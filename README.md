@@ -11,7 +11,7 @@ ASP.NET.
 
 * [.NET Core Framework](https://github.com/dotnet/corefx)
 * [.NET Core Runtime](https://github.com/dotnet/coreclr)
-* [.NET Compiler Platform ("Roslyn")](https://roslyn.codeplex.com)
+* [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn)
 * [ASP.NET 5](https://github.com/aspnet/home)
 
 At present, only a few .NET Core libraries are available on GitHub. The rest of
@@ -22,7 +22,7 @@ the libraries, including the base runtime, will be added in the coming months.
 All projects accept contributions:
 
 * [.NET Core Contributing Guide](https://github.com/dotnet/corefx/wiki/Contributing)
-* [.NET Compiler Platform ("Roslyn")](https://roslyn.codeplex.com/wikipage?title=How%20to%20Contribute&referringTitle=Home)
+* [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn/wiki/Contributing-Code)
 * [ASP.NET Contributing Guide](https://github.com/aspnet/Home/blob/master/CONTRIBUTING.md)
 
 You are also encouraged to start a discussion by posting on the
@@ -36,7 +36,7 @@ The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundat
 
 * [.NET Core Project](http://www.dotnetfoundation.org/netcore5)
 * [.NET Compiler Platform ("Roslyn" Project)](http://www.dotnetfoundation.org/dotnet-compiler-platform)
-* [ASP.NET Project](http://www.dotnetfoundation.org/aspnet-vnext)
+* [ASP.NET Project](http://www.dotnetfoundation.org/aspnet-5)
 
 ## License
 
