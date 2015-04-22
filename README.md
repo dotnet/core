@@ -10,6 +10,7 @@ managed compilers, the runtime, the BCL and the application model, such as
 ASP.NET.
 
 * [.NET Core Framework](https://github.com/dotnet/corefx)
+* [.NET Core Runtime](https://github.com/dotnet/coreclr)
 * [.NET Compiler Platform ("Roslyn")](https://roslyn.codeplex.com)
 * [ASP.NET 5](https://github.com/aspnet/home)
 
