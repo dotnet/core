@@ -3,6 +3,9 @@
 The core repository is the starting point to engage in and learn about the
 .NET Core stack.
 
+- [Install ASP.NET 5 on Windows, OS X and Linux](https://github.com/aspnet/home)
+- [Install .NET Core on Windows, OSX and Linux](https://github.com/dotnet/coreclr#get-net-core)
+
 ## .NET Core Platform
 
 The .NET Core platform is made of several components, which includes the
