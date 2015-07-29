@@ -15,9 +15,7 @@ workaround for your issue.
 
 ## Known Issues
 
-### Visual Studio RTM
-
-*Add list by RTM*
+See: https://social.msdn.microsoft.com/Forums/en-US/home?forum=Win10SDKToolsIssues
 
 ## Examples
 
