@@ -13,6 +13,16 @@ workaround for your issue.
 3. Put ilcRepro.zip on your OneDrive, Dropbox, or another storage provider. Send a link to ilcRepro.zip and a description of your issue to dotnetnative@microsoft.com.
 4. Remove `<NetNativeReproPath>` from your project file.
 
+## Compilation Failure in Store
+
+UWP apps containing managed code are compiled in Store using the .NET Native Toolchain. If there is a compilation failure in the Store, you will get an error message like the following:
+
+`This submission failed due to compilation error {0}. More information about this error can be found here.`
+
+In such a case, please ensure that you were able to build your application in Release mode successfully at the time you submitted it to Store. If it did, please send the error number you got in the message above and email dotnetnative@microsoft.com.
+
+For help with any other issues, please share their details at https://connect.microsoft.com/visualstudio/
+
 ## Known Issues
 
 See: https://social.msdn.microsoft.com/Forums/en-US/home?forum=Win10SDKToolsIssues
