@@ -6,7 +6,7 @@ The core repository is the starting point to engage in and learn about the
 ## Get Started
 
 If you're new to .NET Core and have 10 minutes to try it, start here: 
-- [What is .NET Core?](http://dotnet.github.io/core)
+- [What is .NET Core?](http://dotnet.github.io/core/about/)
 - [Get Started with .NET Core on Windows, OSX and Linux](http://dotnet.github.io/core/getting-started/)
 
 If you have some more time and want to go deeper:
@@ -16,7 +16,7 @@ If you have some more time and want to go deeper:
 ## .NET Core Platform
 
 The .NET Core platform is made of several components, which includes the
-managed compilers, the runtime, the BCL and the application model, such as
+managed compilers, the runtime, the base class libraries, and numerous application models such as
 ASP.NET.
 
 * [.NET Core Framework](https://github.com/dotnet/corefx)
@@ -48,7 +48,7 @@ The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundat
 * [.NET Compiler Platform ("Roslyn" Project)](http://www.dotnetfoundation.org/dotnet-compiler-platform)
 * [ASP.NET Project](http://www.dotnetfoundation.org/aspnet-5)
 
-## License
+## Licenses
 
 .NET Core platform projects typically use either the [MIT](LICENSE) or
 [Apache 2](http://www.apache.org/licenses/LICENSE-2.0) licenses for code.
@@ -63,8 +63,7 @@ See specific projects to understand the license used.
 relationship. .NET Core is named "Core" since it contains the core features from
 the .NET Framework, for both the runtime and framework libraries. For example,
 .NET Core and the .NET Framework share the GC, the JIT and types such as
-`String` and `List<T>`. We'll continue improving these components for both .NET
-Core and .NET Framework.
+`String` and `List<T>`.
 
 .NET Core was created so that .NET could be open source, cross platform and be
 used in more resource-constrained environments. We have also published a subset
@@ -85,7 +84,7 @@ example.
 
 ## Learning about ASP.NET and .NET Core
 
-[ASP.NET](https://github.com/aspnet/home) is a new cross-platform version of
+[ASP.NET 5](https://github.com/aspnet/home) is a new cross-platform version of
 ASP.NET that is designed for the cloud, and runs on Windows, Linux and Mac. It
 uses the .NET Framework to run on Windows, and can also run on .NET Core for
 greater deployment flexibility on Windows. It currently uses Mono for Linux and
