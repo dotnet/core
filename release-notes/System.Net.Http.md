@@ -102,7 +102,7 @@
 
 ### 2.1.3 Beta (Microsoft.Net.Http)
 
-* Announcement
+* [Announcement](http://blogs.msdn.com/b/bclteam/archive/2013/02/18/portable-httpclient-for-net-framework-and-windows-phone.aspx)
 * First release of the portable version of `HttpClient`
 
 ## Troubleshooting
