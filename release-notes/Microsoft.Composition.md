@@ -4,6 +4,7 @@
 
 * [NuGet Package](http://nuget.org/packages/Microsoft.Composition)
 * [Documentation](http://msdn.microsoft.com/en-us/library/jj635137.aspx)
+* [Announcement](http://blogs.msdn.com/b/bclteam/archive/2012/03/02/introducing-mef-lightweight-composition-and-an-updated-composition-provider-for-asp-net-mvc-nick.aspx)
 * [Report an issue](http://github.com/dotnet/corefx/issues/new)
 * [Source](https://github.com/dotnet/corefx/tree/master/src)
 
@@ -41,3 +42,4 @@
 * Updated version information to .NET 4.5 RTM
 * Added symbol package with source information for debugging
 * Updated branding to say "Windows Store Apps" instead of "Metro style apps"
+* [Announcement](http://blogs.msdn.com/b/bclteam/archive/2012/03/02/introducing-mef-lightweight-composition-and-an-updated-composition-provider-for-asp-net-mvc-nick.aspx)

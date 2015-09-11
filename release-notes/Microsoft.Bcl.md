@@ -3,6 +3,7 @@
 ## Information
 
 * [NuGet Package](https://nuget.org/packages/Microsoft.Bcl)
+* [Announcement](http://blogs.msdn.com/b/bclteam/archive/2012/10/22/using-async-await-without-net-framework-4-5.aspx)
 * [Report an issue](https://www.nuget.org/packages/Microsoft.Bcl/ContactOwners)
 
 ## Version History

@@ -4,6 +4,7 @@
 
 * [NuGet Package](http://nuget.org/packages/System.Collections.Immutable)
 * [Documentation](https://msdn.microsoft.com/en-us/library/dn769092.aspx)
+* [Announcement](http://blogs.msdn.com/b/dotnet/archive/2013/09/25/immutable-collections-ready-for-prime-time.aspx)
 * [Report an issue](http://github.com/dotnet/corefx/issues/new)
 * [Source](https://github.com/dotnet/corefx/tree/master/src)
 

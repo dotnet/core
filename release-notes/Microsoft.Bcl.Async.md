@@ -3,6 +3,7 @@
 ## Information
 
 * [NuGet Package](https://nuget.org/packages/Microsoft.Bcl.Async)
+* [Announcement](http://blogs.msdn.com/b/bclteam/archive/2013/04/17/microsoft-bcl-async-is-now-stable.aspx)
 * [Report an issue](https://www.nuget.org/packages/Microsoft.Bcl.Async/ContactOwners)
 
 ## Version History

@@ -3,6 +3,7 @@
 ## Information
 
 * [NuGet Package](https://nuget.org/packages/Microsoft.Bcl.Build)
+* [Announcement](http://blogs.msdn.com/b/dotnet/archive/2013/08/12/improved-package-restore.aspx)
 * [Report an issue](https://www.nuget.org/packages/Microsoft.Bcl.Build/ContactOwners)
 
 ## Version History

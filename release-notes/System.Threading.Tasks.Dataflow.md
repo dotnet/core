@@ -4,6 +4,7 @@
 
 * [NuGet Package](http://nuget.org/packages/System.Threading.Tasks.Dataflow)
 * [Documentation](http://msdn.microsoft.com/en-us/library/hh228603.aspx)
+* [Announcement](http://blogs.msdn.com/b/dotnet/archive/2013/11/13/pcl-and-net-nuget-libraries-are-now-enabled-for-xamarin.aspx)
 * [Report an issue](http://github.com/dotnet/corefx/issues/new)
 * [Source](https://github.com/dotnet/corefx/tree/master/src)
 

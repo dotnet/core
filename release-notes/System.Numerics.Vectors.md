@@ -3,7 +3,9 @@
 ## Information
 
 * [NuGet Package](https://www.nuget.org/packages/System.Numerics.Vectors)
+* [Documentation](https://msdn.microsoft.com/en-us/library/dn858218.aspx)
 * [Samples](http://code.msdn.microsoft.com/SIMD-Sample-f2c8c35a)
+* [Announcement](http://blogs.msdn.com/b/dotnet/archive/2014/04/07/the-jit-finally-proposed-jit-and-simd-are-getting-married.aspx)
 * [Report an issue](http://github.com/dotnet/corefx/issues/new)
 * [Source](https://github.com/dotnet/corefx/tree/master/src)
 

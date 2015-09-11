@@ -4,6 +4,7 @@
 
 * [NuGet Package](http://nuget.org/packages/System.IO.Compression)
 * [Documentation](https://msdn.microsoft.com/en-us/library/system.io.compression.aspx)
+* [Announcement](http://blogs.msdn.com/b/dotnet/archive/2013/08/22/portable-compression-is-now-stable.aspx)
 * [Report an issue](http://github.com/dotnet/corefx/issues/new)
 * [Source](https://github.com/dotnet/corefx/tree/master/src)
 

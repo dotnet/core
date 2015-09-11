@@ -3,6 +3,8 @@
 ## Information
 
 * [NuGet Package](https://nuget.org/packages/System.Net.Http)
+* [Documentation](https://msdn.microsoft.com/en-us/library/system.net.http.aspx)
+* [Announcement](http://blogs.msdn.com/b/dotnet/archive/2013/07/17/httpclient-2-2-is-now-stable.aspx)
 * [Report an issue](http://github.com/dotnet/corefx/issues/new)
 * [Source](https://github.com/dotnet/corefx/tree/master/src)
 
