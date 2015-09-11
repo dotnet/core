@@ -22,10 +22,11 @@ Broad goals:
 
 Active ports:
 
-- OSes: Linux, OS X, FreeBSD, Rasberry Pi2 (Linux) and Windows.
+- OSes: Linux, OS X, FreeBSD and Windows.
 - Linux distros: Debian family, CentOS.
 - Windows versions: Win7+ (client and server).
 - Chips: X64, X86, ARM32, ARM64.
+- Specialized hardware: RPi2
 
 Contributions
 =============
