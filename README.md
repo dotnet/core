@@ -19,6 +19,7 @@ The .NET Core platform is made of several components, which includes the
 managed compilers, the runtime, the base class libraries, and numerous application models such as
 ASP.NET.
 
+* [Roadmap](roadmap.md)
 * [.NET Core Framework](https://github.com/dotnet/corefx)
 * [.NET Core Runtime](https://github.com/dotnet/coreclr)
 * [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn)
