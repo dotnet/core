@@ -25,6 +25,19 @@ For help with any other issues, please share their details at https://connect.mi
 
 ## Known Issues
 
+### CoCreateInstance is not supported for this application type when running the Windows Application Certification Kit (WACK)
+This error shows up in applications with a native code component:
+
+`API CoCreateInstance in api-ms-win-core-com-l1-1-1.dll is not supported for this application type. SomeBinary.dll calls this API.`
+
+This error can occur when running the WACK with your application in Release configuration and "Optimize Code" unchecked in your project properties. Ensure that "Optimize Code" is checked when submitting your application to the Store.
+
+### Application was too large to be compiled in the Store
+Some apps may successfully compile with the .NET Native Toolchain during development but fail to compile in Store due to their size. This issue has been mitigated with the release of the .NET Native Toolchain included in the Windows 10 Tools 1.1 Update.
+
+You can see which version of the .NET Native Toolchain you have by opening AppxManifest.xml in the app package you submitted to Store and looking for `<build:Item Name="ilc.exe" Version="1.0.#####.00>`.  The initial release has version 1.0.23117.00, whereas the updated version in the Windows 10 Tools 1.1 update is 1.0.23303.00.
+
+### Other Known Issues
 See: https://social.msdn.microsoft.com/Forums/en-US/home?forum=Win10SDKToolsIssues
 
 ## Examples
