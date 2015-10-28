@@ -25,9 +25,6 @@ ASP.NET.
 * [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn)
 * [ASP.NET 5](https://github.com/aspnet/home)
 
-At present, only a few .NET Core libraries are available on GitHub. The rest of
-the libraries, including the base runtime, will be added in the coming months.
-
 ## How to Engage, Contribute and Provide Feedback
 
 All projects accept contributions:
