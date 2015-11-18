@@ -1,44 +1,56 @@
 .NET Core Roadmap
 =================
 
-.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes a set of [framework libraries](https://github.com/dotnet/corefx) and a [runtime](https://github.com/dotnet/coreclr). Both together support a set of OS platforms and chip architectures, enabling a broad set of .NET apps to be built and run. Much of this support is in progress.
+.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes runtime, framework, compiler and tools components that support a variety of chip and OS targets. These components can be used together or separately.
 
-The team (anyone contributing to .NET Core) is composed of many individuals and groups. They (separately) have been adding support for the scenarios they are most interested in. That ranges from Windows to FreeBSD. Some of the projects are half-way to completion. Nice work, team! Some contributors, likely companies, will create official distributions (AKA "distros") that they support and potentially sell as part of some offering. A distro is an official build of .NET Core (e.g. zip, apt-get, brew, msi), much like Linux distros.
+Major .NET Core components:
 
-Microsoft makes multiple "official" .NET Core distributions (libraries and/or runtime) available to its customers. It is expected (and desired) that other groups (corporations or otherwise) will also become significantly invested in .NET Core, making other distros available.
+- [Base Class Libraries](https://github.com/dotnet/corefx)
+- [CoreCLR runtime and RyuJIT compiler](https://github.com/dotnet/coreclr)
+- [CoreRT runtime and .NET Native compiler](https://github.com/dotnet/corert)
+- [Roslyn compiler](https://github.com/dotnet/roslyn)
+- [LLILC compiler](https://github.com/dotnet/llilc)
+- [CLI tools](https://github.com/dotnet/cli)
 
-This roadmap is intended to communicate the team's priorities for evolving and extending the scope of .NET Core.
+This roadmap is intended to communicate project priorities for evolving and extending the scope of .NET Core.
+
+Technology Roadmaps
+===================
+
+Architecture:
+
+- [.NET Platform Standard](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/standard-platform.md)
+- [Native Compilation](https://github.com/dotnet/corert/blob/master/Documentation/intro-to-corert.md)
+- [.NET Core Tools/CLI](https://github.com/dotnet/cli/blob/master/Documentation/intro-to-cli.md)
+
+Active ports:
+
+- Languages: F# (C# and VB are done).
+- OSes: Linux, OS X, FreeBSD and Windows.
+- Linux distros: RHEL, Debian family, CentOS.
+- Windows versions: Win7+ (client and server).
+- Chips: X64, X86, ARM32, ARM64.
+- Specialized hardware: RPi2
 
 Project Goals
 =============
 
 Broad goals:
 
-- .NET Core code is high quality (important consideration for contributions).
-- .NET Core can be ported to a broad set of OS platforms and chip architectures.
+- .NET Core supports or can be be ported to a broad set of OS platforms and chip architectures.
 - .NET Core has compelling performance and is highly reliable.
 - Developers can acquire a .NET Core developer environment quickly and intuitively.
 - Developers can productively and intuitively build apps, using documentation, samples and NuGet components.
 
-Active ports:
-
-- OSes: Linux, OS X, FreeBSD and Windows.
-- Linux distros: Debian family, CentOS.
-- Windows versions: Win7+ (client and server).
-- Chips: X64, X86, ARM32, ARM64.
-- Specialized hardware: RPi2
-
 Contributions
 =============
-
-The .NET Core maintainers have taken a liberal approach to contributions since the outset of the .NET Core open source project and have taken changes outside of the published [priorities](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/project-priorities.md). That approach isn't intended to change. 
 
 Contribution goals: 
 
 - Encourage an active community.
 - Make changes easy to code review (smaller vs. bigger). 
-- Keep a single "repo of truth" for the project. 
-- Support multiple release trains (released, about to release, vNext).
+
+The .NET Core maintainers have taken a liberal approach to contributions since the outset of the .NET Core open source project and have taken changes outside of the published [priorities](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/project-priorities.md). 
 
 Microsoft Distro
 ================
@@ -69,8 +81,6 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 |Milestone|Release Date|
 |---------|------------|
-|Beta8    |    Oct 2015|
-|RC1      |    Nov 2015|
 |RTM      |     Q1 2016|
 
 Notes:
@@ -80,18 +90,11 @@ Notes:
 - CoreFX API contracts may need to be at RTM quality in RC releases, to support the already RTM Windows 10 UWP release.
 - The [ASP.NET 5 roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
 
-Feature Roadmaps
-================
-
-This is where links to feature-area roadmaps would go.
-
 TBD
 ===
 
 There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Feel free to contribute that plan.
 
-- Console appmodel.
-- F# suppport for .NET Core.
 - OS package manager support (e.g. apt-get, brew).
 - Broader Linux distro support (beyond Debian and CentOS).
 - Create low-level FX APIs for Linux (e.g. daemon support) and OSX, much like exists for Windows (e.g. Windows registry).
