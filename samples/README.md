@@ -13,10 +13,6 @@ In order to run these samples, you first need to [install .NET Core](http://dotn
 	* `dotnet restore`
 	* `dotnet compile`
 	* `./bin/Debug/[framework]/[binary name]`
-* Compile to a single, native binary
-	* `dotnet restore`
-	* `dotnet compile --native`
-	* `./bin/Debug/[framework]/native/[binary name]`
 
 ## Samples list
 
