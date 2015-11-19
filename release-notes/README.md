@@ -7,8 +7,6 @@ Full details on this release can be read about in this blog post:
 
 Supported platforms for this release are Ubuntu 14.04 LTS, OS X 10.10, and Windows 7+.
 
-.NET Core RC1 supports [.NET Platform Standard](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/standard-platform.md).
-
 ### Dependencies
 .NET Core RC1 on Linux and OSX take dependencies on the following libraries:
 * libc, librt: I/O, process management, time, etc.
