@@ -8,6 +8,8 @@ workaround for your issue.
 
 ## Creating and Sending a .NET Native repro
 
+*NOTE: If you run this more than once, you'll want to make sure that the ilcRepro.zip doesn't already exist by deleting it out of the target folder. This is scheduled to be fixed for VS Update 2.*
+
 1. Add `<NetNativeReproPath>C:\myReproDirectory</NetNativeReproPath>` to the primary PropertyGroup in your project file, the file ending in csproj, vsproj, vcxproj, or jsproj. You can set `C:\myReproDirectory` to any directory that exists. [Examples are below.](#examples)
 2. Rebuild your app. You will find ilcRepro.zip in the repro directory you specified above.
 3. Put ilcRepro.zip on your OneDrive, Dropbox, or another storage provider. Send a link to ilcRepro.zip and a description of your issue to dotnetnative@microsoft.com.
