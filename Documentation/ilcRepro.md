@@ -15,6 +15,17 @@ workaround for your issue.
 3. Put ilcRepro.zip on your OneDrive, Dropbox, or another storage provider. Send a link to ilcRepro.zip and a description of your issue to dotnetnative@microsoft.com.
 4. Remove `<NetNativeReproPath>` from your project file.
 
+## Compilation Failure on Update 1
+
+The error:
+
+    RHBIND : error RHB0011: Internal error: 'declModule == m_pLoaderModule' at 'f:\dd\ndp\rh\src\tools\rhbind\methodtable.h:606'
+
+A new .NET Native feature “SharedLibrary.dll” can expose an a bug in one of the compiler components "RHBind.exe". SharedLibrary is on be default for Update 1 but you can disable this feature to work around the issue by manipulating/adding this property to your project:
+<UseDotNetNativeSharedAssemblyFrameworkPackage>false</UseDotNetNativeSharedAssemblyFrameworkPackage>
+
+This will be fixed for Update 2 but anyone hitting this error will need to disable the SharedLibrary component until then. For more information about shared library please see: http://blogs.msdn.com/b/dotnet/archive/2015/09/28/what-s-new-for-net-and-uwp-in-win10-tools-1-1.aspx
+
 ## Compilation Failure in Store
 
 UWP apps containing managed code are compiled in Store using the .NET Native Toolchain. If there is a compilation failure in the Store, you will get an error message like the following:
