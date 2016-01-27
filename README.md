@@ -29,7 +29,7 @@ ASP.NET.
 
 All projects accept contributions:
 
-* [.NET Core Contributing Guide](https://github.com/dotnet/corefx/wiki/Contributing)
+* [.NET Core Contributing Guide](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/contributing.md)
 * [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn/wiki/Contributing-Code)
 * [ASP.NET Contributing Guide](https://github.com/aspnet/Home/blob/master/CONTRIBUTING.md)
 
