@@ -23,14 +23,16 @@ Architecture:
 - [Native Compilation](https://github.com/dotnet/corert/blob/master/Documentation/intro-to-corert.md)
 - [.NET Core Tools/CLI](https://github.com/dotnet/cli/blob/master/Documentation/intro-to-cli.md)
 
-Active ports:
+Version 1.0 OS Support:
 
-- Languages: F# (C# and VB are done).
-- OSes: Linux, OS X, FreeBSD and Windows.
-- Linux distros: RHEL, Debian family, CentOS.
-- Windows versions: Win7+ (client and server).
-- Chips: X64, X86, ARM32, ARM64.
-- Specialized hardware: RPi2
+|OS|Version|Architectures|Configurations|
+|---------|------------|--------|-------------|
+|Windows Client | 7 SP1 - 10 | x64, x86 | |
+|Windows Server      | 2008 R2 SP1 - 2016 | x64, x86 | Full, Server Core, Nano (2016 only) |
+|Debian      | 8.2 | x64 | |
+|Ubuntu      | 14.04 LTS | x64 | |
+|Centos      | 7.1 | x64 | |
+|Red Hat Enterprise Linux      | 7.2 | x64 | |
 
 Project Goals
 =============
@@ -71,7 +73,7 @@ Workloads
 The Microsoft distro currently supports the following workloads.
 
 - Console
-- ASP.NET 5
+- ASP.NET Core
 - Windows 10 UWP
 
 Ship Dates
@@ -81,14 +83,14 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 |Milestone|Release Date|
 |---------|------------|
-|RTM      |     Q1 2016|
+|RTM      |            |
 
 Notes:
 
 - The RC1 release candidate will be a supported and production ready cross-platform release. 
 - Depending on feedback from RC1, we will ship additional release candidates as necessary.
 - CoreFX API contracts may need to be at RTM quality in RC releases, to support the already RTM Windows 10 UWP release.
-- The [ASP.NET 5 roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
+- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
 
 TBD
 ===
