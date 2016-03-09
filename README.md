@@ -10,7 +10,7 @@ If you're new to .NET Core and have 10 minutes to try it, start here:
 - [Get Started with .NET Core on Windows, OSX and Linux](http://dotnet.github.io/getting-started/)
 
 If you have some more time and want to go deeper:
-- [Install ASP.NET 5 on Windows, OSX and Linux](https://github.com/aspnet/home)
+- [Install ASP.NET Core on Windows, OSX and Linux](https://github.com/aspnet/home)
 - [Install .NET Core on Windows, OSX and Linux](https://github.com/dotnet/coreclr#get-net-core)
 
 ## .NET Core Platform
@@ -23,7 +23,7 @@ ASP.NET.
 * [.NET Core Framework](https://github.com/dotnet/corefx)
 * [.NET Core Runtime](https://github.com/dotnet/coreclr)
 * [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn)
-* [ASP.NET 5](https://github.com/aspnet/home)
+* [ASP.NET Core](https://github.com/aspnet/home)
 
 ## How to Engage, Contribute and Provide Feedback
 
@@ -44,7 +44,7 @@ The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundat
 
 * [.NET Core Project](http://www.dotnetfoundation.org/netcore)
 * [.NET Compiler Platform ("Roslyn" Project)](http://www.dotnetfoundation.org/dotnet-compiler-platform)
-* [ASP.NET Project](http://www.dotnetfoundation.org/aspnet-5)
+* [ASP.NET Core Project](http://www.dotnetfoundation.org/aspnet-5)
 
 ## Licenses
 
@@ -82,7 +82,7 @@ example.
 
 ## Learning about ASP.NET and .NET Core
 
-[ASP.NET 5](https://github.com/aspnet/home) is a new cross-platform version of
+[ASP.NET Core](https://github.com/aspnet/home) is a new cross-platform version of
 ASP.NET that is designed for the cloud, and runs on Windows, Linux and Mac. It
 uses the .NET Framework to run on Windows, and can also run on .NET Core for
 greater deployment flexibility on Windows. It currently uses Mono for Linux and
