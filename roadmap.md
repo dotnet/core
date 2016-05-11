@@ -34,6 +34,8 @@ Mac OSX                       | 10.11 (El Capitan) | x64      |
 
 There will be packages available for the native package managers for each OS. (e.g. apt-get, rpm, pkg, msi) as well as zips.
 
+Microsoft provides commercially reasonable support for ASP.NET Core 1.0, .NET Core 1.0 and Entity Framework Core 1.0 on the OS and Version detailed in the table above.
+
 Project Goals
 =============
 
