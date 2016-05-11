@@ -34,6 +34,8 @@ Mac OSX                       | 10.11 (El Capitan) | x64      |
 
 There will be packages available for the native package managers for each OS. (e.g. apt-get, rpm, pkg, msi) as well as zips.
 
+Microsoft provides commercially reasonable support for ASP.NET Core 1.0, .NET Core 1.0 and Entity Framework Core 1.0 on Windows (Win7+), Mac (OSX 10.11) and Linux.  Supported Linux distributions include Ubuntu 14.04 LTS, RHEL 7.2, CentOS 7.1, and Debian 8.2.
+
 Project Goals
 =============
 
