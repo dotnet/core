@@ -8,7 +8,7 @@ Full details on this release can be read about in this blog post:
 Supported platforms for this release are Ubuntu 14.04 LTS, OS X 10.10, and Windows 7+.
 
 ### Dependencies
-.NET Core RC1 on Linux and OSX take dependencies on the following libraries:
+.NET Core RC1 on Linux and OS X take dependencies on the following libraries:
 * libc, librt: I/O, process management, time, etc.
 * libunwind: call chain determination for exception handling and stack traces
 * gettext: resource strings
@@ -18,24 +18,24 @@ Supported platforms for this release are Ubuntu 14.04 LTS, OS X 10.10, and Windo
 * libcurl: HTTP
 * libssl & libcrypto: cryptography
 * libz: deflate and gzip
-* procfs & Core Foundation / Services: process and networking information on Linux and OSX
+* procfs & Core Foundation / Services: process and networking information on Linux and OS X
 
 ### Compilation
-* Support csc compiler on .NET Core on Linux and OSX
-* Support vbc compiler on .NET Core on Linux and OSX
+* Support csc compiler on .NET Core on Linux and OS X
+* Support vbc compiler on .NET Core on Linux and OS X
 
 ### Runtime
-* GC/thread suspension for Linux and OSX
+* GC/thread suspension for Linux and OS X
 * Integration of exception handling with debugger and crash dumps
 * Support for LLDB and SOS on Linux
-* RyuJIT ported to Linux and OSX, including JIT and crossgen
-* RyuJIT implements calling convention for structs passing on Linux and OSX
+* RyuJIT ported to Linux and OS X, including JIT and crossgen
+* RyuJIT implements calling convention for structs passing on Linux and OS X
 * Runtime performance improvements
 * Native eventing support via LTTNG for Linux
 * Added 2800 Windows tests
 
 ### BCL
-* More complete `System.Globalization` support on Linux and OSX
+* More complete `System.Globalization` support on Linux and OS X
 * IDNA2008 support for internationalized domain names
 * X509 certificate support
 * `System.Security.Cryptography.EcDSA` class is supported on all platforms
