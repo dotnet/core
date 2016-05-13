@@ -15,12 +15,11 @@ Platform support has been expanded for RC2
 * Windows 7+ / Server 2012 R2+
 * Windows Nano Server TP5
 
+A little style note for the rest of this document - any references to 'Unix' encompasses Linux distros detailed above and OS X.
+
 ### Dependencies
 
-- [ ] Are there changes from RC1?
-- [ ] Should min versions of tools be included?
-
-.NET Core RC1 on Linux and OSX take dependencies on the following libraries:
+.NET Core RC2 on Linux and OS X take dependencies on the following libraries:
 * libc, librt: I/O, process management, time, etc.
 * libunwind: call chain determination for exception handling and stack traces
 * gettext: resource strings
@@ -30,7 +29,7 @@ Platform support has been expanded for RC2
 * libcurl: HTTP
 * libssl & libcrypto: cryptography
 * libz: deflate and gzip
-* procfs & Core Foundation / Services: process and networking information on Linux and OSX
+* procfs & Core Foundation / Services: process and networking information on Linux and OS X
 
 ### Introduction of .NET Core API Documentation
 
@@ -42,7 +41,7 @@ Platform support has been expanded for RC2
 Most of the Runtime work since RC1 has been focused on performance and reliability improvements. A few highlights include:
 
 * [Runtime Configuration](https://github.com/dotnet/cli/blob/rel/1.0.0/Documentation/specs/runtime-configuration-file.md) enhancements
-* Server GC on Linux platforms
+* Server GC on Unix platforms
 
 ### JIT
 
@@ -52,7 +51,7 @@ Most of the Runtime work since RC1 has been focused on performance and reliabili
 
 ### BCL
 
-Below is a summary of API changes made since RC1. A complete and detailed listing of API changes can be seen [here](https://github.com/dotnet/core/tree/master/release-notes/RC1-RC2_API_diff.md). A little style note - any references to 'Unix' encompasses Linux distros detailed above and OS X.
+Below is a summary of API changes made since RC1. A complete and detailed listing of API changes can be seen [here](https://github.com/dotnet/core/tree/master/release-notes/RC1-RC2_API_diff.md).
 
 New .NET Core APIs
 
