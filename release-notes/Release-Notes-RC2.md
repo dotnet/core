@@ -26,7 +26,7 @@ Platform support has been expanded for RC2
 
 ### Runtime
 
-Most of the Runtime work since RC1 has been focused on performance and reliability improvements. A few highlights include
+Most of the Runtime work since RC1 has been focused on performance and reliability improvements. A few highlights include:
 
 * [Runtime Configuration](https://github.com/dotnet/cli/blob/rel/1.0.0/Documentation/specs/runtime-configuration-file.md) enhancements
 * Server GC on Linux platforms
@@ -39,7 +39,7 @@ Most of the Runtime work since RC1 has been focused on performance and reliabili
 
 ### BCL
 
-Below is a summary of API changes made since RC1. A complete and detailed listing of APIs changes can be seen [here](https://github.com/dotnet/core/tree/master/release-notes/RC1-RC2_API_diff.md).
+Below is a summary of API changes made since RC1. A complete and detailed listing of API changes can be seen [here](https://github.com/dotnet/core/tree/master/release-notes/RC1-RC2_API_diff.md).
 
 New .NET Core APIs
 
