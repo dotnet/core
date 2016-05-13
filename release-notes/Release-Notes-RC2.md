@@ -19,17 +19,16 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 ### Dependencies
 
-.NET Core RC2 on Linux and OS X take dependencies on the following libraries:
-* libc, librt: I/O, process management, time, etc.
-* libunwind: call chain determination for exception handling and stack traces
-* gettext: resource strings
-* libicu: globalization
-* liblttng: runtime tracing
-* libuuid: guid generation
-* libcurl: HTTP
-* libssl & libcrypto: cryptography
-* libz: deflate and gzip
-* procfs & Core Foundation / Services: process and networking information on Linux and OS X
+| Library		      | Function                                                         | Mode          |Debian/Ubuntu | CentOS/RHEL  | OS X                  |
+| ------------------- | ---------------------------------------------------------------- | ------------- | ------------ | ------------ | --------------------- |
+| libc, librt         | I/O, process management, time, etc.	                             | Runtime       | glibc        | glibc	       |Part of OS             |
+| libunwind           | call chain determination for exception handling and stack traces | Runtime       | libunwind8   | libunwind    | Part of OS            |
+| gettext             | resource strings                                                 | Development   | gettext	    | gettext	   | n/a                   |
+| libicu              | globalization                                                    | Runtime	     | libicu52	    | libicu	   | Part of OS            |
+| libuuid             | guid generation                                                  | Runtime       | libuuid1	    | libuuid	   | Part of OS            |
+| libcurl             | HTTP                                                             | Runtime       | libcurl3	    | libcurl	   | Part of OS            |
+| libssl & libcrypto  | cryptography                                                     | Runtime       | libssl1.0.0  | openssl-libs | Openssl from homebrew |
+| libz                | deflate and gzip                                                 | Development   | zlib1g       |zlib          | Part of OS            |
 
 ### Introduction of .NET Core API Documentation
 
