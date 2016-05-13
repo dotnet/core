@@ -28,7 +28,7 @@ A little style note for the rest of this document - any references to 'Unix' enc
 | libuuid             | guid generation                                                  | Runtime       | libuuid1	    | libuuid	   | Part of OS            |
 | libcurl             | HTTP                                                             | Runtime       | libcurl3	    | libcurl	   | Part of OS            |
 | libssl & libcrypto  | cryptography                                                     | Runtime       | libssl1.0.0  | openssl-libs | Openssl from homebrew |
-| libz                | deflate and gzip                                                 | Development   | zlib1g       |zlib          | Part of OS            |
+| libz                | deflate and gzip                                                 | Runtime       | zlib1g       |zlib          | Part of OS            |
 
 ### Introduction of .NET Core API Documentation
 
