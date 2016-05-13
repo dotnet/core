@@ -19,16 +19,17 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 ### Dependencies
 
-| Library		      | Function                                                         | Mode          |Debian/Ubuntu | CentOS/RHEL  | OS X                  |
-| ------------------- | ---------------------------------------------------------------- | ------------- | ------------ | ------------ | --------------------- |
-| libc, librt         | I/O, process management, time, etc.	                             | Runtime       | glibc        | glibc	       |Part of OS             |
-| libunwind           | call chain determination for exception handling and stack traces | Runtime       | libunwind8   | libunwind    | Part of OS            |
-| gettext             | resource strings                                                 | Development   | gettext	    | gettext	   | n/a                   |
-| libicu              | globalization                                                    | Runtime	     | libicu52	    | libicu	   | Part of OS            |
-| libuuid             | guid generation                                                  | Runtime       | libuuid1	    | libuuid	   | Part of OS            |
-| libcurl             | HTTP                                                             | Runtime       | libcurl3	    | libcurl	   | Part of OS            |
-| libssl & libcrypto  | cryptography                                                     | Runtime       | libssl1.0.0  | openssl-libs | Openssl from homebrew |
-| libz                | deflate and gzip                                                 | Runtime       | zlib1g       |zlib          | Part of OS            |
+| Library		      | Function                                                         | Mode          |Debian/Ubuntu  | CentOS/RHEL   | OS X                  |
+| ------------------- | ---------------------------------------------------------------- | ------------- | ------------- | ------------- | --------------------- |
+| libc, librt         | I/O, process management, time, etc.	                             | Runtime       | glibc         | glibc	     |Part of OS             |
+| libunwind           | call chain determination for exception handling and stack traces | Runtime       | libunwind8    | libunwind     | Part of OS            |
+| gettext             | resource strings                                                 | Development   | gettext	     | gettext	     | n/a                   |
+| libicu              | globalization                                                    | Runtime	     | libicu52	     | libicu	     | Part of OS            |
+| libuuid             | guid generation                                                  | Runtime       | libuuid1	     | libuuid	     | Part of OS            |
+| libcurl             | HTTP                                                             | Runtime       | libcurl3	     | libcurl	     | Part of OS            |
+| libssl & libcrypto  | cryptography                                                     | Runtime       | libssl1.0.0   | openssl-libs  | Openssl from homebrew |
+| libz                | deflate and gzip                                                 | Runtime       | zlib1g        |zlib           | Part of OS            |
+| liblttng            | runtime tracing                                                  | Diagnostic    | liblttng-ust0 | liblttng-ust0 | Part of OS            |
 
 ### Introduction of .NET Core API Documentation
 
