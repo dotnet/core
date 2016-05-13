@@ -7,7 +7,7 @@ Full details on this release can be read about in this blog post:
 
 Platform support has been expanded for RC2
 
-* RHEL 7.2
+* Red Hat Enterprise Linux 7.2
 * Debian 8.2 (8.2, 8.3, 8.4)+
 * Ubuntu 14.04 (16.04 support is coming in RTM)
 * OS X 10.11
@@ -17,7 +17,20 @@ Platform support has been expanded for RC2
 
 ### Dependencies
 
-** << Changes from RC1? >> **
+- [ ] Are there changes from RC1?
+- [ ] Should min versions of tools be included?
+
+.NET Core RC1 on Linux and OSX take dependencies on the following libraries:
+* libc, librt: I/O, process management, time, etc.
+* libunwind: call chain determination for exception handling and stack traces
+* gettext: resource strings
+* libicu: globalization
+* liblttng: runtime tracing
+* libuuid: guid generation
+* libcurl: HTTP
+* libssl & libcrypto: cryptography
+* libz: deflate and gzip
+* procfs & Core Foundation / Services: process and networking information on Linux and OSX
 
 ### Introduction of .NET Core API Documentation
 
