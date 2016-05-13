@@ -26,7 +26,10 @@ Platform support has been expanded for RC2
 
 ### Runtime
 
-* Performance and Reliability improvements
+Most of the Runtime work since RC1 has been focused on performance and reliability improvements. A few highlights include
+
+* [Runtime Configuration](https://github.com/dotnet/cli/blob/rel/1.0.0/Documentation/specs/runtime-configuration-file.md) enhancements
+* Server GC on Linux platforms
 
 ### JIT
 
@@ -35,6 +38,8 @@ Platform support has been expanded for RC2
 * Code quality improvements
 
 ### BCL
+
+Below is a summary of API changes made since RC1. A complete and detailed listing of APIs changes can be seen [here](https://github.com/dotnet/core/tree/master/release-notes/RC1-RC2_API_diff.md).
 
 New .NET Core APIs
 
@@ -48,14 +53,21 @@ APIs added in RC2 to existing classes and namespaces
 * System.Diagnostics.ProcessStartInfo
 * System.Environment
 * System.Linq
-* System.Reflection (this deserves attention)
+* System.Reflection
 * System.Runtime.InteropServices
 * System.Runtime.InteropServices.RuntimeInformation
 * System.Security.Cryptography
     * Aes, HMACMD5, HMACSHA1, HMACSHA256, HMACSHA384, HMACSHA512, RSA, RSACryptoServiceProvider
-* System.Security.Principal,
+* System.Security.Principal
 * System.Security.WindowsPrincipal
-* System.ServiceModel (related to HTTPS)
+* System.ServiceModel
+
+### Serialization
+
+* ISerializatonSurrogateProvider interface now supports applications or libraries that target for either full .NET Framework or .NET Core to use data contract surrogate in DataContractSerializer.
+* DataContractJsonSerializer improved compliance with ECMAScript 6 standard in serializing control characters including 0x0008 (BACKSPACE), 0x000C (FORM FEED), 0x000A (LINE FEED), 0x000D (CARRIAGE RETURN), and 0x0009 (HORIZONTAL TABULATION).
+
+Additional details can be found in the [WCF Release Notes](https://github.com/dotnet/wcf/releases/tag/v1.0.0-rc2)
 
 ### Network
 
@@ -72,20 +84,19 @@ Additions to existing classes
 
 ### Data
 
-* System.Data ** (ping Saurabh Singh <sausing@microsoft.com> - this deserves its own blog post / blog section covering all the changes as a result of community feedback) **
 * SqlBulkCopy was added to System.Data.SqlClient for bulk operations.
 * Community ask: Interfaces from .Net Desktop were re-introduced to RC2 to allow backward compatibility.
 * Community ask: Addition of API to DbDataReader to retrieve the Schema information for the tables being queried. This effort was requested by the community to substitute the GetSchemaTable API which was removed due to absence of DataTable
 * MARS support enabled
 
-### List of closed issues
+### Closed issues
 
 The lists of issues closed for this and past releases can be found here:
 
 * [CLR issues](https://github.com/dotnet/coreclr/issues?q=is%3Aissue+no%3Amilestone+is%3Aclosed)
 * [BCL issues](https://github.com/dotnet/corefx/issues?q=is%3Aissue+no%3Amilestone+is%3Aclosed)
 
-### List of commits for RC2
+### Commits for RC2
 
 The lists of commits for this release can be viewed here:
 
