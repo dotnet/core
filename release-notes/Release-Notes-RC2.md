@@ -2,8 +2,8 @@
 
 ## RC2 released 5/16/2016
 
-Full details on this release can be read about in this blog post:
-** [the blog title](http://someurl) **
+Full details on this release can be read about in 
+** [the blog title](http://someurl) ** and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
 
 Platform support has been expanded for RC2
 
@@ -97,9 +97,6 @@ New for RC2
 Additions to existing classes
 
 * System.Net.Sockets
-
-
-
 
 ### Data
 
