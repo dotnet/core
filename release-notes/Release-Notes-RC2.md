@@ -84,6 +84,9 @@ Additional details can be found in the [WCF Release Notes](https://github.com/do
 
 ### Network
 
+* Implemented Async pattern for WinHttpHandler
+* Bug fixes and Stabilization
+
 New for RC2
 
 * System.Net.NetworkInformation
@@ -94,6 +97,9 @@ New for RC2
 Additions to existing classes
 
 * System.Net.Sockets
+
+
+
 
 ### Data
 
