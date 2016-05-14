@@ -1,16 +1,41 @@
 # API Diff between RC1 and RC2
 
+
+- [System](System)
+- [System.ComponentModel.DataAnnotations](System.ComponentModel.DataAnnotations)
+- [System.Data](System.Data)
+- [System.Data.Common](System.Data.Common)
+- [System.Data.SqlClient](System.Data.SqlClient)
+- [System.Diagnostics](System.Diagnostics)
+- [System.Drawing](System.Drawing)
+- [System.IO](System.IO)
+- [System.IO.Packaging](System.IO.Packaging)
+- [System.Linq](System.Linq)
+- [System.Net](System.Net)
+- [System.Net.NetworkInformation](System.Net.NetworkInformation)
+- [System.Net.Security](System.Net.Security)
+- [System.Net.Sockets](System.Net.Sockets)
+- [System.Reflection](System.Reflection)
+- [System.Runtime.InteropServices](System.Runtime.InteropServices)
+- [System.Runtime.Loader](System.Runtime.Loader)
+- [System.Runtime.Serialization](System.Runtime.Serialization)
+- [System.Security.Cryptography](System.Security.Cryptography)
+- [System.Security.Cryptography.X509Certificates](System.Security.Cryptography.X509Certificates)
+- [System.Security.Principal](System.Security.Principal)
+- [System.ServiceModel](System.ServiceModel)
+- [System.ServiceModel.Channels](System.ServiceModel.Channels)
+
+### System
+
 ```csharp
-
-
 namespace System {
   public static class Activator {
     public static object CreateInstance(Type type, bool nonPublic);
-  }
+  }  
   public static class AppContext {
     public static string TargetFrameworkName { get; }
     public static object GetData(string name);
-  }
+  }  
   public static class Console {
     public static int BufferHeight { get; set; }
     public static int BufferWidth { get; set; }
@@ -38,7 +63,7 @@ namespace System {
     public static void SetCursorPosition(int left, int top);
     public static void SetWindowPosition(int left, int top);
     public static void SetWindowSize(int width, int height);
-  }
+  }  
   [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential, Size=1)]
   public struct ConsoleKeyInfo {
     public bool Equals(ConsoleKeyInfo obj);
@@ -46,22 +71,32 @@ namespace System {
     public override int GetHashCode();
     public static bool operator ==(ConsoleKeyInfo a, ConsoleKeyInfo b);
     public static bool operator !=(ConsoleKeyInfo a, ConsoleKeyInfo b);
-  }
+  }  
   public static class Environment {
     public static string MachineName { get; }
     public static void Exit(int exitCode);
     public static string[] GetCommandLineArgs();
-  }
+  }  
   public abstract class Type {
     public static readonly char Delimiter;
     public static TypeCode GetTypeCode(Type type);
   }
 }
+```
+
+### System.ComponentModel.DataAnnotations
+
+```csharp
 namespace System.ComponentModel.DataAnnotations {
   public class RegularExpressionAttribute : ValidationAttribute {
     public int MatchTimeoutInMilliseconds { get; set; }
   }
 }
+```
+
+### System.Data
+
+```csharp
 namespace System.Data {
   public enum DataRowVersion {
     Default = 1536,
@@ -159,6 +194,11 @@ namespace System.Data {
     void Rollback();
   }
 }
+```
+
+### System.Data.Common
+
+```csharp
 namespace System.Data.Common {
   public abstract class DbColumn {
     protected DbColumn();
@@ -253,6 +293,11 @@ namespace System.Data.Common {
     ReadOnlyCollection<DbColumn> GetColumnSchema();
   }
 }
+```
+
+### System.Data.SqlClient
+
+```csharp
 namespace System.Data.SqlClient {
   public sealed class SqlBulkCopy : IDisposable {
     public SqlBulkCopy(SqlConnection connection);
@@ -327,6 +372,11 @@ namespace System.Data.SqlClient {
   }
   public delegate void SqlRowsCopiedEventHandler(object sender, SqlRowsCopiedEventArgs e);
 }
+```
+
+### System.Diagnostics
+
+```csharp
 namespace System.Diagnostics {
   public sealed class ProcessStartInfo {
     public string Domain { get; set; }
@@ -335,6 +385,11 @@ namespace System.Diagnostics {
     public string UserName { get; set; }
   }
 }
+```
+
+### System.Drawing
+
+```csharp
 namespace System.Drawing {
   [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential, Size=1)]
   public struct Point {
@@ -503,6 +558,11 @@ namespace System.Drawing {
     public override string ToString();
   }
 }
+```
+
+### System.IO
+
+```csharp
 namespace System.IO {
   public sealed class BufferedStream : Stream {
     public BufferedStream(Stream stream);
@@ -535,6 +595,11 @@ namespace System.IO {
     public Uri SourceUri { get; }
   }
 }
+```
+
+### System.IO.Packaging
+
+```csharp
 namespace System.IO.Packaging {
   public enum CompressionOption {
     Fast = 2,
@@ -678,18 +743,33 @@ namespace System.IO.Packaging {
     protected override Stream GetStreamCore(FileMode streamFileMode, FileAccess streamFileAccess);
   }
 }
+```
+
+### System.Linq
+
+```csharp
 namespace System.Linq {
   public static class Enumerable {
     public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> source, TSource element);
     public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> source, TSource element);
   }
 }
+```
+
+### System.Net
+
+```csharp
 namespace System.Net {
   public class WebException : InvalidOperationException {
     public WebException(string message, Exception innerinnerException);
     public WebException(string message, Exception innerinnerException, WebExceptionStatus status, WebResponse response);
   }
 }
+```
+
+### System.Net.NetworkInformation
+
+```csharp
 namespace System.Net.NetworkInformation {
   public enum DuplicateAddressDetectionState {
     Deprecated = 3,
@@ -1089,6 +1169,11 @@ namespace System.Net.NetworkInformation {
     IEnumerator System.Collections.IEnumerable.GetEnumerator();
   }
 }
+```
+
+### System.Net.Security
+
+```csharp
 namespace System.Net.Security {
   public abstract class AuthenticatedStream : Stream {
     protected AuthenticatedStream(Stream innerStream, bool leaveInnerStreamOpen);
@@ -1151,6 +1236,11 @@ namespace System.Net.Security {
     public virtual void AuthenticateAsServer(X509Certificate serverCertificate, bool clientCertificateRequired, SslProtocols enabledSslProtocols, bool checkCertificateRevocation);
   }
 }
+```
+
+### System.Net.Sockets
+
+```csharp
 namespace System.Net.Sockets {
   public enum IOControlCode : long {
     AbsorbRouterAlert = (long)2550136837,
@@ -1524,6 +1614,11 @@ namespace System.Net.Sockets {
     public static bool operator !=(UdpReceiveResult left, UdpReceiveResult right);
   }
 }
+```
+
+### System.Reflection
+
+```csharp
 namespace System.Reflection {
   public abstract class Assembly : ICustomAttributeProvider {
     public virtual string CodeBase { get; }
@@ -1736,6 +1831,11 @@ namespace System.Reflection {
     public virtual bool IsInstanceOfType(object o);
   }
 }
+```
+
+### System.Runtime.InteropServices
+
+```csharp
 namespace System.Runtime.InteropServices {
   public enum Architecture {
     Arm = 2,
@@ -1785,6 +1885,11 @@ namespace System.Runtime.InteropServices {
     public static Architecture ProcessArchitecture { get; }
   }
 }
+```
+
+### System.Runtime.Loader
+
+```csharp
 namespace System.Runtime.Loader {
   public abstract class AssemblyLoadContext {
     public event Func<AssemblyLoadContext, AssemblyName, Assembly> Resolving;
@@ -1795,6 +1900,11 @@ namespace System.Runtime.Loader {
     protectedpublic Assembly LoadFromStream(Stream assembly, Stream assemblySymbols);
   }
 }
+```
+
+### System.Runtime.Serialization
+
+```csharp
 namespace System.Runtime.Serialization {
   public sealed class DataContractSerializer : XmlObjectSerializer {
     public ISerializationSurrogateProvider SerializationSurrogateProvider { get; set; }
@@ -1804,6 +1914,11 @@ namespace System.Runtime.Serialization {
     public static void SetSerializationSurrogateProvider(this DataContractSerializer serializer, ISerializationSurrogateProvider provider);
   }
 }
+```
+
+### SystemSecurity.Cryptography
+
+```csharp
 namespace System.Security.Cryptography {
   public abstract class Aes : SymmetricAlgorithm {
     public override KeySizes[] LegalBlockSizes { get; }
@@ -1858,6 +1973,11 @@ namespace System.Security.Cryptography {
     public override KeySizes[] LegalKeySizes { get; }
   }
 }
+```
+
+### System.Security.Cryptography.X509Certificates
+
+```csharp
 namespace System.Security.Cryptography.X509Certificates {
   public enum X509ChainStatusFlags {
     ExplicitDistrust = 67108864,
@@ -1865,6 +1985,11 @@ namespace System.Security.Cryptography.X509Certificates {
     HasWeakSignature = 1048576,
   }
 }
+```
+
+### System.Security.Principal
+
+```csharp
 namespace System.Security.Principal {
   public class WindowsIdentity : ClaimsIdentity, IDisposable {
     public const string DefaultIssuer = "AD AUTHORITY";
@@ -1879,6 +2004,11 @@ namespace System.Security.Principal {
     public override bool IsInRole(string role);
   }
 }
+```
+
+### System.ServiceModel
+
+```csharp
 namespace System.ServiceModel {
   public class BasicHttpsBinding : HttpBindingBase {
     public BasicHttpsBinding();
@@ -1909,6 +2039,11 @@ namespace System.ServiceModel {
     public override BindingElementCollection CreateBindingElements();
   }
 }
+```
+
+### System.ServiceModel.Channels
+
+```csharp
 namespace System.ServiceModel.Channels {
   public class HttpsTransportBindingElement : HttpTransportBindingElement {
     public bool RequireClientCertificate { get; set; }

@@ -19,7 +19,7 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 ### Dependencies
 
-| Library		      | Function                                                         | Mode          |Debian/Ubuntu  | CentOS/RHEL   | OS X                  |
+| Library             | Function                                                         | Mode          |Debian/Ubuntu  | CentOS/RHEL   | OS X                  |
 | ------------------- | ---------------------------------------------------------------- | ------------- | ------------- | ------------- | --------------------- |
 | libc, librt         | I/O, process management, time, etc.	                             | Runtime       | glibc         | glibc	     |Part of OS             |
 | libunwind           | call chain determination for exception handling and stack traces | Runtime       | libunwind8    | libunwind     | Part of OS            |
