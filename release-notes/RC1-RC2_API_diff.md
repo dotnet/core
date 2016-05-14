@@ -22,7 +22,7 @@
 - [System.Security.Cryptography](#systemsecuritycryptography)
 - [System.Security.Cryptography.X509Certificates](#systemsecuritycryptographyx509certificates)
 - [System.Security.Principal](#systemsecurityprincipal)
-- [System.ServiceModel](#systemserviceModel)
+- [System.ServiceModel](#systemservicemodel)
 - [System.ServiceModel.Channels](#systemservicemodelchannels)
 
 ## System
@@ -1916,7 +1916,7 @@ namespace System.Runtime.Serialization {
 }
 ```
 
-## SystemSecurity.Cryptography
+## System.Security.Cryptography
 
 ```csharp
 namespace System.Security.Cryptography {
