@@ -51,7 +51,7 @@ Most of the Runtime work since RC1 has been focused on performance and reliabili
 
 ### BCL
 
-Below is a summary of API changes made since RC1. A complete and detailed listing of API changes can be seen [here](https://github.com/dotnet/core/tree/master/release-notes/RC1-RC2_API_diff.md).
+Below is a summary of API changes made since RC1. A complete and detailed listing of API changes can be seen [here](/RC1-RC2_API_diff.md).
 
 New .NET Core APIs
 
