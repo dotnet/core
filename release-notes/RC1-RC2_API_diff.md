@@ -2,8 +2,8 @@
 
 
 - [System](#system)
-- [System.ComponentModel.DataAnnotations](#system.componentmodel.dataannotations)
-- [System.Data](#system.data)
+- [System.ComponentModel.DataAnnotations](#systemcomponentmodeldataannotations)
+- [System.Data](#systemdata)
 - [System.Data.Common](#system.data.common)
 - [System.Data.SqlClient](#system.data.sqlclient)
 - [System.Diagnostics](#system.diagnostics)
