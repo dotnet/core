@@ -2,7 +2,7 @@
 
 ## RC2 released 5/16/2016
 
-Full details on this release can be read about in 
+Full details on this release can be read about in
 ** [the blog title](http://someurl) ** and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
 
 Platform support has been expanded for RC2
@@ -21,12 +21,12 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 | Library             | Function                                                         | Mode          |Debian/Ubuntu  | CentOS/RHEL   | OS X                  |
 | ------------------- | ---------------------------------------------------------------- | ------------- | ------------- | ------------- | --------------------- |
-| libc, librt         | I/O, process management, time, etc.	                             | Runtime       | glibc         | glibc	     |Part of OS             |
+| libc, librt         | I/O, process management, time, etc.                              | Runtime       | glibc         | glibc         |Part of OS             |
 | libunwind           | call chain determination for exception handling and stack traces | Runtime       | libunwind8    | libunwind     | Part of OS            |
-| gettext             | resource strings                                                 | Development   | gettext	     | gettext	     | n/a                   |
-| libicu              | globalization                                                    | Runtime	     | libicu52	     | libicu	     | Part of OS            |
-| libuuid             | guid generation                                                  | Runtime       | libuuid1	     | libuuid	     | Part of OS            |
-| libcurl             | HTTP                                                             | Runtime       | libcurl3	     | libcurl	     | Part of OS            |
+| gettext             | resource strings                                                 | Development   | gettext       | gettext       | n/a                   |
+| libicu              | globalization                                                    | Runtime       | libicu52      | libicu        | Part of OS            |
+| libuuid             | guid generation                                                  | Runtime       | libuuid1      | libuuid       | Part of OS            |
+| libcurl             | HTTP                                                             | Runtime       | libcurl3      | libcurl       | Part of OS            |
 | libssl & libcrypto  | cryptography                                                     | Runtime       | libssl1.0.0   | openssl-libs  | Openssl from homebrew |
 | libz                | deflate and gzip                                                 | Runtime       | zlib1g        |zlib           | Part of OS            |
 | liblttng            | runtime tracing                                                  | Diagnostic    | liblttng-ust0 | liblttng-ust0 | Part of OS            |
@@ -74,6 +74,7 @@ APIs added in RC2 to existing classes and namespaces
 * System.ServiceModel
 
 ### Cryptography
+
 * RSA.Create() was added to support platform-agnostic operations
 * TripleDES (3DES) was added (it existed, but threw NotImplementedException, in RC1)
 * Reference Assemblies: HMACMD5 was missing in RC1, added it
