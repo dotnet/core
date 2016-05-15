@@ -1,6 +1,5 @@
 # API Diff between RC1 and RC2
 
-
 - [System](#system)
 - [System.ComponentModel.DataAnnotations](#systemcomponentmodeldataannotations)
 - [System.Data](#systemdata)

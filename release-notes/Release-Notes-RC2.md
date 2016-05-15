@@ -5,6 +5,8 @@
 Full details on this release can be read about in
 ** [the blog title](http://someurl) ** and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
 
+There are a few issues to be aware of which are described in the [.NET Core Known Issues](known-issues-rc2.md) document.
+
 Platform support has been expanded for RC2
 
 * Red Hat Enterprise Linux 7.2

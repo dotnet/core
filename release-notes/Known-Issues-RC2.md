@@ -37,5 +37,3 @@ NegotiateStream relies on the gssapi implementation available on the platform o
 NegotiateStream relies on the gssapi implementation and it uses SPNEGO via the GSS-NTLMSSP on RHEL and CentOS. For other distros individuals need to have a similar package supporting GSS-NTLMSSP to have it working.
 
 https://github.com/dotnet/corefx/issues/8042
-
-
