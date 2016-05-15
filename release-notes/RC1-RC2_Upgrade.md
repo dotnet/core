@@ -4,9 +4,10 @@ Due to schedule changes for the .NET Core all-up, there was a rename of the tool
 
 **What about RC1 bits?**
 
-This does not impact RC1 release. Since the tooling and the way you write applications has changed, having DNX (or many of them) installed should not be a problem. However, one caveat is what tooling you are using for what project. For RC2 projects you may get wrong results and/or errors if you try to restore dependencies using `dnu restore`. Please use the appropriate tooling. You can see what are the new commands in the DNX to CLI migration document listed below. 
+This does not impact RC1 release. Since the tooling and the way you write applications has changed, having DNX (or many of them) installed should not be a problem. However, one caveat is what tooling you are using for what project. For RC2 projects you may get wrong results and/or errors if you try to restore dependencies using `dnu restore`. Please use the appropriate tooling. You can see what are the new commands in the DNX to CLI migration document listed below.
 
-For updating your code, you can check these two documents: 
+For updating your code, you can check these two documents:
+
 * [Migrating from DNX to CLI](http://dotnet.github.io/docs/core-concepts/dnx-migration.html)
 * [Updating from ASP.NET Core RC1 to RC2]()
 
@@ -14,7 +15,7 @@ For updating your code, you can check these two documents:
 
 ### Windows
 
-On Windows, simply use the Add/Remove programs in the Control Panel to remove all the previous versions of the .NET Core bits. Please note that we have changed the name that appears in Add/Remove programs from ".NET Core CLI" to ".NET Core SDK"; please use the latter to search for installed versions to remove. 
+On Windows, simply use the Add/Remove programs in the Control Panel to remove all the previous versions of the .NET Core bits. Please note that we have changed the name that appears in Add/Remove programs from ".NET Core CLI" to ".NET Core SDK"; please use the latter to search for installed versions to remove.
 
 ### Ubuntu
 
@@ -26,9 +27,10 @@ In order to make life easier, we have created a script for cleaning up all versi
 
 ## Installation Scripts (all supported OS-es)
 
-If you installed .NET Core previous versions using an installation script, simply delete the directory where you installed the previous version of .NET Core. If you are on Linux or OSX and you have symlinked the dotnet binary to a global location (e.g. /usr/local/bin) please remove that symlink as well. Once you install RC2 using the installation script, you can recreate the symlink. Similar goes for Windows if you added the install folder to your system path. 
+If you installed .NET Core previous versions using an installation script, simply delete the directory where you installed the previous version of .NET Core. If you are on Linux or OSX and you have symlinked the dotnet binary to a global location (e.g. /usr/local/bin) please remove that symlink as well. Once you install RC2 using the installation script, you can recreate the symlink. Similar goes for Windows if you added the install folder to your system path.
 
 After uninstalling the actual bits of the previous version, you should also clear your Nuget package cache. The cache can be found in the following places:
+
 * Windows: `%HOME%\.nuget\packages`
 * OSX: `$HOME\.nuget\packages`
 * Linux: `$HOME\.nuget\packages`
