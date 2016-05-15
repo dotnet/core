@@ -2,14 +2,14 @@
 
 ## RC2 released 5/16/2016
 
-Full details on this release can be read about in
-** [the blog title](http://someurl) ** and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
+Details on this release can be read about on
+[the .NET Blog](https://blogs.msdn.microsoft.com/dotnet) and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
 
 Before installing RC2 please have a look at the [RC1 to RC2 Upgrade Roadmap](RC1-RC2_Upgrade.md). All previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release.
 
 There are a few issues to be aware of which are described in the [.NET Core Known Issues](Known-Issues-RC2.md) document.
 
-Platform support has been expanded for RC2
+### RC2 Platform Support
 
 * Red Hat Enterprise Linux 7.2
 * Debian 8.2 (8.2, 8.3, 8.4)+
@@ -25,7 +25,7 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 | Library             | Function                                                         | Mode          |Debian/Ubuntu  | CentOS/RHEL   | OS X                  |
 | ------------------- | ---------------------------------------------------------------- | ------------- | ------------- | ------------- | --------------------- |
-| libc, librt         | I/O, process management, time, etc.                              | Runtime       | glibc         | glibc         |Part of OS             |
+| libc, librt         | I/O, process management, time, etc.                              | Runtime       | glibc         | glibc         | Part of OS            |
 | libunwind           | call chain determination for exception handling and stack traces | Runtime       | libunwind8    | libunwind     | Part of OS            |
 | gettext             | resource strings                                                 | Development   | gettext       | gettext       | n/a                   |
 | libicu              | globalization                                                    | Runtime       | libicu52      | libicu        | Part of OS            |
@@ -102,8 +102,6 @@ APIs added in RC2 to existing classes and namespaces
 * ISerializatonSurrogateProvider interface now supports applications or libraries that target for either full .NET Framework or .NET Core to use data contract surrogate in DataContractSerializer.
 * DataContractJsonSerializer improved compliance with ECMAScript 6 standard in serializing control characters including 0x0008 (BACKSPACE), 0x000C (FORM FEED), 0x000A (LINE FEED), 0x000D (CARRIAGE RETURN), and 0x0009 (HORIZONTAL TABULATION).
 
-Additional details can be found in the [WCF Release Notes](https://github.com/dotnet/wcf/releases/tag/v1.0.0-rc2)
-
 ### Network
 
 * Implemented Async pattern for WinHttpHandler
@@ -129,14 +127,18 @@ Additions to existing classes
 * Community ask: Addition of API to DbDataReader to retrieve the Schema information for the tables being queried. This effort was requested by the community to substitute the GetSchemaTable API which was removed due to absence of DataTable
 * MARS support enabled
 
-### Closed issues
+### WCF
+
+Details on work the WCF team has done for RC2 can be found in the [WCF Release Notes](https://github.com/dotnet/wcf/releases/tag/v1.0.0-rc2).
+
+## Closed issues
 
 The lists of issues closed for this and past releases can be found here:
 
 * [CLR issues](https://github.com/dotnet/coreclr/issues?q=is%3Aissue+no%3Amilestone+is%3Aclosed)
 * [BCL issues](https://github.com/dotnet/corefx/issues?q=is%3Aissue+no%3Amilestone+is%3Aclosed)
 
-### Commits for RC2
+## Commits for RC2
 
 The lists of commits for this release can be viewed here:
 

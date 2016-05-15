@@ -1,6 +1,6 @@
 # RC1 to RC2 Upgrade Roadmap
 
-Due to schedule changes for the .NET Core all-up, there was a rename of the tooling from RC2 to RC2 - Preview 1. This rename impacted all of the packages as well as installers for .NET Core and .NET Core tools. The impact of this change for the users is in that all previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release.
+Due to schedule changes for the .NET Core all-up, there was a rename of the tooling from "RC2" to "RC2 - Preview 1". This rename impacted all of the packages as well as installers for .NET Core and .NET Core tools. The impact of this change for the users is in that all previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release.
 
 **What about RC1 bits?**
 
