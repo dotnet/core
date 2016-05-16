@@ -33,7 +33,7 @@ A little style note for the rest of this document - any references to 'Unix' enc
 | libcurl             | HTTP                                                             | Runtime       | libcurl3      | libcurl       | Part of OS            |
 | libssl & libcrypto  | cryptography                                                     | Runtime       | libssl1.0.0   | openssl-libs  | Openssl from homebrew |
 | libz                | deflate and gzip                                                 | Runtime       | zlib1g        |zlib           | Part of OS            |
-| liblttng            | runtime tracing                                                  | Diagnostic    | liblttng-ust0 | liblttng-ust0 | Part of OS            |
+| liblttng            | runtime tracing                                                  | Diagnostic    | liblttng-ust0 | liblttng-ust0 | n/a                   |
 
 ### Introduction of .NET Core API Documentation
 
