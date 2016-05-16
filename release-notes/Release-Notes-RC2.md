@@ -5,9 +5,9 @@
 Details on this release can be read about on
 [the .NET Blog](https://blogs.msdn.microsoft.com/dotnet) and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
 
-Before installing RC2 please have a look at the [RC1 to RC2 Upgrade Roadmap](RC1-RC2_Upgrade.md). All previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release.
+Before installing RC2, please have a look at the [RC1 to RC2 Upgrade Roadmap](RC1-RC2_Upgrade.md). All previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release.
 
-There are a few issues to be aware of which are described in the [.NET Core Known Issues](Known-Issues-RC2.md) document.
+There are a few issues to be aware of, which are described in the [.NET Core Known Issues](Known-Issues-RC2.md) document.
 
 ### RC2 Platform Support
 
