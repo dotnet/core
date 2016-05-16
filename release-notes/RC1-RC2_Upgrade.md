@@ -43,9 +43,9 @@ Before installing the RC2 bits it is also prudent to check whether you have the 
 
 ## OpenSSL and OSX specifics
 
-If you read the [getting started](http://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409) instructions you will notice that  you need to update OpenSSL to version 1.0.1 or higher. By default, OSX "El Capitan" comes with OpenSSL 0.9.8. We are giving instructions for updating using Homebrew because that is what we use on the team. Macports can be used as well. You can also do it manually. 
+If you read the [getting started](http://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409) instructions you will notice that  you need to update OpenSSL to version 1.0.1 or higher. By default, OS X "El Capitan" comes with OpenSSL 0.9.8. To check what version is installed use `openssl verion`. We are giving instructions for updating using Homebrew because that is what we use on the team. MacPorts can be used as well. You can also do it manually.
 
-What is important is that you have the new version of OpenSSL on the path when you start using the .NET Core RC2. With brew, you can use the `brew link --force openssl` command to relink the OpenSSL. On Mac ports there is no analogue to linking, so you should just uninstall version(s) that are less than 1.0.1. For Mac Ports you can use the following command: `port -f uninstall openssl @0.9.8`. 
+What is important is that you have the new version of OpenSSL on the path when you start using the .NET Core RC2. With brew, you can use the `brew link --force openssl` command to relink the OpenSSL. On MacPorts there is no analogue to linking, so you should just uninstall version(s) that are less than 1.0.1. For Mac Ports you can use the following command: `port -f uninstall openssl @0.9.8`.
 
 ## After installation of RC2
 
