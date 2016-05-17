@@ -397,11 +397,11 @@ A big *Thank You* to all who contributed!
 * [MichaelSimons (1)](https://github.com/dotnet/cli/commits/master?author=msimons@microsoft.com)
 * [John Van Tuyl (1)](https://github.com/dotnet/cli/commits/master?author=jpvantuyl@gmail.com)
 * [Alexander Kozlenko (1)](https://github.com/dotnet/cli/commits/master?author=alexander.kozlenko@live.com)
-* [(1)](https://github.com/dotnet/cli/commits/master?author=noahfalk@microsoft.com)
-* [(1)](https://github.com/dotnet/cli/commits/master?author=jhendrix@microsoft.com)
-* [(1)](https://github.com/dotnet/cli/commits/master?author=Peter.Marcu@Microsoft.com)
-* [(1)](https://github.com/dotnet/cli/commits/master?author=office@schneider-netservices.com)
-* [(1)](https://github.com/dotnet/cli/commits/master?author=AlexKeySmith@users.noreply.github.com)
+* [Noah Falk (1)](https://github.com/dotnet/cli/commits/master?author=noahfalk@microsoft.com)
+* [Joel Hendrix (1)](https://github.com/dotnet/cli/commits/master?author=jhendrix@microsoft.com)
+* [Peter Marcu (1)](https://github.com/dotnet/cli/commits/master?author=Peter.Marcu@Microsoft.com)
+* [Peter Schneider (1)](https://github.com/dotnet/cli/commits/master?author=office@schneider-netservices.com)
+* [AlexKeySmith (1)](https://github.com/dotnet/cli/commits/master?author=AlexKeySmith@users.noreply.github.com)
 
 ## WCF
 
