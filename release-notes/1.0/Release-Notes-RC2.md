@@ -12,10 +12,10 @@ There are a few issues to be aware of, which are described in the [.NET Core Kno
 ### RC2 Platform Support
 
 * Red Hat Enterprise Linux 7.2
-* Debian 8.2 (8.2, 8.3, 8.4)+
+* Debian 8.2+
 * Ubuntu 14.04 (16.04 support is coming in RTM)
-* OS X 10.11
-* Centos 7.1
+* Mac OS X 10.11
+* CentOS 7.1+
 * Windows 7+ / Server 2012 R2+
 * Windows Nano Server TP5
 
