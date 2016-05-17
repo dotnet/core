@@ -1002,7 +1002,7 @@ namespace System.Net.NetworkInformation {
     public NetworkInformationException(int errorCode);
     public int ErrorCode { get; }
   }
-  public staticabstract class NetworkInterface {
+  public static abstract class NetworkInterface {
     protected NetworkInterface();
     public virtual string Description { get; }
     public virtual string Id { get; }
