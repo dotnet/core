@@ -1,4 +1,4 @@
-# .NET Core RC2 and .NET Core SDK RC2 - Preview 1 Contributor List
+# .NET Core 1.0.0 RC2 and .NET Core 1.0.0 RC2 SDK - Preview 1 Contributor List
 
 A big *Thank You* to all who contributed!
 
