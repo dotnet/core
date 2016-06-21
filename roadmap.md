@@ -1,13 +1,35 @@
 .NET Core Roadmap
 =================
 
-.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes a set of [framework libraries](https://github.com/dotnet/corefx) and a [runtime](https://github.com/dotnet/coreclr). Both together support a set of OS platforms and chip architectures, enabling a broad set of .NET apps to be built and run. Much of this support is in progress.
+.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes runtime, framework, compiler and tools components that support a variety of chip and OS targets. These components can be used together or separately.
 
-The team (anyone contributing to .NET Core) is composed of many individuals and groups. They (separately) have been adding support for the scenarios they are most interested in. That ranges from Windows to FreeBSD. Some contributors, likely companies, will create official distributions (AKA "distros") that they support and potentially sell as part of their offering. A distro is an official build of .NET Core (e.g. zip, apt-get, brew, msi), much like Linux distros.
+Major .NET Core components:
+- [Base Class Libraries](https://github.com/dotnet/corefx)
+- [CoreCLR runtime and RyuJIT compiler](https://github.com/dotnet/coreclr)
+- [CoreRT runtime and .NET Native compiler](https://github.com/dotnet/corert)
+- [Roslyn compiler](https://github.com/dotnet/roslyn)
+- [LLILC compiler](https://github.com/dotnet/llilc)
+- [CLI tools](https://github.com/dotnet/cli)
 
-Microsoft makes multiple "official" .NET Core distributions (libraries and/or runtime) available to its customers. It is expected (and desired) that other groups (corporations or otherwise) will also become significantly invested in .NET Core, making other distros available.
+This roadmap is intended to communicate project priorities for evolving and extending the scope of .NET Core.
 
-This roadmap is intended to communicate the team's priorities for evolving and extending the scope of .NET Core.
+Technology Roadmaps
+===================
+
+Architecture:
+
+- [.NET Platform Standard](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/standard-platform.md)
+- [Native Compilation](https://github.com/dotnet/corert/blob/master/Documentation/intro-to-corert.md)
+- [.NET Core Tools/CLI](https://github.com/dotnet/cli/blob/master/Documentation/intro-to-cli.md)
+
+Active ports:
+
+- Languages: F# (C# and VB are done).
+- OSes: Linux, OS X, FreeBSD and Windows.
+- Linux distros: RHEL, Debian family, CentOS.
+- Windows versions: Win7+ (client and server).
+- Chips: X64, X86, ARM32, ARM64.
+- Specialized hardware: RPi2
 
 Project Goals
 =============
@@ -32,14 +54,12 @@ Active ports:
 Contributions
 =============
 
-The .NET Core maintainers have taken a liberal approach to contributions since the outset of the .NET Core open source project and have taken changes outside of the published [priorities](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/project-priorities.md). 
-
-Contribution goals:
+Contribution goals: 
 
 - Encourage an active community.
 - Make changes easy to code review (smaller vs. bigger). 
-- Keep a single "repo of truth" for the project. 
-- Support multiple release trains (released, about to release, vNext).
+
+The .NET Core maintainers have taken a liberal approach to contributions since the outset of the .NET Core open source project and have taken changes outside of the published [priorities](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/project-priorities.md). 
 
 Microsoft Distro
 ================

@@ -6,8 +6,8 @@ The core repository is the starting point to engage in and learn about the
 ## Get Started
 
 If you're new to .NET Core and have 10 minutes to try it, start here: 
-- [What is .NET Core?](http://dotnet.github.io/core/about/)
-- [Get Started with .NET Core on Windows, OSX and Linux](http://dotnet.github.io/core/getting-started/)
+- [What is .NET Core?](http://dotnet.github.io/about/)
+- [Get Started with .NET Core on Windows, OSX and Linux](http://dotnet.github.io/getting-started/)
 
 If you have some more time and want to go deeper:
 - [Install ASP.NET 5 on Windows, OSX and Linux](https://github.com/aspnet/home)
@@ -24,9 +24,6 @@ ASP.NET.
 * [.NET Core Runtime](https://github.com/dotnet/coreclr)
 * [.NET Compiler Platform ("Roslyn")](https://github.com/dotnet/roslyn)
 * [ASP.NET 5](https://github.com/aspnet/home)
-
-At present, only a few .NET Core libraries are available on GitHub. The rest of
-the libraries, including the base runtime, will be added in the coming months.
 
 ## How to Engage, Contribute and Provide Feedback
 
