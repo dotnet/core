@@ -3,7 +3,7 @@
 
 .NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes a set of [framework libraries](https://github.com/dotnet/corefx) and a [runtime](https://github.com/dotnet/coreclr). Both together support a set of OS platforms and chip architectures, enabling a broad set of .NET apps to be built and run. Much of this support is in progress.
 
-The team (anyone contributing to .NET Core) is composed of many individuals and groups. They (separately) have been adding support for the scenarios they are most interested in. That ranges from Windows to FreeBSD. Some of the projects are half-way to completion. Nice work, team! Some contributors, likely companies, will create official distributions (AKA "distros") that they support and potentially sell as part of some offering. A distro is an official build of .NET Core (e.g. zip, apt-get, brew, msi), much like Linux distros.
+The team (anyone contributing to .NET Core) is composed of many individuals and groups. They (separately) have been adding support for the scenarios they are most interested in. That ranges from Windows to FreeBSD. Some contributors, likely companies, will create official distributions (AKA "distros") that they support and potentially sell as part of their offering. A distro is an official build of .NET Core (e.g. zip, apt-get, brew, msi), much like Linux distros.
 
 Microsoft makes multiple "official" .NET Core distributions (libraries and/or runtime) available to its customers. It is expected (and desired) that other groups (corporations or otherwise) will also become significantly invested in .NET Core, making other distros available.
 
@@ -14,26 +14,27 @@ Project Goals
 
 Broad goals:
 
-- .NET Core code is high quality (important consideration for contributions).
+- .NET Core code is high quality, has compelling performance, and is highly reliable.
 - .NET Core can be ported to a broad set of OS platforms and chip architectures.
-- .NET Core has compelling performance and is highly reliable.
+- .NET Core can be deployed with the application, side-by-side with orher versions.
+- .NET Core has a broad API surface that makes it suitable for most payloads.
 - Developers can acquire a .NET Core developer environment quickly and intuitively.
 - Developers can productively and intuitively build apps, using documentation, samples and NuGet components.
 
 Active ports:
 
-- OSes: Linux, OS X, FreeBSD and Windows.
-- Linux distros: Debian family, CentOS.
+- OS: Linux, macOS, FreeBSD and Windows.
+- Linux distros: RHEL, Fedora, Debian family, CentOS.
 - Windows versions: Win7+ (client and server).
 - Chips: X64, X86, ARM32, ARM64.
-- Specialized hardware: RPi2
+- Specialized hardware: Raspberry Pi.
 
 Contributions
 =============
 
-The .NET Core maintainers have taken a liberal approach to contributions since the outset of the .NET Core open source project and have taken changes outside of the published [priorities](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/project-priorities.md). That approach isn't intended to change. 
+The .NET Core maintainers have taken a liberal approach to contributions since the outset of the .NET Core open source project and have taken changes outside of the published [priorities](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/project-priorities.md). 
 
-Contribution goals: 
+Contribution goals:
 
 - Encourage an active community.
 - Make changes easy to code review (smaller vs. bigger). 
@@ -48,7 +49,7 @@ Microsoft ships multiple .NET Core distros. It is important that Microsoft can s
 Goals
 -----
 
-- There are high-quality ports for Linux, OS X and Windows.
+- There are high-quality ports for Linux, macOS and Windows.
 - There are high-quality ports for X64, X86 and ARM32.
 - .NET Core can be shipped on a schedule that aligns with ASP.NET and Windows 10 UWP dates and quality (e.g. Beta, RTM) requirements.
 - Contributions should be prioritized that align with these goals.
@@ -56,10 +57,10 @@ Goals
 Workloads
 ---------
 
-The Microsoft distro currently supports the following workloads.
+The Microsoft distro currently supports the following workloads:
 
 - Console
-- ASP.NET 5
+- ASP.NET Core (MVC and WebAPI)
 - Windows 10 UWP
 
 Ship Dates
@@ -69,29 +70,25 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 |Milestone|Release Date|
 |---------|------------|
-|Beta8    |    Oct 2015|
-|RC1      |    Nov 2015|
-|RTM      |     Q1 2016|
+|RTM      |   June 2016|
+|1.1      |   Fall 2016|
+
+Planned 1.1 features
+--------------------
+
+- Broader API support, bringing parity with .NET Framework and Mono.
+- Transition to MSBuild and csproj as the default build system and project model for all versions of .NET. 
 
 Notes:
 
-- The RC1 release candidate will be a supported and production ready cross-platform release. 
-- Depending on feedback from RC1, we will ship additional release candidates as necessary.
-- CoreFX API contracts may need to be at RTM quality in RC releases, to support the already RTM Windows 10 UWP release.
-- The [ASP.NET 5 roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
-
-Feature Roadmaps
-================
-
-This is where links to feature-area roadmaps would go.
+- The RTM release is accompanied with a preview version of the Visual Studio and command-line tooling. The tooling should reach RTM quality with version 1.1 of the .NET Core runtime in Fall 2016.
+- The [ASP.NET Core 1.0 roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
 
 TBD
 ===
 
 There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Feel free to contribute that plan.
 
-- Console appmodel.
-- F# suppport for .NET Core.
 - OS package manager support (e.g. apt-get, brew).
-- Broader Linux distro support (beyond Debian and CentOS).
+- Broader Linux distro support.
 - Create low-level FX APIs for Linux (e.g. daemon support) and OSX, much like exists for Windows (e.g. Windows registry).
