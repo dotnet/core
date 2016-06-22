@@ -26,7 +26,7 @@ Active ports:
 
 - Languages: C#, VB, and F#.
 - OS: Linux, macOS, FreeBSD and Windows.
-- Linux distros: RHEL, Debian family, CentOS.
+- Linux distros: RHEL, Fedora, Debian family, CentOS, Oracle Linux, Linux Mint.
 - Windows versions: Win7+ (client and server).
 - Chips: X64, X86, ARM32, ARM64.
 - Specialized hardware: Raspberry Pi.
