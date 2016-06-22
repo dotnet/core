@@ -82,7 +82,7 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 |Milestone|Release Date|
 |---------|------------|
-|RTM      |   June 2016|
+|1.0      |   June 2016|
 |1.1      |   Fall 2016|
 
 Planned 1.1 features
@@ -93,7 +93,7 @@ Planned 1.1 features
 
 Notes:
 
-- The RTM release is accompanied with a preview version of the Visual Studio and command-line tooling. The tooling should reach RTM quality with version 1.1 of the .NET Core runtime in Fall 2016.
+- The 1.0 release is accompanied with a preview version of the Visual Studio and command-line tooling. The tooling should reach RTM quality with version 1.1 of the .NET Core runtime in Fall 2016.
 - The [ASP.NET Core 1.0 roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
 
 TBD
