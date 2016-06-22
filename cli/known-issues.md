@@ -50,10 +50,10 @@ There is an [outstanding PR](https://github.com/robbyrussell/oh-my-zsh/pull/4925
 The command you can use is:
 
 ```console
-ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
+ln -s /usr/local/share/dotnet/bin/dotnet /usr/local/bin
 ```
 
-**Workaround 2:** edit your `.zshrc` and/or `.zshprofile` files to add the `/usr/local/share/dotnet` to the $PATH. 
+**Workaround 2:** edit your `.zshrc` and/or `.zshprofile` files to add the `/usr/local/share/dotnet/bin` to the $PATH. 
 
 ## On dev builds of the tools, restoring default project from dotnet new fails
 When using non-release versions of the CLI, `dotnet restore` will fail to restore `Microsoft.NETCore.App` because for that particular version it exists on a NuGet feed that is not configured on the machine. This behavior is by design and does not happen with public releases (such as RC2).
