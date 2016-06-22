@@ -1,7 +1,7 @@
 .NET Core Roadmap
 =================
 
-.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes runtime, framework, compiler and tools components that support a variety of chip and OS targets. These components can be used together or separately.
+.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes a runtime, framework libraries, compilers and tools that support a variety of chip and OS targets. These components can be used together or separately.
 
 Major .NET Core components:
 - [Base Class Libraries](https://github.com/dotnet/corefx)
@@ -24,12 +24,12 @@ Architecture:
 
 Active ports:
 
-- Languages: F# (C# and VB are done).
-- OSes: Linux, OS X, FreeBSD and Windows.
+- Languages: C#, VB, and F#.
+- OS: Linux, macOS, FreeBSD and Windows.
 - Linux distros: RHEL, Debian family, CentOS.
 - Windows versions: Win7+ (client and server).
 - Chips: X64, X86, ARM32, ARM64.
-- Specialized hardware: RPi2
+- Specialized hardware: Raspberry Pi.
 
 Project Goals
 =============
@@ -38,18 +38,10 @@ Broad goals:
 
 - .NET Core code is high quality, has compelling performance, and is highly reliable.
 - .NET Core can be ported to a broad set of OS platforms and chip architectures.
-- .NET Core can be deployed with the application, side-by-side with orher versions.
+- .NET Core can be deployed with the application, side-by-side with other versions.
 - .NET Core has a broad API surface that makes it suitable for most payloads.
 - Developers can acquire a .NET Core developer environment quickly and intuitively.
-- Developers can productively and intuitively build apps, using documentation, samples and NuGet components.
-
-Active ports:
-
-- OS: Linux, macOS, FreeBSD and Windows.
-- Linux distros: RHEL, Fedora, Debian family, CentOS.
-- Windows versions: Win7+ (client and server).
-- Chips: X64, X86, ARM32, ARM64.
-- Specialized hardware: Raspberry Pi.
+- Developers can productively and intuitively build apps, using documentation, samples, community resources, and NuGet packages.
 
 Contributions
 =============
