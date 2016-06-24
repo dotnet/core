@@ -12,7 +12,7 @@ In order to run these samples, you first need to [install .NET Core](http://dotn
 * Compile and run using the following commands
 	* `dotnet restore`
 	* `dotnet build`
-	* `./bin/Debug/[framework]/[binary name]`
+	* `dotnet bin/Debug/[framework]/[binary name]`
 
 ## Samples list
 

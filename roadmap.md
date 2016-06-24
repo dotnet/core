@@ -23,14 +23,18 @@ Architecture:
 Version 1.0 OS Support:
 
 OS|Version|Architectures|Configurations
-------------------------------|--------------------|----------|---
-Windows Client                | 7 SP1 - 10         | x64, x86 |
-Windows Server                | 2008 R2 SP1 - 2016 | x64, x86 | Full, Server Core, Nano (2016 only)
-Red Hat Enterprise Linux      | 7.2                | x64      |
-Debian                        | 8.2                | x64      |
-Ubuntu                        | 14.04 LTS          | x64      |
-Centos                        | 7.1                | x64      |
-Mac OSX                       | 10.11 (El Capitan) | x64      |
+------------------------------|-------------------------------|----------|---
+Windows Client                | 7 SP1 - 10                    | x64, x86 |
+Windows Server                | 2008 R2 SP1 - 2016            | x64, x86 | Full, Server Core, Nano (2016 only)
+Red Hat Enterprise Linux      | 7.2                           | x64      |
+Fedora                        | 23                            | x64      |
+Debian                        | 8.2                           | x64      |
+Ubuntu                        | 14.04 LTS, 16.04 LTS          | x64      |
+Linux Mint                    | 17                            | x64      |
+openSUSE                      | 13.2                          | x64      |
+Centos                        | 7.1                           | x64      |
+Oracle Linux                  | 7.1                           | x64      |
+Mac OSX                       | 10.11 (El Capitan)            | x64      |
 
 There will be packages available for the native package managers for each OS. (e.g. apt-get, rpm, pkg, msi) as well as zips.
 
@@ -87,7 +91,7 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 |Milestone|Release Date|
 |---------|------------|
-|RTM      |            |
+|RTM      | 6/27/2016  |
 
 Notes:
 
