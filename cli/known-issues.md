@@ -72,6 +72,13 @@ When using non-release versions of the CLI, `dotnet restore` will fail to restor
 </configuration>
 ```
 
+## Running `dotnet` on Debian distributions causes a segmentation fault
+If a Debian machine is set in a certain way it may cause the native host (`dotnet`) to produce a segmentation fault. The culprit is the failed installation of the `libicu` dependency due to mirror package repository setup. If you fail to set up mirror package repositories, `apt-get` may not be able to resolve the dependency and the host will fail at runtime. 
+
+**Affects:** the native host
+
+**Workaround:** make sure that all of the [native pre-requisites](../Documentation/prereqs.md) are installed correctly. You can usually do this by running `apt-get` package manager. 
+
 ## `dotnet restore` times out on Win7 x64
 If you have any virtualization software (so far we've confirmed VMWare and Virtual Box) and you try to use the CLI on a Win7 SP1 x64 machine, `dotnet restore` will be really slow and will eventually time out without doing much restoring. The issue is in the virtual networking adapters that usually get installed with said software. 
 
