@@ -18,7 +18,7 @@ Technology Roadmaps
 Architecture:
 
 - [.NET Platform Standard](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md)
-- [.NET Core Tools/CLI](https://github.com/dotnet/cli/blob/master/Documentation/intro-to-cli.md)
+- [.NET Core Tools/CLI](https://github.com/dotnet/cli/blob/rel/1.0.0/Documentation/intro-to-cli.md)
 
 Version 1.0 OS Support:
 
