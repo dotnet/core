@@ -55,6 +55,22 @@ ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
 
 **Workaround 2:** edit your `.zshrc` and/or `.zshprofile` files to add the `/usr/local/share/dotnet` to the $PATH. 
 
+## `app.config` file needs to be checked out before publishing 
+If you have an `app.config` file in source control that places locks on local files (such as TFS), you will recieve the following error during publishing:
+
+```console
+Failed to make the following project runnable: <project name> reason: Access to the path <path> is denied.
+```
+
+To resolve this, checkout the `app.config` file from the source control prior to publishing. 
+
+## `dotnet restore` in the root of the file system fails
+If you run `dotnet restore` in the root of the file system (`/` in Linux/macOS or `C:\` in Windows) it may fail even if you have the `project.json` file in the root. By default, running the command without specifying the project file will result in the command trying to locate any project files in all subdirectories in the file system. That will fail for certain paths due to security. 
+
+**Workaround:** point `dotnet restore` towards the actual project file using the `-p` switch. 
+
+**More information:** https://github.com/NuGet/Home/issues/3038
+
 ## On dev builds of the tools, restoring default project from dotnet new fails
 When using non-release versions of the CLI, `dotnet restore` will fail to restore `Microsoft.NETCore.App` because for that particular version it exists on a NuGet feed that is not configured on the machine. This behavior is by design and does not happen with public releases (such as RC2).
 
