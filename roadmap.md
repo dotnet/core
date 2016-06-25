@@ -6,7 +6,6 @@
 Major .NET Core components:
 - [Base Class Libraries](https://github.com/dotnet/corefx)
 - [CoreCLR runtime and RyuJIT compiler](https://github.com/dotnet/coreclr)
-- [CoreRT runtime and .NET Native compiler](https://github.com/dotnet/corert)
 - [Roslyn compiler](https://github.com/dotnet/roslyn)
 - [LLILC compiler](https://github.com/dotnet/llilc)
 - [CLI tools](https://github.com/dotnet/cli)
@@ -27,9 +26,9 @@ Active ports:
 - Languages: C#, VB, and F#.
 - OS: Linux, macOS, FreeBSD and Windows.
 - Linux distros: RHEL, Fedora, Debian family, CentOS, Oracle Linux, Linux Mint.
-- Windows versions: Win7+ (client and server).
+- Windows versions: Win7+, Windows Server 2008+, and Windows Nano Server.
 - Chips: X64, X86, ARM32, ARM64.
-- Specialized hardware: Raspberry Pi.
+- Specialized hardware: Raspberry Pi 2+.
 
 Project Goals
 =============
@@ -62,7 +61,7 @@ Goals
 -----
 
 - There are high-quality ports for Linux, macOS and Windows.
-- There are high-quality ports for X64, X86 and ARM32.
+- There are high-quality ports for X64, X86, ARM32, and ARM64.
 - .NET Core can be shipped on a schedule that aligns with ASP.NET and Windows 10 UWP dates and quality (e.g. Beta, RTM) requirements.
 - Contributions should be prioritized that align with these goals.
 
@@ -88,19 +87,18 @@ At Microsoft, .NET has always been an important component of other teams' produc
 Planned 1.1 features
 --------------------
 
-- Broader API support, bringing parity with .NET Framework and Mono.
+- Broader API support, bringing parity with .NET Framework and Mono at the BCL level.
 - Transition to MSBuild and csproj as the default build system and project model for all versions of .NET. 
 
 Notes:
 
 - The 1.0 release is accompanied with a preview version of the Visual Studio and command-line tooling. The tooling should reach RTM quality with version 1.1 of the .NET Core runtime in Fall 2016.
-- The [ASP.NET Core 1.0 roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
+- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
 
 TBD
 ===
 
 There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Feel free to contribute that plan.
 
-- OS package manager support (e.g. apt-get, brew).
-- Broader Linux distro support.
-- Create low-level FX APIs for Linux (e.g. daemon support) and OSX, much like exists for Windows (e.g. Windows registry).
+- OS package manager (e.g. apt-get, brew), and broader Linux distro support.
+- Create low-level FX APIs for Linux (e.g. daemon support) and macOS, much like exists for Windows (e.g. Windows registry).
