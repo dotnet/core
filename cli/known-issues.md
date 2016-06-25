@@ -55,6 +55,15 @@ ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
 
 **Workaround 2:** edit your `.zshrc` and/or `.zshprofile` files to add the `/usr/local/share/dotnet` to the $PATH. 
 
+## `app.config` file needs to be checked out before publishing 
+If you have an `app.config` file in source control that places locks on local files (such as TFS), you will recieve the following error during publishing:
+
+```console
+Failed to make the following project runnable: <project name> reason: Access to the path <path> is denied.
+```
+
+To resolve this, checkout the `app.config` file from the source control prior to publishing. 
+
 ## `dotnet restore` in the root of the file system fails
 If you run `dotnet restore` in the root of the file system (`/` in Linux/macOS or `C:\` in Windows) it may fail even if you have the `project.json` file in the root. By default, running the command without specifying the project file will result in the command trying to locate any project files in all subdirectories in the file system. That will fail for certain paths due to security. 
 
