@@ -1,2 +1,107 @@
 #Release Notes
-TBD
+
+## .NET Core 1.0.0 released 6/27/2016
+
+Details on this release can be read about on
+[the .NET Blog](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0) and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
+
+There are a few issues to be aware of, which are described in the [.NET Core 1.0.0 Known Issues](known-issues-1.0.0.md) document.
+
+### RTM Platform Support
+
+We've added a number of distros to our support list. Below is the complete set for 1.0.0.
+
+* Red Hat Enterprise Linux 7.2
+* CentOS 7.1+
+* Debian 8.2+
+* Fedora 23
+* Linux Mint 17.1
+* OpenSUSE 13.2
+* Oracle Linux 7.1
+* Ubuntu 14.04 & 16.04
+* Mac OS X 10.11
+* Windows 7+ / Server 2012 R2+
+* Windows Nano Server TP5
+
+A little style note for the rest of this document - any references to 'Unix' encompasses the Linux distros detailed above and OS X / macOS.
+
+### Dependencies
+
+No changes from RC2.
+
+| Library             | Function                                                         | Mode          |Debian/Ubuntu  | CentOS/RHEL   | OS X                  |
+| ------------------- | ---------------------------------------------------------------- | ------------- | ------------- | ------------- | --------------------- |
+| libc, librt         | I/O, process management, time, etc.                              | Runtime       | glibc         | glibc         | Part of OS            |
+| libunwind           | call chain determination for exception handling and stack traces | Runtime       | libunwind8    | libunwind     | Part of OS            |
+| gettext             | resource strings                                                 | Development   | gettext       | gettext       | n/a                   |
+| libicu              | globalization                                                    | Runtime       | libicu52      | libicu        | Part of OS            |
+| libuuid             | guid generation                                                  | Runtime       | libuuid1      | libuuid       | Part of OS            |
+| libcurl             | HTTP                                                             | Runtime       | libcurl3      | libcurl       | Part of OS            |
+| libssl & libcrypto  | cryptography                                                     | Runtime       | libssl1.0.0   | openssl-libs  | Openssl from homebrew |
+| libz                | deflate and gzip                                                 | Runtime       | zlib1g        |zlib           | Part of OS            |
+| liblttng            | runtime tracing                                                  | Diagnostic    | liblttng-ust0 | liblttng-ust0 | n/a                   |
+
+### Introduction of .NET Core API Documentation
+
+* Conceptual: http://docs.microsoft.com/dotnet
+* API: http://dotnet.github.io/api/
+
+### Production-quality .NET Core Runtime and Framework libraries
+
+* Background GC on Unix
+* Support for basic cross-process synchronization in the Mutex class on Unix
+* Reliability improvements
+* R2R Performance improvements for Generics
+* Portable PDB support in Exception.ToString() and System.Diagnostics.StackTrace
+* New SOS commands "!CLRStack -r"
+* Limited managed profiling support on Windows
+
+### BCL
+
+Below is a summary of API changes made since RC2. A complete and detailed listing of API changes can be seen in the [RC2 to Final API Diff](RC2-Final_API_diff.md).
+
+New .NET Core APIs
+
+* System.ComponentModel.TypeConverter - TypeDescriptor support
+* System.Data.Common - DBEnumerator
+* System.Diagnostics.Tracing - EventCounter
+* System.IO.FileSystem.Watcher - FileSystemWatcher.WaitForChanged
+* System.Net.Http - new properties on HttpClientHandler
+* System.Net.Sockets - add back Tcp|UdpClient.Client property
+* System.Reflection.Metadata - MetadataReaderProvider
+	* Many types have been removed from the 1.3 surface area and moved to 1.4 which remains in pre-release.  If you depend on these types update to the 1.4.0 pre-release package.
+* System.Resources.ReaderWriter - types are now in separate assemblies System.Resources.Reader and System.Resources.Writer
+* System.Runtime.CompilerServices.Unsafe - New static helper methods for dealing with unsafe pointers
+* System.Security.Cryptography
+    * ECDsa supports creating keys for arbitrary named and explicit curves (Windows 10, OS X, Linux)
+	* ECDsa supports importing and exporting keys via the platform-independent ECParameters type
+    * EnvelopedCms is now supported via the System.Security.Cryptography.Pkcs package
+* System.Security.SecureString
+* System.Text.RegularExpressions - precompiled regex
+
+### CLI
+
+<<<<<<< HEAD
+* Offline support: now you don't have to be connected to the internet to write applications that target only the .NET Core runtime and libraries. This means the core libraries are cached locally after running various dotnet commands the first time. Restoring packages which are not part of the Shared Framework do generally require and do need an internet connection to gather the packages from NuGet.
+=======
+* Offline support: now you don't have to be connected to the internet to write applications that target only the .NET Core runtime and libraries. This means the core libraries are cached locally after running various dotnet commands the first time. Restoring packages which are not part of the Shared Framework do generally require and internet connection to gather the packages from NuGet.
+>>>>>>> master
+* New Templates: web, lib and xunittest
+
+### WCF
+
+Details on work the WCF team has done since RC2 can be found in the [WCF Release Notes](https://github.com/dotnet/wcf/releases/tag/v1.0.0).
+
+## Closed issues
+
+The lists of issues closed for this and past releases can be found here:
+
+* [CLR issues](https://github.com/dotnet/coreclr/issues?q=is%3Aissue+no%3Amilestone+is%3Aclosed)
+* [BCL issues](https://github.com/dotnet/corefx/issues?q=is%3Aissue+no%3Amilestone+is%3Aclosed)
+
+## Commits for 1.0.0
+
+The lists of commits for this release can be viewed here:
+
+* [CLR commits](https://github.com/dotnet/coreclr/commits/release/1.0.0)
+* [BCL commits](https://github.com/dotnet/corefx/commits/release/1.0.0)
