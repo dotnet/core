@@ -1,6 +1,6 @@
 # API Diff between RC2 and 1.0.0 final
 
-API listing follows standar diff formatting. Lines preceded by a '+' are additions and a '-' indicates removal.
+API listing follows standard diff formatting. Lines preceded by a '+' are additions and a '-' indicates removal.
 
 - [System](#system)
 - [System.Buffers](#systembuffers)
