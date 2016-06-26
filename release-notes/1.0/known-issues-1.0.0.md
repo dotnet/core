@@ -4,40 +4,33 @@ This document lists known issues for *.NET Core 1.0.0* and *.NET Core SDK 1.0.0 
 
 ## .NET Core native prerequisites
 
-See the [.NET Core prequisites document](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) to understand any installation or setup requirements for you OS which are not handled by the .NET Core 1.0.0 installers.
+See the [.NET Core prequisites document](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) to understand any installation or setup requirements for your OS which are not handled by the .NET Core 1.0.0 installers.
 
-## NegotiateStream
+## NegotiateStream's functionality relies on gssapi implementation
 
-```NegotiateStream``` relies on the gssapi implementation available on the platform.
-* On Linux flavors, the default gssapi implementation provided is [MIT's krb5 library](http://web.mit.edu/kerberos/) which is available on all the linux platforms
-* On OS X, the default implementation is heimdal-based GSS.framework
+```NegotiateStream``` relies on the gssapi implementation available on the platform:
+* On Linux, the default gssapi implementation typically provided is [MIT's krb5 library](http://web.mit.edu/kerberos/), which is available on all the linux platforms.
+* On OS X, the default implementation is the heimdal-based GSS.framework.
 
-On both Linux and OS X, NegotiateStream uses SPNEGO and relies on the underlying implementation for supporting Kerberos or NTLM as the underlying security protocol.
+On both Linux and OS X, NegotiateStream uses SPNEGO and relies on the underlying implementation for supporting Kerberos and NTLM as the underlying security protocol:
+* On OS X, GSS.framework supports the SPNEGO mechanism with Kerberos and NTLM as the available security protocols.
+* On Linux, the MIT krb5 library supports SPENGO mechanism and Kerberos as the available security protocol. The implementation can also be made to support NTLM by installing the [GSS-NTLMSSP plugin](https://fedorahosted.org/gss-ntlmssp/) or another plugin with similar functionality. The fallback to NTLM is thus dependent on runtime availability of such a plugin. On RHEL and CentOS, the GSS-NTLMSSP plugin is available from the package managers. The same is also available on Ubuntu 16. It may be available for installable on other distributions and versions of Linux. There's no compile time dependency on this plugin.
 
-* On OS X, Gss.framework supports SPNEGO mechanism with Kerberos and NTLM as the security protocols.
-* On Linux, mit krb5 library supports SPENGO mechanism and Kerberos as the out of the box security protocol. The implementation can be made to support NTLM too by installing [GSS-NTLMSSP plugin](https://fedorahosted.org/gss-ntlmssp/) or another plugin with similar functionality. The fallback to NTLM is thus dependent on runtime availability of such a plugin.
+## NegotiateStream.Write interop failures on Linux and OS X
 
-On RHEL and CENTOS, the plugin GSS-NTLMSSP is available from the package managers. The same is also available on Ubuntu 16. It can be installed on the other flavors of linux.
-
-There's no compile time dependency on this plugin.
-
-## NegotiateStream.Write interop issues on Linux/OS X
-
-There are some combinations of Kerberos/NTLM, SignOnly/EncryptAndSign etc. that cause the ```gss_wrap``` call on Unix client to fail against a Windows server using ```NegotiateStream```. Here are the failing combinations of credentials and protection level passed in ```AuthenticateAsClientAsync```
+There are some combinations of Kerberos/NTLM and SignOnly/EncryptAndSign/etc. that cause the native ```gss_wrap``` call used by ```NegotiateStream``` on a Unix client to fail when connected to a ```NegotiateStream``` on a Windows server. Here are the failing combinations of credentials and protection level passed in to ```AuthenticateAsClientAsync```:
 
 On Linux:
-
-- Kerberos creds with Sign: Server complains that signature is valid but contents not encrypted
-- NTLM creds with EncrypAndSign: Server rejects signature
-- NTLM creds with Sign: Server rejects signature
+- Kerberos creds with Sign: Server complains that signature is valid but that the contents are not encrypted.
+- NTLM creds with EncrypAndSign: Server rejects signature.
+- NTLM creds with Sign: Server rejects signature.
 
 On OS X:
+- Kerberos creds with Sign: Server complains that signature is valid but the contents are not encrypted.
+- NTLM creds with EncryptAndSign: Server complains about message format.
+- NTLM creds with Sign: gss_wrap fails on client side.
 
-- Kerberos creds with Sign: Server complains that signature is valid but contents not encrypted
-- NTLM creds with EncryptAndSign: Server complains about message format
-- NTLM creds with Sign: gss_wrap fails on client side
-
-The fix has been pushed to MIT Kerberos source <https://github.com/krb5/krb5/pull/436> which will make the fix available for all unix platforms, starting krb5-1.15. Red Hat reports the fix will be backported to RHEL 7.
+A fix for this issue has been pushed to MIT Kerberos source <https://github.com/krb5/krb5/pull/436>, which will make the fix available for all Unix platforms, starting with krb5-1.15. Red Hat reports the fix will be backported to RHEL 7.
 
 <https://github.com/dotnet/corefx/issues/6767>
 
@@ -87,9 +80,9 @@ HttpClient response header parsing logic on Linux and on OS X fairly strictly fo
 
 <https://github.com/dotnet/corefx/issues/9240>
 
-## NTFS and FAT not supported on unix
+## X509 certificate stores not supported on NTFS and FAT volumes on Unix
 
-Adding certs to an X509Store fails when the current user's home directory is an NTFS volume on unix.
+Adding certificates to an X509Store fails when the current user's home directory is on an NTFS volume on Unix.
 
 The user's home directory (or, the directory referenced by $HOME) must be on a standard filesystem (such as ext4) supporting chmod.
 
@@ -100,7 +93,7 @@ The user's home directory (or, the directory referenced by $HOME) must be on a s
 ```bash
 brew install openssl
 
-# without this next step Homebrew will not register a symlink in a standard rpath location,
+# Without this next step, Homebrew will not register a symlink in a standard rpath location,
 # so .NET Core will still be unable to find the installed libraries.
 brew link --force openssl
 ```
@@ -108,16 +101,16 @@ brew link --force openssl
 When this dependency is not met, an application making direct or indirect use of cryptography will get an exception similar to
 `System.DllNotFoundException: Unable to load DLL 'System.Security.Cryptography.Native': The specified module could not be found.`.
 
-### A note on producing standalone OS X applications
+### Producing standalone OS X applications
 
-Since .NET Core loads libcrypto and libssl via rpath probing these libraries can be copied into the working directory of an application before being copied to another machine.  But when trying to use this configuration users should be advised that the Homebrew version of libssl has an absolute path dependency on libcrypto.  The local copy of libssl may need to be modified to search for libcrypto via rpath with the install_name_tool utility.
+Since .NET Core loads libcrypto and libssl via rpath probing, these libraries can be copied into the working directory of an application before being copied to another machine.  But when trying to use this configuration, users should be advised that the Homebrew version of libssl has an absolute path dependency on libcrypto.  The local copy of libssl may need to be modified to search for libcrypto via rpath with the `install_name_tool` utility.
 
 <https://github.com/dotnet/corefx/issues/9171>
 
 
 ## Debian users may experience unexpected failure when using SSL/TLS
 
-When new Root Certificate Authorities are being created it is not uncommon for the new CA public key to be "cross certified" by an existing Certificate Authority to boostrap the trust relationship into existing environments. For example, the "Baltimore CyberTrust Root" CA was cross-certified by the existing "GTE CyberTrust Global Root" CA. This process is usually considered to make clients more accepting.
+When new Root Certificate Authorities are being created, it is not uncommon for the new CA public key to be "cross certified" by an existing Certificate Authority to boostrap the trust relationship into existing environments. For example, the "Baltimore CyberTrust Root" CA was cross-certified by the existing "GTE CyberTrust Global Root" CA. This process is usually considered to make clients more accepting.
 
 Metadata from the server can cause OpenSSL 1.0.1 to consider the cross-certified certificate chain without considering the direct-root chain. Combined with Debian's removal of some older trusted Root Certificate Authorities in the 20141019+deb8u1 version of the ca-certificates package, these certificate chains will be incomplete (and therefore untrusted).
 
@@ -125,69 +118,54 @@ Microsoft has no specific guidance to offer users affected by this configuration
 
 <https://github.com/dotnet/corefx/issues/9244>
 
-## HttpClient.GetAsync
+## HttpClient.GetAsync may fail while handling multiple "WWW-Authenticate: Basic" headers
 
-HttpClient.GetAsync throws an exception, if server response has more than one "WWW-Authenticate: Basic" header with different realm. The following sample illustrates the error.
-
-```csharp
-var handler = new HttpClientHandler();
-handler.UseDefaultCredentials = false;
-handler.Credentials = System.Net.CredentialCache.DefaultCredentials;
-
-handler.AllowAutoRedirect = true;
-
-using (var client = new HttpClient(handler))
-{
-        client.BaseAddress = new Uri("type you server URI here");
-        HttpResponseMessage response = await client.GetAsync("api/values");
-}
-```
+HttpClient.GetAsync on Windows is unable to process and throws an exception if a server response includes more than one "WWW-Authenticate: Basic" header with different realms.
 
 <https://github.com/dotnet/corefx/issues/9124>
 
-## uCRT dependency on Windows
+## Universal C Runtime dependency on Windows
 
-With 1.0 of .NET Core, all applications that target .NET Core and run on Windows have a Universal CRT (UCRT) dependency. This dependency is needed on all non-Windows 10 editions. This especially impacts the self-contained applications, as it means that the machine that they are to be run on needs to have UCRT installed.
+With 1.0.0 of .NET Core, all applications that target .NET Core and run on Windows have a Universal CRT (UCRT) dependency. This especially impacts self-contained applications, as it means that the machine that they are to be run on needs to have UCRT installed.
 
-If the dependency is not present, applications will fail to run and errors will be thrown.
-The UCRT dependency can be installed via Windows Update and as a recommended update it will be installed automatically if the user left the default settings for Windows Update operational.
+If the dependency is not present, applications will fail to run and errors will be thrown, e.g.
+```The program can't start because api-ms-win-crt-runtime-1-1-0.dll is missing from your computer. Try reinstalling the program to fix this problem.```
+The UCRT dependency can be installed via Windows Update (name: "Update for Universal C Runtime in Windows", per <https://support.microsoft.com/en-us/kb/2999226>) and, as a recommended update, it will be installed automatically if the user uses the default settings for Windows Update. It can also be downloaded from [Microsoft Download Center](https://www.microsoft.com/en-us/download/details.aspx?id=48234).
 
+<https://github.com/dotnet/corefx/issues/9083>
 <https://github.com/dotnet/corefx/issues/9389>
 
-## ULIMIT on OS X
+## Exceptions due to user limits on OS X
 
-When an app exceeds ULIMIT on OS X and throws an exception, the user will get a bogus error from the CLR instead of a good call stack for the real exception. The workaround is to manually increase ULIMIT.
+When an app exceeds a user limit (ulimit) on OS X and an exception is thrown, the exception may be for an "internal error" (0x8007054F) rather than representing the actual error that occured. The workaround is to manually increase the ulimit.
 
 <https://github.com/dotnet/coreclr/issues/5782>
 
-## Unexpected OutOfMemoryException on unix
+## Unexpected OutOfMemoryExceptions on Unix
 
-App on unix can throw OutOfMemoryException when there is still enough memory available in case the number of memory mappings it has made exceeds the `/proc/sys/vm/max_map_count`.
+Apps on Unix can throw OutOfMemoryException even when there is still enough memory available.  This can happen if the number of memory mappings it has made exceeds the maximum map count, e.g. `/proc/sys/vm/max_map_count` on Linux.
 
-Set the `/proc/sys/vm/max_map_count` to a larger value for applications that experience that problem or are expected to create a large number of mappings. One source of such mappings is excessive usage of `System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly` with the access parameter set to `AssemblyBuilderAccess.Run`.
+If an application experiences this problem and/or is expected to create a large number of mappings, the maximum map count can be increased, e.g. setting `/proc/sys/vm/max_map_count` to a larger value. One source of such mappings is excessive usage of `System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly` with the access parameter set to `AssemblyBuilderAccess.Run`.
 
-## Lazily binding an assembly from Resolving event for static load can result in a crash
+## Lazily binding an assembly AssemblyLoadContent.Resolving event for static load can cause crashes
 
-If an app has a static assembly reference to an assembly that is missing (which is not the normal case since .NET Core app have their dependencies complete) OR attempts to do Assembly.Load against an assembly that is missing AND has wired up to the Resolving event to load the assemblies from custom locations, then the event will not return a valid reference and could result in a crash.
+If an app has a static assembly reference to an assembly that is missing (this is not common), or if an app attempts to use Assembly.Load with an assembly that is missing and is using a handler for the Resolving event to load assemblies from custom locations, the Resolving event may return an invalid reference, which could result in a crash.
 
 The workaround to address the above problem is one of the following:
-
-Load the assembly using `LoadFromAssemblyName` instead of Assembly.Load, OR
-Create a custom `AssemblyLoadContext` and override its Load method to resolve the assembly.
+- Load the assembly using `LoadFromAssemblyName` instead of Assembly.Load.
+- Create a custom `AssemblyLoadContext` and override its Load method to resolve the assembly.
 
 <https://github.com/dotnet/coreclr/issues/5837#issuecomment-226657996>
 
 ## global.json needs to be in UTF-8
 
-If global.json file has an UTF-16 BOM, dotnet commands will fail due to not supporting UTF-16 BOM with the error:
-
+If global.json file has an UTF-16 BOM, dotnet commands will fail (due to not supporting a UTF-16 BOM) with the error:
 ```
 A JSON parsing exception occurred: * Line 1, Column 2 Syntax error: Malformed token
 ```
+This situation may arise when using tools that by default produce UTF-16 files with the BOM, such as PowerShell's Out-File cmdlet.
 
-This situation may arise if using tools that by default produce UTF-16 files with the BOM, such as PowerShell's Out-File cmdlet.
-
-**The workaround** is to either remove the BOM or change it to UTF-8 BOM, as these are the currently supported. Visual Studio by default uses UTF-8. If you are using PowerShell, you can specify the encoding for the Out-File cmdlet with the -Encoding argument, `Out-File -Encoding utf8`.
+A workaround is to either remove the BOM or change the file's encoding. Visual Studio by default uses UTF-8. If you are using PowerShell, you can specify the encoding for the Out-File cmdlet with the -Encoding argument, `Out-File -Encoding utf8`.
 
 <https://github.com/dotnet/core-setup/issues/185>
 <https://github.com/dotnet/cli/issues/2159>
@@ -205,11 +183,10 @@ sudo dnf downgrade nspr nss-util nss-softokn-freebl nss-softokn nss-sysinit nss 
 
 ## Line numbers missing from exception call stack on Windows 7
 
-When an exception goes unhandled, the exception call stack doesn't include the source line numbers.  On the other hand, the source line numbers are included when Exception.ToString() or Exception.StackTrace is called on an exception object.
+When an exception goes unhandled, the exception call stack doesn't include the source line numbers.  However, source line numbers are included when an Exception object's ToString or StackTrace methods are used.
 
 ```csharp
 // Catch the exception and call Exception.ToString() on it, e.g.
-
 try
 {
     throw new Exception();
@@ -225,7 +202,6 @@ catch (Exception ex)
 ## Nano Server TP5
 
 When working on TP5 of Nano server, users will encounter the following error if they try to run either portable or self-contained application:
-
 ```
 Failed to load the dll from [C:\hwapp_s\bin\Debug\netcoreapp1.0\win10-x64\hostpolicy.dll], HRESULT: 0x8007007E
 An error occurred while loading required library hostpolicy.dll from [C:\hwapp_s\bin\Debug\netcoreapp1.0\win10-x64]
@@ -242,7 +218,7 @@ This process will ensure that that the dotnet host finds the appropriate APIs it
 ## Windows 7
 
 **Issue:**
-Some libraries that Pinvoke into api-set's and target .NET Framework in our nuget packages might fail to run on Windows 7.
+Some libraries that P/Invoke into api-set's and target .NET Framework in our nuget packages might fail to run on Windows 7.
 
 **Workarounds:**
 Some of the api-sets are installed by the UCRT update: <https://support.microsoft.com/en-us/kb/2999226>
@@ -254,22 +230,8 @@ and <https://support.microsoft.com/en-us/kb/2790113> but these installations ma
 [runtime.win7-x64.Microsoft.NETCore.Windows.ApiSets](https://dotnet.myget.org/F/dotnet-core/api/v2/package/runtime.win7-x64.Microsoft.NETCore.Windows.ApiSets/1.0.1)
 [runtime.win7-x86.Microsoft.NETCore.Windows.ApiSets](https://dotnet.myget.org/F/dotnet-core/api/v2/package/runtime.win7-x86.Microsoft.NETCore.Windows.ApiSets/1.0.1)
 
-## UCRT Dependency on Windows 7 and System.IO.Compression
-
-With 1.0 of .NET Core, all applications that target .NET Core and run on Windows have a [Universal CRT (UCRT)](https://blogs.msdn.microsoft.com/vcblog/2015/03/03/introducing-the-universal-crt/) dependency. This dependency is needed on all non-Windows 10 editions. This especially impacts the [self-contained](https://dotnet.github.io/docs/core-concepts/app-types.html) applications, as it means that the machine that they are to be run on needs to have UCRT installed.
-
-If the dependency is not present, applications will fail to run and errors will be thrown. The error will be:
-
-> The program can't start because api-ms-win-crt-runtime-1-1-0.dll is missing from your computer. Try reinstalling the program to fix this problem.
-
-The UCRT dependency can be installed via Windows Update (name: "Update for Universal C Runtime in Windows" as according to <https://support.microsoft.com/en-us/kb/2999226>) and as a recommended update it will be installed automatically if the user left the default settings for Windows Update operational. It can also be downloaded from [Microsoft Download Center](https://www.microsoft.com/en-us/download/details.aspx?id=48234).
-
-<https://github.com/dotnet/corefx/issues/9083>
-
 ## Bash on Ubuntu on Windows
 
 [Bash on Windows (WSL)](https://msdn.microsoft.com/en-us/commandline/wsl/about) is not yet supported by .NET Core. Attempting to run applications in the environment can experience interittent crashes.
 
 <https://github.com/Microsoft/BashOnWindows/issues/520>
-
-
