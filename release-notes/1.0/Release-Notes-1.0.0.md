@@ -81,11 +81,8 @@ New .NET Core APIs
 
 ### CLI
 
-<<<<<<< HEAD
-* Offline support: now you don't have to be connected to the internet to write applications that target only the .NET Core runtime and libraries. This means the core libraries are cached locally after running various dotnet commands the first time. Restoring packages which are not part of the Shared Framework do generally require and do need an internet connection to gather the packages from NuGet.
-=======
-* Offline support: now you don't have to be connected to the internet to write applications that target only the .NET Core runtime and libraries. This means the core libraries are cached locally after running various dotnet commands the first time. Restoring packages which are not part of the Shared Framework do generally require and internet connection to gather the packages from NuGet.
->>>>>>> master
+* Offline support: now you don't have to be connected to the internet to write applications that target only the .NET Core runtime and libraries. This means the core libraries are cached locally after running various dotnet commands the first time. Restoring packages which are not part of the Shared Framework do generally require an internet connection to gather the packages from NuGet.
+
 * New Templates: web, lib and xunittest
 
 ### WCF
