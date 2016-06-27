@@ -84,7 +84,5 @@ example.
 
 [ASP.NET Core](https://github.com/aspnet/home) is a new cross-platform version of
 ASP.NET that is designed for the cloud, and runs on Windows, Linux and Mac. It
-uses the .NET Framework to run on Windows, and can also run on .NET Core for
-greater deployment flexibility on Windows. It currently uses Mono for Linux and
-Mac support but will move to .NET Core for those platforms when they are
-supported.
+targets .NET Core by default, but you may choose to target the .NET Framework on
+Windows.
