@@ -6,7 +6,7 @@ API listing follows standard diff formatting. Lines preceded by a '+' are additi
 - [System.Buffers](#systembuffers)
 - [System.ComponentModel](#systemcomponentmodel)
 - [System.Data.Common](#systemdatacommon)
-- [System.Diagnostics.Tracing](#systemdiagnostics)
+- [System.Diagnostics.Tracing](#systemdiagnosticstracing)
 - [System.IO](#systemio)
 - [System.Net.Http](#systemnethttp)
 - [System.Net.Sockets](#systemnetsockets)
