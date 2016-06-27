@@ -55,6 +55,23 @@ ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
 
 **Workaround 2:** edit your `.zshrc` and/or `.zshprofile` files to add the `/usr/local/share/dotnet` to the $PATH. 
 
+## Breaking change in Preview 2 apt-get packages that impacts Preview 1 packages
+We made a breaking change in the way we package Preview 2 Ubuntu packages that also affects Preview 1 packages. The core of the change is that the host policy is now not packaged together with the host, but separately. This means that when you install Preview 1 packages from our Ubuntu apt-get feed, you will run into the following error message when trying to run any `dotnet` command: 
+
+> Failed to resolve library symbol hostfxr_main, error: dotnet: undefined symbol: hostfxr_main
+> Segmentation fault (core dumped)
+
+**Issues tracking this:** 
+
+* [dotnet/cli#3657](https://github.com/dotnet/cli/issues/3657)
+
+**Affects:** the Preview 1 apt-get packages
+
+**Workaround:** there are two main workarounds:
+
+1. Use the `dotnet-install.sh` script to install the bits you need; ater you install them, do not forget to put them in the $PATH either by symlinking the `dotnet` binary in a global place (e.g. `/usr/local/bin`) or by adding the install directory to the $PATH. 
+2. Install the Preview 2 of tooling and then use the `sudo apt-get install dotnet-sharedframework-microsoft.netcore.app-1.0.0-rc2-3002702` commands to install the Preview 1 shared framework so that you apps can continue to work. 
+
 ## `app.config` file needs to be checked out before publishing 
 If you have an `app.config` file in source control that places locks on local files (such as TFS), you will recieve the following error during publishing:
 
