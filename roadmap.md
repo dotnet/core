@@ -34,13 +34,13 @@ Linux Mint                    | 17                            | x64      |
 openSUSE                      | 13.2                          | x64      |
 Centos                        | 7.1                           | x64      |
 Oracle Linux                  | 7.1                           | x64      |
-Mac OSX                       | 10.11 (El Capitan)            | x64      |
+Mac OS X                       | 10.11 (El Capitan)            | x64      |
 
 There will be packages available for the native package managers for each OS. (e.g. apt-get, rpm, pkg, msi) as well as zips.
 
 Microsoft provides commercially reasonable support for ASP.NET Core 1.0, .NET Core 1.0 and Entity Framework Core 1.0 on the OS and Version detailed in the table above.
 
-Microsoft provides support for ASP.NET Core 1.0, .NET Core 1.0 and Entity Framework Core 1.0 on Windows, Linux, and Mac OSX.  For an explanation of available support options, please visit [Support for Business and Developers](https://support.microsoft.com/en-us/gp/contactus81?Audience=Commercial&SegNo=4).
+Microsoft provides support for ASP.NET Core 1.0, .NET Core 1.0 and Entity Framework Core 1.0 on Windows, Linux, and Mac OS X.  For an explanation of available support options, please visit [Support for Business and Developers](https://support.microsoft.com/en-us/gp/contactus81?Audience=Commercial&SegNo=4).
 
 Project Goals
 =============
@@ -109,4 +109,4 @@ There are several areas of the product that are planned for the future. This des
 - [CoreRT runtime and .NET Native compiler](https://github.com/dotnet/corert)
 - [LLILC compiler](https://github.com/dotnet/llilc)
 
-- Create low-level FX APIs for Linux (e.g. daemon support) and OSX, much like exists for Windows (e.g. Windows registry).
+- Create low-level FX APIs for Linux (e.g. daemon support) and OS X, much like exists for Windows (e.g. Windows registry).
