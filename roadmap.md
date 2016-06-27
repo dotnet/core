@@ -36,7 +36,7 @@ Notes:
 TBD
 ===
 
-There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Feel free to contribute that plan.
+There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Contributions are welcome.
 
 - OS package manager (e.g. apt-get, brew), and broader Linux distro support.
 - Create low-level FX APIs for Linux (e.g. daemon support) and macOS, much like exists for Windows (e.g. Windows registry).
