@@ -1,10 +1,9 @@
 .NET Core Roadmap
 =================
 
-.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes runtime, framework, compiler and tools components that support a variety of chip and OS targets. These components can be used together or separately.
+.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET. It includes a runtime, framework libraries, compilers and tools that support a variety of chip and OS targets. These components can be used together or separately.
 
 Major .NET Core components:
-
 - [Base Class Libraries](https://github.com/dotnet/corefx)
 - [CoreCLR runtime and RyuJIT compiler](https://github.com/dotnet/coreclr)
 - [Roslyn compiler](https://github.com/dotnet/roslyn)
@@ -12,13 +11,43 @@ Major .NET Core components:
 
 This roadmap is intended to communicate project priorities for evolving and extending the scope of .NET Core.
 
+Ship Dates
+----------
+
+At Microsoft, .NET has always been an important component of other teams' products and has largely shipped on their schedules. It means that we have to take their dates seriously and integrate them into the .NET Core schedule.
+
+|Milestone|Release Date|
+|---------|------------|
+|1.0      |   June 2016|
+|1.1      |   Fall 2016|
+
+Planned 1.1 features
+--------------------
+
+- Broader API support, bringing parity with .NET Framework and Mono at the BCL level.
+- Transition to MSBuild and csproj as the default build system and project model for all versions of .NET. 
+
+Notes:
+
+- The 1.0 release is accompanied with a preview version of the Visual Studio and command-line tooling. The tooling should reach RTM quality with version 1.1 of the .NET Core runtime in Fall 2016.
+- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
+
+TBD
+===
+
+There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Contributions are welcome.
+
+- OS package manager (e.g. apt-get, brew), and broader Linux distro support.
+- Create low-level FX APIs for Linux (e.g. daemon support) and macOS, much like exists for Windows (e.g. Windows registry).
+
 Technology Roadmaps
 ===================
 
 Architecture:
 
 - [.NET Platform Standard](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md)
-- [.NET Core Tools/CLI](https://github.com/dotnet/cli/blob/rel/1.0.0/Documentation/intro-to-cli.md)
+- [.NET Core Tools/CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
+- Languages: F# (C# and VB are done).
 
 Version 1.0 OS Support:
 
@@ -39,7 +68,6 @@ Mac OS X                       | 10.11 (El Capitan)            | x64      |
 There will be packages available for the native package managers for each OS. (e.g. apt-get, rpm, pkg, msi) as well as zips.
 
 Microsoft provides commercially reasonable support for ASP.NET Core 1.0, .NET Core 1.0 and Entity Framework Core 1.0 on the OS and Version detailed in the table above.
-
 Microsoft provides support for ASP.NET Core 1.0, .NET Core 1.0 and Entity Framework Core 1.0 on Windows, Linux, and Mac OS X.  For an explanation of available support options, please visit [Support for Business and Developers](https://support.microsoft.com/en-us/gp/contactus81?Audience=Commercial&SegNo=4).
 
 Project Goals
@@ -47,10 +75,12 @@ Project Goals
 
 Broad goals:
 
-- .NET Core supports or can be be ported to a broad set of OS platforms and chip architectures.
-- .NET Core has compelling performance and is highly reliable.
+- .NET Core code is high quality, has compelling performance, and is highly reliable.
+- .NET Core can be ported to a broad set of OS platforms and chip architectures.
+- .NET Core can be deployed with the application, side-by-side with other versions.
+- .NET Core has a broad API surface that makes it suitable for most payloads.
 - Developers can acquire a .NET Core developer environment quickly and intuitively.
-- Developers can productively and intuitively build apps, using documentation, samples and NuGet components.
+- Developers can productively and intuitively build apps, using documentation, samples, community resources, and NuGet packages.
 
 Contributions
 =============
@@ -70,43 +100,16 @@ Microsoft ships multiple .NET Core distros. It is important that Microsoft can s
 Goals
 -----
 
-- There are high-quality ports for Linux, OS X and Windows.
-- There are high-quality ports for X64, X86.
-- .NET Core can be shipped on a schedule that aligns with ASP.NET Core and Windows 10 UWP dates and quality requirements.
+- There are high-quality ports for Linux, macOS and Windows.
+- There are high-quality ports for X64, X86, ARM32, and ARM64.
+- .NET ships stable releases multiple times a year.
 - Contributions should be prioritized that align with these goals.
 
 Workloads
 ---------
 
-The Microsoft distro currently supports the following workloads.
+The Microsoft distro currently supports the following workloads:
 
 - Console
-- ASP.NET Core
+- ASP.NET Core (MVC and WebAPI)
 - Windows 10 UWP
-
-Ship Dates
-----------
-
-At Microsoft, .NET has always been an important component of other teams' products and has largely shipped on their schedules. It means that we have to take their dates seriously and integrate them into the .NET Core schedule.
-
-|Milestone|Release Date|
-|---------|------------|
-|RTM      | 6/27/2016  |
-
-Notes:
-
-- The RC1 release candidate will be a supported and production ready cross-platform release. 
-- Depending on feedback from RC1, we will ship additional release candidates as necessary.
-- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
-
-Future
-===
-
-There are several areas of the product that are planned for the future. This designation doesn't mean that they are not important, just that there is no plan in place yet for when they will be done. Feel free to contribute that plan.
-
-
-- [Native Compilation](https://github.com/dotnet/corert/blob/master/Documentation/intro-to-corert.md)
-- [CoreRT runtime and .NET Native compiler](https://github.com/dotnet/corert)
-- [LLILC compiler](https://github.com/dotnet/llilc)
-
-- Create low-level FX APIs for Linux (e.g. daemon support) and OS X, much like exists for Windows (e.g. Windows registry).
