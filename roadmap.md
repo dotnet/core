@@ -12,6 +12,35 @@ Major .NET Core components:
 
 This roadmap is intended to communicate project priorities for evolving and extending the scope of .NET Core.
 
+Ship Dates
+----------
+
+At Microsoft, .NET has always been an important component of other teams' products and has largely shipped on their schedules. It means that we have to take their dates seriously and integrate them into the .NET Core schedule.
+
+|Milestone|Release Date|
+|---------|------------|
+|1.0      |   June 2016|
+|1.1      |   Fall 2016|
+
+Planned 1.1 features
+--------------------
+
+- Broader API support, bringing parity with .NET Framework and Mono at the BCL level.
+- Transition to MSBuild and csproj as the default build system and project model for all versions of .NET. 
+
+Notes:
+
+- The 1.0 release is accompanied with a preview version of the Visual Studio and command-line tooling. The tooling should reach RTM quality with version 1.1 of the .NET Core runtime in Fall 2016.
+- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
+
+TBD
+===
+
+There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Feel free to contribute that plan.
+
+- OS package manager (e.g. apt-get, brew), and broader Linux distro support.
+- Create low-level FX APIs for Linux (e.g. daemon support) and macOS, much like exists for Windows (e.g. Windows registry).
+
 Technology Roadmaps
 ===================
 
@@ -24,7 +53,7 @@ Architecture:
 Active ports:
 
 - Languages: C#, VB, and F#.
-- OS: Linux, macOS, FreeBSD and Windows.
+- OS: Linux, macOS, and Windows.
 - Linux distros: RHEL, Fedora, Debian family, CentOS, Oracle Linux, Linux Mint.
 - Windows versions: Win7+, Windows Server 2008+, and Windows Nano Server.
 - Chips: X64, X86, ARM32, ARM64.
@@ -62,7 +91,7 @@ Goals
 
 - There are high-quality ports for Linux, macOS and Windows.
 - There are high-quality ports for X64, X86, ARM32, and ARM64.
-- .NET Core can be shipped on a schedule that aligns with ASP.NET and Windows 10 UWP dates and quality (e.g. Beta, RTM) requirements.
+- .NET ships stable releases multiple times a year.
 - Contributions should be prioritized that align with these goals.
 
 Workloads
@@ -73,32 +102,3 @@ The Microsoft distro currently supports the following workloads:
 - Console
 - ASP.NET Core (MVC and WebAPI)
 - Windows 10 UWP
-
-Ship Dates
-----------
-
-At Microsoft, .NET has always been an important component of other teams' products and has largely shipped on their schedules. It means that we have to take their dates seriously and integrate them into the .NET Core schedule.
-
-|Milestone|Release Date|
-|---------|------------|
-|1.0      |   June 2016|
-|1.1      |   Fall 2016|
-
-Planned 1.1 features
---------------------
-
-- Broader API support, bringing parity with .NET Framework and Mono at the BCL level.
-- Transition to MSBuild and csproj as the default build system and project model for all versions of .NET. 
-
-Notes:
-
-- The 1.0 release is accompanied with a preview version of the Visual Studio and command-line tooling. The tooling should reach RTM quality with version 1.1 of the .NET Core runtime in Fall 2016.
-- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
-
-TBD
-===
-
-There are several areas of the product that are TBD. This designation doesn't mean that they are not important, just that there is no plan in place yet. Feel free to contribute that plan.
-
-- OS package manager (e.g. apt-get, brew), and broader Linux distro support.
-- Create low-level FX APIs for Linux (e.g. daemon support) and macOS, much like exists for Windows (e.g. Windows registry).
