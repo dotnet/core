@@ -81,10 +81,14 @@ Failed to make the following project runnable: <project name> reason: Access to 
 
 To resolve this, checkout the `app.config` file from the source control prior to publishing. 
 
-## `dotnet restore` in the root of the file system fails
-If you run `dotnet restore` in the root of the file system (`/` in Linux/macOS or `C:\` in Windows) it may fail even if you have the `project.json` file in the root. By default, running the command without specifying the project file will result in the command trying to locate any project files in all subdirectories in the file system. That will fail for certain paths due to security. 
+## `dotnet` commands in the root of the file system fails
+If you run any `dotnet` command on project and code files that reside in the root of the file system (`/` in Linux/macOS or `C:\` in Windows) it may fail due to security reasons. The most common error that is encountered is:
 
-**Workaround:** point `dotnet restore` towards the actual project file using the `-p` switch. 
+> Object reference not set to an instance of an object.
+
+This affects the situation where the actual code files are in the root. So, the example path that would trigger this behavior would be `/project.json` or `C:\project.json` on UNIX or Windows respectivelly. 
+
+**Workaround:** use a directory to store your projects and source files. 
 
 **More information:** https://github.com/NuGet/Home/issues/3038
 
