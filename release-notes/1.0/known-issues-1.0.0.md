@@ -32,7 +32,7 @@ On OS X:
 
 A fix for this issue has been pushed to MIT Kerberos source <https://github.com/krb5/krb5/pull/436>, which will make the fix available for all Unix platforms, starting with krb5-1.15. Red Hat reports the fix will be backported to RHEL 7.
 
-<https://github.com/dotnet/corefx/issues/6767>
+- https://github.com/dotnet/corefx/issues/6767
 
 ### Socket.Connect and ConnectAsync instance methods support only one IPAddress
 
@@ -72,13 +72,13 @@ public static class SocketUtilities
 }
 ```
 
-<https://github.com/dotnet/corefx/issues/9235>
+- https://github.com/dotnet/corefx/issues/9235
 
 ## HttpClient handler header parsing strictness on Linux and OS X
 
 HttpClient response header parsing logic on Linux and on OS X fairly strictly follows the RFC.  Certain "invalid" headers, such as with spaces between the header name and the colon, might be accepted by other browsers or even by HttpClient on Windows, but could be rejected when run on Linux or on OS X.
 
-<https://github.com/dotnet/corefx/issues/9240>
+- https://github.com/dotnet/corefx/issues/9240
 
 ## X509 certificate stores not supported on NTFS and FAT volumes on Unix
 
@@ -105,7 +105,7 @@ When this dependency is not met, an application making direct or indirect use of
 
 Since .NET Core loads libcrypto and libssl via rpath probing, these libraries can be copied into the working directory of an application before being copied to another machine.  But when trying to use this configuration, users should be advised that the Homebrew version of libssl has an absolute path dependency on libcrypto.  The local copy of libssl may need to be modified to search for libcrypto via rpath with the `install_name_tool` utility.
 
-<https://github.com/dotnet/corefx/issues/9171>
+- https://github.com/dotnet/corefx/issues/9171
 
 
 ## Debian users may experience unexpected failure when using SSL/TLS
@@ -116,13 +116,13 @@ Metadata from the server can cause OpenSSL 1.0.1 to consider the cross-certified
 
 Microsoft has no specific guidance to offer users affected by this configuration state. This is currently tracked as [bug 812488 in the Debian bug system](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=812488).
 
-<https://github.com/dotnet/corefx/issues/9244>
+- https://github.com/dotnet/corefx/issues/9244
 
 ## HttpClient.GetAsync may fail while handling multiple "WWW-Authenticate: Basic" headers
 
 HttpClient.GetAsync on Windows is unable to process and throws an exception if a server response includes more than one "WWW-Authenticate: Basic" header with different realms.
 
-<https://github.com/dotnet/corefx/issues/9124>
+- https://github.com/dotnet/corefx/issues/9124
 
 ## Universal C Runtime dependency on Windows
 
@@ -132,14 +132,14 @@ If the dependency is not present, applications will fail to run and errors will 
 ```The program can't start because api-ms-win-crt-runtime-1-1-0.dll is missing from your computer. Try reinstalling the program to fix this problem.```
 The UCRT dependency can be installed via Windows Update (name: "Update for Universal C Runtime in Windows", per <https://support.microsoft.com/en-us/kb/2999226>) and, as a recommended update, it will be installed automatically if the user uses the default settings for Windows Update. It can also be downloaded from [Microsoft Download Center](https://www.microsoft.com/en-us/download/details.aspx?id=48234).
 
-<https://github.com/dotnet/corefx/issues/9083>
-<https://github.com/dotnet/corefx/issues/9389>
+- https://github.com/dotnet/corefx/issues/9083
+- https://github.com/dotnet/corefx/issues/9389
 
 ## Exceptions due to user limits on OS X
 
 When an app exceeds a user limit (ulimit) on OS X and an exception is thrown, the exception may be for an "internal error" (0x8007054F) rather than representing the actual error that occured. The workaround is to manually increase the ulimit.
 
-<https://github.com/dotnet/coreclr/issues/5782>
+- https://github.com/dotnet/coreclr/issues/5782
 
 ## Unexpected OutOfMemoryExceptions on Unix
 
@@ -155,7 +155,7 @@ The workaround to address the above problem is one of the following:
 - Load the assembly using `LoadFromAssemblyName` instead of Assembly.Load.
 - Create a custom `AssemblyLoadContext` and override its Load method to resolve the assembly.
 
-<https://github.com/dotnet/coreclr/issues/5837#issuecomment-226657996>
+- https://github.com/dotnet/coreclr/issues/5837#issuecomment-226657996
 
 ## global.json needs to be in UTF-8
 
@@ -167,8 +167,8 @@ This situation may arise when using tools that by default produce UTF-16 files w
 
 A workaround is to either remove the BOM or change the file's encoding. Visual Studio by default uses UTF-8. If you are using PowerShell, you can specify the encoding for the Out-File cmdlet with the -Encoding argument, `Out-File -Encoding utf8`.
 
-<https://github.com/dotnet/core-setup/issues/185>
-<https://github.com/dotnet/cli/issues/2159>
+- https://github.com/dotnet/core-setup/issues/185
+- https://github.com/dotnet/cli/issues/2159
 
 ## dotnet restore can fail on Fedora 23 with NSS 3.24 installed with timeouts and SSL connection errors
 
@@ -178,7 +178,7 @@ At this time, the workaround is to downgrade NSS.
 sudo dnf downgrade nspr nss-util nss-softokn-freebl nss-softokn nss-sysinit nss nss-tools
 ```
 
-<https://github.com/dotnet/cli/issues/3676>
+- https://github.com/dotnet/cli/issues/3676
 
 
 ## Line numbers missing from exception call stack on Windows 7
@@ -197,7 +197,7 @@ catch (Exception ex)
 }
 ```
 
-<https://github.com/dotnet/coreclr/issues/5828>
+- https://github.com/dotnet/coreclr/issues/5828
 
 ## Nano Server TP5
 
@@ -227,11 +227,11 @@ and <https://support.microsoft.com/en-us/kb/2790113> but these installations ma
 - If you're using project.json you can just reference the Microsoft.NETCore.Windows.ApiSets package from your app and be sure to deploy for runtime win7-x86 or win7-x64, as appropriate.
 
 - If you're using packages.config you'll need to manually download and extract the packages, as appropriate for the bitness of your app:
-[runtime.win7-x64.Microsoft.NETCore.Windows.ApiSets](https://dotnet.myget.org/F/dotnet-core/api/v2/package/runtime.win7-x64.Microsoft.NETCore.Windows.ApiSets/1.0.1)
-[runtime.win7-x86.Microsoft.NETCore.Windows.ApiSets](https://dotnet.myget.org/F/dotnet-core/api/v2/package/runtime.win7-x86.Microsoft.NETCore.Windows.ApiSets/1.0.1)
+   - [runtime.win7-x64.Microsoft.NETCore.Windows.ApiSets](https://dotnet.myget.org/F/dotnet-core/api/v2/package/runtime.win7-x64.Microsoft.NETCore.Windows.ApiSets/1.0.1)
+   - [runtime.win7-x86.Microsoft.NETCore.Windows.ApiSets](https://dotnet.myget.org/F/dotnet-core/api/v2/package/runtime.win7-x86.Microsoft.NETCore.Windows.ApiSets/1.0.1)
 
 ## Bash on Ubuntu on Windows
 
 [Bash on Windows (WSL)](https://msdn.microsoft.com/en-us/commandline/wsl/about) is not yet supported by .NET Core. Attempting to run applications in the environment can experience interittent crashes.
 
-<https://github.com/Microsoft/BashOnWindows/issues/520>
+- https://github.com/Microsoft/BashOnWindows/issues/520
