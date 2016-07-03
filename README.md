@@ -44,7 +44,7 @@ The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundat
 
 * [.NET Core Project](http://www.dotnetfoundation.org/netcore)
 * [.NET Compiler Platform ("Roslyn" Project)](http://www.dotnetfoundation.org/dotnet-compiler-platform)
-* [ASP.NET Core Project](http://www.dotnetfoundation.org/aspnet-5)
+* [ASP.NET Core Project](http://www.dotnetfoundation.org/aspnet-core)
 
 ## Licenses
 
