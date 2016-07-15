@@ -15,7 +15,7 @@ The core repository is the starting point to engage in and learn about the
 ## Get Started
 
 If you're new to .NET Core and have 10 minutes to try it, start here: 
-- [What is .NET Core?](http://dotnet.github.io/about/)
+- [What is .NET Core?](https://www.microsoft.com/net/core/platform)
 - [Get Started with .NET Core on Windows, OSX and Linux](https://www.microsoft.com/net/core)
 
 If you have some more time and want to go deeper:
