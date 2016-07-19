@@ -6,10 +6,12 @@ The core repository is the starting point to engage in and learn about the
 > **Note:** please note that this repository is not for filing product issues.
 > If you run into an issue using .NET Core, there are multiple repos where you can 
 > file an issue:
-> * dotnet/cli - for CLI tools and questions
-> * dotnet/corefx - for API issues and questions
-> * dotnet/coreclr - for runtime issues
-> * nuget/home - for NuGet questions and issues
+> * [dotnet/cli](https://github.com/dotnet/cli) - for CLI tools and questions
+> * [dotnet/corefx](https://github.com/dotnet/corefx) - for API issues and questions
+> * [dotnet/coreclr](https://github.com/dotnet/coreclr) - for runtime issues
+> * [nuget/home](https://github.com/nuget/home) - for NuGet questions and issues
+> * [aspnet/home](https://github.com/aspnet/home) - for ASP.NET Core questions and issues.
+> 
 > We will be removing the ability to file issues on this repo in the near future.
 
 ## Get Started
