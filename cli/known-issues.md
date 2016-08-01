@@ -4,12 +4,12 @@ Known issues & workarounds
 ## OpenSSL dependency on OS X
 OS X "El Capitan" (10.11) comes with 0.9.8 version of OpenSSL. .NET Core depends on versions >= 1.0.1 of OpenSSL. You can update the version by using [Homebrew](https://brew.sh), [MacPorts](https://www.macports.org/) or manually. The important bit is that you need to have the required OpenSSL version on the path when you work with .NET Core. 
 
-With Homebrew, you can run the following commands to get this done: 
+Homebrew no longer supports linking openssl folders into /usr/local/lib (see https://github.com/Homebrew/brew/pull/597 and https://github.com/Homebrew/brew/pull/612 for info).
 
-```console
-brew update
-brew install openssl
-brew link --force openssl
+A temporary workaround for this is to add the library location to the dynamic loader library path either on your shell window or in your ~/.bashrc / ~/.zshrc.
+
+```shell
+export DYLD_LIBRARY_PATH=/usr/local/opt/openssl/lib
 ```
 
 Homebrew may also show the following warning:
@@ -26,19 +26,6 @@ sudo port -f uninstall openssl @0.9.8
 ```
 
 You can verify whether you have the right version using the  `openssl version` command from the Terminal.
-
-## Problems using `brew` to link `openssl` after uprading
-Some users have reported problems when using `brew link --force openssl` command to link the upgraded OpenSSL. The error reported is a variation of the below:
-
-```console
-Linking /usr/local/Cellar/openssl/1.0.2h_1... 
-Error: Could not symlink share/man/man5/config.5ssl /usr/local/share/man/man5 is not writable
-```
-
-This is due to permissions being set in a certain way on the `/usr` directory on El Capitan. In order to workaround this problem, you need to give your user ownership of the directory and its contents. More information can be found on the following links:
-
-* http://blog.blakesimpson.co.uk/read/89-fix-homebrew-error-usr-local-bin-is-not-writable-on-os-x-el-capitan
-* http://stackoverflow.com/questions/26647412/homebrew-could-not-symlink-usr-local-bin-is-not-writable
 
 ## Running .NET Core CLI on Nano Server
 
