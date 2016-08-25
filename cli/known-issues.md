@@ -27,7 +27,7 @@ sudo port -f uninstall openssl @0.9.8
 
 You can verify whether you have the right version using the  `openssl version` command from the Terminal.
 
-## Problems using `brew` to link `openssl` after uprading
+## Problems using `brew` to link `openssl` after upgrading
 Some users have reported problems when using `brew link --force openssl` command to link the upgraded OpenSSL. The error reported is a variation of the below:
 
 ```console
