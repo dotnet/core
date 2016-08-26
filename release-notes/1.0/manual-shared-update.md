@@ -51,7 +51,7 @@ If your system doesn't recognize *nupkg files as archives, rename them to *.zip 
 
 ## Back up existing files ##
 
-Since we'll be updating files in-place it's a good idea to make a backup. First you need to locate the `Microsoft.NETCoreApp/1.0.0` directory. If you used the installers for Ubuntu, 1.0.0 will be found under `/usr/local/share/dotnet/shared/Microsoft.NETCore.App/`. Other distro installations are still manual extraction from archives so it's whereever you copied the directory structure. Something like `/opt/dotnet/shared/Microsoft.NETCore.App` would not be uncommon.
+Since we'll be updating files in-place it's a good idea to make a backup. First you need to locate the `Microsoft.NETCoreApp/1.0.0` directory. If you used the installers for Ubuntu, 1.0.0 will be found under `/usr/share/dotnet/shared/Microsoft.NETCore.App/`. Other distro installations are still manual extraction from archives so it's whereever you copied the directory structure. Something like `/opt/dotnet/shared/Microsoft.NETCore.App` would not be uncommon.
 
 Now that `Microsoft.NETCore.App/1.0.0` has been located, the easiest way to make the backup will be to copy the entire directory which will be updated. `sudo rsync -r 1.0.0/ 1.0.0-backup/` will create the backup directory and copy the entire contents of the source directory.
 
