@@ -1,6 +1,6 @@
-# Manually updating the Shared Framework #
+# Manually updating CoreCLR and the JIT in the Shared Framework #
 
-The procedures detailed below can be used to update the .NET Core shared runtime and libraries, also known as Microsoft.NETCore.App in-place. This will enable portable applications to take advantage of updates to the shared files. The preferred way to update Microsoft.NETCore.App is to install the new version side-by-side but there may be times when an updated NETCore.App is not yet available while the required components have been released as NuGet packages.
+The procedures detailed below can be used to update the CoreCLR runtime and JIT that are part of the .NET Core shared runtime and libraries, also known as Microsoft.NETCore.App in-place. This will enable portable applications to take advantage of updates to the shared files. The preferred way to update Microsoft.NETCore.App is to install the new version side-by-side but there may be times when an updated NETCore.App is not yet available while the required components have been released as NuGet packages.
 
 Again, this process should be done only in the event that required updates are available as NuGet packages and not as an updated .NET Core installer.
 
