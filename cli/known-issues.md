@@ -40,6 +40,20 @@ This is due to permissions being set in a certain way on the `/usr` directory on
 * http://blog.blakesimpson.co.uk/read/89-fix-homebrew-error-usr-local-bin-is-not-writable-on-os-x-el-capitan
 * http://stackoverflow.com/questions/26647412/homebrew-could-not-symlink-usr-local-bin-is-not-writable
 
+## `brew` refusing to link `openssl`
+
+```console
+Warning: Refusing to link: openssl
+Linking keg-only OpenSSL means you may end up linking against the insecure,
+deprecated system version while using the headers from the Homebrew version.
+Instead, pass the full include/library paths to your compiler e.g.:
+  -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
+```
+This is due to a recent update from `brew` where it refuses to link `openssl`. More information and workaround on the following links:
+
+* https://github.com/Homebrew/brew/pull/597
+* http://stackoverflow.com/questions/38670295/brew-refusing-to-link-openssl
+
 ## Running .NET Core CLI on Nano Server
 
 If you’re using Nano Server Technical Preview 5 with .NET Core CLI, due to a bug in the Nano Server product, you will need to copy binaries from  `c:\windows\system32\forwarders`. The destination depends on the [type of deployment](https://dotnet.github.io/docs/core-concepts/app-types.html) that you are choosing for your application. 
