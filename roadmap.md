@@ -95,7 +95,7 @@ The .NET Core maintainers have taken a liberal approach to contributions since t
 Microsoft Distro
 ================
 
-Microsoft ships multiple .NET Core distros. It is important that Microsoft can successfully ship .NET Core at quality and meet it's desired dates.
+Microsoft ships multiple .NET Core distros. It is important that Microsoft can successfully ship .NET Core at quality and meet its desired dates.
 
 Goals
 -----
