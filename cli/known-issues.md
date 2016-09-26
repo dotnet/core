@@ -1,6 +1,43 @@
 Known issues & workarounds
 ==========================
 
+<!-- TOC -->
+
+- [Known issues](#known-issues)
+    - [Installing on clean macOS Sierra does not put `dotnet` on the $PATH](#installing-on-clean-macos-sierra-does-not-put-dotnet-on-the-path)
+    - [OpenSSL dependency on OS X](#openssl-dependency-on-os-x)
+    - [Brew cannot write to /usr on a clean install of macOS](#brew-cannot-write-to-usr-on-a-clean-install-of-macos)
+    - [`brew` refusing to link `openssl`](#brew-refusing-to-link-openssl)
+    - [Running .NET Core CLI on Nano Server](#running-net-core-cli-on-nano-server)
+    - [Users of zsh (z shell) don't get `dotnet` on the path after install](#users-of-zsh-z-shell-dont-get-dotnet-on-the-path-after-install)
+    - [Breaking change in Preview 2 apt-get packages that impacts Preview 1 packages](#breaking-change-in-preview-2-apt-get-packages-that-impacts-preview-1-packages)
+    - [`app.config` file needs to be checked out before publishing](#appconfig-file-needs-to-be-checked-out-before-publishing)
+    - [`dotnet` commands in the root of the file system fails](#dotnet-commands-in-the-root-of-the-file-system-fails)
+    - [On dev builds of the tools, restoring default project from dotnet new fails](#on-dev-builds-of-the-tools-restoring-default-project-from-dotnet-new-fails)
+    - [Running `dotnet` on Debian distributions causes a segmentation fault](#running-dotnet-on-debian-distributions-causes-a-segmentation-fault)
+    - [`dotnet restore` times out on Win7 x64](#dotnet-restore-times-out-on-win7-x64)
+    - [Uninstalling/reinstalling the PKG on OS X](#uninstallingreinstalling-the-pkg-on-os-x)
+- [What is this document about?](#what-is-this-document-about)
+- [What is a "known issue"?](#what-is-a-known-issue)
+
+<!-- /TOC -->
+
+# Known issues
+
+## Installing on clean macOS Sierra does not put `dotnet` on the $PATH
+Users have reported this being the case. It seems that the root cause of the issue is that the `/etc/paths.d/` path does not exist on a clean install of macOS Sierra. This, in turn, leads to the file `/etc/paths.d/dotnet` not being created which means that `$PATH` is not updated with the install location of .NET Core. 
+
+> **Note:** if you wish to know what `paths.d` is, please type `man path_helper` in your Terminal in macOS.  
+
+In order to fix this, after install .NET Core on macOS Sierra, you can issue the following commands to create the directory and the file:
+
+```console
+mkdir -p /etc/paths.d
+echo /usr/local/share/dotnet > /etc/paths.d/dotnet
+```
+
+> **Note:** you may need to run these commands as `sudo`. 
+
 ## OpenSSL dependency on OS X
 OS X "El Capitan" (10.11) comes with 0.9.8 version of OpenSSL. .NET Core depends on versions >= 1.0.1 of OpenSSL. You can update the version by using [Homebrew](https://brew.sh), [MacPorts](https://www.macports.org/) or manually. The important bit is that you need to have the required OpenSSL version on the path when you work with .NET Core. 
 
@@ -9,7 +46,6 @@ With Homebrew, you can run the following commands to get this done:
 ```console
 brew update
 brew install openssl
-brew link --force openssl
 ```
 
 Homebrew may also show the following warning:
@@ -17,6 +53,13 @@ Homebrew may also show the following warning:
 > Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries
 
 This warning is meant for the software that uses OpenSSL (in this case, .NET Core) and not for the end-user that is installing said software. Homebrew installation doesn't touch either the existing Apple crypto libraries or existing OpenSSL 0.9.8 version, so there is no impact on any software that uses either one of those crypto solutions and is already installed.
+
+After installing OpenSSL via `brew` you will need to create two symbolic links to get the needed libraries into the loader's path using these commands:
+
+```console
+ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
+ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
+```
 
 MacPorts doesn't have the concept of linking, so it is reccomended that you uninstall 0.9.8 version of OpenSSL using the following command:
 
@@ -27,12 +70,11 @@ sudo port -f uninstall openssl @0.9.8
 
 You can verify whether you have the right version using the  `openssl version` command from the Terminal.
 
-## Problems using `brew` to link `openssl` after upgrading
-Some users have reported problems when using `brew link --force openssl` command to link the upgraded OpenSSL. The error reported is a variation of the below:
+## Brew cannot write to /usr on a clean install of macOS
+On a clean install of macOS El Capitan or later, users have reported getting errors that any path under `/usr/` directory is not writable: 
 
 ```console
-Linking /usr/local/Cellar/openssl/1.0.2h_1... 
-Error: Could not symlink share/man/man5/config.5ssl /usr/local/share/man/man5 is not writable
+Error: /usr/local must be writable!
 ```
 
 This is due to permissions being set in a certain way on the `/usr` directory on El Capitan. In order to workaround this problem, you need to give your user ownership of the directory and its contents. More information can be found on the following links:
@@ -154,37 +196,10 @@ If you have any virtualization software (so far we've confirmed VMWare and Virtu
 
 **Workaround:** disable the virtual network interface and do the restore.   
 
-## Resolving the Standard library packages
-The StdLib package is on a MyGet feed. In order to restore it, a MyGet feed needs to be added 
-to the NuGet feeds, either locally per application or in a central location. 
-
-**Issues tracking this:** 
-
-* [#535](https://github.com/dotnet/cli/issues/535)
-
-**Affects:** `dotnet restore`
-
-**Workaround:** update to the latest bits and run `dotnet new` in an empty directory. This will 
-now drop a `nuget.config` file that you can use in other applications. 
-
-If you cannot update, you can use the following `nuget.config`:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <packageSources>
-    <!--To inherit the global NuGet package sources remove the <clear/> line below -->
-    <clear />
-    <add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />
-    <add key="api.nuget.org" value="https://api.nuget.org/v3/index.json" />
-  </packageSources>
-</configuration>
-```
-
 ## Uninstalling/reinstalling the PKG on OS X
 OS X doesn't really have an uninstall capacity for PKGs like Windows has for 
 MSIs. There is, however, a way to remove the bits as well as the "recipe" for 
-dotnet. More information can be found on [this SuperUser question](http://superuser.com/questions/36567/how-do-i-uninstall-any-apple-pkg-package-file).
+dotnet. More information can be found on [this SuperUser question](http://superuser.com/questions/36567/how-do-i-uninstall-any-apple-pkg-package-file) or you can use the [uninstall script](https://github.com/dotnet/cli/blob/rel/1.0.0-preview2/scripts/obtain/uninstall/dotnet-uninstall-pkgs.sh).
 
 # What is this document about? 
 This document outlines the known issues and workarounds for the current state of 
