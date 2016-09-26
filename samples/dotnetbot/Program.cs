@@ -6,23 +6,23 @@ namespace DotnetBot
     {
                 public static void Main(string[] args) 
                 {
-                        string message = "";
-                        if (args.Length < 1) 
+                      string message = "Welcome to .NET Core!";
+                        
+                       if (args.Length > 0) 
                         {
-                          message = "Welcome to .NET Core!";
-                        } else 
-                        {
+                          message = String.Empty;
                           foreach (string item in args) 
                           {
                             message += item; 
                           }
                         }
+
                         Console.WriteLine(GetBot(message));
                 }
 
                 public static string GetBot(string message) 
                 {
-                        string bot = "\n" + "        " + message;
+                        string bot = $"\n        {message}";
                         bot += @"
     __________________
                       \
