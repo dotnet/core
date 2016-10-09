@@ -97,7 +97,7 @@ Microsoft ships multiple .NET Core distros. It is important that Microsoft can s
 
 Other Distros
 ================
-.NET Core will ship as part of many Linus distros and we are actively working with key partners in the Linux community to make it natural for .NET Core to get everyone people need it. We are contantly looking to expand our distro support and welcome contributions and collaborations in this direction.
+.NET Core will ship as part of many Linux distros and we are actively working with key partners in the Linux community to make it natural for .NET Core to get everyone people need it. We are contantly looking to expand our distro support and welcome contributions and collaborations in this direction.
 
 Goals
 -----
