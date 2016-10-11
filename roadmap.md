@@ -22,7 +22,7 @@ At Microsoft, .NET has always been an important component of other teams' produc
 |---------|------------|
 |1.0      |   Spring 2016|
 |1.1      |   Fall 2016|
-|1.2      |   Spring 2016|
+|1.2      |   Spring 2017|
 
 Planned 1.1 features
 --------------------
@@ -97,7 +97,7 @@ Microsoft ships multiple .NET Core distros. It is important that Microsoft can s
 
 Other Distros
 ================
-.NET Core will ship as part of many Linux distros and we are actively working with key partners in the Linux community to make it natural for .NET Core to get everyone people need it. We are contantly looking to expand our distro support and welcome contributions and collaborations in this direction.
+.NET Core will ship as part of many Linux distros and we are actively working with key partners in the Linux community to make it natural for .NET Core to go everywhere people need it. We are contantly looking to expand our distro support and welcome contributions and collaborations in this direction.
 
 Goals
 -----
