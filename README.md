@@ -9,8 +9,10 @@ The core repository is the starting point to engage in and learn about the
 > * [dotnet/cli](https://github.com/dotnet/cli) - for CLI tools and questions
 > * [dotnet/corefx](https://github.com/dotnet/corefx) - for API issues and questions
 > * [dotnet/coreclr](https://github.com/dotnet/coreclr) - for runtime issues
+> * [dotnet/standard](https://github.com/dotnet/standard) - for .NET Standard issues and questions
 > * [nuget/home](https://github.com/nuget/home) - for NuGet questions and issues
 > * [aspnet/home](https://github.com/aspnet/home) - for ASP.NET Core questions and issues.
+
 > 
 > We will be removing the ability to file issues on this repo in the near future.
 
@@ -83,7 +85,7 @@ Framework features to .NET Core.
 ## Understanding the relationship between .NET Core and Mono
 
 Mono is an important part of the .NET ecosystem, particularly for client
-scenarios (e.g. Xamarin). We will look for ways to collaborate with Mono
+scenarios (for example, Xamarin). We will look for ways to collaborate with Mono
 developers and encourage them to take our code to improve Mono. We will also
 look for opportunities to improve .NET Core with MIT-licensed Mono code.
 
