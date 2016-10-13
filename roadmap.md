@@ -26,7 +26,7 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 Planned 1.1 features
 --------------------
-- Lot's of fixes based on feedback. 
+- Lots of fixes based on feedback. 
 - Support for more popular OS's/distro's that have been released since 1.0.
 
 Planned 1.2 features
@@ -38,7 +38,7 @@ Notes:
 
 - The 1.0 release is accompanied with a preview version of the Visual Studio and command-line tooling. The Visual Studio tooling for 1.0 through 1.2 based on MSBuild and csproj should be publicly available in Fall 2016 and reach RTM quality in Spring 2017. 
 
-- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects's roadmap and dates.
+- The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap) articulates the ASP.NET projects' roadmap and dates.
 
 Technology Roadmaps
 ===================
@@ -97,7 +97,7 @@ Microsoft ships multiple .NET Core distros. It is important that Microsoft can s
 
 Other Distros
 ================
-.NET Core will ship as part of many Linux distros and we are actively working with key partners in the Linux community to make it natural for .NET Core to go everywhere people need it. We are contantly looking to expand our distro support and welcome contributions and collaborations in this direction.
+.NET Core will ship as part of many Linux distros and we are actively working with key partners in the Linux community to make it natural for .NET Core to go everywhere people need it. We are constantly looking to expand our distro support and welcome contributions and collaborations in this direction.
 
 Goals
 -----
