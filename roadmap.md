@@ -20,7 +20,6 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 |Milestone|Release Date|
 |---------|------------|
-|1.0      |   Spring 2016|
 |1.1      |   Fall 2016|
 |1.2      |   Spring 2017|
 
