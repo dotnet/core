@@ -1,0 +1,10 @@
+# System.Text.RegularExpressions
+
+``` diff
+ namespace System.Text.RegularExpressions {
+     public class Group : Capture {
++        public string Name { get; }
+     }
+ }
+```
+
