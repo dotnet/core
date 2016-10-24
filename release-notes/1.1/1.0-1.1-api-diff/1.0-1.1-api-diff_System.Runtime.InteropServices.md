@@ -1,0 +1,16 @@
+# System.Runtime.InteropServices
+
+``` diff
+ namespace System.Runtime.InteropServices {
+     public static class Marshal {
++        public static string PtrToStringUTF8(IntPtr ptr);
++        public static string PtrToStringUTF8(IntPtr ptr, int byteLen);
++        public static IntPtr StringToCoTaskMemUTF8(string s);
++        public static void ZeroFreeCoTaskMemUTF8(IntPtr s);
+     }
+     public enum UnmanagedType {
++        LPUTF8Str = 48,
+     }
+ }
+```
+

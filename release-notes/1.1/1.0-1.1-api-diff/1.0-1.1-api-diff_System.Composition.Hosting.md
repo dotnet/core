@@ -1,0 +1,35 @@
+# System.Composition.Hosting
+
+``` diff
++namespace System.Composition.Hosting {
++    public class CompositionFailedException : Exception {
++        public CompositionFailedException();
++        public CompositionFailedException(string message);
++        public CompositionFailedException(string message, Exception innerException);
++    }
++    public sealed class CompositionHost : CompositionContext, IDisposable {
++        public static CompositionHost CreateCompositionHost(IEnumerable<ExportDescriptorProvider> providers);
++        public static CompositionHost CreateCompositionHost(params ExportDescriptorProvider[] providers);
++        public void Dispose();
++        public override bool TryGetExport(CompositionContract contract, out object export);
++    }
++    public class ContainerConfiguration {
++        public ContainerConfiguration();
++        public CompositionHost CreateContainer();
++        public ContainerConfiguration WithAssemblies(IEnumerable<Assembly> assemblies);
++        public ContainerConfiguration WithAssemblies(IEnumerable<Assembly> assemblies, AttributedModelProvider conventions);
++        public ContainerConfiguration WithAssembly(Assembly assembly);
++        public ContainerConfiguration WithAssembly(Assembly assembly, AttributedModelProvider conventions);
++        public ContainerConfiguration WithDefaultConventions(AttributedModelProvider conventions);
++        public ContainerConfiguration WithPart(Type partType);
++        public ContainerConfiguration WithPart(Type partType, AttributedModelProvider conventions);
++        public ContainerConfiguration WithPart<TPart>();
++        public ContainerConfiguration WithPart<TPart>(AttributedModelProvider conventions);
++        public ContainerConfiguration WithParts(IEnumerable<Type> partTypes);
++        public ContainerConfiguration WithParts(IEnumerable<Type> partTypes, AttributedModelProvider conventions);
++        public ContainerConfiguration WithParts(params Type[] partTypes);
++        public ContainerConfiguration WithProvider(ExportDescriptorProvider exportDescriptorProvider);
++    }
++}
+```
+

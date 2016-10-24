@@ -1,0 +1,96 @@
+# System.Composition
+
+``` diff
++namespace System.Composition {
++    public abstract class CompositionContext {
++        protected CompositionContext();
++        public object GetExport(CompositionContract contract);
++        public object GetExport(Type exportType);
++        public object GetExport(Type exportType, string contractName);
++        public TExport GetExport<TExport>();
++        public TExport GetExport<TExport>(string contractName);
++        public IEnumerable<object> GetExports(Type exportType);
++        public IEnumerable<object> GetExports(Type exportType, string contractName);
++        public IEnumerable<TExport> GetExports<TExport>();
++        public IEnumerable<TExport> GetExports<TExport>(string contractName);
++        public abstract bool TryGetExport(CompositionContract contract, out object export);
++        public bool TryGetExport(Type exportType, out object export);
++        public bool TryGetExport(Type exportType, string contractName, out object export);
++        public bool TryGetExport<TExport>(string contractName, out TExport export);
++        public bool TryGetExport<TExport>(out TExport export);
++    }
++    public static class CompositionContextExtensions {
++        public static void SatisfyImports(this CompositionContext compositionContext, object objectWithLooseImports);
++        public static void SatisfyImports(this CompositionContext compositionContext, object objectWithLooseImports, AttributedModelProvider conventions);
++    }
++    public sealed class Export<T> : IDisposable {
++        public Export(T value, Action disposeAction);
++        public T Value { get; }
++        public void Dispose();
++    }
++    public class ExportAttribute : Attribute {
++        public ExportAttribute();
++        public ExportAttribute(string contractName);
++        public ExportAttribute(string contractName, Type contractType);
++        public ExportAttribute(Type contractType);
++        public string ContractName { get; private set; }
++        public Type ContractType { get; private set; }
++    }
++    public class ExportFactory<T> {
++        public ExportFactory(Func<Tuple<T, Action>> exportCreator);
++        public Export<T> CreateExport();
++    }
++    public class ExportFactory<T, TMetadata> : ExportFactory<T> {
++        public ExportFactory(Func<Tuple<T, Action>> exportCreator, TMetadata metadata);
++        public TMetadata Metadata { get; }
++    }
++    public sealed class ExportMetadataAttribute : Attribute {
++        public ExportMetadataAttribute(string name, object value);
++        public string Name { get; private set; }
++        public object Value { get; private set; }
++    }
++    public class ImportAttribute : Attribute {
++        public ImportAttribute();
++        public ImportAttribute(string contractName);
++        public bool AllowDefault { get; set; }
++        public string ContractName { get; private set; }
++    }
++    public sealed class ImportingConstructorAttribute : Attribute {
++        public ImportingConstructorAttribute();
++    }
++    public class ImportManyAttribute : Attribute {
++        public ImportManyAttribute();
++        public ImportManyAttribute(string contractName);
++        public string ContractName { get; private set; }
++    }
++    public sealed class ImportMetadataConstraintAttribute : Attribute {
++        public ImportMetadataConstraintAttribute(string name, object value);
++        public string Name { get; }
++        public object Value { get; }
++    }
++    public sealed class MetadataAttributeAttribute : Attribute {
++        public MetadataAttributeAttribute();
++    }
++    public sealed class OnImportsSatisfiedAttribute : Attribute {
++        public OnImportsSatisfiedAttribute();
++    }
++    public class PartMetadataAttribute : Attribute {
++        public PartMetadataAttribute(string name, object value);
++        public string Name { get; private set; }
++        public object Value { get; private set; }
++    }
++    public sealed class PartNotDiscoverableAttribute : Attribute {
++        public PartNotDiscoverableAttribute();
++    }
++    public class SharedAttribute : PartMetadataAttribute {
++        public SharedAttribute();
++        public SharedAttribute(string sharingBoundaryName);
++        public string SharingBoundary { get; }
++    }
++    public sealed class SharingBoundaryAttribute : Attribute {
++        public SharingBoundaryAttribute(params string[] sharingBoundaryNames);
++        public ReadOnlyCollection<string> SharingBoundaryNames { get; }
++    }
++}
+```
+

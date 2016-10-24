@@ -1,0 +1,80 @@
+# System.Composition.Convention
+
+``` diff
++namespace System.Composition.Convention {
++    public abstract class AttributedModelProvider {
++        protected AttributedModelProvider();
++        public abstract IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, MemberInfo member);
++        public abstract IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, ParameterInfo parameter);
++    }
++    public class ConventionBuilder : AttributedModelProvider {
++        public ConventionBuilder();
++        public PartConventionBuilder ForType(Type type);
++        public PartConventionBuilder<T> ForType<T>();
++        public PartConventionBuilder ForTypesDerivedFrom(Type type);
++        public PartConventionBuilder<T> ForTypesDerivedFrom<T>();
++        public PartConventionBuilder ForTypesMatching(Predicate<Type> typeFilter);
++        public PartConventionBuilder<T> ForTypesMatching<T>(Predicate<Type> typeFilter);
++        public override IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, MemberInfo member);
++        public override IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, ParameterInfo parameter);
++    }
++    public sealed class ExportConventionBuilder {
++        public ExportConventionBuilder AddMetadata(string name, Func<Type, object> getValueFromPartType);
++        public ExportConventionBuilder AddMetadata(string name, object value);
++        public ExportConventionBuilder AsContractName(Func<Type, string> getContractNameFromPartType);
++        public ExportConventionBuilder AsContractName(string contractName);
++        public ExportConventionBuilder AsContractType(Type type);
++        public ExportConventionBuilder AsContractType<T>();
++    }
++    public sealed class ImportConventionBuilder {
++        public ImportConventionBuilder AddMetadataConstraint(string name, Func<Type, object> getConstraintValueFromPartType);
++        public ImportConventionBuilder AddMetadataConstraint(string name, object value);
++        public ImportConventionBuilder AllowDefault();
++        public ImportConventionBuilder AsContractName(Func<Type, string> getContractNameFromPartType);
++        public ImportConventionBuilder AsContractName(string contractName);
++        public ImportConventionBuilder AsMany();
++        public ImportConventionBuilder AsMany(bool isMany);
++    }
++    public abstract class ParameterImportConventionBuilder {
++        public T Import<T>();
++        public T Import<T>(Action<ImportConventionBuilder> configure);
++    }
++    public class PartConventionBuilder {
++        public PartConventionBuilder AddPartMetadata(string name, Func<Type, object> getValueFromPartType);
++        public PartConventionBuilder AddPartMetadata(string name, object value);
++        public PartConventionBuilder Export();
++        public PartConventionBuilder Export(Action<ExportConventionBuilder> exportConfiguration);
++        public PartConventionBuilder Export<T>();
++        public PartConventionBuilder Export<T>(Action<ExportConventionBuilder> exportConfiguration);
++        public PartConventionBuilder ExportInterfaces();
++        public PartConventionBuilder ExportInterfaces(Predicate<Type> interfaceFilter);
++        public PartConventionBuilder ExportInterfaces(Predicate<Type> interfaceFilter, Action<Type, ExportConventionBuilder> exportConfiguration);
++        public PartConventionBuilder ExportProperties(Predicate<PropertyInfo> propertyFilter);
++        public PartConventionBuilder ExportProperties(Predicate<PropertyInfo> propertyFilter, Action<PropertyInfo, ExportConventionBuilder> exportConfiguration);
++        public PartConventionBuilder ExportProperties<T>(Predicate<PropertyInfo> propertyFilter);
++        public PartConventionBuilder ExportProperties<T>(Predicate<PropertyInfo> propertyFilter, Action<PropertyInfo, ExportConventionBuilder> exportConfiguration);
++        public PartConventionBuilder ImportProperties(Predicate<PropertyInfo> propertyFilter);
++        public PartConventionBuilder ImportProperties(Predicate<PropertyInfo> propertyFilter, Action<PropertyInfo, ImportConventionBuilder> importConfiguration);
++        public PartConventionBuilder ImportProperties<T>(Predicate<PropertyInfo> propertyFilter);
++        public PartConventionBuilder ImportProperties<T>(Predicate<PropertyInfo> propertyFilter, Action<PropertyInfo, ImportConventionBuilder> importConfiguration);
++        public PartConventionBuilder NotifyImportsSatisfied(Predicate<MethodInfo> methodFilter);
++        public PartConventionBuilder SelectConstructor(Func<IEnumerable<ConstructorInfo>, ConstructorInfo> constructorSelector);
++        public PartConventionBuilder SelectConstructor(Func<IEnumerable<ConstructorInfo>, ConstructorInfo> constructorSelector, Action<ParameterInfo, ImportConventionBuilder> importConfiguration);
++        public PartConventionBuilder Shared();
++        public PartConventionBuilder Shared(string sharingBoundary);
++    }
++    public class PartConventionBuilder<T> : PartConventionBuilder {
++        public PartConventionBuilder<T> ExportProperty(Expression<Func<T, object>> propertySelector);
++        public PartConventionBuilder<T> ExportProperty(Expression<Func<T, object>> propertySelector, Action<ExportConventionBuilder> exportConfiguration);
++        public PartConventionBuilder<T> ExportProperty<TContract>(Expression<Func<T, object>> propertySelector);
++        public PartConventionBuilder<T> ExportProperty<TContract>(Expression<Func<T, object>> propertySelector, Action<ExportConventionBuilder> exportConfiguration);
++        public PartConventionBuilder<T> ImportProperty(Expression<Func<T, object>> propertySelector);
++        public PartConventionBuilder<T> ImportProperty(Expression<Func<T, object>> propertySelector, Action<ImportConventionBuilder> importConfiguration);
++        public PartConventionBuilder<T> ImportProperty<TContract>(Expression<Func<T, object>> propertySelector);
++        public PartConventionBuilder<T> ImportProperty<TContract>(Expression<Func<T, object>> propertySelector, Action<ImportConventionBuilder> importConfiguration);
++        public PartConventionBuilder<T> NotifyImportsSatisfied(Expression<Action<T>> methodSelector);
++        public PartConventionBuilder<T> SelectConstructor(Expression<Func<ParameterImportConventionBuilder, T>> constructorSelector);
++    }
++}
+```
+
