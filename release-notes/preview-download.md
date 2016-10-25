@@ -43,7 +43,7 @@ The first step is to establish the source feed for the package manager. This is 
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-sdk-1.0.0-preview2.1-003155
+sudo apt-get install dotnet-dev-1.0.0-preview2.1-003155
 ```
 
 Installed packages
@@ -61,7 +61,7 @@ dotnet-sdk-ubuntu-x64.1.0.0-preview2.1-003155.deb
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview2.1-003155
+sudo apt-get install dotnet-dev-1.0.0-preview2.1-003155
 ```
 
 Installed packages
@@ -79,7 +79,7 @@ dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview2.1-003155.deb
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ yakkety main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-sdk-ubuntu.16.10-x64.1.0.0-preview2.1-003155
+sudo apt-get install dotnet-dev-1.0.0-preview2.1-003155
 ```
 
 Installed packages
