@@ -49,7 +49,7 @@ sudo apt-get update
 sudo apt-get install dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview2.1-003155
 ```
 
-#### Ubunt 16.10
+#### Ubuntu 16.10
 
 ```bash
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ yakkety main" > /etc/apt/sources.list.d/dotnetdev.list'
