@@ -31,13 +31,12 @@ sudo ln -s /opt/dotnet/dotnet /usr/local/bin
 
 The first step is to establish the source feed for the package manager. This is only needed if you have not previously set up the source or if you are installing on Ubuntu 16.10 for the first time.
 
-***Note: Ubuntu feeds are not live yet. Will remove this note as soon as they are up and running.***
-
 #### Ubuntu 14.04 and Linux Mint 17
 
 ```bash
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+sudo apt-get update
 sudo apt-get install dotnet-sdk-1.0.0-preview2.1-003155
 ```
 
@@ -46,6 +45,7 @@ sudo apt-get install dotnet-sdk-1.0.0-preview2.1-003155
 ```bash
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+sudo apt-get update
 sudo apt-get install dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview2.1-003155
 ```
 
@@ -54,17 +54,6 @@ sudo apt-get install dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview2.1-003155
 ```bash
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ yakkety main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+sudo apt-get update
 sudo apt-get install dotnet-sdk-ubuntu.16.10-x64.1.0.0-preview2.1-003155
 ```
-
-Now that the source feed is defined for your distro, apt-get update can be used to install the latest available version.
-
-```bash
-sudo apt-get install
-```
-
-
-
-
-
-
