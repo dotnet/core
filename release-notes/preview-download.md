@@ -5,7 +5,8 @@ Download the installer or binary archive for your platform.
 | .NET Core 1.1 Preview 1 | Installer                                        | Binaries                                        |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|
 | Windows                 | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831458) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831453)  | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831474) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831469) |
-| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831445)                           | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831486)                          |
+| Windows Server Hosting  | [32-bit/64-bit](https://go.microsoft.com/fwlink/?linkid=832756) | - |
+| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831445)  | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831486)                          |
 | CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831470)                          |
 | Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831481)                          |
 | Fedora 23 / 24          | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831489)                          |
@@ -90,3 +91,7 @@ dotnet-host-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
 dotnet-sharedframework-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
 dotnet-sdk-ubuntu.16.10-x64.1.0.0-preview2.1-003155.deb
 ```
+
+## Windows Server Hosting
+If you are looking to host stand-alone apps on Windows Servers, the ASP.NET Core Module for IIS can be installed separately on servers without installing .NET Core runtime. You can download the Windows (Server Hosting) installer and run the following command from an Administrator command prompt:
+``DotNetCore.1.0.1-WindowsHosting.exe OPT_INSTALL_REDIST=0``
