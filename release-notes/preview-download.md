@@ -27,6 +27,12 @@ sudo ln -s /opt/dotnet/dotnet /usr/local/bin
 
 ## Ubuntu installation
 
+dotnet-host-ubuntu-x64.1.1.0-preview1-001100-00.deb
+dotnet-hostfxr-ubuntu-x64.1.1.0-preview1-001100-00.deb
+dotnet-sharedframework-ubuntu-x64.1.1.0-preview1-001100-00.deb
+dotnet-sdk-ubuntu-x64.1.0.0-preview2.1-003155.deb
+
+
 ### Set up package source
 
 The first step is to establish the source feed for the package manager. This is only needed if you have not previously set up the source or if you are installing on Ubuntu 16.10 for the first time.
@@ -40,6 +46,15 @@ sudo apt-get update
 sudo apt-get install dotnet-sdk-1.0.0-preview2.1-003155
 ```
 
+Installed packages
+
+```
+dotnet-host-ubuntu-x64.1.1.0-preview1-001100-00.deb
+dotnet-hostfxr-ubuntu-x64.1.1.0-preview1-001100-00.deb
+dotnet-sharedframework-ubuntu-x64.1.1.0-preview1-001100-00.deb
+dotnet-sdk-ubuntu-x64.1.0.0-preview2.1-003155.deb
+```
+
 #### Ubuntu 16.04 and Linux Mint 18
 
 ```bash
@@ -49,6 +64,15 @@ sudo apt-get update
 sudo apt-get install dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview2.1-003155
 ```
 
+Installed packages
+
+```
+dotnet-host-ubuntu.16.04-x64.1.1.0-preview1-001100-00.deb
+dotnet-hostfxr-ubuntu.16.04-x64.1.1.0-preview1-001100-00.deb
+dotnet-sharedframework-ubuntu.16.04-x64.1.1.0-preview1-001100-00.deb
+dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview2.1-003155.deb
+```
+
 #### Ubuntu 16.10
 
 ```bash
@@ -56,4 +80,13 @@ sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotne
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
 sudo apt-get install dotnet-sdk-ubuntu.16.10-x64.1.0.0-preview2.1-003155
+```
+
+Installed packages
+
+```
+dotnet-hostfxr-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
+dotnet-host-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
+dotnet-sharedframework-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
+dotnet-sdk-ubuntu.16.10-x64.1.0.0-preview2.1-003155.deb
 ```
