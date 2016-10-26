@@ -8,7 +8,7 @@ This page provides download links for .NET Core 1.1 Preview 1 runtime and shared
 | macOS                   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831446)  | -                                                                                 |
 | CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831487)                          |
 | Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831477)                          |
-| Fedora 23 / 24          | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831484)                          |
+| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831484)                          |
 | openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831491)                          |
 | openSUSE 42.1           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831475)                          |
 | Ubuntu 14.04            | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831468)                          |
