@@ -9,7 +9,7 @@ The installers and binary archives on this page include .NET Core 1.1 Preview 1 
 | macOS                   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831445)  | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831486)                          |
 | CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831470)                          |
 | Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831481)                          |
-| Fedora 23 / 24          | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831489)                          |
+| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831489)                          |
 | openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831491)                          |
 | openSUSE 42.1           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831475)                          |
 | Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831488)                          |
