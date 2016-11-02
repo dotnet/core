@@ -506,15 +506,6 @@ if __name__ == "__main__":
 
         RoverPrint(RoverMods.Blue('RID: %s'%(RoverMods.Green(RoverSettings._Rid))))
 
-        # if we're root, then we will install dependencies
-        # should we ask first? It's going to be running apt-get in 'yes' mode.
-        if os.getuid() == 0:
-            RoverPrint(RoverMods.Yellow('(because sudo) is installing required dependencies to build the native components of the .NET GitHub Repositories.'))
-
-            # are people cool with this?
-            RoverShellCall('chmod +x %s/repo-dependencies-installer.py'%(RoverSettings._ScriptDirectory), cwd=RoverSettings._ScriptDirectory)
-            RoverShellCall('python %s/repo-dependencies-installer.py'%(RoverSettings._ScriptDirectory), cwd=RoverSettings._ScriptDirectory)
-
         # Spawn our working directory
         if not path.exists(RoverSettings._WorkingDirectory):
             makedirs(RoverSettings._WorkingDirectory)
