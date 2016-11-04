@@ -22,6 +22,8 @@ from urllib import urlretrieve
 
 # ROVER BASE #
 class RoverMods:
+    PIPE_TO_STDOUT = not sys.stdout.isatty()
+
     HEADER = '\033[95m'
     BLUE = '\033[94m'
     GREEN = '\033[92m'
@@ -34,34 +36,58 @@ class RoverMods:
 
     @staticmethod
     def Header(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+
         return RoverMods.HEADER + line + RoverMods.ENDC
 
     @staticmethod
     def Blue(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+        
         return RoverMods.BLUE + line + RoverMods.ENDC
 
     @staticmethod
     def Green(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+        
         return RoverMods.GREEN + line + RoverMods.ENDC
 
     @staticmethod
     def Yellow(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+        
         return RoverMods.YELLOW + line + RoverMods.ENDC
     
     @staticmethod
     def White(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+        
         return RoverMods.WHITE + line + RoverMods.ENDC
 
     @staticmethod
     def Red(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+        
         return RoverMods.RED + line + RoverMods.ENDC
 
     @staticmethod
     def Bold(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+        
         return RoverMods.BOLD + line + RoverMods.ENDC
 
     @staticmethod
     def Underline(line):
+        if(RoverMods.PIPE_TO_STDOUT):
+            return line
+        
         return RoverMods.UNDERLINE + line + RoverMods.ENDC   
     
 def RoverPrint(line):
