@@ -1,36 +1,85 @@
-# Rover
-The dotnet CLI bootstrapping tool
+CLI.BOOTSTRAP(1)
+### NAME
+.NET CLI Bootstrapping Tool - A tool to help you bootstrap the .NET Command Line Tool on unsupported platforms.
 
-## What
-Bootstrapping a tool like the dotnet CLI can be a dizzying effort. From a high-level we simply want to replace the native components of a pre-existing CLI with new ones that
-have been built on the targetted platform. Unfortunately, from the bottom-up, this means that we need to clone a handful of dotnet repositories, execute particular
-command lines with particular arguments and then copy them in to a pre-existing dotnet file. Rover aims to simplify that.
+### SYNOPSIS
+python cli.bootstrap.py [-b __build_set__] [-nopatch] [-payload __tarball_path__]
 
-The goal is to place Rover on to the distro of choice, execute it, and then have it do the required steps for you - and then things 'just work'! 
+### DESCRIPTION  
+cli.bootstrap.py is the .NET CLI bootstrapping script that intends to help developers move to new platforms and "bring up" the required pieces.
 
-However, things don't always 'just work.' When this is the case Rover hopes to reduce the amount of effort necessary to fix build or script breaks by placing 'repro' shell scripts when there is a failure so that a developer can go in and 'apply pressure' where appropriate. 
-
-## How
-
-There are default settings for each of the rover arguments. If all is going to plan, you should never need to specify any additional parameters. However
+There are default settings that intend to hit the 'most cases' scenario. If all is going to plan, you should never need to specify any additional parameters. However
 many situations arise where it becomes a necessity or a nice-to-have. Namely, when things go wrong, you want to be able to get in there and fix
 up the build, make changes, etc. This is 'development mode' or DevMode for short. In DevMode, NO git commands are executed. This is to prevent 
-the script from stomping out any changes you have made in the working directory. 
+the script from stomping out any changes you have made in the working directory. Additionally, when things do go wrong (inevitably they will), this tool places a shell/batch script
+within the working directory that contains the command line that failed. This is to enable the scenario where you want to 'drill into' a problem.
 
-DevMode is triggered if the working directory is pre-existing. Consequently, when things fail in the script, we do not 'clean up' the working directory. We write a repro script
-of the command that failed and then we bail out immediately.
+### EXAMPLES
+The first time you run this tool HAS to be like this:
+```
+./cli.bootstrap.py
+```
+This will spawn a directory next to the bootstrap script, named after its runtime identifier (the runtime identifier is currently picked from the /os/release and we concatenate the 
+VERSION and VERSION_ID values). So on an AMD64 Ubuntu 16.04 machine, the RID is ubuntu.16.04-x64-dotnet 
 
-Rover has the following command line options:
 
-- -clone [-c] - This defines the set of repositories that we want to clone. This WILL NOT function in DevMode. By default the full clone set is specified as {coreclr, corefx, core-setup, libuv}.
+Any additional runs can be controlled via these command lines, and consequently, any additional runs are going to be in DevMode.
 
-- -build [-b] - This defines the set of repositories we want to build. By default the full build set is specified as {coreclr, corefx, core-setup, libuv}
+```
+./cli.bootstrap.py -b corefx libuv
+```
+This will build only the corefx binaries and coreclr binaries, then patch the files.
 
-- -nopatch
+If you want to prevent patching (for example, just to re-run a build):
 
-- -payload - a path to a local tarball that we will extract and then subsequently patch. If this is not specified, we pull the latest tarball from the dotnet repository.
+```
+./cli.bootstrap.py -b corefx coreclr -nopatch
+```
 
-## Work Flow
-Place Rover in a directory. Run it. 
+Additionally, if you have a tarball of the files that you'd like to produce, consider:
 
-In the event of a failure, we prevent clean-up. If the failure is not a rover script error, there is likely a rover_failure-repro.sh in the directory where the command failed (you are notified on 
+```
+./cli.bootstrap.py -b corefx coreclr -nopatch -payload ~/downloads/dotnet-dev-build.tar.gz
+```
+
+### DEFAULTS
+
+By default, running ./cli.bootstrap.py with no additional parameters is equivalent to this command line:
+```
+./cli.bootstrap.py -b corefx coreclr libuv core-setup -payload __dotnet_cli_repository_url__
+```
+
+### OPTIONS
+*-b __build_set__*
+
+&nbsp;&nbsp;&nbsp;&nbsp;__build_set__ is the space-delimited set of repositories to place. At the moment it is one of these {coreclr, corefx, core-setup, libuv}. 
+
+*-nopatch*
+
+&nbsp;&nbsp;&nbsp;&nbsp;As part of the bootstrapping process, we "patch" (overwrite/replace native binaries) a pre-built version of the CLI.
+
+*-payload __tar_filepath__*
+
+&nbsp;&nbsp;&nbsp;&nbsp;By default cli.bootstrap will pull in a pre-built tar file from the CLI repository and patch this. If you want to provide your own binaries to patch
+    (from dev builds or something), then specify a path (relative or absolute).
+
+### OVERVIEW
+After you run the cli.bootstrap, you'll see a directory named after the Runtime Identifier (RID) next to the script, the directory tree looks like this (for example),
+
+```
+<RID>
+├── bin
+│   ├── dotnet
+│   ├── host
+│   ├── LICENSE.txt
+│   ├── sdk
+│   ├── shared
+│   └── ThirdPartyNotices.txt
+├── obj
+│   └── dotnet-dev-debian-x64.latest.tar.gz
+└── src
+    ├── coreclr
+    ├── corefx
+    ├── core-setup
+    └── libuv
+```
