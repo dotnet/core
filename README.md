@@ -18,11 +18,11 @@ The core repository is the starting point to engage in and learn about the
 
 If you're new to .NET Core and have 10 minutes to try it, start here: 
 - [What is .NET Core?](https://www.microsoft.com/net/core/platform)
-- [Get Started with .NET Core on Windows, OSX and Linux](https://www.microsoft.com/net/core)
+- [Get Started with the Official releases of .NET Core on Windows, OSX and Linux](https://www.microsoft.com/net/core)
 
-If you have some more time and want to go deeper:
-- [Install ASP.NET Core on Windows, OSX and Linux](https://github.com/aspnet/home)
-- [Install .NET Core on Windows, OSX and Linux](https://github.com/dotnet/coreclr#get-net-core)
+If you have some more time and want to go deeper or get the latest builds:
+- [Get the latest builds of .NET Core on Windows, OSX and Linux](https://github.com/dotnet/core-setup/blob/master/README.md)
+- [Get the latest builds of ASP.NET Core on Windows, OSX and Linux](https://github.com/aspnet/home)
 
 ## .NET Core Platform
 
