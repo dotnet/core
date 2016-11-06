@@ -1,4 +1,4 @@
-# .NET Core Home
+﻿# .NET Core Home
 
 The core repository is the starting point to engage in and learn about the
 .NET Core stack. 
@@ -53,9 +53,9 @@ details.
 
 The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundation.org/projects).
 
-* [.NET Core Project](http://www.dotnetfoundation.org/netcore)
-* [.NET Compiler Platform ("Roslyn" Project)](http://www.dotnetfoundation.org/dotnet-compiler-platform)
-* [ASP.NET Core Project](http://www.dotnetfoundation.org/aspnet-core)
+* [.NET Core Project](http://www.dotnetfoundation.org/net-core)
+* [.NET Compiler Platform ("Roslyn" Project)](http://www.dotnetfoundation.org/net-compiler-platform-roslyn)
+* [ASP.NET Core Project](http://www.dotnetfoundation.org/asp-net-core)
 
 ## Licenses
 
