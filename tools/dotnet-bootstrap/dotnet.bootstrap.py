@@ -15,6 +15,7 @@ from subprocess import CalledProcessError
 
 from os import path
 from os import makedirs
+from os.path import normpath
 
 from string import find
 from urllib import urlretrieve
@@ -96,6 +97,7 @@ def RoverPrint(line):
 def UnexpectedRoverException(exc_info):
     RoverPrint(RoverMods.Red('CAUGHT AN UNEXPECTED EXCEPTION: \"' + RoverMods.White('%s'%(str(exc_info[1]))) + '\" of type: %s'%(str(exc_info[0]))))
     RoverPrint(RoverMods.White('%s'%(str(traceback.print_tb(exc_info[2])))))
+    os._exit(1) # bail out immediately to avoid possibly futzing up the state, or printing unhelpful messages. 
 
 
 # probably a pretty shaky interpretation of the semantic versioning 2.0.0 standard (http://semver.org/)
@@ -160,6 +162,7 @@ class RoverSettings:
     # Setting dev mode to True means that we keep a folder around.
     # By Design DevMode is triggered if there is a pre-existing working directory
     # By Design, when in DevMode we do not run any git commands.
+    # By Design, when in DevMode we do not clean up anything.
     _DevMode=False
 
     # This function needs to be here, because otherwise we wouldnt be able to change DevMode. 
@@ -193,18 +196,24 @@ class RoverSettings:
     _OsVars                             = FetchOSVariables()
     _Rid                                = '%s.%s-x64'%(_OsVars['ID'], _OsVars['VERSION_ID'])
     _Moniker                            = '%s-dotnet'%(_Rid)
+    _ScriptDirectory                    = str(path.dirname(path.abspath(__file__)))
+    _LaunchedFromDirectory              = os.getcwd()
     
-    _WorkingDirectory                   = '%s'%(_Moniker)
+    _WorkingDirectory                   = path.join(_LaunchedFromDirectory, _Moniker)
     _srcDirectory                       = path.join(_WorkingDirectory, "src")
     _objDirectory                       = path.join(_WorkingDirectory, "obj")
     _binDirectory                       = path.join(_WorkingDirectory, "bin")
 
-    _ScriptDirectory                    = str(path.dirname(path.abspath(__file__)))
-    _LaunchedFromDirectory              = os.getcwd()
+    @staticmethod
+    def SetWorkingDirectory(working_dir):
+        RoverSettings._WorkingDirectory                   = working_dir
+        RoverSettings._srcDirectory                       = path.join(working_dir, "src")
+        RoverSettings._objDirectory                       = path.join(working_dir, "obj")
+        RoverSettings._binDirectory                       = path.join(working_dir, "bin")
+
 
     PayloadPath                         = str('')
     PatchTargetPath                     = _binDirectory
-    CloneSet                            = []
     BuildSet                            = []
     Patch                               = True
 
@@ -217,7 +226,7 @@ class RoverSettings:
     PatchTarget_SDK                     = ''
     PatchTarget_Host                    = ''
 
-    DotNetCommitHash                    = 'rover-boot-strap'
+    DotNetCommitHash                    = ''
 
     @staticmethod
     def MaxPrecedence(versionStrA, versionStrB):
@@ -297,14 +306,12 @@ def RoverShellCall(cmd, cwd = None):
         os._exit(1) # if we fail a check_call then we want to bail out asap so the dev can investigate.
 
 
-
-
 ##
 ## ROVER FUNCTION DEFINITIONS
 ##
 
 # detination_folder is expected to be relative to the _ScriptDirectory. 
-# payload path is expected to be a dotn``et-cli tarball.
+# payload path is expected to be a dotnet-cli tarball.
 def SpawnPatchTarget(destination_folder, payload_path):
     try:
         if payload_path and not path.isabs(payload_path):
@@ -340,29 +347,22 @@ def CloneRepositories(cwd,
                         corefx_commit_hash,
                         dotnet_commit_hash):
     try:
-        if not RoverSettings._DevMode:
-            RoverPrint(RoverMods.Blue('is initializing the .NET GitHub repositories.'))
+        if not path.exists(path.join(cwd, 'coreclr')):
+            RoverShellCall('git clone http://www.github.com/dotnet/coreclr', cwd=cwd)
+            RoverShellCall('git checkout %s'%(coreclr_commit_hash), cwd=path.join(cwd, 'coreclr'))
 
-            if 'coreclr' in RoverSettings.CloneSet:
-                if not path.exists(path.join(cwd, 'coreclr')):
-                    RoverShellCall('git clone http://www.github.com/dotnet/coreclr', cwd=cwd)
-                    RoverShellCall('git checkout %s'%(coreclr_commit_hash), cwd=path.join(cwd, 'coreclr'))
+        if not path.exists(path.join(cwd, 'corefx')):
+            RoverShellCall('git clone http://www.github.com/dotnet/corefx', cwd=cwd)
+            RoverShellCall('git checkout %s'%(corefx_commit_hash), cwd=path.join(cwd, 'corefx'))
 
-            if 'corefx' in RoverSettings.CloneSet:
-                if not path.exists(path.join(cwd, 'corefx')):
-                    RoverShellCall('git clone http://www.github.com/dotnet/corefx', cwd=cwd)
-                    RoverShellCall('git checkout %s'%(corefx_commit_hash), cwd=path.join(cwd, 'corefx'))
+        if not path.exists(path.join(cwd, 'core-setup')):
+            RoverShellCall('git clone http://www.github.com/dotnet/core-setup', cwd=cwd)
+            RoverShellCall('git checkout %s'%(dotnet_commit_hash), cwd=path.join(cwd, 'core-setup'))   
 
-            if 'core-setup' in RoverSettings.CloneSet:
-                if not path.exists(path.join(cwd, 'core-setup')):
-                    RoverShellCall('git clone http://www.github.com/dotnet/core-setup', cwd=cwd)
-                    RoverShellCall('git checkout %s'%(dotnet_commit_hash), cwd=path.join(cwd, 'core-setup'))   
-
-            if 'libuv' in RoverSettings.CloneSet:
-                if not path.exists(path.join(cwd, 'libuv')):
-                    RoverShellCall('git clone http://www.github.com/libuv/libuv', cwd=cwd)
-                    # we are fixed to using libuv 1.9.0 - this is the commit hash for that (https://github.com/libuv/libuv/commit/229b3a4cc150aebd6561e6bd43076eafa7a03756)
-                    RoverShellCall('git checkout %s'%('229b3a4cc150aebd6561e6bd43076eafa7a03756'), cwd=path.join(cwd, 'libuv'))   
+        if not path.exists(path.join(cwd, 'libuv')):
+            RoverShellCall('git clone http://www.github.com/libuv/libuv', cwd=cwd)
+            # we are fixed to using libuv 1.9.0 - this is the commit hash for that (https://github.com/libuv/libuv/commit/229b3a4cc150aebd6561e6bd43076eafa7a03756)
+            RoverShellCall('git checkout %s'%('229b3a4cc150aebd6561e6bd43076eafa7a03756'), cwd=path.join(cwd, 'libuv'))   
 
         else:
             RoverPrint(RoverMods.Yellow(('DEVMODE IS ON. Skipping all git calls : I.e. you must manually control git your self.')))
@@ -395,10 +395,7 @@ def BuildNativeComponents(  coreclr_git_directory,
                 RoverShellCall('./build.sh native x64 release', cwd=corefx_git_directory) 
 
         # Build corehost from core-setup
-        # TODO: declare proper runtime id
-        # TODO: hostver?
-        # TODO: fxrver?
-        # TODO: policyver?
+        # TODO: Pull versions from the runtimes.
         if 'core-setup' in RoverSettings.BuildSet:
             RoverShellCall('./build.sh --arch x64 --rid %s --hostver 0.0.0 --fxrver 0.0.0 --policyver 0.0.0 --commithash %s'%(RoverSettings._Rid, RoverSettings.DotNetCommitHash), cwd="%s/src/corehost"%(core_setup_git_directory))
 
@@ -466,24 +463,25 @@ if __name__ == "__main__":
     ##  COMMAND-LINE BEHAVIOR
     ##
 
-    parser = argparse.ArgumentParser(description = 'Rover is the dotnet bootstrapping tool.')
-    parser.add_argument('-clone', metavar='c', nargs='*', default=['coreclr', 'corefx', 'core-setup', 'libuv'], help='Clones specified repositories in to the working directory. Select from the following repositories: {' 
-        + '%s, %s, %s, %s'%(RoverMods.Red('coreclr'), RoverMods.Blue('corefx'), RoverMods.Green('core-setup'), RoverMods.Yellow('libuv') +'}'))
+    parser = argparse.ArgumentParser(description = 'This is the .NET CLI bootstrapping tool.')
+    
     parser.add_argument('-build', metavar='b', nargs='*', default = ['coreclr', 'corefx', 'core-setup', 'libuv'],help='\'Builds\' all native components if no arguments are specified. Otherwise, specify one or more (space separated) arguments from the following : {' 
         + '%s, %s, %s, %s'%(RoverMods.Red('coreclr'), RoverMods.Blue('corefx'), RoverMods.Green('core-setup'), RoverMods.Yellow('libuv') +'}'))
     parser.add_argument('-nopatch', action='store_true', default=False, help='prevents the copying of specific native binaries from the pre-built repositories in to the destination directory.')
     parser.add_argument('-payload', nargs=1, help='Specify a path to a tarball (something that we can tar xf) that contains a version of the dotnet CLI.')
-    
+    parser.add_argument('-to', type=str, default='%s'%(RoverSettings._Moniker), help='allows you to overwrite the default staging directory (default is %s)'%(RoverSettings._Moniker))
+
     args = parser.parse_args()
 
     if args.payload:
-        RoverPrint('using payload ' + RoverMods.White(str(args.payload)))
+        RoverPrint('is using payload from \'' + RoverMods.White(str(args.payload)) + '\'')
     
-    RoverPrint('Cloning Set: ' + RoverMods.White(str(args.clone)))
-    RoverPrint('Building Set: ' + RoverMods.White(str(args.build)))
-    RoverPrint('Is Patching? ' + RoverMods.White(str(not args.nopatch)))
-    
-    RoverSettings.CloneSet = args.clone
+    RoverPrint('Building: ' + RoverMods.White(str(args.build)))
+    RoverPrint('Patching? ' + RoverMods.White(str(not args.nopatch)))
+
+    RoverSettings.SetWorkingDirectory(normpath(str(args.to)))
+
+    RoverPrint('Staging in %s'%(RoverSettings._WorkingDirectory))
     RoverSettings.BuildSet = args.build
 
     # I am guessing that users are more inclined to want patching to happen whenever it can, and so I ask
@@ -535,10 +533,15 @@ if __name__ == "__main__":
         # Spawn our working directory
         if not path.exists(RoverSettings._WorkingDirectory):
             makedirs(RoverSettings._WorkingDirectory)
+
+        if not path.exists(RoverSettings._srcDirectory):
             makedirs(RoverSettings._srcDirectory)
+
+        if not path.exists(RoverSettings._objDirectory):
             makedirs(RoverSettings._objDirectory)
+
+        if not path.exists(RoverSettings._binDirectory):
             makedirs(RoverSettings._binDirectory)
-              
 
         SpawnPatchTarget(RoverSettings._binDirectory, RoverSettings.PayloadPath)
         
