@@ -186,6 +186,16 @@ OS X doesn't really have an uninstall capacity for PKGs like Windows has for
 MSIs. There is, however, a way to remove the bits as well as the "recipe" for 
 dotnet. More information can be found on [this SuperUser question](http://superuser.com/questions/36567/how-do-i-uninstall-any-apple-pkg-package-file).
 
+## Installing VS 2017 RC or dotnet CLI preview3 prevents Visual Studio 2015 .NET Core tooling from working
+Symptoms:
+Opening a project.json solution in Visual Studio 2015 fails with `error: Error reading '{some root path}\.vs\restore.dg'`
+
+Workaround:
+- Copy the full command line that is failing, something like C:\Program Files\dotnet\dotnet.exe restore "C:\Users\user\Desktop\SampleApp\.vs\restore.dg"
+- Open a command prompt and navigate to the project directory, e.g. cd C:\Users\user\Desktop\SampleApp\
+- Run the copied command from this directory
+- Reload the project in Visual Studio
+
 # What is this document about? 
 This document outlines the known issues and workarounds for the current state of 
 the CLI tools. Issues will also have a workaround and affects sections if necessary. You can use this page to 
