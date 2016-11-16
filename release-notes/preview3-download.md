@@ -40,7 +40,7 @@ The first step is to establish the source feed for the package manager. This is 
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-dev-preview3-004056
+sudo apt-get install dotnet-sdk-ubuntu-x64.1.0.0-preview3-004056.deb
 
 ```
 
@@ -59,7 +59,7 @@ dotnet-sdk-ubuntu-x64.1.0.0-preview3-004056.deb
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-dev-preview3-004056
+sudo apt-get install dotnet-sdk-ubuntu-x64.1.0.0-preview3-004056.deb
 ```
 
 Installed packages
