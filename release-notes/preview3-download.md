@@ -15,7 +15,7 @@ The installers and binary archives on this page include .NET Core 1.0 SDK Previe
 
 ## Installation from a binary archive
 
-When using binary archives to install, we recommend the contents be extracted to /opt/dotnet and a symbolic link created for dotnet. If an earlier release of .NET Core is already installed, the directory and symbolic link may already exist.
+When using binary archives to install, we recommend the contents be extracted to /opt/dotnet and a symbolic link created for dotnet. If an earlier release of .NET Core is already installed, the directory and symbolic link may already exist. Ubuntu and Mint users should follow the instructions in the Ubuntu Installation section below.
 
 ```bash
 sudo mkdir -p /opt/dotnet
@@ -40,7 +40,7 @@ The first step is to establish the source feed for the package manager. This is 
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-sdk-ubuntu-x64.1.0.0-preview3-004056.deb
+sudo apt-get install dotnet-dev-1.0.0-preview3-004056
 
 ```
 
@@ -59,7 +59,7 @@ dotnet-sdk-ubuntu-x64.1.0.0-preview3-004056.deb
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-sdk-ubuntu-x64.1.0.0-preview3-004056.deb
+sudo apt-get install dotnet-dev-1.0.0-preview3-004056
 ```
 
 Installed packages
