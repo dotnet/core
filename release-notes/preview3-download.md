@@ -4,7 +4,7 @@ The installers and binary archives on this page include .NET Core 1.0 SDK Previe
 
 | .NET Core 1.1 Preview 1 | Installer                                        | Binaries                                        |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|
-| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?LinkID=835132) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=835138)  | [32-bit](https://go.microsoft.com/fwlink/?LinkID=835139) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=835127) |
+| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?LinkID=835138) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=835132)  | [32-bit](https://go.microsoft.com/fwlink/?LinkID=835139) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=835127) |
 | macOS                   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=835133)  | [64-bit](https://go.microsoft.com/fwlink/?LinkID=835129)                          |
 | CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=835137)                          |
 | Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=835131)                          |
