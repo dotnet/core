@@ -5,7 +5,7 @@
 - [Release Notes](1.1.md)
 - [Known Issues](1.1-known-issues.md)
 - [Commits](1.1-commits.md)
-- [Contributors](1.1-contibutor-list.md)
+- [Contributors](1.1-contributor-list.md)
 - [1.0 - 1.1 Preview 1 API Differences](1.0-1.1-api-diff/1.0-1.1-api-diff.md)
 
 
