@@ -1,4 +1,4 @@
-# .NET Core SDK 1.0 Preview 3 build 004506
+# .NET Core SDK 1.0 Preview 3 build 004056
 
 The installers and binary archives on this page include .NET Core 1.0 SDK Preview 3.
 
