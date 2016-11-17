@@ -1,5 +1,7 @@
 # Release Notes
 
+[1.1 released 11/16/2016](1.1/1.1.md)
+
 [1.1.0 Preview 1 released 10/24/2016](1.1/1.1.0-preview1.md)
 
 [1.0.1 released 9/13/2016](1.0/1.0.1-release-notes.md)
