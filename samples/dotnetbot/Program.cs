@@ -4,7 +4,7 @@ public static class Program
 {
   public static void Main(string[] args) 
   {
-        string message = "Dotnet-bot: Welcome to using .NET Core!";
+        string message = "dotnet-bot: Welcome to using .NET Core!";
           
         if (args.Length > 0) 
         {
