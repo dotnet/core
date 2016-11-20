@@ -56,18 +56,6 @@ Instead, pass the full include/library paths to your compiler e.g.:
 ```
 This is due to a recent update from `brew` where it refuses to link `openssl`. The installation steps have been updated with instructions on how to deal with this. 
 
-## Running .NET Core CLI on Nano Server
-
-If you’re using Nano Server Technical Preview 5 with .NET Core CLI, due to a bug in the Nano Server product, you will need to copy binaries from  `c:\windows\system32\forwarders`. The destination depends on the [type of deployment](https://dotnet.github.io/docs/core-concepts/app-types.html) that you are choosing for your application. 
-
-For portable applications, the forwarders need to be copied to the shared runtime location. The shared runtime can be found wherever you installed .NET Core (by default, it is `C:\Program Files\dotnet`) under the following path: `shared\Microsoft.NETCore.App\<version>\`. 
-
-For self-contained applications, the forwarders need to be copied over into the application folder, that is, wherever you put the published output.
-
-This process will ensure that the `dotnet` host finds the appropriate APIs it needs.  If your Nano Server Technical Preview 5 build is updated or serviced, please make sure to repeat this process, in case any of the forwarders have been updated as well.
- 
-Apologies for any inconvenience. Again, this has been fixed in later releases.
-
 ## Users of zsh (z shell) don't get `dotnet` on the path after install
 There is a known issue in oh-my-zsh installer that interferes with how `path_helper` works on OS X systems. In short, 
 the said installer creates a `.zshrc` file which contains the exploded path at the time of installation. This clobbers 
