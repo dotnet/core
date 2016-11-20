@@ -20,13 +20,7 @@ At Microsoft, .NET has always been an important component of other teams' produc
 
 |Milestone|Release Date|
 |---------|------------|
-|1.1      |   Fall 2016|
 |1.2      |   Spring 2017|
-
-Planned 1.1 features
---------------------
-- Lots of fixes based on feedback. 
-- Support for more popular OS's/distro's that have been released since 1.0.
 
 Planned 1.2 features
 --------------------
