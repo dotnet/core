@@ -6,16 +6,16 @@ from shellcall import ShellCall
 from shellcall import ContinueOnError
 from sys       import argv
 from os        import getcwd
-from os.path   import join
-from os.path   import exists
+
+from os.path   import join, exists, dirname, realpath
 
 from globals import g_override
 
 # interface + data binding for managing the testcases.
 class Cases:
-    # TODO: use script directory instead of cwd, and require the containers directory to be local to the script
-    _supported_containers = join(getcwd(), 'containers/') # our 'list' of current supported platforms are the directories in this directory
-    _testcases = join(getcwd(), 'cases/')
+    _labPath = dirname(realpath(__file__))
+    _supported_containers = join(_labPath, 'containers/') # our 'list' of current supported platforms are the directories in this directory
+    _testcases = join(_labPath, 'cases/')
     _continueOnError = True
     _lenient = True
 
@@ -38,7 +38,7 @@ class Cases:
         ShellCall("echo \"running 'dotnet-bootstrap:%s - testcase: %s'\""%(container_name, casename), lenient = self._lenient)
         
         # copy the bootstrap and test source in to the container working directory (next to the Dockerfile)
-        ShellCall('cp ../../dotnet.bootstrap.py %s'%(join(self._supported_containers, container_name)), lenient = self._lenient)
+        ShellCall('cp %s %s'%(join(self._labPath, '../../dotnet.bootstrap.py'), join(self._supported_containers, container_name)), lenient = self._lenient)
         ShellCall('mkdir -p %s'%(join(testing_destination, casename)), lenient=self._lenient)
         ShellCall('cp -R %s %s'%(join(self._testcases, casename), join(testing_destination, casename)), lenient = self._lenient)
         

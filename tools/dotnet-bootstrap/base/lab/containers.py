@@ -12,13 +12,15 @@ import os
 
 from sys import argv
 from os.path import join
+from os.path import dirname
+from os.path import realpath
 from os import getcwd
 
 from globals import g_override
 
 # interface + data binding for managing the containers.
 class Containers:
-    _supported_platforms = join(getcwd(), 'containers') + '/' # our 'list' of current supported platforms are the directories in this directory
+    _supported_platforms = join(dirname(realpath(__file__)), 'containers') + '/' # our 'list' of current supported platforms are the directories in this directory
 
     def Bake(self, selected_platform):
         ShellCall("echo baking 'dotnet-bootstrap:%s'"%(selected_platform), lenient=True)
