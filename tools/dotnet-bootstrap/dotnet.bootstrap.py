@@ -321,14 +321,13 @@ def SpawnPatchTarget(destination_folder, payload_path):
             destination_folder = path.join(RoverSettings._LaunchedFromDirectory, destination_folder)
 
         if not path.exists(str(payload_path)):
-            fallback_url = 'https://dotnetcli.blob.core.windows.net/dotnet/Sdk/rel-1.0.0/dotnet-dev-debian-x64.latest.tar.gz'
-            RoverPrint('could not locate a payload at path: \'%s\' so I am going to download the latest dotnet CLI from %s'%(payload_path, fallback_url))
+            fallback_url = 'https://dotnetcli.blob.core.windows.net/dotnet/Sdk/rel-1.0.0/dotnet-dev-debian-x64.latest.tar.gz'               
 
-            payload_filename    = 'dotnet-dev-debian-x64.latest.tar.gz'
-
-            RoverPrint(RoverMods.Blue('is downloading latest .NET CLI for bootstrapping (%s)'%(payload_filename)))
-
-            payload_path        = path.join(RoverSettings._objDirectory, 'dotnet-dev-debian-x64.latest.tar.gz')
+            payload_filename    = 'dotnet.latest.tar.gz'
+            payload_path        = path.join(RoverSettings._objDirectory, payload_filename)
+            
+            if not path.exists(payload_path):
+                RoverPrint(RoverMods.Blue('is downloading latest .NET CLI for bootstrapping (%s)'%(payload_filename)))
 
             urlretrieve(fallback_url, payload_path)
         
