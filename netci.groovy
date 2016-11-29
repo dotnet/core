@@ -16,9 +16,6 @@ def branch = GithubBranchName
         // is a boolean indicating whether the job will be a PR job.  If true, the
         // suffix _prtest will be appended.
         def newJobName = Utilities.getFullJobName(project, configuration, isPR)
-        
-        // Define build string
-        def buildString = """echo Configuration: ${configuration} isPR: ${isPR}"""
 
         // Create a new job with the specified name.  The brace opens a new closure
         // and calls made within that closure apply to the newly created job.
@@ -28,7 +25,10 @@ def branch = GithubBranchName
                 // Indicates that a batch script should be run with the build string (see above)
                 // Also available is:
                 // shell (for unix scripting)
-                shell(buildString)
+                shell("ls")
+		
+		shell("python tools/dotnet-bootstrap/base/lab/containers.py bake")
+		shell("python tools/dotnet-bootstrap/base/lab/cases.py run")
             }
         }
         
