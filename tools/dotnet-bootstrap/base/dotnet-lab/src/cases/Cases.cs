@@ -59,32 +59,35 @@ namespace Lab
             string local_mount_location     = Combine(_containers_path, container_name);
             string testing_destination      = Combine(local_mount_location, "testing");
             
-            Call($"echo \"running 'dotnet-bootstrap:{container_name} - testcase: {casename}'\"",                        lenient: _lenient);
+            Call($"echo", $"running 'dotnet-bootstrap:{container_name} - testcase: {casename}'\"",                                  lenient: _lenient);
             
             // copy the bootstrap and test source in to the container working directory (next to the Dockerfile)
-            Call($"cp {Combine(this._base_path, BOOTSTRAP_PATH)} {Combine(this._containers_path, container_name)}",  lenient: _lenient);
-            Call($"mkdir -p {Combine(testing_destination, casename)}",                                                  lenient: _lenient);
-            Call($"cp -R {Combine(this._cases_path, casename)} {Combine(testing_destination, casename)}",                lenient: _lenient);
+            Call($"cp", "{Combine(this._base_path, BOOTSTRAP_PATH)} {Combine(this._containers_path, container_name)}",              lenient: _lenient);
+            Call($"mkdir", "-p {Combine(testing_destination, casename)}",                                                           lenient: _lenient);
+            Call($"cp", "-R {Combine(this._cases_path, casename)} {Combine(testing_destination, casename)}",                        lenient: _lenient);
  
-            string docker_run_cmd = $"docker run -v {local_mount_location}:/env/dotnet-bootstrap dotnet-bootstrap:{container_name}";
+            string docker_run_cmd = $"run -v {local_mount_location}:/env/dotnet-bootstrap dotnet-bootstrap:{container_name}";
             // ^ : This runs docker using the current container directory (with the Dockerfile) as the current working directory.
             // so that anything placed in that directory becomes accessible. 
             // eventually we will copy the tests in to this directory as well (see below)
                             
             // run the bootstrap
-            Call($"{docker_run_cmd} python /env/dotnet-bootstrap/dotnet.bootstrap.py -to /env/dotnet-bootstrap/", lenient: _lenient); // this will generate the src, obj, and bin directory here.
+            Call("docker", $"{docker_run_cmd} python /env/dotnet-bootstrap/dotnet.bootstrap.py -to /env/dotnet-bootstrap/",         lenient: _lenient); // this will generate the src, obj, and bin directory here.
                     
             // create whatever project file is the latest and greatest (was project.json, and is now named after the directory.csproj)
-            Call($"{_docker_compose(container_name, local_mount_location)} /env/dotnet-bootstrap/bin/dotnet new -t Console", lenient: _lenient);
+            Call("docker", $"{_DockerRun(container_name, local_mount_location)} /env/dotnet-bootstrap/bin/dotnet new -t Console",   lenient: _lenient);
             // Call('ls', cwd=join(testing_destination, casename, casename + '.csproj'))
             
             // confirm that it exists.
             if(Exists(Combine(testing_destination, casename, casename + ".csproj")))
             {
-                Call($"mkdir -p {Combine(testing_destination, casename, "result")}");
-                Call($"touch {Combine(testing_destination, casename, "result", "pass")}"); // spawn a result; a failure is when this doesn't exist. If this exists, this is a passing testcase.
+                var resultPath = Combine(testing_destination, casename, "result");
+                var passToken = Combine(resultPath, "pass");
                 
-                Call($"cp -R {Combine(_cases_path, casename)}/* {Combine(testing_destination, casename)}", lenient: _lenient);           
+                Call($"mkdir", "-p {resultPath}");
+                Call($"touch", "{passToken}"); // spawn a pass token; a failure is when this doesn't exist. If this exists, this is a passing testcase.
+                
+                Call($"cp", "-R {Combine(_cases_path, casename)}/* {Combine(testing_destination, casename)}", lenient: _lenient);           
             }
 
             Report();
@@ -96,7 +99,7 @@ namespace Lab
             {
                 foreach(var testcase in Selection.List["cases"])
                 {
-                    _status(container.ToString(), testcase.ToString()); // TODO: Fix this
+                    _Status(container.ToString(), testcase.ToString()); // TODO: Fix this
                 }
             }
         }
@@ -106,7 +109,7 @@ namespace Lab
         {
             if(Selection.List.Count > 0)
             {
-                _runSelection();
+                _RunSelection();
                 
                 return;
             }
@@ -130,14 +133,14 @@ namespace Lab
 
         public void List()
         {
-            Call($"ls -1 {_cases_path}", lenient: _lenient);
+            Call($"ls", "-1 {_cases_path}", lenient: _lenient);
         }
 
         #region Privates
 
         // if current_path_str = None, then we use the working dir dictated by the dockerfile
         // if none is specified in the dockerfile, then docker uses '/'
-        private string _docker_compose(string identifier, string local_volume, string current_path_str = "")
+        private string _DockerRun(string identifier, string local_volume, string current_path_str = "")
         {
             string wdir_parameter = String.Empty;
             
@@ -146,10 +149,10 @@ namespace Lab
                 wdir_parameter = $"-w \"{current_path_str}\"";
             }
 
-            return $"docker run {wdir_parameter} -v {local_volume}:/env/dotnet-bootstrap dotnet-bootstrap:{identifier}";
+            return $"run {wdir_parameter} -v {local_volume}:/env/dotnet-bootstrap dotnet-bootstrap:{identifier}";
         }
 
-        private void _runSelection()
+        private void _RunSelection()
         {
             foreach(var container in Selection.List["containers"])
             {
@@ -167,7 +170,7 @@ namespace Lab
             }
         }
 
-        private void _status(string container, string testcase)
+        private void _Status(string container, string testcase)
         {
             WriteLine("CONTAINER - CASE - STATUS");
             
