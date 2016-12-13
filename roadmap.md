@@ -11,11 +11,13 @@ there are some big themes you will identify in the early work on GitHub:
 
 [vs2017-rc]: https://blogs.msdn.microsoft.com/dotnet/2016/12/12/updating-visual-studio-2017-rc-net-core-tooling-improvements/
 
-* **.NET Standard 2.0**. Having a large set of common APIs that are consistent
-  across .NET Framework, .NET Core and Xamarin making it easier to share code
-  across those platforms and making it easier for package authors to build NuGet
-  packages. .NET Core gain over 5,000 APIs from .NET Framework as part of this
-  work. You can follow this work in the
+* **Lower the Barrier of Entry and Reach** .NET Standard 2.0 standardizes the
+  shared APIs across .NET Framework, .NET Core and Xamarin making it easy to
+  share code across all of .NET. .NET Core gain over 5,000 APIs from .NET
+  Framework as part of this work making it a broader platform. Simplifying how a
+  developer references .NET Core from many packages to one. Simplified
+  acquisition of runtime and tools. And easier to reference Linux platforms and
+  their dependencies. You can follow this work in the
   [dotnet/standard](https://github.com/dotnet/standard) repo.
 
 * **.NET Core Tooling**. Evolve the tooling aligned with the next .NET Core
