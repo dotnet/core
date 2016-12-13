@@ -45,7 +45,7 @@ Notes:
 
 Architecture:
 
-- [.NET Platform Standard](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md)
+- [.NET Standard](https://github.com/dotnet/standard)
 - [.NET Core Tools/CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
 
 Version 1.0 OS Support:
