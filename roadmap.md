@@ -1,5 +1,65 @@
 # .NET Core Roadmap
 
+Our primary focus is to get the .NET Core 1.0 tooling to RTM quality for the
+Visual Studio 2017 RTM ([please try the 2017 RC update][vs2017-rc] we shipped
+today with improvements in this area).
+
+However, we are also starting to think of the next version of the runtime.
+Because of this, if you follow our repositories you will start to see .NET Core
+2.0 versioning. While we are still in the process of planning the next release,
+there are some big themes you will identify in the early work on GitHub:
+
+[vs2017-rc]: https://blogs.msdn.microsoft.com/dotnet/2016/12/12/updating-visual-studio-2017-rc-net-core-tooling-improvements/
+
+* **.NET Standard 2.0**. Having a large set of common APIs that are consistent
+  across .NET Framework, .NET Core and Xamarin making it easier to share code
+  across those platforms and making it easier for package authors to build NuGet
+  packages. .NET Core gain over 5,000 APIs from .NET Framework as part of this
+  work. You can follow this work in the
+  [dotnet/standard](https://github.com/dotnet/standard) repo.
+
+* **.NET Core Tooling**. Evolve the tooling aligned with the next .NET Core
+  runtime release. This will include tooling for choosing which .NET Core
+  version to target, to change the version of .NET Core for existing projects,
+  full package IntelliSense in .csproj files and more. You can follow this work
+  in the
+  [dotnet/roslyn-project-system](https://github.com/dotnet/roslyn-project-system),
+  [dotnet/sdk](https://github.com/dotnet/sdk), and
+  [microsoft/msbuild](https://github.com/microsoft/msbuild) repos.
+
+* **Performance**. Continue to make the performance of building .NET Core
+  applications faster, especially in the inner loop. This is the cycle of
+  changing the source code and then restarting the application and making that
+  as fast as possible. You can follow this work
+  [dotnet/corefxlab](https://github.com/dotnet/corefxlab/blob/master/docs/roadmap.md)
+  repo.
+
+* **.NET Core and Cloud**. Continue to improve how you run .NET Core
+  applications in Azure. Better logging, tracing and diagnosing errors in your
+  applications when running in the cloud. You can follow this work in the
+  [dotnet/corefx](https://github.com/dotnet/corefx) and
+  [aspnet](https://github.com/aspnet) repos.
+
+* **Build from Source**. Make it very easy to clone the .NET Core repository and
+  GitHub and build the product. Great for experimenting with customizing the
+  product or trying to get it to run on Linux distributions other than the ones
+  we officially support. You can follow the bulk of the work in the
+  [dotnet/coreclr](https://github.com/dotnet/coreclr) and
+  [dotnet/corefx](https://github.com/dotnet/corefx) repos.
+
+As mentioned above these are just some of the early themes we are going to
+invest in. After we ship VS 2017 RTM you will hear more from us on the next
+version of .NET Core, and as always let us know what is important to you.
+
+## Ship Dates
+
+| Milestone         | Release Date |
+|-------------------|--------------|
+| .NET Core 2.0     | Spring 2017  |
+| .NET Standard 2.0 | Spring 2017  |
+
+# Components
+
 .NET Core is a general purpose, modular, cross-platform and open source
 implementation of .NET. It includes a runtime, framework libraries, compilers
 and tools that support a variety of chip and OS targets. These components can be
@@ -15,31 +75,6 @@ Major .NET Core components:
 
 This roadmap is intended to communicate project priorities for evolving and
 extending the scope of .NET Core.
-
-## Ship Dates
-
-At Microsoft, .NET has always been an important component of other teams'
-products and has largely shipped on their schedules. It means that we have to
-take their dates seriously and integrate them into the .NET Core schedule.
-
-| Milestone | Release Date |
-|-----------|--------------|
-| 1.2       | Spring 2017  |
-
-## Planned 1.2 features
-
-* .NET Standard 2.0 support, bringing .NET Core to parity with .NET Framework
-  and Mono for a large collection of base types.
-
-Notes:
-
-* The 1.0 release is accompanied with a preview version of the Visual Studio and
-  command-line tooling. The Visual Studio tooling for 1.0 through 1.2 based on
-  MSBuild and csproj should be publicly available in Fall 2016 and reach RTM
-  quality in Spring 2017.
-
-* The [ASP.NET Core roadmap](https://github.com/aspnet/Home/wiki/Roadmap)
-  articulates the ASP.NET projects' roadmap and dates.
 
 # Technology Roadmaps
 
