@@ -32,14 +32,15 @@ there are some big themes you will identify in the early work on GitHub:
 * **Performance**. Continue to make the performance of building .NET Core
   applications faster, especially in the inner loop. This is the cycle of
   changing the source code and then restarting the application and making that
-  as fast as possible. You can follow this work
-  [dotnet/corefxlab](https://github.com/dotnet/corefxlab/blob/master/docs/roadmap.md)
-  repo.
+  as fast as possible. You can follow part of this work in the
+  [dotnet/roslyn](https://github.com/dotnet/standard) repo.
 
 * **.NET Core and Cloud**. Continue to improve how you run .NET Core
   applications in Azure. Better logging, tracing and diagnosing errors in your
   applications when running in the cloud. You can follow this work in the
-  [dotnet/corefx](https://github.com/dotnet/corefx) and
+  [dotnet/corefx](https://github.com/dotnet/corefx),
+  [dotnet/corefxlab](https://github.com/dotnet/corefxlab/blob/master/docs/roadmap.md),
+  and
   [aspnet](https://github.com/aspnet) repos.
 
 * **Build from Source**. Make it very easy to clone the .NET Core repository and
