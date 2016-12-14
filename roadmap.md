@@ -2,7 +2,7 @@
 
 Our primary focus is to get the .NET Core 1.0 tooling to RTM quality for the
 Visual Studio 2017 RTM ([please try the 2017 RC update][vs2017-rc] we shipped
-today with improvements in this area).
+with improvements in this area).
 
 However, we are also starting to think of the next version of the runtime.
 Because of this, if you follow our repositories you will start to see .NET Core
