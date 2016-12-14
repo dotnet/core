@@ -69,7 +69,9 @@ implementation of .NET. It includes a runtime, framework libraries, compilers
 and tools that support a variety of chip and OS targets. These components can be
 used together or separately.
 
-Major .NET Core components:
+Major .NET Core components are listed below. Please note that this is not meant
+to be an exhaustive list.
+
 * [Runtime](https://github.com/dotnet/coreclr)
 * [Libraries](https://github.com/dotnet/corefx)
 * [C#/VB compiler](https://github.com/dotnet/roslyn)
