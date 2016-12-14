@@ -18,7 +18,8 @@ there are some big themes you will identify in the early work on GitHub:
   developer references .NET Core from many packages to one. Simplified
   acquisition of runtime and tools. And easier to reference Linux platforms and
   their dependencies. You can follow this work in the
-  [dotnet/standard](https://github.com/dotnet/standard) repo.
+  [dotnet/standard](https://github.com/dotnet/standard) and
+  [dotnet/corefx](https://github.com/dotnet/corefx) repos.
 
 * **.NET Core Tooling**. Evolve the tooling aligned with the next .NET Core
   runtime release. This will include tooling for choosing which .NET Core
