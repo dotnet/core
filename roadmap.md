@@ -74,10 +74,15 @@ to be an exhaustive list.
 
 * [Runtime](https://github.com/dotnet/coreclr)
 * [Libraries](https://github.com/dotnet/corefx)
+* [.NET Standard](https://github.com/dotnet)
 * [C#/VB compiler](https://github.com/dotnet/roslyn)
+* [F# compiler](https://github.com/microsoft/visualfsharp)
+* [SDK](https://github.com/dotnet/sdk)
 * [CLI tools](https://github.com/dotnet/cli)
 * [NuGet](https://github.com/NuGet/Home)
+* [ASP.NET](https://github.com/aspnet)
 * [MSBuild](https://github.com/microsoft/msbuild)
+* [Docker Images](https://github.com/dotnet/dotnet-docker)
 
 This roadmap is intended to communicate project priorities for evolving and
 extending the scope of .NET Core.
