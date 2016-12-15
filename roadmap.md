@@ -74,7 +74,7 @@ to be an exhaustive list.
 
 * [Runtime](https://github.com/dotnet/coreclr)
 * [Libraries](https://github.com/dotnet/corefx)
-* [.NET Standard](https://github.com/dotnet)
+* [.NET Standard](https://github.com/dotnet/standard)
 * [C#/VB compiler](https://github.com/dotnet/roslyn)
 * [F# compiler](https://github.com/microsoft/visualfsharp)
 * [SDK](https://github.com/dotnet/sdk)
