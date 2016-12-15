@@ -51,9 +51,12 @@ there are some big themes you will identify in the early work on GitHub:
   [dotnet/coreclr](https://github.com/dotnet/coreclr) and
   [dotnet/corefx](https://github.com/dotnet/corefx) repos.
 
-As mentioned above these are just some of the early themes we are going to
-invest in. After we ship VS 2017 RTM you will hear more from us on the next
-version of .NET Core, and as always let us know what is important to you.
+As mentioned above these are just some of the early big themes we are going to
+invest in, we will also continue to invest in ASP.NET, Entity Framework,
+Languages and many other parts of .NET.
+
+After we ship VS 2017 RTM you will hear more from us on the next version of .NET
+Core, and as always let us know what is important to you.
 
 ## Ship Dates
 
