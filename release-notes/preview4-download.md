@@ -1,6 +1,6 @@
 # .NET Core SDK 1.0 Preview 4 build 004233
 
-The installers and binary archives on this page include .NET Core 1.0 SDK Preview 3.
+The installers and binary archives on this page include .NET Core 1.0 SDK Preview 4.
 
 | .NET Core 1.1 Preview 1 | Installer                                        | Binaries                                        |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|
