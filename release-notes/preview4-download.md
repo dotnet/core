@@ -28,7 +28,7 @@ sudo ln -s /opt/dotnet/dotnet /usr/local/bin
 dotnet-host-ubuntu-x64.deb
 dotnet-hostfxr-ubuntu-x64.deb
 dotnet-sharedframework-ubuntu-x64.deb
-dotnet-sdk-ubuntu-x64.1.0.0-preview4-004223.deb
+dotnet-sdk-ubuntu-x64.1.0.0-preview4-004233.deb
 
 ### Set up package source
 
@@ -40,7 +40,7 @@ The first step is to establish the source feed for the package manager. This is 
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-dev-1.0.0-preview4-004223
+sudo apt-get install dotnet-dev-1.0.0-preview4-004233
 
 ```
 
@@ -50,7 +50,7 @@ Installed packages
 dotnet-host-ubuntu-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu-x64.1.0.1.deb
 dotnet-sharedframework-ubuntu-x64.1.0.1.deb
-dotnet-sdk-ubuntu-x64.1.0.0-preview4-004223.deb
+dotnet-sdk-ubuntu-x64.1.0.0-preview4-004233.deb
 ```
 
 #### Ubuntu 16.04 and Linux Mint 18
@@ -59,7 +59,7 @@ dotnet-sdk-ubuntu-x64.1.0.0-preview4-004223.deb
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 sudo apt-get update
-sudo apt-get install dotnet-dev-1.0.0-preview4-004223
+sudo apt-get install dotnet-dev-1.0.0-preview4-004233
 ```
 
 Installed packages
@@ -68,5 +68,5 @@ Installed packages
 dotnet-host-ubuntu.16.04-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu.16.04-x64.1.0.1.deb
 dotnet-sharedframework-ubuntu.16.04-x64.1.0.1.deb
-dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview4-004223.deb
+dotnet-sdk-ubuntu.16.04-x64.1.0.0-preview4-004233.deb
 ```
