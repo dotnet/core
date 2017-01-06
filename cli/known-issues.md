@@ -36,7 +36,7 @@ Homebrew may also show the following warning:
 
 This warning is meant for the software that uses OpenSSL (in this case, .NET Core) and not for the end-user that is installing said software. Homebrew installation doesn't touch either the existing Apple crypto libraries or existing OpenSSL 0.9.8 version, so there is no impact on any software that uses either one of those crypto solutions and is already installed.
 
-MacPorts doesn't have the concept of linking, so it is reccomended that you uninstall 0.9.8 version of OpenSSL using the following command:
+MacPorts doesn't have the concept of linking, so it is recommended that you uninstall 0.9.8 version of OpenSSL using the following command:
 
 ```console
 sudo port upgrade openssl
@@ -73,7 +73,7 @@ ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
 **Workaround 2:** edit your `.zshrc` and/or `.zshprofile` files to add the `/usr/local/share/dotnet` to the $PATH. 
 
 ## `app.config` file needs to be checked out before publishing 
-If you have an `app.config` file in source control that places locks on local files (such as TFS), you will recieve the following error during publishing:
+If you have an `app.config` file in source control that places locks on local files (such as TFS), you will receive the following error during publishing:
 
 ```console
 Failed to make the following project runnable: <project name> reason: Access to the path <path> is denied.
@@ -86,7 +86,7 @@ If you run any `dotnet` command on project and code files that reside in the roo
 
 > Object reference not set to an instance of an object.
 
-This affects the situation where the actual code files are in the root. So, the example path that would trigger this behavior would be `/project.json` or `C:\project.json` on UNIX or Windows respectivelly. 
+This affects the situation where the actual code files are in the root. So, the example path that would trigger this behavior would be `/project.json` or `C:\project.json` on UNIX or Windows respectively. 
 
 **Workaround:** use a directory to store your projects and source files. 
 
