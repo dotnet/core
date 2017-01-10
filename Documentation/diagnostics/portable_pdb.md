@@ -9,7 +9,7 @@ The Windows PDB format has been around a long time now (~25 years), and it evolv
 ## Why a new format? ##
 While the Windows PDB format has worked okay over the years, with .NET Core the [Roslyn](https://github.com/dotnet/roslyn/wiki/Roslyn%20Overview) team decided it was time to go back to the drawing board and come up with a new format. A few of the reasons:
 
-* The Windows PDB format is complex, and not well documented. This complexity is important for some of the native code scenarios that the format was designed for, but it is unnecessary for the .NET scenarios. The portable format is [open source](https://github.com/dotnet/roslyn/tree/master/src/Debugging/Microsoft.DiaSymReader.PortablePdb) and [documented](https://github.com/dotnet/corefx/blob/master/src/System.Reflection.Metadata/specs/PortablePdb-Metadata.md).
+* The Windows PDB format is complex, and not well documented. This complexity is important for some of the native code scenarios that the format was designed for, but it is unnecessary for the .NET scenarios. The portable format is [open source](https://github.com/dotnet/symreader-portable) and [documented](https://github.com/dotnet/corefx/blob/master/src/System.Reflection.Metadata/specs/PortablePdb-Metadata.md).
 * At the time the effort was begun there wasn't a cross-platform library that could read or write the original windows PDB format.
 * The Windows PDB format is not a compact representation for managed code. Significant size reductions can be obtained with a new format without losing any information.
 

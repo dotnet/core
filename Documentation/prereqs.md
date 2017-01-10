@@ -8,15 +8,13 @@ For Operating System support, please refer to [the roadmap document](https://git
 ## Windows dependencies
 On Windows, the only dependency is the VC++ Redistributable. Depending on the version of Windows you are running on, the versions are changing.
 
-> **Note:** these dependencies are chained in the installer, you only need to install them manually if you are using
-> the installer script (`dotnet-install.sh` or `dotnet-install.ps1`). 
+.NET Core requires the VC++ Redistributable when running on Windows. It is installed for you by the .NET Core installer. You need to install the Visual C++ redistributable manually if you are installing .NET Core via the installer script (`dotnet-install.ps1`) or are attempting to run a self-contained .NET Core application. 
 
-* Windows 10
-    * [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
-* Pre-Windows 10
-    * Please make sure that your Windows installation is up-to-date and includes hotfix [KB2533623] (https://support.microsoft.com/en-us/kb/2533623) installed through Windows Update.
-    * [Universal CRT update](https://www.microsoft.com/en-us/download/details.aspx?id=48234) (you can get more info on what Universal CRT is in [this blog post](https://blogs.msdn.microsoft.com/vcblog/2015/03/03/introducing-the-universal-crt/))
+[Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
 
+* Windows 7 and 2008 only
+    * Please make sure that your Windows installation is up-to-date and includes hotfix [KB2533623](https://support.microsoft.com/en-us/kb/2533623) installed through Windows Update.
+    
 ## Ubuntu
 Ubuntu distributions require the following libraries installed:
 
