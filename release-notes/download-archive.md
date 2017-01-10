@@ -23,4 +23,4 @@ This page provides an archive of previously released versions of the .NET Core r
 | | | | |
 | --: | :-- | :--: | :--: |
 | 10/24/2016 | 1.1 Preview 1 with SDK Preview 2.1 build 3155 | [release notes](https://github.com/leecow/core/blob/master/release-notes/1.1/1.1.0-preview1.md) | [download](https://github.com/dotnet/core/blob/master/release-notes/preview-download.md) |
-| 11/16/2017 | 1.1 with SDK Preview 2.1 build 3177 | [release notes](https://github.com/leecow/core/blob/master/release-notes/1.1/1.1.md) | [download](download-archives/1.1-preview2.1-download.md) |
+| 11/16/2016 | 1.1 with SDK Preview 2.1 build 3177 | [release notes](https://github.com/leecow/core/blob/master/release-notes/1.1/1.1.md) | [download](download-archives/1.1-preview2.1-download.md) |
