@@ -2,7 +2,7 @@
 
 The installers and binary archives on this page include .NET Core 1.0 SDK Preview 4.
 
-| .NET Core 1.1 Preview 1 | Installer                                        | Binaries                                        |
+| .NET Core 1.0 Preview 4 | Installer                                        | Binaries                                        |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|
 | Windows                 | [32-bit](https://go.microsoft.com/fwlink/?linkid=838402) / [64-bit](https://go.microsoft.com/fwlink/?linkid=838401)  | [32-bit](https://go.microsoft.com/fwlink/?linkid=837978) / [64-bit](https://go.microsoft.com/fwlink/?linkid=837977) |
 | macOS                   | [64-bit](https://go.microsoft.com/fwlink/?linkid=838403)  | [64-bit](https://go.microsoft.com/fwlink/?linkid=837973)                          |
