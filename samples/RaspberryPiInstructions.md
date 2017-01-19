@@ -14,9 +14,9 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 * Run `dotnet ./bin/Debug/netcoreapp1.1/publish/helloworld.dll` on Linux/OSX or `dotnet .\bin\Debug\netcoreapp1.1\publish\helloworld.dll` and you should see it print `Hello World!`.
 
-* Under `./bin/Debug/netcoreapp1.1/publish` or `.\bin\Debug\netcoreapp1.1\publish` on Windows you need to edit the helloworld.runtimeconfig.json file to update the version to `1.2.0-beta-001206-00`.
+* Under `./bin/Debug/netcoreapp1.1/publish` or `.\bin\Debug\netcoreapp1.1\publish` on Windows you need to edit the helloworld.runtimeconfig.json file to update the version to `1.2.0-beta-001291-00`.
 
-* This app is now ready to copy over to any machine that has the `1.2.0-beta-001206-00` version of .NET Core on it.
+* This app is now ready to copy over to any machine that has the `1.2.0-beta-001291-00` version of .NET Core on it.
 
 
 ##Getting the app to run on the Pi.
@@ -31,9 +31,8 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 * Extract the matching tar.gz to a folder on your Pi and **cd into that folder in the terminal**.
 
-[dotnet-ubuntu-arm.1.2.0-beta-001206-00.tar.gz](https://github.com/dotnet/core-setup/files/667836/dotnet-ubuntu-arm.1.2.0-beta-001206-00.tar.gz) (Ubuntu 14.04 ARM)
-
-[dotnet-ubuntu-arm.1.2.0-beta-001206-00.tar.gz](https://github.com/dotnet/core-setup/files/672459/dotnet-ubuntu-arm.1.2.0-beta-001206-00.tar.gz) (Ubuntu 16.04 ARM)
+[dotnet-ubuntu.14.04-arm.1.2.0-beta-001291-00.tar.gz](https://github.com/dotnet/core-setup/files/716354/dotnet-ubuntu.14.04-arm.1.2.0-beta-001291-00.tar.gz) (Ubuntu 14.04 ARM)
+[dotnet-ubuntu.16.04-arm.1.2.0-beta-001291-00.tar.gz](https://github.com/dotnet/core-setup/files/716356/dotnet-ubuntu.16.04-arm.1.2.0-beta-001291-00.tar.gz) (Ubuntu 16.04 ARM)
 
 * Create a subfolder called `helloworld` and copy contents of the publish folder you created on your developer machine into it. The contents should be:
 
@@ -53,7 +52,7 @@ For now I am just pointing to tar.gz's that were built for Ubuntu at a point in 
 
 * Install [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot/GetStarted) on your Pi.
 
-* Extract [dotnet-win-arm.1.2.0-beta-001206-00.zip](https://dotnetcli.blob.core.windows.net/dotnet/master/Binaries/1.2.0-beta-001206-00/dotnet-win-arm.1.2.0-beta-001206-00.zip) to a folder on your Pi and **go into that folder in the terminal**.
+* Extract [dotnet-win-arm.1.2.0-beta-001291-00.zip](https://dotnetcli.blob.core.windows.net/dotnet/master/Binaries/1.2.0-beta-001291-00/dotnet-win-arm.1.2.0-beta-001291-00.zip) to a folder on your Pi and **cd into that folder in the terminal**.
 
 * Add the folder where you extracted it to your path.
 
