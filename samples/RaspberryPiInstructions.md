@@ -21,7 +21,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 * This app is now ready to copy over to any machine that has the `1.2.0-beta-001206-00` version of .NET Core on it.
 
 
-Getting the app to run on the Pi.
+**Getting the app to run on the Pi.**
 
 **Linux (Ubuntu)**
 
