@@ -6,7 +6,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 ##Creating an app:
 
-* [Install .NET Core](http://dotnet.github.io/getting-started/) into a supported developer configuration.
+* [Install .NET Core](https://www.microsoft.com/net/download/core) into a supported developer configuration.
 
 * From the terminal/commandline create a folder named helloworld and go into it.
 
@@ -29,7 +29,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 `sudo apt-get install libunwind8 libunwind8-dev gettext libicu-dev liblttng-ust-dev libcurl4-openssl-dev libssl-dev uuid-dev`
 
-* Extract the matching tar.gz to a folder on your Pi and **go into that folder in the terminal**.
+* Extract the matching tar.gz to a folder on your Pi and **cd into that folder in the terminal**.
 
 [dotnet-ubuntu-arm.1.2.0-beta-001206-00.tar.gz](https://github.com/dotnet/core-setup/files/667836/dotnet-ubuntu-arm.1.2.0-beta-001206-00.tar.gz) (Ubuntu 14.04 ARM)
 
