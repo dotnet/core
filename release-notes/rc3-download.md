@@ -4,14 +4,14 @@ The installers and binary archives on this page include .NET Core 1.0 SDK RC 3.
 
 | .NET Core 1.0 Preview 4 | Installer                                        | Binaries                                        |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|
-| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?linkid=836277) / [64-bit](https://go.microsoft.com/fwlink/?linkid=836276)  | [32-bit](https://go.microsoft.com/fwlink/?linkid=836291) / [64-bit](https://go.microsoft.com/fwlink/?linkid=836290) |
-| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?linkid=836275)  | [64-bit](https://go.microsoft.com/fwlink/?linkid=837973)                          |
-| CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=836282)                          |
-| Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=836283)                          |
-| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=836284)                          |
-| openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=836285)                          |
-| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=836289)                          |
-| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=836288)                          |
+| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?linkid=839629) / [64-bit](https://go.microsoft.com/fwlink/?linkid=839640)  | [32-bit](https://go.microsoft.com/fwlink/?linkid=839632) / [64-bit](https://go.microsoft.com/fwlink/?linkid=839634) |
+| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?linkid=839635)  | [64-bit](https://go.microsoft.com/fwlink/?linkid=839641)                          |
+| CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=839642)                          |
+| Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=839630)                          |
+| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=839639)                          |
+| openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=839637)                          |
+| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=839628)                          |
+| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=839636)                          |
 
 ## Installation from a binary archive
 
@@ -49,7 +49,7 @@ Installed packages
 ```
 dotnet-host-ubuntu-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu-x64.1.0.1.deb
-dotnet-sharedframework-ubuntu-x64.1.0.1.deb
+dotnet-sharedframework-ubuntu-x64.1.0.3.deb
 dotnet-sdk-ubuntu-x64.1.0.0-rc3-004517.deb
 ```
 
@@ -67,6 +67,6 @@ Installed packages
 ```
 dotnet-host-ubuntu.16.04-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu.16.04-x64.1.0.1.deb
-dotnet-sharedframework-ubuntu.16.04-x64.1.0.1.deb
+dotnet-sharedframework-ubuntu.16.04-x64.1.0.3.deb
 dotnet-sdk-ubuntu.16.04-x64.1.0.0-rc3-004517.deb
 ```
