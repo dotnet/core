@@ -1,4 +1,4 @@
-## Implicit glob for including compilation files in the Visual Studio 2017 RC3 release of the .NET Core SDK
+## Implicit compilation sources includes in the Visual Studio 2017 RC3 release of the .NET Core SDK
 As part of the RC3 release of Visual Studio 2017, a new version of the .NET Core SDK is included. With that, we've  moved the default includes and excludes for compile items and embedded resources to the SDK properties files. This means that you don't need to specify these items in your project file moving forward. 
 
 The main reason for doing this is to reduce the clutter on your project file. The defaults that are present in the SDK should cover most common use cases, so there is no need to repeat them in every project that you create. This leads to shorter projects that are much easier to understand as well as edit by hand, if needed. 
