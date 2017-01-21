@@ -1,8 +1,9 @@
-# .NET Core on Raspberry Pi
+# .NET Core on ARM boards
 
 Arm32 support for .NET Core is still being brought up but there has been enough progress for people to start playing with it. 
-It's not ready to be used as a developer environment yet but you can publish an application on a developer machine and run it on a Raspberry Pi. 
-These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with success.
+It's not ready to be used as a developer environment yet but you can publish an application on a developer machine and run it on a Raspberry Pi and Orange Pi PC. 
+These steps have been tested on both a Raspberry Pi 2 and Pi 3 on Linux and Windows with success.
+These steps have been tested on Orange Pi PC on Linux with success.
 
 ##Creating an app:
 
@@ -23,7 +24,8 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 ###Linux (Ubuntu)
 
-* Install [Ubuntu 14.04 or 16.04](https://www.raspberrypi.org/downloads/) on your Pi.
+* Install [Ubuntu 14.04 or 16.04](https://www.raspberrypi.org/downloads/) on your Raspberry Pi.
+* Install [Ubuntu 16.04](https://www.armbian.com/orange-pi-pc/) on your Orange Pi PC.
 
 * Install the [prereq packages](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core. 
 
@@ -49,7 +51,7 @@ Note: While it is possible to build the product on the Pi, it isn't easy today a
 We're also hopefully very soon going to have daily dev builds people can get to have all the latest fixes. 
 For now I am just pointing to tar.gz's that were built for Ubuntu at a point in time.
 
-###Win10 IoT Core
+###Win10 IoT Core on Raspberry Pi
 
 * Install [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot/GetStarted) on your Pi.
 
