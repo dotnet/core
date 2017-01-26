@@ -12,6 +12,7 @@ The core repository is the starting point to engage in and learn about the
 > * [dotnet/standard](https://github.com/dotnet/standard) - for .NET Standard issues and questions
 > * [nuget/home](https://github.com/nuget/home) - for NuGet questions and issues
 > * [aspnet/home](https://github.com/aspnet/home) - for ASP.NET Core questions and issues.
+> * [dotnet/netcorecli-fsc](https://github.com/dotnet/netcorecli-fsc) - for F# questions and issues
 
 > 
 > We will be removing the ability to file issues on this repo in the near future.
