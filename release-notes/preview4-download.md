@@ -24,12 +24,12 @@ sudo ln -s /opt/dotnet/dotnet /usr/local/bin
 ```
 
 ## Ubuntu installation
-
+```
 dotnet-host-ubuntu-x64.deb
 dotnet-hostfxr-ubuntu-x64.deb
 dotnet-sharedframework-ubuntu-x64.deb
 dotnet-sdk-ubuntu-x64.1.0.0-preview4-004233.deb
-
+```
 ### Set up package source
 
 The first step is to establish the source feed for the package manager. This is only needed if you have not previously set up the source or if you are installing for the first time.
