@@ -10,5 +10,3 @@ The minimum available resources required for a simple standalone application are
 - 16MB available RAM
 
 Depending on your application and performance requirements, these requirements may be higher. 
-
-*SSE2 processor instruction support is required.
