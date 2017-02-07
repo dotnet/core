@@ -15,7 +15,7 @@ The installers and binary archives on this page include .NET Core 1.0 SDK Previe
 
 ## Installation from a binary archive
 
-When using binary archives to install, we recommend the contents be extracted to /opt/dotnet and a symbolic link created for dotnet. If an earlier release of .NET Core is already installed, the directory and symbolic link may already exist. Ubuntu and Mint users should follow the instructions in the Ubuntu Installation section below.
+When using binary archives to install, we recommend the contents be extracted to `/opt/dotnet` and a symbolic link created for `dotnet`. If an earlier release of .NET Core is already installed, the directory and symbolic link may already exist. Ubuntu and Mint users should follow the instructions in the Ubuntu Installation section below.
 
 ```bash
 sudo mkdir -p /opt/dotnet
@@ -25,10 +25,12 @@ sudo ln -s /opt/dotnet/dotnet /usr/local/bin
 
 ## Ubuntu installation
 
+```
 dotnet-host-ubuntu-x64.deb
 dotnet-hostfxr-ubuntu-x64.deb
 dotnet-sharedframework-ubuntu-x64.deb
 dotnet-sdk-ubuntu-x64.1.0.0-preview4-004233.deb
+```
 
 ### Set up package source
 
