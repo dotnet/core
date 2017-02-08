@@ -1,6 +1,6 @@
 # Docker Images and .NET Core Content Reference
 
-In order for Docker containers to run dotnet cli commands the sdk that you use to build your project with locally must match the dotnet sdk version inside your container. If you want a lighter-weight container and don’t need to use the cli tools inside the container, then you can pull the runtime images.
+In order for Docker containers to run dotnet cli commands, the sdk that you use to build your project with locally must match the dotnet sdk version inside your container. If you want a lighter-weight container and don’t need to use the cli tools inside the container, then you can pull the runtime images.
 
 |    Docker Images   2/07/17             |    .NET Core   Runtime version in image   |    .NET Core SDK   version in image    (NOTE: All SDK versions can target all   runtimes)    |    Full SDK   version number    |
 |----------------------------------------|-------------------------------------------|----------------------------------------------------------------------------------------------|---------------------------------|
