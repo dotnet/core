@@ -60,10 +60,11 @@ Core, and as always let us know what is important to you.
 
 ## Ship Dates
 
-| Milestone         | Release Date |
-|-------------------|--------------|
-| .NET Core 2.0     | Spring 2017  |
-| .NET Standard 2.0 | Spring 2017  |
+| Milestone              | Release Date |
+|------------------------|--------------|
+| .NET Core 2.0 Preview  | Spring 2017  |
+| .NET Core 2.0          | Summer 2017  |
+| .NET Standard 2.0      | Spring 2017  |
 
 # Components
 
