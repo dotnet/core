@@ -8,8 +8,8 @@ The installers and binary archives on this page include .NET Core 1.0 SDK RC 4.
 | macOS                   | [64-bit](https://go.microsoft.com/fwlink/?linkid=841693) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-osx-x64.1.0.0-rc4-004771.pkg.sha) | [64-bit](https://go.microsoft.com/fwlink/?linkid=841692) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-osx-x64.1.0.0-rc4-004771.tar.gz.sha)                         ||
 | CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=841688) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-centos-x64.1.0.0-rc4-004771.tar.gz.sha)                         ||
 | Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=841689) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-debian-x64.1.0.0-rc4-004771.tar.gz.sha)                         | [1.1.0-sdk-msbuild-rc4](1.1.0-sdk-msbuild-rc4)|
-| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=841684) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-ubuntu-x64.1.0.0-rc4-004771.tar.gz.sha)                         ||
-| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=841687) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-ubuntu.16.04-x64.1.0.0-rc4-004771.tar.gz.sha)
+| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=841687) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-ubuntu-x64.1.0.0-rc4-004771.tar.gz.sha)                         ||
+| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=841684) [(sha)](download-sha/1.0.3-sdk-rc4/dotnet-dev-ubuntu.16.04-x64.1.0.0-rc4-004771.tar.gz.sha)
 
 ## Installation from a binary archive
 
