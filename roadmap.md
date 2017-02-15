@@ -62,9 +62,9 @@ Core, and as always let us know what is important to you.
 
 | Milestone              | Release Date |
 |------------------------|--------------|
-| .NET Core 2.0 Preview  | Spring 2017  |
-| .NET Core 2.0          | Summer 2017  |
-| .NET Standard 2.0      | Spring 2017  |
+| .NET Core 2.0 Preview  | Q2 2017  |
+| .NET Core 2.0          | Q3 2017  |
+| .NET Standard 2.0      | Q3 2017  |
 
 # Components
 
