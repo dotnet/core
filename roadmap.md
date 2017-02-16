@@ -34,7 +34,7 @@ there are some big themes you will identify in the early work on GitHub:
   applications faster, especially in the inner loop. This is the cycle of
   changing the source code and then restarting the application and making that
   as fast as possible. You can follow part of this work in the
-  [dotnet/roslyn](https://github.com/dotnet/standard) repo.
+  [dotnet/sdk](https://github.com/dotnet/sdk) repo.
 
 * **.NET Core and Cloud**. Continue to improve how you run .NET Core
   applications in Azure. Better logging, tracing and diagnosing errors in your
