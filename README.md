@@ -9,6 +9,8 @@ The core repository is the starting point to engage in and learn about the
 > * [dotnet/cli](https://github.com/dotnet/cli) - for CLI tools and questions
 > * [dotnet/corefx](https://github.com/dotnet/corefx) - for API issues and questions
 > * [dotnet/coreclr](https://github.com/dotnet/coreclr) - for runtime issues
+> * [dotnet/docs](https://github.com/dotnet/docs) - for .NET Core documentation issues and questions
+> * [dotnet/sdk](https://github.com/dotnet/sdk) - for .NET Core SDK for Visual Studio issues and questions
 > * [dotnet/standard](https://github.com/dotnet/standard) - for .NET Standard issues and questions
 > * [nuget/home](https://github.com/nuget/home) - for NuGet questions and issues
 > * [aspnet/home](https://github.com/aspnet/home) - for ASP.NET Core questions and issues.
