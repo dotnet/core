@@ -1,6 +1,6 @@
 # .NET Core SDK 1.0 rc4 build 004771
 
-The installers and binary archives on this page include .NET Core 1.0 SDK RC 4.
+The installers and binary archives on this page include .NET Core 1.0 SDK RC 4. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.3-RC4-SHA.txt) are available to verify downloads.
 
 
 | .NET Core 1.0 RC 4                        | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries | Docker Images |
@@ -11,8 +11,6 @@ The installers and binary archives on this page include .NET Core 1.0 SDK RC 4.
 | Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=841689)                          | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=836295) | [1.1.0-sdk-msbuild-rc4](https://hub.docker.com/r/microsoft/dotnet/)|
 | Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=841684)                         | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=836278) | - |
 | Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=841687)  | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=836290) | - |
-
-[Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.3-RC4-SHA.txt) to verify downloads.
 
 ## Installation from a binary archive
 
