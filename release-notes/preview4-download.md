@@ -2,16 +2,16 @@
 
 The installers and binary archives on this page include .NET Core 1.0 SDK Preview 4. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.1-SDK-Preview-4-4233-SHA.txt) are available to verify downloads.
 
-| .NET Core 1.0 Preview 4 | Installer                                        | Binaries                                        |
-| ----------------------- | :----------------------------------------------: | :----------------------------------------------:|
-| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?linkid=838402) / [64-bit](https://go.microsoft.com/fwlink/?linkid=838401)  | [32-bit](https://go.microsoft.com/fwlink/?linkid=837978) / [64-bit](https://go.microsoft.com/fwlink/?linkid=837977) |
-| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?linkid=838403)  | [64-bit](https://go.microsoft.com/fwlink/?linkid=837973)                          |
-| CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837969)                          |
-| Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837970)                          |
-| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837971)                          |
-| openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837972)                          |
-| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=837976)                          |
-| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=837975)                          |
+| .NET Core 1.0 Preview 4 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
+| ----------------------- | :----------------------------------------------: | :----------------------------------------------:| :--: | :--: |
+| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?linkid=838402) / [64-bit](https://go.microsoft.com/fwlink/?linkid=838401)  | [32-bit](https://go.microsoft.com/fwlink/?linkid=837978) / [64-bit](https://go.microsoft.com/fwlink/?linkid=837977) | [32-bit](https://go.microsoft.com/fwlink/?LinkID=827516) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=827515) | [32-bit](https://go.microsoft.com/fwlink/?LinkID=825883) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=825882) |
+| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?linkid=838403)  | [64-bit](https://go.microsoft.com/fwlink/?linkid=837973)                          | [64-bit](https://go.microsoft.com/fwlink/?LinkID=827517) | [64-bit](https://go.microsoft.com/fwlink/?LinkID=825884) |
+| CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837969)                          | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=825888) |
+| Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837970)                          | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=825887) |
+| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837971)                          | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=825891) |
+| openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?linkid=837972)                          | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=825890) |
+| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=837976)                          | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=825885) |
+| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?linkid=837975)                          | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=825886) |
 
 ## Installation from a binary archive
 

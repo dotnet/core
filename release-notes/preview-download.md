@@ -2,19 +2,19 @@
 
 The installers and binary archives on this page include .NET Core 1.1 Preview 1 (runtime and shared framework) and the .NET Core 1.0 SDK Preview 2.1. If you only need the runtime and shared framework (no SDK), download links are available on the [Runtime Download](https://github.com/dotnet/core/blob/master/release-notes/preview-runtime-download.md) page. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1-Preview-1-SDK-Preview-2.1-3155-SHA.txt) are available to verify downloads.
 
-| .NET Core 1.1 Preview 1 | Installer                                        | Binaries                                        |
-| ----------------------- | :----------------------------------------------: | :----------------------------------------------:|
-| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831458) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831453)  | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831474) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831469) |
-| Windows Server Hosting  | [32-bit/64-bit](https://go.microsoft.com/fwlink/?linkid=832756) | - |
-| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831445)  | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831486)                          |
-| CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831470)                          |
-| Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831481)                          |
-| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831489)                          |
-| openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831491)                          |
-| openSUSE 42.1           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831478)                          |
-| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831488)                          |
-| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831471)                          |
-| Ubuntu 16.10            | See notes below for Ubuntu 16.10                          | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831479)                          |
+| .NET Core 1.1 Preview 1 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
+| ----------------------- | :----------------------------------------------: | :----------------------------------------------:|:--|:--|
+| Windows                 | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831458) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831453)  | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831474) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831469) | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831452) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831444) | [32-bit](https://go.microsoft.com/fwlink/?LinkID=831483) / [64-bit](https://go.microsoft.com/fwlink/?LinkID=831476) |
+| Windows Server Hosting  | [32-bit/64-bit](https://go.microsoft.com/fwlink/?linkid=832756) | - | - | - |
+| macOS                   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831445)  | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831486) | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831446) | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831486) |
+| CentOS 7.1              | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831470) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831487) |
+| Debian 8                | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831481) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831477) |
+| Fedora 23               | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831489) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831484) |
+| openSUSE 13.2           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831491) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831491) |
+| openSUSE 42.1           | -                                                         | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831478) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831475) |
+| Ubuntu 14.04            | See notes below for Ubuntu 14.04 and Mint 17 installers   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831488) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831468) |
+| Ubuntu 16.04            | See notes below for Ubuntu 16.04 and Mint 18 installers   | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831471) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831482) |
+| Ubuntu 16.10            | See notes below for Ubuntu 16.10                          | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831479) | - | [64-bit](https://go.microsoft.com/fwlink/?LinkID=831490) |
 
 ## Installation from a binary archive
 
