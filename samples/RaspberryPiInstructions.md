@@ -3,7 +3,7 @@
 Arm32 support for .NET Core is still being brought up but there are now daily runtime builds that are ready to use. 
 There is no SDK that runs on ARM32 yet but you can publish an application that will from on a Raspberry Pi. 
 
-These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with success.
+These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with success except there is currently a problem with the Ubuntu packages that needs to be worked out.
 
 ##Creating an app:
 
@@ -20,7 +20,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeFrameworkVersion>2.0.0-beta-001509-00</RuntimeFrameworkVersion>
-    <RuntimeIdentifiers>win8-arm</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win8-arm;ubuntu.14.04-arm;ubuntu.16.04-arm</RuntimeIdentifiers>
   </PropertyGroup>
 
 </Project>
@@ -28,9 +28,9 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 * Run `dotnet restore`.
 
-* Run `dotnet publish` to publish the application for arm.
+* Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win8-arm` to publish the application for windows.
 
-* Under `./bin/Debug/netcoreapp2.0/win8-arm/publish` or `.\bin\Debug\netcoreapp1.1\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
+* Under `./bin/Debug/netcoreapp2.0/<runtime identifier>/publish` or `.\bin\Debug\netcoreapp2.0\<runtime identifier>\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
 
 
 ##Getting the app to run on the Pi.
