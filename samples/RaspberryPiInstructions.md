@@ -49,6 +49,4 @@ Note: While it is possible to build the product on the Pi, it isn't easy today a
 
 * Install [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot/GetStarted) on your Pi.
 
-* Copy your app to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi!
-
-* `helloworld.dll` and you should see `Hello World!` from .NET Core running on your Pi!
+* Copy your app to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi
