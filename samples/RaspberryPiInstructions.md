@@ -10,6 +10,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 * [Install .NET Core 2.0 SDK](https://github.com/dotnet/cli/tree/master) into a supported developer configuration.
 
 * From the terminal/commandline create a folder named helloworld and go into it.
+* Run `dotnet new`.
 * Edit the helloworld.csproj file to look like this (Note the version may be newer under RuntimeIdentifiers).
 
 ```
@@ -24,6 +25,8 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 </Project>
 ```
+
+* Run `dotnet restore`.
 
 * Run `dotnet publish` to publish the application for arm.
 
