@@ -3,7 +3,7 @@
 Arm32 support for .NET Core is still being brought up but there are now daily runtime builds that are ready to use. 
 There is no SDK that runs on ARM32 yet but you can publish an application that will from on a Raspberry Pi. 
 
-These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with success except there is currently a problem with the Ubuntu packages that needs to be worked out.
+These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows.
 
 ##Creating an app:
 
@@ -11,7 +11,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
 
 * From the terminal/commandline create a folder named helloworld and go into it.
 * Run `dotnet new`.
-* Edit the helloworld.csproj file to look like this (Note the version may be newer under RuntimeIdentifiers).
+* Edit the helloworld.csproj file to look like this (Note the version may be newer for RuntimeFrameworkVersion but not lower than 2.0.0-beta-001620-00).
 
 ```
 <Project Sdk="Microsoft.NET.Sdk">
@@ -19,7 +19,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows with s
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RuntimeFrameworkVersion>2.0.0-beta-001509-00</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.0-beta-001620-00</RuntimeFrameworkVersion>
     <RuntimeIdentifiers>win8-arm;ubuntu.14.04-arm;ubuntu.16.04-arm</RuntimeIdentifiers>
   </PropertyGroup>
 
