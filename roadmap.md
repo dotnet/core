@@ -44,7 +44,7 @@ there are some big themes you will identify in the early work on GitHub:
   and
   [aspnet](https://github.com/aspnet) repos.
 
-* **Build from Source**. Make it very easy to clone the .NET Core repository and
+* **Build from Source**. Make it very easy to clone the .NET Core repository at
   GitHub and build the product. Great for experimenting with customizing the
   product or trying to get it to run on Linux distributions other than the ones
   we officially support. You can follow the bulk of the work in the
