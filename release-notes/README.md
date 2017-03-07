@@ -4,7 +4,6 @@
 
 | |   | | |
 | :-- | :-- | :--: | :--: |
-
 | 2017/03/07 | 1.0.4 with SDK 1.0.1     | [release notes](1.0/1.0.4.md) | [download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md) |
 | 2017/02/07 | 1.0.3 with SDK RC4 build 004771     | [release notes](1.0/1.0.3-SDK-RC4.md) | [download](download-archives/rc4-download.md) |
 | 2017/01/27 | 1.0.3 with SDK RC3 build 004530     | [release notes](1.0/1.0.3.md) | [download](download-archives/rc3-download.md) |
