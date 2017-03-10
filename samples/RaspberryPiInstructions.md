@@ -10,7 +10,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows.
 * [Install .NET Core 2.0 SDK](https://github.com/dotnet/cli/tree/master) into a supported developer configuration.
 
 * From the terminal/commandline create a folder named helloworld and go into it.
-* Run `dotnet new`.
+* Run `dotnet new console -n helloworld`.
 * Edit the helloworld.csproj file to look like this (Note the version may be newer for RuntimeFrameworkVersion but not lower than 2.0.0-beta-001620-00).
 
 ```
@@ -28,7 +28,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows.
 
 * Run `dotnet restore`.
 
-* Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win8-arm` to publish the application for windows.
+* Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win8-arm` to publish the application for windows and `dotnet publish -r ubuntu.16.04-arm` for ubuntu 16.04 running on raspberrypi.
 
 * Under `./bin/Debug/netcoreapp2.0/<runtime identifier>/publish` or `.\bin\Debug\netcoreapp2.0\<runtime identifier>\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
 
@@ -41,7 +41,7 @@ These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows.
 
 * Install the [prereq packages](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core. 
 
-* Copy your app to the Raspberry Pi and execute run `./helloworld.exe` to see `Hello World!` from .NET Core running on your Pi!
+* Copy your app to the Raspberry Pi and execute run `./helloworld` to see `Hello World!` from .NET Core running on your Pi!
 
 Note: While it is possible to build the product on the Pi, it isn't easy today and it's slow. We are working on making it very easy to do.
 
