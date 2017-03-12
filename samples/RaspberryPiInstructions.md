@@ -1,9 +1,9 @@
 # .NET Core on Raspberry Pi
 
-Arm32 support for .NET Core is still being brought up but there are now daily runtime builds that are ready to use. 
-There is no SDK that runs on ARM32 yet but you can publish an application that will on a Raspberry Pi. 
+Arm32 support for .NET Core is still being brought up, but there are now daily runtime builds that are ready to use. 
+There is no SDK that runs on ARM32 yet, but you can publish an application that will run on a Raspberry Pi. 
 
-These steps have been tested on both a Pi 2 and Pi 3 on Linux and Windows.
+These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 ##Creating an app:
 
