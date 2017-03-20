@@ -5,7 +5,7 @@ There is no SDK that runs on ARM32 yet, but you can publish an application that 
 
 These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
-##Creating an app:
+## Creating an app:
 
 * [Install .NET Core 2.0 SDK](https://github.com/dotnet/cli/tree/master) into a supported developer configuration.
 
@@ -33,9 +33,9 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 * Under `./bin/Debug/netcoreapp2.0/<runtime identifier>/publish` or `.\bin\Debug\netcoreapp2.0\<runtime identifier>\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
 
 
-##Getting the app to run on the Pi.
+## Getting the app to run on the Pi.
 
-###Linux (Ubuntu)
+### Linux (Ubuntu)
 
 * Install [Ubuntu 14.04 or 16.04](https://www.raspberrypi.org/downloads/) on your Pi.
 
@@ -45,7 +45,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 Note: While it is possible to build the product on the Pi, it isn't easy today and it's slow. We are working on making it very easy to do.
 
-###Win10 IoT Core
+### Win10 IoT Core
 
 * Install [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot/GetStarted) on your Pi.
 
