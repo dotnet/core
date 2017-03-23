@@ -99,7 +99,7 @@ Architecture:
 - [.NET Standard](https://github.com/dotnet/standard)
 - [.NET Core Tools/CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
 
-Version 2.0 minumum OS Support (Proposed):
+Version 2.0 minimum OS Support (Proposed):
 
 OS                            |Version                        |Architectures|Configurations|Notes
 ------------------------------|-------------------------------|-------------|--------------|-----
