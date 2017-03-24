@@ -11,7 +11,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 * From the terminal/commandline create a folder named helloworld and go into it.
 * Run `dotnet new console -n helloworld`.
-* Run `dotnet` to get the current RuntimeFrameworkVersion.
+* Run `dotnet` and note the current RuntimeFrameworkVersion.
 * Edit the helloworld.csproj file to look like this (Note the version may be newer for RuntimeFrameworkVersion but not lower than 2.0.0-beta-001620-00).
 
 ```
