@@ -55,3 +55,5 @@ def branch = GithubBranchName
         }
     }
 }
+
+Utilities.addCROSSCheck(this, project, branch)
