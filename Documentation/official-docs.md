@@ -9,7 +9,7 @@ Microsoft maintains official documentation for .NET, listed below. Both .NET Cor
 
 ## .NET Framework
 
-- [.Conceptual docs](https://msdn.microsoft.com/library/w0x726c2.aspx)
+- [Conceptual docs](https://msdn.microsoft.com/library/w0x726c2.aspx)
 - [API docs](https://msdn.microsoft.com/library/mt472912.aspx)
 
 Note: .NET Framework docs will be moving to docs.microsoft.com in 2017.
