@@ -101,19 +101,21 @@ Architecture:
 
 Version 2.0 minimum OS Support (Proposed):
 
-OS                            |Version                        |Architectures|Configurations|Notes
-------------------------------|-------------------------------|-------------|--------------|-----
-Windows Client                | 7 SP1 - 10                    | x64, x86    |              |
-Windows Server                | 2008 R2 SP1 - 2016            | x64, x86    | Full, Server Core, Nano |
-Red Hat Enterprise Linux      | 7.2                           | x64         |              | This includes Centos and Oracle Linux
-Fedora                        | 25                            | x64         |              |
-Debian                        | 8.2                           | x64         |              |
-Ubuntu                        | 14.04                         | x64, arm32  |              | This includes Linux Mint 17
-openSUSE                      | 42.2                          | x64         |              |
-Tizen                         | 4                             | arm32       |              |
-Mac OS X                      | 10.12                         | x64         |              |
+OS                            |Version                        |Architectures  |Configurations|Notes
+------------------------------|-------------------------------|---------------|--------------|-----
+Windows Client                | 7 SP1+                        | x64, x86      |              |
+Windows Server                | 2008 R2 SP1+                  | x64, x86      | Full, Server Core, Nano |
+Red Hat Enterprise Linux      | 7.3+                          | x64           |              | This includes Centos and Oracle Linux
+Fedora                        | 25+                           | x64           |              |
+Debian                        | 8.7+                          | x64           |              |
+Ubuntu                        | 14.04+                        | x64, arm32 [S]|              | This includes Linux Mint 17
+openSUSE                      | 42.2+                         | x64           |              |
+Tizen                         | 4+                            | arm32 [S]     |              |
+Mac OS X                      | 10.12+                        | x64           |              |
 
-*Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support.
+* Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support. Entries will be supported by Microsoft per the Microsoft support policy except where support is explicitly called out as coming from elsewhere.
+* [S] This is supported by Samsung.
+* [C] This is supported by the Community
 
 Version 1.0 OS Support:
 
