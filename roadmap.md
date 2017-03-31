@@ -108,7 +108,7 @@ Windows Server                | 2008 R2 SP1+                  | x64, x86      | 
 Red Hat Enterprise Linux      | 7.3+                          | x64           |              | This includes Centos and Oracle Linux
 Fedora                        | 25+                           | x64           |              |
 Debian                        | 8.7+                          | x64           |              |
-Ubuntu                        | 14.04+                        | x64, arm32 [S]|              | This includes Linux Mint 17
+Ubuntu                        | 14.04+                        | x64, arm32 [C]|              | This includes Linux Mint 17 for x64
 openSUSE                      | 42.2+                         | x64           |              |
 Tizen                         | 4+                            | arm32 [S]     |              |
 Mac OS X                      | 10.12+                        | x64           |              |
