@@ -110,7 +110,7 @@ Fedora                        | 25+                           | x64           | 
 Debian                        | 8.7+                          | x64           |              |
 Ubuntu                        | 14.04+                        | x64, arm32 [C]|              | This includes Linux Mint 17 for x64
 openSUSE                      | 42.2+                         | x64           |              |
-Tizen                         | 4+                            | arm32 [S]     |              | [Tizen .NET preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
+Tizen                         | 4+                            | arm32 [S]     |              | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
 Mac OS X                      | 10.12+                        | x64           |              |
 
 * Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support. Entries will be supported by Microsoft per the Microsoft support policy except where support is explicitly called out as coming from elsewhere.
