@@ -9,6 +9,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 * [Install .NET Core 2.0 SDK](https://github.com/dotnet/cli/tree/master) into a supported developer configuration.
 
+
 * From the terminal/commandline create a folder named `helloworld` and go into it.
 * Run `dotnet new console`
 * You can find `helloworld.csproj` file is created under current directory.
@@ -26,6 +27,8 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 </Project>
 ```
+
+* Make sure you have a nuget.config file next to your csproj that includes the dotnet-core myget feed: `<add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />`.
 
 * Run `dotnet restore`.
 
