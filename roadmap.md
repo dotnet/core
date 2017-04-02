@@ -1,15 +1,12 @@
 # .NET Core Roadmap
 
-Our primary focus is to get the .NET Core 1.0 tooling to RTM quality for the
-Visual Studio 2017 RTM ([please try the 2017 RC update][vs2017-rc] we shipped
-with improvements in this area).
+We aim to continuously deliver updates to the .NET Core Runtime and Tools and our primary focus right now is on .NET Core 2.0. 
 
-However, we are also starting to think of the next version of the runtime.
-Because of this, if you follow our repositories you will start to see .NET Core
-2.0 versioning. While we are still in the process of planning the next release,
-there are some big themes you will identify in the early work on GitHub:
+We shipped Visual Studio 2017 RTM with .NET Core 1.X support. [Please try VS 2017][vs2017].
 
-[vs2017-rc]: https://blogs.msdn.microsoft.com/dotnet/2016/12/12/updating-visual-studio-2017-rc-net-core-tooling-improvements/
+[vs2017]: https://www.visualstudio.com/downloads/
+
+## Primary scenarios for .NET Core 2.0
 
 * **Lower the Barrier of Entry and Reach** .NET Standard 2.0 standardizes the
   shared APIs across .NET Framework, .NET Core and Xamarin making it easy to
@@ -54,9 +51,6 @@ there are some big themes you will identify in the early work on GitHub:
 As mentioned above these are just some of the early big themes we are going to
 invest in, we will also continue to invest in ASP.NET, Entity Framework,
 Languages and many other parts of .NET.
-
-After we ship VS 2017 RTM you will hear more from us on the next version of .NET
-Core, and as always let us know what is important to you.
 
 ## Ship Dates
 
