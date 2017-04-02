@@ -27,7 +27,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 </Project>
 ```
 
-* Add a new package source to the project with source: `https://dotnet.myget.org/F/dotnet-core/api/v3/index.json`.
+* Make sure you have a nuget.config file next to your csproj that includes the dotnet-core myget feed: `<add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />`.
 
 * Run `dotnet restore`.
 
