@@ -1,15 +1,12 @@
 # .NET Core Roadmap
 
-Our primary focus is to get the .NET Core 1.0 tooling to RTM quality for the
-Visual Studio 2017 RTM ([please try the 2017 RC update][vs2017-rc] we shipped
-with improvements in this area).
+We aim to continuously deliver updates to the .NET Core Runtime and Tools and our primary focus right now is on .NET Core 2.0. 
 
-However, we are also starting to think of the next version of the runtime.
-Because of this, if you follow our repositories you will start to see .NET Core
-2.0 versioning. While we are still in the process of planning the next release,
-there are some big themes you will identify in the early work on GitHub:
+We shipped Visual Studio 2017 RTM with .NET Core 1.X support. [Please try VS 2017][vs2017].
 
-[vs2017-rc]: https://blogs.msdn.microsoft.com/dotnet/2016/12/12/updating-visual-studio-2017-rc-net-core-tooling-improvements/
+[vs2017]: https://www.visualstudio.com/downloads/
+
+## Primary scenarios for .NET Core 2.0
 
 * **Lower the Barrier of Entry and Reach** .NET Standard 2.0 standardizes the
   shared APIs across .NET Framework, .NET Core and Xamarin making it easy to
@@ -55,9 +52,6 @@ As mentioned above these are just some of the early big themes we are going to
 invest in, we will also continue to invest in ASP.NET, Entity Framework,
 Languages and many other parts of .NET.
 
-After we ship VS 2017 RTM you will hear more from us on the next version of .NET
-Core, and as always let us know what is important to you.
-
 ## Ship Dates
 
 | Milestone                 | Release Date |
@@ -98,6 +92,24 @@ Architecture:
 
 - [.NET Standard](https://github.com/dotnet/standard)
 - [.NET Core Tools/CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
+
+Version 2.0 minimum OS Support (Proposed):
+
+OS                            |Version                        |Architectures  |Configurations|Notes
+------------------------------|-------------------------------|---------------|--------------|-----
+Windows Client                | 7 SP1+                        | x64, x86      |              |
+Windows Server                | 2008 R2 SP1+                  | x64, x86      | Full, Server Core, Nano |
+Red Hat Enterprise Linux      | 7.3+                          | x64           |              | This includes Centos and Oracle Linux
+Fedora                        | 25+                           | x64           |              |
+Debian                        | 8.7+                          | x64           |              |
+Ubuntu                        | 14.04+                        | x64, arm32 [C]|              | This includes Linux Mint 17 for x64
+openSUSE                      | 42.2+                         | x64           |              |
+Tizen                         | 4+                            | arm32 [S]     |              | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
+Mac OS X                      | 10.12+                        | x64           |              |
+
+* Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support. Entries will be supported by Microsoft per the Microsoft support policy except where support is explicitly called out as coming from elsewhere.
+* [S] This is supported by Samsung.
+* [C] This is supported by the Community
 
 Version 1.0 OS Support:
 

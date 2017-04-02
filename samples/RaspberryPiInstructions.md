@@ -9,10 +9,11 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 * [Install .NET Core 2.0 SDK](https://github.com/dotnet/cli/tree/master) into a supported developer configuration.
 
-* From the terminal/commandline create a folder named helloworld and go into it.
-* Run `dotnet new console -n helloworld`.
-* Run `dotnet` and note the current RuntimeFrameworkVersion.
-* Edit the helloworld.csproj file to look like this (Note the version may be newer for RuntimeFrameworkVersion but not lower than 2.0.0-beta-001620-00).
+
+* From the terminal/commandline create a folder named `helloworld` and go into it.
+* Run `dotnet new console`
+* You can find `helloworld.csproj` file is created under current directory.
+* Edit the `helloworld.csproj` file to look like this (Note the version may be newer for RuntimeFrameworkVersion but not lower than 2.0.0-beta-001620-00).
 
 ```
 <Project Sdk="Microsoft.NET.Sdk">
@@ -31,7 +32,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 * Run `dotnet restore`.
 
-* Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win8-arm` to publish the application for windows and `dotnet publish -r ubuntu.16.04-arm` for ubuntu 16.04 running on raspberrypi.
+* Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win8-arm` to publish the application for windows and `dotnet publish -r ubuntu.16.04-arm` for ubuntu 16.04 running on Raspberry Pi.
 
 * Under `./bin/Debug/netcoreapp2.0/<runtime identifier>/publish` or `.\bin\Debug\netcoreapp2.0\<runtime identifier>\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
 
