@@ -30,6 +30,15 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 * Make sure you have a nuget.config file next to your csproj that includes the dotnet-core myget feed: `<add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />`.
 
+```
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />
+  </packageSources>
+</configuration>
+```
+
 * Run `dotnet restore`.
 
 * Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win8-arm` to publish the application for windows and `dotnet publish -r ubuntu.16.04-arm` for ubuntu 16.04 running on Raspberry Pi.
