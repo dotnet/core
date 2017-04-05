@@ -4,7 +4,7 @@
 
 .NET Core SDK 1.0.1, 2017/03/07
 * [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/2017/03/07/announcing-net-core-tools-1-0/)
-* [Release notes](1.0/1.0.4.md)
+* [Release notes](1.0/1.0.1-sdk-release-notes.md)
 * [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md)
 
 
