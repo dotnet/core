@@ -181,7 +181,7 @@ support and welcome contributions and collaborations in this direction.
 
 * There are high-quality ports for Linux, macOS and Windows.
 * There are high-quality ports for X64, X86, ARM32, and ARM64.
-* .NET ships stable releases multiple times a year.
+* .NET Core ships stable releases multiple times a year.
 * Contributions should be prioritized that align with these goals.
 
 ## Workloads
