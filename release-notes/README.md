@@ -25,7 +25,7 @@
 .NET Core 1.1.1
 
 * [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/2017/03/07/announcing-net-core-tools-1-0/)
-* [Release notes](1.0/1.0.4.md)
+* [Release notes](1.1/1.1.1.md)
 * [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.1.1-download.md)
 
 ### .NET Core Download Archive
