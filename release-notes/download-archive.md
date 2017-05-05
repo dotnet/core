@@ -36,4 +36,4 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
-| 2016/09/13/ | DotNetCore.1.0.1-VS2015Tools.Preview2.0.2.exe | [release notes](1.0/1.0.1-release-notes.md) |  [download](download-archives/1.0.1-preview2-download.md) |
+| 2016/09/13 | DotNetCore.1.0.1-VS2015Tools.Preview2.0.2.exe | [release notes](1.0/1.0.1-release-notes.md) |  [download](download-archives/1.0.1-preview2-download.md) |
