@@ -24,8 +24,10 @@ We shipped Visual Studio 2017 RTM with .NET Core 1.X support. [Please try VS 201
   full package IntelliSense in .csproj files and more. You can follow this work
   in the
   [dotnet/roslyn-project-system](https://github.com/dotnet/roslyn-project-system),
-  [dotnet/sdk](https://github.com/dotnet/sdk), and
-  [microsoft/msbuild](https://github.com/microsoft/msbuild) repos.
+  [dotnet/sdk](https://github.com/dotnet/sdk), 
+  [microsoft/msbuild](https://github.com/microsoft/msbuild), and 
+  [dotnet/cli](https://github.com/dotnet/cli) 
+  repos.
 
 * **Performance**. Continue to make the performance of building .NET Core
   applications faster, especially in the inner loop. This is the cycle of
@@ -77,7 +79,7 @@ to be an exhaustive list.
 * [C#/VB compiler](https://github.com/dotnet/roslyn)
 * [F# compiler](https://github.com/microsoft/visualfsharp)
 * [SDK](https://github.com/dotnet/sdk)
-* [CLI tools](https://github.com/dotnet/cli)
+* [CLI tools](https://github.com/dotnet/cli) / [CLI documentation](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
 * [NuGet](https://github.com/NuGet/Home)
 * [ASP.NET](https://github.com/aspnet)
 * [MSBuild](https://github.com/microsoft/msbuild)
@@ -86,14 +88,11 @@ to be an exhaustive list.
 This roadmap is intended to communicate project priorities for evolving and
 extending the scope of .NET Core.
 
-# Technology Roadmaps
+# Supported OS Versions
 
-Architecture:
+## .NET Core 2.0 - Supported OS Versions
 
-- [.NET Standard](https://github.com/dotnet/standard)
-- [.NET Core Tools/CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
-
-Version 2.0 minimum OS Support (Proposed):
+Proposal:
 
 OS                            |Version                        |Architectures  |Configurations|Notes
 ------------------------------|-------------------------------|---------------|--------------|-----
@@ -111,7 +110,15 @@ Mac OS X                      | 10.12+                        | x64           | 
 * [S] This is supported by Samsung.
 * [C] This is supported by the Community
 
-Version 1.0 OS Support:
+### Unsuported OS Versions
+
+List of (some) unsupported OS versions and their status:
+
+OS                            | Notes                        
+------------------------------|-------------------------|
+Arch Linux                    | Blocked on [missing OpenSSL 1.0 package](https://github.com/dotnet/corefx/issues/9855#issuecomment-298982251) in Arch Linux distro. Arch Linux community efforts tracked [here](https://bbs.archlinux.org/viewtopic.php?pid=1708479). |
+
+## .NET Core 1.0 - Supported OS Versions
 
 OS                            |Version                        |Architectures|Configurations|Notes
 ------------------------------|-------------------------------|-------------|--------------|-----
