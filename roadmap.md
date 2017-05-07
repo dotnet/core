@@ -105,19 +105,13 @@ Ubuntu                        | 14.04+                        | x64, arm32 [C]| 
 openSUSE                      | 42.2+                         | x64           |              |
 Tizen                         | 4+                            | arm32 [S]     |              | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
 Mac OS X                      | 10.12+                        | x64           |              |
+**In Progress OS's**          |                               |               |              |
+Arch Linux                    | [C] TBD                       | TBD           |              | Blocked on [missing OpenSSL 1.0 package](https://github.com/dotnet/corefx/issues/9855#issuecomment-298982251) in Arch Linux distro. Arch Linux community efforts tracked [here](https://bbs.archlinux.org/viewtopic.php?pid=1708479).
+FreeBSD & NetBSD              | [C] TBD                       | TBD           |              | Tracking [issue](https://github.com/dotnet/coreclr/issues/6115). Tracking [label](https://github.com/dotnet/coreclr/labels/os-freebsd). NetBSD packages for [.NET Core 1.0.0](https://github.com/dotnet/coreclr/issues/6115#issuecomment-233151220) |
 
 * Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support. Entries will be supported by Microsoft per the Microsoft support policy except where support is explicitly called out as coming from elsewhere.
 * [S] This is supported by Samsung.
 * [C] This is supported by the Community
-
-### Community-support OS Versions
-
-List of OS versions which are not officially supported, but have community port/support available or in progress:
-
-OS                            | Notes
-------------------------------|-------------------------|
-Arch Linux                    | Blocked on [missing OpenSSL 1.0 package](https://github.com/dotnet/corefx/issues/9855#issuecomment-298982251) in Arch Linux distro. Arch Linux community efforts tracked [here](https://bbs.archlinux.org/viewtopic.php?pid=1708479). |
-FreeBSD & NetBSD              | Tracking [issue](https://github.com/dotnet/coreclr/issues/6115). Tracking [label](https://github.com/dotnet/coreclr/labels/os-freebsd). NetBSD packages for [.NET Core 1.0.0](https://github.com/dotnet/coreclr/issues/6115#issuecomment-233151220) |
 
 ## .NET Core 1.0 - Supported OS Versions
 
