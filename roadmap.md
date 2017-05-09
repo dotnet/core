@@ -1,15 +1,12 @@
 # .NET Core Roadmap
 
-Our primary focus is to get the .NET Core 1.0 tooling to RTM quality for the
-Visual Studio 2017 RTM ([please try the 2017 RC update][vs2017-rc] we shipped
-with improvements in this area).
+We aim to continuously deliver updates to the .NET Core Runtime and Tools and our primary focus right now is on .NET Core 2.0. 
 
-However, we are also starting to think of the next version of the runtime.
-Because of this, if you follow our repositories you will start to see .NET Core
-2.0 versioning. While we are still in the process of planning the next release,
-there are some big themes you will identify in the early work on GitHub:
+We shipped Visual Studio 2017 RTM with .NET Core 1.X support. [Please try VS 2017][vs2017].
 
-[vs2017-rc]: https://blogs.msdn.microsoft.com/dotnet/2016/12/12/updating-visual-studio-2017-rc-net-core-tooling-improvements/
+[vs2017]: https://www.visualstudio.com/downloads/
+
+## Primary scenarios for .NET Core 2.0
 
 * **Lower the Barrier of Entry and Reach** .NET Standard 2.0 standardizes the
   shared APIs across .NET Framework, .NET Core and Xamarin making it easy to
@@ -27,8 +24,10 @@ there are some big themes you will identify in the early work on GitHub:
   full package IntelliSense in .csproj files and more. You can follow this work
   in the
   [dotnet/roslyn-project-system](https://github.com/dotnet/roslyn-project-system),
-  [dotnet/sdk](https://github.com/dotnet/sdk), and
-  [microsoft/msbuild](https://github.com/microsoft/msbuild) repos.
+  [dotnet/sdk](https://github.com/dotnet/sdk), 
+  [microsoft/msbuild](https://github.com/microsoft/msbuild), and 
+  [dotnet/cli](https://github.com/dotnet/cli) 
+  repos.
 
 * **Performance**. Continue to make the performance of building .NET Core
   applications faster, especially in the inner loop. This is the cycle of
@@ -55,9 +54,6 @@ As mentioned above these are just some of the early big themes we are going to
 invest in, we will also continue to invest in ASP.NET, Entity Framework,
 Languages and many other parts of .NET.
 
-After we ship VS 2017 RTM you will hear more from us on the next version of .NET
-Core, and as always let us know what is important to you.
-
 ## Ship Dates
 
 | Milestone                 | Release Date |
@@ -83,7 +79,7 @@ to be an exhaustive list.
 * [C#/VB compiler](https://github.com/dotnet/roslyn)
 * [F# compiler](https://github.com/microsoft/visualfsharp)
 * [SDK](https://github.com/dotnet/sdk)
-* [CLI tools](https://github.com/dotnet/cli)
+* [CLI tools](https://github.com/dotnet/cli) / [CLI documentation](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
 * [NuGet](https://github.com/NuGet/Home)
 * [ASP.NET](https://github.com/aspnet)
 * [MSBuild](https://github.com/microsoft/msbuild)
@@ -92,14 +88,32 @@ to be an exhaustive list.
 This roadmap is intended to communicate project priorities for evolving and
 extending the scope of .NET Core.
 
-# Technology Roadmaps
+# Supported OS Versions
 
-Architecture:
+## .NET Core 2.0 - Supported OS Versions
 
-- [.NET Standard](https://github.com/dotnet/standard)
-- [.NET Core Tools/CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
+Proposal:
 
-Version 1.0 OS Support:
+OS                            |Version                        |Architectures  |Configurations|Notes
+------------------------------|-------------------------------|---------------|--------------|-----
+Windows Client                | 7 SP1+                        | x64, x86      |              |
+Windows Server                | 2008 R2 SP1+                  | x64, x86      | Full, Server Core, Nano |
+Red Hat Enterprise Linux      | 7.3+                          | x64           |              | This includes Centos and Oracle Linux
+Fedora                        | 25+                           | x64           |              |
+Debian                        | 8.7+                          | x64           |              |
+Ubuntu                        | 14.04+                        | x64, arm32 [C]|              | This includes Linux Mint 17 for x64
+openSUSE                      | 42.2+                         | x64           |              |
+Tizen                         | 4+                            | arm32 [S]     |              | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
+Mac OS X                      | 10.12+                        | x64           |              |
+**In Progress OS's**          |                               |               |              |
+Arch Linux                    | [C] TBD                       | TBD           |              | Blocked on [missing OpenSSL 1.0 package](https://github.com/dotnet/corefx/issues/9855#issuecomment-298982251) in distro. <br/> Arch Linux community efforts tracked [here](https://bbs.archlinux.org/viewtopic.php?pid=1708479).
+FreeBSD & NetBSD              | [C] TBD                       | TBD           |              | Tracking [issue](https://github.com/dotnet/coreclr/issues/6115). <br/> Tracking [label](https://github.com/dotnet/coreclr/labels/os-freebsd). <br/> NetBSD packages for [.NET Core 1.0.0](https://github.com/dotnet/coreclr/issues/6115#issuecomment-233151220) |
+
+* Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support. Entries will be supported by Microsoft per the Microsoft support policy except where support is explicitly called out as coming from elsewhere.
+* [S] This is supported by Samsung.
+* [C] This is supported by the Community
+
+## .NET Core 1.0 - Supported OS Versions
 
 OS                            |Version                        |Architectures|Configurations|Notes
 ------------------------------|-------------------------------|-------------|--------------|-----
@@ -169,7 +183,7 @@ support and welcome contributions and collaborations in this direction.
 
 * There are high-quality ports for Linux, macOS and Windows.
 * There are high-quality ports for X64, X86, ARM32, and ARM64.
-* .NET ships stable releases multiple times a year.
+* .NET Core ships stable releases multiple times a year.
 * Contributions should be prioritized that align with these goals.
 
 ## Workloads
