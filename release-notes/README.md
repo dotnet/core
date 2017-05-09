@@ -2,6 +2,11 @@
 
 ### .NET Core SDK
 
+.NET Core SDK 1.0.4, 2017/05/09
+
+* [Release notes](https://github.com/dotnet/cli/releases/tag/v1.0.4)
+* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-sdk-download.md)
+
 .NET Core SDK 1.0.3, 2017/04/13
 
 * [Release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3)
@@ -15,6 +20,22 @@
 
 
 ### .NET Core Runtime
+
+.NET Core 1.0.5
+
+* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/)
+* [Release notes](1.0/1.0.5.md)
+* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.5-download.md)
+
+.NET Core 1.1.2
+
+* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/)
+* [Release notes](1.1/1.1.2.md)
+* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.1.2-download.md)
+
+### .NET Core Download Archive
+
+Release notes and download links to previous releases can be found in the [.NET Core Downloads Archive](download-archive.md).
 
 .NET Core 1.0.4
 
@@ -31,3 +52,4 @@
 ### .NET Core Download Archive
 
 Release notes and download links to previous releases can be found in the [.NET Core Downloads Archive](download-archive.md).
+
