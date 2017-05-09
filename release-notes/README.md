@@ -4,7 +4,7 @@
 
 .NET Core SDK 1.0.4, 2017/05/09
 
-* [Release notes](https://github.com/dotnet/cli/releases/tag/v1.0.4)
+* [Release notes](1.0/1.0.4-sdk.md)
 * [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-sdk-download.md)
 
 .NET Core SDK 1.0.3, 2017/04/13
