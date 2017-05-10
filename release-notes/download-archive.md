@@ -8,6 +8,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2017/05/09 | 1.0.5 with SDK 1.0.4     | [release notes](1.0/1.0.5.md) | [download](download-archives/1.0.5-download.md) |
 | 2017/04/13 | 1.0.4 with SDK 1.0.3     | [release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3) | [download](download-archives/1.0.3-sdk-download.md) |
 | 2017/03/07 | 1.0.4 with SDK 1.0.1     | [release notes](1.0/1.0.4.md) | [download](download-archives/1.0.4-download.md) |
 | 2017/02/07 | 1.0.3 with SDK RC4 build 004771     | [release notes](1.0/1.0.3-SDK-RC4.md) | [download](download-archives/rc4-download.md) |
@@ -25,12 +26,19 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2017/05/09 | 1.1.2 with SDK 1.0.4     | [release notes](1.1/1.1.2.md) | [download](download-archives/1.1.2-download.md) |
 | 2017/04/13 | 1.1.1 with SDK 1.0.3     | [release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3) | [download](download-archives/1.0.3-sdk-download.md) |
 | 2017/03/07 | 1.1.1 with SDK 1.0.1     | [release notes](1.1/1.1.1.md) | [download](download-archives/1.1.1-download.md) |
 | 2017/02/07 | 1.1 with SDK RC4 build 004771       | - | [download](download-archives/rc4-download.md) |
 | 2017/01/27 | 1.1 with SDK RC3 build 004530       | - | [download](download-archives/rc3-download.md) |
 | 2016/11/16 | 1.1 with SDK Preview 2.1 build 3177 | [release notes](1.1/1.1.md) | [download](download-archives/1.1-preview2.1-download.md) |
 | 2016/10/24 | 1.1 Preview 1 with SDK Preview 2.1 build 3155 | [release notes](1.1/1.1.0-preview1.md) | [download](download-archives/preview-download.md) |
+
+### .NET Core 2.0
+
+| Release Date | Description | Release Notes | |
+| :-- | :-- | :--: | :--: |
+| 2017/05/10 | 2.0.0-Preview1 with SDK 2.0.0-Preview1 | [release notes](2.0/2.0.0-preview1.md) | [download](download-archives/2.0.0-preview1-download.md) |
 
 ### .NET Core Tools for Visual Studio 2015
 
