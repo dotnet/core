@@ -58,8 +58,8 @@ Languages and many other parts of .NET.
 
 | Milestone                 | Release Date |
 |---------------------------|--------------|
-| .NET Core 2.0 Preview     | [2017/5/10](https://github.com/dotnet/core/issues/640) |
-| .NET Standard 2.0 Preview | [2017/5/10](https://github.com/dotnet/core/issues/640) |
+| .NET Core 2.0 Preview     | [Released on 2017/5/10](https://github.com/dotnet/core/issues/640) |
+| .NET Standard 2.0 Preview | [Released on 2017/5/10](https://github.com/dotnet/core/issues/640) |
 | .NET Core 2.0             | Q3 2017      |
 | .NET Standard 2.0         | Q3 2017      |
 
