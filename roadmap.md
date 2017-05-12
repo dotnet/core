@@ -62,6 +62,7 @@ Languages and many other parts of .NET.
 | .NET Standard 2.0 Preview | [Released on 2017/5/10](https://github.com/dotnet/core/issues/640) |
 | .NET Core 2.0             | Q3 2017      |
 | .NET Standard 2.0         | Q3 2017      |
+| .NET Core 2.1 (.NET Standard 2.0 for UWP) | [Win10 Fall's Creator Update](https://www.windowslatest.com/2017/05/11/new-timeline-feature-windows-10-falls-creator-update-announced/) |
 
 # Components
 
