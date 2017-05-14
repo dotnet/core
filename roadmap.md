@@ -102,7 +102,7 @@ Windows Server                | 2008 R2 SP1+                  | x64, x86      | 
 Windows IoT                   | 10+                           | [C] arm32     | IoT Core - see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
 Red Hat Enterprise Linux      | 7.3+                          | x64           | This includes Centos and Oracle Linux
 Fedora                        | 25+                           | x64           | 
-Debian                        | 8.7+                          | x64           | 
+Debian                        | 8.7+                          | x64           | [Debian 9 (Stretch) workaround](https://github.com/dotnet/corefx/issues/8951#issuecomment-299927277)
 Ubuntu                        | 14.04+                        | x64, [C] arm32 | This includes Linux Mint 17 for x64 <br/> For arm32, see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
 openSUSE                      | 42.2+                         | x64           | 
 Tizen                         | 4+                            | [S] arm32     | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
