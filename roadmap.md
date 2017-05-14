@@ -95,20 +95,21 @@ extending the scope of .NET Core.
 
 Proposal:
 
-OS                            |Version                        |Architectures  |Configurations|Notes
-------------------------------|-------------------------------|---------------|--------------|-----
-Windows Client                | 7 SP1+                        | x64, x86      |              |
-Windows Server                | 2008 R2 SP1+                  | x64, x86      | Full, Server Core, Nano |
-Red Hat Enterprise Linux      | 7.3+                          | x64           |              | This includes Centos and Oracle Linux
-Fedora                        | 25+                           | x64           |              |
-Debian                        | 8.7+                          | x64           |              |
-Ubuntu                        | 14.04+                        | x64, arm32 [C]|              | This includes Linux Mint 17 for x64
-openSUSE                      | 42.2+                         | x64           |              |
-Tizen                         | 4+                            | arm32 [S]     |              | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
-Mac OS X                      | 10.12+                        | x64           |              |
-**In Progress OS's**          |                               |               |              |
-Arch Linux                    | [C] TBD                       | TBD           |              | Blocked on [missing OpenSSL 1.0 package](https://github.com/dotnet/corefx/issues/9855#issuecomment-298982251) in distro. <br/> Arch Linux community efforts tracked [here](https://bbs.archlinux.org/viewtopic.php?pid=1708479).
-FreeBSD & NetBSD              | [C] TBD                       | TBD           |              | Tracking [issue](https://github.com/dotnet/coreclr/issues/6115). <br/> Tracking [label](https://github.com/dotnet/coreclr/labels/os-freebsd). <br/> NetBSD packages for [.NET Core 1.0.0](https://github.com/dotnet/coreclr/issues/6115#issuecomment-233151220) |
+OS                            |Version                        |Architectures  |Notes
+------------------------------|-------------------------------|---------------|-----
+Windows Client                | 7 SP1+                        | x64, x86      |
+Windows Server                | 2008 R2 SP1+                  | x64, x86      | Configurations: Full, Server Core, Nano
+Windows IoT                   | 10                            | [C] arm32     | IoT Core - see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
+Red Hat Enterprise Linux      | 7.3+                          | x64           | This includes Centos and Oracle Linux
+Fedora                        | 25+                           | x64           | 
+Debian                        | 8.7+                          | x64           | 
+Ubuntu                        | 14.04+                        | x64, [C] arm32 | This includes Linux Mint 17 for x64 <br/> For arm32, see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
+openSUSE                      | 42.2+                         | x64           | 
+Tizen                         | 4+                            | [S] arm32     | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
+Mac OS X                      | 10.12+                        | x64           | 
+**In Progress OS's**          |                               |               | 
+Arch Linux                    | [C] TBD                       | TBD           | Blocked on [missing OpenSSL 1.0 package](https://github.com/dotnet/corefx/issues/9855#issuecomment-298982251) in distro. <br/> Arch Linux community efforts tracked [here](https://bbs.archlinux.org/viewtopic.php?pid=1708479).
+FreeBSD & NetBSD              | [C] TBD                       | TBD           | Tracking [main issue](https://github.com/dotnet/coreclr/issues/6115) and [label](https://github.com/dotnet/coreclr/labels/os-freebsd). <br/> NetBSD packages for [.NET Core 1.0.0](https://github.com/dotnet/coreclr/issues/6115#issuecomment-233151220) |
 
 * Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support. Entries will be supported by Microsoft per the Microsoft support policy except where support is explicitly called out as coming from elsewhere.
 * [S] This is supported by Samsung.
