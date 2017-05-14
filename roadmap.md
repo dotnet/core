@@ -99,7 +99,7 @@ OS                            |Version                        |Architectures  |N
 ------------------------------|-------------------------------|---------------|-----
 Windows Client                | 7 SP1+                        | x64, x86      |
 Windows Server                | 2008 R2 SP1+                  | x64, x86      | Configurations: Full, Server Core, Nano
-Windows IoT                   | 10                            | [C] arm32     | IoT Core - see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
+Windows IoT                   | 10+                           | [C] arm32     | IoT Core - see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
 Red Hat Enterprise Linux      | 7.3+                          | x64           | This includes Centos and Oracle Linux
 Fedora                        | 25+                           | x64           | 
 Debian                        | 8.7+                          | x64           | 
