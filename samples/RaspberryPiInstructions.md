@@ -46,7 +46,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 ## Getting the app to run on the Pi.
 
-### Linux (Ubuntu)
+### Linux
 
 * Install [Linux](https://www.raspberrypi.org/downloads/) on your Pi.
 
