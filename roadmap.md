@@ -65,6 +65,8 @@ Languages and many other parts of .NET.
 | UWP 6.0 (implements .NET Standard 2.0) | Q4 2017 ([Win10 Fall Creators Update](https://www.microsoft.com/en-us/windows/upcoming-features)) |
 | .NET Core 2.1 | Q4 2017 (after UWP 6.0) |
 
+Details on sub-milestones are also captured in milestone details of our repos, e.g. [CoreFX milestones](https://github.com/dotnet/corefx/milestones)
+
 # Components
 
 .NET Core is a general purpose, modular, cross-platform and open source
