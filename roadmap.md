@@ -8,7 +8,7 @@ We shipped Visual Studio 2017 RTM with .NET Core 1.X support. [Please try VS 201
 
 ## Primary scenarios for .NET Core 2.0
 
-* **Lower the Barrier of Entry and Reach** .NET Standard 2.0 standardizes the
+* **Lower the Barrier of Entry, and Reach** .NET Standard 2.0 standardizes the
   shared APIs across .NET Framework, .NET Core and Xamarin making it easy to
   share code across all of .NET. .NET Core gain over 5,000 APIs from .NET
   Framework as part of this work making it a broader platform. Simplifying how a
