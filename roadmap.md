@@ -170,7 +170,7 @@ Contribution goals:
 The .NET Core maintainers have taken a liberal approach to contributions since
 the outset of the .NET Core open source project and have taken changes outside
 of the published
-[priorities](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/project-priorities.md).
+[priorities](https://github.com/dotnet/coreclr/blob/release/2.0.0/Documentation/project-docs/project-priorities.md).
 
 # Microsoft Distro
 
