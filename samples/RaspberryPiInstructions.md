@@ -61,7 +61,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 * Copy your app to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi
 
 
-### MVC Web Applications Instructions
+## Getting a MVC application run on the Pi 
 
 * Create a new MVC app with the latest SDK and via the command line: dotnet new mvc on a windows laptop/pc
 * Change the cproj file with the following:
