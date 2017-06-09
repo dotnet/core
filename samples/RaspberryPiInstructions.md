@@ -59,3 +59,35 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 * Install [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot/GetStarted) on your Pi.
 
 * Copy your app to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi
+
+
+### MVC Web Applications Instructions
+
+* Create a new MVC app with the latest SDK and via the command line: dotnet new mvc on a windows laptop/pc
+* Change the cproj file with the following:
+`<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+  <RuntimeIdentifiers>win-arm;linux-arm</RuntimeIdentifiers>
+    <UserSecretsId>aspnet-test6-1765DAD7-51F4-4572-8443-7F7BD9581173</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-25159" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0-preview2-25159" />
+  </ItemGroup>
+
+</Project>`
+
+* run `dotnet restore`
+* run `dotnet publish -r linux-arm`
+* copy the output in the pubished folder (bin\Debug\netcoreapp2.0\linux-arm\publish) to a folder on your raspberry pi (in my case raspbian)
+* go to the folder by ssh and run: `sudo ./yourprojectname`
+
+Tada! A working MVC application on your raspberry pi!
+
