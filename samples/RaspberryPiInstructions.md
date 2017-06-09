@@ -88,8 +88,8 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 * run `dotnet restore`
 * run `dotnet publish -r linux-arm`
-* copy the output in the pubished folder (bin\Debug\netcoreapp2.0\linux-arm\publish) to a folder on your raspberry pi (in my case raspbian)
-* go to the folder by ssh and run: `sudo ./yourprojectname`
+* copy the output in the pubished folder (bin\Debug\netcoreapp2.0\linux-arm\publish) to a folder on your raspberry pi (in my case running Raspbian Jessie)
+* go to the folder (with ssh) and run: `sudo ./yourprojectname`
 
 Tada! A working MVC application on your raspberry pi!
 
