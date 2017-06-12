@@ -60,6 +60,7 @@ Languages and many other parts of .NET.
 |---------------------------|--------------|
 | .NET Core 2.0 Preview     | [Released on 2017/5/10](https://github.com/dotnet/core/issues/640) |
 | .NET Standard 2.0 Preview | [Released on 2017/5/10](https://github.com/dotnet/core/issues/640) |
+| .NET Core 2.0 Preview 2   | ET: End of June |
 | .NET Core 2.0             | Q3 2017      |
 | .NET Standard 2.0         | Q3 2017      |
 | UWP 6.0 (implements .NET Standard 2.0) | Q4 2017 ([Win10 Fall Creators Update](https://www.microsoft.com/en-us/windows/upcoming-features)) |
