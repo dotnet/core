@@ -59,8 +59,7 @@ For ARM and more details you can take a look at [RaspberryPiInstructions](Raspbe
 Package `bin/Debug/netcoreapp2.0/<runtime identifier>/publish` to your image.
 That directory has the native executable binary as well as all needed runtime dependencies. 
 
-Getting standalone app has no steps specific to Yocto.
-
+After following these steps to configure Yocto, .NET Core applications should run just like they do on other supported Linux distros.
 
 
 
