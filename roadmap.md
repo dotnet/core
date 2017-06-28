@@ -23,7 +23,7 @@ We shipped Visual Studio 2017 RTM with .NET Core 1.X support. [Please try VS 201
   version to target, to change the version of .NET Core for existing projects,
   full package IntelliSense in .csproj files and more. You can follow this work
   in the
-  [dotnet/roslyn-project-system](https://github.com/dotnet/roslyn-project-system),
+  [dotnet/project-system](https://github.com/dotnet/project-system),
   [dotnet/sdk](https://github.com/dotnet/sdk), 
   [microsoft/msbuild](https://github.com/microsoft/msbuild), and 
   [dotnet/cli](https://github.com/dotnet/cli) 
