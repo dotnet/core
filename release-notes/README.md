@@ -2,6 +2,11 @@
 
 ### .NET Core SDK
 
+.NET Core SDK 2.0.0-Preview2 2017/06/28
+
+* [Release notes](2.0/2.0.0-preview2.md)
+* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-preview2-download.md)
+
 .NET Core SDK 2.0.0-Preview1 2017/05/10
 
 * [Release notes](2.0/2.0.0-preview1.md)
@@ -23,8 +28,13 @@
 * [Release notes](1.0/1.0.1-sdk-release-notes.md)
 * [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md)
 
-
 ### .NET Core Runtime
+
+.NET Core 2.0.0-Preview1
+
+* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/)
+* [Release notes](2.0/2.0.0-preview1.md)
+* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-preview1-download.md)
 
 .NET Core 1.0.5
 
@@ -37,16 +47,6 @@
 * [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/)
 * [Release notes](1.1/1.1.2.md)
 * [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.1.2-download.md)
-
-.NET Core 2.0.0-Preview1
-
-* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/)
-* [Release notes](2.0/2.0.0-preview1.md)
-* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-preview1-download.md)
-
-### .NET Core Download Archive
-
-Release notes and download links to previous releases can be found in the [.NET Core Downloads Archive](download-archive.md).
 
 .NET Core 1.0.4
 
