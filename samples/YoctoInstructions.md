@@ -7,7 +7,7 @@ Unless explicitly mentioned, x86_64 and ARM platforms are supported.
 ## Getting started with base OS image
 Instructions below assume familiarity with Yocto build process. 
 Initial testing as been done on 2.2 Morty but it is probably applicable to 
-other versions as well. 
+other versions as well. .NET Core 2.0 Preview2 or later should be used.  
 
 add the following lines your local.conf or custom recipe.
 
