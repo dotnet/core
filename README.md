@@ -30,12 +30,12 @@ The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/
 ## Download .NET Core
 
 - [Released builds](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
-- [_latest_ .NET Core SDK](https://github.com/dotnet/cli/blob/master/README.md)
-- [_latest_ .NET Core Runtime](https://github.com/dotnet/core-setup/blob/master/README.md)
+- [_latest_ .NET Core SDK](https://github.com/dotnet/cli/blob/master/README.md#installers-and-binaries)
+- [_latest_ .NET Core Runtime](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)
 
 ## .NET Foundation
 
-The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundation.org/projects).
+The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundation.org).
 
 ## Licenses
 
