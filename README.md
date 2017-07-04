@@ -20,7 +20,7 @@ If you're new to .NET Core, you can get started in 10 minutes:
 
 - [File a general .NET Core issue](https://github.com/dotnet/core/issues)
 - [File a more specific issue](Documentation/core-repos.md)
-- [Ask on StackOverflow](https://stackoverflow.com/questions/ask)
+- [Ask on Stack Overflow](https://stackoverflow.com/questions/ask)
 - [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
 ## How to Engage, Contribute and Provide Feedback
@@ -30,8 +30,8 @@ The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/
 ## Download .NET Core
 
 - [Released builds](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
-- [_latest_ .NET Core SDK](https://github.com/dotnet/cli/blob/master/README.md#installers-and-binaries)
-- [_latest_ .NET Core Runtime](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)
+- [.NET Core SDK daily build](https://github.com/dotnet/cli/blob/master/README.md#installers-and-binaries)
+- [.NET Core Runtime daily build](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)
 
 ## .NET Foundation
 
