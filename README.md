@@ -11,8 +11,7 @@ If you're new to .NET Core, you can get started in 10 minutes:
 
 ## Learn about .NET Core 
 
-- [Learn about .NET Core]
-(https://docs.microsoft.com/dotnet/core)
+- [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
 - [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
 - [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
 - [Learn how about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
