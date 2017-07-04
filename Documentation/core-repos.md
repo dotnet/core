@@ -6,7 +6,7 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 
 * [dotnet/cli](https://github.com/dotnet/cli) - .NET Core CLI tools
 * [dotnet/corefx](https://github.com/dotnet/corefx) - .NET Core framework APIs
-* [dotnet/coreclr](https://github.com/dotnet/coreclr) - .NET Core Runtime
+* [dotnet/coreclr](https://github.com/dotnet/coreclr) - .NET Core runtime
 * [dotnet/docs](https://github.com/dotnet/docs) - .NET documentation
 * [dotnet/sdk](https://github.com/dotnet/sdk) - .NET Core SDK (used by Visual Studio and CLI)
 
@@ -16,14 +16,15 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 
 ## Languages
 
-* [dotnet/roslyn](https://github.com/dotnet/roslyn) - Roslyn and C# questions
-* [dotnet/netcorecli-fsc](https://github.com/dotnet/netcorecli-fsc) - F# questions and
+* [dotnet/roslyn](https://github.com/dotnet/roslyn) - Roslyn and C#
+* [dotnet/csharplang](https://github.com/dotnet/csharplang)
+* [dotnet/netcorecli-fsc](https://github.com/dotnet/netcorecli-fsc) - F# integration into .NET CLI
 
 ## NuGet
 
-* [nuget/home](https://github.com/nuget/home) - NuGet questions and
+* [nuget/home](https://github.com/nuget/home) - NuGet client
 
 ## ASP.NET Core
 
-* [aspnet/home](https://github.com/aspnet/home) - ASP.NET Core questions and.
+* [aspnet/home](https://github.com/aspnet/home) - ASP.NET Core framework
 * [aspnet/Docs](https://github.com/aspnet/Docs) - ASP.NET and ASP.NET Core documentation

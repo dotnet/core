@@ -1,6 +1,6 @@
 ﻿# .NET Core Home
 
-The dotnet/core repository a good starting point for .NET Core. 
+The dotnet/core repository is a good starting point for .NET Core. 
 
 ## Get Started
 
