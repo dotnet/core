@@ -9,6 +9,7 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 * [dotnet/coreclr](https://github.com/dotnet/coreclr) - .NET Core runtime
 * [dotnet/docs](https://github.com/dotnet/docs) - .NET documentation
 * [dotnet/sdk](https://github.com/dotnet/sdk) - .NET Core SDK (used by Visual Studio and CLI)
+* [dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker) - .NET Core Docker images
 
 ## .NET Standard
 
@@ -17,7 +18,8 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 ## Languages
 
 * [dotnet/roslyn](https://github.com/dotnet/roslyn) - Roslyn and C#
-* [dotnet/csharplang](https://github.com/dotnet/csharplang)
+* [dotnet/csharplang](https://github.com/dotnet/csharplang) - C# spec
+* [dotnet/vblang](https://github.com/dotnet/vblang) - VB spec
 * [dotnet/netcorecli-fsc](https://github.com/dotnet/netcorecli-fsc) - F# integration into .NET CLI
 
 ## NuGet
@@ -28,3 +30,10 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 
 * [aspnet/home](https://github.com/aspnet/home) - ASP.NET Core framework
 * [aspnet/Docs](https://github.com/aspnet/Docs) - ASP.NET and ASP.NET Core documentation
+
+## WCF
+* [dotnet/wcf](https://github.com/dotnet/sdk) - WCF
+
+## .NET Framework
+* [microsoft/dotnet](https://github.com/microsoft/dotnet) -- catch-all repository for .NET (where most .NET Framework issues are filed)
+* [microsoft/dotnet-framework-docker](https://github.com/microsoft/dotnet-framework-docker) - .NET Core Docker images
