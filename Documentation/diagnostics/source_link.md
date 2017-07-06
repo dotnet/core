@@ -122,7 +122,8 @@ In this example:
 ## Tooling
 - [Visual Studio 2017](https://www.visualstudio.com/downloads/)
     - First debugger to support Source Link.
-    - Only supports Source Link from the [Portable PDB](https://github.com/dotnet/core/blob/master/Documentation/diagnostics/portable_pdb.md) format.
+    - Supports Source Link in [Portable PDBs](https://github.com/dotnet/core/blob/master/Documentation/diagnostics/portable_pdb.md) -- default PDB format for .NET Core projects.
+    - VS 2017 Update 3 supports Source Link in Windows PDBs -- default PDB format for .NET Framework projects.
     - The current implementation uses a case insensitive string comparison between the file path and the Source Link entry. Using multiple entries that differ only in casing is not supported; the first entry will be used and the second entry that differs only by case will be ignored. Here is an example of an unsupported Source Link JSON:
         ```json
         {
