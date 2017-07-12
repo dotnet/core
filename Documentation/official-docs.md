@@ -4,12 +4,10 @@ Microsoft maintains official documentation for .NET, listed below. Both .NET Cor
 
 ## .NET Core
 
-- [Conceptual docs](https://docs.microsoft.com/dotnet/articles/core/)
-- [API docs](https://docs.microsoft.com/dotnet/core/api/)
+- [Conceptual docs](https://docs.microsoft.com/dotnet/core/)
+- [API docs](https://docs.microsoft.com/dotnet/api/)
 
 ## .NET Framework
 
-- [Conceptual docs](https://msdn.microsoft.com/library/w0x726c2.aspx)
-- [API docs](https://msdn.microsoft.com/library/mt472912.aspx)
-
-Note: .NET Framework docs will be moving to docs.microsoft.com in 2017.
+- [Conceptual docs](https://docs.microsoft.com/dotnet/framework/)
+- [API docs](https://docs.microsoft.com/dotnet/api/)
