@@ -1,9 +1,11 @@
 # .NET Core on Raspberry Pi
 
-Arm32 support for .NET Core is still being brought up, but there are now daily runtime builds that are ready to use. 
-There is no SDK that runs on ARM32 yet, but you can publish an application that will run on a Raspberry Pi. 
+Arm32 build are available as community supported builds for .NET Core 2.0. 
+There is no SDK that runs on ARM32 but you can publish an application that will run on a Raspberry Pi. 
 
 These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
+
+Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instructions not available on Pi Zero.
 
 ## Creating an app:
 
@@ -12,7 +14,7 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
 * From the terminal/commandline create a folder named `helloworld` and go into it.
 * Run `dotnet new console`
-* You can find `helloworld.csproj` file is created under current directory.
+* You can find a `helloworld.csproj` file is created under current directory.
 
 ```
 <Project Sdk="Microsoft.NET.Sdk">
@@ -20,7 +22,6 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RuntimeIdentifiers>win-arm;linux-arm</RuntimeIdentifiers>
   </PropertyGroup>
 
 </Project>
@@ -36,8 +37,6 @@ These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
   </packageSources>
 </configuration>
 ```
-
-* Run `dotnet restore`.
 
 * Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win-arm` to publish the application for windows and `dotnet publish -r linux-arm` for Linux running on Raspberry Pi.
 
