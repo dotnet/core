@@ -1,6 +1,17 @@
 # What you can expect from Maintainers
 
-The .NET Core maintainer team aims to support a productive and safe working environment for everyone participating in .NET repositories. You can expect maintainers to do three things to that end: respect your contributions make engagement efficient and report potential .NET Foundation Code of Conduct violations. These three actions are defined below.
+The .NET Core maintainer team aims to support a productive and safe working environment for everyone participating in .NET repositories. You can expect maintainers to do three things to that end: respect your contributions, make engagement efficient, and report potential .NET Foundation Code of Conduct violations.
+
+The following two lists summarize how maintainers will act. A more detailed description follows this summary.
+
+**Maintainers will**
+- Encourage your contributions and participation and provide clear and direct feedback, including when your contributions are not accepted.
+- Close issues and PRs as a means of making repos more efficient to use for everyone. They can be re-opened, as needed.
+- Edit comments for formatting [if and only if (iff)](https://en.wikipedia.org/wiki/If_and_only_if) the edit adds substantially to the readability or usability of the comment. No changes will be made to spelling, wording, meaning, or emphasis.
+- Report abusive behavior to the [Code of Conduct review group](mailto:conduct@dotnetfoundation.org).
+
+**Maintainers won't**
+- Edit contributor comments as a general rule. GitHub comments don't provide edit history and therefore don't offer maintainers a transparent and accurate way to describe changes made to contributor comments. Transparency is a cornerstone of effective discourse and its absence undermines trust.
 
 ## Respect your Contributions
 
@@ -31,14 +42,3 @@ All .NET repositories have adopted a code of conduct, either the [.NET Foundatio
 Maintainers will report potential code of conduct violations they observe to the appropriate code of conduct review group at either conduct@dotnetfoundation.org (for [dotnet org](https://github.com/dotnet) and [aspnet org](https://github.com/aspnet)) or opencode@microsoft.com (for [microsoft org](https://github.com/microsoft)). You are encouraged to report concerns via these same email addresses. Don't worry which one you use (or both); the concern will end up in the right place.
 
 The Code of Conduct team will delete comments that are considered code of conduct violations. Maintainers will unilaterally delete comments that are objectively severe violations of the code of conduct and submit the original comment to the Code of Conduct team after-the-fact for review.
-
-## Summary of Maintainer Code
-
-**Maintainers will**
-- Encourage your contributions and participation and provide clear and direct feedback, including when your contributions are not accepted.
-- Close issues and PRs as a means of making repos more efficient to use for everyone. They can be re-opened, as needed.
-- Edit comments for formatting [if and only if (iff)](https://en.wikipedia.org/wiki/If_and_only_if) the edit adds substantially to the readability or usability of the comment. No changes will be made to spelling, wording, meaning, or emphasis.
-- Report abusive behavior to the [Code of Conduct review group](mailto:conduct@dotnetfoundation.org).
-
-**Maintainers won't**
-- Edit contributor comments as a general rule. GitHub comments don't provide edit history and therefore don't offer maintainers a transparent and accurate way to describe changes made to contributor comments. Transparency is a cornerstone of effective discourse and its absence undermines trust.
