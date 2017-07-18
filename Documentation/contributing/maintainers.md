@@ -37,6 +37,6 @@ Maintainers may make the following changes to contributor comments:
 
 ## Reporting Code of Conduct Violations
 
-All .NET Foundation repositories have adopted the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct). Maintainers will report potential code of conduct violations they observe to the [.NET Foundation Code of Conduct Review Group](https://github.com/dotnet).
+All .NET Foundation repositories have adopted the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct). Maintainers will report potential code of conduct violations they observe to the [.NET Foundation Code of Conduct Review Group](mailto:conduct@dotnetfoundation.org).
 
 The Code of Conduct team will delete comments that are considered code of conduct violations. Maintainers will unilaterally delete comments that are objectively severe violations of the code of conduct and submit the original comment to the Code of Conduct team after-the-fact for review.
