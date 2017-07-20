@@ -11,5 +11,5 @@ Servicing branches are for new patch versions of .NET Core that have not yet bee
 
 ## .NET Core 1.0
 
-* [.NET Core SDK 1.0](https://github.com/dotnet/cli/blob/rel/1.0.1/README.md)
+* [.NET Core SDK 1.0](https://github.com/dotnet/cli/blob/rel/1.0.1/README.md#installers-and-binaries)
 * [.NET Core Runtime 1.0](https://github.com/dotnet/core-setup/blob/release/1.0.0/README.md#latest-versions)
