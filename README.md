@@ -2,36 +2,33 @@
 
 The dotnet/core repository is a good starting point for .NET Core. 
 
-## Get Started
-
-If you're new to .NET Core, you can get started in 10 minutes: 
-
-- [Get started with .NET Core](https://www.microsoft.com/net/core)
-- [Download .NET Core](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
-
 ## Learn about .NET Core 
 
-- [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
-- [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
-- [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
-- [Learn how about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
+* [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
+* [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
+* [Learn how about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
+
+## Download .NET Core
+
+* [Released builds](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
+* [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
+* .NET Core 2.0 daily builds: 
+  * [.NET Core SDK 2.0 preview3](https://github.com/dotnet/cli/blob/release/2.0.0/README.md#installers-and-binaries)
+  * [.NET Core Runtime 2.0 preview3](https://github.com/dotnet/core-setup/blob/release/2.0.0/README.md#officially-released-builds)
+* .NET Core 2.1 daily builds:
+  * [.NET Core SDK 2.1 preview1](https://github.com/dotnet/cli/blob/master/README.md#installers-and-binaries)
+  * [.NET Core Runtime 2.1 preview1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)
 
 ## Getting help
 
-- [File a general .NET Core issue](https://github.com/dotnet/core/issues)
-- [File a more specific issue](Documentation/core-repos.md)
-- [Ask on Stack Overflow](https://stackoverflow.com/questions/ask)
-- [Contact Microsoft Support](https://support.microsoft.com/contactus/)
+* [File a general .NET Core issue](https://github.com/dotnet/core/issues)
+* [File a more specific issue](Documentation/core-repos.md)
+* [Ask on Stack Overflow](https://stackoverflow.com/questions/ask)
+* [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
 ## How to Engage, Contribute and Provide Feedback
 
 The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
-
-## Download .NET Core
-
-- [Released builds](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
-- [.NET Core SDK daily build](https://github.com/dotnet/cli/blob/master/README.md#installers-and-binaries)
-- [.NET Core Runtime daily build](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)
 
 ## .NET Foundation
 
