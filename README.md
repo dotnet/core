@@ -1,8 +1,8 @@
 ﻿# .NET Core Home
 
-The dotnet/core repository is a good starting point for .NET Core. 
+The dotnet/core repository is a good starting point for .NET Core.
 
-## Learn about .NET Core 
+## Learn about .NET Core
 
 * [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
 * [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
@@ -12,12 +12,8 @@ The dotnet/core repository is a good starting point for .NET Core.
 
 * [Released builds](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
 * [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
-* .NET Core 2.0 daily builds: 
-  * [.NET Core SDK 2.0 preview3](https://github.com/dotnet/cli/blob/release/2.0.0/README.md#installers-and-binaries)
-  * [.NET Core Runtime 2.0 preview3](https://github.com/dotnet/core-setup/blob/release/2.0.0/README.md#officially-released-builds)
-* .NET Core 2.1 daily builds:
-  * [.NET Core SDK 2.1 preview1](https://github.com/dotnet/cli/blob/master/README.md#installers-and-binaries)
-  * [.NET Core Runtime 2.1 preview1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)
+* [.NET Core daily preview builds](daily-builds.md)
+* [.NET Core daily servicing builds](daily-builds-servicing.md)
 
 ## Getting help
 
