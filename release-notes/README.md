@@ -63,3 +63,7 @@
 ### .NET Core Download Archive
 
 Release notes and download links to previous releases can be found in the [.NET Core Downloads Archive](download-archive.md).
+
+### CLI Usage Data
+
+The [.NET Core SDK collects usage data](cli-usage-data.md) by default. This data is available to all .NET Core developers.
