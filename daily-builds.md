@@ -4,11 +4,6 @@ The .NET Core team builds several branches of the product daily. You can install
 
 Preview branches are for new major/minor versions of .NET Core that have not yet been released and are not yet supported.
 
-## .NET Core 2.0 Preview 3
-
-* [.NET Core SDK 2.0 preview3](https://github.com/dotnet/cli/blob/release/2.0.0/README.md#installers-and-binaries)
-* [.NET Core Runtime 2.0 preview3](https://github.com/dotnet/core-setup/blob/release/2.0.0/README.md#officially-released-builds)
-
 ## .NET Core 2.1 Preview 1
 
 * [.NET Core SDK 2.1 preview1](https://github.com/dotnet/cli/blob/master/README.md#installers-and-binaries)
