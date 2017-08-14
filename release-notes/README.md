@@ -2,6 +2,11 @@
 
 ### .NET Core SDK
 
+.NET Core SDK 2.0 2017/08/14
+
+* [Release notes](2.0/2.0.0.md)
+* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-download.md)
+
 .NET Core SDK 2.0.0-Preview2 2017/06/28
 
 * [Release notes](2.0/2.0.0-preview2.md)
