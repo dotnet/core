@@ -33,7 +33,7 @@ Customers using LTS will need the latest patch update installed to qualify for s
 
 In addition to staying current with the latest patch update, customers using Current will need to update as new minor versions are released. The latest released minor version will become the minimum serviceable baseline 3 months after release. For example, after 1.2 releases systems running version 1.1 will have 3 months to update to 1.2 to remain eligible for support. Applications do not automatically begin using the new minor update.
 
-### Out of Support
+### .NET Core Release Lifecycles
 
 This table tracks release dates and end of support dates for .NET Core versions.
 
