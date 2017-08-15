@@ -35,6 +35,12 @@
 
 ### .NET Core Runtime
 
+.NET Core 2.0.0
+
+* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/)
+* [Release notes](2.0/2.0.0.md)
+* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.0-download.md)
+
 .NET Core 2.0.0-Preview2
 
 * [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/2017/06/28/announcing-net-core-2-0-preview-2/)
