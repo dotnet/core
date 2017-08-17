@@ -2,7 +2,7 @@
 
 ## NET Core Support Lifecycle
 
-Every Microsoft product has a lifecycle. The lifecycle begins when a product is released and ends when it's no longer supported. Knowing key dates in this lifecycle helps you make informed decisions about when to upgrade or make other changes to your software.
+Every Microsoft product has a lifecycle. The lifecycle begins when a product is released and ends when it's no longer supported. Knowing key dates in this lifecycle helps you make informed decisions about when to upgrade or make other changes to your software. This product is governed by the [Microsoft Modern Lifecycle](https://support.microsoft.com/en-us/help/30881/modern-lifecycle-policy)
 
 The .NET Core support lifecycle offers 3 years of support for each Major and Minor release where:
 
@@ -38,13 +38,15 @@ In addition to staying current with the latest patch update, customers using Cur
 This table tracks release dates and end of support dates for .NET Core versions.
 
 
-|  Version  |  Release Date  | Latest Patch Version | End of Support |
-| -- | -- | -- | -- |
-| .NET Core 2.0 | August 14, 2017 | 2.0.0 | August 14, 2020 or 3 months after next Current release or 12 months after next LTS release, whichever is shorter. |
-| .NET Core 1.1 | November 16, 2016 | 1.1.2 | LTS | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
-| .NET Core 1.0 | June 27, 2016 | 1.0.5 | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
+|  Version  |  Release Date  | Latest Patch Version | Support Level | End of Support |
+| -- | -- | -- | -- | -- |
+| .NET Core 2.0 | August 14, 2017 | 2.0.0 | Current | August 14, 2020 or 3 months after next Current release or 12 months after next LTS release, whichever is shorter. |
+| .NET Core 1.1 | November 16, 2016 | 1.1.2 | LTS* | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
+| .NET Core 1.0 | June 27, 2016 | 1.0.5 | LTS | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
 | .NET Core 1.0.0 RC2 | May 16, 2016 | n/a | n/a | September 27, 2016 |
 | .NET Core 1.0.0 RC1 | February 15, 2016 | n/a | n/a | July 16, 2016 |
+
+\* .NET Core 1.1 is adopted into the 1.0 LTS lifecycle and will share the same end of support dates.
 
 ### End of support
 
