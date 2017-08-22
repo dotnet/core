@@ -8,6 +8,8 @@ You can test the linker with a sample application:
 
 * [.NET Core self-contained application Docker Production Sample -- using .NET IL Linker](https://github.com/dotnet/dotnet-docker-samples/blob/master/dotnetapp-selfcontained/README.md#build-run-and-publish-the-sample-locally)
 
+For more advanced IL Linker instructions, see [Using IL Linker Advanced Features](linker-instructions-advanced.md).
+
 ## Instructions
 
 The instructions assume you are using [.NET Core 2.0](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md) or [.NET Core daily builds](https://github.com/dotnet/core/blob/master/daily-builds.md). You can validate your .NET Core SDK version by typing `dotnet --version`.
@@ -29,7 +31,7 @@ The instructions assume you are using [.NET Core 2.0](https://github.com/dotnet/
    * Windows: `out\testapp`
    * Linux/macOS: `./out/testapp`
 
-### Linker Switches
+## Linker Switches
 
 The linker can be controlled with the following commandline switches.
 
@@ -38,7 +40,7 @@ The linker can be controlled with the following commandline switches.
 
 You must disable the linker if you want to publish a [framework dependent application](https://docs.microsoft.com/en-us/dotnet/core/deploying/) while you have ILLink.Tasks as a dependency. This behavior will b changed in a later release.
 
-### Determining the Benefit of the linker
+## Determining the Benefit of the linker
 
 There are two straightforward approaches to determining the benefit of the linker.
 
