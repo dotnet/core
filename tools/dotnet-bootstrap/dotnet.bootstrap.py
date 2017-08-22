@@ -234,9 +234,9 @@ class RoverSettings:
         versionB = SemanticVersion(versionStrB)
         
         if(versionA > versionB):
-            return versionA
+            return versionStrA
 
-        return versionB
+        return versionStrB
 
 
     @staticmethod
