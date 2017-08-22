@@ -61,8 +61,8 @@ Languages and many other parts of .NET.
 | .NET Core 2.0 Preview 1   | [Released on 2017/5/10](https://github.com/dotnet/core/issues/640), see [announcement](https://blogs.msdn.microsoft.com/dotnet/2017/05/10/announcing-net-core-2-0-preview-1/) |
 | .NET Standard 2.0 Preview 1 | [Released on 2017/5/10](https://github.com/dotnet/core/issues/640), see [announcement](https://blogs.msdn.microsoft.com/dotnet/2017/05/10/announcing-net-core-2-0-preview-1/) |
 | .NET Core 2.0 Preview 2   | [Released on 2017/6/28](https://github.com/dotnet/core/issues/711), see [announcement](https://blogs.msdn.microsoft.com/dotnet/2017/06/28/announcing-net-core-2-0-preview-2/) |
-| .NET Core 2.0             | Q3 2017, see also [latest build](https://github.com/dotnet/cli/tree/release/2.0.0#installers-and-binaries) |
-| .NET Standard 2.0         | Q3 2017      |
+| .NET Core 2.0             | [Released on 2017/8/14](https://github.com/dotnet/core/issues/812), see [announcement](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) |
+| .NET Standard 2.0         | [Released on 2017/8/14](https://github.com/dotnet/core/issues/812), see [announcement](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) |
 | UWP 6.0 (implements .NET Standard 2.0) | Q4 2017 ([Win10 Fall Creators Update](https://www.microsoft.com/en-us/windows/upcoming-features)) |
 | .NET Core 2.1 | Q4 2017 (after UWP 6.0) |
 
