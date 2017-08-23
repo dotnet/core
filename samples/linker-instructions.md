@@ -1,8 +1,10 @@
 # Using the .NET IL Linker
 
-The .NET team has built a linker to reduce the size of applications. In trivial cases, it can reduce the size of applications by 50%. The size wins may be more favorable or more moderate for larger applications.
+The .NET team has built a linker to reduce the size of .NET Core applications. It is built on top of the excellent and battle-tested [mono linker](https://github.com/mono/linker). The Xamarin tools also use this linker.
 
-The linker currently only supports publishing self-contained applications. It will fail unless you specify a runtime ID. It is currently an experimental feature. We intend to productize it in a subsequent .NET Core release.
+In trivial cases, the linker can reduce the size of applications by 50%. The size wins may be more favorable or more moderate for larger applications. The linker removes code in your application and dependent libraries that are not reached by any code paths. It is effectively an application-specific dead code analysis.
+
+## Sample
 
 You can test the linker with a sample application:
 
@@ -38,11 +40,11 @@ The linker can be controlled with the following commandline switches.
 * `/p:LinkDuringPublish=false` -- Disable the linker.
 * `/p:ShowLinkerSizeComparison=true` -- Displays a table of size reductions for the application.
 
-You must disable the linker if you want to publish a [framework dependent application](https://docs.microsoft.com/en-us/dotnet/core/deploying/) while you have ILLink.Tasks as a dependency. This behavior will b changed in a later release.
+You must disable the linker if you want to publish a [framework dependent application](https://docs.microsoft.com/en-us/dotnet/core/deploying/) while you have ILLink.Tasks as a dependency. This behavior will be changed in a later release.
 
-## Determining the Benefit of the linker
+## Determining Code Size Reduction
 
-There are two straightforward approaches to determining the benefit of the linker.
+There are two straightforward approaches to determining the code size reduction provided by the linker.
 
 * Publish an application with the linker enabled and pass the `/p:ShowLinkerSizeComparison=true` flag. The output will describe the benefit. For example:
   * `dotnet publish -c release -r osx-x64 -o out /p:ShowLinkerSizeComparison=true`
@@ -51,6 +53,15 @@ There are two straightforward approaches to determining the benefit of the linke
   * `dotnet publish -c release -r linux-x64 -o notlinkedapp /p:LinkDuringPublish=false`
 
 Note: The `osx-x64` and `linux-x64` runtime IDs are used in the examples above. Feel free to use any runtime ID that you would like, such as `win-x64`.
+
+## Caveats
+
+The linker has the following caveats.
+
+* Currently only supports publishing self-contained applications. It will fail unless you specify a runtime ID.
+* It is currently an experimental feature. We intend to productize it in a subsequent .NET Core release.
+* Linking only happens during publish, and therefore the linked app needs to be tested after publish, not just after build.
+* The linker can and will break some apps that use reflection. See [Using IL Linker Advanced Features](linker-instructions-advanced.md) for more information about managing reflection usage.
 
 ### Feedback
 

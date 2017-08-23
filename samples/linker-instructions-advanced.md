@@ -1,6 +1,6 @@
 # Using IL Linker Advanced Features
 
-This document described the more advanced features for the IL Linker and provides more insight into how it functions.
+This document describes the more advanced features for the IL Linker and provides more insight into how it functions.
 
 The basic features and instructions for the linker are described in the [Using the .NET IL Linker](linker-instructions.md) document.
 
@@ -12,7 +12,7 @@ The dynamic features of .NET make it hard for this analysis to catch all cases i
 
 ## Using the tasks package
 
-The linker tasks package ([ILLink.Tasks](https://dotnet.myget.org/feed/dotnet-core/package/nuget/Illink.Tasks)) contains MSBuild targets that become a part of the referencing project's build, using the mechanism described in the nuget docs.
+The linker tasks package ([ILLink.Tasks](https://dotnet.myget.org/feed/dotnet-core/package/nuget/Illink.Tasks)) contains MSBuild targets that become a part of the referencing project's build, using the [mechanism described in the nuget docs](https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package#including-msbuild-props-and-targets-in-a-package).
 
 When this package is referenced in a project, the publish target is augmented with additional targets that run the linker on the app's assemblies before they are placed in the publish directory.
 
