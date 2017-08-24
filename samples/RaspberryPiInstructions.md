@@ -38,7 +38,7 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 </configuration>
 ```
 
-* Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win-arm` to publish the application for windows and `dotnet publish -r linux-arm` for Linux running on Raspberry Pi.
+* Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win10-arm` to publish the application for windows and `dotnet publish -r linux-arm` for Linux running on Raspberry Pi.
 
 * Under `./bin/Debug/netcoreapp2.0/<runtime identifier>/publish` or `.\bin\Debug\netcoreapp2.0\<runtime identifier>\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
 
