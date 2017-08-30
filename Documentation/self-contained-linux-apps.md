@@ -8,12 +8,12 @@ So, in order to use local copies of the third-party libraries, developers need t
 ## Gathering the third-party dependencies
 The following sections describe the steps needed to get the full set of dependencies that need to be carried with the application:
 ### Pick the oldest supported distro the application should run at as the source for the dependencies
-Select a distro to get the dependencies to be packaged with the application. Using the oldest distro ensures that the third-party dependencies don't reference functions from libc / libstdc++ that are only present in newer versions of those libraries and not present on the supported distros.
+Select a distro to get the dependencies to be packaged with the application. Using the oldest distro ensures that the third-party dependencies don't reference functions from libc / libstdc++ that are only present in newer versions of those libraries and not present in the supported distros.
 ### Get the transitive closure of all the first-level dependencies
 That means the dependencies of the first-level dependencies, their dependencies, etc. To get those transitives closures, use the `ldd` command-line tool. As a parameter, pass the root set of .NET Core dependencies to the command as follows:
 * libcoreclr.so
 * If your app uses System.IO.Compression.dll assembly: `System.IO.Compression.Native.so`
-* If your app uses the System.Security.Cryptography.dll assembly: `System.Security.Cryptography.Native.OpenSsl.so`, `libssl.so.{version}`, and `libcrypto.so`.
+* If your app uses the System.Security.Cryptography.dll assembly: `System.Security.Cryptography.Native.OpenSsl.so`, `libssl.so.{version}`, and `libcrypto.so.{version}`.
 {version} depends on the source distro as follows:
    * Fedora-based distros: `10`
    * Debian 9-based distros: `1.0.2`
