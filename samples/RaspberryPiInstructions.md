@@ -1,6 +1,6 @@
 # .NET Core on Raspberry Pi
 
-Arm32 build are available as community supported builds for .NET Core 2.0. 
+Arm32 builds are available as community supported builds for .NET Core 2.0. 
 There is no SDK that runs on ARM32 but you can publish an application that will run on a Raspberry Pi. 
 
 These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
