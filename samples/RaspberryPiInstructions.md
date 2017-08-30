@@ -9,7 +9,7 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 
 ## Creating an app:
 
-* [Install .NET Core 2.0 SDK](https://www.microsoft.com/net/core/preview) into a supported developer configuration.
+* [Install .NET Core 2.0 SDK](https://www.microsoft.com/net/core) into a supported developer configuration.
 
 
 * From the terminal/commandline create a folder named `helloworld` and go into it.
