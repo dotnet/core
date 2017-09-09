@@ -33,7 +33,7 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 * [aspnet/Docs](https://github.com/aspnet/Docs) - ASP.NET and ASP.NET Core documentation
 
 ## WCF
-* [dotnet/wcf](https://github.com/dotnet/sdk) - WCF
+* [dotnet/wcf](https://github.com/dotnet/wcf) - WCF
 
 ## .NET Framework
 * [microsoft/dotnet](https://github.com/microsoft/dotnet) -- catch-all repository for .NET (where most .NET Framework issues are filed)
