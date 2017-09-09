@@ -72,4 +72,4 @@ Please provide feedback on your use of the linker. We are actively looking for f
 * Cases where the link is too aggressive and causes applications to fail at runtime.
 * The linker provided an excellent result for a large application.
 
-Please create issue with your feedback at either [mono/linker](https://github.com/mono/linker) or [dotnet/core](https://github.com/dotnet/core). Also feel free to contact the team at dotnet@microsoft.com.
+Please create issue with your feedback at either [mono/linker](https://github.com/mono/linker) or [dotnet/core](https://github.com/dotnet/core). Also feel free to contact the team at clrlinker@microsoft.com.
