@@ -1,6 +1,16 @@
 .NET Core native prerequisites
 ==============================
 
+___
+__Note:__ This document covers .NET Core 1.0 only and is not being maintained. Current prerequisite, dependency and Operating System support information is available on the documentation site.
+
+* [Windows Prerequisites](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites?tabs=netcore2x)
+* [macOS Prerequisites](https://docs.microsoft.com/en-us/dotnet/core/macos-prerequisites)
+* [Linux Prerequisites](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x)
+* [.NET Core Supported OS Lifecycle Policy](https://github.com/dotnet/core/blob/master/os-lifecycle-policy.md)
+
+___
+
 This document outlines the dependencies needed to run .NET Core tools and applications. 
 
 For Operating System support, please refer to [the roadmap document](https://github.com/dotnet/core/blob/master/roadmap.md#technology-roadmaps). 
