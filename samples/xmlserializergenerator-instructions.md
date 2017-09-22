@@ -16,7 +16,9 @@ Provides SGen tool to generate Xml Serialization code for types in specified ass
 * Add the types you need in the library. 
 
 * Install the Microsoft.XmlSerializer.Generator package on the project from myget
+  
   a.	Add a new package source with the MyGet url (https://dotnet.myget.org/F/dotnet-core/api/v3/index.json) 
+  
   b. Search the latest released 1.0.0-preview1-*** version from (https://dotnet.myget.org/feed/dotnet-core/package/nuget/Microsoft.XmlSerializer.Generator) e.g. 1.0.0-preview1-25718-03 and add the following lines in the project
   ```
   <ItemGroup>
