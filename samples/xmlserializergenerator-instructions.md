@@ -1,46 +1,40 @@
-# Microsoft XmlSerializer Generator
+# Using Microsoft XmlSerializer Generator on .Net Core
 
-Provides SGen tool to generate Xml Serialization code for types in specified assembly in order to improve the startup performance of a XmlSerializer when it serializes or deserializes objects of the specified types.
+Use Microsoft XmlSerializer Generator to generate Xml Serialization code for types in specified project to improve the startup performance of a XmlSerializer when it serializes or deserializes objects of the specified types.
 
 ## Prequisition:
 
-* [Install .NET Core 2.1 SDK](https://github.com/dotnet/core-setup#daily-builds) into a supported developer configuration.
-* [Install .NET Core 2.1 RUNTIME](https://github.com/dotnet/core-setup#daily-builds) into a supported developer configuration.
+The instructions assume you are using [.NET Core SDK daily builds](https://github.com/dotnet/cli#installers-and-binaries) and [.NET Core runtime daily builds](https://github.com/dotnet/core-setup#daily-builds). You can validate your .NET Core SDK version by typing `dotnet --info`.
 
-## Creating an app:
+## Instructions:
 
-* From the terminal/commandline create a library app.
+1. Create a library with `dotnet new library --name MyData`
 
-* Run `dotnet new library --name MyData`
+1. cd into it, e.g. `cd MyData`
 
-* Add the types you need in the library. 
+1.  Add a `nuget.config` file in the root of the project, using the following:
+   * `dotnet new nuget`
+   * Edit the new `nuget.config`. Remove `<clear />` and add the following line,
+     
+     `<add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />`
+   * The final file should look like [nuget.config](nuget.config).
 
-* Install the Microsoft.XmlSerializer.Generator package on the project from myget
-  
-  a.	Add a new package source with the MyGet url (https://dotnet.myget.org/F/dotnet-core/api/v3/index.json) 
-  
-  b. Search the latest released 1.0.0-preview1-*** version from (https://dotnet.myget.org/feed/dotnet-core/package/nuget/Microsoft.XmlSerializer.Generator) e.g. 1.0.0-preview1-25718-03 and add the following lines in the project
-  ```
-  <ItemGroup>
-         <PackageReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25718-03" />
-  </ItemGroup>
-  ```
+4. `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25718-03`
 
-* Edit the project and add DotNetCliToolReference as the following. The version must match the package version.
+4. Add the following lines in MyData.csproj. The version must match the package version.
 
-  ```
-  <?xml version="1.0" encoding="utf-8"?>
+  ```xml
   <ItemGroup>
       <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25718-03" />
   </ItemGroup>
   ```
 
-* Run `dotnet restore` to retore the package.
+6. Run `dotnet restore` to retore the package.
 
-* Run `dotnet build` to build the package.
+6. Run `dotnet build` to build the package.
   If all succeed, a file named <AssemblyName>.XmlSerializers.dll will be generated under the debug folder. You should check the warning in the output window if the serializer fail to generate.
 
-* Create a console app and add a project reference for the library. Build and the library assembly and its generated serializer will all be in the output folder of the console app.
+6. Create a console app and add a project reference for the library. Build and the library assembly and its generated serializer will all be in the output folder of the console app.
 
-* Run `dotnet publish` to publish the package.
-  The generated serializer will be copied to the PublishOutput folder as well.
+6. Run `dotnet publish` to publish the package.
+  The generated serializer will be copied to the `PublishOutput` folder as well as the output assembly.
