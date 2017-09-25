@@ -1,145 +1,49 @@
 # .NET Core Roadmap
 
-We aim to continuously deliver updates to the .NET Core Runtime and Tools.
-We are primarily focused on delivering UWP 6.0 (.NET Standard 2.0 for UWP) and .NET Core 2.1.
+The .NET Core roadmap communicates project priorities for evolving and extending the scope of the product. New product experiences and features will include changes in various [layers of the product](Documentation/core-repos.md), in some combination of the runtime, framework, language compilers and tools. Each component may have its own component-level roadmap that will available in the repo for that component.
 
-We shipped .NET Core 2.0 and .NET Standard 2.0 - you can try it by installing [Visual Studio 2017 (15.3)][vs2017] and [.NET Core 2.0 SDK][Core20Sdk].
+The .NET Core team is currently focussed on the Web workload and console apps. We encourage the community to work with us to improve web and console apps and to extend .NET Core for other scenarios.
 
-[vs2017]: https://www.visualstudio.com/downloads
-[Core20Sdk]: https://www.microsoft.com/net/download/core
+## Released Versions
 
-## Ship Dates
+[.NET Core 2.0](https://github.com/dotnet/core/issues/812) shipped on August 14th, 2017.
+
+For released versions of the product:
+
+* [.NET Core Release Notes](release-notes/README.md)
+* [.NET Core Supported OS Lifecycle Policy](os-lifecycle-policy.md).
+
+## Upcoming Ship Dates
 
 | Milestone                 | Release Date |
 |---------------------------|--------------|
-| .NET Core 2.0 & .NET Standard 2.0 | [Released on 2017/8/14](https://github.com/dotnet/core/issues/812), see [announcement](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) |
-| UWP 6.0 (implements .NET Standard 2.0) | Q4 2017 ([Win10 Fall Creators Update](https://www.microsoft.com/en-us/windows/upcoming-features)) |
 | .NET Core 2.1 Preview | Q4 2017 |
 | .NET Core 2.1 | Q1 2018 |
 
-Details on sub-milestones are also captured in milestone details of our repos, e.g. [CoreFX repo milestones](https://github.com/dotnet/corefx/milestones).
+Note: Dates are always in Calendar Year format (as opposed to Fiscal Year).
 
-# Components
+Milestone information is available on most repos, for example [dotnet/corefx milestones](https://github.com/dotnet/corefx/milestones).
 
-.NET Core is a general purpose, modular, cross-platform and open source implementation of .NET.
-It includes a runtime, framework libraries, compilers and tools that support a variety of chip and OS targets.
-These components can be used together or separately.
+## .NET Core 2.1 Release
 
-Major .NET Core components are listed below.
-Please note that this is not meant to be an exhaustive list.
+The .NET Core 2.1 project has not yet started. The team is currently working on infastructure improvements to the .NET Core build and release system. .NET Core 2.1 release information will be shared here once planning starts.
 
-* [Runtime](https://github.com/dotnet/coreclr)
-* [Libraries](https://github.com/dotnet/corefx)
-* [.NET Standard](https://github.com/dotnet/standard)
-* [C#/VB compiler](https://github.com/dotnet/roslyn)
-* [F# compiler](https://github.com/microsoft/visualfsharp)
-* [SDK](https://github.com/dotnet/sdk)
-* [CLI tools](https://github.com/dotnet/cli) / [CLI documentation](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index)
-* [NuGet](https://github.com/NuGet/Home)
-* [ASP.NET](https://github.com/aspnet)
-* [MSBuild](https://github.com/microsoft/msbuild)
-* [Docker Images](https://github.com/dotnet/dotnet-docker)
+## Feedback
 
-This roadmap is intended to communicate project priorities for evolving and extending the scope of .NET Core.
+The product and the roadmap should align with a broad set of user requests. We listen to feedback in various forums and also actively use the product ourselves for both our engineering system and for [lives sites](https://www.microsoft.com/net) we maintain. We want your feedback to help best direct the efforts of everyone who works on the product.
 
-# Supported OS Versions
+## Engagement
 
-## .NET Core 2.1 - Supported OS Versions
+The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo with the [roadmap label](https://github.com/dotnet/core/labels/roadmap). You can also create issues in other [.NET Core repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
 
-Proposal: TBD
+There are some specific improvements where we would like to get direct feedback
 
-## .NET Core 2.0 - Supported OS Versions
+* Existing features are missing some capability or otherwise don't work well enough.
+* Missing features that should be added to the product.
+* Design choices for a feature that is currently in-progress.
 
-Proposal:
+Some important caveats / notes:
 
-OS                            |Version                        |Architectures  |Notes
-------------------------------|-------------------------------|---------------|-----
-Windows Client                | 7 SP1+                        | x64, x86      |
-Windows Server                | 2008 R2 SP1+                  | x64, x86      | Configurations: Full, Server Core, Nano (2016 only)
-Windows IoT                   | 10+                           | [C] arm32     | IoT Core - see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
-Red Hat Enterprise Linux      | 7.3+                          | x64           | This includes Centos and Oracle Linux
-Fedora                        | 25+                           | x64           | 
-Debian                        | 8.7+                          | x64           | [Debian 9 (Stretch) workaround](https://github.com/dotnet/corefx/issues/8951#issuecomment-299927277)
-Ubuntu                        | 14.04+                        | x64, [C] arm32 | This includes Linux Mint 17 for x64 <br/> For arm32, see [Raspberry Pi instructions](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
-openSUSE                      | 42.2+                         | x64           | 
-Tizen                         | 4+                            | [S] arm32     | [Tizen .NET Developer Preview](https://developer.tizen.org/development/tizen-.net-preview/introduction)
-Mac OS X                      | 10.12+                        | x64           | 
-**In Progress OS's**          |                               |               | 
-Arch Linux                    | [C] TBD                       | TBD           | Blocked on [missing OpenSSL 1.0 package](https://github.com/dotnet/corefx/issues/9855#issuecomment-298982251) in distro. <br/> Arch Linux community efforts tracked [here](https://bbs.archlinux.org/viewtopic.php?pid=1708479).
-FreeBSD & NetBSD              | [C] TBD                       | TBD           | Tracking [main issue](https://github.com/dotnet/coreclr/issues/6115) and [label](https://github.com/dotnet/coreclr/labels/os-freebsd). <br/> NetBSD packages for [.NET Core 1.0.0](https://github.com/dotnet/coreclr/issues/6115#issuecomment-233151220) |
-
-* Note: The goal is to support these OS's up to the version that has released when .NET Core 2.0 releases. Some will be officially supported by Microsoft and/or Samsung while others may be made available with community support. Entries will be supported by Microsoft per the Microsoft support policy except where support is explicitly called out as coming from elsewhere.
-* [S] This is supported by Samsung.
-* [C] This is supported by the Community
-
-## .NET Core 1.0 - Supported OS Versions
-
-OS                            |Version                        |Architectures|Configurations|Notes
-------------------------------|-------------------------------|-------------|--------------|-----
-Windows Client                | 7 SP1 - 10                    | x64, x86    |              |
-Windows Server                | 2008 R2 SP1 - 2016            | x64, x86    | Full, Server Core, Nano (2016 only) |
-Red Hat Enterprise Linux      | 7.2                           | x64         |              |
-~~Fedora~~ *                        | ~~23~~                            | ~~x64~~         |              |
-Debian                        | 8.2                           | x64         |              |
-Ubuntu                        | 14.04 LTS, 16.04 LTS          | x64         |              |
-Linux Mint                    | 17                            | x64         |              |
-~~openSUSE~~ *                      | ~~13.2~~                          | ~~x64~~         |              |
-Centos                        | 7.1                           | x64         |              |
-Oracle Linux                  | 7.1                           | x64         |              |
-Mac OS X                      | 10.11, 10.12                  | x64         |              | 10.12 added in 1.0.2
-
-(* See the note regarding changes to supported Linux distros in the [RC4 Release Notes](https://github.com/dotnet/core/blob/master/release-notes/1.0/1.0.3-SDK-RC4.md).)
-
-There will be packages available for the native package managers for each OS.
-(e.g. apt-get, rpm, pkg, msi) as well as zips.
-
-Microsoft provides commercially reasonable support for ASP.NET Core 1.0, .NET
-Core 1.0 and Entity Framework Core 1.0 on the OS and Version detailed in the
-table above. Microsoft provides support for ASP.NET Core 1.0, .NET Core 1.0 and
-Entity Framework Core 1.0 on Windows, Linux, and Mac OS X.  For an explanation
-of available support options, please visit [Support for Business and
-Developers](https://support.microsoft.com/en-us/gp/contactus81?Audience=Commercial&SegNo=4).
-
-# Project Goals
-
-Broad goals:
-
-* .NET Core code is high quality, has compelling performance, and is highly reliable.
-* .NET Core can be ported to a broad set of OS platforms and chip architectures.
-* .NET Core can be deployed with the application, side-by-side with other versions.
-* .NET Core has a broad API surface that makes it suitable for most payloads.
-* Developers can acquire a .NET Core developer environment quickly and intuitively.
-* Developers can productively and intuitively build apps, using documentation, samples, community resources, and NuGet packages.
-
-# Contributions
-
-Contribution goals:
-
-* Encourage an active community welcoming contributions from all.
-
-The .NET Core maintainers have taken a liberal approach to contributions since the outset of the .NET Core open source project.
-
-# Microsoft Distro
-
-Microsoft ships multiple .NET Core distros.
-It is important that Microsoft can successfully ship .NET Core at quality and meet its desired dates.
-
-# Other Distros
-
-.NET Core will ship as part of many Linux distros and we are actively working with key partners in the Linux community to make it natural for .NET Core to go everywhere people need it.
-We are constantly looking to expand our distro support and welcome contributions and collaborations in this direction.
-
-## Goals
-
-* There are high-quality ports for Linux, macOS and Windows.
-* There are high-quality ports for X64, X86, ARM32, and ARM64.
-* .NET Core ships stable releases multiple times a year.
-* Contributions should be prioritized that align with these goals.
-
-## Workloads
-
-The Microsoft distro currently supports the following workloads:
-
-* Console Apps
-* ASP.NET Core
-* Windows 10 UWP
+* It is best to give design feedback quickly for improvements that have been committed to the current in-development release. We're unlikely to hold a feature being part of a release on late feedback.
+* We are most likely to include improvements that either have a positive impact on a broad scenario or have very significant positive impact on a niche scenario.
+* Compatibility will almost always be given a higher priority than improvements, other than security.
