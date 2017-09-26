@@ -1,18 +1,24 @@
 # Using Microsoft XmlSerializer Generator on .Net Core
 
-Use Microsoft XmlSerializer Generator to generate Xml Serialization code for types in specified project to improve the startup performance of a XmlSerializer when it serializes or deserializes objects of the specified types.
+An XmlSerializer generates serialization code and a serialization assembly for each type every time an application run during the Xml Serialization. To improve the performance, we can use Microsoft XmlSerializer Generator to generate Xml Serialization code for types in specified project and compile it into an assembly in advance. These assemblies can then run with the application.
 
-## Prequisition:
+## Prerequisition
 
-The instructions assume you are using [.NET Core SDK daily builds](https://github.com/dotnet/cli#installers-and-binaries) and [.NET Core runtime daily builds](https://github.com/dotnet/core-setup#daily-builds). You can validate your .NET Core SDK version by typing `dotnet --info`.
+You need install the followings on your machine:
+* [.NET Core SDK daily builds](https://github.com/dotnet/cli#installers-and-binaries) 
+* [.NET Core runtime daily builds](https://github.com/dotnet/core-setup#daily-builds). 
 
-## Instructions:
+You can validate your .NET Core SDK version by typing `dotnet --info`.
 
-1. Create a library with `dotnet new library --name MyData`
+## Instructions
 
-1. cd into the project folder, e.g. `cd MyData`
+Here is the step by step how to create a dotnet project and install the XmlSerializer Generator on the project.
 
-1.  Add a nuget.config file in the root of the project, using the following:
+1. Create a library project that contains you custom data. e.g. Create a library named MyData using the CLI: `dotnet new library --name MyData`
+
+2. Go to the folder of the project you created in step1, e.g. `cd MyData`
+
+3.  Add a nuget.config file in the root of the project, using the following:
     * `dotnet new nuget`
     * Edit the new nuget.config. Remove `<clear />` and add the following line,
      
