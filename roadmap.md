@@ -10,7 +10,7 @@ The .NET Core team is currently focused on Web, Cloud, Microservices, Containers
 
 For released versions of the product:
 
-* [Supported OSes](os-lifecycle-policy.md).
+* [Supported OSes](os-lifecycle-policy.md)
 * [Release Notes](release-notes/README.md)
 
 ## Upcoming Ship Dates
