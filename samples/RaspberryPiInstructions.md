@@ -49,7 +49,7 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 
 * Install [Linux](https://www.raspberrypi.org/downloads/) on your Pi.
 
-* Install the [prereq packages](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core.
+* Install the [platform dependencies from your distro's package manager](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core.
 
 * Copy your app, i.e. whole `publish` directory mentioned above, to the Raspberry Pi and execute run `./helloworld` to see `Hello World!` from .NET Core running on your Pi! (make sure you `chmod 755 ./helloworld`)
 
