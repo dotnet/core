@@ -6,7 +6,7 @@ When a running application creates an instance of XmlSerializer, it generates a 
 
 You need to install the followings on your machine:
 * [.NET Core SDK daily builds](https://github.com/dotnet/cli#installers-and-binaries) 
-* [.NET Core runtime daily builds](https://github.com/dotnet/core-setup#daily-builds). 
+* [.NET Core runtime Release/2.0.X build](https://github.com/dotnet/core-setup#daily-builds). 
 
 You can validate your .NET Core SDK version by typing `dotnet --info`.
 
@@ -14,16 +14,17 @@ You can validate your .NET Core SDK version by typing `dotnet --info`.
 
 Here are the step by step instructions how to create a dotnet project and install the XmlSerializer Generator for that project.
 
-1. Create a library project that contains your custom data types. E.g. create a library named MyData using the CLI: `dotnet new library --name MyData`
+1. Create a library project that contains your custom data types. E.g. create a library named MyLibrary using the CLI: `dotnet new library --name MyLibrary`
 
 2. Add dotnet-core MyGet feed to the project.
-    * Go to the folder of the project you created in step 1, e.g. `cd MyData`
+    * Go to the folder of the project you created in step 1, e.g. `cd MyLibrary`
     * Add a nuget.config file in the root of the project, using the command `dotnet new nuget`
     * Edit the new nuget.config. Remove `<clear />` and add the following line:
 
       `<add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />`
 
     - The final file should look like [nuget.config](nuget.config):
+    
       ```xml
       <?xml version="1.0" encoding="utf-8"?>
       <configuration>
@@ -35,20 +36,16 @@ Here are the step by step instructions how to create a dotnet project and instal
 
 3. Add a reference to the Microsoft.XmlSerializer.Generator package:
 
-    * `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25718-03`
+    * `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25906-03`
 
-    * Add the following lines in MyData.csproj.
+    * Add the following lines in MyLibrary.csproj.
 
   ```xml
     <ItemGroup>
-        <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25718-03" />
+        <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25906-03" />
     </ItemGroup>
   ```
 
-4. Run `dotnet restore`.
+4. Run `dotnet restore` and  `dotnet build` to build the library. If everything succeeds, a file named MyLibrary.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the serializer failed to generate.
 
-5. Run `dotnet build`. If everything succeeds, a file named MyData.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the serializer failed to generate.
-
-6. Create a console app and add a project reference to the library. Building the app will generate serialization code for the library and the assembly will be copied to the output folder of the app.
-
-7. Run `dotnet publish` to publish the app.
+Now you can use the library with a console app by adding a project reference to the library. Building the app will generate serialization code for the library and the assembly will be copied to the output folder of the app.
