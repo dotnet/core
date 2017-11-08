@@ -27,8 +27,8 @@ def branch = GithubBranchName
                 // shell (for unix scripting)
                 shell("ls")
 		
-		shell("python tools/dotnet-bootstrap/base/lab/containers.py bake")
-		shell("python tools/dotnet-bootstrap/base/lab/cases.py run")
+		// shell("python tools/dotnet-bootstrap/base/lab/containers.py bake")
+		// shell("python tools/dotnet-bootstrap/base/lab/cases.py run")
             }
         }
         
