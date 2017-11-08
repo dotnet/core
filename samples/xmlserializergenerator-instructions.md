@@ -47,7 +47,10 @@ Here are the step by step instructions on how to use Xml Serializer Generator in
         public int Value;
     }
     ```
-    Now you can use `XmlSerializer` to serialize the objects of MyClass.
+    Now you can create an `XmlSerializer` for MyClass.
+    ```c#
+    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(MyClass));
+    ```
     
 6. Build the application by running `dotnet build`. If everything succeeds, an assembly named MyApp.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the assembly.
 
