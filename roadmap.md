@@ -26,7 +26,7 @@ Milestone information is available on most repos, for example [dotnet/corefx mil
 
 ## .NET Core 2.1 Release
 
-The .NET Core 2.1 project has not yet started. The team is currently working on infastructure improvements to the .NET Core build and release system. .NET Core 2.1 release information will be shared here once planning starts.
+The .NET Core 2.1 project has not yet started. The team is currently working on infrastructure improvements to the .NET Core build and release system. .NET Core 2.1 release information will be shared here once planning starts.
 
 ## Feedback
 
