@@ -4,7 +4,7 @@ Like the Xml Serializer Generator (sgen.exe) on desktop, Microsoft.XmlSerializer
 
 You can start using the tool today following the instructions below. 
 
-## Prerequisite
+## Prerequisites
 
 * [.Net Core SDK of version 2.0.2 or later](https://www.microsoft.com/net/download/windows)
 * [.NET Core runtime Release/2.0.X](https://github.com/dotnet/core-setup#daily-builds) (build 2.0.4-servicing-25831-01 or later. Note down the build version which will be used in the step 3 of the instructions below.)
