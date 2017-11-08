@@ -20,9 +20,9 @@ You can start using the tool today following the instructions below.
 
 ## Instructions
 
-Here are the step by step instructions on how to Xml Serializer Generator in a .Net Core console application.
+Here are the step by step instructions on how to use Xml Serializer Generator in a .Net Core console application.
 
-1. Create a .Net Core console application, e.g. create a app named 'MyApp' using the command: `dotnet new console --name MyApp`.
+1. Create a .Net Core console application, e.g. create a app named 'MyApp' with the command: `dotnet new console --name MyApp`.
 
 2. Add dotnet-core MyGet feed to the project. 
     * Go to the project folder and create a file named `nuget.config` with the following content. The final file should look like [nuget.config](nuget.config)
@@ -38,8 +38,6 @@ Here are the step by step instructions on how to Xml Serializer Generator in a .
 
 3. Add a reference to the Microsoft.XmlSerializer.Generator package:
 
-    * `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25906-03`
-
     * Add the following lines in MyApp.csproj.
 
 ```xml
@@ -50,5 +48,5 @@ Here are the step by step instructions on how to Xml Serializer Generator in a .
 
 4. Build the application by running `dotnet restore` and  `dotnet build`. If everything succeeds, a file named MyApp.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the serialization code.
 
-Now you can use `XmlSerializer` in the application. And the application will be able to load and use the pre-generated serializers at runtime.
+Now you can use `XmlSerializer` in the application. And the application will automatically load and use the pre-generated serializers at runtime.
 
