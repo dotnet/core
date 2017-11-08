@@ -54,4 +54,8 @@ Here are the step by step instructions how to create a dotnet project and instal
 
 4. Run `dotnet restore` and  `dotnet build` to build the library. If everything succeeds, a file named MyLibrary.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the serializer failed to generate.
 
-Now you can use the library with a console app by adding a project reference to the library. Building the app will generate serialization code for the library and the assembly will be copied to the output folder of the app. You need make sure your console app will use the latest 2.0 build by specifying the RuntimeFrameWorkVersion as mentioned in Prequisition.
+5. Create a console app and add a project reference to the library. Building the app will generate serialization code for the library and the assembly called MyLibrary.XmlSerializers.dll will be copied to the output folder of the app. You need make sure your console app will use the latest 2.0 build by specifying the RuntimeFrameWorkVersion as mentioned in Prequisition.
+
+6. Add code to create XmlSerializer with the type defined in the library such as the following. MyLibrary.XmlSerializers.dll will be loaded into the memory after executing the following line. 
+
+   `XmlSerializer serializer = new XmlSerializer(typeof(MyClass));`
