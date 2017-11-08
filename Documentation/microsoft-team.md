@@ -34,7 +34,7 @@ Once your permission requests are approved, you should have write permissions to
 
 ## Resources
 
-* [.NET Core "Home Repo"](https://github.com/dotnet/core)
+* [.NET Core "Home Repo"](https://github.com/dotnet/core) (links to install daily builds)
 * [Introduction to the Common Language Runtime (CLR)](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/intro-to-clr.md)
 * [The Book of the Runtime](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/README.md)
 * [CoreCLR Docs](https://github.com/dotnet/coreclr/tree/master/Documentation)
