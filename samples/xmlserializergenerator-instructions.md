@@ -4,11 +4,17 @@ When a running application creates an instance of XmlSerializer, it generates a 
 
 ## Prerequisition
 
-You need to install the followings on your machine:
-* [.NET Core SDK daily builds](https://github.com/dotnet/cli#installers-and-binaries) 
+Install the latest 2.0 build released on Oct. on your machine from the following link since the earlier version won't work 
 * [.NET Core runtime Release/2.0.X build](https://github.com/dotnet/core-setup#daily-builds). 
 
-You can validate your .NET Core SDK version by typing `dotnet --info`.
+The version number is just above the link of the installer e.g. version 2.0.4-servicing-25831-01. You need specify the version through RuntimeFrameworkVersion in your .csproj like the following.
+
+  ```xml
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RuntimeFrameworkVersion>2.0.4-servicing-25831-01</RuntimeFrameworkVersion>
+  </PropertyGroup>
+ ```
 
 ## Instructions
 
@@ -48,4 +54,4 @@ Here are the step by step instructions how to create a dotnet project and instal
 
 4. Run `dotnet restore` and  `dotnet build` to build the library. If everything succeeds, a file named MyLibrary.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the serializer failed to generate.
 
-Now you can use the library with a console app by adding a project reference to the library. Building the app will generate serialization code for the library and the assembly will be copied to the output folder of the app.
+Now you can use the library with a console app by adding a project reference to the library. Building the app will generate serialization code for the library and the assembly will be copied to the output folder of the app. You need make sure your console app will use the latest 2.0 build by specifying the RuntimeFrameWorkVersion as mentioned in Prequisition.
