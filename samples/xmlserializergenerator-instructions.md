@@ -6,28 +6,18 @@ You can start using the tool today following the instructions below.
 
 ## Prerequisition
 
-* Install [.Net Core SDK of version 2.0.X](https://www.microsoft.com/net/download/windows).
-* Install the latest [.NET Core runtime Release/2.0.X build](https://github.com/dotnet/core-setup#daily-builds). 
+* [.Net Core SDK of version 2.0.2 or later](https://www.microsoft.com/net/download/windows)
+* [.NET Core runtime Release/2.0.X](https://github.com/dotnet/core-setup#daily-builds) (build 2.0.4-servicing-25831-01 or later. Note down the build version which will be used in the step 3 of the instructions below.)
   
-  
-  Note: You would need to set the project's `RuntimeFrameworkVersion` to the build version of the runtime, which can be found on the download page. For example, if the build version is `2.0.4-servicing-25831-01`, add the following lines in the project's .csproj,
-
-    ```xml
-   <PropertyGroup>
-     <RuntimeFrameworkVersion>2.0.4-servicing-25831-01</RuntimeFrameworkVersion>
-   </PropertyGroup>
-    ```
-
 ## Instructions
 
 Here are the step by step instructions on how to use Xml Serializer Generator in a .Net Core console application.
 
-1. Create a .Net Core console application, e.g. create a app named 'MyApp' with the command: `dotnet new console --name MyApp`.
-
-2. Add dotnet-core MyGet feed to the project. 
-    * Go to the project folder and create a file named `nuget.config` with the following content. The final file should look like [nuget.config](nuget.config)
-    
-    
+1. Create a .Net Core console application, e.g. create an app named 'MyApp' with the command:
+    ```
+    dotnet new console --name MyApp
+    ```
+2. The Microsoft.XmlSerializer.Generator package is currently avaialbe on MyGet only. We need to add dotnet-core MyGet feed to as a NuGet source. For example, add a file named `nuget.config` as shown below in \MyApp folder.
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
     <configuration>
@@ -36,18 +26,19 @@ Here are the step by step instructions on how to use Xml Serializer Generator in
       </packageSources>
     </configuration>
     ```
-
-3. Add a reference to the Microsoft.XmlSerializer.Generator package:
-
-    * Add the following lines in MyApp.csproj.
-
+3. Set the project's `RuntimeFrameworkVersion` to the build version of the runtime you have installed. For example, if the build version is `2.0.4-servicing-25831-01`, add the following lines in MyApp.csproj,
+    ```xml
+    <PropertyGroup>
+      <RuntimeFrameworkVersion>2.0.4-servicing-25831-01</RuntimeFrameworkVersion>
+    </PropertyGroup>
+    ```
+4. Edit the .csproj and add a reference to the Microsoft.XmlSerializer.Generator package. For example, add the following lines in MyApp.csproj,
     ```xml
     <ItemGroup>
       <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25906-03" />
     </ItemGroup>
     ```
-
-4. Build the application by running `dotnet restore` and  `dotnet build`. If everything succeeds, a file named MyApp.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the serialization code.
+5. Build the application by running `dotnet build`. If everything succeeds, an assembly named MyApp.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the assembly.
 
 Now you can use `XmlSerializer` in the application. And the application will automatically load and use the pre-generated serializers at runtime.
 
