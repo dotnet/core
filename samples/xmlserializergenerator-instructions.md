@@ -12,11 +12,11 @@ You can start using the tool today following the instructions below.
   
   Note: You would need to set the project's `RuntimeFrameworkVersion` to the build version of the runtime, which can be found on the download page. For example, if the build version is `2.0.4-servicing-25831-01`, add the following lines in the project's .csproj,
 
-```xml
-  <PropertyGroup>
-    <RuntimeFrameworkVersion>2.0.4-servicing-25831-01</RuntimeFrameworkVersion>
-  </PropertyGroup>
-```
+    ```xml
+   <PropertyGroup>
+     <RuntimeFrameworkVersion>2.0.4-servicing-25831-01</RuntimeFrameworkVersion>
+   </PropertyGroup>
+    ```
 
 ## Instructions
 
@@ -27,24 +27,25 @@ Here are the step by step instructions on how to use Xml Serializer Generator in
 2. Add dotnet-core MyGet feed to the project. 
     * Go to the project folder and create a file named `nuget.config` with the following content. The final file should look like [nuget.config](nuget.config)
     
-```xml
+    
+    ```xml
     <?xml version="1.0" encoding="utf-8"?>
     <configuration>
       <packageSources>
         <add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />
       </packageSources>
     </configuration>
-```
+    ```
 
 3. Add a reference to the Microsoft.XmlSerializer.Generator package:
 
     * Add the following lines in MyApp.csproj.
 
-```xml
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25906-03" />
-  </ItemGroup>
-```
+    ```xml
+    <ItemGroup>
+      <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25906-03" />
+    </ItemGroup>
+    ```
 
 4. Build the application by running `dotnet restore` and  `dotnet build`. If everything succeeds, a file named MyApp.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the serialization code.
 
