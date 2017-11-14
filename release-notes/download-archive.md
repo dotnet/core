@@ -8,6 +8,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2017/11/14 | 2.0.3 with SDK 2.0.3 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.0.3) | [download](download-archives/2.0.3-sdk-download.md) |
 | 2017/10/10 | 2.0.0 with SDK 2.0.2 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.0.2) | [download](download-archives/2.0.2-sdk-download.md) |
 | 2017/08/14 | 2.0.0 with SDK 2.0.0 | [release notes](2.0/2.0.0.md) | [download](download-archives/2.0.0-download.md) |
 | 2017/06/28 | 2.0.0-Preview2 with SDK 2.0.0-Preview2 | [release notes](2.0/2.0.0-preview2.md) | [download](download-archives/2.0.0-preview2-download.md) |
@@ -25,6 +26,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2017/11/14 | 1.1.5 with SDK 1.1.5 (LTS)     | [release notes](1.1/1.1.5.md) | [download](download-archives/1.1.5-download.md) |
 | 2017/09/21 | 1.1.4 with SDK 1.1.4 (LTS)     | [release notes](1.1/1.1.4.md) | [download](download-archives/1.1.4-download.md) |
 | 2017/05/09 | 1.1.2 with SDK 1.0.4 (Promoted to LTS)     | [release notes](1.1/1.1.2.md) | [download](download-archives/1.1.2-download.md) |
 | 2017/04/13 | 1.1.1 with SDK 1.0.3     | [release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3) | [download](download-archives/1.0.3-sdk-download.md) |
@@ -38,6 +40,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2017/11/14 | 1.0.8 with SDK 1.1.5     | [release notes](1.0/1.0.8.md) | [download](download-archives/1.0.8-download.md) |
 | 2017/09/21 | 1.0.7 with SDK 1.1.4     | [release notes](1.0/1.0.7.md) | [download](download-archives/1.0.7-download.md) |
 | 2017/05/09 | 1.0.5 with SDK 1.0.4     | [release notes](1.0/1.0.5.md) | [download](download-archives/1.0.5-download.md) |
 | 2017/04/13 | 1.0.4 with SDK 1.0.3     | [release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3) | [download](download-archives/1.0.3-sdk-download.md) |
