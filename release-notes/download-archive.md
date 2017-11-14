@@ -8,7 +8,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
-| 2017/11/14 | 2.0.3 with SDK 2.0.3 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.0.3) | [download](download-archives/2.0.3-sdk-download.md) |
+| 2017/11/14 | 2.0.3 with SDK 2.0.3 | [release notes](2.0/2.0.3.md) | [download](download-archives/2.0.3-download.md) |
 | 2017/10/10 | 2.0.0 with SDK 2.0.2 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.0.2) | [download](download-archives/2.0.2-sdk-download.md) |
 | 2017/08/14 | 2.0.0 with SDK 2.0.0 | [release notes](2.0/2.0.0.md) | [download](download-archives/2.0.0-download.md) |
 | 2017/06/28 | 2.0.0-Preview2 with SDK 2.0.0-Preview2 | [release notes](2.0/2.0.0-preview2.md) | [download](download-archives/2.0.0-preview2-download.md) |
