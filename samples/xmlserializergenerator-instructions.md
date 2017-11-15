@@ -26,14 +26,16 @@ Here are the step by step instructions on how to use Xml Serializer Generator in
       </packageSources>
     </configuration>
     ```
-3. Edit the .csproj and add a reference to the Microsoft.XmlSerializer.Generator package. For example, 
-    * Run command: `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25915-02`
+
+3. Edit the .csproj and add a reference to the Microsoft.XmlSerializer.Generator package. For example,
+    * Run command: `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25915-02`
     * Add the following lines in MyApp.csproj,
     ```xml
     <ItemGroup>
-      <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25915-02" />
+      <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25915-02" />
     </ItemGroup>
-    ```
+    ```
+  
 4. Add a class in the application. For example, add the class below in Program.cs,
     ```c#
     public class MyClass
