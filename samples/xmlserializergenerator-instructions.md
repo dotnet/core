@@ -7,7 +7,7 @@ You can start using the tool today following the instructions below.
 ## Prerequisites
 
 * [.Net Core SDK of version 2.0.2 or later](https://www.microsoft.com/net/download/windows)
-* [.NET Core runtime Release/2.0.X](https://github.com/dotnet/core-setup#daily-builds) (build 2.0.4-servicing-25831-01 or later. Note down the build version which will be used in the step 3 of the instructions below.)
+* [.NET Core runtime Release/2.0.3](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.3.md)
   
 ## Instructions
 
@@ -25,22 +25,16 @@ Here are the step by step instructions on how to use Xml Serializer Generator in
         <add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />
       </packageSources>
     </configuration>
-    ```
-3. Set the project's `RuntimeFrameworkVersion` to the build version of the runtime you have installed. For example, if the build version is `2.0.4-servicing-25831-01`, add the following lines in MyApp.csproj,
-    ```xml
-    <PropertyGroup>
-      <RuntimeFrameworkVersion>2.0.4-servicing-25831-01</RuntimeFrameworkVersion>
-    </PropertyGroup>
-    ```
-4. Edit the .csproj and add a reference to the Microsoft.XmlSerializer.Generator package. For example, 
-    * Run command: `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25906-03`
+    ```
+3. Edit the .csproj and add a reference to the Microsoft.XmlSerializer.Generator package. For example, 
+    * Run command: `dotnet add package Microsoft.XmlSerializer.Generator -v 1.0.0-preview1-25915-02`
     * Add the following lines in MyApp.csproj,
     ```xml
     <ItemGroup>
-      <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25906-03" />
+      <DotNetCliToolReference Include="Microsoft.XmlSerializer.Generator" Version="1.0.0-preview1-25915-02" />
     </ItemGroup>
-    ```
-5. Add a class in the application. For example, add the class below in Program.cs,
+    ```
+4. Add a class in the application. For example, add the class below in Program.cs,
     ```c#
     public class MyClass
     {
@@ -51,8 +45,8 @@ Here are the step by step instructions on how to use Xml Serializer Generator in
     ```c#
     var serializer = new System.Xml.Serialization.XmlSerializer(typeof(MyClass));
     ```
-    
-6. Build the application by running `dotnet build`. If everything succeeds, an assembly named MyApp.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the assembly.
+    
+5. Build the application by running `dotnet build`. If everything succeeds, an assembly named MyApp.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the assembly.
 
 Start the application and it will automatically load and use the pre-generated serializers at runtime.
 
