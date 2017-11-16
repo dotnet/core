@@ -1,7 +1,7 @@
 # .NET Core 1.0 Release Documents
 
 | Release Date | Description | |
-| :-- | :-- | :--: | :--: |
+| :-- | :-- | :--: |
 | 2017/11/14 | 1.0.8 with SDK 1.1.5 | [release notes](1.0/1.0.8.md)/[download](download-archives/1.0.8.md) |
 | 2017/09/21 | 1.0.7 with SDK 1.1.4 | [release notes](1.0/1.0.7.md)/[download](download-archives/1.0.7-download.md) |
 | 2017/05/09 | 1.0.5 with SDK 1.0.4 | [release notes](1.0/1.0.5.md)/[download](download-archives/1.0.5-download.md) |
