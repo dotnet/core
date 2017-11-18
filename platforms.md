@@ -10,8 +10,11 @@ You can install .NET Core on the following platforms, some of which are [support
 
 ## Docker
 
-* [.NET](https://hub.docker.com/r/microsoft/dotnet/)
-* [ASP.NET](https://hub.docker.com/r/microsoft/aspnetcore/)
+* [.NET Core](https://hub.docker.com/r/microsoft/dotnet/)
+* [.NET Core "Nightly"](https://hub.docker.com/r/microsoft/dotnet-nightly/)
+* [ASP.NET Core](https://hub.docker.com/r/microsoft/aspnetcore/)
+
+Note: Debian and Nanoserver images are supported.
 
 ## Unofficial Instructions 
 
