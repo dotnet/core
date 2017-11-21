@@ -19,8 +19,9 @@ Note: Debian and Nanoserver images are supported.
 
 ## Unofficial Instructions 
 
-* [RHEL 6](https://github.com/dotnet/core/blob/master/Documentation/build-and-install-rhel6-prerequisites.md)
 * [ARM32 / Raspberry Pi](https://github.com/dotnet/core/blob/master/samples/RaspberryPiInstructions.md)
+* [RHEL 6](https://github.com/dotnet/core/blob/master/Documentation/build-and-install-rhel6-prerequisites.md)
+* [Yocto](https://github.com/dotnet/core/blob/master/samples/YoctoInstructions.md)
 
 ## Build from Source
 
