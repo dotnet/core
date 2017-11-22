@@ -17,6 +17,11 @@ You can install .NET Core on the following platforms, some of which are [support
 
 Note: Debian and Nanoserver images are supported.
 
+## Nightly Builds (Unsupported)
+
+* [Preview Releases](https://github.com/dotnet/core/blob/master/daily-builds.md)
+* [Servicing Releases](https://github.com/dotnet/core/blob/master/daily-builds-servicing.md)
+
 ## Unofficial Instructions 
 
 * [Alpine](https://github.com/dotnet/announcements/issues/49)
