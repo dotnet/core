@@ -17,8 +17,8 @@ For released versions of the product:
 
 | Milestone                 | Release Date |
 |---------------------------|--------------|
-| .NET Core 2.1 Preview | Q4 2017 |
-| .NET Core 2.1 | Q1 2018 |
+| .NET Core 2.1 Preview | Q1 2018 |
+| .NET Core 2.1 | Q2 2018 |
 
 Note: Dates are calendar year (as opposed to fiscal year).
 
