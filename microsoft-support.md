@@ -1,27 +1,33 @@
-# .NET Core Support
+# Microsoft Support for .NET Core
 
-## NET Core Support Lifecycle
+This document describes Microsoft support for .NET Core.
+
+## Operating Systems
+
+.NET Core is supported by Microsoft across several operating systems and versions. The [.NET Core OS Lifecycle Policy](https://github.com/dotnet/core/blob/master/os-lifecycle-policy.md) provides current details on operating systems support policies and versions.
+
+## Support Lifecycle
 
 Every Microsoft product has a lifecycle. The lifecycle begins when a product is released and ends when it's no longer supported. Knowing key dates in this lifecycle helps you make informed decisions about when to upgrade or make other changes to your software. This product is governed by the [Microsoft Modern Lifecycle](https://support.microsoft.com/en-us/help/30881/modern-lifecycle-policy)
 
 The .NET Core support lifecycle offers 3 years of support for each Major and Minor release where:
 
-* Major releases are any release which updates the Major version number. For example, 1.0 is updated to 2.0.
-* Minor releases are any release which updates the Minor version number. For example, 1.0.0 is updated to 1.1.0.
-* Patch releases are any release which update the Patch number. For example, 1.0.1 is updated to 1.0.2.
+* Major releases are any release which updates the Major version number. For example, .NET Core 2.0.
+* Minor releases are any release which updates the Minor version number. For example, .NET Core 1.1.
+* Patch releases are any release which update the Patch number. For example, .NET Core 2.0.1.
 
-## What releases qualify for servicing and how do updates effect servicing qualifications?</h2>
+## What releases qualify for servicing and how do updates effect servicing qualifications?
 
 Within the 3-year support lifecycle, systems must remain current on released patch updates for the Major.Minor release.
 
 Customers can choose to use the Long Term Support (LTS) releases or Current releases. LTS releases will typically be Major releases (eg 1.0) and will only receive critical fixes throughout their lifecycle. Current releases will be Minor releases (eg 1.1.0) and receive these same fixes and will also be updated with compatible innovations and features.
 
-### Long Term Support (LTS) releases are -
+### Long Term Support (LTS) releases
 
 * Supported for three years after the general availability date of a LTS release
 * Or one year after the general availability of a subsequent LTS release
 
-### Current releases are -
+### Current releases
 
 * Supported within the same three-year window as the parent LTS release
 * Supported for three months after the general availability of a subsequent Current release
@@ -50,10 +56,6 @@ This table tracks release dates and end of support dates for .NET Core versions.
 
 ### End of support
 
-End of support refers to the date when Microsoft no longer provides fixes, updates, or online technical assistance. This is the time to make sure you have the latest available update* installed. Without Microsoft support, you will no longer receive security updates that can help protect your machine from harmful viruses, spyware, and other malicious software that can steal your personal information.
+End of support refers to the date when Microsoft no longer provides fixes, updates, or online technical assistance. This is the time to make sure you have the latest available update\* installed. Without Microsoft support, you will no longer receive security updates that can help protect your machine from harmful viruses, spyware, and other malicious software that can steal your personal information.
 
 \* Updates are cumulative, with each update built upon all of the updates that preceded it. A device needs to install the latest update to remain supported. Updates may include new features, fixes (security and/or non-security), or a combination of both. Not all features in an update will work on all devices. Update availability may vary, for example by country, region, network connectivity, or hardware capabilities (including, e.g., free disk space).
-
-### What Operating System versions are supported to run .NET Core applications?
-    
-.NET Core is supported across several operating systems and versions. The [.NET Core OS Lifecycle Policy](https://github.com/dotnet/core/blob/master/os-lifecycle-policy.md) provides current details on operating systems support policies and versions.
