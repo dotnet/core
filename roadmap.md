@@ -19,6 +19,7 @@ For released versions of the product:
 |---------------------------|--------------|
 | .NET Core 2.1 Preview | Q1 2018 |
 | .NET Core 2.1 | Q2 2018 |
+| .NET Core 2.0.x (servicing) | approx. every 1-2 months or as needed (see also [2.0 Releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-20)) |
 
 Note: Dates are calendar year (as opposed to fiscal year).
 
