@@ -43,12 +43,11 @@ In addition to staying current with the latest patch update, customers using Cur
 
 This table tracks release dates and end of support dates for .NET Core versions.
 
-
 |  Version  |  Release Date  | Latest Patch Version | Support Level | End of Support |
 | -- | -- | -- | -- | -- |
-| .NET Core 2.0 | August 14, 2017 | 2.0.3 | Current | August 14, 2020 or 3 months after next Current release or 12 months after next LTS release, whichever is shorter. |
-| .NET Core 1.1 | November 16, 2016 | 1.1.5 | LTS* | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
-| .NET Core 1.0 | June 27, 2016 | 1.0.8 | LTS | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
+| .NET Core 2.0 | August 14, 2017 | 2.0.0 | Current | August 14, 2020 or 3 months after next Current release or 12 months after next LTS release, whichever is shorter. |
+| .NET Core 1.1 | November 16, 2016 | 1.1.4 | LTS\* | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
+| .NET Core 1.0 | June 27, 2016 | 1.0.7 | LTS | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
 | .NET Core 1.0.0 RC2 | May 16, 2016 | n/a | n/a | September 27, 2016 |
 | .NET Core 1.0.0 RC1 | February 15, 2016 | n/a | n/a | July 16, 2016 |
 
