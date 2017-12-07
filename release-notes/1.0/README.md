@@ -1,4 +1,6 @@
-# .NET Core 1.0 Release Documents
+# .NET Core 1.0 Releases
+
+The following .NET Core 1.0 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
 
 | Release Date | Description | |
 | :-- | :-- | :--: |
