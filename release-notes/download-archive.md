@@ -26,7 +26,6 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
-| 2017/12/04 | 1.1.5 with SDK 1.1.6 (LTS)     | [release notes](https://github.com/dotnet/cli/releases/tag/v1.1.6) | [download](download-archives/1.1.6-sdk-download.md) |
 | 2017/11/14 | 1.1.5 with SDK 1.1.5 (LTS)     | [release notes](1.1/1.1.5.md) | [download](download-archives/1.1.5.md) |
 | 2017/09/21 | 1.1.4 with SDK 1.1.4 (LTS)     | [release notes](1.1/1.1.4.md) | [download](download-archives/1.1.4-download.md) |
 | 2017/05/09 | 1.1.2 with SDK 1.0.4 (Promoted to LTS)     | [release notes](1.1/1.1.2.md) | [download](download-archives/1.1.2-download.md) |
