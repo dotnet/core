@@ -1,9 +1,21 @@
-# .NET Core Releases
+# .NET Core Release Notes
 
-This area contains release information and download links for all .NET Core releases.
+The latest major release is [.NET Core 2.0](2.0/2.0.0.md).
 
-| Area | Description |
-| -- | -- |
-| [.NET Core Download Archive](download-archive.md) | Release notes and download links to previous releases |
-| .NET Core Releases | [csv](releases.csv) and [json](releases.json) files for discovering and tracking .NET Core versions, download locations and other release metadata. |
-| [CLI Usage Data](cli-usage-data.md) | The .NET Core SDK collects usage data by default. This data is available to all .NET Core developers. |
+## Latest Updates
+
+You can download the latest updates for .NET Core.
+
+* [.NET Core 2.0.3](download-archives/2.0.3.md)
+* [.NET Core 1.1.5](download-archives/1.1.5.md)
+* [.NET Core 1.0.8](download-archives/1.0.8.md)
+
+## Release Information
+
+* [.NET Core Releases](download-archive.md) -- Release notes and downloads
+* [CSV format](releases.csv) -- Releases in CSV format
+* [JSON format](releases.json) -- Releases in JSON format
+
+## CLI Usage Data
+
+* [CLI Usage Data](cli-usage-data.md) - Usage data from the .NET Core SDK

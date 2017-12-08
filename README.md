@@ -2,18 +2,24 @@
 
 The dotnet/core repository is a good starting point for .NET Core.
 
+The latest major release is [.NET Core 2.0](release-notes/2.0/2.0.0.md). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md)
+
+## Download the latest .NET Core SDK
+
+* [.NET Core 2.0 SDK](release-notes/download-archives/2.0.3.md)
+
+## .NET Core Releases
+
+* [.NET Core released builds](release-notes/README.md)
+* [.NET Core daily preview builds](daily-builds.md)
+* [.NET Core daily servicing builds](daily-builds-servicing.md)
+
 ## Learn about .NET Core
 
 * [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
 * [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
 * [Learn how about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
 * [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
-
-## Download .NET Core
-
-* [.NET Core released builds](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
-* [.NET Core daily preview builds](daily-builds.md)
-* [.NET Core daily servicing builds](daily-builds-servicing.md)
 
 ## Getting help
 
@@ -33,9 +39,9 @@ The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundat
 
 ## Licenses
 
-.NET Core platform projects typically use either the [MIT](LICENSE.TXT) or
+.NET Core repos typically use either the [MIT](LICENSE.TXT) or
 [Apache 2](http://www.apache.org/licenses/LICENSE-2.0) licenses for code.
 Some projects license documentation and other forms of content under
 [Creative Commons Attribution 4.0](http://creativecommons.org/licenses/by/4.0/).
 
-See specific projects to understand the license used.
+See specific [repos](Documentation/core-repos.md) to understand the license used.
