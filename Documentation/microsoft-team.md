@@ -15,6 +15,10 @@ There are two main teams to join to get access to Microsoft .NET-related project
 
 Once your permission requests are approved, you should have write permissions to [.NET Core Repos](https://github.com/dotnet/core/blob/master/Documentation/core-repos.md). Repo users will be able to @mention you at that point.
 
+## Service Accounts
+
+Service accounts should also be linked. For more details, see [Service accounts for GitHub](https://docs.opensource.microsoft.com/github/service-accounts.html).
+
 ## Best Practices
 
 * Use your full name for your account.
