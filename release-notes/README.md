@@ -6,10 +6,9 @@ The latest major release is [.NET Core 2.0](2.0/2.0.0.md).
 
 You can download the latest updates for .NET Core.
 
-* [.NET Core 2.0.4](download-archives/2.0.4-download.md)
-* [.NET Core 2.0.3](download-archives/2.0.3.md)
-* [.NET Core 1.1.5](download-archives/1.1.5.md)
-* [.NET Core 1.0.8](download-archives/1.0.8.md)
+* [.NET Core 2.0.5](download-archives/2.0.5-download.md)
+* [.NET Core 1.1.6](download-archives/1.1.6-download.md)
+* [.NET Core 1.0.9](download-archives/1.0.9-download.md)
 
 ## Release Information
 
