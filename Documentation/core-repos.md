@@ -37,4 +37,4 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 
 ## .NET Framework
 * [microsoft/dotnet](https://github.com/microsoft/dotnet) -- catch-all repository for .NET (where most .NET Framework issues are filed)
-* [microsoft/dotnet-framework-docker](https://github.com/microsoft/dotnet-framework-docker) - .NET Core Docker images
+* [microsoft/dotnet-framework-docker](https://github.com/microsoft/dotnet-framework-docker) - .NET Framework Docker images
