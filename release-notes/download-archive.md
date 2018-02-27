@@ -4,6 +4,12 @@ This page provides an archive of previously released versions of the .NET Core r
 
 ## ["Current"](https://www.microsoft.com/net/core/support) Releases
 
+### .NET Core 2.1
+
+| Release Date | Description | Release Notes | |
+| :-- | :-- | :--: | :--: |
+| 2018/02/27 | 2.0.1-Preview1 with SDK 2.0.1-Preview1 | [release notes](2.1/2.0.1-preview1.md) | [download](download-archives/2.0.1-preview1-download.md) |
+
 ### .NET Core 2.0
 
 | Release Date | Description | Release Notes | |
