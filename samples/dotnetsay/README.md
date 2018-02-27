@@ -88,6 +88,6 @@ At present, there is no formal uninstall capability. We'll add that in Preview 2
 On Windows:
  * `%USERPROFILE%\.dotnet\tools`
 
-On Linux and OSX:
+On Linux and macOS:
  * `~/.dotnet/tools`
  
