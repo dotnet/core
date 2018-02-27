@@ -85,6 +85,6 @@ dotnetsay
 
 At present, there is no formal uninstall capability. We'll add that in Preview 2. Instead you need to delete the tool from one of following locations (as appropriate to your operating system):
 
- * %USERPROFILE&\.dotnet\tools 
+ * %USERPROFILE%\.dotnet\tools 
  * ~\.dotnet\tools
  
