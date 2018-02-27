@@ -1,6 +1,7 @@
 # .NET Core Release Notes
 
-The latest major release is [.NET Core 2.0](2.0/2.0.0.md).
+The latest major release is [.NET Core 2.0](2.0/2.0.0.md). 
+[.NET Core 2.1-preview1](2.1/2.1.0-preview1.md)
 
 ## Latest Updates
 
