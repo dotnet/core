@@ -29,7 +29,7 @@ You can also [download the repository as a zip](https://github.com/dotnet/core/a
 
 ## Build the Tool
 
-You can build and run the sample using the following commands. The instructions assume that you are in the root of the repository.
+You can build and package the tool using the following commands. The instructions assume that you are in the root of the repository.
 
 ```console
 cd samples
@@ -55,7 +55,7 @@ The `PackAsTool` property in the project file makes it a global tool, as you can
 
 ## Install the Tool
 
-You can build and run the sample using the following command.
+You can install the tool using the following command.
 
 ```console
 dotnet install tool -g dotnetsay
@@ -75,7 +75,7 @@ For Preview 1, defining the source during installation doesn't work correctly, s
 
 ## Run the Tool
 
-You can install the sample using the following command.
+You can run the tool using the following command.
 
 ```console
 dotnetsay
