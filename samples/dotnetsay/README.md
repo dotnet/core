@@ -78,5 +78,13 @@ For Preview 1, defining the source during installation doesn't work correctly, s
 You can install the sample using the following command.
 
 ```console
-dotnet install tool -g dotnetsay
+dotnetsay
 ```
+
+## Uninstall the Tool
+
+At present, there is no formal uninstall capability. We'll add that in Preview 2. Instead you need to delete the tool from one of following locations (as appropriate to you operating system):
+
+ * %USERPROFILE&\.dotnet\tools 
+ * ~\.dotnet\tools
+ 
