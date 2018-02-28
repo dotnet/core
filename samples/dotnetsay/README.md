@@ -61,7 +61,7 @@ You can install the tool using the following command.
 dotnet install tool -g dotnetsay
 ```
 
-For Preview 1, defining the source during installation doesn't work correctly, so you need a nuget.config file to test your new tool without deploying it to a NuGet feed. You can do this by placing this nuget.config in your project directory that looking similar to the followin example:
+For Preview 1, defining the source during installation doesn't work correctly, so you need a nuget.config file to test your new tool without deploying it to a NuGet feed. You can do this by placing this nuget.config in your project directory that looks similar to the following example:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
