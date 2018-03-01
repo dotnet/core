@@ -25,10 +25,6 @@ Note: Dates are calendar year (as opposed to fiscal year).
 
 Milestone information is available on most repos, for example [dotnet/corefx milestones](https://github.com/dotnet/corefx/milestones).
 
-## .NET Core 2.1 Release
-
-The .NET Core 2.1 project has not yet started. The team is currently working on infrastructure improvements to the .NET Core build and release system. .NET Core 2.1 release information will be shared here once planning starts.
-
 ## Feedback
 
 The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo with the [roadmap label](https://github.com/dotnet/core/labels/roadmap). You can also create issues in other [.NET Core repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
