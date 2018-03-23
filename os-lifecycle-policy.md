@@ -7,10 +7,10 @@
 
 ## Support for new OS versions
 
-When an OS which is part of the .NET Core supported set releases an update, support for that version will generally be available with the next update to .NET Core. For example Fedora 26 is available and will be supported by .NET Core 2.0. Fedora 27 is scheduled to release in the fall and will be supported by a subsequent update of .NET Core.
+When an OS which is part of the .NET Core supported set releases an update, support for that version will generally be available with the next update to .NET Core. For example Fedora 26 is available and will be supported by .NET Core 2.0. Fedora 27 is scheduled to release in the fall of 2017 and will be supported by a subsequent update of .NET Core.
 
 'Support' means that .NET Core is built and tested on the OS and Microsoft Developer Support may be contacted for assistance with .NET Core on the environment.
 
 ## OS version end of life
 
-When an OS version reaches end-of-life as defined by the OS owner, .NET Core will also cease to provide support for that OS version. Previously released packages will remain available for customers needing access but formal support and updates of any kind will no long be provided.
+When an OS version reaches end-of-life as defined by the OS owner, .NET Core will also cease to provide support for that OS version. Previously released packages will remain available for customers needing access but formal support and updates of any kind will no longer be provided.
