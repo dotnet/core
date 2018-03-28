@@ -8,6 +8,11 @@ You can install .NET Core on the following platforms, some of which are [support
 * [Linux](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.3.md)
 * [macOS](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.3.md)
 
+## Supported Operating System Versions
+
+* [.NET Core 2.0 supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0-supported-os.md)
+* [.NET Core 1.x supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/1.0/1.0-supported-os.md)
+
 ## Official Docker Repos
 
 * [.NET Core](https://hub.docker.com/r/microsoft/dotnet/)
