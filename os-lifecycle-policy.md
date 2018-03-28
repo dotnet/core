@@ -2,8 +2,8 @@
 
 .NET Core is [supported by Microsoft](microsoft-support.md) on a range of operatings systems and versions. Each platform has distinct Lifecycles defined by the parent organization. .NET Core support will take these Lifecycle schedules into account when adding or removing versions from the supported list.
 
-* [.NET Core 2.0 supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0-supported-os.md)
-* [.NET Core 1.x supported OS versions](https://github.com/dotnet/core/blob/master/release-notes/1.0/1.0-supported-os.md)
+* [.NET Core 2.0 supported OS versions](release-notes/2.0/2.0-supported-os.md)
+* [.NET Core 1.x supported OS versions](release-notes/1.0/1.0-supported-os.md)
 
 ## Support for new OS versions
 
