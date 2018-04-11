@@ -4,7 +4,7 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        string message = "dotnet-bot: Welcome to using .NET Core with a global tool!";
+        string message = "Welcome to using a .NET Core global tool!";
 
         if (args.Length > 0)
         {
