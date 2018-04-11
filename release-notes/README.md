@@ -1,8 +1,22 @@
-# .NET Core 2.1 Releases
+# .NET Core Release Notes
 
-The following .NET Core 2.1 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
+[.NET Core 2.1-preview2](2.1/Preview/2.1.0-preview2.md) is the latest release available.
+The latest major shipped release is [.NET Core 2.0](2.0/2.0.0.md). 
 
-| Release Date | Description |  |  |
-| :-- | :-- | :--: | :-- |
-| 2018/04/10 | 2.1.0 Preview 2 | [release notes](Preview/2.1.0-preview2.md)/[download](../download-archives/2.1.0-preview2-download.md) | [Known Issues](Preview/2.1.0-preview2-known-issues.md)|
-| 2018/02/27 | 2.1.0 Preview 1 | [release notes](2.1.0-preview1.md)/[download](../download-archives/2.1.0-preview1-download.md) | [Known Issues](2.1.0-preview1-known-issues.md)|
+## Latest Updates
+
+You can download the latest updates for .NET Core.
+
+* [.NET Core 2.0.6](download-archives/2.0.6-download.md)
+* [.NET Core 1.1.7](download-archives/1.1.7-download.md)
+* [.NET Core 1.0.10](download-archives/1.0.10-download.md)
+
+## Release Information
+
+* [.NET Core Releases](download-archive.md) -- Release notes and downloads
+* [CSV format](releases.csv) -- Releases in CSV format
+* [JSON format](releases.json) -- Releases in JSON format
+
+## CLI Usage Data
+
+* [CLI Usage Data](cli-usage-data.md) - Usage data from the .NET Core SDK
