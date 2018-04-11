@@ -2,14 +2,14 @@
 
 This sample demonstrates how to use and create .NET Core Global Tools. It works on Windows, macOS and Linux.
 
-You must have [.NET Core 2.1 Preview 1](https://blogs.msdn.microsoft.com/dotnet/2018/02/27/announcing-net-core-2-1-preview-1/) or higher installed.
+You must have [.NET Core 2.1 Preview 2](https://blogs.msdn.microsoft.com/dotnet/2018/02/27/announcing-net-core-2-1-preview-2/) or higher installed.
 
 ## Try the pre-built `dotnetsay` Global Tool
 
 You can quickly try the `dotnetsay` global tool using the following commands:
 
 ```console
-dotnet install tool -g dotnetsay
+dotnet tool install -g dotnetsay
 dotnetsay
 ```
 
@@ -58,10 +58,10 @@ The `PackAsTool` property in the project file makes it a global tool, as you can
 You can install the tool using the following command.
 
 ```console
-dotnet install tool -g dotnetsay
+dotnet tool install -g dotnetsay
 ```
 
-For Preview 1, defining the source during installation doesn't work correctly, so you need a nuget.config file to test your new tool without deploying it to a NuGet feed. You can do this by placing this nuget.config in your project directory that looks similar to the following example:
+For Preview 2, defining the source during installation doesn't work correctly, so you need a nuget.config file to test your new tool without deploying it to a NuGet feed. You can do this by placing this nuget.config in your project directory that looks similar to the following example:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -83,11 +83,9 @@ dotnetsay
 
 ## Uninstall the Tool
 
-At present, there is no formal uninstall capability. We'll add that in Preview 2. Instead you need to delete the tool from one of following locations (as appropriate to your operating system):
+You can uninstall the tool using the following command.
 
-On Windows:
- * `%USERPROFILE%\.dotnet\tools`
-
-On Linux and macOS:
- * `~/.dotnet/tools`
+```console
+dotnet tool uninstall -g dotnetsay
+```
  
