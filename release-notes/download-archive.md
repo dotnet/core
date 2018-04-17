@@ -8,7 +8,6 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
-| 2018/04/10 | 2.1.0-Preview2 with SDK 2.1.300-Preview2 | [release notes](2.1/Preview/2.1.0-preview2.md) | [download](download-archives/2.1.0-preview2-download.md) |
 | 2018/02/27 | 2.1.0-Preview1 with SDK 2.1.300-Preview1 | [release notes](2.1/2.1.0-preview1.md) | [download](download-archives/2.1.0-preview1-download.md) |
 
 ### .NET Core 2.0
