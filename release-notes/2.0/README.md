@@ -4,6 +4,7 @@ The following .NET Core 2.0 releases have been shipped. You must be on the lates
 
 | Release Date | Description |  |  |
 | :-- | :-- | :--: | :-- |
+| 2018/04/17 | 2.0.7 with SDK 2.1.105 | [release notes](2.0.7.md)/[download](../download-archives/2.0.7-download.md) | |
 | 2018/03/13 | 2.0.6 with SDK 2.1.101 | [release notes](2.0.6.md)/[download](../download-archives/2.0.6-download.md) | |
 | 2018/01/09 | 2.0.5 with SDK 2.1.4 | [release notes](2.0.5.md)/[download](../download-archives/2.0.5-download.md) | |
 | 2017/12/14 | 2.0.4 with SDK 2.1.3 | [release notes](2.0.4.md)/[download](../download-archives/2.0.4-download.md) | |
