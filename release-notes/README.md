@@ -7,9 +7,9 @@ The latest major shipped release is [.NET Core 2.0](2.0/2.0.0.md).
 
 You can download the latest updates for .NET Core.
 
-* [.NET Core 2.0.6](download-archives/2.0.6-download.md)
-* [.NET Core 1.1.7](download-archives/1.1.7-download.md)
-* [.NET Core 1.0.10](download-archives/1.0.10-download.md)
+* [.NET Core 2.0.7](download-archives/2.0.7-download.md)
+* [.NET Core 1.1.8](download-archives/1.1.8-download.md)
+* [.NET Core 1.0.11](download-archives/1.0.11-download.md)
 
 ## Release Information
 
