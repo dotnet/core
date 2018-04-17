@@ -15,6 +15,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/04/17 | 2.0.7 with SDK 2.1.105 | [release notes](2.0/2.0.7.md) | [download](download-archives/2.0.7-download.md) |
 | 2018/03/13 | 2.0.6 with SDK 2.1.101 | [release notes](2.0/2.0.6.md) | [download](download-archives/2.0.6-download.md) |
 | 2018/01/09 | 2.0.5 with SDK 2.1.4 | [release notes](2.0/2.0.5.md) | [download](download-archives/2.0.5-download.md) |
 | 2017/12/14 | 2.0.4 with SDK 2.1.3 | [release notes](2.0/2.0.4.md) | [download](download-archives/2.0.4-download.md) |
@@ -35,6 +36,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/04/17 | 1.1.8 with SDK 1.1.9 (LTS)          | [release notes](1.1/1.1.8.md) | [download](download-archives/1.1.8-download.md) |
 | 2018/03/13 | 1.1.7 with SDK 1.1.8 (LTS)          | [release notes](1.1/1.1.7.md) | [download](download-archives/1.1.7-download.md) |
 | 2018/01/09 | 1.1.6 with SDK 1.1.7 (LTS)          | [release notes](1.1/1.1.6.md) | [download](download-archives/1.1.6-download.md) |
 | 2017/11/14 | 1.1.5 with SDK 1.1.5 (LTS)          | [release notes](1.1/1.1.5.md) | [download](download-archives/1.1.5.md) |
@@ -47,6 +49,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/04/17 | 1.0.11 with SDK 1.1.9               | [release notes](1.0/1.0.11.md) | [download](download-archives/1.0.11-download.md) |
 | 2018/03/13 | 1.0.10 with SDK 1.1.8               | [release notes](1.0/1.0.10.md) | [download](download-archives/1.0.10-download.md) |
 | 2018/01/09 | 1.0.9 with SDK 1.1.7                | [release notes](1.0/1.0.9.md) | [download](download-archives/1.0.9-download.md) |
 | 2017/11/14 | 1.0.8 with SDK 1.1.5                | [release notes](1.0/1.0.8.md) | [download](download-archives/1.0.8.md) |
