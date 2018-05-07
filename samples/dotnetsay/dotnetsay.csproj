@@ -6,9 +6,26 @@
     <IsPackable>true</IsPackable>
     <PackAsTool>true</PackAsTool>
     <AssemblyName>dotnetsay</AssemblyName>
-    <Description>A simple global tool.</Description>
+    <Description>A simple .NET Core global tool.</Description>
     <DebugType>embedded</DebugType>
     <RootNamespace>dotnetsay</RootNamespace>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>.NET Team</Authors>
+    <Product>dotnetsay</Product>
+    <Copyright>MIT</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://github.com/dotnet/core/blob/master/LICENSE.TXT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/dotnet/core/blob/master/samples/dotnetsay/README.md</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dotnet/core</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62905-03" PrivateAssets="All"/>
+  </ItemGroup>
 
 </Project>

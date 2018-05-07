@@ -2,7 +2,7 @@
 
 This sample demonstrates how to use and create .NET Core Global Tools. It works on Windows, macOS and Linux.
 
-You must have [.NET Core 2.1 Preview 2](https://blogs.msdn.microsoft.com/dotnet/2018/02/27/announcing-net-core-2-1-preview-2/) or higher installed.
+You must have [.NET Core 2.1 RC 1](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/announcing-net-core-2-1-rc-1/) or higher installed.
 
 ## Try the pre-built `dotnetsay` Global Tool
 
