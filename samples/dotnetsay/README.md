@@ -87,3 +87,19 @@ dotnet pack -c release -o nupkg /p:DeterministicSourcePaths=true
 ```
 
 Make sure to build official packages from repositories with stable commit hashes. If you build from a branch who commits are later [squashed](https://help.github.com/articles/about-pull-request-merges/), then the commit hashs will not be found and sourcelink will not work correctly.
+
+## Debug Tools with Visual Studio
+
+You can debug sourcelink-enabled .NET Core Global tools with Visual Studio, using the `Developer Command Prompt for VS 2017`. The following example launches `dotnetsay` for debugging:
+
+```console
+devenv /debugexe c:\Users\rich\.dotnet\tools\dotnetsay.exe
+```
+
+Set `Debugger Type` to `Managed (CoreCLR)` in `Properties`. Then `Step Into new instance` from the `Debug` menu.
+
+![debugging-dotnetsay-configure](https://user-images.githubusercontent.com/2608468/40098555-db8cd828-5890-11e8-9549-b3bb1746c187.png)
+
+You will be asked if you want to download source from GitHub. After that, you will then be able to step through the execution of the tool. 
+
+![debugging-dotnetsay](https://user-images.githubusercontent.com/2608468/40098638-5a2be8b8-5891-11e8-83e7-905aa445c2fe.png)
