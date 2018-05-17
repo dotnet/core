@@ -69,24 +69,23 @@ You can make tools debuggable with [sourcelink](https://github.com/dotnet/source
 
 ```xml
 <PropertyGroup>
-  <RepositoryType>git</RepositoryType>
   <PublishRepositoryUrl>true</PublishRepositoryUrl>
   <DebugType>embedded</DebugType>
   <EmbedUntrackedSources>true</EmbedUntrackedSources>
 </PropertyGroup>
 
 <ItemGroup>
-  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62905-03" PrivateAssets="All"/>
+  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62909-01" PrivateAssets="All"/>
 </ItemGroup>
 ```
 
-Use [`DeterministicSourcePaths`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#deterministicsourcepaths) when producting official builds. The simplest way to do that is by packing with an additional property set.
+Use [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild) when producting official builds. The simplest way to do that is by packing with an additional property set.
 
 ```console
-dotnet pack -c release -o nupkg /p:DeterministicSourcePaths=true
+dotnet pack -c release -o nupkg /p:ContinuousIntegrationBuild=true
 ```
 
-Make sure to build official packages from repositories with stable commit hashes. If you build from a branch who commits are later [squashed](https://help.github.com/articles/about-pull-request-merges/), then the commit hashs will not be found and sourcelink will not work correctly.
+Make sure to build official packages from repositories with stable commit hashes. If you build from a branch whose commits are later [squashed](https://help.github.com/articles/about-pull-request-merges/), then the commit hashs will not be found and sourcelink will not work correctly.
 
 ## Debug Tools with Visual Studio
 
