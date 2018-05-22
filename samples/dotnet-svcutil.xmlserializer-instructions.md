@@ -43,13 +43,19 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     ```
     ii. Add WCF Client code
     ```c#
-    var myBinding = new BasicHttpBinding();
-    var myEndpoint = new EndpointAddress("http://localhost:2561/Service1.svc"); //Fill your service url here
-    var myChannelFactory = new ChannelFactory<IService1>(myBinding, myEndpoint);
-    IService1 client = myChannelFactory.CreateChannel();
-    string s = client.GetData(1);
-    ((ICommunicationObject)client).Close();
-    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var myBinding = new BasicHttpBinding();
+            var myEndpoint = new EndpointAddress("http://localhost:2561/Service1.svc"); //Fill your service url here
+            var myChannelFactory = new ChannelFactory<IService1>(myBinding, myEndpoint);
+            IService1 client = myChannelFactory.CreateChannel();
+            string s = client.GetData(1);
+            ((ICommunicationObject)client).Close();
+        }
+    }
+
     [ServiceContract]
     public interface IService1
     {
