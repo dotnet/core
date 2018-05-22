@@ -34,6 +34,7 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     <TargetFramework>netcoreapp2.1</TargetFramework>
     ```
 3. Add WCF client code like the following
+   
    i. Add package reference for servicemodel
    ```xml
     <ItemGroup>
