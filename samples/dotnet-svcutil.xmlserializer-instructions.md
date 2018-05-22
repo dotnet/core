@@ -49,6 +49,14 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     IService1 client = myChannelFactory.CreateChannel();
     string s = client.GetData(1);
     ((ICommunicationObject)client).Close();
+    
+    [ServiceContract]
+    public interface IService1
+    {
+        [XmlSerializerFormat]
+        [OperationContract(Action = "http://tempuri.org/IService1/GetData", ReplyAction = "http://tempuri.org/IService1/GetDataResponse")]
+        string GetData(int value);
+    }
     ```
 4. Edit the .csproj and add a reference to the dotnet-svcutil.xmlserializer package. For example,
 
