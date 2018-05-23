@@ -36,6 +36,7 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     <TargetFramework>netcoreapp2.1</TargetFramework>
     ```
 3. Add package reference for servicemodel
+   
    Run command: `dotnet add packages System.ServiceModel.Http -v 4.4.2`
 
 4. Add WCF Client code
