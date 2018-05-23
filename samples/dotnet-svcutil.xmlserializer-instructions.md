@@ -6,16 +6,18 @@ You can start using the tool today following the instructions below.
 
 ## Prerequisites
 
-The following is required for svcutil.xmlserializer to work. You can use command `dotnet --info` to check which versions of .NET Core SDK and runtime you may already have installed.
+The following is required for svcutil.xmlserializer to work. 
 
 * [.NET Core SDK 2.1.2 or later](https://www.microsoft.com/net/download/windows)
 * [.NET Core runtime 2.1.0-preview1 or later](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.1.0-preview1-download.md)
-  
+
+You can use command `dotnet --info` to check which versions of .NET Core SDK and runtime you may already have installed.
+
 ## Instructions
 
 Here are the step by step instructions on how to use dotnet-svcutil.xmlserializer in a .NET Core console application.
 
-1. Create a WCF Service named 'MyWCFService' using default template 'WCF Service Application'.  Add [XmlSerializerFormat] attribute on the service method like the following
+1. Create a WCF Service named 'MyWCFService' using default template 'WCF Service Application' in .NET Framework.  Add [XmlSerializerFormat] attribute on the service method like the following
     ```c#
     [ServiceContract]
     public interface IService1
@@ -25,23 +27,18 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
         string GetData(int value);
     }
     ```
-2. Create a .NET Core console application as WCF client target at netcoreapp 2.1, e.g. create an app named 'MyWCFClient' with the command,
+2. Create a .NET Core console application as WCF client application that targets at netcoreapp 2.1, e.g. create an app named 'MyWCFClient' with the command,
     ```
     dotnet new console --name MyWCFClient
     ```
-    And make sure your csproj target at netcoreapp 2.1 as the following
+    And make sure your csproj targets at netcoreapp 2.1 as the following in .csproj
     ```xml
     <TargetFramework>netcoreapp2.1</TargetFramework>
     ```
-3. Add WCF client code like the following
-   
-   i. Add package reference for servicemodel
-   ```xml
-    <ItemGroup>
-      <PackageReference Include="System.ServiceModel.Http" Version="4.4.2" />
-    </ItemGroup>
-    ```
-    ii. Add WCF Client code
+3. Add package reference for servicemodel
+   Run command: `dotnet add packages System.ServiceModel.Http -v 4.4.2`
+
+4. Add WCF Client code
     ```c#
     class Program
     {
@@ -64,7 +61,7 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
         string GetData(int value);
     }
     ```
-4. Edit the .csproj and add a reference to the dotnet-svcutil.xmlserializer package. For example,
+5. Edit the .csproj and add a reference to the dotnet-svcutil.xmlserializer package. For example,
 
     i. Run command: `dotnet add packages dotnet-svcutil.xmlserializer -v 1.0.0-preview1-26515-1`
 
@@ -75,6 +72,6 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     </ItemGroup>
     ```
 
-5. Build the application by running `dotnet build`. If everything succeeds, an assembly named MyWCFClient.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the assembly.
+6. Build the application by running `dotnet build`. If everything succeeds, an assembly named MyWCFClient.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the assembly.
 
-Start the application and it will automatically load and use the pre-generated serializers at runtime.
+7. Start the WCF service e.g. running http://localhost:2561/Service1.svc in the IE. Then start the client application and it will automatically load and use the pre-generated serializers at runtime.
