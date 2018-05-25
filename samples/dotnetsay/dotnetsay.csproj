@@ -3,9 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Description>A simple .NET Core global tool.</Description>
+    <Description>A simple .NET Core global tool called "dotnetsay".</Description>
     <LangVersion>Latest</LangVersion>
-    <VersionPrefix>2.1.2</VersionPrefix>
+    <VersionPrefix>2.1.3</VersionPrefix>
     <Authors>.NET Team</Authors>
     <Product>dotnetsay</Product>
     <Copyright>MIT</Copyright>
@@ -19,7 +19,7 @@
     <PackAsTool>true</PackAsTool>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62909-01" PrivateAssets="All"/>
   </ItemGroup>
 

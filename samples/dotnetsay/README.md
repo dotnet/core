@@ -2,7 +2,7 @@
 
 This sample demonstrates how to use and create .NET Core Global Tools. It works on Windows, macOS and Linux.
 
-You must have [.NET Core 2.1 RC 1](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/announcing-net-core-2-1-rc-1/) or higher installed.
+You must have [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/announcing-net-core-2-1-rc-1/) or higher installed.
 
 ## Try the pre-built `dotnetsay` Global Tool
 
@@ -39,9 +39,13 @@ You can build and package the tool using the following commands. The instruction
 cd samples
 cd dotnetsay
 dotnet pack -c release -o nupkg
-dotnet tool install --source-feed C:\git\core\samples\dotnetsay\nupkg -g dotnetsay
+dotnet tool install --add-source .\nupkg -g dotnetsay
 dotnetsay
 ```
+
+> Note: On macOS and Linux, `.\nupkg` will need be switched to `./nupkg` to accomodate for the different slash directions.
+
+> Note: For .NET Core 2.1 RC1, the argument to specify a NuGet feed was `--source-feed`. It was changed to `--add-source` for the final release. You will need to use `--source-feed` if you are using .NET Core 2.1 RC1.
 
 You can uninstall the tool using the following command.
 
@@ -74,12 +78,14 @@ You can make tools debuggable with [sourcelink](https://github.com/dotnet/source
   <EmbedUntrackedSources>true</EmbedUntrackedSources>
 </PropertyGroup>
 
-<ItemGroup>
+<ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
   <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62909-01" PrivateAssets="All"/>
 </ItemGroup>
 ```
 
-Use [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild) when producting official builds. The simplest way to do that is by packing with an additional property set.
+> Note: This example conditionalizes the `PackageReference` to the `ContinuousIntegrationBuild` property being set. There is no problem running SourceLink on every build, however, it will fail if it cannot find a `.git` directory. Given that behavior, it may be easier to use the approach shown above.
+
+Use [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild) when producing official builds. The simplest way to do that is by packing with an additional property set.
 
 ```console
 dotnet pack -c release -o nupkg /p:ContinuousIntegrationBuild=true
