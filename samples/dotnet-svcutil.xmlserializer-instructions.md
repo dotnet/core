@@ -37,7 +37,7 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     ```
 3. Add a package reference to System.ServiceModel.Http
    
-   Run command: `dotnet add package System.ServiceModel.Http -v 4.4.2`
+   Run command: `dotnet add package System.ServiceModel.Http -v 4.5.0`
 
 4. Add WCF Client code
     ```c#
