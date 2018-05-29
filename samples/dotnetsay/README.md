@@ -45,12 +45,6 @@ dotnetsay
 
 > Note: On macOS and Linux, `.\nupkg` will need be switched to `./nupkg` to accomodate for the different slash directions.
 
-If you are using .NET Core 2.1 RC1, use the following command:
-
-```console
-dotnet tool install --source-feed .\nupkg -g dotnetsay --version 2.1.2
-```
-
 You can uninstall the tool using the following command.
 
 ```console
