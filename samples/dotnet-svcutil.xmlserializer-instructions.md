@@ -8,8 +8,8 @@ You can start using the tool today following the instructions below.
 
 The following is required for svcutil.xmlserializer to work. 
 
-* [.NET Core SDK 2.1.2 or later](https://www.microsoft.com/net/download/windows)
-* [.NET Core runtime 2.1.0-preview1 or later](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.1.0-preview1-download.md)
+* [.NET Core SDK 2.1.300-preview2](https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.300-preview2)
+* [.NET Core runtime 2.1.0-preview1 or later](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.0-preview1)
 
 You can use the command `dotnet --info` to check which versions of .NET Core SDK and runtime you already have installed.
 
@@ -37,10 +37,12 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     ```
 3. Add a package reference to System.ServiceModel.Http
    
-   Run command: `dotnet add packages System.ServiceModel.Http -v 4.4.2`
+   Run command: `dotnet add package System.ServiceModel.Http -v 4.4.2`
 
 4. Add WCF Client code
     ```c#
+    using System.ServiceModel;
+    
     class Program
     {
         static void Main(string[] args)
@@ -64,7 +66,7 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     ```
 5. Edit the .csproj and add a reference to the dotnet-svcutil.xmlserializer package. For example,
 
-    i. Run command: `dotnet add packages dotnet-svcutil.xmlserializer -v 1.0.0-preview1-26515-1`
+    i. Run command: `dotnet add package dotnet-svcutil.xmlserializer -v 1.0.0-preview1-26515-1`
 
     ii. Add the following lines in MyWCFClient.csproj,
     ```xml
