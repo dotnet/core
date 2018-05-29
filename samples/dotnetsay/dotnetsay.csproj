@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Description>A simple .NET Core global tool called "dotnetsay".</Description>
     <LangVersion>Latest</LangVersion>
-    <VersionPrefix>2.1.3</VersionPrefix>
+    <VersionPrefix>2.1.4</VersionPrefix>
     <Authors>.NET Team</Authors>
     <Product>dotnetsay</Product>
     <Copyright>MIT</Copyright>
@@ -17,10 +17,12 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IsPackable>true</IsPackable>
     <PackAsTool>true</PackAsTool>
+    <!-- Optional performance setting - enables tiered JIT compilation-->
+    <TieredCompilation>true</TieredCompilation>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62909-01" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All"/>
   </ItemGroup>
 
 </Project>
