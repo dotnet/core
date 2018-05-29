@@ -45,7 +45,11 @@ dotnetsay
 
 > Note: On macOS and Linux, `.\nupkg` will need be switched to `./nupkg` to accomodate for the different slash directions.
 
-> Note: For .NET Core 2.1 RC1, the argument to specify a NuGet feed was `--source-feed`. It was changed to `--add-source` for the final release. You will need to use `--source-feed` if you are using .NET Core 2.1 RC1.
+If you are using .NET Core 2.1 RC1, use the following command:
+
+```console
+dotnet tool install --source-feed .\nupkg -g dotnetsay --version 2.1.2
+```
 
 You can uninstall the tool using the following command.
 
