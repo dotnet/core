@@ -10,17 +10,11 @@ This document describes Microsoft support for .NET Core.
 
 Every Microsoft product has a lifecycle. The lifecycle begins when a product is released and ends when it's no longer supported. Knowing key dates in this lifecycle helps you make informed decisions about when to upgrade or make other changes to your software. This product is governed by the [Microsoft Modern Lifecycle](https://support.microsoft.com/en-us/help/30881/modern-lifecycle-policy)
 
-The .NET Core support lifecycle offers 3 years of support for each Major and Minor release where:
-
-* Major releases are any release which updates the Major version number. For example, .NET Core 2.0.
-* Minor releases are any release which updates the Minor version number. For example, .NET Core 1.1.
-* Patch releases are any release which update the Patch number. For example, .NET Core 2.0.1.
-
 ## What releases qualify for servicing and how do updates effect servicing qualifications?
 
-Within the 3-year support lifecycle, systems must remain current on released patch updates for the Major.Minor release.
+Within a release's lifecycle, systems must remain current on released patch updates for the Major.Minor release.
 
-Customers can choose to use the Long Term Support (LTS) releases or Current releases. LTS releases will typically be Major releases (eg 1.0) and will only receive critical fixes throughout their lifecycle. Current releases will be Minor releases (eg 1.1.0) and receive these same fixes and will also be updated with compatible innovations and features.
+Customers can choose to use the Long Term Support (LTS) releases or Current releases. LTS releases will generally receive only critical fixes throughout their lifecycle. Current releases will receive these same fixes and will also be updated with compatible innovations and features.
 
 ### Long Term Support (LTS) releases
 
