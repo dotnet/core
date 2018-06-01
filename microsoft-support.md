@@ -1,54 +1,53 @@
 # Microsoft Support for .NET Core
 
-This document describes Microsoft support for .NET Core.
+Every Microsoft product has a lifecycle, including .NET Core. The lifecycle begins when a product is released and ends when it's no longer supported. Knowing key dates in this lifecycle helps you make informed decisions about when to upgrade or make other changes to your software. This product is governed by the [Microsoft Modern Lifecycle](https://support.microsoft.com/help/30881/modern-lifecycle-policy).
 
-## Operating Systems
+This document describes the support lifecycle for: .NET Core, ASP.NET Core and EF Core.
 
-.NET Core is supported by Microsoft across several operating systems and versions. The [.NET Core OS Lifecycle Policy](https://github.com/dotnet/core/blob/master/os-lifecycle-policy.md) provides current details on operating systems support policies and versions.
+The [.NET Core OS Lifecycle Policy](https://github.com/dotnet/core/blob/master/os-lifecycle-policy.md) describes support for various operating systems.
 
-## Support Lifecycle
+## .NET Core Releases
 
-Every Microsoft product has a lifecycle. The lifecycle begins when a product is released and ends when it's no longer supported. Knowing key dates in this lifecycle helps you make informed decisions about when to upgrade or make other changes to your software. This product is governed by the [Microsoft Modern Lifecycle](https://support.microsoft.com/en-us/help/30881/modern-lifecycle-policy)
+This table describes support type, supported patch version and end of support date for .NET Core releases.
 
-## What releases qualify for servicing and how do updates effect servicing qualifications?
+|  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
+| -- | -- | -- | -- | -- |
+|[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | Current\* | [2.1.0](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.0) | Three months after a subsequent Current release or 12 months after next LTS release, whichever is shorter. |
+| [.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | August 14, 2017 | Current | [2.0.7](https://www.microsoft.com/net/download/dotnet-core/runtime-2.0.7) | September 1, 2018 |
+| [.NET Core 1.1](https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/) | November 16, 2016 | LTS | [1.1.8](https://www.microsoft.com/net/download/dotnet-core/runtime-1.1.8) | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
+| [.NET Core 1.0](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) | June 27, 2016 | LTS | [1.0.11](https://www.microsoft.com/net/download/dotnet-core/runtime-1.0.11) | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
 
-Systems must stay up-to-date with patch updates to qualify for support.
+\* This Current release is expected to switch to LTS at a later date.
 
-Customers can choose to use the Long Term Support (LTS) releases or Current releases. LTS releases will generally receive only critical fixes throughout their lifecycle. Current releases will receive these same fixes and will also be updated with compatible innovations and features.
+## Release Types
+
+Microsoft produces **Long Term Support (LTS)** and **Current** releases, which are defined as:
+
+* **LTS** releases are designed for long-term support. They included features and components that have been stabilized, requiring few updates over a longer support release lifetime. These releases are a good choice for hosting applications that you do not intend to update.
+* **Current** releases include new features that may undergo future change based on feedback. These releases are a good choice for applications in active development, giving you access to the latest features and improvements. You need to upgrade to later .NET Core releases more often to stay in support.
+
+Both types of releases receive critical fixes throughout their lifecycle, for security, reliability, or to add support for new operating system versions. You must stay up-to-date with the latest patches to qualify for support.
+
+## Release Support Policies
+
+.NET Core releases are supported according to the following policies.
 
 ### Long Term Support (LTS) releases
 
-* Supported for three years after the general availability date of a LTS release
-* Or one year after the general availability of a subsequent LTS release
+LTS releases are supported for the following timeframe, whichever is shorter:
+
+* Three years after initial release.
+* One year after a subsequent **LTS** release.
 
 ### Current releases
 
-* Supported within the same three-year window as the parent LTS release
-* Supported for three months after the general availability of a subsequent Current release
-* And one year after the general availability of a subsequent LTS release
+Current releases are supported for the following timeframe, whichever is shorter:
 
-### How do the different support tracks work?
-
-Customers using LTS will need the latest patch update installed to qualify for support. If a system is running 1.0 and 1.0.1 has been released, 1.0.1 will need to be installed as a first step. Once a patch update has been installed applications will begin using the update by default. LTS releases will be supported for 3-years after general availability, or 12 months after the next LTS release ships, whichever is shorter.
-
-In addition to keeping up with the latest patch update, customers using Current will need to update as new minor versions are released. The latest released minor version will become the minimum serviceable baseline 3 months after release. For example, after 1.2 releases systems running version 1.1 will have 3 months to update to 1.2 to remain eligible for support. Applications do not automatically begin using the new minor update.
-
-### .NET Core Release Lifecycles
-
-This table tracks release dates and end of support dates for .NET Core versions.
-
-|  Version  |  Release Date  | Latest Patch Version | Support Level | End of Support |
-| -- | -- | -- | -- | -- |
-| .NET Core 2.0 | August 14, 2017 | 2.0.5 | Current | August 14, 2020 or 3 months after next Current release or 12 months after next LTS release, whichever is shorter. |
-| .NET Core 1.1 | November 16, 2016 | 1.1.6 | LTS\* | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
-| .NET Core 1.0 | June 27, 2016 | 1.0.9 | LTS | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
-| .NET Core 1.0.0 RC2 | May 16, 2016 | n/a | n/a | September 27, 2016 |
-| .NET Core 1.0.0 RC1 | February 15, 2016 | n/a | n/a | July 16, 2016 |
-
-\* .NET Core 1.1 is adopted into the 1.0 LTS lifecycle and will share the same end of support dates.
+* Three months after a subsequent **Current** release
+* One year after a subsequent **LTS** release
 
 ### End of support
 
-End of support refers to the date when Microsoft no longer provides fixes, updates, or online technical assistance. This is the time to make sure you have the latest available update\* installed. Without Microsoft support, you will no longer receive security updates that can help protect your machine from harmful viruses, spyware, and other malicious software that can steal your personal information.
+End of support refers to the date when Microsoft no longer provides fixes, updates, or online technical assistance. As this date nears, make sure you have the latest available update\* installed. Without Microsoft support, you will no longer receive security updates that can help protect your machine from harmful viruses, spyware, and other malicious software that can steal your personal information.
 
-\* Updates are cumulative, with each update built upon all of the updates that preceded it. A device needs to install the latest update to remain supported. Updates may include new features, fixes (security and/or non-security), or a combination of both. Not all features in an update will work on all devices. Update availability may vary, for example by country, region, network connectivity, or hardware capabilities (including, e.g., free disk space).
+\* Updates are cumulative, with each update built upon all of the updates that preceded it. A device needs to install the latest update to remain supported. Updates may include new features, fixes (security and/or non-security), or a combination of both. Not all features in an update will work on all devices. Update availability may vary, for example by country, region, network connectivity, or hardware capabilities (including, for example, free disk space).
