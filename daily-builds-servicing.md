@@ -6,7 +6,6 @@ Servicing branches are for new patch versions of .NET Core that have not yet bee
 
 ## .NET Core 2.1
 
-* [.NET Core SDK 2.1.4xx](https://github.com/dotnet/cli/blob/release/2.1.4xx/README.md#installers-and-binaries)
 * [.NET Core SDK 2.1.3xx](https://github.com/dotnet/cli/blob/release/2.1.3xx/README.md#installers-and-binaries)
 * [.NET Core Runtime 2.1](https://github.com/dotnet/core-setup/blob/release/2.1/README.md#officially-released-builds)
 
