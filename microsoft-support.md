@@ -12,7 +12,7 @@ Every Microsoft product has a lifecycle. The lifecycle begins when a product is 
 
 ## What releases qualify for servicing and how do updates effect servicing qualifications?
 
-Within a release's lifecycle, systems must remain current on released patch updates for the Major.Minor release.
+Systems must stay up-to-date with patch updates to qualify for support.
 
 Customers can choose to use the Long Term Support (LTS) releases or Current releases. LTS releases will generally receive only critical fixes throughout their lifecycle. Current releases will receive these same fixes and will also be updated with compatible innovations and features.
 
@@ -31,7 +31,7 @@ Customers can choose to use the Long Term Support (LTS) releases or Current rele
 
 Customers using LTS will need the latest patch update installed to qualify for support. If a system is running 1.0 and 1.0.1 has been released, 1.0.1 will need to be installed as a first step. Once a patch update has been installed applications will begin using the update by default. LTS releases will be supported for 3-years after general availability, or 12 months after the next LTS release ships, whichever is shorter.
 
-In addition to staying current with the latest patch update, customers using Current will need to update as new minor versions are released. The latest released minor version will become the minimum serviceable baseline 3 months after release. For example, after 1.2 releases systems running version 1.1 will have 3 months to update to 1.2 to remain eligible for support. Applications do not automatically begin using the new minor update.
+In addition to keeping up with the latest patch update, customers using Current will need to update as new minor versions are released. The latest released minor version will become the minimum serviceable baseline 3 months after release. For example, after 1.2 releases systems running version 1.1 will have 3 months to update to 1.2 to remain eligible for support. Applications do not automatically begin using the new minor update.
 
 ### .NET Core Release Lifecycles
 
