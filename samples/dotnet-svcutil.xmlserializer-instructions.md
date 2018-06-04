@@ -9,7 +9,7 @@ You can start using the tool today following the instructions below.
 The following is required for svcutil.xmlserializer to work. 
 
 * [.NET Core SDK 2.1 or later](https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.300)
-* [.NET Core runtime 2.1 or later](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.0)
+* [.NET Core Runtime 2.1 or later](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.0)
 
 You can use the command `dotnet --info` to check which versions of .NET Core SDK and runtime you already have installed.
 
