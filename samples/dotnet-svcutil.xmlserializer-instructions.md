@@ -66,12 +66,12 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
     ```
 5. Edit the .csproj and add a reference to the dotnet-svcutil.xmlserializer package. For example,
 
-    i. Run command: `dotnet add package dotnet-svcutil.xmlserializer -v 1.0.0-preview1-26515-1`
+    i. Run command: `dotnet add package dotnet-svcutil.xmlserializer -v 1.0.0-preview1`
 
     ii. Add the following lines in MyWCFClient.csproj,
     ```xml
     <ItemGroup>
-      <DotNetCliToolReference Include="dotnet-svcutil.xmlserializer" Version="1.0.0-preview1-26515-1" />
+      <DotNetCliToolReference Include="dotnet-svcutil.xmlserializer" Version="1.0.0-preview1" />
     </ItemGroup>
     ```
 
