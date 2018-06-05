@@ -1,6 +1,6 @@
 # Using svctuil.xmlserializer on .NET Core
 
-Just like the svcutil XmlSerializer Type Generation function on desktop, dotnet-svcutil.xmlserializer NuGet package is the solution for .NET Core and .NET Standard Libraries. It pre-generates c# serialization code for the types used by Service Contract in the client applications that can be serialized using the XmlSerializer to improve the startup performance of Xml Serialization when serializing or de-serializing objects of those types using XmlSerializer. 
+Just like the svcutil XmlSerializer Type Generation function on desktop, dotnet-svcutil.xmlserializer NuGet package is the solution for WCF applications on .NET Core and .NET Standard Libraries. It pre-generates c# serialization code for the types used by Service Contract in the WCF client applications that can be serialized using the XmlSerializer to improve the startup performance of Xml Serialization when serializing or de-serializing objects of those types using XmlSerializer. 
 
 You can start using the tool today following the instructions below. 
 
