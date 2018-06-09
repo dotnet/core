@@ -1,7 +1,7 @@
 # .NET Core on Raspberry Pi
 
 Arm32 builds are available as community supported builds for .NET Core 2.0. 
-There is no SDK that runs on ARM32 but you can publish an application that will run on a Raspberry Pi. 
+**There is no SDK that runs on ARM32** but you can publish an application that will run on a Raspberry Pi. 
 
 These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
@@ -9,8 +9,8 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 
 ## Creating an app:
 
-* [Install .NET Core 2.0 SDK](https://www.microsoft.com/net/core) into a supported developer configuration.
-
+* [Install .NET Core SDK](https://www.microsoft.com/net/core) into a supported developer configuration.
+(Raspberry Pi itself is supported only as deployment target but there is an unsupported version of the SDK available as well.)
 
 * From the terminal/commandline create a folder named `helloworld` and go into it.
 * Run `dotnet new console`
@@ -21,7 +21,7 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
 </Project>
@@ -49,12 +49,20 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 
 * Install [Linux](https://www.raspberrypi.org/downloads/) on your Pi.
 
-* Install the [prereq packages](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core.
+* Install the [platform dependencies from your distro's package manager](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core.
 
-* Copy your app to the Raspberry Pi and execute run `./helloworld` to see `Hello World!` from .NET Core running on your Pi! (make sure you `chmod 755 ./helloworld`)
+For Raspbian [Debian 9 Jessie](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) you need to do the following:
+```
+sudo apt-get update
+sudo apt-get install curl libunwind8 gettext apt-transport-https
+```
+
+* Copy your app, i.e. whole `publish` directory mentioned above, to the Raspberry Pi and execute run `./helloworld` to see `Hello World!` from .NET Core running on your Pi! (make sure you `chmod 755 ./helloworld`)
 
 ### Win10 IoT Core
 
 * Install [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot/GetStarted) on your Pi.
 
-* Copy your app to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi
+* Copy your app, i.e. whole `publish` directory mentioned above, to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi. 
+
+** It is important that you copy the `publish` directory contents displayed at the end of the publish operation and not from another location in the `bin` folder. **

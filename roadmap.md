@@ -6,7 +6,8 @@ The .NET Core team is currently focused on Web, Cloud, Microservices, Containers
 
 ## Released Versions
 
-[.NET Core 2.0](https://github.com/dotnet/core/issues/812) shipped on August 14th, 2017.
+* [.NET Core 2.1](https://github.com/dotnet/core/issues/1614) shipped on May 30th, 2018.
+* [.NET Core 2.0](https://github.com/dotnet/core/issues/812) shipped on August 14th, 2017.
 
 For released versions of the product:
 
@@ -17,16 +18,13 @@ For released versions of the product:
 
 | Milestone                 | Release Date |
 |---------------------------|--------------|
-| .NET Core 2.1 Preview | Q4 2017 |
-| .NET Core 2.1 | Q1 2018 |
+| .NET Core 2.2 | Q4 2018 |
+| .NET Core 3.0 | Q1 2019, see the [announcement](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/net-core-3-and-support-for-windows-desktop-applications/) for details |
+| .NET Core 2.0.x (servicing) | approx. every 1-2 months or as needed (see also [2.0 Releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-20)) |
 
 Note: Dates are calendar year (as opposed to fiscal year).
 
 Milestone information is available on most repos, for example [dotnet/corefx milestones](https://github.com/dotnet/corefx/milestones).
-
-## .NET Core 2.1 Release
-
-The .NET Core 2.1 project has not yet started. The team is currently working on infastructure improvements to the .NET Core build and release system. .NET Core 2.1 release information will be shared here once planning starts.
 
 ## Feedback
 

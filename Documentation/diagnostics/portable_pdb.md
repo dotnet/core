@@ -20,11 +20,16 @@ Windows PDBs can only be written or read on Windows. All Windows tooling support
 Portable PDBs can be read on any operating system, but there are a number of places where they aren't supported yet. Here are a few –
 
 * Older versions of the Visual Studio debugger (versions before VS 2015 Update 2)
-* .NET Framework prior 4.7.1: printing stack traces with mappings back to line numbers (such as in an ASP.NET error page). The name of methods is unaffected, only the source file names and line numbers are unsupported.
+* Applications targeting .NET Framework 4.7.1 or earlier<sup><a href="#fn1" id="ref1">1</a></sup>: printing stack traces with mappings back to line numbers (such as in an ASP.NET error page). The name of methods is unaffected, only the source file names and line numbers are unsupported.
 * C# Code analysis (aka FxCop), note that this doesn't apply to Roslyn Analyzer
 * Symbol server (ex: SymbolsSource.org)
 * Running post-compilation build step that consumes or modifies the PDB using older versions of tools such as CCI, CodeContracts.
 * Using .NET decompilers such as ildasm or .Net reflector and expecting to see source line mappings or local parameter names
+* [MS DIA](https://msdn.microsoft.com/en-us/library/ee8x173s.aspx)-based tools such as WinDBG.
 
 Over time we plan to shrink this list of non-supported scenarios so that portable PDB can become the default choice for most usage needs.
+
+
+
+<sup id="fn1">1. When running on .NET Framework 4.7.2 with an app that targets earlier .NET Framework versions we anticipate having an opt-in configuration switch as an additional mechanism to enable support for older applications<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
 

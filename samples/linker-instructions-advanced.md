@@ -44,7 +44,7 @@ For example, the xml file might be used to root an entire assembly:
 
 ```xml
 <linker>
-  <assembly fullname="AssemblyToRoot.dll" />
+  <assembly fullname="AssemblyToRoot" />
 </linker>
 ```
 
@@ -52,7 +52,7 @@ or just a specific type within the assembly:
 
 ```xml
 <linker>
-  <assembly fullname="AssemblyName.dll">
+  <assembly fullname="AssemblyName">
     <type fullname="Type.To.Root" />
   </assembly>
 </linker>
