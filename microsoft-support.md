@@ -13,11 +13,11 @@ This table describes support type, supported patch version and end of support da
 |  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
 | -- | -- | -- | -- | -- |
 |[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | Current\* | [2.1.0](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.0) | Three months after a subsequent Current release|
-| [.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | August 14, 2017 | Current | [2.0.7](https://www.microsoft.com/net/download/dotnet-core/runtime-2.0.7) | September 1, 2018 |
-| [.NET Core 1.1](https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/) | November 16, 2016 | LTS | [1.1.8](https://www.microsoft.com/net/download/dotnet-core/runtime-1.1.8) | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
-| [.NET Core 1.0](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) | June 27, 2016 | LTS | [1.0.11](https://www.microsoft.com/net/download/dotnet-core/runtime-1.0.11) | June 27 2019 or 12 months after next LTS release, whichever is shorter. |
+| [.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | August 14, 2017 | Current | [2.0.7](https://www.microsoft.com/net/download/dotnet-core/runtime-2.0.7) | October 1, 2018 |
+| [.NET Core 1.1](https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/) | November 16, 2016 | LTS | [1.1.8](https://www.microsoft.com/net/download/dotnet-core/runtime-1.1.8) | June 27 2019|
+| [.NET Core 1.0](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) | June 27, 2016 | LTS | [1.0.11](https://www.microsoft.com/net/download/dotnet-core/runtime-1.0.11) | June 27 2019|
 
-\* This Current release is expected to switch to LTS at a later date.
+\* This Current release is expected to switch to LTS at a later date and will then follow the LTS support policy, defined below.
 
 ## Release Types
 
@@ -34,17 +34,18 @@ Both types of releases receive critical fixes throughout their lifecycle, for se
 
 ### Long Term Support (LTS) releases
 
-LTS releases are supported for the following timeframe, whichever is shorter:
+LTS releases are supported for the following timeframe, whichever is longer:
 
 * Three years after initial release.
 * One year after a subsequent **LTS** release.
 
+Note: .NET Core 1.x releases were released under a different definition for LTS. This policy applies to .NET Core 2.1 and later LTS releases.
+
 ### Current releases
 
-Current releases are supported for the following timeframe, whichever is shorter:
+Current releases are supported for the following timeframe:
 
 * Three months after a subsequent **Current** release
-* One year after a subsequent **LTS** release
 
 ### End of support
 
