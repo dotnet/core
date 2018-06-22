@@ -39,7 +39,7 @@ LTS releases are supported for the following timeframe, whichever is longer:
 * Three years after initial release.
 * One year after a subsequent **LTS** release.
 
-Note: .NET Core 1.x releases were released under a different definition for LTS. This policy applies to .NET Core 2.1 and later LTS releases.
+Note: .NET Core 1.x releases were released under a [different definition for LTS](https://github.com/dotnet/core/blob/e2f22a7106860c0e5dc98bb36dc648a779944ad5/microsoft-support.md#long-term-support-lts-releases). This policy applies to .NET Core 2.1 and later LTS releases.
 
 ### Current releases
 
