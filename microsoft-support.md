@@ -45,7 +45,7 @@ Note: .NET Core 1.x releases were released under a different definition for LTS.
 
 Current releases are supported for the following timeframe:
 
-* Three months after a subsequent **Current** release
+* Three months after a subsequent **Current** or **LTS* release
 
 ### End of support
 
