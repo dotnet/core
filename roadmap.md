@@ -13,6 +13,7 @@ For released versions of the product:
 
 * [Supported OSes](os-lifecycle-policy.md)
 * [Release Notes](release-notes/README.md)
+* [Support Timelines](microsoft-support.md)
 
 ## Upcoming Ship Dates
 
