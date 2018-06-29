@@ -12,7 +12,7 @@ This table describes support type, supported patch version and end of support da
 
 |  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
 | -- | -- | -- | -- | -- |
-|[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | Current | [2.1.0](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.0) | At least three years from today. Expected to switch to and start LTS period before 2018 CYQ3 end.|
+|[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | LTS | [2.1.0](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.0) | At least three years from today. Expected to switch to and start LTS period before 2018 CYQ3 end.|
 | [.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | August 14, 2017 | Current | [2.0.7](https://www.microsoft.com/net/download/dotnet-core/runtime-2.0.7) | October 1, 2018 |
 | [.NET Core 1.1](https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/) | November 16, 2016 | LTS | [1.1.8](https://www.microsoft.com/net/download/dotnet-core/runtime-1.1.8) | June 27 2019|
 | [.NET Core 1.0](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) | June 27, 2016 | LTS | [1.0.11](https://www.microsoft.com/net/download/dotnet-core/runtime-1.0.11) | June 27 2019|
