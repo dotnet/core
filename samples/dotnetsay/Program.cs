@@ -6,7 +6,11 @@ public static class Program
     {
         string message = "Welcome to using a .NET Core global tool!";
 
-        if (args.Length > 0)
+        if (Console.IsInputRedirected)
+        {
+            message = Console.In.ReadToEnd();
+        }
+        else if (args.Length > 0)
         {
             message = String.Join(" ", args);
         }
