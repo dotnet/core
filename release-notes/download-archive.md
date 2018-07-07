@@ -8,14 +8,20 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+<<<<<<< HEAD
 | 2018/05/07 | 2.1.0-RC1 with SDK 2.1.300-RC1 | [release notes](2.1/Preview/2.1.0-rc1.md) | [download](download-archives/2.1.0-rc1-download.md) |
 | 2018/04/10 | 2.1.0-Preview2 with SDK 2.1.300-Preview2 | [release notes](2.1/Preview/2.1.0-preview2.md) | [download](download-archives/2.1.0-preview2-download.md) |
 | 2018/02/27 | 2.1.0-Preview1 with SDK 2.1.300-Preview1 | [release notes](2.1/2.1.0-preview1.md) | [download](download-archives/2.1.0-preview1-download.md) |
+=======
+| 2018/06/19 | 2.1.1 with SDK 2.1.301 | [release notes](2.1/2.1.1.md) | [download](download-archives/2.1.1-download.md) |
+| 2018/05/30 | 2.1.0 with SDK 2.1.300 | [release notes](2.1/2.1.0.md) | [download](download-archives/2.1.0-download.md) |
+>>>>>>> b6442508bd96d57adb989bb028059239295bf52f
 
 ### .NET Core 2.0
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/05/08 | 2.0.7 with SDK 2.1.200 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.1.200) | [download](download-archives/2.1.200-sdk-download) |
 | 2018/04/17 | 2.0.7 with SDK 2.1.105 | [release notes](2.0/2.0.7.md) | [download](download-archives/2.0.7-download.md) |
 | 2018/03/13 | 2.0.6 with SDK 2.1.101 | [release notes](2.0/2.0.6.md) | [download](download-archives/2.0.6-download.md) |
 | 2018/01/09 | 2.0.5 with SDK 2.1.4 | [release notes](2.0/2.0.5.md) | [download](download-archives/2.0.5-download.md) |
@@ -27,9 +33,14 @@ This page provides an archive of previously released versions of the .NET Core r
 
 ### .NET Core Tools for Visual Studio 2015
 
-| Release Date | Description | Release Notes | |
-| :-- | :-- | :--: | :--: |
-| 2016/09/13 | DotNetCore.1.0.1-VS2015Tools.Preview2.0.2.exe | [release notes](1.0/1.0.1-release-notes.md) |  [download](download-archives/1.0.1-preview2-download.md) |
+| Description | |
+| :-- | :--: |
+| DotNetCore.1.0.1-VS2015Tools.Preview2.0.4.exe | [download](https://download.microsoft.com/download/D/7/5/D75188CA-848C-4634-B402-4B746E9F516A/DotNetCore.1.0.1-VS2015Tools.Preview2.0.4.exe) |
+| DotNetCore.1.0.1-VS2015Tools.Preview2.0.3.exe | [download](https://go.microsoft.com/fwlink/?LinkID=827546) |
+| DotNetCore.1.0.1-VS2015Tools.Preview2.0.2.exe | [download](https://download.microsoft.com/download/5/5/7/557D02A5-C3D0-4EF6-A570-4F75CD0DA5BF/DotNetCore.1.0.1-VS2015Tools.Preview2.0.2.exe) |
+| DotNetCore.1.0.0-VS2015Tools.Preview2.0.1.exe | [download](https://download.microsoft.com/download/2/F/8/2F864C4E-6980-4AFC-B64E-0AC04837FD6C/DotNetCore.1.0.0-VS2015Tools.Preview2.0.1.exe) |
+| DotNetCore.1.0.0-VS2015Tools.Preview2.exe | [download](https://download.microsoft.com/download/A/3/8/A38489F3-9777-41DD-83F8-2CBDFAB2520C/DotNetCore.1.0.0-VS2015Tools.Preview2.exe) |
+| DotNetCore.1.0.0.RC2-VS2015Tools.Preview1.exe | [download](https://download.microsoft.com/download/4/6/1/46116DFF-29F9-4FF8-94BF-F9BE05BE263B/DotNetCore.1.0.0.RC2-VS2015Tools.Preview1.exe) |
 
 ## [LTS](https://www.microsoft.com/net/core/support) Releases
 

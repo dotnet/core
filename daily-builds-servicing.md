@@ -4,6 +4,11 @@ The .NET Core team builds several branches of the product daily. You can install
 
 Servicing branches are for new patch versions of .NET Core that have not yet been released and are not yet supported. These patch versions are for previously released major/minor versions.
 
+## .NET Core 2.1
+
+* [.NET Core SDK 2.1.3xx](https://github.com/dotnet/cli/blob/release/2.1.3xx/README.md#installers-and-binaries)
+* [.NET Core Runtime 2.1](https://github.com/dotnet/core-setup/blob/release/2.1/README.md#officially-released-builds)
+
 ## .NET Core 2.0
 
 * [.NET Core SDK 2.0](https://github.com/dotnet/cli/blob/release/2.0.0/README.md#installers-and-binaries)
