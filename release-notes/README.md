@@ -1,11 +1,6 @@
 # .NET Core Release Notes
 
-<<<<<<< HEAD
-[.NET Core 2.1-rc1](2.1/Preview/2.1.0-rc1.md) is the latest release available.
-The latest major shipped release is [.NET Core 2.0](2.0/2.0.0.md). 
-=======
 The latest supported release is [.NET Core 2.1](2.1/2.1.0.md). 
->>>>>>> b6442508bd96d57adb989bb028059239295bf52f
 
 ## Latest Updates
 
