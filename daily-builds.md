@@ -8,9 +8,9 @@ Preview branches are for new major/minor versions of .NET Core that have not yet
 
 |Component|*.NET Core 3.0*|*.NET Core 2.2*|
 |:------:|:------:|:------:|
-|SDK|[.NET Core SDK 3.0.1xx (Master)](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|[.NET Core SDK 2.2.1xx](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|
-|ASP.NET Core|[ASP.NET Core Shared Framework 3.0 (see master)](https://github.com/aspnet/universe#daily-builds)|[ASP.NET Core Shared Framework 2.2](https://github.com/aspnet/universe#daily-builds)|
-|Runtime|[.NET Core Runtime 3.0 (Master)](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|[.NET Core Runtime 2.2 preview](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|
+|SDK|[.NET Core SDK 3.0.1xx  (Master)](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|[.NET Core SDK 2.2.1xx](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|
+|ASP.NET Core|[ASP.NET Core Shared Framework 3.0 (Master)](https://github.com/aspnet/universe#daily-builds)|[ASP.NET Core Shared Framework 2.2](https://github.com/aspnet/universe#daily-builds)|
+|Runtime|[.NET Core Runtime 3.0 (Master)](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|[.NET Core Runtime 2.2](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|
 
 ## Servicing Releases
 
