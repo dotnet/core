@@ -1,12 +1,12 @@
-## Installing .NET Core on Linux
+## Preparing your Linux system for .NET Core
 
-There are a few options available for installing .NET Core on Linux systems.
+There are a few options available for installing .NET Core on Linux systems and each requires a few actions before installing .NET Core. The sections below detail different methods for installing .NET Core and any prerequisites.
 
 * [Using the package manager](installation-using-a-package-manager)
 * [Installing from binary archive (tar.gz)](installation-from-a-binary-archive)
 * [Installing using Snap](installation-using-snap)
 
-other junk
+Other useful references
 
 * [OS lifecycle support policy](https://github.com/dotnet/core/blob/master/os-lifecycle-policy.md)
 * [Linux System Prerequisites](https://github.com/dotnet/core/blob/master/Documentation/linux-prereqs.md)
