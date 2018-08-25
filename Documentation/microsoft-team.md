@@ -4,7 +4,7 @@ If you are new to Microsoft, you will need to onboard into various GitHub projec
 
 ## Getting Permissions
 
-You first need to link your GitHub accoount so that you can use Microsoft's GitHub management tools.
+You first need to link your GitHub account so that you can use Microsoft's GitHub management tools.
 
 * [Link your GitHub account](https://repos.opensource.microsoft.com/link)
 
