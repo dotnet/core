@@ -38,9 +38,11 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 </configuration>
 ```
 
+## Publishing an app to run on the Pi:
+
 * Run `dotnet publish -r <runtime identifier>` for example `dotnet publish -r win-arm` to publish the application for windows and `dotnet publish -r linux-arm` for Linux running on Raspberry Pi.
 
-* Under `./bin/Debug/netcoreapp2.0/<runtime identifier>/publish` or `.\bin\Debug\netcoreapp2.0\<runtime identifier>\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
+* Under `./bin/Debug/netcoreapp2.1/<runtime identifier>/publish` or `.\bin\Debug\netcoreapp2.1\<runtime identifier>\publish` you will see the whole self contained app that you need to copy to your Raspberry Pi.
 
 
 ## Getting the app to run on the Pi.
@@ -49,7 +51,7 @@ Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instru
 
 * Install [Linux](https://www.raspberrypi.org/downloads/) on your Pi.
 
-* Install the [platform dependencies from your distro's package manager](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core.
+* Install the [platform dependencies from your distro's package manager](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core. .NET Core depends on some packages from the Linux package manager as prerequisites to running your application.
 
 For Raspbian [Debian 9 Jessie](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) you need to do the following:
 ```

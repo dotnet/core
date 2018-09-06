@@ -6,8 +6,7 @@ The .NET Core team is currently focused on Web, Cloud, Microservices, Containers
 
 ## Released Versions
 
-* [.NET Core 2.1](https://github.com/dotnet/core/issues/1614) shipped on May 30th, 2018.
-* [.NET Core 2.0](https://github.com/dotnet/core/issues/812) shipped on August 14th, 2017.
+* [Latest updates](https://github.com/dotnet/core/blob/master/release-notes/README.md) or [Download archive](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
 
 For released versions of the product:
 
