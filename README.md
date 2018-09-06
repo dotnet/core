@@ -17,7 +17,7 @@ The latest major release is [.NET Core 2.1](release-notes/2.1/2.1.3/2.1.3.md). T
 
 * [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
 * [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
-* [Learn how about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
+* [Learn about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
 * [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
 * [.NET Core Announcements](https://github.com/dotnet/announcements)
 * [.NET Core blog](https://blogs.msdn.microsoft.com/dotnet/tag/net-core/)
