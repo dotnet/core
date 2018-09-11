@@ -6,7 +6,7 @@ The latest major release is [.NET Core 2.1](release-notes/2.1/2.1.3/2.1.3.md). T
 
 ## Download the latest .NET Core SDK
 
-* [.NET Core 2.1 SDK](release-notes/2.1/2.1.3/2.1.3.md)
+* [.NET Core 2.1 SDK](release-notes/2.1/2.1.4/2.1.4.md)
 
 ## .NET Core Releases and Daily Builds
 
