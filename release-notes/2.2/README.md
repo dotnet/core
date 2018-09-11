@@ -4,4 +4,5 @@ The following .NET Core 2.2 releases have been shipped. You must be on the lates
 
 | Release Date | Description |  |  |
 | :-- | :-- | :--: | :-- |
-| 2018/08/22 | 2.2.0 Preview 1 | [release notes](./preview/2.2.0-preview1.md)/[download](./preview/2.1.0-preview1-download.md) | - |
+| 2018/09/12 | 2.2.0 Preview 2 | [release notes](./preview/2.2-preview2.md)/[download](./preview/2.2.0-preview2-download.md) | - |
+| 2018/08/22 | 2.2.0 Preview 1 | [release notes](./preview/2.2-preview1.md)/[download](./preview/2.2.0-preview1-download.md) | - |
