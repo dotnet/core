@@ -5,7 +5,7 @@ Arm32 builds are available as community supported builds for .NET Core 2.0.
 
 These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
 
-Note: Pi Zero is not supported because the .NET Core JIT depends on armv7 instructions not available on Pi Zero.
+Note: All models of generation 1 and Pi Zero are not supported because the .NET Core JIT depends on armv7 instructions not available on those versions.
 
 ## Creating an app:
 
