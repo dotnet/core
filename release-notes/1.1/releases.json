@@ -1,11 +1,12 @@
 {
-    "dotnet-core-1.1": [
+    "netcore-release": [
     {
-        "date": "2018-07-10",
+        "release-date": "2018-07-10",
+        "channel-version": "1.1",
         "security": true,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.9.md",
         "runtime":{
-            "version": "1.1.9",
+            "release-version": "1.1.9",
             "version-display": "1.1.9",
             "vs-version":null,
             "lts":true,
@@ -29,7 +30,7 @@
             ]
         },
         "sdk":{
-            "version": "1.1.10",
+            "release-version": "1.1.10",
             "version-display":"1.1.10",
             "vs-version":null,
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1.10-sdk-sha.txt",
@@ -51,7 +52,7 @@
             ]
         },
         "aspnetcore-runtime":{
-            "version": "1.1.9",
+            "release-version": "1.1.9",
             "lts":true,
             "eol": false,
             "files": [
@@ -60,11 +61,12 @@
         }
     },
     {
-        "date": "2018-04-17",
+        "release-date": "2018-04-17",
+        "channel-version": "1.1",
         "security": false,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.8.md",
         "runtime":{
-            "version": "1.1.8",
+            "release-version": "1.1.8",
             "vs-version": "15.0",
             "lts": true,
             "eol": false,
@@ -85,7 +87,7 @@
             ]
         },            
         "sdk":{
-            "version": "1.1.9",
+            "release-version": "1.1.9",
             "vs-version": "15.0",
             "lts": true,
             "eol": false,
@@ -105,7 +107,7 @@
             ]
         },
         "aspnetcore-runtime":{
-            "version": "1.1.8",
+            "release-version": "1.1.8",
             "vs-version": "15.0",
             "lts": true,
             "eol": false,
@@ -115,7 +117,8 @@
         }
     },      
     {
-        "date": "2018-03-13",
+        "release-date": "2018-03-13",
+        "channel-version": "1.1",
         "security": true,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.7.md",
         "runtime":{
@@ -151,18 +154,19 @@
             ]            
         },
         "aspnetcore-runtime":{
-            "version": "1.1.7",
+            "release-version": "1.1.7",
             "files":[
                 {"name": "hosting-win-x64.exe", "url": "https://download.microsoft.com/download/1/4/1/1416E22E-A1C5-48E3-81EF-AFE86CDA9C78/DotNetCore.1.0.10_1.1.7-WindowsHosting.exe", "hash": ""}
             ]            
         }
     },
     {
-        "date": "2017-11-14",
+        "release-date": "2017-11-14",
+        "channel-version": "1.1",
         "security": true,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.6.md",
         "runtime":{
-            "version": "1.1.6",
+            "release-version": "1.1.6",
             "lts": true,
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1.6-runtime-sha.txt",
             "files":[
@@ -179,7 +183,7 @@
             ]
         },
         "sdk":{
-            "version": "1.1.7",
+            "release-version": "1.1.7",
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1.7-sdk-sha.txt",
             "files":[
             {"name": "sdk-mac-x64", "url": "https://download.microsoft.com/download/4/E/6/4E64A465-F02E-43AD-9A86-A08A223A82C3/dotnet-dev-osx-x64.1.1.7.tar.gz", "hash": "9f5430391f664c942d49d7d1371bdeedad1bf41a21fb9d9afeb5557ce518a494634b750631dbe019e8128296e6d0ffa438853561919566451f42744a53e0b6b7"},
@@ -195,17 +199,18 @@
             ]            
         },
         "aspnetcore-runtime":{
-            "version": "1.1.6",
+            "release-version": "1.1.6",
             "files":[
                 {"name": "hosting-win-x64.exe", "url": "https://download.microsoft.com/download/A/7/E/A7EF2AFF-F77B-4F77-A21B-0F7BD09A4065/DotNetCore.1.0.9_1.1.6-WindowsHosting.exe", "hash": ""}
             ]            
         }
     },
     {
-        "date": "2017-11-14",
+        "release-date": "2017-11-14",
+        "channel-version": "1.1",
         "security": true,
         "runtime":{
-            "version": "1.1.5",
+            "release-version": "1.1.5",
             "lts": true,
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1.5-runtime-sha.txt",            
             "files":[
@@ -221,7 +226,7 @@
             ]
         },
         "sdk":{
-            "version": "1.1.5",
+            "release-version": "1.1.5",
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1.5-sdk-sha.txt",
             "files":[
             {"name": "sdk-mac-x64", "url": "https://download.microsoft.com/download/C/5/5/C55807F5-601C-49B1-B9BB-1BE03EB83E0A/dotnet-dev-osx-x64.1.1.5.tar.gz", "hash": "075daf8361e6d7dbbf079b71b2b2a804a96dbde9fe63a665afd02a5e4f1fc67dc7d37e8edd83766535f8f34ec5bb2ad82ef96effb3568d24d25ea3074068bf5c"},
@@ -236,7 +241,8 @@
         }
     },
     {
-        "date": "2017-09-21",
+        "release-date": "2017-09-21",
+        "channel-version": "1.1",
         "security": false,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.4.md",
         "runtime":{
@@ -275,11 +281,12 @@
         }
     },
     {
-        "date": "2017-05-09",
+        "release-date": "2017-05-09",
+        "channel-version": "1.1",
         "security": true,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.2.md",
         "runtime":{
-            "version": "1.1.2",
+            "release-version": "1.1.2",
             "lts": false,
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.5-1.1.2-sharedfx-SHA.txt",
             "files":[
@@ -298,7 +305,7 @@
             ]
         },
         "sdk":{
-            "version": "1.0.4",
+            "release-version": "1.0.4",
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.4-SDK-SHA.txt",
             "vs-version": "15.2.2",
             "files":[
@@ -318,11 +325,12 @@
         }
     },
     {
-        "date": "2017-03-07",
+        "release-date": "2017-03-07",
+        "channel-version": "1.1",
         "security": false,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.1.md",
         "runtime":{
-            "version": "1.1.1",
+            "release-version": "1.1.1",
             "lts": false,
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.4-1.1.1-sharedfx-SHA.txt",
             "files":[
@@ -341,7 +349,7 @@
             ]
         },
         "sdk":{
-            "version": "1.0.1",
+            "release-version": "1.0.1",
             "checksums": "https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.1-SDK-SHA.txt",
             "files":[
                 {"name": "sdk-mac-x64", "url": "https://dotnetcli.blob.core.windows.net/dotnet/Sdk/1.0.1/dotnet-dev-osx-x64.1.0.1.tar.gz", "hash": "f030188673ebb71fc3bb3a089504c2079cd8176e669575b5992664b405194366"},
@@ -360,11 +368,12 @@
         }
     },
     {
-        "date": "2016-11-16",
+        "release-date": "2016-11-16",
+        "channel-version": "1.1",
         "security": false,
         "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.md",
         "runtime":{
-            "version": "1.1.0",
+            "release-version": "1.1.0",
             "lts": false,
             "files":[
                 {"name": "runtime-mac-x64", "url": "https://download.microsoft.com/download/A/F/6/AF610E6A-1D2D-47D8-80B8-F178951A0C72/Binaries/dotnet-osx-x64.1.1.0.tar.gz", "hash": "b8c28c32ca6bf677982999543feec0cea4e7275ed034e1b503451de0744d13f2"},
@@ -382,7 +391,7 @@
             ]
         },
         "sdk":{
-            "version": "1.0.0-preview2.1-003177",
+            "release-version": "1.0.0-preview2.1-003177",
             "files":[
                 {"name": "sdk-mac-x64", "url": "https://download.microsoft.com/download/A/F/6/AF610E6A-1D2D-47D8-80B8-F178951A0C72/Binaries/dotnet-dev-osx-x64.1.0.0-preview2-1-003177.tar.gz", "hash": "8f1ffef37aa9da7273674185dab3b78feb44082d3a9d3156dfc20329acfe7e0d"},
                 {"name": "sdk-win-x86", "url": "https://download.microsoft.com/download/A/F/6/AF610E6A-1D2D-47D8-80B8-F178951A0C72/Binaries/dotnet-dev-win-x86.1.0.0-preview2-1-003177.zip", "hash": "38a451069f6bc1d2e226218f260b19fc1a2aca775fbd88c083b2d23d5a3af737"},
