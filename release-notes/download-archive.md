@@ -7,27 +7,12 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
-| 2018/10/02 | 2.1.5 with SDK 2.1.403 (Promoted to LTS) | [release notes](2.1/2.1.5/2.1.5.md) | [download](2.1/2.1.5/2.1.5-download.md) |
-| 2018/09/11 | 2.1.4 with SDK 2.1.402 (Promoted to LTS) | [release notes](2.1/2.1.4/2.1.4.md) | [download](2.1/2.1.4/2.1.4-download.md) |
+| 2018/10/02 | 2.1.5 with SDK 2.1.403 (LTS) | [release notes](2.1/2.1.5/2.1.5.md) | [download](2.1/2.1.5/2.1.5-download.md) |
+| 2018/09/11 | 2.1.4 with SDK 2.1.402 (LTS) | [release notes](2.1/2.1.4/2.1.4.md) | [download](2.1/2.1.4/2.1.4-download.md) |
 | 2018/08/21 | 2.1.3 with SDK 2.1.401 (Promoted to LTS) | [release notes](2.1/2.1.3/2.1.3.md) | [download](2.1/2.1.3/2.1.3-download.md) |
 | 2018/07/10 | 2.1.2 with SDK 2.1.302 | [release notes](2.1/2.1.2.md) | [download](download-archives/2.1.2-download.md) |
 | 2018/06/19 | 2.1.1 with SDK 2.1.301 | [release notes](2.1/2.1.1.md) | [download](download-archives/2.1.1-download.md) |
 | 2018/05/30 | 2.1.0 with SDK 2.1.300 | [release notes](2.1/2.1.0.md) | [download](download-archives/2.1.0-download.md) |
-
-### .NET Core 2.0 - ["Current"](https://www.microsoft.com/net/core/support) release
-
-| Release Date | Description | Release Notes | |
-| :-- | :-- | :--: | :--: |
-| 2018/07/10 | 2.0.9 with SDK 2.1.202 | [release notes](2.0/2.0.9.md) | [download](download-archives/2.0.9-download.md) |
-| 2018/05/08 | 2.0.7 with SDK 2.1.200 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.1.200) | [download](download-archives/2.1.200-sdk-download.md) |
-| 2018/04/17 | 2.0.7 with SDK 2.1.105 | [release notes](2.0/2.0.7.md) | [download](download-archives/2.0.7-download.md) |
-| 2018/03/13 | 2.0.6 with SDK 2.1.101 | [release notes](2.0/2.0.6.md) | [download](download-archives/2.0.6-download.md) |
-| 2018/01/09 | 2.0.5 with SDK 2.1.4 | [release notes](2.0/2.0.5.md) | [download](download-archives/2.0.5-download.md) |
-| 2017/12/14 | 2.0.4 with SDK 2.1.3 | [release notes](2.0/2.0.4.md) | [download](download-archives/2.0.4-download.md) |
-| 2017/12/04 | 2.0.3 with SDK 2.1.2 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.1.2) | [download](download-archives/2.1.2-sdk-download.md) |
-| 2017/11/14 | 2.0.3 with SDK 2.0.3 | [release notes](2.0/2.0.3.md) | [download](download-archives/2.0.3.md) |
-| 2017/10/10 | 2.0.0 with SDK 2.0.2 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.0.2) | [download](download-archives/2.0.2-sdk-download.md) |
-| 2017/08/14 | 2.0.0 with SDK 2.0.0 | [release notes](2.0/2.0.0.md) | [download](download-archives/2.0.0-download.md) |
 
 ### .NET Core 1.1 - [LTS](https://www.microsoft.com/net/core/support) release
 
@@ -67,3 +52,7 @@ This page provides an archive of previously released versions of the .NET Core r
 | DotNetCore.1.0.0-VS2015Tools.Preview2.0.1.exe | [download](https://download.microsoft.com/download/2/F/8/2F864C4E-6980-4AFC-B64E-0AC04837FD6C/DotNetCore.1.0.0-VS2015Tools.Preview2.0.1.exe) |
 | DotNetCore.1.0.0-VS2015Tools.Preview2.exe | [download](https://download.microsoft.com/download/A/3/8/A38489F3-9777-41DD-83F8-2CBDFAB2520C/DotNetCore.1.0.0-VS2015Tools.Preview2.exe) |
 | DotNetCore.1.0.0.RC2-VS2015Tools.Preview1.exe | [download](https://download.microsoft.com/download/4/6/1/46116DFF-29F9-4FF8-94BF-F9BE05BE263B/DotNetCore.1.0.0.RC2-VS2015Tools.Preview1.exe) |
+
+### Out of support
+
+* .NET Core 2.0 - [Release details](https://github.com/dotnet/core/tree/master/release-notes/2.0)
