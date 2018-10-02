@@ -1,6 +1,6 @@
 # Contributing
 
-See [Contributing](https://github.com/dotnet/coreclr/blob/master/CONTRIBUTING.md) for information about coding styles, source structure, making pull requests, and more.
+See [Contributing](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md) for information about coding styles, source structure, making pull requests, and more.
 
 # Repos
 
