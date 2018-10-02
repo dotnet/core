@@ -12,9 +12,9 @@ This table describes support type, supported patch version and end of support da
 
 |  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
 | -- | -- | -- | -- | -- |
-|[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | LTS | [2.1.5](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.4) | At least three years from LTS declaration (August 21, 2018).|
-| [.NET Core 1.1](https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/) | November 16, 2016 | LTS | [1.1.9](https://www.microsoft.com/net/download/dotnet-core/runtime-1.1.9) | June 27, 2019|
-| [.NET Core 1.0](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) | June 27, 2016 | LTS | [1.0.12](https://www.microsoft.com/net/download/dotnet-core/runtime-1.0.12) | June 27, 2019|
+| [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | LTS | [2.1.5](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.4) | At least three years from LTS declaration (August 21, 2018). |
+| [.NET Core 1.1](https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/) | November 16, 2016 | LTS | [1.1.9](https://www.microsoft.com/net/download/dotnet-core/runtime-1.1.9) | June 27, 2019 |
+| [.NET Core 1.0](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) | June 27, 2016 | LTS | [1.0.12](https://www.microsoft.com/net/download/dotnet-core/runtime-1.0.12) | June 27, 2019 |
 
 ## Release Types
 
@@ -53,5 +53,5 @@ End of support refers to the date when Microsoft no longer provides fixes, updat
 ### Out of support .NET Core releases
 
 |  Version  |  End of Support |
-| -- | -- | -- | -- | -- |
-|[.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | October 1, 2018 |
+| -- | -- |
+| [.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | October 1, 2018 |
