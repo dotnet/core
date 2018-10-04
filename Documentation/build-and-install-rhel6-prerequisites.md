@@ -26,7 +26,7 @@ This document describes the prerequisites required to run .NET Core applications
 ### ICU
 The ICU libraries can be downloaded as a precompiled binary from the ICU website, the URL is http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-RHEL6-x64.tgz.
 ### CURL
-The CURL libraries needs to be built from the source code. The source code can be obtained from the CURL website, the URL is https://curl.haxx.se/download/curl-7.45.0.tar.gz.
+The CURL libraries need to be built from the source code. The source code can be obtained from the CURL website, the URL is https://curl.haxx.se/download/curl-7.45.0.tar.gz.
 To build it, follow the steps described below.
 
 First install the prerequisites:
