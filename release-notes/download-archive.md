@@ -2,7 +2,6 @@
 
 This page provides an archive of previously released versions of the .NET Core runtime, libraries and the .NET Core SDK.
 
-
 ### .NET Core 2.1 - [LTS](https://www.microsoft.com/net/core/support) release
 
 | Release Date | Description | Release Notes | |
@@ -18,6 +17,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/10/09 | 1.1.10 with SDK 1.1.11 (LTS)          | [release notes](1.1/1.1.10.md) | [download](download-archives/1.1.10-download.md) |
 | 2018/07/10 | 1.1.9 with SDK 1.1.10 (LTS)          | [release notes](1.1/1.1.9.md) | [download](download-archives/1.1.9-download.md) |
 | 2018/04/17 | 1.1.8 with SDK 1.1.9 (LTS)          | [release notes](1.1/1.1.8.md) | [download](download-archives/1.1.8-download.md) |
 | 2018/03/13 | 1.1.7 with SDK 1.1.8 (LTS)          | [release notes](1.1/1.1.7.md) | [download](download-archives/1.1.7-download.md) |
@@ -32,6 +32,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/10/09 | 1.0.13 with SDK 1.1.11               | [release notes](1.0/1.0.13.md) | [download](download-archives/1.0.13-download.md) |
 | 2018/07/10 | 1.0.12 with SDK 1.1.10               | [release notes](1.0/1.0.12.md) | [download](download-archives/1.0.12-download.md) |
 | 2018/04/17 | 1.0.11 with SDK 1.1.9               | [release notes](1.0/1.0.11.md) | [download](download-archives/1.0.11-download.md) |
 | 2018/03/13 | 1.0.10 with SDK 1.1.8               | [release notes](1.0/1.0.10.md) | [download](download-archives/1.0.10-download.md) |
