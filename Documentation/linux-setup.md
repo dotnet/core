@@ -47,7 +47,7 @@ wget -nv https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-p
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 
-# Ubuntu 18.04 -  - .NET Core 2.0 and newer
+# Ubuntu 18.04 - .NET Core 2.0 and newer
 wget -nv https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
