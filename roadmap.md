@@ -28,7 +28,7 @@ Milestone information is available on most repos, for example [dotnet/corefx mil
 
 ## Feedback
 
-The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo with the [roadmap label](https://github.com/dotnet/core/labels/roadmap). You can also create issues in other [.NET Core repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
+The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo. You can also create issues in other [.NET Core repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
 
 Although mostly obvious, please give us feedback that will give us insight on the following points:
 
