@@ -19,8 +19,8 @@ For released versions of the product:
 | Milestone                 | Release Date |
 |---------------------------|--------------|
 | .NET Core 2.2 | Q4 2018 |
-| .NET Core 3.0 | Q1 2019, see the [announcement](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/net-core-3-and-support-for-windows-desktop-applications/) for details |
-| .NET Core 2.1.x, 2.0.x, 1.x (servicing) | approx. every 1-2 months or as needed (see also [releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-21)) |
+| .NET Core 3.0 | Preview in Q4 2018. Final version in 2019. See the [original](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/net-core-3-and-support-for-windows-desktop-applications/) and the [update](https://blogs.msdn.microsoft.com/dotnet/2018/10/04/update-on-net-core-3-0-and-net-framework-4-8/) announcements for details. |
+| .NET Core 2.1.x, 1.x (servicing) | approx. every 1-2 months or as needed (see also [releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-21)) |
 
 Note: Dates are calendar year (as opposed to fiscal year).
 
@@ -28,7 +28,7 @@ Milestone information is available on most repos, for example [dotnet/corefx mil
 
 ## Feedback
 
-The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo with the [roadmap label](https://github.com/dotnet/core/labels/roadmap). You can also create issues in other [.NET Core repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
+The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo. You can also create issues in other [.NET Core repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
 
 Although mostly obvious, please give us feedback that will give us insight on the following points:
 
