@@ -6,6 +6,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/11/13 | 2.1.6 with SDK 2.1.500 (LTS) | [release notes](2.1/2.1.6/2.1.6.md) | [download](2.1/2.1.6/2.1.6-download.md) |
 | 2018/10/02 | 2.1.5 with SDK 2.1.403 (LTS) | [release notes](2.1/2.1.5/2.1.5.md) | [download](2.1/2.1.5/2.1.5-download.md) |
 | 2018/09/11 | 2.1.4 with SDK 2.1.402 (LTS) | [release notes](2.1/2.1.4/2.1.4.md) | [download](2.1/2.1.4/2.1.4-download.md) |
 | 2018/08/21 | 2.1.3 with SDK 2.1.401 (Promoted to LTS) | [release notes](2.1/2.1.3/2.1.3.md) | [download](2.1/2.1.3/2.1.3-download.md) |
