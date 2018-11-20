@@ -1,11 +1,12 @@
 # .NET Core Release Notes
 
-The latest supported release is [.NET Core 2.1](2.1).
+The latest supported release is [.NET Core 2.2](2.2).
 
 ## Latest Updates
 
 You can download the latest updates for .NET Core.
 
+* [.NET Core 2.2.0](2.2/2.2.0/2.2.0-download.md)
 * [.NET Core 2.1.6](2.1/2.1.6/2.1.6-download.md)
 * [.NET Core 1.1.10](download-archives/1.1.10-download.md)
 * [.NET Core 1.0.13](download-archives/1.0.13-download.md)
