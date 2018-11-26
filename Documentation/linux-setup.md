@@ -68,8 +68,8 @@ sudo yum install libunwind libicu
 sudo rpm -Uvh https://packages.microsoft.com/config/fedora/27/packages-microsoft-prod.rpm
 sudo dnf install libunwind libicu compat-openssl10
 
-# OpenSUSE 42 - .NET Core 2.0 and newer
-sudo rpm -Uvh https://packages.microsoft.com/config/opensuse/42.2//packages-microsoft-prod.rpm
+# OpenSUSE Leap (Tumbleweed is not officially supported) - .NET Core 2.0 and newer
+sudo rpm -Uvh https://packages.microsoft.com/config/opensuse/42.2/packages-microsoft-prod.rpm
 sudo zypper install libunwind libicu
 
 # SLES 12 - .NET Core 2.0 and newer
