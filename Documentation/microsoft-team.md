@@ -37,10 +37,10 @@ The primary reason to join the orgs are the following:
 ## Get write permissions to repos (optional)
 
 Join teams to gain write access to repos:
-    * Request team membership via https://repos.opensource.microsoft.com/teams
-    * Find the right teams - e.g. `dotnet-coreclr`, `dotnet-corefx`, etc.
-    * Ask someone if you don't know which team to join.
-    * Select `Request to join this team` on the right side - it will send email request to maintainers of the team
+ * Request team membership via https://repos.opensource.microsoft.com/teams
+ * Find the right teams - e.g. `dotnet-coreclr`, `dotnet-corefx`, etc.
+ * Ask someone if you don't know which team to join.
+ * Select `Request to join this team` on the right side - it will send email request to maintainers of the team
 
 ## Service Accounts
 
