@@ -19,7 +19,7 @@ The primary reason to join the orgs are the following:
 * You will be able to access any private repos we maintain
 * You will get write access to a subset of repos
 
-## Get Write Access to Repos (Optional)
+## Get Write Access to Repos (optional)
 
 Join teams to gain write access to repos:
     * Request team membership via https://repos.opensource.microsoft.com/teams
