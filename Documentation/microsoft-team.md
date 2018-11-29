@@ -19,7 +19,7 @@ The primary reason to join the orgs are the following:
 * You will be able to access to private repos we maintain
 * You will get write access to a subset of repos
 
-## Configuring your GitHub account as a Microsoft employee (recommended)
+## Configure your GitHub account as a Microsoft employee (recommended)
 
 * Publicly associate yourself with dotnet and Microsoft orgs
     * For Microsoft, go to https://github.com/orgs/Microsoft/people
