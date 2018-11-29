@@ -21,17 +21,13 @@ The primary reason to join the orgs are the following:
 
 ## Configuring your GitHub account as a Microsoft employee (recommended)
 
-1. Publicly associate yourself with **Microsoft organization**
+* Publicly associate yourself with dotnet and Microsoft orgs
     * Go to https://github.com/orgs/Microsoft/people
-    * Search for your GH login in the list
-    * Choose `Public` from the drop-down list of organization visibility
-    * Note: Everyone will now see a Microsoft badge on your GH profile in Organizations section on the left side
-2. Publicly associate yourself with **dotnet organization**
     * Go to https://github.com/orgs/dotnet/people
     * Search for your GH login in the list
     * Choose `Public` from the drop-down list of organization visibility
-    * Note: Everyone will now see a dotnet badge on your GH profile in Organizations section on the left side
-3. Update your profile
+    * Note: Everyone will now see an org badge on your GH profile in the Organizations section
+* Update your profile
     * Go to https://github.com/settings/profile
     * Match your **Name** on GitHub with full name in address book (so other employees can find you and contact you internally when needed)
     * Set `@Microsoft` as your **Company**
