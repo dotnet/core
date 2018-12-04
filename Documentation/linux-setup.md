@@ -41,7 +41,6 @@ wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-pr
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 
-
 # Ubuntu 16.04 - .NET Core 2.0 and newer
 wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
@@ -49,6 +48,15 @@ sudo apt-get install apt-transport-https
 
 # Ubuntu 18.04 -  - .NET Core 2.0 and newer
 wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt-get install apt-transport-https
+
+# Ubuntu 18.04.1 by default does not configure Universe repository. .NET Core 2.1 depends on liblttng-ust0, which is available in the Universe repository.
+sudo add-apt-repository universe
+sudo apt-get update
+
+# Ubuntu 18.10 - .NET Core 2.1 and newer
+wget -nv https://packages.microsoft.com/config/ubuntu/18.10/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 ```
