@@ -12,7 +12,7 @@ This document describes the prerequisites required to run .NET Core applications
 * lttng-ust
 * zlib
 
-.NET Core also needs two runtime libraries - CURL and ICU - that are not available as RHEL 6 installation packages in versions that .NET Core relies on. The CURL is required if the application references System.Net.Http.dll. The ICU is needed unless globalization is disabled by setting the environment variable `CORECLR_GLOBAL_INVARIANT` to 1 or by adding `System.Globalization.Invariant` element set to `true` under `configProperties` in `*.runtimeconfig.json` file of the application. Here is an example for the console hello world app:
+.NET Core also needs two runtime libraries - CURL and ICU - that are not available as RHEL 6 installation packages in versions that .NET Core relies on. CURL is required if the application references System.Net.Http.dll. ICU is needed except if globalization is disabled. Globalization can be disabled by setting the environment variable `CORECLR_GLOBAL_INVARIANT` to 1 or by adding `System.Globalization.Invariant` element set to `true` under `configProperties` in `*.runtimeconfig.json` file of the application. Here is an example for a console app:
 ```json
 {
     "runtimeOptions": {
@@ -24,9 +24,9 @@ This document describes the prerequisites required to run .NET Core applications
 ```
 ## Getting the libraries that are not available as packages.
 ### ICU
-The ICU libraries can be downloaded in a precompiled binary form from the ICU site, the URL is http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-RHEL6-x64.tgz.
+The ICU libraries can be downloaded as a precompiled binary from the ICU website, the URL is http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-RHEL6-x64.tgz.
 ### CURL
-The CURL needs to be built from sources. The sources can be obtained from the CURL site, the URL is https://curl.haxx.se/download/curl-7.45.0.tar.gz.
+The CURL libraries need to be built from the source code. The source code can be obtained from the CURL website, the URL is https://curl.haxx.se/download/curl-7.45.0.tar.gz.
 To build it, follow the steps described below.
 
 First install the prerequisites:
@@ -41,11 +41,11 @@ yum install -y \
     libidn-devel \
     gcc 
 ```
-Now untar the sources
+Now untar the source code
 ```sh
 tar -xf curl-7.45.0.tar.gz
 ```
-Change the current directory to where the CURL sources were untared:
+Change the current directory to where the CURL source code was untared:
 ```sh
 cd curl-7.45.0
 ```
@@ -85,7 +85,7 @@ cd install
 tar -czf curl-7_45_0-RHEL6-x64.tgz *
 ```
 ## Making the libraries available for a .NET Core application
-There are several ways to do this. The paragraphs below describe them. 
+There are several ways to do this. The following paragraphs describe them. 
 ### Install the libraries into /usr/local
 First untar the .tgz files as follows:
 ```sh
@@ -124,11 +124,11 @@ FailFast: Couldn't find a valid ICU package installed on the system. Set the con
    at System.AppDomain.PrepareDataForSetup(System.String, System.AppDomainSetup, System.String[], System.String[])
 Aborted (core dumped)
 ```
-**A1:** The ICU libraries were not extracted from the `icu4c-57_1-RHEL6-x64.tgz` to the right place, or the `LD_LIBRARY_PATH` was not set to `/usr/local/lib`. See the [Making the libraries available for a .NET Core application](#making-the-libraries-available-for-a-net-core-application) section.
+**A1:** The ICU libraries were not extracted from `icu4c-57_1-RHEL6-x64.tgz` to the right place, or `LD_LIBRARY_PATH` was not set to `/usr/local/lib`. See the [Making the libraries available for a .NET Core application](#making-the-libraries-available-for-a-net-core-application) section.
  
 
 **Q2:** I try to run a .NET Core application on RHEL 6 / CentOS 6 and I get the exception similar to the following one:
 ```
 dotnet: symbol lookup error: System.Net.Http.Native.so: undefined symbol: curl_multi_wait
 ```
-**A2:** The CURL libraries were not extracted from the `curl-7_45_0-RHEL6-x64.tgz` to the right place, or the `LD_LIBRARY_PATH` was not set to `/usr/local/lib`. See the [Making the libraries available for a .NET Core application](#making-the-libraries-available-for-a-net-core-application) section.
+**A2:** The CURL libraries were not extracted from `curl-7_45_0-RHEL6-x64.tgz` to the right place, or `LD_LIBRARY_PATH` was not set to `/usr/local/lib`. See the [Making the libraries available for a .NET Core application](#making-the-libraries-available-for-a-net-core-application) section.

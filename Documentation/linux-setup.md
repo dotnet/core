@@ -2,9 +2,9 @@
 
 There are a few options available for installing .NET Core on Linux systems and each requires a few actions before installing .NET Core. The sections below detail different methods for installing .NET Core and any prerequisites.
 
-* [Using the package manager](installation-using-a-package-manager)
-* [Installing from binary archive (tar.gz)](installation-from-a-binary-archive)
-* [Installing using Snap](installation-using-snap)
+* [Using the package manager](#installation-using-a-package-manager)
+* [Installing from binary archive (tar.gz)](#installation-from-a-binary-archive)
+* [Installing using Snap](#installation-using-snap)
 
 Other useful references
 
@@ -21,33 +21,33 @@ Open a command prompt and run the commands below that match your distro:
 
 ```bash
 # Debian 8 - .NET Core 2.0 and newer
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
 sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
-wget -q https://packages.microsoft.com/config/debian/8/prod.list
+wget -nv https://packages.microsoft.com/config/debian/8/prod.list
 sudo mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
 sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
 # Debian 9 - .NET Core 2.0 and newer
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+wget -nv -O- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
 sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
-wget -q https://packages.microsoft.com/config/debian/9/prod.list
+wget -nv https://packages.microsoft.com/config/debian/9/prod.list
 sudo mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
 sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
 # Ubuntu 14.04 - .NET Core 1.0 and newer
-wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
+wget -nv https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 
 # Ubuntu 16.04 - .NET Core 2.0 and newer
-wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+wget -nv https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 
-# Ubuntu 18.04 -  - .NET Core 2.0 and newer
-wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+# Ubuntu 18.04 - .NET Core 2.0 and newer
+wget -nv https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 
@@ -72,8 +72,8 @@ sudo yum install libunwind libicu
 sudo rpm -Uvh https://packages.microsoft.com/config/fedora/27/packages-microsoft-prod.rpm
 sudo dnf install libunwind libicu compat-openssl10
 
-# OpenSUSE 42 - .NET Core 2.0 and newer
-sudo rpm -Uvh https://packages.microsoft.com/config/opensuse/42.2//packages-microsoft-prod.rpm
+# OpenSUSE Leap (Tumbleweed is not officially supported) - .NET Core 2.0 and newer
+sudo rpm -Uvh https://packages.microsoft.com/config/opensuse/42.2/packages-microsoft-prod.rpm
 sudo zypper install libunwind libicu
 
 # SLES 12 - .NET Core 2.0 and newer

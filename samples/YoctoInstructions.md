@@ -33,7 +33,7 @@ CORE_IMAGE_EXTRA_INSTALL += "curl" to get command line tool.
 This simply adds 1G of extra space. 
 
 ```
-IMAGE_ROOTFS_EXTRA_SPACE_append += "+ 10000000"
+IMAGE_ROOTFS_EXTRA_SPACE_append += "+ 1000000"
 ```
 
 On x86_64 .NET uses /lib64/ld-linux-x86-64.so.2. However Yocto defaults everything to /lib.

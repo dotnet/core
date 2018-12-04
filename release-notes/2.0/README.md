@@ -1,10 +1,12 @@
-# .NET Core 2.0 Releases
+# .NET Core 2.0 Releases - Out of support
 
-The following .NET Core 2.0 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
+The following .NET Core 2.0 releases have been shipped.
 
 | Release Date | Description |  |  |
 | :-- | :-- | :--: | :-- |
-| 2018/04/17 | 2.0.9 with SDK 2.1.202 | [release notes](2.0.9.md)/[download](../download-archives/2.0.9-download.md) | |
+| 2018/10/01 | Out of support | [details](https://github.com/dotnet/core/blob/master/microsoft-support.md#out-of-support-net-core-releases) | |
+| 2018/07/10 | 2.0.9 with SDK 2.1.202 | [release notes](2.0.9.md)/[download](../download-archives/2.0.9-download.md) | |
+| 2018/05/08 | 2.0.7 with SDK 2.1.200 | [release notes](https://github.com/dotnet/cli/releases/tag/v2.1.200)/[download](../download-archives/2.1.200-sdk-download.md) |
 | 2018/04/17 | 2.0.7 with SDK 2.1.105 | [release notes](2.0.7.md)/[download](../download-archives/2.0.7-download.md) | |
 | 2018/03/13 | 2.0.6 with SDK 2.1.101 | [release notes](2.0.6.md)/[download](../download-archives/2.0.6-download.md) | |
 | 2018/01/09 | 2.0.5 with SDK 2.1.4 | [release notes](2.0.5.md)/[download](../download-archives/2.0.5-download.md) | |
