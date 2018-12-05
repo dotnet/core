@@ -2,6 +2,12 @@
 
 This page provides an archive of previously released versions of the .NET Core runtime, libraries and the .NET Core SDK.
 
+### .NET Core 2.2 - [Current](https://www.microsoft.com/net/core/support) release
+
+| Release Date | Description | Release Notes | |
+| :-- | :-- | :--: | :--: |
+| 2018/12/04 | 2.2.0 with SDK 2.2.100 | [release notes](2.2/2.2.0/2.2.0.md) | [download](2.2/2.2.0/2.2.0-download.md) |
+
 ### .NET Core 2.1 - [LTS](https://www.microsoft.com/net/core/support) release
 
 | Release Date | Description | Release Notes | |
