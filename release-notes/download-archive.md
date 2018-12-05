@@ -2,11 +2,17 @@
 
 This page provides an archive of previously released versions of the .NET Core runtime, libraries and the .NET Core SDK.
 
+### .NET Core 2.2 - [Current](https://www.microsoft.com/net/core/support) release
+
+| Release Date | Description | Release Notes | |
+| :-- | :-- | :--: | :--: |
+| 2018/12/04 | 2.2.0 with SDK 2.2.100 | [release notes](2.2/2.2.0/2.2.0.md) | [download](2.2/2.2.0/2.2.0-download.md) |
 
 ### .NET Core 2.1 - [LTS](https://www.microsoft.com/net/core/support) release
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/11/13 | 2.1.6 with SDK 2.1.500 (LTS) | [release notes](2.1/2.1.6/2.1.6.md) | [download](2.1/2.1.6/2.1.6-download.md) |
 | 2018/10/02 | 2.1.5 with SDK 2.1.403 (LTS) | [release notes](2.1/2.1.5/2.1.5.md) | [download](2.1/2.1.5/2.1.5-download.md) |
 | 2018/09/11 | 2.1.4 with SDK 2.1.402 (LTS) | [release notes](2.1/2.1.4/2.1.4.md) | [download](2.1/2.1.4/2.1.4-download.md) |
 | 2018/08/21 | 2.1.3 with SDK 2.1.401 (Promoted to LTS) | [release notes](2.1/2.1.3/2.1.3.md) | [download](2.1/2.1.3/2.1.3-download.md) |
@@ -18,6 +24,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/10/09 | 1.1.10 with SDK 1.1.11 (LTS)          | [release notes](1.1/1.1.10.md) | [download](download-archives/1.1.10-download.md) |
 | 2018/07/10 | 1.1.9 with SDK 1.1.10 (LTS)          | [release notes](1.1/1.1.9.md) | [download](download-archives/1.1.9-download.md) |
 | 2018/04/17 | 1.1.8 with SDK 1.1.9 (LTS)          | [release notes](1.1/1.1.8.md) | [download](download-archives/1.1.8-download.md) |
 | 2018/03/13 | 1.1.7 with SDK 1.1.8 (LTS)          | [release notes](1.1/1.1.7.md) | [download](download-archives/1.1.7-download.md) |
@@ -32,6 +39,7 @@ This page provides an archive of previously released versions of the .NET Core r
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
+| 2018/10/09 | 1.0.13 with SDK 1.1.11               | [release notes](1.0/1.0.13.md) | [download](download-archives/1.0.13-download.md) |
 | 2018/07/10 | 1.0.12 with SDK 1.1.10               | [release notes](1.0/1.0.12.md) | [download](download-archives/1.0.12-download.md) |
 | 2018/04/17 | 1.0.11 with SDK 1.1.9               | [release notes](1.0/1.0.11.md) | [download](download-archives/1.0.11-download.md) |
 | 2018/03/13 | 1.0.10 with SDK 1.1.8               | [release notes](1.0/1.0.10.md) | [download](download-archives/1.0.10-download.md) |

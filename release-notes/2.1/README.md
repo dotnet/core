@@ -4,6 +4,7 @@ The following .NET Core 2.1 releases have been shipped. You must be on the lates
 
 | Release Date | Description |  |  |
 | :-- | :-- | :--: | :-- |
+| 2018/11/13 | 2.1.6 | [release notes](2.1.6/2.1.6.md)/[download](2.1.6/2.1.6-download.md) | - |
 | 2018/10/02 | 2.1.5 | [release notes](2.1.5/2.1.5.md)/[download](2.1.5/2.1.5-download.md) | - |
 | 2018/09/11 | 2.1.4 | [release notes](2.1.4/2.1.4.md)/[download](2.1.4/2.1.4-download.md) | - |
 | 2018/08/21 | 2.1.3 | [release notes](2.1.3/2.1.3.md)/[download](2.1.3/2.1.3-download.md) | - |
