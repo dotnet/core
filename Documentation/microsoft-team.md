@@ -34,6 +34,13 @@ The primary reason to join the orgs are the following:
     * Upload your **picture**, ideally showing your face
         * Hint: You can grab your GAL picture from https://microsoft-my.sharepoint.com
 
+## Install Microsoft Open Source tools
+
+The tools make it easier to participate 
+
+* [Browser Extension](https://docs.opensource.microsoft.com/tools/browser.html) -- Identifies Microsoft employees on GitHub.
+* [VS Code Extension](https://docs.opensource.microsoft.com/tools/vscode.html) --  Provides information about known vulnerabilities.
+
 ## Get write permissions to repos (optional)
 
 Join teams to gain write access to repos:
