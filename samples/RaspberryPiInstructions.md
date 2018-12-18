@@ -67,4 +67,4 @@ sudo apt-get install curl libunwind8 gettext apt-transport-https
 
 * Copy your app, i.e. whole `publish` directory mentioned above, to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi. 
 
-** It is important that you copy the `publish` directory contents displayed at the end of the publish operation and not from another location in the `bin` folder. **
+**It is important that you copy the `publish` directory contents displayed at the end of the publish operation and not from another location in the `bin` folder.**
