@@ -63,7 +63,7 @@ sudo apt-get install curl libunwind8 gettext apt-transport-https
 
 ### Win10 IoT Core
 
-* Install [Windows 10 IoT Core](https://developer.microsoft.com/en-us/windows/iot/GetStarted) on your Pi.
+* Install [Windows 10 IoT Core](https://docs.microsoft.com/en-us/windows/iot-core/getstarted) on your Pi.
 
 * Copy your app, i.e. whole `publish` directory mentioned above, to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi. 
 
