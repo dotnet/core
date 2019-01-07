@@ -12,7 +12,16 @@
       "release-date": "2018-07-10",
       "release-version": "2.0.9",
       "security": true,
-      "cve-list": null,
+      "cve-list": [
+          {
+            "cve-id": "CVE-2018-8171",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-8171"
+          },
+          {
+            "cve-id": "CVE-2018-8356",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-8356"
+          }
+        ],
       "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0.9.md",
       "runtime": {
         "version": "2.0.9",
@@ -276,7 +285,12 @@
       "release-date": "2018-05-08",
       "release-version": "2.0.8",
       "security": true,
-      "cve-list": null,
+      "cve-list": [
+          {
+            "cve-id": "CVE-2018-0765",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0765"
+          }
+        ],
       "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/2.0/2.1.200-sdk.md",
       "runtime": {
         "version": "2.0.8",
@@ -872,7 +886,12 @@
       "release-date": "2018-03-13",
       "release-version": "2.0.6",
       "security": true,
-      "cve-list": null,
+      "cve-list": [
+          {
+            "cve-id": "CVE-2018-0875",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0875"
+          }
+        ],
       "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0.6.md",
       "runtime": {
         "version": "2.0.6",
@@ -1130,7 +1149,24 @@
       "release-date": "2018-01-09",
       "release-version": "2.0.5",
       "security": true,
-      "cve-list": null,
+      "cve-list": [
+          {
+            "cve-id": "CVE-2018-0786",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0786"
+          },
+          {
+            "cve-id": "CVE-2018-0764",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0764"
+          },
+          {
+            "cve-id": "CVE-2018-0785",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0785"
+          },
+          {
+            "cve-id": "CVE-2018-0784",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0784"
+          }
+        ],
       "release-notes": null,
       "runtime": {
         "version": "2.0.5",
@@ -1318,6 +1354,117 @@
     },
     {
       "release-date": "2017-12-04",
+      "release-version": "2.0.4",
+      "security": false,
+      "cve-list": null,
+      "release-notes": null,
+      "runtime": {
+        "version": "2.0.4",
+        "version-display": null,
+        "vs-version": null,
+        "files": [
+          {
+            "name": "dotnet-runtime-linux-x64.tar.gz",
+            "rid": "linux-x64",
+            "url": "https://download.microsoft.com/download/2/B/2/2B2854E7-7EAE-4FE9-85D2-19ACCD716F18/dotnet-runtime-2.0.4-linux-x64.tar.gz",
+            "hash": "447d9f20f97133e344bdc331c2e89d9b0d05818f9ad62a72ba021343d77df4cddad15f328f79797a67c9ca205a9f1fed1e6a3f156579467454aac24c7cf260b2"
+          },
+          {
+            "name": "dotnet-runtime-osx-x64.tar.gz",
+            "rid": "osx-x64",
+            "url": "https://download.microsoft.com/download/2/B/2/2B2854E7-7EAE-4FE9-85D2-19ACCD716F18/dotnet-runtime-2.0.4-osx-x64.tar.gz",
+            "hash": "4b3619b6663cdff7b7c5eb2781728c5433020cacbe5f5116a76ca002aa171e8f7ab0091ab825654ec7d83d1a914f9524e614eeb74b912e97409a8c9dcfa3d822"
+          },
+          {
+            "name": "dotnet-runtime-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.microsoft.com/download/2/B/2/2B2854E7-7EAE-4FE9-85D2-19ACCD716F18/dotnet-runtime-2.0.4-win-x86.zip",
+            "hash": "743a0d94a5dfe3fd4134c67e4a287f51ec9ebf870515cf354f98d0cba72d2eccf2d2a4845ddb30b06aca8a810499d9d5512b0fa1b067f4d52522bf949843c177"
+          },
+          {
+            "name": "dotnet-runtime-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.microsoft.com/download/2/B/2/2B2854E7-7EAE-4FE9-85D2-19ACCD716F18/dotnet-runtime-2.0.4-win-x64.zip",
+            "hash": "fb5761fa6e38b10bffdff96b841ba1d1bf3d127d2bde0401a2e87f5b31f8bfc48dc8b4a283ef8661fe96c4460ba50e824800c97ccc6858e820bd0e633f85257f"
+          },
+          {
+            "name": "dotnet-runtime-osx-x64.pkg",
+            "rid": "osx-x64",
+            "url": "https://download.microsoft.com/download/2/B/2/2B2854E7-7EAE-4FE9-85D2-19ACCD716F18/dotnet-runtime-2.0.4-osx-x64.pkg",
+            "hash": "10831f708ae9b9328121ca9040e27cffa050dcf28494741abd1017f111edac96555a6c4f011532e17360e1e0ecaa3558d4738a382f974a4f0f838cc66b648032"
+          },
+          {
+            "name": "dotnet-runtime-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.microsoft.com/download/2/B/2/2B2854E7-7EAE-4FE9-85D2-19ACCD716F18/dotnet-runtime-2.0.4-win-x86.exe",
+            "hash": "5978c622c24b8ae03e80cdd70774e90b7058908a9f380ac08cb2c7b45fde75f775eb025048af1e0fe028b2406626436019bd8dadc23868643191f86e2ff73c2a"
+          },
+          {
+            "name": "dotnet-runtime-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.microsoft.com/download/2/B/2/2B2854E7-7EAE-4FE9-85D2-19ACCD716F18/dotnet-runtime-2.0.4-win-x64.exe",
+            "hash": "551a5485e9ef8af0bebea2ee82f5edc1e5c39c8a9c1d98730b963929f23dd032a885dae5877c39d1e344d9f07483ea11e3d0fdef24d33c8a8e4535281dfd9263"
+          }
+        ]
+      },
+      "sdk": {
+        "version": "2.1.3",
+        "version-display": null,
+        "runtime-version": "2.0.4",
+        "vs-version": null,
+        "csharp-version": null,
+        "fsharp-version": null,
+        "vb-version": null,
+        "files": [
+          {
+            "name": "dotnet-sdk-linux-x64.tar.gz",
+            "rid": "linux-x64",
+            "url": "https://download.microsoft.com/download/2/9/3/293BC432-348C-4D1C-B628-5AC8AB7FA162/dotnet-sdk-2.1.3-linux-x64.tar.gz",
+            "hash": "509b88895fd5a6a90e245141eb52f188aa9ee7d20188c213892483c142900d6975013aef9ca6d8da986cc5617a2c3571e22318297c51578b871c047602757600"
+          },
+          {
+            "name": "dotnet-sdk-osx-x64.tar.gz",
+            "rid": "osx-x64",
+            "url": "https://download.microsoft.com/download/2/9/3/293BC432-348C-4D1C-B628-5AC8AB7FA162/dotnet-sdk-2.1.3-osx-x64.tar.gz",
+            "hash": "ce60c900039217c0f67d66a6436fd7d7adf75f4bbc4646389f8d69da53df7b8c5ecdeec270a799a4624a1a0bc3b43bea9306d72869251b2892d3763d37ce664c"
+          },
+          {
+            "name": "dotnet-sdk-osx-x64.pkg",
+            "rid": "osx-x64",
+            "url": "https://download.microsoft.com/download/2/9/3/293BC432-348C-4D1C-B628-5AC8AB7FA162/dotnet-sdk-2.1.3-osx-x64.pkg",
+            "hash": "77eac5aa167cc8d18a4f4aebc1db7aead6fe814fe26fc6b6c2193aa1b9d5e3b2ceb476fff0293371d0a719d68d4f93a0b2fbfba40271fc5ecdbcce34b33b0bf3"
+          },
+          {
+            "name": "dotnet-sdk-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.microsoft.com/download/5/D/F/5DF4B836-7DFD-4CCF-AC96-101E2A4C7421/dotnet-sdk-2.1.3-win-x86.zip",
+            "hash": "9adc65a0708d7ae8300ae13db509313083ecece3901576c98c69413608ccffe7e73f35547583760c4ee08f01a9e9b6e89098788344027827602053ee4106af38"
+          },
+          {
+            "name": "dotnet-sdk-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.microsoft.com/download/2/9/3/293BC432-348C-4D1C-B628-5AC8AB7FA162/dotnet-sdk-2.1.3-win-x64.zip",
+            "hash": "5d5be9568ce48b173aacd8807bb3a8085386bf0e00d1a055550a514248c88f52399818f2f5c7d998701dc6cf311395cdb4e1689173344edc207f27abe7fb36ce"
+          },
+          {
+            "name": "dotnet-sdk-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.microsoft.com/download/2/9/3/293BC432-348C-4D1C-B628-5AC8AB7FA162/dotnet-sdk-2.1.3-win-x86.exe",
+            "hash": "61e2ae2300a0489ab1a53feed31b5c11b14426bdd1120a2f8fa0ebe07e291b78452bb650983164a1056aa8ddff35d9ea256a7b3084052d548a116572db641676"
+          },
+          {
+            "name": "dotnet-sdk-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.microsoft.com/download/2/9/3/293BC432-348C-4D1C-B628-5AC8AB7FA162/dotnet-sdk-2.1.3-win-x64.exe",
+            "hash": "8146bc0b74d152a9691e42d2c2f0755a735ed4cc48abeb79af86efea5801e8c7e94cf2f524c491c737cee45cf71c3182229f9a5201b9af8c5fcea324cfc67913"
+          }
+        ]
+      },
+      "aspnetcore-runtime": null,
+      "symbols": null
+    },
+    {
+      "release-date": "2017-12-04",
       "release-version": "2.0.3",
       "security": true,
       "cve-list": null,
@@ -1450,7 +1597,24 @@
       "release-date": "2017-11-14",
       "release-version": "2.0.3",
       "security": true,
-      "cve-list": null,
+      "cve-list": [
+          {
+            "cve-id": "CVE-2017-8700",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-8700"
+          },
+          {
+            "cve-id": "CVE-2017-11770",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11770"
+          },
+          {
+            "cve-id": "CVE-2017-11879",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11879"
+          },
+          {
+            "cve-id": "CVE-2017-11883",
+            "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11883"
+          }
+        ],
       "release-notes": null,
       "runtime": {
         "version": "2.0.3",
