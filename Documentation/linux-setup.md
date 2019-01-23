@@ -102,7 +102,33 @@ We have been working on bringing .NET Core to Snap and are ready to hear what yo
 * As with our other installers, the Runtime and SDK are available depending on your needs. The SDK installation will include the .NET Core runtime and ASP.NET Core runtime.
 
 ```bash
-sudo snap install dotnet-sdk --candidate --classic
+sudo snap install dotnet-sdk --classic
 ## or
-sudo snap install dotnet-runtime-21 --candidate
+sudo snap install dotnet-runtime-21 --classic
 ```
+
+### SSL Certificate resolution with Snap installs
+
+On some distros, a few environment variables need to be set in order for .NET Core to properly find the SSL certificate. You will know this is needed on your system if you get an error similar to the following during `restore`.
+
+```bash
+Processing post-creation actions...
+Running 'dotnet restore' on /home/myhome/test/test.csproj...
+  Restoring packages for /home/myhome/test/test.csproj...
+/snap/dotnet-sdk/27/sdk/2.2.103/NuGet.targets(114,5): error : Unable to load the service index for source https://api.nuget.org/v3/index.json. [/home/myhome/test/test.csproj]
+/snap/dotnet-sdk/27/sdk/2.2.103/NuGet.targets(114,5): error :   The SSL connection could not be established, see inner exception. [/home/myhome/test/test.csproj]
+/snap/dotnet-sdk/27/sdk/2.2.103/NuGet.targets(114,5): error :   The remote certificate is invalid according to the validation procedure. [/home/myhome/test/test.csproj]
+```
+
+To resolve this issue
+
+```bash
+export SSL_CERT_FILE=[certificate file location and name]
+export SSL_CERT_DIR=/dev/null
+```
+
+The certificate location will vary by distro. Here are the locations for the distros where we have experienced the issue.
+
+* Fedora - `/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem`
+* OpenSUSE - `/etc/ssl/ca-bundle.pem`
+* Solus - `/etc/ssl/certs/ca-certificates.crt`
