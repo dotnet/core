@@ -1,4 +1,4 @@
-# .NET Core on Raspberry Pi
+# Run .NET Core Apps on Raspberry Pi
 
 .NET Core builds are available that run on the Raspberry Pi and similar hardware. In particular, the Raspberry Pi uses an ARM chip, and requires .NET Core ARM builds. .NET Core supports ARM32 and ARM64.
 
