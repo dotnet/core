@@ -12,12 +12,19 @@ Note: You can run [32-bit Linux](https://www.raspberrypi.org/downloads/raspbian/
 
 ## Configuring Linux
 
-For Raspbian [Debian 9 Jessie](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) you need to do the following:
+For [32-bit Linux](https://www.raspberrypi.org/downloads/raspbian/), you need to [install the following prerequisites](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit):
 
 ```console
 sudo apt-get update
 sudo apt-get install curl libunwind8 gettext apt-transport-https
 ```
+
+For 64-bit Linux, there are several different distros in progress:
+
+* [Debian on Raspberry Pi 3](https://github.com/Debian/raspi3-image-spec)
+* [Fedora on Raspberry Pi 3](https://fedoraproject.org/wiki/Architectures/ARM/Raspberry_Pi#Raspberry_Pi_3_aarch64_support)
+* [Ubuntu on Raspberry Pi 3](https://wiki.ubuntu.com/ARM/RaspberryPi#arm64)
+* [Ubuntu on Pine64](http://wiki.pine64.org/index.php/Pine_A64_Software_Release#Xenial_Mate)
 
 ## Installing the .NET Core SDK on Rasberry Pi for Linux ARM32/ARM64
 
