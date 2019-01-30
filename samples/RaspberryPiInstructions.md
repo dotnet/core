@@ -8,23 +8,45 @@ We recommend that you use .NET Core 3 for Raspberry Pi development. There are si
 
 Note: .NET Core supports Raspberry Pi 2 and Pi 3. We recommend the Pi 3.
 
-Note: You can run [32-bit Linux](https://www.raspberrypi.org/downloads/raspbian/), [64-bit Linux](https://gist.github.com/richlander/467813274cea8abc624553ee72b28213#how-to-install-arm64-builds) and [32-bit Windows](https://docs.microsoft.com/en-us/windows/iot-core/downloads) on the Pi. Any of those options will work with .NET Core. On Linux, it may be helpful to [Starting ssh automatically at boot time](https://raspberrypi.stackexchange.com/questions/1747/starting-ssh-automatically-at-boot-time).
+## Run with Docker
 
-## Configuring Linux
+You can run [sample .NET Core Docker apps](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md) if you have Docker installed. 
 
-For [32-bit Linux](https://www.raspberrypi.org/downloads/raspbian/), you need to [install the following prerequisites](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit):
+You can also run the .NET Core SDK with a simple command:
+
+```console
+docker run --rm -it microsoft/dotnet:3.0-sdk
+```
+
+## Installing and Configuring Linux
+
+For [32-bit Linux](https://www.raspberrypi.org/downloads/raspbian/), you need to [install the following prerequisites](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) using the following commands, here for Debian:
 
 ```console
 sudo apt-get update
 sudo apt-get install curl libunwind8 gettext apt-transport-https
 ```
 
-For 64-bit Linux, there are several different distros in progress:
+For 64-bit Linux, there are several different distros in progress that you can try:
 
 * [Debian on Raspberry Pi 3](https://github.com/Debian/raspi3-image-spec)
 * [Fedora on Raspberry Pi 3](https://fedoraproject.org/wiki/Architectures/ARM/Raspberry_Pi#Raspberry_Pi_3_aarch64_support)
 * [Ubuntu on Raspberry Pi 3](https://wiki.ubuntu.com/ARM/RaspberryPi#arm64)
 * [Ubuntu on Pine64](http://wiki.pine64.org/index.php/Pine_A64_Software_Release#Xenial_Mate)
+
+Note: We've had the most success with Debian on ARM64 for the Pi.
+
+For 64-bit, You need to install the following components using the following commands, here for Debian:
+
+```console
+sudo apt-get update
+sudo apt-get install libc6 libgcc1 libgssapi-krb5-2 libicu60 liblttng-ust0 libssl1.0.0 libstdc++6 zlib1g
+``` 
+
+Note: There are various tricks that makes it easier to manage installing Linux images:
+
+* [Installing operating system images](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
+* [Starting ssh automatically at boot time](https://raspberrypi.stackexchange.com/questions/1747/starting-ssh-automatically-at-boot-time).
 
 ## Installing the .NET Core SDK on Rasberry Pi for Linux ARM32/ARM64
 
@@ -105,7 +127,3 @@ Build self-contained Linux ARM32 app and copy to Pi:
 6. Navigate to webapp in desktop browser at: `192.168.1.75:5100`
 
 Note: For Linux ARM32, use `-r linux-arm`, for  Linux ARM64, use `-r linux-arm64` and for Windows ARM32, use `-r win-arm` .
-
-## Run with Docker
-
-You can run [sample .NET Core Docker apps](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md) if you have Docker installed.
