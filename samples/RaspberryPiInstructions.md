@@ -1,13 +1,39 @@
 # .NET Core on Raspberry Pi
 
-Arm32 builds are available as community supported builds for .NET Core 2.0. 
-**There is no SDK that runs on ARM32** but you can publish an application that will run on a Raspberry Pi. 
+.NET Core builds are available that run on the Raspberry Pi and similar hardware. In particular, the Raspberry Pi uses an ARM chip, and requires .NET Core ARM builds. .NET Core supports ARM32 and ARM64.
 
-These steps have been tested on a RPi 2 and RPi 3 with Linux and Windows.
+You can build an application for ARM either on an ARM device or on your X64 machine. Both options are documented below.
 
-Note: All models of generation 1 and Pi Zero are not supported because the .NET Core JIT depends on armv7 instructions not available on those versions.
+We recommend that you use .NET Core 3 for Raspberry Pi development. There are significant improvements in .NET Core 3 that make the experience much better.
 
-## Creating an app:
+Note: .NET Core supports Raspberry Pi 2 and Pi 3. We recommend the Pi 3.
+
+## Installing the .NET Core SDK on Rasberry Pi
+
+The best way to install .NET Core on ARM platforms is via curl.
+
+Note: The pattern documented below is the same one we use for [Docker](https://github.com/dotnet/dotnet-docker). You can look at .NET Core Dockerfiles to learn more about specific installation needs.
+
+Download .NET Core via curl (choose the version that works for you):
+
+* 2.2 ARM32: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/2.2.103/dotnet-sdk-2.2.103-linux-arm.tar.gz`
+* 3.0 ARM32: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/3.0.100-preview-010184/dotnet-sdk-3.0.100-preview-010184-linux-arm.tar.gz`
+* 3.0 ARM64: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/3.0.100-preview-010184/dotnet-sdk-3.0.100-preview-010184-linux-arm64.tar.gz`
+
+Note: The latest download links are available at the [.NET Core Download page](https://dotnet.microsoft.com/download/archives).
+
+Unpack .NET Core to a global location:
+
+* `sudo mkdir -p /usr/share/dotnet`
+* `sudo tar -zxf dotnet.tar.gz -C /usr/share/dotnet`
+
+Symbolically link dotnet into a path location:
+
+* `sudo ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet`
+
+## Installation .NET Core
+
+
 
 * [Install .NET Core SDK](https://www.microsoft.com/net/core) into a supported developer configuration.
 (Raspberry Pi itself is supported only as deployment target but there is an unsupported version of the SDK available as well.)
