@@ -45,8 +45,8 @@ sudo apt-get install libc6 libgcc1 libgssapi-krb5-2 libicu60 liblttng-ust0 libss
 
 Note: There are various tricks that makes it easier to manage installing Linux images:
 
-* [Installing operating system images](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
-* [Starting ssh automatically at boot time](https://raspberrypi.stackexchange.com/questions/1747/starting-ssh-automatically-at-boot-time).
+* [Install operating system images](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
+* [Start ssh automatically at boot time](https://raspberrypi.stackexchange.com/questions/1747/starting-ssh-automatically-at-boot-time).
 
 ## Installing the .NET Core SDK on Rasberry Pi for Linux ARM32/ARM64
 
@@ -87,7 +87,7 @@ Console App:
 1. `dotnet new console -o app` // Generate app from template
 2. `cd app`
 3. `dotnet run` // Build and run app
-4. `./bin/Debug/netcoreapp3.0/app` // Alternatively, run app directly
+4. `./bin/Debug/netcoreapp3.0/app` // Run app directly (once built)
 
 Web App:
 
@@ -105,7 +105,7 @@ You can build and publish app on another machine (likely x64) and publish to the
 1. `dotnet new webapp -o webapp` // Generate app from template
 2. `cd webapp`
 3. `dotnet run` // Build and run app -- will use `localhost:5000`
-4. `\bin\Debug\netcoreapp3.0\webapp.exe` // Alternatively, run app directly
+4. `\bin\Debug\netcoreapp3.0\webapp.exe` // Run app directly (once built)
 
 Now, we will copy the app to the Pi with scp (other tools work similarly, like Putty). There are a few different options.
 
