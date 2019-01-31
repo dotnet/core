@@ -4,13 +4,13 @@
 
 You can build an application for ARM either on an ARM device or on your X64 machine. Both options are documented below.
 
-We recommend that you use .NET Core 3 for Raspberry Pi development. There are significant improvements in .NET Core 3 that make the experience much better.
+This document is written for .NET Core 3, but can be adapted to work for .NET Core 2.1 or 2.2.
 
-Note: .NET Core supports Raspberry Pi 2 and Pi 3. We recommend the Pi 3.
+Note: .NET Core supports Raspberry Pi 2 and Pi 3. We recommend using the Raspberry Pi 3.
 
 ## Run with Docker
 
-You can run [sample .NET Core Docker apps](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md) if you have Docker installed. 
+You can run [.NET Core sample apps](https://github.com/dotnet/dotnet-docker/blob/master/samples/dotnetapp/dotnet-docker-arm32.md) and [ASP.NET Core sample apps](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-arm32.md) with Docker.
 
 You can also run the .NET Core SDK with a simple command:
 
@@ -20,14 +20,25 @@ docker run --rm -it microsoft/dotnet:3.0-sdk
 
 ## Installing and Configuring Linux
 
-For [32-bit Linux](https://www.raspberrypi.org/downloads/raspbian/), you need to [install the following prerequisites](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) using the following commands, here for Debian:
+We recommend [32-bit Linux](https://www.raspberrypi.org/downloads/raspbian/) for Pi users.
+
+.NET Core has a set of [dependencies](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) that must be installed.
+
+32-bit Debian/Raspian:
 
 ```console
 sudo apt-get update
 sudo apt-get install curl libunwind8 gettext apt-transport-https
 ```
 
-For 64-bit Linux, there are several different distros in progress that you can try:
+64-bit Debian:
+
+```console
+sudo apt-get update
+sudo apt-get install libc6 libgcc1 libgssapi-krb5-2 libicu60 liblttng-ust0 libssl1.0.0 libstdc++6 zlib1g
+```
+
+There are several ARM64 distros in progress that you can try:
 
 * [Debian on Raspberry Pi 3](https://github.com/Debian/raspi3-image-spec)
 * [Fedora on Raspberry Pi 3](https://fedoraproject.org/wiki/Architectures/ARM/Raspberry_Pi#Raspberry_Pi_3_aarch64_support)
@@ -36,14 +47,7 @@ For 64-bit Linux, there are several different distros in progress that you can t
 
 Note: We've had the most success with Debian on ARM64 for the Pi.
 
-For 64-bit, You need to install the following components using the following commands, here for Debian:
-
-```console
-sudo apt-get update
-sudo apt-get install libc6 libgcc1 libgssapi-krb5-2 libicu60 liblttng-ust0 libssl1.0.0 libstdc++6 zlib1g
-``` 
-
-Note: There are various tricks that makes it easier to manage installing Linux images:
+There are various techniques that we use to makes it easier to install Linux images:
 
 * [Install operating system images](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 * [Start ssh automatically at boot time](https://raspberrypi.stackexchange.com/questions/1747/starting-ssh-automatically-at-boot-time).
@@ -54,15 +58,16 @@ The best way to install .NET Core on ARM platforms is currently via curl. We are
 
 Note: The pattern documented below is the same one we use for [Docker](https://github.com/dotnet/dotnet-docker). You can look at .NET Core Dockerfiles to learn more about specific installation needs.
 
-1. Download .NET Core via curl (choose the version that works for you):
-  * 2.2 ARM32: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/2.2.103/dotnet-sdk-2.2.103-linux-arm.tar.gz`
-  * 3.0 ARM32: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/3.0.100-preview-010184/dotnet-sdk-3.0.100-preview-010184-linux-arm.tar.gz`
-  * 3.0 ARM64: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/3.0.100-preview-010184/dotnet-sdk-3.0.100-preview-010184-linux-arm64.tar.gz`
+1. Download .NET Core via curl (choose the version that works for you, or grab an [official build](https://dotnet.microsoft.com/download/archives)):
 
-  Note: The latest download links are available at the [.NET Core Download page](https://dotnet.microsoft.com/download/archives).
+  * 3.0 ARM32: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-sdk-latest-linux-arm.tar.gz`
+  * 3.0 ARM64: `curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-sdk-latest-linux-arm64.tar.gz`
+
 2. Unpack .NET Core to a global location:
+
   * `sudo mkdir -p /usr/share/dotnet`
   * `sudo tar -zxf dotnet.tar.gz -C /usr/share/dotnet`
+
 3. Symbolically link dotnet into a path location:
   * `sudo ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet`
 
