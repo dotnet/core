@@ -45,7 +45,7 @@ Current releases are supported for the following timeframe:
 
 * Three months after a subsequent **Current** or **LTS** release
 
-###Maintenance releases
+### Maintenance releases
 
 Maintenance releases are in the last stage of the lifecycle . During Maintenance, a release will still receive security updates. The length of Maintenance time is determined by the type of release it was previously; as described in the above section.
 
