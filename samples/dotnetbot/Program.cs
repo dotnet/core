@@ -2,22 +2,22 @@ using System;
 
 public static class Program
 {
-  public static void Main(string[] args) 
-  {
+    public static void Main(string[] args)
+    {
         string message = "dotnet-bot: Welcome to using .NET Core!";
-          
-        if (args.Length > 0) 
+
+        if (args.Length > 0)
         {
-          message = String.Join(" ",args);
+            message = string.Join(" ", args);
         }
 
         Console.WriteLine(GetBot(message));
-  }
+    }
 
-  public static string GetBot(string message) 
-  {
-          string bot = $"\n        {message}";
-          bot += @"
+    public static string GetBot(string message)
+    {
+        string bot = $"\n        {message}";
+        bot += @"
     __________________
                       \
                        \
@@ -57,7 +57,6 @@ public static class Program
         .....
 
 ";
-  return bot;
-  }
-
+        return bot;
+    }
 }
