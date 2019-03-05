@@ -12,7 +12,7 @@ public static class Program
         }
         else if (args.Length > 0)
         {
-            message = String.Join(" ", args);
+            message = string.Join(" ", args);
         }
 
         Console.WriteLine(GetBot(message));
@@ -62,5 +62,4 @@ public static class Program
 ";
         return bot;
     }
-
 }
