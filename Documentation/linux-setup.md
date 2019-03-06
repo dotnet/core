@@ -83,7 +83,7 @@ sudo zypper install libunwind libicu
 
 ## Ready to install
 
-Your system is now ready to install .NET Core. See the [Release Notes index](https://github.com/dotnet/core/tree/master/release-notes) for the latest available updates.
+Your system is now ready to install .NET Core. See the [Release Notes index](https://github.com/dotnet/core/tree/master/release-notes#net-core-release-notes) for the latest available updates.
 
 ## Installation from a binary archive
 
