@@ -19,7 +19,7 @@ For released versions of the product:
 | Milestone                 | Release Date |
 |---------------------------|--------------|
 | .NET Core 2.2.x, 2.1.x, 1.x (servicing) | Approximately every 1-2 months or as needed (see also [releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-21)) |
-| .NET Core 3.0 | [Preview releases](https://github.com/dotnet/core/blob/master/release-notes/3.0/README.md) started late 2018. Final version in 2019. See the [original](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/net-core-3-and-support-for-windows-desktop-applications/) and the [update](https://blogs.msdn.microsoft.com/dotnet/2018/10/04/update-on-net-core-3-0-and-net-framework-4-8/) announcements for details. |
+| .NET Core 3.0 | [Preview releases](https://github.com/dotnet/core/blob/master/release-notes/3.0/README.md) <br/> Final version in second half of 2019 - see [Schedule in Preview 3](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-preview-3) (from 2019/3). Ship date will be announced at the Build 2019 conference. <br/> Previous announcements: [original 2018/5](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/net-core-3-and-support-for-windows-desktop-applications/) and [update 2018/10](https://blogs.msdn.microsoft.com/dotnet/2018/10/04/update-on-net-core-3-0-and-net-framework-4-8/). |
 
 Note: Dates are calendar year (as opposed to fiscal year).
 
