@@ -1,13 +1,256 @@
 {
   "channel-version": "1.1",
-  "latest-release": "1.1.11",
-  "latest-release-date": "2019-02-12",
-  "latest-runtime": "1.1.11",
-  "latest-sdk": "1.1.12",
+  "latest-release": "1.1.12",
+  "latest-release-date": "2019-03-12",
+  "latest-runtime": "1.1.12",
+  "latest-sdk": "1.1.13",
   "support-phase": "maintenance",
   "eol-date": "2019-06-27",
   "lifecycle-policy": "https://www.microsoft.com/net/support/policy",
   "releases": [
+    {
+      "release-date": "2019-03-12",
+      "release-version": "1.1.12",
+      "security": true,
+      "cve-list": [
+        {
+          "cve-id": " CVE-2019-0757",
+          "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-0757"
+        }
+      ],
+      "release-notes": "https://github.com/dotnet/core/blob/master/release-notes/1.1/1.1.12/1.1.12.md",
+      "runtime": {
+        "version": "1.1.12",
+        "version-display": "1.1.12",
+        "vs-version": "15.0",
+        "files": [
+          {
+            "name": "dotnet-centos-x64.tar.gz",
+            "rid": "centos-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/60439f54-4dd4-4128-8c3e-aaa346e54f63/9eed8f5fae4265f32ab4c859bfcbe720/dotnet-centos-x64.1.1.12.tar.gz",
+            "hash": "F101DE0E33838801572DCC9A5626698C6F20C154D0938E761AFA41F861EE470E7824CC99F74852484E62B4776FC6F98D4E57DD503B84F7B74A4121A74698DBDA"
+          },
+          {
+            "name": "dotnet-debian.9-x64.tar.gz",
+            "rid": "debian.9-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/4e85cb6b-7a05-4766-b230-372df3ab80b0/6fa4bed7440dda5a10ee961d14c0def3/dotnet-debian.9-x64.1.1.12.tar.gz",
+            "hash": "F556EC502C91A3B50576A2717A6E01BB60800AB1F671BB211BE5F1577BCB405A1BD02BC5C7D6BD4CC3D6B12B9785BE8308E22D1E22743E5AAA67A2C613C6558B"
+          },
+          {
+            "name": "dotnet-fedora.27-x64.tar.gz",
+            "rid": "fedora.27-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/58c83eae-9a1a-4257-8b08-e72c6ddf8ed7/8298ff6440d2109e1e5991582e9a1331/dotnet-fedora.27-x64.1.1.12.tar.gz",
+            "hash": "F1489C659CD38D7CCF91394C04917E1E7A6975891BA59131AA16E7657C0543037275C6EFD7EBB880194E695FE7E943A87C808C6DCBAD7DD35E4154779FB75050"
+          },
+          {
+            "name": "dotnet-fedora.28-x64.tar.gz",
+            "rid": "fedora.28-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/06012b3a-9c4d-41b0-b61b-6b2fedcddec2/9d0f39dcd9198f951fa735495d00112c/dotnet-fedora.28-x64.1.1.12.tar.gz",
+            "hash": "EA5CECA6265C05B4EDD62893CA2125E533D2566074D4D98BE95686E8752EA3E2C8B36AAA8DFF75AAC5CA60ACD44893800221E38BEE4236C2B9E36F5FF9859325"
+          },
+          {
+            "name": "dotnet-opensuse.42.3-x64.tar.gz",
+            "rid": "opensuse.42.3-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/7f965480-976e-4e85-b80e-c7c39fbb8080/fffabde4aff2a525359b645dea57a6c6/dotnet-opensuse.42.3-x64.1.1.12.tar.gz",
+            "hash": "38416155C3307870F58B464E5ECDD5575A2CDB9CB59DA800960E3C75E85BCB6BE253E42017F87BD9B6AF5F5FDF5EB7D8B3C39923432C5EB114CF8503914A2946"
+          },
+          {
+            "name": "dotnet-osx-x64.pkg",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/c6b8bdeb-27e4-4149-9f5b-164ac344d48e/8e3e3c41f97317ea9d4b15250a092419/dotnet-osx-x64.1.1.12.pkg",
+            "hash": "7A131AAE13827BA2785F501C544695166D85B8A831381C270A9C219E4FDC587A5490A7A3C3B4E38FB90BC1A5EE75FF7366E333619DEFF98409CB0E72A091CEAF"
+          },
+          {
+            "name": "dotnet-osx-x64.tar.gz",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/2dc4619f-cec3-4159-a061-ea288cb69f96/e7558401471ddc4cb8168a4bff711114/dotnet-osx-x64.1.1.12.tar.gz",
+            "hash": "867E247EE13D2A59FC9E974225888E97FF59DDA6F747D784E86C75D1FD90E5D17EA1C6E1B8C2DC7BB889B8097361548345239F5A83E2B1908389907496D08D6F"
+          },
+          {
+            "name": "dotnet-rhel-x64.tar.gz",
+            "rid": "rhel-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/f4992fb8-592e-474f-8834-e3a64e015b6e/955fe39bdb8603a06bb70d7a2cc0743d/dotnet-rhel-x64.1.1.12.tar.gz",
+            "hash": "2292B6E2562F76A22063A06435B9215A11FDCDB20CC2DE1490D6BB32BBC590F9B6A308CE951AA13BDAFC3EE88ADC8A974BEB2691C9A4DDB43FBEB35E94ECCF8E"
+          },
+          {
+            "name": "dotnet-ubuntu-x64.tar.gz",
+            "rid": "ubuntu-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/6d75ff7e-dbcb-4602-b788-e5d51e193b26/19bc8f49ee59468e22fa800462ab17e3/dotnet-ubuntu-x64.1.1.12.tar.gz",
+            "hash": "429E18C6B885EB0C04E23794F39337F785FCA7A3E645869E26C7362FB545339D698C4CF5414195E0FF36B26E1170835D178BE243188C93CDAC6CF9401DFACEFC"
+          },
+          {
+            "name": "dotnet-ubuntu.16.04-x64.tar.gz",
+            "rid": "ubuntu.16.04-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/ca6f8aeb-711c-4cb6-ab40-7bf687bf234f/402d838eb8a4c5a97c196e596883e267/dotnet-ubuntu.16.04-x64.1.1.12.tar.gz",
+            "hash": "1A0FDB76B30672BAEB6BD1B1B5A407DCF8F0C4F0E3B2116534C9212CC18E14E152E34BD026CE8AC00379DC9DD3BDAA65589FCAB19268782AD329837B3A926280"
+          },
+          {
+            "name": "dotnet-ubuntu.18.04-x64.tar.gz",
+            "rid": "ubuntu.18.04-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/a84b8d06-915a-4409-8c64-320424d1d822/3e9af619592ab59f0831cdd67b4c1f19/dotnet-ubuntu.18.04-x64.1.1.12.tar.gz",
+            "hash": "747EC1218A36F18BFF25834594AFBA2A79A46028A5D00CCB2AAE4E343886E4C6691BF4AD0DC9426D3D86635156E796E100DBC31F4E3159CAC774335742C7CAA1"
+          },
+          {
+            "name": "dotnet-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/6f175fa3-5578-47e8-a03e-eb07a7bc619e/d727018b0a1f428377a2de6d6d30480f/dotnet-win-x64.1.1.12.exe",
+            "hash": "FFC597AEF0AF1C09827DD935EAEBCFC485FEBABC03B65A2D5B2D185A8E2FA57364DC152B57FA88676804C4B26A28AC7D53BA1BD766E73118BB12D647475EEF08"
+          },
+          {
+            "name": "dotnet-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/96c27dff-44b8-4ecd-bcd4-c56527b80572/be6d454ffa6346b70631159d1170352b/dotnet-win-x64.1.1.12.zip",
+            "hash": "C285DD9B8BD713D86D35EA03C60877045E0328AA4696462072A4E5B276D70686C1BA0A89DF0B9F8BA29CE16C4CC5A8A764D1B1E447A81872511E5CC63F71EFCB"
+          },
+          {
+            "name": "dotnet-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/d776cddb-c401-4b85-b941-5ef02d4b4169/cdcf84cdc77ba08f66fdb3ff93e4675a/dotnet-win-x86.1.1.12.exe",
+            "hash": "7785BE9E9097C6F38C8AEE7A7A73543FBD2F2CD587FB2B98FC662351CDE07EEC6958CE93458890E1663706E733A873D88950151DDDA97A3B2D0B950E3A49464C"
+          },
+          {
+            "name": "dotnet-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/02f966a0-edaa-4930-ad98-ea742670270d/dcc2b2e1cd7032625e2485930ca495bf/dotnet-win-x86.1.1.12.zip",
+            "hash": "9308293A3EFE49C0FAE11952F7140E73CE0F5C3FEDA13D228188CE8A02CD9C35053A6ECC35CE6CD22C1FD8D31EBF67F296CC1C6BF5D63FBE92344D169E1A8C51"
+          }
+        ]
+      },
+      "sdk": {
+        "version": "1.1.13",
+        "version-display": "1.1.13",
+        "runtime-version": "1.1.12",
+        "vs-version": "15.0",
+        "csharp-version": "",
+        "fsharp-version": "",
+        "vb-version": "15.0",
+        "files": [
+          {
+            "name": "dotnet-dev-centos-x64.tar.gz",
+            "rid": "centos-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/9032949d-db66-46bc-9548-7e118801e1e2/e505beee873cfa56413c055451cccdf6/dotnet-dev-centos-x64.1.1.13.tar.gz",
+            "hash": "222B86C1A162EBF400042A36D6F7D72B934FD61170A8FB1D20016D5B9252CAD6FA0A97F5036060A5A5CDB6138F043239753904D2A8BB395AA94A4A9430EE45B0"
+          },
+          {
+            "name": "dotnet-dev-debian.9-x64.tar.gz",
+            "rid": "debian.9-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/93df87b2-f685-4966-a35b-bc26daac4d51/16417d162121cf54c2bed343ca8b79f6/dotnet-dev-debian.9-x64.1.1.13.tar.gz",
+            "hash": "FA6C3BD7924E43E349101F61805C4411FE1CB924ED1C918F13217FEA6624A4808B2CF149FBABB83E56A0F5E2B33BA4138E1AB76313C26D956587A36F14074823"
+          },
+          {
+            "name": "dotnet-dev-fedora.27-x64.tar.gz",
+            "rid": "fedora.27-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/0e8c5253-9a17-4181-af70-a8db26024196/20d14303a038aaf353ad4205d9473377/dotnet-dev-fedora.27-x64.1.1.13.tar.gz",
+            "hash": "83A6E71F446C22B5A1238A1F45C51E95AC746079F5B933F2A12891470733D9DE9298D001186705902D3A6C13FA8AD6497E372CDCF8F7A927F693977E25E721CF"
+          },
+          {
+            "name": "dotnet-dev-fedora.28-x64.tar.gz",
+            "rid": "fedora.28-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/390e5457-7bd9-4669-99a1-dd61e47829d5/f4c1886ce93eea9b433a538c9e2a23d8/dotnet-dev-fedora.28-x64.1.1.13.tar.gz",
+            "hash": "083008FD1828CFFC32CE47F0D0310F06C8A0B2564B4C4C28CF01A2AC3BE98E874E33F5E337A2DFCD0460D991F7F99F7D5173DB612B909F0D3F364D2B69BC09BB"
+          },
+          {
+            "name": "dotnet-dev-opensuse.42.3-x64.tar.gz",
+            "rid": "opensuse.42.3-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/9ff0fc37-7937-4879-b09e-c4c986a1fbfd/0196f65e2a761fea9d50049f8588e704/dotnet-dev-opensuse.42.3-x64.1.1.13.tar.gz",
+            "hash": "659095919C5013D8491CDEBC6704F5851EC4276E9C6FE90CB657F1C212546D8B93F25DC012660B0FC46C3C82C28CFD60C1FBA53E4F9A5DFA68663F66D820D1E8"
+          },
+          {
+            "name": "dotnet-dev-osx-x64.pkg",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/294628ef-c677-4f2b-9b32-965d262bd9b0/75b3465b93889ec468521866eb1eb2a2/dotnet-dev-osx-x64.1.1.13.pkg",
+            "hash": "7C66AA51D95195D1095259EA66A568D1D318B44E850120A8F0883795790DBFF1ED8A621B3262019697FF55779F8897590034A968956885ABB5224A04C7561326"
+          },
+          {
+            "name": "dotnet-dev-osx-x64.tar.gz",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/7fdeaba7-cf01-4ecf-905c-5192424a9357/2b866b907f3b9a33f47fde137b5b7381/dotnet-dev-osx-x64.1.1.13.tar.gz",
+            "hash": "5D0564E3B6E98C0FB394F6C0D1792B73F2E18C47ECFBB8E799DBBB18693695F763772A197447B41934627E909D4C3ABBEFA7C6DEB0E7BEE2BFE43BA6AFBB852A"
+          },
+          {
+            "name": "dotnet-dev-rhel-x64.tar.gz",
+            "rid": "rhel-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/ad8dba5f-665f-4602-873f-2f315d0f4b07/f653f760ad97620a8561822ba6fcc937/dotnet-dev-rhel-x64.1.1.13.tar.gz",
+            "hash": "9FE0323C059621BB98678031B4E49AB439A7B220EAF31D13C1B67ADAD195A597A4283BF0A08AA60231AAC16C44A9A6918350969E427FBAEBAA5C31526FF218A2"
+          },
+          {
+            "name": "dotnet-dev-ubuntu-x64.tar.gz",
+            "rid": "ubuntu-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/904d3146-d148-4f5b-8f96-5c48643e3f37/5769dbfc8cb5341e1a89822354ac4eeb/dotnet-dev-ubuntu-x64.1.1.13.tar.gz",
+            "hash": "FD1B77682713298299CF7EADF400FA315AB0E3DEE297E94DB942377D44275681B1906CA3D87651E76D15B6ADDC176E9CAD8C023A627F366EFF06265D5BEE8A2D"
+          },
+          {
+            "name": "dotnet-dev-ubuntu.16.04-x64.tar.gz",
+            "rid": "ubuntu.16.04-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/4c37da1a-3307-435c-973f-89b1bad1f31c/d4c2484339d2c888eda9419df8923998/dotnet-dev-ubuntu.16.04-x64.1.1.13.tar.gz",
+            "hash": "E7A44F4A328289ADFB171F3F3CE47914661669023D86865FC0BA41FF707644C5504CB378D4E5E758CF89134404A56359FB06DD5C966CBF0EBCE50FB41D950099"
+          },
+          {
+            "name": "dotnet-dev-ubuntu.18.04-x64.tar.gz",
+            "rid": "ubuntu.18.04-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/76a25d74-d4b5-43f7-b9f7-0d0f5ce9e90c/df2bf041d954c283fb08a27fd8a9524e/dotnet-dev-ubuntu.18.04-x64.1.1.13.tar.gz",
+            "hash": "DD6548EA7E6E390B264EA3DF17BB201CEF4CAC53A5E24B20823DC20B775CEE3EE642153B482FEBE8F8B33CDEF3F53B52AC19B58208E343D1F8912ADB00031A5D"
+          },
+          {
+            "name": "dotnet-dev-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/1d145015-eb70-4e17-b808-e9fda0910ab3/80b480c8507742d2369c852bfe36eec6/dotnet-dev-win-x64.1.1.13.exe",
+            "hash": "130A2DC3815696CD94542EBB4EBE2504EA9DBF6E03AF0416E8855B7C436396ED25E630C6FA8E2B688397A6203BF883E8AF5215E0200445C6D8346E6313397357"
+          },
+          {
+            "name": "dotnet-dev-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/707f0887-b149-4ea1-9f97-7a841526c17e/423ece599bd8c0e2c80558b208b0e6b4/dotnet-dev-win-x64.1.1.13.zip",
+            "hash": "360887A17C657C21F93D65FECAC6E19C6294C285C8199A29BAC1DE1C22AD42427B0B557FA19E175B2E5289F8C0AFC7A68A0771ADADBE9EDE6F941B093B056458"
+          },
+          {
+            "name": "dotnet-dev-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/42e527c7-bd17-4c5f-b418-e6bc0ac386c2/87c1a57275d1031139ddd1c48783adb0/dotnet-dev-win-x86.1.1.13.exe",
+            "hash": "163367B5B3289ABF63A99C549509FAA016C10DEDF2F3DB4FB6534879B4489BB8041BDDDD6CABE6FEF04C7D424A4F83149639C0602B4A0DC93008C5CE60B1D92B"
+          },
+          {
+            "name": "dotnet-dev-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/5e35d95e-a547-4b1f-bdcd-668e5bff05f4/fd3556eddf1063f47ae236d26246df23/dotnet-dev-win-x86.1.1.13.zip",
+            "hash": "C51BE9D28965BD7BFC3125F35AB84BB7653807327A1ECBA522C9967ABC8CFE8126B7DCF60C59D8FA5951752411F2346EA9DF6D855ACF19D1ABD037C37E7A36C0"
+          }
+        ]
+      },
+      "aspnetcore-runtime": {
+        "version": "1.1.12",
+        "version-display": "1.1.12",
+        "version-aspnetcoremodule": [
+          ""
+        ],
+        "vs-version": "15.0",
+        "files": [
+          {
+            "name": "DotNetCore_1.1.12-WindowsHosting.exe",
+            "rid": "win-x86_x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/1110274e-cd5c-4b82-8a3f-c71937d603b9/f507bbb5a47ca15cadf0d55efcdb5176/dotnetcore.1.0.15_1.1.12-windowshosting.exe",
+            "hash": "8E8353B4BA51F62AF7866D166E6A1BD1C3B99B0FE71EEC79B4F10CC3EFFC1B78EB0341F431CE4D5A9F0BD87DD9A94EAEFFC0BDD8D78C700473A7FC111C12013B"
+          }
+        ]
+      },
+      "symbols": {
+        "version": "1.1.12",
+        "files": [
+          {
+            "name": "core-setup-symbols.zip",
+            "rid": null,
+            "url": "https://download.visualstudio.microsoft.com/download/pr/83729897-e15b-4b9e-bfff-80d57675b3e9/55aa62a4467a1857f95d1b5b51fdab47/core-setup-1.1.12-symbols.zip",
+            "hash": "6DC6A817E1CDA44083A5D02B91655578827A6532201307FAD31C100956FCAACEF8BC9E999AEA6E4E4A45972B7B5F3668DDFE28DCEA190AD1091C6A3AB51E0590"
+          },
+          {
+            "name": "coreclr-symbols.zip",
+            "rid": null,
+            "url": "https://download.visualstudio.microsoft.com/download/pr/314025be-f4b7-42bd-a7fe-7021d5d5949d/621672cdc23f62ec92849aec18887b2d/coreclr-1.1.12-symbols.zip",
+            "hash": "E56534AA917CA8ECAE25ED2E5377BE0DE1F19B0E70B66012EA8F55E4D6BF9FEF69DF1E7807B44283746CF8A017ECE30321D5D86BB34D517F360EA2C25B33FB60"
+          }
+        ]
+      }
+    },
     {
       "release-date": "2019-02-12",
       "release-version": "1.1.11",
