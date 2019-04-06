@@ -35,6 +35,11 @@ The latest major release is [.NET Core 2.2](release-notes/2.2). The latest patch
 
 The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
 
+### Community
+
+This project uses the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct) to define expected conduct in our community.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting a project maintainer at conduct@dotnetfoundation.org.
+
 ## .NET Foundation
 
 The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundation.org).
