@@ -6,7 +6,7 @@ The latest supported release is [.NET Core 2.2](2.2).
 
 You can download the latest updates for .NET Core.
 
-* [.NET Core 3.0 Preview 3](3.0/preview/3.0.0-preview3-download.md)
+* [.NET Core 3.0 Preview 4](3.0/preview/3.0.0-preview4-download.md)
 * [.NET Core 2.2.4](2.2/2.2.4/2.2.4-download.md)
 * [.NET Core 2.1.10](2.1/2.1.10/2.1.10-download.md)
 * [.NET Core 1.1.12](1.1/1.1.12/1.1.12-download.md)
