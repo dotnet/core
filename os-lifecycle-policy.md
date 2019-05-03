@@ -13,7 +13,7 @@ The following support documents list currently supported operating system versio
 
 ## Out-of-Support .NET Core versions
 
-When an operating system version goes out of support, we stop testing that version and providing support for that version. This means that users will need to move forward to a supported operating system version to get support. Previously released packages will remain available for users needing access.
+When an operating system version goes out of standard support, we stop testing that version and providing support for that version. This means that users will need to move forward to a supported operating system version to get support. Previously released packages will remain available for users needing access.
 
 The following support documents list historical operating system support for out-of-support .NET Core versions: 
 
