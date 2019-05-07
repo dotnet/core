@@ -24,7 +24,7 @@ For released versions of the product:
 | .NET 5.0 | *For more info, see article [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/).*<br/>Release scheduled for November 2020 |
 | .NET 6.0 LTS | Release scheduled for November 2021 |
 | .NET 7.0 | Release scheduled for November 2022 |
-| .NET 8.0 LTS | Release scheduled for November 2023 |
+| .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
 
 Details about longer-term schedule have been announced on 2019/5/6 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
 
