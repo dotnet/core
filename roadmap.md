@@ -22,7 +22,7 @@ For released versions of the product:
 | .NET Core 3.0 | [Preview releases](https://github.com/dotnet/core/blob/master/release-notes/3.0/README.md)<br/>RC (Release Candidate) scheduled for July 2019<br/>GA (General Availability) scheduled for September 2019 |
 | .NET Core 3.1 LTS | Release scheduled for November 2019 |
 | .NET 5.0 | *For more info, see article [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/).*<br/>Release scheduled for November 2020 |
-| .NET 6.0 LTS | Release scheduled for November 2021 |
+| .NET 6.0 | LTS (Long Term Support) release, scheduled for November 2021 |
 | .NET 7.0 | Release scheduled for November 2022 |
 | .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
 
