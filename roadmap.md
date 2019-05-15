@@ -19,7 +19,14 @@ For released versions of the product:
 | Milestone                 | Release Date |
 |---------------------------|--------------|
 | .NET Core 2.2.x, 2.1.x, 1.x (servicing) | Approximately every 1-2 months or as needed (see also [releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-21)) |
-| .NET Core 3.0 | [Preview releases](https://github.com/dotnet/core/blob/master/release-notes/3.0/README.md) <br/> Final version in second half of 2019 - see [Schedule in Preview 3](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-preview-3) (from 2019/3). Ship date will be announced at the Build 2019 conference. <br/> Previous announcements: [original 2018/5](https://blogs.msdn.microsoft.com/dotnet/2018/05/07/net-core-3-and-support-for-windows-desktop-applications/) and [update 2018/10](https://blogs.msdn.microsoft.com/dotnet/2018/10/04/update-on-net-core-3-0-and-net-framework-4-8/). |
+| .NET Core 3.0 | [Preview releases](https://github.com/dotnet/core/blob/master/release-notes/3.0/README.md)<br/>RC (Release Candidate) scheduled for July 2019<br/>GA (General Availability) scheduled for September 2019 |
+| .NET Core 3.1 | LTS (Long Term Support) release, scheduled for November 2019 |
+| .NET 5.0 | Release scheduled for November 2020 |
+| .NET 6.0 | LTS (Long Term Support) release, scheduled for November 2021 |
+| .NET 7.0 | Release scheduled for November 2022 |
+| .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
+
+Details about longer-term schedule have been announced on 2019/5/6 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
 
 Note: Dates are calendar year (as opposed to fiscal year).
 
