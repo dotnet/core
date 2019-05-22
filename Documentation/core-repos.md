@@ -23,6 +23,7 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 * [dotnet/roslyn](https://github.com/dotnet/roslyn) - Roslyn and C#
 * [dotnet/csharplang](https://github.com/dotnet/csharplang) - C# spec
 * [dotnet/vblang](https://github.com/dotnet/vblang) - VB spec
+* [dotnet/fsharp](https://github.com/dotnet/fsharp) - The F# compiler, FSharp.Core library, and tools for F#
 
 ## NuGet
 
