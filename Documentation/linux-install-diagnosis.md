@@ -39,6 +39,8 @@ Next are common issues and resolutions:
 ### Attempting to use the package repository on a non-x64 device
 The Microsoft package repository only works on x64 (`x86_64`). For example, a Raspberry Pi uses an ARM architecture, so you can't install .NET Core on that device using the package repository.
 
+In this case, you can [install from binaries](#install-from-binaries).
+
 ### Package feed not installed due to bug in `packages-microsoft-prod.deb`
 The output from the commands above should include a line like this:
 
@@ -122,7 +124,7 @@ If the dropdown doesn't have an entry for your distribution and version, check i
 
 ## `W: Failed to fetch https://packages.microsoft.com/ubuntu/14.04/prod/dists/trusty/main/binary-amd64/Packages Hash Sum mismatch`
 
-This indicates a service outage in the Microsoft repository, not limited to .NET Core. Please file an issue so we can have it fixed it as soon as possible!
+This indicates a service outage in the Microsoft repository, not limited to .NET Core. Please file an issue so we can have it fixed as soon as possible!
 
 ---
 
