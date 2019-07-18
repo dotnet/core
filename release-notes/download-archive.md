@@ -38,7 +38,7 @@ This page provides an archive of previously released versions of the .NET Core r
 | 2018/06/19 | 2.1.1 with SDK 2.1.301 | [release notes](2.1/2.1.1.md) | [download](download-archives/2.1.1-download.md) |
 | 2018/05/30 | 2.1.0 with SDK 2.1.300 | [release notes](2.1/2.1.0.md) | [download](download-archives/2.1.0-download.md) |
 
-### .NET Core 1.1 - [Maintenance](https://www.microsoft.com/net/core/support) release
+### .NET Core 1.1 - [EOL](https://www.microsoft.com/net/core/support) release
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
@@ -56,7 +56,7 @@ This page provides an archive of previously released versions of the .NET Core r
 | 2017/04/13 | 1.1.1 with SDK 1.0.3                | [release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3) | [download](download-archives/1.0.3-sdk-download.md) |
 | 2017/03/07 | 1.1.1 with SDK 1.0.1                | [release notes](1.1/1.1.1.md) | [download](download-archives/1.1.1-download.md) |
 
-### .NET Core 1.0 - [Maintenance](https://www.microsoft.com/net/core/support) release
+### .NET Core 1.0 - [EOL](https://www.microsoft.com/net/core/support) release
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
@@ -87,4 +87,6 @@ This page provides an archive of previously released versions of the .NET Core r
 
 ### Out of support
 
+* .NET Core 1.0 - [Release details](https://github.com/dotnet/core/tree/master/release-notes/1.0)
+* .NET Core 1.1 - [Release details](https://github.com/dotnet/core/tree/master/release-notes/1.1)
 * .NET Core 2.0 - [Release details](https://github.com/dotnet/core/tree/master/release-notes/2.0)
