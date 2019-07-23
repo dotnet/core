@@ -4,6 +4,7 @@ The following .NET Core 1.1 releases have been shipped. You must be on the lates
 
 | Release Date | Description | Commits | Known Issues | Contributors |
 | :-- | :-- | :--: | :--: | :--: |
+| 2019/06/27 | Out of support - see [details](https://github.com/dotnet/core/blob/master/microsoft-support.md#out-of-support-net-core-releases) | - | - | - |
 | 2019/05/14 | 1.1.13 with SDK 1.1.14 ([release notes](1.1.13/1.1.13.md) / [download](1.1.13/1.1.13-download.md)) | see release notes | - | - |
 | 2019/03/12 | 1.1.12 with SDK 1.1.13 ([release notes](1.1.12/1.1.12.md) / [download](1.1.12/1.1.12-download.md)) | see release notes | - | - |
 | 2019/02/12 | 1.1.11 with SDK 1.1.12 ([release notes](1.1.11/1.1.11.md) / [download](1.1.11/1.1.11-download.md)) | see release notes | - | - |

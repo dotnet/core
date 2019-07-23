@@ -4,6 +4,7 @@ The following .NET Core 1.0 releases have been shipped. You must be on the lates
 
 | Release Date | Description | |
 | :-- | :-- | :--: |
+| 2019/06/27 | Out of support | [details](https://github.com/dotnet/core/blob/master/microsoft-support.md#out-of-support-net-core-releases) |
 | 2019/05/14 | 1.0.16 with SDK 1.1.14 | [release notes](1.0.16/1.0.16.md)/[download](1.0.16/1.0.16-download.md) |
 | 2019/03/12 | 1.0.15 with SDK 1.1.13 | [release notes](1.0.15/1.0.15.md)/[download](1.0.15/1.0.15-download.md) |
 | 2019/02/12 | 1.0.14 with SDK 1.1.12 | [release notes](1.0.14/1.0.14.md)/[download](1.0.14/1.0.14-download.md) |
