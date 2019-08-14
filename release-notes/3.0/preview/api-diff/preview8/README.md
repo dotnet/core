@@ -1,7 +1,7 @@
-# .NET Core 3.0 preview 8 Api Changes
+# .NET Core 3.0 Preview 8 API Changes
 
-.NET Core 3.0 preview 8 api changes comprises of :-
+The following API changes were made in .NET Core 3.0 Preview 8:
 
-- Changes in the [shared framework](./.Net/3.0-preview8.md) of .NetCore.
-- Changes in the [standalone packages](./.Net/standalone-packages/3.0-preview8-standalone-packages.md) of .NetCore.
-- Changes in the [shared framework](./ASP.Net/3.0-preview8.md)  of Asp.NetCore.
+- [.NET Core](./.Net/3.0-preview8.md)
+- [.NET Core NuGet Packages](./.Net/standalone-packages/3.0-preview8-standalone-packages.md)
+- [ASP.NET Core](./ASP.Net/3.0-preview8.md)
