@@ -30,22 +30,17 @@ Both types of releases receive critical fixes throughout their lifecycle, for se
 
 ### Long Term Support (LTS) releases
 
-LTS releases are supported for the following timeframe, whichever is longer:
-
-* Three years after initial release.
-* One year after a subsequent **LTS** release.
+LTS releases are supported for three years after the initial release.
 
 Note: .NET Core 1.x was released under an earlier definition of LTS. See: [.NET Core 1.x "shorter" LTS definition](https://github.com/dotnet/core/blob/e2f22a7106860c0e5dc98bb36dc648a779944ad5/microsoft-support.md#long-term-support-lts-releases).
 
 ### Current releases
 
-Current releases are supported for the following timeframe:
-
-* Three months after a subsequent **Current** or **LTS** release
+Current releases are supported for three months after a subsequent Current or LTS release.
 
 ### Maintenance releases
 
-Maintenance releases are in the last stage of the lifecycle . During Maintenance, a release will still receive security updates. The length of Maintenance time is determined by the type of release it was previously; as described in the above section.
+Maintenance releases are in the last stage of the lifecycle . During Maintenance, a release will receive security updates. The length of Maintenance time is 3 months for Current and 1 year for LTS.
 
 ### End of support
 
