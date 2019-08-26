@@ -7,7 +7,7 @@ This document describes the prerequisites required to run .NET Core applications
 * openssl
 * libnghttp2
 * libidn
-* krb5
+* krb5-libs
 * libuuid
 * lttng-ust
 * zlib
@@ -75,7 +75,7 @@ The following command performs the build with the right settings for .NET Core:
     --with-gssapi \
     --with-ssl \
     --without-librtmp \
-    --prefix=$PWD/install/usr/local
+    --prefix=$PWD/install/usr/local \
 && \
 make install
 ```
@@ -94,8 +94,9 @@ tar -xf icu4c-57_1-RHEL6-x64.tgz -C /
 ```
 Then set `LD_LIBRARY_PATH` to `/usr/local/lib` before running the application:
 ```sh
-export LD_LIBRARY_PATH=/usr/local/lib
+LD_LIBRARY_PATH=/usr/local/lib your_dotnet_app
 ```
+**Important** - please make sure that you do not set the LD_LIBRARY_PATH using `export` in your current shell or even globally for your session. Linux applications that depend on the default CURL (like the `yum`) would stop working.
 ### Install the libraries into the netcoredeps subdirectory of your .NET Core application
 This works only for self-contained published apps. Create the `netcoredeps` subdirectory in the same directory where your apps main executable is located. Then change the current directory to the `netcoredeps` and extract the libraries into that directory as follows:
 ```sh
