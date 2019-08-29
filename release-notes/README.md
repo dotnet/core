@@ -22,9 +22,9 @@ You can download the latest updates for .NET Core.
 * [1.1 Release Details][1.1-releases.json] -- All releases details for the 1.1 channel in JSON format
 * [1.0 Release Details][1.0-releases.json] -- All releases details for the 1.0 channel in JSON format
 
-## CLI Usage Data
+## See also
 
-* [CLI Usage Data](cli-usage-data.md) - Usage data from the .NET Core SDK
+* [.NET Core SDK telemetry](https://docs.microsoft.com/dotnet/core/tools/telemetry)
 
 [releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
 [3.0-releases.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/3.0/releases.json
