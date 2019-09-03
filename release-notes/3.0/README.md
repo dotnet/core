@@ -4,6 +4,7 @@ The following .NET Core 3.0 releases have been shipped. You must be on the lates
 
 | Release Date | Description |  |  |
 | :-- | :-- | :--: | :-- |
+| 2019/09/04 | 3.0.0 Preview 9 | [release notes](./preview/3.0.0-preview9.md)/[download](./preview/3.0.0-preview9-download.md) | - |
 | 2019/08/13 | 3.0.0 Preview 8 | [release notes](./preview/3.0.0-preview8.md)/[download](./preview/3.0.0-preview8-download.md) | - |
 | 2019/07/23 | 3.0.0 Preview 7 | [release notes](./preview/3.0.0-preview7.md)/[download](./preview/3.0.0-preview7-download.md) | - |
 | 2019/06/12 | 3.0.0 Preview 6 | [release notes](./preview/3.0.0-preview6.md)/[download](./preview/3.0.0-preview6-download.md) | - |
