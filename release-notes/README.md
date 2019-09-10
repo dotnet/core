@@ -1,17 +1,28 @@
-# .NET Core 2.2 Releases
+# .NET Core Release Notes
 
-The following .NET Core 2.2 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
+The latest supported release is [.NET Core 2.2](2.2).
 
-| Release Date | Description |  |  |
-| :-- | :-- | :--: | :-- |
-| 2019/09/10 | 2.2.6 | [release notes](2.2.7/2.2.7.md)/[download](2.2.7/2.2.7-download.md) | - |
-| 2019/07/09 | 2.2.6 | [release notes](2.2.6/2.2.6.md)/[download](2.2.6/2.2.6-download.md) | - |
-| 2019/05/14 | 2.2.5 | [release notes](2.2.5/2.2.5.md)/[download](2.2.5/2.2.5-download.md) | - |
-| 2019/04/09 | 2.2.4 | [release notes](2.2.4/2.2.4.md)/[download](2.2.4/2.2.4-download.md) | - |
-| 2019/03/12 | 2.2.3 | [release notes](2.2.3/2.2.3.md)/[download](2.2.3/2.2.3-download.md) | - |
-| 2019/02/12 | 2.2.2 | [release notes](2.2.2/2.2.2.md)/[download](2.2.2/2.2.2-download.md) | - |
-| 2019/01/08 | 2.2.1 | [release notes](2.2.1/2.2.1.md)/[download](2.2.1/2.2.1-download.md) | - |
-| 2018/12/04 | 2.2.0 | [release notes](2.2.0/2.2.0.md)/[download](2.2.0/2.2.0-download.md) | - |
-| 2018/10/17 | 2.2.0 Preview 3 | [release notes](./preview/2.2.0-preview3.md)/[download](./preview/2.2.0-preview3-download.md) | - |
-| 2018/09/12 | 2.2.0 Preview 2 | [release notes](./preview/2.2.0-preview2.md)/[download](./preview/2.2.0-preview2-download.md) | - |
-| 2018/08/22 | 2.2.0 Preview 1 | [release notes](./preview/2.2.0-preview1.md)/[download](./preview/2.2.0-preview1-download.md) | - |
+## Latest Updates
+
+You can download the latest updates for .NET Core.
+
+* [.NET Core 3.0 Preview 9](3.0/preview/3.0.0-preview9-download.md)
+* [.NET Core 2.2.6](2.2/2.2.6/2.2.6-download.md)
+* [.NET Core 2.1.12](2.1/2.1.12/2.1.12-download.md)
+
+## Release Information
+
+* [.NET Core Releases](download-archive.md) -- Release notes and downloads
+* [Releases Index][releases-index.json] -- Index for all release channels in JSON format
+* [3.0 Release Details][3.0-releases.json] -- All releases details for the 3.0 channel in JSON format
+* [2.2 Release Details][2.2-releases.json] -- All releases details for the 2.2 channel in JSON format
+* [2.1 Release Details][2.1-releases.json] -- All releases details for the 2.1 channel in JSON format
+
+## CLI Usage Data
+
+* [CLI Usage Data](cli-usage-data.md) - Usage data from the .NET Core SDK
+
+[releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
+[3.0-releases.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/3.0/releases.json
+[2.2-releases.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/2.2/releases.json
+[2.1-releases.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/2.1/releases.json
