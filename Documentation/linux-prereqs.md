@@ -1,6 +1,6 @@
 # Linux System Prerequisites for .NET Core
 
-The following table represents the minimum library requirements to create, and run, a basic "hello world" console or MVC application with .NET Core. More complex applications could have additional requirements. 
+The following table represents the minimum library requirements to create, and run, a basic "hello world" console or MVC application with .NET Core. This table lists .NET Core Runtime requirements; applications could introduce additional dependencies. 
 
 
 | Distro         | 2.1                       | 2.2                       | 3.0                       |
