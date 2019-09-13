@@ -80,4 +80,4 @@ The ILLink task can be invoked just like any other msbuild task. For example, it
 </Target>
 ```
 
-Here, the ItemGroups `AssemblyFilesToLink`, `LinkerRootAssemblies`, and `LinkerRootDescriptors` would be defined elsewhere in the project, and the `ExtraArgs` input consists of flags described in the [mono/linker documentation](https://github.com/mono/linker/blob/master/linker/README). By default, the `RootAssemblyNames` are rooted as if illink had been called with `-a RootAssemblyName1 -a RootAssemblyName2` ... as arguments, but this behavior is subject to change and should not be relied upon.
+Here, the ItemGroups `AssemblyFilesToLink`, `LinkerRootAssemblies`, and `LinkerRootDescriptors` would be defined elsewhere in the project, and the `ExtraArgs` input consists of flags described in the [mono/linker documentation](https://github.com/mono/linker/blob/master/README.md). By default, the `RootAssemblyNames` are rooted as if illink had been called with `-a RootAssemblyName1 -a RootAssemblyName2` ... as arguments, but this behavior is subject to change and should not be relied upon.
