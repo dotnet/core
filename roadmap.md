@@ -19,7 +19,7 @@ For released versions of the product:
 | Milestone                 | Release Date |
 |---------------------------|--------------|
 | .NET Core 2.2.x, 2.1.x, 1.x (servicing) | Approximately every 1-2 months or as needed (see also [releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-21)) |
-| .NET Core 3.0 | [Preview releases](https://github.com/dotnet/core/blob/master/release-notes/3.0/README.md)<br/>RC (Release Candidate) released in September 2019 (Preview 9)<br/>GA (General Availability) scheduled for September 2019 |
+| .NET Core 3.0 | [Preview releases](https://github.com/dotnet/core/blob/master/release-notes/3.0/README.md)<br/>RC (Release Candidate) released in September 2019 (Preview 9)<br/>GA (General Availability) released on September 23, 2019 |
 | .NET Core 3.1 | LTS (Long Term Support) release, scheduled for November 2019 |
 | .NET 5.0 | Release scheduled for November 2020 |
 | .NET 6.0 | LTS (Long Term Support) release, scheduled for November 2021 |
