@@ -8,7 +8,7 @@ You can download the latest updates for .NET Core.
 
 * [.NET Core 3.0.0](3.0/3.0.0/3.0.0-download.md)
 * [.NET Core 2.2.7](2.2/2.2.7/2.2.7-download.md)
-* [.NET Core 2.1.12](2.1/2.1.13/2.1.13-download.md)
+* [.NET Core 2.1.13](2.1/2.1.13/2.1.13-download.md)
 
 ## Release Information
 
