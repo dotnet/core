@@ -2,23 +2,22 @@
 
 The dotnet/core repository is a good starting point for .NET Core.
 
-The latest major release is [.NET Core 2.0](release-notes/2.0/2.0.0.md). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md)
+The latest major release is [.NET Core 3.0](release-notes/3.0). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md).
 
 ## Download the latest .NET Core SDK
 
-* [.NET Core 2.0 SDK](release-notes/download-archives/2.0.3.md)
+* [.NET Core 3.0 SDK](release-notes/3.0/README.md)
 
-## .NET Core Releases
+## .NET Core Releases and Daily Builds
 
 * [.NET Core released builds](release-notes/README.md)
-* [.NET Core daily preview builds](daily-builds.md)
-* [.NET Core daily servicing builds](daily-builds-servicing.md)
+* [.NET Core daily builds](daily-builds.md)
 
 ## Learn about .NET Core
 
 * [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
 * [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
-* [Learn how about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
+* [Learn about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
 * [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
 * [.NET Core Announcements](https://github.com/dotnet/announcements)
 * [.NET Core blog](https://blogs.msdn.microsoft.com/dotnet/tag/net-core/)
@@ -30,10 +29,16 @@ The latest major release is [.NET Core 2.0](release-notes/2.0/2.0.0.md). The lat
 * [File an issue for other components](Documentation/core-repos.md)
 * [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net-core)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
+* [VS Developer Community Portal](https://developercommunity.visualstudio.com/) for "full" .NET Framework feedback (or via [Report a Problem](https://aka.ms/vs-rap) tool)
 
 ## How to Engage, Contribute and Provide Feedback
 
 The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
+
+### Community
+
+This project uses the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct) to define expected conduct in our community.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting a project maintainer at conduct@dotnetfoundation.org.
 
 ## .NET Foundation
 

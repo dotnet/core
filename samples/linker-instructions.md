@@ -23,8 +23,8 @@ The instructions assume you are using [.NET Core 2.0](https://github.com/dotnet/
   * `dotnet new nuget`
   * Add this line to nuget.config, under `<clear />`: `<add key="dotnet-core" value="https://dotnet.myget.org/F/dotnet-core/api/v3/index.json" />`
   * The final file should look like [nuget.config](nuget.config).
-1. Add a reference to the [latest version of the linker package](https://dotnet.myget.org/feed/dotnet-core/package/nuget/Illink.Tasks) in your .csproj, using the following:
-   * `dotnet add package ILLink.Tasks -v 0.1.4-preview-906439`
+1. Add a reference to the [latest version of the linker package](https://dotnet.myget.org/feed/dotnet-core/package/nuget/ILLink.Tasks) in your .csproj, using the command below. As of writing, that version is `0.1.5-preview-1841731`:
+   * `dotnet add package ILLink.Tasks -v 0.1.5-preview-1841731`
 1. Publish the application, using the following:
    * `dotnet publish -c release -r <RID> -o out`
    * where `<RID>` is one of `win-x64`, `win-x86`, `linux-x64`, `osx-x64` depending the OS that you want to publish for.

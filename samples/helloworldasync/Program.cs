@@ -1,13 +1,13 @@
 using System;
 using System.Threading.Tasks;
 
-namespace HelloWorldSample 
+namespace HelloWorldSample
 {
-	public static class Program 
-	{
-		public static async Task Main()
-		{
-			await Task.Run(() => Console.WriteLine("Hello World!"));
-		}
-	}
+    public static class Program
+    {
+        public static async Task Main()
+        {
+            await Task.Run(() => Console.WriteLine("Hello World!"));
+        }
+    }
 }

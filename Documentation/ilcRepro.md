@@ -8,8 +8,6 @@ workaround for your issue.
 
 ## Creating and Sending a .NET Native repro
 
-*NOTE: If you run this more than once, you'll want to make sure that the ilcRepro.zip doesn't already exist by deleting it out of the target folder. This is scheduled to be fixed for VS Update 2.*
-
 1. Add `<NetNativeReproPath>C:\myReproDirectory</NetNativeReproPath>` to the primary PropertyGroup in your project file, the file ending in csproj, vsproj, vcxproj, or jsproj. You can set `C:\myReproDirectory` to any directory that exists. [Examples are below.](#examples)
 2. Rebuild your app. You will find ilcRepro.zip in the repro directory you specified above.
 3. Put ilcRepro.zip on your OneDrive, Dropbox, or another storage provider. Send a link to ilcRepro.zip and a description of your issue to dotnetnative@microsoft.com.
@@ -24,35 +22,6 @@ UWP apps containing managed code are compiled in Store using the .NET Native Too
 In such a case, please ensure that you were able to build your application in Release mode successfully at the time you submitted it to Store. If it did, please send the error number you got in the message above and email dotnetnative@microsoft.com.
 
 For help with any other issues, please share their details at https://connect.microsoft.com/visualstudio/
-
-## Known Issues
-
-### CoCreateInstance is not supported for this application type when running the Windows Application Certification Kit (WACK)
-This error shows up in applications with a native code component:
-
-`API CoCreateInstance in api-ms-win-core-com-l1-1-1.dll is not supported for this application type. SomeBinary.dll calls this API.`
-
-This error can occur when running the WACK with your application in Release configuration and "Optimize Code" unchecked in your project properties. Ensure that "Optimize Code" is checked when submitting your application to the Store.
-
-### Application was too large to be compiled in the Store
-Some apps may successfully compile with the .NET Native Toolchain during development but fail to compile in Store due to their size. This issue has been mitigated with the release of the .NET Native Toolchain included in the Windows 10 Tools 1.1 Update.
-
-You can see which version of the .NET Native Toolchain you have by opening AppxManifest.xml in the app package you submitted to Store and looking for `<build:Item Name="ilc.exe" Version="1.0.#####.00>`.  The initial release has version 1.0.23117.00, whereas the updated version in the Windows 10 Tools 1.1 update is 1.0.23303.00.
-
-### Compilation Failure on Update 1
-
-The error:
-
-    RHBIND : error RHB0011: Internal error: 'declModule == m_pLoaderModule' at 'f:\dd\ndp\rh\src\tools\rhbind\methodtable.h:606'
-
-A new .NET Native feature “SharedLibrary.dll” can expose an a bug in one of the compiler components "RHBind.exe". SharedLibrary is on be default for Update 1 but you can disable this feature to work around the issue by manipulating/adding this property to your project:
-<UseDotNetNativeSharedAssemblyFrameworkPackage>false</UseDotNetNativeSharedAssemblyFrameworkPackage>
-
-This will be fixed for Update 2 but anyone hitting this error will need to disable the SharedLibrary component until then. For more information about shared library please see: http://blogs.msdn.com/b/dotnet/archive/2015/09/28/what-s-new-for-net-and-uwp-in-win10-tools-1-1.aspx
-
-
-### Other Known Issues
-See: https://social.msdn.microsoft.com/Forums/en-US/home?forum=Win10SDKToolsIssues
 
 ## Examples
 

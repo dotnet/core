@@ -1,14 +1,18 @@
-﻿using System;
+using System;
 
 public static class Program
 {
     public static void Main(string[] args)
     {
-        string message = "dotnet-bot: Welcome to using .NET Core with a global tool!";
+        string message = "Welcome to using a .NET Core global tool!";
 
-        if (args.Length > 0)
+        if (Console.IsInputRedirected)
         {
-            message = String.Join(" ", args);
+            message = Console.In.ReadToEnd();
+        }
+        else if (args.Length > 0)
+        {
+            message = string.Join(" ", args);
         }
 
         Console.WriteLine(GetBot(message));
@@ -58,5 +62,4 @@ public static class Program
 ";
         return bot;
     }
-
 }
