@@ -1,3 +1,4 @@
+Get-Service | Get-Member
 # .NET Core Supported OS Lifecycle Policy
 
 .NET Core is [supported by Microsoft](microsoft-support.md) on a range of operating systems. 
