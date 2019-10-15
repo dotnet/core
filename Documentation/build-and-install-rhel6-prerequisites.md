@@ -12,7 +12,7 @@ This document describes the prerequisites required to run .NET Core applications
 * lttng-ust
 * zlib
 
-.NET Core also needs two runtime libraries - CURL and ICU - that are not available as RHEL 6 installation packages in versions that .NET Core relies on. CURL is required if the application references System.Net.Http.dll. ICU is needed except if globalization is disabled. Globalization can be disabled by setting the environment variable `CORECLR_GLOBAL_INVARIANT` to 1 or by adding `System.Globalization.Invariant` element set to `true` under `configProperties` in `*.runtimeconfig.json` file of the application. Here is an example for a console app:
+.NET Core also needs two runtime libraries - CURL and ICU - that are not available as RHEL 6 installation packages in versions that .NET Core relies on. CURL is required if the application references System.Net.Http.dll. ICU is needed except if globalization is disabled. Globalization can be disabled by setting the environment variable `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT` to `true` or by adding `System.Globalization.Invariant` element set to `true` under `configProperties` in `*.runtimeconfig.json` file of the application. Here is an example for a console app:
 ```json
 {
     "runtimeOptions": {
@@ -22,6 +22,8 @@ This document describes the prerequisites required to run .NET Core applications
     }
 }
 ```
+For more information about enabling or disabling the Globalization, you may refer to the [Globalization Invariant Mode Doc](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/globalization-invariant-mode.md)
+
 ## Getting the libraries that are not available as packages.
 ### ICU
 The ICU libraries can be downloaded as a precompiled binary from the ICU website, the URL is http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-RHEL6-x64.tgz.
