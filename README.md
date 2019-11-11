@@ -24,9 +24,7 @@ The latest major release is [.NET Core 3.0](release-notes/3.0). The latest patch
 
 ## Getting help
 
-* [File a .NET Core issue](https://github.com/dotnet/core/issues)
-* [File an ASP.NET Core issue](https://github.com/aspnet/home/issues)
-* [File an issue for other components](Documentation/core-repos.md)
+* [File an issue](Documentation/core-repos.md)
 * [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net-core)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 * [VS Developer Community Portal](https://developercommunity.visualstudio.com/) for "full" .NET Framework feedback (or via [Report a Problem](https://aka.ms/vs-rap) tool)
