@@ -5,7 +5,7 @@ The following .NET Core 2.2 releases have been shipped. You must be on the lates
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
 | 2019/12/23 | Out of support | [details](https://github.com/dotnet/core/blob/master/microsoft-support.md) |
-| 2019/11/19 | [2.2.8](2.2.8/2.2.8.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.1) |
+| 2019/11/19 | [2.2.8](2.2.8/2.2.8.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.2) |
 | 2019/09/10 | [2.2.7](2.2.7/2.2.7.md) | [download](2.2.7/2.2.7-download.md) |
 | 2019/07/09 | [2.2.6](2.2.6/2.2.6.md) | [download](2.2.6/2.2.6-download.md) |
 | 2019/05/14 | [2.2.5](2.2.5/2.2.5.md) | [download](2.2.5/2.2.5-download.md) |
