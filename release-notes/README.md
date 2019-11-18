@@ -1,4 +1,4 @@
-# .NET Core Release Notes
+# .NET Core Release Notes |
 
 The latest supported release is [.NET Core 3.0](3.0).
 
