@@ -62,8 +62,8 @@
 |Repository                                               |Description     |
 |---------------------------------------------------------|----------------|
 |[dotnet/roslyn](https://github.com/dotnet/roslyn)        |Roslyn compiler |
-|[dotnet/csharplang](https://github.com/dotnet/csharplang)|C# specification|
-|[dotnet/vblang](https://github.com/dotnet/vblang)        |VB specification|
+|[dotnet/csharplang](https://github.com/dotnet/csharplang)|C# specification, ongoing language design|
+|[dotnet/vblang](https://github.com/dotnet/vblang)        |VB specification, ongoing language design|
 |[dotnet/fsharp](https://github.com/dotnet/fsharp)        |The F# compiler, FSharp.Core library, and tools for F#|
 
 ## NuGet
