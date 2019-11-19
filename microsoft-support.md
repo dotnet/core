@@ -13,8 +13,8 @@ This table describes support type, supported patch version and end of support da
 |  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
 | -- | -- | -- | -- | -- |
 | [.NET Core 3.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) | September 23, 2019 | Current | [3.0.0](https://www.microsoft.com/net/download/dotnet-core/runtime-3.0.0) | |
-| [.NET Core 2.2](https://aka.ms/netcore22announce) | September 10, 2019 | Current | [2.2.7](https://www.microsoft.com/net/download/dotnet-core/runtime-2.2.7) | December 23, 2019 |
-| [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | LTS | [2.1.13](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.13) | At least three years from LTS declaration (August 21, 2018). |
+| [.NET Core 2.2](https://aka.ms/netcore22announce) | December 04, 2018 | Current | [2.2.8](https://www.microsoft.com/net/download/dotnet-core/runtime-2.2.8) | December 23, 2019 |
+| [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | LTS | [2.1.14](https://www.microsoft.com/net/download/dotnet-core/runtime-2.1.14) | At least three years from LTS declaration (August 21, 2018). |
 
 ## Release Types
 
