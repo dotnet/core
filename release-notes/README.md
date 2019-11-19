@@ -7,9 +7,9 @@ The latest supported release is [.NET Core 3.0](3.0).
 You can download the latest updates for .NET Core.
 
 * [.NET Core 3.1 Preview 3](3.1/preview/3.1.0-preview3.md)
-* [.NET Core 3.0.0](3.0/3.0.0/3.0.0-download.md)
-* [.NET Core 2.2.7](2.2/2.2.7/2.2.7-download.md)
-* [.NET Core 2.1.13](2.1/2.1.13/2.1.13-download.md)
+* [.NET Core 3.0.1](3.0/3.0.1/3.0.1.md)
+* [.NET Core 2.2.8](2.2/2.2.8/2.2.8.md)
+* [.NET Core 2.1.14](2.1/2.1.14/2.1.14.md)
 
 ## Release Information
 
