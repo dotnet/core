@@ -18,8 +18,9 @@ For released versions of the product:
 
 | Milestone                 | Release Date |
 |---------------------------|--------------|
-| .NET Core 2.1.x, 2.2.x, 3.0.x (servicing) | Approximately every 1-2 months or as needed (see also [releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-21)) |
-| .NET Core 3.1 | LTS (Long Term Support) release, scheduled for December 2019 |
+| .NET Core 2.1.x (servicing) | LTS (Long Term Support) release. Approximately every 1-2 months or as needed. |
+| .NET Core 3.0.x (servicing) | Maintenance. Approximately every 1-2 months or as needed. |
+| .NET Core 3.1.x (servicing) | LTS (Long Term Support) release. Approximately every 1-2 months or as needed. |
 | .NET 5.0 | Release scheduled for November 2020 |
 | .NET 6.0 | LTS (Long Term Support) release, scheduled for November 2021 |
 | .NET 7.0 | Release scheduled for November 2022 |
