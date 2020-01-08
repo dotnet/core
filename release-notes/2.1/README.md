@@ -4,6 +4,7 @@ The following .NET Core 2.1 releases have been shipped. You must be on the lates
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
+| 2020/01/14 | [2.1.15](2.1.15/2.1.15.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.1) |
 | 2019/11/19 | [2.1.14](2.1.14/2.1.14.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.1) |
 | 2019/09/10 | [2.1.13](2.1.13/2.1.13.md) | [download](2.1.13/2.1.13-download.md) |
 | 2019/07/09 | [2.1.12](2.1.12/2.1.12.md) | [download](2.1.12/2.1.12-download.md) |
