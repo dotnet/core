@@ -18,7 +18,7 @@ The linker tasks package ([ILLink.Tasks](https://dotnet.myget.org/feed/dotnet-co
 
 These targets will run the linker on all managed assemblies that are a part of the app, including dependencies from project references and package references. The linker will attempt to determine which parts of the code (in the project and its dependencies) are unnecessary, and it will remove assemblies or parts of assemblies that it determines to be safe to remove. By default this behavior is fairly conservative: the linker will always keep code in the application and its non-framework dependencies, only removing unused parts of the framework assemblies (this may change in the future as we improve the linker's heuristics).
 
-Even with the current conservative behavior, there may be cases in which the linker removes code that the application expects to be present at runtime. For example, the application may use reflection to load and call code at runtime, and the linker will not be able to catch these cases perfectly. To explicitly tell the linker to keep certain code in the linked output, it is possible to specify additional roots via MSBuild properties and xml root descriptor files.
+Even with the current conservative behavior, there may be cases in which the linker removes code that the application expects to be present at runtime. For example, the application may use reflection to load and call code at runtime, and the linker will not be able to catch these cases perfectly. To explicitly tell the linker to keep certain code in the linked output, it is possible to specify additional roots via MSBuild properties and XML root descriptor files.
 
 ## Specifying additional roots
 
@@ -32,7 +32,7 @@ Root assemblies can be specified with the `LinkerRootAssemblies` ItemGroup:
 
 This ItemGroup should contain the logical names of assemblies, not the filenames (so the assembly names should not have extensions).
 
-The linker roots can also be specified at a more granular level using xml root descriptor files, whose format is [documented](https://github.com/mono/linker/tree/master/linker) in the mono/linker repo. These files should be specified in the LinkerRootDescriptors ItemGroup:
+The linker roots can also be specified at a more granular level using XML root descriptor files, whose format is [documented](https://github.com/mono/linker/tree/master/src/linker#syntax-of-xml-descriptor) in the mono/linker repo. These files should be specified in the LinkerRootDescriptors ItemGroup:
 
 ```xml
 <ItemGroup>
