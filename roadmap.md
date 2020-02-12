@@ -26,7 +26,7 @@ For released versions of the product:
 | .NET 7.0 | Release scheduled for November 2022 |
 | .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
 
-Details about longer-term schedule have been announced on 2019/5/6 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
+Details about longer-term schedule have been announced on May 6th, 2019 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
 
 Milestone information is available on most repos, for example [dotnet/corefx milestones](https://github.com/dotnet/corefx/milestones).
 
