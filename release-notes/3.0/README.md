@@ -5,6 +5,7 @@ The following .NET Core 3.0 releases have been shipped. You must be on the lates
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
 | 2020/03/03 (future) | Out of Support | see [details](https://github.com/dotnet/core/blob/master/microsoft-support.md#net-core-releases) |
+| 2020/02/18 | [3.0.3](./3.0.3/3.0.3.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.0) |
 | 2020/01/14 | [3.0.2](./3.0.2/3.0.2.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.0) |
 | 2019/11/19 | [3.0.1](./3.0.1/3.0.1.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.0) |
 | 2019/09/23 | [3.0.0](./3.0.0/3.0.0.md) | [download](./3.0.0/3.0.0-download.md) | - |
