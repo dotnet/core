@@ -5,9 +5,7 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 ## .NET Core
 
 * [dotnet/cli](https://github.com/dotnet/cli) - .NET Core CLI tools
-* [dotnet/core-setup](https://github.com/dotnet/core-setup) - .NET Core Runtime Installers and application model
-* [dotnet/corefx](https://github.com/dotnet/corefx) - .NET Core APIs
-* [dotnet/coreclr](https://github.com/dotnet/coreclr) - .NET Core runtime
+* [dotnet/runtime](https://github.com/dotnet/runtime) - .NET Core Runtime
 * [dotnet/docs](https://github.com/dotnet/docs) - .NET documentation
 * [dotnet/project-system](https://github.com/dotnet/project-system) - .NET Core Project System
 * [dotnet/sdk](https://github.com/dotnet/sdk) - .NET Core SDK (used by Visual Studio and CLI)
