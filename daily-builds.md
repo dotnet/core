@@ -20,4 +20,4 @@ Servicing branches are for new patch versions of .NET Core that have not yet bee
 |:------:|:------:|:------:|
 |SDK|[.NET Core SDK 3.1](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|[.NET Core SDK 2.1.xxx](https://github.com/dotnet/cli/blob/release/2.1/README.md#installers-and-binaries)|
 |ASP.NET Core|[ASP.NET Core Shared Framework 3.1](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md)|[ASP.NET Core Shared Framework 2.1](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md)|
-|Runtime|[.NET Core Runtime 3.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|[.NET Core Runtime 2.1](https://github.com/dotnet/core-setup/blob/release/2.1/README.md#officially-released-builds)|
+|Runtime|[.NET Core Runtime 3.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|[.NET Core Runtime 2.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|
