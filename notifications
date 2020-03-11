@@ -1,0 +1,12 @@
+notifications:
+  - provider: Email
+    # Список адресов
+    to:
+      - user1@host.com
+      - user2@host.com
+    # Отправлять ли письмо в случае успеха?
+    on_build_success: false
+    # Отправлять ли письмо в случае провала?
+    on_build_failure: true
+    # Отправлять ли письмо когда статус изменился?
+    on_build_status_changed: true
