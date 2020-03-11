@@ -1,0 +1,26 @@
+# Выбираем контейнер с необходимыми Rust компонентами
+os: Visual Studio 2015
+
+# Устанавливаем Rust
+install:
+  # Скачиваем rustup
+  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+  # Устанавливаем стабильный Rust с MSVC ABI
+  # Если хотите другую версию - замените stable на версию
+  # Если хотите GNU ABI - замените x86_64-pc-windows-msvc на x86_64-pc-windows-gnu
+  - rustup-init -yv --default-toolchain stable --default-host x86_64-pc-windows-msvc
+  # Устанавливаем пути до компонентов Rust
+  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin
+  # Выводим версии
+  - rustc -vV
+  - cargo -vV
+
+# Выключаем стандартный сборщик AppVeyor
+build: false
+
+# Используем специальный тестовый скрипт
+test_script:
+  # Собираем
+  - cargo build --verbose
+  # Запускаем тесты
+  - cargo test --verbose
