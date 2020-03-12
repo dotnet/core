@@ -29,14 +29,6 @@ artifacts:
 - path: cache
   name: deploy 2
   type: WebDeployPackage
-deploy_script:
-- sh: >-
-    provider: FTP
-        name: master
-        on:
-          branch: master
-          env_var1: value1
-          env_var2: value2
 on_image_bake:
 - cmd: >-
     echo This is batch again
