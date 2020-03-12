@@ -1,7 +1,5 @@
 version: 1.0.{build}
 image: Visual Studio 2015
-configuration: Release
-platform: Any CPU
 clone_folder: c:\projects\myproject
 init:
 - cmd: echo This is batch
@@ -13,24 +11,3 @@ environment:
     configuration: Debug
 install:
 - ps: Write-Host 'This is PowerShell'
-build_script:
-- sh: "platform: Any CPU\nconfiguration: Release\nbuild:\n  parallel: true                  \n  project: MyTestAzureCS.sln      \n  publish_wap: true               \n  publish_wap_xcopy: true         \n  publish_wap_beanstalk: true     \n  publish_wap_octopus: true       \n  publish_azure_webjob: true      \n  publish_azure: true             \n  publish_aspnet_core: true       \n  publish_core_console: true      \n  publish_nuget: true             \n  publish_nuget_symbols: true     \n  include_nuget_references: true"
-test_script:
-- sh: >-
-    before_test:
-      - echo script1
-      - ps: Write-Host "script1"
-    test_script:
-      - echo This is my custom test script
-artifacts:
-- path: appveyor.yml
-  name: deploy1
-  type: WebDeployPackage
-- path: cache
-  name: deploy 2
-  type: WebDeployPackage
-on_image_bake:
-- cmd: >-
-    echo This is batch again
-
-    set MY_VAR=12345
