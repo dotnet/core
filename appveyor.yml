@@ -31,7 +31,7 @@ artifacts:
   type: WebDeployPackage
 deploy_script:
 - sh: >-
-    provider: Environment
+    provider: FTP
         name: master
         on:
           branch: master
