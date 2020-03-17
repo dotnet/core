@@ -6,6 +6,7 @@ Each supported operating system has a lifecycle defined by its sponsor organizat
 
 The following support documents list currently supported operating system versions for supported .NET Core versions:
 
+* [.NET 5 supported OS versions](release-notes/5.0/5.0-supported-os.md)
 * [.NET Core 3.1 supported OS versions](release-notes/3.1/3.1-supported-os.md)
 * [.NET Core 2.1 supported OS versions](release-notes/2.1/2.1-supported-os.md)
 
