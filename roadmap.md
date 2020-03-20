@@ -29,7 +29,7 @@ Details about longer-term schedule have been announced on 2019/5/6 in [Introduci
 
 Note: Dates are calendar year (as opposed to fiscal year).
 
-Milestone information is available on most repos, for example [dotnet/corefx milestones](https://github.com/dotnet/corefx/milestones).
+Milestone information is available on most repos, for example [dotnet/runtime milestones](https://github.com/dotnet/runtime/milestones).
 
 ## Feedback
 
