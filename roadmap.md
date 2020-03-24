@@ -10,9 +10,9 @@ The .NET Core team is currently focused on Web, Cloud, Microservices, Containers
 
 For released versions of the product:
 
-* [Supported OSes](os-lifecycle-policy.md)
-* [Release Notes](release-notes/README.md)
-* [Support Timelines](microsoft-support.md)
+* [Supported operating systems](os-lifecycle-policy.md)
+* [Release notes](release-notes/README.md)
+* [Support timelines](microsoft-support.md)
 
 ## Upcoming Ship Dates
 
@@ -25,11 +25,9 @@ For released versions of the product:
 | .NET 7.0 | Release scheduled for November 2022 |
 | .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
 
-Details about longer-term schedule have been announced on 2019/5/6 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
+Details about longer-term schedule have been announced on May 6th, 2019 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
 
-Note: Dates are calendar year (as opposed to fiscal year).
-
-Milestone information is available on most repos, for example [dotnet/corefx milestones](https://github.com/dotnet/corefx/milestones).
+Milestone information is available on most repos, for example [dotnet/runtime milestones](https://github.com/dotnet/runtime/milestones).
 
 ## Feedback
 
