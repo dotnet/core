@@ -4,6 +4,7 @@ The following .NET Core 3.1 releases have been shipped. You must be on the lates
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
+| 2020/03/24 | [3.1.3](./3.1.3/3.1.3.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |
 | 2020/03/16 | [3.1.200](./3.1.2/3.1.200-sdk.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |
 | 2020/02/18 | [3.1.2](./3.1.2/3.1.2.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |
 | 2020/01/14 | [3.1.1](./3.1.1/3.1.1.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |
