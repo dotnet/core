@@ -33,7 +33,7 @@ The latest major release is [.NET Core 3.1](release-notes/3.1). The latest patch
 
 ## How to Engage, Contribute and Provide Feedback
 
-The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
+The .NET Core team encourages [contributions](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
 
 ### Community
 
