@@ -30,8 +30,8 @@ There are many repos that make up .NET Core. To file an issue, make a PR, or eng
 
 ## ASP.NET Core
 
-* [aspnet/home](https://github.com/aspnet/home) - ASP.NET Core framework
-* [aspnet/Docs](https://github.com/aspnet/Docs) - ASP.NET and ASP.NET Core documentation
+* [dotnet/aspnetcore](https://github.com/dotnet/aspnetcore) - ASP.NET Core framework
+* [dotnet/AspNetCore.Docs](https://github.com/dotnet/AspNetCore.Docs) - ASP.NET and ASP.NET Core documentation
 
 ## WCF
 * [dotnet/wcf](https://github.com/dotnet/wcf) - WCF
