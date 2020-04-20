@@ -9,7 +9,7 @@ The Windows PDB format has been around a long time now (~25 years), and it evolv
 ## Why a new format? ##
 While the Windows PDB format has worked okay over the years, with .NET Core the [Roslyn](https://github.com/dotnet/roslyn/wiki/Roslyn%20Overview) team decided it was time to go back to the drawing board and come up with a new format. A few of the reasons:
 
-* The Windows PDB format is complex, and not well documented. This complexity is important for some of the native code scenarios that the format was designed for, but it is unnecessary for the .NET scenarios. The portable format is [open source](https://github.com/dotnet/symreader-portable) and [documented](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Reflection.Metadata/specs/PortablePdb-Metadata.md).
+* The Windows PDB format is complex, and not well documented. This complexity is important for some of the native code scenarios that the format was designed for, but it is unnecessary for the .NET scenarios. The portable format is [open source](https://github.com/dotnet/symreader-portable) and [documented](https://github.com/dotnet/runtime/blob/master/docs/design/specs/PortablePdb-Metadata.md).
 * At the time the effort was begun there wasn't a cross-platform library that could read or write the original windows PDB format.
 * The Windows PDB format is not a compact representation for managed code. Significant size reductions can be obtained with a new format without losing any information.
 
@@ -32,4 +32,3 @@ Over time we plan to shrink this list of non-supported scenarios so that portabl
 
 
 <sup id="fn1">1. When running on .NET Framework 4.7.2 with an app that targets earlier .NET Framework versions we anticipate having an opt-in configuration switch as an additional mechanism to enable support for older applications<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
-
