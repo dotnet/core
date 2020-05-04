@@ -1,8 +1,8 @@
 # License information for .NET
 
 The Windows distribution of .NET 5.0 contains files that are provided under multiple licenses. 
-The files and their licenses are listed below, including the part of the product in which the files are used.
-This information helps you to understand if the files, and their associated licenses, apply to your use.
+This information is provided to help you to understand if the files, and their associated licenses terms, apply to your use.  
+By using any or all of these files you agree to their associated license terms. 
 
 The following binaries are licensed with the [.NET Library License](https://dotnet.microsoft.com/en/dotnet_library_license.htm)
 
