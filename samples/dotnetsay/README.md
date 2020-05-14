@@ -38,7 +38,7 @@ You can build and package the tool using the following commands. The instruction
 ```console
 cd samples
 cd dotnetsay
-dotnet pack -c release -o nupkg
+dotnet pack -c Release -o nupkg
 dotnet tool install --add-source .\nupkg -g dotnetsay
 dotnetsay
 ```
@@ -86,7 +86,7 @@ You can make tools debuggable with [sourcelink](https://github.com/dotnet/source
 Use [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild) when producing official builds. The simplest way to do that is by packing with an additional property set.
 
 ```console
-dotnet pack -c release -o nupkg /p:ContinuousIntegrationBuild=true
+dotnet pack -c Release -o nupkg /p:ContinuousIntegrationBuild=true
 ```
 
 Make sure to build official packages from repositories with stable commit hashes. If you build from a branch whose commits are later [squashed](https://help.github.com/articles/about-pull-request-merges/), then the commit hashs will not be found and sourcelink will not work correctly.

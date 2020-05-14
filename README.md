@@ -2,11 +2,11 @@
 
 The dotnet/core repository is a good starting point for .NET Core.
 
-The latest major release is [.NET Core 3.0](release-notes/3.0). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md).
+The latest major release is [.NET Core 3.1](release-notes/3.1). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md).
 
 ## Download the latest .NET Core SDK
 
-* [.NET Core 3.0 SDK](release-notes/3.0/README.md)
+* [.NET Core 3.1 SDK](release-notes/3.1/README.md)
 
 ## .NET Core Releases and Daily Builds
 
@@ -31,7 +31,7 @@ The latest major release is [.NET Core 3.0](release-notes/3.0). The latest patch
 
 ## How to Engage, Contribute and Provide Feedback
 
-The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
+The .NET Core team encourages [contributions](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
 
 ### Community
 

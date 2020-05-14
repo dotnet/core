@@ -12,7 +12,7 @@
 |[dotnet/docs](https://github.com/dotnet/docs)                     |.NET documentation|
 |[dotnet/project-system](https://github.com/dotnet/project-system) |Visual Studio project system for C#, F#, & VB|
 |[dotnet/sdk](https://github.com/dotnet/sdk)                       |.NET Core SDK (used by Visual Studio & .NET Core CLI)|
-|[aspnet/Extensions](https://github.com/aspnet/Extensions)         |.NET extension APIs (DI, logging, configuration, etc.)|
+|[dotnet/extensions](https://github.com/dotnet/extensions)         |.NET extension APIs (DI, logging, configuration, etc.)|
 |[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)   |.NET Core Docker images|
 |[dotnet/templating](https://github.com/dotnet/templating)         |Templating engine used by `dotnet new`|
 |[dotnet/winforms](https://github.com/dotnet/winforms)             |Windows Forms|
@@ -22,7 +22,7 @@
 
 |Repository                                                        |Description |
 |------------------------------------------------------------------|------------|
-|[microsoft/dotnet](https://github.com/microsoft/dotnet) |catch-all repository for .NET (where most .NET Framework issues are filed)|
+|[microsoft/dotnet](https://github.com/microsoft/dotnet) |Catch-all repository for .NET (where most .NET Framework issues are filed)|
 |[microsoft/dotnet-framework-docker](https://github.com/microsoft/dotnet-framework-docker) |.NET Framework Docker images|
 
 ## .NET Standard
@@ -31,14 +31,15 @@
 |------------------------------------------------------|------------------------|
 |[dotnet/standard](https://github.com/dotnet/standard) |.NET Standard definition|
 
-## ASP.NET Core
+## ASP.NET
 
 |Repository                                                         |Description                                  |
 |-------------------------------------------------------------------|---------------------------------------------|
-|[aspnet/AspNetCore](https://github.com/aspnet/AspNetCore)          |ASP.NET Core framework                       |
-|[aspnet/AspNetCore.Docs](https://github.com/aspnet/AspNetCore.Docs)|ASP.NET Core documentation                   |
-|[aspnet/Scaffolding](https://github.com/aspnet/scaffolding)        |ASP.NET Core code generators                 |
-|[aspnet/WebSdk](https://github.com/aspnet/websdk)                  |MSBuild tasks & targets for ASP.NET Core apps|
+|[dotnet/aspnetcore](https://github.com/dotnet/aspnetcore)          |ASP.NET Core framework                       |
+|[dotnet/AspNetCore.Docs](https://github.com/dotnet/AspNetCore.Docs)|ASP.NET Core documentation                   |
+|[dotnet/AspNetDocs](https://github.com/dotnet/AspNetDocs)          |ASP.NET 4.x documentation                    |
+|[dotnet/Scaffolding](https://github.com/dotnet/Scaffolding)        |ASP.NET Core code generators                 |
+|[dotnet/websdk](https://github.com/dotnet/websdk)                  |MSBuild tasks & targets for ASP.NET Core apps|
 
 ## Build platform
 
@@ -48,20 +49,20 @@
 
 ## Entity Framework and data access
 
-|Repository                                                                 |Description                           |
-|---------------------------------------------------------------------------|--------------------------------------|
-|[aspnet/EntityFrameworkCore](https://github.com/aspnet/EntityFrameworkCore)|EF Core                               |
-|[aspnet/EntityFramework6](https://github.com/aspnet/EntityFramework6)      |EF 6                                  |
-|[aspnet/EntityFramework.Docs](https://github.com/aspnet/AspNetCore.Docs)   |EF Core & EF 6 documentation          |
-|[dotnet/sqlclient](https://github.com/dotnet/sqlclient)                    |SqlClient data provider for SQL Server|
+|Repository                                                                   |Description                           |
+|-----------------------------------------------------------------------------|--------------------------------------|
+|[dotnet/efcore](https://github.com/dotnet/efcore)                            |EF Core                               |
+|[dotnet/ef6](https://github.com/dotnet/ef6)                                  |EF 6                                  |
+|[dotnet/EntityFramework.Docs](https://github.com/dotnet/EntityFramework.Docs)|EF Core & EF 6 documentation          |
+|[dotnet/sqlclient](https://github.com/dotnet/sqlclient)                      |SqlClient data provider for SQL Server|
 
 ## Languages
 
-|Repository                                               |Description     |
-|---------------------------------------------------------|----------------|
-|[dotnet/roslyn](https://github.com/dotnet/roslyn)        |Roslyn compiler |
-|[dotnet/csharplang](https://github.com/dotnet/csharplang)|C# specification, ongoing language design|
-|[dotnet/vblang](https://github.com/dotnet/vblang)        |VB specification, ongoing language design|
+|Repository                                               |Description                                           |
+|---------------------------------------------------------|------------------------------------------------------|
+|[dotnet/roslyn](https://github.com/dotnet/roslyn)        |Roslyn (C# / VB compiler)                             |
+|[dotnet/csharplang](https://github.com/dotnet/csharplang)|C# specification, ongoing language design             |
+|[dotnet/vblang](https://github.com/dotnet/vblang)        |VB specification, ongoing language design             |
 |[dotnet/fsharp](https://github.com/dotnet/fsharp)        |The F# compiler, FSharp.Core library, and tools for F#|
 
 ## NuGet

@@ -8,7 +8,7 @@ Note: All models of generation 1 and Pi Zero are not supported because the .NET 
 
 ## Creating an app:
 
-* [Install .NET Core SDK](https://www.microsoft.com/net/core) into a supported developer configuration.
+* [Install .NET Core SDK](https://dotnet.microsoft.com/download) into a supported developer configuration.
 (Raspberry Pi itself is supported only as deployment target but there is an unsupported version of the SDK available as well.)
 
 * From the terminal/commandline create a folder named `helloworld` and go into it.

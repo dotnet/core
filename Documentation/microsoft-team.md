@@ -8,10 +8,10 @@ You first need to link your GitHub account so that you can use Microsoft's GitHu
 
 * [Link your GitHub account](https://repos.opensource.microsoft.com/link)
 
-There are two main teams to join to get access to Microsoft .NET-related projects.
+Then join these two teams:
 
-* **dotnet org:** [Add yourself to the microsoft team](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
-* **Microsoft org:** [Add yourself to the dotnet team](https://repos.opensource.microsoft.com/Microsoft/teams/dotnet/join/)
+* [dotnet team (microsoft org)](https://repos.opensource.microsoft.com/microsoft/teams/dotnet/join/)
+* [microsoft team (dotnet org)](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
 
 The primary reason to join the orgs are the following: 
 

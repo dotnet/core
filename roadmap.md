@@ -1,6 +1,6 @@
 # .NET Core Roadmap
 
-The .NET Core roadmap communicates project priorities for evolving and extending the scope of the product. New product experiences and features will include changes in various [layers of the product](Documentation/core-repos.md), in some combination of the runtime, framework, language compilers and tools. Each component may have its own component-level roadmap that will available in the repo for that component.
+The .NET Core roadmap communicates project priorities for evolving and extending the scope of the product. New product experiences and features will include changes in various [layers of the product](Documentation/core-repos.md), in some combination of the runtime, framework, language compilers and tools. Each component may have its own component-level roadmap that will be available in the repo for that component.
 
 The .NET Core team is currently focused on Web, Cloud, Microservices, Containers, and Console applications. We encourage the community to work with us to improve .NET Core for these scenarios and extend it for others.
 
@@ -10,26 +10,24 @@ The .NET Core team is currently focused on Web, Cloud, Microservices, Containers
 
 For released versions of the product:
 
-* [Supported OSes](os-lifecycle-policy.md)
-* [Release Notes](release-notes/README.md)
-* [Support Timelines](microsoft-support.md)
+* [Supported operating systems](os-lifecycle-policy.md)
+* [Release notes](release-notes/README.md)
+* [Support timelines](microsoft-support.md)
 
 ## Upcoming Ship Dates
 
 | Milestone                 | Release Date |
 |---------------------------|--------------|
-| .NET Core 2.1.x, 2.2.x, 3.0.x (servicing) | Approximately every 1-2 months or as needed (see also [releases](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md#net-core-21)) |
-| .NET Core 3.1 | LTS (Long Term Support) release, scheduled for December 2019 |
+| .NET Core 2.1.x (servicing) | LTS (Long Term Support) release. Approximately every 1-2 months or as needed. |
+| .NET Core 3.1.x (servicing) | LTS (Long Term Support) release. Approximately every 1-2 months or as needed. |
 | .NET 5.0 | Release scheduled for November 2020 |
 | .NET 6.0 | LTS (Long Term Support) release, scheduled for November 2021 |
 | .NET 7.0 | Release scheduled for November 2022 |
 | .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
 
-Details about longer-term schedule have been announced on 2019/5/6 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
+Details about longer-term schedule have been announced on May 6th, 2019 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
 
-Note: Dates are calendar year (as opposed to fiscal year).
-
-Milestone information is available on most repos, for example [dotnet/corefx milestones](https://github.com/dotnet/corefx/milestones).
+Milestone information is available on most repos, for example [dotnet/runtime milestones](https://github.com/dotnet/runtime/milestones).
 
 ## Feedback
 
