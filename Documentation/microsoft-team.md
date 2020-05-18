@@ -1,19 +1,19 @@
 # Microsoft Team Onboarding
 
-If you are new to Microsoft, you will need to onboard into various GitHub projects in order to get your work done.
+If you are new to Microsoft or working with the .NET Team, you will need to onboard into various GitHub projects in order to get your work done.
 
 ## Join .NET teams in dotnet and Microsoft orgs
 
-You first need to link your GitHub account so that you can use Microsoft's GitHub management tools.
+You need to link your GitHub and @microsoft.com accounts. Click the link:
 
 * [Link your GitHub account](https://repos.opensource.microsoft.com/link)
 
-Then join these two teams:
+You need to join teams in two organizations. Click the two links:
 
-* [dotnet team (microsoft org)](https://repos.opensource.microsoft.com/microsoft/teams/dotnet/join/)
-* [microsoft team (dotnet org)](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
+* [dotnet org](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
+* [Microsoft org](https://repos.opensource.microsoft.com/microsoft/teams/dotnet/join/)
 
-The primary reason to join the orgs are the following: 
+After you join the teams: 
 
 * Users will be able to @mention you on [.NET Core Repos](https://github.com/dotnet/core/blob/master/Documentation/core-repos.md)
 * You will be able to access to private repos we maintain
