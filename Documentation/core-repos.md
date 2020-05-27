@@ -1,4 +1,4 @@
-# .NET Core repositories
+# .NET repositories
 
 .NET Core consists of many repositories. To file an issue, make a PR, or engage on specific topics, it's best to engage with developers working in the correct repo. A largely complete set of .NET Core and related repositories follows.
 
@@ -10,6 +10,7 @@
 |[dotnet/cli](https://github.com/dotnet/cli)                       |.NET Core CLI tools|
 |[dotnet/runtime](https://github.com/dotnet/runtime)               |.NET Core runtime, runtime installers, application model, & Base Class Library (BCL)|
 |[dotnet/docs](https://github.com/dotnet/docs)                     |.NET documentation|
+|[dotnet/dotnet-api-docs](https://github.com/dotnet/dotnet-api-docs) |.NET API documentation|
 |[dotnet/project-system](https://github.com/dotnet/project-system) |Visual Studio project system for C#, F#, & VB|
 |[dotnet/sdk](https://github.com/dotnet/sdk)                       |.NET Core SDK (used by Visual Studio & .NET Core CLI)|
 |[dotnet/extensions](https://github.com/dotnet/extensions)         |.NET extension APIs (DI, logging, configuration, etc.)|

@@ -27,7 +27,7 @@ The latest major release is [.NET Core 3.1](release-notes/3.1). The latest patch
 * [File an issue](Documentation/core-repos.md)
 * [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net-core)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
-* [VS Developer Community Portal](https://developercommunity.visualstudio.com/) for "full" .NET Framework feedback (or via [Report a Problem](https://aka.ms/vs-rap) tool)
+* [VS Developer Community Portal](https://developercommunity.visualstudio.com/) for .NET Framework feedback (or via [Report a Problem](https://aka.ms/vs-rap) tool)
 
 ## How to Engage, Contribute and Provide Feedback
 
