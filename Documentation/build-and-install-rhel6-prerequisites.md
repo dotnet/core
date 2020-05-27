@@ -26,7 +26,7 @@ For more information about enabling or disabling the Globalization, you may refe
 
 ## Getting the libraries that are not available as packages.
 ### ICU
-The ICU libraries can be downloaded as a precompiled binary from the ICU website, the URL is http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-RHEL6-x64.tgz.
+The ICU libraries can be downloaded as a precompiled binary from the ICU website, the URL is https://github.com/unicode-org/icu/releases/download/release-57-1/icu4c-57_1-RHEL6-x64.tgz.
 ### CURL
 The CURL libraries need to be built from the source code. The source code can be obtained from the CURL website, the URL is https://curl.haxx.se/download/curl-7.45.0.tar.gz.
 To build it, follow the steps described below.
