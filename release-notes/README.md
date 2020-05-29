@@ -1,33 +1,29 @@
-# Release Notes
+# .NET Core Release Notes
 
-### .NET Core SDK
+The latest supported release is [.NET Core 3.1](3.1).
 
-.NET Core SDK 1.0.3, 2017/04/13
+## Latest Updates
 
-* [Release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3)
-* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.3-sdk-download.md)
+You can download the latest updates for .NET Core.
 
-.NET Core SDK 1.0.1, 2017/03/07
-
-* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/2017/03/07/announcing-net-core-tools-1-0/)
-* [Release notes](1.0/1.0.1-sdk-release-notes.md)
-* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md)
+* [.NET 5.0 Preview 4](5.0/preview/5.0.0-preview.4.md)
+* [.NET Core 3.1.4](3.1/3.1.4/3.1.4.md)
+* [.NET Core 2.1.18](2.1/2.1.18/2.1.18.md)
 
 
-### .NET Core Runtime
+## Release Information
 
-.NET Core 1.0.4
+* [.NET Core Releases](download-archive.md) -- Release notes and downloads
+* [Releases Index][releases-index.json] -- Index for all release channels in JSON format
+* [5.0 Release Details][5.0-releases.json] -- All releases details for the 5.0 channel in JSON format
+* [3.1 Release Details][3.1-releases.json] -- All releases details for the 3.1 channel in JSON format
+* [2.1 Release Details][2.1-releases.json] -- All releases details for the 2.1 channel in JSON format
 
-* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/2017/03/07/announcing-net-core-tools-1-0/)
-* [Release notes](1.0/1.0.4.md)
-* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.4-download.md)
+## See also
 
-.NET Core 1.1.1
+* [.NET Core SDK telemetry](https://docs.microsoft.com/dotnet/core/tools/telemetry)
 
-* [Announcement blog post](https://blogs.msdn.microsoft.com/dotnet/2017/03/07/announcing-net-core-tools-1-0/)
-* [Release notes](1.1/1.1.1.md)
-* [Download](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.1.1-download.md)
-
-### .NET Core Download Archive
-
-Release notes and download links to previous releases can be found in the [.NET Core Downloads Archive](download-archive.md).
+[releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
+[5.0-releases.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/5.0/releases.json
+[3.1-releases.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/3.1/releases.json
+[2.1-releases.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/2.1/releases.json
