@@ -1,41 +1,80 @@
-# .NET Core Repos
+# .NET repositories
 
-There are many repos that make up .NET Core. To file an issue, make a PR, or engage on specific topics, it is best to engage with developers working on the right repo. A largely complete set of .NET Core repositories follows.
+.NET Core consists of many repositories. To file an issue, make a PR, or engage on specific topics, it's best to engage with developers working in the correct repo. A largely complete set of .NET Core and related repositories follows.
 
 ## .NET Core
 
-* [dotnet/cli](https://github.com/dotnet/cli) - .NET Core CLI tools
-* [dotnet/runtime](https://github.com/dotnet/runtime) - .NET Core Runtime
-* [dotnet/docs](https://github.com/dotnet/docs) - .NET documentation
-* [dotnet/project-system](https://github.com/dotnet/project-system) - .NET Core Project System
-* [dotnet/sdk](https://github.com/dotnet/sdk) - .NET Core SDK (used by Visual Studio and CLI)
-* [dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker) - .NET Core Docker images
-* [dotnet/wpf](https://github.com/dotnet/wpf) - Windows Presentation Foundation
-* [dotnet/winforms](https://github.com/dotnet/winforms) - Windows Forms
+|Repository                                                        |Description |
+|------------------------------------------------------------------|------------|
+|[dotnet/core](https://github.com/dotnet/core)                     |.NET Core home repository|
+|[dotnet/cli](https://github.com/dotnet/cli)                       |.NET Core CLI tools|
+|[dotnet/runtime](https://github.com/dotnet/runtime)               |.NET Core runtime, runtime installers, application model, & Base Class Library (BCL)|
+|[dotnet/docs](https://github.com/dotnet/docs)                     |.NET documentation|
+|[dotnet/dotnet-api-docs](https://github.com/dotnet/dotnet-api-docs) |.NET API documentation|
+|[dotnet/project-system](https://github.com/dotnet/project-system) |Visual Studio project system for C#, F#, & VB|
+|[dotnet/sdk](https://github.com/dotnet/sdk)                       |.NET Core SDK (used by Visual Studio & .NET Core CLI)|
+|[dotnet/extensions](https://github.com/dotnet/extensions)         |.NET extension APIs (DI, logging, configuration, etc.)|
+|[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)   |.NET Core Docker images|
+|[dotnet/templating](https://github.com/dotnet/templating)         |Templating engine used by `dotnet new`|
+|[dotnet/winforms](https://github.com/dotnet/winforms)             |Windows Forms|
+|[dotnet/wpf](https://github.com/dotnet/wpf)                       |Windows Presentation Foundation (WPF)|
+
+## .NET Framework
+
+|Repository                                                        |Description |
+|------------------------------------------------------------------|------------|
+|[microsoft/dotnet](https://github.com/microsoft/dotnet) |Catch-all repository for .NET (where most .NET Framework issues are filed)|
+|[microsoft/dotnet-framework-docker](https://github.com/microsoft/dotnet-framework-docker) |.NET Framework Docker images|
 
 ## .NET Standard
 
-* [dotnet/standard](https://github.com/dotnet/standard) - .NET Standard definition
+|Repository                                            |Description             |
+|------------------------------------------------------|------------------------|
+|[dotnet/standard](https://github.com/dotnet/standard) |.NET Standard definition|
+
+## ASP.NET
+
+|Repository                                                         |Description                                  |
+|-------------------------------------------------------------------|---------------------------------------------|
+|[dotnet/aspnetcore](https://github.com/dotnet/aspnetcore)          |ASP.NET Core framework                       |
+|[dotnet/AspNetCore.Docs](https://github.com/dotnet/AspNetCore.Docs)|ASP.NET Core documentation                   |
+|[dotnet/AspNetDocs](https://github.com/dotnet/AspNetDocs)          |ASP.NET 4.x documentation                    |
+|[dotnet/Scaffolding](https://github.com/dotnet/Scaffolding)        |ASP.NET Core code generators                 |
+|[dotnet/websdk](https://github.com/dotnet/websdk)                  |MSBuild tasks & targets for ASP.NET Core apps|
+
+## Build platform
+
+|Repository                                               |Description                            |
+|---------------------------------------------------------|---------------------------------------|
+|[microsoft/msbuild](https://github.com/microsoft/msbuild)|Build platform for .NET & Visual Studio|
+
+## Entity Framework and data access
+
+|Repository                                                                   |Description                           |
+|-----------------------------------------------------------------------------|--------------------------------------|
+|[dotnet/efcore](https://github.com/dotnet/efcore)                            |EF Core                               |
+|[dotnet/ef6](https://github.com/dotnet/ef6)                                  |EF 6                                  |
+|[dotnet/EntityFramework.Docs](https://github.com/dotnet/EntityFramework.Docs)|EF Core & EF 6 documentation          |
+|[dotnet/sqlclient](https://github.com/dotnet/sqlclient)                      |SqlClient data provider for SQL Server|
 
 ## Languages
 
-* [dotnet/roslyn](https://github.com/dotnet/roslyn) - Roslyn (C#/VB compiler) and C#
-* [dotnet/csharplang](https://github.com/dotnet/csharplang) - C# spec
-* [dotnet/vblang](https://github.com/dotnet/vblang) - VB spec
-* [dotnet/fsharp](https://github.com/dotnet/fsharp) - The F# compiler, FSharp.Core library, and tools for F#
+|Repository                                               |Description                                           |
+|---------------------------------------------------------|------------------------------------------------------|
+|[dotnet/roslyn](https://github.com/dotnet/roslyn)        |Roslyn (C# / VB compiler)                             |
+|[dotnet/csharplang](https://github.com/dotnet/csharplang)|C# specification, ongoing language design             |
+|[dotnet/vblang](https://github.com/dotnet/vblang)        |VB specification, ongoing language design             |
+|[dotnet/fsharp](https://github.com/dotnet/fsharp)        |The F# compiler, FSharp.Core library, and tools for F#|
 
 ## NuGet
 
-* [nuget/home](https://github.com/nuget/home) - NuGet client
-
-## ASP.NET Core
-
-* [dotnet/aspnetcore](https://github.com/dotnet/aspnetcore) - ASP.NET Core framework
-* [dotnet/AspNetCore.Docs](https://github.com/dotnet/AspNetCore.Docs) - ASP.NET and ASP.NET Core documentation
+|Repository                                                  |Description |
+|------------------------------------------------------------|------------|
+|[nuget/home](https://github.com/nuget/home)                 |NuGet client|
+|[nuget/nugetgallery](https://github.com/nuget/nugetgallery) |NuGet.org   |
 
 ## WCF
-* [dotnet/wcf](https://github.com/dotnet/wcf) - WCF
 
-## .NET Framework
-* [microsoft/dotnet](https://github.com/microsoft/dotnet) - catch-all repository for .NET (where most .NET Framework issues are filed)
-* [microsoft/dotnet-framework-docker](https://github.com/microsoft/dotnet-framework-docker) - .NET Framework Docker images
+|Repository                                  |Description         |
+|--------------------------------------------|--------------------|
+|[dotnet/wcf](https://github.com/dotnet/wcf) |WCF client libraries|
