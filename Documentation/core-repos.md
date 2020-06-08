@@ -59,12 +59,14 @@
 
 ## Languages
 
-|Repository                                               |Description                                           |
-|---------------------------------------------------------|------------------------------------------------------|
-|[dotnet/roslyn](https://github.com/dotnet/roslyn)        |Roslyn (C# / VB compiler)                             |
-|[dotnet/csharplang](https://github.com/dotnet/csharplang)|C# specification, ongoing language design             |
-|[dotnet/vblang](https://github.com/dotnet/vblang)        |VB specification, ongoing language design             |
-|[dotnet/fsharp](https://github.com/dotnet/fsharp)        |The F# compiler, FSharp.Core library, and tools for F#|
+|Repository                                                               |Description                                            |
+|-------------------------------------------------------------------------|-------------------------------------------------------|
+|[dotnet/roslyn](https://github.com/dotnet/roslyn)                        |Roslyn (C# / VB compiler)                              |
+|[dotnet/csharplang](https://github.com/dotnet/csharplang)                |C# suggestions, specification, ongoing language design |
+|[dotnet/vblang](https://github.com/dotnet/vblang)                        |VB suggestions, specification, ongoing language design |
+|[dotnet/fsharp](https://github.com/dotnet/fsharp)                        |The F# compiler, FSharp.Core library, and tools for F# |
+|[fsharp/fslang-design](https://github.com/fsharp/fslang-design)          |RFCs and docs related to the F# language design process|
+|[fsharp/fslang-suggestions](https://github.com/fsharp/fslang-suggestions)|F# language and FSharp.Core library suggestions        |
 
 ## NuGet
 
