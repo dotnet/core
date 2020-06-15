@@ -7,7 +7,6 @@
 |Repository                                                        |Description |
 |------------------------------------------------------------------|------------|
 |[dotnet/core](https://github.com/dotnet/core)                     |.NET Core home repository|
-|[dotnet/cli](https://github.com/dotnet/cli)                       |.NET Core CLI tools|
 |[dotnet/runtime](https://github.com/dotnet/runtime)               |.NET Core runtime, runtime installers, application model, & Base Class Library (BCL)|
 |[dotnet/docs](https://github.com/dotnet/docs)                     |.NET documentation|
 |[dotnet/dotnet-api-docs](https://github.com/dotnet/dotnet-api-docs) |.NET API documentation|
