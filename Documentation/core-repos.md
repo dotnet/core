@@ -12,6 +12,7 @@
 |[dotnet/dotnet-api-docs](https://github.com/dotnet/dotnet-api-docs) |.NET API documentation|
 |[dotnet/project-system](https://github.com/dotnet/project-system) |Visual Studio project system for C#, F#, & VB|
 |[dotnet/sdk](https://github.com/dotnet/sdk)                       |.NET Core SDK (used by Visual Studio & .NET Core CLI)|
+|[dotnet/installer](https://github.com/dotnet/installer)           |.NET Core installer (produces zips, tarballs, and installers for the .NET SDK)
 |[dotnet/extensions](https://github.com/dotnet/extensions)         |.NET extension APIs (DI, logging, configuration, etc.)|
 |[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)   |.NET Core Docker images|
 |[dotnet/templating](https://github.com/dotnet/templating)         |Templating engine used by `dotnet new`|
@@ -45,7 +46,7 @@
 
 |Repository                                               |Description                            |
 |---------------------------------------------------------|---------------------------------------|
-|[microsoft/msbuild](https://github.com/microsoft/msbuild)|Build platform for .NET & Visual Studio|
+|[dotnet/msbuild](https://github.com/dotnet/msbuild)      |Build platform for .NET & Visual Studio|
 
 ## Entity Framework and data access
 
