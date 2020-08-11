@@ -11,6 +11,7 @@ You can download the latest updates for .NET Core.
 * [.NET Core 2.1.21](2.1/2.1.21/2.1.21.md)
 
 
+
 ## Release Information
 
 * [.NET Core Releases](download-archive.md) -- Release notes and downloads
