@@ -17,6 +17,7 @@
 |[dotnet/templating](https://github.com/dotnet/templating)         |Templating engine used by `dotnet new`|
 |[dotnet/winforms](https://github.com/dotnet/winforms)             |Windows Forms|
 |[dotnet/wpf](https://github.com/dotnet/wpf)                       |Windows Presentation Foundation (WPF)|
+|[dotnet/maui](https://github.com/dotnet/maui)                     |.NET Multi-platform App UI|
 
 ## .NET Framework
 
