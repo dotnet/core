@@ -15,6 +15,7 @@
 |[dotnet/extensions](https://github.com/dotnet/extensions)         |.NET extension APIs (DI, logging, configuration, etc.)|
 |[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)   |.NET Core Docker images|
 |[dotnet/templating](https://github.com/dotnet/templating)         |Templating engine used by `dotnet new`|
+|[dotnet/test-templates](https://github.com/dotnet/test-templates) |.NET Core unit testing project templates|
 |[dotnet/winforms](https://github.com/dotnet/winforms)             |Windows Forms|
 |[dotnet/wpf](https://github.com/dotnet/wpf)                       |Windows Presentation Foundation (WPF)|
 |[dotnet/maui](https://github.com/dotnet/maui)                     |.NET Multi-platform App UI|
