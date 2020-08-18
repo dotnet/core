@@ -6,7 +6,7 @@ The latest supported release is [.NET Core 3.1](3.1).
 
 You can download the latest updates for .NET Core.
 
-* [.NET 5.0 Preview 7](5.0/preview/5.0.0-preview.7.md)
+* [.NET 5.0 Preview 8](5.0/preview/5.0.0-preview.8.md)
 * [.NET Core 3.1.7](3.1/3.1.7/3.1.7.md)
 * [.NET Core 2.1.21](2.1/2.1.21/2.1.21.md)
 
