@@ -77,7 +77,7 @@ You can make tools debuggable with [sourcelink](https://github.com/dotnet/source
 </PropertyGroup>
 
 <ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
-  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62909-01" PrivateAssets="All"/>
+  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
 </ItemGroup>
 ```
 
