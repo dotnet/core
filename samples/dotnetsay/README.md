@@ -1,12 +1,12 @@
-# dotnetsay .NET Core Global Tools Sample
+# dotnetsay .NET Tool Sample
 
-This sample demonstrates how to use and create .NET Core Global Tools. It works on Windows, macOS and Linux.
+This sample demonstrates how to use and create .NET Tools. It works on Windows, macOS and Linux.
 
-You must have [.NET Core 2.1](https://dotnet.microsoft.com/download/dotnet-core/2.1) or higher installed.
+You must have the .NET SDK installed, [.NET Core 2.1](https://dotnet.microsoft.com/download/dotnet-core/2.1) or higher.
 
-## Try the pre-built `dotnetsay` Global Tool
+## Installation
 
-You can quickly install and try the [dotnetsay global tool from nuget.org](https://www.nuget.org/packages/dotnetsay/) using the following commands.
+You can quickly install and try the [dotnetsay](https://www.nuget.org/packages/dotnetsay/):
 
 ```console
 dotnet tool install -g dotnetsay
@@ -20,16 +20,6 @@ You can uninstall the tool using the following command.
 ```console
 dotnet tool uninstall -g dotnetsay
 ```
-
-## Getting the sample
-
-The easiest way to get the sample is by cloning the samples repository with [git](https://git-scm.com/downloads), using the following instructions.
-
-```console
-git clone https://github.com/dotnet/core/
-```
-
-You can also [download the repository as a zip](https://github.com/dotnet/core/archive/master.zip).
 
 ## Build the Tool from source
 
