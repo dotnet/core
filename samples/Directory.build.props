@@ -1,13 +1,25 @@
 <Project>
+ <!--
+    At Microsoft, we have three build types:
 
-    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
-        <Configuration>release</Configuration>
+    Official build:
+    - Build standalone Portable PDBs to reduce the size of the binaries.
+    PR validation build:
+    - Embed PDBs to make it easier to debug crash dumps captured on the CI machine.
+    Developer build:
+    - Embed PDBs to be consistent with PR validation build.   
+    
+    Context: https://github.com/dotnet/arcade/blob/master/src/Microsoft.DotNet.Arcade.Sdk/tools/ProjectDefaults.props
+ -->
+
+    <PropertyGroup>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <DebugType>embedded</DebugType>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <DebugType>portable</DebugType>
+        <DebugType Condition="'$(OfficialBuild)' != 'true'">embedded</DebugType>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
+    <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
     </ItemGroup>
 
