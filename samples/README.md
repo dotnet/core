@@ -1,6 +1,6 @@
 # .NET Samples
 
-This directory contains samples and documents that you can use to test out .NET.
+This directory contains .NET samples and documents.
 
 * [dotnetsay tools](dotnetsay/README.md)
 * [Raspberry Pi instructions](RaspberryPiInstructions.md)
