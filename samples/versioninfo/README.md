@@ -1,0 +1,28 @@
+# dotnet-versioninfo tool
+
+Produces information about your .NET, OS and hardware environment. It is also a demonstration of the APIs you can use to get this information for your own uses. This information is likely useful for logging.
+
+## Installation
+
+```console
+dotnet install -g dotnet-versioninfo
+```
+
+[dotnet-versioninfo package](https://www.nuget.org/packages/dotnetsay/)
+
+## Usage
+
+```console
+dotnet-versioninfo
+**.NET Core information
+Version: 3.1.7
+FrameworkDescription: .NET Core 3.1.7
+Libraries version: 3.1.7-servicing.20366.2
+Libraries hash: e8b17841cb5ce923aec48a1b0c12042d445d508f
+
+**Environment information
+OSDescription: Darwin 19.6.0 Darwin Kernel Version 19.6.0: Sun Jul  5 00:43:10 PDT 2020; root:xnu-6153.141.1~9/RELEASE_X86_64
+OSVersion: Unix 19.6.0.0
+OSArchitecture: X64
+ProcessorCount: 8
+```
