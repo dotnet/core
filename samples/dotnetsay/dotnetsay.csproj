@@ -3,23 +3,15 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RollForward>LatestMajor</RollForward>
     <Description>A simple .NET Core global tool called "dotnetsay".</Description>
     <VersionPrefix>2.1.5</VersionPrefix>
     <Authors>.NET Team</Authors>
     <Product>dotnetsay</Product>
-    <Copyright>MIT</Copyright>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://github.com/dotnet/core/blob/master/LICENSE.TXT</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/dotnet/core/blob/master/samples/dotnetsay/README.md</PackageProjectUrl>
+    <License>MIT</License>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <DebugType>embedded</DebugType>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PackAsTool>true</PackAsTool>
-    <!-- 
-      Enables tool to run on any runtime version.
-      Will run on .NET Core 2.1 if available. Otherwise, the latest. 
-    -->
-    <RollForward>LatestMajor</RollForward>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
