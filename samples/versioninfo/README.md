@@ -1,14 +1,23 @@
 # dotnet-versioninfo tool
 
-Produces information about your .NET, OS and hardware environment. It is also a demonstration of the APIs you can use to get this information for your own uses. This information is likely useful for logging.
+`dotnet-versioninfo` prints information about your .NET, OS and hardware environment. It is also a demonstration of the APIs you can use to get this information for your own uses. This information is likely useful for logging.
 
 ## Installation
 
+You can quickly install and try the [dotnet-versioninfo](https://www.nuget.org/packages/dotnet-versioninfo/):
+
 ```console
-dotnet install -g dotnet-versioninfo
+dotnet tool install -g dotnet-versioninfo
+dotnet-versioninfo
 ```
 
-[dotnet-versioninfo package](https://www.nuget.org/packages/dotnetsay/)
+> Note: You may need to open a new command/terminal window the first time you install a tool.
+
+You can uninstall the tool using the following command.
+
+```console
+dotnet tool uninstall -g dotnet-versioninfo
+```
 
 ## Usage
 
@@ -26,3 +35,7 @@ OSVersion: Unix 19.6.0.0
 OSArchitecture: X64
 ProcessorCount: 8
 ```
+
+## More information
+
+The [dotnetsay tool sample](../dotnetsay/README.md) includes more information on .NET tools.
