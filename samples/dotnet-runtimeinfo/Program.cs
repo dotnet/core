@@ -13,8 +13,9 @@ namespace RuntimeEnvironment
             WriteLine("**.NET information");
             WriteLine($"{nameof(Environment.Version)}: {Environment.Version}");
             WriteLine($"{nameof(RuntimeInformation.FrameworkDescription)}: {RuntimeInformation.FrameworkDescription}");
-            WriteLine($"Libraries version: {((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute),false))[0].InformationalVersion.Split('+')[0]}");
-            WriteLine($"Libraries hash: {((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false))[0].InformationalVersion.Split('+')[1]}");
+            var assemblyInformation = ((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute),false))[0];
+            WriteLine($"Libraries version: {assemblyInformation.InformationalVersion.Split('+')[0]}");
+            WriteLine($"Libraries hash: {assemblyInformation.InformationalVersion.Split('+')[1]}");
             WriteLine();
             WriteLine("**Environment information");
             WriteLine($"{nameof(RuntimeInformation.OSDescription)}: {RuntimeInformation.OSDescription}");
@@ -29,7 +30,6 @@ namespace RuntimeEnvironment
                 WriteLine($"cfs_quota_us: {System.IO.File.ReadAllLines("/sys/fs/cgroup/cpu/cpu.cfs_quota_us")[0]}");
                 WriteLine($"memory.limit_in_bytes: {System.IO.File.ReadAllLines("/sys/fs/cgroup/memory/memory.limit_in_bytes")[0]}");
                 WriteLine($"memory.usage_in_bytes: {System.IO.File.ReadAllLines("/sys/fs/cgroup/memory/memory.usage_in_bytes")[0]}");
-
             }
         }
     }
