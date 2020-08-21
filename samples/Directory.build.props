@@ -3,6 +3,7 @@
     At Microsoft, we have three build types:
 
     Official build:
+    - Authenticode signed binaries, unique version numbers, packages published to feeds, symbols published to symbol servers
     - Build standalone Portable PDBs to reduce the size of the binaries.
     PR validation build:
     - Embed PDBs to make it easier to debug crash dumps captured on the CI machine.
@@ -15,13 +16,12 @@
     <PropertyGroup>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <DebugType>portable</DebugType>
-        <DebugType Condition="'$(OfficialBuild)' != 'true'">embedded</DebugType>
-        <ContinuousIntegrationBuild Condition="'$(OfficialBuild)' == 'true'">true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(OfficialBuild)' == 'true'">
         <Configuration>release</Configuration>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <DebugType>portable</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
