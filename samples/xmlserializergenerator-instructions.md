@@ -1,4 +1,4 @@
- # Using Microsoft Xml Serializer Generator on .NET Core
+ # Using Xml Serializer Generator on .NET Core
 
 Like the Xml Serializer Generator (sgen.exe) on desktop, Microsoft.XmlSerializer.Generator NuGet package is the solution for .NET Core and .NET Standard Libraries. It creates an Xml serialization assembly for types contained in an assembly to improve the startup performance of Xml serialization when serializing or de-serializing objects of those types using XmlSerializer. 
 

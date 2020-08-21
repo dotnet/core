@@ -1,19 +1,18 @@
-# .NET Core Samples
+# .NET Samples
 
-This directory contains samples that you can use to test out [.NET Core](http://dotnet.github.io). They are small and simple, and are used to get your feet wet with .NET Core as fast as possible. 
+This directory contains .NET samples and documents.
 
-## How to run the samples?
+* [dotnetsay tools](dotnetsay/README.md)
+* [Raspberry Pi instructions](RaspberryPiInstructions.md)
+* [Using Xml Serializer Generator on .NET Core](xmlserializergenerator-instructions.md)
+* [nuget.config for daily .NET builds](nuget.config)
+* [linker instructions](linker-instructions.md)
+* [.NET Core on Yocto instructions](YoctoInstructions.md)
+* [Using dotnet-svcutil.xmlserializer on .NET Core](dotnet-svcutil.xmlserializer-instructions.md)
 
-In order to run these samples, you first need to [install .NET Core](http://dotnet.github.io/getting-started/). After that, you can clone this repo, go into each of the samples folders and either:
+## Other resources
 
-* Run from source using the following commands:
-	* `dotnet run`
-* Compile and run using the following commands
-	* `dotnet build`
-	* `dotnet bin/Debug/[framework]/[binary name]`
+* [Install .NET](https://dotnet.microsoft.com/download/)
+* [.NET documentation](https://docs.microsoft.com/dotnet)
+* [.NET samples repo](https://github.com/dotnet/samples)
 
-## Samples list
-
-* **dotnetbot** - Let dotnetbot say Hi!
-* **helloworld** - because no sample is complete without Hello World!
-* **qotd** - a simple "quote of the day" console application (**note**: this sample is not yet capable of being compiled to a native binary).
