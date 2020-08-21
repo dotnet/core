@@ -1,14 +1,14 @@
-# dotnet-versioninfo tool
+# dotnet-runtimeinfo tool
 
-`dotnet-versioninfo` prints information about your .NET, OS and hardware environment. It is also a demonstration of the APIs you can use to get this information for your own uses. This information is likely useful for logging.
+`dotnet-runtimeinfo` prints information about your .NET, OS and hardware environment. It is also a demonstration of the APIs you can use to get this information for your own uses. This information is likely useful for logging.
 
 ## Installation
 
-You can quickly install and try the [dotnet-versioninfo](https://www.nuget.org/packages/dotnet-versioninfo/):
+You can quickly install and try the [dotnet-runtimeinfo](https://www.nuget.org/packages/dotnet-runtimeinfo/):
 
 ```console
-dotnet tool install -g dotnet-versioninfo
-dotnet-versioninfo
+dotnet tool install -g dotnet-runtimeinfo
+dotnet-runtimeinfo
 ```
 
 > Note: You may need to open a new command/terminal window the first time you install a tool.
@@ -16,13 +16,13 @@ dotnet-versioninfo
 You can uninstall the tool using the following command.
 
 ```console
-dotnet tool uninstall -g dotnet-versioninfo
+dotnet tool uninstall -g dotnet-runtimeinfo
 ```
 
 ## Usage
 
 ```console
-dotnet-versioninfo
+dotnet-runtimeinfo
 **.NET Core information
 Version: 3.1.7
 FrameworkDescription: .NET Core 3.1.7

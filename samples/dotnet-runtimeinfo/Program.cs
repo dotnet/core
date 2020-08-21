@@ -4,13 +4,13 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using static System.Console;
 
-namespace versioninfo
+namespace RuntimeEnvironment
 {
     class Program
     {
         static void Main(string[] args)
         {
-            WriteLine("**.NET Core information");
+            WriteLine("**.NET information");
             WriteLine($"{nameof(Environment.Version)}: {Environment.Version}");
             WriteLine($"{nameof(RuntimeInformation.FrameworkDescription)}: {RuntimeInformation.FrameworkDescription}");
             WriteLine($"Libraries version: {((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute),false))[0].InformationalVersion.Split('+')[0]}");
