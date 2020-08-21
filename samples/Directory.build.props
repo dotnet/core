@@ -17,6 +17,11 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <DebugType>portable</DebugType>
         <DebugType Condition="'$(OfficialBuild)' != 'true'">embedded</DebugType>
+        <ContinuousIntegrationBuild Condition="'$(OfficialBuild)' == 'true'">true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(OfficialBuild)' == 'true'">
+        <Configuration>release</Configuration>
     </PropertyGroup>
 
     <ItemGroup>
