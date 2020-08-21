@@ -7,13 +7,17 @@
     <RollForward>LatestMajor</RollForward>
     <VersionPrefix>2.1.7</VersionPrefix>
     <PackageProjectUrl>https://github.com/dotnet/core/blob/master/samples/dotnetsay/README.md</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>    <Copyright>.NET Foundation</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>.NET Foundation</Copyright>
     <Authors>.NET Team</Authors>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PackAsTool>true</PackAsTool>
   </PropertyGroup>
 
+  <!-- 
+    To pack correctly
+    dotnet pack -c release /p:ContinuousIntegrationBuild=true
+  -->
   <ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>

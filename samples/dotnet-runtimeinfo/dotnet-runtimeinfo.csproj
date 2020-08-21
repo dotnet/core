@@ -14,6 +14,10 @@
     <PackAsTool>true</PackAsTool>
   </PropertyGroup>
 
+  <!-- 
+    To pack correctly
+    dotnet pack -c release /p:ContinuousIntegrationBuild=true
+  -->
   <ItemGroup Condition="'$(ContinuousIntegrationBuild)'=='true'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
