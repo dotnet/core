@@ -1,0 +1,40 @@
+<Project>
+ <!--
+    This file is intended as a best practice for using sourcelink.
+    https://github.com/dotnet/sourcelink
+    
+    At Microsoft, we have three build types:
+
+    Official build:
+    - OfficialBuild property is set to true (this is an adhoc property)
+    - ContinuousIntegrationBuild property is set to true
+    - Produces authenticode signed binaries, unique version numbers, packages published to feeds, symbols published to symbol servers
+    - Produces standalone Portable PDBs to reduce the size of the binaries.
+    PR validation build:
+    - ContinuousIntegrationBuild property is set to true
+    - Embeds PDBs to make it easier to debug crash dumps captured on the CI machine.
+    Developer build:
+    - Embeds PDBs to be consistent with PR validation build.   
+    
+    Context: 
+    * https://github.com/dotnet/arcade/blob/master/src/Microsoft.DotNet.Arcade.Sdk/tools/ProjectDefaults.props
+    * https://github.com/dotnet/sourcelink/tree/master/docs#continuousintegrationbuild
+ -->
+
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <DebugType>embedded</DebugType>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(OfficialBuild)' == 'true'">
+        <Configuration>release</Configuration>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <DebugType>portable</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0-beta-20204-02" PrivateAssets="All"/>
+    </ItemGroup>
+
+</Project>
