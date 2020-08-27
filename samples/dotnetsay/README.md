@@ -2,7 +2,7 @@
 
 This sample demonstrates how to use and create .NET Tools. It works on Windows, macOS and Linux.
 
-You must have the .NET SDK installed, [.NET Core 2.1](https://dotnet.microsoft.com/download/dotnet-core/2.1) or higher.
+You must have the .NET SDK installed. [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) is recommended.
 
 ## Installation
 
@@ -20,6 +20,8 @@ You can uninstall the tool using the following command.
 ```console
 dotnet tool uninstall -g dotnetsay
 ```
+
+Also see [dotnet-runtimeinfo](../dotnet-runtimeinfo/README.md).
 
 ## Build the Tool from source
 
@@ -41,7 +43,7 @@ You can uninstall the tool using the following command.
 dotnet tool uninstall -g dotnetsay
 ```
 
-The `PackAsTool` property in the [project file](dotnetsay.csproj) enables packing a console application as a global tool, as you can see in the following simplified example. Applications must target .NET Core 2.1 or higher for global tools.
+The `PackAsTool` property in the [project file](dotnetsay.csproj) enables packing a console application as a global tool, as you can see in the following simplified example. Applications must target .NET Core 2.1 or higher for .NET Tools.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -55,9 +57,9 @@ The `PackAsTool` property in the [project file](dotnetsay.csproj) enables packin
 </Project>
 ```
 
-## Enabling SourceLink with Tools
+## Enabling Source Link with Tools
 
-You can make tools debuggable with [sourcelink](https://github.com/dotnet/sourcelink) by adding the following properties and `PackageReference`. The example is specific to git and GitHub. See [dotnet/sourcelink](https://github.com/dotnet/sourcelink) for other options.
+You can make tools and libraries debuggable with [Source Link](https://github.com/dotnet/sourcelink) by adding the following properties and `PackageReference`. The example is specific to git and GitHub. See [dotnet/sourcelink](https://github.com/dotnet/sourcelink) for other options.
 
 ```xml
 <PropertyGroup>
@@ -71,23 +73,17 @@ You can make tools debuggable with [sourcelink](https://github.com/dotnet/source
 </ItemGroup>
 ```
 
-The [dotnetsay project](dotnetsay.csproj) doesn't add these properties or the `PackageReference` but relies on the same information in the [Directory.build.props](../Directory.build.props) in the parent directory.
+When you or your users debug your binaries with Source Link, the debugger will attempt to retrieve content (like `.cs` files) from the recorded git commit in your binaries. The given commit needs to be published to a public or accessible private repo in order for that to work. This means that you should build from a branch whose commits are stable and already published. You can build from a PR branch, but the commits may not remain stable for long, as the PRs may be [squashed on merge](https://help.github.com/articles/about-pull-request-merges/).
 
-> Note: The approach used in [Directory.build.props](../Directory.build.props) conditionalizes sourcelink properties and `PackageReference` to the `ContinuousIntegrationBuild` property being set. There is no problem running SourceLink on every build, however, it isn't necessary. 
+For official builds, we recommend that you enable [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild), so that the built artifacts are [reproducible and deterministic](https://reproducible-builds.org/) (same outcome independent of build machine or time).
 
-Use [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild) when producing official builds. If you don't, the sourcelink information will be wrong. The simplest way to do that is by packing with an additional property set, as follows.
+The [dotnetsay project](dotnetsay.csproj) doesn't add these properties or the `PackageReference` but relies on the same information in the [Directory.Build.props](../Directory.Build.props) in the parent directory. The use of a Directory.Build.props is recommended for Source Link, to avoid maintaining these settings in multiple project files.
 
-```console
-dotnet pack /p:ContinuousIntegrationBuild=true
-```
-
-Make sure to build official packages from branches/repositories with stable commit hashes. If you build from a branch whose commits are later [squashed](https://help.github.com/articles/about-pull-request-merges/), then the commit hashs will not be found and sourcelink will not work correctly.
-
-SourceLink will fail if it cannot find a `.git` directory. This can happen if you build projects in containers at solution root and not repo root for example. There are solutions to that problem described at the [sourcelink repo](https://github.com/dotnet/sourcelink).
+Source Link will fail if it cannot find a `.git` directory. This can happen if you build projects in containers at solution root and not repo root for example. There are solutions to that problem described at the [dotnet/sourcelink repo](https://github.com/dotnet/sourcelink).
 
 ## Debug Tools with Visual Studio
 
-You can debug sourcelink-enabled .NET Core Global tools with Visual Studio, using the `Developer Command Prompt for VS 2017`. The following example launches `dotnetsay` for debugging:
+You can debug Source Link enabled .NET Tools with Visual Studio, using the `Developer Command Prompt for VS 2017`. The following example launches `dotnetsay` for debugging:
 
 ```console
 devenv /debugexe c:\Users\rich\.dotnet\tools\dotnetsay.exe
