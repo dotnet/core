@@ -72,18 +72,10 @@ You can make tools and libraries debuggable with [sourcelink](https://github.com
   <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
 </ItemGroup>
 ```
-You need to do two things to share sourcelink-enabled binaries with others (for sourcelink to work correctly):
 
-* Build from branches/repositories with stable and published commit hashes (the commit is on GitHub).
-* Enable [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild).
+When you or your users debug your binaries with sourcelink, the debugger will attempt to retrieve content (like `.cs` files) from the recorded git commit in your binaries. The given commit needs to be published to a public or accessible private repo in order for that to work. This means that you should build from a branch whose commits are stable and already published. You can build from a PR branch, but the commits may not remain stable for long, as the PRs may be [squashed on merge](https://help.github.com/articles/about-pull-request-merges/).
 
-The simplest way to do that is by packing with an additional property set, as follows.
-
-```console
-dotnet pack /p:ContinuousIntegrationBuild=true
-```
-
-If you do not follow this guidance, sourcelink will not work correctly (the referenced commit and the related content will not be found).
+For official builds, we recommend that you enable [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild), so that the built artifacts are deterministic (same outcome independent of build machine or time).
 
 The [dotnetsay project](dotnetsay.csproj) doesn't add these properties or the `PackageReference` but relies on the same information in the [Directory.Build.props](../Directory.Build.props) in the parent directory. The use of a Directory.Build.props is recommended for sourcelink, to avoid maintaining these settings in multiple project files.
 
