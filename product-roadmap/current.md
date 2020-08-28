@@ -26,6 +26,20 @@ Items in each section include the following icons:
 
 ## EF
 
+[EF Core 5.0 plan](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)
+
+- ![Completed](media/completed.png "Completed icon") Fully transparent many-to-many mapping by convention
+- ![Completed](media/completed.png "Completed icon") Many-to-many navigation properties (a.k.a "skip navigations")
+- ![Completed](media/completed.png "Completed icon") Table-per-type (TPT) inheritance mapping
+- ![Completed](media/completed.png "Completed icon") Filtered Include
+- ![Completed](media/completed.png "Completed icon") Split Include
+- ![Completed](media/completed.png "Completed icon") Required one-to-one dependents
+- ![Completed](media/completed.png "Completed icon") Rationalize ToTable, ToQuery, ToView, FromSql, etc.
+- ![Completed](media/completed.png "Completed icon") General query enhancements
+- ![Completed](media/completed.png "Completed icon") Migrations and deployment experience
+- ![Completed](media/completed.png "Completed icon") EF Core platforms experience
+- ![Completed](media/completed.png "Completed icon") Performance improvements
+
 ## ML.NET
 
 ## Runtime
@@ -38,6 +52,8 @@ Items in each section include the following icons:
 - ![Completed](media/completed.png "Completed icon") [Support WebAssembly (Mono Runtime)](https://github.com/dotnet/runtime/issues/38367)
 
 ## .NET Interactive
+
+- ![In Progress](media/in-progress.png "In Progress icon") F# support in .NET Interactive and Jupyter Notebooks scenarios
 
 ## Languages
 
@@ -77,11 +93,12 @@ Items in each section include the following icons:
 
 ### F# 5
 
-- ![Completed](media/completed.png "Completed icon") Complete the open type declarations implementation
-- ![Completed](media/completed.png "Completed icon") Complete the nameof implementation
-- ![Completed](media/completed.png "Completed icon") Address design questions/issues in string interpolation
-- ![Completed](media/completed.png "Completed icon") Finish design for unamanged generic constraints
-- ![Completed](media/completed.png "Completed icon") FSharp.Core is .NET Standard 2.0 only
-- ![Completed](media/completed.png "Completed icon") Remove the preview attribute from non-slicing APIs in FSharp.Core
+- ![Completed](media/completed.png "Completed icon") Open type declarations
+- ![Completed](media/completed.png "Completed icon") nameof
+- ![In Progress](media/in-progress.png "In Progress icon") Unmanaged generic constraints
+- ![In Progress](media/in-progress.png "In Progress icon") String interpolation
+- ![Completed](media/completed.png "Completed icon") Overloads of custom keywords in computation expressions
+- ![Completed](media/completed.png "Completed icon") Interfaces can be implemented at different generic instantiations
 
 ## CLI
+
