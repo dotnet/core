@@ -110,12 +110,12 @@ Please see the following links to view work items and themes across:
 - ![Completed](media/status-completed.png "Completed icon") [Default in deconstruction](https://github.com/dotnet/roslyn/pull/25562)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Constant Interpolated Strings](https://github.com/dotnet/csharplang/issues/2951)
 
-### Visual Basic 
+### Visual Basic
 
-- ![Completed] .NET Core appropriate features of the Visual Basic Runtime (Microsoft.VisualBasic.dll) ported to .NET 5.0
-- ![Completed] Single instance application support
-- ![In Progress] WinForms support in Visual Studio (designer and events)
-- ![In Progress] Visual Basic Application Models ported to .NET 5.0
+- ![Completed](media/status-completed.png "Completed icon") .NET Core appropriate features of the Visual Basic Runtime (Microsoft.VisualBasic.dll) ported to .NET 5.0
+- ![Completed](media/status-completed.png "Completed icon") Single instance application support
+- ![In Progress](media/status-in-progress.png "In Progress icon") WinForms support in Visual Studio (designer and events)
+- ![In Progress](media/status-in-progress.png "In Progress icon") Visual Basic Application Models ported to .NET 5.0
 - ![Completed](media/status-completed.png "Completed icon") [Line continuation comments](https://github.com/dotnet/vblang/issues/65)
 - ![Completed](media/status-completed.png "Completed icon") [Relax null-coalescing operator requirements](https://github.com/dotnet/vblang/issues/339)
 
