@@ -137,9 +137,9 @@ Please see the following links to view work items and themes across:
 ## CLI/SDK and MSBuild
 
 
-- ![Completed](media/status-completed.png "Completed icon") [Changes to Target Framework Moniker - TFM](https://github.com/dotnet/designs/blob/master/accepted/2020/net5/net5.md) (done)
-- ![In Planning](media/status-in-planning.png "In Planning icon") Xamarin runs on .NET and via the CLI (planned)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Optional Workload infrastructure](https://github.com/dotnet/designs/blob/107b50feec105b7c2b67b37acb322054e2255df5/accepted/2020/workloads/workloads.md) (in progress)
+- ![Completed](media/status-completed.png "Completed icon") [Changes to Target Framework Moniker - TFM](https://github.com/dotnet/designs/blob/master/accepted/2020/net5/net5.md)
+- ![In Planning](media/status-in-planning.png "In Planning icon") Xamarin runs on .NET and via the CLI
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Optional Workload infrastructure](https://github.com/dotnet/designs/blob/107b50feec105b7c2b67b37acb322054e2255df5/accepted/2020/workloads/workloads.md)
 - ![In Planning](media/status-in-planning.png "In Planning icon") Acquisition improvements
 - ![In Progress](media/status-in-progress.png "In Progress icon") Improvements to templates (performance and list output)
 - ![In Planning](media/status-in-planning.png "In Planning icon") Improvements to tab CLI tab completion and parsing
