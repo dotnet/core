@@ -102,3 +102,10 @@ Items in each section include the following icons:
 
 ## CLI
 
+## Desktop
+
+### WPF
+
+### WinForms
+
+## Xamarin
