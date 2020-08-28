@@ -113,12 +113,18 @@ Please see the following links to view work items and themes across:
 
 ### F# 5
 
+- ![Completed](media/status-completed.png "Completed icon") `nameof` support
+- ![Completed](media/status-completed.png "Completed icon") String interpolation
 - ![Completed](media/status-completed.png "Completed icon") Open type declarations
-- ![Completed](media/status-completed.png "Completed icon") nameof
-- ![In Progress](media/status-in-progress.png "In Progress icon") Unmanaged generic constraints
-- ![In Progress](media/status-in-progress.png "In Progress icon") String interpolation
-- ![Completed](media/status-completed.png "Completed icon") Overloads of custom keywords in computation expressions
+- ![Completed](media/status-completed.png "Completed icon") Improved F# quotations: constraints retained in quotation metadata
+- ![Completed](media/status-completed.png "Completed icon") Improved Computation Expressions: Applicative forms
+- ![Completed](media/status-completed.png "Completed icon") Improved Computation Expressions: Overloads for custom keywords
+- ![Completed](media/status-completed.png "Completed icon") Consistent slicing for FSharp.Core collection types
+- ![Completed](media/status-completed.png "Completed icon") Fixed-index slicing for 3D and 4D arrays
 - ![Completed](media/status-completed.png "Completed icon") Interfaces can be implemented at different generic instantiations
+- ![Completed](media/status-completed.png "Completed icon") Improved .NET interop: consumption support for Default Interface Members
+- ![Completed](media/status-completed.png "Completed icon") Improved .NET interop: type-directed implicit conversions for `Nullable` value types
+- ![In Progress](media/status-in-progress.png "In Progress icon") Support for reverse indexes in collection types
 
 ## CLI
 
