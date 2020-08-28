@@ -110,8 +110,12 @@ Please see the following links to view work items and themes across:
 - ![Completed](media/status-completed.png "Completed icon") [Default in deconstruction](https://github.com/dotnet/roslyn/pull/25562)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Constant Interpolated Strings](https://github.com/dotnet/csharplang/issues/2951)
 
-### Visual Basic 16.0
+### Visual Basic 
 
+- ![Completed] .NET Core appropriate features of the Visual Basic Runtime (Microsoft.VisualBasic.dll) ported to .NET 5.0
+- ![Completed] Single instance application support
+- ![In Progress] WinForms support in Visual Studio (designer and events)
+- ![In Progress] Visual Basic Application Models ported to .NET 5.0
 - ![Completed](media/status-completed.png "Completed icon") [Line continuation comments](https://github.com/dotnet/vblang/issues/65)
 - ![Completed](media/status-completed.png "Completed icon") [Relax null-coalescing operator requirements](https://github.com/dotnet/vblang/issues/339)
 
@@ -130,7 +134,19 @@ Please see the following links to view work items and themes across:
 - ![Completed](media/status-completed.png "Completed icon") Improved .NET interop: type-directed implicit conversions for `Nullable` value types
 - ![In Progress](media/status-in-progress.png "In Progress icon") Support for reverse indexes in collection types
 
-## CLI
+## CLI/SDK and MSBuild
+
+- ![Completed][Changes to Target Framework Moniker - TFM] (https://github.com/dotnet/designs/blob/master/accepted/2020/net5/net5.md) (done)
+- ![Planned]Xamarin runs on .NET and via the CLI (planned)
+- ![In Progress][Optional Workload infrastructure](https://github.com/dotnet/designs/blob/107b50feec105b7c2b67b37acb322054e2255df5/accepted/2020/workloads/workloads.md) (in progress)
+- ![In Planning]Acquisition improvements
+- ![In Progress]Improvements to templates (performance and list output)
+- ![In Planning]Improvements to tab CLI tab completion and parsing
+- ![Completed][Online Structured Log Viewer for MSBuild](https://live.msbuildlog.com)
+- ![Completed][Solution filter support in MSBuild] (https://github.com/dotnet/msbuild/issues/4097)
+- ![Completed][Low priority builds for MSBuild](https://github.com/dotnet/msbuild/pull/4162)
+- ![In Progress][Resolve Assembly References (RAR) pre-built cache](https://github.com/dotnet/msbuild/issues/5247)
+- ![In Progress][Share RAR cache between projects](https://github.com/dotnet/msbuild/blob/master/documentation/specs/rar-as-service.md)
 
 ## Desktop
 
