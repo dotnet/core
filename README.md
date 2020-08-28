@@ -33,6 +33,8 @@ The latest major release is [.NET Core 3.1](release-notes/3.1). The latest patch
 
 The .NET Core team encourages [contributions](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
 
+Check the [product roadmap](https://aka.ms/dotnet-product-roadmap) to see what the team is focusing on.
+
 ### Community
 
 This project uses the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct) to define expected conduct in our community.

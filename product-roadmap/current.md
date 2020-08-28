@@ -24,6 +24,10 @@ Items in each section include the following icons:
   - ![In Progress](media/status-in-progress.png "In Progress icon") [How to upload files in Blazor App](https://github.com/dotnet/aspnetcore/issues/12205)
   - ![In Progress](media/status-in-progress.png "In Progress icon") [Required parameters to blazor components (runtime check)](https://github.com/dotnet/aspnetcore/issues/11815)
 
+## gRPC
+
+## Tye
+
 ## EF
 
 [EF Core 5.0 plan](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)
