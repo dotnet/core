@@ -61,7 +61,19 @@ Items in each section include the following icons:
 
 ## .NET Interactive
 
-- ![In Progress](media/status-in-progress.png "In Progress icon") F# support in .NET Interactive and Jupyter Notebooks scenarios
+[Details](https://github.com/dotnet/interactive/issues/392)
+
+- ![Completed](media/status-completed.png "Completed icon") Multi Language support for Jupyter Notebooks (C#, F#, PowerShell)
+- ![In Progress](media/status-in-progress.png "In Progress icon") .NET Notebooks support in VS code Support
+- ![In Progress](media/status-in-progress.png "In Progress icon") Improve Productivity
+- ![In Progress](media/status-in-progress.png "In Progress icon") .NET Interactive for makers
+- ![Completed](media/status-completed.png "Completed icon") [Documentation](https://github.com/dotnet/interactive/tree/main/docs) - done but always improving
+- ![In Planning](media/status-in-planning.png "In Planning icon") Automation / DevOps
+
+Please see the following links to view work items and themes across:
+- ![Completed](media/status-completed.png "Completed icon") [Preview 3](https://github.com/dotnet/interactive/issues/507)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Preview 4](https://github.com/dotnet/interactive/issues/508)
+- [.NET Interactive GA](https://github.com/dotnet/interactive/issues/509)
 
 ## Languages
 
