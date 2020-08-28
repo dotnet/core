@@ -112,10 +112,10 @@ Please see the following links to view work items and themes across:
 
 ### Visual Basic 
 
-- ![Completed] .NET Core appropriate features of the Visual Basic Runtime (Microsoft.VisualBasic.dll) ported to .NET 5.0
-- ![Completed] Single instance application support
-- ![In Progress] WinForms support in Visual Studio (designer and events)
-- ![In Progress] Visual Basic Application Models ported to .NET 5.0
+- ![Completed](media/status-completed.png "Completed icon") .NET Core appropriate features of the Visual Basic Runtime (Microsoft.VisualBasic.dll) ported to .NET 5.0
+- ![Completed](media/status-completed.png "Completed icon") Single instance application support
+- ![In Progress](media/status-in-progress.png "In Progress icon") WinForms support in Visual Studio (designer and events)
+- ![In Progress](media/status-in-progress.png "In Progress icon") Visual Basic Application Models ported to .NET 5.0
 - ![Completed](media/status-completed.png "Completed icon") [Line continuation comments](https://github.com/dotnet/vblang/issues/65)
 - ![Completed](media/status-completed.png "Completed icon") [Relax null-coalescing operator requirements](https://github.com/dotnet/vblang/issues/339)
 
@@ -136,17 +136,18 @@ Please see the following links to view work items and themes across:
 
 ## CLI/SDK and MSBuild
 
-- ![Completed][Changes to Target Framework Moniker - TFM] (https://github.com/dotnet/designs/blob/master/accepted/2020/net5/net5.md) (done)
-- ![Planned]Xamarin runs on .NET and via the CLI (planned)
-- ![In Progress][Optional Workload infrastructure](https://github.com/dotnet/designs/blob/107b50feec105b7c2b67b37acb322054e2255df5/accepted/2020/workloads/workloads.md) (in progress)
-- ![In Planning]Acquisition improvements
-- ![In Progress]Improvements to templates (performance and list output)
-- ![In Planning]Improvements to tab CLI tab completion and parsing
-- ![Completed][Online Structured Log Viewer for MSBuild](https://live.msbuildlog.com)
-- ![Completed][Solution filter support in MSBuild] (https://github.com/dotnet/msbuild/issues/4097)
-- ![Completed][Low priority builds for MSBuild](https://github.com/dotnet/msbuild/pull/4162)
-- ![In Progress][Resolve Assembly References (RAR) pre-built cache](https://github.com/dotnet/msbuild/issues/5247)
-- ![In Progress][Share RAR cache between projects](https://github.com/dotnet/msbuild/blob/master/documentation/specs/rar-as-service.md)
+
+- ![Completed](media/status-completed.png "Completed icon") [Changes to Target Framework Moniker - TFM](https://github.com/dotnet/designs/blob/master/accepted/2020/net5/net5.md) (done)
+- ![In Planning](media/status-in-planning.png "In Planning icon") Xamarin runs on .NET and via the CLI (planned)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Optional Workload infrastructure](https://github.com/dotnet/designs/blob/107b50feec105b7c2b67b37acb322054e2255df5/accepted/2020/workloads/workloads.md) (in progress)
+- ![In Planning](media/status-in-planning.png "In Planning icon") Acquisition improvements
+- ![In Progress](media/status-in-progress.png "In Progress icon") Improvements to templates (performance and list output)
+- ![In Planning](media/status-in-planning.png "In Planning icon") Improvements to tab CLI tab completion and parsing
+- ![Completed](media/status-completed.png "Completed icon") [Online Structured Log Viewer for MSBuild](https://live.msbuildlog.com)
+- ![Completed](media/status-completed.png "Completed icon") [Solution filter support in MSBuild](https://github.com/dotnet/msbuild/issues/4097)
+- ![Completed](media/status-completed.png "Completed icon") [Low priority builds for MSBuild](https://github.com/dotnet/msbuild/pull/4162)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Resolve Assembly References (RAR) pre-built cache](https://github.com/dotnet/msbuild/issues/5247)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Share RAR cache between projects](https://github.com/dotnet/msbuild/blob/master/documentation/specs/rar-as-service.md)
 
 ## Desktop
 
