@@ -12,12 +12,11 @@ Items in each section include the following icons:
 
 These are some key moments in our .NET 5.0 roadmap. 
 
-| Date | Moment/Rally Point | Key Message |
-| :------------- | :---------- | :----------- |
-|  Sep 2020 | Ignite   |     |
-|  Nov 2020 | .NET Conf   | This year .NET 5.0 will launch at .NET Conf 2020! |
-|  Nov 2020 | __**.NET 5.0 GA**__   |     |
-
+| Date      | Moment/Rally Point | Key Message     |
+| :-------- | :----------------- | :-------------- |
+|  Sep 2020 | Ignite             |                 |
+|  Nov 2020 | .NET Conf          | .NET 5.0 Launch |
+|  Nov 2020 | **.NET 5.0 GA**    |                 |
 
 ## ASP.NET
 
@@ -194,6 +193,9 @@ Please see the following links to view work items and themes across:
 ## Desktop
 
 ### WPF
+
+- ![In Progress](media/status-in-progress.png "In Progress icon") Accessibility updates to .NET 5
+- ![In Progress](media/status-in-progress.png "In Progress icon") ARM64 support
 
 ### WinForms
 
