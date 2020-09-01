@@ -45,6 +45,20 @@ Items in each section include the following icons:
 - ![Completed](media/status-completed.png "Completed icon") Performance improvements
 
 ## ML.NET
+ 
+- ![Completed](media/status-completed.png "Completed icon") Local GPU training for Image Classification in Model Builder
+- ![Completed](media/status-completed.png "Completed icon") Add Ranking scenario to local ML.NET AutoML API
+- ![Completed](media/status-completed.png "Completed icon") Add new algorithm and root cause detection for anomaly detection
+- ![Completed](media/status-completed.png "Completed icon") Add time series seasonality and de-seasonality
+- ![In Progress](media/status-in-progress.png "In Progress icon") GA Model Builder in Visual Studio
+- ![In Progress](media/status-in-progress.png "In Progress icon") Add Azure Object Detection training to Model Builder
+- ![In Progress](media/status-in-progress.png "In Progress icon") Add local Image Classification training scenario to ML.NET CLI
+- ![In Progress](media/status-in-progress.png "In Progress icon") Add advanced options for data loading in Model Builder
+- ![In Progress](media/status-in-progress.png "In Progress icon") Improve Azure training from Model Builder (better errors, multi-GPU multi-machine, reduced overhead)
+- ![In Planning](media/status-in-planning.png "In Planning icon") Add local Ranking scenario to tooling
+- ![In Progress](media/status-in-progress.png "In Progress icon") Add support for re-opening Model Builder and adding multiple models to a project
+- ![In Planning](media/status-in-planning.png "In Planning icon") Add integration with MLOps
+- ![In Planning](media/status-in-planning.png "In Planning icon") Support all local and Azure AutoML supported scenarios in tooling
 
 ## Spark
 
