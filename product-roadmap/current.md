@@ -179,4 +179,9 @@ Please see the following links to view work items and themes across:
 
 ### WinForms
 
+-	![In Progress](media/status-in-progress.png "In Progress icon") Visual Studio WinForms .NET Core Designer
+-	![In Progress](media/status-in-progress.png "In Progress icon") Accessibility enhancements to support common UIA patterns so that Accessibility tools (like Narrator and others) can more easily interact with our controls
+-	![In Progress](media/status-in-progress.png "In Progress icon") Customer reported issues and migration blockers
+-	![In Progress](media/status-in-progress.png "In Progress icon") Keep pace with changes in the underlying OS to ensure compatibility with the latest changes in Win10.
+
 ## Xamarin
