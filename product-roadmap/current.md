@@ -31,7 +31,6 @@ These are some key moments in our .NET 5.0 roadmap.
   - ![In Progress](media/status-in-progress.png "In Progress icon") [Build performance improvements for Blazor](https://github.com/dotnet/aspnetcore/issues/22566)
   - ![Completed](media/status-completed.png "Completed icon") [Blazor performance optimizations](https://github.com/dotnet/aspnetcore/issues/22432)
   - ![In Progress](media/status-in-progress.png "In Progress icon") [How to upload files in Blazor App](https://github.com/dotnet/aspnetcore/issues/12205)
-  - ![In Progress](media/status-in-progress.png "In Progress icon") [Required parameters to blazor components (runtime check)](https://github.com/dotnet/aspnetcore/issues/11815)
 
 ## gRPC
 
