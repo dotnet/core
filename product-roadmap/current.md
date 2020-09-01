@@ -1,6 +1,6 @@
 # .NET Product Roadmap
 
-This document provides a peek into the work we've planned for .NET through December 2020.
+This document provides a peek into the work we've planned for .NET through __December 2020__.
 
 The .NET product roadmap communicates project priorities for evolving and extending the scope of the product. New product experiences and features will include changes in various [layers of the product](../Documentation/core-repos.md), in some combination of the runtime, framework, language compilers and tools. Each component may have its own component-level roadmap that is available in the repository for that component.
 
@@ -9,6 +9,12 @@ Items in each section include the following icons:
 - ![In Planning](media/status-in-planning.png "In Planning icon") - In Planning
 - ![In Progress](media/status-in-progress.png "In Progress icon") - In Progress
 - ![Completed](media/status-completed.png "Completed icon") - Completed
+
+| Date       | Rally point/Moment     | Key Message     |
+| :------------- | :----------: | -----------: |
+|  Sep 2020 | __**Ignite**__   |     |
+|  Nov 2020 | __**.NET Conf**__   |     |
+
 
 ## ASP.NET
 
