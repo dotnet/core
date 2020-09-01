@@ -10,7 +10,7 @@ Items in each section include the following icons:
 - ![In Progress](media/status-in-progress.png "In Progress icon") - In Progress
 - ![Completed](media/status-completed.png "Completed icon") - Completed
 
-These are some key points/moments in our .NET 5.0 roadmap. 
+These are some key moments in our .NET 5.0 roadmap. 
 
 | Date | Moment/Rally Point | Key Message |
 | :------------- | :---------- | :----------- |
