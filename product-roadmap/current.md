@@ -35,6 +35,14 @@ These are some key moments in our .NET 5.0 roadmap.
 
 ## gRPC
 
+- ![Completed](media/status-completed.png "Completed icon") gRPC-web
+- ![Completed](media/status-completed.png "Completed icon") gRPC-web client support in Blazor
+- ![Completed](media/status-completed.png "Completed icon") Improve gRPC server performance (to match C++/Go)
+- ![Completed](media/status-completed.png "Completed icon") Use Span APIs in protobuf marshaller (to reduce allocations)
+- ![Completed](media/status-completed.png "Completed icon") Configurable HTTP/2 PING frames
+- ![Completed](media/status-completed.png "Completed icon") Instrument gRPC for use with OpenTelemetry
+- ![In Progress](media/status-in-progress.png "In Progress icon") Introduce additional transports (e.g., Unix-domain sockets, Windows Named Pipes)
+
 ## Tye
 
 - ![Completed](media/status-completed.png "Completed icon") Run many services with one command
