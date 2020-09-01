@@ -41,6 +41,8 @@ These are some key moments in our .NET 5.0 roadmap.
 - ![Completed](media/status-completed.png "Completed icon") Use Span APIs in protobuf marshaller (to reduce allocations)
 - ![Completed](media/status-completed.png "Completed icon") Configurable HTTP/2 PING frames
 - ![Completed](media/status-completed.png "Completed icon") Instrument gRPC for use with OpenTelemetry
+- ![Completed](media/status-completed.png "Completed icon") Add support for HttpSysServer
+- ![In Progress](media/status-in-progress.png "In Progress icon") Add support for IIS
 - ![In Progress](media/status-in-progress.png "In Progress icon") Introduce additional transports (e.g., Unix-domain sockets, Windows Named Pipes)
 
 ## Tye
