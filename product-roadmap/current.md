@@ -28,6 +28,16 @@ Items in each section include the following icons:
 
 ## Tye
 
+- ![Completed](media/status-completed.png "Completed icon") Run many services with one command
+- ![Completed](media/status-completed.png "Completed icon") Use dependencies in containers
+- ![Completed](media/status-completed.png "Completed icon") Discover addresses of other services using simple conventions
+- ![Completed](media/status-completed.png "Completed icon") Automatically containerizing .NET applications
+- ![Completed](media/status-completed.png "Completed icon") Deploy to Kubernetes
+- ![Completed](media/status-completed.png "Completed icon") Generating Kubernetes manifests with minimal knowledge or configuration
+- ![Completed](media/status-completed.png "Completed icon") Using the same conventions as development to keep it consistent
+- ![Completed](media/status-completed.png "Completed icon") Support Azure Functions in development
+- ![In Progress](media/status-in-progress.png "In Progress icon") VS Code tooling
+ 
 ## EF
 
 [EF Core 5.0 plan](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)
