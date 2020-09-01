@@ -12,8 +12,8 @@ Items in each section include the following icons:
 
 These are some key points/moments in our .NET 5.0 roadmap. 
 
-| Date       | Rally point/Moment     | Key Message     |
-| :------------- | :----------: | -----------: |
+| Date | Moment/Rally Point | Key Message |
+| :------------- | :---------- | :----------- |
 |  Sep 2020 | Ignite   |     |
 |  Nov 2020 | .NET Conf   | This year .NET 5.0 will launch at .NET Conf 2020! |
 |  Nov 2020 | __**.NET 5.0 GA**__   |     |
