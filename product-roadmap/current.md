@@ -194,8 +194,9 @@ Please see the following links to view work items and themes across:
 
 ### WPF
 
-- ![In Progress](media/status-in-progress.png "In Progress icon") Accessibility updates to .NET 5
-- ![In Progress](media/status-in-progress.png "In Progress icon") ARM64 support
+- ![In Progress](media/status-in-progress.png "In Progress icon") WPF Integration with .NET 5
+- ![In Progress](media/status-in-progress.png "In Progress icon") Accessibility updates on app sample bugs
+- ![In Planning](media/status-in-planning.png "In Planning icon") ARM64 support
 
 ### WinForms
 
