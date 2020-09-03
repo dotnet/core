@@ -4,6 +4,11 @@ This document provides a peek into the work we've planned for .NET through __Dec
 
 The .NET product roadmap communicates project priorities for evolving and extending the scope of the product. New product experiences and features will include changes in various [layers of the product](../Documentation/core-repos.md), in some combination of the runtime, framework, language compilers and tools. Each component may have its own component-level roadmap that is available in the repository for that component.
 
+These are some of the high level themes for the .NET 5.0 release. A more comprehensive list of the work we’re doing organized by technology can be found further below in this document.
+- Developers can build great cloud infrastructure components with .NET.
+- Developers can build great mobile apps for new devices with .NET 5 – we will support not only the latest in iOS and Android, but unify the platform and deliver first-class support for delivering cross-platform applications.
+- .NET 5.0 has excellent fundamentals - continue to deliver on reliability, performance, diagnosability, compliance, security, acquisition and deployment.  
+
 These are some key moments in our .NET 5.0 roadmap. 
 
 | Date      | Moment/Rally Point | Key Message     |
