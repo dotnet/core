@@ -1,8 +1,8 @@
-# .NET Core Roadmap
+# .NET Release Schedule
 
-The .NET Core roadmap communicates project priorities for evolving and extending the scope of the product. New product experiences and features will include changes in various [layers of the product](Documentation/core-repos.md), in some combination of the runtime, framework, language compilers and tools. Each component may have its own component-level roadmap that will be available in the repo for that component.
+This document covers the upcoming release dates for .NET and .NET Core.
 
-The .NET Core team is currently focused on Web, Cloud, Microservices, Containers, and Console applications. We encourage the community to work with us to improve .NET Core for these scenarios and extend it for others.
+If you're looking for the product roadmap, see the [current roadmap](product-roadmap/current.md) document.
 
 ## Released Versions
 
@@ -31,7 +31,7 @@ Milestone information is available on most repos, for example [dotnet/runtime mi
 
 ## Feedback
 
-The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo. You can also create issues in other [.NET Core repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
+The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo. You can also create issues in other [.NET repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
 
 Although mostly obvious, please give us feedback that will give us insight on the following points:
 
