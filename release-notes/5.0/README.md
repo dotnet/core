@@ -4,6 +4,7 @@ The following .NET 5 releases have been shipped. You must be on the latest patch
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
+| 2020/09/14 | [5.0.0 RC 1](https://github.com/dotnet/core/blob/master/release-notes/5.0/preview/5.0.0-rc.1.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
 | 2020/08/25 | [5.0.0 Preview 8](https://github.com/dotnet/core/blob/master/release-notes/5.0/preview/5.0.0-preview.8.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
 | 2020/07/21 | [5.0.0 Preview 7](https://github.com/dotnet/core/blob/master/release-notes/5.0/preview/5.0.0-preview.7.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
 | 2020/06/25 | [5.0.0 Preview 6](https://github.com/dotnet/core/blob/master/release-notes/5.0/preview/5.0.0-preview.6.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
