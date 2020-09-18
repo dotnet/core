@@ -22,7 +22,7 @@ The following binaries are licensed with the
 The following binaries are licensed with the 
 [Windows SDK License](https://docs.microsoft.com/legal/windows-sdk/license):
 
-* .NET Core: api-ms-*.* 
+* .NET Core: api-ms-\*.\*
 * .NET Core: ucrtbase.dll 
 * WPF: D3DCompiler_47_cor3.dll
 
