@@ -1,4 +1,4 @@
-# License information for .NET
+# License information for .NET on Windows
 
 The Windows distribution of .NET 5.0 contains files that are provided under 
 multiple licenses.
