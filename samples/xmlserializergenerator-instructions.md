@@ -1,15 +1,14 @@
  # Using Xml Serializer Generator on .NET Core
 
-Like the Xml Serializer Generator (sgen.exe) on desktop, Microsoft.XmlSerializer.Generator NuGet package is the solution for .NET Core and .NET Standard Libraries. It creates an Xml serialization assembly for types contained in an assembly to improve the startup performance of Xml serialization when serializing or de-serializing objects of those types using XmlSerializer. 
+Like the Xml Serializer Generator (sgen.exe) on desktop, Microsoft.XmlSerializer.Generator NuGet package is the solution for .NET Core and .NET Standard Libraries. It creates an Xml serialization assembly for types contained in an assembly to improve the startup performance of Xml serialization when serializing or de-serializing objects of those types using XmlSerializer.
 
-You can start using the tool today following the instructions below. 
+You can start using the tool today following the instructions below.
 
 ## Prerequisites
 
 The following is required for Microsoft.XmlSerializer.Generator to work. You can use command `dotnet --info` to check which versions of .NET Core SDK and runtime you may already have installed.
 
-* [.NET Core SDK 2.0.2 or later](https://www.microsoft.com/net/download/windows)
-* [.NET Core runtime 2.0.3 or later](https://github.com/dotnet/core/blob/master/release-notes/download-archives/2.0.3.md)
+* [.NET Core SDK 2.0.2 or later](https://dotnet.microsoft.com/download)
   
 ## Instructions
 
