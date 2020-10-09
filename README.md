@@ -42,13 +42,13 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 
 ## .NET Foundation
 
-The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundation.org).
+The .NET Core platform is part of the [.NET Foundation](https://www.dotnetfoundation.org).
 
 ## Licenses
 
 .NET Core repos typically use either the [MIT](LICENSE.TXT) or
-[Apache 2](http://www.apache.org/licenses/LICENSE-2.0) licenses for code.
+[Apache 2](https://www.apache.org/licenses/LICENSE-2.0) licenses for code.
 Some projects license documentation and other forms of content under
-[Creative Commons Attribution 4.0](http://creativecommons.org/licenses/by/4.0/).
+[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 See specific [repos](Documentation/core-repos.md) to understand the license used.
