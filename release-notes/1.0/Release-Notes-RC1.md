@@ -3,7 +3,7 @@
 ## RC1 released 11/18/2015
 
 Full details on this release can be read about in this blog post:
-[Announcing .NET Core and ASP.NET 5 RC](http://aka.ms/netcorerc)
+[Announcing .NET Core and ASP.NET 5 RC](https://aka.ms/netcorerc)
 
 Supported platforms for this release are Ubuntu 14.04 LTS, OS X 10.10, and Windows 7+.
 

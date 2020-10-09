@@ -119,7 +119,7 @@ If a Debian machine is set in a certain way it may cause the native host (`dotne
 ## Uninstalling/reinstalling the PKG on OS X
 OS X doesn't really have an uninstall capacity for PKGs like Windows has for 
 MSIs. There is, however, a way to remove the bits as well as the "recipe" for 
-dotnet. More information can be found on [this SuperUser question](http://superuser.com/questions/36567/how-do-i-uninstall-any-apple-pkg-package-file).
+dotnet. More information can be found on [this SuperUser question](https://superuser.com/questions/36567/how-do-i-uninstall-any-apple-pkg-package-file).
 
 # Preview 3 tooling known issues
 
