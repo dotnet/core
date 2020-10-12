@@ -5,7 +5,7 @@
 Describe an Epic that will be delivered over the release.
 
 
-<!--We will include a markdown list of all Experiences uner this Epic-->
+<!--We will include a markdown list of all Experiences under this Epic-->
 
 ### Experiences
 
