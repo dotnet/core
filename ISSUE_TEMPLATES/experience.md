@@ -5,7 +5,7 @@
 Describe a specific and tangible customer experience that is delivered in a few sprints.
 
 
-<!--We will include a markdown list of all User Stories uner this Experience-->
+<!--We will include a markdown list of all User Stories under this Experience-->
 
 
 ### User Stories
