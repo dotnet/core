@@ -2,7 +2,7 @@
 
 This page provides an archive of previously released versions of the .NET Core runtime, libraries and the .NET Core SDK.
 
-### .NET Core 2.2 - [Current](https://www.microsoft.com/net/core/support) release
+### .NET Core 2.2 - [Current](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) release
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
@@ -18,7 +18,7 @@ This page provides an archive of previously released versions of the .NET Core r
 | 2019/01/08 | 2.2.1 with SDK 2.2.102 | [release notes](2.2/2.2.1/2.2.1.md) | [download](2.2/2.2.1/2.2.1-download.md) |
 | 2018/12/04 | 2.2.0 with SDK 2.2.100 | [release notes](2.2/2.2.0/2.2.0.md) | [download](2.2/2.2.0/2.2.0-download.md) |
 
-### .NET Core 2.1 - [LTS](https://www.microsoft.com/net/core/support) release
+### .NET Core 2.1 - [LTS](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) release
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
@@ -38,7 +38,7 @@ This page provides an archive of previously released versions of the .NET Core r
 | 2018/06/19 | 2.1.1 with SDK 2.1.301 | [release notes](2.1/2.1.1.md) | [download](download-archives/2.1.1-download.md) |
 | 2018/05/30 | 2.1.0 with SDK 2.1.300 | [release notes](2.1/2.1.0.md) | [download](download-archives/2.1.0-download.md) |
 
-### .NET Core 1.1 - [EOL](https://www.microsoft.com/net/core/support) release
+### .NET Core 1.1 - [EOL](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) release
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
@@ -56,7 +56,7 @@ This page provides an archive of previously released versions of the .NET Core r
 | 2017/04/13 | 1.1.1 with SDK 1.0.3                | [release notes](https://github.com/dotnet/cli/releases/tag/v1.0.3) | [download](download-archives/1.0.3-sdk-download.md) |
 | 2017/03/07 | 1.1.1 with SDK 1.0.1                | [release notes](1.1/1.1.1.md) | [download](download-archives/1.1.1-download.md) |
 
-### .NET Core 1.0 - [EOL](https://www.microsoft.com/net/core/support) release
+### .NET Core 1.0 - [EOL](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) release
 
 | Release Date | Description | Release Notes | |
 | :-- | :-- | :--: | :--: |
