@@ -3,7 +3,7 @@
 ## RC2 released 5/16/2016
 
 Details on this release can be read about on
-[the .NET Blog](https://blogs.msdn.microsoft.com/dotnet/2016/05/16/announcing-net-core-rc2/) and if you haven't already discovered the updated [.NET Portal](http://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
+[the .NET Blog](https://blogs.msdn.microsoft.com/dotnet/2016/05/16/announcing-net-core-rc2/) and if you haven't already discovered the updated [.NET Portal](https://go.microsoft.com/fwlink/?LinkID=798306), make that your next destination for getting started with .NET Core.
 
 Before installing RC2, please have a look at the [RC1 to RC2 Upgrade Roadmap](RC1-RC2_Upgrade.md). All previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release.
 
@@ -37,8 +37,8 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 ### Introduction of .NET Core API Documentation
 
-* API: http://dotnet.github.io/api/
-* Conceptual: http://dotnet.github.io/docs
+* API: https://docs.microsoft.com/dotnet/api/
+* Conceptual: https://docs.microsoft.com/dotnet/
 
 ### Runtime
 

@@ -8,7 +8,7 @@ This document lists known issues for *.NET Core 1.0 RC2* and *.NET Core SDK 1.0 
 
 ## .NET Core 1.0 SDK Preview 1
 
-All previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release. Details and steps to uninstall can be found on the [.NET Core Getting Started](http://go.microsoft.com/fwlink/?LinkID=798687) pages and in the [RC1 to RC2 Upgrade Roadmap](RC1-RC2_Upgrade.md).
+All previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release. Details and steps to uninstall can be found on the [.NET Core Getting Started](https://go.microsoft.com/fwlink/?LinkID=798687) pages and in the [RC1 to RC2 Upgrade Roadmap](RC1-RC2_Upgrade.md).
 
 https://github.com/dotnet/cli/issues/2833
 
