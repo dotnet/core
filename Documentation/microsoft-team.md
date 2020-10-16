@@ -10,8 +10,8 @@ You need to link your GitHub and @microsoft.com accounts. Click the link:
 
 You need to join teams in two organizations. Click the two links:
 
-* [Add yourself to the dotnet org](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
-* [Add yourself to the microsoft org](https://repos.opensource.microsoft.com/Microsoft/teams/dotnet/join/)
+* [Join the dotnet org and the microsoft team in that org](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
+* [Join the microsoft org and the dotnet team in that org](https://repos.opensource.microsoft.com/Microsoft/teams/dotnet/join/)
 
 After you join the teams: 
 
