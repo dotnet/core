@@ -1,3 +1,9 @@
+---
+name: User Story
+about: Use this template for creating user stories
+labels: User Story
+---
+
 <!--This is  a template - feel free to delete any and all of it and replace as appropriate-->
 
 ### Summary

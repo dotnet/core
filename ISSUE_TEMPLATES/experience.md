@@ -1,3 +1,9 @@
+---
+name: Experience
+about: Use this template for creating experiences
+labels: Experience
+---
+
 <!--This is  a template - feel free to delete any and all of it and replace as appropriate-->
 
 ### Summary
