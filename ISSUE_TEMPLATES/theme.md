@@ -1,7 +1,7 @@
 ---
 name: Theme
 about: Use this template for creating Themes
-labels: THeme
+labels: Theme
 ---
 
 <!--This is  a template - feel free to delete any and all of it and replace as appropriate-->
