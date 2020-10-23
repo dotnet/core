@@ -1,7 +1,9 @@
 ---
 name: Theme
 about: Use this template for creating Themes
+title: ''
 labels: Theme
+assignees: ''
 ---
 
 <!--This is  a template - feel free to delete any and all of it and replace as appropriate-->
