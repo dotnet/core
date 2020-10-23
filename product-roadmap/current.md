@@ -95,8 +95,8 @@ Items in each section include the following icons:
 ## Spark
 
 - ![Completed](media/status-completed.png "Completed icon") Improve debugging experience
-- ![In Progress](media/status-in-progress.png "In Progress icon") Spark 2.4 API compatibility
-- ![In Progress](media/status-in-progress.png "In Progress icon") Spark 3.0 API compatibility
+- ![Completed](media/status-completed.png "Completed icon") Spark 2.4 API compatibility
+- ![Completed](media/status-completed.png "Completed icon") Spark 3.0 API compatibility
 - ![In Planning](media/status-in-planning.png "In Planning icon") .NET Core project templates for .NET for Spark
 - ![In Planning](media/status-in-planning.png "In Planning icon") VS deploy for .NET for Spark jobs
 
