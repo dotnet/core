@@ -11,8 +11,7 @@ The [.NET Core OS Lifecycle Policy](https://github.com/dotnet/core/blob/master/o
 This table describes support type, supported patch version and end of support date for .NET Core releases.
 
 |  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
-| -- | -- | -- | -- | -- |
-
+| :-- | :-- | :-- | :-- | :-- |
 | [.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | December 3, 2019 | LTS | [3.1.9](https://dotnet.microsoft.com/download/dotnet-core/3.1) | December 3, 2022 |
 | [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | LTS | [2.1.23](https://dotnet.microsoft.com/download/dotnet-core/2.1) | August 21, 2021 |
 
@@ -54,7 +53,7 @@ End of support refers to the date when Microsoft no longer provides fixes, updat
 ### Out of support .NET Core releases
 
 |  Version  |  End of Support |
-| -- | -- |
+| :-- | :-- |
 | [.NET Core 3.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) | [March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) |
 | [.NET Core 2.2](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-2/) | [December 23, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/)
 | [.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | [October 1, 2018](https://devblogs.microsoft.com/dotnet/net-core-2-0-will-reach-end-of-life-on-september-1-2018/)
