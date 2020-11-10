@@ -1,6 +1,6 @@
 # .NET Core Release Notes
 
-The latest supported release is [.NET Core 3.1](3.1).
+The latest supported release is [.NET Core 5.0](5.0).
 
 ## Latest Updates
 
