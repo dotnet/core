@@ -12,7 +12,8 @@ This table describes support type, supported patch version and end of support da
 
 |  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | December 3, 2019 | LTS | [3.1.9](https://dotnet.microsoft.com/download/dotnet-core/3.1) | December 3, 2022 |
+| [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | November 10, 2020 | Current | [5.0.0](https://dotnet.microsoft.com/download/dotnet-core/5.0) | 3 Months after .NET 6 is released |
+| [.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | December 3, 2019 | LTS | [3.1.10](https://dotnet.microsoft.com/download/dotnet-core/3.1) | December 3, 2022 |
 | [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) | May 30, 2018 | LTS | [2.1.23](https://dotnet.microsoft.com/download/dotnet-core/2.1) | August 21, 2021 |
 
 For previous versions, [see here](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -34,7 +35,6 @@ Both types of releases receive critical fixes throughout their lifecycle, for se
 
 LTS releases are supported for three years after the initial release.
 
-Note: .NET Core 1.x was released under an earlier definition of LTS. See: [.NET Core 1.x "shorter" LTS definition](https://github.com/dotnet/core/blob/e2f22a7106860c0e5dc98bb36dc648a779944ad5/microsoft-support.md#long-term-support-lts-releases).
 
 ### Current releases
 
