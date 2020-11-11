@@ -25,16 +25,16 @@ Items in each section include the following icons:
 
 ## ASP.NET
 
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Blazor](https://github.com/dotnet/aspnetcore/issues/21514)
+- ![Completed](media/status-completed.png "Completed icon") [Blazor](https://github.com/dotnet/aspnetcore/issues/21514)
   - ![Completed](media/status-completed.png "Completed icon") [Move Blazor to .NET 5](https://github.com/dotnet/aspnetcore/issues/20519)
   - ![Completed](media/status-completed.png "Completed icon") [CSS Isolation](https://github.com/dotnet/aspnetcore/issues/10170)
   - ![Completed](media/status-completed.png "Completed icon") [Support IAsyncDisposable](https://github.com/dotnet/aspnetcore/issues/9960)
   - ![Completed](media/status-completed.png "Completed icon") [Lazy loading of application areas](https://github.com/dotnet/aspnetcore/issues/5465)
   - ![Completed](media/status-completed.png "Completed icon") [Add focus support to BrowserRenderer](https://github.com/dotnet/aspnetcore/issues/17472)
   - ![Completed](media/status-completed.png "Completed icon") [Protected Browser Storage](https://github.com/dotnet/aspnetcore/issues/18755)
-  - ![In Progress](media/status-in-progress.png "In Progress icon") [Build performance improvements for Blazor](https://github.com/dotnet/aspnetcore/issues/22566)
+  - ![Completed](media/status-completed.png "Completed icon") [Build performance improvements for Blazor](https://github.com/dotnet/aspnetcore/issues/22566)
   - ![Completed](media/status-completed.png "Completed icon") [Blazor performance optimizations](https://github.com/dotnet/aspnetcore/issues/22432)
-  - ![In Progress](media/status-in-progress.png "In Progress icon") [How to upload files in Blazor App](https://github.com/dotnet/aspnetcore/issues/12205)
+  - ![Completed](media/status-completed.png "Completed icon") [How to upload files in Blazor App](https://github.com/dotnet/aspnetcore/issues/12205)
 
 ## gRPC
 
@@ -95,8 +95,8 @@ Items in each section include the following icons:
 ## Spark
 
 - ![Completed](media/status-completed.png "Completed icon") Improve debugging experience
-- ![In Progress](media/status-in-progress.png "In Progress icon") Spark 2.4 API compatibility
-- ![In Progress](media/status-in-progress.png "In Progress icon") Spark 3.0 API compatibility
+- ![Completed](media/status-completed.png "Completed icon") Spark 2.4 API compatibility
+- ![Completed](media/status-completed.png "Completed icon") Spark 3.0 API compatibility
 - ![In Planning](media/status-in-planning.png "In Planning icon") .NET Core project templates for .NET for Spark
 - ![In Planning](media/status-in-planning.png "In Planning icon") VS deploy for .NET for Spark jobs
 
