@@ -7,9 +7,9 @@ The .NET product roadmap communicates project priorities for evolving and extend
 These are some of the high level themes for the .NET 5.0 release. A more comprehensive list of the work we’re doing organized by technology can be found further below in this document.
 - Developers can build great cloud infrastructure components with .NET.
 - Developers can build great mobile apps for new devices with .NET 5 – we will support not only the latest in iOS and Android, but unify the platform and deliver first-class support for delivering cross-platform applications.
-- .NET 5.0 has excellent fundamentals - continue to deliver on reliability, performance, diagnosability, compliance, security, acquisition and deployment.  
+- .NET 5.0 has excellent fundamentals - continue to deliver on reliability, performance, diagnosability, compliance, security, acquisition and deployment.
 
-These are some key moments in our .NET 5.0 roadmap. 
+These are some key moments in our .NET 5.0 roadmap.
 
 | Date      | Moment/Rally Point | Key Message     |
 | :-------- | :----------------- | :-------------- |
@@ -59,7 +59,7 @@ Items in each section include the following icons:
 - ![Completed](media/status-completed.png "Completed icon") Using the same conventions as development to keep it consistent
 - ![Completed](media/status-completed.png "Completed icon") Support Azure Functions in development
 - ![In Progress](media/status-in-progress.png "In Progress icon") VS Code tooling
- 
+
 ## EF
 
 [EF Core 5.0 plan](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)
@@ -77,7 +77,7 @@ Items in each section include the following icons:
 - ![Completed](media/status-completed.png "Completed icon") Performance improvements
 
 ## ML.NET
- 
+
 - ![Completed](media/status-completed.png "Completed icon") Local GPU training for Image Classification in Model Builder
 - ![Completed](media/status-completed.png "Completed icon") Add Ranking scenario to local ML.NET AutoML API
 - ![Completed](media/status-completed.png "Completed icon") Add new algorithm and root cause detection for anomaly detection
@@ -131,7 +131,7 @@ Please see the following links to view work items and themes across:
 
 ### C# 9
 
-- ![Completed](media/status-completed.png "Completed icon") [Target-typed new](https://github.com/dotnet/csharplang/issues/100)  
+- ![Completed](media/status-completed.png "Completed icon") [Target-typed new](https://github.com/dotnet/csharplang/issues/100)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Relax ordering of `ref` and `partial` modifiers](https://github.com/dotnet/csharplang/issues/946)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Parameter null-checking](https://github.com/dotnet/csharplang/issues/2145)
 - ![Completed](media/status-completed.png "Completed icon") [Skip locals init](https://github.com/dotnet/csharplang/issues/1738)
@@ -210,8 +210,8 @@ Please see the following links to view work items and themes across:
 -	![In Progress](media/status-in-progress.png "In Progress icon") Keep pace with changes in the underlying OS to ensure compatibility with the latest changes in Win10.
 
 ## Xamarin
-- ![Completed](media/status-completed.png "Completed icon") [Android 11 / API 30 Support](https://docs.microsoft.com/en-us/xamarin/android/release-notes/11/11.0)
-- ![Completed](media/status-completed.png "Completed icon") [Android smaller APK sizes](https://docs.microsoft.com/en-us/xamarin/android/release-notes/11/11.0#smaller-app-package-sizes)
+- ![Completed](media/status-completed.png "Completed icon") [Android 11 / API 30 Support](https://docs.microsoft.com/xamarin/android/release-notes/11/11.0)
+- ![Completed](media/status-completed.png "Completed icon") [Android smaller APK sizes](https://docs.microsoft.com/xamarin/android/release-notes/11/11.0#smaller-app-package-sizes)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Xcode 12 and iOS 14 Support](https://github.com/xamarin/xamarin-macios/issues/8931)
 - ![In Progress](media/status-in-progress.png "In Progress icon") Hot Restart for Android
 - ![In Progress](media/status-in-progress.png "In Progress icon") AndroidX and Google Play Services Bindings Updates
@@ -219,13 +219,13 @@ Please see the following links to view work items and themes across:
 - ![In Planning](media/status-in-planning.png "In Planning icon") Xamarin.Essentials integration to .NET 6 BCL (System namespace)
 
 ### Xamarin.Forms 5
-- ![Completed](media/status-completed.png "Completed icon") [AppTheme aka Dark Mode support](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/theming/system-theme-changes)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [CarouselView](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/carouselview/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Drag-and-drop Gestures](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/gestures/drag-and-drop)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Gradient and Solid Brushes](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/brushes/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Shapes and Paths](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/shapes/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [SwipeView](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/swipeview)
+- ![Completed](media/status-completed.png "Completed icon") [AppTheme aka Dark Mode support](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/theming/system-theme-changes)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [CarouselView](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/carouselview/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Drag-and-drop Gestures](https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/gestures/drag-and-drop)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Gradient and Solid Brushes](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/brushes/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Shapes and Paths](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/shapes/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [SwipeView](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/swipeview)
 
 ### Xamarin.Forms vNext (.NET MAUI)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Slim Renderers](https://github.com/dotnet/maui/issues/28) - performance improvements, decouple from bindable, and introduce interfaces 
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Slim Renderers](https://github.com/dotnet/maui/issues/28) - performance improvements, decouple from bindable, and introduce interfaces
 - ![In Planning](media/status-in-planning.png "In Planning icon") WinUI 3 Support - [testing integration](https://github.com/xamarin/Xamarin.Forms/pull/11955)

@@ -13,7 +13,7 @@ You need to join teams in two organizations. Click the two links:
 * [Join the dotnet org and the microsoft team in that org](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
 * [Join the microsoft org and the dotnet team in that org](https://repos.opensource.microsoft.com/Microsoft/teams/dotnet/join/)
 
-After you join the teams: 
+After you join the teams:
 
 * Users will be able to @mention you on [.NET Core Repos](https://github.com/dotnet/core/blob/master/Documentation/core-repos.md)
 * You will be able to access to private repos we maintain
@@ -54,11 +54,11 @@ Join teams to gain write access to repos:
 
 Enabling 2FA doesn't necessarily mean your account is secure. SMS (phone texts) is [not secure](https://en.wikipedia.org/wiki/SIM_swap_scam) as a 2FA method and should be avoided if possible. You can see [failed login attempts](https://github.com/settings/security-log?q=action%3Auser.failed_login) on your account to get some sense of the risk you have.
 
-The following best practices are required for org owners, and recommended for repo admins. 
+The following best practices are required for org owners, and recommended for repo admins.
 
 * Do register a [security key(s)](https://www.yubico.com/works-with-yubikey/catalog/github/) as a two factor method.
 * Do register an authenticator app -- registering a one-time-password with an app like 1Password is recommended (not tied to your phone).
-* Do store recorvery codes in a safe place, like [OneDrive Vault](https://www.microsoft.com/en-us/microsoft-365/onedrive/personal-vault), 2FA-protected OneNote or in a password vault like 1Password.
+* Do store recorvery codes in a safe place, like [OneDrive Vault](https://www.microsoft.com/microsoft-365/onedrive/personal-vault), 2FA-protected OneNote or in a password vault like 1Password.
 * Do register your GitHub account with your 2FA-protected Facebook account for GitHub account recovery. This is the absolute last recovery option and is considered secure (even if your Facebook account is breached).
 * Do not use SMS for 2FA or as a recovery fallback.
 
