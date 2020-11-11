@@ -14,9 +14,10 @@ namespace RuntimeEnvironment
             WriteLine("**.NET information");
             WriteLine($"{nameof(Environment.Version)}: {Environment.Version}");
             WriteLine($"{nameof(RuntimeInformation.FrameworkDescription)}: {RuntimeInformation.FrameworkDescription}");
-            var assemblyInformation = ((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute),false))[0];
-            WriteLine($"Libraries version: {assemblyInformation.InformationalVersion.Split('+')[0]}");
-            WriteLine($"Libraries hash: {assemblyInformation.InformationalVersion.Split('+')[1]}");
+            var assemblyInformation = ((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false))[0];
+            var informationalVersionSplit = assemblyInformation.InformationalVersion.Split('+');
+            WriteLine($"Libraries version: {informationalVersionSplit[0]}");
+            WriteLine($"Libraries hash: {informationalVersionSplit[1]}");
             WriteLine();
             WriteLine("**Environment information");
             WriteLine($"{nameof(RuntimeInformation.OSDescription)}: {RuntimeInformation.OSDescription}");
