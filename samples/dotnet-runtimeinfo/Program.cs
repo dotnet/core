@@ -26,7 +26,7 @@ namespace RuntimeEnvironment
             WriteLine($"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}");
             WriteLine();
 
-            if(RuntimeInformation.OSDescription.StartsWith("Linux") && Directory.Exists("/sys/fs/cgroup"))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && Directory.Exists("/sys/fs/cgroup"))
             {
                 WriteLine("**CGroup info**");
                 WriteLine($"cfs_quota_us: {ReadAllLines("/sys/fs/cgroup/cpu/cpu.cfs_quota_us")[0]}");
