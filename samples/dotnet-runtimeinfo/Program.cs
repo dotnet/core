@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 using static System.Console;
 using static System.IO.File;
 
-var assemblyInformation = ((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false))[0];
-var informationalVersionSplit = assemblyInformation.InformationalVersion.Split('+');
+AssemblyInformationalVersionAttribute assemblyInformation = ((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false))[0];
+string[] informationalVersionSplit = assemblyInformation.InformationalVersion.Split('+');
 
 WriteLine("**.NET information");
 WriteLine($"{nameof(Environment.Version)}: {Environment.Version}");
