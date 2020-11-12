@@ -77,6 +77,6 @@ $@"  - package-ecosystem: ""nuget""
 
 bool IsProject(string filename) => Path.GetExtension(filename) switch
 {
-    ".csproj" or ".fsproj" or ".vbproj" or ".props" => true,
+    ".csproj" or ".fsproj" or ".vbproj" => true,
     _ => false
 };
