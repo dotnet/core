@@ -69,11 +69,8 @@ $@"  - package-ecosystem: ""nuget""
     open-pull-requests-limit: 5");
 }
 
-bool IsProject(string filename)
+bool IsProject(string filename) => Path.GetExtension(filename) switch
 {
-    return Path.GetExtension(filename) switch
-    {
-        ".csproj" or ".fsproj" or ".vbproj" => true,
-        _ => false
-    };
-}
+    ".csproj" or ".fsproj" or ".vbproj" or ".props" => true,
+    _ => false
+};
