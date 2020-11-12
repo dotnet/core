@@ -43,7 +43,7 @@ foreach (string file in Directory.EnumerateFiles(path,"*.*",SearchOption.AllDire
 
     string filename = Path.GetFileName(file);
     string? parentDir = Path.GetDirectoryName(file);
-    string relativeDir = parentDir?.Substring(path.Length).Replace('\\','/') ?? "/";
+    string relativeDir = parentDir?.Substring(path.Length).Replace(Path.DirectorySeparatorChar,Path.AltDirectorySeparatorChar) ?? Path.AltDirectorySeparatorChar.ToString();
     
     bool match = false;
     foreach (string content in File.ReadLines(file))
