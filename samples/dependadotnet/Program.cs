@@ -71,12 +71,7 @@ $@"  - package-ecosystem: ""nuget""
 
 bool IsProject(string filename)
 {
-    if (filename.Length < 8)
-    {
-        return false;
-    }
-
-    return filename.Substring(filename.Length - 7) switch
+    return Path.GetExtension(filename) switch
     {
         ".csproj" or ".fsproj" or ".vbproj" => true,
         _ => false
