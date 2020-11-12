@@ -1,4 +1,4 @@
-# Dependadotnet -- Generator for Dependabot config.yml for .NET
+# Dependadotnet -- Generator for dependabot.yml for .NET
 
 [Dependabot](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/keeping-your-dependencies-updated-automatically) is a GitHub service for automatically updating dependencies listed in project files for various package managers, including NuGet.
 
