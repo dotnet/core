@@ -1,6 +1,6 @@
 # Dependadotnet -- Generator for Dependabot config.yml for .NET
 
-[Dependabot](https://dependabot.com/) is a GitHub service for automatically updating dependencies listed in project files for various package managers, including NuGet.
+[Dependabot](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/keeping-your-dependencies-updated-automatically) is a GitHub service for automatically updating dependencies listed in project files for various package managers, including NuGet.
 
 Dependabot works out of the box if you have a solution (`.sln`) or project file (like `.csproj`) at the root or other (singular) location. It also supports `packages.config`.
 
