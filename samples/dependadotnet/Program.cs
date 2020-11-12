@@ -32,6 +32,7 @@ WriteLine(topMatter);
 */
 
 string regex = @"PackageReference.*Version=""[0-9]";
+string dotnetDir = $"{Path.AltDirectorySeparatorChar}.dotnet";
 
 foreach (string file in Directory.EnumerateFiles(path,"*.*",SearchOption.AllDirectories))
 {
@@ -44,6 +45,11 @@ foreach (string file in Directory.EnumerateFiles(path,"*.*",SearchOption.AllDire
     string filename = Path.GetFileName(file);
     string? parentDir = Path.GetDirectoryName(file);
     string relativeDir = parentDir?.Substring(path.Length).Replace(Path.DirectorySeparatorChar,Path.AltDirectorySeparatorChar) ?? Path.AltDirectorySeparatorChar.ToString();
+
+    if (relativeDir.StartsWith(dotnetDir))
+    {
+        continue;
+    }
     
     bool match = false;
     foreach (string content in File.ReadLines(file))
