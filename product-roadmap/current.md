@@ -113,8 +113,10 @@ Items in each section include the following icons:
 
 [Details](https://github.com/dotnet/interactive/issues/392)
 
-- ![Completed](media/status-completed.png "Completed icon") Multi Language support for Jupyter Notebooks (C#, F#, PowerShell)
-- ![In Progress](media/status-in-progress.png "In Progress icon") .NET Notebooks support in VS code Support
+- ![Completed](media/status-completed.png "Completed icon") Multi Language support for Jupyter Notebooks (C#, F#, PowerShell)[Post](https://devblogs.microsoft.com/dotnet/net-interactive-is-here-net-notebooks-preview-2/)
+- ![Completed](media/status-completed.png "Completed icon") [.NET Notebooks support - Available in VS Code Insiders.](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
+- ![In Progress](media/status-in-progress.png "In Progress icon") VS Code 
+- ![In Progress](media/status-in-progress.png "In Progress icon") Adding SQL to .NET Interactive
 - ![In Progress](media/status-in-progress.png "In Progress icon") Improve Productivity
 - ![In Progress](media/status-in-progress.png "In Progress icon") .NET Interactive for makers
 - ![Completed](media/status-completed.png "Completed icon") [Documentation](https://github.com/dotnet/interactive/tree/main/docs) - done but always improving
