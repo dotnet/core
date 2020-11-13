@@ -199,6 +199,8 @@ Please see the following links to view work items and themes across:
 
 ### WPF
 
+[Details](https://github.com/dotnet/wpf/blob/master/roadmap.md)
+
 - ![In Progress](media/status-in-progress.png "In Progress icon") WPF Integration with .NET 5
 - ![In Progress](media/status-in-progress.png "In Progress icon") Accessibility updates on app sample bugs
 
