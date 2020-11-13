@@ -45,8 +45,8 @@ Items in each section include the following icons:
 - ![Completed](media/status-completed.png "Completed icon") Configurable HTTP/2 PING frames
 - ![Completed](media/status-completed.png "Completed icon") Instrument gRPC for use with OpenTelemetry
 - ![Completed](media/status-completed.png "Completed icon") Add support for HttpSysServer
-- ![In Progress](media/status-in-progress.png "In Progress icon") Add support for IIS
-- ![In Progress](media/status-in-progress.png "In Progress icon") Introduce additional transports (e.g., Unix-domain sockets, Windows Named Pipes)
+- ![Completed](media/status-completed.png "Completed icon") Add support for IIS
+- ![Completed](media/status-completed.png "Completed icon") Introduce additional transports (e.g., Unix-domain sockets, Windows Named Pipes)
 
 ## Tye
 
