@@ -21,7 +21,9 @@ WriteLine($"{nameof(RuntimeInformation.OSArchitecture)}: {RuntimeInformation.OSA
 WriteLine($"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}");
 WriteLine();
 
-if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && Directory.Exists("/sys/fs/cgroup"))
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && 
+    Directory.Exists("/sys/fs/cgroup/cpu") &&
+    Directory.Exists("/sys/fs/cgroup/memory"))
 {
     WriteLine("**CGroup info");
     WriteLine($"cfs_quota_us: {ReadAllLines("/sys/fs/cgroup/cpu/cpu.cfs_quota_us")[0]}");
