@@ -4,11 +4,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Console;
-
-args = new string[] {@"D:\git\dependabot-dotnet-test-projects\"};
 
 if (args is { Length: 0 } || args[0] is not string path)
 {
@@ -38,7 +37,9 @@ WriteLine(topMatter);
   open-pull-requests-limit: 5
 */
 
-string packagesJsonUrl = "https://gist.githubusercontent.com/richlander/b6e9d0a2550396813c8899dc8b20748d/raw/baaa3517d802b0f39333887bc0adde66ab110264/packages.json";
+
+// will change this location in a subsequent update
+string packagesJsonUrl = "https://gist.githubusercontent.com/richlander/b6e9d0a2550396813c8899dc8b20748d/raw/2cc3b59314b39ac27442453ce7a1419fd4305b6a/packages.json";
 Dictionary<string, string[]> packageIgnore = await GetPackagesInfo(packagesJsonUrl);
 string validPackageReference = @"PackageReference.*Version=""[0-9]";
 string packageReference = @"PackageReference Include=""";
@@ -62,14 +63,14 @@ foreach (string directory in Directory.EnumerateDirectories(path,"*.*",SearchOpt
 
         string filename = Path.GetFileName(file);
         string? parentDir = Path.GetDirectoryName(file);
+        string relativeDir = parentDir?.Substring(path.Length).Replace(Path.DirectorySeparatorChar,Path.AltDirectorySeparatorChar) ?? Path.AltDirectorySeparatorChar.ToString();
         string? targetFramework = null;
         bool match = false;
-        List<
+        List<PackageIgnoreMapping> mappings = new();
         foreach (string content in File.ReadLines(file))
         {
             if (targetFramework is null && TryGetTargetFramework(content, out targetFramework))
             {
-                Console.WriteLine(targetFramework);
             }
 
             if (Regex.IsMatch(content, validPackageReference))
@@ -79,7 +80,7 @@ foreach (string directory in Directory.EnumerateDirectories(path,"*.*",SearchOpt
                 if (TryGetPackageName(content, out string? packageName) &&
                     packageIgnore.TryGetValue($"{packageName}_{targetFramework}", out string[]? ignore))
                 {
-                    
+                    mappings.Add(new(packageName,ignore));
                 }
 
                 break;
@@ -92,12 +93,32 @@ foreach (string directory in Directory.EnumerateDirectories(path,"*.*",SearchOpt
         }
 
         WriteLine( 
-    $@"  - package-ecosystem: ""nuget""
-        directory: ""{relativeDir}"" #{filename}
-        schedule:
-        interval: ""weekly""
-        day: ""wednesday""
-        open-pull-requests-limit: 5");
+$@"  - package-ecosystem: ""nuget""
+    directory: ""{relativeDir}"" #{filename}
+    schedule:
+      interval: ""weekly""
+      day: ""wednesday""
+    open-pull-requests-limit: 5");
+
+        if (mappings.Count == 0)
+        {
+            continue;
+        }
+
+        /* Format:
+    ignore:
+     - dependency-name: "Microsoft.AspNetCore.Mvc.NewtonsoftJson"
+       versions: ["5.*"]        
+        */
+
+        WriteLine("    ignore:");
+
+        foreach(PackageIgnoreMapping mapping in mappings)
+        {
+            WriteLine( 
+$@"     - dependency-name: ""{mapping.PackageName}""
+       versions: {PrintArrayAsYaml(mapping.Ignore)}");
+        }
     }
 }
 
@@ -167,7 +188,7 @@ async Task<Dictionary<string, string[]>> GetPackagesInfo(string url)
 
     foreach (PackageInfo package in packages.Packages)
     {
-        foreach(PackageMapping mapping in package.Mapping)
+        foreach(PackageTargetFrameworkIgnoreMapping mapping in package.Mapping)
         {
             string key = $"{package.Name}_{mapping.TargetFramework}";
             packageIgnore.Add(key, mapping.Ignore);
@@ -177,6 +198,25 @@ async Task<Dictionary<string, string[]>> GetPackagesInfo(string url)
     return packageIgnore;
 }
 
+string PrintArrayAsYaml(string[] array)
+{
+    StringBuilder buffer = new(); 
+    buffer.Append("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        buffer.Append($@"""{array[i]}""");
+
+        if (i + 1 < array.Length)
+        {
+            buffer.Append(", ");
+        }
+    }
+    buffer.Append("]");
+
+    return buffer.ToString();
+}
+
 record PackageInfoSet(PackageInfo[] Packages);
-record PackageInfo(string Name, PackageMapping[] Mapping);
-record PackageMapping(string TargetFramework, string[] Ignore);
+record PackageInfo(string Name, PackageTargetFrameworkIgnoreMapping[] Mapping);
+record PackageTargetFrameworkIgnoreMapping(string TargetFramework, string[] Ignore);
+record PackageIgnoreMapping(string PackageName, string[] Ignore);
