@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 using static System.Console;
+
+args = new string[] {@"D:\git\dependabot-dotnet-test-projects\"};
 
 if (args is { Length: 0 } || args[0] is not string path)
 {
@@ -31,7 +36,13 @@ WriteLine(topMatter);
   open-pull-requests-limit: 5
 */
 
-string regex = @"PackageReference.*Version=""[0-9]";
+string packagesJsonUrl = "https://gist.githubusercontent.com/richlander/b6e9d0a2550396813c8899dc8b20748d/raw/baaa3517d802b0f39333887bc0adde66ab110264/packages.json";
+HttpClient client = new();
+Packages? packages = await client.GetFromJsonAsync<Packages>(packagesJsonUrl);
+
+string validPackageReference = @"PackageReference.*Version=""[0-9]";
+string targetFrameworkStart = "<TargetFramework>";
+string targetFrameworkEnd = "</TargetFramework>";
 string dotnetDir = $"{Path.AltDirectorySeparatorChar}.dotnet";
 
 foreach (string file in Directory.EnumerateFiles(path,"*.*",SearchOption.AllDirectories))
@@ -40,7 +51,6 @@ foreach (string file in Directory.EnumerateFiles(path,"*.*",SearchOption.AllDire
     {
         continue;
     }
-
 
     string filename = Path.GetFileName(file);
     string? parentDir = Path.GetDirectoryName(file);
@@ -51,10 +61,16 @@ foreach (string file in Directory.EnumerateFiles(path,"*.*",SearchOption.AllDire
         continue;
     }
     
+    string? targetFramework = null;
     bool match = false;
     foreach (string content in File.ReadLines(file))
     {
-        if (Regex.IsMatch(content, regex))
+        if (targetFramework is null && TryGetTargetFramework(content, out targetFramework))
+        {
+            Console.WriteLine(targetFramework);
+        }
+
+        if (Regex.IsMatch(content, validPackageReference))
         {
             match = true;
             break;
@@ -80,3 +96,39 @@ bool IsProject(string filename) => Path.GetExtension(filename) switch
     ".csproj" or ".fsproj" or ".vbproj" => true,
     _ => false
 };
+
+bool TryGetTargetFramework(string content, [NotNullWhen(true)] out string? targetFramework)
+{
+    targetFramework = null;
+    int start = content.IndexOf(targetFrameworkStart);
+
+    if (start == -1)
+    {
+        return false;
+    }
+
+    int end = content.IndexOf(targetFrameworkEnd);
+
+    if (end == -1 ||
+        end < start)
+    {
+        return false;
+    }
+
+    int startOfTFM = start + targetFrameworkStart.Length;
+    targetFramework = content.Substring(startOfTFM, end - startOfTFM);
+
+    return targetFramework.StartsWith("net");
+}
+
+bool TryGetPackageName(string content, [NotNullWhen(true)] out string? packageName)
+{
+    packageName = string.Empty;
+    Match match = Regex.Match(content, validPackageReference);
+
+    return match.Success;
+}
+
+record Packages(Package[] Set);
+record Package(string Name, Mapping[] Mapping);
+record Mapping(string Version, string TargetFramework);
