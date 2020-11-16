@@ -1,0 +1,19 @@
+{
+    "packages" :
+    [
+        {
+            "name" : "Microsoft.AspNetCore.Mvc.NewtonsoftJson",
+            "mapping" : 
+            [
+                {
+                    "targetFramework" : "netcoreapp3.0",
+                    "ignore" : ["3.1.*", "5.*"]
+                },
+                {
+                    "targetFramework" : "netcoreapp3.1",
+                    "ignore" : ["5.*"]
+                }
+            ]
+        }
+    ]
+}
