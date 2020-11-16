@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using static System.Console;
 
 args = new string[] {@"D:\git\dependabot-dotnet-test-projects\"};
@@ -37,58 +39,66 @@ WriteLine(topMatter);
 */
 
 string packagesJsonUrl = "https://gist.githubusercontent.com/richlander/b6e9d0a2550396813c8899dc8b20748d/raw/baaa3517d802b0f39333887bc0adde66ab110264/packages.json";
-HttpClient client = new();
-Packages? packages = await client.GetFromJsonAsync<Packages>(packagesJsonUrl);
-
+Dictionary<string, string[]> packageIgnore = await GetPackagesInfo(packagesJsonUrl);
 string validPackageReference = @"PackageReference.*Version=""[0-9]";
+string packageReference = @"PackageReference Include=""";
 string targetFrameworkStart = "<TargetFramework>";
 string targetFrameworkEnd = "</TargetFramework>";
 string dotnetDir = $"{Path.AltDirectorySeparatorChar}.dotnet";
 
-foreach (string file in Directory.EnumerateFiles(path,"*.*",SearchOption.AllDirectories))
+foreach (string directory in Directory.EnumerateDirectories(path,"*.*",SearchOption.AllDirectories))
 {
-    if (!IsProject(file))
+    if (directory.EndsWith(dotnetDir))
     {
         continue;
     }
 
-    string filename = Path.GetFileName(file);
-    string? parentDir = Path.GetDirectoryName(file);
-    string relativeDir = parentDir?.Substring(path.Length).Replace(Path.DirectorySeparatorChar,Path.AltDirectorySeparatorChar) ?? Path.AltDirectorySeparatorChar.ToString();
-
-    if (relativeDir.StartsWith(dotnetDir))
+    foreach (string file in Directory.EnumerateFiles(directory))
     {
-        continue;
-    }
-    
-    string? targetFramework = null;
-    bool match = false;
-    foreach (string content in File.ReadLines(file))
-    {
-        if (targetFramework is null && TryGetTargetFramework(content, out targetFramework))
+        if (!IsProject(file))
         {
-            Console.WriteLine(targetFramework);
+            continue;
         }
 
-        if (Regex.IsMatch(content, validPackageReference))
+        string filename = Path.GetFileName(file);
+        string? parentDir = Path.GetDirectoryName(file);
+        string? targetFramework = null;
+        bool match = false;
+        List<
+        foreach (string content in File.ReadLines(file))
         {
-            match = true;
-            break;
+            if (targetFramework is null && TryGetTargetFramework(content, out targetFramework))
+            {
+                Console.WriteLine(targetFramework);
+            }
+
+            if (Regex.IsMatch(content, validPackageReference))
+            {
+                match = true;
+
+                if (TryGetPackageName(content, out string? packageName) &&
+                    packageIgnore.TryGetValue($"{packageName}_{targetFramework}", out string[]? ignore))
+                {
+                    
+                }
+
+                break;
+            }
         }
-    }
 
-    if (!match)
-    {
-        continue;
-    }
+        if (!match)
+        {
+            continue;
+        }
 
-    WriteLine( 
-$@"  - package-ecosystem: ""nuget""
-    directory: ""{relativeDir}"" #{filename}
-    schedule:
-      interval: ""weekly""
-      day: ""wednesday""
-    open-pull-requests-limit: 5");
+        WriteLine( 
+    $@"  - package-ecosystem: ""nuget""
+        directory: ""{relativeDir}"" #{filename}
+        schedule:
+        interval: ""weekly""
+        day: ""wednesday""
+        open-pull-requests-limit: 5");
+    }
 }
 
 bool IsProject(string filename) => Path.GetExtension(filename) switch
@@ -123,12 +133,50 @@ bool TryGetTargetFramework(string content, [NotNullWhen(true)] out string? targe
 
 bool TryGetPackageName(string content, [NotNullWhen(true)] out string? packageName)
 {
-    packageName = string.Empty;
-    Match match = Regex.Match(content, validPackageReference);
+    packageName = null;
+    int start = content.IndexOf(packageReference);
 
-    return match.Success;
+    if (start < 0)
+    {
+        return false;
+    }
+
+    int startOfPackageName = start + packageReference.Length;
+    int endOfPackageName = content.AsSpan(startOfPackageName).IndexOf('"');
+
+    if (endOfPackageName == 0)
+    {
+        return false;
+    }
+
+    packageName = content.Substring(startOfPackageName, endOfPackageName);
+    return true;
 }
 
-record Packages(Package[] Set);
-record Package(string Name, Mapping[] Mapping);
-record Mapping(string Version, string TargetFramework);
+async Task<Dictionary<string, string[]>> GetPackagesInfo(string url)
+{
+    HttpClient client = new();
+    PackageInfoSet? packages = await client.GetFromJsonAsync<PackageInfoSet>(packagesJsonUrl);
+
+    if (packages is null)
+    {
+        throw new IOException("Could not download packages information");
+    }
+    
+    Dictionary<string, string[]> packageIgnore = new();
+
+    foreach (PackageInfo package in packages.Packages)
+    {
+        foreach(PackageMapping mapping in package.Mapping)
+        {
+            string key = $"{package.Name}_{mapping.TargetFramework}";
+            packageIgnore.Add(key, mapping.Ignore);
+        }
+    }
+
+    return packageIgnore;
+}
+
+record PackageInfoSet(PackageInfo[] Packages);
+record PackageInfo(string Name, PackageMapping[] Mapping);
+record PackageMapping(string TargetFramework, string[] Ignore);

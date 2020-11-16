@@ -6,16 +6,12 @@
             "mapping" : 
             [
                 {
-                    "version" : "3.0.0",
-                    "target" : "netcoreapp3.0"
+                    "targetFramework" : "netcoreapp3.0",
+                    "ignore" : ["3.1.*", "5.0*"]
                 },
                 {
-                    "version" : "3.1.0",
-                    "target" : "netcoreapp3.1"
-                },
-                {
-                    "version" : "5.0.0",
-                    "target" : "net5.0"
+                    "targetFramework" : "netcoreapp3.1",
+                    "ignore" : ["5.0*"]
                 }
             ]
         }
