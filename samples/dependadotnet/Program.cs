@@ -39,7 +39,7 @@ WriteLine(topMatter);
 
 
 // will change this location in a subsequent update
-string packagesJsonUrl = "https://gist.githubusercontent.com/richlander/b6e9d0a2550396813c8899dc8b20748d/raw/2cc3b59314b39ac27442453ce7a1419fd4305b6a/packages.json";
+string packagesJsonUrl = "https://gist.githubusercontent.com/richlander/b6e9d0a2550396813c8899dc8b20748d/raw/e4547e94c16e6b0a7749f33c20f981afe5de9188/packages.json";
 Dictionary<string, string[]> packageIgnore = await GetPackagesInfo(packagesJsonUrl);
 string validPackageReference = @"PackageReference.*Version=""[0-9]";
 string packageReference = @"PackageReference Include=""";
