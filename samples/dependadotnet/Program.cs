@@ -37,8 +37,6 @@ WriteLine(topMatter);
   open-pull-requests-limit: 5
 */
 
-
-// will change this location in a subsequent update
 string packagesJsonUrl = "https://raw.githubusercontent.com/dotnet/core/b5ca8283def279b20eced6c0b14c4634659cd6eb/samples/dependadotnet/package-ignore.json";
 Dictionary<string, string[]> packageIgnore = await GetPackagesInfo(packagesJsonUrl);
 string validPackageReference = @"PackageReference.*Version=""[0-9]";
