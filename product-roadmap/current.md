@@ -7,9 +7,9 @@ The .NET product roadmap communicates project priorities for evolving and extend
 These are some of the high level themes for the .NET 5.0 release. A more comprehensive list of the work we’re doing organized by technology can be found further below in this document.
 - Developers can build great cloud infrastructure components with .NET.
 - Developers can build great mobile apps for new devices with .NET 5 – we will support not only the latest in iOS and Android, but unify the platform and deliver first-class support for delivering cross-platform applications.
-- .NET 5.0 has excellent fundamentals - continue to deliver on reliability, performance, diagnosability, compliance, security, acquisition and deployment.  
+- .NET 5.0 has excellent fundamentals - continue to deliver on reliability, performance, diagnosability, compliance, security, acquisition and deployment.
 
-These are some key moments in our .NET 5.0 roadmap. 
+These are some key moments in our .NET 5.0 roadmap.
 
 | Date      | Moment/Rally Point | Key Message     |
 | :-------- | :----------------- | :-------------- |
@@ -25,16 +25,16 @@ Items in each section include the following icons:
 
 ## ASP.NET
 
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Blazor](https://github.com/dotnet/aspnetcore/issues/21514)
+- ![Completed](media/status-completed.png "Completed icon") [Blazor](https://github.com/dotnet/aspnetcore/issues/21514)
   - ![Completed](media/status-completed.png "Completed icon") [Move Blazor to .NET 5](https://github.com/dotnet/aspnetcore/issues/20519)
   - ![Completed](media/status-completed.png "Completed icon") [CSS Isolation](https://github.com/dotnet/aspnetcore/issues/10170)
   - ![Completed](media/status-completed.png "Completed icon") [Support IAsyncDisposable](https://github.com/dotnet/aspnetcore/issues/9960)
   - ![Completed](media/status-completed.png "Completed icon") [Lazy loading of application areas](https://github.com/dotnet/aspnetcore/issues/5465)
   - ![Completed](media/status-completed.png "Completed icon") [Add focus support to BrowserRenderer](https://github.com/dotnet/aspnetcore/issues/17472)
   - ![Completed](media/status-completed.png "Completed icon") [Protected Browser Storage](https://github.com/dotnet/aspnetcore/issues/18755)
-  - ![In Progress](media/status-in-progress.png "In Progress icon") [Build performance improvements for Blazor](https://github.com/dotnet/aspnetcore/issues/22566)
+  - ![Completed](media/status-completed.png "Completed icon") [Build performance improvements for Blazor](https://github.com/dotnet/aspnetcore/issues/22566)
   - ![Completed](media/status-completed.png "Completed icon") [Blazor performance optimizations](https://github.com/dotnet/aspnetcore/issues/22432)
-  - ![In Progress](media/status-in-progress.png "In Progress icon") [How to upload files in Blazor App](https://github.com/dotnet/aspnetcore/issues/12205)
+  - ![Completed](media/status-completed.png "Completed icon") [How to upload files in Blazor App](https://github.com/dotnet/aspnetcore/issues/12205)
 
 ## gRPC
 
@@ -45,8 +45,8 @@ Items in each section include the following icons:
 - ![Completed](media/status-completed.png "Completed icon") Configurable HTTP/2 PING frames
 - ![Completed](media/status-completed.png "Completed icon") Instrument gRPC for use with OpenTelemetry
 - ![Completed](media/status-completed.png "Completed icon") Add support for HttpSysServer
-- ![In Progress](media/status-in-progress.png "In Progress icon") Add support for IIS
-- ![In Progress](media/status-in-progress.png "In Progress icon") Introduce additional transports (e.g., Unix-domain sockets, Windows Named Pipes)
+- ![Completed](media/status-completed.png "Completed icon") Add support for IIS
+- ![Completed](media/status-completed.png "Completed icon") Introduce additional transports (e.g., Unix-domain sockets, Windows Named Pipes)
 
 ## Tye
 
@@ -59,7 +59,7 @@ Items in each section include the following icons:
 - ![Completed](media/status-completed.png "Completed icon") Using the same conventions as development to keep it consistent
 - ![Completed](media/status-completed.png "Completed icon") Support Azure Functions in development
 - ![In Progress](media/status-in-progress.png "In Progress icon") VS Code tooling
- 
+
 ## EF
 
 [EF Core 5.0 plan](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)
@@ -77,16 +77,16 @@ Items in each section include the following icons:
 - ![Completed](media/status-completed.png "Completed icon") Performance improvements
 
 ## ML.NET
- 
+
 - ![Completed](media/status-completed.png "Completed icon") Local GPU training for Image Classification in Model Builder
 - ![Completed](media/status-completed.png "Completed icon") Add Ranking scenario to local ML.NET AutoML API
 - ![Completed](media/status-completed.png "Completed icon") Add new algorithm and root cause detection for anomaly detection
 - ![Completed](media/status-completed.png "Completed icon") Add time series seasonality and de-seasonality
 - ![In Progress](media/status-in-progress.png "In Progress icon") GA Model Builder in Visual Studio
-- ![In Progress](media/status-in-progress.png "In Progress icon") Add Azure Object Detection training to Model Builder
-- ![In Progress](media/status-in-progress.png "In Progress icon") Add local Image Classification training scenario to ML.NET CLI
-- ![In Progress](media/status-in-progress.png "In Progress icon") Add advanced options for data loading in Model Builder
-- ![In Progress](media/status-in-progress.png "In Progress icon") Improve Azure training from Model Builder (better errors, multi-GPU multi-machine, reduced overhead)
+- ![Completed](media/status-completed.png "Completed icon") Add Azure Object Detection training to Model Builder
+- ![Completed](media/status-completed.png "Completed icon") Add local Image Classification training scenario to ML.NET CLI
+- ![Completed](media/status-completed.png "Completed icon") Add advanced options for data loading in Model Builder
+- ![Completed](media/status-completed.png "Completed icon") Improve Azure training from Model Builder (better errors, multi-GPU multi-machine, reduced overhead)
 - ![In Planning](media/status-in-planning.png "In Planning icon") Add local Ranking scenario to tooling
 - ![In Progress](media/status-in-progress.png "In Progress icon") Add support for re-opening Model Builder and adding multiple models to a project
 - ![In Planning](media/status-in-planning.png "In Planning icon") Add integration with MLOps
@@ -95,8 +95,8 @@ Items in each section include the following icons:
 ## Spark
 
 - ![Completed](media/status-completed.png "Completed icon") Improve debugging experience
-- ![In Progress](media/status-in-progress.png "In Progress icon") Spark 2.4 API compatibility
-- ![In Progress](media/status-in-progress.png "In Progress icon") Spark 3.0 API compatibility
+- ![Completed](media/status-completed.png "Completed icon") Spark 2.4 API compatibility
+- ![Completed](media/status-completed.png "Completed icon") Spark 3.0 API compatibility
 - ![In Planning](media/status-in-planning.png "In Planning icon") .NET Core project templates for .NET for Spark
 - ![In Planning](media/status-in-planning.png "In Planning icon") VS deploy for .NET for Spark jobs
 
@@ -113,8 +113,10 @@ Items in each section include the following icons:
 
 [Details](https://github.com/dotnet/interactive/issues/392)
 
-- ![Completed](media/status-completed.png "Completed icon") Multi Language support for Jupyter Notebooks (C#, F#, PowerShell)
-- ![In Progress](media/status-in-progress.png "In Progress icon") .NET Notebooks support in VS code Support
+- ![Completed](media/status-completed.png "Completed icon") Multi Language support for Jupyter Notebooks (C#, F#, PowerShell)[Post](https://devblogs.microsoft.com/dotnet/net-interactive-is-here-net-notebooks-preview-2/)
+- ![Completed](media/status-completed.png "Completed icon") [.NET Notebooks support - Available in VS Code Insiders.](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
+- ![In Progress](media/status-in-progress.png "In Progress icon") VS Code 
+- ![In Progress](media/status-in-progress.png "In Progress icon") Adding SQL to .NET Interactive
 - ![In Progress](media/status-in-progress.png "In Progress icon") Improve Productivity
 - ![In Progress](media/status-in-progress.png "In Progress icon") .NET Interactive for makers
 - ![Completed](media/status-completed.png "Completed icon") [Documentation](https://github.com/dotnet/interactive/tree/main/docs) - done but always improving
@@ -131,7 +133,7 @@ Please see the following links to view work items and themes across:
 
 ### C# 9
 
-- ![Completed](media/status-completed.png "Completed icon") [Target-typed new](https://github.com/dotnet/csharplang/issues/100)  
+- ![Completed](media/status-completed.png "Completed icon") [Target-typed new](https://github.com/dotnet/csharplang/issues/100)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Relax ordering of `ref` and `partial` modifiers](https://github.com/dotnet/csharplang/issues/946)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Parameter null-checking](https://github.com/dotnet/csharplang/issues/2145)
 - ![Completed](media/status-completed.png "Completed icon") [Skip locals init](https://github.com/dotnet/csharplang/issues/1738)
@@ -199,7 +201,9 @@ Please see the following links to view work items and themes across:
 
 ### WPF
 
-- ![In Progress](media/status-in-progress.png "In Progress icon") WPF Integration with .NET 5
+[Details](https://github.com/dotnet/wpf/blob/master/roadmap.md)
+
+- ![Completed](media/status-completed.png "Completed icon") WPF Integration with .NET 5
 - ![In Progress](media/status-in-progress.png "In Progress icon") Accessibility updates on app sample bugs
 
 ### WinForms
@@ -210,8 +214,8 @@ Please see the following links to view work items and themes across:
 -	![In Progress](media/status-in-progress.png "In Progress icon") Keep pace with changes in the underlying OS to ensure compatibility with the latest changes in Win10.
 
 ## Xamarin
-- ![Completed](media/status-completed.png "Completed icon") [Android 11 / API 30 Support](https://docs.microsoft.com/en-us/xamarin/android/release-notes/11/11.0)
-- ![Completed](media/status-completed.png "Completed icon") [Android smaller APK sizes](https://docs.microsoft.com/en-us/xamarin/android/release-notes/11/11.0#smaller-app-package-sizes)
+- ![Completed](media/status-completed.png "Completed icon") [Android 11 / API 30 Support](https://docs.microsoft.com/xamarin/android/release-notes/11/11.0)
+- ![Completed](media/status-completed.png "Completed icon") [Android smaller APK sizes](https://docs.microsoft.com/xamarin/android/release-notes/11/11.0#smaller-app-package-sizes)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Xcode 12 and iOS 14 Support](https://github.com/xamarin/xamarin-macios/issues/8931)
 - ![In Progress](media/status-in-progress.png "In Progress icon") Hot Restart for Android
 - ![In Progress](media/status-in-progress.png "In Progress icon") AndroidX and Google Play Services Bindings Updates
@@ -219,13 +223,13 @@ Please see the following links to view work items and themes across:
 - ![In Planning](media/status-in-planning.png "In Planning icon") Xamarin.Essentials integration to .NET 6 BCL (System namespace)
 
 ### Xamarin.Forms 5
-- ![Completed](media/status-completed.png "Completed icon") [AppTheme aka Dark Mode support](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/theming/system-theme-changes)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [CarouselView](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/carouselview/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Drag-and-drop Gestures](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/gestures/drag-and-drop)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Gradient and Solid Brushes](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/brushes/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Shapes and Paths](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/shapes/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [SwipeView](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/swipeview)
+- ![Completed](media/status-completed.png "Completed icon") [AppTheme aka Dark Mode support](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/theming/system-theme-changes)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [CarouselView](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/carouselview/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Drag-and-drop Gestures](https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/gestures/drag-and-drop)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Gradient and Solid Brushes](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/brushes/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Shapes and Paths](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/shapes/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [SwipeView](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/swipeview)
 
 ### Xamarin.Forms vNext (.NET MAUI)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Slim Renderers](https://github.com/dotnet/maui/issues/28) - performance improvements, decouple from bindable, and introduce interfaces 
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Slim Renderers](https://github.com/dotnet/maui/issues/28) - performance improvements, decouple from bindable, and introduce interfaces
 - ![In Planning](media/status-in-planning.png "In Planning icon") WinUI 3 Support - [testing integration](https://github.com/xamarin/Xamarin.Forms/pull/11955)

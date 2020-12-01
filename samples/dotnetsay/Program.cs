@@ -1,27 +1,22 @@
 using System;
 
-public static class Program
+string message = "Welcome to dotnetsay, a .NET tool!";
+
+if (Console.IsInputRedirected)
 {
-    public static void Main(string[] args)
-    {
-        string message = "Welcome to using a .NET Core global tool!";
+    message = Console.In.ReadToEnd();
+}
+else if (args.Length > 0)
+{
+    message = string.Join(" ", args);
+}
 
-        if (Console.IsInputRedirected)
-        {
-            message = Console.In.ReadToEnd();
-        }
-        else if (args.Length > 0)
-        {
-            message = string.Join(" ", args);
-        }
+Console.WriteLine(GetBot());
 
-        Console.WriteLine(GetBot(message));
-    }
-
-    public static string GetBot(string message)
-    {
-        string bot = $"\n        {message}";
-        bot += @"
+string GetBot()
+{
+    return @$"
+    {message}
     __________________
                       \
                        \
@@ -60,6 +55,4 @@ public static class Program
        .........                        ..............
         .....
 ";
-        return bot;
-    }
 }
