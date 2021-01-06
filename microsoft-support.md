@@ -1,10 +1,8 @@
 # Microsoft support for .NET
 
-Microsoft supports .NET on multiple operating systems, per the [Microsoft Modern Lifecycle](https://support.microsoft.com/help/30881/modern-lifecycle-policy), [.NET release lifecycle](releases.md), and [operating system lifecycle](os-lifecycle-policy.md).
+Microsoft supports .NET on multiple operating systems, per the [Microsoft Modern Lifecycle](https://support.microsoft.com/help/30881/modern-lifecycle-policy).
 
-Support is provided for: .NET, ASP.NET Core and EF Core.
-
-The .NET lifecycle for a new version begins when it is released and ends when it's no longer supported. Knowing key dates for a product lifecycle helps you make informed decisions about when to upgrade or make other changes to your software and computing environment.
+Support is provided for: .NET SDK, .NET runtime, ASP.NET Core and EF Core.
 
 Support has two key benefits:
 
@@ -12,3 +10,10 @@ Support has two key benefits:
 * You can contact Microsoft support to request help (potentially at a cost).
 
 You can also request community support on GitHub (for free), but there is no guarantee on a quick reply.
+
+Support is conditional on using the latest .NET patch update and a supported operating system, as defined by:
+
+* [.NET release lifecycle](releases.md)
+* [Operating system lifecycle](os-lifecycle-policy.md).
+
+Knowing key dates for a product lifecycle helps you make informed decisions about when to upgrade or make other changes to your software and computing environment.
