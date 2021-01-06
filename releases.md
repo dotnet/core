@@ -1,0 +1,24 @@
+
+# .NET Releases
+
+The .NET team releases new versions of .NET annually, each November. Releases are either Long Term Support (LTS) or Current, our two [release types](release-notes/release-types.md).
+
+The following table lists currently in-support .NET releases, per [Microsoft support policy](microsoft-support.md).
+
+|  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
+| :-- | :-- | :-- | :-- | :-- |
+| [.NET 5.0](release-notes/5.0/README.md) | November 10, 2020 | Current | [5.0.1](https://dotnet.microsoft.com/download/dotnet-core/5.0) | February 10, 2022 |
+| [.NET Core 3.1](release-notes/3.1/README.md) | December 3, 2019 | LTS | [3.1.10](https://dotnet.microsoft.com/download/dotnet-core/3.1) | December 3, 2022 |
+| [.NET Core 2.1](release-notes/2.1/README.md) | May 30, 2018 | LTS | [2.1.23](https://dotnet.microsoft.com/download/dotnet-core/2.1) | August 21, 2021 |
+
+The following table lists out-of-support releases.
+
+Note: We should use the same table format as above.
+
+|  Version  |  End of Support |
+| :-- | :-- |
+| [.NET Core 3.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) | [March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) |
+| [.NET Core 2.2](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-2/) | [December 23, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/)
+| [.NET Core 2.0](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | [October 1, 2018](https://devblogs.microsoft.com/dotnet/net-core-2-0-will-reach-end-of-life-on-september-1-2018/)
+| [.NET Core 1.1](https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/) | [June 27, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/)
+| [.NET Core 1.0](https://blogs.msdn.microsoft.com/dotnet/2016/06/27/announcing-net-core-1-0/) | [June 27, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/)

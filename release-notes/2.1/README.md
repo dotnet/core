@@ -1,6 +1,8 @@
 # .NET Core 2.1 Releases
 
-The following .NET Core 2.1 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
+[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) was released on May 30th, 2018. The release was a collaborative effort by many contributors. .NET Core 2.1 is [supported by Microsoft]((../../microsoft-support.md)) on [multiple operating systems](2.1-supported-os.md).
+
+Release notes and download information is provided for each update, in the follow table. You must be on the latest update to be supported.
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |

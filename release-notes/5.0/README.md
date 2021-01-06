@@ -1,6 +1,8 @@
-# .NET 5 Releases
+# .NET 5.0 Releases
 
-The following .NET 5 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
+[.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) was released on November 10th, 2020. The release was a collaborative effort by many [contributors](5.0-contributor-list.md). .NET 5.0 is [supported by Microsoft]((../../microsoft-support.md)) on [multiple operating systems](5.0-supported-os.md). [Known Issues](5.0-known-issues.md) are recorded and updated, as appropriate, with each update.
+
+Release notes and download information is provided for each update, in the follow table. You must be on the latest update to be supported.
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
