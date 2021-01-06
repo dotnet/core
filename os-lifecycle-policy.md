@@ -2,17 +2,17 @@
 
 .NET is [supported by Microsoft](microsoft-support.md) on multiple operating systems, defined per .NET version.
 
-Each supported operating system has a lifecycle defined by its sponsor organization (for example, Microsoft, Red Hat, or Apple). The .NET team applies each of those lifecycle schedules to inform adding and removing support for operating system versions.
+Each supported operating system has a lifecycle defined by its sponsor organization (for example, Microsoft, Red Hat, Debian, or Apple). The .NET team applies each of those lifecycle schedules to inform adding and removing support for operating system versions.
 
-The following support documents list currently supported operating system versions for supported .NET Core versions:
+When an operating system version goes out of support, we stop testing that version and providing support for that version. This means that users will need to move forward to a supported operating system version to get support.
+
+The following documents define currently supported operating system versions for supported .NET Core versions:
 
 * [.NET 5 supported OS versions](release-notes/5.0/5.0-supported-os.md)
 * [.NET Core 3.1 supported OS versions](release-notes/3.1/3.1-supported-os.md)
 * [.NET Core 2.1 supported OS versions](release-notes/2.1/2.1-supported-os.md)
 
-When an operating system version goes out of support, we stop testing that version and providing support for that version. This means that users will need to move forward to a supported operating system version to get support.
-
-The following support documents list historical operating system support for out-of-support .NET Core versions:
+The following documents define (historical) operating system support for out-of-support .NET Core versions:
 
 * [.NET Core 3.0 supported OS versions](release-notes/3.0/3.0-supported-os.md)
 * [.NET Core 2.2 supported OS versions](release-notes/2.2/2.2-supported-os.md)
