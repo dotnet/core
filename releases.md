@@ -7,9 +7,9 @@ The following table lists currently in-support .NET releases, per [Microsoft sup
 
 |  Version  |  Release Date | Support Level | Supported Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 5.0](release-notes/5.0/README.md) | November 10, 2020 | Current | [5.0.1](https://dotnet.microsoft.com/download/dotnet-core/5.0) | February 10, 2022 |
-| [.NET Core 3.1](release-notes/3.1/README.md) | December 3, 2019 | LTS | [3.1.10](https://dotnet.microsoft.com/download/dotnet-core/3.1) | December 3, 2022 |
-| [.NET Core 2.1](release-notes/2.1/README.md) | May 30, 2018 | LTS | [2.1.23](https://dotnet.microsoft.com/download/dotnet-core/2.1) | August 21, 2021 |
+| [.NET 5.0](https://dotnet.microsoft.com/download/dotnet-core/5.0) | November 10, 2020 | Current | [5.0.1](release-notes/5.0/README.md) | February 10, 2022 |
+| [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) | December 3, 2019 | LTS | [3.1.10](release-notes/3.1/README.md) | December 3, 2022 |
+| [.NET Core 2.1](https://dotnet.microsoft.com/download/dotnet-core/2.1) | May 30, 2018 | LTS | [2.1.23](release-notes/2.1/README.md) | August 21, 2021 |
 
 The following table lists out-of-support releases.
 

@@ -1,6 +1,6 @@
 # .NET Core 3.1 Releases
 
-[.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) was released on December 3rd, 2019. The release was a collaborative effort by many contributors. .NET Core 3.1 is [supported by Microsoft]((../../microsoft-support.md)) on [multiple operating systems](3.1-supported-os.md). [Known Issues](3.1-known-issues.md) are recorded and updated, as appropriate, with each update.
+[.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) was released on December 3rd, 2019. The release was a collaborative effort by many contributors. .NET Core 3.1 is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](3.1-supported-os.md). [Known Issues](3.1-known-issues.md) are recorded and updated, as appropriate, with each update.
 
 Release notes and download information is provided for each update, in the follow table. You must be on the latest update to be supported.
 

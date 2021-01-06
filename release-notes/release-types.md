@@ -21,10 +21,10 @@ Current releases are supported for three months after a subsequent Current or LT
 
 ### Patch updates
 
-Updates are cumulative, with each update built upon all of the updates that preceded it. A device needs to install the latest update to remain supported. Updates may include new features, fixes (security and/or non-security), or a combination of both.
+Updates are cumulative, with each update built upon all of the updates that preceded it. You need to install the latest update of a given .NET version to remain supported. Updates may include new features, fixes (security and/or non-security), or a combination of both.
 
 ### End of support
 
 End of support refers to the date when Microsoft no longer provides fixes, updates, or online technical assistance. As the end of support nears for a given .NET version, we recommend that you move to a newer .NET version, and reduce/remove your use of the given .NET version. After support ends, we recommend that you uninstall a given .NET version if you are no longer using it, or install the latest patch, and accelerate your plans to remove your use of that .NET version.
 
-Your use of out-of-support .NET versions may put your applications and computing environment at risk.
+Your use of out-of-support .NET versions may put your applications, application data, and computing environment at risk.
