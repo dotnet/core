@@ -15,7 +15,7 @@ Each .NET release is defined (prior to initial release) as either **Long Term Su
 
 LTS and Current releases have many similarities. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another (LTS or Current, in either direction), and has processes in place to achieve that intention.
 
-## Servicing Policies
+## Servicing
 
 .NET Core releases are supported -- during the servicing period -- according to the following policies. Servicing policies are the same for LTS and Current releases.
 
@@ -44,9 +44,9 @@ During the maintenance support period, .NET releases are updated to mitigate sec
 
 Your use of out-of-support .NET versions may put your applications, application data, and computing environment at risk. You are strongly recommended to not use out-of-support software.
 
-## Release time frames
+## Support Policies
 
-The following release time frame policies are used to determine support.
+The following policies are used to determine support length and kind.
 
 * LTS releases are supported for three years. They receive full support for the first two years and are in maintenance for the third year. After that time, the release will be out-of-support.
 * Current releases are typically supported for fifteen months. They receive full support for the first twelve months and are in maintenance for the last three months. After that time, the release will be out-of-support.
