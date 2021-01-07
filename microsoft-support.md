@@ -7,7 +7,7 @@ Support is provided for: .NET SDK, .NET runtime, ASP.NET Core and EF Core.
 Support has two key benefits:
 
 * Patches are provided (for free) as required by functional or security issues, typically monthly.
-* You can contact Microsoft support to request help (potentially at a cost).
+* You can [contact Microsoft support to request help](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) (potentially at a cost).
 
 You can also request community support on GitHub (for free), but there is no guarantee on a quick reply.
 
