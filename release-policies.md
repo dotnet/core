@@ -1,6 +1,6 @@
 # Release Policies
 
-The .NET team uses the following policies for .NET releases. They define what you can expect when you use a given .NET release.
+The .NET team uses the following policies for [.NET releases](releases.md). They define what you can expect when you use a given .NET release.
 
 ## Release cadence
 
@@ -51,3 +51,7 @@ The following policies are used to determine support length and kind.
 * LTS releases are supported for three years. They receive full support for the first two years and are in maintenance for the third year. After that time, the release will be out-of-support.
 * Current releases are typically supported for fifteen months. They receive full support for the first twelve months and are in maintenance for the last three months. After that time, the release will be out-of-support.
 * A Current release will be supported for a shorter period if a new release (LTS or Current) is released within twelve months of that Current release. In that case, the Current release will immediately transition to three months of maintenance support. After that time, the release will be out-of-support.
+
+## Vendor support
+
+[Microsoft offers support](microsoft-support.md) for in-support releases. Updates are provided at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet-core) and [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/).
