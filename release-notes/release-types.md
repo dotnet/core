@@ -1,32 +1,53 @@
-# Release Types
+# Release Policies
 
-Each .NET release is defined as either **Long Term Support (LTS)** or **Current**. The difference is support time frame, as defined below:
+The .NET team uses the following policies for .NET releases. They define what you can expect when you use a given .NET release.
+
+## Release cadence
+
+New .NET versions are released annually in November. .NET 5.0 was the first version to be released according to this schedule.
+
+## Release types
+
+Each .NET release is defined (prior to initial release) as either **Long Term Support (LTS)** or **Current**. The difference is support time frame, as defined below:
 
 * **LTS** releases are supported for three years. They are intended for users that want the stability and lower cost of maintaining an application on a single (major.minor) .NET version for an extended period.
 * **Current** releases are supported for (typically) fifteen months. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation. Current release users need to upgrade to later .NET releases more often to stay in support.
 
-LTS and Current releases have many similarities. The .NET team follows the same software engineering and release processes for both, including for security, compatibility, and reliability.
+LTS and Current releases have many similarities. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another (LTS or Current, in either direction), and has processes in place to achieve that intention.
 
-Servicing policies are the same both release types. We use a single "bug bar" to decide if a change is warranted and safe for  servicing updates. In fact, a given fix is often applied to multiple [servicing branches](https://github.com/dotnet/core/blob/master/daily-builds.md#servicing-releases), independent of release type. Monthly patch releases are typical, including adding support for new operating system versions.
+## Servicing Policies
 
-## Release Support Policies
+.NET Core releases are supported -- during the servicing period -- according to the following policies. Servicing policies are the same for LTS and Current releases.
 
-.NET Core releases are supported according to the following policies.
+A single "bug bar" is used to decide if a change is warranted and safe for servicing updates. A given fix is often applied to multiple [servicing branches](https://github.com/dotnet/core/blob/master/daily-builds.md#servicing-releases), independent of release type. Breaking changes are not accepted during servicing, except (in the very rare case) to resolve a security vulnerability.
 
-### Long Term Support (LTS) releases
+Improvements are released as "patches". Patch releases are cumulative. Patches are often released on the Microsoft "Patch Tuesday" (second Tuesday of each month), but not exclusively so, and there is no guarantee that there will be a .NET release on any given Patch Tuesday. Patches are announced on the [.NET blog](https://devblogs.microsoft.com/dotnet/). A digest of monthly releases is published to [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
 
-LTS releases are supported for three years after the initial release.
+### Full support
 
-### Current releases
+During the full support period, .NET releases are updated to improve functional capabilities and mitigate security vulnerabilities.
 
-Current releases are supported for three months after a subsequent Current or LTS release.
+Functional improvements are typically very targeted, and may address the following:
 
-### Patch updates
+* Resolve reported crashes.
+* Resolve severe performance issues.
+* Resolve functional bugs in mainline scenarios.
+* Add support for a new operating system version or new hardware platform.
 
-Patch updates apply (and are made available) for both LTS and Current releases. Updates are cumulative, with each update built upon all of the updates that preceded it. You need to install the latest update of a given .NET version to remain supported. Updates may include new features, fixes (security and/or non-security), or a combination of both.
+### Maintenance support
+
+During the maintenance support period, .NET releases are updated to mitigate security vulnerabilities, only.
 
 ### End of support
 
-End of support refers to the date when Microsoft no longer provides fixes, updates, or online technical assistance. As the end of support nears for a given .NET version, we recommend that you move to a newer .NET version, and reduce/remove your use of the given .NET version. After support ends, we recommend that you uninstall a given .NET version if you are no longer using it, or install the latest patch, and accelerate your plans to remove your use of that .NET version.
+"End of support", "out of support", or "end of life" refers to the date after which fixes, updates, or technical assistance are no longer provided. As the end of support nears for a given .NET version, we recommend that you move to a newer .NET version, and reduce/remove your use of the given .NET version. After support ends, we recommend that you uninstall a given .NET version if you are no longer using it, or install the latest patch, and accelerate your plans to remove your use of that .NET version.
 
-Your use of out-of-support .NET versions may put your applications, application data, and computing environment at risk.
+Your use of out-of-support .NET versions may put your applications, application data, and computing environment at risk. You are strongly recommended to not use out-of-support software.
+
+## Release time frames
+
+The following release time frame policies are used to determine support.
+
+* LTS releases are supported for three years. They receive full support for the first two years and are in maintenance for the third year. After that time, the release will be out-of-support.
+* Current releases are typically supported for fifteen months. They receive full support for the first twelve months and are in maintenance for the last three months. After that time, the release will be out-of-support.
+* A Current release will be supported for a shorter period if a new release (LTS or Current) is released within twelve months of that Current release. In that case, the Current release will immediately transition to three months of maintenance support. After that time, the release will be out-of-support.
