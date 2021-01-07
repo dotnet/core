@@ -13,6 +13,7 @@ You can also request community support on GitHub (for free), but there is no gua
 
 Support is conditional on using the latest .NET patch update and a supported operating system, as defined by:
 
+* [.NET release policies](release-notes/release-policies.md)
 * [.NET release lifecycle](releases.md)
 * [Operating system lifecycle](os-lifecycle-policy.md).
 

@@ -1,7 +1,7 @@
 
 # .NET Releases
 
-The .NET team releases new versions of .NET annually, each November. Releases are either Long Term Support (LTS) or Current, our two [release types](release-notes/release-types.md).
+The .NET team releases new versions of .NET annually, each November. Releases are either Long Term Support (LTS) or Current, the two [.NET release types](release-notes/release-policies.md).
 
 The following table lists currently in-support .NET releases, per [Microsoft support policy](microsoft-support.md).
 
