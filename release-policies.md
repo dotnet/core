@@ -4,7 +4,7 @@ The .NET team uses the following policies for .NET releases. They define what yo
 
 ## Release cadence
 
-New .NET versions are released annually in November. .NET 5.0 was the first version to be released according to this schedule.
+New major .NET versions are released annually in November. .NET 5.0 was the first version to be released according to this schedule. Minor releases may also be released, with no pre-defined or regular schedule.
 
 ## Release types
 
@@ -15,7 +15,7 @@ Each .NET release is defined (prior to initial release) as either **Long Term Su
 
 LTS and Current releases have many similarities. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another (LTS or Current, in either direction), and has processes in place to achieve that intention.
 
-## Servicing
+## Servicing periods
 
 .NET Core releases are supported -- during the servicing period -- according to the following policies. Servicing policies are the same for LTS and Current releases.
 
