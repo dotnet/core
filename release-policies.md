@@ -32,7 +32,7 @@ Functional improvements are typically very targeted, and may address the followi
 * Resolve reported crashes.
 * Resolve severe performance issues.
 * Resolve functional bugs in mainline scenarios.
-* Add support for a new operating system version or new hardware platform.
+* Add support for a new [operating system version](os-lifecyle-policy.md) or new hardware platform.
 
 ### Maintenance support
 
