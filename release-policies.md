@@ -21,7 +21,7 @@ LTS and Current releases have many similarities. The .NET team follows the same 
 
 A single "bug bar" is used to decide if a change is warranted and safe for servicing updates. A given fix is often applied to multiple [servicing branches](https://github.com/dotnet/core/blob/master/daily-builds.md#servicing-releases), independent of release type. Breaking changes are not accepted during servicing, except (in the very rare case) to resolve a security vulnerability.
 
-Improvements are released as "patches". Patch releases are cumulative. Patches are often released on the Microsoft "Patch Tuesday" (second Tuesday of each month), but not exclusively so, and there is no guarantee that there will be a .NET release on any given Patch Tuesday. Patches are announced on the [.NET blog](https://devblogs.microsoft.com/dotnet/). A digest of monthly releases is published to [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
+Improvements are released as "patches". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday. Patches are announced on the [.NET blog](https://devblogs.microsoft.com/dotnet/). A digest of monthly releases is published to [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
 
 ### Full support
 
