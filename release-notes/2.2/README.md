@@ -1,10 +1,14 @@
-# .NET Core 2.2 Releases
+# .NET Core 2.2 Release -- Out of support
 
-The following .NET Core 2.2 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
+This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
+
+[.NET Core 2.2](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-2) was released on December 4th, 2018. The release was a collaborative effort by many contributors. [.NET Core 2.2 reached end of life on December 23rd, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.2-supported-os.md).
+
+Release notes and download information is provided for each update, in the follow table.
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
-| 2019/12/23 | Out of support | [details](https://github.com/dotnet/core/blob/master/microsoft-support.md) |
+| 2019/12/23 | Out of support | [.NET Core 2.2 end of life](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) |
 | 2019/11/19 | [2.2.8](2.2.8/2.2.8.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.2) |
 | 2019/09/10 | [2.2.7](2.2.7/2.2.7.md) | [download](2.2.7/2.2.7-download.md) |
 | 2019/07/09 | [2.2.6](2.2.6/2.2.6.md) | [download](2.2.6/2.2.6-download.md) |

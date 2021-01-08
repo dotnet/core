@@ -1,10 +1,14 @@
-# .NET Core 1.0 Releases
+# .NET Core 1.0 Release -- Out of support
 
-The following .NET Core 1.0 releases have been shipped. You must be on the latest patch release to be [supported by Microsoft](../../microsoft-support.md)
+This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
+
+[.NET Core 1.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-1-0/) was released on June 27th, 2016. The release was a collaborative effort by many [contributors](1.0.0-contributor-list.md). [.NET Core 1.0 reached end of life on June 27th, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/). It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](1.0-supported-os.md).
+
+Release notes and download information is provided for each update, in the follow table.
 
 | Release Date | Description | |
 | :-- | :-- | :--: |
-| 2019/06/27 | Out of support | [details](https://github.com/dotnet/core/blob/master/microsoft-support.md#out-of-support-net-core-releases) |
+| 2019/06/27 | Out of support |  [.NET Core 1.0 end of life](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/) |
 | 2019/05/14 | 1.0.16 with SDK 1.1.14 | [release notes](1.0.16/1.0.16.md)/[download](1.0.16/1.0.16-download.md) |
 | 2019/03/12 | 1.0.15 with SDK 1.1.13 | [release notes](1.0.15/1.0.15.md)/[download](1.0.15/1.0.15-download.md) |
 | 2019/02/12 | 1.0.14 with SDK 1.1.12 | [release notes](1.0.14/1.0.14.md)/[download](1.0.14/1.0.14-download.md) |

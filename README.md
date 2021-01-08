@@ -2,15 +2,12 @@
 
 The dotnet/core repository is a good starting point for .NET Core.
 
-The latest major release is [.NET 5.0](release-notes/5.0). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md).
+The latest major release is [.NET 5.0](release-notes/5.0/README.md). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md).
 
-## Download the latest .NET Core SDK
+## .NET Core Releases
 
-* [.NET 5.0 SDK](release-notes/5.0/README.md)
-
-## .NET Core Releases and Daily Builds
-
-* [.NET Core released builds](release-notes/README.md)
+* [Download the latest .NET Core SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+* [.NET Core releases](releases.md)
 * [.NET Core daily builds](daily-builds.md)
 
 ## Learn about .NET Core
