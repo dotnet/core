@@ -33,9 +33,9 @@ Milestone information is available on most repos, for example [dotnet/runtime mi
 
 The best way to give feedback is to create issues in the [dotnet/core](https://github.com/dotnet/core) repo. You can also create issues in other [.NET repos](Documentation/core-repos.md) if you find that to be more appropriate for the topic you want to discuss.
 
-Although mostly obvious, please give us feedback that will give us insight on the following points:
+Please give us feedback that will give us insight on the following points:
 
-* Existing features are missing some capability or otherwise don't work well enough.
+* Existing features that are missing some capability or otherwise don't work well enough.
 * Missing features that should be added to the product.
 * Design choices for a feature that is currently in-progress.
 
