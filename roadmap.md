@@ -2,7 +2,7 @@
 
 This document covers the upcoming release dates for .NET and .NET Core.
 
-If you're looking for the product roadmap, see the [current roadmap](product-roadmap/current.md) document.
+If you're looking for the product roadmap, visit <https://aka.ms/dotnet-product-roadmap>.
 
 ## Released Versions
 
