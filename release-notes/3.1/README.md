@@ -6,6 +6,7 @@ Release notes and download information is provided for each update, in the follo
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
+| 2021/02/09 | [3.1.12](./3.1.12/3.1.12.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |
 | 2021/01/12 | [3.1.11](./3.1.11/3.1.11.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |
 | 2020/11/10 | [3.1.10](./3.1.10/3.1.10.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |
 | 2020/10/13 | [3.1.9](./3.1.9/3.1.9.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.1) |

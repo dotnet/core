@@ -8,6 +8,7 @@ Release notes and download information is provided for each update, in the follo
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
+| 2021/02/09 | [2.1.25](2.1.25/2.1.25.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.1) |
 | 2021/01/12 | [2.1.24](2.1.24/2.1.24.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.1) |
 | 2020/10/13 | [2.1.23](2.1.23/2.1.23.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.1) |
 | 2020/09/08 | [2.1.22](2.1.22/2.1.22.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.1) |
