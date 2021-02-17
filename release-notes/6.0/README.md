@@ -2,5 +2,8 @@
 
 Placeholder for .NET 6 release information.
 
-| Release Date | Description | Download |
-| :-- | :-- | :--: |
+Install the latest [.NET 6 update](https://dotnet.microsoft.com/download/dotnet/6.0)
+
+| Release Date | Description |
+| :-- | :-- |
+| 2021/02/16 | [6.0.0 Preview 1](https://github.com/dotnet/core/blob/master/release-notes/6.0/preview/6.0.0-preview.1.md) |
