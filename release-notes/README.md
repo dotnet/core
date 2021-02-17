@@ -2,6 +2,7 @@
 
 The following [.NET releases](../releases.md) are currently supported:
 
+* [.NET 6.0](6.0/README.md)
 * [.NET 5.0](5.0/README.md)
 * [.NET Core 3.1](3.1/README.md)
 * [.NET Core 2.1](2.1/README.md)
