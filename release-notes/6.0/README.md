@@ -2,7 +2,7 @@
 
 Placeholder for .NET 6 release information.
 
-Install the latest [.NET 6 update](https://dotnet.microsoft.com/download/dotnet/6.0)
+Install the latest [.NET 6 Preview](https://dotnet.microsoft.com/download/dotnet/6.0)
 
 | Release Date | Description |
 | :-- | :-- |
