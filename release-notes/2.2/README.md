@@ -9,7 +9,7 @@ Release notes and download information is provided for each update, in the follo
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
 | 2019/12/23 | Out of support | [.NET Core 2.2 end of life](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) |
-| 2019/11/19 | [2.2.8](2.2.8/2.2.8.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/2.2) |
+| 2019/11/19 | [2.2.8](2.2.8/2.2.8.md) | [download](https://dotnet.microsoft.com/download/dotnet/2.2) |
 | 2019/09/10 | [2.2.7](2.2.7/2.2.7.md) | [download](2.2.7/2.2.7-download.md) |
 | 2019/07/09 | [2.2.6](2.2.6/2.2.6.md) | [download](2.2.6/2.2.6-download.md) |
 | 2019/05/14 | [2.2.5](2.2.5/2.2.5.md) | [download](2.2.5/2.2.5-download.md) |

@@ -54,4 +54,4 @@ The following policies are used to determine support length and kind.
 
 ## Vendor support
 
-[Microsoft offers support](microsoft-support.md) for in-support releases. Updates are provided at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet-core) and [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/).
+[Microsoft offers support](microsoft-support.md) for in-support releases. Updates are provided at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet) and [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/).
