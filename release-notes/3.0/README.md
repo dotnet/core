@@ -9,9 +9,9 @@ Release notes and download information is provided for each update, in the follo
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
 | 2020/03/03 | Out of Support | [.NET Core 3.0 End of Life](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) |
-| 2020/02/18 | [3.0.3](./3.0.3/3.0.3.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.0) |
-| 2020/01/14 | [3.0.2](./3.0.2/3.0.2.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.0) |
-| 2019/11/19 | [3.0.1](./3.0.1/3.0.1.md) | [download](https://dotnet.microsoft.com/download/dotnet-core/3.0) |
+| 2020/02/18 | [3.0.3](./3.0.3/3.0.3.md) | [download](https://dotnet.microsoft.com/download/dotnet/3.0) |
+| 2020/01/14 | [3.0.2](./3.0.2/3.0.2.md) | [download](https://dotnet.microsoft.com/download/dotnet/3.0) |
+| 2019/11/19 | [3.0.1](./3.0.1/3.0.1.md) | [download](https://dotnet.microsoft.com/download/dotnet/3.0) |
 | 2019/09/23 | [3.0.0](./3.0.0/3.0.0.md) | [download](./3.0.0/3.0.0-download.md) | - |
 | 2019/09/16 | [3.0.0 RC 1](./preview/3.0.0-rc1.md) | [download](./preview/3.0.0-rc1-download.md) | - |
 | 2019/09/04 | [3.0.0 Preview 9](./preview/3.0.0-preview9.md) | [download](./preview/3.0.0-preview9-download.md) | - |
