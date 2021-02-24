@@ -13,9 +13,9 @@ The latest major release is [.NET 5.0](release-notes/5.0/README.md). The latest 
 ## Learn about .NET Core
 
 * [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
-* [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
+* [.NET Core Roadmap](https://github.com/dotnet/core/blob/main/roadmap.md)
 * [Learn about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
-* [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
+* [.NET Core release notes](https://github.com/dotnet/core/blob/main/release-notes/README.md)
 * [.NET Core Announcements](https://github.com/dotnet/announcements)
 * [.NET Core blog](https://blogs.msdn.microsoft.com/dotnet/tag/net-core/)
 

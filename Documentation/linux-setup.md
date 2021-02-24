@@ -8,8 +8,8 @@ There are a few options available for installing .NET Core on Linux systems and 
 
 Other useful references
 
-* [OS lifecycle support policy](https://github.com/dotnet/core/blob/master/os-lifecycle-policy.md)
-* [Linux System Prerequisites](https://github.com/dotnet/core/blob/master/Documentation/linux-prereqs.md)
+* [OS lifecycle support policy](https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md)
+* [Linux System Prerequisites](https://github.com/dotnet/core/blob/main/Documentation/linux-prereqs.md)
 
 ### Installation using a package manager
 
@@ -83,11 +83,11 @@ sudo zypper install libunwind libicu
 
 ## Ready to install
 
-Your system is now ready to install .NET Core. See the [Release Notes index](https://github.com/dotnet/core/tree/master/release-notes#net-core-release-notes) for the latest available updates.
+Your system is now ready to install .NET Core. See the [Release Notes index](https://github.com/dotnet/core/tree/main/release-notes#net-core-release-notes) for the latest available updates.
 
 ## Installation from a binary archive
 
-Installing from the packages detailed above is recommended or you can install from binary archive, if that better suits your needs. When using binary archives to install, the contents must be extracted to a user location such as `$HOME/dotnet`, a symbolic link created for `dotnet` and a few dependencies installed. Dependency requirements for each distro can be seen in the [Linux System Prerequisites](https://github.com/dotnet/core/blob/master/Documentation/linux-prereqs.md) document.
+Installing from the packages detailed above is recommended or you can install from binary archive, if that better suits your needs. When using binary archives to install, the contents must be extracted to a user location such as `$HOME/dotnet`, a symbolic link created for `dotnet` and a few dependencies installed. Dependency requirements for each distro can be seen in the [Linux System Prerequisites](https://github.com/dotnet/core/blob/main/Documentation/linux-prereqs.md) document.
 
 ```bash
 mkdir -p $HOME/dotnet && tar zxf dotnet.tar.gz -C $HOME/dotnet
