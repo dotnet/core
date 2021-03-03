@@ -6,6 +6,7 @@ Release notes and download information is provided for each update, in the follo
 
 | Release Date | Description | Download |
 | :-- | :-- | :--: |
+| 2021/03/02 | [5.0.200](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.3/5.0.200-sdk.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
 | 2021/02/09 | [5.0.3](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.3/5.0.3.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
 | 2021/01/12 | [5.0.2](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.2/5.0.2.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
 | 2020/12/08 | [5.0.1](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.1/5.0.1.md) | [download](https://dotnet.microsoft.com/download/dotnet/5.0) |
