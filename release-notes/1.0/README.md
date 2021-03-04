@@ -27,6 +27,6 @@ Release notes and download information is provided for each update, in the follo
 | 2016/12/13 | 1.0.3 with SDK Preview 2 build 3156 | [release notes](1.0.3.md)/[download](../download-archives/1.0.3-preview2-download.md) |
 | 2016/10/24 | 1.0.1 with SDK Preview 4 build 4233 | [release notes](1.0.1-release-notes.md)/[download](../download-archives/preview4-download.md) | | [1.0.1 Known Issues](1.0.1-known-issue
 | 2016/10/17 | 1.0.2 with SDK Preview 2 build 3148 | [release notes](https://github.com/dotnet/core/releases/tag/1.0.2)/[download](../download-archives/1.0.2-preview2-download.md) |
-| 2016/10/03 | 1.0.1 with SDK Preview 3 build 4056 | [release notes](https://github.com/dotnet/core/blob/master/release-notes/1.0/1.0.1-release-notes.md)/[download](../download-archives/preview3-download.md) |
-| 2016/09/13 | 1.0.1 with SDK Preview 2 build 3131 and 3133 | [release notes](https://github.com/dotnet/core/blob/master/release-notes/1.0/1.0.1-release-notes.md)/[download](../download-archives/1.0.1-preview2-download.md) |
-| 2016/06/27 | 1.0 with SDK Preview 2 build 3121 | [release notes](https://github.com/dotnet/core/blob/master/release-notes/1.0/1.0.0.md)/[download](../download-archives/1.0-preview2-download.md) | | | [Contributors](1.0.0-contributor-list
+| 2016/10/03 | 1.0.1 with SDK Preview 3 build 4056 | [release notes](https://github.com/dotnet/core/blob/main/release-notes/1.0/1.0.1-release-notes.md)/[download](../download-archives/preview3-download.md) |
+| 2016/09/13 | 1.0.1 with SDK Preview 2 build 3131 and 3133 | [release notes](https://github.com/dotnet/core/blob/main/release-notes/1.0/1.0.1-release-notes.md)/[download](../download-archives/1.0.1-preview2-download.md) |
+| 2016/06/27 | 1.0 with SDK Preview 2 build 3121 | [release notes](https://github.com/dotnet/core/blob/main/release-notes/1.0/1.0.0.md)/[download](../download-archives/1.0-preview2-download.md) | | | [Contributors](1.0.0-contributor-list

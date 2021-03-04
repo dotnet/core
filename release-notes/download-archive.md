@@ -87,6 +87,6 @@ This page provides an archive of previously released versions of the .NET Core r
 
 ### Out of support
 
-* .NET Core 1.0 - [Release details](https://github.com/dotnet/core/tree/master/release-notes/1.0)
-* .NET Core 1.1 - [Release details](https://github.com/dotnet/core/tree/master/release-notes/1.1)
-* .NET Core 2.0 - [Release details](https://github.com/dotnet/core/tree/master/release-notes/2.0)
+* .NET Core 1.0 - [Release details](https://github.com/dotnet/core/tree/main/release-notes/1.0)
+* .NET Core 1.1 - [Release details](https://github.com/dotnet/core/tree/main/release-notes/1.1)
+* .NET Core 2.0 - [Release details](https://github.com/dotnet/core/tree/main/release-notes/2.0)
