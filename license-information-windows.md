@@ -1,6 +1,6 @@
 # License information for .NET on Windows
 
-The Windows distribution of .NET 5.0 contains files that are provided under 
+The Windows distribution of .NET 5.0 and later releases contains files that are provided under 
 multiple licenses.
 This information is provided to help you understand the license terms that 
 apply to your use. By using any or all of these files you agree to their associated license terms.
