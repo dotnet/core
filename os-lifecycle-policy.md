@@ -4,7 +4,7 @@
 
 Each supported operating system has a lifecycle defined by its sponsor organization (for example, Microsoft, Red Hat, Debian, or Apple). The .NET team applies each of those lifecycle schedules to inform adding and removing support for operating system versions.
 
-When an operating system version goes out of support, we stop testing that version and providing support for that version. This means that users will need to move forward to a supported operating system version to get support.
+When an operating system version goes out of "mainstream" or "free" support, we stop testing that version and providing support for that version. This means that users will need to move forward to a supported operating system version to get support.
 
 The following documents define currently supported operating system versions for supported .NET Core versions:
 
