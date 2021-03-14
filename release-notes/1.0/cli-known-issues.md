@@ -114,7 +114,7 @@ If a Debian machine is set in a certain way it may cause the native host (`dotne
 
 **Affects:** the native host
 
-**Workaround:** make sure that all of the [native pre-requisites](../Documentation/prereqs.md) are installed correctly. You can usually do this by running `apt-get` package manager.
+**Workaround:** make sure that all of the [native pre-requisites](../../Documentation/prereqs.md) are installed correctly. You can usually do this by running `apt-get` package manager.
 
 ## Uninstalling/reinstalling the PKG on OS X
 OS X doesn't really have an uninstall capacity for PKGs like Windows has for
