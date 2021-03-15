@@ -3,7 +3,7 @@
 This directory contains .NET samples and documents.
 
 * [dotnetsay tool](dotnetsay/README.md)
-* [dotnet-runtimeinformation tool](dotnet-runtimeinformation/README.md)
+* [dotnet-runtimeinformation tool](dotnet-runtimeinfo/README.md)
 * [Raspberry Pi instructions](RaspberryPiInstructions.md)
 * [Using Xml Serializer Generator on .NET Core](xmlserializergenerator-instructions.md)
 * [nuget.config for daily .NET builds](nuget.config)
