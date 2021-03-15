@@ -12,10 +12,10 @@ Release notes and download information is provided for each update, in the follo
 | 2019/05/14 | 1.0.16 with SDK 1.1.14 | [release notes](1.0.16/1.0.16.md)/[download](1.0.16/1.0.16-download.md) |
 | 2019/03/12 | 1.0.15 with SDK 1.1.13 | [release notes](1.0.15/1.0.15.md)/[download](1.0.15/1.0.15-download.md) |
 | 2019/02/12 | 1.0.14 with SDK 1.1.12 | [release notes](1.0.14/1.0.14.md)/[download](1.0.14/1.0.14-download.md) |
-| 2018/10/09 | 1.0.13 with SDK 1.1.11 | [release notes](1.0.13.md)/[download](../download-archives/1.0.13.md) |
-| 2018/07/10 | 1.0.12 with SDK 1.1.10 | [release notes](1.0.12.md)/[download](../download-archives/1.0.12.md) |
-| 2018/04/17 | 1.0.11 with SDK 1.1.9 | [release notes](1.0.11.md)/[download](../download-archives/1.0.11.md) |
-| 2018/03/13 | 1.0.10 with SDK 1.1.8 | [release notes](1.0.10.md)/[download](../download-archives/1.0.10.md) |
+| 2018/10/09 | 1.0.13 with SDK 1.1.11 | [release notes](1.0.13.md)/[download](../download-archives/1.0.13-download.md) |
+| 2018/07/10 | 1.0.12 with SDK 1.1.10 | [release notes](1.0.12.md)/[download](../download-archives/1.0.12-download.md) |
+| 2018/04/17 | 1.0.11 with SDK 1.1.9 | [release notes](1.0.11.md)/[download](../download-archives/1.0.11-download.md) |
+| 2018/03/13 | 1.0.10 with SDK 1.1.8 | [release notes](1.0.10.md)/[download](../download-archives/1.0.10-download.md) |
 | 2018/01/09 | 1.0.9 with SDK 1.1.7 | [release notes](1.0.9.md)  |
 | 2017/11/14 | 1.0.8 with SDK 1.1.5 | [release notes](1.0.8.md)/[download](../download-archives/1.0.8.md) |
 | 2017/09/21 | 1.0.7 with SDK 1.1.4 | [release notes](1.0.7.md)/[download](../download-archives/1.0.7-download.md) |
