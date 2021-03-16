@@ -1,0 +1,414 @@
+# .NET Core 3.1.13 - March 09, 2021
+
+The .NET 3.1.13 and .NET SDK 3.1.113 releases are available for download. The latest 3.1 release is always listed at [.NET 3.1 Releases](../README.md).
+
+## Downloads
+
+|           | SDK Installer<sup>1</sup>                        | SDK Binaries<sup>1</sup>                 | Runtime Installer                                        | Runtime Binaries                                 | ASP.NET Core Runtime           | Windows Desktop Runtime           |
+| --------- | :------------------------------------------:     | :----------------------:                 | :---------------------------:                            | :-------------------------:                      | :-----------------:            |:-----------------:            |
+| Windows   | [x86][dotnet-sdk-win-x86.exe] \| [x64][dotnet-sdk-win-x64.exe] | [x86][dotnet-sdk-win-x86.zip] \| [x64][dotnet-sdk-win-x64.zip] \| [Arm][dotnet-sdk-win-arm.zip] | [x86][dotnet-runtime-win-x86.exe] \| [x64][dotnet-runtime-win-x64.exe] | [x86][dotnet-runtime-win-x86.zip] \| [x64][dotnet-runtime-win-x64.zip] \| [Arm][dotnet-runtime-win-arm.zip]  | [x86][aspnetcore-runtime-win-x86.exe] \| [x64][aspnetcore-runtime-win-x64.exe] \| [Arm][aspnetcore-runtime-win-arm.zip] \|<br> [Hosting Bundle][dotnet-hosting-win.exe]<sup>2</sup> | [x86][windowsdesktop-runtime-win-x86.exe] \| [x64][windowsdesktop-runtime-win-x64.exe] |
+| macOS     | [x64][dotnet-sdk-osx-x64.pkg]  | [x64][dotnet-sdk-osx-x64.tar.gz]     | [x64][dotnet-runtime-osx-x64.pkg] | [x64][dotnet-runtime-osx-x64.tar.gz] | [x64][aspnetcore-runtime-osx-x64.tar.gz]<sup>1</sup> | - |
+| Linux     |  [Snap Install][snap-install]  | [x64][dotnet-sdk-linux-x64.tar.gz] \| [Arm][dotnet-sdk-linux-arm.tar.gz] \| [Arm64][dotnet-sdk-linux-arm64.tar.gz] \| [x64 Alpine][dotnet-sdk-linux-musl-x64.tar.gz] | - | [x64][dotnet-runtime-linux-x64.tar.gz] \| [Arm][dotnet-runtime-linux-arm.tar.gz] \| [Arm64][dotnet-runtime-linux-arm64.tar.gz] \| [x64 Alpine][dotnet-runtime-linux-musl-x64.tar.gz] \|  [Arm64 Alpine][dotnet-runtime-linux-musl-arm64.tar.gz]  | [x64][aspnetcore-runtime-linux-x64.tar.gz]<sup>1</sup>  \| [Arm][aspnetcore-runtime-linux-arm.tar.gz]<sup>1</sup> \| [Arm64][aspnetcore-runtime-linux-arm64.tar.gz]<sup>1</sup> \| [x64 Alpine][aspnetcore-runtime-linux-musl-x64.tar.gz] \| [Arm64 Alpine][aspnetcore-runtime-linux-musl-arm64.tar.gz] | - |
+|  | [Checksums][checksums-sdk]                             | [Checksums][checksums-sdk]                                          | [Checksums][checksums-runtime]                             | [Checksums][checksums-runtime] | [Checksums][checksums-runtime] | [Checksums][checksums-runtime] |
+
+</br>
+1. Includes the .NET Core and ASP.NET Core Runtimes.
+</br>2. For hosting stand-alone apps on Windows Servers. Includes the ASP.NET Core Module for IIS and can be installed separately on servers without installing .NET Core runtime.
+
+</br>
+
+The .NET SDK includes a matching updated .NET Runtime. Downloading the Runtime or ASP.NET Core packages is not needed when installing the SDK.
+
+You can check your .NET SDK version by running the following command. The example version shown is for this release.
+
+```console
+$ dotnet --version
+3.1.113
+```
+Visit [.NET Documentation](https://docs.microsoft.com/dotnet/core/) to learn about .NET, for building many different types of applications.
+
+## Docker Images
+
+The [.NET Docker images](https://hub.docker.com/_/microsoft-dotnet) have been updated for this release. The [.NET Docker samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md) show various ways to use .NET and Docker together.
+
+The following repos have been updated.
+
+* [dotnet/sdk](https://hub.docker.com/_/microsoft-dotnet-sdk/): .NET Core SDK
+* [dotnet/aspnet](https://hub.docker.com/_/microsoft-dotnet-aspnet/): ASP.NET Core Runtime
+* [dotnet/runtime](https://hub.docker.com/_/microsoft-dotnet-runtime/): .NET Core Runtime
+* [dotnet/runtime-deps](https://hub.docker.com/_/microsoft-dotnet-runtime-deps/): .NET Core Runtime Dependencies
+
+### Azure App Services
+
+* .NET Core 3.1.13 is being deployed to Azure App Services and the deployment is expected to complete later in January 2021.
+
+## Visual Studio Compatibility
+
+**Visual Studio compatibility:** .NET Core 3.1 requires Visual Studio 2019 16.4 or above to take full advantage of all its features. .NET Core 3.1 won't work properly in earlier versions of Visual Studio. See the following table to select the correct download.
+
+| OS | Development Environment | .NET Core SDK |
+| :-- | :-- | :--: |
+| Windows | Visual Studio 2019 version 16.7 | [3.1.407](3.1.407-download.md) |
+| Windows | Visual Studio 2019 version 16.4 | [3.1.113](#downloads) |
+| macOS | Visual Studio for Mac | [Visual Studio for Mac .NET Core Support](https://docs.microsoft.com/visualstudio/mac/net-core-support) |
+
+
+
+## Notable Changes
+
+.NET Core 3.1.13 release carries both security and non-security fixes.
+
+# Microsoft Security Advisory CVE-2021-26701 | .NET Core Remote Code Execution Vulnerability
+
+## <a name="executive-summary"></a>Executive summary
+
+Microsoft is releasing this security advisory to provide information about a vulnerability in .NET 5.0, .NET Core 3.1, and .NET Core 2.1. This advisory also provides guidance on what developers can do to update their applications to remove this vulnerability.
+
+A remote code execution vulnerability exists in .NET 5 and .NET Core due to how text encoding is performed.
+
+* [Blog Roundup][dotnet-blog]
+* [Known issues](../3.1-known-issues.md)
+
+### Additional fixes in this release
+
+* [WPF](https://github.com/dotnet/wpf/pulls?q=milestone%3A3.1.13+is%3Aclosed+label%3Aservicing-approved)
+* [ASP.NETCore](https://github.com/dotnet/aspnetcore/pulls?q=milestone%3A3.1.13+is%3Aclosed+label%3Aservicing-approved)
+
+## Adding a switch to enable sending ISO-8859-1 headers with SocketsHttpHandler
+
+Since the introduction of `SocketsHttpHandler` in .NET Core 2.1, an attempt to send non-ASCII characters in HTTP headers throws an `HttpRequestException`. This (RFC-conform) behavior turned out to be a blocker for some users trying to migrate from .NET Framework. In .NET 5 we are addressing this by the introduction of [`SocketsHttpHandler.RequestHeaderEncodingSelector`](https://docs.microsoft.com/dotnet/api/system.net.http.socketshttphandler.requestheaderencodingselector?view=net-5.0). To unblock users who are not (yet) able to migrate to .NET 5.0, we also added a runtime-configuration switch as part of .NET Core 3.1 servicing. This switch allows relaxing the HTTP header validation, enabling `SocketsHttpHandler` to send ISO-8859-1 (Latin-1) encoded characters in headers.
+
+- `AppContext` switch: `System.Net.Http.SocketsHttpHandler.AllowLatin1Headers`. `false` - disabled, `true` - enabled
+- Environment variable: `DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_ALLOWLATIN1HEADERS`. `0` - disabled, `1` - enabled
+
+**Note:**
+
+This switch is specific to .NET Core 3.1 since service release 3.1.13, and not available in later versions.
+
+
+
+## macOS Notarization Change
+  Running "dotnet build" will generate a dll instead of a dylib on macOS. This is a planned change to not use the AppHost by default on macOS because of [notarization requirements](https://docs.microsoft.com/dotnet/core/install/macos-notarization-issues). If you want to opt into using the AppHost, add the following to your project file:
+```
+<PropertyGroup>
+  <UseAppHost>true</UseAppHost>
+</PropertyGroup>
+```
+
+## Feedback
+
+Your feedback is important and appreciated. We've created an issue at [dotnet/core #6035](https://github.com/dotnet/core/issues/6035) for your questions and comments.
+
+## Packages updated in this release:
+
+Package name | Version
+:----------- | :------------------
+Microsoft.NETCore.App.Host.linux-musl-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.win-arm64 | 3.1.13.nupkg
+runtime.rhel.6-x64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.linux-arm64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.linux-arm64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.linux-arm64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.linux-x64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.osx-x64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.linux-musl-x64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.linux-arm64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.linux-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.win-arm | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.win-arm64 | 3.1.13.nupkg
+Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.rhel.6-x64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.rhel.6-x64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.win-arm.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.win-arm64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.win-x86.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.linux-arm64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.linux-musl-arm64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.linux-arm.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.linux-x64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.osx-x64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.linux-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.rhel.6-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.linux-arm | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.osx-x64 | 3.1.13.nupkg
+runtime.rhel.6-x64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.win-arm64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.win-x86.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.linux-arm.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.linux-musl-arm64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.linux-musl-arm64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.linux-musl-arm64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.linux-musl-x64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.linux-x64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.linux-x64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.osx-x64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.linux-musl-arm64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.linux-musl-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.rhel.6-x64 | 3.1.13.nupkg
+Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.win-x64.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.win-x64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.win-x86.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.win-x86.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.linux-arm.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.linux-arm.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.linux-musl-x64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.linux-musl-x64.Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.osx-x64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+Microsoft.WindowsDesktop.App.Runtime.win-x86 | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.osx-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.win-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.win-x86 | 3.1.13.nupkg
+runtime.win-arm.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.win-arm64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+runtime.win-arm64.Microsoft.NETCore.DotNetHostPolicy | 3.1.13.nupkg
+runtime.win-x64.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+Microsoft.WindowsDesktop.App.Runtime.win-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.linux-arm | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.linux-musl-arm64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Host.win-arm | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.linux-arm64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.win-x64 | 3.1.13.nupkg
+Microsoft.NETCore.App.Runtime.win-x86 | 3.1.13.nupkg
+Microsoft.NETCore.DotNetHostResolver | 3.1.13.nupkg
+runtime.win-arm.Microsoft.NETCore.DotNetAppHost | 3.1.13.nupkg
+runtime.win-arm.Microsoft.NETCore.DotNetHost | 3.1.13.nupkg
+System.Text.Encodings.Web | 4.7.2.nupkg
+Microsoft.NETCore.Platforms | 3.1.5.nupkg
+Microsoft.AspNetCore.App.Runtime.win-x64 | 3.1.13.nupkg
+dotnet-sql-cache | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.Google | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.linux-musl-arm64 | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.linux-arm64 | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.linux-arm | 3.1.13.nupkg
+Microsoft.Extensions.Identity.Stores | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.win-arm | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.AzureAD.UI | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.linux-musl-x64 | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.linux-x64 | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.Negotiate | 3.1.13.nupkg
+Microsoft.AspNetCore.Identity.EntityFrameworkCore | 3.1.13.nupkg
+Microsoft.AspNetCore.Metadata | 3.1.13.nupkg
+Microsoft.DotNet.Web.Client.ItemTemplates | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.StackExchangeRedis | 3.1.13.nupkg
+Microsoft.AspNetCore.SpaServices.Extensions | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.Specification.Tests | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.Protocols.Json | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.Common | 3.1.13.nupkg
+Microsoft.AspNetCore.Http.Features | 3.1.13.nupkg
+Microsoft.AspNetCore.Components.Authorization | 3.1.13.nupkg
+Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore | 3.1.13.nupkg
+Microsoft.DotNet.Web.ProjectTemplates.3.1 | 3.1.13.nupkg
+Microsoft.Extensions.Identity.Core | 3.1.13.nupkg
+Microsoft.DotNet.Web.Spa.ProjectTemplates.3.1 | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.win-x86 | 3.1.13.nupkg
+Microsoft.AspNetCore.ApiAuthorization.IdentityServer | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.Facebook | 3.1.13.nupkg
+Microsoft.AspNetCore.Mvc.Testing | 3.1.13.nupkg
+Microsoft.AspNetCore.Mvc.NewtonsoftJson | 3.1.13.nupkg
+Microsoft.AspNetCore.Owin | 3.1.13.nupkg
+Microsoft.AspNetCore.Identity.UI | 3.1.13.nupkg
+Microsoft.dotnet-openapi | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.Protocols.MessagePack | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.Client.Core | 3.1.13.nupkg
+Microsoft.AspNetCore.Hosting.WindowsServices | 3.1.13.nupkg
+Microsoft.AspNetCore.HeaderPropagation | 3.1.13.nupkg
+Microsoft.AspNetCore.AzureAppServices.SiteExtension | 3.1.13.nupkg
+Microsoft.AspNetCore.AzureAppServices.HostingStartup | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.OpenIdConnect | 3.1.13.nupkg
+Microsoft.AspNetCore.Components.Forms | 3.1.13.nupkg
+Microsoft.Extensions.ApiDescription.Server | 3.1.13.nupkg
+Microsoft.Extensions.ApiDescription.Client | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.Client | 3.1.13.nupkg
+Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore | 3.1.13.nupkg
+Microsoft.AspNetCore.Components | 3.1.13.nupkg
+Microsoft.AspNetCore.AzureAppServicesIntegration | 3.1.13.nupkg
+Microsoft.AspNetCore.Authorization | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.WsFederation | 3.1.13.nupkg
+Microsoft.AspNetCore.DataProtection.AzureKeyVault | 3.1.13.nupkg
+Microsoft.AspNetCore.Cryptography.Internal | 3.1.13.nupkg
+AspNetCoreRuntime.3.1.x64 | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.Certificate | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.AzureADB2C.UI | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.osx-x64 | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.JwtBearer | 3.1.13.nupkg
+Microsoft.AspNetCore.MiddlewareAnalysis | 3.1.13.nupkg
+Microsoft.AspNetCore.Http.Connections.Common | 3.1.13.nupkg
+Microsoft.DotNet.Web.ItemTemplates | 3.1.13.nupkg
+Microsoft.AspNetCore.TestHost | 3.1.13.nupkg
+Microsoft.AspNetCore.DataProtection.Extensions | 3.1.13.nupkg
+Microsoft.AspNetCore.Connections.Abstractions | 3.1.13.nupkg
+Microsoft.AspNetCore.App.Runtime.win-arm64 | 3.1.13.nupkg
+AspNetCoreRuntime.3.1.x86 | 3.1.13.nupkg
+Microsoft.AspNetCore.JsonPatch | 3.1.13.nupkg
+Microsoft.AspNetCore.Identity.Specification.Tests | 3.1.13.nupkg
+Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv | 3.1.13.nupkg
+Microsoft.AspNetCore.SpaServices | 3.1.13.nupkg
+Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson | 3.1.13.nupkg
+Microsoft.AspNetCore.Components.Web | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.Twitter | 3.1.13.nupkg
+Microsoft.AspNetCore.DataProtection.StackExchangeRedis | 3.1.13.nupkg
+Microsoft.AspNetCore.DataProtection.Abstractions | 3.1.13.nupkg
+Microsoft.AspNetCore.ConcurrencyLimiter | 3.1.13.nupkg
+Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation | 3.1.13.nupkg
+Microsoft.AspNetCore.NodeServices | 3.1.13.nupkg
+Microsoft.AspNetCore.Authentication.MicrosoftAccount | 3.1.13.nupkg
+Microsoft.AspNetCore.Http.Connections.Client | 3.1.13.nupkg
+Microsoft.AspNetCore.Components.Analyzers | 3.1.13.nupkg
+Microsoft.AspNetCore.DataProtection.EntityFrameworkCore | 3.1.13.nupkg
+Microsoft.AspNetCore.DataProtection.AzureStorage | 3.1.13.nupkg
+Microsoft.AspNetCore.Cryptography.KeyDerivation | 3.1.13.nupkg
+Microsoft.AspNetCore.DataProtection | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.1.x | 3.1.13.nupkg
+Microsoft.DotNet.Common.ItemTemplates | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.2.0 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.2.1 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.3.1 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.2.2 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.3.0 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ItemTemplates | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.2.0 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.2.1 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.3.0 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.1.x | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.2.2 | 3.1.13.nupkg
+Microsoft.DotNet.Common.ProjectTemplates.3.1 | 3.1.13.nupkg
+Microsoft.AspNetCore.Razor.Language | 3.1.13.nupkg
+Microsoft.NET.Sdk.Razor | 3.1.13.nupkg
+Microsoft.AspNetCore.Mvc.Razor.Extensions | 3.1.13.nupkg
+Microsoft.CodeAnalysis.Razor | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Tools | 3.1.13.nupkg
+Microsoft.Data.Sqlite.Core | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Analyzers | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Design | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Relational.Specification.Tests | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Sqlite.Core | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.SqlServer | 3.1.13.nupkg
+Microsoft.Data.Sqlite | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Abstractions | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Cosmos | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Specification.Tests | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite | 3.1.13.nupkg
+dotnet-ef | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.InMemory | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Relational | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Sqlite | 3.1.13.nupkg
+Microsoft.EntityFrameworkCore.Proxies | 3.1.13.nupkg
+Microsoft.Extensions.FileProviders.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.DependencyInjection.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.KeyPerFile | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.Ini | 3.1.13.nupkg
+Microsoft.Extensions.FileProviders.Composite | 3.1.13.nupkg
+Microsoft.Extensions.Caching.StackExchangeRedis | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.AzureKeyVault | 3.1.13.nupkg
+Microsoft.Extensions.Caching.Memory | 3.1.13.nupkg
+Microsoft.Extensions.Options | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.CommandLine | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.Binder | 3.1.13.nupkg
+Microsoft.Extensions.Caching.SqlServer | 3.1.13.nupkg
+Microsoft.Extensions.Configuration | 3.1.13.nupkg
+Microsoft.Extensions.WebEncoders | 3.1.13.nupkg
+Microsoft.Extensions.FileProviders.Embedded | 3.1.13.nupkg
+Microsoft.Extensions.Options.DataAnnotations | 3.1.13.nupkg
+Microsoft.Extensions.Logging.TraceSource | 3.1.13.nupkg
+Microsoft.Extensions.Logging.Debug | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.EnvironmentVariables | 3.1.13.nupkg
+Microsoft.Extensions.Options.ConfigurationExtensions | 3.1.13.nupkg
+Microsoft.Extensions.ObjectPool | 3.1.13.nupkg
+Microsoft.Extensions.Logging.EventLog | 3.1.13.nupkg
+Microsoft.Extensions.Logging.Console | 3.1.13.nupkg
+Microsoft.Extensions.Hosting | 3.1.13.nupkg
+Microsoft.Extensions.DiagnosticAdapter | 3.1.13.nupkg
+Microsoft.Extensions.DependencyInjection.Specification.Tests | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.NewtonsoftJson | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.Primitives | 3.1.13.nupkg
+Microsoft.Extensions.Http | 3.1.13.nupkg
+Microsoft.JSInterop | 3.1.13.nupkg
+Microsoft.Extensions.Diagnostics.HealthChecks | 3.1.13.nupkg
+Microsoft.Extensions.DependencyInjection | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.UserSecrets | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.FileExtensions | 3.1.13.nupkg
+Microsoft.Extensions.Logging.EventSource | 3.1.13.nupkg
+Microsoft.Extensions.FileProviders.Physical | 3.1.13.nupkg
+Microsoft.Extensions.Logging.AzureAppServices | 3.1.13.nupkg
+Microsoft.Extensions.Localization | 3.1.13.nupkg
+Microsoft.Extensions.Localization.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.Caching.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.Http.Polly | 3.1.13.nupkg
+Microsoft.Extensions.Logging.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.Xml | 3.1.13.nupkg
+Microsoft.Extensions.Configuration.Json | 3.1.13.nupkg
+Microsoft.Extensions.FileSystemGlobbing | 3.1.13.nupkg
+Microsoft.Extensions.Logging.Configuration | 3.1.13.nupkg
+Microsoft.Extensions.Hosting.Abstractions | 3.1.13.nupkg
+Microsoft.Extensions.Hosting.Systemd | 3.1.13.nupkg
+Microsoft.Extensions.Logging | 3.1.13.nupkg
+Microsoft.Extensions.Hosting.WindowsServices | 3.1.13.nupkg
+
+
+[blob-runtime]: https://dotnetcli.blob.core.windows.net/dotnet/Runtime/
+[blob-sdk]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/
+[release-notes]: https://github.com/dotnet/core/blob/main/release-notes/3.1/3.1.13/3.1.13.md
+[snap-install]: 3.1.13-install-instructions.md
+
+[checksums-runtime]: https://dotnetcli.blob.core.windows.net/dotnet/checksums/3.1.13-sha.txt
+[checksums-sdk]: https://dotnetcli.blob.core.windows.net/dotnet/checksums/3.1.13-sha.txt
+
+[linux-setup]: https://docs.microsoft.com/dotnet/core/install/linux
+
+[dotnet-blog]:  https://devblogs.microsoft.com/dotnet/net-march-2021/
+
+
+
+[//]: # ( Runtime 3.1.13)
+[dotnet-runtime-linux-arm.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/7b53e04d-db64-4b97-af76-9da1a1567d94/e71e3d484accc5bb8db9e4f556d52cc9/dotnet-runtime-3.1.13-linux-arm.tar.gz
+[dotnet-runtime-linux-arm64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/efbdde5b-884f-4aba-8d01-f490da935c74/5abb194e21a00ca9ed69cf478d195e10/dotnet-runtime-3.1.13-linux-arm64.tar.gz
+[dotnet-runtime-linux-musl-arm64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/eb9532e6-4f76-4ad9-a0ee-a50ac7d51708/6abd83e6e5aafc3331d2bc7bb535e426/dotnet-runtime-3.1.13-linux-musl-arm64.tar.gz
+[dotnet-runtime-linux-musl-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/8b1b4d33-7db9-47a7-ba5b-0e2ada5587a1/52f1f56d25f895af44554f4cc7208227/dotnet-runtime-3.1.13-linux-musl-x64.tar.gz
+[dotnet-runtime-linux-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/6880db3b-a4fe-4801-8e80-bbbec045f7c0/283b70d5e263c0341f011adf5a2ea5b1/dotnet-runtime-3.1.13-linux-x64.tar.gz
+[dotnet-runtime-osx-x64.pkg]: https://download.visualstudio.microsoft.com/download/pr/69d7eb12-f378-485d-8f3c-ad3a124039b8/52e9adf9e2a2900f658eea4851fb157a/dotnet-runtime-3.1.13-osx-x64.pkg
+[dotnet-runtime-osx-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/1e34af24-c5d6-4c3c-8b47-a5a3155a5284/ba1c6094a77f9275bc17515460833194/dotnet-runtime-3.1.13-osx-x64.tar.gz
+[dotnet-runtime-win-arm.zip]: https://download.visualstudio.microsoft.com/download/pr/52f3a100-c1c8-416e-b428-b4bf8e6253a0/6526170d6ae9291e76a9fc8ddc094df1/dotnet-runtime-3.1.13-win-arm.zip
+[dotnet-runtime-win-x64.exe]: https://download.visualstudio.microsoft.com/download/pr/3f8c0aae-01e2-4fc3-97a6-e9c1b0d48e95/b48a5c754811fb08d34c4acf67851429/dotnet-runtime-3.1.13-win-x64.exe
+[dotnet-runtime-win-x64.zip]: https://download.visualstudio.microsoft.com/download/pr/5aea20f8-1a5d-4ae6-b0e9-3f4414f5578f/b3753cc3d444bd44ea46fe7fce3d43fc/dotnet-runtime-3.1.13-win-x64.zip
+[dotnet-runtime-win-x86.exe]: https://download.visualstudio.microsoft.com/download/pr/750f2e6f-8a3e-4309-9e43-dd2abf01f24d/4d46d984df3e52a48d191ce50b432ce9/dotnet-runtime-3.1.13-win-x86.exe
+[dotnet-runtime-win-x86.zip]: https://download.visualstudio.microsoft.com/download/pr/5403648f-dc5a-479a-9b6c-a2ff6b5582dc/6371fec819d5c4986809a734d05822ad/dotnet-runtime-3.1.13-win-x86.zip
+
+[//]: # ( WindowsDesktop 3.1.13)
+[windowsdesktop-runtime-win-x64.exe]: https://download.visualstudio.microsoft.com/download/pr/aa717f57-3ae5-48fa-a3ab-0018338d0726/fb37276b1575772461701339110e7a54/windowsdesktop-runtime-3.1.13-win-x64.exe
+[windowsdesktop-runtime-win-x86.exe]: https://download.visualstudio.microsoft.com/download/pr/c39e684e-f804-4e5d-b2ca-eaf4ac49d7b3/fb155e336f2a2bea7efbb3161822296e/windowsdesktop-runtime-3.1.13-win-x86.exe
+
+[//]: # ( ASP 3.1.13)
+[aspnetcore-runtime-linux-arm.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/d5c26b6d-dd45-4124-a72b-8240b0631f40/3cf24631a82b5b1c39afb1329a3e2f4b/aspnetcore-runtime-3.1.13-linux-arm.tar.gz
+[aspnetcore-runtime-linux-arm64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/9d3a6671-c145-4bc0-9d8b-fcddf3f61e73/341cb6bab5498c05345ab332707734b1/aspnetcore-runtime-3.1.13-linux-arm64.tar.gz
+[aspnetcore-runtime-linux-musl-arm64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/1ed60b7b-d339-44c2-84f3-61500caf8600/aa50ccd295936e06be2a44692abd5487/aspnetcore-runtime-3.1.13-linux-musl-arm64.tar.gz
+[aspnetcore-runtime-linux-musl-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/8e52f8ff-729a-4516-bac9-47c0e62c881f/90a293faff9ca1ac06fe059a14dae0a0/aspnetcore-runtime-3.1.13-linux-musl-x64.tar.gz
+[aspnetcore-runtime-linux-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/a11a4be1-2a51-4ddc-a23a-56348ea45101/20085ae5fbefd18642babcee279a74e4/aspnetcore-runtime-3.1.13-linux-x64.tar.gz
+[aspnetcore-runtime-osx-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/46cd05f0-77cd-4ea2-a767-6ebd52f0dc23/ea123f33a2895650bdc271baca4149b4/aspnetcore-runtime-3.1.13-osx-x64.tar.gz
+[aspnetcore-runtime-win-arm.zip]: https://download.visualstudio.microsoft.com/download/pr/703eaed2-7efb-4ad0-95ad-5f4faef309d5/de8c08f1a82a933830df0cdb844faecb/aspnetcore-runtime-3.1.13-win-arm.zip
+[aspnetcore-runtime-win-x64.exe]: https://download.visualstudio.microsoft.com/download/pr/61b9c6d9-79ab-41a1-8529-d29f66ba4f4a/04d7695f1bffeb9ce350fb02a1a702da/aspnetcore-runtime-3.1.13-win-x64.exe
+[aspnetcore-runtime-win-x64.zip]: https://download.visualstudio.microsoft.com/download/pr/f84f98be-a301-4dd3-9b9c-41f51269131e/1b60ca294819b87ce6f643ae024cc243/aspnetcore-runtime-3.1.13-win-x64.zip
+[aspnetcore-runtime-win-x86.exe]: https://download.visualstudio.microsoft.com/download/pr/f5c25df9-8354-4823-ace9-d6b477876775/dbed3a7d59a63257332b2fabc4d02866/aspnetcore-runtime-3.1.13-win-x86.exe
+[aspnetcore-runtime-win-x86.zip]: https://download.visualstudio.microsoft.com/download/pr/be797884-6860-436b-91b9-3a7dab6bc272/5c3571050fb5efc2cdb4676d7e82dc3e/aspnetcore-runtime-3.1.13-win-x86.zip
+[dotnet-hosting-win.exe]: https://download.visualstudio.microsoft.com/download/pr/0f60f951-edec-48a1-aaa1-2f5b5bcbb704/e205315e03bb9f4ac0a6a7efd5d89178/dotnet-hosting-3.1.13-win.exe
+
+
+[//]: # ( SDK 3.1.113 )
+[dotnet-sdk-linux-arm.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/d0cb55c6-1731-4c64-aaa9-3e87cad0c890/515de52bd97e8d78bb837c3d19c54061/dotnet-sdk-3.1.113-linux-arm.tar.gz
+[dotnet-sdk-linux-arm64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/313e05b5-61c3-4644-b594-54ecc19c0544/81c3d5179e264f8adc28cc073cbacee2/dotnet-sdk-3.1.113-linux-arm64.tar.gz
+[dotnet-sdk-linux-musl-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/07b9df1b-6763-447d-a101-de9c634a69ad/f9a98322f1d161a639188219f0926214/dotnet-sdk-3.1.113-linux-musl-x64.tar.gz
+[dotnet-sdk-linux-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/9efb8d13-3d56-4379-8eb6-a0c8cc35b754/77a81e14a24790e16816d65f420019a3/dotnet-sdk-3.1.113-linux-x64.tar.gz
+[dotnet-sdk-osx-x64.pkg]: https://download.visualstudio.microsoft.com/download/pr/2f33d5fa-f218-46fb-8952-dc14e8f3e5f0/e955de1fe2cf72acc8052074f091d480/dotnet-sdk-3.1.113-osx-x64.pkg
+[dotnet-sdk-osx-x64.tar.gz]: https://download.visualstudio.microsoft.com/download/pr/ac4c3396-85ae-4348-88b3-b373fb9e2537/29c4a5097df906e60347aa90318eeb59/dotnet-sdk-3.1.113-osx-x64.tar.gz
+[dotnet-sdk-win-arm.zip]: https://download.visualstudio.microsoft.com/download/pr/41bcceec-9c73-4779-8cd1-0ef873871cdf/ba161cfa4b3c97b444c8895936b94192/dotnet-sdk-3.1.113-win-arm.zip
+[dotnet-sdk-win-x64.exe]: https://download.visualstudio.microsoft.com/download/pr/0e1818d5-9aae-49fa-8085-8e933a470a23/b95543b4ad23cbe1e6981f6efff9272c/dotnet-sdk-3.1.113-win-x64.exe
+[dotnet-sdk-win-x64.zip]: https://download.visualstudio.microsoft.com/download/pr/fc5cce1e-5483-47e7-aef3-1c568e03480c/e011cad264e76fda15a965cc213e7951/dotnet-sdk-3.1.113-win-x64.zip
+[dotnet-sdk-win-x86.exe]: https://download.visualstudio.microsoft.com/download/pr/f585e6ac-ac0d-4104-8791-cda3d6c032c1/112d3750c864e10706a15c1846be67fd/dotnet-sdk-3.1.113-win-x86.exe
+[dotnet-sdk-win-x86.zip]: https://download.visualstudio.microsoft.com/download/pr/3b2f24ab-5897-415f-adf3-33e4e7f305c7/d03110fb1c253b3c8a27fcb3d6482801/dotnet-sdk-3.1.113-win-x86.zip
+

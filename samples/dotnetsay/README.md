@@ -2,7 +2,7 @@
 
 This sample demonstrates how to use and create .NET Tools. It works on Windows, macOS and Linux.
 
-You must have the .NET SDK installed. [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) is recommended.
+You must have the .NET SDK installed. [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1) is recommended.
 
 ## Installation
 
@@ -35,7 +35,7 @@ dotnet tool install --add-source .\nupkg -g dotnetsay
 dotnetsay
 ```
 
-> Note: On macOS and Linux, `.\nupkg` will need be switched to `./nupkg` to accomodate for the different slash directions.
+> Note: On macOS and Linux, `.\nupkg` will need be switched to `./nupkg` to accommodate for the different slash directions.
 
 You can uninstall the tool using the following command.
 

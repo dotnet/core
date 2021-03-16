@@ -1,6 +1,6 @@
 # License information for .NET on Windows
 
-The Windows distribution of .NET 5.0 contains files that are provided under 
+The Windows distribution of .NET 5.0 and later releases contains files that are provided under 
 multiple licenses.
 This information is provided to help you understand the license terms that 
 apply to your use. By using any or all of these files you agree to their associated license terms.
@@ -26,6 +26,6 @@ The following binaries are licensed with the
 * Microsoft.DiaSymReader.Native.{x86|amd64|arm|arm64}.dll (used by .NET SDK)
 
 All other binaries and files are licensed with the 
-[MIT license](https://github.com/dotnet/core/blob/master/LICENSE.TXT)
+[MIT license](https://github.com/dotnet/core/blob/main/LICENSE.TXT)
 
 This document is provided for informative purposes only, and is not itself a license.

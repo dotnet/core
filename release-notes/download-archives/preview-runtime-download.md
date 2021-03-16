@@ -1,6 +1,6 @@
 # .NET Core 1.1 Preview 1
 
-This page provides download links for .NET Core 1.1 Preview 1 runtime and shared framework only. If you also need the SDK, use the download links on the main [Preview 1 download](https://github.com/dotnet/core/blob/master/release-notes/preview-download.md) page.
+This page provides download links for .NET Core 1.1 Preview 1 runtime and shared framework only. If you also need the SDK, use the download links on the main [Preview 1 download](https://github.com/dotnet/core/blob/main/release-notes/preview-download.md) page.
 
 | .NET Core 1.1 Preview 1 | Installer                                        | Binaries                                        |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|

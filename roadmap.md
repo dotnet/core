@@ -2,11 +2,11 @@
 
 This document covers the upcoming release dates for .NET and .NET Core.
 
-If you're looking for the product roadmap, see the [current roadmap](product-roadmap/current.md) document.
+If you're looking for the product roadmap, visit <https://aka.ms/dotnet-product-roadmap>.
 
 ## Released Versions
 
-* [Latest updates](https://github.com/dotnet/core/blob/master/release-notes/README.md) or [Download archive](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
+* [Latest updates](https://github.com/dotnet/core/blob/main/release-notes/README.md) or [Download archive](https://github.com/dotnet/core/blob/main/release-notes/download-archive.md)
 
 For released versions of the product:
 

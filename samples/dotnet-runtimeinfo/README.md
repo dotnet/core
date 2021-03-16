@@ -2,7 +2,7 @@
 
 `dotnet-runtimeinfo` prints information about your .NET, OS and hardware environment. It is also a demonstration of the APIs you can use to get this information for your own uses. This information is likely useful for logging.
 
-You must have the .NET SDK installed, [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) or higher.
+You must have the .NET SDK installed, [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1) or higher.
 
 ## Installation
 

@@ -19,7 +19,7 @@ LTS and Current releases have many similarities. The .NET team follows the same 
 
 .NET Core releases are supported -- during the servicing period -- according to the following policies. Servicing policies are the same for LTS and Current releases.
 
-A single "bug bar" is used to decide if a change is warranted and safe for servicing updates. A given fix is often applied to multiple [servicing branches](https://github.com/dotnet/core/blob/master/daily-builds.md#servicing-releases), independent of release type. Breaking changes are not accepted during servicing, except (in the very rare case) to resolve a security vulnerability.
+A single "bug bar" is used to decide if a change is warranted and safe for servicing updates. A given fix is often applied to multiple [servicing branches](https://github.com/dotnet/core/blob/main/daily-builds.md#servicing-releases), independent of release type. Breaking changes are not accepted during servicing, except (in the very rare case) to resolve a security vulnerability.
 
 Improvements are released as "patches". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday. Patches are announced on the [.NET blog](https://devblogs.microsoft.com/dotnet/). A digest of monthly releases is published to [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
 
@@ -54,4 +54,4 @@ The following policies are used to determine support length and kind.
 
 ## Vendor support
 
-[Microsoft offers support](microsoft-support.md) for in-support releases. Updates are provided at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet-core) and [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/).
+[Microsoft offers support](microsoft-support.md) for in-support releases. Updates are provided at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet) and [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/).

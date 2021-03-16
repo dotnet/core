@@ -50,7 +50,7 @@ Note: All models of generation 1 and Pi Zero are not supported because the .NET 
 
 * Install [Linux](https://www.raspberrypi.org/downloads/) on your Pi.
 
-* Install the [platform dependencies from your distro's package manager](https://github.com/dotnet/core/blob/master/Documentation/prereqs.md) for .NET Core. .NET Core depends on some packages from the Linux package manager as prerequisites to running your application.
+* Install the [platform dependencies from your distro's package manager](https://github.com/dotnet/core/blob/main/Documentation/prereqs.md) for .NET Core. .NET Core depends on some packages from the Linux package manager as prerequisites to running your application.
 
 For Raspbian [Debian 9 Jessie](https://docs.microsoft.com/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) you need to do the following:
 ```
