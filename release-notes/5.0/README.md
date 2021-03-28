@@ -1,12 +1,13 @@
-# .NET 5.0 Release
+# .NET 5
 
-[.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) was released on November 10th, 2020. The release was a collaborative effort by many [contributors](5.0-contributor-list.md). .NET 5.0 is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md). [Known Issues](5.0-known-issues.md) are recorded and updated, as appropriate, with each update.
+[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) was released on November 10th, 2020. It will reach end of life in February, 2022.
 
-Release notes and download information is provided for each update, in the follow table. You must be on the latest update to be supported.
+- [Supported](5.0-supported-os.md)
+- [Installation](install.md)
+- [Known Issues](5.0-known-issues.md)
+- [Contributors](5.0-contributor-list.md)
 
-Install the latest [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
-
-| Release Date | Description |
+| Date | Release |
 | :-- | :-- |
 | 2021/03/09 | [5.0.4](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.4/5.0.4.md) |
 | 2021/03/02 | [5.0.200](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.3/5.0.200-sdk.md) |

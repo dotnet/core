@@ -13,8 +13,8 @@ You can also request community support on GitHub (for free), but there is no gua
 
 Support is conditional on using the latest .NET patch update and a supported operating system, as defined by:
 
+* [.NET releases](releases.md)
 * [.NET release policies](release-policies.md)
-* [.NET release lifecycle](releases.md)
 * [Operating system lifecycle](os-lifecycle-policy.md).
 
 Knowing key dates for a product lifecycle helps you make informed decisions about when to upgrade or make other changes to your software and computing environment.
