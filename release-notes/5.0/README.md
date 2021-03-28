@@ -1,9 +1,10 @@
 # .NET 5
 
-[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) was released on November 10th, 2020. It will reach end of life in February, 2022.
+[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) is a [Current release](release-policies.md) and will be supported for fifteen months, from December 2021 to February 2022. It is [supported by Microsoft](../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
 
-- [Supported](5.0-supported-os.md)
-- [Installation](install.md)
+- [Downloads](https://dotnet.microsoft.com/download/dotnet/5.0)
+- [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
+- [Supported OSes](5.0-supported-os.md)
 - [Known Issues](5.0-known-issues.md)
 - [Contributors](5.0-contributor-list.md)
 
