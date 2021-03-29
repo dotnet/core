@@ -2,6 +2,8 @@
 
 The following instructions demonstrate installing .NET 6 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
 
+[Linux package dependencies](linux-packages.md) describes the set of packages required to run .NET on Linux.
+
 ## Distributions
 
 The following distributions are available for Linux:

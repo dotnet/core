@@ -62,6 +62,8 @@ The `DOTNET_ROOT` environment variable is required in order to launch applicatio
 
 You can add your .NET install location permanently to your path using the approach recommended for your operating system.
 
+Note: [Linux package dependencies](linux-packages.md) describes the set of packages required to run .NET on Linux.
+
 ## What's installed?
 
 You can determine what is installed on your machine using the following approach, with `dotnet --info`.
