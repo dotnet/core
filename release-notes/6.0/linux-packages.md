@@ -68,7 +68,7 @@ Note: Add [noninteractive](https://github.com/dotnet/dotnet-docker/blob/c0e8be8a
 ## Arch Linux (rolling build)
 
 ```bash
-pacman -S \
+pacman -Sy \
     glibc \
     gcc \
     krb5 \
@@ -77,3 +77,5 @@ pacman -S \
     libc++ \
     zlib
 ```
+
+Note: Arch Linux is not supported by the .NET team.
