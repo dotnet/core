@@ -11,6 +11,11 @@ The following [.NET releases](../releases.md) are currently supported:
 
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
 
+[6.0 Preview 2]: 6.0/preview/6.0.0-preview.2.md
+[5.0.4]: 5.0/5.0.4/5.0.4.md
+[3.1.13]: 3.1/3.1.13/3.1.13.md
+[2.1.26]: 2.1/2.1.26/2.1.26.md
+
 ## Release Information
 
 * [Download .NET](https://dotnet.microsoft.com/download/dotnet)
@@ -18,10 +23,5 @@ You can find release notes for all releases, including out-of-support releases, 
 * [dotnet-install scripts](https://docs.microsoft.com/dotnet/core/tools/dotnet-install-script)
 * [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
 
-
-[6.0 Preview 2]: 6.0/preview/6.0.0-preview.2.md
-[5.0.4]: 5.0/5.0.4/5.0.4.md
-[3.1.13]: 3.1/3.1.13/3.1.13.md
-[2.1.26]: 2.1/2.1.26/2.1.26.md
 [releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
-[policies]: release-policies.md
+[policies]: ../release-policies.md
