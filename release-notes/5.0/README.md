@@ -9,6 +9,8 @@
 - [Known Issues](5.0-known-issues.md)
 - [Contributors](5.0-contributor-list.md)
 
+.NET 6 releases:
+
 | Date | Release |
 | :-- | :-- |
 | 2021/03/09 | [5.0.4](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.4/5.0.4.md) |

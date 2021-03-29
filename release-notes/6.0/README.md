@@ -8,7 +8,9 @@
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
 
-| Release Date | Description |
+.NET 6 releases:
+
+| Date | Release |
 | :-- | :-- |
 | 2021/03/11 | [6.0.0 Preview 2](https://github.com/dotnet/core/blob/main/release-notes/6.0/preview/6.0.0-preview.2.md) |
 | 2021/02/17 | [6.0.0 Preview 1](https://github.com/dotnet/core/blob/main/release-notes/6.0/preview/6.0.0-preview.1.md) |
