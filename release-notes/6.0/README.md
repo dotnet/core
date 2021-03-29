@@ -1,4 +1,4 @@
- # .NET 6
+# .NET 6
 
 [.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6-preview-2/) is an [LTS release](../../release-policies.md) and will be supported for three years, from November 2021 to November 2024. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
@@ -8,7 +8,7 @@
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
 
-.NET 6 releases:
+## Releases
 
 | Date | Release |
 | :-- | :-- |
