@@ -1,6 +1,6 @@
 # .NET 5
 
-[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) is a [Current release](release-policies.md) and will be supported for fifteen months, from November 2020 to February 2022. It is [supported by Microsoft](../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
+[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) is a [Current release](../../release-policies.md) and will be supported for fifteen months, from November 2020 to February 2022. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/5.0) (also see release notes)
 - [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
