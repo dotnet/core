@@ -1,6 +1,6 @@
-# .NET 5 - Supported OS versions
+# .NET 6 Support
 
-[.NET 5](README.md) is supported on multiple operating systems per their lifecycle.
+[.NET 6](README.md) is supported on multiple operating systems per their lifecycle.
 
 ## Windows
 
@@ -25,15 +25,14 @@ OS                                    | Version                 | Architectures 
 
 OS                                    | Version               | Architectures     | Lifecycle
 --------------------------------------|-----------------------|-------------------|----------
-[Alpine Linux][Alpine]                | 3.11+                 | x64, Arm64        | [Alpine][Alpine-lifecycle]
+[Alpine Linux][Alpine]                | 3.13+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
 [CentOS][CentOS]                      | 7+                    | x64               | [CentOS][CentOS-lifecycle]
-[Debian][Debian]                      | 9+                    | x64, Arm32, Arm64 | [Debian][Debian-lifecycle]
+[Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
 [Fedora][Fedora]                      | 32+                   | x64               | [Fedora][Fedora-lifecycle]
-[Linux Mint][Linux-Mint]              | 18+                   | x64               | [Linux Mint][Linux-Mint-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
-[Red Hat Enterprise Linux][RHEL]      | 7+                    | x64               | [Red Hat][RHEL-lifecycle]
+[Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
-[Ubuntu][Ubuntu]                      | 20.10, 20.04, 18.04, 16.04   | x64, Arm32, Arm64 | [Ubuntu][Ubuntu-lifecycle]
+[Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://wiki.alpinelinux.org/wiki/Alpine_Linux:Releases
@@ -49,8 +48,6 @@ OS                                    | Version               | Architectures   
 [Fedora-docker]: https://hub.docker.com/_/fedora
 [Fedora-msft-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-fedora32
 [Fedora-pm]: https://fedoraproject.org/wiki/DotNet
-[Linux-Mint]: https://linuxmint.com/
-[Linux-Mint-lifecycle]: https://forums.linuxmint.com/viewforum.php?f=143
 [OpenSUSE]: https://opensuse.org/
 [OpenSUSE-lifecycle]: https://en.opensuse.org/Lifetime
 [OpenSUSE-docker]: https://hub.docker.com/r/opensuse/leap
@@ -68,22 +65,37 @@ OS                                    | Version               | Architectures   
 
 ## macOS
 
-OS                            | Version                       | Architectures  |
-------------------------------|-------------------------------|----------------|
-[macOS][macOS]                | 10.13+                        | x64            |
+OS                            | Version                   | Architectures     |
+------------------------------|---------------------------|-------------------|
+[macOS][macOS]                | 10.14+                    | x64, Arm64        |
 
 [macOS]: https://support.apple.com/macos
 
-## Support changes from .NET Core 3.1
+## Android
 
-The following operating systems are no longer supported, starting with .NET 5.0.
+OS                            | Version                 | Architectures     |
+------------------------------|-------------------------|-------------------|
+[Android][Android]            | API 21+                 | x64, Arm32, Arm64 |
 
-* Windows Arm32
-* Oracle Linux
+[Android]: https://support.google.com/android
+
+## iOS / tvOS
+
+OS                            | Version                 | Architectures     |
+------------------------------|-------------------------|-------------------|
+[iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
+
+[iOS]: https://support.apple.com/ios
+
+## Support changes from .NET 5.0
+
+The following operating systems are no longer supported, starting with .NET 6.0.
+
+None yet.
 
 ## Out of support OS versions
 
-Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 5][OS-lifecycle-policy].
+Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 6.0][OS-lifecycle-policy].
 
 None yet.
 

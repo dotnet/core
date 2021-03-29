@@ -1,19 +1,12 @@
-# .NET 6.0 Release
+ # .NET 6
 
-[.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6-preview-2/) is currently a preview release.
+[.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6-preview-2/) is an [LTS release](release-policies.md) and will be supported for three years, from November 2021 to November 2024. It is [supported by Microsoft](../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
-- [Supported](support.md)
-- [Installation](install.md)
-- [Known Issues](5.0-known-issues.md)
-- [Contributors](5.0-contributor-list.md)
-
-The release was a collaborative effort by many [contributors](5.0-contributor-list.md). .NET 5.0 is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md). [Known Issues](5.0-known-issues.md) are recorded and updated, as appropriate, with each update.
-
-Release notes and download information is provided for each update, in the follow table. You must be on the latest update to be supported.
-
-Install the latest [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
-
-Install the latest [.NET 6 Preview](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [Downloads](https://dotnet.microsoft.com/download/dotnet/6.0) (also see release notes)
+- [Containers](https://hub.docker.com/_/microsoft-dotnet)
+- [Supported OSes](supported-os.md)
+- [Known Issues](known-issues.md)
+- [Installation instructions](install.md)
 
 | Release Date | Description |
 | :-- | :-- |
