@@ -13,7 +13,7 @@ The following documents describe supported operating systems:
 * [.NET Core 3.1 supported OS versions](release-notes/3.1/3.1-supported-os.md)
 * [.NET Core 2.1 supported OS versions](release-notes/2.1/2.1-supported-os.md)
 
-## End-of-life .NET versions
+## Out-of-support .NET versions
 
 The following documents describe (historical) supported operating systems:
 

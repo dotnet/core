@@ -1,6 +1,6 @@
 # Microsoft support for .NET
 
-Microsoft supports .NET on multiple operating systems, per the [Microsoft Modern Lifecycle](https://support.microsoft.com/help/30881/modern-lifecycle-policy).
+[Microsoft supports .NET](https://dotnet.microsoft.com/platform/support/policy) on multiple operating systems, per the [Microsoft Modern Lifecycle](https://support.microsoft.com/help/30881/modern-lifecycle-policy).
 
 Support is provided for: .NET SDK, .NET runtime, ASP.NET Core, and EF Core.
 
@@ -13,6 +13,7 @@ You can also request community support on GitHub (for free), but there is no gua
 
 Support is conditional on using the latest .NET patch update and a supported operating system, as defined by:
 
+* [Microsoft support policy](https://dotnet.microsoft.com/platform/support/policy)
 * [.NET releases](releases.md)
 * [.NET release policies](release-policies.md)
 * [.NET supported operating system lifecycle](os-lifecycle-policy.md).

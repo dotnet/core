@@ -16,7 +16,7 @@ The following distributions are available for all operating systems:
 - .NET Runtime: includes the .NET runtime and libraries, enabling running console applications.
 - ASP.NET Core Runtime: includes the .NET and ASP.NET Core runtimes, enabling running console, and web applications.
 
-You are recommended to install the .NET SDK to develop and build applications, and to install one of the runtimes packages (like ASP.NET Core) to (exclusively) run applications.
+We recommend that you install the .NET SDK to develop and build applications, and to install one of the runtimes packages (like ASP.NET Core) to (exclusively) run applications.
 
 ## Downloads
 
