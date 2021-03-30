@@ -58,7 +58,7 @@ On macOS and Linux:
 6.0.100-preview.2.21155.3
 ```
 
-The `DOTNET_ROOT` environment variable is required in order to launch application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it is not installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
+The `DOTNET_ROOT` environment variable is required in order to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it is not installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
 
 You can add your .NET install location permanently to your path using the approach recommended for your operating system.
 
