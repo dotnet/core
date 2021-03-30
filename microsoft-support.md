@@ -15,6 +15,6 @@ Support is conditional on using the latest .NET patch update and a supported ope
 
 * [.NET releases](releases.md)
 * [.NET release policies](release-policies.md)
-* [Operating system lifecycle](os-lifecycle-policy.md).
+* [.NET supported operating system lifecycle](os-lifecycle-policy.md).
 
 Knowing key dates for a product lifecycle helps you make informed decisions about when to upgrade or make other changes to your software and computing environment.
