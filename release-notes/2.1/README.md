@@ -7,7 +7,7 @@
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/2.1) (also see [Releases](#releases))
 - [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
-- [Supported OSes](2.1-supported-os.md)
+- [Supported operating systems](2.1-supported-os.md)
 - [Known Issues](2.1-known-issues.md)
 - [Contributors](2.1.0-contributor-list.md)
 

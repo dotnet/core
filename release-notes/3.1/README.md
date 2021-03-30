@@ -1,6 +1,6 @@
 # .NET Core 3.1
 
-[.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) is an [LTS release](../../release-policies.md) and will be supported for three years, from December 2019 to December 2022. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](3.1-supported-os.md).
+[.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) is a [Long Term Support (LTS) release](../../release-policies.md) and will be supported for three years, from December 2019 to December 2022. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](3.1-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/3.1) (also see [Releases](#releases))
 - [Installation docs](https://docs.microsoft.com/dotnet/core/install/)

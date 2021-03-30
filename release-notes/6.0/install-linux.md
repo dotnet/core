@@ -29,14 +29,14 @@ Preview release installers are not available from the Microsoft package reposito
 
 **Note:** `curl` must be available on the system before running the following steps. Once you have confirmed that `curl` is available, complete the steps to download and install the latest .NET 6 Preview SDK and Runtime.
 
-1. Create a directory to use for the download location and change into that directory. For example `mkdir $HOME/dotnet_install && cd $HOME/dotnet_install`
+1. Create a directory to use for the download location and change into that directory. For example, `mkdir $HOME/dotnet_install && cd $HOME/dotnet_install`
 2. Run `curl -L https://aka.ms/install-dotnet-preview -o install-dotnet-preview.sh`
 3. Run the script with `sudo bash install-dotnet-preview.sh`
 
 Here's what the script does.
 
 * Detects the distribution and version. The script supports platforms and versions listed in [.NET 6.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0-supported-os.md).
-* Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example `tar` is used to unpack that installer packages.
+* Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack that installer packages.
 * Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
 * Downloads the system dependency installer, if needed.
 * Expands the tar.gz into ./dotnet_packages
@@ -73,6 +73,6 @@ The following workflow demonstrates downloading, unpacking, configuring, and run
 6.0.100-preview.2.21155.3
 ```
 
-The `DOTNET_ROOT` environment variable is required in order to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it is not installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
+The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
 
 You can add your .NET install location permanently to your path if you'd like.
