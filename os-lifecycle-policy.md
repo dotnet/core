@@ -30,7 +30,7 @@ Operating system versions are added and go out of support on a regular basis. We
 * [Monthly Update Announcements](https://github.com/dotnet/announcements/labels/Monthly-Update)
 * [OS support tracking issues](https://github.com/dotnet/core/labels/os-support)
 
-## Policies
+## Lifecycle Policy
 
 Each supported operating system has a lifecycle defined by its sponsor organization (for example, Microsoft, Red Hat, Debian, or Apple). The .NET team applies each of those lifecycle schedules to inform adding and removing support for operating system versions. Support is typically removed when an operating system goes out of mainline support, at which point we stop testing and supporting it, and support documents are updated to match.
 
