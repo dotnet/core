@@ -21,6 +21,8 @@ Tips:
 - [Open SSL](https://www.openssl.org/)
 - [zlib compression library](https://www.zlib.net/)
 
+You do not need to install ICU if you [enable globalization invariant mode](https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md#enabling-the-invariant-mode).
+
 If your app relies on `https` endpoints, you'll also need to install `ca-certificates`.
 
 ## Alpine 3.13
@@ -65,6 +67,20 @@ sudo apt-get update \
 
 Note: Add [noninteractive](https://github.com/dotnet/dotnet-docker/blob/c0e8be8a44b47b1dcc2a5b4b2ebd92022087ac0b/src/runtime-deps/3.1/focal/arm64v8/Dockerfile#L4) for non-interactive installation.
 
+## Ubuntu 18.04 "bionic"
+
+```bash
+sudo apt-get update \
+    && sudo apt-get install -y --no-install-recommends \
+    libc6 \
+    libgcc1 \
+    libgssapi-krb5-2 \
+    libicu60 \
+    libssl1.1 \
+    libstdc++6 \
+    zlib1g \
+```
+
 ## Arch Linux (rolling build)
 
 ```bash
@@ -77,5 +93,7 @@ pacman -Sy \
     libc++ \
     zlib
 ```
+
+Also tested on Manjaro.
 
 Note: Arch Linux is not supported by the .NET team.
