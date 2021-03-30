@@ -37,7 +37,7 @@ sudo apk add \
     zlib
 ```
 
-## Debian 10 "bullseye"
+## Debian 11 "bullseye"
 
 ```bash
 sudo apt-get update \
@@ -46,6 +46,20 @@ sudo apt-get update \
     libgcc1 \
     libgssapi-krb5-2 \
     libicu67 \
+    libssl1.1 \
+    libstdc++6 \
+    zlib1g
+```
+
+## Debian 10 "buster"
+
+```bash
+sudo apt-get update \
+    && sudo apt-get install -y --no-install-recommends \
+    libc6 \
+    libgcc1 \
+    libgssapi-krb5-2 \
+    libicu63 \
     libssl1.1 \
     libstdc++6 \
     zlib1g
