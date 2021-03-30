@@ -4,7 +4,7 @@
 
 [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) is an [LTS release](../../release-policies.md) and will be supported for (a little more than) three years, from May 2018 to August 2021. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.1-supported-os.md).
 
-- [Downloads](https://dotnet.microsoft.com/download/dotnet/2.1) (also see release notes)
+- [Downloads](https://dotnet.microsoft.com/download/dotnet/2.1) (also see [Releases](#releases))
 - [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](2.1-supported-os.md)
@@ -13,8 +13,8 @@
 
 ## Releases
 
-| Date | Release | Download |
-| :-- | :-- | :--: |
+| Date | Release |
+| :-- | :-- |
 | 2021/03/09 | [2.1.26](2.1.26/2.1.26.md) |
 | 2021/02/09 | [2.1.25](2.1.25/2.1.25.md) |
 | 2021/01/12 | [2.1.24](2.1.24/2.1.24.md) |

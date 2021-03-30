@@ -1,6 +1,6 @@
 # Linux package dependencies
 
-.NET 6 has several dependencies that must be satisfied to run .NET apps. The commands to install these libraries are listed for multiple distributions.
+.NET 6 has several dependencies that must be satisfied to run .NET apps. The commands to install these libraries are listed for multiple Linux distributions.
 
 Feel free to contribute packages for distributions not (yet) listed in this document, including ones not supported by the .NET Team.
 
@@ -51,7 +51,7 @@ sudo apt-get update \
     zlib1g
 ```
 
-## Ubuntu 20.04 "focal"
+## Ubuntu 20.04 "Focal"
 
 ```bash
 sudo apt-get update \
@@ -81,7 +81,11 @@ sudo apt-get update \
     zlib1g \
 ```
 
-## Arch Linux (rolling build)
+## Community supported distros
+
+The following distros are not supported by the .NET team. The following package information is provided on an as-is basis. Feel free contribute package information for the distro you use .NET with if it isn't listed.
+
+### Arch Linux
 
 ```bash
 pacman -Sy \
@@ -94,6 +98,4 @@ pacman -Sy \
     zlib
 ```
 
-Also tested on Manjaro.
-
-Note: Arch Linux is not supported by the .NET team.
+This set of packages was tested on the Arch and Manjaro.
