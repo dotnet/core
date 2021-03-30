@@ -37,7 +37,7 @@ sudo apk add \
     zlib
 ```
 
-## Debian 11 "bullseye"
+## Debian 11 "Bullseye"
 
 ```bash
 sudo apt-get update \
@@ -51,7 +51,7 @@ sudo apt-get update \
     zlib1g
 ```
 
-## Debian 10 "buster"
+## Debian 10 "Buster"
 
 ```bash
 sudo apt-get update \
@@ -81,7 +81,7 @@ sudo apt-get update \
 
 Note: Add [noninteractive](https://github.com/dotnet/dotnet-docker/blob/c0e8be8a44b47b1dcc2a5b4b2ebd92022087ac0b/src/runtime-deps/3.1/focal/arm64v8/Dockerfile#L4) for non-interactive installation.
 
-## Ubuntu 18.04 "bionic"
+## Ubuntu 18.04 "Bionic"
 
 ```bash
 sudo apt-get update \
