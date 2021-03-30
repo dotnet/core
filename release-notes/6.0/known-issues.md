@@ -40,4 +40,10 @@ You can workaround these issues by setting the IncludePackageReferencesDuringMar
 * `PropertyGrid` values are rendered at incorrect location.
 
      The issue is tracked in [dotnet/winforms#4593](https://github.com/dotnet/winforms/issues/4593) and is expected to be fixed in 6.0 Preview3.
+     
+## ASP.NET Core
+
+**Running Blazor WebAssembly using IIS Express in Development**
+
+As of .NET 6 Preview 1, there is an ongoing issue with running Blazor WebAssembly applications using an IIS Express server during development on Visual Studio. As a workaround, we recommend using Kestrel during development.
 
