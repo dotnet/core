@@ -35,6 +35,14 @@ You can workaround these issues by setting the IncludePackageReferencesDuringMar
     <IncludePackageReferencesDuringMarkupCompilation>false</IncludePackageReferencesDuringMarkupCompilation>
 </PropertyGroup>`
 
+## .NET Runtime
+1. Issue in `ReadyToRun` fearue for .NET Preview 6.0 Preview 3 as descripbed in GitHub issue [#50472](https://github.com/dotnet/runtime/issues/50472)
+
+**Workaround**
+
+You can workaround this issue by setting `COMPlus_ReadyToRun=0` environment variable.
+
+
 ## Windows Forms
 
 * `PropertyGrid` values are rendered at incorrect location.
