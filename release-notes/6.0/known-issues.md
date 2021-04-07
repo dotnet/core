@@ -36,7 +36,7 @@ You can workaround these issues by setting the IncludePackageReferencesDuringMar
 </PropertyGroup>`
 
 ## .NET Runtime
-1. Issue in `ReadyToRun` fearue for .NET Preview 6.0 Preview 3 as descripbed in GitHub issue [#50472](https://github.com/dotnet/runtime/issues/50472)
+1. Issue in `ReadyToRun` feature for .NET Preview 6.0 Preview 3 as described in [dotnet/runtime #50472](https://github.com/dotnet/runtime/issues/50472)
 
 **Workaround**
 
@@ -54,4 +54,3 @@ You can workaround this issue by setting `COMPlus_ReadyToRun=0` environment vari
 **Running Blazor WebAssembly using IIS Express in Development**
 
 As of .NET 6 Preview 1, there is an ongoing issue with running Blazor WebAssembly applications using an IIS Express server during development on Visual Studio. As a workaround, we recommend using Kestrel during development.
-
