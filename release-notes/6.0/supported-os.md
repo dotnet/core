@@ -1,6 +1,6 @@
-# .NET 6.0 - Supported OS versions
+# .NET 6 Support
 
-.NET 6.0 is [supported](https://github.com/dotnet/core/blob/main/microsoft-support.md) on multiple operating systems, in alignment with official operating system lifecycle and distribution.
+[.NET 6](README.md) is supported on multiple operating systems per their [lifecycle policy](../../os-lifecycle-policy.md).
 
 ## Windows
 
@@ -65,25 +65,25 @@ OS                                    | Version               | Architectures   
 
 ## macOS
 
-OS                            | Version                       | Architectures  |
-------------------------------|-------------------------------|----------------|
-[macOS][macOS]                | 10.14+                        | x64, Arm64     |
+OS                            | Version                   | Architectures     |
+------------------------------|---------------------------|-------------------|
+[macOS][macOS]                | 10.14+                    | x64, Arm64        |
 
 [macOS]: https://support.apple.com/macos
 
 ## Android
 
-OS                            | Version                       | Architectures  |
-------------------------------|-------------------------------|----------------|
-[Android][Android]                | API 21+                        | x64, Arm32, Arm64     |
+OS                            | Version                 | Architectures     |
+------------------------------|-------------------------|-------------------|
+[Android][Android]            | API 21+                 | x64, Arm32, Arm64 |
 
 [Android]: https://support.google.com/android
 
 ## iOS / tvOS
 
-OS                            | Version                       | Architectures  |
-------------------------------|-------------------------------|----------------|
-[iOS][iOS]                | 10.0+                        | x64, Arm32, Arm64     |
+OS                            | Version                 | Architectures     |
+------------------------------|-------------------------|-------------------|
+[iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
 
 [iOS]: https://support.apple.com/ios
 
