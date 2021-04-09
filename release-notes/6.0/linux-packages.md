@@ -102,7 +102,7 @@ The following distros are not supported by the .NET team. The following package 
 ### Arch Linux
 
 ```bash
-pacman -Sy \
+sudo pacman -Sy \
     glibc \
     gcc \
     krb5 \
