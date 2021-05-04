@@ -54,3 +54,11 @@ You can workaround this issue by setting `COMPlus_ReadyToRun=0` environment vari
 **Running Blazor WebAssembly using IIS Express in Development**
 
 As of .NET 6 Preview 1, there is an ongoing issue with running Blazor WebAssembly applications using an IIS Express server during development on Visual Studio. As a workaround, we recommend using Kestrel during development.
+
+**Incremental builds in VS not working for apps with Razor views**
+
+As of .NET 6 Preview 3, changes to Razor views will not be updated during incremental builds. As a workaround, you can:
+
+- Build from the command line
+- Configure VS to always call MSBuild when building projects
+- Clean and build projects to pick up changes
