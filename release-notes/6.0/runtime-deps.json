@@ -8,6 +8,7 @@
     "media": "Used for multimedia scenarios",
     "printing": "Used for printing to printers",
     "security": "Used for security scenarios",
+    "dtc-transactions": "Used for DTC transactions",
     "xwindows": "Used to access the X Window System of a Linux or Unix-based system"
   },
   "platforms": [
@@ -784,6 +785,11 @@
               "usage": "default"
             },
             {
+              "name": "msxactps.dll",
+              "dependencyType": "Library",
+              "usage": "dtc-transactions"
+            },
+            {
               "name": "ncrypt.dll",
               "dependencyType": "Library",
               "usage": "security"
@@ -994,13 +1000,39 @@
           ]
         },
         {
+          "name": "System.Management",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "fastprox.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "wbemsvc.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "wmiutils.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
           "name": "System.Speech",
           "type": "NuGetPackage",
           "platformDependencies": [
             {
-              "name": "winmm.dll",
+              "name": "sapi.dll",
               "dependencyType": "Library",
               "usage": "default"
+            },
+            {
+              "name": "winmm.dll",
+              "dependencyType": "Library",
+              "usage": "media"
             }
           ]
         },
