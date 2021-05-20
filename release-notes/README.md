@@ -12,7 +12,7 @@ The following [.NET releases](../releases.md) are currently supported:
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
 
 [6.0 Preview 3]: 6.0/preview/6.0.0-preview.3.md
-[5.0.6]: 5.0/5.0.5/5.0.6.md
+[5.0.6]: 5.0/5.0.6/5.0.6.md
 [3.1.15]: 3.1/3.1.15/3.1.15.md
 [2.1.28]: 2.1/2.1.28/2.1.28.md
 
