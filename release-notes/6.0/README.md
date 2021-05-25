@@ -14,6 +14,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2021/05/25 | [6.0.0 Preview 4](https://github.com/dotnet/core/blob/main/release-notes/6.0/preview/6.0.0-preview.4.md) |
 | 2021/04/08 | [6.0.0 Preview 3](https://github.com/dotnet/core/blob/main/release-notes/6.0/preview/6.0.0-preview.3.md) |
 | 2021/03/11 | [6.0.0 Preview 2](https://github.com/dotnet/core/blob/main/release-notes/6.0/preview/6.0.0-preview.2.md) |
 | 2021/02/17 | [6.0.0 Preview 1](https://github.com/dotnet/core/blob/main/release-notes/6.0/preview/6.0.0-preview.1.md) |
