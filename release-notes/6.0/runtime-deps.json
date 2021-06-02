@@ -1,0 +1,1058 @@
+{
+  "productVersion": "6.0",
+  "dependencyUsages": {
+    "default": "Used by default or for canonical scenarios",
+    "diagnostics": "Used for diagnostic scenarios such as tracing or debugging",
+    "http.sys": "Used to access the HTTP.sys listener in Windows",
+    "localization": "Used for locale and culture scenarios",
+    "media": "Used for multimedia scenarios",
+    "printing": "Used for printing to printers",
+    "security": "Used for security scenarios",
+    "dtc-transactions": "Used for DTC transactions",
+    "xwindows": "Used to access the X Window System of a Linux or Unix-based system"
+  },
+  "platforms": [
+    {
+      "rid": "alpine",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "icu-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "krb5-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgcc",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libintl",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libssl1.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libstdc++",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "lttng-ust",
+              "dependencyType": "LinuxPackage",
+              "usage": "diagnostics"
+            },
+            {
+              "name": "tzdata",
+              "dependencyType": "LinuxPackage",
+              "usage": "localization"
+            },
+            {
+              "name": "zlib1g",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libldap",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "cups",
+              "dependencyType": "LinuxPackage",
+              "usage": "printing"
+            },
+            {
+              "name": "libgdiplus:6.0.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libx11-dev",
+              "dependencyType": "LinuxPackage",
+              "usage": "xwindows"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "debian",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "libc6",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgcc1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgssapi-krb5-2",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libicu57",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "liblttng-ust0",
+              "dependencyType": "LinuxPackage",
+              "usage": "diagnostics"
+            },
+            {
+              "name": "libssl1.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libstdc++6",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "tzdata",
+              "dependencyType": "LinuxPackage",
+              "usage": "localization"
+            },
+            {
+              "name": "zlib1g",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libldap-2.4-2",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libcups2",
+              "dependencyType": "LinuxPackage",
+              "usage": "printing"
+            },
+            {
+              "name": "libgdiplus:6.0.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libx11-dev",
+              "dependencyType": "LinuxPackage",
+              "usage": "xwindows"
+            }
+          ]
+        }
+      ],
+      "platforms": [
+        {
+          "rid": "debian.10",
+          "components": [
+            {
+              "name": "Microsoft.NETCore.App",
+              "type": "SharedFramework",
+              "platformDependencies": [
+                {
+                  "name": "libicu63",
+                  "overrides": {
+                    "id": "libicu57",
+                    "dependencyType": "LinuxPackage"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "rid": "debian.11",
+          "components": [
+            {
+              "name": "Microsoft.NETCore.App",
+              "type": "SharedFramework",
+              "platformDependencies": [
+                {
+                  "name": "libicu67",
+                  "overrides": {
+                    "id": "libicu57",
+                    "dependencyType": "LinuxPackage"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "fedora",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "glibc",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "krb5-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libicu",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgcc",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libstdc++",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "lttng-ust",
+              "dependencyType": "LinuxPackage",
+              "usage": "diagnostics"
+            },
+            {
+              "name": "openssl-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "tzdata",
+              "dependencyType": "LinuxPackage",
+              "usage": "localization"
+            },
+            {
+              "name": "zlib",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "openldap",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "cups-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "printing"
+            },
+            {
+              "name": "libgdiplus:6.0.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libX11-devel",
+              "dependencyType": "LinuxPackage",
+              "usage": "xwindows"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "opensuse",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "glibc",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "icu",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "krb5",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgcc_s1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "liblttng-ust0",
+              "dependencyType": "LinuxPackage",
+              "usage": "diagnostics"
+            },
+            {
+              "name": "libopenssl1_0_0 || libopenssl1_1",
+              "id": "libopenssl",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libstdc++6",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "timezone",
+              "dependencyType": "LinuxPackage",
+              "usage": "localization"
+            },
+            {
+              "name": "zlib",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libldap-2_4-2",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libcups2",
+              "dependencyType": "LinuxPackage",
+              "usage": "printing"
+            },
+            {
+              "name": "libgdiplus0:6.0.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libX11-devel",
+              "dependencyType": "LinuxPackage",
+              "usage": "xwindows"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "osx",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "libobjc.dylib",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "libproc.dylib",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Data.Odbc",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libodbc.2.dylib",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libldap.dylib",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libgdiplus.dylib:6.0.1",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "rhel",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "glibc",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "krb5-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libicu",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgcc",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libstdc++",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "lttng-ust",
+              "dependencyType": "LinuxPackage",
+              "usage": "diagnostics"
+            },
+            {
+              "name": "openssl-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "tzdata",
+              "dependencyType": "LinuxPackage",
+              "usage": "localization"
+            },
+            {
+              "name": "zlib",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "openldap",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "cups-libs",
+              "dependencyType": "LinuxPackage",
+              "usage": "printing"
+            },
+            {
+              "name": "libgdiplus0:6.0.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libX11-devel",
+              "dependencyType": "LinuxPackage",
+              "usage": "xwindows"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "sles",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "glibc",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgcc_s1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "krb5",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "icu",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "liblttng-ust0",
+              "dependencyType": "LinuxPackage",
+              "usage": "diagnostics"
+            },
+            {
+              "name": "libopenssl1_0_0 || libopenssl1_1",
+              "id": "libopenssl",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libstdc++6",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "timeszone",
+              "dependencyType": "LinuxPackage",
+              "usage": "localization"
+            },
+            {
+              "name": "zlib",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libldap-2_4-2",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libcups2",
+              "dependencyType": "LinuxPackage",
+              "usage": "printing"
+            },
+            {
+              "name": "libgdiplus0:6.0.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libX11-devel",
+              "dependencyType": "LinuxPackage",
+              "usage": "xwindows"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "ubuntu",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "libc6",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgcc1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libgssapi-krb5-2",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libicu60",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "liblttng-ust0",
+              "dependencyType": "LinuxPackage",
+              "usage": "diagnostics"
+            },
+            {
+              "name": "libssl1.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libstdc++6",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "tzdata",
+              "dependencyType": "LinuxPackage",
+              "usage": "localization"
+            },
+            {
+              "name": "zlib1g",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libldap-2.4-2",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "libcups2",
+              "dependencyType": "LinuxPackage",
+              "usage": "printing"
+            },
+            {
+              "name": "libgdiplus:6.0.1",
+              "dependencyType": "LinuxPackage",
+              "usage": "default"
+            },
+            {
+              "name": "libx11-dev",
+              "dependencyType": "LinuxPackage",
+              "usage": "xwindows"
+            }
+          ]
+        }
+      ],
+      "platforms": [
+        {
+          "rid": "ubuntu.20.04",
+          "components": [
+            {
+              "name": "Microsoft.NETCore.App",
+              "type": "SharedFramework",
+              "platformDependencies": [
+                {
+                  "name": "libicu66",
+                  "overrides": {
+                    "id": "libicu60",
+                    "dependencyType": "LinuxPackage"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rid": "win",
+      "components": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "type": "SharedFramework",
+          "platformDependencies": [
+            {
+              "name": "advapi32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "bcrypt.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "crypt32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "httpapi.dll",
+              "dependencyType": "Library",
+              "usage": "http.sys"
+            },
+            {
+              "name": "iphlpapi.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "kernel32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "mswsock.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "msxactps.dll",
+              "dependencyType": "Library",
+              "usage": "dtc-transactions"
+            },
+            {
+              "name": "ncrypt.dll",
+              "dependencyType": "Library",
+              "usage": "security"
+            },
+            {
+              "name": "normaliz.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "ntdll.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "ole32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "oleaut32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "secur32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "shell32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "sspicli.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "user32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "version.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "websocket.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "winhttp.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "ws2_32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "Microsoft.Win32.SystemEvents",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "wtsapi32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Data.Odbc",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "odbc32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Diagnostics.EventLog",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "wevtapi.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Diagnostics.PerformanceCounter",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "pdh.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "activeds.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "dnsapi.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "netapi32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.AccountManagement",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "activeds.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "authz.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "credui.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "dsrole.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "logoncli.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "netutils.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "wkscli.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.DirectoryServices.Protocols",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "wldap32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Drawing.Common",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "comdlg32.dll",
+              "dependencyType": "Library",
+              "usage": "printing"
+            },
+            {
+              "name": "gdi32.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "gdiplus.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "winspool.drv",
+              "dependencyType": "DeviceDriver",
+              "usage": "printing"
+            }
+          ]
+        },
+        {
+          "name": "System.Management",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "fastprox.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "wbemsvc.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "wmiutils.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            }
+          ]
+        },
+        {
+          "name": "System.Speech",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "sapi.dll",
+              "dependencyType": "Library",
+              "usage": "default"
+            },
+            {
+              "name": "winmm.dll",
+              "dependencyType": "Library",
+              "usage": "media"
+            }
+          ]
+        },
+        {
+          "name": "System.Windows.Extensions",
+          "type": "NuGetPackage",
+          "platformDependencies": [
+            {
+              "name": "cryptui.dll",
+              "dependencyType": "Library",
+              "usage": "security"
+            },
+            {
+              "name": "winmm.dll",
+              "dependencyType": "Library",
+              "usage": "media"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
