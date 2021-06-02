@@ -36,7 +36,11 @@ You can workaround these issues by setting the IncludePackageReferencesDuringMar
 </PropertyGroup>`
 
 ## .NET Runtime
-1. Issue in `ReadyToRun` feature for .NET Preview 6.0 Preview 3 as described in [dotnet/runtime #50472](https://github.com/dotnet/runtime/issues/50472)
+1. Issue in "dnSpy.exe" fpr .NET 6.0 Preview 5 as described in [dotnet/runtime #53014](https://github.com/dotnet/runtime/issues/53014)
+
+A [fix](https://github.com/dotnet/runtime/pull/53574) for this issue will be available in .NET 6.0 Prevew 6
+
+2. Issue in `ReadyToRun` feature for .NET Preview 6.0 Preview 3 as described in [dotnet/runtime #50472](https://github.com/dotnet/runtime/issues/50472)
 
 **Workaround**
 
