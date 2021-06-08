@@ -75,7 +75,7 @@ You can make tools and libraries debuggable with [Source Link](https://github.co
 
 When you or your users debug your binaries with Source Link, the debugger will attempt to retrieve content (like `.cs` files) from the recorded git commit in your binaries. The given commit needs to be published to a public or accessible private repo in order for that to work. This means that you should build from a branch whose commits are stable and already published. You can build from a PR branch, but the commits may not remain stable for long, as the PRs may be [squashed on merge](https://help.github.com/articles/about-pull-request-merges/).
 
-For official builds, we recommend that you enable [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/master/docs/README.md#continuousintegrationbuild), so that the built artifacts are [reproducible and deterministic](https://reproducible-builds.org/) (same outcome independent of build machine or time).
+For official builds, we recommend that you enable [`ContinuousIntegrationBuild`](https://github.com/dotnet/sourcelink/blob/main/docs/README.md#continuousintegrationbuild), so that the built artifacts are [reproducible and deterministic](https://reproducible-builds.org/) (same outcome independent of build machine or time).
 
 The [dotnetsay project](dotnetsay.csproj) doesn't add these properties or the `PackageReference` but relies on the same information in the [Directory.Build.props](../Directory.Build.props) in the parent directory. The use of a Directory.Build.props is recommended for Source Link, to avoid maintaining these settings in multiple project files.
 
@@ -93,6 +93,6 @@ Set `Debugger Type` to `Managed (CoreCLR)` in `Properties`. Then `Step Into new 
 
 ![debugging-dotnetsay-configure](https://user-images.githubusercontent.com/2608468/40098555-db8cd828-5890-11e8-9549-b3bb1746c187.png)
 
-You will be asked if you want to download source from GitHub. After that, you will then be able to step through the execution of the tool. 
+You will be asked if you want to download source from GitHub. After that, you will then be able to step through the execution of the tool.
 
 ![debugging-dotnetsay](https://user-images.githubusercontent.com/2608468/40098638-5a2be8b8-5891-11e8-83e7-905aa445c2fe.png)
