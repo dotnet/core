@@ -34,7 +34,7 @@ Root assemblies can be specified with the `LinkerRootAssemblies` ItemGroup:
 
 This ItemGroup should contain the logical names of assemblies, not the filenames (so the assembly names should not have extensions).
 
-The linker roots can also be specified at a more granular level using XML root descriptor files, whose format is [documented](https://github.com/mono/linker/tree/master/src/linker#syntax-of-xml-descriptor) in the mono/linker repo. These files should be specified in the LinkerRootDescriptors ItemGroup:
+The linker roots can also be specified at a more granular level using XML root descriptor files, whose format is [documented](https://github.com/mono/linker/blob/main/docs/data-formats.md#descriptor-format) in the mono/linker repo. These files should be specified in the LinkerRootDescriptors ItemGroup:
 
 ```xml
 <ItemGroup>
@@ -82,4 +82,4 @@ The ILLink task can be invoked just like any other msbuild task. For example, it
 </Target>
 ```
 
-Here, the ItemGroups `AssemblyFilesToLink`, `LinkerRootAssemblies`, and `LinkerRootDescriptors` would be defined elsewhere in the project, and the `ExtraArgs` input consists of flags described in the [mono/linker documentation](https://github.com/mono/linker/blob/master/README.md). By default, the `RootAssemblyNames` are rooted as if illink had been called with `-a RootAssemblyName1 -a RootAssemblyName2` ... as arguments, but this behavior is subject to change and should not be relied upon.
+Here, the ItemGroups `AssemblyFilesToLink`, `LinkerRootAssemblies`, and `LinkerRootDescriptors` would be defined elsewhere in the project, and the `ExtraArgs` input consists of flags described in the [mono/linker documentation](https://github.com/mono/linker/blob/main/docs/illink-tasks.md#extraargs). By default, the `RootAssemblyNames` are rooted as if illink had been called with `-a RootAssemblyName1 -a RootAssemblyName2` ... as arguments, but this behavior is subject to change and should not be relied upon.

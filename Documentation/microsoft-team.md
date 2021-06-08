@@ -91,5 +91,5 @@ Service accounts should also be linked. For more details, see [Service accounts 
 
 ## Guidelines
 
-* [Contributing to .NET Core](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md)
+* [Contributing to .NET Core](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md)
 * [What you can expect from Maintainers](https://github.com/dotnet/core/blob/main/Documentation/contributing/maintainers.md)

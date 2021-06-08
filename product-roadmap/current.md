@@ -115,7 +115,7 @@ Items in each section include the following icons:
 
 - ![Completed](media/status-completed.png "Completed icon") Multi Language support for Jupyter Notebooks (C#, F#, PowerShell)[Post](https://devblogs.microsoft.com/dotnet/net-interactive-is-here-net-notebooks-preview-2/)
 - ![Completed](media/status-completed.png "Completed icon") [.NET Notebooks support - Available in VS Code Insiders.](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
-- ![In Progress](media/status-in-progress.png "In Progress icon") VS Code 
+- ![In Progress](media/status-in-progress.png "In Progress icon") VS Code
 - ![In Progress](media/status-in-progress.png "In Progress icon") Adding SQL to .NET Interactive
 - ![In Progress](media/status-in-progress.png "In Progress icon") Improve Productivity
 - ![In Progress](media/status-in-progress.png "In Progress icon") .NET Interactive for makers
@@ -129,7 +129,7 @@ Please see the following links to view work items and themes across:
 
 ## Languages
 
-[Language Feature Status](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md)
+[Language Feature Status](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md)
 
 ### C# 9
 
@@ -147,9 +147,9 @@ Please see the following links to view work items and themes across:
 - ![Completed](media/status-completed.png "Completed icon") [Target-typed conditional](https://github.com/dotnet/csharplang/issues/2460)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Covariant](https://github.com/dotnet/csharplang/issues/49) [Returns](https://github.com/dotnet/csharplang/issues/2844)
 - ![Completed](media/status-completed.png "Completed icon") [Extension GetEnumerator](https://github.com/dotnet/csharplang/issues/3194)
-- ![Completed](media/status-completed.png "Completed icon") [Module initializers](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-9.0/module-initializers.md)
-- ![Completed](media/status-completed.png "Completed icon") [Extending Partial](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-9.0/extending-partial-methods.md)
-- ![Completed](media/status-completed.png "Completed icon") [Top-level statements](https://github.com/dotnet/csharplang/blob/master/proposals/csharp-9.0/top-level-statements.md)
+- ![Completed](media/status-completed.png "Completed icon") [Module initializers](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/module-initializers.md)
+- ![Completed](media/status-completed.png "Completed icon") [Extending Partial](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/extending-partial-methods.md)
+- ![Completed](media/status-completed.png "Completed icon") [Top-level statements](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-9.0/top-level-statements.md)
 
 ### C# Next
 
@@ -185,7 +185,7 @@ Please see the following links to view work items and themes across:
 ## CLI/SDK and MSBuild
 
 
-- ![Completed](media/status-completed.png "Completed icon") [Changes to Target Framework Moniker - TFM](https://github.com/dotnet/designs/blob/master/accepted/2020/net5/net5.md)
+- ![Completed](media/status-completed.png "Completed icon") [Changes to Target Framework Moniker - TFM](https://github.com/dotnet/designs/blob/main/accepted/2020/net5/net5.md)
 - ![In Planning](media/status-in-planning.png "In Planning icon") Xamarin runs on .NET and via the CLI
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Optional Workload infrastructure](https://github.com/dotnet/designs/blob/107b50feec105b7c2b67b37acb322054e2255df5/accepted/2020/workloads/workloads.md)
 - ![In Planning](media/status-in-planning.png "In Planning icon") Acquisition improvements
@@ -195,13 +195,13 @@ Please see the following links to view work items and themes across:
 - ![Completed](media/status-completed.png "Completed icon") [Solution filter support in MSBuild](https://github.com/dotnet/msbuild/issues/4097)
 - ![Completed](media/status-completed.png "Completed icon") [Low priority builds for MSBuild](https://github.com/dotnet/msbuild/pull/4162)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Resolve Assembly References (RAR) pre-built cache](https://github.com/dotnet/msbuild/issues/5247)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Share RAR cache between projects](https://github.com/dotnet/msbuild/blob/master/documentation/specs/rar-as-service.md)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Share RAR cache between projects](https://github.com/dotnet/msbuild/blob/main/documentation/specs/rar-as-service.md)
 
 ## Desktop
 
 ### WPF
 
-[Details](https://github.com/dotnet/wpf/blob/master/roadmap.md)
+[Details](https://github.com/dotnet/wpf/blob/main/roadmap.md)
 
 - ![Completed](media/status-completed.png "Completed icon") WPF Integration with .NET 5
 - ![In Progress](media/status-in-progress.png "In Progress icon") Accessibility updates on app sample bugs
