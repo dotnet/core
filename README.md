@@ -28,7 +28,7 @@ The latest major release is [.NET 5.0](release-notes/5.0/README.md). The latest 
 
 ## How to Engage, Contribute and Provide Feedback
 
-The .NET Core team encourages [contributions](https://github.com/dotnet/runtime/blob/master/CONTRIBUTING.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
+The .NET Core team encourages [contributions](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
 
 Check the [product roadmap](https://aka.ms/dotnet-product-roadmap) to see what the team is focusing on.
 

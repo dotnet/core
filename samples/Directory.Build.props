@@ -2,7 +2,7 @@
  <!--
     This file is intended as a best practice for using sourcelink.
     https://github.com/dotnet/sourcelink
-    
+
     At Microsoft, we have three build types:
 
     Official build:
@@ -14,11 +14,11 @@
     - ContinuousIntegrationBuild property is set to true
     - Embeds PDBs to make it easier to debug crash dumps captured on the CI machine.
     Developer build:
-    - Embeds PDBs to be consistent with PR validation build.   
-    
-    Context: 
-    * https://github.com/dotnet/arcade/blob/master/src/Microsoft.DotNet.Arcade.Sdk/tools/ProjectDefaults.props
-    * https://github.com/dotnet/sourcelink/tree/master/docs#continuousintegrationbuild
+    - Embeds PDBs to be consistent with PR validation build.
+
+    Context:
+    * https://github.com/dotnet/arcade/blob/main/src/Microsoft.DotNet.Arcade.Sdk/tools/ProjectDefaults.props
+    * https://github.com/dotnet/sourcelink/tree/main/docs#continuousintegrationbuild
  -->
 
     <PropertyGroup>

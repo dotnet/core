@@ -13,6 +13,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2021/06/08 | [5.0.7](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.7/5.0.7.md) |
 | 2021/05/25 | [5.0.300](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.6/5.0.300-sdk.md) |
 | 2021/05/11 | [5.0.6](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.6/5.0.6.md) |
 | 2021/04/06 | [5.0.5](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.5/5.0.5.md) |

@@ -1,8 +1,8 @@
 # How to use .NET Core on RHEL 6 / CentOS 6
 This document describes the prerequisites required to run .NET Core applications on RHEL / CentOS 6. Since this version is quite old, there are two runtime libraries that are not available as standard  installation packages in versions that .NET Core can use, so they need to be obtained in different ways described in the sections below.
 ## Required packages
-.NET Core requires the following packages to be installed on RHEL 6: 
-* epel-release 
+.NET Core requires the following packages to be installed on RHEL 6:
+* epel-release
 * libunwind
 * openssl
 * libnghttp2
@@ -22,7 +22,7 @@ This document describes the prerequisites required to run .NET Core applications
     }
 }
 ```
-For more information about enabling or disabling the Globalization, you may refer to the [Globalization Invariant Mode Doc](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/globalization-invariant-mode.md)
+For more information about enabling or disabling the Globalization, you may refer to the [Globalization Invariant Mode Doc](https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md)
 
 ## Getting the libraries that are not available as packages.
 ### ICU
@@ -35,13 +35,13 @@ First install the prerequisites:
 ```sh
 yum install -y \
     wget \
-    epel-release 
+    epel-release
 
 yum install -y \
     openssl-devel \
     libnghttp2-devel \
     libidn-devel \
-    gcc 
+    gcc
 ```
 Now untar the source code
 ```sh
@@ -83,11 +83,11 @@ make install
 ```
 Now pack the compiled CURL:
 ```sh
-cd install 
+cd install
 tar -czf curl-7_45_0-RHEL6-x64.tgz *
 ```
 ## Making the libraries available for a .NET Core application
-There are several ways to do this. The following paragraphs describe them. 
+There are several ways to do this. The following paragraphs describe them.
 ### Install the libraries into /usr/local
 First untar the .tgz files as follows:
 ```sh
@@ -109,7 +109,7 @@ tar -xf /your/path/to/icu4c-57_1-RHEL6-x64.tgz --strip-components=3 usr/local/li
 ### For the app developers – pack the libraries with your application
 The steps are the same as for the previous option, but they are done by the app developer. The app is then packaged including the libraries.
 ## Troubleshooting
-**Q1:** I try to run a .NET Core application on RHEL 6 / CentOS 6 and I get the following exception: 
+**Q1:** I try to run a .NET Core application on RHEL 6 / CentOS 6 and I get the following exception:
 ```
 FailFast: Couldn't find a valid ICU package installed on the system. Set the configuration flag System.Globalization.Invariant to true if you want to run with no globalization support.
 
@@ -128,7 +128,7 @@ FailFast: Couldn't find a valid ICU package installed on the system. Set the con
 Aborted (core dumped)
 ```
 **A1:** The ICU libraries were not extracted from `icu4c-57_1-RHEL6-x64.tgz` to the right place, or `LD_LIBRARY_PATH` was not set to `/usr/local/lib`. See the [Making the libraries available for a .NET Core application](#making-the-libraries-available-for-a-net-core-application) section.
- 
+
 
 **Q2:** I try to run a .NET Core application on RHEL 6 / CentOS 6 and I get the exception similar to the following one:
 ```

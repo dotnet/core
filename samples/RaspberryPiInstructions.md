@@ -74,6 +74,6 @@ It is possible to setup VS Code for remote debugging. Please refer to [Scott Han
 
 ## GPIO access / communicating with hardware
 
-GPIO access as well as I2C, SPI, PWM and many more can be achieved with [.NET IoT](https://github.com/dotnet/iot). For list of available devices please refer to [device listing](https://github.com/dotnet/iot/blob/master/src/devices/README.md).
+GPIO access as well as I2C, SPI, PWM and many more can be achieved with [.NET IoT](https://github.com/dotnet/iot). For list of available devices please refer to [device listing](https://github.com/dotnet/iot/blob/main/src/devices/README.md).
 
 Please consider contributing to the repository or filing an issue if you cannot find the device you're looking for!
