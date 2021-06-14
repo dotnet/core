@@ -3,37 +3,46 @@
 You may encounter the following known issues, which may include workarounds, mitigations or expected resolution timeframes.
 
 ## .NET SDK
+### Preview 4
+1. Workload install for protected install location (eg. c:\program files) will fail
 
-1. WPF App may fail to build or publish
+In the future, the .NET SDK will trigger elevation to install missing workloads but today that fails.
 
-**Publish in Visual Studio**
-
-When publishing a WPF project in Visual Studio with a target runtime specified, the publish operation may fail and display a message similar to the following in the output window:
-
-> Assets file ‘c:\git\repro\WPFSelfContained\obj\project.assets.json’ doesn’t have a target for ‘net5.0-windows/win-x64’. Ensure that restore has run and that you have included ‘net5.0-windows’ in the TargetFrameworks for your project. You may also need to include ‘win-x64’ in your project’s RuntimeIdentifiers.
-
-**Customized output paths**
-
-When building a project that redirects the intermediate and/or output paths to a folder using the `MSBuildProjectName` MSBuild property, for example via the following in a `Directory.Build.props` file:
-
-```xml
-<PropertyGroup>
-    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</RepoRoot>
-    <BaseOutputPath>$(RepoRoot)artifacts\bin\$(MSBuildProjectName)\</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(RepoRoot)artifacts\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-  </PropertyGroup>
 ```
-An error similar to the following may be generated:
+C:\Users\MPP>dotnet workload install microsoft-macos-sdk-full --skip-manifest-update
 
-> error NETSDK1004: Assets file ‘c:\git\repro\wpf\artifacts\obj\wpf_gzmmtwnk_wpftmp\project.assets.json’ not found. Run a NuGet package restore to generate this file.
+Installing pack Microsoft.macOS.Sdk version 11.3.100-preview.5.889...
+Workload installation failed, rolling back installed packs...
+Rolling back pack Microsoft.macOS.Sdk installation...
+Workload installation failed: One or more errors occurred. (Access to the path 'C:\Program Files\dotnet\metadata\temp\microsoft.macos.sdk\11.3.100-preview.5.889' is denied.)
+```
+**Workaround**
+You'll need to elevate your command prompt before running the install command.
+
+### Preview 5
+1. Missing Workload Manifests in Visual Studio 17 preview 1
+
+`dotnet workload install` will error with workload not found when using the .NET SDK CLI installed with Visual Studio preview 1.  To work around this, please install the stand-alone SDK of preview 5 on the same machine.
+
+2. SDK broken when both preview 4 and preview 5 stand-alone SDKs installed on the same machine. Many SDK commands will fail, such as creating, building, or restoring a project. For example:
+```
+dotnet new console
+An item with the same key has already been added. Key: microsoft-android-sdk-full
+   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior) in
+```
+The issue is caused because we renamed SDK workload manifests between preview 4 and preview 5, so if both versions are installed the same workloads and workload packs are defined in multiple places, which is not supported.
 
 **Workaround**
 
-You can workaround these issues by setting the IncludePackageReferencesDuringMarkupCompilation property to false in the project file:
+Uninstall preview 4
 
-`<PropertyGroup>
-    <IncludePackageReferencesDuringMarkupCompilation>false</IncludePackageReferencesDuringMarkupCompilation>
-</PropertyGroup>`
+or
+
+Delete all folders under dotnet\sdk-manifests\6.0.100 that have the form Microsoft.NET.Workload.*, EXCEPT for `microsoft.net.workload.mono.toolchain`
+
+3. Workload update from preview 4 not working
+
+The .NET SDK Optional Workloads were renamed between preview 4 and preview 5 and are not compatible. As such, the `dotnet workload update` command won't work for a preview 4 installed workload but should work with preview 5 and onward.
 
 ## .NET Runtime
 1. Issue in "dnSpy.exe" fpr .NET 6.0 Preview 5 as described in [dotnet/runtime #53014](https://github.com/dotnet/runtime/issues/53014)
