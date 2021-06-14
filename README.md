@@ -6,25 +6,25 @@ The latest major release is [.NET 5.0](release-notes/5.0/README.md). The latest 
 
 ## .NET Core Releases
 
-* [Download the latest .NET Core SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
-* [.NET Core releases](releases.md)
-* [.NET Core daily builds](daily-builds.md)
+- [Download the latest .NET Core SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+- [.NET Core releases](releases.md)
+- [.NET Core daily builds](daily-builds.md)
 
 ## Learn about .NET Core
 
-* [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
-* [.NET Core Roadmap](https://github.com/dotnet/core/blob/main/roadmap.md)
-* [Learn about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
-* [.NET Core release notes](https://github.com/dotnet/core/blob/main/release-notes/README.md)
-* [.NET Core Announcements](https://github.com/dotnet/announcements)
-* [.NET Core blog](https://blogs.msdn.microsoft.com/dotnet/tag/net-core/)
+- [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
+- [.NET Core Roadmap](https://github.com/dotnet/core/blob/main/roadmap.md)
+- [Learn about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
+- [.NET Core release notes](https://github.com/dotnet/core/blob/main/release-notes/README.md)
+- [.NET Core Announcements](https://github.com/dotnet/announcements)
+- [.NET Core blog](https://blogs.msdn.microsoft.com/dotnet/tag/net-core/)
 
 ## Getting help
 
-* [File an issue](Documentation/core-repos.md)
-* [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net-core)
-* [Contact Microsoft Support](https://support.microsoft.com/contactus/)
-* [VS Developer Community Portal](https://developercommunity.visualstudio.com/) for .NET Framework feedback (or via [Report a Problem](https://aka.ms/vs-rap) tool)
+- [File an issue](Documentation/core-repos.md)
+- [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net-core)
+- [Contact Microsoft Support](https://support.microsoft.com/contactus/)
+- [VS Developer Community Portal](https://developercommunity.visualstudio.com/) for .NET Framework feedback (or via [Report a Problem](https://aka.ms/vs-rap) tool)
 
 ## How to Engage, Contribute and Provide Feedback
 
