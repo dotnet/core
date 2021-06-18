@@ -48,7 +48,7 @@ In the .NET SDK installation folder, delete all folders under `sdk-manifests\6.0
 
 **Or**
 
-If you want to use .NET Maui, you can run the latest version of the [maui-check tool](https://github.com/Redth/dotnet-maui-check/blob/main/README.md).  This will delete the outdated manifest folders and set up your environment for .NET Maui development.
+If you want to use .NET MAUI, you can run the latest version of the [maui-check tool](https://github.com/Redth/dotnet-maui-check/blob/main/README.md).  This will delete the outdated manifest folders and set up your environment for .NET MAUI development.
 
 #### 3. Workload update from preview 4 not working
 
