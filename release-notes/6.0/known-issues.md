@@ -20,7 +20,7 @@ Workload installation failed: One or more errors occurred. (Access to the path '
 You'll need to elevate your command prompt before running the install command.
 
 ### Preview 5
-#### 1. Missing Workload Manifests in Visual Studio 17 preview 1
+#### 1. Missing Workload Manifests in Visual Studio 17 Preview 1
 
 `dotnet workload install` will error with workload not found when using the .NET SDK CLI installed with Visual Studio preview 1.  To work around this, please install the stand-alone SDK of preview 5 on the same machine.
 
@@ -44,7 +44,7 @@ Errors that a WorkloadManifest.json file could not be found may be caused if the
 
 **Workaround**
 
-In the .NET SDK installation folder, delete all folders under `sdk-manifests\6.0.100` (for example, under `C:\Program Files\dotnet\sdk-manifests\6.0.100`) that have the form Microsoft.NET.Workload.*, **EXCEP**T for `microsoft.net.workload.mono.toolchain`
+In the .NET SDK installation folder, delete all folders under `sdk-manifests\6.0.100` (for example, under `C:\Program Files\dotnet\sdk-manifests\6.0.100`) that have the form Microsoft.NET.Workload.*, **EXCEPT** for `microsoft.net.workload.mono.toolchain`
 
 **Or**
 
