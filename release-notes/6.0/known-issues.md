@@ -20,27 +20,37 @@ Workload installation failed: One or more errors occurred. (Access to the path '
 You'll need to elevate your command prompt before running the install command.
 
 ### Preview 5
-1. Missing Workload Manifests in Visual Studio 17 preview 1
+#### 1. Missing Workload Manifests in Visual Studio 17 Preview 1
 
 `dotnet workload install` will error with workload not found when using the .NET SDK CLI installed with Visual Studio preview 1.  To work around this, please install the stand-alone SDK of preview 5 on the same machine.
 
-2. SDK broken when both preview 4 and preview 5 stand-alone SDKs installed on the same machine. Many SDK commands will fail, such as creating, building, or restoring a project. For example:
+#### 2. Upgrades from .NET SDK Preview 4 to Preview 5 leave tools in a broken state.  Projects will fail to load in Visual Studio, and many SDK commands will fail, such as creating, building, or restoring a project.
+
+This can manifest in several different ways.  For example, when using the dotnet CLI, you may get an error similar to the following:
+
 ```
 dotnet new console
 An item with the same key has already been added. Key: microsoft-android-sdk-full
    at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior) in
 ```
-The issue is caused because we renamed SDK workload manifests between preview 4 and preview 5, so if both versions are installed the same workloads and workload packs are defined in multiple places, which is not supported.
+
+When opening a project in Visual Studio, you may get an error similar to the following:
+
+> The project file cannot be opened. The NuGet-based SDK resolver failed to run because NuGet assemblies could not be located. Check your installation of MSBuild or set the environment variable “MSBUILD_NUGET_PATH” to the folder that contains the required NuGet assemblies. Could not find file ‘C:\Program Files\dotnet\sdk-manifests\6.0.100\Microsoft.NET.Workload.Android\WorkloadManifest.json’.
+
+The issue is caused because we renamed SDK workload manifests between preview 4 and preview 5.  If both versions of the manifests are installed, they will conflict with each other, leading to the "An item with the same key has already been added" error.
+
+Errors that a WorkloadManifest.json file could not be found may be caused if the `maui-check` tool had previously been run with Preview 4.  The tool would add some additional files to the workload manifest folders, which prevents the folders from being deleted when installing Preview 5.  These manifest folders without a WorkloadManfiest.json file then cause the file not found error.
 
 **Workaround**
 
-Uninstall preview 4
+In the .NET SDK installation folder, delete all folders under `sdk-manifests\6.0.100` (for example, under `C:\Program Files\dotnet\sdk-manifests\6.0.100`) that have the form Microsoft.NET.Workload.*, **EXCEPT** for `microsoft.net.workload.mono.toolchain`
 
-or
+**Or**
 
-Delete all folders under dotnet\sdk-manifests\6.0.100 that have the form Microsoft.NET.Workload.*, EXCEPT for `microsoft.net.workload.mono.toolchain`
+If you want to use .NET MAUI, you can run the latest version of the [maui-check tool](https://github.com/Redth/dotnet-maui-check/blob/main/README.md).  This will delete the outdated manifest folders and set up your environment for .NET MAUI development.
 
-3. Workload update from preview 4 not working
+#### 3. Workload update from preview 4 not working
 
 The .NET SDK Optional Workloads were renamed between preview 4 and preview 5 and are not compatible. As such, the `dotnet workload update` command won't work for a preview 4 installed workload but should work with preview 5 and onward.
 
