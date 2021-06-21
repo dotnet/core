@@ -85,3 +85,13 @@ As of .NET 6 Preview 3, changes to Razor views will not be updated during increm
 - Build from the command line
 - Configure VS to always call MSBuild when building projects
 - Clean and build projects to pick up changes
+
+**JWT Bearer Handler ArgumentOutOfRangeException in UTC+X time zones**
+
+As of .NET 6 Preview 5, when using the JWT Bearer handler in a time zone that is higher than UTC (e.g. Eastern European Time/UTC+2), you may observe an `ArgumentOutOfRangeException` if the JWT token does not contain a `nbf` value (valid from).
+
+Issue is tracked by https://github.com/dotnet/aspnetcore/issues/33634 and will be fixed in .NET 6 Preview 6.
+
+**Workaround**
+
+You can workaround this by always providing a non-zero and non-minimum value for the `notBefore` parameter when using System.IdentityModel.Tokens.Jwt.JwtSecurityToken, or the 'nbf' field if using another JWT library.
