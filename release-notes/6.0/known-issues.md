@@ -65,6 +65,23 @@ A [fix](https://github.com/dotnet/runtime/pull/53574) for this issue will be ava
 
 You can workaround this issue by setting `COMPlus_ReadyToRun=0` environment variable.
 
+3. **Microsoft.Extensions.DependencyInjection** .NET 6.0 Preview 5 has a regression related to injecting more than 5 services into an IEnumerable\<T>\, see [dotnet/runtime #54407](https://github.com/dotnet/runtime/issues/54407) for more details.
+
+
+**Workaround**
+
+If using the generic host, you can disable the `ValidateOnBuild` option:
+
+```C#
+Host.CreateDefaultBuilder(args)
+    .UseDefaultServiceProvider(o =>
+    {
+        o.ValidateOnBuild = false;
+    });
+```
+
+If using the `BuildServiceProvider` container directly, `ValidateOnBuild` is not on by default.
+
 
 ## Windows Forms
 
