@@ -25,7 +25,7 @@ Each of the distributions can be downloaded from:
 
 ## Install using deb/rpm packages
 
-DEB and RPM install packages for Linux are available from Microsoft or, natively from some Linux distrobutions. It is recommended that you use packages provided by distrobution, when available. See [Install .NET on Linux](https://docs.microsoft.com/en-us/dotnet/core/install/linux) for a complete list of supported Linux Distros and installer package options for each.
+DEB and RPM install packages for Linux are available from Microsoft or, natively from some Linux distributions. It is recommended that you use packages provided by distribution, when available. See [Install .NET on Linux](https://docs.microsoft.com/en-us/dotnet/core/install/linux) for a complete list of supported Linux distributions and installer package options for each.
 
 ## Install using Snap
 
@@ -48,7 +48,7 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -o dotnet.tar.gz http://aka.ms/dotnet/5.0/dotnet-sdk-linux-x64.tar.gz
+~# curl -L -o dotnet.tar.gz http://aka.ms/dotnet/5.0/dotnet-sdk-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
