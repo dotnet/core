@@ -17,8 +17,8 @@ The following table lists in-support .NET releases.
 | [.NET Core 2.1](release-notes/2.1/README.md) | [May 30, 2018](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-1/) | [LTS][policies] | [2.1.28][2.1.28] | [August 21, 2021](https://devblogs.microsoft.com/dotnet/net-core-2-1-will-reach-end-of-support-on-august-21-2021/) |
 
 [6.0 Preview 5]: release-notes/6.0/preview/6.0.0-preview.5.md
-[5.0.7]: release-notes/5.0/5.0.7/5.0.7.md
-[3.1.16]: release-notes/3.1/3.1.16/3.1.16.md
+[5.0.8]: release-notes/5.0/5.0.8/5.0.8.md
+[3.1.17]: release-notes/3.1/3.1.17/3.1.17.md
 [2.1.28]: release-notes/2.1/2.1.28/2.1.28.md
 
 ## End-of-life .NET versions
