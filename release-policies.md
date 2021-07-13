@@ -11,7 +11,7 @@ New major .NET versions are released annually in November. .NET 5.0 was the firs
 Each .NET release is defined (prior to initial release) as either **Preview**, **Current**, or **Long Term Support (LTS)**. The difference is support time frame, as defined below:
 
 * **Preview** releases are not supported but are offered for public testing. A Preview or Release Candidate release may be considered "go live" and have its own specific ad-hoc support terms that aren't covered by this general policy.
-* **Current** releases are supported for (typically) fifteen months. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation. Current release users need to upgrade to later .NET releases more often to stay in support.
+* **Current** releases are supported for (typically) eighteen months. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation. Current release users need to upgrade to later .NET releases more often to stay in support.
 * **LTS** releases are supported for three years. They are intended for users that want the stability and lower cost of maintaining an application on a single (major.minor) .NET version for an extended period.
 
 LTS and Current releases have many similarities. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another (LTS or Current, in either direction), and has processes in place to achieve that intention.
@@ -39,7 +39,7 @@ Functional improvements are typically very targeted, and may address the followi
 
 During the maintenance support period, .NET releases are updated to mitigate security vulnerabilities, only.
 
-* Current releases are supported for fifteen months, the last three months of which is maintenance.
+* Current releases are supported for eighteen months, the last six months of which is maintenance.
 * LTS releases are supported for three years, the last year of which is maintenance.
 
 After the maintenance period ends, the release is out of support.
