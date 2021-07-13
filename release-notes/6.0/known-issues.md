@@ -38,6 +38,12 @@ When opening a project in Visual Studio, you may get an error similar to the fol
 
 > The project file cannot be opened. The NuGet-based SDK resolver failed to run because NuGet assemblies could not be located. Check your installation of MSBuild or set the environment variable “MSBUILD_NUGET_PATH” to the folder that contains the required NuGet assemblies. Could not find file ‘C:\Program Files\dotnet\sdk-manifests\6.0.100\Microsoft.NET.Workload.Android\WorkloadManifest.json’.
 
+When opening a project in Visual Studio for Mac, you may get an error similar to the following:
+
+> Unable to find SDK  
+> 'Microsoft.NET.SDK.WorkloadAutoImportPropsLocator'  
+> SDK not found
+
 The issue is caused because we renamed SDK workload manifests between preview 4 and preview 5.  If both versions of the manifests are installed, they will conflict with each other, leading to the "An item with the same key has already been added" error.
 
 Errors that a WorkloadManifest.json file could not be found may be caused if the `maui-check` tool had previously been run with Preview 4.  The tool would add some additional files to the workload manifest folders, which prevents the folders from being deleted when installing Preview 5.  These manifest folders without a WorkloadManfiest.json file then cause the file not found error.
