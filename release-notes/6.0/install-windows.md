@@ -40,13 +40,13 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```console
-C:\>curl -o dotnet.zip https://download.visualstudio.microsoft.com/download/pr/5b31ca8e-f684-4de7-9889-c53ce6cf9a3c/e85b1ef8dc6004c5f5bd0019771b21c5/dotnet-sdk-6.0.100-preview.2.21155.3-win-x64.zip
+C:\>curl -o dotnet.zip https://download.visualstudio.microsoft.com/download/pr/9da8718a-a4cf-42dc-a86c-1ea648acf136/73e158f3e4dfb1446595d0dba5b6343a/dotnet-sdk-6.0.100-preview.6.21355.2-win-x64.exe
 C:\>tar -C dotnet -xf dotnet.zip
 C:\>del dotnet.zip
 C:\>set DOTNET_ROOT=C:\dotnet
 C:\>set PATH=%PATH%;C:\dotnet
 C:\>dotnet --version
-6.0.100-preview.2.21155.3
+6.0.100-preview.6.21355.2
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
