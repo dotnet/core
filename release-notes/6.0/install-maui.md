@@ -1,6 +1,29 @@
 # Install .NET Multi-platform App UI Workloads
 
-To check your environment for dependencies and obtain the latest .NET MAUI SDKs, we recommend using the `maui-check` dotnet tool.
+As of .NET 6 preview 6, .NET MAUI is a workload. To install .NET MAUI with Android, iOS, and macOS (Mac Catalyst) SDKs:
+
+```console
+$ dotnet workload install maui
+```
+
+We also have targeted workload manifests for mobile and desktop only:
+
+```console
+$ dotnet workload install maui-desktop
+$ dotnet workload install maui-mobile
+```
+
+Optionally, for more granular control you can install platform SDKs individually:
+
+```console
+$ dotnet workload install microsoft-android-sdk-full
+$ dotnet workload install microsoft-ios-sdk-full
+$ dotnet workload install microsoft-maccatalyst-sdk-full
+$ dotnet workload install microsoft-macos-sdk-full
+$ dotnet workload install microsoft-tvos-sdk-full
+```
+
+To check your environment for additional dependencies and obtain the latest .NET MAUI SDKs, we recommend using our `maui-check` dotnet tool.
 
 ```console
 $ dotnet tool install -g redth.net.maui.check
@@ -12,17 +35,7 @@ Then run the tool and follow the instructions presented:
 $ maui-check
 ```
 
-Optionally, you can also use `dotnet workload install` from the command line to install individual SDKs:
-
-```console
-$ dotnet workload install microsoft-android-sdk-full
-$ dotnet workload install microsoft-ios-sdk-full
-$ dotnet workload install microsoft-maccatalyst-sdk-full
-$ dotnet workload install microsoft-macos-sdk-full
-$ dotnet workload install microsoft-tvos-sdk-full
-```
-
-See the [dotnet/maui-samples](https://github.com/dotnet/maui-samples/) repo for sample projects and further details about getting started.
+See our [documentation](https://docs.microsoft.com/dotnet/maui/get-started/installation) for further details about getting started, including installing Windows App SDK requirements.
 
 ### Android
 
@@ -36,7 +49,7 @@ Prerequisites:
 Prerequisites:
 
 * [Install .NET 6.0.0 Preview 6](#downloads)
-* Xcode 12.5
+* Xcode 13.0 Beta 1
 
 ## Downloads
 
