@@ -28,14 +28,14 @@ See the [dotnet/maui-samples](https://github.com/dotnet/maui-samples/) repo for 
 
 Prerequisites:
 
-* [Install .NET 6.0.0 Preview 5](#downloads)
+* [Install .NET 6.0.0 Preview 6](#downloads)
 * You will need the Android SDK installed as well as `Android SDK Platform 30`. One way to acquire this is to install the Xamarin workload in the Visual Studio installer. You can manage Android SDKs from `Tools > Android > Android SDK Manager` from within Visual Studio.
 
 ### iOS, Mac Catalyst, and macOS (Cocoa)
 
 Prerequisites:
 
-* [Install .NET 6.0.0 Preview 5](#downloads)
+* [Install .NET 6.0.0 Preview 6](#downloads)
 * Xcode 12.5
 
 ## Downloads
