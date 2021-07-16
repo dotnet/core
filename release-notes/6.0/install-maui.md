@@ -49,7 +49,11 @@ Prerequisites:
 Prerequisites:
 
 * [Install .NET 6.0.0 Preview 6](#downloads)
+<<<<<<< HEAD
 * Xcode 13.0 Beta 1
+=======
+* Xcode 12.5
+>>>>>>> f239783c2edb8cca1eb698b53e35a7538c528992
 
 ## Downloads
 
