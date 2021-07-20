@@ -72,6 +72,23 @@ sudo apt-get install curl libunwind8 gettext apt-transport-https
 
 It is possible to setup VS Code for remote debugging. Please refer to [Scott Hanselman's tutorial](https://www.hanselman.com/blog/RemoteDebuggingWithVSCodeOnWindowsToARaspberryPiUsingNETCoreOnARM.aspx).
 
+## Remote Debugging from Windows using a Setup Script
+
+Pete Gallagher (A Microsoft Azure MVP - @pete_codes) has created a single line setup script to enable remote debugging from a Windows Machine using VS Code to a Raspberry Pi.
+
+This setup script makes use of cwRsync to copy the published files over to the Pi and then uses SSH to download and attach the .NET debugger remotely from VS Code.
+
+Please refer to [Pete Gallagher's Blog](https://bit.ly/pidotnetremotedeploy)
+
+## Single Line Install script for .NET Core and .NET 5 for the Raspberry Pi
+
+Pete Gallagher has also created single line install scripts for .NET Core and .NET 5 for the Raspberry Pi.
+
+Please refer to Pete Gallagher's Blog;
+
+- [.NET Core](https://bit.ly/dotnetcorepi)
+- [NET 5](https://bit.ly/dotnet5pi)
+
 ## GPIO access / communicating with hardware
 
 GPIO access as well as I2C, SPI, PWM and many more can be achieved with [.NET IoT](https://github.com/dotnet/iot). For list of available devices please refer to [device listing](https://github.com/dotnet/iot/blob/main/src/devices/README.md).
