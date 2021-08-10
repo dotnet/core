@@ -2,9 +2,9 @@
 
 This document lists known issues for *.NET Core 1.0 RC2* and *.NET Core SDK 1.0 Preview 1* which may be encountered during usage. Issues and bugs that are being considered for the final release can be seen in the following GitHub repos.
 
-* [CoreCLR](https://github.com/dotnet/coreclr/issues?q=is%3Aopen+is%3Aissue+milestone%3A1.0.0-rtm)
-* [CoreFX](https://github.com/dotnet/corefx/issues?q=is%3Aopen+is%3Aissue+milestone%3A1.0.0-rtm)
-* [SDK](https://github.com/dotnet/cli/issues?q=is%3Aopen+is%3Aissue+milestone%3A1.0.0-rtm)
+- [CoreCLR](https://github.com/dotnet/coreclr/issues?q=is%3Aopen+is%3Aissue+milestone%3A1.0.0-rtm)
+- [CoreFX](https://github.com/dotnet/corefx/issues?q=is%3Aopen+is%3Aissue+milestone%3A1.0.0-rtm)
+- [SDK](https://github.com/dotnet/cli/issues?q=is%3Aopen+is%3Aissue+milestone%3A1.0.0-rtm)
 
 ## .NET Core 1.0 SDK Preview 1
 
