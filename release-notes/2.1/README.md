@@ -9,12 +9,13 @@
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported operating systems](2.1-supported-os.md)
 - [Known Issues](2.1-known-issues.md)
-- [Contributors](2.1.0-contributor-list.md)
+- [Contributors](2.1.0-contributor.md)
 
 ## Releases
 
 | Date | Release |
 | :-- | :-- |
+| 2021/08/10 | [2.1.29](2.1.29/2.1.29.md) |
 | 2021/05/11 | [2.1.28](2.1.28/2.1.28.md) |
 | 2021/04/13 | [2.1.27](2.1.27/2.1.27.md) |
 | 2021/03/09 | [2.1.26](2.1.26/2.1.26.md) |
