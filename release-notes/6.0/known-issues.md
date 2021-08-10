@@ -60,20 +60,6 @@ If you want to use .NET MAUI, you can run the latest version of the [maui-check 
 
 The .NET SDK Optional Workloads were renamed between preview 4 and preview 5 and are not compatible. As such, the `dotnet workload update` command won't work for a preview 4 installed workload but should work with preview 5 and onward.
 
-### Preview 7
-#### 1. Reference assemblies no longer output to the bin directory
-
-These files are only needed during builds and cause confusion for customers to see extra binaries built to the bin\ref folder. Instead they were [moved](https://github.com/dotnet/msbuild/pull/6560) to only build to the obj/ref folder.
-
-**Note, this change is being [reverted](https://github.com/dotnet/msbuild/pull/6718) for RC1 as we found a hardcoded path in Roslyn in VS scenarios that has to be addressed first**
-
-#### 2. Error when cleaning up preview 6 workloads when installing preview 7 workloads
-
-The workload names all changed between preview 6 and 7 so the SDK doesn't recognize how to clean up existing installed workloads from earlier previews and will error
-
-`Garbage collecting for SDK feature bands 6.0.100...
-Workload installation failed: Workload not found: microsoft-net-sdk-blazorwebassembly-aot. Known workloads: ...`
-
 ## .NET Runtime
 1. Issue in "dnSpy.exe" fpr .NET 6.0 Preview 5 as described in [dotnet/runtime #53014](https://github.com/dotnet/runtime/issues/53014)
 

@@ -1,6 +1,6 @@
 # Install .NET Multi-platform App UI Workloads
 
-As of .NET 6 preview 6, .NET MAUI is a workload. To install .NET MAUI with Android, iOS, and macOS (Mac Catalyst) SDKs:
+As of .NET 6 preview 7, .NET MAUI is a workload. To install .NET MAUI with Android, iOS, and macOS (Mac Catalyst) SDKs:
 
 ```console
 $ dotnet workload install maui
@@ -41,14 +41,14 @@ See our [documentation](https://docs.microsoft.com/dotnet/maui/get-started/insta
 
 Prerequisites:
 
-* [Install .NET 6.0.0 Preview 6](#downloads)
+* [Install .NET 6.0.0 preview 7](#downloads)
 * You will need the Android SDK installed as well as `Android SDK Platform 30`. One way to acquire this is to install the Xamarin workload in the Visual Studio installer. You can manage Android SDKs from `Tools > Android > Android SDK Manager` from within Visual Studio.
 
 ### iOS, Mac Catalyst, and macOS (Cocoa)
 
 Prerequisites:
 
-* [Install .NET 6.0.0 Preview 6](#downloads)
+* [Install .NET 6.0.0 preview 7](#downloads)
 * Xcode 13.0 Beta 1
 
 ## Downloads
