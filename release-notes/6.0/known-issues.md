@@ -74,6 +74,10 @@ The workload names all changed between preview 6 and 7 so the SDK doesn't recogn
 `Garbage collecting for SDK feature bands 6.0.100...
 Workload installation failed: Workload not found: microsoft-net-sdk-blazorwebassembly-aot. Known workloads: ...`
 
+#### 3. .NET MAUI Windows apps fail to debug in Visual Studio 2022 Preview 3
+
+There is an incompatibility between .NET MAUI tooling features and Windows App SDK that prevents apps from launching and debugging. You can work around this by building and deploying without debugging, and then launching the application from the Start menu and attaching the debugger. A fix is underway and will come in a future Visual Studio 2022 service release.
+
 ## .NET Runtime
 1. Issue in "dnSpy.exe" fpr .NET 6.0 Preview 5 as described in [dotnet/runtime #53014](https://github.com/dotnet/runtime/issues/53014)
 
