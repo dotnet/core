@@ -17,6 +17,15 @@ The workload names all changed between preview 6 and 7 so the SDK doesn't recogn
 `Garbage collecting for SDK feature bands 6.0.100...
 Workload installation failed: Workload not found: microsoft-net-sdk-blazorwebassembly-aot. Known workloads: ...`
 
+Another potential error
+`Garbage collecting for SDK feature bands 6.0.100…
+Workload installation failed: The JSON value could not be converted to Microsoft.NET.Sdk.WorkloadManifestReader.WorkloadPackId. Path: $.Id | LineNumber: 0 | BytePositionInLine: 40.`
+
+**Workaround**
+Delete your dotnet\metadata folder and try the workload install again. The metadata folder contains our records of what workloads you've tried to install and is what's triggering us to try to clean up an older workload that may not be recognized or compatible with the current SDK.  
+
+Note that a side effect of this is that the SDK will leave behind some older preview workloads across various _packs_ directories.
+
 ### Preview 5
 #### 1. Missing Workload Manifests in Visual Studio 17 Preview 1
 
