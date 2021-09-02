@@ -35,7 +35,7 @@ OS                                    | Version               | Architectures   
 [Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
 [Alpine]: https://alpinelinux.org/
-[Alpine-lifecycle]: https://wiki.alpinelinux.org/wiki/Alpine_Linux:Releases
+[Alpine-lifecycle]: https://alpinelinux.org/releases/
 [CentOS]: https://www.centos.org/
 [CentOS-lifecycle]:https://wiki.centos.org/FAQ/General
 [CentOS-docker]: https://hub.docker.com/_/centos
