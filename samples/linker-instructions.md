@@ -37,7 +37,7 @@ The instructions assume you are using [.NET Core 2.0](https://github.com/dotnet/
 
 ## Linker Switches
 
-The linker can be controlled with the following commandline switches.
+The linker can be controlled with the following command-line switches.
 
 * `/p:LinkDuringPublish=false` -- Disable the linker.
 * `/p:ShowLinkerSizeComparison=true` -- Displays a table of size reductions for the application.
