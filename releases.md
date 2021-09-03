@@ -19,6 +19,7 @@ The following table lists in-support .NET releases.
 [5.0.9]: release-notes/5.0/5.0.9/5.0.9.md
 [3.1.18]: release-notes/3.1/3.1.18/3.1.18.md
 
+
 ## End-of-life .NET versions
 
 The following table lists end-of-life releases.
