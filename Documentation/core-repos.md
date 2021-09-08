@@ -25,7 +25,7 @@
 
 |Repository                                                        |Description |
 |------------------------------------------------------------------|------------|
-|[Dev Community](https://developercommunity.visualstudio.com/spaces/61/index.html) |Report isssues to .NET Framework Developer Community|
+|[Dev Community](https://developercommunity.visualstudio.com/spaces/61/index.html) |Report issues to .NET Framework Developer Community|
 |[microsoft/dotnet-framework-docker](https://github.com/microsoft/dotnet-framework-docker) |.NET Framework Docker images|
 
 ## .NET Standard
