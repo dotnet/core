@@ -3,21 +3,28 @@
 You may encounter the following known issues, which may include workarounds, mitigations or expected resolution timeframes.
 
 ## .NET SDK
-### Preview 4
-1. Workload install for protected install location (eg. c:\program files) will fail
+### Preview 7
+#### 1. Reference assemblies no longer output to the bin directory
 
-In the future, the .NET SDK will trigger elevation to install missing workloads but today that fails.
+These files are only needed during builds and cause confusion for customers to see extra binaries built to the bin\ref folder. Instead they were [moved](https://github.com/dotnet/msbuild/pull/6560) to only build to the obj/ref folder.
 
-```
-C:\Users\MPP>dotnet workload install microsoft-macos-sdk-full --skip-manifest-update
+**Note, this change is being [reverted](https://github.com/dotnet/msbuild/pull/6718) for RC1 as we found a hardcoded path in Roslyn in VS scenarios that has to be addressed first**
 
-Installing pack Microsoft.macOS.Sdk version 11.3.100-preview.5.889...
-Workload installation failed, rolling back installed packs...
-Rolling back pack Microsoft.macOS.Sdk installation...
-Workload installation failed: One or more errors occurred. (Access to the path 'C:\Program Files\dotnet\metadata\temp\microsoft.macos.sdk\11.3.100-preview.5.889' is denied.)
-```
+#### 2. Error when cleaning up preview 6 workloads when installing preview 7 workloads
+
+The workload names all changed between preview 6 and 7 so the SDK doesn't recognize how to clean up existing installed workloads from earlier previews and will error
+
+`Garbage collecting for SDK feature bands 6.0.100...
+Workload installation failed: Workload not found: microsoft-net-sdk-blazorwebassembly-aot. Known workloads: ...`
+
+Another potential error
+`Garbage collecting for SDK feature bands 6.0.100…
+Workload installation failed: The JSON value could not be converted to Microsoft.NET.Sdk.WorkloadManifestReader.WorkloadPackId. Path: $.Id | LineNumber: 0 | BytePositionInLine: 40.`
+
 **Workaround**
-You'll need to elevate your command prompt before running the install command.
+Delete your dotnet\metadata folder and try the workload install again. The metadata folder contains our records of what workloads you've tried to install and is what's triggering us to try to clean up an older workload that may not be recognized or compatible with the current SDK.  
+
+Note that a side effect of this is that the SDK will leave behind some older preview workloads across various _packs_ directories.
 
 ### Preview 5
 #### 1. Missing Workload Manifests in Visual Studio 17 Preview 1
@@ -59,6 +66,26 @@ If you want to use .NET MAUI, you can run the latest version of the [maui-check 
 #### 3. Workload update from preview 4 not working
 
 The .NET SDK Optional Workloads were renamed between preview 4 and preview 5 and are not compatible. As such, the `dotnet workload update` command won't work for a preview 4 installed workload but should work with preview 5 and onward.
+
+### Preview 4
+1. Workload install for protected install location (eg. c:\program files) will fail
+
+In the future, the .NET SDK will trigger elevation to install missing workloads but today that fails.
+
+```
+C:\Users\MPP>dotnet workload install microsoft-macos-sdk-full --skip-manifest-update
+
+Installing pack Microsoft.macOS.Sdk version 11.3.100-preview.5.889...
+Workload installation failed, rolling back installed packs...
+Rolling back pack Microsoft.macOS.Sdk installation...
+Workload installation failed: One or more errors occurred. (Access to the path 'C:\Program Files\dotnet\metadata\temp\microsoft.macos.sdk\11.3.100-preview.5.889' is denied.)
+```
+**Workaround**
+You'll need to elevate your command prompt before running the install command.
+
+#### 3. .NET MAUI Windows apps fail to debug in Visual Studio 2022 Preview 3
+
+There is an incompatibility between .NET MAUI tooling features and Windows App SDK that prevents apps from launching and debugging. You can work around this by building and deploying without debugging, and then launching the application from the Start menu and attaching the debugger. A fix is underway and will come in a future Visual Studio 2022 service release.
 
 ## .NET Runtime
 1. Issue in "dnSpy.exe" fpr .NET 6.0 Preview 5 as described in [dotnet/runtime #53014](https://github.com/dotnet/runtime/issues/53014)

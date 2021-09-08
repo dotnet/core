@@ -35,7 +35,7 @@ Preview release installers are not available from the Microsoft package reposito
 
 Here's what the script does.
 
-* Detects the distribution and version. The script supports platforms and versions listed in [.NET 6.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0-supported-os.md).
+* Detects the distribution and version. The script supports platforms and versions listed in [.NET 6.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/6.0/supported-os.md).
 * Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack that installer packages.
 * Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
 * Downloads the system dependency installer, if needed.
@@ -63,14 +63,14 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -o dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/919880af-ab5a-4b58-8058-7baaea4a09d1/4fe186d747cf416cbdc83fd8354e15ea/dotnet-sdk-6.0.100-preview.5.21302.13-linux-x64.tar.gz
+~# curl -o dotnet.tar.gz  https://download.visualstudio.microsoft.com/download/pr/ce3fd989-b69d-439a-9cac-09ad40597db8/2848d49480b6e7b1b2a18cfa46d724e2/dotnet-sdk-6.0.100-preview.7.21379.14-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
 ~# export DOTNET_ROOT=~/dotnet
 ~# export PATH=$PATH:~/dotnet
 ~# dotnet --version
-6.0.100-preview.5.21302.13
+6.0.100-preview.7.21379.14
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
