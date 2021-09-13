@@ -3,6 +3,13 @@
 You may encounter the following known issues, which may include workarounds, mitigations or expected resolution timeframes.
 
 ## .NET SDK
+### RC 1
+#### 1. Optional workloads on Windows (arm64)
+
+Installing MSI based optional workloads using the CLI will result in a `PlatformNotSupported` exception on Windows (arm64). The CLI installer has a dependency on `System.Management` that is not support on Windows (arm64). This dependency has been removed in RC2.
+
+There is no workaround for this issue in RC1, except to switch to the file based workload installation.
+
 ### Preview 7
 #### 1. Reference assemblies no longer output to the bin directory
 
