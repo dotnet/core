@@ -34,7 +34,7 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -o dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/9db4cce9-8c78-47af-b3a1-b05e98870ab0/1d6062e2cc4ab529c0c1857a2c099b4e/dotnet-sdk-3.1.410-osx-x64.tar.gz
+~# curl -Lo dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/9db4cce9-8c78-47af-b3a1-b05e98870ab0/1d6062e2cc4ab529c0c1857a2c099b4e/dotnet-sdk-3.1.410-osx-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
