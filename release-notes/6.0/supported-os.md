@@ -1,4 +1,4 @@
-# .NET 6 Support
+# .NET 6 - Supported OS versions
 
 [.NET 6](README.md) is supported on multiple operating systems per their [lifecycle policy](../../os-lifecycle-policy.md).
 
