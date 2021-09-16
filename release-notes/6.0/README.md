@@ -1,7 +1,5 @@
 # .NET 6
 
-> Note: .NET 6 is currently in `Preview` and is currently not supported.
-
 [.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6-rc1/) will be an [LTS release](../../release-policies.md) and will be supported for three years, from November 2021 to November 2024. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/6.0) (also see [Releases](#releases))
