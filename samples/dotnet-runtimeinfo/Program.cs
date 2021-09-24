@@ -45,7 +45,7 @@ if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) &&
       if (line.StartsWith(PrettyName))
       {
           ReadOnlySpan<char> value = line.AsSpan()[(PrettyName.Length + 2)..^1];
-          WriteLine(value.ToString());
+          WriteLine($"PRETTY_NAME: {value.ToString()}");
           break;
       }
   }
