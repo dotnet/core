@@ -4,13 +4,12 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET SDK
 
-.NET 6.0 only works with Visual Studio 2022 version 17.0 or later and MSBuild 17.0 or later. 
+.NET 6 is supported with Visual Studio 2022 and MSBuild 17.  It is not supported with Visual Studio 2019 and MSBuild 16.
 
-If you try to build using a lower version of MSBuild say 16.11 you will get:
+If you build .NET 6 projects with MSBuild 16.11, for example, you will see the following error:
 
 `warning NETSDK1182: Targeting .NET 6.0 in Visual Studio 2019 is not supported`
 
-We recommend to upgrade to MSBuild 17 in such cases.
 
 ### RC 1
 #### 1. Optional workloads on Windows (arm64)
