@@ -163,4 +163,11 @@ You can workaround this by always providing a non-zero and non-minimum value for
 
 **Customizing WebRootPath not supported for minimal applications**
 
-There is a known issue with modifying the `WebRootPath` in a minimal app using the `WebApplicationBuilder` as documented in https://github.com/dotnet/aspnetcore/issues/36999. The issue will be resolved in .NET 6 GA. As a workaround, users can use the default `wwwroot` directory for serving static files in their applications.
+There is a known issue with modifying the `WebRootPath` in a minimal app using the `WebApplicationBuilder` as documented in https://github.com/dotnet/aspnetcore/issues/36999. The issue will be resolved in .NET 6 RTM. As a workaround, users can use the default `wwwroot` directory for serving static files in their applications. Alternatively, you can invoke `UseStaticFiles` with a `StaticFilesOption` containing both the provider and path.
+
+```csharp
+app.UseStaticFiles(new StaticFileOptions
+{
+  ContentTypeProvider = new PhysicalFileProvider("/full/path/to/custom/wwwroot")
+});
+```
