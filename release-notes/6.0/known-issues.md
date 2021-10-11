@@ -160,3 +160,7 @@ Issue is tracked by https://github.com/dotnet/aspnetcore/issues/33634 and will b
 **Workaround**
 
 You can workaround this by always providing a non-zero and non-minimum value for the `notBefore` parameter when using System.IdentityModel.Tokens.Jwt.JwtSecurityToken, or the 'nbf' field if using another JWT library.
+
+**Customizing WebRootPath not supported for minimal applications**
+
+There is a known issue with modifying the `WebRootPath` in a minimal app using the `WebApplicationBuilder` as documented in https://github.com/dotnet/aspnetcore/issues/36999. The issue will be resolved in .NET 6 GA. As a workaround, users can use the default `wwwroot` directory for serving static files in their applications.
