@@ -167,9 +167,9 @@ When enabling HTTP/3 which is only accessible through a feature flag, you might 
 
 Issue is tracked by https://github.com/dotnet/runtime/issues/60133 and will be fixed in .NET 6 RTM.
 
-### 
+### Configuration not reloaded on changes
 
-There is a regression between RC1 and RC2 preventing configuration from being reloaded on changes when using `WebApplication.Create()` and `WebApplication.CreateBuilder()`. This includes both custom configuration sources and default configuration sources such as `appsettings.json`.
+A regression introduced in .NET 6 RC2 prevents configuration from being reloaded on changes when using `WebApplication.Create()` and `WebApplication.CreateBuilder()`. This includes both custom configuration sources and default configuration sources such as `appsettings.json`.
 
 To make configuration reloadable, you can manually add a chained configuration source as follows.
 
