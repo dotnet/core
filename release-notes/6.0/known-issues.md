@@ -160,3 +160,9 @@ Issue is tracked by https://github.com/dotnet/aspnetcore/issues/33634 and will b
 **Workaround**
 
 You can workaround this by always providing a non-zero and non-minimum value for the `notBefore` parameter when using System.IdentityModel.Tokens.Jwt.JwtSecurityToken, or the 'nbf' field if using another JWT library.
+
+**CPU at 100% when enabling HTTP/3 Preview**
+
+When enabling HTTP/3 which is only accessible through a feature flag, you might experience Kestrel using 100% of the CPU. We recommend not enabling the feature until this is fixed.
+
+Issue is tracked by https://github.com/dotnet/runtime/issues/60133 and will be fixed in .NET 6 RTM.
