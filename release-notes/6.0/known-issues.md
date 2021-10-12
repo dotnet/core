@@ -167,6 +167,17 @@ When enabling HTTP/3 which is only accessible through a feature flag, you might 
 
 Issue is tracked by https://github.com/dotnet/runtime/issues/60133 and will be fixed in .NET 6 RTM.
 
+
+**Customizing WebRootPath not supported for minimal applications**
+
+There is a known issue with modifying the `WebRootPath` in a minimal app using the `WebApplicationBuilder` as documented in https://github.com/dotnet/aspnetcore/issues/36999. The issue will be resolved in .NET 6 RTM. As a workaround, users can use the default `wwwroot` directory for serving static files in their applications. Alternatively, you can invoke `UseStaticFiles` with a `StaticFilesOption` containing both the provider and path.
+
+```csharp
+app.UseStaticFiles(new StaticFileOptions
+{
+  ContentTypeProvider = new PhysicalFileProvider("/full/path/to/custom/wwwroot")
+});
+```
 ### Configuration not reloaded on changes
 
 A regression introduced in .NET 6 RC2 prevents configuration from being reloaded on changes when using `WebApplication.Create()` and `WebApplication.CreateBuilder()`. This includes both custom configuration sources and default configuration sources such as `appsettings.json`.
