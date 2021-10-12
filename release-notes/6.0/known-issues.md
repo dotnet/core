@@ -139,11 +139,11 @@ If using the `BuildServiceProvider` container directly, `ValidateOnBuild` is not
      
 ## ASP.NET Core
 
-**Running Blazor WebAssembly using IIS Express in Development**
+### Running Blazor WebAssembly using IIS Express in Development
 
 As of .NET 6 Preview 1, there is an ongoing issue with running Blazor WebAssembly applications using an IIS Express server during development on Visual Studio. As a workaround, we recommend using Kestrel during development.
 
-**Incremental builds in VS not working for apps with Razor views**
+### Incremental builds in VS not working for apps with Razor views
 
 As of .NET 6 Preview 3, changes to Razor views will not be updated during incremental builds. As a workaround, you can:
 
@@ -151,7 +151,7 @@ As of .NET 6 Preview 3, changes to Razor views will not be updated during increm
 - Configure VS to always call MSBuild when building projects
 - Clean and build projects to pick up changes
 
-**JWT Bearer Handler ArgumentOutOfRangeException in UTC+X time zones**
+### JWT Bearer Handler ArgumentOutOfRangeException in UTC+X time zones
 
 As of .NET 6 Preview 5, when using the JWT Bearer handler in a time zone that is higher than UTC (e.g. Eastern European Time/UTC+2), you may observe an `ArgumentOutOfRangeException` if the JWT token does not contain a `nbf` value (valid from).
 
@@ -161,11 +161,12 @@ Issue is tracked by https://github.com/dotnet/aspnetcore/issues/33634 and will b
 
 You can workaround this by always providing a non-zero and non-minimum value for the `notBefore` parameter when using System.IdentityModel.Tokens.Jwt.JwtSecurityToken, or the 'nbf' field if using another JWT library.
 
-**CPU at 100% when enabling HTTP/3 Preview**
+### CPU at 100% when enabling HTTP/3 Preview
 
 When enabling HTTP/3 which is only accessible through a feature flag, you might experience Kestrel using 100% of the CPU. We recommend not enabling the feature until this is fixed.
 
 Issue is tracked by https://github.com/dotnet/runtime/issues/60133 and will be fixed in .NET 6 RTM.
+
 
 **Customizing WebRootPath not supported for minimal applications**
 
@@ -177,3 +178,31 @@ app.UseStaticFiles(new StaticFileOptions
   ContentTypeProvider = new PhysicalFileProvider("/full/path/to/custom/wwwroot")
 });
 ```
+### Configuration not reloaded on changes
+
+A regression introduced in .NET 6 RC2 prevents configuration from being reloaded on changes when using `WebApplication.Create()` and `WebApplication.CreateBuilder()`. This includes both custom configuration sources and default configuration sources such as `appsettings.json`.
+
+Issue is tracked by https://github.com/dotnet/aspnetcore/issues/37046 and will be fixed in .NET 6 RTM.
+
+**Workaround**
+
+To make configuration reloadable in RC2, you can manually add a chained configuration source as follows.
+
+```C#
+var builder = WebApplication.CreateBuilder(args);
+
+var chainedConfiguration = new ConfigurationBuilder()
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+builder.Configuration.AddConfiguration(chainedConfiguration.Build());
+
+var app = builder.Build();
+// ...
+```
+
+### SPA template issues with Individual authentication when running in development
+
+The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved.
+
+When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
