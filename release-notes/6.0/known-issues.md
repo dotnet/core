@@ -176,10 +176,11 @@ To make configuration reloadable, you can manually add a chained configuration s
 ```C#
 var builder = WebApplication.CreateBuilder(args);
 
-using var chainedConfiguration = new ConfigurationManager();
-chainedConfiguration.SetBasePath(builder.Environment.ContentRootPath);
-chainedConfiguration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-builder.Configuration.AddConfiguration(chainedConfiguration, shouldDisposeConfiguration: false);
+var chainedConfiguration = new ConfigurationBuilder()
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+builder.Configuration.AddConfiguration(chainedConfiguration.Build());
 
 var app = builder.Build();
 // ...
