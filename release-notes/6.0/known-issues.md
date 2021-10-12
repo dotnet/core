@@ -171,7 +171,11 @@ Issue is tracked by https://github.com/dotnet/runtime/issues/60133 and will be f
 
 A regression introduced in .NET 6 RC2 prevents configuration from being reloaded on changes when using `WebApplication.Create()` and `WebApplication.CreateBuilder()`. This includes both custom configuration sources and default configuration sources such as `appsettings.json`.
 
-To make configuration reloadable, you can manually add a chained configuration source as follows.
+Issue is tracked by https://github.com/dotnet/aspnetcore/issues/37046 and will be fixed in .NET 6 RTM.
+
+**Workaround**
+
+To make configuration reloadable in RC2, you can manually add a chained configuration source as follows.
 
 ```C#
 var builder = WebApplication.CreateBuilder(args);
@@ -186,4 +190,8 @@ var app = builder.Build();
 // ...
 ```
 
-Issue is tracked by https://github.com/dotnet/aspnetcore/issues/37046 and will be fixed in .NET 6 RTM.
+### SPA template issues with Individual authentication when running in development
+
+The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved.
+
+When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
