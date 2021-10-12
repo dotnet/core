@@ -161,6 +161,12 @@ Issue is tracked by https://github.com/dotnet/aspnetcore/issues/33634 and will b
 
 You can workaround this by always providing a non-zero and non-minimum value for the `notBefore` parameter when using System.IdentityModel.Tokens.Jwt.JwtSecurityToken, or the 'nbf' field if using another JWT library.
 
+**CPU at 100% when enabling HTTP/3 Preview**
+
+When enabling HTTP/3 which is only accessible through a feature flag, you might experience Kestrel using 100% of the CPU. We recommend not enabling the feature until this is fixed.
+
+Issue is tracked by https://github.com/dotnet/runtime/issues/60133 and will be fixed in .NET 6 RTM.
+
 **Customizing WebRootPath not supported for minimal applications**
 
 There is a known issue with modifying the `WebRootPath` in a minimal app using the `WebApplicationBuilder` as documented in https://github.com/dotnet/aspnetcore/issues/36999. The issue will be resolved in .NET 6 RTM. As a workaround, users can use the default `wwwroot` directory for serving static files in their applications. Alternatively, you can invoke `UseStaticFiles` with a `StaticFilesOption` containing both the provider and path.
