@@ -1,4 +1,4 @@
-# .NET 6.0 Known Issues
+# .NET 6.0 RC1 Known Issues
 
 You may encounter the following known issues, which may include workarounds, mitigations or expected resolution timeframes.
 
@@ -11,7 +11,6 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 `warning NETSDK1182: Targeting .NET 6.0 in Visual Studio 2019 is not supported`
 
 
-### RC 1
 #### 1. Optional workloads on Windows (arm64)
 
 Installing MSI based optional workloads using the CLI will result in a `PlatformNotSupported` exception on Windows (arm64). The CLI installer has a dependency on `System.Management` that is not support on Windows (arm64). This dependency has been removed in RC2.
