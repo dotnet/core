@@ -64,7 +64,7 @@
 |Repository                                                                                    |Description              |
 |----------------------------------------------------------------------------------------------|-------------------------|
 |[dotnet/machinelearning](https://github.com/dotnet/machinelearning)                           |ML.NET                   |
-|[dotnet/machinelearning-modelbuilder](https://github.com/dotnet/machinelearning-modelbuilder) |Model Builder            |
+|[dotnet/machinelearning-modelbuilder](https://github.com/dotnet/machinelearning-modelbuilder) |ML.NET Tooling           |
 |[dotnet/ml-api-docs](https://github.com/dotnet/ml-api-docs)                                   |ML.NET API documentation |
 |[dotnet/spark](https://github.com/dotnet/spark)                                               |.NET for Apache® Spark™  |
 
