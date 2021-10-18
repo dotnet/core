@@ -2,6 +2,8 @@
 
 [.NET 6](README.md) is supported on multiple operating systems per their [lifecycle policy](../../os-lifecycle-policy.md).
 
+For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . Please see [.NET Repos](https://github.com/dotnet/core/blob/main/Documentation/core-repos.md) for the repository list.
+
 ## Windows
 
 OS                                    | Version                 | Architectures   | Lifecycle
