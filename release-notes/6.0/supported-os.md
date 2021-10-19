@@ -1,6 +1,8 @@
 # .NET 6 - Supported OS versions
 
-[.NET 6](README.md) is supported on multiple operating systems per their [lifecycle policy](../../os-lifecycle-policy.md).
+[.NET 6](README.md) [is supported](https://github.com/dotnet/core/blob/main/microsoft-support.md) on multiple operating systems per their [lifecycle policy](../../os-lifecycle-policy.md).
+
+For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . Please see [.NET Repos](https://github.com/dotnet/core/blob/main/Documentation/core-repos.md) for the repository list.
 
 ## Windows
 
@@ -97,6 +99,6 @@ None yet.
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 6.0][OS-lifecycle-policy].
 
-None yet.
+* macOS 10.13
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md
