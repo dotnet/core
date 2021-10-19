@@ -10,33 +10,12 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 
 `warning NETSDK1182: Targeting .NET 6.0 in Visual Studio 2019 is not supported`
 
+You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
-#### 1. Optional workloads on Windows (arm64)
+#### 1. dotnet test x64 emulation on arm64 support
+While a lot of work has been done to support arm64 emulation of x64 processes in .net 6, there are some remaining [work](https://github.com/dotnet/sdk/issues/21686) to be done in 6.0.2xx. The most impactful remaining item is `dotnet test` support.
 
-Installing MSI based optional workloads using the CLI will result in a `PlatformNotSupported` exception on Windows (arm64). The CLI installer has a dependency on `System.Management` that is not support on Windows (arm64). This dependency has been removed in RC2.
-
-There is no workaround for this issue in RC1, except to switch to the file based workload installation.
-
-#### 2. Reference assemblies no longer output to the bin directory
-
-These files are only needed during builds and cause confusion for customers to see extra binaries built to the bin\ref folder. Instead they were [moved](https://github.com/dotnet/msbuild/pull/6560) to only build to the obj/ref folder.
-
-**Note, this change is being [reverted](https://github.com/dotnet/msbuild/pull/6718) for RC1 as we found a hardcoded path in Roslyn in VS scenarios that has to be addressed first**
-
-#### 3. Workload install for protected install location (eg. c:\program files) will fail
-
-In the future, the .NET SDK will trigger elevation to install missing workloads but today that fails.
-
-```
-C:\Users\MPP>dotnet workload install microsoft-macos-sdk-full --skip-manifest-update
-
-Installing pack Microsoft.macOS.Sdk version 11.3.100-preview.5.889...
-Workload installation failed, rolling back installed packs...
-Rolling back pack Microsoft.macOS.Sdk installation...
-Workload installation failed: One or more errors occurred. (Access to the path 'C:\Program Files\dotnet\metadata\temp\microsoft.macos.sdk\11.3.100-preview.5.889' is denied.)
-```
-**Workaround**
-You'll need to elevate your command prompt before running the install command.
+`dotnet test --arch x64` on an arm64 machine will not work as it will not find the correct test host.  To test x64 components on an arm64 machine, you will have to install the x64 SDK and configure your `DOTNET_ROOT` and `PATH` to use the x64 version of dotnet.
    
 ## ASP.NET Core
 
