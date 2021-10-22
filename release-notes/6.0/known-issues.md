@@ -1,4 +1,4 @@
-# .NET 6.0 RC1 Known Issues
+# .NET 6.0 RC2 Known Issues
 
 You may encounter the following known issues, which may include workarounds, mitigations or expected resolution timeframes.
 
@@ -16,6 +16,13 @@ You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 While a lot of work has been done to support arm64 emulation of x64 processes in .net 6, there are some remaining [work](https://github.com/dotnet/sdk/issues/21686) to be done in 6.0.2xx. The most impactful remaining item is `dotnet test` support.
 
 `dotnet test --arch x64` on an arm64 machine will not work as it will not find the correct test host.  To test x64 components on an arm64 machine, you will have to install the x64 SDK and configure your `DOTNET_ROOT` and `PATH` to use the x64 version of dotnet.
+
+#### 2. Upgrade of Visual Studio or .NET SDK from earlier builds can result in a bad `PATH` configuration on Windows
+When upgrading Visual Studio to preview 5 or the .NET SDK to RC2 from an earlier build, the installer will uninstall the prior version of the .NET Host (dotnet.exe) and then install a new version. This results in the x64 `PATH` being removed and added back. If a customer has the x86 .NET Host installed, this one will end up ahead of the x64 one and will be picked up first.  
+
+Different architectures of .NET do not know about each other so then the .NET SDK will stop functioning correctly (behavior may be Visual Studio unable to create projects, dotnet new fails, etc).
+
+To confirm, run `dotnet --info` and you'll see (x86) paths for all of the found .NET runtimes and .NET SDKs installed. To resolve this, remove "c:\program files (x86)\dotnet" from the `PATH` environment variable or move it after "c:\program files\dotnet"
    
 ## ASP.NET Core
 
