@@ -38,7 +38,7 @@ After you join the teams:
 
 ## Install Microsoft open source tools (recommended)
 
-The tools make it easier to use open source and participate in open source projects:
+The following tool makes it easier to use open source and participate in open-source projects:
 
 * [Browser Extension](https://docs.opensource.microsoft.com/tools/browser.html) -- Identifies Microsoft employees on GitHub.
 
