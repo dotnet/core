@@ -42,7 +42,6 @@ The following tool makes it easier to use open source and participate in open-so
 
 * [Browser Extension](https://docs.opensource.microsoft.com/tools/browser.html) -- Identifies Microsoft employees on GitHub.
 
-The browser extension is recommended.
 ## Get write permissions to repos (optional)
 
 Join teams to gain write access to repos:
