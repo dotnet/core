@@ -38,12 +38,9 @@ After you join the teams:
 
 ## Install Microsoft open source tools (recommended)
 
-The tools make it easier to use open source and participate in open source projects:
+The following tool makes it easier to use open source and participate in open-source projects:
 
 * [Browser Extension](https://docs.opensource.microsoft.com/tools/browser.html) -- Identifies Microsoft employees on GitHub.
-* [VS Code Extension](https://docs.opensource.microsoft.com/tools/vscode.html) --  Provides information about known vulnerabilities.
-
-The browser extension is recommended. The VS code extension is optional.
 
 ## Get write permissions to repos (optional)
 

@@ -11,14 +11,13 @@ The following table lists in-support .NET releases.
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 6](release-notes/6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6-rc-2/) | [Preview][policies] | [6.0 RC2 ][6.0 RC2 ] | November, 2024 |
-| [.NET 5](release-notes/5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [Current][policies] | [5.0.11][5.0.11 ] | May, 2022 |
-| [.NET Core 3.1](release-notes/3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.20][3.1.20] | December 3, 2022 |
+| [.NET 6](release-notes/6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.0 ][6.0.0 ] | November 08, 2024 |
+| [.NET 5](release-notes/5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [Current][policies] | [5.0.12][5.0.12 ] | May, 2022 |
+| [.NET Core 3.1](release-notes/3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.21][3.1.21] | December 3, 2022 |
 
-[6.0 RC2]: release-notes/6.0/preview/6.0.0-rc.2.md
-[5.0.11]: release-notes/5.0/5.0.11/5.0.11.md
-[3.1.20]: release-notes/3.1/3.1.20/3.1.20.md
-
+[6.0.0]: release-notes/6.0/preview/6.0.0.md
+[5.0.12]: release-notes/5.0/5.0.11/5.0.12.md
+[3.1.21]: release-notes/3.1/3.1.21/3.1.21.md
 
 ## End-of-life .NET versions
 
@@ -26,7 +25,6 @@ The following table lists end-of-life releases.
 
 |  Version  |  Release Date | Support | Final Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET Core 2.1](release-notes/2.1/README.md) | [May 30, 2018](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-1/) | [LTS][policies] | [2.1.30][2.1.30] | [August 21, 2021](https://devblogs.microsoft.com/dotnet/net-core-2-1-will-reach-end-of-support-on-august-21-2021/) |
 | [.NET Core 3.0](release-notes/3.0/README.md) | [September 23, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) |  [Current][policies] | [3.0.3][3.0.3] | [March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) |
 | [.NET Core 2.2](release-notes/2.2/README.md) | [December 4th, 2018](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-2/) | [Current][policies] | [2.2.8][2.2.8] | [December 23, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) |
 | [.NET Core 2.1](release-notes/2.1/README.md) | [May 30, 2018](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-1/) | [LTS][policies] | [2.1.30][2.1.30] | [August 21, 2021](https://devblogs.microsoft.com/dotnet/net-core-2-1-will-reach-end-of-support-on-august-21-2021/) |

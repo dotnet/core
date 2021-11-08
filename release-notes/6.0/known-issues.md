@@ -1,4 +1,4 @@
-# .NET 6.0 RC1 Known Issues
+# .NET 6.0 RC2 Known Issues
 
 You may encounter the following known issues, which may include workarounds, mitigations or expected resolution timeframes.
 
@@ -10,33 +10,19 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 
 `warning NETSDK1182: Targeting .NET 6.0 in Visual Studio 2019 is not supported`
 
+You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
-#### 1. Optional workloads on Windows (arm64)
+#### 1. dotnet test x64 emulation on arm64 support
+While a lot of work has been done to support arm64 emulation of x64 processes in .net 6, there are some remaining [work](https://github.com/dotnet/sdk/issues/21686) to be done in 6.0.2xx. The most impactful remaining item is `dotnet test` support.
 
-Installing MSI based optional workloads using the CLI will result in a `PlatformNotSupported` exception on Windows (arm64). The CLI installer has a dependency on `System.Management` that is not support on Windows (arm64). This dependency has been removed in RC2.
+`dotnet test --arch x64` on an arm64 machine will not work as it will not find the correct test host.  To test x64 components on an arm64 machine, you will have to install the x64 SDK and configure your `DOTNET_ROOT` and `PATH` to use the x64 version of dotnet.
 
-There is no workaround for this issue in RC1, except to switch to the file based workload installation.
+#### 2. Upgrade of Visual Studio or .NET SDK from earlier builds can result in a bad `PATH` configuration on Windows
+When upgrading Visual Studio to preview 5 or the .NET SDK to RC2 from an earlier build, the installer will uninstall the prior version of the .NET Host (dotnet.exe) and then install a new version. This results in the x64 `PATH` being removed and added back. If a customer has the x86 .NET Host installed, this one will end up ahead of the x64 one and will be picked up first.  
 
-#### 2. Reference assemblies no longer output to the bin directory
+Different architectures of .NET do not know about each other so then the .NET SDK will stop functioning correctly (behavior may be Visual Studio unable to create projects, dotnet new fails, etc).
 
-These files are only needed during builds and cause confusion for customers to see extra binaries built to the bin\ref folder. Instead they were [moved](https://github.com/dotnet/msbuild/pull/6560) to only build to the obj/ref folder.
-
-**Note, this change is being [reverted](https://github.com/dotnet/msbuild/pull/6718) for RC1 as we found a hardcoded path in Roslyn in VS scenarios that has to be addressed first**
-
-#### 3. Workload install for protected install location (eg. c:\program files) will fail
-
-In the future, the .NET SDK will trigger elevation to install missing workloads but today that fails.
-
-```
-C:\Users\MPP>dotnet workload install microsoft-macos-sdk-full --skip-manifest-update
-
-Installing pack Microsoft.macOS.Sdk version 11.3.100-preview.5.889...
-Workload installation failed, rolling back installed packs...
-Rolling back pack Microsoft.macOS.Sdk installation...
-Workload installation failed: One or more errors occurred. (Access to the path 'C:\Program Files\dotnet\metadata\temp\microsoft.macos.sdk\11.3.100-preview.5.889' is denied.)
-```
-**Workaround**
-You'll need to elevate your command prompt before running the install command.
+To confirm, run `dotnet --info` and you'll see (x86) paths for all of the found .NET runtimes and .NET SDKs installed. To resolve this, remove "c:\program files (x86)\dotnet" from the `PATH` environment variable or move it after "c:\program files\dotnet"
    
 ## ASP.NET Core
 
@@ -104,6 +90,6 @@ var app = builder.Build();
 
 ### SPA template issues with Individual authentication when running in development
 
-The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved.
+The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved. If restarting doesn't resolve the problem, another workaround is to specify the authority for your app in Program.cs: `builder.Services.Configure<JwtBearerOptions>("IdentityServerJwtBearer", o => o.Authority = "https://localhost:44416");` where 44416 is the port for the spa proxy.
 
 When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
