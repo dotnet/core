@@ -4,13 +4,13 @@ The following [.NET releases](../releases.md) are currently supported:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 6](6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6-rc-2/) | [Preview][policies] | [6.0 RC2][6.0 RC2] | November, 2024 |
+| [.NET 6](6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [Preview][policies] | [6.0.0 ][6.0.0]  | November 08, 2024 |
 | [.NET 5](5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [Current][policies] | [5.0.11][5.0.11] | May, 2022 |
 | [.NET Core 3.1](3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.20][3.1.20] | December 3, 2022 |
 
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
 
-[6.0 RC2]: 6.0/preview/6.0.0-rc.2.md
+[6.0.0]: 6.0/6.0.0/6.0.0.md
 [5.0.11]: 5.0/5.0.11/5.0.11.md
 [3.1.20]: 3.1/3.1.20/3.1.20.md
 
