@@ -31,10 +31,6 @@ To fix this, edit your `PATH` environment variable to either remove the `c:\Prog
    
 ## ASP.NET Core
 
-### Running Blazor WebAssembly using IIS Express in Development
-
-As of .NET 6 Preview 1, there is an ongoing issue with running Blazor WebAssembly applications using an IIS Express server during development on Visual Studio. As a workaround, we recommend using Kestrel during development.
-
 ### SPA template issues with Individual authentication when running in development
 
 The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved. If restarting doesn't resolve the problem, another workaround is to specify the authority for your app in Program.cs: `builder.Services.Configure<JwtBearerOptions>("IdentityServerJwtBearer", o => o.Authority = "https://localhost:44416");` where 44416 is the port for the spa proxy.
