@@ -14,7 +14,7 @@ Any inclusion of a feature in the table below should not be taken as an indicati
 
 Documenation of security bugs for preview features are only in scope for the current released version of .NET
 
-Please read the .NET bug bounty [terms and conditions](https://www.microsoft.com/en-us/msrc/bounty-dot-net-core) before submitting your bug report. To be eligible for a bounty you must submit your bug report through the Microsoft Security Response Center (MSRC).
+Read the .NET bug bounty [terms and conditions](https://www.microsoft.com/en-us/msrc/bounty-dot-net-core) before submitting your bug report. To be eligible for a bounty, you must submit your bug report through the Microsoft Security Response Center (MSRC).
 
 ## In-scope preview features in the current release (.NET 6)
 
