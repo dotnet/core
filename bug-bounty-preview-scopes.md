@@ -4,7 +4,7 @@
 
 The [.NET bug bounty](https://www.microsoft.com/en-us/msrc/bounty-dot-net-core) covers current released versions of .NET Core, ASP.NET Core and .NET, as well as the latest beta or release candidate of the upcoming version.
 
-.NET has the concept of preview features which ship in the current version, or in nightly builds of the upcoming version. Preview features are not enabled by default, but their goal is to be enabled in the next major release. Preview features are now considered in scope for the bug bounty if they are listed in the table below.
+.NET has the concept of [preview features](https://github.com/dotnet/designs/blob/main/accepted/2021/preview-features/preview-features.md) which ship in the current version, or in nightly builds of the upcoming version. Preview features are not enabled by default, but their goal is to be enabled in the next major release. Preview features are now considered in scope for the bug bounty if they are listed in the table below.
 
 Bugs against preview features in the current release must be demonstrated against the latest current release.
 
