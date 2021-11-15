@@ -1,22 +1,22 @@
 # .NET repositories
 
-.NET Core consists of many repositories. To file an issue, make a PR, or engage on specific topics, it's best to engage with developers working in the correct repo. A largely complete set of .NET Core and related repositories follows.
+.NET consists of many repositories. To file an issue, make a PR, or engage on specific topics, it's best to engage with developers working in the correct repo. A largely complete set of .NET and related repositories follows.
 
-## .NET Core
+## .NET
 
 |Repository                                                          |Description |
 |--------------------------------------------------------------------|------------|
-|[dotnet/core](https://github.com/dotnet/core)                       |.NET Core home repository|
-|[dotnet/runtime](https://github.com/dotnet/runtime)                 |.NET Core runtime, runtime installers, application model, & Base Class Library (BCL)|
+|[dotnet/core](https://github.com/dotnet/core)                       |.NET home repository|
+|[dotnet/runtime](https://github.com/dotnet/runtime)                 |.NET runtime, runtime installers, application model, & Base Class Library (BCL)|
 |[dotnet/docs](https://github.com/dotnet/docs)                       |.NET documentation|
 |[dotnet/dotnet-api-docs](https://github.com/dotnet/dotnet-api-docs) |.NET API documentation|
 |[dotnet/project-system](https://github.com/dotnet/project-system)   |Visual Studio project system for C#, F#, & VB|
-|[dotnet/sdk](https://github.com/dotnet/sdk)                         |.NET Core SDK (used by Visual Studio & .NET Core CLI)|
-|[dotnet/installer](https://github.com/dotnet/installer)             |.NET Core installer (produces zips, tarballs, and installers for the .NET SDK)
+|[dotnet/sdk](https://github.com/dotnet/sdk)                         |.NET SDK (used by Visual Studio & .NET CLI)|
+|[dotnet/installer](https://github.com/dotnet/installer)             |.NET installer (produces zips, tarballs, and installers for the .NET SDK)
 |[dotnet/extensions](https://github.com/dotnet/extensions)           |.NET extension APIs (DI, logging, configuration, etc.)|
-|[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)     |.NET Core Docker images|
+|[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)     |.NET Docker images|
 |[dotnet/templating](https://github.com/dotnet/templating)           |Templating engine used by `dotnet new`|
-|[dotnet/test-templates](https://github.com/dotnet/test-templates)   |.NET Core unit testing project templates|
+|[dotnet/test-templates](https://github.com/dotnet/test-templates)   |.NET unit testing project templates|
 |[dotnet/winforms](https://github.com/dotnet/winforms)               |Windows Forms|
 |[dotnet/wpf](https://github.com/dotnet/wpf)                         |Windows Presentation Foundation (WPF)|
 |[dotnet/maui](https://github.com/dotnet/maui)                       |.NET Multi-platform App UI|

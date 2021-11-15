@@ -1,13 +1,13 @@
 # Portable PDB #
 
-.NET Core introduces a new symbol file (PDB) format - portable PDBs. Unlike traditional PDBs which are Windows-only, portable PDBs can be created and read on all platforms.
+.NET introduces a new symbol file (PDB) format - portable PDBs. Unlike traditional PDBs which are Windows-only, portable PDBs can be created and read on all platforms.
 
 ## What is a PDB? ##
 For anyone not familiar, a PDB file is an auxiliary file produced by a compiler to provide other tools, especially debuggers, information about what is in the main executable file and how it was produced. For example, a debugger reads a PDB to map foo.cs line 12 to the right executable location so that it can set a breakpoint.
 The Windows PDB format has been around a long time now (~25 years), and it evolved from other native debugging symbol formats which were even older. It started out its life as a format for native (C/C++) programs. For the first release of the .NET Framework, the Windows PDB format was extended to support .NET.
 
 ## Why a new format? ##
-While the Windows PDB format has worked okay over the years, with .NET Core the [Roslyn](https://github.com/dotnet/roslyn/wiki/Roslyn%20Overview) team decided it was time to go back to the drawing board and come up with a new format. A few of the reasons:
+While the Windows PDB format has worked okay over the years, with .NET the [Roslyn](https://github.com/dotnet/roslyn/wiki/Roslyn%20Overview) team decided it was time to go back to the drawing board and come up with a new format. A few of the reasons:
 
 * The Windows PDB format is complex, and not well documented. This complexity is important for some of the native code scenarios that the format was designed for, but it is unnecessary for the .NET scenarios. The portable format is [open source](https://github.com/dotnet/symreader-portable) and [documented](https://github.com/dotnet/runtime/blob/main/docs/design/specs/PortablePdb-Metadata.md).
 * At the time the effort was begun there wasn't a cross-platform library that could read or write the original windows PDB format.

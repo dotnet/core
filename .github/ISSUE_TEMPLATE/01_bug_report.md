@@ -30,7 +30,7 @@ assignees: ''
 ### Regression?
 
 <!--
-* Did this work in a previous build or release of .NET Core, or from .NET Framework? If you can try a previous release or build to find out, that can help us narrow down the problem. If you don't know, that's OK.
+* Did this work in a previous build or release of .NET, or from .NET Framework? If you can try a previous release or build to find out, that can help us narrow down the problem. If you don't know, that's OK.
   -->
 
 ### Other information
