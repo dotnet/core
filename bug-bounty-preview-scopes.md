@@ -12,7 +12,7 @@ Bugs against preview features in nightly builds of the next version must be demo
 
 Any inclusion of a feature in the table below should not be taken as an indication that the feature will ship in any upcoming version.
 
-Documenation of security bugs for preview features are only in scope for the current released version of .NET
+Documentation of security bugs for preview features are only in scope for the current released version of .NET
 
 Read the .NET bug bounty [terms and conditions](https://www.microsoft.com/en-us/msrc/bounty-dot-net-core) before submitting your bug report. To be eligible for a bounty, you must submit your bug report through the Microsoft Security Response Center (MSRC).
 
