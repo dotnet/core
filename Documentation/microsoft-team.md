@@ -17,7 +17,7 @@ You need to join teams in two organizations. Click the two links:
 
 After you join the teams:
 
-* Users will be able to @mention you on [.NET Core Repos](https://github.com/dotnet/core/blob/main/Documentation/core-repos.md)
+* Users will be able to @mention you on [.NET Repos](https://github.com/dotnet/core/blob/main/Documentation/core-repos.md)
 * You will be able to access to private repos we maintain
 * You will get write access to a subset of repos
 
@@ -89,5 +89,5 @@ Service accounts should also be linked. For more details, see [Service accounts 
 
 ## Guidelines
 
-* [Contributing to .NET Core](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md)
+* [Contributing to .NET](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md)
 * [What you can expect from Maintainers](https://github.com/dotnet/core/blob/main/Documentation/contributing/maintainers.md)

@@ -1,6 +1,6 @@
 # What you can expect from Maintainers
 
-The .NET Core maintainer team aims to support a productive and safe working environment for everyone participating in .NET repositories. You can expect maintainers to do three things to that end: respect your contributions, make engagement efficient, and report potential .NET Foundation Code of Conduct violations.
+The .NET maintainer team aims to support a productive and safe working environment for everyone participating in .NET repositories. You can expect maintainers to do three things to that end: respect your contributions, make engagement efficient, and report potential .NET Foundation Code of Conduct violations.
 
 The following two lists summarize how maintainers will act. A more detailed description follows this summary.
 

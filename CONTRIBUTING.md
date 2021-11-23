@@ -4,4 +4,4 @@ See [Contributing](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md) 
 
 # Repos
 
-See the [.NET Core Repos](Documentation/core-repos.md) to find a repo to contribute to.
+See the [.NET Repos](Documentation/core-repos.md) to find a repo to contribute to.

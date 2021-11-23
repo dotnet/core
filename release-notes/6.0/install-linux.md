@@ -46,11 +46,11 @@ Here's what the script does.
 
 You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://docs.snapcraft.io/installing-snapd/6735).
 
-After configuring Snap on your system, run the following command to install the latest .NET Core SDK.
+After configuring Snap on your system, run the following command to install the latest .NET SDK.
 
 `sudo snap install dotnet-sdk --channel=6.0/beta --classic`
 
-When .NET Core is installed using the Snap package, the default .NET Core command is `dotnet-sdk.dotnet`, as opposed to just `dotnet`. The benefit of the namespaced command is that it will not conflict with a globally installed .NET Core version you may have. This command can be aliased to `dotnet` with:
+When .NET is installed using the Snap package, the default .NET command is `dotnet-sdk.dotnet`, as opposed to just `dotnet`. The benefit of the namespaced command is that it will not conflict with a globally installed .NET version you may have. This command can be aliased to `dotnet` with:
 
 `sudo snap alias dotnet-sdk.dotnet dotnet`
 
