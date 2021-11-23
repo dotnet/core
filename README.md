@@ -6,7 +6,7 @@ The latest major release is [.NET 6.0](release-notes/6.0/README.md). The latest 
 
 ## .NET Core Releases
 
-* [Download the latest .NET Core SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+* [Download the latest .NET Core SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
 * [.NET Core releases](releases.md)
 * [.NET Core daily builds](daily-builds.md)
 
