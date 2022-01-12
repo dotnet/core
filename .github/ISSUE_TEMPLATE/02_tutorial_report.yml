@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         We welcome bug reports! Please help us gather the information we need to start the triage process.
-  - type: input
+  - type: textarea
     id: url
     attributes:
       label: URL
@@ -15,18 +15,15 @@ body:
       placeholder: https://dotnet.microsoft.com
     validations:
       required: true
-  - type: dropdown
+  - type: textarea
     id: os
     attributes:
       label: Operating system
       description: What is your operating system?
-      options:
-        - Windows
-        - macOS
-        - Linux
+      placeholder: Windows/macOS/Linux
     validations:
       required: true
-  - type: input
+  - type: textarea
     id: os-version
     attributes:
       label: More information about your system
