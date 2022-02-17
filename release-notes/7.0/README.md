@@ -13,4 +13,4 @@
 
 | Date | Release |
 | :-- | :-- |
-| 2021/02/17 | [7.0.0 Preview 1](https://github.com/dotnet/core/blob/main/release-notes/7.0/preview/7.0.0-preview.1.md) |
+| 2022/02/17 | [7.0.0 Preview 1](https://github.com/dotnet/core/blob/main/release-notes/7.0/preview/7.0.0-preview.1.md) |
