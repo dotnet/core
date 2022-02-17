@@ -16,7 +16,7 @@ We recommend you install the .NET SDK to develop and build applications, and to 
 
 Each of the distributions can be downloaded from:
 
-- [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/7.0)
 - [.NET 7 release notes](README.md)
 
 [Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Linux (Alpine, Debian, and Ubuntu).
