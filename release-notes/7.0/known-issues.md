@@ -10,3 +10,9 @@ You may encounter the following known issues, which may include workarounds, mit
 When trying to do GetType with ignorecase as true in some cases does not find the type but finds it when ignoreCase is set to false.
 This only happens in .NET7 preview 1 and does not happen in .NET 6.
 More information and workaround can be found at https://github.com/dotnet/runtime/issues/65013
+
+## .NET SDK
+
+### MAUI optional workloads not yet supported in .NET 7
+
+Customer will continue to need to use 6.0.200 .NET SDK versions. See more information here:https://github.com/dotnet/maui/wiki/.NET-7-and-.NET-MAUI
