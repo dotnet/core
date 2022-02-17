@@ -15,4 +15,4 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 ### MAUI optional workloads not yet supported in .NET 7
 
-Customer will continue to need to use 6.0.200 .NET SDK versions. See more information here:https://github.com/dotnet/maui/wiki/.NET-7-and-.NET-MAUI
+You can continue using 6.0.200 .NET SDK versions until .NET MAUI joins the .NET 7 release. See more information here: https://github.com/dotnet/maui/wiki/.NET-7-and-.NET-MAUI
