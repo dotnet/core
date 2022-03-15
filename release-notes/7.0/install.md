@@ -8,9 +8,6 @@ Operating system specific instructions:
 - [macOS](install-macos.md)
 - [Windows](install-windows.md)
 
- Install .NET Multi-platform App UI Workloads: 
-- [MAUI](install-maui.md)
-
 ## Distributions
 
 The following distributions are available for all operating systems:
