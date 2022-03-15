@@ -1,6 +1,6 @@
 # .NET 7
 
-[.NET 7](https://devblogs.microsoft.com/dotnet/announcing-net-7-preview-2/) will be a [current release](../../release-policies.md) and will be supported for one year, from November 2022 to November 2023. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
+[.NET 7](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-preview-2/) will be a [current release](../../release-policies.md) and will be supported for one year, from November 2022 to November 2023. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/7.0) (also see [Releases](#releases))
