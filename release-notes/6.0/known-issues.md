@@ -32,6 +32,18 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 
 `warning NETSDK1182: Targeting .NET 6.0 in Visual Studio 2019 is not supported`
 
+`where dotnet` lists the path(s) to the dotnet cli.
+
+Make sure the \ProgramFiles\ path comes before the \ProgramFiles(x86) path by changing the path envvar.
+
+`where msbuild` lists the path to the msbuild cli.
+
+If no paths are listed `dotnet` will still find a working `msbuild` for .net6.
+
+If `ProgramFiles\Microsoft Visual Studio\**2022**\Enterprise\Common7\Tools\VsDevCmd.bat` have been used to set up a commandline environment for **VS2022**, `where msbuild` and `dotnet` will find the VS2022 msbuild that works.
+
+If `ProgramFiles\Microsoft Visual Studio\**2019**\Enterprise\Common7\Tools\VsDevCmd.bat` have been used to set up a commandline environment for **VS2019**, `where msbuild` and `dotnet` will find the VS2019 msbuild that does not work (v16). Avoid using the VS2019 VsDevCmd.bat fixes the problem.
+
 You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
 #### 1. dotnet test x64 emulation on arm64 support
