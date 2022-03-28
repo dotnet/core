@@ -1,20 +1,22 @@
 # .NET Core 2.1 Releases
 
-> Important: [.NET Core 2.1 is scheduled to go out of support on August 21, 2021](https://devblogs.microsoft.com/dotnet/net-core-2-1-will-reach-end-of-support-on-august-21-2021/). You should consider moving your applications to a later release.
+This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
 
-[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) is an [LTS release](../../release-policies.md) and will be supported for (a little more than) three years, from May 2018 to August 2021. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.1-supported-os.md).
+[.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) was an [LTS release](../../release-policies.md) and was supported for (a little more than) three years, from May 2018 to August 2021. It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.1-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/2.1) (also see [Releases](#releases))
 - [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported operating systems](2.1-supported-os.md)
 - [Known Issues](2.1-known-issues.md)
-- [Contributors](2.1.0-contributor-list.md)
+- [Contributors](2.1.0-contributor.md)
 
 ## Releases
 
 | Date | Release |
 | :-- | :-- |
+| 2021/08/21 | Out of support - [.NET Core 2.1 end of life](https://devblogs.microsoft.com/dotnet/net-core-2-1-will-reach-end-of-support-on-august-21-2021/) |
+| 2021/08/19 | [2.1.30](2.1.30/2.1.30.md) |
 | 2021/05/11 | [2.1.28](2.1.28/2.1.28.md) |
 | 2021/04/13 | [2.1.27](2.1.27/2.1.27.md) |
 | 2021/03/09 | [2.1.26](2.1.26/2.1.26.md) |

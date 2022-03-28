@@ -1,6 +1,8 @@
-# .NET 6 Support
+# .NET 6 - Supported OS versions
 
-[.NET 6](README.md) is supported on multiple operating systems per their [lifecycle policy](../../os-lifecycle-policy.md).
+[.NET 6](README.md) [is supported](https://github.com/dotnet/core/blob/main/microsoft-support.md) on multiple operating systems per their [lifecycle policy](../../os-lifecycle-policy.md).
+
+For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . Please see [.NET Repos](https://github.com/dotnet/core/blob/main/Documentation/core-repos.md) for the repository list.
 
 ## Windows
 
@@ -8,6 +10,7 @@ OS                                    | Version                 | Architectures 
 --------------------------------------|-------------------------|-----------------|----------
 [Windows Client][Windows-client]      | 7 SP1(**\***), 8.1      | x64, x86        | [Windows][Windows-lifecycle]
 [Windows 10 Client][Windows-client]   | Version 1607+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
+[Windows 11][Windows-client]   | Version 22000+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
 [Windows Server][Windows-Server]      | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Windows Server Core][Windows-Server] | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Nano Server][Nano-Server]            | Version 1809+           | x64             | [Windows Server][Windows-Server-lifecycle]
@@ -25,17 +28,18 @@ OS                                    | Version                 | Architectures 
 
 OS                                    | Version               | Architectures     | Lifecycle
 --------------------------------------|-----------------------|-------------------|----------
-[Alpine Linux][Alpine]                | 3.13+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
+[Alpine Linux][Alpine]                | 3.12+                 | x64, Arm64        | [Alpine][Alpine-lifecycle]
+&nbsp;                                | 3.13+                 | Arm32             |
 [CentOS][CentOS]                      | 7+                    | x64               | [CentOS][CentOS-lifecycle]
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
-[Fedora][Fedora]                      | 32+                   | x64               | [Fedora][Fedora-lifecycle]
+[Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
 [Alpine]: https://alpinelinux.org/
-[Alpine-lifecycle]: https://wiki.alpinelinux.org/wiki/Alpine_Linux:Releases
+[Alpine-lifecycle]: https://alpinelinux.org/releases/
 [CentOS]: https://www.centos.org/
 [CentOS-lifecycle]:https://wiki.centos.org/FAQ/General
 [CentOS-docker]: https://hub.docker.com/_/centos
@@ -67,7 +71,7 @@ OS                                    | Version               | Architectures   
 
 OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
-[macOS][macOS]                | 10.14+                    | x64, Arm64        |
+[macOS][macOS]                | 10.15+                    | x64, Arm64        |
 
 [macOS]: https://support.apple.com/macos
 
@@ -97,6 +101,6 @@ None yet.
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 6.0][OS-lifecycle-policy].
 
-None yet.
+* macOS 10.13
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md

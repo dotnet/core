@@ -5,6 +5,20 @@ using System.Runtime.InteropServices;
 using static System.Console;
 using static System.IO.File;
 
+string nl = Environment.NewLine;
+
+// Variant of https://github.com/dotnet/core/tree/main/samples/dotnet-runtimeinfo
+// Ascii text: https://ascii.co.uk/text (Univers font)
+WriteLine(
+$"         42{nl}" +
+$"         42              ,d                             ,d{nl}" +
+$"         42              42                             42{nl}" +
+$" ,adPPYb,42  ,adPPYba, MM42MMM 8b,dPPYba,   ,adPPYba, MM42MMM{nl}" +
+$"a8\"    `Y42 a8\"     \"8a  42    42P\'   `\"8a a8P_____42   42{nl}" +
+$"8b       42 8b       d8  42    42       42 8PP\"\"\"\"\"\"\"   42{nl}" +
+$"\"8a,   ,d42 \"8a,   ,a8\"  42,   42       42 \"8b,   ,aa   42,{nl}" +
+$" `\"8bbdP\"Y8  `\"YbbdP\"\'   \"Y428 42       42  `\"Ybbd8\"\'   \"Y428{nl}");
+
 AssemblyInformationalVersionAttribute assemblyInformation = ((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false))[0];
 string[] informationalVersionSplit = assemblyInformation.InformationalVersion.Split('+');
 
@@ -15,18 +29,26 @@ WriteLine($"Libraries version: {informationalVersionSplit[0]}");
 WriteLine($"Libraries hash: {informationalVersionSplit[1]}");
 WriteLine();
 WriteLine("**Environment information");
+WriteLine($"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}");
+WriteLine($"{nameof(RuntimeInformation.OSArchitecture)}: {RuntimeInformation.OSArchitecture}");
 WriteLine($"{nameof(RuntimeInformation.OSDescription)}: {RuntimeInformation.OSDescription}");
 WriteLine($"{nameof(Environment.OSVersion)}: {Environment.OSVersion}");
-WriteLine($"{nameof(RuntimeInformation.OSArchitecture)}: {RuntimeInformation.OSArchitecture}");
-WriteLine($"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}");
-WriteLine();
 
+// Linux Pretty Name
+const string OSRel = "/etc/os-release";
 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && 
-    Directory.Exists("/sys/fs/cgroup/cpu") &&
-    Directory.Exists("/sys/fs/cgroup/memory"))
+    File.Exists(OSRel))
 {
-    WriteLine("**CGroup info");
-    WriteLine($"cfs_quota_us: {ReadAllLines("/sys/fs/cgroup/cpu/cpu.cfs_quota_us")[0]}");
-    WriteLine($"memory.limit_in_bytes: {ReadAllLines("/sys/fs/cgroup/memory/memory.limit_in_bytes")[0]}");
-    WriteLine($"memory.usage_in_bytes: {ReadAllLines("/sys/fs/cgroup/memory/memory.usage_in_bytes")[0]}");
+  const string PrettyName = "PRETTY_NAME";
+  foreach(string line in File.ReadAllLines(OSRel))
+  {
+      if (line.StartsWith(PrettyName))
+      {
+          ReadOnlySpan<char> value = line.AsSpan()[(PrettyName.Length + 2)..^1];
+          WriteLine($"PRETTY_NAME: {value.ToString()}");
+          break;
+      }
+  }
 }
+
+WriteLine();

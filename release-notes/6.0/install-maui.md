@@ -1,6 +1,16 @@
 # Install .NET Multi-platform App UI Workloads
 
-As of .NET 6 preview 6, .NET MAUI is a workload. To install .NET MAUI with Android, iOS, and macOS (Mac Catalyst) SDKs:
+.NET MAUI is a .NET workload installable via the dotnet CLI tool, and is available within the Visual Studio 2022 Preview channel installer. To install .NET MAUI and all dependencies for daily development, we recommend installing via Visual Studio 2022 previews.
+
+## Visual Studio 2022 Installation
+
+When installing Visual Studio 2022 Previews, select the "Mobile development with .NET" workload, and under Optional check the ".NET MAUI (Preview)" box. To enable desktop development, also select the "Universal Windows Platform development" workload.
+
+To enable debugging Windows applications, install the [Single-project MSIX packaging tools for Visual Studio 2022 extension](https://marketplace.visualstudio.com/items?itemName=ProjectReunion.MicrosoftSingleProjectMSIXPackagingToolsDev17).
+
+## CLI Installation
+
+To install .NET MAUI with Android, iOS, and macOS (Mac Catalyst) SDKs:
 
 ```console
 $ dotnet workload install maui
@@ -41,15 +51,16 @@ See our [documentation](https://docs.microsoft.com/dotnet/maui/get-started/insta
 
 Prerequisites:
 
-* [Install .NET 6.0.0 Preview 6](#downloads)
-* You will need the Android SDK installed as well as `Android SDK Platform 30`. One way to acquire this is to install the Xamarin workload in the Visual Studio installer. You can manage Android SDKs from `Tools > Android > Android SDK Manager` from within Visual Studio.
+* [Install .NET 6.0.0 rc 2](#downloads)
+* Android SDK Platform API 31. 
+* [JDK 11](https://www.microsoft.com/openjdk)
 
 ### iOS, Mac Catalyst, and macOS (Cocoa)
 
 Prerequisites:
 
-* [Install .NET 6.0.0 Preview 6](#downloads)
-* Xcode 13.0 Beta 1
+* [Install .NET 6.0.0 rc 2](#downloads)
+* Xcode 13.0 Beta (latest)
 
 ## Downloads
 

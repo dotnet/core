@@ -13,7 +13,7 @@ The following binaries are licensed with the
 * D3DCompiler_47_cor3.dll (used by WPF)
 
 The following binaries are licensed with the 
-[.NET Library License](https://dotnet.microsoft.com/en/dotnet_library_license.htm)
+[.NET Library License](https://dotnet.microsoft.com/dotnet_library_license.htm)
 
 * PresentationNative_cor3.dll (used by WPF)
 * wpfgfx_cor3.dll (used by WPF)

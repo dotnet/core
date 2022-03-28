@@ -37,7 +37,7 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
- Version:   6.0.100-preview.6.21355.2
+ Version:   6.0.100-preview.7.21379.14
  Commit:    1a9103db2d
 
 Runtime Environment:
@@ -45,24 +45,24 @@ Runtime Environment:
  OS Version:  10.0.17763
  OS Platform: Windows
  RID:         win10-x64
- Base Path:   C:\Program Files\dotnet\sdk\6.0.100-preview.6.21355.2\
+ Base Path:   C:\Program Files\dotnet\sdk\6.0.100-preview.7.21379.14\
 
 Host (useful for support):
-  Version: 6.0.0-preview.6.21355.2
+  Version: 6.0.100-preview.7.21379.14
   Commit:  3eaf1f316b
 
 .NET SDKs installed:
-  6.0.100-preview.6.21355.2 [C:\Program Files\dotnet\sdk]
+  6.0.100-preview.7.21379.14 [C:\Program Files\dotnet\sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App 6.0.0-preview.6.21355.2 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 6.0.0-preview.6.21352.12 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
-  Microsoft.WindowsDesktop.App 6.0.0-preview.6.21353.1 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.AspNetCore.App 6.0.100-preview.7.21379.14 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 6.0.0-preview.7.21377.19 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.WindowsDesktop.App 6.0.0-preview.7.21378.9 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-6.0.100-preview.5.21302.13
+6.0.100-preview.7.21379.14
 ```

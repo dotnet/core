@@ -48,7 +48,7 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -o dotnet.tar.gz http://aka.ms/dotnet/5.0/dotnet-sdk-linux-x64.tar.gz
+~# curl -Lo dotnet.tar.gz http://aka.ms/dotnet/5.0/dotnet-sdk-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz

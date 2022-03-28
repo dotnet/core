@@ -10,7 +10,7 @@ New major .NET versions are released annually in November. .NET 5.0 was the firs
 
 Each .NET release is defined (prior to initial release) as either **Preview**, **Current**, or **Long Term Support (LTS)**. The difference is support time frame, as defined below:
 
-* **Preview** releases are not supported but are offered for public testing. A Preview or Release Candidate release may be considered "go live" and have its own specific ad-hoc support terms that aren't covered by this general policy.
+* **Preview** releases are not supported but are offered for public testing. A Preview or Release Candidate release may be declared as "go live" by Microsoft and be supported in production.
 * **Current** releases are supported for (typically) eighteen months. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation. Current release users need to upgrade to later .NET releases more often to stay in support.
 * **LTS** releases are supported for three years. They are intended for users that want the stability and lower cost of maintaining an application on a single (major.minor) .NET version for an extended period.
 

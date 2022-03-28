@@ -2,133 +2,59 @@
 
 You may encounter the following known issues, which may include workarounds, mitigations or expected resolution timeframes.
 
+## Failure to install the .NET 6.0.1 update via Microsoft Update
+
+#### Summary
+There have been limited reports of a failure to install the .NET 6.0.1 update via Microsoft Update, the update fails with an error code 0x80070643.
+
+.NET 6.0 can be updated to 6.0.1 via MU and .NET 6.0.1 is also included in the Visual Studio 17.0.3 update. Both options carry the .NET Core Runtime and ASP.NET Core runtime version 6.0.1 and the .NET 6 SDK version 6.0.101. When these are installed, applications will by default roll forward to using the latest runtime patch version automatically. See [framework dependent app runtime roll forward](https://docs.microsoft.com/en-us/dotnet/core/versions/selection#framework-dependent-apps-roll-forward) for more information about this behavior.
+
+Therefore, installing either the 6.0.1 update via MU or the VS 17.0.3 update will secure the machine for the vulnerability described in [CVE-2021-43877](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-43877).
+
+
+#### Root Cause
+The optional workload manifest MSIs in the SDK populate the Language column in the Upgrade table. The INSTALLEDLANGUAGE property cannot be queried under the USERUNMANAGED context, it can only be queried under MSIINSTALLCONTEXT_MACHINE context. Due to an error the .NET 6.0.101 SDK Wix bundle sets the installer context incorrectly to USERUNMANAGED when running under the LOCAL\SYSTEM account. This causes the engine to continue and execute an older copy of the MSI instead of skipping it, which in turn triggers a launch condition to block the downgrade and the subsequent error causes the bundle to fail, resulting in the MU update failure.
+
+
+#### Workaround
+Running the 6.0.101 SDK bundle (without using MU) results in the context changing to MSIINSTALLCONTEXT_MACHINE, this allows the API call to query the INSTALLEDLANGUAGE to complete and the SDK Wix bundle install succeeds.
+
+Therefore a workaround for this issue is to install the 6.0.101 SDK bundle manually by downloading it from the [.NET download site](https://dotnet.microsoft.com/en-us/download/dotnet/6.0). Once this is successfully installed scanning MU again will result in clearing the previous error. 
+
+As described previously the computer can be secured by installing the VS 17.0.3 update, even if the MU update results in a failure so the MU failure is not a critical factor from a security perspective. Therefore for the case where we expect the VS update to offer and secure the computer we will be making a change to not offer the MU update to those computers to avoid the MU failure. For the case where .NET 6 was installed as a standalone version and VS is not expected to patch the computer we will continue to offer the 6.0.1 update via MU. 
+
+
 ## .NET SDK
-### Preview 4
-1. Workload install for protected install location (eg. c:\program files) will fail
 
-In the future, the .NET SDK will trigger elevation to install missing workloads but today that fails.
+.NET 6 is supported with Visual Studio 2022 and MSBuild 17.  It is not supported with Visual Studio 2019 and MSBuild 16.
 
+If you build .NET 6 projects with MSBuild 16.11, for example, you will see the following error:
+
+`warning NETSDK1182: Targeting .NET 6.0 in Visual Studio 2019 is not supported`
+
+You can use the .net 6 SDK to target downlevel runtimes in 16.11.
+
+#### 1. dotnet test x64 emulation on arm64 support
+While a lot of work has been done to support arm64 emulation of x64 processes in .net 6, there are some remaining [work](https://github.com/dotnet/sdk/issues/21686) to be done in 6.0.2xx. The most impactful remaining item is `dotnet test` support.
+
+`dotnet test --arch x64` on an arm64 machine will not work as it will not find the correct test host.  To test x64 components on an arm64 machine, you will have to install the x64 SDK and configure your `DOTNET_ROOT` and `PATH` to use the x64 version of dotnet.
+
+#### 2. Upgrade of Visual Studio or .NET SDK from earlier builds can result in a bad `PATH` configuration on Windows
+When upgrading Visual Studio to preview 5 or the .NET SDK to RC2 from an earlier build, the installer will uninstall the prior version of the .NET Host (dotnet.exe) and then install a new version. This results in the path to the x64 copy of dotnet being removed from the `PATH` then added back. If you have the x86 .NET Host installed, it will end up ahead of the x64 one and will be picked up first. 
+
+In this case you may find that Visual Studio is unable to create projects, or commands like `dotnet new` fail with a message like this:
 ```
-C:\Users\MPP>dotnet workload install microsoft-macos-sdk-full --skip-manifest-update
-
-Installing pack Microsoft.macOS.Sdk version 11.3.100-preview.5.889...
-Workload installation failed, rolling back installed packs...
-Rolling back pack Microsoft.macOS.Sdk installation...
-Workload installation failed: One or more errors occurred. (Access to the path 'C:\Program Files\dotnet\metadata\temp\microsoft.macos.sdk\11.3.100-preview.5.889' is denied.)
-```
-**Workaround**
-You'll need to elevate your command prompt before running the install command.
-
-### Preview 5
-#### 1. Missing Workload Manifests in Visual Studio 17 Preview 1
-
-`dotnet workload install` will error with workload not found when using the .NET SDK CLI installed with Visual Studio preview 1.  To work around this, please install the stand-alone SDK of preview 5 on the same machine.
-
-#### 2. Upgrades from .NET SDK Preview 4 to Preview 5 leave tools in a broken state.  Projects will fail to load in Visual Studio, and many SDK commands will fail, such as creating, building, or restoring a project.
-
-This can manifest in several different ways.  For example, when using the dotnet CLI, you may get an error similar to the following:
-
-```
-dotnet new console
-An item with the same key has already been added. Key: microsoft-android-sdk-full
-   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior) in
+Could not execute because the application was not found or a compatible .NET SDK is not installed.
 ```
 
-When opening a project in Visual Studio, you may get an error similar to the following:
+To confirm, run `dotnet --info` and you'll see (x86) paths for all of the found .NET runtimes and .NET SDKs installed. 
 
-> The project file cannot be opened. The NuGet-based SDK resolver failed to run because NuGet assemblies could not be located. Check your installation of MSBuild or set the environment variable “MSBUILD_NUGET_PATH” to the folder that contains the required NuGet assemblies. Could not find file ‘C:\Program Files\dotnet\sdk-manifests\6.0.100\Microsoft.NET.Workload.Android\WorkloadManifest.json’.
-
-When opening a project in Visual Studio for Mac, you may get an error similar to the following:
-
-> Unable to find SDK  
-> 'Microsoft.NET.SDK.WorkloadAutoImportPropsLocator'  
-> SDK not found
-
-The issue is caused because we renamed SDK workload manifests between preview 4 and preview 5.  If both versions of the manifests are installed, they will conflict with each other, leading to the "An item with the same key has already been added" error.
-
-Errors that a WorkloadManifest.json file could not be found may be caused if the `maui-check` tool had previously been run with Preview 4.  The tool would add some additional files to the workload manifest folders, which prevents the folders from being deleted when installing Preview 5.  These manifest folders without a WorkloadManfiest.json file then cause the file not found error.
-
-**Workaround**
-
-In the .NET SDK installation folder, delete all folders under `sdk-manifests\6.0.100` (for example, under `C:\Program Files\dotnet\sdk-manifests\6.0.100`) that have the form Microsoft.NET.Workload.*, **EXCEPT** for `microsoft.net.workload.mono.toolchain`
-
-**Or**
-
-If you want to use .NET MAUI, you can run the latest version of the [maui-check tool](https://github.com/Redth/dotnet-maui-check/blob/main/README.md).  This will delete the outdated manifest folders and set up your environment for .NET MAUI development.
-
-#### 3. Workload update from preview 4 not working
-
-The .NET SDK Optional Workloads were renamed between preview 4 and preview 5 and are not compatible. As such, the `dotnet workload update` command won't work for a preview 4 installed workload but should work with preview 5 and onward.
-
-### Preview 7
-#### 1. Reference assemblies no longer output to the bin directory
-
-These files are only needed during builds and cause confusion for customers to see extra binaries built to the bin\ref folder. Instead they were [moved](https://github.com/dotnet/msbuild/pull/6560) to only build to the obj/ref folder.
-
-**Note, this change is being [reverted](https://github.com/dotnet/msbuild/pull/6718) for RC1 as we found a hardcoded path in Roslyn in VS scenarios that has to be addressed first**
-
-#### 2. Error when cleaning up preview 6 workloads when installing preview 7 workloads
-
-The workload names all changed between preview 6 and 7 so the SDK doesn't recognize how to clean up existing installed workloads from earlier previews and will error
-
-`Garbage collecting for SDK feature bands 6.0.100...
-Workload installation failed: Workload not found: microsoft-net-sdk-blazorwebassembly-aot. Known workloads: ...`
-
-## .NET Runtime
-1. Issue in "dnSpy.exe" fpr .NET 6.0 Preview 5 as described in [dotnet/runtime #53014](https://github.com/dotnet/runtime/issues/53014)
-
-A [fix](https://github.com/dotnet/runtime/pull/53574) for this issue will be available in .NET 6.0 Prevew 6
-
-2. Issue in `ReadyToRun` feature for .NET Preview 6.0 Preview 3 as described in [dotnet/runtime #50472](https://github.com/dotnet/runtime/issues/50472)
-
-**Workaround**
-
-You can workaround this issue by setting `COMPlus_ReadyToRun=0` environment variable.
-
-3. **Microsoft.Extensions.DependencyInjection** .NET 6.0 Preview 5 has a regression related to injecting more than 5 services into an IEnumerable\<T>\, see [dotnet/runtime #54407](https://github.com/dotnet/runtime/issues/54407) for more details.
-
-
-**Workaround**
-
-If using the generic host, you can disable the `ValidateOnBuild` option:
-
-```C#
-Host.CreateDefaultBuilder(args)
-    .UseDefaultServiceProvider(o =>
-    {
-        o.ValidateOnBuild = false;
-    });
-```
-
-If using the `BuildServiceProvider` container directly, `ValidateOnBuild` is not on by default.
-
-
-## Windows Forms
-
-* `PropertyGrid` values are rendered at incorrect location.
-
-     The issue is tracked in [dotnet/winforms#4593](https://github.com/dotnet/winforms/issues/4593) and is expected to be fixed in 6.0 Preview3.
-     
+To fix this, edit your `PATH` environment variable to either remove the `c:\Program Files (x86)\dotnet` entry or move it after the entry for `c:\Program Files\dotnet`. Now reopen your console window.
+   
 ## ASP.NET Core
 
-**Running Blazor WebAssembly using IIS Express in Development**
+### SPA template issues with Individual authentication when running in development
 
-As of .NET 6 Preview 1, there is an ongoing issue with running Blazor WebAssembly applications using an IIS Express server during development on Visual Studio. As a workaround, we recommend using Kestrel during development.
+The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved. If restarting doesn't resolve the problem, another workaround is to specify the authority for your app in Program.cs: `builder.Services.Configure<JwtBearerOptions>("IdentityServerJwtBearer", o => o.Authority = "https://localhost:44416");` where 44416 is the port for the spa proxy.
 
-**Incremental builds in VS not working for apps with Razor views**
-
-As of .NET 6 Preview 3, changes to Razor views will not be updated during incremental builds. As a workaround, you can:
-
-- Build from the command line
-- Configure VS to always call MSBuild when building projects
-- Clean and build projects to pick up changes
-
-**JWT Bearer Handler ArgumentOutOfRangeException in UTC+X time zones**
-
-As of .NET 6 Preview 5, when using the JWT Bearer handler in a time zone that is higher than UTC (e.g. Eastern European Time/UTC+2), you may observe an `ArgumentOutOfRangeException` if the JWT token does not contain a `nbf` value (valid from).
-
-Issue is tracked by https://github.com/dotnet/aspnetcore/issues/33634 and will be fixed in .NET 6 Preview 6.
-
-**Workaround**
-
-You can workaround this by always providing a non-zero and non-minimum value for the `notBefore` parameter when using System.IdentityModel.Tokens.Jwt.JwtSecurityToken, or the 'nbf' field if using another JWT library.
+When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.

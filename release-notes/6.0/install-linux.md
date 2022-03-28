@@ -35,7 +35,7 @@ Preview release installers are not available from the Microsoft package reposito
 
 Here's what the script does.
 
-* Detects the distribution and version. The script supports platforms and versions listed in [.NET 6.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0-supported-os.md).
+* Detects the distribution and version. The script supports platforms and versions listed in [.NET 6.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/6.0/supported-os.md).
 * Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack that installer packages.
 * Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
 * Downloads the system dependency installer, if needed.
@@ -46,11 +46,11 @@ Here's what the script does.
 
 You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://docs.snapcraft.io/installing-snapd/6735).
 
-After configuring Snap on your system, run the following command to install the latest .NET Core SDK.
+After configuring Snap on your system, run the following command to install the latest .NET SDK.
 
 `sudo snap install dotnet-sdk --channel=6.0/beta --classic`
 
-When .NET Core is installed using the Snap package, the default .NET Core command is `dotnet-sdk.dotnet`, as opposed to just `dotnet`. The benefit of the namespaced command is that it will not conflict with a globally installed .NET Core version you may have. This command can be aliased to `dotnet` with:
+When .NET is installed using the Snap package, the default .NET command is `dotnet-sdk.dotnet`, as opposed to just `dotnet`. The benefit of the namespaced command is that it will not conflict with a globally installed .NET version you may have. This command can be aliased to `dotnet` with:
 
 `sudo snap alias dotnet-sdk.dotnet dotnet`
 
@@ -63,14 +63,14 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -o dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/45f9f84c-dbe6-458e-bea1-c1e931802486/995edcbcd852a07b0a285626f30afb33/dotnet-sdk-6.0.100-preview.6.21355.2-linux-x64.tar.gz
+~# curl -Lo dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/20283373-1d83-4879-8278-0afb7fd4035e/56f204f174743b29a656499ad0fc93c3/dotnet-sdk-6.0.100-rc.2.21505.57-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
 ~# export DOTNET_ROOT=~/dotnet
 ~# export PATH=$PATH:~/dotnet
 ~# dotnet --version
-6.0.100-preview.6.21355.2
+6.0.100-rc.2.21505.57
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.

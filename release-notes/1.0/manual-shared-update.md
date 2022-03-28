@@ -9,7 +9,7 @@ Again, this process should be done only in the event that required updates are a
 3. Back up existing files to be updated
 4. Copy new files to the target directory
 
-## Download NuGet packages containing the udpated files ##
+## Download NuGet packages containing the updated files ##
 
 Download the updated CoreCLR and JIT NuGet package which correspond to your system. Links below will download the packages directly.
 
@@ -31,7 +31,7 @@ JIT
 
 ## Rename and Extract ##
 
-If your system doesn't recognize *nupkg files as archives, rename them to *.zip or *.tar.gz and extract the `/runtimes` directory to a temporary location. For CoreCLR there will be `/native` and `/lib/netstandard1.0` directories under `/runtimes`. JIT will have only a `/native` directory. Here's an example of what the tmp location should look like when you are done if the Debian 8 packages were used. The list of binaries will be different for other distros.
+If your system doesn't recognize \*nupkg files as archives, rename them to \*.zip or \*.tar.gz and extract the `/runtimes` directory to a temporary location. For CoreCLR there will be `/native` and `/lib/netstandard1.0` directories under `/runtimes`. JIT will have only a `/native` directory. Here's an example of what the tmp location should look like when you are done if the Debian 8 packages were used. The list of binaries will be different for other distros.
 
 ```
 ~/tmp-update/
@@ -51,7 +51,7 @@ If your system doesn't recognize *nupkg files as archives, rename them to *.zip 
 
 ## Back up existing files ##
 
-Since we'll be updating files in-place it's a good idea to make a backup. First you need to locate the `Microsoft.NETCoreApp/1.0.0` directory. If you used the installers for Ubuntu, 1.0.0 will be found under `/usr/share/dotnet/shared/Microsoft.NETCore.App/`. Other distro installations are still manual extraction from archives so it's whereever you copied the directory structure. Something like `/opt/dotnet/shared/Microsoft.NETCore.App` would not be uncommon.
+Since we'll be updating files in-place it's a good idea to make a backup. First you need to locate the `Microsoft.NETCoreApp/1.0.0` directory. If you used the installers for Ubuntu, 1.0.0 will be found under `/usr/share/dotnet/shared/Microsoft.NETCore.App/`. Other distro installations are still manual extraction from archives so it's wherever you copied the directory structure. Something like `/opt/dotnet/shared/Microsoft.NETCore.App` would not be uncommon.
 
 Now that `Microsoft.NETCore.App/1.0.0` has been located, the easiest way to make the backup will be to copy the entire directory which will be updated. `sudo rsync -r 1.0.0/ 1.0.0-backup/` will create the backup directory and copy the entire contents of the source directory.
 

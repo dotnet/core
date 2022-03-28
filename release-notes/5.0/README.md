@@ -1,6 +1,6 @@
 # .NET 5
 
-[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) is a [Current release](../../release-policies.md) and will be supported for fifteen months, from November 2020 to February 2022. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
+[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) is a [Current release](../../release-policies.md) and will be supported for eighteen months, from November 2020 to May 2022. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/5.0) (also see [Releases](#releases))
 - [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
@@ -13,6 +13,13 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2022/03/08 | [5.0.15](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.15/5.0.15.md) 
+| 2022/02/08 | [5.0.14](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.14/5.0.14.md) 
+| 2021/12/14 | [5.0.13](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.13/5.0.13.md) |
+| 2021/11/08 | [5.0.12](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.12/5.0.12.md) |
+| 2021/10/12 | [5.0.11](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.11/5.0.11.md) |
+| 2021/09/14 | [5.0.10](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.10/5.0.10.md) |
+| 2021/08/10 | [5.0.9](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.9/5.0.9.md) |
 | 2021/07/13 | [5.0.8](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.8/5.0.8.md) |
 | 2021/06/08 | [5.0.7](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.7/5.0.7.md) |
 | 2021/05/25 | [5.0.300](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.6/5.0.300-sdk.md) |
