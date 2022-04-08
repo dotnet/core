@@ -63,7 +63,7 @@ When using localdb (default when creating projects in VS), the normal database a
 
 ### Issues running applications with Windows Desktop 6.0.2
 
-Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built against 6.0.2 won't run, if either .NET Windows Desktop runtime 6.0.0 or 6.0.1 are installed, and receieve error messages similar to the following:
+Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built with 6.0.200 or later .NET SDK, if the target workstation has only .NET Windows Desktop runtime 6.0.0 or 6.0.1 installed, and receieve error messages similar to the following:
 ```
 Application: WinFormsApp1.exe
 CoreCLR Version: 6.0.121.56705
@@ -74,19 +74,18 @@ File name: 'System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyTok
    at WinFormsApp1.Program.Main()   
 ```
 
-This is a result of Windows Desktop servicing ref packs in 6.0.2, which was shipped with an incorrect version.
+This is a result of Windows Desktop servicing ref pack in 6.0.2, which was shipped with an incorrect version.
 
 **Fix:**
-* To run Windows Desktop applications built against 6.0.0 or 6.0.1, the Windows Desktop runtime either 6.0.0 or 6.0.1 must be installed. 
-* To run Windows Desktop applications built against 6.0.2 or later, the Windows Desktop 6.0.2 or later is required.
+* To run Windows Desktop applications built with 6.0.200 or later .NET SDK, the Windows Desktop runtime 6.0.2 or later is required.
 
 The team appreciates that the fix is less than ideal, however it was chosen for the following reasons.
-* If the ref pack version number was reverted to 6.0.0, then all DLLs built against the 6.0.2 reference assemblies would be broken. Those projects/libraries would have no other workaround besides rebuilding, which would mean that any NuGet packages published would be irreversibly broken and would need to be updated.
+* If the ref pack version number was reverted to 6.0.0, then all DLLs built with 6.0.2 reference assemblies would be broken. Those projects/libraries would have no other workaround besides rebuilding, which would mean that any NuGet packages published would be irreversibly broken and would need to be updated.
 * If we lock the ref pack version number at 6.0.2, there is a workaround that lets allows building an app or library that can run on 6.0.0 or 6.0.1 - for the end-user it requires installing Windows Desktop runtime 6.0.0 or 6.0.1, and for a developer either locking the SDK in global.json:
     ```json
     {
       "sdk": {
-        "version": "6.0.101",
+        "version": "6.0.100",
         "rollForward": "disable"
       }
     }
