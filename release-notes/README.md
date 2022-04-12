@@ -5,16 +5,16 @@ The following [.NET releases](../releases.md) are currently supported:
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
 | [.NET 7](7.0/README.md) | [November, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-preview-2/) | [Preview][policies] | [7.0 Preview 2][7.0 Preview 2] | November, 2023 |
-| [.NET 6](6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.3][6.0.3]  | November 08, 2024 |
-| [.NET 5](5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [Current][policies] | [5.0.15][5.0.15] | May 08, 2022 |
-| [.NET Core 3.1](3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.23][3.1.23] | December 3, 2022 |
+| [.NET 6](6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.4][6.0.4]  | November 08, 2024 |
+| [.NET 5](5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [Current][policies] | [5.0.16][5.0.16] | May 08, 2022 |
+| [.NET Core 3.1](3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.24][3.1.24] | December 3, 2022 |
 
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
 
 [7.0 Preview 2]: 7.0/preview/7.0.0-preview.2.md
-[6.0.3]: 6.0/6.0.3/6.0.3.md
-[5.0.15]: 5.0/5.0.15/5.0.15.md
-[3.1.23]: 3.1/3.1.23/3.1.23.md
+[6.0.4]: 6.0/6.0.4/6.0.4.md
+[5.0.16]: 5.0/5.0.16/5.0.16.md
+[3.1.24]: 3.1/3.1.24/3.1.24.md
 
 
 ## Release Information
