@@ -37,7 +37,7 @@ OS                                    | Version               | Architectures   
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
-Minimum libc versions (from build OS):
+Other distros are supported with best effort if their libc version is at least the minimum supported libc version:
 
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
 - Arm64: [glibc][glibc] 2.23 (from Ubuntu 16.04)
