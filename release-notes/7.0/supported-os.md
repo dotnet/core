@@ -72,7 +72,7 @@ Other distros are supported with best effort if their libc version is at least t
 [Ubuntu-lifecycle]: https://wiki.ubuntu.com/Releases
 [Ubuntu-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-ubuntu-2004
 [glibc]: https://www.gnu.org/software/libc/
-[musl]: https://www.musl-libc.org/
+[musl]: https://musl.libc.org/
 
 ## macOS
 
