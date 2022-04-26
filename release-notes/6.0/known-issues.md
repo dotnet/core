@@ -63,7 +63,7 @@ When using localdb (default when creating projects in VS), the normal database a
 
 ### Issues running applications with Windows Desktop 6.0.2
 
-Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built with 6.0.200 or later .NET SDK, if the target workstation has only .NET Windows Desktop runtime 6.0.0 or 6.0.1 installed, and receieve error messages similar to the following:
+Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built with 6.0.200 or later .NET SDK, if the target environment has only .NET Windows Desktop runtime 6.0.0 or 6.0.1 installed, and receive error messages similar to the following:
 ```
 Application: WinFormsApp1.exe
 CoreCLR Version: 6.0.121.56705
