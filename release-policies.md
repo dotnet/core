@@ -39,10 +39,7 @@ Functional improvements are typically very targeted, and may address the followi
 
 During the maintenance support period, .NET releases are updated to mitigate security vulnerabilities, only.
 
-* Current releases are supported for eighteen months, the last six months of which is maintenance.
-* LTS releases are supported for three years, the last year of which is maintenance.
-
-After the maintenance period ends, the release is out of support.
+The maintenance support period is the final 6 months of support for any release (Current or LTS). After the maintenance period ends, the release is out of support.
 
 ### End of support
 
