@@ -8,9 +8,6 @@ Operating system specific instructions:
 - [macOS](install-macos.md)
 - [Windows](install-windows.md)
 
- Install .NET Multi-platform App UI Workloads: 
-- [MAUI](install-maui.md)
-
 ## Distributions
 
 The following distributions are available for all operating systems:
@@ -37,7 +34,7 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
- Version:   7.0.100-preview.1.22110.4
+ Version:   7.0.100-preview.2.22153.17
  Commit:    1a9103db2d
 
 Runtime Environment:
@@ -45,24 +42,24 @@ Runtime Environment:
  OS Version:  10.0.17763
  OS Platform: Windows
  RID:         win10-x64
- Base Path:   C:\Program Files\dotnet\sdk\7.0.100-preview.1.22101.1\
+ Base Path:   C:\Program Files\dotnet\sdk\7.0.100-preview.2.22153.17\
 
 Host (useful for support):
-  Version: 7.0.100-preview.1.22110.4
+  Version: 7.0.100-preview.2.22153.17
   Commit:  3eaf1f316b
 
 .NET SDKs installed:
-  7.0.100-preview.1.22110.4 [C:\Program Files\dotnet\sdk]
+  7.0.100-preview.2.22153.17 [C:\Program Files\dotnet\sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App 7.0.100-preview.1.22081.6 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 7.0.0-preview.1.21377.19 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
-  Microsoft.WindowsDesktop.App 7.0.0-preview.1.22077.5 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.AspNetCore.App 7.0.0-preview.2.22153.2 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 7.0.100-preview.2.22153.17 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.WindowsDesktop.App 7.0.0-preview.2.22153.5 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-7.0.100-preview.1.22110.4
+7.0.100-preview.2.22153.17
 ```

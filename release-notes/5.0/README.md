@@ -13,7 +13,9 @@
 
 | Date | Release |
 | :-- | :-- |
-| 2022/02/08 | [5.0.14](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.14/5.0.14.md) 
+| 2022/04/12 | [5.0.16](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.16/5.0.16.md) |
+| 2022/03/08 | [5.0.15](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.15/5.0.15.md) |
+| 2022/02/08 | [5.0.14](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.14/5.0.14.md) |
 | 2021/12/14 | [5.0.13](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.13/5.0.13.md) |
 | 2021/11/08 | [5.0.12](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.12/5.0.12.md) |
 | 2021/10/12 | [5.0.11](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.11/5.0.11.md) |

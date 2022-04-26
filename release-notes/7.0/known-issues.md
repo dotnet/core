@@ -11,6 +11,9 @@ When trying to do GetType with ignorecase as true in some cases does not find th
 This only happens in .NET7 preview 1 and does not happen in .NET 6.
 More information and workaround can be found at https://github.com/dotnet/runtime/issues/65013
 
+### Libraries has a non blocking issue in System.Security.Cryptography.
+.NET 7 Preview 3 on Linux skips revocation checks for expired certificates, reporting RevocationStatusUnknown when revocation checks were enabled. You can read more about this here: https://github.com/dotnet/runtime/issues/66803
+
 ## .NET SDK
 
 ### MAUI optional workloads not yet supported in .NET 7
