@@ -81,7 +81,7 @@ This is a result of Windows Desktop servicing ref pack in 6.0.2, which was shipp
 
 The team appreciates that the fix is less than ideal, however it was chosen for the following reasons.
 * If the ref pack version number was reverted to 6.0.0, then all DLLs built with 6.0.2 reference assemblies would be broken. Those projects/libraries would have no other workaround besides rebuilding, which would mean that any NuGet packages published would be irreversibly broken and would need to be updated.
-* If we lock the ref pack version number at 6.0.2, there is a workaround that lets allows building an app or library that can run on 6.0.0 or 6.0.1 - for the end-user it requires installing Windows Desktop runtime 6.0.0 or 6.0.1, and for a developer either locking the SDK in global.json:
+* If we lock the ref pack version number at 6.0.2, there is a workaround that allows building an app or library that can run on 6.0.0 or 6.0.1 - for the end-user it requires installing Windows Desktop runtime 6.0.0 or 6.0.1, and for a developer either locking the SDK in global.json:
     ```json
     {
       "sdk": {
