@@ -92,7 +92,7 @@ The team appreciates that the fix is less than ideal, however it was chosen for 
     ```
     ...or locking the runtime at the project level:
     ```xml
-    <ItemGroup>
+    <ItemGroup Condition="'$(TargetFrameworkVersion)' == '6.0'">
       <FrameworkReference
               Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF;Microsoft.WindowsDesktop.App.WindowsForms"
               TargetingPackVersion="6.0.0" />
