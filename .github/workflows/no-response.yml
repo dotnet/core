@@ -1,0 +1,26 @@
+name: No Response
+
+# **What it does**: Closes issues where the original author doesn't respond to a request for information within the predefined period of time.
+# **Why we have it**: To remove the need for maintainers to remember to check back on issues periodically to see if contributors have responded.
+
+# Both `issue_comment` and `scheduled` event types are required for this Action
+# to work properly.
+on:
+  issue_comment:
+    types: [created]
+  schedule:
+    # Schedule for five minutes after the hour, every hour
+    - cron: '5 * * * *'
+
+jobs:
+  noResponse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lee-dohm/no-response@v0.5.0
+        with:
+          token: ${{ github.token }}
+          daysUntilClose: 7 # Number of days of inactivity before an Issue is closed for lack of response
+          responseRequiredLabel: needs-more-info # Label indicating that a response from the original author is required
+          closeComment: >
+            This issue has been automatically closed due to no response from the original author.
+            Please feel free to reopen it if you have more information that can help us investigate the issue further.
