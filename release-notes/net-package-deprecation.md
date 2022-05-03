@@ -1,6 +1,6 @@
-# .NET Pacakge Maintenance (deprecation) File List
+# .NET Package Maintenance (deprecation) File List
 
-The following list of packages does not include specific version numbers for affected packages. Where a given package has a current version that is in support, the previous versions will be marked deprecated.
+The following list of packages doesn't include specific version numbers for affected packages. Where a given package has a current version that is in support, the previous versions will be marked deprecated.
 
 * Accessibility
 * AjaxGridScaffolder
