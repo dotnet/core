@@ -4,22 +4,39 @@ If you work on or with the .NET Team, you will need to onboard into various GitH
 
 ## Join .NET teams in dotnet and Microsoft orgs
 
-You need to link your GitHub and @microsoft.com accounts. Click the link:
+[Link your GitHub account](https://repos.opensource.microsoft.com/link) with Microsoft and then join our teams (in two organizations):
 
-* [Link your GitHub account](https://repos.opensource.microsoft.com/link)
+1. [Join the microsoft/dotnet team](https://repos.opensource.microsoft.com/Microsoft/teams/dotnet/join/)
+1. [Join the dotnet/microsoft team](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
 
-You need to join teams in two organizations. Click the two links:
+## Security best practices
 
-1. [Join the Microsoft org](https://repos.opensource.microsoft.com/orgs/microsoft/join)
-2. [Join the dotnet team](https://repos.opensource.microsoft.com/Microsoft/teams/dotnet/join/)
-3. [Join the dotnet org](https://repos.opensource.microsoft.com/orgs/dotnet/join)
-4. [Join the microsoft team](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
+Bad actors try to break into our accounts all the time (see ["failed login attempts" on your account](https://github.com/settings/security-log?q=action%3Auser.failed_login)). You need to apply the following guidance to (A) stay secure, and (B) maintain access to your account.
 
-After you join the teams:
+The following best practices are required for org owners, and recommended for repo admins.
 
-* Users will be able to @mention you on [.NET Repos](https://github.com/dotnet/core/blob/main/Documentation/core-repos.md)
-* You will be able to access to private repos we maintain
-* You will get write access to a subset of repos
+* Do not use [SMS](https://en.wikipedia.org/wiki/SIM_swap_scam) for 2FA or as a recovery fallback (disable those options).
+* Do use the [GitHub mobile app](https://github.blog/2022-01-25-secure-your-github-account-github-mobile-2fa/) for 2FA.
+* Do register a [security key(s)](https://www.yubico.com/works-with-yubikey/catalog/github/) as a two factor method.
+* Do register an authenticator app -- registering a one-time-password with an app like 1Password is recommended (not tied to your phone).
+* Do store recovery codes in a safe place, like [OneDrive Vault](https://www.microsoft.com/microsoft-365/onedrive/personal-vault), 2FA-protected OneNote or in a password vault like 1Password.
+
+Note: If you completely lose access to login to your account, GitHub support will not be able to recover your account. That's why all of these options are covered.
+
+A correctly configured account should look similar to the following:
+
+![image](https://user-images.githubusercontent.com/2608468/166490511-557e41e3-2fe0-45a6-a67b-425bf6800be1.png)
+
+Please test your security key to ensure it works. For example, on Windows, you should see a dialog similar to the following (that says "security key"):
+
+![image](https://user-images.githubusercontent.com/2608468/83581665-56980400-a4f4-11ea-8096-ddd553d28e18.png)
+
+A few more notes on hardware keys:
+
+* You should have at least one hardware key that does not travel with you, but is stored in a secure location (like at home) as a last resort in case you lose access to other factors.
+* If you have a FIDO2 key, it can be used with [mysignins](https://mysignins.microsoft.com/).
+* If you have USB-C and USB-A only devices, and want to use hardware keys for them, then you need [separate keys](https://www.yubico.com/works-with-yubikey/catalog/github/). This explains why the example below has multiple keys registered (for example, one securely stored at home, and two keys for daily use for USB-C and USB-A only devices).
+* You can use Windows Hello to sign in as a hardware key. This is fine to use, but it doesn't replace the need for hardware key that you store in a secure location. Your Windows Hello key is not tied to you, but the machine. It won't survive hardware failures or re-installing Windows.
 
 ## Configure your GitHub account as a Microsoft employee (recommended)
 
@@ -35,12 +52,7 @@ After you join the teams:
   * Set `@Microsoft` as your **Company**,
   * Upload your **picture**, ideally showing your face.
     * Hint: You can grab your GAL picture from <https://microsoft-my.sharepoint.com>.
-
-## Install Microsoft open source tools (recommended)
-
-The following tool makes it easier to use open source and participate in open-source projects:
-
-* [Browser Extension](https://docs.opensource.microsoft.com/tools/browser.html) -- Identifies Microsoft employees on GitHub.
+ * Easily identify other Microsoft employees with our [browser extension](https://docs.opensource.microsoft.com/tools/browser.html)
 
 ## Get write permissions to repos (optional)
 
@@ -49,45 +61,3 @@ Join teams to gain write access to repos:
 * Request team membership via <https://repos.opensource.microsoft.com/teams>.
 * Ask someone if you don't know which team(s) to join.
 * Select `Request to join this team` on the right side - it will send email request to maintainers of the team.
-
-## Security best practices
-
-Enabling 2FA doesn't necessarily mean your account is secure. SMS (phone texts) is [not secure](https://en.wikipedia.org/wiki/SIM_swap_scam) as a 2FA method and should be avoided if possible. You can see [failed login attempts](https://github.com/settings/security-log?q=action%3Auser.failed_login) on your account to get some sense of the risk you have.
-
-The following best practices are required for org owners, and recommended for repo admins.
-
-* Do register a [security key(s)](https://www.yubico.com/works-with-yubikey/catalog/github/) as a two factor method.
-* Do register an authenticator app -- registering a one-time-password with an app like 1Password is recommended (not tied to your phone).
-* Do store recovery codes in a safe place, like [OneDrive Vault](https://www.microsoft.com/microsoft-365/onedrive/personal-vault), 2FA-protected OneNote or in a password vault like 1Password.
-* Do register your GitHub account with your 2FA-protected Facebook account for GitHub account recovery. This is the absolute last recovery option and is considered secure (even if your Facebook account is breached).
-* Do not use SMS for 2FA or as a recovery fallback.
-
-Note: If you completely lose access to login to your account, GitHub support will not be able to recover your account. That's why all of these options are covered.
-
-A few more notes on hardware keys:
-
-* You should have at least one hardware key that does not travel with you, but is stored in a secure location (like at home) as a last resort in case you lose access to other factors.
-* If you have a FIDO2 key, it can be used with [mysignins](https://mysignins.microsoft.com/).
-* If you have USB-C and USB-A only devices, and want to use hardware keys for them, then you need [separate keys](https://www.yubico.com/works-with-yubikey/catalog/github/). This explains why the example below has three keys registered (one securely stored at home, and two keys for daily use for USB-C and USB-A only devices).
-* You can use Windows Hello to sign in as a hardware key. This is fine to use, but it doesn't replace the need for hardware key that you store in a secure location. Your Windows Hello key is not tied to you, but the machine. It won't survive hardware failures or re-installing Windows.
-
-A correctly configured account should look similar to the following:
-
-![image](https://user-images.githubusercontent.com/2608468/83581219-1421f780-a4f3-11ea-8f01-3a27afe4ddac.png)
-
-Please test your security key to ensure it works. You need to see a dialog similar to the following (that says "security key"):
-
-![image](https://user-images.githubusercontent.com/2608468/83581665-56980400-a4f4-11ea-8096-ddd553d28e18.png)
-
-Facebook-based account recovery registration will look similar to the following:
-
-![image](https://user-images.githubusercontent.com/2608468/83581770-965eeb80-a4f4-11ea-993d-ad39bae391c2.png)
-
-## Service Accounts
-
-Service accounts should also be linked. For more details, see [Service accounts for GitHub](https://docs.opensource.microsoft.com/github/service-accounts.html).
-
-## Guidelines
-
-* [Contributing to .NET](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md)
-* [What you can expect from Maintainers](https://github.com/dotnet/core/blob/main/Documentation/contributing/maintainers.md)
