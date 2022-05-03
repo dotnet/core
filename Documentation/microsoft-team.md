@@ -13,13 +13,17 @@ If you work on or with the .NET Team, you will need to onboard into various GitH
 
 Bad actors try to break into our accounts all the time (see ["failed login attempts" on your account](https://github.com/settings/security-log?q=action%3Auser.failed_login)). You need to apply the following guidance to (A) stay secure, and (B) maintain access to your account.
 
-The following best practices are required for org owners, and recommended for repo admins.
+Register at least two of the following two-factor authentication methods:
+
+* [GitHub mobile app](https://github.blog/2022-01-25-secure-your-github-account-github-mobile-2fa/)
+* [Hardware security key(s)](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-security-key) (also see [yubikey](https://www.yubico.com/works-with-yubikey/catalog/github/))
+* [TOTP with an Authenticator app](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app)
+
+
+Additional guidance:
 
 * Do not use [SMS](https://en.wikipedia.org/wiki/SIM_swap_scam) for 2FA or as a recovery fallback (disable those options).
-* Do use the [GitHub mobile app](https://github.blog/2022-01-25-secure-your-github-account-github-mobile-2fa/) for 2FA.
-* Do register a [security key(s)](https://www.yubico.com/works-with-yubikey/catalog/github/) as a two factor method.
-* Do register an authenticator app -- registering a one-time-password with an app like 1Password is recommended (not tied to your phone).
-* Do store recovery codes in a safe place, like [OneDrive Vault](https://www.microsoft.com/microsoft-365/onedrive/personal-vault), 2FA-protected OneNote or in a password vault like 1Password.
+* Store [recovery codes](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication-recovery-methods) in a safe place, like [OneDrive Vault](https://www.microsoft.com/microsoft-365/onedrive/personal-vault), 2FA-protected OneNote or in a password vault like 1Password.
 
 Note: If you completely lose access to login to your account, GitHub support will not be able to recover your account. That's why all of these options are covered.
 
