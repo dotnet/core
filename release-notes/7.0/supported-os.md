@@ -40,7 +40,7 @@ OS                                    | Version               | Architectures   
 Other distros are supported with best effort if their libc version is at least the minimum supported libc version:
 
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
-- Arm64: [glibc][glibc] 2.23 (from Ubuntu 16.04)
+- Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
 - Alpine (x64 and Arm64): [musl][musl] 1.1.24 (from oldest supported Alpine)
 
 [Alpine]: https://alpinelinux.org/
