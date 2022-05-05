@@ -38,6 +38,8 @@ OS                                    | Version               | Architectures   
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
+Note: Newer distro versions include OpenSSL 3 and not OpenSSL 1.x. .NET 6 is the first .NET version to support OpenSSL3. You need to use .NET 6+ if you want to use a distro version that only offers OpenSSL 3, such as Ubuntu 22.04.
+
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://alpinelinux.org/releases/
 [CentOS]: https://www.centos.org/
