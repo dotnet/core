@@ -8,18 +8,18 @@ Daily builds, for both future and servicing branches, are available as Docker co
 
 Preview branches are for new versions of .NET that have not yet been released and are not yet supported.
 
-|Component|*.NET 6.0*
+|Component|*.NET 7.0*
 |:------:|:------:|
-|SDK|[.NET SDK 6.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)
-|ASP.NET Core|[ASP.NET Core 6.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)
-|Runtime|[.NET Runtime 6.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)
+|SDK|[.NET SDK 7.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)
+|ASP.NET Core|[ASP.NET Core 7.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)
+|Runtime|[.NET Runtime 7.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)
 
 ## Servicing Releases
 
 Servicing branches are for new patch versions of .NET that have not yet been released and are not yet supported.
 
-|Component|*.NET 5.0*|*.NET Core 3.1*|
-|:------:|:------:|:------:|
-|SDK|[.NET SDK 5.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET Core SDK 3.1.xxx](https://github.com/dotnet/core-sdk/blob/main/README.md#installers-and-binaries)
-|ASP.NET Core|[ASP.NET Core 5.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 3.1](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|
-|Runtime|[.NET Runtime 5.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)|[.NET Core Runtime 3.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)
+|Component|*.NET 6.0*|*.NET 5.0*|*.NET Core 3.1*|*.NET Core 2.1*|
+|:------:|:------:|:------:|:------:|:------:|
+|SDK|[.NET SDK 6.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET SDK 5.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET Core SDK 3.1.xxx](https://github.com/dotnet/core-sdk/blob/main/README.md#installers-and-binaries)|[.NET Core SDK 2.1.xxx](https://github.com/dotnet/cli/blob/release/2.1/README.md#installers-and-binaries)|
+|ASP.NET Core|[ASP.NET Core 6.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 5.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 3.1](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 2.1](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|
+|Runtime|[.NET Runtime 6.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)|[.NET Core Runtime 5.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)|[.NET Core Runtime 3.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|[.NET Core Runtime 2.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|

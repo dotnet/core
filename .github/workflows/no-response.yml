@@ -1,0 +1,30 @@
+name: No Response
+
+# **What it does**: Closes issues where the original author doesn't respond to a request for information within the predefined period of time.
+# **Why we have it**: To remove the need for maintainers to remember to check back on issues periodically to see if contributors have responded.
+
+# Both `issue_comment` and `scheduled` event types are required for this Action
+# to work properly.
+on:
+  issue_comment:
+    types: [created]
+  schedule:
+    # Schedule for five minutes after the hour, every hour
+    - cron: '5 * * * *'
+
+jobs:
+  noResponse:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/stale@v5
+        with:
+          days-before-issue-stale: 7
+          days-before-issue-close: 3
+          only-labels: "needs-more-info"
+          stale-issue-message: "This issue is stale because there has been no response to a request for more information for 7 days."
+          close-issue-message: "This issue was closed because there was no response to a request for more information for 10 days."
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

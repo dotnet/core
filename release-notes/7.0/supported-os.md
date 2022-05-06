@@ -37,6 +37,12 @@ OS                                    | Version               | Architectures   
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
+Other distros are supported with best effort if their libc version is at least the minimum supported libc version:
+
+- x64: [glibc][glibc] 2.17 (from CentOS 7)
+- Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
+- Alpine (x64 and Arm64): [musl][musl] 1.1.24 (from oldest supported Alpine)
+
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://alpinelinux.org/releases/
 [CentOS]: https://www.centos.org/
@@ -65,6 +71,8 @@ OS                                    | Version               | Architectures   
 [Ubuntu]: https://ubuntu.com/
 [Ubuntu-lifecycle]: https://wiki.ubuntu.com/Releases
 [Ubuntu-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-ubuntu-2004
+[glibc]: https://www.gnu.org/software/libc/
+[musl]: https://musl.libc.org/
 
 ## macOS
 
