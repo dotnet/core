@@ -15,12 +15,16 @@ on:
 jobs:
   noResponse:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
-      - uses: lee-dohm/no-response@v0.5.0
+      - uses: actions/stale@v5
         with:
-          token: ${{ github.token }}
-          daysUntilClose: 7 # Number of days of inactivity before an Issue is closed for lack of response
-          responseRequiredLabel: "needs-more-info" # Label indicating that a response from the original author is required
-          closeComment: >
-            This issue has been automatically closed due to no response from the original author.
-            Please feel free to reopen it if you have more information that can help us investigate the issue further.
+          days-before-issue-stale: 7
+          days-before-issue-close: 3
+          only-labels: "needs-more-info"
+          stale-issue-message: "This issue is stale because there has been no response to a request for more information for 7 days."
+          close-issue-message: "This issue was closed because there was no response to a request for more information for 10 days."
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
