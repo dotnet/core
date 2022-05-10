@@ -1,6 +1,8 @@
-# .NET 5
+# .NET 5 Release -- Out of Support
 
-[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) is a [Current release](../../release-policies.md) and will be supported for eighteen months, from November 2020 to May 2022. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
+This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
+
+[.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) was released on May 10, 2020. The release was a collaborative effort by many contributors. [.NET 5 reached end of support on May 10, 2022](https://devblogs.microsoft.com/dotnet/dotnet-5-end-of-support-update/) | It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/5.0) (also see [Releases](#releases))
 - [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
@@ -13,6 +15,8 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2020/05/10 | Out of Support | [.NET 5 End of Support](https://devblogs.microsoft.com/dotnet/dotnet-5-end-of-support-update/) |
+| 2022/05/10 | [5.0.17](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.17/5.0.17.md) |
 | 2022/04/12 | [5.0.16](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.16/5.0.16.md) |
 | 2022/03/08 | [5.0.15](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.15/5.0.15.md) |
 | 2022/02/08 | [5.0.14](https://github.com/dotnet/core/blob/main/release-notes/5.0/5.0.14/5.0.14.md) |
