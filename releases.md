@@ -14,7 +14,7 @@ The following table lists in-support .NET releases.
 | [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.5][6.0.5] | November 12, 2024 |
 | [.NET Core 3.1](release-notes/3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.25][3.1.25] | December 13, 2022 |
 
-[7.0 Preview 4]: release-notes/7.0/preview/7.0.0-preview.3.md
+[7.0 Preview 4]: release-notes/7.0/preview/7.0.0-preview.4.md
 [6.0.5]: release-notes/6.0/6.0.5/6.0.5.md
 [3.1.25]: release-notes/3.1/3.1.25/3.1.25.md
 
