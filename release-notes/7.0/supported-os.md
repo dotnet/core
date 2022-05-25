@@ -28,7 +28,7 @@ OS                                    | Version                 | Architectures 
 
 OS                                    | Version               | Architectures     | Lifecycle
 --------------------------------------|-----------------------|-------------------|----------
-[Alpine Linux][Alpine]                | 3.12+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
+[Alpine Linux][Alpine]                | 3.15+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
 [CentOS][CentOS]                      | 7+                    | x64               | [CentOS][CentOS-lifecycle]
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
 [Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
@@ -41,7 +41,7 @@ Other distros are supported with best effort if their libc version is at least t
 
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
 - Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
-- Alpine (x64 and Arm64): [musl][musl] 1.1.24 (from oldest supported Alpine)
+- Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.15)
 
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://alpinelinux.org/releases/
@@ -108,6 +108,6 @@ None yet.
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 7.0][OS-lifecycle-policy].
 
-* macOS 10.13
+None yet.
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md
