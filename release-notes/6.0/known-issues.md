@@ -58,3 +58,36 @@ To fix this, edit your `PATH` environment variable to either remove the `c:\Prog
 The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved. If restarting doesn't resolve the problem, another workaround is to specify the authority for your app in Program.cs: `builder.Services.Configure<JwtBearerOptions>("IdentityServerJwtBearer", o => o.Authority = "https://localhost:44416");` where 44416 is the port for the spa proxy.
 
 When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
+
+## Windows Desktop (Windows Forms / WPF)
+
+### Issues running applications with Windows Desktop 6.0.2
+
+Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built with 6.0.200 or later .NET SDK, if the target environment has only .NET Windows Desktop runtime 6.0.0 or 6.0.1 installed, and receive error messages similar to the following:
+```
+Application: WinFormsApp1.exe
+CoreCLR Version: 6.0.121.56705
+.NET Version: 6.0.1
+Description: The process was terminated due to an unhandled exception.
+Exception Info: System.IO.FileLoadException: Could not load file or assembly 'System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The located assembly's manifest definition does not match the assembly reference. (0x80131040)
+File name: 'System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WinFormsApp1.Program.Main()   
+```
+
+This is a result of Windows Desktop servicing ref pack in 6.0.2, which was shipped with an incorrect version.
+
+**Fix:**
+* To run Windows Desktop applications built with 6.0.200 or later .NET SDK, the Windows Desktop runtime 6.0.2 or later is required.
+
+The team appreciates that the fix is less than ideal, however it was chosen for the following reasons.
+* If the ref pack version number was reverted to 6.0.0, then all DLLs built with 6.0.2 reference assemblies would be broken. Those projects/libraries would have no other workaround besides rebuilding, which would mean that any NuGet packages published would be irreversibly broken and would need to be updated.
+* If we lock the ref pack version number at 6.0.2, there is a workaround that allows building an app or library that can run on 6.0.0 or 6.0.1 - for an end-user it requires installing Windows Desktop runtime 6.0.0 or 6.0.1, and for a developer - locking the runtime at the project level:
+    ```xml
+    <ItemGroup Condition="'$(TargetFrameworkVersion)' == '6.0'">
+      <FrameworkReference
+              Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF;Microsoft.WindowsDesktop.App.WindowsForms"
+              TargetingPackVersion="6.0.0" />
+    </ItemGroup>
+    ```
+* Additionally 6.0.1 and 6.0.2 are security releases, and customers are encouraged to update to the latest version.
+
