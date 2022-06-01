@@ -3,10 +3,11 @@
 [.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6-rc1/) is an [LTS release](../../release-policies.md) and will be supported for three years, from November 2021 to November 2024. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/6.0) (also see [Releases](#releases))
+- [Installation instructions](install.md)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
-- [Installation instructions](install.md)
+- [CVEs](cve.md)
 
 ## Releases
 
