@@ -24,4 +24,6 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 6.0.0 (November 2021)
   - [CVE-2021-43877 | ASP.NET Core Elevation of privilege Vulnerability](https://github.com/dotnet/announcements/issues/206)
 
-For example, `6.0.0` users may be vulnerable to the CVEs present in `6.0.0` and newer releases. Similarly, `6.0.3` users may be vulnerable to the CVEs present in `6.0.4` and newer releases.
+The CVEs are diplayed one month offset from when they were released. For example, the CVE listed with `6.0.0` was disclosed and a fix was published with `6.0.1`. `6.0.1` is not vulnerable to that CVE while `6.0.0` is. As a result, the CVE is listed with `6.0.0`, where it still applies. The same model is used for the other releases. 
+
+The CVE exposure is cumulative. For example, `6.0.0` users may be vulnerable to the CVEs present in `6.0.0` and newer releases. Similarly, `6.0.3` users may be vulnerable to the CVEs present in `6.0.4` and newer releases. The latest release is not vulnerable to any published CVEs.
