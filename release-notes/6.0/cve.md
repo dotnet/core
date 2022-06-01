@@ -2,7 +2,7 @@
 
 The .NET Team releases [monthly updates for .NET 6](https://github.com/dotnet/announcements/labels/.NET%206.0), on Update Tuesday. These updates often include security fixes. If you are on an older version, your app my be vulnerable.
 
-Your app needs to be on the tip .NET 6 patch version to be secure. The longer you wait to upgrade, the greater the exposure to CVEs.
+Your app needs to be on the latest .NET 6 patch version to be secure. The longer you wait to upgrade, the greater the exposure to CVEs.
 
 ## Which CVEs apply to my app?
 
