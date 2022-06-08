@@ -444,7 +444,7 @@ VerifyPathOrExit $windowsDesktopAfterDllFolder
 
 $asmDiffProjectPath = [IO.Path]::Combine($ArcadeRepo, "src", "Microsoft.DotNet.AsmDiff", "Microsoft.DotNet.AsmDiff.csproj")
 $asmDiffArtifactsPath = [IO.Path]::Combine($ArcadeRepo ,"artifacts", "bin", "Microsoft.DotNet.AsmDiff")
-$asmDiffExe = [IO.Path]::Combine($asmDiffArtifactsPath, "Release", "net6.0", "Microsoft.DotNet.AsmDiff.exe")
+$asmDiffExe = [IO.Path]::Combine($asmDiffArtifactsPath, "Release", "netcoreapp3.1", "Microsoft.DotNet.AsmDiff.exe")
 ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
 
 
