@@ -27,7 +27,7 @@ Workaround:
 
 `dotnet tool install -g dotnet-format --version "7.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json`
 
-Then invoke the global tool instead of using the dotnet CLI.
+Then invoke the global tool using `dotnet-format` instead of through the dotnet CLI using `dotnet format`.
 
 
 ### MAUI optional workloads not yet supported in .NET 7
