@@ -16,6 +16,24 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 ## .NET SDK
 
+### [Unhandled Exception in dotnet format app in .NET 7.0 Preview 5](https://github.com/dotnet/sdk/issues/25879)
+
+dotnet format app that comes with SDK has this exception:
+Unhandled exception: System.IO.FileLoadException: Could not load file or assembly 'System.Configuration.ConfigurationManager, Version=6.0.0.0
+
+Workaround:
+
+[Install dotnet-format as a global tool](https://github.com/dotnet/format#how-to-install-development-builds)
+
+`dotnet tool install -g dotnet-format --version "7.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json`
+
+Then invoke the global tool instead of using the dotnet CLI.
+
+
 ### MAUI optional workloads not yet supported in .NET 7
 
 You can continue using 6.0.200 .NET SDK versions until .NET MAUI joins the .NET 7 release. See more information here: https://github.com/dotnet/maui/wiki/.NET-7-and-.NET-MAUI
+
+
+
+
