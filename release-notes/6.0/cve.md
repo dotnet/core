@@ -1,12 +1,12 @@
-# .NET 6 CVEs
+# .NET 6 Security Vulnerabilities
 
 The .NET Team releases [monthly updates for .NET 6](https://github.com/dotnet/announcements/labels/.NET%206.0) on [Patch Tuesday](https://en.wikipedia.org/wiki/Patch_Tuesday). These updates often include security fixes. If you are on an older version, your app may be vulnerable.
 
-Your app needs to be on the latest .NET 6 patch version to be secure. The longer you wait to upgrade, the greater the exposure to CVEs.
+Your app needs to be on the latest .NET 6 patch version to be secure. The longer you wait to upgrade, the greater the exposure to [Common Vulnerabilities and Exposures (CVEs)](https://www.cve.org/).
 
 ## Which CVEs apply to my app?
 
-Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
+Your app may be vulnerable to the following [published CVEs](https://github.com/dotnet/announcements/issues?q=is%3Aopen+label%3A%22.NET+6.0%22++label%3A%22Security%22) if you are using the given version or older.
 
 - 6.0.5 (May 2022)
   - No CVEs currently apply.
