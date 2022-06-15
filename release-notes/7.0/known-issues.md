@@ -21,7 +21,7 @@ Copy the following into any net7.0 blazor wasm csproj:
               SkipUnchangedFiles="true"/>
     </Target>
 `
-That should resolve the missing dependency and get debugging working in .NET 7.0 Previw 5 after a single build. This only needs to be run once but should be harmless to leave if project doesn’t doesn’t have a different Serilog requirement.
+That should resolve the missing dependency and get debugging working in .NET 7.0 Preview 5 after a single build. This only needs to be run once but should be harmless to leave if project doesn’t have a different Serilog requirement.
 
 ### Assembly.GetType("System.Net.Http.HttpClientHandler", false, true) does not find some types but finds it when ignoreCase is set to false
 
