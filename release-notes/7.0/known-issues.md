@@ -12,14 +12,6 @@ Workaround:
 Copy the following into any net7.0 blazor wasm csproj:
 
 `
-  <ItemGroup>
-        <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" ExcludeAssets="all" GeneratePathProperty="true"/>
-    </ItemGroup>
-    <Target Name="_CopySerilogDeps" AfterTargets="Build">
-        <Copy SourceFiles="$(PkgSerilog_Extensions_Logging_File)\lib\netstandard2.0\Serilog.Extensions.Logging.File.dll"
-              DestinationFolder="$(PkgMicrosoft_AspNetCore_Components_WebAssembly_DevServer)\tools\BlazorDebugProxy"
-              SkipUnchangedFiles="true"/>
-    </Target>
 `
 That will copy the missing dependency into the DevServer package and enable Wasm debugging in .NET 7.0 Preview 5 after a single build. This workaround only needs to be run once per package root to repair the DevServer package but should be harmless to leave in as long as the project doesn’t have a different Serilog version requirement.
 
