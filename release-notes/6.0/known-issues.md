@@ -61,7 +61,7 @@ When using localdb (default when creating projects in VS), the normal database a
 
 ### SPA template issues with Individual authentication when running in production
 
-<!-- Statement of problem here. Initially you say  but then say Tested with `Always on = true` for Azure App Service and the error actually occurred more frequently. So if it's not the app shutting down and restarting, what causes the error? Something like SPA apps on Azure that (conditions that cause the problem) return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authenticaion is successful. Subsequent requests to `https://MyDomain.com` succeed until (??? the app is restarted??? but not according to always on = true). After stopping and starting the app, authenticaion succeeds.
+<!-- Statement of problem here. Initially you say  but then say Tested with `Always on = true` for Azure App Service and the error actually occurred more frequently. So if it's not the app shutting down and restarting, what causes the error? Something like --> SPA apps on Azure that (conditions that cause the problem) return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authentication is successful. Subsequent requests to `https://MyDomain.com` succeed until (??? the app is restarted??? but not according to always on = true). After stopping and starting the app, authentication succeeds.
 
 To prevent this problem without having to stop and restart the app:
 
