@@ -59,6 +59,38 @@ The first time SPA apps are run, the authority for the spa proxy might be incorr
 
 When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
 
+### SPA template issues with Individual authentication when running in production
+
+<!-- Statement of problem here. Initially you say  but then say Tested with `Always on = true` for Azure App Service and the error actually occurred more frequently. So if it's not the app shutting down and restarting, what causes the error? Something like SPA apps on Azure that (conditions that cause the problem) return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authenticaion is successful. Subsequent requests to `https://MyDomain.com` succeed until (??? the app is restarted??? but not according to always on = true). After stopping and starting the app, authenticaion succeeds.
+
+To prevent this problem without having to stop and restart the app:
+
+1. Add a new app setting which contains the target DNS address. For example, create `IdentityServer:IssuerUri` with value `https://MyDomain.com/`
+1. Add the following code to the app:
+```
+builder.Services.AddIdentityServer(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.IssuerUri = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+   Alternatively, add the following code:
+```
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.Tokens.AuthenticatorIssuer = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+
+For more information, see [this GitHub issue](https://github.com/dotnet/aspnetcore/issues/42072)
+
+
+
 ## Windows Desktop (Windows Forms / WPF)
 
 ### Issues running applications with Windows Desktop 6.0.2
