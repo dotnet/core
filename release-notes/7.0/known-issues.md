@@ -4,6 +4,25 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET Runtime
 
+### Unable to debug a Blazor WebAssembly App
+
+It’s not possible to debug a Blazor app using .net7 preview 5 https://github.com/dotnet/runtime/pull/70383
+
+Workaround:
+Copy the following into any net7.0 blazor wasm csproj:
+
+```xml
+    <ItemGroup>
+        <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" ExcludeAssets="all" GeneratePathProperty="true"/>
+    </ItemGroup>
+    <Target Name="_CopySerilogDeps" AfterTargets="Build">
+        <Copy SourceFiles="$(PkgSerilog_Extensions_Logging_File)\lib\netstandard2.0\Serilog.Extensions.Logging.File.dll"
+              DestinationFolder="$(PkgMicrosoft_AspNetCore_Components_WebAssembly_DevServer)\tools\BlazorDebugProxy"
+              SkipUnchangedFiles="true"/>
+    </Target> 
+```
+That will copy the missing dependency into the DevServer package and enable Wasm debugging in .NET 7.0 Preview 5 after a single build. This workaround only needs to be run once per package root to repair the DevServer package but should be harmless to leave in as long as the project doesn’t have a different Serilog version requirement.
+
 ### Assembly.GetType("System.Net.Http.HttpClientHandler", false, true) does not find some types but finds it when ignoreCase is set to false
 
 
