@@ -1,0 +1,34 @@
+name: Package Deprecation Feedback
+description: Let us know if you believe a package has been deprecated by mistake.
+title: "[PackageId]: [version(s)]"
+labels: [package-deprecation]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We did our best to deprecate only the packages which are out of support. But, we are also humans and could have missed something.
+        Tell us about such cases if you've noticed any.
+  - type: input
+    id: packageId
+    attributes:
+      label: Package Id
+      description: What is the name of the package that you think shouldn't have been deprecated?
+      placeholder: Microsoft.Dnx.Compilation.Abstractions
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Package Version(s)
+      description: List the version(s) you think should have not been deprecated.
+      placeholder: 1.2.0, 1.0-preview3
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Additional details
+      description: Why do you think this package shouldn't have been deprecated? Please refer to the principles listed in the [package deprecatiton announcement](https://github.com/dotnet/announcements/issues/217) and tell us why the package(s) doen't comply with those principles.
+      placeholder: Description
+    validations:
+      required: true
