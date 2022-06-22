@@ -19,7 +19,7 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 ## .NET SDK
 
-### MaxInteger[T](System.Collections.Generic.IEnumerable`1[T])' violates the constraint of type parameter 'T' exception
+### MaxInteger[T]\(System.Collections.Generic.IEnumerable`1[T]\)' violates the constraint of type parameter 'T' exception
 
 We have discovered that AutoMapper library is impacted by a change in .NET 7 Preview 5 and this is tracked by [dotnet-sdk-7.0.100-preview.5.22257.3] MaxInteger[T](System.Collections.Generic.IEnumerable`1[T])' violates the constraint of type parameter 'T' exception · Issue #3988 · AutoMapper/AutoMapper (github.com). .NET team has submitted a PR to fix the bug in AutoMapper code and is working with AutoMapper library owners to determine options.
 
