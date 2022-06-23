@@ -35,7 +35,7 @@ OS                                    | Version               | Architectures   
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
-[Ubuntu][Ubuntu]                      | 20.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
+[Ubuntu][Ubuntu]                      | 18.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
 Other distros are supported with best effort if their libc version is at least the minimum supported libc version:
 
