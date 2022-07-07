@@ -21,7 +21,7 @@ Copy the following into the server net7.0 blazor wasm csproj:
     </Target>
 ```
 
-Workaround for a non-hosted app:
+#### Workaround for a non-hosted app:
 Copy the following into any net7.0 blazor wasm csproj:
 
 ```xml
