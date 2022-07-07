@@ -8,7 +8,20 @@ You may encounter the following known issues, which may include workarounds, mit
 
 It’s not possible to debug a Blazor app using .net7 preview 5 https://github.com/dotnet/runtime/pull/70383
 
-Workaround:
+Workaround for a hosted app:
+Copy the following into the server net7.0 blazor wasm csproj:
+
+```xml
+    <ItemGroup>
+        <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" ExcludeAssets="all" GeneratePathProperty="true"/>
+    </ItemGroup>
+    <Target Name="_CopySerilogDeps" AfterTargets="Build">
+        <Copy SourceFiles="$(PkgSerilog_Extensions_Logging_File)\lib\netstandard2.0\Serilog.Extensions.Logging.File.dll"
+	        DestinationFolder="$(OutputPath)\BlazorDebugProxy"/>
+    </Target>
+```
+
+Workaround for a non-hosted app:
 Copy the following into any net7.0 blazor wasm csproj:
 
 ```xml
