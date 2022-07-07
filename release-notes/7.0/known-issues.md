@@ -8,7 +8,7 @@ You may encounter the following known issues, which may include workarounds, mit
 
 It’s not possible to debug a Blazor app using .net7 preview 5 https://github.com/dotnet/runtime/pull/70383
 
-Workaround for a hosted app:
+#### Workaround for a hosted app:
 Copy the following into the server net7.0 blazor wasm csproj:
 
 ```xml
