@@ -17,7 +17,8 @@ Copy the following into the server net7.0 blazor wasm csproj:
     </ItemGroup>
     <Target Name="_CopySerilogDeps" AfterTargets="Build">
         <Copy SourceFiles="$(PkgSerilog_Extensions_Logging_File)\lib\netstandard2.0\Serilog.Extensions.Logging.File.dll"
-	        DestinationFolder="$(OutputPath)\BlazorDebugProxy"/>
+              DestinationFolder="$(OutputPath)\BlazorDebugProxy"
+              SkipUnchangedFiles="true"/>
     </Target>
 ```
 
