@@ -57,7 +57,7 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 ### [Testhost.exe does not find '7.0.0-preview.6.22324.4' runtime when running tests](https://github.com/dotnet/sdk/issues/26462)
 A file-based install of the SDK, dotnet test on a .net 7 project will look in the global location rather than the local location and be unable to find .net 7.
 
-Workaround: Setting DOTNET_ROOT to point to 'C:\Users\adity\AppData\Local\Microsoft\dotnet' fixes the issue.
+Workaround: Setting DOTNET_ROOT to point to the path to the local dotnet fixes the issue.
 
 ### Blazor issues depending on whether you’re using .NET 6 installed by VS or stand-alone install of .NET 7
 
