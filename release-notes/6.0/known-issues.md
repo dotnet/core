@@ -59,6 +59,40 @@ The first time SPA apps are run, the authority for the spa proxy might be incorr
 
 When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
 
+### SPA template issues with Individual authentication when running in production
+
+SPA apps on Azure App Service with all the following:
+* Individual authentication and requires login for every page.
+* A custom domain such as `https://MyDomain.com`:
+
+Sometimes return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authentication is successful. Subsequent requests to `https://MyDomain.com` succeed.  Alternatively, stopping and starting the app, enables authentication to succeed. This error can occur with [`Always On`](/azure/app-service/configure-common) set to `true` or `false`.
+
+To prevent this problem without having to stop and restart the app:
+
+1. Add a new app setting which contains the target DNS address. For example, create `IdentityServer:IssuerUri` with value `https://MyDomain.com/`
+1. Add the following code to the app:
+```
+builder.Services.AddIdentityServer(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.IssuerUri = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+   Alternatively, add the following code:
+```
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.Tokens.AuthenticatorIssuer = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+
+For more information, see [this GitHub issue](https://github.com/dotnet/aspnetcore/issues/42072)
+
 ## Windows Desktop (Windows Forms / WPF)
 
 ### Issues running applications with Windows Desktop 6.0.2

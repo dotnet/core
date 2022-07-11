@@ -6,10 +6,26 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ### Unable to debug a Blazor WebAssembly App
 
-It’s not possible to debug a Blazor app using .net7 preview 5 https://github.com/dotnet/runtime/pull/70383
+It’s not possible to debug a Blazor WebAssembly app using .NET 7 Preview 5 https://github.com/dotnet/runtime/pull/70383
 
-Workaround:
-Copy the following into any net7.0 blazor wasm csproj:
+#### Workaround for a Blazor WebAssembly Hosted App:
+
+Copy the following into the server project (`.csproj`) of a `.NET 7 Preview 5` Blazor WebAssembly Hosted App:
+
+```xml
+    <ItemGroup>
+        <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" ExcludeAssets="all" GeneratePathProperty="true"/>
+    </ItemGroup>
+    <Target Name="_CopySerilogDeps" AfterTargets="Build">
+        <Copy SourceFiles="$(PkgSerilog_Extensions_Logging_File)\lib\netstandard2.0\Serilog.Extensions.Logging.File.dll"
+              DestinationFolder="$(OutputPath)\BlazorDebugProxy"
+              SkipUnchangedFiles="true"/>
+    </Target>
+```
+
+#### Workaround for a Blazor WebAssembly Standalone App:
+
+Copy the following into a `.NET 7 Preview 5` Blazor WebAssembly project (`.csproj`):
 
 ```xml
     <ItemGroup>
@@ -37,6 +53,10 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 .NET 7 Preview 5 on Browser WASM has implemented the SHA1, SHA256, SHA384, SHA512 algorithms using the [SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) browser-native APIs. A race condition was discovered in System.Security.Cryptography's implementation where the wrong hash value is returned unpredictably. You can read more about this here: https://github.com/dotnet/runtime/issues/69806. This only happens in .NET 7 Preview 5 and has been fixed in the latest code.
 
 ## .NET SDK
+
+### MaxInteger[T]\(System.Collections.Generic.IEnumerable`1[T]\)' violates the constraint of type parameter 'T' exception
+
+We have discovered that AutoMapper library is impacted by a change in .NET 7 Preview 5 and this is tracked by [dotnet-sdk-7.0.100-preview.5.22257.3] MaxInteger[T]\(System.Collections.Generic.IEnumerable`1[T]\)' violates the constraint of type parameter 'T' exception · Issue #3988 · AutoMapper/AutoMapper (github.com). .NET team has submitted a PR to fix the bug in AutoMapper code and is working with AutoMapper library owners to determine options.
 
 ### [Unhandled Exception in dotnet format app in .NET 7.0 Preview 5](https://github.com/dotnet/sdk/issues/25879)
 
