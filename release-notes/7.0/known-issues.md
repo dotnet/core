@@ -61,7 +61,7 @@ Workaround: Setting DOTNET_ROOT to point to the path to the local dotnet fixes t
 
 ### Blazor issues depending on whether you’re using .NET 6 installed by VS or stand-alone install of .NET 7
 
-If your app is targetting Blazor using the .net 7 included in VS, you can target net6.0 but not target net7.0. 
+If your app is targetting Blazor using the .net 7 included in VS, you can target net6.0 but not target net7.0  and you will see an error message 'The "ProcessFrameworkReferences" task faield unexpectedly.'
 
 Workaround:
 
