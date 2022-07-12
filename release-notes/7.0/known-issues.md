@@ -54,6 +54,19 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 ## .NET SDK
 
+### [Testhost.exe does not find '7.0.0-preview.6.22324.4' runtime when running tests](https://github.com/dotnet/sdk/issues/26462)
+A file-based install of the SDK, dotnet test on a .net 7 project will look in the global location rather than the local location and be unable to find .net 7.
+
+Workaround: Setting DOTNET_ROOT to point to the path to the local dotnet fixes the issue.
+
+### Blazor issues depending on whether you’re using .NET 6 installed by VS or stand-alone install of .NET 7
+
+If your app is targetting Blazor using the .net 7 included in VS, you can target net6.0 but not target net7.0 and you will see an error message 'The "ProcessFrameworkReferences" task faield unexpectedly.'
+
+Workaround:
+
+Install the stand-alone SDK for .NET 7.0 Preview 6
+
 ### MaxInteger[T]\(System.Collections.Generic.IEnumerable`1[T]\)' violates the constraint of type parameter 'T' exception
 
 We have discovered that AutoMapper library is impacted by a change in .NET 7 Preview 5 and this is tracked by [dotnet-sdk-7.0.100-preview.5.22257.3] MaxInteger[T]\(System.Collections.Generic.IEnumerable`1[T]\)' violates the constraint of type parameter 'T' exception · Issue #3988 · AutoMapper/AutoMapper (github.com). .NET team has submitted a PR to fix the bug in AutoMapper code and is working with AutoMapper library owners to determine options.
