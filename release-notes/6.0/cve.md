@@ -8,6 +8,8 @@ Your app needs to be on the latest .NET 6 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
 
+- 6.0.7 (July 2022)
+  - No CVEs currently apply. 
 - 6.0.6 (June 2022)
   - No CVEs currently apply. 
 - 6.0.5 (May 2022)
