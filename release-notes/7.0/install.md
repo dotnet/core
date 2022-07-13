@@ -34,7 +34,7 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
- Version:   7.0.100-preview.5.22307.18
+ Version:   7.0.100-preview.6.22352.1
  Commit:    1a9103db2d
 
 Runtime Environment:
@@ -42,18 +42,18 @@ Runtime Environment:
  OS Version:  10.0.17763
  OS Platform: Windows
  RID:         win10-x64
- Base Path:   C:\Program Files\dotnet\sdk\7.0.100-preview.5.22307.18\
+ Base Path:   C:\Program Files\dotnet\sdk\7.0.100-preview.6.22352.1\
 
 Host (useful for support):
-  Version: 7.0.100-preview.5.22307.18
+  Version: 7.0.100-preview.6.22352.1
   Commit:  3eaf1f316b
 
 .NET SDKs installed:
-  7.0.100-preview.5.22307.18 [C:\Program Files\dotnet\sdk]
+  7.0.100-preview.6.22352.1 [C:\Program Files\dotnet\sdk]
 
 .NET runtimes installed:
   Microsoft.AspNetCore.App  7.0.0-preview.5.22301.12 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 7.0.100-preview.5.22307.18 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 7.0.100-preview.6.22352.1 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
   Microsoft.WindowsDesktop.App 7.0.0-preview.5.22302.5 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
 ```
 
@@ -61,5 +61,5 @@ If you have the .NET SDK installed, you can also use `dotnet --version` as demon
 
 ```console
 C:\>dotnet --version
-7.0.100-preview.5.22307.18
+7.0.100-preview.6.22352.1
 ```
