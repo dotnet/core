@@ -1,6 +1,6 @@
 # .NET Releases
 
-The .NET team releases new major versions of .NET annually, each November. Releases are either Long Term Support (LTS) or Current, the two .NET release types, and transition from full support, to maintenance and finally to end-of-life on a defined schedule, per [.NET release policies][policies]. .NET releases are [supported by Microsoft](microsoft-support.md) on [multiple operating systems](os-lifecycle-policy.md) and hardware architectures.
+The .NET team releases new major versions of .NET annually, each November. Releases are either Long Term Support (LTS) or Short Term Support (STS), and transition from full support, to maintenance and finally to end-of-life on a defined schedule, per [.NET release policies][policies]. .NET releases are [supported by Microsoft](microsoft-support.md) on [multiple operating systems](os-lifecycle-policy.md) and hardware architectures.
 
 All .NET versions can be downloaded from the [.NET website](https://dotnet.microsoft.com/download/dotnet) or [.NET release notes](release-notes/README.md).
 
@@ -24,11 +24,11 @@ The following table lists end-of-life releases.
 
 |  Version  |  Release Date | Support | Final Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 5](release-notes/5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [Current][policies] | [5.0.17][5.0.17] | May 10, 2022 |
-| [.NET Core 3.0](release-notes/3.0/README.md) | [September 23, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) |  [Current][policies] | [3.0.3][3.0.3] | [March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) |
-| [.NET Core 2.2](release-notes/2.2/README.md) | [December 4th, 2018](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-2/) | [Current][policies] | [2.2.8][2.2.8] | [December 23, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) |
+| [.NET 5](release-notes/5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [STS][policies] | [5.0.17][5.0.17] | May 10, 2022 |
+| [.NET Core 3.0](release-notes/3.0/README.md) | [September 23, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) |  [STS][policies] | [3.0.3][3.0.3] | [March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) |
+| [.NET Core 2.2](release-notes/2.2/README.md) | [December 4th, 2018](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-2/) | [STS][policies] | [2.2.8][2.2.8] | [December 23, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) |
 | [.NET Core 2.1](release-notes/2.1/README.md) | [May 30, 2018](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-1/) | [LTS][policies] | [2.1.30][2.1.30] | [August 21, 2021](https://devblogs.microsoft.com/dotnet/net-core-2-1-will-reach-end-of-support-on-august-21-2021/) |
-| [.NET Core 2.0](release-notes/2.0/README.md) | [August 14th, 2017](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | [Current][policies] | [2.0.9][2.0.9] | [October 1, 2018](https://devblogs.microsoft.com/dotnet/net-core-2-0-will-reach-end-of-life-on-september-1-2018/) |
+| [.NET Core 2.0](release-notes/2.0/README.md) | [August 14th, 2017](https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/) | [STS][policies] | [2.0.9][2.0.9] | [October 1, 2018](https://devblogs.microsoft.com/dotnet/net-core-2-0-will-reach-end-of-life-on-september-1-2018/) |
 | [.NET Core 1.1](release-notes/1.1/README.md) | [November 16th, 2016](https://devblogs.microsoft.com/dotnet/announcing-net-core-1-1/) | [LTS][policies] | [1.1.13][1.1.13] | [June 27, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/) |
 | [.NET Core 1.0](release-notes/1.0/README.md) | [June 27th, 2016](https://devblogs.microsoft.com/dotnet/announcing-net-core-1-0/) | [LTS][policies] | [1.0.16][1.0.16] | [June 27, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/) |
 
