@@ -59,6 +59,40 @@ The first time SPA apps are run, the authority for the spa proxy might be incorr
 
 When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
 
+### SPA template issues with Individual authentication when running in production
+
+SPA apps on Azure App Service with all the following:
+* Individual authentication and requires login for every page.
+* A custom domain such as `https://MyDomain.com`:
+
+Sometimes return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authentication is successful. Subsequent requests to `https://MyDomain.com` succeed.  Alternatively, stopping and starting the app, enables authentication to succeed. This error can occur with [`Always On`](/azure/app-service/configure-common) set to `true` or `false`.
+
+To prevent this problem without having to stop and restart the app:
+
+1. Add a new app setting which contains the target DNS address. For example, create `IdentityServer:IssuerUri` with value `https://MyDomain.com/`
+1. Add the following code to the app:
+```
+builder.Services.AddIdentityServer(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.IssuerUri = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+   Alternatively, add the following code:
+```
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.Tokens.AuthenticatorIssuer = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+
+For more information, see [this GitHub issue](https://github.com/dotnet/aspnetcore/issues/42072)
+
 ## Windows Desktop (Windows Forms / WPF)
 
 ### Issues running applications with Windows Desktop 6.0.2
@@ -91,3 +125,36 @@ The team appreciates that the fix is less than ideal, however it was chosen for 
     ```
 * Additionally 6.0.1 and 6.0.2 are security releases, and customers are encouraged to update to the latest version.
 
+### Issues building WPF application with Windows Desktop 6.0.7 and 6.0.8
+
+Some customers are unable to build WPF applications with Windows Desktop 6.0.7 and 6.0.8, if they are including source generators coming from NuGet Packages, and receive errors similar to :
+```
+Rebuild started...
+1>------ Rebuild All started: Project: ObservablePropertyTest, Configuration: Debug Any CPU ------
+Restored C:\git\ObservablePropertyTest\ObservablePropertyTest.csproj (in 2 ms).
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(12,27,12,70): error CS0101: The namespace 'CommunityToolkit.Mvvm.ComponentModel.__Internals' already contains a definition for '__KnownINotifyPropertyChangedOrChangingArgs'
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(7,6,7,51): error CS0579: Duplicate 'global::System.CodeDom.Compiler.GeneratedCode' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(8,6,8,52): error CS0579: Duplicate 'global::System.Diagnostics.DebuggerNonUserCode' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(9,6,9,69): error CS0579: Duplicate 'global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(10,6,10,51): error CS0579: Duplicate 'global::System.ComponentModel.EditorBrowsable' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(11,6,11,29): error CS0579: Duplicate 'global::System.Obsolete' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\ObservablePropertyTest.TestVM.cs(12,23,12,33): error CS0102: The type 'TestVM' already contains a definition for 'TestString'
+1>Done building project "ObservablePropertyTest_yynlzhol_wpftmp.csproj" -- FAILED.
+========== Rebuild All: 0 succeeded, 1 failed, 0 skipped ==========
+```
+
+This happened because WPF builds in 6.0.7 onwards, only considered source generators that were coming from nuget references. This caused an issue when there were source generators that were essentially coming via FrameworkReference. This issue has already been addressed in next release (6.0.9). However, the following workaround would unblock WPF builds.
+
+**Fix:**
+* To enable build in Windows Desktop 6.0.7, navigate to the directory containing the `Microsoft.WinFx.targets` file ( `C:\Program Files\dotnet\sdk\6.0.302\Sdks\Microsoft.NET.Sdk.WindowsDesktop\targets` )
+* Add the following target in the file : 
+    ```xml
+
+    <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
+        <ItemGroup>
+            <FilteredAnalyzer Include="@(Analyzer->Distinct())" />
+            <Analyzer Remove="@(Analyzer)" />
+            <Analyzer Include="@(FilteredAnalyzer)" />
+        </ItemGroup>
+    </Target>    
+    ```

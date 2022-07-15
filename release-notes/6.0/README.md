@@ -3,16 +3,17 @@
 [.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6/) is an [LTS release](../../release-policies.md) and will be supported for three years, from November 8, 2021 to November 12, 2024. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/6.0) (also see [Releases](#releases))
-- [Installation instructions](install.md)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
-- [CVEs](cve.md)
+- [Installation instructions](install.md)
 
 ## Releases
 
 | Date | Release |
 | :-- | :-- |
+| 2022/07/12 | [6.0.7](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.7/6.0.7.md) |
+| 2022/06/14 | [6.0.6](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.6/6.0.6.md) |
 | 2022/05/10 | [6.0.5](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.5/6.0.5.md) |
 | 2022/04/12 | [6.0.4](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.4/6.0.4.md) |
 | 2022/03/08 | [6.0.3](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.3/6.0.3.md) |
