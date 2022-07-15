@@ -6,6 +6,10 @@ The .NET team uses the following policies for [.NET releases](releases.md).
 
 New major .NET versions are released annually in November, at [.NET Conf](https://www.dotnetconf.net/).
 
+Patch updates are released monthly on the second tuesday of each month, also known as Patch Tuesday.
+
+Minor versions of the .NET SDK are releases approximately quarterly. These are known as [feature bands](https://docs.microsoft.com/en-us/dotnet/core/releases-and-support#feature-bands-sdk-only).
+
 ## Release types
 
 Each .NET release is defined as either  **Short Term Support (STS)** or **Long Term Support (LTS)**, at the beginning of the release.
@@ -19,7 +23,7 @@ Note: **STS** releases were previously called **Current**.
 
 LTS and STS releases are the same in most respects, differing only by support duration. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another, independent of release type.
 
-## Support Phase
+## Support phases
 
 .NET releases go through multiple support phases, with varying support levels.
 
@@ -33,9 +37,9 @@ LTS and STS releases are the same in most respects, differing only by support du
 
 ## Servicing
 
-Improvements are released as full re-releases of the product, called "patch releases". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday. 
+Improvements are released as full re-releases of the product, called "patch releases". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday.
 
-Patches are announced on the [.NET blog](https://devblogs.microsoft.com/dotnet/category/maintenance-and-updates/) and [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
+Patches are announced in [release notes](release-notes/README.md), on the [.NET blog](https://devblogs.microsoft.com/dotnet/category/maintenance-and-updates/), and [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
 
 Breaking changes are not accepted during servicing, except (in the very rare case) to resolve critical issues, such as a security vulnerability.
 
