@@ -21,7 +21,7 @@ The release types:
 
 Note: **STS** releases were previously called **Current**.
 
-LTS and STS releases are the same in most respects, differing only by support duration. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another, independent of release type.
+LTS and STS releases differ only by support duration. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another, independent of release type.
 
 ## Support phases
 
