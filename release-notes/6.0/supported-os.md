@@ -1,8 +1,8 @@
 # .NET 6 - Supported OS versions
 
-[.NET 6](README.md) is an [LTS release](../../release-policies.md) and [is supported](https://github.com/dotnet/core/blob/main/microsoft-support.md) on multiple operating systems per their lifecycle policy.
+[.NET 6](README.md) is an [LTS release](../../release-policies.md) and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
 
-For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . Please see [.NET Repos](https://github.com/dotnet/core/blob/main/Documentation/core-repos.md) for the repository list.
+For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . See [.NET Repos](../../Documentation/core-repos.md) for the repository list.
 
 ## Windows
 
