@@ -19,7 +19,7 @@ You can find release notes for all releases, including out-of-support releases, 
 ## Release Information
 
 * [Download .NET](https://dotnet.microsoft.com/download/dotnet)
-* [Releases Index][releases-index.json] -- Index for all release channels in JSON format.
+* [Releases Index][releases-index.json] -- Index for all release channels in JSON format
 * [dotnet-install scripts](https://docs.microsoft.com/dotnet/core/tools/dotnet-install-script)
 * [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
 
