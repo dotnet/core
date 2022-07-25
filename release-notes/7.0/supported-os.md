@@ -86,7 +86,7 @@ OS                            | Version                   | Architectures     |
 
 OS                            | Version                 | Architectures     |
 ------------------------------|-------------------------|-------------------|
-[Android][Android]            | API 21+                 | x64, Arm32, Arm64 |
+[Android][Android]            | API 21+                 | Arm32, Arm64 |
 
 [Android]: https://support.google.com/android
 
@@ -94,7 +94,7 @@ OS                            | Version                 | Architectures     |
 
 OS                            | Version                 | Architectures     |
 ------------------------------|-------------------------|-------------------|
-[iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
+[iOS][iOS]                    | 10.0+                   |  Arm32, Arm64 |
 
 [iOS]: https://support.apple.com/ios
 
