@@ -59,13 +59,13 @@ A file-based install of the SDK, dotnet test on a .NET 7 project will look in th
 
 Workaround: Setting DOTNET_ROOT to point to the path to the local dotnet fixes the issue.
 
-### Blazor issues depending on whether you’re using .NET 6 installed by VS or stand-alone install of .NET 7
+### Blazor issues in Visual Studio 17.4 preview 1 depending on whether you’re using .NET 7 preview installed by VS or stand-alone install of .NET 7 preview 7
 
 If your app is targeting Blazor using the .NET 7 version included in VS, you can target net6.0 but not target net7.0 and you'll see an error message 'The "ProcessFrameworkReferences" task failed unexpectedly.'
 
 Workaround:
 
-Install the standalone SDK for .NET 7.0 Preview 6.
+Install the standalone SDK for .NET 7.0 Preview 7.
 
 ### MaxInteger[T]\(System.Collections.Generic.IEnumerable`1[T]\)' violates the constraint of type parameter 'T' exception
 
