@@ -34,22 +34,12 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 
 You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
-#### 1. dotnet test x64 emulation on arm64 support
-While a lot of work has been done to support arm64 emulation of x64 processes in .net 6, there are some remaining [work](https://github.com/dotnet/sdk/issues/21686) to be done in 6.0.2xx. The most impactful remaining item is `dotnet test` support.
+#### 1. Windows admin installs of the .NET 6.0.400 SDK will not correctly update .NET SDK optional workloads
+Commands like `dotnet workload install` and `dotnet workload update` will not correctly update to the latest versions of the workloads on the first try. This is because a timing issue in the workload manifest update code causes the SDK to stop early typically only updating 0-1 manifests.
 
-`dotnet test --arch x64` on an arm64 machine will not work as it will not find the correct test host.  To test x64 components on an arm64 machine, you will have to install the x64 SDK and configure your `DOTNET_ROOT` and `PATH` to use the x64 version of dotnet.
-
-#### 2. Upgrade of Visual Studio or .NET SDK from earlier builds can result in a bad `PATH` configuration on Windows
-When upgrading Visual Studio to preview 5 or the .NET SDK to RC2 from an earlier build, the installer will uninstall the prior version of the .NET Host (dotnet.exe) and then install a new version. This results in the path to the x64 copy of dotnet being removed from the `PATH` then added back. If you have the x86 .NET Host installed, it will end up ahead of the x64 one and will be picked up first. 
-
-In this case you may find that Visual Studio is unable to create projects, or commands like `dotnet new` fail with a message like this:
-```
-Could not execute because the application was not found or a compatible .NET SDK is not installed.
-```
-
-To confirm, run `dotnet --info` and you'll see (x86) paths for all of the found .NET runtimes and .NET SDKs installed. 
-
-To fix this, edit your `PATH` environment variable to either remove the `c:\Program Files (x86)\dotnet` entry or move it after the entry for `c:\Program Files\dotnet`. Now reopen your console window.
+**Workarounds**
+1. Run `dotnet workload update` again and again until all workloads are updated.
+2. Run `dotnet workload update --from-rollback-file` specifying the exact workload versions you want to install.
    
 ## ASP.NET Core
 
@@ -125,3 +115,36 @@ The team appreciates that the fix is less than ideal, however it was chosen for 
     ```
 * Additionally 6.0.1 and 6.0.2 are security releases, and customers are encouraged to update to the latest version.
 
+### Issues building WPF application with Windows Desktop 6.0.7 and 6.0.8
+
+Some customers are unable to build WPF applications with Windows Desktop 6.0.7 and 6.0.8, if they are including source generators coming from NuGet Packages, and receive errors similar to :
+```
+Rebuild started...
+1>------ Rebuild All started: Project: ObservablePropertyTest, Configuration: Debug Any CPU ------
+Restored C:\git\ObservablePropertyTest\ObservablePropertyTest.csproj (in 2 ms).
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(12,27,12,70): error CS0101: The namespace 'CommunityToolkit.Mvvm.ComponentModel.__Internals' already contains a definition for '__KnownINotifyPropertyChangedOrChangingArgs'
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(7,6,7,51): error CS0579: Duplicate 'global::System.CodeDom.Compiler.GeneratedCode' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(8,6,8,52): error CS0579: Duplicate 'global::System.Diagnostics.DebuggerNonUserCode' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(9,6,9,69): error CS0579: Duplicate 'global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(10,6,10,51): error CS0579: Duplicate 'global::System.ComponentModel.EditorBrowsable' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(11,6,11,29): error CS0579: Duplicate 'global::System.Obsolete' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\ObservablePropertyTest.TestVM.cs(12,23,12,33): error CS0102: The type 'TestVM' already contains a definition for 'TestString'
+1>Done building project "ObservablePropertyTest_yynlzhol_wpftmp.csproj" -- FAILED.
+========== Rebuild All: 0 succeeded, 1 failed, 0 skipped ==========
+```
+
+This happened because WPF builds in 6.0.7 onwards, only considered source generators that were coming from nuget references. This caused an issue when there were source generators that were essentially coming via FrameworkReference. This issue has already been addressed in next release (6.0.9). However, the following workaround would unblock WPF builds.
+
+**Fix:**
+* To enable build in Windows Desktop 6.0.7, navigate to the directory containing the `Microsoft.WinFx.targets` file ( `C:\Program Files\dotnet\sdk\6.0.302\Sdks\Microsoft.NET.Sdk.WindowsDesktop\targets` )
+* Add the following target in the file : 
+    ```xml
+
+    <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
+        <ItemGroup>
+            <FilteredAnalyzer Include="@(Analyzer->Distinct())" />
+            <Analyzer Remove="@(Analyzer)" />
+            <Analyzer Include="@(FilteredAnalyzer)" />
+        </ItemGroup>
+    </Target>    
+    ```
