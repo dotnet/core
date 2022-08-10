@@ -4,7 +4,7 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET Runtime
 
-### Unable to install wasm-tools workload on Linux/x64
+### Unable to install wasm-tools workload on .NET 7 Preview 7 for Linux/x64
 
 Installing `wasm-tools` workload with `dotnet install workload wasm-tools` fails because nuget cannot find `Microsoft.NET.Runtime.Emscripten.3.1.12.Sdk.linux-x64` version `7.0.0-preview.7.22361.2`. This will be fixed shortly. Tracking issue - https://github.com/dotnet/runtime/issues/73694 .
 
