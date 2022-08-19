@@ -45,11 +45,11 @@ Example rollback file for 6.0.400
 ```
 {
   "microsoft.net.sdk.android": "32.0.448/6.0.400",
-  "microsoft.net.sdk.ios": "15.4.446-ci.-release-6-0-4xx.446/6.0.400",
-  "microsoft.net.sdk.maccatalyst": "15.4.446-ci.-release-6-0-4xx.446/6.0.400",
-  "microsoft.net.sdk.macos": "12.3.446-ci.-release-6-0-4xx.446/6.0.400",
+  "microsoft.net.sdk.ios": "15.4.447/6.0.400",
+  "microsoft.net.sdk.maccatalyst": "15.4.447/6.0.400",
+  "microsoft.net.sdk.macos": "12.3.447/6.0.400",
   "microsoft.net.sdk.maui": "6.0.486/6.0.400",
-  "microsoft.net.sdk.tvos": "15.4.446-ci.-release-6-0-4xx.446/6.0.400",
+  "microsoft.net.sdk.tvos": "15.4.447/6.0.400",
   "microsoft.net.workload.mono.toolchain": "6.0.8/6.0.300",
   "microsoft.net.workload.emscripten": "6.0.4/6.0.300"
 }
