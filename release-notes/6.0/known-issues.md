@@ -40,6 +40,20 @@ Commands like `dotnet workload install` and `dotnet workload update` will not co
 **Workarounds**
 1. Run `dotnet workload update` again and again until all workloads are updated.
 2. Run `dotnet workload update --from-rollback-file` specifying the exact workload versions you want to install.
+
+Example rollback file for 6.0.400
+```
+{
+  "microsoft.net.sdk.android": "32.0.448/6.0.400",
+  "microsoft.net.sdk.ios": "15.4.447/6.0.400",
+  "microsoft.net.sdk.maccatalyst": "15.4.447/6.0.400",
+  "microsoft.net.sdk.macos": "12.3.447/6.0.400",
+  "microsoft.net.sdk.maui": "6.0.486/6.0.400",
+  "microsoft.net.sdk.tvos": "15.4.447/6.0.400",
+  "microsoft.net.workload.mono.toolchain": "6.0.8/6.0.300",
+  "microsoft.net.workload.emscripten": "6.0.4/6.0.300"
+}
+```
    
 ## ASP.NET Core
 
