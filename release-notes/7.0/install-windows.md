@@ -27,7 +27,7 @@ Each of the distributions can be downloaded from:
 
 You can install any of the distributions with MSI. The following image demonstrates installing the .NET SDK. After launching the MSI, click "Install" and you will be taken through the process of installing the SDK.
 
-![image](https://user-images.githubusercontent.com/2608468/112773547-4a34e880-8feb-11eb-8671-59fffceffd42.png)
+![image.png](./images/msi_installer_preview.png)
 
 ## Windows Server Hosting with IIS
 
