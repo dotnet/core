@@ -126,6 +126,8 @@ To circumvent this issue, you will need to modify the local installation to prob
 +               }
 +           }
         },
+    },
+    "libraries": {
 +       "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22411.12": {
 +           "type": "package",
 +           "serviceable": true,
