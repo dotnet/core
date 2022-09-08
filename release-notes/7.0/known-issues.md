@@ -139,14 +139,17 @@ To circumvent this issue, you will need to modify the local installation to prob
 }
 ```
 
-3. Locate the `dotnet-user-jwts.runtimeconfig.json` file and add a reference to your global NuGet packages directory under additional probing paths.
+3. Locate the `Microsoft.Extensions.Configuration.Binder` assembly in the directory associated with the `Microsoft.AspNetCore.App` shared runtime. This will typically be located in a path as follows:
 
-```diff
-{
-+   "additionalProbingPaths": [
-+       "/Users/homedirname/.nuget/packages/"
-+   ]
-}
+```
+~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22415.4
+```
+
+4. Copy the assembly from Step 3 to the `user-jwts` tool directory from Step 1.
+
+```
+$ cp ~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22415.4/Microsoft.Extensions.Configuration.Binder.dll 
+~/.dotnet/sdk/7.0.100-rc.2.22419.24/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22415.4/tools/net7.0/any
 ```
 
 This issue will be resolved in .NET 7 RC 2.
