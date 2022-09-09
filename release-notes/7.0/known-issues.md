@@ -59,6 +59,7 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 The --interactive flag is not working with any dotnet.exe command in RC1. https://github.com/dotnet/sdk/issues/27597
 
 **Workarounds** 
-- msbuild /t:restore /p:nugetInteractive=true
+- set `DOTNET_CLI_DO_NOT_USE_MSBUILD_SERVER=1` before running `dotnet`
+- `msbuild /t:restore /p:nugetInteractive=true`
 - [package source credentials](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesourcecredentials)
 - Open the project in Visual Studio
