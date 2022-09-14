@@ -8,6 +8,35 @@ Operating system specific instructions:
 - [macOS](install-macos.md)
 - [Windows](install-windows.md)
 
+## [Using dotnet-install-scripts](https://docs.microsoft.com/dotnet/core/tools/dotnet-install-script)
+
+### Install the latest preview version of the 7.0.1xx SDK to the specified location:
+
+Windows:
+
+```
+./dotnet-install.ps1 -Channel 7.0.1xx -Quality preview -InstallDir C:\cli
+```
+
+macOS/Linux:
+```
+./dotnet-install.sh --channel 7.0.1xx --quality preview --install-dir ~/cli
+```
+
+### Install the latest preview version of the 7.0.0 runtime to the specified location:
+
+Windows:
+
+```
+.\dotnet-install.ps1 -Runtime dotnet -Version 7.0.0-rc.1.22426.10 -InstallDir E:\sample
+```
+
+macOs/Linux:
+
+```
+./dotnet-install.sh --runtime dotnet --version 7.0.0-rc.1.22426.10 --install-dir ~/cli
+```
+
 ## Distributions
 
 The following distributions are available for all operating systems:
