@@ -34,32 +34,32 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
- Version:   7.0.100-preview.7.22377.5
- Commit:    1a9103db2d
+ Version:   7.0.100-rc.1.22431.12
+ Commit:    f1cf61e1c0
 
 Runtime Environment:
- OS Name:     Windows
- OS Version:  10.0.17763
- OS Platform: Windows
- RID:         win10-x64
- Base Path:   C:\Program Files\dotnet\sdk\7.0.100-preview.7.22377.5\
+ OS Name:     Mac OS X
+ OS Version:  12.5
+ OS Platform: Darwin
+ RID:         osx.12-x64
+ Base Path:   /usr/local/share/dotnet/x64/sdk/7.0.100-rc.1.22431.12/
 
-Host (useful for support):
-  Version: 7.0.100-preview.7.22377.5
-  Commit:  3eaf1f316b
+Host:
+  Version:      7.0.0-rc.1.22426.10
+  Architecture: x64
+  Commit:       06aceb7015
 
 .NET SDKs installed:
-  7.0.100-preview.7.22377.5 [C:\Program Files\dotnet\sdk]
+  7.0.100-rc.1.22431.12 [/usr/local/share/dotnet/x64/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App  7.0.0-preview.5.22301.12 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 7.0.100-preview.7.22377.5 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
-  Microsoft.WindowsDesktop.App 7.0.0-preview.5.22302.5 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.AspNetCore.App 7.0.0-rc.1.22427.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]  
+  Microsoft.NETCore.App 7.0.0-rc.1.22426.10 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-7.0.100-preview.7.22377.5
+7.0.100-rc.1.22431.12
 ```
