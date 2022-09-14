@@ -28,7 +28,7 @@ macOS/Linux:
 Windows:
 
 ```
-.\.dotnet\dotnet-install.ps1 -Channel 7.0 -Runtime dotnet -Quality preview -InstallDir E:\sample
+.\.dotnet\dotnet-install.ps1 -Channel 7.0 -Runtime dotnet -Quality preview -InstallDir c:\cli
 ```
 
 macOs/Linux:
