@@ -63,3 +63,69 @@ The --interactive flag is not working with any dotnet.exe command in RC1. https:
 - `msbuild /t:restore /p:nugetInteractive=true`
 - [package source credentials](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesourcecredentials)
 - Open the project in Visual Studio
+
+### `dotnet user-jwts` not functional in .NET 7 RC1
+
+The `dotnet user-jwts` command line tool is not functional in .NET 7 RC1 due to an assembly resolution bug.  When running the CLI, you will encounter the following exception.
+
+```
+$ dotnet user-jwts create 
+Could not load file or assembly 'Microsoft.Extensions.Configuration.Binder, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. The system cannot find the file specified.
+```
+
+To circumvent this issue, you will need to modify the local installation to probe correctly for the `Microsoft.Extensions.Configuration.Binder` assembly
+
+1. Locate the `user-jwts` tool directory in your local SDK installation. This will typically be located in a path as follows:
+
+```
+~/.dotnet/sdk/7.0.100-rc.2.22419.24/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22415.4/tools/net7.0/any
+```
+
+2. Locate the `dotnet-user-jwts.deps.json` file and make the following modifications:
+
+```diff
+{
+    "targets": {
+        ".NETCoreApp,Version=v7.0": {
+            "dotnet-user-jwts/7.0.0-rc.1.22415.4": {
+            "dependencies": {
++               "Microsoft.Extensions.Configuration.Binder": "7.0.0-rc.1.22411.12"
+            },
++           "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22411.12": {
++               "dependencies": {
++                   "Microsoft.Extensions.Configuration.Abstractions": "7.0.0-rc.1.22411.12"
++               },
++               "runtime": {
++                   "lib/net7.0/Microsoft.Extensions.Configuration.Binder.dll": {
++                       "assemblyVersion": "7.0.0.0",
++                       "fileVersion": "7.0.22.41112"
++               }
++           }
+        },
+    },
+    "libraries": {
++       "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22411.12": {
++           "type": "package",
++           "serviceable": true,
++           "sha512": "",
++           "path": "microsoft.extensions.configuration.binder/7.0.0-rc.1.22411.12",
++           "hashPath": "microsoft.extensions.configuration.binder.7.0.0-rc.1.22411.12.nupkg.sha512"
++       },
+    }
+}
+```
+
+3. Locate the `Microsoft.Extensions.Configuration.Binder` assembly in the directory associated with the `Microsoft.AspNetCore.App` shared runtime. This will typically be located in a path as follows:
+
+```
+~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22415.4
+```
+
+4. Copy the assembly from Step 3 to the `user-jwts` tool directory from Step 1.
+
+```
+$ cp ~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22415.4/Microsoft.Extensions.Configuration.Binder.dll 
+~/.dotnet/sdk/7.0.100-rc.2.22419.24/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22415.4/tools/net7.0/any
+```
+
+This issue will be resolved in .NET 7 RC 2.
