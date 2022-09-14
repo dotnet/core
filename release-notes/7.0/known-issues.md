@@ -6,7 +6,7 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ### Unable to evaluate expressions in a Blazor WebAssembly App
 
-It isn't possible to debug a Blazor WebAssembly app using .NET 7 RC1 https://github.com/dotnet/runtime/pull/75495
+It isn't possible to evaluate expressions in a Blazor WebAssembly app using .NET 7 RC1 https://github.com/dotnet/runtime/pull/75495
 
 #### Workaround for a Blazor WebAssembly Hosted App:
 
