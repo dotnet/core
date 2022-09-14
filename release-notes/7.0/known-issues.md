@@ -76,10 +76,14 @@ Could not load file or assembly 'Microsoft.Extensions.Configuration.Binder, Vers
 To circumvent this issue, you will need to modify the local installation to probe correctly for the `Microsoft.Extensions.Configuration.Binder` assembly
 
 1. Locate the `user-jwts` tool directory in your local SDK installation. This will typically be located in a path as follows:
-
-```
-~/.dotnet/sdk/7.0.100-rc.2.22419.24/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22415.4/tools/net7.0/any
-```
+  - on Linux/macOS:
+  ```
+  ~/.dotnet/sdk/7.0.100-rc.1.22431.12/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22427.2/tools/net7.0/any
+  ```
+  - on Windows:
+  ```
+  C:\Program Files\ddotnet\sdk\7.0.100-rc.1.22431.12\DotnetTools\dotnet-user-jwts\7.0.0-rc.1.22427.2\tools\net7.0\any
+  ```
 
 2. Locate the `dotnet-user-jwts.deps.json` file and make the following modifications:
 
@@ -87,45 +91,54 @@ To circumvent this issue, you will need to modify the local installation to prob
 {
     "targets": {
         ".NETCoreApp,Version=v7.0": {
-            "dotnet-user-jwts/7.0.0-rc.1.22415.4": {
+            "dotnet-user-jwts/7.0.0-rc.1.22426.10": {
             "dependencies": {
-+               "Microsoft.Extensions.Configuration.Binder": "7.0.0-rc.1.22411.12"
++               "Microsoft.Extensions.Configuration.Binder": "7.0.0-rc.1.22426.10"
             },
-+           "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22411.12": {
++           "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22426.10": {
 +               "dependencies": {
-+                   "Microsoft.Extensions.Configuration.Abstractions": "7.0.0-rc.1.22411.12"
++                   "Microsoft.Extensions.Configuration.Abstractions": "7.0.0-rc.1.22426.10"
 +               },
 +               "runtime": {
 +                   "lib/net7.0/Microsoft.Extensions.Configuration.Binder.dll": {
 +                       "assemblyVersion": "7.0.0.0",
-+                       "fileVersion": "7.0.22.41112"
++                       "fileVersion": "7.0.22.42610"
 +               }
 +           }
         },
     },
     "libraries": {
-+       "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22411.12": {
++       "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22426.10": {
 +           "type": "package",
 +           "serviceable": true,
 +           "sha512": "",
-+           "path": "microsoft.extensions.configuration.binder/7.0.0-rc.1.22411.12",
-+           "hashPath": "microsoft.extensions.configuration.binder.7.0.0-rc.1.22411.12.nupkg.sha512"
++           "path": "microsoft.extensions.configuration.binder/7.0.0-rc.1.22426.10",
++           "hashPath": "microsoft.extensions.configuration.binder.7.0.0-rc.1.22426.10.nupkg.sha512"
 +       },
     }
 }
 ```
 
 3. Locate the `Microsoft.Extensions.Configuration.Binder` assembly in the directory associated with the `Microsoft.AspNetCore.App` shared runtime. This will typically be located in a path as follows:
-
-```
-~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22415.4
-```
-
+  - on Linux/macOS
+  ```
+  ~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22427.2
+  ```
+  - on Windows
+  ```
+  C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2
+  ```
+  
 4. Copy the assembly from Step 3 to the `user-jwts` tool directory from Step 1.
+  - on Linux/macOS
+  ```
+  $ cp ~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22427.2/Microsoft.Extensions.Configuration.Binder.dll ~/.dotnet/sdk/7.0.100-rc.1.22431.12/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22427.2/tools/net7.0/any
+  ```
+  - on Windows
+  ```
+  > copy C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2\C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2 C:\Program Files\ddotnet\sdk\7.0.100-rc.1.22431.12\DotnetTools\dotnet-user-jwts\7.0.0-rc.1.22427.2\tools\net7.0\any
+  ```
 
-```
-$ cp ~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22415.4/Microsoft.Extensions.Configuration.Binder.dll 
-~/.dotnet/sdk/7.0.100-rc.2.22419.24/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22415.4/tools/net7.0/any
-```
+5. Note that the install directory for the SDK may not be deleted during uninstall due to applying this workaround, e.g. when updating to 7.0.0-rc.2. If that occurs, delete the directory manually.
 
 This issue will be resolved in .NET 7 RC 2.
