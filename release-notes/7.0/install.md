@@ -28,13 +28,13 @@ macOS/Linux:
 Windows:
 
 ```
-.\dotnet-install.ps1 -Runtime dotnet -Version 7.0.0-rc.1.22426.10 -InstallDir E:\sample
+.\.dotnet\dotnet-install.ps1 -Channel 7.0 -Runtime dotnet -Quality preview -InstallDir E:\sample
 ```
 
 macOs/Linux:
 
 ```
-./dotnet-install.sh --runtime dotnet --version 7.0.0-rc.1.22426.10 --install-dir ~/cli
+./dotnet-install.sh --runtime dotnet --channel 7.0 --quality preview --install-dir ~/cli
 ```
 
 ## Distributions
