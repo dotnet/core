@@ -4,6 +4,50 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET Runtime
 
+### Unable to evaluate expressions in a Blazor WebAssembly App
+
+It isn't possible to evaluate expressions in a Blazor WebAssembly app using .NET 7 RC1 https://github.com/dotnet/runtime/pull/75495
+
+#### Workaround for a Blazor WebAssembly Hosted App:
+
+Copy the following into the server project (`.csproj`) of a `.NET 7 Preview RC1` Blazor WebAssembly Hosted App:
+
+```xml
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="3.7.0" ExcludeAssets="all" GeneratePathProperty="true"/>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.7.0" ExcludeAssets="all" GeneratePathProperty="true"/>
+	</ItemGroup>
+	<Target Name="_CopyCodeAnalysisDeps" AfterTargets="Build">
+		<Copy SourceFiles="$(PkgMicrosoft_CodeAnalysis_Scripting_Common)\lib\netstandard2.0\Microsoft.CodeAnalysis.Scripting.dll"
+              DestinationFolder="$(OutputPath)\BlazorDebugProxy"
+              SkipUnchangedFiles="true"/>
+		<Copy SourceFiles="$(PkgMicrosoft_CodeAnalysis_CSharp_Scripting)\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll"
+			  DestinationFolder="$(OutputPath)\BlazorDebugProxy"
+			  SkipUnchangedFiles="true"/>
+	</Target>
+```
+
+#### Workaround for a Blazor WebAssembly Standalone App:
+
+Copy the following into a `.NET 7 Preview RC1` Blazor WebAssembly project (`.csproj`):
+
+```xml
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="3.7.0" ExcludeAssets="all" GeneratePathProperty="true"/>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.7.0" ExcludeAssets="all" GeneratePathProperty="true"/>
+	</ItemGroup>
+	<Target Name="_CopyCodeAnalysisDeps" AfterTargets="Build">
+		<Copy SourceFiles="$(PkgMicrosoft_CodeAnalysis_Scripting_Common)\lib\netstandard2.0\Microsoft.CodeAnalysis.Scripting.dll"
+              DestinationFolder="$(PkgMicrosoft_AspNetCore_Components_WebAssembly_DevServer)\tools\BlazorDebugProxy"
+              SkipUnchangedFiles="true"/>
+		<Copy SourceFiles="$(PkgMicrosoft_CodeAnalysis_CSharp_Scripting)\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll"
+			  DestinationFolder="$(PkgMicrosoft_AspNetCore_Components_WebAssembly_DevServer)\tools\BlazorDebugProxy"
+			  SkipUnchangedFiles="true"/>
+	</Target>
+```
+
+That will copy the missing dependency into the DevServer package and enable evaluation of expression on Wasm debugging in .NET 7.0 Preview RC1 after a single build. This workaround only needs to be run once per package root to repair the DevServer package but should be harmless to leave in.
+
 ### Unable to debug a Blazor WebAssembly App
 
 It isn't possible to debug a Blazor WebAssembly app using .NET 7 Preview 5 https://github.com/dotnet/runtime/pull/70383
