@@ -12,6 +12,7 @@ The following two lists summarize how maintainers will act. A more detailed desc
 
 **Maintainers won't**
 - Edit contributor comments as a general rule. GitHub provides [edit history](https://blog.github.com/changelog/2018-05-24-comment-edit-history/) which makes editing more acceptable as there is a way to see an audit log. However, contributors might still be surprised when they see statements or phrases under their name that they don't recall making. Transparency is a cornerstone of effective discourse and its absence undermines trust. And a change log doesn't fully eliminate these concerns.
+- Accept the same contribution which has been done before by someone else.  
 
 ## Respect your Contributions
 
