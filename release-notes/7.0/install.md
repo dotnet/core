@@ -63,32 +63,32 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
- Version:   7.0.100-rc.1.22431.12
- Commit:    f1cf61e1c0
+Version:   7.0.100-rc.2.22477.23
+ Commit:    0a5360315a
 
 Runtime Environment:
  OS Name:     Mac OS X
- OS Version:  12.5
+ OS Version:  12.6
  OS Platform: Darwin
  RID:         osx.12-x64
- Base Path:   /usr/local/share/dotnet/x64/sdk/7.0.100-rc.1.22431.12/
+ Base Path:   /usr/local/share/dotnet/x64/sdk/7.0.100-rc.2.22477.23/
 
 Host:
-  Version:      7.0.0-rc.1.22426.10
+  Version:      7.0.0-rc.2.22472.3
   Architecture: x64
-  Commit:       06aceb7015
+  Commit:       550605cc93
 
 .NET SDKs installed:
-  7.0.100-rc.1.22431.12 [/usr/local/share/dotnet/x64/sdk]
+  7.0.100-rc.2.22477.23 [/usr/local/share/dotnet/x64/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App 7.0.0-rc.1.22427.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]  
-  Microsoft.NETCore.App 7.0.0-rc.1.22426.10 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
+  Microsoft.AspNetCore.App 7.0.0-rc.2.22476.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 7.0.0-rc.2.22472.3 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-7.0.100-rc.1.22431.12
+7.0.100-rc.2.22477.23
 ```
