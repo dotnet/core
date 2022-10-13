@@ -6,9 +6,9 @@ The .NET team uses the following policies for [.NET releases](releases.md).
 
 New major .NET versions are released annually in November, at [.NET Conf](https://www.dotnetconf.net/).
 
-Patch updates are released monthly on the second tuesday of each month, also known as Patch Tuesday.
+Patch updates are released monthly on the second Tuesday of each month, also known as Patch Tuesday.
 
-Minor versions of the .NET SDK are releases approximately quarterly. These are known as [feature bands](https://docs.microsoft.com/en-us/dotnet/core/releases-and-support#feature-bands-sdk-only).
+Minor versions of the .NET SDK are released approximately quarterly. These are known as [feature bands](https://learn.microsoft.com/dotnet/core/releases-and-support#feature-bands-sdk-only).
 
 ## Release types
 
