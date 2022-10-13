@@ -2,10 +2,8 @@
 
 The following list of packages doesn't include specific version numbers for affected packages. Where a given package has a current version that is in support, the previous versions will be marked deprecated.
 
-* Accessibility
-* AjaxGridScaffolder
-* AntiXSS
-* ApiPort
+## Runtime Packs
+
 * AspNetCoreRuntime.2.2.x64
 * AspNetCoreRuntime.2.2.x86
 * AspNetCoreRuntime.3.0.x64
@@ -16,6 +14,26 @@ The following list of packages doesn't include specific version numbers for affe
 * AspNetCoreRuntime.5.0.x86
 * AspNetCoreRuntime.6.0.x64
 * AspNetCoreRuntime.6.0.x86
+* dnx-clr-win-x64
+* dnx-clr-win-x86
+* dnx-coreclr-darwin-x64
+* dnx-coreclr-linux-x64
+* dnx-coreclr-win-x64
+* dnx-coreclr-win-x86
+* dnx-mono
+* Microsoft.NETCore
+* Microsoft.NETCore.App
+* Microsoft.AspNetCore
+* Microsoft.AspNetCore.All
+* Microsoft.AspNetCore.App
+* Microsoft.AspNetCore.App.Ref
+
+## Packages
+
+* Accessibility
+* AjaxGridScaffolder
+* AntiXSS
+* ApiPort
 * AspNetRazor.Core
 * AspNetSprites-Core
 * AspNetSprites-MvcAndRazorHelper
@@ -29,13 +47,14 @@ The following list of packages doesn't include specific version numbers for affe
 * Bakery.Template.VB2
 * Calendar.Template
 * Calendar.Template.VB2
-* dnx-clr-win-x64
-* dnx-clr-win-x86
-* dnx-coreclr-darwin-x64
-* dnx-coreclr-linux-x64
-* dnx-coreclr-win-x64
-* dnx-coreclr-win-x86
-* dnx-mono
+* EntityFramework
+* EntityFramework.Core.FunctionalTests
+* EntityFramework.Relational.Design.FunctionalTests
+* EntityFramework.Relational.FunctionalTests
+* EntityFramework.SqlServerCompact
+
+## Tools
+
 * dotnet-aspnet-codegenerator
 * dotnet-counters
 * dotnet-dev-certs
@@ -55,11 +74,10 @@ The following list of packages doesn't include specific version numbers for affe
 * dotnet-trace
 * dotnet-user-secrets
 * dotnet-watch
-* EntityFramework
-* EntityFramework.Core.FunctionalTests
-* EntityFramework.Relational.Design.FunctionalTests
-* EntityFramework.Relational.FunctionalTests
-* EntityFramework.SqlServerCompact
+* Microsoft.dotnet-httprepl
+* Microsoft.dotnet-interactive
+* Microsoft.dotnet-openapi
+* Microsoft.dotnet-try
 * Facebook.Helper
 * Iot.Device.Bindings
 * jQuery.Ajax.Unobtrusive
@@ -727,13 +745,9 @@ The following list of packages doesn't include specific version numbers for affe
 * Microsoft.AspNet.WebSockets.Protocol
 * Microsoft.AspNet.WebSockets.Server
 * Microsoft.AspNet.WebUtilities
-* Microsoft.AspNetCore
-* Microsoft.AspNetCore.All
 * Microsoft.AspNetCore.AngularServices
 * Microsoft.AspNetCore.Antiforgery
 * Microsoft.AspNetCore.ApiAuthorization.IdentityServer
-* Microsoft.AspNetCore.App
-* Microsoft.AspNetCore.App.Ref
 * Microsoft.AspNetCore.App.Runtime.linux-arm
 * Microsoft.AspNetCore.App.Runtime.linux-arm64
 * Microsoft.AspNetCore.App.Runtime.linux-musl-arm
@@ -1043,10 +1057,6 @@ The following list of packages doesn't include specific version numbers for affe
 * Microsoft.Dnx.Testing.Abstractions
 * Microsoft.Dnx.Watcher
 * Microsoft.Dnx.Watcher.Core
-* Microsoft.dotnet-httprepl
-* Microsoft.dotnet-interactive
-* Microsoft.dotnet-openapi
-* Microsoft.dotnet-try
 * Microsoft.DotNet.Analyzers.Compatibility
 * Microsoft.DotNet.BuildTools.GenAPI
 * Microsoft.DotNet.Cli.Utils
@@ -1275,8 +1285,6 @@ The following list of packages doesn't include specific version numbers for affe
 * Microsoft.Net.WebSocketAbstractions
 * Microsoft.Net.WebSockets
 * Microsoft.Net.WebSockets.Server
-* Microsoft.NETCore
-* Microsoft.NETCore.App
 * Microsoft.NETCore.App.Crossgen2.linux-musl-x64
 * Microsoft.NETCore.App.Crossgen2.linux-x64
 * Microsoft.NETCore.App.Crossgen2.osx-arm64
