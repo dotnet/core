@@ -8,6 +8,35 @@ Operating system specific instructions:
 - [macOS](install-macos.md)
 - [Windows](install-windows.md)
 
+## [Using dotnet-install-scripts](https://docs.microsoft.com/dotnet/core/tools/dotnet-install-script)
+
+### Install the latest preview version of the 7.0.1xx SDK to the specified location:
+
+Windows:
+
+```
+./dotnet-install.ps1 -Channel 7.0.1xx -Quality preview -InstallDir C:\cli
+```
+
+macOS/Linux:
+```
+./dotnet-install.sh --channel 7.0.1xx --quality preview --install-dir ~/cli
+```
+
+### Install the latest preview version of the 7.0.0 runtime to the specified location:
+
+Windows:
+
+```
+.\.dotnet\dotnet-install.ps1 -Channel 7.0 -Runtime dotnet -Quality preview -InstallDir c:\cli
+```
+
+macOs/Linux:
+
+```
+./dotnet-install.sh --runtime dotnet --channel 7.0 --quality preview --install-dir ~/cli
+```
+
 ## Distributions
 
 The following distributions are available for all operating systems:
@@ -34,32 +63,32 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
- Version:   7.0.100-preview.6.22352.1
- Commit:    1a9103db2d
+Version:   7.0.100-rc.2.22477.23
+ Commit:    0a5360315a
 
 Runtime Environment:
- OS Name:     Windows
- OS Version:  10.0.17763
- OS Platform: Windows
- RID:         win10-x64
- Base Path:   C:\Program Files\dotnet\sdk\7.0.100-preview.6.22352.1\
+ OS Name:     Mac OS X
+ OS Version:  12.6
+ OS Platform: Darwin
+ RID:         osx.12-x64
+ Base Path:   /usr/local/share/dotnet/x64/sdk/7.0.100-rc.2.22477.23/
 
-Host (useful for support):
-  Version: 7.0.100-preview.6.22352.1
-  Commit:  3eaf1f316b
+Host:
+  Version:      7.0.0-rc.2.22472.3
+  Architecture: x64
+  Commit:       550605cc93
 
 .NET SDKs installed:
-  7.0.100-preview.6.22352.1 [C:\Program Files\dotnet\sdk]
+  7.0.100-rc.2.22477.23 [/usr/local/share/dotnet/x64/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App  7.0.0-preview.5.22301.12 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 7.0.100-preview.6.22352.1 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
-  Microsoft.WindowsDesktop.App 7.0.0-preview.5.22302.5 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.AspNetCore.App 7.0.0-rc.2.22476.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 7.0.0-rc.2.22472.3 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-7.0.100-preview.6.22352.1
+7.0.100-rc.2.22477.23
 ```

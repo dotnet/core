@@ -63,5 +63,9 @@ A few more notes on hardware keys:
 Join teams to gain write access to repos:
 
 * Request team membership via <https://repos.opensource.microsoft.com/teams>.
-* Ask someone if you don't know which team(s) to join.
+* Ask someone if you don't know which team(s) to join, or see below.
 * Select `Request to join this team` on the right side - it will send email request to maintainers of the team.
+
+Typically you will only need to join one team, because teams are nested. Here are some common teams:
+
+* New engineers on the Core Libraries team should join the [dotnet-corefx team](https://repos.opensource.microsoft.com/dotnet/teams/dotnet-corefx/join).
