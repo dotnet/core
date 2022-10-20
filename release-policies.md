@@ -29,7 +29,7 @@ LTS and Standard Support releases differ only by support duration. The .NET team
 
 * **Preview** releases are not supported but are offered for public testing and for the opportunity to give feedback.
 * **Release Candidate** releases have a go-live support that enables users to deploy a pre-release build in production and are supported by Microsoft.
-* **Active** support is provided for the majority of the period after a release is Generally Available (GA). Functional and security improvements will be provided, including support for new operating system versions.
+* **Active** support is provided for the majority of the period after a release is generally available (GA). Functional and security improvements will be provided, including support for new operating system versions.
 * **Maintenance** support is provided for the last six months of support. Improvements are limited to security fixes. Support for new operating system versions will be provided on a best-effort basis.
 * **End of support** or end-of-life (EOL) marks the point where a release is no longer supported.
 
