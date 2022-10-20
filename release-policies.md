@@ -12,7 +12,7 @@ Minor versions of the .NET SDK are released approximately quarterly. These are k
 
 ## Release types
 
-Each .NET release is defined as either  **Standard Support** or **Long Term Support (LTS)**, at the beginning of the release.
+Each .NET release is defined as either **Standard Support** or **Long Term Support (LTS)**, at the beginning of the release.
 
 The release types:
 
