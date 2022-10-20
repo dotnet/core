@@ -16,22 +16,22 @@ Each .NET release is defined as either  **Standard Support** or **Long Term Supp
 
 The release types:
 
-* **Standard** releases are supported for eighteen months, released in even-numbered years. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation.
+* **Standard Support** releases are supported for eighteen months, released in even-numbered years. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation.
 * **LTS** releases are supported for three years, released in odd-numbered years. They are intended for users that want the stability and lower cost of maintaining an application for an extended period, only needing to upgrade their .NET version for security patches.
 
 Note: **Standard** releases were previously called **Current**.
 
-LTS and Standard releases differ only by support duration. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another, independent of release type.
+LTS and Standard Support releases differ only by support duration. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another, independent of release type.
 
 ## Support phases
 
 .NET releases go through multiple support phases, with varying support levels.
 
 * **Preview** releases are not supported but are offered for public testing and for the opportunity to give feedback.
-* **Go-live** support enables users to deploy a pre-release build in production, and are supported by Microsoft. These are typically Release Candidate (RC) releases.
+* **Release Candidate** releases have a go-live support that enables users to deploy a pre-release build in production and are supported by Microsoft.
 * **Active** support is provided for the majority of the period after a release is Generally Available (GA). Functional and security improvements will be provided, including support for new operating system versions.
 * **Maintenance** support is provided for the last six months of support. Improvements are limited to security fixes. Support for new operating system versions will be provided on a best-effort basis.
-* **End-of-life (EOL)** marks the point where a release is no longer supported.
+* **End of support** or end-of-life (EOL) marks the point where a release is no longer supported.
 
 [Support for various operating systems](os-lifecycle-policy.md) is defined for each release.
 
