@@ -1,6 +1,6 @@
 # .NET 7 - Supported OS versions
 
-[.NET 7](README.md) is an [STS release](../../release-policies.md) and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
+[.NET 7](README.md) is a [Standard Support release](../../release-policies.md) and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
 
 For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . See [.NET Repos](../../Documentation/core-repos.md) for the repository list.
 
