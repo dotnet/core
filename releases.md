@@ -12,7 +12,7 @@ The following table lists in-support .NET releases.
 | :-- | :-- | :-- | :-- | :-- |
 | [.NET 7](release-notes/7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-rc-2/) | [Preview][policies] | [7.0 RC 2][7.0 RC 2] | May 14, 2024 |
 | [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.10][6.0.10] | November 12, 2024 |
-| [.NET Core 3.1](release-notes/3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.30][3.1.30] | December 13, 2022 |
+| [.NET Core 3.1](release-notes/3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.30][3.1.30] | [December 13, 2022](https://devblogs.microsoft.com/dotnet/net-core-3-1-will-reach-end-of-support-on-december-13-2022/) |
 
 [7.0 RC 2]: release-notes/7.0/preview/7.0.0-rc.2.md
 [6.0.10]: release-notes/6.0/6.0.10/6.0.10.md
