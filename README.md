@@ -1,6 +1,6 @@
 # .NET Release Notes
 
-The following [.NET releases](../releases.md) are currently supported:
+The following [.NET releases](releases.md) are currently supported:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
