@@ -6,7 +6,7 @@ The following [.NET releases](../releases.md) are currently supported:
 | :-- | :-- | :-- | :-- | :-- |
 | [.NET 7](7.0/README.md) | [November, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-rc-2/) | [Preview][policies] | [7.0 RC 2][7.0 RC 2] | May 14, 2024 |
 | [.NET 6](6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.10][6.0.10]  | November 12, 2024 |
-| [.NET Core 3.1](3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.30][3.1.30] | December 13, 2022 |
+| [.NET Core 3.1](3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.30][3.1.30] | [December 13, 2022](https://devblogs.microsoft.com/dotnet/net-core-3-1-will-reach-end-of-support-on-december-13-2022/) |
 
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
 
