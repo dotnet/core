@@ -1,6 +1,6 @@
 # .NET Releases
 
-The .NET team releases new major versions of .NET annually, each November. Releases are either Long Term Support (LTS) or Standard Support, the two .NET release types, and transition from full support, to maintenance and finally to end-of-life on a defined schedule, per [.NET release policies][policies]. .NET releases are [supported by Microsoft](microsoft-support.md) on [multiple operating systems](os-lifecycle-policy.md) and hardware architectures.
+The .NET team releases new major versions of .NET annually, each November. Releases are either Long Term Support (LTS) or Standard Term Support (STS), the two .NET release types, and transition from full support, to maintenance and finally to end-of-life on a defined schedule, per [.NET release policies][policies]. .NET releases are [supported by Microsoft](microsoft-support.md) on [multiple operating systems](os-lifecycle-policy.md) and hardware architectures.
 
 All .NET versions can be downloaded from the [.NET website](https://dotnet.microsoft.com/download/dotnet) or [.NET release notes](release-notes/README.md).
 
