@@ -1,51 +1,25 @@
-﻿# .NET Home
+# .NET Release Notes
 
-The dotnet/core repository is a good starting point for .NET.
+The following [.NET releases](../releases.md) are currently supported:
 
-The latest major release is [.NET 6.0](release-notes/6.0/README.md). The latest patch updates are listed in [.NET release notes](release-notes/README.md).
+|  Version  | Release Date | Support | Latest Patch Version | End of Support |
+| :-- | :-- | :-- | :-- | :-- |
+| [.NET 7](7.0/README.md) | [November, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7-rc-2/) | [Preview][policies] | [7.0 RC 2][7.0 RC 2] | May 14, 2024 |
+| [.NET 6](6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.10][6.0.10]  | November 12, 2024 |
+| [.NET Core 3.1](3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.30][3.1.30] | December 13, 2022 |
 
-## .NET Releases
+You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
 
-* [Download the latest .NET SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
-* [.NET releases](releases.md)
-* [.NET daily builds](daily-builds.md)
+[7.0 RC 2]: release-notes/7.0/preview/7.0.0-rc.2.md
+[6.0.10]: release-notes/6.0/6.0.10/6.0.10.md
+[3.1.30]: release-notes/3.1/3.1.30/3.1.30.md
 
-## Learn about .NET
+## Release Information
 
-* [Learn about .NET](https://docs.microsoft.com/dotnet/core)
-* [.NET Roadmap](https://github.com/dotnet/core/blob/main/roadmap.md)
-* [Learn about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
-* [.NET release notes](https://github.com/dotnet/core/blob/main/release-notes/README.md)
-* [.NET Announcements](https://github.com/dotnet/announcements)
-* [.NET blog](https://blogs.msdn.microsoft.com/dotnet/tag/net-core/)
+* [Download .NET](https://dotnet.microsoft.com/download/dotnet)
+* [Releases Index][releases-index.json] -- Index for all release channels in JSON format
+* [dotnet-install scripts](https://docs.microsoft.com/dotnet/core/tools/dotnet-install-script)
+* [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
 
-## Getting help
-
-* [File an issue](Documentation/core-repos.md)
-* [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net-core)
-* [Contact Microsoft Support](https://support.microsoft.com/contactus/)
-* [VS Developer Community Portal](https://developercommunity.visualstudio.com/) for .NET Framework feedback (or via [Report a Problem](https://aka.ms/vs-rap) tool)
-
-## How to Engage, Contribute and Provide Feedback
-
-The .NET team encourages [contributions](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md), both issues and PRs. The first step is finding the [.NET repository](Documentation/core-repos.md) that you want to contribute to.
-
-Check the [product roadmap](https://aka.ms/dotnet-product-roadmap) to see what the team is focusing on.
-
-### Community
-
-This project uses the [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct) to define expected conduct in our community.
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting a project maintainer at conduct@dotnetfoundation.org.
-
-## .NET Foundation
-
-The .NET platform is part of the [.NET Foundation](https://www.dotnetfoundation.org).
-
-## Licenses
-
-.NET repos typically use either the [MIT](LICENSE.TXT) or
-[Apache 2](https://www.apache.org/licenses/LICENSE-2.0) licenses for code.
-Some projects license documentation and other forms of content under
-[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-See specific [repos](Documentation/core-repos.md) to understand the license used.
+[releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
+[policies]: ../release-policies.md

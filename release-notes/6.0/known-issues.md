@@ -19,10 +19,17 @@ The optional workload manifest MSIs in the SDK populate the Language column in t
 #### Workaround
 Running the 6.0.101 SDK bundle (without using MU) results in the context changing to MSIINSTALLCONTEXT_MACHINE, this allows the API call to query the INSTALLEDLANGUAGE to complete and the SDK Wix bundle install succeeds.
 
-Therefore a workaround for this issue is to install the 6.0.101 SDK bundle manually by downloading it from the [.NET download site](https://dotnet.microsoft.com/en-us/download/dotnet/6.0). Once this is successfully installed scanning MU again will result in clearing the previous error. 
+Therefore a workaround for this issue is to install the 6.0.101 SDK bundle manually by downloading it from the [.NET download site](https://dotnet.microsoft.com/en-us/download/dotnet/6.0). Once this is successfully installed scanning MU again will result in clearing the previous error.
 
-As described previously the computer can be secured by installing the VS 17.0.3 update, even if the MU update results in a failure so the MU failure is not a critical factor from a security perspective. Therefore for the case where we expect the VS update to offer and secure the computer we will be making a change to not offer the MU update to those computers to avoid the MU failure. For the case where .NET 6 was installed as a standalone version and VS is not expected to patch the computer we will continue to offer the 6.0.1 update via MU. 
+As described previously the computer can be secured by installing the VS 17.0.3 update, even if the MU update results in a failure so the MU failure is not a critical factor from a security perspective. Therefore for the case where we expect the VS update to offer and secure the computer we will be making a change to not offer the MU update to those computers to avoid the MU failure. For the case where .NET 6 was installed as a standalone version and VS is not expected to patch the computer we will continue to offer the 6.0.1 update via MU.
 
+## Failure when using ICU App-Local feature in .NET 6.0.10
+### Summary
+Applications using the [App-local ICU](https://learn.microsoft.com/en-us/dotnet/core/extensions/globalization-icu#app-local-icu) feature to deploy ICU library binaries with the application binaries can experience throwing unhandled [AccessViolationException](https://learn.microsoft.com/en-us/dotnet/api/system.accessviolationexception?view=net-6.0). The [reported issue](https://github.com/dotnet/runtime/issues/77045) contains more information about this failure.
+
+**Workarounds**
+- If having the ICU app-local feature to use ICU in the .NET 6.0 application when running on OS like `Windows Server 2019`, migration to .NET 7.0 would help as ICU gets loaded in the application without the need to use the app-local feature. .NET 7.0 supports loading ICU by default on `Windows Server 2019`.
+- Use a different .NET version than `6.0.10` like `6.0.9` or `6.0.11` or any later version including .NET `7.0`.
 
 ## .NET SDK
 
@@ -34,23 +41,27 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 
 You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
-#### 1. dotnet test x64 emulation on arm64 support
-While a lot of work has been done to support arm64 emulation of x64 processes in .net 6, there are some remaining [work](https://github.com/dotnet/sdk/issues/21686) to be done in 6.0.2xx. The most impactful remaining item is `dotnet test` support.
+#### 1. Windows admin installs of the .NET 6.0.400 SDK will not correctly update .NET SDK optional workloads
+Commands like `dotnet workload install` and `dotnet workload update` will not correctly update to the latest versions of the workloads on the first try. This is because a timing issue in the workload manifest update code causes the SDK to stop early typically only updating 0-1 manifests.
 
-`dotnet test --arch x64` on an arm64 machine will not work as it will not find the correct test host.  To test x64 components on an arm64 machine, you will have to install the x64 SDK and configure your `DOTNET_ROOT` and `PATH` to use the x64 version of dotnet.
+**Workarounds**
+1. Run `dotnet workload update` again and again until all workloads are updated.
+2. Run `dotnet workload update --from-rollback-file` specifying the exact workload versions you want to install.
 
-#### 2. Upgrade of Visual Studio or .NET SDK from earlier builds can result in a bad `PATH` configuration on Windows
-When upgrading Visual Studio to preview 5 or the .NET SDK to RC2 from an earlier build, the installer will uninstall the prior version of the .NET Host (dotnet.exe) and then install a new version. This results in the path to the x64 copy of dotnet being removed from the `PATH` then added back. If you have the x86 .NET Host installed, it will end up ahead of the x64 one and will be picked up first. 
-
-In this case you may find that Visual Studio is unable to create projects, or commands like `dotnet new` fail with a message like this:
+Example rollback file for 6.0.400
 ```
-Could not execute because the application was not found or a compatible .NET SDK is not installed.
+{
+  "microsoft.net.sdk.android": "32.0.448/6.0.400",
+  "microsoft.net.sdk.ios": "15.4.447/6.0.400",
+  "microsoft.net.sdk.maccatalyst": "15.4.447/6.0.400",
+  "microsoft.net.sdk.macos": "12.3.447/6.0.400",
+  "microsoft.net.sdk.maui": "6.0.486/6.0.400",
+  "microsoft.net.sdk.tvos": "15.4.447/6.0.400",
+  "microsoft.net.workload.mono.toolchain": "6.0.8/6.0.300",
+  "microsoft.net.workload.emscripten": "6.0.4/6.0.300"
+}
 ```
 
-To confirm, run `dotnet --info` and you'll see (x86) paths for all of the found .NET runtimes and .NET SDKs installed. 
-
-To fix this, edit your `PATH` environment variable to either remove the `c:\Program Files (x86)\dotnet` entry or move it after the entry for `c:\Program Files\dotnet`. Now reopen your console window.
-   
 ## ASP.NET Core
 
 ### SPA template issues with Individual authentication when running in development
@@ -58,3 +69,103 @@ To fix this, edit your `PATH` environment variable to either remove the `c:\Prog
 The first time SPA apps are run, the authority for the spa proxy might be incorrectly cached which results in the JWT bearer being rejected due to Invalid issuer. The workaround is to just restart the SPA app and the issue will be resolved. If restarting doesn't resolve the problem, another workaround is to specify the authority for your app in Program.cs: `builder.Services.Configure<JwtBearerOptions>("IdentityServerJwtBearer", o => o.Authority = "https://localhost:44416");` where 44416 is the port for the spa proxy.
 
 When using localdb (default when creating projects in VS), the normal database apply migrations error page will not be displayed correctly due to the spa proxy. This will result in errors when going to the fetch data page. Apply the migrations via 'dotnet ef database update' to create the database.
+
+### SPA template issues with Individual authentication when running in production
+
+SPA apps on Azure App Service with all the following:
+* Individual authentication and requires login for every page.
+* A custom domain such as `https://MyDomain.com`:
+
+Sometimes return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authentication is successful. Subsequent requests to `https://MyDomain.com` succeed.  Alternatively, stopping and starting the app, enables authentication to succeed. This error can occur with [`Always On`](/azure/app-service/configure-common) set to `true` or `false`.
+
+To prevent this problem without having to stop and restart the app:
+
+1. Add a new app setting which contains the target DNS address. For example, create `IdentityServer:IssuerUri` with value `https://MyDomain.com/`
+1. Add the following code to the app:
+```
+builder.Services.AddIdentityServer(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.IssuerUri = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+   Alternatively, add the following code:
+```
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
+    {
+        options.Tokens.AuthenticatorIssuer = settings.IdentityServer.IssuerUri;
+    }
+})
+```
+
+For more information, see [this GitHub issue](https://github.com/dotnet/aspnetcore/issues/42072)
+
+## Windows Desktop (Windows Forms / WPF)
+
+### Issues running applications with Windows Desktop 6.0.2
+
+Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built with 6.0.200 or later .NET SDK, if the target environment has only .NET Windows Desktop runtime 6.0.0 or 6.0.1 installed, and receive error messages similar to the following:
+```
+Application: WinFormsApp1.exe
+CoreCLR Version: 6.0.121.56705
+.NET Version: 6.0.1
+Description: The process was terminated due to an unhandled exception.
+Exception Info: System.IO.FileLoadException: Could not load file or assembly 'System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The located assembly's manifest definition does not match the assembly reference. (0x80131040)
+File name: 'System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WinFormsApp1.Program.Main()
+```
+
+This is a result of Windows Desktop servicing ref pack in 6.0.2, which was shipped with an incorrect version.
+
+**Fix:**
+* To run Windows Desktop applications built with 6.0.200 or later .NET SDK, the Windows Desktop runtime 6.0.2 or later is required.
+
+The team appreciates that the fix is less than ideal, however it was chosen for the following reasons.
+* If the ref pack version number was reverted to 6.0.0, then all DLLs built with 6.0.2 reference assemblies would be broken. Those projects/libraries would have no other workaround besides rebuilding, which would mean that any NuGet packages published would be irreversibly broken and would need to be updated.
+* If we lock the ref pack version number at 6.0.2, there is a workaround that allows building an app or library that can run on 6.0.0 or 6.0.1 - for an end-user it requires installing Windows Desktop runtime 6.0.0 or 6.0.1, and for a developer - locking the runtime at the project level:
+    ```xml
+    <ItemGroup Condition="'$(TargetFrameworkVersion)' == '6.0'">
+      <FrameworkReference
+              Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF;Microsoft.WindowsDesktop.App.WindowsForms"
+              TargetingPackVersion="6.0.0" />
+    </ItemGroup>
+    ```
+* Additionally 6.0.1 and 6.0.2 are security releases, and customers are encouraged to update to the latest version.
+
+### Issues building WPF application with Windows Desktop 6.0.7 and 6.0.8
+
+Some customers are unable to build WPF applications with Windows Desktop 6.0.7 and 6.0.8, if they are including source generators coming from NuGet Packages, and receive errors similar to :
+```
+Rebuild started...
+1>------ Rebuild All started: Project: ObservablePropertyTest, Configuration: Debug Any CPU ------
+Restored C:\git\ObservablePropertyTest\ObservablePropertyTest.csproj (in 2 ms).
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(12,27,12,70): error CS0101: The namespace 'CommunityToolkit.Mvvm.ComponentModel.__Internals' already contains a definition for '__KnownINotifyPropertyChangedOrChangingArgs'
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(7,6,7,51): error CS0579: Duplicate 'global::System.CodeDom.Compiler.GeneratedCode' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(8,6,8,52): error CS0579: Duplicate 'global::System.Diagnostics.DebuggerNonUserCode' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(9,6,9,69): error CS0579: Duplicate 'global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(10,6,10,51): error CS0579: Duplicate 'global::System.ComponentModel.EditorBrowsable' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\__KnownINotifyPropertyChangedOrChangingArgs.cs(11,6,11,29): error CS0579: Duplicate 'global::System.Obsolete' attribute
+1>C:\git\ObservablePropertyTest\CommunityToolkit.Mvvm.SourceGenerators\CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator\ObservablePropertyTest.TestVM.cs(12,23,12,33): error CS0102: The type 'TestVM' already contains a definition for 'TestString'
+1>Done building project "ObservablePropertyTest_yynlzhol_wpftmp.csproj" -- FAILED.
+========== Rebuild All: 0 succeeded, 1 failed, 0 skipped ==========
+```
+
+This happened because WPF builds in 6.0.7 onwards, only considered source generators that were coming from nuget references. This caused an issue when there were source generators that were essentially coming via FrameworkReference. This issue has already been addressed in next release (6.0.9). However, the following workaround would unblock WPF builds.
+
+**Fix:**
+* To enable build in Windows Desktop 6.0.7, navigate to the directory containing the `Microsoft.WinFx.targets` file ( `C:\Program Files\dotnet\sdk\6.0.302\Sdks\Microsoft.NET.Sdk.WindowsDesktop\targets` )
+* Add the following target in the file :
+    ```xml
+
+    <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
+        <ItemGroup>
+            <FilteredAnalyzer Include="@(Analyzer->Distinct())" />
+            <Analyzer Remove="@(Analyzer)" />
+            <Analyzer Include="@(FilteredAnalyzer)" />
+        </ItemGroup>
+    </Target>
+    ```
