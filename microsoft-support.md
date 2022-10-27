@@ -2,7 +2,7 @@
 
 [Microsoft supports .NET](https://dotnet.microsoft.com/platform/support/policy) on multiple operating systems, per the [Microsoft Modern Lifecycle](https://support.microsoft.com/help/30881/modern-lifecycle-policy).
 
-Support is provided for: .NET SDK, .NET runtime, ASP.NET Core, and EF Core.
+Support is provided for: .NET SDK, .NET Runtimes, ASP.NET Core, and EF Core.
 
 Support has two key benefits:
 
