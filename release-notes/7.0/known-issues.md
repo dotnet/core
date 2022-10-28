@@ -197,3 +197,11 @@ An update for the compiler is planned as part of the 7.0.1 release that will upd
 
 
 Users that are not relying on bind get, set, after will not be affected by this issue.
+
+## WPF
+
+### NullReferenceException is thrown in the System.Windows.StyleHelper.GetExpression method
+An attempt to call the BindingOperations.GetBindingExpression method in .NET 7.0 leads to NullReferenceException (Issue 7205)[https://github.com/dotnet/wpf/issues/7205].
+ 
+Currently no workaround is available. If your application is using the above API, then we recommend you wait for the upcoming servicing release post GA.
+
