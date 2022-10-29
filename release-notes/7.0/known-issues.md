@@ -4,6 +4,10 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET Runtime
 
+### Unable to decompress 4GB+ zip archives
+
+It's impossible to decompress large (4GB+ after compression) zip archives that consist of more than one zipped file. There is no known workaround. More information and workaround can be found at: https://github.com/dotnet/runtime/issues/77159. This issue will be fixed in the December servicing release.
+
 ### Unable to evaluate expressions in a Blazor WebAssembly App
 
 It isn't possible to evaluate expressions in a Blazor WebAssembly app using .NET 7 RC1 https://github.com/dotnet/runtime/pull/75495
