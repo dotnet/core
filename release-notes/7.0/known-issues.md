@@ -4,6 +4,11 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET Runtime
 
+### Warning messages while debugging a Blazor WebAssembly App using .NET 7
+It is just a warning message, can be ignored and it will be fixed in the next servicing release.<br>
+``` fail: Microsoft.WebAssembly.Diagnostics.DevToolsProxy[0] sending error response for id: msg-B7CCCEF5694F2EF11713AE7F86743A45:::1017 -> [Result: IsOk: False, IsErr: True, Value: , Error: { "code": -32601, "message": "'DotnetDebugger.setDebuggerProperty' wasn't found" } ]```
+
+
 ### Unable to decompress 4GB+ zip archives
 
 It's impossible to decompress large (4GB+ after compression) zip archives that consist of more than one zipped file. There is no known workaround. More information and workaround can be found at: https://github.com/dotnet/runtime/issues/77159. This issue will be fixed in the December servicing release.
