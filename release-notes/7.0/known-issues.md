@@ -186,3 +186,14 @@ To circumvent this issue, you will need to modify the local installation to prob
 5. Note that the install directory for the SDK may not be deleted during uninstall due to applying this workaround, e.g. when updating to 7.0.0-rc.2. If that occurs, delete the directory manually.
 
 This issue will be resolved in .NET 7 RC 2.
+
+## ASP.NET Core
+
+### [7.0] bind get, set, after can't be used in 7.0 Blazor applications
+In .NET 7 Preview 7, we've introduced [a new feature for binding values to components](https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-7-preview-7/#blazor-data-binding-get-set-after-modifiers) using the new `bind:get`, `bind:set` and `bind:after` syntax.
+As part of a follow-up work to address some issues we've learned about related to that feature, we had to take a two-part fix both in dotnet/aspnetcore and dotnet/razor-compiler repos. Unfortunately, we had an issue with our dependency update process and the razor compiler changes did not make it into the 7.0 build. As a result, when you try to use bind, get, set, after on 7.0 Blazor application, the compiler will emit code against non existing APIs and users will be presented with an error like `Can't convert from EventCallback<T> to Func<T,Task>`.
+An update for the compiler is planned as part of the 7.0.1 release that will update the compiler to target the new APIs and make this feature work as expected from them on.
+
+
+
+Users that are not relying on bind get, set, after will not be affected by this issue.
