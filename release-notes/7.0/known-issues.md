@@ -4,10 +4,6 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET Runtime
 
-### Unable to decompress 4GB+ zip archives
-
-It's impossible to decompress large (4GB+ after compression) zip archives that consist of more than one zipped file. There is no known workaround. More information and workaround can be found at: https://github.com/dotnet/runtime/issues/77159. This issue will be fixed in the December servicing release.
-
 ### Unable to evaluate expressions in a Blazor WebAssembly App
 
 It isn't possible to evaluate expressions in a Blazor WebAssembly app using .NET 7 RC1 https://github.com/dotnet/runtime/pull/75495
@@ -201,11 +197,3 @@ An update for the compiler is planned as part of the 7.0.1 release that will upd
 
 
 Users that are not relying on bind get, set, after will not be affected by this issue.
-
-## WPF
-
-### NullReferenceException is thrown in the System.Windows.StyleHelper.GetExpression method
-An attempt to call the BindingOperations.GetBindingExpression method in .NET 7.0 leads to NullReferenceException (Issue 7205)[https://github.com/dotnet/wpf/issues/7205].
- 
-Currently no workaround is available. If your application is using the above API, then we recommend you wait for the upcoming servicing release post GA.
-
