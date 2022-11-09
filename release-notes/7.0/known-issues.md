@@ -102,7 +102,7 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 If a preview 7 .NET SDK is installed, projects with workload dependencies such as `microsoft.net.workload.mono.toolchain` may fail to build, load, or run. An example of this issue is described in https://github.com/dotnet/sdk/issues/28947 and also here: https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html. 
 
-**Workarounds**
+**Resolution**
 The best method to resolve the issue is to uninstall any .NET 7 preview SDKs. On Windows, this can be done easily with add/remove programs. Another option is to try deleting the folder `C:\Program Files\dotnet\sdk-manifests\microsoft.net.workload.mono.toolchain`. Dotnet-core-uninstall https://github.com/dotnet/cli-lab/releases is another option for uninstalling the .NET 7 preview SDKs.
 
 Why? This happened because in the middle of preview development some workloads got renamed to have .net7.0 appended to the end, partially to support multi-targeting. We've been having discussions about how to prevent the same thing happening when folks upgrade to .NET 8. We are also considering adding `dotnet workload clean` which could fix this automatically.
