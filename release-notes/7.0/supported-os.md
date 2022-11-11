@@ -30,11 +30,14 @@ OS                                    | Version               | Architectures   
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
 [Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
+[Oracle Linux][Oracle-Linux]                  | 7+                   | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 18.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
-Other distros are supported with best effort if their libc version is at least the minimum supported libc version:
+Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
+
+### Libc compatibility
 
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
 - Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
@@ -58,6 +61,8 @@ Other distros are supported with best effort if their libc version is at least t
 [OpenSUSE-lifecycle]: https://en.opensuse.org/Lifetime
 [OpenSUSE-docker]: https://hub.docker.com/r/opensuse/leap
 [OpenSUSE-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-opensuse15
+[Oracle-Linux]: https://www.oracle.com/linux/
+[Oracle-Lifecycle]: https://www.oracle.com/a/ocom/docs/elsp-lifetime-069338.pdf
 [RHEL]: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
 [RHEL-lifecycle]: https://access.redhat.com/support/policy/updates/errata/
 [RHEL-msft-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-rhel8
