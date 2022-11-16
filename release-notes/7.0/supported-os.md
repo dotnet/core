@@ -8,7 +8,6 @@ For issues with .NET on operating systems not listed here, please open a GitHub 
 
 OS                                    | Version                 | Architectures   | Lifecycle
 --------------------------------------|-------------------------|-----------------|----------
-[Windows Client][Windows-client]      | 7 SP1(**\***), 8.1      | x64, x86        | [Windows][Windows-lifecycle]
 [Windows 10 Client][Windows-client]   | Version 1607+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
 [Windows 11][Windows-client]   | Version 22000+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
 [Windows Server][Windows-Server]      | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
