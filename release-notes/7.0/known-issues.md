@@ -8,7 +8,6 @@ You may encounter the following known issues, which may include workarounds, mit
 It is just a warning message, can be ignored and it will be fixed in the next servicing release.<br>
 ``` fail: Microsoft.WebAssembly.Diagnostics.DevToolsProxy[0] sending error response for id: msg-B7CCCEF5694F2EF11713AE7F86743A45:::1017 -> [Result: IsOk: False, IsErr: True, Value: , Error: { "code": -32601, "message": "'DotnetDebugger.setDebuggerProperty' wasn't found" } ]```
 
-
 ### Unable to decompress 4GB+ zip archives
 
 It's impossible to decompress large (4GB+ after compression) zip archives that consist of more than one zipped file. There is no known workaround. More information and workaround can be found at: https://github.com/dotnet/runtime/issues/77159. This issue will be fixed in the December servicing release.
@@ -106,6 +105,14 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 .NET 7 Preview 5 on Browser WASM has implemented the SHA1, SHA256, SHA384, SHA512 algorithms using the [SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) browser-native APIs. A race condition was discovered in System.Security.Cryptography's implementation where the wrong hash value is returned unpredictably. You can read more about this here: https://github.com/dotnet/runtime/issues/69806. This only happens in .NET 7 Preview 5 and has been fixed in the latest code.
 
 ## .NET SDK
+
+### [7.0] Projects using certain workloads don't load, build, and or run if .NET 7 Preview SDK workloads are installed: 
+
+If a preview .NET 7 SDK is installed, projects with workload dependencies such as `microsoft.net.workload.mono.toolchain` may fail to build, load, and or run. An example of this issue is described [here](https://github.com/dotnet/sdk/issues/28947).
+
+**Resolution**
+
+The best method to resolve the issue is to uninstall any .NET 7 preview SDKs. For detailed instructions, see [dotnet uninstall instructions](https://learn.microsoft.com/en-us/dotnet/core/install/remove-runtime-sdk-versions?pivots=os-windows). For example, on Windows, dotnet preview SDKs can be uninstalled with add/remove programs. Another option is to try deleting the folder `C:\Program Files\dotnet\sdk-manifests\7.0.100\microsoft.net.workload.mono.toolchain`, but this will only work for file-based installs. [Dotnet-core-uninstall](https://github.com/dotnet/cli-lab/releases) is another option for uninstalling the .NET 7 preview SDKs.
 
 ### [RC1] dotnet restore --interactive not working for authenticated feeds
 
