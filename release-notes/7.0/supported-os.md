@@ -101,7 +101,7 @@ The following operating systems are no longer supported, starting with .NET 7.0.
 
 OS                                    | Version                 | Architectures     |
 --------------------------------------|-------------------------|-------------------|
-[Windows Client][Windows-client]      | 7 SP1(**\***), 8.1      | x64, x86          |
+[Windows Client][Windows-client]      | 7 SP1, 8.1      | x64, x86          |
 
 ## Out of support OS versions
 
