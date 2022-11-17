@@ -30,16 +30,16 @@ ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35
 .NET has two policies for OpenSSL:
 
 - When built into a distro archive, .NET will load a specific OpenSSL version, per the distro archive policy.
-- When built by Microsoft (as a portable Linux build), .NET will the highest OpenSSL version it finds (that it supports), but can be configured to use a specific version.
+- When built by Microsoft (as a portable Linux build), .NET will load the highest OpenSSL version it finds (that it supports), but can be configured to use a specific version.
 
 ## Linux distributions support
 
 .NET can typically be run on any Linux distribution.  Commercially supported distributions are listed in [.NET Supported OS Policy](./os-lifecycle-policy.md), while other distributions are supported at best effort per the compatibility rules above.
 
-.NET can be installed on your distribution using one of the follow approaches:
+.NET can be installed on your distribution using one of the following approaches:
 
 * Install from the [official archive for your distribution](./linux.md).
-* Install the [Microsoft Linux build](https://dotnet.microsoft.com/download), which is built to run on any distro with compatible dependencies (including libc).
+* Install the [Microsoft Linux build](https://dotnet.microsoft.com/download/dotnet), which is built to run on any distro with compatible dependencies (including libc).
 * Build from source via [dotnet/source-build](https://github.com/dotnet/source-build).
 
 ## Red Hat Family support
