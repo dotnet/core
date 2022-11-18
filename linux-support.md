@@ -56,7 +56,7 @@ Red Hat family distributions include: AlmaLinux, CentOS, Oracle Linux, Red Hat E
 
 ## Red Hat Commercial Support
 
-Red Hat supports .NET via [Red Hat Enterprise Linux](http://redhatloves.net/) software collections, per the following.
+Red Hat supports .NET via [Red Hat Enterprise Linux](http://redhatloves.net/), per the following.
 
 - .NET 6 is supported in RHEL 7+.
 - .NET 7 is supported in RHEL 8+.
