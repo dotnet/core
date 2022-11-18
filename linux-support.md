@@ -1,6 +1,6 @@
 # .NET Support and Compatibility for Linux Distributions
 
-.NET is officially supported on multiple [Linux distributions](os-support-lifecycle.md) and [supported by the community on several others](linux.md).
+.NET is officially supported on multiple [Linux distributions](os-lifecycle-policy.md) and [supported by the community on several others](linux.md).
 
 There are various aspects of compatibility to consider.
 
@@ -52,4 +52,4 @@ ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35
 
 New .NET versions will typically only be supported on RHEL era distributions in active support. Check [release notes](./release-notes/README.md) for a given .NET version for specific support information.
 
-Red Hat family distributions include: AlmaLinux, CentOS, Fedora, Oracle Linux, Red Hat Enterprise Linux, and Rocky Linux.
+Red Hat family distributions include: AlmaLinux, CentOS, Oracle Linux, Red Hat Enterprise Linux, and Rocky Linux.

@@ -6,7 +6,7 @@
 
 ## Official archives
 
-.NET is included in the [official archives](https://pkgs.org/download/dotnet) of the following distributions:
+.NET is included in the [archives](https://pkgs.org/download/dotnet) of the following distributions:
 
 - [Alpine Linux](https://pkgs.alpinelinux.org/packages?name=dotnet*)
 - [Arch Linux](https://archlinux.org/packages/?q=dotnet)
@@ -18,7 +18,7 @@
 In general, you can install the .NET SDK via a versioned package, like `dotnet7` or `dotnet-sdk-7.0`. For example, on Ubuntu 22.10, you can install .NET via the following.
 
 ```bash
-sudo apt update && sudo apt install -y dotnet7
+sudo apt update && sudo apt install -y dotnet-sdk-7.0
 ```
 
 See [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux) for extensive install instructions.
