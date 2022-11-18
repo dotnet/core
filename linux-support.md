@@ -1,12 +1,29 @@
 # .NET Support and Compatibility for Linux Distributions
 
-.NET is officially supported on multiple [Linux distributions](os-lifecycle-policy.md) and [supported by the community on several others](linux.md).
+.NET is [supported by Microsoft](os-lifecycle-policy.md) and by [various commercial vendors and the community](linux.md) on multiple Linux distributions.
 
-There are various aspects of compatibility to consider.
+.NET can typically be run on any Linux distribution, via:
+
+- The Microsoft build, which is built to be broadly compatible (as defined below).
+- Distribution-specific builds, which are built specifically for a given distribution version (like Red Hat Enterprise Linux 9 or Ubuntu 22.04).
+
+The following compatibility information primarily applies to the Microsoft build of .NET.
+
+## General dependencies
+
+Microsoft builds have multiple dependencies that must be installed:
+
+- [.NET 6 dependencies](./release-notes/6.0/linux-packages.md)
+- [.NET 7 dependencies](./release-notes/7.0/linux-packages.md)
 
 ## libc compatibility
 
-.NET supports both [glibc](https://www.gnu.org/software/libc/)- and [musl libc](https://musl.libc.org/)-based Linux distributions. [.NET release notes](release-notes/README.md) specify the minimum required libc version (for example for [.NET 6](release-notes/6.0/supported-os.md#linux)). You can use this version information to determine if a given .NET version will run on a given Linux distribution.
+Microsoft builds supports both [glibc](https://www.gnu.org/software/libc/)- and [musl libc](https://musl.libc.org/)-based Linux distributions, per the following minimum version information.
+
+- [.NET 6 minimum libc](release-notes/6.0/supported-os.md#linux)
+- [.NET 7 minimum libc](release-notes/7.0/supported-os.md#linux)
+
+You can use the following pattern to determine the libc version provided for your distribution.
 
 On Alpine 3.16:
 
@@ -25,31 +42,30 @@ ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35
 
 ## OpenSSL compatibility
 
-.NET 6 and later versions support both OpenSSL 1.x and 3.x and can be run on distributions with either version of this package. For example, Ubuntu 22.04 only includes OpenSSL 3 in its official package archive. Previous .NET versions only support OpenSSL 1.x.
+Microsoft builds support both OpenSSL 1.x and 3.x and can be run on distributions with either version of this package. For example, Ubuntu 22.04 only includes OpenSSL 3 in its official package archive.
 
-.NET has two policies for OpenSSL:
+The Microsoft build will generally load the highest OpenSSL version it finds, but can be configured to use a specific version.
 
-- When built into a distro archive, .NET will load a specific OpenSSL version, per the distro archive policy.
-- When built by Microsoft (as a portable Linux build), .NET will load the highest OpenSSL version it finds (that it supports), but can be configured to use a specific version.
+## Red Hat Enterprise Linux Family support
 
-## Linux distributions support
-
-.NET can typically be run on any Linux distribution.  Commercially supported distributions are listed in [.NET Supported OS Policy](./os-lifecycle-policy.md), while other distributions are supported at best effort per the compatibility rules above.
-
-.NET can be installed on your distribution using one of the following approaches:
-
-* Install from the [official archive for your distribution](./linux.md).
-* Install the [Microsoft Linux build](https://dotnet.microsoft.com/download/dotnet), which is built to run on any distro with compatible dependencies (including libc).
-* Build from source via [dotnet/source-build](https://github.com/dotnet/source-build).
-
-## Red Hat Family support
-
-.NET is supported on Red Hat family distributions, including [Red Hat Enterprise Linux](http://redhatloves.net/).
+Microsoft builds support multiple Red Hat versions. New .NET versions will typically only be supported on RHEL era distributions in active support.
 
 * RHEL 7 era distributions are considered in maintenance.
 * RHEL 8 era distributions are considered in active support.
 * RHEL 9 era distributions are considered in active support.
 
-New .NET versions will typically only be supported on RHEL era distributions in active support. Check [release notes](./release-notes/README.md) for a given .NET version for specific support information.
-
 Red Hat family distributions include: AlmaLinux, CentOS, Oracle Linux, Red Hat Enterprise Linux, and Rocky Linux.
+
+## Red Hat Commercial Support
+
+Red Hat supports .NET via [Red Hat Enterprise Linux](http://redhatloves.net/) software collections, per the following.
+
+- .NET 6 is supported in RHEL 7+.
+- .NET 7 is supported in RHEL 8+.
+
+## Ubuntu Family Support
+
+Canonical supports .NET on Ubuntu via APT archives, per the following.
+
+- .NET 6 is supported in Ubuntu 22.04+.
+- .NET 7 is supported in Ubuntu 22.10+.
