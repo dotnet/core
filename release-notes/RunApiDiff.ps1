@@ -169,35 +169,44 @@ Function GetDotNetFullName
 {
     Param (
         [Parameter(Mandatory=$true)]
+        [bool]
+        $areVersionsEqual
+    ,
+        [Parameter(Mandatory=$true)]
         [ValidatePattern("\d+\.\d")]
         [string]
-        $DotNetVersion # 7.0, 8.0, 9.0, ...
+        $dotNetVersion # 7.0, 8.0, 9.0, ...
     ,
         [Parameter(Mandatory=$true)]
         [string]
         [ValidateSet("preview", "rc", "ga")]
-        $PreviewOrRC
+        $previewOrRC
     ,
         [Parameter(Mandatory=$true)]
         [ValidatePattern("(\d+)?")]
         [string]
-        $PreviewNumberVersion # 0, 1, 2, 3, ...
+        $previewNumberVersion # 0, 1, 2, 3, ...
     )
 
-    If ($PreviewOrRC -eq "ga")
+    If (-Not $areVersionsEqual)
     {
-        If ($PreviewNumberVersion -eq "0")
+        Return "$dotNetVersion.$previewNumberVersion"
+    }
+
+    If ($previewOrRC -eq "ga")
+    {
+        If ($previewNumberVersion -eq "0")
         {
             # Example: Don't return "7.0-ga0", instead just return "7.0-ga"
-            Return "$DotNetVersion-$PreviewOrRC"
+            Return "$dotNetVersion-$previewOrRC"
         }
 
         # Examples: Don't include "ga", instead just return "7.0.1", "7.0.2"
-        Return "$DotNetVersion.$PreviewNumberVersion"
+        Return "$dotNetVersion.$previewNumberVersion"
     }
 
     # Examples: "7.0-preview5", "7.0-rc2", "7.0-ga"
-    Return "$DotNetVersion-$PreviewOrRC$PreviewNumberVersion"
+    Return "$dotNetVersion-$previewOrRC$previewNumberVersion"
 }
 
 Function GetDotNetFriendlyName
@@ -245,7 +254,7 @@ Function GetDotNetFriendlyName
     Return ".NET $DotNetVersion $friendlyPreview $PreviewNumberVersion"
 }
 
-Function GetApiDiffFolderName
+Function GetPreviewOrRCFolderName
 {
     Param (
         [Parameter(Mandatory=$true)]
@@ -277,6 +286,45 @@ Function GetApiDiffFolderName
     }
 
     Return "$previewOrRC$previewNumberVersion"
+}
+
+Function GetPreviewFolderPath
+{
+    Param (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $rootFolder #"D:\\core"
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("\d+\.\d")]
+        [string]
+        $dotNetVersion # 7.0, 8.0, 9.0, ...
+    ,
+        [Parameter(Mandatory=$true)]
+        [string]
+        [ValidateSet("preview", "rc", "ga")]
+        $previewOrRC
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("(\d+)?")]
+        [string]
+        $previewNumberVersion # 0, 1, 2, 3, ...
+    ,
+        [Parameter(Mandatory=$true)]
+        [bool]
+        $areVersionsEqual
+    )
+
+    $prefixFolder = [IO.Path]::Combine($rootFolder, "release-notes", $dotNetVersion)
+    $apiDiffFolderName = "api-diff"
+    If ($areVersionsEqual)
+    {
+        $previewOrRCFolderName = GetPreviewOrRCFolderName $dotNetVersion $previewOrRC $previewNumberVersion
+        Return [IO.Path]::Combine($prefixFolder, "preview", $apiDiffFolderName, $previewOrRCFolderName)
+    }
+    
+    Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
 }
 
 Function RunAsmDiff
@@ -511,12 +559,15 @@ Function DownloadPackage
     $resultingPath.value = $dllPath
 }
 
+
 ### Execution ###
 
 ## Generate strings with no whitespace
 
-$previousDotNetFullName = GetDotNetFullName $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
-$currentDotNetFullName = GetDotNetFullName $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
+$areVersionsEqual = $PreviousDotNetVersion -eq $CurrentDotNetVersion
+
+$previousDotNetFullName = GetDotNetFullName $areVersionsEqual $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
+$currentDotNetFullName = GetDotNetFullName $areVersionsEqual $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
 
 
 ## Check folders passed as parameters exist
@@ -565,9 +616,7 @@ ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
 
 ## Recreate api-diff folder in core repo folder
 
-$ApiDiffFolder = GetApiDiffFolderName $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
-
-$previewFolderPath = [IO.Path]::Combine($CoreRepo, "release-notes", $CurrentDotNetVersion, "preview", "api-diff", $ApiDiffFolder)
+$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $areVersionsEqual
 WriteColor cyan "Checking existing diff folder: $previewFolderPath"
 RecreateFolder $previewFolderPath
 
