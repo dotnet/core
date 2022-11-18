@@ -4,10 +4,8 @@
 
 .NET can typically be run on any Linux distribution, via:
 
-- The Microsoft build, which is built to be broadly compatible (as defined below).
+- The Microsoft build, which is built to be broadly compatible.
 - Distribution-specific builds, which are built specifically for a given distribution version (like Red Hat Enterprise Linux 9 or Ubuntu 22.04).
-
-The following compatibility information primarily applies to the Microsoft build of .NET.
 
 ## General dependencies
 
@@ -44,7 +42,7 @@ ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35
 
 Microsoft builds support both OpenSSL 1.x and 3.x and can be run on distributions with either version of this package. For example, Ubuntu 22.04 only includes OpenSSL 3 in its official package archive.
 
-The Microsoft build will generally load the highest OpenSSL version it finds, but can be configured to use a specific version.
+Microsoft builds will generally load the highest OpenSSL version it finds, but can be configured to use a specific version.
 
 ## Red Hat Enterprise Linux Family support
 

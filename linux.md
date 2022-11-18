@@ -1,6 +1,6 @@
 # .NET for Linux Distributions
 
-.NET can be [installed on Linux](https://learn.microsoft.com/dotnet/core/install/linux) in multiple ways, via packages, [scripts](https://github.com/dotnet/install-scripts), or [tarballs](https://dotnet.microsoft.com/download/dotnet). It can be installed globally, locally/privately, or with an app.
+.NET can be installed on Linux in multiple ways, via [packages](https://learn.microsoft.com/dotnet/core/install/linux), [scripts](https://github.com/dotnet/install-scripts), or [tarballs](https://dotnet.microsoft.com/download/dotnet). It can be installed globally, locally/privately, or with an app.
 
 .NET is supported on Linux per [.NET Support and Compatibility for Linux Distributions](linux-support.md).
 
@@ -22,8 +22,6 @@ In general, you can install the .NET SDK via a versioned package, like `dotnet7`
 sudo apt update && sudo apt install -y dotnet-sdk-7.0
 ```
 
-[Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux) has extensive install instructions.
-
 ## Containers
 
 .NET containers are published to multiple registries.
@@ -32,7 +30,7 @@ sudo apt update && sudo apt install -y dotnet-sdk-7.0
 - [OpenShift](https://developers.redhat.com/blog/2018/07/05/deploy-dotnet-core-apps-openshift)
 - [Ubuntu Rocks](https://hub.docker.com/r/ubuntu/dotnet-aspnet)
 
-Microsoft publishes container images per [.NET container publishing policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md). Other distributions may have a different policy.
+Microsoft publishes container images per [.NET container publishing policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md). Other distributions may have different policies.
 
 ## Building .NET from source
 
