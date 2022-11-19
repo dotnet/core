@@ -33,11 +33,18 @@ OS                                    | Version               | Architectures   
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
 [Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
+[Oracle Linux][Oracle-Linux]                  | 7+                   | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
-Note: Newer distro versions include OpenSSL 3 and not OpenSSL 1.x. .NET 6 is the first .NET version to support OpenSSL3. You need to use .NET 6+ if you want to use a distro version that only offers OpenSSL 3, such as Ubuntu 22.04.
+Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
+
+### Libc compatibility
+
+- x64: [glibc][glibc] 2.17 (from CentOS 7)
+- Arm32, Arm64: [glibc][glibc] 2.23 (from Ubuntu 16.04)
+- Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.13)
 
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://alpinelinux.org/releases/
@@ -57,6 +64,8 @@ Note: Newer distro versions include OpenSSL 3 and not OpenSSL 1.x. .NET 6 is the
 [OpenSUSE-lifecycle]: https://en.opensuse.org/Lifetime
 [OpenSUSE-docker]: https://hub.docker.com/r/opensuse/leap
 [OpenSUSE-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-opensuse15
+[Oracle-Linux]: https://www.oracle.com/linux/
+[Oracle-Lifecycle]: https://www.oracle.com/a/ocom/docs/elsp-lifetime-069338.pdf
 [RHEL]: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
 [RHEL-lifecycle]: https://access.redhat.com/support/policy/updates/errata/
 [RHEL-msft-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-rhel8
@@ -67,6 +76,8 @@ Note: Newer distro versions include OpenSSL 3 and not OpenSSL 1.x. .NET 6 is the
 [Ubuntu]: https://ubuntu.com/
 [Ubuntu-lifecycle]: https://wiki.ubuntu.com/Releases
 [Ubuntu-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-ubuntu-2004
+[glibc]: https://www.gnu.org/software/libc/
+[musl]: https://musl.libc.org/
 
 ## macOS
 
