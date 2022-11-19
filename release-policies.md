@@ -49,7 +49,7 @@ As the end of support nears for a given .NET version, we strongly recommend you 
 
 ## Operating System support
 
-Each supported operating system has a lifecycle, such as the [Ubuntu lifecycle](https://ubuntu.com/about/release-cycle). The .NET team applies each of the lifecycle policies to inform adding and removing support for operating system versions. Support is typically removed when an operating system goes out of mainline support, at which point we stop testing and supporting it.
+Each supported operating system has a lifecycle, such as the [Ubuntu lifecycle](https://ubuntu.com/about/release-cycle). The .NET team applies each of the lifecycle policies to inform adding and removing support for operating system versions. Support is typically removed when an operating system version is no longer publicly supported for free, at which point we stop testing and supporting it.
 
 Operating system policies and schedules do not always align with the .NET lifecycle. We have sometimes supported operating system versions after mainline support has lapsed as a service to users to provide more time to transition to newer releases. We may also stop supporting an operating system before support has ended, particularly if support time frames are very long.
 
