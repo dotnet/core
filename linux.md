@@ -4,7 +4,7 @@
 
 .NET is supported on Linux per [.NET Support and Compatibility for Linux Distributions](linux-support.md).
 
-## Official archives
+## Distribution archives
 
 .NET is included in the [archives](https://pkgs.org/download/dotnet) of the following distributions:
 
@@ -21,6 +21,12 @@ In general, you can install the .NET SDK via a versioned package, like `dotnet7`
 ```bash
 sudo apt update && sudo apt install -y dotnet-sdk-7.0
 ```
+
+## Microsoft archives
+
+Microsoft offers alternate feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are document at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux).
+
+You can move back-and-forth between distribution and Microsoft archives using a variety of [package manager patterns](https://github.com/dotnet/core/issues/7699).
 
 ## Containers
 
