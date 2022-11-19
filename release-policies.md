@@ -1,52 +1,66 @@
 # Release Policies
 
-The .NET team uses the following policies for [.NET releases](releases.md). They define what you can expect when you use a given .NET release.
+The .NET team uses the following policies for [.NET releases](releases.md).
 
 ## Release cadence
 
-New major .NET versions are released annually in November. .NET 5.0 was the first version to be released according to this schedule. Minor releases may also be released, with no pre-defined or regular schedule.
+New major .NET versions are released annually in November, at [.NET Conf](https://www.dotnetconf.net/).
+
+Patch updates are released monthly on the second Tuesday of each month, also known as Patch Tuesday.
+
+Minor versions of the .NET SDK are released approximately quarterly. These are known as [feature bands](https://learn.microsoft.com/dotnet/core/releases-and-support#feature-bands-sdk-only).
 
 ## Release types
 
-Each .NET release is defined (prior to initial release) as either **Preview**, **Current**, or **Long Term Support (LTS)**. The difference is support time frame, as defined below:
+Each .NET release is defined as either **Standard Term Support (STS)** or **Long Term Support (LTS)**, at the beginning of the release.
 
-* **Preview** releases are not supported but are offered for public testing. A Preview or Release Candidate release may be declared as "go live" by Microsoft and be supported in production.
-* **Current** releases are supported for (typically) eighteen months. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation. Current release users need to upgrade to later .NET releases more often to stay in support.
-* **LTS** releases are supported for three years. They are intended for users that want the stability and lower cost of maintaining an application on a single (major.minor) .NET version for an extended period.
+* **STS** releases are supported for eighteen months, released in even-numbered years. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation.
+* **LTS** releases are supported for three years, released in odd-numbered years. They are intended for users that want the stability and lower cost of maintaining an application for an extended period, only needing to upgrade their .NET version for security patches.
 
-LTS and Current releases have many similarities. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another (LTS or Current, in either direction), and has processes in place to achieve that intention.
+Note: **Standard Term Support** releases were previously called **Current**.
+
+LTS and STS releases differ only by support duration. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another, for both release types.
+
+## Support phases
+
+.NET releases go through multiple support phases, with varying support levels.
+
+* **Preview** releases are not supported but are offered for the community to test and give feedback.
+* **Go-Live** releases are supported by Microsoft in production. These are typically our release candidate builds, just before the Generally Available (GA) release.
+* **Active** support is provided for the majority of the period after a release is GA. Functional and security improvements will be provided, including support for new operating system versions.
+* **Maintenance** support is provided for the last six months of support. Improvements are limited to security fixes. Support for new operating system versions will be provided on a best-effort basis.
+* **End of life (EOL)** marks the end of support.
+
+[Support for various operating systems](os-lifecycle-policy.md) is defined for each release.
 
 ## Servicing
 
-.NET releases are supported -- during the servicing period -- according to the following policies. Servicing policies are the same for LTS and Current releases.
+Improvements are released as full re-releases of the product, called "patch releases". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday.
 
-A single "bug bar" is used to decide if a change is warranted and safe for servicing updates. A given fix is often applied to multiple [servicing branches](https://github.com/dotnet/core/blob/main/daily-builds.md#servicing-releases), independent of release type. Breaking changes are not accepted during servicing, except (in the very rare case) to resolve a security vulnerability.
+Breaking changes are not accepted during servicing, except in the rare case to mitigate a security vulnerability or other critical issue.
 
-Improvements are released as "patches". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday. Patches are announced on the [.NET blog](https://devblogs.microsoft.com/dotnet/). A digest of monthly releases is published to [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
+Patches are announced in [release notes](release-notes/README.md), on the [.NET blog](https://devblogs.microsoft.com/dotnet/category/maintenance-and-updates/), and [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
 
-### Full support
+Patches are published at the [.NET Website](https://dotnet.microsoft.com/download/dotnet), [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/), and in [Linux archives and registries](./linux.md).
 
-During the full support period, .NET releases are updated to improve functional capabilities and mitigate security vulnerabilities.
+## End of support
 
-Functional improvements are typically very targeted, and may address the following:
+As the end of support nears for a given .NET version, we strongly recommend you move to a newer, supported version of .NET. .NET releases that have reached end of support do not get security patches. Continuing to use an unsupported version will expose you to security vulnerabilities.
 
-* Resolve reported crashes.
-* Resolve severe performance issues.
-* Resolve functional bugs in mainline scenarios.
-* Add support for a new [operating system version](os-lifecycle-policy.md) or new hardware platform.
+## Operating System support
 
-### Maintenance support
+Each supported operating system has a lifecycle, such as the [Ubuntu lifecycle](https://ubuntu.com/about/release-cycle). The .NET team applies each of the lifecycle policies to inform adding and removing support for operating system versions. Support is typically removed when an operating system goes out of mainline support, at which point we stop testing and supporting it.
 
-During the maintenance support period, .NET releases are updated to mitigate security vulnerabilities, only.
+Operating system policies and schedules do not always align with the .NET lifecycle. We have sometimes supported operating system versions after mainline support has lapsed as a service to users to provide more time to transition to newer releases. We may also stop supporting an operating system before support has ended, particularly if support time frames are very long.
 
-The maintenance support period is the final 6 months of support for any release (Current or LTS). After the maintenance period ends, the release is out of support.
+Support documents are kept up to date to accurately inform your support policies.
 
-### End of support
-
-"End of support", "out of support", or "end of life" refers to the date after which fixes, updates, or technical assistance are no longer provided. As the end of support nears for a given .NET version, we recommend that you move to a newer .NET version, and reduce/remove your use of the given .NET version. After support ends, we recommend that you uninstall a given .NET version if you are no longer using it, or install the latest patch, and accelerate your plans to remove your use of that .NET version.
-
-Your use of out-of-support .NET versions may put your applications, application data, and computing environment at risk. You are strongly recommended to not use out-of-support software.
+[.NET Support and Compatibility for Linux Distributions](./linux-support.md) includes additional policies for Linux.
 
 ## Vendor support
 
-[Microsoft offers support](microsoft-support.md) for in-support releases. Updates are provided at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet) and [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/).
+Multiple commercial vendors provide support for .NET, including:
+
+* [Canonical](https://ubuntu.com/blog/install-dotnet-on-ubuntu)
+* [Microsoft](microsoft-support.md)
+* [Red Hat](http://redhatloves.net/)

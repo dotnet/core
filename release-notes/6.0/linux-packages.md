@@ -1,4 +1,4 @@
-# Linux package dependencies
+# .NET 6 Linux package dependencies
 
 .NET 6 has several dependencies that must be satisfied to run .NET apps. The commands to install these libraries are listed for multiple Linux distributions.
 

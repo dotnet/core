@@ -98,6 +98,14 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 ## .NET SDK
 
+### [7.0] Projects using certain workloads don't load, build, and or run if .NET 7 Preview SDK workloads are installed: 
+
+If a preview .NET 7 SDK is installed, projects with workload dependencies such as `microsoft.net.workload.mono.toolchain` may fail to build, load, and or run. An example of this issue is described [here](https://github.com/dotnet/sdk/issues/28947).
+
+**Resolution**
+
+The best method to resolve the issue is to uninstall any .NET 7 preview SDKs. For detailed instructions, see [dotnet uninstall instructions](https://learn.microsoft.com/en-us/dotnet/core/install/remove-runtime-sdk-versions?pivots=os-windows). For example, on Windows, dotnet preview SDKs can be uninstalled with add/remove programs. Another option is to try deleting the folder `C:\Program Files\dotnet\sdk-manifests\7.0.100\microsoft.net.workload.mono.toolchain`, but this will only work for file-based installs. [Dotnet-core-uninstall](https://github.com/dotnet/cli-lab/releases) is another option for uninstalling the .NET 7 preview SDKs.
+
 ### [RC1] dotnet restore --interactive not working for authenticated feeds
 
 The --interactive flag is not working with any dotnet.exe command in RC1. https://github.com/dotnet/sdk/issues/27597
@@ -186,3 +194,14 @@ To circumvent this issue, you will need to modify the local installation to prob
 5. Note that the install directory for the SDK may not be deleted during uninstall due to applying this workaround, e.g. when updating to 7.0.0-rc.2. If that occurs, delete the directory manually.
 
 This issue will be resolved in .NET 7 RC 2.
+
+## ASP.NET Core
+
+### [7.0] bind get, set, after can't be used in 7.0 Blazor applications
+In .NET 7 Preview 7, we've introduced [a new feature for binding values to components](https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-7-preview-7/#blazor-data-binding-get-set-after-modifiers) using the new `bind:get`, `bind:set` and `bind:after` syntax.
+As part of a follow-up work to address some issues we've learned about related to that feature, we had to take a two-part fix both in dotnet/aspnetcore and dotnet/razor-compiler repos. Unfortunately, we had an issue with our dependency update process and the razor compiler changes did not make it into the 7.0 build. As a result, when you try to use bind, get, set, after on 7.0 Blazor application, the compiler will emit code against non existing APIs and users will be presented with an error like `Can't convert from EventCallback<T> to Func<T,Task>`.
+An update for the compiler is planned as part of the 7.0.1 release that will update the compiler to target the new APIs and make this feature work as expected from them on.
+
+
+
+Users that are not relying on bind get, set, after will not be affected by this issue.
