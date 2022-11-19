@@ -16,10 +16,10 @@ Microsoft builds have multiple dependencies that must be installed:
 
 ## libc compatibility
 
-Microsoft builds supports both [glibc](https://www.gnu.org/software/libc/)- and [musl libc](https://musl.libc.org/)-based Linux distributions, per the following minimum version information.
+Microsoft builds supports both [glibc](https://www.gnu.org/software/libc/)-based and [musl libc](https://musl.libc.org/)-based Linux distributions, per the following minimum version information.
 
-- [.NET 6 minimum libc](release-notes/6.0/supported-os.md#linux)
-- [.NET 7 minimum libc](release-notes/7.0/supported-os.md#linux)
+- [.NET 6 minimum libc](release-notes/6.0/supported-os.md#libc-compatibility)
+- [.NET 7 minimum libc](release-notes/7.0/supported-os.md#libc-compatibility)
 
 You can use the following pattern to determine the libc version provided for your distribution.
 
