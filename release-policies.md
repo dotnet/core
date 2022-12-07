@@ -37,14 +37,30 @@ LTS and STS releases differ only by support duration. The .NET team follows the 
 
 Improvements are released as full re-releases of the product, called "patch releases". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday.
 
+Breaking changes are not accepted during servicing, except in the rare case to mitigate a security vulnerability or other critical issue.
+
 Patches are announced in [release notes](release-notes/README.md), on the [.NET blog](https://devblogs.microsoft.com/dotnet/category/maintenance-and-updates/), and [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
 
-Breaking changes are not accepted during servicing, except in the  rare case to mitigate a security vulnerability or other critical issue.
+Patches are published at the [.NET Website](https://dotnet.microsoft.com/download/dotnet), [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/), and in [Linux archives and registries](./linux.md).
 
 ## End of support
 
 As the end of support nears for a given .NET version, we strongly recommend you move to a newer, supported version of .NET. .NET releases that have reached end of support do not get security patches. Continuing to use an unsupported version will expose you to security vulnerabilities.
 
+## Operating System support
+
+Each supported operating system has a lifecycle, such as the [Ubuntu lifecycle](https://ubuntu.com/about/release-cycle). The .NET team applies each of the lifecycle policies to inform adding and removing support for operating system versions. Support is typically removed when an operating system version is no longer publicly supported for free, at which point we stop testing and supporting it.
+
+Operating system policies and schedules do not always align with the .NET lifecycle. We have sometimes supported operating system versions after mainline support has lapsed as a service to users to provide more time to transition to newer releases. We may also stop supporting an operating system before support has ended, particularly if support time frames are very long.
+
+Support documents are kept up to date to accurately inform your support policies.
+
+[.NET Support and Compatibility for Linux Distributions](./linux-support.md) includes additional policies for Linux.
+
 ## Vendor support
 
-[Microsoft offers support](microsoft-support.md) for .NET releases, per these policies. Updates are provided at the [.NET Website](https://dotnet.microsoft.com/download/dotnet), [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/), [Linux Package Managers](https://docs.microsoft.com/dotnet/core/install/linux), and the [Microsoft Artifact Registry](https://mcr.microsoft.com/catalog?search=dotnet/).
+Multiple commercial vendors provide support for .NET, including:
+
+* [Canonical](https://ubuntu.com/blog/install-dotnet-on-ubuntu)
+* [Microsoft](microsoft-support.md)
+* [Red Hat](http://redhatloves.net/)

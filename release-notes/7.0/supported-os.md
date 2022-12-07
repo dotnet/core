@@ -8,14 +8,11 @@ For issues with .NET on operating systems not listed here, please open a GitHub 
 
 OS                                    | Version                 | Architectures   | Lifecycle
 --------------------------------------|-------------------------|-----------------|----------
-[Windows Client][Windows-client]      | 7 SP1(**\***), 8.1      | x64, x86        | [Windows][Windows-lifecycle]
 [Windows 10 Client][Windows-client]   | Version 1607+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
 [Windows 11][Windows-client]   | Version 22000+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
 [Windows Server][Windows-Server]      | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Windows Server Core][Windows-Server] | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Nano Server][Nano-Server]            | Version 1809+           | x64             | [Windows Server][Windows-Server-lifecycle]
-
-**\*** Windows 7 SP1 is supported with [Extended Security Updates](https://docs.microsoft.com/troubleshoot/windows-client/windows-7-eos-faq/windows-7-extended-security-updates-faq) installed.
 
 [Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
@@ -33,11 +30,14 @@ OS                                    | Version               | Architectures   
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
 [Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
+[Oracle Linux][Oracle-Linux]                  | 7+                   | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 18.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
-Other distros are supported with best effort if their libc version is at least the minimum supported libc version:
+Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
+
+### Libc compatibility
 
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
 - Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
@@ -61,6 +61,8 @@ Other distros are supported with best effort if their libc version is at least t
 [OpenSUSE-lifecycle]: https://en.opensuse.org/Lifetime
 [OpenSUSE-docker]: https://hub.docker.com/r/opensuse/leap
 [OpenSUSE-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-opensuse15
+[Oracle-Linux]: https://www.oracle.com/linux/
+[Oracle-Lifecycle]: https://www.oracle.com/a/ocom/docs/elsp-lifetime-069338.pdf
 [RHEL]: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
 [RHEL-lifecycle]: https://access.redhat.com/support/policy/updates/errata/
 [RHEL-msft-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-rhel8
@@ -102,7 +104,9 @@ OS                            | Version                 | Architectures     |
 
 The following operating systems are no longer supported, starting with .NET 7.0.
 
-None yet.
+OS                                    | Version                 | Architectures     |
+--------------------------------------|-------------------------|-------------------|
+[Windows Client][Windows-client]      | 7 SP1, 8.1      | x64, x86          |
 
 ## Out of support OS versions
 

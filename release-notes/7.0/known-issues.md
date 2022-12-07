@@ -98,6 +98,14 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 ## .NET SDK
 
+### [7.0] Projects using certain workloads don't load, build, and or run if .NET 7 Preview SDK workloads are installed: 
+
+If a preview .NET 7 SDK is installed, projects with workload dependencies such as `microsoft.net.workload.mono.toolchain` may fail to build, load, and or run. An example of this issue is described [here](https://github.com/dotnet/sdk/issues/28947).
+
+**Resolution**
+
+The best method to resolve the issue is to uninstall any .NET 7 preview SDKs. For detailed instructions, see [dotnet uninstall instructions](https://learn.microsoft.com/en-us/dotnet/core/install/remove-runtime-sdk-versions?pivots=os-windows). For example, on Windows, dotnet preview SDKs can be uninstalled with add/remove programs. Another option is to try deleting the folder `C:\Program Files\dotnet\sdk-manifests\7.0.100\microsoft.net.workload.mono.toolchain`, but this will only work for file-based installs. [Dotnet-core-uninstall](https://github.com/dotnet/cli-lab/releases) is another option for uninstalling the .NET 7 preview SDKs.
+
 ### [RC1] dotnet restore --interactive not working for authenticated feeds
 
 The --interactive flag is not working with any dotnet.exe command in RC1. https://github.com/dotnet/sdk/issues/27597
