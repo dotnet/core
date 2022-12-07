@@ -25,7 +25,7 @@ Each of the distributions can be downloaded from:
 
 ## Install using deb/rpm packages
 
-DEB and RPM install packages for Linux are available from Microsoft or, natively from some Linux distributions. It is recommended that you use packages provided by you distribution, when available. See [Install .NET on Linux](https://docs.microsoft.com/en-us/dotnet/core/install/linux) for a complete list of supported Linux Distros and installer package options for each.
+DEB and RPM install packages for Linux are available from Microsoft or, natively from some Linux distributions. It is recommended that you use packages provided by you distribution, when available. See [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux) for a complete list of supported Linux Distros and installer package options for each.
 
 ## Install using Snap
 

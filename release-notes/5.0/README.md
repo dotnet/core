@@ -5,7 +5,7 @@ This release is out of support. See [.NET releases](../../releases.md) for in-su
 [.NET 5](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) was released on May 10, 2020. The release was a collaborative effort by many contributors. [.NET 5 reached end of support on May 10, 2022](https://devblogs.microsoft.com/dotnet/dotnet-5-end-of-support-update/) | It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](5.0-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/5.0) (also see [Releases](#releases))
-- [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
+- [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](5.0-supported-os.md)
 - [Known Issues](5.0-known-issues.md)

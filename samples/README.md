@@ -14,6 +14,6 @@ This directory contains .NET samples and documents.
 ## Other resources
 
 * [Install .NET](https://dotnet.microsoft.com/download/)
-* [.NET documentation](https://docs.microsoft.com/dotnet)
+* [.NET documentation](https://learn.microsoft.com/dotnet)
 * [.NET samples repo](https://github.com/dotnet/samples)
 

@@ -6,7 +6,7 @@ Due to schedule changes for the .NET Core all-up, there was a rename of the tool
 
 This does not impact RC1 release. Since the tooling and the way you write applications has changed, having DNX (or many of them) installed should not be a problem. However, one caveat is what tooling you are using for what project. For RC2 projects you may get wrong results and/or errors if you try to restore dependencies using `dnu restore`. Please use the appropriate tooling. You can see what are the new commands in the DNX to CLI migration document listed below.
 
-For updating your code, you can check [Migrating from DNX to CLI](https://docs.microsoft.com/dotnet/core/migration/from-dnx).
+For updating your code, you can check [Migrating from DNX to CLI](https://learn.microsoft.com/dotnet/core/migration/from-dnx).
 
 ## Native installers
 

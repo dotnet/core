@@ -42,7 +42,7 @@ The linker can be controlled with the following command-line switches.
 * `/p:LinkDuringPublish=false` -- Disable the linker.
 * `/p:ShowLinkerSizeComparison=true` -- Displays a table of size reductions for the application.
 
-You must disable the linker if you want to publish a [framework dependent application](https://docs.microsoft.com/dotnet/core/deploying/) while you have ILLink.Tasks as a dependency. This behavior will be changed in a later release.
+You must disable the linker if you want to publish a [framework dependent application](https://learn.microsoft.com/dotnet/core/deploying/) while you have ILLink.Tasks as a dependency. This behavior will be changed in a later release.
 
 ## Determining Code Size Reduction
 
