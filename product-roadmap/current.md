@@ -62,7 +62,7 @@ Items in each section include the following icons:
 
 ## EF
 
-[EF Core 5.0 plan](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)
+[EF Core 5.0 plan](https://learn.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)
 
 - ![Completed](media/status-completed.png "Completed icon") Fully transparent many-to-many mapping by convention
 - ![Completed](media/status-completed.png "Completed icon") Many-to-many navigation properties (a.k.a "skip navigations")
@@ -214,8 +214,8 @@ Please see the following links to view work items and themes across:
 -	![In Progress](media/status-in-progress.png "In Progress icon") Keep pace with changes in the underlying OS to ensure compatibility with the latest changes in Win10.
 
 ## Xamarin
-- ![Completed](media/status-completed.png "Completed icon") [Android 11 / API 30 Support](https://docs.microsoft.com/xamarin/android/release-notes/11/11.0)
-- ![Completed](media/status-completed.png "Completed icon") [Android smaller APK sizes](https://docs.microsoft.com/xamarin/android/release-notes/11/11.0#smaller-app-package-sizes)
+- ![Completed](media/status-completed.png "Completed icon") [Android 11 / API 30 Support](https://learn.microsoft.com/xamarin/android/release-notes/11/11.0)
+- ![Completed](media/status-completed.png "Completed icon") [Android smaller APK sizes](https://learn.microsoft.com/xamarin/android/release-notes/11/11.0#smaller-app-package-sizes)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Xcode 12 and iOS 14 Support](https://github.com/xamarin/xamarin-macios/issues/8931)
 - ![In Progress](media/status-in-progress.png "In Progress icon") Hot Restart for Android
 - ![In Progress](media/status-in-progress.png "In Progress icon") AndroidX and Google Play Services Bindings Updates
@@ -223,12 +223,12 @@ Please see the following links to view work items and themes across:
 - ![In Planning](media/status-in-planning.png "In Planning icon") Xamarin.Essentials integration to .NET 6 BCL (System namespace)
 
 ### Xamarin.Forms 5
-- ![Completed](media/status-completed.png "Completed icon") [AppTheme aka Dark Mode support](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/theming/system-theme-changes)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [CarouselView](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/carouselview/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Drag-and-drop Gestures](https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/gestures/drag-and-drop)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Gradient and Solid Brushes](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/brushes/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [Shapes and Paths](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/shapes/)
-- ![In Progress](media/status-in-progress.png "In Progress icon") [SwipeView](https://docs.microsoft.com/xamarin/xamarin-forms/user-interface/swipeview)
+- ![Completed](media/status-completed.png "Completed icon") [AppTheme aka Dark Mode support](https://learn.microsoft.com/xamarin/xamarin-forms/user-interface/theming/system-theme-changes)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [CarouselView](https://learn.microsoft.com/xamarin/xamarin-forms/user-interface/carouselview/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Drag-and-drop Gestures](https://learn.microsoft.com/xamarin/xamarin-forms/app-fundamentals/gestures/drag-and-drop)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Gradient and Solid Brushes](https://learn.microsoft.com/xamarin/xamarin-forms/user-interface/brushes/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [Shapes and Paths](https://learn.microsoft.com/xamarin/xamarin-forms/user-interface/shapes/)
+- ![In Progress](media/status-in-progress.png "In Progress icon") [SwipeView](https://learn.microsoft.com/xamarin/xamarin-forms/user-interface/swipeview)
 
 ### Xamarin.Forms vNext (.NET MAUI)
 - ![In Progress](media/status-in-progress.png "In Progress icon") [Slim Renderers](https://github.com/dotnet/maui/issues/28) - performance improvements, decouple from bindable, and introduce interfaces

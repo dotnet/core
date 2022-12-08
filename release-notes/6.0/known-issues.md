@@ -7,7 +7,7 @@ You may encounter the following known issues, which may include workarounds, mit
 #### Summary
 There have been limited reports of a failure to install the .NET 6.0.1 update via Microsoft Update, the update fails with an error code 0x80070643.
 
-.NET 6.0 can be updated to 6.0.1 via MU and .NET 6.0.1 is also included in the Visual Studio 17.0.3 update. Both options carry the .NET Core Runtime and ASP.NET Core runtime version 6.0.1 and the .NET 6 SDK version 6.0.101. When these are installed, applications will by default roll forward to using the latest runtime patch version automatically. See [framework dependent app runtime roll forward](https://docs.microsoft.com/en-us/dotnet/core/versions/selection#framework-dependent-apps-roll-forward) for more information about this behavior.
+.NET 6.0 can be updated to 6.0.1 via MU and .NET 6.0.1 is also included in the Visual Studio 17.0.3 update. Both options carry the .NET Core Runtime and ASP.NET Core runtime version 6.0.1 and the .NET 6 SDK version 6.0.101. When these are installed, applications will by default roll forward to using the latest runtime patch version automatically. See [framework dependent app runtime roll forward](https://learn.microsoft.com/dotnet/core/versions/selection#framework-dependent-apps-roll-forward) for more information about this behavior.
 
 Therefore, installing either the 6.0.1 update via MU or the VS 17.0.3 update will secure the machine for the vulnerability described in [CVE-2021-43877](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-43877).
 
@@ -25,7 +25,7 @@ As described previously the computer can be secured by installing the VS 17.0.3 
 
 ## Failure when using ICU App-Local feature in .NET 6.0.10
 ### Summary
-Applications using the [App-local ICU](https://learn.microsoft.com/en-us/dotnet/core/extensions/globalization-icu#app-local-icu) feature to deploy ICU library binaries with the application binaries can experience throwing unhandled [AccessViolationException](https://learn.microsoft.com/en-us/dotnet/api/system.accessviolationexception?view=net-6.0). The [reported issue](https://github.com/dotnet/runtime/issues/77045) contains more information about this failure.
+Applications using the [App-local ICU](https://learn.microsoft.com/dotnet/core/extensions/globalization-icu#app-local-icu) feature to deploy ICU library binaries with the application binaries can experience throwing unhandled [AccessViolationException](https://learn.microsoft.com/dotnet/api/system.accessviolationexception?view=net-6.0). The [reported issue](https://github.com/dotnet/runtime/issues/77045) contains more information about this failure.
 
 **Workarounds**
 - If having the ICU app-local feature to use ICU in the .NET 6.0 application when running on OS like `Windows Server 2019`, migration to .NET 7.0 would help as ICU gets loaded in the application without the need to use the app-local feature. .NET 7.0 supports loading ICU by default on `Windows Server 2019`.

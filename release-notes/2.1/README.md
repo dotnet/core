@@ -5,7 +5,7 @@ This release is out of support. See [.NET releases](../../releases.md) for in-su
 [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1) was an [LTS release](../../release-policies.md) and was supported for (a little more than) three years, from May 2018 to August 2021. It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.1-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/2.1) (also see [Releases](#releases))
-- [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
+- [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported operating systems](2.1-supported-os.md)
 - [Known Issues](2.1-known-issues.md)

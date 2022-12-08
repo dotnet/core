@@ -52,7 +52,7 @@ Note: All models of generation 1 and Pi Zero are not supported because the .NET 
 
 * Install the [platform dependencies from your distro's package manager](https://github.com/dotnet/core/blob/main/Documentation/prereqs.md) for .NET Core. .NET Core depends on some packages from the Linux package manager as prerequisites to running your application.
 
-For Raspbian [Debian 9 Jessie](https://docs.microsoft.com/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) you need to do the following:
+For Raspbian [Debian 9 Jessie](https://learn.microsoft.com/dotnet/core/linux-prerequisites?tabs=netcore2x#install-net-core-for-debian-8-or-debian-9-64-bit) you need to do the following:
 ```
 sudo apt-get update
 sudo apt-get install curl libunwind8 gettext apt-transport-https
@@ -62,7 +62,7 @@ sudo apt-get install curl libunwind8 gettext apt-transport-https
 
 ### Win10 IoT Core
 
-* Install [Windows 10 IoT Core](https://docs.microsoft.com/windows/iot-core/getstarted) on your Pi.
+* Install [Windows 10 IoT Core](https://learn.microsoft.com/windows/iot-core/getstarted) on your Pi.
 
 * Copy your app, i.e. whole `publish` directory mentioned above, to the Raspberry Pi and execute run `helloworld.exe` to see `Hello World!` from .NET Core running on your Pi.
 

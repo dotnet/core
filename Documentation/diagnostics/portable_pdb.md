@@ -25,7 +25,7 @@ Portable PDBs can be read on any operating system, but there are a number of pla
 * Some symbol servers (ex: SymbolSource.org [does not](https://github.com/SymbolSource/SymbolSource/issues/7#issuecomment-399747015), nuget.org [does](https://blog.nuget.org/20181116/Improved-debugging-experience-with-the-NuGet-org-symbol-server-and-snupkg.html))
 * Running post-compilation build step that consumes or modifies the PDB using older versions of tools such as CCI, CodeContracts.
 * Using .NET decompilers such as ILDASM or .NET Reflector and expecting to see source line mappings or local parameter names.
-* [MS DIA](https://docs.microsoft.com/previous-versions/visualstudio/visual-studio-2015/debugger/debug-interface-access/debug-interface-access-sdk-reference)-based tools such as WinDBG.
+* [MS DIA](https://learn.microsoft.com/previous-versions/visualstudio/visual-studio-2015/debugger/debug-interface-access/debug-interface-access-sdk-reference)-based tools such as WinDBG.
 
 Over time we plan to shrink this list of non-supported scenarios so that portable PDB can become the default choice for most usage needs.
 

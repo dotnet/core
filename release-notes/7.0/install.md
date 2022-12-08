@@ -1,6 +1,6 @@
 # .NET 7 installation instructions
 
-Concise install instructions are provided in this document and may be augmented in [release notes](README.md) for a given update. Complete [.NET installation instructions for Windows, macOS, and Linux](https://docs.microsoft.com/dotnet/core/install/) are provided for supported releases in [.NET documentation](https://docs.microsoft.com/dotnet).
+Concise install instructions are provided in this document and may be augmented in [release notes](README.md) for a given update. Complete [.NET installation instructions for Windows, macOS, and Linux](https://learn.microsoft.com/dotnet/core/install/) are provided for supported releases in [.NET documentation](https://learn.microsoft.com/dotnet).
 
 Operating system specific instructions:
 
@@ -8,7 +8,7 @@ Operating system specific instructions:
 - [macOS](install-macos.md)
 - [Windows](install-windows.md)
 
-## [Using dotnet-install-scripts](https://docs.microsoft.com/dotnet/core/tools/dotnet-install-script)
+## [Using dotnet-install-scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
 
 ### Install the latest preview version of the 7.0.1xx SDK to the specified location:
 
