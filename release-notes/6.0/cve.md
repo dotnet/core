@@ -11,7 +11,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 6.0.12 (December 2022)
   - No additional CVEs.
 - 6.0.11 (November 2022)
-  - [CVE 2022-41089 | .NET Core Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE 2022-41089 | .NET Core Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/242)
 - 6.0.10 (October 2022)
   - No additional CVEs.
 - 6.0.9 (September 2022)
