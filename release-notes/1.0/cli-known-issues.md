@@ -143,7 +143,7 @@ If you don't get this error on a Windows machine, that is most likely due to the
 
 ## `dotnet test` has changed from Preview 2 `dotnet test`
 As part of the overall Preview 3 work, `dotnet test` command has been been revised and is quite different in usage and behavior then Preview 2 `dotnet test` command. Please consult the official [dotnet test
-docs](https://docs.microsoft.com/dotnet/articles/core/preview3/tools/dotnet-test) for more information and expect more documentation in coming days.
+docs](https://learn.microsoft.com/dotnet/articles/core/preview3/tools/dotnet-test) for more information and expect more documentation in coming days.
 
 # What is this document about?
 This document outlines the known issues and workarounds for the current state of

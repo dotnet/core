@@ -1,9 +1,11 @@
-# .NET Core 3.1
+# .NET Core 3.1 - Out of Support
 
-[.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) is a [Long Term Support (LTS) release](../../release-policies.md) and will be supported for three years, from December 2019 to December 2022. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](3.1-supported-os.md).
+This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
+
+[.NET Core 3.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) was released on December 3, 2019. [.NET Core 3.1 reached end of support on December 13, 2022](https://devblogs.microsoft.com/dotnet/net-core-3-1-will-reach-end-of-support-on-december-13-2022/) | It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](3.1-supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/3.1) (also see [Releases](#releases))
-- [Installation docs](https://docs.microsoft.com/dotnet/core/install/)
+- [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](3.1-supported-os.md)
 - [Known Issues](3.1-known-issues.md)
@@ -13,6 +15,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2022/12/13 | [3.1.32](./3.1.32/3.1.32.md) |
 | 2022/11/08 | [3.1.31](./3.1.31/3.1.31.md) |
 | 2022/10/11 | [3.1.30](./3.1.30/3.1.30.md) |
 | 2022/09/13 | [3.1.29](./3.1.29/3.1.29.md) |

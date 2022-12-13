@@ -17,9 +17,9 @@ OS                                    | Version                 | Architectures 
 [Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
 [win-client-docker]: https://hub.docker.com/_/microsoft-windows
-[Windows-Server-lifecycle]: https://docs.microsoft.com/windows-server/get-started/windows-server-release-info
-[Nano-Server]: https://docs.microsoft.com/windows-server/get-started/getting-started-with-nano-server
-[Windows-Server]: https://docs.microsoft.com/windows-server/
+[Windows-Server-lifecycle]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
+[Windows-Server]: https://learn.microsoft.com/windows-server/
 
 ## Linux
 
@@ -48,31 +48,31 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 [CentOS]: https://www.centos.org/
 [CentOS-lifecycle]:https://wiki.centos.org/FAQ/General
 [CentOS-docker]: https://hub.docker.com/_/centos
-[CentOS-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-centos8
+[CentOS-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-centos8
 [Debian]: https://www.debian.org/
 [Debian-lifecycle]: https://wiki.debian.org/DebianReleases
-[Debian-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-debian10
+[Debian-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-debian10
 [Fedora]: https://getfedora.org/
 [Fedora-lifecycle]: https://fedoraproject.org/wiki/End_of_life
 [Fedora-docker]: https://hub.docker.com/_/fedora
-[Fedora-msft-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-fedora32
+[Fedora-msft-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-fedora32
 [Fedora-pm]: https://fedoraproject.org/wiki/DotNet
 [OpenSUSE]: https://opensuse.org/
 [OpenSUSE-lifecycle]: https://en.opensuse.org/Lifetime
 [OpenSUSE-docker]: https://hub.docker.com/r/opensuse/leap
-[OpenSUSE-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-opensuse15
+[OpenSUSE-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-opensuse15
 [Oracle-Linux]: https://www.oracle.com/linux/
 [Oracle-Lifecycle]: https://www.oracle.com/a/ocom/docs/elsp-lifetime-069338.pdf
 [RHEL]: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
 [RHEL-lifecycle]: https://access.redhat.com/support/policy/updates/errata/
-[RHEL-msft-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-rhel8
+[RHEL-msft-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-rhel8
 [RHEL-pm]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/developing_.net_applications_in_rhel_8/using-net-core-on-rhel_gsg#installing-net-core_gsg
 [SLES]: https://www.suse.com/products/server/
 [SLES-lifecycle]: https://www.suse.com/lifecycle/
-[SLES-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-sles15
+[SLES-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-sles15
 [Ubuntu]: https://ubuntu.com/
 [Ubuntu-lifecycle]: https://wiki.ubuntu.com/Releases
-[Ubuntu-pm]: https://docs.microsoft.com/dotnet/core/install/linux-package-manager-ubuntu-2004
+[Ubuntu-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-ubuntu-2004
 [glibc]: https://www.gnu.org/software/libc/
 [musl]: https://musl.libc.org/
 

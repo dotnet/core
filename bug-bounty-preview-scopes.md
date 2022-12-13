@@ -20,7 +20,7 @@ Read the .NET bug bounty [terms and conditions](https://www.microsoft.com/en-us/
 
 | Feature | Description | Documentation |
 |---------|-------------|---------------|
-| HTTP/3 | HTTP/3 support in the Kestrel Web Server | [Enabling HTTP/3](https://docs.microsoft.com/aspnet/core/fundamentals/servers/kestrel/http3?view=aspnetcore-6.0) |
+| HTTP/3 | HTTP/3 support in the Kestrel Web Server | [Enabling HTTP/3](https://learn.microsoft.com/aspnet/core/fundamentals/servers/kestrel/http3?view=aspnetcore-6.0) |
 
 ## In-scope preview features in nightly builds of the upcoming version (.NET 7)
 

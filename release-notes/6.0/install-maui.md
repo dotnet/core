@@ -45,14 +45,14 @@ Then run the tool and follow the instructions presented:
 $ maui-check
 ```
 
-See our [documentation](https://docs.microsoft.com/dotnet/maui/get-started/installation) for further details about getting started, including installing Windows App SDK requirements.
+See our [documentation](https://learn.microsoft.com/dotnet/maui/get-started/installation) for further details about getting started, including installing Windows App SDK requirements.
 
 ### Android
 
 Prerequisites:
 
 * [Install .NET 6.0.0 rc 2](#downloads)
-* Android SDK Platform API 31. 
+* Android SDK Platform API 31.
 * [JDK 11](https://www.microsoft.com/openjdk)
 
 ### iOS, Mac Catalyst, and macOS (Cocoa)

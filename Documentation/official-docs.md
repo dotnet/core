@@ -4,10 +4,10 @@ Microsoft maintains official documentation for .NET, listed below. Both .NET and
 
 ## .NET
 
-- [Conceptual docs](https://docs.microsoft.com/dotnet/core/)
-- [API docs](https://docs.microsoft.com/dotnet/api/)
+- [Conceptual docs](https://learn.microsoft.com/dotnet/core/)
+- [API docs](https://learn.microsoft.com/dotnet/api/)
 
 ## .NET Framework
 
-- [Conceptual docs](https://docs.microsoft.com/dotnet/framework/)
-- [API docs](https://docs.microsoft.com/dotnet/api/)
+- [Conceptual docs](https://learn.microsoft.com/dotnet/framework/)
+- [API docs](https://learn.microsoft.com/dotnet/api/)
