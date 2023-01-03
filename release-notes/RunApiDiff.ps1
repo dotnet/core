@@ -4,11 +4,11 @@
 
 # RunApiDiff.ps1
 # -PreviousDotNetVersion        : The 'before' .NET version: '6.0', '7.0', '8.0', etc.
-# -PreviousPreviewOrRC          : An optional word that indicates if the 'before' version is a Preview, an RC, or nothing. Accepted values: "preview", "rc". Leave empty for a released version.
-# -PreviousPreviewNumberVersion : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. Leave empty for a released version.
+# -PreviousPreviewOrRC          : An optional word that indicates if the 'before' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
+# -PreviousPreviewNumberVersion : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...).
 # -CurrentDotNetVersion         : The 'after' .NET version: '6.0', '7.0', '8.0', etc.
-# -CurrentPreviewOrRC           : An optional word that indicates if the 'after' version is a Preview, an RC, or nothing. Accepted values: "preview", "rc". Leave empty for a released version.
-# -CurrentPreviewNumberVersion  : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. Leave empty for a released version.
+# -CurrentPreviewOrRC           : An optional word that indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
+# -CurrentPreviewNumberVersion  : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...).
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo.
 # -ArcadeRepo                   : The full path to your local clone of the dotnet/arcade repo.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
@@ -22,30 +22,30 @@ Param (
     [string]
     $PreviousDotNetVersion # 7.0, 8.0, 9.0, ...
 ,
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$true)]
     [string]
-    [ValidateSet("preview", "rc", "")]
+    [ValidateSet("preview", "rc", "ga")]
     $PreviousPreviewOrRC
 ,
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$true)]
     [ValidatePattern("(\d+)?")]
     [string]
-    $PreviousPreviewNumberVersion # 1, 2, 3, ..., or even ""
+    $PreviousPreviewNumberVersion # 0, 1, 2, 3, ...
 ,
     [Parameter(Mandatory=$true)]
     [ValidatePattern("\d+\.\d")]
     [string]
     $CurrentDotNetVersion # 7.0, 8.0, 9.0, ...
 ,
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$true)]
     [string]
-    [ValidateSet("preview", "rc", "")]
+    [ValidateSet("preview", "rc", "ga")]
     $CurrentPreviewOrRC
 ,
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$true)]
     [ValidatePattern("(\d+)?")]
     [string]
-    $CurrentPreviewNumberVersion # 1, 2, 3, ..., or even ""
+    $CurrentPreviewNumberVersion # 0, 1, 2, 3, ...
 ,
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
@@ -64,44 +64,28 @@ Param (
 )
 
 
-### Globals ###
-
-$ErrorActionPreference = "Stop"
-
-$PreviousDotNetVersionPreviewAndNumber=$PreviousDotNetVersion
-If (-Not [System.String]::IsNullOrWhiteSpace($PreviousPreviewNumberVersion))
-{
-    $PreviousDotNetVersionPreviewAndNumber="$PreviousDotNetVersion-$PreviousPreviewOrRC$PreviousPreviewNumberVersion"
-}
-$CurrentDotNetVersionPreviewAndNumber=$CurrentDotNetVersion
-If (-Not [System.String]::IsNullOrWhiteSpace($CurrentPreviewNumberVersion))
-{
-    $CurrentDotNetVersionPreviewAndNumber="$CurrentDotNetVersion-$CurrentPreviewOrRC$CurrentPreviewNumberVersion"
-}
-
-
 ### Functions ###
 
 Function WriteColor
 {
-	Param (
-		[ValidateNotNullOrEmpty()]
-		[string] $newColor
-	)
+    Param (
+        [ValidateNotNullOrEmpty()]
+        [string] $newColor
+    )
 
-	$oldColor = $host.UI.RawUI.ForegroundColor
-	$host.UI.RawUI.ForegroundColor = $newColor
+    $oldColor = $host.UI.RawUI.ForegroundColor
+    $host.UI.RawUI.ForegroundColor = $newColor
 
-	If ($args)
-	{
-		Write-Output $args
-	}
-	Else
-	{
-		$input | Write-Output
-	}
+    If ($args)
+    {
+        Write-Output $args
+    }
+    Else
+    {
+        $input | Write-Output
+    }
 
-	$host.UI.RawUI.ForegroundColor = $oldColor
+    $host.UI.RawUI.ForegroundColor = $oldColor
 }
 
 Function VerifyPathOrExit
@@ -181,6 +165,168 @@ Function RunCommand
     Invoke-Expression "$command"
 }
 
+Function GetDotNetFullName
+{
+    Param (
+        [Parameter(Mandatory=$true)]
+        [bool]
+        $areVersionsEqual
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("\d+\.\d")]
+        [string]
+        $dotNetVersion # 7.0, 8.0, 9.0, ...
+    ,
+        [Parameter(Mandatory=$true)]
+        [string]
+        [ValidateSet("preview", "rc", "ga")]
+        $previewOrRC
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("(\d+)?")]
+        [string]
+        $previewNumberVersion # 0, 1, 2, 3, ...
+    )
+
+    If (-Not $areVersionsEqual)
+    {
+        Return "$dotNetVersion.$previewNumberVersion"
+    }
+
+    If ($previewOrRC -eq "ga")
+    {
+        If ($previewNumberVersion -eq "0")
+        {
+            # Example: Don't return "7.0-ga0", instead just return "7.0-ga"
+            Return "$dotNetVersion-$previewOrRC"
+        }
+
+        # Examples: Don't include "ga", instead just return "7.0.1", "7.0.2"
+        Return "$dotNetVersion.$previewNumberVersion"
+    }
+
+    # Examples: "7.0-preview5", "7.0-rc2", "7.0-ga"
+    Return "$dotNetVersion-$previewOrRC$previewNumberVersion"
+}
+
+Function GetDotNetFriendlyName
+{
+    Param (
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("\d+\.\d")]
+        [string]
+        $DotNetVersion # 7.0, 8.0, 9.0, ...
+    ,
+        [Parameter(Mandatory=$true)]
+        [string]
+        [ValidateSet("preview", "rc", "ga")]
+        $PreviewOrRC
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("(\d+)?")]
+        [string]
+        $PreviewNumberVersion # 0, 1, 2, 3, ...
+    )
+
+    $friendlyPreview = ""
+    If ($PreviewOrRC -eq "preview")
+    {
+        $friendlyPreview = "Preview"
+    }
+    ElseIf ($PreviewOrRC -eq "rc")
+    {
+        $friendlyPreview = "RC"
+    }
+    ElseIf ($PreviewOrRC -eq "ga")
+    {
+        $friendlyPreview = "GA"
+        If ($PreviewNumberVersion -eq 0)
+        {
+            # Example: Don't return "7.0 GA 0", instead just return "7.0 GA"
+            Return ".NET $DotNetVersion $friendlyPreview"
+        }
+
+        # Examples: Don't include "ga", instead just return "7.0.1", "7.0.2"
+        Return ".NET $DotNetVersion.$PreviewNumberVersion"
+    }
+
+    # Examples: "7.0 Preview 5", "7.0 RC 2"
+    Return ".NET $DotNetVersion $friendlyPreview $PreviewNumberVersion"
+}
+
+Function GetPreviewOrRCFolderName
+{
+    Param (
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("\d+\.\d")]
+        [string]
+        $dotNetVersion # 7.0, 8.0, 9.0, ...
+    ,
+        [Parameter(Mandatory=$true)]
+        [string]
+        [ValidateSet("preview", "rc", "ga")]
+        $previewOrRC
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("(\d+)?")]
+        [string]
+        $previewNumberVersion # 0, 1, 2, 3, ...
+    )
+
+    If ($previewOrRC -eq "ga")
+    {
+        If ($previewNumberVersion -eq "0")
+        {
+            # return "ga", not "ga0"
+            Return $previewOrRC
+        }
+
+        # return "7.0.1", "7.0.2", not "ga1, ga2"
+        Return "$dotNetVersion$previewNumberVersion"
+    }
+
+    Return "$previewOrRC$previewNumberVersion"
+}
+
+Function GetPreviewFolderPath
+{
+    Param (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $rootFolder #"D:\\core"
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("\d+\.\d")]
+        [string]
+        $dotNetVersion # 7.0, 8.0, 9.0, ...
+    ,
+        [Parameter(Mandatory=$true)]
+        [string]
+        [ValidateSet("preview", "rc", "ga")]
+        $previewOrRC
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidatePattern("(\d+)?")]
+        [string]
+        $previewNumberVersion # 0, 1, 2, 3, ...
+    ,
+        [Parameter(Mandatory=$true)]
+        [bool]
+        $areVersionsEqual
+    )
+
+    $prefixFolder = [IO.Path]::Combine($rootFolder, "release-notes", $dotNetVersion)
+    $apiDiffFolderName = "api-diff"
+    If ($areVersionsEqual)
+    {
+        $previewOrRCFolderName = GetPreviewOrRCFolderName $dotNetVersion $previewOrRC $previewNumberVersion
+        Return [IO.Path]::Combine($prefixFolder, "preview", $apiDiffFolderName, $previewOrRCFolderName)
+    }
+    
+    Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
+}
+
 Function RunAsmDiff
 {
     Param (
@@ -241,11 +387,21 @@ Function ReplaceTitle
         [ValidateNotNullOrEmpty()]
         [string]
         $tableOfContentsFilePath
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $previousFullName
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $currentFullName
     )
 
     VerifyPathOrExit $tableOfContentsFilePath
 
-    $correctTitle="# API Difference ${PreviousDotNetVersionPreviewAndNumber} vs ${CurrentDotNetVersionPreviewAndNumber}"
+    $correctTitle="# API Difference ${previousFullName} vs ${currentFullName}"
 
     WriteColor cyan "Replacing title of table of contents with correct one: $tableOfContentsFilePath"
     $updatedTableOfContents = .{
@@ -263,6 +419,16 @@ Function CreateReadme
         [ValidateNotNullOrEmpty()]
         [string]
         $previewFolderPath
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $dotNetFriendlyName
+    ,
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $dotNetFullName
     )
 
     $readmePath=[IO.Path]::Combine($previewFolderPath, "README.md")
@@ -272,25 +438,13 @@ Function CreateReadme
     }
     New-Item -ItemType File $readmePath
 
-    $friendlyPreviewOrRC = "";
-    If ($CurrentPreviewOrRC -eq "preview")
-    {
-        $friendlyPreviewOrRC = "Preview"
-    }
-    ElseIf ($CurrentPreviewOrRC -eq "rc")
-    {
-        $friendlyPreviewOrRC = "RC"
-    }
-
-    $friendlyDotNetFullName = ".NET $CurrentDotNetVersion $friendlyPreviewOrRC $CurrentPreviewNumberVersion"
-
-    Add-Content $readmePath "# $friendlyDotNetFullName API Changes"
+    Add-Content $readmePath "# $dotNetFriendlyName API Changes"
     Add-Content $readmePath ""
-    Add-Content $readmePath "The following API changes were made in $($friendlyDotNetFullName):"
+    Add-Content $readmePath "The following API changes were made in $($dotNetFriendlyName):"
     Add-Content $readmePath ""
-    Add-Content $readmePath "- [Microsoft.NETCore.App](./Microsoft.NETCore.App/$CurrentDotNetVersionPreviewAndNumber.md)"
-    Add-Content $readmePath "- [Microsoft.AspNetCore.App](./Microsoft.AspNetCore.App/$CurrentDotNetVersionPreviewAndNumber.md)"
-    Add-Content $readmePath "- [Microsoft.WindowsDesktop.App](./Microsoft.WindowsDesktop.App/$CurrentDotNetVersionPreviewAndNumber.md)"
+    Add-Content $readmePath "- [Microsoft.NETCore.App](./Microsoft.NETCore.App/$dotNetFullName.md)"
+    Add-Content $readmePath "- [Microsoft.AspNetCore.App](./Microsoft.AspNetCore.App/$dotNetFullName.md)"
+    Add-Content $readmePath "- [Microsoft.WindowsDesktop.App](./Microsoft.WindowsDesktop.App/$dotNetFullName.md)"
 }
 
 Function RebuildIfExeNotFound
@@ -346,12 +500,12 @@ Function DownloadPackage
         [string]
         $dotNetVersion
     ,
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("preview", "rc", "")]
+        [Parameter(Mandatory=$true)]
+        [ValidateSet("preview", "rc", "ga")]
         [string]
         $previewOrRC
     ,
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$true)]
         [ValidatePattern("(\d+)?")]
         [string]
         $previewNumberVersion
@@ -366,10 +520,14 @@ Function DownloadPackage
 
     $refPackageName = "$fullSdkName.Ref"
     $nugetSource = "https://api.nuget.org/v3/index.json"
-    $searchTerm = "$dotNetversion.*"
-    If (-Not ([System.String]::IsNullOrWhiteSpace($previewOrRC)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion)))
+    $searchTerm = ""
+    If ($previewOrRC -eq "ga")
     {
-        $searchTerm = "$searchTerm-$previewOrRC.$previewNumberVersion*"
+        $searchTerm = "$dotNetversion.$previewNumberVersion"
+    }
+    ElseIf (-Not ([System.String]::IsNullOrWhiteSpace($previewOrRC)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion)))
+    {
+        $searchTerm = "$dotNetversion.*-$previewOrRC.$previewNumberVersion*"
     }
 
     $results = Find-Package -AllVersions -Source $nugetSource -Name $refPackageName -AllowPrereleaseVersions | Where-Object -Property Version -Like $searchTerm | Sort-Object Version -Descending
@@ -401,7 +559,16 @@ Function DownloadPackage
     $resultingPath.value = $dllPath
 }
 
+
 ### Execution ###
+
+## Generate strings with no whitespace
+
+$areVersionsEqual = $PreviousDotNetVersion -eq $CurrentDotNetVersion
+
+$previousDotNetFullName = GetDotNetFullName $areVersionsEqual $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
+$currentDotNetFullName = GetDotNetFullName $areVersionsEqual $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
+
 
 ## Check folders passed as parameters exist
 
@@ -447,10 +614,9 @@ $asmDiffArtifactsPath = [IO.Path]::Combine($ArcadeRepo ,"artifacts", "bin", "Mic
 $asmDiffExe = [IO.Path]::Combine($asmDiffArtifactsPath, "Release", "net7.0", "Microsoft.DotNet.AsmDiff.exe")
 ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
 
-
 ## Recreate api-diff folder in core repo folder
 
-$previewFolderPath = [IO.Path]::Combine($CoreRepo, "release-notes", $CurrentDotNetVersion, "preview", "api-diff", "$CurrentPreviewOrRC$CurrentPreviewNumberVersion")
+$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $areVersionsEqual
 WriteColor cyan "Checking existing diff folder: $previewFolderPath"
 RecreateFolder $previewFolderPath
 
@@ -472,7 +638,7 @@ RecreateFolder $windowsDesktopTargetFolder
 
 ## Run the Asm-Diff commands
 
-$tableOfContentsFile = "$CurrentDotNetVersionPreviewAndNumber.md"
+$tableOfContentsFile = "$currentDotNetFullName.md"
 
 $tableOfContentsFilePathNETCore = [IO.Path]::Combine($netCoreTargetFolder, $tableOfContentsFile)
 $tableOfContentsFilePathAspNetCore = [IO.Path]::Combine($aspNetCoreTargetFolder, $tableOfContentsFile)
@@ -485,8 +651,10 @@ RunAsmDiff $asmDiffExe $tableOfContentsFilePathWindowsDesktop $windowsDesktopBef
 
 ## Replace the first line of the summmary files with the correct title, and write final readme
 
-ReplaceTitle $tableOfContentsFilePathNETCore
-ReplaceTitle $tableOfContentsFilePathAspNetCore
-ReplaceTitle $tableOfContentsFilePathWindowsDesktop
+ReplaceTitle $tableOfContentsFilePathNETCore $previousDotNetFullName $currentDotNetFullName
+ReplaceTitle $tableOfContentsFilePathAspNetCore $previousDotNetFullName $currentDotNetFullName
+ReplaceTitle $tableOfContentsFilePathWindowsDesktop $previousDotNetFullName $currentDotNetFullName
 
-CreateReadme $previewFolderPath
+$currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
+
+CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
