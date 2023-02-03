@@ -106,7 +106,7 @@ OS                            | Version                 | Architectures     |
 
 ## QEMU
 
-.NET is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
+.NET 7 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
 ## Support changes from .NET 6.0
 
