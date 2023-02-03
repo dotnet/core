@@ -21,6 +21,8 @@ OS                                    | Version                 | Architectures 
 [Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
 [Windows-Server]: https://learn.microsoft.com/windows-server/
 
+.NET 7 is supported in the x64 emulator on Windows 11 Arm64.
+
 ## Linux
 
 OS                                    | Version               | Architectures     | Lifecycle
@@ -82,6 +84,8 @@ OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
 [macOS][macOS]                | 10.15+                    | x64, Arm64        |
 
+.NET 7 is supported in the Rosetta 2 x64 emulator.
+
 [macOS]: https://support.apple.com/macos
 
 ## Android
@@ -99,6 +103,10 @@ OS                            | Version                 | Architectures     |
 [iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
 
 [iOS]: https://support.apple.com/ios
+
+## QEMU
+
+.NET is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
 ## Support changes from .NET 6.0
 
