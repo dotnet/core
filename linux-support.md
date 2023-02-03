@@ -61,7 +61,7 @@ Red Hat supports .NET via [Red Hat Enterprise Linux](http://redhatloves.net/), p
 - .NET 6 is supported in RHEL 7+.
 - .NET 7 is supported in RHEL 8+.
 
-## Ubuntu Family Support
+## Ubuntu Commercial Support
 
 Canonical supports .NET on Ubuntu via APT archives, per the following.
 
