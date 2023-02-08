@@ -44,7 +44,7 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
 - Arm32 [glibc][glibc] 2.27 (from Ubuntu 18.04)
 - Arm64: [glibc][glibc] 2.23 (from Ubuntu 16.04)
-  - Starting in 7.0.4. In 7.0.3 and earlier: [glibc][glibc] 2.27 (from Ubuntu 18.04)
+- Arm64: [glibc][glibc] 2.27 (applies to 7.0.3 and earlier)
 - Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.15)
 
 [Alpine]: https://alpinelinux.org/
