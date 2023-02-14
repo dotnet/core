@@ -10,11 +10,11 @@ The following table lists in-support .NET releases.
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 7](release-notes/7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7) | [STS][policies] | [7.0.2][7.0.2] | May 14, 2024 |
-| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.13][6.0.13] | November 12, 2024 |
+| [.NET 7](release-notes/7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7) | [STS][policies] | [7.0.3][7.0.3] | May 14, 2024 |
+| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.14][6.0.14] | November 12, 2024 |
 
-[7.0.2]: release-notes/7.0/7.0.2/7.0.2.md
-[6.0.13]: release-notes/6.0/6.0.13/6.0.13.md
+[7.0.3]: release-notes/7.0/7.0.3/7.0.3.md
+[6.0.14]: release-notes/6.0/6.0.14/6.0.14.md
 
 ## End-of-life .NET versions
 
