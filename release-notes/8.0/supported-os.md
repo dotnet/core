@@ -97,13 +97,18 @@ OS                            | Version                 | Architectures     |
 
 [Android]: https://support.google.com/android
 
-## iOS / tvOS
+## iOS / tvOS / MacCatalyst
 
 OS                            | Version                 | Architectures     |
 ------------------------------|-------------------------|-------------------|
-[iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
+[iOS][iOS]                    | 11.0+                   | Arm64             |
+[iOS Simulator][iOS]          | 11.0+                   | x64, Arm64        |
+[tvOS][tvOS]                  | 11.0+                   | Arm64             |
+[tvOS Simulator][tvOS]        | 11.0+                   | x64, Arm64        |
+[MacCatalyst][macOS]          | 10.15+, 11.0+ on Arm64  | x64, Arm64        |
 
 [iOS]: https://support.apple.com/ios
+[tvOS]: https://support.apple.com/apple-tv
 
 ## QEMU
 
