@@ -3,6 +3,11 @@
 You may encounter the following known issues, which may include workarounds, mitigations, or expected resolution timeframes.
 
 ## .NET SDK
-### [8.0 Preview 1] Using the `--output` option fails for many commands when targeting a solution
 
-A [breaking change](https://learn.microsoft.com/dotnet/core/compatibility/sdk/7.0/solution-level-output-no-longer-valid) was introduced that was intended to prevent common build errors. However, many users relied on this behavior to build their projects. We have downgraded this change to a warning and are intent on releasing this fix in .NET 8.0 Preview 2. Please see the linked breaking change notification for more details.
+## .NET MAUI
+
+For details about known issues, please refer to the individual repositories:
+
+* [.NET MAUI](https://github.com/dotnet/maui/wiki/Known-Issues/)
+* [Android](https://github.com/xamarin/xamarin-android/wiki/Known-issues-in-.NET)
+* [iOS and macOS](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET8)
