@@ -9,7 +9,7 @@ Support has two key benefits:
 * Patches are provided (for free) as required for functional or security issues, typically monthly.
 * You can [contact Microsoft support to request help](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) (potentially at a cost).
 
-You can also request community support on GitHub (for free), but there is no guarantee on a quick reply.
+You can also request [community support on GitHub](https://github.com/dotnet/core) (for free), but there is no guarantee on a quick reply.
 
 Support is conditional on using the latest .NET patch update and a supported operating system, as defined by:
 
