@@ -21,6 +21,8 @@ OS                                    | Version                 | Architectures 
 [Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
 [Windows-Server]: https://learn.microsoft.com/windows-server/
 
+.NET 7 is supported in the x64 emulator on Windows 11 Arm64.
+
 ## Linux
 
 OS                                    | Version               | Architectures     | Lifecycle
@@ -30,7 +32,7 @@ OS                                    | Version               | Architectures   
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
 [Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
-[Oracle Linux][Oracle-Linux]                  | 7+                   | x64               | [Oracle][Oracle-lifecycle]
+[Oracle Linux][Oracle-Linux]          | 7+                    | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 18.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
@@ -40,7 +42,9 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 ### Libc compatibility
 
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
-- Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
+- Arm32 [glibc][glibc] 2.27 (from Ubuntu 18.04)
+- Arm64: [glibc][glibc] 2.23 (from Ubuntu 16.04)
+- Arm64: [glibc][glibc] 2.27 (applies to 7.0.3 and earlier)
 - Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.15)
 
 [Alpine]: https://alpinelinux.org/
@@ -82,6 +86,8 @@ OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
 [macOS][macOS]                | 10.15+                    | x64, Arm64        |
 
+.NET 7 is supported in the Rosetta 2 x64 emulator.
+
 [macOS]: https://support.apple.com/macos
 
 ## Android
@@ -99,6 +105,10 @@ OS                            | Version                 | Architectures     |
 [iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
 
 [iOS]: https://support.apple.com/ios
+
+## QEMU
+
+.NET 7 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
 ## Support changes from .NET 6.0
 

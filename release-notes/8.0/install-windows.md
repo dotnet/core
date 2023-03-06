@@ -1,6 +1,6 @@
-# .NET 7 installation instructions for Windows
+# .NET 8 installation instructions for Windows
 
-The following instructions demonstrate installing .NET 7 on Windows. These instructions augment the more general [.NET install instructions](install.md), including installing with `.zip` files, that work on multiple operating systems.
+The following instructions demonstrate installing .NET 8 on Windows. These instructions augment the more general [.NET install instructions](install.md), including installing with `.zip` files, that work on multiple operating systems.
 
 ## Distributions
 
@@ -18,8 +18,8 @@ We recommend you install the .NET SDK to develop and build applications, and to 
 
 Each of the distributions can be downloaded from:
 
-- [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/7.0)
-- [.NET 7 release notes](README.md)
+- [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [.NET 8 release notes](README.md)
 
 [Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
@@ -27,9 +27,9 @@ Each of the distributions can be downloaded from:
 
 You can now install .NET updates using the Windows Package Manager CLI (winget):
 
-* To install the .NET 7 runtime: ```winget install dotnet-runtime-7```
+* To install the .NET 8 runtime: ```winget install dotnet-runtime-8```
 
-* To install the .NET 7 SDK: ```winget install dotnet-sdk-7```
+* To install the .NET 8 SDK: ```winget install dotnet-sdk-8```
 
 * To update an existing installation: ```winget upgrade```
 
@@ -53,13 +53,13 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```console
-C:\>curl -Lo dotnet.zip https://download.visualstudio.microsoft.com/download/pr/d0114a9c-5b5a-4af7-aa63-076f318ad181/e13facbfca6798141e1c67ae0c83f8d1/dotnet-sdk-7.0.100-rc.2.22477.23-win-x86.zip
+C:\>curl -Lo dotnet.zip https://download.visualstudio.microsoft.com/download/pr/a1b7c03d-8c06-4d07-a99d-b7c919fc9b9a/0b57d52282f0e56c8701aaafd31cab90/dotnet-sdk-8.0.100-preview.1.23115.2-win-x64.zip
 C:\>tar -C dotnet -xf dotnet.zip
 C:\>del dotnet.zip
 C:\>set DOTNET_ROOT=C:\dotnet
 C:\>set PATH=%PATH%;C:\dotnet
 C:\>dotnet --version
-7.0.100-rc.2.22477.23
+8.0.100-preview.1.23115.2
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.

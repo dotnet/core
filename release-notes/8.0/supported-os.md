@@ -1,6 +1,6 @@
-# .NET 6 - Supported OS versions
+# .NET 8 - Supported OS versions
 
-[.NET 6](README.md) is an [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
+[.NET 8](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
 
 For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . See [.NET Repos](../../Documentation/core-repos.md) for the repository list.
 
@@ -8,14 +8,11 @@ For issues with .NET on operating systems not listed here, please open a GitHub 
 
 OS                                    | Version                 | Architectures   | Lifecycle
 --------------------------------------|-------------------------|-----------------|----------
-[Windows Client][Windows-client]      | 7 SP1(**\***), 8.1      | x64, x86        | [Windows][Windows-lifecycle]
 [Windows 10 Client][Windows-client]   | Version 1607+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
-[Windows 11][Windows-client]   | Version 22000+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
-[Windows Server][Windows-Server]      | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
-[Windows Server Core][Windows-Server] | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
+[Windows 11][Windows-client]          | Version 22000+          | x64, x86, Arm64 | [Windows][Windows-lifecycle]
+[Windows Server][Windows-Server]      | 2012+                   | x64, x86        | [Windows Server][Windows-Server-lifecycle]
+[Windows Server Core][Windows-Server] | 2012+                   | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Nano Server][Nano-Server]            | Version 1809+           | x64             | [Windows Server][Windows-Server-lifecycle]
-
-**\*** Windows 7 SP1 is supported with [Extended Security Updates](https://learn.microsoft.com/troubleshoot/windows-client/windows-7-eos-faq/windows-7-extended-security-updates-faq) installed.
 
 [Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
@@ -24,29 +21,26 @@ OS                                    | Version                 | Architectures 
 [Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
 [Windows-Server]: https://learn.microsoft.com/windows-server/
 
-.NET 6 is supported in the x64 emulator on Windows 11 Arm64.
-
 ## Linux
 
 OS                                    | Version               | Architectures     | Lifecycle
 --------------------------------------|-----------------------|-------------------|----------
-[Alpine Linux][Alpine]                | 3.13+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
-[CentOS][CentOS]                      | 7+                    | x64               | [CentOS][CentOS-lifecycle]
-[Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
-[Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
+[Alpine Linux][Alpine]                | 3.17+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
+[Debian][Debian]                      | 11+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
+[Fedora][Fedora]                      | 37+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
-[Oracle Linux][Oracle-Linux]                  | 7+                   | x64               | [Oracle][Oracle-lifecycle]
-[Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
+[Oracle Linux][Oracle-Linux]          | 8+                    | x64               | [Oracle][Oracle-lifecycle]
+[Red Hat Enterprise Linux][RHEL]      | 8+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
-[Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
+[Ubuntu][Ubuntu]                      | 20.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
 Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
 
 ### Libc compatibility
 
 - x64: [glibc][glibc] 2.17 (from CentOS 7)
-- Arm32, Arm64: [glibc][glibc] 2.23 (from Ubuntu 16.04)
-- Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.13)
+- Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
+- Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.15)
 
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://alpinelinux.org/releases/
@@ -89,8 +83,6 @@ OS                            | Version                   | Architectures     |
 
 [macOS]: https://support.apple.com/macos
 
-.NET 6 is supported in the Rosetta 2 x64 emulator.
-
 ## Android
 
 OS                            | Version                 | Architectures     |
@@ -107,21 +99,18 @@ OS                            | Version                 | Architectures     |
 
 [iOS]: https://support.apple.com/ios
 
-## QEMU
+## Support changes from .NET 6.0
 
-.NET 6 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
+The following operating systems are no longer supported, starting with .NET 7.0.
 
-## Support changes from .NET 5.0
-
-The following operating systems are no longer supported, starting with .NET 6.0.
-
-None yet.
+OS                                    | Version                 | Architectures     |
+--------------------------------------|-------------------------|-------------------|
+[Windows Client][Windows-client]      | 7 SP1, 8.1      | x64, x86          |
 
 ## Out of support OS versions
 
-Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 6.0][OS-lifecycle-policy].
+Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 8.0][OS-lifecycle-policy].
 
-* Alpine 3.12
-* macOS 10.13
+None yet.
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md

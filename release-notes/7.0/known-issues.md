@@ -204,6 +204,11 @@ This issue will be resolved in .NET 7 RC 2.
 The logger will also be renamed for 17.6.
 https://github.com/dotnet/msbuild/pull/8343
 
+
+### [7.0.200] Using the `--output` option fails for many commands when targeting a solution
+
+A [breaking change](https://learn.microsoft.com/dotnet/core/compatibility/sdk/7.0/solution-level-output-no-longer-valid) was introduced that was intended to prevent common build errors. However, many users relied on this behavior to build their projects. We have downgraded this change to a warning and are intent on releasing this fix in 7.0.201. Please see the linked breaking change notification for more details.
+
 ## ASP.NET Core
 
 ### [7.0] bind get, set, after can't be used in 7.0 Blazor applications
