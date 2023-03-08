@@ -23,6 +23,18 @@ Each of the distributions can be downloaded from:
 
 [Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
+## Windows Package Manager CLI (winget)
+
+You can now install .NET updates using the Windows Package Manager CLI (winget):
+
+* To install the .NET 7 runtime: ```winget install dotnet-runtime-7```
+
+* To install the .NET 7 SDK: ```winget install dotnet-sdk-7```
+
+* To update an existing installation: ```winget upgrade```
+
+See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/dotnet/core/install/windows?tabs=net70#install-with-windows-package-manager-winget) for more information.
+
 ## Install using MSI
 
 You can install any of the distributions with MSI. The following image demonstrates installing the .NET SDK. After launching the MSI, click "Install" and you will be taken through the process of installing the SDK.

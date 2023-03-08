@@ -79,7 +79,7 @@ Copy the following into a `.NET 7 Preview 5` Blazor WebAssembly project (`.cspro
         <Copy SourceFiles="$(PkgSerilog_Extensions_Logging_File)\lib\netstandard2.0\Serilog.Extensions.Logging.File.dll"
               DestinationFolder="$(PkgMicrosoft_AspNetCore_Components_WebAssembly_DevServer)\tools\BlazorDebugProxy"
               SkipUnchangedFiles="true"/>
-    </Target> 
+    </Target>
 ```
 
 That will copy the missing dependency into the DevServer package and enable Wasm debugging in .NET 7.0 Preview 5 after a single build. This workaround only needs to be run once per package root to repair the DevServer package but should be harmless to leave in as long as the project doesn’t have a different Serilog version requirement.
@@ -98,14 +98,22 @@ More information and workaround can be found at https://github.com/dotnet/runtim
 
 ## .NET SDK
 
+### [7.0] Projects using certain workloads don't load, build, and or run if .NET 7 Preview SDK workloads are installed:
+
+If a preview .NET 7 SDK is installed, projects with workload dependencies such as `microsoft.net.workload.mono.toolchain` may fail to build, load, and or run. An example of this issue is described [here](https://github.com/dotnet/sdk/issues/28947).
+
+**Resolution**
+
+The best method to resolve the issue is to uninstall any .NET 7 preview SDKs. For detailed instructions, see [dotnet uninstall instructions](https://learn.microsoft.com/dotnet/core/install/remove-runtime-sdk-versions?pivots=os-windows). For example, on Windows, dotnet preview SDKs can be uninstalled with add/remove programs. Another option is to try deleting the folder `C:\Program Files\dotnet\sdk-manifests\7.0.100\microsoft.net.workload.mono.toolchain`, but this will only work for file-based installs. [Dotnet-core-uninstall](https://github.com/dotnet/cli-lab/releases) is another option for uninstalling the .NET 7 preview SDKs.
+
 ### [RC1] dotnet restore --interactive not working for authenticated feeds
 
 The --interactive flag is not working with any dotnet.exe command in RC1. https://github.com/dotnet/sdk/issues/27597
 
-**Workarounds** 
+**Workarounds**
 - set `DOTNET_CLI_DO_NOT_USE_MSBUILD_SERVER=1` before running `dotnet`
 - `msbuild /t:restore /p:nugetInteractive=true`
-- [package source credentials](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesourcecredentials)
+- [package source credentials](https://learn.microsoft.com/nuget/reference/nuget-config-file#packagesourcecredentials)
 - Open the project in Visual Studio
 
 ### `dotnet user-jwts` not functional in .NET 7 RC1
@@ -113,7 +121,7 @@ The --interactive flag is not working with any dotnet.exe command in RC1. https:
 The `dotnet user-jwts` command line tool is not functional in .NET 7 RC1 due to an assembly resolution bug.  When running the CLI, you will encounter the following exception.
 
 ```
-$ dotnet user-jwts create 
+$ dotnet user-jwts create
 Could not load file or assembly 'Microsoft.Extensions.Configuration.Binder, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. The system cannot find the file specified.
 ```
 
@@ -172,7 +180,7 @@ To circumvent this issue, you will need to modify the local installation to prob
   ```
   C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2
   ```
-  
+
 4. Copy the assembly from Step 3 to the `user-jwts` tool directory from Step 1.
   - on Linux/macOS
   ```
@@ -186,6 +194,10 @@ To circumvent this issue, you will need to modify the local installation to prob
 5. Note that the install directory for the SDK may not be deleted during uninstall due to applying this workaround, e.g. when updating to 7.0.0-rc.2. If that occurs, delete the directory manually.
 
 This issue will be resolved in .NET 7 RC 2.
+
+### [7.0.200] Using the `--output` option fails for many commands when targeting a solution
+
+A [breaking change](https://learn.microsoft.com/dotnet/core/compatibility/sdk/7.0/solution-level-output-no-longer-valid) was introduced that was intended to prevent common build errors. However, many users relied on this behavior to build their projects. We have downgraded this change to a warning and are intent on releasing this fix in 7.0.201. Please see the linked breaking change notification for more details.
 
 ## ASP.NET Core
 

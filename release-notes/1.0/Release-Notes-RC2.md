@@ -37,8 +37,8 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 ### Introduction of .NET Core API Documentation
 
-* API: https://docs.microsoft.com/dotnet/api/
-* Conceptual: https://docs.microsoft.com/dotnet/
+* API: https://learn.microsoft.com/dotnet/api/
+* Conceptual: https://learn.microsoft.com/dotnet/
 
 ### Runtime
 

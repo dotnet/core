@@ -8,8 +8,16 @@ Your app needs to be on the latest .NET 6 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
 
+- 6.0.14 (February 2023)
+  - No additional CVEs.
+- 6.0.13 (January 2023)
+  - [CVE-2023-21808 | .NET Remote Code Execution Vulnerability](ttps://github.com/dotnet/announcements/issues/xxx) 
+- 6.0.12 (December 2022)
+  - [CVE 2023-21538 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/244)
+- 6.0.11 (November 2022)
+  - [CVE 2022-41089 | .NET Core Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/242)
 - 6.0.10 (October 2022)
-  - No CVEs currently apply.
+  - No additional CVEs.
 - 6.0.9 (September 2022)
   - [CVE 2022-41032 | .NET Core Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/236)
 - 6.0.8 (August 2022)
