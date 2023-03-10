@@ -4,14 +4,33 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET SDK
 
-### [8.0.100-preview.1.23115.2] analyzer CA2009 throws InvalidCastException at runtime causing build failure
+### [8.0.100-preview.1.23115.2] analyzer CA2009 throws InvalidCastException at runtime could cause a build failure
 
-This regression introduced .NET 8 preview 1 for CA2009 `Do not call ToImmutableCollection on an ImmutableCollection value` analyzer. It is [fixed](https://github.com/dotnet/roslyn-analyzers/pull/6476) in preview 2. 
+[CA2009](https://learn.microsoft.com/EN-US/dotnet/fundamentals/code-analysis/quality-rules/ca2009): `Do not call ToImmutableCollection on an ImmutableCollection value` analyzer regressed in .NET 8 preview 1, the regression could cause a build failure if:
+ - CA2009 severity is set at `warning` level: `dotnet_diagnostic.CA2009.severity = warning` (by default it is `suggestion`)
+ - And the AD0001 is at `warning` level (by default it is `warning`)
+ - And the .NET 8 preview 1 SDK is being used for build
+ - And the project warns as error `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` 
+ - And the projects have a code section that calls `ToImmutableArray()` on an array instance, for example:
+ 
+ ```cs
+public ImmutableArray<int>  Method(int [] arr)
+{
+    return arr.ToImmutableArray();
+}
+```
+
+Then the build would fail with an error:
+
+```log
+error AD0001: Analyzer 'Microsoft.NetCore.Analyzers.ImmutableCollections.DoNotCallToImmutableCollectionOnAnImmutableCollectionValueAnalyzer' threw an exception of type 'System.InvalidCastException' with message 'Unable to cast object of type 'Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.ArrayTypeSymbol' to type 'Microsoft.CodeAnalysis.INamedTypeSymbol'.
+```
 
 **Resolution**
 
-- Please upgrade into .NET 8 preview 2 or above if possible
-- Disable the analyzer in .editorconfig: `dotnet_diagnostic.CA2009.severity = none` 
+- The regression is [fixed](https://github.com/dotnet/roslyn-analyzers/pull/6476) in .NET 8 preview 2. Could upgrade into .NET 8 preview 2 or above
+- Lower the CA2009 analyzer severoty to `suggestion` or `none` : `dotnet_diagnostic.CA2009.severity = none` 
+- Lower the AD0001 diagnostic severoty to `suggestion` or `none` : `dotnet_diagnostic.CA2009.severity = suggestion` 
 
 ## .NET MAUI
 
