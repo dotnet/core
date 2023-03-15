@@ -12,6 +12,6 @@ For details about known issues, please refer to the individual repositories:
 * [Android](https://github.com/xamarin/xamarin-android/wiki/Known-issues-in-.NET)
 * [iOS and macOS](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET8)
 
-## AoT Support in .NET
+## Native AOT Support in .NET
 
 For details about known issues, please reference to [the pinned issue](https://github.com/dotnet/core/issues/8288) in this repo.
