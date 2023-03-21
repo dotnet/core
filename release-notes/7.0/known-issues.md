@@ -195,6 +195,15 @@ To circumvent this issue, you will need to modify the local installation to prob
 
 This issue will be resolved in .NET 7 RC 2.
 
+## .NET MSBuild
+
+### .NET MSBuild 17.5 previews shipped with public classes for the new console logger
+
+.NET MSBuild is adding a new live console logger in a future release. The initial implementation that shipped in 17.5 previews (and will ship in .NET SDK 7.0.200) had the classes public. This new logger is still in preview and not meant for public consumption of the classes or apis. 17.5.0 will ship with the classes marked internal and that change will release in the .NET SDK 7.0.201 release in March.
+
+The logger will also be renamed for 17.6.
+https://github.com/dotnet/msbuild/pull/8343
+
 ### [7.0.200] Using the `--output` option fails for many commands when targeting a solution
 
 A [breaking change](https://learn.microsoft.com/dotnet/core/compatibility/sdk/7.0/solution-level-output-no-longer-valid) was introduced that was intended to prevent common build errors. However, many users relied on this behavior to build their projects. We have downgraded this change to a warning and are intent on releasing this fix in 7.0.201. Please see the linked breaking change notification for more details.
