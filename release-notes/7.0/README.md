@@ -3,7 +3,7 @@
 [.NET 7](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported for 18 months, from November 8th, 2022 to May 14th, 2024. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/7.0)
-- [Linux Package Managers](https://docs.microsoft.com/dotnet/core/install/linux)
+- [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
 - [Containers](https://mcr.microsoft.com/catalog?search=dotnet/)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
@@ -13,6 +13,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2023/03/14 | [7.0.4](https://github.com/dotnet/core/blob/main/release-notes/7.0/7.0.4/7.0.4.md) |
 | 2023/02/24 | [7.0.201](https://github.com/dotnet/core/blob/main/release-notes/7.0/7.0.3/7.0.201.md) |
 | 2023/02/14 | [7.0.3](https://github.com/dotnet/core/blob/main/release-notes/7.0/7.0.3/7.0.3.md) |
 | 2023/01/10 | [7.0.2](https://github.com/dotnet/core/blob/main/release-notes/7.0/7.0.2/7.0.2.md) |
