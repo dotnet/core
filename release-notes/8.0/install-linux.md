@@ -44,7 +44,7 @@ Here's what the script does.
 
 ## Install using Snap
 
-You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://docs.snapcraft.io/installing-snapd/6835).
+You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://snapcraft.io/docs/installing-snapd).
 
 After configuring Snap on your system, run the following command to install the latest .NET SDK.
 
