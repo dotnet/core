@@ -6,7 +6,7 @@ If you're looking for the product roadmap, visit <https://aka.ms/dotnet-product-
 
 ## Released Versions
 
-* [Latest updates](https://github.com/dotnet/core/blob/main/release-notes/README.md) or [Download archive](https://github.com/dotnet/core/blob/main/release-notes/download-archive.md)
+* [Latest updates](./release-notes/README.md) or [Download archive](./release-notes/download-archives)
 
 For released versions of the product:
 
