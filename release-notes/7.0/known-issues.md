@@ -203,7 +203,7 @@ To circumvent this issue, you will need to modify the local installation to prob
 - on Windows
 
   ```console
-  > copy C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2\C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2 C:\Program Files\ddotnet\sdk\7.0.100-rc.1.22431.12\DotnetTools\dotnet-user-jwts\7.0.0-rc.1.22427.2\tools\net7.0\any
+  copy C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2\C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2 C:\Program Files\ddotnet\sdk\7.0.100-rc.1.22431.12\DotnetTools\dotnet-user-jwts\7.0.0-rc.1.22427.2\tools\net7.0\any
   ```
 
 5. Note that the install directory for the SDK may not be deleted during uninstall due to applying this workaround, e.g. when updating to 7.0.0-rc.2. If that occurs, delete the directory manually.
