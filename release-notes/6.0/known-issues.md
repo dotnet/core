@@ -30,7 +30,7 @@ As described previously the computer can be secured by installing the VS 17.0.3 
 
 Applications using the [App-local ICU](https://learn.microsoft.com/dotnet/core/extensions/globalization-icu#app-local-icu) feature to deploy ICU library binaries with the application binaries can experience throwing unhandled [AccessViolationException](https://learn.microsoft.com/dotnet/api/system.accessviolationexception?view=net-6.0). The [reported issue](https://github.com/dotnet/runtime/issues/77045) contains more information about this failure.
 
-### Workarounds*
+### Workarounds
 
 - If having the ICU app-local feature to use ICU in the .NET 6.0 application when running on OS like `Windows Server 2019`, migration to .NET 7.0 would help as ICU gets loaded in the application without the need to use the app-local feature. .NET 7.0 supports loading ICU by default on `Windows Server 2019`.
 - Use a different .NET version than `6.0.10` like `6.0.9` or `6.0.11` or any later version including .NET `7.0`.
