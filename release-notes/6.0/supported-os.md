@@ -121,8 +121,8 @@ None yet.
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 6.0][OS-lifecycle-policy].
 
-* Alpine 3.12
-* macOS 10.13
-* Fedora 35
+- Alpine 3.12
+- macOS 10.13
+- Fedora 35
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md
