@@ -8,12 +8,12 @@ You may encounter the following known issues, which may include workarounds, mit
 
 [CA2009](https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2009): `Do not call ToImmutableCollection on an ImmutableCollection value` analyzer regressed in .NET 8 preview 1, the regression could cause a build failure if:
 
-- CA2009 severity is set at `warning` level: `dotnet_diagnostic.CA2009.severity = warning` (by default it is `suggestion`)
-- And the AD0001 is at `warning` level (by default it is `warning`)
-- And the .NET 8 preview 1 SDK is being used for build
-- And the project warns as error `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>`
-- And the projects have a code section that calls `ToImmutableArray()` on an array instance, for example:
-
+ - CA2009 severity is set at `warning` level: `dotnet_diagnostic.CA2009.severity = warning` (by default it is `suggestion`)
+ - And the AD0001 is at `warning` level (by default it is `warning`)
+ - And the .NET 8 preview 1 SDK is being used for build
+ - And the project warns as error `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` 
+ - And the projects have a code section that calls `ToImmutableArray()` on an array instance, for example:
+ 
  ```cs
 public ImmutableArray<int>  Method(int [] arr)
 {
