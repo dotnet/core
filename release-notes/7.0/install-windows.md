@@ -27,9 +27,9 @@ Each of the distributions can be downloaded from:
 
 You can now install .NET updates using the Windows Package Manager CLI (winget):
 
-- To install the .NET 7 runtime: ```winget install dotnet-runtime-7```
-- To install the .NET 7 SDK: ```winget install dotnet-sdk-7```
-- To update an existing installation: ```winget upgrade```
+- To install the .NET 7 runtime: `winget install dotnet-runtime-7`
+- To install the .NET 7 SDK: `winget install dotnet-sdk-7`
+- To update an existing installation: `winget upgrade`
 
 See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/dotnet/core/install/windows?tabs=net70#install-with-windows-package-manager-winget) for more information.
 
