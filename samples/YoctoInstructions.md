@@ -5,6 +5,7 @@ At this moment, the focus is on getting standalone applications running.
 Unless explicitly mentioned, x86_64 and ARM platforms are supported.
 
 ## Getting started with base OS image
+
 Instructions below assume familiarity with Yocto build process.
 Initial testing as been done on 2.2 Morty but it is probably applicable to
 other versions as well. .NET Core 2.0 Preview2 or later should be used.
@@ -50,7 +51,7 @@ DEFAULTTUNE_virtclass-multilib-lib64 = "x86"
 
 Write and debug your app. When ready to publish, use:
 
-```
+```console
 dotnet publish -r <runtime identifier>
 ```
 

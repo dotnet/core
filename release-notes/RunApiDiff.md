@@ -24,5 +24,5 @@ The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script can automatically generate an AP
 
 Examples of what this script generates:
 
-- PR comparing .NET 6.0 vs .NET 7.0 Preview1: https://github.com/dotnet/core/pull/7211
-- PR comparing .NET 7.0 Preview1 vs Preview2: https://github.com/dotnet/core/pull/7307
+- PR comparing .NET 6.0 vs .NET 7.0 Preview1: <https://github.com/dotnet/core/pull/7211>
+- PR comparing .NET 7.0 Preview1 vs Preview2: <https://github.com/dotnet/core/pull/7307>

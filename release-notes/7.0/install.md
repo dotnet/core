@@ -10,30 +10,31 @@ Operating system specific instructions:
 
 ## [Using dotnet-install-scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
 
-### Install the latest preview version of the 7.0.1xx SDK to the specified location:
+### Install the latest preview version of the 7.0.1xx SDK to the specified location
 
 Windows:
 
-```
+```console
 ./dotnet-install.ps1 -Channel 7.0.1xx -Quality preview -InstallDir C:\cli
 ```
 
 macOS/Linux:
-```
+
+```console
 ./dotnet-install.sh --channel 7.0.1xx --quality preview --install-dir ~/cli
 ```
 
-### Install the latest preview version of the 7.0.0 runtime to the specified location:
+### Install the latest preview version of the 7.0.0 runtime to the specified location
 
 Windows:
 
-```
+```console
 .\.dotnet\dotnet-install.ps1 -Channel 7.0 -Runtime dotnet -Quality preview -InstallDir c:\cli
 ```
 
 macOs/Linux:
 
-```
+```console
 ./dotnet-install.sh --runtime dotnet --channel 7.0 --quality preview --install-dir ~/cli
 ```
 

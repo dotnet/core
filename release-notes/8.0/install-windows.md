@@ -27,11 +27,9 @@ Each of the distributions can be downloaded from:
 
 You can now install .NET updates using the Windows Package Manager CLI (winget):
 
-* To install the .NET 8 runtime: ```winget install dotnet-runtime-8```
-
-* To install the .NET 8 SDK: ```winget install dotnet-sdk-8```
-
-* To update an existing installation: ```winget upgrade```
+- To install the .NET 8 runtime: `winget install dotnet-runtime-8`
+- To install the .NET 8 SDK: `winget install dotnet-sdk-8`
+- To update an existing installation: `winget upgrade`
 
 See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/dotnet/core/install/windows?tabs=net70#install-with-windows-package-manager-winget) for more information.
 
@@ -40,7 +38,6 @@ See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/
 You can install any of the distributions with MSI. The following image demonstrates installing the .NET SDK. After launching the MSI, click "Install" and you will be taken through the process of installing the SDK.
 
 ![image](https://user-images.githubusercontent.com/94140381/186767749-45306b95-cd1b-4d85-9634-42fb83a1cf4b.png)
-
 
 ## Windows Server Hosting with IIS
 

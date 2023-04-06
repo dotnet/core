@@ -9,6 +9,7 @@ Operating system specific instructions:
 - [Windows](install-windows.md)
 
  Install .NET Multi-platform App UI Workloads:
+
 - [MAUI](install-maui.md)
 
 ## Distributions

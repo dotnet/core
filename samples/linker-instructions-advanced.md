@@ -1,6 +1,6 @@
 # Using IL Linker Advanced Features
 
-***Note:*** In 3.0, the linker has shipped as part of the SDK (still marked as "preview"), and the out-of-band nuget package is no longer supported. Please see the new instructions at https://aka.ms/dotnet-illink.
+***Note:*** In 3.0, the linker has shipped as part of the SDK (still marked as "preview"), and the out-of-band nuget package is no longer supported. Please see the new instructions at <https://aka.ms/dotnet-illink>.
 
 This document describes the more advanced features for the IL Linker and provides more insight into how it functions.
 
