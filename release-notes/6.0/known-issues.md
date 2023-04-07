@@ -4,19 +4,20 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## Failure to install the .NET 6.0.1 update via Microsoft Update
 
-#### Summary
+### Summary
+
 There have been limited reports of a failure to install the .NET 6.0.1 update via Microsoft Update, the update fails with an error code 0x80070643.
 
 .NET 6.0 can be updated to 6.0.1 via MU and .NET 6.0.1 is also included in the Visual Studio 17.0.3 update. Both options carry the .NET Core Runtime and ASP.NET Core runtime version 6.0.1 and the .NET 6 SDK version 6.0.101. When these are installed, applications will by default roll forward to using the latest runtime patch version automatically. See [framework dependent app runtime roll forward](https://learn.microsoft.com/dotnet/core/versions/selection#framework-dependent-apps-roll-forward) for more information about this behavior.
 
 Therefore, installing either the 6.0.1 update via MU or the VS 17.0.3 update will secure the machine for the vulnerability described in [CVE-2021-43877](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-43877).
 
+### Root Cause
 
-#### Root Cause
 The optional workload manifest MSIs in the SDK populate the Language column in the Upgrade table. The INSTALLEDLANGUAGE property cannot be queried under the USERUNMANAGED context, it can only be queried under MSIINSTALLCONTEXT_MACHINE context. Due to an error the .NET 6.0.101 SDK Wix bundle sets the installer context incorrectly to USERUNMANAGED when running under the LOCAL\SYSTEM account. This causes the engine to continue and execute an older copy of the MSI instead of skipping it, which in turn triggers a launch condition to block the downgrade and the subsequent error causes the bundle to fail, resulting in the MU update failure.
 
+### Workaround
 
-#### Workaround
 Running the 6.0.101 SDK bundle (without using MU) results in the context changing to MSIINSTALLCONTEXT_MACHINE, this allows the API call to query the INSTALLEDLANGUAGE to complete and the SDK Wix bundle install succeeds.
 
 Therefore a workaround for this issue is to install the 6.0.101 SDK bundle manually by downloading it from the [.NET download site](https://dotnet.microsoft.com/download/dotnet/6.0). Once this is successfully installed, scanning MU again will result in clearing the previous error.
@@ -24,10 +25,13 @@ Therefore a workaround for this issue is to install the 6.0.101 SDK bundle manua
 As described previously the computer can be secured by installing the VS 17.0.3 update, even if the MU update results in a failure so the MU failure is not a critical factor from a security perspective. Therefore for the case where we expect the VS update to offer and secure the computer we will be making a change to not offer the MU update to those computers to avoid the MU failure. For the case where .NET 6 was installed as a standalone version and VS is not expected to patch the computer we will continue to offer the 6.0.1 update via MU.
 
 ## Failure when using ICU App-Local feature in .NET 6.0.10
+
 ### Summary
+
 Applications using the [App-local ICU](https://learn.microsoft.com/dotnet/core/extensions/globalization-icu#app-local-icu) feature to deploy ICU library binaries with the application binaries can experience throwing unhandled [AccessViolationException](https://learn.microsoft.com/dotnet/api/system.accessviolationexception?view=net-6.0). The [reported issue](https://github.com/dotnet/runtime/issues/77045) contains more information about this failure.
 
-**Workarounds**
+### Workarounds
+
 - If having the ICU app-local feature to use ICU in the .NET 6.0 application when running on OS like `Windows Server 2019`, migration to .NET 7.0 would help as ICU gets loaded in the application without the need to use the app-local feature. .NET 7.0 supports loading ICU by default on `Windows Server 2019`.
 - Use a different .NET version than `6.0.10` like `6.0.9` or `6.0.11` or any later version including .NET `7.0`.
 
@@ -41,15 +45,18 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 
 You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
-#### 1. Windows admin installs of the .NET 6.0.400 SDK will not correctly update .NET SDK optional workloads
+### 1. Windows admin installs of the .NET 6.0.400 SDK will not correctly update .NET SDK optional workloads
+
 Commands like `dotnet workload install` and `dotnet workload update` will not correctly update to the latest versions of the workloads on the first try. This is because a timing issue in the workload manifest update code causes the SDK to stop early typically only updating 0-1 manifests.
 
-**Workarounds**
+#### Workarounds
+
 1. Run `dotnet workload update` again and again until all workloads are updated.
 2. Run `dotnet workload update --from-rollback-file` specifying the exact workload versions you want to install.
 
 Example rollback file for 6.0.400
-```
+
+```console
 {
   "microsoft.net.sdk.android": "32.0.448/6.0.400",
   "microsoft.net.sdk.ios": "15.4.447/6.0.400",
@@ -73,8 +80,9 @@ When using localdb (default when creating projects in VS), the normal database a
 ### SPA template issues with Individual authentication when running in production
 
 SPA apps on Azure App Service with all the following:
-* Individual authentication and requires login for every page.
-* A custom domain such as `https://MyDomain.com`:
+
+- Individual authentication and requires login for every page.
+- A custom domain such as `https://MyDomain.com`:
 
 Sometimes return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authentication is successful. Subsequent requests to `https://MyDomain.com` succeed.  Alternatively, stopping and starting the app, enables authentication to succeed. This error can occur with [`Always On`](/azure/app-service/configure-common) set to `true` or `false`.
 
@@ -82,6 +90,7 @@ To prevent this problem without having to stop and restart the app:
 
 1. Add a new app setting which contains the target DNS address. For example, create `IdentityServer:IssuerUri` with value `https://MyDomain.com/`
 1. Add the following code to the app:
+
 ```
 builder.Services.AddIdentityServer(options =>
 {
@@ -91,7 +100,9 @@ builder.Services.AddIdentityServer(options =>
     }
 })
 ```
+
    Alternatively, add the following code:
+
 ```
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
@@ -109,6 +120,7 @@ For more information, see [this GitHub issue](https://github.com/dotnet/aspnetco
 ### Issues running applications with Windows Desktop 6.0.2
 
 Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built with 6.0.200 or later .NET SDK, if the target environment has only .NET Windows Desktop runtime 6.0.0 or 6.0.1 installed, and receive error messages similar to the following:
+
 ```
 Application: WinFormsApp1.exe
 CoreCLR Version: 6.0.121.56705
@@ -122,11 +134,14 @@ File name: 'System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyTok
 This is a result of Windows Desktop servicing ref pack in 6.0.2, which was shipped with an incorrect version.
 
 **Fix:**
-* To run Windows Desktop applications built with 6.0.200 or later .NET SDK, the Windows Desktop runtime 6.0.2 or later is required.
+
+- To run Windows Desktop applications built with 6.0.200 or later .NET SDK, the Windows Desktop runtime 6.0.2 or later is required.
 
 The team appreciates that the fix is less than ideal, however it was chosen for the following reasons.
-* If the ref pack version number was reverted to 6.0.0, then all DLLs built with 6.0.2 reference assemblies would be broken. Those projects/libraries would have no other workaround besides rebuilding, which would mean that any NuGet packages published would be irreversibly broken and would need to be updated.
-* If we lock the ref pack version number at 6.0.2, there is a workaround that allows building an app or library that can run on 6.0.0 or 6.0.1 - for an end-user it requires installing Windows Desktop runtime 6.0.0 or 6.0.1, and for a developer - locking the runtime at the project level:
+
+- If the ref pack version number was reverted to 6.0.0, then all DLLs built with 6.0.2 reference assemblies would be broken. Those projects/libraries would have no other workaround besides rebuilding, which would mean that any NuGet packages published would be irreversibly broken and would need to be updated.
+- If we lock the ref pack version number at 6.0.2, there is a workaround that allows building an app or library that can run on 6.0.0 or 6.0.1 - for an end-user it requires installing Windows Desktop runtime 6.0.0 or 6.0.1, and for a developer - locking the runtime at the project level:
+
     ```xml
     <ItemGroup Condition="'$(TargetFrameworkVersion)' == '6.0'">
       <FrameworkReference
@@ -134,12 +149,14 @@ The team appreciates that the fix is less than ideal, however it was chosen for 
               TargetingPackVersion="6.0.0" />
     </ItemGroup>
     ```
-* Additionally 6.0.1 and 6.0.2 are security releases, and customers are encouraged to update to the latest version.
+
+- Additionally 6.0.1 and 6.0.2 are security releases, and customers are encouraged to update to the latest version.
 
 ### Issues building WPF application with Windows Desktop 6.0.7 and 6.0.8
 
 Some customers are unable to build WPF applications with Windows Desktop 6.0.7 and 6.0.8, if they are including source generators coming from NuGet Packages, and receive errors similar to :
-```
+
+```output
 Rebuild started...
 1>------ Rebuild All started: Project: ObservablePropertyTest, Configuration: Debug Any CPU ------
 Restored C:\git\ObservablePropertyTest\ObservablePropertyTest.csproj (in 2 ms).
@@ -157,8 +174,10 @@ Restored C:\git\ObservablePropertyTest\ObservablePropertyTest.csproj (in 2 ms).
 This happened because WPF builds in 6.0.7 onwards, only considered source generators that were coming from nuget references. This caused an issue when there were source generators that were essentially coming via FrameworkReference. This issue has already been addressed in next release (6.0.9). However, the following workaround would unblock WPF builds.
 
 **Fix:**
-* To enable build in Windows Desktop 6.0.7, navigate to the directory containing the `Microsoft.WinFx.targets` file ( `C:\Program Files\dotnet\sdk\6.0.302\Sdks\Microsoft.NET.Sdk.WindowsDesktop\targets` )
-* Add the following target in the file :
+
+- To enable build in Windows Desktop 6.0.7, navigate to the directory containing the `Microsoft.WinFx.targets` file ( `C:\Program Files\dotnet\sdk\6.0.302\Sdks\Microsoft.NET.Sdk.WindowsDesktop\targets` )
+- Add the following target in the file :
+
     ```xml
 
     <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">

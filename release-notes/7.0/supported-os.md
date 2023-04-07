@@ -123,6 +123,6 @@ OS                                    | Version                 | Architectures 
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 7.0][OS-lifecycle-policy].
 
-* Fedora 35
+- Fedora 35
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md
