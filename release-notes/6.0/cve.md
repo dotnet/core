@@ -11,7 +11,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 6.0.15 (March 2023)
   - No additional CVEs.
 - 6.0.14 (February 2023)
-  - [CVE-2023-21808 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/247) 
+  - [CVE-2023-21808 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/247)
 - 6.0.13 (January 2023)
   - [CVE 2023-21538 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/244)
 - 6.0.12 (December 2022)
@@ -33,7 +33,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 6.0.4 (April 2022)
   - [CVE 2022-29145 | ASP.NET Core Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/222)
   - [CVE 2022-23267 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/221)
-  - [ CVE 2022-29117 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/220)
+  - [CVE 2022-29117 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/220)
 - 6.0.3 (March 2022)
   - No additional CVEs.
 - 6.0.2 (February 2022)
@@ -44,6 +44,6 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 6.0.0 (November 2021)
   - [CVE-2021-43877 | ASP.NET Core Elevation of privilege Vulnerability](https://github.com/dotnet/announcements/issues/206)
 
-The CVEs are displayed one month offset from when they were released. For example, the CVE listed with `6.0.0` was disclosed and a fix was published with `6.0.1`. `6.0.1` is not vulnerable to that CVE while `6.0.0` is. As a result, the CVE is listed with `6.0.0`, where it still applies. The same model is used for the other releases. 
+The CVEs are displayed one month offset from when they were released. For example, the CVE listed with `6.0.0` was disclosed and a fix was published with `6.0.1`. `6.0.1` is not vulnerable to that CVE while `6.0.0` is. As a result, the CVE is listed with `6.0.0`, where it still applies. The same model is used for the other releases.
 
 The CVE exposure is cumulative. For example, `6.0.0` users may be vulnerable to the CVEs present in `6.0.0` and newer releases. Similarly, `6.0.3` users may be vulnerable to the CVEs present in `6.0.4` and newer releases. The latest release is not vulnerable to any published CVEs.

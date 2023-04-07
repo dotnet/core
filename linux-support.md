@@ -48,9 +48,9 @@ Microsoft builds will generally load the highest OpenSSL version it finds, but c
 
 Microsoft builds support multiple Red Hat versions. New .NET versions will typically only be supported on RHEL era distributions in active support.
 
-* RHEL 7 era distributions are considered in maintenance.
-* RHEL 8 era distributions are considered in active support.
-* RHEL 9 era distributions are considered in active support.
+- RHEL 7 era distributions are considered in maintenance.
+- RHEL 8 era distributions are considered in active support.
+- RHEL 9 era distributions are considered in active support.
 
 Red Hat family distributions include: AlmaLinux, CentOS, Oracle Linux, Red Hat Enterprise Linux, and Rocky Linux.
 
