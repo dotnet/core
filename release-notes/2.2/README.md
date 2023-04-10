@@ -2,7 +2,7 @@
 
 This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
 
-[.NET Core 2.2](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-2) was released on December 4th, 2018. The release was a collaborative effort by many contributors. [.NET Core 2.2 reached end of life on December 23rd, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.2-supported-os.md).
+[.NET Core 2.2](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-2/) was released on December 4th, 2018. The release was a collaborative effort by many contributors. [.NET Core 2.2 reached end of life on December 23rd, 2019](https://devblogs.microsoft.com/dotnet/net-core-2-2-will-reach-end-of-life-on-december-23-2019/) It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.2-supported-os.md).
 
 Release notes and download information is provided for each update, in the follow table.
 
