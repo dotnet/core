@@ -1,14 +1,599 @@
 {
   "channel-version": "7.0",
-  "latest-release": "7.0.4",
-  "latest-release-date": "2023-03-14",
-  "latest-runtime": "7.0.4",
-  "latest-sdk": "7.0.202",
+  "latest-release": "7.0.5",
+  "latest-release-date": "2023-04-11",
+  "latest-runtime": "7.0.5",
+  "latest-sdk": "7.0.203",
   "release-type" : "sts",
   "support-phase": "active",
   "eol-date": "2024-05-14",
   "lifecycle-policy": "https://aka.ms/dotnetcoresupport",
   "releases": [
+    {
+      "release-date": "2023-04-11",
+      "release-version": "7.0.5",
+      "security": true,
+      "cve-list": [
+        {
+          "cve-id": "CVE-2023-28260",
+          "cve-url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28260"
+        }
+      ],
+      "release-notes": "https://github.com/dotnet/core/blob/main/release-notes/7.0/7.0.5/7.0.5.md",
+      "runtime": {
+        "version": "7.0.5",
+        "version-display": "7.0.5",
+        "vs-version": "17.5.4, 17.4.7",
+        "vs-mac-version": "17.4.7",
+        "files": [
+          {
+            "name": "dotnet-runtime-linux-arm.tar.gz",
+            "rid": "linux-arm",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/86fd4795-bfa3-41b7-91ff-7b0baadc9d2d/66df53b623f0c9524359c9f01dad110a/dotnet-runtime-7.0.5-linux-arm.tar.gz",
+            "hash": "34afeebf2d6fc2b8bd381578449ea088bf8adb5619686c82d7825171c0a9f66242882c21435579628ae859f060c5adb035bf0ebd0528b8421aef2f7534a1cb6d"
+          },
+          {
+            "name": "dotnet-runtime-linux-arm64.tar.gz",
+            "rid": "linux-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/8fc09c26-b0b1-4f26-921b-c1378547768a/04088af0b59a80a1fe1d613751d0a2c8/dotnet-runtime-7.0.5-linux-arm64.tar.gz",
+            "hash": "983b8123db0ecddee10c00c455c740e24793c3a7d1d400722cbc6183ca9a8916404d81dde07e43b9a6b1ea6ea160055b871845a789117ddc023eb07f3685f4cd"
+          },
+          {
+            "name": "dotnet-runtime-linux-musl-arm.tar.gz",
+            "rid": "linux-musl-arm",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/9d5dff2d-9dd0-436e-8a3a-faad2ffed615/a6e3bdc912a2820ae768fcde911a768f/dotnet-runtime-7.0.5-linux-musl-arm.tar.gz",
+            "hash": "082d24b8e7ad015a04ef3bc0c1556eaef588c5952acb768d9c8292bae42e1a9bb777136e126dcf6f34d4025d7b2af291ebfd5c7b7d821b1f426ce4524b3137cd"
+          },
+          {
+            "name": "dotnet-runtime-linux-musl-arm64.tar.gz",
+            "rid": "linux-musl-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/120f0ac7-5c99-4d91-816b-b189b0d305cf/525a76cb3ed256c762f33349e8d70956/dotnet-runtime-7.0.5-linux-musl-arm64.tar.gz",
+            "hash": "77871fef3a4d7c03c12bacfc7d6dbc17586233a72d874a9f850184262d986dbd270521ebf254c1d96dfd5d275b2c96cc45f7ec28e1ec5116f90eca80550b85b2"
+          },
+          {
+            "name": "dotnet-runtime-linux-musl-x64.tar.gz",
+            "rid": "linux-musl-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/dcbcdd71-eec5-4f66-bd92-1e71fee8b246/738e49c09dddafd29de10d417ed90367/dotnet-runtime-7.0.5-linux-musl-x64.tar.gz",
+            "hash": "f853175cf9818d71f575762960319bf79d1a35bca7518de4594e8a9468ad8572328e2412eda091d989083b70001fc9b65d478314a58d67f0aa57a5da60e86fbd"
+          },
+          {
+            "name": "dotnet-runtime-linux-x64.tar.gz",
+            "rid": "linux-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/e577f9c3-cf57-4f3c-aa2f-2c0c9ce7b9c2/16911adb0b0ac64ece205a8cf96a061d/dotnet-runtime-7.0.5-linux-x64.tar.gz",
+            "hash": "68014bdbf55bf455f59549c7d9d61ccc051e09fe74a975ca6b46d3269278d77c9cd167ba05760aef8ab413df4212f4f5cebdd1533779b49caf517eb4ec50cce5"
+          },
+          {
+            "name": "dotnet-runtime-osx-arm64.pkg",
+            "rid": "osx-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/80126e7f-027c-4d19-bf5c-a15197d1e9f6/94d520fd53fa8124140a3b51da11b773/dotnet-runtime-7.0.5-osx-arm64.pkg",
+            "hash": "a6fe3119f8e7a7624f7dbcf5f7b267f9a234b65462d0dd4df0b762b1c0cca1289d01fb870019af1af6e238f41ef9902ee2978ff8e88f1facd2ebcb31b9fe9dff"
+          },
+          {
+            "name": "dotnet-runtime-osx-arm64.tar.gz",
+            "rid": "osx-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/5a4664cc-7009-4b8a-9e6f-e3ae0b2218d0/add2992c737ce7bb70298fc030c84ead/dotnet-runtime-7.0.5-osx-arm64.tar.gz",
+            "hash": "2bbf02e8001b700cf6badcabedad148a3b799ad0404b2e1e17bf80eca5eaa7a7939df135898f2aa5ebe7892f09d6fa7840118d3f360c2f4aacceb2cd8067c15d"
+          },
+          {
+            "name": "dotnet-runtime-osx-x64.pkg",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/c490efa8-9487-4bd9-ba04-27422baf62bc/ee551784913646cea981e7671a480b3d/dotnet-runtime-7.0.5-osx-x64.pkg",
+            "hash": "db1cc19b3c839ed542c4ebb46563cdf1670da0714eebfd36efe910c5656d3af59ef439f844c4a33e00855eefffd5d4c1434a5bcd74ea04d39867dca22ecf4afc"
+          },
+          {
+            "name": "dotnet-runtime-osx-x64.tar.gz",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/e4242cbd-90b1-4fc0-a8a2-44cd251450aa/3d811a2e1d73cf59d077a63099cb8189/dotnet-runtime-7.0.5-osx-x64.tar.gz",
+            "hash": "4053c79ef80dae8f8ae1958215def910490b3c754ef088f02c81263c790eb8658f1845de916827755d62af37c6d090d59c9a2219c961a29b469a7bed74ba950a"
+          },
+          {
+            "name": "dotnet-runtime-win-arm64.exe",
+            "rid": "win-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/dbaaf99f-a5af-4048-b3fb-1dc1b004e863/ab83f0bbd9a05f27ed500f280e5bfa9d/dotnet-runtime-7.0.5-win-arm64.exe",
+            "hash": "1a0175cff3aa36a8babf82aac627f270cc188e52f749485ecdcc22b064d56eb264beb8886a161234c87f36e431090df69117a3804417e170443f2b36a2325102"
+          },
+          {
+            "name": "dotnet-runtime-win-arm64.zip",
+            "rid": "win-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/f7b11a2e-384a-4880-b3d8-6b9ec86652e5/9d9474a5ae2dcb02ed568a6a6f64ea54/dotnet-runtime-7.0.5-win-arm64.zip",
+            "hash": "89fb5acc88d2b0ee53929e42c7d45cb58938d05c0908ce3770d921f87e85450df4a83cff8f19a9b1d1df7b0b10e4d65abf48d0cce0fb4025c3b62943ab22815f"
+          },
+          {
+            "name": "dotnet-runtime-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/4b99bbc8-917a-417c-907b-d408341726a5/78b225344fbb9b80d3da3681e1d20d68/dotnet-runtime-7.0.5-win-x64.exe",
+            "hash": "8334857953169d90b44bd6728dbead7954aa740db5ed8c5ef73a2fbbe1ae45a15a59c25161afd61fdf61a959becc5346e2e4853b73a589f7ebc2b6a8d24d7676"
+          },
+          {
+            "name": "dotnet-runtime-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/6cc30660-3d0b-48f2-8fbe-4a0301c46363/0776581a6c71da0f01290f08c9493581/dotnet-runtime-7.0.5-win-x64.zip",
+            "hash": "3a11bf5866f78df6190a7886235461d31eb5924d5abf43631ee58325efe0ec5a7a6f63ee53a3a322fcec605e9fe525c9e9b1bdc3ba9358aa7c76b8ce9a5122fc"
+          },
+          {
+            "name": "dotnet-runtime-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/da45af44-e437-41b5-a5de-be6698557272/e4aaf2eafc2e983c275189f4a4161bae/dotnet-runtime-7.0.5-win-x86.exe",
+            "hash": "9837f453e7c4e8e8f628fa72e7a6bc3d7dccf51bdd4418453c34fea0c911799bcd5917f9e59e06949f58d693894f4e50d71d0cee48ebce7bd79f0bd3b22d9d62"
+          },
+          {
+            "name": "dotnet-runtime-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/6e7f1147-5c09-4fec-991a-6339caf75c0f/06fc478af9a150bdcf4a3e9254b87e0c/dotnet-runtime-7.0.5-win-x86.zip",
+            "hash": "1dba5c83dacfba3f4830a2e238bbab60f79118c36ba9db9c2e67076d7515ae223b7773f43628f89ba0392a6d0d851fa9eb818cacb6da53aca8b1632fc7b08f83"
+          }
+        ]
+      },
+      "sdk": {
+        "version": "7.0.203",
+        "version-display": "7.0.203",
+        "runtime-version": "7.0.5",
+        "vs-version": "17.5.4",
+        "vs-mac-version": "17.5.4",
+        "vs-support": "Visual Studio 2022 (v17.5)",
+        "vs-mac-support": "Visual Studio 2022 for Mac (v17.5)",
+        "csharp-version": "11.0",
+        "fsharp-version": "7.0",
+        "vb-version": "16.9",
+        "files": [
+          {
+            "name": "dotnet-sdk-linux-arm.tar.gz",
+            "rid": "linux-arm",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/55972ef4-146e-47e6-b014-0163cbaca6a3/fa9713f73f44088898843016d68c5929/dotnet-sdk-7.0.203-linux-arm.tar.gz",
+            "hash": "9617060ed134d70a561ec8439748a09d54e67dab46c5f362dc749b37fee9324de50a2f8990b5b3745a1b6caa54578580afe7ca8791f276e8e72aeb21ff4abf27"
+          },
+          {
+            "name": "dotnet-sdk-linux-arm64.tar.gz",
+            "rid": "linux-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/6cd2eaa7-4c06-4168-b90b-ee2d6bb40b10/4a8387eb07e17d262bfb9965f6d34462/dotnet-sdk-7.0.203-linux-arm64.tar.gz",
+            "hash": "f5e1b5a63b51af664b852435fc5631ff3fbeafbfac9f34c025da016218b0e6fb9a24e816035a44f4b4a16f28bc696821b1aa6f181966754318bc45cde7f439bf"
+          },
+          {
+            "name": "dotnet-sdk-linux-musl-arm.tar.gz",
+            "rid": "linux-musl-arm",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/18b88ba4-38db-4271-b4dc-5e93ba34124d/02462f7d9c477154d962b8323155aef9/dotnet-sdk-7.0.203-linux-musl-arm.tar.gz",
+            "hash": "b391d6d8ae2411450ac3d4b3ba7a8a402b95403d9c9a9f227dd504492fac7311405181f4aeda05390149e5c2363bf0a86d526d7ff89feac165c97e9d8ef39327"
+          },
+          {
+            "name": "dotnet-sdk-linux-musl-arm64.tar.gz",
+            "rid": "linux-musl-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/0417714b-65c8-4fc0-a63c-bdd6e0fafaea/ec6c8cfb236aa61c8f3fae9721481a20/dotnet-sdk-7.0.203-linux-musl-arm64.tar.gz",
+            "hash": "ad94a557cb7a319e641ba09f3ee63dce74cae3ae668011c009b7a004b1b28001942ae4c7a82fe80ba2467f5ac44731bff81a1edd422c0aaaf95d7206b715dcbf"
+          },
+          {
+            "name": "dotnet-sdk-linux-musl-x64.tar.gz",
+            "rid": "linux-musl-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/fb8f282d-41eb-4926-87b8-78bff54bd0c5/c2cf161fe014133a5d177beb035e3b99/dotnet-sdk-7.0.203-linux-musl-x64.tar.gz",
+            "hash": "0d7bbf8f8e517aa4530d2bc590978394f0fd568a866b6369ab349aaf43412f820391ee3bb99d3f5b7f149bc7dfc1baff7658d928caa931e37c69e149d3667741"
+          },
+          {
+            "name": "dotnet-sdk-linux-x64.tar.gz",
+            "rid": "linux-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/ebfd0bf8-79bd-480a-9e81-0b217463738d/9adc6bf0614ce02670101e278a2d8555/dotnet-sdk-7.0.203-linux-x64.tar.gz",
+            "hash": "ed1ae7cd88591ec52e1515c4a25d9a832eca29e8a0889549fea35a320e6e356e3806a17289f71fc0b04c36b006ae74446c53771d976c170fcbe5977ac7db1cb6"
+          },
+          {
+            "name": "dotnet-sdk-osx-arm64.pkg",
+            "rid": "osx-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/a5070179-d53b-4a84-98d6-37a9d3ef458b/f8bba83817d23e3b7726746c59de4e0c/dotnet-sdk-7.0.203-osx-arm64.pkg",
+            "hash": "093bad46eff19a96bfbf9a8af60d22d40a5562048257a7460e88c4239d9bb529935f84ac2142ffb087e156af852205a87084bd3e7f085f31affd3fb72f380058"
+          },
+          {
+            "name": "dotnet-sdk-osx-arm64.tar.gz",
+            "rid": "osx-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/ad0ad533-6970-4099-a0c6-ee1d089a381d/2d7ea966c6d032111389b7686ccc0d9a/dotnet-sdk-7.0.203-osx-arm64.tar.gz",
+            "hash": "e41de76f6be00de587cedaed2b0c6e2c2871b2ebf03c89375b4c69cd3fdd14df0dc49b5fe83970868a25d14aa19deafbfe66ee6790383b77f7da3d8dea939664"
+          },
+          {
+            "name": "dotnet-sdk-osx-x64.pkg",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/08b3b509-05e6-4df1-84e1-a76c8855d899/d9b9a2d8ef9788f345d97304ceb67b07/dotnet-sdk-7.0.203-osx-x64.pkg",
+            "hash": "1da8e2c4cec652d3528ec008db6fdb0514500233b119b1c1a9d8eb71257f17bc14d3ea390bf45f2875c2b9ed7653090fac46b1f7a807632a8a07fa42bc980354"
+          },
+          {
+            "name": "dotnet-sdk-osx-x64.tar.gz",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/de3e24bd-f677-4d9e-9717-859ce6659b5d/80c21bb06ca64d9408d11a32f858c7c6/dotnet-sdk-7.0.203-osx-x64.tar.gz",
+            "hash": "a69ec597bc5b0a59ccfc9cc63c4883037eb9293600e98ea420c879242ec6c3fae6a81a3a08bf7d5d2ab93f750debffb224ad5628c9abd53bc44cfcb02ca77136"
+          },
+          {
+            "name": "dotnet-sdk-win-arm64.exe",
+            "rid": "win-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/99681982-34f1-447c-996f-e2deeaccc2b0/097021e4edee399854ad3bb1032db86d/dotnet-sdk-7.0.203-win-arm64.exe",
+            "hash": "f48c72dfb05488b4a86e05e47da7b11ec683321d3d124bb87045fd02a02b538ee662fbd588fa8f824be6068c8979d842e115e184febba420feebe54cd5719dff"
+          },
+          {
+            "name": "dotnet-sdk-win-arm64.zip",
+            "rid": "win-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/61fefa17-6507-4f53-b5d7-e4851942e03b/248af1a9204b19761dfa6a8f7f7340c8/dotnet-sdk-7.0.203-win-arm64.zip",
+            "hash": "20cd360a7b914959757a21c3140092a78718622e7e88daa61cabd8d04176f827e3b93e0642e4dee497c790695d0c8e27ef7a07ffa311dce2951c702cc38676b2"
+          },
+          {
+            "name": "dotnet-sdk-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/89a2923a-18df-4dce-b069-51e687b04a53/9db4348b561703e622de7f03b1f11e93/dotnet-sdk-7.0.203-win-x64.exe",
+            "hash": "b2c09ba8454da835304075760c4f355ee1e394c47402800695c75e2da964c5dcd0bb70c1f0c5c67c425369d7fdc9eb060a3936ea755a140342ba12ea47d7cd8b"
+          },
+          {
+            "name": "dotnet-sdk-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/a3b948f2-2335-4c9e-88e6-75794a2824c0/7807d990e142c3a4d8da7d426b5f18a2/dotnet-sdk-7.0.203-win-x64.zip",
+            "hash": "d675c05c6a30fcc2d5512f37e56fda19ee5e0d22de3b2c410c7bee58d3e565a2c87af7ee522c17a51b0f8562de6610831b7f89c1d22586e8be475855b3a060e5"
+          },
+          {
+            "name": "dotnet-sdk-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/60253bf7-2405-4ee4-84ea-0a5fc9764f13/f5bd3e91214abfbb89e0f522e92aca70/dotnet-sdk-7.0.203-win-x86.exe",
+            "hash": "8e6defc8ad73be03c28121656a7bb8b4d8fdee93e12916ff3ddf03518d1e142a42750ed3ac49a15ec0c5f5c48f9c9362648624a14e12e8a53b127bba8d5705fe"
+          },
+          {
+            "name": "dotnet-sdk-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/1761b80c-fb67-4f49-8a40-4967722357e0/a06736ca9ed2df7401ecfecfdfc2c625/dotnet-sdk-7.0.203-win-x86.zip",
+            "hash": "0bbd156db6337629e100218ffe6c9a12633a5fbbcbd02b4283fa29eaae9c293b05a57d5ac7a44c6317e3ef0ea35730c9fc101d054be8d713f676ed5006817118"
+          }
+        ]
+      },
+      "sdks": [
+        {
+          "version": "7.0.203",
+          "version-display": "7.0.203",
+          "runtime-version": "7.0.5",
+          "vs-version": "17.5.4",
+          "vs-mac-version": "17.5.4",
+          "vs-support": "Visual Studio 2022 (v17.5)",
+          "vs-mac-support": "Visual Studio 2022 for Mac (v17.5)",
+          "csharp-version": "11.0",
+          "fsharp-version": "7.0",
+          "vb-version": "16.9",
+          "files": [
+            {
+              "name": "dotnet-sdk-linux-arm.tar.gz",
+              "rid": "linux-arm",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/55972ef4-146e-47e6-b014-0163cbaca6a3/fa9713f73f44088898843016d68c5929/dotnet-sdk-7.0.203-linux-arm.tar.gz",
+              "hash": "9617060ed134d70a561ec8439748a09d54e67dab46c5f362dc749b37fee9324de50a2f8990b5b3745a1b6caa54578580afe7ca8791f276e8e72aeb21ff4abf27"
+            },
+            {
+              "name": "dotnet-sdk-linux-arm64.tar.gz",
+              "rid": "linux-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/6cd2eaa7-4c06-4168-b90b-ee2d6bb40b10/4a8387eb07e17d262bfb9965f6d34462/dotnet-sdk-7.0.203-linux-arm64.tar.gz",
+              "hash": "f5e1b5a63b51af664b852435fc5631ff3fbeafbfac9f34c025da016218b0e6fb9a24e816035a44f4b4a16f28bc696821b1aa6f181966754318bc45cde7f439bf"
+            },
+            {
+              "name": "dotnet-sdk-linux-musl-arm.tar.gz",
+              "rid": "linux-musl-arm",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/18b88ba4-38db-4271-b4dc-5e93ba34124d/02462f7d9c477154d962b8323155aef9/dotnet-sdk-7.0.203-linux-musl-arm.tar.gz",
+              "hash": "b391d6d8ae2411450ac3d4b3ba7a8a402b95403d9c9a9f227dd504492fac7311405181f4aeda05390149e5c2363bf0a86d526d7ff89feac165c97e9d8ef39327"
+            },
+            {
+              "name": "dotnet-sdk-linux-musl-arm64.tar.gz",
+              "rid": "linux-musl-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/0417714b-65c8-4fc0-a63c-bdd6e0fafaea/ec6c8cfb236aa61c8f3fae9721481a20/dotnet-sdk-7.0.203-linux-musl-arm64.tar.gz",
+              "hash": "ad94a557cb7a319e641ba09f3ee63dce74cae3ae668011c009b7a004b1b28001942ae4c7a82fe80ba2467f5ac44731bff81a1edd422c0aaaf95d7206b715dcbf"
+            },
+            {
+              "name": "dotnet-sdk-linux-musl-x64.tar.gz",
+              "rid": "linux-musl-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/fb8f282d-41eb-4926-87b8-78bff54bd0c5/c2cf161fe014133a5d177beb035e3b99/dotnet-sdk-7.0.203-linux-musl-x64.tar.gz",
+              "hash": "0d7bbf8f8e517aa4530d2bc590978394f0fd568a866b6369ab349aaf43412f820391ee3bb99d3f5b7f149bc7dfc1baff7658d928caa931e37c69e149d3667741"
+            },
+            {
+              "name": "dotnet-sdk-linux-x64.tar.gz",
+              "rid": "linux-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/ebfd0bf8-79bd-480a-9e81-0b217463738d/9adc6bf0614ce02670101e278a2d8555/dotnet-sdk-7.0.203-linux-x64.tar.gz",
+              "hash": "ed1ae7cd88591ec52e1515c4a25d9a832eca29e8a0889549fea35a320e6e356e3806a17289f71fc0b04c36b006ae74446c53771d976c170fcbe5977ac7db1cb6"
+            },
+            {
+              "name": "dotnet-sdk-osx-arm64.pkg",
+              "rid": "osx-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/a5070179-d53b-4a84-98d6-37a9d3ef458b/f8bba83817d23e3b7726746c59de4e0c/dotnet-sdk-7.0.203-osx-arm64.pkg",
+              "hash": "093bad46eff19a96bfbf9a8af60d22d40a5562048257a7460e88c4239d9bb529935f84ac2142ffb087e156af852205a87084bd3e7f085f31affd3fb72f380058"
+            },
+            {
+              "name": "dotnet-sdk-osx-arm64.tar.gz",
+              "rid": "osx-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/ad0ad533-6970-4099-a0c6-ee1d089a381d/2d7ea966c6d032111389b7686ccc0d9a/dotnet-sdk-7.0.203-osx-arm64.tar.gz",
+              "hash": "e41de76f6be00de587cedaed2b0c6e2c2871b2ebf03c89375b4c69cd3fdd14df0dc49b5fe83970868a25d14aa19deafbfe66ee6790383b77f7da3d8dea939664"
+            },
+            {
+              "name": "dotnet-sdk-osx-x64.pkg",
+              "rid": "osx-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/08b3b509-05e6-4df1-84e1-a76c8855d899/d9b9a2d8ef9788f345d97304ceb67b07/dotnet-sdk-7.0.203-osx-x64.pkg",
+              "hash": "1da8e2c4cec652d3528ec008db6fdb0514500233b119b1c1a9d8eb71257f17bc14d3ea390bf45f2875c2b9ed7653090fac46b1f7a807632a8a07fa42bc980354"
+            },
+            {
+              "name": "dotnet-sdk-osx-x64.tar.gz",
+              "rid": "osx-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/de3e24bd-f677-4d9e-9717-859ce6659b5d/80c21bb06ca64d9408d11a32f858c7c6/dotnet-sdk-7.0.203-osx-x64.tar.gz",
+              "hash": "a69ec597bc5b0a59ccfc9cc63c4883037eb9293600e98ea420c879242ec6c3fae6a81a3a08bf7d5d2ab93f750debffb224ad5628c9abd53bc44cfcb02ca77136"
+            },
+            {
+              "name": "dotnet-sdk-win-arm64.exe",
+              "rid": "win-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/99681982-34f1-447c-996f-e2deeaccc2b0/097021e4edee399854ad3bb1032db86d/dotnet-sdk-7.0.203-win-arm64.exe",
+              "hash": "f48c72dfb05488b4a86e05e47da7b11ec683321d3d124bb87045fd02a02b538ee662fbd588fa8f824be6068c8979d842e115e184febba420feebe54cd5719dff"
+            },
+            {
+              "name": "dotnet-sdk-win-arm64.zip",
+              "rid": "win-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/61fefa17-6507-4f53-b5d7-e4851942e03b/248af1a9204b19761dfa6a8f7f7340c8/dotnet-sdk-7.0.203-win-arm64.zip",
+              "hash": "20cd360a7b914959757a21c3140092a78718622e7e88daa61cabd8d04176f827e3b93e0642e4dee497c790695d0c8e27ef7a07ffa311dce2951c702cc38676b2"
+            },
+            {
+              "name": "dotnet-sdk-win-x64.exe",
+              "rid": "win-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/89a2923a-18df-4dce-b069-51e687b04a53/9db4348b561703e622de7f03b1f11e93/dotnet-sdk-7.0.203-win-x64.exe",
+              "hash": "b2c09ba8454da835304075760c4f355ee1e394c47402800695c75e2da964c5dcd0bb70c1f0c5c67c425369d7fdc9eb060a3936ea755a140342ba12ea47d7cd8b"
+            },
+            {
+              "name": "dotnet-sdk-win-x64.zip",
+              "rid": "win-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/a3b948f2-2335-4c9e-88e6-75794a2824c0/7807d990e142c3a4d8da7d426b5f18a2/dotnet-sdk-7.0.203-win-x64.zip",
+              "hash": "d675c05c6a30fcc2d5512f37e56fda19ee5e0d22de3b2c410c7bee58d3e565a2c87af7ee522c17a51b0f8562de6610831b7f89c1d22586e8be475855b3a060e5"
+            },
+            {
+              "name": "dotnet-sdk-win-x86.exe",
+              "rid": "win-x86",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/60253bf7-2405-4ee4-84ea-0a5fc9764f13/f5bd3e91214abfbb89e0f522e92aca70/dotnet-sdk-7.0.203-win-x86.exe",
+              "hash": "8e6defc8ad73be03c28121656a7bb8b4d8fdee93e12916ff3ddf03518d1e142a42750ed3ac49a15ec0c5f5c48f9c9362648624a14e12e8a53b127bba8d5705fe"
+            },
+            {
+              "name": "dotnet-sdk-win-x86.zip",
+              "rid": "win-x86",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/1761b80c-fb67-4f49-8a40-4967722357e0/a06736ca9ed2df7401ecfecfdfc2c625/dotnet-sdk-7.0.203-win-x86.zip",
+              "hash": "0bbd156db6337629e100218ffe6c9a12633a5fbbcbd02b4283fa29eaae9c293b05a57d5ac7a44c6317e3ef0ea35730c9fc101d054be8d713f676ed5006817118"
+            }
+          ]
+        },
+        {
+          "version": "7.0.105",
+          "version-display": "7.0.105",
+          "runtime-version": "7.0.5",
+          "vs-version": "17.4.7",
+          "vs-mac-version": "17.4.7",
+          "vs-support": "Visual Studio 2022 (v17.4)",
+          "vs-mac-support": "Visual Studio 2022 for Mac (v17.4)",
+          "csharp-version": "11.0",
+          "fsharp-version": "7.0",
+          "vb-version": "16.9",
+          "files": [
+            {
+              "name": "dotnet-sdk-linux-arm.tar.gz",
+              "rid": "linux-arm",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/2e912d09-6398-4d35-ae92-eb17a6b233da/5253942b6c618d0ca225c53753602afc/dotnet-sdk-7.0.105-linux-arm.tar.gz",
+              "hash": "21a34dfb031ffc667f37b491ede6e9e4dce1cf5e83663174270af72245e8e9a5dde4483864253f4fb48dd36ef546e93f4651f31a82a4e7310b8dd1b02afb25de"
+            },
+            {
+              "name": "dotnet-sdk-linux-arm64.tar.gz",
+              "rid": "linux-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/3f304811-f66c-411b-8222-2844d4ef0ee5/583467c6d9920557986808090267d07b/dotnet-sdk-7.0.105-linux-arm64.tar.gz",
+              "hash": "3b401a4416b5b5a6ad90a9fdf7591a00f7f2b27cd960821dc1445b0a17c1c6ca08a92497d48f20ceae788f04f64cbe4416847fd98ab694faef21a9d22c475f9f"
+            },
+            {
+              "name": "dotnet-sdk-linux-musl-arm.tar.gz",
+              "rid": "linux-musl-arm",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/956b710c-6467-49e7-ad33-22ea085d71b8/17d91ddce1461c504c6fefaea319e1d2/dotnet-sdk-7.0.105-linux-musl-arm.tar.gz",
+              "hash": "9ffa724ccc02dc3e40afe22f0546a9bdf68b6314cf6da03d9387fb010fe3e5935154a5c06c4a2d588ff4ac77f34120a4ae9bc0237fb24452d78e6698435acf72"
+            },
+            {
+              "name": "dotnet-sdk-linux-musl-arm64.tar.gz",
+              "rid": "linux-musl-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/34214cfb-1a81-447e-a9f1-95d222b6c08d/1a3d29720ceab72ca5c6d5d7eb6c2846/dotnet-sdk-7.0.105-linux-musl-arm64.tar.gz",
+              "hash": "c8120c20939232b53a3cdc607d812d93fadd6dea9466f9454df559f8b7eb334c69fdfd31bc60e4c70b6cf4fc519a25a0439902b04cf5c5bd0c29de020024fbe2"
+            },
+            {
+              "name": "dotnet-sdk-linux-musl-x64.tar.gz",
+              "rid": "linux-musl-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/153882a0-84b1-46a8-a267-8e62ab99846f/53cab807e3dc23e72662add3392ea339/dotnet-sdk-7.0.105-linux-musl-x64.tar.gz",
+              "hash": "8fb7d1754359e3fda35b7a07e13d2a5e9e723196b980dd922b30919aedaddbedd4d82e28b37471437b69cb93e4b1d136ac701e221924e44d0be6b6ba94dc3654"
+            },
+            {
+              "name": "dotnet-sdk-linux-x64.tar.gz",
+              "rid": "linux-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/a6088745-20a8-4b68-9ac3-54c1ccacf9a6/7b8a64d169e48a897b67f292e1ad0348/dotnet-sdk-7.0.105-linux-x64.tar.gz",
+              "hash": "704c54efca6c4e40b93e31d92b9116407c5ff557b7f04d974df90dd56041282b26073f32719e99cb2afd29cdbf251b3fa7f05d52335f37fc1624c703005a2d3b"
+            },
+            {
+              "name": "dotnet-sdk-osx-arm64.pkg",
+              "rid": "osx-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/ae16687a-dcb8-4da5-9145-8b58651f61e3/74e24b760ce77e6739831a0f997406f4/dotnet-sdk-7.0.105-osx-arm64.pkg",
+              "hash": "5ea2d251e293f623b2cbccd063f5c8c12ff9de9e7d93681f9788dabd80457fc1afce0ce251437b2b3f1ef9f422481cd157f70308df0753972c615a7bbd8cd021"
+            },
+            {
+              "name": "dotnet-sdk-osx-arm64.tar.gz",
+              "rid": "osx-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/22b0a515-bb57-495b-8d99-61f8f7c73aea/7134631e66e8e975746b455cb443ced0/dotnet-sdk-7.0.105-osx-arm64.tar.gz",
+              "hash": "555691ce8ee49cb6566cca79fbd43e47ad7e557f35215544a51a1a76aef625711f572dd9f5dec622116113207a9f473f54fd07248661359ea65aea51e4d2fcf3"
+            },
+            {
+              "name": "dotnet-sdk-osx-x64.pkg",
+              "rid": "osx-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/112f04ff-4813-4531-bf29-42fc5f0f1dba/ecbd0689f059fad37d3ec07e3f2ec4bc/dotnet-sdk-7.0.105-osx-x64.pkg",
+              "hash": "f406aa26174de874658b21228a397018ccae83406a63901febd8bc0c6641a3347a069ef7e14ec8584ecebe6f03ac8f09cb7e209eef782a584d9e57d865222a13"
+            },
+            {
+              "name": "dotnet-sdk-osx-x64.tar.gz",
+              "rid": "osx-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/aa1bbe02-bc32-4330-b374-ab603fd04c8f/d0350189194df27bd75ff8393f884d10/dotnet-sdk-7.0.105-osx-x64.tar.gz",
+              "hash": "8701327bb2fc729b5ae9571129fcff74a3ea7133ea2822f6e793fa4c5f0fe9ca00b7025b68039e53d67fa8d244918ca52e6580d641d7e500e68c85083bd152d4"
+            },
+            {
+              "name": "dotnet-sdk-win-arm64.exe",
+              "rid": "win-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/15dceb64-049c-4e7d-ab34-5f9e767353b4/e00280ea720987bc284f392be4e0fcfd/dotnet-sdk-7.0.105-win-arm64.exe",
+              "hash": "916c4c23d721ddf870e831b72e53ee28fb882c1d5cff83f00ad342421082e111feb711d5b0c000c7d9e0ae149c70975c2f5dd77fc5bf4770633050888e117f88"
+            },
+            {
+              "name": "dotnet-sdk-win-arm64.zip",
+              "rid": "win-arm64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/96918d28-2b86-4636-9600-0b5da06f3efa/1179ce4af645e225b5fe2b9e791a5b48/dotnet-sdk-7.0.105-win-arm64.zip",
+              "hash": "13bb40127f46174d31e3c0f7505abb020785848d12815f2513ff224488cdc2d9705fbeb36b6536193ea66fa5e7ba34dc7f24b83a456e74392e3808b9ec0dabe8"
+            },
+            {
+              "name": "dotnet-sdk-win-x64.exe",
+              "rid": "win-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/f4928dfa-cf76-458f-8c83-eb493496fbfb/6596406cd727ff680fe22fe6b0a2776b/dotnet-sdk-7.0.105-win-x64.exe",
+              "hash": "f3a26982239f5d65d3214814618fc374a4aa6edf178b01da351c82317442cb5e0616730836edaf5a3c0c258233c8bfd100092318bb38624bb507d02c5006430a"
+            },
+            {
+              "name": "dotnet-sdk-win-x64.zip",
+              "rid": "win-x64",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/39e9b7ad-5bd5-4c5a-8cb5-20a4cf110c70/88784a26ee910815a6f239d3e8474c4b/dotnet-sdk-7.0.105-win-x64.zip",
+              "hash": "3cbc3f3ef1518ff910a42ee31d952fdd011921cdaafcc5bd315cd9897d3f2f3a7c872f537a91dd1cc9038387c28603497560e51b42585004030cab2effa43d3d"
+            },
+            {
+              "name": "dotnet-sdk-win-x86.exe",
+              "rid": "win-x86",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/aaa87fef-1f8b-45da-b27c-97b0da365f83/a4b55e9f6624b3e1974d6b663224b27f/dotnet-sdk-7.0.105-win-x86.exe",
+              "hash": "ca95eb8ddf5e1e71ef5719af11e5935aa8df60a0ed4c1b9bbc63fc4b7ecca56bab2cd0adc081bb7b60032303becd4c464208f55a4b1740fc53982e280106784a"
+            },
+            {
+              "name": "dotnet-sdk-win-x86.zip",
+              "rid": "win-x86",
+              "url": "https://download.visualstudio.microsoft.com/download/pr/835b8493-e2c9-4149-8c99-69496b6f0a7f/d95196ccaf4afac04e6c18a0023e29cc/dotnet-sdk-7.0.105-win-x86.zip",
+              "hash": "4d89aae9d51f904e1f366cd3149270907fc92707dc03e6f1dcf957d001932efb498f4b7aec3c12203765fd8d475e3fd2073dd1a8e4503368e7049c4d0c1c4b0d"
+            }
+          ]
+        }
+      ],
+      "aspnetcore-runtime": {
+        "version": "7.0.5",
+        "version-display": "7.0.5",
+        "version-aspnetcoremodule": [
+          "17.0.23084.5"
+        ],
+        "vs-version": "17.4.7",
+        "files": [
+          {
+            "name": "aspnetcore-runtime-linux-arm.tar.gz",
+            "rid": "linux-arm",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/7cd10989-16bd-4d51-8cc9-333a201086e6/d0e049f1f97918fd1aea856b57006abd/aspnetcore-runtime-7.0.5-linux-arm.tar.gz",
+            "hash": "973ac412ae17e50385d8e18e1b9e307dfcd7fb19f6da8d1ab6b959596093b6a46caade82be81d9c81069c86d78e1690c9418029403b2a70a436a00d7fbf1fa6e"
+          },
+          {
+            "name": "aspnetcore-runtime-linux-arm64.tar.gz",
+            "rid": "linux-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/565ed9fc-5ae5-4168-b08c-f4e39acf47ff/f5e3c6cc872681c08ab9aa6deb8a72c2/aspnetcore-runtime-7.0.5-linux-arm64.tar.gz",
+            "hash": "2c35feac6e8a55185767714eca52912bafe5c6255cc0eb0b93aa245255e405ad1076ae018b7a3cd845b159bc2d87d950ebf5305dd52b1215adbb35ea9cfcf551"
+          },
+          {
+            "name": "aspnetcore-runtime-linux-musl-arm.tar.gz",
+            "rid": "linux-musl-arm",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/ab6b4ea9-2f89-4123-af64-c1dea7efc40c/d2c835806fdf58de55f209d6276fded8/aspnetcore-runtime-7.0.5-linux-musl-arm.tar.gz",
+            "hash": "43a168a0e6f3c4386bdf6e1b002903de1d38e97ba1e2cf580c49f6d280e15edee91efa8fa2ccb0be468bbdfd17046519322fa3f34032b5bbe1c26d231fb79e69"
+          },
+          {
+            "name": "aspnetcore-runtime-linux-musl-arm64.tar.gz",
+            "rid": "linux-musl-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/032bc6f8-f157-4a2d-b9dd-4f859a32afdf/9f0acd1435053563ff80ee4c59b74df9/aspnetcore-runtime-7.0.5-linux-musl-arm64.tar.gz",
+            "hash": "3aba51e65739677db4e9e2735d78ba814022bc514d467e27c45775f9f6847c91804a798a9dffe550c3fccc4ce972266e0981a220f227414c9b45b79da0cc3c52"
+          },
+          {
+            "name": "aspnetcore-runtime-linux-musl-x64.tar.gz",
+            "rid": "linux-musl-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/4486f7a2-8bd1-4329-a18e-0269de558076/9a5fee54d132251a48b8da07642ce954/aspnetcore-runtime-7.0.5-linux-musl-x64.tar.gz",
+            "hash": "77bcbc7230779d741f5a18199f18e4eda1b21d3034eb5ab37b20eeb40c4e15ee7556f2ffd4d512be05c3c063095e3e2e2c46d1f2758bd3f29082a6b40ce88f24"
+          },
+          {
+            "name": "aspnetcore-runtime-linux-x64.tar.gz",
+            "rid": "linux-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/b936641a-57d6-4069-bd32-280020863326/5793e00ff9e9973a01ca735479ff15b3/aspnetcore-runtime-7.0.5-linux-x64.tar.gz",
+            "hash": "859d48d0f29e014d56e89161d8001f75b3b0b03ee04f86641066570cfbe267b06798232500a86fd7bc31edf022097278dfeb496874778fead4476863aa994928"
+          },
+          {
+            "name": "aspnetcore-runtime-osx-arm64.tar.gz",
+            "rid": "osx-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/dfb4f870-e416-459f-bdf5-5362030c6d5f/fb888174a31cea86516a95f60ca8e65c/aspnetcore-runtime-7.0.5-osx-arm64.tar.gz",
+            "hash": "855ae3cad226fe4429073a54825ebadf2c3bff84ef811d602f4d4f259663d6648b7b0d3e1683e50ec5caf82417ffab47599a928cb635f2149661731cf27ff698"
+          },
+          {
+            "name": "aspnetcore-runtime-osx-x64.tar.gz",
+            "rid": "osx-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/b707a1b6-7222-4929-96b6-3525f93cd79e/dfa98874e490e3da4024cd20baca4a22/aspnetcore-runtime-7.0.5-osx-x64.tar.gz",
+            "hash": "69c473ec116de84bd5cfc27972890f545952a83deae1c3d298152a2dac892f1a70b0a3e10269bbd332fa8d95f2616052f07597adf9279a0d2d2ffad7382602b2"
+          },
+          {
+            "name": "aspnetcore-runtime-win-arm64.zip",
+            "rid": "win-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/a2c88dc8-55d4-4e99-a74a-c08e718fa77b/778dacf7446e8537accc1b47bec8fca3/aspnetcore-runtime-7.0.5-win-arm64.zip",
+            "hash": "fda8628bbfd178abef246fe09398775ea25c064bf6c11f4f41bb5eb420726fdb92a4207c694410585cbc58efc13d5c6d11b9aa486fd106389fffbfcbb9f0df2e"
+          },
+          {
+            "name": "aspnetcore-runtime-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/02d08d3a-c846-40a9-a75d-4dcfa12b2d8d/c9d48b7ce67ad4e1356d9f3630f51cf4/aspnetcore-runtime-7.0.5-win-x64.exe",
+            "hash": "2f62d0033f89473e8fd22b5134fa8a26163b0d66dd9256cfd0ed8ef1eb0ef6e72bbe107e64491c50c322c738ffafa92fdbaedc5f2f3261ba3bfb2060c8261ab0"
+          },
+          {
+            "name": "aspnetcore-runtime-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/82e7d963-e5b6-41fe-84d1-a8c3f1a75bd7/fe22d4a60c66449d3e97a246fc41d10b/aspnetcore-runtime-7.0.5-win-x64.zip",
+            "hash": "101964c1789cca6f4f5209092294c76bc0a9afe6ed2fbebdfeb07b768475500fd36b65e3ab0cbfbd252933e318985ed9ec994efbfeb011a37245497c8e275636"
+          },
+          {
+            "name": "aspnetcore-runtime-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/423272b5-615c-436b-a198-a10518b3e8a3/e7587e2c70e4db7f9c93d0e6dbbc21f5/aspnetcore-runtime-7.0.5-win-x86.exe",
+            "hash": "ade0aa076e5a87387c1a181859c2cc92cfb440d9db7b75613414afc209e8f107d16a02d574284f417df0899ce4f3ee9227fae0a7e2365d36fe09d88a7fdba44f"
+          },
+          {
+            "name": "aspnetcore-runtime-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/e5cb9bbc-6c3d-4ca2-b57e-47de252e7861/209669f62b361008007f66fffa6af38e/aspnetcore-runtime-7.0.5-win-x86.zip",
+            "hash": "b2317339a1c05d776363ea27869242fe070b5adc0ab92f88207cd7245cad7d755dd9ff0cc108c9f63be78877dc09dd9f0e65964170bd167280a7d062e9a58a9c"
+          },
+          {
+            "name": "dotnet-hosting-win.exe",
+            "rid": "",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/19927e80-7df2-4906-badd-439502008177/cb55d49c06a3691965b4bcf934ead822/dotnet-hosting-7.0.5-win.exe",
+            "hash": "b4fb11e0027c295ab879a0db8b3bd34069a0f351fe1968c2fab2f6fba6886f4b33b847f0aca52b7dfe548538105cdf9d83f15b1f8a5e8b194c9448340a09c768",
+            "akams": "https://aka.ms/dotnetcore-7-0-windowshosting"
+          }
+        ]
+      },
+      "windowsdesktop": {
+        "version": "7.0.5",
+        "version-display": "7.0.5",
+        "files": [
+          {
+            "name": "windowsdesktop-runtime-win-arm64.exe",
+            "rid": "win-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/9b902dfd-2320-48ae-9d83-4120f7b0955d/e892bacdf6629da532f7604555afd07c/windowsdesktop-runtime-7.0.5-win-arm64.exe",
+            "hash": "46426250a93615b531d0dcfbef9c98747bdfa6b31a773e6efe640a30d063efd51f880fb80879ed2a9339588854402ea172952b5318a0810f038eab208aa4905d"
+          },
+          {
+            "name": "windowsdesktop-runtime-win-arm64.zip",
+            "rid": "win-arm64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/6a5134e4-123c-4102-ae4e-1cf056187a5c/853709934574ebcd659e4e227dd39b5e/windowsdesktop-runtime-7.0.5-win-arm64.zip",
+            "hash": "fb394e909b7f2690806f222a1fa343429a95f8f08665b739562c03011910fb10a204d57af3d43d24d2eb30c7e8ab46893ed69b8afd2f6da1b1d47b7c98308414"
+          },
+          {
+            "name": "windowsdesktop-runtime-win-x64.exe",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/dffb1939-cef1-4db3-a579-5475a3061cdd/578b208733c914c7b7357f6baa4ecfd6/windowsdesktop-runtime-7.0.5-win-x64.exe",
+            "hash": "8907aa0e934a31c63f0a840bf9e734c2f5ba109b766c1a775f8adbb169049753664790c0a15b216f02a942392819a3500e4a33918df10fb967341dc167f82d11"
+          },
+          {
+            "name": "windowsdesktop-runtime-win-x64.zip",
+            "rid": "win-x64",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/bcbbbce9-e9b2-435f-b835-49c3152d786b/593fc9da1ddb494b72a7f0f05be6fe43/windowsdesktop-runtime-7.0.5-win-x64.zip",
+            "hash": "237c0e5e4985aa0831b70d5fb074b986e09c2e536c34d9711cf8223ce3020fa2ad10788694f694f32297c4d39527a30ebd6e22ba92549e058a1c38faaa3cf92a"
+          },
+          {
+            "name": "windowsdesktop-runtime-win-x86.exe",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/eb64dcd1-d277-4798-ada1-600805c9e2dc/fc73c843d66f3996e7ef22468f4902e6/windowsdesktop-runtime-7.0.5-win-x86.exe",
+            "hash": "a2f776cfabcfbd4b9278198301d289ed1c56febd47259520c50b8b8d130a79d0ea99c857aec96865cc635ddf078fd575368c030ce11d61bb9991d296df87a4a7"
+          },
+          {
+            "name": "windowsdesktop-runtime-win-x86.zip",
+            "rid": "win-x86",
+            "url": "https://download.visualstudio.microsoft.com/download/pr/99652d52-96d1-42d7-b38f-b93ccfa8f833/cf2eef3fc49611b3326278a0a3a3b7c7/windowsdesktop-runtime-7.0.5-win-x86.zip",
+            "hash": "91c72f3a5fb0f980f6987590629269f2280fa890744f514e6c5c9ed0e1edec290a75d1ca17eee62e47ba495a3ab2cf00ecd06d0dd7a8e274dc6180745dbc0064"
+          }
+        ]
+      }
+    },
     {
       "release-date": "2023-03-14",
       "release-version": "7.0.4",
