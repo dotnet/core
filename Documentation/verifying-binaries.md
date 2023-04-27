@@ -1,6 +1,6 @@
 # How to verifying .NET downloads
 
-After downloading a .NET file, verify it for security by calculating the file's checksum on your computure and comparing it to the original checksum. This will verify the file has not been tampered with or corrupted.
+After downloading a .NET file, verify it for security by calculating the file's checksum on your computer and comparing it to the original checksum. This will verify the file has not been tampered with or corrupted.
 
 ## Examples
 
