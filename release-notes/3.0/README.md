@@ -2,7 +2,7 @@
 
 This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
 
-[.NET Core 3.0](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-3-0) was released on September 23rd, 2019. The release was a collaborative effort by many contributors. [.NET Core 3.0 reached end of life on March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](3.0-supported-os.md).
+[.NET Core 3.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) was released on September 23rd, 2019. The release was a collaborative effort by many contributors. [.NET Core 3.0 reached end of life on March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](3.0-supported-os.md).
 
 Release notes and download information is provided for each update, in the follow table.
 
