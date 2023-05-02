@@ -142,5 +142,5 @@ The lists of issues closed for this and past releases can be found here:
 
 The lists of commits for this release can be viewed here:
 
-* [CLR commits](https://github.com/dotnet/coreclr/commits/release/1.0.0-rc2)
+* [CLR commits](https://github.com/dotnet/coreclr/commits/v1.0.0-rc2)
 * [BCL commits](https://github.com/dotnet/corefx/commits/release/1.0.0-rc2)
