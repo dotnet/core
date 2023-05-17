@@ -53,7 +53,7 @@ We recommend that you install the .NET SDK to develop and build applications, an
 Download links are provided for each of the distributions at:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [.NET 8 release notes](README.md)
+- [.NET 8 release notes](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.4.md)
 
 [Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server, and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
