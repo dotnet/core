@@ -11,10 +11,10 @@ The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script can automatically generate an AP
 
 ```powershell
 .\RunApiDiff.ps1 `
-   -PreviousDotNetVersion 7.0 `
+   -PreviousDotNetVersion 8.0 `
    -PreviousPreviewOrRC preview `
    -PreviousPreviewNumberVersion 2 `
-   -CurrentDotNetVersion 7.0 `
+   -CurrentDotNetVersion 8.0 `
    -CurrentPreviewOrRC preview `
    -CurrentPreviewNumberVersion 3 `
    -CoreRepo D:\core\ `
@@ -24,5 +24,5 @@ The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script can automatically generate an AP
 
 Examples of what this script generates:
 
-- PR comparing .NET 6.0 vs .NET 7.0 Preview1: <https://github.com/dotnet/core/pull/7211>
+- PR comparing .NET 8.0 Preview2 vs Preview3: <https://github.com/dotnet/core/pull/8387>
 - PR comparing .NET 7.0 Preview1 vs Preview2: <https://github.com/dotnet/core/pull/7307>
