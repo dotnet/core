@@ -53,7 +53,7 @@ We recommend that you install the .NET SDK to develop and build applications, an
 Download links are provided for each of the distributions at:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [.NET 8 release notes](README.md)
+- [.NET 8 release notes](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.4.md)
 
 [Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server, and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
@@ -75,21 +75,21 @@ Runtime Environment:
  Base Path:   /usr/local/share/dotnet/x64/sdk/8.0.100-preview.3.23178.7/
 
 Host:
-  Version:      8.0.100-preview.3.23178.7
+  Version:      8.0.100-preview.4.23260.5
   Architecture: x64
   Commit:       550605cc93
 
 .NET SDKs installed:
-  8.0.100-preview.3.23178.7 [/usr/local/share/dotnet/x64/sdk]
+  8.0.100-preview.4.23260.5 [/usr/local/share/dotnet/x64/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App 8.0.0-preview.3.23153.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 8.0.0-preview.3.23128.3 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
+  Microsoft.AspNetCore.App  8.0.0-preview.4.23260.4 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.0-preview.4.23259.5 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-8.0.100-preview.3.23178.7
+8.0.100-preview.4.23260.5
 ```
