@@ -45,29 +45,28 @@ If you build .NET 6 projects with MSBuild 16.11, for example, you will see the f
 
 You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
-### 1. Windows admin installs of the .NET 6.0.400 SDK will not correctly update .NET SDK optional workloads
+### 1. Repair or update of VS or old .NET versions can lead to bad `PATH` configuration on windows
 
-Commands like `dotnet workload install` and `dotnet workload update` will not correctly update to the latest versions of the workloads on the first try. This is because a timing issue in the workload manifest update code causes the SDK to stop early typically only updating 0-1 manifests.
+In 2021, .NET Runtime and .NET SDK were changed to no longer add the `program files (x86)\dotnet` location to the global machine `PATH` but not all prior versions were updated. Some customers may still have an old version of 2.1 or older runtime and any repair of Visual Studio or that SDK will set the x86 path. Customers can end up in a state where the x86 path ends up ahead of the x64 `program files\dotnet` path which Visual Studio should be using.
+
+**Behavior**
+`The SDK 'Microsoft.NET.Sdk' specified could not be found`
+
+```
+dotnet --info
+
+Host:
+  Version:      7.0.5
+  Architecture: **x86**
+  Commit:       8042d61b17
+```
 
 #### Workarounds
 
-1. Run `dotnet workload update` again and again until all workloads are updated.
-2. Run `dotnet workload update --from-rollback-file` specifying the exact workload versions you want to install.
-
-Example rollback file for 6.0.400
-
-```console
-{
-  "microsoft.net.sdk.android": "32.0.448/6.0.400",
-  "microsoft.net.sdk.ios": "15.4.447/6.0.400",
-  "microsoft.net.sdk.maccatalyst": "15.4.447/6.0.400",
-  "microsoft.net.sdk.macos": "12.3.447/6.0.400",
-  "microsoft.net.sdk.maui": "6.0.486/6.0.400",
-  "microsoft.net.sdk.tvos": "15.4.447/6.0.400",
-  "microsoft.net.workload.mono.toolchain": "6.0.8/6.0.300",
-  "microsoft.net.workload.emscripten": "6.0.4/6.0.300"
-}
-```
+- Edit the system environment variables
+- Environment Variables
+- Double click `Path` under System variables
+- Delete the `program files (x86)\dotnet path`
 
 ## ASP.NET Core
 
