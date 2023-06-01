@@ -51,6 +51,9 @@ In 2021, .NET Runtime and .NET SDK were changed to no longer add the `program fi
 
 **Behavior**
 `The SDK 'Microsoft.NET.Sdk' specified could not be found`
+<img width="438" alt="image" src="https://github.com/dotnet/core/assets/12663534/1e6fdd30-cc33-4296-bb81-da9d26482f66">
+
+
 
 ```
 dotnet --info
@@ -62,7 +65,7 @@ Host:
 ```
 
 #### Workarounds
-
+See https://github.com/dotnet/core/issues/5962#issuecomment-780084535 for more details
 - Edit the system environment variables
 - Environment Variables
 - Double click `Path` under System variables
