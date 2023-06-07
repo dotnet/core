@@ -86,7 +86,7 @@ SPA apps on Azure App Service with all the following:
 - Individual authentication and requires login for every page.
 - A custom domain such as `https://MyDomain.com`:
 
-Sometimes return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authentication is successful. Subsequent requests to `https://MyDomain.com` succeed.  Alternatively, stopping and starting the app, enables authentication to succeed. This error can occur with [`Always On`](/azure/app-service/configure-common) set to `true` or `false`.
+Sometimes return the following error `WWW-Authenticate: Bearer error="invalid_token", error_description="The issuer 'https://MyDomain.com' is invalid"`. If the app is accessed from the Azure DNS (MyDomain.azurewebsites.net), authentication is successful. Subsequent requests to `https://MyDomain.com` succeed.  Alternatively, stopping and starting the app, enables authentication to succeed. This error can occur with [`Always On`](https://learn.microsoft.com/azure/app-service/configure-common) set to `true` or `false`.
 
 To prevent this problem without having to stop and restart the app:
 
