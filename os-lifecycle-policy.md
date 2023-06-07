@@ -13,6 +13,7 @@ The following documents describe supported operating systems:
 
 ## Preview .NET versions
 
+* [.NET 8 supported OS versions](release-notes/8.0/supported-os.md)
 
 ## Out-of-support .NET versions
 
