@@ -21,6 +21,8 @@ OS                                    | Version                 | Architectures 
 [Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
 [Windows-Server]: https://learn.microsoft.com/windows-server/
 
+.NET 8 is supported in the x64 emulator on Windows 11 Arm64.
+
 ## Linux
 
 OS                                    | Version               | Architectures     | Lifecycle
@@ -38,9 +40,8 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 
 ### Libc compatibility
 
-- x64: [glibc][glibc] 2.17 (from CentOS 7)
-- Arm32, Arm64: [glibc][glibc] 2.27 (from Ubuntu 18.04)
-- Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.15)
+- [glibc][glibc] 2.23 (from Ubuntu 16.04)
+- Alpine: [musl][musl] 1.2.2 (from Alpine 3.13)
 
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://alpinelinux.org/releases/
@@ -81,6 +82,8 @@ OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
 [macOS][macOS]                | 10.15+                    | x64, Arm64        |
 
+.NET 8 is supported in the Rosetta 2 x64 emulator.
+
 [macOS]: https://support.apple.com/macos
 
 ## Android
@@ -91,13 +94,22 @@ OS                            | Version                 | Architectures     |
 
 [Android]: https://support.google.com/android
 
-## iOS / tvOS
+## iOS / tvOS / MacCatalyst
 
 OS                            | Version                 | Architectures     |
 ------------------------------|-------------------------|-------------------|
-[iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
+[iOS][iOS]                    | 11.0+                   | Arm64             |
+[iOS Simulator][iOS]          | 11.0+                   | x64, Arm64        |
+[tvOS][tvOS]                  | 11.0+                   | Arm64             |
+[tvOS Simulator][tvOS]        | 11.0+                   | x64, Arm64        |
+[MacCatalyst][macOS]          | 10.15+, 11.0+ on Arm64  | x64, Arm64        |
 
 [iOS]: https://support.apple.com/ios
+[tvOS]: https://support.apple.com/apple-tv
+
+## QEMU
+
+.NET 8 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
 ## Support changes from .NET 6.0
 
