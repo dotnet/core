@@ -4,15 +4,15 @@ The following [.NET releases](./releases.md) are currently supported:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 8](release-notes/8.0/README.md) | [November 8, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-4/) | [LTS][policies] | [8.0.0-preview.4][8.0.0-preview.4] | November 10, 2026 |
-| [.NET 7](./release-notes/7.0/README.md) | [November, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) | [STS](release-policies.md) | [7.0.5][7.0.5] | May 14, 2024 |
-| [.NET 6](./release-notes/6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS](release-policies.md) | [6.0.16][6.0.16]  | November 12, 2024 |
+| [.NET 8](8.0/README.md) | [November 8, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-4/) | [LTS][policies] | [8.0.0-preview.5][8.0.0-preview.5] | November 10, 2026 |
+| [.NET 7](7.0/README.md) | [November, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) | [STS](/release-policies.md) | [7.0.7][7.0.7] | May 14, 2024 |
+| [.NET 6](6.0/README.md) | [November, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS](/release-policies.md) | [6.0.18][6.0.18]  | November 12, 2024 |
 
-You can find release notes for all releases, including out-of-support releases, in the [release-notes](./release-notes) directory.
+You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
 
-[8.0.0-preview.4]: release-notes/8.0/preview/8.0.0-preview.4.md
-[7.0.5]: release-notes/7.0/7.0.5/7.0.5.md
-[6.0.16]: release-notes/6.0/6.0.16/6.0.16.md
+[8.0.0-preview.5]: 8.0/preview/8.0.0-preview.5.md
+[7.0.7]: 7.0/7.0.7/7.0.7.md
+[6.0.18]: 6.0/6.0.18/6.0.18.md
 
 ## Release Information
 
