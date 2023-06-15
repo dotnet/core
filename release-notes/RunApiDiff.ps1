@@ -14,7 +14,7 @@
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
 
 # Example:
-# .\RunApiDiff.ps1 -PreviousDotNetVersion 7.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 2 -CurrentDotNetVersion 7.0 -CurrentPreviewOrRC preview -CurrentPreviewNumberVersion 3 -CoreRepo D:\core -ArcadeRepo D:\arcade -TmpFolder D:\tmp
+# .\RunApiDiff.ps1 -PreviousDotNetVersion 8.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 2 -CurrentDotNetVersion 8.0 -CurrentPreviewOrRC preview -CurrentPreviewNumberVersion 3 -CoreRepo D:\core -ArcadeRepo D:\arcade -TmpFolder D:\tmp
 
 Param (
     [Parameter(Mandatory=$true)]
@@ -323,7 +323,7 @@ Function GetPreviewFolderPath
         $previewOrRCFolderName = GetPreviewOrRCFolderName $dotNetVersion $previewOrRC $previewNumberVersion
         Return [IO.Path]::Combine($prefixFolder, "preview", $apiDiffFolderName, $previewOrRCFolderName)
     }
-    
+
     Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
 }
 
@@ -611,7 +611,7 @@ VerifyPathOrExit $windowsDesktopAfterDllFolder
 
 $asmDiffProjectPath = [IO.Path]::Combine($ArcadeRepo, "src", "Microsoft.DotNet.AsmDiff", "Microsoft.DotNet.AsmDiff.csproj")
 $asmDiffArtifactsPath = [IO.Path]::Combine($ArcadeRepo ,"artifacts", "bin", "Microsoft.DotNet.AsmDiff")
-$asmDiffExe = [IO.Path]::Combine($asmDiffArtifactsPath, "Release", "net7.0", "Microsoft.DotNet.AsmDiff.exe")
+$asmDiffExe = [IO.Path]::Combine($asmDiffArtifactsPath, "Release", "net8.0", "Microsoft.DotNet.AsmDiff.exe")
 ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
 
 ## Recreate api-diff folder in core repo folder
