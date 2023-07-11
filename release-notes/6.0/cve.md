@@ -8,6 +8,24 @@ Your app needs to be on the latest .NET 6 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
 
+- 6.0.20 (July 2023)
+  - [CVE-2023-24895 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/261)
+  - [CVE-2023-24897 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/260)
+  - [CVE-2023-24936 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/259)
+  - [CVE-2023-29331 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/257)
+  - [CVE-2023-29337 | Nuget Client Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/256)
+  - [CVE-2023-32032 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/255)
+  - [CVE-2023-33126 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/254)
+  - [CVE-2023-33128 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/253)
+  - [CVE-2023-33135 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/252)
+- 6.0.19 (June 2023)
+  - No additional CVEs.
+- 6.0.18 (June 2023)
+  - No additional CVEs.
+- 6.0.17 (May 2023)
+  - No additional CVEs.
+- 6.0.16 (April 2023)
+  - No additional CVEs.
 - 6.0.15 (March 2023)
   - No additional CVEs.
 - 6.0.14 (February 2023)
