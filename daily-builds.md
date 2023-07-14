@@ -8,11 +8,11 @@ Daily builds, for both future and servicing branches, are available as Docker co
 
 Preview branches are for new versions of .NET that have not yet been released and are not yet supported.
 
-|Component|*.NET 7.0*
+|Component|*.NET 8.0*
 |:------:|:------:|
-|SDK|[.NET SDK 7.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)
+|SDK|[.NET SDK 8.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)
 |ASP.NET Core|[ASP.NET Core 7.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)
-|Runtime|[.NET Runtime 7.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)
+|Runtime|[.NET Runtime 8.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)
 
 ## Servicing Releases
 
