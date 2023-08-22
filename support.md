@@ -14,26 +14,26 @@ Knowing key dates and policies can help you make informed decisions about when t
 
 ## Community Support
 
-Community builds are available for [Linux](linux.md) and macOS ([cask](https://formulae.brew.sh/cask/dotnet-sdk) and [formulae](https://formulae.brew.sh/formula/dotnet)).
+Community builds are available for [Linux](linux.md) and [macOS](https://formulae.brew.sh/cask/dotnet-sdk).
 
 Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core), but there is no guarantee of a quick reply.
 
-## Microsoft Commercial Support
-
-Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [commercial support](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) for .NET on Linux, macOS, and Windows, per [.NET support policy](https://dotnet.microsoft.com/platform/support/policy).
-
-A more restrictive policy is used for [.NET container images](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md).
-
-## Red Hat Commercial Support
-
-[Red Hat supports .NET](http://redhatloves.net/) on Red Hat Enterprise Linux, per the following.
-
-- .NET 6 is supported in RHEL 7+.
-- .NET 7 is supported in RHEL 8+.
-
-## Ubuntu Commercial Support
+## Canonical support
 
 Canonical supports .NET on Ubuntu via APT archives, per the following.
 
 - .NET 6 is supported in Ubuntu 22.04+.
 - .NET 7 is supported in Ubuntu 22.04+.
+
+## Microsoft support
+
+Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [commercial support](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) for .NET on Linux, macOS, and Windows, per [.NET support policy](https://dotnet.microsoft.com/platform/support/policy).
+
+A more restrictive policy is used for [.NET container images](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md).
+
+## Red Hat support
+
+[Red Hat supports .NET](http://redhatloves.net/) on Red Hat Enterprise Linux, per the following.
+
+- .NET 6 is supported in RHEL 7+.
+- .NET 7 is supported in RHEL 8+.
