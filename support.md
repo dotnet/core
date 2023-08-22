@@ -10,28 +10,25 @@ Patches are provided for functional or security issues, typically monthly on [Pa
 * [.NET release policies](release-policies.md)
 * [.NET supported operating system lifecycle](os-lifecycle-policy.md).
 
-Knowing key dates and policies can help you make informed decisions about when to upgrade or make other changes to your software and computing environment.
 
-## Community Support
+Community builds are available for [Linux](linux.md) and [macOS](https://formulae.brew.sh/cask/dotnet-sdk). Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core).
 
-Community builds are available for [Linux](linux.md) and [macOS](https://formulae.brew.sh/cask/dotnet-sdk).
+Official builds and commercial support is available from the following companies.
 
-Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core), but there is no guarantee of a quick reply.
+## Canonical
 
-## Canonical support
-
-Canonical supports .NET on Ubuntu via APT archives, per the following.
+Canonical supports .NET on Ubuntu, per the following.
 
 - .NET 6 is supported in Ubuntu 22.04+.
 - .NET 7 is supported in Ubuntu 22.04+.
 
-## Microsoft support
+## Microsoft
 
 Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [commercial support](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) for .NET on Linux, macOS, and Windows, per [.NET support policy](https://dotnet.microsoft.com/platform/support/policy).
 
 A more restrictive policy is used for [.NET container images](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md).
 
-## Red Hat support
+## Red Hat
 
 [Red Hat supports .NET](http://redhatloves.net/) on Red Hat Enterprise Linux, per the following.
 

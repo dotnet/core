@@ -11,7 +11,7 @@ Microsoft builds are portable builds.
 
 ## General dependencies
 
-.NET has multiple dependencies that must be installed:
+Portable builds have multiple dependencies that must be installed:
 
 - [.NET 6 dependencies](./release-notes/6.0/linux-packages.md)
 - [.NET 7 dependencies](./release-notes/7.0/linux-packages.md)
