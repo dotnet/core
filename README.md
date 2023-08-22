@@ -22,4 +22,4 @@ You can find release notes for all releases, including out-of-support releases, 
 * [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 
 [releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
-[policies]: ../release-policies.md
+[policies]: release-policies.md
