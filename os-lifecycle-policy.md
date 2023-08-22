@@ -1,8 +1,6 @@
 # .NET Supported OS Policy
 
-.NET is [supported by Microsoft](microsoft-support.md) on multiple operating systems.
-
-A more restrictive policy is used for [.NET container images](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md).
+.NET is [supported](support.md) on multiple operating systems.
 
 ## Supported .NET versions
 
