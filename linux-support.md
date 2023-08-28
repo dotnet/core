@@ -48,12 +48,12 @@ Portable builds support both OpenSSL 1.x and 3.x and can be run on distributions
 
 The highest OpenSSL version is loaded by default, but can be [configured to use a specific version](https://github.com/dotnet/runtime/issues/79153#issuecomment-1335476471).
 
-## Red Hat Enterprise Linux Family support
+## Red Hat Enterprise Linux support
 
-New .NET versions will typically only be supported on RHEL versions in active support.
+New .NET versions will typically only be supported on Red Hat Enterprise Linux (RHEL) versions in active support.
 
 - RHEL 7 is considered in maintenance.
 - RHEL 8 is considered in active support.
 - RHEL 9 is considered in active support.
 
-RHEL compatible distributions are also supported, including: AlmaLinux, CentOS, Oracle Linux, Red Hat Enterprise Linux, and Rocky Linux. 
+RHEL compatible distributions are supported, including: AlmaLinux, CentOS, Oracle Linux, and Rocky Linux. 
