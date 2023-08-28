@@ -1,6 +1,6 @@
 # .NET Support and Compatibility for Linux Distributions
 
-.NET is supported by multiple [commercial and community organizations](support.md) on [multiple Linux distributions](linux.md).
+.NET is supported by various [commercial and community organizations](support.md) on [multiple Linux distributions](linux.md).
 
 .NET can be run on any Linux distribution, via:
 
@@ -46,7 +46,7 @@ ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35
 
 Portable builds support both OpenSSL 1.x and 3.x and can be run on distributions with either version of OpenSSL. For example, Ubuntu 22.04 only includes OpenSSL 3 in its official package archive.
 
-The highest OpenSSL version is loaded by default, but can be [configured to use a specific version](https://github.com/dotnet/runtime/issues/79153#issuecomment-1335476471).
+The highest OpenSSL version is loaded by default, but it can be [configured to use a specific version](https://github.com/dotnet/runtime/issues/79153#issuecomment-1335476471).
 
 ## Red Hat Enterprise Linux support
 

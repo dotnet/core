@@ -1,6 +1,6 @@
 # .NET Support and Distributions
 
-.NET is available (as a binary distribution) in many package managers and official download sites. These builds of .NET are provided and supported by  organizations that participate in the .NET community, [build .NET from source](https://github.com/dotnet/dotnet), and offer stable binaries to their users. These organizations work together to enable developers to be productive and safe on Linux, macOS, and Windows.
+.NET is available (as a binary distribution) in many package managers and official download sites. These builds of .NET are provided and supported by organizations that participate in the .NET community, [build .NET from source](https://github.com/dotnet/dotnet), and offer stable binaries to their users. These organizations work together to enable developers to be productive and safe on Linux, macOS, and Windows.
 
 Patches are provided for functional or security issues, typically monthly on [Patch Tuesday](https://en.wikipedia.org/wiki/Patch_Tuesday).
 
@@ -10,10 +10,9 @@ Patches are provided for functional or security issues, typically monthly on [Pa
 * [.NET release policies](release-policies.md)
 * [.NET supported operating system lifecycle](os-lifecycle-policy.md).
 
-
 Community builds are available for [Linux](linux.md) and [macOS](https://formulae.brew.sh/cask/dotnet-sdk). Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core).
 
-Official builds and commercial support is available from the following companies.
+Official builds and commercial support is available from the following companies:
 
 ## Canonical
 
