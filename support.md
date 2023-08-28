@@ -30,7 +30,7 @@ A more restrictive policy is used for [.NET container images](https://github.com
 
 ## Red Hat
 
-[Red Hat supports .NET](http://redhatloves.net/) on Red Hat Enterprise Linux, per the following.
+[Red Hat supports .NET](https://access.redhat.com/support/policy/updates/net-core) on Red Hat Enterprise Linux, per the following.
 
 - .NET 6 is supported in RHEL 7+.
 - .NET 7 is supported in RHEL 8+.
