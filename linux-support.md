@@ -50,10 +50,10 @@ The highest OpenSSL version is loaded by default, but can be [configured to use 
 
 ## Red Hat Enterprise Linux Family support
 
-New .NET versions will typically only be supported on RHEL era distributions in active support.
+New .NET versions will typically only be supported on RHEL versions in active support.
 
-- RHEL 7 era distributions are considered in maintenance.
-- RHEL 8 era distributions are considered in active support.
-- RHEL 9 era distributions are considered in active support.
+- RHEL 7 is considered in maintenance.
+- RHEL 8 is considered in active support.
+- RHEL 9 is considered in active support.
 
-Red Hat family distributions include: AlmaLinux, CentOS, Oracle Linux, Red Hat Enterprise Linux, and Rocky Linux.
+RHEL compatible distributions are also supported, including: AlmaLinux, CentOS, Oracle Linux, Red Hat Enterprise Linux, and Rocky Linux. 
