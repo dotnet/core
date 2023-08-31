@@ -10,7 +10,9 @@ Patches are provided for functional or security issues, typically monthly on [Pa
 * [.NET release policies](release-policies.md)
 * [.NET supported operating system lifecycle](os-lifecycle-policy.md).
 
-Community builds are available for [Linux](linux.md) and [macOS](https://formulae.brew.sh/cask/dotnet-sdk). Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core).
+Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core).
+
+Community builds are available for [Linux](linux.md) and [macOS](https://formulae.brew.sh/cask/dotnet-sdk). 
 
 Official builds and commercial support is available from the following companies:
 
