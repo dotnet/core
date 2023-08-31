@@ -6,7 +6,7 @@
 
 ## Package archives
 
-.NET is included in the [package archives](https://pkgs.org/download/dotnet) of the following distributions:
+.NET is included in the package archives of the following distributions:
 
 - [Alpine Linux](https://pkgs.alpinelinux.org/packages?name=dotnet*)
 - [Arch Linux](https://archlinux.org/packages/?q=dotnet)
