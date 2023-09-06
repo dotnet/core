@@ -33,7 +33,7 @@ OS                                    | Version               | Architectures   
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
 [Oracle Linux][Oracle-Linux]          | 8+                    | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 8+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
-[SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
+[SUSE Enterprise Linux (SLES)][SLES]  | 12 SP5+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 20.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
 Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
