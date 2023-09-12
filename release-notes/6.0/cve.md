@@ -7,12 +7,17 @@ Your app needs to be on the latest .NET 6 patch version to be secure. The longer
 ## Which CVEs apply to my app?
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
-- 6.0.21 (August 2023)
+- 6.0.22 (September 2023)
   - [CVE-2023-36799 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/275)
   - [CVE-2023-36796 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/274)
   - [CVE-2023-36793 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/273)
   - [CVE-2023-36794 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/271)
   - [CVE-2023-36792 | Nuget Client Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/271)
+- 6.0.21 (August 2023)
+  - [CVE-2023-35390 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/266)
+  - [CVE-2023-38180 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/269)
+  - [CVE-2023-38178 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/268)
+  - [CVE-2023-35391 | Nuget Client Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/267)
 - 6.0.20 (July 2023)
   - [CVE-2023-24895 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/261)
   - [CVE-2023-24897 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/260)
