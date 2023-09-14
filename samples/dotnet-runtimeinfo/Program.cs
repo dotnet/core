@@ -5,8 +5,6 @@ using System.Runtime.InteropServices;
 using static System.Console;
 using static System.IO.File;
 
-string nl = Environment.NewLine;
-
 // Variant of https://github.com/dotnet/core/tree/main/samples/dotnet-runtimeinfo
 // Ascii text: https://ascii.co.uk/text (Univers font)
 WriteLine(""""""""
