@@ -22,21 +22,23 @@ $" `\"8bbdP\"Y8  `\"YbbdP\"\'   \"Y428 42       42  `\"Ybbd8\"\'   \"Y428{nl}");
 AssemblyInformationalVersionAttribute assemblyInformation = ((AssemblyInformationalVersionAttribute[])typeof(object).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false))[0];
 string[] informationalVersionSplit = assemblyInformation.InformationalVersion.Split('+');
 
-WriteLine("**.NET information");
-WriteLine($"{nameof(Environment.Version)}: {Environment.Version}");
-WriteLine($"{nameof(RuntimeInformation.FrameworkDescription)}: {RuntimeInformation.FrameworkDescription}");
-WriteLine($"Libraries version: {informationalVersionSplit[0]}");
-WriteLine($"Libraries hash: {informationalVersionSplit[1]}");
+WriteLine("=== .NET information ===");
+WriteLine("{0,-20} {1}", "Environment.Version", Environment.Version);
+WriteLine("{0,-20} {1}", "FrameworkDescription", RuntimeInformation.FrameworkDescription);
+WriteLine("{0,-20} {1}", "Libraries version", informationalVersionSplit[0]);
+WriteLine("{0,-20} {1}", "Libraries hash", informationalVersionSplit[1]);
+WriteLine("{0,-20} {1}", "Runtime identifier", RuntimeInformation.RuntimeIdentifier);
+WriteLine("{0,-20} {1}", "Runtime location", Path.GetDirectoryName(typeof(object).Assembly.Location));
 WriteLine();
-WriteLine("**Environment information");
-WriteLine($"{nameof(Environment.ProcessorCount)}: {Environment.ProcessorCount}");
-WriteLine($"{nameof(RuntimeInformation.OSArchitecture)}: {RuntimeInformation.OSArchitecture}");
-WriteLine($"{nameof(RuntimeInformation.OSDescription)}: {RuntimeInformation.OSDescription}");
-WriteLine($"{nameof(Environment.OSVersion)}: {Environment.OSVersion}");
+WriteLine("===Environment information ===");
+WriteLine($"{nameof(Environment.ProcessorCount),-20} {Environment.ProcessorCount}");
+WriteLine($"{nameof(RuntimeInformation.OSArchitecture),-20} {RuntimeInformation.OSArchitecture}");
+WriteLine($"{nameof(RuntimeInformation.OSDescription),-20} {RuntimeInformation.OSDescription}");
+WriteLine($"{nameof(Environment.OSVersion),-20} {Environment.OSVersion}");
 
 // Linux Pretty Name
 const string OSRel = "/etc/os-release";
-if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && 
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) &&
     File.Exists(OSRel))
 {
   const string PrettyName = "PRETTY_NAME";
