@@ -53,7 +53,7 @@ We recommend that you install the .NET SDK to develop and build applications, an
 Download links are provided for each of the distributions at:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [.NET 8 release notes](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.6.md)
+- [.NET 8 release notes](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.7.md)
 
 [Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server, and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
@@ -64,7 +64,7 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
-Version:   8.0.100-preview.6.23330.14
+Version:   8.0.100-rc.1.23455.8
  Commit:    0a5360315a
 
 Runtime Environment:
@@ -72,24 +72,24 @@ Runtime Environment:
  OS Version:  12.6
  OS Platform: Darwin
  RID:         osx.12-x64
- Base Path:   /usr/local/share/dotnet/x64/sdk/8.0.100-preview.6.23330.14/
+ Base Path:   /usr/local/share/dotnet/x64/sdk/8.0.100-rc.1.23455.8/
 
 Host:
-  Version:      8.0.100-preview.6.23330.14
+  Version:      8.0.100-rc.1.23455.8
   Architecture: x64
   Commit:       550605cc93
 
 .NET SDKs installed:
-8.0.100-preview.6.23330.14 [/usr/local/share/dotnet/x64/sdk]
+8.0.100-rc.1.23455.8 [/usr/local/share/dotnet/x64/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App  8.0.0-preview.5.23302.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 8.0.0-preview.5.23280.8 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
+  Microsoft.AspNetCore.App 8.0.0-rc.1.23421.29 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.0-rc.1.23419.4 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-8.0.100-preview.6.23330.14
+8.0.100-rc.1.23455.8
 ```

@@ -13,6 +13,8 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2023/09/12 | [8.0.0 RC 1](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-rc.1.md) |
+| 2023/08/08 | [8.0.0 Preview 7](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.7.md) |
 | 2023/07/11 | [8.0.0 Preview 6](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.6.md) |
 | 2023/06/13 | [8.0.0 Preview 5](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.5.md) |
 | 2023/05/16 | [8.0.0 Preview 4](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.4.md) |
