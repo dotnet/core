@@ -41,16 +41,16 @@ const string OSRel = "/etc/os-release";
 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) &&
     File.Exists(OSRel))
 {
-  const string PrettyName = "PRETTY_NAME";
-  foreach(string line in File.ReadAllLines(OSRel))
-  {
-      if (line.StartsWith(PrettyName))
-      {
-          ReadOnlySpan<char> value = line.AsSpan()[(PrettyName.Length + 2)..^1];
-          WriteLine($"PRETTY_NAME: {value.ToString()}");
-          break;
-      }
-  }
+    const string PrettyName = "PRETTY_NAME";
+    foreach (string line in File.ReadAllLines(OSRel))
+    {
+        if (line.StartsWith(PrettyName))
+        {
+            ReadOnlySpan<char> value = line.AsSpan()[(PrettyName.Length + 2)..^1];
+            WriteLine($"PRETTY_NAME: {value.ToString()}");
+            break;
+        }
+    }
 }
 
 WriteLine();
