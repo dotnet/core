@@ -4,13 +4,16 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## .NET SDK
 
-### [8.0.100-preview.7] .NET 8 preview 7 SDK is not compatible with Visual Studio 17.6
+### [8.0.100-rc.2] .NET 8 RC 2 SDK is not compatible with Visual Studio 17.7 or 17.8-preview 2 for Razor projects
 
-Please upgrade to 17.7.0 or 17.8-preview1 or use [global.json](https://learn.microsoft.com/dotnet/core/tools/global-json) to pin to the 7.0.400 SDK that is included with 17.6.
+Please upgrade to 17.8-preview3 or use [global.json](https://learn.microsoft.com/dotnet/core/tools/global-json) to pin to the 7.0.400 SDK that is included with 17.7.
+
+### [8.0.100-rc.2] .NET 8 RC 2 SDK will list out 14 warnings when running dotnet new the first time
+
+This should not affect the fucntionality of the template itself but may impact localization of the template help for the Blazor templates.
 
 ```
-SDK Resolver Failure: "The SDK resolver "Microsoft.DotNet.MSBuildSdkResolver" failed while attempting to resolve the SDK "Microsoft.Net.Sdk". Exception: "System.IO.FileNotFoundException: Could not find file '...\sdk-manifests\8.0.100-rc.1\microsoft.net.workload.emscripten.current\WorkloadManifest.json'.
-File name: '...\sdk-manifests\8.0.100-rc.1\microsoft.net.workload.emscripten.current\WorkloadManifest.json'
+Warning: Failed to read or parse localization file "C:\Program Files\dotnet\templates\8.0.0-rc.2.23476.41\microsoft.dotnet.web.projecttemplates.8.0.8.0.0-rc.2.23476.41.nupkg(/content/BlazorWeb-CSharp/.template.config/localize/templatestrings.cs.json)", it will be skipped from further processing.
 ```
 
 ## .NET MAUI
