@@ -13,7 +13,7 @@ System.TypeLoadException: Could not load type 'Enumerator' from assembly 'Micros
 ```
 **Workaround** Please upgrade to 17.8-preview3 or use [global.json](https://learn.microsoft.com/dotnet/core/tools/global-json) to pin to the 7.0.400 SDK that is included with 17.7.
 
-### [8.0.100-rc.2] .NET 8 RC 2 SDK will list out 14 warnings when running dotnet new the first time
+### [8.0.100-rc.2] .NET 8 RC 2 SDK will disply 14 warnings when running dotnet new the first time or during any future template installation
 
 This should not affect the fucntionality of the template itself but may impact localization of the template help for the Blazor templates.
 
@@ -21,12 +21,23 @@ This should not affect the fucntionality of the template itself but may impact l
 Warning: Failed to read or parse localization file "C:\Program Files\dotnet\templates\8.0.0-rc.2.23476.41\microsoft.dotnet.web.projecttemplates.8.0.8.0.0-rc.2.23476.41.nupkg(/content/BlazorWeb-CSharp/.template.config/localize/templatestrings.cs.json)", it will be skipped from further processing.
 ```
 
-### [8.0.100-rc.2] .NET 8 RC 2 SDK may fail when restoring multiple local tools in the same action
-The .NET tools download experience was changed in .NET 8 RC 2 and the tool restore functionality ended up running in parallel for multiple tools but overwriting the same shared project.assets.json file.
+### [8.0.100-rc.2] `dotnet tool restore` may fail with a file access exception when restoring multiple tools
+When running `dotnet tool restore` with a tools config which contains multiple .NET tools, the command can fail with an exception similar to the following:
+
 ```
-The process cannot access the file '/tmp/505bdf97-0de5-4af8-8b26-2b27ae4ab4e5/project.assets.json' because it is being used by another process.
+Unhandled exception: System.AggregateException: One or more errors occurred. (The process cannot access the file 'C:\Users\Username\AppData\Local\Temp\a75617cf-9767-45ca-aaed-34da2edd223e\project.assets.json' because it is being used by another process.)
+When running `dotnet tool restore` with a tools config which contains multiple .NET tools, the command can fail with an exception similar to the following:
+ ---> System.IO.IOException: The process cannot access the file 'C:\Users\Username\AppData\Local\Temp\a75617cf-9767-45ca-aaed-34da2edd223e\project.assets.json' because it is being used by another process.
 ```
-**Workaround** Create separate dotnet-tool.json files for each tool and restore them one by one
+**Workarounds**
+
+The error only occurs when there are multiple tools that have not been previously restored.  So to work around the issue, you can remove all but one tool from the `dotnet-tools.json` config file, and run `dotnet tool restore`.  Then add the tools back to the config file one at a time, running `dotnet tool restore` between each one.
+
+If you are using .NET tools in CI where you can't easily modify the tools config file between multiple tool restores, you can create a separate `dotnet-tools.json` config file for each .NET tool in a separate subfolder.  Then run `dotnet tool restore` in each subfolder.
+
+### ## [8.0.100-rc.2] `dotnet tool restore` will always install the latest version of a specific tool
+
+If a version or version range is used to specify a version of a tool, tool restore will still install the latest version available. There is no workaround and a fix is expected for GA.
 
 ## .NET MAUI
 
