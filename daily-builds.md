@@ -12,14 +12,14 @@ Preview branches are for new versions of .NET that have not yet been released an
 |:------:|:------:|
 |SDK|[.NET SDK 8.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)
 |ASP.NET Core|[ASP.NET Core 8.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)
-|Runtime|[.NET Runtime 8.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)
+|Runtime|[.NET Runtime 8.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md)
 
 ## Servicing Releases
 
 Servicing branches are for new patch versions of .NET that have not yet been released and are not yet supported.
 
-|Component|*.NET 7.0*|*.NET 6.0*|*.NET Core 3.1*|
-|:------:|:------:|:------:|:------:|:------:|
-|SDK|[.NET SDK 7.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET SDK 6.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET Core SDK 3.1.xxx](https://github.com/dotnet/core-sdk/blob/main/README.md#installers-and-binaries)|
-|ASP.NET Core|[ASP.NET Core 7.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 6.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 3.1](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|
-|Runtime|[.NET Runtime 7.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)|[.NET Core Runtime 6.0](https://github.com/dotnet/installer/blob/master/README.md#daily-builds)|[.NET Core Runtime 3.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|
+|Component|*.NET 7.0*|*.NET 6.0*|
+|:------:|:------:|:------:
+|SDK|[.NET SDK 7.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET SDK 6.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|
+|ASP.NET Core|[ASP.NET Core 7.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 6.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|
+|Runtime|[.NET Runtime 7.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md)|[.NET Core Runtime 6.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md)|
