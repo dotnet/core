@@ -11,12 +11,12 @@ The following table lists in-support .NET releases.
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
 | [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8) | [LTS][policies] | [8.0.0-rc.2][8.0.0-rc.2] | November 10, 2026 |
-| [.NET 7](release-notes/7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7) | [STS][policies] | [7.0.12][7.0.12] | May 14, 2024 |
-| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.23][6.0.23] | November 12, 2024 |
+| [.NET 7](release-notes/7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7) | [STS][policies] | [7.0.13][7.0.13] | May 14, 2024 |
+| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.24][6.0.24] | November 12, 2024 |
 
 [8.0.0-rc.2]: release-notes/8.0/preview/8.0.0-rc.2.md
-[7.0.12]: release-notes/7.0/7.0.12/7.0.12.md
-[6.0.23]: release-notes/6.0/6.0.23/6.0.23.md
+[7.0.13]: release-notes/7.0/7.0.13/7.0.13.md
+[6.0.24]: release-notes/6.0/6.0.24/6.0.24.md
 
 ## End-of-life .NET versions
 
