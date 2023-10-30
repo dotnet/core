@@ -17,6 +17,7 @@ You can use the command `dotnet --info` to check which versions of .NET Core SDK
 Here are the step by step instructions on how to use dotnet-svcutil.xmlserializer in a .NET Core console application.
 
 1. Create a WCF Service named 'MyWCFService' using the default template 'WCF Service Application' in .NET Framework.  Add ```[XmlSerializerFormat]``` attribute on the service method like the following
+
     ```c#
     [ServiceContract]
     public interface IService1
@@ -26,19 +27,25 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
         string GetData(int value);
     }
     ```
+
 2. Create a .NET Core console application as WCF client application that targets at netcoreapp 2.1, e.g. create an app named 'MyWCFClient' with the command,
-    ```
+
+    ```console
     dotnet new console --name MyWCFClient
     ```
+
     Make sure your csproj targets a netcoreapp 2.1 as the following in .csproj. This is done using the following XML element in your .csproj
+
     ```xml
     <TargetFramework>netcoreapp2.1</TargetFramework>
     ```
+
 3. Add a package reference to System.ServiceModel.Http
-   
+
    Run command: `dotnet add package System.ServiceModel.Http -v 4.5.0`
 
 4. Add WCF Client code
+
     ```c#
     using System.ServiceModel;
     
@@ -63,11 +70,13 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
         string GetData(int value);
     }
     ```
+
 5. Edit the .csproj and add a reference to the dotnet-svcutil.xmlserializer package. For example,
 
     i. Run command: `dotnet add package dotnet-svcutil.xmlserializer -v 1.0.0`
 
     ii. Add the following lines in MyWCFClient.csproj,
+
     ```xml
     <ItemGroup>
       <DotNetCliToolReference Include="dotnet-svcutil.xmlserializer" Version="1.0.0" />
@@ -76,4 +85,4 @@ Here are the step by step instructions on how to use dotnet-svcutil.xmlserialize
 
 6. Build the application by running `dotnet build`. If everything succeeds, an assembly named MyWCFClient.XmlSerializers.dll will be generated in the output folder. You will see warnings in the build output if the tool failed to generate the assembly.
 
-7. Start the WCF service e.g. running http://localhost:2561/Service1.svc in the IE. Then start the client application and it will automatically load and use the pre-generated serializers at runtime.
+7. Start the WCF service e.g. running <http://localhost:2561/Service1.svc> in the IE. Then start the client application and it will automatically load and use the pre-generated serializers at runtime.

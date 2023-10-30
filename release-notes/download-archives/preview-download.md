@@ -1,6 +1,6 @@
 # .NET Core 1.1 Preview 1 and .NET Core SDK 1.0 Preview 2.1
 
-The installers and binary archives on this page include .NET Core 1.1 Preview 1 (runtime and shared framework) and the .NET Core 1.0 SDK Preview 2.1. If you only need the runtime and shared framework (no SDK), download links are available on the [Runtime Download](https://github.com/dotnet/core/blob/main/release-notes/preview-runtime-download.md) page. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1-Preview-1-SDK-Preview-2.1-3155-SHA.txt) are available to verify downloads.
+The installers and binary archives on this page include .NET Core 1.1 Preview 1 (runtime and shared framework) and the .NET Core 1.0 SDK Preview 2.1. If you only need the runtime and shared framework (no SDK), download links are available on the [Runtime Download](preview-runtime-download.md) page. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1-Preview-1-SDK-Preview-2.1-3155-SHA.txt) are available to verify downloads.
 
 | .NET Core 1.1 Preview 1 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|:--|:--|

@@ -4,9 +4,9 @@
 
 .NET is supported on Linux per [.NET Support and Compatibility for Linux Distributions](linux-support.md).
 
-## Distribution archives
+## Package archives
 
-.NET is included in the [archives](https://pkgs.org/download/dotnet) of the following distributions:
+.NET is included in the package archives of the following distributions:
 
 - [Alpine Linux](https://pkgs.alpinelinux.org/packages?name=dotnet*)
 - [Arch Linux](https://archlinux.org/packages/?q=dotnet)
@@ -22,11 +22,11 @@ In general, you can install the .NET SDK via a versioned package, like `dotnet7`
 sudo apt update && sudo apt install -y dotnet-sdk-7.0
 ```
 
-## Microsoft archives
+## Microsoft packages
 
-Microsoft offers alternate feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are document at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux).
+Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are document at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux).
 
-You can move back-and-forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
+You can move back and forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
 
 ## Containers
 
@@ -40,6 +40,6 @@ Microsoft publishes container images per [.NET container publishing policy](http
 
 ## Building .NET from source
 
-.NET can be built from source via [dotnet/source-build](https://github.com/dotnet/source-build). This capability is expanding with [dotnet/dotnet](https://github.com/dotnet/dotnet) (which also uses source-build).
+.NET can be built from source via [dotnet/dotnet](https://github.com/dotnet/dotnet).
 
-For distributions publishing packages, please follow [.NET Packaging Guidelines](https://learn.microsoft.com/dotnet/core/distribution-packaging#recommended-packages).
+For distributions publishing packages, follow [.NET Packaging Guidelines](https://learn.microsoft.com/dotnet/core/distribution-packaging#recommended-packages).

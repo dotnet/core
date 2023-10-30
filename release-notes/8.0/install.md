@@ -10,30 +10,31 @@ Operating system specific instructions:
 
 ## [Using dotnet-install-scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
 
-### Install the latest preview version of the 8.0.1xx SDK to the specified location:
+### Install the latest preview version of the 8.0.1xx SDK to the specified location
 
 Windows:
 
-```
+```console
 ./dotnet-install.ps1 -Channel 8.0.1xx -Quality preview -InstallDir C:\cli
 ```
 
 macOS/Linux:
-```
+
+```console
 ./dotnet-install.sh --channel 8.0.1xx --quality preview --install-dir ~/cli
 ```
 
-### Install the latest preview version of the 8.0.0 runtime to the specified location:
+### Install the latest preview version of the 8.0.0 runtime to the specified location
 
 Windows:
 
-```
+```console
 .\.dotnet\dotnet-install.ps1 -Channel 8.0 -Runtime dotnet -Quality preview -InstallDir c:\cli
 ```
 
 macOs/Linux:
 
-```
+```console
 ./dotnet-install.sh --runtime dotnet --channel 8.0 --quality preview --install-dir ~/cli
 ```
 
@@ -52,7 +53,7 @@ We recommend that you install the .NET SDK to develop and build applications, an
 Download links are provided for each of the distributions at:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [.NET 8 release notes](README.md)
+- [.NET 8 release notes](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.7.md)
 
 [Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server, and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
@@ -63,7 +64,7 @@ You can determine what is installed on your machine (assuming .NET is installed)
 ```console
 C:\>dotnet --info
 .NET SDK (reflecting any global.json):
-Version:   8.0.100-preview.2.23157.25
+Version:   8.0.100-rc.2.23502.2
  Commit:    0a5360315a
 
 Runtime Environment:
@@ -71,24 +72,24 @@ Runtime Environment:
  OS Version:  12.6
  OS Platform: Darwin
  RID:         osx.12-x64
- Base Path:   /usr/local/share/dotnet/x64/sdk/8.0.100-preview.2.23157.25/
+ Base Path:   /usr/local/share/dotnet/x64/sdk/8.0.100-rc.2.23502.2/
 
 Host:
-  Version:      8.0.100-preview.2.23157.25
+  Version:      8.0.100-rc.2.23502.2
   Architecture: x64
   Commit:       550605cc93
 
 .NET SDKs installed:
-  8.0.100-preview.2.23157.25 [/usr/local/share/dotnet/x64/sdk]
+8.0.100-rc.2.23502.2 [/usr/local/share/dotnet/x64/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App 8.0.0-preview.2.23153.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 8.0.0-preview.2.23128.3 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
+  Microsoft.AspNetCore.App 8.0.0-rc.2.23480.2 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.0-rc.2.23479.6 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-8.0.100-preview.2.23157.25
+8.0.100-rc.2.23502.2
 ```

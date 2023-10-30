@@ -31,13 +31,14 @@ OS                                    | Version                 | Architectures 
 OS                                    | Version               | Architectures     | Lifecycle
 --------------------------------------|-----------------------|-------------------|----------
 [Alpine Linux][Alpine]                | 3.13+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
-[CentOS][CentOS]                      | 7+                    | x64               | [CentOS][CentOS-lifecycle]
+[CentOS Linux][CentOS]                | 7                     | x64               | [CentOS][CentOS-lifecycle]
+[CentOS Stream Linux][CentOS]         | 8                     | x64               | [CentOS][CentOS-lifecycle]
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
-[Fedora][Fedora]                      | 33+                   | x64               | [Fedora][Fedora-lifecycle]
+[Fedora][Fedora]                      | 36+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
-[Oracle Linux][Oracle-Linux]                  | 7+                   | x64               | [Oracle][Oracle-lifecycle]
+[Oracle Linux][Oracle-Linux]          | 7+                    | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
-[SUSE Enterprise Linux (SLES)][SLES]  | 12 SP2+               | x64               | [SUSE][SLES-lifecycle]
+[SUSE Enterprise Linux (SLES)][SLES]  | 12 SP5+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 16.04, 18.04, 20.04+  | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
 Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
@@ -121,7 +122,9 @@ None yet.
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 6.0][OS-lifecycle-policy].
 
-* Alpine 3.12
-* macOS 10.13
+- Alpine 3.12
+- macOS 10.13
+- SUSE Linux Enterprise Server 12 SP2, SP3, SP4
+- Fedora 35
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md

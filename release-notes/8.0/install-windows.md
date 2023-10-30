@@ -27,11 +27,9 @@ Each of the distributions can be downloaded from:
 
 You can now install .NET updates using the Windows Package Manager CLI (winget):
 
-* To install the .NET 8 runtime: ```winget install dotnet-runtime-8```
-
-* To install the .NET 8 SDK: ```winget install dotnet-sdk-8```
-
-* To update an existing installation: ```winget upgrade```
+- To install the .NET 8 runtime: `winget install dotnet-runtime-8`
+- To install the .NET 8 SDK: `winget install dotnet-sdk-8`
+- To update an existing installation: `winget upgrade`
 
 See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/dotnet/core/install/windows?tabs=net70#install-with-windows-package-manager-winget) for more information.
 
@@ -40,7 +38,6 @@ See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/
 You can install any of the distributions with MSI. The following image demonstrates installing the .NET SDK. After launching the MSI, click "Install" and you will be taken through the process of installing the SDK.
 
 ![image](https://user-images.githubusercontent.com/94140381/186767749-45306b95-cd1b-4d85-9634-42fb83a1cf4b.png)
-
 
 ## Windows Server Hosting with IIS
 
@@ -53,13 +50,13 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```console
-C:\>curl -Lo dotnet.zip https://download.visualstudio.microsoft.com/download/pr/42e8780b-d8eb-4c1e-b8d6-ab7b44d5e273/a7b8f51ea935fdee14c871a3d1b11001/dotnet-sdk-8.0.100-preview.2.23157.25-win-x64.zip
+C:\>curl -Lo dotnet.zip https://download.visualstudio.microsoft.com/download/pr/3e9b8d29-808a-488c-aac5-e553e970adbb/76b4ecb7f8751ecf2375730398816271/dotnet-sdk-8.0.100-rc.2.23502.2-win-x64.exe
 C:\>tar -C dotnet -xf dotnet.zip
 C:\>del dotnet.zip
 C:\>set DOTNET_ROOT=C:\dotnet
 C:\>set PATH=%PATH%;C:\dotnet
 C:\>dotnet --version
-8.0.100-preview.2.23157.25
+8.0.100-rc.2.23502.2
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.

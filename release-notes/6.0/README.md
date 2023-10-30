@@ -3,7 +3,7 @@
 [.NET 6](https://devblogs.microsoft.com/dotnet/announcing-net-6/) is an [Long Term Support (LTS)](../../release-policies.md) release and will be supported for three years, from November 8, 2021 to November 12, 2024. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/6.0)
-- [Linux Package Managers](https://docs.microsoft.com/dotnet/core/install/linux)
+- [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
 - [Containers](https://mcr.microsoft.com/catalog?search=dotnet/)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
@@ -13,6 +13,14 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2023/10/24 | [6.0.24](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.24/6.0.24.md) |
+| 2023/10/10 | [6.0.23](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.23/6.0.23.md) |
+| 2023/09/12 | [6.0.22](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.22/6.0.22.md) |
+| 2023/08/08 | [6.0.21](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.21/6.0.21.md) |
+| 2023/07/11 | [6.0.20](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.20/6.0.20.md) |
+| 2023/06/22 | [6.0.19](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.19/6.0.19.md) |
+| 2023/06/13 | [6.0.18](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.18/6.0.18.md) |
+| 2023/04/11 | [6.0.16](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.16/6.0.16.md) |
 | 2023/03/14 | [6.0.15](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.15/6.0.15.md) |
 | 2023/02/14 | [6.0.14](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.14/6.0.14.md) |
 | 2023/01/10 | [6.0.13](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.13/6.0.13.md) |

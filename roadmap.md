@@ -6,7 +6,7 @@ If you're looking for the product roadmap, visit <https://aka.ms/dotnet-product-
 
 ## Released Versions
 
-* [Latest updates](https://github.com/dotnet/core/blob/main/release-notes/README.md) or [Download archive](https://github.com/dotnet/core/blob/main/release-notes/download-archive.md)
+* [Latest updates](./release-notes/README.md) or [Download archive](./release-notes/download-archives)
 
 For released versions of the product:
 
@@ -18,7 +18,6 @@ For released versions of the product:
 
 | Milestone                 | Release Date |
 |---------------------------|--------------|
-| .NET Core 3.1.x  | LTS (Long Term Support) release. Approximately every 1-2 months or as needed. |
 | .NET 6.0 | LTS (Long Term Support) release. Approximately every 1-2 months or as needed. |
 | .NET 7.0 | STS (Standard Term Support) release. Approximately every 1-2 months or as needed. |
 | .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
