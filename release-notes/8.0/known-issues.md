@@ -54,7 +54,7 @@ For details about known issues, please reference to [the pinned issue](https://g
 ## WPF [ 8.0.100-preview.6.] `dotnet build` will fail for WPF projects having `IntermediateOutputPath` redirected or `IncludePackageReferencesDuringMarkupCompilation` set to false
 Available Workarounds:
 Either of these should work, depending on the use cases.
-- set IncludePackageReferencesDuringMarkupCompilation to true in csproj
+- set `IncludePackageReferencesDuringMarkupCompilation` to `true` in the `.csproj` or an imported file.
 - set EmbedUntrackedSources as false in csproj.
 - Do NOT redirect the IntermediateOutputPath
 Detailed discussion [here](https://github.com/dotnet/sdk/issues/34438)
