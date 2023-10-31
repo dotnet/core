@@ -52,9 +52,17 @@ For details about known issues, please refer to the individual repositories:
 For details about known issues, please reference to [the pinned issue](https://github.com/dotnet/core/issues/8288) in this repo.
 
 ## WPF [ 8.0.100-preview.6.] `dotnet build` will fail for WPF projects having `IntermediateOutputPath` redirected or `IncludePackageReferencesDuringMarkupCompilation` set to false
+When building XAML files, you may encounter an error like
+
+```
+S:\FxWpf\obj\net472\MainWindow.g.cs(57,21): error CS1504: Source file 'MainWindow.xaml' could not be opened -- Could not find file. [S:\FxWpf\FxWpf\FxWpf_mrhd1mq3_wpftmp.csproj]
+```
+
+Where the error arises from a `*_wpftmp.csproj` project, is `CS1504`, and references a `.xaml` file.
+
 Available Workarounds:
-Either of these should work, depending on the use cases.
+Any of these should work; select the best option for your case.
 - set `IncludePackageReferencesDuringMarkupCompilation` to `true` in the `.csproj` or an imported file.
-- set EmbedUntrackedSources as false in csproj.
-- Do NOT redirect the IntermediateOutputPath
+- set `EmbedUntrackedSources` to `false` in the `.csproj` or an imported file.
+- Use the default `IntermediateOutputPath` in .NET Framework 4.x-targeting projects.
 Detailed discussion [here](https://github.com/dotnet/sdk/issues/34438)
