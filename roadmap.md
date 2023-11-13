@@ -20,7 +20,7 @@ For released versions of the product:
 |---------------------------|--------------|
 | .NET 6.0 | LTS (Long Term Support) release. Approximately every 1-2 months or as needed. |
 | .NET 7.0 | STS (Standard Term Support) release. Approximately every 1-2 months or as needed. |
-| .NET 8.0 | LTS (Long Term Support) release, scheduled for November 2023 |
+| .NET 8.0 | LTS (Long Term Support) release, scheduled for November 14, 2023 |
 
 Details about longer-term schedule have been announced on May 6th, 2019 in [Introducing .NET 5](https://devblogs.microsoft.com/dotnet/introducing-net-5/) blog post.
 
