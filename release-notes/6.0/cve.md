@@ -7,6 +7,17 @@ Your app needs to be on the latest .NET 6 patch version to be secure. The longer
 ## Which CVEs apply to my app?
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
+- 6.0.25 (November 2023)
+  - [CVE-2023-36038 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/286)
+  - [CVE-2023-36049 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/287)
+  - [CVE-2023-36558 | .NET Security Feature Bypass Vulnerability](https://github.com/dotnet/announcements/issues/288)
+- 6.0.24 (October 2023)
+  - [CVE-2023-44487 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/277)
+  - [CVE-2023-36799 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/275)
+  - [CVE-2023-36796 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/274)
+  - [CVE-2023-36793 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/273)
+  - [CVE-2023-36794 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/272)
+  - [CVE-2023-36792 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/271)
 - 6.0.23 (October 2023)
   - [CVE-2023-44487 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/277)
 - 6.0.22 (September 2023)
