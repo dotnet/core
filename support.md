@@ -22,7 +22,7 @@ Canonical supports .NET on Ubuntu, per the following.
 
 - .NET 6 is supported in Ubuntu 22.04+.
 - .NET 7 is supported in Ubuntu 22.04+.
-- .NET 8 is supported in Ubuntu 22.04+.
+- .NET 8 is supported in Ubuntu 23.10+.
 
 ## Microsoft
 
