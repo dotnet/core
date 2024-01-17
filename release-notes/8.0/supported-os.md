@@ -14,7 +14,7 @@ OS                                    | Version                 | Architectures 
 [Windows Server Core][Windows-Server] | 2012+ (*)               | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Nano Server][Nano-Server]            | Version 1809+           | x64             | [Windows Server][Windows-Server-lifecycle]
 
-**\*** Windows Server 2012 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview) installed
+**\*** Windows Server 2012 and Windows Server 2012 R2 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview) installed
 
 [Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
