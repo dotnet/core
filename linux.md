@@ -24,7 +24,7 @@ sudo apt update && sudo apt install -y dotnet-sdk-7.0
 
 ## Microsoft packages
 
-Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are document at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux).
+Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are documented at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux).
 
 You can move back and forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
 

@@ -22,6 +22,7 @@ Canonical supports .NET on Ubuntu, per the following.
 
 - .NET 6 is supported in Ubuntu 22.04+.
 - .NET 7 is supported in Ubuntu 22.04+.
+- .NET 8 is supported in Ubuntu 23.10+.
 
 ## Microsoft
 
@@ -31,7 +32,4 @@ A more restrictive policy is used for [.NET container images](https://github.com
 
 ## Red Hat
 
-[Red Hat supports .NET](https://access.redhat.com/support/policy/updates/net-core) on Red Hat Enterprise Linux, per the following.
-
-- .NET 6 is supported in RHEL 7+.
-- .NET 7 is supported in RHEL 8+.
+Red Hat supports .NET on Red Hat Enterprise Linux, per [.NET life cycle policy](https://access.redhat.com/support/policy/updates/net-core).
