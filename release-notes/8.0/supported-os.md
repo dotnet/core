@@ -80,7 +80,7 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 
 OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
-[macOS][macOS]                | 10.15+                    | x64, Arm64        |
+[macOS][macOS]                | 12.0                    | x64, Arm64        |
 
 .NET 8 is supported in the Rosetta 2 x64 emulator.
 
