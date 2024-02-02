@@ -1,8 +1,23 @@
-# .NET Release Schedule
+# .NET Roadmaps & Release Schedule
 
-This document covers the upcoming release dates for .NET and .NET Core.
+This document covers roadmaps and release schedules for .NET and .NET products.
 
-If you're looking for the product roadmap, visit <https://aka.ms/dotnet-product-roadmap>.
+# .NET Roadmaps
+
+Here is a list of .NET project roadmaps that you can get involved in:
+
+* [.NET Aspire](https://github.com/dotnet/aspire/issues/1549)
+* [.NET MAUI](https://github.com/dotnet/maui/wiki/Roadmap)
+* [ASP.NET Core](https://github.com/dotnet/aspnetcore/issues/51834)
+* [C#](https://github.com/dotnet/csharplang)
+* [Entity Framework Core](https://github.com/dotnet/efcore/issues/29853)
+* [F#](https://github.com/fsharp/fslang-design)
+* [ML.NET](https://github.com/dotnet/machinelearning/blob/main/ROADMAP.md)
+* [NuGet](https://github.com/NuGet/Home/issues/13143)
+* [Roslyn](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md)
+* [Visual Basic](https://github.com/dotnet/vblang)
+* [WinForms](https://github.com/dotnet/winforms/blob/main/docs/roadmap.md)
+* [WPF](https://github.com/dotnet/wpf/blob/main/roadmap.md)
 
 ## Released Versions
 
