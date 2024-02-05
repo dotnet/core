@@ -80,7 +80,7 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 
 OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
-[macOS][macOS]                | 12.0                    | x64, Arm64        |
+[macOS][macOS]                | 12.0+                     | x64, Arm64        |
 
 .NET 8 is supported in the Rosetta 2 x64 emulator.
 
@@ -98,11 +98,11 @@ OS                            | Version                 | Architectures     |
 
 OS                            | Version                 | Architectures     |
 ------------------------------|-------------------------|-------------------|
-[iOS][iOS]                    | 11.0+                   | Arm64             |
-[iOS Simulator][iOS]          | 11.0+                   | x64, Arm64        |
-[tvOS][tvOS]                  | 11.0+                   | Arm64             |
-[tvOS Simulator][tvOS]        | 11.0+                   | x64, Arm64        |
-[MacCatalyst][macOS]          | 10.15+, 11.0+ on Arm64  | x64, Arm64        |
+[iOS][iOS]                    | 12.0+                   | Arm64             |
+[iOS Simulator][iOS]          | 12.0+                   | x64, Arm64        |
+[tvOS][tvOS]                  | 12.0+                   | Arm64             |
+[tvOS Simulator][tvOS]        | 12.0+                   | x64, Arm64        |
+[MacCatalyst][macOS]          | 12.0+                   | x64, Arm64        |
 
 [iOS]: https://support.apple.com/ios
 [tvOS]: https://support.apple.com/apple-tv
