@@ -98,10 +98,10 @@ OS                            | Version                 | Architectures     |
 
 OS                            | Version                 | Architectures     |
 ------------------------------|-------------------------|-------------------|
-[iOS][iOS]                    | 11.0+                   | Arm64             |
-[iOS Simulator][iOS]          | 11.0+                   | x64, Arm64        |
-[tvOS][tvOS]                  | 11.0+                   | Arm64             |
-[tvOS Simulator][tvOS]        | 11.0+                   | x64, Arm64        |
+[iOS][iOS]                    | 12.0+                   | Arm64             |
+[iOS Simulator][iOS]          | 12.0+                   | x64, Arm64        |
+[tvOS][tvOS]                  | 12.0+                   | Arm64             |
+[tvOS Simulator][tvOS]        | 12.0+                   | x64, Arm64        |
 [MacCatalyst][macOS]          | 12.0+                   | x64, Arm64        |
 
 [iOS]: https://support.apple.com/ios
