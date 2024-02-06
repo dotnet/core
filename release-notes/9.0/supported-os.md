@@ -111,13 +111,6 @@ OS                            | Version                 | Architectures     |
 
 .NET 9 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
-## Support changes from .NET 6.0
-
-The following operating systems are no longer supported, starting with .NET 7.0.
-
-OS                                    | Version                 | Architectures     |
---------------------------------------|-------------------------|-------------------|
-[Windows Client][Windows-client]      | 7 SP1, 8.1      | x64, x86          |
 
 ## Out of support OS versions
 
