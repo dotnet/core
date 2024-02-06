@@ -21,7 +21,7 @@ OS                                    | Version                 | Architectures 
 [Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
 [Windows-Server]: https://learn.microsoft.com/windows-server/
 
-.NET 8 is supported in the x64 emulator on Windows 11 Arm64.
+.NET 9 is supported in the x64 emulator on Windows 11 Arm64.
 
 ## Linux
 
@@ -82,7 +82,7 @@ OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
 [macOS][macOS]                | 12.0+                     | x64, Arm64        |
 
-.NET 8 is supported in the Rosetta 2 x64 emulator.
+.NET 9 is supported in the Rosetta 2 x64 emulator.
 
 [macOS]: https://support.apple.com/macos
 
@@ -109,7 +109,7 @@ OS                            | Version                 | Architectures     |
 
 ## QEMU
 
-.NET 8 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
+.NET 9 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
 ## Support changes from .NET 6.0
 
