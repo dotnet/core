@@ -1,6 +1,6 @@
 # .NET 9 - Supported OS versions
 
-[.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
+[.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community. See [.NET Repos](../../Documentation/core-repos.md) for the repository list.
 
