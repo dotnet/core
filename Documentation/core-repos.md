@@ -9,14 +9,29 @@
 |[dotnet/core](https://github.com/dotnet/core)                       |[🔗](https://github.com/dotnet/core/issues)           |                                                          |.NET home repository|
 |[dotnet/runtime](https://github.com/dotnet/runtime)                 |[🔗](https://github.com/dotnet/runtime/issues)        |[🔗](https://github.com/dotnet/runtime/discussions)      |.NET runtime, runtime installers, application model, & Base Class Library (BCL)|
 |[dotnet/sdk](https://github.com/dotnet/sdk)                         |[🔗](https://github.com/dotnet/sdk/issues)            |                                                          |.NET SDK (used by Visual Studio & .NET CLI)|
-|[dotnet/roslyn](https://github.com/dotnet/roslyn)                        |[🔗](https://github.com/dotnet/roslyn/issues)             |[🔗](https://github.com/dotnet/roslyn/discussions)             |Roslyn (C# / VB compiler)                              |
+
+
+## Compilers & Languages
+|Repository                                                          |Issues                                                |Discussions                                               | Description |
+|--------------------------------------------------------------------|:----------------------------------------------------:|:--------------------------------------------------------:|-------------|
 |[dotnet/csharplang](https://github.com/dotnet/csharplang)                |[🔗](https://github.com/dotnet/csharplang/issues)         |[🔗](https://github.com/dotnet/csharplang/discussions)         |C# suggestions, specification, ongoing language design |
 |[dotnet/fsharp](https://github.com/dotnet/fsharp)                        |[🔗](https://github.com/dotnet/fsharp/issues)             |[🔗](https://github.com/dotnet/fsharp/discussions)             |The F# compiler, FSharp.Core library, and tools for F# |
-|[fsharp/fslang-design](https://github.com/fsharp/fslang-design)          |[🔗](https://github.com/fsharp/fslang-design/issues)      |[🔗](https://github.com/fsharp/fslang-design/discussions)      |RFCs and docs related to the F# language design process|
-|[fsharp/fslang-suggestions](https://github.com/fsharp/fslang-suggestions)|[🔗](https://github.com/fsharp/fslang-suggestions/issues) |[🔗](https://github.com/fsharp/fslang-suggestions/discussions) |F# language and FSharp.Core library suggestions        |
 |[dotnet/razor](https://github.com/dotnet/razor)                    |[🔗](https://github.com/dotnet/razor/issues)           |                                                             |Compiler and tooling experience for Razor    |
+|[dotnet/roslyn](https://github.com/dotnet/roslyn)                        |[🔗](https://github.com/dotnet/roslyn/issues)             |[🔗](https://github.com/dotnet/roslyn/discussions)             |Roslyn (C# / VB compiler)                              |
 |[dotnet/vblang](https://github.com/dotnet/vblang)                        |[🔗](https://github.com/dotnet/vblang/issues)             |                                                                |VB suggestions, specification, ongoing language design |
-|[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)     |[🔗](https://github.com/dotnet/dotnet-docker/issues)  |[🔗](https://github.com/dotnet/dotnet-docker/discussions)|.NET Docker images|
+
+## Libraries
+
+|Repository                                            |Issues                                           |Discussions                                          | Description |
+|------------------------------------------------------|:-----------------------------------------------:|:---------------------------------------------------:|-------------|
+|[dotnet/efcore](https://github.com/dotnet/efcore)                            |[🔗](https://github.com/dotnet/efcore/issues)               |                                                       |EF Core                               |
+|[dotnet/ef6](https://github.com/dotnet/ef6)                                  |[🔗](https://github.com/dotnet/ef6/issues)                  |                                                       |EF 6                                  |
+|[dotnet/extensions](https://github.com/dotnet/extensions)           |[🔗](https://github.com/dotnet/extensions/issues)     |[🔗](https://github.com/dotnet/extensions/discussions)   |.NET extension APIs (DI, logging, configuration, etc.)|
+|[dotnet/machinelearning](https://github.com/dotnet/machinelearning)                           |[🔗](https://github.com/dotnet/machinelearning/issues)              |                                                   |ML.NET                   |
+|[dotnet/spark](https://github.com/dotnet/spark)                                               |[🔗](https://github.com/dotnet/spark/issues)                        |[🔗](https://github.com/dotnet/spark/discussions) |.NET for Apache® Spark™  |
+|[dotnet/sqlclient](https://github.com/dotnet/sqlclient)                      |[🔗](https://github.com/dotnet/sqlclient/issues)            |[🔗](https://github.com/dotnet/sqlclient/discussions) |SqlClient data provider for SQL Server|
+|[dotnet/wcf](https://github.com/dotnet/wcf)           |[🔗](https://github.com/dotnet/wcf/issues)      |                                                      |WCF client libraries|
+|[CoreWCF/CoreWCF](https://github.com/CoreWCF/CoreWCF) |[🔗](https://github.com/CoreWCF/CoreWCF/issues) |[🔗](https://github.com/CoreWCF/CoreWCF/discussions) | Core WCF client libraries|
 
 ## App Workloads
 
@@ -32,6 +47,7 @@
 
 |Repository                                                          |Issues                                           |Discussions                                          | Description |
 |--------------------------------------------------------------------|:-----------------------------------------------:|:---------------------------------------------------:|------------|
+|[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)     |[🔗](https://github.com/dotnet/dotnet-docker/issues)  |[🔗](https://github.com/dotnet/dotnet-docker/discussions)|.NET Docker images|
 |[dotnet/installer](https://github.com/dotnet/installer)             |[🔗](https://github.com/dotnet/installer/issues)      |                                                          |.NET installer (produces zips, tarballs, and installers for the .NET SDK)
 |[dotnet/machinelearning-modelbuilder](https://github.com/dotnet/machinelearning-modelbuilder) |[🔗](https://github.com/dotnet/machinelearning-modelbuilder/issues) |                                                   |ML.NET Tooling           |
 |[dotnet/msbuild](https://github.com/dotnet/msbuild)      |[🔗](https://github.com/dotnet/msbuild/issues)|[🔗](https://github.com/dotnet/msbuild/discussions)|Build platform for .NET & Visual Studio|
@@ -40,29 +56,17 @@
 |[dotnet/project-system](https://github.com/dotnet/project-system)   |[🔗](https://github.com/dotnet/project-system/issues) |                                                          |Visual Studio project system for C#, F#, & VB|
 |[dotnet/templating](https://github.com/dotnet/templating)           |[🔗](https://github.com/dotnet/templating/issues)     |[🔗](https://github.com/dotnet/templating/discussions)   |Templating engine used by `dotnet new`|
 |[dotnet/test-templates](https://github.com/dotnet/test-templates)   |[🔗](https://github.com/dotnet/test-templates/issues) |                                                          |.NET unit testing project templates|
+|[dotnet/vscode-csharp](https://github.com/dotnet/vscode-csharp)     |[🔗](https://github.com/dotnet/vscode-csharp/issues)     |[🔗](https://github.com/dotnet/vscode-csharp/discussions)   |C# support for VS Code|
 
-## Libraries
-
-|Repository                                            |Issues                                           |Discussions                                          | Description |
-|------------------------------------------------------|:-----------------------------------------------:|:---------------------------------------------------:|-------------|
-|[dotnet/efcore](https://github.com/dotnet/efcore)                            |[🔗](https://github.com/dotnet/efcore/issues)               |                                                       |EF Core                               |
-|[dotnet/ef6](https://github.com/dotnet/ef6)                                  |[🔗](https://github.com/dotnet/ef6/issues)                  |                                                       |EF 6                                  |
-|[dotnet/extensions](https://github.com/dotnet/extensions)           |[🔗](https://github.com/dotnet/extensions/issues)     |[🔗](https://github.com/dotnet/extensions/discussions)   |.NET extension APIs (DI, logging, configuration, etc.)|
-|[dotnet/machinelearning](https://github.com/dotnet/machinelearning)                           |[🔗](https://github.com/dotnet/machinelearning/issues)              |                                                   |ML.NET                   |
-|[dotnet/spark](https://github.com/dotnet/spark)                                               |[🔗](https://github.com/dotnet/spark/issues)                        |[🔗](https://github.com/dotnet/spark/discussions) |.NET for Apache® Spark™  |
-|[dotnet/sqlclient](https://github.com/dotnet/sqlclient)                      |[🔗](https://github.com/dotnet/sqlclient/issues)            |[🔗](https://github.com/dotnet/sqlclient/discussions) |SqlClient data provider for SQL Server|
-|[dotnet/wcf](https://github.com/dotnet/wcf)           |[🔗](https://github.com/dotnet/wcf/issues)      |                                                      |WCF client libraries|
-|[CoreWCF/CoreWCF](https://github.com/CoreWCF/CoreWCF) |[🔗](https://github.com/CoreWCF/CoreWCF/issues) |[🔗](https://github.com/CoreWCF/CoreWCF/discussions) | Core WCF client libraries|
 
 ## NuGet
 
 |Repository                                                  |Issues                                     |Discussions                                    | Description |
 |------------------------------------------------------------|:-----------------------------------------:|:---------------------------------------------:|-------------|
 |[nuget/home](https://github.com/nuget/home)                 |[🔗](https://github.com/nuget/home/issues)|[🔗](https://github.com/nuget/home/discussions)|NuGet client|
-|[nuget/nugetgallery](https://github.com/nuget/nugetgallery) |                                           |                                               |NuGet.org   |
-
 
 ## Documentation
+
 |Repository                                                          |Issues                                                |Discussions                                               | Description |
 |--------------------------------------------------------------------|:----------------------------------------------------:|:--------------------------------------------------------:|-------------|
 |[dotnet/docs](https://github.com/dotnet/docs)                       |[🔗](https://github.com/dotnet/docs/issues)           |                                                          |.NET documentation|
