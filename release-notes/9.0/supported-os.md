@@ -40,7 +40,7 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 
 ### Libc compatibility
 
-- [glibc][glibc] 2.23 (from Ubuntu 16.04)
+- [glibc][glibc] 2.27 (from Ubuntu 18.04)
 - Alpine: [musl][musl] 1.2.2 (from Alpine 3.13)
 
 [Alpine]: https://alpinelinux.org/
