@@ -1,6 +1,6 @@
 # .NET 8
 
-[.NET 8](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) will be a [Long Term Support (LTS)](../../release-policies.md) release and will be supported for 3 years, from November 2023 to November 2026. It is [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](supported-os.md).
+[.NET 8](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) is a [Long Term Support (LTS)](../../release-policies.md) release and will be supported for 3 years, from November 2023 to November 2026. It is [supported](../../support.md) on [multiple operating systems](supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
