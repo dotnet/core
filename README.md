@@ -1,4 +1,10 @@
-# .NET Release Notes
+# .NET News & Release Notes
+
+Welcome to the home of .NET news & release notes to help you stay up to date with all of latest previews and releases. 
+
+Follow our [GitHub Discussions](https://github.com/dotnet/core/discussions), where you will find the latest new on preview releases, service releases, and CVEs for .NET.
+
+## Release Notes
 
 The following [.NET releases](./releases.md) are currently supported:
 
