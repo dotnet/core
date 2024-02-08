@@ -66,7 +66,7 @@ Param (
 
 ### Functions ###
 
-Function WriteColor
+Function Write-Color
 {
     Param (
         [ValidateNotNullOrEmpty()]
@@ -114,7 +114,7 @@ Function RemoveFolderIfExists
 
     If (Test-Path -Path $path)
     {
-        WriteColor yellow "Removing existing folder: $path"
+        Write-Color yellow "Removing existing folder: $path"
         Remove-Item -Recurse -Path $path
     }
 }
@@ -130,7 +130,7 @@ Function RecreateFolder
 
     RemoveFolderIfExists $path
 
-    WriteColor cyan "Creating new folder: $path"
+    Write-Color cyan "Creating new folder: $path"
     New-Item -ItemType Directory -Path $path
 }
 
@@ -161,7 +161,7 @@ Function RunCommand
         $command
     )
 
-    WriteColor yellow $command
+    Write-Color yellow $command
     Invoke-Expression "$command"
 }
 
@@ -357,7 +357,7 @@ Function RunAsmDiff
 
     If (Test-Path -Path $tableOfContentsFilePath)
     {
-        WriteColor yellow "Deleting existing table of contents file..."
+        Write-Color yellow "Deleting existing table of contents file..."
         Remove-Item -Path $tableOfContentsFilePath
     }
     # Arguments currently used:
@@ -403,7 +403,7 @@ Function ReplaceTitle
 
     $correctTitle="# API Difference ${previousFullName} vs ${currentFullName}"
 
-    WriteColor cyan "Replacing title of table of contents with correct one: $tableOfContentsFilePath"
+    Write-Color cyan "Replacing title of table of contents with correct one: $tableOfContentsFilePath"
     $updatedTableOfContents = .{
         $correctTitle
         Get-Content $tableOfContentsFilePath | Select-Object -Skip 1
@@ -472,7 +472,7 @@ Function RebuildIfExeNotFound
     {
         # Building the project
 
-        WriteColor cyan "Building project '$projectPath'"
+        Write-Color cyan "Building project '$projectPath'"
         RunCommand "dotnet build -c release $projectPath"
 
         # Verifying expected output from building
@@ -617,7 +617,7 @@ ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
 ## Recreate api-diff folder in core repo folder
 
 $previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $areVersionsEqual
-WriteColor cyan "Checking existing diff folder: $previewFolderPath"
+Write-Color cyan "Checking existing diff folder: $previewFolderPath"
 RecreateFolder $previewFolderPath
 
 
