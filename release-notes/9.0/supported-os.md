@@ -102,10 +102,11 @@ OS                            | Version                 | Architectures     |
 [iOS Simulator][iOS]          | 12.2+                   | x64, Arm64        |
 [tvOS][tvOS]                  | 12.2+                   | Arm64             |
 [tvOS Simulator][tvOS]        | 12.2+                   | x64, Arm64        |
-[MacCatalyst][macOS]          | 15.0+ (macOS 12.0+)     | x64, Arm64        |
+[MacCatalyst][MacCatalyst]    | 15.0+ (macOS 12.0+)     | x64, Arm64        |
 
 [iOS]: https://support.apple.com/ios
 [tvOS]: https://support.apple.com/apple-tv
+[MacCatalyst]: https://developer.apple.com/documentation/uikit/mac_catalyst
 
 ## QEMU
 
