@@ -17,7 +17,7 @@ OS                                    | Version                 | Architectures 
 
 **\*** Windows 7 SP1 is supported with [Extended Security Updates](https://learn.microsoft.com/troubleshoot/windows-client/windows-7-eos-faq/windows-7-extended-security-updates-faq) installed.
 
-[Windows-client]: https://learn.microsoft.com/windows/
+[Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
 [win-client-docker]: https://hub.docker.com/_/microsoft-windows
 [Windows-Server-lifecycle]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info

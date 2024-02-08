@@ -16,7 +16,7 @@ OS                                    | Version                 | Architectures 
 
 **\*** Windows Server 2012 and Windows Server 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview) installed
 
-[Windows-client]: https://learn.microsoft.com/windows/
+[Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
 [win-client-docker]: https://hub.docker.com/_/microsoft-windows
 [Windows-Server-lifecycle]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
