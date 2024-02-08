@@ -1,8 +1,8 @@
-# .NET 8 - Supported OS versions
+# .NET 9 - Supported OS versions
 
-[.NET 8](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
+[.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
-For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . See [.NET Repos](../../Documentation/core-repos.md) for the repository list.
+For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community. See [.NET Repos](../../Documentation/core-repos.md) for the repository list.
 
 ## Windows
 
@@ -10,11 +10,9 @@ OS                                    | Version                 | Architectures 
 --------------------------------------|-------------------------|-----------------|----------
 [Windows 10 Client][Windows-client]   | Version 1607+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
 [Windows 11][Windows-client]          | Version 22000+          | x64, x86, Arm64 | [Windows][Windows-lifecycle]
-[Windows Server][Windows-Server]      | 2012+ (*)               | x64, x86        | [Windows Server][Windows-Server-lifecycle]
-[Windows Server Core][Windows-Server] | 2012+ (*)               | x64, x86        | [Windows Server][Windows-Server-lifecycle]
+[Windows Server][Windows-Server]      | 2012+                   | x64, x86        | [Windows Server][Windows-Server-lifecycle]
+[Windows Server Core][Windows-Server] | 2012+                   | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Nano Server][Nano-Server]            | Version 1809+           | x64             | [Windows Server][Windows-Server-lifecycle]
-
-**\*** Windows Server 2012 and Windows Server 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview) installed
 
 [Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
@@ -23,7 +21,7 @@ OS                                    | Version                 | Architectures 
 [Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
 [Windows-Server]: https://learn.microsoft.com/windows-server/
 
-.NET 8 is supported in the x64 emulator on Windows 11 Arm64.
+.NET 9 is supported in the x64 emulator on Windows 11 Arm64.
 
 ## Linux
 
@@ -31,7 +29,7 @@ OS                                    | Version               | Architectures   
 --------------------------------------|-----------------------|-------------------|----------
 [Alpine Linux][Alpine]                | 3.17+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
 [Debian][Debian]                      | 11+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
-[Fedora][Fedora]                      | 37+                   | x64               | [Fedora][Fedora-lifecycle]
+[Fedora][Fedora]                      | 38+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
 [Oracle Linux][Oracle-Linux]          | 8+                    | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 8+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
@@ -42,7 +40,7 @@ Other distributions are supported at best effort, per [.NET Support and Compatib
 
 ### Libc compatibility
 
-- [glibc][glibc] 2.23 (from Ubuntu 16.04)
+- [glibc][glibc] 2.27 (from Ubuntu 18.04)
 - Alpine: [musl][musl] 1.2.2 (from Alpine 3.13)
 
 [Alpine]: https://alpinelinux.org/
@@ -84,7 +82,7 @@ OS                            | Version                   | Architectures     |
 ------------------------------|---------------------------|-------------------|
 [macOS][macOS]                | 12.0+                     | x64, Arm64        |
 
-.NET 8 is supported in the Rosetta 2 x64 emulator.
+.NET 9 is supported in the Rosetta 2 x64 emulator.
 
 [macOS]: https://support.apple.com/macos
 
@@ -111,19 +109,12 @@ OS                            | Version                 | Architectures     |
 
 ## QEMU
 
-.NET 8 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
+.NET 9 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
-## Support changes from .NET 6.0
-
-The following operating systems are no longer supported, starting with .NET 7.0.
-
-OS                                    | Version                 | Architectures     |
---------------------------------------|-------------------------|-------------------|
-[Windows Client][Windows-client]      | 7 SP1, 8.1      | x64, x86          |
 
 ## Out of support OS versions
 
-Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 8.0][OS-lifecycle-policy].
+Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 9.0][OS-lifecycle-policy].
 
 None yet.
 
