@@ -10,6 +10,10 @@ The following documents describe supported operating systems:
 * [.NET 7 supported OS versions](release-notes/7.0/supported-os.md)
 * [.NET 6 supported OS versions](release-notes/6.0/supported-os.md)
 
+## Preview .NET versions
+
+* [.NET 9 supported OS versions](release-notes/9.0/supported-os.md)
+
 ## Out-of-support .NET versions
 
 The following documents describe (historical) supported operating systems:
