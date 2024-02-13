@@ -313,12 +313,12 @@ Function GetPreviewFolderPath
     ,
         [Parameter(Mandatory=$true)]
         [bool]
-        $areVersionsEqual
+        $IsComparingReleases # True when comparing 8.0 GA with 9.0 GA
     )
 
     $prefixFolder = [IO.Path]::Combine($rootFolder, "release-notes", $dotNetVersion)
     $apiDiffFolderName = "api-diff"
-    If ($areVersionsEqual)
+    If (-Not $IsComparingReleases)
     {
         $previewOrRCFolderName = GetPreviewOrRCFolderName $dotNetVersion $previewOrRC $previewNumberVersion
         Return [IO.Path]::Combine($prefixFolder, "preview", $apiDiffFolderName, $previewOrRCFolderName)
@@ -616,7 +616,10 @@ ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
 
 ## Recreate api-diff folder in core repo folder
 
-$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $areVersionsEqual
+# True when comparing 8.0 GA with 9.0 GA
+$IsComparingReleases = (-Not $areVersionsEqual) -And ($PreviousPreviewOrRC -eq "ga") -And ($CurrentPreviewOrRC -eq "ga")
+
+$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $IsComparingReleases
 Write-Color cyan "Checking existing diff folder: $previewFolderPath"
 RecreateFolder $previewFolderPath
 
