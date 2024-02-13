@@ -4,11 +4,14 @@ Welcome to the home of .NET news & release notes to help you stay up to date wit
 
 Follow our [GitHub Discussions](https://github.com/dotnet/core/discussions), where you will find the latest new on preview releases, service releases, and CVEs for .NET.
 
-You can subscribe to news posts with the following feeds:
-* All Discussions: https://github.com/dotnet/core/discussions.atom
-* News: https://github.com/dotnet/core/discussions/categories/news.atom
-* Security Disclosures (CVEs): https://github.com/dotnet/core/discussions/categories/security-disclosures-cves.atom
-* Sevicing Releases: https://github.com/dotnet/core/discussions/categories/servicing-releases.atom
+You can subscribe to news posts with the following RSS feeds:
+
+| Category | GitHub Discussions | RSS Feed |
+| --- | :--: | :--: |
+| All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
+| News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
+| Security Disclosures (CVEs)  | [🔗](https://github.com/dotnet/core/discussions/categories/security-disclosures-cves) | [🔗](https://github.com/dotnet/core/discussions/categories/security-disclosures-cves.atom) |
+| Sevicing Releases  | [🔗](https://github.com/dotnet/core/discussions/categories/servicing-releases) | [🔗](https://github.com/dotnet/core/discussions/categories/servicing-releases.atom) |
 
 ## Release Notes
 
