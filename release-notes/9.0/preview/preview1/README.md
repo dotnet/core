@@ -11,11 +11,11 @@ You may be surprised to be reading about our release on GitHub & GitHub Discussi
 Check out the release notes and discussions for the new features in this release. 
 
 * .NET 9: [Binaries](9.0.0-preview.1.md) | [Discussions](https://aka.ms/dotnet/9/preview1)
-* .NET MAUI: [Release Notes](dotnetmaui.md) | [Discussions](https://github.com/dotnet/maui/discussions/categories/announcements)
-* ASP.NET Core: [Release Notes](aspnetcore.md) | [Discussions](https://github.com/dotnet/aspnetcore/discussions/categories/announcements)
-* .NET Data and EF Core: [Release Notes](efcoreanddata.md) | [Discussions](https://github.com/dotnet/efcore/issues/)
-* Libraries [Release Notes](libraries.md) | [Discussions](https://github.com/dotnet/runtime/discussions/categories/announcements)
-* Runtime: [Release Notes](runtime.md) | [Discussions](https://github.com/dotnet/runtime/discussions/categories/announcements)
-* SDK: [Release Notes](sdk.md) | [Discussions](https://github.com/dotnet/runtime/discussions/categories/announcements)
+* .NET Data and EF Core: [Release Notes](efcoreanddata.md) | [Discussions](https://github.com/dotnet/efcore/issues/33030)
+* .NET MAUI: [Release Notes](dotnetmaui.md) | [Discussions](https://github.com/dotnet/maui/discussions/20558)
+* ASP.NET Core: [Release Notes](aspnetcore.md) | [Discussions](https://github.com/dotnet/aspnetcore/discussions/54007)
+* Libraries [Release Notes](libraries.md) | [Discussions](https://github.com/dotnet/runtime/discussions/98372)
+* Runtime: [Release Notes](runtime.md) | [Discussions](https://github.com/dotnet/runtime/discussions/98372)
+* SDK: [Release Notes](sdk.md)
 
 Use the discussions links to engage with teams.
