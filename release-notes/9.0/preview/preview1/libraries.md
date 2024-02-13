@@ -107,7 +107,7 @@ For creating a new persisted `AssemblyBuilder` instance you should use the new `
 AssemblyBuilder ab = AssemblyBuilder.DefinePersistedAssembly(new AssemblyName("MyAssembly"), typeof(object).Assembly);
 ```
 
-The `Assembly` passed to the method used for resolving base runtime types, notice that `AssemblyBuilderAccess` option is not passed, the new persisted `AssemblyBuilder` implementation is only for saving, in order to run the assembly user first need to save it into a memory stream or a file, then load it back.
+The `Assembly` passed to the method is used for resolving base runtime types. Notice that an `AssemblyBuilderAccess` value is not passed; the new persisted `AssemblyBuilder` implementation is only for saving. In order to run the assembly user first need to save it into a memory stream or a file, then load it back.
 
 
 The following example demonstrates how to create and save assemblies: 
