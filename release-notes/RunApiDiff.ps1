@@ -170,7 +170,7 @@ Function GetDotNetFullName
     Param (
         [Parameter(Mandatory=$true)]
         [bool]
-        $areVersionsEqual
+        $IsComparingReleases
     ,
         [Parameter(Mandatory=$true)]
         [ValidatePattern("\d+\.\d")]
@@ -188,7 +188,7 @@ Function GetDotNetFullName
         $previewNumberVersion # 0, 1, 2, 3, ...
     )
 
-    If (-Not $areVersionsEqual)
+    If ($IsComparingReleases)
     {
         Return "$dotNetVersion.$previewNumberVersion"
     }
@@ -318,13 +318,14 @@ Function GetPreviewFolderPath
 
     $prefixFolder = [IO.Path]::Combine($rootFolder, "release-notes", $dotNetVersion)
     $apiDiffFolderName = "api-diff"
-    If (-Not $IsComparingReleases)
+
+    If ($IsComparingReleases)
     {
-        $previewOrRCFolderName = GetPreviewOrRCFolderName $dotNetVersion $previewOrRC $previewNumberVersion
-        Return [IO.Path]::Combine($prefixFolder, "preview", $apiDiffFolderName, $previewOrRCFolderName)
+        Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
     }
 
-    Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
+    $previewOrRCFolderName = GetPreviewOrRCFolderName $dotNetVersion $previewOrRC $previewNumberVersion
+    Return [IO.Path]::Combine($prefixFolder, "preview", $apiDiffFolderName, $previewOrRCFolderName)
 }
 
 Function RunAsmDiff
@@ -564,10 +565,11 @@ Function DownloadPackage
 
 ## Generate strings with no whitespace
 
-$areVersionsEqual = $PreviousDotNetVersion -eq $CurrentDotNetVersion
+# True when comparing 8.0 GA with 9.0 GA
+$IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And ($PreviousPreviewOrRC -Eq "ga") -And ($CurrentPreviewOrRC -eq "ga")
 
-$previousDotNetFullName = GetDotNetFullName $areVersionsEqual $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
-$currentDotNetFullName = GetDotNetFullName $areVersionsEqual $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
+$previousDotNetFullName = GetDotNetFullName $IsComparingReleases $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
+$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
 
 
 ## Check folders passed as parameters exist
@@ -615,9 +617,6 @@ $asmDiffExe = [IO.Path]::Combine($asmDiffArtifactsPath, "Release", "net8.0", "Mi
 ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
 
 ## Recreate api-diff folder in core repo folder
-
-# True when comparing 8.0 GA with 9.0 GA
-$IsComparingReleases = (-Not $areVersionsEqual) -And ($PreviousPreviewOrRC -eq "ga") -And ($CurrentPreviewOrRC -eq "ga")
 
 $previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $IsComparingReleases
 Write-Color cyan "Checking existing diff folder: $previewFolderPath"
