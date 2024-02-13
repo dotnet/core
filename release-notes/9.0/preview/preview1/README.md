@@ -4,7 +4,7 @@ Welcome to .NET 9! We're happy to deliver the first preview of .NET 9 and share 
 
 The latest .NET 9 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/9.0) and [.NET 9 Releases](../README.md). Instructions on getting started .NET 9 can be found on the [get started guide](../../get-started.md).
 
-You may be surprised to be reading about our release on GitHub Discussions. Check out [Welcome to .NET Release News on GitHub Discussions!](https://github.com/dotnet/core/discussions/9131) to learn more about how we're approaching documenting and sharing preview releases.
+You may be surprised to be reading about our release on GitHub & GitHub Discussions. Check out [Welcome to .NET Release News on GitHub Discussions!](https://github.com/dotnet/core/discussions/9131) to learn more about how we're approaching documenting and sharing preview releases.
 
 ## Release notes & Discussions
 
