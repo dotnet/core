@@ -3,7 +3,6 @@
 .NET 9 Preview 1 includes several new SDK features.
 
 SDK updates in .NET 9 Preview 1:
-* [Discussion](https://github.com/dotnet/sdk/discussions/categories/announcements)
 * [What's new in the .NET SDK in .NET 9](https://review.learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
 
 .NET 9 Preview 1:
