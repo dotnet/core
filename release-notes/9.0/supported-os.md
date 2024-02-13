@@ -14,7 +14,7 @@ OS                                    | Version                 | Architectures 
 [Windows Server Core][Windows-Server] | 2012+                   | x64, x86        | [Windows Server][Windows-Server-lifecycle]
 [Nano Server][Nano-Server]            | Version 1809+           | x64             | [Windows Server][Windows-Server-lifecycle]
 
-[Windows-client]: https://learn.microsoft.com/windows/
+[Windows-client]: https://www.microsoft.com/windows/
 [Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
 [win-client-docker]: https://hub.docker.com/_/microsoft-windows
 [Windows-Server-lifecycle]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info

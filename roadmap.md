@@ -1,4 +1,4 @@
-# .NET Project Roadmaps
+# .NET 9 Project Backlog
 
 .NET project roadmaps and backlogs:
 
@@ -6,7 +6,7 @@
 * [.NET MAUI](https://github.com/dotnet/maui/wiki/Roadmap)
 * [ASP.NET Core](https://github.com/dotnet/aspnetcore/issues/51834)
 * [C#](https://github.com/dotnet/csharplang)
-* [Entity Framework Core](https://github.com/dotnet/efcore/issues/29853)
+* [Entity Framework Core](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/plan)
 * [F#](https://github.com/fsharp/fslang-design)
 * [ML.NET](https://github.com/dotnet/machinelearning/blob/main/ROADMAP.md)
 * [NuGet](https://github.com/NuGet/Home/issues/13143)
