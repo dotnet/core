@@ -5,7 +5,7 @@ The team is continuing work on core fundamentals of the .NET MAUI SDK to improve
 .NET MAUI updates in .NET 9 Preview 1:
 * [Discussion](https://github.com/dotnet/maui/discussions/categories/announcements)
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
-* [GitHub Release](https://github.com/dotnet/maui/releases/tag/untagged-e764fa1780e2dd618900)
+* [GitHub Release](https://github.com/dotnet/maui/releases/tag/9.0.100-preview.1.9973)
 
 .NET 9 Preview 1:
 * [Discussion](https://aka.ms/dotnet/9/preview1)
