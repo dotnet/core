@@ -9,11 +9,11 @@
 - System.Text.Json
 
 Libraries updates in .NET 9 Preview 1:
-* [Discussion](https://github.com/dotnet/runtime/discussions/categories/announcements)
+* [Announcement](https://github.com/dotnet/runtime/discussions/98372)
 * [What's new in .NET Libraries in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
 
 .NET 9 Preview 1:
-* [Discussion](https://aka.ms/dotnet/9/preview1)
+* [Announcement](https://aka.ms/dotnet/9/preview1)
 * [Release notes](README.md) 
 
 ## System.Collections: `PriorityQueue.Remove`
