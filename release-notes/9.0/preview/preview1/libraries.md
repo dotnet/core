@@ -91,7 +91,7 @@ foreach ((string line, int index) in lines.Select((line, index) => (line, index)
 Now becomes
 
 ```C#
-foreach ((string line, int index) in lines.Index())
+foreach ((int index, string line) in lines.Index())
 {
     Console.WriteLine($"Line number: {index + 1}, Line: {line}");
 }
