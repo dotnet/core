@@ -22,11 +22,11 @@ The debugging display of dictionaries and other key-value collections has an imp
 
 Before:
 
-![Prior experience debugging dictionaries.](./dictionary-debugging-repo-before.png)
+![Prior experience debugging dictionaries.](./media/dictionary-debugging-repo-before.png)
 
 After: 
 
-![New experience debugging dictionaries.](./dictionary-debugging-repo-after.png)
+![New experience debugging dictionaries.](./media/dictionary-debugging-repo-after.png)
 
 ASP.NET Core has many key-value collections. This improved debugging experience applies to:
 
