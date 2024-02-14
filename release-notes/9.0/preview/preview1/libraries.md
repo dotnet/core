@@ -82,7 +82,7 @@ The new `Index` method makes it possible to quickly extract the implicit index o
 
 ```C#
 IEnumerable<string> lines = File.ReadAllLines("file.txt");
-foreach ((string line, int index) in lines.Select((line, index) => (line, index))
+foreach ((int index, string line) in lines.Select((line, index) => (index, line)))
 {
     Console.WriteLine($"Line number: {index + 1}, Line: {line}");
 }
@@ -91,7 +91,7 @@ foreach ((string line, int index) in lines.Select((line, index) => (line, index)
 Now becomes
 
 ```C#
-foreach ((string line, int index) in lines.Index())
+foreach ((int index, string line) in lines.Index())
 {
     Console.WriteLine($"Line number: {index + 1}, Line: {line}");
 }
