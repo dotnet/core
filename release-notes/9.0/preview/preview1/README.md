@@ -7,7 +7,7 @@ You can find detailed release notes about the new features in .NET 9 Preview 1 a
 - [Binaries](9.0.0-preview.1.md)
 - [Release notes](.)
 
-The latest .NET 9 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/9.0) and [.NET 9 Releases](../README.md). Instructions on getting started with .NET 9 can be found in the [getting started guide](../../get-started.md).
+The latest .NET 9 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/9.0) and [.NET 9 Releases](../../README.md). Instructions on getting started with .NET 9 can be found in the [getting started guide](../../get-started.md).
 
 You may be surprised to be reading about our release on GitHub & GitHub Discussions. Check out [Welcome to .NET Release News on GitHub Discussions!](https://github.com/dotnet/core/discussions/9131) to learn more about how we're approaching documenting and sharing preview releases.
 
