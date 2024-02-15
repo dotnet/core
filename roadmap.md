@@ -1,6 +1,4 @@
-# .NET 9 Project Backlog
-
-.NET project roadmaps and backlogs:
+# .NET Project Roadmaps & Backlogs
 
 * [.NET Aspire](https://github.com/dotnet/aspire/issues/1549)
 * [.NET MAUI](https://github.com/dotnet/maui/wiki/Roadmap)
