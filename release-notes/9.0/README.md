@@ -4,8 +4,7 @@
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/9.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
-- [Containers](https://mcr.microsoft.com/product/dotnet/sdk/about)
-
+- [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
