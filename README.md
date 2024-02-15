@@ -4,11 +4,14 @@ Welcome to the home of .NET news & release notes to help you stay up to date wit
 
 Follow our [GitHub Discussions](https://github.com/dotnet/core/discussions), where you will find the latest new on preview releases, service releases, and CVEs for .NET.
 
-You can subscribe to news posts with the following feeds:
-* All Discussions: https://github.com/dotnet/core/discussions.atom
-* News: https://github.com/dotnet/core/discussions/categories/news.atom
-* Security Disclosures (CVEs): https://github.com/dotnet/core/discussions/categories/security-disclosures-cves.atom
-* Sevicing Releases: https://github.com/dotnet/core/discussions/categories/servicing-releases.atom
+You can subscribe to news posts with the following RSS feeds:
+
+| Category | GitHub Discussions | RSS Feed |
+| --- | :--: | :--: |
+| All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
+| News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
+| Security Disclosures (CVEs)  | [🔗](https://github.com/dotnet/core/discussions/categories/security-disclosures-cves) | [🔗](https://github.com/dotnet/core/discussions/categories/security-disclosures-cves.atom) |
+| Sevicing Releases  | [🔗](https://github.com/dotnet/core/discussions/categories/servicing-releases) | [🔗](https://github.com/dotnet/core/discussions/categories/servicing-releases.atom) |
 
 ## Release Notes
 
@@ -25,9 +28,9 @@ The following [.NET releases](./releases.md) are currently supported:
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](release-notes) directory.
 
 [9.0.0-preview.1]: release-notes/9.0/preview/preview1/9.0.0-preview.1.md
-[8.0.2]: release-notes/8.0/8.0.1/8.0.1.md
-[7.0.16]: release-notes/7.0/7.0.15/7.0.16.md
-[6.0.27]: release-notes/6.0/6.0.26/6.0.27.md
+[8.0.2]: release-notes/8.0/8.0.2/8.0.2.md
+[7.0.16]: release-notes/7.0/7.0.16/7.0.16.md
+[6.0.27]: release-notes/6.0/6.0.27/6.0.27.md
 
 ## Release Information
 

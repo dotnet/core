@@ -9,11 +9,11 @@
 - System.Text.Json
 
 Libraries updates in .NET 9 Preview 1:
-* [Discussion](https://github.com/dotnet/runtime/discussions/categories/announcements)
+* [Announcement](https://github.com/dotnet/runtime/discussions/98372)
 * [What's new in .NET Libraries in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
 
 .NET 9 Preview 1:
-* [Discussion](https://aka.ms/dotnet/9/preview1)
+* [Announcement](https://aka.ms/dotnet/9/preview1)
 * [Release notes](README.md) 
 
 ## System.Collections: `PriorityQueue.Remove`
@@ -82,7 +82,7 @@ The new `Index` method makes it possible to quickly extract the implicit index o
 
 ```C#
 IEnumerable<string> lines = File.ReadAllLines("file.txt");
-foreach ((string line, int index) in lines.Select((line, index) => (line, index))
+foreach ((int index, string line) in lines.Select((line, index) => (index, line)))
 {
     Console.WriteLine($"Line number: {index + 1}, Line: {line}");
 }
@@ -91,7 +91,7 @@ foreach ((string line, int index) in lines.Select((line, index) => (line, index)
 Now becomes
 
 ```C#
-foreach ((string line, int index) in lines.Index())
+foreach ((int index, string line) in lines.Index())
 {
     Console.WriteLine($"Line number: {index + 1}, Line: {line}");
 }
@@ -107,7 +107,7 @@ For creating a new persisted `AssemblyBuilder` instance you should use the new `
 AssemblyBuilder ab = AssemblyBuilder.DefinePersistedAssembly(new AssemblyName("MyAssembly"), typeof(object).Assembly);
 ```
 
-The `Assembly` passed to the method used for resolving base runtime types, notice that `AssemblyBuilderAccess` option is not passed, the new persisted `AssemblyBuilder` implementation is only for saving, in order to run the assembly user first need to save it into a memory stream or a file, then load it back.
+The `Assembly` passed to the method is used for resolving base runtime types. Notice that an `AssemblyBuilderAccess` value is not passed; the new persisted `AssemblyBuilder` implementation is only for saving. In order to run the assembly user first need to save it into a memory stream or a file, then load it back.
 
 
 The following example demonstrates how to create and save assemblies: 
