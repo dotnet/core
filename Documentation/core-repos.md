@@ -6,7 +6,7 @@
 
 |Repository                                                          |Issues                                                |Discussions                                               | Description |
 |--------------------------------------------------------------------|:----------------------------------------------------:|:--------------------------------------------------------:|-------------|
-|[dotnet/core](https://github.com/dotnet/core)                       |[🔗](https://github.com/dotnet/core/issues)           |                                                          |.NET home repository|
+|[dotnet/core](https://github.com/dotnet/core)                       |[🔗](https://github.com/dotnet/core/issues)           |[🔗](https://github.com/dotnet/core/discussions)         |Home for .NET News, Release Notes, and Announcements|
 |[dotnet/runtime](https://github.com/dotnet/runtime)                 |[🔗](https://github.com/dotnet/runtime/issues)        |[🔗](https://github.com/dotnet/runtime/discussions)      |.NET runtime, runtime installers, application model, & Base Class Library (BCL)|
 |[dotnet/sdk](https://github.com/dotnet/sdk)                         |[🔗](https://github.com/dotnet/sdk/issues)            |                                                          |.NET SDK (used by Visual Studio & .NET CLI)|
 

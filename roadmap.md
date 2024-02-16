@@ -3,7 +3,7 @@
 * [.NET Aspire](https://github.com/dotnet/aspire/issues/1549)
 * [.NET MAUI](https://github.com/dotnet/maui/wiki/Roadmap)
 * [ASP.NET Core](https://github.com/dotnet/aspnetcore/issues/51834)
-* [C#](https://github.com/dotnet/csharplang)
+* [C#](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md#working-set)
 * [Entity Framework Core](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/plan)
 * [F#](https://github.com/fsharp/fslang-design)
 * [ML.NET](https://github.com/dotnet/machinelearning/blob/main/ROADMAP.md)
