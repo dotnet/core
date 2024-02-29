@@ -12,7 +12,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
   - [CVE-2024-21386 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/295)
   - [CVE-2024-21404 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/296)
 - 6.0.26 (January 2024)
-  - [CVE-2024-0056](https://github.com/dotnet/announcements/issues/292) | .NET Information Disclosure Vulnerability
+  - [CVE-2024-0056 | .NET Information Disclosure Vulnerability](https://github.com/dotnet/announcements/issues/292)
   - [CVE-2024-0057 | .NET Security Feature Bypass Vulnerability](https://github.com/dotnet/announcements/issues/291)
   - [CVE-2024-21319 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/290)
 - 6.0.25 (November 2023)
