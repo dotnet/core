@@ -47,7 +47,9 @@ Patches are published at the [.NET Website](https://dotnet.microsoft.com/downloa
 
 As the end of support nears for a given .NET version, we strongly recommend you move to a newer, supported version of .NET. .NET releases that have reached end of support do not get security patches. Continuing to use an unsupported version will expose you to security vulnerabilities.
 
-End of support also applies to source that targets unsupported .NET versions. You must target a supported .NET version (via the `TargetFramework` property), for both apps and libraries. The .NET SDK produces warnings when you target out of support versions to help identify these cases. The SDK does not prevent you from targeting unsupported versions, however, your configuration will be considered unsupported.
+End of support applies to source that targets unsupported .NET versions. You must target a supported .NET version (via the `TargetFramework` property), for both apps and libraries. The .NET SDK produces warnings when you target out of support versions to help identify these cases. The SDK does not prevent you from targeting unsupported versions, however, your configuration will be considered unsupported.
+
+End of support applies to packages that do not include an asset for a supported `TargetFramework`. For example, a package that supports `net5.0` as the highest version it supports is not supported. A package that supports a `netstandard` version is supported, unless stated otherwise.
 
 ## Operating System support
 
