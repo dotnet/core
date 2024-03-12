@@ -13,5 +13,6 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2023/03/12 | [9.0.0 Preview 2](preview/preview2/README.md) |
 | 2023/02/13 | [9.0.0 Preview 1](preview/preview1/README.md) |
 
