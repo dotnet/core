@@ -4,7 +4,7 @@
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
-- [Containers](https://mcr.microsoft.com/catalog?search=dotnet/)
+- [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
