@@ -53,9 +53,9 @@ We recommend that you install the .NET SDK to develop and build applications, an
 Download links are provided for each of the distributions at:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [.NET 9 release notes](preview/README.md)
+- [.NET 9 release notes](README.md)
 
-[Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server, and Server Core) and Linux (Alpine, Debian, and Ubuntu).
+[Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Linux (Alpine, Debian, Ubuntu, Azure Linux, and distroless variants of Ubuntu and Azure Linux) and Windows (Nano Server and Server Core).
 
 ## What's installed?
 
@@ -75,7 +75,7 @@ Runtime Environment:
  Base Path:   /usr/local/share/dotnet/x64/sdk/9.0.100-preview.1.24101.2/
 
 Host:
-  Version:      9.0.0-preview.1.24080.9
+  Version:      9.0.100-preview.2.24157.14
   Architecture: x64
   Commit:       550605cc93
 
@@ -83,13 +83,13 @@ Host:
 9.0.100-preview.1.24101.2 [/usr/local/share/dotnet/x64/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App 9.0.0-preview.1.24081.5 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 9.0.0-preview.1.24080.9 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
+  Microsoft.AspNetCore.App 9.0.0-preview.2.24128.4 [/usr/local/share/dotnet/x64/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 9.0.100-preview.2.24157.14 [/usr/local/share/dotnet/x64/shared/Microsoft.NETCore.App]
 ```
 
 If you have the .NET SDK installed, you can also use `dotnet --version` as demonstrated in the following example:
 
 ```console
 C:\>dotnet --version
-9.0.100-preview.1.24101.2
+9.0.100-preview.2.24157.14
 ```

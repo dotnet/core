@@ -4,7 +4,7 @@
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
-- [Containers](https://mcr.microsoft.com/catalog?search=dotnet/)
+- [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
@@ -13,6 +13,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2024/03/12 | [8.0.3](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.3/8.0.3.md) |
 | 2024/02/15 | [8.0.201 SDK](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.2/8.0.201.md) |
 | 2024/02/13 | [8.0.2](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.2/8.0.2.md) |
 | 2024/01/09 | [8.0.1](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.1/8.0.1.md) |

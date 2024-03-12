@@ -4,7 +4,7 @@
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/6.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
-- [Containers](https://mcr.microsoft.com/catalog?search=dotnet/)
+- [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
@@ -13,6 +13,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2024/03/12 | [6.0.28](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.28/6.0.28.md) |
 | 2024/02/13 | [6.0.27](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.27/6.0.27.md) |
 | 2024/01/09 | [6.0.26](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.26/6.0.26.md) |
 | 2023/11/14 | [6.0.25](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.25/6.0.25.md) |

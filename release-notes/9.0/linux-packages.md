@@ -6,7 +6,7 @@ Feel free to contribute packages for distributions not (yet) listed in this docu
 
 Tips:
 
-- [runtime-deps container images](https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps) installs these same packages. You can look at those dockerfiles.
+- [runtime-deps container images](https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps) install these same packages. You can look at those dockerfiles.
 - [pkgs.org](https://pkgs.org/) is a useful site for searching for packages, to find the one for your distribution.
 
 ## Packages
