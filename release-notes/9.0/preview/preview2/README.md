@@ -18,10 +18,7 @@ Dive into the [.NET Release News on GitHub Discussions](https://github.com/dotne
 Check out the release notes and discussions for the new features in this release. 
 
 * .NET 9: [Announcement](https://aka.ms/dotnet/9/preview2)
-* .NET Data and EF Core: [Announcement](https://github.com/dotnet/efcore/issues/33030)
-* .NET MAUI: [Announcement](https://github.com/dotnet/maui/discussions/20558)
-* ASP.NET Core: [Announcement](https://github.com/dotnet/aspnetcore/discussions/54007)
-* Containers: [Announcement](https://github.com/dotnet/dotnet-docker/discussions/5198)
-* Source-build [Announcement](https://github.com/dotnet/source-build/discussions/4132)
-* Libraries and runtime [Announcement](https://github.com/dotnet/runtime/discussions/98372)
+* .NET MAUI: [Announcement](https://github.com/dotnet/maui/discussions/21159)
+* ASP.NET Core: [Announcement](https://github.com/dotnet/aspnetcore/discussions/54503)
+* Libraries and Runtime [Announcement](https://github.com/dotnet/runtime/discussions/99619)
 
