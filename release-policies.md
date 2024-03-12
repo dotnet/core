@@ -31,35 +31,42 @@ LTS and STS releases differ only by support duration. The .NET team follows the 
 * **Maintenance** support is provided for the last six months of support. Improvements are limited to security fixes. Support for new operating system versions will be provided on a best-effort basis.
 * **End of life (EOL)** marks the end of support.
 
-[Support for various operating systems](os-lifecycle-policy.md) is defined for each release.
-
 ## Servicing
 
-Improvements are released as full re-releases of the product, called "patch releases". Patch releases are cumulative. Patches are released on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday.
+Improvements are released as as a cumulative "patch release", typically monthly. Patches releases are announced and published on the Microsoft "Patch Tuesday" (second Tuesday of each month), however there is no guarantee that there will be a .NET release on any given Patch Tuesday.
 
 Breaking changes are not accepted during servicing, except in the rare case to mitigate a security vulnerability or other critical issue.
 
-Patches are announced in [release notes](release-notes/README.md), on the [.NET blog](https://devblogs.microsoft.com/dotnet/category/maintenance-and-updates/), and [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
+Patches are announced in [release notes](release-notes/README.md) and [dotnet/announcements](https://github.com/dotnet/announcements/labels/Monthly-Update).
 
 Patches are published at the [.NET Website](https://dotnet.microsoft.com/download/dotnet), [Microsoft Update](https://devblogs.microsoft.com/dotnet/net-core-updates-coming-to-microsoft-update/), and in [Linux archives and registries](./linux.md).
 
 ## End of support
 
-As the end of support nears for a given .NET version, we strongly recommend you move to a newer, supported version of .NET. .NET releases that have reached end of support do not get security patches. Continuing to use an unsupported version will expose you to security vulnerabilities.
+As the end of support nears for a given .NET version, we strongly recommend you move to a newer, supported version of .NET.
 
-End of support applies to source that targets unsupported .NET versions. You must target a supported .NET version (via the `TargetFramework` property), for both apps and libraries. The .NET SDK produces warnings when you target out of support versions to help identify these cases. The SDK does not prevent you from targeting unsupported versions, however, your configuration will be considered unsupported.
+Support ends for a given .NET version when its published end of support date has passed. Support typically ends on a patch day. If there is a critical issue for that .NET version, it will be patched for the last time on that day. There will not be any patches after that point. Continuing to use an unsupported version will expose you to security vulnerabilities.
 
-End of support applies to packages that do not include an asset for a supported `TargetFramework`. For example, a package that supports `net5.0` as the highest version it supports is not supported. A package that supports a `netstandard` version is supported, unless stated otherwise.
+[.NET packages](https://www.nuget.org/profiles/dotnetframework) are no longer supported when either of the following occurs:
+
+- A new version of the package is available. Some packages support multiple patches versions at once, one per major version matching a supported major .NET version.
+- The package exclusively includes implementations for out-of-support .NET versions.
+
+Nuget.org includes [version](https://www.nuget.org/packages/System.Text.Json/#versions-body-tab) and [supported framework](https://www.nuget.org/packages/System.Text.Json/#supportedframeworks-body-tab) information that can be used to determine support status for packages.
+
+## Support requirements
+
+To remain supported, you must do the following:
+
+- Use a supported SDK
+- Target a supported .NET version (via the `TargetFramework` property)
+- Reference supported packages
 
 ## Operating System support
 
-Each supported operating system has a lifecycle, such as the [Ubuntu lifecycle](https://ubuntu.com/about/release-cycle). The .NET team applies each of the lifecycle policies to inform adding and removing support for operating system versions. Support is typically removed when an operating system version is no longer publicly supported for free, at which point we stop testing and supporting it.
+Each [supported operating system](os-lifecycle-policy.md) has a lifecycle. The .NET team applies each of the lifecycle policies to inform adding and removing support for operating system versions. Support is typically removed when an operating system version is no longer publicly supported for free, at which point we stop testing and supporting it.
 
 Operating system policies and schedules do not always align with the .NET lifecycle. We have sometimes supported operating system versions after mainline support has lapsed as a service to users to provide more time to transition to newer releases. We may also stop supporting an operating system before support has ended, particularly if support time frames are very long.
-
-Support documents are kept up to date to accurately inform your support policies.
-
-[.NET Support and Compatibility for Linux Distributions](./linux-support.md) includes additional policies for Linux.
 
 ## Vendor support
 
