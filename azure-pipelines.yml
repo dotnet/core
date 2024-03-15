@@ -21,8 +21,8 @@ extends:
   template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
     pool:
-      name: Azure-Pipelines-1ESPT-ExDShared
-      image: windows-2022
+      name: 1es-default-pool
+      image: 1es-agent-image
       os: windows
     customBuildTags:
     - ES365AIMigrationTooling
@@ -36,6 +36,7 @@ extends:
           - output: pipelineArtifact
             displayName: 'Publish Artifacts'
             artifactName: dotnet-core-release-metadata-drop
+            targetPath: $(build.artifactstagingdirectory)
         steps:
         - checkout: self
           fetchTags: true
