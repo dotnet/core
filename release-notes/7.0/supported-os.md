@@ -27,7 +27,7 @@ OS                                    | Version                 | Architectures 
 
 OS                                    | Version               | Architectures     | Lifecycle
 --------------------------------------|-----------------------|-------------------|----------
-[Alpine Linux][Alpine]                | 3.15+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
+[Alpine Linux][Alpine]                | 3.16+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
 [CentOS Linux][CentOS]                | 7                     | x64               | [CentOS][CentOS-lifecycle]
 [CentOS Stream Linux][CentOS]         | 8                     | x64               | [CentOS][CentOS-lifecycle]
 [Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
@@ -123,6 +123,7 @@ OS                                    | Version                 | Architectures 
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 7.0][OS-lifecycle-policy].
 
+- Alpine 3.15
 - Fedora 35
 - SUSE Linux Enterprise Server 12 SP2, SP3, SP4
 
