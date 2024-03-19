@@ -31,7 +31,7 @@ OS                                    | Version               | Architectures   
 --------------------------------------|-----------------------|-------------------|----------
 [Alpine Linux][Alpine]                | 3.16+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
 [Debian][Debian]                      | 11+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
-[Fedora][Fedora]                      | 37+                   | x64               | [Fedora][Fedora-lifecycle]
+[Fedora][Fedora]                      | 38+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
 [Oracle Linux][Oracle-Linux]          | 8+                    | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 8+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
@@ -125,6 +125,6 @@ OS                                    | Version                 | Architectures 
 
 Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 8.0][OS-lifecycle-policy].
 
-None yet.
+- Fedora 37
 
 [OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md
