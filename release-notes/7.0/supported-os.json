@@ -1,0 +1,64 @@
+{
+  "channel-version": "7.0",
+  "last-updated": "2024-02-28",
+  "glibc": [
+    {
+      "name": "CentOS",
+      "supported-cycles": [
+        {
+          "cycle": "7",
+          "architectures": ["x64"],
+          "required-version": "2.17"
+        }
+      ],
+      "last-updated": "2024-03-21"
+    },
+    {
+      "name": "Ubuntu",
+      "supported-cycles": [
+        {
+          "cycle": "16.04",
+          "architectures": ["arm64"],
+          "required-version": "2.23"
+        },
+        {
+          "cycle": "18.04",
+          "architectures": ["arm"],
+          "required-version": "2.27"
+        }
+      ],
+      "last-updated": "2024-03-21"
+    }
+  ],
+  "musl": [
+    {
+      "name": "Alpine",
+      "supported-cycles": [
+        {
+          "cycle": "3.15",
+          "architectures": ["x64", "arm64"],
+          "required-version": "1.2.2"
+        }
+      ],
+      "last-updated": "2024-03-21"
+    }
+  ],
+  "operating-systems" : [
+    {
+      "name": "Ubuntu",
+      "lifecycle-policy": "https://wiki.ubuntu.com/Releases",
+      "architectures": ["x64", "arm64", "arm"],
+      "supported-cycles": ["20.04", "22.04", "23.10", "24.04"],
+      "unsupported-cycles": ["16.04", "18.04", "22.10", "23.04"],
+      "last-updated": "2023-02-21"
+    },
+    {
+      "name": "iOS",
+      "lifecycle-policy": "https://support.apple.com/ios",
+      "architectures": ["x64", "arm64", "arm"],
+      "supported-cycles": ["15", "16", "17"],
+      "unsupported-cycles": ["10", "11", "12", "13", "14"],
+      "last-updated": "2023-02-28"
+    }
+  ]
+}
