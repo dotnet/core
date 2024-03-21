@@ -1,9 +1,36 @@
 {
   "channel-version": "8.0",
   "last-updated": "2024-02-28",
+  "glibc": [
+    {
+      "name": "Ubuntu",
+      "supported-cycles": [
+        {
+          "cycle": "16.04",
+          "architectures": ["x64", "arm64", "arm"],
+          "required-version": "2.23"
+        }
+      ],
+      "last-updated": "2024-03-21"
+    }
+  ],
+  "musl": [
+    {
+      "name": "Alpine",
+      "supported-cycles": [
+        {
+          "cycle": "3.13",
+          "architectures": ["x64", "arm64", "arm"],
+          "required-version": "1.2.2"
+        }
+      ],
+      "last-updated": "2024-03-21"
+    }
+  ],
   "operating-systems" : [
     {
       "name": "Ubuntu",
+      "lifecycle-policy": "https://wiki.ubuntu.com/Releases",
       "architectures": ["x64", "arm64", "arm"],
       "supported-cycles" : ["20.04", "22.04", "23.10", "24.04"],
       "unsupported-cycles" : ["18.04"],
@@ -11,6 +38,7 @@
     },
     {
       "name": "iOS",
+      "lifecycle-policy": "https://support.apple.com/ios",
       "architectures": ["arm64"],
       "supported-cycles" : ["15", "16", "17"],
       "unsupported-cycles" : ["11", "12", "13", "14"],
