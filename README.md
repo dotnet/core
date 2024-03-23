@@ -10,8 +10,7 @@ You can subscribe to news posts with the following RSS feeds:
 | --- | :--: | :--: |
 | All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
 | News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
-| Security Disclosures (CVEs)  | [🔗](https://github.com/dotnet/core/discussions/categories/security-disclosures-cves) | [🔗](https://github.com/dotnet/core/discussions/categories/security-disclosures-cves.atom) |
-| Servicing Releases  | [🔗](https://github.com/dotnet/core/discussions/categories/servicing-releases) | [🔗](https://github.com/dotnet/core/discussions/categories/servicing-releases.atom) |
+| General  | [🔗](https://github.com/dotnet/core/discussions/categories/general) | [🔗](https://github.com/dotnet/core/discussions/categories/general.atom) |
 
 ## Release Notes
 
