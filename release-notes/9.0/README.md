@@ -9,7 +9,7 @@
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
 
-## Releases & Release Notes
+## Release notes
 
 | Date | Release |
 | :-- | :-- |
