@@ -16,8 +16,8 @@ jobs:
     - uses: actions/checkout@v3
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
-        use-quiet-mode: 'yes'
-        use-verbose-mode: 'yes'
-        check-modified-files-only: 'yes'
+        use-quiet-mode: 'true'
+        use-verbose-mode: 'true'
+        check-modified-files-only: 'true'
         config-file: '.github/workflows/markdown-link-check-config.json'
         base-branch: 'main'
