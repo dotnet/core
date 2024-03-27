@@ -1,8 +1,5 @@
 name: No Response
 
-# **What it does**: Closes issues where the original author doesn't respond to a request for information within the predefined period of time.
-# **Why we have it**: To remove the need for maintainers to remember to check back on issues periodically to see if contributors have responded.
-
 # Both `issue_comment` and `scheduled` event types are required for this Action
 # to work properly.
 on:
@@ -18,15 +15,29 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/stale@v9
+      - name: Check out repository
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          days-before-issue-stale: 7
-          days-before-issue-close: 3
-          only-labels: "needs-more-info"
-          labels-to-add-when-unstale: "info-provided"
-          labels-to-remove-when-unstale: "needs-more-info"
-          stale-issue-message: "This issue is stale because there has been no response to a request for more information for 7 days."
-          close-issue-message: "This issue was closed because there was no response to a request for more information for 10 days."
-          days-before-pr-stale: -1
-          days-before-pr-close: -1
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script to update the trap-handler file
+        run: |
+          sed -i 's/V8_TRAP_HANDLER_SUPPORTED false/V8_TRAP_HANDLER_SUPPORTED true/' trap-handler.h
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add .
+          git commit -m "Enable trap handler support"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
