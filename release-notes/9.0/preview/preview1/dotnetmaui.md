@@ -1,9 +1,9 @@
-# .NET MAUI updates in .NET 9 Preview 1
+# .NET MAUI in .NET 9 Preview 1 Release Notes
 
 The team is continuing work on core fundamentals of the .NET MAUI SDK to improve overall product quality. This includes expanding test coverage, end to end scenario testing, and bug fixing. 
 
 .NET MAUI updates in .NET 9 Preview 1:
-* [Discussion](https://github.com/dotnet/maui/discussions/categories/announcements)
+* [Discussion](https://github.com/dotnet/maui/discussions/20558)
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
 * [GitHub Release](https://github.com/dotnet/maui/releases/tag/9.0.100-preview.1.9973)
 

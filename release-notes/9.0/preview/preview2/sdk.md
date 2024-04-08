@@ -1,4 +1,4 @@
-# SDK updates in .NET 9 Preview 2
+# .NET SDK in .NET 9 Preview 2 Release Notes
 
 .NET 9 Preview 2 includes several new SDK features. We focused on the following areas:
 
