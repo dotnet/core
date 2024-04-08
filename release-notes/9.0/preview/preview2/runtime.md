@@ -1,4 +1,4 @@
-# Runtime updates in .NET 9 Preview 2
+# .NET Runtime in .NET 9 Preview 2 Release Notes
 
 .NET 9 Preview 2 includes several new runtime features. We focused on the following areas:
 
@@ -7,8 +7,8 @@
 
 Runtime updates in .NET 9 Preview 2:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/runtime.md)
-- [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
+- [Discussion](https://aka.ms/dotnet/9/preview2)
+- [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 2:
 

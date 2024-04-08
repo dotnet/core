@@ -1,4 +1,4 @@
-# ASP.NET Core updates in .NET 9 Preview 1
+# ASP.NET Core in .NET 9 Preview 1 Release Notes
 
 Here's a summary of what's new in ASP.NET Core in this preview release:
 
@@ -7,7 +7,8 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - General quality improvements and bug fixes
 
 ASP.NET Core updates in .NET 9 Preview 1:
-* [Discussion](https://github.com/dotnet/aspnetcore/discussions/categories/announcements)
+
+* [Discussion](https://github.com/dotnet/aspnetcore/discussions/54007)
 * [What's new in ASP.NET Core in .NET 9](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0) documentation.
 * [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/9.0#aspnet-core)
 * [Roadmap](https://aka.ms/aspnet/roadmap)
