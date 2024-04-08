@@ -52,7 +52,7 @@ Thanks to everyone for their contributions, as issues, PRs, and other types of e
 
 Notable contributions:
 
-- [@a74nh](https://github.com/a74nh),  [@snickrolls-arm](https://github.com/snickrolls-arm), and [@SwapnilGaikwad](https://github.com/SwapnilGaikwad) for their ARM64 contributions to RyuJIT!
+- [@a74nh](https://github.com/a74nh),  [@snickolls-arm](https://github.com/snickolls-arm), and [@SwapnilGaikwad](https://github.com/SwapnilGaikwad) for their ARM64 contributions to RyuJIT!
 - [@MichalPetryka](https://github.com/MichalPetryka) for his contributions to RyuJIT and related functionality.
 
 ## Community Spotlight (Michał Petryka)
