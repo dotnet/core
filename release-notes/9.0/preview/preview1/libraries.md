@@ -1,4 +1,4 @@
-# Libraries updates in .NET 9 Preview 1
+# .NET Libraries in .NET 9 Preview 1 Release Notes
 
 .NET 9 Preview 1 includes several new library features. We focused on the following areas:
 
@@ -9,11 +9,12 @@
 - System.Text.Json
 
 Libraries updates in .NET 9 Preview 1:
-* [Announcement](https://github.com/dotnet/runtime/discussions/98372)
-* [What's new in .NET Libraries in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
+
+* [Discussion](https://github.com/dotnet/runtime/discussions/98372)
+* [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
 
 .NET 9 Preview 1:
-* [Announcement](https://aka.ms/dotnet/9/preview1)
+* [Discussion](https://aka.ms/dotnet/9/preview1)
 * [Release notes](README.md) 
 
 ## System.Collections: `PriorityQueue.Remove`

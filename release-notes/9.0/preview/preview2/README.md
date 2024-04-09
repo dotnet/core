@@ -1,24 +1,32 @@
-# .NET 9 Preview 2 - March 12, 2024
+# .NET 9 Preview 2 - Release Notes
 
-We are pleased to announce the release of the second preview of .NET 9, along with comprehensive release notes that highlight significant enhancements from the initial preview. Additionally, we have previously outlined [Our Vision for .NET 9](https://aka.ms/dotnet/9/vision), which describes some of the broad areas we intend to deliver on by the upcoming November 2024 release.
+.NET 9 Preview 2 released on March 12th, 2024. Find more information on new features released in .NET 9 Preview 2 by browsing through the release notes below:
 
-You can find detailed release notes about the new features in .NET 9 Preview 2 and up-to-date [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) in [.NET docs](https://learn.microsoft.com/dotnet/core/introduction).
+* [Runtime](./runtime.md)
+* [SDK](./sdk.md)
 
-- [Binaries](9.0.0-preview.2.md)
-- [Release notes](.)
+### Feature Release Notes
 
-The latest .NET 9 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/9.0) and [.NET 9 Releases](../../README.md). Instructions on getting started with .NET 9 can be found in the [getting started guide](../../get-started.md).
+* [.NET Data and EF Core](./efcoreanddata.md)
+* [.NET MAUI](./dotnetmaui.md)
+* [ASP.NET Core](./aspnetcore.md)
 
-We're excited to bring our release updates to you right where the community thrives - on GitHub! 
+## Get Started
 
-Dive into the [.NET Release News on GitHub Discussions](https://github.com/dotnet/core/discussions) and share your feedback on each release!
+Instructions on getting started with .NET 9 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 9 Preview 2 can be found [here on GitHub](./9.0.0-preview.2.md). 
 
-## Announcements
+## Announcements & Discussions
 
-Check out the release notes and discussions for the new features in this release. 
+Discuss this release with the product teams on GitHub through the announcements for this release. 
 
-* .NET 9: [Announcement](https://aka.ms/dotnet/9/preview2)
-* .NET MAUI: [Announcement](https://github.com/dotnet/maui/discussions/21159)
-* ASP.NET Core: [Announcement](https://github.com/dotnet/aspnetcore/discussions/54503)
-* Libraries and Runtime [Announcement](https://github.com/dotnet/runtime/discussions/99619)
+* [.NET 9 Preview 2 Announcement](https://aka.ms/dotnet/9/preview2)
+* [.NET MAUI](https://github.com/dotnet/maui/discussions/21159)
+* [ASP.NET Core](https://github.com/dotnet/aspnetcore/discussions/54503)
+* [Libraries and Runtime](https://github.com/dotnet/runtime/discussions/99619)
+* [Source-build](https://github.com/dotnet/source-build/discussions/4214)
 
+## Stay up-to-date
+
+You can find a detailed overview of all new features in .NET 9 in the [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
+
+The latest .NET 9 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/9.0) and [.NET 9 Releases](../../README.md).
