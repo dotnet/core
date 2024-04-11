@@ -44,11 +44,13 @@ Here's what the script does.
 
 ## Install using Snap
 
+**Note:** There are changes coming to .NET Snap packages in the next few months. Please see [this announcement](https://github.com/dotnet/announcements/issues/304) for details. 
+
 You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://snapcraft.io/docs/installing-snapd).
 
 After configuring Snap on your system, run the following command to install the latest .NET SDK.
 
-`sudo snap install dotnet-sdk --channel=8.0/beta --classic`
+`sudo snap install dotnet-sdk --channel=8.0 --classic`
 
 When .NET is installed using the Snap package, the default .NET command is `dotnet-sdk.dotnet`, as opposed to just `dotnet`. The benefit of the namespaced command is that it will not conflict with a globally installed .NET version you may have. This command can be aliased to `dotnet` with:
 
