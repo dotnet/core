@@ -1,11 +1,11 @@
-# Entity Framework Core 9 Preview 1
+# Entity Framework Core 9 Preview 1 Release Notes
 
 The team has been working primarily on EF Core internals, so there are no new big features in EF Core 9 (EF9) Preview 1. However, this means we really need people like you to run your code on these new internals and report back what you find. We want to fix bugs in the new internals as soon as possible in order to have a strong GA release later in the year.
 
 That being said, there are also several smaller enhancements included in preview 1. One of these might be just the thing you have been waiting for, so read on!
 
 Entity Framework Core 9 Preview 1:
-* [Discussion](https://github.com/dotnet/efcore/issues)
+* [Discussion](https://github.com/dotnet/efcore/issues/33030)
 * [What's new in EF Core 9](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/whatsnew) documentation.
 * [Documentation & Samples](https://github.com/dotnet/EntityFramework.Docs)
 

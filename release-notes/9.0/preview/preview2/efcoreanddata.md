@@ -1,4 +1,4 @@
-# Entity Framework Core 9 Preview 2
+# Entity Framework Core 9 Preview 2 Release Notes
 
 The team has been working primarily on EF Core internals, so there are no new big features in EF Core 9 (EF9) Preview 2. However, this means we really need people like you to run your code on these new internals and report back what you find. We want to fix bugs in the new internals as soon as possible in order to have a strong GA release later in the year.
 
