@@ -137,6 +137,8 @@ Serialization is configured as part of registering the service, with support for
 handles `string` and `byte[]` internally, and uses `System.Text.Json` for everything else, but if you want to use protobuf, xml, or anything
 else: that's easy to do.
 
+`HybridCache` includes support for older .NET runtimes, down to .NET Framework 4.7.2 and .NET Standard 2.0.
+
 Outstanding `HybridCache` work includes:
 
 - support for "tagging" (similar to how tagging works for "Output Cache"), allowing invalidation of entire *categories* of data
