@@ -132,6 +132,11 @@ As you might expect for parity with `IDistributedCache`, `HybridCache` supports 
 also introduces new optional APIs for `IDistributedCache` implementations, to avoid `byte[]` allocations (this feature is implemented
 by the preview versions of `Microsoft.Extensions.Caching.StackExchangeRedis` and `Microsoft.Extensions.Caching.SqlServer`).
 
+Serialization is configured as part of registering the service, with support for type-specific and generalized serializers via the
+`.WithSerializer(...)` and `.WithSerializerFactory(...)` methods, chained from the `AddHybridCache(...)` call. By default, the library
+handles `string` and `byte[]` internally, and uses `System.Text.Json` for everything else, but if you want to use protobuf, xml, or anything
+else: that's easy to do.
+
 Outstanding `HybridCache` work includes:
 
 - support for "tagging" (similar to how tagging works for "Output Cache"), allowing invalidation of entire *categories* of data
