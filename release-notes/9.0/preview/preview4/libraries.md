@@ -114,7 +114,8 @@ public class SomeService(HybridCache cache)
 }
 ```
 
-`HybridCache` will use your configured `IDistributedCache` implementation, if any, for the secondary out-of-process caching - but even without
+`HybridCache` will use your configured `IDistributedCache` implementation, if any, for the secondary out-of-process caching - for example
+Redis ([more information](https://learn.microsoft.com/aspnet/core/performance/caching/distributed)) - but even without
 an `IDistributedCache`, the `HybridCache` service will still provide in-process caching and "stampede" protection.
 
 ### A note on object reuse
