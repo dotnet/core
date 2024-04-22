@@ -104,7 +104,7 @@ public class SomeService(HybridCache cache)
         return await cache.GetOrCreateAsync(
             $"someinfo:{name}:{id}", // unique key for this combination
             (name, id), // all of the state we need for the final call, if needed
-            async (state, token) =>
+            static async (state, token) =>
                 await SomeExpensiveOperationAsync(state.name, state.id, token),
             token: token
         );
