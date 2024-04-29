@@ -61,3 +61,6 @@ Thank you contributors! ❤️
 - [johatuni](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview3+author%3Ajohatuni)
 - [andrewjsaid](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview3+author%3Aandrewjsaid)
 - [Kahbazi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview3+author%3AKahbazi)
+- [hakenr](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview3+author%3Ahakenr)
+- [WeihanLi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview3+author%3AWeihanLi)
+- [StevenTCramer](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview3+author%3AStevenTCramer)
