@@ -1,0 +1,71 @@
+{
+    "channel-version": "9.0",
+    "last-updated": "2024-05-01",
+    "linux" : [
+        {
+            "name": "Alpine",
+            "lifecycle-policy": "https://alpinelinux.org/releases/",
+            "architectures": ["x64", "arm64", "arm"],
+            "supported-cycles" : ["3.17", "3.18", "3.19"]
+        },
+        {
+            "name": "Debian",
+            "lifecycle-policy": "https://wiki.debian.org/DebianReleases",
+            "architectures": ["x64", "arm64", "arm"],
+            "supported-cycles" : ["11", "12"]
+        },
+        {
+            "name": "Fedora",
+            "lifecycle-policy": "https://fedoraproject.org/wiki/End_of_life",
+            "architectures": ["x64", "arm64", "arm"],
+            "supported-cycles" : ["39", "40"]
+        },
+        {
+            "name": "openSUSE Leap",
+            "lifecycle-policy": "https://en.opensuse.org/Lifetime",
+            "architectures": ["x64", "arm64"],
+            "supported-cycles" : ["15.5"]
+        },
+        {
+            "name": "Red Hat Enterprise Linux",
+            "lifecycle-policy": "https://access.redhat.com/support/policy/updates/errata/",
+            "architectures": ["x64", "arm64"],
+            "supported-cycles" : ["8", "9"]
+        },
+        {
+            "name": "SUSE Enterprise Linux",
+            "lifecycle-policy": "https://www.suse.com/lifecycle/",
+            "architectures": ["x64", "arm64"],
+            "supported-cycles" : ["39", "40"]
+        },
+        {
+            "name": "Ubuntu",
+            "lifecycle-policy": "https://wiki.ubuntu.com/Releases",
+            "architectures": ["x64", "arm64", "arm"],
+            "supported-cycles" : ["20.04", "22.04", "23.10", "24.04"]
+        }
+    ],
+    "glibc": [
+        {
+            "architectures": ["arm64","x64"],
+            "version": "Ubuntu 16.04",
+            "source": "CentOS 7"
+        },
+        {
+            "architecture": "arm32",
+            "version": "2.35",
+            "source": "Ubuntu 22.04"
+        }
+    ],
+    "musl": [
+        {
+            "architectures": [
+                "arm32",
+                "arm64",
+                "x64"
+            ],
+            "version": "1.2.2",
+            "source": "Alpine 3.13"
+        }
+    ]
+}
