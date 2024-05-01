@@ -27,21 +27,23 @@ OS                                    | Version                 | Architectures 
 
 OS                                    | Version               | Architectures     | Lifecycle
 --------------------------------------|-----------------------|-------------------|----------
-[Alpine Linux][Alpine]                | 3.17+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
+[Alpine Linux][Alpine]                | 3.19+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
 [Debian][Debian]                      | 12+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
-[Fedora][Fedora]                      | 38+                   | x64               | [Fedora][Fedora-lifecycle]
+[Fedora][Fedora]                      | 40+                   | x64               | [Fedora][Fedora-lifecycle]
 [openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
 [Oracle Linux][Oracle-Linux]          | 8+                    | x64               | [Oracle][Oracle-lifecycle]
 [Red Hat Enterprise Linux][RHEL]      | 8+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP5+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 20.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
+Arm32 builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions. See Libc compatibility.
+
 Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
 
 ### Libc compatibility
 
-- [glibc][glibc] 2.27 (from Ubuntu 18.04)
-- Alpine: [musl][musl] 1.2.2 (from Alpine 3.13)
+- [glibc][glibc] 2.23 (from Ubuntu 16.04) for Arm64/x64; 2.35 (from Ubuntu 22.04) for Arm32
+- [musl][musl] 1.2.2 (from Alpine 3.13)
 
 [Alpine]: https://alpinelinux.org/
 [Alpine-lifecycle]: https://alpinelinux.org/releases/
@@ -110,7 +112,6 @@ OS                            | Version                 | Architectures     |
 ## QEMU
 
 .NET 9 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
-
 
 ## Out of support OS versions
 
