@@ -1,71 +1,277 @@
 {
     "channel-version": "9.0",
     "last-updated": "2024-05-01",
-    "linux" : [
+    "operating-systems": [
         {
-            "name": "Alpine",
-            "lifecycle-policy": "https://alpinelinux.org/releases/",
-            "architectures": ["x64", "arm64", "arm"],
-            "supported-cycles" : ["3.17", "3.18", "3.19"]
+            "family": "Android",
+            "distributions": [
+                {
+                    "name": "Android",
+                    "lifecycle-policy": "https://support.google.com/android",
+                    "architectures": [
+                        "x64",
+                        "arm64",
+                        "arm"
+                    ],
+                    "supported-cycles": [
+                        "API 21+"
+                    ]
+                }
+            ]
         },
         {
-            "name": "Debian",
-            "lifecycle-policy": "https://wiki.debian.org/DebianReleases",
-            "architectures": ["x64", "arm64", "arm"],
-            "supported-cycles" : ["11", "12"]
+            "family": "Apple",
+            "distributions": [
+                {
+                    "name": "iOS",
+                    "lifecycle-policy": "https://support.apple.com/ios/",
+                    "architectures": [
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "12+"
+                    ]
+                },
+                {
+                    "name": "iOS Simulator",
+                    "lifecycle-policy": "https://support.apple.com/ios/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "12+"
+                    ]
+                },
+                {
+                    "name": "tvOS",
+                    "lifecycle-policy": "https://support.apple.com/apple-tv/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "12"
+                    ]
+                },
+                {
+                    "name": "tvOS Simulator",
+                    "lifecycle-policy": "https://support.apple.com/apple-tv/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "12"
+                    ]
+                },
+                {
+                    "name": "MacCatalyst",
+                    "lifecycle-policy": "https://support.apple.com/macos/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "12"
+                    ]
+                },
+                {
+                    "name": "macOS",
+                    "lifecycle-policy": "https://support.apple.com/macos/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "12"
+                    ]
+                }
+            ]
         },
         {
-            "name": "Fedora",
-            "lifecycle-policy": "https://fedoraproject.org/wiki/End_of_life",
-            "architectures": ["x64", "arm64", "arm"],
-            "supported-cycles" : ["39", "40"]
+            "family": "Linux",
+            "distributions": [
+                {
+                    "name": "Alpine",
+                    "lifecycle-policy": "https://alpinelinux.org/releases/",
+                    "architectures": [
+                        "x64",
+                        "arm64",
+                        "arm"
+                    ],
+                    "supported-cycles": [
+                        "3.17",
+                        "3.18",
+                        "3.19"
+                    ]
+                },
+                {
+                    "name": "Debian",
+                    "lifecycle-policy": "https://wiki.debian.org/DebianReleases",
+                    "architectures": [
+                        "x64",
+                        "arm64",
+                        "arm"
+                    ],
+                    "supported-cycles": [
+                        "11",
+                        "12"
+                    ]
+                },
+                {
+                    "name": "Fedora",
+                    "lifecycle-policy": "https://fedoraproject.org/wiki/End_of_life",
+                    "architectures": [
+                        "x64",
+                        "arm64",
+                        "arm"
+                    ],
+                    "supported-cycles": [
+                        "39",
+                        "40"
+                    ]
+                },
+                {
+                    "name": "openSUSE Leap",
+                    "lifecycle-policy": "https://en.opensuse.org/Lifetime",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "15.5"
+                    ]
+                },
+                {
+                    "name": "Red Hat Enterprise Linux",
+                    "lifecycle-policy": "https://access.redhat.com/support/policy/updates/errata/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "8",
+                        "9"
+                    ]
+                },
+                {
+                    "name": "SUSE Enterprise Linux",
+                    "lifecycle-policy": "https://www.suse.com/lifecycle/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "39",
+                        "40"
+                    ]
+                },
+                {
+                    "name": "Ubuntu",
+                    "lifecycle-policy": "https://wiki.ubuntu.com/Releases",
+                    "architectures": [
+                        "x64",
+                        "arm64",
+                        "arm"
+                    ],
+                    "supported-cycles": [
+                        "20.04",
+                        "22.04",
+                        "23.10",
+                        "24.04"
+                    ]
+                }
+            ]
         },
         {
-            "name": "openSUSE Leap",
-            "lifecycle-policy": "https://en.opensuse.org/Lifetime",
-            "architectures": ["x64", "arm64"],
-            "supported-cycles" : ["15.5"]
-        },
-        {
-            "name": "Red Hat Enterprise Linux",
-            "lifecycle-policy": "https://access.redhat.com/support/policy/updates/errata/",
-            "architectures": ["x64", "arm64"],
-            "supported-cycles" : ["8", "9"]
-        },
-        {
-            "name": "SUSE Enterprise Linux",
-            "lifecycle-policy": "https://www.suse.com/lifecycle/",
-            "architectures": ["x64", "arm64"],
-            "supported-cycles" : ["39", "40"]
-        },
-        {
-            "name": "Ubuntu",
-            "lifecycle-policy": "https://wiki.ubuntu.com/Releases",
-            "architectures": ["x64", "arm64", "arm"],
-            "supported-cycles" : ["20.04", "22.04", "23.10", "24.04"]
+            "family": "Windows",
+            "distributions": [
+                {
+                    "name": "Nano Server",
+                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64"
+                    ],
+                    "supported-cycles": [
+                        "Version 1809+"
+                    ]
+                },
+                {
+                    "name": "Windows 10",
+                    "lifecycle-policy": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
+                    "architectures": [
+                        "x64",
+                        "x86",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "Version 1607+"
+                    ]
+                },
+                {
+                    "name": "Windows 11",
+                    "lifecycle-policy": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
+                    "architectures": [
+                        "x64",
+                        "x86",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "Version 22000+"
+                    ]
+                },
+                {
+                    "name": "Windows Server",
+                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64",
+                        "x86"
+                    ],
+                    "supported-cycles": [
+                        "2012+"
+                    ]
+                },
+                {
+                    "name": "Windows Server Core",
+                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64",
+                        "x86"
+                    ],
+                    "supported-cycles": [
+                        "2012+"
+                    ]
+                }
+            ]
         }
     ],
-    "glibc": [
-        {
-            "architectures": ["arm64","x64"],
-            "version": "Ubuntu 16.04",
-            "source": "CentOS 7"
-        },
-        {
-            "architecture": "arm32",
-            "version": "2.35",
-            "source": "Ubuntu 22.04"
-        }
-    ],
-    "musl": [
-        {
-            "architectures": [
-                "arm32",
-                "arm64",
-                "x64"
-            ],
-            "version": "1.2.2",
-            "source": "Alpine 3.13"
-        }
-    ]
+    "linux": {
+        "glibc": [
+            {
+                "architectures": [
+                    "arm64",
+                    "x64"
+                ],
+                "version": "2.23",
+                "source": "Ubuntu 16.04"
+            },
+            {
+                "architecture": "arm32",
+                "version": "2.35",
+                "source": "Ubuntu 22.04"
+            }
+        ],
+        "musl": [
+            {
+                "architectures": [
+                    "arm32",
+                    "arm64",
+                    "x64"
+                ],
+                "version": "1.2.2",
+                "source": "Alpine 3.13"
+            }
+        ]
+    }
 }
