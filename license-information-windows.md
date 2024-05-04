@@ -8,8 +8,8 @@ apply to your use. By using any or all of these files you agree to their associa
 The following binaries are licensed with the
 [Windows SDK License](https://learn.microsoft.com/legal/windows-sdk/license):
 
-* api-ms-\*.\* (used by .NET runtime before .NET 7.0)
-* ucrtbase.dll (used by .NET runtime before .NET 7.0)
+* api-ms-\*.\* (used by .NET runtime,  .NET 6 and earlier)
+* ucrtbase.dll (used by .NET runtime,  .NET 6 and earlier)
 * D3DCompiler_47_cor3.dll (used by WPF)
 
 The following binaries are licensed with the
