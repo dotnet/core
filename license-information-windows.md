@@ -1,15 +1,14 @@
 # License information for .NET on Windows
 
-The Windows distribution of .NET 5.0 and later releases contains files that are provided under
-multiple licenses.
+The Windows distribution of .NET contains files that are provided under multiple licenses.
 This information is provided to help you understand the license terms that
 apply to your use. By using any or all of these files you agree to their associated license terms.
 
 The following binaries are licensed with the
 [Windows SDK License](https://learn.microsoft.com/legal/windows-sdk/license):
 
-* api-ms-\*.\* (used by .NET runtime,  .NET 6 and earlier)
-* ucrtbase.dll (used by .NET runtime,  .NET 6 and earlier)
+* api-ms-\*.\* (used by .NET runtime, .NET 6 and earlier)
+* ucrtbase.dll (used by .NET runtime, .NET 6 and earlier)
 * D3DCompiler_47_cor3.dll (used by WPF)
 
 The following binaries are licensed with the
