@@ -44,7 +44,7 @@ Here's what the script does.
 
 ## Install using Snap
 
-**Note:** There are changes coming to .NET Snap packages in the next few months. Please see [this announcement](https://github.com/dotnet/announcements/issues/304) for details. 
+**Note:** On 30 April 2024, all existing .NET Snaps are transferred from Microsoft to Canonical. Please see [this announcement](https://github.com/dotnet/announcements/issues/304) for details. 
 
 You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://snapcraft.io/docs/installing-snapd).
 
