@@ -37,7 +37,7 @@ sudo apk add \
 
 ```bash
 sudo apt-get update \
-    &&sudo apt-get install -y --no-install-recommends \
+    && sudo apt-get install -y --no-install-recommends \
         libc6 \
         libgcc-s1 \
         libicu72 \
@@ -49,7 +49,7 @@ sudo apt-get update \
 ## Debian 11 "Bullseye"
 ``` bash
 sudo apt-get update \
-    &&sudo apt-get install -y --no-install-recommends \
+    && sudo apt-get install -y --no-install-recommends \
     libc6 \
     libgcc1 \
     libgssapi-krb5-2 \
@@ -59,10 +59,23 @@ sudo apt-get update \
     zlib1g
 ```
 
+## Ubuntu 24.04 "Noble"
+
+```bash
+sudo apt-get update \
+    && sudo apt-get install -y --no-install-recommends \
+    libc6 \
+    libgcc-s1 \
+    libicu74 \
+    libssl3 \
+    libstdc++6 \
+    zlib1g 
+```
+
 ## Ubuntu 23.10"Mantic"
 ``` bash
 sudo apt-get update \
-    &&sudo apt-get install -y --no-install-recommends \
+    && sudo apt-get install -y --no-install-recommends \
         libc6 \
         libgcc-s1 \
         libicu72 \
@@ -75,7 +88,7 @@ sudo apt-get update \
 
 ``` bash
 sudo apt-get update \
-    &&sudo apt-get install -y --no-install-recommends \
+    && sudo apt-get install -y --no-install-recommends \
         libc6 \
         libgcc-s1 \
         libicu70 \

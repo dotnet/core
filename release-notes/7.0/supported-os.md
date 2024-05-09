@@ -38,6 +38,8 @@ OS                                    | Version               | Architectures   
 [SUSE Enterprise Linux (SLES)][SLES]  | 12 SP5+               | x64               | [SUSE][SLES-lifecycle]
 [Ubuntu][Ubuntu]                      | 18.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
 
+Arm32 builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [`_TIME_BITS` set to 32-bit](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html#index-_005fTIME_005fBITS), for example Debian 12, Ubuntu 22.04, and lower versions.
+
 Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
 
 ### Libc compatibility
