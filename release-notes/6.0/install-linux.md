@@ -44,17 +44,19 @@ Here's what the script does.
 
 ## Install using Snap
 
+**Note:** On 30 April 2024, all existing .NET Snaps are transferred from Microsoft to Canonical. Please see [this announcement](https://github.com/dotnet/announcements/issues/304) for details. 
+
 You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://docs.snapcraft.io/installing-snapd/6735).
 
 After configuring Snap on your system, run the following command to install the latest .NET SDK.
 
-`sudo snap install dotnet-sdk --channel=6.0/beta --classic`
+`sudo snap install dotnet-sdk --channel=6.0 --classic`
 
 When .NET is installed using the Snap package, the default .NET command is `dotnet-sdk.dotnet`, as opposed to just `dotnet`. The benefit of the namespaced command is that it will not conflict with a globally installed .NET version you may have. This command can be aliased to `dotnet` with:
 
 `sudo snap alias dotnet-sdk.dotnet dotnet`
 
-**Note:** Some distributions require an additional step to enable access to the SSL certificate. If you experience SSL errors when running `dotnet restore`, see [Linux Setup](https://github.com/dotnet/core/blob/main/Documentation/linux-setup.md) for a possible resolution.
+**Note:** Some distributions require an additional step to enable access to the SSL certificate. If you experience SSL errors when running `dotnet restore`, see [.NET for Linux Distributions](https://github.com/dotnet/core/blob/main/linux.md) for a possible resolution.
 
 ## Installing from a binary archive
 
