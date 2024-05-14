@@ -24,7 +24,7 @@ The following table lists end-of-life releases.
 
 |  Version  |  Release Date | Support | Final Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 7](release-notes/7.0/README.md) |  [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-net-7-0/) | [STS][policies] | [7.0.19][7.0.19] |[May 14, 2024](https://devblogs.microsoft.com/dotnet/dotnet-7-end-of-support/) |
+| [.NET 7](release-notes/7.0/README.md) |  [November 8, 2022]([https://devblogs.microsoft.com/dotnet/announcing-net-7-0/](https://github.com/dotnet/core/actions/runs/9082951363/job/24960544754)) | [STS][policies] | [7.0.19][7.0.19] |[May 14, 2024](https://devblogs.microsoft.com/dotnet/dotnet-7-end-of-support/) |
 | [.NET Core 3.1](release-notes/3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.32][3.1.32] | December 13, 2022 |
 | [.NET 5](release-notes/5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [STS][policies] | [5.0.17][5.0.17] | [May 10, 2022](https://devblogs.microsoft.com/dotnet/dotnet-5-end-of-support-update/) |
 | [.NET Core 3.0](release-notes/3.0/README.md) | [September 23, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/) |  [STS][policies] | [3.0.3][3.0.3] | [March 3, 2020](https://devblogs.microsoft.com/dotnet/net-core-3-0-end-of-life/) |
