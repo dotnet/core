@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in .NET Libraries in this preview release:
 
-- [New Tensor<T> type](#new-tensor-t-exchange-type)
+- [New `Tensor<T>` type](#new-tensor-type)
 - [Tokenizer library enhancements](#tokenizer-library-enhancements)
 - [OpenTelemetry: Make activity linking more flexible](#opentelemetry-make-activity-linking-more-flexible)
 - [PDB support for System.Reflection.Emit.PersistedAssemblyBuilder](#pdb-support-added-for-systemreflectionemitpersistedassemblybuilder)
@@ -17,7 +17,7 @@ Libraries updates in .NET 9 Preview 4:
 - [Release notes](./README.md)
 - [Runtime release notes](./runtime.md)
 
-## New Tensor<T> type
+## New `Tensor<T>` type
 
 Tensors are the cornerstone data structure of artificial intelligence (AI). They can often be thought of as multidimensional arrays. 
 
