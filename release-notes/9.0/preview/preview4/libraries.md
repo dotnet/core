@@ -125,7 +125,6 @@ IReadOnlyList<int> ids = ph2Tokenizer.EncodeToIds("Hello, World");
 
 The [tokenizer library](https://github.com/dotnet/machinelearning/tree/main/src/Microsoft.ML.Tokenizers) is available on GitHub and can be accessed by referencing the [NuGet package](https://www.nuget.org/packages/Microsoft.ML.Tokenizers/0.22.0-preview.24271.1#readme-body-tab).
 
-
 ```C#
 
 ## OpenTelemetry: Make activity linking more flexible
