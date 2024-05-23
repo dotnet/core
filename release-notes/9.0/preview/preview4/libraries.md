@@ -19,20 +19,20 @@ Libraries updates in .NET 9 Preview 4:
 
 ## New `Tensor<T>` type
 
-Tensors are the cornerstone data structure of artificial intelligence (AI). They can often be thought of as multidimensional arrays. 
+Tensors are the cornerstone data structure of artificial intelligence (AI). They can often be thought of as multidimensional arrays.
 
 Tensors are used to:
 
-- Represent and encode data such as text sequences (tokens), images, video, and audio.  
-- Efficiently manipulate higher-dimensional data.  
-- Efficiently apply computations on higher-dimensional data.  
-- Inside neural networks, they’re used to store weight information and intermediate computations.  
+- Represent and encode data such as text sequences (tokens), images, video, and audio.
+- Efficiently manipulate higher-dimensional data.
+- Efficiently apply computations on higher-dimensional data.
+- Inside neural networks, they’re used to store weight information and intermediate computations.
 
-In .NET 9, we plan to introduce a new `Tensor<T>` exchange type that:  
+In .NET 9, we plan to introduce a new `Tensor<T>` exchange type that:
 
-- Provides efficient interop with AI libraries like ML.NET, TorchSharp, and ONNX Runtime using zero copies where possible.  
-- Builds on top of `TensorPrimitives` for efficient math operations.  
-- Enables easy and efficient data manipulation by providing indexing and slicing operations.  
+- Provides efficient interop with AI libraries like ML.NET, TorchSharp, and ONNX Runtime using zero copies where possible.
+- Builds on top of `TensorPrimitives` for efficient math operations.
+- Enables easy and efficient data manipulation by providing indexing and slicing operations.
 
 Below is a brief overview of some of the APIs included with the new `Tensor<T>` type:
 
@@ -69,12 +69,12 @@ var t11 = Tensor.Divide(t0, t0); // [[1, 1, 1]]
 
 Some things to note:
 
-- `Tensor<T>` is not a replacement for existing AI and Machine Learning libraries. Instead, it’s intended to provide enough of a common set of APIs that reduce code duplication, reduce dependencies, and where possible achieve better performance by using the latest runtime features.  
+- `Tensor<T>` is not a replacement for existing AI and Machine Learning libraries. Instead, it’s intended to provide enough of a common set of APIs that reduce code duplication, reduce dependencies, and where possible achieve better performance by using the latest runtime features.
 - At the moment, the easiest way to try `Tensor<T>` is using .NET 8. If your application targets .NET 9, we recommend waiting until .NET 9 Preview 5. If you're eager to try it out in your .NET 9 applications, you can install the latest .NET nightly builds.
 
 To get started:
 
-1. Configure the following NuGet nightly feed: 
+1. Configure the following NuGet nightly feed:
 
     ```text
     https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json
@@ -87,7 +87,7 @@ To get started:
     <LangVersion>preview</LangVersion>
     ```
 
-We can't wait to see what you build! 
+We can't wait to see what you build!
 
 Try it out and [give us feedback](https://github.com/dotnet/runtime/issues)!
 
@@ -102,14 +102,14 @@ The following example demonstrates how to utilize the tokenizer with `Span<char>
 using Stream remoteStream = File.OpenRead(tokenizerModelPath));
 Tokenizer llamaTokenizer = Tokenizer.CreateLlama(remoteStream);
 
-Span<char> textSpan = "Hello World".AsSpan();
+ReadOnlySpan<char> textSpan = "Hello World".AsSpan();
 IReadOnlyList<int> ids = llamaTokenizer.EncodeToIds(textSpan, considerNormalization: false); // bypass the normalization
 
 Tokenizer tiktokenTokenizer = Tokenizer.CreateTiktokenForModel("gpt-4");
-IReadOnlyList<int> ids = tiktokenTokenizer.EncodeToIds(textSpan, considerPreTokenization: false); // bypass the PreTokenization
+ids = tiktokenTokenizer.EncodeToIds(textSpan, considerPreTokenization: false); // bypass the PreTokenization
 ```
 
-We've also introduced the CodeGen tokenizer, compatible with models such as [codegen-350M-mono](https://huggingface.co/Salesforce/codegen-350M-mono/tree/main) and [phi-2](https://huggingface.co/microsoft/phi-2/tree/main). 
+We've also introduced the CodeGen tokenizer, compatible with models such as [codegen-350M-mono](https://huggingface.co/Salesforce/codegen-350M-mono/tree/main) and [phi-2](https://huggingface.co/microsoft/phi-2/tree/main).
 
 The following example demonstrates how to create and utilize this tokenizer.
 
@@ -123,11 +123,13 @@ Tokenizer ph2Tokenizer = Tokenizer.CreateCodeGen(vocabStream, mergesStream);
 IReadOnlyList<int> ids = ph2Tokenizer.EncodeToIds("Hello, World");
 ```
 
+The [tokenizer library](https://github.com/dotnet/machinelearning/tree/main/src/Microsoft.ML.Tokenizers) is available on GitHub and can be accessed by referencing the [NuGet package](https://www.nuget.org/packages/Microsoft.ML.Tokenizers/0.22.0-preview.24271.1#readme-body-tab).
+
 ## OpenTelemetry: Make activity linking more flexible
 
 [Activity.AddLink](https://github.com/dotnet/runtime/blob/e1f98a13be27efbe0ee3b69aa4673e7e98c5c003/src/libraries/System.Diagnostics.DiagnosticSource/src/System/Diagnostics/Activity.cs#L529) was added to enable linking an `Activity` object to other tracing contexts after `Activity` object creation. This change better aligns .NET with the [OpenTelemetry specifications](https://github.com/open-telemetry/opentelemetry-specification/blob/6360b49d20ae451b28f7ba0be168ed9a799ac9e1/specification/trace/api.md?plain=1#L804).
 
-`Activity` linking was previously only possible as part of [`Activity` creation](https://learn.microsoft.com/dotnet/api/system.diagnostics.activitysource.createactivity?view=net-8.0#system-diagnostics-activitysource-createactivity(system-string-system-diagnostics-activitykind-system-diagnostics-activitycontext-system-collections-generic-ienumerable((system-collections-generic-keyvaluepair((system-string-system-object))))-system-collections-generic-ienumerable((system-diagnostics-activitylink))-system-diagnostics-activityidformat)). 
+`Activity` linking was previously only possible as part of [`Activity` creation](https://learn.microsoft.com/dotnet/api/system.diagnostics.activitysource.createactivity?view=net-8.0#system-diagnostics-activitysource-createactivity(system-string-system-diagnostics-activitykind-system-diagnostics-activitycontext-system-collections-generic-ienumerable((system-collections-generic-keyvaluepair((system-string-system-object))))-system-collections-generic-ienumerable((system-diagnostics-activitylink))-system-diagnostics-activityidformat)).
 
 ```C#
 var activityContext = new ActivityContext(ActivityTraceId.CreateRandom(), ActivitySpanId.CreateRandom(), ActivityTraceFlags.None);
@@ -156,7 +158,7 @@ public abstract partial class ModuleBuilder : System.Reflection.Module
  {
     public void MarkSequencePoint(ISymbolDocumentWriter document, int startLine, int startColumn, int endLine, int endColumn) { }
  }
- 
+
 public abstract partial class LocalBuilder : LocalVariableInfo
 {
     public void SetLocalSymInfo(string name);
