@@ -21,6 +21,18 @@ For consumer applications built on WPF and running on Windows 11, this feature e
 ![WPF app running in light mode](media/wpf-light.png)
 ![WPF app running in dark mode](media/wpf-dark.png)
 
+This can been enabled by adding the following to your `App.xaml`
+
+```xml
+<Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Resources/Fluent.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</Application.Resources>
+```
+
 ## Hyphen based ligature support 
 
 Based on the WPF community feedback, we have now fixed the issue with Hyphen based ligatures not working in WPF. Summary: A call to LsTxtFmt (Text Formatter) is made when a line is being created. Previously, in LsTxtFmt, glyphing was only performed for regular characters. However, after the fix, glyphing will also be performed for special characters, such as hyphens. 
