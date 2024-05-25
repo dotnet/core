@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in .NET Libraries in this preview release:
 
-- [New `Tensor<T>` type](#new-tensor-type)
+- [New `Tensor<T>` type](#new-tensort-type)
 - [Tokenizer library enhancements](#tokenizer-library-enhancements)
 - [OpenTelemetry: Make activity linking more flexible](#opentelemetry-make-activity-linking-more-flexible)
 - [PDB support for System.Reflection.Emit.PersistedAssemblyBuilder](#pdb-support-added-for-systemreflectionemitpersistedassemblybuilder)
