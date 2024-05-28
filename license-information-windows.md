@@ -14,15 +14,14 @@ The following binaries are licensed with the
 The following binaries are licensed with the
 [.NET Library License](https://dotnet.microsoft.com/dotnet_library_license.htm)
 
+* Microsoft.DiaSymReader.Native.{x86|amd64|arm|arm64}.dll (used by .NET runtime and SDK)
 * PresentationNative_cor3.dll (used by WPF)
 * wpfgfx_cor3.dll (used by WPF)
 
 The following binaries are licensed with the
-[Visual Studio 2019 License](https://visualstudio.microsoft.com/license-terms/mlt031619/)
-(not as a "trial"):
+[Microsoft Visual C++ Runtime Software License](https://visualstudio.microsoft.com/license-terms/vs2022-cruntime/):
 
 * vcruntime140_cor3.dll (used by WPF)
-* Microsoft.DiaSymReader.Native.{x86|amd64|arm|arm64}.dll (used by .NET runtime and SDK)
 
 All other binaries and files are licensed with the
 [MIT license](https://github.com/dotnet/core/blob/main/LICENSE.TXT)
