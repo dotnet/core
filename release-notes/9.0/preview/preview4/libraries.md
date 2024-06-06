@@ -125,22 +125,6 @@ IReadOnlyList<int> ids = ph2Tokenizer.EncodeToIds("Hello, World");
 
 The [tokenizer library](https://github.com/dotnet/machinelearning/tree/main/src/Microsoft.ML.Tokenizers) is available on GitHub and can be accessed by referencing the [NuGet package](https://www.nuget.org/packages/Microsoft.ML.Tokenizers/0.22.0-preview.24271.1#readme-body-tab).
 
-## OpenTelemetry: Make activity linking more flexible
-
-[Activity.AddLink](https://github.com/dotnet/runtime/blob/e1f98a13be27efbe0ee3b69aa4673e7e98c5c003/src/libraries/System.Diagnostics.DiagnosticSource/src/System/Diagnostics/Activity.cs#L529) was added to enable linking an `Activity` object to other tracing contexts after `Activity` object creation. This change better aligns .NET with the [OpenTelemetry specifications](https://github.com/open-telemetry/opentelemetry-specification/blob/6360b49d20ae451b28f7ba0be168ed9a799ac9e1/specification/trace/api.md?plain=1#L804).
-
-`Activity` linking was previously only possible as part of [`Activity` creation](https://learn.microsoft.com/dotnet/api/system.diagnostics.activitysource.createactivity?view=net-8.0#system-diagnostics-activitysource-createactivity(system-string-system-diagnostics-activitykind-system-diagnostics-activitycontext-system-collections-generic-ienumerable((system-collections-generic-keyvaluepair((system-string-system-object))))-system-collections-generic-ienumerable((system-diagnostics-activitylink))-system-diagnostics-activityidformat)).
-
-```C#
-var activityContext = new ActivityContext(ActivityTraceId.CreateRandom(), ActivitySpanId.CreateRandom(), ActivityTraceFlags.None);
-var activityLink = new ActivityLink(activityContext);
-
-var activity = new Activity("LinkTest");
-activity.AddLink(activityLink);
-
-// use activity.Links to retrieve all links to the activity object.
-```
-
 ## PDB support added for System.Reflection.Emit.PersistedAssemblyBuilder
 
 PDB support has been added to the new [`PersistedAssemblyBuilder`](../preview1/runtime.md) class. You can now emit symbol info and use it for debugging an assembl generated with Reflection.Emit. The API shape that was chosen was inspired by the .NET Framework implementation of the same functionality.
