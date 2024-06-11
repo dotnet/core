@@ -33,10 +33,9 @@ EF9 preview 5 contains three small enhancements to query translation:
 See [LINQ and SQL translation](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/whatsnew#linq-and-sql-translation) in the _What's New_ docs for more information.
  
 ## Everything else in preview 5
-Preview 4 contains:
+Preview 5 contains:
  
 * [6 enhancements](https://github.com/dotnet/efcore/issues?q=is%3Aissue+milestone%3A9.0.0-preview5+is%3Aclosed+label%3Atype-enhancement+)
 * [6 bug fixes](https://github.com/dotnet/efcore/issues?q=is%3Aissue+milestone%3A9.0.0-preview5+is%3Aclosed+label%3Atype-bug)
  
 EF Core 9 preview 5 and Microsoft.Data.Sqlite contain work from the EF Team at Microsoft (@roji @AndriySvyryd @maumar @ajcvickers @cincuranet @SamMonoRT @luisquintanilla).
-
