@@ -27,7 +27,7 @@ dotnet new maui-blazor-web -n AllTheTargets
 
 ### Android API 35 Beta 2
 
-This release includes [Android API 35 Beta 2](https://developer.android.com/about/versions/15#beta-2) bindings, and improvements for startup performance and app size.
+This release includes [Android API 35 Beta 2](https://developer.android.com/about/versions/15) bindings, and improvements for startup performance and app size.
 
 ### LLVM marshalled methods
 
