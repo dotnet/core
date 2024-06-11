@@ -61,3 +61,4 @@ This release was focused on quality.
 
 ## Community Contributions
 
+Thanks to contributors [@MartyIX](https://github.com/MartyIX), [@albyrock87](https://github.com/albyrock87), [@aritchie](https://github.com/aritchie), [@symbiogenesis](https://github.com/symbiogenesis), [@Adam--](https://github.com/Adam--), [@rafalka](https://github.com/rafalka), [@dartasen](https://github.com/dartasen), [@BurningLights](https://github.com/BurningLights), [@koviant](https://github.com/koviant), [@aqua-ix](https://github.com/aqua-ix), [@maonaoda](https://github.com/maonaoda), [@Axemasta](https://github.com/Axemasta), [@kubaflo](https://github.com/kubaflo), [@Giviruk](https://github.com/Giviruk), and [@PreciousNyasulu](https://github.com/PreciousNyasulu).
