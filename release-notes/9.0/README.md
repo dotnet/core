@@ -45,7 +45,7 @@
 * [Preview 2](preview/preview2/aspnetcore.md)
 * [Preview 3](preview/preview3/aspnetcore.md)
 * [Preview 4](preview/preview4/aspnetcore.md)
-* [Preview 5(preview/preview5/aspnetcore.md)
+* [Preview 5](preview/preview5/aspnetcore.md)
 
 ### .NET MAUI
 * [Preview 1](preview/preview1/dotnetmaui.md)
