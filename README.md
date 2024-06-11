@@ -18,14 +18,14 @@ The following [.NET releases](./releases.md) are currently supported:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.4][9.0.0-preview.4] |  |
+| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.5][9.0.0-preview.5] |  |
 | [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.6][8.0.6] | November 10, 2026 |
 | [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.31][6.0.31]  | November 12, 2024 |
 
 
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](release-notes) directory.
 
-[9.0.0-preview.4]: release-notes/9.0/preview/preview4/9.0.0-preview.4.md
+[9.0.0-preview.5]: release-notes/9.0/preview/preview5/9.0.0-preview.5.md
 [8.0.6]: release-notes/8.0/8.0.6/8.0.6.md
 [6.0.31]: release-notes/6.0/6.0.31/6.0.31.md
 
