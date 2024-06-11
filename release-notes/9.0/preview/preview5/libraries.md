@@ -13,13 +13,12 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 
 Libraries updates in .NET 9 Preview 5:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview5/libraries.md)
 - [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 5:
 
 - [Discussion](https://aka.ms/dotnet/9/preview5)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview5/README.md)
+- [Release notes](./README.md)
 
 ## Enhanced AI capabilities with `TensorPrimitives` and `Tensor<T>`
 

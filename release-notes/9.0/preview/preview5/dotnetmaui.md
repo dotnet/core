@@ -8,13 +8,12 @@ Here's a summary of what's new in .NET MAUI in this preview release:
 - [Android - Trimming Enhancements](#trimming-enhancements)
 
 .NET MAUI updates in .NET 9 Preview 5:
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview5/dotnetmaui.md) 
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
 * [GitHub Release](https://aka.ms/maui9p5)
 
 .NET 9 Preview 5:
 * [Discussion](https://aka.ms/dotnet/9/preview5)
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview5/README.md)
+* [Release notes](./README.md)
 
 ## Blazor Hybrid Updated Templates
 

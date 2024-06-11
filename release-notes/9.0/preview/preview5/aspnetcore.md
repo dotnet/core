@@ -10,7 +10,6 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 
 ASP.NET Core updates in .NET 9 Preview 5:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview5/aspnetcore.md) 
 - [What's new in ASP.NET Core in .NET 9](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0) documentation.
 - [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/9.0#aspnet-core)
 - [Roadmap](https://aka.ms/aspnet/roadmap)
@@ -18,7 +17,7 @@ ASP.NET Core updates in .NET 9 Preview 5:
 .NET 9 Preview 5:
 
 - [Discussion](https://aka.ms/dotnet/9/preview5)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview5/README.md)
+- [Release notes](./README.md)
 
 ## Optimized static web asset delivery
 
