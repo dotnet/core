@@ -1,27 +1,34 @@
-# .NET Release Notes
+# .NET 8
 
-The following [.NET releases](../releases.md) are currently supported:
+[.NET 8](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) is a [Long Term Support (LTS)](../../release-policies.md) release and will be supported for 3 years, from November 2023 to November 2026. It is [supported](../../support.md) on [multiple operating systems](supported-os.md).
 
-|  Version  | Release Date | Support | Latest Patch Version | End of Support |
-| :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.4][9.0.0-preview.4] |  |
-| [.NET 8](8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.6][8.0.6] | November 10, 2026 |
-| [.NET 7](7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) | [STS][policies] | [7.0.20][7.0.20] | May 14, 2024 |
-| [.NET 6](6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.31][6.0.31]  | November 12, 2024 |
+- [Downloads](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
+- [Containers](https://hub.docker.com/_/microsoft-dotnet)
+- [Supported OSes](supported-os.md)
+- [Known Issues](known-issues.md)
+- [Installation instructions](install.md)
 
-You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
+## Releases
 
-[9.0.0-preview.4]: 9.0/preview/preview4/9.0.0-preview.4.md
-[8.0.6]: 8.0/8.0.6/8.0.6.md
-[7.0.20]: 7.0/7.0.20/7.0.20.md
-[6.0.31]: 6.0/6.0.31/6.0.31.md
-
-## Release Information
-
-* [Download .NET](https://dotnet.microsoft.com/download/dotnet)
-* [Releases Index][releases-index.json] -- Index for all release channels in JSON format
-* [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
-* [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
-
-[releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
-[policies]: ../release-policies.md
+| Date | Release |
+| :-- | :-- |
+| 2024/06/11 | [8.0.302 SDK](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.6/8.0.302.md) |
+| 2024/05/28 | [8.0.6](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.6/8.0.6.md) |
+| 2024/05/14 | [8.0.5](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.5/8.0.5.md) |
+| 2024/04/08 | [8.0.4](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.4/8.0.4.md) |
+| 2024/03/14 | [8.0.203 SDK](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.3/8.0.203.md) |
+| 2024/03/12 | [8.0.3](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.3/8.0.3.md) |
+| 2024/02/15 | [8.0.201 SDK](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.2/8.0.201.md) |
+| 2024/02/13 | [8.0.2](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.2/8.0.2.md) |
+| 2024/01/09 | [8.0.1](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.1/8.0.1.md) |
+| 2023/11/14 | [8.0.0](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.0/8.0.0.md) |
+| 2023/10/10 | [8.0.0 RC 2](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-rc.2.md) |
+| 2023/09/12 | [8.0.0 RC 1](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-rc.1.md) |
+| 2023/08/08 | [8.0.0 Preview 7](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.7.md) |
+| 2023/07/11 | [8.0.0 Preview 6](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.6.md) |
+| 2023/06/13 | [8.0.0 Preview 5](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.5.md) |
+| 2023/05/16 | [8.0.0 Preview 4](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.4.md) |
+| 2023/04/11 | [8.0.0 Preview 3](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.3.md) |
+| 2023/03/14 | [8.0.0 Preview 2](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.2.md) |
+| 2023/02/21 | [8.0.0 Preview 1](https://github.com/dotnet/core/blob/main/release-notes/8.0/preview/8.0.0-preview.1.md) |
