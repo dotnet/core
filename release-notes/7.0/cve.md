@@ -8,6 +8,8 @@ Your app needs to be on the latest .NET 7 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
 
+- 7.0.20 (May 2024)
+   - No new CVEs.
 - 7.0.19 (May 2024)
   - [CVE-2024-30045 | .NET Remote code Execution Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
   - [CVE-2024-30046 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
