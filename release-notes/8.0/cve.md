@@ -7,6 +7,7 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 ## Which CVEs apply to my app?
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
+
 - 8.0.6 (May 28 2024)
   - No new CVEs.
 - 8.0.5 (May 2024)
