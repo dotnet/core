@@ -11,8 +11,8 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 7.0.20 (May 28 2024)
    - No new CVEs.
 - 7.0.19 (May 2024)
-  - [CVE-2024-30045 | .NET Remote code Execution Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
-  - [CVE-2024-30046 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2024-30045 | .NET Remote code Execution Vulnerability](https://github.com/dotnet/announcements/issues/307)
+  - [CVE-2024-30046 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/308)
 - 7.0.18 (April 2024)
   - [CVE-2024-21409 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/303)
 - 7.0.17 (March 2024)
