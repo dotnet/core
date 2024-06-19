@@ -1,11 +1,12 @@
 {
     "channel-version": "9.0",
     "last-updated": "2024-05-01",
-    "operating-systems": [
+    "operating-system-family": [
         {
-            "family": "Android",
-            "distributions": [
+            "name": "Android",
+            "operating-system": [
                 {
+                    "id": "android",
                     "name": "Android",
                     "lifecycle-policy": "https://support.google.com/android",
                     "architectures": [
@@ -14,84 +15,44 @@
                         "arm"
                     ],
                     "supported-cycles": [
-                        "API 21+"
+                        "12",
+                        "13",
+                        "14"
                     ]
                 }
             ]
         },
         {
-            "family": "Apple",
-            "distributions": [
+            "name": "Apple",
+            "operating-system": [
                 {
+                    "id": "ios",
                     "name": "iOS",
                     "lifecycle-policy": "https://support.apple.com/ios/",
                     "architectures": [
                         "arm64"
                     ],
                     "supported-cycles": [
-                        "12.2"
-                    ]
-                },
-                {
-                    "name": "iOS Simulator",
-                    "lifecycle-policy": "https://support.apple.com/ios/",
-                    "architectures": [
-                        "x64",
-                        "arm64"
-                    ],
-                    "supported-cycles": [
-                        "12.2",
-                        "13",
-                        "14",
                         "15",
                         "16",
                         "17"
                     ]
                 },
                 {
-                    "name": "tvOS",
-                    "lifecycle-policy": "https://support.apple.com/apple-tv/",
+                    "id": "ipados",
+                    "name": "iPadOS",
+                    "lifecycle-policy": "https://support.apple.com/ipados/",
                     "architectures": [
-                        "x64",
                         "arm64"
                     ],
                     "supported-cycles": [
-                        "12.2",
-                        "13",
-                        "14",
                         "15",
                         "16",
                         "17"
                     ]
-                },
+                },                
                 {
-                    "name": "tvOS Simulator",
-                    "lifecycle-policy": "https://support.apple.com/apple-tv/",
-                    "architectures": [
-                        "x64",
-                        "arm64"
-                    ],
-                    "supported-cycles": [
-                        "12.2",
-                        "13",
-                        "14",
-                        "15",
-                        "16",
-                        "17"
-                    ]
-                },
-                {
-                    "name": "Mac Catalyst",
-                    "lifecycle-policy": "https://support.apple.com/macos/",
-                    "architectures": [
-                        "x64",
-                        "arm64"
-                    ],
-                    "supported-cycles": [
-                        "15+"
-                    ]
-                },
-                {
+                    "id": "macos",
                     "name": "macOS",
                     "lifecycle-policy": "https://support.apple.com/macos/",
                     "architectures": [
@@ -107,9 +68,10 @@
             ]
         },
         {
-            "family": "Linux",
-            "distributions": [
+            "name": "Linux",
+            "operating-system": [
                 {
+                    "id": "alpine",
                     "name": "Alpine",
                     "lifecycle-policy": "https://alpinelinux.org/releases/",
                     "architectures": [
@@ -124,6 +86,7 @@
                     ]
                 },
                 {
+                    "id": "debian",
                     "name": "Debian",
                     "lifecycle-policy": "https://wiki.debian.org/DebianReleases",
                     "architectures": [
@@ -137,6 +100,7 @@
                     ]
                 },
                 {
+                    "id": "fedora",
                     "name": "Fedora",
                     "lifecycle-policy": "https://fedoraproject.org/wiki/End_of_life",
                     "architectures": [
@@ -150,6 +114,7 @@
                     ]
                 },
                 {
+                    "id": "opensuse",
                     "name": "openSUSE Leap",
                     "lifecycle-policy": "https://en.opensuse.org/Lifetime",
                     "architectures": [
@@ -161,6 +126,7 @@
                     ]
                 },
                 {
+                    "id": "rhel",
                     "name": "Red Hat Enterprise Linux",
                     "lifecycle-policy": "https://access.redhat.com/support/policy/updates/errata/",
                     "architectures": [
@@ -173,6 +139,7 @@
                     ]
                 },
                 {
+                    "id": "sles",
                     "name": "SUSE Enterprise Linux",
                     "lifecycle-policy": "https://www.suse.com/lifecycle/",
                     "architectures": [
@@ -185,6 +152,7 @@
                     ]
                 },
                 {
+                    "id": "ubuntu",
                     "name": "Ubuntu",
                     "lifecycle-policy": "https://wiki.ubuntu.com/Releases",
                     "architectures": [
@@ -202,21 +170,11 @@
             ]
         },
         {
-            "family": "Windows",
-            "distributions": [
+            "name": "Windows",
+            "operating-system": [
                 {
-                    "name": "Nano Server",
-                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
-                    "architectures": [
-                        "x64"
-                    ],
-                    "supported-cycles": [
-                        "1809",
-                        "2022"
-                    ]
-                },
-                {
-                    "name": "Windows 10",
+                    "id": "windows",
+                    "name": "Windows",
                     "lifecycle-policy": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
                     "architectures": [
                         "x64",
@@ -224,25 +182,15 @@
                         "arm64"
                     ],
                     "supported-cycles": [
-                        "1607",
-                        "1809",
-                        "21H2",
-                        "22H2"
+                        "10 1607 (E) (LTS)",
+                        "10 1809 (E) (LTS)",
+                        "10 21H2 (E) (LTS)",
+                        "10 22H2",
+                        "11 22H2"
                     ]
                 },
                 {
-                    "name": "Windows 11",
-                    "lifecycle-policy": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
-                    "architectures": [
-                        "x64",
-                        "x86",
-                        "arm64"
-                    ],
-                    "supported-cycles": [
-                        "22H2"
-                    ]
-                },
-                {
+                    "id": "windows-server",
                     "name": "Windows Server",
                     "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
                     "architectures": [
@@ -250,30 +198,15 @@
                         "x86"
                     ],
                     "supported-cycles": [
-                        "2012",
-                        "2016",
-                        "2019",
-                        "2022"
-                    ]
-                },
-                {
-                    "name": "Windows Server Core",
-                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
-                    "architectures": [
-                        "x64",
-                        "x86"
-                    ],
-                    "supported-cycles": [
-                        "2012",
-                        "2016",
-                        "2019",
-                        "2022"
+                        "Windows Server 2016 (LTSC)",
+                        "Windows Server 2019 (LTSC)",
+                        "Windows Server 2022 (LTSC)"
                     ]
                 }
             ]
         }
     ],
-    "linux": {
+    "libc": {
         "glibc": [
             {
                 "architectures": [
