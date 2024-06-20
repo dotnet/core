@@ -64,6 +64,27 @@
                         "14",
                         "13",
                         "12"
+                    ],
+                    "notes" : [
+                        "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
+                        "Mac Catalyst apps are supported on macOS Arm64 and x64."
+                    ]
+                },
+                {
+                    "id": "tvos",
+                    "name": "tvOS",
+                    "lifecycle-policy": "https://support.apple.com/apple-tv/",
+                    "architectures": [
+                        "x64",
+                        "arm64"
+                    ],
+                    "supported-cycles": [
+                        "17",
+                        "16",
+                        "15",
+                        "14",
+                        "13",
+                        "12.2"
                     ]
                 }
             ]
@@ -174,6 +195,17 @@
             "name": "Windows",
             "distributions": [
                 {
+                    "name": "Nano Server",
+                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64"
+                    ],
+                    "supported-cycles": [
+                        "1809",
+                        "2022"
+                    ]
+                },
+                {
                     "id": "windows",
                     "name": "Windows",
                     "lifecycle-policy": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
@@ -196,6 +228,21 @@
                 {
                     "id": "windows-server",
                     "name": "Windows Server",
+                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64",
+                        "x86"
+                    ],
+                    "supported-cycles": [
+                        "23H2",
+                        "2022",
+                        "2019",
+                        "2016"
+                    ]
+                },
+                {
+                    "id": "windows-server-core",
+                    "name": "Windows Server Core",
                     "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
                     "architectures": [
                         "x64",
