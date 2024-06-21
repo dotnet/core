@@ -1,8 +1,6 @@
 # .NET for Linux Distributions
 
-.NET can be installed on Linux in multiple ways, via [packages](https://learn.microsoft.com/dotnet/core/install/linux), [scripts](https://github.com/dotnet/install-scripts), or [tarballs](https://dotnet.microsoft.com/download/dotnet). It can be installed globally, locally/privately, or with an app.
-
-.NET is supported on Linux per [.NET Support and Compatibility for Linux Distributions](linux-support.md).
+.NET can be [installed on Linux](https://learn.microsoft.com/dotnet/core/install/linux) in multiple ways. It is supported per [.NET Support and Compatibility for Linux Distributions](linux-support.md).
 
 ## Package archives
 
@@ -27,6 +25,8 @@ sudo apt update && sudo apt install -y dotnet-sdk-8.0
 Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are documented at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux). You can move back and forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
 
 Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.04](https://github.com/dotnet/core/discussions/9258).
+
+[SDK feature bands](https://learn.microsoft.com/en-us/dotnet/core/releases-and-support#feature-bands-sdk-only) are the only significant difference between Microsoft and distro-provided builds. Distro-provided SDK builds are always within the `.1xx` feature band, while Microsoft SDK builds are always for the latest feature band, for example `.2xx`.
 
 ## Containers
 
