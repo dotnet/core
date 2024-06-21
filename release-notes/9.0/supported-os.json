@@ -8,7 +8,8 @@
                 {
                     "id": "android",
                     "name": "Android",
-                    "lifecycle-policy": "https://support.google.com/android",
+                    "link": "https://www.android.com/",
+                    "lifecycle": "https://support.google.com/android",
                     "architectures": [
                         "x64",
                         "arm64",
@@ -29,7 +30,8 @@
                 {
                     "id": "ios",
                     "name": "iOS",
-                    "lifecycle-policy": "https://support.apple.com/ios/",
+                    "link": "https://developer.apple.com/ios/",
+                    "lifecycle": "https://support.apple.com/ios/",
                     "architectures": [
                         "arm64"
                     ],
@@ -42,7 +44,8 @@
                 {
                     "id": "ipados",
                     "name": "iPadOS",
-                    "lifecycle-policy": "https://support.apple.com/ipados/",
+                    "link": "https://developer.apple.com/ipados/",
+                    "lifecycle": "https://support.apple.com/ipados/",
                     "architectures": [
                         "arm64"
                     ],
@@ -55,7 +58,8 @@
                 {
                     "id": "macos",
                     "name": "macOS",
-                    "lifecycle-policy": "https://support.apple.com/macos/",
+                    "link": "https://developer.apple.com/macos/",
+                    "lifecycle": "https://support.apple.com/macos/",
                     "architectures": [
                         "x64",
                         "arm64"
@@ -74,7 +78,8 @@
                 {
                     "id": "tvos",
                     "name": "tvOS",
-                    "lifecycle-policy": "https://support.apple.com/apple-tv/",
+                    "link": "https://developer.apple.com/tvos/",
+                    "lifecycle": "https://support.apple.com/apple-tv/",
                     "architectures": [
                         "x64",
                         "arm64"
@@ -96,7 +101,8 @@
                 {
                     "id": "alpine",
                     "name": "Alpine",
-                    "lifecycle-policy": "https://alpinelinux.org/releases/",
+                    "link": "https://alpinelinux.org/",
+                    "lifecycle": "https://alpinelinux.org/releases/",
                     "architectures": [
                         "x64",
                         "arm64",
@@ -112,7 +118,8 @@
                 {
                     "id": "debian",
                     "name": "Debian",
-                    "lifecycle-policy": "https://wiki.debian.org/DebianReleases",
+                    "link": "https://www.debian.org/",
+                    "lifecycle": "https://wiki.debian.org/DebianReleases",
                     "architectures": [
                         "x64",
                         "arm64",
@@ -125,7 +132,8 @@
                 {
                     "id": "fedora",
                     "name": "Fedora",
-                    "lifecycle-policy": "https://fedoraproject.org/wiki/End_of_life",
+                    "link": "https://fedoraproject.org/",
+                    "lifecycle": "https://fedoraproject.org/wiki/End_of_life",
                     "architectures": [
                         "x64",
                         "arm64",
@@ -139,7 +147,8 @@
                 {
                     "id": "opensuse",
                     "name": "openSUSE Leap",
-                    "lifecycle-policy": "https://en.opensuse.org/Lifetime",
+                    "link": "https://www.opensuse.org/",
+                    "lifecycle": "https://en.opensuse.org/Lifetime",
                     "architectures": [
                         "x64",
                         "arm64"
@@ -152,7 +161,8 @@
                 {
                     "id": "rhel",
                     "name": "Red Hat Enterprise Linux",
-                    "lifecycle-policy": "https://access.redhat.com/support/policy/updates/errata/",
+                    "link": "https://access.redhat.com/",
+                    "lifecycle": "https://access.redhat.com/support/policy/updates/errata/",
                     "architectures": [
                         "x64",
                         "arm64"
@@ -165,7 +175,8 @@
                 {
                     "id": "sles",
                     "name": "SUSE Enterprise Linux",
-                    "lifecycle-policy": "https://www.suse.com/lifecycle/",
+                    "link": "https://www.suse.com/",
+                    "lifecycle": "https://www.suse.com/lifecycle/",
                     "architectures": [
                         "x64",
                         "arm64"
@@ -178,7 +189,8 @@
                 {
                     "id": "ubuntu",
                     "name": "Ubuntu",
-                    "lifecycle-policy": "https://wiki.ubuntu.com/Releases",
+                    "link": "https://ubuntu.com/",
+                    "lifecycle": "https://wiki.ubuntu.com/Releases",
                     "architectures": [
                         "x64",
                         "arm64",
@@ -196,8 +208,10 @@
             "name": "Windows",
             "distributions": [
                 {
+                    "id": "windows-nano-server",
                     "name": "Nano Server",
-                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "link": "https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images",
+                    "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
                     "architectures": [
                         "x64"
                     ],
@@ -209,7 +223,8 @@
                 {
                     "id": "windows",
                     "name": "Windows",
-                    "lifecycle-policy": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
+                    "link": "https://www.microsoft.com/windows/",
+                    "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
                     "architectures": [
                         "x64",
                         "x86",
@@ -233,7 +248,8 @@
                 {
                     "id": "windows-server",
                     "name": "Windows Server",
-                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "link": "https://www.microsoft.com/windows-server",
+                    "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
                     "architectures": [
                         "x64",
                         "x86"
@@ -248,7 +264,8 @@
                 {
                     "id": "windows-server-core",
                     "name": "Windows Server Core",
-                    "lifecycle-policy": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "link": "https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images",
+                    "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
                     "architectures": [
                         "x64",
                         "x86"
