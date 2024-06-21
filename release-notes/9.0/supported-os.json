@@ -67,6 +67,7 @@
                     ],
                     "notes" : [
                         "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
+                        "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
                         "Mac Catalyst apps are supported on macOS Arm64 and x64."
                     ]
                 },
@@ -224,6 +225,9 @@
                         "10-21h2-e-lts",
                         "10-1809-e-lts",
                         "10-1607-e-lts"
+                    ],
+                    "notes": [
+                        "The x64 emulator is supported on Windows 11 Arm64."
                     ]
                 },
                 {
@@ -287,6 +291,12 @@
                 "version": "1.2.2",
                 "source": "Alpine 3.13"
             }
+        ]
+    },
+    "qemu":
+    {
+        "notes": [
+            "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa."
         ]
     }
 }
