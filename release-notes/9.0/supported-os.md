@@ -2,7 +2,7 @@
 
 [.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
-This file is generated from [supported-os.json](supported-os.json).
+This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
 
 ## Android
 
