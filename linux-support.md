@@ -1,11 +1,11 @@
-# .NET Compatibility for Linux Distributions
+# .NET Support and Compatibility for Linux Distributions
 
-.NET can be run on any Linux distribution, via:
+.NET can be run on almost any Linux distribution, via:
 
 - Portable builds, which are built to be broadly compatible with most Linux distributions.
 - Distribution-specific builds, which are built specifically for a given distribution version (like Red Hat Enterprise Linux 9 or Ubuntu 24.04).
 
-Microsoft builds are portable builds.
+The community provides best effort support for .NET across all Linux distributions. [Commercial support](support.md) is provided for some popular distributions.
 
 ## General dependencies
 
@@ -15,15 +15,13 @@ Microsoft builds are portable builds.
 - [.NET 8 dependencies](./release-notes/8.0/linux-packages.md)
 - [.NET 9 dependencies](./release-notes/9.0/linux-packages.md)
 
-## libc compatibility
+## Portable build compatibility
 
-Portable builds supports both [glibc](https://www.gnu.org/software/libc/)-based and [musl libc](https://musl.libc.org/)-based Linux distributions, per the following minimum version information.
+Portable builds are compiled with an [intentionally old Linux version](https://github.com/dotnet/runtime/issues/83428) in order to provide broad compatibility. The primary purpose of this approach is linking to a sufficiently old libc library. The minimum supported libc version is documented in [.NET Supported OS Policy](./os-lifecycle-policy.md).
 
-- [.NET 6 minimum libc](release-notes/6.0/supported-os.md#libc-compatibility)
-- [.NET 8 minimum libc](release-notes/8.0/supported-os.md#libc-compatibility)
-- [.NET 9 minimum libc](release-notes/9.0/supported-os.md#libc-compatibility)
+Microsoft build portable builds supports both [glibc](https://www.gnu.org/software/libc/)-based and [musl libc](https://musl.libc.org/)-based Linux distributions.
 
-You can use the following examples to determine the libc version provided for your distribution.
+The following examples demonstrate how to find the libc version provided for your distribution.
 
 On Alpine 3.13:
 

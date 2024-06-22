@@ -12,9 +12,9 @@
 
 ## Community support
 
-Community builds are available for [FreeBSD](https://wiki.freebsd.org/.NET), [Linux](linux.md), and [macOS](https://formulae.brew.sh/cask/dotnet-sdk)
-
 Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core).
+
+Community builds are available for [FreeBSD](https://wiki.freebsd.org/.NET), [Linux](linux.md), and [macOS](https://formulae.brew.sh/cask/dotnet-sdk)
 
 ## Commercial support
 
@@ -29,9 +29,9 @@ Canonical supports .NET on Ubuntu, per the following.
 
 ### Microsoft
 
-Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [commercial support](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) for .NET on Linux, macOS, and Windows, per [.NET support policy](https://dotnet.microsoft.com/platform/support/policy).
+Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [commercial support](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) for .NET on [multiple operating systems](os-lifecycle-policy.md), per [.NET support policy](https://dotnet.microsoft.com/platform/support/policy).
 
-A more restrictive policy is used for [.NET container images](https://github.com/dotnet/dotnet*docker/blob/main/documentation/supported-platforms.md).
+.NET container images are provided for a more limited set [operating system versions](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md).
 
 ### Red Hat
 
