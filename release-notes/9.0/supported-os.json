@@ -280,36 +280,35 @@
             ]
         }
     ],
-    "libc": {
-        "glibc": [
-            {
-                "architectures": [
-                    "arm64",
-                    "x64"
-                ],
-                "version": "2.23",
-                "source": "Ubuntu 16.04"
-            },
-            {
-                "architectures": [
-                    "arm32"
-                ],
-                "version": "2.35",
-                "source": "Ubuntu 22.04"
-            }
-        ],
-        "musl": [
-            {
-                "architectures": [
-                    "arm32",
-                    "arm64",
-                    "x64"
-                ],
-                "version": "1.2.2",
-                "source": "Alpine 3.13"
-            }
-        ]
-    },
+    "libc": [
+        {
+            "name": "glibc",
+            "architectures": [
+                "arm64",
+                "x64"
+            ],
+            "version": "2.23",
+            "source": "Ubuntu 16.04"
+        },
+        {
+            "name": "glibc",
+            "architectures": [
+                "arm32"
+            ],
+            "version": "2.35",
+            "source": "Ubuntu 22.04"
+        },
+        {
+            "name": "musl",
+            "architectures": [
+                "arm32",
+                "arm64",
+                "x64"
+            ],
+            "version": "1.2.2",
+            "source": "Alpine 3.13"
+        }
+    ],
     "qemu":
     {
         "notes": [
