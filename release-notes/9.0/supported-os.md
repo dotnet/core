@@ -10,6 +10,10 @@ OS                              | Version                      | Architectures  
 --------------------------------|------------------------------|--------------------|--------------------|
 [Android][0]                    | 14, 13, 12.1, 12             | Arm32, Arm64, x64  | [Lifecycle][1]     |
 
+Notes:
+
+* Android: API 21 is used as the minimum SDK target.
+
 [0]: https://www.android.com/
 [1]: https://support.google.com/android
 
@@ -24,6 +28,7 @@ OS                              | Version                      | Architectures  
 
 Notes:
 
+* iOS: iOS 12.2 is used as the minimum SDK target.
 * macOS: The iOS and tvOS simulators are supported on macOS Arm64 and x64.
 * macOS: The x64 emulator (Rosetta 2) is supported on macOS Arm64.
 * macOS: Mac Catalyst apps are supported on macOS Arm64 and x64.
