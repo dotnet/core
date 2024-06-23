@@ -2,8 +2,8 @@
 
 .NET can be run on almost any Linux distribution, via:
 
-- Portable builds, which are built to be broadly compatible with most Linux distributions.
-- Distribution-specific builds, which are built specifically for a given distribution version (like Red Hat Enterprise Linux 9 or Ubuntu 24.04).
+- Portable builds, which are built to be broadly compatible with most Linux distributions by support multiple versions of OpenSSL, ICU, and other depedencies.
+- Distribution-specific builds, which are built specifically for a given distribution version (like Red Hat Enterprise Linux 9 or Ubuntu 24.04) and the libraries that it contains.
 
 The community provides best effort support for .NET across all Linux distributions. [Commercial support](support.md) is provided for some popular distributions.
 
@@ -19,7 +19,7 @@ The community provides best effort support for .NET across all Linux distributio
 
 Portable builds are compiled with an [intentionally old Linux version](https://github.com/dotnet/runtime/issues/83428) in order to provide broad compatibility. The primary purpose of this approach is linking to a sufficiently old libc library. The minimum supported libc version is documented in [.NET Supported OS Policy](./os-lifecycle-policy.md).
 
-Microsoft build portable builds supports both [glibc](https://www.gnu.org/software/libc/)-based and [musl libc](https://musl.libc.org/)-based Linux distributions.
+Microsoft provides portable builds that support both [glibc](https://www.gnu.org/software/libc/)-based and [musl libc](https://musl.libc.org/)-based Linux distributions.
 
 The following examples demonstrate how to find the libc version provided for your distribution.
 
