@@ -24,7 +24,7 @@ OS                              | Version                      | Architectures  
 [iOS][2]                        | 17, 16, 15                   | Arm64              | [Lifecycle][3]     |
 [iPadOS][4]                     | 17, 16, 15                   | Arm64              | [Lifecycle][5]     |
 [macOS][6]                      | 14, 13, 12                   | Arm64, x64         | [Lifecycle][7]     |
-[tvOS][8]                       | 17, 16, 15, 14, 13, 12.2     | Arm64, x64         | [Lifecycle][9]     |
+[tvOS][8]                       | 17, 16, 15, 14, 13, 12.2     | Arm64              | [Lifecycle][9]     |
 
 Notes:
 
@@ -47,7 +47,7 @@ Notes:
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][10]                    | 3.20, 3.19, 3.18, 3.17       | Arm32, Arm64, x64  | [Lifecycle][11]    |
-[Debian][12]                    | 12                           | Arm32, Arm64, x64  | [Lifecycle][13]    |
+[Debian][12]                    | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][13]    |
 [Fedora][14]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][15]    |
 [openSUSE Leap][16]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][17]    |
 [Red Hat Enterprise Linux][18]  | 9, 8                         | Arm64, x64         | [Lifecycle][19]    |
@@ -119,5 +119,6 @@ Support for the following operating system versions has ended.
 * Android 11
 * Alpine 3.16
 * Fedora 38
-* Ubuntu 23.10
+* Fedora 37
+* Ubuntu 23.04
 * Windows 10-21h2-e
