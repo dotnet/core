@@ -16,17 +16,17 @@
 - [Tizen](https://developer.samsung.com/tizen/About-Tizen.NET/Tizen.NET.html)
 - [Ubuntu](https://packages.ubuntu.com/search?keywords=dotnet)
 
-In general, you can install the .NET SDK via a versioned package, like `dotnet7` or `dotnet-sdk-7.0`. For example, on Ubuntu 22.10, you can install .NET via the following.
+In general, you can install the .NET SDK via a versioned package, like `dotnet8` or `dotnet-sdk-8.0`.
 
 ```bash
-sudo apt update && sudo apt install -y dotnet-sdk-7.0
+sudo apt update && sudo apt install -y dotnet-sdk-8.0
 ```
 
 ## Microsoft packages
 
-Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are documented at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux).
+Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are documented at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux). You can move back and forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
 
-You can move back and forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
+Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.04](https://github.com/dotnet/core/discussions/9258).
 
 ## Containers
 

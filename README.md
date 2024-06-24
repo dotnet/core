@@ -14,22 +14,19 @@ You can subscribe to news posts with the following RSS feeds:
 
 ## Release Notes
 
-The following [.NET releases](./releases.md) are currently supported:
+The following tables lists [releases](./releases.md) under active development or support:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.3][9.0.0-preview.3] |  |
-| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.4][8.0.4] | November 10, 2026 |
-| [.NET 7](release-notes/7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) | [STS][policies] | [7.0.18][7.0.18] | May 14, 2024 |
-| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.29][6.0.29]  | November 12, 2024 |
-
+| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.5][9.0.0-preview.5] | May 11, 2026 |
+| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.6][8.0.6] | November 10, 2026 |
+| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.31][6.0.31]  | November 12, 2024 |
 
 You can find release notes for all releases, including out-of-support releases, in the [release-notes](release-notes) directory.
 
-[9.0.0-preview.3]: release-notes/9.0/preview/preview3/9.0.0-preview.3.md
-[8.0.4]: release-notes/8.0/8.0.4/8.0.4.md
-[7.0.18]: release-notes/7.0/7.0.18/7.0.18.md
-[6.0.29]: release-notes/6.0/6.0.29/6.0.29.md
+[9.0.0-preview.5]: release-notes/9.0/preview/preview5/9.0.0-preview.5.md
+[8.0.6]: release-notes/8.0/8.0.6/8.0.6.md
+[6.0.31]: release-notes/6.0/6.0.31/6.0.31.md
 
 ## Release Information
 
