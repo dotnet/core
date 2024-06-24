@@ -2,7 +2,7 @@
 
 .NET can be run on almost any Linux distribution, via:
 
-- Portable builds, which are built to be broadly compatible with most Linux distributions by support multiple versions of OpenSSL, ICU, and other depedencies.
+- Portable builds, which are built to be broadly compatible with most Linux distributions by support multiple versions of OpenSSL, ICU, and other dependencies.
 - Distribution-specific builds, which are built specifically for a given distribution version (like Red Hat Enterprise Linux 9 or Ubuntu 24.04) and the libraries that it contains.
 
 The community provides best effort support for .NET across all Linux distributions. [Commercial support](support.md) is provided for some popular distributions.
