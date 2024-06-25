@@ -1,5 +1,5 @@
 {
-    "channel-version": "9.0",
+    "channel-version": "6.0",
     "last-updated": "2024-07-01",
     "families": [
         {
@@ -20,6 +20,11 @@
                         "13",
                         "12.1",
                         "12"
+                    ],
+                    "unsupported-versions": [
+                        "11",
+                        "10",
+                        "9"
                     ],
                     "notes": [
                         "API 21 is used as the minimum SDK target."
@@ -43,8 +48,11 @@
                         "16",
                         "15"
                     ],
+                    "unsupported-versions": [
+                        "12"
+                    ],
                     "notes": [
-                        "iOS 12.2 is used as the minimum SDK target."
+                        "iOS 10.0 is used as the minimum SDK target."
                     ]
                 },
                 {
@@ -59,8 +67,11 @@
                         "17",
                         "16",
                         "15"
+                    ],
+                    "unsupported-versions": [
+                        "12"
                     ]
-                },                
+                },
                 {
                     "id": "macos",
                     "name": "macOS",
@@ -75,7 +86,11 @@
                         "13",
                         "12"
                     ],
-                    "notes" : [
+                    "unsupported-versions": [
+                        "11",
+                        "10.15"
+                    ],
+                    "notes": [
                         "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
                         "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
                         "Mac Catalyst apps are supported on macOS Arm64 and x64."
@@ -92,10 +107,10 @@
                     "supported-versions": [
                         "17",
                         "16",
-                        "15",
-                        "14",
-                        "13",
-                        "12.2"
+                        "15"
+                    ],
+                    "unsupported-versions": [
+                        "12"
                     ]
                 }
             ]
@@ -115,7 +130,16 @@
                     ],
                     "supported-versions": [
                         "3.20",
-                        "3.19"
+                        "3.19",
+                        "3.18",
+                        "3.17"
+                    ],
+                    "unsupported-versions": [
+                        "3.16",
+                        "3.15",
+                        "3.14",
+                        "3.13",
+                        "3.12"
                     ]
                 },
                 {
@@ -129,7 +153,11 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "12"
+                        "12",
+                        "11"
+                    ],
+                    "unsupported-versions": [
+                        "10"
                     ]
                 },
                 {
@@ -143,7 +171,16 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "40"
+                        "40",
+                        "39"
+                    ],
+                    "unsupported-versions": [
+                        "38",
+                        "37",
+                        "36",
+                        "35",
+                        "34",
+                        "33"
                     ]
                 },
                 {
@@ -158,6 +195,11 @@
                     "supported-versions": [
                         "15.6",
                         "15.5"
+                    ],
+                    "unsupported-versions": [
+                        "15.4",
+                        "15.3",
+                        "15.2"
                     ]
                 },
                 {
@@ -171,7 +213,8 @@
                     ],
                     "supported-versions": [
                         "9",
-                        "8"
+                        "8",
+                        "7"
                     ],
                     "notes": [
                         "Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md)."
@@ -187,7 +230,16 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "15.5"
+                        "15.5",
+                        "12.5"
+                    ],
+                    "unsupported-versions": [
+                        "15.4",
+                        "15.3",
+                        "15.2",
+                        "12.4",
+                        "12.3",
+                        "12.2"
                     ]
                 },
                 {
@@ -202,8 +254,16 @@
                     ],
                     "supported-versions": [
                         "24.04",
+                        "23.10",
                         "22.04",
                         "20.04"
+                    ],
+                    "unsupported-versions": [
+                        "23.04",
+                        "22.10",
+                        "21.10",
+                        "21.04",
+                        "18.04"
                     ]
                 }
             ]
@@ -222,6 +282,10 @@
                     "supported-versions": [
                         "2022",
                         "2019"
+                    ],
+                    "unsupported-versions": [
+                        "20H2",
+                        "2004"
                     ]
                 },
                 {
@@ -243,8 +307,21 @@
                         "11-21h2-e",
                         "10-21h2-e-lts",
                         "10-21h2-iot-lts",
+                        "10-20h2-e-lts",
                         "10-1809-e-lts",
                         "10-1607-e-lts"
+                    ],
+                    "unsupported-versions": [
+                        "11-21h2-w",
+                        "10-21h2-w",
+                        "10-21h2-e",
+                        "10-21h1",
+                        "10-20h2-w",
+                        "10-20h2-e",
+                        "10-2004",
+                        "10-1909-e",
+                        "8.1",
+                        "7-sp1"
                     ],
                     "notes": [
                         "The x64 emulator is supported on Windows 11 Arm64."
@@ -267,6 +344,10 @@
                         "2012-R2",
                         "2012"
                     ],
+                    "unsupported-versions": [
+                        "20H2",
+                        "2004"
+                    ],
                     "notes": [
                         "Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview)."
                     ]
@@ -284,7 +365,13 @@
                         "23H2",
                         "2022",
                         "2019",
-                        "2016"
+                        "2016",
+                        "2012"
+                    ],
+                    "unsupported-versions": [
+                        "20H2",
+                        "2004",
+                        "1607"
                     ]
                 }
             ]
@@ -294,24 +381,23 @@
         {
             "name": "glibc",
             "architectures": [
-                "Arm64",
                 "x64"
+            ],
+            "version": "2.17",
+            "source": "CentOS 7"
+        },
+        {
+            "name": "glibc",
+            "architectures": [
+                "Arm64",
+                "Arm32"
             ],
             "version": "2.23",
             "source": "Ubuntu 16.04"
         },
         {
-            "name": "glibc",
-            "architectures": [
-                "Arm32"
-            ],
-            "version": "2.35",
-            "source": "Ubuntu 22.04"
-        },
-        {
             "name": "musl",
             "architectures": [
-                "Arm32",
                 "Arm64",
                 "x64"
             ],
