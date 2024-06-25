@@ -1,132 +1,209 @@
 # .NET 7 - Supported OS versions
 
-[.NET 7](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../microsoft-support.md) on multiple operating systems per their lifecycle policy.
+[.NET 7](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
-For issues with .NET on operating systems not listed here, please open a GitHub issue in the appropriate .NET repository or contact the OS maintainer community . See [.NET Repos](../../Documentation/core-repos.md) for the repository list.
-
-## Windows
-
-OS                                    | Version                 | Architectures   | Lifecycle
---------------------------------------|-------------------------|-----------------|----------
-[Windows 10 Client][Windows-client]   | Version 1607+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
-[Windows 11][Windows-client]   | Version 22000+           | x64, x86, Arm64 | [Windows][Windows-lifecycle]
-[Windows Server][Windows-Server]      | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
-[Windows Server Core][Windows-Server] | 2012+                | x64, x86        | [Windows Server][Windows-Server-lifecycle]
-[Nano Server][Nano-Server]            | Version 1809+           | x64             | [Windows Server][Windows-Server-lifecycle]
-
-[Windows-client]: https://www.microsoft.com/windows/
-[Windows-lifecycle]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
-[win-client-docker]: https://hub.docker.com/_/microsoft-windows
-[Windows-Server-lifecycle]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[Nano-Server]: https://learn.microsoft.com/windows-server/get-started/getting-started-with-nano-server
-[Windows-Server]: https://learn.microsoft.com/windows-server/
-
-.NET 7 is supported in the x64 emulator on Windows 11 Arm64.
-
-## Linux
-
-OS                                    | Version               | Architectures     | Lifecycle
---------------------------------------|-----------------------|-------------------|----------
-[Alpine Linux][Alpine]                | 3.16+                 | x64, Arm64, Arm32 | [Alpine][Alpine-lifecycle]
-[CentOS Linux][CentOS]                | 7                     | x64               | [CentOS][CentOS-lifecycle]
-[CentOS Stream Linux][CentOS]         | 8                     | x64               | [CentOS][CentOS-lifecycle]
-[Debian][Debian]                      | 10+                   | x64, Arm64, Arm32 | [Debian][Debian-lifecycle]
-[Fedora][Fedora]                      | 38+                   | x64               | [Fedora][Fedora-lifecycle]
-[openSUSE][OpenSUSE]                  | 15+                   | x64               | [OpenSUSE][OpenSUSE-lifecycle]
-[Oracle Linux][Oracle-Linux]          | 7+                    | x64               | [Oracle][Oracle-lifecycle]
-[Red Hat Enterprise Linux][RHEL]      | 7+                    | x64, Arm64        | [Red Hat][RHEL-lifecycle]
-[SUSE Enterprise Linux (SLES)][SLES]  | 12 SP5+               | x64               | [SUSE][SLES-lifecycle]
-[Ubuntu][Ubuntu]                      | 18.04+                | x64, Arm64, Arm32 | [Ubuntu][Ubuntu-lifecycle]
-
-Arm32 builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [`_TIME_BITS` set to 32-bit](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html#index-_005fTIME_005fBITS), for example Debian 12, Ubuntu 22.04, and lower versions.
-
-Other distributions are supported at best effort, per [.NET Support and Compatibility for Linux Distributions](../../linux-support.md).
-
-### Libc compatibility
-
-- x64: [glibc][glibc] 2.17 (from CentOS 7)
-- Arm32 [glibc][glibc] 2.27 (from Ubuntu 18.04)
-- Arm64: [glibc][glibc] 2.23 (from Ubuntu 16.04)
-- Arm64: [glibc][glibc] 2.27 (applies to 7.0.3 and earlier)
-- Alpine (x64 and Arm64): [musl][musl] 1.2.2 (from Alpine 3.15)
-
-[Alpine]: https://alpinelinux.org/
-[Alpine-lifecycle]: https://alpinelinux.org/releases/
-[CentOS]: https://www.centos.org/
-[CentOS-lifecycle]:https://wiki.centos.org/FAQ/General
-[CentOS-docker]: https://hub.docker.com/_/centos
-[CentOS-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-centos8
-[Debian]: https://www.debian.org/
-[Debian-lifecycle]: https://wiki.debian.org/DebianReleases
-[Debian-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-debian10
-[Fedora]: https://getfedora.org/
-[Fedora-lifecycle]: https://fedoraproject.org/wiki/End_of_life
-[Fedora-docker]: https://hub.docker.com/_/fedora
-[Fedora-msft-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-fedora32
-[Fedora-pm]: https://fedoraproject.org/wiki/DotNet
-[OpenSUSE]: https://opensuse.org/
-[OpenSUSE-lifecycle]: https://en.opensuse.org/Lifetime
-[OpenSUSE-docker]: https://hub.docker.com/r/opensuse/leap
-[OpenSUSE-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-opensuse15
-[Oracle-Linux]: https://www.oracle.com/linux/
-[Oracle-Lifecycle]: https://www.oracle.com/a/ocom/docs/elsp-lifetime-069338.pdf
-[RHEL]: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
-[RHEL-lifecycle]: https://access.redhat.com/support/policy/updates/errata/
-[RHEL-msft-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-rhel8
-[RHEL-pm]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/developing_.net_applications_in_rhel_8/using-net-core-on-rhel_gsg#installing-net-core_gsg
-[SLES]: https://www.suse.com/products/server/
-[SLES-lifecycle]: https://www.suse.com/lifecycle/
-[SLES-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-sles15
-[Ubuntu]: https://ubuntu.com/
-[Ubuntu-lifecycle]: https://wiki.ubuntu.com/Releases
-[Ubuntu-pm]: https://learn.microsoft.com/dotnet/core/install/linux-package-manager-ubuntu-2004
-[glibc]: https://www.gnu.org/software/libc/
-[musl]: https://musl.libc.org/
-
-## macOS
-
-OS                            | Version                   | Architectures     |
-------------------------------|---------------------------|-------------------|
-[macOS][macOS]                | 10.15+                    | x64, Arm64        |
-
-.NET 7 is supported in the Rosetta 2 x64 emulator.
-
-[macOS]: https://support.apple.com/macos
+This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
 
 ## Android
 
-OS                            | Version                 | Architectures     |
-------------------------------|-------------------------|-------------------|
-[Android][Android]            | API 21+                 | x64, Arm32, Arm64 |
+OS                              | Version                      | Architectures      | Lifecycle          |
+--------------------------------|------------------------------|--------------------|--------------------|
+[Android][0]                    |                              | Arm32, Arm64, x64  | [Lifecycle][1]     |
 
-[Android]: https://support.google.com/android
+Notes:
 
-## iOS / tvOS
+* Android: API 21 is used as the minimum SDK target.
 
-OS                            | Version                 | Architectures     |
-------------------------------|-------------------------|-------------------|
-[iOS][iOS]                    | 10.0+                   | x64, Arm32, Arm64 |
+[0]: https://www.android.com/
+[1]: https://support.google.com/android
 
-[iOS]: https://support.apple.com/ios
+## Apple
 
-## QEMU
+OS                              | Version                      | Architectures      | Lifecycle          |
+--------------------------------|------------------------------|--------------------|--------------------|
+[iOS][2]                        |                              | Arm64              | [Lifecycle][3]     |
+[iPadOS][4]                     |                              | Arm64              | [Lifecycle][5]     |
+[macOS][6]                      |                              | Arm64, x64         | [Lifecycle][7]     |
+[tvOS][8]                       |                              | Arm64              | [Lifecycle][9]     |
 
-.NET 7 is not supported being run (emulated) via [QEMU](https://www.qemu.org/). QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
+Notes:
 
-## Support changes from .NET 6.0
+* iOS: iOS 10.0 is used as the minimum SDK target.
+* macOS: The iOS and tvOS simulators are supported on macOS Arm64 and x64.
+* macOS: The x64 emulator (Rosetta 2) is supported on macOS Arm64.
+* macOS: Mac Catalyst apps are supported on macOS Arm64 and x64.
 
-The following operating systems are no longer supported, starting with .NET 7.0.
+[2]: https://developer.apple.com/ios/
+[3]: https://support.apple.com/ios/
+[4]: https://developer.apple.com/ipados/
+[5]: https://support.apple.com/ipados/
+[6]: https://developer.apple.com/macos/
+[7]: https://support.apple.com/macos/
+[8]: https://developer.apple.com/tvos/
+[9]: https://support.apple.com/apple-tv/
 
-OS                                    | Version                 | Architectures     |
---------------------------------------|-------------------------|-------------------|
-[Windows Client][Windows-client]      | 7 SP1, 8.1      | x64, x86          |
+## Linux
+
+OS                              | Version                      | Architectures      | Lifecycle          |
+--------------------------------|------------------------------|--------------------|--------------------|
+[Alpine][10]                    |                              | Arm32, Arm64, x64  | [Lifecycle][11]    |
+[Debian][12]                    |                              | Arm32, Arm64, x64  | [Lifecycle][13]    |
+[Fedora][14]                    |                              | Arm32, Arm64, x64  | [Lifecycle][15]    |
+[openSUSE Leap][16]             |                              | Arm64, x64         | [Lifecycle][17]    |
+[Red Hat Enterprise Linux][18]  |                              | Arm64, x64         | [Lifecycle][19]    |
+[SUSE Enterprise Linux][20]     |                              | Arm64, x64         | [Lifecycle][21]    |
+[Ubuntu][22]                    |                              | Arm32, Arm64, x64  | [Lifecycle][23]    |
+
+Notes:
+
+* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
+
+[10]: https://alpinelinux.org/
+[11]: https://alpinelinux.org/releases/
+[12]: https://www.debian.org/
+[13]: https://wiki.debian.org/DebianReleases
+[14]: https://fedoraproject.org/
+[15]: https://fedoraproject.org/wiki/End_of_life
+[16]: https://www.opensuse.org/
+[17]: https://en.opensuse.org/Lifetime
+[18]: https://access.redhat.com/
+[19]: https://access.redhat.com/support/policy/updates/errata/
+[20]: https://www.suse.com/
+[21]: https://www.suse.com/lifecycle/
+[22]: https://ubuntu.com/
+[23]: https://wiki.ubuntu.com/Releases
+
+## Windows
+
+OS                              | Version                      | Architectures      | Lifecycle          |
+--------------------------------|------------------------------|--------------------|--------------------|
+[Nano Server][24]               |                              | x64                | [Lifecycle][25]    |
+[Windows][26]                   |                              | Arm64, x64, x86    | [Lifecycle][27]    |
+[Windows Server][28]            |                              | x64, x86           | [Lifecycle][29]    |
+[Windows Server Core][30]       |                              | x64, x86           | [Lifecycle][31]    |
+
+Notes:
+
+* Windows: The x64 emulator is supported on Windows 11 Arm64.
+* Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+
+[24]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[25]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[26]: https://www.microsoft.com/windows/
+[27]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
+[28]: https://www.microsoft.com/windows-server
+[29]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[30]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[31]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+
+## Linux compatibility
+
+Microsoft-provided [portable](../../linux-support.md) Linux builds define [minimum compatibility](/linux-support.md) primarily via libc version.
+
+Libc                     | Version  | Architectures      | Source             |
+-------------------------|----------|--------------------|--------------------|
+glibc                    | 2.17     | x64                | CentOS 7           |
+glibc                    | 2.23     | Arm64              | Ubuntu 16.04       |
+glibc                    | 2.27     | Arm32              | Ubuntu 18.04       |
+musl                     | 1.2.2    | Arm64, x64         | Alpine 3.15        |
+
+Note: Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285)or a Y2038 compatible glibc with [_TIME_BITS](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions.
+
+## Notes
+
+* The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 
 ## Out of support OS versions
 
-Support for the following versions was ended by the distribution owners and are [no longer supported by .NET 7.0][OS-lifecycle-policy].
+Support for the following operating system versions has ended.
 
-- Alpine 3.15
-- Fedora 35, 37, 37
-- SUSE Linux Enterprise Server 12 SP2, SP3, SP4
-
-[OS-lifecycle-policy]: https://github.com/dotnet/core/blob/main/os-lifecycle-policy.md
+* Android 14
+* Android 13
+* Android 12.1
+* Android 12
+* Android 11
+* Android 10
+* iOS 17
+* iOS 16
+* iOS 15
+* iOS 12
+* iPadOS 17
+* iPadOS 16
+* iPadOS 15
+* iPadOS 12
+* macOS 14
+* macOS 13
+* macOS 12
+* macOS 11
+* macOS 10.15
+* tvOS 17
+* tvOS 16
+* tvOS 15
+* tvOS 12
+* Alpine 3.20
+* Alpine 3.19
+* Alpine 3.18
+* Alpine 3.17
+* Alpine 3.16
+* Alpine 3.15
+* Debian 12
+* Debian 11
+* Debian 10
+* Fedora 40
+* Fedora 39
+* Fedora 38
+* Fedora 37
+* Fedora 36
+* Fedora 35
+* openSUSE Leap 15.6
+* openSUSE Leap 15.5
+* openSUSE Leap 15.4
+* openSUSE Leap 15.3
+* Red Hat Enterprise Linux 9
+* Red Hat Enterprise Linux 8
+* Red Hat Enterprise Linux 7
+* SUSE Enterprise Linux 15.5
+* SUSE Enterprise Linux 15.4
+* SUSE Enterprise Linux 15.3
+* SUSE Enterprise Linux 12.5
+* SUSE Enterprise Linux 12.4
+* SUSE Enterprise Linux 12.3
+* SUSE Enterprise Linux 12.2
+* Ubuntu 24.04
+* Ubuntu 23.10
+* Ubuntu 23.04
+* Ubuntu 22.10
+* Ubuntu 22.04
+* Ubuntu 20.04
+* Ubuntu 18.04
+* Nano Server 2022
+* Nano Server 2019
+* Windows 11-23h2-e
+* Windows 11-23h2-w
+* Windows 11-22h2-e
+* Windows 11-22h2-w
+* Windows 10-22h2
+* Windows 11-21h2-e
+* Windows 10-21h2-e-lts
+* Windows 10-21h2-iot-lts
+* Windows 10-20h2-e-lts
+* Windows 10-1809-e-lts
+* Windows 10-1607-e-lts
+* Windows 11-21h2-w
+* Windows 10-21h2-w
+* Windows 10-21h2-e
+* Windows 10-21h1
+* Windows 10-20h2-e
+* Windows 8.1
+* Windows 7-sp1
+* Windows Server 23H2
+* Windows Server 2022
+* Windows Server 2019
+* Windows Server 2016
+* Windows Server 2012-R2
+* Windows Server 2012
+* Windows Server Core 23H2
+* Windows Server Core 2022
+* Windows Server Core 2019
+* Windows Server Core 2016
+* Windows Server Core 2012
