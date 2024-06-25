@@ -8,11 +8,13 @@ The community provides best effort support for .NET across all Linux distributio
 
 .NET containers are published to multiple registries.
 
+- [Chainguard Images](https://images.chainguard.dev/directory/image/dotnet-sdk/versions)
 - [Microsoft Artifact Repository](https://mcr.microsoft.com/catalog?search=dotnet/)
 - [OpenShift](https://developers.redhat.com/blog/2018/07/05/deploy-dotnet-core-apps-openshift)
+- [SUSE Linux Enterprise Server Container Images](https://registry.suse.com/repositories?languages%5B%5D=dotnet)
 - [Ubuntu Rocks](https://hub.docker.com/r/ubuntu/dotnet-aspnet)
 
-Microsoft publishes container images per [.NET container publishing policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md). Other distributions may have different policies.
+Note: Microsoft publishes container images per [.NET container publishing policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md). Other distributions may have different policies.
 
 ## Packages
 
@@ -52,7 +54,7 @@ Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.0
 
 Portable builds are compiled to provide [broad compatibility](https://github.com/dotnet/runtime/issues/83428). The minimum supported libc version is documented in [.NET Supported OS Policy](./os-lifecycle-policy.md).
 
-Microsoft provides portable builds that support both [glibc](https://www.gnu.org/software/libc/)-based and [musl libc](https://musl.libc.org/)-based Linux distributions.
+Microsoft provides [portable builds](https://dotnet.microsoft.com/download/dotnet) that support both [glibc](https://www.gnu.org/software/libc/)-based and [musl libc](https://musl.libc.org/)-based Linux distributions.
 
 The following examples demonstrate how to find the libc version provided for your distribution.
 
@@ -79,13 +81,13 @@ The highest OpenSSL version is loaded by default, but it can be [configured to u
 
 ## Red Hat Enterprise Linux support
 
+RHEL-compatible distributions are supported, including: AlmaLinux, CentOS Stream, Oracle Linux, and Rocky Linux.
+
 New .NET versions will typically only be supported on Red Hat Enterprise Linux (RHEL) versions in active support.
 
 - RHEL 7 is considered in maintenance.
 - RHEL 8 is considered in active support.
 - RHEL 9 is considered in active support.
-
-RHEL compatible distributions are supported, including: AlmaLinux, CentOS Stream, Oracle Linux, and Rocky Linux.
 
 ## Building .NET from source
 
