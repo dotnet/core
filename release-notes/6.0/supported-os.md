@@ -116,54 +116,57 @@ Note: Microsoft-provided portable Arm32 glibc builds are supported on distro ver
 
 Support for the following operating system versions has ended.
 
-* Android 11
-* Android 10
-* Android 9
-* iOS 12
-* iPadOS 12
-* macOS 11
-* macOS 10.15
-* tvOS 12
-* Alpine 3.16
-* Alpine 3.15
-* Alpine 3.14
-* Alpine 3.13
-* Alpine 3.12
-* Debian 10
-* Fedora 38
-* Fedora 37
-* Fedora 36
-* Fedora 35
-* Fedora 34
-* Fedora 33
-* openSUSE Leap 15.4
-* openSUSE Leap 15.3
-* openSUSE Leap 15.2
-* SUSE Enterprise Linux 15.4
-* SUSE Enterprise Linux 15.3
-* SUSE Enterprise Linux 15.2
-* SUSE Enterprise Linux 12.4
-* SUSE Enterprise Linux 12.3
-* SUSE Enterprise Linux 12.2
-* Ubuntu 23.04
-* Ubuntu 22.10
-* Ubuntu 21.10
-* Ubuntu 21.04
-* Ubuntu 18.04
-* Nano Server 20H2
-* Nano Server 2004
-* Windows 11-21h2-w
-* Windows 10-21h2-w
-* Windows 10-21h2-e
-* Windows 10-21h1
-* Windows 10-20h2-w
-* Windows 10-20h2-e
-* Windows 10-2004
-* Windows 10-1909-e
-* Windows 8.1
-* Windows 7-sp1
-* Windows Server 20H2
-* Windows Server 2004
-* Windows Server Core 20H2
-* Windows Server Core 2004
-* Windows Server Core 1607
+OS                              | Version                      | End of Life        |
+--------------------------------|------------------------------|--------------------|
+iPadOS                          | 12                           | -                  |
+tvOS                            | 12                           | -                  |
+SUSE Enterprise Linux           | 12.2                         | 03/31/2018         |
+SUSE Enterprise Linux           | 12.3                         | 06/30/2019         |
+Windows                         | 7 SP1                        | [01/14/2020](https://learn.microsoft.com/lifecycle/products/windows-7) |
+SUSE Enterprise Linux           | 12.4                         | 06/30/2020         |
+Fedora                          | 33                           | 11/30/2021         |
+Nano Server                     | 2004                         | [12/14/2021](https://learn.microsoft.com/lifecycle/announcements/windows-server-version-2004-end-of-servicing) |
+Windows                         | 10 2004                      | [12/14/2021](https://learn.microsoft.com/lifecycle/announcements/windows-10-version-2004-end-of-servicing) |
+Windows Server                  | 2004                         | [12/14/2021](https://learn.microsoft.com/lifecycle/announcements/windows-server-version-2004-end-of-servicing) |
+Windows Server Core             | 2004                         | [12/14/2021](https://learn.microsoft.com/lifecycle/announcements/windows-server-version-2004-end-of-servicing) |
+SUSE Enterprise Linux           | 15.2                         | 12/31/2021         |
+Android                         | 9                            | [01/01/2022](https://developer.android.com/about/versions/pie) |
+openSUSE Leap                   | 15.2                         | 01/04/2022         |
+Windows Server Core             | 1607                         | [01/11/2022](https://learn.microsoft.com/virtualization/windowscontainers/deploy-containers/base-image-lifecycle) |
+Ubuntu                          | 21.04                        | 01/20/2022         |
+Alpine                          | 3.12                         | [05/01/2022](https://alpinelinux.org/posts/Alpine-3.12.12-3.13.10-3.14.6-3.15.4-released.html) |
+Windows                         | 10 20H2 (W)                  | [05/10/2022](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
+Windows                         | 10 1909 (E)                  | [05/10/2022](https://learn.microsoft.com/lifecycle/announcements/windows-10-1909-enterprise-education-eos) |
+Fedora                          | 34                           | 06/07/2022         |
+Ubuntu                          | 21.10                        | 07/14/2022         |
+Nano Server                     | 20H2                         | [08/09/2022](https://learn.microsoft.com/lifecycle/announcements/windows-server-20h2-retiring) |
+Windows Server                  | 20H2                         | [08/09/2022](https://learn.microsoft.com/lifecycle/announcements/windows-server-20h2-retiring) |
+Windows Server Core             | 20H2                         | [08/09/2022](https://learn.microsoft.com/lifecycle/announcements/windows-server-20h2-retiring) |
+Debian                          | 10                           | [09/10/2022](https://www.debian.org/News/2022/20220910) |
+macOS                           | 10.15                        | [09/12/2022](https://support.apple.com/HT210642) |
+Alpine                          | 3.13                         | [11/01/2022](https://alpinelinux.org/posts/Alpine-3.12.12-3.13.10-3.14.6-3.15.4-released.html) |
+Fedora                          | 35                           | 12/13/2022         |
+Windows                         | 10 21H1                      | [12/13/2022](https://learn.microsoft.com/windows/release-health/status-windows-10-21h1) |
+openSUSE Leap                   | 15.3                         | 12/31/2022         |
+SUSE Enterprise Linux           | 15.3                         | 12/31/2022         |
+Windows                         | 8.1                          | [01/10/2023](https://learn.microsoft.com/lifecycle/products/windows-81) |
+iOS                             | 12                           | [01/23/2023](https://support.apple.com/HT209084) |
+Android                         | 10                           | 03/06/2023         |
+Alpine                          | 3.14                         | [05/01/2023](https://alpinelinux.org/posts/Alpine-3.14.10-3.15.8-3.16.5-released.html) |
+Windows                         | 10 20H2 (E)                  | [05/09/2023](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
+Fedora                          | 36                           | 05/16/2023         |
+Ubuntu                          | 18.04                        | 05/31/2023         |
+Windows                         | 10 21H2 (W)                  | [06/13/2023](https://learn.microsoft.com/windows/release-health/release-information) |
+Ubuntu                          | 22.10                        | 07/20/2023         |
+macOS                           | 11                           | [09/26/2023](https://support.apple.com/HT211896) |
+Windows                         | 11 21H2 (W)                  | [10/10/2023](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+Alpine                          | 3.15                         | [11/01/2023](https://alpinelinux.org/posts/Alpine-3.15.10-3.16.7-3.17.5-3.18.3-released.html) |
+Fedora                          | 37                           | 12/05/2023         |
+openSUSE Leap                   | 15.4                         | 12/07/2023         |
+SUSE Enterprise Linux           | 15.4                         | 12/31/2023         |
+Ubuntu                          | 23.04                        | 01/20/2024         |
+Android                         | 11                           | 02/05/2024         |
+Fedora                          | 38                           | 05/21/2024         |
+Alpine                          | 3.16                         | [05/23/2024](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
+Windows                         | 10 21H2 (E)                  | [06/11/2024](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
+
