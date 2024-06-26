@@ -78,7 +78,7 @@ Notes:
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Nano Server][24]               | 2022, 2019                   | x64                | [Lifecycle][25]    |
-[Windows][26]                   | 11-23H2, 11-22H2, 10-22H2, 11-21H2-E, 10-21H2, 10-20H2-E-LTS, 10-1809-E-LTS, 10-1607-E-LTS | Arm64, x64, x86    | [Lifecycle][27]    |
+[Windows][26]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 20H2 (E), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][27]    |
 [Windows Server][28]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86           | [Lifecycle][29]    |
 [Windows Server Core][30]       | 23H2, 2022, 2019, 2016, 2012 | x64, x86           | [Lifecycle][31]    |
 
