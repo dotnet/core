@@ -106,7 +106,7 @@ glibc                    | 2.23     | Arm64, x64         | Ubuntu 16.04       |
 glibc                    | 2.35     | Arm32              | Ubuntu 22.04       |
 musl                     | 1.2.2    | Arm32, Arm64, x64  | Alpine 3.13        |
 
-Note: Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285)or a Y2038 compatible glibc with [_TIME_BITS](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions.
+Note: Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [_TIME_BITS](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions.
 
 ## Notes
 
@@ -118,9 +118,9 @@ Support for the following operating system versions has ended.
 
 OS                              | Version                      | End of Life        |
 --------------------------------|------------------------------|--------------------|
-Windows                         | 10 21H2 (E)                  | [06/11/2024](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
-Alpine                          | 3.16                         | [05/23/2024](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
-Fedora                          | 38                           | 05/21/2024         |
-Android                         | 11                           | 02/05/2024         |
-Ubuntu                          | 23.04                        | 01/20/2024         |
-Fedora                          | 37                           | 12/05/2023         |
+Alpine                          | 3.16                         | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
+Android                         | 11                           | 2024-02-05         |
+Fedora                          | 38                           | 2024-05-21         |
+Fedora                          | 37                           | 2023-12-05         |
+Ubuntu                          | 23.04                        | 2024-01-20         |
+Windows                         | 10 21H2 (E)                  | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
