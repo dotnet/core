@@ -34,9 +34,9 @@ Notes:
 * macOS: Mac Catalyst apps are supported on macOS Arm64 and x64.
 
 [2]: https://developer.apple.com/ios/
-[3]: https://support.apple.com/iphone/
+[3]: https://support.apple.com/ios/
 [4]: https://developer.apple.com/ipados/
-[5]: https://support.apple.com/ipad/
+[5]: https://support.apple.com/ipados/
 [6]: https://developer.apple.com/macos/
 [7]: https://support.apple.com/macos/
 [8]: https://developer.apple.com/tvos/
@@ -56,7 +56,7 @@ OS                              | Version                      | Architectures  
 
 Notes:
 
-* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux.md).
+* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
 
 [10]: https://alpinelinux.org/
 [11]: https://alpinelinux.org/releases/
@@ -98,7 +98,7 @@ Notes:
 
 ## Linux compatibility
 
-Microsoft-provided [portable](../../linux.md) Linux builds define [minimum compatibility](../../linux.md) primarily via libc version.
+Microsoft-provided [portable](../../linux-support.md) Linux builds define [minimum compatibility](/linux-support.md) primarily via libc version.
 
 Libc                     | Version  | Architectures      | Source             |
 -------------------------|----------|--------------------|--------------------|
@@ -119,39 +119,39 @@ Support for the following operating system versions has ended.
 
 OS                              | Version                      | End of Life        |
 --------------------------------|------------------------------|--------------------|
-SUSE Enterprise Linux           | 12.5                         | 10/31/2024         |
-Windows                         | 10 21H2 (E)                  | [06/11/2024](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
-Alpine                          | 3.16                         | [05/23/2024](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
-Fedora                          | 38                           | 05/21/2024         |
-Android                         | 11                           | 02/05/2024         |
-Ubuntu                          | 23.04                        | 01/20/2024         |
-openSUSE Leap                   | 15.4                         | 12/07/2023         |
-Fedora                          | 37                           | 12/05/2023         |
-Alpine                          | 3.15                         | [11/01/2023](https://alpinelinux.org/posts/Alpine-3.15.10-3.16.7-3.17.5-3.18.3-released.html) |
-Windows                         | 11 21H2 (W)                  | [10/10/2023](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-Windows Server                  | 2012-R2                      | [10/10/2023](https://learn.microsoft.com/lifecycle/products/windows-server-2012-r2) |
-Windows Server                  | 2012                         | [10/10/2023](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
-macOS                           | 11                           | [09/26/2023](https://support.apple.com/HT211896) |
-Ubuntu                          | 22.10                        | 07/20/2023         |
-Windows                         | 10 21H2 (W)                  | [06/13/2023](https://learn.microsoft.com/windows/release-health/release-information) |
-Ubuntu                          | 18.04                        | 05/31/2023         |
-Fedora                          | 36                           | 05/16/2023         |
-Windows                         | 10 20H2 (E)                  | [05/09/2023](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
-Android                         | 10                           | 03/06/2023         |
-iOS                             | 12                           | [01/23/2023](https://support.apple.com/HT209084) |
-Windows                         | 8.1                          | [01/10/2023](https://learn.microsoft.com/lifecycle/products/windows-81) |
-openSUSE Leap                   | 15.3                         | 12/31/2022         |
-SUSE Enterprise Linux           | 15.3                         | 12/31/2022         |
-Fedora                          | 35                           | 12/13/2022         |
-Windows                         | 10 21H1                      | [12/13/2022](https://learn.microsoft.com/windows/release-health/status-windows-10-21h1) |
-macOS                           | 10.15                        | [09/12/2022](https://support.apple.com/HT210642) |
-Debian                          | 10                           | [09/10/2022](https://www.debian.org/News/2022/20220910) |
-SUSE Enterprise Linux           | 12.4                         | 06/30/2020         |
-Windows                         | 7 SP1                        | [01/14/2020](https://learn.microsoft.com/lifecycle/products/windows-7) |
-SUSE Enterprise Linux           | 12.3                         | 06/30/2019         |
-SUSE Enterprise Linux           | 12.2                         | 03/31/2018         |
+Alpine                          | 3.16                         | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
+Alpine                          | 3.15                         | [2023-11-01](https://alpinelinux.org/posts/Alpine-3.15.10-3.16.7-3.17.5-3.18.3-released.html) |
+Android                         | 11                           | 2024-02-05         |
+Android                         | 10                           | 2023-03-06         |
+Debian                          | 10                           | [2022-09-10](https://www.debian.org/News/2022/20220910) |
+Fedora                          | 38                           | 2024-05-21         |
+Fedora                          | 37                           | 2023-12-05         |
+Fedora                          | 36                           | 2023-05-16         |
+Fedora                          | 35                           | 2022-12-13         |
+iOS                             | 12                           | [2023-01-23](https://support.apple.com/HT209084) |
 iPadOS                          | 12                           | -                  |
+macOS                           | 11                           | [2023-09-26](https://support.apple.com/HT211896) |
+macOS                           | 10.15                        | [2022-09-12](https://support.apple.com/HT210642) |
+openSUSE Leap                   | 15.4                         | 2023-12-07         |
+openSUSE Leap                   | 15.3                         | 2022-12-31         |
+SUSE Enterprise Linux           | 12.5                         | 2024-10-31         |
+SUSE Enterprise Linux           | 15.3                         | 2022-12-31         |
+SUSE Enterprise Linux           | 12.4                         | 2020-06-30         |
+SUSE Enterprise Linux           | 12.3                         | 2019-06-30         |
+SUSE Enterprise Linux           | 12.2                         | 2018-03-31         |
 tvOS                            | 17                           | -                  |
 tvOS                            | 16                           | -                  |
 tvOS                            | 15                           | -                  |
 tvOS                            | 12                           | -                  |
+Ubuntu                          | 23.04                        | 2024-01-20         |
+Ubuntu                          | 22.10                        | 2023-07-20         |
+Ubuntu                          | 18.04                        | 2023-05-31         |
+Windows                         | 10 21H2 (E)                  | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
+Windows                         | 11 21H2 (W)                  | [2023-10-10](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+Windows                         | 10 21H2 (W)                  | [2023-06-13](https://learn.microsoft.com/windows/release-health/release-information) |
+Windows                         | 10 20H2 (E)                  | [2023-05-09](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
+Windows                         | 8.1                          | [2023-01-10](https://learn.microsoft.com/lifecycle/products/windows-81) |
+Windows                         | 10 21H1                      | [2022-12-13](https://learn.microsoft.com/windows/release-health/status-windows-10-21h1) |
+Windows                         | 7 SP1                        | [2020-01-14](https://learn.microsoft.com/lifecycle/products/windows-7) |
+Windows Server                  | 2012-R2                      | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012-r2) |
+Windows Server                  | 2012                         | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |

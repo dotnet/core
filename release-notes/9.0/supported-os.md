@@ -34,9 +34,9 @@ Notes:
 * macOS: Mac Catalyst apps are supported on macOS Arm64 and x64.
 
 [2]: https://developer.apple.com/ios/
-[3]: https://support.apple.com/iphone/
+[3]: https://support.apple.com/ios/
 [4]: https://developer.apple.com/ipados/
-[5]: https://support.apple.com/ipad/
+[5]: https://support.apple.com/ipados/
 [6]: https://developer.apple.com/macos/
 [7]: https://support.apple.com/macos/
 [8]: https://developer.apple.com/tvos/
@@ -56,7 +56,7 @@ OS                              | Version                      | Architectures  
 
 Notes:
 
-* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux.md).
+* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
 
 [10]: https://alpinelinux.org/
 [11]: https://alpinelinux.org/releases/
@@ -98,7 +98,7 @@ Notes:
 
 ## Linux compatibility
 
-Microsoft-provided [portable](../../linux.md) Linux builds define [minimum compatibility](../../linux.md) primarily via libc version.
+Microsoft-provided [portable](../../linux-support.md) Linux builds define [minimum compatibility](/linux-support.md) primarily via libc version.
 
 Libc                     | Version  | Architectures      | Source             |
 -------------------------|----------|--------------------|--------------------|

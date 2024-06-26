@@ -34,9 +34,9 @@ Notes:
 * macOS: Mac Catalyst apps are supported on macOS Arm64 and x64.
 
 [2]: https://developer.apple.com/ios/
-[3]: https://support.apple.com/iphone/
+[3]: https://support.apple.com/ios/
 [4]: https://developer.apple.com/ipados/
-[5]: https://support.apple.com/ipad/
+[5]: https://support.apple.com/ipados/
 [6]: https://developer.apple.com/macos/
 [7]: https://support.apple.com/macos/
 [8]: https://developer.apple.com/tvos/
@@ -56,7 +56,7 @@ OS                              | Version                      | Architectures  
 
 Notes:
 
-* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux.md).
+* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
 
 [10]: https://alpinelinux.org/
 [11]: https://alpinelinux.org/releases/
@@ -98,7 +98,7 @@ Notes:
 
 ## Linux compatibility
 
-Microsoft-provided [portable](../../linux.md) Linux builds define [minimum compatibility](../../linux.md) primarily via libc version.
+Microsoft-provided [portable](../../linux-support.md) Linux builds define [minimum compatibility](/linux-support.md) primarily via libc version.
 
 Libc                     | Version  | Architectures      | Source             |
 -------------------------|----------|--------------------|--------------------|
@@ -118,9 +118,9 @@ Support for the following operating system versions has ended.
 
 OS                              | Version                      | End of Life        |
 --------------------------------|------------------------------|--------------------|
-Windows                         | 10 21H2 (E)                  | [06/11/2024](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
-Alpine                          | 3.16                         | [05/23/2024](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
-Fedora                          | 38                           | 05/21/2024         |
-Android                         | 11                           | 02/05/2024         |
-Ubuntu                          | 23.04                        | 01/20/2024         |
-Fedora                          | 37                           | 12/05/2023         |
+Alpine                          | 3.16                         | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
+Android                         | 11                           | 2024-02-05         |
+Fedora                          | 38                           | 2024-05-21         |
+Fedora                          | 37                           | 2023-12-05         |
+Ubuntu                          | 23.04                        | 2024-01-20         |
+Windows                         | 10 21H2 (E)                  | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
