@@ -7,7 +7,6 @@
 The following documents describe supported operating systems:
 
 * [.NET 8 supported OS versions](release-notes/8.0/supported-os.md)
-* [.NET 7 supported OS versions](release-notes/7.0/supported-os.md)
 * [.NET 6 supported OS versions](release-notes/6.0/supported-os.md)
 
 ## Preview .NET versions
@@ -18,8 +17,9 @@ The following documents describe supported operating systems:
 
 The following documents describe (historical) supported operating systems:
 
-* [.NET Core 3.1 supported OS versions](release-notes/3.1/3.1-supported-os.md)
+* [.NET 7 supported OS versions](release-notes/7.0/supported-os.md)
 * [.NET 5 supported OS versions](release-notes/5.0/5.0-supported-os.md)
+* [.NET Core 3.1 supported OS versions](release-notes/3.1/3.1-supported-os.md)
 * [.NET Core 3.0 supported OS versions](release-notes/3.0/3.0-supported-os.md)
 * [.NET Core 2.2 supported OS versions](release-notes/2.2/2.2-supported-os.md)
 * [.NET Core 2.1 supported OS versions](release-notes/2.1/2.1-supported-os.md)
