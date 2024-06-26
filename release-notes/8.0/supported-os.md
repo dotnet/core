@@ -34,9 +34,9 @@ Notes:
 * macOS: Mac Catalyst apps are supported on macOS Arm64 and x64.
 
 [2]: https://developer.apple.com/ios/
-[3]: https://support.apple.com/ios/
+[3]: https://support.apple.com/iphone/
 [4]: https://developer.apple.com/ipados/
-[5]: https://support.apple.com/ipados/
+[5]: https://support.apple.com/ipad/
 [6]: https://developer.apple.com/macos/
 [7]: https://support.apple.com/macos/
 [8]: https://developer.apple.com/tvos/
