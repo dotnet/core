@@ -8,7 +8,7 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
-[Android][0]                    |                              | Arm32, Arm64, x64  | [Lifecycle][1]     |
+[Android][0]                    | 14, 13, 12.1, 12             | Arm32, Arm64, x64  | [Lifecycle][1]     |
 
 Notes:
 
@@ -21,9 +21,9 @@ Notes:
 
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
-[iOS][2]                        |                              | Arm64              | [Lifecycle][3]     |
-[iPadOS][4]                     |                              | Arm64              | [Lifecycle][5]     |
-[macOS][6]                      |                              | Arm64, x64         | [Lifecycle][7]     |
+[iOS][2]                        | 17, 16, 15                   | Arm64              | [Lifecycle][3]     |
+[iPadOS][4]                     | 17, 16, 15                   | Arm64              | [Lifecycle][5]     |
+[macOS][6]                      | 14, 13, 12                   | Arm64, x64         | [Lifecycle][7]     |
 [tvOS][8]                       |                              | Arm64              | [Lifecycle][9]     |
 
 Notes:
@@ -46,13 +46,13 @@ Notes:
 
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
-[Alpine][10]                    |                              | Arm32, Arm64, x64  | [Lifecycle][11]    |
-[Debian][12]                    |                              | Arm32, Arm64, x64  | [Lifecycle][13]    |
-[Fedora][14]                    |                              | Arm32, Arm64, x64  | [Lifecycle][15]    |
-[openSUSE Leap][16]             |                              | Arm64, x64         | [Lifecycle][17]    |
-[Red Hat Enterprise Linux][18]  |                              | Arm64, x64         | [Lifecycle][19]    |
-[SUSE Enterprise Linux][20]     |                              | Arm64, x64         | [Lifecycle][21]    |
-[Ubuntu][22]                    |                              | Arm32, Arm64, x64  | [Lifecycle][23]    |
+[Alpine][10]                    | 3.20, 3.19, 3.18, 3.17       | Arm32, Arm64, x64  | [Lifecycle][11]    |
+[Debian][12]                    | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][13]    |
+[Fedora][14]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][15]    |
+[openSUSE Leap][16]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][17]    |
+[Red Hat Enterprise Linux][18]  | 9, 8, 7                      | Arm64, x64         | [Lifecycle][19]    |
+[SUSE Enterprise Linux][20]     | 15.5, 15.4                   | Arm64, x64         | [Lifecycle][21]    |
+[Ubuntu][22]                    | 24.04, 23.10, 22.04, 20.04   | Arm32, Arm64, x64  | [Lifecycle][23]    |
 
 Notes:
 
@@ -77,10 +77,10 @@ Notes:
 
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
-[Nano Server][24]               |                              | x64                | [Lifecycle][25]    |
-[Windows][26]                   |                              | Arm64, x64, x86    | [Lifecycle][27]    |
-[Windows Server][28]            |                              | x64, x86           | [Lifecycle][29]    |
-[Windows Server Core][30]       |                              | x64, x86           | [Lifecycle][31]    |
+[Nano Server][24]               | 2022, 2019                   | x64                | [Lifecycle][25]    |
+[Windows][26]                   | 11 23H2, 10 22H2, 11 22H2, 10 21H2 (E), 10 21H2 (IoT), 11 21H2 (E), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][27]    |
+[Windows Server][28]            | 23H2, 2022, 2019, 2016       | x64, x86           | [Lifecycle][29]    |
+[Windows Server Core][30]       | 2022, 2019, 2016             | x64, x86           | [Lifecycle][31]    |
 
 Notes:
 
@@ -117,78 +117,34 @@ Note: Microsoft-provided portable Arm32 glibc builds are supported on distro ver
 
 Support for the following operating system versions has ended.
 
-* Android 14
-* Android 13
-* Android 12.1
-* Android 12
 * Android 11
 * Android 10
-* iOS 17
-* iOS 16
-* iOS 15
 * iOS 12
-* iPadOS 17
-* iPadOS 16
-* iPadOS 15
 * iPadOS 12
-* macOS 14
-* macOS 13
-* macOS 12
 * macOS 11
 * macOS 10.15
 * tvOS 17
 * tvOS 16
 * tvOS 15
 * tvOS 12
-* Alpine 3.20
-* Alpine 3.19
-* Alpine 3.18
-* Alpine 3.17
 * Alpine 3.16
 * Alpine 3.15
-* Debian 12
-* Debian 11
 * Debian 10
-* Fedora 40
-* Fedora 39
 * Fedora 38
 * Fedora 37
 * Fedora 36
 * Fedora 35
-* openSUSE Leap 15.6
-* openSUSE Leap 15.5
 * openSUSE Leap 15.4
 * openSUSE Leap 15.3
-* Red Hat Enterprise Linux 9
-* Red Hat Enterprise Linux 8
-* Red Hat Enterprise Linux 7
-* SUSE Enterprise Linux 15.5
-* SUSE Enterprise Linux 15.4
 * SUSE Enterprise Linux 15.3
 * SUSE Enterprise Linux 12.5
 * SUSE Enterprise Linux 12.4
 * SUSE Enterprise Linux 12.3
 * SUSE Enterprise Linux 12.2
-* Ubuntu 24.04
-* Ubuntu 23.10
 * Ubuntu 23.04
 * Ubuntu 22.10
-* Ubuntu 22.04
-* Ubuntu 20.04
 * Ubuntu 18.04
-* Nano Server 2022
-* Nano Server 2019
-* Windows 11-23h2-e
-* Windows 11-23h2-w
-* Windows 11-22h2-e
-* Windows 11-22h2-w
-* Windows 10-22h2
-* Windows 11-21h2-e
-* Windows 10-21h2-e-lts
-* Windows 10-21h2-iot-lts
 * Windows 10-20h2-e-lts
-* Windows 10-1809-e-lts
-* Windows 10-1607-e-lts
 * Windows 11-21h2-w
 * Windows 10-21h2-w
 * Windows 10-21h2-e
@@ -196,14 +152,7 @@ Support for the following operating system versions has ended.
 * Windows 10-20h2-e
 * Windows 8.1
 * Windows 7-sp1
-* Windows Server 23H2
-* Windows Server 2022
-* Windows Server 2019
-* Windows Server 2016
 * Windows Server 2012-R2
 * Windows Server 2012
 * Windows Server Core 23H2
-* Windows Server Core 2022
-* Windows Server Core 2019
-* Windows Server Core 2016
 * Windows Server Core 2012
