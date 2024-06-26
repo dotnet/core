@@ -140,10 +140,10 @@ Android                         | 10                           | 03/06/2023     
 Windows                         | 10 20H2 (E)                  | [05/09/2023](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
 Fedora                          | 36                           | 05/16/2023         |
 Ubuntu                          | 18.04                        | 05/31/2023         |
-Windows                         | 10 21H2 W                    | [06/13/2023](https://learn.microsoft.com/windows/release-health/release-information) |
+Windows                         | 10 21H2 (W)                  | [06/13/2023](https://learn.microsoft.com/windows/release-health/release-information) |
 Ubuntu                          | 22.10                        | 07/20/2023         |
 macOS                           | 11                           | [09/26/2023](https://support.apple.com/HT211896) |
-Windows                         | 11 21H2 W                    | [10/10/2023](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+Windows                         | 11 21H2 (W)                  | [10/10/2023](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 Windows Server                  | 2012-R2                      | [10/10/2023](https://learn.microsoft.com/lifecycle/products/windows-server-2012-r2) |
 Windows Server                  | 2012                         | [10/10/2023](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
 Alpine                          | 3.15                         | [11/01/2023](https://alpinelinux.org/posts/Alpine-3.15.10-3.16.7-3.17.5-3.18.3-released.html) |

@@ -135,7 +135,7 @@ openSUSE Leap                   | 15.2                         | 01/04/2022     
 Windows Server Core             | 1607                         | [01/11/2022](https://learn.microsoft.com/virtualization/windowscontainers/deploy-containers/base-image-lifecycle) |
 Ubuntu                          | 21.04                        | 01/20/2022         |
 Alpine                          | 3.12                         | [05/01/2022](https://alpinelinux.org/posts/Alpine-3.12.12-3.13.10-3.14.6-3.15.4-released.html) |
-Windows                         | 10 20H2 W                    | [05/10/2022](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
+Windows                         | 10 20H2 (W)                  | [05/10/2022](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
 Windows                         | 10 1909 (E)                  | [05/10/2022](https://learn.microsoft.com/lifecycle/announcements/windows-10-1909-enterprise-education-eos) |
 Fedora                          | 34                           | 06/07/2022         |
 Ubuntu                          | 21.10                        | 07/14/2022         |
@@ -156,10 +156,10 @@ Alpine                          | 3.14                         | [05/01/2023](ht
 Windows                         | 10 20H2 (E)                  | [05/09/2023](https://learn.microsoft.com/windows/release-health/status-windows-10-20h2) |
 Fedora                          | 36                           | 05/16/2023         |
 Ubuntu                          | 18.04                        | 05/31/2023         |
-Windows                         | 10 21H2 W                    | [06/13/2023](https://learn.microsoft.com/windows/release-health/release-information) |
+Windows                         | 10 21H2 (W)                  | [06/13/2023](https://learn.microsoft.com/windows/release-health/release-information) |
 Ubuntu                          | 22.10                        | 07/20/2023         |
 macOS                           | 11                           | [09/26/2023](https://support.apple.com/HT211896) |
-Windows                         | 11 21H2 W                    | [10/10/2023](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+Windows                         | 11 21H2 (W)                  | [10/10/2023](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 Alpine                          | 3.15                         | [11/01/2023](https://alpinelinux.org/posts/Alpine-3.15.10-3.16.7-3.17.5-3.18.3-released.html) |
 Fedora                          | 37                           | 12/05/2023         |
 openSUSE Leap                   | 15.4                         | 12/07/2023         |
