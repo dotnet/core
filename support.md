@@ -31,7 +31,7 @@ Canonical supports .NET on Ubuntu, per the following.
 
 Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [commercial support](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) for .NET on [multiple operating systems](os-lifecycle-policy.md), per [.NET support policy](https://dotnet.microsoft.com/platform/support/policy).
 
-.NET container images are provided for a more limited set [operating system versions](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md).
+.NET container images are provided for a more limited set of [operating system versions](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md).
 
 ### Red Hat
 
