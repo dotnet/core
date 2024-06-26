@@ -98,7 +98,7 @@ Notes:
 
 ## Linux compatibility
 
-Microsoft-provided [portable](../../linux-support.md) Linux builds define [minimum compatibility](/linux-support.md) primarily via libc version.
+Microsoft-provided [portable Linux builds](../../linux.md) define minimum compatibility primarily via libc version.
 
 Libc                     | Version  | Architectures      | Source             |
 -------------------------|----------|--------------------|--------------------|
