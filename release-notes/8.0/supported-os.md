@@ -123,5 +123,5 @@ Ubuntu                          | 23.04                        | 01/20/2024     
 Android                         | 11                           | 02/05/2024         |
 Fedora                          | 38                           | 05/21/2024         |
 Alpine                          | 3.16                         | [05/23/2024](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
-Windows                         | 10-21h2-e                    | [06/11/2024](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
+Windows                         | 10 21H2 (E)                  | [06/11/2024](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
 
