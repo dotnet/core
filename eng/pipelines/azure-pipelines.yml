@@ -21,8 +21,8 @@ extends:
   template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
     pool:
-      name: 1es-default-pool
-      image: 1es-agent-image
+      name: AzurePipelines-EO
+      image: 1ESPT-Windows2022
       os: windows
     customBuildTags:
     - ES365AIMigrationTooling
