@@ -4,7 +4,7 @@ The following table lists [releases](../releases.md) under active development or
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.5][9.0.0-preview.5] | May 11, 2026 |
+| [.NET 9](9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.5][9.0.0-preview.5] | May 12, 2026 |
 | [.NET 8](8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.6][8.0.6] | November 10, 2026 |
 | [.NET 7](7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) | [STS][policies] | [7.0.20][7.0.20] | May 14, 2024 |
 | [.NET 6](6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.31][6.0.31]  | November 12, 2024 |

@@ -22,7 +22,7 @@ The following table lists unsupported preview releases.
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.5][9.0.0-preview.5] | May 11, 2026 |
+| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.5][9.0.0-preview.5] | May 12, 2026 |
 
 [9.0.0-preview.5]: release-notes/9.0/preview/preview5/9.0.0-preview.5.md
 
