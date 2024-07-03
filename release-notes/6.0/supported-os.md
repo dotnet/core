@@ -43,54 +43,60 @@ Notes:
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][6]                     | 3.20, 3.19, 3.18, 3.17       | Arm32, Arm64, x64  | [Lifecycle][7]     |
-[Debian][8]                     | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][9]     |
-[Fedora][10]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][11]    |
-[openSUSE Leap][12]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][13]    |
-[Red Hat Enterprise Linux][14]  | 9, 8, 7                      | Arm64, x64         | [Lifecycle][15]    |
-[SUSE Enterprise Linux][16]     | 15.5, 12.5                   | Arm64, x64         | [Lifecycle][17]    |
-[Ubuntu][18]                    | 24.04, 23.10, 22.04, 20.04   | Arm32, Arm64, x64  | [Lifecycle][19]    |
+[CentOS][8]                     |                              | x64                | [Lifecycle][9]     |
+[CentOS Stream][10]             | 9                            | x64                |
+[Debian][11]                    | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][12]    |
+[Fedora][13]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][14]    |
+[openSUSE Leap][15]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][16]    |
+[Red Hat Enterprise Linux][17]  | 9, 8, 7                      | Arm64, x64         | [Lifecycle][18]    |
+[SUSE Enterprise Linux][19]     | 15.5, 12.5                   | Arm64, x64         | [Lifecycle][20]    |
+[Ubuntu][21]                    | 24.04, 23.10, 22.04, 20.04   | Arm32, Arm64, x64  | [Lifecycle][22]    |
 
 Notes:
 
+* CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
 * Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
-[8]: https://www.debian.org/
-[9]: https://wiki.debian.org/DebianReleases
-[10]: https://fedoraproject.org/
-[11]: https://fedoraproject.org/wiki/End_of_life
-[12]: https://www.opensuse.org/
-[13]: https://en.opensuse.org/Lifetime
-[14]: https://access.redhat.com/
-[15]: https://access.redhat.com/support/policy/updates/errata/
-[16]: https://www.suse.com/
-[17]: https://www.suse.com/lifecycle/
-[18]: https://ubuntu.com/
-[19]: https://wiki.ubuntu.com/Releases
+[8]: https://centos.org/
+[9]: https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/
+[10]: https://centos.org/
+[11]: https://www.debian.org/
+[12]: https://wiki.debian.org/DebianReleases
+[13]: https://fedoraproject.org/
+[14]: https://fedoraproject.org/wiki/End_of_life
+[15]: https://www.opensuse.org/
+[16]: https://en.opensuse.org/Lifetime
+[17]: https://access.redhat.com/
+[18]: https://access.redhat.com/support/policy/updates/errata/
+[19]: https://www.suse.com/
+[20]: https://www.suse.com/lifecycle/
+[21]: https://ubuntu.com/
+[22]: https://wiki.ubuntu.com/Releases
 
 ## Windows
 
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
-[Nano Server][20]               | 2022, 2019                   | x64                | [Lifecycle][21]    |
-[Windows][22]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 20H2 (E), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][23]    |
-[Windows Server][24]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86           | [Lifecycle][25]    |
-[Windows Server Core][26]       | 23H2, 2022, 2019, 2016, 2012 | x64, x86           | [Lifecycle][27]    |
+[Nano Server][23]               | 2022, 2019                   | x64                | [Lifecycle][24]    |
+[Windows][25]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 20H2 (E), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][26]    |
+[Windows Server][27]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86           | [Lifecycle][28]    |
+[Windows Server Core][29]       | 23H2, 2022, 2019, 2016, 2012 | x64, x86           | [Lifecycle][30]    |
 
 Notes:
 
 * Windows: The x64 emulator is supported on Windows 11 Arm64.
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
-[20]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
-[21]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[22]: https://www.microsoft.com/windows/
-[23]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
-[24]: https://www.microsoft.com/windows-server
-[25]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[26]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
-[27]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[23]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[24]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[25]: https://www.microsoft.com/windows/
+[26]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
+[27]: https://www.microsoft.com/windows-server
+[28]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[29]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[30]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
 
 ## Linux compatibility
 
@@ -122,6 +128,10 @@ Alpine                          | 3.12                         | [2022-05-01](ht
 Android                         | 11                           | 2024-02-05         |
 Android                         | 10                           | 2023-03-06         |
 Android                         | 9                            | [2022-01-01](https://developer.android.com/about/versions/pie) |
+CentOS                          | 7                            | [2024-06-30](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.2009) |
+CentOS                          | 8                            | [2021-12-31](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS8.2111) |
+CentOS Stream                   | 8                            | [2024-05-31](http://web.archive.org/web/20230417021744/https://wiki.centos.org/Manuals/ReleaseNotes/CentOSStream) |
+CentOS Stream                   | 7                            | -                  |
 Debian                          | 10                           | [2022-09-10](https://www.debian.org/News/2022/20220910) |
 Fedora                          | 38                           | 2024-05-21         |
 Fedora                          | 37                           | 2023-12-05         |
