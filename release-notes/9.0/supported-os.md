@@ -43,7 +43,7 @@ Notes:
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][6]                     | 3.20, 3.19                   | Arm32, Arm64, x64  | [Lifecycle][7]     |
-[CentOS Stream][8]              | 9                            | Arm32, s390x, x64  |
+[CentOS Stream][8]              | 9                            | Arm64, s390x, x64  |
 [Debian][9]                     | 12                           | Arm32, Arm64, x64  | [Lifecycle][10]    |
 [Fedora][11]                    | 40                           | Arm32, Arm64, x64  | [Lifecycle][12]    |
 [openSUSE Leap][13]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][14]    |
