@@ -43,12 +43,13 @@ Notes:
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][6]                     | 3.20, 3.19, 3.18, 3.17       | Arm32, Arm64, x64  | [Lifecycle][7]     |
-[Debian][8]                     | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][9]     |
-[Fedora][10]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][11]    |
-[openSUSE Leap][12]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][13]    |
-[Red Hat Enterprise Linux][14]  | 9, 8                         | Arm64, ppc64le, s390x, x64 | [Lifecycle][15]    |
-[SUSE Enterprise Linux][16]     | 15.5                         | Arm64, x64         | [Lifecycle][17]    |
-[Ubuntu][18]                    | 24.04, 23.10, 22.04, 20.04   | Arm32, Arm64, x64  | [Lifecycle][19]    |
+[CentOS Stream][8]              | 9                            | Arm32, s390x, x64  |
+[Debian][9]                     | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][10]    |
+[Fedora][11]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][12]    |
+[openSUSE Leap][13]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][14]    |
+[Red Hat Enterprise Linux][15]  | 9, 8                         | Arm64, ppc64le, s390x, x64 | [Lifecycle][16]    |
+[SUSE Enterprise Linux][17]     | 15.5                         | Arm64, x64         | [Lifecycle][18]    |
+[Ubuntu][19]                    | 24.04, 23.10, 22.04, 20.04   | Arm32, Arm64, x64  | [Lifecycle][20]    |
 
 Notes:
 
@@ -56,41 +57,42 @@ Notes:
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
-[8]: https://www.debian.org/
-[9]: https://wiki.debian.org/DebianReleases
-[10]: https://fedoraproject.org/
-[11]: https://fedoraproject.org/wiki/End_of_life
-[12]: https://www.opensuse.org/
-[13]: https://en.opensuse.org/Lifetime
-[14]: https://access.redhat.com/
-[15]: https://access.redhat.com/support/policy/updates/errata/
-[16]: https://www.suse.com/
-[17]: https://www.suse.com/lifecycle/
-[18]: https://ubuntu.com/
-[19]: https://wiki.ubuntu.com/Releases
+[8]: https://centos.org/
+[9]: https://www.debian.org/
+[10]: https://wiki.debian.org/DebianReleases
+[11]: https://fedoraproject.org/
+[12]: https://fedoraproject.org/wiki/End_of_life
+[13]: https://www.opensuse.org/
+[14]: https://en.opensuse.org/Lifetime
+[15]: https://access.redhat.com/
+[16]: https://access.redhat.com/support/policy/updates/errata/
+[17]: https://www.suse.com/
+[18]: https://www.suse.com/lifecycle/
+[19]: https://ubuntu.com/
+[20]: https://wiki.ubuntu.com/Releases
 
 ## Windows
 
 OS                              | Version                      | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
-[Nano Server][20]               | 2022, 2019                   | x64                | [Lifecycle][21]    |
-[Windows][22]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][23]    |
-[Windows Server][24]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86           | [Lifecycle][25]    |
-[Windows Server Core][26]       | 23H2, 2022, 2019, 2016, 2012 | x64, x86           | [Lifecycle][27]    |
+[Nano Server][21]               | 2022, 2019                   | x64                | [Lifecycle][22]    |
+[Windows][23]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][24]    |
+[Windows Server][25]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86           | [Lifecycle][26]    |
+[Windows Server Core][27]       | 23H2, 2022, 2019, 2016, 2012 | x64, x86           | [Lifecycle][28]    |
 
 Notes:
 
 * Windows: The x64 emulator is supported on Windows 11 Arm64.
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
-[20]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
-[21]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[22]: https://www.microsoft.com/windows/
-[23]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
-[24]: https://www.microsoft.com/windows-server
-[25]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[26]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
-[27]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[21]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[22]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[23]: https://www.microsoft.com/windows/
+[24]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
+[25]: https://www.microsoft.com/windows-server
+[26]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[27]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[28]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
 
 ## Linux compatibility
 

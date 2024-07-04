@@ -44,7 +44,7 @@ OS                              | Version                      | Architectures  
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][6]                     | 3.20, 3.19, 3.18, 3.17       | Arm32, Arm64, x64  | [Lifecycle][7]     |
 [CentOS][8]                     |                              | x64                | [Lifecycle][9]     |
-[CentOS Stream][10]             | 9                            | x64                |
+[CentOS Stream][10]             | 9                            | Arm32, s390x, x64  |
 [Debian][11]                    | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][12]    |
 [Fedora][13]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][14]    |
 [openSUSE Leap][15]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][16]    |
