@@ -55,8 +55,8 @@ In .NET MAUI apps, the delivery type can be specified with the `DeliveryType` at
 <MauiAsset Update="Resources\Raw\myvideo.mp4" AssetPack="myassetpack" DeliveryType="FastFollow" />
 ```
  
-- [Android Asset Packs](https://github.com/xamarin/xamarin-android/blob/main/Documentation/guides/AndroidAssetPacks.md)
-- [GitHub Release](https://github.com/xamarin/xamarin-android/releases/)
+- [Android Asset Packs](https://github.com/dotnet/android/blob/main/Documentation/guides/AndroidAssetPacks.md)
+- [GitHub Release](https://github.com/dotnet/android/releases/)
 
 ## .NET for iOS
 

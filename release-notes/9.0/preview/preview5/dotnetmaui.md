@@ -31,7 +31,7 @@ This release includes [Android API 35 Beta 2](https://developer.android.com/abou
 
 ### LLVM marshalled methods
 
-LLVM marshalled methods are now enabled by default in non-Blazor applications targeting Android. We have [noted a ~10% improvement in startup performance](https://github.com/xamarin/xamarin-android/pull/8925) in our test app. You can disable this in your project file.
+LLVM marshalled methods are now enabled by default in non-Blazor applications targeting Android. We have [noted a ~10% improvement in startup performance](https://github.com/dotnet/android/pull/8925) in our test app. You can disable this in your project file.
 
 ```xml
 <PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
@@ -50,7 +50,7 @@ Various fixes have been made when using full trimming to result in smaller appli
 </PropertyGroup>
 ```
 
-- [GitHub Release](https://github.com/xamarin/xamarin-android/releases/)
+- [GitHub Release](https://github.com/dotnet/android/releases/)
 
 ## .NET for iOS
 

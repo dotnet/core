@@ -17,7 +17,7 @@ The team is continuing work on core fundamentals of the .NET MAUI SDK to improve
 
 This release was focused on quality.
 
-- [GitHub Release](https://github.com/xamarin/xamarin-android/releases/)
+- [GitHub Release](https://github.com/dotnet/android/releases/)
 
 ## .NET for iOS
 
