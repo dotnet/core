@@ -6,7 +6,7 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 ## Android
 
-OS                              | Version                      | Architectures      | Lifecycle          |
+OS                              | Versions                     | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Android][0]                    | 14, 13, 12.1, 12             | Arm32, Arm64, x64  | [Lifecycle][1]     |
 
@@ -19,7 +19,7 @@ Notes:
 
 ## Apple
 
-OS                              | Version                      | Architectures      |
+OS                              | Versions                     | Architectures      |
 --------------------------------|------------------------------|--------------------|
 [iOS][2]                        | 17, 16, 15                   | Arm64              |
 [iPadOS][3]                     | 17, 16, 15                   | Arm64              |
@@ -40,15 +40,16 @@ Notes:
 
 ## Linux
 
-OS                              | Version                      | Architectures      | Lifecycle          |
+OS                              | Versions                     | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][6]                     | 3.20, 3.19                   | Arm32, Arm64, x64  | [Lifecycle][7]     |
-[Debian][8]                     | 12                           | Arm32, Arm64, x64  | [Lifecycle][9]     |
-[Fedora][10]                    | 40                           | Arm32, Arm64, x64  | [Lifecycle][11]    |
-[openSUSE Leap][12]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][13]    |
-[Red Hat Enterprise Linux][14]  | 9, 8                         | Arm64, ppc64le, s390x, x64 | [Lifecycle][15]    |
-[SUSE Enterprise Linux][16]     | 15.5                         | Arm64, x64         | [Lifecycle][17]    |
-[Ubuntu][18]                    | 24.04, 22.04, 20.04          | Arm32, Arm64, x64  | [Lifecycle][19]    |
+[CentOS Stream][8]              | 9                            | Arm64, ppc64le, s390x, x64 | [Lifecycle][9]     |
+[Debian][10]                    | 12                           | Arm32, Arm64, x64  | [Lifecycle][11]    |
+[Fedora][12]                    | 40                           | Arm32, Arm64, x64  | [Lifecycle][13]    |
+[openSUSE Leap][14]             | 15.6, 15.5                   | Arm64, x64         | [Lifecycle][15]    |
+[Red Hat Enterprise Linux][16]  | 9, 8                         | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]    |
+[SUSE Enterprise Linux][18]     | 15.5                         | Arm64, x64         | [Lifecycle][19]    |
+[Ubuntu][20]                    | 24.04, 22.04, 20.04          | Arm32, Arm64, x64  | [Lifecycle][21]    |
 
 Notes:
 
@@ -56,41 +57,43 @@ Notes:
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
-[8]: https://www.debian.org/
-[9]: https://wiki.debian.org/DebianReleases
-[10]: https://fedoraproject.org/
-[11]: https://fedoraproject.org/wiki/End_of_life
-[12]: https://www.opensuse.org/
-[13]: https://en.opensuse.org/Lifetime
-[14]: https://access.redhat.com/
-[15]: https://access.redhat.com/support/policy/updates/errata/
-[16]: https://www.suse.com/
-[17]: https://www.suse.com/lifecycle/
-[18]: https://ubuntu.com/
-[19]: https://wiki.ubuntu.com/Releases
+[8]: https://centos.org/
+[9]: https://www.centos.org/cl-vs-cs/
+[10]: https://www.debian.org/
+[11]: https://wiki.debian.org/DebianReleases
+[12]: https://fedoraproject.org/
+[13]: https://fedoraproject.org/wiki/End_of_life
+[14]: https://www.opensuse.org/
+[15]: https://en.opensuse.org/Lifetime
+[16]: https://access.redhat.com/
+[17]: https://access.redhat.com/support/policy/updates/errata/
+[18]: https://www.suse.com/
+[19]: https://www.suse.com/lifecycle/
+[20]: https://ubuntu.com/
+[21]: https://wiki.ubuntu.com/Releases
 
 ## Windows
 
-OS                              | Version                      | Architectures      | Lifecycle          |
+OS                              | Versions                     | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
-[Nano Server][20]               | 2022, 2019                   | x64                | [Lifecycle][21]    |
-[Windows][22]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][23]    |
-[Windows Server][24]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86           | [Lifecycle][25]    |
-[Windows Server Core][26]       | 23H2, 2022, 2019, 2016       | x64, x86           | [Lifecycle][27]    |
+[Nano Server][22]               | 2022, 2019                   | x64                | [Lifecycle][23]    |
+[Windows][24]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86    | [Lifecycle][25]    |
+[Windows Server][26]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86           | [Lifecycle][27]    |
+[Windows Server Core][28]       | 23H2, 2022, 2019, 2016       | x64, x86           | [Lifecycle][29]    |
 
 Notes:
 
 * Windows: The x64 emulator is supported on Windows 11 Arm64.
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
-[20]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
-[21]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[22]: https://www.microsoft.com/windows/
-[23]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
-[24]: https://www.microsoft.com/windows-server
-[25]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[26]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[22]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[23]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[24]: https://www.microsoft.com/windows/
+[25]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
+[26]: https://www.microsoft.com/windows-server
 [27]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[28]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[29]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
 
 ## Linux compatibility
 
