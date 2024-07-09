@@ -5,7 +5,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Fingerprinting of static web assets](#fingerprinting-of-static-web-assets)
 - [Improved distributed tracing for SignalR](#improved-distributed-tracing-for-signalr)
 - [Enhancements to Microsoft.AspNetCore.OpenAPI](#enhancements-to-microsoftaspnetcoreopenapi)
-- [Analyzer to warn when `[Authorize]` is overridden by `[AllowAnymous]`](#analyzer-to-warn-when-authorize-is-overridden-by-allowanymous-from-farther-away)
+- [Analyzer to warn when `[Authorize]` is overridden by `[AllowAnonymous]`](#analyzer-to-warn-when-authorize-is-overridden-by-allowanonymous-from-farther-away)
 - [`ComponentPlatform` renamed to `RendererInfo`](#componentplatform-renamed-to-rendererinfo)
 - [Split large HTTP/2 headers across frames](#split-large-http2-headers-across-frames)
 
@@ -226,7 +226,7 @@ class Todo
 }
 ```
 
-## Analyzer to warn when `[Authorize]` is overridden by `[AllowAnymous]` from farther away
+## Analyzer to warn when `[Authorize]` is overridden by `[AllowAnonymous]` from farther away
 
 The `[Authorize]` attribute is commonly used on controllers and actions to require authorization. The `[AllowAnonymous]` attribute can then be used to allow anonymous access when authorization would otherwise be required. However, once anonymous access has been enabled, applying the `[Authorize]` attribute does not then reenable authorization. Incorrectly assuming that applying `[Authorize]` closer to an action than [AllowAnonymous] will still force authorization can lead to possible security bugs. For example:
 
