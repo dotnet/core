@@ -13,6 +13,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2024/06/09 | [6.0.32](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.32/6.0.32.md) |
 | 2024/05/28 | [6.0.31](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.31/6.0.31.md) |
 | 2024/05/14 | [6.0.30](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.30/6.0.30.md) |
 | 2024/04/09 | [6.0.29](https://github.com/dotnet/core/blob/main/release-notes/6.0/6.0.29/6.0.29.md) |

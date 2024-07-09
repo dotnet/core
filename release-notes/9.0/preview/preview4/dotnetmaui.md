@@ -34,7 +34,7 @@ This release introduces .NET bindings for Beta 1 of Android 15 codenamed "Vanill
 <TargetFramework>net9.0-android35</TargetFramework>
 ```
 
-Additional release information can be found on [GitHub releases](https://github.com/xamarin/xamarin-android/releases/).
+Additional release information can be found on [GitHub releases](https://github.com/dotnet/android/releases/).
 
 ## .NET for iOS
 
