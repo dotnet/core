@@ -1,194 +1,308 @@
-# ASP.NET Core in .NET 9 Preview 5 - Release Notes
+# ASP.NET Core updates in .NET 9 Preview 6
 
 Here's a summary of what's new in ASP.NET Core in this preview release:
 
-- [Optimized static web asset delivery](#optimized-static-web-asset-delivery)
-- [Improved Blazor Server reconnection experience](#improved-blazor-server-reconnection-experience)
-- [Detect the current component render mode at runtime](#detect-the-current-component-render-mode-at-runtime)
-- [Simplified authentication state serialization for Blazor Web Apps](#simplified-authentication-state-serialization-for-blazor-web-apps)
-- [New .NET MAUI Blazor Hybrid and Web solution template](#new-net-maui-blazor-hybrid-and-web-solution-template)
+- [Fingerprinting of static web assets](#fingerprinting-of-static-web-assets)
+- [Improved distributed tracing for SignalR](#improved-distributed-tracing-for-signalr)
+- [Enhancements to Microsoft.AspNetCore.OpenAPI](#enhancements-to-microsoftaspnetcoreopenapi)
+- [Analyzer to warn when `[Authorize]` is overridden by `[AllowAnymous]`](#analyzer-to-warn-when-authorize-is-overridden-by-allowanymous-from-farther-away)
+- [`ComponentPlatform` renamed to `RendererInfo`](#componentplatform-renamed-to-rendererinfo)
+- [Split large HTTP/2 headers across frames](#split-large-http2-headers-across-frames)
 
-ASP.NET Core updates in .NET 9 Preview 5:
+ASP.NET Core updates in .NET 9 Preview 6:
 
 - [What's new in ASP.NET Core in .NET 9](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0) documentation.
 - [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/9.0#aspnet-core)
 - [Roadmap](https://aka.ms/aspnet/roadmap)
 
-.NET 9 Preview 5:
+.NET 9 Preview 6:
 
-- [Discussion](https://aka.ms/dotnet/9/preview5)
+- [Discussion](https://aka.ms/dotnet/9/preview6)
 - [Release notes](./README.md)
 
-## Optimized static web asset delivery
+## Fingerprinting of static web assets
 
-A big part of delivering performant web apps involves optimizing static web asset delivery to the browser. This process entails many aspects, including:
+ASP.NET Core will now generate fingerprinted versions of static web assets when the app is published. The fingerprinted static web assets contain a unique hash of their content in their filename, so that they never clash with earlier versions of the file. ASP.NET Core then exposes the fingerprinted static web assets as endpoints with appropriate cache headers to ensure the content is cached for a long time. Fingerprinting static web assets helps ensure that stale assets aren't used and enables improved caching behavior for faster load times.
 
-- Using ETags and the Last-Modified header.
-- Setting up proper caching headers.
-- Serving compressed versions of the assets when possible.
+Use of fingerprinted static web assets in Blazor is enabled automatically. To enable using fingerprinted static web assets in MVC & Razor Pages apps, switch to use `MapStaticAssets` instead of `UseStaticFiles` and add a call to `WithStaticAssets`:
 
-To this effect, we're introducing a new API for handling static web assets called `MapStaticAssets`. `MapStaticAssets` works by combining work done at build or publish time to gather information about all the static web assets in your app with a runtime library that is capable of processing that information and using it to better serve the files to the browser.
+```diff
+app.MapStaticAssets();
 
-`MapStaticAssets` can replace `UseStaticFiles` in most situations. However, it's optimized for serving the assets that your app has knowledge of at build and publish time. This means that if your app serves assets from other locations on disk, or embedded resources, etc. then using `UseStaticFiles` is still the right choice.
+app.MapRazorPages()
++   .WithStaticAssets();
+```
 
+In Blazor, the fingerprinted static web assets can be consumed using the `Assets` property in `ComponentBase`, which exposes an indexer (case-sensitive) to resolve the fingerprinted URL for a given asset.
 
-What are the things that `MapStaticAssets` does that `UseStaticFiles` doesn't?
+```html
+<link rel="stylesheet" href="@Assets["app.css"]" />
+<link rel="stylesheet" href="@Assets["BlazorWeb-CSharp.styles.css"]" />
+```
 
-- **Build and publish time compression for all the assets.** Uncompressed static web assets are precompressed using gzip as part of the build and then also with brotli during publish to reduce the download size.
+In MVC & Razor Pages apps, the fingerprinted static web assets are consumed via the existing `script`, `image`, `link`, and URL tag helpers.
 
-- **Content based ETags.** The Etags for each resource are setup to be the Base64 encoded string of the SHA-256 hash of the content. This ensures that the browser doesn't have to download the file again unless its contents change.
+When importing JavaScript modules in a Blazor app, the new `ImportMap` component can be used to generate an appropriate import map for importing the fingerprinted JavaScript files:
 
-What are some of the gains that you can expect when using `MapStaticAssets`? Here are some examples:
+```razor
+<ImportMap />
+```
 
-Default Razor Pages template:
+In an MVC or Razor Pages app, you can generate the required import map using the existing `script` tag helper and an empty `script` block of type `importmap`:
 
-File | Original (KB) | Compressed (KB) | % Reduction
--- | -- | -- | --
-bootstrap.min.css | 163 | 17.5 | 89.26%
-jquery.js | 89.6 | 28 | 68.75%
-bootstrap.min.js | 78.5 | 20 | 74.52%
-**Total** | **331.1** | **65.5** | **80.22%**
+```razor
+<script type="importmap"></script>
+```
 
-[Fluent UI Blazor components](https://www.fluentui-blazor.net/):
+The project templates for Blazor, MVC, and Razor Pages have all been updated to use the fingerprinted static web assets and to generate the appropriate import map by default.
 
-File | Original | Compressed | % Reduction
--- | -- | -- | --
-fluent.js | 384 | 73 | 80.99%
-fluent.css | 94 | 11 | 88.30%
-**Total** | **478** | **84** | **82.43%**
+## Improved distributed tracing for SignalR
 
-[MudBlazor](https://mudblazor.com):
+SignalR now has an `ActivitySource` named "Microsoft.AspNetCore.SignalR.Server" that emits events for hub method calls. Every method is its own activity, so anything that emits an activity during the hub method call will be under the hub method activity. Hub method activities don't have a parent, so they won't be bundled under the long running SignalR connection.
 
-File | Original | Compressed | Reduction
--- | -- | -- | --
-MudBlazor.min.css | 541 | 37.5 | 93.07%
-MudBlazor.min.js | 47.4 | 9.2 | 80.59%
-**Total** | **588.4** | **46.7** | **92.06%**
+Here's how these new activities look in the the [.NET Aspire dashboard](https://learn.microsoft.com/dotnet/aspire/fundamentals/dashboard/overview?tabs=bash#standalone-mode):
 
-The best part is that the improvements happen automatically after switching to use `MapStaticAssets`. When you decide to bring in a new library or copy some new JS/CSS library to your project, you don't have to do anything. It'll get optimized as part of the build and served to the browser faster, which is especially important for mobile environments with lower bandwidth or spotty connections.
+![SignalR distributed tracing](./media/signalr-distributed-tracing.png)
 
-Even apps that currently use dynamic compression from the server can benefit from using `MapStaticAssets`. With `MapStaticAssets` there's no need for server specific configuration to enable compression. The compression ratio is also higher because you're able to spend extra time during the build process to ensure that the assets are as small as they can be. How much smaller? If we take MudBlazor as an example, IIS will compress the CSS bundle to around 90KB, while brotli with max settings will compress to 37KB.
+To try this out yourself, add the [OpenTelemetry](https://www.nuget.org/packages/OpenTelemetry.Extensions.Hosting) packages to your project:
 
+```xml
+<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
+<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+```
 
-## Improved Blazor Server reconnection experience
-
-A Blazor Server app (or a Blazor Web App using interactive server rendering) requires a real-time connection with the server in order to function. If this connection is lost, the app tries to reconnect.
-
-The following changes have been made to the default Blazor Server reconnection experience:
-
-- Reconnect timing now uses an exponential backoff strategy. The first several reconnection attempts happen in rapid succession, and then a delay gradually gets introduced between attempts. This behavior can be customized by specifying a function to compute the retry interval. For example:
-
-    ```js
-    Blazor.start({
-        circuit: {
-            reconnectionOptions: {
-            retryIntervalMilliseconds: (previousAttempts, maxRetries) => previousAttempts >= maxRetries ? null : previousAttempts * 1000,
-            },
-        },
-    });
-    ```
-
-- A reconnect attempt is immediate when the user navigates back to an app with a disconnected circuit. In this case, the automatic retry interval is ignored. This behavior especially improves the user experience when navigating to an app in a browser tab that has gone to sleep.
-- If a reconnection attempt reaches the server, but reconnection fails because the server had already released the circuit, a refresh occurs automatically. A manual refresh isn't needed if successful reconnection is likely.
-- The styling of the default reconnection UI has been modernized to be more friendly to end users.
-
-![New Blazor Server reconnection UI](./media/blazor-server-reconnection-ui.png)
-
-## Detect the current component render mode at runtime
-
-We've introduced an API to make it easier for component authors to detect:
-
-- Where is my component currently running?
-- Is my component running in an interactive environment?
-- What is the assigned render mode for my component?
-
-`ComponentBase` (and by extension your components) offers a new `Platform` property (soon to be renamed `RendererInfo`) that exposes `Name` and `IsInteractive` properties.
-
-- `Platform.Name` answers the question "Where is my component currently running?" and it can be `Static`, `Server`, `WebAssembly`, or `WebView`.
-- `Platform.IsInteractive` indicates whether the component is currently interactive (not `Static`).
-
-`ComponentBase` also exposes a new `AssignedRenderMode` property, which provides the `IComponentRenderMode` value defined in the component hierarchy (if any). This value is most useful during prerendering, as it lets you know how the component will render after prerendering so that you can render different content.
-
-For example, if you create a form component and the form is going to be rendered interactively, you might choose to disable the inputs during prerendering and then enable them when the component becomes interactive. Alternatively, if the component is not going to be rendered in an interactive context, you might render markup to support performing any action through regular web mechanics.
-
-## Simplified authentication state serialization for Blazor Web Apps
-
-New APIs make it easier to add authentication to an existing Blazor web app. When you create a new Blazor web app project with authentication using **Individual Accounts** and you enable WebAssembly-based interactivity, the project includes a custom `AuthenticationStateProvider` in both the server and client projects.
-
-These providers flow the user's authentication state to the browser. Authenticating on the server rather than the client allows the app to access authentication state during prerendering and before the WebAssembly runtime is initialized.
-
-The custom `AuthenticationStateProvider` implementations use the `PersistentComponentState` service to serialize the authentication state into HTML comments and then read it back from WebAssembly to create a new `AuthenticationState` instance. This works well if you've started from the Blazor web app project template and selected the **Individual Accounts** option, but it's a lot of code to implement yourself or copy if you're trying to add authentication to an existing project.
-
-There are now APIs that can be called in the server and client projects to add this functionality:
-
-* In the server project, use [`AddAuthenticationStateSerialization`](https://source.dot.net/#Microsoft.AspNetCore.Components.WebAssembly.Server/WebAssemblyRazorComponentsBuilderExtensions.cs,5557151694ca7c07) in `Program.cs` to add the necessary services to serialize the authentication state on the server.
-
-  ```csharp
-  builder.Services.AddRazorComponents()
-      .AddInteractiveWebAssemblyComponents()
-      .AddAuthenticationStateSerialization();
-  ```
-
-* In the client project, use [`AddAuthenticationStateDeserialization`](https://apisof.net/catalog/4a296157ae3e0f6f0c352bfb4a0c5d5a?) in `Program.cs` to add the necessary services to deserialize the authentication state in the browser.
-
-  ```csharp
-  builder.Services.AddAuthorizationCore();
-  builder.Services.AddCascadingAuthenticationState();
-  builder.Services.AddAuthenticationStateDeserialization();
-  ```
-
-By default, these APIs only serialize the server-side name and role claims for access in the browser. To include all claims, use [AuthenticationStateSerializationOptions](https://source.dot.net/#Microsoft.AspNetCore.Components.WebAssembly.Server/AuthenticationStateSerializationOptions.cs,f2703f443f0954f5) on the server:
+And then add the following code in startup:
 
 ```csharp
-builder.Services.AddRazorComponents()
-    .AddInteractiveWebAssemblyComponents()
-    .AddAuthenticationStateSerialization(options => options.SerializeAllClaims = true);
+// Set OTEL_EXPORTER_OTLP_ENDPOINT environment variable depending on where your OTEL endpoint is
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
+
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing =>
+    {
+        if (builder.Environment.IsDevelopment())
+        {
+            // We want to view all traces in development
+            tracing.SetSampler(new AlwaysOnSampler());
+        }
+
+        tracing.AddAspNetCoreInstrumentation();
+        tracing.AddSource("Microsoft.AspNetCore.SignalR.Server");
+    });
+
+builder.Services.ConfigureOpenTelemetryTracerProvider(tracing => tracing.AddOtlpExporter());
 ```
 
-The Blazor Web App project template has been updated to use these APIs.
+## Enhancements to Microsoft.AspNetCore.OpenApi
 
-## New .NET MAUI Blazor Hybrid and Web solution template
+### Completion enhancements and package install recommendations for OpenAPI package
 
-The new ".NET MAUI Blazor Hybrid and Web App" solution template makes it easier to create a .NET MAUI Blazor Hybrid app and a Blazor web app that share the same UI. This template shows how to create apps that target Android, iOS, Mac, Windows, and Web while maximizing code reuse.
+ASP.NET Core's OpenAPI support ships in an independent package outside of the shared framework. This means that it is difficult for users to independently discover built-in OpenAPI support by leveraging code-completion aids like IntelliSense. In .NET 9 Preview 6, we're shipping a completion provider/codefixer combination to help users discover built-in OpenAPI support more easily.
 
+When a user is typing a statement where an OpenAPI-related API is available, the completion provider will provide a recommendation for said API. For example, in the screenshots below, completions for `AddOpenApi` and `MapOpenApi` are provided when a user is entering an invocation statement on a supported type, such as `IEndpointConventionBuilder`.
 
-Key features of this template include:
+![OpenAPI completion provider](./media/openapi-completion-provider.png)
 
-* The ability to choose a Blazor interactive render mode for the web app.
-* Automatic creation of the appropriate projects, including a Blazor Web App and a .NET MAUI Blazor Hybrid app.
-* The created projects are wired up to use a shared Razor Class Library that contains all of the UI components and pages.
-* Sample code that demonstrates how to use service injection to provide different interface implementations for the Blazor Hybrid and Blazor Web App. In .NET 8 this is a manual process documented in [Build a .NET MAUI Blazor Hybrid app with a Blazor Web App](https://aka.ms/maui-blazor-web).
+When the completion is accepted and the Microsoft.AspNetCore.OpenApi package is not installed, a codefixer will provide a shortcut for automatically installing the dependency in the project.
 
-To get started, install the [.NET 9 SDK](https://get.dot.net/9) (Preview 5 or later) then install the .NET MAUI workload, which contains the template.
+![OpenAPI code fix](./media/openapi-code-fix.png)
+
+### Support for `[Required]` and `[DefaultValue]` attributes on parameters or properties
+
+When `[Required]` and `[DefaultValue]` attributes are applied on parameters or properties within complex types, the OpenAPI implementation will map these to the `required` and `default` properties in the OpenAPI document associated with the parameter or type schema.
+
+For example, the following API will produce the accompanying schema for the `Todo` type.
+
+```csharp
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+var builder = WebApplication.CreateBuilder();
+
+builder.Services.AddOpenApi();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.MapPost("/todos", (Todo todo) => { });
+
+app.Run();
+
+class Todo
+{
+    public int Id { get; init; }
+    public required string Title { get; init; }
+    [DefaultValue("A new todo")]
+    public required string Description { get; init; }
+    [Required]
+    public DateTime CreatedOn { get; init; }
+}
+```
+
+```json
+{
+    "required": [
+        "title",
+        "description",
+        "createdOn"
+    ],
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "format": "int32"
+        },
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string",
+            "default": "A new todo"
+        },
+        "createdOn": {
+            "type": "string",
+            "format": "date-time"
+        }
+    }
+}
+```
+
+### Support for schema transformers on OpenAPI document
+
+In .NET 9 Preview 6, built-in OpenAPI support ships with support for schema transformers that can be used to modify schemas generated by System.Text.Json and the OpenAPI implementation. Like document and operation transformers, schema transformers can be registered on the `OpenApiOptions` object. For example, the code sample below demonstrates using a schema transformer to add an example to a type's schema.
+
+```csharp
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.OpenApi.Any;
+
+var builder = WebApplication.CreateBuilder();
+
+builder.Services.AddOpenApi(options =>
+{
+    options.UseSchemaTransformer((schema, context, cancellationToken) =>
+    {
+        if (context.Type == typeof(Todo))
+        {
+            schema.Example = new OpenApiObject
+            {
+                ["id"] = new OpenApiInteger(1),
+                ["title"] = new OpenApiString("A short title"),
+                ["description"] = new OpenApiString("A long description"),
+                ["createdOn"] = new OpenApiDateTime(DateTime.Now)
+            };
+        }
+        return Task.CompletedTask;
+    });
+});
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.MapPost("/todos", (Todo todo) => { });
+
+app.Run();
+
+class Todo
+{
+    public int Id { get; init; }
+    public required string Title { get; init; }
+    [DefaultValue("A new todo")]
+    public required string Description { get; init; }
+    [Required]
+    public DateTime CreatedOn { get; init; }
+}
+```
+
+## Analyzer to warn when `[Authorize]` is overridden by `[AllowAnymous]` from farther away
+
+The `[Authorize]` attribute is commonly used on controllers and actions to require authorization. The `[AllowAnonymous]` attribute can then be used to allow anonymous access when authorization would otherwise be required. However, once anonymous access has been enabled, applying the `[Authorize]` attribute does not then reenable authorization. Incorrectly assuming that applying `[Authorize]` closer to an action than [AllowAnonymous] will still force authorization can lead to possible security bugs. For example:
+
+```csharp
+[AllowAnonymous]
+public class MyController
+{
+    [Authorize] // Possible bug
+    public IActionResult Privacy() => null;
+}
+
+[AllowAnonymous]
+public class MyControllerAnon : ControllerBase
+{
+}
+
+[Authorize] // Possible bug
+public class MyControllerInherited : MyControllerAnon
+{
+}
+
+public class MyControllerInherited2 : MyControllerAnon
+{
+    [Authorize] // Possible bug
+    public IActionResult Privacy() => null;
+}
+
+[AllowAnonymous]
+[Authorize] // Possible bug
+public class MyControllerMultiple : ControllerBase
+{
+}
+```
+
+We've introduced an analyzer that will highlight instances like these where a closer `[Authorize]` attribute gets overridden by an `[AllowAnonymous]` attribute that is farther away from the action and emit a warning pointing to the overridden `[Authorize]` attribute with the following message:
 
 ```console
-dotnet workload install maui
+ASP0026 [Authorize] overridden by [AllowAnonymous] from farther away
 ```
 
-You can then create the template from the commandline like this:
+The correct action to take if you see this warning depends on the intention behind the attributes. The further `[AllowAnonymous]` attribute should be removed if it's unintentionally exposing the endpoint to anonymous users. If the `[AllowAnonymous]` attribute was intended to override a closer `[Authorize]` attribute, you can repeat the `[AllowAnonymous]` attribute after the `[Authorize]` attribute to clarify intent.
 
-```console
-dotnet new maui-blazor-web -n AllTheTargets
+```csharp
+[AllowAnonymous]
+public class MyController
+{
+    // Specifying AuthenticationSchemes can still be useful for endpoints that allow but don't require authenticated users.
+    // This produces no warning because the second "closer" [AllowAnonymous] clarifies that [Authorize] is intentionally overridden.
+    [Authorize(AuthenticationSchemes = "Cookies")]
+    [AllowAnonymous]
+    public IActionResult Privacy() => null;
+}
 ```
 
-Alternatively, you can use the template from Visual Studio:
+## `ComponentPlatform` renamed to `RendererInfo`
 
+The `ComponentPlatform` class was renamed to `RendererInfo`. The `Platform` properties on `ComponentBase` and `RenderHandle` were also renamed to `RendererInfo`.
 
-![Blazor Hybrid and Web App template in Visual Studio](./media/blazor-hybrid-and-web-template-vs.png)
+## Split large HTTP/2 headers across frames
 
-> **Note:** Currently Blazor Hybrid apps throw an exception if the Blazor rendering modes are defined at the page/component level. For more information, see [#51235](https://github.com/dotnet/aspnetcore/issues/51235).
+Kestrel will now split HTTP/2 headers that are too large for a single HEADER or CONTINUATION frame.
+
+Thank you [@ladeak](https://github.com/ladeak) for this contribution!
 
 ## Community contributors
 
-- [@ranma42](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3Aranma42)
-- [@andrewjsaid](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3Aandrewjsaid)
-- [@ctyar](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3Actyar)
-- [@GiovanniBraconi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3AGiovanniBraconi)
-- [@AhmedKabbary](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3AAhmedKabbary)
-- [@ascott18](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3Aascott18)
-- [@xt0rted](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3Axt0rted)
-- [@Haidar0096](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3AHaidar0096)
-- [@MattyLeslie](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3AMattyLeslie)
-- [@martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview5+author%3Amartincostello)
-
 Thank you contributors! ❤️
+
+- [@hamidrezahy](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Ahamidrezahy)
+- [@joegoldman2](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Ajoegoldman2)
+- [@k3min](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Ak3min)
+- [@kendaleiv](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Akendaleiv)
+- [@ladeak](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Aladeak)
+- [@martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Amartincostello)
+- [@MatthiasHuygelen](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3AMatthiasHuygelen)
+- [@MrXhh](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3AMrXhh)
+- [@paulomorgado](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Apaulomorgado)
+- [@petterh](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Apetterh)
+- [@tmds](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A9.0-preview6+author%3Atmds)
