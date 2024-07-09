@@ -13,6 +13,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2024/07/09 | [8.0.7](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.7/8.0.7.md) |
 | 2024/06/11 | [8.0.302 SDK](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.6/8.0.302.md) |
 | 2024/05/28 | [8.0.6](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.6/8.0.6.md) |
 | 2024/05/14 | [8.0.5](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.5/8.0.5.md) |
