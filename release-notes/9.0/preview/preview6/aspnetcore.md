@@ -60,7 +60,7 @@ The project templates for Blazor, MVC, and Razor Pages have all been updated to 
 
 SignalR now has an `ActivitySource` named "Microsoft.AspNetCore.SignalR.Server" that emits events for hub method calls. Every method is its own activity, so anything that emits an activity during the hub method call will be under the hub method activity. Hub method activities don't have a parent, so they won't be bundled under the long running SignalR connection.
 
-Here's how these new activities look in the the [.NET Aspire dashboard](https://learn.microsoft.com/dotnet/aspire/fundamentals/dashboard/overview?tabs=bash#standalone-mode):
+Here's how these new activities look in the [.NET Aspire dashboard](https://learn.microsoft.com/dotnet/aspire/fundamentals/dashboard/overview?tabs=bash#standalone-mode):
 
 ![SignalR distributed tracing](./media/signalr-distributed-tracing.png)
 
