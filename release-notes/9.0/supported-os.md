@@ -53,7 +53,7 @@ OS                              | Versions                     | Architectures  
 
 Notes:
 
-* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
+* Red Hat Enterprise Linux: RHEL-compatible distributions are supported per [.NET Support](../../support.md).
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/

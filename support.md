@@ -12,9 +12,18 @@
 
 ## Community support
 
-Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core).
+Community support is available on GitHub, such as at [dotnet/core](https://github.com/dotnet/core) and [.NET repos](./Documentation/core-repos.md).
 
 Community builds are available for [FreeBSD](https://wiki.freebsd.org/.NET), [Linux](linux.md), and [macOS](https://formulae.brew.sh/cask/dotnet-sdk)
+
+### Downstream derivative support
+
+There are many [Linux distributions](https://en.wikipedia.org/wiki/List_of_Linux_distributions). In general, a downstream distribution of a [supported distribution](./os-lifecycle-policy.md) will also be supported.
+
+Supported derivatives:
+
+* RHEL-family: AlmaLinux, CentOS Stream, Oracle Linux, and Rocky Linux.
+* Ubuntu family: Linux Mint
 
 ## Commercial support
 

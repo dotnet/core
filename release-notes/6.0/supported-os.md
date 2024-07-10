@@ -43,7 +43,7 @@ Notes:
 OS                              | Versions                     | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][6]                     | 3.20, 3.19, 3.18, 3.17       | Arm32, Arm64, x64  | [Lifecycle][7]     |
-[CentOS][8]                     | [None](#out-of-support-os-versions) | x64                | [Lifecycle][9]     |
+[CentOS][8]                     | [None][OOS]                  | x64                | [Lifecycle][9]     |
 [CentOS Stream][10]             | 9                            | Arm64, s390x, x64  | [Lifecycle][11]    |
 [Debian][12]                    | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][13]    |
 [Fedora][14]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][15]    |
@@ -55,7 +55,7 @@ OS                              | Versions                     | Architectures  
 Notes:
 
 * CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
-* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
+* Red Hat Enterprise Linux: RHEL-compatible distributions are supported per [.NET Support](../../support.md).
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
@@ -147,8 +147,8 @@ macOS                           | 10.15                        | [2022-09-12](ht
 Nano Server                     | 20H2                         | [2022-08-09](https://learn.microsoft.com/lifecycle/announcements/windows-server-20h2-retiring) |
 Nano Server                     | 2004                         | [2021-12-14](https://learn.microsoft.com/lifecycle/announcements/windows-server-version-2004-end-of-servicing) |
 openSUSE Leap                   | 15.4                         | 2023-12-07         |
-openSUSE Leap                   | 15.3                         | 2022-12-31         |
-openSUSE Leap                   | 15.2                         | 2022-01-04         |
+openSUSE Leap                   | 15.3                         | [2022-12-31](https://web.archive.org/web/20230521063245/https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/15.3/) |
+openSUSE Leap                   | 15.2                         | [2022-01-04](https://web.archive.org/web/20230529015218/https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/15.2/) |
 SUSE Enterprise Linux           | 15.4                         | 2023-12-31         |
 SUSE Enterprise Linux           | 15.3                         | 2022-12-31         |
 SUSE Enterprise Linux           | 15.2                         | 2021-12-31         |
@@ -176,3 +176,5 @@ Windows Server                  | 2004                         | [2021-12-14](ht
 Windows Server Core             | 20H2                         | [2022-08-09](https://learn.microsoft.com/lifecycle/announcements/windows-server-20h2-retiring) |
 Windows Server Core             | 1607                         | [2022-01-11](https://learn.microsoft.com/virtualization/windowscontainers/deploy-containers/base-image-lifecycle) |
 Windows Server Core             | 2004                         | [2021-12-14](https://learn.microsoft.com/lifecycle/announcements/windows-server-version-2004-end-of-servicing) |
+
+[OOS]: #out-of-support-os-versions
