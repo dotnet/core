@@ -452,7 +452,7 @@ The following example shows a new `String.ToLowerInvariant` overload using this 
 
 ```csharp
 public static string ToLowerInvariant(ReadOnlySpan<char> input) =>
-    string.Create(span.Length, input, static (stringBuffer, input) => span.ToLowerInvariant(stringBuffer));
+    string.Create(input.Length, input, static (stringBuffer, input) => input.ToLowerInvariant(stringBuffer));
 ```
 
 ## Collection lookups with spans
