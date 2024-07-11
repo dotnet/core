@@ -20,7 +20,7 @@ Community builds are available for [FreeBSD](https://wiki.freebsd.org/.NET), [Li
 
 There are many [Linux distributions](https://en.wikipedia.org/wiki/List_of_Linux_distributions). In general, a downstream distribution of a [supported distribution](./os-lifecycle-policy.md) will also be supported.
 
-Supported derivatives:
+The following derivatives are supported, for example:
 
 * RHEL-family: AlmaLinux, CentOS Stream, Oracle Linux, and Rocky Linux.
 * Ubuntu family: Linux Mint
