@@ -55,7 +55,7 @@ OS                              | Versions                     | Architectures  
 Notes:
 
 * CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
-* Red Hat Enterprise Linux: RHEL-compatible distributions are supported per [.NET Support](../../support.md).
+* Red Hat Enterprise Linux: RHEL-compatible derivatives are supported per [.NET Support](../../support.md).
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
@@ -129,7 +129,6 @@ Android                         | 10                           | 2023-03-06     
 CentOS                          | 7                            | [2024-06-30](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.2009) |
 CentOS                          | 8                            | [2021-12-31](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS8.2111) |
 CentOS Stream                   | 8                            | [2024-05-31](http://web.archive.org/web/20230417021744/https://wiki.centos.org/Manuals/ReleaseNotes/CentOSStream) |
-CentOS Stream                   | 7                            | -                  |
 Debian                          | 10                           | [2022-09-10](https://www.debian.org/News/2022/20220910) |
 Fedora                          | 38                           | 2024-05-21         |
 Fedora                          | 37                           | 2023-12-05         |
