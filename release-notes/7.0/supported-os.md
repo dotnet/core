@@ -1,5 +1,7 @@
 # .NET 7 - Supported OS versions
 
+Last updated: 2024-07-11
+
 [.NET 7](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
