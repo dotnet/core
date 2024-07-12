@@ -21,52 +21,66 @@
 | 2024/02/13 | [9.0.0 Preview 1](preview/preview1/README.md) |
 
 ### .NET Libraries
-* [Preview 1](preview/preview1/libraries.md)
-* Preview 2: No release notes
-* [Preview 3](preview/preview3/libraries.md)
-* [Preview 4](preview/preview4/libraries.md)
-* [Preview 5](preview/preview5/libraries.md)
+
+* [What's new in .NET 9 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview#net-libraries)
 * [Preview 6](preview/preview6/libraries.md)
+* [Preview 5](preview/preview5/libraries.md)
+* [Preview 4](preview/preview4/libraries.md)
+* [Preview 3](preview/preview3/libraries.md)
+* Preview 2: No release notes
+* [Preview 1](preview/preview1/libraries.md)
 
 ### .NET Runtime
-* [Preview 1](preview/preview1/runtime.md)
-* [Preview 2](preview/preview2/runtime.md)
-* [Preview 3](preview/preview3/runtime.md)
-* [Preview 4](preview/preview4/runtime.md)
-* Preview 5: No release notes
+
+* [What's new in the .NET 9 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/runtime)
 * [Preview 6](preview/preview6/runtime.md)
+* Preview 5: No release notes
+* [Preview 4](preview/preview4/runtime.md)
+* [Preview 3](preview/preview3/runtime.md)
+* [Preview 2](preview/preview2/runtime.md)
+* [Preview 1](preview/preview1/runtime.md)
 
 ### .NET SDK
-* [Preview 1](preview/preview1/sdk.md)
-* [Preview 2](preview/preview2/sdk.md)
-* [Preview 3](preview/preview3/sdk.md)
-* Preview 4: No release notes
-* Preview 5: No release notes
-* [Preview 6](preview/preview6/sdk.md)
 
-### C#
+* [What's new in the SDK for .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/sdk)
+* [Preview 6](preview/preview6/sdk.md)
+* Preview 5: No release notes
+* Preview 4: No release notes
+* [Preview 3](preview/preview3/sdk.md)
+* [Preview 2](preview/preview2/sdk.md)
+* [Preview 1](preview/preview1/sdk.md)
+
+### C\#
+
+* [What's new in C# 13](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-13)
 * [Preview 6](preview/preview6/csharp.md)
 
 ### ASP.NET Core
-* [Preview 1](preview/preview1/aspnetcore.md)
-* [Preview 2](preview/preview2/aspnetcore.md)
-* [Preview 3](preview/preview3/aspnetcore.md)
-* [Preview 4](preview/preview4/aspnetcore.md)
-* [Preview 5](preview/preview5/aspnetcore.md)
+
+* [What's new in ASP.NET Core 9.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0)
 * [Preview 6](preview/preview6/aspnetcore.md)
+* [Preview 5](preview/preview5/aspnetcore.md)
+* [Preview 4](preview/preview4/aspnetcore.md)
+* [Preview 3](preview/preview3/aspnetcore.md)
+* [Preview 2](preview/preview2/aspnetcore.md)
+* [Preview 1](preview/preview1/aspnetcore.md)
 
 ### .NET MAUI
-* [Preview 1](preview/preview1/dotnetmaui.md)
-* [Preview 2](preview/preview2/dotnetmaui.md)
-* [Preview 3](preview/preview3/dotnetmaui.md)
-* [Preview 4](preview/preview4/dotnetmaui.md)
-* [Preview 5](preview/preview5/dotnetmaui.md)
+
+* [What's new in .NET MAUI for .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9)
 * [Preview 6](preview/preview6/dotnetmaui.md)
+* [Preview 5](preview/preview5/dotnetmaui.md)
+* [Preview 4](preview/preview4/dotnetmaui.md)
+* [Preview 3](preview/preview3/dotnetmaui.md)
+* [Preview 2](preview/preview2/dotnetmaui.md)
+* [Preview 1](preview/preview1/dotnetmaui.md)
 
 ### Entity Framework Core
-* [Preview 1](preview/preview1/efcoreanddata.md)
-* [Preview 2](preview/preview2/efcoreanddata.md)
-* [Preview 3](preview/preview3/efcoreanddata.md)
-* [Preview 4](preview/preview4/efcoreanddata.md)
-* [Preview 5](preview/preview5/efcoreanddata.md)
+
+* [What's new in EF Core 9](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/whatsnew)
 * Preview 6: Coming soon
+* [Preview 5](preview/preview5/efcoreanddata.md)
+* [Preview 4](preview/preview4/efcoreanddata.md)
+* [Preview 3](preview/preview3/efcoreanddata.md)
+* [Preview 2](preview/preview2/efcoreanddata.md)
+* [Preview 1](preview/preview1/efcoreanddata.md)
