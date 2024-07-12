@@ -41,7 +41,7 @@ Programs that are outside these limits are incredibly rare and would already ben
 
 ### BigMul APIs
 
-There are now dedicated `BigMul` APIs on `int`, `long`, `uint`, and `ulong` that directly return the next larger integer.
+There are now dedicated `BigMul` APIs on `int`, `long`, `uint`, and `ulong` that return the next larger [integer type](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/integral-numeric-types).
 
 The new APIs have the following shape.
 
