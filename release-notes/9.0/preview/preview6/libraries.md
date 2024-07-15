@@ -518,7 +518,7 @@ string encoded = Base64Url.EncodeToString(bytes);
 
 ## SocketsHttpHandler by default in HttpClientFactory
 
-`HttpClientFactory` creates `HttpClient` objects backed by `HttpClientHandler`, by default. `HttpClientHandler` is itself backed by `SocketsHttpHandler`, however, `SocketsHttpHandler` is much more configurable, including around connection lifetime management. `HttpClientFactory` now uses `SocketsHttpHandler` by default and will configure it to set limits on its connection lifetimes to match that of the rotation lifetime specified in the factory. THis change is in the 9.0 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package
+`HttpClientFactory` creates `HttpClient` objects backed by `HttpClientHandler`, by default. `HttpClientHandler` is itself backed by `SocketsHttpHandler`, however, `SocketsHttpHandler` is much more configurable, including around connection lifetime management. `HttpClientFactory` now uses `SocketsHttpHandler` by default and will configure it to set limits on its connection lifetimes to match that of the rotation lifetime specified in the factory. This change is in the 9.0 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package
 
 ## TLS resume with client certificates on Linux
 
