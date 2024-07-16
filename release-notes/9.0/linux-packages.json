@@ -94,6 +94,14 @@
             "commands": [
                 "sudo apk add"
             ],
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apk",
+                    "command-parts": ["add", "{packageName}"]
+                }
+            ],
             "releases": [
                 {
                     "name": "Alpine 3.20",
@@ -175,9 +183,18 @@
         },
         {
             "name": "Debian",
-            "commands": [
-                "sudo apt-get update",
-                "sudo apt-get install -y --no-install-recommends"
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["update"]
+                },
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
             ],
             "releases": [
                 {
@@ -260,9 +277,18 @@
         },
         {
             "name": "Ubuntu",
-            "commands": [
-                "sudo apt-get update",
-                "sudo apt-get install -y --no-install-recommends"
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["update"]
+                },
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
             ],
             "releases": [
                 {
