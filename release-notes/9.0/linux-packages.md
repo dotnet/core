@@ -1,120 +1,136 @@
-# .NET 9 Linux package dependencies
+# .NET 9 Required Packages
 
-.NET 9 has several dependencies that must be satisfied to run .NET apps. The commands to install these libraries are listed for multiple Linux distributions.
+Several packages must be installed to run .NET apps and the .NET SDK. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
 
-Feel free to contribute packages for distributions not (yet) listed in this document, including ones not supported by the .NET Team.
+## Package Overview
 
-Tips:
+The following table lists required packages, including the scenarios by which they are needed.
 
-- [runtime-deps container images](https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps) install these same packages. You can look at those dockerfiles.
-- [pkgs.org](https://pkgs.org/) is a useful site for searching for packages, to find the one for your distribution.
+Id              | Name      | Required      | References
+--------------- | --------- | ------------- | ------------------------------
+[libc][0]       | C Library | CoreCLR<br>Native AOT | https://www.gnu.org/software/libc/libc.html<br>https://musl.libc.org/
+[libgcc][1]     | GCC low-level runtime library | CoreCLR<br>Native AOT | https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+[ca-certificates][2] | CA Certificates | HTTPS | https://www.redhat.com/sysadmin/ca-certificates-cli
+[libssl][3]     | OpenSSL   | HTTPS<br>Cryptography | https://www.openssl.org/
+[libstdc++][4]  | C++ Library | CoreCLR     | https://gcc.gnu.org/onlinedocs/libstdc++/
+[libicu][5]     | ICU       | Globalization | http://icu.unicode.org<br>https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md
+[tzdata][6]     | tz database | Globalization | https://data.iana.org/time-zones/tz-link.html
+[krb5][7]       | Kerberos  | Kerberos networking | http://web.mit.edu/kerberos
 
-## Packages
+[0]: https://pkgs.org/search/?q=libc
+[1]: https://pkgs.org/search/?q=libgcc
+[2]: https://pkgs.org/search/?q=ca-certificates
+[3]: https://pkgs.org/search/?q=libssl
+[4]: https://pkgs.org/search/?q=libstdc++
+[5]: https://pkgs.org/search/?q=libicu
+[6]: https://pkgs.org/search/?q=tzdata
+[7]: https://pkgs.org/search/?q=krb5
 
-.NET depends on the following packages.
+## Alpine
 
-- [GNU C Library (glibc)](https://www.gnu.org/software/libc/libc.html)
-- [GNU C++ Library](https://gcc.gnu.org/onlinedocs/libstdc++/)
-- [GCC low-level runtime library](https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html)
-- [ICU](http://site.icu-project.org/)
-- [Kerberos](http://web.mit.edu/kerberos/)
-- [Open SSL](https://www.openssl.org/)
-- [zlib compression library](https://www.zlib.net/)
-
-You do not need to install ICU if you [enable globalization invariant mode](https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md#enabling-the-invariant-mode).
-
-If your app relies on `https` endpoints, you'll also need to install `ca-certificates`.
-
-## Alpine 3.19
-```bash
-sudo apk add \
-        libgcc \
-        libssl3 \
-        libstdc++ \
-        zlib
- ```
-## Debian 12 "bookworm"
+### Alpine 3.20
 
 ```bash
-sudo apt-get update \
-    && sudo apt-get install -y --no-install-recommends \
-        libc6 \
-        libgcc-s1 \
-        libicu72 \
-        libssl3 \
-        libstdc++6 \
-        tzdata \
-        zlib1g \
- ```
-## Debian 11 "Bullseye"
-``` bash
-sudo apt-get update \
-    && sudo apt-get install -y --no-install-recommends \
-    libc6 \
-    libgcc1 \
-    libgssapi-krb5-2 \
-    libicu67 \
-    libssl1.1 \
-    libstdc++6 \
-    zlib1g
+sudo apk add && \
+    libgcc \
+    ca-certificates \
+    libssl3 \
+    libstdc++ \
+    icu-libs \
+    icu-data-full \
+    tzdata \
+    libgssapi-krb5-2
 ```
 
-## Ubuntu 24.04 "Noble"
+### Alpine 3.19
 
 ```bash
-sudo apt-get update \
-    && sudo apt-get install -y --no-install-recommends \
+sudo apk add && \
+    libgcc \
+    ca-certificates \
+    libssl3 \
+    libstdc++ \
+    icu-libs \
+    icu-data-full \
+    tzdata \
+    libgssapi-krb5-2
+```
+
+## Debian
+
+### Debian 12 (Bookworm)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y --no-install-recommends && \
     libc6 \
     libgcc-s1 \
-    libicu74 \
+    ca-certificates \
     libssl3 \
     libstdc++6 \
-    zlib1g 
+    libicu72 \
+    tzdata \
+    libgssapi-krb5-2
 ```
 
-## Ubuntu 23.10"Mantic"
-``` bash
-sudo apt-get update \
-    && sudo apt-get install -y --no-install-recommends \
-        libc6 \
-        libgcc-s1 \
-        libicu72 \
-        libssl3 \
-        libstdc++6 \
-        tzdata \
-        zlib1g \
-```
-## Ubuntu 22.04 "Jammy"
-
-``` bash
-sudo apt-get update \
-    && sudo apt-get install -y --no-install-recommends \
-        libc6 \
-        libgcc-s1 \
-        libicu70 \
-        libssl3 \
-        libstdc++6 \
-        tzdata \
-        zlib1g \
-```
-
-
-
-## Community supported distros
-
-The following distros are not supported by the .NET team. The following package information is provided on an as-is basis. Feel free to contribute package information for the distro you use .NET with if it isn't listed.
-
-### Arch Linux
+### Debian 11 (Bullseye)
 
 ```bash
-sudo pacman -Sy \
-    glibc \
-    gcc \
-    krb5 \
-    icu \
-    openssl \
-    libc++ \
-    zlib
+sudo apt-get update && \
+sudo apt-get install -y --no-install-recommends && \
+    libc6 \
+    libgcc1 \
+    ca-certificates \
+    libssl1.1 \
+    libstdc++6 \
+    libicu67 \
+    tzdata \
+    libgssapi-krb5-2
 ```
 
-This set of packages was tested on the Arch and Manjaro.
+## Ubuntu
+
+### Ubuntu 24.10 (Oracular Oriole)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y --no-install-recommends && \
+    libc6 \
+    libgcc-s1 \
+    ca-certificates \
+    libssl3t64 \
+    libstdc++6 \
+    libicu74 \
+    tzdata \
+    libgssapi-krb5-2
+```
+
+### Ubuntu 24.04 (Noble Numbat)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y --no-install-recommends && \
+    libc6 \
+    libgcc-s1 \
+    ca-certificates \
+    libssl3t64 \
+    libstdc++6 \
+    libicu74 \
+    tzdata \
+    libgssapi-krb5-2
+```
+
+### Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y --no-install-recommends && \
+    libc6 \
+    libgcc-s1 \
+    ca-certificates \
+    libssl3 \
+    libstdc++6 \
+    libicu70 \
+    tzdata \
+    libgssapi-krb5-2
+```
