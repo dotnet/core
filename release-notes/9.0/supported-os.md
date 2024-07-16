@@ -1,5 +1,7 @@
 # .NET 9 - Supported OS versions
 
+Last updated: 2024-07-11
+
 [.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
@@ -53,7 +55,7 @@ OS                              | Versions                     | Architectures  
 
 Notes:
 
-* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
+* Red Hat Enterprise Linux: RHEL-compatible derivatives are supported per [.NET Support](../../support.md).
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
