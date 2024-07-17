@@ -1,0 +1,159 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "ChannelVersion": {
+      "type": "string"
+    },
+    "LastUpdated": {
+      "type": "string",
+      "format": "date"
+    },
+    "Families": {
+      "type": "array",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Distributions": {
+            "type": "array",
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "Id": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Link": {
+                  "type": "string"
+                },
+                "Architectures": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "SupportedVersions": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "Lifecycle": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "Notes": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "UnsupportedVersions": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "Id",
+                "Name",
+                "Link",
+                "Architectures",
+                "SupportedVersions"
+              ]
+            }
+          }
+        },
+        "required": [
+          "Name",
+          "Distributions"
+        ]
+      }
+    },
+    "Libc": {
+      "type": "array",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Architectures": {
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "Version": {
+            "type": "string"
+          },
+          "Source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Architectures",
+          "Version",
+          "Source"
+        ]
+      }
+    },
+    "Notes": {
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  },
+  "required": [
+    "ChannelVersion",
+    "LastUpdated",
+    "Families",
+    "Libc",
+    "Notes"
+  ]
+}

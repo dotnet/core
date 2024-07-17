@@ -1,0 +1,164 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "ChannelVersion": {
+      "type": "string"
+    },
+    "EolDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "Packages": {
+      "type": "array",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "References": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "Required": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "required": [
+          "Id",
+          "Name",
+          "References",
+          "Required"
+        ]
+      }
+    },
+    "Distributions": {
+      "type": "array",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "InstallCommands": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "RunUnderSudo": {
+                  "type": "boolean"
+                },
+                "CommandRoot": {
+                  "type": "string"
+                },
+                "CommandParts": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "RunUnderSudo",
+                "CommandRoot",
+                "CommandParts"
+              ]
+            }
+          },
+          "Releases": {
+            "type": "array",
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "Name": {
+                  "type": "string"
+                },
+                "Release": {
+                  "type": "string"
+                },
+                "Packages": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "Id": {
+                        "type": "string"
+                      },
+                      "Name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "Id",
+                      "Name"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "Name",
+                "Release",
+                "Packages"
+              ]
+            }
+          }
+        },
+        "required": [
+          "Name",
+          "InstallCommands",
+          "Releases"
+        ]
+      }
+    }
+  },
+  "required": [
+    "ChannelVersion",
+    "EolDate",
+    "Packages",
+    "Distributions"
+  ]
+}
