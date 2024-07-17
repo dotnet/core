@@ -1,4 +1,4 @@
-# Release note Formats
+# Release note formats
 
 Release notes are available in a combination of markdown and JSON formats. The intent is to make all release notes available in markdown and also in JSON if there is a  scenario that requires structured data. This content is [licensed](./license-information.md) for broad use.
 
