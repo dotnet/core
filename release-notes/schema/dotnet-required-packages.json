@@ -1,4 +1,5 @@
 {
+  "description": "The set of packages required by a given .NET version for a set of distros.",
   "type": [
     "object",
     "null"
@@ -14,6 +15,7 @@
     "Packages": {
       "type": "array",
       "items": {
+        "description": "A logical package that will exist in various distros with different package names. Includes the scenarios for which the package is required.",
         "type": [
           "object",
           "null"
@@ -61,6 +63,7 @@
     "Distributions": {
       "type": "array",
       "items": {
+        "description": "An operating system distribution, with required package install commands and specific packages for distribution releases.",
         "type": [
           "object",
           "null"
@@ -75,6 +78,7 @@
               "null"
             ],
             "items": {
+              "description": "A command to be run to install packages",
               "type": [
                 "object",
                 "null"
@@ -106,6 +110,7 @@
           "Releases": {
             "type": "array",
             "items": {
+              "description": "A distribution release with a list of packages to install.",
               "type": [
                 "object",
                 "null"
@@ -120,6 +125,7 @@
                 "Packages": {
                   "type": "array",
                   "items": {
+                    "description": "A distro archive package to install, with a reference to a logical package with more information.",
                     "type": [
                       "object",
                       "null"
