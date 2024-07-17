@@ -8,7 +8,10 @@ Our approach has evolved over time. The following descripions are for our latest
 
 We typically release an update each month. These often include security fixes for vulberabilities (AKA CVEs) disclosed on the same day.
 
-Example: [8.0.1](8.0/8.0.1/8.0.1.md)
+Examples:
+
+- [6.0.32](./6.0/6.0.32/6.0.32.md)
+- [8.0.1](./8.0/8.0.1/8.0.1.md)
 
 These markdown files include the following information:
 
@@ -21,7 +24,10 @@ These markdown files include the following information:
 
 We typically release a preview for the next major version each month. These are much the same as the monthly patches, however, will not include CVE information until the new major release is supported (starting with RC1).
 
-Example: [.NET 9 Preview 6](./9.0/preview/preview6/README.md)
+Examples:
+
+- [.NET 9 Preview 1](./9.0/preview/preview1/README.md)
+- [.NET 9 Preview 6](./9.0/preview/preview6/README.md)
 
 These markdown files are primarily composed of dense feature descriptions. This content is used as source material for [What's New](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) pages in official Microsoft docs, which are [often updated](https://github.com/dotnet/docs/pulls?q=is%3Apr+What%27s+New) on the same day as a preview release.
 
@@ -89,7 +95,7 @@ Linux package information is published for each release. This information indica
 
 Examples:
 
-- [.NET Linux packages (json)](9.0/linux-packages.json)
-- [.NET Linux packages (markdown)](9.0/linux-packages.md)
+- [.NET Linux packages (json)](./9.0/linux-packages.json)
+- [.NET Linux packages (markdown)](./9.0/linux-packages.md)
 
 Schema: [dotnet-requires-packages](./schema/dotnet-required-packages.json)
