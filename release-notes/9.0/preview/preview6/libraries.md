@@ -4,15 +4,15 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 
 - [Improvements to System.Numerics](#improvements-to-systemnumerics)
 - [Support Primary Constructors in Logging Source Generator](#support-primary-constructors-in-logging-source-generator)
-- [System.Text.Json enhancements](#systemtextjson) includinga a new [JsonSchemaExporter](#jsonschemaexporter), [nullable annotations recognition](#respecting-nullable-annotations), [requiring non-optionsl constructor parameters](#requiring-non-optional-constructor-parameters), [ordering `JsonObject` properties](#ordering-jsonobject-properties), and new [contract metadata APIs](#additional-contract-metadata-apis)
+- [System.Text.Json enhancements](#systemtextjson) including a new [JsonSchemaExporter](#jsonschemaexporter), [nullable annotations recognition](#respecting-nullable-annotations), [requiring non-optionsl constructor parameters](#requiring-non-optional-constructor-parameters), [ordering `JsonObject` properties](#ordering-jsonobject-properties), and new [contract metadata APIs](#additional-contract-metadata-apis)
 - [`[GeneratedRegex]` can now be used on properties](#generatedregex-on-properties)
-- New [`EnumerateSplits`](#regexenumeratesplits) method for `Regex` to split more colleciton types
+- New [`EnumerateSplits`](#regexenumeratesplits) method for `Regex` to split more collection types
 - Introduction of generic `OrderedDictionary` with [`OrderedDictionary<TKey, TValue>`](#ordereddictionarytkey-tvalue) 
-- New [`ReadOnlySet<T>`](#readonlysett) when needing to create a read-only warapper around `ISet<T>`
+- New [`ReadOnlySet<T>`](#readonlysett) when needing to create a read-only wrapper around `ISet<T>`
 - [`allows ref struct` used in many places throughout the libraries](#allows-ref-struct-used-in-many-places-throughout-the-libraries)
 - [Collection lookups with spans](#collection-lookups-with-spans)
 - [More span-based APIs](#more-span-based-apis) including `StartsWith` and `EndsWith` extension methods
-- [Base64Url](#base64url) for optimzed enconding and decoding
+- [Base64Url](#base64url) for optimized encoding and decoding
 - [SocketsHttpHandler by default in HttpClientFactory](#socketshttphandler-by-default-in-httpclientfactory)
 - [TLS resume with client certificates on Linux](#tls-resume-with-client-certificates-on-linux)
 - New [`System.Net.ServerSentEvents`](#systemnetserversentevents) library providing a parser for easily ingesting server-sent events
