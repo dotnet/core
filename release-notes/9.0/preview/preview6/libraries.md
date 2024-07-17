@@ -16,7 +16,7 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 - [SocketsHttpHandler by default in HttpClientFactory](#socketshttphandler-by-default-in-httpclientfactory)
 - [TLS resume with client certificates on Linux](#tls-resume-with-client-certificates-on-linux)
 - New [`System.Net.ServerSentEvents`](#systemnetserversentevents) library providing a parser for easily ingesting server-sent events
-- [Introducing the Metrics Gauge Instrument](#introducing-the-metrics-gauge-instrument) in `System.Diagnostics.Metrics` to record non-additive values when changes occur.
+- [Introducing the Metrics Gauge Instrument](#introducing-the-metrics-gauge-instrument) in `System.Diagnostics.Metrics` to record non-additive values when changes occur
 
 Libraries updates in .NET 9 Preview 6:
 
