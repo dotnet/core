@@ -2,11 +2,11 @@
 
 Release notes are available in a combination of markdown and JSON formats. The intent is to make all release notes available in markdown and also in JSON if there is a  scenario that requires structured data. This content is [licensed](./license-information.md) for broad use.
 
-Our approach has evolved over time. The following descripions are for our latest practices.
+Our approach has evolved over time. The following descriptions are for our latest practices.
 
 ## Monthly patch release notes (markdown)
 
-We typically release an update each month. These often include security fixes for vulberabilities (AKA CVEs) disclosed on the same day.
+We typically release an update each month. These often include security fixes for vulnerabilities (AKA CVEs) disclosed on the same day.
 
 Examples:
 
@@ -31,7 +31,7 @@ Examples:
 
 These markdown files are primarily composed of dense feature descriptions. This content is used as source material for [What's New](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) pages in official Microsoft docs, which are [often updated](https://github.com/dotnet/docs/pulls?q=is%3Apr+What%27s+New) on the same day as a preview release.
 
-Preview release notes are always in a `preview` folder. This approach was adopted so that preview releases do distract from stable releases once preview releases are no longer relevant.
+Preview release notes are always in a `preview` folder. This approach was adopted so that preview releases do not distract from stable releases once preview releases are no longer relevant.
 
 ## Releases Index (json)
 
@@ -74,7 +74,7 @@ Examples:
 - [8.0 `releases.json`](./8.0/releases.json)
 - [9.0 `releases.json`](./9.0/releases.json)
 
-This files can grow to be quite large. We are considering producing release-specific versions of this file, for example for `8.0/8.0.1/release.json`.
+These files can grow to be quite large. We are considering producing release-specific versions of this file, for example for `8.0/8.0.1/release.json`.
 
 ## Supported OS (json and markdown)
 
