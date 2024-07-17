@@ -5,7 +5,7 @@ Here's a summary of what's new in the .NET Runtime in this preview release:
 - [ARM64 Code Generation](#arm64-code-generation) now adds ability to store operations
 - [Code Layout](#code-layout) - RyuJIT's block reordering algorithm with a simpler, more global approach
 - [Loop Optimizations](#loop-optimizations) for code size reduction and performance improvements
-- [Reduced Address Exposure](#reduced-address-exposure) through RyuJIT improvements to better track usage of local variable addreses
+- [Reduced Address Exposure](#reduced-address-exposure) through RyuJIT improvements to better track usage of local variable addreses.
 - [AVX10v1 Support](#avx10v1-support), a new SIMD instruction set from Intel
 - [Hardware Intrinsic Code Generation](#hardware-intrinsic-code-generation)
 - [Constant Folding for Floating Point and SIMD Operations](#constant-folding-for-floating-point-and-simd-operations)
