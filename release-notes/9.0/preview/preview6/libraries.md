@@ -6,7 +6,7 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 - [Support Primary Constructors in Logging Source Generator](#support-primary-constructors-in-logging-source-generator)
 - [System.Text.Json enhancements](#systemtextjson) includinga a new [JsonSchemaExporter](#jsonschemaexporter), [nullable annotations recognition](#respecting-nullable-annotations), [requiring non-optionsl constructor parameters](#requiring-non-optional-constructor-parameters), [ordering `JsonObject` properties](#ordering-jsonobject-properties), and new [contract metadata APIs](#additional-contract-metadata-apis)
 - [`[GeneratedRegex]` can now be used on properties](#generatedregex-on-properties)
-- New [`EnumerateSplits`](#regexenumeratesplits) method for `Regex` to split more colleciton types.
+- New [`EnumerateSplits`](#regexenumeratesplits) method for `Regex` to split more colleciton types
 - Introduction of generic `OrderedDictionary` with [`OrderedDictionary<TKey, TValue>`](#ordereddictionarytkey-tvalue) 
 - New [`ReadOnlySet<T>`](#readonlysett) when needing to create a read-only warapper around `ISet<T>`
 - [`allows ref struct` used in many places throughout the libraries](#allows-ref-struct-used-in-many-places-throughout-the-libraries)
