@@ -13,9 +13,9 @@ Id              | Name      | Required      | References
 [ca-certificates][2] | CA Certificates | HTTPS | https://www.redhat.com/sysadmin/ca-certificates-cli
 [libssl][3]     | OpenSSL   | HTTPS<br>Cryptography | https://www.openssl.org/
 [libstdc++][4]  | C++ Library | CoreCLR     | https://gcc.gnu.org/onlinedocs/libstdc++/
-[libicu][5]     | ICU       | Globalization | http://icu.unicode.org<br>https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md
+[libicu][5]     | ICU       | Globalization | https://icu.unicode.org<br>https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md
 [tzdata][6]     | tz database | Globalization | https://data.iana.org/time-zones/tz-link.html
-[krb5][7]       | Kerberos  | Kerberos networking | http://web.mit.edu/kerberos
+[krb5][7]       | Kerberos  | Kerberos networking | https://web.mit.edu/kerberos
 
 [0]: https://pkgs.org/search/?q=libc
 [1]: https://pkgs.org/search/?q=libgcc
@@ -31,7 +31,7 @@ Id              | Name      | Required      | References
 ### Alpine 3.20
 
 ```bash
-sudo apk add && \
+sudo apk add \
     libgcc \
     ca-certificates \
     libssl3 \
@@ -45,7 +45,7 @@ sudo apk add && \
 ### Alpine 3.19
 
 ```bash
-sudo apk add && \
+sudo apk add \
     libgcc \
     ca-certificates \
     libssl3 \
@@ -62,7 +62,7 @@ sudo apk add && \
 
 ```bash
 sudo apt-get update && \
-sudo apt-get install -y --no-install-recommends && \
+sudo apt-get install -y \
     libc6 \
     libgcc-s1 \
     ca-certificates \
@@ -77,7 +77,7 @@ sudo apt-get install -y --no-install-recommends && \
 
 ```bash
 sudo apt-get update && \
-sudo apt-get install -y --no-install-recommends && \
+sudo apt-get install -y \
     libc6 \
     libgcc1 \
     ca-certificates \
@@ -94,7 +94,7 @@ sudo apt-get install -y --no-install-recommends && \
 
 ```bash
 sudo apt-get update && \
-sudo apt-get install -y --no-install-recommends && \
+sudo apt-get install -y \
     libc6 \
     libgcc-s1 \
     ca-certificates \
@@ -109,7 +109,7 @@ sudo apt-get install -y --no-install-recommends && \
 
 ```bash
 sudo apt-get update && \
-sudo apt-get install -y --no-install-recommends && \
+sudo apt-get install -y \
     libc6 \
     libgcc-s1 \
     ca-certificates \
@@ -124,7 +124,7 @@ sudo apt-get install -y --no-install-recommends && \
 
 ```bash
 sudo apt-get update && \
-sudo apt-get install -y --no-install-recommends && \
+sudo apt-get install -y \
     libc6 \
     libgcc-s1 \
     ca-certificates \
