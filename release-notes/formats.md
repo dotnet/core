@@ -1,6 +1,6 @@
 # Release note formats
 
-Release notes are available in a combination of markdown and JSON formats. The intent is to make all release notes available in markdown and also in JSON if there is a  scenario that requires structured data. This content is [licensed](./license-information.md) for broad use.
+Release notes are available in a combination of markdown and JSON formats. The intent is to make all release notes available in markdown and also in JSON if there is a scenario that requires structured data. This content is [licensed](./license-information.md) for broad use.
 
 Our approach has evolved over time. The following descriptions are for our latest practices.
 
@@ -22,7 +22,7 @@ These markdown files include the following information:
 
 ## Monthly preview release notes (markdown)
 
-We typically release a preview for the next major version each month. These are much the same as the monthly patches, however, will not include CVE information until the new major release is supported (starting with RC1).
+We typically release a preview for the next major version each month. These are much the same as the monthly patches; however, they will not include CVE information until the new major release is supported (starting with RC1).
 
 Examples:
 

@@ -36,7 +36,7 @@
             ]
         },
         {
-            "id": "libssl",
+            "id": "openssl",
             "name": "OpenSSL",
             "references": [
                 "https://www.openssl.org/"
@@ -267,6 +267,57 @@
                         {
                             "id": "krb5",
                             "name": "libgssapi-krb5-2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Fedora",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "dnf",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "Fedora 40",
+                    "release": "40",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "glibc"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "libssl",
+                            "name": "openssl-libs"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5-libs"
                         }
                     ]
                 }
