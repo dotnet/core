@@ -14,16 +14,14 @@ You can find release notes for all releases, including out-of-support releases, 
 [8.0.7]: 8.0/8.0.7/8.0.7.md
 [6.0.32]: 6.0/6.0.32/6.0.32.md
 
+* [Release note formats](./formats.md)
+* [Releases index][releases-index.json]
+
 ## Download .NET
 
 * [Download .NET](https://dotnet.microsoft.com/download/dotnet)
 * [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 * [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
-
-## Release notes in JSON format
-
-* [Releases index][releases-index.json]
-* [Release note formats](./formats.md)
 
 [releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
 [policies]: ../release-policies.md
