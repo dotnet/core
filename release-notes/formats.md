@@ -87,15 +87,13 @@ Examples:
 - [.NET 9 Supported OSes (json)](./9.0/supported-os.json)
 - [.NET 9 Supported OSes (markdown)](./9.0/supported-os.md)
 
-Schema: [dotnet-support-matrix](./schema/dotnet-support-matrix.json)
+## OS packages (json and markdown)
 
-## Linux packages (json and markdown)
-
-Linux package information is published for each release. This information indicates which packages must be installed on a given distro for a .NET app (or the .NET SDK) to run. [.NET packages](../linux.md) are available for multiple distros, which automatically install all required packages
+OS package information is published for each release. This information indicates which packages must be installed on a given distro for a .NET app (or the .NET SDK) to run. [.NET packages](../linux.md) are available for multiple distros, which automatically install all required packages
 
 Examples:
 
-- [.NET Linux packages (json)](./9.0/linux-packages.json)
-- [.NET Linux packages (markdown)](./9.0/linux-packages.md)
+- [.NET packages (json)](./9.0/os-packages.json)
+- [.NET packages (markdown)](./9.0/os-packages.md)
 
-Schema: [dotnet-requires-packages](./schema/dotnet-required-packages.json)
+Schema: [dotnet-requires-packages](./schemas/dotnet-os-packages.json)
