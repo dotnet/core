@@ -53,14 +53,14 @@
                 "string",
                 "null"
               ]
-            }
+            },
+            "default": null
           }
         },
         "required": [
           "id",
           "name",
-          "required-scenarios",
-          "references"
+          "required-scenarios"
         ]
       }
     },
@@ -80,10 +80,7 @@
           },
           "install-commands": {
             "description": "Commands required to install packages within the distribution.",
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": "array",
             "items": {
               "description": "A command to be run to install packages",
               "type": [
@@ -110,13 +107,13 @@
                       "string",
                       "null"
                     ]
-                  }
+                  },
+                  "default": null
                 }
               },
               "required": [
                 "run-under-sudo",
-                "command-root",
-                "command-parts"
+                "command-root"
               ]
             }
           },
@@ -148,7 +145,7 @@
                     ],
                     "properties": {
                       "id": {
-                        "description": "Reference to nominal package id, providing access to required scenarios and other information.",
+                        "description": "Reference to nominal package ID, providing access to required scenarios and other information.",
                         "type": "string"
                       },
                       "name": {
