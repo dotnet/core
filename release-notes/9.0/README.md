@@ -6,6 +6,7 @@
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
+- [OS packages](./os-packages.md)
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
 

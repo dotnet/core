@@ -1,6 +1,8 @@
 # .NET 9 Required Packages
 
-Several packages must be installed to run .NET apps and the .NET SDK. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
+Various packages must be installed to run .NET apps and the .NET SDK. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
+
+This file is generated from [os-packages.json](os-packages.json).
 
 ## Package Overview
 
@@ -8,19 +10,19 @@ The following table lists required packages, including the scenarios by which th
 
 Id              | Name      | Required      | References
 --------------- | --------- | ------------- | ------------------------------
-[libc][0]       | C Library | CoreCLR<br>Native AOT | https://www.gnu.org/software/libc/libc.html<br>https://musl.libc.org/
-[libgcc][1]     | GCC low-level runtime library | CoreCLR<br>Native AOT | https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-[ca-certificates][2] | CA Certificates | HTTPS | https://www.redhat.com/sysadmin/ca-certificates-cli
-[libssl][3]     | OpenSSL   | HTTPS<br>Cryptography | https://www.openssl.org/
-[libstdc++][4]  | C++ Library | CoreCLR     | https://gcc.gnu.org/onlinedocs/libstdc++/
+[libc][0]       | C Library | All           | https://www.gnu.org/software/libc/libc.html<br>https://musl.libc.org/
+[libgcc][1]     | GCC low-level runtime library | All | https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+[ca-certificates][2] | CA Certificates | Https | https://www.redhat.com/sysadmin/ca-certificates-cli
+[openssl][3]    | OpenSSL   | Https<br>Cryptography | https://www.openssl.org/
+[libstdc++][4]  | C++ Library | Runtime     | https://gcc.gnu.org/onlinedocs/libstdc++/
 [libicu][5]     | ICU       | Globalization | https://icu.unicode.org<br>https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md
 [tzdata][6]     | tz database | Globalization | https://data.iana.org/time-zones/tz-link.html
-[krb5][7]       | Kerberos  | Kerberos networking | https://web.mit.edu/kerberos
+[krb5][7]       | Kerberos  | Kerberos      | https://web.mit.edu/kerberos
 
 [0]: https://pkgs.org/search/?q=libc
 [1]: https://pkgs.org/search/?q=libgcc
 [2]: https://pkgs.org/search/?q=ca-certificates
-[3]: https://pkgs.org/search/?q=libssl
+[3]: https://pkgs.org/search/?q=openssl
 [4]: https://pkgs.org/search/?q=libstdc++
 [5]: https://pkgs.org/search/?q=libicu
 [6]: https://pkgs.org/search/?q=tzdata
@@ -86,6 +88,22 @@ sudo apt-get install -y \
     libicu67 \
     tzdata \
     libgssapi-krb5-2
+```
+
+## Fedora
+
+### Fedora 40
+
+```bash
+sudo dnf install -y \
+    glibc \
+    libgcc \
+    ca-certificates \
+    openssl-libs \
+    libstdc++ \
+    libicu \
+    tzdata \
+    krb5-libs
 ```
 
 ## Ubuntu
