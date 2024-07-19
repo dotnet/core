@@ -1,4 +1,5 @@
 {
+    "$schema": "../schemas/dotnet-os-packages.json",
     "channel-version": "9.0",
     "last-updated": "2024-07-01",
     "packages": [
@@ -9,9 +10,8 @@
                 "https://www.gnu.org/software/libc/libc.html",
                 "https://musl.libc.org/"
             ],
-            "required": [
-                "CoreCLR",
-                "Native AOT"
+            "required-scenarios": [
+                "all"
             ]
         },
         {
@@ -20,9 +20,8 @@
             "references": [
                 "https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html"
             ],
-            "required": [
-                "CoreCLR",
-                "Native AOT"
+            "required-scenarios": [
+                "all"
             ]
         },
         {
@@ -31,8 +30,8 @@
             "references": [
                 "https://www.redhat.com/sysadmin/ca-certificates-cli"
             ],
-            "required": [
-                "HTTPS"
+            "required-scenarios": [
+                "https"
             ]
         },
         {
@@ -41,9 +40,9 @@
             "references": [
                 "https://www.openssl.org/"
             ],
-            "required": [
-                "HTTPS",
-                "Cryptography"
+            "required-scenarios": [
+                "https",
+                "cryptography"
             ]
         },
         {
@@ -52,8 +51,8 @@
             "references": [
                 "https://gcc.gnu.org/onlinedocs/libstdc++/"
             ],
-            "required": [
-                "CoreCLR"
+            "required-scenarios": [
+                "runtime"
             ]
         },
         {
@@ -63,8 +62,8 @@
                 "https://icu.unicode.org",
                 "https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md"
             ],
-            "required": [
-                "Globalization"
+            "required-scenarios": [
+                "globalization"
             ]
         },
         {
@@ -73,8 +72,8 @@
             "references": [
                 "https://data.iana.org/time-zones/tz-link.html"
             ],
-            "required": [
-                "Globalization"
+            "required-scenarios": [
+                "globalization"
             ]
         },
         {
@@ -83,8 +82,8 @@
             "references": [
                 "https://web.mit.edu/kerberos"
             ],
-            "required": [
-                "Kerberos networking"
+            "required-scenarios": [
+                "kerberos"
             ]
         }
     ],
@@ -113,7 +112,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "libssl3"
                         },
                         {
@@ -151,7 +150,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "libssl3"
                         },
                         {
@@ -211,7 +210,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "libssl3"
                         },
                         {
@@ -249,7 +248,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "libssl1.1"
                         },
                         {
@@ -300,7 +299,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "openssl-libs"
                         },
                         {
@@ -356,7 +355,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "libssl3t64"
                         },
                         {
@@ -394,7 +393,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "libssl3t64"
                         },
                         {
@@ -432,7 +431,7 @@
                             "name": "ca-certificates"
                         },
                         {
-                            "id": "libssl",
+                            "id": "openssl",
                             "name": "libssl3"
                         },
                         {
