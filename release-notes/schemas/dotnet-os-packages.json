@@ -9,23 +9,18 @@
       "description": "Major (or major.minor) version of product.",
       "type": "string"
     },
-    "eol-date": {
-      "description": "End of life date of product version.",
-      "type": "string",
-      "format": "date"
-    },
     "packages": {
       "description": "Set of nominal packages used by product, with descriptions.",
       "type": "array",
       "items": {
-        "description": "A nominal package is a distro-agnostic representation of a package, including the scenarios for which the package is required. A nominal package will be referenced a distribution package, with a distribution-specific package name.",
+        "description": "A nominal package is a distro-agnostic representation of a package, including the scenarios for which the package is required. A nominal package will be referenced by a distribution package, with a distribution-specific package name.",
         "type": [
           "object",
           "null"
         ],
         "properties": {
           "id": {
-            "description": "Id of nominal package.",
+            "description": "ID of nominal package.",
             "type": "string"
           },
           "name": {
@@ -106,7 +101,10 @@
                 },
                 "command-parts": {
                   "description": "The command parts or arguments that need to be used.",
-                  "type": "array",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
                   "items": {
                     "type": [
                       "string",
@@ -150,7 +148,7 @@
                     ],
                     "properties": {
                       "id": {
-                        "description": "Reference to nominal package id, to providing access to required scenarios and other information.",
+                        "description": "Reference to nominal package id, providing access to required scenarios and other information.",
                         "type": "string"
                       },
                       "name": {
@@ -183,7 +181,6 @@
   },
   "required": [
     "channel-version",
-    "eol-date",
     "packages",
     "distributions"
   ]
