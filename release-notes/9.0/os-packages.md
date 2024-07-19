@@ -34,28 +34,28 @@ Id              | Name      | Required      | References
 
 ```bash
 sudo apk add \
-    libgcc \
     ca-certificates \
+    icu-data-full \
+    icu-libs \
+    libgcc \
+    libgssapi-krb5-2 \
     libssl3 \
     libstdc++ \
-    icu-libs \
-    icu-data-full \
-    tzdata \
-    libgssapi-krb5-2
+    tzdata
 ```
 
 ### Alpine 3.19
 
 ```bash
 sudo apk add \
-    libgcc \
     ca-certificates \
+    icu-data-full \
+    icu-libs \
+    libgcc \
+    libgssapi-krb5-2 \
     libssl3 \
     libstdc++ \
-    icu-libs \
-    icu-data-full \
-    tzdata \
-    libgssapi-krb5-2
+    tzdata
 ```
 
 ## Debian
@@ -65,14 +65,14 @@ sudo apk add \
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
+    ca-certificates \
     libc6 \
     libgcc-s1 \
-    ca-certificates \
+    libgssapi-krb5-2 \
+    libicu72 \
     libssl3 \
     libstdc++6 \
-    libicu72 \
-    tzdata \
-    libgssapi-krb5-2
+    tzdata
 ```
 
 ### Debian 11 (Bullseye)
@@ -80,14 +80,14 @@ sudo apt-get install -y \
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
+    ca-certificates \
     libc6 \
     libgcc1 \
-    ca-certificates \
+    libgssapi-krb5-2 \
+    libicu67 \
     libssl1.1 \
     libstdc++6 \
-    libicu67 \
-    tzdata \
-    libgssapi-krb5-2
+    tzdata
 ```
 
 ## Fedora
@@ -96,14 +96,14 @@ sudo apt-get install -y \
 
 ```bash
 sudo dnf install -y \
-    glibc \
-    libgcc \
     ca-certificates \
-    openssl-libs \
-    libstdc++ \
+    glibc \
+    krb5-libs \
+    libgcc \
     libicu \
-    tzdata \
-    krb5-libs
+    libstdc++ \
+    openssl-libs \
+    tzdata
 ```
 
 ## Ubuntu
@@ -113,14 +113,14 @@ sudo dnf install -y \
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
+    ca-certificates \
     libc6 \
     libgcc-s1 \
-    ca-certificates \
+    libgssapi-krb5-2 \
+    libicu74 \
     libssl3t64 \
     libstdc++6 \
-    libicu74 \
-    tzdata \
-    libgssapi-krb5-2
+    tzdata
 ```
 
 ### Ubuntu 24.04 (Noble Numbat)
@@ -128,14 +128,14 @@ sudo apt-get install -y \
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
+    ca-certificates \
     libc6 \
     libgcc-s1 \
-    ca-certificates \
+    libgssapi-krb5-2 \
+    libicu74 \
     libssl3t64 \
     libstdc++6 \
-    libicu74 \
-    tzdata \
-    libgssapi-krb5-2
+    tzdata
 ```
 
 ### Ubuntu 22.04.4 LTS (Jammy Jellyfish)
@@ -143,12 +143,12 @@ sudo apt-get install -y \
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
+    ca-certificates \
     libc6 \
     libgcc-s1 \
-    ca-certificates \
+    libgssapi-krb5-2 \
+    libicu70 \
     libssl3 \
     libstdc++6 \
-    libicu70 \
-    tzdata \
-    libgssapi-krb5-2
+    tzdata
 ```
