@@ -71,8 +71,8 @@ The `releases.json` file contains expansive release information for the life of 
 
 Examples:
 
-- [8.0 `releases.json`](./8.0/releases.json)
-- [9.0 `releases.json`](./9.0/releases.json)
+- [.NET 8 `releases.json`](./8.0/releases.json)
+- [.NET 9 `releases.json`](./9.0/releases.json)
 
 These files can grow to be quite large. We are considering producing release-specific versions of this file, for example for `8.0/8.0.1/release.json`.
 
@@ -93,7 +93,7 @@ OS package information is published for each release. This information indicates
 
 Examples:
 
-- [.NET packages (json)](./9.0/os-packages.json)
-- [.NET packages (markdown)](./9.0/os-packages.md)
+- [.NET 9 OS packages (json)](./9.0/os-packages.json)
+- [.NET 9 OS packages (markdown)](./9.0/os-packages.md)
 
 Schema: [dotnet-requires-packages](./schemas/dotnet-os-packages.json)
