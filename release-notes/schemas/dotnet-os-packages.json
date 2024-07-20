@@ -42,6 +42,14 @@
               ]
             }
           },
+          "min-version": {
+            "description": "Minimum required version of library.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
           "references": {
             "description": "Related references.",
             "type": [
@@ -75,7 +83,7 @@
         ],
         "properties": {
           "name": {
-            "description": "Name of the distribution, matching ID in /etc/os-release,however, the expectation is that this value starts with a capital letter (proper noun).",
+            "description": "Name of the distribution, matching ID in /etc/os-release, however, the expectation is that this value starts with a capital letter (proper noun).",
             "type": "string"
           },
           "install-commands": {
