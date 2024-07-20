@@ -6,6 +6,7 @@
             "id": "libc",
             "name": "C Library",
             "references": [
+                "./supported-os.md#linux-compatibility",
                 "https://www.gnu.org/software/libc/libc.html",
                 "https://musl.libc.org/"
             ],
@@ -36,6 +37,7 @@
         {
             "id": "openssl",
             "name": "OpenSSL",
+            "min-version": "1.1.1",
             "references": [
                 "https://www.openssl.org/"
             ],
