@@ -8,12 +8,12 @@ This file is generated from [os-packages.json](os-packages.json).
 
 The following table lists required packages, including the scenarios by which they are needed.
 
-Id              | Name      | Required      | References
+Id              | Name      | Required scenarios | Notes
 --------------- | --------- | ------------- | ------------------------------
-[libc][0]       | C Library | All           | https://www.gnu.org/software/libc/libc.html<br>https://musl.libc.org/
+[libc][0]       | C Library | All           | https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#linux-compatibility<br>https://www.gnu.org/software/libc/libc.html<br>https://musl.libc.org/
 [libgcc][1]     | GCC low-level runtime library | All | https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 [ca-certificates][2] | CA Certificates | Https | https://www.redhat.com/sysadmin/ca-certificates-cli
-[openssl][3]    | OpenSSL   | Https<br>Cryptography | https://www.openssl.org/
+[openssl][3]    | OpenSSL   | Https<br>Cryptography | Minimum required version 1.1.1<br>https://www.openssl.org/
 [libstdc++][4]  | C++ Library | Runtime     | https://gcc.gnu.org/onlinedocs/libstdc++/
 [libicu][5]     | ICU       | Globalization | https://icu.unicode.org<br>https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md
 [tzdata][6]     | tz database | Globalization | https://data.iana.org/time-zones/tz-link.html
@@ -71,21 +71,6 @@ sudo apt-get install -y \
     libgssapi-krb5-2 \
     libicu72 \
     libssl3 \
-    libstdc++6 \
-    tzdata
-```
-
-### Debian 11 (Bullseye)
-
-```bash
-sudo apt-get update && \
-sudo apt-get install -y \
-    ca-certificates \
-    libc6 \
-    libgcc1 \
-    libgssapi-krb5-2 \
-    libicu67 \
-    libssl1.1 \
     libstdc++6 \
     tzdata
 ```
