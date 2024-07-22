@@ -1,0 +1,135 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$comment": "Schema derived from https://raw.githubusercontent.com/dotnet/core/main/release-notes/releases-index.json and https://github.com/dotnet/deployment-tools/blob/main/src/Microsoft.Deployment.DotNet.Releases/src/Product.cs",
+    "additionalProperties": false,
+    "definitions": {
+        "dateYYYYMMDD": {
+            "$comment": "If we targeted draft-07 we could use the 'date' format instead of this format pattern. We cannot use the 'date-time' format because our existing values don't validate against it.",
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "description": "A date in the format YYYY-MM-DD"
+        },
+        "releaseVersion": {
+            "type": "string",
+            "description": "A SemVer-compatible version string",
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+        },
+        "releaseType": {
+            "$comment": "If we targeted draft-06 we could use oneOf/const in combination to add descriptions to the enum values",
+            "type": "string",
+            "enum": [
+                "sts",
+                "lts"
+            ],
+            "description": "An enumeration describing the different release types of a product"
+        },
+        "supportPhase": {
+            "$comment": "If we targeted draft-06 we could use oneOf/const in combination to add descriptions to the enum values",
+            "type": "string",
+            "enum": [
+                "preview",
+                "go-live",
+                "active",
+                "maintenance",
+                "eol"
+            ],
+            "description": "An enumeration describing the different support phases of a product"
+        },
+        "product": {
+            "type": "object",
+            "properties": {
+                "channel-version": {
+                    "type": "string",
+                    "title": "ProductVersion",
+                    "description": "The version of the product, e.g '5.0' or '1.1'",
+                    "pattern": "^[0-9]+\\.[0-9]+$"
+                },
+                "eol-date": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/dateYYYYMMDD"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "title": "EndOfLifeDate",
+                    "description": "The end-of-life (EOL) date for this Product when it is considered to be out of support. The value may be `null` if the EOL date is undetermined, e.g. when a product is still a prerelease."
+                },
+                "security": {
+                    "type": "boolean",
+                    "title": "LatestReleaseIncludesSecurityUpdate",
+                    "description": "`true` if the latest release of this product includes a security update, `false` otherwise."
+                },
+                "latest-release-date": {
+                    "$ref": "#/definitions/dateYYYYMMDD",
+                    "title": "LatestReleaseDate",
+                    "description": "The date of the latest release of this product."
+                },
+                "latest-release": {
+                    "$ref": "#/definitions/releaseVersion",
+                    "title": "LatestReleaseVersion",
+                    "description": "The version of the latest release"
+                },
+                "latest-runtime": {
+                    "$ref": "#/definitions/releaseVersion",
+                    "title": "LatestRuntimeVersion",
+                    "description": "The version of the runtime included in the latest release"
+                },
+                "latest-sdk": {
+                    "$ref": "#/definitions/releaseVersion",
+                    "title": "LatestSdkVersion",
+                    "description": "The version of the SDK included in the latest release.  This is usually the SDK with the highest feature band. A ProductRelease may include multiple SDKs across different feature bands, all of which carry the same runtime version."
+                },
+                "product": {
+                    "type": "string",
+                    "title": "ProductName",
+                    "description": "The name of the product."
+                },
+                "releases.json": {
+                    "$comment": "Since this is always an absolute uri, the 'uri' format is unambiguous",
+                    "description": "The URL pointing to the releases.json file that contains information about all the releases  associated with this Product.",
+                    "type": "string",
+                    "format": "uri"
+                },
+                "release-type": {
+                    "$ref": "#/definitions/releaseType",
+                    "description": "The type of Product release indicating whether the release is Standard Term Support (sts) or Long Term Support (lts)."
+                },
+                "support-phase": {
+                    "$ref": "#/definitions/supportPhase",
+                    "description": "The support phase of the Product."
+                }
+            },
+            "required": [
+                "channel-version",
+                "security",
+                "latest-release-date",
+                "latest-release",
+                "latest-runtime",
+                "latest-sdk",
+                "product",
+                "releases.json",
+                "release-type",
+                "support-phase"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "description": "A collection of manifests for .NET products, which is updated with each preview and stable release of the .NET SDK and/or Runtime",
+    "id": "https://json.schemastore.org/dotnet-releases-index.json",
+    "properties": {
+        "releases-index": {
+            "type": "array",
+            "description": "A collection of all released products",
+            "items": {
+                "$ref": "#/definitions/product"
+            }
+        }
+    },
+    "required": [
+        "releases-index"
+    ],
+    "title": "JSON schema for .NET product collection manifests",
+    "type": "object"
+}
