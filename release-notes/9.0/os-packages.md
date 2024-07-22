@@ -37,8 +37,8 @@ sudo apk add \
     ca-certificates \
     icu-data-full \
     icu-libs \
+    krb5 \
     libgcc \
-    libgssapi-krb5-2 \
     libssl3 \
     libstdc++ \
     tzdata
@@ -51,8 +51,8 @@ sudo apk add \
     ca-certificates \
     icu-data-full \
     icu-libs \
+    krb5 \
     libgcc \
-    libgssapi-krb5-2 \
     libssl3 \
     libstdc++ \
     tzdata
