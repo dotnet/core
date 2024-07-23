@@ -1,0 +1,50 @@
+{
+  "description": "A set of product releases with high-level information, like latest version.",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "channel-version": {
+      "type": "string"
+    },
+    "releases": {
+      "type": "array",
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "release-version": {
+            "description": "Version of release.",
+            "type": "string"
+          },
+          "release-date": {
+            "description": "Date of release.",
+            "type": "string",
+            "format": "date"
+          },
+          "security": {
+            "description": "Security status of release.",
+            "type": "boolean"
+          },
+          "release.json": {
+            "description": "Url to detailed description of release.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "release-version",
+          "release-date",
+          "security",
+          "release.json"
+        ]
+      }
+    }
+  },
+  "required": [
+    "channel-version",
+    "releases"
+  ]
+}
