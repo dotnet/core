@@ -31,7 +31,7 @@ Example JSON files:
 
 We typically release a preview for the next major version each month. These are much the same as the monthly patches.
 
-They priumarily differ in two ways:
+They primarily differ in two ways:
 
 - Dense feature descriptions
 - No CVE information (since the releases are not supported)
