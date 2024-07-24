@@ -1,14 +1,25 @@
 {
-  "description": "A set of product releases with high-level information, like latest version.",
+  "description": "A set of product patch releases with high-level information, like version and whether the release contains security fixes.",
   "type": [
     "object",
     "null"
   ],
   "properties": {
     "channel-version": {
+      "description": "Major (or major.minor) version of the product.",
       "type": "string"
     },
+    "latest-release": {
+      "description": "The version (branding) of the most recent patch release.",
+      "type": "string"
+    },
+    "latest-release-date": {
+      "description": "The date of the most recent patch release.",
+      "type": "string",
+      "format": "date"
+    },
     "releases": {
+      "description": "Set of patch releases.",
       "type": "array",
       "items": {
         "type": [
@@ -17,7 +28,7 @@
         ],
         "properties": {
           "release-version": {
-            "description": "Version of release.",
+            "description": "Version (branding) of the release.",
             "type": "string"
           },
           "release-date": {
@@ -26,11 +37,11 @@
             "format": "date"
           },
           "security": {
-            "description": "Security status of release.",
+            "description": "Whether the release contains any CVE fixes.",
             "type": "boolean"
           },
-          "release.json": {
-            "description": "Url to detailed description of release.",
+          "release-info-uri": {
+            "description": "Link to detailed description of the release.",
             "type": "string"
           }
         },
@@ -38,13 +49,15 @@
           "release-version",
           "release-date",
           "security",
-          "release.json"
+          "release-info-uri"
         ]
       }
     }
   },
   "required": [
     "channel-version",
+    "latest-release",
+    "latest-release-date",
     "releases"
   ]
 }

@@ -34,7 +34,7 @@ We typically release a preview for the next major version each month. These are 
 They primarily differ in two ways:
 
 - Dense feature descriptions
-- No CVE information (since the releases are not supported)
+- No CVE information (applies to previews, not RCs)
 
 Examples:
 
