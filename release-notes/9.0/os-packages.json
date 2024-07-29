@@ -416,6 +416,33 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "FreeBSD",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "pkg",
+                    "command-parts": ["install", "-A", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "FreeBSD 14.1",
+                    "release": "14.1",
+                    "packages": [
+                        {
+                            "id": "libicu",
+                            "name": "icu"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
