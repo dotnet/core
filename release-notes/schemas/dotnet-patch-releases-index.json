@@ -18,6 +18,24 @@
       "type": "string",
       "format": "date"
     },
+    "latest-release-security": {
+      "description": "Wehther the latest release includes security fixes.",
+      "type": "boolean"
+    },
+    "supported-os-info-uri": {
+      "description": "Link to supported OS matrix (JSON format).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "os-packages-info-uri": {
+      "description": "Link to OS package information (JSON format).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "releases": {
       "description": "Set of patch releases.",
       "type": "array",
@@ -58,6 +76,9 @@
     "channel-version",
     "latest-release",
     "latest-release-date",
+    "latest-release-security",
+    "supported-os-info-uri",
+    "os-packages-info-uri",
     "releases"
   ]
 }

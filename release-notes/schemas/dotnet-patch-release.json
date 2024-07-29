@@ -8,6 +8,19 @@
       "description": "Major (or major.minor) version of product.",
       "type": "string"
     },
+    "release-date": {
+      "description": "The date of the patch release.",
+      "type": "string",
+      "format": "date"
+    },
+    "release-version": {
+      "description": "The version (branding) of the release",
+      "type": "string"
+    },
+    "security": {
+      "description": "Whether the release contains any CVE fixes.",
+      "type": "boolean"
+    },
     "release": {
       "description": "A patch release with detailed release information.",
       "type": "object",
@@ -66,8 +79,12 @@
               "description": "The display or branding variant of the version, if different.",
               "type": "string"
             },
+            "vs-support": {
+              "description": "The minimum version of Visual Studio that supports this component version.",
+              "type": "string"
+            },
             "vs-version": {
-              "description": "The version of Visual Studio that includes this version of the component.",
+              "description": "The version of Visual Studio that includes this component version.",
               "type": "string"
             },
             "files": {
@@ -92,6 +109,10 @@
                     "description": "Fully-qualified URL of file.",
                     "type": "string"
                   },
+                  "akams": {
+                    "description": "Short-link URL to file.",
+                    "type": "string"
+                  },
                   "hash": {
                     "description": "Content hash of file.",
                     "type": "string"
@@ -101,6 +122,7 @@
                   "name",
                   "rid",
                   "url",
+                  "akams",
                   "hash"
                 ]
               }
@@ -109,6 +131,7 @@
           "required": [
             "version",
             "version-display",
+            "vs-support",
             "vs-version",
             "files"
           ]
@@ -125,24 +148,32 @@
               "description": "The display or branding variant of the version, if different.",
               "type": "string"
             },
+            "runtime-version": {
+              "description": "The version of the runtime that is included in the component.",
+              "type": "string"
+            },
             "vs-version": {
               "description": "The version of Visual Studio that includes this component version.",
               "type": "string"
             },
+            "vs-support": {
+              "description": "The minimum version of Visual Studio that supports this component version.",
+              "type": "string"
+            },
             "csharp-version": {
-              "description": "The version of C# included in this component version.",
+              "description": "The version of C# included in the component.",
               "type": "string"
             },
             "fsharp-version": {
-              "description": "The version of F# included in this component version.",
+              "description": "The version of F# included in the component.",
               "type": "string"
             },
             "vb-version": {
-              "description": "The version of Visual Basic included in this component version.",
+              "description": "The version of Visual Basic included in the component.",
               "type": "string"
             },
             "files": {
-              "description": "The files that are available for this component.",
+              "description": "The files that are available for the component.",
               "type": "array",
               "items": {
                 "description": "File that is part of a release.",
@@ -163,6 +194,10 @@
                     "description": "Fully-qualified URL of file.",
                     "type": "string"
                   },
+                  "akams": {
+                    "description": "Short-link URL to file.",
+                    "type": "string"
+                  },
                   "hash": {
                     "description": "Content hash of file.",
                     "type": "string"
@@ -172,6 +207,7 @@
                   "name",
                   "rid",
                   "url",
+                  "akams",
                   "hash"
                 ]
               }
@@ -180,7 +216,9 @@
           "required": [
             "version",
             "version-display",
+            "runtime-version",
             "vs-version",
+            "vs-support",
             "csharp-version",
             "fsharp-version",
             "vb-version",
@@ -205,24 +243,32 @@
                 "description": "The display or branding variant of the version, if different.",
                 "type": "string"
               },
+              "runtime-version": {
+                "description": "The version of the runtime that is included in the component.",
+                "type": "string"
+              },
               "vs-version": {
                 "description": "The version of Visual Studio that includes this component version.",
                 "type": "string"
               },
+              "vs-support": {
+                "description": "The minimum version of Visual Studio that supports this component version.",
+                "type": "string"
+              },
               "csharp-version": {
-                "description": "The version of C# included in this component version.",
+                "description": "The version of C# included in the component.",
                 "type": "string"
               },
               "fsharp-version": {
-                "description": "The version of F# included in this component version.",
+                "description": "The version of F# included in the component.",
                 "type": "string"
               },
               "vb-version": {
-                "description": "The version of Visual Basic included in this component version.",
+                "description": "The version of Visual Basic included in the component.",
                 "type": "string"
               },
               "files": {
-                "description": "The files that are available for this component.",
+                "description": "The files that are available for the component.",
                 "type": "array",
                 "items": {
                   "description": "File that is part of a release.",
@@ -243,6 +289,10 @@
                       "description": "Fully-qualified URL of file.",
                       "type": "string"
                     },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": "string"
+                    },
                     "hash": {
                       "description": "Content hash of file.",
                       "type": "string"
@@ -252,6 +302,7 @@
                     "name",
                     "rid",
                     "url",
+                    "akams",
                     "hash"
                   ]
                 }
@@ -260,7 +311,9 @@
             "required": [
               "version",
               "version-display",
+              "runtime-version",
               "vs-version",
+              "vs-support",
               "csharp-version",
               "fsharp-version",
               "vb-version",
@@ -316,6 +369,10 @@
                     "description": "Fully-qualified URL of file.",
                     "type": "string"
                   },
+                  "akams": {
+                    "description": "Short-link URL to file.",
+                    "type": "string"
+                  },
                   "hash": {
                     "description": "Content hash of file.",
                     "type": "string"
@@ -325,6 +382,7 @@
                   "name",
                   "rid",
                   "url",
+                  "akams",
                   "hash"
                 ]
               }
@@ -372,6 +430,10 @@
                     "description": "Fully-qualified URL of file.",
                     "type": "string"
                   },
+                  "akams": {
+                    "description": "Short-link URL to file.",
+                    "type": "string"
+                  },
                   "hash": {
                     "description": "Content hash of file.",
                     "type": "string"
@@ -381,6 +443,7 @@
                   "name",
                   "rid",
                   "url",
+                  "akams",
                   "hash"
                 ]
               }
@@ -409,6 +472,9 @@
   },
   "required": [
     "channel-version",
+    "release-date",
+    "release-version",
+    "security",
     "release"
   ]
 }
