@@ -38,7 +38,7 @@ Example JSON files:
 
 - [Major releases index](./releases-index.json)
 - [Major release](./9.0/releases.json)
-- [Patch release index, for a major version](./9.0/patch-release-index.json)
+- [Patch release index, for a major version](./9.0/patch-releases-index.json)
 - [Patch release](./9.0/preview/preview1/release.json)
 
 Note: monthly previews are published in the same way, often on the same day. They are not supported so do not include CVE information. However, Release Candidate releases follow our ["Go Live" policy](https://github.com/dotnet/core/blob/main/release-policies.md) and may include CVE information.
