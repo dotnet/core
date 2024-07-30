@@ -91,6 +91,16 @@ sudo dnf install -y \
     tzdata
 ```
 
+## FreeBSD
+
+### FreeBSD 14.1
+
+```bash
+sudo pkg install -A \
+    icu \
+    krb5
+```
+
 ## Ubuntu
 
 ### Ubuntu 24.10 (Oracular Oriole)
