@@ -143,10 +143,6 @@
                 "description": "The display or branding variant of the version, if different.",
                 "type": "string"
               },
-              "vs-support": {
-                "description": "The minimum version of Visual Studio that supports this component version.",
-                "type": "string"
-              },
               "vs-version": {
                 "description": "The version of Visual Studio that includes this component version.",
                 "type": "string"
@@ -173,29 +169,39 @@
                       "description": "Fully-qualified URL of file.",
                       "type": "string"
                     },
-                    "akams": {
-                      "description": "Short-link URL to file.",
-                      "type": "string"
-                    },
                     "hash": {
                       "description": "Content hash of file.",
                       "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
                     }
                   },
                   "required": [
                     "name",
                     "rid",
                     "url",
-                    "akams",
                     "hash"
                   ]
                 }
+              },
+              "vs-support": {
+                "description": "The minimum version of Visual Studio that supports this component version.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": null
               }
             },
             "required": [
               "version",
               "version-display",
-              "vs-support",
               "vs-version",
               "files"
             ]
@@ -258,20 +264,23 @@
                       "description": "Fully-qualified URL of file.",
                       "type": "string"
                     },
-                    "akams": {
-                      "description": "Short-link URL to file.",
-                      "type": "string"
-                    },
                     "hash": {
                       "description": "Content hash of file.",
                       "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
                     }
                   },
                   "required": [
                     "name",
                     "rid",
                     "url",
-                    "akams",
                     "hash"
                   ]
                 }
@@ -353,20 +362,23 @@
                         "description": "Fully-qualified URL of file.",
                         "type": "string"
                       },
-                      "akams": {
-                        "description": "Short-link URL to file.",
-                        "type": "string"
-                      },
                       "hash": {
                         "description": "Content hash of file.",
                         "type": "string"
+                      },
+                      "akams": {
+                        "description": "Short-link URL to file.",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "default": null
                       }
                     },
                     "required": [
                       "name",
                       "rid",
                       "url",
-                      "akams",
                       "hash"
                     ]
                   }
@@ -433,20 +445,23 @@
                       "description": "Fully-qualified URL of file.",
                       "type": "string"
                     },
-                    "akams": {
-                      "description": "Short-link URL to file.",
-                      "type": "string"
-                    },
                     "hash": {
                       "description": "Content hash of file.",
                       "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
                     }
                   },
                   "required": [
                     "name",
                     "rid",
                     "url",
-                    "akams",
                     "hash"
                   ]
                 }
@@ -462,7 +477,10 @@
           },
           "windowsdesktop": {
             "description": "Windows Desktop component of the release.",
-            "type": "object",
+            "type": [
+              "object",
+              "null"
+            ],
             "properties": {
               "version": {
                 "description": "The version of the component.",
@@ -494,20 +512,23 @@
                       "description": "Fully-qualified URL of file.",
                       "type": "string"
                     },
-                    "akams": {
-                      "description": "Short-link URL to file.",
-                      "type": "string"
-                    },
                     "hash": {
                       "description": "Content hash of file.",
                       "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
                     }
                   },
                   "required": [
                     "name",
                     "rid",
                     "url",
-                    "akams",
                     "hash"
                   ]
                 }
@@ -517,7 +538,8 @@
               "version",
               "version-display",
               "files"
-            ]
+            ],
+            "default": null
           }
         },
         "required": [
@@ -529,8 +551,7 @@
           "runtime",
           "sdk",
           "sdks",
-          "aspnetcore-runtime",
-          "windowsdesktop"
+          "aspnetcore-runtime"
         ]
       }
     }
