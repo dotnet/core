@@ -48,11 +48,12 @@ As the end of support nears for a given .NET version, we strongly recommend you 
 Support ends for a given .NET version when its published end of support date has passed. Support typically ends on a patch day. If there is a critical issue for that .NET version, it will be patched for the last time on that day. There will not be any patches after that point. Continuing to use an unsupported version will expose you to security vulnerabilities.
 
 ### Tooling
+
 The month after a .NET version goes out of support we mark it as optional and out of support in Visual Studio. Customers can remove it from their Visual Studio installs by using the [remove out of support components](https://devblogs.microsoft.com/visualstudio/removing-out-of-support-components-from-your-visual-studio-installations/) experience.
 
 Additionally, customers targeting the out of support .NET version in their projects will get a notification in Visual Studio.
 
-6 months after a .NET version goes out of support, .NET SDK versions are updated to produce warning [NETSDK1138](https://learn.microsoft.com/dotnet/core/tools/sdk-errors/netsdk1138) when targeting the out of support version.
+6 months after a .NET version goes out of support, newer in-support .NET SDK versions are updated to produce warning [NETSDK1138](https://learn.microsoft.com/dotnet/core/tools/sdk-errors/netsdk1138) when targeting the out of support version.
 
 ### Packages
 
