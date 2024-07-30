@@ -13,7 +13,7 @@ The following table lists [releases](../releases.md) under active support or dev
 [6.0.32]: 6.0/6.0.32/6.0.32.md
 [policies]: ../release-policies.md
 
-You can find release notes for all releases in the [release-notes](.) directory, in a combination of markdown and JSON formats. This content is [licensed](./license-information.md) for broad use. JSON schemas are available for JSON formats at [schemas](./schemas/README.md).
+You can find release notes for all releases in the [release-notes](.) directory, in a combination of markdown and JSON formats. JSON schemas are available for JSON formats at [schemas](./schemas/README.md). This content is [licensed](./license-information.md) for broad use.
 
 ## Download .NET
 

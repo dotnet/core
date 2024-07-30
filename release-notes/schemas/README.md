@@ -153,3 +153,5 @@ OS package information is published for each major release. A nominal set of pac
 
 - Example: [.NET 9 OS packages (json)](./9.0/os-packages.json)
 - Schema: [dotnet-os-packages.json](./schemas/dotnet-os-packages.json)
+
+- This file is only present for .NET 9+.
