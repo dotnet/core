@@ -16,7 +16,7 @@
 * [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
 * [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 
-You can find release notes for all releases in the [release-notes](.) directory, in a combination of markdown and [JSON formats](./schemas/README.md). This content is [licensed](./license-information.md) for broad use.
+You can find release notes for all releases in the [release-notes](.) directory, in markdown and [JSON formats](./schemas/README.md). This content is [licensed](./license-information.md) for broad use.
 
 ## Monthly patch release notes
 
@@ -67,7 +67,7 @@ Examples:
 
 ## OS packages
 
-OS package information is published for each major release. This information indicates which packages must be installed on a given distro for a .NET app (or the .NET SDK) to run. [.NET packages](../../linux.md) are available for multiple distros, which automatically install all required packages.
+OS package information is published for each major release. This information indicates which packages must be installed on a given distro for a .NET app (or the .NET SDK) to run. [.NET packages](../linux.md) are available for multiple distros, which automatically install all required packages.
 
 Examples:
 
