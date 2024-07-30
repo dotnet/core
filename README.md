@@ -1,10 +1,10 @@
-# .NET News & Release Notes
+# .NET Release Notes
 
 Welcome to the home of [.NET news](https://github.com/dotnet/core/discussions/categories/news) & [release notes](./release-notes/README.md).
 
-## Release Notes
+## Releases
 
-[Releases](./releases.md) under active development or support:
+[Releases](./releases.md) under active support or development:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
@@ -17,6 +17,11 @@ Welcome to the home of [.NET news](https://github.com/dotnet/core/discussions/ca
 [6.0.32]: release-notes/6.0/6.0.32/6.0.32.md
 [policies]: release-policies.md
 
+* [Release notes](./release-notes/README.md)
+* [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
+* [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
+* [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
+
 ## Discussions
 
 Follow [GitHub Discussions](https://github.com/dotnet/core/discussions), where you will find the latest new on preview releases, service releases, and CVEs for .NET.
@@ -28,10 +33,3 @@ You can subscribe to news posts with the following RSS feeds:
 | All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
 | News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
 | General  | [🔗](https://github.com/dotnet/core/discussions/categories/general) | [🔗](https://github.com/dotnet/core/discussions/categories/general.atom) |
-
-## Release Information
-
-* [Release notes](./release-notes/README.md)
-* [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
-* [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
-* [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)

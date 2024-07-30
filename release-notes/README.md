@@ -1,6 +1,6 @@
 # .NET Release Notes
 
-The following table lists [releases](../releases.md) under active support or development:
+[Releases](../releases.md) under active support or development:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
@@ -13,13 +13,10 @@ The following table lists [releases](../releases.md) under active support or dev
 [6.0.32]: 6.0/6.0.32/6.0.32.md
 [policies]: ../release-policies.md
 
-You can find release notes for all releases in the [release-notes](.) directory, in a combination of markdown and JSON formats. JSON schemas are available for JSON formats at [schemas](./schemas/README.md). This content is [licensed](./license-information.md) for broad use.
-
-## Download .NET
-
 * [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
 * [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
-* [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
+
+You can find release notes for all releases in the [release-notes](.) directory, in a combination of markdown and [JSON formats](./schemas/README.md). This content is [licensed](./license-information.md) for broad use.
 
 ## Monthly patch release notes
 

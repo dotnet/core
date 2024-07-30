@@ -1,6 +1,6 @@
 # Release notes schemas
 
-JSON schemas are available for most JSON [formats used in this repository](../formats.md).
+JSON schemas are available for most JSON formats used in this repository.
 
 ## Major releases index -- `releases-index.json`
 
@@ -36,7 +36,7 @@ Notes:
 - Some property values are repeated. The properties with `.` characters in them, like `supported-os.json`, are considered deprecated.
 - This file is generated from the `releases.json` files in the version directories.
 
-`releases-index.json` and all the files it references are stored in blob storage and in GitHub. We use GitHub for easy discoverability of the files and Azure Blob Storage as our production platform (and we know some of our users host their apps within Azure). It is straightforward to programmatically transform the [blob storage links](https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json) to [`raw` GitHub links](https://raw.githubusercontent.com/dotnet/core/main/release-notes/releases-index.json) should that be desired.
+`releases-index.json` and all the files it references are stored in blob storage and in GitHub. We use GitHub for easy discoverability of the files and Azure Blob Storage as our production platform. It is straightforward to programmatically transform the [blob storage links](https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json) to [`raw` GitHub links](https://raw.githubusercontent.com/dotnet/core/main/release-notes/releases-index.json) should that be desired.
 
 ## Patch releases -- `releases.json`
 
@@ -44,7 +44,7 @@ The `releases.json` file contains detailed release information for the life of a
 
 - Example: [.NET 8 `releases.json`](../8.0/releases.json)
 - Example: [.NET 9 `releases.json`](../9.0/releases.json)
-- Schema: [](./dotnet-patch-release.json)
+- Schema: [dotnet-patch-release.json](./dotnet-patch-release.json)
 
 The following example demonstrates the start of this file.
 
@@ -92,7 +92,7 @@ Notes:
 
 ## Patch releases index -- `patch-releases-index.json`
 
-The `patch-releases-index.json` is the index file for all patch releases within a major release. It contains much the same high-level information as `releases-index.json`, but for a single major release.
+The `patch-releases-index.json` is the index file for all patch releases within a major release. It contains much the same high-level information as `releases-index.json`, but for a single major release.  It is relatively small, just a few lines per version object.
 
 - Example: [.NET 8 `releases.json`](../8.0/patch-releases-index.json)
 - Example: [.NET 9 `releases.json`](../9.0/patch-releases-index.json)
@@ -127,8 +127,8 @@ The `release.json` file contains expansive release information for a single patc
 
 Examples:
 
-- [6.0.0 `releass.json`](../6.0/6.0.0/release.json)
-- [8.0.7 `releases.json`](../8.0/8.0.7/release.json)
+- [6.0.0 `release.json`](../6.0/6.0.0/release.json)
+- [8.0.7 `release.json`](../8.0/8.0.7/release.json)
 
 Notes:
 
@@ -140,7 +140,7 @@ Notes:
 
 Supported OS information is published for each major release. It describes a set of operating distributions and which versions are supported.
 
-- Example: [.NET 8 Supported OSes (json)](./8.0/supported-os.json)
+- Example: [.NET 8 Supported OSes (json)](../8.0/supported-os.json)
 - Schema: [dotnet-supported-os-matrix.json](./dotnet-supported-os-matrix.json)
 
 Notes:
@@ -151,7 +151,7 @@ Notes:
 
 OS package information is published for each major release. A nominal set of packages is documented, including the scenarios they are required for. Each operating system can then indicate which of those packages are required (for that given environment). The packages are documented in an order that makes it possibly to `foreach` over the first n packages in the array for common scenarios.
 
-- Example: [.NET 9 OS packages (json)](./9.0/os-packages.json)
+- Example: [.NET 9 OS packages (json)](../9.0/os-packages.json)
 - Schema: [dotnet-os-packages.json](./schemas/dotnet-os-packages.json)
 
 - This file is only present for .NET 9+.
