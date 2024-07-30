@@ -75,7 +75,7 @@
             "type": "string"
           },
           "patch-releases-index-uri": {
-            "description": "Link to index file of detailed release descriptions  (JSON format), with one file per patch release.",
+            "description": "Link to index file of detailed release descriptions (JSON format), with one file per patch release.",
             "type": [
               "string",
               "null"
@@ -120,11 +120,13 @@
           "release-type",
           "releases.json",
           "patch-releases-info-uri"
-        ]
+        ],
+        "additionalProperties": false
       }
     }
   },
   "required": [
     "releases-index"
-  ]
+  ],
+  "additionalProperties": false
 }

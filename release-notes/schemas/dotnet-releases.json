@@ -1,4 +1,5 @@
 {
+  "description": "A major product release, including detailed information for each patch release.",
   "type": [
     "object",
     "null"
@@ -60,7 +61,7 @@
       "type": "string"
     },
     "patch-releases-index-uri": {
-      "description": "Link to index file of detailed release descriptions  (JSON format), with one file per patch release.",
+      "description": "Link to index file of detailed release descriptions (JSON format), with one file per patch release.",
       "type": [
         "string",
         "null"
@@ -84,6 +85,7 @@
       "description": "A set of patch releases with detailed release information.",
       "type": "array",
       "items": {
+        "description": "Detailed information for the patch release.",
         "type": [
           "object",
           "null"
@@ -124,7 +126,8 @@
               "required": [
                 "cve-id",
                 "cve-url"
-              ]
+              ],
+              "additionalProperties": false
             }
           },
           "release-notes": {
@@ -187,7 +190,8 @@
                     "rid",
                     "url",
                     "hash"
-                  ]
+                  ],
+                  "additionalProperties": false
                 }
               },
               "vs-support": {
@@ -204,7 +208,8 @@
               "version-display",
               "vs-version",
               "files"
-            ]
+            ],
+            "additionalProperties": false
           },
           "sdk": {
             "description": "SDK component of the release (primary SDK release).",
@@ -282,7 +287,8 @@
                     "rid",
                     "url",
                     "hash"
-                  ]
+                  ],
+                  "additionalProperties": false
                 }
               }
             },
@@ -296,7 +302,8 @@
               "fsharp-version",
               "vb-version",
               "files"
-            ]
+            ],
+            "additionalProperties": false
           },
           "sdks": {
             "description": "SDK components of the release (often multiple, otherwise a repeat of \u0060Sdk\u0060 value within an array).",
@@ -380,7 +387,8 @@
                       "rid",
                       "url",
                       "hash"
-                    ]
+                    ],
+                    "additionalProperties": false
                   }
                 }
               },
@@ -394,7 +402,8 @@
                 "fsharp-version",
                 "vb-version",
                 "files"
-              ]
+              ],
+              "additionalProperties": false
             }
           },
           "aspnetcore-runtime": {
@@ -463,7 +472,8 @@
                     "rid",
                     "url",
                     "hash"
-                  ]
+                  ],
+                  "additionalProperties": false
                 }
               }
             },
@@ -473,7 +483,8 @@
               "version-aspnetcoremodule",
               "vs-version",
               "files"
-            ]
+            ],
+            "additionalProperties": false
           },
           "windowsdesktop": {
             "description": "Windows Desktop component of the release.",
@@ -530,7 +541,8 @@
                     "rid",
                     "url",
                     "hash"
-                  ]
+                  ],
+                  "additionalProperties": false
                 }
               }
             },
@@ -539,6 +551,7 @@
               "version-display",
               "files"
             ],
+            "additionalProperties": false,
             "default": null
           }
         },
@@ -552,7 +565,8 @@
           "sdk",
           "sdks",
           "aspnetcore-runtime"
-        ]
+        ],
+        "additionalProperties": false
       }
     }
   },
@@ -572,5 +586,6 @@
     "supported-os-info-uri",
     "os-packages-info-uri",
     "releases"
-  ]
+  ],
+  "additionalProperties": false
 }

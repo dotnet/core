@@ -40,6 +40,7 @@
       "description": "Set of patch releases.",
       "type": "array",
       "items": {
+        "description": "A patch release, including the version, and whether it included security updates.",
         "type": [
           "object",
           "null"
@@ -68,7 +69,8 @@
           "release-date",
           "security",
           "release-info-uri"
-        ]
+        ],
+        "additionalProperties": false
       }
     }
   },
@@ -80,5 +82,6 @@
     "supported-os-info-uri",
     "os-packages-info-uri",
     "releases"
-  ]
+  ],
+  "additionalProperties": false
 }

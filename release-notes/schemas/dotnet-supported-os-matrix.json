@@ -110,14 +110,16 @@
                 "link",
                 "architectures",
                 "supported-versions"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         },
         "required": [
           "name",
           "distributions"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "libc": {
@@ -161,7 +163,8 @@
           "version",
           "architectures",
           "source"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "notes": {
@@ -182,5 +185,6 @@
     "channel-version",
     "last-updated",
     "families"
-  ]
+  ],
+  "additionalProperties": false
 }

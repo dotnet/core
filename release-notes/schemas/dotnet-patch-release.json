@@ -1,4 +1,5 @@
 {
+  "description": "A patch release for a major product version.",
   "type": [
     "object",
     "null"
@@ -60,7 +61,8 @@
             "required": [
               "cve-id",
               "cve-url"
-            ]
+            ],
+            "additionalProperties": false
           }
         },
         "release-notes": {
@@ -123,7 +125,8 @@
                   "rid",
                   "url",
                   "hash"
-                ]
+                ],
+                "additionalProperties": false
               }
             },
             "vs-support": {
@@ -140,7 +143,8 @@
             "version-display",
             "vs-version",
             "files"
-          ]
+          ],
+          "additionalProperties": false
         },
         "sdk": {
           "description": "SDK component of the release (primary SDK release).",
@@ -218,7 +222,8 @@
                   "rid",
                   "url",
                   "hash"
-                ]
+                ],
+                "additionalProperties": false
               }
             }
           },
@@ -232,7 +237,8 @@
             "fsharp-version",
             "vb-version",
             "files"
-          ]
+          ],
+          "additionalProperties": false
         },
         "sdks": {
           "description": "SDK components of the release (often multiple, otherwise a repeat of \u0060Sdk\u0060 value within an array).",
@@ -316,7 +322,8 @@
                     "rid",
                     "url",
                     "hash"
-                  ]
+                  ],
+                  "additionalProperties": false
                 }
               }
             },
@@ -330,7 +337,8 @@
               "fsharp-version",
               "vb-version",
               "files"
-            ]
+            ],
+            "additionalProperties": false
           }
         },
         "aspnetcore-runtime": {
@@ -399,7 +407,8 @@
                   "rid",
                   "url",
                   "hash"
-                ]
+                ],
+                "additionalProperties": false
               }
             }
           },
@@ -409,7 +418,8 @@
             "version-aspnetcoremodule",
             "vs-version",
             "files"
-          ]
+          ],
+          "additionalProperties": false
         },
         "windowsdesktop": {
           "description": "Windows Desktop component of the release.",
@@ -466,7 +476,8 @@
                   "rid",
                   "url",
                   "hash"
-                ]
+                ],
+                "additionalProperties": false
               }
             }
           },
@@ -475,6 +486,7 @@
             "version-display",
             "files"
           ],
+          "additionalProperties": false,
           "default": null
         }
       },
@@ -488,7 +500,8 @@
         "sdk",
         "sdks",
         "aspnetcore-runtime"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -497,5 +510,6 @@
     "release-version",
     "security",
     "release"
-  ]
+  ],
+  "additionalProperties": false
 }
