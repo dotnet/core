@@ -102,7 +102,7 @@ More information and workaround can be found at <https://github.com/dotnet/runti
 
 ### Using Visual Studio 17.6 to target .NET 6 may hit NETSDK1145 if nuget.org not configured for package downloads
 
-.NET 7 went [out of support](https://devblogs.microsoft.com/dotnet/dotnet-7-end-of-support/) in May 2024. Per the plan outlined in that blog post, we have included the .NET 7 SDK in 17.6 as optional but are no longer updating it. We will continue to update the 6.0 runtime included in Visual Studio 17.6 to ensure customers have the latest security fixes when targeting .NET 6. However, when building using the .NET 7 SDK, it will expect Host Packs, Targeting Packs, and Runtime Packs from an older version of .NET 6 than is installed by default. It will attempt to download these packages from NuGet.org.
+.NET 7 went [out of support](https://devblogs.microsoft.com/dotnet/dotnet-7-end-of-support/) in May 2024. Per the plan outlined in that blog post, we have included the .NET 7 SDK in 17.6 as an optional component but are no longer updating it. We will continue to update the 6.0 runtime included in Visual Studio 17.6 to ensure customers have the latest security fixes when targeting .NET 6. However, when building using the .NET 7 SDK, it will expect Host Packs, Targeting Packs, and Runtime Packs from an older version of .NET 6 than is installed by default. It will attempt to download these packages from NuGet.org.
 
 If you are working offline though or without using the default NuGet.org feed, you will hit error NETSDK1145 as it will not be able to find the 6.0.31 packs it expects.
 
