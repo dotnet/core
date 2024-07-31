@@ -49,7 +49,7 @@ Support ends for a given .NET version when its published end of support date has
 
 ### Tooling
 
-The month after a .NET version goes out of support we mark it as optional and out of support in Visual Studio. Customers can remove it from their Visual Studio installs by using the [remove out of support components](https://devblogs.microsoft.com/visualstudio/removing-out-of-support-components-from-your-visual-studio-installations/) experience.
+The month after a .NET version goes out of support, we mark that version as optional and out of support in Visual Studio. Customers can remove it from their Visual Studio installs by using the [remove out of support components](https://devblogs.microsoft.com/visualstudio/removing-out-of-support-components-from-your-visual-studio-installations/) experience.
 
 Additionally, customers targeting the out of support .NET version in their projects will get a notification in Visual Studio.
 
