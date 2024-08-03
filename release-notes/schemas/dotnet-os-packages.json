@@ -69,7 +69,8 @@
           "id",
           "name",
           "required-scenarios"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "distributions": {
@@ -122,7 +123,8 @@
               "required": [
                 "run-under-sudo",
                 "command-root"
-              ]
+              ],
+              "additionalProperties": false
             }
           },
           "releases": {
@@ -144,6 +146,7 @@
                   "type": "string"
                 },
                 "packages": {
+                  "description": "The packages required by the distro release.",
                   "type": "array",
                   "items": {
                     "description": "A distro archive package to install, with a reference to a logical package with more information.",
@@ -164,7 +167,8 @@
                     "required": [
                       "id",
                       "name"
-                    ]
+                    ],
+                    "additionalProperties": false
                   }
                 }
               },
@@ -172,7 +176,8 @@
                 "name",
                 "release",
                 "packages"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         },
@@ -180,7 +185,8 @@
           "name",
           "install-commands",
           "releases"
-        ]
+        ],
+        "additionalProperties": false
       }
     }
   },
@@ -188,5 +194,6 @@
     "channel-version",
     "packages",
     "distributions"
-  ]
+  ],
+  "additionalProperties": false
 }
