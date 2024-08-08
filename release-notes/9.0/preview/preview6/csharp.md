@@ -32,7 +32,7 @@ The Regex source generator has been updated and if you prefer to use a property,
  
 ```csharp
 [GeneratedRegex("abc|def")]
-private static partial Regex AbcOrDefProperty { get; };
+private static partial Regex AbcOrDefProperty { get; }
  
 if (AbcOrDefProperty.IsMatch(text))
 {

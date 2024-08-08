@@ -2,10 +2,10 @@
 
 Here's a summary of what's new in ASP.NET Core in this preview release:
 
-- [Fingerprinting of static web assets](#fingerprinting-of-static-web-assets)
-- [Improved distributed tracing for SignalR](#improved-distributed-tracing-for-signalr)
-- [Enhancements to Microsoft.AspNetCore.OpenAPI](#enhancements-to-microsoftaspnetcoreopenapi)
-- [Analyzer to warn when `[Authorize]` is overridden by `[AllowAnymous]`](#analyzer-to-warn-when-authorize-is-overridden-by-allowanymous-from-farther-away)
+- [Fingerprinting of static web assets](#fingerprinting-of-static-web-assets) ensuring that stale assets aren't used and enables improved caching behavior for faster load time
+- [Improved distributed tracing for SignalR](#improved-distributed-tracing-for-signalr) with a new `ActivitySource`
+- [Enhancements to Microsoft.AspNetCore.OpenAPI](#enhancements-to-microsoftaspnetcoreopenapi) including [completion enhancements](#completion-enhancements-and-package-install-recommendations-for-openapi-package), support for [`[Required]` and `[DefaultValue]` attributes](#support-for-required-and-defaultvalue-attributes-on-parameters-or-properties), [schema transforms](#support-for-schema-transformers-on-openapi-document) on OpenAPI documents, 
+- [Analyzer to warn when `[Authorize]` is overridden by `[AllowAnonymous]`](#analyzer-to-warn-when-authorize-is-overridden-by-allowanonymous-from-farther-away), and new [analyzers](#analyzer-to-warn-when-authorize-is-overridden-by-allowanonymous-from-farther-away), 
 - [`ComponentPlatform` renamed to `RendererInfo`](#componentplatform-renamed-to-rendererinfo)
 - [Split large HTTP/2 headers across frames](#split-large-http2-headers-across-frames)
 
@@ -60,7 +60,7 @@ The project templates for Blazor, MVC, and Razor Pages have all been updated to 
 
 SignalR now has an `ActivitySource` named "Microsoft.AspNetCore.SignalR.Server" that emits events for hub method calls. Every method is its own activity, so anything that emits an activity during the hub method call will be under the hub method activity. Hub method activities don't have a parent, so they won't be bundled under the long running SignalR connection.
 
-Here's how these new activities look in the the [.NET Aspire dashboard](https://learn.microsoft.com/dotnet/aspire/fundamentals/dashboard/overview?tabs=bash#standalone-mode):
+Here's how these new activities look in the [.NET Aspire dashboard](https://learn.microsoft.com/dotnet/aspire/fundamentals/dashboard/overview?tabs=bash#standalone-mode):
 
 ![SignalR distributed tracing](./media/signalr-distributed-tracing.png)
 
@@ -226,7 +226,7 @@ class Todo
 }
 ```
 
-## Analyzer to warn when `[Authorize]` is overridden by `[AllowAnymous]` from farther away
+## Analyzer to warn when `[Authorize]` is overridden by `[AllowAnonymous]` from farther away
 
 The `[Authorize]` attribute is commonly used on controllers and actions to require authorization. The `[AllowAnonymous]` attribute can then be used to allow anonymous access when authorization would otherwise be required. However, once anonymous access has been enabled, applying the `[Authorize]` attribute does not then reenable authorization. Incorrectly assuming that applying `[Authorize]` closer to an action than [AllowAnonymous] will still force authorization can lead to possible security bugs. For example:
 

@@ -1,8 +1,8 @@
-# .NET Support and Compatibility for Linux Distributions
+# Linux Distribution Support and Compatibility
 
 .NET can be [installed](https://learn.microsoft.com/dotnet/core/install/linux) and run on almost any Linux distribution. Packages that are available in a given distribution are compatible with that distribution. Packages and binaries from Microsoft are compatible with a broad set of distributions.
 
-The community provides best effort support for .NET across all Linux distributions. [Commercial support](support.md) is provided for some popular distributions.
+The .NET community provides [best effort support](./os-lifecycle-policy.md) across all Linux distributions. [Commercial support](support.md) is provided for some popular distributions.
 
 ## Containers
 
@@ -78,16 +78,6 @@ ldd (Ubuntu GLIBC 2.23-0ubuntu11.3) 2.23
 Portable builds support both OpenSSL 1.x and 3.x and can be run on distributions with either version of OpenSSL. For example, Ubuntu 22.04 only includes OpenSSL 3 in its official package archive.
 
 The highest OpenSSL version is loaded by default, but it can be [configured to use a specific version](https://github.com/dotnet/runtime/issues/79153#issuecomment-1335476471).
-
-## Red Hat Enterprise Linux support
-
-RHEL-compatible distributions are supported, including: AlmaLinux, CentOS Stream, Oracle Linux, and Rocky Linux.
-
-New .NET versions will typically only be supported on Red Hat Enterprise Linux (RHEL) versions in active support.
-
-- RHEL 7 is considered in maintenance.
-- RHEL 8 is considered in active support.
-- RHEL 9 is considered in active support.
 
 ## Building .NET from source
 

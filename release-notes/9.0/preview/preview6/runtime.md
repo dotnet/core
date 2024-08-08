@@ -2,11 +2,11 @@
 
 Here's a summary of what's new in the .NET Runtime in this preview release:
 
-- [ARM64 Code Generation](#arm64-code-generation)
-- [Code Layout](#code-layout)
-- [Loop Optimizations](#loop-optimizations)
-- [Reduced Address Exposure](#reduced-address-exposure)
-- [AVX10v1 Support](#avx10v1-support)
+- [ARM64 Code Generation](#arm64-code-generation) now adds ability to store operations
+- [Code Layout](#code-layout) - RyuJIT's block reordering algorithm with a simpler, more global approach
+- [Loop Optimizations](#loop-optimizations) for code size reduction and performance improvements
+- [Reduced Address Exposure](#reduced-address-exposure) through RyuJIT improvements to better track usage of local variable addreses.
+- [AVX10v1 Support](#avx10v1-support), a new SIMD instruction set from Intel
 - [Hardware Intrinsic Code Generation](#hardware-intrinsic-code-generation)
 - [Constant Folding for Floating Point and SIMD Operations](#constant-folding-for-floating-point-and-simd-operations)
 
@@ -142,7 +142,7 @@ for (int i = 100; i > 0; i--)
 }
 ```
 
-For the first example, we need to emit an instruction to increment `i`, followed by an instruction to perform the `i < 100` comparison, followed by a conditional jump to continue the loop if the conditoin is still true -- that's three instructions in total. However, if we flip the counter's direction, we need one fewer instruction. For example, on x64, we can use the `dec` instruction to decrement `i`; when `i` reaches zero, the `dec` instruction sets a CPU flag that can be used as the condition for a jump instruction immediately following the `dec`.
+For the first example, we need to emit an instruction to increment `i`, followed by an instruction to perform the `i < 100` comparison, followed by a conditional jump to continue the loop if the condition is still true -- that's three instructions in total. However, if we flip the counter's direction, we need one fewer instruction. For example, on x64, we can use the `dec` instruction to decrement `i`; when `i` reaches zero, the `dec` instruction sets a CPU flag that can be used as the condition for a jump instruction immediately following the `dec`.
 
 Here's what the x64 assembly looks like for the first example:
 ```asm
@@ -203,7 +203,7 @@ G_M59043_IG03:  ;; offset=0x0010
 ; Total bytes of code: 21
 ```
 
-Preview 6 improves RyuJIT's ability to track the usages of local variables' addresses, and avoid unnecessary address exposure. In this example, the more precise address exposure detection allows RyuJIT to replace usages of the `Awaitable` instance with its `Opts` field, and then eliminate `Opts` altogether by evaluating the constant expression `value ? 1 : 2`, where `value` is known to be `false`.
+RyuJIT can now better track the usage of local variables' addresses, and avoid unnecessary address exposure. In this example, the more precise address exposure detection allows RyuJIT to replace usages of the `Awaitable` instance with its `Opts` field, and then eliminate `Opts` altogether by evaluating the constant expression `value ? 1 : 2`, where `value` is known to be `false`.
 
 Here's what the updated x64 assembly looks like:
 ```asm
@@ -217,7 +217,7 @@ Check out [dotnet/runtime #102808](https://github.com/dotnet/runtime/pull/102808
 
 ## AVX10v1 Support
 
-Preview 6 introduces support for AVX10, a new SIMD instruction set by Intel. Using the new API surface under `System.Runtime.Intrinsics.X86.Avx10v1`, you'll be able to accelerate your .NET applications on AVX10-enabled hardware through numerous vectorized operations. Check out [dotnet/runtime #101938](https://github.com/dotnet/runtime/pull/101938).
+New APIs have been added for AVX10, a new SIMD instruction set by Intel. You'll be able to accelerate your .NET applications on AVX10-enabled hardware with vectorized operations using the new `System.Runtime.Intrinsics.X86.Avx10v1` APIs. Check out [dotnet/runtime #101938](https://github.com/dotnet/runtime/pull/101938).
 
 ## Hardware Intrinsic Code Generation
 

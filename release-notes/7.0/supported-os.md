@@ -1,5 +1,7 @@
 # .NET 7 - Supported OS versions
 
+Last updated: 2024-07-11
+
 [.NET 7](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
@@ -24,7 +26,7 @@ OS                              | Versions                     | Architectures  
 [iOS][2]                        | 17, 16, 15                   | Arm64              |
 [iPadOS][3]                     | 17, 16, 15                   | Arm64              |
 [macOS][4]                      | 14, 13, 12                   | Arm64, x64         |
-[tvOS][5]                       | [None](#out-of-support-os-versions) | Arm64              |
+[tvOS][5]                       | [None][OOS]                  | Arm64              |
 
 Notes:
 
@@ -43,7 +45,7 @@ Notes:
 OS                              | Versions                     | Architectures      | Lifecycle          |
 --------------------------------|------------------------------|--------------------|--------------------|
 [Alpine][6]                     | 3.20, 3.19, 3.18, 3.17       | Arm32, Arm64, x64  | [Lifecycle][7]     |
-[CentOS][8]                     | [None](#out-of-support-os-versions) | x64                | [Lifecycle][9]     |
+[CentOS][8]                     | [None][OOS]                  | x64                | [Lifecycle][9]     |
 [CentOS Stream][10]             | 9                            | Arm64, s390x, x64  | [Lifecycle][11]    |
 [Debian][12]                    | 12, 11                       | Arm32, Arm64, x64  | [Lifecycle][13]    |
 [Fedora][14]                    | 40, 39                       | Arm32, Arm64, x64  | [Lifecycle][15]    |
@@ -55,7 +57,7 @@ OS                              | Versions                     | Architectures  
 Notes:
 
 * CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
-* Red Hat Enterprise Linux: Red Hat family distributions are supported per [Linux compatibility and support](../../linux-support.md).
+* Red Hat Enterprise Linux: RHEL-compatible derivatives are supported per [.NET Support](../../support.md).
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
@@ -129,7 +131,6 @@ Android                         | 10                           | 2023-03-06     
 CentOS                          | 7                            | [2024-06-30](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.2009) |
 CentOS                          | 8                            | [2021-12-31](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS8.2111) |
 CentOS Stream                   | 8                            | [2024-05-31](http://web.archive.org/web/20230417021744/https://wiki.centos.org/Manuals/ReleaseNotes/CentOSStream) |
-CentOS Stream                   | 7                            | -                  |
 Debian                          | 10                           | [2022-09-10](https://www.debian.org/News/2022/20220910) |
 Fedora                          | 38                           | 2024-05-21         |
 Fedora                          | 37                           | 2023-12-05         |
@@ -140,7 +141,7 @@ iPadOS                          | 12                           | -              
 macOS                           | 11                           | [2023-09-26](https://support.apple.com/HT211896) |
 macOS                           | 10.15                        | [2022-09-12](https://support.apple.com/HT210642) |
 openSUSE Leap                   | 15.4                         | 2023-12-07         |
-openSUSE Leap                   | 15.3                         | 2022-12-31         |
+openSUSE Leap                   | 15.3                         | [2022-12-31](https://web.archive.org/web/20230521063245/https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/15.3/) |
 SUSE Enterprise Linux           | 12.5                         | 2024-10-31         |
 SUSE Enterprise Linux           | 15.3                         | 2022-12-31         |
 SUSE Enterprise Linux           | 12.4                         | 2020-06-30         |
@@ -162,3 +163,5 @@ Windows                         | 10 21H1                      | [2022-12-13](ht
 Windows                         | 7 SP1                        | [2020-01-14](https://learn.microsoft.com/lifecycle/products/windows-7) |
 Windows Server                  | 2012-R2                      | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012-r2) |
 Windows Server                  | 2012                         | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+
+[OOS]: #out-of-support-os-versions

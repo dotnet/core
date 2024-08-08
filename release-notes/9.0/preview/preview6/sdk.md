@@ -3,8 +3,8 @@
 Here's a summary of what's new in the .NET SDK in this preview release:
 
 - [NuGetAudit now raises warnings for vulnerabilities in transitive dependencies](#nugetaudit-now-raises-warnings-for-vulnerabilities-in-transitive-dependencies)
-- [`dotnet nuget why`](#dotnet-nuget-why)
-- [MSBuild BuildChecks](#msbuild-buildchecks)
+- Addition of [`dotnet nuget why`](#dotnet-nuget-why) to find out why a transitive package is being used in your project
+- [MSBuild BuildChecks](#msbuild-buildchecks) to help users enforce rules and invariants during their builds
 
 SDK updates in .NET 9 Preview 6:
 
