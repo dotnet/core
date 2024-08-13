@@ -36,7 +36,7 @@ Requirements (depending on your environment):
 
 ## More consistent environment variables for container publishing
 
-[@kasperk81](https://github.com/kasperk81] noticed that the environment variables that the container publish tooling use to control some of the finer aspects of registry communication and security were not aligned with the existing conventions. 
+[@kasperk81](https://github.com/kasperk81) noticed that the environment variables that the container publish tooling use to control some of the finer aspects of registry communication and security were not aligned with the existing conventions. 
 Most of the rest of the CLI uses the `DOTNET` 'namespace' for environment variables, but the container tooling used `SDK` instead. They helpfully [unified our environment variables to the `DOTNET` version](https://github.com/dotnet/sdk/pull/41769), while keeping support for the older `SDK` prefix. Going forward, please use the `DOTNET` prefix for environment variables, as we will eventually deprecate the older form.
 
 ## Introduction of Workload Sets for more control over workloads
