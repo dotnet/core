@@ -486,4 +486,4 @@ This release was focused on quality improvements. Using this release requires th
 
 ## Community Contributions
 
-Thank you to community contributors [@albyrock87](https://github.com/albyrock87), [@symbiogenesis](https://github.com/symbiogenesis), [@BurningLights](https://github.com/BurningLights), [@Takym](https://github.com/Takym), [@pictos](https://github.com/pictos), [@kubaflo](https://github.com/kubaflo), and [@rs-lkroneman](https://github.com/rs-lkroneman).
+Thank you to community contributors [@albyrock87](https://github.com/albyrock87), [@MartyIX](https://github.com/MartyIX), [@symbiogenesis](https://github.com/symbiogenesis), [@BurningLights](https://github.com/BurningLights), [@Takym](https://github.com/Takym), [@pictos](https://github.com/pictos), [@kubaflo](https://github.com/kubaflo), and [@rs-lkroneman](https://github.com/rs-lkroneman).
