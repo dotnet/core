@@ -313,6 +313,95 @@
             ]
         },
         {
+            "name": "RHEL",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "dnf",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "RHEL 8",
+                    "release": "8",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "glibc"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "openssl-libs"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5-libs"
+                        }
+                    ]
+                },
+                {
+                    "name": "RHEL 9",
+                    "release": "9",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "glibc"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "openssl-libs"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5-libs"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Ubuntu",
             "install-commands":
             [
