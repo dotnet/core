@@ -21,10 +21,6 @@ Instructions on getting started with .NET 9 can be found in the [getting started
 Discuss this release with the product teams on GitHub through the announcements for this release. 
 
 * [.NET 9 Preview 7 Announcement](https://aka.ms/dotnet/9/preview7)
-* [.NET MAUI]()
-* [ASP.NET Core]()
-* [Libraries and Runtime]()
-* [Source-build]()
 
 ## Stay up-to-date
 
