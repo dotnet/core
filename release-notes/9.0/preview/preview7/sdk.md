@@ -2,7 +2,7 @@
 
 .NET 9 Preview 7 includes several new SDK features. We focused on the following areas:
 
-* [Container publishing support for insecure registries](#container-publishing-support-for-insecure-registries)
+* [Container publishing support for insecure registries](#container-publishing-improvements-for-insecure-registries)
 * [More consistent environment variables for container publishing](#more-consistent-environment-variables-for-container-publishing)
 * [Introduction of Workload Sets for more control over workloads](#introduction-of-workload-sets-for-more-control-over-workloads)
 * [Mitigating analyzer mismatch issues aka 'torn SDK'](#mitigating-analyzer-mismatch-issues-aka-torn-sdk)
@@ -20,7 +20,7 @@ SDK updates in .NET 7 Preview 7:
 - [Libraries release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/libraries.md)
 
 
-## Container publishing support for insecure registries
+## Container publishing improvements for insecure registries
 
 The SDK's built-in container publishing support can publish images to container registries, but until this release those registries were required to be secured - they needed HTTPS support and valid certificates for the .NET SDK to work.
 Container engines can usually be configured to work with insecure registries as well - meaning registries that do not have TLS configured, or have TLS configured with a certificate that is invalid from the perspective of the container engine. This is a valid use case, but our tooling didn't support this mode of communication.
