@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in .NET MAUI in this preview release:
 
-* [Introduction of `HybridWebview`](introduction-of-hybridwebview)
+* [Introduction of `HybridWebview`](#introduction-of-hybridwebview)
 * [New `TitleBar` Control and `Window.TitleBar` for Windows](#new-titlebar-control-and-windowtitlebar-for-windows)
 * [`CollectionView` & `CarouselView` improvements with a new opt-in handler for iOS and Mac Catalyst](#collectionview--carouselview-improvements-with-a-new-opt-in-handler-for-ios-and-mac-catalyst)
 * [Ability to bring a `Window` to the foregrond with `ActivateWindow`](#activatewindow-added-to-bring-a-window-to-foreground)
@@ -253,7 +253,11 @@ The `TitleBar.Content` and `TitleBar.LeadingContent` are extremely customizable 
 
 Here is an overview of different settings in action:
 
-![Video showing different settings on a title bar on Windows](./media/titlebar.mp4)
+
+
+https://github.com/user-attachments/assets/2623e4a0-27b5-45b1-bbe8-59ddb2f2ab14
+
+
 
 ## `ActivateWindow` Added to bring a `Window` to foreground
 
