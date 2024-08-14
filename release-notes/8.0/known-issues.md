@@ -2,7 +2,7 @@
 
 You may encounter the following known issues, which may include workarounds, mitigations, or expected resolution timeframes.
 
-## .NET Runtime
+## .NET Servicing July 2024 update
 The .NET Servicing updated released on [July](https://github.com/dotnet/announcements/issues/311) contains a security fix addressed an elevation of privilege vulnerability detailed in CVE [2024-38081](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-38081). The fix changed System.IO.Path.GetTempPath method return value. If windows version exposes the GetTempPath2 Win32 API, this method invokes that API and returns the resolved path. [See the Remarks section](https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppath2w#remarks) of the [GetTempPath2](https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-gettemppath2w) documentation for more information on how this resolution is performed, including how to control the return value through the use of environment variables. The GetTempPath2 API may not be available on all versions of Windows.
 
 An observable difference between the GetTempPath and GetTempPath2 Win32 APIs is that they return different values for SYSTEM and non-SYSTEM processes. When calling this function from a process running as SYSTEM it will return the path %WINDIR%\SystemTemp, which is inaccessible to non-SYSTEM processes. This return value for SYSTEM processes cannot be overridden by environment variables. For non-SYSTEM processes, GetTempPath2 will behave the same as GetTempPath, respecting the same environment variables to override the return value.
