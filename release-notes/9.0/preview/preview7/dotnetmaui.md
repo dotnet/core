@@ -253,7 +253,11 @@ The `TitleBar.Content` and `TitleBar.LeadingContent` are extremely customizable 
 
 Here is an overview of different settings in action:
 
-![Video showing different settings on a title bar on Windows](./media/titlebar.mp4)
+
+
+https://github.com/user-attachments/assets/2623e4a0-27b5-45b1-bbe8-59ddb2f2ab14
+
+
 
 ## `ActivateWindow` Added to bring a `Window` to foreground
 
