@@ -220,7 +220,7 @@ Full .NET TechEmpower benchmark results are published [here](https://aka.ms/aspn
 
 If you notice a reduction in throughput, DATAS can be disabled using the following: 
 
-- `DOTNET_GCDynamicAdaptationMode=0` environment veriable
+- `DOTNET_GCDynamicAdaptationMode=0` environment variable
 - setting `System.GC.DynamicAdaptationMode` to `0` in `runtimeconfig.json`
 - `GarbageCollectionAdaptationMode` msbuild property set to `0`
 
