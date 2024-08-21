@@ -48,7 +48,7 @@ Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.0
 
 - [.NET 6 dependencies](./release-notes/6.0/linux-packages.md)
 - [.NET 8 dependencies](./release-notes/8.0/linux-packages.md)
-- [.NET 9 dependencies](./release-notes/9.0/linux-packages.md)
+- [.NET 9 dependencies](./release-notes/9.0/os-packages.md)
 
 ## Portable build compatibility
 
