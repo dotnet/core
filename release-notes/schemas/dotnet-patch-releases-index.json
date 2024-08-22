@@ -1,0 +1,87 @@
+{
+  "description": "A set of product patch releases with high-level information, like version and whether the release contains security fixes.",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "channel-version": {
+      "description": "Major (or major.minor) version of the product.",
+      "type": "string"
+    },
+    "latest-release": {
+      "description": "The version (branding) of the most recent patch release.",
+      "type": "string"
+    },
+    "latest-release-date": {
+      "description": "The date of the most recent patch release.",
+      "type": "string",
+      "format": "date"
+    },
+    "latest-release-security": {
+      "description": "Wehther the latest release includes security fixes.",
+      "type": "boolean"
+    },
+    "supported-os-info-uri": {
+      "description": "Link to supported OS matrix (JSON format).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "os-packages-info-uri": {
+      "description": "Link to OS package information (JSON format).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "releases": {
+      "description": "Set of patch releases.",
+      "type": "array",
+      "items": {
+        "description": "A patch release, including the version, and whether it included security updates.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "release-version": {
+            "description": "Version (branding) of the release.",
+            "type": "string"
+          },
+          "release-date": {
+            "description": "Date of release.",
+            "type": "string",
+            "format": "date"
+          },
+          "security": {
+            "description": "Whether the release contains any CVE fixes.",
+            "type": "boolean"
+          },
+          "release-info-uri": {
+            "description": "Link to detailed description of the release.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "release-version",
+          "release-date",
+          "security",
+          "release-info-uri"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "channel-version",
+    "latest-release",
+    "latest-release-date",
+    "latest-release-security",
+    "supported-os-info-uri",
+    "os-packages-info-uri",
+    "releases"
+  ],
+  "additionalProperties": false
+}
