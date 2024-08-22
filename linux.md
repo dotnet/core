@@ -36,7 +36,9 @@ sudo apt update && sudo apt install -y dotnet-sdk-8.0
 
 ## Microsoft packages
 
-Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET. They are documented at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux). You can move back and forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
+Microsoft offers alternate package feeds at [packages.microsoft.com](http://packages.microsoft.com/) that include the Microsoft binary build of .NET.
+They are documented at [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux).
+You can move back and forth between distribution and Microsoft archives using a variety of [package manager patterns](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup) and [previous challenges](https://github.com/dotnet/core/issues/7699) to guide you.
 
 Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.04](https://github.com/dotnet/core/discussions/9258).
 
@@ -48,7 +50,7 @@ Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.0
 
 - [.NET 6 dependencies](./release-notes/6.0/linux-packages.md)
 - [.NET 8 dependencies](./release-notes/8.0/linux-packages.md)
-- [.NET 9 dependencies](./release-notes/9.0/linux-packages.md)
+- [.NET 9 dependencies](./release-notes/9.0/os-packages.md)
 
 ## Portable build compatibility
 
