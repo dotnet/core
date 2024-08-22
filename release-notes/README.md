@@ -8,8 +8,6 @@
 | [.NET 8](8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.8][8.0.8] | November 10, 2026 |
 | [.NET 6](6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.33][6.0.33]  | November 12, 2024 |
 
-You can find release notes for all releases, including out-of-support releases, in the [release-notes](.) directory.
-
 [9.0.0-preview.7]: 9.0/preview/preview7/9.0.0-preview.7.md
 [8.0.8]: 8.0/8.0.8/8.0.8.md
 [6.0.33]: 6.0/6.0.33/6.0.33.md
@@ -41,6 +39,8 @@ Example JSON files:
 - [Major releases index](./releases-index.json)
 - [Major release](./9.0/releases.json)
 
+`releases-index.json` and all the files it references are stored in blob storage and in GitHub. We use GitHub for easy discoverability of the files and Azure Blob Storage as our production platform. It is straightforward to programmatically transform the [blob storage links](https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json) to [`raw` GitHub links](https://raw.githubusercontent.com/dotnet/core/main/release-notes/releases-index.json) should that be desired.
+
 Note: monthly previews are published in the same way, often on the same day. They are not supported so do not include CVE information. However, Release Candidate releases follow our ["Go Live" policy](https://github.com/dotnet/core/blob/main/release-policies.md) and may include CVE information.
 
 ## Monthly preview release notes
@@ -52,7 +52,7 @@ Examples:
 - [.NET 9 Preview 1](./9.0/preview/preview1/README.md)
 - [.NET 9 Preview 6](./9.0/preview/preview6/README.md)
 
-This content is used as source material for [What's New](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) pages in official Microsoft docs, which are [often updated](https://github.com/dotnet/docs/pulls?q=is%3Apr+What%27s+New) at the same time.
+This content is used as source material for [What's New](https://learn.microsoft.com/dotnet/core/whats-new/) pages in official Microsoft docs.
 
 Preview release notes are always in a `preview` folder. This approach was adopted so that preview releases do not distract from stable releases once preview releases are no longer relevant.
 

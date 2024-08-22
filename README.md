@@ -1,6 +1,6 @@
 # .NET Release Notes
 
-Welcome to the home of [.NET news](https://github.com/dotnet/core/discussions/categories/news) & [release notes](./release-notes/README.md).
+Welcome to the home of .NET [release notes](./release-notes/README.md) and [news](https://github.com/dotnet/core/discussions/categories/news).
 
 ## Releases
 
@@ -11,8 +11,6 @@ Welcome to the home of [.NET news](https://github.com/dotnet/core/discussions/ca
 | [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.7][9.0.0-preview.7] | May 12, 2026 |
 | [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.8][8.0.8] | November 10, 2026 |
 | [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.33][6.0.33]  | November 12, 2024 |
-
-You can find release notes for all releases, including out-of-support releases, in the [release-notes](release-notes) directory.
 
 [9.0.0-preview.7]: release-notes/9.0/preview/preview7/9.0.0-preview.7.md
 [8.0.8]: release-notes/8.0/8.0.8/8.0.8.md
