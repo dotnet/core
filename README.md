@@ -1,20 +1,10 @@
-# .NET News & Release Notes
+# .NET Release Notes
 
-Welcome to the home of .NET news & release notes to help you stay up to date with all of latest previews and releases. 
+Welcome to the home of [.NET news](https://github.com/dotnet/core/discussions/categories/news) & [release notes](./release-notes/README.md).
 
-Follow our [GitHub Discussions](https://github.com/dotnet/core/discussions), where you will find the latest new on preview releases, service releases, and CVEs for .NET.
+## Releases
 
-You can subscribe to news posts with the following RSS feeds:
-
-| Category | GitHub Discussions | RSS Feed |
-| --- | :--: | :--: |
-| All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
-| News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
-| General  | [🔗](https://github.com/dotnet/core/discussions/categories/general) | [🔗](https://github.com/dotnet/core/discussions/categories/general.atom) |
-
-## Release Notes
-
-The following tables lists [releases](./releases.md) under active development or support:
+[Releases](./releases.md) under active support or development:
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
@@ -27,13 +17,21 @@ You can find release notes for all releases, including out-of-support releases, 
 [9.0.0-preview.7]: release-notes/9.0/preview/preview7/9.0.0-preview.7.md
 [8.0.8]: release-notes/8.0/8.0.8/8.0.8.md
 [6.0.33]: release-notes/6.0/6.0.33/6.0.33.md
+[policies]: release-policies.md
 
-## Release Information
-
-* [Download .NET](https://dotnet.microsoft.com/download/dotnet)
+* [Release notes](./release-notes/README.md)
+* [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
 * [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 * [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
-* [Releases Index][releases-index.json] -- Index for all release channels in JSON format
 
-[releases-index.json]: https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
-[policies]: release-policies.md
+## Discussions
+
+Follow [GitHub Discussions](https://github.com/dotnet/core/discussions), where you will find the latest news on releases, including PSAs and CVEs.
+
+You can subscribe to discussions with the following RSS feeds:
+
+| Category | GitHub Discussions | RSS Feed |
+| --- | :--: | :--: |
+| All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
+| News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
+| General  | [🔗](https://github.com/dotnet/core/discussions/categories/general) | [🔗](https://github.com/dotnet/core/discussions/categories/general.atom) |
