@@ -89,6 +89,7 @@ Notes:
 - These files can grow to be quite large (>10k lines).
 - These files are used as the source for other, generated, files.
 
+<!--
 ## Patch releases index -- `patch-releases-index.json`
 
 The `patch-releases-index.json` is the index file for all patch releases within a major release. It contains much the same high-level information as `releases-index.json`, but for a single major release.  It is relatively small, just a few lines per version object.
@@ -132,6 +133,8 @@ Notes:
 - This file is only present for .NET 8+.
 - This file is generated from the `releases.json` files in the major version directories.
 
+-->
+
 ## Supported OS -- `supported-os.json`
 
 Supported OS information is published for each major release. It describes a set of operating distributions and which versions are supported.
@@ -148,6 +151,6 @@ Notes:
 OS package information is published for each major release. A nominal set of packages is documented, including the scenarios they are required for. Each operating system can then indicate which of those packages are required (for that given environment). The packages are documented in an order that makes it possibly to `foreach` over the first n packages in the array for common scenarios.
 
 - Example: [9.0 OS packages (json)](../9.0/os-packages.json)
-- Schema: [`dotnet-os-packages.json`](./schemas/dotnet-os-packages.json)
+- Schema: [`dotnet-os-packages.json`](./dotnet-os-packages.json)
 
 - This file is only present for .NET 9+.
