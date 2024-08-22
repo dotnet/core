@@ -143,7 +143,7 @@ Notes:
 Supported OS information is published for each major release. It describes a set of operating distributions and which versions are supported.
 
 - Example: [.NET 8 Supported OSes (json)](../8.0/supported-os.json)
-- Schema: [dotnet-supported-os-matrix.json](./dotnet-supported-os-matrix.json)
+- Schema: [dotnet-supported-os-matrix.json](./dotnet-supported-os.json)
 
 Notes:
 
