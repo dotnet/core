@@ -101,6 +101,36 @@ sudo pkg install -A \
     krb5
 ```
 
+## RHEL
+
+### RHEL 8
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### RHEL 9
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
 ## Ubuntu
 
 ### Ubuntu 24.10 (Oracular Oriole)
