@@ -1,6 +1,6 @@
 # .NET 6 - Supported OS versions
 
-Last updated: 2024-08-23
+Last updated: 2024-08-26
 
 [.NET 6](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -47,7 +47,7 @@ OS                              | Versions                    | Architectures   
 [Alpine][6]                     | 3.20, 3.19, 3.18, 3.17      | Arm32, Arm64, x64     | [Lifecycle][7]
 [CentOS][8]                     | [None][None]                | x64                   | [Lifecycle][9]
 [CentOS Stream][8]              | 9                           | Arm64, s390x, x64     | [Lifecycle][10]
-[Debian][11]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]
+[Debian][11]                    | 12, 11                      | Arm32, Arm64, x64     | [Lifecycle][12]
 [Fedora][13]                    | 40, 39                      | Arm32, Arm64, x64     | [Lifecycle][14]
 [openSUSE Leap][15]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][16]
 [Red Hat Enterprise Linux][17]  | 9, 8                        | Arm64, x64            | [Lifecycle][18]
@@ -130,7 +130,6 @@ Android                 | 9             | [2022-01-01](https://developer.android
 CentOS                  | 7             | [2024-06-30](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.2009)
 CentOS                  | 8             | [2021-12-31](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS8.2111)
 CentOS Stream           | 8             | [2024-05-31](http://web.archive.org/web/20230417021744/https://wiki.centos.org/Manuals/ReleaseNotes/CentOSStream)
-Debian                  | 11            | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html)
 Debian                  | 10            | [2022-09-10](https://www.debian.org/News/2022/20220910)
 Fedora                  | 38            | 2024-05-21
 Fedora                  | 37            | 2023-12-05

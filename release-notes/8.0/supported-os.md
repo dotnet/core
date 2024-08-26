@@ -1,6 +1,6 @@
 # .NET 8 - Supported OS versions
 
-Last updated: 2024-08-23
+Last updated: 2024-08-26
 
 [.NET 8](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -46,7 +46,7 @@ OS                              | Versions                    | Architectures   
 ------------------------------- | --------------------------- | --------------------- | ----------------------
 [Alpine][6]                     | 3.20, 3.19, 3.18, 3.17      | Arm32, Arm64, x64     | [Lifecycle][7]
 [CentOS Stream][8]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][9]
-[Debian][10]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][11]
+[Debian][10]                    | 12, 11                      | Arm32, Arm64, x64     | [Lifecycle][11]
 [Fedora][12]                    | 40, 39                      | Arm32, Arm64, x64     | [Lifecycle][13]
 [openSUSE Leap][14]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][15]
 [Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
@@ -118,7 +118,6 @@ OS                      | Version       | Date
 ----------------------- | ------------- | ----------------------
 Alpine                  | 3.16          | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html)
 Android                 | 11            | 2024-02-05
-Debian                  | 11            | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html)
 Fedora                  | 38            | 2024-05-21
 Fedora                  | 37            | 2023-12-05
 openSUSE Leap           | 15.4          | 2023-12-07
