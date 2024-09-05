@@ -39,3 +39,18 @@ private void ReactiveWindow_ContentRendered(object sender, System.EventArgs e)
 ```
 
 The behavior will be **fixed in .NET 9 RC1** release.
+
+## .NET SDK
+
+#### .NET 9.0.100-RC.1 will fail when used with 17.11
+
+There is an incompatible dependency between a file loaded from the SDK and the dependencies that Visual Studio includes.
+
+```
+NETSDK1060 Error reading assets file: Error loading lock file '...\obj\project.assets.json' : Could not load file or assembly 'System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51' or one of its dependencies. The system cannot find the file specified.
+```
+**Workaround**
+If you must use 17.11, you may be able to workaround this by copying a file from the SDK into a Visual Studio folder (note that you should delete this file in the future)
+`copy "C:\Program Files\dotnet\sdk\9.0.100-preview.7.24407.12\Sdks\Microsoft.NET.Sdk\tools\net472\System.Text.Json.dll" "C:\Program Files\Microsoft Visual Studio\2022\Preview\Common7\IDE\CommonExtensions\Microsoft\NuGet"`
+
+This behavior will be **fixed in .NET 9 SDK RC2** release
