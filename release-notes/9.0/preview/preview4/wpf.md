@@ -21,13 +21,13 @@ For consumer applications built on WPF and running on Windows 11, this feature e
 ![WPF app running in light mode](media/wpf-light.png)
 ![WPF app running in dark mode](media/wpf-dark.png)
 
-This can been enabled by adding the following to your `App.xaml`
+This can be enabled by adding the following to your `App.xaml`
 
 ```xml
 <Application.Resources>
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Resources/Fluent.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
         </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
 </Application.Resources>
