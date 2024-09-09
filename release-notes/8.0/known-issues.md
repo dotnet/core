@@ -13,4 +13,4 @@ You may encounter the following known issues, which may include workarounds, mit
 Exception: "System.IO.FileNotFoundException: Workload version 8.0.401, which was specified in <path>\global.json, was not found. Run "dotnet workload restore" to install this workload version.`
 
 **Workaround**
-Run `dotnet workload update` first to get the workload set instaleld and then run `dotnet workload restore` after to install the required workloads.
+Run `dotnet workload update` first to get the workload set installed and then run `dotnet workload restore` after to install the required workloads.
