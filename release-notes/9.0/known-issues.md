@@ -49,4 +49,4 @@ There is an incompatible dependency between a file loaded from the SDK and the d
 ```
 NETSDK1060 Error reading assets file: Error loading lock file '...\obj\project.assets.json' : Could not load file or assembly 'System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51' or one of its dependencies. The system cannot find the file specified.
 ```
-This behavior will be **fixed in .NET 9 SDK RC2** release
+This behavior will be **fixed in an upcoming Visual Studio 17.11.x** release
