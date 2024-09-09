@@ -71,7 +71,7 @@ public static bool ListContainsItem(ReadOnlySpan<char> span, string item)
             return true;
         }
     }
-    
+
     return false;
 }
 ```
@@ -283,3 +283,112 @@ Some additional callouts include:
 ### `TensorPrimitives` is stable and improved
 
 As a final note, the `TensorPrimitives` class which we shipped in .NET 8 is stable and has been expanded in .NET 9 with additional API surface that is also considered stable. It is not marked as `[Experimental]`. It is the class that contains most of the accelerated algorithms that underpin the `Tensor<T>` type and so they can still be used to accelerate your code where applicable. There are many potential applications for these algorithms including in machine learning/AI, image processing, games, and beyond.
+
+## Introducing Runtime Metrics
+
+.NET has long supported [System.Runtime Counters](https://learn.microsoft.com/dotnet/core/diagnostics/available-counters#systemruntime-counters). With the introduction of the [Metrics](https://learn.microsoft.com/dotnet/core/diagnostics/metrics) feature, it became a natural step to [expose runtime counters as metrics](https://github.com/dotnet/runtime/pull/104680). This enhancement allows users to collect runtime metrics more flexibly and enables support for telemetry platforms like OpenTelemetry.
+
+The detailed semantic conventions for runtime metrics can be found [here](https://github.com/open-telemetry/semantic-conventions/blob/main/model/metrics/dotnet-metrics.yaml). Users or tools can collect runtime metrics by using the `System.Diagnostics.Metrics` event source provider to listen to the meter named `System.Runtime`. Below is an example of how to use the [`dotnet-counters`](https://learn.microsoft.com/dotnet/core/diagnostics/dotnet-counters) tool to listen and display runtime metrics for a specific process ID:
+
+```terminal
+ dotnet-counters monitor --process-id 29104 --counters System.Runtime
+```
+
+The output of this command will be like the following:
+
+```terminal
+Press p to pause, r to resume, q to quit.
+    Status: Running
+
+Name                                                                         Current Value
+[System.Runtime]
+    dotnet.assembly.count ({assembly})                                              16
+    dotnet.gc.collections ({collection})
+        gc.heap.generation
+        gen0                                                                         0
+        gen1                                                                         0
+        gen2                                                                         0
+    dotnet.gc.heap.total_allocated (By)                                      1,655,208
+    dotnet.gc.pause.time (s)                                                         0
+    dotnet.jit.compilation.time (s)                                                  0.245
+    dotnet.jit.compiled_il.size (By)                                            81,019
+    dotnet.jit.compiled_methods ({method})                                         754
+    dotnet.monitor.lock_contentions ({contention})                                   0
+    dotnet.process.cpu.count ({cpu})                                                16
+    dotnet.process.cpu.time (s)
+        cpu.mode
+        system                                                                       0.031
+        user                                                                         0.156
+    dotnet.process.memory.working_set (By)                                  31,395,840
+    dotnet.thread_pool.queue.length ({work_item})                                    0
+    dotnet.thread_pool.thread.count ({thread})                                       0
+    dotnet.thread_pool.work_item.count ({work_item})                                 0
+    dotnet.timer.count ({timer})                                                     0
+```
+
+## Introducing Environment CpuUsage
+
+.NET has long supported retrieving CPU usage for the current process via properties like [`Process.TotalProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.totalprocessortime?view=net-8.0), [`PrivilegedProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.privilegedprocessortime?view=net-8.0), and [`UserProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.userprocessortime?view=net-8.0). However, these properties require a dependency on the `System.Diagnostics.Process` library and involve calling `Process.GetCurrentProcess()` to retrieve the current process. Additionally, since these properties are designed to work with any system process, they introduce extra performance overhead.
+
+The new [`Environment.CpuUsage`](https://github.com/dotnet/runtime/pull/105152) property provides a more efficient way to retrieve CPU usage for the current process, eliminating the need to create a `Process` object.
+
+Here is an example of how to use the `Environment.CpuUsage` property:
+
+```csharp
+Environment.ProcessCpuUsage usage = Environment.CpuUsage;
+
+Console.WriteLine($"Total CPU usage: {usage.TotalCpuUsage}");
+Console.WriteLine($"User CPU usage: {usage.UserCpuUsage}");
+Console.WriteLine($"Kernel CPU usage: {usage.KernelCpuUsage}");
+```
+
+## Adding Metrics Measurement Constructor with TagList Parameter
+
+The [`Measurement<T>`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics.measurement-1?view=net-8.0) class in the [`System.Diagnostics.Metrics`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics?view=net-8.0) namespace has been updated to [include a new constructor](https://github.com/dotnet/runtime/pull/105011) that accepts a [`TagList`](https://learn.microsoft.com/dotnet/api/system.diagnostics.taglist?view=net-8.0) parameter. This new constructor allows users to create a `Measurement` object with a `TagList` that contains associated tags.
+Previously, users who employed `TagList` and called the `Measurement` constructor that accepted an `IEnumerable<KeyValuePair<string,object?>>` had to allocate extra boxing objects, which negated the performance benefits of using `TagList`. With this update, users can now pass `TagList` directly to the `Measurement` constructor, avoiding unnecessary overhead and improving performance.
+
+```csharp
+var tags = new TagList() { { "Key1", "Value1" } }
+var measurement = new Measurement<int>(10, tags);
+```
+
+## Microsoft.Bcl.Memory Compatibility Package
+
+The `Microsoft.Bcl.Memory` compatibility package provides compatibility for the `Base64Url`, `Index` and `Range` types in .NET Framework and .NET Standard 2.0. The package is useful for projects that need to target .NET Framework or .NET Standard 2.0 and want to use such types.
+
+.NET 9.0 introduces the new `Base64Url` class in the `System.Buffers.Text` namespace. Additionally, the types [Index](https://learn.microsoft.com/dotnet/api/system.index?view=net-8.0) and [Range](https://learn.microsoft.com/dotnet/api/system.range?view=net-8.0) were introduced in the `System` namespace starting with .NET 5.0. However, these types are not supported in .NET Framework or .NET Standard 2.0. To use them in those environments, you can leverage the `Microsoft.Bcl.Memory` compatibility package.
+
+The [`Index` and `Range`](https://github.com/dotnet/runtime/pull/104170) types simplify slicing operations on collections, while [`Base64Url`](https://github.com/dotnet/runtime/pull/103617) enables URL-safe encoding for data in .NET Framework and .NET Standard 2.0.
+
+Here’s an example that implicitly uses the `Index` type:
+
+```csharp
+string[] words = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
+
+// Use Index to reference the last element
+Console.WriteLine(words[^1]);
+// Output: "dog"
+```
+
+Here is example of `Base64Url` which is encoding in a URL-safe version of Base64, commonly used in web applications, such as JWT tokens.
+
+```csharp
+using System.Buffers.Text;
+using System.Text;
+
+// Original data
+byte[] data = Encoding.UTF8.GetBytes("Hello World!");
+
+Span<byte> encoded = new byte[Base64Url.GetEncodedLength(data.Length)];
+Base64Url.EncodeToUtf8(data, encoded, out int _, out int bytesWritten);
+
+string encodedString = Base64Url.EncodeToString(data);
+Console.WriteLine($"Encoded: {encodedString}");
+// Encoded: SGVsbG8gV29ybGQh
+Span<byte> decoded = new byte[data.Length];
+Base64Url.DecodeFromUtf8(encoded[..bytesWritten], decoded, out _, out bytesWritten);
+
+string decodedString = Encoding.UTF8.GetString(decoded[..bytesWritten]);
+Console.WriteLine($"Decoded: {decodedString}");
+// Decoded: Hello World!
+```
