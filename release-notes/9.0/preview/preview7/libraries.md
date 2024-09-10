@@ -348,7 +348,8 @@ Console.WriteLine($"Kernel CPU usage: {usage.KernelCpuUsage}");
 
 ## Adding Metrics Measurement Constructor with TagList Parameter
 
-The [`Measurement<T>`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics.measurement-1?view=net-8.0) class in the [`System.Diagnostics.Metrics`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics?view=net-8.0) namespace has been updated to [include a new constructor](https://github.com/dotnet/runtime/pull/105011) that accepts a [`TagList`](https://learn.microsoft.com/dotnet/api/system.diagnostics.taglist?view=net-8.0) parameter. This new constructor allows users to create a `Measurement` object with a `TagList` that contains associated tags.
+The [`Measurement<T>`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics.measurement-1?view=net-8.0) class in the [`System.Diagnostics.Metrics`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics?view=net-8.0) namespace has been updated to [include a new constructor](https://github.com/dotnet/runtime/pull/105011) that accepts a [`TagList`](https://learn.microsoft.com/dotnet/api/system.diagnostics.taglist?view=net-8.0) parameter.
+This new constructor allows users to create a `Measurement` object with a `TagList` that contains associated tags.
 Previously, users who employed `TagList` and called the `Measurement` constructor that accepted an `IEnumerable<KeyValuePair<string,object?>>` had to allocate extra boxing objects, which negated the performance benefits of using `TagList`. With this update, users can now pass `TagList` directly to the `Measurement` constructor, avoiding unnecessary overhead and improving performance.
 
 ```csharp
@@ -360,7 +361,8 @@ var measurement = new Measurement<int>(10, tags);
 
 The `Microsoft.Bcl.Memory` compatibility package provides compatibility for the `Base64Url`, `Index` and `Range` types in .NET Framework and .NET Standard 2.0. The package is useful for projects that need to target .NET Framework or .NET Standard 2.0 and want to use such types.
 
-.NET 9.0 introduces the new `Base64Url` class in the `System.Buffers.Text` namespace. Additionally, the types [Index](https://learn.microsoft.com/dotnet/api/system.index?view=net-8.0) and [Range](https://learn.microsoft.com/dotnet/api/system.range?view=net-8.0) were introduced in the `System` namespace starting with .NET 5.0. However, these types are not supported in .NET Framework or .NET Standard 2.0. To use them in those environments, you can leverage the `Microsoft.Bcl.Memory` compatibility package.
+.NET 9.0 introduces the new `Base64Url` class in the `System.Buffers.Text` namespace. Additionally, the types [Index](https://learn.microsoft.com/dotnet/api/system.index?view=net-8.0) and [Range](https://learn.microsoft.com/dotnet/api/system.range?view=net-8.0) were introduced in the `System` namespace starting with .NET 5.0.
+However, these types are not supported in .NET Framework or .NET Standard 2.0. To use them in those environments, you can leverage the `Microsoft.Bcl.Memory` compatibility package.
 
 The [`Index` and `Range`](https://github.com/dotnet/runtime/pull/104170) types simplify slicing operations on collections, while [`Base64Url`](https://github.com/dotnet/runtime/pull/103617) enables URL-safe encoding for data in .NET Framework and .NET Standard 2.0.
 
