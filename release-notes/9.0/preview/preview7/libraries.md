@@ -15,7 +15,7 @@ New in .NET Libraries with this release:
 - [Introducing Runtime Metrics](#introducing-runtime-metrics)
 - [Introducing Environment CpuUsage](#introducing-environment-cpuusage)
 - [Adding Metrics Measurement Constructor with TagList Parameter](#adding-metrics-measurement-constructor-with-taglist-parameter)
-- [`Microsoft.Bcl.Memory` Compatibility Package](#microsoft-bcl-memory-compatibility-package)
+- [`Microsoft.Bcl.Memory` Compatibility Package](# microsoft-bcl-memory-compatibility-package)
 
 Libraries updates in .NET 9 Preview 7:
 
@@ -80,7 +80,7 @@ public static bool ListContainsItem(ReadOnlySpan<char> span, string item)
 }
 ```
 
-## `Debug.Assert` now reports assert condition, by default.
+## `Debug.Assert` now reports assert condition, by default
 
 `Debug.Assert` is commonly-used to help validate conditions that are expected to always be true, where failure typically indicates a bug in the code.
 
