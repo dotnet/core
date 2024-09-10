@@ -139,6 +139,8 @@ services.AddHttpClient("myClient")
     .RedactLoggedHeaders(name => name != "User-Agent");
 ```
 
+See the [documentation](https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/redact-headers.md) for detailed breaking change guidance.
+
 ## Out-of-proc Meter wildcard listening
 
 It is already possible to listen to meters out-of-process using the `System.Diagnostics.Metrics` event source provider, but the current implementation requires specifying the full meter name. [This update](https://github.com/dotnet/runtime/pull/105581) introduces support for listening to all meters by using the wildcard character `*`, allowing you to capture metrics from every meter in a process. Additionally, it adds support for listening by meter prefix, so you can listen to all meters whose names start with a specified prefix. For example, using `MyMeter*` will enable listening to all meters with names beginning with `MyMeter`.
@@ -223,8 +225,6 @@ CounterRateValuePublished
 Monitoring tools like [dotnet-counters](https://learn.microsoft.com/dotnet/core/diagnostics/dotnet-counters) can also be used to listen to the metrics using the wildcard.
 
 ---
-
-See the [documentation](https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/redact-headers.md) for detailed breaking change guidance.
 
 * [Support listening to meters out-of-proc using a wildcard](https://github.com/dotnet/runtime/pull/105581)
 * [Add `JsonEnumMemberNameAttribute`](https://github.com/dotnet/runtime/pull/105032)
