@@ -139,7 +139,7 @@ services.AddHttpClient("myClient")
     .RedactLoggedHeaders(name => name != "User-Agent");
 ```
 
-See the [documentation](https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/redact-headers.md) for detailed breaking change guidance.
+See the [documentation](https://learn.microsoft.com/dotnet/core/compatibility/networking/9.0/redact-headers) for detailed breaking change guidance.
 
 ## Out-of-proc Meter wildcard listening
 
