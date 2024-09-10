@@ -12,6 +12,10 @@ New in .NET Libraries with this release:
 - [Changes to X.509 Certificate Loading](#changes-to-x509-certificate-loading)
 - [Support for XPS documents from XPS virtual printer](#support-for-xps-documents-from-xps-virtual-printer)
 - [Marking `Tensor<T>` as `Experimental`](#marking-tensort-as-experimental)
+- [Introducing Runtime Metrics](#introducing-runtime-metrics)
+- [Introducing Environment CpuUsage](#introducing-environment-cpuusage)
+- [Adding Metrics Measurement Constructor with TagList Parameter](#adding-metrics-measurement-constructor-with-taglist-parameter)
+- [`Microsoft.Bcl.Memory` Compatibility Package](#microsoft-bcl-memory-compatibility-package)
 
 Libraries updates in .NET 9 Preview 7:
 
