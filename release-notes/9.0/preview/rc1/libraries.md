@@ -6,7 +6,7 @@ Here's a summary of what's new in .NET Libraries in this release:
 * [Add ZLib, Brotli compression options](#add-zlib-and-brotli-compression-options)
 * [Add TarEntry.DataOffset](#add-tarentrydataoffset)
 * [`HttpClientFactory` no longer logs header values by default](#httpclientfactory-no-longer-logs-header-values-by-default)
-* [Out-of-proc Meter wildcard listening](#Out-of-proc-Meter-wildcard-listening)
+* [Out-of-proc Meter wildcard listening](#out-of-proc-meter-wildcard-listening)
 
 Libraries updates in .NET 9 Release Candidate 1:
 
