@@ -14,6 +14,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2024/09/10 | [9.0.0 RC 1](preview/rc1/README.md) |
 | 2024/08/13 | [9.0.0 Preview 7](preview/preview7/README.md) |
 | 2024/07/09 | [9.0.0 Preview 6](preview/preview6/README.md) |
 | 2024/06/11 | [9.0.0 Preview 5](preview/preview5/README.md) |
