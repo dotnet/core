@@ -13,7 +13,6 @@ SDK updates in .NET 9 Release Candidate 1:
 
 * [Discussion](https://aka.ms/dotnet/9/rc1)
 * [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc1/README.md)
-* [Runtime release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc1/runtime.md)
 * [Libraries release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc1/libraries.md)
 
 ## Feature
