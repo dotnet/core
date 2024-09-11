@@ -16,13 +16,13 @@ Here's a summary of what's new in .NET MAUI in this preview release:
 * [Xcode Sync for CLI and Visual Studio Code](#xcode-sync-for-cli-and-visual-studio-code)
 
 .NET MAUI updates in .NET 9 Preview 7:
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/dotnetmaui.md) 
+* [Release notes](dotnetmaui.md)
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
 * [GitHub Release](https://aka.ms/maui9p7)
 
 .NET 9 Preview 7:
 * [Discussion](https://aka.ms/dotnet/9/preview7)
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/README.md)
+* [Release notes](README.md)
 
 ## Introduction of `HybridWebView`
 
@@ -181,7 +181,7 @@ The new `TitleBar` control enables developers the ability to create custom title
 ![Overview of title bar control](./media/titlebar-overview.png)
 
 
-The `TitleBar` control can now be set for the `Window.TitleBar` property for any `Window`.  
+The `TitleBar` control can now be set for the `Window.TitleBar` property for any `Window`.
 
 ```xml
 <Window.TitleBar>
@@ -208,7 +208,7 @@ It can also be set in C# code:
 protected override void OnAppearing()
 {
     base.OnAppearing();
-    
+
     Window.TitleBar = new TitleBar
     {
         Title = "MAUI App",
@@ -272,11 +272,11 @@ Application.Current?.ActivateWindow(secondWindow);
 The binding mode for `IsVisible` and `IsEnabled` on the `BackButtonBehavior` is now `BindingMode.OneWay` instead of `BindingMode.OneTime`. This allows you to more easily control the behavior of the back button at runtime using data bindings.
 
 ```xml
-<ContentPage ...>    
+<ContentPage ...>
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding BackCommand}"
                             IsVisible="{Binding IsBackButtonVisible}"
-                            IconOverride="back.png" />   
+                            IconOverride="back.png" />
     </Shell.BackButtonBehavior>
     ...
 </ContentPage>
@@ -284,7 +284,7 @@ The binding mode for `IsVisible` and `IsEnabled` on the `BackButtonBehavior` is 
 
 ## `BlazorWebView` backward compatibility host address
 
-.NET 9 Preview 7 changes the default behavior for hosting content to be `localhost` on iOS and Mac Catalyst 18 and newer. Starting with iOS and Mac Catalyst 18 the internal `0.0.0.0` address used to host the `BlazorWebView`'s content no longer works and causes the `BlazorWebView` to not load and render as an empty rectangle. 
+.NET 9 Preview 7 changes the default behavior for hosting content to be `localhost` on iOS and Mac Catalyst 18 and newer. Starting with iOS and Mac Catalyst 18 the internal `0.0.0.0` address used to host the `BlazorWebView`'s content no longer works and causes the `BlazorWebView` to not load and render as an empty rectangle.
 
 
 In order to continue using `0.0.0.0`, activate this behavior using a switch in `MauiProgram.cs`:
@@ -410,7 +410,7 @@ To clean up the native views, call the `DisconnectHandler` method.
 layout2.DisconnectHandler();
 ```
 
-When disconnecting, the action will continue down the tree until it completes or arrives at a control that has set a manual policy. 
+When disconnecting, the action will continue down the tree until it completes or arrives at a control that has set a manual policy.
 
 ## New `ProcessTerminated` event on `WebView` Control
 
@@ -422,7 +422,7 @@ When disconnecting, the action will continue down the tree until it completes or
 
 When working with remote notifications it is now easier to get insight into when a user registers or receives remove notifications.
 
-* `ReceivedRemoteNotifications` - Invoked when a remote notification is received. 
+* `ReceivedRemoteNotifications` - Invoked when a remote notification is received.
 * `RegisteredForRemoteNotifications` - Invoked when the app has successfully registered for remote notifications.
 
 ```csharp
@@ -462,7 +462,7 @@ For more information see the [App Lifecycle documentation](https://learn.microso
 
 Xcode sync (xcsync) is a tool that enables developers to leverage Xcode for managing Apple specific files with .NET projects including asset catalogs, plist, storyboard, and xib files. The tool has two main commandes to generates a temporary Xcode project from a .NET project and to synchronize changes to the Xcode files back to the .NET project for iOS, tvOS, macOS, or Mac Catalyst.
 
-To generate or sync these files you can use the `dotnet build` command with `xcsync-generate` or `xcsync-sync` and passing in a project file and additional parameters for the project TFM in a multi-targeted project, Xcode location, and verbosity. 
+To generate or sync these files you can use the `dotnet build` command with `xcsync-generate` or `xcsync-sync` and passing in a project file and additional parameters for the project TFM in a multi-targeted project, Xcode location, and verbosity.
 
 ```bash
 dotnet build /t:xcsync-generate

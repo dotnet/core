@@ -8,21 +8,21 @@ Here's a summary of what's new in .NET MAUI in this release:
 
 This release is focused on quality, housekeeping, and resolving issues to stabilize the impending GA release.
 
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc1/dotnetmaui.md)
+* [Release notes](dotnetmaui.md)
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
 * [GitHub Release](https://aka.ms/maui9rc1)
 
 .NET 9 Release Candidate 1:
 
 * [Discussion](https://aka.ms/dotnet/9/rc1)
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc1/README.md)
+* [Release notes](README.md)
 
 ## Added `HorizontalTextAlignment.Justify`
 
 In addition to `Start`, `Center`, and `End` you can now use `Justify` to horizontally align your text in `Label`s.
 
 ```xml
-<Label 
+<Label
   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis nulla eu felis fringilla vulputate. Nullam porta eleifend lacinia. Donec at iaculis tellus."
   HorizontalTextAlignment="Justify"/>
 ```
