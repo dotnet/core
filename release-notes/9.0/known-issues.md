@@ -47,7 +47,7 @@ The behavior will be **fixed in .NET 9 RC1** release.
 
 There is an incompatible dependency between a file referenced in the SDK and the dependencies that Visual Studio includes.
 
-```
+```terminal
 NETSDK1060 Error reading assets file: Error loading lock file '...\obj\project.assets.json' : Could not load file or assembly 'System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51' or one of its dependencies. The system cannot find the file specified.
 ```
 
