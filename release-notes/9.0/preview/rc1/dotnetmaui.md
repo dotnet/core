@@ -3,6 +3,7 @@
 Here's a summary of what's new in .NET MAUI in this release:
 
 * [Added `HorizontalTextAlignment.Justify`](#added-horizontaltextalignmentjustify)
+* [Updates to HybridWebView to invoke JavaScript methods, and updated HybridWebView.js](#hybridwebview-updates)
 
 .NET MAUI updates in .NET 9 Release Candidate 1:
 
@@ -28,6 +29,48 @@ In addition to `Start`, `Center`, and `End` you can now use `Justify` to horizon
 ```
 
 ![justify](./media/dotnetmaui-textalign-justify.png)
+
+## HybridWebView Updates
+
+### Update to .NET 9 RC1 script
+
+To update your HybridWebView app from .NET 9 Preview 7 to .NET 9 RC1, update the contents of your app's `HybridWebView.js` file to match these contents: https://github.com/dotnet/maui/blob/release/9.0.1xx-rc1/src/Controls/samples/Controls.Sample/Resources/Raw/HybridSamplePage/scripts/HybridWebView.js
+
+### Invoke JavaScript methods from C#
+
+Your app's C# code can directly invoke JavaScript methods within the HybridWebView. Both synchronous and asynchronous method invokation are supported. Internally, the parameters and return values are JSON encoded. Both synchronous and asynchronous JavaScript methods are supported.
+
+For example, this JavaScript method (as defined in a file such as `index.html`):
+
+```js
+function AddNumbers(a, b) {
+    return a + b;
+}
+```
+
+Can be invoked from C# using this code:
+
+```csharp
+var x = 123d;
+var y = 321d;
+var result = await hwv.InvokeJavaScriptAsync<double>(
+	"AddNumbers",
+	HybridSampleJsContext.Default.Double,
+	[x, y],
+	[HybridSampleJsContext.Default.Double, HybridSampleJsContext.Default.Double]);
+```
+
+The method invokation requires specifying `JsonTypeInfo` objects that include serialization information for the types used in the operation. These objects are automatically created by including this partial class in the project:
+
+```csharp
+	[JsonSourceGenerationOptions(WriteIndented = true)]
+	[JsonSerializable(typeof(double))]
+	internal partial class HybridSampleJsContext : JsonSerializerContext
+	{
+	}
+```
+
+Note: This type must be marked as `partial` so that code generation can provide the implementation when the project is compiled. If this type is nested into another type, then that type must also be marked as `partial`.
 
 ## .NET for Android
 
