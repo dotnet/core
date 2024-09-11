@@ -43,12 +43,14 @@ The behavior will be **fixed in .NET 9 RC1** release.
 
 ## .NET SDK
 
-### .NET 9.0.100-RC.1 will fail when used with 17.11
+### .NET SDK 9.0.100-RC.1 will fail when used with Visual Studio 17.11
 
-There is an incompatible dependency between a file loaded from the SDK and the dependencies that Visual Studio includes.
+There is an incompatible dependency between a file referenced in the SDK and the dependencies that Visual Studio includes.
 
-`
+```
 NETSDK1060 Error reading assets file: Error loading lock file '...\obj\project.assets.json' : Could not load file or assembly 'System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51' or one of its dependencies. The system cannot find the file specified.
-`
+```
 
-This behavior will be **fixed in an upcoming Visual Studio 17.11.x** release
+To target .NET 9 from Visual Studio, .NET SDK requires the use of Visual Studio 17.12 Preview 2.0 or higher.
+
+An **upcoming Visual Studio 17.11.x** release will restore support for targeting .NET 8 and lower using .NET SDK 9.0.100. A [workaround that can be temporarily checked into affected repositories](https://github.com/dotnet/sdk/issues/43339#issuecomment-2344233994) is available.
