@@ -22,10 +22,10 @@ We've added an option to `dotnet tool install` that lets users decide how .NET T
 
 SDK updates in .NET 2 Preview 2:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/sdk.md)
+- [Release notes](sdk.md)
 - [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 2:
 
 - [Discussion](https://aka.ms/dotnet/9/preview2)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/README.md)
+- [Release notes](README.md)

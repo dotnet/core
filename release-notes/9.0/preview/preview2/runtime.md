@@ -13,7 +13,7 @@ Runtime updates in .NET 9 Preview 2:
 .NET 9 Preview 2:
 
 - [Discussion](https://aka.ms/dotnet/9/preview2)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/README.md)
+- [Release notes](README.md)
 
 
 ## Loop Optimizations: IV Widening
