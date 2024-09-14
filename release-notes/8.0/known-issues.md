@@ -24,7 +24,7 @@ The `CopyWithPrivateKey` methods that combine a certificate with its associated 
 
 Callers of these methods on macOS 15 ("Sequoia") will receive a `CryptographicException`, specifically `Interop+AppleCrypto+AppleCommonCryptoCryptographicException: The specified item is no longer valid. It may have been deleted from the keychain.`  The `dotnet dev-certs https` command relies on `CertificateRequest.CreateSelfSigned` and fails with this error.
 
-This issue is addressed in the upcoming .NET 6.0.34 release, scheduled for release in October 2024.
+This issue is addressed in the upcoming .NET 8.0.10 release, scheduled for release in October 2024.
 
 ### Root Cause
 
@@ -32,6 +32,6 @@ macOS 15 uses a different status code to indicate a key is not in a Keychain tha
 
 ### Workarounds
 
-If you have not already upgraded to macOS 15 from a prior version and use .NET, you are not impacted by this issue.  If you are planning to upgrade to macOS 15, the workaround is to upgrade to .NET 6.0.34 (scheduled for October 2024) prior to upgrading to macOS 15.
+If you have not already upgraded to macOS 15 from a prior version and use .NET, you are not impacted by this issue.  If you are planning to upgrade to macOS 15, the workaround is to upgrade to .NET 8.0.10 (scheduled for October 2024) prior to upgrading to macOS 15.
 
 Loading a certificate and its associated private key from a PKCS#12/PFX are not affected.  If you are using an application that supports loading a certificate (and associated private key) by either PFX or PEM, converting your PEM contents to PFX - and updating configuration appropriately - may unblock you.
