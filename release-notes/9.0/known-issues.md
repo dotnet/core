@@ -54,3 +54,31 @@ NETSDK1060 Error reading assets file: Error loading lock file '...\obj\project.a
 To target .NET 9 from Visual Studio, .NET SDK requires the use of Visual Studio 17.12 Preview 2.0 or higher.
 
 An **upcoming Visual Studio 17.11.x** release will restore support for targeting .NET 8 and lower using .NET SDK 9.0.100. A [workaround that can be temporarily checked into affected repositories](https://github.com/dotnet/sdk/issues/43339#issuecomment-2344233994) is available.
+
+## Certificate Issues on macOS 15 ("Sequoia")
+
+### Summary
+
+The `CopyWithPrivateKey` methods that combine a certificate with its associated private key fail on macOS 15 when using in-memory (ephemeral) keys.  This failure is most commonly seen when creating new certificates via `CertificateRequest.CreateSelfSigned` or when loading a certificate and key from a PEM file (or files) with `X509Certificate2.CreateFromPem`, which utilize the affected methods.
+
+Callers of these methods on macOS 15 ("Sequoia") will receive a `CryptographicException`, specifically `Interop+AppleCrypto+AppleCommonCryptoCryptographicException: The specified item is no longer valid. It may have been deleted from the keychain.`  The `dotnet dev-certs https` command relies on `CertificateRequest.CreateSelfSigned` and fails with this error.
+
+## Certificate Issues on macOS 15 ("Sequoia")
+
+### Summary
+
+The `CopyWithPrivateKey` methods that combine a certificate with its associated private key fail on macOS 15 when using in-memory (ephemeral) keys.  This failure is most commonly seen when creating new certificates via `CertificateRequest.CreateSelfSigned` or when loading a certificate and key from a PEM file (or files) with `X509Certificate2.CreateFromPem`, which utilize the affected methods.
+
+Callers of these methods on macOS 15 ("Sequoia") will receive a `CryptographicException`, specifically `Interop+AppleCrypto+AppleCommonCryptoCryptographicException: The specified item is no longer valid. It may have been deleted from the keychain.`  The `dotnet dev-certs https` command relies on `CertificateRequest.CreateSelfSigned` and fails with this error.
+
+This issue is addressed in the upcoming .NET 6.0.34 release, scheduled for release in October 2024.
+
+### Root Cause
+
+macOS 15 uses a different status code to indicate a key is not in a Keychain than prior versions do.
+
+### Workarounds
+
+If you have not already upgraded to macOS 15 from a prior version and use .NET, you are not impacted by this issue.  If you are planning to upgrade to macOS 15, the workaround is to upgrade to .NET 6.0.34 (scheduled for October 2024) prior to upgrading to macOS 15.
+
+Loading a certificate and its associated private key from a PKCS#12/PFX are not affected.  If you are using an application that supports loading a certificate (and associated private key) by either PFX or PEM, converting your PEM contents to PFX - and updating configuration appropriately - may unblock you.
