@@ -35,7 +35,7 @@ Preview release installers are not available from the Microsoft package reposito
 
 Here's what the script does.
 
-- Detects the distribution and version. The script supports platforms and versions listed in [.NET 8.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/8.0/supported-os.md).
+- Detects the distribution and version. The script supports platforms and versions listed in [.NET 8.0 - Supported OS versions](supported-os.md).
 - Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack that installer packages.
 - Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
 - Downloads the system dependency installer, if needed.
@@ -44,7 +44,7 @@ Here's what the script does.
 
 ## Install using Snap
 
-**Note:** On 30 April 2024, all existing .NET Snaps are transferred from Microsoft to Canonical. Please see [this announcement](https://github.com/dotnet/announcements/issues/304) for details. 
+**Note:** On 30 April 2024, all existing .NET Snaps are transferred from Microsoft to Canonical. Please see [this announcement](https://github.com/dotnet/announcements/issues/304) for details.
 
 You can use Snap is to install and try .NET Previews on [Linux distributions that support Snap](https://snapcraft.io/docs/installing-snapd).
 
