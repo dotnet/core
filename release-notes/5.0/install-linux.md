@@ -39,7 +39,7 @@ When .NET Core is installed using the Snap package, the default .NET Core comman
 
 `sudo snap alias dotnet-sdk.dotnet dotnet`
 
-**Note:** Some distributions require an additional step to enable access to the SSL certificate. If you experience SSL errors when running `dotnet restore`, see [Linux Setup](https://github.com/dotnet/core/blob/main/Documentation/linux-setup.md) for a possible resolution.
+**Note:** Some distributions require an additional step to enable access to the SSL certificate. If you experience SSL errors when running `dotnet restore`, see [.NET for Linux Distributions](../../../linux.md) for a possible resolution.
 
 ## Installing from a binary archive
 
