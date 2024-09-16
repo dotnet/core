@@ -14,10 +14,8 @@ Please reference to the [System.IO.Path.GetTempPath API](https://learn.microsoft
 **Temporary Workaround**
 
 Warning: The opt-out will disable the security fix for the elevation of privilege vulnerability detailed in [CVE 2024-38081](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-38081). The opt-out is only for temporary workaround if you're sure that the software is running in secure environments. Microsoft does not recommend applying this temporary workaround.
-  - Option#1: Opt out in a command window by setting the environment variable
-	  -- COMPlus_Disable_GetTempPath2=true
-  -	Opiton#2: [Opt out globally on the machine by creating a system-wide environment variable and rebooting to ensure all processes observe the change](https://stackoverflow.com/questions/2365307/what-determines-the-return-value-of-path-gettemppath). 
-   --	System-wide environment variables can be set by running “sysdm.cpl” from a cmd window, and then navigating to “Advanced -> Environment variables -> System variables -> New”. 
+
+To apply the opt-out, set the `COMPlus_Disable_GetTempPath2` environment variable to `true` in the necessary context. System-wide environment variables can be set by running `sysdm.cpl` and navigating to "Advanced -> Environment variables -> System variables -> New".
 
 **Resolution**
 The API behavior change is by design to address the elevation of privilege vulnerability. Any affected software or application is expected to make code change to adapt to this new design change.
