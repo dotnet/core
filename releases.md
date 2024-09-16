@@ -16,15 +16,15 @@ The following table lists supported releases.
 [8.0.8]: release-notes/8.0/8.0.8/8.0.8.md
 [6.0.33]: release-notes/6.0/6.0.33/6.0.33.md
 
-## Preview releases
+## RC releases
 
-The following table lists unsupported preview releases.
+The following table lists unsupported rc releases.
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-preview.7][9.0.0-preview.7] | May 12, 2026 |
+| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-rc.1][9.0.0-rc.1] | May 12, 2026 |
 
-[9.0.0-preview.7]: release-notes/9.0/preview/preview7/9.0.0-preview.7.md
+[9.0.0-rc.1]: release-notes/9.0/preview/rc1/9.0.0-rc.1.md
 
 ## End-of-life releases
 
