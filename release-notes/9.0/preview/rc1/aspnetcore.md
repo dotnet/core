@@ -10,7 +10,7 @@ Here's a summary of what's new in ASP.NET Core in this release:
 
 ASP.NET Core updates in .NET 9 Release Candidate 1:
 
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc1/aspnetcore.md)
+* [Release notes](aspnetcore.md)
 * [What's new in ASP.NET Core in .NET 9](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0) documentation.
 * [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/9.0#aspnet-core)
 * [Roadmap](https://aka.ms/aspnet/roadmap)
@@ -18,11 +18,11 @@ ASP.NET Core updates in .NET 9 Release Candidate 1:
 .NET 9 Release Candidate 1:
 
 * [Discussion](https://aka.ms/dotnet/9/rc1)
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc1/README.md)
+* [Release notes](README.md)
 
 ## Improvements to SignalR distributed tracing
 
-.NET 9 preview 6 added [initial support for SignalR distributed tracing](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview6/aspnetcore.md#improved-distributed-tracing-for-signalr). RC1 improves SignalR tracing with new capabilities:
+.NET 9 preview 6 added [initial support for SignalR distributed tracing](../preview6/aspnetcore.md#improved-distributed-tracing-for-signalr). RC1 improves SignalR tracing with new capabilities:
 
 * .NET SignalR client has an `ActivitySource` named "Microsoft.AspNetCore.SignalR.Client". Hub invocations now create a client span. Note that other SignalR clients, such as the JavaScript client, don't support tracing. This feature will be added to more clients in future releases.
 * Hub invocations from the client to the server now support [context propagation](https://opentelemetry.io/docs/concepts/context-propagation/). Propagating the trace context enables true distributed tracing. It's now possible to see invocations flow from the client to the server and back.

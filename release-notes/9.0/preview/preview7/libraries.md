@@ -19,15 +19,15 @@ New in .NET Libraries with this release:
 
 Libraries updates in .NET 9 Preview 7:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/libraries.md)
+- [Release notes](libraries.md)
 - [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 7:
 
 - [Discussion](https://aka.ms/dotnet/9/preview7)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/README.md)
-- [Runtime release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/runtime.md)
-- [SDK release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/sdk.md)
+- [Release notes](README.md)
+- [Runtime release notes](runtime.md)
+- [SDK release notes](sdk.md)
 
 ## Removal of `BinaryFormatter` is complete
 
@@ -270,7 +270,7 @@ XPS documents coming from a V4 XPS virtual printer could not be opened using the
 
 ## Marking `Tensor<T>` as `[Experimental]`
 
-We announced the [addition of `Tensor<T>`](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview4/libraries.md#new-tensort-type) earlier in .NET 9. Adding new built-in types for exchanging tensor data across libraries and allowing accelerated handling for core operations is an important but large undertaking. The work done in .NET 9 currently encompasses 8 types and nearly 600 new public APIs, many of which are generic and can support a `T` that is arbitrary or constrained to one of the [generic math interfaces](https://learn.microsoft.com/en-us/dotnet/standard/generics/math).
+We announced the [addition of `Tensor<T>`](../preview4/libraries.md#new-tensort-type) earlier in .NET 9. Adding new built-in types for exchanging tensor data across libraries and allowing accelerated handling for core operations is an important but large undertaking. The work done in .NET 9 currently encompasses 8 types and nearly 600 new public APIs, many of which are generic and can support a `T` that is arbitrary or constrained to one of the [generic math interfaces](https://learn.microsoft.com/dotnet/standard/generics/math).
 
 Due to the size of this work and the recognized importance of it to the long term capability of the .NET ecosystem, it has been decided to mark these new APIs as `[Experimental]` (see https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.experimentalattribute) for .NET 9 and to plan on supporting them officially in .NET 10 instead. This is being done to allow time for additional feedback from the community and important libraries in the .NET ecosystem that plan on taking advantage of the provided functionality. It also gives us additional time to coordinate with improvements in the C# language to ensure a great end-to-end experience.
 

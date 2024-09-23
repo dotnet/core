@@ -11,7 +11,7 @@ The team is continuing work on core fundamentals of the .NET MAUI SDK to improve
 .NET 9 Preview 2:
 
 * [Discussion](https://aka.ms/dotnet/9/preview2)
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/README.md)
+* [Release notes](README.md)
 
 ## .NET for Android
 

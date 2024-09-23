@@ -35,7 +35,7 @@ Preview release installers are not available from the Microsoft package reposito
 
 Here's what the script does.
 
-- Detects the distribution and version. The script supports platforms and versions listed in [.NET 9.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md).
+- Detects the distribution and version. The script supports platforms and versions listed in [.NET 9.0 - Supported OS versions](supported-os.md).
 - Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack the installer packages.
 - Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
 - Downloads the system dependency installer, if needed.
