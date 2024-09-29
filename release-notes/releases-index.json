@@ -1,44 +1,61 @@
 {
     "$schema": "https://json.schemastore.org/dotnet-releases-index.json",
     "releases-index": [
-      {
-            "channel-version": "8.0",
-            "latest-release": "8.0.0-rc.2",
-            "latest-release-date": "2023-10-10",
-            "security": true,
-            "latest-runtime": "8.0.0-rc.2.23479.6",
-            "latest-sdk": "8.0.100-rc.2.23502.2",
+        {
+            "channel-version": "9.0",
+            "latest-release": "9.0.0-rc.1",
+            "latest-release-date": "2024-09-10",
+            "security": false,
+            "latest-runtime": "9.0.0-rc.1.24431.7",
+            "latest-sdk": "9.0.100-rc.1.24452.12",
             "product": ".NET",
-            "release-type" : "lts",
             "support-phase": "go-live",
-            "eol-date": null,
-            "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/releases.json"
+            "eol-date": "2026-05-11",
+            "release-type": "sts",
+            "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/9.0/releases.json",
+            "supported-os.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/9.0/supported-os.json"
         },
-          {
-            "channel-version": "7.0",
-            "latest-release": "7.0.13",
-            "latest-release-date": "2023-10-24",
+        {
+            "channel-version": "8.0",
+            "latest-release": "8.0.8",
+            "latest-release-date": "2024-09-24",
             "security": true,
-            "latest-runtime": "7.0.13",
-            "latest-sdk": "7.0.403",
+            "latest-runtime": "8.0.8",
+            "latest-sdk": "8.0.402",
             "product": ".NET",
-            "release-type" : "sts",
             "support-phase": "active",
-            "eol-date": "2024-05-24",
-            "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/7.0/releases.json"
+            "eol-date": "2026-11-10",
+            "release-type": "lts",
+            "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/releases.json",
+            "supported-os.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/supported-os.json"
+        },
+        {
+            "channel-version": "7.0",
+            "latest-release": "7.0.20",
+            "latest-release-date": "2024-05-28",
+            "security": true,
+            "latest-runtime": "7.0.20",
+            "latest-sdk": "7.0.410",
+            "product": ".NET",
+            "support-phase": "eol",
+            "eol-date": "2024-05-14",
+            "release-type": "sts",
+            "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/7.0/releases.json",
+            "supported-os.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/7.0/supported-os.json"
         },
         {
             "channel-version": "6.0",
-            "latest-release": "6.0.24",
-            "latest-release-date": "2023-10-24",
-            "security": true,
-            "latest-runtime": "6.0.24",
-            "latest-sdk": "6.0.416",
+            "latest-release": "6.0.33",
+            "latest-release-date": "2024-08-13",
+            "security": false,
+            "latest-runtime": "6.0.33",
+            "latest-sdk": "6.0.425",
             "product": ".NET",
-            "release-type" : "lts",
-            "support-phase": "active",
+            "support-phase": "maintenance",
             "eol-date": "2024-11-12",
-            "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/6.0/releases.json"
+            "release-type": "lts",
+            "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/6.0/releases.json",
+            "supported-os.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/6.0/supported-os.json"
         },
         {
             "channel-version": "5.0",
@@ -48,9 +65,9 @@
             "latest-runtime": "5.0.17",
             "latest-sdk": "5.0.408",
             "product": ".NET",
-            "release-type" : "sts",
+            "release-type": "sts",
             "support-phase": "eol",
-            "eol-date":"2022-05-10",
+            "eol-date": "2022-05-10",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/5.0/releases.json"
         },
         {
@@ -61,7 +78,7 @@
             "latest-runtime": "3.1.32",
             "latest-sdk": "3.1.426",
             "product": ".NET Core",
-            "release-type" : "lts",
+            "release-type": "lts",
             "support-phase": "eol",
             "eol-date": "2022-12-13",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/3.1/releases.json"
@@ -74,7 +91,7 @@
             "latest-runtime": "3.0.3",
             "latest-sdk": "3.0.103",
             "product": ".NET Core",
-            "release-type" : "sts",
+            "release-type": "sts",
             "support-phase": "eol",
             "eol-date": "2020-03-03",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/3.0/releases.json"
@@ -87,7 +104,7 @@
             "latest-runtime": "2.1.30",
             "latest-sdk": "2.1.818",
             "product": ".NET Core",
-            "release-type" : "lts",
+            "release-type": "lts",
             "support-phase": "eol",
             "eol-date": "2021-08-21",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/2.1/releases.json"
@@ -100,20 +117,20 @@
             "latest-runtime": "2.2.8",
             "latest-sdk": "2.2.207",
             "product": ".NET Core",
-            "release-type" : "sts",
+            "release-type": "sts",
             "support-phase": "eol",
             "eol-date": "2019-12-23",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/2.2/releases.json"
-          },
+        },
         {
             "channel-version": "2.0",
             "latest-release": "2.0.9",
-            "latest-release-date":"2018-07-10",
+            "latest-release-date": "2018-07-10",
             "security": true,
             "latest-runtime": "2.0.9",
             "latest-sdk": "2.1.202",
             "product": ".NET Core",
-            "release-type" : "sts",
+            "release-type": "sts",
             "support-phase": "eol",
             "eol-date": "2018-10-01",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/2.0/releases.json"
@@ -126,7 +143,7 @@
             "latest-runtime": "1.1.13",
             "latest-sdk": "1.1.14",
             "product": ".NET Core",
-            "release-type" : "lts",
+            "release-type": "lts",
             "support-phase": "eol",
             "eol-date": "2019-06-27",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/1.1/releases.json"
@@ -139,7 +156,7 @@
             "latest-runtime": "1.0.16",
             "latest-sdk": "1.1.14",
             "product": ".NET Core",
-            "release-type" : "lts",
+            "release-type": "lts",
             "support-phase": "eol",
             "eol-date": "2019-06-27",
             "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/1.0/releases.json"

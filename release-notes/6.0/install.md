@@ -29,7 +29,7 @@ Download links are provided for each of the distributions at:
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/6.0)
 - [.NET 6 release notes](README.md)
 
-[Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server, and Server Core) and Linux (Alpine, Debian, and Ubuntu).
+[Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Windows (Nano Server, and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
 ## What's installed?
 

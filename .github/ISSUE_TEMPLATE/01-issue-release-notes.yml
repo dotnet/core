@@ -1,0 +1,19 @@
+name: Report Problem or Feedback on Release Notes
+description: See a problem or have specific feedback on specific release notes? Start here.
+labels: [area-release-notes]
+body:
+  - type: textarea
+    id: url
+    attributes:
+      label: URL(s)
+      description: List the specific URLs related to release notes you are reporting on.
+      placeholder: https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.0/8.0.0.md
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the problem is.
+    validations:
+      required: true

@@ -21,7 +21,7 @@ Each of the distributions can be downloaded from:
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [.NET 8 release notes](README.md)
 
-[Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server and Server Core) and Linux (Alpine, Debian, and Ubuntu).
+[Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Windows (Nano Server and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
 ## Windows Package Manager CLI (winget)
 
@@ -37,7 +37,7 @@ See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/
 
 You can install any of the distributions with MSI. The following image demonstrates installing the .NET SDK. After launching the MSI, click "Install" and you will be taken through the process of installing the SDK.
 
-![image](https://user-images.githubusercontent.com/94140381/186767749-45306b95-cd1b-4d85-9634-42fb83a1cf4b.png)
+![dotnet installer](https://github.com/dotnet/core/assets/44339330/62cbf002-89ab-4d63-9f0a-69460a6ab3d0)
 
 ## Windows Server Hosting with IIS
 

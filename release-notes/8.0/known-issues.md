@@ -1,52 +1,36 @@
-# .NET 8.0 Known Issues
+# .NET 8 Known Issues
 
 You may encounter the following known issues, which may include workarounds, mitigations, or expected resolution timeframes.
 
 ## .NET SDK
 
-### [8.0.100-rc.2] .NET 8 RC 2 SDK is not compatible with Visual Studio 17.7 or 17.8-preview 2 for Razor projects
+### [8.0.4xx] `dotnet workload restore` with a workload set configured in the global.json will not work
 
-You will see errors like the following when building Razor applications in incompatible Visual Studio versions when using .NET 8 RC 2 SDK
-```
-System.TypeLoadException: Could not load type 'Enumerator' from assembly 'Microsoft.CodeAnalysis, Version=4.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. 
- C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\Roslyn\Microsoft.CSharp.Core.targets 84
-```
-**Workaround** Please upgrade to 17.8-preview3 or use [global.json](https://learn.microsoft.com/dotnet/core/tools/global-json) to pin to the 7.0.400 SDK that is included with 17.7.
+8.0.4xx doesn't support restoring a workload set listed in a global.json file. See the [documentation](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-workload-sets#use-globaljson-for-the-workload-set-version) for more details on the scenario of pinning a workload version.
 
-### [8.0.100-rc.2] .NET 8 RC 2 SDK will disply 14 warnings when running dotnet new the first time or during any future template installation
+**Error**
+`Unhandled exception: Microsoft.Build.Exceptions.InvalidProjectFileException: SDK Resolver Failure: "The SDK resolver "Microsoft.DotNet.MSBuildWorkloadSdkResolver" failed while attempting to resolve the SDK "Microsoft.NET.SDK.WorkloadAutoImportPropsLocator".
+Exception: "System.IO.FileNotFoundException: Workload version 8.0.401, which was specified in <path>\global.json, was not found. Run "dotnet workload restore" to install this workload version.`
 
-This should not affect the fucntionality of the template itself but may impact localization of the template help for the Blazor templates.
+**Workaround**
+Run `dotnet workload update` first to get the workload set installed and then run `dotnet workload restore` after to install the required workloads.
 
-```
-Warning: Failed to read or parse localization file "C:\Program Files\dotnet\templates\8.0.0-rc.2.23476.41\microsoft.dotnet.web.projecttemplates.8.0.8.0.0-rc.2.23476.41.nupkg(/content/BlazorWeb-CSharp/.template.config/localize/templatestrings.cs.json)", it will be skipped from further processing.
-```
+## Certificate Issues on macOS 15 ("Sequoia")
 
-### [8.0.100-rc.2] `dotnet tool restore` may fail with a file access exception when restoring multiple tools
-When running `dotnet tool restore` with a tools config which contains multiple .NET tools, the command can fail with an exception similar to the following:
+### Summary
 
-```
-Unhandled exception: System.AggregateException: One or more errors occurred. (The process cannot access the file 'C:\Users\Username\AppData\Local\Temp\a75617cf-9767-45ca-aaed-34da2edd223e\project.assets.json' because it is being used by another process.)
-When running `dotnet tool restore` with a tools config which contains multiple .NET tools, the command can fail with an exception similar to the following:
- ---> System.IO.IOException: The process cannot access the file 'C:\Users\Username\AppData\Local\Temp\a75617cf-9767-45ca-aaed-34da2edd223e\project.assets.json' because it is being used by another process.
-```
-**Workarounds**
+The `CopyWithPrivateKey` methods that combine a certificate with its associated private key fail on macOS 15 when using in-memory (ephemeral) keys.  This failure is most commonly seen when creating new certificates via `CertificateRequest.CreateSelfSigned` or when loading a certificate and key from a PEM file (or files) with `X509Certificate2.CreateFromPem`, which utilize the affected methods.
 
-The error only occurs when there are multiple tools that have not been previously restored.  So to work around the issue, you can remove all but one tool from the `dotnet-tools.json` config file, and run `dotnet tool restore`.  Then add the tools back to the config file one at a time, running `dotnet tool restore` between each one.
+Callers of these methods on macOS 15 ("Sequoia") will receive a `CryptographicException`, specifically `Interop+AppleCrypto+AppleCommonCryptoCryptographicException: The specified item is no longer valid. It may have been deleted from the keychain.`  The `dotnet dev-certs https` command relies on `CertificateRequest.CreateSelfSigned` and fails with this error.
 
-If you are using .NET tools in CI where you can't easily modify the tools config file between multiple tool restores, you can create a separate `dotnet-tools.json` config file for each .NET tool in a separate subfolder.  Then run `dotnet tool restore` in each subfolder.
+This issue is addressed in the upcoming .NET 8.0.10 release, scheduled for release in October 2024.
 
-### ## [8.0.100-rc.2] `dotnet tool restore` will always install the latest version of a specific tool
+### Root Cause
 
-If a version or version range is used to specify a version of a tool, tool restore will still install the latest version available. There is no workaround and a fix is expected for GA.
+macOS 15 uses a different status code to indicate a key is not in a Keychain than prior versions do.
 
-## .NET MAUI
+### Workarounds
 
-For details about known issues, please refer to the individual repositories:
+If you have not already upgraded to macOS 15 from a prior version and use .NET, you are not impacted by this issue.  If you are planning to upgrade to macOS 15, the workaround is to upgrade to .NET 8.0.10 (scheduled for October 2024) prior to upgrading to macOS 15.
 
-- [.NET MAUI](https://github.com/dotnet/maui/wiki/Known-Issues/)
-- [Android](https://github.com/xamarin/xamarin-android/wiki/Known-issues-in-.NET)
-- [iOS and macOS](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET8)
-
-## Native AOT Support in .NET
-
-For details about known issues, please reference to [the pinned issue](https://github.com/dotnet/core/issues/8288) in this repo.
+Loading a certificate and its associated private key from a PKCS#12/PFX are not affected.  If you are using an application that supports loading a certificate (and associated private key) by either PFX or PEM, converting your PEM contents to PFX - and updating configuration appropriately - may unblock you.

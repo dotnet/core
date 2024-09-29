@@ -1,0 +1,537 @@
+{
+    "$schema": "../schemas/dotnet-os-packages.json",
+    "channel-version": "9.0",
+    "packages": [
+        {
+            "id": "libc",
+            "name": "C Library",
+            "references": [
+                "https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#linux-compatibility",
+                "https://www.gnu.org/software/libc/libc.html",
+                "https://musl.libc.org/"
+            ],
+            "required-scenarios": [
+                "all"
+            ]
+        },
+        {
+            "id": "libgcc",
+            "name": "GCC low-level runtime library",
+            "references": [
+                "https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html"
+            ],
+            "required-scenarios": [
+                "all"
+            ]
+        },
+        {
+            "id": "ca-certificates",
+            "name": "CA Certificates",
+            "references": [
+                "https://www.redhat.com/sysadmin/ca-certificates-cli"
+            ],
+            "required-scenarios": [
+                "https"
+            ]
+        },
+        {
+            "id": "openssl",
+            "name": "OpenSSL",
+            "min-version": "1.1.1",
+            "references": [
+                "https://www.openssl.org/"
+            ],
+            "required-scenarios": [
+                "https",
+                "cryptography"
+            ]
+        },
+        {
+            "id": "libstdc++",
+            "name": "C++ Library",
+            "references": [
+                "https://gcc.gnu.org/onlinedocs/libstdc++/"
+            ],
+            "required-scenarios": [
+                "runtime"
+            ]
+        },
+        {
+            "id": "libicu",
+            "name": "ICU",
+            "references": [
+                "https://icu.unicode.org",
+                "https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md"
+            ],
+            "required-scenarios": [
+                "globalization"
+            ]
+        },
+        {
+            "id": "tzdata",
+            "name": "tz database",
+            "references": [
+                "https://data.iana.org/time-zones/tz-link.html"
+            ],
+            "required-scenarios": [
+                "globalization"
+            ]
+        },
+        {
+            "id": "krb5",
+            "name": "Kerberos",
+            "references": [
+                "https://web.mit.edu/kerberos"
+            ],
+            "required-scenarios": [
+                "kerberos"
+            ]
+        }
+    ],
+    "distributions": [
+        {
+            "name": "Alpine",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apk",
+                    "command-parts": ["add", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "Alpine 3.20",
+                    "release": "3.20",
+                    "packages": [
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "libssl3"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "icu",
+                            "name": "icu-libs"
+                        },
+                        {
+                            "id": "icu",
+                            "name": "icu-data-full"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5"
+                        }
+                    ]
+                },
+                {
+                    "name": "Alpine 3.19",
+                    "release": "3.19",
+                    "packages": [
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "libssl3"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "icu",
+                            "name": "icu-libs"
+                        },
+                        {
+                            "id": "icu",
+                            "name": "icu-data-full"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Debian",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["update"]
+                },
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "Debian 12 (Bookworm)",
+                    "release": "12",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "libc6"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc-s1"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "libssl3"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++6"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu72"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "libgssapi-krb5-2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Fedora",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "dnf",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "Fedora 40",
+                    "release": "40",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "glibc"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "openssl-libs"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5-libs"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "FreeBSD",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "pkg",
+                    "command-parts": ["install", "-A", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "FreeBSD 14.1",
+                    "release": "14.1",
+                    "packages": [
+                        {
+                            "id": "libicu",
+                            "name": "icu"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "RHEL",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "dnf",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "RHEL 8",
+                    "release": "8",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "glibc"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "openssl-libs"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5-libs"
+                        }
+                    ]
+                },
+                {
+                    "name": "RHEL 9",
+                    "release": "9",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "glibc"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "openssl-libs"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "krb5-libs"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Ubuntu",
+            "install-commands":
+            [
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["update"]
+                },
+                {
+                    "run-under-sudo": true,
+                    "command-root": "apt-get",
+                    "command-parts": ["install", "-y", "{packageName}"]
+                }
+            ],
+            "releases": [
+                {
+                    "name": "Ubuntu 24.10 (Oracular Oriole)",
+                    "release": "24.10",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "libc6"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc-s1"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "libssl3t64"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++6"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu74"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "libgssapi-krb5-2"
+                        }
+                    ]
+                },
+                {
+                    "name": "Ubuntu 24.04 (Noble Numbat)",
+                    "release": "24.04",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "libc6"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc-s1"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "libssl3t64"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++6"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu74"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "libgssapi-krb5-2"
+                        }
+                    ]
+                },
+                {
+                    "name": "Ubuntu 22.04.4 LTS (Jammy Jellyfish)",
+                    "release": "22.04",
+                    "packages": [
+                        {
+                            "id": "libc",
+                            "name": "libc6"
+                        },
+                        {
+                            "id": "libgcc",
+                            "name": "libgcc-s1"
+                        },
+                        {
+                            "id": "ca-certificates",
+                            "name": "ca-certificates"
+                        },
+                        {
+                            "id": "openssl",
+                            "name": "libssl3"
+                        },
+                        {
+                            "id": "libstdc++",
+                            "name": "libstdc++6"
+                        },
+                        {
+                            "id": "libicu",
+                            "name": "libicu70"
+                        },
+                        {
+                            "id": "tzdata",
+                            "name": "tzdata"
+                        },
+                        {
+                            "id": "krb5",
+                            "name": "libgssapi-krb5-2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

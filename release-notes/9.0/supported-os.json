@@ -1,0 +1,340 @@
+{
+    "channel-version": "9.0",
+    "last-updated": "2024-08-23",
+    "families": [
+        {
+            "name": "Android",
+            "distributions": [
+                {
+                    "id": "android",
+                    "name": "Android",
+                    "link": "https://www.android.com/",
+                    "lifecycle": "https://support.google.com/android",
+                    "architectures": [
+                        "Arm32",
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "14",
+                        "13",
+                        "12.1",
+                        "12"
+                    ],
+                    "notes": [
+                        "API 21 is used as the minimum SDK target."
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Apple",
+            "distributions": [
+                {
+                    "id": "ios",
+                    "name": "iOS",
+                    "link": "https://developer.apple.com/ios/",
+                    "architectures": [
+                        "Arm64"
+                    ],
+                    "supported-versions": [
+                        "17",
+                        "16",
+                        "15"
+                    ],
+                    "notes": [
+                        "iOS 12.2 is used as the minimum SDK target."
+                    ]
+                },
+                {
+                    "id": "ipados",
+                    "name": "iPadOS",
+                    "link": "https://developer.apple.com/ipados/",
+                    "architectures": [
+                        "Arm64"
+                    ],
+                    "supported-versions": [
+                        "17",
+                        "16",
+                        "15"
+                    ]
+                },                
+                {
+                    "id": "macos",
+                    "name": "macOS",
+                    "link": "https://developer.apple.com/macos/",
+                    "architectures": [
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "14",
+                        "13",
+                        "12"
+                    ],
+                    "notes" : [
+                        "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
+                        "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
+                        "Mac Catalyst apps are supported on macOS Arm64 and x64."
+                    ]
+                },
+                {
+                    "id": "tvos",
+                    "name": "tvOS",
+                    "link": "https://developer.apple.com/tvos/",
+                    "architectures": [
+                        "Arm64"
+                    ],
+                    "supported-versions": [
+                        "17",
+                        "16",
+                        "15",
+                        "14",
+                        "13",
+                        "12.2"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Linux",
+            "distributions": [
+                {
+                    "id": "alpine",
+                    "name": "Alpine",
+                    "link": "https://alpinelinux.org/",
+                    "lifecycle": "https://alpinelinux.org/releases/",
+                    "architectures": [
+                        "Arm32",
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "3.20",
+                        "3.19"
+                    ]
+                },
+                {
+                    "id": "centos-stream",
+                    "name": "CentOS Stream",
+                    "link": "https://centos.org/",
+                    "lifecycle": "https://www.centos.org/cl-vs-cs/",
+                    "architectures": [
+                        "Arm64",
+                        "ppc64le",
+                        "s390x",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "9"
+                    ]
+                },
+                {
+                    "id": "debian",
+                    "name": "Debian",
+                    "link": "https://www.debian.org/",
+                    "lifecycle": "https://wiki.debian.org/DebianReleases",
+                    "architectures": [
+                        "Arm32",
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "12"
+                    ]
+                },
+                {
+                    "id": "fedora",
+                    "name": "Fedora",
+                    "link": "https://fedoraproject.org/",
+                    "lifecycle": "https://fedoraproject.org/wiki/End_of_life",
+                    "architectures": [
+                        "Arm32",
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "40"
+                    ]
+                },
+                {
+                    "id": "opensuse",
+                    "name": "openSUSE Leap",
+                    "link": "https://www.opensuse.org/",
+                    "lifecycle": "https://en.opensuse.org/Lifetime",
+                    "architectures": [
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "15.6",
+                        "15.5"
+                    ]
+                },
+                {
+                    "id": "rhel",
+                    "name": "Red Hat Enterprise Linux",
+                    "link": "https://access.redhat.com/",
+                    "lifecycle": "https://access.redhat.com/support/policy/updates/errata/",
+                    "architectures": [
+                        "Arm64",
+                        "ppc64le",
+                        "s390x",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "9",
+                        "8"
+                    ],
+                    "notes": [
+                        "RHEL-compatible derivatives are supported per [.NET Support](../../support.md)."
+                    ]
+                },
+                {
+                    "id": "sles",
+                    "name": "SUSE Enterprise Linux",
+                    "link": "https://www.suse.com/",
+                    "lifecycle": "https://www.suse.com/lifecycle/",
+                    "architectures": [
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "15.6",
+                        "15.5"
+                    ]
+                },
+                {
+                    "id": "ubuntu",
+                    "name": "Ubuntu",
+                    "link": "https://ubuntu.com/",
+                    "lifecycle": "https://wiki.ubuntu.com/Releases",
+                    "architectures": [
+                        "Arm32",
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "24.04",
+                        "22.04",
+                        "20.04"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Windows",
+            "distributions": [
+                {
+                    "id": "windows-nano-server",
+                    "name": "Nano Server",
+                    "link": "https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images",
+                    "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "2022",
+                        "2019"
+                    ]
+                },
+                {
+                    "id": "windows",
+                    "name": "Windows",
+                    "link": "https://www.microsoft.com/windows/",
+                    "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
+                    "architectures": [
+                        "Arm64",
+                        "x64",
+                        "x86"
+                    ],
+                    "supported-versions": [
+                        "11-23h2-e",
+                        "11-23h2-w",
+                        "11-22h2-e",
+                        "11-22h2-w",
+                        "10-22h2",
+                        "11-21h2-e",
+                        "10-21h2-e-lts",
+                        "10-21h2-iot-lts",
+                        "10-1809-e-lts",
+                        "10-1607-e-lts"
+                    ],
+                    "notes": [
+                        "The x64 emulator is supported on Windows 11 Arm64."
+                    ]
+                },
+                {
+                    "id": "windows-server",
+                    "name": "Windows Server",
+                    "link": "https://www.microsoft.com/windows-server",
+                    "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64",
+                        "x86"
+                    ],
+                    "supported-versions": [
+                        "23H2",
+                        "2022",
+                        "2019",
+                        "2016",
+                        "2012-R2",
+                        "2012"
+                    ],
+                    "notes": [
+                        "Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview)."
+                    ]
+                },
+                {
+                    "id": "windows-server-core",
+                    "name": "Windows Server Core",
+                    "link": "https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images",
+                    "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
+                    "architectures": [
+                        "x64",
+                        "x86"
+                    ],
+                    "supported-versions": [
+                        "2022",
+                        "2019",
+                        "2016",
+                        "2012-R2",
+                        "2012"
+                    ]
+                }
+            ]
+        }
+    ],
+    "libc": [
+        {
+            "name": "glibc",
+            "architectures": [
+                "Arm64",
+                "x64"
+            ],
+            "version": "2.23",
+            "source": "Ubuntu 16.04"
+        },
+        {
+            "name": "glibc",
+            "architectures": [
+                "Arm32"
+            ],
+            "version": "2.35",
+            "source": "Ubuntu 22.04"
+        },
+        {
+            "name": "musl",
+            "architectures": [
+                "Arm32",
+                "Arm64",
+                "x64"
+            ],
+            "version": "1.2.2",
+            "source": "Alpine 3.13"
+        }
+    ],
+    "notes": [
+        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa."
+    ]
+}

@@ -21,7 +21,7 @@ Each of the distributions can be downloaded from:
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/7.0)
 - [.NET 7 release notes](README.md)
 
-[Container images](https://hub.docker.com/r/microsoft/dotnet/) are provided for Windows (Nano Server and Server Core) and Linux (Alpine, Debian, and Ubuntu).
+[Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Windows (Nano Server and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
 ## Windows Package Manager CLI (winget)
 

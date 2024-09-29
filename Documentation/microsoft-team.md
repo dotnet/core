@@ -56,7 +56,6 @@ A few more notes on hardware keys:
   * Set `@Microsoft` as your **Company**,
   * Upload your **picture**, ideally showing your face.
     * Hint: You can grab your GAL picture from <https://microsoft-my.sharepoint.com>.
- * Easily identify other Microsoft employees with our [browser extension](https://docs.opensource.microsoft.com/tools/browser.html)
 
 ## Get write permissions to repos (optional)
 

@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include:
+    - '*'
+  paths:
+    include:
+    - release-notes/releases-index.json
+    - release-notes/**/releases.json
+  batch: True
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+  - repository: 1ESPipelineTemplates
+    type: git
+    name: 1ESPipelineTemplates/1ESPipelineTemplates
+    ref: refs/tags/release
+extends:
+  template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+  parameters:
+    pool:
+      name: AzurePipelines-EO
+      image: 1ESPT-Windows2022
+      os: windows
+    customBuildTags:
+    - ES365AIMigrationTooling
+    stages:
+    - stage: stage
+      jobs:
+      - job: Job_1
+        displayName: Build
+        templateContext:
+          outputs:
+          - output: pipelineArtifact
+            displayName: 'Publish Artifacts'
+            artifactName: dotnet-core-release-metadata-drop
+            targetPath: $(build.artifactstagingdirectory)
+        steps:
+        - checkout: self
+          fetchTags: true
+        - task: CopyFiles@2
+          displayName: Copy files to publish
+          inputs:
+            Contents: |-
+              **\release-notes\releases-index.json
+              **\release-notes\**\releases.json
+            TargetFolder: $(build.artifactstagingdirectory)
