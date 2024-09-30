@@ -2,18 +2,18 @@
 
 Here's a summary of what's new in .NET WPF in this preview release:
 
-* [Introduction of `ThemeMode`](#introduction-of-thememode)
+* [Introduction of `ThemeMode` (Experimental)](#introduction-of-thememode-experimental)
 * [Introduction of `AccentColor`s as `SystemColors`](#introduction-of-accentcolors-as-systemcolors)
 
 .NET 9 Preview 7:
 * [Discussion](https://aka.ms/dotnet/9/preview7)
 * [Release notes](README.md)
 
-## Introduction of `ThemeMode`
-The `ThemeMode` API is designed to facilitate the newly introduced Fluent Themes and the dynamic adjustment of these theme settings in WPF applications. It allows developers to easily toggle between different visual themes, enhancing user experience and accessibility. This is an **experimental** API introduced at `Application` and `Window` level with options to choose from Light, Dark, System and None (Default) theme.
+## Introduction of `ThemeMode` (Experimental)
+The `ThemeMode` API is designed to facilitate the newly introduced Fluent Themes and the dynamic adjustment of these theme settings in WPF applications. It allows developers to easily toggle between different visual themes, enhancing user experience and accessibility. This is an **experimental** API introduced at the `Application` and the `Window` level with options to choose from Light, Dark, System and None (Default) theme.
 
 ### Usage of the API
-A developer can set the Application or Window to the desired ThemeMode from XAML or the code-behind.
+A developer can set the Application or Window to the desired ThemeMode from the XAML or the code-behind.
 1. **Setting Application ThemeMode from XAML:** 
     In App.xaml include the ThemeMode property as shown below.
     ```xml
@@ -30,7 +30,7 @@ A developer can set the Application or Window to the desired ThemeMode from XAML
     ```
 
 2. **Setting Window ThemeMode from XAML:**
-    Similar to Application ThemeMode, set the ThemeMode at the desired window'ss xaml as shown below.
+    Similar to Application ThemeMode, set the ThemeMode at the desired window's xaml as shown below.
     ```xml
     <Window
         x:Class="YourSampleApplication.MainWindow"
@@ -48,7 +48,7 @@ A developer can set the Application or Window to the desired ThemeMode from XAML
     ```
 
 3. **Setting ThemeMode from Code-Behind:**
-    Since the API is experimental, the usage of ThemeMode from code-behind is a bit restricted. To use ThemeMode from code-behind, the developer either need to configure
+    Since the API is experimental, the usage of ThemeMode from code-behind is a bit restricted. To use ThemeMode from code-behind, the developer either needs to configure
     the project to ignore the WPF0001 warning for the project or suppress the warning where needed.
 
     **To configure the Project to ignore the warning:** <br />
@@ -87,6 +87,7 @@ A developer can set the Application or Window to the desired ThemeMode from XAML
 6. The default value of ThemeMode is None.
 
 <br />
+
 In addition to these behaviors, the ThemeMode is also designed to respect the Fluent Theme Dictionary added to the Application or Window. As mentioned [here](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview4/wpf.md), Fluent Themes can also be loaded by including the respective Fluent Dictionary. If the given application or window is loaded with a given Fluent Dictionary, let's say Light, then the ThemeMode will be synced to Light Mode as well and vice-versa.
 
 ### Minimum System Requirements
@@ -95,10 +96,10 @@ In addition to these behaviors, the ThemeMode is also designed to respect the Fl
 **Please try out the new Fluent Themes, provide feedback on the overall experience, report any missing elements, and what we can fix moving forward [here.](https://github.com/dotnet/wpf/issues/new/choose)**
 
 ## Introduction of `AccentColor`s as `SystemColors`
-With the release of **Windows 10**, Accent color has become a key component for visual styling of various controls. This provides a visually consistent experience across apps by aligning with the system's theme. However, developers currently have no easy way to retrieve the various accent colors in their applications. The developers have to depend on undocumented APIs or create their own UISettings wrapper to access the Accent colors, but with the introduction of AccentColors and corresponding brushes in SystemColors, the developers will now have access to the system's accent colors and their variations.
+With the release of Windows 10, **Accent Color** has become a key component for visual styling of various controls. This provides a visually consistent experience across apps by aligning with the system's theme. However, developers currently have no easy way to retrieve the various accent colors in their applications. The developers have to depend on undocumented APIs or create their own UISettings wrapper to access the Accent colors, but with the introduction of AccentColors and corresponding brushes in SystemColors, the developers will now have access to the system's accent colors and their variations.
 
 ### The following APIs are exposed
-1. **Colors:** The following `System.Windows.Media.Color` were introduced corresponding to the current system accent color and its primary, secondary and tertiary variations in Light and Dark mode.
+1. **Colors:** The following `System.Windows.Media.Color` are being introduced corresponding to the current accent color of the system and its primary, secondary and tertiary variations in both Light and Dark mode.
     ```cs
     AccentColor
     AccentColorLight1
@@ -109,7 +110,7 @@ With the release of **Windows 10**, Accent color has become a key component for 
     AccentColorDark3
     ```
 
-2. **ResourceKey:** Similary, the following `System.Windows.ResourceKey` were introduced.
+2. **ResourceKey:** Similary, the following `System.Windows.ResourceKey` are being introduced.
     ```cs
     AccentColorKey
     AccentColorLight1Key
@@ -120,7 +121,7 @@ With the release of **Windows 10**, Accent color has become a key component for 
     AccentColorDark3Key
     ```
 
-3. **SolidColorBrush:** Similary, the following `System.Windows.Media.SolidColorBrush` were introduced.
+3. **SolidColorBrush:** Similary, the following `System.Windows.Media.SolidColorBrush` are being introduced.
     ```cs
     AccentColorBrush
     AccentColorLight1Brush
@@ -131,19 +132,8 @@ With the release of **Windows 10**, Accent color has become a key component for 
     AccentColorDark3Brush
     ```
 
-The current system accent color is represented by `AccentColor`, and its primary variation in light and dark mode goes by `AccentColorLight1` and `AccentColorDark1`. Similarly, The secondary variation is represented by `AccentColorLight2` and `AccentColorDark2` and the tertiary variation is represented by `AccentColorLight3` and `AccentColorDark3`.
-
 ### Usage of the API
-Developers can use the API as shown below:
-
-- Declare a control with a name
-    ```xml
-    <Grid>
-        <Button Name="myButton" Content="Hello World" />
-    </Grid>
-    ```
-
-- Use the brush in code behind to update its applicable properties.
-    ```cs
-    myButton.Background = SystemColors.AccentColorBrush;
-    ```
+Developers can use the API to update the applicable properties as shown below
+```xml
+<Button Content="Sample WPF Button" Background="{x:Static SystemColors.AccentColorBrush}" />
+```
