@@ -11,6 +11,7 @@
 * [.NET MAUI](./dotnetmaui.md)
 * [ASP.NET Core](./aspnetcore.md)
 * [C#](./csharp.md)
+* [.NET WPF](./wpf.md)
 
 ## Get Started
 
