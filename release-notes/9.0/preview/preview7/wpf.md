@@ -3,7 +3,7 @@
 Here's a summary of what's new in .NET WPF in this preview release:
 
 * [Introduction of `ThemeMode`](#introduction-of-thememode)
-* [Introduction of `AccentColors` as `SystemColors`](#introduction-of-accentcolors-as-systemcolors)
+* [Introduction of `AccentColor`s as `SystemColors`](#introduction-of-accentcolors-as-systemcolors)
 
 .NET 9 Preview 7:
 * [Discussion](https://aka.ms/dotnet/9/preview7)
@@ -87,9 +87,11 @@ A developer can set the Application or Window to the desired ThemeMode from XAML
 6. The default value of ThemeMode is None.
 
 ### Minimum System Requirements
-- The system should atleast be on Windows 10 to support Fluent Themes.
+- The system should atleast be on Windows 10 to support Fluent Themes. Although, the backdrop is only supported on Windows 11.
 
-## Introduction of `AccentColors` as `SystemColors`
+**Please try out the new Fluent Themes, provide feedback on the overall experience, report any missing elements, and what we can fix moving forward [here.](https://github.com/dotnet/wpf/issues/new/choose)**
+
+## Introduction of `AccentColor`s as `SystemColors`
 With the release of **Windows 10**, Accent color has become a key component for visual styling of various controls. This provides a visually consistent experience across apps by aligning with the system's theme. However, developers currently have no easy way to retrieve the various accent colors in their applications. The developers have to depend on undocumented APIs or create their own UISettings wrapper to access the Accent colors, but with the introduction of AccentColors and corresponding brushes in SystemColors, the developers will now have access to the system's accent colors and their variations.
 
 ### The following APIs are exposed
