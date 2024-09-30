@@ -22,7 +22,7 @@ A developer can set the Application or Window to the desired ThemeMode from XAML
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:YourSampleApplication"
-        ThemeMode="Light">
+        ThemeMode="Dark">
         <Application.Resources>
         
         </Application.Resources>
@@ -85,6 +85,9 @@ A developer can set the Application or Window to the desired ThemeMode from XAML
 4. Accent color changes will be adhered to whenever the Fluent Theme is applied irrespective of ThemeMode.
 5. When the ThemeMode is set to a Window, it will take precedence over the Application's ThemeMode. In case Window ThemeMode is set to None, the window will adhere to Application's ThemeMode, even if Application uses Fluent Theme.
 6. The default value of ThemeMode is None.
+
+<br />
+In addition to these behaviors, the ThemeMode is also designed to respect the Fluent Theme Dictionary added to the Application or Window. As mentioned [here](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview4/wpf.md), Fluent Themes can also be loaded by including the respective Fluent Dictionary. If the given application or window is loaded with a given Fluent Dictionary, let's say Light, then the ThemeMode will be synced to Light Mode as well and vice-versa.
 
 ### Minimum System Requirements
 - The system should atleast be on Windows 10 to support Fluent Themes. Although, the backdrop is only supported on Windows 11.
