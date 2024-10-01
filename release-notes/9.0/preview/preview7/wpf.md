@@ -137,3 +137,16 @@ Developers can use the API to update the applicable properties as shown below
 ```xml
 <Button Content="Sample WPF Button" Background="{x:Static SystemColors.AccentColorBrush}" />
 ```
+
+## Community contributors
+
+Thank you contributors! ❤️
+
+- [@ThomasGoulet73](https://github.com/ThomasGoulet73)
+- [@batzen](https://github.com/batzen)
+- [@h3xds1nz](https://github.com/h3xds1nz)
+- [@robert-abeo](https://github.com/robert-abeo)
+- [@miloush](https://github.com/miloush)
+- [@lindexi](https://github.com/lindexi)
+- [@MichaeIDietrich](https://github.com/MichaeIDietrich)
+- [@pomianowski](https://github.com/pomianowski)
