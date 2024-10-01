@@ -6,7 +6,7 @@
 * [Runtime](./runtime.md)
 * [SDK](./sdk.md)
 
-### Feature Release Notes
+## Feature Release Notes
 
 * [.NET MAUI](./dotnetmaui.md)
 * [ASP.NET Core](./aspnetcore.md)
