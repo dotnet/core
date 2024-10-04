@@ -110,9 +110,9 @@ error CS0118: 'WinRT.Text' is a namespace but is used like a variable
 error CS0103: The name 'GenericHelpers' does not exist in the current context
 ```
 
-### 3. Using WindowsSdkPackageVersion with older packages
+### 3. Using WindowsSdkPackageVersion with older package versions
 
-The .NET 9 SDK now supports profiles for the Windows SDK projection package. Due to that, if you use `WindowsSdkPackageVersion` to explicitly specify an older version of the package (i.e. before the `.38` version), you will see no types from `Microsoft.Windows.SDK.NET.dll` resolve.
+The .NET 9 SDK now supports profiles for the Windows SDK projection package. Due to that, if you use `WindowsSdkPackageVersion` to explicitly specify an older version of the package without profiles (i.e. before the `.38` version), you will see no types from `Microsoft.Windows.SDK.NET.dll` resolve.
 
 ### Mitigation
 
