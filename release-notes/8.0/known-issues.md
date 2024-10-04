@@ -37,7 +37,7 @@ Loading a certificate and its associated private key from a PKCS#12/PFX are not 
 
 ## Windows SDK projections
 
-If you target the Windows 10 OS version target framework (i.e. net8.0-windows10.0.22000.0) and run into one of the below compiler errors, see the [CsWinRT issue](https://github.com/microsoft/CsWinRT/issues/1809) for how to get the fix. The fix will be available by default in an upcoming .NET SDK update.
+If you target the Windows 10 OS version target framework (i.e. `net8.0-windows10.0.22000.0`) and run into one of the below compiler errors, **see the [CsWinRT issue](https://github.com/microsoft/CsWinRT/issues/1809) for how to get the fix**. The fix will be available by default in an upcoming .NET SDK update.
 
 ### 1. Partial type nested within a non-partial type
 
