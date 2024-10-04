@@ -118,7 +118,7 @@ The .NET 9 SDK now supports profiles for the Windows SDK projection package. Due
 
 If you had previously specified the `WindowsSdkPackageVersion` property to get a version of the package not available in the .NET SDK, you can remove that property as the .NET SDK now has a newer version of the package including for `26100`.
 
-If you had previously specified the `WindowsSdkPackageVersion` property to fix the version of the package to control your dependencies and need to stay on the older version, you can add the below to your `csproj` or a common `props` or `targets` file to workaround the issue. This will also be done automatically by the .NET 9 SDK in an upcoming update once which you can remove it.
+If you had previously specified the `WindowsSdkPackageVersion` property to fix the version of the package to control your dependencies and need to stay on the older version, you can add the below to your `csproj` or a common `props` or `targets` file to workaround the issue. This will be done automatically by the .NET 9 SDK in an upcoming update upon which you can remove it.
 
 ```
 <ItemGroup Condition=" '$(IncludeWindowsSDKRefFrameworkReferences)' == 'true' ">
