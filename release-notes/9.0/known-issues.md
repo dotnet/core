@@ -53,7 +53,7 @@ NETSDK1060 Error reading assets file: Error loading lock file '...\obj\project.a
 
 To target .NET 9 from Visual Studio, .NET SDK requires the use of Visual Studio 17.12 Preview 2.0 or higher.
 
-An **upcoming Visual Studio 17.11.x** release will restore support for targeting .NET 8 and lower using .NET SDK 9.0.100. A [workaround that can be temporarily checked into affected repositories](https://github.com/dotnet/sdk/issues/43339#issuecomment-2344233994) is available.
+**Visual Studio 17.11.4** restored support for targeting .NET 8 and lower using .NET SDK 9.0.100. A [workaround that can be temporarily checked into affected repositories](https://github.com/dotnet/sdk/issues/43339#issuecomment-2344233994) is available.
 
 ## Certificate Issues on macOS 15 ("Sequoia")
 
