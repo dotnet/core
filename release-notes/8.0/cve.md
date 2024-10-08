@@ -9,10 +9,10 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
 
 - 8.0.10 (October 2024)
-  - [CVE-2024-38229 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
-  - [CVE-2024-43483 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
-  - [CVE-2024-43484 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
-  - [CVE-2024-43485 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2024-38229 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/326)
+  - [CVE-2024-43483 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/327)
+  - [CVE-2024-43484 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/328)
+  - [CVE-2024-43485 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/329)
 - 8.0.8 (August 2024)
   - [CVE-2024-38167 | .NET Information Disclosure Vulnerability](https://github.com/dotnet/announcements/issues/319)
   - [CVE-2024-38168 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/320)
