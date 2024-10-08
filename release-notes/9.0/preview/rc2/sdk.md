@@ -5,6 +5,7 @@ This release was focused on quality improvements as we near general availability
 SDK updates in .NET 9 Release Candidate 2:
 
 * [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
+* [GitHub Release changelog](https://github.com/dotnet/sdk/compare/v9.0.100-rc.1.24452.12...v9.0.100-rc.2.24474.11)
 
 .NET 9 Release Candidate 2:
 
