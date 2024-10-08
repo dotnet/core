@@ -5,6 +5,7 @@ This release was focused primarily on quality improvements as we near general av
  Here's a summary of what's new in ASP.NET Core in this release:
 
 * [Updated to latest Bootstrap, jQuery, and jQuery Validation versions](#updated-to-latest-bootstrap-jquery-and-jquery-validation-versions)
+* [GitHub Release changelog](https://github.com/dotnet/aspnetcore/compare/v9.0.0-rc.1.24452.1...v9.0.0-rc.2.24474.3)
 
 ASP.NET Core updates in .NET 9 Release Candidate 2:
 

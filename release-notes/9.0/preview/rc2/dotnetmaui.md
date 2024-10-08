@@ -5,11 +5,11 @@ This release was focused primarily on quality improvements as we near general av
  Here's a summary of what's new in .NET MAUI in this release:
 
 * [Xcode 16 and latest platform SDK versions](#xcode-16-and-latest-platform-sdk-versions)
+* [GitHub release changelog](https://aka.ms/maui9rc2)
 
 .NET MAUI updates in .NET 9 Release Candidate 2:
 
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
-* [GitHub release with changelog](https://aka.ms/maui9rc2)
 
 .NET 9 Release Candidate 2:
 
