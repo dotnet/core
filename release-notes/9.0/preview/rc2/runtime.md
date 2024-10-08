@@ -10,6 +10,6 @@ Runtime updates in .NET 9 Release Candidate 2:
 
 * [Discussion](https://aka.ms/dotnet/9/rc2)
 * [Release notes](README.md)
-* [Runtime release notes](runtime.md)
+* [SDK release notes](sdk.md)
 * [Libraries release notes](libraries.md)
 
