@@ -9,9 +9,9 @@ Your app needs to be on the latest .NET 6 patch version to be secure. The longer
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older .NET 6 patch version.
 
 - 6.0.35 (October 2024)
-  - [CVE-2024-43483 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
-  - [CVE-2024-43484 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
-  - [CVE-2024-43485 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2024-43483 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/327)
+  - [CVE-2024-43484 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/328)
+  - [CVE-2024-43485 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/329)
 - 6.0.33 (August 2024)
   - No new CVEs.
 - 6.0.32 (July 2024)
