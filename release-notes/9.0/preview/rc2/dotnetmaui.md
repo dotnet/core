@@ -14,7 +14,7 @@ This release was focused primarily on quality improvements as we near general av
 .NET 9 Release Candidate 2:
 
 * [Discussion](https://aka.ms/dotnet/9/rc2)
-* [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/rc2/README.md)
+* [Release notes](README.md)
 
 ## Xcode 16 and latest platform SDK versions
 
