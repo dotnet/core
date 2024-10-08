@@ -9,7 +9,7 @@ This release was focused primarily on quality improvements as we near general av
 .NET MAUI updates in .NET 9 Release Candidate 2:
 
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
-* [GitHub Release](https://aka.ms/maui9rc2)
+* [GitHub release with changelog](https://aka.ms/maui9rc2)
 
 .NET 9 Release Candidate 2:
 
