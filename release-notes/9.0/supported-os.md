@@ -25,7 +25,7 @@ OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
 [iOS][2]                        | 17, 16, 15                  | Arm64
 [iPadOS][3]                     | 17, 16, 15                  | Arm64
-[macOS][4]                      | 14, 13, 12                  | Arm64, x64
+[macOS][4]                      | 14, 13                      | Arm64, x64
 [tvOS][5]                       | 17, 16, 15, 14, 13, 12.2    | Arm64
 
 Notes:
@@ -114,4 +114,6 @@ Note: Microsoft-provided portable Arm32 glibc builds are supported on distro ver
 
 Support for the following operating system versions has ended.
 
-None currently.
+OS                      | Version       | Date
+----------------------- | ------------- | ----------------------
+macOS                   | 12            | [2024-09-16](https://support.apple.com/HT212585)
