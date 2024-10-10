@@ -10,7 +10,7 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Android][0]                    | 14, 13, 12.1, 12            | Arm32, Arm64, x64     | [Lifecycle][1]
+[Android][0]                    | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]
 
 Notes:
 
@@ -23,10 +23,10 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 17, 16, 15                  | Arm64
-[iPadOS][3]                     | 17, 16, 15                  | Arm64
-[macOS][4]                      | 14, 13, 12                  | Arm64, x64
-[tvOS][5]                       | 17, 16, 15                  | Arm64
+[iOS][2]                        | 18, 17, 16, 15              | Arm64
+[iPadOS][3]                     | 18, 17, 16, 15              | Arm64
+[macOS][4]                      | 15, 14, 13                  | Arm64, x64
+[tvOS][5]                       | 18, 17, 16, 15              | Arm64
 
 Notes:
 
@@ -82,7 +82,7 @@ Notes:
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
 [Nano Server][23]               | 2022, 2019                  | x64                   | [Lifecycle][24]
-[Windows][25]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26]
+[Windows][25]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26]
 [Windows Server][27]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]
 [Windows Server Core][23]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][24]
 
@@ -138,7 +138,7 @@ Fedora                  | 35            | 2022-12-13
 Fedora                  | 34            | 2022-06-07
 Fedora                  | 33            | 2021-11-30
 iOS                     | 12            | [2023-01-23](https://support.apple.com/HT209084)
-iPadOS                  | 12            | -
+macOS                   | 12            | [2024-09-16](https://support.apple.com/HT212585)
 macOS                   | 11            | [2023-09-26](https://support.apple.com/HT211896)
 macOS                   | 10.15         | [2022-09-12](https://support.apple.com/HT210642)
 Nano Server             | 20H2          | [2022-08-09](https://learn.microsoft.com/lifecycle/announcements/windows-server-20h2-retiring)
@@ -160,6 +160,8 @@ Ubuntu                  | 22.10         | 2023-07-20
 Ubuntu                  | 18.04         | 2023-05-31
 Ubuntu                  | 21.10         | 2022-07-14
 Ubuntu                  | 21.04         | 2022-01-20
+Windows                 | 11 22H2 (W)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information)
+Windows                 | 11 21H2 (E)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information)
 Windows                 | 10 21H2 (E)   | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education)
 Windows                 | 11 21H2 (W)   | [2023-10-10](https://learn.microsoft.com/windows/release-health/windows11-release-information)
 Windows                 | 10 21H2 (W)   | [2023-06-13](https://learn.microsoft.com/windows/release-health/release-information)
