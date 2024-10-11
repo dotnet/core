@@ -1,6 +1,6 @@
 # .NET 9 - Supported OS versions
 
-Last updated: 2024-08-23
+Last updated: 2024-10-10
 
 [.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 

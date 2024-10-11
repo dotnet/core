@@ -1,6 +1,6 @@
 # .NET 8 - Supported OS versions
 
-Last updated: 2024-08-26
+Last updated: 2024-10-10
 
 [.NET 8](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
