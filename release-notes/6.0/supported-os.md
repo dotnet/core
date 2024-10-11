@@ -10,7 +10,7 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Android][0]                    | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]
+[Android][0]                    | 14, 13, 12.1, 12            | Arm32, Arm64, x64     | [Lifecycle][1]
 
 Notes:
 
@@ -23,10 +23,10 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 18, 17, 16, 15              | Arm64
-[iPadOS][3]                     | 18, 17, 16, 15              | Arm64
+[iOS][2]                        | 17, 16, 15                  | Arm64
+[iPadOS][3]                     | 17, 16, 15                  | Arm64
 [macOS][4]                      | 15, 14, 13                  | Arm64, x64
-[tvOS][5]                       | 18, 17, 16, 15              | Arm64
+[tvOS][5]                       | 17, 16, 15                  | Arm64
 
 Notes:
 
