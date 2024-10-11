@@ -42,7 +42,7 @@ You can move back and forth between distribution and Microsoft archives using a 
 
 Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.04](https://github.com/dotnet/core/discussions/9258).
 
-[SDK feature bands](https://learn.microsoft.com/en-us/dotnet/core/releases-and-support#feature-bands-sdk-only) are the only significant difference between Microsoft and distro-provided builds. Distro-provided SDK builds are always within the `.1xx` feature band, while Microsoft SDK builds are always for the latest feature band, for example `.2xx`.
+[SDK feature bands](https://learn.microsoft.com/dotnet/core/releases-and-support#feature-bands-sdk-only) are the only significant difference between Microsoft and distro-provided builds. Distro-provided SDK builds are always within the `.1xx` feature band, while Microsoft SDK builds are always for the latest feature band, for example `.2xx`.
 
 ## Dependencies
 
