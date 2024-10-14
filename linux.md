@@ -24,7 +24,7 @@ Note: Microsoft publishes container images per [.NET container publishing policy
 - [Arch Linux](https://archlinux.org/packages/?q=dotnet)
 - [Arch Linux User Repository](https://aur.archlinux.org/packages?K=dotnet)
 - [Fedora](https://packages.fedoraproject.org/search?query=dotnet)
-- [Red Hat Enterprise Linux](https://access.redhat.com/documentation/net/6.0)
+- [Red Hat Enterprise Linux](https://docs.redhat.com/documentation/net)
 - [Tizen](https://developer.samsung.com/tizen/About-Tizen.NET/Tizen.NET.html)
 - [Ubuntu](https://packages.ubuntu.com/search?keywords=dotnet)
 
