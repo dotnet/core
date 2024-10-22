@@ -1,6 +1,6 @@
 # .NET 9 - Supported OS versions
 
-Last updated: 2024-08-23
+Last updated: 2024-10-10
 
 [.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -10,7 +10,7 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Android][0]                    | 14, 13, 12.1, 12            | Arm32, Arm64, x64     | [Lifecycle][1]
+[Android][0]                    | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]
 
 Notes:
 
@@ -23,10 +23,10 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 17, 16, 15                  | Arm64
-[iPadOS][3]                     | 17, 16, 15                  | Arm64
-[macOS][4]                      | 14, 13, 12                  | Arm64, x64
-[tvOS][5]                       | 17, 16, 15, 14, 13, 12.2    | Arm64
+[iOS][2]                        | 18, 17, 16, 15              | Arm64
+[iPadOS][3]                     | 18, 17, 16, 15              | Arm64
+[macOS][4]                      | 15, 14, 13                  | Arm64, x64
+[tvOS][5]                       | 18, 17, 16, 15, 14, 13, 12.2 | Arm64
 
 Notes:
 
@@ -79,7 +79,7 @@ Notes:
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
 [Nano Server][22]               | 2022, 2019                  | x64                   | [Lifecycle][23]
-[Windows][24]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][25]
+[Windows][24]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][25]
 [Windows Server][26]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][23]
 [Windows Server Core][22]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][23]
 

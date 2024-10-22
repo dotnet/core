@@ -1,6 +1,6 @@
 # .NET 8 - Supported OS versions
 
-Last updated: 2024-08-26
+Last updated: 2024-10-10
 
 [.NET 8](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -10,7 +10,7 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Android][0]                    | 14, 13, 12.1, 12            | Arm32, Arm64, x64     | [Lifecycle][1]
+[Android][0]                    | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]
 
 Notes:
 
@@ -23,10 +23,10 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 17, 16, 15                  | Arm64
-[iPadOS][3]                     | 17, 16, 15                  | Arm64
-[macOS][4]                      | 14, 13, 12                  | Arm64, x64
-[tvOS][5]                       | 17, 16, 15, 14, 13, 12.2    | Arm64
+[iOS][2]                        | 18, 17, 16, 15              | Arm64
+[iPadOS][3]                     | 18, 17, 16, 15              | Arm64
+[macOS][4]                      | 15, 14, 13                  | Arm64, x64
+[tvOS][5]                       | 18, 17, 16, 15, 14, 13, 12.2 | Arm64
 
 Notes:
 
@@ -79,7 +79,7 @@ Notes:
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
 [Nano Server][22]               | 2022, 2019                  | x64                   | [Lifecycle][23]
-[Windows][24]                   | 11 23H2, 11 22H2, 10 22H2, 11 21H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][25]
+[Windows][24]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][25]
 [Windows Server][26]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][23]
 [Windows Server Core][22]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][23]
 
@@ -87,7 +87,6 @@ Notes:
 
 * Windows: The x64 emulator is supported on Windows 11 Arm64.
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
-* Windows Server Core: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
 [22]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
 [23]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
@@ -122,8 +121,11 @@ Android                 | 11            | 2024-02-05
 Debian                  | 11            | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html)
 Fedora                  | 38            | 2024-05-21
 Fedora                  | 37            | 2023-12-05
+macOS                   | 12            | [2024-09-16](https://support.apple.com/HT212585)
 openSUSE Leap           | 15.4          | 2023-12-07
 SUSE Enterprise Linux   | 15.4          | 2023-12-31
 Ubuntu                  | 23.10         | 2024-07-11
 Ubuntu                  | 23.04         | 2024-01-20
+Windows                 | 11 22H2 (W)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information)
+Windows                 | 11 21H2 (E)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information)
 Windows                 | 10 21H2 (E)   | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education)

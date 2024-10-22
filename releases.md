@@ -10,11 +10,11 @@ The following table lists supported releases.
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.8][8.0.8] | November 10, 2026 |
-| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.33][6.0.33]  | November 12, 2024 |
+| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.10][8.0.10] | November 10, 2026 |
+| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.35][6.0.35]  | November 12, 2024 |
 
-[8.0.8]: release-notes/8.0/8.0.8/8.0.8.md
-[6.0.33]: release-notes/6.0/6.0.33/6.0.33.md
+[8.0.10]: release-notes/8.0/8.0.10/8.0.10.md
+[6.0.35]: release-notes/6.0/6.0.35/6.0.35.md
 
 ## RC releases
 
@@ -22,9 +22,9 @@ The following table lists unsupported rc releases.
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-rc.1][9.0.0-rc.1] | May 12, 2026 |
+| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-rc.2][9.0.0-rc.2] | May 12, 2026 |
 
-[9.0.0-rc.1]: release-notes/9.0/preview/rc1/9.0.0-rc.1.md
+[9.0.0-rc.2]: release-notes/9.0/preview/rc2/9.0.0-rc.2.md
 
 ## End-of-life releases
 
