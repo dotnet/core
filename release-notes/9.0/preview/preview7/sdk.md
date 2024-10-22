@@ -36,8 +36,10 @@ Requirements (depending on your environment):
 
 ## More consistent environment variables for container publishing
 
-[@kasperk81](https://github.com/kasperk81) noticed that the environment variables that the container publish tooling use to control some of the finer aspects of registry communication and security were not aligned with the existing conventions. 
-Most of the rest of the CLI uses the `DOTNET` 'namespace' for environment variables, but the container tooling used `SDK` instead. They helpfully [unified our environment variables to the `DOTNET` version](https://github.com/dotnet/sdk/pull/41769), while keeping support for the older `SDK` prefix. Going forward, please use the `DOTNET` prefix for environment variables, as we will eventually deprecate the older form.
+[@kasperk81](https://github.com/kasperk81) noticed that the environment variables that the container publish tooling use to control some of the finer aspects of registry communication and security were not aligned with the existing conventions.
+Most of the rest of the CLI uses the `DOTNET` 'namespace' for environment variables, but the container tooling used `SDK` instead.
+They helpfully [unified our environment variables to the `DOTNET` version](https://github.com/dotnet/sdk/pull/41769), while keeping support for the older `SDK` prefix.
+Going forward, please use the `DOTNET` prefix for environment variables, as we will eventually deprecate the older form.
 
 ## Introduction of Workload Sets for more control over workloads
 
@@ -68,7 +70,7 @@ If you need to change back for any reason, you can run the same command with `ma
 
 ## Mitigating analyzer mismatch issues aka 'torn SDK'
 
-Many users install the .NET SDK and Visual Studio at different cadences, and while this flexibility is one of our goals, it can lead to problems for tooling that needs to interop between the two environments. 
+Many users install the .NET SDK and Visual Studio at different cadences, and while this flexibility is one of our goals, it can lead to problems for tooling that needs to interop between the two environments.
 
 One example of this kind of tooling is Roslyn Analyzers. Analyzer authors have to code for specific versions of Roslyn, but which versions are available and which is used by a given build has been unclear in the past.
 
@@ -78,9 +80,9 @@ We call this kind of mismatch a 'torn SDK'. When you are in this torn state, you
 >CSC : warning CS9057: The analyzer assembly '..\dotnet\sdk\8.0.200\Sdks\Microsoft.NET.Sdk.Razor\source-generators\Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll' references version '4.9.0.0' of the compiler, which is newer than the currently running version '4.8.0.0'.
 ```
 
-Starting in this release, we have adopted a method of detecting and automatically adjusting for this 'torn' state. 
+Starting in this release, we have adopted a method of detecting and automatically adjusting for this 'torn' state.
 
-You can read more about it [in our documentation for the effort](https://github.com/dotnet/sdk/blob/main/documentation/general/torn-sdk.md). 
+You can read more about it [in our documentation for the effort](https://github.com/dotnet/sdk/blob/main/documentation/general/torn-sdk.md).
 
 In short, the SDK's MSBuild logic embeds the version of MSBuild it shipped with, and we can use that information to detect when the SDK is running in an environment other than that version.
 
