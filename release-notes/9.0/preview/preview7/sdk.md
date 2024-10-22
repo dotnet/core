@@ -9,15 +9,15 @@
 
 SDK updates in .NET 7 Preview 7:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/sdk.md)
+- [Release notes](sdk.md)
 - [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 7:
 
 - [Discussion](https://aka.ms/dotnet/9/preview7)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/README.md)
-- [Runtime release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/runtime.md)
-- [Libraries release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/libraries.md)
+- [Release notes](README.md)
+- [Runtime release notes](runtime.md)
+- [Libraries release notes](libraries.md)
 
 
 ## Container publishing improvements for insecure registries

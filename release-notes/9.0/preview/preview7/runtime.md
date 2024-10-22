@@ -10,21 +10,21 @@
 
 Runtime updates in .NET 9 Preview 7:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/runtime.md)
+- [Release notes](runtime.md)
 - [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 7:
 
 - [Discussion](https://aka.ms/dotnet/9/preview7)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/README.md)
-- [Libraries release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/libraries.md)
-- [SDK release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview7/sdk.md)
+- [Release notes](README.md)
+- [Libraries release notes](libraries.md)
+- [SDK release notes](sdk.md)
 
 
 ## ARM64 SVE Support
 .NET 9 introduces experimental support for the [Scalable Vector Extension (SVE)](https://en.wikipedia.org/wiki/AArch64#Scalable_Vector_Extension_(SVE)), a SIMD instruction set for ARM64 CPUs. .NET already supports the [NEON instruction set](https://en.wikipedia.org/wiki/AArch64#AArch64_features), so on NEON-capable hardware, your applications can leverage 128-bit vector registers. SVE supports flexible vector lengths all the way up to 2048 bits, unlocking more data processing per instruction; in .NET 9, `System.Numerics.Vector<T>` is 128 bits wide when targeting SVE, and future work will enable scaling of its width to match the target machine's vector register size. You can accelerate your .NET applications on SVE-capable hardware using the new `System.Runtime.Intrinsics.Arm.Sve` APIs. To learn more about SVE in .NET, check out [dotnet/runtime #93095](https://github.com/dotnet/runtime/issues/93095), and to track which APIs are completed, check out [dotnet/runtime #99957](https://github.com/dotnet/runtime/issues/99957).
 
-Note that SVE support in .NET 9 is experimental. The APIs under `System.Runtime.Intrinsics.Arm.Sve` are marked with [`ExperimentalAttribute`](https://learn.microsoft.com/en-us/dotnet/fundamentals/apicompat/preview-apis#experimentalattribute), which means they are subject to change in future releases. Additionally, debugger stepping and breakpoints through SVE-generated code may not function properly, resulting in application crashes or corruption of data.
+Note that SVE support in .NET 9 is experimental. The APIs under `System.Runtime.Intrinsics.Arm.Sve` are marked with [`ExperimentalAttribute`](https://learn.microsoft.com/dotnet/fundamentals/apicompat/preview-apis#experimentalattribute), which means they are subject to change in future releases. Additionally, debugger stepping and breakpoints through SVE-generated code may not function properly, resulting in application crashes or corruption of data.
 
 ## Post-Indexed Addressing on ARM64
 In .NET code, we frequently use index variables to read sequential regions of memory.
@@ -59,7 +59,7 @@ Here's what the updated assembly looks like:
 ldr w0, [x1], #0x04
 ```
 
-The `#0x04` at the end means the address in `x1` will be incremented by four bytes after it is used to load an integer into `w0`. In Preview 7, RyuJIT now uses post-indexed addressing when generating ARM64 code. While x64 does not support post-indexed addressing, Preview 2 introduced [induction variable widening](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/runtime.md#loop-optimizations-iv-widening), which is similarly useful for optimizing memory accesses with loop index variables.
+The `#0x04` at the end means the address in `x1` will be incremented by four bytes after it is used to load an integer into `w0`. In Preview 7, RyuJIT now uses post-indexed addressing when generating ARM64 code. While x64 does not support post-indexed addressing, Preview 2 introduced [induction variable widening](../preview2/runtime.md#loop-optimizations-iv-widening), which is similarly useful for optimizing memory accesses with loop index variables.
 
 To learn more about post-indexed addressing support in RyuJIT, check out [dotnet/runtime #105181](https://github.com/dotnet/runtime/pull/105181).
 
@@ -187,7 +187,7 @@ Dynamic Adaptation To Application Sizes ([DATAS](https://github.com/dotnet/runti
 
 The existing Server GC mode takes a different approach than DATAS. It aims to improve throughput and treats the process as the dominant one on the machine. The amount of allocations it allows before triggering the next GC is based on throughput, not application size. So it can grow the heap very aggressively if it needs to and there’s memory available. This can result in very different heap sizes when you run the process on machines with different hardware specs. What some folks have observed is the heap can grow much bigger when they move their process to a machine with many more cores and more memory. Server GC also doesn’t necessarily adjust the heap down aggressively if the workload becomes much lighter.
 
-Because DATAS aims to adapt to the application memory requirement, it means if your application is doing the same work, the heap size should be the same or similar when you run your app on machines with different specs. And if your workload becomes lighter or heavier the heap size is adjusted accordingly. 
+Because DATAS aims to adapt to the application memory requirement, it means if your application is doing the same work, the heap size should be the same or similar when you run your app on machines with different specs. And if your workload becomes lighter or heavier the heap size is adjusted accordingly.
 
 DATAS helps most with bursty workloads where the heap size should be adjusted according to how demanding the workload is, particularly as demand decreases. This is especially important in memory-constrained environments where it’s important to fit more processes when some processes’ workloads lighten. It also helps with capacity planning.
 
@@ -205,7 +205,7 @@ To achieve this adaptation and still maintain reasonable performance, DATAS does
 
 ### Benchmark Results
 
-Here are some benchmarks results for TechEmpower JSON and Fortunes Benchmarks. Notice the significant reduction in working set when running the benchmarks on a 48 core machine with Linux. Max throughput (measured in rps) shows about a 2-3% reduction, but with an working set improvement of 80%+.  
+Here are some benchmarks results for TechEmpower JSON and Fortunes Benchmarks. Notice the significant reduction in working set when running the benchmarks on a 48 core machine with Linux. Max throughput (measured in rps) shows about a 2-3% reduction, but with an working set improvement of 80%+.
 
 
 ![Working Set Improvement](./media/workingset.png)
@@ -214,11 +214,11 @@ With DATAS enabled # of Gen0 and Gen1 GCs are significantly higher
 
 ![Gen0 and Gen1 Counts](./media/Gen0_GC.png)
 
-Full .NET TechEmpower benchmark results are published [here](https://aka.ms/aspnet/benchmarks) 
+Full .NET TechEmpower benchmark results are published [here](https://aka.ms/aspnet/benchmarks)
 
 ### How to Disable DATAS
 
-If you notice a reduction in throughput, DATAS can be disabled using the following: 
+If you notice a reduction in throughput, DATAS can be disabled using the following:
 
 - `DOTNET_GCDynamicAdaptationMode=0` environment variable
 - setting `System.GC.DynamicAdaptationMode` to `0` in `runtimeconfig.json`

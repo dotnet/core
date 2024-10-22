@@ -14,6 +14,8 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2024/10/08 | [9.0.0 RC 2](preview/rc2/README.md) |
+| 2024/09/10 | [9.0.0 RC 1](preview/rc1/README.md) |
 | 2024/08/13 | [9.0.0 Preview 7](preview/preview7/README.md) |
 | 2024/07/09 | [9.0.0 Preview 6](preview/preview6/README.md) |
 | 2024/06/11 | [9.0.0 Preview 5](preview/preview5/README.md) |
@@ -25,6 +27,8 @@
 ### .NET Libraries
 
 * [What's new in .NET 9 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview#net-libraries)
+* [RC 2](preview/rc2/libraries.md)
+* [RC 1](preview/rc1/libraries.md)
 * [Preview 7](preview/preview7/libraries.md)
 * [Preview 6](preview/preview6/libraries.md)
 * [Preview 5](preview/preview5/libraries.md)
@@ -36,6 +40,8 @@
 ### .NET Runtime
 
 * [What's new in the .NET 9 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/runtime)
+* [RC 2](preview/rc2/runtime.md)
+* RC 1: No release notes
 * [Preview 7](preview/preview7/runtime.md)
 * [Preview 6](preview/preview6/runtime.md)
 * Preview 5: No release notes
@@ -47,6 +53,8 @@
 ### .NET SDK
 
 * [What's new in the SDK for .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/sdk)
+* [RC 2](preview/rc2/sdk.md)
+* [RC 1](preview/rc1/sdk.md)
 * [Preview 7](preview/preview7/sdk.md)
 * [Preview 6](preview/preview6/sdk.md)
 * Preview 5: No release notes
@@ -64,6 +72,8 @@
 ### ASP.NET Core
 
 * [What's new in ASP.NET Core 9.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0)
+* [RC 2](preview/rc2/aspnetcore.md)
+* [RC 1](preview/rc1/aspnetcore.md)
 * [Preview 7](preview/preview7/aspnetcore.md)
 * [Preview 6](preview/preview6/aspnetcore.md)
 * [Preview 5](preview/preview5/aspnetcore.md)
@@ -75,6 +85,8 @@
 ### .NET MAUI
 
 * [What's new in .NET MAUI for .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9)
+* [RC 2](preview/rc2/dotnetmaui.md)
+* [RC 1](preview/rc1/dotnetmaui.md)
 * [Preview 7](preview/preview7/dotnetmaui.md)
 * [Preview 6](preview/preview6/dotnetmaui.md)
 * [Preview 5](preview/preview5/dotnetmaui.md)
