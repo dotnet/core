@@ -56,7 +56,7 @@ OS                              | Versions                    | Architectures   
 
 Notes:
 
-* CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
+* CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
 * Red Hat Enterprise Linux: RHEL-compatible derivatives are supported per [.NET Support](../../support.md).
 
 [6]: https://alpinelinux.org/
