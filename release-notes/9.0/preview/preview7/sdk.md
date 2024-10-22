@@ -56,7 +56,7 @@ Configured to use loose manifests when installing new manifests.
    Install Type:        FileBased
 ```
 
-In this example, I am in 'manifests' mode, which is what we call the current mode of managing workloads.
+This example uses the 'manifests' mode, which is what we call the current mode of managing workloads.
 The simplest way to opt into the new mode is to add a `--version` option to a `dotnet workload install` or `dotnet workload update` command, but you can also explicitly control your mode of operation using the new `dotnet workload config` command:
 
 ```terminal
