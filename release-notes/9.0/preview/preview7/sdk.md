@@ -43,7 +43,9 @@ Going forward, please use the `DOTNET` prefix for environment variables, as we w
 
 ## Introduction of Workload Sets for more control over workloads
 
-This preview is the first release of Workload Sets - an SDK feature intended to give users more control over the workloads they install and the cadence of change of those installed workloads. Prior to this release, workloads would periodically be updated as new versions of individual workloads were released onto any configured NuGet feeds. Now, after switching to this new opt-in mode of operation, users will stay at a specific single  version of all of their workloads until they make an explicit update gesture.
+This preview is the first release of Workload Sets - an SDK feature intended to give users more control over the workloads they install and the cadence of change of those installed workloads.
+Prior to this release, workloads would periodically be updated as new versions of individual workloads were released onto any configured NuGet feeds.
+Now, after switching to this new opt-in mode of operation, users will stay at a specific single  version of all of their workloads until they make an explicit update gesture.
 
 You can see what mode your SDK installation is in by running `dotnet workload --info`:
 
