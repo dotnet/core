@@ -6,15 +6,16 @@ The .NET community provides [best effort support](./os-lifecycle-policy.md) acro
 
 ## Containers
 
-.NET containers are published to multiple registries.
+The [official .NET container images](https://github.com/dotnet/dotnet-docker) are published to the [Microsoft Artifact Registry](https://mcr.microsoft.com/catalog?search=dotnet/). These images are built by Microsoft and are kept up-to-date  with new .NET versions and base image updates.
+
+Several other vendors distribute their own versions of .NET containers to other registries:
 
 - [Chainguard Images](https://images.chainguard.dev/directory/image/dotnet-sdk/versions)
-- [Microsoft Artifact Repository](https://mcr.microsoft.com/catalog?search=dotnet/)
 - [OpenShift](https://developers.redhat.com/blog/2018/07/05/deploy-dotnet-core-apps-openshift)
 - [SUSE Linux Enterprise Server Container Images](https://registry.suse.com/repositories?languages%5B%5D=dotnet)
 - [Ubuntu Rocks](https://hub.docker.com/r/ubuntu/dotnet-aspnet)
 
-Note: Microsoft publishes container images per [.NET container publishing policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md). Other distributions may have different policies.
+Please note that these other .NET container image distributions will have different support policies from the official images.
 
 ## Packages
 
@@ -24,7 +25,7 @@ Note: Microsoft publishes container images per [.NET container publishing policy
 - [Arch Linux](https://archlinux.org/packages/?q=dotnet)
 - [Arch Linux User Repository](https://aur.archlinux.org/packages?K=dotnet)
 - [Fedora](https://packages.fedoraproject.org/search?query=dotnet)
-- [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/net/6.0)
+- [Red Hat Enterprise Linux](https://docs.redhat.com/documentation/net)
 - [Tizen](https://developer.samsung.com/tizen/About-Tizen.NET/Tizen.NET.html)
 - [Ubuntu](https://packages.ubuntu.com/search?keywords=dotnet)
 
