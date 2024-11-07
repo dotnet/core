@@ -37,26 +37,30 @@ Requirements (depending on your environment):
 ## More consistent environment variables for container publishing
 
 [@kasperk81](https://github.com/kasperk81) noticed that the environment variables that the container publish tooling use to control some of the finer aspects of registry communication and security were not aligned with the existing conventions.
-Most of the rest of the CLI uses the `DOTNET` 'namespace' for environment variables, but the container tooling used `SDK` instead. They helpfully [unified our environment variables to the `DOTNET` version](https://github.com/dotnet/sdk/pull/41769), while keeping support for the older `SDK` prefix. Going forward, please use the `DOTNET` prefix for environment variables, as we will eventually deprecate the older form.
+Most of the rest of the CLI uses the `DOTNET` 'namespace' for environment variables, but the container tooling used `SDK` instead.
+They helpfully [unified our environment variables to the `DOTNET` version](https://github.com/dotnet/sdk/pull/41769), while keeping support for the older `SDK` prefix.
+Going forward, please use the `DOTNET` prefix for environment variables, as we will eventually deprecate the older form.
 
 ## Introduction of Workload Sets for more control over workloads
 
-This preview is the first release of Workload Sets - an SDK feature intended to give users more control over the workloads they install and the cadence of change of those installed workloads. Prior to this release, workloads would periodically be updated as new versions of individual workloads were released onto any configured NuGet feeds. Now, after switching to this new opt-in mode of operation, users will stay at a specific single  version of all of their workloads until they make an explicit update gesture.
+This preview is the first release of Workload Sets - an SDK feature intended to give users more control over the workloads they install and the cadence of change of those installed workloads.
+Prior to this release, workloads would periodically be updated as new versions of individual workloads were released onto any configured NuGet feeds.
+Now, after switching to this new opt-in mode of operation, users will stay at a specific single  version of all of their workloads until they make an explicit update gesture.
 
 You can see what mode your SDK installation is in by running `dotnet workload --info`:
 
 ```terminal
 > dotnet workload --info
-Workload version: 9.0.100-manifests.400dd185
+ Workload version: 9.0.100-preview.7.24414.1
 Configured to use loose manifests when installing new manifests.
  [aspire]
-   Installation Source: VS 17.10.35027.167, VS 17.11.35111.106
-   Manifest Version:    8.0.2/8.0.100
-   Manifest Path:       C:\Program Files\dotnet\sdk-manifests\8.0.100\microsoft.net.sdk.aspire\8.0.2\WorkloadManifest.json
-   Install Type:              Msi
+   Installation Source: SDK 8.0.400
+   Manifest Version:    8.1.0/8.0.100
+   Manifest Path:       C:\Program Files\dotnet\sdk-manifests\8.0.100\microsoft.net.sdk.aspire\8.1.0\WorkloadManifest.json
+   Install Type:        FileBased
 ```
 
-In this example, I am in 'manifest' mode, which is what we call the current mode of managing workloads.
+This example uses the 'manifests' mode, which is what we call the current mode of managing workloads.
 The simplest way to opt into the new mode is to add a `--version` option to a `dotnet workload install` or `dotnet workload update` command, but you can also explicitly control your mode of operation using the new `dotnet workload config` command:
 
 ```terminal
@@ -64,7 +68,7 @@ The simplest way to opt into the new mode is to add a `--version` option to a `d
 Successfully updated workload install mode to use workload-set.
 ```
 
-If you need to change back for any reason, you can run the same command with `manifests` instead of `workload-set`. You can also use `dotnet workload config --update-mode` to check what the current mode of operation is. You can read more about workload sets in [our documentation]().
+If you need to change back for any reason, you can run the same command with `manifests` instead of `workload-set`. You can also use `dotnet workload config --update-mode` to check what the current mode of operation is. You can read more about workload sets in [our documentation](https://learn.microsoft.com/dotnet/core/tools/dotnet-workload-sets).
 
 ## Mitigating analyzer mismatch issues aka 'torn SDK'
 
@@ -85,4 +89,3 @@ You can read more about it [in our documentation for the effort](https://github.
 In short, the SDK's MSBuild logic embeds the version of MSBuild it shipped with, and we can use that information to detect when the SDK is running in an environment other than that version.
 
 When we detect this, the SDK inserts an implicit [PackageDownload](https://learn.microsoft.com/nuget/consume-packages/packagedownload-functionality) of a support package called `Microsoft.Net.Sdk.Compilers.Toolset` that ensures a consistent analyzer experience for users.
-

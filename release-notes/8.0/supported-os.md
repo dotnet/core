@@ -51,7 +51,8 @@ OS                              | Versions                    | Architectures   
 [openSUSE Leap][14]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][15]
 [Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
 [SUSE Enterprise Linux][18]     | 15.6, 15.5, 12.5            | Arm64, x64            | [Lifecycle][19]
-[Ubuntu][20]                    | 24.04, 22.04, 20.04         | Arm32, Arm64, x64     | [Lifecycle][21]
+[Ubuntu][20]                    | 24.04                       | Arm64, x64            | [Lifecycle][21]
+[Ubuntu][20]                    | 22.04, 20.04                | Arm32, Arm64, x64     | [Lifecycle][21]
 
 Notes:
 

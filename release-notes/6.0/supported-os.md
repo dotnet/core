@@ -60,7 +60,7 @@ OS                              | Versions                    | Architectures   
 
 Notes:
 
-* CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
+* CentOS: The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/blog/centos-linux-has-reached-its-end-life-eol) or another distro.
 * Red Hat Enterprise Linux: RHEL-compatible derivatives are supported per [.NET Support](../../support.md).
 
 [6]: https://alpinelinux.org/
@@ -128,11 +128,11 @@ Alpine                  | 3.15          | [2023-11-01](https://alpinelinux.org/p
 Alpine                  | 3.14          | [2023-05-01](https://alpinelinux.org/posts/Alpine-3.14.10-3.15.8-3.16.5-released.html)
 Alpine                  | 3.13          | [2022-11-01](https://alpinelinux.org/posts/Alpine-3.12.12-3.13.10-3.14.6-3.15.4-released.html)
 Alpine                  | 3.12          | [2022-05-01](https://alpinelinux.org/posts/Alpine-3.12.12-3.13.10-3.14.6-3.15.4-released.html)
-Android                 | 14            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-Android                 | 13            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-Android                 | 12.1          | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-Android                 | 12            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-Android                 | 11            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
+Android                 | 14            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+Android                 | 13            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+Android                 | 12.1          | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+Android                 | 12            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+Android                 | 11            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
 Android                 | 10            | 2023-03-06
 Android                 | 9             | [2022-01-01](https://developer.android.com/about/versions/pie)
 CentOS                  | 7             | [2024-06-30](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.2009)
@@ -145,13 +145,13 @@ Fedora                  | 36            | 2023-05-16
 Fedora                  | 35            | 2022-12-13
 Fedora                  | 34            | 2022-06-07
 Fedora                  | 33            | 2021-11-30
-iOS                     | 17            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-iOS                     | 16            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-iOS                     | 15            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
+iOS                     | 17            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+iOS                     | 16            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+iOS                     | 15            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
 iOS                     | 12            | [2023-01-23](https://support.apple.com/HT209084)
-iPadOS                  | 17            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-iPadOS                  | 16            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-iPadOS                  | 15            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
+iPadOS                  | 17            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+iPadOS                  | 16            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+iPadOS                  | 15            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
 macOS                   | 12            | [2024-09-16](https://support.apple.com/HT212585)
 macOS                   | 11            | [2023-09-26](https://support.apple.com/HT211896)
 macOS                   | 10.15         | [2022-09-12](https://support.apple.com/HT210642)
@@ -167,9 +167,9 @@ SUSE Enterprise Linux   | 15.2          | 2021-12-31
 SUSE Enterprise Linux   | 12.4          | 2020-06-30
 SUSE Enterprise Linux   | 12.3          | 2019-06-30
 SUSE Enterprise Linux   | 12.2          | 2018-03-31
-tvOS                    | 17            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-tvOS                    | 16            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
-tvOS                    | 15            | [2023-05-08](https://dotnet.microsoft.com/en-us/platform/support/policy/maui)
+tvOS                    | 17            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+tvOS                    | 16            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
+tvOS                    | 15            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
 tvOS                    | 12            | -
 Ubuntu                  | 23.10         | 2024-07-11
 Ubuntu                  | 23.04         | 2024-01-20
