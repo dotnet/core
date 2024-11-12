@@ -10,21 +10,12 @@ The following table lists supported releases.
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.10][8.0.10] | November 10, 2026 |
-| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.35][6.0.35]  | November 12, 2024 |
+| [.NET 9](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [LTS][policies] | [9.0.0][9.0.0] | May 12, 2026 |
+| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.11][8.0.11] | November 10, 2026 |
 
-[8.0.10]: release-notes/8.0/8.0.10/8.0.10.md
-[6.0.35]: release-notes/6.0/6.0.35/6.0.35.md
+[9.0.0]: release-notes/9.0/9.0.0/9.0.0.md
+[8.0.11]: release-notes/8.0/8.0.11/8.0.11.md
 
-## RC releases
-
-The following table lists unsupported rc releases.
-
-|  Version  | Release Date | Support | Latest Patch Version | End of Support |
-| :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-rc.2][9.0.0-rc.2] | May 12, 2026 |
-
-[9.0.0-rc.2]: release-notes/9.0/preview/rc2/9.0.0-rc.2.md
 
 ## End-of-life releases
 
@@ -32,6 +23,7 @@ The following table lists end-of-life releases.
 
 |  Version  |  Release Date | Support | Final Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
+| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.36][6.0.36]  | [November 12, 2024](https://devblogs.microsoft.com/dotnet/dotnet-6-end-of-support/) |
 | [.NET 7](release-notes/7.0/README.md) | [November 8, 2022](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/) | [STS][policies] | [7.0.20][7.0.20] |[May 14, 2024](https://devblogs.microsoft.com/dotnet/dotnet-7-end-of-support/) |
 | [.NET 5](release-notes/5.0/README.md) | [November 10, 2020](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/) | [STS][policies] | [5.0.17][5.0.17] | [May 10, 2022](https://devblogs.microsoft.com/dotnet/dotnet-5-end-of-support-update/) |
 | [.NET Core 3.1](release-notes/3.1/README.md) | [December 3, 2019](https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/) | [LTS][policies] | [3.1.32][3.1.32] | [December 13, 2022](https://devblogs.microsoft.com/dotnet/net-core-3-1-will-reach-end-of-support-on-december-13-2022/) |

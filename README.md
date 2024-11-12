@@ -8,13 +8,13 @@ Welcome to the home of .NET [release notes](./release-notes/README.md) and [news
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0-rc.2][9.0.0-rc.2] | May 12, 2026 |
-| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.10][8.0.10] | November 10, 2026 |
-| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.35][6.0.35]  | November 12, 2024 |
+| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0][9.0.0] | May 12, 2026 |
+| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.11][8.0.11] | November 10, 2026 |
+| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.36][6.0.36]  | November 12, 2024 |
 
-[9.0.0-rc.2]: release-notes/9.0/preview/rc2/9.0.0-rc.2.md
-[8.0.10]: release-notes/8.0/8.0.10/8.0.10.md
-[6.0.35]: release-notes/6.0/6.0.35/6.0.35.md
+[9.0.0]: release-notes/9.0/9.0.0/9.0.0.md
+[8.0.11]: release-notes/8.0/8.0.11/8.0.11.md
+[6.0.36]: release-notes/6.0/6.0.36/6.0.36.md
 [policies]: release-policies.md
 
 * [Release notes](./release-notes/README.md)
