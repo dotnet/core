@@ -2,7 +2,7 @@
 
 .NET 9 is now generally available, read about the final release on the [.NET Blog announcement](https://aka.ms/dotnet9).
 
-This release was focused on quality improvements for the general availability of .NET 9. See the [GitHub Release changelog](https://github.com/dotnet/sdk/compare/v9.0.100-rc.2.24474.11...v9.0.0) for more information in changes between this releace and RC.
+This release was focused on quality improvements for the general availability of .NET 9. See the [GitHub Release changelog](https://github.com/dotnet/sdk/compare/v9.0.100-rc.2.24474.11...v9.0.100) for more information in changes between this release and RC 2.
 
 SDK updates in .NET 9:
 
