@@ -51,8 +51,7 @@ OS                              | Versions                    | Architectures   
 [openSUSE Leap][14]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][15]
 [Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
 [SUSE Enterprise Linux][18]     | 15.6, 15.5, 12.5            | Arm64, x64            | [Lifecycle][19]
-[Ubuntu][20]                    | 24.04                       | Arm64, x64            | [Lifecycle][21]
-[Ubuntu][20]                    | 22.04, 20.04                | Arm32, Arm64, x64     | [Lifecycle][21]
+[Ubuntu][20]                    | 24.04, 22.04, 20.04         | Arm32, Arm64, x64     | [Lifecycle][21]
 
 Notes:
 
@@ -88,6 +87,7 @@ Notes:
 
 * Windows: The x64 emulator is supported on Windows 11 Arm64.
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+* Windows Server Core: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
 [22]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
 [23]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
@@ -101,8 +101,7 @@ Microsoft-provided [portable Linux builds](../../linux.md) define minimum compat
 
 Libc            | Version | Architectures         | Source
 --------------- | ------- | --------------------- | --------------
-glibc           | 2.23    | Arm64, x64            | Ubuntu 16.04
-glibc           | 2.35    | Arm32                 | Ubuntu 22.04
+glibc           | 2.23    | Arm32, Arm64, x64     | Ubuntu 16.04
 musl            | 1.2.2   | Arm32, Arm64, x64     | Alpine 3.13
 
 Note: Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [_TIME_BITS](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions.
