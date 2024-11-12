@@ -8,9 +8,9 @@
 | [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.11][8.0.11] | November 10, 2026 |
 | [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.36][6.0.36]  | November 12, 2024 |
 
-[9.0.0]: release-notes/9.0/9.0.0/9.0.0.md
-[8.0.11]: release-notes/8.0/8.0.11/8.0.11.md
-[6.0.36]: release-notes/6.0/6.0.36/6.0.36.md
+[9.0.0]: 9.0/9.0.0/9.0.0.md
+[8.0.11]: 8.0/8.0.11/8.0.11.md
+[6.0.36]: 6.0/6.0.36/6.0.36.md
 [policies]: release-policies.md
 
 * [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
