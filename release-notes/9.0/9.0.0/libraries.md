@@ -1,6 +1,8 @@
 # Libraries updates in .NET 9
 
-.NET 9 is now generally available, read about the final release on the [.NET Blog announcement](https://aka.ms/dotnet9). This release was focused on quality improvements for the general availability of .NET 9.
+.NET 9 is now generally available, read about the final release on the [.NET Blog announcement](https://aka.ms/dotnet9).
+
+This release was focused on quality improvements for the general availability of .NET 9. See the [GitHub Release changelog](https://github.com/dotnet/runtime/compare/v9.0.0-rc.2.24473.5...v9.0.0) for more information in changes between this releace and RC.
 
 Libraries updates in .NET 9:
 
