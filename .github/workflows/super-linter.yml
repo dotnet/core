@@ -29,3 +29,23 @@ jobs:
           VALIDATE_NATURAL_LANGUAGE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - nombre: Caché
+  usos: acciones/cache@v4.1.2
+  con:
+    # Una lista de archivos, directorios y patrones comodín para almacenar en caché y restaurar
+    camino:
+    # Una clave explícita para restaurar y guardar el caché
+    llave:
+    # Una cadena de varias líneas ordenada que enumera las claves que coinciden con el prefijo y que se utilizan para restaurar la memoria caché obsoleta si no se produjo ningún acierto en la memoria caché para la clave. Tenga en cuenta que `cache-hit` devuelve falso en este caso.
+    restaurar-claves: # opcional
+    # El tamaño del fragmento utilizado para dividir archivos grandes durante la carga, en bytes
+    tamaño del fragmento de carga: # opcional
+    # Un valor booleano opcional, cuando está habilitado, permite que los ejecutores de Windows guarden o restauren cachés que se pueden restaurar o guardar respectivamente en otras plataformas
+    enableCrossOsArchive: # opcional, el valor predeterminado es falso
+    # Falla el flujo de trabajo si no se encuentra la entrada de caché
+    fail-on-cache-miss: # opcional, el valor predeterminado es falso
+    # Verificar si existe una entrada de caché para las entradas dadas (clave, claves de restauración) sin descargar el caché
+    solo búsqueda: # opcional, el valor predeterminado es falso
+    # Ejecute el paso posterior para guardar el caché incluso si falla otro paso anterior
+    save-always: # opcional, el valor predeterminado es falso
+          
