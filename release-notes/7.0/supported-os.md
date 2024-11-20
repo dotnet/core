@@ -124,9 +124,9 @@ Alpine                  | 3.16          | [2024-05-23](https://alpinelinux.org/p
 Alpine                  | 3.15          | [2023-11-01](https://alpinelinux.org/posts/Alpine-3.15.10-3.16.7-3.17.5-3.18.3-released.html)
 Android                 | 11            | 2024-02-05
 Android                 | 10            | 2023-03-06
-CentOS                  | 7             | [2024-06-30](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.2009)
-CentOS                  | 8             | [2021-12-31](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS8.2111)
-CentOS Stream           | 8             | [2024-05-31](http://web.archive.org/web/20230417021744/https://wiki.centos.org/Manuals/ReleaseNotes/CentOSStream)
+CentOS                  | 7             | [2024-06-30](https://wiki.centos.org/Manuals(2f)ReleaseNotes(2f)CentOS7(2e)2009.html)
+CentOS                  | 8             | [2021-12-31](https://wiki.centos.org/Manuals(2f)ReleaseNotes(2f)CentOS8(2e)2111.html)
+CentOS Stream           | 8             | [2024-05-31](https://wiki.centos.org/Manuals(2f)ReleaseNotes(2f)CentOSStream.html)
 Debian                  | 10            | [2022-09-10](https://www.debian.org/News/2022/20220910)
 Fedora                  | 38            | 2024-05-21
 Fedora                  | 37            | 2023-12-05
