@@ -9,7 +9,7 @@ This document is provided for informative purposes only, and is not itself a lic
 The following binaries are licensed with the
 [.NET Library License](https://dotnet.microsoft.com/dotnet_library_license.htm)
 
-* coreclr.dll and .NET runtimes included in binaries published as single-file (due to [extra telemetry](https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/dwreport.cpp) included by .NET runtime in Watson crash reports)
+* coreclr.dll and .NET runtimes included in binaries published as single-file (due to [extra telemetry](https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/dwreport.cpp) included by .NET runtime in Windows Error Reporting crash reports)
 * Microsoft.DiaSymReader.Native.{x86|amd64|arm|arm64}.dll (used by .NET runtime and SDK)
 * PresentationNative_cor3.dll (used by WPF)
 * vcruntime140_cor3.dll (used by WPF)
