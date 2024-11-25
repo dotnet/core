@@ -12,7 +12,11 @@ The following binaries are licensed with the
 * coreclr.dll and .NET runtimes included in binaries published as single-file (due to [extra telemetry](https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/dwreport.cpp) included by .NET runtime in Watson crash reports)
 * Microsoft.DiaSymReader.Native.{x86|amd64|arm|arm64}.dll (used by .NET runtime and SDK)
 * PresentationNative_cor3.dll (used by WPF)
+* vcruntime140_cor3.dll (used by WPF)
 * wpfgfx_cor3.dll (used by WPF)
+
+Note: vcruntime140_cor3.dll is the same binary as
+vcruntime140.dll, which is included in Visual Studio, relicensed under .NET Library License by Microsoft.
 
 The following binaries are licensed with the
 [Windows SDK License](https://learn.microsoft.com/legal/windows-sdk/license):
