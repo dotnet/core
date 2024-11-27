@@ -135,9 +135,9 @@ Android                 | 12            | [2023-05-08](https://dotnet.microsoft.
 Android                 | 11            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
 Android                 | 10            | 2023-03-06
 Android                 | 9             | [2022-01-01](https://developer.android.com/about/versions/pie)
-CentOS                  | 7             | [2024-06-30](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.2009)
-CentOS                  | 8             | [2021-12-31](https://web.archive.org/web/20230711113909/https://wiki.centos.org/Manuals/ReleaseNotes/CentOS8.2111)
-CentOS Stream           | 8             | [2024-05-31](http://web.archive.org/web/20230417021744/https://wiki.centos.org/Manuals/ReleaseNotes/CentOSStream)
+CentOS                  | 7             | [2024-06-30](https://wiki.centos.org/Manuals(2f)ReleaseNotes(2f)CentOS7(2e)2009.html)
+CentOS                  | 8             | [2021-12-31](https://wiki.centos.org/Manuals(2f)ReleaseNotes(2f)CentOS8(2e)2111.html)
+CentOS Stream           | 8             | [2024-05-31](https://wiki.centos.org/Manuals(2f)ReleaseNotes(2f)CentOSStream.html)
 Debian                  | 10            | [2022-09-10](https://www.debian.org/News/2022/20220910)
 Fedora                  | 38            | 2024-05-21
 Fedora                  | 37            | 2023-12-05
