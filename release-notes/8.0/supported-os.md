@@ -23,8 +23,8 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 18, 17, 16, 15              | Arm64
-[iPadOS][3]                     | 18, 17, 16, 15              | Arm64
+[iOS][2]                        | 18, 17, 16                  | Arm64
+[iPadOS][3]                     | 18, 17, 16                  | Arm64
 [macOS][4]                      | 15, 14, 13                  | Arm64, x64
 [tvOS][5]                       | 18, 17, 16, 15, 14, 13, 12.2 | Arm64
 
@@ -44,13 +44,13 @@ Notes:
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Alpine][6]                     | 3.20, 3.19, 3.18, 3.17      | Arm32, Arm64, x64     | [Lifecycle][7]
+[Alpine][6]                     | 3.20, 3.19, 3.18            | Arm32, Arm64, x64     | [Lifecycle][7]
 [CentOS Stream][8]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][9]
 [Debian][10]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][11]
-[Fedora][12]                    | 40, 39                      | Arm32, Arm64, x64     | [Lifecycle][13]
+[Fedora][12]                    | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][13]
 [openSUSE Leap][14]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][15]
 [Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
-[SUSE Enterprise Linux][18]     | 15.6, 15.5, 12.5            | Arm64, x64            | [Lifecycle][19]
+[SUSE Enterprise Linux][18]     | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][19]
 [Ubuntu][20]                    | 24.10, 24.04, 22.04, 20.04  | Arm32, Arm64, x64     | [Lifecycle][21]
 
 Notes:
@@ -78,10 +78,10 @@ Notes:
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Nano Server][22]               | 2022, 2019                  | x64                   | [Lifecycle][23]
+[Nano Server][22]               | 2025, 2022, 2019            | x64                   | [Lifecycle][23]
 [Windows][24]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][25]
-[Windows Server][26]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][23]
-[Windows Server Core][22]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][23]
+[Windows Server][26]            | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86 | [Lifecycle][23]
+[Windows Server Core][22]       | 2025, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][23]
 
 Notes:
 
@@ -116,13 +116,18 @@ Support for the following operating system versions has ended.
 
 OS                      | Version       | Date
 ----------------------- | ------------- | ----------------------
+Alpine                  | 3.17          | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html)
 Alpine                  | 3.16          | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html)
 Android                 | 11            | 2024-02-05
 Debian                  | 11            | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html)
+Fedora                  | 39            | 2024-11-26
 Fedora                  | 38            | 2024-05-21
 Fedora                  | 37            | 2023-12-05
+iOS                     | 15            | [2024-09-16](https://support.apple.com/HT212788)
+iPadOS                  | 15            | [2024-09-16](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-15-release-notes)
 macOS                   | 12            | [2024-09-16](https://support.apple.com/HT212585)
 openSUSE Leap           | 15.4          | 2023-12-07
+SUSE Enterprise Linux   | 12.5          | 2024-10-31
 SUSE Enterprise Linux   | 15.4          | 2023-12-31
 Ubuntu                  | 23.10         | 2024-07-11
 Ubuntu                  | 23.04         | 2024-01-20
