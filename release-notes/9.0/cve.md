@@ -2,7 +2,7 @@
 
 The .NET Team releases [monthly updates for .NET 9](https://github.com/dotnet/announcements/labels/.NET%209.0) on [Patch Tuesday](https://en.wikipedia.org/wiki/Patch_Tuesday). These updates often include security fixes. If you are on an older version, your app may be vulnerable.
 
-Your app needs to be on the latest .NET 8 patch version to be secure. The longer you wait to upgrade, the greater the exposure to CVEs.
+Your app needs to be on the latest .NET 9 patch version to be secure. The longer you wait to upgrade, the greater the exposure to CVEs.
 
 ## Which CVEs apply to my app?
 
