@@ -2,9 +2,9 @@
 
 Last updated: 2024-12-06
 
-Note: .NET 10 is unsupported and is expected to be released in late 2025.
-
 [.NET 10](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
+
+Note: .NET 10 is currently in development and not supported. Supported OS versions are subject to change.
 
 This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
 
