@@ -47,7 +47,7 @@ OS                              | Versions                    | Architectures   
 [Alpine][6]                     | 3.20, 3.19, 3.18            | Arm32, Arm64, x64     | [Lifecycle][7]
 [CentOS Stream][8]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][9]
 [Debian][10]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][11]
-[Fedora][12]                    | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][13]
+[Fedora][12]                    | 40                          | Arm32, Arm64, x64     | [Lifecycle][13]
 [openSUSE Leap][14]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][15]
 [Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
 [SUSE Enterprise Linux][18]     | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][19]
@@ -78,10 +78,10 @@ Notes:
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Nano Server][22]               | 2025, 2022, 2019            | x64                   | [Lifecycle][23]
+[Nano Server][22]               | 2022, 2019                  | x64                   | [Lifecycle][23]
 [Windows][24]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][25]
-[Windows Server][26]            | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86 | [Lifecycle][23]
-[Windows Server Core][22]       | 2025, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][23]
+[Windows Server][26]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][23]
+[Windows Server Core][22]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][23]
 
 Notes:
 
