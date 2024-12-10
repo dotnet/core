@@ -1,8 +1,10 @@
-# .NET 9 - Supported OS versions
+# .NET 10 - Supported OS versions
 
-Last updated: 2024-10-10
+Last updated: 2024-12-06
 
-[.NET 9](README.md) is a [Standard Term Support (STS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
+[.NET 10](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
+
+Note: .NET 10 is currently in development and not supported. Supported OS versions are subject to change.
 
 This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
 
@@ -44,14 +46,15 @@ Notes:
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Alpine][6]                     | 3.20, 3.19                  | Arm32, Arm64, x64     | [Lifecycle][7]
-[CentOS Stream][8]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][9]
-[Debian][10]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][11]
-[Fedora][12]                    | 40                          | Arm32, Arm64, x64     | [Lifecycle][13]
-[openSUSE Leap][14]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][15]
-[Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
-[SUSE Enterprise Linux][18]     | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][19]
-[Ubuntu][20]                    | 24.10, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][21]
+[Alpine][6]                     | 3.21                        | Arm32, Arm64, x64     | [Lifecycle][7]
+[Azure Linux][8]                | 3.0                         | Arm64, x64 | None
+[CentOS Stream][9]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][10]
+[Debian][11]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]
+[Fedora][13]                    | 41                          | Arm32, Arm64, x64     | [Lifecycle][14]
+[openSUSE Leap][15]             | 15.6                        | Arm64, x64            | [Lifecycle][16]
+[Red Hat Enterprise Linux][17]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][18]
+[SUSE Enterprise Linux][19]     | 15.6                        | Arm64, x64            | [Lifecycle][20]
+[Ubuntu][21]                    | 24.10, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]
 
 Notes:
 
@@ -59,29 +62,30 @@ Notes:
 
 [6]: https://alpinelinux.org/
 [7]: https://alpinelinux.org/releases/
-[8]: https://centos.org/
-[9]: https://www.centos.org/cl-vs-cs/
-[10]: https://www.debian.org/
-[11]: https://wiki.debian.org/DebianReleases
-[12]: https://fedoraproject.org/
-[13]: https://fedoraproject.org/wiki/End_of_life
-[14]: https://www.opensuse.org/
-[15]: https://en.opensuse.org/Lifetime
-[16]: https://access.redhat.com/
-[17]: https://access.redhat.com/support/policy/updates/errata/
-[18]: https://www.suse.com/
-[19]: https://www.suse.com/lifecycle/
-[20]: https://ubuntu.com/
-[21]: https://wiki.ubuntu.com/Releases
+[8]: https://github.com/microsoft/azurelinux
+[9]: https://centos.org/
+[10]: https://www.centos.org/cl-vs-cs/
+[11]: https://www.debian.org/
+[12]: https://wiki.debian.org/DebianReleases
+[13]: https://fedoraproject.org/
+[14]: https://fedoraproject.org/wiki/End_of_life
+[15]: https://www.opensuse.org/
+[16]: https://en.opensuse.org/Lifetime
+[17]: https://access.redhat.com/
+[18]: https://access.redhat.com/support/policy/updates/errata/
+[19]: https://www.suse.com/
+[20]: https://www.suse.com/lifecycle/
+[21]: https://ubuntu.com/
+[22]: https://wiki.ubuntu.com/Releases
 
 ## Windows
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Nano Server][22]               | 2022, 2019                  | x64                   | [Lifecycle][23]
-[Windows][24]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][25]
-[Windows Server][26]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][23]
-[Windows Server Core][22]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][23]
+[Nano Server][23]               | 2022, 2019                  | x64                   | [Lifecycle][24]
+[Windows][25]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26]
+[Windows Server][27]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]
+[Windows Server Core][23]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][24]
 
 Notes:
 
@@ -89,11 +93,11 @@ Notes:
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 * Windows Server Core: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
-[22]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
-[23]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
-[24]: https://www.microsoft.com/windows/
-[25]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
-[26]: https://www.microsoft.com/windows-server
+[23]: https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images
+[24]: https://learn.microsoft.com/windows-server/get-started/windows-server-release-info
+[25]: https://www.microsoft.com/windows/
+[26]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
+[27]: https://www.microsoft.com/windows-server
 
 ## Linux compatibility
 
@@ -101,9 +105,9 @@ Microsoft-provided [portable Linux builds](../../linux.md) define minimum compat
 
 Libc            | Version | Architectures         | Source
 --------------- | ------- | --------------------- | --------------
-glibc           | 2.23    | Arm64, x64            | Ubuntu 16.04
+glibc           | 2.27    | Arm64, x64            | Ubuntu 18.04
 glibc           | 2.35    | Arm32                 | Ubuntu 22.04
-musl            | 1.2.2   | Arm32, Arm64, x64     | Alpine 3.13
+musl            | 1.2.3   | Arm32, Arm64, x64     | Alpine 3.17
 
 Note: Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions.
 
