@@ -1,108 +1,77 @@
-# .NET 9
+# .NET Release Notes
 
-[.NET 9](https://aka.ms/dotnet/9/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for 18 months, from November 12th, 2024 to May 12th, 2026.
+[Releases](../releases.md) under active support or development:
 
-- [Downloads](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
-- [Containers](https://hub.docker.com/_/microsoft-dotnet)
-- [Supported OSes](supported-os.md)
-- [OS packages](./os-packages.md)
-- [Known Issues](known-issues.md)
-- [Installation instructions](install.md)
+|  Version  | Release Date | Support | Latest Patch Version | End of Support |
+| :-- | :-- | :-- | :-- | :-- |
+| [.NET 9](release-notes/9.0/README.md) | November 12, 2024 | [STS][policies] | [9.0.0][9.0.0] | May 12, 2026 |
+| [.NET 8](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.11][8.0.11] | November 10, 2026 |
+| [.NET 6](release-notes/6.0/README.md) | [November 8, 2021](https://devblogs.microsoft.com/dotnet/announcing-net-6/) | [LTS][policies] | [6.0.36][6.0.36]  | November 12, 2024 |
 
-## Release notes
+[9.0.0]: 9.0/9.0.0/9.0.0.md
+[8.0.11]: 8.0/8.0.11/8.0.11.md
+[6.0.36]: 6.0/6.0.36/6.0.36.md
+[policies]: release-policies.md
 
-| Date | Release |
-| :-- | :-- |
-| 2024/12/10 | [9.0.200 Preview SDK](./9.0.0/9.0.200-preview.md) |
-| 2024/12/03 | [9.0.101 SDK](./9.0.0/9.0.101.md) |
-| 2024/11/12 | [9.0.0](./9.0.0/9.0.0.md) |
-| 2024/10/08 | [9.0.0 RC 2](preview/rc2/README.md) |
-| 2024/09/10 | [9.0.0 RC 1](preview/rc1/README.md) |
-| 2024/08/13 | [9.0.0 Preview 7](preview/preview7/README.md) |
-| 2024/07/09 | [9.0.0 Preview 6](preview/preview6/README.md) |
-| 2024/06/11 | [9.0.0 Preview 5](preview/preview5/README.md) |
-| 2024/05/21 | [9.0.0 Preview 4](preview/preview4/README.md) |
-| 2024/04/11 | [9.0.0 Preview 3](preview/preview3/README.md) |
-| 2024/03/12 | [9.0.0 Preview 2](preview/preview2/README.md) |
-| 2024/02/13 | [9.0.0 Preview 1](preview/preview1/README.md) |
+* [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
+* [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 
-### .NET Libraries
+You can find release notes for all releases in the [release-notes](.) directory, in markdown and [JSON formats](./schemas/README.md). This content is [licensed](./license-information.md) for broad use.
 
-* [What's new in .NET 9 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview#net-libraries)
-* [RC 2](preview/rc2/libraries.md)
-* [RC 1](preview/rc1/libraries.md)
-* [Preview 7](preview/preview7/libraries.md)
-* [Preview 6](preview/preview6/libraries.md)
-* [Preview 5](preview/preview5/libraries.md)
-* [Preview 4](preview/preview4/libraries.md)
-* [Preview 3](preview/preview3/libraries.md)
-* Preview 2: No release notes
-* [Preview 1](preview/preview1/libraries.md)
+## Monthly patch release notes
 
-### .NET Runtime
+Patch releases are published monthly, often including fixes for vulnerabilities (AKA CVEs) that are disclosed at the same time.
 
-* [What's new in the .NET 9 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/runtime)
-* [RC 2](preview/rc2/runtime.md)
-* RC 1: No release notes
-* [Preview 7](preview/preview7/runtime.md)
-* [Preview 6](preview/preview6/runtime.md)
-* Preview 5: No release notes
-* [Preview 4](preview/preview4/runtime.md)
-* [Preview 3](preview/preview3/runtime.md)
-* [Preview 2](preview/preview2/runtime.md)
-* [Preview 1](preview/preview1/runtime.md)
+Release notes include:
 
-### .NET SDK
+- Links to binaries
+- Notable changes, including CVEs
+- Compatibility information
+- Updated packages
 
-* [What's new in the SDK for .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/sdk)
-* [RC 2](preview/rc2/sdk.md)
-* [RC 1](preview/rc1/sdk.md)
-* [Preview 7](preview/preview7/sdk.md)
-* [Preview 6](preview/preview6/sdk.md)
-* Preview 5: No release notes
-* Preview 4: No release notes
-* [Preview 3](preview/preview3/sdk.md)
-* [Preview 2](preview/preview2/sdk.md)
-* [Preview 1](preview/preview1/sdk.md)
+Example markdown files:
 
-### C\#
+- [6.0/6.0.32/6.0.32.md](./6.0/6.0.32/6.0.32.md)
+- [8.0/8.0.1/8.0.1.md](./8.0/8.0.1/8.0.1.md)
 
-* [What's new in C# 13](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-13)
-* [Preview 7](preview/preview7/csharp.md)
-* [Preview 6](preview/preview6/csharp.md)
+Example JSON files:
 
-### ASP.NET Core
+- [Major releases index](./releases-index.json)
+- [Major release](./9.0/releases.json)
 
-* [What's new in ASP.NET Core 9.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0)
-* [RC 2](preview/rc2/aspnetcore.md)
-* [RC 1](preview/rc1/aspnetcore.md)
-* [Preview 7](preview/preview7/aspnetcore.md)
-* [Preview 6](preview/preview6/aspnetcore.md)
-* [Preview 5](preview/preview5/aspnetcore.md)
-* [Preview 4](preview/preview4/aspnetcore.md)
-* [Preview 3](preview/preview3/aspnetcore.md)
-* [Preview 2](preview/preview2/aspnetcore.md)
-* [Preview 1](preview/preview1/aspnetcore.md)
+`releases-index.json` and all the files it references are stored in blob storage and in GitHub. We use GitHub for easy discoverability of the files and Azure Blob Storage as our production platform.
 
-### .NET MAUI
+It is straightforward to programmatically transform the [blob storage links](https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json) to [`raw` GitHub links](https://raw.githubusercontent.com/dotnet/core/main/release-notes/releases-index.json) should that be desired.
 
-* [What's new in .NET MAUI for .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9)
-* [RC 2](preview/rc2/dotnetmaui.md)
-* [RC 1](preview/rc1/dotnetmaui.md)
-* [Preview 7](preview/preview7/dotnetmaui.md)
-* [Preview 6](preview/preview6/dotnetmaui.md)
-* [Preview 5](preview/preview5/dotnetmaui.md)
-* [Preview 4](preview/preview4/dotnetmaui.md)
-* [Preview 3](preview/preview3/dotnetmaui.md)
-* [Preview 2](preview/preview2/dotnetmaui.md)
-* [Preview 1](preview/preview1/dotnetmaui.md)
+Note: monthly previews are published in the same way, often on the same day. They are not supported so do not include CVE information. However, Release Candidate releases follow our ["Go Live" policy](https://github.com/dotnet/core/blob/main/release-policies.md) and may include CVE information.
 
-### Entity Framework Core
+## Monthly preview release notes
 
-* [What's new in EF Core 9](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/whatsnew)
-* [Preview 5](preview/preview5/efcoreanddata.md)
-* [Preview 4](preview/preview4/efcoreanddata.md)
-* [Preview 3](preview/preview3/efcoreanddata.md)
-* [Preview 2](preview/preview2/efcoreanddata.md)
-* [Preview 1](preview/preview1/efcoreanddata.md)
+We typically release a preview for the next major version each month. These include detailed feature information.
+
+Examples:
+
+- [.NET 9 Preview 1](./9.0/preview/preview1/README.md)
+- [.NET 9 Preview 6](./9.0/preview/preview6/README.md)
+
+This content is used as source material for [What's New](https://learn.microsoft.com/dotnet/core/whats-new/) pages in official Microsoft docs.
+
+Preview release notes are always in a `preview` folder. This approach was adopted so that preview releases do not distract from stable releases once preview releases are no longer relevant.
+
+## Supported OS
+
+Supported OS information is published for each major release. This information indicates to users which OSes they can expect an app (or the .NET SDK) to run on for a given .NET version. It also indicates which OSes are supported and when they transitioned to EOL status.
+
+Examples:
+
+- [.NET 8 Supported OSes (json)](./8.0/supported-os.json)
+- [.NET 8 Supported OSes (markdown)](./8.0/supported-os.md)
+
+## OS packages
+
+OS package information is published for each major release. This information indicates which packages must be installed on a given distro for a .NET app (or the .NET SDK) to run. [.NET packages](../linux.md) are available for multiple distros, which automatically install all required packages.
+
+Examples:
+
+- [.NET 9 OS packages (json)](./9.0/os-packages.json)
+- [.NET 9 OS packages (markdown)](./9.0/os-packages.md)
