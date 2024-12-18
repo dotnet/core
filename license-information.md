@@ -24,7 +24,6 @@ Microsoft built binaries use the MIT license, for:
 - NuGet packages
 - Runtime (including ASP.NET Core) and SDK builds for Linux and macOS
 
-The .NET runtime [statically links some binaries](https://github.com/dotnet/runtime/tree/main/src/native/external), all of which are compatible with the specified runtime license.
 
 [Windows builds](license-information-windows.md) carry additional license terms, for closed source dependencies. These terms apply to runtimes (including ASP.NET Core), NuGet runtime packs, and SDK builds, but not to NuGet library packages.
 
