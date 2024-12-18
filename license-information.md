@@ -36,6 +36,7 @@ Note: The licensing of .NET builds provided by other parties may differ.
 
 Binaries produced by .NET SDK compilers (C#, F#, VB) can be redistributed without additional restrictions. The only restrictions are based on the license of the compiler inputs used to produce the binary.
 
-Parts of the .NET runtime are embedded in applications, including [platform-specific executable hosts](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#framework-dependent-executable), and [self-contained deployments](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#self-contained-deployment), are subject to [.NET](https://github.com/dotnet/dotnet/blob/main/LICENSE.TXT) and [third-party notice](https://github.com/dotnet/dotnet/blob/main/THIRD-PARTY-NOTICES.txt) license terms.
+Parts of the .NET runtime are embedded in applications, including [platform-specific executable hosts](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#framework-dependent-executable),
+and [self-contained deployments](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#self-contained-deployment), are subject to [.NET](https://github.com/dotnet/dotnet/blob/main/LICENSE.TXT) and [third-party notice](https://github.com/dotnet/dotnet/blob/main/THIRD-PARTY-NOTICES.txt) license terms.
 
 Binaries that target Windows are subject to [additional terms](license-information-windows.md).
