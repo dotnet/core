@@ -1,24 +1,36 @@
 # License Information
 
-The .NET project uses source and binaries from multiple sources. The MIT license is the primary license used, however, there are some exceptions.
-
-[Windows builds](license-information-windows.md) are the most notable difference, which carry additional license terms.
+The .NET project uses source and binaries from multiple sources that may be important to your use of .NET.
 
 This document is provided for informative purposes only and is not itself a license.
 
 ## Source code
 
-.NET source is held in a variety of [project repos](./Documentation/core-repos.md). They use the MIT license, for example, [dotnet/runtime LICENSE.TXT](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT).
+.NET source uses the MIT license. There are several [project repos](./Documentation/core-repos.md).
 
-Project repos may include source from other projects, and include a matching third-party notice for copied and modified source, for example [dotnet/runtime THIRD-PARTY-NOTICES.TXT](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
+Each repo has:
+
+- A license, for example, [dotnet/runtime LICENSE.TXT](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT).
+- Third party notice file, for example, [dotnet/runtime THIRD-PARTY-NOTICES.TXT](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT)
+
+Third party notice files are used to document source copied (and possibly further modified) from other projects.
 
 [Project copyright guidance](https://github.com/dotnet/runtime/blob/main/docs/project/copyright.md) provides more details on our policies.
 
 ## Binaries
 
-Project binaries (like the .NET runtime distribution) primarily use the MIT license. Binaries built for macOS and Linux exclusively use the MIT license.
+Microsoft built binaries use the MIT license, for:
 
-[Windows builds](license-information-windows.md) carry additional license terms, for closed source dependencies.
+- NuGet packages
+- Runtime (including ASP.NET Core) and SDK builds for Linux and macOS
+
+The .NET runtime [statically links some binaries](https://github.com/dotnet/runtime/tree/main/src/native/external), all of which are compatible with the specified runtime license.
+
+[Windows builds](license-information-windows.md) carry additional license terms, for closed source dependencies. These terms apply to runtimes (including ASP.NET Core), NuGet runtime packs, and SDK builds, but not to NuGet library packages.
+
+See [.NET Asset Licensing Model](https://github.com/dotnet/runtime/blob/main/docs/project/licensing-assets.md) for more information.
+
+Note: The licensing of .NET builds provided by other parties may differ.
 
 ## Redistribution
 
