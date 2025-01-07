@@ -1,6 +1,6 @@
 # .NET Core SDK 1.0 Preview 4 build 004233
 
-The installers and binary archives on this page include .NET Core 1.0 SDK Preview 4. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.1-SDK-Preview-4-4233-SHA.txt) are available to verify downloads.
+The installers and binary archives on this page include .NET Core 1.0 SDK Preview 4. [Checksums](https://builds.dotnet.microsoft.com/dotnet/checksums/1.0.1-SDK-Preview-4-4233-SHA.txt) are available to verify downloads.
 
 | .NET Core 1.0 Preview 4 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:| :--: | :--: |

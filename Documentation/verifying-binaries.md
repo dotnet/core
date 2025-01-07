@@ -24,7 +24,7 @@ You can then compare the checksum with the value provided after [downloading .NE
 Download checksum file using curl:
 
 ```bash
-curl -O https://dotnetcli.blob.core.windows.net/dotnet/checksums/7.0.5-sha.txt
+curl -O https://builds.dotnet.microsoft.com/dotnet/checksums/7.0.5-sha.txt
 
 ```
 
@@ -52,7 +52,7 @@ You can use PowerShell to perform the the checksum comparison.
 Download checksum file using `curl` (_`curl` is an alias of `Invoke-WebRequest`_):
 
 ```powershell
-curl https://dotnetcli.blob.core.windows.net/dotnet/checksums/7.0.5-sha.txt -OutFile 7.0.5-sha.txt
+curl https://builds.dotnet.microsoft.com/dotnet/checksums/7.0.5-sha.txt -OutFile 7.0.5-sha.txt
 ```
 
 Verify the checksum matches:

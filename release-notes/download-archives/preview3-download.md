@@ -1,6 +1,6 @@
 # .NET Core SDK 1.0 Preview 3 build 004056
 
-The installers and binary archives on this page include .NET Core 1.0 SDK Preview 3. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.1-SDK-Preview-3-4056-SHA.txt) are available to verify downloads.
+The installers and binary archives on this page include .NET Core 1.0 SDK Preview 3. [Checksums](https://builds.dotnet.microsoft.com/dotnet/checksums/1.0.1-SDK-Preview-3-4056-SHA.txt) are available to verify downloads.
 
 | .NET Core 1.0 Preview 3 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|:--|:--|

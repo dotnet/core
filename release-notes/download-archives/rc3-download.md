@@ -1,6 +1,6 @@
 # .NET Core SDK 1.0 RC3 build 004530
 
-The installers and binary archives on this page include .NET Core 1.0 SDK RC 3. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.3-SDK-RC3-4530-SHA.txt) are available to verify downloads.
+The installers and binary archives on this page include .NET Core 1.0 SDK RC 3. [Checksums](https://builds.dotnet.microsoft.com/dotnet/checksums/1.0.3-SDK-RC3-4530-SHA.txt) are available to verify downloads.
 
 
 | .NET Core 1.0 RC 3                        | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries | Docker Images |
