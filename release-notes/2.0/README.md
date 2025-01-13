@@ -2,7 +2,8 @@
 
 This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
 
-[.NET Core 2.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-0/) was released on December 4th, 2018. The release was a collaborative effort by many [contributors](2.0.0-contributor.md). [.NET Core 2.0 reached end of life on October 1st, 2018](https://devblogs.microsoft.com/dotnet/net-core-2-0-will-reach-end-of-life-on-september-1-2018/). It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.0-supported-os.md).
+[.NET Core 2.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-2-0/) was released on December 4th, 2018. The release was a collaborative effort by many [contributors](2.0.0-contributor.md).
+[.NET Core 2.0 reached end of life on October 1st, 2018](https://devblogs.microsoft.com/dotnet/net-core-2-0-will-reach-end-of-life-on-september-1-2018/). It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](2.0-supported-os.md).
 
 Release notes and download information is provided for each update, in the follow table.
 
