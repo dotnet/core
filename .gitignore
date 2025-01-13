@@ -1,4 +1,19 @@
-*.swp
+test:
+    stage: test
+    script: 
+        - "dotnet test"
+build:
+    stage: build
+    script:
+        - "dotnet build"
+    artifacts:
+      paths:
+        - bin/
+stages:
+    - build
+    - test
+image: microsoft/dotnet:latest
+.github/FUNDING.yml*.swp
 *.*~
 project.lock.json
 .DS_Store
