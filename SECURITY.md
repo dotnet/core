@@ -6,7 +6,7 @@ The .NET and ASP.NET Core support policy, including supported versions can be fo
 
 ## Reporting a Vulnerability
 
-Security issues and bugs should be reported privately to the Microsoft Security Response Center (MSRC), either by emailing secure@microsoft.com or via the portal at https://msrc.microsoft.com.
+Security issues and bugs should be reported privately to the Microsoft Security Response Center (MSRC), either by emailing <secure@microsoft.com> or via the portal at <https://msrc.microsoft.com>.
 You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your
 original message. Further information, including the MSRC PGP key, can be found in the [MSRC Report an Issue FAQ](https://www.microsoft.com/msrc/faqs-report-an-issue).
 

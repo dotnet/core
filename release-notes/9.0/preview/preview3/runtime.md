@@ -22,18 +22,18 @@ We have adopted a new exception handling approach for CoreCLR. It improves the p
 
 Here are several links to the perf improvements measured in the perf lab:
 
-* Windows x64: https://github.com/dotnet/perf-autofiling-issues/issues/32280
-* Windows Arm64: https://github.com/dotnet/perf-autofiling-issues/issues/32016
-* Linux x64: https://github.com/dotnet/perf-autofiling-issues/issues/31367
-* Linux Arm64: https://github.com/dotnet/perf-autofiling-issues/issues/31631
+- Windows x64: <https://github.com/dotnet/perf-autofiling-issues/issues/32280>
+- Windows Arm64: <https://github.com/dotnet/perf-autofiling-issues/issues/32016>
+- Linux x64: <https://github.com/dotnet/perf-autofiling-issues/issues/31367>
+- Linux Arm64: <https://github.com/dotnet/perf-autofiling-issues/issues/31631>
 
 In preview 3, this new implementation has been enabled by default after making sure there are no known issues with either running or debugging .NET applications except for few minor ones that will be fixed in the next preview.
 
 Here is a list of remaining known issues:
 
-* WinDbg doesn't break on a first chance managed software exception. As a temporary mitigation, it is possible to set a breakpoint at the native `coreclr!DispatchManagedException`.
-* Exception interception doesn't work on Windows Arm64 and Unix.
-* Visual studio doesn't break on failed Asserts when debugging unit tests. With the legacy exception handling, it breaks on those and pops up a "user unhandled exception" dialog. The tests still execute correctly though.
+- WinDbg doesn't break on a first chance managed software exception. As a temporary mitigation, it is possible to set a breakpoint at the native `coreclr!DispatchManagedException`.
+- Exception interception doesn't work on Windows Arm64 and Unix.
+- Visual studio doesn't break on failed Asserts when debugging unit tests. With the legacy exception handling, it breaks on those and pops up a "user unhandled exception" dialog. The tests still execute correctly though.
 
 These issues are already fixed in the main branch and the fixes will be included in preview 4.
 

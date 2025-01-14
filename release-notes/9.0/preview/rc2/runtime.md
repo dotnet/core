@@ -13,4 +13,3 @@ Runtime updates in .NET 9 Release Candidate 2:
 * [Release notes](README.md)
 * [SDK release notes](sdk.md)
 * [Libraries release notes](libraries.md)
-

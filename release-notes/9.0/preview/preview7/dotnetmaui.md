@@ -16,11 +16,13 @@ Here's a summary of what's new in .NET MAUI in this preview release:
 * [Xcode Sync for CLI and Visual Studio Code](#xcode-sync-for-cli-and-visual-studio-code)
 
 .NET MAUI updates in .NET 9 Preview 7:
+
 * [Release notes](dotnetmaui.md)
 * [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
 * [GitHub Release](https://aka.ms/maui9p7)
 
 .NET 9 Preview 7:
+
 * [Discussion](https://aka.ms/dotnet/9/preview7)
 * [Release notes](README.md)
 
@@ -137,11 +139,9 @@ The entire app, including the web content, is packaged and then runs locally on 
 
     > [!TIP] In some cases the IDE or code editor might add entries to the project's `.csproj` file that are incorrect. When using the default locations for the raw assets there should be no entries for any of these files or folders in the `.csproj` file. You might need to look at source control diffs to undo any such changes.
 
-
 1. **Adding the HybridWebView control**
 
     In the app's `MainPage.xaml` file replace the default code within the `<ContentPage>` tag with this XAML that has a grid layout, a button, and the `HybridWebView` control:
-
 
     ```xml
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
@@ -171,15 +171,12 @@ The entire app, including the web content, is packaged and then runs locally on 
 
     The message are "raw" because no additional processing is performed. You can encode data within the message to perform more advanced messaging.
 
-
 ## New `TitleBar` Control and `Window.TitleBar` for Windows
 
-
-The new `TitleBar` control enables developers the ability to create custom title bars in their applications. There are two parts to this new control, first is the control itself which inherits from `ContentView` and can be placed anywhere in an application. Second, is a new `Window.TitleBar` property on `Window` that enables developers to set a `TitleBar` control that users will see at the top of their application. `Window.TitleBar` is available in Windows projects today and will come to Mac Catalyst in a future release. Thanks to Mike Corsaro ([@Foda](https://github.com/Foda)) for the contribution.
-
+The new `TitleBar` control enables developers the ability to create custom title bars in their applications. There are two parts to this new control, first is the control itself which inherits from `ContentView` and can be placed anywhere in an application.
+Second, is a new `Window.TitleBar` property on `Window` that enables developers to set a `TitleBar` control that users will see at the top of their application. `Window.TitleBar` is available in Windows projects today and will come to Mac Catalyst in a future release. Thanks to Mike Corsaro ([@Foda](https://github.com/Foda)) for the contribution.
 
 ![Overview of title bar control](./media/titlebar-overview.png)
-
 
 The `TitleBar` control can now be set for the `Window.TitleBar` property for any `Window`.
 
@@ -253,11 +250,7 @@ The `TitleBar.Content` and `TitleBar.LeadingContent` are extremely customizable 
 
 Here is an overview of different settings in action:
 
-
-
-https://github.com/user-attachments/assets/2623e4a0-27b5-45b1-bbe8-59ddb2f2ab14
-
-
+<https://github.com/user-attachments/assets/2623e4a0-27b5-45b1-bbe8-59ddb2f2ab14>
 
 ## `ActivateWindow` Added to bring a `Window` to foreground
 
@@ -286,7 +279,6 @@ The binding mode for `IsVisible` and `IsEnabled` on the `BackButtonBehavior` is 
 
 .NET 9 Preview 7 changes the default behavior for hosting content to be `localhost` on iOS and Mac Catalyst 18 and newer. Starting with iOS and Mac Catalyst 18 the internal `0.0.0.0` address used to host the `BlazorWebView`'s content no longer works and causes the `BlazorWebView` to not load and render as an empty rectangle.
 
-
 In order to continue using `0.0.0.0`, activate this behavior using a switch in `MauiProgram.cs`:
 
 ```c#
@@ -296,23 +288,23 @@ AppContext.SetSwitch("BlazorWebView.AppHostAddressAlways0000", true);
 
 ## `MainPage` is Obsolete
 
-Instead of setting a `MainPage` property on the `Application`, developers should now set the `Page` on the `Window` to which it belongs. This is what actually happens when you set `MainPage` today in a .NET MAUI application, so the behavior is the same and the usage is now more clear. `MainPage` has been retained for .NET 9 in order to facilitate upgrading projects from Xamarin.Forms, but will be completely removed in a future release.
-
+Instead of setting a `MainPage` property on the `Application`, developers should now set the `Page` on the `Window` to which it belongs. This is what actually happens when you set `MainPage` today in a .NET MAUI application, so the behavior is the same and the usage is now more clear.
+`MainPage` has been retained for .NET 9 in order to facilitate upgrading projects from Xamarin.Forms, but will be completely removed in a future release.
 
 New projects now see the recommended pattern in the .NET MAUI template:
 
 ```csharp
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
-	}
+ public App()
+ {
+  InitializeComponent();
+ }
 
-	protected override Window CreateWindow(IActivationState? activationState)
-	{
-		return new Window(new AppShell());
-	}
+ protected override Window CreateWindow(IActivationState? activationState)
+ {
+  return new Window(new AppShell());
+ }
 }
 ```
 
@@ -337,15 +329,15 @@ appBuilder.ConfigureMauiHandlers(handlers =>
 ```csharp
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
+ public static MauiApp CreateMauiApp()
+ {
+  var builder = MauiApp.CreateBuilder();
 
-		builder
-			.UseMauiEmbeddedApp<App>();
+  builder
+   .UseMauiEmbeddedApp<App>();
 
-		return builder.Build();
-	}
+  return builder.Build();
+ }
 }
 ```
 
@@ -397,8 +389,8 @@ Example with a `VerticalStackLayout`:
 ```csharp
 var layout2 = new VerticalStackLayout()
 {
-	new Button(),
-	new Button()
+ new Button(),
+ new Button()
 };
 
 HandlerProperties.SetDisconnectPolicy(layout2, HandlerDisconnectPolicy.Manual);
@@ -416,9 +408,7 @@ When disconnecting, the action will continue down the tree until it completes or
 
 `WebView` adds a `ProcessTerminated` event that's raised when a `WebView` process ends unexpectedly. The `WebViewProcessTerminatedEventArgs` object that accompanies this event defines platform-specific properties that indicate why the process failed.
 
-
 ## New lifecycle methods for remote notifications on iOS & Mac Catalyst
-
 
 When working with remote notifications it is now easier to get insight into when a user registers or receives remove notifications.
 
@@ -474,19 +464,18 @@ dotnet build /t:xcsync-generate
 
 For more information browse the [Xcode sync documentation](https://learn.microsoft.com/dotnet/maui/macios/xcsync).
 
-
 ## .NET for Android
 
 This release was focused on quality improvements.
 
-- [GitHub Release](https://github.com/xamarin/xamarin-android/releases/)
+* [GitHub Release](https://github.com/xamarin/xamarin-android/releases/)
 
 ## .NET for iOS
 
 This release was focused on quality improvements. Using this release requires the use of Xcode 15.4 for building apps.
 
-- [GitHub Release](https://github.com/xamarin/xamarin-macios/releases/)
-- [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET9)
+* [GitHub Release](https://github.com/xamarin/xamarin-macios/releases/)
+* [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET9)
 
 ## Community Contributions
 

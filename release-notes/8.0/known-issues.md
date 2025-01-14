@@ -43,7 +43,7 @@ If you target the Windows 10 OS version target framework (i.e. `net8.0-windows10
 
 If you have a type marked `partial` implementing WinRT mapped interfaces nested within a type that isn't marked `partial`, you may see the below compiler error instead of a diagnostic message with a code fix indicating that the outer type needs to be made `partial`.
 
-```
+```console
 CS0260 Missing partial modifier on declaration of type '..'; another partial declaration of this type exists
 ```
 
@@ -51,7 +51,7 @@ CS0260 Missing partial modifier on declaration of type '..'; another partial dec
 
 If you have certain special characters in your assembly name (i.e. `-`) and you have WinRT generic instantiation scenarios, you may notice the generated code doesn't compile due to the source generator fails to escape all possible special characters not allowed in identifiers.
 
-```
+```console
 WinRT.SourceGenerator\Generator.WinRTAotSourceGenerator\WinRTGenericInstantiation.g.cs
 WinRT.SourceGenerator\Generator.WinRTAotSourceGenerator\WinRTGlobalVtableLookup.g.cs
 

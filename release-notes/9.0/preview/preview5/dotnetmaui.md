@@ -8,12 +8,14 @@ Here's a summary of what's new in .NET MAUI in this preview release:
 - [Android - Trimming Enhancements](#trimming-enhancements)
 
 .NET MAUI updates in .NET 9 Preview 5:
-* [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
-* [GitHub Release](https://aka.ms/maui9p5)
+
+- [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation.
+- [GitHub Release](https://aka.ms/maui9p5)
 
 .NET 9 Preview 5:
-* [Discussion](https://aka.ms/dotnet/9/preview5)
-* [Release notes](./README.md)
+
+- [Discussion](https://aka.ms/dotnet/9/preview5)
+- [Release notes](./README.md)
 
 ## Blazor Hybrid Updated Templates
 
@@ -46,7 +48,7 @@ Various fixes have been made when using full trimming to result in smaller appli
 
 ```xml
 <PropertyGroup Condition="'$(Configuration)' == 'Release' And '$(TargetFramework)' == 'net9.0-android'">
-	<TrimMode>Full</TrimMode>
+ <TrimMode>Full</TrimMode>
 </PropertyGroup>
 ```
 

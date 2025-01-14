@@ -37,7 +37,8 @@ await cws.ConnectAsync(uri, httpClient, cancellationToken);
 
 ## Add ZLib and Brotli compression options
 
-We added `ZLibCompressionOptions` and `BrotliCompressionOptions` types for setting algorithm specific compression level and compression strategy for users who would like to set more fine-tuned settings than the only existing option [CompressionLevel](https://learn.microsoft.com/dotnet/api/system.io.compression.compressionlevel). The new compression options are designed to allow for expanding to more options in the future.
+We added `ZLibCompressionOptions` and `BrotliCompressionOptions` types for setting algorithm specific compression level and compression strategy for users who would like to set more fine-tuned settings than the only existing option [CompressionLevel](https://learn.microsoft.com/dotnet/api/system.io.compression.compressionlevel).
+The new compression options are designed to allow for expanding to more options in the future.
 
 ```diff
 namespace System.IO.Compression
@@ -103,7 +104,8 @@ public abstract partial class TarEntry
 }
 ```
 
-`TarEntry.DataOffset` returns a position in the entry's archive stream where the entry's first data byte is located. The entry's data is encapsulated in a sub-stream which users can access via `TarEntry.DataStream`, which hides the real position of the data relative to the archive stream. This is enough for most users, but for those who need more flexibility and want to know the real starting position of the data in the archive stream, we added this new API, which should make it easy to support features like concurrent access with very large TAR files.
+`TarEntry.DataOffset` returns a position in the entry's archive stream where the entry's first data byte is located. The entry's data is encapsulated in a sub-stream which users can access via `TarEntry.DataStream`, which hides the real position of the data relative to the archive stream.
+This is enough for most users, but for those who need more flexibility and want to know the real starting position of the data in the archive stream, we added this new API, which should make it easy to support features like concurrent access with very large TAR files.
 
 ```csharp
 // Create stream for tar ball data in Azure Blob Storage
@@ -142,7 +144,8 @@ See the [documentation](https://learn.microsoft.com/dotnet/core/compatibility/ne
 
 ## Out-of-proc Meter wildcard listening
 
-It is already possible to listen to meters out-of-process using the `System.Diagnostics.Metrics` event source provider, but the current implementation requires specifying the full meter name. [This update](https://github.com/dotnet/runtime/pull/105581) introduces support for listening to all meters by using the wildcard character `*`, allowing you to capture metrics from every meter in a process. Additionally, it adds support for listening by meter prefix, so you can listen to all meters whose names start with a specified prefix. For example, using `MyMeter*` will enable listening to all meters with names beginning with `MyMeter`.
+It is already possible to listen to meters out-of-process using the `System.Diagnostics.Metrics` event source provider, but the current implementation requires specifying the full meter name. [This update](https://github.com/dotnet/runtime/pull/105581) introduces support for listening to all meters by using the wildcard character `*`, allowing you to capture metrics from every meter in a process.
+Additionally, it adds support for listening by meter prefix, so you can listen to all meters whose names start with a specified prefix. For example, using `MyMeter*` will enable listening to all meters with names beginning with `MyMeter`.
 
 ```csharp
 using System.Diagnostics.Metrics;

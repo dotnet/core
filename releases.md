@@ -16,7 +16,6 @@ The following table lists supported releases.
 [9.0.0]: release-notes/9.0/9.0.0/9.0.0.md
 [8.0.11]: release-notes/8.0/8.0.11/8.0.11.md
 
-
 ## End-of-life releases
 
 The following table lists end-of-life releases.

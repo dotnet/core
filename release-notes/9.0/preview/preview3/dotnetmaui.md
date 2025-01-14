@@ -9,12 +9,13 @@ Here's a summary of what's new in .NET MAUI in this preview release:
 
 .NET MAUI updates in .NET 9 Preview 3:
 
-* [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation
-* [GitHub Release](https://aka.ms/maui9p3)
+- [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation
+- [GitHub Release](https://aka.ms/maui9p3)
 
 .NET 9 Preview 3:
-* [Discussion](https://aka.ms/dotnet/9/preview3)
-* [Release notes](./README.md)
+
+- [Discussion](https://aka.ms/dotnet/9/preview3)
+- [Release notes](./README.md)
 
 ## .NET for Android
 
@@ -54,7 +55,7 @@ In .NET MAUI apps, the delivery type can be specified with the `DeliveryType` at
 ```xml
 <MauiAsset Update="Resources\Raw\myvideo.mp4" AssetPack="myassetpack" DeliveryType="FastFollow" />
 ```
- 
+
 - [Android Asset Packs](https://github.com/dotnet/android/blob/main/Documentation/guides/AndroidAssetPacks.md)
 - [GitHub Release](https://github.com/dotnet/android/releases/)
 

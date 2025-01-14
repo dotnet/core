@@ -46,6 +46,7 @@ sudo apk add \
     libstdc++ \
     zlib
 ```
+
 ## Debian 12 "Bookworm"
 
 ```bash
@@ -126,6 +127,7 @@ sudo apt-get update \
     libstdc++6 \
     zlib1g 
 ```
+
 ## Ubuntu 20.04 "Focal"
 
 ```bash

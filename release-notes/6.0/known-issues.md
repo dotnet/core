@@ -8,13 +8,15 @@ You may encounter the following known issues, which may include workarounds, mit
 
 There have been limited reports of a failure to install the .NET 6.0.1 update via Microsoft Update, the update fails with an error code 0x80070643.
 
-.NET 6.0 can be updated to 6.0.1 via MU and .NET 6.0.1 is also included in the Visual Studio 17.0.3 update. Both options carry the .NET Core Runtime and ASP.NET Core runtime version 6.0.1 and the .NET 6 SDK version 6.0.101. When these are installed, applications will by default roll forward to using the latest runtime patch version automatically. See [framework dependent app runtime roll forward](https://learn.microsoft.com/dotnet/core/versions/selection#framework-dependent-apps-roll-forward) for more information about this behavior.
+.NET 6.0 can be updated to 6.0.1 via MU and .NET 6.0.1 is also included in the Visual Studio 17.0.3 update. Both options carry the .NET Core Runtime and ASP.NET Core runtime version 6.0.1 and the .NET 6 SDK version 6.0.101. When these are installed, applications will by default roll forward to using the latest runtime patch version automatically.
+See [framework dependent app runtime roll forward](https://learn.microsoft.com/dotnet/core/versions/selection#framework-dependent-apps-roll-forward) for more information about this behavior.
 
 Therefore, installing either the 6.0.1 update via MU or the VS 17.0.3 update will secure the machine for the vulnerability described in [CVE-2021-43877](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-43877).
 
 ### Root Cause
 
-The optional workload manifest MSIs in the SDK populate the Language column in the Upgrade table. The INSTALLEDLANGUAGE property cannot be queried under the USERUNMANAGED context, it can only be queried under MSIINSTALLCONTEXT_MACHINE context. Due to an error the .NET 6.0.101 SDK Wix bundle sets the installer context incorrectly to USERUNMANAGED when running under the LOCAL\SYSTEM account. This causes the engine to continue and execute an older copy of the MSI instead of skipping it, which in turn triggers a launch condition to block the downgrade and the subsequent error causes the bundle to fail, resulting in the MU update failure.
+The optional workload manifest MSIs in the SDK populate the Language column in the Upgrade table. The INSTALLEDLANGUAGE property cannot be queried under the USERUNMANAGED context, it can only be queried under MSIINSTALLCONTEXT_MACHINE context. Due to an error the .NET 6.0.101 SDK Wix bundle sets the installer context incorrectly to USERUNMANAGED when running under the LOCAL\SYSTEM account.
+This causes the engine to continue and execute an older copy of the MSI instead of skipping it, which in turn triggers a launch condition to block the downgrade and the subsequent error causes the bundle to fail, resulting in the MU update failure.
 
 ### Workaround
 
@@ -22,13 +24,13 @@ Running the 6.0.101 SDK bundle (without using MU) results in the context changin
 
 Therefore a workaround for this issue is to install the 6.0.101 SDK bundle manually by downloading it from the [.NET download site](https://dotnet.microsoft.com/download/dotnet/6.0). Once this is successfully installed, scanning MU again will result in clearing the previous error.
 
-As described previously the computer can be secured by installing the VS 17.0.3 update, even if the MU update results in a failure so the MU failure is not a critical factor from a security perspective. Therefore for the case where we expect the VS update to offer and secure the computer we will be making a change to not offer the MU update to those computers to avoid the MU failure. For the case where .NET 6 was installed as a standalone version and VS is not expected to patch the computer we will continue to offer the 6.0.1 update via MU.
+As described previously the computer can be secured by installing the VS 17.0.3 update, even if the MU update results in a failure so the MU failure is not a critical factor from a security perspective. Therefore for the case where we expect the VS update to offer and secure the computer we will be making a change to not offer the MU update to those computers to avoid the MU failure.
+For the case where .NET 6 was installed as a standalone version and VS is not expected to patch the computer we will continue to offer the 6.0.1 update via MU.
 
 ## Failure when using ICU App-Local feature in .NET 6.0.10
 
-### Summary
-
-Applications using the [App-local ICU](https://learn.microsoft.com/dotnet/core/extensions/globalization-icu#app-local-icu) feature to deploy ICU library binaries with the application binaries can experience throwing unhandled [AccessViolationException](https://learn.microsoft.com/dotnet/api/system.accessviolationexception?view=net-6.0). The [reported issue](https://github.com/dotnet/runtime/issues/77045) contains more information about this failure.
+Applications using the [App-local ICU](https://learn.microsoft.com/dotnet/core/extensions/globalization-icu#app-local-icu) feature to deploy ICU library binaries with the application binaries can experience throwing unhandled [AccessViolationException](https://learn.microsoft.com/dotnet/api/system.accessviolationexception?view=net-6.0).
+The [reported issue](https://github.com/dotnet/runtime/issues/77045) contains more information about this failure.
 
 ### Workarounds
 
@@ -49,13 +51,13 @@ You can use the .net 6 SDK to target downlevel runtimes in 16.11.
 
 In 2021, .NET Runtime and .NET SDK were changed to no longer add the `program files (x86)\dotnet` location to the global machine `PATH` but not all prior versions were updated. Some customers may still have an old version of 2.1 or older runtime and any repair of Visual Studio or that SDK will set the x86 path. Customers can end up in a state where the x86 path ends up ahead of the x64 `program files\dotnet` path which Visual Studio should be using.
 
-**Behavior**
+Behavior:
+
 `The SDK 'Microsoft.NET.Sdk' specified could not be found`
-<img width="438" alt="image" src="https://github.com/dotnet/core/assets/12663534/1e6fdd30-cc33-4296-bb81-da9d26482f66">
 
+![The SDK 'Microsoft.NET.Sdk' specified could not be found](https://github.com/dotnet/core/assets/12663534/1e6fdd30-cc33-4296-bb81-da9d26482f66)
 
-
-```
+```bash
 dotnet --info
 
 Host:
@@ -64,8 +66,10 @@ Host:
   Commit:       8042d61b17
 ```
 
-#### Workarounds
-See https://github.com/dotnet/core/issues/5962#issuecomment-780084535 for more details
+Workarounds:
+
+See <https://github.com/dotnet/core/issues/5962#issuecomment-780084535> for more details
+
 - Edit the system environment variables
 - Environment Variables
 - Double click `Path` under System variables
@@ -93,7 +97,7 @@ To prevent this problem without having to stop and restart the app:
 1. Add a new app setting which contains the target DNS address. For example, create `IdentityServer:IssuerUri` with value `https://MyDomain.com/`
 1. Add the following code to the app:
 
-```
+```csharp
 builder.Services.AddIdentityServer(options =>
 {
     if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
@@ -105,7 +109,7 @@ builder.Services.AddIdentityServer(options =>
 
    Alternatively, add the following code:
 
-```
+```csharp
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     if (!string.IsNullOrEmpty(settings.IdentityServer.IssuerUri))
@@ -123,7 +127,7 @@ For more information, see [this GitHub issue](https://github.com/dotnet/aspnetco
 
 Some customers are unable to run Windows Desktop (that is, Windows Forms or WPF) applications built with 6.0.200 or later .NET SDK, if the target environment has only .NET Windows Desktop runtime 6.0.0 or 6.0.1 installed, and receive error messages similar to the following:
 
-```
+```console
 Application: WinFormsApp1.exe
 CoreCLR Version: 6.0.121.56705
 .NET Version: 6.0.1
@@ -193,19 +197,17 @@ This happened because WPF builds in 6.0.7 onwards, only considered source genera
 
 ## Certificate Issues on macOS 15 ("Sequoia")
 
-### Summary
-
 The `CopyWithPrivateKey` methods that combine a certificate with its associated private key fail on macOS 15 when using in-memory (ephemeral) keys.  This failure is most commonly seen when creating new certificates via `CertificateRequest.CreateSelfSigned` or when loading a certificate and key from a PEM file (or files) with `X509Certificate2.CreateFromPem`, which utilize the affected methods.
 
 Callers of these methods on macOS 15 ("Sequoia") will receive a `CryptographicException`, specifically `Interop+AppleCrypto+AppleCommonCryptoCryptographicException: The specified item is no longer valid. It may have been deleted from the keychain.`  The `dotnet dev-certs https` command relies on `CertificateRequest.CreateSelfSigned` and fails with this error.
 
 This issue is addressed in the upcoming .NET 6.0.34 release, scheduled for release in October 2024.
 
-### Root Cause
+Root Cause:
 
 macOS 15 uses a different status code to indicate a key is not in a Keychain than prior versions do.
 
-### Workarounds
+Workarounds:
 
 If you have not already upgraded to macOS 15 from a prior version and use .NET, you are not impacted by this issue.  If you are planning to upgrade to macOS 15, the workaround is to upgrade to .NET 6.0.34 (scheduled for October 2024) prior to upgrading to macOS 15.
 
