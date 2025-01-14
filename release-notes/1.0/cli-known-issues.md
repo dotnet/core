@@ -3,7 +3,6 @@
 - [Preview 2 tooling known issues](#preview-2-tooling-known-issues)
   - [OpenSSL dependency on OS X](#openssl-dependency-on-os-x)
   - [`brew` refusing to link `openssl`](#brew-refusing-to-link-openssl)
-  - [Running .NET Core CLI on Nano Server](#running-net-core-cli-on-nano-server)
   - [Users of zsh (z shell) don't get `dotnet` on the path after install](#users-of-zsh-z-shell-dont-get-dotnet-on-the-path-after-install)
   - [`app.config` file needs to be checked out before publishing](#appconfig-file-needs-to-be-checked-out-before-publishing)
   - [`dotnet` commands in the root of the file system fails](#dotnet-commands-in-the-root-of-the-file-system-fails)
@@ -147,7 +146,8 @@ Workaround:
 You have to run `dotnet restore` before you try any of the CLI commands in the Preview 3 tooling. The restore call is needed to bring in the needed targets that comprise main functionality of the Preview 3 tooling. You will get the following error if
 you don't restore on macOS/Linux machines:
 
-> /usr/local/share/dotnet/sdk/1.0.0-preview3-004056/Microsoft.Common.CurrentVersion.targets(1107,5): error MSB3644: The reference assemblies for framework ".NETFramework,Version=v4.0" were not found. To resolve this, install the SDK or Targeting Pack for this framework version or retarget your application to a version of the framework for which you have the SDK or Targeting Pack installed. Note that assemblies will be resolved from the Global Assembly Cache (GAC) and will be used in place of reference assemblies. Therefore your assembly may not be correctly targeted for the framework you intend.
+> /usr/local/share/dotnet/sdk/1.0.0-preview3-004056/Microsoft.Common.CurrentVersion.targets(1107,5): error MSB3644: The reference assemblies for framework ".NETFramework,Version=v4.0" were not found. To resolve this, install the SDK or Targeting Pack for this framework version or retarget your application to a version of the framework for which you have the SDK or Targeting Pack installed.
+Note that assemblies will be resolved from the Global Assembly Cache (GAC) and will be used in place of reference assemblies. Therefore your assembly may not be correctly targeted for the framework you intend.
 
 If you don't get this error on a Windows machine, that is most likely due to the fact that the targeting pack for .NET Framework 4.0 are installed. To be sure that you have the targets, run restore again if you are not sure.
 

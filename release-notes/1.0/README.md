@@ -2,7 +2,8 @@
 
 This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
 
-[.NET Core 1.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-1-0/) was released on June 27th, 2016. The release was a collaborative effort by many [contributors](1.0.0-contributor-list.md). [.NET Core 1.0 reached end of life on June 27th, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/). It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](1.0-supported-os.md).
+[.NET Core 1.0](https://devblogs.microsoft.com/dotnet/announcing-net-core-1-0/) was released on June 27th, 2016. The release was a collaborative effort by many [contributors](1.0.0-contributor-list.md).
+[.NET Core 1.0 reached end of life on June 27th, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/). It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](1.0-supported-os.md).
 
 Release notes and download information is provided for each update, in the follow table.
 
@@ -25,8 +26,8 @@ Release notes and download information is provided for each update, in the follo
 | 2017/02/07 | 1.0.3 with SDK RC4 build 004771 | [release notes](1.0.3-SDK-RC4.md)/[download](../download-archives/rc4-download.md) |
 | 2017/01/27 | 1.0.3 with SDK RC3 build 004530 | [release notes](1.0.3.md)/[download](../download-archives/rc3-download.md) |
 | 2016/12/13 | 1.0.3 with SDK Preview 2 build 3156 | [release notes](1.0.3.md)/[download](../download-archives/1.0.3-preview2-download.md) |
-| 2016/10/24 | 1.0.1 with SDK Preview 4 build 4233 | [release notes](1.0.1-release-notes.md)/[download](../download-archives/preview4-download.md) | | [1.0.1 Known Issues](1.0.1-known-issue
+| 2016/10/24 | 1.0.1 with SDK Preview 4 build 4233 | [release notes](1.0.1-release-notes.md)/[download](../download-archives/preview4-download.md) / [1.0.1 Known Issues](1.0.1-known-issues.md) |
 | 2016/10/17 | 1.0.2 with SDK Preview 2 build 3148 | [release notes](https://github.com/dotnet/core/releases/tag/1.0.2)/[download](../download-archives/1.0.2-preview2-download.md) |
 | 2016/10/03 | 1.0.1 with SDK Preview 3 build 4056 | [release notes](https://github.com/dotnet/core/blob/main/release-notes/1.0/1.0.1-release-notes.md)/[download](../download-archives/preview3-download.md) |
 | 2016/09/13 | 1.0.1 with SDK Preview 2 build 3131 and 3133 | [release notes](https://github.com/dotnet/core/blob/main/release-notes/1.0/1.0.1-release-notes.md)/[download](../download-archives/1.0.1-preview2-download.md) |
-| 2016/06/27 | 1.0 with SDK Preview 2 build 3121 | [release notes](https://github.com/dotnet/core/blob/main/release-notes/1.0/1.0.0.md)/[download](../download-archives/1.0-preview2-download.md) | | | [Contributors](1.0.0-contributor-list
+| 2016/06/27 | 1.0 with SDK Preview 2 build 3121 | [release notes](https://github.com/dotnet/core/blob/main/release-notes/1.0/1.0.0.md)/[download](../download-archives/1.0-preview2-download.md) |

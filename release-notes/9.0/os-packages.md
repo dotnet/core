@@ -10,14 +10,14 @@ The following table lists required packages, including the scenarios by which th
 
 Id              | Name      | Required scenarios | Notes
 --------------- | --------- | ------------- | ------------------------------
-[libc][0]       | C Library | All           | https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#linux-compatibility<br>https://www.gnu.org/software/libc/libc.html<br>https://musl.libc.org/
-[libgcc][1]     | GCC low-level runtime library | All | https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
-[ca-certificates][2] | CA Certificates | Https | https://www.redhat.com/sysadmin/ca-certificates-cli
-[openssl][3]    | OpenSSL   | Https<br>Cryptography | Minimum required version 1.1.1<br>https://www.openssl.org/
-[libstdc++][4]  | C++ Library | Runtime     | https://gcc.gnu.org/onlinedocs/libstdc++/
-[libicu][5]     | ICU       | Globalization | https://icu.unicode.org<br>https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md
-[tzdata][6]     | tz database | Globalization | https://data.iana.org/time-zones/tz-link.html
-[krb5][7]       | Kerberos  | Kerberos      | https://web.mit.edu/kerberos
+[libc][0]       | C Library | All           | <https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#linux-compatibility>;<https://www.gnu.org/software/libc/libc.html>;<https://musl.libc.org/>
+[libgcc][1]     | GCC low-level runtime library | All | <https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html>
+[ca-certificates][2] | CA Certificates | Https | <https://www.redhat.com/sysadmin/ca-certificates-cli>
+[openssl][3]    | OpenSSL   | Https;Cryptography | Minimum required version 1.1.1;<https://www.openssl.org/>
+[libstdc++][4]  | C++ Library | Runtime     | <https://gcc.gnu.org/onlinedocs/libstdc++/>
+[libicu][5]     | ICU       | Globalization | <https://icu.unicode.org>;<https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md>
+[tzdata][6]     | tz database | Globalization | <https://data.iana.org/time-zones/tz-link.html>
+[krb5][7]       | Kerberos  | Kerberos      | <https://web.mit.edu/kerberos>
 
 [0]: https://pkgs.org/search/?q=libc
 [1]: https://pkgs.org/search/?q=libgcc

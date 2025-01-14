@@ -15,7 +15,6 @@ SDK updates in .NET 9 Preview 3:
 - [Runtime release notes](./runtime.md)
 - [Libraries release notes](./libraries.md)
 
-
 ## Terminal Logger Usability
 
 In this preview, the Terminal Logger feature learned to summarize the total count of failures and warnings at the end of a build, and it also learned how to show errors that contain newlines. These changes are a direct result of feedback from users in the early preview of .NET 9, so please continue to use Terminal Logger and report your feedback [on the MSBuild repository](https://github.com/dotnet/msbuild/issues).
@@ -87,5 +86,3 @@ Rendered on my terminal, this looks like
 In the image, the larger blue box is highlighting that the message lines of the third warning no longer have the repeated long project and location information that cluttered the display in the original version. In addition, the smaller blue box highlights that the build summary clearly shows how many warnings (and errors, if we had any) were generated during the build.
 
 Combined, these features improve the information that is available at-a-glance, and the multi-line support especially is a foundational improvement for future investment in multi-line diagnostics and messages of all kinds. Give the new version of Terminal Logger a try, and remember to let us know your feedback [on the MSBuild repository](https://github.com/dotnet/msbuild/issues).
-
-

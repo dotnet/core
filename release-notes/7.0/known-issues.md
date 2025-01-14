@@ -52,7 +52,7 @@ That will copy the missing dependency into the DevServer package and enable eval
 
 It isn't possible to debug a Blazor WebAssembly app using .NET 7 Preview 5 <https://github.com/dotnet/runtime/pull/70383>
 
-#### Workaround for a Blazor WebAssembly Hosted App
+Workaround for a Blazor WebAssembly Hosted App:
 
 Copy the following into the server project (`.csproj`) of a `.NET 7 Preview 5` Blazor WebAssembly Hosted App:
 
@@ -67,7 +67,7 @@ Copy the following into the server project (`.csproj`) of a `.NET 7 Preview 5` B
     </Target>
 ```
 
-#### Workaround for a Blazor WebAssembly Standalone App
+Workaround for a Blazor WebAssembly Standalone App:
 
 Copy the following into a `.NET 7 Preview 5` Blazor WebAssembly project (`.csproj`):
 
@@ -106,13 +106,14 @@ More information and workaround can be found at <https://github.com/dotnet/runti
 
 If you are working offline though or without using the default NuGet.org feed, you will hit error NETSDK1145 as it will not be able to find the 6.0.31 packs it expects.
 
-**Workarounds**
+Workaround:
+
 - Upgrade to Visual Studio 17.8 or newer and use the .NET 8 SDK when building net6.0 applications
 - Enable NuGet.org in your nuget configuration
 - Pin to a 6.0.4xx SDK using global.json
 - Modify your project to target the latest 6.0 version released
-```
 
+```xml
   <PropertyGroup>
     <RuntimeFrameworkVersion>6.0.32</RuntimeFrameworkVersion>
   </PropertyGroup>

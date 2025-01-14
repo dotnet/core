@@ -8,13 +8,13 @@ Here's a summary of what's new in .NET MAUI in this preview release:
 
 .NET MAUI updates in .NET 9 Preview 4:
 
-* [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation
-* [GitHub Release](https://aka.ms/maui9p4)
+- [What's new in .NET MAUI in .NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9) documentation
+- [GitHub Release](https://aka.ms/maui9p4)
 
 .NET 9 Preview 4:
-* [Discussion](https://aka.ms/dotnet/9/preview4)
-* [Release notes](./README.md)
 
+- [Discussion](https://aka.ms/dotnet/9/preview4)
+- [Release notes](./README.md)
 
 ## New Input Keyboards
 
@@ -42,7 +42,7 @@ Additional release information can be found on [GitHub releases](https://github.
 
 Native AOT (Ahead of Time) compilation for iOS and Mac Catalyst now takes advantage of full trimming to greatly reduce your application's package size and startup performance. This is a publishing feature that you can use when you're ready to ship your application. Your application and all dependencies must be fully trimmable in order to utilize this feature.
 
-```
+```console
 dotnet publish -f net9.0-maccatalyst -r maccatalyst-arm64
 ```
 

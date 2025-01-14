@@ -6,7 +6,7 @@
 * [Runtime](./runtime.md)
 * [SDK](./sdk.md)
 
-### Feature Release Notes
+## Feature Release Notes
 
 * [.NET Data and EF Core](./efcoreanddata.md)
 * [.NET MAUI](./dotnetmaui.md)
@@ -14,15 +14,15 @@
 
 ## Get Started
 
-Instructions on getting started with .NET 9 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 9 Preview 3 can be found [here on GitHub](./9.0.0-preview.3.md). 
+Instructions on getting started with .NET 9 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 9 Preview 3 can be found [here on GitHub](./9.0.0-preview.3.md).
 
 ## Announcements & Discussions
 
-Discuss this release with the product teams on GitHub through the announcements for this release. 
+Discuss this release with the product teams on GitHub through the announcements for this release.
 
-* [.NET MAUI](https://github.com/dotnet/maui/discussions/21783) 
+* [.NET MAUI](https://github.com/dotnet/maui/discussions/21783)
 * [ASP.NET Core](https://github.com/dotnet/aspnetcore/discussions/55086)
-* [Libraries & Runtime](https://github.com/dotnet/runtime/discussions/100928) 
+* [Libraries & Runtime](https://github.com/dotnet/runtime/discussions/100928)
 * [Containers](https://github.com/dotnet/dotnet-docker/discussions/5351)
 * [Source-build](https://github.com/dotnet/source-build/discussions/4320)
 

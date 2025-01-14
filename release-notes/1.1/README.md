@@ -2,7 +2,8 @@
 
 This release is out of support. See [.NET releases](../../releases.md) for in-support releases.
 
-[.NET Core 1.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-1-1/) was released on November 16th, 2016. The release was a collaborative effort by many [contributors](1.1-contributor-list.md). [.NET Core 1.1 reached end of life on June 27th, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/). It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](1.1-supported-os.md).
+[.NET Core 1.1](https://devblogs.microsoft.com/dotnet/announcing-net-core-1-1/) was released on November 16th, 2016. The release was a collaborative effort by many [contributors](1.1-contributor-list.md). [.NET Core 1.1 reached end of life on June 27th, 2019](https://devblogs.microsoft.com/dotnet/net-core-1-0-and-1-1-will-reach-end-of-life-on-june-27-2019/).
+It was [supported by Microsoft](../../microsoft-support.md) on [multiple operating systems](1.1-supported-os.md).
 
 Release notes and download information is provided for each update, in the follow table.
 

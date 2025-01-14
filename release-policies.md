@@ -59,8 +59,8 @@ Additionally, customers targeting an out-of-support .NET version in their projec
 
 [.NET packages](https://www.nuget.org/profiles/dotnetframework) are no longer supported when either of the following occurs:
 
-- A new version of the package is available. Some packages support multiple patches versions at once, one per major version matching a supported major .NET version.
-- The package exclusively includes implementations for out-of-support .NET versions.
+* A new version of the package is available. Some packages support multiple patches versions at once, one per major version matching a supported major .NET version.
+* The package exclusively includes implementations for out-of-support .NET versions.
 
 Nuget.org includes [version](https://www.nuget.org/packages/System.Text.Json/#versions-body-tab) and [supported framework](https://www.nuget.org/packages/System.Text.Json/#supportedframeworks-body-tab) information that can be used to determine support status for packages.
 
@@ -68,9 +68,9 @@ Nuget.org includes [version](https://www.nuget.org/packages/System.Text.Json/#ve
 
 To remain supported, you must do the following:
 
-- Use a supported SDK
-- Target a supported .NET version (via the `TargetFramework` property)
-- Reference supported packages
+* Use a supported SDK
+* Target a supported .NET version (via the `TargetFramework` property)
+* Reference supported packages
 
 ## Operating System support
 

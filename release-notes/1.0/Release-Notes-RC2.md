@@ -37,8 +37,8 @@ A little style note for the rest of this document - any references to 'Unix' enc
 
 ### Introduction of .NET Core API Documentation
 
-* API: https://learn.microsoft.com/dotnet/api/
-* Conceptual: https://learn.microsoft.com/dotnet/
+* API: <https://learn.microsoft.com/dotnet/api/>
+* Conceptual: <https://learn.microsoft.com/dotnet/>
 
 ### Runtime
 
@@ -85,15 +85,15 @@ APIs added in RC2 to existing classes and namespaces
 * Reference Assemblies: Refactored ECDSA into a higher version to allow net46-compatible references for all cryptography packages
 * Unix: X509Chain.ChainStatus and X509Chain.ChainElementStatus now report all chain errors, not just the first one
 * Unix: Finish X509Certificates support
-    * Implement GetCertContentType
-    * Constructors and properties for all X509Extension classes behave as on Windows
-    * Add support for X509ContentType.Pkcs7 for X509Certificate2Collection.Export
-    * Add support for X509Chain.ChainPolicy.VerificationFlags for error suppression
-    * Breaking change: X509Certificate2.FriendlyName and X509Certificate2.Archived setters throw PlatformNotSupportedException
+  * Implement GetCertContentType
+  * Constructors and properties for all X509Extension classes behave as on Windows
+  * Add support for X509ContentType.Pkcs7 for X509Certificate2Collection.Export
+  * Add support for X509Chain.ChainPolicy.VerificationFlags for error suppression
+  * Breaking change: X509Certificate2.FriendlyName and X509Certificate2.Archived setters throw PlatformNotSupportedException
 * Unix: The CA cert bundle read into the machine Root CA store now also supports the one unified file format
 * Unix: Default RSA keysize is 2048. This matches Windows .NET Core, but not Windows .NET Framework (1024-bit default)
 * OS X: Minimum version of OpenSSL bumped from 0.9.8 to the 1.0.0 family
-    * The on-box libcrypto.0.9.8.dylib has gone out of security-fix support, libcrypto.1.0.0.dylib must be installed via homebrew
+  * The on-box libcrypto.0.9.8.dylib has gone out of security-fix support, libcrypto.1.0.0.dylib must be installed via homebrew
 * Windows: An ECDSA PFX created with OpenSSL can now be successfully used
 * Windows: RSA public and private keys with unusual sizes (e.g. 1032-bit) work now
 
