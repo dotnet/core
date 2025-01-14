@@ -83,7 +83,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 6.0.10 (October 2022)
   - [CVE-2022-41032 | .NET Core Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/236)
 - 6.0.9 (September 2022)
-  - [CVE-2022-38013 | .NET Core Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/234) 
+  - [CVE-2022-38013 | .NET Core Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/234)
 - 6.0.8 (August 2022)
   - [CVE-2022-34716 | .NET Core Information Disclosure Vulnerability](https://github.com/dotnet/announcements/issues/232)
 - 6.0.7 (July 2022)

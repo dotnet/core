@@ -236,6 +236,7 @@ activity.AddLink(activityLink);
 ```
 
 ## TypeDescriptor trimming support
+
 This feature updates the `System.ComponentModel.TypeConverter` assembly to support new opt-in trimmer-compatible APIs. An important consumer of these new APIs will be WinForms, to help with supporting NativeAot applications. However, any application, especially self-contained trimmed applications, can use these new APIs to help support trimming scenarios.
 
 The primary opt-in API is the `public static void RegisterType<T>()` method on the `TypeDescriptor` class. This method has the `[DynamicallyAccessedMembers]` attribute to have the trimmer preserve members for that type. It is expected to be called once per type, and typically would be called early during application warm-up.
@@ -299,12 +300,12 @@ The new `TypeName` class provides:
 - `Parse` and `TryParse` static methods for parsing input represented as `ReadOnlySpan<char>`. Both methods accept an instance of `TypeNameParseOptions` class (an option bag) that allows to customize the parsing.
 - `Name`, `FullName` and `AssemblyQualifiedName` properties that work exactly like their counterparts in the existing `System.Type` class.
 - Multiple properties and methods that provide additional information about the name itself:
-    - `IsArray`, `IsSZArray` (`SZ` stands for single-dimension, zero-indexed array), `IsVariableBoundArrayType` and `GetArrayRank` for working with arrays.
-    - `IsConstructedGenericType`, `GetGenericTypeDefinition` and `GetGenericArguments` for working with generic type names.
-    - `IsByRef`, `IsPointer` and for working with pointers and managed references.
-    - `GetElementType()` for working with pointers, references and arrays.
-    - `IsNested` and `DeclaringType` for working with nested types.
-    - `AssemblyName` property that exposes the assembly name information via new `AssemblyNameInfo` class. In contrary to `AssemblyName`, the new type is **immutable** and parsing culture names does not create instances of `CultureInfo`.
+  - `IsArray`, `IsSZArray` (`SZ` stands for single-dimension, zero-indexed array), `IsVariableBoundArrayType` and `GetArrayRank` for working with arrays.
+  - `IsConstructedGenericType`, `GetGenericTypeDefinition` and `GetGenericArguments` for working with generic type names.
+  - `IsByRef`, `IsPointer` and for working with pointers and managed references.
+  - `GetElementType()` for working with pointers, references and arrays.
+  - `IsNested` and `DeclaringType` for working with nested types.
+  - `AssemblyName` property that exposes the assembly name information via new `AssemblyNameInfo` class. In contrary to `AssemblyName`, the new type is **immutable** and parsing culture names does not create instances of `CultureInfo`.
 
 Both `TypeName` and `AssemblyNameInfo` types are immutable and don't provide a way to check for equality (don't implement `IEquatable`). Comparing assembly names is simple, but different scenarios need to compare only a subset of exposed information (`Name`, `Version`, `CultureName` and `PublicKeyOrToken`).
 

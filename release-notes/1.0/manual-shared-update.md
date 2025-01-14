@@ -1,6 +1,7 @@
 # Manually updating CoreCLR and the JIT in the Shared Framework #
 
-The procedures detailed below can be used to update the CoreCLR runtime and JIT that are part of the .NET Core shared runtime and libraries, also known as Microsoft.NETCore.App in-place. This will enable portable applications to take advantage of updates to the shared files. The preferred way to update Microsoft.NETCore.App is to install the new version side-by-side but there may be times when an updated NETCore.App is not yet available while the required components have been released as NuGet packages.
+The procedures detailed below can be used to update the CoreCLR runtime and JIT that are part of the .NET Core shared runtime and libraries, also known as Microsoft.NETCore.App in-place. This will enable portable applications to take advantage of updates to the shared files.
+The preferred way to update Microsoft.NETCore.App is to install the new version side-by-side but there may be times when an updated NETCore.App is not yet available while the required components have been released as NuGet packages.
 
 Again, this process should be done only in the event that required updates are available as NuGet packages and not as an updated .NET Core installer.
 
@@ -31,9 +32,10 @@ JIT
 
 ## Rename and Extract ##
 
-If your system doesn't recognize \*nupkg files as archives, rename them to \*.zip or \*.tar.gz and extract the `/runtimes` directory to a temporary location. For CoreCLR there will be `/native` and `/lib/netstandard1.0` directories under `/runtimes`. JIT will have only a `/native` directory. Here's an example of what the tmp location should look like when you are done if the Debian 8 packages were used. The list of binaries will be different for other distros.
+If your system doesn't recognize \*nupkg files as archives, rename them to \*.zip or \*.tar.gz and extract the `/runtimes` directory to a temporary location. For CoreCLR there will be `/native` and `/lib/netstandard1.0` directories under `/runtimes`. JIT will have only a `/native` directory.
+Here's an example of what the tmp location should look like when you are done if the Debian 8 packages were used. The list of binaries will be different for other distros.
 
-```
+```txt
 ~/tmp-update/
         System.Globalization.Native.so
         libcoreclr.so
@@ -51,7 +53,8 @@ If your system doesn't recognize \*nupkg files as archives, rename them to \*.zi
 
 ## Back up existing files ##
 
-Since we'll be updating files in-place it's a good idea to make a backup. First you need to locate the `Microsoft.NETCoreApp/1.0.0` directory. If you used the installers for Ubuntu, 1.0.0 will be found under `/usr/share/dotnet/shared/Microsoft.NETCore.App/`. Other distro installations are still manual extraction from archives so it's wherever you copied the directory structure. Something like `/opt/dotnet/shared/Microsoft.NETCore.App` would not be uncommon.
+Since we'll be updating files in-place it's a good idea to make a backup. First you need to locate the `Microsoft.NETCoreApp/1.0.0` directory. If you used the installers for Ubuntu, 1.0.0 will be found under `/usr/share/dotnet/shared/Microsoft.NETCore.App/`. Other distro installations are still manual extraction from archives so it's wherever you copied the directory structure.
+Something like `/opt/dotnet/shared/Microsoft.NETCore.App` would not be uncommon.
 
 Now that `Microsoft.NETCore.App/1.0.0` has been located, the easiest way to make the backup will be to copy the entire directory which will be updated. `sudo rsync -r 1.0.0/ 1.0.0-backup/` will create the backup directory and copy the entire contents of the source directory.
 

@@ -17,14 +17,14 @@ The team is continuing work on core fundamentals of the .NET MAUI SDK to improve
 
 This release was focused on quality.
 
-- [GitHub Release](https://github.com/dotnet/android/releases/)
+* [GitHub Release](https://github.com/dotnet/android/releases/)
 
 ## .NET for iOS
 
 This release was focused on quality.
 
-- [GitHub Release](https://github.com/xamarin/xamarin-macios/releases/)
-- [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET9)
+* [GitHub Release](https://github.com/xamarin/xamarin-macios/releases/)
+* [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET9)
 
 ## Community Contributions
 

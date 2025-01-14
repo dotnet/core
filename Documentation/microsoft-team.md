@@ -19,7 +19,6 @@ Register at least two of the following two-factor authentication methods:
 * [Hardware security key(s)](https://docs.github.com/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-security-key) (also see [yubikey](https://www.yubico.com/works-with-yubikey/catalog/github/))
 * [TOTP with an Authenticator app](https://docs.github.com/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication#configuring-two-factor-authentication-using-a-totp-mobile-app) (like [Microsoft Authenticator](https://support.microsoft.com/account-billing/download-and-install-the-microsoft-authenticator-app-351498fc-850a-45da-b7b6-27e523b8702a))
 
-
 Additional guidance:
 
 * Do not use [SMS](https://en.wikipedia.org/wiki/SIM_swap_scam) for 2FA or as a recovery fallback (disable those options).

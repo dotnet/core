@@ -15,7 +15,7 @@ This release is out of support. See [.NET releases](../../releases.md) for in-su
 
 | Date | Release |
 | :-- | :-- |
-| 2020/05/10 | Out of Support | [.NET 5 End of Support](https://devblogs.microsoft.com/dotnet/dotnet-5-end-of-support-update/) |
+| 2020/05/10 | [.NET 5 End of Support](https://devblogs.microsoft.com/dotnet/dotnet-5-end-of-support-update/) |
 | 2022/05/10 | [5.0.17](./5.0.17/5.0.17.md) |
 | 2022/04/12 | [5.0.16](./5.0.16/5.0.16.md) |
 | 2022/03/08 | [5.0.15](./5.0.15/5.0.15.md) |

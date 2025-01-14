@@ -49,7 +49,6 @@ public void AccessGenericType(Class<int> c)
 
 Two new attributes make it possible to define [feature switches](https://github.com/dotnet/designs/blob/main/accepted/2020/feature-switch.md) that can be used to toggle areas of functionality in .NET libraries, with support for removing unused features when trimming or native AOT compiling. For example, these attributes are used in the definitions of [`RuntimeFeature.IsDynamicCodeSupported`](https://github.com/dotnet/runtime/blob/24562bcabefaea5e03c74d01e4df8fc7c112a13a/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/RuntimeFeature.NonNativeAot.cs#L10-L11) and [`RuntimeFeature.IsDynamicCodeCompiled`](https://github.com/dotnet/runtime/blob/24562bcabefaea5e03c74d01e4df8fc7c112a13a/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/RuntimeFeature.NonNativeAot.cs#L19-L20)
 
-
 ### FeatureSwitchDefinition
 
 `FeatureSwitchDefinitionAttribute` can be used to treat a feature switch property as a constant when trimming:

@@ -1,6 +1,6 @@
 # .NET Core SDK 1.0 Preview 4 build 004233
 
-The installers and binary archives on this page include .NET Core 1.0 SDK Preview 4. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.1-SDK-Preview-4-4233-SHA.txt) are available to verify downloads.
+The installers and binary archives on this page include .NET Core 1.0 SDK Preview 4. [Checksums](https://builds.dotnet.microsoft.com/dotnet/checksums/1.0.1-SDK-Preview-4-4233-SHA.txt) are available to verify downloads.
 
 | .NET Core 1.0 Preview 4 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:| :--: | :--: |
@@ -25,7 +25,7 @@ sudo ln -s /opt/dotnet/dotnet /usr/local/bin
 
 ## Ubuntu installation
 
-```
+```bash
 dotnet-host-ubuntu-x64.deb
 dotnet-hostfxr-ubuntu-x64.deb
 dotnet-sharedframework-ubuntu-x64.deb
@@ -48,7 +48,7 @@ sudo apt-get install dotnet-dev-1.0.0-preview4-004233
 
 Installed packages
 
-```
+```bash
 dotnet-host-ubuntu-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu-x64.1.0.1.deb
 dotnet-sharedframework-ubuntu-x64.1.0.1.deb
@@ -66,7 +66,7 @@ sudo apt-get install dotnet-dev-1.0.0-preview4-004233
 
 Installed packages
 
-```
+```bash
 dotnet-host-ubuntu.16.04-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu.16.04-x64.1.0.1.deb
 dotnet-sharedframework-ubuntu.16.04-x64.1.0.1.deb

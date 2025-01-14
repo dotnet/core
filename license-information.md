@@ -10,7 +10,6 @@ This document is provided for informative purposes only and is not itself a lice
 
 [Each repo](./Documentation/core-repos.md) has:
 
-
 - A license, for example, [dotnet/runtime LICENSE.TXT](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT).
 - Third party notice file, for example, [dotnet/runtime THIRD-PARTY-NOTICES.TXT](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT)
 

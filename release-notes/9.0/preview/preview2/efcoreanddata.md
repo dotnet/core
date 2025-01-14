@@ -25,7 +25,7 @@ That being said, there are several smaller enhancements included in preview 2, m
 ## Improved tooling
 
 - Fewer rebuilds when using `dotnet ef` tools
-  - EF9 invalidates build caches less often, resulting in faster re-builds. 
+  - EF9 invalidates build caches less often, resulting in faster re-builds.
   - See [Fewer rebuilds](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/whatsnew#fewer-rebuilds) for full details.
 
 ## Everything else in preview 2

@@ -34,9 +34,9 @@ In addition to `Start`, `Center`, and `End` you can now use `Justify` to horizon
 
 ### Update to .NET 9 RC1 script
 
-To update your HybridWebView app from .NET 9 Preview 7 to .NET 9 RC1, update the contents of your app's `HybridWebView.js` file to match these contents: https://github.com/dotnet/maui/blob/release/9.0.1xx-rc1/src/Controls/samples/Controls.Sample/Resources/Raw/HybridSamplePage/scripts/HybridWebView.js
+To update your HybridWebView app from .NET 9 Preview 7 to .NET 9 RC1, update the contents of your app's `HybridWebView.js` file to match these contents: <https://github.com/dotnet/maui/blob/release/9.0.1xx-rc1/src/Controls/samples/Controls.Sample/Resources/Raw/HybridSamplePage/scripts/HybridWebView.js>
 
-### Invoke JavaScript methods from C#
+### Invoke JavaScript methods from C\#
 
 Your app's C# code can directly invoke JavaScript methods within the HybridWebView. Both synchronous and asynchronous method invokation are supported. Internally, the parameters and return values are JSON encoded. Both synchronous and asynchronous JavaScript methods are supported.
 
@@ -54,20 +54,20 @@ Can be invoked from C# using this code:
 var x = 123d;
 var y = 321d;
 var result = await hwv.InvokeJavaScriptAsync<double>(
-	"AddNumbers",
-	HybridSampleJsContext.Default.Double,
-	[x, y],
-	[HybridSampleJsContext.Default.Double, HybridSampleJsContext.Default.Double]);
+ "AddNumbers",
+ HybridSampleJsContext.Default.Double,
+ [x, y],
+ [HybridSampleJsContext.Default.Double, HybridSampleJsContext.Default.Double]);
 ```
 
 The method invokation requires specifying `JsonTypeInfo` objects that include serialization information for the types used in the operation. These objects are automatically created by including this partial class in the project:
 
 ```csharp
-	[JsonSourceGenerationOptions(WriteIndented = true)]
-	[JsonSerializable(typeof(double))]
-	internal partial class HybridSampleJsContext : JsonSerializerContext
-	{
-	}
+ [JsonSourceGenerationOptions(WriteIndented = true)]
+ [JsonSerializable(typeof(double))]
+ internal partial class HybridSampleJsContext : JsonSerializerContext
+ {
+ }
 ```
 
 Note: This type must be marked as `partial` so that code generation can provide the implementation when the project is compiled. If this type is nested into another type, then that type must also be marked as `partial`.
@@ -87,4 +87,5 @@ This release was focused on quality improvements. Using this release requires th
 
 ## Community Contributions
 
-Thank you to our community contributors [@MartyIX](https://github.com/MartyIX), [@albyrock87](https://github.com/albyrock87), [@jpiechowiak](https://github.com/jpiechowiak), [@dhindrik](https://github.com/dhindrik), [@TommiGustafsson-HMP](https://github.com/TommiGustafsson-HMP), [@kubaflo](https://github.com/kubaflo), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman), [@Vignesh-SF3580](https://github.com/Vignesh-SF3580), and [@daltzctr](https://github.com/daltzctr).
+Thank you to our community contributors [@MartyIX](https://github.com/MartyIX), [@albyrock87](https://github.com/albyrock87), [@jpiechowiak](https://github.com/jpiechowiak), [@dhindrik](https://github.com/dhindrik), [@TommiGustafsson-HMP](https://github.com/TommiGustafsson-HMP), [@kubaflo](https://github.com/kubaflo), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman),
+[@Vignesh-SF3580](https://github.com/Vignesh-SF3580), and [@daltzctr](https://github.com/daltzctr).

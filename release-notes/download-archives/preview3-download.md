@@ -1,6 +1,6 @@
 # .NET Core SDK 1.0 Preview 3 build 004056
 
-The installers and binary archives on this page include .NET Core 1.0 SDK Preview 3. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.0.1-SDK-Preview-3-4056-SHA.txt) are available to verify downloads.
+The installers and binary archives on this page include .NET Core 1.0 SDK Preview 3. [Checksums](https://builds.dotnet.microsoft.com/dotnet/checksums/1.0.1-SDK-Preview-3-4056-SHA.txt) are available to verify downloads.
 
 | .NET Core 1.0 Preview 3 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|:--|:--|
@@ -46,7 +46,7 @@ sudo apt-get install dotnet-dev-1.0.0-preview3-004056
 
 Installed packages
 
-```
+```bash
 dotnet-host-ubuntu-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu-x64.1.0.1.deb
 dotnet-sharedframework-ubuntu-x64.1.0.1.deb
@@ -64,7 +64,7 @@ sudo apt-get install dotnet-dev-1.0.0-preview3-004056
 
 Installed packages
 
-```
+```bash
 dotnet-host-ubuntu.16.04-x64.1.0.1.deb
 dotnet-hostfxr-ubuntu.16.04-x64.1.0.1.deb
 dotnet-sharedframework-ubuntu.16.04-x64.1.0.1.deb

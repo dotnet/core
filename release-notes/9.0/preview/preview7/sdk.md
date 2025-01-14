@@ -9,16 +9,15 @@
 
 SDK updates in .NET 7 Preview 7:
 
-- [Release notes](sdk.md)
-- [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
+* [Release notes](sdk.md)
+* [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 7:
 
-- [Discussion](https://aka.ms/dotnet/9/preview7)
-- [Release notes](README.md)
-- [Runtime release notes](runtime.md)
-- [Libraries release notes](libraries.md)
-
+* [Discussion](https://aka.ms/dotnet/9/preview7)
+* [Release notes](README.md)
+* [Runtime release notes](runtime.md)
+* [Libraries release notes](libraries.md)
 
 ## Container publishing improvements for insecure registries
 
@@ -32,7 +31,6 @@ Requirements (depending on your environment):
 * [Configure the Docker CLI to mark a registry as insecure](https://docs.docker.com/reference/cli/dockerd/#insecure-registries)
 * [Configure Podman to mark a registry as insecure](https://podman-desktop.io/docs/containers/registries)
 * Use the `DOTNET_CONTAINER_INSECURE_REGISTRIES` environment variable to pass a semicolon-delimited list of registry domains to treat as insecure
-
 
 ## More consistent environment variables for container publishing
 

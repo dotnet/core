@@ -10,7 +10,7 @@ This document lists known issues for *.NET Core 1.0 RC2* and *.NET Core SDK 1.0 
 
 All previous versions of .NET Core and any tooling **must be** removed from the machine in order to properly install and use RC2 release. Details and steps to uninstall can be found on the [.NET Core Getting Started](https://go.microsoft.com/fwlink/?LinkID=798687) pages and in the [RC1 to RC2 Upgrade Roadmap](RC1-RC2_Upgrade.md).
 
-https://github.com/dotnet/cli/issues/2833
+<https://github.com/dotnet/cli/issues/2833>
 
 ## .NET Core RC2 Packages and UWP Projects
 
@@ -22,13 +22,13 @@ Adding certificates to an X509Store on Unix systems may result in an exception s
 
 The directory '/Users/dotnet-bot/.dotnet/corefx/cryptography/x509stores/my' must be readable, writable and executable by the owner. It must not be readable, writable or executable by anyone other than the owner. when the X509Store was not created with a pre-RC2 build of .NET Core, due to an incorrect permissions check on the directory. A one time (per-store) workaround is possible:
 
-* (Optional) Create the directory ahead of program execution. The name of the directory will be the lower-cased version of the storeName parameter under `~/.dotnet/corefx/cryptography/x509stores/`.
+- (Optional) Create the directory ahead of program execution. The name of the directory will be the lower-cased version of the storeName parameter under `~/.dotnet/corefx/cryptography/x509stores/`.
 
 ```csharp
 new X509Store(“ThisIsATest”, StoreLocation.CurrentUser)` => ~/.dotnet/corefx/cryptography/x509stores/thisisatest
 ```
 
-* Make all of the directories within the x509stores directory have the right permissions: `chmod 700 ~/.dotnet/corefx/cryptography/x509stores/*`
+- Make all of the directories within the x509stores directory have the right permissions: `chmod 700 ~/.dotnet/corefx/cryptography/x509stores/*`
 
 ## NegotiateStream
 
@@ -36,4 +36,4 @@ NegotiateStream relies on the gssapi implementation available on the platform o
 
 NegotiateStream relies on the gssapi implementation and it uses SPNEGO via the GSS-NTLMSSP on RHEL and CentOS. For other distros individuals need to have a similar package supporting GSS-NTLMSSP to have it working.
 
-https://github.com/dotnet/corefx/issues/8042
+<https://github.com/dotnet/corefx/issues/8042>

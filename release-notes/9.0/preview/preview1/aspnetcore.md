@@ -8,14 +8,15 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 
 ASP.NET Core updates in .NET 9 Preview 1:
 
-* [Discussion](https://github.com/dotnet/aspnetcore/discussions/54007)
-* [What's new in ASP.NET Core in .NET 9](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0) documentation.
-* [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/9.0#aspnet-core)
-* [Roadmap](https://aka.ms/aspnet/roadmap)
+- [Discussion](https://github.com/dotnet/aspnetcore/discussions/54007)
+- [What's new in ASP.NET Core in .NET 9](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0) documentation.
+- [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/9.0#aspnet-core)
+- [Roadmap](https://aka.ms/aspnet/roadmap)
 
 .NET 9 Preview 1:
-* [Discussion](https://aka.ms/dotnet/9/preview1)
-* [Release notes](README.md) 
+
+- [Discussion](https://aka.ms/dotnet/9/preview1)
+- [Release notes](README.md)
 
 ## Dictionary debugging improvements
 
@@ -25,7 +26,7 @@ Before:
 
 ![Prior experience debugging dictionaries.](./media/dictionary-debugging-repo-before.png)
 
-After: 
+After:
 
 ![New experience debugging dictionaries.](./media/dictionary-debugging-repo-after.png)
 

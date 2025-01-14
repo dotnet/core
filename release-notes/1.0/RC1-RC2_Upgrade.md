@@ -4,7 +4,8 @@ Due to schedule changes for the .NET Core all-up, there was a rename of the tool
 
 **What about RC1 bits?**
 
-This does not impact RC1 release. Since the tooling and the way you write applications has changed, having DNX (or many of them) installed should not be a problem. However, one caveat is what tooling you are using for what project. For RC2 projects you may get wrong results and/or errors if you try to restore dependencies using `dnu restore`. Please use the appropriate tooling. You can see what are the new commands in the DNX to CLI migration document listed below.
+This does not impact RC1 release. Since the tooling and the way you write applications has changed, having DNX (or many of them) installed should not be a problem. However, one caveat is what tooling you are using for what project. For RC2 projects you may get wrong results and/or errors if you try to restore dependencies using `dnu restore`. Please use the appropriate tooling.
+You can see what are the new commands in the DNX to CLI migration document listed below.
 
 For updating your code, you can check [Migrating from DNX to CLI](https://learn.microsoft.com/dotnet/core/migration/from-dnx).
 
@@ -16,15 +17,18 @@ On Windows, simply use the Add/Remove programs in the Control Panel to remove al
 
 ### Ubuntu
 
-In order to make life easier, we have created a script for cleaning up all versions of .NET Core from a machine. You can get the script from https://github.com/dotnet/cli/blob/rel/1.0.0/scripts/obtain/uninstall/dotnet-uninstall-debian-packages.sh. Please note that this will remove any and all previous versions, which means the machine will be cleaned completely of any .NET Core bits.  The script needs elevated privileges, so it needs to be run under sudo.
+In order to make life easier, we have created a script for cleaning up all versions of .NET Core from a machine. You can get the script from <https://github.com/dotnet/cli/blob/rel/1.0.0/scripts/obtain/uninstall/dotnet-uninstall-debian-packages.sh>. Please note that this will remove any and all previous versions, which means the machine will be cleaned completely of any .NET Core bits.
+The script needs elevated privileges, so it needs to be run under sudo.
 
 ### OS X
 
-In order to make life easier, we have created a script for cleaning up all versions of .NET Core from a machine. You can get the script from https://github.com/dotnet/cli/blob/rel/1.0.0/scripts/obtain/uninstall/dotnet-uninstall-pkgs.sh. Please note that this will remove any and all previous versions, which means the machine will be cleaned completely of any .NET Core bits.  The script needs elevated privileges, so it needs to be run under sudo.
+In order to make life easier, we have created a script for cleaning up all versions of .NET Core from a machine. You can get the script from <https://github.com/dotnet/cli/blob/rel/1.0.0/scripts/obtain/uninstall/dotnet-uninstall-pkgs.sh>. Please note that this will remove any and all previous versions, which means the machine will be cleaned completely of any .NET Core bits.
+The script needs elevated privileges, so it needs to be run under sudo.
 
 ## Installation Scripts (all supported OS-es)
 
-If you installed .NET Core previous versions using an installation script, simply delete the directory where you installed the previous version of .NET Core. If you are on Linux or OSX and you have symlinked the dotnet binary to a global location (e.g. /usr/local/bin) please remove that symlink as well. Once you install RC2 using the installation script, you can recreate the symlink. Similar goes for Windows if you added the install folder to your system path.
+If you installed .NET Core previous versions using an installation script, simply delete the directory where you installed the previous version of .NET Core. If you are on Linux or OSX and you have symlinked the dotnet binary to a global location (e.g. /usr/local/bin) please remove that symlink as well. Once you install RC2 using the installation script, you can recreate the symlink.
+Similar goes for Windows if you added the install folder to your system path.
 
 After uninstalling the actual bits of the previous version, you should also clear your Nuget package cache. The cache can be found in the following places:
 
@@ -40,7 +44,8 @@ Before installing the RC2 bits it is also prudent to check whether you have the 
 
 ## OpenSSL and OSX specifics
 
-If you read the [getting started](https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409) instructions you will notice that  you need to update OpenSSL to version 1.0.1 or higher. By default, OS X "El Capitan" comes with OpenSSL 0.9.8. To check what version is installed use `openssl verion`. We are giving instructions for updating using Homebrew because that is what we use on the team. MacPorts can be used as well. You can also do it manually.
+If you read the [getting started](https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409) instructions you will notice that  you need to update OpenSSL to version 1.0.1 or higher. By default, OS X "El Capitan" comes with OpenSSL 0.9.8. To check what version is installed use `openssl verion`. We are giving instructions for updating using Homebrew because that is what we use on the team.
+MacPorts can be used as well. You can also do it manually.
 
 What is important is that you have the new version of OpenSSL on the path when you start using the .NET Core RC2. With brew, you can use the `brew link --force openssl` command to relink the OpenSSL. On MacPorts there is no analogue to linking, so you should just uninstall version(s) that are less than 1.0.1. For Mac Ports you can use the following command: `port -f uninstall openssl @0.9.8`.
 

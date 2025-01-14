@@ -91,7 +91,7 @@ A big *Thank You* to all who contributed!
 * [tijoytom (2)](https://github.com/dotnet/coreclr/commits/master?author=tijoytom@gmail.com)
 * [Petr Onderka (2)](https://github.com/dotnet/coreclr/commits/master?author=gsvick@gmail.com)
 * [Gregg Miskelly (2)](https://github.com/dotnet/coreclr/commits/master?author=greggm@microsoft.com)
-* [Gaurav Khanna (1)](https://github.com/dotnet/coreclr/commits/master?author=Gaurav Khanna)
+* [Gaurav Khanna (1)](https://github.com/dotnet/coreclr/commits/master?author=GauravKhanna)
 * [Drew Scoggins (1)](https://github.com/dotnet/coreclr/commits/master?author=anscoggi@microsoft.com)
 * [DionYe (1)](https://github.com/dotnet/coreclr/commits/master?author=junye@microsoft.com)
 * [Josh Varty (1)](https://github.com/dotnet/coreclr/commits/master?author=JoshVarty@users.noreply.github.com)

@@ -10,8 +10,8 @@
 |[dotnet/runtime](https://github.com/dotnet/runtime)                 |[🔗](https://github.com/dotnet/runtime/issues)        |[🔗](https://github.com/dotnet/runtime/discussions)      |.NET runtime, runtime installers, application model, & Base Class Library (BCL)|
 |[dotnet/sdk](https://github.com/dotnet/sdk)                         |[🔗](https://github.com/dotnet/sdk/issues)            |                                                          |.NET SDK (used by Visual Studio & .NET CLI)|
 
-
 ## Compilers & Languages
+
 |Repository                                                          |Issues                                                |Discussions                                               | Description |
 |--------------------------------------------------------------------|:----------------------------------------------------:|:--------------------------------------------------------:|-------------|
 |[dotnet/csharplang](https://github.com/dotnet/csharplang)                |[🔗](https://github.com/dotnet/csharplang/issues)         |[🔗](https://github.com/dotnet/csharplang/discussions)         |C# suggestions, specification, ongoing language design |
@@ -48,7 +48,7 @@
 |Repository                                                          |Issues                                           |Discussions                                          | Description |
 |--------------------------------------------------------------------|:-----------------------------------------------:|:---------------------------------------------------:|------------|
 |[dotnet/dotnet-docker](https://github.com/dotnet/dotnet-docker)     |[🔗](https://github.com/dotnet/dotnet-docker/issues)  |[🔗](https://github.com/dotnet/dotnet-docker/discussions)|.NET Docker images|
-|[dotnet/installer](https://github.com/dotnet/installer)             |[🔗](https://github.com/dotnet/installer/issues)      |                                                          |.NET installer (produces zips, tarballs, and installers for the .NET SDK)
+|[dotnet/installer](https://github.com/dotnet/installer)             |[🔗](https://github.com/dotnet/installer/issues)      |                                                          |.NET installer (produces zips, tarballs, and installers for the .NET SDK) |
 |[dotnet/machinelearning-modelbuilder](https://github.com/dotnet/machinelearning-modelbuilder) |[🔗](https://github.com/dotnet/machinelearning-modelbuilder/issues) |                                                   |ML.NET Tooling           |
 |[dotnet/msbuild](https://github.com/dotnet/msbuild)      |[🔗](https://github.com/dotnet/msbuild/issues)|[🔗](https://github.com/dotnet/msbuild/discussions)|Build platform for .NET & Visual Studio|
 |[dotnet/Scaffolding](https://github.com/dotnet/Scaffolding)        |[🔗](https://github.com/dotnet/Scaffolding/issues)     |                                                             |ASP.NET Core code generators                 |
@@ -57,7 +57,6 @@
 |[dotnet/templating](https://github.com/dotnet/templating)           |[🔗](https://github.com/dotnet/templating/issues)     |[🔗](https://github.com/dotnet/templating/discussions)   |Templating engine used by `dotnet new`|
 |[dotnet/test-templates](https://github.com/dotnet/test-templates)   |[🔗](https://github.com/dotnet/test-templates/issues) |                                                          |.NET unit testing project templates|
 |[dotnet/vscode-csharp](https://github.com/dotnet/vscode-csharp)     |[🔗](https://github.com/dotnet/vscode-csharp/issues)     |[🔗](https://github.com/dotnet/vscode-csharp/discussions)   |C# support for VS Code|
-
 
 ## NuGet
 

@@ -31,14 +31,16 @@ Libraries updates in .NET 9 Preview 7:
 
 ## Removal of `BinaryFormatter` is complete
 
-As [announced earlier](https://github.com/dotnet/announcements/issues/293), starting with .NET 9, we no longer include an implementation of `BinaryFormatter` in the runtime (.NET Framework remains unchanged). The APIs are still present, but their implementation always throws an exception, regardless of project type. Hence, setting the existing backwards compatibility flag is no longer sufficient to use `BinaryFormatter`.
+As [announced earlier](https://github.com/dotnet/announcements/issues/293), starting with .NET 9, we no longer include an implementation of `BinaryFormatter` in the runtime (.NET Framework remains unchanged). The APIs are still present, but their implementation always throws an exception, regardless of project type.
+Hence, setting the existing backwards compatibility flag is no longer sufficient to use `BinaryFormatter`.
 
-* We published the [BinaryFormatter migration guide][migration-guide]. We'd appreciate if could give it a read and give us feedback by filling issues in the [dotnet/docs][dotnet/docs] repo.
-* If you experience issues related to BinaryFormatter's removal not addressed in this migration guide, please file an issue in the [dotnet/runtime][dotnet/runtime] repo and indicate that the issue is related to the removal of `BinaryFormatter`.
+- We published the [BinaryFormatter migration guide][migration-guide]. We'd appreciate if could give it a read and give us feedback by filling issues in the [dotnet/docs][dotnet/docs] repo.
+- If you experience issues related to BinaryFormatter's removal not addressed in this migration guide, please file an issue in the [dotnet/runtime][dotnet/runtime] repo and indicate that the issue is related to the removal of `BinaryFormatter`.
 
 ### Why was `BinaryFormatter` removed?
 
-The primary reason is that `BinaryFormatter` is unsafe. Any deserializer, binary or text, that allows its input to carry information about the objects to be created is a security problem waiting to happen. There is a common weakness enumeration (CWE) that describes the issue: [CWE-502 "Deserialization of Untrusted Data"][CWE502]. `BinaryFormatter` is such a deserializer but this isn't specific to .NET; this applies to any deserializer. Another example is using `eval` in JavaScript to load JSON.
+The primary reason is that `BinaryFormatter` is unsafe. Any deserializer, binary or text, that allows its input to carry information about the objects to be created is a security problem waiting to happen.
+There is a common weakness enumeration (CWE) that describes the issue: [CWE-502 "Deserialization of Untrusted Data"][CWE502]. `BinaryFormatter` is such a deserializer but this isn't specific to .NET; this applies to any deserializer. Another example is using `eval` in JavaScript to load JSON.
 
 We also cover this in the [BinaryFormatter security guide][security-guide].
 
@@ -59,9 +61,11 @@ You have two options to address the removal of `BinaryFormatter`'s implementatio
 
 ## Enumerate over `ReadOnlySpan<char>.Split()` segments
 
-`string.Split` is a very popular and convenient method for quickly partitioning a string with one or more supplied separators. For code focused on performance, however, the allocation profile of `string.Split` can be prohibitive, allocating a `string` for each parsed component and a `string[]` to store them all. It also doesn't work with spans, so if you have a `ReadOnlySpan<char>` and want to use `string.Split` with it, you're forced to allocate yet another string, converting the `ReadOnlySpan<char>` to a `string` to be able to call the method on it.
+`string.Split` is a very popular and convenient method for quickly partitioning a string with one or more supplied separators. For code focused on performance, however, the allocation profile of `string.Split` can be prohibitive, allocating a `string` for each parsed component and a `string[]` to store them all.
+It also doesn't work with spans, so if you have a `ReadOnlySpan<char>` and want to use `string.Split` with it, you're forced to allocate yet another string, converting the `ReadOnlySpan<char>` to a `string` to be able to call the method on it.
 
-In .NET 8, a set of `Split` and `SplitAny` methods were introduced for `ReadOnlySpan<char>`. Rather than returning a new `string[]`, these methods instead accept a destination `Span<Range>` into which to write the bounding indices for each component. This makes the operation fully allocation-free, as no new `string` object is required (each result is represented just as a `Range` within the original span) and no `string[]` needs to be allocated (the results can be written into the supplied destination buffer). This is great when the number of ranges is both known and small, yielding an API that's both efficient and almost as convenient as `string.Split`.
+In .NET 8, a set of `Split` and `SplitAny` methods were introduced for `ReadOnlySpan<char>`. Rather than returning a new `string[]`, these methods instead accept a destination `Span<Range>` into which to write the bounding indices for each component.
+This makes the operation fully allocation-free, as no new `string` object is required (each result is represented just as a `Range` within the original span) and no `string[]` needs to be allocated (the results can be written into the supplied destination buffer). This is great when the number of ranges is both known and small, yielding an API that's both efficient and almost as convenient as `string.Split`.
 
 New overloads of `Split` and `SplitAny` have been added to allow incrementally parsing a `ReadOnlySpan<T>` with an a priori unknown number of segments. The new methods enable enumerating through each segment, which is similarly represented as a `Range` that can be used to slice into the original span.
 
@@ -113,11 +117,15 @@ a > 0 && b > 0
 
 ## `Guid.CreateVersion7` enables creating GUIDs with a natural sort order
 
-`Guid.NewGuid()` creates a `Guid` filled mostly with cryptographically-secure random data, following the [UUID Version 4 specification](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)) in RFC 9562. That same RFC also defines other versions, including [Version 7](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_7_(timestamp_and_random)), which "features a time-ordered value field derived from the widely implemented and well-known Unix Epoch timestamp source". In other words, much of the data is still random, but some of it is reserved for data based on a timestamp, enabling these values to have a natural sort order. In .NET 9, a `Guid` can be created according to Version 7 via the new `Guid.CreateVersion7()` and `Guid.CreateVersion7(DateTimeOffset timestamp)` methods. A `Guid`'s version field can also be retrieved with the new `Version` property.
+`Guid.NewGuid()` creates a `Guid` filled mostly with cryptographically-secure random data, following the [UUID Version 4 specification](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)) in RFC 9562.
+That same RFC also defines other versions, including [Version 7](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_7_(timestamp_and_random)), which "features a time-ordered value field derived from the widely implemented and well-known Unix Epoch timestamp source".
+In other words, much of the data is still random, but some of it is reserved for data based on a timestamp, enabling these values to have a natural sort order. In .NET 9, a `Guid` can be created according to Version 7 via the new `Guid.CreateVersion7()` and `Guid.CreateVersion7(DateTimeOffset timestamp)` methods. A `Guid`'s version field can also be retrieved with the new `Version` property.
 
 ## `Interlocked.CompareExchange` for more types
 
-In previous versions of .NET, `Interlocked.Exchange` and [`Interlocked.CompareExchange`](https://learn.microsoft.com/dotnet/api/system.threading.interlocked.compareexchange) had overloads for working with `int`, `uint`, `long`, `ulong`, `nint`, `nuint`, `float`, `double`, and `object`, as well as a generic overload for working with any reference type `T`. Now in .NET 9, thanks to several contributions from [@MichalPetryka](https://github.com/MichalPetryka), there are now also overloads for atomically working with `byte`, `sbyte`, `short`, and `ushort`. Moreover, the generic constraint on the generic `Interlocked.Exchange<T>` and `Interlocked.CompareExchange<T>` overloads has been removed, so those methods are no longer constrained to only work with reference types. In addition, they can now work with any primitive type, which includes all of the aforementioned types as well as `bool` and `char`, as well as any enum type.
+In previous versions of .NET, `Interlocked.Exchange` and [`Interlocked.CompareExchange`](https://learn.microsoft.com/dotnet/api/system.threading.interlocked.compareexchange) had overloads for working with `int`, `uint`, `long`, `ulong`, `nint`, `nuint`, `float`, `double`, and `object`, as well as a generic overload for working with any reference type `T`.
+Now in .NET 9, thanks to several contributions from [@MichalPetryka](https://github.com/MichalPetryka), there are now also overloads for atomically working with `byte`, `sbyte`, `short`, and `ushort`.
+Moreover, the generic constraint on the generic `Interlocked.Exchange<T>` and `Interlocked.CompareExchange<T>` overloads has been removed, so those methods are no longer constrained to only work with reference types. In addition, they can now work with any primitive type, which includes all of the aforementioned types as well as `bool` and `char`, as well as any enum type.
 
 ## AES-GCM and ChaChaPoly1305 algorithms enabled for iOS/tvOS/MacCatalyst
 
@@ -212,7 +220,8 @@ via the Microsoft.Bcl.Cryptography compatibility package.
 
 ## OpenSSL providers support
 
-In .NET 8, we introduced OpenSSL specific APIs: [SafeEvpPKeyHandle.OpenPrivateKeyFromEngine](https://learn.microsoft.com/dotnet/api/system.security.cryptography.safeevppkeyhandle.openprivatekeyfromengine) and [SafeEvpPKeyHandle.OpenPublicKeyFromEngine](https://learn.microsoft.com/dotnet/api/system.security.cryptography.safeevppkeyhandle.openpublickeyfromengine). They enable interacting with OpenSSL [`ENGINE` components](https://github.com/openssl/openssl/blob/master/README-ENGINES.md) and utilize hardware security modules (HSM), for example.
+In .NET 8, we introduced OpenSSL specific APIs: [SafeEvpPKeyHandle.OpenPrivateKeyFromEngine](https://learn.microsoft.com/dotnet/api/system.security.cryptography.safeevppkeyhandle.openprivatekeyfromengine) and [SafeEvpPKeyHandle.OpenPublicKeyFromEngine](https://learn.microsoft.com/dotnet/api/system.security.cryptography.safeevppkeyhandle.openpublickeyfromengine).
+They enable interacting with OpenSSL [`ENGINE` components](https://github.com/openssl/openssl/blob/master/README-ENGINES.md) and utilize hardware security modules (HSM), for example.
 .NET 9 introduces `SafeEvpPKeyHandle.OpenKeyFromProvider` which enables using [OpenSSL `providers`](https://docs.openssl.org/master/man7/provider/) and interacting with providers such as `tpm2` or `pkcs11`.
 
 Some distros have [removed `ENGINE` support](https://github.com/dotnet/runtime/issues/104775) since it is now deprecated.
@@ -260,6 +269,7 @@ using (ECDsaCng ecdsa = new ECDsaCng(key))
 ```
 
 In total 3 flags were added:
+
 - `CngKeyCreationOptions.PreferVbs` matching `NCRYPT_PREFER_VBS_FLAG`
 - `CngKeyCreationOptions.RequireVbs` matching `NCRYPT_REQUIRE_VBS_FLAG`
 - `CngKeyCreationOptions.UsePerBootKey` matching `NCRYPT_USE_PER_BOOT_KEY_FLAG`
@@ -270,29 +280,36 @@ XPS documents coming from a V4 XPS virtual printer could not be opened using the
 
 ## Marking `Tensor<T>` as `[Experimental]`
 
-We announced the [addition of `Tensor<T>`](../preview4/libraries.md#new-tensort-type) earlier in .NET 9. Adding new built-in types for exchanging tensor data across libraries and allowing accelerated handling for core operations is an important but large undertaking. The work done in .NET 9 currently encompasses 8 types and nearly 600 new public APIs, many of which are generic and can support a `T` that is arbitrary or constrained to one of the [generic math interfaces](https://learn.microsoft.com/dotnet/standard/generics/math).
+We announced the [addition of `Tensor<T>`](../preview4/libraries.md#new-tensort-type) earlier in .NET 9. Adding new built-in types for exchanging tensor data across libraries and allowing accelerated handling for core operations is an important but large undertaking.
+The work done in .NET 9 currently encompasses 8 types and nearly 600 new public APIs, many of which are generic and can support a `T` that is arbitrary or constrained to one of the [generic math interfaces](https://learn.microsoft.com/dotnet/standard/generics/math).
 
-Due to the size of this work and the recognized importance of it to the long term capability of the .NET ecosystem, it has been decided to mark these new APIs as `[Experimental]` (see https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.experimentalattribute) for .NET 9 and to plan on supporting them officially in .NET 10 instead. This is being done to allow time for additional feedback from the community and important libraries in the .NET ecosystem that plan on taking advantage of the provided functionality. It also gives us additional time to coordinate with improvements in the C# language to ensure a great end-to-end experience.
+Due to the size of this work and the recognized importance of it to the long term capability of the .NET ecosystem, it has been decided to mark these new APIs as `[Experimental]` (see <https://learn.microsoft.com/dotnet/api/system.diagnostics.codeanalysis.experimentalattribute>) for .NET 9 and to plan on supporting them officially in .NET 10 instead.
+This is being done to allow time for additional feedback from the community and important libraries in the .NET ecosystem that plan on taking advantage of the provided functionality. It also gives us additional time to coordinate with improvements in the C# language to ensure a great end-to-end experience.
 
 ### Call to Action
 
 Please try out the new APIs and provide feedback on the overall experience. This includes (but is not limited to) the naming or shape of APIs, any core functionality that appears to be missing or that behaves unexpectedly, and how the general user experience was.
 
 Some additional callouts include:
-* Despite being marked `[Experimental]` much of the surface is relatively stable and isn't _expected_ to change. There isn't much you can get wrong for an API like `Add(x, y)` after all. This isn't a guarantee that we won't change such APIs, but the expected churn for these ones is minimal.
-* There's known missing functionality such as no operator support given that we want `Tensor<T>` to work over all `T` but `operator +` can only be defined for types that implement the generic math `IAdditionOperators` interface. This requires language support for `extension operators`.
-* The `TensorSpan<T>` types can wrap native allocations, but we don't have a non-ref struct type equivalent. Such a type would need to be disposable and needs additional design consideration around how ownership/lifetime tracking works. If this is an important scenario to you, we'd like to hear about it.
-* The names/concepts used for some APIs can be very inconsistent across the entire machine learning ecosystem (both inside and outside .NET) and in many cases we opted choose the name that was most consistent with existing .NET concepts or behavior. This decision is typically matching the same semantics given to other major tensor libraries (both in .NET and in other language ecosystems), but if there are any quirks or unexpected behaviors found then we'd like to hear about it.
+
+- Despite being marked `[Experimental]` much of the surface is relatively stable and isn't _expected_ to change. There isn't much you can get wrong for an API like `Add(x, y)` after all. This isn't a guarantee that we won't change such APIs, but the expected churn for these ones is minimal.
+- There's known missing functionality such as no operator support given that we want `Tensor<T>` to work over all `T` but `operator +` can only be defined for types that implement the generic math `IAdditionOperators` interface. This requires language support for `extension operators`.
+- The `TensorSpan<T>` types can wrap native allocations, but we don't have a non-ref struct type equivalent. Such a type would need to be disposable and needs additional design consideration around how ownership/lifetime tracking works. If this is an important scenario to you, we'd like to hear about it.
+- The names/concepts used for some APIs can be very inconsistent across the entire machine learning ecosystem (both inside and outside .NET) and in many cases we opted choose the name that was most consistent with existing .NET concepts or behavior.
+This decision is typically matching the same semantics given to other major tensor libraries (both in .NET and in other language ecosystems), but if there are any quirks or unexpected behaviors found then we'd like to hear about it.
 
 ### `TensorPrimitives` is stable and improved
 
-As a final note, the `TensorPrimitives` class which we shipped in .NET 8 is stable and has been expanded in .NET 9 with additional API surface that is also considered stable. It is not marked as `[Experimental]`. It is the class that contains most of the accelerated algorithms that underpin the `Tensor<T>` type and so they can still be used to accelerate your code where applicable. There are many potential applications for these algorithms including in machine learning/AI, image processing, games, and beyond.
+As a final note, the `TensorPrimitives` class which we shipped in .NET 8 is stable and has been expanded in .NET 9 with additional API surface that is also considered stable. It is not marked as `[Experimental]`. It is the class that contains most of the accelerated algorithms that underpin the `Tensor<T>` type and so they can still be used to accelerate your code where applicable.
+There are many potential applications for these algorithms including in machine learning/AI, image processing, games, and beyond.
 
 ## Introducing Runtime Metrics
 
-.NET has long supported [System.Runtime Counters](https://learn.microsoft.com/dotnet/core/diagnostics/available-counters#systemruntime-counters). With the introduction of the [Metrics](https://learn.microsoft.com/dotnet/core/diagnostics/metrics) feature, it became a natural step to [expose runtime counters as metrics](https://github.com/dotnet/runtime/pull/104680). This enhancement allows users to collect runtime metrics more flexibly and enables support for telemetry platforms like OpenTelemetry.
+.NET has long supported [System.Runtime Counters](https://learn.microsoft.com/dotnet/core/diagnostics/available-counters#systemruntime-counters). With the introduction of the [Metrics](https://learn.microsoft.com/dotnet/core/diagnostics/metrics) feature, it became a natural step to [expose runtime counters as metrics](https://github.com/dotnet/runtime/pull/104680).
+This enhancement allows users to collect runtime metrics more flexibly and enables support for telemetry platforms like OpenTelemetry.
 
-The detailed semantic conventions for runtime metrics can be found [here](https://github.com/open-telemetry/semantic-conventions/blob/main/model/metrics/dotnet-metrics.yaml). Users or tools can collect runtime metrics by using the `System.Diagnostics.Metrics` event source provider to listen to the meter named `System.Runtime`. Below is an example of how to use the [`dotnet-counters`](https://learn.microsoft.com/dotnet/core/diagnostics/dotnet-counters) tool to listen and display runtime metrics for a specific process ID:
+The detailed semantic conventions for runtime metrics can be found [here](https://github.com/open-telemetry/semantic-conventions/blob/main/model/metrics/dotnet-metrics.yaml).
+Users or tools can collect runtime metrics by using the `System.Diagnostics.Metrics` event source provider to listen to the meter named `System.Runtime`. Below is an example of how to use the [`dotnet-counters`](https://learn.microsoft.com/dotnet/core/diagnostics/dotnet-counters) tool to listen and display runtime metrics for a specific process ID:
 
 ```terminal
  dotnet-counters monitor --process-id 29104 --counters System.Runtime
@@ -332,7 +349,9 @@ Name                                                                         Cur
 
 ## Introducing Environment CpuUsage
 
-.NET has long supported retrieving CPU usage for the current process via properties like [`Process.TotalProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.totalprocessortime?view=net-8.0), [`PrivilegedProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.privilegedprocessortime?view=net-8.0), and [`UserProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.userprocessortime?view=net-8.0). However, these properties require a dependency on the `System.Diagnostics.Process` library and involve calling `Process.GetCurrentProcess()` to retrieve the current process. Additionally, since these properties are designed to work with any system process, they introduce extra performance overhead.
+.NET has long supported retrieving CPU usage for the current process via properties like [`Process.TotalProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.totalprocessortime?view=net-8.0), [`PrivilegedProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.privilegedprocessortime?view=net-8.0),
+and [`UserProcessorTime`](https://learn.microsoft.com/dotnet/api/system.diagnostics.process.userprocessortime?view=net-8.0). However, these properties require a dependency on the `System.Diagnostics.Process` library and involve calling `Process.GetCurrentProcess()` to retrieve the current process.
+Additionally, since these properties are designed to work with any system process, they introduce extra performance overhead.
 
 The new [`Environment.CpuUsage`](https://github.com/dotnet/runtime/pull/105152) property provides a more efficient way to retrieve CPU usage for the current process, eliminating the need to create a `Process` object.
 
@@ -348,7 +367,8 @@ Console.WriteLine($"Kernel CPU usage: {usage.KernelCpuUsage}");
 
 ## Adding Metrics Measurement Constructor with TagList Parameter
 
-The [`Measurement<T>`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics.measurement-1?view=net-8.0) class in the [`System.Diagnostics.Metrics`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics?view=net-8.0) namespace has been updated to [include a new constructor](https://github.com/dotnet/runtime/pull/105011) that accepts a [`TagList`](https://learn.microsoft.com/dotnet/api/system.diagnostics.taglist?view=net-8.0) parameter.
+The [`Measurement<T>`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics.measurement-1?view=net-8.0) class in the [`System.Diagnostics.Metrics`](https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics?view=net-8.0) namespace has been updated to [include a new constructor](https://github.com/dotnet/runtime/pull/105011)
+that accepts a [`TagList`](https://learn.microsoft.com/dotnet/api/system.diagnostics.taglist?view=net-8.0) parameter.
 This new constructor allows users to create a `Measurement` object with a `TagList` that contains associated tags.
 Previously, users who employed `TagList` and called the `Measurement` constructor that accepted an `IEnumerable<KeyValuePair<string,object?>>` had to allocate extra boxing objects, which negated the performance benefits of using `TagList`. With this update, users can now pass `TagList` directly to the `Measurement` constructor, avoiding unnecessary overhead and improving performance.
 

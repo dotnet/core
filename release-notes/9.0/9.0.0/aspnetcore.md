@@ -15,4 +15,3 @@ ASP.NET Core updates in .NET 9:
 * [Announcement Blog](https://aka.ms/dotnet9)
 * [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview)
 * [Release notes](README.md)
-
