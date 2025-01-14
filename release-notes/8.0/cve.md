@@ -6,8 +6,12 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 
 ## Which CVEs apply to my app?
 
-Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
+Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 8.0.12 (January 2025)
+  - [CVE-2025-21172 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2025-21176 | .NET Elevation of Priviledge Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2025-21173 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
 - 8.0.10 (October 2024)
   - [CVE-2024-38229 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/326)
   - [CVE-2024-43483 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/327)
