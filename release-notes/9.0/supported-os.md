@@ -23,7 +23,7 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 18, 17, 16                  | Arm64
+[iOS][2]                        | 18                          | Arm64
 [iPadOS][3]                     | 18, 17, 16                  | Arm64
 [macOS][4]                      | 15, 14, 13                  | Arm64, x64
 [tvOS][5]                       | 18, 17, 16, 15, 14, 13, 12.2 | Arm64
@@ -48,7 +48,7 @@ OS                              | Versions                    | Architectures   
 [CentOS Stream][8]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][9]
 [Debian][10]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][11]
 [Fedora][12]                    | 40                          | Arm32, Arm64, x64     | [Lifecycle][13]
-[openSUSE Leap][14]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][15]
+[openSUSE Leap][14]             | 15.6                        | Arm64, x64            | [Lifecycle][15]
 [Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
 [SUSE Enterprise Linux][18]     | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][19]
 [Ubuntu][20]                    | 24.10, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][21]
@@ -115,4 +115,8 @@ Note: Microsoft-provided portable Arm32 glibc builds are supported on distro ver
 
 Support for the following operating system versions has ended.
 
-None currently.
+OS                      | Version       | Date
+----------------------- | ------------- | ----------------------
+iOS                     | 17            | [2024-11-19](https://support.apple.com/en-us/118723)
+iOS                     | 16            | [2024-08-07](https://support.apple.com/HT213407)
+openSUSE Leap           | 15.5          | 2024-12-31
