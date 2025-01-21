@@ -23,8 +23,8 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 18                          | Arm64
-[iPadOS][3]                     | 18, 17, 16                  | Arm64
+[iOS][2]                        | 18, 17                      | Arm64
+[iPadOS][3]                     | 18, 17                      | Arm64
 [macOS][4]                      | 15, 14, 13                  | Arm64, x64
 [tvOS][5]                       | 18, 17, 16, 15, 14, 13, 12.2 | Arm64
 
@@ -117,6 +117,6 @@ Support for the following operating system versions has ended.
 
 OS                      | Version       | Date
 ----------------------- | ------------- | ----------------------
-iOS                     | 17            | [2024-11-19](https://support.apple.com/en-us/118723)
 iOS                     | 16            | [2024-08-07](https://support.apple.com/HT213407)
+iPadOS                  | 16            | [2024-08-07](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes)
 openSUSE Leap           | 15.5          | 2024-12-31

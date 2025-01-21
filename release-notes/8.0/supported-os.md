@@ -23,8 +23,8 @@ Notes:
 
 OS                              | Versions                    | Architectures
 ------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 18                          | Arm64
-[iPadOS][3]                     | 18, 17, 16                  | Arm64
+[iOS][2]                        | 18, 17                      | Arm64
+[iPadOS][3]                     | 18, 17                      | Arm64
 [macOS][4]                      | 15, 14, 13                  | Arm64, x64
 [tvOS][5]                       | 18, 17, 16, 15, 14, 13, 12.2 | Arm64
 
@@ -123,9 +123,9 @@ Debian                  | 11            | [2024-08-14](https://lists.debian.org/
 Fedora                  | 39            | 2024-11-26
 Fedora                  | 38            | 2024-05-21
 Fedora                  | 37            | 2023-12-05
-iOS                     | 17            | [2024-11-19](https://support.apple.com/en-us/118723)
 iOS                     | 15            | [2024-09-16](https://support.apple.com/HT212788)
 iOS                     | 16            | [2024-08-07](https://support.apple.com/HT213407)
+iPadOS                  | 16            | [2024-08-07](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes)
 iPadOS                  | 15            | [2024-09-16](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-15-release-notes)
 macOS                   | 12            | [2024-09-16](https://support.apple.com/HT212585)
 openSUSE Leap           | 15.5          | 2024-12-31
