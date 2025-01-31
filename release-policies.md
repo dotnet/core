@@ -61,8 +61,8 @@ Additionally, customers targeting an out-of-support .NET version in their projec
 
 To remain supported, you must do the following:
 
-* Use a supported SDK
-* Target a supported .NET version (via the `TargetFramework` property)
+* Use a [supported SDK](https://dotnet.microsoft.com/download)
+* Target a [supported .NET version](./releases.md) (via the `TargetFramework` property)
 * Reference [supported packages](./Documentation/policies/package-servicing.md)
 
 ## Operating System support
