@@ -41,6 +41,13 @@ Users must be on the latest patch version of the package or a runtime-band to be
 
 Packages retain compatibility for supported .NET versions. A package will not drop support for a .NET version that is in support. When a .NET version goes out of support, packages released after that point may drop support for that .NET version.
 
+Mechanically, a package can support multiple target frameworks via either of two approaches:
+
+- Multi-targeting: A project supports and is built for multiple target frameworks, resulting in assets supporting multiple .NET versions in a NuGet package.
+- Branching: A project exists and is built in multiple branches, each targeting a specific target framework and resulting multiple packages that each include a single asset supporting a specific .NET version.
+
+The differences in these approaches are user observable and require users to adopt different patterns with package references. It's the difference between the two versioning strategies defined earlier. They are also patterns that users can adopt for themselves with their own packages.
+
 ## End of Life
 
 .NET packages are no longer supported when either of the following occurs:
