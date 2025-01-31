@@ -23,7 +23,7 @@ Users can upgrade to the latest library version (like 8.0.x) that matches a supp
 
 The advantage of matching versions is that the runtime library will be used in place of the package, resulting in smaller deployments and servicing being provided by the runtime. The advantage of using a newer package version is getting access to newer functionality.
 
-Apps only ever need a package reference to one of these libraries to use a newer major version. It is more common for libraries to have a reference, particularly .NET Standard libraries.
+It common for .NET Standard libraries to have a reference to these libraries. Libraries and app projects only need a reference if they need access to newer features in a later major version (than their target framework exposes).
 
 The following libraries use this servicing model:
 
