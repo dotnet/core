@@ -11,6 +11,7 @@ The default package servicing model is “latest version”. The team publishes 
 The following libraries use this servicing model:
 
 - [.NET Aspire](https://github.com/dotnet/aspire)
+- [.NET Platform Extensions](https://github.com/dotnet/extensions)
 - [ML.NET](https://github.com/dotnet/machinelearning)
 - [Maintenance-packages](https://github.com/dotnet/maintenance-packages)
 
@@ -29,6 +30,8 @@ The following libraries use this servicing model:
 - [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection)
 - [System.Text.Json](https://www.nuget.org/packages/System.Text.Json)
 - [System.Diagnostics.DiagnosticSource](https://www.nuget.org/packages/System.Diagnostics.DiagnosticSource)
+- [ASP.NET Core Packages](https://github.com/dotnet/aspnetcore)
+- [Entity Framework Core Packages](https://github.com/dotnet/efcore)
 
 ## Support
 
