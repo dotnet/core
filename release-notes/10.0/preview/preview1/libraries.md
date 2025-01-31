@@ -6,7 +6,8 @@
 
 .NET Libraries updates in .NET 10:
 
-- [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
+- [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
+
 
 ## Feature
 

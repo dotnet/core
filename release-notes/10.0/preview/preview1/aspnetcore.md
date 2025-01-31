@@ -6,9 +6,10 @@
 
 ASP.NET Core updates in .NET 10:
 
-- [What's new in ASP.NET Core in .NET 10](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0) documentation
-- [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/9.0#aspnet-core)
+- [What's new in ASP.NET Core in .NET 10](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0) documentation
+- [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/10.0#aspnet-core)
 - [Roadmap](https://aka.ms/aspnet/roadmap)
+
 
 ## Feature
 

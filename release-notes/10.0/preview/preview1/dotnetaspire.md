@@ -6,7 +6,8 @@
 
 .NET Aspire 10 updates:
 
-- [What's new in .NET Aspire in .NET 10](https://learn.microsoft.com/dotnet/aspire/whats-new/dotnet-aspire-9) documentation
+- [What's new in .NET Aspire in .NET 10](https://learn.microsoft.com/dotnet/aspire/whats-new/dotnet-aspire-10) documentation
+
 
 ## Feature
 

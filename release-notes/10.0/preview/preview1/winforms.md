@@ -6,7 +6,8 @@
 
 Windows Forms updates in .NET 10:
 
-- [What's new in Windows Forms in .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net90) documentation
+- [What's new in Windows Forms in .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100) documentation
+
 
 ## Feature
 
