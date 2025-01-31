@@ -3,7 +3,7 @@
 .NET 10 Preview 1 includes new .NET MAUI features & enhancements:
 
 - [Feature](#feature)
-- [GitHub Release Notes](https://aka.ms/maui10p1)
+- [GitHub Release Notes](https://aka.ms/maui9p1)
 
 .NET MAUI updates in .NET 10:
 
