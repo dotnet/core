@@ -6,7 +6,7 @@
 
 Entity Framework Core 10:
 
-- [What's new in Entity Framework Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/whatsnew) documentation
+- [What's new in Entity Framework Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/whatsnew) documentation
 
 ## Feature
 
