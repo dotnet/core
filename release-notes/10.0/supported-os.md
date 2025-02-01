@@ -47,7 +47,7 @@ Notes:
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
 [Alpine][6]                     | 3.21                        | Arm32, Arm64, x64     | [Lifecycle][7]
-[Azure Linux][8]                | 3.0                         | Arm64, x64            
+[Azure Linux][8]                | 3.0                         | Arm64, x64            |
 [CentOS Stream][9]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][10]
 [Debian][11]                    | 13, 12                      | Arm32, Arm64, x64     | [Lifecycle][12]
 [Fedora][13]                    | 41                          | Arm32, Arm64, x64     | [Lifecycle][14]
