@@ -1,6 +1,6 @@
 # .NET 8 - Supported OS versions
 
-Last updated: 2024-10-10
+Last updated: 2025-01-31
 
 [.NET 8](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -44,10 +44,10 @@ Notes:
 
 OS                              | Versions                    | Architectures         | Lifecycle
 ------------------------------- | --------------------------- | --------------------- | ----------------------
-[Alpine][6]                     | 3.20, 3.19, 3.18            | Arm32, Arm64, x64     | [Lifecycle][7]
+[Alpine][6]                     | 3.21, 3.20, 3.19, 3.18      | Arm32, Arm64, x64     | [Lifecycle][7]
 [CentOS Stream][8]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][9]
 [Debian][10]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][11]
-[Fedora][12]                    | 40                          | Arm32, Arm64, x64     | [Lifecycle][13]
+[Fedora][12]                    | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][13]
 [openSUSE Leap][14]             | 15.6                        | Arm64, x64            | [Lifecycle][15]
 [Red Hat Enterprise Linux][16]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][17]
 [SUSE Enterprise Linux][18]     | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][19]
