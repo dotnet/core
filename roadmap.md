@@ -1,6 +1,7 @@
 # .NET Project Roadmaps & Backlogs
 
 * [.NET Aspire](https://github.com/dotnet/aspire/issues/1549)
+* [.NET Containers](https://aka.ms/netcontainers-roadmap)
 * [.NET MAUI](https://github.com/dotnet/maui/wiki/Roadmap)
 * [ASP.NET Core](https://aka.ms/aspnet/roadmap)
 * [C#](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md#working-set)
