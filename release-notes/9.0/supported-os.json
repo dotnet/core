@@ -1,6 +1,6 @@
 {
     "channel-version": "9.0",
-    "last-updated": "2025-01-31",
+    "last-updated": "2025-02-03",
     "families": [
         {
             "name": "Android",
@@ -119,6 +119,18 @@
                         "3.21",
                         "3.20",
                         "3.19"
+                    ]
+                },
+                {
+                    "id": "azurelinux",
+                    "name": "Azure Linux",
+                    "link": "https://github.com/microsoft/azurelinux",
+                    "architectures": [
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "3.0"
                     ]
                 },
                 {
@@ -350,6 +362,7 @@
         }
     ],
     "notes": [
-        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa."
+        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.",
+        "Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions."
     ]
 }
