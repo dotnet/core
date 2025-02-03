@@ -2,7 +2,7 @@
 
 * [.NET Aspire](https://github.com/dotnet/aspire/issues/1549)
 * [.NET MAUI](https://github.com/dotnet/maui/wiki/Roadmap)
-* [ASP.NET Core](https://github.com/dotnet/aspnetcore/issues/51834)
+* [ASP.NET Core](https://aka.ms/aspnet/roadmap)
 * [C#](https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md#working-set)
 * [Entity Framework Core](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/plan)
 * [F#](https://github.com/orgs/dotnet/projects/126/views/40?query=is%3Aopen+sort%3Aupdated-desc)
