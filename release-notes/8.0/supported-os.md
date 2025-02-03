@@ -9,6 +9,8 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 ## Android
 
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
 | [Android][0]                  | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]       |
 
 Notes:
@@ -20,6 +22,8 @@ Notes:
 
 ## Apple
 
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
 | [iOS][2]                      | 18, 17                      | Arm64                 | None                 |
 | [iPadOS][3]                   | 18, 17                      | Arm64                 | None                 |
 | [macOS][4]                    | 15, 14, 13                  | Arm64, x64            | None                 |
@@ -39,6 +43,8 @@ Notes:
 
 ## Linux
 
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
 | [Alpine][6]                   | 3.21, 3.20, 3.19, 3.18      | Arm32, Arm64, x64     | [Lifecycle][7]       |
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
 | [CentOS Stream][9]            | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
@@ -73,6 +79,8 @@ Notes:
 
 ## Windows
 
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
 | [Nano Server][23]             | 2022, 2019                  | x64                   | [Lifecycle][24]      |
 | [Windows][25]                 | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
 | [Windows Server][27]          | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]      |
