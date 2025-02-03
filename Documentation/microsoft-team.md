@@ -9,6 +9,10 @@ If you work on or with the .NET Team, you will need to onboard into various GitH
 1. [Join the microsoft/dotnet team](https://repos.opensource.microsoft.com/Microsoft/teams/dotnet/join/)
 1. [Join the dotnet/microsoft team](https://repos.opensource.microsoft.com/dotnet/teams/microsoft/join/)
 
+## Moderation
+
+You will sometimes see issues/PRs/comments that look suspicious/offensive/spammy. We use the "see something, say something" model. Please report content that you think should be addressed or removed to one of our [Moderators](http://aka.ms/dotnet/org).
+
 ## Security best practices
 
 Bad actors try to break into our accounts all the time (see ["failed login attempts" on your account](https://github.com/settings/security-log?q=action%3Auser.failed_login)). You need to apply the following guidance to (A) stay secure, and (B) maintain access to your account.
