@@ -11,4 +11,4 @@
 
 ## Feature
 
-This is something about the feature
+This is something about the feature.
