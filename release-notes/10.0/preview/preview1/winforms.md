@@ -65,4 +65,6 @@ If an application is unable to adopt the new APIs, and requires a fallback to Bi
 
 Windows Forms updates in .NET 10:
 
-- [What's new in Windows Forms in .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100) documentation,
+- [What's new in Windows Forms in .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100) documentation.
+
+**AI-assisted content.** This article was partially created with the help of AI. An author reviewed and revised the content as needed. Learn moreAI-assisted content. This article was partially created with the help of AI. An author reviewed and revised the content as needed. [Learn more](https://devblogs.microsoft.com/principles-for-ai-generated-content/) 
