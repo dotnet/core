@@ -8,7 +8,6 @@
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
 
-
 ## Feature
 
 This is something about the feature.
