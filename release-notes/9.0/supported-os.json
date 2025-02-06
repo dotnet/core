@@ -1,6 +1,6 @@
 {
     "channel-version": "9.0",
-    "last-updated": "2024-10-10",
+    "last-updated": "2025-02-03",
     "families": [
         {
             "name": "Android",
@@ -40,7 +40,9 @@
                     ],
                     "supported-versions": [
                         "18",
-                        "17",
+                        "17"
+                    ],
+                    "unsupported-versions": [
                         "16"
                     ],
                     "notes": [
@@ -56,10 +58,12 @@
                     ],
                     "supported-versions": [
                         "18",
-                        "17",
+                        "17"
+                    ],
+                    "unsupported-versions": [
                         "16"
                     ]
-                },                
+                },
                 {
                     "id": "macos",
                     "name": "macOS",
@@ -73,7 +77,7 @@
                         "14",
                         "13"
                     ],
-                    "notes" : [
+                    "notes": [
                         "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
                         "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
                         "Mac Catalyst apps are supported on macOS Arm64 and x64."
@@ -112,8 +116,21 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "3.21",
                         "3.20",
                         "3.19"
+                    ]
+                },
+                {
+                    "id": "azurelinux",
+                    "name": "Azure Linux",
+                    "link": "https://github.com/microsoft/azurelinux",
+                    "architectures": [
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "3.0"
                     ]
                 },
                 {
@@ -156,6 +173,7 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "41",
                         "40"
                     ]
                 },
@@ -169,7 +187,9 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "15.6",
+                        "15.6"
+                    ],
+                    "unsupported-versions": [
                         "15.5"
                     ]
                 },
@@ -342,6 +362,7 @@
         }
     ],
     "notes": [
-        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa."
+        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.",
+        "Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions."
     ]
 }
