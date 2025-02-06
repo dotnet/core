@@ -1,18 +1,17 @@
 # .NET 10 - Supported OS versions
 
-Last updated: 2024-12-06
+Last Updated: 2025-02-03
+Support phase: Preview
 
-[.NET 10](README.md) is a [Long Term Support (LTS)](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
-
-Note: .NET 10 is currently in development and not supported. Supported OS versions are subject to change.
+[.NET 10](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
 
 ## Android
 
-OS                              | Versions                    | Architectures         | Lifecycle
-------------------------------- | --------------------------- | --------------------- | ----------------------
-[Android][0]                    | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
+| [Android][0]                  | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]       |
 
 Notes:
 
@@ -23,12 +22,12 @@ Notes:
 
 ## Apple
 
-OS                              | Versions                    | Architectures
-------------------------------- | --------------------------- | ----------------------
-[iOS][2]                        | 18, 17, 16                  | Arm64
-[iPadOS][3]                     | 18, 17, 16                  | Arm64
-[macOS][4]                      | 15, 14, 13                  | Arm64, x64
-[tvOS][5]                       | 18, 17, 16, 15, 14, 13, 12.2 | Arm64
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
+| [iOS][2]                      | 18, 17                      | Arm64                 | None                 |
+| [iPadOS][3]                   | 18, 17                      | Arm64                 | None                 |
+| [macOS][4]                    | 15, 14, 13                  | Arm64, x64            | None                 |
+| [tvOS][5]                     | 18, 17, 16, 15, 14, 13, 12.2 | Arm64                | None                 |
 
 Notes:
 
@@ -44,17 +43,17 @@ Notes:
 
 ## Linux
 
-OS                              | Versions                    | Architectures         | Lifecycle
-------------------------------- | --------------------------- | --------------------- | ----------------------
-[Alpine][6]                     | 3.21                        | Arm32, Arm64, x64     | [Lifecycle][7]
-[Azure Linux][8]                | 3.0                         | Arm64, x64 | None
-[CentOS Stream][9]              | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][10]
-[Debian][11]                    | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]
-[Fedora][13]                    | 41                          | Arm32, Arm64, x64     | [Lifecycle][14]
-[openSUSE Leap][15]             | 15.6                        | Arm64, x64            | [Lifecycle][16]
-[Red Hat Enterprise Linux][17]  | 9, 8                        | Arm64, ppc64le, s390x, x64 | [Lifecycle][18]
-[SUSE Enterprise Linux][19]     | 15.6                        | Arm64, x64            | [Lifecycle][20]
-[Ubuntu][21]                    | 24.10, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
+| [Alpine][6]                   | 3.21                        | Arm32, Arm64, x64     | [Lifecycle][7]       |
+| [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
+| [CentOS Stream][9]            | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
+| [Debian][11]                  | 13, 12                      | Arm32, Arm64, x64     | [Lifecycle][12]      |
+| [Fedora][13]                  | 41                          | Arm32, Arm64, x64     | [Lifecycle][14]      |
+| [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
+| [Red Hat Enterprise Linux][17] | 9, 8                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
+| [Ubuntu][21]                  | 24.10, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]      |
 
 Notes:
 
@@ -80,12 +79,12 @@ Notes:
 
 ## Windows
 
-OS                              | Versions                    | Architectures         | Lifecycle
-------------------------------- | --------------------------- | --------------------- | ----------------------
-[Nano Server][23]               | 2022, 2019                  | x64                   | [Lifecycle][24]
-[Windows][25]                   | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26]
-[Windows Server][27]            | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]
-[Windows Server Core][23]       | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][24]
+| OS                            | Versions                    | Architectures         | Lifecycle            |
+| ----------------------------- | --------------------------- | --------------------- | -------------------- |
+| [Nano Server][23]             | 2022, 2019                  | x64                   | [Lifecycle][24]      |
+| [Windows][25]                 | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
+| [Windows Server][27]          | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]      |
+| [Windows Server Core][23]     | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][24]      |
 
 Notes:
 
@@ -103,20 +102,19 @@ Notes:
 
 Microsoft-provided [portable Linux builds](../../linux.md) define minimum compatibility primarily via libc version.
 
-Libc            | Version | Architectures         | Source
---------------- | ------- | --------------------- | --------------
-glibc           | 2.27    | Arm64, x64            | Ubuntu 18.04
-glibc           | 2.35    | Arm32                 | Ubuntu 22.04
-musl            | 1.2.3   | Arm32, Arm64, x64     | Alpine 3.17
-
-Note: Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions.
+| Libc          | Version | Architectures         | Source       |
+| ------------- | ------- | --------------------- | ------------ |
+| glibc         | 2.27    | Arm64, x64            | Ubuntu 18.04 |
+| glibc         | 2.35    | Arm32                 | Ubuntu 22.04 |
+| musl          | 1.2.3   | Arm32, Arm64, x64     | Alpine 3.17  |
 
 ## Notes
 
 * The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
+* Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions.
 
-## Out of support OS versions
+## Out of support
 
-Support for the following operating system versions has ended.
+The following operating system versions are no longer supported.
 
 None currently.
