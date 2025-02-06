@@ -1,6 +1,6 @@
 {
     "channel-version": "10.0",
-    "last-updated": "2024-12-06",
+    "last-updated": "2025-02-03",
     "families": [
         {
             "name": "Android",
@@ -40,8 +40,7 @@
                     ],
                     "supported-versions": [
                         "18",
-                        "17",
-                        "16"
+                        "17"
                     ],
                     "notes": [
                         "iOS 12.2 is used as the minimum SDK target."
@@ -56,10 +55,9 @@
                     ],
                     "supported-versions": [
                         "18",
-                        "17",
-                        "16"
+                        "17"
                     ]
-                },                
+                },
                 {
                     "id": "macos",
                     "name": "macOS",
@@ -73,7 +71,7 @@
                         "14",
                         "13"
                     ],
-                    "notes" : [
+                    "notes": [
                         "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
                         "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
                         "Mac Catalyst apps are supported on macOS Arm64 and x64."
@@ -153,6 +151,7 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "13",
                         "12"
                     ]
                 },
@@ -351,6 +350,7 @@
         }
     ],
     "notes": [
-        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa."
+        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.",
+        "Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions."
     ]
 }
