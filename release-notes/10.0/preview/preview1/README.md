@@ -34,4 +34,3 @@ You can find a detailed overview of all new features in .NET 10:
 - [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100)
 
 The latest .NET 10 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/10.0) and [.NET 10 Releases](../../README.md).
-
