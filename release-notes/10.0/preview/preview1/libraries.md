@@ -37,7 +37,7 @@ you can now skip the UTF-8/ASCII to char conversion and read the file directly.
 byte[] fileContents = File.ReadAllBytes(path);
 -char[] text = Encoding.ASCII.GetString(fileContents);
 -PemFields pemFields = PemEncoding.Find(text);
-+PemFields pemFields = PemEncoding.Find(fileContents);
++PemFields pemFields = PemEncoding.FindUtf8(fileContents);
 
 -byte[] contents = Base64.DecodeFromChars(text.AsSpan()[pemFields.Base64Data]);
 +byte[] contents = Base64.DecodeFromUtf8(fileContents.AsSpan()[pemFields.Base64Data]);
