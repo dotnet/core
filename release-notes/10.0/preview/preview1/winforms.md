@@ -4,7 +4,7 @@ WinForms continues to ease the pain of migrating away from BinaryFormatter in .N
 
 For in-depth discussion of the APIs involved, and usage examples, please see the original [API Proposal](https://github.com/dotnet/winforms/issues/12362) in the WinForms repo.
 
-### Obsoleted APIs
+## Obsoleted APIs
 
 In .NET 10, WinForms has marked as obsolete the following APIs to help warn developers that BinaryFormatter may be used to deserialize data.
 
@@ -22,7 +22,7 @@ In .NET 10, WinForms has marked as obsolete the following APIs to help warn deve
 
 - `public object GetData(string format)`
 
-### New APIs
+## New APIs
 
 We’ve introduced the following APIs in Windows Forms for .NET 10 Preview 1:
 
@@ -32,8 +32,7 @@ We’ve introduced the following APIs in Windows Forms for .NET 10 Preview 1:
 - `public static bool TryGetData<T>(string format, out T data)`
 - `public static bool TryGetData<T>(string format, Func<Reflection.Metadata.TypeName, Type> resolver, out T data)`
 
-**IDataObject:**
-**ITypedDataObject:**
+**DataObject:**
 
 - `public void SetDataAsJson<T>(T data)`
 - `public void SetDataAsJson<T>(string format, T data)`
@@ -43,6 +42,13 @@ We’ve introduced the following APIs in Windows Forms for .NET 10 Preview 1:
 - `public bool TryGetData<T>(string format, bool autoConvert, out T data);`
 - `public bool TryGetData<T>(string format, Func<Reflection.Metadata.TypeName, Type> resolver, bool autoConvert, out T data);`
 - `protected virtual bool TryGetDataCore<T>(string format, Func<Reflection.Metadata.TypeName, Type> resolver, bool autoConvert, out T data)`
+
+**ITypedDataObject:**
+
+- `public bool TryGetData<T>(out T data);`
+- `public bool TryGetData<T>(string format, out T data);`
+- `public bool TryGetData<T>(string format, bool autoConvert, out T data);`
+- `public bool TryGetData<T>(string format, Func<Reflection.Metadata.TypeName, Type> resolver, bool autoConvert, out T data);`
 
 **DataObjectExtensions:**
 
@@ -58,12 +64,12 @@ We’ve introduced the following APIs in Windows Forms for .NET 10 Preview 1:
 - `public bool TryGetData<T>(string format, out T data)`
 - `public bool TryGetData<T>(string format, System.Func<System.Reflection.Metadata.TypeName, System.Type> resolver, out T data)`
 
-### New Configuration Switch
+## New Configuration Switch
 
-If an application is unable to adopt the new APIs, and requires a fallback to `BinaryFormatter` serialization during Clipboard and Drag/Drop operations, the developer will need to take additional action. In .NET 9, calls to BinaryFormatter will always throw a `PlatformNotSupportedException` unless the developer follows the instructions located here: [BinaryFormatter compatibility package](https://learn.microsoft.com/dotnet/standard/serialization/binaryformatter-migration-guide/compatibility-package) . In .NET 10 Preview 1, WinForms will now also by default disable the use of BinaryFormatter as a fallback unless it is explicitly enabled with this new configuration switch. This switch is `Windows.ClipboardDragDrop.EnableUnsafeBinaryFormatterSerialization`, and it must be set to `True` for the fallback to happen successfully.
+If an application is unable to adopt the new APIs, and requires a fallback to `BinaryFormatter` serialization during Clipboard and Drag/Drop operations, the developer will need to take additional action. In .NET 9, calls to `BinaryFormatter` will always throw a `PlatformNotSupportedException` unless the developer follows the instructions located here: [BinaryFormatter compatibility package](https://learn.microsoft.com/dotnet/standard/serialization/binaryformatter-migration-guide/compatibility-package) . In .NET 10 Preview 1, WinForms will also by default disable the use of `BinaryFormatter` at the application level using the same compatibility switches. Additionally, we allow developer to control `BinaryFormatter` usage in Clipboard only with a new compatibility switch `Windows.ClipboardDragDrop.EnableUnsafeBinaryFormatterSerialization`. For full compatibility application should reference the unsupported compatibility package and opt in to both configuration switches. 
 
-Windows Forms updates in .NET 10:
+## Windows Forms updates in .NET 10:
 
 - [What's new in Windows Forms in .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100) documentation.
 
-**AI-assisted content.** This article was partially created with the help of AI. An author reviewed and revised the content as needed. Learn moreAI-assisted content. This article was partially created with the help of AI. An author reviewed and revised the content as needed. [Learn more](https://devblogs.microsoft.com/principles-for-ai-generated-content/) 
+**AI-assisted content.** This article was partially created with the help of AI. An author reviewed and revised the content as needed. Learn moreAI-assisted content. This article was partially created with the help of AI. An author reviewed and revised the content as needed. [Learn more](https://devblogs.microsoft.com/principles-for-ai-generated-content/)
