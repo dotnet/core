@@ -43,6 +43,50 @@ byte[] fileContents = File.ReadAllBytes(path);
 +byte[] contents = Base64.DecodeFromUtf8(fileContents.AsSpan()[pemFields.Base64Data]);
 ```
 
+## New Method Overloads in ISOWeek for DateOnly Type
+
+The ISOWeek class was originally designed to work exclusively with DateTime, as it was introduced before the DateOnly type existed. Now that DateOnly is available, it makes sense for ISOWeek to support it as well.
+
+```C#
+
+    public static class ISOWeek
+
+    {
+
+        // New overloads
+
+        public static int GetWeekOfYear(DateOnly date);
+
+        public static int GetYear(DateOnly date);
+
+        public static DateOnly ToDateOnly(int year, int week, DayOfWeek dayOfWeek);
+
+    }
+
+```
+
+## New Method Overloads in ISOWeek for DateOnly Type
+
+The ISOWeek class was originally designed to work exclusively with DateTime, as it was introduced before the DateOnly type existed. Now that DateOnly is available, it makes sense for ISOWeek to support it as well.
+
+```C#
+
+    public static class ISOWeek
+
+    {
+
+        // New overloads
+
+        public static int GetWeekOfYear(DateOnly date);
+
+        public static int GetYear(DateOnly date);
+
+        public static DateOnly ToDateOnly(int year, int week, DayOfWeek dayOfWeek);
+
+    }
+
+```
+
 ## ZipArchive performance and memory improvements
 
 Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview 1 to improve the performance and memory usage of `ZipArchive`:
@@ -61,16 +105,15 @@ Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview
 - [#103153](https://github.com/dotnet/runtime/pull/103153) - This PR enhances the performance of `ZipArchive` by parallelizing the extraction of entries and optimizing internal data structures for better memory usage. These improvements address issues related to performance bottlenecks and high memory usage, making `ZipArchive` more efficient and faster, especially when dealing with large archives.
 
     Read improvements:
+
     - 12-13% reduction in execution time as a baseline, rising to 18-19% as the number of entries in the archive increases.
     - 33-36% reduction in memory usage.
     - When latency is introduced, as the number of entries in the archive increases, the reduction in execution time becomes more pronounced - 99.6%.
 
     Creation improvements:
+
     - Execution time is almost identical assuming no latency. As latency increases, the execution time reduces by around 82%
     - 10% reduction in memory usage.
 
     Additional benchmarking details provided [in the PR description](https://github.com/dotnet/runtime/pull/103153#issue-2339713028).
 
-## Feature
-
-This is something about the feature
