@@ -43,6 +43,20 @@ byte[] fileContents = File.ReadAllBytes(path);
 +byte[] contents = Base64.DecodeFromUtf8(fileContents.AsSpan()[pemFields.Base64Data]);
 ```
 
+## New Method Overloads in ISOWeek for DateOnly Type
+
+The ISOWeek class was originally designed to work exclusively with DateTime, as it was introduced before the DateOnly type existed. Now that DateOnly is available, it makes sense for ISOWeek to support it as well.
+
+```C#
+    public static class ISOWeek 
+    {
+        // New overloads
+        public static int GetWeekOfYear(DateOnly date);
+        public static int GetYear(DateOnly date);
+        public static DateOnly ToDateOnly(int year, int week, DayOfWeek dayOfWeek);
+    }
+```to work 
+
 ## Feature
 
 This is something about the feature
