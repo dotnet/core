@@ -43,6 +43,34 @@ byte[] fileContents = File.ReadAllBytes(path);
 +byte[] contents = Base64.DecodeFromUtf8(fileContents.AsSpan()[pemFields.Base64Data]);
 ```
 
+## ZipArchive performance and memory improvements
+
+Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview 1 to improve the performance and memory usage of `ZipArchive`:
+
+- [#102704](https://github.com/dotnet/runtime/pull/102704) - This PR optimizes the way entries are written to a `ZipArchive` when in `Update` mode. Previously, all `ZipArchiveEntries` would be loaded into memory and rewritten, which could lead to high memory usage and performance bottlenecks. The optimization reduces memory usage and improves performance by avoiding the need to load all entries into memory.
+
+  Benchmark in Windows 11 intel Core i7:
+
+    | Benchmark    | Mean    | Error    | StdDev   | Gen0      | Gen1      | Gen2      | Allocated |
+    |---------- |--------:|---------:|---------:|----------:|----------:|----------:|----------:|
+    | Pre-PR | 5.128 s | 0.1346 s | 0.3925 s | 1000.00 | 1000.00 | 1000.00 |      2 GB |
+    | Post-PR | 8.169 ms | 0.2386 ms | 0.7036 ms | | | |      7.24 KB |
+
+  Additional details provided [in the PR description](https://github.com/dotnet/runtime/pull/102704#issue-2317941700).
+
+- [#103153](https://github.com/dotnet/runtime/pull/103153) - This PR enhances the performance of `ZipArchive` by parallelizing the extraction of entries and optimizing internal data structures for better memory usage. These improvements address issues related to performance bottlenecks and high memory usage, making `ZipArchive` more efficient and faster, especially when dealing with large archives.
+
+    Read improvements:
+    - 12-13% reduction in execution time as a baseline, rising to 18-19% as the number of entries in the archive increases.
+    - 33-36% reduction in memory usage.
+    - When latency is introduced, as the number of entries in the archive increases, the reduction in execution time becomes more pronounced - 99.6%.
+
+    Creation improvements:
+    - Execution time is almost identical assuming no latency. As latency increases, the execution time reduces by around 82%
+    - 10% reduction in memory usage.
+
+    Additional benchmarking details provided [in the PR description](https://github.com/dotnet/runtime/pull/103153#issue-2339713028).
+
 ## Feature
 
 This is something about the feature
