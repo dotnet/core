@@ -22,10 +22,10 @@ Patch releases are published monthly, often including fixes for vulnerabilities 
 
 Release notes include:
 
-- Links to binaries
-- Notable changes, including CVEs
-- Compatibility information
-- Updated packages
+* Links to binaries
+* Notable changes, including CVEs
+* Compatibility information
+* Updated packages
 
 Example markdown files:
 
@@ -34,8 +34,8 @@ Example markdown files:
 
 Example JSON files:
 
-- [Major releases index](./releases-index.json)
-- [Major release](./9.0/releases.json)
+* [Major releases index](./releases-index.json)
+* [Major release](./9.0/releases.json)
 
 `releases-index.json` and all the files it references are stored in blob storage and in GitHub. We use GitHub for easy discoverability of the files and Azure Blob Storage as our production platform.
 
@@ -49,8 +49,8 @@ We typically release a preview for the next major version each month. These incl
 
 Examples:
 
-- [.NET 9 Preview 1](./9.0/preview/preview1/README.md)
-- [.NET 9 Preview 6](./9.0/preview/preview6/README.md)
+* [.NET 9 Preview 1](./9.0/preview/preview1/README.md)
+* [.NET 9 Preview 6](./9.0/preview/preview6/README.md)
 
 This content is used as source material for [What's New](https://learn.microsoft.com/dotnet/core/whats-new/) pages in official Microsoft docs.
 
@@ -62,8 +62,8 @@ Supported OS information is published for each major release. This information i
 
 Examples:
 
-- [.NET 8 Supported OSes (json)](./8.0/supported-os.json)
-- [.NET 8 Supported OSes (markdown)](./8.0/supported-os.md)
+* [.NET 8 Supported OSes (json)](./8.0/supported-os.json)
+* [.NET 8 Supported OSes (markdown)](./8.0/supported-os.md)
 
 ## OS packages
 
@@ -71,5 +71,5 @@ OS package information is published for each major release. This information ind
 
 Examples:
 
-- [.NET 9 OS packages (json)](./9.0/os-packages.json)
-- [.NET 9 OS packages (markdown)](./9.0/os-packages.md)
+* [.NET 9 OS packages (json)](./9.0/os-packages.json)
+* [.NET 9 OS packages (markdown)](./9.0/os-packages.md)
