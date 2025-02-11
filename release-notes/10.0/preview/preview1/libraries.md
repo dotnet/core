@@ -68,8 +68,11 @@ The change introduces new APIs that work with spans of characters, reducing the 
     public static class StringNormalizationExtensions
     {
         public static int GetNormalizedLength(this ReadOnlySpan<char> source, NormalizationForm normalizationForm = NormalizationForm.FormC);
-
+        public static bool IsNormalized(this ReadOnlySpan<char> source, NormalizationForm normalizationForm = NormalizationForm.FormC);
         public static bool TryNormalize(this ReadOnlySpan<char> source, Span<char> destination, out int charsWritten, NormalizationForm normalizationForm = NormalizationForm.FormC);
+
+
+
 
 
 
