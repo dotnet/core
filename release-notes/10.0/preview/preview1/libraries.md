@@ -57,6 +57,22 @@ The ISOWeek class was originally designed to work exclusively with DateTime, as 
     }
 ```
 
+## String Normalization APIs to Work with Span of Characters
+
+Unicode string normalization has been supported for a long time, but existing APIs have only worked with the string type. This means that callers with data stored in different forms, such as character arrays or spans, must allocate a new string to use these APIs. 
+Additionally, APIs that return a normalized string always allocate a new string to represent the normalized output.
+
+The change introduces new APIs that work with spans of characters, reducing the restriction to string types and helping to avoid unnecessary allocations.
+
+```C#
+    public static class StringNormalizationExtensions
+    {
+        public static int GetNormalizedLength(this ReadOnlySpan<char> source, NormalizationForm normalizationForm = NormalizationForm.FormC);
+        public static bool IsNormalized(this ReadOnlySpan<char> source, NormalizationForm normalizationForm = NormalizationForm.FormC);
+        public static bool TryNormalize(this ReadOnlySpan<char> source, Span<char> destination, out int charsWritten, NormalizationForm normalizationForm = NormalizationForm.FormC);
+    }
+```
+
 ## ZipArchive performance and memory improvements
 
 Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview 1 to improve the performance and memory usage of `ZipArchive`:
