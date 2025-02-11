@@ -73,6 +73,30 @@ The change introduces new APIs that work with spans of characters, reducing the 
     }
 ```
 
+## Adding TimeSpan.FromMilliseconds Overload with a Single Parameter
+
+Previously, we introduced the following method without adding an overload that takes a single parameter:
+
+```C#
+public static TimeSpan FromMilliseconds(long milliseconds, long microseconds = 0);
+```
+
+Although this works since the second parameter is optional, it causes a compilation error when used in a LINQ expression like:
+
+```C#
+Expression<Action> a = () => TimeSpan.FromMilliseconds(1000);
+```
+
+The issue arises because LINQ expressions cannot handle optional parameters. To address this, we are introducing an overload that takes a single parameter and modifying the existing method to make the second parameter mandatory:
+
+```C#
+public readonly struct TimeSpan  
+{
+    public static TimeSpan FromMilliseconds(long milliseconds, long microseconds); // Second parameter is no longer optional
+    public static TimeSpan FromMilliseconds(long milliseconds);  // New overload
+}
+```
+
 ## ZipArchive performance and memory improvements
 
 Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview 1 to improve the performance and memory usage of `ZipArchive`:
