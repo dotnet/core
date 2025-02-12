@@ -2,7 +2,7 @@
 
 .NET 10 Preview 1 includes new Entity Framework Core features & enhancements:
 
-- [Support for the .NET 10 LeftJoin operator](#support-for-left-join)
+- [Support for the .NET 10 LeftJoin operator](#support-for-the-net-10-leftjoin-operator)
 - [ExecuteUpdateAsync now accepts a regular, non-expression lambda](#executeupdateasync-now-accepts-a-regular-non-expression-lambda)
 - [Several small improvements](#small-improvements)
 
@@ -10,8 +10,6 @@ Entity Framework Core 10 updates:
 
 - [What's new in Entity Framework Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/whatsnew) documentation
 - [Breaking change in Entity Framework Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/breaking-changes)
-
-<a name="support-for-left-join"></a>
 
 ## Support for the .NET 10 LeftJoin operator
 
