@@ -66,10 +66,28 @@ We’ve introduced the following APIs in Windows Forms for .NET 10 Preview 1:
 
 ## New Configuration Switch
 
-If an application is unable to adopt the new APIs, and requires a fallback to `BinaryFormatter` serialization during Clipboard and Drag/Drop operations, the developer will need to take additional action. In .NET 9, calls to `BinaryFormatter` will always throw a `PlatformNotSupportedException` unless the developer follows the instructions located here: [BinaryFormatter compatibility package](https://learn.microsoft.com/dotnet/standard/serialization/binaryformatter-migration-guide/compatibility-package) . In .NET 10 Preview 1, WinForms will also by default disable the use of `BinaryFormatter` at the application level using the same compatibility switches. Additionally, we allow developer to control `BinaryFormatter` usage in Clipboard only with a new compatibility switch `Windows.ClipboardDragDrop.EnableUnsafeBinaryFormatterSerialization`. For full compatibility application should reference the unsupported compatibility package and opt in to both configuration switches. 
+- `Windows.ClipboardDragDrop.EnableUnsafeBinaryFormatterSerialization`
 
-## Windows Forms updates in .NET 10:
+## Considerations for BinaryFormatter usage with the Clipboard
+
+### Scenarios that work without any added reference to BinaryFormatter
+
+Applications that use the new .NET Clipboard APIs for standard data types or explicitly use JSON serialization will work seamlessly without needing any reference to `BinaryFormatter`. For instance, the new APIs like `SetDataAsJson` and `TryGetData<T>` are designed to handle common .NET types such as primitive types and `System.Drawing.Bitmap` without relying on `BinaryFormatter`. These APIs ensure type safety and provide mechanisms to constrain incoming data, making them suitable for most scenarios where data exchange is straightforward and does not involve complex types. Serialization using these methods is considered best practice, and developers are strongly encouraged to move in this direction.
+
+### Scenarios that require full backwards compatibility in serialization
+
+For applications that still rely on `BinaryFormatter` for custom format serialization or need to maintain complete compatibility with .NET Framework applications, a reference to the out-of-band, unsupported `System.Runtime.Serialization.Formatters` package and the corresponding AppContext switch is required as detailed [here](https://learn.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-migration-guide/compatibility-package) . This is particularly necessary for scenarios where complex types are involved, and the application cannot migrate to the new JSON-based APIs. In such cases, developers must explicitly opt-in to enable BinaryFormatter serialization and deserialization by setting the `ClipboardDragDrop.EnableUnsafeBinaryFormatterSerialization` switch to `true` in the configuration file in addition to `EnableUnsafeBinaryFormatterSerialization` flag to `true`. The advantage to this approach is that `BinaryFormatter` can be explicitly disabled for Clipboard scenarios, while still being allowed in other parts of the application. This ensures that the application can continue to function while gradually transitioning to safer alternatives.
+
+### Best practices to consider when migrating to the new Clipboard APIs
+
+1. *Replace obsolete APIs*  Start by replacing the obsolete `GetData` and `SetData` methods with the new `TryGetData<T>` and `SetDataAsJson` methods. This ensures type safety and avoids the risks associated with unbounded deserialization.
+1. *Use JSON Serialization:* For complex types, use JSON serialization instead of BinaryFormatter. The new APIs like `SetDataAsJson` and `TryGetData<T>` are designed to handle common .NET types and JSON serialization.
+1. *Constrain incoming data:* The new APIs provide ways to ensure that only expected types are deserialized, reducing the risk of deserialization attacks.
+1. *Opt-In only for compatibility:* If your application still relies on `BinaryFormatter` for custom format serialization or needs to maintain compatibility with .NET Framework applications, use the configuration switch to enable BinaryFormatter serialization and deserialization. This should be done cautiously and only when necessary. Separately enable BinaryFormatter support during Clipboard serialization and dersialization with the new configuration switch.
+
+## Windows Forms updates in .NET 10
 
 - [What's new in Windows Forms in .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100) documentation.
+- [Issues List for Windows Forms in .NET 10 Preview 1](https://github.com/dotnet/winforms/issues?q=is%3Aissue%20milestone%3A%2210.0%20Preview1%22%20)
 
 **AI-assisted content.** This article was partially created with the help of AI. An author reviewed and revised the content as needed. Learn moreAI-assisted content. This article was partially created with the help of AI. An author reviewed and revised the content as needed. [Learn more](https://devblogs.microsoft.com/principles-for-ai-generated-content/)
