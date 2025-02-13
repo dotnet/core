@@ -17,10 +17,12 @@ This is something about the feature
 .NET 10 Preview 1:
 
 
-* [Discussion](https://aka.ms/dotnet/9/preview1)
+* [Discussion](https://aka.ms/dotnet/10/preview1)
+
 * [Release notes](README.md)
 
-> **Known Issue:** building `net8.0-*` target frameworks from .NET 9 does not work in preview 1.
+> **Known Issue:** building `net8.0-*` target frameworks from .NET 10 does not work in preview 1.
+
 
 ## .NET for Android
 
