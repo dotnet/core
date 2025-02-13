@@ -82,7 +82,8 @@ For applications that still rely on `BinaryFormatter` for custom format serializ
 
 1. *Replace obsolete APIs*  Start by replacing the obsolete `GetData` methods with the new `TryGetData<T>`. This ensures type safety and avoids the risks associated with unbounded deserialization.
 
-1. *Use JSON Serialization:* For complex types, use JSON serialization instead of BinaryFormatter, replace `SetData` with the new APIs like `SetDataAsJson`.  The `TryGetData<T>` APIs are designed to handle common .NET types and JSON serialization.
+1. *Use JSON Serialization:* For complex types, use JSON serialization instead of BinaryFormatter, replace `SetData` with the new APIs like `SetDataAsJson`. The `TryGetData<T>` APIs are designed to handle common .NET types and JSON serialization.
+
 
 #### Best practices to consider when migrating to the new Clipboard APIs
 
