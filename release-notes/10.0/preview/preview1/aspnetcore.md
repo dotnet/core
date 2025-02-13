@@ -8,8 +8,8 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Detect if URL is local using `RedirectHttpResult.IsLocalUrl`](#detect-if-url-is-local-using-redirecthttpresultislocalurl)
 - [Better support for testing apps with top-level statements](#better-support-for-testing-apps-with-top-level-statements)
 - [QuickGrid `RowClass` parameter](#quickgrid-rowclass-parameter)
-- [Route syntax highlighting for Blazor `RouteAttribute`](#route-syntax-highlighting-for-blazor-routeattribute)
 - [Blazor script as a static web asset](#blazor-script-as-a-static-web-asset)
+- [Route syntax highlighting for Blazor `RouteAttribute`](#route-syntax-highlighting-for-blazor-routeattribute)
 
 ASP.NET Core updates in .NET 10 Preview 1:
 
