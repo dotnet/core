@@ -17,12 +17,12 @@ Consider the C-style approach of looping over an array:
 ```csharp
 static int Sum(int[] array)
 {
-	int sum = 0;
-	for (int i = 0; i < array.Length; i++)
-	{
-		sum += array[i];
-	}
-	return sum;
+    int sum = 0;
+    for (int i = 0; i < array.Length; i++)
+    {
+        sum += array[i];
+    }
+    return sum;
 }
 ```
 
@@ -31,13 +31,13 @@ This code shape is easy for the JIT to optimize, mainly because there aren't any
 ```csharp
 static int Sum(int[] array)
 {
-	int sum = 0;
+    int sum = 0;
     IList<int> temp = array;
-	foreach (var num in temp)
-	{
-		sum += num;
-	}
-	return sum;
+    foreach (var num in temp)
+    {
+        sum += num;
+    }
+    return sum;
 }
 ```
 
