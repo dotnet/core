@@ -5,7 +5,8 @@
 - [`unmanaged` constraint support](#unmanaged-constraint-support)
 - [Honor overload resolution priority](#honor-overload-resolution-priority)
 
-These features are part of our strategy to ensure that Visual Basic can consume updated features in C# and the runtime. In both cases, you won't change how you write Visual Basic. You'll just find it easier to use the latest runtime APIs.
+These features are part of our strategy to ensure that Visual Basic can consume updated features in C# and the runtime. These features won't change how you write Visual Basic code, you'll just find it easier to use the latest runtime APIs.
+
 
 Visual Basic updates:
 
