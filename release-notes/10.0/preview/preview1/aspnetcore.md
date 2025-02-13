@@ -168,7 +168,13 @@ For more information, see [Style a table row based on the row item](https://lear
 
 ## Blazor script as a static web asset
 
-In prior releases of .NET, the Blazor framework script is served from an embedded resource in the ASP.NET Core shared framework. In .NET 10, the Blazor script is now served as a static web asset with automatic compression and fingerprinting enabled to reduce the download size and improve caching of the file.
+In prior releases of .NET, the Blazor framework script is served from an embedded resource in the ASP.NET Core shared framework. In .NET 10, the Blazor script is now served as a static web asset with automatic precompression and fingerprinting enabled to reduce the download size and improve caching of the file.
+
+Size comparison for *blazor.web.js* in .NET 10:
+
+- **Uncompressed**: 183 KB
+- **Precompressed**: 43 KB
+- **Size reduction**: 76%
 
 ## Route syntax highlighting for Blazor `RouteAttribute`
 
