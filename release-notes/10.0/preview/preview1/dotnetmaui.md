@@ -32,7 +32,8 @@ This release was focused on quality.
 This release was focused on quality.
 
 * [GitHub Release](https://github.com/xamarin/xamarin-macios/releases/)
-* [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET9)
+* [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET10)
+
 
 ## Community Contributions
 
