@@ -176,7 +176,6 @@ The `RouteAttribute` in Blazor now supports route syntax highlighting to help vi
 
 Thank you [@IEvangelist](https://github.com/IEvangelist) for this contribution!
 
-```csharp
 ## Community contributors
 
 Thank you contributors! ❤️
