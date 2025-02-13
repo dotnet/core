@@ -14,7 +14,8 @@
 
 This is something about the feature
 
-.NET 9 Preview 1:
+.NET 10 Preview 1:
+
 
 * [Discussion](https://aka.ms/dotnet/9/preview1)
 * [Release notes](README.md)
