@@ -119,9 +119,10 @@ Generated OpenAPI response:
 
 ```json
 "responses": {
-    "200": {
+  "200": {
     "description": "The weather forecast for the next 5 days.",
-    ...
+    "content": { ... }
+  }
 }
 ```
 
