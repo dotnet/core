@@ -5,7 +5,7 @@
 - [`unmanaged` constraint support](#unmanaged-constraint-support)
 - [Honor overload resolution priority](#honor-overload-resolution-priority)
 
-These features is part of our strategy to ensure that Visual Basic can consume updated features in C# and the runtime. In both cases, you won't change how you write Visual Basic. You'll just find it easier to use the latest runtime APIs.
+These features are part of our strategy to ensure that Visual Basic can consume updated features in C# and the runtime. In both cases, you won't change how you write Visual Basic. You'll just find it easier to use the latest runtime APIs.
 
 Visual Basic updates:
 
@@ -14,7 +14,7 @@ Visual Basic updates:
 
 ## `unmanaged` constraint support
 
-C# added the `unmanaged` generic constraint. The Visual Basic compiler now interprets that constraint and enforces it. Previously, the Visual Basic compiler issue an error if you access a type parameter with the `unmanaged` constraint. You can learn more in the article on [generic types](https://learn.microsoft.com//dotnet/visual-basic/programming-guide/language-features/data-types/generic-types#types-of-constraints) in the Visual Basic documentation.
+C# added the `unmanaged` generic constraint. The Visual Basic compiler now interprets that constraint and enforces it. Previously, the Visual Basic compiler issues an error if you access a type parameter with the `unmanaged` constraint. You can learn more in the article on [generic types](https://learn.microsoft.com//dotnet/visual-basic/programming-guide/language-features/data-types/generic-types#types-of-constraints) in the Visual Basic documentation.
 
 ## Honor overload resolution priority
 
