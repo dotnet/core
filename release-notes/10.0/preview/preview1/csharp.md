@@ -32,7 +32,8 @@ You can learn more in the article on [built-in types](https://learn.microsoft.co
 
 You can add parameter modifiers, such as `ref`, `in`, or `out` to lambda expressions without specifying the type of the parameters. This makes it easier for you to use these modifiers. You can learn more in the article on [lambda expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions.md#input-parameters-of-a-lambda-expression) in the C# language reference.
 
-## Preview feature: String literals in data section
+## Experimental feature: String literals in data section
+
 
 This opt-in experimental feature allows changing how string literals in C# programs are emitted into PE files. By turning on the feature flag, string literals (where possible) are emitted as UTF-8 data into a different section of the PE file without a data limit. The emit format is similar to explicit UTF-8 string literals.
 
