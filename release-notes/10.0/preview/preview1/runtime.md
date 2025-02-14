@@ -52,13 +52,28 @@ The JIT can now devirtualize and inline array interface methods, thanks to work 
 
 In .NET 9, the JIT gained the ability to allocate objects on the stack, when the object is guaranteed to not outlive its parent method. Not only does stack allocation reduce the number of objects the GC has to track, but it also unlocks other optimizations: For example, after an object has been stack-allocated, the JIT can consider replacing it entirely with its scalar values. Because of this, stack allocation is key to reducing the abstraction penalty of reference types.
 
-Thanks to [contributions](https://github.com/dotnet/runtime/pull/104906) from @hez2010, the JIT will now stack-allocate small, fixed-sized arrays of value types that don't contain GC pointers when it can make the same lifetime guarantees described above. Among other [stack allocation enhancements](https://github.com/dotnet/runtime/issues/104936), we plan to expand this ability to arrays of reference types in the coming previews.
+Thanks to [dotnet/runtime #104906](https://github.com/dotnet/runtime/pull/104906) (credit: [@hez2010](https://github.com/hez2010)), the JIT will now stack-allocate small, fixed-sized arrays of value types that don't contain GC pointers when it can make the same lifetime guarantees described above. Consider the following example:
+
+```csharp
+static void Sum()
+{
+    int[] numbers = {1, 2, 3};
+    int sum = 0;
+    for (int i = 0; i < numbers.Length; i++)
+    {
+        sum += numbers[i];
+    }
+    Console.WriteLine(sum);
+}
+```
+
+Because the JIT knows `numbers` is an array of only three integers at compile-time, and it does not outlive a call to `Sum`, it will now allocate it on the stack.
+
+Among other [stack allocation enhancements](https://github.com/dotnet/runtime/issues/104936), we plan to expand this ability to arrays of reference types in the coming previews.
 
 
-## AVX10.2 Support
+## AVX10.2 Support
 
-Preview 1 enables support for the Advanced Vector Extensions (AVX) 10.2 for x64-based processors, thanks to [contributions](https://github.com/dotnet/runtime/pull/111209) from @khushal1996. .NET developers can try out the new intrinsics available in the `System.Runtime.Intrinsics.X86.Avx10v2` class once capable hardware is available. In the next several previews, we plan to further incorporate AVX10.2 support into the JIT's emitter to take full advantage of the instruction set's features.
-
-
-Because AVX10.2-enabled hardware is not yet available, the JIT's support for AVX10.2 is disabled by default for now. We plan to enable it once we have thoroughly tested it.
-
+[dotnet/runtime #111209](https://github.com/dotnet/runtime/pull/111209) (credit: [@khushal1996](https://github.com/khushal1996)) enables support for the Advanced Vector Extensions (AVX) 10.2 for x64-based processors. The new intrinsics available in the `System.Runtime.Intrinsics.X86.Avx10v2` class can be tested once capable hardware is available. In the next several previews, we plan to further incorporate AVX10.2 support into the JIT's emitter to take full advantage of the instruction set's features.
+
+Because AVX10.2-enabled hardware is not yet available, the JIT's support for AVX10.2 is disabled by default for now. We plan to enable it once we have thoroughly tested it.
