@@ -6,7 +6,8 @@
 - [Implicit span conversions](#implicit-span-conversions)
 - [`field` backed properties](#field-backed-properties)
 - [Modifiers on simple lambda parameters](#modifiers-on-simple-lambda-parameters)
-- [Preview feature - String literals in data section](#preview-feature-string-literals-in-data-section)
+- [Experimental feature - String literals in data section](#preview-feature-string-literals-in-data-section)
+
 
 C# 14 updates:
 
@@ -33,6 +34,7 @@ You can add parameter modifiers, such as `ref`, `in`, or `out` to lambda express
 
 ## Preview feature: String literals in data section
 
-This opt-in experimental feature allows changing how string literals in C# programs are emitted into PE files. By turning on the feature flag, string literals (where possible) are emitted as UTF-8 data into a different section of the PE file without a data limit. The emit format is similar to explicit u8 string literals.
+This opt-in experimental feature allows changing how string literals in C# programs are emitted into PE files. By turning on the feature flag, string literals (where possible) are emitted as UTF-8 data into a different section of the PE file without a data limit. The emit format is similar to explicit UTF-8 string literals.
+
 
 You can learn more by reading the feature [documentation](https://github.com/dotnet/roslyn/blob/main/docs/features/string-literals-data-section.md).
