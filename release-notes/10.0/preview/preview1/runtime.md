@@ -32,7 +32,8 @@ This code shape is easy for the JIT to optimize, mainly because there aren't any
 static int Sum(int[] array)
 {
     int sum = 0;
-    IList<int> temp = array;
+    IEnumerable<int> temp = array;
+
     foreach (var num in temp)
     {
         sum += num;
@@ -49,7 +50,10 @@ In Preview 1, the JIT can now devirtualize and inline array interface methods, t
 
 In .NET 9, the JIT gained the ability to allocate objects on the stack, when the object is guaranteed to not outlive its parent method. Not only does stack allocation reduce the number of objects the GC has to track, but it also unlocks other optimizations: For example, after an object has been stack-allocated, the JIT can consider replacing it entirely with its scalar values. Because of this, stack allocation is key to reducing the abstraction penalty of reference types.
 
-In Preview 1, thanks to [contributions](https://github.com/dotnet/runtime/pull/104906) from @hez2010, the JIT will now stack-allocate arrays of value types that don't contain GC pointers when it can make the same lifetime guarantees described above. Among other [stack allocation enhancements](https://github.com/dotnet/runtime/issues/104936), we plan to expand this ability to arrays of reference types in the coming previews.
+In Preview 1, thanks to [contributions](https://github.com/dotnet/runtime/pull/104906) from @hez2010, the JIT will now stack-allocate small fixed-sized arrays of value types that don't contain GC pointers when it can make the same lifetime guarantees described above. Among other [stack allocation enhancements](https://github.com/dotnet/runtime/issues/104936), we plan to expand this ability to arrays of reference types in the coming previews.
+
+
+
 
 ## AVX10.2 Support
 
