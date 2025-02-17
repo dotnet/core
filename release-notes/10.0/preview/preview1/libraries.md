@@ -73,6 +73,34 @@ The change introduces new APIs that work with spans of characters, reducing the 
     }
 ```
 
+
+## Numeric Ordering for String Comparison
+
+Numerical string comparison is a highly requested feature (https://github.com/dotnet/runtime/issues/13979) for comparing strings numerically instead of lexicographically. For example, `2` is less than `10`, so `"2"` should appear before `"10"` when ordered numerically. Similarly, `"2"` and `"02"` are equal numerically. With the new `CompareOptions.NumericOrdering` option, it is now possible to do these types of comparisons:
+
+```cs
+StringComparer numericStringComparer = StringComparer.Create(CultureInfo.CurrentCulture, CompareOptions.NumericOrdering);
+
+Console.WriteLine(numericStringComparer.Equals("02", "2"));
+// Output: True
+
+foreach (string os in new[] { "Windows 8", "Windows 10", "Windows 11" }.Order(numericStringComparer))
+{
+    Console.WriteLine(os);
+}
+
+// Output:
+// Windows 8
+// Windows 10
+// Windows 11
+
+HashSet<string> set = new HashSet<string>(numericStringComparer) { "007" };
+Console.WriteLine(set.Contains("7"));
+// Output: True
+```
+
+Note that this option is not valid for the following index based string operations: `IndexOf`, `LastIndexOf`, `StartsWith`, `EndsWith`, `IsPrefix`, and `IsSuffix`.
+
 ## Adding TimeSpan.FromMilliseconds Overload with a Single Parameter
 
 Previously, we introduced the following method without adding an overload that takes a single parameter:
@@ -178,3 +206,67 @@ Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview
 
     Additional benchmarking details provided [in the PR description](https://github.com/dotnet/runtime/pull/103153#issue-2339713028).
 
+## Additional `TryAdd` and `TryGetValue` overloads for `OrderedDictionary<TKey, TValue>`
+
+`OrderedDictionary<TKey, TValue>` provides `TryAdd` and `TryGetValue` for addition and retrieval like any other `IDictionary<TKey, TValue>` implementation. However, there are scenarios where you might want to perform additional operations, so new overloads have been added which return an index to the entry:
+
+```cs
+public class OrderedDictionary<TKey, TValue>
+{
+    // New overloads
+    public bool TryAdd(TKey key, TValue value, out int index);
+    public bool TryGetValue(TKey key, out TValue value, out int index);
+}
+```
+
+This index can then be used with `GetAt`/`SetAt` for fast access to the entry. An example usage of the new `TryAdd` overload is to add or update a key/value pair in the ordered dictionary:
+
+```cs
+public static void IncrementValue(OrderedDictionary<string, int> orderedDictionary, string key)
+{
+    // Try to add a new key with value 1.
+    if (!orderedDictionary.TryAdd(key, 1, out int index))
+    {
+        // Key was present, so increment the existing value instead.
+        int value = orderedDictionary.GetAt(index).Value;
+        orderedDictionary.SetAt(index, value + 1);
+    }
+}
+```
+
+This new API is now being used in `JsonObject` to improve the performance of updating properties by 10-20%.
+
+## Allow specifying ReferenceHandler in `JsonSourceGenerationOptions`
+
+When using source generators for JSON serialization, the generated context will throw when cycles are serialized or deserialized. This behavior can now be customized by specifying the `ReferenceHandler` in the `JsonSourceGenerationOptionsAttribute`. Here is an example using `JsonKnownReferenceHandler.Preserve`:
+
+```cs
+SelfReference selfRef = new SelfReference();
+selfRef.Me = selfRef;
+
+Console.WriteLine(JsonSerializer.Serialize(selfRef, ContextWithPreserveReference.Default.SelfReference));
+// Output: {"$id":"1","Me":{"$ref":"1"}}
+
+[JsonSourceGenerationOptions(ReferenceHandler = JsonKnownReferenceHandler.Preserve)]
+[JsonSerializable(typeof(SelfReference))]
+internal partial class ContextWithPreserveReference : JsonSerializerContext
+{
+}
+
+internal class SelfReference
+{
+    public SelfReference Me { get; set; }
+}
+```
+
+## More Left-Handed Matrix Transformation Methods
+
+The remaining APIs for creating left-handed tranformation matrices have been added for billboard and constrained billboard matrices. These can be used like their existing right-handed counterparts when using a left-handed coordinate system instead.
+
+```cs
+public partial struct Matrix4x4
+{
+   public static Matrix4x4 CreateBillboardLeftHanded(Vector3 objectPosition, Vector3 cameraPosition, Vector3 cameraUpVector, Vector3 cameraForwardVector)
+   public static Matrix4x4 CreateConstrainedBillboardLeftHanded(Vector3 objectPosition, Vector3 cameraPosition, Vector3 rotateAxis, Vector3 cameraForwardVector, Vector3 objectForwardVector)
+}
+```
