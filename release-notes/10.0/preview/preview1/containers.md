@@ -2,20 +2,9 @@
 
 .NET 10 Preview 1 includes the following updates for container images:
 
-- [New OS: Debian 13 "Trixie"](#new-os-debian-13-trixie)
 - [Ubuntu is now the default OS](#ubuntu-is-now-the-default-os)
+- [New OS: Debian 13 "Trixie"](#new-os-debian-13-trixie)
 - [Ubuntu Chiseled images now contain the Chisel manifest](#ubuntu-chiseled-images-now-contain-the-chisel-manifest)
-
-## New OS: Debian 13 "Trixie"
-
-New images for Debian 13 "Trixie" have been added for .NET 10.
-
-See [dotnet/core#9652](https://github.com/dotnet/core/issues/9652) for more context.
-
-- `docker pull mcr.microsoft.com/dotnet/sdk:10.0-preview-trixie-slim`
-- `docker pull mcr.microsoft.com/dotnet/aspnet:10.0-preview-trixie-slim`
-- `docker pull mcr.microsoft.com/dotnet/runtime:10.0-preview-trixie-slim`
-- `docker pull mcr.microsoft.com/dotnet/runtime-deps:10.0-preview-trixie-slim`
 
 ## Ubuntu is now the default OS
 
@@ -31,6 +20,17 @@ They can be referenced using the `-trixie-slim` suffix.
 For more information, see:
 - [.NET containers supported platforms](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md)
 - [Proposal: Switch to Ubuntu for .NET convenience tags (dotnet/dotnet-docker#5709)](https://github.com/dotnet/dotnet-docker/discussions/5709)
+
+## New OS: Debian 13 "Trixie"
+
+New images for Debian 13 "Trixie" have been added for .NET 10.
+
+See [dotnet/core#9652](https://github.com/dotnet/core/issues/9652) for more context.
+
+- `docker pull mcr.microsoft.com/dotnet/sdk:10.0-preview-trixie-slim`
+- `docker pull mcr.microsoft.com/dotnet/aspnet:10.0-preview-trixie-slim`
+- `docker pull mcr.microsoft.com/dotnet/runtime:10.0-preview-trixie-slim`
+- `docker pull mcr.microsoft.com/dotnet/runtime-deps:10.0-preview-trixie-slim`
 
 ## Ubuntu Chiseled images now contain the Chisel manifest
 
