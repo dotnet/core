@@ -45,6 +45,57 @@ builder.ConfigureMauiHandlers(handlers =>
 
 This release was focused on quality improvements. A detailed list can be found on [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
 
+### Android 16 (Baklava) Beta 1
+
+Google has released [Beta 1](https://android-developers.googleblog.com/2025/01/first-beta-android16.html) of the Android 16 (API-36) SDK.  Support has been added for using these preview APIs.
+
+To target the Android 16 preview API:
+- Use the Android SDK Manager to download the Android 16 (Baklava) Platform
+- Update your project's `TargetFramework` to `net10.0-android36`
+
+### Update Recommended Minimum Supported Android API (https://github.com/dotnet/android/pull/9656)
+
+The .NET for Android project templates have been updated to specify `24` ("Nougat") as the default `$(SupportedOSPlatformVersion)` instead of `21` ("Lollipop").  This prevents users from hitting "desugaring" runtime crashes when using Java default interface methods.
+
+While API-21 is still supported in .NET 10, we recommend updating existing projects to API-24 in order to avoid unexpected runtime errors.
+
+
+### Support for `dotnet run` (https://github.com/dotnet/android/pull/9470)
+
+.NET for Android projects can now be run using `dotnet run`:
+
+```cli
+// Run on the only attached Android physical device
+dotnet run -p:AdbTarget=-d
+
+// Run on the only running Android emulator
+dotnet run -p:AdbTarget=-e
+
+// Run on the specified Android physical device or emulator
+dotnet run -p:AdbTarget="-s emulator-5554"
+```
+
+The `AdbTarget` property is passed to the `adb` (Android Debug Bridge) command tool.
+
+
+### Enable Marshal Methods by Default
+
+A [new way](https://github.com/dotnet/android/pull/7351) of creating the marshal methods needed for Java calling into C# code is now enabled by default. Introduced in .NET 9, we have continued work to stabilize the implementation for .NET 10. This features improves application startup performance.
+
+If you are getting a hang on startup on .NET 10 previews that you didn't see on .NET 9, try disabling marshal methods.  If this fixes the hang, please file an issue letting us know there are still issues with marshal methods.
+
+```xml
+<AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>
+```
+
+### Visual Studio Design-Time Builds no longer invoke `aapt2`
+
+For design-time builds, `aapt2` is no longer invoked; instead, the `.aar` files and underlying Android resources are parsed directly. This reduces the time of a Design-Time Build for some of our unit tests from over 2s to under 600ms.
+
+### Building with JDK-21 is now supported 
+
+.NET for Android projects can now be built with JDK-21.
+
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
 This release was focused on quality improvements. A details list can be found on [xamarin/xamarin-macios GitHub released](https://github.com/xamarin/xamarin-macios/releases/) including a list of [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET10).
