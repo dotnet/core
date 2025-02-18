@@ -37,7 +37,7 @@ builder.Services.AddOpenApi(options =>
 });
 ```
 
-If you are generating the OpenAPI document at build time, you can select the OpenAPI version by setting the `--openapi-version` in the `OpenApiGenerateDocumentsOptions` MSBuild item.
+If you are generating the OpenAPI document at build time, you can select the OpenAPI version by setting the `--openapi-version` in the `OpenApiGenerateDocumentsOptions` MSBuild property.
 
 ```xml
 <!-- Configure build-time OpenAPI generation to produce an OpenAPI 3.0 document. -->
