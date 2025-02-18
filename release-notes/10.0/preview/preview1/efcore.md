@@ -28,7 +28,7 @@ var query = students
         {
             student.student.FirstName,
             student.student.LastName,
-            Department = department?.Name ?? "[NONE]"
+            Department = department.Name ?? "[NONE]"
         });
 ```
 
