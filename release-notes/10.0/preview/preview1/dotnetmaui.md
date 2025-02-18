@@ -1,10 +1,17 @@
 # .NET MAUI in .NET 10 Preview 1 - Release Notes
 
-This release was focused on quality improvements to .NET MAUI. You can find detailed information about the improvements in the GitHub Release below:
+This release was focused on quality improvements to .NET MAUI, .NET for Android, and .NET for iOS, Mac Catalyst, macOS, and tvOS. You can find detailed information about the improvements below:
 
-- [CollectionView enhancements for iOS and Mac Catalyst](#collectionview-enhancements-for-ios-and-mac-catalyst)
-- [.NET MAUI GitHub Release Notes](https://aka.ms/maui10p1)
+- .NET MAUI
+  - [GitHub Release Notes](https://aka.ms/maui10p1)
+  - [CollectionView enhancements for iOS and Mac Catalyst](#collectionview-enhancements-for-ios-and-mac-catalyst)
 - [.NET for Android](#net-for-android)
+  - [Android 16 (Baklava) Beta 1](#android-16-baklava-beta-1)
+  - [Minimum supported Android API recommendations](#updated-recommended-minimum-supported-android-api)
+  - [Building with JDK-21 is now supported](#building-with-jdk-21-is-now-supported)
+  - [`dotnet run` support for Androd projects](#support-for-dotnet-run-for-android)
+  - [Enable marshal methods by default](#enable-marshal-methods-by-default)
+  - [Visual Studio Design-Time Builds no longer invoke `aapt2`](#visual-studio-design-time-builds-no-longer-invoke-aapt2)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
 .NET MAUI updates in .NET 10:
@@ -53,14 +60,19 @@ To target the Android 16 preview API:
 - Use the Android SDK Manager to download the Android 16 (Baklava) Platform
 - Update your project's `TargetFramework` to `net10.0-android36`
 
-### Update Recommended Minimum Supported Android API (https://github.com/dotnet/android/pull/9656)
+### Updated Recommended Minimum Supported Android API
 
 The .NET for Android project templates have been updated to specify `24` ("Nougat") as the default `$(SupportedOSPlatformVersion)` instead of `21` ("Lollipop").  This prevents users from hitting "desugaring" runtime crashes when using Java default interface methods.
 
 While API-21 is still supported in .NET 10, we recommend updating existing projects to API-24 in order to avoid unexpected runtime errors.
 
+> Note: See the main [GitHub pull request](https://github.com/dotnet/android/pull/9656) for more information.
 
-### Support for `dotnet run` (https://github.com/dotnet/android/pull/9470)
+### Building with JDK-21 is now supported 
+
+.NET for Android projects can now be built with JDK-21.
+
+### Support for `dotnet run` for Android
 
 .NET for Android projects can now be run using `dotnet run`:
 
@@ -77,8 +89,9 @@ dotnet run -p:AdbTarget="-s emulator-5554"
 
 The `AdbTarget` property is passed to the `adb` (Android Debug Bridge) command tool.
 
+> Note: See the [GitHub pull request](https://github.com/dotnet/android/pull/9470) for more information.
 
-### Enable Marshal Methods by Default
+### Enable marshal methods by default
 
 A [new way](https://github.com/dotnet/android/pull/7351) of creating the marshal methods needed for Java calling into C# code is now enabled by default. Introduced in .NET 9, we have continued work to stabilize the implementation for .NET 10. This features improves application startup performance.
 
@@ -91,10 +104,6 @@ If you are getting a hang on startup on .NET 10 previews that you didn't see on 
 ### Visual Studio Design-Time Builds no longer invoke `aapt2`
 
 For design-time builds, `aapt2` is no longer invoked; instead, the `.aar` files and underlying Android resources are parsed directly. This reduces the time of a Design-Time Build for some of our unit tests from over 2s to under 600ms.
-
-### Building with JDK-21 is now supported 
-
-.NET for Android projects can now be built with JDK-21.
 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
