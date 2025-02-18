@@ -32,7 +32,7 @@ var query = students
         });
 ```
 
-.NET 10 adds first-class LINQ support for `LeftJoin` method to make those queries much simpler to write. EF Core recognizes the new method, so it can be used in EF LINQ queries instead of the old construct:
+.NET 10 adds first-class LINQ support for `LeftJoin` method, making those queries much simpler to write. EF Core recognizes the new method, so it can be used in EF LINQ queries instead of the old construct:
 
 ```C#
 var query = students
@@ -40,11 +40,11 @@ var query = students
         departments,
         student => student.DepartmentID,
         department => department.ID,
-        (student, departmentList) => new 
+        (student, department) => new 
         { 
-            student.student.FirstName,
-            student.student.LastName,
-            Department = department?.Name ?? "[NONE]"
+            student.FirstName,
+            student.LastName,
+            Department = department.Name ?? "[NONE]"
         });
 ```
 
