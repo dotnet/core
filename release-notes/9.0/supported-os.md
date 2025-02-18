@@ -26,7 +26,7 @@ Notes:
 | ----------------------------- | ---------------------------- | --------------------- | -------------------- |
 | [iOS][2]                      | 12.2 to 18                   | Arm64                 | None                 |
 | [iPadOS][3]                   | 12.2 to 18                   | Arm64                 | None                 |
-| [macOS][4]                    | Venture (13) to Sequoia (15) | Arm64, x64            | None                 |
+| [macOS][4]                    | Ventura (13) to Sequoia (15) | Arm64, x64            | None                 |
 | [tvOS][5]                     | 12.2 to 18                   | Arm64                 | None                 |
 
 Notes:
