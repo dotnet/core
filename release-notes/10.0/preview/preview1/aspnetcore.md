@@ -141,7 +141,7 @@ if (RedirectHttpResult.IsLocalUrl(url))
 
 Thank you [@martincostello](https://github.com/martincostello) for this contribution!
 
-## Better support for testing apps with top-level statements
+## Improvements to integration testing of apps with top-level statements
 
 .NET 10 now has better support for testing apps that use top-level statements. Previously developers had to manually add `public partial class Program` to the *Program.cs* file so that the test project could reference the `Program` class. This is because the top-level statement feature in C# 9 generated a `Program` class that was declared as internal.
 
