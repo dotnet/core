@@ -2,8 +2,8 @@
 
 .NET 10 Preview 1 includes the following updates for container images:
 
-- [Ubuntu is now the default OS](#ubuntu-is-now-the-default-os)
-- [New OS: Debian 13 "Trixie"](#new-os-debian-13-trixie)
+- [`10.0-preview` tags use Ubuntu 24.04](#ubuntu-is-now-the-default-os)
+- [Debian images use Debian 13 "Trixie"](#new-os-debian-13-trixie)
 - [Ubuntu Chiseled images now contain the Chisel manifest](#ubuntu-chiseled-images-now-contain-the-chisel-manifest)
 
 ## Ubuntu is now the default OS
@@ -21,7 +21,7 @@ For more information, see:
 - [.NET containers supported platforms](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md)
 - [Proposal: Switch to Ubuntu for .NET convenience tags (dotnet/dotnet-docker#5709)](https://github.com/dotnet/dotnet-docker/discussions/5709)
 
-## New OS: Debian 13 "Trixie"
+## Debian images use Debian 13 "Trixie"
 
 New images for Debian 13 "Trixie" have been added for .NET 10.
 
