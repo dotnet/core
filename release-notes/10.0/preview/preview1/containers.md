@@ -2,11 +2,11 @@
 
 .NET 10 Preview 1 includes the following updates for container images:
 
-- [`10.0-preview` tags use Ubuntu 24.04](#ubuntu-is-now-the-default-os)
-- [Debian images use Debian 13 "Trixie"](#new-os-debian-13-trixie)
+- [`10.0-preview` tags use Ubuntu 24.04](#100-preview-tags-use-ubuntu-2404)
+- [Debian images use Debian 13 "Trixie"](#debian-images-use-debian-13-trixie)
 - [Ubuntu Chiseled images now contain the Chisel manifest](#ubuntu-chiseled-images-now-contain-the-chisel-manifest)
 
-## Ubuntu is now the default OS
+## `10.0-preview` tags use Ubuntu 24.04
 
 The default OS for .NET tags has been changed from Debian to Ubuntu.
 This applies to all .NET tags that do not explicitly specify an OS.
