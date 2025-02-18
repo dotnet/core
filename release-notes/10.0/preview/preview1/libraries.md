@@ -129,7 +129,8 @@ public readonly struct TimeSpan
 
 Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview 1 to improve the performance and memory usage of `ZipArchive`:
 
-- [#102704](https://github.com/dotnet/runtime/pull/102704) - This PR optimizes the way entries are written to a `ZipArchive` when in `Update` mode. Previously, all `ZipArchiveEntries` would be loaded into memory and rewritten, which could lead to high memory usage and performance bottlenecks. The optimization reduces memory usage and improves performance by avoiding the need to load all entries into memory.
+- [dotnet/runtime #102704](https://github.com/dotnet/runtime/pull/102704) optimizes the way entries are written to a `ZipArchive` when in `Update` mode. Previously, all `ZipArchiveEntries` would be loaded into memory and rewritten, which could lead to high memory usage and performance bottlenecks. The optimization reduces memory usage and improves performance by avoiding the need to load all entries into memory.
+
 
     Adding a 2GB zip file to an existing archive showed:
 
@@ -143,9 +144,11 @@ Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview
     | Benchmark | Baseline | .NET 9.0  | 4.187 s | 83.3751 ms | 177.6792 ms | 1.002 |    0.06 | 1000.0000 | 1000.0000 | 1000.0000 | 2 GB |       1.000 |
     | Benchmark | CoreRun  | .NET 10.0 |     9.452 ms |  0.1583 ms |   0.1322 ms | 0.002 |    0.00 |         - |         - |         - |    7.01 KB |       0.000 |
 
-  Additional details provided [in the PR description](https://github.com/dotnet/runtime/pull/102704#issue-2317941700).
+  Additional details are provided in [dotnet/runtime #102704](https://github.com/dotnet/runtime/pull/102704#issue-2317941700).
 
-- [#103153](https://github.com/dotnet/runtime/pull/103153) - This PR enhances the performance of `ZipArchive` by parallelizing the extraction of entries and optimizing internal data structures for better memory usage. These improvements address issues related to performance bottlenecks and high memory usage, making `ZipArchive` more efficient and faster, especially when dealing with large archives.
+
+- [dotnet/runtime #103153](https://github.com/dotnet/runtime/pull/103153) enhances the performance of `ZipArchive` by parallelizing the extraction of entries and optimizing internal data structures for better memory usage. These improvements address issues related to performance bottlenecks and high memory usage, making `ZipArchive` more efficient and faster, especially when dealing with large archives.
+
 
     Reading a zip archive showed:
 
