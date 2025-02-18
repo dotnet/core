@@ -99,7 +99,3 @@ For design-time builds, `aapt2` is no longer invoked; instead, the `.aar` files 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
 This release was focused on quality improvements. A details list can be found on [xamarin/xamarin-macios GitHub released](https://github.com/xamarin/xamarin-macios/releases/) including a list of [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET10).
-
-## Community Contributions
-
-Thanks to contributors ...
