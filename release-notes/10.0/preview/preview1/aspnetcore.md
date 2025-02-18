@@ -6,7 +6,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Generate OpenAPI documents in YAML format](#generate-openapi-documents-in-yaml-format)
 - [Response description on `ProducesResponseType`](#response-description-on-producesresponsetype)
 - [Detect if URL is local using `RedirectHttpResult.IsLocalUrl`](#detect-if-url-is-local-using-redirecthttpresultislocalurl)
-- [Better support for testing apps with top-level statements](#better-support-for-testing-apps-with-top-level-statements)
+- [Improvements to integration testing of apps with top-level statements](#improvements-to-integration-testing-of-apps-with-top-level-statements)
 - [QuickGrid `RowClass` parameter](#quickgrid-rowclass-parameter)
 - [Blazor script as a static web asset](#blazor-script-as-a-static-web-asset)
 - [Route syntax highlighting for Blazor `RouteAttribute`](#route-syntax-highlighting-for-blazor-routeattribute)
