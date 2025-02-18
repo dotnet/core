@@ -11,7 +11,7 @@ This file is generated from [supported-os.json](supported-os.json) and is based 
 
 | OS                            | Versions                    | Architectures         | Lifecycle            |
 | ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Android][0]                  | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]       |
+| [Android][0]                  | 21 to 35                    | Arm32, Arm64, x64     | [Lifecycle][1]       |
 
 Notes:
 
@@ -23,11 +23,11 @@ Notes:
 ## Apple
 
 | OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [iOS][2]                      | 18, 17                      | Arm64                 | None                 |
-| [iPadOS][3]                   | 18, 17                      | Arm64                 | None                 |
-| [macOS][4]                    | 15, 14, 13                  | Arm64, x64            | None                 |
-| [tvOS][5]                     | 18, 17, 16, 15, 14, 13, 12.2 | Arm64                | None                 |
+| ----------------------------- | ---------------------------- | --------------------- | -------------------- |
+| [iOS][2]                      | 12.2 to 18                   | Arm64                 | None                 |
+| [iPadOS][3]                   | 12.2 to 18                   | Arm64                 | None                 |
+| [macOS][4]                    | Venture (13) to Sequoia (15) | Arm64, x64            | None                 |
+| [tvOS][5]                     | 12.2 to 18                   | Arm64                 | None                 |
 
 Notes:
 
