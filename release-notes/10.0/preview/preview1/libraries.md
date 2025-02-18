@@ -14,7 +14,8 @@ Finding certificates uniquely by thumbprint is a fairly common operation,
 but the `X509Certificate2Collection.Find` method (for the `FindByThumbprint` mode) only searches for the SHA-1 Thumbprint value.
 
 Since SHA-2-256 ("SHA256") and SHA-3-256 have the same lengths,
-we decided that it wasn't pure goodness to let the Find method find any vaguely matching thumbprints.
+we decided that making the Find method find any vaguely matching thumbprints was not the best option.
+
 Instead, we introduced a new method that accepts the name of the hash algorithm that you want to use for matching.
 
 ```C#
