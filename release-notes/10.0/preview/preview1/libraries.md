@@ -2,8 +2,6 @@
 
 .NET 10 Preview 1 includes new .NET Libraries features & enhancements:
 
-- [Feature](#feature)
-
 .NET Libraries updates in .NET 10:
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
@@ -65,7 +63,6 @@ Additionally, APIs that return a normalized string always allocate a new string 
 
 The change introduces new APIs that work with spans of characters, expanding normalization beyond string types and helping to avoid unnecessary allocations.
 
-
 ```C#
     public static class StringNormalizationExtensions
     {
@@ -75,10 +72,9 @@ The change introduces new APIs that work with spans of characters, expanding nor
     }
 ```
 
-
 ## Numeric Ordering for String Comparison
 
-Numerical string comparison is a highly requested feature (https://github.com/dotnet/runtime/issues/13979) for comparing strings numerically instead of lexicographically. For example, `2` is less than `10`, so `"2"` should appear before `"10"` when ordered numerically. Similarly, `"2"` and `"02"` are equal numerically. With the new `CompareOptions.NumericOrdering` option, it is now possible to do these types of comparisons:
+Numerical string comparison is a highly requested feature (<https://github.com/dotnet/runtime/issues/13979>) for comparing strings numerically instead of lexicographically. For example, `2` is less than `10`, so `"2"` should appear before `"10"` when ordered numerically. Similarly, `"2"` and `"02"` are equal numerically. With the new `CompareOptions.NumericOrdering` option, it is now possible to do these types of comparisons:
 
 ```cs
 StringComparer numericStringComparer = StringComparer.Create(CultureInfo.CurrentCulture, CompareOptions.NumericOrdering);
@@ -133,11 +129,10 @@ Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview
 
 - [dotnet/runtime #102704](https://github.com/dotnet/runtime/pull/102704) optimizes the way entries are written to a `ZipArchive` when in `Update` mode. Previously, all `ZipArchiveEntries` would be loaded into memory and rewritten, which could lead to high memory usage and performance bottlenecks. The optimization reduces memory usage and improves performance by avoiding the need to load all entries into memory.
 
-
     Adding a 2GB zip file to an existing archive showed:
 
-    - A 99.8% reduction in execution time.
-    - A 99.9996% reduction in memory usage.
+  - A 99.8% reduction in execution time.
+  - A 99.9996% reduction in memory usage.
 
     Benchmarks:
 
@@ -148,14 +143,12 @@ Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview
 
   Additional details are provided in [dotnet/runtime #102704](https://github.com/dotnet/runtime/pull/102704#issue-2317941700).
 
-
 - [dotnet/runtime #103153](https://github.com/dotnet/runtime/pull/103153) enhances the performance of `ZipArchive` by parallelizing the extraction of entries and optimizing internal data structures for better memory usage. These improvements address issues related to performance bottlenecks and high memory usage, making `ZipArchive` more efficient and faster, especially when dealing with large archives.
-
 
     Reading a zip archive showed:
 
-    - An 18% reduction in execution time.
-    - An 18% reduction in memory usage.
+  - An 18% reduction in execution time.
+  - An 18% reduction in memory usage.
 
     Benchmarks:
 
@@ -190,8 +183,8 @@ Two significant PRs have been made by contributor @edwardneal in .NET 10 Preview
 
     Creating an archive showed:
 
-    - A 23-35% reduction in execution time.
-    - A 2% reduction in memory usage.
+  - A 23-35% reduction in execution time.
+  - A 2% reduction in memory usage.
 
     Benchmarks:
 
