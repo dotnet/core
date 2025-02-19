@@ -14,5 +14,5 @@ While this feature is enabled by default for the TFMs listed above, you can disa
 As part of this feature, a few different validations may be raised, [NU1509](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1509), [NU1510](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1510) and [NU1511](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1511).
 The most frequent warning you may see is `NU1510`, which will warn when you have unnecessary direct `PackageReference` in your project. Consider conditioning or remove those PackageReference to address this warning.
 
-[nuget-audit]: https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages
+[nuget-audit]: https://learn.microsoft.com/nuget/concepts/auditing-packages
 [prune-package-references-spec]: https://github.com/NuGet/Home/blob/451c27180d14214bca60483caee57f0dc737b8cf/accepted/2024/prune-package-reference.md
