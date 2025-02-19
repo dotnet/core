@@ -13,6 +13,8 @@ This release was focused on quality improvements to .NET MAUI, .NET for Android,
   - [Enable marshal methods by default](#enable-marshal-methods-by-default)
   - [Visual Studio Design-Time Builds no longer invoke `aapt2`](#visual-studio-design-time-builds-no-longer-invoke-aapt2)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
+  - [Trimmer warnings enabled by default](#trimmer-warnings-enabled-by-default)
+  - [Bundling original resources in libraries](#bundling-original-resources-in-libraries)
 
 .NET MAUI updates in .NET 10:
 
@@ -108,3 +110,41 @@ For design-time builds, `aapt2` is no longer invoked; instead, the `.aar` files 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
 This release was focused on quality improvements. A details list can be found on [xamarin/xamarin-macios GitHub released](https://github.com/xamarin/xamarin-macios/releases/) including a list of [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET10).
+
+### Trimmer warnings enabled by default
+
+In the past we've suppressed trimmer warnings, because the base class library produced trimmer warnings, which meant that it wouldn't be possible for developers to fix all the trimmer warnings.
+
+However, in .NET 9 we believe we fixed all the trimmer warnings from our own code, so now we're ready to for developers to do the same, and thus we're enabling trimmer warnings by default.
+
+This can be disabled, by adding this to the project file:
+
+```xml
+<PropertyGroup>
+    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+</PropertyGroup>
+```
+
+Ref: https://github.com/xamarin/xamarin-macios/issues/21293
+
+### Bundling original resources in libraries
+
+Library projects can have various types of bundle resources (storyboards, xibs, property lists, png images, CoreML models, texture atlases, etc.), and they're bundled into the compiled library as embedded resources.
+
+If any processing can be done (such as compiling storyboards or xibs, or optimizing property lists/png images, etc), this has historically been done before embedding, but this complicates library builds a lot, because this processing:
+
+* Needs to run on a Mac, because compiling xibs/storyboards can only be done on a Mac.
+* Needs Apple's toolchain around.
+* Makes it impossible to do any decision-making based on the original resources when building the app.
+
+So we've added opt-in support for embedding the original resource in libraries in .NET 9, and making it opt-out in .NET 10.
+
+The default behavior can be changed in the project file like this:
+
+```xml
+<PropertyGroup>
+    <BundleOriginalResources>false</BundleOriginalResources>
+</PropertyGroup>
+```
+
+Ref: https://github.com/xamarin/xamarin-macios/issues/19028
