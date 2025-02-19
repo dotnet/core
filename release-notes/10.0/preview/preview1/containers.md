@@ -38,6 +38,7 @@ See [dotnet/core#9652](https://github.com/dotnet/core/issues/9652) for more cont
 The Chisel manifest describes the package contents of the image and can also be used to install additional packages on top of existing Chiseled base images.
 
 For more information, see:
+
 - [How do I install additional packages on Chiseled images?](https://github.com/dotnet/dotnet-docker/blob/main/documentation/ubuntu-chiseled.md#how-do-i-install-additional-packages-on-chiseled-images)
 - [Chisel manifest documentation][Chisel manifest]
 - [PR: Add documentation for installing additional slices on Ubuntu Chiseled images (dotnet/dotnet-docker#6187)](https://github.com/dotnet/dotnet-docker/pull/6187).
