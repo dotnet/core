@@ -24,7 +24,7 @@ This release was focused on quality improvements to .NET MAUI, .NET for Android,
 
 ## CollectionView enhancements for iOS and Mac Catalyst
 
-Two new handlers for `CollectionView` and `CarouselView` on iOS and Mac Catalyst that brought performance and stability improvements were available optionally in [.NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9?view=net-maui-9.0#collectionview-and-carouselview). In this release they are now on by default. 
+Two new handlers for `CollectionView` and `CarouselView` on iOS and Mac Catalyst that brought performance and stability improvements were available optionally in [.NET 9](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9?view=net-maui-9.0#collectionview-and-carouselview). In this release they are now on by default.
 
 You can _opt out_ of these handlers by adding the following code to your `MauiProgram` class if you want to revert back.
 
