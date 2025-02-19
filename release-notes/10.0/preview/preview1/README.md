@@ -11,6 +11,7 @@
 - [.NET Aspire](./dotnetaspire.md)
 - [.NET MAUI](./dotnetmaui.md)
 - [ASP.NET Core](./aspnetcore.md)
+- [Container images](./containers.md)
 - [EF Core & Data](./efcore.md)
 - [Windows Forms](./winforms.md)
 - [WPF](./wpf.md)
