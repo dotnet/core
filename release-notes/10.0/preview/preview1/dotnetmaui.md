@@ -59,6 +59,7 @@ This release was focused on quality improvements. A detailed list can be found o
 Google has released [Beta 1](https://android-developers.googleblog.com/2025/01/first-beta-android16.html) of the Android 16 (API-36) SDK.  Support has been added for using these preview APIs.
 
 To target the Android 16 preview API:
+
 - Use the Android SDK Manager to download the Android 16 (Baklava) Platform
 - Update your project's `TargetFramework` to `net10.0-android36`
 
@@ -70,7 +71,7 @@ While API-21 is still supported in .NET 10, we recommend updating existing proje
 
 > Note: See the main [GitHub pull request](https://github.com/dotnet/android/pull/9656) for more information.
 
-### Building with JDK-21 is now supported 
+### Building with JDK-21 is now supported
 
 .NET for Android projects can now be built with JDK-21.
 
@@ -125,7 +126,7 @@ This can be disabled, by adding this to the project file:
 </PropertyGroup>
 ```
 
-Ref: https://github.com/xamarin/xamarin-macios/issues/21293
+See the [GitHub Issue](https://github.com/xamarin/xamarin-macios/issues/21293) for more infomration.
 
 ### Bundling original resources in libraries
 
@@ -133,9 +134,9 @@ Library projects can have various types of bundle resources (storyboards, xibs, 
 
 If any processing can be done (such as compiling storyboards or xibs, or optimizing property lists/png images, etc), this has historically been done before embedding, but this complicates library builds a lot, because this processing:
 
-* Needs to run on a Mac, because compiling xibs/storyboards can only be done on a Mac.
-* Needs Apple's toolchain around.
-* Makes it impossible to do any decision-making based on the original resources when building the app.
+- Needs to run on a Mac, because compiling xibs/storyboards can only be done on a Mac.
+- Needs Apple's toolchain around.
+- Makes it impossible to do any decision-making based on the original resources when building the app.
 
 So we've added opt-in support for embedding the original resource in libraries in .NET 9, and making it opt-out in .NET 10.
 
@@ -147,4 +148,4 @@ The default behavior can be changed in the project file like this:
 </PropertyGroup>
 ```
 
-Ref: https://github.com/xamarin/xamarin-macios/issues/19028
+See the [GitHub Issue](https://github.com/xamarin/xamarin-macios/issues/19028) for more information.
