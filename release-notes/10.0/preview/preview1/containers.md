@@ -18,6 +18,7 @@ They can be referenced using the `-trixie-slim` suffix.
 - `docker pull mcr.microsoft.com/dotnet/sdk:10.0-preview-trixie-slim` - Refers to Debian 13 "Trixie"
 
 For more information, see:
+
 - [.NET containers supported platforms](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-platforms.md)
 - [Proposal: Switch to Ubuntu for .NET convenience tags (dotnet/dotnet-docker#5709)](https://github.com/dotnet/dotnet-docker/discussions/5709)
 

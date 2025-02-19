@@ -77,7 +77,7 @@ We’ve introduced the following APIs in Windows Forms for .NET 10 Preview 1:
 - `public bool TryGetData<T>(string format, out T data)`
 - `public bool TryGetData<T>(string format, Func<TypeName, Type> resolver, out T data)`
 
-**New Clipboard compatibility configuration switch**
+**New Clipboard compatibility configuration switch:**
 
 - `Windows.ClipboardDragDrop.EnableUnsafeBinaryFormatterSerialization`
 

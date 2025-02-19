@@ -1,7 +1,6 @@
 # F# updates in .NET 10 Preview 1 - Release Notes
 
-.NET 10 Preview 1 includes the following F# features & enhancements:
-
+.NET 10 Preview 1 includes the following F# features & enhancements:
 
 - [F# Language](#f-language)
 - [FSharp.Core standard library](#fsharpcore-standard-library)

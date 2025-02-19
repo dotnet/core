@@ -6,7 +6,7 @@
 - [Implicit span conversions](#implicit-span-conversions)
 - [`field` backed properties](#field-backed-properties)
 - [Modifiers on simple lambda parameters](#modifiers-on-simple-lambda-parameters)
-- [Experimental feature - String literals in data section](#preview-feature-string-literals-in-data-section)
+- [Experimental feature - String literals in data section](#experimental-feature-string-literals-in-data-section)
 
 C# 14 updates:
 
