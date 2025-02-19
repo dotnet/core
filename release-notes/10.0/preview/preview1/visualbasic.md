@@ -7,7 +7,6 @@
 
 These features are part of our strategy to ensure that Visual Basic can consume updated features in C# and the runtime. These features won't change how you write Visual Basic code, you'll just find it easier to use the latest runtime APIs.
 
-
 Visual Basic updates:
 
 - [What's new in Visual Basic](https://learn.microsoft.com/dotnet/visual-basic/whats-new/) documentation
