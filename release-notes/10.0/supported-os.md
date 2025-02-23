@@ -2,7 +2,7 @@
 
 Last Updated: 2025/02/22; Support phase: Preview
 
-[.NET 10.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
+[.NET 10.0](README.md) is an [Unknown](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 ## Android
 

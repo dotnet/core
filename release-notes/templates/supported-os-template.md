@@ -5,6 +5,7 @@ Last Updated: {{LASTUPDATED}}; Support phase: {{SUPPORT-PHASE}}
 [.NET {{VERSION}}](README.md) is an [{{RELEASE-TYPE}}](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 {{FAMILIES}}
+
 ## Linux compatibility
 
 Microsoft-provided [portable Linux builds](../../linux.md) define minimum compatibility primarily via libc version.
