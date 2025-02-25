@@ -2,6 +2,10 @@
 
 .NET 10 Preview 1 includes new .NET Runtime features & enhancements:
 
+- [Array Interface Method Devirtualization](#array-interface-method-devirtualization)
+- [Stack Allocation of Arrays of Value Types](#stack-allocation-of-arrays-of-value-types)
+- [AVX10.2 Support](#avx102-support)
+
 .NET Runtime updates in .NET 10:
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation

@@ -1,14 +1,19 @@
 # .NET 10 Preview 1 - Release Notes
 
-.NET 10 Preview 1 released on February X, 2025. Find more information on new features released in .NET 10 Preview 1 by browsing through the release notes below:
+.NET 10 Preview 1 released on February 25, 2025. Find more information on new features released in .NET 10 Preview 1 by browsing through the release notes below:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
 - [SDK](./sdk.md)
 
-## Feature Release Notes
+## Languages
 
-- [.NET Aspire](./dotnetaspire.md)
+- [C#](./csharp.md)
+- [F#](./fsharp.md)
+- [Visual Basic](./visualbasic.md)
+
+## Workloads, Libraries, & More
+
 - [.NET MAUI](./dotnetmaui.md)
 - [ASP.NET Core](./aspnetcore.md)
 - [Container images](./containers.md)

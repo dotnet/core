@@ -2,6 +2,16 @@
 
 .NET 10 Preview 1 includes new .NET Libraries features & enhancements:
 
+- [Finding Certificates By Thumbprints Other Than SHA-1](#finding-certificates-by-thumbprints-other-than-sha-1)
+- [Finding PEM-encoded Data in ASCII/UTF-8](#finding-pem-encoded-data-in-asciiutf-8)
+- [New Method Overloads in ISOWeek for DateOnly Type](#new-method-overloads-in-isoweek-for-dateonly-type)
+- [String Normalization APIs to Work with Span of Characters](#string-normalization-apis-to-work-with-span-of-characters)
+- [Numeric Ordering for String Comparison](#numeric-ordering-for-string-comparison)
+- [Adding TimeSpan.FromMilliseconds Overload with a Single Parameter](#adding-timespanfrommilliseconds-overload-with-a-single-parameter)
+- [ZipArchive performance and memory improvements](#ziparchive-performance-and-memory-improvements)
+- [Additional `TryAdd` and `TryGetValue` overloads for `OrderedDictionary<TKey, TValue>`](#additional-tryadd-and-trygetvalue-overloads-for-ordereddictionarytkey-tvalue)
+- [More Left-Handed Matrix Transformation Methods](#more-left-handed-matrix-transformation-methods)
+
 .NET Libraries updates in .NET 10:
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
