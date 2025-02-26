@@ -38,7 +38,13 @@ See [dotnet/core#9652](https://github.com/dotnet/core/issues/9652) for more cont
 [Ubuntu Chiseled](https://github.com/dotnet/dotnet-docker/edit/main/documentation/ubuntu-chiseled.md) images are a type of distroless container image that contain only the minimal set of packages .NET needs, with everything else removed. New for .NET 10, Ubuntu Chiseled images include the [Chisel manifest].
 The Chisel manifest describes the package contents of the image and can also be used to install additional packages on top of existing Chiseled base images.
 
-For more information, see:
+Ubuntu Chiseled base images:
+
+- `docker pull mcr.microsoft.com/dotnet/aspnet:10.0-preview-noble-chiseled`
+- `docker pull mcr.microsoft.com/dotnet/runtime:10.0-preview-noble-chiseled`
+- `docker pull mcr.microsoft.com/dotnet/runtime-deps:10.0-preview-noble-chiseled`
+
+Other [image variants](https://github.com/dotnet/dotnet-docker/blob/main/documentation/image-variants.md) are also available. For more information, see:
 
 - [How do I install additional packages on Chiseled images?](https://github.com/dotnet/dotnet-docker/blob/main/documentation/ubuntu-chiseled.md#how-do-i-install-additional-packages-on-chiseled-images)
 - [Chisel manifest documentation][Chisel manifest]
