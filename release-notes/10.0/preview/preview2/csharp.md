@@ -2,11 +2,7 @@
 
 .NET 10 Preview 2 includes the following C# features & enhancements:
 
-- [`nameof` in unbound generics](#unbound-generic-support-for-nameof)
-- [Implicit span conversions](#implicit-span-conversions)
-- [`field` backed properties](#field-backed-properties)
-- [Modifiers on simple lambda parameters](#modifiers-on-simple-lambda-parameters)
-- [Experimental feature - String literals in data section](#experimental-feature-string-literals-in-data-section)
+- [Feature](#feature)
 
 C# 14 updates:
 
