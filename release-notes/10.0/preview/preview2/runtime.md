@@ -10,4 +10,4 @@
 
 ## Feature
 
-This is about the feature
+This is about a feature.
