@@ -372,6 +372,16 @@ Function RunApiDiff2
         [ValidateNotNullOrEmpty()]
         [string]
         $attributesToExclude
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $beforeFriendlyName
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $afterFriendlyName
     )
 
     VerifyPathOrExit $apiDiffExe
@@ -381,7 +391,7 @@ Function RunApiDiff2
     # All arguments:
     # "https://github.com/dotnet/sdk/tree/main/src/Compatibility/ApiDiff/Microsoft.DotNet.ApiDiff.Tool/Program.cs"
 
-    RunCommand "$apiDiffExe -b $beforeFolder -a $afterFolder -o $outputFolder -tc $tableOfContentsFileNamePrefix -eattrs '$attributesToExclude'"
+    RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'"
 }
 
 Function CreateReadme
@@ -496,7 +506,7 @@ Function DownloadPackage
 
     $refPackageName = "$fullSdkName.Ref"
 
-    $nugetSource = $useNuget ? "https://api.nuget.org/v3/index.json" : "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
+    $feed = $useNuget ? "https://api.nuget.org/v3/index.json" : "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
 
     $searchTerm = ""
     If ($previewOrRC -eq "ga")
@@ -508,7 +518,16 @@ Function DownloadPackage
         $searchTerm = "$dotNetversion.*-$previewOrRC.$previewNumberVersion*"
     }
 
-    $results = Find-Package -AllVersions -Source $nugetSource -Name $refPackageName -AllowPrereleaseVersions | Where-Object -Property Version -Like $searchTerm | Sort-Object Version -Descending
+    $foundPackages = Find-Package -AllVersions -Source $feed -Name $refPackageName -AllowPrereleaseVersions -ErrorAction Continue
+
+    If ($foundPackages.Count -eq 0)
+    {
+        Write-Error "No NuGet packages found with ref package name '$refPackageName' in feed '$feed'"
+        Get-PackageSource -Name $refPackageName | Format-Table -Property Name, SourceUri
+        Write-Error "Exiting" -ErrorAction Stop
+    }
+
+    $results = $foundPackages | Where-Object -Property Version -Like $searchTerm | Sort-Object Version -Descending
 
     If ($results.Count -eq 0)
     {
@@ -563,9 +582,6 @@ Function GetAttributesToExclude
 
 # True when comparing 8.0 GA with 9.0 GA
 $IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And ($PreviousPreviewOrRC -Eq "ga") -And ($CurrentPreviewOrRC -eq "ga")
-
-$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
-
 
 ## Check folders passed as parameters exist
 
@@ -635,12 +651,18 @@ RecreateFolder $windowsDesktopTargetFolder
 
 ## Run the ApiDiff commands
 
+# Comma separated docIDs of attribute types
 $attributesToExclude = GetAttributesToExclude $AttributesToExcludeFilePath
 
-RunApiDiff2 $apiDiffExe $netCoreTargetFolder $netCoreBeforeDllFolder $netCoreAfterDllFolder $currentDotNetFullName $attributesToExclude
-RunApiDiff2 $apiDiffExe $aspNetCoreTargetFolder $aspNetCoreBeforeDllFolder $aspNetCoreAfterDllFolder $currentDotNetFullName $attributesToExclude
-RunApiDiff2 $apiDiffExe $windowsDesktopTargetFolder $windowsDesktopBeforeDllFolder $windowsDesktopAfterDllFolder $currentDotNetFullName $attributesToExclude
+# Example: "10.0-preview2"
+$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
 
+# Examples: ".NET 10 Preview 1" and ".NET 10 Preview 2"
+$previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
 $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
+
+RunApiDiff2 $apiDiffExe $netCoreTargetFolder $netCoreBeforeDllFolder $netCoreAfterDllFolder $currentDotNetFullName $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+RunApiDiff2 $apiDiffExe $aspNetCoreTargetFolder $aspNetCoreBeforeDllFolder $aspNetCoreAfterDllFolder $currentDotNetFullName $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+RunApiDiff2 $apiDiffExe $windowsDesktopTargetFolder $windowsDesktopBeforeDllFolder $windowsDesktopAfterDllFolder $currentDotNetFullName $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
