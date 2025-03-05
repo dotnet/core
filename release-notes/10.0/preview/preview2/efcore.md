@@ -19,4 +19,4 @@ Preview 2 contains:
 
 - [3 enhancements](https://github.com/dotnet/efcore/issues?q=is%3Aissue%20is%3Aclosed%20label%3Apreview-2%20(milestone%3A9.0.3%20OR%20milestone%3A9.0.3%20OR%20milestone%3A10.0.0)%20label%3Atype-enhancement)
 - [3 regression bug fixes](https://github.com/dotnet/efcore/issues?q=is%3Aissue%20is%3Aclosed%20label%3Apreview-2%20(milestone%3A9.0.3%20OR%20milestone%3A9.0.3%20OR%20milestone%3A9.0.x%20OR%20milestone%3A10.0.0)%20label%3Atype-bug%20label%3Aregression%20)
-- [4 non-regression bug fixes](https://github.com/dotnet/efcore/issues?q=is%3Aissue%20is%3Aclosed%20label%3Apreview-2%20(milestone%3A9.0.3%20OR%20milestone%3A9.0.3%20OR%20milestone%3A10.0.0)%20label%3Atype-bug%20label%3Aregression)
+- [4 non-regression bug fixes](https://github.com/dotnet/efcore/issues?q=is%3Aissue%20is%3Aclosed%20label%3Apreview-2%20(milestone%3A9.0.3%20OR%20milestone%3A9.0.3%20OR%20milestone%3A10.0.0)%20label%3Atype-bug%20-label%3Aregression%20)
