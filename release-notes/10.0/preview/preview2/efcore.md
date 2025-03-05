@@ -3,6 +3,7 @@
 .NET 10 Preview 2 includes new Entity Framework Core features & enhancements:
 
 - [Support for the .NET 10 RightJoin operator](#support-for-the-net-10-rightjoin-operator)
+- [Small improvements](#small-improvements)
 
 Entity Framework Core 10 updates:
 
@@ -12,6 +13,10 @@ Entity Framework Core 10 updates:
 ## Support for the .NET 10 RightJoin operator
 
 In Preview 1 we added [support for LeftJoin operator](../preview1/efcore.md#support-for-the-net-10-leftjoin-operator). In Preview 2 we are adding support for the analogous `RightJoin` operator, which keeps all the data from the second collection and only the matching data from the first collection. EF 10 translates this to `RIGHT JOIN` operation in the database.
+
+## Small improvements
+
+- Associate the DatabaseRoot with the scoped options instance and not the singleton options ([#34477](https://github.com/dotnet/efcore/pull/34477), contributed by [@koenigst](https://github.com/koenigst)).
 
 ## Everything else in Preview 2
 
