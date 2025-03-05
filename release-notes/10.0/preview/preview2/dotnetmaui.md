@@ -32,3 +32,7 @@ This release was focused on quality improvements. A details list can be found on
 ### Feature iOS
 
 This is a feature about iOS.
+
+## Community Contributors
+
+Thank you to ...
