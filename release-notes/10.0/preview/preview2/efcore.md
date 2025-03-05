@@ -11,7 +11,7 @@ Entity Framework Core 10 updates:
 
 ## Support for the .NET 10 RightJoin operator
 
-In Preview 1 we added [support for LeftJoin operator](../preview1/efcore.md#support-for-the-net-10-leftjoin-operator). In Preview 2 we are adding support for supports the analogous `RightJoin` operator, which keeps all the data from the second collection and only the matching data from the first collection. EF 10 translates this to `RIGHT JOIN` operation in the database.
+In Preview 1 we added [support for LeftJoin operator](../preview1/efcore.md#support-for-the-net-10-leftjoin-operator). In Preview 2 we are adding support for the analogous `RightJoin` operator, which keeps all the data from the second collection and only the matching data from the first collection. EF 10 translates this to `RIGHT JOIN` operation in the database.
 
 ## Everything else in Preview 2
 
