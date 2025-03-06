@@ -1,11 +1,8 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2025/02/03
-Support phase: Active
+Last Updated: 2025/02/22; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
-
-This file is generated from [supported-os.json](supported-os.json) and is based on support information from [endoflife.date](https://endoflife.date/).
 
 ## Android
 
@@ -27,7 +24,7 @@ Notes:
 | [iOS][2]                      | 18, 17                      | Arm64                 | None                 |
 | [iPadOS][3]                   | 18, 17                      | Arm64                 | None                 |
 | [macOS][4]                    | 15, 14, 13                  | Arm64, x64            | None                 |
-| [tvOS][5]                     | 18, 17, 16, 15, 14, 13, 12.2 | Arm64                | None                 |
+| [tvOS][5]                     | 18, 17                      | Arm64                 | None                 |
 
 Notes:
 
@@ -47,12 +44,12 @@ Notes:
 | ----------------------------- | --------------------------- | --------------------- | -------------------- |
 | [Alpine][6]                   | 3.21, 3.20, 3.19, 3.18      | Arm32, Arm64, x64     | [Lifecycle][7]       |
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
-| [CentOS Stream][9]            | 9                           | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
+| [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
 | [Fedora][13]                  | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
 | [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
-| [Red Hat Enterprise Linux][17] | 9, 8                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Enterprise Linux][19]   | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][20]      |
+| [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
 | [Ubuntu][21]                  | 24.10, 24.04, 22.04, 20.04  | Arm32, Arm64, x64     | [Lifecycle][22]      |
 
 Notes:
@@ -81,10 +78,10 @@ Notes:
 
 | OS                            | Versions                    | Architectures         | Lifecycle            |
 | ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Nano Server][23]             | 2022, 2019                  | x64                   | [Lifecycle][24]      |
+| [Nano Server][23]             | 2025, 2022, 2019            | x64                   | [Lifecycle][24]      |
 | [Windows][25]                 | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
-| [Windows Server][27]          | 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]      |
-| [Windows Server Core][23]     | 2022, 2019, 2016, 2012-R2, 2012 | x64, x86          | [Lifecycle][24]      |
+| [Windows Server][27]          | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86 | [Lifecycle][24]   |
+| [Windows Server Core][23]     | 2025, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]      |
 
 Notes:
 
@@ -127,15 +124,25 @@ The following operating system versions are no longer supported.
 | Fedora                | 37            | 2023-12-05           |
 | iOS                   | 15            | [2024-09-16](https://support.apple.com/HT212788) |
 | iOS                   | 16            | [2024-08-07](https://support.apple.com/HT213407) |
-| iPadOS                | 16            | [9999-12-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
+| iPadOS                | 16            | [2024-09-16](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
 | iPadOS                | 15            | [2024-09-16](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-15-release-notes) |
 | macOS                 | 12            | [2024-09-16](https://support.apple.com/HT212585) |
 | openSUSE Leap         | 15.5          | 2024-12-31           |
 | openSUSE Leap         | 15.4          | 2023-12-07           |
+| SUSE Enterprise Linux | 15.5          | 2024-12-31           |
 | SUSE Enterprise Linux | 12.5          | 2024-10-31           |
 | SUSE Enterprise Linux | 15.4          | 2023-12-31           |
+| tvOS                  | 16            | 2023-09-18           |
+| tvOS                  | 15            | 2022-09-12           |
+| tvOS                  | 14            | 2021-09-20           |
+| tvOS                  | 13            | 2020-09-16           |
+| tvOS                  | 12.2          | -                    |
 | Ubuntu                | 23.10         | 2024-07-11           |
 | Ubuntu                | 23.04         | 2024-01-20           |
 | Windows               | 11 22H2 (W)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows               | 11 21H2 (E)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows               | 10 21H2 (E)   | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
+
+## About
+
+This file is generated from [supported-os.json](supported-os.json) and is based (with thanks) on support information from [endoflife.date](https://endoflife.date/).
