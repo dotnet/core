@@ -39,19 +39,19 @@ In `foreach_static_readonly_array`, the type of `array` is transparent, so it is
 ```
 | Method                                                       | Mean       | Ratio | Allocated |
 |------------------------------------------------------------- |-----------:|------:|----------:|
-| foreach_static_readonly_array (.NET 9)                       |   153.4 ns |  1.00 |         - |
-| foreach_static_readonly_array_via_interface (.NET 9)         |   781.2 ns |  5.09 |      32 B |
+| foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
+| foreach_static_readonly_array_via_interface (.NET 9)         |   851.8 ns |  5.65 |      32 B |
 ```
 
 Thanks to improvements to the JIT's inlining, stack allocation, and loop cloning abilities (all of which are detailed in [dotnet/runtime #108913](https://github.com/dotnet/runtime/issues/108913)), the object allocation is gone, and runtime impact has been reduced substantially:
 ```
 | Method                                                       | Mean       | Ratio | Allocated |
 |------------------------------------------------------------- |-----------:|------:|----------:|
-| foreach_static_readonly_array (.NET 9)                       |   153.4 ns | 1.00  |         - |
-| foreach_static_readonly_array_via_interface (.NET 10)        |   295.7 ns | 1.93  |         - |
+| foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
+| foreach_static_readonly_array_via_interface (.NET 10)        |   280.0 ns |  1.86 |         - |
 ```
 
-Now, let's consider a more challenging example:
+We plan to close the gap entirely by ensuring the loop optimizations introduced in .NET 9 can kick in for these enumeration patterns. Now, let's consider a more challenging example:
 ```csharp
 [MethodImpl(MethodImplOptions.NoInlining)]
 IEnumerable<int> get_opaque_array() => s_ro_array;
@@ -77,7 +77,14 @@ When compiling `foreach_opaque_array_via_interface`, the JIT does not know the u
 
 Notice how `foreach_opaque_array_via_interface` allocates memory on the heap, suggesting the JIT failed to stack-allocate and promote the enumerator to registers. This is because the JIT relies on a technique called escape analysis to enable stack allocation. Escape analysis determines if an object's lifetime can exceed that of its creation context; if the JIT can guarantee an object will not outlive the current method, it can safely allocate it on the stack. In the above example, calling an interface method on the enumerator to control iteration causes it to escape, as the call takes a reference to the enumerator object. On the fast path of the type test, the JIT can try to devirtualize and inline these interface calls to keep the enumerator from escaping. However, escape analysis typically considers the whole method context, so the slow path's reliance on interface calls prevents the JIT from stack-allocating the enumerator at all.
 
-[dotnet/runtime #111473](https://github.com/dotnet/runtime/pull/111473) introduces conditional escape analysis -- a flow-sensitive form of the technique -- to the JIT. Conditional escape analysis can determine if an object will escape only on certain paths through the method, and prompt the JIT to create a fast path where the object never escapes. For array enumeration scenarios, conditional escape analysis reveals the enumerator will escape only when type tests for the collection fail, enabling the JIT to create a copy of the iteration code where the enumerator is stack-allocated and promoted. [benchmark results]
+[dotnet/runtime #111473](https://github.com/dotnet/runtime/pull/111473) introduces conditional escape analysis -- a flow-sensitive form of the technique -- to the JIT. Conditional escape analysis can determine if an object will escape only on certain paths through the method, and prompt the JIT to create a fast path where the object never escapes. For array enumeration scenarios, conditional escape analysis reveals the enumerator will escape only when type tests for the collection fail, enabling the JIT to create a copy of the iteration code where the enumerator is stack-allocated and promoted. Once again, this reduces the abstraction cost considerably:
+```
+| Method                                                       | Mean       | Ratio | Allocated |
+|------------------------------------------------------------- |-----------:|------:|----------:|
+| foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
+| foreach_opaque_array_via_interface (.NET 9)                  |   874.7 ns |  5.80 |      32 B |
+| foreach_opaque_array_via_interface (.NET 10)                 |   277.9 ns |  1.84 |      32 B |
+```
 
 ## Inlining of Late Devirtualized Methods
 
