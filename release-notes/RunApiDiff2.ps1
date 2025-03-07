@@ -13,6 +13,7 @@
 # -SdkRepo                      : The full path to your local clone of the dotnet/sdk repo.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
+# -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
 # -UseNuGet                     : By default, the feed used is https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json , but if this is set to true, the feed used is https://api.nuget.org/v3/index.json
 
 # Example:
@@ -70,7 +71,13 @@ Param (
     [ValidateNotNullOrEmpty()]
     [string]
     $AttributesToExcludeFilePath = "ApiDiffAttributesToExclude.txt"
-,
+    ,
+    [Parameter(Mandatory = $false)]
+    [ValidateNotNullOrEmpty()]
+    [string]
+    $AssembliesToExcludeFilePath = "ApiDiffAssembliesToExclude.txt"
+    ,
+
     [Parameter(Mandatory=$false)]
     [bool]
     $UseNuGet = $false
@@ -367,7 +374,12 @@ Function RunApiDiff2
         [ValidateNotNullOrEmpty()]
         [string]
         $tableOfContentsFileNamePrefix
-    ,
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $assembliesToExclude
+        ,
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
@@ -391,7 +403,7 @@ Function RunApiDiff2
     # All arguments:
     # "https://github.com/dotnet/sdk/tree/main/src/Compatibility/ApiDiff/Microsoft.DotNet.ApiDiff.Tool/Program.cs"
 
-    RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'"
+    RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eas '$assembliesToExclude' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'"
 }
 
 Function CreateReadme
@@ -561,7 +573,7 @@ Function DownloadPackage
     $resultingPath.value = $dllPath
 }
 
-Function GetAttributesToExclude
+Function GetFileLinesAsCommaSeparaterList
 {
     Param (
         [Parameter(Mandatory=$true)]
@@ -572,8 +584,8 @@ Function GetAttributesToExclude
 
     VerifyPathOrExit $filePath
 
-    $attributesToExclude = (Get-Content -Path $filePath) -join ","
-    Return $attributesToExclude
+    $lines = (Get-Content -Path $filePath) -join ","
+    Return $lines
 }
 
 ### Execution ###
@@ -651,8 +663,11 @@ RecreateFolder $windowsDesktopTargetFolder
 
 ## Run the ApiDiff commands
 
-# Comma separated docIDs of attribute types
-$attributesToExclude = GetAttributesToExclude $AttributesToExcludeFilePath
+# Comma separated docIDs of attribute types to exclude
+$attributesToExclude = GetFileLinesAsCommaSeparaterList $AttributesToExcludeFilePath
+
+# Comma separated list of assembly names to exclude
+$assembliesToExclude = GetFileLinesAsCommaSeparaterList $AssembliesToExcludeFilePath
 
 # Example: "10.0-preview2"
 $currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
@@ -661,8 +676,8 @@ $currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVe
 $previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
 $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
 
-RunApiDiff2 $apiDiffExe $netCoreTargetFolder $netCoreBeforeDllFolder $netCoreAfterDllFolder $currentDotNetFullName $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
-RunApiDiff2 $apiDiffExe $aspNetCoreTargetFolder $aspNetCoreBeforeDllFolder $aspNetCoreAfterDllFolder $currentDotNetFullName $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
-RunApiDiff2 $apiDiffExe $windowsDesktopTargetFolder $windowsDesktopBeforeDllFolder $windowsDesktopAfterDllFolder $currentDotNetFullName $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+RunApiDiff2 $apiDiffExe $netCoreTargetFolder $netCoreBeforeDllFolder $netCoreAfterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+RunApiDiff2 $apiDiffExe $aspNetCoreTargetFolder $aspNetCoreBeforeDllFolder $aspNetCoreAfterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+RunApiDiff2 $apiDiffExe $windowsDesktopTargetFolder $windowsDesktopBeforeDllFolder $windowsDesktopAfterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
