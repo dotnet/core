@@ -9,7 +9,7 @@ Your app needs to be on the latest .NET 9 patch version to be secure. The longer
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
 - 9.0.3 (March 2025)
-- [CVE-2025-24070 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+- [CVE-2025-24070 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/348)
 - 9.0.2 (February 2025)
   - No new CVEs.
 - 9.0.1 (January 2025)
