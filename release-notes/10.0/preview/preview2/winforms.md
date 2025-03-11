@@ -13,7 +13,7 @@
 
 ## Clipboard Code Sharing with WPF
 
- We are unifying how WinForms and WPF handle the Clipboard, refining behaviors introduced in Preview 1. Over the course of Preview 2 the WinForms team has refactored much of the Clipboard code to a new location in order to make it shareable with WPF. By sharing and consolidating Clipboard code across both frameworks, we aim to enhance consistency, stability, and overall reliability for .NET WindowsDesktio scenarios. We have also continued to enhance the Clipboard APIs introduced in Preview 1 with tweaks to the behavior in certain edge-cases.
+ We are unifying how WinForms and WPF handle the Clipboard, refining behaviors introduced in Preview 1. Over the course of Preview 2 the WinForms team has refactored much of the Clipboard code to a new location in order to make it shareable with WPF. By sharing and consolidating Clipboard code across both frameworks, we aim to enhance consistency, stability, and overall reliability for .NET Windows Desktop scenarios. We have also continued to enhance the Clipboard APIs introduced in Preview 1 with tweaks to the behavior in certain edge-cases.
 
 ## New System.Design Editors
 
