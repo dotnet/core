@@ -21,7 +21,6 @@ We’ve ported several `UITypeEditors` in the `System.Windows.Forms.Design` name
 
 
 ## Quality Enhancements
-We’ve expanded our unit test coverage and fixed a variety of bugs, continuing to focus on delivering high quality in Windows Forms.
 
 We’ve expanded our unit test coverage and addressed a variety of bug fixes, continuing to focus on delivering high quality in Windows Forms.
 
