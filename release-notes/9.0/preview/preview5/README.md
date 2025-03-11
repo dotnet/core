@@ -3,12 +3,10 @@
 .NET 9 Preview 5 released on June 11th, 2024. Find more information on new features released in .NET 9 Preview 5 by browsing through the release notes below:
 
 * [Libraries](./libraries.md)
-
-## Feature Release Notes
-
 * [.NET Data and EF Core](./efcoreanddata.md)
 * [.NET MAUI](./dotnetmaui.md)
 * [ASP.NET Core](./aspnetcore.md)
+* [API diff](./api-diff/README.md)
 
 ## Get Started
 
