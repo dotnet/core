@@ -129,6 +129,6 @@ If you had previously specified the `WindowsSdkPackageVersion` property to fix t
 
 The Microsoft.AspNetCore.Components.CustomElements package will not ship in version 9.0.3. A blocking issue was discovered late in the release cycle, so the package will not ship until version 9.0.4, which will contain the fix.
 
-#### Available Workaround
- 
+#### Workaround
+
 Use version 9.0.2 of the package until version 9.0.4 becomes available in April.
