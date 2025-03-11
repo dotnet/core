@@ -3,7 +3,7 @@
 .NET 10 Preview 2 includes new Windows Forms features & enhancements:
 
 - [Clipboard Code Sharing with WPF](#clipboard-code-sharing-with-wpf)
-- [New System.Design Editors](#new-systemdesign-editors)
+- [Ported more System.Windows.Forms.Design UITypeEditors](#ported-more-systemwindowsformsdesign-uitypeeditors)
 - [Quality Enhancements](#quality-enhancements)
 
 ## Windows Forms updates in .NET 10
@@ -17,8 +17,7 @@
 
 ## Ported more System.Windows.Forms.Design UITypeEditors  
 
-We’ve ported several `UITypeEditors` in the `System.Windows.Forms.Design` namespace from the .NET Framework code base, giving developers more robust options for creating designer applications. New editors include `ToolStripCollectionEditor` and several editors related to the `DataGridView` control. These editors will now be discoverable by the `PropertyGrid` and Designer Actions Panel. 
-
+We’ve ported several `UITypeEditors` in the `System.Windows.Forms.Design` namespace from the .NET Framework code base, giving developers more robust options for creating designer applications. New editors include `ToolStripCollectionEditor` and several editors related to the `DataGridView` control. These editors will now be discoverable by the `PropertyGrid` and Designer Actions Panel.
 
 ## Quality Enhancements
 
