@@ -15,11 +15,13 @@
 
  We are unifying how WinForms and WPF handle the Clipboard, refining behaviors introduced in Preview 1. Over the course of Preview 2 the WinForms team has refactored much of the Clipboard code to a new location in order to make it shareable with WPF. By sharing and consolidating Clipboard code across both frameworks, we aim to enhance consistency, stability, and overall reliability for .NET Windows Desktop scenarios. We have also continued to enhance the Clipboard APIs introduced in Preview 1 with tweaks to the behavior in certain edge-cases.
 
-## New System.Design Editors
+## Ported more System.Windows.Forms.Design UITypeEditors  
 
-We’ve introduced several new editors in the `System.Design` namespace, giving developers more robust options for creating designer applications. New editors include `ToolStripCollectionEditor` and several editors related to the `DataGridView` control.
+We’ve ported several `UITypeEditors` in the `System.Windows.Forms.Design` namespace from the .NET Framework code base, giving developers more robust options for creating designer applications. New editors include `ToolStripCollectionEditor` and several editors related to the `DataGridView` control. These editors will now be discoverable by the `PropertyGrid` and Designer Actions Panel. 
+
 
 ## Quality Enhancements
+We’ve expanded our unit test coverage and fixed a variety of bugs, continuing to focus on delivering high quality in Windows Forms.
 
 We’ve expanded our unit test coverage and addressed a variety of bug fixes, continuing to focus on delivering high quality in Windows Forms.
 
