@@ -2,12 +2,12 @@
 
 Here's a summary of what's new in ASP.NET Core in this preview release:
 
+- [Reconnection UI component added to the Blazor Web App project template](#reconnection-ui-component-added-to-the-blazor-web-app-project-template)
 - [`NavigateTo` no longer scrolls to the top for same page navigations](#navigateto-no-longer-scrolls-to-the-top-for-same-page-navigations)
 - [Populate XML doc comments into OpenAPI document](#populate-xml-doc-comments-into-openapi-document)
-- [Upgrade to OpenAPI.NET v2.0.0-preview7](#upgrade-to-openapi-net-v2.0.0-preview7)
+- [Upgrade to OpenAPI.NET v2.0.0-preview7](#upgrade-to-openapinet-v200-preview7)
 - [Treating empty string in form post as null for nullable value types](#treating-empty-string-in-form-post-as-null-for-nullable-value-types)
 - [Add authentication and authorization metrics](#add-authentication-and-authorization-metrics)
-- 
 
 ASP.NET Core updates in .NET 10 Preview 2:
 
@@ -20,11 +20,19 @@ ASP.NET Core updates in .NET 10 Preview 2:
 - [Discussion](https://aka.ms/dotnet/10/preview2)
 - [Release notes](README.md)
 
+## Reconnection UI component added to the Blazor Web App project template
+
+The Blazor Web App project template now includes a `ReconnectModal` component, including collocated stylesheet and JavaScript files, for improved developer control over the reconnection UI when the client loses the WebSocket connection to the server. The component doesn't insert styles programmatically, so it doesn't violate stricter Content Security Policy (CSP) settings for the `style-src` policy. A default reconnection UI is still used as fallback when the app doesn't define its own reconnection UI.
+
+New reconnection UI features:
+
+- Apart from indicating the reconnection state by setting a specific CSS class on the reconnection UI element, the new `components-reconnect-state-changed` event is dispatched for reconnection state changes.
+- Code can better differentiate the stages of the reconnection process with the new reconnection state "`retrying`," indicated by both the CSS class and the new event.
+
 ## `NavigateTo` no longer scrolls to the top for same page navigations
 
 Previously, when using `NavigateTo` to navigate to the same page in a Blazor app with an interactive router, the browser would scroll to the top of the page. This behavior has been changed in .NET 10 so that the browser will no longer scroll to the top of the page when navigating to the same page. This means the viewport will no longer be reset when making updates to the address for the current page, such as changing the query string or fragment. Similarly, the scroll position will be preserved for backwards and forwards navigations.
 
-##
 ## Populate XML doc comments into OpenAPI document
 
 ASP.NET Core OpenAPI document generation wlll now include metadata from XML doc comments on on method, class, and member definitions in the OpenAPI document. You must enable XML doc comments in your project file to use this feature. You can do this by adding the following property to your project file:
@@ -129,7 +137,7 @@ public class Todo
 }
 ```
 
-Thanks to [@nvmkpk](https://github.com/nvmkpk) for contributing this change!
+Thank you [@nvmkpk](https://github.com/nvmkpk) for this contribution!
 
 ## Add authentication and authorization metrics
 
@@ -147,3 +155,25 @@ We added metrics for certain authentication and authorization events in ASP.NET 
 The following image shows an example of the Authenticated request duration metric in the Aspire dashboard:
 
 ![Authenticated request duration in the Aspire dashboard](./media/authenticated-request-duration-in-the-aspire-dashboard.png)
+
+## Community contributors
+
+Thank you contributors! ❤️
+
+- [@JelleHissink](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3AJelleHissink)
+- [@WeihanLi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3AWeihanLi)
+- [@am11](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Aam11)
+- [@clegoz](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Aclegoz)
+- [@dlosch](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Adlosch)
+- [@gekka](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Agekka)
+- [@lextm](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Alextm)
+- [@marcusber](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Amarcusber)
+- [@marleypowell](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Amarleypowell)
+- [@martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Amartincostello)
+- [@matthetherington](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Amatthetherington)
+- [@murshex](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Amurshex)
+- [@nvmkpk](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Anvmkpk)
+- [@sgarnovsky](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Asgarnovsky)
+- [@shethaadit](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Ashethaadit)
+- [@xC0dex](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3AxC0dex)
+- [@zuizuihao](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview2+author%3Azuizuihao)
