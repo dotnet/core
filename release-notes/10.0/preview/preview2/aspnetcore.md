@@ -3,7 +3,7 @@
 Here's a summary of what's new in ASP.NET Core in this preview release:
 
 - [`NavigateTo` no longer scrolls to the top for same page navigations](#navigateto-no-longer-scrolls-to-the-top-for-same-page-navigations)
-- [Populate XML doc comments into OpenAPI document](#popular-xml-doc-comments-into-openapi-document)
+- [Populate XML doc comments into OpenAPI document](#populate-xml-doc-comments-into-openapi-document)
 - [Upgrade to OpenAPI.NET v2.0.0-preview7](#upgrade-to-openapi-net-v2.0.0-preview7)
 - [Treating empty string in form post as null for nullable value types](#treating-empty-string-in-form-post-as-null-for-nullable-value-types)
 - [Add authentication and authorization metrics](#add-authentication-and-authorization-metrics)
