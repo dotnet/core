@@ -118,7 +118,7 @@ Here the `Hello` method is added to the `Program` class, but you can add it to a
 
 The example above illustrates the `<summary>`, `<remarks>`, and `<param>` XML doc comments. For more information about XML doc comments, including all the supported tags, see the [C# documentation](https://learn.microsoft.com/dotnet/csharp/language-reference/xmldoc/recommended-tags).
 
-Since the core functionality is provided via a source generator, it can be disabled by adding the following MSBuild to your project file.
+Since the core functionality is provided via a source generator, it can be disabled by adding the following MSBuild configuration to your project file:
 
 ```xml
 <ItemGroup>
