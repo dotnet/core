@@ -176,7 +176,7 @@ Thank you [@nvmkpk](https://github.com/nvmkpk) for this contribution!
 
 ## New authentication and authorization metrics
 
-We added metrics for certain authentication and authorization events in ASP.NET Core. With this change, you can now obtain metrics for the following events:
+We added metrics for the following authentication and authorization events in ASP.NET Core:
 
 - Authentication:
   - Authenticated request duration
