@@ -37,7 +37,7 @@ Previously, when using `NavigateTo` to navigate to the same page in a Blazor app
 
 ## Ignore query string and fragment when using `NavLinkMatch.All`
 
-The `NavLink` component will now ignore the query string and fragment when using the `NavLinkMatch.All` value for the `Match` parameter. This means that the link will still have the `active` class if the URL path matches, but the query string or fragment change. To revert to the original behavior, use the `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftUriPart` [AppContext](https://learn.microsoft.com/dotnet/fundamentals/runtime-libraries/system-appcontext) switch. You can also now override the `ShouldMatch` method on `NavLink` to customize the matching behavior.
+The `NavLink` component will now ignore the query string and fragment when using the `NavLinkMatch.All` value for the `Match` parameter. This means that the link will still have the `active` class if the URL path matches but the query string or fragment change. To revert to the original behavior, use the `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftUriPart` [AppContext](https://learn.microsoft.com/dotnet/fundamentals/runtime-libraries/system-appcontext) switch. You can also now override the `ShouldMatch` method on `NavLink` to customize the matching behavior.
 
 ## Close `QuickGrid` column options
 
