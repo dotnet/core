@@ -8,8 +8,8 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Close `QuickGrid` column options](#close-quickgrid-column-options)
 - [Populate XML doc comments into OpenAPI document](#populate-xml-doc-comments-into-openapi-document)
 - [Upgrade to OpenAPI.NET v2.0.0-preview7](#upgrade-to-openapinet-v200-preview7)
-- [Treating empty string in form post as null for nullable value types](#treating-empty-string-in-form-post-as-null-for-nullable-value-types)
-- [Add authentication and authorization metrics](#add-authentication-and-authorization-metrics)
+- [Treat empty strings in form posts as `null` for nullable value types](#treat-empty-strings-in-form-posts-as-null-for-nullable-value-types)
+- [New authentication and authorization metrics](#new-authentication-and-authorization-metrics)
 
 ASP.NET Core updates in .NET 10 Preview 2:
 
@@ -68,23 +68,25 @@ Thank you [@matthetherington](https://github.com/matthetherington) for this cont
 
 ## Populate XML doc comments into OpenAPI document
 
-ASP.NET Core OpenAPI document generation wlll now include metadata from XML doc comments on on method, class, and member definitions in the OpenAPI document. You must enable XML doc comments in your project file to use this feature. You can do this by adding the following property to your project file:
+ASP.NET Core OpenAPI document generation wlll now include metadata from XML doc comments on  method, class, and member definitions in the OpenAPI document. You must enable XML doc comments in your project file to use this feature. You can do this by adding the following property to your project file:
 
 ```xml
 <PropertyGroup>
-<GenerateDocumentationFile>true</GenerateDocumentationFile>
+  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 </PropertyGroup>
 ```
 
-At build-time, the OpenAPI package will leverage a source generator to discover XML comments in the current application assembly and any project references and emit source code to insert them into the document via an OpenAPI document transformer.
+At build-time, the OpenAPI package will leverage a source generator to discover XML comments in the current app assembly and any project references and emit source code to insert them into the document via an OpenAPI document transformer.
 
-Note that the C# build process does not capture XML doc comments placed on lamda expresions, so to use XML doc comments to add metadata to a minimal API endpoint, you must define the endpoint handler as a method, put the XML doc comments on the method, and then reference that method from the `MapXXX` method. For example, to use XML doc comments to add metadata to a minimal API endpoint originally defined as a lambda expression:
+Note that the C# build process does not capture XML doc comments placed on lambda expresions, so to use XML doc comments to add metadata to a minimal API endpoint, you must define the endpoint handler as a method, put the XML doc comments on the method, and then reference that method from the `MapXXX` method.
+
+For example, to use XML doc comments to add metadata to this minimal API endpoint originally defined as a lambda expression:
 
 ```csharp
 app.MapGet("/hello", (string name) =>$"Hello, {name}!");
 ```
 
-change the `MapGet` call to reference a method
+Change the `MapGet` call to reference a method:
 
 ```csharp
 app.MapGet("/hello", Hello);
@@ -113,7 +115,7 @@ static partial class Program
 Here the `Hello` method is added to the `Program` class, but you can add it to any class in your project.
 
 The example above illustrates the `<summary>`, `<remarks>`, and `<param>` XML doc comments.
-For more information about XML doc comments, including all the supported tags, see the [C# documentation](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/recommended-tags).
+For more information about XML doc comments, including all the supported tags, see the [C# documentation](https://learn.microsoft.com/dotnet/csharp/language-reference/xmldoc/recommended-tags).
 
 Since the core functionality is provided via a source generator, it can be disabled by adding the following MSBuild to your project file.
 
@@ -129,7 +131,7 @@ Since the core functionality is provided via a source generator, it can be disab
 </Target>
 ```
 
-The source generator process XML files included in the `AdditionalFiles` property. To add (or remove), sources modify the property as follows:
+The source generator processes XML files included in the `AdditionalFiles` property. To add (or remove) sources, modify the property as follows:
 
 ```xml
 <Target Name="AddXmlSources" BeforeTargets="CoreCompile">
@@ -146,9 +148,9 @@ The OpenAPI.NET library used in ASP.NET Core OpenAPI document generation has bee
 - Entities within the OpenAPI document, like operations and parameters, are typed as interfaces. Concrete implementations exist for the inlined and referenced variants of an entity. For example, an `IOpenApiSchema` can be an inlined `OpenApiSchema` or an `OpenApiSchemaReference` that points to a schema defined elsewhere in the document.
 - The `Nullable` property has been removed from the `OpenApiSchema` type. To determine if a type is nullable, evaluate if the `OpenApiSchema.Type` property sets `JsonSchemaType.Null`.
 
-## Treating empty string in form post as null for nullable value types
+## Treat empty strings in form posts as `null` for nullable value types
 
-When using the `[FromForm]` attribute with a complex object in minimal APIs, empty string values in a form post are now converted to null rather than causing a parse failure. This behavior matches the processing logic for form posts not associated with complex object's in minimal APIs.
+When using the `[FromForm]` attribute with a complex object in minimal APIs, empty string values in a form post are now converted to `null` rather than causing a parse failure. This behavior matches the processing logic for form posts not associated with complex object's in minimal APIs.
 
 ```csharp
 using Microsoft.AspNetCore.Http;
@@ -172,7 +174,7 @@ public class Todo
 
 Thank you [@nvmkpk](https://github.com/nvmkpk) for this contribution!
 
-## Add authentication and authorization metrics
+## New authentication and authorization metrics
 
 We added metrics for certain authentication and authorization events in ASP.NET Core. With this change, you can now obtain metrics for the following events:
 
