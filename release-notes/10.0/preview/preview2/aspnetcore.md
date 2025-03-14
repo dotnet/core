@@ -61,7 +61,8 @@ The following example uses `CloseColumnOptionsAsync` method to close the column 
     private QuickGrid<Movie>? movieGrid;
     private string titleFilter = string.Empty;
     private IQueryable<Movie> movies = new List<Movie> { ... }.AsQueryable();
-    private IQueryable<Movie> filteredMovies => movies.Where(m => m.Title!.Contains(titleFilter));
+    private IQueryable<Movie> filteredMovies => 
+        movies.Where(m => m.Title!.Contains(titleFilter));
 }
 ```
 
