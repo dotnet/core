@@ -4,6 +4,8 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 
 - [Reconnection UI component added to the Blazor Web App project template](#reconnection-ui-component-added-to-the-blazor-web-app-project-template)
 - [`NavigateTo` no longer scrolls to the top for same page navigations](#navigateto-no-longer-scrolls-to-the-top-for-same-page-navigations)
+- [Ignore query string and fragment when using `NavLinkMatch.All`](#ignore-query-string-and-fragment-when-using-navlinkmatchall)
+- [Close `QuickGrid` column options](#close-quickgrid-column-options)
 - [Populate XML doc comments into OpenAPI document](#populate-xml-doc-comments-into-openapi-document)
 - [Upgrade to OpenAPI.NET v2.0.0-preview7](#upgrade-to-openapinet-v200-preview7)
 - [Treating empty string in form post as null for nullable value types](#treating-empty-string-in-form-post-as-null-for-nullable-value-types)
@@ -32,6 +34,37 @@ New reconnection UI features:
 ## `NavigateTo` no longer scrolls to the top for same page navigations
 
 Previously, when using `NavigateTo` to navigate to the same page in a Blazor app with an interactive router, the browser would scroll to the top of the page. This behavior has been changed in .NET 10 so that the browser will no longer scroll to the top of the page when navigating to the same page. This means the viewport will no longer be reset when making updates to the address for the current page, such as changing the query string or fragment. Similarly, the scroll position will be preserved for backwards and forwards navigations.
+
+## Ignore query string and fragment when using `NavLinkMatch.All`
+
+The `NavLink` component will now ignore the query string and fragment when using the `NavLinkMatch.All` value for the `Match` parameter. This means that the link will still have the `active` class if the URL path matches, but the query string or fragment change. To revert to the original behavior, use the `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftUriPart` [AppContext](https://learn.microsoft.com/dotnet/fundamentals/runtime-libraries/system-appcontext) switch. You can also now override the `ShouldMatch` method on `NavLink` to customize the matching behavior.
+
+## Close `QuickGrid` column options
+
+You can now close the `QuickGrid` column options UI using the new `CloseColumnOptionsAsync` method.
+
+In the following example uses `CloseColumnOptionsAsync` method to close the column options UI as soon as the title filter is applied:
+
+```razor
+<QuickGrid @ref="movieGrid" Items="movies">
+    <PropertyColumn Property="@(m => m.Title)" Title="Title">
+        <ColumnOptions>
+            <input type="search" @bind="titleFilter" @bind:after="@(() => movieGrid.CloseColumnOptionsAsync())" placeholder="Filter by title" />
+        </ColumnOptions>
+    </PropertyColumn>
+    <PropertyColumn Property="@(m => m.Genre)" Title="Genre" />
+    <PropertyColumn Property="@(m => m.ReleaseYear)" Title="Release Year" />
+</QuickGrid>
+
+@code {
+    private QuickGrid<Movie>? movieGrid;
+    private string titleFilter = string.Empty;
+    private IQueryable<Movie> movies = new List<Movie> { ... }.AsQueryable();
+    private IQueryable<Movie> filteredMovies => movies.Where(m => m.Title!.Contains(titleFilter));
+}
+```
+
+Thank you [@matthetherington](https://github.com/matthetherington) for this contribution!
 
 ## Populate XML doc comments into OpenAPI document
 
