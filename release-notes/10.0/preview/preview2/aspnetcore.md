@@ -43,7 +43,7 @@ The `NavLink` component will now ignore the query string and fragment when using
 
 You can now close the `QuickGrid` column options UI using the new `CloseColumnOptionsAsync` method.
 
-In the following example uses `CloseColumnOptionsAsync` method to close the column options UI as soon as the title filter is applied:
+The following example uses `CloseColumnOptionsAsync` method to close the column options UI as soon as the title filter is applied:
 
 ```razor
 <QuickGrid @ref="movieGrid" Items="movies">
