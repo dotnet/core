@@ -82,7 +82,7 @@ Thank you [@matthetherington](https://github.com/matthetherington) for this cont
 
 ## Populate XML doc comments into OpenAPI document
 
-ASP.NET Core OpenAPI document generation wlll now include metadata from XML doc comments on  method, class, and member definitions in the OpenAPI document. You must enable XML doc comments in your project file to use this feature. You can do this by adding the following property to your project file:
+ASP.NET Core OpenAPI document generation will now include metadata from XML doc comments on  method, class, and member definitions in the OpenAPI document. You must enable XML doc comments in your project file to use this feature. You can do this by adding the following property to your project file:
 
 ```xml
 <PropertyGroup>
