@@ -10,7 +10,7 @@
 
 ## Array Enumeration De-Abstraction
 
-Preview 1 introduced enhancements to the JIT compiler's devirtualization abilities for array interface methods, enabling the JIT to begin removing the abstraction overhead of array iteration via enumerators. Consider the following benchmarks:
+Preview 1 brought enhancements to the JIT compiler's devirtualization abilities for array interface methods; this was our first step in reducing the abstraction overhead of array iteration via enumerators. Preview 2 continues this effort with improvements to many other optimizations. Consider the following benchmarks:
 ```csharp
 public class ArrayDeAbstraction
 {
