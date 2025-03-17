@@ -4,11 +4,11 @@
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
-| [.NET 9](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | [9.0.2][9.0.2] | May 12, 2026 |
-| [.NET 8](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.13][8.0.13] | November 10, 2026 |
+| [.NET 9](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | [9.0.3][9.0.3] | May 12, 2026 |
+| [.NET 8](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.14][8.0.14] | November 10, 2026 |
 
-[9.0.2]: ./9.0/9.0.2/9.0.2.md
-[8.0.13]: ./8.0/8.0.13/8.0.13.md
+[9.0.3]: ./9.0/9.0.3/9.0.3.md
+[8.0.14]: ./8.0/8.0.14/8.0.14.md
 [policies]: ../release-policies.md
 
 * [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
@@ -29,8 +29,8 @@ Release notes include:
 
 Example markdown files:
 
-* [8.0/8.0.13/8.0.13.md](./8.0/8.0.13/8.0.13.md)
-* [9.0/9.0.2/9.0.2.md](./9.0/9.0.2/9.0.2.md)
+* [8.0/8.0.14/8.0.14.md](./8.0/8.0.14/8.0.14.md)
+* [9.0/9.0.3/9.0.3.md](./9.0/9.0.3/9.0.3.md)
 
 Example JSON files:
 
