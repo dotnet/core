@@ -2,11 +2,12 @@
 
 .NET 10 Preview 2 includes the following updates for container images:
 
-- [Native AOT images](#native-aot-images)
+- [Native AOT SDK images](#native-aot-sdk-images)
 
 ## Native AOT SDK images
 
 Native AOT .NET apps have faster startup time, smaller memory footprints, and can run on machines that don't have the .NET runtime installed.
+
 For .NET 10, we are publishing new .NET SDK image variants that support building [Native AOT](https://learn.microsoft.com/dotnet/core/deploying/native-aot) apps.
 
 The images are intended for two primary scenarios:

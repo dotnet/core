@@ -8,12 +8,12 @@
 
 Starting in .NET 10, the `dotnet` CLI tool learned a few new aliases for commonly-used but often-forgotten commands. The new commands are:
 
-* `dotnet package add`
-* `dotnet package list`
-* `dotnet package remove`
-* `dotnet reference add`
-* `dotnet reference list`
-* `dotnet reference remove`
+- `dotnet package add`
+- `dotnet package list`
+- `dotnet package remove`
+- `dotnet reference add`
+- `dotnet reference list`
+- `dotnet reference remove`
 
 These commands exist in the current versions of the `dotent` CLI, but they exist in verb-first forms:
 `dotnet add package`, `dotnet list package`, `dotnet remove package`, `dotnet add reference`, `dotnet list reference`, and `dotnet remove reference`.

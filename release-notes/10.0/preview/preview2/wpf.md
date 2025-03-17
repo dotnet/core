@@ -9,7 +9,7 @@ This release focused on performance and bug fixes. You can find detailed informa
 
 WPF updates in .NET 10:
 
-- [What's new in WPF in .NET 10](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100) documentation.
+- [What's new in WPF in .NET 10](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100) documentation.
 
 ## Performance Improvements
 
@@ -26,7 +26,7 @@ Various bug fixes have been addressed in .NET 10 Preview 2, to improve the Fluen
 
 Addressed various bug fixes including UI element cursor types, crash issues when bitmap streams are null, build and test step errors, and minor bugs in `BitmapMetadata` and native dependencies. Other fixes include:
 
-- Updated text pointer normalization.
+- Updated text pointer normalization.
 - Fixed localization issues for `ScrollViewer` and `ContextMenu`.
 
 ## Engineering Health
@@ -34,4 +34,3 @@ Addressed various bug fixes including UI element cursor types, crash issues when
 - Updated and synchronized **MilCodeGen** across multiple WPF components and disabled code analysis for generated code to streamline builds.
 - Removed deprecated .NET runtime and unnecessary package references, and conducted style cleanups to address warnings and improve code quality.
 
- 
