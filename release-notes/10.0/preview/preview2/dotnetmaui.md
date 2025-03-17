@@ -124,7 +124,7 @@ This is a feature about Android.
 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
-This release was focused on quality improvements. A details list can be found on [xamarin/xamarin-macios GitHub released](https://github.com/xamarin/xamarin-macios/releases/) including a list of [Known issues](https://github.com/xamarin/xamarin-macios/wiki/Known-issues-in-.NET10).
+This release was focused on quality improvements. A details list can be found on [xamarin/xamarin-macios GitHub released](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
 
 ### Feature iOS
 
