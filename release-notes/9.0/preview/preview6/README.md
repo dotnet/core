@@ -5,12 +5,10 @@
 * [Libraries](./libraries.md)
 * [Runtime](./runtime.md)
 * [SDK](./sdk.md)
-
-## Feature Release Notes
-
 * [.NET MAUI](./dotnetmaui.md)
 * [ASP.NET Core](./aspnetcore.md)
 * [C#](./csharp.md)
+* [API diff](./api-diff/README.md)
 
 ## Get Started
 

@@ -4,13 +4,11 @@
 
 * [Libraries](./libraries.md)
 * [Runtime](./runtime.md)
-
-## Feature Release Notes
-
 * [.NET Data and EF Core](./efcoreanddata.md)
 * [.NET MAUI](./dotnetmaui.md)
 * [ASP.NET Core](./aspnetcore.md)
 * [WPF](./wpf.md)
+* [API diff](./api-diff/README.md)
 
 ## Get Started
 
