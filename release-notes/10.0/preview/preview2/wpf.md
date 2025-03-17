@@ -33,4 +33,3 @@ Addressed various bug fixes including UI element cursor types, crash issues when
 
 - Updated and synchronized **MilCodeGen** across multiple WPF components and disabled code analysis for generated code to streamline builds.
 - Removed deprecated .NET runtime and unnecessary package references, and conducted style cleanups to address warnings and improve code quality.
-
