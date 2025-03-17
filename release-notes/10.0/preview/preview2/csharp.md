@@ -13,4 +13,3 @@ C# 14 updates:
 
 C# 14 rounds out the set of partial members by adding partial instance constructors and partial events. These new partial member types join partial methods and partial properties that were added in C# 13. Partial members allow one part of a class to declare a member, which can then be implemented in another part of the same class, often in a different file. Partial members are often used by source generators.
 
-You can learn more by reading the feature [documentation](https://github.com/dotnet/roslyn/blob/main/docs/features/string-literals-data-section.md).
