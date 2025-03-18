@@ -1,6 +1,6 @@
 # Windows Forms in .NET 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 includes new Windows Forms features & enhancements:
+Here's a summary of what's new in Windows Forms in this preview release:
 
 - [Clipboard Code Sharing with WPF](#clipboard-code-sharing-with-wpf)
 - [Ported more System.Windows.Forms.Design UITypeEditors](#ported-more-systemwindowsformsdesign-uitypeeditors)

@@ -1,6 +1,6 @@
 # .NET MAUI in .NET 10 Preview 2 - Release Notes
 
-This release is focused on quality improvements to .NET MAUI, .NET for Android, and .NET for iOS, Mac Catalyst, macOS, and tvOS. You can find detailed information about the improvements below:
+Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS, Mac Catalyst, macOS, and tvOS in this preview release:
 
 - .NET MAUI
   - [ShadowTypeConverter](#shadowtypeconverter)

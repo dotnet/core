@@ -1,6 +1,6 @@
 # .NET Libraries in .NET 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 includes new .NET Libraries features & enhancements:
+Here's a summary of what's new in .NET Libraries in this preview release:
 
 - [Feature](#feature)
 

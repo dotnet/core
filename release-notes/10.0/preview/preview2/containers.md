@@ -1,6 +1,6 @@
 # Container image updates in .NET 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 includes the following updates for container images:
+Here's a summary of what's new in container images in this preview release:
 
 - [Native AOT SDK images](#native-aot-sdk-images)
 

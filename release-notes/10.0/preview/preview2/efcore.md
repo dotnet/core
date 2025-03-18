@@ -1,6 +1,6 @@
 # Entity Framework Core 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 includes new Entity Framework Core features & enhancements:
+Here's a summary of what's new in Entity Framework Core in this preview release:
 
 - [Support for the .NET 10 RightJoin operator](#support-for-the-net-10-rightjoin-operator)
 - [Small improvements](#small-improvements)

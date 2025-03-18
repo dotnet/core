@@ -1,6 +1,6 @@
 # .NET SDK in .NET 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 includes new .NET SDK features & enhancements:
+Here's a summary of what's new in the .NET SDK in this preview release:
 
 - [More consistent command order](#more-consistent-command-order)
 

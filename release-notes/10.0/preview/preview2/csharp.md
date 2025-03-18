@@ -1,6 +1,6 @@
 # C# 14 updates in .NET 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 includes the following C# features & enhancements:
+Here's a summary of what's new in C# in this preview release:
 
 - [Partial events and constructors](#partial-events-and-constructors)
 

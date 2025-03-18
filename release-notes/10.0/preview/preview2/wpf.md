@@ -1,6 +1,6 @@
 # WPF in .NET 10 Preview 2 - Release Notes
 
-This release focused on performance and bug fixes. You can find detailed information about the improvements below:
+Here's a summary of what's new in WPF in this preview release:
 
 - [Performance Improvements](#performance-improvements)
 - [Fluent Style Changes](#fluent-style-changes)

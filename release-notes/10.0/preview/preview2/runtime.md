@@ -1,8 +1,11 @@
 # .NET Runtime in .NET 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 includes new .NET Runtime features & enhancements:
+Here's a summary of what's new in the .NET Runtime in this preview release:
 
-- [Feature](#feature)
+- [Array Enumeration De-Abstraction](#array-enumeration-de-abstraction)
+- [Inlining of Late Devirtualized Methods](#inlining-of-late-devirtualized-methods)
+- [Devirtualization Based on Inlining Observations](#devirtualization-based-on-inlining-observations)
+- [Support for Casting and Negation in NativeAOT's Type Preinitializer](#support-for-casting-and-negation-in-nativeaots-type-preinitializer)
 
 .NET Runtime updates in .NET 10:
 
@@ -11,6 +14,7 @@
 ## Array Enumeration De-Abstraction
 
 Preview 1 brought enhancements to the JIT compiler's devirtualization abilities for array interface methods; this was our first step in reducing the abstraction overhead of array iteration via enumerators. Preview 2 continues this effort with improvements to many other optimizations. Consider the following benchmarks:
+
 ```csharp
 public class ArrayDeAbstraction
 {
