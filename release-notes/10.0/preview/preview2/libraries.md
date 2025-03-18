@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in .NET Libraries in this preview release:
 
-- [Feature](#feature)
+- [Encryption algorithm can now be specified in PKCS#12/PFX Export](#encryption-algorithm-can-now-be-specified-in-pkcs12pfx-export)
 
 .NET Libraries updates in .NET 10:
 
@@ -17,7 +17,3 @@ which produces an output supported by almost every library/platform that support
 but the output may not be understood by all readers (sorry, Windows XP).
 
 Callers who want even more control can instead utilize the overload that accepts a `PbeParameters`.
-
-## Feature
-
-This is about the feature

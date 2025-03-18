@@ -4,6 +4,10 @@ Here's a summary of what's new in the .NET SDK in this preview release:
 
 - [More consistent command order](#more-consistent-command-order)
 
+.NET SDK updates in .NET 10:
+
+- [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
+
 ## More consistent command order
 
 Starting in .NET 10, the `dotnet` CLI tool learned a few new aliases for commonly-used but often-forgotten commands. The new commands are:
