@@ -10,12 +10,11 @@ Note: the term "issue" will be used to mean both issue and PR.
 
 If you see an issue that is of significant concern, please bias to action. We trust your judgement.
 
-The quickest and most important action you can take is to close an issue. This will remove the problematic content from view for most people. This action can provide time for the moderators to act. 
+The quickest and most important action you can take is to close an issue. This will remove the problematic content from view for most people. This action can provide time for the moderators to act.
 
 The bar for closing an issue should be low. We can always re-open it if that's the right choice. Don't write a response about code of conduct violations and "do better next time". Just close the issue. Leave the response (if one is needed at all) to the moderators.
 
 GitHub offers a self-service "Report content" capability. Using it is a great option. It is often the case that a user is behaving in similar ways in multiple communities/orgs. GitHub will notice this and can act based on their broader perspective.
-
 
 ![Image](https://github.com/user-attachments/assets/bd84e1d8-92bc-48c6-9296-05f117554c46)
 
