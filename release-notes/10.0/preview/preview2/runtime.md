@@ -85,7 +85,7 @@ Notice how `foreach_opaque_array_via_interface` allocates memory on the heap, su
 |------------------------------------------------------------- |-----------:|------:|----------:|
 | foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
 | foreach_opaque_array_via_interface (.NET 9)                  |   874.7 ns |  5.80 |      32 B |
-| foreach_opaque_array_via_interface (.NET 10)                 |   277.9 ns |  1.84 |      32 B |
+| foreach_opaque_array_via_interface (.NET 10)                 |   277.9 ns |  1.84 |         - |
 
 ## Inlining of Late Devirtualized Methods
 
