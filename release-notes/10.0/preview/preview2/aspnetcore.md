@@ -149,7 +149,7 @@ The source generator processes XML files included in the `AdditionalFiles` prope
 ```xml
 <Target Name="AddXmlSources" BeforeTargets="CoreCompile">
   <ItemGroup>
-    <AdditionalFiles Include="$(PkgSome_Package/lib/net10.0/Some.Package.xml" />
+    <AdditionalFiles Include="$(PkgSome_Package)/lib/net10.0/Some.Package.xml" />
   </ItemGroup>
 </Target>
 ```
