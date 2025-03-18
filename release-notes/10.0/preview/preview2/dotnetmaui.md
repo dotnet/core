@@ -66,13 +66,13 @@ With this new platform-specific you can display a modal page as a popover on iOS
 ```csharp
 public partial class PopoverPage : ContentPage
 {
-  	public PopoverPage(View modal, Rectangle rectangle)
-  	{
+    public PopoverPage(View modal, Rectangle rectangle)
+    {
         InitializeComponent();
         On<iOS>().SetModalPopoverView(modal);
         On<iOS>().SetModalPopoverRect(rectangle);
         On<iOS>().SetModalPresentationStyle(UIModalPresentationStyle.Popover);
-  	}
+    }
 }
 ```
 
@@ -83,7 +83,7 @@ Page modalPage = new PopoverPage(originButton, Rectangle.Empty);
 await Navigation.PushModalAsync(modalPage);
 ```
 
-More info see the [GitHub pull request](https://github.com/dotnet/maui/pull/23984). 
+More info see the [GitHub pull request](https://github.com/dotnet/maui/pull/23984).
 
 ## Switch.OffColor
 
