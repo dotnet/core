@@ -10,9 +10,7 @@ This release is focused on quality improvements to .NET MAUI, .NET for Android, 
   - [HybridWebView new InvokeJavascriptAsync Method](#hybridwebview-new-invokejavascriptasync-method)
   - [Deprecations](#deprecations)
 - [.NET for Android](#net-for-android)
-  - [Feature](#feature-android)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
-  - [Feature](#feature-ios)
 
 .NET MAUI updates in .NET 10:
 
@@ -92,7 +90,7 @@ You can now set the `OffColor` in addition to `OnColor` for a `Switch` control.
 
 ```xaml
 <Switch OffColor="Red"
-        OnColor="Green" />
+        OnColor="Blue" />
 ```
 
 ## SearchBar.SearchIconColor
@@ -118,18 +116,10 @@ More info: https://github.com/dotnet/maui/pull/27594
 
 This release was focused on quality improvements. A detailed list can be found on [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
 
-### Feature Android
-
-This is a feature about Android.
-
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
-This release was focused on quality improvements. A details list can be found on [xamarin/xamarin-macios GitHub released](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
-
-### Feature iOS
-
-This is a feature about iOS.
+This release was focused on quality improvements. A detailed list can be found on [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
 
 ## Community Contributors
 
-Thank you to ...
+Thank you to community contributors [@MartyIX](https://github.com/MartyIX), [@StephaneDelcroix](https://github.com/StephaneDelcroix), [@Zerod159](https://github.com/Zerod159), [@jonathanpeppers](https://github.com/jonathanpeppers), [@jfversluis](https://github.com/jfversluis), [@rmarinho](https://github.com/rmarinho), [@albyrock87](https://github.com/albyrock87), [@symbiogenesis](https://github.com/symbiogenesis), [@pjcollins](https://github.com/pjcollins), [@sthewissen](https://github.com/sthewissen), [@spadapet](https://github.com/spadapet), [@PureWeen](https://github.com/PureWeen), [@jsuarezruiz](https://github.com/jsuarezruiz), [@dotnet-bot](https://github.com/dotnet-bot), [@rabuckley](https://github.com/rabuckley), [@csigs](https://github.com/csigs), [@pictos](https://github.com/pictos), [@APoukar](https://github.com/APoukar), [@kubaflo](https://github.com/kubaflo), [@piersdeseilligny](https://github.com/piersdeseilligny), [@tj-devel709](https://github.com/tj-devel709), [@jkurdek](https://github.com/jkurdek), [@mohsenbgi](https://github.com/mohsenbgi), [@SuthiYuvaraj](https://github.com/SuthiYuvaraj), [@KarthikRajaKalaimani](https://github.com/KarthikRajaKalaimani), [@BagavathiPerumal](https://github.com/BagavathiPerumal), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman), [@dotnet-maestro](https://github.com/dotnet-maestro), [@anandhan-rajagopal](https://github.com/anandhan-rajagopal), [@NirmalKumarYuvaraj](https://github.com/NirmalKumarYuvaraj), [@Shalini-Ashokan](https://github.com/Shalini-Ashokan), [@Vignesh-SF3580](https://github.com/Vignesh-SF3580), [@Ahamed-Ali](https://github.com/Ahamed-Ali), [@NanthiniMahalingam](https://github.com/NanthiniMahalingam), [@devanathan-vaithiyanathan](https://github.com/devanathan-vaithiyanathan), [@prakashKannanSf3972](https://github.com/prakashKannanSf3972), [@Dhivya-SF4094](https://github.com/Dhivya-SF4094), [@nivetha-nagalingam](https://github.com/nivetha-nagalingam), [@NafeelaNazhir](https://github.com/NafeelaNazhir), [@LogishaSelvarajSF4525](https://github.com/LogishaSelvarajSF4525), [@HarishKumarSF4517](https://github.com/HarishKumarSF4517), [@bhavanesh2001](https://github.com/bhavanesh2001), and [@SubhikshaSf4851](https://github.com/SubhikshaSf4851).
