@@ -40,22 +40,21 @@ public class ArrayDeAbstraction
 ```
 
 In `foreach_static_readonly_array`, the type of `array` is transparent, so it is easy for the JIT to generate efficient code. In `foreach_static_readonly_array_via_interface`, the type of `array` is hidden behind an `IEnumerable`, introducing an object allocation and virtual calls for advancing and dereferencing the iterator. In .NET 9, this overhead impacts performance profoundly:
-```
+
 | Method                                                       | Mean       | Ratio | Allocated |
 |------------------------------------------------------------- |-----------:|------:|----------:|
 | foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
 | foreach_static_readonly_array_via_interface (.NET 9)         |   851.8 ns |  5.65 |      32 B |
-```
 
 Thanks to improvements to the JIT's inlining, stack allocation, and loop cloning abilities (all of which are detailed in [dotnet/runtime #108913](https://github.com/dotnet/runtime/issues/108913)), the object allocation is gone, and runtime impact has been reduced substantially:
-```
+
 | Method                                                       | Mean       | Ratio | Allocated |
 |------------------------------------------------------------- |-----------:|------:|----------:|
 | foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
 | foreach_static_readonly_array_via_interface (.NET 10)        |   280.0 ns |  1.86 |         - |
-```
 
 We plan to close the gap entirely by ensuring the loop optimizations introduced in .NET 9 can kick in for these enumeration patterns. Now, let's consider a more challenging example:
+
 ```csharp
 [MethodImpl(MethodImplOptions.NoInlining)]
 IEnumerable<int> get_opaque_array() => s_ro_array;
@@ -71,30 +70,28 @@ public int foreach_opaque_array_via_interface()
 ```
 
 When compiling `foreach_opaque_array_via_interface`, the JIT does not know the underlying collection type. Fortunately, PGO data can tell the JIT what the likely type of the collection is, and via guarded devirtualization, the JIT can create a fast path under a test for this type. The benefits of PGO are significant, but it isn't enough to reach performance parity with the baseline:
-```
+
 | (.NET 9) Method                                              | Mean       | Ratio | Allocated |
 |------------------------------------------------------------- |-----------:|------:|----------:|
 | foreach_static_readonly_array                                |   153.4 ns |  1.00 |         - |
 | foreach_opaque_array_via_interface                           |   843.2 ns |  5.50 |      32 B |
 | foreach_opaque_array_via_interface (no PGO)                  | 2,076.4 ns | 13.54 |      32 B |
-```
 
 Notice how `foreach_opaque_array_via_interface` allocates memory on the heap, suggesting the JIT failed to stack-allocate and promote the enumerator to registers. This is because the JIT relies on a technique called escape analysis to enable stack allocation. Escape analysis determines if an object's lifetime can exceed that of its creation context; if the JIT can guarantee an object will not outlive the current method, it can safely allocate it on the stack. In the above example, calling an interface method on the enumerator to control iteration causes it to escape, as the call takes a reference to the enumerator object. On the fast path of the type test, the JIT can try to devirtualize and inline these interface calls to keep the enumerator from escaping. However, escape analysis typically considers the whole method context, so the slow path's reliance on interface calls prevents the JIT from stack-allocating the enumerator at all.
 
 [dotnet/runtime #111473](https://github.com/dotnet/runtime/pull/111473) introduces conditional escape analysis -- a flow-sensitive form of the technique -- to the JIT. Conditional escape analysis can determine if an object will escape only on certain paths through the method, and prompt the JIT to create a fast path where the object never escapes. For array enumeration scenarios, conditional escape analysis reveals the enumerator will escape only when type tests for the collection fail, enabling the JIT to create a copy of the iteration code where the enumerator is stack-allocated and promoted. Once again, this reduces the abstraction cost considerably:
-```
+
 | Method                                                       | Mean       | Ratio | Allocated |
 |------------------------------------------------------------- |-----------:|------:|----------:|
 | foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
 | foreach_opaque_array_via_interface (.NET 9)                  |   874.7 ns |  5.80 |      32 B |
 | foreach_opaque_array_via_interface (.NET 10)                 |   277.9 ns |  1.84 |      32 B |
-```
 
 ## Inlining of Late Devirtualized Methods
 
 The JIT compiler can replace virtual method calls with non-virtual equivalents when it can determine the exact type of the `this` object. However, this type information may not be available to the JIT unless a specific method call is inlined. Consider the following example:
 
-```cs
+```csharp
 IC obj = GetObject();
 obj.M();
 
@@ -118,7 +115,7 @@ During inlining, a temporary variable may be created to hold the return value of
 
 With the above two improvements, along with recent efforts to de-abstract array enumeration, the JIT can now devirtualize, inline, stack-allocate, and then perform struct promotion on arbitrary enumerators. This means the abstraction overhead can be entirely eliminated, even without PGO data. Consider the following example:
 
-```cs
+```csharp
 var r = GetRangeEnumerable(0, 10);
 foreach (var i in r)
 {
