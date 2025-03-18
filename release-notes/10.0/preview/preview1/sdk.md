@@ -4,6 +4,10 @@
 
 - [Pruning of Framework-provided Package References](#pruning-of-framework-provided-package-references)
 
+.NET SDK updates in .NET 10:
+
+- [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
+
 ## Pruning of Framework-provided Package References
 
 Starting in .NET 10, the [NuGet Audit][nuget-audit] feature can now [prune framework-provided package references][prune-package-references-spec] that are not used by the project. This feature will be enabled by default for all .NET TargetFrameworks (e.g. `net8.0`, `net10.0`) and .NET Standard 2.0 and greater TargetFrameworks. This change will help reduce the number of packages that are restored and analyzed during the build process, which can lead to faster build times and reduced disk space usage. It also can lead to a reduction in false positives from NuGet Audit and other dependency-scanning mechanisms.
