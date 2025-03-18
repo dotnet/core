@@ -63,12 +63,12 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 
 ## Windows Forms
 
-- [What's new in Windows Forms(https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100)
+- [What's new in Windows Forms](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100)
 - [Preview 1](preview/preview1/winforms.md)
 - [Preview 2](preview/preview2/winforms.md)
 
 ## WPF
 
-- [What's new in Windows Forms(https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100)
+- [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100)
 - [Preview 1](preview/preview1/wpf.md)
 - [Preview 2](preview/preview2/wpf.md)

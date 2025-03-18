@@ -6,7 +6,7 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
   - [ShadowTypeConverter](#shadowtypeconverter)
   - [SpeechOptions Rate](#speechoptions-rate)
   - [Styling Modal as Popover](#styling-modal-as-popover)
-  - [Switch.OffColor](#switch.offcolor)
+  - [Switch.OffColor](#switchoffcolor)
   - [HybridWebView new InvokeJavascriptAsync Method](#hybridwebview-new-invokejavascriptasync-method)
   - [Deprecations](#deprecations)
 - [.NET for Android](#net-for-android)
@@ -37,6 +37,7 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
     ```xaml
     <VerticalStackLayout BackgroundColor="#fff" Shadow="4 4 16 #000000 0.5" />
     ```
+
 ## SpeechOptions Rate
 
 When using [Text-to-Speech](https://learn.microsoft.com/dotnet/maui/platform-integration/device-media/text-to-speech) in .NET 10 you now have the option to control the rate at which the audio plays by setting `Rate` on the `SpeechOptions`.
@@ -67,10 +68,10 @@ public partial class PopoverPage : ContentPage
 {
   	public PopoverPage(View modal, Rectangle rectangle)
   	{
-    		InitializeComponent();
-    		On<iOS>().SetModalPopoverView(modal);
-    		On<iOS>().SetModalPopoverRect(rectangle);
-    		On<iOS>().SetModalPresentationStyle(UIModalPresentationStyle.Popover);
+        InitializeComponent();
+        On<iOS>().SetModalPopoverView(modal);
+        On<iOS>().SetModalPopoverRect(rectangle);
+        On<iOS>().SetModalPresentationStyle(UIModalPresentationStyle.Popover);
   	}
 }
 ```
@@ -82,7 +83,7 @@ Page modalPage = new PopoverPage(originButton, Rectangle.Empty);
 await Navigation.PushModalAsync(modalPage);
 ```
 
-More info: https://github.com/dotnet/maui/pull/23984
+More info see the [GitHub pull request](https://github.com/dotnet/maui/pull/23984). 
 
 ## Switch.OffColor
 
@@ -105,7 +106,7 @@ You can now set the color of the search icon that appears with a `SearchBar` by 
 
 A method for `InvokeJavascriptAsync` has been made public for when you don't want a generic argument or return type argument to be required as was the case previously.
 
-More info: https://github.com/dotnet/maui/pull/27594
+More info see the [GitHub pull request](https://github.com/dotnet/maui/pull/27594).
 
 ## Deprecations
 
