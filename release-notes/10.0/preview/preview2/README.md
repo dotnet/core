@@ -1,6 +1,6 @@
 # .NET 10 Preview 2 - Release Notes
 
-.NET 10 Preview 2 released on March X, 2025. Find more information on new features released in .NET 10 Preview 2 by browsing through the release notes below:
+.NET 10 Preview 2 released on March 18, 2025. Find more information on new features released in .NET 10 Preview 2 by browsing through the release notes below:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
