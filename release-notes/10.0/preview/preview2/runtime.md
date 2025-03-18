@@ -112,8 +112,6 @@ If the call to `GetObject` is not inlined, the JIT cannot determine that `obj` i
 
 During inlining, a temporary variable may be created to hold the return value of the callee. With [dotnet/runtime #111948](https://github.com/dotnet/runtime/pull/111948) (credit: [@hez2010](https://github.com/hez2010)), the JIT now analyzes and updates the type of this temporary variable accordingly. If all return sites in a callee yield the same exact type, this precise type information is leveraged to devirtualize subsequent calls.
 
----
-
 With the above two improvements, along with recent efforts to de-abstract array enumeration, the JIT can now devirtualize, inline, stack-allocate, and then perform struct promotion on arbitrary enumerators. This means the abstraction overhead can be entirely eliminated, even without PGO data. Consider the following example:
 
 ```cs
