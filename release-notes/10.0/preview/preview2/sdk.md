@@ -19,7 +19,7 @@ Starting in .NET 10, the `dotnet` CLI tool learned a few new aliases for commonl
 - `dotnet reference list`
 - `dotnet reference remove`
 
-These commands exist in the current versions of the `dotent` CLI, but they exist in verb-first forms:
+These commands exist in the current versions of the `dotnet` CLI, but they exist in verb-first forms:
 `dotnet add package`, `dotnet list package`, `dotnet remove package`, `dotnet add reference`, `dotnet list reference`, and `dotnet remove reference`.
 The new aliases are provided to make the commands easier to remember and type.
 Over the years, we have heard your feedback that the verb-first forms are not as intuitive as they could be, so we hope that these new aliases will help.
