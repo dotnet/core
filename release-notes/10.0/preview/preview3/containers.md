@@ -7,4 +7,3 @@ Here's a summary of what's new in container images in this preview release:
 ## Feature
 
 Something about the feature
-
