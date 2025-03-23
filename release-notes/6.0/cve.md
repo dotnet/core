@@ -8,6 +8,12 @@ Your app needs to be on the latest .NET 6 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older .NET 6 patch version.
 
+- 6.0.35 (October 2024)
+  - [CVE-2024-43483 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/327)
+  - [CVE-2024-43484 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/328)
+  - [CVE-2024-43485 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/329)
+- 6.0.33 (August 2024)
+  - No new CVEs.
 - 6.0.32 (July 2024)
   - [CVE-2024-38095 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/312)
   - [CVE-2024-38081 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/313)
@@ -77,7 +83,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 6.0.10 (October 2022)
   - [CVE-2022-41032 | .NET Core Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/236)
 - 6.0.9 (September 2022)
-  - [CVE-2022-38013 | .NET Core Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/234) 
+  - [CVE-2022-38013 | .NET Core Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/234)
 - 6.0.8 (August 2022)
   - [CVE-2022-34716 | .NET Core Information Disclosure Vulnerability](https://github.com/dotnet/announcements/issues/232)
 - 6.0.7 (July 2022)

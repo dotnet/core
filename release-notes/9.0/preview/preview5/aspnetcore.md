@@ -31,7 +31,6 @@ To this effect, we're introducing a new API for handling static web assets calle
 
 `MapStaticAssets` can replace `UseStaticFiles` in most situations. However, it's optimized for serving the assets that your app has knowledge of at build and publish time. This means that if your app serves assets from other locations on disk, or embedded resources, etc. then using `UseStaticFiles` is still the right choice.
 
-
 What are the things that `MapStaticAssets` does that `UseStaticFiles` doesn't?
 
 - **Build and publish time compression for all the assets.** Uncompressed static web assets are precompressed using gzip as part of the build and then also with brotli during publish to reduce the download size.
@@ -68,7 +67,6 @@ MudBlazor.min.js | 47.4 | 9.2 | 80.59%
 The best part is that the improvements happen automatically after switching to use `MapStaticAssets`. When you decide to bring in a new library or copy some new JS/CSS library to your project, you don't have to do anything. It'll get optimized as part of the build and served to the browser faster, which is especially important for mobile environments with lower bandwidth or spotty connections.
 
 Even apps that currently use dynamic compression from the server can benefit from using `MapStaticAssets`. With `MapStaticAssets` there's no need for server specific configuration to enable compression. The compression ratio is also higher because you're able to spend extra time during the build process to ensure that the assets are as small as they can be. How much smaller? If we take MudBlazor as an example, IIS will compress the CSS bundle to around 90KB, while brotli with max settings will compress to 37KB.
-
 
 ## Improved Blazor Server reconnection experience
 
@@ -121,7 +119,7 @@ The custom `AuthenticationStateProvider` implementations use the `PersistentComp
 
 There are now APIs that can be called in the server and client projects to add this functionality:
 
-* In the server project, use [`AddAuthenticationStateSerialization`](https://source.dot.net/#Microsoft.AspNetCore.Components.WebAssembly.Server/WebAssemblyRazorComponentsBuilderExtensions.cs,5557151694ca7c07) in `Program.cs` to add the necessary services to serialize the authentication state on the server.
+- In the server project, use [`AddAuthenticationStateSerialization`](https://source.dot.net/#Microsoft.AspNetCore.Components.WebAssembly.Server/WebAssemblyRazorComponentsBuilderExtensions.cs,5557151694ca7c07) in `Program.cs` to add the necessary services to serialize the authentication state on the server.
 
   ```csharp
   builder.Services.AddRazorComponents()
@@ -129,7 +127,7 @@ There are now APIs that can be called in the server and client projects to add t
       .AddAuthenticationStateSerialization();
   ```
 
-* In the client project, use [`AddAuthenticationStateDeserialization`](https://apisof.net/catalog/4a296157ae3e0f6f0c352bfb4a0c5d5a?) in `Program.cs` to add the necessary services to deserialize the authentication state in the browser.
+- In the client project, use [`AddAuthenticationStateDeserialization`](https://apisof.net/catalog/4a296157ae3e0f6f0c352bfb4a0c5d5a?) in `Program.cs` to add the necessary services to deserialize the authentication state in the browser.
 
   ```csharp
   builder.Services.AddAuthorizationCore();
@@ -151,13 +149,12 @@ The Blazor Web App project template has been updated to use these APIs.
 
 The new ".NET MAUI Blazor Hybrid and Web App" solution template makes it easier to create a .NET MAUI Blazor Hybrid app and a Blazor web app that share the same UI. This template shows how to create apps that target Android, iOS, Mac, Windows, and Web while maximizing code reuse.
 
-
 Key features of this template include:
 
-* The ability to choose a Blazor interactive render mode for the web app.
-* Automatic creation of the appropriate projects, including a Blazor Web App and a .NET MAUI Blazor Hybrid app.
-* The created projects are wired up to use a shared Razor Class Library that contains all of the UI components and pages.
-* Sample code that demonstrates how to use service injection to provide different interface implementations for the Blazor Hybrid and Blazor Web App. In .NET 8 this is a manual process documented in [Build a .NET MAUI Blazor Hybrid app with a Blazor Web App](https://aka.ms/maui-blazor-web).
+- The ability to choose a Blazor interactive render mode for the web app.
+- Automatic creation of the appropriate projects, including a Blazor Web App and a .NET MAUI Blazor Hybrid app.
+- The created projects are wired up to use a shared Razor Class Library that contains all of the UI components and pages.
+- Sample code that demonstrates how to use service injection to provide different interface implementations for the Blazor Hybrid and Blazor Web App. In .NET 8 this is a manual process documented in [Build a .NET MAUI Blazor Hybrid app with a Blazor Web App](https://aka.ms/maui-blazor-web).
 
 To get started, install the [.NET 9 SDK](https://get.dot.net/9) (Preview 5 or later) then install the .NET MAUI workload, which contains the template.
 
@@ -172,7 +169,6 @@ dotnet new maui-blazor-web -n AllTheTargets
 ```
 
 Alternatively, you can use the template from Visual Studio:
-
 
 ![Blazor Hybrid and Web App template in Visual Studio](./media/blazor-hybrid-and-web-template-vs.png)
 

@@ -18,14 +18,14 @@ You can see an example of both of these features at the same time in the followi
 
 We've added an option to `dotnet tool install` that lets users decide how .NET Tools should be run. When you install a tool via `dotnet tool install`, or when you run an already-installed tool via `dotnet tool run <toolname>`, you can add a new flag called `--allow-roll-forward`. When you do this, the tool will be configured with RollForward mode `Major`. This mode allows the tool to run on a newer major version of .NET if the matching .NET version is not available. The primary scenario of this feature is to help early adopters use .NET Tools without tool authors having to change any code!
 
-# Other Reading
+## Other Reading
 
 SDK updates in .NET 2 Preview 2:
 
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/sdk.md)
+- [Release notes](sdk.md)
 - [What's new in the .NET Runtime in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation
 
 .NET 9 Preview 2:
 
 - [Discussion](https://aka.ms/dotnet/9/preview2)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/README.md)
+- [Release notes](README.md)

@@ -1,6 +1,6 @@
 {
     "channel-version": "6.0",
-    "last-updated": "2024-07-11",
+    "last-updated": "2024-10-10",
     "families": [
         {
             "name": "Android",
@@ -15,19 +15,19 @@
                         "Arm64",
                         "x64"
                     ],
-                    "supported-versions": [
+                    "supported-versions": [],
+                    "unsupported-versions": [
                         "14",
                         "13",
                         "12.1",
-                        "12"
-                    ],
-                    "unsupported-versions": [
+                        "12",
                         "11",
                         "10",
                         "9"
                     ],
                     "notes": [
-                        "API 21 is used as the minimum SDK target."
+                        "API 21 is used as the minimum SDK target.",
+                        "Support for .NET MAUI 6 has ended."
                     ]
                 }
             ]
@@ -42,16 +42,16 @@
                     "architectures": [
                         "Arm64"
                     ],
-                    "supported-versions": [
+                    "supported-versions": [],
+                    "unsupported-versions": [
                         "17",
                         "16",
-                        "15"
-                    ],
-                    "unsupported-versions": [
+                        "15",
                         "12"
                     ],
                     "notes": [
-                        "iOS 10.0 is used as the minimum SDK target."
+                        "iOS 10.0 is used as the minimum SDK target.",
+                        "Support for .NET MAUI 6 has ended."
                     ]
                 },
                 {
@@ -61,13 +61,14 @@
                     "architectures": [
                         "Arm64"
                     ],
-                    "supported-versions": [
+                    "supported-versions": [],
+                    "unsupported-versions": [
                         "17",
                         "16",
                         "15"
                     ],
-                    "unsupported-versions": [
-                        "12"
+                    "notes": [
+                        "Support for .NET MAUI 6 has ended."
                     ]
                 },
                 {
@@ -79,11 +80,12 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "15",
                         "14",
-                        "13",
-                        "12"
+                        "13"
                     ],
                     "unsupported-versions": [
+                        "12",
                         "11",
                         "10.15"
                     ],
@@ -100,13 +102,15 @@
                     "architectures": [
                         "Arm64"
                     ],
-                    "supported-versions": [
+                    "supported-versions": [],
+                    "unsupported-versions": [
                         "17",
                         "16",
-                        "15"
-                    ],
-                    "unsupported-versions": [
+                        "15",
                         "12"
+                    ],
+                    "notes": [
+                        "Support for .NET MAUI 6 has ended."
                     ]
                 }
             ]
@@ -153,7 +157,7 @@
                         "7"
                     ],
                     "notes": [
-                        "The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) or another distro."
+                        "The CentOS project has moved to [supporting CentOS Stream as its future](https://blog.centos.org/2020/12/future-is-centos-stream/). Users can consider [migrating to Red Hat Enterprise Linux](https://www.redhat.com/blog/centos-linux-has-reached-its-end-life-eol) or another distro."
                     ]
                 },
                 {
@@ -244,7 +248,9 @@
                     ],
                     "supported-versions": [
                         "9",
-                        "8",
+                        "8"
+                    ],
+                    "unsupported-versions": [
                         "7"
                     ],
                     "notes": [
@@ -261,6 +267,7 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "15.6",
                         "15.5",
                         "12.5"
                     ],
@@ -285,11 +292,11 @@
                     ],
                     "supported-versions": [
                         "24.04",
-                        "23.10",
                         "22.04",
                         "20.04"
                     ],
                     "unsupported-versions": [
+                        "23.10",
                         "23.04",
                         "22.10",
                         "21.10",
@@ -330,19 +337,22 @@
                         "x86"
                     ],
                     "supported-versions": [
+                        "11-24h2-iot-lts",
+                        "11-24h2-e-lts",
+                        "11-24h2-e",
+                        "11-24h2-w",
                         "11-23h2-e",
                         "11-23h2-w",
                         "11-22h2-e",
-                        "11-22h2-w",
                         "10-22h2",
-                        "11-21h2-e",
                         "10-21h2-e-lts",
                         "10-21h2-iot-lts",
-                        "10-20h2-e-lts",
                         "10-1809-e-lts",
                         "10-1607-e-lts"
                     ],
                     "unsupported-versions": [
+                        "11-22h2-w",
+                        "11-21h2-e",
                         "11-21h2-w",
                         "10-21h2-e",
                         "10-21h2-w",
@@ -393,10 +403,10 @@
                         "x86"
                     ],
                     "supported-versions": [
-                        "23H2",
                         "2022",
                         "2019",
                         "2016",
+                        "2012-R2",
                         "2012"
                     ],
                     "unsupported-versions": [

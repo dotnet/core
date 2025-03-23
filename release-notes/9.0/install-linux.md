@@ -2,7 +2,7 @@
 
 The following instructions demonstrate installing .NET 9 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
 
-[Linux package dependencies](linux-packages.md) describes the set of packages required to run .NET on Linux.
+[.NET 9 Required Packages](os-packages.md) describes the set of packages required to run .NET on Linux.
 
 ## Distributions
 
@@ -35,7 +35,7 @@ Preview release installers are not available from the Microsoft package reposito
 
 Here's what the script does.
 
-- Detects the distribution and version. The script supports platforms and versions listed in [.NET 9.0 - Supported OS versions](https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md).
+- Detects the distribution and version. The script supports platforms and versions listed in [.NET 9.0 - Supported OS versions](supported-os.md).
 - Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack the installer packages.
 - Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
 - Downloads the system dependency installer, if needed.
@@ -49,14 +49,14 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -Lo dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/911f82cf-0f87-46c2-8d70-44fab9a0f3c9/137ec23686722b8119bd62def8d7b117/dotnet-sdk-9.0.100-preview.2.24157.14-linux-x64.tar.gz
+~# curl -Lo dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/3606de37-1325-4f5f-bbe9-1bc44b3c1c7f/91872629e9f0c205cace9c462d5e89a4/dotnet-sdk-9.0.200-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
 ~# export DOTNET_ROOT=~/dotnet
 ~# export PATH=$PATH:~/dotnet
 ~# dotnet --version
-9.0.100-preview.2.24157.14
+9.0.200
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.

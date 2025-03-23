@@ -1,17 +1,45 @@
 # License Information
 
-The .NET projects uses the MIT license for source and binaries.
+The .NET project uses source and binaries from multiple sources that may be important to your use of .NET.
 
-## Third-party code
+This document is provided for informative purposes only and is not itself a license.
 
-The project includes source from other projects, as described in third-party notices, for example in the [dotnet/runtime repo](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT). Only permissively licensed code is allowed, in accordance with [project policies](https://github.com/dotnet/runtime/blob/main/CONTRIBUTING.md#copying-files-from-other-projects).
+## Source code
+
+.NET source uses the MIT license.
+
+[Each repo](./Documentation/core-repos.md) has:
+
+- A license, for example, [dotnet/runtime LICENSE.TXT](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT).
+- Third party notice file, for example, [dotnet/runtime THIRD-PARTY-NOTICES.TXT](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT)
+
+More information:
+
+- [Project copyright guidance](https://github.com/dotnet/runtime/blob/main/docs/project/copyright.md)
+
+## Product distributions
+
+Product distributions use the following license:
+
+- On Linux and macOS: [MIT license](https://github.com/dotnet/core/blob/main/LICENSE.TXT)
+- On Windows: [.NET Library License](https://dotnet.microsoft.com/dotnet_library_license.htm)
+
+Product distributions include [downloadable assets](https://dotnet.microsoft.com/download/dotnet) and [runtime packs](https://www.nuget.org/packages/Microsoft.NETCore.App.Runtime.win-x64/).
+
+More information:
+
+- [Windows license information](https://github.com/dotnet/core/blob/main/license-information-windows.md).
+- [.NET Asset Licensing Model](https://github.com/dotnet/runtime/blob/main/docs/project/licensing-assets.md)
+
+## Package distributions
+
+Library packages use the MIT license, for example [System.Text.Json](https://www.nuget.org/packages/System.Text.Json).
 
 ## Redistribution
 
 Binaries produced by .NET SDK compilers (C#, F#, VB) can be redistributed without additional restrictions. The only restrictions are based on the license of the compiler inputs used to produce the binary.
 
-Parts of the .NET runtime embedded in applications, including [platform-specific executable hosts](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#framework-dependent-executable), and [self-contained deployments](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#self-contained-deployment), are subject to [.NET](https://github.com/dotnet/dotnet/blob/main/LICENSE.TXT) and [third-party notice](https://github.com/dotnet/dotnet/blob/main/THIRD-PARTY-NOTICES.txt) license terms.
+Applications are subject to the same terms as are covered by "Product distributions" and "Package distibutions", above.
 
-Binaries that target Windows are subject to [additional terms](license-information-windows.md).
-
-This document is provided for informative purposes only and is not itself a license.
+Parts of the .NET runtime are embedded in applications, including [platform-specific executable hosts](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#framework-dependent-executable),
+and [self-contained deployments](https://learn.microsoft.com/dotnet/core/deploying/deploy-with-cli#self-contained-deployment).

@@ -2,6 +2,8 @@
 
 The .NET team uses the following policies for [.NET releases](releases.md).
 
+The NuGet packages that the team maintains are governed by [.NET Package Servicing](./Documentation/policies/package-servicing.md)
+
 ## Release cadence
 
 New major .NET versions are released annually in November, at [.NET Conf](https://www.dotnetconf.net/).
@@ -47,20 +49,21 @@ As the end of support nears for a given .NET version, we strongly recommend you 
 
 Support ends for a given .NET version when its published end of support date has passed. Support typically ends on a patch day. If there is a critical issue for that .NET version, it will be patched for the last time on that day. There will not be any patches after that point. Continuing to use an unsupported version will expose you to security vulnerabilities.
 
-[.NET packages](https://www.nuget.org/profiles/dotnetframework) are no longer supported when either of the following occurs:
+### Tooling
 
-- A new version of the package is available. Some packages support multiple patches versions at once, one per major version matching a supported major .NET version.
-- The package exclusively includes implementations for out-of-support .NET versions.
+The month after a .NET version goes out of support, we mark that version as optional and out of support in Visual Studio. Customers can remove it from their Visual Studio installs by using the [remove out of support components](https://devblogs.microsoft.com/visualstudio/removing-out-of-support-components-from-your-visual-studio-installations/) experience.
 
-Nuget.org includes [version](https://www.nuget.org/packages/System.Text.Json/#versions-body-tab) and [supported framework](https://www.nuget.org/packages/System.Text.Json/#supportedframeworks-body-tab) information that can be used to determine support status for packages.
+Additionally, customers targeting an out-of-support .NET version in their projects will get a notification in Visual Studio.
+
+6 months after a .NET version goes out of support, newer in-support .NET SDK versions are updated to produce warning [NETSDK1138: The target framework is out of support](https://learn.microsoft.com/dotnet/core/tools/sdk-errors/netsdk1138) when targeting the out-of-support version.
 
 ## Support requirements
 
 To remain supported, you must do the following:
 
-- Use a supported SDK
-- Target a supported .NET version (via the `TargetFramework` property)
-- Reference supported packages
+* Use a [supported SDK](https://dotnet.microsoft.com/download)
+* Target a [supported .NET version](./releases.md) (via the `TargetFramework` property)
+* Reference [supported packages](./Documentation/policies/package-servicing.md)
 
 ## Operating System support
 

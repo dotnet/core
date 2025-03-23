@@ -1,0 +1,591 @@
+{
+  "description": "A major product release, including detailed information for each patch release.",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "channel-version": {
+      "description": "Major (or major.minor) version of the product.",
+      "type": "string"
+    },
+    "latest-release": {
+      "description": "The version of the most recent patch release.",
+      "type": "string"
+    },
+    "latest-release-date": {
+      "description": "The date of the most recent release.",
+      "type": "string",
+      "format": "date"
+    },
+    "latest-release-security": {
+      "description": "Wehther the latest release includes security fixes.",
+      "type": "boolean"
+    },
+    "latest-runtime": {
+      "description": "The runtime version of the most recent patch release.",
+      "type": "string"
+    },
+    "latest-sdk": {
+      "description": "The SDK version of the most recent patch release.",
+      "type": "string"
+    },
+    "product": {
+      "description": "The product marketing name.",
+      "type": "string"
+    },
+    "support-phase": {
+      "description": "The current support phase of the major version.",
+      "enum": [
+        "preview",
+        "go-live",
+        "active",
+        "maintenance",
+        "eol"
+      ]
+    },
+    "release-type": {
+      "description": "The release type of the major version.",
+      "enum": [
+        "lts",
+        "sts"
+      ]
+    },
+    "eol-date": {
+      "description": "The end of life (EOL) date of the major version.",
+      "type": "string",
+      "format": "date"
+    },
+    "lifecycle-policy": {
+      "description": "Link to lifecycle page for the product.",
+      "type": "string"
+    },
+    "patch-releases-index-uri": {
+      "description": "Link to index file of detailed release descriptions (JSON format), with one file per patch release.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supported-os-info-uri": {
+      "description": "Link to supported OS matrix (JSON format).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "os-packages-info-uri": {
+      "description": "Link to OS package information (JSON format).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "releases": {
+      "description": "A set of patch releases with detailed release information.",
+      "type": "array",
+      "items": {
+        "description": "Detailed information for the patch release.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "release-date": {
+            "description": "The date of the patch release.",
+            "type": "string",
+            "format": "date"
+          },
+          "release-version": {
+            "description": "The version (branding) of the release",
+            "type": "string"
+          },
+          "security": {
+            "description": "Whether the release contains any CVE fixes.",
+            "type": "boolean"
+          },
+          "cve-list": {
+            "description": "The CVEs disclosed with the release.",
+            "type": "array",
+            "items": {
+              "description": "A disclosed vulnerability (AKA CVE).",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "cve-id": {
+                  "description": "The ID tracking the CVE.",
+                  "type": "string"
+                },
+                "cve-url": {
+                  "description": "The URL tracking the CVE at the authoritative site.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cve-id",
+                "cve-url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "release-notes": {
+            "description": "A URL to release notes.",
+            "type": "string"
+          },
+          "runtime": {
+            "description": "Runtime component of the release.",
+            "type": "object",
+            "properties": {
+              "version": {
+                "description": "The version of the component.",
+                "type": "string"
+              },
+              "version-display": {
+                "description": "The display or branding variant of the version, if different.",
+                "type": "string"
+              },
+              "vs-version": {
+                "description": "The version of Visual Studio that includes this component version.",
+                "type": "string"
+              },
+              "files": {
+                "description": "The files that are available for this component.",
+                "type": "array",
+                "items": {
+                  "description": "File that is part of a release.",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "name": {
+                      "description": "File name.",
+                      "type": "string"
+                    },
+                    "rid": {
+                      "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "Fully-qualified URL of file.",
+                      "type": "string"
+                    },
+                    "hash": {
+                      "description": "Content hash of file.",
+                      "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "rid",
+                    "url",
+                    "hash"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "vs-support": {
+                "description": "The minimum version of Visual Studio that supports this component version.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": null
+              }
+            },
+            "required": [
+              "version",
+              "version-display",
+              "vs-version",
+              "files"
+            ],
+            "additionalProperties": false
+          },
+          "sdk": {
+            "description": "SDK component of the release (primary SDK release).",
+            "type": "object",
+            "properties": {
+              "version": {
+                "description": "The version of the component.",
+                "type": "string"
+              },
+              "version-display": {
+                "description": "The display or branding variant of the version, if different.",
+                "type": "string"
+              },
+              "runtime-version": {
+                "description": "The version of the runtime that is included in the component.",
+                "type": "string"
+              },
+              "vs-version": {
+                "description": "The version of Visual Studio that includes this component version.",
+                "type": "string"
+              },
+              "vs-support": {
+                "description": "The minimum version of Visual Studio that supports this component version.",
+                "type": "string"
+              },
+              "csharp-version": {
+                "description": "The version of C# included in the component.",
+                "type": "string"
+              },
+              "fsharp-version": {
+                "description": "The version of F# included in the component.",
+                "type": "string"
+              },
+              "vb-version": {
+                "description": "The version of Visual Basic included in the component.",
+                "type": "string"
+              },
+              "files": {
+                "description": "The files that are available for the component.",
+                "type": "array",
+                "items": {
+                  "description": "File that is part of a release.",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "name": {
+                      "description": "File name.",
+                      "type": "string"
+                    },
+                    "rid": {
+                      "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "Fully-qualified URL of file.",
+                      "type": "string"
+                    },
+                    "hash": {
+                      "description": "Content hash of file.",
+                      "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "rid",
+                    "url",
+                    "hash"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "version",
+              "version-display",
+              "runtime-version",
+              "vs-version",
+              "vs-support",
+              "csharp-version",
+              "fsharp-version",
+              "vb-version",
+              "files"
+            ],
+            "additionalProperties": false
+          },
+          "sdks": {
+            "description": "SDK components of the release (often multiple, otherwise a repeat of \u0060Sdk\u0060 value within an array).",
+            "type": "array",
+            "items": {
+              "description": "SDK component of the release.",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "version": {
+                  "description": "The version of the component.",
+                  "type": "string"
+                },
+                "version-display": {
+                  "description": "The display or branding variant of the version, if different.",
+                  "type": "string"
+                },
+                "runtime-version": {
+                  "description": "The version of the runtime that is included in the component.",
+                  "type": "string"
+                },
+                "vs-version": {
+                  "description": "The version of Visual Studio that includes this component version.",
+                  "type": "string"
+                },
+                "vs-support": {
+                  "description": "The minimum version of Visual Studio that supports this component version.",
+                  "type": "string"
+                },
+                "csharp-version": {
+                  "description": "The version of C# included in the component.",
+                  "type": "string"
+                },
+                "fsharp-version": {
+                  "description": "The version of F# included in the component.",
+                  "type": "string"
+                },
+                "vb-version": {
+                  "description": "The version of Visual Basic included in the component.",
+                  "type": "string"
+                },
+                "files": {
+                  "description": "The files that are available for the component.",
+                  "type": "array",
+                  "items": {
+                    "description": "File that is part of a release.",
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "name": {
+                        "description": "File name.",
+                        "type": "string"
+                      },
+                      "rid": {
+                        "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
+                        "type": "string"
+                      },
+                      "url": {
+                        "description": "Fully-qualified URL of file.",
+                        "type": "string"
+                      },
+                      "hash": {
+                        "description": "Content hash of file.",
+                        "type": "string"
+                      },
+                      "akams": {
+                        "description": "Short-link URL to file.",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "default": null
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "rid",
+                      "url",
+                      "hash"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "version",
+                "version-display",
+                "runtime-version",
+                "vs-version",
+                "vs-support",
+                "csharp-version",
+                "fsharp-version",
+                "vb-version",
+                "files"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "aspnetcore-runtime": {
+            "description": "ASP.NET Core component of the release",
+            "type": "object",
+            "properties": {
+              "version": {
+                "description": "The version of the component.",
+                "type": "string"
+              },
+              "version-display": {
+                "description": "The display variant of the version, if different.",
+                "type": "string"
+              },
+              "version-aspnetcoremodule": {
+                "description": "The version of the ASP.NET Core module (ANCM) that is part of the component.",
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "vs-version": {
+                "description": "The version of Visual Studio that includes this component version.",
+                "type": "string"
+              },
+              "files": {
+                "description": "The files that are available for this component.",
+                "type": "array",
+                "items": {
+                  "description": "File that is part of a release.",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "name": {
+                      "description": "File name.",
+                      "type": "string"
+                    },
+                    "rid": {
+                      "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "Fully-qualified URL of file.",
+                      "type": "string"
+                    },
+                    "hash": {
+                      "description": "Content hash of file.",
+                      "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "rid",
+                    "url",
+                    "hash"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "version",
+              "version-display",
+              "version-aspnetcoremodule",
+              "vs-version",
+              "files"
+            ],
+            "additionalProperties": false
+          },
+          "windowsdesktop": {
+            "description": "Windows Desktop component of the release.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "version": {
+                "description": "The version of the component.",
+                "type": "string"
+              },
+              "version-display": {
+                "description": "The display or branding variant of the version, if different.",
+                "type": "string"
+              },
+              "files": {
+                "description": "The files that are available for this component.",
+                "type": "array",
+                "items": {
+                  "description": "File that is part of a release.",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "name": {
+                      "description": "File name.",
+                      "type": "string"
+                    },
+                    "rid": {
+                      "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "Fully-qualified URL of file.",
+                      "type": "string"
+                    },
+                    "hash": {
+                      "description": "Content hash of file.",
+                      "type": "string"
+                    },
+                    "akams": {
+                      "description": "Short-link URL to file.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "rid",
+                    "url",
+                    "hash"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "version",
+              "version-display",
+              "files"
+            ],
+            "additionalProperties": false,
+            "default": null
+          }
+        },
+        "required": [
+          "release-date",
+          "release-version",
+          "security",
+          "cve-list",
+          "release-notes",
+          "runtime",
+          "sdk",
+          "sdks",
+          "aspnetcore-runtime"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "channel-version",
+    "latest-release",
+    "latest-release-date",
+    "latest-release-security",
+    "latest-runtime",
+    "latest-sdk",
+    "product",
+    "support-phase",
+    "release-type",
+    "eol-date",
+    "lifecycle-policy",
+    "patch-releases-index-uri",
+    "supported-os-info-uri",
+    "os-packages-info-uri",
+    "releases"
+  ],
+  "additionalProperties": false
+}

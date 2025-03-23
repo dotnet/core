@@ -13,14 +13,14 @@ Runtime updates in .NET 9 Preview 2:
 .NET 9 Preview 2:
 
 - [Discussion](https://aka.ms/dotnet/9/preview2)
-- [Release notes](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview2/README.md)
-
+- [Release notes](README.md)
 
 ## Loop Optimizations: IV Widening
 
 Improving code generation for loops is a priority for .NET 9. [Preview 1](../preview1/runtime.md) brought numerous improvements to RyuJIT's existing loop optimizations, and Preview 2 introduces a new optimization to x64 systems: induction variable (IV) widening (see [dotnet/runtime #97865](https://github.com/dotnet/runtime/pull/97865)). An IV is a variable whose value changes as the containing loop iterates; in the classic for-loop construct -- `for (int i = 0; i < 10; i++)` -- `i` is an IV. Being able to analyze how an IV's value evolves over its loop's iterations can enable compilers to produce more performant code for related expressions.
 
 Array accesses in .NET are ripe for this optimization. Consider the following example:
+
 ```csharp
 static int Sum(int[] arr)
 {

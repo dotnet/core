@@ -10,16 +10,17 @@
 
 Libraries updates in .NET 9 Preview 1:
 
-* [Discussion](https://github.com/dotnet/runtime/discussions/98372)
-* [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
+- [Discussion](https://github.com/dotnet/runtime/discussions/98372)
+- [What's new in .NET 9](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-9/overview) documentation.
 
 .NET 9 Preview 1:
-* [Discussion](https://aka.ms/dotnet/9/preview1)
-* [Release notes](README.md) 
+
+- [Discussion](https://aka.ms/dotnet/9/preview1)
+- [Release notes](README.md)
 
 ## System.Collections: `PriorityQueue.Remove`
 
-[`PriorityQueue` collection](https://learn.microsoft.com/dotnet/api/system.collections.generic.priorityqueue-2) provides a simple and fast array heap implementation. One issue however with array heaps in general is that they [don't support priority updates](https://github.com/dotnet/runtime/issues/44871), making them prohibitive for use in algorithms such as variations of [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Using_a_priority_queue). 
+[`PriorityQueue` collection](https://learn.microsoft.com/dotnet/api/system.collections.generic.priorityqueue-2) provides a simple and fast array heap implementation. One issue however with array heaps in general is that they [don't support priority updates](https://github.com/dotnet/runtime/issues/44871), making them prohibitive for use in algorithms such as variations of [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Using_a_priority_queue).
 
 While it wouldn't be possible to implement efficient $\mathcal O(\log n)$ priority updates in the existing collection, the new `Remove` method makes it possible to _emulate_ priority updates (albeit at $\mathcal O(n)$ time):
 
@@ -34,6 +35,7 @@ public static void UpdatePriority<TElement, TPriority>(this PriorityQueue<TEleme
 This improvement unblocks users looking to implement graph algorithms in contexts where asymptotic performance isn't a blocker (e.g. education or prototyping). For example, here's a [toy implementation of Dijkstra's algorithm](https://github.com/dotnet/runtime/blob/16cb41496d595e2568574cfe11c763d5e05136c9/src/libraries/System.Collections/tests/Generic/PriorityQueue/PriorityQueue.Tests.Dijkstra.cs#L46-L76) using the new API.
 
 ## System.ComponentModel: TypeDescriptor is now thread-safe
+
 Long-standing threading issues in TypeDescriptor have been addressed, so any existing work-arounds can be removed. Workarounds included pre-populating internal caches such as by calling `TypeDescriptor.GetProvider(type)` for every type that has a `TypeProviderAttribute`, and by wrapping the access to the affected APIs with a `lock` statement.
 
 For more background, see the issues [TypeDescriptor.GetProperties(object instance) is not thread-safe](https://github.com/dotnet/runtime/issues/92394) and [Concurrency issue in TypeDescriptor.GetConverter(type)](https://github.com/dotnet/runtime/issues/30024).
@@ -110,9 +112,7 @@ AssemblyBuilder ab = AssemblyBuilder.DefinePersistedAssembly(new AssemblyName("M
 
 The `Assembly` passed to the method is used for resolving base runtime types. Notice that an `AssemblyBuilderAccess` value is not passed; the new persisted `AssemblyBuilder` implementation is only for saving. In order to run the assembly user first need to save it into a memory stream or a file, then load it back.
 
-
-The following example demonstrates how to create and save assemblies: 
-
+The following example demonstrates how to create and save assemblies:
 
 ```cs
 public void CreateAndSaveAssembly(string assemblyPath)
@@ -134,7 +134,6 @@ public void CreateAndSaveAssembly(string assemblyPath)
 ```
 
 The following example demonstrates how to run the saved assembly:
-
 
 ```cs
 public void UseAssembly(string assemblyPath)

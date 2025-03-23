@@ -1,6 +1,6 @@
 {
     "channel-version": "8.0",
-    "last-updated": "2024-07-11",
+    "last-updated": "2025-02-22",
     "families": [
         {
             "name": "Android",
@@ -16,6 +16,7 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "15",
                         "14",
                         "13",
                         "12.1",
@@ -23,7 +24,7 @@
                     ],
                     "unsupported-versions": [
                         "11"
-                    ],                    
+                    ],
                     "notes": [
                         "API 21 is used as the minimum SDK target."
                     ]
@@ -41,7 +42,10 @@
                         "Arm64"
                     ],
                     "supported-versions": [
-                        "17",
+                        "18",
+                        "17"
+                    ],
+                    "unsupported-versions": [
                         "16",
                         "15"
                     ],
@@ -57,11 +61,14 @@
                         "Arm64"
                     ],
                     "supported-versions": [
-                        "17",
+                        "18",
+                        "17"
+                    ],
+                    "unsupported-versions": [
                         "16",
                         "15"
                     ]
-                },                
+                },
                 {
                     "id": "macos",
                     "name": "macOS",
@@ -71,11 +78,14 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "15",
                         "14",
-                        "13",
+                        "13"
+                    ],
+                    "unsupported-versions": [
                         "12"
                     ],
-                    "notes" : [
+                    "notes": [
                         "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
                         "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
                         "Mac Catalyst apps are supported on macOS Arm64 and x64."
@@ -89,7 +99,10 @@
                         "Arm64"
                     ],
                     "supported-versions": [
-                        "17",
+                        "18",
+                        "17"
+                    ],
+                    "unsupported-versions": [
                         "16",
                         "15",
                         "14",
@@ -113,13 +126,26 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "3.21",
                         "3.20",
                         "3.19",
-                        "3.18",
-                        "3.17"
+                        "3.18"
                     ],
                     "unsupported-versions": [
+                        "3.17",
                         "3.16"
+                    ]
+                },
+                {
+                    "id": "azurelinux",
+                    "name": "Azure Linux",
+                    "link": "https://github.com/microsoft/azurelinux",
+                    "architectures": [
+                        "Arm64",
+                        "x64"
+                    ],
+                    "supported-versions": [
+                        "3.0"
                     ]
                 },
                 {
@@ -131,10 +157,10 @@
                         "Arm64",
                         "ppc64le",
                         "s390x",
-                        
                         "x64"
                     ],
                     "supported-versions": [
+                        "10",
                         "9"
                     ]
                 },
@@ -149,7 +175,9 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "12",
+                        "12"
+                    ],
+                    "unsupported-versions": [
                         "11"
                     ]
                 },
@@ -164,10 +192,11 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "40",
-                        "39"
+                        "41",
+                        "40"
                     ],
                     "unsupported-versions": [
+                        "39",
                         "38",
                         "37"
                     ]
@@ -182,8 +211,11 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "15.6",
-                        "15.5"
+                        "15.6"
+                    ],
+                    "unsupported-versions": [
+                        "15.5",
+                        "15.4"
                     ]
                 },
                 {
@@ -198,6 +230,7 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "10",
                         "9",
                         "8"
                     ],
@@ -215,7 +248,12 @@
                         "x64"
                     ],
                     "supported-versions": [
-                        "15.5"
+                        "15.6"
+                    ],
+                    "unsupported-versions": [
+                        "15.5",
+                        "15.4",
+                        "12.5"
                     ]
                 },
                 {
@@ -229,12 +267,13 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "24.10",
                         "24.04",
-                        "23.10",
                         "22.04",
                         "20.04"
                     ],
                     "unsupported-versions": [
+                        "23.10",
                         "23.04"
                     ]
                 }
@@ -252,6 +291,7 @@
                         "x64"
                     ],
                     "supported-versions": [
+                        "2025",
                         "2022",
                         "2019"
                     ]
@@ -267,18 +307,22 @@
                         "x86"
                     ],
                     "supported-versions": [
+                        "11-24h2-iot-lts",
+                        "11-24h2-e-lts",
+                        "11-24h2-e",
+                        "11-24h2-w",
                         "11-23h2-e",
                         "11-23h2-w",
                         "11-22h2-e",
-                        "11-22h2-w",
                         "10-22h2",
-                        "11-21h2-e",
                         "10-21h2-e-lts",
                         "10-21h2-iot-lts",
                         "10-1809-e-lts",
                         "10-1607-e-lts"
                     ],
                     "unsupported-versions": [
+                        "11-22h2-w",
+                        "11-21h2-e",
                         "10-21h2-e"
                     ],
                     "notes": [
@@ -295,6 +339,7 @@
                         "x86"
                     ],
                     "supported-versions": [
+                        "2025",
                         "23H2",
                         "2022",
                         "2019",
@@ -316,11 +361,15 @@
                         "x86"
                     ],
                     "supported-versions": [
-                        "23H2",
+                        "2025",
                         "2022",
                         "2019",
                         "2016",
+                        "2012-R2",
                         "2012"
+                    ],
+                    "notes": [
+                        "Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview)."
                     ]
                 }
             ]
@@ -330,19 +379,12 @@
         {
             "name": "glibc",
             "architectures": [
+                "Arm32",
                 "Arm64",
                 "x64"
             ],
             "version": "2.23",
             "source": "Ubuntu 16.04"
-        },
-        {
-            "name": "glibc",
-            "architectures": [
-                "Arm32"
-            ],
-            "version": "2.35",
-            "source": "Ubuntu 22.04"
         },
         {
             "name": "musl",
@@ -356,6 +398,7 @@
         }
     ],
     "notes": [
-        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa."
+        "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.",
+        "Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [_TIME_BITS](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions."
     ]
 }

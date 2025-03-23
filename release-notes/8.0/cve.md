@@ -6,8 +6,22 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 
 ## Which CVEs apply to my app?
 
-Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using the given version or older.
+Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 8.0.14 (March 2025)
+- [CVE-2025-24070 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/348)
+- 8.0.12 (January 2025)
+  - [CVE-2025-21172 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/339)
+  - [CVE-2025-21176 | .NET Elevation of Priviledge Vulnerability](https://github.com/dotnet/announcements/issues/338)
+  - [CVE-2025-21173 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/337)
+- 8.0.10 (October 2024)
+  - [CVE-2024-38229 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/326)
+  - [CVE-2024-43483 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/327)
+  - [CVE-2024-43484 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/328)
+  - [CVE-2024-43485 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/329)
+- 8.0.8 (August 2024)
+  - [CVE-2024-38167 | .NET Information Disclosure Vulnerability](https://github.com/dotnet/announcements/issues/319)
+  - [CVE-2024-38168 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/320)
 - 8.0.7 (July 2024)
   - [CVE-2024-38095 | .NET Remote code Execution Vulnerability](https://github.com/dotnet/announcements/issues/312)
   - [CVE-2024-35264 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/314)

@@ -52,7 +52,7 @@ That will copy the missing dependency into the DevServer package and enable eval
 
 It isn't possible to debug a Blazor WebAssembly app using .NET 7 Preview 5 <https://github.com/dotnet/runtime/pull/70383>
 
-#### Workaround for a Blazor WebAssembly Hosted App
+Workaround for a Blazor WebAssembly Hosted App:
 
 Copy the following into the server project (`.csproj`) of a `.NET 7 Preview 5` Blazor WebAssembly Hosted App:
 
@@ -67,7 +67,7 @@ Copy the following into the server project (`.csproj`) of a `.NET 7 Preview 5` B
     </Target>
 ```
 
-#### Workaround for a Blazor WebAssembly Standalone App
+Workaround for a Blazor WebAssembly Standalone App:
 
 Copy the following into a `.NET 7 Preview 5` Blazor WebAssembly project (`.csproj`):
 
@@ -100,115 +100,30 @@ More information and workaround can be found at <https://github.com/dotnet/runti
 
 ## .NET SDK
 
-### [7.0] Projects using certain workloads don't load, build, and or run if .NET 7 Preview SDK workloads are installed
+### Using Visual Studio 17.6 to target .NET 6 may hit NETSDK1145 if nuget.org not configured for package downloads
 
-If a preview .NET 7 SDK is installed, projects with workload dependencies such as `microsoft.net.workload.mono.toolchain` may fail to build, load, and or run. An example of this issue is described [here](https://github.com/dotnet/sdk/issues/28947).
+.NET 7 went [out of support](https://devblogs.microsoft.com/dotnet/dotnet-7-end-of-support/) in May 2024. Per the plan outlined in that blog post, we have included the .NET 7 SDK in 17.6 as an optional component but are no longer updating it. We will continue to update the 6.0 runtime included in Visual Studio 17.6 to ensure customers have the latest security fixes when targeting .NET 6. However, when building using the .NET 7 SDK, it will expect Host Packs, Targeting Packs, and Runtime Packs from an older version of .NET 6 than is installed by default. It will attempt to download these packages from NuGet.org.
 
-**Resolution**
+If you are working offline though or without using the default NuGet.org feed, you will hit error NETSDK1145 as it will not be able to find the 6.0.31 packs it expects.
 
-The best method to resolve the issue is to uninstall any .NET 7 preview SDKs. For detailed instructions, see [dotnet uninstall instructions](https://learn.microsoft.com/dotnet/core/install/remove-runtime-sdk-versions?pivots=os-windows). For example, on Windows, dotnet preview SDKs can be uninstalled with add/remove programs. Another option is to try deleting the folder `C:\Program Files\dotnet\sdk-manifests\7.0.100\microsoft.net.workload.mono.toolchain`, but this will only work for file-based installs. [Dotnet-core-uninstall](https://github.com/dotnet/cli-lab/releases) is another option for uninstalling the .NET 7 preview SDKs.
+Workaround:
 
-### [RC1] dotnet restore --interactive not working for authenticated feeds
+- Upgrade to Visual Studio 17.8 or newer and use the .NET 8 SDK when building net6.0 applications
+- Enable NuGet.org in your nuget configuration
+- Pin to a 6.0.4xx SDK using global.json
+- Modify your project to target the latest 6.0 version released
 
-The --interactive flag is not working with any dotnet.exe command in RC1. <https://github.com/dotnet/sdk/issues/27597>
+```xml
+  <PropertyGroup>
+    <RuntimeFrameworkVersion>6.0.32</RuntimeFrameworkVersion>
+  </PropertyGroup>
 
-**Workarounds**
-
-- set `DOTNET_CLI_DO_NOT_USE_MSBUILD_SERVER=1` before running `dotnet`
-- `msbuild /t:restore /p:nugetInteractive=true`
-- [package source credentials](https://learn.microsoft.com/nuget/reference/nuget-config-file#packagesourcecredentials)
-- Open the project in Visual Studio
-
-### `dotnet user-jwts` not functional in .NET 7 RC1
-
-The `dotnet user-jwts` command line tool is not functional in .NET 7 RC1 due to an assembly resolution bug.  When running the CLI, you will encounter the following exception.
-
-```console
-$ dotnet user-jwts create
-Could not load file or assembly 'Microsoft.Extensions.Configuration.Binder, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. The system cannot find the file specified.
+  <ItemGroup>
+    <KnownFrameworkReference  Update="@(KnownFrameworkReference)">
+      <TargetingPackVersion Condition="'%(TargetFramework)' == 'net6.0'">6.0.32</TargetingPackVersion >
+    </KnownFrameworkReference >
+  </ItemGroup>
 ```
-
-To circumvent this issue, you will need to modify the local installation to probe correctly for the `Microsoft.Extensions.Configuration.Binder` assembly
-
-1. Locate the `user-jwts` tool directory in your local SDK installation. This will typically be located in a path as follows:
-
-- on Linux/macOS:
-
-  ```console
-  ~/.dotnet/sdk/7.0.100-rc.1.22431.12/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22427.2/tools/net7.0/any
-  ```
-
-- on Windows:
-
-  ```console
-  C:\Program Files\ddotnet\sdk\7.0.100-rc.1.22431.12\DotnetTools\dotnet-user-jwts\7.0.0-rc.1.22427.2\tools\net7.0\any
-  ```
-
-2. Locate the `dotnet-user-jwts.deps.json` file and make the following modifications:
-
-```diff
-{
-    "targets": {
-        ".NETCoreApp,Version=v7.0": {
-            "dotnet-user-jwts/7.0.0-rc.1.22426.10": {
-            "dependencies": {
-+               "Microsoft.Extensions.Configuration.Binder": "7.0.0-rc.1.22426.10"
-            },
-+           "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22426.10": {
-+               "dependencies": {
-+                   "Microsoft.Extensions.Configuration.Abstractions": "7.0.0-rc.1.22426.10"
-+               },
-+               "runtime": {
-+                   "lib/net7.0/Microsoft.Extensions.Configuration.Binder.dll": {
-+                       "assemblyVersion": "7.0.0.0",
-+                       "fileVersion": "7.0.22.42610"
-+               }
-+           }
-        },
-    },
-    "libraries": {
-+       "Microsoft.Extensions.Configuration.Binder/7.0.0-rc.1.22426.10": {
-+           "type": "package",
-+           "serviceable": true,
-+           "sha512": "",
-+           "path": "microsoft.extensions.configuration.binder/7.0.0-rc.1.22426.10",
-+           "hashPath": "microsoft.extensions.configuration.binder.7.0.0-rc.1.22426.10.nupkg.sha512"
-+       },
-    }
-}
-```
-
-3. Locate the `Microsoft.Extensions.Configuration.Binder` assembly in the directory associated with the `Microsoft.AspNetCore.App` shared runtime. This will typically be located in a path as follows:
-
-- on Linux/macOS
-
-  ```console
-  ~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22427.2
-  ```
-
-- on Windows
-
-  ```console
-  C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2
-  ```
-
-4. Copy the assembly from Step 3 to the `user-jwts` tool directory from Step 1.
-
-- on Linux/macOS
-
-  ```console
-  cp ~/.dotnet/shared/Microsoft.AspNetCore.App/7.0.0-rc.1.22427.2/Microsoft.Extensions.Configuration.Binder.dll ~/.dotnet/sdk/7.0.100-rc.1.22431.12/DotnetTools/dotnet-user-jwts/7.0.0-rc.1.22427.2/tools/net7.0/any
-  ```
-
-- on Windows
-
-  ```console
-  copy C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2\C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.0-rc.1.22427.2 C:\Program Files\ddotnet\sdk\7.0.100-rc.1.22431.12\DotnetTools\dotnet-user-jwts\7.0.0-rc.1.22427.2\tools\net7.0\any
-  ```
-
-5. Note that the install directory for the SDK may not be deleted during uninstall due to applying this workaround, e.g. when updating to 7.0.0-rc.2. If that occurs, delete the directory manually.
-
-This issue will be resolved in .NET 7 RC 2.
 
 ## .NET MSBuild
 
