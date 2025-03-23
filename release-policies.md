@@ -2,6 +2,8 @@
 
 The .NET team uses the following policies for [.NET releases](releases.md).
 
+The NuGet packages that the team maintains are governed by [.NET Package Servicing](./Documentation/policies/package-servicing.md)
+
 ## Release cadence
 
 New major .NET versions are released annually in November, at [.NET Conf](https://www.dotnetconf.net/).
@@ -55,22 +57,13 @@ Additionally, customers targeting an out-of-support .NET version in their projec
 
 6 months after a .NET version goes out of support, newer in-support .NET SDK versions are updated to produce warning [NETSDK1138: The target framework is out of support](https://learn.microsoft.com/dotnet/core/tools/sdk-errors/netsdk1138) when targeting the out-of-support version.
 
-### Packages
-
-[.NET packages](https://www.nuget.org/profiles/dotnetframework) are no longer supported when either of the following occurs:
-
-- A new version of the package is available. Some packages support multiple patches versions at once, one per major version matching a supported major .NET version.
-- The package exclusively includes implementations for out-of-support .NET versions.
-
-Nuget.org includes [version](https://www.nuget.org/packages/System.Text.Json/#versions-body-tab) and [supported framework](https://www.nuget.org/packages/System.Text.Json/#supportedframeworks-body-tab) information that can be used to determine support status for packages.
-
 ## Support requirements
 
 To remain supported, you must do the following:
 
-- Use a supported SDK
-- Target a supported .NET version (via the `TargetFramework` property)
-- Reference supported packages
+* Use a [supported SDK](https://dotnet.microsoft.com/download)
+* Target a [supported .NET version](./releases.md) (via the `TargetFramework` property)
+* Reference [supported packages](./Documentation/policies/package-servicing.md)
 
 ## Operating System support
 

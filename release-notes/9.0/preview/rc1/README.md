@@ -4,11 +4,9 @@
 
 * [Libraries](./libraries.md)
 * [SDK](./sdk.md)
-
-### Feature Release Notes
-
 * [.NET MAUI](./dotnetmaui.md)
 * [ASP.NET Core](./aspnetcore.md)
+* [API diff](./api-diff/README.md)
 
 ## Get Started
 
@@ -16,7 +14,7 @@ Instructions on getting started with .NET 9 can be found in the [getting started
 
 ## Announcements & Discussions
 
-Discuss this release with the product teams on GitHub through the announcements for this release. 
+Discuss this release with the product teams on GitHub through the announcements for this release.
 
 * [.NET 9 RC 1 Announcement](https://aka.ms/dotnet/9/rc1)
 

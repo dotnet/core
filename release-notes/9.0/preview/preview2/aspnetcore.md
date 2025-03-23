@@ -25,13 +25,13 @@ Blazor components now support constructor injection of configured services. This
 
 For example, the following component uses constructor injection with a C# primary constructor to get access to the `NavigationManager` service:
 
-**ConstructorInjection.razor**
+ConstructorInjection.razor:
 
 ```razor
 <button @onclick="NavigateToCounter">Go to Counter</button>
 ```
 
-**ConstructorInjection.razor.cs**
+:ConstructorInjection.razor.cs:
 
 ```csharp
 using Microsoft.AspNetCore.Components;

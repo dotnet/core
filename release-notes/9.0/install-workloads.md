@@ -6,7 +6,7 @@ After installing .NET 9 previews, you can install workloads by following these i
 
 Install the .NET MAUI workload:
 
-```
+```console
 > dotnet workload install maui
 ...
 Successfully installed workload(s) maui.
@@ -14,7 +14,7 @@ Successfully installed workload(s) maui.
 
 Verify installation:
 
-```
+```console
 > dotnet workload list
 
 Installed Workload Id      Manifest Version                            Installation Source

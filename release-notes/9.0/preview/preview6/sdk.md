@@ -21,7 +21,7 @@ SDK updates in .NET 9 Preview 6:
 ## NuGetAudit now raises warnings for vulnerabilities in transitive dependencies
 
 NuGetAudit, first added in .NET 8, provides warnings during restore if any packages used by your project have known vulnerabilities.
-It requires a package source that provides a vulnerability database, so in practise you need to use https://api.nuget.org/v3/index.json as a package source, and [we have plans to allow auditing without nuget.org as a package source](https://github.com/NuGet/Home/issues/12698)).
+It requires a package source that provides a vulnerability database, so in practise you need to use <https://api.nuget.org/v3/index.json> as a package source, and [we have plans to allow auditing without nuget.org as a package source](https://github.com/NuGet/Home/issues/12698)).
 For more information on NuGet Audit, including all configuration options, see [the documentation on NuGet Audit](https://learn.microsoft.com/nuget/concepts/auditing-packages).
 
 In the .NET 9 SDK, NuGetAudit defaults for NuGetAuditMode has changed.
@@ -53,6 +53,7 @@ MSBuild has introduced a new tool called BuildChecks to help users enforce rules
 Like Roslyn Analyzers, the goal of this feature is to not only detect problems, but ensure that problems don't re-introduce themselves into the build once fixed.
 
 In this release, we have added two BuildCheck rules
+
 - [BC0101 - Shared Output Path](https://github.com/dotnet/msbuild/blob/main/documentation/specs/BuildCheck/Codes.md#bc0101---shared-output-path)
 - [BC0102 - Double Write detection](https://github.com/dotnet/msbuild/blob/main/documentation/specs/BuildCheck/Codes.md#bc0102---double-writes)
 

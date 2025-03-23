@@ -226,6 +226,7 @@ peBlob.WriteContentTo(fileStream);
 ```
 
 ## Changes to [ActivatorUtilities.CreateInstance()](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities.createinstance) when using [[ActivatorUtilitiesConstructor]](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilitiesconstructorattribute)
+
 The constructor resolution for `ActivatorUtilities.CreateInstance()` with the attribute `[ActivatorUtilitiesConstructor]` [has changed to always use the attribute](https://github.com/dotnet/runtime/pull/99175). Previously, a constructor without the attribute but with more parameters was selected but only if it was declared after the constructor with the attribute.
 
 The change was made to allow full, unambiguous control over which constructor is used.

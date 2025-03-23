@@ -25,11 +25,11 @@ The following example demonstrates a version object from the file.
     "support-phase": "active",
     "eol-date": "2026-11-10",
     "release-type": "lts",
-    "releases.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/releases.json",
-    "patch-releases-info-uri": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/releases.json",
-    "patch-releases-index-uri": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/patch-releases-index.json",
-    "supported-os.json": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/supported-os.json",
-    "supported-os-info-uri": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/supported-os.json"
+    "releases.json": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/releases.json",
+    "patch-releases-info-uri": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/releases.json",
+    "patch-releases-index-uri": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/patch-releases-index.json",
+    "supported-os.json": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/supported-os.json",
+    "supported-os-info-uri": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/supported-os.json"
 },
 ```
 
@@ -60,8 +60,8 @@ The following example demonstrates the start of this file.
   "release-type": "lts",
   "eol-date": "2026-11-10",
   "lifecycle-policy": "https://aka.ms/dotnetcoresupport",
-  "patch-releases-index-uri":"https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/patch-releases-index.json",
-  "supported-os-info-uri": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/supported-os.json",
+  "patch-releases-index-uri":"https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/patch-releases-index.json",
+  "supported-os-info-uri": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/supported-os.json",
   "releases": [
     {
       "release-date": "2024-07-09",
@@ -105,13 +105,13 @@ The following example demonstrates the start of this file including one version 
   "latest-release": "8.0.7",
   "latest-release-date": "2024-07-09",
   "latest-release-security": true,
-  "supported-os-info-uri": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/supported-os.json",
+  "supported-os-info-uri": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/supported-os.json",
   "releases": [
     {
       "release-version": "8.0.7",
       "release-date": "2024-07-09",
       "security": true,
-      "release-info-uri": "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/8.0/8.0.7/release.json"
+      "release-info-uri": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/8.0.7/release.json"
     },
 ```
 

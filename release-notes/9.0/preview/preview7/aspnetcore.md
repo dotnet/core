@@ -34,7 +34,6 @@ Continuing the [Native AOT journey](https://learn.microsoft.com/aspnet/core/fund
 
 Use the `dotnet new webapiaot` template to create a new project and replace the contents of `Program.cs` with the following SignalR code:
 
-
 ```csharp
 using Microsoft.AspNetCore.SignalR;
 using System.Text.Json.Serialization;
@@ -105,9 +104,10 @@ Publishing this app produces a native Windows executable of `10 MB` and a Linux 
 ### Limitations
 
 - Only the JSON protocol is currently supported
-    - As shown in the preceding code, apps that use JSON serialization and Native AOT must use the `System.Text.Json` Source Generator. This follows the same approach as minimal APIs.
-- On the SignalR server, Hub method parameters of type `IAsyncEnumerable<T>` and `ChannelReader<T>` where `T` is a ValueType (i.e. `struct`) aren't supported. Using these types results in a runtime exception at startup in development and in the published app. See https://github.com/dotnet/aspnetcore/issues/56179 for more information.
-* [Strongly-typed hubs](https://learn.microsoft.com/aspnet/core/signalr/hubs#strongly-typed-hubs) aren't supported with Native AOT (`PublishAot`). Using strongly-typed hubs with Native AOT will result in warnings during build and publish, and a runtime exception. Using strongly-typed hubs with trimming (`PublishedTrimmed`) is supported.
+  - As shown in the preceding code, apps that use JSON serialization and Native AOT must use the `System.Text.Json` Source Generator. This follows the same approach as minimal APIs.
+- On the SignalR server, Hub method parameters of type `IAsyncEnumerable<T>` and `ChannelReader<T>` where `T` is a ValueType (i.e. `struct`) aren't supported. Using these types results in a runtime exception at startup in development and in the published app. See <https://github.com/dotnet/aspnetcore/issues/56179> for more information.
+
+- [Strongly-typed hubs](https://learn.microsoft.com/aspnet/core/signalr/hubs#strongly-typed-hubs) aren't supported with Native AOT (`PublishAot`). Using strongly-typed hubs with Native AOT will result in warnings during build and publish, and a runtime exception. Using strongly-typed hubs with trimming (`PublishedTrimmed`) is supported.
 
 - Only `Task`, `Task<T>`, `ValueTask`, or `ValueTask<T>` are supported for async return types.
 
@@ -156,7 +156,6 @@ The app should publish cleanly using Native AOT without warnings.
 ## Improvements to transformer registration APIs in Microsoft.AspNetCore.OpenApi
 
 OpenAPI transformers support modifying the OpenAPI document, operations within the document, or schemas associated with types in the API. In this preview, the APIs for registering transformers on an OpenAPI document provide a variety of options for registering transformers.
-
 
 Previously, the following APIs where available for registering transformers:
 
@@ -235,7 +234,8 @@ We'd like to thank @josephdecock from @DuendeSoftware for adding Pushed Authoriz
 >
 > Pushing the authorization parameters also keeps request URLs short. Authorize parameters might get very long when using more complex OAuth and OIDC features such as Rich Authorization Requests, and URLs that are long cause issues in many browsers and networking infrastructure.
 >
-> The use of PAR is encouraged by the [FAPI working group](https://openid.net/wg/fapi/) within the OpenID Foundation. For example, [the FAPI2.0 Security Profile](https://openid.bitbucket.io/fapi/fapi-2_0-security-profile.html) requires the use of PAR. This security profile is used by many of the groups working on open banking (primarily in Europe), in health care, and in other industries with high security requirements.
+> The use of PAR is encouraged by the [FAPI working group](https://openid.net/wg/fapi/) within the OpenID Foundation. For example, [the FAPI2.0 Security Profile](https://openid.bitbucket.io/fapi/fapi-2_0-security-profile.html) requires the use of PAR.
+> This security profile is used by many of the groups working on open banking (primarily in Europe), in health care, and in other industries with high security requirements.
 >
 > PAR is supported by a number of identity providers, including
 >
@@ -245,7 +245,6 @@ We'd like to thank @josephdecock from @DuendeSoftware for adding Pushed Authoriz
 > - Authlete
 
 PAR is now enabled by default if the identity provider's discovery document advertises support for it. The identity provider's discovery document is usually found at `.well-known/openid-configuration`. This change should provide enhanced security for providers that support PAR. If this causes problems, disable PAR via `OpenIdConnectOptions.PushedAuthorizationBehavior` as follows:
-
 
 ```csharp
 builder.Services
@@ -268,11 +267,10 @@ To ensure that authentication only succeeds if PAR is used, use `PushedAuthoriza
 
 This change also introduces a new `OnPushAuthorization` event to `OpenIdConnectEvents` which can be used to customize the pushed authorization request or handle it manually. Refer to the [API proposal](https://github.com/dotnet/aspnetcore/issues/51686) for more details.
 
-
 ## Data Protection support for deleting keys
 
-Historically, it has been intentionally impossible to delete data protection keys because doing so makes it impossible to decrypt any data protected with them (i.e. causing data loss).  Fortunately, keys are quite small, so the impact of accumulating many of them is minor.  However, in order to support _very_ long running services, we've added the ability to explicitly delete (typically, very old) keys. Only delete keys when you can accept the risk of data loss in exchange for storage savings.  Our guidance remains that data protection keys shouldn't be deleted.
-
+Historically, it has been intentionally impossible to delete data protection keys because doing so makes it impossible to decrypt any data protected with them (i.e. causing data loss).  Fortunately, keys are quite small, so the impact of accumulating many of them is minor.
+However, in order to support *very* long running services, we've added the ability to explicitly delete (typically, very old) keys. Only delete keys when you can accept the risk of data loss in exchange for storage savings.  Our guidance remains that data protection keys shouldn't be deleted.
 
 ```csharp
 var keyManager = services.GetService<IKeyManager>();
@@ -292,7 +290,6 @@ if (keyManager is IDeletableKeyManager deletableKeyManager)
 Kestrel's named pipe support has been improved with advanced customization options. The new `CreateNamedPipeServerStream` method on the named pipe options allows pipes to be customized per-endpoint.
 
 An example of where this is useful is a Kestrel app that requires two pipe endpoints with different [access security](https://learn.microsoft.com/windows/win32/ipc/named-pipe-security-and-access-rights). The `CreateNamedPipeServerStream` option can be used to create pipes with custom security settings, depending on the pipe name.
-
 
 ```csharp
 var builder = WebApplication.CreateBuilder();
@@ -345,8 +342,8 @@ For more information, see [ASP.NET Core metrics](https://learn.microsoft.com/asp
 
 Endpoint can be excluded from metrics by adding metadata using either of the following approaches:
 
-* Add the `[DisableHttpMetrics]` attribute to your Web API controller, SignalR Hub, or gRPC service
-* Call `DisableHttpMetrics()` when mapping endpoints in app startup:
+- Add the `[DisableHttpMetrics]` attribute to your Web API controller, SignalR Hub, or gRPC service
+- Call `DisableHttpMetrics()` when mapping endpoints in app startup:
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);

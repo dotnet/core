@@ -7,7 +7,7 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 - [System.Text.Json enhancements](#systemtextjson) including a new [JsonSchemaExporter](#jsonschemaexporter), [nullable annotations recognition](#respecting-nullable-annotations), [requiring non-optional constructor parameters](#requiring-non-optional-constructor-parameters), [ordering `JsonObject` properties](#ordering-jsonobject-properties), and new [contract metadata APIs](#additional-contract-metadata-apis)
 - [`[GeneratedRegex]` can now be used on properties](#generatedregex-on-properties)
 - New [`EnumerateSplits`](#regexenumeratesplits) method for `Regex` to split more collection types
-- Introduction of generic `OrderedDictionary` with [`OrderedDictionary<TKey, TValue>`](#ordereddictionarytkey-tvalue) 
+- Introduction of generic `OrderedDictionary` with [`OrderedDictionary<TKey, TValue>`](#ordereddictionarytkey-tvalue)
 - New [`ReadOnlySet<T>`](#readonlysett) when needing to create a read-only wrapper around `ISet<T>`
 - [`allows ref struct` used in many places throughout the libraries](#allows-ref-struct-used-in-many-places-throughout-the-libraries)
 - [Collection lookups with spans](#collection-lookups-with-spans)
@@ -93,7 +93,8 @@ public static partial class Vector
 }
 ```
 
-For same sized conversions such as between `Vector4`, `Quaternion`, and `Plane` these are zero-cost. The same can be said for narrowing conversions such as from `Vector4` to `Vector2` or `Vector3`. For widening conversions, such as from `Vector2` or `Vector3` to `Vector4`, there is the normal API which initializes new elements to `0` and an `Unsafe` suffixed API that leaves these new elements undefined and therefore can be zero-cost.
+For same sized conversions such as between `Vector4`, `Quaternion`, and `Plane` these are zero-cost. The same can be said for narrowing conversions such as from `Vector4` to `Vector2` or `Vector3`.
+For widening conversions, such as from `Vector2` or `Vector3` to `Vector4`, there is the normal API which initializes new elements to `0` and an `Unsafe` suffixed API that leaves these new elements undefined and therefore can be zero-cost.
 
 ### Vector Create APIs
 
@@ -167,7 +168,9 @@ The following new capabilities have been added and improved for System.Text.Json
 
 ### JsonSchemaExporter
 
-JSON is frequently used to represent types in method signatures as part of remote procedure calling schemes. It's used, for example, as part of OpenAPI specifications, or as part of tool calling with AI services like those from OpenAI. Developers can serialize and deserialize .NET types as JSON using System.Text.Json, but they also need to be able to get a JSON schema describing the shape of the .NET type (describing the shape of what would be serialized and what can be deserialized). System.Text.Json now provides the `JsonSchemaExporter` type, which supports generating a JSON schema that represents a .NET type.
+JSON is frequently used to represent types in method signatures as part of remote procedure calling schemes.
+It's used, for example, as part of OpenAPI specifications, or as part of tool calling with AI services like those from OpenAI. Developers can serialize and deserialize .NET types as JSON using System.Text.Json, but they also need to be able to get a JSON schema describing the shape of the .NET type (describing the shape of what would be serialized and what can be deserialized).
+System.Text.Json now provides the `JsonSchemaExporter` type, which supports generating a JSON schema that represents a .NET type.
 
 The following code generates a JSON schema from a type.
 
@@ -377,7 +380,8 @@ Split: ""
 Split: "?"
 ```
 
-However, `Regex.Split` only accepts a `string` as input and doesn't support input being provided as a `ReadOnlySpan<char>`, and it outputs the full set of splits as a `string[]`, which requires allocating both the `string[]` to hold the results and a `string` for each split. In .NET 9, the new `EnumerateSplits` method enables performing the same operation, but with a span-based input and without incurring any allocation for the results. It accepts a `ReadOnlySpan<char>` and returns an enumerable of `Range`s representing the results.
+However, `Regex.Split` only accepts a `string` as input and doesn't support input being provided as a `ReadOnlySpan<char>`, and it outputs the full set of splits as a `string[]`, which requires allocating both the `string[]` to hold the results and a `string` for each split.
+In .NET 9, the new `EnumerateSplits` method enables performing the same operation, but with a span-based input and without incurring any allocation for the results. It accepts a `ReadOnlySpan<char>` and returns an enumerable of `Range`s representing the results.
 
 The following example demonstrates `Regex.EnumerateSplits`, taking a `ReadOnlySpan<char>` as input.
 
@@ -559,19 +563,19 @@ namespace System.Diagnostics.Metrics;
 
 public class Meter : IDisposable
 {
-	public Gauge<T> CreateGauge<T>(string name) where T : struct {}
-	public Gauge<T> CreateGauge<T>(string name, string? unit = null, string? description = null, IEnumerable<KeyValuePair<string, object?>>? tags = null) where T : struct {}
+ public Gauge<T> CreateGauge<T>(string name) where T : struct {}
+ public Gauge<T> CreateGauge<T>(string name, string? unit = null, string? description = null, IEnumerable<KeyValuePair<string, object?>>? tags = null) where T : struct {}
 }
 
 public sealed class Gauge<T> : Instrument<T> where T : struct
 {
-	public void Record(T value) {}
-	public void Record(T value, KeyValuePair<string, object?> tag) { }
-	public void Record(T value, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2) { }
-	public void Record(T value, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2, KeyValuePair<string, object?> tag3) { }
-	public void Record(T value, params ReadOnlySpan<KeyValuePair<string, object?>> tags) { }
-	public void Record(T value, params KeyValuePair<string, object?>[] tags) { }
-	public void Record(T value, in TagList tagList) { }
+ public void Record(T value) {}
+ public void Record(T value, KeyValuePair<string, object?> tag) { }
+ public void Record(T value, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2) { }
+ public void Record(T value, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2, KeyValuePair<string, object?> tag3) { }
+ public void Record(T value, params ReadOnlySpan<KeyValuePair<string, object?>> tags) { }
+ public void Record(T value, params KeyValuePair<string, object?>[] tags) { }
+ public void Record(T value, in TagList tagList) { }
 }
 ```
 
