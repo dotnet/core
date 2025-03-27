@@ -69,3 +69,16 @@ namespace System.Diagnostics.Metrics
 }
 ```
 
+## Byte-Level Support in BPE Tokenizer
+
+The `BpeTokenizer` has been available in the `Microsoft.ML.Tokenizers` library for some time. This [update](https://github.com/dotnet/machinelearning/pull/7425) introduces support for Byte-Level encoding in the BPE tokenizer.
+
+Byte-Level encoding allows the tokenizer to process vocabulary as UTF-8 bytes, transforming certain characters—for example, spaces are represented as `Ġ`. This enhancement enables the creation of tokenizer objects compatible with models that utilize Byte-Level BPE tokenization, such as the [DeepSeek](https://huggingface.co/deepseek-ai/DeepSeek-R1) model. The [test code](https://github.com/dotnet/machinelearning/blob/1ccbbd4b840e8edc21fcc0fe102e4dfb5ff75eea/test/Microsoft.ML.Tokenizers.Tests/BpeTests.cs#L875) demonstrates how to read a Hugging Face `tokenizer.json` file for DeepSeek and create a corresponding tokenizer object.
+
+Additionally, this update introduces the `BpeOptions` type, making it easier to configure a BPE tokenizer using multiple options. The new factory method `BpeTokenizer.Create(BpeOptions options)` simplifies the instantiation process:
+
+```csharp
+BpeOptions bpeOptions = new BpeOptions(vocabs);
+BpeTokenizer tokenizer = BpeTokenizer.Create(bpeOptions);
+```
+
