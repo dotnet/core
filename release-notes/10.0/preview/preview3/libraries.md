@@ -10,4 +10,4 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 
 ## Feature
 
-Something about the feature
+Something about the feature.
