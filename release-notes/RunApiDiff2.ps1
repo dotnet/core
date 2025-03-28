@@ -613,7 +613,7 @@ Function ProcessSdk
     DownloadPackage $UseNuget $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
-    $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$adkName.App")
+    $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$sdkName.App")
     RecreateFolder $targetFolder
 
     RunApiDiff2 $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
