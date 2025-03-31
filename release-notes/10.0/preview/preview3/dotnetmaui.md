@@ -21,4 +21,4 @@ This release was focused on quality improvements. A detailed list can be found o
 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
-This release was focused on quality improvements. A detailed list can be found on [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
+This release includes support for Xcode 16.3 Release Candidate, and is focused on quality improvements. A detailed list can be found on [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
