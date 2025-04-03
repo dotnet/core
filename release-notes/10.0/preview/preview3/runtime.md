@@ -15,7 +15,7 @@ Since .NET 9's release, we have introduced new enhancements to the JIT compiler'
 ```csharp
 static void Print()
 {
-	string[] words = {"Hello", "World!"};
+    string[] words = {"Hello", "World!"};
     foreach (var str in words)
     {
         Console.WriteLine(str);
