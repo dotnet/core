@@ -11,7 +11,7 @@ C# 14 updates:
 - [What's new in C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14) documentation
 - [Breaking changes in C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010)
 
-## Extensions
+## Extension members
 
 Extensions just got even more powerful! In Preview 3, they now support static methods, instance properties, and static properties—expanding the capabilities you already know and love. And this is just the beginning—stay tuned for even more extension support in an upcoming release!
 
