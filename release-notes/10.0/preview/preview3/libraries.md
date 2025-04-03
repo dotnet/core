@@ -82,3 +82,19 @@ BpeOptions bpeOptions = new BpeOptions(vocabs);
 BpeTokenizer tokenizer = BpeTokenizer.Create(bpeOptions);
 ```
 
+## Deterministic option for LightGBM Trainer in ML.NET
+
+LightGBM is one of the most popular trainers in ML.NET. In ML.NET we expose a limited set of options to simplify its use. Unfortunately, this meant you could sometimes get non-deterministic results even with the same data and the same random seed. This is due to how LightGBM does its training.
+
+This [update](https://github.com/dotnet/machinelearning/pull/7415) exposes LightGBM's `deterministic`, `force_row_wise`, and `force_cos_wise` options to allow you to force deterministic training behavior when needed. You can set these options using the appropriate LightGBM options class based on which trainer type you are using.
+
+```csharp
+LightGbmBinaryTrainer trainer = ML.BinaryClassification.Trainers.LightGbm(new LightGbmBinaryTrainer.Options
+{
+    NumberOfLeaves = 10,
+    MinimumExampleCountPerLeaf = 2,
+    UnbalancedSets = false,
+    Deterministic = true,
+    ForceRowWise = true
+});
+```
