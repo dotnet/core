@@ -73,7 +73,7 @@ Starting with .NET 10 Preview 3, `dotnet test` now natively supports the [Micros
 
  ```toml
  [dotnet.test.runner]
- name = "Microsoft.Testing.Platform"
+ name = "Microsoft.Testing:Platform"
  ```
 
 For more details, refer to [Testing with `dotnet test`](https://learn.microsoft.com/dotnet/core/testing/unit-testing-with-dotnet-test), which explains how Microsoft.Testing.Platform was integrated with `dotnet test` in .NET 9 and earlier versions, and the reasons behind the new `dotnet test` experience.
