@@ -23,7 +23,7 @@ static void Print()
 }
 ```
 
-The lifetime of `words` is scoped to the `Print` method, and the JIT can avoid heap-allocating the strings `"Hello"` and `"world!"` already. However, the fact that `words` is an array of `strings`, a reference type, would previously stop the JIT from stack-allocating it. Now, the JIT can eliminate every heap allocation in the above example. At the assembly level, the code for `Print` used to look like this:
+The lifetime of `words` is scoped to the `Print` method, and the JIT can already stack-allocate the strings `"Hello"` and `"world!"`. However, the fact that `words` is an array of `strings`, a reference type, would previously stop the JIT from stack-allocating it. Now, the JIT can eliminate every heap allocation in the above example. At the assembly level, the code for `Print` used to look like this:
 ```asm
 Program:Print() (FullOpts):
        push     rbp
