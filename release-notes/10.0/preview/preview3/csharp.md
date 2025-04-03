@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in C# in this preview release:
 
-- [Extensions](#extensions)
+- [Extension members](#extension-members)
 - [Null-conditional assignment](#null-conditional-assignment)
 - 
 
