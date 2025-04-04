@@ -98,3 +98,8 @@ LightGbmBinaryTrainer trainer = ML.BinaryClassification.Trainers.LightGbm(new Li
     ForceRowWise = true
 });
 ```
+
+# Tensor enhancements
+When we initially released Tensor last year we did not provide any non-generic means of interacting with it, even for things that don't really need that generic information such as getting the `Lengths` and `Strides`. This [update](https://github.com/dotnet/runtime/pull/113401) changes the class hierarchy by adding in a non-generic interface that allows you to do those types of operations without needing to worry about generics. It also adds the ability to get/set data in a non-generic why by boxing to type `object`. This does incur a performance penalty and should be avoided when performance is desired, but can make some data access easier when its not required.
+
+When performing `Slice` operations on a `Tensor`, the initial implementation copied the underlying data. This copy could be avoided by using a `TensorSpan` or `ReadOnlyTensorSpan`, but there were many times that same behavior was desired on `Tensor` as well. This [update](https://github.com/dotnet/runtime/pull/113166) adds that behavior. Now, slice operations on a `Tensor` perform the same as the `TensorSpan` types and no longer do a copy.
