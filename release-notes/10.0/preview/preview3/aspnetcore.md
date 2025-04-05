@@ -7,6 +7,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Reference fingerprinted static web assets in standalone Blazor WebAssembly apps](#reference-fingerprinted-static-web-assets-in-standalone-blazor-webassembly-apps)
 - [`HttpClient` response streaming enabled by default on WebAssembly](#httpclient-response-streaming-enabled-by-default-on-webassembly)
 - [`DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`](#disablematchallignoreslefturipart-app-context-switch-renamed-to-enablementchallofthequerystringandfragment)
+- [Support for Server-Sent Events (SSE)](#support-for-server-sent-events-sse)
 
 ASP.NET Core updates in .NET 10:
 
@@ -86,6 +87,34 @@ requestMessage.SetBrowserResponseStreamingEnabled(false);
 ## `DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`
 
 The `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftUriPart` app context switch was renamed to `Microsoft.AspNetCore.Components.Routing.NavLink.EnableMatchAllForQueryStringAndFragment`.
+
+## Support for Server-Sent Events (SSE)
+
+ASP.NET Core now supports returning a `ServerSentEvents` result using the `TypedResults.ServerSentEvents` API. This feature is supported in both minimal APIs and controller-based apps.
+
+Server-Sent Events (SSE) is a server push technology that allows a server to send a stream of event messages to a client over a single HTTP connection. In .NET the event messages are represented as [SseItem<T>](https://learn.microsoft.com/dotnet/api/system.net.serversentevents.sseitem-1) objects, which may contain an event type, an ID, and a data payload of type `T`.
+
+The `TypedResults` class has a new static `ServerSentEvents` method  that can be used to return a `ServerSentEvents` result. The first parameter to this method is an `IAsyncEnumerable<SseItem<T>>` that represents the stream of event messages to be sent to the client.
+
+The following example illustrates how to use the  `TypedResults.ServerSentEvents` API to return a stream of heart rate events as JSON objects to the client:
+
+```csharp
+app.MapGet("/json-item", (CancellationToken cancellationToken) =>
+{
+    async IAsyncEnumerable<HeartRateEvent> GetHeartRate(
+        [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            var heartRate = Random.Shared.Next(60, 100);
+            yield return HeartRateEvent.Create(heartRate);
+            await Task.Delay(2000, cancellationToken);
+        }
+    }
+
+    return TypedResults.ServerSentEvents(GetHeartRate(cancellationToken), eventType: "heartRate");
+});
+```
 
 ## Community contributors
 
