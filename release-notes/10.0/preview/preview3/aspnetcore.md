@@ -17,9 +17,94 @@ ASP.NET Core updates in .NET 10:
 
 ## Declarative model for persisting state from components and services
 
-Blazor supports persisting component state during prerendering using the `PersistentComponentState` service, which helps prevent UI flickering when your component does asynchronous initialization.
+You can now declarative specify state to persist from components and services using the the `SupplyParameterFromPersistentComponentState` attribute. Properties with this attribute will automatically be persisted using the `PersistentComponentState` service during prerendering and the loaded when the component renders interactive or the server is instantiated.
 
-You can now declarative specify state to persist from components and configured services using the the `SupplyParameterFromPersistentComponentState` attribute.
+Previously, persisting state from a component during prerendering using the `PersistentComponentState` service involved a significant amount of code:
+
+```razor
+@page "/movies"
+@inject IMovieService MovieService
+@inject PersistentComponentState ApplicationState
+@implements IDisposable
+
+<PageTitle>Movies</PageTitle>
+
+<h3>Movies</h3>
+
+@if (MoviesList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid Items="MoviesList.AsQueryable()">
+        <PropertyColumn Property="@(m => m.Title)" Title="Title" Sortable="true"  />
+        <PropertyColumn Property="@(m => m.ReleaseDate)" Title="Release Date" Sortable="true" />
+        <PropertyColumn Property="@(m => m.Genre)" Title="Genre" Sortable="true" />
+        <PropertyColumn Property="@(m => m.Price)" Title="Price" Sortable="true" />
+    </QuickGrid>
+}
+
+@code {
+    public List<Movie>? MoviesList { get; set; }
+    private PersistingComponentStateSubscription? persistingSubscription;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!ApplicationState.TryTakeFromJson<List<Movie>>("movies", out var movies))
+        {
+            MoviesList = await MovieService.GetMoviesAsync();
+        }
+        else
+        {
+            MoviesList = movies;
+        }
+
+        persistingSubscription = ApplicationState.RegisterOnPersisting(() =>
+        {
+            ApplicationState.PersistAsJson("movies", MoviesList);
+            return Task.CompletedTask;
+        });
+    }
+
+    public void Dispose() => persistingSubscription?.Dispose();
+}
+```
+
+This code can now be simplified using the new declarative model:
+
+```razor
+@page "/movies"
+@inject IMovieService MovieService
+
+<PageTitle>Movies</PageTitle>
+
+<h3>Movies</h3>
+
+@if (MoviesList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid Items="MoviesList.AsQueryable()">
+        <PropertyColumn Property="@(m => m.Title)" Title="Title" Sortable="true"  />
+        <PropertyColumn Property="@(m => m.ReleaseDate)" Title="Release Date" Sortable="true" />
+        <PropertyColumn Property="@(m => m.Genre)" Title="Genre" Sortable="true" />
+        <PropertyColumn Property="@(m => m.Price)" Title="Price" Sortable="true" />
+    </QuickGrid>
+}
+
+@code {
+    [SupplyParameterFromPersistentComponentState]
+    public List<Movie>? MoviesList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        MoviesList ??= await MovieService.GetMoviesAsync();
+    }
+}
+```
 
 ## Reference fingerprinted static web assets in standalone Blazor WebAssembly apps
 
