@@ -7,6 +7,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Reference fingerprinted static web assets in standalone Blazor WebAssembly apps](#reference-fingerprinted-static-web-assets-in-standalone-blazor-webassembly-apps)
 - [`HttpClient` response streaming enabled by default on WebAssembly](#httpclient-response-streaming-enabled-by-default-on-webassembly)
 - [`DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`](#disablematchallignoreslefturipart-app-context-switch-renamed-to-enablementchallofthequerystringandfragment)
+- [Validation support in minimal APIs](#validation-support-in-minimal-apis)
 - [OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template](#openapi-support-enabled-by-default-in-the-aspnet-core-web-api-native-aot-template)
 - [Support for Server-Sent Events (SSE)](#support-for-server-sent-events-sse)
 
@@ -173,6 +174,34 @@ requestMessage.SetBrowserResponseStreamingEnabled(false);
 ## `DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`
 
 The `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftUriPart` app context switch was renamed to `Microsoft.AspNetCore.Components.Routing.NavLink.EnableMatchAllForQueryStringAndFragment`.
+
+## Validation support in minimal APIs
+
+Support for validation in minimal APIs is now available. This feature allows you to request validation of data sent to your API endpoints. When validation is enabled, the ASP.NET Core runtime will perform any validations defined on query, header, and route parameters, as well as on the request body. Validations can be defined using attributes in the `System.ComponentModel.DataAnnotations` namespace.
+
+Developers can customize the behavior of the validation system by:
+
+- creating custom [ValidationAttribute](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.validationattribute) implementations
+- implement the [IValidatableObject](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.ivalidatableobject) interface for complex validation logic
+
+When validation fails, the runtime will return a 400 Bad Request response with details of the validation errors.
+
+To enable built-in validation support for minimal APIs, call the `AddValidation` extension method to register the required services into the service container for your application.
+
+```csharp
+builder.Services.AddValidation();
+```
+
+The implementation automatically discovers types that are defined in minimal API handlers or as base types of types defined in minimal API handlers. Validation is then performed on these types by an endpoint filter that is added for each endpoint.
+
+Validation can be disabled for specific endpoints by using the `DisableValidation` extension method.
+
+```csharp
+app.MapPost("/products",
+    ([EvenNumber(ErrorMessage = "Product ID must be even")] int productId, [Required] string name)
+        => TypedResults.Ok(productId))
+    .DisableValidation();
+```
 
 ## OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template
 
