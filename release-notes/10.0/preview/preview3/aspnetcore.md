@@ -7,6 +7,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Reference fingerprinted static web assets in standalone Blazor WebAssembly apps](#reference-fingerprinted-static-web-assets-in-standalone-blazor-webassembly-apps)
 - [`HttpClient` response streaming enabled by default on WebAssembly](#httpclient-response-streaming-enabled-by-default-on-webassembly)
 - [`DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`](#disablematchallignoreslefturipart-app-context-switch-renamed-to-enablementchallofthequerystringandfragment)
+- [OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template](#openapi-support-enabled-by-default-in-the-aspnet-core-web-api-native-aot-template)
 - [Support for Server-Sent Events (SSE)](#support-for-server-sent-events-sse)
 
 ASP.NET Core updates in .NET 10:
@@ -172,6 +173,12 @@ requestMessage.SetBrowserResponseStreamingEnabled(false);
 ## `DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`
 
 The `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftUriPart` app context switch was renamed to `Microsoft.AspNetCore.Components.Routing.NavLink.EnableMatchAllForQueryStringAndFragment`.
+
+## OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template
+
+The ASP.NET Core Web API (native AOT) project template now has OpenAPI document generation support enabled by default using the Microsoft.AspNetCore.OpenApi package. This support can be disabled if desired using the `--no-openapi` flag when creating a new project from the command-line interface.
+
+Thank you [@sander1095](https://github.com/sander1095) for this contribution!
 
 ## Support for Server-Sent Events (SSE)
 
