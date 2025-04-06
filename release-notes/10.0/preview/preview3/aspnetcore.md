@@ -2,8 +2,7 @@
 
 Here's a summary of what's new in ASP.NET Core in this preview release:
 
-- [Declarative model for persisting state from components and services](
-- #declarative-model-for-persisting-state-from-components-and-services)
+- [Declarative model for persisting state from components and services](#declarative-model-for-persisting-state-from-components-and-services)
 - [Reference fingerprinted static web assets in standalone Blazor WebAssembly apps](#reference-fingerprinted-static-web-assets-in-standalone-blazor-webassembly-apps)
 - [`HttpClient` response streaming enabled by default on WebAssembly](#httpclient-response-streaming-enabled-by-default-on-webassembly)
 - [`DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`](#disablematchallignoreslefturipart-app-context-switch-renamed-to-enablementchallofthequerystringandfragment)
@@ -20,7 +19,7 @@ ASP.NET Core updates in .NET 10:
 
 ## Declarative model for persisting state from components and services
 
-You can now declarative specify state to persist from components and services using the the `SupplyParameterFromPersistentComponentState` attribute. Properties with this attribute will automatically be persisted using the `PersistentComponentState` service during prerendering and the loaded when the component renders interactive or the server is instantiated.
+You can now declaratively specify state to persist from components and services using the `SupplyParameterFromPersistentComponentState` attribute. Properties with this attribute will automatically be persisted using the `PersistentComponentState` service during prerendering and then loaded when the component renders interactively or the service is instantiated.
 
 Previously, persisting state from a component during prerendering using the `PersistentComponentState` service involved a significant amount of code:
 
@@ -111,7 +110,7 @@ else
 
 ## Reference fingerprinted static web assets in standalone Blazor WebAssembly apps
 
-Standalone Blazor WebAssembly apps can now reference framework static web assets using either a generated import map or using a fingerprinted URL. The import map and the fingerprinted URLs are generated as part of the build process when you specify the `<WriteImportMapToHtml>true</WriteImportMapToHtml>` property in the project file.
+Standalone Blazor WebAssembly apps can now reference framework static web assets using either a generated import map or using a fingerprinted URL. The import map and fingerprinted URLs are generated during the build process when the `<WriteImportMapToHtml>true</WriteImportMapToHtml>` property is specified in the project file..
 
 **blazorwasm.csproj**
 
@@ -178,7 +177,7 @@ The `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftU
 
 ## Set the environment at build-time for standalone Blazor WebAssembly apps
 
-You can now specify the environment for a standalone Blazor WebAssembly app at build-time using the  `<WasmApplicationEnvironmentName>` property in the client app's project file (`.csproj`). The `Blazor-Environment` header is no longer produced or honored in .NET 10 for setting the client environment.
+You can now specify the environment for a standalone Blazor WebAssembly app at build-time using the  `<WasmApplicationEnvironmentName>` property in the client app's project file (`.csproj`). In .NET 10, the `Blazor-Environment` header is no longer generated or used for setting the client environment.
 
 The following example sets the app's environment to `Staging`:
 
@@ -208,7 +207,7 @@ To enable built-in validation support for minimal APIs, call the `AddValidation`
 builder.Services.AddValidation();
 ```
 
-The implementation automatically discovers types that are defined in minimal API handlers or as base types of types defined in minimal API handlers. Validation is then performed on these types by an endpoint filter that is added for each endpoint.
+The implementation automatically discovers types that are defined in minimal API handlers or as base types of types defined in minimal API handlers. Validation is performed on these types by an endpoint filter added to each endpoint..
 
 Validation can be disabled for specific endpoints by using the `DisableValidation` extension method.
 
@@ -231,7 +230,7 @@ ASP.NET Core now supports returning a `ServerSentEvents` result using the `Typed
 
 Server-Sent Events (SSE) is a server push technology that allows a server to send a stream of event messages to a client over a single HTTP connection. In .NET the event messages are represented as [SseItem<T>](https://learn.microsoft.com/dotnet/api/system.net.serversentevents.sseitem-1) objects, which may contain an event type, an ID, and a data payload of type `T`.
 
-The `TypedResults` class has a new static `ServerSentEvents` method  that can be used to return a `ServerSentEvents` result. The first parameter to this method is an `IAsyncEnumerable<SseItem<T>>` that represents the stream of event messages to be sent to the client.
+The TypedResults class includes a new static `ServerSentEvents` method for returning a `ServerSentEvents` result. The first parameter to this method is an `IAsyncEnumerable<SseItem<T>>` that represents the stream of event messages to be sent to the client.
 
 The following example illustrates how to use the  `TypedResults.ServerSentEvents` API to return a stream of heart rate events as JSON objects to the client:
 
