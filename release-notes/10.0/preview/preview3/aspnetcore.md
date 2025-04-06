@@ -7,6 +7,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Reference fingerprinted static web assets in standalone Blazor WebAssembly apps](#reference-fingerprinted-static-web-assets-in-standalone-blazor-webassembly-apps)
 - [`HttpClient` response streaming enabled by default on WebAssembly](#httpclient-response-streaming-enabled-by-default-on-webassembly)
 - [`DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`](#disablematchallignoreslefturipart-app-context-switch-renamed-to-enablementchallofthequerystringandfragment)
+- [Set the environment at build-time for standalone Blazor WebAssembly apps](#set-the-environment-at-build-time-for-standalone-blazor-webassembly-apps)
 - [Validation support in minimal APIs](#validation-support-in-minimal-apis)
 - [OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template](#openapi-support-enabled-by-default-in-the-aspnet-core-web-api-native-aot-template)
 - [Support for Server-Sent Events (SSE)](#support-for-server-sent-events-sse)
@@ -174,6 +175,21 @@ requestMessage.SetBrowserResponseStreamingEnabled(false);
 ## `DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`
 
 The `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftUriPart` app context switch was renamed to `Microsoft.AspNetCore.Components.Routing.NavLink.EnableMatchAllForQueryStringAndFragment`.
+
+## Set the environment at build-time for standalone Blazor WebAssembly apps
+
+You can now specify the environment for a standalone Blazor WebAssembly app at build-time using the  `<WasmApplicationEnvironmentName>` property in the client app's project file (`.csproj`). The `Blazor-Environment` header is no longer produced or honored in .NET 10 for setting the client environment.
+
+The following example sets the app's environment to `Staging`:
+
+```xml
+<WasmApplicationEnvironmentName>Staging</WasmApplicationEnvironmentName>
+```
+
+The default environments applied to the app are:
+
+* `Development` for build.
+* `Production` for publish.
 
 ## Validation support in minimal APIs
 
