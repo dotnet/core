@@ -220,7 +220,7 @@ app.MapPost("/products",
 
 ## OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template
 
-The ASP.NET Core Web API (native AOT) project template now has OpenAPI document generation support enabled by default using the Microsoft.AspNetCore.OpenApi package. This support can be disabled if desired using the `--no-openapi` flag when creating a new project from the command-line interface.
+The ASP.NET Core Web API (native AOT) project template now has OpenAPI document generation support enabled by default using the Microsoft.AspNetCore.OpenApi package. This support can be disabled if desired, using the `--no-openapi` flag when creating a new project from the command-line interface.
 
 Thank you [@sander1095](https://github.com/sander1095) for this contribution!
 
