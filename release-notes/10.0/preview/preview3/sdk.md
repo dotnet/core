@@ -2,15 +2,14 @@
 
 Here's a summary of what's new in the .NET SDK in this preview release:
 
-- [.NET SDK in .NET 10 Preview 3 - Release Notes](#net-sdk-in-net-10-preview-3---release-notes)
-  - [CLI](#cli)
-    - [The `--interactive` option is now...interactive!](#the---interactive-option-is-nowinteractive)
-    - [Native Shell Tab-Completion scripts](#native-shell-tab-completion-scripts)
-  - [Containers](#containers)
-    - [Console apps can natively create container images](#console-apps-can-natively-create-container-images)
-    - [Explicitly control the image format of containers](#explicitly-control-the-image-format-of-containers)
-  - [Testing](#testing)
-    - [Support for Microsoft Testing Platform in `dotnet test`](#support-for-microsoft-testing-platform-in-dotnet-test)
+- [CLI](#cli)
+  - [The `--interactive` option is now...interactive!](#the---interactive-option-is-nowinteractive)
+  - [Native Shell Tab-Completion scripts](#native-shell-tab-completion-scripts)
+- [Containers](#containers)
+  - [Console apps can natively create container images](#console-apps-can-natively-create-container-images)
+  - [Explicitly control the image format of containers](#explicitly-control-the-image-format-of-containers)
+- [Testing](#testing)
+  - [Support for Microsoft Testing Platform in `dotnet test`](#support-for-microsoft-testing-platform-in-dotnet-test)
 
 .NET SDK updates in .NET 10:
 

@@ -60,15 +60,15 @@ else
 Generics are supported and the resolution rules are the same as for extension methods. For example, you could make `WhereGreaterThan` and `IsEmpty` generic:
 
 ```csharp
-    extension<T>(IEnumerable<T> source)
-        where T : INumber<T>
-    {
-        public IEnumerable<T> WhereGreaterThan(T threshold)
-            => source.Where(x => x > threshold);
+extension<T>(IEnumerable<T> source)
+    where T : INumber<T>
+{
+    public IEnumerable<T> WhereGreaterThan(T threshold)
+        => source.Where(x => x > threshold);
 
-        public bool IsEmpty
-            => !source.Any();
-    }
+    public bool IsEmpty
+        => !source.Any();
+}
 ```
 
 The constraint to `INumber<T>` allows the greater than operator to be used.
@@ -76,11 +76,11 @@ The constraint to `INumber<T>` allows the greater than operator to be used.
 Static methods and properties don't have a receiver, so the extension block list the type without a parameter name:
 
 ```csharp
-   extension<T>(List<T>)
-   {
-       public static List<T> Create()
-           => [];
-   }
+extension<T>(List<T>)
+{
+    public static List<T> Create()
+        => [];
+}
 ```
 
 Extension blocks can seamlessly coexist with the extension methods you have today. There's no requirement to switch to the new syntax - both execute in exactly the same way. Just add extension blocks to the static classes that contain your existing extension methods.
@@ -115,15 +115,14 @@ public class UpdateCustomer
 You can simplify the `UpdateAge` method:
 
 ```csharp
-    public static void UpdateAge(Customer? customer, int newAge)
-    {
-        customer?.Age = newAge;
-    }
+public static void UpdateAge(Customer? customer, int newAge)
+{
+    customer?.Age = newAge;
+}
 ```
 
 If the customer is not null, `Age` will be updated. If customer is null, nothing will happen.
 
 The IDE will help you by recommending this change via a lightbulb.
 
-We'd love your feedback on this feature so join us and others in the community in the discussion [Null-conditional assignment](https://github.com/dotnet/csharplang/discussions/8676).
-=======
+We'd love your feedback on this feature so join us and others in the community in the discussion on [Null-conditional assignment](https://github.com/dotnet/csharplang/discussions/8676).
