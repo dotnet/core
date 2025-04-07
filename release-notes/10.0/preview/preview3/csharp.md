@@ -4,7 +4,6 @@ Here's a summary of what's new in C# in this preview release:
 
 - [Extension members](#extension-members)
 - [Null-conditional assignment](#null-conditional-assignment)
-- 
 
 C# 14 updates:
 
