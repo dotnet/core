@@ -110,7 +110,7 @@ else
 
 ## Reference fingerprinted static web assets in standalone Blazor WebAssembly apps
 
-Standalone Blazor WebAssembly apps can now reference framework static web assets using either a generated import map or using a fingerprinted URL. The import map and fingerprinted URLs are generated during the build process when the `<WriteImportMapToHtml>true</WriteImportMapToHtml>` property is specified in the project file..
+Standalone Blazor WebAssembly apps can now reference framework static web assets using either a generated import map or using a fingerprinted URL. The import map and fingerprinted URLs are generated during the build process when the `<WriteImportMapToHtml>true</WriteImportMapToHtml>` property is specified in the project file.
 
 **blazorwasm.csproj**
 
