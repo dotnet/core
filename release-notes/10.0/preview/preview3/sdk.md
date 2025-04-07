@@ -71,7 +71,7 @@ The container images the .NET SDK produces today are either in a Docker-specific
 
 Starting with .NET 10 Preview 3, `dotnet test` now natively supports the [Microsoft.Testing.Platform](https://aka.ms/mtp-overview). You can enable this feature by adding the following configuration to your dotnet.config file (which itself is a [draft specification](https://github.com/dotnet/designs/pull/328) that we would love your feedback on):
 
- ```toml
+ ```ini
  [dotnet.test:runner]
  name = "Microsoft.Testing.Platform"
  ```
