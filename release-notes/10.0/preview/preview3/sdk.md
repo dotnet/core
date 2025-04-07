@@ -12,14 +12,13 @@ Here's a summary of what's new in the .NET SDK in this preview release:
   - [Testing](#testing)
     - [Support for Microsoft Testing Platform in `dotnet test`](#support-for-microsoft-testing-platform-in-dotnet-test)
 
-
 .NET SDK updates in .NET 10:
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview#net-sdk) documentation
 
 ## CLI
 
-### The `--interactive` option is now...interactive!
+### The `--interactive` option is now...interactive
 
 The `--interactive` flag exists on many commands, where it is used to allow or disallow the command to change its behavior based on whether it is running in an interactive terminal or not. The primary use of this flag so far has been to enable commands that use NuGet to use NuGet's credential provider systems to dynamically retrieve credentials during the operation. Today, when using authenticated feeds, if the `--interactive` flag is not set, the command will fail with a message indicating that the command needs to be run with `--interactive` to succeed. This is not a great experience.
 

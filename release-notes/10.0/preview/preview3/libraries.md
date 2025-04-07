@@ -2,15 +2,15 @@
 
 Here's a summary of what's new in .NET Libraries in this preview release:
 
-- [Feature](#feature)
+- [Introduce an AOT-Safe Constructor for `ValidationContext`](#introduce-an-aot-safe-constructor-for-validationcontext)
+- [Support for Telemetry Schema URLs in `ActivitySource` and `Meter`](#support-for-telemetry-schema-urls-in-activitysource-and-meter)
+- [Byte-Level Support in BPE Tokenizer](#byte-level-support-in-bpe-tokenizer)
+- [Deterministic option for LightGBM Trainer in ML.NET](#deterministic-option-for-lightgbm-trainer-in-mlnet)
+- [Tensor enhancements](#tensor-enhancements)
 
 .NET Libraries updates in .NET 10:
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
-
-## Feature
-
-Something about the feature.
 
 ## Introduce an AOT-Safe Constructor for `ValidationContext`
 
@@ -26,6 +26,7 @@ public sealed class ValidationContext
     public ValidationContext(object instance, string displayName, IServiceProvider? serviceProvider = null, IDictionary<object, object?>? items = null)
 }
 ```
+
 ## Support for Telemetry Schema URLs in `ActivitySource` and `Meter`
 
 [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-specification/tree/main/specification/schemas) defines a specification for supporting Telemetry Schemas. To align with this, the `ActivitySource` and `Meter` classes now support specifying a Telemetry Schema URL during construction. 
@@ -99,7 +100,8 @@ LightGbmBinaryTrainer trainer = ML.BinaryClassification.Trainers.LightGbm(new Li
 });
 ```
 
-# Tensor enhancements
+## Tensor enhancements
+
 When we initially released Tensor last year we did not provide any non-generic means of interacting with it, even for things that don't really need that generic information such as getting the `Lengths` and `Strides`. This [update](https://github.com/dotnet/runtime/pull/113401) changes the class hierarchy by adding in a non-generic interface that allows you to do those types of operations without needing to worry about generics. It also adds the ability to get/set data in a non-generic why by boxing to type `object`. This does incur a performance penalty and should be avoided when performance is desired, but can make some data access easier when its not required.
 
 When performing `Slice` operations on a `Tensor`, the initial implementation copied the underlying data. This copy could be avoided by using a `TensorSpan` or `ReadOnlyTensorSpan`, but there were many times that same behavior was desired on `Tensor` as well. This [update](https://github.com/dotnet/runtime/pull/113166) adds that behavior. Now, slice operations on a `Tensor` perform the same as the `TensorSpan` types and no longer do a copy.

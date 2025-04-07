@@ -2,7 +2,8 @@
 
 Here's a summary of what's new in the .NET Runtime in this preview release:
 
-- [Feature](#feature)
+- [Stack Allocation of Small Arrays of Reference Types](#stack-allocation-of-small-arrays-of-reference-types)
+- [Improved Code Layout](#improved-code-layout)
 
 .NET Runtime updates in .NET 10:
 
@@ -24,6 +25,7 @@ static void Print()
 ```
 
 The lifetime of `words` is scoped to the `Print` method, and the JIT can already stack-allocate the strings `"Hello"` and `"world!"`. However, the fact that `words` is an array of `strings`, a reference type, would previously stop the JIT from stack-allocating it. Now, the JIT can eliminate every heap allocation in the above example. At the assembly level, the code for `Print` used to look like this:
+
 ```asm
 Program:Print() (FullOpts):
        push     rbp
@@ -52,7 +54,8 @@ G_M2084_IG03:  ;; offset=0x0043
 ```
 
 Notice how we call `CORINFO_HELP_NEWARR_1_OBJ` to allocate `words` on the heap. Now, the assembly looks like this:
-```
+
+```asm
 Program:Print() (FullOpts):
        push     rbp
        push     r15
@@ -91,8 +94,8 @@ For more information on stack allocation improvements in the JIT compiler, check
 
 The JIT compiler organizes your method's code into basic blocks that can only be entered at the first instruction, and exited via the last instruction. As long as the JIT appends a jump instruction to the end of each block, the program can be laid out in any block order without changing runtime behavior. However, some layouts produce better runtime performance than others:
 
-* Placing a block before its successor in memory means the JIT does not need to emit a jump instruction to it, reducing code size and the potential for CPU pipelining penalties.
-* Placing frequently-executed blocks near each other increases their likelihood of sharing an instruction cache line, reducing instruction cache misses.
+- Placing a block before its successor in memory means the JIT does not need to emit a jump instruction to it, reducing code size and the potential for CPU pipelining penalties.
+- Placing frequently-executed blocks near each other increases their likelihood of sharing an instruction cache line, reducing instruction cache misses.
 
 Thus, the JIT has an optimization where it tries to find a block ordering that exhibits the above traits. Previously, the JIT would compute a reverse postorder (RPO) traversal of the program's flowgraph as an initial layout, and then make iterative transformations to it. RPO tends to produce layouts with little branching by placing each block before its successors, unless the block is in a loop. If profile data suggests a block is rarely executed, the JIT then moves it to the end of the method to compact the hotter parts of the method. Finally, the JIT tries to eliminate hot branches by moving the successor of the branch up to its predecessor.
 
