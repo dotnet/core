@@ -15,7 +15,6 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
 
 - [What's new in .NET MAUI in .NET 10](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-10) documentation.
 
-
 ## API deprecations
 
 This release includes deprecations of `ListView`, `Cell`, and `TableView`. These will be removed in a future release.
