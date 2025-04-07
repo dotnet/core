@@ -76,4 +76,7 @@ Starting with .NET 10 Preview 3, `dotnet test` now natively supports the [Micros
  name = "Microsoft.Testing.Platform"
  ```
 
+> [!NOTE]
+> The `[dotnet.test:runner]` part will change to `[dotnet.test.runner]` in Preview 4.
+
 For more details, refer to [Testing with `dotnet test`](https://learn.microsoft.com/dotnet/core/testing/unit-testing-with-dotnet-test), which explains how Microsoft.Testing.Platform was integrated with `dotnet test` in .NET 9 and earlier versions, and the reasons behind the new `dotnet test` experience.
