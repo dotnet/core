@@ -197,7 +197,7 @@ Support for validation in minimal APIs is now available. This feature allows you
 Developers can customize the behavior of the validation system by:
 
 - creating custom [ValidationAttribute](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.validationattribute) implementations
-- implement the [IValidatableObject](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.ivalidatableobject) interface for complex validation logic
+- implementing the [IValidatableObject](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.ivalidatableobject) interface for complex validation logic
 
 When validation fails, the runtime returns a 400 Bad Request response with details of the validation errors.
 
