@@ -29,7 +29,7 @@ public sealed class ValidationContext
 
 ## Support for Telemetry Schema URLs in `ActivitySource` and `Meter`
 
-[OpenTelemetry](https://github.com/open-telemetry/opentelemetry-specification/tree/main/specification/schemas) defines a specification for supporting Telemetry Schemas. To align with this, the `ActivitySource` and `Meter` classes now support specifying a Telemetry Schema URL during construction. 
+[OpenTelemetry](https://github.com/open-telemetry/opentelemetry-specification/tree/main/specification/schemas) defines a specification for supporting Telemetry Schemas. To align with this, the `ActivitySource` and `Meter` classes now support specifying a Telemetry Schema URL during construction.
 
 This enhancement allows creators of `ActivitySource` and `Meter` instances to define a schema URL for the tracing and metrics data they produce. Consumers of this data can then process it according to the specified schema, ensuring consistency and compatibility.
 

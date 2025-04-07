@@ -5,7 +5,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Declarative model for persisting state from components and services](#declarative-model-for-persisting-state-from-components-and-services)
 - [Reference fingerprinted static web assets in standalone Blazor WebAssembly apps](#reference-fingerprinted-static-web-assets-in-standalone-blazor-webassembly-apps)
 - [`HttpClient` response streaming enabled by default on WebAssembly](#httpclient-response-streaming-enabled-by-default-on-webassembly)
-- [`DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`](#disablematchallignoreslefturipart-app-context-switch-renamed-to-enablementchallofthequerystringandfragment)
+- [`DisableMatchAllIgnoresLeftUriPart` app context switch renamed to `EnableMatchAllForQueryStringAndFragment`](#disablematchallignoreslefturipart-app-context-switch-renamed-to-enablematchallforquerystringandfragment)
 - [Set the environment at build-time for standalone Blazor WebAssembly apps](#set-the-environment-at-build-time-for-standalone-blazor-webassembly-apps)
 - [Validation support in minimal APIs](#validation-support-in-minimal-apis)
 - [OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template](#openapi-support-enabled-by-default-in-the-aspnet-core-web-api-native-aot-template)
@@ -112,7 +112,7 @@ else
 
 Standalone Blazor WebAssembly apps can now reference framework static web assets using either a generated import map or a fingerprinted URL. The import map and fingerprinted URLs are generated during the build process when the `<WriteImportMapToHtml>true</WriteImportMapToHtml>` property is specified in the project file.
 
-**blazorwasm.csproj**
+_blazorwasm.csproj_
 
 ```diff
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
@@ -127,7 +127,7 @@ Standalone Blazor WebAssembly apps can now reference framework static web assets
 
 To specify where the import map should be generated, add an empty `<script type="importmap"></script>` element to your *index.html* file. To generate fingerprinted URLs for referenced static web assets, use the `#[.{fingerprint}]` placeholder.
 
-**index.html**
+_index.html_
 
 ```diff
 <!DOCTYPE html>
@@ -187,8 +187,8 @@ The following example sets the app's environment to `Staging`:
 
 The default environments applied to the app are:
 
-* `Development` for build.
-* `Production` for publish.
+- `Development` for build.
+- `Production` for publish.
 
 ## Validation support in minimal APIs
 
@@ -228,7 +228,7 @@ Thank you [@sander1095](https://github.com/sander1095) for this contribution!
 
 ASP.NET Core now supports returning a `ServerSentEvents` result using the `TypedResults.ServerSentEvents` API. This feature is supported in both minimal APIs and controller-based apps.
 
-Server-Sent Events (SSE) is a server push technology that allows a server to send a stream of event messages to a client over a single HTTP connection. In .NET the event messages are represented as [SseItem<T>](https://learn.microsoft.com/dotnet/api/system.net.serversentevents.sseitem-1) objects, which may contain an event type, an ID, and a data payload of type `T`.
+Server-Sent Events (SSE) is a server push technology that allows a server to send a stream of event messages to a client over a single HTTP connection. In .NET the event messages are represented as [`SseItem<T>`](https://learn.microsoft.com/dotnet/api/system.net.serversentevents.sseitem-1) objects, which may contain an event type, an ID, and a data payload of type `T`.
 
 The TypedResults class includes a new static `ServerSentEvents` method for returning a `ServerSentEvents` result. The first parameter to this method is an `IAsyncEnumerable<SseItem<T>>` that represents the stream of event messages to be sent to the client.
 
@@ -269,4 +269,3 @@ Thank you contributors! ❤️
 - [@shethaadit](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview3+author%3Ashethaadit)
 - [@smnsht](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview3+author%3Asmnsht)
 - [@xt0rted](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview3+author%3Axt0rted)
-

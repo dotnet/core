@@ -30,24 +30,24 @@ A `CancellationToken` may now be passed to `WebAuthenticator.AuthenticateAsync` 
 
 ## Performance improvements
 
-Various incremental improvements are to runtime performance are included in this release. 
+Various incremental improvements are to runtime performance are included in this release.
 
 ### PropertyMapper improvement benchmarks
 
-Each control handler maps properties to the core controls via `PropertyMapper`s. A new cache has been implemented, and improvements have been made to the order in which properties are applied, thus avoiding some race conditions and repetitive calls. 
+Each control handler maps properties to the core controls via `PropertyMapper`s. A new cache has been implemented, and improvements have been made to the order in which properties are applied, thus avoiding some race conditions and repetitive calls.
 
 > BenchmarkDotNet v0.13.10, macOS 15.3.1 (24D70) [Darwin 24.3.0]
 > Apple M3 Pro, 1 CPU, 11 logical and 11 physical cores
 > .NET SDK 9.0.102
 
-**Before**
+Before:
 
 | Method                    | Mean      | Error    | StdDev   | Gen0      | Allocated  |
 |-------------------------- |----------:|---------:|---------:|----------:|-----------:|
 | BenchmarkUpdateProperties | 167.67 ms | 0.584 ms | 0.547 ms | 3333.3333 | 29604261 B |
 | BenchmarkUpdateProperty   |  31.65 ms | 0.079 ms | 0.070 ms |         - |       46 B |
 
-**After**
+After:
 
 | Method                    | Mean     | Error    | StdDev   | Gen0      | Allocated  |
 |-------------------------- |---------:|---------:|---------:|----------:|-----------:|
@@ -65,14 +65,13 @@ Building on previous work, we now eliminated the `MeasureInvalidated` subscripti
 | `main` | CV2 (no-resize) | 1371 | 347 |
 | `PR` | CV2 | 338 | 379 |
 
-
 [#28225](https://github.com/dotnet/maui/pull/28225)
 
 ### FormattedString improvement
 
-`Label` on Windows has been optimized for rendering `FormattedString` resulting in a ~56% improvement. 
+`Label` on Windows has been optimized for rendering `FormattedString` resulting in a ~56% improvement.
 
-[#28073$0](https://github.com/dotnet/maui/pull/28073$0) 
+[See #28073 on GitHub](https://github.com/dotnet/maui/pull/28073)
 
 ## .NET for Android
 
