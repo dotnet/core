@@ -165,7 +165,7 @@ To specify where the import map should be generated, add an empty `<script type=
 
 ## `HttpClient` response streaming enabled by default on WebAssembly
 
-Response streaming is now enabled by default for `HttpClient` in Blazor WebAssembly. This change improves performance and reduces memory usage when handling large responses. However, it also means the response stream no longer supports synchronous operations. If your code requires using synchronous operations, you can opt-out of response streaming for an individual request using the `SetBrowserResponseStreamingEnabled` extension method on the response message:
+Response streaming is now enabled by default for `HttpClient` in Blazor WebAssembly. This change improves performance and reduces memory usage when handling large responses. However, it also means the response stream no longer supports synchronous operations because it is no longer a `MemoryStream`. If your code requires using synchronous operations, you can opt-out of response streaming for an individual request using the `SetBrowserResponseStreamingEnabled` extension method on the response message:
 
 ```csharp
 requestMessage.SetBrowserResponseStreamingEnabled(false);
