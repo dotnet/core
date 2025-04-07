@@ -112,7 +112,7 @@ else
 
 Standalone Blazor WebAssembly apps can now reference framework static web assets using either a generated import map or a fingerprinted URL. The import map and fingerprinted URLs are generated during the build process when the `<WriteImportMapToHtml>true</WriteImportMapToHtml>` property is specified in the project file.
 
-_blazorwasm.csproj_
+blazorwasm.csproj:
 
 ```diff
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
@@ -127,7 +127,7 @@ _blazorwasm.csproj_
 
 To specify where the import map should be generated, add an empty `<script type="importmap"></script>` element to your *index.html* file. To generate fingerprinted URLs for referenced static web assets, use the `#[.{fingerprint}]` placeholder.
 
-_index.html_
+index.html:
 
 ```diff
 <!DOCTYPE html>
