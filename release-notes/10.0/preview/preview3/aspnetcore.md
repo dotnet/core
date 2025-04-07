@@ -125,7 +125,7 @@ blazorwasm.csproj:
 </Project>
 ```
 
-To specify where the import map should be generated, add an empty `<script type="importmap"></script>` element to your *index.html* file. To generate fingerprinted URLs for referenced static web assets, use the `#[.{fingerprint}]` placeholder.
+To specify where the import map should be generated, add an empty `<script type="importmap"></script>` element to your _index.html_ file. To generate fingerprinted URLs for referenced static web assets, use the `#[.{fingerprint}]` placeholder.
 
 index.html:
 
