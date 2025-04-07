@@ -177,7 +177,7 @@ The `Microsoft.AspNetCore.Components.Routing.NavLink.DisableMatchAllIgnoresLeftU
 
 ## Set the environment at build-time for standalone Blazor WebAssembly apps
 
-You can now specify the environment for a standalone Blazor WebAssembly app at build-time using the  `<WasmApplicationEnvironmentName>` property in the client app's project file (`.csproj`). In .NET 10, the `Blazor-Environment` header is no longer generated or used for setting the client environment.
+You can now specify the environment for a standalone Blazor WebAssembly app at build-time using the `<WasmApplicationEnvironmentName>` property in the client app's project file (`.csproj`). In .NET 10, the `Blazor-Environment` header is no longer generated or used for setting the client environment.
 
 The following example sets the app's environment to `Staging`:
 
