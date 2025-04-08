@@ -6,23 +6,22 @@ The .NET team builds many branches of the product daily. You can install these b
 
 Daily builds, for both future and servicing branches, are available as Docker container images from the [Microsoft Container Registry](https://github.com/dotnet/dotnet-docker/blob/nightly/README.md).
 
+## Future Releases
 
-## Future Releases	
+Preview branches are for new versions of .NET that have not yet been released and are not yet supported.
 
-Preview branches are for new versions of .NET that have not yet been released and are not yet supported.	
+|Component|.NET 8.0|
+|:------:|:------:|
+|SDK|[.NET SDK 8.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries) |
+|ASP.NET Core|[ASP.NET Core 8.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md) |
+|Runtime|[.NET Runtime 8.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md) |
 
-|Component|.NET 8.0|	
-|:------:|:------:|	
-|SDK|[.NET SDK 8.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries) |	
-|ASP.NET Core|[ASP.NET Core 8.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md) |	
-|Runtime|[.NET Runtime 8.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md) |	
+## Servicing Releases
 
-## Servicing Releases	
+Servicing branches are for new patch versions of .NET that have not yet been released and are not yet supported.
 
-Servicing branches are for new patch versions of .NET that have not yet been released and are not yet supported.	
-
-|Component|.NET 7.0|.NET 6.0|	
-|:------:|:------:|:------: |	
-|SDK|[.NET SDK 7.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET SDK 6.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|	
-|ASP.NET Core|[ASP.NET Core 7.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 6.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|	
+|Component|.NET 7.0|.NET 6.0|
+|:------:|:------:|:------: |
+|SDK|[.NET SDK 7.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET SDK 6.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|
+|ASP.NET Core|[ASP.NET Core 7.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 6.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|
 |Runtime|[.NET Runtime 7.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md)|[.NET Core Runtime 6.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md)|
