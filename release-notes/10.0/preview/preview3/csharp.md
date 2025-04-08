@@ -87,7 +87,7 @@ Extension blocks can seamlessly coexist with the extension methods you have toda
 
 The choice is entirely yours. If you prefer to leave your existing extension methods untouched, you absolutely can. But if you’d rather update your code for a consistent look and take advantage of the new syntax, that option is available too. And with tools like Visual Studio, converting to your preferred form has never been easier!
 
-You'll see more extensions in upcoming previews, but we'd love to hear your feedback, so join the team and others in the community in the discussion [Extensions](https://github.com/dotnet/csharplang/discussions/8696)..
+You'll see more extensions in upcoming previews, but we'd love to hear your feedback, so join the team and others in the community in the discussion [Extensions](https://github.com/dotnet/csharplang/discussions/8696).
 
 ## Null-conditional assignment
 
