@@ -207,12 +207,13 @@ To enable built-in validation support for minimal APIs, call the `AddValidation`
 builder.Services.AddValidation();
 ```
 
-You also need to set the `InterceptorsNamespaces` property in your project file as follows:  
-\```
+You also need to set the `InterceptorsNamespaces` property in your project file as follows:
+
+```xml
   <PropertyGroup>
     <!-- Enable the generation of interceptors for the validation attributes -->    <InterceptorsNamespaces>$(InterceptorsNamespaces);Microsoft.AspNetCore.Http.Validation.Generated</InterceptorsNamespaces>
   </PropertyGroup>
-\```
+```
 
 The implementation automatically discovers types that are defined in minimal API handlers or as base types of types defined in minimal API handlers. Validation is performed on these types by an endpoint filter added to each endpoint.
 
