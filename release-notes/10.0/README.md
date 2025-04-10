@@ -67,4 +67,18 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 - [What's new in EF Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/whatsnew)
 - [Preview 3](preview/preview3/efcore.md)
 - [Preview 2](preview/preview2/efcore.md)
-- [Preview 2](preview/preview1/efcore.md)
+- [Preview 1](preview/preview1/efcore.md)
+
+### Windows Forms
+
+- [What's new in Windows Forms for .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100)
+- [Preview 3](preview/preview3/winforms.md)
+- [Preview 2](preview/preview2/winforms.md)
+- [Preview 1](preview/preview1/winforms.md)
+
+### Windows Presentation Foundation (WPF)
+
+- [What's new in WPF for .NET 10](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100)
+- [Preview 3](preview/preview3/wpf.md)
+- [Preview 2](preview/preview2/wpf.md)
+- [Preview 1](preview/preview1/wpf.md)
