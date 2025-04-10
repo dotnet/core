@@ -3,7 +3,7 @@
 Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS, Mac Catalyst, macOS, and tvOS in this preview release:
 
 - .NET MAUI
-  - [API deprecations of `LsitView`, `Cell`, and `TableView`](#api-deprecations)
+  - [API deprecations of `ListView`, `Cell`, and `TableView`](#api-deprecations)
   - [Fullscreen video playback](#fullscreen-video-playback)
   - [Geolocation IsEnabled](#geolocation-isenabled)
   - [WebAuthenticator CancellationToken](#webauthenticator-cancellationtoken)
