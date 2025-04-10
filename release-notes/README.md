@@ -4,9 +4,11 @@
 
 |  Version  | Release Date | Support | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- |
+| [.NET 10](release-notes/10.0/README.md) | November 11, 2025 | [LTS][policies] | [10.0.0-preview.3][10.0.0-preview.3] | May 8, 2028 |
 | [.NET 9](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | [9.0.4][9.0.4] | May 12, 2026 |
 | [.NET 8](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | [8.0.15][8.0.15] | November 10, 2026 |
 
+[10.0.0-preview.3]: release-notes/10.0/preview/preview3/10.0.0-preview.3.md
 [9.0.4]: ./9.0/9.0.4/9.0.4.md
 [8.0.15]: ./8.0/8.0.15/8.0.15.md
 [policies]: ../release-policies.md
