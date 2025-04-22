@@ -1,6 +1,6 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2025/04/17; Support phase: Active
+Last Updated: 2025/04/22; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -46,11 +46,11 @@ Notes:
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
 | [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
-| [Fedora][13]                  | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
+| [Fedora][13]                  | 42, 41, 40                  | Arm32, Arm64, x64     | [Lifecycle][14]      |
 | [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
 | [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
 | [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
-| [Ubuntu][21]                  | 25.04, 24.10, 24.04, 22.04, 20.04 | Arm32, Arm64, x64 | [Lifecycle][22]    |
+| [Ubuntu][21]                  | 25.04, 24.10, 24.04, 22.04  | Arm32, Arm64, x64     | [Lifecycle][22]      |
 
 Notes:
 
@@ -137,7 +137,8 @@ The following operating system versions are no longer supported.
 | tvOS                  | 14            | 2021-09-20           |
 | tvOS                  | 13            | 2020-09-16           |
 | tvOS                  | 12.2          | -                    |
-| Ubuntu                | 23.10         | 2024-07-11           |
+| Ubuntu                | 20.04         | 2025-05-31           |
+| Ubuntu                | 23.10         | 2024-07-12           |
 | Ubuntu                | 23.04         | 2024-01-20           |
 | Windows               | 11 22H2 (W)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows               | 11 21H2 (E)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
