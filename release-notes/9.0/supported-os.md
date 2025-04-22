@@ -1,6 +1,6 @@
 # .NET 9.0 - Supported OS versions
 
-Last Updated: 2025/04/17; Support phase: Active
+Last Updated: 2025/04/22; Support phase: Active
 
 [.NET 9.0](README.md) is an [STS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -46,7 +46,7 @@ Notes:
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
 | [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
-| [Fedora][13]                  | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
+| [Fedora][13]                  | 42, 41, 40                  | Arm32, Arm64, x64     | [Lifecycle][14]      |
 | [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
 | [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
 | [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
