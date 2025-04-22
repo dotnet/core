@@ -51,7 +51,7 @@ The following full-text operations are currently supported: [`FullTextContains`]
 
 For more information on Cosmos full-text search, see the [docs](/ef/core/providers/cosmos/full-text-search).
 
-### Hybrid search
+## Hybrid search
 
 EF Core now supports [`RRF`](/azure/cosmos-db/nosql/query/rrf) (Reciprocal Rank Fusion) function, which combines vector similarity search and full-text search (i.e. hybrid search). Here is an example query using hybrid search:
 
@@ -66,7 +66,7 @@ var hybrid = await context.Blogs.OrderBy(x => EF.Functions.Rrf(
 
 For more information on Cosmos hybrid search, see the [docs](/ef/core/providers/cosmos/full-text-search?#hybrid-search).
 
-### Vector similarity search exits preview
+## Vector similarity search exits preview
 
 In EF9 we added experimental support for vector similarity search. In EF Core 10, vector similarity search support is no longer experimental. We have also made some improvements to the feature:
 
