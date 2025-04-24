@@ -1,6 +1,6 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2025/04/22; Support phase: Active
+Last Updated: 2025/04/23; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -42,7 +42,7 @@ Notes:
 
 | OS                            | Versions                    | Architectures         | Lifecycle            |
 | ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Alpine][6]                   | 3.21, 3.20, 3.19, 3.18      | Arm32, Arm64, x64     | [Lifecycle][7]       |
+| [Alpine][6]                   | 3.21, 3.20, 3.19            | Arm32, Arm64, x64     | [Lifecycle][7]       |
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
 | [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
@@ -115,6 +115,7 @@ The following operating system versions are no longer supported.
 
 | OS                    | Version       | Date                 |
 | --------------------- | ------------- | -------------------- |
+| Alpine                | 3.18          | [2025-05-09](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
 | Alpine                | 3.17          | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
 | Alpine                | 3.16          | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
 | Android               | 11            | 2024-02-05           |
