@@ -268,7 +268,7 @@ This feature reduces the need for manual intervention or external tools, streaml
 
 ### Key Features:
 
-- **Flexible Transformations**: Use custom or predefined logic to modify individual OpenAPI operations.
+- **Targeted Transformations**: Use custom or predefined logic to modify individual OpenAPI operations.
 - **Support for Multiple Transformers**: Chain multiple transformers to apply different transformations sequentially.
 
 ### Example: Custom transformer
