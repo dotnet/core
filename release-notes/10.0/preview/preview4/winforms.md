@@ -31,7 +31,8 @@ Numerous unit tests were added to improve reliability and ensure comprehensive c
 
 * [Fix #13305 Baseline SnapLines disappear in the derived ControlDesigners](https://github.com/dotnet/winforms/pull/13324)
 
-* [Add _isReleasingDataSource to prevent unnecessary operations on CurrentCell when changing or releasing DataSource](https://github.com/dotnet/winforms/pull/13320) (Fixes #13319)
+* [InvalidOperationException when dialog containing focused DataGridView is closed](https://github.com/dotnet/winforms/pull/13320) (Fixes #13319)
+
 * [Property grid entry for ShortCut keys should not be up/down scrollable](https://github.com/dotnet/winforms/pull/13280) (Fixes #13279)
 * [Ignore case for DESC and ASC in BindingSource.Sort](https://github.com/dotnet/winforms/pull/13283) (Fixes #13278)
 
