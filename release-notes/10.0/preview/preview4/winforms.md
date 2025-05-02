@@ -16,11 +16,11 @@ Here's a summary of what's new in Windows Forms in this preview release:
 
 ## Features and Enhancements
 
-**Shared Core Clipboard Functionality with WPF**
+**Shared Core Clipboard Functionality with WPF** -
 Introduced shared functionality with WPF by moving reusable code into a common library for better interoperability.
 [Share System.Private.Windows.Core with WPF](https://github.com/dotnet/winforms/issues/12179).
 
-**Improved Test Coverage**
+**Improved Test Coverage** -
 Numerous unit tests were added to improve reliability and ensure comprehensive coverage across components.
 [New Unit Tests](https://github.com/dotnet/winforms/issues?q=is%3Aclosed+milestone%3A%2210.0%20Preview4%22%20label%3A%22area%3A%20test%20coverage%22)
 
@@ -34,18 +34,16 @@ Numerous unit tests were added to improve reliability and ensure comprehensive c
 
 ## Infrastructure and Tooling
 
-* **Enhanced GitHub Workflow Automation**
-
+**Enhanced GitHub Workflow Automation** -
 Onboarded to a new issue-labeling system based on GitHub workflows to improve automation and self-service capabilities.
-Example: [Onboard to the GitHub workflow-based issue-labeler](https://github.com/dotnet/winforms/pull/13101).
+[Onboard to the GitHub workflow-based issue-labeler](https://github.com/dotnet/winforms/pull/13101).
 
 ## Localization and Documentation
 
-* **Translation Updates**
-
+**Translation Updates** -
 Reviewed and corrected translations, including fixing the French translation of "(none)."
-Example: [Correct translation for "(none)" in French](https://github.com/dotnet/winforms/pull/13162).
+[Correct translation for "(none)" in French](https://github.com/dotnet/winforms/pull/13162).
 
 ---
 
-For the full list of updates, visit the [10.0 Preview 4 milestone](https://github.com/dotnet/winforms/issues?q=is%3Aclosed+milestone%3A%2210.0+Preview4%22).
+For the full list of updates, visit the **[10.0 Preview 4 milestone](https://github.com/dotnet/winforms/issues?q=is%3Aclosed+milestone%3A%2210.0+Preview4%22).**
