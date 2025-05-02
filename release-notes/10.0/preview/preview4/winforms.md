@@ -23,7 +23,8 @@ Introduced shared functionality with WPF by moving reusable code into a common l
 
 **Improved Test Coverage** -
 Numerous unit tests were added to improve reliability and ensure comprehensive coverage across components.
-[New Unit Tests](https://github.com/dotnet/winforms/issues?q=is%3Aclosed+milestone%3A%2210.0%20Preview4%22%20label%3A%22area%3A%20test%20coverage%22)
+[New Unit Tests](https://github.com/dotnet/winforms/issues?q=is%3Aclosed%20milestone%3A%2210.0%20Preview4%22%20label%3A%22area-test%20coverage%22)
+
 
 ## Bug Fixes
 
