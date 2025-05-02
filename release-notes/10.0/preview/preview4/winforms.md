@@ -26,7 +26,8 @@ Numerous unit tests were added to improve reliability and ensure comprehensive c
 
 ## Bug Fixes
 
-* [Fix a series of Analyzer issues (backport from release/net9).](https://github.com/dotnet/winforms/pull/13333)
+* [Fix a series of Analyzer issues.](https://github.com/dotnet/winforms/pull/13333)
+
 * [Fix #13305 Baseline SnapLines do not appear in DesignSurface](https://github.com/dotnet/winforms/pull/13324)
 * [Add _isReleasingDataSource to prevent unnecessary operations on CurrentCell when changing or releasing DataSource](https://github.com/dotnet/winforms/pull/13320) (Fixes #13319)
 * [Property grid entry for ShortCut keys should not be up/down scrollable](https://github.com/dotnet/winforms/pull/13280) (Fixes #13279)
