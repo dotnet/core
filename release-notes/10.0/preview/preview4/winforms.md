@@ -17,7 +17,8 @@ Here's a summary of what's new in Windows Forms in this preview release:
 ## Features and Enhancements
 
 **Shared Core Clipboard Functionality with WPF** -
-Introduced shared functionality with WPF by moving reusable code into a common library for better interoperability.
+Introduced shared functionality with WPF by moving reusable code into a common library for better code maintainability.
+
 [Share System.Private.Windows.Core with WPF](https://github.com/dotnet/winforms/issues/12179).
 
 **Improved Test Coverage** -
