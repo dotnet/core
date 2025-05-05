@@ -266,7 +266,7 @@ app.MapGet("/json-item", (CancellationToken cancellationToken) =>
 The new `AddOpenApiOperationTransformer` API makes it easier to customize OpenAPI documentation for your ASP.NET Core endpoints. This API allows you to register custom operation transformers, which modify OpenAPI operation definitions programmatically.
 This feature reduces the need for manual intervention or external tools, streamlining the API documentation process.
 
-### Key Features:
+### Key Features
 
 - **Targeted Transformations**: Use custom or predefined logic to modify individual OpenAPI operations.
 - **Support for Multiple Transformers**: Chain multiple transformers to apply different transformations sequentially.
