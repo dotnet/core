@@ -271,7 +271,7 @@ This feature reduces the need for manual intervention or external tools, streaml
 - **Targeted Transformations**: Use custom or predefined logic to modify individual OpenAPI operations.
 - **Support for Multiple Transformers**: Chain multiple transformers to apply different transformations sequentially.
 
-### Example: Custom transformer
+#### Example: Custom transformer
 
 Here’s how you can use the `AddOpenApiOperationTransformer` extension method with a custom transformer:
 
@@ -289,7 +289,7 @@ app.MapGet("/", () => "Hello World!")
 app.Run();
 ```
 
-### Example: Predefined and chained transformers
+#### Example: Predefined and chained transformers
 
 You can also create predefined transformers that you can use on multiple endpoints. These are defined as extension methods on `RouteHandlerBuilder`, and return a `RouteHandlerBuilder` so they can be chained with other methods like `WithName`, `WithTags`, and other operation transformers.
 Some example use cases are a transformer to add a description for a specific response code, or a transformer to add a response header.
