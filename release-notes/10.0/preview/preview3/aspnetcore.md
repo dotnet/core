@@ -10,6 +10,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Validation support in minimal APIs](#validation-support-in-minimal-apis)
 - [OpenAPI support enabled by default in the ASP.NET Core Web API (native AOT) template](#openapi-support-enabled-by-default-in-the-aspnet-core-web-api-native-aot-template)
 - [Support for Server-Sent Events (SSE)](#support-for-server-sent-events-sse)
+- [OpenAPI operation transformers](#openapi-operation-transformers)
 
 ASP.NET Core updates in .NET 10:
 
@@ -258,6 +259,131 @@ app.MapGet("/json-item", (CancellationToken cancellationToken) =>
 
     return TypedResults.ServerSentEvents(GetHeartRate(cancellationToken), eventType: "heartRate");
 });
+```
+
+## OpenAPI operation transformers
+
+The new `AddOpenApiOperationTransformer` API makes it easier to customize OpenAPI documentation for your ASP.NET Core endpoints. This API allows you to register custom operation transformers, which modify OpenAPI operation definitions programmatically.
+This feature reduces the need for manual intervention or external tools, streamlining the API documentation process.
+
+### Key Features
+
+- **Targeted Transformations**: Use custom or predefined logic to modify individual OpenAPI operations.
+- **Support for Multiple Transformers**: Chain multiple transformers to apply different transformations sequentially.
+
+#### Example: Custom transformer
+
+Here’s how you can use the `AddOpenApiOperationTransformer` extension method with a custom transformer:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/", () => "Hello World!")
+    .AddOpenApiOperationTransformer((operation, context, cancellationToken) =>
+    {
+        operation.Description = "This endpoint returns a greeting message.";
+        return Task.CompletedTask;
+    });
+
+app.Run();
+```
+
+#### Example: Predefined and chained transformers
+
+You can also create predefined transformers that you can use on multiple endpoints. These are defined as extension methods on `RouteHandlerBuilder`, and return a `RouteHandlerBuilder` so they can be chained with other methods like `WithName`, `WithTags`, and other operation transformers.
+Some example use cases are a transformer to add a description for a specific response code, or a transformer to add a response header.
+
+```csharp
+public static class ExtensionMethods
+{
+    public static RouteHandlerBuilder WithResponseDescription(this RouteHandlerBuilder builder, int statusCode, string description)
+    {
+        builder.AddOpenApiOperationTransformer((operation, context, cancellationToken) =>
+        {
+            var response = operation.Responses?.TryGetValue(statusCode.ToString(), out var r) == true ? r : null;
+            // The following line uses the new "null conditional assignment" feature of C# 14
+            response?.Description = description;
+            return Task.CompletedTask;
+        });
+        return builder;
+    }
+
+    public static RouteHandlerBuilder WithLocationHeader(this RouteHandlerBuilder builder)
+    {
+        builder.AddOpenApiOperationTransformer((operation, context, cancellationToken) =>
+        {
+            var createdResponse = operation?.Responses?.TryGetValue("201", out var r) == true ? r : null;
+            // The following line uses the new "null conditional assignment" feature of C# 14
+            createdResponse?.Headers["Location"] = new OpenApiHeader
+            {
+                Description = "Location of the created resource.",
+                Required = true,
+                Schema = new OpenApiSchema
+                {
+                    Type = JsonSchemaType.String,
+                    Format = "uri"
+                }
+            };
+            return Task.CompletedTask;
+        });
+        return builder;
+    }
+}
+```
+
+Here's how you can use the above transformers in your application:
+
+```csharp
+app.MapPost("/todos", (Todo todo) =>
+        TypedResults.Created($"/todos/{todo.Id}", todo))
+    .WithName("CreateTodo")
+    .WithResponseDescription(201, "The todo was created successfully.")
+    .WithLocationHeader();
+```
+
+and the resulting OpenAPI document will look like this:
+
+<!-- In the docs, highlight the response description and response header -->
+```json
+  "paths": {
+    "/todos": {
+      "post": {
+        "operationId": "CreateTodo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The todo was created successfully.",
+            "headers": {
+              "Location": {
+                "description": "Location of the created resource.",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 ```
 
 ## Community contributors
