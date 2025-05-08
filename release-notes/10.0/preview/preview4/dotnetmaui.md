@@ -3,7 +3,7 @@
 Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS, Mac Catalyst, macOS, and tvOS in this preview release:
 
 - .NET MAUI
-  - [Feature](#feature)
+  - [Nullable Pickers](#nullable-pickers)
 - [.NET for Android](#net-for-android)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
@@ -11,9 +11,9 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
 
 - [What's new in .NET MAUI in .NET 10](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-10) documentation.
 
-## Feature
+## Nullable Pickers
 
-Something about the feature
+Added nullable support to `DatePicker` ([#27921](https://github.com/dotnet/maui/pull/27921)) for `Date`, `MinimumDate`, and `MaximumDate` properties, and to `TimerPicker` ([#27930](https://github.com/dotnet/maui/pull/27930)) for the `Time` property.
 
 ## .NET for Android
 
