@@ -114,7 +114,7 @@ This method also has an optional `ApiParameterDescription` parameter to specify 
 
 To support adding the schema to the OpenAPI document, a `Document` property has been added to the Operation and Schema transformer contexts. This allows any transformer to add a schema to the OpenAPI document using the document's `AddComponent` method.
 
-To use this feature in an document, operation, or schema transformer, create the schema using the `GetOrCreateSchemaAsync` method provided in the context
+To use this feature in a document, operation, or schema transformer, create the schema using the `GetOrCreateSchemaAsync` method provided in the context
 and add it to the OpenAPI document using the document's `AddComponent` method.
 
 <!-- In the docs, highlight the lines with the call to "GetOrCreateSchemaAsync" and "AddComponent" -->
