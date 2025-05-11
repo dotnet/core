@@ -18,6 +18,8 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Blazor boot manifest merged into dotnet.js](#blazor-boot-manifest-merged-into-dotnetjs)
 - [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
 
+> TODO: Add WebApplicationFactory.UseKestrel, NavigationManager.NotFound, HTTP/3 partial frames
+
 ASP.NET Core updates in .NET 10:
 
 - [What's new in ASP.NET Core in .NET 10](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0) documentation.
