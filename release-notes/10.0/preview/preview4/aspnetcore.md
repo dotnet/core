@@ -9,6 +9,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Access the OpenAPI document with `IOpenApiDocumentProvider`](#access-the-openapi-document-with-iopenapidocumentprovider)
 - [OpenAPI.NET updated to Preview.17](#openapinet-updated-to-preview17)
 - [JavaScript interop for constructors and properties](#javascript-interop-for-constructors-and-properties)
+- [Reference a JavaScript function with `IJSObjectReference`](#reference-a-javascript-function-with-ijsobjectreference)
 - [Blazor WebAssembly runtime diagnostics](#blazor-webassembly-runtime-diagnostics)
 - [`QuickGrid` method `CloseColumnOptionsAsync` renamed to `HideColumnOptionsAsync`](#quickgrid-method-closecolumnoptionsasync-renamed-to-hidecolumnoptionsasync)
 - [Preload Blazor framework static assets](#preload-blazor-framework-static-assets)
@@ -209,6 +210,10 @@ var jsObj = await JSRuntime.InvokeNewAsync("jsInterop.TestClass", "Blazor!");
 var text = await jsObj.GetValueAsync<string>("text");
 var textLength = await jsObj.InvokeAsync<int>("getTextLength");
 ```
+
+## Reference a JavaScript function with `IJSObjectReference`
+
+You can now use JavaScript interop to retrieve an `IJSObjectReference` pointing to a JavaScript function, for example via `GetValueAsync<IJSObjectReference>` or `InvokeAsync<IJObjectReference>`. You can then use this reference to set a JavaScript handler.
 
 ## Blazor WebAssembly runtime diagnostics
 
