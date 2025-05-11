@@ -19,7 +19,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
 - [Use `WebApplicationFactory` with Kestrel for integration testing](#use-webapplicationfactory-with-kestrel-for-integration-testing)
 
-> TODO: Add NavigationManager.NotFound, HTTP/3 partial frames
+> TODO: Add NavigationManager.NotFound, HTTP/3 partial frames?, finish Blazor WebAssembly runtime diagnostics
 
 ASP.NET Core updates in .NET 10:
 
