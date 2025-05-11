@@ -17,8 +17,9 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Blazor WebAssembly Standalone App template updates](#blazor-webassembly-standalone-app-template-updates)
 - [Blazor boot manifest merged into dotnet.js](#blazor-boot-manifest-merged-into-dotnetjs)
 - [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
+- [Use `WebApplicationFactory` with Kestrel for integration testing](#use-webapplicationfactory-with-kestrel-for-integration-testing)
 
-> TODO: Add WebApplicationFactory.UseKestrel, NavigationManager.NotFound, HTTP/3 partial frames
+> TODO: Add NavigationManager.NotFound, HTTP/3 partial frames
 
 ASP.NET Core updates in .NET 10:
 
@@ -352,6 +353,47 @@ To revert to the previous behavior of throwing a `NavigationException`, set the 
 
 ```csharp
 AppContext.SetSwitch("Microsoft.AspNetCore.Components.Endpoints.NavigationManager.EnableThrowNavigationException", isEnabled: true);
+```
+
+## Use `WebApplicationFactory` with Kestrel for integration testing
+
+You can now use `WebApplicationFactory` with Kestrel for integration testing instead of the in-memory `TestServer`. This allows you to run integration tests against a real Kestrel server, including automated browser testing.
+
+To use Kestrel with `WebApplicationFactory`, first call `UseKestrel` and then `StartServer()` to start the server. Use overloads of `UseKestrel` to optionally configure the port or other Kestrel options.
+
+The following example shows testing an web app using `WebApplicationFactory`, Kestrel, xUnit.net, and Playwright:
+
+```csharp
+public class BlazorWebAppFactory : WebApplicationFactory<Program>
+{
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureTestServices(svc =>
+        {
+            svc.AddTransient<IWeatherService, TestWeatherService>();
+        });
+    }
+}
+
+public class WeatherPageTests : PageTest
+{
+    [Fact]
+    public async Task Page_LoadsSuccessfully()
+    {
+        using var waf = new BlazorWebAppFactory();
+
+        waf.UseKestrel();
+        waf.StartServer();
+
+        await Task.Delay(30000);
+        var privacyPagePath = waf.ClientOptions.BaseAddress.ToString() + "weather";
+        var response = await Page.GotoAsync(privacyPagePath);
+        var content = await response!.TextAsync();
+
+        await Expect(Page).ToHaveTitleAsync("Weather");
+        Assert.Contains(TestWeatherService.TestWeatherSummary, content);
+    }
+}
 ```
 
 ## Contributors
