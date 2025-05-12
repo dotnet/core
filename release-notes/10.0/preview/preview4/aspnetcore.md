@@ -366,7 +366,7 @@ AppContext.SetSwitch("Microsoft.AspNetCore.Components.Endpoints.NavigationManage
 
 You can now use `WebApplicationFactory` with Kestrel for integration testing instead of the in-memory `TestServer`. This allows you to run integration tests against a real Kestrel server, including automated browser testing.
 
-To use Kestrel with `WebApplicationFactory`, first call `UseKestrel` and then `StartServer()` to start the server. Use overloads of `UseKestrel` to optionally configure the port or other Kestrel options.
+To use Kestrel with `WebApplicationFactory`, first call `UseKestrel()` on the `WebApplicationFactory` instance and then `StartServer()` to start the server. Use overloads of `UseKestrel` to optionally configure the port or other Kestrel options.
 
 The following example shows testing an web app using `WebApplicationFactory`, Kestrel, xUnit.net, and Playwright:
 
