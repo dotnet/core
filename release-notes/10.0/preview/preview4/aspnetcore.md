@@ -11,10 +11,10 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [JavaScript interop for constructors and properties](#javascript-interop-for-constructors-and-properties)
 - [Reference a JavaScript function with `IJSObjectReference`](#reference-a-javascript-function-with-ijsobjectreference)
 - [Blazor WebAssembly runtime diagnostics](#blazor-webassembly-runtime-diagnostics)
-- [Signal a Not Found response using `NavigationManager`](#signal-a-not-found-response-using-navigationmanager)
+- [Signal Not Found responses using `NavigationManager`](#signal-not-found-responses-using-navigationmanager)
 - [`QuickGrid` method `CloseColumnOptionsAsync` renamed to `HideColumnOptionsAsync`](#quickgrid-method-closecolumnoptionsasync-renamed-to-hidecolumnoptionsasync)
-- [Preload Blazor framework static assets](#preload-blazor-framework-static-assets)
 - [`WriteImportMapToHtml` renamed to `OverrideHtmlAssetPlaceholders`](#writeimportmaptohtml-renamed-to-overridehtmlassetplaceholders)
+- [Preload Blazor framework static assets](#preload-blazor-framework-static-assets)
 - [Blazor WebAssembly Standalone App template updates](#blazor-webassembly-standalone-app-template-updates)
 - [Blazor boot manifest merged into dotnet.js](#blazor-boot-manifest-merged-into-dotnetjs)
 - [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
@@ -265,7 +265,7 @@ Once the Blazor WebAssebly app has loaded, use the Performance tab in the browse
 
 ![Blazor WebAssembly browser performance profiler](./media/blazor-browser-performance-profiler.png)
 
-## Signal a Not Found response using `NavigationManager`
+## Signal Not Found responses using `NavigationManager`
 
 The `NavigationManager` class now includes a `NotFound` method to handle scenarios where a requested resource is not found:
 
@@ -279,12 +279,6 @@ You can use the `OnNotFound` event on `NavigationManager` to be notified when `N
 
 The `CloseColumnOptionsAsync` method on the `QuickGrid` component has been renamed to `HideColumnOptionsAsync`.
 
-## Preload Blazor framework static assets
-
-In Blazor Web Apps, framework static assets are now automatically preloaded using [`Link` headers](https://developer.mozilla.org/docs/Web/HTTP/Reference/Headers/Link), which allows the browser to preload resources before the initial page is fetched and rendered.
-
-In standalone Blazor WebAssembly apps, framework assets can be preloaded using `link` tags generated from a `<link rel="preload" id="webassembly" />` placeholder using the `OverrideHtmlAssetPlaceholders` MSBuild property setting.
-
 ## `WriteImportMapToHtml` renamed to `OverrideHtmlAssetPlaceholders`
 
 The `WriteImportMapToHtml` MSBuild property has been renamed to `OverrideHtmlAssetPlaceholders`.
@@ -294,6 +288,12 @@ The `OverrideHtmlAssetPlaceholders` property enables the following build-time re
 - Replacing the `importmap` placeholder in the HTML file with a generated import map.
 - Replacing the `<link rel="preload" id="webassembly" />` tag with `link` tags for preloading static framework assets.
 - Replacing the `#[.{fingerprint}]` placeholder with the appropriate fingerprint for the static web asset.
+
+## Preload Blazor framework static assets
+
+In Blazor Web Apps, framework static assets are now automatically preloaded using [`Link` headers](https://developer.mozilla.org/docs/Web/HTTP/Reference/Headers/Link), which allows the browser to preload resources before the initial page is fetched and rendered.
+
+In standalone Blazor WebAssembly apps, framework assets can be preloaded using `link` tags generated from a `<link rel="preload" id="webassembly" />` placeholder using the `OverrideHtmlAssetPlaceholders` MSBuild property setting.
 
 ## Blazor WebAssembly Standalone App template updates
 
