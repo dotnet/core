@@ -9,6 +9,7 @@ Here's a summary of what's new in WPF in this preview release:
 - [Code Cleanup & Refactoring](#code-cleanup--refactoring)
 - [Tests and Test Coverage](#tests-and-test-coverage)
 - [Known Issues](#known-issues)
+- [Breaking changes](#breaking-changes)
 
 WPF updates in .NET 10:
 
@@ -83,3 +84,7 @@ Include the following in the App.xaml to restore the previous behavior:
 ```
 
 We are working on getting this fixed in upcoming releases of .NET 10.
+
+## Breaking changes
+
+Due to our recent efforts in optimizing the performance of dynamic resources, the incorrect initialization of such resources might now lead to crashing applications, given an incorrect type of resource is used. Previously, this would have resulted in an `InvalidOperationException`, which would have been consumed without causing the crash.
