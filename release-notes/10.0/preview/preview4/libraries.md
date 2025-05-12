@@ -53,7 +53,7 @@ The [approved API surface](https://github.com/dotnet/runtime/issues/1541#issueco
 await ZipFile.ExtractToDirectoryAsync("archive.zip", "destinationFolder", overwriteFiles: true);
 
 // Create a Zip archive
-await ZipFile.CreateFromDirectoryAsync("sourceFolder", "archive.zip", CompressionLevel.SmallesSize, includeBaseDirectory: true, entryNameEncoding: Encoding.UTF8);
+await ZipFile.CreateFromDirectoryAsync("sourceFolder", "archive.zip", CompressionLevel.SmallestSize, includeBaseDirectory: true, entryNameEncoding: Encoding.UTF8);
 
 // Open an archive
 await using ZipArchive archive = ZipFile.OpenReadAsync("archive.zip");
