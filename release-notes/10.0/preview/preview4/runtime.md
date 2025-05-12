@@ -10,7 +10,9 @@ Here's a summary of what's new in the .NET Runtime in this preview release:
 
 ## Escape Analysis for Local Struct Fields
 
-Preview 4 expands the JIT compiler's escape analysis abilities to model references to objects from struct fields. As mentioned in prior release notes, the JIT performs escape analysis to determine if an object can outlive its parent method; if it cannot, the JIT can allocate it on the stack, removing the overhead of placing and tracking an object on the heap. Objects can "escape," for example, by being assigned to a non-local variable, or by being passed to or returned from a function that isn't eventually inlined by the JIT. Consider the former case via the following example:
+Preview 4 expands the JIT compiler's escape analysis abilities to model references to objects from struct fields. As mentioned in prior release notes, the JIT performs escape analysis to determine if an object can outlive its parent method; if it cannot, the JIT can allocate it on the stack, removing the overhead of placing and tracking an object on the heap. Objects can "escape," for example, by being assigned to a non-local variable, or by being passed to or returned from a function that isn't eventually inlined by the JIT.
+
+Consider the following example:
 
 ```csharp
 public class Program
