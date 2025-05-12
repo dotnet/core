@@ -14,7 +14,7 @@ Something about the feature.
 
 ## Add Out-of-Proc Trace Support for Activity Events and Links
 
-The .NET [Activity](https://learn.microsoft.com/dotnet/api/system.diagnostics.activity) class enables distributed tracing by tracking the flow of operations across services or components. .NET supports serializing this tracing data out-of-process via the `Microsoft-Diagnostics-DiagnosticSource event` source provider.
+The .NET [Activity](https://learn.microsoft.com/dotnet/api/system.diagnostics.activity) class enables distributed tracing by tracking the flow of operations across services or components. .NET supports serializing this tracing data out-of-process via the `Microsoft-Diagnostics-DiagnosticSource` event source provider.
 
 An Activity can include additional metadata such as [ActivityLink](https://learn.microsoft.com/dotnet/api/system.diagnostics.activitylink) and [ActivityEvent](https://learn.microsoft.com/dotnet/api/system.diagnostics.activityevent). We’ve added support for serializing these as well, so out-of-proc trace data can now include information representing links and events, like the following:
 
