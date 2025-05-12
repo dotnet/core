@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in WPF in this preview release:
 
-- [API Enhancements](#api-enhancements)
+- [API Enhancements](#messagebox-api-enhancements)
 - [Shared Clipboard Code](#code-cleanup--refactoring)
 - [Fluent Theme Bug Fixes and Enhancements](#fluent-theme-bug-fixes-and-enhancements)
 - [Performance Improvements](#performance-improvements)
@@ -15,7 +15,7 @@ WPF updates in .NET 10:
 
 - [What's new in WPF in .NET 10](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100) documentation.
 
-## API Enhancements
+## `MessageBox` API Enhancements
 
 In this release, extended `MessageBox` options are available ([#9613](https://github.com/dotnet/wpf/issues/9613)). We would like to thank GitHub user **bstordrup** for his efforts on creating the API proposal and implementing the API.
 
