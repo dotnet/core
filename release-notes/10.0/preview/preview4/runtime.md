@@ -2,7 +2,8 @@
 
 Here's a summary of what's new in the .NET Runtime in this preview release:
 
-- [Feature](#feature)
+- [Escape Analysis for Local Struct Fields](#escape-analysis-for-local-struct-fields)
+- [Inlining Improvements](#inlining-improvements)
 
 .NET Runtime updates in .NET 10:
 
