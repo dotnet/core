@@ -85,7 +85,8 @@ A community contribution by [@edwardneal](https://github.com/edwardneal) improve
 
 **Highlights:**
 
-- Eliminates repeated allocation of ~64-80 bytes of managed memory per concatenated stream, plus more unmanaged memory.
+- Eliminates repeated allocation of ~64-80 bytes of memory per concatenated stream, with additional unmanaged memory savings.
+
 - Reduces execution time by approximately 400ns per concatenated stream.
 - Largest impact (~35% faster) is seen when processing a large number of small data streams.
 - No significant change for single-stream scenarios.
