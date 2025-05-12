@@ -12,12 +12,12 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Reference a JavaScript function with `IJSObjectReference`](#reference-a-javascript-function-with-ijsobjectreference)
 - [Blazor WebAssembly runtime diagnostics](#blazor-webassembly-runtime-diagnostics)
 - [Signal Not Found responses using `NavigationManager`](#signal-not-found-responses-using-navigationmanager)
+- [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
 - [`QuickGrid` method `CloseColumnOptionsAsync` renamed to `HideColumnOptionsAsync`](#quickgrid-method-closecolumnoptionsasync-renamed-to-hidecolumnoptionsasync)
 - [`WriteImportMapToHtml` renamed to `OverrideHtmlAssetPlaceholders`](#writeimportmaptohtml-renamed-to-overridehtmlassetplaceholders)
 - [Preload Blazor framework static assets](#preload-blazor-framework-static-assets)
 - [Blazor WebAssembly Standalone App template updates](#blazor-webassembly-standalone-app-template-updates)
 - [Blazor boot manifest merged into dotnet.js](#blazor-boot-manifest-merged-into-dotnetjs)
-- [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
 - [Use `WebApplicationFactory` with Kestrel for integration testing](#use-webapplicationfactory-with-kestrel-for-integration-testing)
 
 ASP.NET Core updates in .NET 10:
@@ -275,6 +275,20 @@ The `NavigationManager` class now includes a `NotFound` method to handle scenari
 
 You can use the `OnNotFound` event on `NavigationManager` to be notified when `NotFound` is invoked.
 
+## `NavigationManager.NavigateTo` no longer throws a `NavigationException`
+
+Previously, calling `NavigationManager.NavigateTo` during static server-side rendering (SSR) would throw a `NavigationException`, interrupting execution before being converted to a redirection response. This caused confusion during debugging and was inconsistent with interactive rendering, where code after `NavigateTo` continues to execute normally.
+
+Calling `NavigationManager.NavigateTo` during static SSR no longer throws a `NavigationException`. Instead, it behaves consistently with interactive rendering by performing the navigation without throwing an exception.
+
+Code that relied on `NavigationException` being thrown should be updated. For example, in the default Blazor Identity UI, the `IdentityRedirectManager` previously threw an `InvalidOperationException` after calling `RedirectTo` to ensure it wasn't invoked during interactive rendering. This exception and the `[DoesNotReturn]` attributes should now be removed.
+
+To revert to the previous behavior of throwing a `NavigationException`, set the following `AppContext` switch:
+
+```csharp
+AppContext.SetSwitch("Microsoft.AspNetCore.Components.Endpoints.NavigationManager.EnableThrowNavigationException", isEnabled: true);
+```
+
 ## `QuickGrid` method `CloseColumnOptionsAsync` renamed to `HideColumnOptionsAsync`
 
 The `CloseColumnOptionsAsync` method on the `QuickGrid` component has been renamed to `HideColumnOptionsAsync`.
@@ -347,20 +361,6 @@ The Blazor WebAssembly Standalone app template has been updated to enable preloa
 ## Blazor boot manifest merged into dotnet.js
 
 The Blazor boot manifest (*blazor.boot.json*) is now integrated into the `dotnet.js` framework file. This reduces HTTP requests and improves Blazor WebAssembly runtime performance. Remove any dependencies on *blazor.boot.json* in existing apps.
-
-## `NavigationManager.NavigateTo` no longer throws a `NavigationException`
-
-Previously, calling `NavigationManager.NavigateTo` during static server-side rendering (SSR) would throw a `NavigationException`, interrupting execution before being converted to a redirection response. This caused confusion during debugging and was inconsistent with interactive rendering, where code after `NavigateTo` continues to execute normally.
-
-Calling `NavigationManager.NavigateTo` during static SSR no longer throws a `NavigationException`. Instead, it behaves consistently with interactive rendering by performing the navigation without throwing an exception.
-
-Code that relied on `NavigationException` being thrown should be updated. For example, in the default Blazor Identity UI, the `IdentityRedirectManager` previously threw an `InvalidOperationException` after calling `RedirectTo` to ensure it wasn't invoked during interactive rendering. This exception and the `[DoesNotReturn]` attributes should now be removed.
-
-To revert to the previous behavior of throwing a `NavigationException`, set the following `AppContext` switch:
-
-```csharp
-AppContext.SetSwitch("Microsoft.AspNetCore.Components.Endpoints.NavigationManager.EnableThrowNavigationException", isEnabled: true);
-```
 
 ## Use `WebApplicationFactory` with Kestrel for integration testing
 
