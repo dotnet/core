@@ -20,8 +20,6 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
 - [Use `WebApplicationFactory` with Kestrel for integration testing](#use-webapplicationfactory-with-kestrel-for-integration-testing)
 
-> TODO: Finish Blazor WebAssembly runtime diagnostics
-
 ASP.NET Core updates in .NET 10:
 
 - [What's new in ASP.NET Core in .NET 10](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0) documentation.
@@ -229,45 +227,43 @@ To collect runtime diagnostic information from a Blazor WebAssembly app, first e
 dotnet workload install wasm-tools
 ```
 
-The following MSBuild properties are also required:
+The following MSBuild properties together enable support in the runtime for collecting diagnostics:
 
 Property | Default | Set value to&hellip; | Description
 --- | :---: | :---: | ---
-`<WasmPerfTracing>` | `false` | `true` | Enable support for WebAssembly performance tracing.
-`<MetricsSupport>` | `false` | `true` | Enable `System.Diagnostics.Metrics` support.
-`<EventSourceSupport>` | `false`| `true` | Enable `EventPipe` support.
+`<WasmPerfTracing>` | `false` | `true` | Enables support for WebAssembly performance tracing.
+`<WasmPerfInstrumentation>` | `none` | `all` | Enables instrumentation necessary for the sampling profiler.
+`<EventSourceSupport>` | `false`| `true` | Enables `EventPipe` support.
+`<MetricsSupport>` | `false` | `true` | Enables `System.Diagnostics.Metrics` support.
 
 Note that enabling runtime diagnostics may negatively impacts app size and performance. Publishing an app to production with profilers enabled is not recommended.
 
-> TODO: Add details on each of these runtime diagnostics and how to use them. Clarify with `WasmPerfInstrumentation` settings does.
+You can then use the following JavaScript APIs to collect runtime diagnostics, which will be  downloaded in a .nettrace file:
 
 ```javascript
+// Collect a performance profile using CPU sampling for a specified duration.
 globalThis.getDotnetRuntime(0).collectCpuSamples({durationSeconds: 60});
-```
 
-```javascript
+// Collect metrics for a specified duration.
 globalThis.getDotnetRuntime(0).collectPerfCounters({durationSeconds: 5})
-```
 
-```javascript
+// Collect a memory dump.
 globalThis.getDotnetRuntime(0).collectGcDump()
 ```
 
-You'll need to convert the dump file so it can be opened in Visual Studio.
+Note that to enable loading the collected memory dump in Visual Studio, you can be convert the downloaded .nettrace file to a .gcdump file using the `dotnet gcdump convert` command.
 
-```console
-dotnet gcdump convert
-```
+You can also use the browser performance profiler to collect and view performance traces. To enable the browser performance profiler, add the following to your project file:
 
-You can use the browser performance profiler to collect performance traces. To enable the browser performance profiler, add the following to your project file:
+Property | Default | Set value to&hellip; | Description
+--- | :---: | :---: | ---
+`<WasmProfilers>` | No value | `browser` | Specifies the profilers to use. The `browser` profiler enables integration with the browser's developer tools profiler.
+`<WasmNativeStrip>` | `true` | `false` | Disables stripping the native executable.
+`<WasmNativeDebugSymbols>` | `true` | `true` | Enables building with native debug symbols.
 
-```xml
-<WasmProfilers>browser;</WasmProfilers>
-```
+Once the Blazor WebAssebly app has loaded, use the Performance tab in the browser developer tools to record runtime performance while interacting with the app. Analyze the recorded performance data for .NET using the Timings section:
 
-In the browser developer tools, run the performance profiler and the select the Timings tab.
-
-> TODO: Add a screenshot of the browser performance profiler.
+![Blazor WebAssembly browser performance profiler](./media/blazor-browser-performance-profiler.png)
 
 ## Signal a Not Found response using `NavigationManager`
 
