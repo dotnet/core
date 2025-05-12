@@ -36,3 +36,44 @@ Out-of-proc trace data aggregators can enable and configure this sampling by spe
 ```
 
 This setting limits serialization to **100 root activities per second** across all `ActivitySource` instances.
+
+
+# New async Zip APIs
+
+.NET 10 Preview 4 introduces new asynchronous APIs for working with ZIP archives, making it easier to perform non-blocking operations when reading from or writing to ZIP files. This feature was [highly requested by the community](https://github.com/dotnet/runtime/issues/1541).
+
+The new APIs, added to the `System.IO.Compression` and `System.IO.Compression.ZipFile` assemblies, provide async methods for extracting, creating, and updating ZIP archives. These methods enable developers to efficiently handle large files and improve application responsiveness, especially in scenarios involving I/O-bound operations.
+
+The [approved API surface](https://github.com/dotnet/runtime/issues/1541#issuecomment-2715269236) was implemented [here](https://github.com/dotnet/runtime/pull/114421).
+
+**Usage examples:**
+
+```csharp
+// Extract a Zip archive
+await ZipFile.ExtractToDirectoryAsync("archive.zip", "destinationFolder", overwriteFiles: true);
+
+// Create a Zip archive
+await ZipFile.CreateFromDirectoryAsync("sourceFolder", "archive.zip", CompressionLevel.SmallesSize, includeBaseDirectory: true, entryNameEncoding: Encoding.UTF8);
+
+// Open an archive
+await using ZipArchive archive = ZipFile.OpenReadAsync("archive.zip");
+
+// Fine-grained manipulation
+using FileStream archiveStream = File.OpenRead("archive.zip");
+await using (ZipArchive archive = await ZipArchive.CreateAsync(archiveStream, ZipArchiveMode.Update, leaveOpen: false, entryNameEncoding: Encoding.UTF8))
+{
+    foreach (ZipArchiveEntry entry in archive.Entries)
+    {
+        // Extract an entry to the filesystem
+        await entry.ExtractToFileAsync(destinationFileName: "file.txt", overwrite: true);
+
+        // Open an entry's stream
+        await using Stream entryStream = await entry.OpenAsync();
+
+        // Create an entry from a filesystem object
+        ZipArchiveEntry createdEntry = await archive.CreateEntryFromFileAsync(sourceFileName "path/to/file.txt", entryName: "file.txt");
+    }
+}
+```
+
+These new async methods complement the existing synchronous APIs, providing more flexibility for modern .NET applications.
