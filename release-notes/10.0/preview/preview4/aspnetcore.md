@@ -392,7 +392,6 @@ public class WeatherPageTests : PageTest
         waf.UseKestrel();
         waf.StartServer();
 
-        await Task.Delay(30000);
         var privacyPagePath = waf.ClientOptions.BaseAddress.ToString() + "weather";
         var response = await Page.GotoAsync(privacyPagePath);
         var content = await response!.TextAsync();
