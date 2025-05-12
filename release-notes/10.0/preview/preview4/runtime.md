@@ -60,7 +60,6 @@ Program:Main():int (FullOpts):
        mov      eax, dword ptr [rax+0x10]
        add      rsp, 56
        ret
-
 ```
 
 Note the heap allocation helper call is gone. To learn more about de-abstraction improvements planned for .NET 10, check out [dotnet/runtime #108913](https://github.com/dotnet/runtime/issues/108913).
