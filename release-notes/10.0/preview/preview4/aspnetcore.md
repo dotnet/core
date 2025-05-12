@@ -11,6 +11,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [JavaScript interop for constructors and properties](#javascript-interop-for-constructors-and-properties)
 - [Reference a JavaScript function with `IJSObjectReference`](#reference-a-javascript-function-with-ijsobjectreference)
 - [Blazor WebAssembly runtime diagnostics](#blazor-webassembly-runtime-diagnostics)
+- [Signal a Not Found response using `NavigationManager`](#signal-a-not-found-response-using-navigationmanager)
 - [`QuickGrid` method `CloseColumnOptionsAsync` renamed to `HideColumnOptionsAsync`](#quickgrid-method-closecolumnoptionsasync-renamed-to-hidecolumnoptionsasync)
 - [Preload Blazor framework static assets](#preload-blazor-framework-static-assets)
 - [`WriteImportMapToHtml` renamed to `OverrideHtmlAssetPlaceholders`](#writeimportmaptohtml-renamed-to-overridehtmlassetplaceholders)
@@ -19,7 +20,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`NavigationManager.NavigateTo` no longer throws a `NavigationException`](#navigationmanagernavigateto-no-longer-throws-a-navigationexception)
 - [Use `WebApplicationFactory` with Kestrel for integration testing](#use-webapplicationfactory-with-kestrel-for-integration-testing)
 
-> TODO: Add NavigationManager.NotFound, finish Blazor WebAssembly runtime diagnostics
+> TODO: Finish Blazor WebAssembly runtime diagnostics
 
 ASP.NET Core updates in .NET 10:
 
@@ -267,6 +268,16 @@ You can use the browser performance profiler to collect performance traces. To e
 In the browser developer tools, run the performance profiler and the select the Timings tab.
 
 > TODO: Add a screenshot of the browser performance profiler.
+
+## Signal a Not Found response using `NavigationManager`
+
+The `NavigationManager` class now includes a `NotFound` method to handle scenarios where a requested resource is not found:
+
+- **Static server-side rendering**: Calling `NotFound` sets the HTTP status code to 404.
+- **Streaming rendering**: Throws an exception if the response has already started.
+- **Interactive rendering**: Signals the `Router` to render a Not Found page.
+
+You can use the `OnNotFound` event on `NavigationManager` to be notified when `NotFound` is invoked.
 
 ## `QuickGrid` method `CloseColumnOptionsAsync` renamed to `HideColumnOptionsAsync`
 
