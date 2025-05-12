@@ -77,3 +77,18 @@ await using (ZipArchive archive = await ZipArchive.CreateAsync(archiveStream, Zi
 ```
 
 These new async methods complement the existing synchronous APIs, providing more flexibility for modern .NET applications.
+
+
+# Performance improvement in GZipStream for concatenated streams
+
+A community contribution by [@edwardneal](https://github.com/edwardneal) improved the performance and memory usage of `GZipStream` when processing concatenated GZip data streams. Previously, each new stream segment would dispose and reallocate the internal `ZLibStreamHandle`, resulting in additional memory allocations and initialization overhead. With this change, the handle is now reset and reused using `inflateReset2`, reducing both managed and unmanaged memory allocations and improving execution time.
+
+**Highlights:**
+
+- Eliminates repeated allocation of ~64-80 bytes of managed memory per concatenated stream, plus more unmanaged memory.
+- Reduces execution time by approximately 400ns per concatenated stream.
+- Largest impact (~35% faster) is seen when processing a large number of small data streams.
+- No significant change for single-stream scenarios.
+
+For more details, see the [pull request #113587](https://github.com/dotnet/runtime/pull/113587).
+
