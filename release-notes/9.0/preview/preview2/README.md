@@ -4,12 +4,10 @@
 
 * [Runtime](./runtime.md)
 * [SDK](./sdk.md)
-
-## Feature Release Notes
-
 * [.NET Data and EF Core](./efcoreanddata.md)
 * [.NET MAUI](./dotnetmaui.md)
 * [ASP.NET Core](./aspnetcore.md)
+* [API diff](./api-diff/README.md)
 
 ## Get Started
 
