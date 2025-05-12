@@ -236,22 +236,22 @@ Property | Default | Set value to&hellip; | Description
 `<EventSourceSupport>` | `false`| `true` | Enables `EventPipe` support.
 `<MetricsSupport>` | `false` | `true` | Enables `System.Diagnostics.Metrics` support.
 
-Note that enabling runtime diagnostics may negatively impacts app size and performance. Publishing an app to production with profilers enabled is not recommended.
+Note that enabling runtime diagnostics may negatively impact app size and performance. Publishing an app to production with profilers enabled is not recommended.
 
-You can then use the following JavaScript APIs to collect runtime diagnostics, which will be  downloaded in a .nettrace file:
+You can then use the following JavaScript APIs to collect runtime diagnostics, which will be downloaded in a *.nettrace* file:
 
 ```javascript
 // Collect a performance profile using CPU sampling for a specified duration.
 globalThis.getDotnetRuntime(0).collectCpuSamples({durationSeconds: 60});
 
 // Collect metrics for a specified duration.
-globalThis.getDotnetRuntime(0).collectPerfCounters({durationSeconds: 5})
+globalThis.getDotnetRuntime(0).collectPerfCounters({durationSeconds: 5});
 
 // Collect a memory dump.
-globalThis.getDotnetRuntime(0).collectGcDump()
+globalThis.getDotnetRuntime(0).collectGcDump();
 ```
 
-Note that to enable loading the collected memory dump in Visual Studio, you can be convert the downloaded .nettrace file to a .gcdump file using the `dotnet gcdump convert` command.
+Note that to enable loading the collected memory dump in Visual Studio, you can convert the downloaded *.nettrace* file to a *.gcdump* file using the `dotnet gcdump convert` command.
 
 You can also use the browser performance profiler to collect and view performance traces. To enable the browser performance profiler, add the following to your project file:
 
