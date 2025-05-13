@@ -313,7 +313,7 @@ In standalone Blazor WebAssembly apps, framework assets can be preloaded using `
 
 The Blazor WebAssembly Standalone app template has been updated to enable preloading of state framework assets, include a generated JavaScript import map, and fingerprinting for *blazor.webassembly.js* using the `OverrideHtmlAssetPlaceholders` setting.
 
-**index.html**
+index.html:
 
 ```html
 <!DOCTYPE html>
@@ -341,7 +341,7 @@ The Blazor WebAssembly Standalone app template has been updated to enable preloa
 </html>
 ```
 
-**BlazorApp1.csproj**
+BlazorApp1.csproj:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
