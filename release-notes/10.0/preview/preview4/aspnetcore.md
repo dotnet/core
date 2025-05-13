@@ -281,7 +281,7 @@ Previously, calling `NavigationManager.NavigateTo` during static server-side ren
 
 Calling `NavigationManager.NavigateTo` during static SSR no longer throws a `NavigationException`. Instead, it behaves consistently with interactive rendering by performing the navigation without throwing an exception.
 
-Code that relied on `NavigationException` being thrown should be updated. For example, in the default Blazor Identity UI, the `IdentityRedirectManager` previously threw an `InvalidOperationException` after calling `RedirectTo` to ensure it wasn't invoked during interactive rendering. This exception and the `[DoesNotReturn]` attributes should now be removed.
+Code that previously relied on `NavigationException` being thrown should be updated. For example, in the default Blazor Identity UI, the `IdentityRedirectManager` throws an `InvalidOperationException` after calling `RedirectTo` to ensure it wasn't invoked during interactive rendering. This exception and the `[DoesNotReturn]` attributes should now be removed. For now, this manual update is required when using the Blazor Web App template with Individual Accounts authentication. A future template update will address this change.
 
 To revert to the previous behavior of throwing a `NavigationException`, set the following `AppContext` switch:
 
