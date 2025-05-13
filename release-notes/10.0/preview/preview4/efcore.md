@@ -3,6 +3,7 @@
 Here's a summary of what's new in Entity Framework Core in this preview release:
 
 - [Full-text search support on Azure Cosmos DB for NoSQL](#full-text-search-support-on-azure-cosmos-db-for-nosql)
+- [Hybrid search](#hybrid-search)
 - [Vector similarity search exits preview](#vector-similarity-search-exits-preview)
 - [Small improvements](#small-improvements)
 

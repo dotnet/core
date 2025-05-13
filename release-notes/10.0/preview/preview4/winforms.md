@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in Windows Forms in this preview release:
 
-* [Features and Enhancements](#features-and-enhancements)
+* [Shared Core Clipboard Functionality with WPF](#shared-core-clipboard-functionality-with-wpf)
 * [Bug Fixes](#bug-fixes)
 * [Infrastructure and Tooling](#infrastructure-and-tooling)
 * [Localization and Documentation](#localization-and-documentation)
@@ -14,17 +14,11 @@ Here's a summary of what's new in Windows Forms in this preview release:
 
 ---
 
-## Features and Enhancements
+## Shared Core Clipboard Functionality with WPF
 
-**Shared Core Clipboard Functionality with WPF** -
 Introduced shared functionality with WPF by moving reusable code into a common library for better code maintainability.
 
 [Share System.Private.Windows.Core with WPF](https://github.com/dotnet/winforms/issues/12179).
-
-**Improved Test Coverage** -
-Numerous unit tests were added to improve reliability and ensure comprehensive coverage across components.
-[New Unit Tests](https://github.com/dotnet/winforms/issues?q=is%3Aclosed%20milestone%3A%2210.0%20Preview4%22%20label%3A%22area-test%20coverage%22)
-
 
 ## Bug Fixes
 
@@ -42,6 +36,10 @@ Numerous unit tests were added to improve reliability and ensure comprehensive c
 **Enhanced GitHub Workflow Automation** -
 Onboarded to a new issue-labeling system based on GitHub workflows to improve automation and self-service capabilities.
 [Onboard to the GitHub workflow-based issue-labeler](https://github.com/dotnet/winforms/pull/13101).
+
+**Improved Test Coverage** -
+Numerous unit tests were added to improve reliability and ensure comprehensive coverage across components.
+[New Unit Tests](https://github.com/dotnet/winforms/issues?q=is%3Aclosed%20milestone%3A%2210.0%20Preview4%22%20label%3A%22area-test%20coverage%22)
 
 ## Localization and Documentation
 
