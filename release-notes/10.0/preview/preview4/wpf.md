@@ -3,7 +3,7 @@
 Here's a summary of what's new in WPF in this preview release:
 
 - [API Enhancements](#messagebox-api-enhancements)
-- [Shared Clipboard Code](#code-cleanup--refactoring)
+- [Shared Clipboard Code](#shared-clipboard-code)
 - [Fluent Theme Bug Fixes and Enhancements](#fluent-theme-bug-fixes-and-enhancements)
 - [Performance Improvements](#performance-improvements)
 - [Code Cleanup & Refactoring](#code-cleanup--refactoring)
