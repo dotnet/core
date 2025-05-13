@@ -33,6 +33,7 @@ When building from Visual Studio you might need to force the `RoslynCompilerType
 ```
 
 ## .NET for Android
+
 - [Use System.IO.Compression for `.apk` creation](#use-systemiocompression-for-apk-creation)
 - [Reduced download size](#reduced-download-size)
 - Full list of quality improvements on [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
