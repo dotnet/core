@@ -87,4 +87,4 @@ We are working on getting this fixed in upcoming releases of .NET 10.
 
 ## Breaking changes
 
-Due to our recent efforts in optimizing the performance of dynamic resources, the incorrect initialization of such resources might now lead to crashing applications, given an incorrect type of resource is used. Previously, this would have resulted in an `InvalidOperationException`, which would have been consumed without causing the crash.
+Due to our recent efforts in optimizing the performance of dynamic resources, the incorrect initialization of such resources might now lead to crashing applications, given an incorrect type of resource is used. Previously, this would have resulted in an `InvalidOperationException`, which would have been consumed without causing the crash. For more information, see [Incorrect usage of DynamicResource causes application crash](/dotnet/core/compatibility/wpf/10.0/dynamicresource-crash).
