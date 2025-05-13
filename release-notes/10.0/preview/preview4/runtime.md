@@ -25,7 +25,7 @@ public class Program
 
     public static void Main()
     {
-    	int[] x = new int[10];
+        int[] x = new int[10];
         GCStruct y = new GCStruct() { arr = x };
         return y.arr[0];
     }
@@ -71,9 +71,9 @@ Note the heap allocation helper call is gone. To learn more about de-abstraction
 
 Preview 4 brings multiple enhancements to the JIT's inliner:
 
-* [dotnet/runtime #112998](https://github.com/dotnet/runtime/pull/112998) enabled inlining of some methods with exception handling semantics, in particular those with try-finally blocks.
-* Because the above change increased the number of candidate inlinees, the inliner started exhausting its budget more frequently. [dotnet/runtime #114191](https://github.com/dotnet/runtime/pull/114191) addressed this by doubling the inliner's time constraints
-* To better take advantage of the JIT's ability to stack-allocate some arrays, [dotnet/runtime #114806](https://github.com/dotnet/runtime/pull/114806) adjusted the inliner's heuristics to increase the profitability of candidates that might be returning small, fixed-sized arrays.
-* When the JIT decides a call site is not profitable for inlining, it marks the method with `NoInlining` to save future inlining attempts from considering it, reducing compile times. However, many inlining heuristics are sensitive to profile data. For example, the JIT might decide a method is too large to be worth inlining in the absence of profile data, whereas when the caller is sufficiently hot, the JIT might be willing to relax its size restriction and inline the call. With [dotnet/runtime #114821](https://github.com/dotnet/runtime/pull/114821), the JIT will no longer flag unprofitable inlinees with `NoInlining` to avoid pessimizing call sites with profile data.
+- [dotnet/runtime #112998](https://github.com/dotnet/runtime/pull/112998) enabled inlining of some methods with exception handling semantics, in particular those with try-finally blocks.
+- Because the above change increased the number of candidate inlinees, the inliner started exhausting its budget more frequently. [dotnet/runtime #114191](https://github.com/dotnet/runtime/pull/114191) addressed this by doubling the inliner's time constraints
+- To better take advantage of the JIT's ability to stack-allocate some arrays, [dotnet/runtime #114806](https://github.com/dotnet/runtime/pull/114806) adjusted the inliner's heuristics to increase the profitability of candidates that might be returning small, fixed-sized arrays.
+- When the JIT decides a call site is not profitable for inlining, it marks the method with `NoInlining` to save future inlining attempts from considering it, reducing compile times. However, many inlining heuristics are sensitive to profile data. For example, the JIT might decide a method is too large to be worth inlining in the absence of profile data, whereas when the caller is sufficiently hot, the JIT might be willing to relax its size restriction and inline the call. With [dotnet/runtime #114821](https://github.com/dotnet/runtime/pull/114821), the JIT will no longer flag unprofitable inlinees with `NoInlining` to avoid pessimizing call sites with profile data.
 
 The above changes correspond with [hundreds](https://github.com/dotnet/runtime/pull/114821#issuecomment-2825645564) of microbenchmark improvements, frequently unblocking the de-abstraction capabilities introduced in earlier Previews.

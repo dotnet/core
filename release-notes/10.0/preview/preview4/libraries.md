@@ -17,7 +17,7 @@ The .NET [Activity](https://learn.microsoft.com/dotnet/api/system.diagnostics.ac
 
 An Activity can include additional metadata such as [ActivityLink](https://learn.microsoft.com/dotnet/api/system.diagnostics.activitylink) and [ActivityEvent](https://learn.microsoft.com/dotnet/api/system.diagnostics.activityevent). We’ve added support for serializing these as well, so out-of-proc trace data can now include information representing links and events, like the following:
 
-```
+```cli
 Events->"[(TestEvent1,​2025-03-27T23:34:10.6225721+00:00,​[E11:​EV1,​E12:​EV2]),​(TestEvent2,​2025-03-27T23:34:11.6276895+00:00,​[E21:​EV21,​E22:​EV22])]"
 Links->"[(19b6e8ea216cb2ba36dd5d957e126d9f,​98f7abcb3418f217,​Recorded,​null,​false,​[alk1:​alv1,​alk2:​alv2]),​(2d409549aadfdbdf5d1892584a5f2ab2,​4f3526086a350f50,​None,​null,​false)]"
 ```
@@ -30,12 +30,11 @@ We're introducing a new sampling option called **Rate Limiting Sampling**, which
 
 Out-of-proc trace data aggregators can enable and configure this sampling by specifying the option in [`FilterAndPayloadSpecs`](https://github.com/dotnet/runtime/blob/fb7050d93ea03854d469bb5f84c1f2addcd9e992/src/libraries/System.Diagnostics.DiagnosticSource/src/System/Diagnostics/DiagnosticSourceEventSource.cs#L43). For example:
 
-```
+```cli
 [AS]*/-ParentRateLimitingSampler(100)
 ```
 
 This setting limits serialization to **100 root activities per second** across all `ActivitySource` instances.
-
 
 ## New async Zip APIs
 
@@ -76,7 +75,6 @@ await using (ZipArchive archive = await ZipArchive.CreateAsync(archiveStream, Zi
 ```
 
 These new async methods complement the existing synchronous APIs, providing more flexibility for modern .NET applications.
-
 
 ## Performance improvement in GZipStream for concatenated streams
 
