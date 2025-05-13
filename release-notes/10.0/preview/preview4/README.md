@@ -1,6 +1,6 @@
 # .NET 10 Preview 4 - Release Notes
 
-.NET 10 Preview 4 released on April X, 2025. Find more information on new features released in .NET 10 Preview 4 by browsing through the release notes below:
+.NET 10 Preview 4 released on May 13, 2025. Find more information on new features released in .NET 10 Preview 4 by browsing through the release notes below:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
