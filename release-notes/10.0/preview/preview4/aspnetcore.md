@@ -251,7 +251,7 @@ globalThis.getDotnetRuntime(0).collectPerfCounters({durationSeconds: 5});
 globalThis.getDotnetRuntime(0).collectGcDump();
 ```
 
-Note that to enable loading the collected memory dump in Visual Studio, you can convert the downloaded *.nettrace* file to a *.gcdump* file using the `dotnet gcdump convert` command.
+Note that to enable loading the collected memory dump in Visual Studio, you can convert the downloaded *.nettrace* file to a *.gcdump* file using the `dotnet-gcdump convert` command.
 
 You can also use the browser performance profiler to collect and view performance traces. To enable the browser performance profiler, add the following to your project file:
 
