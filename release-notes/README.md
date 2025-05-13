@@ -4,13 +4,13 @@
 
 |  Version  | Release Date | Release type |Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| [.NET 10](release-notes/10.0/README.md) | November 11, 2025 | [LTS][policies] | Preview | [10.0.0-preview.3][10.0.0-preview.3] | |
-| [.NET 9](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.4][9.0.4] | May 12, 2026 |
-| [.NET 8](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.15][8.0.15] | November 10, 2026 |
+| [.NET 10](release-notes/10.0/README.md) | November 11, 2025 | [LTS][policies] | Preview | [10.0.0-preview.4][10.0.0-preview.4] | |
+| [.NET 9](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.5][9.0.5] | May 12, 2026 |
+| [.NET 8](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.16][8.0.16] | November 10, 2026 |
 
-[10.0.0-preview.3]: release-notes/10.0/preview/preview3/10.0.0-preview.3.md
-[9.0.4]: ./9.0/9.0.4/9.0.4.md
-[8.0.15]: ./8.0/8.0.15/8.0.15.md
+[10.0.0-preview.4]: release-notes/10.0/preview/preview4/10.0.0-preview.4.md
+[9.0.5]: ./9.0/9.0.5/9.0.5.md
+[8.0.16]: ./8.0/8.0.16/8.0.16.md
 [policies]: ../release-policies.md
 
 * [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
@@ -31,8 +31,8 @@ Release notes include:
 
 Example markdown files:
 
-* [8.0/8.0.15/8.0.15.md](./8.0/8.0.15/8.0.15.md)
-* [9.0/9.0.4/9.0.4.md](./9.0/9.0.4/9.0.4.md)
+* [8.0/8.0.16/8.0.16.md](./8.0/8.0.16/8.0.16.md)
+* [9.0/9.0.5/9.0.5.md](./9.0/9.0.5/9.0.5.md)
 
 Example JSON files:
 
