@@ -4,7 +4,8 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
 
 - .NET MAUI
   - [MediaPicker modernization](#mediapicker-modernization)
-  - [Nullable Pickers](#nullable-pickers)  
+  - [Nullable Pickers](#nullable-pickers)
+  - [Known issues](#known-issues)
 - [.NET for Android](#net-for-android)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
@@ -19,6 +20,14 @@ The Android and iOS implementations of `MediaPicker` for taking and picking phot
 ## Nullable Pickers
 
 Added nullable support to `DatePicker` ([#27921](https://github.com/dotnet/maui/pull/27921)) for `Date`, `MinimumDate`, and `MaximumDate` properties, and to `TimerPicker` ([#27930](https://github.com/dotnet/maui/pull/27930)) for the `Time` property.
+
+## Known Issues
+
+When building from Visual Studio you might need to force the `RoslynCompilerType` to be used by adding this property to your **csproj**. After making this change make sure to restart Visual studio.
+
+```xml
+<RoslynCompilerType>FrameworkPackage</RoslynCompilerType>
+```
 
 ## .NET for Android
 
