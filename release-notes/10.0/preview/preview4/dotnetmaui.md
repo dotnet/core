@@ -6,7 +6,10 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
   - [MediaPicker modernization](#mediapicker-modernization)
   - [Nullable Pickers](#nullable-pickers)
   - [Known issues](#known-issues)
+  - Full list of quality improvements on [dotnet/maui GitHub releases](https://github.com/dotnet/maui/releases/).
 - [.NET for Android](#net-for-android)
+  - [Use System.IO.Compression for `.apk` creation](#use-systemiocompression-for-apk-creation)
+  - [Reduced download size](#reduced-download-size)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
 .NET MAUI updates in .NET 10:
@@ -30,8 +33,23 @@ When building from Visual Studio you might need to force the `RoslynCompilerType
 ```
 
 ## .NET for Android
+- [Use System.IO.Compression for `.apk` creation](#use-systemiocompression-for-apk-creation)
+- [Reduced download size](#reduced-download-size)
+- Full list of quality improvements on [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
 
-This release was focused on quality improvements. A detailed list can be found on [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
+### Use System.IO.Compression for `.apk` creation
+
+Historically, [dotnet/android-libzipsharp](https://github.com/dotnet/android-libzipsharp) was used to process ZIP archives and create `.aab` and `.apk` files.
+
+For *command-line* `dotnet build` invocations, we now use [`System.IO.Compression.ZipArchive`](https://learn.microsoft.com/en-us/dotnet/api/system.io.compression.ziparchive?view=net-9.0) to create `.aab` and `.apk` files.  This should result in faster build times.
+
+Builds from within Visual Studio continue to use dotnet/android-libzipsharp, as the .NET Framework version of System.IO.Compression cannot be used.
+
+### Reduced Download Size
+
+Previously, the Android workload installed a copy of `Mono.Android.dll` per architecture, even though the contents of each of these files were identical.
+
+This duplication has been removed, saving nearly 100MB of download size (compressed) and even more when uncompressed on disk.
 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
