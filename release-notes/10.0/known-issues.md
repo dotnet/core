@@ -8,7 +8,7 @@ Starting in .NET 10 Preview 2, installing the ASP.NET Core Runtime Hosting Bundl
 
 See [the GitHub issue](https://github.com/dotnet/aspnetcore/issues/60764) for more details.
 
-### MAUI applications may fail to build in Visual Studio
+## MAUI applications may fail to build in Visual Studio
 
 MAUI applications built in Visual Studio or with `MSBuild.exe` may fail with an error like `C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\amd64\Microsoft.CSharp.CurrentVersion.targets(238,5): error : The application to execute does not exist: 'C:\Program Files\dotnet\sdk\10.0.100-preview.4.25258.110\Roslyn\binfx\csc.dll'`.
 
@@ -20,7 +20,7 @@ Add the following to a `Directory.Build.props` file that is imported in all MAUI
 <PropertyGroup Label="">
   <!-- Work around .NET 10-preview4 MAUI issue.
        Remove when building with .NET SDK 10.0.100-preview.5 or later that
-       includes  https://github.com/dotnet/roslyn/pull/78402 -->
+       includes https://github.com/dotnet/roslyn/pull/78402 -->
   <RoslynCompilerType>FrameworkPackage</RoslynCompilerType>
 </PropertyGroup>
 ```
