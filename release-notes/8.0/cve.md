@@ -8,6 +8,8 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 8.0.16 (May 2025)
+  - [CVE-2025-26646 | .NET and Visual Studio Spoofing Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
 - 8.0.15 (April 2025)
   - [CVE-2025-26682 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/352)
 - 8.0.14 (March 2025)
