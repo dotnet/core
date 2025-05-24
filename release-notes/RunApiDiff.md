@@ -1,6 +1,6 @@
-# RunApiDiff2 Script
+# RunApiDiff Script
 
-The [`RunApiDiff2.ps1`](./RunApiDiff2.ps1) script can automatically generate an API comparison report for two specified .NET previews, in the format expected for publishing in the dotnet/core repo.
+The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script can automatically generate an API comparison report for two specified .NET previews, in the format expected for publishing in the dotnet/core repo.
 
 ## Instructions
 
@@ -13,7 +13,7 @@ dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs
 4. Run the command. Execution example:
 
 ```powershell
-.\RunApiDiff2.ps1 `
+.\RunApiDiff.ps1 `
    -PreviousDotNetVersion 10.0 `
    -PreviousPreviewOrRC preview `
    -PreviousPreviewNumberVersion 1 `

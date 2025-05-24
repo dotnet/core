@@ -2,7 +2,7 @@
 
 # Usage:
 
-# RunApiDiff2.ps1
+# RunApiDiff.ps1
 # -PreviousDotNetVersion        : The 'before' .NET version: '6.0', '7.0', '8.0', etc.
 # -PreviousPreviewOrRC          : An optional word that indicates if the 'before' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
 # -PreviousPreviewNumberVersion : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...).
@@ -20,7 +20,7 @@
 # -InstallApiDiff               : Optional boolean to install or update the ApiDiff tool. Default is false.
 
 # Example:
-# .\RunApiDiff2.ps1 -PreviousDotNetVersion 9.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentPreviewOrRC rc -CurrentPreviewNumberVersion 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
+# .\RunApiDiff.ps1 -PreviousDotNetVersion 9.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentPreviewOrRC rc -CurrentPreviewNumberVersion 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
 
 Param (
     [Parameter(Mandatory = $true)]
@@ -335,7 +335,7 @@ Function GetPreviewFolderPath {
     Return [IO.Path]::Combine($prefixFolder, "preview", $previewOrRCFolderName, $apiDiffFolderName)
 }
 
-Function RunApiDiff2 {
+Function RunApiDiff {
     Param (
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -605,7 +605,7 @@ Function ProcessSdk
     $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$sdkName.App")
     RecreateFolder $targetFolder
 
-    RunApiDiff2 $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+    RunApiDiff $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
 }
 
 #####################
