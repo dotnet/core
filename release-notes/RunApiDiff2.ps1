@@ -10,7 +10,6 @@
 # -CurrentPreviewOrRC           : An optional word that indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
 # -CurrentPreviewNumberVersion  : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...).
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo.
-# -SdkRepo                      : The full path to your local clone of the dotnet/sdk repo.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
@@ -18,11 +17,10 @@
 # -ExcludeNetCore               : Optional boolean to exclude the NETCore comparison. Default is false.
 # -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
 # -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
+# -InstallApiDiff               : Optional boolean to install or update the ApiDiff tool. Default is false.
 
 # Example:
 # .\RunApiDiff2.ps1 -PreviousDotNetVersion 9.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentPreviewOrRC rc -CurrentPreviewNumberVersion 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
-
-# TODO: SDK Repo argument should go away, the tool will be available in the dotnet10 feed after the PR gets merged.
 
 Param (
     [Parameter(Mandatory = $true)]
@@ -63,11 +61,6 @@ Param (
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string]
-    $SdkRepo #"D:\\sdk" # TODO: DELETE AFTER MERGING PR, REPLACE WITH DOWNLOADING TOOL FROM dotnet10 FEED
-    ,
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]
     $TmpFolder #"D:\tmp"
     ,
     [Parameter(Mandatory = $false)]
@@ -95,6 +88,10 @@ Param (
     [Parameter(Mandatory = $false)]
     [bool]
     $ExcludeWindowsDesktop = $false
+    ,
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $InstallApiDiff = $false
 )
 
 #######################
@@ -503,7 +500,10 @@ Function DownloadPackage {
 
     $refPackageName = "$fullSdkName.Ref"
 
-    $feed = $useNuget ? "https://api.nuget.org/v3/index.json" : "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
+    $feed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
+    if ($useNuget) {
+        $feed = "https://api.nuget.org/v3/index.json"
+    }
 
     $searchTerm = ""
     If ($previewOrRC -eq "ga") {
@@ -534,7 +534,10 @@ Function DownloadPackage {
         $href = $results[0].Links | Where-Object -Property Relationship -Eq "icon" | Select-Object -ExpandProperty HRef
         $link = $href.AbsoluteUri.Replace("?extract=Icon.png", "")
 
-        $nupkgUrl = $useNuget ? "https://www.nuget.org/api/v2/package/$refPackageName/$version" : $link
+        $nupkgUrl = $link
+        if ($useNuget) {
+            $nupkgUrl = "https://www.nuget.org/api/v2/package/$refPackageName/$version"
+        }
 
         Write-Color yellow "Downloading '$nupkgUrl' to '$nupkgFile'..."
         Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile
@@ -550,20 +553,6 @@ Function DownloadPackage {
     VerifyPathOrExit $dllPath
     VerifyCountDlls $dllPath
     $resultingPath.value = $dllPath
-}
-
-Function GetFileLinesAsCommaSeparaterList {
-    Param (
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $filePath
-    )
-
-    VerifyPathOrExit $filePath
-
-    $lines = (Get-Content -Path $filePath) -join ","
-    Return $lines
 }
 
 Function ProcessSdk
@@ -627,6 +616,9 @@ Function ProcessSdk
 ### Start Execution ###
 #######################
 
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    Write-Error "This script requires PowerShell 7.0 or later.  See  https://aka.ms/PSWindows for instructions." -ErrorAction Stop
+}
 
 ## Generate strings with no whitespace
 
@@ -635,20 +627,25 @@ $IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And (
 
 
 ## Check folders passed as parameters exist
-
 VerifyPathOrExit $CoreRepo
-VerifyPathOrExit $SdkRepo
 VerifyPathOrExit $TmpFolder
 
+$currentMajorVersion = $CurrentDotNetVersion.Split(".")[0]
+$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet$currentMajorVersion-transport/nuget/v3/index.json --prerelease"
 
-## Ensure ApiDiff artifacts exist
+if ($InstallApiDiff) {
+    Write-Color white "Installing ApiDiff tool..."
+    RunCommand $InstallApiDiffCommand
+}
 
-$apiDiffProjectPath = [IO.Path]::Combine($SdkRepo, "src", "Compatibility", "ApiDiff", "Microsoft.DotNet.ApiDiff.Tool", "Microsoft.DotNet.ApiDiff.Tool.csproj")
-$apiDiffArtifactsPath = [IO.Path]::Combine($SdkRepo , "artifacts", "bin", "Microsoft.DotNet.ApiDiff.Tool")
-$apiDiffExe = [IO.Path]::Combine($apiDiffArtifactsPath, "Release", "net8.0", "Microsoft.DotNet.ApiDiff.Tool.exe")
-ReBuildIfExeNotFound $apiDiffExe $apiDiffProjectPath $apiDiffArtifactsPath
+$apiDiffCommand = get-command "apidiff" -ErrorAction SilentlyContinue
 
+if (-Not $apiDiffCommand) 
+{
+     Write-Error "The command apidiff could not be found.  Please first install the tool using the following command: $InstallApiDiffCommand" -ErrorAction Stop
+}
 
+$apiDiffExe = $apiDiffCommand.Source
 ## Recreate api-diff folder in core repo folder
 
 $previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $IsComparingReleases
@@ -658,14 +655,7 @@ If (-Not (Test-Path -Path $previewFolderPath))
     New-Item -ItemType Directory -Path $previewFolderPath
 }
 
-
 ## Run the ApiDiff commands
-
-# Comma separated docIDs of attribute types to exclude
-$attributesToExclude = GetFileLinesAsCommaSeparaterList $AttributesToExcludeFilePath
-
-# Comma separated list of assembly names to exclude
-$assembliesToExclude = GetFileLinesAsCommaSeparaterList $AssembliesToExcludeFilePath
 
 # Example: "10.0-preview2"
 $currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
@@ -676,17 +666,17 @@ $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $Curren
 
 If (-Not $ExcludeNetCore)
 {
-    ProcessSdk "NETCore" $apiDiffExe $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk "NETCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
 }
 
 If (-Not $ExcludeAspNetCore)
 {
-    ProcessSdk "AspNetCore" $apiDiffExe $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk "AspNetCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
 }
 
 If (-Not $ExcludeWindowsDesktop)
 {
-    ProcessSdk "WindowsDesktop" $apiDiffExe $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk "WindowsDesktop" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
 }
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName

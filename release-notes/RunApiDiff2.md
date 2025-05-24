@@ -4,9 +4,12 @@ The [`RunApiDiff2.ps1`](./RunApiDiff2.ps1) script can automatically generate an 
 
 ## Instructions
 
-1. Clone the dotnet/sdk repo. Let's assume you clone it into `D:\sdk`.
-2. Clone the dotnet/core repo. Let's assume you clone it into `D:\core`.
-3. Create a temporary directory. Let's assume you create it in `D:\tmp`.
+1. Clone the dotnet/core repo. Let's assume you clone it into `D:\core`.
+2. Create a temporary directory. Let's assume you create it in `D:\tmp`.
+3. Install or update your copy of the APIDiff tool (use the latest transport feed):
+```
+dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet10-transport/nuget/v3/index.json --prerelease
+```
 4. Run the command. Execution example:
 
 ```powershell
@@ -18,7 +21,6 @@ The [`RunApiDiff2.ps1`](./RunApiDiff2.ps1) script can automatically generate an 
    -CurrentPreviewOrRC preview `
    -CurrentPreviewNumberVersion 2 `
    -CoreRepo D:\core\ `
-   -SdkRepo D:\sdk\ `
    -TmpFolder D:\tmp\
 ```
 
