@@ -13,7 +13,7 @@
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
-# -UseNuGet                     : By default, the feed used is https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json , but if this is set to true, the feed used is https://api.nuget.org/v3/index.json
+# -UseDefaultNuGetFeed          : By default, the feed used is https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json , but if this is set to true, the feed used is https://api.nuget.org/v3/index.json
 # -ExcludeNetCore               : Optional boolean to exclude the NETCore comparison. Default is false.
 # -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
 # -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
@@ -75,7 +75,7 @@ Param (
     ,
     [Parameter(Mandatory = $false)]
     [bool]
-    $UseNuGet = $false
+    $UseDefaultNuGetFeed = $false
     ,
     [Parameter(Mandatory = $false)]
     [bool]
@@ -387,9 +387,6 @@ Function RunApiDiff {
     VerifyPathOrExit $beforeFolder
     VerifyPathOrExit $afterFolder
 
-    # All arguments:
-    # "https://github.com/dotnet/sdk/tree/main/src/Compatibility/ApiDiff/Microsoft.DotNet.ApiDiff.Tool/Program.cs"
-
     RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eas '$assembliesToExclude' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'"
 }
 
@@ -463,7 +460,7 @@ Function DownloadPackage {
     (
         [Parameter(Mandatory = $true)]
         [bool]
-        $useNuget
+        $useDefaultNuGetFeed
         ,
         [Parameter(Mandatory = $true)]
         [ValidateSet("NETCore", "AspNetCore", "WindowsDesktop")]
@@ -501,7 +498,7 @@ Function DownloadPackage {
     $refPackageName = "$fullSdkName.Ref"
 
     $feed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
-    if ($useNuget) {
+    if ($useDefaultNuGetFeed) {
         $feed = "https://api.nuget.org/v3/index.json"
     }
 
@@ -535,7 +532,7 @@ Function DownloadPackage {
         $link = $href.AbsoluteUri.Replace("?extract=Icon.png", "")
 
         $nupkgUrl = $link
-        if ($useNuget) {
+        if ($useDefaultNuGetFeed) {
             $nupkgUrl = "https://www.nuget.org/api/v2/package/$refPackageName/$version"
         }
 
@@ -595,11 +592,11 @@ Function ProcessSdk
     )
 
     $beforeDllFolder = ""
-    DownloadPackage $UseNuget $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeDllFolder)
+    DownloadPackage $UseDefaultNuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage $UseNuget $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterDllFolder)
+    DownloadPackage $UseDefaultNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$sdkName.App")
