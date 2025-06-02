@@ -11,4 +11,4 @@ C# 14 updates:
 
 ## Feature
 
-Something about the feature
+Something about the feature.
