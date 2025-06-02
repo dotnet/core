@@ -11,7 +11,7 @@ The following documents describe supported operating systems:
 
 ## Preview .NET versions
 
-None.
+* [.NET 10 supported OS versions](release-notes/10.0/supported-os.md)
 
 ## Out-of-support .NET versions
 

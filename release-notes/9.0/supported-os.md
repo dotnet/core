@@ -1,6 +1,6 @@
 # .NET 9.0 - Supported OS versions
 
-Last Updated: 2025/02/22; Support phase: Active
+Last Updated: 2025/04/22; Support phase: Active
 
 [.NET 9.0](README.md) is an [STS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -46,11 +46,11 @@ Notes:
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
 | [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
-| [Fedora][13]                  | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
+| [Fedora][13]                  | 42, 41, 40                  | Arm32, Arm64, x64     | [Lifecycle][14]      |
 | [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
 | [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
 | [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
-| [Ubuntu][21]                  | 24.10, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]      |
+| [Ubuntu][21]                  | 25.04, 24.10, 24.04, 22.04  | Arm32, Arm64, x64     | [Lifecycle][22]      |
 
 Notes:
 
@@ -116,8 +116,8 @@ The following operating system versions are no longer supported.
 
 | OS                    | Version       | Date                 |
 | --------------------- | ------------- | -------------------- |
-| iOS                   | 16            | [2024-08-07](https://support.apple.com/HT213407) |
-| iPadOS                | 16            | [2024-09-16](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
+| iOS                   | 16            | [2025-03-31](https://support.apple.com/HT213407) |
+| iPadOS                | 16            | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
 | openSUSE Leap         | 15.5          | 2024-12-31           |
 | tvOS                  | 16            | 2023-09-18           |
 | tvOS                  | 15            | 2022-09-12           |
