@@ -3,7 +3,7 @@
 Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS, Mac Catalyst, macOS, and tvOS in this preview release:
 
 - .NET MAUI
-  - [Feature](#feature)
+  - [XAML source generation](#xaml-source-generation)
 - [.NET for Android](#net-for-android)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
@@ -11,7 +11,7 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
 
 - [What's new in .NET MAUI in .NET 10](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-10) documentation.
 
-## Feature
+## XAML Source Generation
 
 Something about the feature
 
