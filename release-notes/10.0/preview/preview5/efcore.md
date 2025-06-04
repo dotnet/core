@@ -12,4 +12,3 @@ Entity Framework Core 10 updates:
 ## Feature
 
 Something about the feature
-
