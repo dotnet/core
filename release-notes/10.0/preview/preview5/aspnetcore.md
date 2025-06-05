@@ -2,8 +2,8 @@
 
 Here's a summary of what's new in ASP.NET Core in this preview release:
 
-- [Configure Custom Security Descriptors for HTTP.sys Request Queues](#configure-custom-security-descriptors-for-httpsys-request-queues)
-- [Validation in Minimal APIs](#validation-in-minimal-apis)
+- [Configure custom security descriptors for HTTP.sys request queues](#configure-custom-security-descriptors-for-httpsys-request-queues)
+- [Validation in minimal APIs](#validation-in-minimal-apis)
 - [Support for generating OpenAPI 3.1](#support-for-generating-openapi-31)
 - [OpenAPI metadata from XML doc comments](#openapi-metadata-from-xml-doc-comments)
 - [Router has a `NotFoundPage` parameter](#router-has-a-notfoundpage-parameter)
@@ -14,7 +14,7 @@ ASP.NET Core updates in .NET 10:
 - [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/10.0#aspnet-core)
 - [Roadmap](https://github.com/dotnet/aspnetcore/issues/59443)
 
-## Configure Custom Security Descriptors for HTTP.sys Request Queues
+## Configure custom security descriptors for HTTP.sys request queues
 
 You can now specify a custom security descriptor for HTTP.sys request queues using the new `RequestQueueSecurityDescriptor` property on `HttpSysOptions`. This feature enables more granular control over access rights for the request queue, helping you tailor security to your application's needs.
 
@@ -62,13 +62,13 @@ builder.WebHost.UseHttpSys(options =>
 });
 ```
 
-### Additional Notes
+### Additional notes
 
 - The `RequestQueueSecurityDescriptor` applies only when creating a new request queue.
 - This property does not affect existing request queues.
 - See the official documentation for more information about Windows security descriptors and their usage.
 
-## Validation in Minimal APIs
+## Validation in minimal APIs
 
 A number of small improvements and fixes have been made to the validation generator for Minimal APIs that was introduced in preview 4.
 
