@@ -100,4 +100,7 @@ Rendering content after triggering `NavigationManager.NotFound()` method can be 
 
 Thank you contributors! ❤️
 
-<!-- Contributors list will be populated from milestone when available -->
+- [@Dona278](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview5+author%3ADona278)
+- [@feiyun0112](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview5+author%3Afeiyun0112)
+- [@MohabASHRAF-byte](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview5+author%3AMohabASHRAF-byte)
+- [@profet23](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview5+author%3Apropet23)
