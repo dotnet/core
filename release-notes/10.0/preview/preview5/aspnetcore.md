@@ -6,7 +6,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Validation resolver APIs marked as experimental](#validation-resolver-apis-marked-as-experimental)
 - [Support for generating OpenAPI 3.1](#support-for-generating-openapi-31)
 - [OpenAPI metadata from XML doc comments](#openapi-metadata-from-xml-doc-comments)
-- [Router has a `NotFoundPage` parameter](#router-has-a-notfoundpage-parameter)
+- [Specify a Not Found page using the Blazor Router](#specify-a-not-found-page-using-the-blazor-router)
 
 ASP.NET Core updates in .NET 10:
 
@@ -82,7 +82,7 @@ The OpenAPI.NET library used in ASP.NET Core OpenAPI document generation has bee
 
 Support for generating OpenAPI metadata from XML doc comments has been extended to extract metadata for operation responses from `<returns>` and `<response>` XML tags.
 
-## Router has a `NotFoundPage` parameter
+## Specify a Not Found page using the Blazor Router
 
 Rendering content after triggering `NavigationManager.NotFound()` method can be now handled by passing a parameter with page type to the `Router`. It is a preferred way over `NotFound` fragment because it supports routing that can be used across different applications code re-execution middleware, including non-blazor ones. If `NotFound` fragment is defined together with `NotFoundPage`, the page has higher priority.
 
