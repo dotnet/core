@@ -122,16 +122,19 @@ For Blazor Server applications, additional circuit-specific metrics are availabl
 The new activity tracing capabilities use the `Microsoft.AspNetCore.Components` activity source and provide three main types of activities:
 
 **Circuit lifecycle tracing:**
+
 - **`Microsoft.AspNetCore.Components.CircuitStart`** - Traces circuit initialization with format `Circuit {circuitId}`
   - Tags: `aspnetcore.components.circuit.id`
   - Links: HTTP activity
 
 **Navigation tracing:**
+
 - **`Microsoft.AspNetCore.Components.RouteChange`** - Tracks route changes with format `Route {route} -> {componentType}`
   - Tags: `aspnetcore.components.circuit.id`, `aspnetcore.components.type`, `aspnetcore.components.route`
   - Links: HTTP trace, circuit trace
 
 **Event handling tracing:**
+
 - **`Microsoft.AspNetCore.Components.HandleEvent`** - Traces event handling with format `Event {attributeName} -> {componentType}.{methodName}`
   - Tags: `aspnetcore.components.circuit.id`, `aspnetcore.components.type`, `aspnetcore.components.method`, `aspnetcore.components.attribute.name`, `error.type`
   - Links: HTTP trace, circuit trace, router trace
