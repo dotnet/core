@@ -100,16 +100,19 @@ Rendering content after triggering `NavigationManager.NotFound()` method can be 
 The new metrics feature includes several meters to track different aspects of Blazor application performance:
 
 **Microsoft.AspNetCore.Components meter:**
+
 - **`aspnetcore.components.navigation`** - Tracks the total number of route changes in your Blazor application
 - **`aspnetcore.components.event_handler`** - Measures the duration of processing browser events, including your business logic
 
 **Microsoft.AspNetCore.Components.Lifecycle meter:**
+
 - **`aspnetcore.components.update_parameters`** - Measures the duration of processing component parameters, including your business logic
 - **`aspnetcore.components.render_batch`** - Tracks the duration of rendering batches, including browser round-trip time
 
 **Microsoft.AspNetCore.Components.Server.Circuits meter:**
 
 For Blazor Server applications, additional circuit-specific metrics are available:
+
 - **`aspnetcore.components.circuit.active`** - Shows the number of active circuits currently in memory
 - **`aspnetcore.components.circuit.connected`** - Tracks the number of circuits connected to clients
 - **`aspnetcore.components.circuit.duration`** - Measures circuit lifetime duration and provides total count
