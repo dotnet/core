@@ -7,6 +7,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Support for generating OpenAPI 3.1](#support-for-generating-openapi-31)
 - [OpenAPI metadata from XML doc comments](#openapi-metadata-from-xml-doc-comments)
 - [Add a Not Found page using the Blazor Router](#add-a-not-found-page-using-the-blazor-router)
+- [Blazor metrics and tracing](#blazor-metrics-and-tracing)
 
 ASP.NET Core updates in .NET 10:
 
@@ -93,6 +94,73 @@ Rendering content after triggering `NavigationManager.NotFound()` method can be 
     <NotFound>This content will be ignored because we have NotFoundPage defined.</NotFound>
 </Router>
 ```
+
+## Blazor metrics and tracing
+
+.NET 10 Preview 5 introduces comprehensive metrics and tracing capabilities for Blazor applications, providing detailed observability into component lifecycle, navigation, event handling, and circuit management.
+
+### Blazor metrics
+
+The new metrics feature includes several meters to track different aspects of Blazor application performance:
+
+#### Microsoft.AspNetCore.Components meter
+
+- **`aspnetcore.components.navigation`** - Tracks the total number of route changes in your Blazor application
+- **`aspnetcore.components.event_handler`** - Measures the duration of processing browser events, including your business logic
+
+#### Microsoft.AspNetCore.Components.Lifecycle meter
+
+- **`aspnetcore.components.update_parameters`** - Measures the duration of processing component parameters, including your business logic
+- **`aspnetcore.components.render_batch`** - Tracks the duration of rendering batches, including browser round-trip time
+
+#### Microsoft.AspNetCore.Components.Server.Circuits meter
+
+For Blazor Server applications, additional circuit-specific metrics are available:
+
+- **`aspnetcore.components.circuit.active`** - Shows the number of active circuits currently in memory
+- **`aspnetcore.components.circuit.connected`** - Tracks the number of circuits connected to clients
+- **`aspnetcore.components.circuit.duration`** - Measures circuit lifetime duration and provides total count
+
+### Blazor activity tracing
+
+The new activity tracing capabilities use the `Microsoft.AspNetCore.Components` activity source and provide three main types of activities:
+
+#### Circuit lifecycle tracing
+
+- **`Microsoft.AspNetCore.Components.CircuitStart`** - Traces circuit initialization with format `Circuit {circuitId}`
+  - Tags: `aspnetcore.components.circuit.id`
+  - Links: HTTP activity
+
+#### Navigation tracing
+
+- **`Microsoft.AspNetCore.Components.RouteChange`** - Tracks route changes with format `Route {route} -> {componentType}`
+  - Tags: `aspnetcore.components.circuit.id`, `aspnetcore.components.type`, `aspnetcore.components.route`
+  - Links: HTTP trace, circuit trace
+
+#### Event handling tracing
+
+- **`Microsoft.AspNetCore.Components.HandleEvent`** - Traces event handling with format `Event {attributeName} -> {componentType}.{methodName}`
+  - Tags: `aspnetcore.components.circuit.id`, `aspnetcore.components.type`, `aspnetcore.components.method`, `aspnetcore.components.attribute.name`, `error.type`
+  - Links: HTTP trace, circuit trace, router trace
+
+### Configuration
+
+To enable Blazor metrics and tracing in your application, configure OpenTelemetry in your `Program.cs`:
+
+```csharp
+builder.Services.ConfigureOpenTelemetryMeterProvider(meterProvider =>
+{
+    meterProvider.AddMeter("Microsoft.AspNetCore.Components");
+    meterProvider.AddMeter("Microsoft.AspNetCore.Components.Server.Circuits");
+});
+
+builder.Services.ConfigureOpenTelemetryTracerProvider(tracerProvider =>
+{
+    tracerProvider.AddSource("Microsoft.AspNetCore.Components");
+});
+```
+
+These new observability features help you monitor and diagnose Blazor application performance, track user interactions, and understand component behavior in production environments.
 
 ## Contributors
 
