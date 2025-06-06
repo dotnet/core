@@ -19,13 +19,9 @@ ASP.NET Core updates in .NET 10:
 
 You can now specify a custom security descriptor for HTTP.sys request queues using the new `RequestQueueSecurityDescriptor` property on `HttpSysOptions`. This feature enables more granular control over access rights for the request queue, helping you tailor security to your application's needs.
 
-### Why this matters
-
 By customizing the security descriptor, you can allow or deny specific users or groups access to the request queue. This is particularly useful in scenarios where you want to restrict or delegate HTTP.sys request handling at the operating system level.
 
-### How to use
-
-Set the `RequestQueueSecurityDescriptor` property to a `GenericSecurityDescriptor` instance when configuring your HTTP.sys server. For example, to allow all users but deny guests:
+To use this feature, set the `RequestQueueSecurityDescriptor` property to a `GenericSecurityDescriptor` instance when configuring your HTTP.sys server. For example, to allow all users but deny guests:
 
 ```csharp
 using System.Security.AccessControl;
