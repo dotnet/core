@@ -99,7 +99,7 @@ The Blazor project template now includes a `NotFound.razor` page by default. Thi
 
 ### Blazor metrics
 
-The new metrics feature includes several meters to track different aspects of Blazor application performance:
+The new metrics feature includes several meters that track different aspects of Blazor application performance:
 
 **Microsoft.AspNetCore.Components meter:**
 
