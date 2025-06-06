@@ -2,6 +2,7 @@
 
 Here's a summary of what's new in .NET Libraries in this preview release:
 
+- [Post-Quantum Cryptography (PQC)](#post-quantum-cryptography-pqc)
 - [Feature](#feature)
 
 .NET Libraries updates in .NET 10:
