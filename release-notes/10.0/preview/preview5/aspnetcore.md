@@ -79,7 +79,7 @@ Support for generating OpenAPI metadata from XML doc comments has been extended 
 
 ## Add a Not Found page using the Blazor Router
 
-Rendering content after triggering `NavigationManager.NotFound()` method can be now handled by passing a parameter with page type to the `Router`. It is a preferred way over `NotFound` fragment because it supports routing that can be used across different applications code re-execution middleware, including non-blazor ones. If `NotFound` fragment is defined together with `NotFoundPage`, the page has higher priority.
+Blazor now provides an improved way to display a "Not Found" page when navigating to a non-existent page. You can specify a page to render when `NavigationManager.NotFound()` by passing a page type to the `Router` component using the `NotFoundPage` parameter. This approach is recommended over the previous `NotFound` fragment, as it supports routing, works across code re-execution middleware, and is compatible even with non-Blazor scenarios. If both `NotFound` fragment and `NotFoundPage` are defined, the page specified by `NotFoundPage` takes priority.
 
 ```html
 <Router AppAssembly="@typeof(Program).Assembly" NotFoundPage="typeof(Pages.NotFound)">
@@ -90,6 +90,8 @@ Rendering content after triggering `NavigationManager.NotFound()` method can be 
     <NotFound>This content will be ignored because we have NotFoundPage defined.</NotFound>
 </Router>
 ```
+
+The Blazor project template now includes a `NotFound.razor` page by default. This page will automatically render whenever `NavigationManager.NotFound()` is called in your application, making it easier to handle missing routes with a consistent user experience.
 
 ## Blazor metrics and tracing
 
