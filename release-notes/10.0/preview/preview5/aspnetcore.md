@@ -75,7 +75,7 @@ The OpenAPI.NET library used in ASP.NET Core OpenAPI document generation has bee
 
 ## OpenAPI metadata from XML doc comments
 
-Support for generating OpenAPI metadata from XML doc comments has been extended to extract metadata for operation responses from `<returns>` and `<response>` XML tags.
+Support for generating OpenAPI metadata from XML doc comments has been extended to extract metadata for operation responses from `<returns>` and `<response>` XML tags on handler methods.
 
 ## Add a Not Found page using the Blazor Router
 
