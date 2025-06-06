@@ -67,7 +67,7 @@ builder.WebHost.UseHttpSys(options =>
 
 ## Validation resolver APIs marked as experimental
 
-To support future work on the new validation APIs in .NET 10, the underlying validation resolver APIs used to support minimal API validation have been marked as experimental. However, the top-level `AddValidation` APIs and the built-in validation filter for Minimal APIs are still non-experimental.
+To allow for future adjustments to the new validation APIs, the underlying validation resolver APIs used to support minimal API validation have been marked as experimental. However, the top-level `AddValidation` APIs and the built-in validation filter for Minimal APIs are still non-experimental.
 
 ## Support for generating OpenAPI 3.1
 
