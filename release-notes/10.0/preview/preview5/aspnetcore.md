@@ -137,7 +137,7 @@ The new activity tracing capabilities use the `Microsoft.AspNetCore.Components` 
   - Tags: `aspnetcore.components.circuit.id`, `aspnetcore.components.type`, `aspnetcore.components.method`, `aspnetcore.components.attribute.name`, `error.type`
   - Links: HTTP trace, circuit trace, router trace
 
-To enable Blazor metrics and tracing in your application, configure OpenTelemetry in your `Program.cs`:
+To enable Blazor metrics and tracing in your application, configure OpenTelemetry with the following meters and activity sources:
 
 ```csharp
 builder.Services.ConfigureOpenTelemetryMeterProvider(meterProvider =>
