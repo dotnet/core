@@ -107,7 +107,7 @@ The new metrics feature includes several meters to track different aspects of Bl
 **Microsoft.AspNetCore.Components.Lifecycle meter:**
 
 - **`aspnetcore.components.update_parameters`** - Measures the duration of processing component parameters, including your business logic
-- **`aspnetcore.components.render_batch`** - Tracks the duration of rendering batches, including browser round-trip time
+- **`aspnetcore.components.render_diff`** - Tracks the duration of rendering batches
 
 **Microsoft.AspNetCore.Components.Server.Circuits meter:**
 
@@ -145,6 +145,7 @@ To enable Blazor metrics and tracing in your application, configure OpenTelemetr
 builder.Services.ConfigureOpenTelemetryMeterProvider(meterProvider =>
 {
     meterProvider.AddMeter("Microsoft.AspNetCore.Components");
+    meterProvider.AddMeter("Microsoft.AspNetCore.Components.Lifecycle");
     meterProvider.AddMeter("Microsoft.AspNetCore.Components.Server.Circuits");
 });
 
