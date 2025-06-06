@@ -56,7 +56,6 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### ASP.NET Core
 
 - [What's new in ASP.NET Core 10.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0)
-- [Preview 5](preview/preview5/aspnetcore.md)
 - [Preview 4](preview/preview4/aspnetcore.md)
 - [Preview 3](preview/preview3/aspnetcore.md)
 - [Preview 2](preview/preview2/aspnetcore.md)
