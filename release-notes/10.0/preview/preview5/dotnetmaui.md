@@ -5,6 +5,7 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
 - .NET MAUI
   - [XAML Global Namespaces](#xaml-global-namespaces)
   - [XAML Implicit Namespaces](#xaml-global-namespaces)
+  - [Intercept web requests](#intercept-web-requests)
 - [.NET for Android](#net-for-android)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
@@ -58,6 +59,36 @@ With this change you can also eliminate `xmlns` and `xmlns:x` from XAML files.
 <ContentPage x:Class="MyApp.MainPage">
     <TagView x:DataType="Tag" />
 </ContentPage>
+```
+
+## Intercept Web Requests
+
+The `HybridWebView` now allows you to intercept when the browser requests a web resource in order to take action before it executes, such as adding a header to the request. The do this, add a listener to the `WebResourceRequested` event.
+
+```xml
+<HybridWebView WebResourceRequested="HybridWebView_WebResourceRequested" />
+```
+
+```csharp
+private void HybridWebView_WebResourceRequested(object sender, HybridWebViewWebResourceRequestedEventArgs e)
+{
+  // NOTES:
+  // * This method MUST be synchronous, as it is called from the WebView's thread.
+  // * This method MUST return a response (even if it is not yet complete), otherwise the 
+  //   WebView may freeze or return a error response.
+  // * The response must be set using the SetResponse method of the event args.
+
+  // Only handle requests for the specific image URL
+  if (!e.Uri.ToString().Contains("sample-image.png"))
+    return;
+
+  // Prevent the default behavior of the web view
+  e.Handled = true;
+
+  // Return the stream or task of stream that contains the content
+  // NOTE: the method is NOT awaited, the WebView will continue to load the content
+  e.SetResponse(200, "OK", "image/png", GetStreamAsync());
+  }
 ```
 
 ## .NET for Android
