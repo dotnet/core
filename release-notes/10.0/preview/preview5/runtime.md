@@ -2,7 +2,9 @@
 
 Here's a summary of what's new in the .NET Runtime in this preview release:
 
-- [Feature](#feature)
+- [Escape Analysis for Delegate](#escape-analysis-for-delegates)
+- [Inlining Improvements](#inlining-improvements)
+- [ARM64 Write Barrier Improvements](#arm64-write-barrier-improvements)
 
 .NET Runtime updates in .NET 10:
 

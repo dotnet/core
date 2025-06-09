@@ -11,7 +11,8 @@ Here's a summary of what's new in F# in this preview release:
 ## F# Language
 
 ### Scoped #nowarn/#warnon
-We are thrilled to announce the integration of [FS-1146 Scoped Nowarn](https://github.com/fsharp/fslang-design/blob/main/RFCs/FS-1146-scoped-nowarn.md) into the preview version of F#. 
+
+We are thrilled to announce the integration of [FS-1146 Scoped Nowarn](https://github.com/fsharp/fslang-design/blob/main/RFCs/FS-1146-scoped-nowarn.md) into the preview version of F#.
 
 F# 10 introduces scoped warning controls with the new `#warnon` directive, enabling fine-grained control over compiler diagnostics. Previously, `#nowarn` silenced warnings globally from its point to the end of the file—often hiding valuable issues elsewhere. Inspired by community feedback, this scoped approach strikes a balance: you can suppress a specific warning just for a targeted section, then restore normal checking immediately after. Let's have a look:
 
@@ -40,16 +41,16 @@ A heartfelt thank-you to Martin ([Martin521](https://github.com/Martin521)), who
 
 The following language features are currently under `preview`:
 
-* Better generic unmanaged structs handling. ([Language suggestion #692](https://github.com/fsharp/fslang-suggestions/issues/692), [PR #12154](https://github.com/dotnet/fsharp/pull/12154))
-* Deprecate places where `seq` can be omitted. ([Language suggestion #1033](https://github.com/fsharp/fslang-suggestions/issues/1033), [PR #17772](https://github.com/dotnet/fsharp/pull/17772))
-* Added type conversions cache, only enabled for compiler runs ([PR#17668](https://github.com/dotnet/fsharp/pull/17668))
-* Support ValueOption + Struct attribute as optional parameter for methods ([Language suggestion #1136](https://github.com/fsharp/fslang-suggestions/issues/1136), [PR #18098](https://github.com/dotnet/fsharp/pull/18098))
-* Allow `_` in `use!` bindings values (lift FS1228 restriction) ([PR #18487](https://github.com/dotnet/fsharp/pull/18487))
-* Warn when `unit` is passed to an `obj`-typed argument  ([PR #18330](https://github.com/dotnet/fsharp/pull/18330))
-* Fix parsing errors using anonymous records and units of measures ([PR #18543](https://github.com/dotnet/fsharp/pull/18543))
-* Scoped Nowarn: added the #warnon compiler directive ([Language suggestion #278](https://github.com/fsharp/fslang-suggestions/issues/278), [RFC FS-1146 PR](https://github.com/fsharp/fslang-design/pull/782), [PR #18049](https://github.com/dotnet/fsharp/pull/18049))
-* Allow `let!` and `use!` type annotations without requiring parentheses. ([PR #18508](https://github.com/dotnet/fsharp/pull/18508))
-* Warn on uppercase identifiers in patterns. ([PR #15816](https://github.com/dotnet/fsharp/pull/15816))
+- Better generic unmanaged structs handling. ([Language suggestion #692](https://github.com/fsharp/fslang-suggestions/issues/692), [PR #12154](https://github.com/dotnet/fsharp/pull/12154))
+- Deprecate places where `seq` can be omitted. ([Language suggestion #1033](https://github.com/fsharp/fslang-suggestions/issues/1033), [PR #17772](https://github.com/dotnet/fsharp/pull/17772))
+- Added type conversions cache, only enabled for compiler runs ([PR#17668](https://github.com/dotnet/fsharp/pull/17668))
+- Support ValueOption + Struct attribute as optional parameter for methods ([Language suggestion #1136](https://github.com/fsharp/fslang-suggestions/issues/1136), [PR #18098](https://github.com/dotnet/fsharp/pull/18098))
+- Allow `_` in `use!` bindings values (lift FS1228 restriction) ([PR #18487](https://github.com/dotnet/fsharp/pull/18487))
+- Warn when `unit` is passed to an `obj`-typed argument  ([PR #18330](https://github.com/dotnet/fsharp/pull/18330))
+- Fix parsing errors using anonymous records and units of measures ([PR #18543](https://github.com/dotnet/fsharp/pull/18543))
+- Scoped Nowarn: added the #warnon compiler directive ([Language suggestion #278](https://github.com/fsharp/fslang-suggestions/issues/278), [RFC FS-1146 PR](https://github.com/fsharp/fslang-design/pull/782), [PR #18049](https://github.com/dotnet/fsharp/pull/18049))
+- Allow `let!` and `use!` type annotations without requiring parentheses. ([PR #18508](https://github.com/dotnet/fsharp/pull/18508))
+- Warn on uppercase identifiers in patterns. ([PR #15816](https://github.com/dotnet/fsharp/pull/15816))
 
 A monumental round of applause goes to [Edgar](https://github.com/edgarfgp), whose expertise and dedication brought most of these preview features to life!
 
