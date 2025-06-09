@@ -1,6 +1,6 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2025/04/23; Support phase: Active
+Last Updated: 2025/06/02; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -42,15 +42,15 @@ Notes:
 
 | OS                            | Versions                    | Architectures         | Lifecycle            |
 | ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Alpine][6]                   | 3.21, 3.20, 3.19            | Arm32, Arm64, x64     | [Lifecycle][7]       |
+| [Alpine][6]                   | 3.22, 3.21, 3.20, 3.19      | Arm32, Arm64, x64     | [Lifecycle][7]       |
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
 | [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
-| [Fedora][13]                  | 42, 41, 40                  | Arm32, Arm64, x64     | [Lifecycle][14]      |
+| [Fedora][13]                  | 42, 41                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
 | [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
 | [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
 | [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
-| [Ubuntu][21]                  | 25.04, 24.10, 24.04, 22.04  | Arm32, Arm64, x64     | [Lifecycle][22]      |
+| [Ubuntu][21]                  | 25.04, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]      |
 
 Notes:
 
@@ -120,6 +120,7 @@ The following operating system versions are no longer supported.
 | Alpine                | 3.16          | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
 | Android               | 11            | 2024-02-05           |
 | Debian                | 11            | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html) |
+| Fedora                | 40            | 2025-05-13           |
 | Fedora                | 39            | 2024-11-26           |
 | Fedora                | 38            | 2024-05-21           |
 | Fedora                | 37            | 2023-12-05           |
@@ -138,6 +139,7 @@ The following operating system versions are no longer supported.
 | tvOS                  | 14            | 2021-09-20           |
 | tvOS                  | 13            | 2020-09-16           |
 | tvOS                  | 12.2          | -                    |
+| Ubuntu                | 24.10         | 2025-07-10           |
 | Ubuntu                | 20.04         | 2025-05-31           |
 | Ubuntu                | 23.10         | 2024-07-12           |
 | Ubuntu                | 23.04         | 2024-01-20           |
