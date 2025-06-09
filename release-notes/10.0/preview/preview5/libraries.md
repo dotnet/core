@@ -3,7 +3,6 @@
 Here's a summary of what's new in .NET Libraries in this preview release:
 
 - [Post-Quantum Cryptography (PQC)](#post-quantum-cryptography-pqc)
-- [Feature](#feature)
 
 .NET Libraries updates in .NET 10:
 
@@ -51,10 +50,6 @@ Windows CNG support will be coming soon.
 
 These new algorithms are all marked as `[Experimental]` under diagnostic SYSLIB5006 until full development is complete.
 
-* System.Security.Cryptography.MLKem
-* System.Security.Cryptography.MLDsa
-* System.Security.Cryptography.SlhDsa
-
-## Feature
-
-Something about the feature.
+- System.Security.Cryptography.MLKem
+- System.Security.Cryptography.MLDsa
+- System.Security.Cryptography.SlhDsa

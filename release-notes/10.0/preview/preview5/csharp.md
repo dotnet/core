@@ -29,7 +29,7 @@ If the type of `a` was a class, a typical implementation of `operator +` creates
 
 As more programs use Tensor types or other large data structures, this cost becomes more significant
 
-Library authors can now create user defined implementations for any of the compound assignment operators:  `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=` and ``>>>=`.  In addition, the `+=`, `-=`, `*=` and `/=` operators can include both `checked` and unchecked variants.
+Library authors can now create user defined implementations for any of the compound assignment operators:  `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=` and `>>>=`.  In addition, the `+=`, `-=`, `*=` and `/=` operators can include both `checked` and unchecked variants.
 
 If you're maintaining a library with existing operators, you can decide if this new feature provides real benefit. Your existing code works the same as before. Consumers of your library can still use any of the compound assignment operators. Unless you define the new compound assignment operators, the compiler continues to generate the same code.
 
