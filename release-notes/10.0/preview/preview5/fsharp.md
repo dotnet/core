@@ -16,7 +16,6 @@ We are thrilled to announce the integration of [FS-1146 Scoped Nowarn](https://g
 F# 10 introduces scoped warning controls with the new `#warnon` directive, enabling fine-grained control over compiler diagnostics. Previously, `#nowarn` silenced warnings globally from its point to the end of the file—often hiding valuable issues elsewhere. Inspired by community feedback, this scoped approach strikes a balance: you can suppress a specific warning just for a targeted section, then restore normal checking immediately after. Let's have a look:
 
 ```fsharp
-
 type CustomerStatus = Active | Deleted | [<System.Obsolete>] Inactive
 let activeStatus = Status.Active
 let inactiveStatus = Status.Inactive 
@@ -31,16 +30,15 @@ let processStatus s =
 
 let userStatus = Status.Inactive
 // --------------^^^^^^^^^^^^^^^  warning FS0044: This construct is deprecated
-
 ```
-
 
 A heartfelt thank-you to Martin ([Martin521](https://github.com/Martin521)), who championed this feature from design to delivery. He crafted the RFC, implemented core logic, navigated intricate edge cases—especially around #line support—and resolved countless challenges along the way. His dedication has transformed scoped warning control from RFC to reality.
 
-
 ### More changes
+
 [Release notes for new F# language features](https://fsharp.github.io/fsharp-compiler-docs/release-notes/Language.html) list language changes that have to be enabled by `<LangVersion>preview</LangVersion>` project property in `.fsproj` project file. They will become the default with .NET 10 release.
-The following language features are currently under `preview`.
+
+The following language features are currently under `preview`:
 
 * Better generic unmanaged structs handling. ([Language suggestion #692](https://github.com/fsharp/fslang-suggestions/issues/692), [PR #12154](https://github.com/dotnet/fsharp/pull/12154))
 * Deprecate places where `seq` can be omitted. ([Language suggestion #1033](https://github.com/fsharp/fslang-suggestions/issues/1033), [PR #17772](https://github.com/dotnet/fsharp/pull/17772))
@@ -54,7 +52,6 @@ The following language features are currently under `preview`.
 * Warn on uppercase identifiers in patterns. ([PR #15816](https://github.com/dotnet/fsharp/pull/15816))
 
 A monumental round of applause goes to [Edgar](https://github.com/edgarfgp), whose expertise and dedication brought most of these preview features to life!
-
 
 ## FSharp.Core Standard Library
 
