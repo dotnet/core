@@ -10,7 +10,6 @@
 
 - [C#](./csharp.md)
 - [F#](./fsharp.md)
-- [Visual Basic](./visualbasic.md)
 
 ## Workloads, Libraries, & More
 
