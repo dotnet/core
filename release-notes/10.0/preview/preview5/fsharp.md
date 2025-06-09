@@ -59,7 +59,7 @@ A monumental round of applause goes to [Edgar](https://github.com/edgarfgp), who
 ## FSharp.Core Standard Library
 
 [Changes to the FSharp.Core standard library](https://fsharp.github.io/fsharp-compiler-docs/release-notes/FSharp.Core.html#10.0.100-Added) are applied automatically to projects compiled with new SDK, unless they pin down a lower FSharp.Core version.
-Upcoming improvements include a better performance for the `string` functions when dealing with enums and signed integer types and improvements to the random functions introduced with F# 9.
+Upcoming improvements include a better performance for the `string` functions when dealing with enums and signed integer type, `and!` support for `task{}` expressions and improvements to the random functions introduced with F# 9.
 
 Thank you [Brian](https://github.com/brianrourkeboll) and [Lanayx](https://github.com/dotnet/fsharp/commits?author=Lanayx) for continously making F# better!
 
