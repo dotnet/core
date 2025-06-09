@@ -2,8 +2,6 @@
 
 Here's a summary of what's new in Windows Forms in this preview release:
 
-Here's a summary of what's new in Windows Forms in this preview release:
-
 - [Bug Fixes](#bug-fixes)
 - [Engineering Health](#engineering-health)
 
