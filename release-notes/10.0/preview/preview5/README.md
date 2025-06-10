@@ -23,7 +23,7 @@
 
 ## Get Started
 
-Instructions on getting started with .NET 10 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 10 Preview 5 can be found [here on GitHub](./10.0.0-preview.3.md).
+Instructions on getting started with .NET 10 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 10 Preview 5 can be found [here on GitHub](./10.0.0-preview.5.md).
 
 ## Stay up-to-date
 
