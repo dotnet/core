@@ -29,6 +29,9 @@ By convention the new project template creates a file `GlobalXmlns.cs`.
 [assembly: XmlnsDefinition(
     "http://schemas.microsoft.com/dotnet/maui/global",
     "MyApp.Converters")]
+[assembly: XmlnsDefinition(
+    "http://schemas.microsoft.com/dotnet/maui/global",
+    "http://schemas.syncfusion.com/maui/toolkit")]
 ```
 
 You can then use anything in those namespaces like you do .NET MAUI controls, without prefix.
@@ -42,9 +45,11 @@ You can then use anything in those namespaces like you do .NET MAUI controls, wi
 </ContentPage>
 ```
 
+The `x` namespace cannot be globbed into the global namespace since it's used for parsing.
+
 ## XAML Implicit Namespaces
 
-You can opt-in to this feature by adding the following to your project file.
+You can opt-in to this feature by adding the following to your project file. As of now, turning this on may cause errors to be reported by various XAML tools.
 
 ```xml
 <PropertyGroup>
@@ -60,6 +65,12 @@ With this change you can also eliminate `xmlns` and `xmlns:x` from XAML files.
     <TagView x:DataType="Tag" />
 </ContentPage>
 ```
+
+In this usage:
+- the default xmlns is the global one
+- the `x:` prefix is added by default
+- all `xmlns` with a `XmlnsPrefix` are also accessible with their prefix, even if they are included in the global `xmlns`. These are useful for disambiguating a name. For example, the `maui:` prefix points to the maui `xmlns`.
+- you still need to use the `x:` prefix (e.g. `x:Class`, `x:DataType`), but you don't have to declare it
 
 ## Intercept Web Requests
 
