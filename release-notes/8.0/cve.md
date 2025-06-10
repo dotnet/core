@@ -8,8 +8,14 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 8.0.17 (June 2025)
+  - [CVE-2025-30399 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+- 8.0.16 (May 2025)
+  - [CVE-2025-26646 | .NET and Visual Studio Spoofing Vulnerability](https://github.com/dotnet/announcements/issues/356)
+- 8.0.15 (April 2025)
+  - [CVE-2025-26682 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/352)
 - 8.0.14 (March 2025)
-- [CVE-2025-24070 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/348)
+  - [CVE-2025-24070 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/348)
 - 8.0.12 (January 2025)
   - [CVE-2025-21172 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/339)
   - [CVE-2025-21176 | .NET Elevation of Priviledge Vulnerability](https://github.com/dotnet/announcements/issues/338)

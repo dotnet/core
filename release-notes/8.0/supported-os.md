@@ -1,6 +1,6 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2025/02/22; Support phase: Active
+Last Updated: 2025/06/02; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -42,15 +42,15 @@ Notes:
 
 | OS                            | Versions                    | Architectures         | Lifecycle            |
 | ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Alpine][6]                   | 3.21, 3.20, 3.19, 3.18      | Arm32, Arm64, x64     | [Lifecycle][7]       |
+| [Alpine][6]                   | 3.22, 3.21, 3.20, 3.19      | Arm32, Arm64, x64     | [Lifecycle][7]       |
 | [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
 | [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
-| [Fedora][13]                  | 41, 40                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
+| [Fedora][13]                  | 42, 41                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
 | [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
 | [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
 | [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
-| [Ubuntu][21]                  | 24.10, 24.04, 22.04, 20.04  | Arm32, Arm64, x64     | [Lifecycle][22]      |
+| [Ubuntu][21]                  | 25.04, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]      |
 
 Notes:
 
@@ -115,17 +115,19 @@ The following operating system versions are no longer supported.
 
 | OS                    | Version       | Date                 |
 | --------------------- | ------------- | -------------------- |
+| Alpine                | 3.18          | [2025-05-09](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
 | Alpine                | 3.17          | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
 | Alpine                | 3.16          | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
 | Android               | 11            | 2024-02-05           |
 | Debian                | 11            | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html) |
+| Fedora                | 40            | 2025-05-13           |
 | Fedora                | 39            | 2024-11-26           |
 | Fedora                | 38            | 2024-05-21           |
 | Fedora                | 37            | 2023-12-05           |
-| iOS                   | 15            | [2024-09-16](https://support.apple.com/HT212788) |
-| iOS                   | 16            | [2024-08-07](https://support.apple.com/HT213407) |
-| iPadOS                | 16            | [2024-09-16](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
-| iPadOS                | 15            | [2024-09-16](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-15-release-notes) |
+| iOS                   | 16            | [2025-03-31](https://support.apple.com/HT213407) |
+| iOS                   | 15            | [2025-03-31](https://support.apple.com/HT212788) |
+| iPadOS                | 16            | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
+| iPadOS                | 15            | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-15-release-notes) |
 | macOS                 | 12            | [2024-09-16](https://support.apple.com/HT212585) |
 | openSUSE Leap         | 15.5          | 2024-12-31           |
 | openSUSE Leap         | 15.4          | 2023-12-07           |
@@ -137,7 +139,9 @@ The following operating system versions are no longer supported.
 | tvOS                  | 14            | 2021-09-20           |
 | tvOS                  | 13            | 2020-09-16           |
 | tvOS                  | 12.2          | -                    |
-| Ubuntu                | 23.10         | 2024-07-11           |
+| Ubuntu                | 24.10         | 2025-07-10           |
+| Ubuntu                | 20.04         | 2025-05-31           |
+| Ubuntu                | 23.10         | 2024-07-12           |
 | Ubuntu                | 23.04         | 2024-01-20           |
 | Windows               | 11 22H2 (W)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows               | 11 21H2 (E)   | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
