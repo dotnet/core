@@ -10,7 +10,7 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 
 ## Post-Quantum Cryptography (PQC)
 
-.NET 10 Preview 5 includes support for three new asymmetric algorithms: ML-KEM (FIPS 202), ML-DSA (FIPS 203), and SLH-DSA (FIPS 204).
+.NET 10 Preview 5 includes support for three new asymmetric algorithms: ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205).
 These new algorithms made us call into question some of the assumptions underlying the `AsymmetricAlgorithm` type,
 and we found that there's not much benefit (but some non-trivial drawbacks) to have these algorithm classes continue to derive from it.
 
