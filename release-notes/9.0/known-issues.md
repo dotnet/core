@@ -4,7 +4,7 @@ You may encounter the following known issues, which may include workarounds, mit
 
 ## ASP.NET
 
-### [8.0.16] Breaking Change: UseForwardedHeaders middleware now always checks ForwardedHeadersOptions.KnownNetworks and ForwardedHeadersOptions.KnownProxies
+### [9.0.6] Breaking Change: UseForwardedHeaders middleware now always checks ForwardedHeadersOptions.KnownNetworks and ForwardedHeadersOptions.KnownProxies
 
 `UseForwardedHeaders` middleware now always checks `ForwardedHeadersOptions.KnownNetworks` and `ForwardedHeadersOptions.KnownProxies`. Because both `KnownNetworks` and `KnownProxies` default to Loopback this means deployed applications may fail to apply `X-Forwarded-*` headers resulting in properties like scheme and host not being updated which can have side-effects e.g. `UseHttpsRedirection()` might always see http and always redirecting the request.
  
