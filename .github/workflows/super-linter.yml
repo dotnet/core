@@ -1,6 +1,5 @@
----
-# This workflow executes several linters on changed files based on languages
-# used in your code base whenever you push a code or open a pull request.
+# This workflow executes several linters on changed files based on languages used in your code base whenever
+# you push a code or open a pull request.
 #
 # You can adjust the behavior by modifying this file.
 # For more information, see:
@@ -21,16 +20,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        # actions/checkout @ v4.2.2
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          # Full git history is needed to get a proper list of changed files
-          # within `super-linter`
+          # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
 
       - name: Lint Code Base
-        # github/super-linter @ v7
-        uses: github/super-linter@b807e99ddd37e444d189cfd2c2ca1274d8ae8ef1
+        uses: github/super-linter@b807e99ddd37e444d189cfd2c2ca1274d8ae8ef1 # v7
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JSCPD: false

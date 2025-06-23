@@ -1,11 +1,10 @@
----
 # Workflow template imported from:
 # https://github.com/dotnet/.github/workflow-templates
 #
 # Regularly restore the prediction model from cache to prevent cache eviction
 name: "Labeler: Cache Retention"
 
-# For more information about GitHub's action cache limits and eviction policy:
+# For more information about GitHub's action cache limits and eviction policy, see:
 # https://docs.github.com/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy
 
 on:
@@ -15,29 +14,22 @@ on:
   workflow_dispatch:
     inputs:
       cache_key:
-        description: |
-          The cache key suffix to use for restoring the model from cache.
-          Defaults to 'ACTIVE'.
+        description: "The cache key suffix to use for restoring the model from cache. Defaults to 'ACTIVE'."
         required: true
         default: "ACTIVE"
 
 env:
   CACHE_KEY: ${{ inputs.cache_key || 'ACTIVE' }}
 
-permissions: { }
+permissions: {}
 
 jobs:
   restore-cache:
     # Do not automatically run the workflow on forks outside the 'dotnet' org
-    if:
-      ${{
-        github.event_name == 'workflow_dispatch' ||
-        github.repository_owner == 'dotnet'
-      }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.repository_owner == 'dotnet' }}
     runs-on: ubuntu-latest
     steps:
-        # dotnet/issue-labeler @ v2.0.0
-      - uses: dotnet/issue-labeler/restore@46125e85e6a568dc712f358c39f35317366f5eed
+      - uses: dotnet/issue-labeler/restore@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
         with:
           type: "issues"
           cache_key: ${{ env.CACHE_KEY }}

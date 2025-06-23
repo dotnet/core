@@ -1,4 +1,3 @@
----
 # Workflow template imported from:
 # https://github.com/dotnet/.github/workflow-templates
 #
@@ -10,23 +9,19 @@ on:
   issues:
     types: opened
 
-  # Allow dispatching the workflow via the Actions UI,
-  # specifying ranges of numbers
+  # Allow dispatching the workflow via the Actions UI, specifying ranges of numbers
   workflow_dispatch:
     inputs:
       issues:
         description: "Issue Numbers (comma-separated list of ranges)."
         required: true
       cache_key:
-        description: |
-          The cache key suffix to use for restoring the model.
-          Defaults to 'ACTIVE'.
+        description: "The cache key suffix to use for restoring the model. Defaults to 'ACTIVE'."
         required: true
         default: "ACTIVE"
 
 env:
-  # Do not allow failure for jobs triggered automatically
-  # (as this causes red noise on the workflows list)
+  # Do not allow failure for jobs triggered automatically (as this causes red noise on the workflows list)
   ALLOW_FAILURE: ${{ github.event_name == 'workflow_dispatch' }}
 
   LABEL_PREFIX: "area-"
@@ -39,17 +34,12 @@ permissions:
 jobs:
   predict-issue-label:
     # Do not automatically run the workflow on forks outside the 'dotnet' org
-    if:
-      ${{
-        github.event_name == 'workflow_dispatch' ||
-        github.repository_owner == 'dotnet'
-      }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.repository_owner == 'dotnet' }}
     runs-on: ubuntu-latest
     steps:
       - name: "Restore issues model from cache"
         id: restore-model
-        # dotnet/issue-labeler @ v2.0.0
-        uses: dotnet/issue-labeler/restore@46125e85e6a568dc712f358c39f35317366f5eed
+        uses: dotnet/issue-labeler/restore@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
         with:
           type: issues
           fail-on-cache-miss: ${{ env.ALLOW_FAILURE }}
@@ -58,8 +48,7 @@ jobs:
       - name: "Predict issue labels"
         id: prediction
         if: ${{ steps.restore-model.outputs.cache-hit == 'true' }}
-        # dotnet/issue-labeler @ v2.0.0
-        uses: dotnet/issue-labeler/predict@46125e85e6a568dc712f358c39f35317366f5eed
+        uses: dotnet/issue-labeler/predict@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
         with:
           issues: ${{ inputs.issues || github.event.issue.number }}
           label_prefix: ${{ env.LABEL_PREFIX }}
