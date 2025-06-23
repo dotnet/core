@@ -18,4 +18,4 @@ Here's a summary of what's new in F# in this preview release:
 
 ## FSharp.Compiler.Service
 
-General improvements and bugfixes in the compiler implementation are at [Release notes for FSharp.Compiler.Service](https://fsharp.github.io/fsharp-compiler-docs/release-notes/FSharp.Compiler.Service.html).
+General improvements and bugfixes in the compiler implementation are at [Release notes for FSharp.Compiler.Service](https://fsharp.github.io/fsharp-compiler-docs/release-notes/FSharp.Compiler.Service.html)
