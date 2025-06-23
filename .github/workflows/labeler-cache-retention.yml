@@ -21,6 +21,8 @@ on:
 env:
   CACHE_KEY: ${{ inputs.cache_key || 'ACTIVE' }}
 
+permissions: {}
+
 jobs:
   restore-cache:
     # Do not automatically run the workflow on forks outside the 'dotnet' org

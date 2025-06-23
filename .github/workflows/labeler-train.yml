@@ -41,11 +41,12 @@ env:
   PAGE_SIZE: ${{ inputs.page_size }}
   PAGE_LIMIT: ${{ inputs.page_limit }}
 
+permissions:
+  issues: read
+
 jobs:
   download-issues:
     runs-on: ubuntu-latest
-    permissions:
-      issues: read
     steps:
       - name: "Download Issues"
         uses: dotnet/issue-labeler/download@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
@@ -74,8 +75,6 @@ jobs:
 
   test-issues:
     runs-on: ubuntu-latest
-    permissions:
-      issues: read
     needs: train-issues
     steps:
       - name: "Test Model for Issues"

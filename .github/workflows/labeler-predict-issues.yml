@@ -28,13 +28,14 @@ env:
   THRESHOLD: 0.40
   DEFAULT_LABEL: "needs-area-label"
 
+permissions:
+  issues: write
+
 jobs:
   predict-issue-label:
     # Do not automatically run the workflow on forks outside the 'dotnet' org
     if: ${{ github.event_name == 'workflow_dispatch' || github.repository_owner == 'dotnet' }}
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
       - name: "Restore issues model from cache"
         id: restore-model
