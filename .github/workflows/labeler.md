@@ -24,19 +24,19 @@ labeler for this repository:
     - `labeler-predict-issues.yml`
     - `labeler-train.yml`
 2. Set the `DEFAULT_LABEL` value to `"needs-area-label"` to apply a default
-label when no prediction is made.
+   label when no prediction is made.
     - `labeler-predict-issues.yml`
 3. Remove the `EXCLUDED_AUTHORS` value as we do not bypass labeling for any
-authors' issues/pulls in this repository:
+   authors' issues/pulls in this repository:
     - `labeler-predict-issues.yml`
     - `labeler-train.yml`
 4. Remove the `repository` input for training the models against another
-repository:
+   repository:
     - `labeler-train.yml`
 5. Update the cache retention cron schedule to an arbitrary time of day:
     - `labeler-cache-retention.yml`
 6. Remove configuration, inputs, and jobs related to pull requests, as we will
-only predict labels for issues in this repository:
+   only predict labels for issues in this repository:
     - `labeler-train.yml`
     - `labeler-promote.yml`
     - `labeler-cache-retention.yml`

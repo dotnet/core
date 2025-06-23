@@ -39,7 +39,11 @@ permissions:
 jobs:
   predict-issue-label:
     # Do not automatically run the workflow on forks outside the 'dotnet' org
-    if: ${{ github.event_name == 'workflow_dispatch' || github.repository_owner == 'dotnet' }}
+    if: |
+      ${{
+        github.event_name == 'workflow_dispatch' ||
+        github.repository_owner == 'dotnet'
+      }}
     runs-on: ubuntu-latest
     steps:
       - name: "Restore issues model from cache"

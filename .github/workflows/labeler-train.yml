@@ -75,7 +75,7 @@ jobs:
 
   train-issues:
     runs-on: ubuntu-latest
-    permissions: {}
+    permissions: { }
     needs: download-issues
     steps:
       - name: "Train Model for Issues"

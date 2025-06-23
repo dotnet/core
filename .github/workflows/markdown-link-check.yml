@@ -1,3 +1,4 @@
+---
 name: Check Markdown links
 
 on:
@@ -8,6 +9,9 @@ on:
     branches: [main]
     paths:
       - '**.md'
+
+permissions:
+  contents: read
 
 jobs:
   markdown-link-check:
