@@ -3,4 +3,4 @@
 This preview release does not contain new Visual Basic features. Please checkout the lastest documentation:
 
 - [What's new in Visual Basic](https://learn.microsoft.com/dotnet/visual-basic/whats-new/) documentation
-- [Breaking changes](https://learn.microsoft.com/dotnet/visual-basic/whats-new/breaking-changes)
+- [Breaking changes](https://learn.microsoft.com/dotnet/visual-basic/whats-new/breaking-changes).
