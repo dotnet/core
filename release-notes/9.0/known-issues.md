@@ -125,6 +125,12 @@ If you had previously specified the `WindowsSdkPackageVersion` property to fix t
 
 ## ASP.NET Core
 
+### [9.0.6] Breaking Change: UseForwardedHeaders middleware now always checks ForwardedHeadersOptions.KnownNetworks and ForwardedHeadersOptions.KnownProxies
+
+`UseForwardedHeaders` middleware now always checks `ForwardedHeadersOptions.KnownNetworks` and `ForwardedHeadersOptions.KnownProxies`. Because both `KnownNetworks` and `KnownProxies` default to Loopback this means deployed applications may fail to apply `X-Forwarded-*` headers resulting in properties like scheme and host not being updated which can have side-effects e.g. `UseHttpsRedirection()` might always see http and always redirecting the request.
+ 
+The recommended fix is to set the `KnownNetworks` and `KnownProxies` values to the appropriate values. See https://learn.microsoft.com/aspnet/core/host-and-deploy/proxy-load-balancer for more details on using proxies and `UseForwardedHeaders()`. Alternatively, if you are fine accepting `X-Forwarded-*` headers from any source, which introduces security vulnerabilities, you can clear the `KnownNetworks` and `KnownProxies` properties.
+
 ### Microsoft.AspNetCore.Components.CustomElements package not published in 9.0.3
 
 The Microsoft.AspNetCore.Components.CustomElements package will not ship in version 9.0.3. A blocking issue was discovered late in the release cycle, so the package will not ship until version 9.0.4, which will contain the fix.
