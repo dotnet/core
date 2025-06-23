@@ -1,3 +1,4 @@
+---
 # Workflow template imported from:
 # https://github.com/dotnet/.github/workflow-templates
 #
@@ -19,16 +20,26 @@ on:
           - "Test Model"
 
       limit:
-        description: "Max number of items to download for training/testing the model (newest items are used). Defaults to the max number of pages times the page size."
+        description: |
+          Max number of items to download for training/testing the model.
+          Newest items are used.
+          Defaults to the max number of pages times the page size.
         type: number
       page_size:
-        description: "Number of items per page in GitHub API requests. Defaults to 100."
+        description: |
+          Number of items per page in GitHub API requests.
+          Defaults to 100.
         type: number
       page_limit:
-        description: "Maximum number of pages to download for training/testing the model. Defaults to 1000."
+        description: |
+          Maximum number of pages to download for training/testing the model.
+          Defaults to 1000.
         type: number
       cache_key_suffix:
-        description: "The cache key suffix to use for staged data/models (use 'ACTIVE' to bypass staging). Defaults to 'staged'."
+        description: |
+          The cache key suffix to use for staged data/models.
+          Use 'ACTIVE' to bypass staging.
+          Defaults to 'staged'.
         required: true
         default: "staged"
 
@@ -49,7 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Download Issues"
-        uses: dotnet/issue-labeler/download@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
+        # dotnet/issue-labeler @ v2.0.0
+        uses: dotnet/issue-labeler/download@46125e85e6a568dc712f358c39f35317366f5eed
         with:
           type: "issues"
           cache_key: ${{ env.CACHE_KEY }}
@@ -67,7 +79,8 @@ jobs:
     needs: download-issues
     steps:
       - name: "Train Model for Issues"
-        uses: dotnet/issue-labeler/train@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
+        # dotnet/issue-labeler @ v2.0.0
+        uses: dotnet/issue-labeler/train@46125e85e6a568dc712f358c39f35317366f5eed
         with:
           type: "issues"
           data_cache_key: ${{ env.CACHE_KEY }}
@@ -78,7 +91,8 @@ jobs:
     needs: train-issues
     steps:
       - name: "Test Model for Issues"
-        uses: dotnet/issue-labeler/test@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
+        # dotnet/issue-labeler @ v2.0.0
+        uses: dotnet/issue-labeler/test@46125e85e6a568dc712f358c39f35317366f5eed
         with:
           type: "issues"
           cache_key: ${{ env.CACHE_KEY }}
