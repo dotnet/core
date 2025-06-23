@@ -13,7 +13,7 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
 
 ## Feature
 
-Something about the feature.
+Something about the feature
 
 ## .NET for Android
 

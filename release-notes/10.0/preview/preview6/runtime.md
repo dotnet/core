@@ -10,4 +10,4 @@ Here's a summary of what's new in the .NET Runtime in this preview release:
 
 ## Feature
 
-Something about the feature.
+Something about the feature
