@@ -39,7 +39,7 @@ permissions:
 jobs:
   predict-issue-label:
     # Do not automatically run the workflow on forks outside the 'dotnet' org
-    if: |
+    if:
       ${{
         github.event_name == 'workflow_dispatch' ||
         github.repository_owner == 'dotnet'
