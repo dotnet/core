@@ -90,6 +90,7 @@ To use this feature, place the `<LinkPreload />` component in the head of your a
 +  <LinkPreload />
   ...
 </head>
+```
 
 Removing the component will disable the preloading feature, which is useful in cases where the application uses the `loadBootResource` callback to modify URLs.
 
