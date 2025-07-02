@@ -63,7 +63,7 @@ public class MyBackgroundService : BackgroundService
 }
 ```
 
-Or replace the memory pool being used:
+Use a custom `IMemoryPoolFactory` to replace the memory pool being used:
 
 ```csharp
 services.AddSingleton<IMemoryPoolFactory<byte>, CustomMemoryPoolFactory>();
