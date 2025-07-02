@@ -29,7 +29,7 @@ Previously, memory allocated by the pool would remain reserved, even when not in
 **How to use:**
 No action is needed to benefit from this feature. Memory eviction is handled automatically by the framework.
 
-There are also metrics added to the default memory pool used by our server implementations. The new metrics are under the name `"Microsoft.AspNetCore.MemoryPool"`. See the [ASP.NET Core metrics documentation](https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics?view=aspnetcore-9.0) for general information on what metrics are and how to use them.
+There are also metrics added to the default memory pool used by our server implementations. The new metrics are under the name `Microsoft.AspNetCore.MemoryPool`. See the [ASP.NET Core metrics documentation](https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics) for general information on what metrics are and how to use them.
 
 You can also use the memory pool in custom scenarios:
 
