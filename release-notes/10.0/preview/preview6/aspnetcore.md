@@ -40,7 +40,7 @@ public class MyBackgroundService : BackgroundService
 
     public MyBackgroundService(IMemoryPoolFactory<byte> factory)
     {
-        _memoryPool = factory.CreatePool();
+        _memoryPool = factory.Create();
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
