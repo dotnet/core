@@ -85,9 +85,11 @@ Blazor WebAssembly applications now use a `<LinkPreload />` component instead of
 To use this feature, place the `<LinkPreload />` component in the head of your application:
 
 ```diff
-<base href="/" />
-+<LinkPreload />
-```
+<head>
+  <base href="/" />
++  <LinkPreload />
+  ...
+</head>
 
 Removing the component will disable the preloading feature, which is useful in cases where the application uses the `loadBootResource` callback to modify URLs.
 
