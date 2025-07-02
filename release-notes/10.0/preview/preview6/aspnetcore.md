@@ -31,7 +31,7 @@ No action is needed to benefit from this feature. Memory eviction is handled aut
 
 There are also metrics added to the default memory pool used by our server implementations. The new metrics are under the name `Microsoft.AspNetCore.MemoryPool`. See the [ASP.NET Core metrics documentation](https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics) for general information on what metrics are and how to use them.
 
-You can also use the memory pool in custom scenarios by using the new `IMemoryPoolFactory` service interface:
+You can also use the new `IMemoryPoolFactory` service interface to create or access memory pools for custom scenarios:
 
 ```csharp
 public class MyBackgroundService : BackgroundService
