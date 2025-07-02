@@ -82,14 +82,14 @@ public class CustomMemoryPoolFactory : IMemoryPoolFactory<byte>
 
 Blazor WebAssembly applications now use a `<LinkPreload />` component instead of link headers for preloading WebAssembly assets. This allows the framework to correctly identify the Blazor application base URL and provides better control over the preloading behavior.
 
-To use this feature, place the `<LinkPreload />` component near the base tag in your application:
+To use this feature, place the `<LinkPreload />` component in the head of your application:
 
 ```diff
 <base href="/" />
 +<LinkPreload />
 ```
 
-Removing the component will disable the preloading feature, which is useful in cases where the application uses `loadBootResource` callback to modify URLs.
+Removing the component will disable the preloading feature, which is useful in cases where the application uses the `loadBootResource` callback to modify URLs.
 
 ## Blazor build producing javascript bundler friendly output
 
