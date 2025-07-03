@@ -116,7 +116,7 @@ To create a validated form, use a `DataAnnotationsValidator` component inside an
 2. Declare the form model types in a .cs file (i.e., not a .razor file).
 3. Annotate the root form model type with the `[ValidatableType]` attribute.
 
-Without these steps, the validation behavior remains the same as in previous versions.
+Without these steps, the validation behavior remains the same as in previous versions where only the top-level type is validated.
 
 Here's an example:
 
