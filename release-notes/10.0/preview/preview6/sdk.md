@@ -7,6 +7,12 @@ This release brings several major improvements to the .NET SDK experience, espec
   - [One-shot tool execution](#one-shot-tool-execution)
   - [The new `dnx` tool execution script](#the-new-dnx-tool-execution-script)
   - [New `--cli-schema` option for CLI introspection](#new---cli-schema-option-for-cli-introspection)
+- [File-based apps](#file-based-apps)
+  - [Publish support and native AOT](#publish-support-and-native-aot)
+  - [File directive syntax changes](#file-directive-syntax-changes)
+  - [Referencing projects](#referencing-projects)
+  - [App file and directory path available at runtime](#app-file-and-directory-path-available-at-runtime)
+  - [Enhanced shebang support](#enhanced-shebang-support)
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
 
 ## CLI
@@ -108,3 +114,101 @@ The output gives a structured, machine-readable description of the command’s a
 ---
 
 For more details, see the [full list of changes in this release](https://github.com/dotnet/core/pull/9949) and the [baronfel/multi-rid-tool sample repository](https://github.com/baronfel/multi-rid-tool) for hands-on examples of multi-RID tool packaging and usage.
+
+## File-based apps
+
+Preview 6 brings a bunch of updates to the new file-based apps experience in .NET 10, much of it based on the great feedback we've received since announcing the feature in preview 4:
+
+### Publish support and native AOT
+
+File-based apps now support being published to native executables via the `dotnet publish app.cs` command, making it easier than ever to create simple apps that you can redistribute as native executables. Note that this means that all file-based apps now assume they're targeting native AOT by default. If you need to use packages or features that are incompatible with native AOT, you can disable this using the `#:property PublishAot=false` directive in the top of your .cs file. Learn more about [.NET native AOT, including required prequisties, here](https://learn.microsoft.com/dotnet/core/deploying/native-aot/).
+
+### File directive syntax changes
+
+The syntax of the `#:sdk` and `#:property` directives have been updated for consistency and clarity reasons.
+
+The `#:sdk` directive now requires the `@` symbol to separate the SDK ID and version, aligning with the syntax used for the `#:package` directive, e.g. `#:sdk Aspire.AppHost.Sdk@9.3.1`.
+
+The `#:property` directive now requires the `=` symbol to separate the property name and value, to better align it with the syntax found in project files, e.g. `#:property LangVersion=preview`.
+
+### Referencing projects
+
+File-based apps now support referencing projects via the `#:project` directive. The path to the project can be specified with or without the project file. In the case the path is to the project directory, the project file will be automatically located. This was added based on feedback from users wanting to use file-based apps together with existing projects, e.g. for simple samples asspciated with a class library in a repo:
+
+```csharp
+#:project ../ClassLib/ClassLib.csproj
+
+var greeter = new ClassLib.Greeter();
+var greeting = greeter.Greet(args.Length > 0 ? args[0] : "World");
+Console.WriteLine(greeting);
+```
+
+## App file and directory path available at runtime
+
+It's sometimes useful when authoring file-based apps to know at runtime the full path to the application source file and/or directory. This information is now available via the [`System.AppContext.GetData` method](https://learn.microsoft.com/dotnet/api/system.appcontext.getdata) when running file-based apps from source, e.g. `dotnet run app.cs`. The file path is available using the name `"EntryPointFilePath"`, and the directory via the name `"EntryPointFileDirectoryPath"`. Note that this data is not available after the application has been published or converted to a project-based app. Following is an example of using `AppContext` as well as the [`System.Runtime.CompilerServices.CallerFilePath` attribute](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.callerfilepathattribute) to obtain the path to the C# source file:
+
+```csharp
+#:property LangVersion=preview
+
+Console.WriteLine("From [CallerFilePath] attribute:");
+Console.WriteLine($" - Entry-point path: {Path.EntryPointFilePath()}");
+Console.WriteLine($" - Entry-point directory: {Path.EntryPointFileDirectoryPath()}");
+
+Console.WriteLine("From AppContext data:");
+Console.WriteLine($" - Entry-point path: {AppContext.EntryPointFilePath()}");
+Console.WriteLine($" - Entry-point directory: {AppContext.EntryPointFileDirectoryPath()}");
+
+static class PathEntryPointExtensions
+{
+    extension(Path)
+    {
+        public static string EntryPointFilePath() => EntryPointImpl();
+
+        public static string EntryPointFileDirectoryPath() => Path.GetDirectoryName(EntryPointImpl()) ?? "";
+
+        private static string EntryPointImpl([System.Runtime.CompilerServices.CallerFilePath] string filePath = "") => filePath;
+    }
+}
+
+static class AppContextExtensions
+{
+    extension(AppContext)
+    {
+        public static string? EntryPointFilePath() => AppContext.GetData("EntryPointFilePath") as string;
+        public static string? EntryPointFileDirectoryPath() => AppContext.GetData("EntryPointFileDirectoryPath") as string;
+    }
+}
+```
+
+## Enhanced shebang support
+
+File-based apps support for shebang-based direct shell execution has been enhanced, again based on your feedback.
+
+To avoid the need to specify the exact path to the `dotnet` executable in shebang lines and avoid issues in environments that don't support multiple arguments in shebang directives, `dotnet` now supports directly executing *.cs* files without the need to specify the `run` command, e.g. `dotnet app.cs`. This allows for a shebang line to use the `env` command to run whichever `dotnet` is on the path like this:
+
+```csharp
+#!/usr/bin/env dotnet
+
+Console.WriteLine("Hello shebang!");
+```
+
+Additionally, the *.cs* file extension can be omitted, allowing for direct execution of extensionless C# files configured with a shebang!
+
+```bash
+# 1. Create a single-file C# app with a shebang
+cat << 'EOF' > hello.cs
+#!/usr/bin/env dotnet
+Console.WriteLine("Hello!");
+EOF
+
+# 2. Copy it (extensionless) into ~/utils/hello (~/utils is on my PATH)
+mkdir -p ~/utils
+cp hello.cs ~/utils/hello
+
+# 3. Mark it executable
+chmod +x ~/utils/hello
+
+# 4. Run it directly from anywhere
+cd ~
+hello
+```
