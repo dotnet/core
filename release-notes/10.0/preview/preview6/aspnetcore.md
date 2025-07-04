@@ -8,6 +8,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Improved form validation for Blazor](#improved-form-validation-for-blazor)
 - [`NavigationManager.NotFound()` works after streaming has started](#navigationmanagernotfound-works-after-streaming-has-started)
 - [Blazor diagnostics improvements](#blazor-diagnostics-improvements)
+- [Blazor Server state persistence](#blazor-server-state-persistence)
 - [Disabling `NavigationException` usage is now opt-in](#disabling-navigationexception-usage-is-now-opt-in)
 - [Add passkey support to ASP.NET Core Identity](#add-passkey-support-to-aspnet-core-identity)
 - [Minimal API validation integration with `IProblemDetailsService`](#minimal-api-validation-integration-with-iproblemdetailsservice)
@@ -201,6 +202,46 @@ builder.Services.ConfigureOpenTelemetryTracerProvider(tracerProvider =>
 +   tracerProvider.AddSource("Microsoft.AspNetCore.Components.Server.Circuits");
 });
 ```
+
+## Blazor Server state persistence
+
+Blazor Server apps now automatically persist the state of circuits before evicting them from memory. When a client reconnects after a prolonged period, the app can restore the circuit state, allowing users to resume their work uninterrupted.
+
+**Why it matters:**
+Previously, when a circuit was evicted due to memory pressure or other factors, all client state would be lost. Users would have to start over, losing their progress and creating a poor user experience. With automatic state persistence, applications can now maintain continuity even when circuits need to be temporarily removed from memory.
+
+**How it works:**
+Circuit state is persisted either in memory or using `HybridCache` if configured for the app. The framework handles this automatically, requiring no changes to existing code.
+
+You can also implement custom policies for persisting and evicting circuits using the new `Blazor.pause()` and `Blazor.resume()` JavaScript APIs. These APIs allow you to control when circuits are paused and resumed based on your application's specific needs.
+
+```javascript
+// Pause the circuit when the tab becomes hidden
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        Blazor.pause();
+    } else {
+        Blazor.resume();
+    }
+});
+
+// Pause the circuit during server maintenance
+function pauseForMaintenance() {
+    Blazor.pause();
+    // Perform maintenance tasks
+}
+
+// Resume the circuit after maintenance
+function resumeAfterMaintenance() {
+    Blazor.resume();
+}
+```
+
+Custom policies might be useful when:
+- The circuit is idle and hasn't been used for a while
+- The server is restarting or undergoing maintenance
+- The client browser tab isn't currently visible to the user
+- You want to optimize memory usage during low-activity periods
 
 ## Disabling `NavigationException` usage is now opt-in
 
