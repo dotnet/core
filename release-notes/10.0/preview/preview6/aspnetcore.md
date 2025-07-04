@@ -188,9 +188,11 @@ Calling `NavigationManager.NotFound()` now works even when streaming a response 
 
 ## Blazor diagnostics improvements
 
-All Blazor traces are now top level in the Aspire dashboard and in Application Insights, instead of being nested under HTTP or SignalR parent traces. Additionally, the `CircuitStart` trace has been moved to a separate `Microsoft.AspNetCore.Components.Server.Circuits` source.
+All Blazor Server traces are now top-level activities, instead of being nested under HTTP or SignalR parent activities. This simplifies looking at Blazor Server traces in diagnostic tools like the .NET Aspire developer dashboard or in Application Insights.
 
-To configure OpenTelemetry for the new trace sources:
+Additionally, the `CircuitStart` trace has been moved to a separate `Microsoft.AspNetCore.Components.Server.Circuits` source.
+
+To configure the new trace source:
 
 ```diff
 builder.Services.ConfigureOpenTelemetryTracerProvider(tracerProvider =>
