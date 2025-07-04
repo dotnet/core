@@ -202,16 +202,16 @@ builder.Services.ConfigureOpenTelemetryTracerProvider(tracerProvider =>
 });
 ```
 
-## NavigationException switch behavior change
+## Disabling `NavigationException` usage is now opt-in
 
-The default behavior for `NavigationException` has changed. The configuration switch has been renamed and its default value updated:
+To improve backwards compatibility, disabling usage of `NavigationException` for Blazor page navigations is now opt-in. The configuration switch has been renamed and its default value updated:
 
 ```diff
 - "Microsoft.AspNetCore.Components.Endpoints.NavigationManager.EnableThrowNavigationException", default value: false
 + "Microsoft.AspNetCore.Components.Endpoints.NavigationManager.DisableThrowNavigationException", default value: true
 ```
 
-This change improves the default navigation behavior in Blazor applications.
+The Blazor Web App template has been updated to disable the use of `NavigationException` so that navigation behavior across render modes is more consistent for new Blazor apps.
 
 ## Add passkey support to ASP.NET Core Identity
 
