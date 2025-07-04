@@ -48,11 +48,17 @@ public class MyBackgroundService : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            // Use memory from the pool
-            var rented = _memoryPool.Rent(100);
-            // ... do work ...
-            rented.Dispose();
-            await Task.Delay(20, stoppingToken);
+            try
+            {
+                await Task.Delay(20, stoppingToken);
+                // do work that needs memory
+                var rented = _memoryPool.Rent(100);
+                rented.Dispose();
+            }
+            catch (OperationCanceledException)
+            {
+                return;
+            }
         }
     }
 }
