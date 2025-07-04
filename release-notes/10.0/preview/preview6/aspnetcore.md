@@ -211,7 +211,7 @@ Blazor Server apps now persist the declared state of circuits before evicting th
 Previously, when a circuit was evicted due to memory pressure or other factors, all client state would be lost. Users would have to start over, losing their progress and creating a poor user experience. With state persistence, applications can now maintain continuity even when circuits need to be temporarily removed from memory.
 
 **How it works:**
-Circuit state is persisted either in memory or using `HybridCache` if configured for the app. Only declared state is persisted, and the framework handles the persistence without requiring changes to existing code.
+Circuit state is persisted either in memory or using `HybridCache` if configured for the app. Only declared state is persisted.
 
 You can also implement custom policies for persisting and evicting circuits using the new `Blazor.pause()` and `Blazor.resume()` JavaScript APIs. These APIs allow you to control when circuits are paused and resumed based on your application's specific needs. For example, you might choose to pause circuit when the circuit is idle, when the server is about to restart, or when the browser tab isn't currently visible to the user. When the circuit is paused, it is persisted to the client to free up server resources.
 
