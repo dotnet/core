@@ -11,7 +11,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Disabling `NavigationException` usage is now opt-in](#disabling-navigationexception-usage-is-now-opt-in)
 - [Add passkey support to ASP.NET Core Identity](#add-passkey-support-to-aspnet-core-identity)
 - [Minimal API validation integration with `IProblemDetailsService`](#minimal-api-validation-integration-with-iproblemdetailsservice)
-- [Unified validation APIs moved to extensions package](#unified-validation-apis-moved-to-extensions-package)
+- [Validation APIs moved to extensions package](#validation-apis-moved-to-extensions-package)
 
 ASP.NET Core updates in .NET 10:
 
@@ -227,7 +227,7 @@ Error responses from the validation logic for minimal APIs can now be customized
 
 Community contribution from [@marcominerva](https://github.com/marcominerva). Thank you!
 
-## Unified validation APIs moved to extensions package
+## Validation APIs moved to extensions package
 
 The validation APIs have been moved to the `Microsoft.Extensions.Validation` namespace and NuGet package, making them usable outside of ASP.NET Core scenarios. The public APIs and their behavior remain the same, just under a new package and namespace. Existing projects should not require code changes; old references will redirect to the new implementation. The APIs have also been marked as experimental as they are subject to future changes.
 
