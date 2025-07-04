@@ -10,7 +10,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Blazor diagnostics improvements](#blazor-diagnostics-improvements)
 - [Disabling `NavigationException` usage is now opt-in](#disabling-navigationexception-usage-is-now-opt-in)
 - [Add passkey support to ASP.NET Core Identity](#add-passkey-support-to-aspnet-core-identity)
-- [Minimal API validation integration with IProblemDetailsService](#minimal-api-validation-integration-with-iproblemdetailsservice)
+- [Minimal API validation integration with `IProblemDetailsService`](#minimal-api-validation-integration-with-iproblemdetailsservice)
 - [Unified validation APIs moved to extensions package](#unified-validation-apis-moved-to-extensions-package)
 
 ASP.NET Core updates in .NET 10:
