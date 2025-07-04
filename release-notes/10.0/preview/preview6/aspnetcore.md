@@ -98,7 +98,7 @@ Make Blazor WebAssembly compatible with JavaScript bundlers like webpack or roll
 </PropertyGroup>
 ```
 
-This adjusts the boot configuration to explicitly import framework assets. The output won't run directly in browsers but can be consumed by JavaScript bundlers.
+This adjusts the boot configuration to explicitly import framework assets. The build output won't run directly in browsers but the publish output can be consumed by JavaScript bundlers.
 
 ## Improved form validation for Blazor
 
