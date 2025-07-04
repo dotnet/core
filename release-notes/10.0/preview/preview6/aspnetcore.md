@@ -182,7 +182,7 @@ public class CustomerModel
 
 The requirement to declare model types outside of `.razor` files is due to the fact that both the validation feature and the Razor compiler use source generators. Currently, output of one source generator cannot be used as input for another source generator.
 
-## NotFound works with streaming that has started
+## `NavigationManager.NotFound()` works after streaming has started
 
 Calling `NavigationManager.NotFound()` now works even when streaming a response has already started. This improvement allows for better error handling in scenarios where content has already begun streaming to the client, but a not found condition is later encountered.
 
