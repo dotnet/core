@@ -215,7 +215,7 @@ The Blazor Web App template has been updated to disable the use of `NavigationEx
 
 ## Add passkey support to ASP.NET Core Identity
 
-Passkeys are a modern, phishing-resistant authentication method that improves security and user experience by leveraging public key cryptography and device-based authentication. ASP.NET Core Identity now supports passkey authentication based on WebAuthn and FIDO2 standards. This feature allows users to sign in without passwords, using secure, device-based authentication methods like biometrics or security keys.
+Passkeys are a modern, phishing-resistant authentication method that improves security and user experience by leveraging public key cryptography and device-based authentication. ASP.NET Core Identity now supports passkey authentication based on the WebAuthn and FIDO2 standards. This feature allows users to sign in without passwords, using secure, device-based authentication methods like biometrics or security keys.
 
 The Blazor Web App template provides out-of-the-box passkey management and login functionality.
 
