@@ -184,7 +184,7 @@ The requirement to declare model types outside of `.razor` files is due to the f
 
 ## NotFound works with streaming that has started
 
-Blazor now supports calling `NotFound()` even when streaming has already started. This improvement allows for better error handling in scenarios where content has already begun streaming to the client but a not-found condition is later encountered.
+Calling `NavigationManager.NotFound()` now works even when streaming a response has already started. This improvement allows for better error handling in scenarios where content has already begun streaming to the client, but a not found condition is later encountered.
 
 ## Blazor diagnostics improvements
 
