@@ -6,7 +6,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Blazor WebAssembly preloading](#blazor-webassembly-preloading)
 - [Blazor build producing javascript bundler friendly output](#blazor-build-producing-javascript-bundler-friendly-output)
 - [Improved form validation for Blazor](#improved-form-validation-for-blazor)
-- [NotFound works with streaming that has started](#notfound-works-with-streaming-that-has-started)
+- [`NavigationManager.NotFound()` works after streaming has started](#notfound-works-with-streaming-that-has-started)
 - [Blazor diagnostics improvements](#blazor-diagnostics-improvements)
 - [NavigationException switch behavior change](#navigationexception-switch-behavior-change)
 - [Add passkey support to ASP.NET Core Identity](#add-passkey-support-to-aspnet-core-identity)
