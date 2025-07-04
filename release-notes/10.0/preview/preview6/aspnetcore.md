@@ -96,7 +96,7 @@ Removing the component will disable the preloading feature, which is useful in c
 
 ## Blazor build producing javascript bundler friendly output
 
-Set the new `WasmBundlerFriendlyBootConfig` MSBuild property to `true` to make the Blazor WebAssembly build output compatible with tools like webpack or rollup. Setting this property will adjust the .NET boot configuration to explicitly import framework assets. This output is not directly runnable in the browser, but it can be consumed by JavaScript bundlers to combine it with other scripts.
+Set the new `WasmBundlerFriendlyBootConfig` MSBuild property to `true` to make the Blazor WebAssembly build output compatible with tools like webpack or rollup.
 
 ```xml
 <PropertyGroup>
@@ -104,7 +104,7 @@ Set the new `WasmBundlerFriendlyBootConfig` MSBuild property to `true` to make t
 </PropertyGroup>
 ```
 
-This setup works for publish scenarios because during Blazor build, files are served from multiple locations to minimize file writes.
+Setting this property will adjust the .NET boot configuration to explicitly import framework assets. The output won't be directly runnable in the browser, but the project's published out can be consumed by JavaScript bundlers to combine it with other scripts.
 
 ## Improved form validation for Blazor
 
