@@ -136,7 +136,10 @@ builder.Services.AddValidation();
 
 // This attribute is needed on the top-level model type. 
 // The other types are discovered automatically.
+#pragma warning disable ASP0029 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 [ValidatableType]
+#pragma warning restore ASP0029 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+
 public class OrderModel
 {
     public CustomerModel CustomerDetails { get; set; } = new CustomerModel();
