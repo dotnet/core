@@ -22,17 +22,17 @@ ASP.NET Core updates in .NET 10:
 
 ## Automatic eviction from memory pool
 
-The memory pools used by Kestrel, IIS, and HTTP.sys now automatically evict memory blocks when the application is idle or under less load, helping applications use resources more efficiently.
+Memory pools used by Kestrel, IIS, and HTTP.sys now release unused memory when applications are idle, improving resource efficiency.
 
 **Why it matters:**
-Previously, memory allocated by the pool would remain reserved, even when not in use. With this enhancement, when the app is idle for a period of time, memory is now released back to the system, reducing overall memory usage and helping applications stay responsive under varying workloads.
+Previously, pooled memory stayed reserved even when unused. Now memory is automatically returned to the system during idle periods, reducing overall memory usage.
 
 **How to use:**
-No action is needed to benefit from this feature. Memory eviction is handled automatically by the framework.
+No action needed. This works automatically.
 
-There are also metrics added to the default memory pool used by our server implementations. The new metrics are under the name `Microsoft.AspNetCore.MemoryPool`. See the [ASP.NET Core metrics documentation](https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics) for general information on what metrics are and how to use them.
+There are also metrics available for the memory pool under the name `Microsoft.AspNetCore.MemoryPool`. See the [ASP.NET Core metrics documentation](https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics) for more information.
 
-You can also use the new `IMemoryPoolFactory` service interface to create or access memory pools for custom scenarios:
+You can create custom memory pools using the new `IMemoryPoolFactory` service interface:
 
 ```csharp
 public class MyBackgroundService : BackgroundService
@@ -48,23 +48,17 @@ public class MyBackgroundService : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            try
-            {
-                await Task.Delay(20, stoppingToken);
-                // do work that needs memory
-                var rented = _memoryPool.Rent(100);
-                rented.Dispose();
-            }
-            catch (OperationCanceledException)
-            {
-                return;
-            }
+            // Use memory from the pool
+            var rented = _memoryPool.Rent(100);
+            // ... do work ...
+            rented.Dispose();
+            await Task.Delay(20, stoppingToken);
         }
     }
 }
 ```
 
-Use a custom `IMemoryPoolFactory` to replace the memory pool being used:
+To replace the default memory pool with a custom implementation:
 
 ```csharp
 services.AddSingleton<IMemoryPoolFactory<byte>, CustomMemoryPoolFactory>();
@@ -73,17 +67,16 @@ public class CustomMemoryPoolFactory : IMemoryPoolFactory<byte>
 {
     public MemoryPool<byte> Create()
     {
-        // Return a custom MemoryPool implementation or the default.
-        return MemoryPool<byte>.Shared;
+        return MemoryPool<byte>.Shared; // or custom implementation
     }
 }
 ```
 
 ## Blazor WebAssembly preloading
 
-Blazor now provides a `<LinkPreload />` component to generate `link` tags instead of using link headers to preload framework assets. This allows the framework to correctly identify the Blazor application base URL and provides better control over the preloading behavior.
+Blazor now provides a `<LinkPreload />` component that generates `link` tags for preloading framework assets instead of using link headers. This gives better control over preloading behavior and correctly identifies the application's base URL.
 
-To use this feature, place the `<LinkPreload />` component in the head of your application:
+To enable preloading, add the `<LinkPreload />` component to your application's head:
 
 ```diff
 <head>
@@ -93,11 +86,11 @@ To use this feature, place the `<LinkPreload />` component in the head of your a
 </head>
 ```
 
-Removing the component will disable the preloading feature, which is useful in cases where the application uses the `loadBootResource` callback to modify URLs.
+Remove the component to disable preloading, which is useful when using the `loadBootResource` callback to modify URLs.
 
 ## Blazor build producing javascript bundler friendly output
 
-Set the new `WasmBundlerFriendlyBootConfig` MSBuild property to `true` to make the Blazor WebAssembly build output compatible with tools like webpack or rollup.
+Make Blazor WebAssembly compatible with JavaScript bundlers like webpack or rollup by setting the `WasmBundlerFriendlyBootConfig` property to `true`.
 
 ```xml
 <PropertyGroup>
@@ -105,38 +98,34 @@ Set the new `WasmBundlerFriendlyBootConfig` MSBuild property to `true` to make t
 </PropertyGroup>
 ```
 
-Setting this property will adjust the .NET boot configuration to explicitly import framework assets. The output won't be directly runnable in the browser, but the project's published out can be consumed by JavaScript bundlers to combine it with other scripts.
+This adjusts the boot configuration to explicitly import framework assets. The output won't run directly in browsers but can be consumed by JavaScript bundlers.
 
 ## Improved form validation for Blazor
 
-Blazor now has improved form validation capabilities including support for validating properties of nested objects and collection items.
+Blazor now supports validating nested objects and collection items in forms.
 
-To create a validated form, use a `DataAnnotationsValidator` component inside an `EditForm` component, just as before. To opt into the new validation feature, do the following:
+To use this feature:
 
-1. Call the `AddValidation` extension method in your application setup.
-2. Declare the form model types in a .cs file (i.e., not a .razor file).
-3. Annotate the root form model type with the `[ValidatableType]` attribute.
+1. Call `AddValidation()` in your application setup
+2. Create model types in .cs files (not .razor files)
+3. Add the `[ValidatableType]` attribute to your root model type
 
-Without these steps, the validation behavior remains the same as in previous versions where only the top-level type is validated.
+Without these steps, validation works the same as before (top-level only).
 
-Note that the `[ValidatableType]` attribute is currently experimental and is subject to change, so using this attribute will result in a build error. You'll need to suppress this diagnostic to try out the feature.
+**Note:** The `[ValidatableType]` attribute is experimental and causes a build error. Suppress the diagnostic to use this feature.
 
-Here's an example:
+Example:
 
 ```csharp
 // Program.cs
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents();
-
-// This line enables the new validation behavior.
-builder.Services.AddValidation();
+builder.Services.AddValidation(); // Enable new validation behavior
 ```
 
 ```csharp
 // Data/OrderModel.cs
 
-// This attribute is needed on the top-level model type. 
-// The other types are discovered automatically.
 #pragma warning disable ASP0029 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 [ValidatableType]
 #pragma warning restore ASP0029 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
@@ -172,8 +161,7 @@ public class CustomerModel
         <InputText id="customerFullName" @bind-Value="order.CustomerDetails.FullName" />
         <ValidationMessage For="@(() => order.CustomerDetails.FullName)" />
     </div>
-
-    @* ... *@
+    <!-- Additional form fields -->
 </EditForm>
 
 @code {
@@ -181,17 +169,17 @@ public class CustomerModel
 }
 ```
 
-The requirement to declare model types outside of `.razor` files is due to the fact that both the validation feature and the Razor compiler use source generators. Currently, output of one source generator cannot be used as input for another source generator.
+Model types must be in .cs files because validation uses source generators, and one source generator's output can't be input for another.
 
 ## `NavigationManager.NotFound()` works after streaming has started
 
-Calling `NavigationManager.NotFound()` now works even when streaming a response has already started. This improvement allows for better error handling in scenarios where content has already begun streaming to the client, but a not found condition is later encountered.
+`NavigationManager.NotFound()` now works even after response streaming begins, enabling better error handling when content has already started streaming but a not found condition occurs later.
 
 ## Blazor diagnostics improvements
 
-All Blazor Server traces are now top-level activities, instead of being nested under HTTP or SignalR parent activities. This simplifies looking at Blazor Server traces in diagnostic tools like the .NET Aspire developer dashboard or in Application Insights.
+Blazor Server traces are now top-level activities instead of being nested under HTTP or SignalR activities. This simplifies viewing traces in diagnostic tools like the .NET Aspire dashboard or Application Insights.
 
-Additionally, the `CircuitStart` trace has been moved to a separate `Microsoft.AspNetCore.Components.Server.Circuits` source.
+The `CircuitStart` trace moved to a separate `Microsoft.AspNetCore.Components.Server.Circuits` source.
 
 To configure the new trace source:
 
@@ -205,20 +193,20 @@ builder.Services.ConfigureOpenTelemetryTracerProvider(tracerProvider =>
 
 ## Blazor Server state persistence
 
-Blazor Server apps now persist the declared state of circuits before evicting them from memory. When a client reconnects after a prolonged period, the app can restore the circuit state, allowing users to resume their work uninterrupted.
+Blazor Server apps now persist declared circuit state before evicting circuits from memory. When clients reconnect after extended periods, apps can restore circuit state, letting users resume their work uninterrupted.
 
 **Why it matters:**
-Previously, when a circuit was evicted due to memory pressure or other factors, all client state would be lost. Users would have to start over, losing their progress and creating a poor user experience. With state persistence, applications can now maintain continuity even when circuits need to be temporarily removed from memory.
+Previously, circuit eviction meant losing all client state. Users had to restart, losing progress and creating poor experiences. State persistence maintains continuity even when circuits are temporarily removed from memory.
 
 **How it works:**
-Circuit state is persisted either in memory or using `HybridCache` if configured for the app. Only declared state is persisted.
+Circuit state persists in memory or using `HybridCache` if configured. Only declared state is persisted.
 
-You can also implement custom policies for persisting and evicting circuits using the new `Blazor.pause()` and `Blazor.resume()` JavaScript APIs. These APIs allow you to control when circuits are paused and resumed based on your application's specific needs. For example, you might choose to pause circuit when the circuit is idle, when the server is about to restart, or when the browser tab isn't currently visible to the user. When the circuit is paused, it is persisted to the client to free up server resources.
+You can implement custom policies using the new `Blazor.pause()` and `Blazor.resume()` JavaScript APIs. These control when circuits pause and resume based on your needs. For example, pause when idle, during server restarts, or when browser tabs aren't visible. Paused circuits persist to the client, freeing server resources.
 
-The following example shows how you might pause the app when it isn't currently visible and then resume it when it becomes visible again to save on server resources:
+Example - pause the app when hidden and resume when visible to save server resources:
 
 ```javascript
-// Pause the circuit when the tab becomes hidden
+// Pause when tab becomes hidden, resume when visible
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
         Blazor.pause();
@@ -230,32 +218,32 @@ document.addEventListener('visibilitychange', () => {
 
 ## Disabling `NavigationException` usage is now opt-in
 
-To improve backwards compatibility, disabling usage of `NavigationException` for Blazor page navigations is now opt-in. The configuration switch has been renamed and its default value updated:
+To improve backwards compatibility, disabling `NavigationException` for Blazor page navigations is now opt-in. The configuration switch was renamed with an updated default value:
 
 ```diff
 - "Microsoft.AspNetCore.Components.Endpoints.NavigationManager.EnableThrowNavigationException", default value: false
 + "Microsoft.AspNetCore.Components.Endpoints.NavigationManager.DisableThrowNavigationException", default value: true
 ```
 
-The Blazor Web App template has been updated to disable the use of `NavigationException` so that navigation behavior across render modes is more consistent for new Blazor apps.
+The Blazor Web App template disables `NavigationException` usage for more consistent navigation behavior across render modes.
 
 ## Add passkey support to ASP.NET Core Identity
 
-Passkeys are a modern, phishing-resistant authentication method that improves security and user experience by leveraging public key cryptography and device-based authentication. ASP.NET Core Identity now supports passkey authentication based on the WebAuthn and FIDO2 standards. This feature allows users to sign in without passwords, using secure, device-based authentication methods like biometrics or security keys.
+ASP.NET Core Identity now supports passkey authentication based on WebAuthn and FIDO2 standards. Passkeys provide a modern, phishing-resistant authentication method using public key cryptography and device-based authentication, allowing users to sign in without passwords using biometrics or security keys.
 
-The Blazor Web App template provides out-of-the-box passkey management and login functionality.
+The Blazor Web App template includes built-in passkey management and login functionality.
 
-Developers can use new APIs to enable and manage passkey authentication in existing apps.
+Developers can use new APIs to add passkey authentication to existing applications.
 
 ## Minimal API validation integration with `IProblemDetailsService`
 
-Error responses from the validation logic for minimal APIs can now be customized by an `IProblemDetailsService` implementation provided in the application services collection (DI container). This enables more consistent and user-specific error responses in an ASP.NET Core application.
+Minimal API validation error responses can now be customized using an `IProblemDetailsService` implementation in the services collection (DI container). This enables more consistent and user-specific error responses.
 
 Community contribution from [@marcominerva](https://github.com/marcominerva). Thank you!
 
 ## Validation APIs moved to extensions package
 
-The validation APIs have been moved to the `Microsoft.Extensions.Validation` namespace and NuGet package, making them usable outside of ASP.NET Core scenarios. The public APIs and their behavior remain the same, just under a new package and namespace. Existing projects should not require code changes; old references will redirect to the new implementation. The APIs have also been marked as experimental as they are subject to future changes.
+The validation APIs moved to the `Microsoft.Extensions.Validation` namespace and NuGet package, making them usable outside ASP.NET Core scenarios. The public APIs and behavior remain the same, just under a new package and namespace. Existing projects should work without code changes as old references redirect to the new implementation. The APIs are marked as experimental and subject to future changes.
 
 ## Contributors
 
