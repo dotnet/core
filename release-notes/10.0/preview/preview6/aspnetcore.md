@@ -229,7 +229,7 @@ Community contribution from [@marcominerva](https://github.com/marcominerva). Th
 
 ## Unified validation APIs moved to extensions package
 
-The validation APIs have been moved to the `Microsoft.Extensions.Validation` namespace/NuGet package, making them usable outside of ASP.NET Core HTTP scenarios. The public APIs and their behavior remain the same, just under a new package and namespace. Existing projects should not require code changes; old references will redirect to the new implementation.
+The validation APIs have been moved to the `Microsoft.Extensions.Validation` namespace and NuGet package, making them usable outside of ASP.NET Core scenarios. The public APIs and their behavior remain the same, just under a new package and namespace. Existing projects should not require code changes; old references will redirect to the new implementation. The APIs have also been marked as experimental as they are subject to future changes.
 
 ## Contributors
 
