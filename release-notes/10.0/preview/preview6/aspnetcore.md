@@ -8,7 +8,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Improved form validation for Blazor](#improved-form-validation-for-blazor)
 - [`NavigationManager.NotFound()` works after streaming has started](#navigationmanagernotfound-works-after-streaming-has-started)
 - [Blazor diagnostics improvements](#blazor-diagnostics-improvements)
-- [NavigationException switch behavior change](#navigationexception-switch-behavior-change)
+- [Disabling `NavigationException` usage is now opt-in](#disabling-navigationexception-usage-is-now-opt-in)
 - [Add passkey support to ASP.NET Core Identity](#add-passkey-support-to-aspnet-core-identity)
 - [Minimal API Validation integration with IProblemDetailsService](#minimal-api-validation-integration-with-iproblemdetailsservice)
 - [Unified validation APIs moved to extensions package](#unified-validation-apis-moved-to-extensions-package)
