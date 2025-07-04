@@ -221,7 +221,7 @@ The Blazor Web App template provides out-of-the-box passkey management and login
 
 Developers can use new APIs to enable and manage passkey authentication in existing apps.
 
-## Minimal API validation integration with IProblemDetailsService
+## Minimal API validation integration with `IProblemDetailsService`
 
 Error responses from the validation logic for minimal APIs can now be customized by an `IProblemDetailsService` implementation provided in the application services collection (DI container). This enables more consistent and user-specific error responses in an ASP.NET Core application.
 
