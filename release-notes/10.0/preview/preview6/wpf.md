@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in WPF in this preview release:
 
-- [Feature](#feature)
+- [Fluent Theme Improvements](#fluent-theme-improvements)
 
 WPF updates in .NET 10:
 
