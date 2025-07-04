@@ -118,6 +118,8 @@ To create a validated form, use a `DataAnnotationsValidator` component inside an
 
 Without these steps, the validation behavior remains the same as in previous versions where only the top-level type is validated.
 
+Note that the `[ValidatableType]` attribute is currently experimental and is subject to change, so using this attribute will result in a build error. You'll need to suppress this diagnostic to try out the feature.
+
 Here's an example:
 
 ```csharp
