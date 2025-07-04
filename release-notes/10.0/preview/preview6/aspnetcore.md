@@ -213,7 +213,9 @@ Previously, when a circuit was evicted due to memory pressure or other factors, 
 **How it works:**
 Circuit state is persisted either in memory or using `HybridCache` if configured for the app. The framework handles this automatically, requiring no changes to existing code.
 
-You can also implement custom policies for persisting and evicting circuits using the new `Blazor.pause()` and `Blazor.resume()` JavaScript APIs. These APIs allow you to control when circuits are paused and resumed based on your application's specific needs.
+You can also implement custom policies for persisting and evicting circuits using the new `Blazor.pause()` and `Blazor.resume()` JavaScript APIs. These APIs allow you to control when circuits are paused and resumed based on your application's specific needs. For example, you might choose to pause circuit when the circuit is idle, when the server is about to restart, or when the browser tab isn't currently visible to the user. When the circuit is paused, it is persisted to the client to free up server resources.
+
+The following example shows how you might pause the app when it isn't currently visible and then resume it when it becomes visible again to save on server resources:
 
 ```javascript
 // Pause the circuit when the tab becomes hidden
@@ -224,24 +226,7 @@ document.addEventListener('visibilitychange', () => {
         Blazor.resume();
     }
 });
-
-// Pause the circuit during server maintenance
-function pauseForMaintenance() {
-    Blazor.pause();
-    // Perform maintenance tasks
-}
-
-// Resume the circuit after maintenance
-function resumeAfterMaintenance() {
-    Blazor.resume();
-}
 ```
-
-Custom policies might be useful when:
-- The circuit is idle and hasn't been used for a while
-- The server is restarting or undergoing maintenance
-- The client browser tab isn't currently visible to the user
-- You want to optimize memory usage during low-activity periods
 
 ## Disabling `NavigationException` usage is now opt-in
 
