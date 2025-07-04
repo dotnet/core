@@ -235,8 +235,11 @@ The validation APIs have been moved to the `Microsoft.Extensions.Validation` nam
 
 Thank you contributors! ❤️
 
-- [@am11](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Aam11)
-- [@maraf](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Amaraf)
-- [@marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Amarcominerva)
-- [@mikekistler](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Amikekistler)
-- [@oroztocil](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Aoroztocil)
+- [martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Amartincostello)
+- [jzabroski](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Ajzabroski)
+- [BrendanRidenour](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3ABrendanRidenour)
+- [v-wuzhai](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Av-wuzhai)
+- [marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Amarcominerva)
+- [timdeschryver](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Atimdeschryver)
+- [tmds](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Atmds)
+- [saitama951](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview6+author%3Asaitama951)
