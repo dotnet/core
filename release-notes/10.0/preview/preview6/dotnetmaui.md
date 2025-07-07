@@ -57,7 +57,7 @@ This release includes support for **Android API levels 35 and 36**, along with e
 - Updated to Android API 36 revision 2.\
   [PR #10168](https://github.com/dotnet/android/pull/10168)
 - JNI interop improvements:
-  - JNI handles are now wrapped in a control block for improved memory safety.\
+  - JNI handles are now wrapped in a control block for GC support in new runtimes.\
     [PR #10179](https://github.com/dotnet/android/pull/10179)
   - Caching of JNI-to-managed type mappings to enhance performance.\
     [PR #10170](https://github.com/dotnet/android/pull/10170)
