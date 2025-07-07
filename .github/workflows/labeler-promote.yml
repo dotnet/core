@@ -1,0 +1,36 @@
+# Workflow template imported from:
+# https://github.com/dotnet/.github/workflow-templates
+#
+# Promote a model from staging to 'ACTIVE', backing up the currently 'ACTIVE' model
+name: "Labeler: Promotion"
+
+on:
+  # Dispatched via the Actions UI, promotes the model from a staged slot into the active prediction environment
+  workflow_dispatch:
+    inputs:
+      issues:
+        description: "Issues: Promote Model"
+        type: boolean
+        required: true
+      staged_key:
+        description: "The cache key suffix to use for promoting a staged model to 'ACTIVE'. Defaults to 'staged'."
+        required: true
+        default: "staged"
+      backup_key:
+        description: "The cache key suffix to use for backing up the currently active model. Defaults to 'backup'."
+        default: "backup"
+
+permissions:
+  actions: write
+
+jobs:
+  promote-issues:
+    if: ${{ inputs.issues }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Promote Model for Issues"
+        uses: dotnet/issue-labeler/promote@46125e85e6a568dc712f358c39f35317366f5eed # v2.0.0
+        with:
+          type: "issues"
+          staged_key: ${{ inputs.staged_key }}
+          backup_key: ${{ inputs.backup_key }}

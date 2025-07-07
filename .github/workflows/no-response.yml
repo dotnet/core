@@ -12,11 +12,12 @@ on:
     # Schedule for five minutes after the hour, every hour
     - cron: '5 * * * *'
 
+permissions:
+  issues: write
+
 jobs:
   noResponse:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
       - uses: actions/stale@v9
         with:
