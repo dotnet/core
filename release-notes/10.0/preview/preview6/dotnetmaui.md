@@ -80,7 +80,7 @@ A detailed list can be found on the [dotnet/android GitHub releases](https://git
 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
-This release introduces and requires Xcode 16.4. A detailed list can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
+This release includes updates to Apple platform SDKs aligned with Xcode 16.4 and introduces improvements to binding generation, build reliability, and runtime behavior. A detailed list can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
 
 ## Contributors
 
