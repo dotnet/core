@@ -14,11 +14,18 @@ Here's a summary of what's new in Windows Forms in this preview release:
 
 ### Dark Mode & Styling
 
-This release brings several improvements to dark mode support in Windows Forms. ListView column headers, StatusStrip, ToolStrip, and buttons with FlatStyle 'Standard' now render correctly in dark mode, including fixes for color issues and regressions introduced in previous versions.
+This release brings several improvements to dark mode support in Windows Forms. 
+* `ListView` ColumnHeaders` are rendering correctly in dark mode now.
+* All `ToolStrip` based controls (`MenuStrip`, `StatusStrip`) have their dedicated System Darkmode renderes, and do not rely any longer on additional Professional renderers, which make them compatible to certain A11Y requirements.
+* All `ButtonBase` derived push-style controls have their dedicated dark mode renderers. Please note that in contrast to the existing docs, which was somewhat unprecise about the auto owner-rendering of using `ButtonRenderers` vs. wrapped Win32 Button controls, `Standard` `FlatStyle` renderers ARE owner drawn (and always were). Only setting the renderers to System actually wraps a `ButtonBase` control around the native Win32 Button and delegates painting/handling down completely. All remaining `FlatStyle` settings are either relying on VisualStyle-based- or entirely owner rendering. Thus, we've introduced a series of dedicated Button dark mode renderers which are also fixing a series of small bugs as well as one prominent bug, where Buttons would be ignoring dark mode background theming in 96 dpi.
+* We fixed the base functionality as far as the Win32 allowed for `TabControl`: Horizontal orientation of tabs are rendering the tabs themselves now correctly in dark mode, and the oversized light-gray/white frame around the respective tab area has been mitigated for most scenarios. Note though that vertical tab orientation and different Tab-Button styles are NOT supported in dark mode, and are not at all high on our priority list.
+* We fixed an issue with the `ListBox` dark mode, when using check boxes for List items which had been previously rendered with a white background.
+* We've fixed a series of cases when both `RadioButton` and `CheckBox` controls had been rendered with a white background of the actual control background.
 
 ### ScreenCaptureMode API
 
-New APIs have been introduced to exclude forms and controls from screen capture and a renaming of the ScreenCaptureMode API for clarity and consistency.
+New security APIs have been introduced to protect forms containing sensitive information from the usual screen capture approaches. Please see the new `FormScreenCaptureMode` property for the `Form` class, and the `ScreenCaptureMode` settings for more information.
+
 
 ## Fixed Issues in .NET 10 Preview 6
 
