@@ -66,13 +66,6 @@ This release includes support for **Android API levels 35 and 36**, along with e
 - Diagnostics and profiling improvements:
   - Introduced `$(EnableDiagnostics)` MSBuild property (aka `$(AndroidEnableProfiler)`) to align with iOS and wasm.\
     [PR #10166](https://github.com/dotnet/android/pull/10166)
-- Smaller binaries and runtime cleanup:
-  - Removed mkbundle and related MSBuild tasks.\
-    [PR #10208](https://github.com/dotnet/android/pull/10208)
-  - Removed CilStrip task and related references.\
-    [PR #10206](https://github.com/dotnet/android/pull/10206)
-  - Removed unused MSBuild tasks.\
-    [PR #10209](https://github.com/dotnet/android/pull/10209)
 - New tests added using `Plugin.Maui.Audio` to validate plugin behavior.\
   [PR #10219](https://github.com/dotnet/android/pull/10219)
 
