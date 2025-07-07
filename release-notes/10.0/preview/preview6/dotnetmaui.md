@@ -52,7 +52,31 @@ This release includes numerous fixes and improvements to controls and layout beh
 
 ## .NET for Android
 
-This release was focused on quality improvements. A detailed list can be found on the [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
+This release includes support for **Android API levels 35 and 36**, along with enhancements to interop performance, binary size reduction, and diagnostics:
+
+- Updated to Android API 36 revision 2.\
+  [PR #10168](https://github.com/dotnet/android/pull/10168)
+- JNI interop improvements:
+  - JNI handles are now wrapped in a control block for improved memory safety.\
+    [PR #10179](https://github.com/dotnet/android/pull/10179)
+  - Caching of JNI-to-managed type mappings to enhance performance.\
+    [PR #10170](https://github.com/dotnet/android/pull/10170)
+  - Improved handling of foreign library p/invokes.\
+    [PR #10165](https://github.com/dotnet/android/pull/10165)
+- Diagnostics and profiling improvements:
+  - MSBuild property `$(EnableProfiler)` renamed to `$(EnableDiagnostics)`.\
+    [PR #10166](https://github.com/dotnet/android/pull/10166)
+- Smaller binaries and runtime cleanup:
+  - Removed mkbundle and related MSBuild tasks.\
+    [PR #10208](https://github.com/dotnet/android/pull/10208)
+  - Removed CilStrip task and related references.\
+    [PR #10206](https://github.com/dotnet/android/pull/10206)
+  - Removed unused MSBuild tasks.\
+    [PR #10209](https://github.com/dotnet/android/pull/10209)
+- New tests added using `Plugin.Maui.Audio` to validate plugin behavior.\
+  [PR #10219](https://github.com/dotnet/android/pull/10219)
+
+A detailed list can be found on the [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
 
 ## .NET for iOS, Mac Catalyst, macOS, tvOS
 
