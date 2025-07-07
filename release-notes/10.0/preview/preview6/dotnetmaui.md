@@ -64,7 +64,7 @@ This release includes support for **Android API levels 35 and 36**, along with e
   - Improved handling of foreign library p/invokes.\
     [PR #10165](https://github.com/dotnet/android/pull/10165)
 - Diagnostics and profiling improvements:
-  - MSBuild property `$(EnableProfiler)` renamed to `$(EnableDiagnostics)`.\
+  - Introduced `$(EnableDiagnostics)` MSBuild property (aka `$(AndroidEnableProfiler)`) to align with iOS and wasm.\
     [PR #10166](https://github.com/dotnet/android/pull/10166)
 - Smaller binaries and runtime cleanup:
   - Removed mkbundle and related MSBuild tasks.\
