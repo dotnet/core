@@ -1,6 +1,6 @@
-# .NET 8 installation instructions for Windows
+# .NET 8.0 installation instructions for Windows
 
-The following instructions demonstrate installing .NET 8 on Windows. These instructions augment the more general [.NET install instructions](install.md), including installing with `.zip` files, that work on multiple operating systems.
+The following instructions demonstrate installing .NET 8.0 on Windows. These instructions augment the more general [.NET install instructions](install.md), including installing with `.zip` files, that work on multiple operating systems.
 
 ## Distributions
 
@@ -12,14 +12,14 @@ The following distributions are available for Windows:
 - ASP.NET Core Runtime: includes the .NET and ASP.NET Core runtimes, enabling running console, and web applications.
 - ASP.NET Core Hosting Bundle: includes the ASP.NET Core runtime and IIS support (for running both in- and out-of-process with IIS).
 
-We recommend you install the .NET SDK to develop and build applications, and to install one of the runtimes packages (like ASP.NET Core) to exclusively run applications.
+We recommend you install the .NET SDK to develop and build applications, and to install one of the runtime packages (like ASP.NET Core) to exclusively run applications.
 
 ## Downloads
 
 Each of the distributions can be downloaded from:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [.NET 8 release notes](README.md)
+- [.NET 8.0 release notes](README.md)
 
 [Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Windows (Nano Server and Server Core) and Linux (Alpine, Debian, and Ubuntu).
 
@@ -27,8 +27,8 @@ Each of the distributions can be downloaded from:
 
 You can now install .NET updates using the Windows Package Manager CLI (winget):
 
-- To install the .NET 8 runtime: `winget install dotnet-runtime-8`
-- To install the .NET 8 SDK: `winget install dotnet-sdk-8`
+- To install the .NET 8.0 runtime: `winget install dotnet-runtime-8.0`
+- To install the .NET 8.0 SDK: `winget install dotnet-sdk-8.0`
 - To update an existing installation: `winget upgrade`
 
 See [Install with Windows Package Manager (winget)](https://learn.microsoft.com/dotnet/core/install/windows?tabs=net70#install-with-windows-package-manager-winget) for more information.
@@ -50,12 +50,13 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```console
-C:\>curl -Lo dotnet.zip  https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.411/dotnet-sdk-8.0.411-win-x64.exe
+C:\>curl -Lo dotnet.zip  https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.412/dotnet-sdk-8.0.412-win-x64.exe
+C:\>tar -C dotnet -xf dotnet.zip
 C:\>del dotnet.zip
 C:\>set DOTNET_ROOT=C:\dotnet
 C:\>set PATH=%PATH%;C:\dotnet
 C:\>dotnet --version
-8.0.411
+8.0.412
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
