@@ -40,7 +40,7 @@ The JSON serializer accepts many options to customize serialization and deserial
 - Preserves case sensitive property binding
 - Enables both `RespectNullableAnnotations` and `RespectRequiredConstructorParameters` settings
 
-These options are read-compatible with `JsonSerializationOptions.Default` - an object serialized with `JsonSerializationOptions.Default` can be deserialized with `JsonSerializationOptions.Script`.
+These options are read-compatible with `JsonSerializationOptions.Default` - an object serialized with `JsonSerializationOptions.Default` can be deserialized with `JsonSerializationOptions.Strict`.
 
 ## Post-Quantum Cryptography (PQC)
 
