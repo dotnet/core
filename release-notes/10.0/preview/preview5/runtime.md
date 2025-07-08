@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in the .NET Runtime in this preview release:
 
-- [Escape Analysis for Delegate](#escape-analysis-for-delegates)
+- [Escape Analysis for Delegates](#escape-analysis-for-delegates)
 - [Inlining Improvements](#inlining-improvements)
 - [ARM64 Write Barrier Improvements](#arm64-write-barrier-improvements)
 
