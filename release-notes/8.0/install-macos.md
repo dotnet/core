@@ -1,6 +1,6 @@
-# .NET 8 installation instructions for macOS
+# .NET 8.0 installation instructions for macOS
 
-The following instructions demonstrate installing .NET 8 on macOS. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
+The following instructions demonstrate installing .NET 8.0 on macOS. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
 
 ## Distributions
 
@@ -10,14 +10,14 @@ The following distributions are available for Linux:
 - .NET Runtime: includes the .NET runtime and libraries, enabling running console applications.
 - ASP.NET Core Runtime: includes the .NET and ASP.NET Core runtimes, enabling running console, and web applications.
 
-We recommend you install the .NET SDK to develop and build applications, and to install one of the runtimes packages (like ASP.NET Core) to exclusively run applications.
+We recommend you install the .NET SDK to develop and build applications, and to install one of the runtime packages (like ASP.NET Core) to exclusively run applications.
 
 ## Downloads
 
 Each of the distributions can be downloaded from:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [.NET 8 release notes](README.md)
+- [.NET 8.0 release notes](README.md)
 
 [Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Linux (Alpine, Debian, and Ubuntu).
 
@@ -34,14 +34,14 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -Lo dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.411/dotnet-sdk-8.0.411-osx-x64.tar.gz
+~# curl -Lo dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.412/dotnet-sdk-8.0.412-osx-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
 ~# export DOTNET_ROOT=~/dotnet
 ~# export PATH=$PATH:~/dotnet
 ~# dotnet --version
-8.0.411
+8.0.412
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.

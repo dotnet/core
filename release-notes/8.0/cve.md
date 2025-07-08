@@ -8,6 +8,8 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 8.0.18 (July 2025)
+  - No new CVEs.
 - 8.0.17 (June 2025)
   - [CVE-2025-30399 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/362)
 - 8.0.16 (May 2025)
