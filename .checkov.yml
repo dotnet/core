@@ -1,0 +1,10 @@
+---
+# Available properties:
+# https://github.com/bridgecrewio/checkov#configuration-using-a-config-file
+
+skip-check:
+  # CKV_GHA_7: "The build output cannot be affected by user parameters other
+  # than the build entry point and the top-level source location. GitHub
+  # Actions workflow_dispatch inputs MUST be empty."
+  # Suppressed as issue-labeler workflows require `workflow_dispatch` inputs.
+  - CKV_GHA_7
