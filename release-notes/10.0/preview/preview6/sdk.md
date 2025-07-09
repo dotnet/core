@@ -29,20 +29,25 @@ The [baronfel/multi-rid-tool](https://github.com/baronfel/multi-rid-tool) reposi
 - **Trimmed, platform-specific** (smaller, trims unused code)
 - **AOT-compiled, platform-specific** (maximum performance and smallest deployment)
 
+
 To build different variations, use:
+
 ```bash
 dotnet pack -p ToolType=<variation>
 ```
+
 Where `<variation>` is `agnostic`, `specific`, `self-contained`, `trimmed`, or `aot`.
+
 
 These new tools are much more like normal Published applications, so any of the ways you can think of publishing an application (self-contained, trimmed, AOT, etc) can apply to them now!
 
 ### One-shot tool execution
 
+
 You can now use the `dotnet tool exec` command to execute a .NET tool without installing it globally or locally. This is especially valuable for CI/CD or ephemeral usage.
 
 - Design doc: [accepted/2025/direct-tool-execution.md](https://github.com/dotnet/designs/blob/main/accepted/2025/direct-tool-execution.md)
--
+
 ```bash
 dotnet tool exec --source ./artifacts/package/ toolsay "Hello, World!"
 Tool package toolsay@1.0.0 will be downloaded from source <source>.
@@ -55,11 +60,14 @@ Proceed? [y/n] (y): y
                                 |/
 ```
 
+
 This downloads and runs the specified tool package all in one go. By default, users will be prompted to confirm the download of the tool if it doesn't already exist locally. The latest version of the chosen tool package is used unless an explicit is chosen - for example `dotnet tool exec toolsay@0.1.0`.
+
 
 One-shot tool execution works seamlessly with local tool manifests as well. If you run a tool from a location containing a `.config/dotnet-tools.json` nearby, the version of the tool in that config will be used instead of the latest version available.
 
 ### The new `dnx` tool execution script
+
 
 Typing `dotnet tool exec` all the time is annoying, so we also added a new `dnx` script to further streamline tool execution. It basically just exists to make using tools as easy as possible - it just forwards all of your arguments along to the `dotnet` CLI for further processing. The actual implementation of the `dnx` command is in the `dotnet` CLI itself, so we can evolve its behavior over time. Today it runs tools, but who knows what the future may hold.
 
@@ -77,6 +85,7 @@ Proceed? [y/n] (y): y
 
 ### New `--cli-schema` option for CLI introspection
 
+
 A new option, `--cli-schema`, is available on all CLI commands. When used, it outputs a JSON representation of the CLI command tree for the invoked command or subcommand. This is useful for tool authors, shell integration, and advanced scripting.
 
 - Issue: [Update `--cli-schema` output for consistency](https://github.com/dotnet/sdk/issues/49500)
@@ -84,10 +93,13 @@ A new option, `--cli-schema`, is available on all CLI commands. When used, it ou
 **Example:**
 
 Running:
+
 ```bash
 dotnet clean --cli-schema
 ```
+
 Outputs:
+
 ```json
 {
   "name": "clean",
@@ -109,6 +121,7 @@ Outputs:
   "subcommands": {}
 }
 ```
+
 The output gives a structured, machine-readable description of the command’s arguments, options, and subcommands.
 
 ---

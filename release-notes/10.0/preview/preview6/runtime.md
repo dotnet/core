@@ -1,8 +1,7 @@
 # .NET Runtime in .NET 10 Preview 6 - Release Notes
 
-Here's a summary of what's new in the .NET Runtime in this preview release:
 
-- [Feature](#feature)
+Here's a summary of what's new in the .NET Runtime in this preview release:
 
 .NET Runtime updates in .NET 10:
 
@@ -85,4 +84,4 @@ if (loopCondition)
 
 This transformation is called loop inversion. By moving the condition to the bottom of the loop, the JIT removes the need to branch to the top of the loop to test the condition, improving code layout. Numerous optimizations (like loop cloning, loop unrolling, and induction variable optimizations) also depend on loop inversion to produce this shape to aid analysis.
 
-.NET 9 enhanced code quality for loops by switching over numerous optimizations to use a graph-based loop recognition implementation, bringing improved precision over the lexical analysis it replaced. Preview 6 switches over loop inversion, the only loop optimization still using the lexical implementation, to the graph-based implementation. Thanks to [dotnet/runtime #116017](https://github.com/dotnet/runtime/pull/116017), loop inversion now considers all natural loops -- loops with a single entry point -- and ignores the false positives previously considered by the lexical implementation. This translates into higher optimization potential for .NET programs with `for` and `while` statements.
+ .NET 9 enhanced code quality for loops by switching over numerous optimizations to use a graph-based loop recognition implementation, bringing improved precision over the lexical analysis it replaced. Preview 6 switches over loop inversion, the only loop optimization still using the lexical implementation, to the graph-based implementation. Thanks to [dotnet/runtime #116017](https://github.com/dotnet/runtime/pull/116017), loop inversion now considers all natural loops -- loops with a single entry point -- and ignores the false positives previously considered by the lexical implementation. This translates into higher optimization potential for .NET programs with `for` and `while` statements.

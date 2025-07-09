@@ -12,7 +12,7 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 
 ## Option to disallow duplicate JSON properties
 
-The JSON specification does not specify how to handle duplicate properties when deserializing a JSON payload. This can lead to unexpected results and security vulnerabilities. For example, see https://bishopfox.com/blog/json-interoperability-vulnerabilities and https://nvd.nist.gov/vuln/detail/CVE-2017-12635. This release introduces the `AllowDuplicateProperties` option to disallow duplicate JSON properties:
+The JSON specification does not specify how to handle duplicate properties when deserializing a JSON payload. This can lead to unexpected results and security vulnerabilities. For example, see [bishopfox.com JSON Interoperability Vulnerabilities](https://bishopfox.com/blog/json-interoperability-vulnerabilities) and [NVD CVE-2017-12635](https://nvd.nist.gov/vuln/detail/CVE-2017-12635). This release introduces the `AllowDuplicateProperties` option to disallow duplicate JSON properties:
 
 ```csharp
 string json = """{ "Value": 1, "Value": -1 }""";

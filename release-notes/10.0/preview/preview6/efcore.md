@@ -1,9 +1,10 @@
 # Entity Framework Core 10 Preview 6 - Release Notes
 
+
 Here's a summary of what's new in Entity Framework Core in this preview release:
 
 - [Named query filters](#named-query-filters)
-- [Small improvements](#small-improvements)
+- [Small improvements and bug fixes](#small-improvements-and-bug-fixes)
 
 Entity Framework Core 10 updates:
 
@@ -32,11 +33,12 @@ For more information on named query filters, see the [documentation](https://lea
 
 This feature was contributed by [@bittola](https://github.com/bittola).
 
+
 ## Small improvements and bug fixes
 
-* Implemented `DateOnly.DayNumber` translations ([#36189](https://github.com/dotnet/efcore/pull/36189)).
-* IQueryExpressionInterceptor leaks across contexts, leading to incorrectly-used cached queries ([#36127](https://github.com/dotnet/efcore/issues/36127)).
-* Support entity splitting with owned JSON entities (on main table) ([#36145](https://github.com/dotnet/efcore/issues/36145)).
+- Implemented `DateOnly.DayNumber` translations ([#36189](https://github.com/dotnet/efcore/pull/36189)).
+- IQueryExpressionInterceptor leaks across contexts, leading to incorrectly-used cached queries ([#36127](https://github.com/dotnet/efcore/issues/36127)).
+- Support entity splitting with owned JSON entities (on main table) ([#36145](https://github.com/dotnet/efcore/issues/36145)).
 
 ## Everything else in Preview 6
 
