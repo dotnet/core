@@ -67,8 +67,6 @@ This release includes support for **Android API levels 35 and 36**, along with e
   - Introduced `$(EnableDiagnostics)` MSBuild property (aka `$(AndroidEnableProfiler)`) to align with iOS and wasm.\
     [PR #10166](https://github.com/dotnet/android/pull/10166)
 - New tests added using `Plugin.Maui.Audio` to validate plugin behavior.\
-
-
   [PR #10219](https://github.com/dotnet/android/pull/10219)
 
 A detailed list can be found on the [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).

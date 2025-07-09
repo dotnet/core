@@ -57,7 +57,6 @@ Proceed? [y/n] (y): y
                                 |/
 ```
 
-
 This downloads and runs the specified tool package all in one go. By default, users will be prompted to confirm the download of the tool if it doesn't already exist locally. The latest version of the chosen tool package is used unless an explicit is chosen - for example `dotnet tool exec toolsay@0.1.0`.
 
 One-shot tool execution works seamlessly with local tool manifests as well. If you run a tool from a location containing a `.config/dotnet-tools.json` nearby, the version of the tool in that config will be used instead of the latest version available.
