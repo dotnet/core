@@ -1,7 +1,10 @@
+
 # .NET Runtime in .NET 10 Preview 6 - Release Notes
 
-
 Here's a summary of what's new in the .NET Runtime in this preview release:
+
+- [Improved Code Generation for Struct Arguments](#improved-code-generation-for-struct-arguments)
+- [Improved Loop Inversion](#improved-loop-inversion)
 
 .NET Runtime updates in .NET 10:
 

@@ -14,7 +14,6 @@ Here's a summary of what's new in Windows Forms in this preview release:
 
 ### Dark Mode & Styling
 
-
 This release brings several improvements to dark mode support in Windows Forms.
 
 - `ListView` ColumnHeaders` are rendering correctly in dark mode now.

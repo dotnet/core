@@ -1,5 +1,5 @@
-# Entity Framework Core 10 Preview 6 - Release Notes
 
+# Entity Framework Core 10 Preview 6 - Release Notes
 
 Here's a summary of what's new in Entity Framework Core in this preview release:
 
@@ -32,7 +32,6 @@ var allBlogs = await context.Blogs.IgnoreQueryFilters(["SoftDeletionFlter"]).ToL
 For more information on named query filters, see the [documentation](https://learn.microsoft.com/ef/core/querying/filters).
 
 This feature was contributed by [@bittola](https://github.com/bittola).
-
 
 ## Small improvements and bug fixes
 
