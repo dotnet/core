@@ -2,6 +2,18 @@
 
 You may encounter the following known issues, which may include workarounds, mitigations, or expected resolution timeframes.
 
+## F#
+### error NU1403: Package content hash validation failed for FSharp.Core.9.0.300. The package is different than the last restore.
+When using lock files with nuget, a package content hash validation fails for FSharp.Core 9.0.303.
+This is caused by a mismatched between binaries published to the .NET SDK and the version of FSharp.Core available separately on NuGet.
+ 
+This problem exists specifically for the 9.0.301 and 9.0.302 versions of the .NET SDK, when using lock files for package restore.
+
+https://github.com/dotnet/fsharp/issues/18712
+
+**workaround**
+Temporarily disable lock files for affected project(s).
+
 ## .NET WPF
 
 ### 1. Usage of incorrect types as DynamicResource
