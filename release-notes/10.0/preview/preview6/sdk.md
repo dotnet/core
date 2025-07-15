@@ -139,7 +139,7 @@ The `#:property` directive now requires the `=` symbol to separate the property 
 
 ### Referencing projects
 
-File-based apps now support referencing projects via the `#:project` directive. The path to the project can be specified with or without the project file. In the case the path is to the project directory, the project file will be automatically located. This was added based on feedback from users wanting to use file-based apps together with existing projects, e.g. for simple samples asspciated with a class library in a repo:
+File-based apps now support referencing projects via the `#:project` directive. The path to the project can be specified with or without the project file. In the case the path is to the project directory, the project file will be automatically located. This was added based on feedback from users wanting to use file-based apps together with existing projects, e.g. for simple samples associated with a class library in a repo:
 
 ```csharp
 #:project ../ClassLib/ClassLib.csproj
