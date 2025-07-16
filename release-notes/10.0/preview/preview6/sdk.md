@@ -149,7 +149,7 @@ var greeting = greeter.Greet(args.Length > 0 ? args[0] : "World");
 Console.WriteLine(greeting);
 ```
 
-## App file and directory path available at runtime
+### App file and directory path available at runtime
 
 It's sometimes useful when authoring file-based apps to know at runtime the full path to the application source file and/or directory. This information is now available via the [`System.AppContext.GetData` method](https://learn.microsoft.com/dotnet/api/system.appcontext.getdata) when running file-based apps from source, e.g. `dotnet run app.cs`. The file path is available using the name `"EntryPointFilePath"`, and the directory via the name `"EntryPointFileDirectoryPath"`. Note that this data is not available after the application has been published or converted to a project-based app. Following is an example of using `AppContext` as well as the [`System.Runtime.CompilerServices.CallerFilePath` attribute](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.callerfilepathattribute) to obtain the path to the C# source file:
 
@@ -186,7 +186,7 @@ static class AppContextExtensions
 }
 ```
 
-## Enhanced shebang support
+### Enhanced shebang support
 
 File-based apps support for shebang-based direct shell execution has been enhanced, again based on your feedback.
 
