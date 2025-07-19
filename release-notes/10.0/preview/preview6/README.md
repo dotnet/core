@@ -1,6 +1,6 @@
 # .NET 10 Preview 6 - Release Notes
 
-.NET 10 Preview 6 released on April X, 2025. Find more information on new features released in .NET 10 Preview 6 by browsing through the release notes below:
+.NET 10 Preview 6 released on July 15, 2025. Find more information on new features released in .NET 10 Preview 6 by browsing through the release notes below:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
