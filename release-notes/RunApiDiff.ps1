@@ -183,7 +183,7 @@ Function RunCommand {
     )
 
     Write-Color yellow $command
-    Invoke-Expression "$command"
+    & cmd /c $command
 }
 
 Function GetDotNetFullName {
@@ -331,7 +331,7 @@ Function GetPreviewFolderPath {
         Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
     }
 
-    $previewOrRCFolderName = GetPreviewOrRCFolderName $dotNetVersion $previewOrRC $previewNumberVersion
+    $previewOrRCFolderName = GetPreviewOrRCFolderName -dotNetVersion $dotNetVersion -previewOrRC $previewOrRC -previewNumberVersion $previewNumberVersion
     Return [IO.Path]::Combine($prefixFolder, "preview", $previewOrRCFolderName, $apiDiffFolderName)
 }
 
@@ -607,28 +607,27 @@ Function ProcessSdk
     )
 
     $beforeDllFolder = ""
-    DownloadPackage $UseDefaultNuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeDllFolder)
+    DownloadPackage -useDefaultNuGetFeed $UseDefaultNuGetFeed -sdkName $sdkName -beforeOrAfter "Before" -dotNetVersion $PreviousDotNetVersion -previewOrRC $PreviousPreviewOrRC -previewNumberVersion $PreviousPreviewNumberVersion -resultingPath ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage $UseDefaultNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterDllFolder)
+    DownloadPackage -useDefaultNuGetFeed $UseDefaultNuGetFeed -sdkName $sdkName -beforeOrAfter "After" -dotNetVersion $CurrentDotNetVersion -previewOrRC $CurrentPreviewOrRC -previewNumberVersion $CurrentPreviewNumberVersion -resultingPath ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
     $beforeReferenceFolder = ""
     $afterReferenceFolder = ""
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
-        DownloadPackage $UseDefaultNuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeReferenceFolder)
+        DownloadPackage -useDefaultNuGetFeed $UseDefaultNuGetFeed -sdkName "NETCore" -beforeOrAfter "Before" -dotNetVersion $PreviousDotNetVersion -previewOrRC $PreviousPreviewOrRC -previewNumberVersion $PreviousPreviewNumberVersion -resultingPath ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
-        
-        DownloadPackage $UseDefaultNuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterReferenceFolder)
+        DownloadPackage -useDefaultNuGetFeed $UseDefaultNuGetFeed -sdkName "NETCore" -beforeOrAfter "After" -dotNetVersion $CurrentDotNetVersion -previewOrRC $CurrentPreviewOrRC -previewNumberVersion $CurrentPreviewNumberVersion -resultingPath ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
 
     $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$sdkName.App")
     RecreateFolder $targetFolder
 
-    RunApiDiff $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName $beforeReferenceFolder $afterReferenceFolder
+    RunApiDiff -apiDiffExe $apiDiffExe -outputFolder $targetFolder -beforeFolder $beforeDllFolder -afterFolder $afterDllFolder -tableOfContentsFileNamePrefix $currentDotNetFullName -assembliesToExclude $assembliesToExclude -attributesToExclude $attributesToExclude -beforeFriendlyName $previousDotNetFriendlyName -afterFriendlyName $currentDotNetFriendlyName -beforeReferenceFolder $beforeReferenceFolder -afterReferenceFolder $afterReferenceFolder
 }
 
 #####################
@@ -653,6 +652,9 @@ $IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And (
 VerifyPathOrExit $CoreRepo
 VerifyPathOrExit $TmpFolder
 
+# Acknowledge UseDefaultNuGetFeed parameter usage for PSScriptAnalyzer
+Write-Verbose "Using default NuGet feed: $UseDefaultNuGetFeed" -Verbose:$false
+
 $currentMajorVersion = $CurrentDotNetVersion.Split(".")[0]
 $InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet$currentMajorVersion-transport/nuget/v3/index.json --prerelease"
 
@@ -663,7 +665,7 @@ if ($InstallApiDiff) {
 
 $apiDiffCommand = get-command "apidiff" -ErrorAction SilentlyContinue
 
-if (-Not $apiDiffCommand) 
+if (-Not $apiDiffCommand)
 {
      Write-Error "The command apidiff could not be found.  Please first install the tool using the following command: $InstallApiDiffCommand" -ErrorAction Stop
 }
@@ -671,7 +673,7 @@ if (-Not $apiDiffCommand)
 $apiDiffExe = $apiDiffCommand.Source
 ## Recreate api-diff folder in core repo folder
 
-$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $IsComparingReleases
+$previewFolderPath = GetPreviewFolderPath -rootFolder $CoreRepo -dotNetVersion $CurrentDotNetVersion -previewOrRC $CurrentPreviewOrRC -previewNumberVersion $CurrentPreviewNumberVersion -IsComparingReleases $IsComparingReleases
 If (-Not (Test-Path -Path $previewFolderPath))
 {
     Write-Color white "Creating new diff folder: $previewFolderPath"
@@ -681,28 +683,28 @@ If (-Not (Test-Path -Path $previewFolderPath))
 ## Run the ApiDiff commands
 
 # Example: "10.0-preview2"
-$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
+$currentDotNetFullName = GetDotNetFullName -IsComparingReleases $IsComparingReleases -dotNetVersion $CurrentDotNetVersion -previewOrRC $CurrentPreviewOrRC -previewNumberVersion $CurrentPreviewNumberVersion
 
 # Examples: ".NET 10 Preview 1" and ".NET 10 Preview 2"
-$previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
-$currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
+$previousDotNetFriendlyName = GetDotNetFriendlyName -DotNetVersion $PreviousDotNetVersion -PreviewOrRC $PreviousPreviewOrRC -PreviewNumberVersion $PreviousPreviewNumberVersion
+$currentDotNetFriendlyName = GetDotNetFriendlyName -DotNetVersion $CurrentDotNetVersion -PreviewOrRC $CurrentPreviewOrRC -PreviewNumberVersion $CurrentPreviewNumberVersion
 
 If (-Not $ExcludeNetCore)
 {
-    ProcessSdk "NETCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk -sdkName "NETCore" -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName
 }
 
 If (-Not $ExcludeAspNetCore)
 {
-    ProcessSdk "AspNetCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk -sdkName "AspNetCore" -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName
 }
 
 If (-Not $ExcludeWindowsDesktop)
 {
-    ProcessSdk "WindowsDesktop" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk -sdkName "WindowsDesktop" -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName
 }
 
-CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
+CreateReadme -previewFolderPath $previewFolderPath -dotNetFriendlyName $currentDotNetFriendlyName -dotNetFullName $currentDotNetFullName
 
 #####################
 ### End Execution ###
