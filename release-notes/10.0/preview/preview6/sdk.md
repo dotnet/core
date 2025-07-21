@@ -193,7 +193,7 @@ File-based apps support for shebang-based direct shell execution has been enhanc
 To avoid the need to specify the exact path to the `dotnet` executable in shebang lines and avoid issues in environments that don't support multiple arguments in shebang directives, `dotnet` now supports directly executing *.cs* files without the need to specify the `run` command, e.g. `dotnet app.cs`. This allows for a shebang line to use the `env` command to run whichever `dotnet` is on the path like this:
 
 ```csharp
-#!/usr/bin/env dotnet
+#!/usr/bin/dotnet
 
 Console.WriteLine("Hello shebang!");
 ```
@@ -203,7 +203,7 @@ Additionally, the *.cs* file extension can be omitted, allowing for direct execu
 ```bash
 # 1. Create a single-file C# app with a shebang
 cat << 'EOF' > hello.cs
-#!/usr/bin/env dotnet
+#!/usr/bin/dotnet
 Console.WriteLine("Hello!");
 EOF
 
