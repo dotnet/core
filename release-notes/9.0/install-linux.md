@@ -1,8 +1,8 @@
-# .NET 9 installation instructions for Linux
+# .NET 9.0 installation instructions for Linux
 
-The following instructions demonstrate installing .NET 9 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
+The following instructions demonstrate installing .NET 9.0 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
 
-[.NET 9 Required Packages](os-packages.md) describes the set of packages required to run .NET on Linux.
+[.NET 9.0 Required Packages](os-packages.md) describes the set of packages required to run .NET on Linux.
 
 ## Distributions
 
@@ -19,15 +19,15 @@ We recommend you install the .NET SDK to develop and build applications, and to 
 Each of the distributions can be downloaded from:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [.NET 9 release notes](README.md)
+- [.NET 9.0 release notes](README.md)
 
 [Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Linux (Alpine, Debian, and Ubuntu).
 
 ## Install using deb/rpm packages
 
-Preview release installers are not available from the Microsoft package repositories. The steps below provide an easy way to install .NET 9 using your Distro package manager.
+Preview release installers are not available from the Microsoft package repositories. The steps below provide an easy way to install .NET 9.0 using your Distro package manager.
 
-**Note:** `curl` must be available on the system before running the following steps. Once you have confirmed that `curl` is available, complete the steps to download and install the latest .NET 9 Preview SDK and Runtime.
+**Note:** `curl` must be available on the system before running the following steps. Once you have confirmed that `curl` is available, complete the steps to download and install the latest .NET 9.0 Preview SDK and Runtime.
 
 1. Create a directory to use for the download location and change into that directory. For example, `mkdir $HOME/dotnet_install && cd $HOME/dotnet_install`
 2. Run `curl -L https://aka.ms/install-dotnet-preview -o install-dotnet-preview.sh`
@@ -49,14 +49,14 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -Lo dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.203/dotnet-sdk-9.0.203-linux-x64.tar.gz
+~# curl -Lo dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.303/dotnet-sdk-9.0.303-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
 ~# export DOTNET_ROOT=~/dotnet
 ~# export PATH=$PATH:~/dotnet
 ~# dotnet --version
-9.0.203
+9.0.303
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
