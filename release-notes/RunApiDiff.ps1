@@ -381,13 +381,28 @@ Function RunApiDiff {
         [ValidateNotNullOrEmpty()]
         [string]
         $afterFriendlyName
+        ,
+        [Parameter(Mandatory = $false)]
+        [string]
+        $beforeReferenceFolder = ""
+        ,
+        [Parameter(Mandatory = $false)]
+        [string]
+        $afterReferenceFolder = ""
     )
 
     VerifyPathOrExit $apiDiffExe
     VerifyPathOrExit $beforeFolder
     VerifyPathOrExit $afterFolder
 
-    RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eas '$assembliesToExclude' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'"
+    $referenceParams = ""
+    if (-not [string]::IsNullOrEmpty($beforeReferenceFolder) -and -not [string]::IsNullOrEmpty($afterReferenceFolder)) {
+        VerifyPathOrExit $beforeReferenceFolder
+        VerifyPathOrExit $afterReferenceFolder
+        $referenceParams = " -rb '$beforeReferenceFolder' -ra '$afterReferenceFolder'"
+    }
+
+    RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eas '$assembliesToExclude' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'$referenceParams"
 }
 
 Function CreateReadme {
@@ -599,10 +614,21 @@ Function ProcessSdk
     DownloadPackage $UseDefaultNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
+    # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
+    $beforeReferenceFolder = ""
+    $afterReferenceFolder = ""
+    if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
+        DownloadPackage $UseDefaultNuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeReferenceFolder)
+        VerifyPathOrExit $beforeReferenceFolder
+        
+        DownloadPackage $UseDefaultNuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterReferenceFolder)
+        VerifyPathOrExit $afterReferenceFolder
+    }
+
     $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$sdkName.App")
     RecreateFolder $targetFolder
 
-    RunApiDiff $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName
+    RunApiDiff $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName $beforeReferenceFolder $afterReferenceFolder
 }
 
 #####################
