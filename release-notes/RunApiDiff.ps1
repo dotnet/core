@@ -652,9 +652,6 @@ $IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And (
 VerifyPathOrExit $CoreRepo
 VerifyPathOrExit $TmpFolder
 
-# Acknowledge UseDefaultNuGetFeed parameter usage for PSScriptAnalyzer
-Write-Verbose "Using default NuGet feed: $UseDefaultNuGetFeed" -Verbose:$false
-
 $currentMajorVersion = $CurrentDotNetVersion.Split(".")[0]
 $InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet$currentMajorVersion-transport/nuget/v3/index.json --prerelease"
 
