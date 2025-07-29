@@ -15,7 +15,7 @@ int[] ids = [1, 2, 3];
 var blogs = await context.Blogs.Where(b => ids.Contains(b.Id)).ToListAsync();
 ```
 
-EF 10.0 introduces a new default translation mode for parameterized collections, where each value in the collection is traslated into its own scalar parameter:
+EF 10.0 introduces a new default translation mode for parameterized collections, where each value in the collection is translated into its own scalar parameter:
 
 ```sql
 SELECT [b].[Id], [b].[Name]
