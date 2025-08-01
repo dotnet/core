@@ -2,7 +2,7 @@
 
 Here's a summary of what's new in .NET Libraries in this preview release:
 
-- [Feature](#feature)
+- [Launch Windows processes in new process group](#launch-windows-processes-in-new-process-group)
 
 .NET Libraries updates in .NET 10:
 
