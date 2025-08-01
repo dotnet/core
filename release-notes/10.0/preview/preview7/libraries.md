@@ -47,7 +47,7 @@ class Program
         }
         else
         {
-            // you need to call SetConsoleCtrlHandler this way if you want to handle Ctrl+C in the child process,
+            // If you need to send a CTRL+C, the child process needs to re-enable CTRL+C handling, if you own the code, you can call SetConsoleCtrlHandler(NULL, FALSE).
             // see https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw#remarks
             SetConsoleCtrlHandler((IntPtr)null, false);
 
