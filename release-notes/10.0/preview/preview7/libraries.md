@@ -215,7 +215,7 @@ var consumerTask = Task.Run(async () =>
     }
 
     Console.Write(clearThinkingString);
-    Console.WriteLine($" Last message received at {lastTimestamp}.");
+    Console.WriteLine($" Last message sent at {lastTimestamp}.");
 
     await pipe.Reader.CompleteAsync();
 });
@@ -228,7 +228,7 @@ record Chunk(string Message, DateTime Timestamp);
 // Output (500ms between each line):
 // The quick brown fox...
 // The quick brown fox jumps over...
-// The quick brown fox jumps over the lazy dog. Last message received at 8/1/2025 6:41:35 PM.
+// The quick brown fox jumps over the lazy dog. Last message sent at 8/1/2025 6:41:35 PM.
 ```
 
 Note that all of this is serialized as JSON in the `Pipe` (formatted here for readability):
