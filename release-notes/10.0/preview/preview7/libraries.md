@@ -3,6 +3,9 @@
 Here's a summary of what's new in .NET Libraries in this preview release:
 
 - [Launch Windows processes in new process group](#launch-windows-processes-in-new-process-group)
+- [AES KeyWrap with Padding (IETF RFC 5649)](#aes-keywrap-with-padding-ietf-rfc-5649)
+- [ML-DSA Updates](ml-dsa-updates)
+- [PipeReader support for JSON serializer](#pipereader-support-for-json-serializer)
 
 .NET Libraries updates in .NET 10:
 
@@ -149,3 +152,99 @@ private static byte[] SignPreHashSha3_256(MLDsa signingKey, ReadOnlySpan<byte> d
 This release also introduces new types to support ietf-lamps-pq-composite-sigs (currently at draft 7),
 but in Preview 7 they don't have an implementation, just inheritance-model tests.
 If you're looking for Composite ML-DSA, come back next release.
+
+## PipeReader support for JSON serializer
+
+New `PipeReader` overloads have been added to `JsonSerializer.Deserialize`, to match the existing `PipeWriter` support. Previously, deserialization required using an intermediate `Stream` which could involve copying data unnecessarily. The new overloads avoid that by integrating directly with the core deserialization logic which should improve performance.
+
+This shows the basic usage:
+
+```cs
+var pipe = new Pipe();
+
+// Serialize to writer
+await JsonSerializer.SerializeAsync(pipe.Writer, new Person("Alice"));
+await pipe.Writer.CompleteAsync();
+
+// Deserialize from reader
+var result = await JsonSerializer.DeserializeAsync<Person>(pipe.Reader);
+await pipe.Reader.CompleteAsync();
+
+Console.WriteLine($"Your name is {result.Name}.");
+// Output: Your name is Alice.
+
+record Person(string Name);
+```
+
+Here is an example of a producer that produces tokens in chunks and a consumer that receives and displays them.
+
+```cs
+var pipe = new Pipe();
+
+// Producer writes to the pipe in chunks
+var producerTask = Task.Run(async () =>
+{
+    async static IAsyncEnumerable<Chunk> GenerateResponse()
+    {
+        yield return new Chunk("The quick brown fox", DateTime.Now);
+        await Task.Delay(500);
+        yield return new Chunk(" jumps over", DateTime.Now);
+        await Task.Delay(500);
+        yield return new Chunk(" the lazy dog.", DateTime.Now);
+    }
+
+    await JsonSerializer.SerializeAsync<IAsyncEnumerable<Chunk>>(pipe.Writer, GenerateResponse());
+    await pipe.Writer.CompleteAsync();
+});
+
+// Consumer reads from the pipe and outputs to console
+var consumerTask = Task.Run(async () =>
+{
+    var thinkingString = "...";
+    var clearThinkingString = new string("\b\b\b");
+    var lastTimestamp = DateTime.MinValue;
+
+    // Read response to end
+    Console.Write(thinkingString);
+    await foreach (var chunk in JsonSerializer.DeserializeAsyncEnumerable<Chunk>(pipe.Reader))
+    {
+        Console.Write(clearThinkingString);
+        Console.Write(chunk.Message);
+        Console.Write(thinkingString);
+        lastTimestamp = DateTime.Now;
+    }
+
+    Console.Write(clearThinkingString);
+    Console.WriteLine($" Last message received at {lastTimestamp}.");
+
+    await pipe.Reader.CompleteAsync();
+});
+
+await producerTask;
+await consumerTask;
+
+record Chunk(string Message, DateTime Timestamp);
+
+// Output (500ms between each line):
+// The quick brown fox...
+// The quick brown fox jumps over...
+// The quick brown fox jumps over the lazy dog. Last message received at 8/1/2025 6:41:35 PM.
+```
+
+Note that all of this is serialized as JSON in the `Pipe` (formatted here for readability):
+```
+[
+    {
+        "Message": "The quick brown fox",
+        "Timestamp": "2025-08-01T18:37:27.2930151-07:00"
+    },
+    {
+        "Message": " jumps over",
+        "Timestamp": "2025-08-01T18:37:27.8594502-07:00"
+    },
+    {
+        "Message": " the lazy dog.",
+        "Timestamp": "2025-08-01T18:37:28.3753669-07:00"
+    }
+]
+```
