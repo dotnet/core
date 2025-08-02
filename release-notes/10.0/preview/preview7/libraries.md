@@ -4,16 +4,14 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 
 - [Launch Windows processes in new process group](#launch-windows-processes-in-new-process-group)
 - [AES KeyWrap with Padding (IETF RFC 5649)](#aes-keywrap-with-padding-ietf-rfc-5649)
-- [ML-DSA Updates](ml-dsa-updates)
+- Post-Quantum Cryptography
+    - [ML-DSA](#ml-dsa)
+    - [Composite ML-DSA](#composite-ml-dsa)
 - [PipeReader support for JSON serializer](#pipereader-support-for-json-serializer)
 
 .NET Libraries updates in .NET 10:
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
-
-## Feature
-
-Something about the feature
 
 ## Launch Windows processes in new process group
 
@@ -119,7 +117,9 @@ private static byte[] DecryptContent(ReadOnlySpan<byte> kek, ReadOnlySpan<byte> 
 }
 ```
 
-## ML-DSA Updates
+## Post Quantum Cryptography Updates
+
+### ML-DSA
 
 The `System.Security.Cryptography.MLDsa` class gained ease-of-use updates in this release, allowing some common code patterns to be simplified:
 
@@ -149,9 +149,24 @@ private static byte[] SignPreHashSha3_256(MLDsa signingKey, ReadOnlySpan<byte> d
 }
 ```
 
+### Composite ML-DSA
+
 This release also introduces new types to support ietf-lamps-pq-composite-sigs (currently at draft 7),
-but in Preview 7 they don't have an implementation, just inheritance-model tests.
-If you're looking for Composite ML-DSA, come back next release.
+and an implementation of the primitive methods for RSA variants.
+
+```cs
+var algorithm = CompositeMLDsaAlgorithm.MLDsa65WithRSA4096Pss;
+using var privateKey = CompositeMLDsa.GenerateKey(algorithm);
+
+byte[] data = [42];
+byte[] signature = privateKey.SignData(data);
+
+using var publicKey = CompositeMLDsa.ImportCompositeMLDsaPublicKey(algorithm, privateKey.ExportCompositeMLDsaPublicKey());
+Console.WriteLine(publicKey.VerifyData(data, signature)); // True
+
+signature[0] ^= 1; // Tamper with signature
+Console.WriteLine(publicKey.VerifyData(data, signature)); // False
+```
 
 ## PipeReader support for JSON serializer
 
