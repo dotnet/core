@@ -4,7 +4,7 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 
 - [Launch Windows processes in new process group](#launch-windows-processes-in-new-process-group)
 - [AES KeyWrap with Padding (IETF RFC 5649)](#aes-keywrap-with-padding-ietf-rfc-5649)
-- Post-Quantum Cryptography
+- Post-Quantum Cryptography Updates
     - [ML-DSA](#ml-dsa)
     - [Composite ML-DSA](#composite-ml-dsa)
 - [PipeReader support for JSON serializer](#pipereader-support-for-json-serializer)
@@ -117,7 +117,7 @@ private static byte[] DecryptContent(ReadOnlySpan<byte> kek, ReadOnlySpan<byte> 
 }
 ```
 
-## Post Quantum Cryptography Updates
+## Post-Quantum Cryptography Updates
 
 ### ML-DSA
 
