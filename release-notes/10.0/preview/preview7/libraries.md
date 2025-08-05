@@ -170,7 +170,7 @@ Console.WriteLine(publicKey.VerifyData(data, signature)); // False
 
 ## PipeReader support for JSON serializer
 
-New `PipeReader` overloads have been added to `JsonSerializer.Deserialize`, to match the existing `PipeWriter` support. Previously, deserialization required using an intermediate `Stream` which could involve copying data unnecessarily. The new overloads avoid that by integrating directly with the core deserialization logic which should improve performance.
+`JsonSerializer.Deserialize` now supports `PipeReader`, complementing the existing `PipeWriter` support. Previously, deserializing from a `PipeReader` required converting it to a `Stream`, but the new overloads eliminate that step by integrating `PipeReader` directly into the serializer. As a bonus, not having to convert from what you're already holding can yield some efficiency benefits.
 
 This shows the basic usage:
 
