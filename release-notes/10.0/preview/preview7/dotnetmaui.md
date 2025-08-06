@@ -112,28 +112,13 @@ This release includes numerous fixes and improvements across controls and layout
 
 ## .NET for Android
 
-This release includes continued improvements to the CoreCLR runtime integration, build tooling, and native interop performance:
+This release includes continued integration with multiple .NET runtimes, and several bug fixes:
 
-- **CoreCLR Runtime Enhancements**:
-  - Implemented GC bridge support for better memory management integration
-  - Added support for ignoring specific assemblies when requested to load them
-  - Improved native typemap code generation with fewer relocations
-  - Static linking of app native runtime/library for better performance
-
-- **Build and Tooling Improvements**:
-  - Updated p/invoke tables for `libSystem.Native.so`
-  - Enhanced logging with function names in native code
-  - Cleaned up workload definitions by removing deprecated android-net8 workload
-  - Fixed build warnings and improved project configuration
-
-- **Configuration Updates**:
-  - Set default for Http3Support feature switch
-  - Added `DOTNET_SYSTEM_NET_SECURITY_NOREVOCATIONCHECKBYDEFAULT` environment variable
-  - Removed legacy dotnet9 NuGet feeds
-
-- **Developer Experience**:
-  - Removed `IsRunningOnDesktop` checks for Android designer scenarios
-  - Updated TSA Area Path configuration for better tooling integration
+- Add `$(EnableDiagnostics)` cross-platform MSBuild property, to align with iOS and WASM.
+- Fixe an issue with `=` symbol in Android environment variables.
+- Fixed an issue where certain Java libraries were not redistributed in NuGet packages.
+- Add support for API 36 in various Visual Studio dropdowns & menus.
+- Changes to the "Java GC Bridge" to support multiple runtimes.
 
 A detailed list can be found on the [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
 
