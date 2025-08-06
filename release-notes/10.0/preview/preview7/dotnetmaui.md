@@ -2,14 +2,181 @@
 
 Here's a summary of what's new in .NET MAUI in this preview release:
 
-- [Feature](#feature)
+- .NET MAUI
+  - [XAML Source Generator](#xaml-source-generator)
+  - [MediaPicker EXIF Support](#mediapicker-exif-support)
+  - [SafeArea Enhancements](#safearea-enhancements)
+  - [Secondary Toolbar Items](#secondary-toolbar-items)
+  - [New Control APIs](#new-control-apis)
+  - [Deprecated API Removals](#deprecated-api-removals)
+  - [Control and Layout Improvements](#control-and-layout-improvements)
+- [.NET for Android](#net-for-android)
+- [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
 .NET MAUI updates in .NET 10:
 
-- [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/) documentation
+- [What's new in .NET MAUI in .NET 10](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-10) documentation.
 
-## Feature
+## XAML Source Generator
 
-Something about the feature
+.NET MAUI now includes a source generator for XAML that improves build performance and enables better tooling support. This generator creates strongly-typed code for your XAML files at compile time, reducing runtime overhead and providing better IntelliSense support.
 
-Something about the feature
+The source generator decorates generated types with the `[Generated]` attribute for better tooling integration and debugging support.
+
+## MediaPicker EXIF Support
+
+The `MediaPicker` now automatically handles EXIF information when working with images:
+
+- **Auto-rotate images**: Images are automatically rotated based on their EXIF orientation data
+- **Preserve EXIF information**: Original EXIF metadata is preserved when using MediaPicker
+
+This ensures that images appear correctly oriented regardless of how they were captured or stored on the device.
+
+## SafeArea Enhancements
+
+This release introduces significant improvements to SafeArea management:
+
+- **Per-edge safe area control**: New `SafeArea` attached property allows fine-grained control over safe area behavior for individual edges
+- **iOS SafeArea fixes**: Resolved issues with SafeArea management on iOS, including extra bottom space in ScrollView when using SafeAreaEdges
+- **Improved defaults**: Fixed safe area defaults to provide more consistent behavior across platforms
+
+```csharp
+// Example of per-edge safe area control
+<ContentPage>
+    <Grid SafeArea.Top="True" SafeArea.Bottom="False">
+        <!-- Content respects top safe area but ignores bottom -->
+    </Grid>
+</ContentPage>
+```
+
+## Secondary Toolbar Items
+
+iOS and macOS now support secondary toolbar items in Shell applications, providing better alignment with platform conventions:
+
+- **Shell integration**: Secondary toolbar items are automatically handled in Shell-based applications
+- **Platform consistency**: Follows iOS/macOS design patterns for secondary actions in navigation bars
+
+## New Control APIs
+
+Several new APIs have been added to improve control functionality:
+
+- **Picker controls**: New "Open/Close" API for programmatically controlling picker state
+- **SearchHandler**: Added API to hide or show the soft keyboard when using SearchHandler
+- **Vibration and HapticFeedback**: New `IsSupported` API to check platform support
+- **Windows**: Added API to enable/disable minimize and maximize buttons on Windows
+- **Shell navigation**: Added `Shell.SetNavBarVisibilityAnimationEnabled` property for controlling navigation bar visibility animations
+- **TabbedPageManager**: Made TabbedPageManager public for advanced customization scenarios
+- **StackNavigationManager**: Exposed public APIs for StackNavigationManager on Android
+
+## Deprecated API Removals
+
+As part of .NET 10, several deprecated APIs have been removed:
+
+- **Accelerator class**: Removed from Microsoft.Maui.Controls
+- **ClickGestureRecognizer**: Removed in favor of TapGestureRecognizer
+- **Page.IsBusy**: Marked as obsolete
+
+## Control and Layout Improvements
+
+This release includes numerous fixes and improvements across controls and layouts:
+
+### ScrollView Improvements
+
+- Fixed Android ScrollView content measurement issues
+- Resolved iOS extra bottom space when using SafeAreaEdges
+- Fixed ScrollView ContentOffset reset on first layout pass
+
+### Image and Visual Improvements
+
+- Fixed random image disappearing when switching tabs on Android
+- Improved image resizing with proper disposal when `disposeOriginal` is set to true
+- Enhanced FontImageSource sizing for back/flyout icons on iOS
+
+### Navigation and Shell Fixes
+
+- Fixed Shell tab becoming blank after specific navigation patterns on iOS
+- Improved handler disconnection when removing non-visible pages from navigation stack
+- Fixed Shell custom FlyoutIcon display problems on iOS
+
+### Platform-Specific Fixes
+
+- **Android**: Fixed Picker selected item highlight, resolved OnIdiom threading issues
+- **iOS**: Fixed Switch OffColor persistence, improved SwipeView content change handling
+- **Windows**: Enhanced WebView behavior with hardware acceleration disabled
+
+### Performance and Memory
+
+- Removed Compatibility.Layout dependency on modern .NET MAUI controls
+- Improved handler mapping efficiency by skipping useless calls
+- Enhanced nullability annotations for converter classes
+
+## .NET for Android
+
+This release includes continued improvements to the CoreCLR runtime integration, build tooling, and native interop performance:
+
+- **CoreCLR Runtime Enhancements**:
+  - Implemented GC bridge support for better memory management integration
+  - Added support for ignoring specific assemblies when requested to load them
+  - Improved native typemap code generation with fewer relocations
+  - Static linking of app native runtime/library for better performance
+
+- **Build and Tooling Improvements**:
+  - Updated p/invoke tables for `libSystem.Native.so`
+  - Enhanced logging with function names in native code
+  - Cleaned up workload definitions by removing deprecated android-net8 workload
+  - Fixed build warnings and improved project configuration
+
+- **Configuration Updates**:
+  - Set default for Http3Support feature switch
+  - Added `DOTNET_SYSTEM_NET_SECURITY_NOREVOCATIONCHECKBYDEFAULT` environment variable
+  - Removed legacy dotnet9 NuGet feeds
+
+- **Developer Experience**:
+  - Removed `IsRunningOnDesktop` checks for Android designer scenarios
+  - Updated TSA Area Path configuration for better tooling integration
+
+A detailed list can be found on the [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
+
+## .NET for iOS, Mac Catalyst, macOS, tvOS
+
+This release includes significant improvements to binding generation, runtime performance, and API coverage:
+
+- **New Binding Generator (RGen)**:
+  - Enhanced source generator for better binding performance and maintainability
+  - Added support for nested classes, categories, and constructors
+  - Improved async method generation with proper Task-based patterns
+  - Better memory management and semantic model usage
+  - Support for strong dictionary properties and weak delegate patterns
+
+- **Runtime and Interop Improvements**:
+  - Reworked NSObject data storage for better performance
+  - Enhanced P/Invoke handling and native library integration
+  - Improved delegate signature consistency with nullability annotations
+  - Better handling of Action-based delegates across frameworks
+
+- **API and Framework Updates**:
+  - Fixed CoreLocation availability for macOS monitoring features
+  - Enhanced CoreText font manager constants generation
+  - Updated StoreKit by unmarking AppStore class as experimental
+  - Fixed CoreMedia format description extensions and related APIs
+  - Improved Network framework P/Invoke calls
+
+- **Build and Tooling Enhancements**:
+  - Better xcframework processing with improved diagnostics
+  - Enhanced resource duplication detection
+  - Improved MSBuild task assembly merging
+  - Better xml documentation generation for interfaces and protocols
+
+- **Platform-Specific Fixes**:
+  - Fixed CVOpenGLESTexture and CVOpenGLESTextureCache build integration
+  - Resolved AVFoundation enum value locations
+  - Enhanced CoreImage format convenience enum generation
+  - Improved introspection support for device testing
+
+A detailed list can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
+
+## Contributors
+
+Thank you contributors! ❤️
+
+[@Aguilex](https://github.com/Aguilex), [@Ahamed-Ali](https://github.com/Ahamed-Ali), [@albyrock87](https://github.com/albyrock87), [@anandhan-rajagopal](https://github.com/anandhan-rajagopal), [@bhavanesh2001](https://github.com/bhavanesh2001), [@Copilot](https://github.com/copilot-swe-agent), [@csigs](https://github.com/csigs), [@dotnet-bot](https://github.com/dotnet-bot), [@dotnet-maestro](https://github.com/dotnet-maestro), [@emaf](https://github.com/emaf), [@framinosona](https://github.com/framinosona), [@github-actions](https://github.com/github-actions), [@grendello](https://github.com/grendello), [@HarishKumarSF4517](https://github.com/HarishKumarSF4517), [@jfversluis](https://github.com/jfversluis), [@jonathanpeppers](https://github.com/jonathanpeppers), [@jonpryor](https://github.com/jonpryor), [@jsuarezruiz](https://github.com/jsuarezruiz), [@kubaflo](https://github.com/kubaflo), [@LogishaSelvarajSF4525](https://github.com/LogishaSelvarajSF4525), [@mandel-macaque](https://github.com/mandel-macaque), [@mattleibow](https://github.com/mattleibow), [@MichalStrehovsky](https://github.com/MichalStrehovsky), [@morning4coffe-dev](https://github.com/morning4coffe-dev), [@NafeelaNazhir](https://github.com/NafeelaNazhir), [@NanthiniMahalingam](https://github.com/NanthiniMahalingam), [@NirmalKumarYuvaraj](https://github.com/NirmalKumarYuvaraj), [@nivetha-nagalingam](https://github.com/nivetha-nagalingam), [@pictos](https://github.com/pictos), [@praveenkumarkarunanithi](https://github.com/praveenkumarkarunanithi), [@PureWeen](https://github.com/PureWeen), [@rmarinho](https://github.com/rmarinho), [@rolfbjarne](https://github.com/rolfbjarne), [@sheiksyedm](https://github.com/sheiksyedm), [@simonrozsival](https://github.com/simonrozsival), [@StephaneDelcroix](https://github.com/StephaneDelcroix), [@SyedAbdulAzeemSF4852](https://github.com/SyedAbdulAzeemSF4852), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman), [@TamilarasanSF4853](https://github.com/TamilarasanSF4853), [@Vignesh-SF3580](https://github.com/Vignesh-SF3580), [@VitalyKnyazev](https://github.com/VitalyKnyazev), [@vs-mobiletools-engineering-service2](https://github.com/vs-mobiletools-engineering-service2)
