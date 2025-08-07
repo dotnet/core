@@ -8,6 +8,8 @@ Here's a summary of what's new in .NET Libraries in this preview release:
     - [ML-DSA](#ml-dsa)
     - [Composite ML-DSA](#composite-ml-dsa)
 - [PipeReader support for JSON serializer](#pipereader-support-for-json-serializer)
+-Networking
+    - [WebSocketStreaam](#web-socket-stream)
 
 .NET Libraries updates in .NET 10:
 
@@ -263,3 +265,68 @@ Note that all of this is serialized as JSON in the `Pipe` (formatted here for re
     }
 ]
 ```
+
+## Networking
+
+### WebSocketStream
+
+This release introduces `WebSocketStream`, a new API designed to simplify some of the most common—and previously cumbersome—`WebSocket` scenarios in .NET.
+
+Traditional `WebSocket` APIs are low-level and require significant boilerplate: handling buffering and framing, reconstructing messages, managing encoding/decoding, and writing custom wrappers to integrate with streams, channels, or other transport abstractions. These complexities make it difficult to use WebSockets as a transport, especially for apps with streaming or text-based protocols, or event-driven handlers.
+
+**WebSocketStream** addresses these pain points by providing a Stream-based abstraction over a WebSocket. This enables seamless integration with existing APIs for reading, writing, and parsing data, whether binary or text, and reduces the need for manual plumbing.
+
+**Common Usage Patterns**
+
+Here are a few examples of how `WebSocketStream` simplifies typical WebSocket workflows:
+
+**1. Streaming text protocol (e.g., STOMP)**
+
+```csharp
+using Stream transportStream = WebSocketStream.Create(
+    connectedWebSocket, 
+    WebSocketMessageType.Text,
+    ownsWebSocket: true);
+// Integration with Stream-based APIs
+// Don't close the stream, as it's also used for writing
+using var transportReader = new StreamReader(transportStream, leaveOpen: true); 
+var line = await transportReader.ReadLineAsync(cancellationToken); // Automatic UTF-8 and new line handling
+transportStream.Dispose(); // Automatic closing handshake handling on `Dispose`
+```
+
+**2. Streaming binary protocol (e.g., AMQP)**
+
+```csharp
+Stream transportStream = WebSocketStream.Create(
+    connectedWebSocket,
+    WebSocketMessageType.Binary,
+    closeTimeout: TimeSpan.FromSeconds(10));
+await message.SerializeToStreamAsync(transportStream, cancellationToken);
+var receivePayload = new byte[payloadLength];
+await transportStream.ReadExactlyAsync(receivePayload, cancellationToken);
+transportStream.Dispose()
+// `Dispose` automatically handles closing handshake
+```
+
+**3. Reading a single message as a stream (e.g., JSON deserialization)**
+
+```csharp
+using Stream messageStream = WebSocketStream.CreateReadableMessageStream(connectedWebSocket, WebSocketMessageType.Text);
+// JsonSerializer.DeserializeAsync reads until the end of stream.
+var appMessage = await JsonSerializer.DeserializeAsync<AppMessage>(messageStream);
+```
+
+**4. Writing a single message as a stream (e.g., binary serialization)**
+
+```csharp
+public async Task SendMessageAsync(AppMessage message, CancellationToken cancellationToken)
+{
+    using Stream messageStream = WebSocketStream.CreateWritableMessageStream(_connectedWebSocket, WebSocketMessageType.Binary);
+    foreach (ReadOnlyMemory<byte> chunk in message.SplitToChunks())
+    {
+        await messageStream.WriteAsync(chunk, cancellationToken);
+    }
+} // EOM sent on messageStream.Dispose()
+```
+
+**WebSocketStream** enables high-level, familiar APIs for common WebSocket consumption and production patterns—reducing friction and making advanced scenarios easier to implement.
