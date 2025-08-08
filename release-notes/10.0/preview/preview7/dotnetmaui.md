@@ -162,6 +162,8 @@ This release includes Xcode 26 Beta 4 support for targeting .NET 9. We will incl
 </Project>
 ```
 
+> **Note** A current issues exists with `Shell` that prevents it from rendering on iOS 26. Other page types work.
+
 Also in this release are significant improvements to binding generation, runtime performance, and API coverage:
 
 - **New Binding Generator (RGen)**:
@@ -172,10 +174,8 @@ Also in this release are significant improvements to binding generation, runtime
   - Support for strong dictionary properties and weak delegate patterns
 
 - **Runtime and Interop Improvements**:
-  - Reworked `NSObject` data storage for better performance
+  - Reworked `NSObject` data storage to fix a crash
   - Enhanced P/Invoke handling and native library integration
-  - Improved delegate signature consistency with nullability annotations
-  - Better handling of Action-based delegates across frameworks
 
 - **API and Framework Updates**:
   - Fixed `CoreLocation` availability for macOS monitoring features
@@ -187,14 +187,12 @@ Also in this release are significant improvements to binding generation, runtime
 - **Build and Tooling Enhancements**:
   - Better xcframework processing with improved diagnostics
   - Enhanced resource duplication detection
-  - Improved MSBuild task assembly merging
   - Better xml documentation generation for interfaces and protocols
 
 - **Platform-Specific Fixes**:
   - Fixed `CVOpenGLESTexture` and `CVOpenGLESTextureCache` build integration
   - Resolved `AVFoundation` enum value locations
   - Enhanced `CoreImage` format convenience enum generation
-  - Improved introspection support for device testing
 
 A detailed list can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/) including a list of [Known issues](https://github.com/dotnet/macios/wiki/Known-issues-in-.NET10).
 
