@@ -5,8 +5,11 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Configure suppressing exception handler diagnostics](#configure-suppressing-exception-handler-diagnostics)
 - [Avoid cookie login redirects for known API endpoints](#avoid-cookie-login-redirects-for-known-api-endpoints)
 - [Passkey authentication improvements](#passkey-authentication-improvements)
-- [Support for the .localhost Top-Level Domain](#support-for-the-localhost-top-level-domain)
+- [Support for the .localhost top-level domain](#support-for-the-localhost-top-level-domain)
 - [JSON+PipeReader deserialization support](#jsonpipereader-deserialization-support)
+- [Enhanced validation for classes and records](#enhanced-validation-for-classes-and-records)
+- [Blazor component improvements](#blazor-component-improvements)
+- [Identity metrics](#identity-metrics)
 - [OpenAPI improvements](#openapi-improvements)
 
 ASP.NET Core updates in .NET 10:
@@ -85,7 +88,7 @@ dotnet new blazor -au Individual
 
 **For existing applications:** Please refer to the [official docs](https://learn.microsoft.com/aspnet/core/security/authentication/identity) for guidance on upgrading existing apps to utilize passkeys.
 
-## Support for the .localhost Top-Level Domain
+## Support for the .localhost top-level domain
 
 The `.localhost` top-level domain (TLD) is defined in [RFC2606](https://www.rfc-editor.org/rfc/rfc2606) and [RFC6761](https://www.rfc-editor.org/rfc/rfc6761) as being reserved for testing purposes and available for users to use locally as they would any other domain name. This means using a name like `myapp.localhost` locally that resolves to the IP loopback address is allowed and expected according to these RFCs. Additionally, modern evergreen browsers already automatically resolve any `*.localhost` name to the IP loopback address (`127.0.0.1`/`::1`), effectively making them an alias for any service already being hosted at `localhost` on the local machine.
 
@@ -163,17 +166,65 @@ public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSeria
 }
 ```
 
+## Enhanced validation for classes and records
+
+Users can now use validation attributes on both classes and records, with consistent code generation and validation behavior. This enhances flexibility when designing models using records in ASP.NET Core applications.
+
+**Community contribution: Thanks to [@marcominerva](https://github.com/marcominerva)**
+
+## Blazor component improvements
+
+### Resource preloader component renamed
+
+The Blazor component for rendering preloading links has been renamed from `LinkPreload` to `ResourcePreloader` based on API review feedback.
+
+### API review feedback implementation
+
+Blazor APIs have been updated to implement API review feedback, including:
+
+- Renamed JavaScript APIs: `Blazor.pause()` → `Blazor.pauseCircuit()` and `Blazor.resume()` → `Blazor.resumeCircuit()`
+- Renamed C# attribute: `SupplyParameterFromPersistentComponentStateAttribute` → `PersistentStateAttribute`
+- Updated related class names for consistency
+
+### Enhanced NotFound support
+
+Added support for `NotFound` in applications without Blazor's `Router`. Applications that implement their custom router can now use `NavigationManager.NotFound()`. The implementation also simplifies 404 handling with the default `Router` by making the `NotFound` fragment obsolete.
+
+### Diagnostic metrics and traces improvements
+
+Updated Blazor diagnostic metrics and traces to follow OpenTelemetry naming conventions:
+
+- Split `aspnetcore.components.render_diff` into separate duration and size metrics
+- Renamed navigation and event handler metrics for consistency with trace names
+- Updated trace names to follow OpenTelemetry standards
+
+### WebAssembly host builder improvements
+
+Enhanced the `WebAssemblyHostBuilder` with customizable service provider options. This improvement helps prevent circular dependency issues in Blazor WebAssembly apps by providing validation errors at build time instead of runtime hangs.
+
+```csharp
+// Simple configuration
+builder.UseDefaultServiceProvider(options => 
+{
+    options.ValidateOnBuild = true;
+});
+
+// Environment-aware configuration  
+builder.UseDefaultServiceProvider((env, options) =>
+{
+    options.ValidateOnBuild = env.IsDevelopment();
+});
+```
+
+## Identity metrics
+
+ASP.NET Core Identity now includes built-in metrics for better observability and monitoring of authentication and user management operations.
+
 ## OpenAPI improvements
 
 ### Upgrade Microsoft.OpenApi to 2.0.0
 
 The OpenAPI.NET library used in ASP.NET Core OpenAPI document generation has been upgraded to v2.0.0 (GA). With the update to the GA version of this package, no further breaking changes are expected in the OpenAPI document generation.
-
-### Enhance validation for classes and records
-
-Users can now use validation attributes on both classes and records, with consistent code generation and validation behavior. This enhances flexibility when designing models using records in ASP.NET Core applications.
-
-**Community contribution: Thanks to [@marcominerva](https://github.com/marcominerva)**
 
 ### Fix ProducesResponseType Description for Minimal APIs
 
@@ -196,19 +247,7 @@ XML documentation comments from referenced assemblies are now correctly merged i
 Thank you contributors! ❤️
 
 - [ascott18](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Aascott18)
-- [BrennanConroy](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3ABrennanConroy)
-- [captainsafia](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Acaptainsafia)
-- [Copilot](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3ACopilot)
-- [DamianEdwards](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3ADamianEdwards)
-- [halter73](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Ahalter73)
-- [ilonatommy](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Ailonatommy)
-- [JamesNK](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3AJamesNK)
-- [javiercn](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Ajaviercn)
 - [ladeak](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Aladeak)
-- [MackinnonBuck](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3AMackinnonBuck)
-- [maraf](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Amaraf)
 - [marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Amarcominerva)
 - [oroztocil](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Aoroztocil)
-- [pavelsavara](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Apavelsavara)
 - [sander1095](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Asander1095)
-- [wtgodbe](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-preview7+author%3Awtgodbe)
