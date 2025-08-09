@@ -52,7 +52,7 @@ API [endpoints](https://learn.microsoft.com/aspnet/core/fundamentals/routing) ar
 
 When `IApiEndpointMetadata` is present, the cookie authentication handler now returns appropriate HTTP status codes (401 for unauthenticated requests, 403 for forbidden requests) instead of redirecting.
 
-If you want to prevent this new behavior, and always redirect to the login and access denied URIs for unauthenticated or unauthorized requests regardless of the target endpoint, you can override the `RedirectToLogin` and `RedirectToAccessDenied` as follows:
+If you want to prevent this new behavior and always redirect to the login and access denied URIs for unauthenticated or unauthorized requests regardless of the target endpoint, you can override the `RedirectToLogin` and `RedirectToAccessDenied` events as follows:
 
 ```csharp
 builder.Services.AddAuthentication()
