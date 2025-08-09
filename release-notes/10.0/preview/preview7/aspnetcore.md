@@ -138,7 +138,7 @@ For the majority of applications this should have no impact on behavior. However
 
 The quick workaround (especially if you don't own the custom `JsonConverter` being used) is to set the `"Microsoft.AspNetCore.UseStreamBasedJsonParsing"` [AppContext](https://learn.microsoft.com/dotnet/api/system.appcontext?view=net-9.0) switch to `"true"`. This should be a temporary workaround and the `JsonConverter`(s) should be updated to support `HasValueSequence`.
 
-To fix `JsonConverter` implementations, there is the quick fix which allocates an array from the `ReadOnlySequence` and would look something like:
+To fix `JsonConverter` implementations, there is the quick fix which allocates an array from the `ReadOnlySequence`:
 
 ```csharp
 public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
