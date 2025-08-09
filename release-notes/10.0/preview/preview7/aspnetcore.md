@@ -43,7 +43,7 @@ By default, unauthenticated and unauthorized requests made to known API endpoint
 
 This change was [highly requested](https://github.com/dotnet/aspnetcore/issues/9039), because redirecting unauthenticated requests to a login page doesn't usually make sense for API endpoints which typically rely on 401 and 403 status codes rather than HTML redirects to communicate auth failures.
 
-Known API [Endpoints](https://learn.microsoft.com/aspnet/core/fundamentals/routing) are identified using the new `IApiEndpointMetadata` interface, and metadata implementing the new interface has been added automatically to the following:
+API [endpoints](https://learn.microsoft.com/aspnet/core/fundamentals/routing) are identified using the new `IApiEndpointMetadata` interface, and metadata implementing the new interface has been added automatically to the following:
 
 - `[ApiController]` endpoints
 - Minimal API endpoints that read JSON request bodies or write JSON responses
