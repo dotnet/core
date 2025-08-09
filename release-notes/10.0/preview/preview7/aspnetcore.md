@@ -185,7 +185,32 @@ The new Blazor state persistence APIs have been updated:
 
 ### Enhanced NotFound support
 
-Added support for `NotFound` in applications without Blazor's `Router`. Applications that implement their custom router can now use `NavigationManager.NotFound()`. The implementation also simplifies 404 handling with the default `Router` by making the `NotFound` fragment obsolete.
+Custom Blazor routers can now support `NavigationManager.NotFound()` by subscribing to the `NavigationManager.OnNotFound` event:
+
+```csharp
+private void OnNotFoundEvent(object sender, NotFoundEventArgs e)
+{
+     // Only execute the logic if HTTP response has started,
+    // because setting args' Path blocks re-execution
+    if (_httpContext?.Response.HasStarted == false)
+    {
+        return;
+    }
+
+    var type = typeof(CustomNotFoundPage);
+    var routeAttributes = type.GetCustomAttributes(typeof(RouteAttribute), inherit: true);
+    if (routeAttributes.Length == 0)
+    {
+        throw new InvalidOperationException($"The type {type.FullName} " +
+            $"does not have a {typeof(RouteAttribute).FullName} applied to it.");
+    }
+
+    var routeAttribute = (RouteAttribute)routeAttributes[0];
+    if (routeAttribute.Template != null)
+    {
+        e.Path = routeAttribute.Template;
+    }
+}
 
 ### Diagnostic metrics and traces improvements
 
