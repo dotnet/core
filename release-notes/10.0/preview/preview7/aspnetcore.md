@@ -39,9 +39,7 @@ For more information about this breaking change, see https://github.com/aspnet/A
 
 ## Avoid cookie login redirects for known API endpoints
 
-By default, unauthenticated and unauthorized requests made to known API endpoints protected by cookie authentication now result in 401 and 403 responses rather than redirecting to a login or access denied URI.
-
-This change was [highly requested](https://github.com/dotnet/aspnetcore/issues/9039), because redirecting unauthenticated requests to a login page doesn't usually make sense for API endpoints which typically rely on 401 and 403 status codes rather than HTML redirects to communicate auth failures.
+By default, unauthenticated and unauthorized requests made to known API endpoints protected by cookie authentication now result in 401 and 403 responses rather than redirecting to a login or access denied URI. Redirecting unauthenticated requests to a login page doesn't usually make sense for API endpoints which typically rely on 401 and 403 status codes rather than HTML redirects to communicate authentication and authorization failures.
 
 API [endpoints](https://learn.microsoft.com/aspnet/core/fundamentals/routing) are identified using the new `IApiEndpointMetadata` interface, and metadata implementing the new interface has been added automatically to the following:
 
