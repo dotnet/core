@@ -6,11 +6,10 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Avoid cookie login redirects for known API endpoints](#avoid-cookie-login-redirects-for-known-api-endpoints)
 - [Passkey authentication improvements](#passkey-authentication-improvements)
 - [Support for the .localhost top-level domain](#support-for-the-localhost-top-level-domain)
-- [JSON+PipeReader deserialization support](#jsonpipereader-deserialization-support)
+- [Use PipeReader support in System.Text.Json](#use-pipereader-support-in-systemtextjson)
 - [Enhanced validation for classes and records](#enhanced-validation-for-classes-and-records)
-- [Blazor component improvements](#blazor-component-improvements)
-- [Identity metrics](#identity-metrics)
-- [OpenAPI improvements](#openapi-improvements)
+- [Blazor improvements](#blazor-improvements)
+- [OpenAPI.NET dependency upgraded to stable release](#openapinet-dependency-upgraded-to-stable-release)
 
 ASP.NET Core updates in .NET 10:
 
@@ -76,6 +75,17 @@ For more information about this breaking change, see https://github.com/aspnet/A
 
 APIs for passkey authentication in ASP.NET Core Identity have been updated and simplified, and now resemble what we expect to ship in .NET 10 GA.
 
+### Passkey API changes from Preview 6
+
+The following API changes were made in Preview 7 to simplify passkey authentication:
+
+- `IdentityApiEndpointRouteBuilderExtensions.MapIdentityApi<TUser>()` now includes passkey endpoints by default
+- Simplified registration flow with improved error handling
+- Updated JavaScript interop APIs for better browser compatibility
+- Streamlined credential verification process
+
+These changes improve the developer experience when implementing passkey authentication and align the APIs with the expected final release in .NET 10 GA.
+
 ### Getting started with passkeys
 
 **For new applications:** The Blazor Web App project template now includes passkey functionality out of the box. Create a new Blazor app with passkey support using:
@@ -128,9 +138,9 @@ info: Microsoft.Hosting.Lifetime[0]
       Content root path: D:\src\local\10.0.1xx\MyApp
 ```
 
-## JSON+PipeReader deserialization support
+## Use PipeReader support in System.Text.Json
 
-MVC, Minimal APIs, and the `HttpRequestJsonExtensions.ReadFromJsonAsync` methods have all been updated to use the new Json+PipeReader support without requiring any code changes from applications.
+MVC, Minimal APIs, and the `HttpRequestJsonExtensions.ReadFromJsonAsync` methods have all been updated to use the new PipeReader support in System.Text.Json without requiring any code changes from applications.
 
 For the majority of applications this should have no impact on behavior. However, if the application is using a custom `JsonConverter`, there is a chance that the converter doesn't handle [Utf8JsonReader.HasValueSequence](https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonreader.hasvaluesequence) correctly. This can result in missing data and errors like `ArgumentOutOfRangeException` when deserializing.
 
@@ -168,13 +178,13 @@ public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSeria
 
 Users can now use validation attributes on both classes and records, with consistent code generation and validation behavior. This enhances flexibility when designing models using records in ASP.NET Core applications.
 
-**Community contribution: Thanks to [@marcominerva](https://github.com/marcominerva)**
+Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
-## Blazor component improvements
+## Blazor improvements
 
 ### Resource preloader component renamed
 
-The Blazor component for rendering preloading links has been renamed from `LinkPreload` to `ResourcePreloader` based on API review feedback.
+The Blazor component for rendering preloading links has been renamed from `LinkPreload` to `ResourcePreloader`.
 
 ### Updated API names for Blazor state persistence
 
@@ -183,7 +193,7 @@ The new Blazor state persistence APIs have been updated:
 - Renamed JavaScript APIs: `Blazor.pause()` → `Blazor.pauseCircuit()` and `Blazor.resume()` → `Blazor.resumeCircuit()`
 - Renamed C# attribute: `SupplyParameterFromPersistentComponentStateAttribute` → `PersistentStateAttribute`
 
-### Enhanced NotFound support
+### Support NotFound in custom Blazor routers
 
 Custom Blazor routers can now support `NavigationManager.NotFound()` by subscribing to the `NavigationManager.OnNotFound` event:
 
@@ -211,54 +221,51 @@ private void OnNotFoundEvent(object sender, NotFoundEventArgs e)
         e.Path = routeAttribute.Template;
     }
 }
+```
 
 ### Diagnostic metrics and traces improvements
 
 Updated Blazor diagnostic metrics and traces to follow OpenTelemetry naming conventions:
 
+| Old Name | New Name |
+|----------|----------|
+| `aspnetcore.components.render_diff` | `aspnetcore.components.render_diff.duration` and `aspnetcore.components.render_diff.size` |
+| `blazor.navigation` | `aspnetcore.components.navigation` |
+| `blazor.event_handler` | `aspnetcore.components.event_handler` |
+
+Additional improvements:
 - Split `aspnetcore.components.render_diff` into separate duration and size metrics
 - Renamed navigation and event handler metrics for consistency with trace names
 - Updated trace names to follow OpenTelemetry standards
 
-### WebAssembly host builder improvements
+### Validate configured services for Blazor WebAssembly apps on build
 
-Enhanced the `WebAssemblyHostBuilder` with customizable service provider options. This improvement helps prevent circular dependency issues in Blazor WebAssembly apps by providing validation errors at build time instead of runtime hangs.
+Previously, circular DI dependencies in Blazor WebAssembly apps would cause the browser to hang with no error message. Now developers get validation errors at build time instead of runtime hangs when running in development.
+
+To change the default service configuration validation behavior, use the new `UseDefaultServiceProvider` extension methods:
 
 ```csharp
-// Simple configuration
 builder.UseDefaultServiceProvider(options => 
 {
-    options.ValidateOnBuild = true;
-});
-
-// Environment-aware configuration  
-builder.UseDefaultServiceProvider((env, options) =>
-{
-    options.ValidateOnBuild = env.IsDevelopment();
+    options.ValidateOnBuild = false;
 });
 ```
 
-## Identity metrics
+## OpenAPI.NET dependency upgraded to stable release
 
-ASP.NET Core Identity now includes built-in metrics for better observability and monitoring of authentication and user management operations.
-
-## OpenAPI improvements
-
-### Upgrade Microsoft.OpenApi to 2.0.0
-
-The OpenAPI.NET library used in ASP.NET Core OpenAPI document generation has been upgraded to v2.0.0 (GA). With the update to the GA version of this package, no further breaking changes are expected in the OpenAPI document generation.
+The ASP.NET Core OpenAPI document generation support has been upgraded to use the 2.0.0 stable release of the OpenAPI.NET library. No further breaking changes are expected in the OpenAPI document generation for this release.
 
 ### Fix ProducesResponseType Description for Minimal APIs
 
 The Description property for the `ProducesResponseType` attribute is now correctly set in Minimal APIs even when the attribute type and the inferred return type are not an exact match.
 
-**Community contribution: Thanks to [@sander1095](https://github.com/sander1095)**
+Thank you [@sander1095](https://github.com/sander1095) for this contribution!
 
 ### Correct metadata type for formdata enum parameters
 
 The metadata type for formdata enum parameters in MVC controller actions has been updated to use the actual enum type instead of string.
 
-**Community contribution: Thanks to [@ascott18](https://github.com/ascott18)**
+Thank you [@ascott18](https://github.com/ascott18) for this contribution!
 
 ### Unify handling of documentation IDs in OpenAPI XML comment generator
 
