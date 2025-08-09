@@ -212,20 +212,16 @@ private void OnNotFoundEvent(object sender, NotFoundEventArgs e)
 }
 ```
 
-### Diagnostic metrics and traces improvements
+### Updated metric names
 
-Updated Blazor diagnostic metrics and traces to follow OpenTelemetry naming conventions:
+The Blazor diagnostic metrics have been updated to follow OpenTelemetry naming conventions:
 
-| Old Name | New Name |
+| Old | New |
 |----------|----------|
-| `aspnetcore.components.render_diff` | `aspnetcore.components.render_diff.duration` and `aspnetcore.components.render_diff.size` |
-| `blazor.navigation` | `aspnetcore.components.navigation` |
-| `blazor.event_handler` | `aspnetcore.components.event_handler` |
-
-Additional improvements:
-- Split `aspnetcore.components.render_diff` into separate duration and size metrics
-- Renamed navigation and event handler metrics for consistency with trace names
-- Updated trace names to follow OpenTelemetry standards
+| `aspnetcore.components.render_diff` | Split into `aspnetcore.components.render_diff.duration` and `aspnetcore.components.render_diff.size` |
+| `aspnetcore.components.navigation` | `aspnetcore.components.navigate` |
+| `aspnetcore.components.event_handler` | `aspnetcore.components.handle_event.duration` |
+| `aspnetcore.components.update_parameters` | `aspnetcore.components.update_parameters.duration`
 
 ### Validate configured services for Blazor WebAssembly apps on build
 
