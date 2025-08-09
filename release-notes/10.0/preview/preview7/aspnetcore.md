@@ -136,7 +136,7 @@ MVC, Minimal APIs, and the `HttpRequestJsonExtensions.ReadFromJsonAsync` methods
 
 For the majority of applications this should have no impact on behavior. However, if the application is using a custom `JsonConverter`, there is a chance that the converter doesn't handle [Utf8JsonReader.HasValueSequence](https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonreader.hasvaluesequence) correctly. This can result in missing data and errors like `ArgumentOutOfRangeException` when deserializing.
 
-The quick workaround (especially if you don't own the custom `JsonConverter` being used) is to set the `"Microsoft.AspNetCore.UseStreamBasedJsonParsing"` [AppContext](https://learn.microsoft.com/dotnet/api/system.appcontext?view=net-9.0) switch to `"true"`. This should be a temporary workaround and the `JsonConverter`(s) should be updated to support `HasValueSequence`.
+The quick workaround (especially if you don't own the custom `JsonConverter` being used) is to set the `"Microsoft.AspNetCore.UseStreamBasedJsonParsing"` [AppContext](https://learn.microsoft.com/dotnet/api/system.appcontext) switch to `true`. This should be a temporary workaround and the `JsonConverter`(s) should be updated to support `HasValueSequence`.
 
 To fix `JsonConverter` implementations, there is the quick fix which allocates an array from the `ReadOnlySequence`:
 
