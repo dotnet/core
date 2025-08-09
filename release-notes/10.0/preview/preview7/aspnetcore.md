@@ -176,7 +176,7 @@ Users can now use validation attributes on both classes and records, with consis
 
 The Blazor component for rendering preloading links has been renamed from `LinkPreload` to `ResourcePreloader` based on API review feedback.
 
-### API review feedback implementation
+### Updated API names for Blazor state persistence
 
 Blazor APIs have been updated to implement API review feedback, including:
 
