@@ -178,7 +178,7 @@ The Blazor component for rendering preloading links has been renamed from `LinkP
 
 ### Updated API names for Blazor state persistence
 
-Blazor APIs have been updated to implement API review feedback, including:
+The new Blazor state persistence APIs have been updated:
 
 - Renamed JavaScript APIs: `Blazor.pause()` → `Blazor.pauseCircuit()` and `Blazor.resume()` → `Blazor.resumeCircuit()`
 - Renamed C# attribute: `SupplyParameterFromPersistentComponentStateAttribute` → `PersistentStateAttribute`
