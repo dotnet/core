@@ -75,7 +75,7 @@ For more information about this breaking change, see https://github.com/aspnet/A
 
 APIs for passkey authentication in ASP.NET Core Identity have been updated and simplified, and now resemble what we expect to ship in .NET 10 GA.
 
-### Passkey API changes from Preview 6
+### Passkey API changes
 
 The following API changes were made in Preview 7 to simplify passkey authentication:
 
