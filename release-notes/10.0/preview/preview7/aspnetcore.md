@@ -73,18 +73,7 @@ For more information about this breaking change, see https://github.com/aspnet/A
 
 ## Passkey authentication improvements
 
-APIs for passkey authentication in ASP.NET Core Identity have been updated and simplified, and now resemble what we expect to ship in .NET 10 GA.
-
-### Passkey API changes
-
-The following API changes were made in Preview 7 to simplify passkey authentication:
-
-- `IdentityApiEndpointRouteBuilderExtensions.MapIdentityApi<TUser>()` now includes passkey endpoints by default
-- Simplified registration flow with improved error handling
-- Updated JavaScript interop APIs for better browser compatibility
-- Streamlined credential verification process
-
-These changes improve the developer experience when implementing passkey authentication and align the APIs with the expected final release in .NET 10 GA.
+APIs for passkey authentication in ASP.NET Core Identity have been updated and simplified. The Blazor Identity UI in the Blazor Web App project template has been updated accordingly.
 
 ### Getting started with passkeys
 
