@@ -1,0 +1,72 @@
+{
+  "name": "@oozcitak/dom",
+  "version": "1.15.10",
+  "keywords": [
+    "dom",
+    "whatwg"
+  ],
+  "homepage": "http://github.com/oozcitak/dom",
+  "description": "A modern DOM implementation",
+  "author": "Ozgur Ozcitak <oozcitak@gmail.com>",
+  "contributors": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oozcitak/dom.git"
+  },
+  "bugs": {
+    "url": "http://github.com/oozcitak/dom/issues"
+  },
+  "main": "./lib/index",
+  "engines": {
+    "node": ">=8.0"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "@oozcitak/infra": "1.0.8",
+    "@oozcitak/url": "1.0.4",
+    "@oozcitak/util": "8.3.8"
+  },
+  "devDependencies": {
+    "@types/benchmark": "*",
+    "@types/dedent": "*",
+    "@types/jest": "*",
+    "@types/jsdom": "*",
+    "@types/node": "*",
+    "@types/semver": "*",
+    "@types/xmldom": "*",
+    "benchmark": "*",
+    "chalk": "*",
+    "dedent": "*",
+    "fast-xml-parser": "*",
+    "glob": "*",
+    "jest": "*",
+    "jsdom": "*",
+    "semver": "*",
+    "ts-jest": "^26.3.0",
+    "ts-node": "*",
+    "typescript": "*",
+    "xmldom": "*"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "/test/.*\\.test\\.tsx?$",
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
+  },
+  "scripts": {
+    "compile": "rm -rf lib && tsc --version && tsc",
+    "test": "npm run compile && jest --coverage",
+    "perf": "npm run compile && ts-node ./perf/perf.ts",
+    "prof-create": "npm run compile && rm -f isolate-*-v8.log && node --prof ./perf/prof-create.js && find . -name isolate-*-v8.log -exec mv {} isolate-v8.log ; && node --prof-process isolate-v8.log > isolate-create.log && rm isolate-v8.log",
+    "prof-parse": "npm run compile && rm -f isolate-*-v8.log && node --prof ./perf/prof-parse.js && find . -name isolate-*-v8.log -exec mv {} isolate-v8.log ; && node --prof-process isolate-v8.log > isolate-parse.log && rm isolate-v8.log",
+    "prof-serialize": "npm run compile && rm -f isolate-*-v8.log && node --prof ./perf/prof-serialize.js && find . -name isolate-*-v8.log -exec mv {} isolate-v8.log ; && node --prof-process isolate-v8.log > isolate-serialize.log && rm isolate-v8.log",
+    "publish-public": "npm run test && npm publish --access public"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "name": "xmlbuilder2",
+  "version": "3.1.1",
+  "keywords": [
+    "xml",
+    "xmlbuilder"
+  ],
+  "homepage": "http://github.com/oozcitak/xmlbuilder2",
+  "description": "An XML builder for node.js",
+  "author": "Ozgur Ozcitak <oozcitak@gmail.com>",
+  "contributors": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oozcitak/xmlbuilder2.git"
+  },
+  "bugs": {
+    "url": "http://github.com/oozcitak/xmlbuilder2/issues"
+  },
+  "main": "./lib/index",
+  "browser": "./lib/xmlbuilder2.min.js",
+  "engines": {
+    "node": ">=12.0"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@oozcitak/dom": "1.15.10",
+    "@oozcitak/infra": "1.0.8",
+    "@oozcitak/util": "8.3.8",
+    "js-yaml": "3.14.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "*",
+    "@babel/runtime-corejs3": "7.10.3",
+    "@types/benchmark": "*",
+    "@types/dedent": "*",
+    "@types/jest": "*",
+    "@types/js-yaml": "3.11.1",
+    "@types/node": "*",
+    "babel-loader": "*",
+    "benchmark": "*",
+    "chalk": "*",
+    "core-js": "3.6.5",
+    "dedent": "*",
+    "es6-proxy-polyfill": "*",
+    "glob": "*",
+    "harmony-reflect": "*",
+    "jest": "*",
+    "libxmljs2": "*",
+    "ts-jest": "*",
+    "ts-loader": "*",
+    "ts-node": "*",
+    "typescript": "*",
+    "webpack": "*",
+    "webpack-cli": "*",
+    "xmlbuilder": "*",
+    "xpath": "*"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "/test/.*\\.test\\.tsx?$",
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
+  },
+  "scripts": {
+    "prepare": "tsc && webpack",
+    "pretest": "rm -rf ./lib && tsc --version && tsc && webpack",
+    "test": "jest --coverage",
+    "perf": "npm run pretest && ts-node ./perf/perf.ts",
+    "perf-cb": "npm run pretest && ts-node ./perf/perf-cb.ts",
+    "prof-serialize": "npm run pretest && rm -f isolate-*-v8.log && node --prof ./perf/prof-serialize.js && find . -name isolate-*-v8.log -exec mv {} isolate-v8.log ; && node --prof-process isolate-v8.log > isolate-serialize.log && rm isolate-v8.log",
+    "postpublish": "git push --all && git push --tags",
+    "servedocs": "(cd docs && bundle exec jekyll serve)"
+  }
+}

@@ -1,0 +1,102 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var util_1 = require("@oozcitak/util");
+// Import implementation classes
+var AbortControllerImpl_1 = require("./AbortControllerImpl");
+exports.AbortController = AbortControllerImpl_1.AbortControllerImpl;
+var AbortSignalImpl_1 = require("./AbortSignalImpl");
+exports.AbortSignal = AbortSignalImpl_1.AbortSignalImpl;
+var AbstractRangeImpl_1 = require("./AbstractRangeImpl");
+exports.AbstractRange = AbstractRangeImpl_1.AbstractRangeImpl;
+var AttrImpl_1 = require("./AttrImpl");
+exports.Attr = AttrImpl_1.AttrImpl;
+var CDATASectionImpl_1 = require("./CDATASectionImpl");
+exports.CDATASection = CDATASectionImpl_1.CDATASectionImpl;
+var CharacterDataImpl_1 = require("./CharacterDataImpl");
+exports.CharacterData = CharacterDataImpl_1.CharacterDataImpl;
+var ChildNodeImpl_1 = require("./ChildNodeImpl");
+var CommentImpl_1 = require("./CommentImpl");
+exports.Comment = CommentImpl_1.CommentImpl;
+var CustomEventImpl_1 = require("./CustomEventImpl");
+exports.CustomEvent = CustomEventImpl_1.CustomEventImpl;
+var DocumentFragmentImpl_1 = require("./DocumentFragmentImpl");
+exports.DocumentFragment = DocumentFragmentImpl_1.DocumentFragmentImpl;
+var DocumentImpl_1 = require("./DocumentImpl");
+exports.Document = DocumentImpl_1.DocumentImpl;
+var DocumentOrShadowRootImpl_1 = require("./DocumentOrShadowRootImpl");
+var DocumentTypeImpl_1 = require("./DocumentTypeImpl");
+exports.DocumentType = DocumentTypeImpl_1.DocumentTypeImpl;
+var DOMImpl_1 = require("./DOMImpl");
+exports.dom = DOMImpl_1.dom;
+var DOMImplementationImpl_1 = require("./DOMImplementationImpl");
+exports.DOMImplementation = DOMImplementationImpl_1.DOMImplementationImpl;
+var DOMTokenListImpl_1 = require("./DOMTokenListImpl");
+exports.DOMTokenList = DOMTokenListImpl_1.DOMTokenListImpl;
+var ElementImpl_1 = require("./ElementImpl");
+exports.Element = ElementImpl_1.ElementImpl;
+var EventImpl_1 = require("./EventImpl");
+exports.Event = EventImpl_1.EventImpl;
+var EventTargetImpl_1 = require("./EventTargetImpl");
+exports.EventTarget = EventTargetImpl_1.EventTargetImpl;
+var HTMLCollectionImpl_1 = require("./HTMLCollectionImpl");
+exports.HTMLCollection = HTMLCollectionImpl_1.HTMLCollectionImpl;
+var MutationObserverImpl_1 = require("./MutationObserverImpl");
+exports.MutationObserver = MutationObserverImpl_1.MutationObserverImpl;
+var MutationRecordImpl_1 = require("./MutationRecordImpl");
+exports.MutationRecord = MutationRecordImpl_1.MutationRecordImpl;
+var NamedNodeMapImpl_1 = require("./NamedNodeMapImpl");
+exports.NamedNodeMap = NamedNodeMapImpl_1.NamedNodeMapImpl;
+var NodeFilterImpl_1 = require("./NodeFilterImpl");
+exports.NodeFilter = NodeFilterImpl_1.NodeFilterImpl;
+var NodeImpl_1 = require("./NodeImpl");
+exports.Node = NodeImpl_1.NodeImpl;
+var NodeIteratorImpl_1 = require("./NodeIteratorImpl");
+exports.NodeIterator = NodeIteratorImpl_1.NodeIteratorImpl;
+var NodeListImpl_1 = require("./NodeListImpl");
+exports.NodeList = NodeListImpl_1.NodeListImpl;
+var NodeListStaticImpl_1 = require("./NodeListStaticImpl");
+exports.NodeListStatic = NodeListStaticImpl_1.NodeListStaticImpl;
+var NonDocumentTypeChildNodeImpl_1 = require("./NonDocumentTypeChildNodeImpl");
+var NonElementParentNodeImpl_1 = require("./NonElementParentNodeImpl");
+var ParentNodeImpl_1 = require("./ParentNodeImpl");
+var ProcessingInstructionImpl_1 = require("./ProcessingInstructionImpl");
+exports.ProcessingInstruction = ProcessingInstructionImpl_1.ProcessingInstructionImpl;
+var RangeImpl_1 = require("./RangeImpl");
+exports.Range = RangeImpl_1.RangeImpl;
+var ShadowRootImpl_1 = require("./ShadowRootImpl");
+exports.ShadowRoot = ShadowRootImpl_1.ShadowRootImpl;
+var SlotableImpl_1 = require("./SlotableImpl");
+var StaticRangeImpl_1 = require("./StaticRangeImpl");
+exports.StaticRange = StaticRangeImpl_1.StaticRangeImpl;
+var TextImpl_1 = require("./TextImpl");
+exports.Text = TextImpl_1.TextImpl;
+var TraverserImpl_1 = require("./TraverserImpl");
+exports.Traverser = TraverserImpl_1.TraverserImpl;
+var TreeWalkerImpl_1 = require("./TreeWalkerImpl");
+exports.TreeWalker = TreeWalkerImpl_1.TreeWalkerImpl;
+var WindowImpl_1 = require("./WindowImpl");
+exports.Window = WindowImpl_1.WindowImpl;
+var XMLDocumentImpl_1 = require("./XMLDocumentImpl");
+exports.XMLDocument = XMLDocumentImpl_1.XMLDocumentImpl;
+// Apply mixins
+// ChildNode
+util_1.applyMixin(ElementImpl_1.ElementImpl, ChildNodeImpl_1.ChildNodeImpl);
+util_1.applyMixin(CharacterDataImpl_1.CharacterDataImpl, ChildNodeImpl_1.ChildNodeImpl);
+util_1.applyMixin(DocumentTypeImpl_1.DocumentTypeImpl, ChildNodeImpl_1.ChildNodeImpl);
+// DocumentOrShadowRoot
+util_1.applyMixin(DocumentImpl_1.DocumentImpl, DocumentOrShadowRootImpl_1.DocumentOrShadowRootImpl);
+util_1.applyMixin(ShadowRootImpl_1.ShadowRootImpl, DocumentOrShadowRootImpl_1.DocumentOrShadowRootImpl);
+// NonDocumentTypeChildNode
+util_1.applyMixin(ElementImpl_1.ElementImpl, NonDocumentTypeChildNodeImpl_1.NonDocumentTypeChildNodeImpl);
+util_1.applyMixin(CharacterDataImpl_1.CharacterDataImpl, NonDocumentTypeChildNodeImpl_1.NonDocumentTypeChildNodeImpl);
+// NonElementParentNode
+util_1.applyMixin(DocumentImpl_1.DocumentImpl, NonElementParentNodeImpl_1.NonElementParentNodeImpl);
+util_1.applyMixin(DocumentFragmentImpl_1.DocumentFragmentImpl, NonElementParentNodeImpl_1.NonElementParentNodeImpl);
+// ParentNode
+util_1.applyMixin(DocumentImpl_1.DocumentImpl, ParentNodeImpl_1.ParentNodeImpl);
+util_1.applyMixin(DocumentFragmentImpl_1.DocumentFragmentImpl, ParentNodeImpl_1.ParentNodeImpl);
+util_1.applyMixin(ElementImpl_1.ElementImpl, ParentNodeImpl_1.ParentNodeImpl);
+// Slotable
+util_1.applyMixin(TextImpl_1.TextImpl, SlotableImpl_1.SlotableImpl);
+util_1.applyMixin(ElementImpl_1.ElementImpl, SlotableImpl_1.SlotableImpl);
+//# sourceMappingURL=index.js.map

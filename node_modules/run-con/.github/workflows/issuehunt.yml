@@ -1,0 +1,33 @@
+name: Auto message for Issues
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  actions: none
+  checks: none
+  contents: read
+  deployments: none
+  id-token: write
+  issues: write
+  discussions: none
+  packages: none
+  pages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: none
+
+jobs:
+  comment:
+    name: Hello new contributor
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Posts comment
+        env:
+          issue_num: ${{github.event.issue.number}}
+          comment_message: "Hey, thank you for opening this issue! 🙂 To boost priority on this issue and support open source please tip the team at https://issuehunt.io/r/${{github.repository}}/issues/${{github.event.issue.number }}"
+        run: gh issue comment $issue_num --body "$comment_message"

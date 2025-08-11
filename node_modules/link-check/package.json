@@ -1,0 +1,80 @@
+{
+  "name": "link-check",
+  "version": "5.4.0",
+  "description": "checks whether a hyperlink is alive (200 OK) or dead",
+  "main": "index.js",
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE.md",
+    "README.md",
+    "lib"
+  ],
+  "scripts": {
+    "pretest": "jshint index.js lib test",
+    "test": "mocha -R spec --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tcort/link-check.git"
+  },
+  "keywords": [
+    "link",
+    "check",
+    "checker",
+    "hyperlink",
+    "alive",
+    "dead",
+    "HTTP",
+    "head"
+  ],
+  "author": "Thomas Cort <linuxgeek@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tcort/link-check/issues"
+  },
+  "homepage": "https://github.com/tcort/link-check#readme",
+  "dependencies": {
+    "is-relative-url": "^4.0.0",
+    "ms": "^2.1.3",
+    "needle": "^3.3.1",
+    "node-email-verifier": "^2.0.0",
+    "proxy-agent": "^6.4.0"
+  },
+  "devDependencies": {
+    "debug": "^4.3.7",
+    "expect.js": "^0.3.1",
+    "express": "^4.21.1",
+    "jshint": "^2.13.6",
+    "mocha": "^10.8.2"
+  },
+  "jshintConfig": {
+    "esversion": 11,
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "globalstrict": true,
+    "immed": true,
+    "indent": 4,
+    "moz": true,
+    "newcap": true,
+    "noarg": true,
+    "node": true,
+    "noempty": true,
+    "nonew": true,
+    "trailing": true,
+    "undef": true,
+    "smarttabs": true,
+    "strict": true,
+    "validthis": true,
+    "globals": {
+      "describe": false,
+      "it": false,
+      "before": false,
+      "beforeEach": false,
+      "after": false,
+      "afterEach": false
+    }
+  }
+}

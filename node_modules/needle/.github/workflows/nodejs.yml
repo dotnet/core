@@ -1,0 +1,28 @@
+name: Node CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [4.x, 6.x, 8.x, 10.x, 12.x, 14.x, 16.x, 17.x, 18.x]
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and test
+      run: |
+        npm install
+        mkdir -p test/keys
+        openssl genrsa -out test/keys/ssl.key 2048
+        openssl req -new -key test/keys/ssl.key -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" -x509 -days 999 -out test/keys/ssl.cert
+        npm run build --if-present
+        npm test
+      env:
+        CI: true

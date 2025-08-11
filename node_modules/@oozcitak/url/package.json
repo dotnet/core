@@ -1,0 +1,55 @@
+{
+  "name": "@oozcitak/url",
+  "version": "1.0.4",
+  "keywords": [
+    "url",
+    "whatwg"
+  ],
+  "homepage": "http://github.com/oozcitak/url",
+  "description": "An implementation of the URL Living Standard",
+  "author": "Ozgur Ozcitak <oozcitak@gmail.com>",
+  "contributors": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oozcitak/url.git"
+  },
+  "bugs": {
+    "url": "http://github.com/oozcitak/url/issues"
+  },
+  "main": "./lib/index",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=8.0"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "@oozcitak/util": "8.3.8",
+    "@oozcitak/infra": "1.0.8"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "jest": "*",
+    "ts-jest": "*",
+    "coveralls": "*",
+    "@types/node": "*",
+    "@types/jest": "*"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "/test/.*\\.test\\.tsx?$",
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
+  },
+  "scripts": {
+    "compile": "rm -rf ./lib && tsc --version && tsc",
+    "test": "npm run compile && jest --coverage",
+    "publish-public": "npm run test && npm publish --access public"
+  }
+}

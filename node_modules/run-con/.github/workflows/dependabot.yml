@@ -1,0 +1,44 @@
+name: CreateDependabotIssue
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  actions: none
+  checks: none
+  contents: read
+  deployments: none
+  id-token: write
+  issues: write
+  discussions: none
+  packages: none
+  pages: none
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: none
+
+jobs:
+  issue:
+      runs-on: ubuntu-latest
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      steps:
+        - name: Checks if Dependabot PR
+          if: ${{github.event_name != 'pull_request'}}
+          run: echo "no dependabot"
+        - uses: actions/checkout@v3
+          if: ${{github.event.pull_request.user.login  == 'dependabot[bot]' || github.event.pull_request.user.login  == 'app/dependabot'}}
+          
+        - name: Open issue if Dependabot PR
+          if: ${{github.event.pull_request.user.login  == 'dependabot[bot]' || github.event.pull_request.user.login  == 'app/dependabot'}}
+          env:
+            pr_title: ${{github.event.pull_request.title}}
+            pr_number: ${{github.event.pull_request.number}}
+            pr_url: ${{github.event.pull_request.url}}
+          run: |
+            title="Dependabot PR $pr_title opened"
+            body="Dependabot has opened PR #$pr_number
+            Link: $pr_url"
+            gh issue create --title "$title" --body "$body"  
