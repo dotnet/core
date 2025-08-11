@@ -83,8 +83,6 @@ APIs for passkey authentication in ASP.NET Core Identity have been updated and s
 dotnet new blazor -au Individual
 ```
 
-**For existing applications:** Please refer to the [official docs](https://learn.microsoft.com/aspnet/core/security/authentication/identity) for guidance on upgrading existing apps to utilize passkeys.
-
 ## Support for the .localhost top-level domain
 
 The `.localhost` top-level domain (TLD) is defined in [RFC2606](https://www.rfc-editor.org/rfc/rfc2606) and [RFC6761](https://www.rfc-editor.org/rfc/rfc6761) as being reserved for testing purposes and available for users to use locally as they would any other domain name. This means using a name like `myapp.localhost` locally that resolves to the IP loopback address is allowed and expected according to these RFCs. Additionally, modern evergreen browsers already automatically resolve any `*.localhost` name to the IP loopback address (`127.0.0.1`/`::1`), effectively making them an alias for any service already being hosted at `localhost` on the local machine.
