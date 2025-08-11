@@ -1,15 +1,20 @@
-# WPF in .NET 10 Preview 7 - Release Notes
+# WPF in .NET 10 Preview 6 - Release Notes
 
 Here's a summary of what's new in WPF in this preview release:
 
-- [Feature](#feature)
+- [Bug Fixes](#bug-fixes)
+- [Fluent Theme Improvements](#fluent-theme-improvements)
 
 WPF updates in .NET 10:
 
-- [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/) documentation
+- [What's new in WPF in .NET 10](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100) documentation.
 
-## Feature
+## Bug Fixes
 
-Something about the feature
+- Avoided `UCEERR_RENDERTHREADFAILURE` in applications using ***D3DImage**, when the monitor is unavailable.
 
-Something about the feature
+## Fluent Theme Improvements
+
+- Fixed some accessibility issues in Fluent control styles (DatePicker, DataGrid).
+- Unified text control Fluent style resources
+- Fixed localization resources for ScrollBar.
