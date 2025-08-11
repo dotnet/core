@@ -22,7 +22,6 @@ The following images have been added to the `dotnet/sdk` repo:
 - `10.0-noble-preview-aot` (Also tagged as `10.0-preview-aot`)
 - `10.0-preview-alpine-aot`
 - `10.0-preview-azurelinux3.0-aot`
-- `10.0-preview-trixie-aot`
 
 For more information, see:
 
