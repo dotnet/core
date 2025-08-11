@@ -367,3 +367,7 @@ Notes
 
 - Applies to SslStream and APIs built on it (e.g., HttpClient/HttpMessageHandler).
 - Cipher suites are controlled by macOS via Network.framework.
+- Underlying stream behavior may differ when Network.framework is enabled (e.g., buffering, read/write completion, cancellation semantics).
+- Zero-byte reads: semantics may differ. Avoid relying on zero-length reads for detecting data availability.
+- Internationalized domain names (IDN): certain IDN hostnames may be rejected by Network.framework. Prefer ASCII/Punycode (A-label) hostnames or validate names against macOS/Network.framework constraints.
+- If your app relies on specific SslStream edge-case behavior, validate it under Network.framework.
