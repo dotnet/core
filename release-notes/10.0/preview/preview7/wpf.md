@@ -1,4 +1,4 @@
-# WPF in .NET 10 Preview 6 - Release Notes
+# WPF in .NET 10 Preview 7 - Release Notes
 
 Here's a summary of what's new in WPF in this preview release:
 
