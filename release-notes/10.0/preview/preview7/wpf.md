@@ -15,6 +15,6 @@ WPF updates in .NET 10:
 
 ## Fluent Theme Improvements
 
-- Fixed some accessibility issues in Fluent control styles (DatePicker, DataGrid).
+- Fixed some accessibility issues in Fluent control styles (`DatePicker`, `DataGrid`).
 - Unified text control Fluent style resources.
-- Fixed localization resources for ScrollBar.
+- Fixed localization resources for `ScrollBar`.
