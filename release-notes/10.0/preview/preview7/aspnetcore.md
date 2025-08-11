@@ -75,6 +75,55 @@ For more information about this breaking change, see https://github.com/aspnet/A
 
 APIs for passkey authentication in ASP.NET Core Identity have been updated and simplified. The Blazor Identity UI in the Blazor Web App project template has been updated accordingly.
 
+Passkey options are now configured globally via `IdentityPasskeyOptions`. Here's an example of how passkey options can be configured:
+
+```csharp
+builder.Services.Configure<IdentityPasskeyOptions>(options =>
+{
+    // Explicitly set the Relying Party ID (domain)
+    options.ServerDomain = "example.com";
+    
+    // Configure authenticator timeout
+    options.AuthenticatorTimeout = TimeSpan.FromMinutes(3);
+    
+    // Configure challenge size
+    options.ChallengeSize = 64;
+});
+```
+
+The `SignInManager` passkey APIs have also been simplified. Passkey creation and request options can now be created as shown below:
+
+```csharp
+// Makes passkey options for use with the JS `navigator.credentials.create()` API:
+var optionsJson = await signInManager.MakePasskeyCreationOptionsAsync(new()
+{
+    Id = userId,
+    Name = userName,
+    DisplayName = displayName,
+});
+
+// Makes passkey options for use with the JS `navigator.credentials.get()` API:
+var optionsJson = await signInManager.MakePasskeyRequestOptionsAsync(user);
+```
+
+Below is an example of how a new passkey can be validated and added to a user:
+
+```csharp
+// 'credentialJson' is the JSON-serialized result from `navigator.credentials.create()`.
+var attestationResult = await SignInManager.PerformPasskeyAttestationAsync();
+if (attestationResult.Succeeded)
+{
+    var addPasskeyResult = await UserManager.AddOrUpdatePasskeyAsync(user, attestationResult.Passkey);
+    // ...
+}
+else { /* ... */ }
+```
+
+To sign in with a passkey, use `SignInManager.PasskeySignInAsync()`:
+```csharp
+// 'credentialJson' is the JSON-serialized result from `navigator.credentials.get()`.
+var result = await signInManager.PasskeySignInAsync(credentialJson);
+```
 ### Getting started with passkeys
 
 **For new applications:** The Blazor Web App project template now includes passkey functionality out of the box. Create a new Blazor app with passkey support using:
