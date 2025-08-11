@@ -8,8 +8,9 @@ Here's a summary of what's new in .NET Libraries in this preview release:
     - [ML-DSA](#ml-dsa)
     - [Composite ML-DSA](#composite-ml-dsa)
 - [PipeReader support for JSON serializer](#pipereader-support-for-json-serializer)
--Networking
-    - [WebSocketStreaam](#web-socket-stream)
+- Networking
+    - [WebSocketStream](#websocketstream)
+    - [TLS 1.3 for macOS (client)](#tls-13-for-macos-client)
 
 .NET Libraries updates in .NET 10:
 
@@ -330,3 +331,39 @@ public async Task SendMessageAsync(AppMessage message, CancellationToken cancell
 ```
 
 **WebSocketStream** enables high-level, familiar APIs for common WebSocket consumption and production patterns—reducing friction and making advanced scenarios easier to implement.
+
+### TLS 1.3 for macOS (client)
+
+This release adds client-side TLS 1.3 support on macOS by integrating Apple’s Network.framework into SslStream and HttpClient. Historically, macOS used Secure Transport which doesn’t support TLS 1.3; opting into Network.framework enables TLS 1.3.
+
+Scope and behavior
+
+- macOS only, client-side in this release.
+- Opt-in. Existing apps continue to use the current stack unless enabled.
+- When enabled, older TLS versions (TLS 1.0 and 1.1) may no longer be available via Network.framework.
+
+How to enable
+
+- AppContext switch in code:
+
+```csharp
+// Opt in to Network.framework-backed TLS on Apple platforms
+AppContext.SetSwitch("System.Net.Security.UseNetworkFramework", true);
+
+using var client = new HttpClient();
+var html = await client.GetStringAsync("https://example.com");
+```
+
+- Or environment variable:
+
+```bash
+# Opt-in via environment variable (set for the process or machine as appropriate)
+DOTNET_SYSTEM_NET_SECURITY_USENETWORKFRAMEWORK=1
+# or
+DOTNET_SYSTEM_NET_SECURITY_USENETWORKFRAMEWORK=true
+```
+
+Notes
+
+- Applies to SslStream and APIs built on it (e.g., HttpClient/HttpMessageHandler).
+- Cipher suites are controlled by macOS via Network.framework.
