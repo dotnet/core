@@ -1,6 +1,6 @@
 # .NET 10 Preview 7 - Release Notes
 
-.NET 10 Preview 7 released on September 15, 2025. Find more information on new features released in .NET 10 Preview 7 by browsing through the release notes below:
+.NET 10 Preview 7 released on August 12, 2025. Find more information on new features released in .NET 10 Preview 7 by browsing through the release notes below:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
