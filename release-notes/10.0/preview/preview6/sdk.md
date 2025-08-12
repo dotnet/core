@@ -93,7 +93,7 @@ dotnet clean --cli-schema
 
 Outputs:
 
-```json
+```jsonc
 {
   "name": "clean",
   "version": "10.0.100-dev",
