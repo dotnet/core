@@ -11,5 +11,4 @@ F# updates in .NET 10:
 ## Feature
 
 Something about the feature
-
-Something about the feature
+This preview release does not contain new F# features. View the [What's new in F#](https://fsharp.github.io/fsharp-compiler-docs/release-notes/Language.html) documentation to learn more.
