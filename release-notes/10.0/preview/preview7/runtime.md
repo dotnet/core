@@ -11,3 +11,6 @@ Here's a summary of what's new in the .NET Runtime in this preview release:
 ## Feature
 
 Something about the feature
+# Runtime updates in .NET 10 Preview 7 - Release Notes
+
+This preview release does not contain new runtime features.
