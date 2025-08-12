@@ -3,7 +3,7 @@
 Here's a summary of what's new in C# in this preview release:
 
 - [Extension operators](#extension-operators)
-- [Named and optional arguments in expression trees](#named-and-optiona)
+- [Named and optional arguments in expression trees](#named-and-optional-parameters-in-expression-trees)
 
 Preview 7 represents feature complete for C# 14. Any features available only in later previews will be gated behind feature flags. That enables a longer feedback cycle for any additional features.
 
