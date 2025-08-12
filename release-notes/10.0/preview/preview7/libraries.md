@@ -305,7 +305,7 @@ Stream transportStream = WebSocketStream.Create(
 await message.SerializeToStreamAsync(transportStream, cancellationToken);
 var receivePayload = new byte[payloadLength];
 await transportStream.ReadExactlyAsync(receivePayload, cancellationToken);
-transportStream.Dispose()
+transportStream.Dispose();
 // `Dispose` automatically handles closing handshake
 ```
 
