@@ -104,7 +104,7 @@ secret form.
 
 .NET now supports the AES-KWP algorithm via instance methods on the `System.Security.Cryptography.Aes` class:
 
-```C#
+```csharp
 private static byte[] DecryptContent(ReadOnlySpan<byte> kek, ReadOnlySpan<byte> encryptedKey, ReadOnlySpan<byte> ciphertext)
 {
     using (Aes aes = Aes.Create())
