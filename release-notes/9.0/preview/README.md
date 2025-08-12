@@ -1,6 +1,6 @@
 # .NET 9 preview release notes
 
-.NET 9 preview releases were released between February and October, 2025. The first [stable release](../README.md) was published in November. Release notes included detailed information and API diffs for new features.
+.NET 9 preview releases were released between February and October, 2024. The first [stable release](../README.md) was published in November. Release notes included detailed information and API diffs for new features.
 
 ## Release notes
 

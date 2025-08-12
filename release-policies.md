@@ -19,8 +19,6 @@ Each .NET release is defined as either **Standard Term Support (STS)** or **Long
 * **STS** releases are supported for eighteen months, released in even-numbered years. They are intended for users that want to take advantage of the newest features and improvements and to stay on the leading edge of .NET innovation.
 * **LTS** releases are supported for three years, released in odd-numbered years. They are intended for users that want the stability and lower cost of maintaining an application for an extended period, only needing to upgrade their .NET version for security patches.
 
-Note: **Standard Term Support** releases were previously called **Current**.
-
 LTS and STS releases differ only by support duration. The .NET team follows the same software engineering and release processes for both release types, including for security, compatibility, and reliability. Both releases may contain major new features and breaking changes. The .NET team aspires to enable straightforward migration from one release to another, for both release types.
 
 ## Support phases

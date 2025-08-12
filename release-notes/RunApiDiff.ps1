@@ -10,64 +10,95 @@
 # -CurrentPreviewOrRC           : An optional word that indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
 # -CurrentPreviewNumberVersion  : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...).
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo.
-# -ArcadeRepo                   : The full path to your local clone of the dotnet/arcade repo.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
+# -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
+# -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
+# -UseDefaultNuGetFeed          : By default, the feed used is https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json , but if this is set to true, the feed used is https://api.nuget.org/v3/index.json
+# -ExcludeNetCore               : Optional boolean to exclude the NETCore comparison. Default is false.
+# -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
+# -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
+# -InstallApiDiff               : Optional boolean to install or update the ApiDiff tool. Default is false.
 
 # Example:
-# .\RunApiDiff.ps1 -PreviousDotNetVersion 8.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 2 -CurrentDotNetVersion 8.0 -CurrentPreviewOrRC preview -CurrentPreviewNumberVersion 3 -CoreRepo D:\core -ArcadeRepo D:\arcade -TmpFolder D:\tmp
+# .\RunApiDiff.ps1 -PreviousDotNetVersion 9.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentPreviewOrRC rc -CurrentPreviewNumberVersion 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
 
 Param (
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [ValidatePattern("\d+\.\d")]
     [string]
     $PreviousDotNetVersion # 7.0, 8.0, 9.0, ...
-,
-    [Parameter(Mandatory=$true)]
+    ,
+    [Parameter(Mandatory = $true)]
     [string]
     [ValidateSet("preview", "rc", "ga")]
     $PreviousPreviewOrRC
-,
-    [Parameter(Mandatory=$true)]
+    ,
+    [Parameter(Mandatory = $true)]
     [ValidatePattern("(\d+)?")]
     [string]
     $PreviousPreviewNumberVersion # 0, 1, 2, 3, ...
-,
-    [Parameter(Mandatory=$true)]
+    ,
+    [Parameter(Mandatory = $true)]
     [ValidatePattern("\d+\.\d")]
     [string]
     $CurrentDotNetVersion # 7.0, 8.0, 9.0, ...
-,
-    [Parameter(Mandatory=$true)]
+    ,
+    [Parameter(Mandatory = $true)]
     [string]
     [ValidateSet("preview", "rc", "ga")]
     $CurrentPreviewOrRC
-,
-    [Parameter(Mandatory=$true)]
+    ,
+    [Parameter(Mandatory = $true)]
     [ValidatePattern("(\d+)?")]
     [string]
     $CurrentPreviewNumberVersion # 0, 1, 2, 3, ...
-,
-    [Parameter(Mandatory=$true)]
+    ,
+    [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string]
     $CoreRepo #"D:\\core"
-,
-    [Parameter(Mandatory=$true)]
-    [ValidateNotNullOrEmpty()]
-    [string]
-    $ArcadeRepo #"D:\\arcade"
-,
-    [Parameter(Mandatory=$true)]
+    ,
+    [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string]
     $TmpFolder #"D:\tmp"
+    ,
+    [Parameter(Mandatory = $false)]
+    [ValidateNotNullOrEmpty()]
+    [string]
+    $AttributesToExcludeFilePath = "ApiDiffAttributesToExclude.txt"
+    ,
+    [Parameter(Mandatory = $false)]
+    [ValidateNotNullOrEmpty()]
+    [string]
+    $AssembliesToExcludeFilePath = "ApiDiffAssembliesToExclude.txt"
+    ,
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $UseDefaultNuGetFeed = $false
+    ,
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $ExcludeNetCore = $false
+    ,
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $ExcludeAspNetCore = $false
+    ,
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $ExcludeWindowsDesktop = $false
+    ,
+    [Parameter(Mandatory = $false)]
+    [bool]
+    $InstallApiDiff = $false
 )
 
+#######################
+### Start Functions ###
+#######################
 
-### Functions ###
-
-Function Write-Color
-{
+Function Write-Color {
     Param (
         [ValidateNotNullOrEmpty()]
         [string] $newColor
@@ -76,53 +107,46 @@ Function Write-Color
     $oldColor = $host.UI.RawUI.ForegroundColor
     $host.UI.RawUI.ForegroundColor = $newColor
 
-    If ($args)
-    {
+    If ($args) {
         Write-Output $args
     }
-    Else
-    {
+    Else {
         $input | Write-Output
     }
 
     $host.UI.RawUI.ForegroundColor = $oldColor
 }
 
-Function VerifyPathOrExit
-{
+Function VerifyPathOrExit {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $path
     )
 
-    If (-Not (Test-Path -Path $path))
-    {
+    If (-Not (Test-Path -Path $path)) {
         Write-Error "The path '$path' does not exist." -ErrorAction Stop
     }
 }
 
-Function RemoveFolderIfExists
-{
+Function RemoveFolderIfExists {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $path
     )
 
-    If (Test-Path -Path $path)
-    {
+    If (Test-Path -Path $path) {
         Write-Color yellow "Removing existing folder: $path"
         Remove-Item -Recurse -Path $path
     }
 }
 
-Function RecreateFolder
-{
+Function RecreateFolder {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $path
@@ -134,10 +158,9 @@ Function RecreateFolder
     New-Item -ItemType Directory -Path $path
 }
 
-Function VerifyCountDlls
-{
+Function VerifyCountDlls {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $path
@@ -145,17 +168,15 @@ Function VerifyCountDlls
 
     VerifyPathOrExit $path
 
-    $count=(Get-ChildItem -Path $path -Filter "*.dll" | Measure-Object).Count
-    If ($count -eq 0)
-    {
+    $count = (Get-ChildItem -Path $path -Filter "*.dll" | Measure-Object).Count
+    If ($count -eq 0) {
         Write-Error "There are no DLL files inside the folder." -ErrorAction Stop
     }
 }
 
-Function RunCommand
-{
+Function RunCommand {
     Param (
-        [Parameter(Mandatory=$True)]
+        [Parameter(Mandatory = $True)]
         [ValidateNotNullOrEmpty()]
         [string]
         $command
@@ -165,38 +186,34 @@ Function RunCommand
     Invoke-Expression "$command"
 }
 
-Function GetDotNetFullName
-{
+Function GetDotNetFullName {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [bool]
         $IsComparingReleases
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("\d+\.\d")]
         [string]
         $dotNetVersion # 7.0, 8.0, 9.0, ...
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [string]
         [ValidateSet("preview", "rc", "ga")]
         $previewOrRC
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("(\d+)?")]
         [string]
         $previewNumberVersion # 0, 1, 2, 3, ...
     )
 
-    If ($IsComparingReleases)
-    {
+    If ($IsComparingReleases) {
         Return "$dotNetVersion.$previewNumberVersion"
     }
 
-    If ($previewOrRC -eq "ga")
-    {
-        If ($previewNumberVersion -eq "0")
-        {
+    If ($previewOrRC -eq "ga") {
+        If ($previewNumberVersion -eq "0") {
             # Example: Don't return "7.0-ga0", instead just return "7.0-ga"
             Return "$dotNetVersion-$previewOrRC"
         }
@@ -209,39 +226,34 @@ Function GetDotNetFullName
     Return "$dotNetVersion-$previewOrRC$previewNumberVersion"
 }
 
-Function GetDotNetFriendlyName
-{
+Function GetDotNetFriendlyName {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("\d+\.\d")]
         [string]
         $DotNetVersion # 7.0, 8.0, 9.0, ...
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [string]
         [ValidateSet("preview", "rc", "ga")]
         $PreviewOrRC
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("(\d+)?")]
         [string]
         $PreviewNumberVersion # 0, 1, 2, 3, ...
     )
 
     $friendlyPreview = ""
-    If ($PreviewOrRC -eq "preview")
-    {
+    If ($PreviewOrRC -eq "preview") {
         $friendlyPreview = "Preview"
     }
-    ElseIf ($PreviewOrRC -eq "rc")
-    {
+    ElseIf ($PreviewOrRC -eq "rc") {
         $friendlyPreview = "RC"
     }
-    ElseIf ($PreviewOrRC -eq "ga")
-    {
+    ElseIf ($PreviewOrRC -eq "ga") {
         $friendlyPreview = "GA"
-        If ($PreviewNumberVersion -eq 0)
-        {
+        If ($PreviewNumberVersion -eq 0) {
             # Example: Don't return "7.0 GA 0", instead just return "7.0 GA"
             Return ".NET $DotNetVersion $friendlyPreview"
         }
@@ -254,29 +266,26 @@ Function GetDotNetFriendlyName
     Return ".NET $DotNetVersion $friendlyPreview $PreviewNumberVersion"
 }
 
-Function GetPreviewOrRCFolderName
-{
+Function GetPreviewOrRCFolderName {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("\d+\.\d")]
         [string]
         $dotNetVersion # 7.0, 8.0, 9.0, ...
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [string]
         [ValidateSet("preview", "rc", "ga")]
         $previewOrRC
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("(\d+)?")]
         [string]
         $previewNumberVersion # 0, 1, 2, 3, ...
     )
 
-    If ($previewOrRC -eq "ga")
-    {
-        If ($previewNumberVersion -eq "0")
-        {
+    If ($previewOrRC -eq "ga") {
+        If ($previewNumberVersion -eq "0") {
             # return "ga", not "ga0"
             Return $previewOrRC
         }
@@ -288,30 +297,29 @@ Function GetPreviewOrRCFolderName
     Return "$previewOrRC$previewNumberVersion"
 }
 
-Function GetPreviewFolderPath
-{
+Function GetPreviewFolderPath {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $rootFolder #"D:\\core"
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("\d+\.\d")]
         [string]
         $dotNetVersion # 7.0, 8.0, 9.0, ...
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [string]
         [ValidateSet("preview", "rc", "ga")]
         $previewOrRC
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("(\d+)?")]
         [string]
         $previewNumberVersion # 0, 1, 2, 3, ...
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [bool]
         $IsComparingReleases # True when comparing 8.0 GA with 9.0 GA
     )
@@ -319,8 +327,7 @@ Function GetPreviewFolderPath
     $prefixFolder = [IO.Path]::Combine($rootFolder, "release-notes", $dotNetVersion)
     $apiDiffFolderName = "api-diff"
 
-    If ($IsComparingReleases)
-    {
+    If ($IsComparingReleases) {
         Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
     }
 
@@ -328,113 +335,96 @@ Function GetPreviewFolderPath
     Return [IO.Path]::Combine($prefixFolder, "preview", $previewOrRCFolderName, $apiDiffFolderName)
 }
 
-Function RunAsmDiff
-{
+Function RunApiDiff {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $asmDiffExe
-    ,
-        [Parameter(Mandatory=$true)]
+        $apiDiffExe
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $tableOfContentsFilePath
-    ,
-        [Parameter(Mandatory=$true)]
+        $outputFolder
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $beforeFolder
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $afterFolder
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $tableOfContentsFileNamePrefix
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $assembliesToExclude
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $attributesToExclude
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $beforeFriendlyName
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $afterFriendlyName
+        ,
+        [Parameter(Mandatory = $false)]
+        [string]
+        $beforeReferenceFolder = ""
+        ,
+        [Parameter(Mandatory = $false)]
+        [string]
+        $afterReferenceFolder = ""
     )
 
-    VerifyPathOrExit $asmDiffExe
+    VerifyPathOrExit $apiDiffExe
     VerifyPathOrExit $beforeFolder
     VerifyPathOrExit $afterFolder
 
-    If (Test-Path -Path $tableOfContentsFilePath)
-    {
-        Write-Color yellow "Deleting existing table of contents file..."
-        Remove-Item -Path $tableOfContentsFilePath
-    }
-    # Arguments currently used:
-    # -r: Include members, types, and namespaces that were removed.
-    # -a: Include members, types and namespaces that were added.
-    # -c: Included members, types and namespaces that were changed.
-    # -itc: Include table of contents.
-    # -cfn: Create files per namespace.
-    # -adm: Forces showing all members of a type that was added or removed.
-    # -hbm: Highlight members that are interface implementations or overrides of a base member.
-    # -da: Enables diffing of the attributes as well.
-    # -w markdown: Type of diff writer to use.
-    # -o <path>: Output file path.
-    # -os <path>: Path to the old assembly set (baseline).
-    # -ns <path>: Path to the new assembly set.
-
-    # All arguments:
-    # https://github.com/dotnet/arcade/blob/main/src/Microsoft.DotNet.AsmDiff/Program.cs
-
-    RunCommand "$asmDiffExe -r -a -c -itc -cfn -adm -hbm -da -w markdown -o $tableOfContentsFilePath -os $beforeFolder -ns $afterFolder"
-}
-
-Function ReplaceTitle
-{
-    Param (
-        [Parameter(Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $tableOfContentsFilePath
-    ,
-        [Parameter(Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $previousFullName
-    ,
-        [Parameter(Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $currentFullName
-    )
-
-    VerifyPathOrExit $tableOfContentsFilePath
-
-    $correctTitle="# API Difference ${previousFullName} vs ${currentFullName}"
-
-    Write-Color cyan "Replacing title of table of contents with correct one: $tableOfContentsFilePath"
-    $updatedTableOfContents = .{
-        $correctTitle
-        Get-Content $tableOfContentsFilePath | Select-Object -Skip 1
+    $referenceParams = ""
+    if (-not [string]::IsNullOrEmpty($beforeReferenceFolder) -and -not [string]::IsNullOrEmpty($afterReferenceFolder)) {
+        VerifyPathOrExit $beforeReferenceFolder
+        VerifyPathOrExit $afterReferenceFolder
+        $referenceParams = " -rb '$beforeReferenceFolder' -ra '$afterReferenceFolder'"
     }
 
-    Set-Content -Path $tableOfContentsFilePath -Value $updatedTableOfContents
+    RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eas '$assembliesToExclude' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'$referenceParams"
 }
 
-Function CreateReadme
-{
+Function CreateReadme {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $previewFolderPath
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $dotNetFriendlyName
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $dotNetFullName
     )
 
-    $readmePath=[IO.Path]::Combine($previewFolderPath, "README.md")
-    If (Test-Path -Path $readmePath)
-    {
+    $readmePath = [IO.Path]::Combine($previewFolderPath, "README.md")
+    If (Test-Path -Path $readmePath) {
         Remove-Item -Path $readmePath
     }
     New-Item -ItemType File $readmePath
@@ -448,20 +438,19 @@ Function CreateReadme
     Add-Content $readmePath "- [Microsoft.WindowsDesktop.App](./Microsoft.WindowsDesktop.App/$dotNetFullName.md)"
 }
 
-Function RebuildIfExeNotFound
-{
+Function RebuildIfExeNotFound {
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $exePath
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $projectPath
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $artifactsPath
@@ -469,12 +458,11 @@ Function RebuildIfExeNotFound
 
     VerifyPathOrExit $projectPath
 
-    If (-Not (Test-Path -Path $exePath))
-    {
+    If (-Not (Test-Path -Path $exePath)) {
         # Building the project
 
         Write-Color cyan "Building project '$projectPath'"
-        RunCommand "dotnet build -c release $projectPath"
+        RunCommand "$SdkRepo/.dotnet/dotnet build -c release $projectPath"
 
         # Verifying expected output from building
         VerifyPathOrExit $artifactsPath
@@ -482,35 +470,38 @@ Function RebuildIfExeNotFound
     }
 }
 
-Function DownloadPackage
-{
+Function DownloadPackage {
     Param
     (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
+        [bool]
+        $useDefaultNuGetFeed
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateSet("NETCore", "AspNetCore", "WindowsDesktop")]
         [string]
         $sdkName
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateSet("Before", "After")]
         [string]
         $beforeOrAfter
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("\d+\.\d")]
         [string]
         $dotNetVersion
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateSet("preview", "rc", "ga")]
         [string]
         $previewOrRC
-    ,
-        [Parameter(Mandatory=$true)]
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidatePattern("(\d+)?")]
         [string]
         $previewNumberVersion
-    ,
+        ,
         [ref]
         $resultingPath
     )
@@ -520,39 +511,55 @@ Function DownloadPackage
     RecreateFolder $destinationFolder
 
     $refPackageName = "$fullSdkName.Ref"
-    $nugetSource = "https://api.nuget.org/v3/index.json"
+
+    $feed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
+    if ($useDefaultNuGetFeed) {
+        $feed = "https://api.nuget.org/v3/index.json"
+    }
+
     $searchTerm = ""
-    If ($previewOrRC -eq "ga")
-    {
+    If ($previewOrRC -eq "ga") {
         $searchTerm = "$dotNetversion.$previewNumberVersion"
     }
-    ElseIf (-Not ([System.String]::IsNullOrWhiteSpace($previewOrRC)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion)))
-    {
+    ElseIf (-Not ([System.String]::IsNullOrWhiteSpace($previewOrRC)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion))) {
         $searchTerm = "$dotNetversion.*-$previewOrRC.$previewNumberVersion*"
     }
 
-    $results = Find-Package -AllVersions -Source $nugetSource -Name $refPackageName -AllowPrereleaseVersions | Where-Object -Property Version -Like $searchTerm | Sort-Object Version -Descending
+    $foundPackages = Find-Package -AllVersions -Source $feed -Name $refPackageName -AllowPrereleaseVersions -ErrorAction Continue
 
-    If ($results.Count -eq 0)
-    {
+    If ($foundPackages.Count -eq 0) {
+        Write-Error "No NuGet packages found with ref package name '$refPackageName' in feed '$feed'"
+        Get-PackageSource -Name $refPackageName | Format-Table -Property Name, SourceUri
+        Write-Error "Exiting" -ErrorAction Stop
+    }
+
+    $results = $foundPackages | Where-Object -Property Version -Like $searchTerm | Sort-Object Version -Descending
+
+    If ($results.Count -eq 0) {
         Write-Error "No NuGet packages found with search term '$searchTerm'." -ErrorAction Stop
     }
 
     $version = $results[0].Version
     $nupkgFile = [IO.Path]::Combine($TmpFolder, "$refPackageName.$version.nupkg")
 
-    If (-Not (Test-Path -Path $nupkgFile))
-    {
-        Write-Color yellow "Package '$nupkgFile' does not exist. Downloading."
-        Invoke-WebRequest -Uri "https://www.nuget.org/api/v2/package/$refPackageName/$version" -OutFile $nupkgFile
+    If (-Not(Test-Path -Path $nupkgFile)) {
+        $href = $results[0].Links | Where-Object -Property Relationship -Eq "icon" | Select-Object -ExpandProperty HRef
+        $link = $href.AbsoluteUri.Replace("?extract=Icon.png", "")
+
+        $nupkgUrl = $link
+        if ($useDefaultNuGetFeed) {
+            $nupkgUrl = "https://www.nuget.org/api/v2/package/$refPackageName/$version"
+        }
+
+        Write-Color yellow "Downloading '$nupkgUrl' to '$nupkgFile'..."
+        Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile
         VerifyPathOrExit $nupkgFile
     }
-    Else
-    {
-        Write-Color green "The '$nupkgFile' package was already found. Skipping new download."
+    Else {
+        Write-Color green "File '$nupkgFile' already exists locally. Skipping re-download."
     }
 
-    Expand-Archive -Path $nupkgFile -DestinationPath $destinationFolder
+    Expand-Archive -Path $nupkgFile -DestinationPath $destinationFolder -ErrorAction Stop
 
     $dllPath = [IO.Path]::Combine($destinationFolder, "ref", "net$dotNetVersion")
     VerifyPathOrExit $dllPath
@@ -560,103 +567,143 @@ Function DownloadPackage
     $resultingPath.value = $dllPath
 }
 
+Function ProcessSdk
+{
+    Param(
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $sdkName
+    ,
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $apiDiffExe
+    ,
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $currentDotNetFullName
+    ,
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $assembliesToExclude
+    ,
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $attributesToExclude
+    ,
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $previousDotNetFriendlyName
+    ,
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $currentDotNetFriendlyName
+    )
 
-### Execution ###
+    $beforeDllFolder = ""
+    DownloadPackage $UseDefaultNuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeDllFolder)
+    VerifyPathOrExit $beforeDllFolder
+
+    $afterDllFolder = ""
+    DownloadPackage $UseDefaultNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterDllFolder)
+    VerifyPathOrExit $afterDllFolder
+
+    # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
+    $beforeReferenceFolder = ""
+    $afterReferenceFolder = ""
+    if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
+        DownloadPackage $UseDefaultNuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeReferenceFolder)
+        VerifyPathOrExit $beforeReferenceFolder
+        
+        DownloadPackage $UseDefaultNuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterReferenceFolder)
+        VerifyPathOrExit $afterReferenceFolder
+    }
+
+    $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$sdkName.App")
+    RecreateFolder $targetFolder
+
+    RunApiDiff $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName $beforeReferenceFolder $afterReferenceFolder
+}
+
+#####################
+### End Functions ###
+#####################
+
+#######################
+### Start Execution ###
+#######################
+
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    Write-Error "This script requires PowerShell 7.0 or later.  See  https://aka.ms/PSWindows for instructions." -ErrorAction Stop
+}
 
 ## Generate strings with no whitespace
 
 # True when comparing 8.0 GA with 9.0 GA
 $IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And ($PreviousPreviewOrRC -Eq "ga") -And ($CurrentPreviewOrRC -eq "ga")
 
-$previousDotNetFullName = GetDotNetFullName $IsComparingReleases $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
-$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
-
 
 ## Check folders passed as parameters exist
-
 VerifyPathOrExit $CoreRepo
-VerifyPathOrExit $ArcadeRepo
 VerifyPathOrExit $TmpFolder
 
+$currentMajorVersion = $CurrentDotNetVersion.Split(".")[0]
+$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet$currentMajorVersion-transport/nuget/v3/index.json --prerelease"
 
-## Download the NuGet packages
+if ($InstallApiDiff) {
+    Write-Color white "Installing ApiDiff tool..."
+    RunCommand $InstallApiDiffCommand
+}
 
-# NETCore
-$netCoreBeforeDllFolder = ""
-DownloadPackage "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$netCoreBeforeDllFolder)
-VerifyPathOrExit $netCoreBeforeDllFolder
+$apiDiffCommand = get-command "apidiff" -ErrorAction SilentlyContinue
 
-$netCoreAfterDllFolder = ""
-DownloadPackage "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$netCoreAfterDllFolder)
-VerifyPathOrExit $netCoreAfterDllFolder
+if (-Not $apiDiffCommand) 
+{
+     Write-Error "The command apidiff could not be found.  Please first install the tool using the following command: $InstallApiDiffCommand" -ErrorAction Stop
+}
 
-# AspNetCore
-$aspNetCoreBeforeDllFolder = ""
-DownloadPackage "AspNetCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$aspNetCoreBeforeDllFolder)
-VerifyPathOrExit $aspNetCoreBeforeDllFolder
-
-$aspNetCoreAfterDllFolder = ""
-DownloadPackage "AspNetCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$aspNetCoreAfterDllFolder)
-VerifyPathOrExit $aspNetCoreAfterDllFolder
-
-# WindowsDesktop
-$windowsDesktopBeforeDllFolder = ""
-DownloadPackage "WindowsDesktop" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$windowsDesktopBeforeDllFolder)
-VerifyPathOrExit $windowsDesktopBeforeDllFolder
-
-$windowsDesktopAfterDllFolder = ""
-DownloadPackage "WindowsDesktop" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$windowsDesktopAfterDllFolder)
-VerifyPathOrExit $windowsDesktopAfterDllFolder
-
-
-## Ensure AsmDiff artifacts exist
-
-$asmDiffProjectPath = [IO.Path]::Combine($ArcadeRepo, "src", "Microsoft.DotNet.AsmDiff", "Microsoft.DotNet.AsmDiff.csproj")
-$asmDiffArtifactsPath = [IO.Path]::Combine($ArcadeRepo ,"artifacts", "bin", "Microsoft.DotNet.AsmDiff")
-$asmDiffExe = [IO.Path]::Combine($asmDiffArtifactsPath, "Release", "net8.0", "Microsoft.DotNet.AsmDiff.exe")
-ReBuildIfExeNotFound $asmDiffExe $asmDiffProjectPath $asmDiffArtifactsPath
-
+$apiDiffExe = $apiDiffCommand.Source
 ## Recreate api-diff folder in core repo folder
 
 $previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $IsComparingReleases
-Write-Color cyan "Checking existing diff folder: $previewFolderPath"
-RecreateFolder $previewFolderPath
+If (-Not (Test-Path -Path $previewFolderPath))
+{
+    Write-Color white "Creating new diff folder: $previewFolderPath"
+    New-Item -ItemType Directory -Path $previewFolderPath
+}
 
+## Run the ApiDiff commands
 
-## Create subfolders
+# Example: "10.0-preview2"
+$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
 
-# NETCore
-$netCoreTargetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.NETCore.App")
-RecreateFolder $netCoreTargetFolder
-
-#AspNetCore
-$aspNetCoreTargetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.AspNetCore.App")
-RecreateFolder $aspNetCoreTargetFolder
-
-# WindowsDesktop
-$windowsDesktopTargetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.WindowsDesktop.App")
-RecreateFolder $windowsDesktopTargetFolder
-
-
-## Run the Asm-Diff commands
-
-$tableOfContentsFile = "$currentDotNetFullName.md"
-
-$tableOfContentsFilePathNETCore = [IO.Path]::Combine($netCoreTargetFolder, $tableOfContentsFile)
-$tableOfContentsFilePathAspNetCore = [IO.Path]::Combine($aspNetCoreTargetFolder, $tableOfContentsFile)
-$tableOfContentsFilePathWindowsDesktop = [IO.Path]::Combine($windowsDesktopTargetFolder, $tableOfContentsFile)
-
-RunAsmDiff $asmDiffExe $tableOfContentsFilePathNETCore $netCoreBeforeDllFolder $netCoreAfterDllFolder
-RunAsmDiff $asmDiffExe $tableOfContentsFilePathAspNetCore $aspNetCoreBeforeDllFolder $aspNetCoreAfterDllFolder
-RunAsmDiff $asmDiffExe $tableOfContentsFilePathWindowsDesktop $windowsDesktopBeforeDllFolder $windowsDesktopAfterDllFolder
-
-
-## Replace the first line of the summmary files with the correct title, and write final readme
-
-ReplaceTitle $tableOfContentsFilePathNETCore $previousDotNetFullName $currentDotNetFullName
-ReplaceTitle $tableOfContentsFilePathAspNetCore $previousDotNetFullName $currentDotNetFullName
-ReplaceTitle $tableOfContentsFilePathWindowsDesktop $previousDotNetFullName $currentDotNetFullName
-
+# Examples: ".NET 10 Preview 1" and ".NET 10 Preview 2"
+$previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion
 $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion
 
+If (-Not $ExcludeNetCore)
+{
+    ProcessSdk "NETCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+}
+
+If (-Not $ExcludeAspNetCore)
+{
+    ProcessSdk "AspNetCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+}
+
+If (-Not $ExcludeWindowsDesktop)
+{
+    ProcessSdk "WindowsDesktop" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+}
+
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
+
+#####################
+### End Execution ###
+#####################
