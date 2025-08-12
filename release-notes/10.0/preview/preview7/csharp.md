@@ -41,4 +41,4 @@ Extension members are only considered for overload resolution when no applicable
 
 ## Named and optional parameters in expression trees
 
-This is a small feature that removes a limitation for *expression trees*. Code in expression trees no longer needs to declare arguments for all optional parameters. In addition, code in expression trees can include named arguments. The call rewriting orders named arguments and provides values for missing optional parameters. Query providers shouldn't need to make any adjustments for this support.
+This is a small feature that removes a limitation for *expression trees*. Code in lambda expressions can use optional parameters and named arguments when converted to an expression tree. The call rewriting orders named arguments and provides values for missing optional parameters. Query providers shouldn't need to make any adjustments for this support.
