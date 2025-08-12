@@ -8,7 +8,7 @@ Here's a summary of what's new in the .NET SDK in this preview release:
 
 - [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
 
-## Use the `any` RuntimeIdentifier with platform-specific .NET Tools <a id="any-rid-in-multi-rid-tools">
+## Use the `any` RuntimeIdentifier with platform-specific .NET Tools {#any-rid-in-multi-rid-tools}
 
 The [platform-specific .NET Tools](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10/sdk#platform-specific-net-tools) feature released in preview 6
 is great for making sure your tools are optimized for specific platforms that you target ahead-of-time. However, there are times where you won't know

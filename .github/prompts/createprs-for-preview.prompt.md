@@ -1,18 +1,15 @@
----
-mode: agent
----
-
+# Create PRs for Preview
 
 Go through each folder in release-notes/10.0/preview7 and one at a time i want you do to the following:
 
-1. create a new branch names **dotnet10-p7-<name>** where <name> is the name of the file without the extension.
+1. create a new branch names **dotnet10-p7-{name}** where {name} is the name of the file without the extension.
 2. modify the file in some simple way by adding a new line at the end of the file with the text "Something about the feature" in it.
-3. commit the change with the message "Update <name> for preview 7" where <name> is the name of the file without the extension.
+3. commit the change with the message "Update {name} for preview 7" where {name} is the name of the file without the extension.
 4. push the branch to the remote repository.
-5. create a pull request with the title "Update <name> for preview 7" and the body "Please update the release notes here as needed for Preview 7.\n\n/cc @<reviewer>" where <name> is the name of the file without the extension and <reviewer> is assigned based on the assignment table below.
+5. create a pull request with the title "Update {name} for preview 7" and the body "Please update the release notes here as needed for Preview 7.\n\n/cc @{reviewer}" where {name} is the name of the file without the extension and {reviewer} is assigned based on the assignment table below.
 6. go back to the dotnet10-p7 branch and repeat the process for the next file.
 
-## Assignment Table (based on Preview 6 patterns):
+## Assignment Table (based on Preview 6 patterns)
 
 | File | Assignee(s) | Based on Preview 6 PR |
 |------|-------------|----------------------|
@@ -30,6 +27,7 @@ Go through each folder in release-notes/10.0/preview7 and one at a time i want y
 | wpf.md | @harshit7962 | #9948 |
 
 Here are the files you need to do this one at a time for:
+
 - aspnetcore.md
 - containers.md
 - csharp.md

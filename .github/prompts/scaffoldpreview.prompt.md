@@ -1,6 +1,5 @@
----
-mode: agent
----
+# Scaffold Preview
+
 Create a new folder in the releasenotes/10.0/preview folder for preview7. Inside of it duplicate the folder structure and files that are in the preview6 folder and for each of the files use the following template based on the names of the product that the file is in. You can use the previous file as a reference for the content. Ignore the api-diff folder. Ignore the release.json file.
 
 Here is a sample of what aspnetcore.md should look like:
@@ -22,4 +21,4 @@ ASP.NET Core updates in .NET 10:
 
 Something about the feature
 
-``
+```

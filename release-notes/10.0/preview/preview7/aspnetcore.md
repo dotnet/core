@@ -34,7 +34,7 @@ app.UseExceptionHandler(new ExceptionHandlerOptions
 });
 ```
 
-For more information about this breaking change, see https://github.com/aspnet/Announcements/issues/524.
+For more information about this breaking change, see [this announcement](https://github.com/aspnet/Announcements/issues/524).
 
 ## Avoid cookie login redirects for known API endpoints
 
@@ -69,7 +69,7 @@ builder.Services.AddAuthentication()
     });
 ```
 
-For more information about this breaking change, see https://github.com/aspnet/Announcements/issues/525
+For more information about this breaking change, see [this announcement](https://github.com/aspnet/Announcements/issues/525).
 
 ## Passkey authentication improvements
 
@@ -124,6 +124,7 @@ To sign in with a passkey, use `SignInManager.PasskeySignInAsync()`:
 // 'credentialJson' is the JSON-serialized result from `navigator.credentials.get()`.
 var result = await signInManager.PasskeySignInAsync(credentialJson);
 ```
+
 ### Getting started with passkeys
 
 **For new applications:** The Blazor Web App project template now includes passkey functionality out of the box. Create a new Blazor app with passkey support using:
@@ -148,7 +149,7 @@ The [ASP.NET Core HTTPS development certificate](https://learn.microsoft.com/asp
 
 The project templates for *ASP.NET Core Empty* (`web`) and *Blazor Web App* (`blazor`) have been updated with a new option that when specified configures the created project to use the `.dev.localhost` domain name suffix, combining it with the project name to allow the app to be browsed to at an address like `https://myapp.dev.localhost:5036`:
 
-```
+```bash
 $ dotnet new web -n MyApp --localhost-tld
 The template "ASP.NET Core Empty" was created successfully.
 
@@ -268,7 +269,7 @@ The Blazor diagnostic metrics have been updated to follow OpenTelemetry naming c
 | `aspnetcore.components.render_diff` | Split into `aspnetcore.components.render_diff.duration` and `aspnetcore.components.render_diff.size` |
 | `aspnetcore.components.navigation` | `aspnetcore.components.navigate` |
 | `aspnetcore.components.event_handler` | `aspnetcore.components.handle_event.duration` |
-| `aspnetcore.components.update_parameters` | `aspnetcore.components.update_parameters.duration`
+| `aspnetcore.components.update_parameters` | `aspnetcore.components.update_parameters.duration` |
 
 ### Validate configured services for Blazor WebAssembly apps on build
 

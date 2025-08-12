@@ -5,12 +5,12 @@ Here's a summary of what's new in .NET Libraries in this preview release:
 - [Launch Windows processes in new process group](#launch-windows-processes-in-new-process-group)
 - [AES KeyWrap with Padding (IETF RFC 5649)](#aes-keywrap-with-padding-ietf-rfc-5649)
 - Post-Quantum Cryptography Updates
-    - [ML-DSA](#ml-dsa)
-    - [Composite ML-DSA](#composite-ml-dsa)
+  - [ML-DSA](#ml-dsa)
+  - [Composite ML-DSA](#composite-ml-dsa)
 - [PipeReader support for JSON serializer](#pipereader-support-for-json-serializer)
 - Networking
-    - [WebSocketStream](#websocketstream)
-    - [TLS 1.3 for macOS (client)](#tls-13-for-macos-client)
+  - [WebSocketStream](#websocketstream)
+  - [TLS 1.3 for macOS (client)](#tls-13-for-macos-client)
 
 .NET Libraries updates in .NET 10:
 
@@ -250,7 +250,8 @@ record Chunk(string Message, DateTime Timestamp);
 ```
 
 Note that all of this is serialized as JSON in the `Pipe` (formatted here for readability):
-```
+
+```json
 [
     {
         "Message": "The quick brown fox",
@@ -277,11 +278,11 @@ Traditional `WebSocket` APIs are low-level and require significant boilerplate: 
 
 **WebSocketStream** addresses these pain points by providing a Stream-based abstraction over a WebSocket. This enables seamless integration with existing APIs for reading, writing, and parsing data, whether binary or text, and reduces the need for manual plumbing.
 
-**Common Usage Patterns**
+## Common Usage Patterns
 
 Here are a few examples of how `WebSocketStream` simplifies typical WebSocket workflows:
 
-**1. Streaming text protocol (e.g., STOMP)**
+### 1. Streaming text protocol (e.g., STOMP)
 
 ```csharp
 using Stream transportStream = WebSocketStream.Create(
@@ -295,7 +296,7 @@ var line = await transportReader.ReadLineAsync(cancellationToken); // Automatic 
 transportStream.Dispose(); // Automatic closing handshake handling on `Dispose`
 ```
 
-**2. Streaming binary protocol (e.g., AMQP)**
+### 2. Streaming binary protocol (e.g., AMQP)
 
 ```csharp
 Stream transportStream = WebSocketStream.Create(
@@ -309,7 +310,7 @@ transportStream.Dispose();
 // `Dispose` automatically handles closing handshake
 ```
 
-**3. Reading a single message as a stream (e.g., JSON deserialization)**
+### 3. Reading a single message as a stream (e.g., JSON deserialization)
 
 ```csharp
 using Stream messageStream = WebSocketStream.CreateReadableMessageStream(connectedWebSocket, WebSocketMessageType.Text);
@@ -317,7 +318,7 @@ using Stream messageStream = WebSocketStream.CreateReadableMessageStream(connect
 var appMessage = await JsonSerializer.DeserializeAsync<AppMessage>(messageStream);
 ```
 
-**4. Writing a single message as a stream (e.g., binary serialization)**
+### 4. Writing a single message as a stream (e.g., binary serialization)
 
 ```csharp
 public async Task SendMessageAsync(AppMessage message, CancellationToken cancellationToken)
