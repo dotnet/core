@@ -120,6 +120,7 @@ else { /* ... */ }
 ```
 
 To sign in with a passkey, use `SignInManager.PasskeySignInAsync()`:
+
 ```csharp
 // 'credentialJson' is the JSON-serialized result from `navigator.credentials.get()`.
 var result = await signInManager.PasskeySignInAsync(credentialJson);
