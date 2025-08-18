@@ -10,6 +10,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Enhanced validation for classes and records](#enhanced-validation-for-classes-and-records)
 - [Blazor resource preloader component renamed](#blazor-resource-preloader-component-renamed)
 - [Updated API names for Blazor state persistence](#updated-api-names-for-blazor-state-persistence)
+- [InvokeNew renamed to InvokeConstructor](#invokenew-renamed-to-invokeconstructor)
 - [Support NotFound in custom Blazor routers](#support-notfound-in-custom-blazor-routers)
 - [Updated Blazor metric names](#updated-blazor-metric-names)
 - [Validate configured services for Blazor WebAssembly apps on build](#validate-configured-services-for-blazor-webassembly-apps-on-build)
@@ -237,6 +238,10 @@ The new Blazor state persistence APIs have been updated:
 
 - Renamed JavaScript APIs: `Blazor.pause()` → `Blazor.pauseCircuit()` and `Blazor.resume()` → `Blazor.resumeCircuit()`
 - Renamed C# attribute: `SupplyParameterFromPersistentComponentStateAttribute` → `PersistentStateAttribute`
+
+### InvokeNew renamed to InvokeConstructor
+
+The new `InvokeNew` and `InvokeNewAsync` JavaScript interop methods have been renamed to `InvokeConstructor` and `InvokeConstructorAsync` to better reflect their purpose.
 
 ### Support NotFound in custom Blazor routers
 
