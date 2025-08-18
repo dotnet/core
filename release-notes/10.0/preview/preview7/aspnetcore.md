@@ -8,8 +8,16 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Support for the .localhost top-level domain](#support-for-the-localhost-top-level-domain)
 - [Use PipeReader support in System.Text.Json](#use-pipereader-support-in-systemtextjson)
 - [Enhanced validation for classes and records](#enhanced-validation-for-classes-and-records)
-- [Blazor improvements](#blazor-improvements)
+- [Blazor resource preloader component renamed](#blazor-resource-preloader-component-renamed)
+- [Updated API names for Blazor state persistence](#updated-api-names-for-blazor-state-persistence)
+- [InvokeNew renamed to InvokeConstructor](#invokenew-renamed-to-invokeconstructor)
+- [Support NotFound in custom Blazor routers](#support-notfound-in-custom-blazor-routers)
+- [Updated Blazor metric names](#updated-blazor-metric-names)
+- [Validate configured services for Blazor WebAssembly apps on build](#validate-configured-services-for-blazor-webassembly-apps-on-build)
 - [OpenAPI.NET dependency upgraded to stable release](#openapinet-dependency-upgraded-to-stable-release)
+- [Fix ProducesResponseType Description for Minimal APIs](#fix-producesresponsetype-description-for-minimal-apis)
+- [Correct metadata type for formdata enum parameters](#correct-metadata-type-for-formdata-enum-parameters)
+- [Unify handling of documentation IDs in OpenAPI XML comment generator](#unify-handling-of-documentation-ids-in-openapi-xml-comment-generator)
 
 ASP.NET Core updates in .NET 10:
 
@@ -220,7 +228,7 @@ Thank you [@marcominerva](https://github.com/marcominerva) for this contribution
 
 ## Blazor improvements
 
-### Resource preloader component renamed
+### Blazor resource preloader component renamed
 
 The Blazor component for rendering preloading links has been renamed from `LinkPreload` to `ResourcePreloader`.
 
@@ -230,6 +238,10 @@ The new Blazor state persistence APIs have been updated:
 
 - Renamed JavaScript APIs: `Blazor.pause()` → `Blazor.pauseCircuit()` and `Blazor.resume()` → `Blazor.resumeCircuit()`
 - Renamed C# attribute: `SupplyParameterFromPersistentComponentStateAttribute` → `PersistentStateAttribute`
+
+### InvokeNew renamed to InvokeConstructor
+
+The new `InvokeNew` and `InvokeNewAsync` JavaScript interop methods have been renamed to `InvokeConstructor` and `InvokeConstructorAsync` to better reflect their purpose.
 
 ### Support NotFound in custom Blazor routers
 
@@ -261,7 +273,7 @@ private void OnNotFoundEvent(object sender, NotFoundEventArgs e)
 }
 ```
 
-### Updated metric names
+### Updated Blazor metric names
 
 The Blazor diagnostic metrics have been updated to follow OpenTelemetry naming conventions:
 
@@ -289,19 +301,19 @@ builder.UseDefaultServiceProvider(options =>
 
 The ASP.NET Core OpenAPI document generation support has been upgraded to use the 2.0.0 stable release of the OpenAPI.NET library. No further breaking changes are expected in the OpenAPI document generation for this release.
 
-### Fix ProducesResponseType Description for Minimal APIs
+## Fix ProducesResponseType Description for Minimal APIs
 
 The Description property for the `ProducesResponseType` attribute is now correctly set in Minimal APIs even when the attribute type and the inferred return type are not an exact match.
 
 Thank you [@sander1095](https://github.com/sander1095) for this contribution!
 
-### Correct metadata type for formdata enum parameters
+## Correct metadata type for formdata enum parameters
 
 The metadata type for formdata enum parameters in MVC controller actions has been updated to use the actual enum type instead of string.
 
 Thank you [@ascott18](https://github.com/ascott18) for this contribution!
 
-### Unify handling of documentation IDs in OpenAPI XML comment generator
+## Unify handling of documentation IDs in OpenAPI XML comment generator
 
 XML documentation comments from referenced assemblies are now correctly merged if their documentation IDs included return type suffixes. As a result, all valid XML comments are now reliably included in generated OpenAPI documentation, improving doc accuracy and completeness for APIs using referenced assemblies.
 
