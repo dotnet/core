@@ -8,8 +8,15 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Support for the .localhost top-level domain](#support-for-the-localhost-top-level-domain)
 - [Use PipeReader support in System.Text.Json](#use-pipereader-support-in-systemtextjson)
 - [Enhanced validation for classes and records](#enhanced-validation-for-classes-and-records)
-- [Blazor improvements](#blazor-improvements)
+- [Blazor resource preloader component renamed](#blazor-resource-preloader-component-renamed)
+- [Updated API names for Blazor state persistence](#updated-api-names-for-blazor-state-persistence)
+- [Support NotFound in custom Blazor routers](#support-notfound-in-custom-blazor-routers)
+- [Updated Blazor metric names](#updated-blazor-metric-names)
+- [Validate configured services for Blazor WebAssembly apps on build](#validate-configured-services-for-blazor-webassembly-apps-on-build)
 - [OpenAPI.NET dependency upgraded to stable release](#openapinet-dependency-upgraded-to-stable-release)
+- [Fix ProducesResponseType Description for Minimal APIs](#fix-producesresponsetype-description-for-minimal-apis)
+- [Correct metadata type for formdata enum parameters](#correct-metadata-type-for-formdata-enum-parameters)
+- [Unify handling of documentation IDs in OpenAPI XML comment generator](#unify-handling-of-documentation-ids-in-openapi-xml-comment-generator)
 
 ASP.NET Core updates in .NET 10:
 
@@ -218,20 +225,20 @@ Users can now use validation attributes on both classes and records, with consis
 
 Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
-## Blazor improvements
+<a id="blazor-improvements"></a>
 
-### Resource preloader component renamed
+## Blazor resource preloader component renamed
 
 The Blazor component for rendering preloading links has been renamed from `LinkPreload` to `ResourcePreloader`.
 
-### Updated API names for Blazor state persistence
+## Updated API names for Blazor state persistence
 
 The new Blazor state persistence APIs have been updated:
 
 - Renamed JavaScript APIs: `Blazor.pause()` → `Blazor.pauseCircuit()` and `Blazor.resume()` → `Blazor.resumeCircuit()`
 - Renamed C# attribute: `SupplyParameterFromPersistentComponentStateAttribute` → `PersistentStateAttribute`
 
-### Support NotFound in custom Blazor routers
+## Support NotFound in custom Blazor routers
 
 Custom Blazor routers can now support `NavigationManager.NotFound()` by subscribing to the `NavigationManager.OnNotFound` event:
 
@@ -261,7 +268,7 @@ private void OnNotFoundEvent(object sender, NotFoundEventArgs e)
 }
 ```
 
-### Updated metric names
+## Updated Blazor metric names
 
 The Blazor diagnostic metrics have been updated to follow OpenTelemetry naming conventions:
 
@@ -272,7 +279,7 @@ The Blazor diagnostic metrics have been updated to follow OpenTelemetry naming c
 | `aspnetcore.components.event_handler` | `aspnetcore.components.handle_event.duration` |
 | `aspnetcore.components.update_parameters` | `aspnetcore.components.update_parameters.duration` |
 
-### Validate configured services for Blazor WebAssembly apps on build
+## Validate configured services for Blazor WebAssembly apps on build
 
 Previously, circular DI dependencies in Blazor WebAssembly apps would cause the browser to hang with no error message. Now developers get validation errors at build time instead of runtime hangs when running in development.
 
@@ -289,19 +296,19 @@ builder.UseDefaultServiceProvider(options =>
 
 The ASP.NET Core OpenAPI document generation support has been upgraded to use the 2.0.0 stable release of the OpenAPI.NET library. No further breaking changes are expected in the OpenAPI document generation for this release.
 
-### Fix ProducesResponseType Description for Minimal APIs
+## Fix ProducesResponseType Description for Minimal APIs
 
 The Description property for the `ProducesResponseType` attribute is now correctly set in Minimal APIs even when the attribute type and the inferred return type are not an exact match.
 
 Thank you [@sander1095](https://github.com/sander1095) for this contribution!
 
-### Correct metadata type for formdata enum parameters
+## Correct metadata type for formdata enum parameters
 
 The metadata type for formdata enum parameters in MVC controller actions has been updated to use the actual enum type instead of string.
 
 Thank you [@ascott18](https://github.com/ascott18) for this contribution!
 
-### Unify handling of documentation IDs in OpenAPI XML comment generator
+## Unify handling of documentation IDs in OpenAPI XML comment generator
 
 XML documentation comments from referenced assemblies are now correctly merged if their documentation IDs included return type suffixes. As a result, all valid XML comments are now reliably included in generated OpenAPI documentation, improving doc accuracy and completeness for APIs using referenced assemblies.
 
