@@ -225,20 +225,20 @@ Users can now use validation attributes on both classes and records, with consis
 
 Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
-<a id="blazor-improvements"></a>
+## Blazor improvements
 
-## Blazor resource preloader component renamed
+### Blazor resource preloader component renamed
 
 The Blazor component for rendering preloading links has been renamed from `LinkPreload` to `ResourcePreloader`.
 
-## Updated API names for Blazor state persistence
+### Updated API names for Blazor state persistence
 
 The new Blazor state persistence APIs have been updated:
 
 - Renamed JavaScript APIs: `Blazor.pause()` → `Blazor.pauseCircuit()` and `Blazor.resume()` → `Blazor.resumeCircuit()`
 - Renamed C# attribute: `SupplyParameterFromPersistentComponentStateAttribute` → `PersistentStateAttribute`
 
-## Support NotFound in custom Blazor routers
+### Support NotFound in custom Blazor routers
 
 Custom Blazor routers can now support `NavigationManager.NotFound()` by subscribing to the `NavigationManager.OnNotFound` event:
 
@@ -268,7 +268,7 @@ private void OnNotFoundEvent(object sender, NotFoundEventArgs e)
 }
 ```
 
-## Updated Blazor metric names
+### Updated Blazor metric names
 
 The Blazor diagnostic metrics have been updated to follow OpenTelemetry naming conventions:
 
@@ -279,7 +279,7 @@ The Blazor diagnostic metrics have been updated to follow OpenTelemetry naming c
 | `aspnetcore.components.event_handler` | `aspnetcore.components.handle_event.duration` |
 | `aspnetcore.components.update_parameters` | `aspnetcore.components.update_parameters.duration` |
 
-## Validate configured services for Blazor WebAssembly apps on build
+### Validate configured services for Blazor WebAssembly apps on build
 
 Previously, circular DI dependencies in Blazor WebAssembly apps would cause the browser to hang with no error message. Now developers get validation errors at build time instead of runtime hangs when running in development.
 
