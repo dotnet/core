@@ -1,3 +1,7 @@
-# F# in .NET 10 Preview 7 - Release Notes
+# F# in .NET 10 RC 1 - Release Notes
 
-This preview release does not contain new F# features. View the [What's new in F#](https://fsharp.github.io/fsharp-compiler-docs/release-notes/Language.html) documentation to learn more.
+The following .NET 10 RC 1 release notes describe new features and changes in this release.
+
+## What's new features
+
+TBD

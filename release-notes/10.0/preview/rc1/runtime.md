@@ -1,7 +1,7 @@
-# .NET Runtime in .NET 10 Preview 7 - Release Notes
+# Runtime in .NET 10 RC 1 - Release Notes
 
-This preview release does not contain new runtime features.
+The following .NET 10 RC 1 release notes describe new features and changes in this release.
 
-.NET Runtime updates in .NET 10:
+## What's new features
 
-- [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
+TBD

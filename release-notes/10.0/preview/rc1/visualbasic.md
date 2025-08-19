@@ -1,6 +1,7 @@
-# Visual Basic in .NET 10 Preview 7 - Release Notes
+# Visual Basic in .NET 10 RC 1 - Release Notes
 
-This preview release does not contain new Visual Basic features. Please checkout the lastest documentation:
+The following .NET 10 RC 1 release notes describe new features and changes in this release.
 
-- [What's new in Visual Basic](https://learn.microsoft.com/dotnet/visual-basic/whats-new/) documentation
-- [Breaking changes](https://learn.microsoft.com/dotnet/visual-basic/whats-new/breaking-changes)
+## What's new features
+
+TBD
