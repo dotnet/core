@@ -19,16 +19,16 @@ Derived values:
 Process (repeat per file in the RC1 folder):
 
 1. Create a new branch from the base branch `dotnet10-rc1` with name `dotnet10-rc1-{name}`
-2. Modify the corresponding file by adding a simple new line at the end with the text: `Something about the feature`.
-3. Commit with message: `Update {name} for RC 1`.
-4. Push the branch to the remote repository.
-5. Create a pull request with:
+1. Modify the corresponding file by adding a simple new line at the end with the text: `Something about the feature`.
+1. Commit with message: `Update {name} for RC 1`.
+1. Push the branch to the remote repository.
+1. Create a pull request with:
 
 - Title: `Update {name} for RC 1`
 - Body: `Please update the release notes here as needed for RC 1.\n\n/cc @{assignees}`
 - Assignees: Assign the PR to the person(s) listed for the file in the table below.
 
-6. Switch back to the base branch `dotnet10-rc1` and repeat for the next file.
+1. Switch back to the base branch `dotnet10-rc1` and repeat for the next file.
 
 Notes:
 
