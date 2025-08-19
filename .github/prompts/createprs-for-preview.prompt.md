@@ -1,6 +1,6 @@
-# Create PRs for .NET 10 release milestones (Preview or RC)
+# Create PRs for .NET 10 release milestones (Preview, RC, or GA)
 
-Use this workflow to create one PR per release-notes file for .NET 10 pre-release milestones. It supports both Previews (typically 6 or 7; .NET 10 had 7) and Release Candidates (RC). After the last Preview, the next milestone is RC1.
+Use this workflow to create one PR per release-notes file for .NET 10 milestones. It supports Previews (typically 6 or 7; .NET 10 had 7), Release Candidates (RC), and the GA release. After the last Preview, the next milestone is RC1, followed by GA.
 
 Fixed settings:
 
@@ -9,20 +9,32 @@ Fixed settings:
 
 Inputs:
 
-- Milestone Kind: `{milestoneKind}` — either `preview` or `rc`
-- Milestone Number: `{milestoneNumber}` — integer like `1`, `2`, ... (`7` for the last preview of .NET 10; next is `1` for RC1)
+- Milestone Kind: `{milestoneKind}` — one of `preview`, `rc`, or `ga`
+- Milestone Number: `{milestoneNumber}` — required for `preview`/`rc` (e.g., `7`, `1`), omit for `ga`
 
 Derived values:
 
-- Release notes folder: `release-notes/10.0/{milestoneKind}/{milestoneKind}{milestoneNumber}` (e.g., `release-notes/10.0/preview/preview7` or `release-notes/10.0/rc/rc1`)
-- Branch prefix (short): `{short}` where `{short} = 'p'` when `{milestoneKind} = 'preview'`, otherwise `{short} = 'rc'`
-- Base branch for iteration: `dotnet10-{short}{milestoneNumber}` (e.g., `dotnet10-p7` or `dotnet10-rc1`)
-- Per-file working branch: `dotnet10-{short}{milestoneNumber}-{name}`
-- Milestone label for titles/bodies: `{MilestoneLabel}` — use `Preview {milestoneNumber}` for previews and `RC {milestoneNumber}` for RCs
+- Release notes folder (always under the `preview` subfolder):
+	- For Preview N: `release-notes/10.0/preview/preview{milestoneNumber}` (e.g., `release-notes/10.0/preview/preview7`)
+	- For RC N: `release-notes/10.0/preview/rc{milestoneNumber}` (e.g., `release-notes/10.0/preview/rc1`)
+	- For GA: `release-notes/10.0/preview/ga`
+- Branch prefix (short): `{short}` mapping — `preview` → `p`, `rc` → `rc`, `ga` → `ga`
+- Base branch for iteration:
+	- Preview N → `dotnet10-p{milestoneNumber}` (e.g., `dotnet10-p7`)
+	- RC N → `dotnet10-rc{milestoneNumber}` (e.g., `dotnet10-rc1`)
+	- GA → `dotnet10-ga`
+- Per-file working branch:
+	- Preview N → `dotnet10-p{milestoneNumber}-{name}`
+	- RC N → `dotnet10-rc{milestoneNumber}-{name}`
+	- GA → `dotnet10-ga-{name}`
+- Milestone label for titles/bodies: `Preview {N}`, `RC {N}`, or `GA`
 
 Process (repeat per file in the milestone folder):
 
-1. From the base branch `dotnet10-{short}{milestoneNumber}`, create a new branch named `dotnet10-{short}{milestoneNumber}-{name}` where `{name}` is the filename without extension.
+1. Create a new branch from the appropriate base branch (see mapping above):
+	- Preview N: base `dotnet10-p{N}`, new branch `dotnet10-p{N}-{name}`
+	- RC N: base `dotnet10-rc{N}`, new branch `dotnet10-rc{N}-{name}`
+	- GA: base `dotnet10-ga`, new branch `dotnet10-ga-{name}`
 2. Modify the corresponding file by adding a simple new line at the end with the text: `Something about the feature`.
 3. Commit with message: `Update {name} for {MilestoneLabel}`.
 4. Push the branch to the remote repository.
@@ -30,11 +42,12 @@ Process (repeat per file in the milestone folder):
 	- Title: `Update {name} for {MilestoneLabel}`
 	- Body: `Please update the release notes here as needed for {MilestoneLabel}.\n\n/cc @{assignees}`
 	- Assignees: Assign the PR to the person(s) listed for the file in the table below.
-6. Switch back to the base branch `dotnet10-{short}{milestoneNumber}` and repeat for the next file.
+6. Switch back to the corresponding base branch (e.g., `dotnet10-p{N}`, `dotnet10-rc{N}`, or `dotnet10-ga`) and repeat for the next file.
 
 Notes:
 
-- Previews usually run 6–7 iterations; after the final Preview, the next milestone is `RC1`.
+- Previews usually run 6–7 iterations; after the final Preview, the next milestone is `RC1`, followed by `GA`.
+- All Preview, RC, and GA release notes live under the `release-notes/10.0/preview/` directory (for example, `.NET 9 RC 1` notes are in `release-notes/9.0/preview/rc1`).
 - Keep the same file-to-assignee mapping unless explicitly changed.
 
 ## Assignment Table (based on Preview 7 PRs)
