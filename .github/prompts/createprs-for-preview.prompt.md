@@ -1,32 +1,64 @@
-# Create PRs for Preview
+# Create PRs for .NET 10 RC 1
 
-Go through each folder in release-notes/10.0/preview7 and one at a time i want you do to the following:
+Use this workflow to create one PR per release-notes file for .NET 10 RC 1.
 
-1. create a new branch names **dotnet10-p7-{name}** where {name} is the name of the file without the extension.
-2. modify the file in some simple way by adding a new line at the end of the file with the text "Something about the feature" in it.
-3. commit the change with the message "Update {name} for preview 7" where {name} is the name of the file without the extension.
-4. push the branch to the remote repository.
-5. create a pull request with the title "Update {name} for preview 7" and the body "Please update the release notes here as needed for Preview 7.\n\n/cc @{reviewer}" where {name} is the name of the file without the extension and {reviewer} is assigned based on the assignment table below.
-6. go back to the dotnet10-p7 branch and repeat the process for the next file.
+Fixed settings:
 
-## Assignment Table (based on Preview 6 patterns)
+- Version Major: 10
+- Version Path: 10.0
+- Milestone Kind: `rc`
+- Milestone Number: `1`
 
-| File | Assignee(s) | Based on Preview 6 PR |
-|------|-------------|----------------------|
-| aspnetcore.md | @danroth27 | #9953 |
-| containers.md | @lbussell | #9942 |
-| csharp.md | @BillWagner | #9943 |
-| dotnetmaui.md | @davidortinau | #10013 |
-| efcore.md | @roji | #9945 |
-| fsharp.md | @T-Gro | #9946 |
-| libraries.md | @richlander @tarekgh | #9952 |
-| runtime.md | @ericstj @kunalspathak | #9951 |
-| sdk.md | @baronfel @mariam-abdulla @nohwnd | #9949 |
-| visualbasic.md | @BillWagner | #9950 |
-| winforms.md | @merriemcgaw | #9947 |
-| wpf.md | @harshit7962 | #9948 |
+Derived values:
 
-Here are the files you need to do this one at a time for:
+- Release notes folder: `release-notes/10.0/preview/rc1`
+- Base branch: `dotnet10-rc1`
+- Per-file working branch: `dotnet10-rc1-{name}`
+- Milestone label: `RC 1`
+
+Process (repeat per file in the RC1 folder):
+
+1. Create a new branch from the base branch `dotnet10-rc1` with name `dotnet10-rc1-{name}`
+1. Modify the corresponding file by replacing any "TBD" placeholder text with: `Something about the feature`.
+1. Validate markdown formatting using markdownlint with the repository's settings (`.github/linters/.markdown-lint.yml`).
+1. Commit with message: `Update {name} for RC 1`.
+1. Push the branch to the remote repository.
+1. Create a pull request with:
+
+- Title: `Update {name} for RC 1`
+- Body: `Please update the release notes here as needed for RC 1.\n\n/cc @{assignees}`
+
+1. Assign the PR using GitHub CLI: `gh pr edit <PR_NUMBER> --add-assignee <username>` (use the first listed person for files with multiple assignees)
+1. Switch back to the base branch `dotnet10-rc1` and repeat for the next file.
+
+Notes:
+
+- All RC 1 release notes are in the `release-notes/10.0/preview/rc1/` directory.
+- Keep the same file-to-assignee mapping unless explicitly changed.
+- Use GitHub CLI for assignments as it's more reliable than the API: `gh pr edit <PR_NUMBER> --add-assignee <username>`
+- For files with multiple assignees, assign to the first listed person only.
+- Replace "TBD" placeholders rather than adding content to avoid duplication.
+- Run markdownlint validation before committing: The repository uses `.github/linters/.markdown-lint.yml` for linting rules.
+- Ensure all markdown files have proper trailing newlines and follow the established formatting standards.
+
+## Assignment Table (based on Preview 7 PRs)
+
+| File | Assignee(s) | Based on Preview 7 PR |
+|------|-------------|-----------------------|
+| aspnetcore.md | @danroth27 | #10023 |
+| containers.md | @lbussell | #9995 |
+| csharp.md | @BillWagner @MadsTorgersen @jcouv | #9996 |
+| dotnetmaui.md | @davidortinau | #9997 |
+| efcore.md | @roji | #9998 |
+| fsharp.md | @T-Gro | #9999 |
+| libraries.md | @richlander @tarekgh | #10000 |
+| runtime.md | @ericstj @kunalspathak @AndyAyersMS | #10001 |
+| sdk.md | @baronfel @mariam-abdulla @nohwnd @DamianEdwards | #10002 |
+| visualbasic.md | @BillWagner | #10003 |
+| winforms.md | @merriemcgaw @KlausLoeffelmann | #10004 |
+| wpf.md | @harshit7962 @adegeo | #10005 |
+
+Here are the files to process one at a time:
 
 - aspnetcore.md
 - containers.md
@@ -40,3 +72,12 @@ Here are the files you need to do this one at a time for:
 - visualbasic.md
 - winforms.md
 - wpf.md
+
+## Master Consolidation PR
+
+After creating all individual component PRs, create a master consolidation PR:
+
+1. Create a PR from `dotnet10-rc1` to `main` with:
+   - Title: `Add release notes for .NET 10 RC 1 across various components`
+   - Body: Include references to all component PRs and cc the release management team
+   - Pattern: Follow the same structure as the Preview 7 master PR (#10006)
