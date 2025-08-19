@@ -15,34 +15,38 @@ Inputs:
 Derived values:
 
 - Release notes folder (always under the `preview` subfolder):
-	- For Preview N: `release-notes/10.0/preview/preview{milestoneNumber}` (e.g., `release-notes/10.0/preview/preview7`)
-	- For RC N: `release-notes/10.0/preview/rc{milestoneNumber}` (e.g., `release-notes/10.0/preview/rc1`)
-	- For GA: `release-notes/10.0/preview/ga`
+  - For Preview N: `release-notes/10.0/preview/preview{milestoneNumber}` (e.g., `release-notes/10.0/preview/preview7`)
+  - For RC N: `release-notes/10.0/preview/rc{milestoneNumber}` (e.g., `release-notes/10.0/preview/rc1`)
+  - For GA: `release-notes/10.0/preview/ga`
 - Branch prefix (short): `{short}` mapping — `preview` → `p`, `rc` → `rc`, `ga` → `ga`
 - Base branch for iteration:
-	- Preview N → `dotnet10-p{milestoneNumber}` (e.g., `dotnet10-p7`)
-	- RC N → `dotnet10-rc{milestoneNumber}` (e.g., `dotnet10-rc1`)
-	- GA → `dotnet10-ga`
+  - Preview N → `dotnet10-p{milestoneNumber}` (e.g., `dotnet10-p7`)
+  - RC N → `dotnet10-rc{milestoneNumber}` (e.g., `dotnet10-rc1`)
+  - GA → `dotnet10-ga`
 - Per-file working branch:
-	- Preview N → `dotnet10-p{milestoneNumber}-{name}`
-	- RC N → `dotnet10-rc{milestoneNumber}-{name}`
-	- GA → `dotnet10-ga-{name}`
+  - Preview N → `dotnet10-p{milestoneNumber}-{name}`
+  - RC N → `dotnet10-rc{milestoneNumber}-{name}`
+  - GA → `dotnet10-ga-{name}`
 - Milestone label for titles/bodies: `Preview {N}`, `RC {N}`, or `GA`
 
 Process (repeat per file in the milestone folder):
 
 1. Create a new branch from the appropriate base branch (see mapping above):
-	- Preview N: base `dotnet10-p{N}`, new branch `dotnet10-p{N}-{name}`
-	- RC N: base `dotnet10-rc{N}`, new branch `dotnet10-rc{N}-{name}`
-	- GA: base `dotnet10-ga`, new branch `dotnet10-ga-{name}`
-2. Modify the corresponding file by adding a simple new line at the end with the text: `Something about the feature`.
-3. Commit with message: `Update {name} for {MilestoneLabel}`.
-4. Push the branch to the remote repository.
-5. Create a pull request with:
-	- Title: `Update {name} for {MilestoneLabel}`
-	- Body: `Please update the release notes here as needed for {MilestoneLabel}.\n\n/cc @{assignees}`
-	- Assignees: Assign the PR to the person(s) listed for the file in the table below.
-6. Switch back to the corresponding base branch (e.g., `dotnet10-p{N}`, `dotnet10-rc{N}`, or `dotnet10-ga`) and repeat for the next file.
+
+- Preview N: base `dotnet10-p{N}`, new branch `dotnet10-p{N}-{name}`
+- RC N: base `dotnet10-rc{N}`, new branch `dotnet10-rc{N}-{name}`
+- GA: base `dotnet10-ga`, new branch `dotnet10-ga-{name}`
+
+1. Modify the corresponding file by adding a simple new line at the end with the text: `Something about the feature`.
+1. Commit with message: `Update {name} for {MilestoneLabel}`.
+1. Push the branch to the remote repository.
+1. Create a pull request with:
+
+- Title: `Update {name} for {MilestoneLabel}`
+- Body: `Please update the release notes here as needed for {MilestoneLabel}.\n\n/cc @{assignees}`
+- Assignees: Assign the PR to the person(s) listed for the file in the table below.
+
+1. Switch back to the corresponding base branch (e.g., `dotnet10-p{N}`, `dotnet10-rc{N}`, or `dotnet10-ga`) and repeat for the next file.
 
 Notes:
 
