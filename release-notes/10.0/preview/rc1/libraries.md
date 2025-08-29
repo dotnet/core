@@ -5,7 +5,7 @@ this release.
 
 ## Cryptography: ML-DSA External Mu
 
-The ML-DSA class now allows signatures to be created and verified from an "external" mu (&#x3BC;) value. 
+The ML-DSA class now allows signatures to be created and verified from an "external" mu (&#x3BC;) value.
 
 ```csharp
 namespace System.Security.Cryptography;
