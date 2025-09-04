@@ -16,6 +16,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 
 | Date | Release |
 | :-- | :-- |
+| 2025/09/10 | [10.0.0 RC 1](preview/rc1/README.md) |
 | 2025/08/12 | [10.0.0 Preview 7](preview/preview7/README.md) |
 | 2025/07/15 | [10.0.0 Preview 6](preview/preview6/README.md) |
 | 2025/06/10 | [10.0.0 Preview 5](preview/preview5/README.md) |
@@ -71,6 +72,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### ASP.NET Core
 
 - [What's new in ASP.NET Core 10.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0)
+- [RC 1](preview/rc1/aspnetcore.md)
 - [Preview 7](preview/preview7/aspnetcore.md)
 - [Preview 6](preview/preview6/aspnetcore.md)
 - [Preview 5](preview/preview5/aspnetcore.md)
