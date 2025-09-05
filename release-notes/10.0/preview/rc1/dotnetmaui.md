@@ -5,7 +5,7 @@ Here's a summary of what's new in .NET MAUI in this release:
 - .NET MAUI
   - [Diagnostics](#diagnostics)
   - [HybridWebView events](#hybridwebview-events)
-  - [RefreshView IsRefreshEnabled](#xaml-source-generator)
+  - [RefreshView IsRefreshEnabled](#refreshview-isrefreshenabled)
   - [Deprecated APIs](#deprecated-apis)
 - [.NET for Android](#net-for-android)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
@@ -23,11 +23,13 @@ We've added comprehensive diagnostics and metrics tracking for .NET MAUI applica
 <img width="1923" height="1397" alt="image" src="https://github.com/user-attachments/assets/1874a732-0b56-4898-8db0-d04211e7f5ea" />
 
 **Core Diagnostics Infrastructure:**
+
 - **ActivitySource**: `"Microsoft.Maui"` - Tracks layout operations with detailed timing
 - **Metrics**: `"Microsoft.Maui"` - Records counters and histograms for performance analysis
 - **Feature Switch**: `System.Diagnostics.Metrics.Meter.IsSupported` - Runtime enable/disable for AOT/trimming
 
 **Layout Performance Tracking:**
+
 - Instruments `IView.Measure()` and `IView.Arrange()` operations
 - Records timing data and operation counts with rich contextual tags
 - Zero-allocation struct-based instrumentation using `using` pattern
@@ -70,7 +72,6 @@ Added `IsRefreshEnabled` property to be distinct from `IsEnabled` and make the b
 Compressed layout APIs are now marked obsolete. Avoid unnecessary layout nesting instead.
 
 `Performance` and `IPerformanceProvider` types are market obsolete.
-
 
 ## .NET for Android
 
