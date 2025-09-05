@@ -3,7 +3,7 @@
 Here's a summary of what's new in ASP.NET Core in this release:
 
 * [New ASP.NET Core Identity metrics](#new-aspnet-core-identity-metrics)
-* [Validation improvements for Blazor and Minimal APIs](#validation-improvements-for-blazor-and-minimal-apis)
+* [Validation improvements for Minimal APIs and Blazor](#validation-improvements-for-minimal-apis-and-blazor)
 * [OpenAPI schema generation improvements](#openapi-schema-generation-improvements)
 
 ASP.NET Core updates in .NET 10 Release Candidate 1:
@@ -20,9 +20,7 @@ ASP.NET Core updates in .NET 10 Release Candidate 1:
 
 ## New ASP.NET Core Identity metrics
 
-[ASP.NET Core Identity](https://learn.microsoft.com/aspnet/core/security/authentication/identity) observability has been improved in .NET 10 with metrics. Metrics are counters, histograms and gauges that provide time-series measurements of system or application behavior.
-
-You can use the new ASP.NET Core Identity metrics to observe user management, such as new user creations, password changes and role assignments. You can also use the metrics to observe login/session handling, such as login attempts, sign ins and sign outs, and users using two factor authentication.
+ASP.NET Core Identity now provides built-in metrics (counters, histograms, gauges) for key user and sign-in operations. These metrics let you monitor user management activities like creating users, changing passwords, and assigning roles. You can also track login attempts, sign-ins, sign-outs, and two-factor authentication usage.
 
 The new metrics are in the `Microsoft.AspNetCore.Identity` meter:
 
@@ -41,13 +39,13 @@ The new metrics are in the `Microsoft.AspNetCore.Identity` meter:
 
 For more information about using metrics in ASP.NET Core, see [ASP.NET Core metrics](https://learn.microsoft.com/aspnet/core/log-mon/metrics/metrics).
 
-## Validation improvements for Blazor and Minimal APIs
+## Validation improvements for Minimal APIs and Blazor
 
-Several features and fixes have been added to the new validation API that is coming in .NET 10 for Minimal APIs and Blazor. The RC1 updates are focused on providing feature parity and behavioral compatibility with the existing `System.ComponentModel.DataAnnotations.Validator`.
+Several new features and fixes have been added to validation in Minimal APIs and Blazor. These updates improve compatibility and ensure consistent behavior with `System.ComponentModel.DataAnnotations.Validator`.
 
 ### Type-level validation attributes
 
-The new validations now support attributes placed on classes and records themselves.
+Validation attributes can now be applied directly to classes and records, not just to properties. This lets you enforce validation rules at the type level, making it easier to validate complex objects with custom logic.
 
 ```csharp
 [SumLimit(42)]
@@ -68,9 +66,12 @@ class SumLimitAttribute(int Limit) : ValidationAttribute
 
 ### Skipping validation
 
-A new `[SkipValidation]` attribute can be used to omit selected properties, parameters, or types from validation. When applied to a property or a method parameter, the validator skips that value during validation. When applied to a type, the validator skips all properties and parameters of that type.
+The new `[SkipValidation]` attribute lets you exclude specific properties, parameters, or entire types from validation.
 
-This can be useful, in particular, when using the same model types in cases which require and do not require validation.
+* Apply `[SkipValidation]` to a property or parameter to skip its validation.
+* Apply `[SkipValidation]` to a type to skip validation for all its properties and parameters.
+
+This is helpful when you use the same model in scenarios where validation is needed and others where it is not.
 
 ```csharp
 class Order
@@ -92,17 +93,17 @@ class Address
 }
 ```
 
-Additionally, properties annotated with the `[JsonIgnore]` attribute are now also omitted from validation to improve consistency between serialization and validation in the context of JSON models. Note that the `[SkipValidation]` attribute should be preferred in general cases.
+Additionally, properties annotated with the `[JsonIgnore]` attribute are now also omitted from validation to improve consistency between serialization and validation in the context of JSON models. Note that the `[SkipValidation]` attribute should be preferred in most cases.
 
 ### Backwards-compatible behavior
 
-Type validation logic has been updated to match the behavior of `System.ComponentModel.DataAnnotations.Validator` with regards to order of validations and short-circuiting. This means that the following rules are applied when validating an instance of type `T`:
+Type validation logic now matches the behavior of `System.ComponentModel.DataAnnotations.Validator`:
 
-1. Member properties of `T` are validated, including recursively validating nested objects.
-2. Type-level attributes of `T` are validated.
-3. The `IValidatableObject.Validate` method is executed, if `T` implements it.
+1. Member properties are validated, including recursively validating nested objects.
+2. Type-level attributes are validated.
+3. The `IValidatableObject.Validate` method is executed.
 
-In case one of these steps produces a validation error, the following steps are skipped.
+If one of these steps produces a validation error, the remaining steps are skipped.
 
 ## OpenAPI schema generation improvements
 
@@ -152,21 +153,20 @@ Thank you [@martincostello](https://github.com/martincostello) for this contribu
 
 Thank you contributors! ❤️
 
+* [@Elanis](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AElanis)
+* [@ExtraClock](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AExtraClock)
+* [@ReaganYuan](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AReaganYuan)
+* [@Sejsel](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3ASejsel)
+* [@StickFun](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AStickFun)
+* [@StuartMosquera](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AStuartMosquera)
+* [@WeihanLi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AWeihanLi)
 * [@bkoelman](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Abkoelman)
 * [@campersau](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Acampersau)
 * [@desjoerd](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Adesjoerd)
-* [@Elanis](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AElanis)
-* [@ExtraClock](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AExtraClock)
 * [@h5aaimtron](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Ah5aaimtron)
 * [@kimsey0](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Akimsey0)
 * [@ladeak](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Aladeak)
 * [@martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Amartincostello)
 * [@medhatiwari](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Amedhatiwari)
 * [@navferty](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Anavferty)
-* [@oroztocil](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3Aoroztocil)
-* [@ReaganYuan](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AReaganYuan)
 * [@rkargMsft](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3ArkargMsft)
-* [@Sejsel](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3ASejsel)
-* [@StickFun](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AStickFun)
-* [@StuartMosquera](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AStuartMosquera)
-* [@WeihanLi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A10.0-rc1+author%3AWeihanLi)
