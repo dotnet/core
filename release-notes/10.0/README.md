@@ -16,6 +16,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 
 | Date | Release |
 | :-- | :-- |
+| 2025/09/09 | [10.0.0 RC 1](preview/rc1/README.md) |
 | 2025/08/12 | [10.0.0 Preview 7](preview/preview7/README.md) |
 | 2025/07/15 | [10.0.0 Preview 6](preview/preview6/README.md) |
 | 2025/06/10 | [10.0.0 Preview 5](preview/preview5/README.md) |
@@ -27,6 +28,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### .NET Libraries
 
 - [What's new in .NET 10 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview#net-libraries)
+- [RC 1](preview/rc1/libraries.md)
 - [Preview 7](preview/preview7/libraries.md)
 - [Preview 6](preview/preview6/libraries.md)
 - [Preview 5](preview/preview5/libraries.md)
@@ -38,6 +40,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### .NET Runtime
 
 - [What's new in the .NET 10 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/runtime)
+- [RC 1](preview/rc1/runtime.md)
 - [Preview 7](preview/preview7/runtime.md)
 - [Preview 6](preview/preview6/runtime.md)
 - [Preview 5](preview/preview5/runtime.md)
@@ -49,6 +52,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### .NET SDK
 
 - [What's new in the SDK for .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/sdk)
+- [RC 1](preview/rc1/sdk.md)
 - [Preview 7](preview/preview7/sdk.md)
 - [Preview 6](preview/preview6/sdk.md)
 - [Preview 5](preview/preview5/sdk.md)
@@ -60,6 +64,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### C\#
 
 - [What's new in C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14)
+- [RC 1](preview/rc1/csharp.md)
 - [Preview 7](preview/preview7/csharp.md)
 - [Preview 6](preview/preview6/csharp.md)
 - [Preview 5](preview/preview5/csharp.md)
@@ -71,6 +76,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### ASP.NET Core
 
 - [What's new in ASP.NET Core 10.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0)
+- [RC 1](preview/rc1/aspnetcore.md)
 - [Preview 7](preview/preview7/aspnetcore.md)
 - [Preview 6](preview/preview6/aspnetcore.md)
 - [Preview 5](preview/preview5/aspnetcore.md)
@@ -82,6 +88,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### .NET MAUI
 
 - [What's new in .NET MAUI for .NET 10](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-10)
+- [RC 1](preview/rc1/dotnetmaui.md)
 - [Preview 7](preview/preview7/dotnetmaui.md)
 - [Preview 6](preview/preview6/dotnetmaui.md)
 - [Preview 5](preview/preview5/dotnetmaui.md)
@@ -93,6 +100,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### Entity Framework Core
 
 - [What's new in EF Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/whatsnew)
+- [RC 1](preview/rc1/efcore.md)
 - [Preview 7](preview/preview7/efcore.md)
 - [Preview 6](preview/preview6/efcore.md)
 - [Preview 5](preview/preview5/efcore.md)
@@ -104,6 +112,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### Windows Forms
 
 - [What's new in Windows Forms for .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100)
+- [RC 1](preview/rc1/winforms.md)
 - [Preview 7](preview/preview7/winforms.md)
 - [Preview 6](preview/preview6/winforms.md)
 - [Preview 5](preview/preview5/winforms.md)
@@ -115,6 +124,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 ### Windows Presentation Foundation (WPF)
 
 - [What's new in WPF for .NET 10](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100)
+- [RC 1](preview/rc1/wpf.md)
 - [Preview 7](preview/preview7/wpf.md)
 - [Preview 6](preview/preview6/wpf.md)
 - [Preview 5](preview/preview5/wpf.md)
