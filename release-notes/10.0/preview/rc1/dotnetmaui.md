@@ -71,7 +71,7 @@ Added `IsRefreshEnabled` property to be distinct from `IsEnabled` and make the b
 
 Compressed layout APIs are now marked obsolete. Avoid unnecessary layout nesting instead.
 
-`Performance` and `IPerformanceProvider` types are market obsolete.
+`Performance` and `IPerformanceProvider` types are marked obsolete.
 
 ## .NET for Android
 
