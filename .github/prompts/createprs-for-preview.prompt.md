@@ -19,21 +19,27 @@ Derived values:
 Process (repeat per file in the RC1 folder):
 
 1. Create a new branch from the base branch `dotnet10-rc1` with name `dotnet10-rc1-{name}`
-1. Modify the corresponding file by adding a simple new line at the end with the text: `Something about the feature`.
+1. Modify the corresponding file by replacing any "TBD" placeholder text with: `Something about the feature`.
+1. Validate markdown formatting using markdownlint with the repository's settings (`.github/linters/.markdown-lint.yml`).
 1. Commit with message: `Update {name} for RC 1`.
 1. Push the branch to the remote repository.
 1. Create a pull request with:
 
 - Title: `Update {name} for RC 1`
 - Body: `Please update the release notes here as needed for RC 1.\n\n/cc @{assignees}`
-- Assignees: Assign the PR to the person(s) listed for the file in the table below.
 
+1. Assign the PR using GitHub CLI: `gh pr edit <PR_NUMBER> --add-assignee <username>` (use the first listed person for files with multiple assignees)
 1. Switch back to the base branch `dotnet10-rc1` and repeat for the next file.
 
 Notes:
 
 - All RC 1 release notes are in the `release-notes/10.0/preview/rc1/` directory.
 - Keep the same file-to-assignee mapping unless explicitly changed.
+- Use GitHub CLI for assignments as it's more reliable than the API: `gh pr edit <PR_NUMBER> --add-assignee <username>`
+- For files with multiple assignees, assign to the first listed person only.
+- Replace "TBD" placeholders rather than adding content to avoid duplication.
+- Run markdownlint validation before committing: The repository uses `.github/linters/.markdown-lint.yml` for linting rules.
+- Ensure all markdown files have proper trailing newlines and follow the established formatting standards.
 
 ## Assignment Table (based on Preview 7 PRs)
 
@@ -66,3 +72,12 @@ Here are the files to process one at a time:
 - visualbasic.md
 - winforms.md
 - wpf.md
+
+## Master Consolidation PR
+
+After creating all individual component PRs, create a master consolidation PR:
+
+1. Create a PR from `dotnet10-rc1` to `main` with:
+   - Title: `Add release notes for .NET 10 RC 1 across various components`
+   - Body: Include references to all component PRs and cc the release management team
+   - Pattern: Follow the same structure as the Preview 7 master PR (#10006)
