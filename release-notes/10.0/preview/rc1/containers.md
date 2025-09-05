@@ -1,10 +1,3 @@
 # Containers in .NET 10 RC 1 - Release Notes
 
-The following .NET 10 RC 1 release notes describe new features and changes in
-this release.
-
-## What's new features
-
-TBD
-
-Something about the feature
+This preview release does not contain new Container image features.
