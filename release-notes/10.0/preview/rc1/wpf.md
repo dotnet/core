@@ -1,8 +1,6 @@
 # WPF in .NET 10 RC 1 - Release Notes
 
-This preview release does not contain new WPF features. You can find detailed information about the improvements in the GitHub Release below:
-
-- [WPF GitHub Release Notes](https://github.com/dotnet/wpf/releases/tag/v10.0.0-preview.1.25080.3)
+This preview release does not contain new WPF features.
 
 WPF updates in .NET 10:
 
