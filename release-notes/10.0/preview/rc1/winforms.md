@@ -5,4 +5,4 @@ this release.
 
 ## What's new features
 
-TBD
+Something about the feature
