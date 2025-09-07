@@ -2,6 +2,7 @@
 
 Here's a summary of what's new in ASP.NET Core in this release:
 
+* [Persistent component state support for enhanced navigation](#persistent-component-state-support-for-enhanced-navigation)
 * [New ASP.NET Core Identity metrics](#new-aspnet-core-identity-metrics)
 * [Validation improvements for Minimal APIs and Blazor](#validation-improvements-for-minimal-apis-and-blazor)
 * [OpenAPI schema generation improvements](#openapi-schema-generation-improvements)
@@ -17,6 +18,85 @@ ASP.NET Core updates in .NET 10 Release Candidate 1:
 
 * [Discussion](https://aka.ms/dotnet/10/rc1)
 * [Release notes](README.md)
+
+## Persistent component state support for enhanced navigation
+
+Blazor now supports handling persistent component state when doing enhanced navigations. State persisted during an enhanced navigation can be read by interactive components on the page.
+
+By default, persistent component state will only be loaded by interactive components when they are initially loaded on the page. This prevents important state, like data in an edited form, from being overwritten if additional enhanced navigations occur to the same page after the component was already loaded.
+
+If the data is read-only and doesn't change frequently, you can opt-in to allow updates during enhanced navigation by setting `AllowUpdates = true` on the `[PersistentState]` attribute. This is useful for scenarios like displaying cached data that is expensive to fetch but doesn't change often:
+
+```csharp
+[PersistentState(AllowUpdates = true)]
+public WeatherForecast[]? Forecasts { get; set; }
+
+protected override async Task OnInitializedAsync()
+{
+    Forecasts ??= await ForecastService.GetForecastAsync();
+}
+```
+
+To skip restoring state during prerendering, set `RestoreBehavior` to `SkipInitialValue`:
+
+```csharp
+// Skip restoration during prerendering
+[PersistentState(RestoreBehavior = RestoreBehavior.SkipInitialValue)]
+public string NoPrerenderedData { get; set; }
+```
+
+To skip restoring state during reconnection, set `RestoreBehavior` to `SkipLastSnapshot`:
+
+```csharp
+// Receive updates during enhanced navigation
+[PersistentState(AllowUpdates = true)]
+public int CurrentPage { get; set; }
+```
+
+Combine these behavior to only restore state during enhanced navigation:
+
+```csharp
+// Only restore state during enhanced navigation
+[PersistentState(RestoreBehavior = RestoreBehavior.SkipInitialValue | RestoreBehavior.SkipLastSnapshot)]
+public string OnlyEnhancedNavData { get; set; }
+```
+
+You can also call `RegisterOnRestoring` on the `PersistentComponentState` service to register a callback for imperatively controlling how state gets restored. Pass `RestoreOptions` to control when the call back is invoked.
+
+```razor
+@implements IDisposable
+@inject PersistentComponentState State
+
+@code {
+    int currentPage { get; set; } = 1;
+    string initialData { get; set; } = "";
+    RestoringComponentStateSubscription? currentPageSubscription;
+    RestoringComponentStateSubscription? initialDataSubscription;
+
+    protected override void OnInitialized()
+    {
+        // Register for enhanced navigation updates
+        currentPageSubscription = State.RegisterOnRestoring(() =>
+        {
+            // Only restore navigation-specific state
+            currentPage = State.TryTakeFromJson<int>(nameof(currentPage), out var page) ? page : 1;
+        }, new RestoreOptions { AllowUpdates = true });
+
+        // Register for prerendering only
+        initialDataSubscription = State.RegisterOnRestoring(() =>
+        {
+            // Only restore during prerendering
+            initialData = State.TryTakeFromJson<string>(nameof(initialData), out var data) ? data : "";
+        }, new RestoreOptions { RestoreBehavior = RestoreBehavior.SkipLastSnapshot });
+    }
+
+    public void Dispose()
+    {
+        currentPageSubscription?.Dispose();
+        initialDataSubscription?.Dispose();
+    }
+}
+```
 
 ## New ASP.NET Core Identity metrics
 
