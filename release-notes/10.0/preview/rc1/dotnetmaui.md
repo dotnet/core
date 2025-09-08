@@ -92,10 +92,6 @@ Please try this in your applications and report any issues; when filing feedback
 
 A detailed list of Android changes can be found on the [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
 
-## .NET for iOS, Mac Catalyst, macOS, tvOS
-
-Need release notes here
-
 ## Contributors
 
 Thank you contributors! ❤️
