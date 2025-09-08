@@ -8,6 +8,7 @@ Here's a summary of what's new in .NET MAUI in this release:
   - [RefreshView IsRefreshEnabled](#refreshview-isrefreshenabled)
   - [Deprecated APIs](#deprecated-apis)
 - [.NET for Android](#net-for-android)
+  - [CoreCLR runtime experimental support](#experimental-coreclr)
 - [.NET for iOS, Mac Catalyst, macOS, tvOS](#net-for-ios-mac-catalyst-macos-tvos)
 
 .NET MAUI updates in .NET 10:
