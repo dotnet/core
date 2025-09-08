@@ -80,4 +80,4 @@ The types are taking advantage of the new C# 14 extension operators feature so t
 
 ## API Diff
 
-The full diff for the "in box" .NET Libraries APIs between .NET 10 Preview 7 and .NET 10 RC1 can be found here: https://github.com/dotnet/core/blob/main/release-notes/10.0/preview/rc1/api-diff/Microsoft.NETCore.App/10.0-rc1.md
+The full diff for the "in box" .NET Libraries APIs between .NET 10 Preview 7 and .NET 10 RC1 can be found [here](https://github.com/dotnet/core/blob/main/release-notes/10.0/preview/rc1/api-diff/Microsoft.NETCore.App/10.0-rc1.md).
