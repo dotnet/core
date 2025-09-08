@@ -49,8 +49,8 @@ To skip restoring state during reconnection, set `RestoreBehavior` to `SkipLastS
 
 ```csharp
 // Receive updates during enhanced navigation
-[PersistentState(AllowUpdates = true)]
-public int CurrentPage { get; set; }
+[PersistentState(RestoreBehavior = RestoreBehavior.SkipLastSnapshot)]
+public int CounterNotRestoredOnReconnect { get; set; }
 ```
 
 Combine these behavior to only restore state during enhanced navigation:
