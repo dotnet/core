@@ -18,9 +18,9 @@ Here's a summary of what's new in .NET MAUI in this release:
 
 We've added comprehensive diagnostics and metrics tracking for .NET MAUI applications, focusing on layout performance monitoring with an extensible architecture for future observability needs.
 
-![.NET Aspire dashboard showing several .NET MAUI traces](https://github.com/user-attachments/assets/2d60c934-cd50-416d-85e7-c0ccc22915a2)
+![.NET Aspire dashboard showing several .NET MAUI traces](media/maui-aspire-1.png)
 
-![.NET Aspire dashboard showing trace detail for an element](https://github.com/user-attachments/assets/1874a732-0b56-4898-8db0-d04211e7f5ea)
+![.NET Aspire dashboard showing trace detail for an element](media/maui-aspire-2.png)
 
 **Core Diagnostics Infrastructure:**
 
@@ -91,6 +91,11 @@ Enables Android apps to run on the CoreCLR runtime (instead of Mono). To use it,
 Please try this in your applications and report any issues; when filing feedback, state that you are using UseMonoRuntime=false. Expect that application size is currently larger than with Mono and that debugging and some runtime diagnostics are not fully functional yet; these areas are actively being improved. This is an experimental feature and not intended for production use.
 
 A detailed list of Android changes can be found on the [dotnet/android GitHub releases](https://github.com/dotnet/android/releases/).
+
+
+## .NET for iOS, Mac Catalyst, macOS, tvOS
+
+This release includes continued integration with multiple .NET runtimes, and several bug fixes.
 
 ## Contributors
 
