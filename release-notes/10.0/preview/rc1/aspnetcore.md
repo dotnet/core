@@ -53,14 +53,6 @@ To skip restoring state during reconnection, set `RestoreBehavior` to `SkipLastS
 public int CounterNotRestoredOnReconnect { get; set; }
 ```
 
-Combine these behavior to only restore state during enhanced navigation:
-
-```csharp
-// Only restore state during enhanced navigation
-[PersistentState(RestoreBehavior = RestoreBehavior.SkipInitialValue | RestoreBehavior.SkipLastSnapshot)]
-public string OnlyEnhancedNavData { get; set; }
-```
-
 You can also call `RegisterOnRestoring` on the `PersistentComponentState` service to register a callback for imperatively controlling how state gets restored. Pass `RestoreOptions` to control when the call back is invoked.
 
 ```razor
