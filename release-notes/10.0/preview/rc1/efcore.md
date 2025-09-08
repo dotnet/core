@@ -1,11 +1,17 @@
 # Entity Framework Core in .NET 10 RC 1 - Release Notes
 
+Here's a summary of what's new in Entity Framework Core in this release:
+
+- [SQL Server vector search](#sql-server-vector-search)
+- [SQL Server JSON type support](#sql-server-json-type-support)
+- [Cosmos full-text and hybrid search](#cosmos-full-text-and-hybrid-search)
+- [Complex types](#complex-types)
+- [Padding for parameterized collections](#padding-for-parameterized-collections)
+
 Entity Framework Core 10 updates:
 
 - [What's new in Entity Framework Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/whatsnew) documentation
 - [Breaking change in Entity Framework Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/breaking-changes)
-
-The following .NET 10 RC 1 release notes describe new features and changes in this release.
 
 ## SQL Server vector search
 
