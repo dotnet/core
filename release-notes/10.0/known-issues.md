@@ -27,7 +27,6 @@ Add the following to a `Directory.Build.props` file that is imported in all MAUI
 
 The behavior will be **fixed in the .NET 10 preview 5** release. The workaround should be removed after that release.
 
-
 ## 'dotnet.config' will be removed in favor of 'global.json'
 
 In .NET 10, we introduced 'dotnet.config' file that is used to set the test runner and is the way to opt-in using `dotnet test` for Microsoft.Testing.Platform. This is already shipping in RC1, but will be removed in RC2.
