@@ -54,6 +54,7 @@ public int CounterNotRestoredOnReconnect { get; set; }
 ```
 
 You can also call `RegisterOnRestoring` on the `PersistentComponentState` service to register a callback for imperatively controlling how state gets restored, which gives you full control of how state gets restored (similar to how `RegisterOnPersisting` gives you full control of how state gets persisted). 
+
 ## New ASP.NET Core Identity metrics
 
 ASP.NET Core Identity now provides built-in metrics (counters, histograms, gauges) for key user and sign-in operations. These metrics let you monitor user management activities like creating users, changing passwords, and assigning roles. You can also track login attempts, sign-ins, sign-outs, and two-factor authentication usage.
