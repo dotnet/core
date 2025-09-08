@@ -18,9 +18,9 @@ Here's a summary of what's new in .NET MAUI in this release:
 
 We've added comprehensive diagnostics and metrics tracking for .NET MAUI applications, focusing on layout performance monitoring with an extensible architecture for future observability needs.
 
-<img width="1814" height="635" alt="image" src="https://github.com/user-attachments/assets/2d60c934-cd50-416d-85e7-c0ccc22915a2" />
+![.NET Aspire dashboard showing several .NET MAUI traces](https://github.com/user-attachments/assets/2d60c934-cd50-416d-85e7-c0ccc22915a2)
 
-<img width="1923" height="1397" alt="image" src="https://github.com/user-attachments/assets/1874a732-0b56-4898-8db0-d04211e7f5ea" />
+![.NET Aspire dashboard showing trace detail for an element](https://github.com/user-attachments/assets/1874a732-0b56-4898-8db0-d04211e7f5ea)
 
 **Core Diagnostics Infrastructure:**
 
