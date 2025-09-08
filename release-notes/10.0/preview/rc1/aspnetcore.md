@@ -45,7 +45,7 @@ To skip restoring state during prerendering, set `RestoreBehavior` to `SkipIniti
 public string NoPrerenderedData { get; set; }
 ```
 
-To skip restoring state during reconnection, set `RestoreBehavior` to `SkipLastSnapshot`:
+To skip restoring state during reconnection, set `RestoreBehavior` to `SkipLastSnapshot`. This can be useful if you want to ensure fresh data after reconnection:
 
 ```csharp
 // Receive updates during enhanced navigation
