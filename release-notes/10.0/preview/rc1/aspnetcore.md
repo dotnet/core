@@ -53,7 +53,7 @@ To skip restoring state during reconnection, set `RestoreBehavior` to `SkipLastS
 public int CounterNotRestoredOnReconnect { get; set; }
 ```
 
-You can also call `RegisterOnRestoring` on the `PersistentComponentState` service to register a callback for imperatively controlling how state gets restored, which gives you full control of how state gets restored (similar to how `RegisterOnPersisting` gives you full control of how state gets persisted). 
+You can also call `RegisterOnRestoring` on the `PersistentComponentState` service to register a callback for imperatively controlling how state gets restored, which gives you full control of how state gets restored (similar to how `RegisterOnPersisting` gives you full control of how state gets persisted).
 
 ## New ASP.NET Core Identity metrics
 
