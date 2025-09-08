@@ -3,6 +3,15 @@
 The following .NET 10 RC 1 release notes describe new features and changes in
 this release.
 
+- [Cryptography: ML-DSA External Mu](#cryptography-ml-dsa-external-mu)
+- [Cryptography: Post Quantum Cryptography "API Complete"](#cryptography-post-quantum-cryptography-api-complete)
+- [UTF-8 Support for hex-string conversion](#utf-8-support-for-hex-string-conversion)
+- [Tensor, TensorSpan, and ReadOnlyTensorSpan](#tensor-tensorspan-and-readonlytensorspan)
+
+.NET Libraries updates in .NET 10:
+
+- [What's new in .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview) documentation
+
 ## Cryptography: ML-DSA External Mu
 
 The ML-DSA class now allows signatures to be created and verified from an "external" mu (&#x3BC;) value.
@@ -72,7 +81,3 @@ The types are taking advantage of the new C# 14 extension operators feature so t
 ## API Diff
 
 The full diff for the "in box" .NET Libraries APIs between .NET 10 Preview 7 and .NET 10 RC1 can be found here: https://github.com/dotnet/core/blob/main/release-notes/10.0/preview/rc1/api-diff/Microsoft.NETCore.App/10.0-rc1.md
-
-## What's new features
-
-Something about the feature
