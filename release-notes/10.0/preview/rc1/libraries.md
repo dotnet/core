@@ -44,6 +44,35 @@ While we have no active plans to introduce breaking changes beyond the stable re
 the `[Experimental]` attribute is indicating areas where specifications are not complete
 or we are still waiting on features in our underlying platform libraries.
 
+## UTF-8 Support for hex-string conversion
+
+The `System.Convert` class exposes additional overloads which provide support for converting a buffer of UTF-8 text to the corresponding bytes and vice-versa. These mirror the existing overloads taking `string` and `ReadOnlySpan<char>`:
+```csharp
+namespace System;
+
+public static class Convert
+{
+    public static System.Buffers.OperationStatus FromHexString(ReadOnlySpan<byte> utf8Source, Span<byte> destination, out int bytesConsumed, out int bytesWritten);
+    public static byte[] FromHexString(ReadOnlySpan<byte> utf8Source);
+    public static bool TryToHexString(ReadOnlySpan<byte> source, Span<byte> utf8Destination, out int bytesWritten);
+    public static bool TryToHexStringLower(ReadOnlySpan<byte> source, Span<byte> utf8Destination, out int bytesWritten);
+}
+```
+
+## Tensor, TensorSpan, and ReadOnlyTensorSpan
+
+We initially previewed the new tensor APIs as part of .NET 9 (see [here](https://github.com/dotnet/core/blob/main/release-notes/9.0/preview/preview5/libraries.md#enhanced-ai-capabilities-with-tensorprimitives-and-tensort)) and are now shipping these APIs as stable in .NET 10
+
+The API surface remains "out of box" and requires referencing the [System.Numerics.Tensors](https://www.nuget.org/packages/System.Numerics.Tensors) NuGet package to be available.
+
+While the overall API surface remains similar to that previewed in .NET 9, several binary breaking changes were made to the types that were annotated with the `[Experimental]` attribute based on feedback from the community and general user experience problems that were identified.
+
+The types are taking advantage of the new C# 14 extension operators feature so that arithmetic operations are available if the underlying `T` in a `Tensor<T>` itself supports the given operation. Support is identified by the `T` implementing the relevant [Generic Math](https://learn.microsoft.com/en-us/dotnet/standard/generics/math) interfaces, such as `IAdditionOperators<TSelf, TOther, TResult>` or `INumber<TSelf>`. For example, `tensor + tensor` is available for a `Tensor<int>`, but is not available for a `Tensor<bool>`.
+
+## API Diff
+
+The full diff for the "in box" .NET Libraries APIs between .NET 10 Preview 7 and .NET 10 RC1 can be found here: https://github.com/dotnet/core/blob/main/release-notes/10.0/preview/rc1/api-diff/Microsoft.NETCore.App/10.0-rc1.md
+
 ## What's new features
 
 Something about the feature
