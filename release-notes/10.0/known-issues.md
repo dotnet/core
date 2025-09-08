@@ -48,3 +48,15 @@ With `global.json`, this becomes:
 }
 ```
 
+A `global.json` that sets SDK version along with the test runner will look like:
+
+```json
+{
+  "sdk": {
+    "version": "<version>"
+  },
+  "test": {
+    "runner": "Microsoft.Testing.Platform"
+  }
+}
+```
