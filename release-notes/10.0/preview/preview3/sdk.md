@@ -100,4 +100,8 @@ name = "Microsoft.Testing.Platform"
 > [!NOTE]
 > The `[dotnet.test:runner]` part will change to `[dotnet.test.runner]` in Preview 4.
 
+
+> [!IMPORTANT]
+> In RC2, we are moving from `dotnet.config` to `global.json`, and we are removing `dotnet.config` support completely.
+
 For more details, refer to [Testing with `dotnet test`](https://learn.microsoft.com/dotnet/core/testing/unit-testing-with-dotnet-test), which explains how Microsoft.Testing.Platform was integrated with `dotnet test` in .NET 9 and earlier versions, and the reasons behind the new `dotnet test` experience.
