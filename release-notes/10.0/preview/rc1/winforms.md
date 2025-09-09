@@ -4,7 +4,7 @@ Here's a summary of what's new in WinForms in this release:
 
 - [Dark Mode Now Fully Integrated](#dark-mode-now-fully-integrated)
 - [Clarification on ControlStyles `ApplyThemingImplicitlyUsage`](#clarification-on-controlstyles-applythemingimplicitlyusage)
-- [Several additional improvements to renderer, async, and state management](#additional-improvements)
+- [Several more improvements to renderer, async, and state management](#other-improvements)
 
 Windows Forms updates in .NET 10:
 
@@ -12,13 +12,13 @@ Windows Forms updates in .NET 10:
 
 ## Dark Mode Now Fully Integrated
 
-Dark mode is officially out of experimental status and can be used without special configuration. Keep in mind that the dark mode renderer relies on underlying Win32 controls, and while we anticipate improvements, dark mode support will evolve over time. Please refer to our updated docs for the latest scope and details.
+Dark mode is officially out of experimental status and can be used without special configuration. Keep in mind that the dark mode renderer relies on underlying Win32 controls, and while we anticipate improvements, dark mode support will evolve over time. Refer to our updated docs for the latest scope and details.
 
 ## Clarification on ControlStyles `ApplyThemingImplicitlyUsage`
 
-While the `ControlStyles` enum element `ApplyThemingImplicitly`  isn’t new, it now has a more precise application for opting in or out of dark mode themin: It’s crucial to set this enum flag in a derived control in `CreateParams` _before_ calling the base method. Due to the original WinForms design, `CreateParams` runs before derived class constructors, and this order can be a common pitfall if not highlighted. We've updated the docs with this note, and it’s important for developers inheriting controls to follow this guidance, if they want their control to opt in or out implicit theming handling.
+While the `ControlStyles` enum element `ApplyThemingImplicitly` isn’t new, it now has a more precise application for opting in or out of dark mode theming: It’s crucial to set this enum flag in a derived control in `CreateParams` _before_ calling the base method. Due to the original WinForms design, `CreateParams` runs before derived class constructors, and this order can be a common pitfall if not highlighted. We've updated the docs with this note, and it’s important for developers inheriting controls to follow this guidance, if they want their control to opt in or out implicit theming handling.
 
-## Additional Improvements
+## Other Improvements
 
 - **Renderer and Color Fixes**: We've resolved issues with foreground and background colors for buttons and text boxes in dark mode.
 
