@@ -22,7 +22,7 @@ platform-specific .NET Tools work this way, you only need to add one thing to yo
   <RuntimeIdentifiers>
         linux-x64;
         linux-arm64;
-        macos-arm64;
+        osx-arm64;
         win-x64;
 -       win-arm64
 +       win-arm64;
