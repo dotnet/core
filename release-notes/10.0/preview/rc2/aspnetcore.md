@@ -1,6 +1,12 @@
 # ASP.NET Core in .NET 10 RC 2 - Release Notes
 
-This RC 2 release does not contain new ASP.NET Core feature additions.
+Here's a summary of what's new in ASP.NET Core in this RC 2 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary
 
 ASP.NET Core updates in .NET 10:
 
