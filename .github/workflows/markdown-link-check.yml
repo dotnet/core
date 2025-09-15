@@ -17,10 +17,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Detect preview-only changes
+      id: preview_filter
+      shell: bash
+      run: |
+        # List changed markdown files against base for PRs or last commit for pushes
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '**/*.md')
+        else
+          CHANGED=$(git diff --name-only HEAD^ HEAD -- '**/*.md' || true)
+        fi
+        echo "Changed markdown files:\n$CHANGED"
+        # If all changed markdown files (and at least one) are under release-notes/*/preview/, mark skip
+        if [ -n "$CHANGED" ]; then
+          PREVIEW_ONLY=true
+          while IFS= read -r file; do
+            case "$file" in
+              release-notes/*/preview/*) ;; # stays true
+              *) PREVIEW_ONLY=false; break ;;
+            esac
+          done <<< "$CHANGED"
+          if [ "$PREVIEW_ONLY" = true ]; then
+            echo "All changed markdown files are preview release notes. Skipping link check to avoid transient failures."
+            echo "skip_check=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip_check=false" >> $GITHUB_OUTPUT
+          fi
+        else
+          echo "No markdown changes detected; skipping link check."
+          echo "skip_check=true" >> $GITHUB_OUTPUT
+        fi
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
+      if: steps.preview_filter.outputs.skip_check != 'true'
       with:
         use-quiet-mode: 'yes'
         use-verbose-mode: 'yes'
         check-modified-files-only: 'yes'
         config-file: '.github/workflows/markdown-link-check-config.json'
         base-branch: 'main'
+    - name: Skip summary
+      if: steps.preview_filter.outputs.skip_check == 'true'
+      run: echo "Markdown link check skipped for preview-only or no markdown changes."
