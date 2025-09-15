@@ -1,6 +1,12 @@
 # .NET MAUI in .NET 10 RC 2 - Release Notes
 
-This RC 2 release does not contain new .NET MAUI feature additions.
+Here's a summary of what's new in .NET MAUI in this RC 2 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary
 
 .NET MAUI updates in .NET 10:
 
