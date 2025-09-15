@@ -1,6 +1,12 @@
 # C# 14 updates in .NET 10 RC 2 - Release Notes
 
-This RC 2 release does not contain new C# features.
+Here's a summary of what's new in C# in this RC 2 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary
 
 C# 14 updates:
 
