@@ -34,33 +34,29 @@ Example (NOT to be edited into the file): DOTNET_VERSION=10, MILESTONE_KIND=rc, 
 ## Process (assistant substitutes variables at execution time)
 
 1. Create a new branch from the base branch: `git switch -c dotnet${DOTNET_VERSION}-${MilestonePrefix}-{name} origin/dotnet${DOTNET_VERSION}-${MilestonePrefix}`
-1. Modify the file content:
-    - If the file contains a neutral/no-new-features sentence such as:
-       * `This ${Milestone Label} release does not contain new` … OR
-       * `This RC 2 release does not contain new` …
-       replace that ENTIRE sentence block with the following scaffold (customize the product/area name appropriately — keep heading anchors lowercase with hyphens):
-       ```markdown
-       Here's a summary of what's new in <Product/Area> in this ${Milestone Label} release:
+1. Modify the file content. If the file contains a neutral/no-new-features sentence such as `This ${Milestone Label} release does not contain new ...` (or the equivalent for a specific RC) replace that entire sentence block with the scaffold below. If no neutral sentence exists, insert the scaffold directly below the heading (only once; do not duplicate it).
 
-       - [Feature](#feature)
+```markdown
+Here's a summary of what's new in <Product/Area> in this ${Milestone Label} release:
 
-       ## Feature
+- [Feature](#feature)
 
-       Feature summary
-       ```
-    - Otherwise, insert the above placeholder text directly below the heading.
-    - Do NOT append duplicates; always replace in-place.
+## Feature
+
+Feature summary
+```
+
 1. Run markdown lint: `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/{name}`
 1. Commit: `Update {name} for ${Milestone Label}`
 1. Push the branch
-1. Create a pull request with:
-   - Title: `Update {name} for ${Milestone Label}`
-    - Body (exact format):
-       ```
-   Please update the release notes here as needed for ${Milestone Label}.
+1. Create a pull request with title `Update {name} for ${Milestone Label}` and body:
 
-       /cc @{assignees}
-       ```
+```text
+Please update the release notes here as needed for ${Milestone Label}.
+
+/cc @{assignees}
+```
+
 1. Assign the PR (first listed person if multiple): `gh pr edit <PR_NUMBER> --add-assignee <username>`
 1. Switch back to `dotnet${DOTNET_VERSION}-${MilestonePrefix}` and continue with the next file.
 
@@ -114,11 +110,11 @@ Here are the files to process one at a time:
 After all component PRs are opened for the milestone, create a consolidation PR:
 
 1. Source: `dotnet${DOTNET_VERSION}-${MilestonePrefix}` → Target: `main`
-1. Title: `Add release notes for .NET ${DOTNET_VERSION} ${Milestone Label} across various components`
-1. Body sections:
+2. Title: `Add release notes for .NET ${DOTNET_VERSION} ${Milestone Label} across various components`
+3. Body sections:
    - Intro sentence
    - Bullet list of component PRs (e.g. `- ASP.NET Core: #<PR>`)
    - CC release management (e.g. `@leecow @rbhanda @victorisr`)
-1. Match the structure used previously (see Preview 7 consolidation PR #10006) for consistency.
+4. Match the structure used previously (see Preview 7 consolidation PR #10006) for consistency.
 
 When adapting for another milestone, update only the branch name, title milestone label, and intro sentence.
