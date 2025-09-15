@@ -34,7 +34,22 @@ Example (NOT to be edited into the file): DOTNET_VERSION=10, MILESTONE_KIND=rc, 
 ## Process (assistant substitutes variables at execution time)
 
 1. Create a new branch from the base branch: `git switch -c dotnet${DOTNET_VERSION}-${MilestonePrefix}-{name} origin/dotnet${DOTNET_VERSION}-${MilestonePrefix}`
-1. Modify the file: replace any placeholder like `TBD`, `Coming soon`, or `TODO` with a single line `Something about the feature` (do NOT append duplicates).
+1. Modify the file content:
+    - If the file contains a neutral/no-new-features sentence such as:
+       * `This ${Milestone Label} release does not contain new` … OR
+       * `This RC 2 release does not contain new` …
+       replace that ENTIRE sentence block with the following scaffold (customize the product/area name appropriately — keep heading anchors lowercase with hyphens):
+       ```markdown
+       Here's a summary of what's new in <Product/Area> in this ${Milestone Label} release:
+
+       - [Feature](#feature)
+
+       ## Feature
+
+       Feature summary
+       ```
+    - Otherwise, insert the above placeholder text directly below the heading.
+    - Do NOT append duplicates; always replace in-place.
 1. Run markdown lint: `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/{name}`
 1. Commit: `Update {name} for ${Milestone Label}`
 1. Push the branch
