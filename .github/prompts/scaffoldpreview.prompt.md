@@ -22,14 +22,14 @@ Example (not baked in): DOTNET_VERSION=10, MILESTONE_KIND=rc, MILESTONE_NUMBER=2
 ## Steps
 
 1. Navigate to `release-notes/${DOTNET_VERSION}.0/preview/`.
-2. Duplicate the previous milestone folder (prior prefix → new prefix, e.g. `rc1` → `${MilestonePrefix}` or `p6` → `${MilestonePrefix}`).
-3. Remove (do NOT copy):
-	- `api-diff` directory (if present) – will be regenerated later.
-	- `release.json` – create a fresh one if required by process.
-4. For each component markdown file, update the heading and milestone label only; preserve existing anchor structure.
-5. If there are no new feature items yet, insert a neutral placeholder sentence (e.g. `This ${Milestone Label} release does not introduce new ${Product} features.`) instead of a generic "Something about the feature" line. Avoid duplicating placeholder lines.
-6. Run markdown lint: `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/*.md`.
-7. Commit on the base milestone branch (`dotnet${DOTNET_VERSION}-${MilestonePrefix}`) with message: `Scaffold .NET ${DOTNET_VERSION} ${Milestone Label} release notes folder`.
+1. Duplicate the previous milestone folder (prior prefix → new prefix, e.g. `rc1` → `${MilestonePrefix}` or `p6` → `${MilestonePrefix}`).
+1. Remove (do NOT copy):
+   - `api-diff` directory (if present) – will be regenerated later.
+   - `release.json` – create a fresh one if required by process.
+1. For each component markdown file, update the heading and milestone label only; preserve existing anchor structure.
+1. If there are no new feature items yet, insert a neutral placeholder sentence (e.g. `This ${Milestone Label} release does not introduce new ${Product} features.`) instead of a generic "Something about the feature" line. Avoid duplicating placeholder lines.
+1. Run markdown lint: `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/*.md`.
+1. Commit on the base milestone branch (`dotnet${DOTNET_VERSION}-${MilestonePrefix}`) with message: `Scaffold .NET ${DOTNET_VERSION} ${Milestone Label} release notes folder`.
 
 ## Sample File Template (aspnetcore.md – dynamic)
 
