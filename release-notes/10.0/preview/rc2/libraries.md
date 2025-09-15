@@ -1,6 +1,12 @@
 # Libraries in .NET 10 RC 2 - Release Notes
 
-This RC 2 release does not contain new Libraries feature additions.
+Here's a summary of what's new in Libraries in this RC 2 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary
 
 .NET Libraries updates in .NET 10:
 
