@@ -1,6 +1,12 @@
 # Entity Framework Core in .NET 10 RC 2 - Release Notes
 
-This RC 2 release does not contain new Entity Framework Core feature additions.
+Here's a summary of what's new in Entity Framework Core in this RC 2 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary
 
 Entity Framework Core 10 updates:
 
