@@ -1,9 +1,3 @@
 # F# in .NET 10 RC 2 - Release Notes
 
-Here's a summary of what's new in F# in this RC 2 release:
-
-- [Feature](#feature)
-
-## Feature
-
-Feature summary
+This RC 2 release does not contain new F# language features. View the [What's new in F#](https://fsharp.github.io/fsharp-compiler-docs/release-notes/Language.html) documentation to learn more.
