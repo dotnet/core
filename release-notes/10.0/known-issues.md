@@ -27,6 +27,22 @@ Add the following to a `Directory.Build.props` file that is imported in all MAUI
 
 The behavior will be **fixed in the .NET 10 preview 5** release. The workaround should be removed after that release.
 
+## .NET 10 Preview 7 SDK deb and rpm missing package dependencies
+
+Installation of .NET 10 Preview 7 runtime via package managers (deb/rpm) on Linux distributions may result in incomplete installations. When using commands like `tdnf install dotnet-runtime-10.0`, the package manager may not install all necessary components.
+
+### Available Workaround
+
+Install either `dotnet-runtime` or `aspnetcore-runtime` package instead:
+
+```bash
+tdnf install aspnetcore-runtime-10.0
+```
+
+Or use the .NET install script, which is not affected by this issue.
+
+See [GitHub issue #10033](https://github.com/dotnet/core/issues/10033) for more details and status updates on the fix.
+
 ## `dotnet.config` will be removed in favor of `global.json`
 
 In .NET 10, we introduced `dotnet.config` file that is used to set the test runner and is the way to opt-in using `dotnet test` for Microsoft.Testing.Platform. This is already shipping in RC1, but will be removed in RC2.
