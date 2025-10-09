@@ -8,7 +8,7 @@ ASP.NET Core updates in .NET 10 RC2:
 - [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/10.0#aspnet-core)
 - [Roadmap](https://aka.ms/aspnet/roadmap)
 
-.NET 10 R2:
+.NET 10 RC2:
 
 - [Discussion](https://aka.ms/dotnet/10/rc2)
 - [Release notes](README.md)
