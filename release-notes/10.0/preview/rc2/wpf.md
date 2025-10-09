@@ -1,6 +1,6 @@
 # WPF in .NET 10 RC 2 - Release Notes
 
-This release doesn't contain new WPF features.
+The RC 2 release does not contain new WPF feature additions.
 
 Key WPF updates in previous releases of .NET 10:
 
