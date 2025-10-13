@@ -47,7 +47,37 @@ This release includes continued integration with multiple .NET runtimes, and sev
 
 ### Android API 36.1
 
-Android API 36.1 bindings are now available thanks to the contribution and collaboration of the Uno Platform. 
+Android API 36.1 bindings are now available thanks to the contribution and collaboration of the [Uno Platform](https://platform.uno/) team. 
+
+To try out the new APIs, you can opt your project into the new `net10.0-android36.1` target framework:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android36.1</TargetFramework>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <!-- Remainder of your .csproj -->
+```
+
+Note that if omitted, `net10.0-android` will default to API 36.0. `$(EnablePreviewFeatures)` will not be required in future .NET 10 releases.
+
+To *use* an Android 36.1-only API you can use the `OperatingSystem` class to check the Android version at runtime:
+
+```csharp
+if (OperatingSystem.IsAndroidVersionAtLeast(36, 1))
+{
+    // Call some Android 36.1 API here
+}
+else
+{
+	// Fallback for older OS versions
+	ShowToast("Android 36.1+ is required for this feature");
+}
+```
+
+For a full sample using Android 36.1 APIs, see our [Pdf Annotator sample on GitHub](https://github.com/dotnet/android-samples/tree/main/PdfAnnotator).
+
+To install the Android 36.1 platform, you can go to **Tools** > **Android** > **Android SDK Manager**. Under the gear icon in the bottom right, change **Repository*** to **Full List**. This allows you to install `Android SDK Platform 36.1`.
 
 ### (Experimental) CoreCLR
 
