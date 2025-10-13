@@ -70,7 +70,7 @@ This release includes continued integration with multiple .NET runtimes, and sev
 
 ### Xcode 26
 
-Xcode 26 bindings have been updated and are available now for both for targeting .NET 9 and .NET 10 RC2. This is compatible with Xcdoe 26.0 and 26.1.
+Xcode 26 bindings have been updated and are available now for both for targeting .NET 9 and .NET 10 RC2. This is compatible with Xcode 26.0 and 26.1.
 
 ## Contributors
 
