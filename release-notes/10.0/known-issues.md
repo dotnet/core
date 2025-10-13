@@ -63,6 +63,7 @@ A `global.json` that sets SDK version along with the test runner will look like:
 
 ## Startup Performance Regression in Fractional CPU Containers
 
-A startup performance regression was identified in .NET 10 runtime, particularly affecting scenarios running in containers with fractional CPU allocations. We are actively investigating and working to resolve the issue in future updates.
+Up to 10% startup performance regression was identified in .NET 10 runtime, particularly affecting scenarios running in containers with fractional CPU allocations. We are actively investigating and working to resolve the issue in future updates.
+
 
 
