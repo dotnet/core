@@ -8,7 +8,7 @@ Microsoft Corporation (“Microsoft”) is pleased to work with Company Ltd. (�
 
 3. **Collaboration with Other Parties**. Microsoft intends to engage with a group of interested and known industry parties (who have  also entered into an agreement substantially the same as this Agreement) in a similar way as Microsoft and Collaborator are  collaborating under this Agreement. Each party agrees to use commercially reasonable efforts to collaborate in good faith with all other such parties to the program. Within the group, parties may share information relating to their respective products, builds, schedules, processes, dependencies, etc.  Collaborator agrees to keep confidential all information received from other parties while participating in the group.
 
-4. **Proprietary Rights**. With the exception of information shared under Section 1, neither party grants the other (by implication, estoppel or otherwise) any right, title, interest, or license, in any patents, patent applications, trade secrets, copyrights, mask work rights, trademarks or other intellectual property. Collaborator grants Microsoft a license to use, publish, and commercialize information shared under Section 1. 
+4. **Proprietary Rights**. With the exception of information shared under Section 1, neither party grants the other (by implication, estoppel or otherwise) any right, title, interest, or license, in any patents, patent applications, trade secrets, copyrights, mask work rights, trademarks or other intellectual property. Collaborator grants Microsoft a license to use, publish, and commercialize information shared under Section 1.
 
 5. **Data**. Collaborator and Microsoft will not provide each other with any customer data, personal data, or personally identifiable  information in connection with this Agreement.
 
@@ -20,7 +20,7 @@ Microsoft Corporation (“Microsoft”) is pleased to work with Company Ltd. (�
 
 9. **Limitation of liability**. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE PARTIES LIMIT THEIR LIABILITY FOR ANY  CLAIMS UNDER THIS AGREEMENT TO $500 USD AND IN NO EVENT WILL EITHER PARTY (INCLUDING THEIR DIRECTORS, OFFICERS  AND AFFILIATES) BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, SPECIAL, OR EXEMPLARY DAMAGES  ARISING OUT OF THIS AGREEMENT. THESE EXCLUSIONS APPLY REGARDLESS OF WHETHER APPLICATION OF THESE EXCLUSIONS  CAUSES ANY REMEDY TO FAIL OF ITS ESSENTIAL PURPOSE. THIS SECTION 9 WILL NOT APPLY TO LIABILITY ARISING OUT OF EITHER  PARTY’S LIABILITY FOR (i) VIOLATION OF ITS CONFIDENTIALITY OBLIGATIONS OR (ii) WILLFUL MISCONDUCT.
 
-10. **Governing Law**. The terms of this Agreement will be governed and construed in accordance with the laws of the state of  New York of the United States of America, U.S.A. 
+10. **Governing Law**. The terms of this Agreement will be governed and construed in accordance with the laws of the state of  New York of the United States of America, U.S.A.
 
 11. **Entire agreement; assignment**. This Agreement is the entire agreement between the parties regarding its limited subject matter  and merges and replaces all prior and contemporaneous agreements, communications, and representations between the parties  regarding its subject matter. Collaborator may not assign or transfer this Agreement to a third party without Microsoft’s prior  written consent.
 

@@ -14,10 +14,10 @@ Membership in the Group is limited to companies that distribute or support .NET 
 
 Members:
 
--	Canonical
--	IBM
--	Microsoft
--	Red Hat
+- Canonical
+- IBM
+- Microsoft
+- Red Hat
 
 ## Responsibilities
 
@@ -25,7 +25,7 @@ The group is modelled on common open source practices. It is oriented on source 
 
 Members must publish builds for supported .NET versions. They can additionally patch end-of-life .NET versions, however, that activity is outside the scope of the Group. Members who exclusively use early-access source patches to update end-of-life versions may be removed from the program.
 
-Members are expected to be active in `main` or other active branches as an investment in the .NET ecosystem. Doing that demonstrates a strong commitment to the ecosystem and earned community credibility. 
+Members are expected to be active in `main` or other active branches as an investment in the .NET ecosystem. Doing that demonstrates a strong commitment to the ecosystem and earned community credibility.
 
 ## Vulnerability publishing process
 
@@ -48,4 +48,4 @@ This process applies to [supported .NET releases](https://github.com/dotnet/core
 
 Vulnerability reports should be sent through the [security reporting process](https://github.com/dotnet/runtime/blob/main/README.md#reporting-security-issues-and-security-bugs).
 
-Inquiries about the Group can be sent to [dotnet@microsoft.com](mailto:dotnet@microsoft.com). 
+Inquiries about the Group can be sent to [dotnet@microsoft.com](mailto:dotnet@microsoft.com).
