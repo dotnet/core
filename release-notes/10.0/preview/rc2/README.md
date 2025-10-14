@@ -1,6 +1,6 @@
 # .NET 10 RC 2 - Release Notes
 
-.NET 10 RC 2 released on October 14, 2025. Find more information on new features released in .NET 10 RC 2 by browsing through the release notes below:
+.NET 10 RC 2 released on October 14th, 2025. Find more information on new features released in .NET 10 RC 2 by browsing through the release notes below:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)

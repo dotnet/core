@@ -1,62 +1,94 @@
-# Create PRs for .NET 10 RC 1
+# Create PRs for .NET Preview or RC
 
-Use this workflow to create one PR per release-notes file for .NET 10 RC 1.
+Use this workflow to create one PR per release-notes file for a specific .NET Preview or RC milestone. You will supply three inputs when you invoke it:
 
-Fixed settings:
+- DOTNET_VERSION (major only, e.g. 10, 11)
+- MILESTONE_KIND (`preview` or `rc`)
+- MILESTONE_NUMBER (preview: 1–7, rc: 1–2)
 
-- Version Major: 10
-- Version Path: 10.0
-- Milestone Kind: `rc`
-- Milestone Number: `1`
+PR numbers and historical references remain concrete; only version and milestone values change per cycle.
 
-Derived values:
+## Sample Inputs (Example)
 
-- Release notes folder: `release-notes/10.0/preview/rc1`
-- Base branch: `dotnet10-rc1`
-- Per-file working branch: `dotnet10-rc1-{name}`
-- Milestone label: `RC 1`
+Example below uses: DOTNET_VERSION=10, MILESTONE_KIND=rc, MILESTONE_NUMBER=2 (".NET 10 RC 2"). Replace these values when running for a different milestone.
 
-Process (repeat per file in the RC1 folder):
+## Runtime Inputs (provide these when invoking)
 
-1. Create a new branch from the base branch `dotnet10-rc1` with name `dotnet10-rc1-{name}`
-1. Modify the corresponding file by replacing any "TBD" placeholder text with: `Something about the feature`.
-1. Validate markdown formatting using markdownlint with the repository's settings (`.github/linters/.markdown-lint.yml`).
-1. Commit with message: `Update {name} for RC 1`.
-1. Push the branch to the remote repository.
-1. Create a pull request with:
+Required:
 
-- Title: `Update {name} for RC 1`
-- Body: `Please update the release notes here as needed for RC 1.\n\n/cc @{assignees}`
+- DOTNET_VERSION (major) – e.g. 10
+- MILESTONE_KIND – `preview` or `rc`
+- MILESTONE_NUMBER – preview: 1–7, rc: 1–2
 
-1. Assign the PR using GitHub CLI: `gh pr edit <PR_NUMBER> --add-assignee <username>` (use the first listed person for files with multiple assignees)
-1. Switch back to the base branch `dotnet10-rc1` and repeat for the next file.
+Derived (logic performed mentally / by assistant at run time):
 
-Notes:
+- Version Path = `${DOTNET_VERSION}.0`
+- Milestone Label = if preview → `Preview ${MILESTONE_NUMBER}` else `RC ${MILESTONE_NUMBER}`
+- Milestone Prefix = preview → `p${MILESTONE_NUMBER}` ; rc → `rc${MILESTONE_NUMBER}`
+- Base Branch = `dotnet${DOTNET_VERSION}-${MilestonePrefix}` (example: `dotnet10-rc2`)
+- Working Branch Pattern = `dotnet${DOTNET_VERSION}-${MilestonePrefix}-{name}`
+- Release Notes Folder = `release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}` (historical path keeps `preview/rcX` for RC)
 
-- All RC 1 release notes are in the `release-notes/10.0/preview/rc1/` directory.
+Example (NOT to be edited into the file): DOTNET_VERSION=10, MILESTONE_KIND=rc, MILESTONE_NUMBER=2 ⇒ label `RC 2`, prefix `rc2`.
+
+## Process (assistant substitutes variables at execution time)
+
+1. Create a new branch from the base branch: `git switch -c dotnet${DOTNET_VERSION}-${MilestonePrefix}-{name} origin/dotnet${DOTNET_VERSION}-${MilestonePrefix}`
+1. Modify the file content. If the file contains a neutral/no-new-features sentence such as `This ${Milestone Label} release does not contain new ...` (or the equivalent for a specific RC) replace that entire sentence block with the scaffold below. If no neutral sentence exists, insert the scaffold directly below the heading (only once; do not duplicate it).
+
+```markdown
+Here's a summary of what's new in <Product/Area> in this ${Milestone Label} release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary
+```
+
+1. Run markdown lint: `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/{name}`
+1. Commit: `Update {name} for ${Milestone Label}`
+1. Push the branch
+1. Create a pull request with title `Update {name} for ${Milestone Label}` and body:
+
+```text
+Please update the release notes here as needed for ${Milestone Label}.
+
+/cc @{assignees}
+```
+
+1. Assign the PR (first listed person if multiple): `gh pr edit <PR_NUMBER> --add-assignee <username>`
+1. Switch back to `dotnet${DOTNET_VERSION}-${MilestonePrefix}` and continue with the next file.
+
+## Notes
+
+- All milestone release notes live under `release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/`.
 - Keep the same file-to-assignee mapping unless explicitly changed.
-- Use GitHub CLI for assignments as it's more reliable than the API: `gh pr edit <PR_NUMBER> --add-assignee <username>`
-- For files with multiple assignees, assign to the first listed person only.
-- Replace "TBD" placeholders rather than adding content to avoid duplication.
-- Run markdownlint validation before committing: The repository uses `.github/linters/.markdown-lint.yml` for linting rules.
-- Ensure all markdown files have proper trailing newlines and follow the established formatting standards.
+- Use GitHub CLI for assignee setting; it's more reliable than reviewer assignment for this workflow.
+- Always replace placeholders rather than appending text to avoid duplicates.
+- Ensure trailing newline, consistent heading style, and no stray whitespace.
+- Optional: for JSON meta changes run `npx prettier --check "release-notes/${DOTNET_VERSION}.0/**/*.json"` (do not auto-fix when only reporting).
 
-## Assignment Table (based on Preview 7 PRs)
+No need to edit this file between milestones. Provide DOTNET_VERSION, MILESTONE_KIND, MILESTONE_NUMBER each time; assistant derives the rest. Leave PR number references and assignment history intact unless ownership changes.
 
-| File | Assignee(s) | Based on Preview 7 PR |
-|------|-------------|-----------------------|
-| aspnetcore.md | @danroth27 | #10023 |
-| containers.md | @lbussell | #9995 |
-| csharp.md | @BillWagner @MadsTorgersen @jcouv | #9996 |
-| dotnetmaui.md | @davidortinau | #9997 |
-| efcore.md | @roji | #9998 |
-| fsharp.md | @T-Gro | #9999 |
-| libraries.md | @richlander @tarekgh | #10000 |
-| runtime.md | @ericstj @kunalspathak @AndyAyersMS | #10001 |
-| sdk.md | @baronfel @mariam-abdulla @nohwnd @DamianEdwards | #10002 |
-| visualbasic.md | @BillWagner | #10003 |
-| winforms.md | @merriemcgaw @KlausLoeffelmann | #10004 |
-| wpf.md | @harshit7962 @adegeo | #10005 |
+## Assignment Table (updated using .NET 10 RC 1 assignees)
+
+The table below reflects the assignee(s) actually used on the most recent component PRs for .NET 10 RC 1 (PRs #10049–#10060). Use these as the current default owners for upcoming milestones unless ownership changes again. Notable change: libraries and runtime primary owners effectively swapped compared to Preview 7 (libraries → @ericstj, runtime → @richlander). Additional previously listed secondary owners were trimmed where they were not present as assignees on the RC 1 PR.
+
+| File | Assignee(s) | .NET 10 RC 1 PR |
+|------|-------------|-----------------|
+| aspnetcore.md | @danroth27 | #10049 |
+| containers.md | @lbussell | #10050 |
+| csharp.md | @BillWagner | #10051 |
+| dotnetmaui.md | @davidortinau | #10052 |
+| efcore.md | @roji | #10053 |
+| fsharp.md | @T-Gro | #10054 |
+| libraries.md | @ericstj @artl93 | #10055 |
+| runtime.md | @richlander | #10056 |
+| sdk.md | @baronfel | #10057 |
+| visualbasic.md | @BillWagner | #10058 |
+| winforms.md | @KlausLoeffelmann @merriemcgaw | #10059 |
+| wpf.md | @harshit7962 @adegeo | #10060 |
 
 Here are the files to process one at a time:
 
@@ -75,9 +107,14 @@ Here are the files to process one at a time:
 
 ## Master Consolidation PR
 
-After creating all individual component PRs, create a master consolidation PR:
+After all component PRs are opened for the milestone, create a consolidation PR:
 
-1. Create a PR from `dotnet10-rc1` to `main` with:
-   - Title: `Add release notes for .NET 10 RC 1 across various components`
-   - Body: Include references to all component PRs and cc the release management team
-   - Pattern: Follow the same structure as the Preview 7 master PR (#10006)
+1. Source: `dotnet${DOTNET_VERSION}-${MilestonePrefix}` → Target: `main`
+2. Title: `Add release notes for .NET ${DOTNET_VERSION} ${Milestone Label} across various components`
+3. Body sections:
+   - Intro sentence
+   - Bullet list of component PRs (e.g. `- ASP.NET Core: #<PR>`)
+   - CC release management (e.g. `@leecow @rbhanda @victorisr`)
+4. Match the structure used previously (see Preview 7 consolidation PR #10006) for consistency.
+
+When adapting for another milestone, update only the branch name, title milestone label, and intro sentence.
