@@ -8,6 +8,10 @@ Your app needs to be on the latest .NET 9 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 9.0.10 (October 2025)
+  - [CVE-2025-55248 | .NET Information Disclosure Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2025-55315 | .NET Security Feature Bypass Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2025-55247 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/xxx)
 - 9.0.9 (September 2025)
   - No new CVEs.
 - 9.0.8 (August 2025)
