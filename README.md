@@ -34,3 +34,4 @@ You can subscribe to discussions with the following RSS feeds:
 | All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
 | News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
 | General  | [🔗](https://github.com/dotnet/core/discussions/categories/general) | [🔗](https://github.com/dotnet/core/discussions/categories/general.atom) |
+ok
