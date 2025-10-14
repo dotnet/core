@@ -1,6 +1,6 @@
 # .NET 9
 
-[.NET 9](https://aka.ms/dotnet/9/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for 18 months, from November 12th, 2024 to May 12th, 2026.
+[.NET 9](https://aka.ms/dotnet/9/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for two years, from November 12th, 2024 to November 10th, 2026.
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/9.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
