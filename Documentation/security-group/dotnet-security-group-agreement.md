@@ -20,7 +20,7 @@ Microsoft Corporation (“Microsoft”) is pleased to work with Company Ltd. (�
 
 9. **Limitation of liability**. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE PARTIES LIMIT THEIR LIABILITY FOR ANY  CLAIMS UNDER THIS AGREEMENT TO $500 USD AND IN NO EVENT WILL EITHER PARTY (INCLUDING THEIR DIRECTORS, OFFICERS  AND AFFILIATES) BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, SPECIAL, OR EXEMPLARY DAMAGES  ARISING OUT OF THIS AGREEMENT. THESE EXCLUSIONS APPLY REGARDLESS OF WHETHER APPLICATION OF THESE EXCLUSIONS  CAUSES ANY REMEDY TO FAIL OF ITS ESSENTIAL PURPOSE. THIS SECTION 9 WILL NOT APPLY TO LIABILITY ARISING OUT OF EITHER  PARTY’S LIABILITY FOR (i) VIOLATION OF ITS CONFIDENTIALITY OBLIGATIONS OR (ii) WILLFUL MISCONDUCT.
 
-10. **Governing Law**. The terms of this Agreement will be governed and construed in accordance with the laws of the state of  New York of the United States of America, U.S.A.
+10. **Governing Law**. The terms of this Agreement will be governed and construed in accordance with the laws of the state of New York of the United States of America, U.S.A.
 
 11. **Entire agreement; assignment**. This Agreement is the entire agreement between the parties regarding its limited subject matter  and merges and replaces all prior and contemporaneous agreements, communications, and representations between the parties  regarding its subject matter. Collaborator may not assign or transfer this Agreement to a third party without Microsoft’s prior  written consent.
 
