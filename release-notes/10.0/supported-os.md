@@ -1,14 +1,14 @@
 # .NET 10.0 - Supported OS versions
 
-Last Updated: 2025/06/02; Support phase: Preview
+Last Updated: 2025/06/02; Support phase: GoLive
 
 [.NET 10.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 ## Android
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Android][0]                  | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]       |
+| OS           | Versions       | Architectures     | Lifecycle      |
+| ------------ | -------------- | ----------------- | -------------- |
+| [Android][0] | 16, 15, 14, 13 | Arm32, Arm64, x64 | [Lifecycle][1] |
 
 Notes:
 
@@ -19,12 +19,12 @@ Notes:
 
 ## Apple
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [iOS][2]                      | 18                          | Arm64                 | None                 |
-| [iPadOS][3]                   | 18                          | Arm64                 | None                 |
-| [macOS][4]                    | 15, 14                      | Arm64, x64            | None                 |
-| [tvOS][5]                     | 18                          | Arm64                 | None                 |
+| OS          | Versions   | Architectures | Lifecycle |
+| ----------- | ---------- | ------------- | --------- |
+| [iOS][2]    | 26, 18     | Arm64         | None      |
+| [iPadOS][3] | 26, 18     | Arm64         | None      |
+| [macOS][4]  | 26, 15, 14 | Arm64, x64    | None      |
+| [tvOS][5]   | 26         | Arm64         | None      |
 
 Notes:
 
@@ -40,17 +40,17 @@ Notes:
 
 ## Linux
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Alpine][6]                   | 3.22                        | Arm32, Arm64, x64     | [Lifecycle][7]       |
-| [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
-| [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
-| [Debian][11]                  | 13, 12                      | Arm32, Arm64, x64     | [Lifecycle][12]      |
-| [Fedora][13]                  | 42                          | Arm32, Arm64, x64     | [Lifecycle][14]      |
-| [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
-| [Red Hat Enterprise Linux][17] | 10, 9                      | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
-| [Ubuntu][21]                  | 25.04, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]      |
+| OS                             | Versions   | Architectures              | Lifecycle       |
+| ------------------------------ | ---------- | -------------------------- | --------------- |
+| [Alpine][6]                    | 3.22       | Arm32, Arm64, x64          | [Lifecycle][7]  |
+| [Azure Linux][8]               | 3.0        | Arm64, x64                 | None            |
+| [CentOS Stream][9]             | 10, 9      | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
+| [Debian][11]                   | 13, 12     | Arm32, Arm64, x64          | [Lifecycle][12] |
+| [Fedora][13]                   | 42         | Arm32, Arm64, x64          | [Lifecycle][14] |
+| [openSUSE Leap][15]            | 16.0, 15.6 | Arm64, x64                 | [Lifecycle][16] |
+| [Red Hat Enterprise Linux][17] | 10, 9      | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Enterprise Linux][19]    | 15.7, 15.6 | Arm64, x64                 | [Lifecycle][20] |
+| [Ubuntu][21]                   | 25.10, 25.04, 24.04, 22.04 | Arm32, Arm64, x64 | [Lifecycle][22] |
 
 Notes:
 
@@ -76,12 +76,12 @@ Notes:
 
 ## Windows
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Nano Server][23]             | 2025, 2022, 2019            | x64                   | [Lifecycle][24]      |
-| [Windows][25]                 | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
-| [Windows Server][27]          | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86 | [Lifecycle][24]   |
-| [Windows Server Core][23]     | 2025, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]      |
+| OS                        | Versions                                                                                                    | Architectures   | Lifecycle       |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------- | --------------- |
+| [Nano Server][23]         | 2025, 2022, 2019                                                                                            | x64             | [Lifecycle][24] |
+| [Windows][25]             | 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
+| [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012                                                                 | x64, x86        | [Lifecycle][24] |
+| [Windows Server Core][23] | 2025, 2022, 2019, 2016, 2012-R2, 2012                                                                       | x64, x86        | [Lifecycle][24] |
 
 Notes:
 
@@ -99,11 +99,11 @@ Notes:
 
 Microsoft-provided [portable Linux builds](../../linux.md) define minimum compatibility primarily via libc version.
 
-| Libc          | Version | Architectures         | Source       |
-| ------------- | ------- | --------------------- | ------------ |
-| glibc         | 2.27    | Arm64, x64            | Ubuntu 18.04 |
-| glibc         | 2.35    | Arm32                 | Ubuntu 22.04 |
-| musl          | 1.2.3   | Arm32, Arm64, x64     | Alpine 3.17  |
+| Libc  | Version | Architectures     | Source       |
+| ----- | ------- | ----------------- | ------------ |
+| glibc | 2.27    | Arm64, x64        | Ubuntu 18.04 |
+| glibc | 2.35    | Arm32             | Ubuntu 22.04 |
+| musl  | 1.2.3   | Arm32, Arm64, x64 | Alpine 3.17  |
 
 ## Notes
 
