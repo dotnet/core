@@ -1,6 +1,6 @@
 # .NET 9
 
-[.NET 9](https://aka.ms/dotnet/9/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for 18 months, from November 12th, 2024 to May 12th, 2026.
+[.NET 9](https://aka.ms/dotnet/9/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for two years, from November 12th, 2024 to November 10th, 2026.
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/9.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
@@ -14,6 +14,7 @@
 
 | Date | Release | SDK |
 | :-- | :-- | :-- |
+| 2025/10/14 | [9.0.10](./9.0.10/9.0.10.md) | [9.0.306](./9.0.10/9.0.10.md), [9.0.111](./9.0.10/9.0.111.md) |
 | 2025/09/09 | [9.0.9](./9.0.9/9.0.9.md) | [9.0.305](./9.0.9/9.0.9.md), [9.0.110](./9.0.9/9.0.110.md) |
 | 2025/08/05 | [9.0.8](./9.0.8/9.0.8.md) | [9.0.304](./9.0.8/9.0.8.md), [9.0.109](./9.0.8/9.0.109.md) |
 | 2025/07/17 | [9.0.7](./9.0.7/9.0.7.md) | [9.0.303](./9.0.7/9.0.303.md) |
