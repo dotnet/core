@@ -11,7 +11,7 @@
           "link": "https://www.android.com/",
           "lifecycle": "https://support.google.com/android",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["15", "14", "13", "12.1", "12"],
+          "supported-versions": ["16", "15", "14", "13"],
           "notes": ["API 21 is used as the minimum SDK target."]
         }
       ]
@@ -24,7 +24,7 @@
           "name": "iOS",
           "link": "https://developer.apple.com/ios/",
           "architectures": ["Arm64"],
-          "supported-versions": ["18"],
+          "supported-versions": ["26", "18"],
           "notes": ["iOS 12.2 is used as the minimum SDK target."]
         },
         {
@@ -32,14 +32,14 @@
           "name": "iPadOS",
           "link": "https://developer.apple.com/ipados/",
           "architectures": ["Arm64"],
-          "supported-versions": ["18"]
+          "supported-versions": ["26", "18"]
         },
         {
           "id": "macos",
           "name": "macOS",
           "link": "https://developer.apple.com/macos/",
           "architectures": ["Arm64", "x64"],
-          "supported-versions": ["15", "14"],
+          "supported-versions": ["26", "15", "14"],
           "notes": [
             "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
             "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
@@ -51,7 +51,7 @@
           "name": "tvOS",
           "link": "https://developer.apple.com/tvos/",
           "architectures": ["Arm64"],
-          "supported-versions": ["18"]
+          "supported-versions": ["26"]
         }
       ]
     },
@@ -103,7 +103,7 @@
           "link": "https://www.opensuse.org/",
           "lifecycle": "https://en.opensuse.org/Lifetime",
           "architectures": ["Arm64", "x64"],
-          "supported-versions": ["15.6"]
+          "supported-versions": ["16.0", "15.6"]
         },
         {
           "id": "rhel",
@@ -122,7 +122,7 @@
           "link": "https://www.suse.com/",
           "lifecycle": "https://www.suse.com/lifecycle/",
           "architectures": ["Arm64", "x64"],
-          "supported-versions": ["15.6"]
+          "supported-versions": ["15.7", "15.6"]
         },
         {
           "id": "ubuntu",
@@ -130,7 +130,7 @@
           "link": "https://ubuntu.com/",
           "lifecycle": "https://wiki.ubuntu.com/Releases",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["25.04", "24.04", "22.04"]
+          "supported-versions": ["25.10", "25.04", "24.04", "22.04"]
         }
       ]
     },
@@ -152,14 +152,14 @@
           "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
           "architectures": ["Arm64", "x64", "x86"],
           "supported-versions": [
+            "11-25h2-e",
+            "11-25h2-w",
             "11-24h2-iot-lts",
             "11-24h2-e-lts",
             "11-24h2-e",
             "11-24h2-w",
             "11-23h2-e",
             "11-23h2-w",
-            "11-22h2-e",
-            "10-22h2",
             "10-21h2-e-lts",
             "10-21h2-iot-lts",
             "10-1809-e-lts",
