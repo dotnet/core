@@ -1,5 +1,5 @@
 # .NET Bounty Scope
-
+ 
 ## Introduction
 
 The [.NET bug bounty](https://www.microsoft.com/msrc/bounty-dot-net-core) covers current released versions of .NET Core, ASP.NET Core and .NET, as well as the latest beta or release candidate of the upcoming version.
