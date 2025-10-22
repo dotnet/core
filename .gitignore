@@ -1,51 +1,42 @@
-# Ignore list for Eagle, a PCB layout tool
+# Modelica - an object-oriented language for modeling of cyber-physical systems
+# https://modelica.org/
+# Ignore temporary files, build results, simulation files
 
-# Backup files
-*.s#?
-*.b#?
-*.l#?
-*.b$?
-*.s$?
-*.l$?
+## Modelica-specific files
+*~
+*.bak
+*.bak-mo
+*.mof
+\#*\#
+*.moe
+*.mol
 
-# Eagle project file
-# It contains a serial number and references to the file structure
-# on your computer.
-# comment the following line if you want to have your project file included.
-eagle.epf
+## Build artefacts
+*.exe
+*.exp
+*.o
+*.pyc
 
-# Autorouter files
-*.pro
-*.job
+## Simulation files
+*.mat
 
-# CAM files
-*.$$$
-*.cmp
-*.ly2
-*.l15
-*.sol
-*.plc
-*.stc
-*.sts
-*.crc
-*.crs
+## Package files
+*.gz
+*.rar
+*.tar
+*.zip
 
-*.dri
-*.drl
-*.gpi
-*.pls
-*.ger
-*.xln
-
-*.drd
-*.drd.*
-
-*.s#*
-*.b#*
-
-*.info
-
-*.eps
-
-# file locks introduced since 7.x
-*.lck
+## Dymola-specific files
+buildlog.txt
+dsfinal.txt
+dsin.txt
+dslog.txt
+dsmodel*
+dsres.txt
+dymosim*
+request
+stat
+status
+stop
+success
+*.
