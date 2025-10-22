@@ -1,28 +1,34 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
+# Gradle files
+.gradle/
+build/
 
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
+# Local configuration file (sdk path, etc)
+local.properties
 
-# Environment files
-/.env
+# Log/OS Files
+*.log
 
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.aab
+*.apk
+output-metadata.json
 
-# TypeScript cache
-*.tsbuildinfo
+# IntelliJ
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
