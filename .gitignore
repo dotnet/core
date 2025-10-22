@@ -1,41 +1,24 @@
-# Compiled Lua sources
-luac.out
+# Nestjs specific
+/dist
+/node_modules
+/build
+/tmp
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
+# dotenv environment variable files
+.env
+.env.development
+.env.test
+.env.production
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
+# temp directory
+.temp
+.tmp
