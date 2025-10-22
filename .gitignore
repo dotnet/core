@@ -1,16 +1,31 @@
-# Node rules:
-## Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
+# Built things
+_Debug/
+Compiled/
 
-## Dependency directory
-## Commenting this out is preferred by some people, see
-## https://docs.npmjs.com/misc/faq#should-i-check-my-node_modules-folder-into-git
-node_modules
+# AudioCache can be rebuilt from sources
+AudioCache/
 
-# Book build output
-_book
+# Lockfile
+_OpenInEditor.lock
 
-# eBook build output
-*.epub
-*.mobi
-*.pdf
+# User settings
+Game.agf.user
+*.crm.user
+
+# Backups
+Game.agf.bak
+backup_acsprset.spr
+
+# Memory dumps
+*.dmp
+
+# Temporary files
+# temporarily created during sprite or room background compression
+~aclzw.tmp
+# temporary, main game data, before getting packed into exe
+game28.dta
+# temporary build of the game before being moved to Compiled/ folder
+*.exe
+
+# Log files
+warnings.log
