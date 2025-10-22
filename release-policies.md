@@ -1,4 +1,4 @@
-# Release Policies
+# Release Policies 
 
 The .NET team uses the following policies for [.NET releases](releases.md).
 
