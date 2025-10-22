@@ -1,4 +1,4 @@
-# Issue-Labeler Workflows
+# Issue-Labeler Workflows 
 
 This repository uses actions from [dotnet/issue-labeler](https://github.com/dotnet/issue-labeler) to predict area labels for issues and pull requests.
 
