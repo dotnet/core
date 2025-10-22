@@ -1,28 +1,25 @@
-# Firebase build and deployment files
-/firebase-debug.log
-/firebase-debug.*.log
-.firebaserc
+# CakePHP 3
 
-# Firebase Hosting
-/firebase.json
-*.cache
-hosting/.cache
+/vendor/*
+/config/app.php
 
-# Firebase Functions
-/functions/node_modules/
-/functions/.env
-/functions/package-lock.json
+/tmp/cache/models/*
+!/tmp/cache/models/empty
+/tmp/cache/persistent/*
+!/tmp/cache/persistent/empty
+/tmp/cache/views/*
+!/tmp/cache/views/empty
+/tmp/sessions/*
+!/tmp/sessions/empty
+/tmp/tests/*
+!/tmp/tests/empty
 
-# Firebase Emulators
-/firebase-*.zip
-/.firebase/
-/emulator-ui/
+/logs/*
+!/logs/empty
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# CakePHP 2
 
-# Environment files (local configs)
-/.env.*
+/app/tmp/*
+/app/Config/core.php
+/app/Config/database.php
+/vendors/*
