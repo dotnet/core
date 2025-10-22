@@ -1,4 +1,4 @@
-# .NET Supported OS Policy
+# .NET Supported OS Policy 
 
 .NET is [supported](support.md) on multiple operating systems.
 
