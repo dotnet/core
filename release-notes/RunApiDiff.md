@@ -1,4 +1,4 @@
-# RunApiDiff Script
+# RunApiDiff Script 
 
 The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script can automatically generate an API comparison report for two specified .NET previews, in the format expected for publishing in the dotnet/core repo.
 
