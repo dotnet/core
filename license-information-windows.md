@@ -1,5 +1,5 @@
 # License information for .NET on Windows
-
+ 
 The Windows distribution of .NET contains files that are provided under multiple licenses.
 This information is provided to help you understand the license terms that
 apply to your use. By using .NET on Windows, you agree to the following license terms.
