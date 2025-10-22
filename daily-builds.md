@@ -1,4 +1,4 @@
-# .NET Daily Builds -- Servicing and future releases
+# .NET Daily Builds -- Servicing and future releases 
 
 See the [.NET SDK daily builds table](https://github.com/dotnet/dotnet/blob/main/docs/builds-table.md) for the latest daily build.
 
