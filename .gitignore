@@ -1,32 +1,48 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+# Wordpress - ignore core, configuration, examples, uploads and logs.
+# https://github.com/github/gitignore/blob/main/WordPress.gitignore
+
+# Core
 #
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+# Note: if you want to stage/commit WP core files
+# you can delete this whole section/until Configuration.
+/wp-admin/
+/wp-content/index.php
+/wp-content/languages
+/wp-content/plugins/index.php
+/wp-content/themes/index.php
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/wp-*.php
+/xmlrpc.php
 
-# Test binary, built with `go test -c`
-*.test
+# Configuration
+wp-config.php
 
-# Code coverage profiles and other test artifacts
-*.out
-coverage.*
-*.coverprofile
-profile.cov
+# Example themes
+/wp-content/themes/twenty*/
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Example plugin
+/wp-content/plugins/hello.php
 
-# Go workspace file
-go.work
-go.work.sum
+# Uploads
+/wp-content/uploads/
 
-# env file
-.env
+# Log files
+*.log
 
-# Editor/IDE
-# .idea/
-# .vscode/
+# htaccess
+/.htaccess
+
+# All plugins
+#
+# Note: If you wish to whitelist plugins,
+# uncomment the next line
+#/wp-content/plugins
+
+# All themes
+#
+# Note: If you wish to whitelist themes,
+# uncomment the next line
+#/wp-content/themes
