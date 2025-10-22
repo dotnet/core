@@ -1,5 +1,5 @@
 # This script allows running API-diff to generate the dotnet/core report that compares the APIs introduced between two previews, in the format expected for publishing in the dotnet/core repo.
-
+v
 # Usage:
 
 # RunApiDiff.ps1
