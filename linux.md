@@ -1,5 +1,5 @@
 # Linux Distribution Support and Compatibility
-
+ 
 .NET can be [installed](https://learn.microsoft.com/dotnet/core/install/linux) and run on almost any Linux distribution. Packages that are available in a given distribution are compatible with that distribution. Packages and binaries from Microsoft are compatible with a broad set of distributions.
 
 The .NET community provides [best effort support](./os-lifecycle-policy.md) across all Linux distributions. [Commercial support](support.md) is provided for some popular distributions.
