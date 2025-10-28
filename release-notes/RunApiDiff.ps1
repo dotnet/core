@@ -18,9 +18,14 @@
 # -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
 # -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
 # -InstallApiDiff               : Optional boolean to install or update the ApiDiff tool. Default is false.
+# -PreviousPackageExactVersion  : Optional exact package version for the previous/before comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
+# -CurrentPackageExactVersion   : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.2.25502.107"). Overrides version search logic.
 
 # Example:
 # .\RunApiDiff.ps1 -PreviousDotNetVersion 9.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentPreviewOrRC rc -CurrentPreviewNumberVersion 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
+
+# Example with exact package versions:
+# .\RunApiDiff.ps1 -PreviousDotNetVersion 10.0 -PreviousPreviewOrRC RC -PreviousPreviewNumberVersion 1 -CurrentDotNetVersion 10.0 -CurrentPreviewOrRC RC -CurrentPreviewNumberVersion 2 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousPackageExactVersion "10.0.0-rc.1.25451.107" -CurrentPackageExactVersion "10.0.0-rc.2.25502.107"
 
 Param (
     [Parameter(Mandatory = $true)]
@@ -92,6 +97,14 @@ Param (
     [Parameter(Mandatory = $false)]
     [bool]
     $InstallApiDiff = $false
+    ,
+    [Parameter(Mandatory = $false)]
+    [string]
+    $PreviousPackageExactVersion = ""
+    ,
+    [Parameter(Mandatory = $false)]
+    [string]
+    $CurrentPackageExactVersion = ""
 )
 
 #######################
@@ -502,6 +515,10 @@ Function DownloadPackage {
         [string]
         $previewNumberVersion
         ,
+        [Parameter(Mandatory = $false)]
+        [string]
+        $exactVersion = ""
+        ,
         [ref]
         $resultingPath
     )
@@ -517,36 +534,45 @@ Function DownloadPackage {
         $feed = "https://api.nuget.org/v3/index.json"
     }
 
-    $searchTerm = ""
-    If ($previewOrRC -eq "ga") {
-        $searchTerm = "$dotNetversion.$previewNumberVersion"
+    $version = ""
+    
+    # If exact version is provided, use it directly
+    If (-Not ([System.String]::IsNullOrWhiteSpace($exactVersion))) {
+        Write-Color cyan "Using exact package version: $exactVersion"
+        $version = $exactVersion
     }
-    ElseIf (-Not ([System.String]::IsNullOrWhiteSpace($previewOrRC)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion))) {
-        $searchTerm = "$dotNetversion.*-$previewOrRC.$previewNumberVersion*"
+    Else {
+        # Otherwise, search for the package version
+        $searchTerm = ""
+        If ($previewOrRC -eq "ga") {
+            $searchTerm = "$dotNetversion.$previewNumberVersion"
+        }
+        ElseIf (-Not ([System.String]::IsNullOrWhiteSpace($previewOrRC)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion))) {
+            $searchTerm = "$dotNetversion.*-$previewOrRC.$previewNumberVersion*"
+        }
+
+        $foundPackages = Find-Package -AllVersions -Source $feed -Name $refPackageName -AllowPrereleaseVersions -ErrorAction Continue
+
+        If ($foundPackages.Count -eq 0) {
+            Write-Error "No NuGet packages found with ref package name '$refPackageName' in feed '$feed'"
+            Get-PackageSource -Name $refPackageName | Format-Table -Property Name, SourceUri
+            Write-Error "Exiting" -ErrorAction Stop
+        }
+
+        $results = $foundPackages | Where-Object -Property Version -Like $searchTerm | Sort-Object Version -Descending
+
+        If ($results.Count -eq 0) {
+            Write-Error "No NuGet packages found with search term '$searchTerm'." -ErrorAction Stop
+        }
+
+        $version = $results[0].Version
     }
-
-    $foundPackages = Find-Package -AllVersions -Source $feed -Name $refPackageName -AllowPrereleaseVersions -ErrorAction Continue
-
-    If ($foundPackages.Count -eq 0) {
-        Write-Error "No NuGet packages found with ref package name '$refPackageName' in feed '$feed'"
-        Get-PackageSource -Name $refPackageName | Format-Table -Property Name, SourceUri
-        Write-Error "Exiting" -ErrorAction Stop
-    }
-
-    $results = $foundPackages | Where-Object -Property Version -Like $searchTerm | Sort-Object Version -Descending
-
-    If ($results.Count -eq 0) {
-        Write-Error "No NuGet packages found with search term '$searchTerm'." -ErrorAction Stop
-    }
-
-    $version = $results[0].Version
+    
     $nupkgFile = [IO.Path]::Combine($TmpFolder, "$refPackageName.$version.nupkg")
 
     If (-Not(Test-Path -Path $nupkgFile)) {
-        $href = $results[0].Links | Where-Object -Property Relationship -Eq "icon" | Select-Object -ExpandProperty HRef
-        $link = $href.AbsoluteUri.Replace("?extract=Icon.png", "")
+        $nupkgUrl = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/flat2/$refPackageName/$version/$refPackageName.$version.nupkg"
 
-        $nupkgUrl = $link
         if ($useDefaultNuGetFeed) {
             $nupkgUrl = "https://www.nuget.org/api/v2/package/$refPackageName/$version"
         }
@@ -604,24 +630,32 @@ Function ProcessSdk
         [ValidateNotNullOrEmpty()]
         [string]
         $currentDotNetFriendlyName
+    ,
+        [Parameter(Mandatory = $false)]
+        [string]
+        $previousExactVersion = ""
+    ,
+        [Parameter(Mandatory = $false)]
+        [string]
+        $currentExactVersion = ""
     )
 
     $beforeDllFolder = ""
-    DownloadPackage $UseDefaultNuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeDllFolder)
+    DownloadPackage $UseDefaultNuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion $previousExactVersion ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage $UseDefaultNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterDllFolder)
+    DownloadPackage $UseDefaultNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $currentExactVersion ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
     $beforeReferenceFolder = ""
     $afterReferenceFolder = ""
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
-        DownloadPackage $UseDefaultNuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion ([ref]$beforeReferenceFolder)
+        DownloadPackage $UseDefaultNuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion $previousExactVersion ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
         
-        DownloadPackage $UseDefaultNuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion ([ref]$afterReferenceFolder)
+        DownloadPackage $UseDefaultNuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $currentExactVersion ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
 
@@ -689,17 +723,17 @@ $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $Curren
 
 If (-Not $ExcludeNetCore)
 {
-    ProcessSdk "NETCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk "NETCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
 }
 
 If (-Not $ExcludeAspNetCore)
 {
-    ProcessSdk "AspNetCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk "AspNetCore" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
 }
 
 If (-Not $ExcludeWindowsDesktop)
 {
-    ProcessSdk "WindowsDesktop" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName
+    ProcessSdk "WindowsDesktop" $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
 }
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
