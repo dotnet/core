@@ -42,7 +42,7 @@ Notes:
 
 | OS                  | Versions | Architectures     | Lifecycle       |
 | ------------------- | -------- | ----------------- | --------------- |
-| [Alpine][6]         | 3.22, 3.21, 3.20, 3.19 | Arm32, Arm64, x64 | [Lifecycle][7] |
+| [Alpine][6]         | 3.22, 3.21, 3.20 | Arm32, Arm64, x64 | [Lifecycle][7] |
 | [Azure Linux][8]    | 3.0      | Arm64, x64        | None            |
 | [CentOS Stream][9]  | 10, 9    | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]        | 13, 12   | Arm32, Arm64, x64 | [Lifecycle][12] |
@@ -117,6 +117,7 @@ The following operating system versions are no longer supported.
 
 | OS     | Version | Date       |
 | ------ | ------- | ---------- |
+| Alpine | 3.19    | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
 | Android | 12.1   | [2025-03-03](https://developer.android.com/about/versions/12/12L) |
 | Android | 12     | 2025-03-03 |
 | Fedora | 40      | 2025-05-13 |
