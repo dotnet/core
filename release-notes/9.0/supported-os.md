@@ -79,13 +79,14 @@ Notes:
 | OS                   | Versions                                    | Architectures | Lifecycle       |
 | -------------------- | ------------------------------------------- | ------------- | --------------- |
 | [Nano Server][23]    | 2025, 2022, 2019                            | x64           | [Lifecycle][24] |
-| [Windows][25]        | 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
-| [Windows Server][27] | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86      | [Lifecycle][24] |
+| [Windows][25]        | 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64 | [Lifecycle][26] |
+| [Windows Server][27] | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64           | [Lifecycle][24] |
 | [Windows Server Core][23] | 2025, 2022, 2019, 2016, 2012-R2, 2012  | x64, x86      | [Lifecycle][24] |
 
 Notes:
 
-* Windows: The x64 emulator is supported on Windows 11 Arm64.
+* Windows: The x64 and x86 emulators are supported on Windows 11 Arm64.
+* Windows: The x86 emulator is supported on x64.
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 * Windows Server Core: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 

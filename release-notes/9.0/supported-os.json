@@ -158,7 +158,7 @@
           "name": "Windows",
           "link": "https://www.microsoft.com/windows/",
           "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
-          "architectures": ["Arm64", "x64", "x86"],
+          "architectures": ["Arm64", "x64"],
           "supported-versions": [
             "11-25h2-e",
             "11-25h2-w",
@@ -174,14 +174,17 @@
             "10-1607-e-lts"
           ],
           "unsupported-versions": ["11-22h2-e", "10-22h2"],
-          "notes": ["The x64 emulator is supported on Windows 11 Arm64."]
+          "notes": [
+            "The x64 and x86 emulators are supported on Windows 11 Arm64.",
+            "The x86 emulator is supported on x64."
+          ]
         },
         {
           "id": "windows-server",
           "name": "Windows Server",
           "link": "https://www.microsoft.com/windows-server",
           "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
-          "architectures": ["x64", "x86"],
+          "architectures": ["x64"],
           "supported-versions": [
             "2025",
             "23H2",
