@@ -1,14 +1,14 @@
 # .NET 9.0 - Supported OS versions
 
-Last Updated: 2025/06/02; Support phase: Active
+Last Updated: 2025/10/28; Support phase: Active
 
 [.NET 9.0](README.md) is an [STS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 ## Android
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Android][0]                  | 15, 14, 13, 12.1, 12        | Arm32, Arm64, x64     | [Lifecycle][1]       |
+| OS           | Versions       | Architectures     | Lifecycle      |
+| ------------ | -------------- | ----------------- | -------------- |
+| [Android][0] | 16, 15, 14, 13 | Arm32, Arm64, x64 | [Lifecycle][1] |
 
 Notes:
 
@@ -19,12 +19,12 @@ Notes:
 
 ## Apple
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [iOS][2]                      | 18, 17                      | Arm64                 | None                 |
-| [iPadOS][3]                   | 18, 17                      | Arm64                 | None                 |
-| [macOS][4]                    | 15, 14, 13                  | Arm64, x64            | None                 |
-| [tvOS][5]                     | 18, 17                      | Arm64                 | None                 |
+| OS         | Versions | Architectures | Lifecycle |
+| ---------- | -------- | ------------- | --------- |
+| [iOS][2]   | 26, 18   | Arm64         | None      |
+| [iPadOS][3] | 26, 18, 17 | Arm64      | None      |
+| [macOS][4] | 26, 15, 14 | Arm64, x64  | None      |
+| [tvOS][5]  | 26       | Arm64         | None      |
 
 Notes:
 
@@ -40,17 +40,17 @@ Notes:
 
 ## Linux
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Alpine][6]                   | 3.22, 3.21, 3.20, 3.19      | Arm32, Arm64, x64     | [Lifecycle][7]       |
-| [Azure Linux][8]              | 3.0                         | Arm64, x64            | None                 |
-| [CentOS Stream][9]            | 10, 9                       | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
-| [Debian][11]                  | 12                          | Arm32, Arm64, x64     | [Lifecycle][12]      |
-| [Fedora][13]                  | 42, 41                      | Arm32, Arm64, x64     | [Lifecycle][14]      |
-| [openSUSE Leap][15]           | 15.6                        | Arm64, x64            | [Lifecycle][16]      |
-| [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Enterprise Linux][19]   | 15.6                        | Arm64, x64            | [Lifecycle][20]      |
-| [Ubuntu][21]                  | 25.04, 24.04, 22.04         | Arm32, Arm64, x64     | [Lifecycle][22]      |
+| OS                  | Versions | Architectures     | Lifecycle       |
+| ------------------- | -------- | ----------------- | --------------- |
+| [Alpine][6]         | 3.22, 3.21, 3.20 | Arm32, Arm64, x64 | [Lifecycle][7] |
+| [Azure Linux][8]    | 3.0      | Arm64, x64        | None            |
+| [CentOS Stream][9]  | 10, 9    | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
+| [Debian][11]        | 13, 12   | Arm32, Arm64, x64 | [Lifecycle][12] |
+| [Fedora][13]        | 42, 41   | Arm32, Arm64, x64 | [Lifecycle][14] |
+| [openSUSE Leap][15] | 16.0, 15.6 | Arm64, x64      | [Lifecycle][16] |
+| [Red Hat Enterprise Linux][17] | 10, 9, 8 | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Enterprise Linux][19] | 16.0, 15.7, 15.6 | Arm64, x64 | [Lifecycle][20] |
+| [Ubuntu][21]        | 25.10, 24.04, 22.04 | Arm32, Arm64, x64 | [Lifecycle][22] |
 
 Notes:
 
@@ -76,16 +76,17 @@ Notes:
 
 ## Windows
 
-| OS                            | Versions                    | Architectures         | Lifecycle            |
-| ----------------------------- | --------------------------- | --------------------- | -------------------- |
-| [Nano Server][23]             | 2025, 2022, 2019            | x64                   | [Lifecycle][24]      |
-| [Windows][25]                 | 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 11 22H2 (E), 10 22H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
-| [Windows Server][27]          | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86 | [Lifecycle][24]   |
-| [Windows Server Core][23]     | 2025, 2022, 2019, 2016, 2012-R2, 2012 | x64, x86    | [Lifecycle][24]      |
+| OS                   | Versions                                    | Architectures | Lifecycle       |
+| -------------------- | ------------------------------------------- | ------------- | --------------- |
+| [Nano Server][23]    | 2025, 2022, 2019                            | x64           | [Lifecycle][24] |
+| [Windows][25]        | 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2, 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64 | [Lifecycle][26] |
+| [Windows Server][27] | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64           | [Lifecycle][24] |
+| [Windows Server Core][23] | 2025, 2022, 2019, 2016, 2012-R2, 2012  | x64, x86      | [Lifecycle][24] |
 
 Notes:
 
-* Windows: The x64 emulator is supported on Windows 11 Arm64.
+* Windows: The x64 and x86 emulators are supported on Windows 11 Arm64.
+* Windows: The x86 emulator is supported on x64.
 * Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 * Windows Server Core: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
@@ -99,11 +100,11 @@ Notes:
 
 Microsoft-provided [portable Linux builds](../../linux.md) define minimum compatibility primarily via libc version.
 
-| Libc          | Version | Architectures         | Source       |
-| ------------- | ------- | --------------------- | ------------ |
-| glibc         | 2.23    | Arm64, x64            | Ubuntu 16.04 |
-| glibc         | 2.35    | Arm32                 | Ubuntu 22.04 |
-| musl          | 1.2.2   | Arm32, Arm64, x64     | Alpine 3.13  |
+| Libc  | Version | Architectures | Source       |
+| ----- | ------- | ------------- | ------------ |
+| glibc | 2.23    | Arm64, x64    | Ubuntu 16.04 |
+| glibc | 2.35    | Arm32         | Ubuntu 22.04 |
+| musl  | 1.2.2   | Arm32, Arm64, x64 | Alpine 3.13 |
 
 ## Notes
 
@@ -114,18 +115,28 @@ Microsoft-provided [portable Linux builds](../../linux.md) define minimum compat
 
 The following operating system versions are no longer supported.
 
-| OS                    | Version       | Date                 |
-| --------------------- | ------------- | -------------------- |
-| Fedora                | 40            | 2025-05-13           |
-| iOS                   | 16            | [2025-03-31](https://support.apple.com/HT213407) |
-| iPadOS                | 16            | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
-| openSUSE Leap         | 15.5          | 2024-12-31           |
-| tvOS                  | 16            | 2023-09-18           |
-| tvOS                  | 15            | 2022-09-12           |
-| tvOS                  | 14            | 2021-09-20           |
-| tvOS                  | 13            | 2020-09-16           |
-| tvOS                  | 12.2          | -                    |
-| Ubuntu                | 24.10         | 2025-07-10           |
+| OS     | Version | Date       |
+| ------ | ------- | ---------- |
+| Alpine | 3.19    | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
+| Android | 12.1   | [2025-03-03](https://developer.android.com/about/versions/12/12L) |
+| Android | 12     | 2025-03-03 |
+| Fedora | 40      | 2025-05-13 |
+| iOS    | 16      | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes) |
+| iOS    | 17      | 2024-11-19 |
+| iPadOS | 16      | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
+| macOS  | 13      | 2025-09-15 |
+| openSUSE Leap | 15.5 | 2024-12-31 |
+| tvOS   | 18      | 2025-09-15 |
+| tvOS   | 17      | 2024-09-16 |
+| tvOS   | 16      | 2023-09-18 |
+| tvOS   | 15      | 2022-09-12 |
+| tvOS   | 14      | 2021-09-20 |
+| tvOS   | 13      | 2020-09-16 |
+| tvOS   | 12.2    | -          |
+| Ubuntu | 25.04   | 2026-01-17 |
+| Ubuntu | 24.10   | 2025-07-10 |
+| Windows | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| Windows | 10 22H2 | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information) |
 
 ## About
 
