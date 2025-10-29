@@ -40,6 +40,16 @@ Notes:
 
 ## Linux
 
+Microsoft-provided [Portable Linux builds](../../linux.md) define minimum compatibility primarily via libc version:
+
+| Libc  | Version | Architectures | Source       |
+| ----- | ------- | ------------- | ------------ |
+| glibc | 2.27    | Arm64, x64    | Ubuntu 18.04 |
+| glibc | 2.35    | Arm32         | Ubuntu 22.04 |
+| musl  | 1.2.3   | Arm32, Arm64, x64 | Alpine 3.17 |
+
+The following are examples of distributions that align with the above libc compatibility levels (non-exhaustive):
+
 | OS                  | Versions | Architectures     | Lifecycle       |
 | ------------------- | -------- | ----------------- | --------------- |
 | [Alpine][6]         | 3.22     | Arm32, Arm64, x64 | [Lifecycle][7]  |
@@ -49,7 +59,7 @@ Notes:
 | [Fedora][13]        | 42       | Arm32, Arm64, x64 | [Lifecycle][14] |
 | [openSUSE Leap][15] | 16.0, 15.6 | Arm64, x64      | [Lifecycle][16] |
 | [Red Hat Enterprise Linux][17] | 10, 9 | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Enterprise Linux][19] | 16.0, 15.7, 15.6 | Arm64, x64 | [Lifecycle][20] |
+| [SUSE Linux Enterprise][19] | 16.0, 15.7, 15.6 | Arm64, x64 | [Lifecycle][20] |
 | [Ubuntu][21]        | 25.10, 24.04, 22.04 | Arm32, Arm64, x64 | [Lifecycle][22] |
 
 Notes:
@@ -95,16 +105,6 @@ Notes:
 [25]: https://www.microsoft.com/windows/
 [26]: https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet
 [27]: https://www.microsoft.com/windows-server
-
-## Linux compatibility
-
-Microsoft-provided [portable Linux builds](../../linux.md) define minimum compatibility primarily via libc version.
-
-| Libc  | Version | Architectures | Source       |
-| ----- | ------- | ------------- | ------------ |
-| glibc | 2.27    | Arm64, x64    | Ubuntu 18.04 |
-| glibc | 2.35    | Arm32         | Ubuntu 22.04 |
-| musl  | 1.2.3   | Arm32, Arm64, x64 | Alpine 3.17 |
 
 ## Notes
 
