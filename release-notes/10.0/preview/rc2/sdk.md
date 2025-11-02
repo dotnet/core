@@ -87,8 +87,8 @@ A [future version](https://github.com/dotnet/msbuild/pull/12642) will simplify t
 addition is required.
 
 There are also small technical limitations to be aware of when using .NET Tasks in MSBuild - the most notable of which is
-that the `Host Object` feature of MSBuild Tasks is [not yet supported](https://github.com/dotnet/msbuild/issues/11510) for .NET 
-Tasks running out-of-process. This means that if your Task relies on a Host Object, it will not work when running in Visual Studio 
+that the `Host Object` feature of MSBuild Tasks is [not yet supported](https://github.com/dotnet/msbuild/issues/11510) for .NET
+Tasks running out-of-process. This means that if your Task relies on a Host Object, it will not work when running in Visual Studio
 or `msbuild.exe`. We are actively working on adding support for Host Objects in future releases.
 
 > [!IMPORTANT]
@@ -96,7 +96,7 @@ or `msbuild.exe`. We are actively working on adding support for Host Objects in 
 
 Loading a Task declared with `Runtime="NET"` in an earlier version of Visual Studio or MSBuild.exe will result in an error like the following:
 
-```
+```text
 System.AggregateException: One or more errors occurred. ---> Microsoft.Build.Exceptions.BuildAbortedException: Build was canceled.
  MSBuild.exe could not be launched as a child node as it could not be found at the location "C:\Program Files\Microsoft Visual Studio\2026\Preview\MSBuild\Current\Bin\amd64\MSBuild.dll". If necessary, specify the correct location in the BuildParameters, or with the MSBUILD_EXE_PATH environment variable.
  at Microsoft.Build.BackEnd.NodeLauncher.StartInternal(String msbuildLocation, String commandLineArgs)
@@ -107,8 +107,8 @@ System.AggregateException: One or more errors occurred. ---> Microsoft.Build.Exc
 
 For this reason, you will likely need two `UsingTask` elements for each Task you want to load:
 
- * one comparing against `MSBuild::VersionGreaterThanOrEquals('$(MSBuildVersion)', '18.0.0')` for environments that support the .NET TaskHost
- * one comparing against `MSBuild::VersionLessThan('$(MSBuildVersion)', '18.0.0')` for environments that do not support the .NET TaskHost
+- one comparing against `MSBuild::VersionGreaterThanOrEquals('$(MSBuildVersion)', '18.0.0')` for environments that support the .NET TaskHost
+- one comparing against `MSBuild::VersionLessThan('$(MSBuildVersion)', '18.0.0')` for environments that do not support the .NET TaskHost
 
 If you don't do this UsingTask-based version detection, then you should have some other kind of version-checking that issues
 some kind of warning message to a user that they are using an unsupported configuration
