@@ -111,7 +111,7 @@ For this reason, you will likely need two `UsingTask` elements for each Task you
 - one comparing against `MSBuild::VersionLessThan('$(MSBuildVersion)', '18.0.0')` for environments that do not support the .NET TaskHost
 
 If you don't do this UsingTask-based version detection, then you should have some other kind of version-checking that issues
-some kind of warning message to a user that they are using an unsupported configuration
+some kind of warning message to a user that they are using an unsupported configuration.
 
 ### Future work
 
