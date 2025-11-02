@@ -21,7 +21,7 @@ This release brings several major improvements to the .NET SDK experience, espec
 
 .NET tools can now be published with support for multiple RuntimeIdentifiers (RIDs) in a single package. Tool authors can bundle binaries for all supported platforms, and the .NET CLI will select the correct one at install or run time. This makes cross-platform tool authoring and distribution much easier.
 
-The [baronfel/multi-rid-tool](https://github.com/baronfel/multi-rid-tool) repository demonstrates this feature with the `toolsay` tool. The README shows several packaging variations:
+The [baronfel/multi-rid-tool](https://github.com/baronfel/multi-rid-tool) repository demonstrates this feature with the `dotnetsay` tool. The README shows several packaging variations:
 
 - **Framework-dependent, platform-agnostic** (classic mode, runs anywhere with .NET 10 installed)
 - **Framework-dependent, platform-specific** (smaller, optimized for each platform)
@@ -46,8 +46,8 @@ You can now use the `dotnet tool exec` command to execute a .NET tool without in
 - Design doc: [accepted/2025/direct-tool-execution.md](https://github.com/dotnet/designs/blob/main/accepted/2025/direct-tool-execution.md)
 
 ```bash
-dotnet tool exec --source ./artifacts/package/ toolsay "Hello, World!"
-Tool package toolsay@1.0.0 will be downloaded from source <source>.
+dotnet tool exec --source ./artifacts/package/ dotnetsay "Hello, World!"
+Tool package dotnetsay@1.0.0 will be downloaded from source <source>.
 Proceed? [y/n] (y): y
   _   _          _   _                __        __                 _       _   _
  | | | |   ___  | | | |   ___         \ \      / /   ___    _ __  | |   __| | | |
@@ -57,7 +57,7 @@ Proceed? [y/n] (y): y
                                 |/
 ```
 
-This downloads and runs the specified tool package all in one go. By default, users will be prompted to confirm the download of the tool if it doesn't already exist locally. The latest version of the chosen tool package is used unless an explicit is chosen - for example `dotnet tool exec toolsay@0.1.0`.
+This downloads and runs the specified tool package all in one go. By default, users will be prompted to confirm the download of the tool if it doesn't already exist locally. The latest version of the chosen tool package is used unless an explicit is chosen - for example `dotnet tool exec dotnetsay@0.1.0`.
 
 One-shot tool execution works seamlessly with local tool manifests as well. If you run a tool from a location containing a `.config/dotnet-tools.json` nearby, the version of the tool in that config will be used instead of the latest version available.
 
@@ -66,8 +66,8 @@ One-shot tool execution works seamlessly with local tool manifests as well. If y
 Typing `dotnet tool exec` all the time is annoying, so we also added a new `dnx` script to further streamline tool execution. It basically just exists to make using tools as easy as possible - it just forwards all of your arguments along to the `dotnet` CLI for further processing. The actual implementation of the `dnx` command is in the `dotnet` CLI itself, so we can evolve its behavior over time. Today it runs tools, but who knows what the future may hold.
 
 ```bash
-dnx toolsay "Hello, World!"
-Tool package toolsay@1.0.0 will be downloaded from source <source>.
+dnx dotnetsay "Hello, World!"
+Tool package dotnetsay@1.0.0 will be downloaded from source <source>.
 Proceed? [y/n] (y): y
   _   _          _   _                __        __                 _       _   _
  | | | |   ___  | | | |   ___         \ \      / /   ___    _ __  | |   __| | | |

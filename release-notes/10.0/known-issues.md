@@ -64,3 +64,9 @@ A `global.json` that sets SDK version along with the test runner will look like:
 ## Startup Performance Regression in Fractional CPU Containers
 
 Up to 10% startup performance regression was identified in .NET 10 runtime, particularly affecting scenarios running in containers with fractional CPU allocations. This issue has been observed only on x64 architecture. We are actively investigating and working to resolve the issue in future updates.
+
+## Windows System Path Regression
+
+Updating .NET 10 preview7, RC1, or RC2 to RTM may fail to set the `PATH` environment variable on Windows. To work around this issue, repair the .NET 10 Installation. If earlier, non-native versions like 5.0 are present, it can result in swapping the path entries for x86 and x64.
+
+See [the GitHub issue](https://github.com/dotnet/sdk/issues/51218) for more details.
