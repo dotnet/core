@@ -1,5 +1,9 @@
 # This script allows running API-diff to generate the dotnet/core report that compares the APIs introduced between two previews, in the format expected for publishing in the dotnet/core repo.
 
+# Prerequisites:
+# - PowerShell 7.0 or later
+# - Azure CLI (az) installed and logged in (required for authenticated Azure DevOps feeds): Run 'az login' before using private feeds
+
 # Usage:
 
 # RunApiDiff.ps1
@@ -455,6 +459,39 @@ Function CreateReadme {
     Add-Content $readmePath "- [Microsoft.WindowsDesktop.App](./Microsoft.WindowsDesktop.App/$dotNetFullName.md)"
 }
 
+Function GetAuthHeadersForFeed {
+    Param (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $feedUrl
+    )
+
+    $headers = @{}
+    
+    # Check if authentication is required (internal dnceng feeds)
+    if ($feedUrl -match "dnceng/internal") {
+        try {
+            # Try to get Azure DevOps token using az CLI
+            $token = az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query accessToken -o tsv 2>$null
+            if ($token) {
+                Write-Color cyan "Using Azure CLI authentication for internal Azure DevOps feed"
+                $headers = @{
+                    Authorization = "Bearer $token"
+                }
+            }
+            else {
+                Write-Error "Could not get Azure DevOps token from Azure CLI. Please run 'az login' first." -ErrorAction Stop
+            }
+        }
+        catch {
+            Write-Error "Azure CLI not available or not logged in. Please run 'az login' first." -ErrorAction Stop
+        }
+    }
+    
+    return $headers
+}
+
 Function RebuildIfExeNotFound {
     Param (
         [Parameter(Mandatory = $true)]
@@ -583,7 +620,16 @@ Function DownloadPackage {
         }
 
         Write-Color yellow "Downloading '$nupkgUrl' to '$nupkgFile'..."
-        Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile
+        
+        # Get authentication headers if required
+        $headers = GetAuthHeadersForFeed $nuGetFeed
+        
+        if ($headers.Count -gt 0) {
+            Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile -Headers $headers
+        }
+        else {
+            Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile
+        }
         VerifyPathOrExit $nupkgFile
     }
     Else {
