@@ -75,4 +75,7 @@ See [the GitHub issue](https://github.com/dotnet/sdk/issues/51218) for more deta
 
 Applications that use an empty array configuration such as `"IEnumerableProperty": []` and bind it to an uninitialized property of type `IEnumerable<T>`, `IReadOnlyList<T>`, or `IReadOnlyCollection<T>` will encounter an `ArgumentNullException`. This exception can cause the application to crash if it isn’t properly handled.
 
-See [the GitHub issue](https://github.com/dotnet/runtime/issues/121193) for more details.
+See [the GitHub issue](https://github.com/dotnet/runtime/issues/121193) for more details. This issue will be fixed in a future servicing release for .NET 10.
+
+### Available Workarounds
+Using a concrete `T[]` array instead of `IEnumerable<T>` for the configuration property works around this issue.
