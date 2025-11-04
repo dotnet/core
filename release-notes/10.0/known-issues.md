@@ -78,4 +78,5 @@ Applications that use an empty array configuration such as `"IEnumerableProperty
 See [the GitHub issue](https://github.com/dotnet/runtime/issues/121193) for more details. This issue will be fixed in a future servicing release for .NET 10.
 
 ### Available Workarounds
+
 Using a concrete `T[]` array instead of `IEnumerable<T>` for the configuration property works around this issue.
