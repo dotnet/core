@@ -17,7 +17,8 @@
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
-# -NuGetFeed                    : The NuGet feed URL to use for package downloads. By default, uses https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json
+# -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json
+# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json
 # -ExcludeNetCore               : Optional boolean to exclude the NETCore comparison. Default is false.
 # -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
 # -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
@@ -32,7 +33,7 @@
 # .\RunApiDiff.ps1 -PreviousDotNetVersion 10.0 -PreviousPreviewOrRC RC -PreviousPreviewNumberVersion 1 -CurrentDotNetVersion 10.0 -CurrentPreviewOrRC RC -CurrentPreviewNumberVersion 2 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousPackageExactVersion "10.0.0-rc.1.25451.107" -CurrentPackageExactVersion "10.0.0-rc.2.25502.107"
 
 # Example with custom NuGet feed:
-# .\RunApiDiff.ps1 -PreviousDotNetVersion 9.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentPreviewOrRC rc -CurrentPreviewNumberVersion 1 -CoreRepo D:\core\ -TmpFolder D:\tmp -NuGetFeed "https://api.nuget.org/v3/index.json"
+# .\RunApiDiff.ps1 -PreviousDotNetVersion 9.0 -PreviousPreviewOrRC preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentPreviewOrRC rc -CurrentPreviewNumberVersion 1 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousNuGetFeed "https://api.nuget.org/v3/index.json" -CurrentNuGetFeed "https://api.nuget.org/v3/index.json"
 
 Param (
     [Parameter(Mandatory = $true)]
@@ -88,7 +89,12 @@ Param (
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
     [string]
-    $NuGetFeed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
+    $PreviousNuGetFeed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
+    ,
+    [Parameter(Mandatory = $false)]
+    [ValidateNotNullOrEmpty()]
+    [string]
+    $CurrentNuGetFeed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
     ,
     [Parameter(Mandatory = $false)]
     [bool]
@@ -467,16 +473,14 @@ Function GetAuthHeadersForFeed {
         $feedUrl
     )
 
-    $headers = @{}
-    
     # Check if authentication is required (internal dnceng feeds)
     if ($feedUrl -match "dnceng/internal") {
         try {
             # Try to get Azure DevOps token using az CLI
             $token = az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query accessToken -o tsv 2>$null
             if ($token) {
-                Write-Color cyan "Using Azure CLI authentication for internal Azure DevOps feed"
-                $headers = @{
+                Write-Host "Using Azure CLI authentication for internal Azure DevOps feed" -ForegroundColor Cyan
+                return @{
                     Authorization = "Bearer $token"
                 }
             }
@@ -489,7 +493,7 @@ Function GetAuthHeadersForFeed {
         }
     }
     
-    return $headers
+    return @{}
 }
 
 Function RebuildIfExeNotFound {
@@ -655,7 +659,12 @@ Function ProcessSdk
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $nuGetFeed
+        $previousNuGetFeed
+    ,
+        [Parameter(Mandatory = $false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $currentNuGetFeed
     ,
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
@@ -697,21 +706,21 @@ Function ProcessSdk
     )
 
     $beforeDllFolder = ""
-    DownloadPackage $nuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion $previousExactVersion ([ref]$beforeDllFolder)
+    DownloadPackage $previousNuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion $previousExactVersion ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage $nuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $currentExactVersion ([ref]$afterDllFolder)
+    DownloadPackage $currentNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $currentExactVersion ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
     $beforeReferenceFolder = ""
     $afterReferenceFolder = ""
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
-        DownloadPackage $nuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion $previousExactVersion ([ref]$beforeReferenceFolder)
+        DownloadPackage $previousNuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousPreviewOrRC $PreviousPreviewNumberVersion $previousExactVersion ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
         
-        DownloadPackage $nuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $currentExactVersion ([ref]$afterReferenceFolder)
+        DownloadPackage $currentNuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentPreviewOrRC $CurrentPreviewNumberVersion $currentExactVersion ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
 
@@ -779,17 +788,17 @@ $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $Curren
 
 If (-Not $ExcludeNetCore)
 {
-    ProcessSdk "NETCore" $NuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
+    ProcessSdk "NETCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
 }
 
 If (-Not $ExcludeAspNetCore)
 {
-    ProcessSdk "AspNetCore" $NuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
+    ProcessSdk "AspNetCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
 }
 
 If (-Not $ExcludeWindowsDesktop)
 {
-    ProcessSdk "WindowsDesktop" $NuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
+    ProcessSdk "WindowsDesktop" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageExactVersion $CurrentPackageExactVersion
 }
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
