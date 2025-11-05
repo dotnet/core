@@ -83,7 +83,7 @@ Using a concrete `T[]` array instead of `IEnumerable<T>` for the configuration p
 
 ## macOS PKG installers missing executable bit on `createdump`
 
-SDK and runtime installers for macOS install a `createdump` binary that lacks the executable bit. This means that scenarios that request a dump (test hang collector, `dotnet-dump collect`, crash environment variable, etc.) will fail with an error indicating that `createdump` cannot be executed.
+SDK and runtime installers for macOS install a `createdump` binary that lacks the executable bit. This means that scenarios that request a dump (test hang collector, `dotnet-dump collect`, collecting dumps on crash through environment variable, etc.) will fail with an error indicating that `createdump` cannot be executed.
 
 ### Available Workaround for createdump
 
