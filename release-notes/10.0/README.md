@@ -16,6 +16,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 
 | Date | Release |
 | :-- | :-- |
+| 2025/11/11 | [10.0.0](./10.0.0/10.0.0.md) |
 | 2025/10/14 | [10.0.0 RC 2](preview/rc2/README.md) |
 | 2025/09/09 | [10.0.0 RC 1](preview/rc1/README.md) |
 | 2025/08/12 | [10.0.0 Preview 7](preview/preview7/README.md) |
