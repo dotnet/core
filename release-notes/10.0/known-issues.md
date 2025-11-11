@@ -70,3 +70,22 @@ Up to 10% startup performance regression was identified in .NET 10 runtime, part
 Updating .NET 10 preview7, RC1, or RC2 to RTM may fail to set the `PATH` environment variable on Windows. To work around this issue, repair the .NET 10 Installation. If earlier, non-native versions like 5.0 are present, it can result in swapping the path entries for x86 and x64.
 
 See [the GitHub issue](https://github.com/dotnet/sdk/issues/51218) for more details.
+
+## Configuration regression when binding `IEnumerable<T>` property to empty array
+
+Applications that use an empty array configuration such as `"IEnumerableProperty": []` and bind it to an uninitialized property of type `IEnumerable<T>`, `IReadOnlyList<T>`, or `IReadOnlyCollection<T>` will encounter an `ArgumentNullException`. This exception can cause the application to crash if it isn’t properly handled.
+
+See [the GitHub issue](https://github.com/dotnet/runtime/issues/121193) for more details. This issue will be fixed in a future servicing release for .NET 10.
+
+### Available Workarounds
+
+Using a concrete `T[]` array instead of `IEnumerable<T>` for the configuration property works around this issue.
+
+## macOS PKG installers missing executable bit on `createdump`
+
+SDK and runtime installers for macOS install a `createdump` binary that lacks the executable bit. This means that scenarios that request a dump (test hang collector, `dotnet-dump collect`, collecting dumps on crash through environment variable, etc.) will fail with an error indicating that `createdump` cannot be executed.
+
+### Available Workaround for createdump
+
+- Add the executable bit to `shared/Microsoft.NETCore.App/10.0.0/createdump` manually using `chmod +x`
+- Use another runtime hosting mechanism (self-contained app, use a tarball installation of the runtime/SDK)
