@@ -1,0 +1,961 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/schemas/dotnet-sdk-version-index.json",
+  "kind": "index",
+  "component": "sdk",
+  "version": "9.0",
+  "label": ".NET SDK 9.0",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/sdk/index.json",
+      "relative": "9.0/sdk/index.json",
+      "title": ".NET SDK 9.0",
+      "type": "application/hal\u002Bjson"
+    }
+  },
+  "_embedded": {
+    "latest-downloads": {
+      "linux-arm": {
+        "name": "dotnet-sdk-linux-arm.tar.gz",
+        "rid": "linux-arm",
+        "os": "linux",
+        "arch": "arm",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-arm.tar.gz",
+            "title": "Download dotnet-sdk-linux-arm.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-arm.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "linux-arm64": {
+        "name": "dotnet-sdk-linux-arm64.tar.gz",
+        "rid": "linux-arm64",
+        "os": "linux",
+        "arch": "arm64",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-arm64.tar.gz",
+            "title": "Download dotnet-sdk-linux-arm64.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-arm64.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "linux-musl": {
+        "name": "dotnet-sdk-linux-musl-x64.tar.gz",
+        "rid": "linux-musl",
+        "os": "linux",
+        "arch": "musl",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-musl-x64.tar.gz",
+            "title": "Download dotnet-sdk-linux-musl-x64.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-musl-x64.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "linux-x64": {
+        "name": "dotnet-sdk-linux-x64.tar.gz",
+        "rid": "linux-x64",
+        "os": "linux",
+        "arch": "x64",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-x64.tar.gz",
+            "title": "Download dotnet-sdk-linux-x64.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-x64.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "osx-arm64": {
+        "name": "dotnet-sdk-osx-arm64.tar.gz",
+        "rid": "osx-arm64",
+        "os": "osx",
+        "arch": "arm64",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-osx-arm64.tar.gz",
+            "title": "Download dotnet-sdk-osx-arm64.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-osx-arm64.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "osx-x64": {
+        "name": "dotnet-sdk-osx-x64.tar.gz",
+        "rid": "osx-x64",
+        "os": "osx",
+        "arch": "x64",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-osx-x64.tar.gz",
+            "title": "Download dotnet-sdk-osx-x64.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-osx-x64.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "win-arm64": {
+        "name": "dotnet-sdk-win-arm64.zip",
+        "rid": "win-arm64",
+        "os": "win",
+        "arch": "arm64",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-win-arm64.zip",
+            "title": "Download dotnet-sdk-win-arm64.zip"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-win-arm64.zip.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "win-x64": {
+        "name": "dotnet-sdk-win-x64.zip",
+        "rid": "win-x64",
+        "os": "win",
+        "arch": "x64",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-win-x64.zip",
+            "title": "Download dotnet-sdk-win-x64.zip"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-win-x64.zip.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "win-x86": {
+        "name": "dotnet-sdk-win-x86.zip",
+        "rid": "win-x86",
+        "os": "win",
+        "arch": "x86",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-win-x86.zip",
+            "title": "Download dotnet-sdk-win-x86.zip"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-win-x86.zip.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      }
+    },
+    "sdk-feature-bands": [
+      {
+        "kind": "band",
+        "version": "9.0.3xx",
+        "label": ".NET SDK 9.0.3xx",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/sdk/sdk-9.0.3xx.json",
+            "relative": "9.0/sdk/sdk-9.0.3xx.json",
+            "title": ".NET SDK 9.0.3xx",
+            "type": "application/json"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-11-11T00:00:00-08:00"
+        }
+      },
+      {
+        "kind": "band",
+        "version": "9.0.1xx",
+        "label": ".NET SDK 9.0.1xx",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/sdk/sdk-9.0.1xx.json",
+            "relative": "9.0/sdk/sdk-9.0.1xx.json",
+            "title": ".NET SDK 9.0.1xx",
+            "type": "application/json"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-11-11T00:00:00-08:00"
+        }
+      },
+      {
+        "kind": "band",
+        "version": "9.0.2xx",
+        "label": ".NET SDK 9.0.2xx",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/sdk/sdk-9.0.2xx.json",
+            "relative": "9.0/sdk/sdk-9.0.2xx.json",
+            "title": ".NET SDK 9.0.2xx",
+            "type": "application/json"
+          }
+        },
+        "lifecycle": {
+          "phase": "eol",
+          "release-date": "2025-06-10T00:00:00-07:00"
+        }
+      }
+    ],
+    "releases": [
+      {
+        "version": "9.0.307",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.11/release.json",
+            "relative": "9.0/9.0.11/release.json",
+            "title": "9.0.11 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.11/9.0.11.md",
+            "relative": "9.0/9.0.11/9.0.11.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-11-11T00:00:00-08:00"
+        }
+      },
+      {
+        "version": "9.0.306",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.10/release.json",
+            "relative": "9.0/9.0.10/release.json",
+            "title": "9.0.10 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.10/9.0.10.md",
+            "relative": "9.0/9.0.10/9.0.10.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-10-14T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.305",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.9/release.json",
+            "relative": "9.0/9.0.9/release.json",
+            "title": "9.0.9 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.9/9.0.9.md",
+            "relative": "9.0/9.0.9/9.0.9.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-09-09T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.304",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.8/release.json",
+            "relative": "9.0/9.0.8/release.json",
+            "title": "9.0.8 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.8/9.0.8.md",
+            "relative": "9.0/9.0.8/9.0.8.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-08-05T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.303",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.7/release.json",
+            "relative": "9.0/9.0.7/release.json",
+            "title": "9.0.7 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.7/9.0.303.md",
+            "relative": "9.0/9.0.7/9.0.303.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-07-17T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.302",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.7/release.json",
+            "relative": "9.0/9.0.7/release.json",
+            "title": "9.0.7 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.7/9.0.7.md",
+            "relative": "9.0/9.0.7/9.0.7.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-07-17T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.301",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.6/release.json",
+            "relative": "9.0/9.0.6/release.json",
+            "title": "9.0.6 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.6/9.0.6.md",
+            "relative": "9.0/9.0.6/9.0.6.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-06-10T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.300",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.5/release.json",
+            "relative": "9.0/9.0.5/release.json",
+            "title": "9.0.5 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.5/9.0.5.md",
+            "relative": "9.0/9.0.5/9.0.5.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-05-13T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.205",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.6/release.json",
+            "relative": "9.0/9.0.6/release.json",
+            "title": "9.0.6 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.6/9.0.205.md",
+            "relative": "9.0/9.0.6/9.0.205.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-06-10T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.204",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.5/release.json",
+            "relative": "9.0/9.0.5/release.json",
+            "title": "9.0.5 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.5/9.0.204.md",
+            "relative": "9.0/9.0.5/9.0.204.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-05-13T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.203",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.4/release.json",
+            "relative": "9.0/9.0.4/release.json",
+            "title": "9.0.4 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.4/9.0.4.md",
+            "relative": "9.0/9.0.4/9.0.4.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-04-08T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.202",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.3/release.json",
+            "relative": "9.0/9.0.3/release.json",
+            "title": "9.0.3 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.3/9.0.202.md",
+            "relative": "9.0/9.0.3/9.0.202.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-03-11T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.201",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.3/release.json",
+            "relative": "9.0/9.0.3/release.json",
+            "title": "9.0.3 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.3/9.0.3.md",
+            "relative": "9.0/9.0.3/9.0.3.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-03-11T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.200",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.2/release.json",
+            "relative": "9.0/9.0.2/release.json",
+            "title": "9.0.2 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.2/9.0.2.md",
+            "relative": "9.0/9.0.2/9.0.2.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-02-11T00:00:00-08:00"
+        }
+      },
+      {
+        "version": "9.0.112",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.11/release.json",
+            "relative": "9.0/9.0.11/release.json",
+            "title": "9.0.11 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.11/9.0.112.md",
+            "relative": "9.0/9.0.11/9.0.112.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-11-11T00:00:00-08:00"
+        }
+      },
+      {
+        "version": "9.0.111",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.10/release.json",
+            "relative": "9.0/9.0.10/release.json",
+            "title": "9.0.10 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.10/9.0.111.md",
+            "relative": "9.0/9.0.10/9.0.111.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-10-14T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.110",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.9/release.json",
+            "relative": "9.0/9.0.9/release.json",
+            "title": "9.0.9 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.9/9.0.110.md",
+            "relative": "9.0/9.0.9/9.0.110.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-09-09T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.109",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.8/release.json",
+            "relative": "9.0/9.0.8/release.json",
+            "title": "9.0.8 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.8/9.0.109.md",
+            "relative": "9.0/9.0.8/9.0.109.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-08-05T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.108",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.7/release.json",
+            "relative": "9.0/9.0.7/release.json",
+            "title": "9.0.7 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.7/9.0.108.md",
+            "relative": "9.0/9.0.7/9.0.108.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-07-17T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.107",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.6/release.json",
+            "relative": "9.0/9.0.6/release.json",
+            "title": "9.0.6 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.6/9.0.107.md",
+            "relative": "9.0/9.0.6/9.0.107.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-06-10T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.106",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.5/release.json",
+            "relative": "9.0/9.0.5/release.json",
+            "title": "9.0.5 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.5/9.0.106.md",
+            "relative": "9.0/9.0.5/9.0.106.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-05-13T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.105",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.4/release.json",
+            "relative": "9.0/9.0.4/release.json",
+            "title": "9.0.4 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.4/9.0.105.md",
+            "relative": "9.0/9.0.4/9.0.105.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-04-08T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.104",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.3/release.json",
+            "relative": "9.0/9.0.3/release.json",
+            "title": "9.0.3 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.3/9.0.104.md",
+            "relative": "9.0/9.0.3/9.0.104.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-03-11T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.103",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.2/release.json",
+            "relative": "9.0/9.0.2/release.json",
+            "title": "9.0.2 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.2/9.0.103.md",
+            "relative": "9.0/9.0.2/9.0.103.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-02-11T00:00:00-08:00"
+        }
+      },
+      {
+        "version": "9.0.102",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.1/release.json",
+            "relative": "9.0/9.0.1/release.json",
+            "title": "9.0.1 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.1/9.0.1.md",
+            "relative": "9.0/9.0.1/9.0.1.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2025-01-14T00:00:00-08:00"
+        }
+      },
+      {
+        "version": "9.0.101",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0/release.json",
+            "relative": "9.0/9.0.0/release.json",
+            "title": "9.0.0 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0/9.0.101.md",
+            "relative": "9.0/9.0.0/9.0.101.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-12-03T00:00:00-08:00"
+        }
+      },
+      {
+        "version": "9.0.100-rc.2.24474.11",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-rc.2/9.0.0-rc.2.md",
+            "relative": "9.0/9.0.0-rc.2/9.0.0-rc.2.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-10-08T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-rc.1.24452.12",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-rc.1/9.0.0-rc.1.md",
+            "relative": "9.0/9.0.0-rc.1/9.0.0-rc.1.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-09-10T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-preview.7.24407.12",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-preview.7/9.0.0-preview.7.md",
+            "relative": "9.0/9.0.0-preview.7/9.0.0-preview.7.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-08-13T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-preview.6.24328.19",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-preview.6/9.0.0-preview.6.md",
+            "relative": "9.0/9.0.0-preview.6/9.0.0-preview.6.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-07-09T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-preview.5.24307.3",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-preview.5/9.0.0-preview.5.md",
+            "relative": "9.0/9.0.0-preview.5/9.0.0-preview.5.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-06-11T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-preview.4.24267.66",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-preview.4/9.0.0-preview.4.md",
+            "relative": "9.0/9.0.0-preview.4/9.0.0-preview.4.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-05-21T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-preview.3.24204.13",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-preview.3/9.0.0-preview.3.md",
+            "relative": "9.0/9.0.0-preview.3/9.0.0-preview.3.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-04-11T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-preview.2.24157.14",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-preview.2/9.0.0-preview.2.md",
+            "relative": "9.0/9.0.0-preview.2/9.0.0-preview.2.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-03-12T00:00:00-07:00"
+        }
+      },
+      {
+        "version": "9.0.100-preview.1.24101.2",
+        "kind": "patch-release",
+        "_links": {
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0-preview.1/9.0.0-preview.1.md",
+            "relative": "9.0/9.0.0-preview.1/9.0.0-preview.1.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-02-13T00:00:00-08:00"
+        }
+      },
+      {
+        "version": "9.0.100",
+        "kind": "patch-release",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0/release.json",
+            "relative": "9.0/9.0.0/release.json",
+            "title": "9.0.0 Release Information",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/9.0.0/9.0.0.md",
+            "relative": "9.0/9.0.0/9.0.0.md",
+            "title": "Release Notes",
+            "type": "application/markdown"
+          }
+        },
+        "lifecycle": {
+          "phase": "active",
+          "release-date": "2024-12-03T00:00:00-08:00"
+        }
+      }
+    ]
+  },
+  "_metadata": {
+    "schema-version": "1.0",
+    "generated-on": "2025-11-13T22:51:12.8064391\u002B00:00",
+    "generated-by": "VersionIndex"
+  }
+}
