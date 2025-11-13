@@ -1,0 +1,420 @@
+{
+  "last_updated": "2024-01-09",
+  "title": ".NET Security Updates for January 2024 (2024-01-09)",
+  "disclosures": [
+    {
+      "id": "CVE-2024-0056",
+      "problem": "Microsoft.Data.SqlClient and System.Data.SqlClient SQL Data provider Information Disclosure Vulnerability",
+      "description": [
+        "A vulnerability exists in the Microsoft.Data.SqlClient and System.Data.SqlClient SQL Data provider where an attackercan perform an AiTM (adversary-in-the-middle) attack between the SQL client and the SQL server. This may allow the attacker to steal authentication credentials intended for the database server, even if the connection is established over an encrypted channel like TLS."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:N/E:U/RL:O/RC:C",
+        "score": 8.7,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-01-09",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-01-09",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/292"
+      ],
+      "weakness": "CWE-319",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Vishal Mishra and Anita Gaud with Microsoft\u0027s Azure DevSec Variant Hunt Team"
+        ],
+        "faq": [
+          {
+            "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
+            "answer": "The attacker must inject themselves into the logical network path between the target and the resource requested by the victim to read or modify network communications. This is called a machine-in-the-middle (MITM) attack."
+          },
+          {
+            "question": "If I am using System.Data.SqlClient or Microsoft.Data.SqlClient, what do I need to do to be protected from this vulnerability?",
+            "answer": "Customers developing applications using either the System.Data.SqlClient or Microsoft.Data.SqlClient NuGet Packages need to do the following to be protected:"
+          },
+          {
+            "question": "According to the CVSS metric, a successful exploitation could lead to a scope change (S:C). What does this mean for this vulnerability?",
+            "answer": "A successful attack could exploit a vulnerability in the SQL Data Provider which allows the attacker to exploit the SQL Server."
+          },
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could carry out a machine-in-the-middle (MITM) attack and could decrypt and read or modify TLS traffic between the client and server. There is no impact to the availability of the attacked machine (A:N)."
+          },
+          {
+            "question": "What security feature is bypassed with this vulnerability?",
+            "answer": "An attacker might be able to evade the encryption used in a TLS connection."
+          },
+          {
+            "question": "I am running SQL Server on my system. What action do I need to take?",
+            "answer": "Update your relevant version of SQL Server. Any applicable driver fixes are included in those updates."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-0057",
+      "problem": ".NET Security Feature Bypass Vulnerability",
+      "description": [
+        "A security feature bypass vulnerability exists when Microsoft .NET Framework-based applications use X.509 chain building APIs but do not completely validate the X.509 certificate due to a logic flaw. An attacker could present an arbitrary untrusted certificate with malformed signatures, triggering a bug in the framework. The framework will correctly report that X.509 chain building failed, but it will return an incorrect reason code for the failure. Applications which utilize this reason code to make their own chain building trust decisions may inadvertently treat this scenario as a successful chain build. This could allow an adversary to subvert the app\u0027s typical authentication logic."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N/E:P/RL:O/RC:C",
+        "score": 9.1,
+        "severity": "CRITICAL"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-01-09",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-01-09",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/291"
+      ],
+      "mitigation": [
+        "Within .NET, only the WindowsDesktop shared runtime contains inbox components which utilize X.509 chain building APIs in a vulnerable manner. Other project types, such as web applications, are not impacted by this vulnerability unless they explicitly invoke the X.509 chain building APIs themselves in a vulnerable manner or they consume an external package which does this on their behalf."
+      ],
+      "weakness": "CWE-20",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Vishal Mishra and Anita Gaud with Microsoft\u0027s Azure DevSec Variant Hunt Team and Stav Nir from Microsoft"
+        ],
+        "faq": [
+          {
+            "question": "What kind of security feature could be bypassed by successfully exploiting this vulnerability?",
+            "answer": "A security feature bypass vulnerability exists when Microsoft .NET Framework-based applications use X.509 chain building APIs but do not completely validate the X.509 certificate due to a logic flaw. An attacker could present an arbitrary untrusted certificate with malformed signatures, triggering a bug in the framework. The framework will correctly report that X.509 chain building failed, but it will return an incorrect reason code for the failure. Applications which utilize this reason code to make their own chain building trust decisions may inadvertently treat this scenario as a successful chain build. This could allow an adversary to subvert the app\u0027s typical authentication logic."
+          },
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "An attacker could exploit this by creating a specially crafted X.509 certificate that intentionally introduce or intentionally induces a chain building failure."
+          },
+          {
+            "question": "Is there are reason for such a high CVSS score?",
+            "answer": "Yes, the CVSS scoring guide recommends using a  reasonable worst-case implementation scenario when scoring vulnerabilities in software libraries.  Vulnerabilites in .NET Framework and similar products are scored with this advice in mind.  The score for your implmentation this product may not be as severe, however we recommend installing the update as soon as possible in an abundance of caution."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-21319",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A Denial of Service vulnerability exists in ASP.NET Core project templates which utilize JWT-based authentication tokens. This vulnerability allows an unauthenticated client to consume arbitrarily large amounts of server memory, potentially triggering an out-of-memory condition on the server and making the server no longer able to respond to legitimate requests."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:C/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 6.8,
+        "severity": "MEDIUM"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-01-09",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-01-09",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/290"
+      ],
+      "mitigation": [
+        "This issue impacts only .NET projects that were created using any version of the following project templates.\n\n- ASP.NET Core Web App (Model-View-Controller)\n- ASP.NET Core Web API\n- ASP.NET Core Web App (Razor Pages)\n- Blazor Server App\n- Blazor WebAssembly App"
+      ],
+      "weakness": "CWE-20",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Morgan Brown with Microsoft"
+        ],
+        "faq": [
+          {
+            "question": "According to the CVSS metric, privileges required is high (PR:H).  What does that mean for this vulnerability?",
+            "answer": "The attacker must have access to the public encrypt key registered with the IDP(Entra ID) for successful exploitation."
+          },
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "An attacker could exploit this vulnerability by crafting a malicious JSON Web Encryption (JWE) token with a high compression ratio. This token, when processed by a server, leads to excessive memory allocation and processing time during decompression, causing a denial-of-service (DoS) condition."
+          },
+          {
+            "question": "According to the CVSS metric, a successful exploitation could lead to a scope change (S:C). What does this mean for this vulnerability?",
+            "answer": "A scope change (S:C) in the CVSS metric indicates that successful exploitation of this vulnerability could extend beyond the immediate processing of malicious tokens, affecting the overall availability of the system by causing a denial-of-service (DoS) condition."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2024-0057",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.25",
+      "fixed": "6.0.26",
+      "release": "6.0",
+      "commits": [
+        "821d21b8891ee470a36b2f7fb51e952ff0833c7c"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21319",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.25",
+      "fixed": "6.0.26",
+      "release": "6.0",
+      "commits": [
+        "00f7c0edf759ec4fa22094a1571b1b1530ffe183"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-0057",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": null,
+      "fixed": "7.0.15",
+      "release": "7.0",
+      "commits": [
+        "98fd5f3850ac46606ef7f3981a158b4c7dc2eb8f"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21319",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.14",
+      "fixed": "7.0.15",
+      "release": "7.0",
+      "commits": [
+        "360f1564385745dd9e9acc53e697f8e63ff41126"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-0057",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.0",
+      "fixed": "8.0.1",
+      "release": "8.0",
+      "commits": [
+        "72e5ae975785990e904372573c93dd661279f662"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21319",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.0",
+      "fixed": "8.0.1",
+      "release": "8.0",
+      "commits": [
+        "8b3f5333523ac4f3a7520c5c9261ac6f2a2b6b23"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2024-0056",
+      "name": "Microsoft.Data.SqlClient",
+      "min_vulnerable": "1.0.19123.2-Preview",
+      "max_vulnerable": "2.1.6",
+      "fixed": "2.17",
+      "release": "",
+      "commits": [
+        "f88afce71145f0568e8be4b99a3f18dedae7e80e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-0056",
+      "name": "Microsoft.Data.SqlClient",
+      "min_vulnerable": "3.0.0",
+      "max_vulnerable": "3.1.4",
+      "fixed": "3.1.5",
+      "release": "",
+      "commits": [
+        "f88afce71145f0568e8be4b99a3f18dedae7e80e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-0056",
+      "name": "Microsoft.Data.SqlClient",
+      "min_vulnerable": "4.0.0",
+      "max_vulnerable": "4.0.4",
+      "fixed": "4.0.5",
+      "release": "",
+      "commits": [
+        "f88afce71145f0568e8be4b99a3f18dedae7e80e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-0056",
+      "name": "Microsoft.Data.SqlClient",
+      "min_vulnerable": "5.0.0",
+      "max_vulnerable": "5.1.2",
+      "fixed": "5.1.3",
+      "release": "",
+      "commits": [
+        "f88afce71145f0568e8be4b99a3f18dedae7e80e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-0056",
+      "name": "System.Data.SqlClient",
+      "min_vulnerable": "1.0.0-beta1",
+      "max_vulnerable": "4.8.5",
+      "fixed": "4.8.6",
+      "release": "",
+      "commits": [
+        "f88afce71145f0568e8be4b99a3f18dedae7e80e"
+      ]
+    }
+  ],
+  "commits": {
+    "821d21b8891ee470a36b2f7fb51e952ff0833c7c": {
+      "repo": "runtime",
+      "branch": "release/6.0",
+      "hash": "821d21b8891ee470a36b2f7fb51e952ff0833c7c",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/821d21b8891ee470a36b2f7fb51e952ff0833c7c.diff"
+    },
+    "98fd5f3850ac46606ef7f3981a158b4c7dc2eb8f": {
+      "repo": "runtime",
+      "branch": "release/7.0",
+      "hash": "98fd5f3850ac46606ef7f3981a158b4c7dc2eb8f",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/98fd5f3850ac46606ef7f3981a158b4c7dc2eb8f.diff"
+    },
+    "72e5ae975785990e904372573c93dd661279f662": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "72e5ae975785990e904372573c93dd661279f662",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/72e5ae975785990e904372573c93dd661279f662.diff"
+    },
+    "00f7c0edf759ec4fa22094a1571b1b1530ffe183": {
+      "repo": "aspnetcore",
+      "branch": "release/6.0",
+      "hash": "00f7c0edf759ec4fa22094a1571b1b1530ffe183",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/00f7c0edf759ec4fa22094a1571b1b1530ffe183.diff"
+    },
+    "360f1564385745dd9e9acc53e697f8e63ff41126": {
+      "repo": "aspnetcore",
+      "branch": "release/7.0",
+      "hash": "360f1564385745dd9e9acc53e697f8e63ff41126",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/360f1564385745dd9e9acc53e697f8e63ff41126.diff"
+    },
+    "8b3f5333523ac4f3a7520c5c9261ac6f2a2b6b23": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "8b3f5333523ac4f3a7520c5c9261ac6f2a2b6b23",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/8b3f5333523ac4f3a7520c5c9261ac6f2a2b6b23.diff"
+    },
+    "f88afce71145f0568e8be4b99a3f18dedae7e80e": {
+      "repo": "maintenance-packages",
+      "branch": "release/5.0",
+      "hash": "f88afce71145f0568e8be4b99a3f18dedae7e80e",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/maintenance-packages/commit/f88afce71145f0568e8be4b99a3f18dedae7e80e.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime",
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2024-21319"
+    ],
+    "dotnet-runtime": [
+      "CVE-2024-0057"
+    ]
+  },
+  "package_cves": {
+    "Microsoft.Data.SqlClient": [
+      "CVE-2024-0056"
+    ],
+    "System.Data.SqlClient": [
+      "CVE-2024-0056"
+    ]
+  },
+  "release_cves": {
+    "6.0": [
+      "CVE-2024-0057",
+      "CVE-2024-21319"
+    ],
+    "7.0": [
+      "CVE-2024-0057",
+      "CVE-2024-21319"
+    ],
+    "8.0": [
+      "CVE-2024-0057",
+      "CVE-2024-21319"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2024-0057": [
+      "6.0",
+      "7.0",
+      "8.0"
+    ],
+    "CVE-2024-21319": [
+      "6.0",
+      "7.0",
+      "8.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2024-0056": [
+      "f88afce71145f0568e8be4b99a3f18dedae7e80e"
+    ],
+    "CVE-2024-0057": [
+      "72e5ae975785990e904372573c93dd661279f662",
+      "821d21b8891ee470a36b2f7fb51e952ff0833c7c",
+      "98fd5f3850ac46606ef7f3981a158b4c7dc2eb8f"
+    ],
+    "CVE-2024-21319": [
+      "00f7c0edf759ec4fa22094a1571b1b1530ffe183",
+      "360f1564385745dd9e9acc53e697f8e63ff41126",
+      "8b3f5333523ac4f3a7520c5c9261ac6f2a2b6b23"
+    ]
+  }
+}

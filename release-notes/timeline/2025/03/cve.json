@@ -1,0 +1,141 @@
+{
+  "last_updated": "2025-03-11",
+  "title": ".NET Security Updates for March 2025 (2025-03-11)",
+  "disclosures": [
+    {
+      "id": "CVE-2025-24070",
+      "problem": ".NET Elevation of Privilege Vulnerability",
+      "description": [
+        "A vulnerability exists in ASP.NET Core applications calling RefreshSignInAsync with an improperly authenticated user parameter that could allow an attacker to sign into another user\u0027s account, resulting in Elevation of Privilege."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:H/E:U/RL:O/RC:C",
+        "score": 7,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-03-11",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-03-11",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/348"
+      ],
+      "weakness": "CWE-1390",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Zahid TOKAT"
+        ],
+        "faq": [
+          {
+            "question": "What privileges could be gained by an attacker who successfully exploited the vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could gain the privileges of the compromised user."
+          },
+          {
+            "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
+            "answer": "Successful exploitation of this vulnerability requires an attacker to gather information specific to the environment and take additional actions prior to exploitation to prepare the target environment."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2025-24070",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.13",
+      "fixed": "8.0.14",
+      "release": "8.0",
+      "commits": [
+        "67f3b04274d3acb607fe95796dcb35f4f11149bf"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-24070",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.2",
+      "fixed": "9.0.3",
+      "release": "9.0",
+      "commits": [
+        "f71e283286d8470639486804053f28391f92fafc"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2025-24070",
+      "name": "Microsoft.AspNetCore.Identity",
+      "min_vulnerable": "2.3.0",
+      "max_vulnerable": "2.3.0",
+      "fixed": "2.3.1",
+      "release": "",
+      "commits": [
+        "ed336c18bdb6c3c09a41bf25d0530edcb9ef3537"
+      ]
+    }
+  ],
+  "commits": {
+    "67f3b04274d3acb607fe95796dcb35f4f11149bf": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "67f3b04274d3acb607fe95796dcb35f4f11149bf",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/67f3b04274d3acb607fe95796dcb35f4f11149bf.diff"
+    },
+    "f71e283286d8470639486804053f28391f92fafc": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "f71e283286d8470639486804053f28391f92fafc",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/f71e283286d8470639486804053f28391f92fafc.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2025-24070"
+    ]
+  },
+  "package_cves": {
+    "Microsoft.AspNetCore.Identity": [
+      "CVE-2025-24070"
+    ]
+  },
+  "release_cves": {
+    "8.0": [
+      "CVE-2025-24070"
+    ],
+    "9.0": [
+      "CVE-2025-24070"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2025-24070": [
+      "8.0",
+      "9.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2025-24070": [
+      "67f3b04274d3acb607fe95796dcb35f4f11149bf",
+      "f71e283286d8470639486804053f28391f92fafc"
+    ]
+  }
+}
