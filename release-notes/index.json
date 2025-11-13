@@ -17,25 +17,63 @@
       "type": "application/hal\u002Bjson"
     },
     "latest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/index.json",
-      "relative": "9.0/index.json",
-      "title": "Latest .NET release (.NET 9.0)",
+      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/index.json",
+      "relative": "10.0/index.json",
+      "title": "Latest .NET release (.NET 10.0)",
       "type": "application/hal\u002Bjson"
     },
     "latest-sdk": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/sdk/index.json",
-      "relative": "9.0/sdk/index.json",
-      "title": "Latest .NET SDK (9.0)",
+      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/sdk/index.json",
+      "relative": "10.0/sdk/index.json",
+      "title": "Latest .NET SDK (10.0)",
       "type": "application/hal\u002Bjson"
     },
     "latest-lts": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/8.0/index.json",
-      "relative": "8.0/index.json",
-      "title": "Latest LTS release (.NET 8.0)",
+      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/index.json",
+      "relative": "10.0/index.json",
+      "title": "Latest LTS release (.NET 10.0)",
       "type": "application/hal\u002Bjson"
     }
   },
   "usage": {
+    "_links": {
+      "usage-markdown-raw": {
+        "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/llms/README.md",
+        "relative": "llms/README.md",
+        "title": "Usage Guide (Raw Markdown)",
+        "type": "application/markdown"
+      },
+      "usage-markdown": {
+        "href": "https://github.com/dotnet/core/blob/main/release-notes/llms/README.md",
+        "relative": "llms/README.md",
+        "title": "Usage Guide (Markdown)",
+        "type": "application/markdown"
+      },
+      "quick-reference-markdown-raw": {
+        "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/llms/quick-ref.md",
+        "relative": "llms/quick-ref.md",
+        "title": "Quick Reference (Raw Markdown)",
+        "type": "application/markdown"
+      },
+      "quick-reference-markdown": {
+        "href": "https://github.com/dotnet/core/blob/main/release-notes/llms/quick-ref.md",
+        "relative": "llms/quick-ref.md",
+        "title": "Quick Reference (Markdown)",
+        "type": "application/markdown"
+      },
+      "glossary-markdown-raw": {
+        "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/llms/glossary.md",
+        "relative": "llms/glossary.md",
+        "title": "Glossary (Raw Markdown)",
+        "type": "application/markdown"
+      },
+      "glossary-markdown": {
+        "href": "https://github.com/dotnet/core/blob/main/release-notes/llms/glossary.md",
+        "relative": "llms/glossary.md",
+        "title": "Glossary (Markdown)",
+        "type": "application/markdown"
+      }
+    },
     "glossary": {
       "lts": "Long-Term Support \u2013 3-year support window",
       "sts": "Standard-Term Support \u2013 18-month support window",
@@ -60,10 +98,10 @@
         },
         "lifecycle": {
           "release-type": "lts",
-          "phase": "preview",
+          "phase": "active",
           "release-date": "2025-11-11T00:00:00\u002B00:00",
           "eol-date": "2028-11-14T00:00:00\u002B00:00",
-          "supported": false
+          "supported": true
         }
       },
       {
@@ -298,7 +336,7 @@
   },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-13T22:51:12.786246\u002B00:00",
+    "generated-on": "2025-11-13T23:34:44.3189406\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }

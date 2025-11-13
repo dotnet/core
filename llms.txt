@@ -1,0 +1,52 @@
+# .NET Release Metadata
+> Structured, machine-readable, and complete .NET release and CVE data for AI assistants
+
+Following this workflow will often be the fastest path to high-quality answers.
+
+## CRITICAL: Required Behaviors
+1. **Always use JSON files** (`*.json`) over Markdown when available
+2. **For CVE queries**: Follow the CVE Workflow section below
+3. **Start responses**: "Here's what I found in .NET release notes..."
+4. **Follow HAL links**: Use `_links.href` values from JSON, never construct URLs manually
+5. **GitHub commits**: URLs in JSON are in `.diff` format for direct analysis
+
+## Start Here
+**Version Index**: `https://raw.githubusercontent.com/dotnet/core/4b3e8b0817034a3142e36e3f3ea1a0408cc6a5e2/release-notes/index.json`
+**Timeline Index**: `https://raw.githubusercontent.com/dotnet/core/4b3e8b0817034a3142e36e3f3ea1a0408cc6a5e2/release-notes/timeline/index.json`
+
+- The Version index describes .NET releases.
+- The timeline index describes the history of not releases over time, including CVE disclosures and fixes.
+
+Each index provides HAL links to all other resources. **Always navigate via HAL links - never construct URLs manually.**
+
+### What You'll Find in index.json
+- `_links.latest`: Current release version
+- `_links.latest-lts`: Current LTS version  
+- `_embedded.releases[]`: All versions with their own `_links`
+- Each version has links to patches, downloads, OS support
+
+## HAL Navigation
+Use `_links.href` values from JSON:
+```json
+{
+  "_links": {
+    "latest": {"href": "8.0/index.json"},
+    "cve-json": {"href": "archives/2024/07/cve.json"}
+  }
+}
+```
+
+## CVE Workflow  
+1. GET `https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/index.json`
+2. Navigate to target year via `_links.href`
+3. Navigate to target month's `cve-json` link
+4. List CVEs from `cves[]` array
+5. **ALWAYS ask**: "Would you like inline diffs for these fixes?"
+6. If yes: Use commit URLs from `commits{}` (already in `.diff` format for direct analysis)
+
+## Learn More
+- **Usage**: `https://raw.githubusercontent.com/dotnet/core/main/llms/README.md` - Overview and required behaviors
+- **Quick Reference**: `https://raw.githubusercontent.com/dotnet/core/main/llms/quick-ref.md` - Essential workflows, CVE analysis, response templates
+- **Glossary**: `https://raw.githubusercontent.com/dotnet/core/main/llms/glossary.md` - HAL+JSON terminology and field definitions
+
+**Note**: The `index.json` file includes both `-markdown-raw` links (for LLM consumption) and `-markdown` links (for web viewing). Always follow links from `index.json` rather than constructing URLs.
