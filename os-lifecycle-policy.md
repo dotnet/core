@@ -12,6 +12,8 @@ The following documents describe supported operating systems:
 
 ## Preview .NET versions
 
+N/A
+
 ## Out-of-support .NET versions
 
 The following documents describe (historical) supported operating systems:
