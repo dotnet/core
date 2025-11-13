@@ -1,0 +1,195 @@
+{
+  "last_updated": "2024-03-12",
+  "title": ".NET Security Updates for March 2024 (2024-03-12)",
+  "disclosures": [
+    {
+      "id": "CVE-2024-26190",
+      "problem": "Microsoft QUIC Denial of Service Vulnerability",
+      "description": [
+        "A Vulnerability exist in MsQuic.dll which might result in a peer to allocate small chunks of memory as long as connection stays alive."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-03-12",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-03-12",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/300"
+      ],
+      "weakness": "CWE-400",
+      "cna": {
+        "name": "microsoft"
+      }
+    },
+    {
+      "id": "CVE-2024-21392",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in .NET where specially crafted requests may cause a resource leak, leading to a Denial of Service."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:P/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-03-12",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-03-12",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/299"
+      ],
+      "weakness": "CWE-400",
+      "cna": {
+        "name": "microsoft"
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2024-21392",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.16",
+      "fixed": "7.0.17",
+      "release": "7.0",
+      "commits": [
+        "24a00b5b75b4e60620768e02c11e79bc65386e5b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-26190",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.16",
+      "fixed": "7.0.17",
+      "release": "7.0",
+      "commits": [
+        "8a9929bf0b6ae93ea10f4c3e71b03b9958411c1d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21392",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.2",
+      "fixed": "8.0.3",
+      "release": "8.0",
+      "commits": [
+        "0c7efec09666babeebea1f608c91757b8faccca0"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-26190",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.2",
+      "fixed": "8.0.3",
+      "release": "8.0",
+      "commits": [
+        "ddb41ec46ddc558be2f43135a1daa01ebac8e841"
+      ]
+    }
+  ],
+  "packages": [],
+  "commits": {
+    "8a9929bf0b6ae93ea10f4c3e71b03b9958411c1d": {
+      "repo": "runtime",
+      "branch": "release/7.0",
+      "hash": "8a9929bf0b6ae93ea10f4c3e71b03b9958411c1d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/8a9929bf0b6ae93ea10f4c3e71b03b9958411c1d.diff"
+    },
+    "ddb41ec46ddc558be2f43135a1daa01ebac8e841": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "ddb41ec46ddc558be2f43135a1daa01ebac8e841",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/ddb41ec46ddc558be2f43135a1daa01ebac8e841.diff"
+    },
+    "24a00b5b75b4e60620768e02c11e79bc65386e5b": {
+      "repo": "runtime",
+      "branch": "release/7.0",
+      "hash": "24a00b5b75b4e60620768e02c11e79bc65386e5b",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/24a00b5b75b4e60620768e02c11e79bc65386e5b.diff"
+    },
+    "0c7efec09666babeebea1f608c91757b8faccca0": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "0c7efec09666babeebea1f608c91757b8faccca0",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/0c7efec09666babeebea1f608c91757b8faccca0.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-runtime": [
+      "CVE-2024-21392",
+      "CVE-2024-26190"
+    ]
+  },
+  "package_cves": {},
+  "release_cves": {
+    "7.0": [
+      "CVE-2024-21392",
+      "CVE-2024-26190"
+    ],
+    "8.0": [
+      "CVE-2024-21392",
+      "CVE-2024-26190"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2024-21392": [
+      "7.0",
+      "8.0"
+    ],
+    "CVE-2024-26190": [
+      "7.0",
+      "8.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2024-21392": [
+      "0c7efec09666babeebea1f608c91757b8faccca0",
+      "24a00b5b75b4e60620768e02c11e79bc65386e5b"
+    ],
+    "CVE-2024-26190": [
+      "8a9929bf0b6ae93ea10f4c3e71b03b9958411c1d",
+      "ddb41ec46ddc558be2f43135a1daa01ebac8e841"
+    ]
+  }
+}

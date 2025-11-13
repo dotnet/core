@@ -1,0 +1,351 @@
+{
+  "last_updated": "2023-11-14",
+  "title": ".NET Security Updates for November 2023 (2023-11-14)",
+  "disclosures": [
+    {
+      "id": "CVE-2023-36038",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in ASP.NET IIS where a remote unauthenticated user can issue specially crafted requests to a .NET application which may result in denial of service."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:H/E:U/RL:O/RC:C",
+        "score": 8.2,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2023-11-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2023-11-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/286"
+      ],
+      "weakness": "CWE-400",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Barry Dorans"
+        ],
+        "faq": [
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "This vulnerability could be exploited if http requests to .NET 8 RC 1 running on IIS InProcess hosting model are cancelled.  Threads counts would increase and an OutOfMemoryException is possible."
+          },
+          {
+            "question": "According to the CVSS metric, successful exploitation of this vulnerability could lead to a total loss of availability (A:H). What does that mean for this vulnerability?",
+            "answer": "If an attacker was able to successfully exploit the vulnerability the attack might result in a total loss of availability."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2023-36049",
+      "problem": ".NET Elevation of Privilege Vulnerability",
+      "description": [
+        "An elevation of privilege vulnerability exists in .NET where untrusted URIs provided to System.Net.WebRequest.Create can be used to inject arbitrary commands to backend FTP servers."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:L/E:P/RL:O/RC:C",
+        "score": 7.6,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2023-11-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2023-11-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/287"
+      ],
+      "weakness": "CWE-20",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Anonymous with Trend Micro",
+          "Piotr Bazydlo (@chudypb) of Trend Micro Zero Day Initiative"
+        ],
+        "faq": [
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "To exploit this vulnerability an attacker would have to inject arbitrary commands to the FTP server."
+          },
+          {
+            "question": "What type of information could be disclosed by this vulnerability?",
+            "answer": "The type of information that could be disclosed if an attacker successfully exploited this vulnerability would be access controls on the server, allowing for read or write abilities."
+          },
+          {
+            "question": "According to the CVSS metric, privileges required is low (PR:L).  What does that mean for this vulnerability?",
+            "answer": "Any authenticated attacker could trigger this vulnerability. It does not require admin or other elevated privileges."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2023-36558",
+      "problem": ".NET Security Feature Bypass Vulnerability",
+      "description": [
+        "A security feature bypass vulnerability exists in ASP.NET where an unauthenticated user is able to bypass validation on Blazor server forms which could trigger unintended actions."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N/E:P/RL:O/RC:C",
+        "score": 6.2,
+        "severity": "MEDIUM"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2023-11-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2023-11-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/288"
+      ],
+      "mitigation": [
+        "This vulnerability only affects ASP.NET Core Blazor apps. Other application types, including ASP.NET Core apps which do not utilize Blazor, are not affected."
+      ],
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "What kind of security feature could be bypassed by successfully exploiting this vulnerability?",
+            "answer": "An unauthenticated attacker could bypass validations on Blazor Server forms."
+          },
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then trigger an event that could exploit the vulnerability to save an invalid state to a database or trigger other unintended actions, depending on what functionality the form provides."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2023-36049",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.24",
+      "fixed": "6.0.25",
+      "release": "6.0",
+      "commits": [
+        "9865d1c190bce3aa18cb9d8c82bfcb2857bdfe5d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-36049",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.13",
+      "fixed": "7.0.14",
+      "release": "7.0",
+      "commits": [
+        "8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-36038",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0-rc.2",
+      "max_vulnerable": "8.0-rc.2",
+      "fixed": "8.0.0",
+      "release": "8.0",
+      "commits": [
+        "5536e61a3d7b77667f9544b45c5270a73905154d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-36049",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0-rc.2",
+      "max_vulnerable": "8.0-rc.2",
+      "fixed": "8.0.0",
+      "release": "8.0",
+      "commits": [
+        "4796219f6bc0d09dafd21708c2d503279890da5d"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2023-36558",
+      "name": "Microsoft.AspNetCore.Components",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.24",
+      "fixed": "6.0.25",
+      "release": "6.0",
+      "commits": [
+        "9ec7bd0ebb9dbd8e250e2f1a342758a575d63da1"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-36558",
+      "name": "Microsoft.AspNetCore.Components",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.13",
+      "fixed": "7.0.14",
+      "release": "7.0",
+      "commits": [
+        "b056b7af6535c39c5464aff05d6202d807de8af2"
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-36558",
+      "name": "Microsoft.AspNetCore.Components",
+      "min_vulnerable": "8.0-rc.2",
+      "max_vulnerable": "8.0-rc.2",
+      "fixed": "8.0.0",
+      "release": "8.0",
+      "commits": [
+        "416da79a1244c311e573db468a58c08d1e50e809"
+      ]
+    }
+  ],
+  "commits": {
+    "9865d1c190bce3aa18cb9d8c82bfcb2857bdfe5d": {
+      "repo": "runtime",
+      "branch": "release/6.0",
+      "hash": "9865d1c190bce3aa18cb9d8c82bfcb2857bdfe5d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/9865d1c190bce3aa18cb9d8c82bfcb2857bdfe5d.diff"
+    },
+    "8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30": {
+      "repo": "runtime",
+      "branch": "release/7.0",
+      "hash": "8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30.diff"
+    },
+    "4796219f6bc0d09dafd21708c2d503279890da5d": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "4796219f6bc0d09dafd21708c2d503279890da5d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/4796219f6bc0d09dafd21708c2d503279890da5d.diff"
+    },
+    "9ec7bd0ebb9dbd8e250e2f1a342758a575d63da1": {
+      "repo": "aspnetcore",
+      "branch": "release/6.0",
+      "hash": "9ec7bd0ebb9dbd8e250e2f1a342758a575d63da1",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/9ec7bd0ebb9dbd8e250e2f1a342758a575d63da1.diff"
+    },
+    "b056b7af6535c39c5464aff05d6202d807de8af2": {
+      "repo": "aspnetcore",
+      "branch": "release/7.0",
+      "hash": "b056b7af6535c39c5464aff05d6202d807de8af2",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/b056b7af6535c39c5464aff05d6202d807de8af2.diff"
+    },
+    "416da79a1244c311e573db468a58c08d1e50e809": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "416da79a1244c311e573db468a58c08d1e50e809",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/416da79a1244c311e573db468a58c08d1e50e809.diff"
+    },
+    "5536e61a3d7b77667f9544b45c5270a73905154d": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "5536e61a3d7b77667f9544b45c5270a73905154d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/5536e61a3d7b77667f9544b45c5270a73905154d.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime",
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2023-36038"
+    ],
+    "dotnet-runtime": [
+      "CVE-2023-36049"
+    ]
+  },
+  "package_cves": {
+    "Microsoft.AspNetCore.Components": [
+      "CVE-2023-36558"
+    ]
+  },
+  "release_cves": {
+    "6.0": [
+      "CVE-2023-36049",
+      "CVE-2023-36558"
+    ],
+    "7.0": [
+      "CVE-2023-36049",
+      "CVE-2023-36558"
+    ],
+    "8.0": [
+      "CVE-2023-36038",
+      "CVE-2023-36049",
+      "CVE-2023-36558"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2023-36038": [
+      "8.0"
+    ],
+    "CVE-2023-36049": [
+      "6.0",
+      "7.0",
+      "8.0"
+    ],
+    "CVE-2023-36558": [
+      "6.0",
+      "7.0",
+      "8.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2023-36038": [
+      "5536e61a3d7b77667f9544b45c5270a73905154d"
+    ],
+    "CVE-2023-36049": [
+      "4796219f6bc0d09dafd21708c2d503279890da5d",
+      "8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30",
+      "9865d1c190bce3aa18cb9d8c82bfcb2857bdfe5d"
+    ],
+    "CVE-2023-36558": [
+      "416da79a1244c311e573db468a58c08d1e50e809",
+      "9ec7bd0ebb9dbd8e250e2f1a342758a575d63da1",
+      "b056b7af6535c39c5464aff05d6202d807de8af2"
+    ]
+  }
+}
