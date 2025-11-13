@@ -1,0 +1,113 @@
+{
+  "last_updated": "2025-06-10",
+  "title": ".NET Security Updates for June 2025 (2025-06-10)",
+  "disclosures": [
+    {
+      "id": "CVE-2025-30399",
+      "problem": "DLL Hijacking Remote Code Execution Vulnerability",
+      "description": [
+        "A vulnerability exists in .NET SDK where DLL search path hijacking could allow an attacker to achieve remote code execution."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-06-10",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-06-10",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/362"
+      ],
+      "weakness": "CWE-426",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "jony_juice"
+        ],
+        "faq": [
+          {
+            "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
+            "answer": "This attack requires a victim to perform a specific action, such as copying files or executing a command, and for an attacker with appropriate access to have pre-planted malicious files with knowledge of where they should be placed on the victim\u0027s system."
+          },
+          {
+            "question": "According to the CVSS metric, the attack vector is network (AV:N) and the user interaction is required (UI:R). What is the target context of the remote code execution?",
+            "answer": "This attack requires a specially crafted file to be placed either in an online directory or in a local network location. When a victim runs this file, it loads the malicious DLL."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2025-30399",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.16",
+      "fixed": "8.0.17",
+      "release": "",
+      "commits": [
+        "b33d4e34e1cbf993583d78fc1b64ea8400935978"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-30399",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.5",
+      "fixed": "9.0.6",
+      "release": "",
+      "commits": [
+        "214743ee2a5a25b9a3a07e3f0451da73eb4e97e2"
+      ]
+    }
+  ],
+  "packages": [],
+  "commits": {
+    "b33d4e34e1cbf993583d78fc1b64ea8400935978": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "b33d4e34e1cbf993583d78fc1b64ea8400935978",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/b33d4e34e1cbf993583d78fc1b64ea8400935978.diff"
+    },
+    "214743ee2a5a25b9a3a07e3f0451da73eb4e97e2": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "214743ee2a5a25b9a3a07e3f0451da73eb4e97e2",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/214743ee2a5a25b9a3a07e3f0451da73eb4e97e2.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-runtime": [
+      "CVE-2025-30399"
+    ]
+  },
+  "package_cves": {},
+  "release_cves": {},
+  "cve_releases": {},
+  "cve_commits": {
+    "CVE-2025-30399": [
+      "214743ee2a5a25b9a3a07e3f0451da73eb4e97e2",
+      "b33d4e34e1cbf993583d78fc1b64ea8400935978"
+    ]
+  }
+}

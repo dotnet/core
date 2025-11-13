@@ -1,0 +1,184 @@
+{
+  "last_updated": "2024-11-12",
+  "title": ".NET Security Updates for November 2024 (2024-11-12)",
+  "disclosures": [
+    {
+      "id": "CVE-2024-43498",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "description": [
+        "A remote unauthenticated attacker could exploit this vulnerability by sending specially crafted requests to a .NET vulnerable webapp or loading a specially crafted file into a vulnerable application."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 9.8,
+        "severity": "CRITICAL"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-11-12",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-11-12",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/334"
+      ],
+      "mitigation": [
+        "Applications that do not use the NrbfDecoder component are not affected by this vulnerability. By default, .NET console apps and web apps do not reference this component."
+      ],
+      "weakness": "CWE-843",
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "A remote unauthenticated attacker could exploit this vulnerability by sending specially crafted requests to a vulnerable .NET webapp or by loading a specially crafted file into a vulnerable desktop app."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-43499",
+      "problem": ".NET Core - DoS - (unbounded work factor) in NrbfDecoder component",
+      "description": [
+        "The NrbfDecoder component in .NET 9 contains a denial of service vulnerability due to incorrect input validation."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-11-12",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-11-12",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/333"
+      ],
+      "mitigation": [
+        "Applications that do not use the NrbfDecoder component are not affected by this vulnerability. By default, .NET console apps and web apps do not reference this component."
+      ],
+      "weakness": "CWE-409",
+      "cna": {
+        "name": "microsoft"
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2024-43498",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0-preview.6.24327.7",
+      "max_vulnerable": "9.0.0-rc.2.24473.5",
+      "fixed": "9.0.0",
+      "release": "9.0",
+      "commits": [
+        "d16f41ad8fded18bf82bca88df27967cc3365eb0"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43499",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0-preview.6.24327.7",
+      "max_vulnerable": "9.0.0-rc.2.24473.5",
+      "fixed": "9.0.0",
+      "release": "9.0",
+      "commits": [
+        "d16f41ad8fded18bf82bca88df27967cc3365eb0"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2024-43498",
+      "name": "System.Formats.Nrbf",
+      "min_vulnerable": "9.0.0-preview.6.24327.7",
+      "max_vulnerable": "9.0.0-rc.2.24473.5",
+      "fixed": "9.0.0",
+      "release": "9.0",
+      "commits": [
+        "d16f41ad8fded18bf82bca88df27967cc3365eb0"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43499",
+      "name": "System.Formats.Nrbf",
+      "min_vulnerable": "9.0.0-preview.6.24327.7",
+      "max_vulnerable": "9.0.0-rc.2.24473.5",
+      "fixed": "9.0.0",
+      "release": "9.0",
+      "commits": [
+        "d16f41ad8fded18bf82bca88df27967cc3365eb0"
+      ]
+    }
+  ],
+  "commits": {
+    "d16f41ad8fded18bf82bca88df27967cc3365eb0": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "d16f41ad8fded18bf82bca88df27967cc3365eb0",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/d16f41ad8fded18bf82bca88df27967cc3365eb0.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-runtime": [
+      "CVE-2024-43498",
+      "CVE-2024-43499"
+    ]
+  },
+  "package_cves": {
+    "System.Formats.Nrbf": [
+      "CVE-2024-43498",
+      "CVE-2024-43499"
+    ]
+  },
+  "release_cves": {
+    "9.0": [
+      "CVE-2024-43498",
+      "CVE-2024-43499"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2024-43498": [
+      "9.0"
+    ],
+    "CVE-2024-43499": [
+      "9.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2024-43498": [
+      "d16f41ad8fded18bf82bca88df27967cc3365eb0"
+    ],
+    "CVE-2024-43499": [
+      "d16f41ad8fded18bf82bca88df27967cc3365eb0"
+    ]
+  }
+}

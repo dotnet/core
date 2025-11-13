@@ -1,0 +1,483 @@
+{
+  "last_updated": "2024-10-08",
+  "title": ".NET Security Updates for October 2024 (2024-10-08)",
+  "disclosures": [
+    {
+      "id": "CVE-2024-43483",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "System.Security.Cryptography.Cose, System.IO.Packaging, Microsoft.Extensions.Caching.Memory may be exposed to a hostile input which may lead them to be susceptible to hash flooding attacks resulting in denial of service."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-10-08",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-10-08",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/327"
+      ],
+      "weakness": "CWE-407",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Levi Broderick of Microsoft Corporation"
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-43484",
+      "problem": "(DoS) System.IO.Packaging - Multiple DoS vectors in use of SortedList",
+      "description": [
+        "The System.IO.Packaging library may allow untrusted inputs to influence algorithmically complex operations, leading to denial of service."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-10-08",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-10-08",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/328"
+      ],
+      "weakness": "CWE-407",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Levi Broderick of Microsoft Corporation"
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-43485",
+      "problem": "(DoS) Denial of Service attack against System.Text.Json ExtensionData feature",
+      "description": [
+        "In System.Text.Json 6.0.x and 8.0.x, applications which deserialize input to a model with an [ExtensionData] property can be vulnerable to an algorithmic complexity attack resulting in Denial of Service."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-10-08",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-10-08",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/329"
+      ],
+      "weakness": "CWE-407",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Eirik George Tsarpalis of Microsoft Corporation"
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-38229",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "description": [
+        "A vulnerability exists in ASP.NET when closing an HTTP/3 stream while application code is writing to the response body, a race condition may lead to use-after-free.",
+        "Note: HTTP/3 is experimental in .NET 6.0. If you are on .NET 6.0 and using HTTP/3, please upgrade to .NET 8.0.10. .NET 6.0 will not receive a security patch for this vulnerability."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.1,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-10-08",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-10-08",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/326"
+      ],
+      "weakness": "CWE-416",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Radek Zikmund of Microsoft Corporation"
+        ],
+        "faq": [
+          {
+            "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
+            "answer": "Successful exploitation of this vulnerability requires an attacker to win a race condition."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.33",
+      "fixed": "6.0.34",
+      "release": "6.0",
+      "commits": [
+        "741b04589cdd3514d032cbfd041fb7178bbd15c9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43485",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.33",
+      "fixed": "6.0.34",
+      "release": "6.0",
+      "commits": [
+        "c3c2cc2e61411fc1c56ca962684348ccf5563ce4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-38229",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.8",
+      "fixed": "8.0.9",
+      "release": "8.0",
+      "commits": [
+        "1002b673be5803ba63173ef8a2fdebe3e388a34a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.8",
+      "fixed": "8.0.9",
+      "release": "8.0",
+      "commits": [
+        "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43485",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.8",
+      "fixed": "8.0.9",
+      "release": "8.0",
+      "commits": [
+        "be46d16f6ff2daa6632136f7f100c5de89de6809"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0-preview.1.24080.9",
+      "max_vulnerable": "9.0.0-rc.1.24431.7",
+      "fixed": "9.0.0-rc.2.24473.5",
+      "release": "9.0",
+      "commits": [
+        "b4ccde403bdb8976d3ad4768d16002fa232f1ac0"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "System.IO.Packaging",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.0",
+      "fixed": "6.0.1",
+      "release": "6.0",
+      "commits": [
+        "741b04589cdd3514d032cbfd041fb7178bbd15c9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "System.IO.Packaging",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.0",
+      "fixed": "8.0.1",
+      "release": "8.0",
+      "commits": [
+        "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "System.IO.Packaging",
+      "min_vulnerable": "9.0.0-preview.1.24080.9",
+      "max_vulnerable": "9.0.0-rc.1.24431.7",
+      "fixed": "9.0.0-rc.2.24473.5",
+      "release": "9.0",
+      "commits": [
+        "b4ccde403bdb8976d3ad4768d16002fa232f1ac0"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43484",
+      "name": "System.IO.Packaging",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.0",
+      "fixed": "8.0.1",
+      "release": "8.0",
+      "commits": [
+        "c2891d32a0408ce62771120dd7c03bc3dde1fca7",
+        "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43484",
+      "name": "System.IO.Packaging",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.0",
+      "fixed": "6.0.1",
+      "release": "6.0",
+      "commits": [
+        "40d60a122dfd637e1b8a7cccbbbc363d508fb0d7",
+        "741b04589cdd3514d032cbfd041fb7178bbd15c9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "System.Runtime.Caching",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.0",
+      "fixed": "8.0.1",
+      "release": "8.0",
+      "commits": [
+        "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "System.Security.Cryptography.Cose",
+      "min_vulnerable": "8.0.0-preview.1.23110.8",
+      "max_vulnerable": "8.0.0",
+      "fixed": "8.0.1",
+      "release": "8.0",
+      "commits": [
+        "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43483",
+      "name": "System.Security.Cryptography.Cose",
+      "min_vulnerable": "9.0.0-preview.1.24080.9",
+      "max_vulnerable": " 9.0.0-rc.1.24431.7",
+      "fixed": "9.0.0-rc.2.24473.5",
+      "release": "9.0",
+      "commits": [
+        "b4ccde403bdb8976d3ad4768d16002fa232f1ac0"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43485",
+      "name": "System.Text.Json",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.9",
+      "fixed": "6.0.10",
+      "release": "6.0",
+      "commits": [
+        "c3c2cc2e61411fc1c56ca962684348ccf5563ce4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-43485",
+      "name": "System.Text.Json",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.4",
+      "fixed": "8.0.5",
+      "release": "8.0",
+      "commits": [
+        "be46d16f6ff2daa6632136f7f100c5de89de6809"
+      ]
+    }
+  ],
+  "commits": {
+    "741b04589cdd3514d032cbfd041fb7178bbd15c9": {
+      "repo": "runtime",
+      "branch": "release/6.0",
+      "hash": "741b04589cdd3514d032cbfd041fb7178bbd15c9",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/741b04589cdd3514d032cbfd041fb7178bbd15c9.diff"
+    },
+    "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8.diff"
+    },
+    "c3c2cc2e61411fc1c56ca962684348ccf5563ce4": {
+      "repo": "runtime",
+      "branch": "release/6.0",
+      "hash": "c3c2cc2e61411fc1c56ca962684348ccf5563ce4",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/c3c2cc2e61411fc1c56ca962684348ccf5563ce4.diff"
+    },
+    "be46d16f6ff2daa6632136f7f100c5de89de6809": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "be46d16f6ff2daa6632136f7f100c5de89de6809",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/be46d16f6ff2daa6632136f7f100c5de89de6809.diff"
+    },
+    "40d60a122dfd637e1b8a7cccbbbc363d508fb0d7": {
+      "repo": "runtime",
+      "branch": "release/6.0",
+      "hash": "40d60a122dfd637e1b8a7cccbbbc363d508fb0d7",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/40d60a122dfd637e1b8a7cccbbbc363d508fb0d7.diff"
+    },
+    "c2891d32a0408ce62771120dd7c03bc3dde1fca7": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "c2891d32a0408ce62771120dd7c03bc3dde1fca7",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/c2891d32a0408ce62771120dd7c03bc3dde1fca7.diff"
+    },
+    "1002b673be5803ba63173ef8a2fdebe3e388a34a": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "1002b673be5803ba63173ef8a2fdebe3e388a34a",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/1002b673be5803ba63173ef8a2fdebe3e388a34a.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime",
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2024-38229"
+    ],
+    "dotnet-runtime": [
+      "CVE-2024-43483",
+      "CVE-2024-43485"
+    ]
+  },
+  "package_cves": {
+    "System.IO.Packaging": [
+      "CVE-2024-43483",
+      "CVE-2024-43484"
+    ],
+    "System.Runtime.Caching": [
+      "CVE-2024-43483"
+    ],
+    "System.Security.Cryptography.Cose": [
+      "CVE-2024-43483"
+    ],
+    "System.Text.Json": [
+      "CVE-2024-43485"
+    ]
+  },
+  "release_cves": {
+    "6.0": [
+      "CVE-2024-43483",
+      "CVE-2024-43484",
+      "CVE-2024-43485"
+    ],
+    "8.0": [
+      "CVE-2024-38229",
+      "CVE-2024-43483",
+      "CVE-2024-43484",
+      "CVE-2024-43485"
+    ],
+    "9.0": [
+      "CVE-2024-43483"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2024-38229": [
+      "8.0"
+    ],
+    "CVE-2024-43483": [
+      "6.0",
+      "8.0",
+      "9.0"
+    ],
+    "CVE-2024-43484": [
+      "6.0",
+      "8.0"
+    ],
+    "CVE-2024-43485": [
+      "6.0",
+      "8.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2024-38229": [
+      "1002b673be5803ba63173ef8a2fdebe3e388a34a"
+    ],
+    "CVE-2024-43483": [
+      "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8",
+      "741b04589cdd3514d032cbfd041fb7178bbd15c9"
+    ],
+    "CVE-2024-43484": [
+      "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8",
+      "40d60a122dfd637e1b8a7cccbbbc363d508fb0d7",
+      "741b04589cdd3514d032cbfd041fb7178bbd15c9",
+      "c2891d32a0408ce62771120dd7c03bc3dde1fca7"
+    ],
+    "CVE-2024-43485": [
+      "be46d16f6ff2daa6632136f7f100c5de89de6809",
+      "c3c2cc2e61411fc1c56ca962684348ccf5563ce4"
+    ]
+  }
+}

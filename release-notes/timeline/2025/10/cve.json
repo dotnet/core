@@ -1,0 +1,573 @@
+{
+  "last_updated": "2025-10-14",
+  "title": ".NET Security Updates for October 2025 (2025-10-14)",
+  "disclosures": [
+    {
+      "id": "CVE-2025-55248",
+      "problem": ".NET Information Disclosure Vulnerability",
+      "description": [
+        "An AiTM (Attacker in the middle) attacker may prevent use of TLS between client and SMTP server, forcing client to send data over unencrypted connection."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C",
+        "score": 4.8,
+        "severity": "MEDIUM"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-10-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-10-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/372"
+      ],
+      "weakness": "CWE-326",
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "What type of information could be disclosed by this vulnerability?",
+            "answer": "The type of information that could be disclosed if an attacker successfully exploited this vulnerability is Personally Identifiable Information (PII)."
+          },
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R) and privileges required is Low (PR:L). What does that mean for this vulnerability?",
+            "answer": "An authorized attacker with read/write privileges must send a victim a malicious email, or share the link to a malicious email, and convince them to open it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2025-55315",
+      "problem": ".NET Security Feature Bypass Vulnerability",
+      "description": [
+        "Inconsistent interpretation of http requests (\u0027http request/response smuggling\u0027) in ASP.NET Core allows an authorized attacker to bypass a security feature over a network."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:L/E:U/RL:O/RC:C",
+        "score": 9.9,
+        "severity": "CRITICAL"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-10-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-10-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/371"
+      ],
+      "weakness": "CWE-444",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Sid"
+        ],
+        "faq": [
+          {
+            "question": "How could an attacker exploit the vulnerability?",
+            "answer": "An authenticated attacker could exploit the vulnerability by sending a malicious http request to the web server."
+          },
+          {
+            "question": "According to the CVSS metrics, successful exploitation of this vulnerability could lead to a high loss of confidentiality (C:H), and integrity (I:H) and some loss of availability (A:L). What does that mean for this vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could view sensitive information such as other user\u0027s credentials (Confidentiality) and make changes to file contents on the target server (Integrity), and they might be able to force a crash within the server (Availability)."
+          },
+          {
+            "question": "According to the CVSS metric, a successful exploitation could lead to a scope change (S:C). What does this mean for this vulnerability?",
+            "answer": "An exploited vulnerability can affect resources beyond the security scope managed by the security authority of the vulnerable component. In this case, the vulnerable component and the impacted component are different and managed by different security authorities."
+          },
+          {
+            "question": "What kind of security feature could be bypassed by successfully exploiting this vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could smuggle another HTTP request and bypass front-end security controls or hijack other users\u0027 credentials."
+          },
+          {
+            "question": "This vulnerability is rated as an Important, Security Feature Bypass that is less likely to be exploited. Why is the CVSS score 9.9 out of 10?",
+            "answer": "ASP.NET Core is a framework. CVSS scores applications. This mismatch makes scoring ASP.NET challenging. In situations like this, it is Microsoft\u0027s standard practice to score the worst possible case scenario for any application written using ASP.NET Core. \u0026quot;Exploitation less likely\u0026quot; refers to a more typical application which doesn\u0027t go outside the typical ASP.NET Core uses."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2025-55247",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in .NET where predictable paths for MSBuild\u0027s temporary directories on Linux let another user create the directories ahead of MSBuild, leading to DoS of builds. This only affects .NET on Linux operating systems."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.3,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-10-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-10-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "linux"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/370"
+      ],
+      "mitigation": [
+        "Projects which do not utilize the DownloadFile build task are not susceptible to this vulnerability."
+      ],
+      "weakness": "CWE-59",
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "What privileges could be gained by an attacker who successfully exploited the vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could gain the privileges of the authenticated user."
+          },
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R) and privileges required is Low (PR:L). What does that mean for this vulnerability?",
+            "answer": "An authenticated attacker could place a malicious file in the core project path and then wait for a user with admin privileges to create or build a .NET project to gain elevated privileges."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2025-55248",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.9",
+      "fixed": "9.0.10",
+      "release": "9.0",
+      "commits": [
+        "18e28d767acf44208afa6c4e2e67a10c65e9647e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55248",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.20",
+      "fixed": "8.0.21",
+      "release": "8.0",
+      "commits": [
+        "44527b9ed8427463578126a4494c3654dda11866"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55315",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.9",
+      "fixed": "9.0.10",
+      "release": "9.0",
+      "commits": [
+        "97a86434195a82fc7e302a4c57d5ec7f885c1ad5"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55315",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.20",
+      "fixed": "8.0.21",
+      "release": "8.0",
+      "commits": [
+        "61794b7f3aac0b6719f783db5b5c725fefc8b695"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.100",
+      "max_vulnerable": "8.0.120",
+      "fixed": "8.0.121",
+      "release": "",
+      "commits": [
+        "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.300",
+      "max_vulnerable": "8.0.317",
+      "fixed": "8.0.318",
+      "release": "",
+      "commits": [
+        "aa888d3214e5adb503c48c3bad2bfc6c5aff638a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.400",
+      "max_vulnerable": "8.0.414",
+      "fixed": "8.0.415",
+      "release": "",
+      "commits": [
+        "02bf66295b64ab368d12933041f7281aad186a2d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.100",
+      "max_vulnerable": "9.0.110",
+      "fixed": "9.0.111",
+      "release": "",
+      "commits": [
+        "728984d96edf07d56918a88b0f37fec6b1dfbbc9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.300",
+      "max_vulnerable": "9.0.305",
+      "fixed": "9.0.306",
+      "release": "",
+      "commits": [
+        "09c1be8483dad070189c3a0c660e7acacf478402"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2025-55315",
+      "name": "Microsoft.AspNetCore.Server.Kestrel.Core",
+      "min_vulnerable": "2.0.0",
+      "max_vulnerable": "2.3.0",
+      "fixed": "2.3.6",
+      "release": "",
+      "commits": [
+        "83a330a683c99bf89398a6b554d8d9bf21b6b969"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.8.0",
+      "max_vulnerable": "17.8.29",
+      "fixed": "17.8.43",
+      "release": "",
+      "commits": [
+        "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.10.0",
+      "max_vulnerable": "17.10.29",
+      "fixed": "17.10.46",
+      "release": "",
+      "commits": [
+        "aa888d3214e5adb503c48c3bad2bfc6c5aff638a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.11.0",
+      "max_vulnerable": "17.11.31",
+      "fixed": "17.11.48",
+      "release": "",
+      "commits": [
+        "02bf66295b64ab368d12933041f7281aad186a2d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.12.0",
+      "max_vulnerable": "17.12.36",
+      "fixed": "17.12.50",
+      "release": "",
+      "commits": [
+        "728984d96edf07d56918a88b0f37fec6b1dfbbc9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.14.0",
+      "max_vulnerable": "17.14.8",
+      "fixed": "17.14.28",
+      "release": "",
+      "commits": [
+        "09c1be8483dad070189c3a0c660e7acacf478402"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build",
+      "min_vulnerable": "17.8.0",
+      "max_vulnerable": "17.8.29",
+      "fixed": "17.8.43",
+      "release": "",
+      "commits": [
+        "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build",
+      "min_vulnerable": "17.10.0",
+      "max_vulnerable": "17.10.29",
+      "fixed": "17.10.46",
+      "release": "",
+      "commits": [
+        "aa888d3214e5adb503c48c3bad2bfc6c5aff638a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build",
+      "min_vulnerable": "17.11.0",
+      "max_vulnerable": "17.11.31",
+      "fixed": "17.11.48",
+      "release": "",
+      "commits": [
+        "02bf66295b64ab368d12933041f7281aad186a2d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build",
+      "min_vulnerable": "17.12.0",
+      "max_vulnerable": "17.12.36",
+      "fixed": "17.12.50",
+      "release": "",
+      "commits": [
+        "728984d96edf07d56918a88b0f37fec6b1dfbbc9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build",
+      "min_vulnerable": "17.14.0",
+      "max_vulnerable": "17.14.8",
+      "fixed": "17.14.28",
+      "release": "",
+      "commits": [
+        "09c1be8483dad070189c3a0c660e7acacf478402"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Utilities.Core",
+      "min_vulnerable": "17.8.0",
+      "max_vulnerable": "17.8.29",
+      "fixed": "17.8.43",
+      "release": "",
+      "commits": [
+        "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Utilities.Core",
+      "min_vulnerable": "17.10.0",
+      "max_vulnerable": "17.10.29",
+      "fixed": "17.10.46",
+      "release": "",
+      "commits": [
+        "aa888d3214e5adb503c48c3bad2bfc6c5aff638a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Utilities.Core",
+      "min_vulnerable": "17.11.0",
+      "max_vulnerable": "17.11.31",
+      "fixed": "17.11.48",
+      "release": "",
+      "commits": [
+        "02bf66295b64ab368d12933041f7281aad186a2d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Utilities.Core",
+      "min_vulnerable": "17.12.0",
+      "max_vulnerable": "17.12.36",
+      "fixed": "17.12.50",
+      "release": "",
+      "commits": [
+        "728984d96edf07d56918a88b0f37fec6b1dfbbc9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-55247",
+      "name": "Microsoft.Build.Utilities.Core",
+      "min_vulnerable": "17.14.0",
+      "max_vulnerable": "17.14.8",
+      "fixed": "17.14.28",
+      "release": "",
+      "commits": [
+        "09c1be8483dad070189c3a0c660e7acacf478402"
+      ]
+    }
+  ],
+  "commits": {
+    "18e28d767acf44208afa6c4e2e67a10c65e9647e": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "18e28d767acf44208afa6c4e2e67a10c65e9647e",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/18e28d767acf44208afa6c4e2e67a10c65e9647e.diff"
+    },
+    "44527b9ed8427463578126a4494c3654dda11866": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "44527b9ed8427463578126a4494c3654dda11866",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/44527b9ed8427463578126a4494c3654dda11866.diff"
+    },
+    "97a86434195a82fc7e302a4c57d5ec7f885c1ad5": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "97a86434195a82fc7e302a4c57d5ec7f885c1ad5",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/97a86434195a82fc7e302a4c57d5ec7f885c1ad5.diff"
+    },
+    "61794b7f3aac0b6719f783db5b5c725fefc8b695": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "61794b7f3aac0b6719f783db5b5c725fefc8b695",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/61794b7f3aac0b6719f783db5b5c725fefc8b695.diff"
+    },
+    "f0cbb13971c30ad15a3f252a8d0171898a01ec11": {
+      "repo": "msbuild",
+      "branch": "vs17.8",
+      "hash": "f0cbb13971c30ad15a3f252a8d0171898a01ec11",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/msbuild/commit/f0cbb13971c30ad15a3f252a8d0171898a01ec11.diff"
+    },
+    "aa888d3214e5adb503c48c3bad2bfc6c5aff638a": {
+      "repo": "msbuild",
+      "branch": "vs17.10",
+      "hash": "aa888d3214e5adb503c48c3bad2bfc6c5aff638a",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/msbuild/commit/aa888d3214e5adb503c48c3bad2bfc6c5aff638a.diff"
+    },
+    "02bf66295b64ab368d12933041f7281aad186a2d": {
+      "repo": "msbuild",
+      "branch": "vs17.11",
+      "hash": "02bf66295b64ab368d12933041f7281aad186a2d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/msbuild/commit/02bf66295b64ab368d12933041f7281aad186a2d.diff"
+    },
+    "728984d96edf07d56918a88b0f37fec6b1dfbbc9": {
+      "repo": "msbuild",
+      "branch": "vs17.12",
+      "hash": "728984d96edf07d56918a88b0f37fec6b1dfbbc9",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/msbuild/commit/728984d96edf07d56918a88b0f37fec6b1dfbbc9.diff"
+    },
+    "09c1be8483dad070189c3a0c660e7acacf478402": {
+      "repo": "msbuild",
+      "branch": "vs17.14",
+      "hash": "09c1be8483dad070189c3a0c660e7acacf478402",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/msbuild/commit/09c1be8483dad070189c3a0c660e7acacf478402.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime",
+    "dotnet-runtime": ".NET Runtime Libraries",
+    "dotnet-sdk": ".NET SDK"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2025-55315"
+    ],
+    "dotnet-runtime": [
+      "CVE-2025-55248"
+    ],
+    "dotnet-sdk": [
+      "CVE-2025-55247"
+    ]
+  },
+  "package_cves": {
+    "Microsoft.AspNetCore.Server.Kestrel.Core": [
+      "CVE-2025-55315"
+    ],
+    "Microsoft.Build": [
+      "CVE-2025-55247"
+    ],
+    "Microsoft.Build.Tasks.Core": [
+      "CVE-2025-55247"
+    ],
+    "Microsoft.Build.Utilities.Core": [
+      "CVE-2025-55247"
+    ]
+  },
+  "release_cves": {
+    "8.0": [
+      "CVE-2025-55248",
+      "CVE-2025-55315"
+    ],
+    "9.0": [
+      "CVE-2025-55248",
+      "CVE-2025-55315"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2025-55248": [
+      "8.0",
+      "9.0"
+    ],
+    "CVE-2025-55315": [
+      "8.0",
+      "9.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2025-55247": [
+      "02bf66295b64ab368d12933041f7281aad186a2d",
+      "09c1be8483dad070189c3a0c660e7acacf478402",
+      "728984d96edf07d56918a88b0f37fec6b1dfbbc9",
+      "aa888d3214e5adb503c48c3bad2bfc6c5aff638a",
+      "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
+    ],
+    "CVE-2025-55248": [
+      "18e28d767acf44208afa6c4e2e67a10c65e9647e",
+      "44527b9ed8427463578126a4494c3654dda11866"
+    ],
+    "CVE-2025-55315": [
+      "61794b7f3aac0b6719f783db5b5c725fefc8b695",
+      "97a86434195a82fc7e302a4c57d5ec7f885c1ad5"
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "last_updated": "2025-04-08",
+  "title": ".NET Security Updates for April 2025 (2025-04-08)",
+  "disclosures": [
+    {
+      "id": "CVE-2025-26682",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in ASP.NET Core where using HTTP/3 improperly may result in a Denial of Service by allocation of resources without limits or throttling."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-04-08",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-04-08",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/352"
+      ],
+      "weakness": "CWE-770",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "James Newton-King with Microsoft"
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2025-26682",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.14",
+      "fixed": "8.0.15",
+      "release": "8.0",
+      "commits": [
+        "d6605eb150c993dd8943e2c1a6875a93927c301a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26682",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.3",
+      "fixed": "9.0.4",
+      "release": "9.0",
+      "commits": [
+        "d5933a9d685c3a09566ec7c9ca818bd7ac2f08ad"
+      ]
+    }
+  ],
+  "packages": [],
+  "commits": {
+    "d6605eb150c993dd8943e2c1a6875a93927c301a": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "d6605eb150c993dd8943e2c1a6875a93927c301a",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/d6605eb150c993dd8943e2c1a6875a93927c301a.diff"
+    },
+    "d5933a9d685c3a09566ec7c9ca818bd7ac2f08ad": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "d5933a9d685c3a09566ec7c9ca818bd7ac2f08ad",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/d5933a9d685c3a09566ec7c9ca818bd7ac2f08ad.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2025-26682"
+    ]
+  },
+  "package_cves": {},
+  "release_cves": {
+    "8.0": [
+      "CVE-2025-26682"
+    ],
+    "9.0": [
+      "CVE-2025-26682"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2025-26682": [
+      "8.0",
+      "9.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2025-26682": [
+      "d5933a9d685c3a09566ec7c9ca818bd7ac2f08ad",
+      "d6605eb150c993dd8943e2c1a6875a93927c301a"
+    ]
+  }
+}

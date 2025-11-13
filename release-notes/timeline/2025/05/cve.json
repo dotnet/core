@@ -1,0 +1,276 @@
+{
+  "last_updated": "2025-05-13",
+  "title": ".NET Security Updates for May 2025 (2025-05-13)",
+  "disclosures": [
+    {
+      "id": "CVE-2025-26646",
+      "problem": ".NET and Visual Studio Spoofing Vulnerability",
+      "description": [
+        "A vulnerability exists in .NET SDK or MSBuild applications where external control of file name or path allows an unauthorized attacked to perform spoofing over a network."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-05-13",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-05-13",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/356"
+      ],
+      "weakness": "CWE-73",
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R) and privileges required \u00A0is low (PR:L). What does that mean for this vulnerability?",
+            "answer": "An authorized attacker with standard user privileges could place a malicious file and then wait for the privileged victim to run the calling command."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.100",
+      "max_vulnerable": "8.0.115",
+      "fixed": "8.0.116",
+      "release": "8.0.1xx",
+      "commits": [
+        "d00609e7978ee1b0fe62b39a378611311cf85603"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.400",
+      "max_vulnerable": "8.0.408",
+      "fixed": "8.0.409",
+      "release": "",
+      "commits": [
+        "7892f91f7191adb473a9e97a79e1c4ca8a2c9247"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.100",
+      "max_vulnerable": "9.0.105",
+      "fixed": "9.0.106",
+      "release": "9.0.1xx",
+      "commits": [
+        "ad312fc3980fd8c562fac172bc17318c447eeb75"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.200",
+      "max_vulnerable": "9.0.203",
+      "fixed": "9.0.204",
+      "release": "9.0.2xx",
+      "commits": [
+        "070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.300",
+      "max_vulnerable": "9.0.303",
+      "fixed": "9.0.304",
+      "release": "9.0.3xx",
+      "commits": [
+        "391e16c3b5c49938029e20d9ee69c4d5bdf51c70"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "15.8.166",
+      "max_vulnerable": "15.9.20",
+      "fixed": "15.9.30",
+      "release": "",
+      "commits": [
+        "c0e4b0e6834d8605c8b82834c87d0dd38c0674a4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "16.0.461",
+      "max_vulnerable": "16.11.0",
+      "fixed": "16.11.6",
+      "release": "",
+      "commits": [
+        "0d5c4e39e876d79404e0428fa66be0194c023ba5"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.0.0",
+      "max_vulnerable": "17.8.3",
+      "fixed": "17.8.29",
+      "release": "",
+      "commits": [
+        "3ab07f0cf43d15c3d05da60fb0ff44b49799ed5e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.9.5",
+      "max_vulnerable": "17.10.4",
+      "fixed": "17.10.29",
+      "release": "",
+      "commits": [
+        "b0cdc2699481d73486745912101458984847a8f3"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.11.4",
+      "max_vulnerable": "17.11.4",
+      "fixed": "17.12.36",
+      "release": "",
+      "commits": [
+        "933b72e36e86c22ba73e8b8148488f8298bb73c7"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.12.6",
+      "max_vulnerable": "17.12.6",
+      "fixed": "17.12.36",
+      "release": "",
+      "commits": [
+        "13c590f8d138d6a30b899a5172cc6ec494db930b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.13.9",
+      "max_vulnerable": "17.13.9",
+      "fixed": "17.13.26",
+      "release": "",
+      "commits": [
+        "b1feb5ea6f2577069bf11fe6fb96cd03fb3be112"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-26646",
+      "name": "Microsoft.Build.Tasks.Core",
+      "min_vulnerable": "17.13.4",
+      "max_vulnerable": "17.14.5",
+      "fixed": "17.14.8",
+      "release": "",
+      "commits": [
+        "b1feb5ea6f2577069bf11fe6fb96cd03fb3be112"
+      ]
+    }
+  ],
+  "commits": {
+    "d00609e7978ee1b0fe62b39a378611311cf85603": {
+      "repo": "sdk",
+      "branch": "release/8.0.1xx",
+      "hash": "d00609e7978ee1b0fe62b39a378611311cf85603",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/d00609e7978ee1b0fe62b39a378611311cf85603.diff"
+    },
+    "7892f91f7191adb473a9e97a79e1c4ca8a2c9247": {
+      "repo": "sdk",
+      "branch": "release/8.0.4xx",
+      "hash": "7892f91f7191adb473a9e97a79e1c4ca8a2c9247",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/7892f91f7191adb473a9e97a79e1c4ca8a2c9247.diff"
+    },
+    "ad312fc3980fd8c562fac172bc17318c447eeb75": {
+      "repo": "sdk",
+      "branch": "release/9.0.1xx",
+      "hash": "ad312fc3980fd8c562fac172bc17318c447eeb75",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/ad312fc3980fd8c562fac172bc17318c447eeb75.diff"
+    },
+    "070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753": {
+      "repo": "sdk",
+      "branch": "release/9.0.2xx",
+      "hash": "070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753.diff"
+    },
+    "391e16c3b5c49938029e20d9ee69c4d5bdf51c70": {
+      "repo": "sdk",
+      "branch": "release/9.0.3xx",
+      "hash": "391e16c3b5c49938029e20d9ee69c4d5bdf51c70",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/391e16c3b5c49938029e20d9ee69c4d5bdf51c70.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-sdk": ".NET SDK"
+  },
+  "product_cves": {
+    "dotnet-sdk": [
+      "CVE-2025-26646"
+    ]
+  },
+  "package_cves": {
+    "Microsoft.Build.Tasks.Core": [
+      "CVE-2025-26646"
+    ]
+  },
+  "release_cves": {
+    "8.0.1xx": [
+      "CVE-2025-26646"
+    ],
+    "9.0.1xx": [
+      "CVE-2025-26646"
+    ],
+    "9.0.2xx": [
+      "CVE-2025-26646"
+    ],
+    "9.0.3xx": [
+      "CVE-2025-26646"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2025-26646": [
+      "8.0.1xx",
+      "9.0.1xx",
+      "9.0.2xx",
+      "9.0.3xx"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2025-26646": [
+      "070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753",
+      "391e16c3b5c49938029e20d9ee69c4d5bdf51c70",
+      "7892f91f7191adb473a9e97a79e1c4ca8a2c9247",
+      "ad312fc3980fd8c562fac172bc17318c447eeb75",
+      "d00609e7978ee1b0fe62b39a378611311cf85603"
+    ]
+  }
+}

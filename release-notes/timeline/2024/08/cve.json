@@ -1,0 +1,169 @@
+{
+  "last_updated": "2024-08-13",
+  "title": ".NET Security Updates for August 2024 (2024-08-13)",
+  "disclosures": [
+    {
+      "id": "CVE-2024-38167",
+      "problem": ".NET Information Disclosure Vulnerability",
+      "description": [
+        "A vulnerability exists in .NET runtime TlsStream which may result in Information Disclosure."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C",
+        "score": 6.5,
+        "severity": "MEDIUM"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-08-13",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-08-13",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/319"
+      ],
+      "weakness": "CWE-319",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Alex Appleton, D. E. Shaw \u0026 Co., L.P.",
+          "Roman Konecny, Microsoft"
+        ],
+        "faq": [
+          {
+            "question": "What type of information could be disclosed by this vulnerability?",
+            "answer": "An attacker who successfully exploited the vulnerability could read targeted email messages."
+          },
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R). What interaction would the user have to do?",
+            "answer": "Exploitation of this vulnerability requires that a user trigger the payload in the application."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-38168",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-08-13",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-08-13",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/320"
+      ],
+      "weakness": "CWE-400",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Brennan Conroy of Microsoft Corporation"
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2024-38167",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.7",
+      "fixed": "8.0.8",
+      "release": "8.0",
+      "commits": [
+        "76f50f60931e85e9240715ebd1f345547cbae366"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-38168",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.7",
+      "fixed": "8.0.8",
+      "release": "8.0",
+      "commits": [
+        "123e69ce581cb33fd86c7cd2f8d4ba95e667885c"
+      ]
+    }
+  ],
+  "packages": [],
+  "commits": {
+    "76f50f60931e85e9240715ebd1f345547cbae366": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "76f50f60931e85e9240715ebd1f345547cbae366",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/76f50f60931e85e9240715ebd1f345547cbae366.diff"
+    },
+    "123e69ce581cb33fd86c7cd2f8d4ba95e667885c": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "123e69ce581cb33fd86c7cd2f8d4ba95e667885c",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/123e69ce581cb33fd86c7cd2f8d4ba95e667885c.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime",
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2024-38168"
+    ],
+    "dotnet-runtime": [
+      "CVE-2024-38167"
+    ]
+  },
+  "package_cves": {},
+  "release_cves": {
+    "8.0": [
+      "CVE-2024-38167",
+      "CVE-2024-38168"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2024-38167": [
+      "8.0"
+    ],
+    "CVE-2024-38168": [
+      "8.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2024-38167": [
+      "76f50f60931e85e9240715ebd1f345547cbae366"
+    ],
+    "CVE-2024-38168": [
+      "123e69ce581cb33fd86c7cd2f8d4ba95e667885c"
+    ]
+  }
+}

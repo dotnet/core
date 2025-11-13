@@ -1,0 +1,156 @@
+{
+  "last_updated": "2024-04-09",
+  "title": ".NET Security Updates for April 2024 (2024-04-09)",
+  "disclosures": [
+    {
+      "id": "CVE-2024-21409",
+      "problem": ".NET Elevation of Privilege Vulnerability",
+      "description": [
+        "A use-after-free vulnerability exists in WPF which may result in Elevation of Privilege when viewing untrusted documents."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.3,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-04-09",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-04-09",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/303"
+      ],
+      "weakness": "CWE-416",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "wh1tc \u0026 Zhiniang Peng"
+        ],
+        "faq": [
+          {
+            "question": "How could an attacker exploit this vulnerability?",
+            "answer": "To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system."
+          },
+          {
+            "question": "For .NET 7.0 and .NET 8.0, what operating systems are affected by this vulnerability?",
+            "answer": "This is a Windows-only vulnerability for .NET 7.0 and .NET 8.0. For more information see Microsoft Security Advisory CVE-2024-21409 | .NET Elevation of Privilege Vulnerability."
+          },
+          {
+            "question": "According to the CVSS metric, the attack vector is local (AV:L). Why does the CVE title indicate that this is a remote code execution?",
+            "answer": "The word Remote in the title refers to the location of the attacker. This type of exploit is sometimes referred to as Arbitrary Code Execution (ACE). The attack itself is carried out locally. This means an attacker or victim needs to execute code from the local machine to exploit the vulnerability."
+          },
+          {
+            "question": "According to the CVSS metric, privileges required is low (PR:L). What does that mean for this remote code execution vulnerability?",
+            "answer": "An authenticated attacker who successfully exploited a vulnerability in WordPad when closing a maliciously crafted .docx file could trigger execution of malicious code."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2024-21409",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "6.0.0",
+      "max_vulnerable": "6.0.28",
+      "fixed": "6.0.29",
+      "release": "6.0",
+      "commits": [
+        "46dcf8720a1326a2c3f84b10a3d71ceb954cde70"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21409",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.17",
+      "fixed": "7.0.18",
+      "release": "7.0",
+      "commits": [
+        "3a6bf4b373cb6e0f955d994a317cd6fd84355633"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21409",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.3",
+      "fixed": "8.0.4",
+      "release": "8.0",
+      "commits": [
+        "8537295cb0637acfc62befc1459244d3bfdb70d4"
+      ]
+    }
+  ],
+  "packages": [],
+  "commits": {
+    "46dcf8720a1326a2c3f84b10a3d71ceb954cde70": {
+      "repo": "wpf",
+      "branch": "release/6.0",
+      "hash": "46dcf8720a1326a2c3f84b10a3d71ceb954cde70",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/wpf/commit/46dcf8720a1326a2c3f84b10a3d71ceb954cde70.diff"
+    },
+    "3a6bf4b373cb6e0f955d994a317cd6fd84355633": {
+      "repo": "wpf",
+      "branch": "release/7.0",
+      "hash": "3a6bf4b373cb6e0f955d994a317cd6fd84355633",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/wpf/commit/3a6bf4b373cb6e0f955d994a317cd6fd84355633.diff"
+    },
+    "8537295cb0637acfc62befc1459244d3bfdb70d4": {
+      "repo": "wpf",
+      "branch": "release/8.0",
+      "hash": "8537295cb0637acfc62befc1459244d3bfdb70d4",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/wpf/commit/8537295cb0637acfc62befc1459244d3bfdb70d4.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-runtime": [
+      "CVE-2024-21409"
+    ]
+  },
+  "package_cves": {},
+  "release_cves": {
+    "6.0": [
+      "CVE-2024-21409"
+    ],
+    "7.0": [
+      "CVE-2024-21409"
+    ],
+    "8.0": [
+      "CVE-2024-21409"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2024-21409": [
+      "6.0",
+      "7.0",
+      "8.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2024-21409": [
+      "3a6bf4b373cb6e0f955d994a317cd6fd84355633",
+      "46dcf8720a1326a2c3f84b10a3d71ceb954cde70",
+      "8537295cb0637acfc62befc1459244d3bfdb70d4"
+    ]
+  }
+}
