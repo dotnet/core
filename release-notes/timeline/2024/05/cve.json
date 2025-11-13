@@ -1,0 +1,196 @@
+{
+  "last_updated": "2024-05-14",
+  "title": ".NET Security Updates for May 2024 (2024-05-14)",
+  "disclosures": [
+    {
+      "id": "CVE-2024-30045",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "description": [
+        "A Remote Code Execution vulnerability exists in .NET 7.0 and .NET 8.0 where a stack buffer overrun occurs in .NET Double Parse routine."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L/E:U/RL:O/RC:C",
+        "score": 6.3,
+        "severity": "MEDIUM"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-05-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-05-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/307"
+      ],
+      "weakness": "CWE-122",
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "According to the CVSS metrics, successful exploitation of this vulnerability could lead to minor loss of confidentiality (C:L), integrity (I:L) and availability (A:L). What does that mean for this vulnerability?",
+            "answer": "While we cannot rule out the impact to Confidentiality, Integrity, and Availability, the ability to exploit this vulnerability by itself is limited. An attacker would need to combine this with other vulnerabilities to perform an attack."
+          },
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R). What interaction would the user have to do?",
+            "answer": "Exploitation of this vulnerability requires that a user trigger the payload in the application."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2024-30046",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in Microsoft.AspNetCore.Server.Kestrel.Core.dll where a dead-lock can occur resulting in Denial of Service."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 5.9,
+        "severity": "MEDIUM"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2024-05-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2024-05-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/308"
+      ],
+      "weakness": "CWE-362",
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
+            "answer": "Successful exploitation of this vulnerability requires an attacker to invest time in repeated exploitation attempts through sending constant or intermittent data."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2024-30045",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.18",
+      "fixed": "7.0.19",
+      "release": "",
+      "commits": [
+        "b9c54e25b11aa3e750c20cbef06774eb75ff3da6"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-30045",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.4",
+      "fixed": "8.0.5",
+      "release": "",
+      "commits": [
+        "173b4b8a96434a3eedaabca529a2083b16d616f3"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-30046",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "7.0.0",
+      "max_vulnerable": "7.0.18",
+      "fixed": "7.0.19",
+      "release": "",
+      "commits": [
+        "9142e56c11f4351961b9d99482a4a6fc29625b8a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-30046",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.4",
+      "fixed": "8.0.5",
+      "release": "",
+      "commits": [
+        "90f892827eb441fc76d7f409334f2df40885dd06"
+      ]
+    }
+  ],
+  "packages": [],
+  "commits": {
+    "b9c54e25b11aa3e750c20cbef06774eb75ff3da6": {
+      "repo": "runtime",
+      "branch": "release/7.0",
+      "hash": "b9c54e25b11aa3e750c20cbef06774eb75ff3da6",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/b9c54e25b11aa3e750c20cbef06774eb75ff3da6.diff"
+    },
+    "173b4b8a96434a3eedaabca529a2083b16d616f3": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "173b4b8a96434a3eedaabca529a2083b16d616f3",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/173b4b8a96434a3eedaabca529a2083b16d616f3.diff"
+    },
+    "9142e56c11f4351961b9d99482a4a6fc29625b8a": {
+      "repo": "aspnetcore",
+      "branch": "release/7.0",
+      "hash": "9142e56c11f4351961b9d99482a4a6fc29625b8a",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/9142e56c11f4351961b9d99482a4a6fc29625b8a.diff"
+    },
+    "90f892827eb441fc76d7f409334f2df40885dd06": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "90f892827eb441fc76d7f409334f2df40885dd06",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/90f892827eb441fc76d7f409334f2df40885dd06.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime",
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2024-30046"
+    ],
+    "dotnet-runtime": [
+      "CVE-2024-30045"
+    ]
+  },
+  "package_cves": {},
+  "release_cves": {},
+  "cve_releases": {},
+  "cve_commits": {
+    "CVE-2024-30045": [
+      "173b4b8a96434a3eedaabca529a2083b16d616f3",
+      "b9c54e25b11aa3e750c20cbef06774eb75ff3da6"
+    ],
+    "CVE-2024-30046": [
+      "90f892827eb441fc76d7f409334f2df40885dd06",
+      "9142e56c11f4351961b9d99482a4a6fc29625b8a"
+    ]
+  }
+}

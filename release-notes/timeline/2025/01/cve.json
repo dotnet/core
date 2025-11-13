@@ -1,0 +1,471 @@
+{
+  "last_updated": "2025-01-14",
+  "title": ".NET Security Updates for January 2025 (2025-01-14)",
+  "disclosures": [
+    {
+      "id": "CVE-2025-21171",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "description": [
+        "An attacker could exploit this vulnerability by sending a specially crafted request to the vulnerable web server."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-01-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-01-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/340"
+      ],
+      "weakness": "CWE-122",
+      "cna": {
+        "name": "microsoft",
+        "faq": [
+          {
+            "question": "According to the CVSS metric, the attack vector is network (AV:N) and the user interaction is required (UI:R). What is the target context of the remote code execution?",
+            "answer": "This attack requires a victim to perform a specific action, such as copying files or executing a command, and for an attacker with appropriate access to have pre-planted malicious files with knowledge of where they should be placed on the victim\u0027s system."
+          },
+          {
+            "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
+            "answer": "This attack requires a victim to perform a specific action, such as copying files or executing a command, and for an attacker with appropriate access to have pre-planted malicious files with knowledge of where they should be placed on the victim\u0027s system."
+          },
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R). What interaction would the user have to do?",
+            "answer": "Exploitation of this vulnerability requires that a user trigger the payload in the application."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2025-21172",
+      "problem": ".NET and Visual Studio Remote Code Execution Vulnerability",
+      "description": [
+        "An attacker could exploit this vulnerability by sending a specially crafted request to the vulnerable web server."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-01-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-01-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/339"
+      ],
+      "weakness": "CWE-190",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "goodbyeselene"
+        ],
+        "faq": [
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R). What interaction would the user have to do?",
+            "answer": "Exploitation of this vulnerability requires that an attacker convinces a user to open a maliciously crafted package file in Visual Studio."
+          },
+          {
+            "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
+            "answer": "Successful exploitation of this vulnerability requires an attacker to gather information specific to the environment of the targeted component."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2025-21176",
+      "problem": ".NET and Visual Studio Remote Code Execution Vulnerability",
+      "description": [
+        "An attacker could exploit this vulnerability by loading a specially crafted file in Visual Studio."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.8,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-01-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-01-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/338"
+      ],
+      "weakness": "CWE-126",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "goodbyeselene"
+        ],
+        "faq": [
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R). What interaction would the user have to do?",
+            "answer": "Exploitation of this vulnerability requires that an attacker convinces a user to open a maliciously crafted package file in Visual Studio."
+          }
+        ]
+      }
+    },
+    {
+      "id": "CVE-2025-21173",
+      "problem": ".NET Elevation of Privilege Vulnerability",
+      "description": [
+        "An attacker could exploit this vulnerability to writing a specially crafted file in the security context of the local system."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.3,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2025-01-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2025-01-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "linux"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/337"
+      ],
+      "weakness": "CWE-379",
+      "cna": {
+        "name": "microsoft",
+        "acknowledgments": [
+          "Noah Gilson with Microsoft",
+          "Daniel Plaisted with Microsoft"
+        ],
+        "faq": [
+          {
+            "question": "What privileges could be gained by an attacker who successfully exploited this vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could overwrite arbitrary file content in the security context of the local system."
+          },
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R). What interaction would the user have to do?",
+            "answer": "Exploitation of this vulnerability requires that a user trigger the payload in the application."
+          },
+          {
+            "question": "According to the CVSS metric, user interaction is required (UI:R) and privileges required \u00A0is low (PR:L). What does that mean for this vulnerability?",
+            "answer": "An authorized attacker with standard user privileges could place a malicious file and then wait for the privileged victim to run the calling command."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2025-21172",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "",
+      "max_vulnerable": "",
+      "fixed": "",
+      "release": "6.0",
+      "commits": [
+        "b3f8ef0105c079c255caa6aa31d630482db5d03c"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21173",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "",
+      "max_vulnerable": "",
+      "fixed": "",
+      "release": "",
+      "commits": [
+        "4416ac92cd8588320132c4ce0d508d78a4a26d15"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21176",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "",
+      "max_vulnerable": "",
+      "fixed": "",
+      "release": "6.0",
+      "commits": [
+        "b3f8ef0105c079c255caa6aa31d630482db5d03c"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21172",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.11",
+      "fixed": "8.0.12",
+      "release": "8.0",
+      "commits": [
+        "89ef51c5d8f5239345127a1e282e11036e590c8b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21173",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.100",
+      "max_vulnerable": "8.0.111",
+      "fixed": "8.0.112",
+      "release": "",
+      "commits": [
+        "7034fd96502b925b5f65c31e34e99116870bc59f"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21173",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.300",
+      "max_vulnerable": "8.0.307",
+      "fixed": "8.0.308",
+      "release": "",
+      "commits": [
+        "2a98e615955be9b9d0752d090c3f92f70c7d0223"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21173",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "",
+      "max_vulnerable": "",
+      "fixed": "",
+      "release": "",
+      "commits": [
+        "1ba623839f23fe8857d2aa0dc23783692325deab"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21176",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.11",
+      "fixed": "8.0.12",
+      "release": "8.0",
+      "commits": [
+        "89ef51c5d8f5239345127a1e282e11036e590c8b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21171",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.0",
+      "fixed": "9.0.1",
+      "release": "9.0",
+      "commits": [
+        "9da8c6a4a6ea03054e776275d3fd5c752897842e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21172",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.0",
+      "fixed": "9.0.1",
+      "release": "9.0",
+      "commits": [
+        "32d8ea6eecf7f192a75162645390847b14b56dbb"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21173",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.100",
+      "max_vulnerable": "9.0.101",
+      "fixed": "9.0.102",
+      "release": "",
+      "commits": [
+        "802c364c05180a487624fc839870677625810b10"
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-21176",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.0",
+      "fixed": "9.0.1",
+      "release": "9.0",
+      "commits": [
+        "32d8ea6eecf7f192a75162645390847b14b56dbb"
+      ]
+    }
+  ],
+  "packages": [],
+  "commits": {
+    "9da8c6a4a6ea03054e776275d3fd5c752897842e": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "9da8c6a4a6ea03054e776275d3fd5c752897842e",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/9da8c6a4a6ea03054e776275d3fd5c752897842e.diff"
+    },
+    "b3f8ef0105c079c255caa6aa31d630482db5d03c": {
+      "repo": "runtime",
+      "branch": "release/6.0",
+      "hash": "b3f8ef0105c079c255caa6aa31d630482db5d03c",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/b3f8ef0105c079c255caa6aa31d630482db5d03c.diff"
+    },
+    "89ef51c5d8f5239345127a1e282e11036e590c8b": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "89ef51c5d8f5239345127a1e282e11036e590c8b",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/89ef51c5d8f5239345127a1e282e11036e590c8b.diff"
+    },
+    "32d8ea6eecf7f192a75162645390847b14b56dbb": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "32d8ea6eecf7f192a75162645390847b14b56dbb",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/32d8ea6eecf7f192a75162645390847b14b56dbb.diff"
+    },
+    "4416ac92cd8588320132c4ce0d508d78a4a26d15": {
+      "repo": "sdk",
+      "branch": "release/6.0",
+      "hash": "4416ac92cd8588320132c4ce0d508d78a4a26d15",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/4416ac92cd8588320132c4ce0d508d78a4a26d15.diff"
+    },
+    "7034fd96502b925b5f65c31e34e99116870bc59f": {
+      "repo": "sdk",
+      "branch": "release/8.0.1xx",
+      "hash": "7034fd96502b925b5f65c31e34e99116870bc59f",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/7034fd96502b925b5f65c31e34e99116870bc59f.diff"
+    },
+    "2a98e615955be9b9d0752d090c3f92f70c7d0223": {
+      "repo": "sdk",
+      "branch": "release/8.0.3xx",
+      "hash": "2a98e615955be9b9d0752d090c3f92f70c7d0223",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/2a98e615955be9b9d0752d090c3f92f70c7d0223.diff"
+    },
+    "1ba623839f23fe8857d2aa0dc23783692325deab": {
+      "repo": "sdk",
+      "branch": "release/8.0.4xx",
+      "hash": "1ba623839f23fe8857d2aa0dc23783692325deab",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/1ba623839f23fe8857d2aa0dc23783692325deab.diff"
+    },
+    "802c364c05180a487624fc839870677625810b10": {
+      "repo": "sdk",
+      "branch": "release/9.0.1xx",
+      "hash": "802c364c05180a487624fc839870677625810b10",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/802c364c05180a487624fc839870677625810b10.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-runtime": ".NET Runtime Libraries",
+    "dotnet-sdk": ".NET SDK"
+  },
+  "product_cves": {
+    "dotnet-runtime": [
+      "CVE-2025-21171",
+      "CVE-2025-21172",
+      "CVE-2025-21176"
+    ],
+    "dotnet-sdk": [
+      "CVE-2025-21173"
+    ]
+  },
+  "package_cves": {},
+  "release_cves": {
+    "6.0": [
+      "CVE-2025-21172",
+      "CVE-2025-21176"
+    ],
+    "8.0": [
+      "CVE-2025-21172",
+      "CVE-2025-21176"
+    ],
+    "9.0": [
+      "CVE-2025-21171",
+      "CVE-2025-21172",
+      "CVE-2025-21176"
+    ]
+  },
+  "cve_releases": {
+    "CVE-2025-21171": [
+      "9.0"
+    ],
+    "CVE-2025-21172": [
+      "6.0",
+      "8.0",
+      "9.0"
+    ],
+    "CVE-2025-21176": [
+      "6.0",
+      "8.0",
+      "9.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2025-21171": [
+      "9da8c6a4a6ea03054e776275d3fd5c752897842e"
+    ],
+    "CVE-2025-21172": [
+      "32d8ea6eecf7f192a75162645390847b14b56dbb",
+      "89ef51c5d8f5239345127a1e282e11036e590c8b",
+      "b3f8ef0105c079c255caa6aa31d630482db5d03c"
+    ],
+    "CVE-2025-21173": [
+      "1ba623839f23fe8857d2aa0dc23783692325deab",
+      "2a98e615955be9b9d0752d090c3f92f70c7d0223",
+      "4416ac92cd8588320132c4ce0d508d78a4a26d15",
+      "7034fd96502b925b5f65c31e34e99116870bc59f",
+      "802c364c05180a487624fc839870677625810b10"
+    ],
+    "CVE-2025-21176": [
+      "32d8ea6eecf7f192a75162645390847b14b56dbb",
+      "89ef51c5d8f5239345127a1e282e11036e590c8b",
+      "b3f8ef0105c079c255caa6aa31d630482db5d03c"
+    ]
+  }
+}
