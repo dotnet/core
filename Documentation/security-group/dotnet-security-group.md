@@ -15,6 +15,7 @@ Membership in the Group is limited to companies that distribute or support .NET 
 Members:
 
 - Canonical
+- HeroDevs
 - IBM
 - Microsoft
 - Red Hat
