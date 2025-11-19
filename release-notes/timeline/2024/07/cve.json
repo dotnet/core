@@ -24,12 +24,20 @@
           "description": "Fix released"
         }
       },
-      "platforms": ["all"],
-      "architectures": ["all"],
-      "references": ["https://github.com/dotnet/announcements/issues/315"],
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/315"
+      ],
       "weakness": "CWE-400",
       "cna": {
-        "name": "microsoft"
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Denial of Service"
       }
     },
     {
@@ -55,13 +63,23 @@
           "description": "Fix released"
         }
       },
-      "platforms": ["all"],
-      "architectures": ["all"],
-      "references": ["https://github.com/dotnet/announcements/issues/314"],
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/314"
+      ],
       "weakness": "CWE-416",
       "cna": {
         "name": "microsoft",
-        "acknowledgments": ["Radek Zikmund of Microsoft Corporation"],
+        "severity": "Important",
+        "impact": "Remote Code Execution",
+        "acknowledgments": [
+          "Radek Zikmund of Microsoft Corporation"
+        ],
         "faq": [
           {
             "question": "According to the CVSS metric, the attack complexity is high (AC:H). What does that mean for this vulnerability?",
@@ -100,13 +118,23 @@
           "description": "Fix released"
         }
       },
-      "platforms": ["windows"],
-      "architectures": ["all"],
-      "references": ["https://github.com/dotnet/announcements/issues/313"],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/313"
+      ],
       "weakness": "CWE-59",
       "cna": {
         "name": "microsoft",
-        "acknowledgments": ["goodbyeselene"],
+        "severity": "Important",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": [
+          "goodbyeselene"
+        ],
         "faq": [
           {
             "question": "What privileges could be gained by an attacker who successfully exploited this vulnerability?",
@@ -145,12 +173,20 @@
           "description": "Fix released"
         }
       },
-      "platforms": ["all"],
-      "architectures": ["all"],
-      "references": ["https://github.com/dotnet/announcements/issues/312"],
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/312"
+      ],
       "weakness": "CWE-20",
       "cna": {
-        "name": "microsoft"
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Denial of Service"
       }
     }
   ],
@@ -162,7 +198,9 @@
       "max_vulnerable": "6.0.31",
       "fixed": "6.0.32",
       "release": "6.0",
-      "commits": ["0a0dd0e27560e692e11ee286ed9f45471b2131fa"]
+      "commits": [
+        "0a0dd0e27560e692e11ee286ed9f45471b2131fa"
+      ]
     },
     {
       "cve_id": "CVE-2024-38095",
@@ -171,7 +209,9 @@
       "max_vulnerable": "6.0.31",
       "fixed": "6.0.32",
       "release": "6.0",
-      "commits": ["979135d5ca4efaf6436ee13539cc3f1e039d570a"]
+      "commits": [
+        "979135d5ca4efaf6436ee13539cc3f1e039d570a"
+      ]
     },
     {
       "cve_id": "CVE-2024-30105",
@@ -180,7 +220,9 @@
       "max_vulnerable": "8.0.6",
       "fixed": "8.0.7",
       "release": "8.0",
-      "commits": ["fa5b0d8f4a8b424732cc992158aa92842f8a2846"]
+      "commits": [
+        "fa5b0d8f4a8b424732cc992158aa92842f8a2846"
+      ]
     },
     {
       "cve_id": "CVE-2024-35264",
@@ -189,7 +231,9 @@
       "max_vulnerable": "8.0.6",
       "fixed": "8.0.7",
       "release": "8.0",
-      "commits": ["c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc"]
+      "commits": [
+        "c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc"
+      ]
     },
     {
       "cve_id": "CVE-2024-38095",
@@ -198,7 +242,9 @@
       "max_vulnerable": "8.0.6",
       "fixed": "8.0.7",
       "release": "8.0",
-      "commits": ["4a8d5a007971d19f389ca17f7b8eb4f9bb199991"]
+      "commits": [
+        "4a8d5a007971d19f389ca17f7b8eb4f9bb199991"
+      ]
     }
   ],
   "packages": [
@@ -209,7 +255,9 @@
       "max_vulnerable": "6.0.0",
       "fixed": "6.0.1",
       "release": "",
-      "commits": ["0a0dd0e27560e692e11ee286ed9f45471b2131fa"]
+      "commits": [
+        "0a0dd0e27560e692e11ee286ed9f45471b2131fa"
+      ]
     },
     {
       "cve_id": "CVE-2024-38095",
@@ -218,7 +266,9 @@
       "max_vulnerable": "6.0.0",
       "fixed": "6.0.1",
       "release": "6.0",
-      "commits": ["979135d5ca4efaf6436ee13539cc3f1e039d570a"]
+      "commits": [
+        "979135d5ca4efaf6436ee13539cc3f1e039d570a"
+      ]
     },
     {
       "cve_id": "CVE-2024-38095",
@@ -227,7 +277,9 @@
       "max_vulnerable": "8.0.0",
       "fixed": "8.0.1",
       "release": "8.0",
-      "commits": ["4a8d5a007971d19f389ca17f7b8eb4f9bb199991"]
+      "commits": [
+        "4a8d5a007971d19f389ca17f7b8eb4f9bb199991"
+      ]
     },
     {
       "cve_id": "CVE-2024-30105",
@@ -236,7 +288,9 @@
       "max_vulnerable": "8.0.3",
       "fixed": "8.0.4",
       "release": "8.0",
-      "commits": ["fa5b0d8f4a8b424732cc992158aa92842f8a2846"]
+      "commits": [
+        "fa5b0d8f4a8b424732cc992158aa92842f8a2846"
+      ]
     }
   ],
   "commits": {
@@ -281,28 +335,62 @@
     "dotnet-runtime": ".NET Runtime Libraries"
   },
   "product_cves": {
-    "dotnet-aspnetcore": ["CVE-2024-35264"],
-    "dotnet-runtime": ["CVE-2024-30105", "CVE-2024-38081", "CVE-2024-38095"]
+    "dotnet-aspnetcore": [
+      "CVE-2024-35264"
+    ],
+    "dotnet-runtime": [
+      "CVE-2024-30105",
+      "CVE-2024-38081",
+      "CVE-2024-38095"
+    ]
   },
   "package_cves": {
-    "Microsoft.IO.Redist": ["CVE-2024-38081"],
-    "System.Formats.Asn1": ["CVE-2024-38095"],
-    "System.Text.Json": ["CVE-2024-30105"]
+    "Microsoft.IO.Redist": [
+      "CVE-2024-38081"
+    ],
+    "System.Formats.Asn1": [
+      "CVE-2024-38095"
+    ],
+    "System.Text.Json": [
+      "CVE-2024-30105"
+    ]
   },
   "release_cves": {
-    "6.0": ["CVE-2024-38081", "CVE-2024-38095"],
-    "8.0": ["CVE-2024-30105", "CVE-2024-35264", "CVE-2024-38095"]
+    "6.0": [
+      "CVE-2024-38081",
+      "CVE-2024-38095"
+    ],
+    "8.0": [
+      "CVE-2024-30105",
+      "CVE-2024-35264",
+      "CVE-2024-38095"
+    ]
   },
   "cve_releases": {
-    "CVE-2024-30105": ["8.0"],
-    "CVE-2024-35264": ["8.0"],
-    "CVE-2024-38081": ["6.0"],
-    "CVE-2024-38095": ["6.0", "8.0"]
+    "CVE-2024-30105": [
+      "8.0"
+    ],
+    "CVE-2024-35264": [
+      "8.0"
+    ],
+    "CVE-2024-38081": [
+      "6.0"
+    ],
+    "CVE-2024-38095": [
+      "6.0",
+      "8.0"
+    ]
   },
   "cve_commits": {
-    "CVE-2024-30105": ["fa5b0d8f4a8b424732cc992158aa92842f8a2846"],
-    "CVE-2024-35264": ["c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc"],
-    "CVE-2024-38081": ["0a0dd0e27560e692e11ee286ed9f45471b2131fa"],
+    "CVE-2024-30105": [
+      "fa5b0d8f4a8b424732cc992158aa92842f8a2846"
+    ],
+    "CVE-2024-35264": [
+      "c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc"
+    ],
+    "CVE-2024-38081": [
+      "0a0dd0e27560e692e11ee286ed9f45471b2131fa"
+    ],
     "CVE-2024-38095": [
       "4a8d5a007971d19f389ca17f7b8eb4f9bb199991",
       "979135d5ca4efaf6436ee13539cc3f1e039d570a"

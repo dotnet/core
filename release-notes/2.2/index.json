@@ -1,41 +1,37 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/schemas/dotnet-release-version-index.json",
-  "kind": "index",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-version-index.json",
+  "kind": "major-release-index",
   "title": ".NET 2.2 Patch Release Index",
   "description": "Index of .NET versions 2.2.0\u20132.2.300 (latest first); This file is cache-friendly; follow links for the most current details.",
   "_links": {
     "self": {
-      "href": "https://github.com/dotnet/core/blob/main/release-notes/2.2/README.md",
-      "relative": "2.2/README.md",
-      "title": "Release Notes (Markdown)",
-      "type": "application/markdown"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/index.json",
+      "path": "/2.2/index.json",
+      "title": ".NET 2.2",
+      "type": "application/hal\u002Bjson"
     },
     "release-manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/2.2/manifest.json",
-      "relative": "2.2/manifest.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/manifest.json",
+      "path": "/2.2/manifest.json",
       "title": "Release manifest",
       "type": "application/hal\u002Bjson"
     },
-    "release-timeline-2019": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2019/index.json",
-      "relative": "timeline/2019/index.json",
-      "title": ".NET Release Timeline 2019 (chronological)",
-      "type": "application/hal\u002Bjson"
-    },
-    "release-timeline-2018": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2018/index.json",
-      "relative": "timeline/2018/index.json",
-      "title": ".NET Release Timeline 2018 (chronological)",
-      "type": "application/hal\u002Bjson"
-    },
     "releases": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/2.2/releases.json",
-      "relative": "2.2/releases.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/releases.json",
+      "path": "/2.2/releases.json",
       "title": "Complete (large file) release information for all patch releases",
       "type": "application/json"
     }
   },
   "usage": {
+    "_links": {
+      "usage-markdown": {
+        "href": "https://github.com/dotnet/core/blob/main/release-notes/2.2/README.md",
+        "path": "/2.2/README.md",
+        "title": "Release Notes (Markdown)",
+        "type": "application/markdown"
+      }
+    },
     "glossary": {
       "lts": "Long-Term Support \u2013 3-year support window",
       "sts": "Standard-Term Support \u2013 18-month support window",
@@ -52,9 +48,36 @@
     "eol-date": "2019-12-23T00:00:00\u002B00:00",
     "supported": false
   },
+  "_embedded": {
+    "releases": [],
+    "years": [
+      {
+        "year": "2019",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/index.json",
+            "path": "/timeline/2019/index.json",
+            "title": ".NET Release Timeline 2019 (chronological)",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      },
+      {
+        "year": "2018",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/index.json",
+            "path": "/timeline/2018/index.json",
+            "title": ".NET Release Timeline 2018 (chronological)",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-13T23:34:44.3176426\u002B00:00",
+    "generated-on": "2025-11-19T05:38:10.1632288\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }
