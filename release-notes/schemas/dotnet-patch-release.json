@@ -6,21 +6,8 @@
   ],
   "properties": {
     "channel-version": {
-      "description": "Major (or major.minor) version of product.",
+      "description": "Major (or major.minor) version of the product.",
       "type": "string"
-    },
-    "release-date": {
-      "description": "The date of the patch release.",
-      "type": "string",
-      "format": "date"
-    },
-    "release-version": {
-      "description": "The version (branding) of the release",
-      "type": "string"
-    },
-    "security": {
-      "description": "Whether the release contains any CVE fixes.",
-      "type": "boolean"
     },
     "release": {
       "description": "A patch release with detailed release information.",
@@ -85,6 +72,14 @@
               "description": "The version of Visual Studio that includes this component version.",
               "type": "string"
             },
+            "vs-mac-version": {
+              "description": "The version of Visual Studio for Mac that includes this component version.",
+              "type": "string"
+            },
+            "vs-support": {
+              "description": "The minimum version of Visual Studio that supports this component version.",
+              "type": "string"
+            },
             "files": {
               "description": "The files that are available for this component.",
               "type": "array",
@@ -128,20 +123,14 @@
                 ],
                 "additionalProperties": false
               }
-            },
-            "vs-support": {
-              "description": "The minimum version of Visual Studio that supports this component version.",
-              "type": [
-                "string",
-                "null"
-              ],
-              "default": null
             }
           },
           "required": [
             "version",
             "version-display",
             "vs-version",
+            "vs-mac-version",
+            "vs-support",
             "files"
           ],
           "additionalProperties": false
@@ -166,8 +155,16 @@
               "description": "The version of Visual Studio that includes this component version.",
               "type": "string"
             },
+            "vs-mac-version": {
+              "description": "The version of Visual Studio for Mac that includes this component version.",
+              "type": "string"
+            },
             "vs-support": {
               "description": "The minimum version of Visual Studio that supports this component version.",
+              "type": "string"
+            },
+            "vs-mac-support": {
+              "description": "The minimum version of Visual Studio for Mac that supports this component version.",
               "type": "string"
             },
             "csharp-version": {
@@ -186,44 +183,7 @@
               "description": "The files that are available for the component.",
               "type": "array",
               "items": {
-                "description": "File that is part of a release.",
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "properties": {
-                  "name": {
-                    "description": "File name.",
-                    "type": "string"
-                  },
-                  "rid": {
-                    "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
-                    "type": "string"
-                  },
-                  "url": {
-                    "description": "Fully-qualified URL of file.",
-                    "type": "string"
-                  },
-                  "hash": {
-                    "description": "Content hash of file.",
-                    "type": "string"
-                  },
-                  "akams": {
-                    "description": "Short-link URL to file.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "default": null
-                  }
-                },
-                "required": [
-                  "name",
-                  "rid",
-                  "url",
-                  "hash"
-                ],
-                "additionalProperties": false
+                "$ref": "#/properties/release/properties/runtime/properties/files/items"
               }
             }
           },
@@ -232,7 +192,9 @@
             "version-display",
             "runtime-version",
             "vs-version",
+            "vs-mac-version",
             "vs-support",
+            "vs-mac-support",
             "csharp-version",
             "fsharp-version",
             "vb-version",
@@ -266,8 +228,16 @@
                 "description": "The version of Visual Studio that includes this component version.",
                 "type": "string"
               },
+              "vs-mac-version": {
+                "description": "The version of Visual Studio for Mac that includes this component version.",
+                "type": "string"
+              },
               "vs-support": {
                 "description": "The minimum version of Visual Studio that supports this component version.",
+                "type": "string"
+              },
+              "vs-mac-support": {
+                "description": "The minimum version of Visual Studio for Mac that supports this component version.",
                 "type": "string"
               },
               "csharp-version": {
@@ -283,48 +253,7 @@
                 "type": "string"
               },
               "files": {
-                "description": "The files that are available for the component.",
-                "type": "array",
-                "items": {
-                  "description": "File that is part of a release.",
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "properties": {
-                    "name": {
-                      "description": "File name.",
-                      "type": "string"
-                    },
-                    "rid": {
-                      "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
-                      "type": "string"
-                    },
-                    "url": {
-                      "description": "Fully-qualified URL of file.",
-                      "type": "string"
-                    },
-                    "hash": {
-                      "description": "Content hash of file.",
-                      "type": "string"
-                    },
-                    "akams": {
-                      "description": "Short-link URL to file.",
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "default": null
-                    }
-                  },
-                  "required": [
-                    "name",
-                    "rid",
-                    "url",
-                    "hash"
-                  ],
-                  "additionalProperties": false
-                }
+                "$ref": "#/properties/release/properties/sdk/properties/files"
               }
             },
             "required": [
@@ -332,7 +261,9 @@
               "version-display",
               "runtime-version",
               "vs-version",
+              "vs-mac-version",
               "vs-support",
+              "vs-mac-support",
               "csharp-version",
               "fsharp-version",
               "vb-version",
@@ -371,44 +302,7 @@
               "description": "The files that are available for this component.",
               "type": "array",
               "items": {
-                "description": "File that is part of a release.",
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "properties": {
-                  "name": {
-                    "description": "File name.",
-                    "type": "string"
-                  },
-                  "rid": {
-                    "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
-                    "type": "string"
-                  },
-                  "url": {
-                    "description": "Fully-qualified URL of file.",
-                    "type": "string"
-                  },
-                  "hash": {
-                    "description": "Content hash of file.",
-                    "type": "string"
-                  },
-                  "akams": {
-                    "description": "Short-link URL to file.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "default": null
-                  }
-                },
-                "required": [
-                  "name",
-                  "rid",
-                  "url",
-                  "hash"
-                ],
-                "additionalProperties": false
+                "$ref": "#/properties/release/properties/runtime/properties/files/items"
               }
             }
           },
@@ -440,45 +334,35 @@
               "description": "The files that are available for this component.",
               "type": "array",
               "items": {
-                "description": "File that is part of a release.",
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "properties": {
-                  "name": {
-                    "description": "File name.",
-                    "type": "string"
-                  },
-                  "rid": {
-                    "description": "Runtime ID of file, describing OS and architecture applicability, like \u0060linux-x64\u0060.",
-                    "type": "string"
-                  },
-                  "url": {
-                    "description": "Fully-qualified URL of file.",
-                    "type": "string"
-                  },
-                  "hash": {
-                    "description": "Content hash of file.",
-                    "type": "string"
-                  },
-                  "akams": {
-                    "description": "Short-link URL to file.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "default": null
-                  }
-                },
-                "required": [
-                  "name",
-                  "rid",
-                  "url",
-                  "hash"
-                ],
-                "additionalProperties": false
+                "$ref": "#/properties/release/properties/runtime/properties/files/items"
               }
+            }
+          },
+          "required": [
+            "version",
+            "version-display",
+            "files"
+          ],
+          "additionalProperties": false,
+          "default": null
+        },
+        "symbols": {
+          "description": "Symbol files for the release.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "version": {
+              "description": "The version of the component.",
+              "type": "string"
+            },
+            "version-display": {
+              "description": "The display or branding variant of the version, if different.",
+              "type": "string"
+            },
+            "files": {
+              "$ref": "#/properties/release/properties/windowsdesktop/properties/files"
             }
           },
           "required": [
@@ -506,9 +390,6 @@
   },
   "required": [
     "channel-version",
-    "release-date",
-    "release-version",
-    "security",
     "release"
   ],
   "additionalProperties": false
