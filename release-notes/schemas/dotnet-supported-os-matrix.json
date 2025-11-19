@@ -1,0 +1,190 @@
+{
+  "description": "Operating system support matrix for a given major product version.",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "channel-version": {
+      "description": "Major (or major.minor) version of product.",
+      "type": "string"
+    },
+    "last-updated": {
+      "description": "Date when file was last updated",
+      "type": "string",
+      "format": "date"
+    },
+    "families": {
+      "description": "Supported operating system families.",
+      "type": "array",
+      "items": {
+        "description": "Operating system family, such as Linux.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "name": {
+            "description": "Operating system family name.",
+            "type": "string"
+          },
+          "distributions": {
+            "description": "Supported operating system family distributions.",
+            "type": "array",
+            "items": {
+              "description": "A supported operating system distribution, like iOS or Ubuntu.",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "id": {
+                  "description": "ID for distribution matching IDs used at https://endoflife.date/.",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Display name for distribution.",
+                  "type": "string"
+                },
+                "link": {
+                  "description": "Link to home page for distribution.",
+                  "type": "string"
+                },
+                "architectures": {
+                  "description": "Supported architectures for distribution.",
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "supported-versions": {
+                  "description": "Supported versions for distribution.",
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "unsupported-versions": {
+                  "description": "Once but not longer supported versions for distribution.",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "lifecycle": {
+                  "description": "Link to lifecycle page for distribution.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "notes": {
+                  "description": "Support notes for distribution. For example, use notes if a given distribution architecture or version is only supported in certain circumstances.",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "link",
+                "architectures",
+                "supported-versions"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "name",
+          "distributions"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "libc": {
+      "description": "Minimum supported libc versions, per architecture.",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "description": "Minimum supported libc versions, for both glibc and musl, with the allowance for different versions per architecture.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of libc library.",
+            "type": "string"
+          },
+          "version": {
+            "description": "Minimum version supported.",
+            "type": "string"
+          },
+          "architectures": {
+            "description": "Architectures where that version is supported.",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "source": {
+            "description": "Source of the libc header files and libraries (used by a compiler).",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "architectures",
+          "source"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "description": "Notes relating to support.",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  },
+  "required": [
+    "channel-version",
+    "last-updated",
+    "families"
+  ],
+  "additionalProperties": false
+}
