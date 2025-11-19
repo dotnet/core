@@ -1,6 +1,6 @@
 # .NET 10.0 - Supported OS versions
 
-Last Updated: 2025/10/28; Support phase: GoLive
+Last Updated: 2025/11/19; Support phase: Active
 
 [.NET 10.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -23,7 +23,7 @@ Notes:
 | ---------- | -------- | ------------- | --------- |
 | [iOS][2]   | 26, 18   | Arm64         | None      |
 | [iPadOS][3] | 26, 18  | Arm64         | None      |
-| [macOS][4] | 26, 15   | Arm64, x64    | None      |
+| [macOS][4] | 26, 15, 14 | Arm64, x64  | None      |
 | [tvOS][5]  | 26       | Arm64         | None      |
 
 Notes:
