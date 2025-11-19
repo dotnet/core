@@ -1,48 +1,48 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/schemas/dotnet-release-version-index.json",
-  "kind": "index",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-version-index.json",
+  "kind": "major-release-index",
   "title": ".NET 10.0 Patch Release Index",
   "description": "Index of .NET versions 10.0.0\u201310.0.0-rc.2 (latest first); This file is cache-friendly; follow links for the most current details.",
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/supported-os.json",
-      "relative": "10.0/supported-os.json",
-      "title": "Supported OSes",
-      "type": "application/json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
+      "path": "/10.0/index.json",
+      "title": ".NET 10.0",
+      "type": "application/hal\u002Bjson"
     },
     "release-manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/manifest.json",
-      "relative": "10.0/manifest.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/manifest.json",
+      "path": "/10.0/manifest.json",
       "title": "Release manifest",
       "type": "application/hal\u002Bjson"
     },
     "sdk-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/sdk/index.json",
-      "relative": "10.0/sdk/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/index.json",
+      "path": "/10.0/sdk/index.json",
       "title": ".NET SDK 10.0 Release Information",
       "type": "application/hal\u002Bjson"
     },
-    "release-timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2025/index.json",
-      "relative": "timeline/2025/index.json",
-      "title": ".NET Release Timeline 2025 (chronological)",
-      "type": "application/hal\u002Bjson"
-    },
     "releases": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/releases.json",
-      "relative": "10.0/releases.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/releases.json",
+      "path": "/10.0/releases.json",
       "title": "Complete (large file) release information for all patch releases",
       "type": "application/json"
     },
+    "supported-os": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/supported-os.json",
+      "path": "/10.0/supported-os.json",
+      "title": "Supported OSes",
+      "type": "application/json"
+    },
     "supported-os-markdown-raw": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/supported-os.md",
-      "relative": "10.0/supported-os.md",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/supported-os.md",
+      "path": "/10.0/supported-os.md",
       "title": "Supported OSes (Raw Markdown)",
       "type": "application/markdown"
     },
     "supported-os-markdown": {
       "href": "https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md",
-      "relative": "10.0/supported-os.md",
+      "path": "/10.0/supported-os.md",
       "title": "Supported OSes (Markdown)",
       "type": "application/markdown"
     }
@@ -51,7 +51,7 @@
     "_links": {
       "usage-markdown": {
         "href": "https://github.com/dotnet/core/blob/main/release-notes/10.0/README.md",
-        "relative": "10.0/README.md",
+        "path": "/10.0/README.md",
         "title": "Release Notes (Markdown)",
         "type": "application/markdown"
       }
@@ -65,6 +65,13 @@
       "active": "Full support with regular updates and security fixes"
     }
   },
+  "lifecycle": {
+    "release-type": "lts",
+    "phase": "active",
+    "release-date": "2025-11-11T00:00:00\u002B00:00",
+    "eol-date": "2028-11-14T00:00:00\u002B00:00",
+    "supported": true
+  },
   "_embedded": {
     "releases": [
       {
@@ -72,8 +79,14 @@
         "kind": "patch-release",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/10.0.0/release.json",
-            "relative": "10.0.0/release.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/index.json",
+            "path": "/10.0/10.0.0/index.json",
+            "title": "10.0.0 Patch Index",
+            "type": "application/hal\u002Bjson"
+          },
+          "release": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/release.json",
+            "path": "/10.0.0/release.json",
             "title": "10.0.0 Release Information",
             "type": "application/json"
           }
@@ -83,18 +96,24 @@
           "release-date": "2025-11-11T00:00:00\u002B00:00"
         }
       }
+    ],
+    "years": [
+      {
+        "year": "2025",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/index.json",
+            "path": "/timeline/2025/index.json",
+            "title": ".NET Release Timeline 2025 (chronological)",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      }
     ]
-  },
-  "lifecycle": {
-    "release-type": "lts",
-    "phase": "active",
-    "release-date": "2025-11-11T00:00:00\u002B00:00",
-    "eol-date": "2028-11-14T00:00:00\u002B00:00",
-    "supported": false
   },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-13T23:34:44.3139135\u002B00:00",
+    "generated-on": "2025-11-19T05:38:10.1593369\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }
