@@ -1,75 +1,77 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/schemas/dotnet-release-version-index.json",
-  "kind": "index",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-version-index.json",
+  "kind": "release-index",
   "title": ".NET Version Index",
   "description": "Index of .NET versions 1.0\u201310.0 (latest first); This file is cache-friendly; follow links for the most current details.",
+  "latest": "10.0",
+  "latest-lts": "10.0",
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/index.json",
-      "relative": "index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json",
+      "path": "/index.json",
       "title": ".NET Version Index",
       "type": "application/hal\u002Bjson"
     },
-    "index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/index.json",
-      "relative": "timeline/index.json",
+    "release-timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "path": "/timeline/index.json",
       "title": ".NET Release Timeline Index",
       "type": "application/hal\u002Bjson"
     },
     "latest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/index.json",
-      "relative": "10.0/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
+      "path": "/10.0/index.json",
       "title": "Latest .NET release (.NET 10.0)",
       "type": "application/hal\u002Bjson"
     },
-    "latest-sdk": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/sdk/index.json",
-      "relative": "10.0/sdk/index.json",
-      "title": "Latest .NET SDK (10.0)",
+    "latest-lts": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
+      "path": "/10.0/index.json",
+      "title": "Latest LTS release (.NET 10.0)",
       "type": "application/hal\u002Bjson"
     },
-    "latest-lts": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/index.json",
-      "relative": "10.0/index.json",
-      "title": "Latest LTS release (.NET 10.0)",
+    "latest-sdk": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/index.json",
+      "path": "/10.0/sdk/index.json",
+      "title": "Latest .NET SDK (10.0)",
       "type": "application/hal\u002Bjson"
     }
   },
   "usage": {
     "_links": {
       "usage-markdown-raw": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/llms/README.md",
-        "relative": "llms/README.md",
+        "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms/README.md",
+        "path": "/llms/README.md",
         "title": "Usage Guide (Raw Markdown)",
         "type": "application/markdown"
       },
       "usage-markdown": {
         "href": "https://github.com/dotnet/core/blob/main/release-notes/llms/README.md",
-        "relative": "llms/README.md",
+        "path": "/llms/README.md",
         "title": "Usage Guide (Markdown)",
         "type": "application/markdown"
       },
       "quick-reference-markdown-raw": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/llms/quick-ref.md",
-        "relative": "llms/quick-ref.md",
+        "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms/quick-ref.md",
+        "path": "/llms/quick-ref.md",
         "title": "Quick Reference (Raw Markdown)",
         "type": "application/markdown"
       },
       "quick-reference-markdown": {
         "href": "https://github.com/dotnet/core/blob/main/release-notes/llms/quick-ref.md",
-        "relative": "llms/quick-ref.md",
+        "path": "/llms/quick-ref.md",
         "title": "Quick Reference (Markdown)",
         "type": "application/markdown"
       },
       "glossary-markdown-raw": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/llms/glossary.md",
-        "relative": "llms/glossary.md",
+        "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms/glossary.md",
+        "path": "/llms/glossary.md",
         "title": "Glossary (Raw Markdown)",
         "type": "application/markdown"
       },
       "glossary-markdown": {
         "href": "https://github.com/dotnet/core/blob/main/release-notes/llms/glossary.md",
-        "relative": "llms/glossary.md",
+        "path": "/llms/glossary.md",
         "title": "Glossary (Markdown)",
         "type": "application/markdown"
       }
@@ -87,11 +89,11 @@
     "releases": [
       {
         "version": "10.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/10.0/index.json",
-            "relative": "10.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
+            "path": "/10.0/index.json",
             "title": ".NET 10.0",
             "type": "application/hal\u002Bjson"
           }
@@ -106,11 +108,11 @@
       },
       {
         "version": "9.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/9.0/index.json",
-            "relative": "9.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
+            "path": "/9.0/index.json",
             "title": ".NET 9.0",
             "type": "application/hal\u002Bjson"
           }
@@ -119,17 +121,17 @@
           "release-type": "sts",
           "phase": "active",
           "release-date": "2024-11-12T00:00:00\u002B00:00",
-          "eol-date": "2026-05-12T00:00:00\u002B00:00",
+          "eol-date": "2026-11-10T00:00:00\u002B00:00",
           "supported": true
         }
       },
       {
         "version": "8.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/8.0/index.json",
-            "relative": "8.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+            "path": "/8.0/index.json",
             "title": ".NET 8.0",
             "type": "application/hal\u002Bjson"
           }
@@ -144,11 +146,11 @@
       },
       {
         "version": "7.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/7.0/index.json",
-            "relative": "7.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/index.json",
+            "path": "/7.0/index.json",
             "title": ".NET 7.0",
             "type": "application/hal\u002Bjson"
           }
@@ -163,11 +165,11 @@
       },
       {
         "version": "6.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/6.0/index.json",
-            "relative": "6.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/index.json",
+            "path": "/6.0/index.json",
             "title": ".NET 6.0",
             "type": "application/hal\u002Bjson"
           }
@@ -182,11 +184,11 @@
       },
       {
         "version": "5.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/5.0/index.json",
-            "relative": "5.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/index.json",
+            "path": "/5.0/index.json",
             "title": ".NET 5.0",
             "type": "application/hal\u002Bjson"
           }
@@ -201,11 +203,11 @@
       },
       {
         "version": "3.1",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/3.1/index.json",
-            "relative": "3.1/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/index.json",
+            "path": "/3.1/index.json",
             "title": ".NET 3.1",
             "type": "application/hal\u002Bjson"
           }
@@ -220,11 +222,11 @@
       },
       {
         "version": "3.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/3.0/index.json",
-            "relative": "3.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/index.json",
+            "path": "/3.0/index.json",
             "title": ".NET 3.0",
             "type": "application/hal\u002Bjson"
           }
@@ -239,11 +241,11 @@
       },
       {
         "version": "2.2",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/2.2/index.json",
-            "relative": "2.2/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/index.json",
+            "path": "/2.2/index.json",
             "title": ".NET 2.2",
             "type": "application/hal\u002Bjson"
           }
@@ -258,11 +260,11 @@
       },
       {
         "version": "2.1",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/2.1/index.json",
-            "relative": "2.1/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/index.json",
+            "path": "/2.1/index.json",
             "title": ".NET 2.1",
             "type": "application/hal\u002Bjson"
           }
@@ -277,11 +279,11 @@
       },
       {
         "version": "2.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/2.0/index.json",
-            "relative": "2.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.0/index.json",
+            "path": "/2.0/index.json",
             "title": ".NET 2.0",
             "type": "application/hal\u002Bjson"
           }
@@ -296,11 +298,11 @@
       },
       {
         "version": "1.1",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/1.1/index.json",
-            "relative": "1.1/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/index.json",
+            "path": "/1.1/index.json",
             "title": ".NET 1.1",
             "type": "application/hal\u002Bjson"
           }
@@ -315,11 +317,11 @@
       },
       {
         "version": "1.0",
-        "kind": "index",
+        "kind": "major-release-index",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/1.0/index.json",
-            "relative": "1.0/index.json",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/index.json",
+            "path": "/1.0/index.json",
             "title": ".NET 1.0",
             "type": "application/hal\u002Bjson"
           }
@@ -336,7 +338,7 @@
   },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-13T23:34:44.3189406\u002B00:00",
+    "generated-on": "2025-11-19T05:38:10.1655521\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }

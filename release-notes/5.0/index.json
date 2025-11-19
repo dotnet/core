@@ -1,51 +1,45 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/schemas/dotnet-release-version-index.json",
-  "kind": "index",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-version-index.json",
+  "kind": "major-release-index",
   "title": ".NET 5.0 Patch Release Index",
   "description": "Index of .NET versions 5.0.0\u20135.0.17 (latest first); This file is cache-friendly; follow links for the most current details.",
   "_links": {
     "self": {
-      "href": "https://github.com/dotnet/core/blob/main/release-notes/5.0/linux-packages.md",
-      "relative": "5.0/linux-packages.md",
-      "title": "Linux Packages (Markdown)",
-      "type": "application/markdown"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/index.json",
+      "path": "/5.0/index.json",
+      "title": ".NET 5.0",
+      "type": "application/hal\u002Bjson"
     },
     "release-manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/5.0/manifest.json",
-      "relative": "5.0/manifest.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/manifest.json",
+      "path": "/5.0/manifest.json",
       "title": "Release manifest",
       "type": "application/hal\u002Bjson"
     },
-    "release-timeline-2022": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2022/index.json",
-      "relative": "timeline/2022/index.json",
-      "title": ".NET Release Timeline 2022 (chronological)",
-      "type": "application/hal\u002Bjson"
-    },
-    "release-timeline-2021": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2021/index.json",
-      "relative": "timeline/2021/index.json",
-      "title": ".NET Release Timeline 2021 (chronological)",
-      "type": "application/hal\u002Bjson"
-    },
-    "release-timeline-2020": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2020/index.json",
-      "relative": "timeline/2020/index.json",
-      "title": ".NET Release Timeline 2020 (chronological)",
-      "type": "application/hal\u002Bjson"
-    },
     "releases": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/main/release-notes/5.0/releases.json",
-      "relative": "5.0/releases.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/releases.json",
+      "path": "/5.0/releases.json",
       "title": "Complete (large file) release information for all patch releases",
       "type": "application/json"
+    },
+    "linux-packages-markdown-raw": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/linux-packages.md",
+      "path": "/5.0/linux-packages.md",
+      "title": "Linux Packages (Raw Markdown)",
+      "type": "application/markdown"
+    },
+    "linux-packages-markdown": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/5.0/linux-packages.md",
+      "path": "/5.0/linux-packages.md",
+      "title": "Linux Packages (Markdown)",
+      "type": "application/markdown"
     }
   },
   "usage": {
     "_links": {
       "usage-markdown": {
         "href": "https://github.com/dotnet/core/blob/main/release-notes/5.0/README.md",
-        "relative": "5.0/README.md",
+        "path": "/5.0/README.md",
         "title": "Release Notes (Markdown)",
         "type": "application/markdown"
       }
@@ -66,9 +60,47 @@
     "eol-date": "2022-05-10T00:00:00\u002B00:00",
     "supported": false
   },
+  "_embedded": {
+    "releases": [],
+    "years": [
+      {
+        "year": "2022",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2022/index.json",
+            "path": "/timeline/2022/index.json",
+            "title": ".NET Release Timeline 2022 (chronological)",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      },
+      {
+        "year": "2021",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2021/index.json",
+            "path": "/timeline/2021/index.json",
+            "title": ".NET Release Timeline 2021 (chronological)",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      },
+      {
+        "year": "2020",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/index.json",
+            "path": "/timeline/2020/index.json",
+            "title": ".NET Release Timeline 2020 (chronological)",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-13T23:34:44.3130854\u002B00:00",
+    "generated-on": "2025-11-19T05:38:10.152341\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }
