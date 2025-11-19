@@ -1,0 +1,488 @@
+{
+  "description": "A set of CVEs with affected products, packages, and commit information.",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "last_updated": {
+      "description": "Date when the CVE set was last updated.",
+      "type": "string"
+    },
+    "title": {
+      "description": "Title of the CVE disclosure.",
+      "type": "string"
+    },
+    "disclosures": {
+      "description": "Set of CVEs disclosed.",
+      "type": "array",
+      "items": {
+        "description": "A disclosed vulnerability (CVE).",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "description": "The CVE ID.",
+            "type": "string"
+          },
+          "problem": {
+            "description": "Brief description of the vulnerability type.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Detailed description of the vulnerability.",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "cvss": {
+            "description": "CVSS score and vector string.",
+            "type": "object",
+            "properties": {
+              "version": {
+                "description": "CVSS version used for scoring.",
+                "type": "string"
+              },
+              "vector": {
+                "description": "CVSS vector string.",
+                "type": "string"
+              },
+              "score": {
+                "description": "CVSS base score.",
+                "type": "number",
+                "default": 0.0
+              },
+              "severity": {
+                "description": "CVSS severity rating (low/medium/high/critical) derived from base score.",
+                "type": "string",
+                "default": ""
+              },
+              "source": {
+                "description": "Source of the CVSS score calculation (e.g., \u0027microsoft\u0027, \u0027nvd\u0027).",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": null
+              },
+              "temporal_score": {
+                "description": "CVSS temporal score, adjusted for exploit maturity, remediation level, and report confidence.",
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "default": null
+              }
+            },
+            "required": [
+              "version",
+              "vector"
+            ],
+            "additionalProperties": false
+          },
+          "timeline": {
+            "description": "Timeline of when the CVE was disclosed and fixed.",
+            "type": "object",
+            "properties": {
+              "disclosure": {
+                "description": "Date when the CVE was publicly disclosed.",
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "description": "Date of the event.",
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "description": {
+                    "description": "Description of what occurred on this date.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "date",
+                  "description"
+                ],
+                "additionalProperties": false
+              },
+              "fixed": {
+                "description": "Date when the CVE fix was released.",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "date": {
+                    "description": "Date of the event.",
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "description": {
+                    "description": "Description of what occurred on this date.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "date",
+                  "description"
+                ],
+                "additionalProperties": false,
+                "default": null
+              },
+              "other": {
+                "description": "Additional timeline events (e.g., reported, embargo start, validation).",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "description": "A dated event in the CVE lifecycle.",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "date": {
+                      "description": "Date of the event.",
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "description": {
+                      "description": "Description of what occurred on this date.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "date",
+                    "description"
+                  ],
+                  "additionalProperties": false
+                },
+                "default": null
+              }
+            },
+            "required": [
+              "disclosure"
+            ],
+            "additionalProperties": false
+          },
+          "platforms": {
+            "description": "Platforms affected by the CVE.",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "architectures": {
+            "description": "Architectures affected by the CVE.",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "references": {
+            "description": "Reference URLs for the CVE.",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "mitigation": {
+            "description": "Mitigation information for the CVE.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "default": null
+          },
+          "weakness": {
+            "description": "CWE (Common Weakness Enumeration) identifier.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "cna": {
+            "default": null
+          }
+        },
+        "required": [
+          "id",
+          "problem",
+          "description",
+          "cvss",
+          "timeline",
+          "platforms",
+          "architectures",
+          "references"
+        ]
+      }
+    },
+    "products": {
+      "description": "Set of products affected by CVEs.",
+      "type": "array",
+      "items": {
+        "description": "A product affected by a CVE.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "cve_id": {
+            "description": "The CVE ID affecting this product.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the affected product.",
+            "type": "string"
+          },
+          "min_vulnerable": {
+            "description": "Minimum vulnerable version of the product.",
+            "type": "string"
+          },
+          "max_vulnerable": {
+            "description": "Maximum vulnerable version of the product.",
+            "type": "string"
+          },
+          "fixed": {
+            "description": "Version of the product that contains the fix.",
+            "type": "string"
+          },
+          "release": {
+            "description": "Major release version affected.",
+            "type": "string"
+          },
+          "commits": {
+            "description": "List of commit hashes that fix the vulnerability.",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "required": [
+          "cve_id",
+          "name",
+          "min_vulnerable",
+          "max_vulnerable",
+          "fixed",
+          "release",
+          "commits"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "packages": {
+      "description": "Set of packages affected by CVEs.",
+      "type": "array",
+      "items": {
+        "description": "A package affected by a CVE.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "cve_id": {
+            "description": "The CVE ID affecting this package.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the affected package.",
+            "type": "string"
+          },
+          "min_vulnerable": {
+            "description": "Minimum vulnerable version of the package.",
+            "type": "string"
+          },
+          "max_vulnerable": {
+            "description": "Maximum vulnerable version of the package.",
+            "type": "string"
+          },
+          "fixed": {
+            "description": "Version of the package that contains the fix.",
+            "type": "string"
+          },
+          "release": {
+            "description": "Major release version affected.",
+            "type": "string"
+          },
+          "commits": {
+            "description": "List of commit hashes that fix the vulnerability.",
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "required": [
+          "cve_id",
+          "name",
+          "min_vulnerable",
+          "max_vulnerable",
+          "fixed",
+          "release",
+          "commits"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "commits": {
+      "description": "Dictionary of commit information, keyed by commit hash.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "description": "Information about a commit that fixes a CVE.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "repo": {
+            "description": "Repository name where the commit exists.",
+            "type": "string"
+          },
+          "branch": {
+            "description": "Branch name where the commit exists.",
+            "type": "string"
+          },
+          "hash": {
+            "description": "Commit hash (SHA).",
+            "type": "string"
+          },
+          "org": {
+            "description": "Organization that owns the repository.",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL to the commit diff.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repo",
+          "branch",
+          "hash",
+          "org",
+          "url"
+        ],
+        "additionalProperties": false
+      },
+      "default": null
+    },
+    "product_name": {
+      "description": "Dictionary of product display names, keyed by product name.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "default": null
+    },
+    "product_cves": {
+      "description": "Dictionary of CVE IDs affecting each product, keyed by product name.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "default": null
+    },
+    "package_cves": {
+      "description": "Dictionary of CVE IDs affecting each package, keyed by package name.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "$ref": "#/properties/product_cves/additionalProperties"
+      },
+      "default": null
+    },
+    "release_cves": {
+      "description": "Dictionary of CVE IDs affecting each release, keyed by release version.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "$ref": "#/properties/product_cves/additionalProperties"
+      },
+      "default": null
+    },
+    "cve_releases": {
+      "description": "Dictionary of release versions affected by each CVE, keyed by CVE ID.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "$ref": "#/properties/product_cves/additionalProperties"
+      },
+      "default": null
+    },
+    "cve_commits": {
+      "description": "Dictionary of commit hashes that fix each CVE, keyed by CVE ID.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "$ref": "#/properties/product_cves/additionalProperties"
+      },
+      "default": null
+    }
+  },
+  "required": [
+    "last_updated",
+    "title",
+    "disclosures",
+    "products",
+    "packages"
+  ],
+  "additionalProperties": false
+}
