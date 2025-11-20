@@ -27,18 +27,18 @@ Add the following to a `Directory.Build.props` file that is imported in all MAUI
 
 The behavior will be **fixed in the .NET 10 preview 5** release. The workaround should be removed after that release.
 
-## `dotnet.config` will be removed in favor of `global.json`
+## `global.json` is used for test runner selection instead of `dotnet.config`
 
-In .NET 10, we introduced `dotnet.config` file that is used to set the test runner and is the way to opt-in using `dotnet test` for Microsoft.Testing.Platform. This is already shipping in RC1, but will be removed in RC2.
+In .NET 10 versions up to RC1, we supported the use of a `dotnet.config` file, an INI-formatted file that is currently used only to set the test runner to use with `dotnet test`. Setting this is required in order to use the new Microsoft.Testing.Platform. In 10.0.100 RC2 and beyond, the use of this file is removed in favor of the pre-existing `dotnet.config` file. 
 
-The `dotnet.config` used to look like:
+Instead of using `dotnet.config` to specify a runner:
 
 ```ini
 [dotnet.test.runner]
 name = "Microsoft.Testing.Platform"
 ```
 
-With `global.json`, this becomes:
+`global.json` uses the following to specify the same runner:
 
 ```json
 {
@@ -48,18 +48,7 @@ With `global.json`, this becomes:
 }
 ```
 
-A `global.json` that sets SDK version along with the test runner will look like:
-
-```json
-{
-  "sdk": {
-    "version": "<version>"
-  },
-  "test": {
-    "runner": "Microsoft.Testing.Platform"
-  }
-}
-```
+This change is done in response to user feedback about the relative lack of utility of `dotnet.config` at this time.
 
 ## Startup Performance Regression in Fractional CPU Containers
 
@@ -89,3 +78,4 @@ SDK and runtime installers for macOS install a `createdump` binary that lacks th
 
 - Add the executable bit to `shared/Microsoft.NETCore.App/10.0.0/createdump` manually using `chmod +x`
 - Use another runtime hosting mechanism (self-contained app, use a tarball installation of the runtime/SDK)
+
