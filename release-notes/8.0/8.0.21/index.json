@@ -16,15 +16,111 @@
       "path": "/8.0/8.0.21/release.json",
       "title": "8.0.21 Release Information",
       "type": "application/json"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+      "path": "/8.0/index.json",
+      "title": ".NET 8.0 Patch Release Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+      "path": "/8.0/sdk/index.json",
+      "title": ".NET SDK 8.0 Release Information",
+      "type": "application/hal\u002Bjson"
+    },
+    "month-timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json",
+      "path": "/timeline/2025/10/index.json",
+      "title": "Release timeline index for 2025-10",
+      "type": "application/hal\u002Bjson"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/cve.json",
+      "path": "/timeline/2025/10/cve.json",
+      "title": "CVE Information",
+      "type": "application/json"
     }
   },
   "lifecycle": {
     "phase": "active",
     "release-date": "2025-10-14T00:00:00\u002B00:00"
   },
+  "_embedded": {
+    "cve-records": [
+      "CVE-2025-55248",
+      "CVE-2025-55315"
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2025-55248",
+        "title": ".NET Information Disclosure Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/372",
+            "title": "Announcement for CVE-2025-55248"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/44527b9ed8427463578126a4494c3654dda11866.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 4.8,
+        "cvss-severity": "MEDIUM",
+        "disclosure-date": "2025-10-14",
+        "affected-releases": [
+          "8.0",
+          "9.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2025-55315",
+        "title": ".NET Security Feature Bypass Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/371",
+            "title": "Announcement for CVE-2025-55315"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/aspnetcore/commit/61794b7f3aac0b6719f783db5b5c725fefc8b695.diff",
+            "repo": "dotnet/aspnetcore",
+            "branch": "release/8.0",
+            "title": "Fix commit in aspnetcore (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 9.9,
+        "cvss-severity": "CRITICAL",
+        "disclosure-date": "2025-10-14",
+        "affected-releases": [
+          "8.0",
+          "9.0"
+        ],
+        "affected-products": [
+          "dotnet-aspnetcore"
+        ],
+        "platforms": [
+          "all"
+        ]
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-19T05:38:10.1635421\u002B00:00",
+    "generated-on": "2025-11-21T02:01:38.384418\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }

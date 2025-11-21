@@ -16,15 +16,78 @@
       "path": "/9.0/9.0.6/release.json",
       "title": "9.0.6 Release Information",
       "type": "application/json"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
+      "path": "/9.0/index.json",
+      "title": ".NET 9.0 Patch Release Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
+      "path": "/9.0/sdk/index.json",
+      "title": ".NET SDK 9.0 Release Information",
+      "type": "application/hal\u002Bjson"
+    },
+    "month-timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/06/index.json",
+      "path": "/timeline/2025/06/index.json",
+      "title": "Release timeline index for 2025-06",
+      "type": "application/hal\u002Bjson"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/06/cve.json",
+      "path": "/timeline/2025/06/cve.json",
+      "title": "CVE Information",
+      "type": "application/json"
     }
   },
   "lifecycle": {
     "phase": "active",
     "release-date": "2025-06-10T00:00:00\u002B00:00"
   },
+  "_embedded": {
+    "cve-records": [
+      "CVE-2025-30399"
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2025-30399",
+        "title": "DLL Hijacking Remote Code Execution Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/362",
+            "title": "Announcement for CVE-2025-30399"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/214743ee2a5a25b9a3a07e3f0451da73eb4e97e2.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/9.0",
+            "title": "Fix commit in runtime (release/9.0)",
+            "release": "9.0"
+          }
+        ],
+        "cvss-score": 7.5,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2025-06-10",
+        "affected-releases": [
+          "8.0",
+          "9.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "all"
+        ]
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-19T05:38:10.162009\u002B00:00",
+    "generated-on": "2025-11-21T02:01:38.506406\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }
