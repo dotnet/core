@@ -16,15 +16,113 @@
       "path": "/8.0/8.0.2/release.json",
       "title": "8.0.2 Release Information",
       "type": "application/json"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+      "path": "/8.0/index.json",
+      "title": ".NET 8.0 Patch Release Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+      "path": "/8.0/sdk/index.json",
+      "title": ".NET SDK 8.0 Release Information",
+      "type": "application/hal\u002Bjson"
+    },
+    "month-timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/02/index.json",
+      "path": "/timeline/2024/02/index.json",
+      "title": "Release timeline index for 2024-02",
+      "type": "application/hal\u002Bjson"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/02/cve.json",
+      "path": "/timeline/2024/02/cve.json",
+      "title": "CVE Information",
+      "type": "application/json"
     }
   },
   "lifecycle": {
     "phase": "active",
     "release-date": "2024-02-13T00:00:00\u002B00:00"
   },
+  "_embedded": {
+    "cve-records": [
+      "CVE-2024-21386",
+      "CVE-2024-21404"
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2024-21386",
+        "title": ".NET Denial of Service Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/295",
+            "title": "Announcement for CVE-2024-21386"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/aspnetcore/commit/35e1129d086017e4de913f3cfa0dcd69a7a0561c.diff",
+            "repo": "dotnet/aspnetcore",
+            "branch": "release/8.0",
+            "title": "Fix commit in aspnetcore (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 7.5,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2024-02-13",
+        "affected-releases": [
+          "6.0",
+          "7.0",
+          "8.0"
+        ],
+        "affected-products": [
+          "dotnet-aspnetcore"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2024-21404",
+        "title": ".NET Denial of Service Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/296",
+            "title": "Announcement for CVE-2024-21404"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/806d04b02e42254b0be9b0b85119f3e9133462bd.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 7.5,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2024-02-13",
+        "affected-releases": [
+          "6.0",
+          "7.0",
+          "8.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "linux"
+        ]
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-19T05:38:10.1643574\u002B00:00",
+    "generated-on": "2025-11-21T02:01:38.433372\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }
