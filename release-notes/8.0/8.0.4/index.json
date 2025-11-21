@@ -16,15 +16,79 @@
       "path": "/8.0/8.0.4/release.json",
       "title": "8.0.4 Release Information",
       "type": "application/json"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+      "path": "/8.0/index.json",
+      "title": ".NET 8.0 Patch Release Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+      "path": "/8.0/sdk/index.json",
+      "title": ".NET SDK 8.0 Release Information",
+      "type": "application/hal\u002Bjson"
+    },
+    "month-timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/04/index.json",
+      "path": "/timeline/2024/04/index.json",
+      "title": "Release timeline index for 2024-04",
+      "type": "application/hal\u002Bjson"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/04/cve.json",
+      "path": "/timeline/2024/04/cve.json",
+      "title": "CVE Information",
+      "type": "application/json"
     }
   },
   "lifecycle": {
     "phase": "active",
     "release-date": "2024-04-09T00:00:00\u002B00:00"
   },
+  "_embedded": {
+    "cve-records": [
+      "CVE-2024-21409"
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2024-21409",
+        "title": ".NET Elevation of Privilege Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/303",
+            "title": "Announcement for CVE-2024-21409"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/wpf/commit/8537295cb0637acfc62befc1459244d3bfdb70d4.diff",
+            "repo": "dotnet/wpf",
+            "branch": "release/8.0",
+            "title": "Fix commit in wpf (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 7.3,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2024-04-09",
+        "affected-releases": [
+          "6.0",
+          "7.0",
+          "8.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "windows"
+        ]
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-19T05:38:10.16427\u002B00:00",
+    "generated-on": "2025-11-21T02:01:38.429517\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }
