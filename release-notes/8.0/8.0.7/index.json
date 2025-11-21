@@ -16,15 +16,148 @@
       "path": "/8.0/8.0.7/release.json",
       "title": "8.0.7 Release Information",
       "type": "application/json"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+      "path": "/8.0/index.json",
+      "title": ".NET 8.0 Patch Release Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+      "path": "/8.0/sdk/index.json",
+      "title": ".NET SDK 8.0 Release Information",
+      "type": "application/hal\u002Bjson"
+    },
+    "month-timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/index.json",
+      "path": "/timeline/2024/07/index.json",
+      "title": "Release timeline index for 2024-07",
+      "type": "application/hal\u002Bjson"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/cve.json",
+      "path": "/timeline/2024/07/cve.json",
+      "title": "CVE Information",
+      "type": "application/json"
     }
   },
   "lifecycle": {
     "phase": "active",
     "release-date": "2024-07-09T00:00:00\u002B00:00"
   },
+  "_embedded": {
+    "cve-records": [
+      "CVE-2024-30105",
+      "CVE-2024-35264",
+      "CVE-2024-38095"
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2024-30105",
+        "title": ".NET Denial of Service Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/315",
+            "title": "Announcement for CVE-2024-30105"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/fa5b0d8f4a8b424732cc992158aa92842f8a2846.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 7.5,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2024-07-09",
+        "affected-releases": [
+          "8.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "affected-packages": [
+          "System.Text.Json"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2024-35264",
+        "title": ".NET Remote Code Execution Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/314",
+            "title": "Announcement for CVE-2024-35264"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/aspnetcore/commit/c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc.diff",
+            "repo": "dotnet/aspnetcore",
+            "branch": "release/8.0",
+            "title": "Fix commit in aspnetcore (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 8.1,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2024-07-09",
+        "affected-releases": [
+          "8.0"
+        ],
+        "affected-products": [
+          "dotnet-aspnetcore"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2024-38095",
+        "title": ".NET Denial of Service Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/312",
+            "title": "Announcement for CVE-2024-38095"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/4a8d5a007971d19f389ca17f7b8eb4f9bb199991.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 7.5,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2024-07-09",
+        "affected-releases": [
+          "6.0",
+          "8.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "affected-packages": [
+          "System.Formats.Asn1"
+        ],
+        "platforms": [
+          "all"
+        ]
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-19T05:38:10.1641393\u002B00:00",
+    "generated-on": "2025-11-21T02:01:38.421117\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }

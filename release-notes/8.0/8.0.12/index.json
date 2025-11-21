@@ -16,15 +16,111 @@
       "path": "/8.0/8.0.12/release.json",
       "title": "8.0.12 Release Information",
       "type": "application/json"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+      "path": "/8.0/index.json",
+      "title": ".NET 8.0 Patch Release Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+      "path": "/8.0/sdk/index.json",
+      "title": ".NET SDK 8.0 Release Information",
+      "type": "application/hal\u002Bjson"
+    },
+    "month-timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/01/index.json",
+      "path": "/timeline/2025/01/index.json",
+      "title": "Release timeline index for 2025-01",
+      "type": "application/hal\u002Bjson"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/01/cve.json",
+      "path": "/timeline/2025/01/cve.json",
+      "title": "CVE Information",
+      "type": "application/json"
     }
   },
   "lifecycle": {
     "phase": "active",
     "release-date": "2025-01-14T00:00:00\u002B00:00"
   },
+  "_embedded": {
+    "cve-records": [
+      "CVE-2025-21172",
+      "CVE-2025-21176"
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2025-21172",
+        "title": ".NET and Visual Studio Remote Code Execution Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/339",
+            "title": "Announcement for CVE-2025-21172"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/89ef51c5d8f5239345127a1e282e11036e590c8b.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 7.5,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2025-01-14",
+        "affected-releases": [
+          "8.0",
+          "9.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2025-21176",
+        "title": ".NET and Visual Studio Remote Code Execution Vulnerability",
+        "_links": {
+          "announcement": {
+            "href": "https://github.com/dotnet/announcements/issues/338",
+            "title": "Announcement for CVE-2025-21176"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/89ef51c5d8f5239345127a1e282e11036e590c8b.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
+        "cvss-score": 8.8,
+        "cvss-severity": "HIGH",
+        "disclosure-date": "2025-01-14",
+        "affected-releases": [
+          "8.0",
+          "9.0"
+        ],
+        "affected-products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "all"
+        ]
+      }
+    ]
+  },
   "_metadata": {
     "schema-version": "1.0",
-    "generated-on": "2025-11-19T05:38:10.1639633\u002B00:00",
+    "generated-on": "2025-11-21T02:01:38.41576\u002B00:00",
     "generated-by": "VersionIndex"
   }
 }
