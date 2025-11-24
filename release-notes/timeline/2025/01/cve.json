@@ -227,7 +227,7 @@
       "min_vulnerable": "8.0.100",
       "max_vulnerable": "8.0.111",
       "fixed": "8.0.112",
-      "release": "8.0.1xx",
+      "release": "8.0",
       "commits": [
         "7034fd96502b925b5f65c31e34e99116870bc59f"
       ]
@@ -238,7 +238,7 @@
       "min_vulnerable": "8.0.300",
       "max_vulnerable": "8.0.307",
       "fixed": "8.0.308",
-      "release": "8.0.3xx",
+      "release": "8.0",
       "commits": [
         "2a98e615955be9b9d0752d090c3f92f70c7d0223"
       ]
@@ -249,7 +249,7 @@
       "min_vulnerable": "8.0.400",
       "max_vulnerable": "8.0.404",
       "fixed": "8.0.405",
-      "release": "8.0.4xx",
+      "release": "8.0",
       "commits": [
         "1ba623839f23fe8857d2aa0dc23783692325deab"
       ]
@@ -293,7 +293,7 @@
       "min_vulnerable": "9.0.100",
       "max_vulnerable": "9.0.101",
       "fixed": "9.0.102",
-      "release": "9.0.1xx",
+      "release": "9.0",
       "commits": [
         "802c364c05180a487624fc839870677625810b10"
       ]
@@ -335,28 +335,28 @@
     },
     "7034fd96502b925b5f65c31e34e99116870bc59f": {
       "repo": "sdk",
-      "branch": "release/8.0.1xx",
+      "branch": "release/8.0",
       "hash": "7034fd96502b925b5f65c31e34e99116870bc59f",
       "org": "dotnet",
       "url": "https://github.com/dotnet/sdk/commit/7034fd96502b925b5f65c31e34e99116870bc59f.diff"
     },
     "2a98e615955be9b9d0752d090c3f92f70c7d0223": {
       "repo": "sdk",
-      "branch": "release/8.0.3xx",
+      "branch": "release/8.0",
       "hash": "2a98e615955be9b9d0752d090c3f92f70c7d0223",
       "org": "dotnet",
       "url": "https://github.com/dotnet/sdk/commit/2a98e615955be9b9d0752d090c3f92f70c7d0223.diff"
     },
     "1ba623839f23fe8857d2aa0dc23783692325deab": {
       "repo": "sdk",
-      "branch": "release/8.0.4xx",
+      "branch": "release/8.0",
       "hash": "1ba623839f23fe8857d2aa0dc23783692325deab",
       "org": "dotnet",
       "url": "https://github.com/dotnet/sdk/commit/1ba623839f23fe8857d2aa0dc23783692325deab.diff"
     },
     "802c364c05180a487624fc839870677625810b10": {
       "repo": "sdk",
-      "branch": "release/9.0.1xx",
+      "branch": "release/9.0",
       "hash": "802c364c05180a487624fc839870677625810b10",
       "org": "dotnet",
       "url": "https://github.com/dotnet/sdk/commit/802c364c05180a487624fc839870677625810b10.diff"
@@ -380,24 +380,14 @@
   "release_cves": {
     "8.0": [
       "CVE-2025-21172",
+      "CVE-2025-21173",
       "CVE-2025-21176"
-    ],
-    "8.0.1xx": [
-      "CVE-2025-21173"
-    ],
-    "8.0.3xx": [
-      "CVE-2025-21173"
-    ],
-    "8.0.4xx": [
-      "CVE-2025-21173"
     ],
     "9.0": [
       "CVE-2025-21171",
       "CVE-2025-21172",
+      "CVE-2025-21173",
       "CVE-2025-21176"
-    ],
-    "9.0.1xx": [
-      "CVE-2025-21173"
     ]
   },
   "cve_releases": {
@@ -409,10 +399,8 @@
       "9.0"
     ],
     "CVE-2025-21173": [
-      "8.0.1xx",
-      "8.0.3xx",
-      "8.0.4xx",
-      "9.0.1xx"
+      "8.0",
+      "9.0"
     ],
     "CVE-2025-21176": [
       "8.0",
@@ -430,7 +418,6 @@
     "CVE-2025-21173": [
       "1ba623839f23fe8857d2aa0dc23783692325deab",
       "2a98e615955be9b9d0752d090c3f92f70c7d0223",
-      "4416ac92cd8588320132c4ce0d508d78a4a26d15",
       "7034fd96502b925b5f65c31e34e99116870bc59f",
       "802c364c05180a487624fc839870677625810b10"
     ],
