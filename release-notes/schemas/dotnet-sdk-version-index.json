@@ -93,8 +93,8 @@
         "null"
       ],
       "properties": {
-        "latest_downloads": {
-          "description": "Latest SDK downloads keyed by RID for direct access",
+        "downloads": {
+          "description": "SDK downloads keyed by RID for direct access",
           "type": [
             "object",
             "null"
@@ -122,6 +122,10 @@
                 "description": "Architecture",
                 "type": "string"
               },
+              "hash_algorithm": {
+                "description": "Hash algorithm used for file verification (e.g., \u0027sha512\u0027)",
+                "type": "string"
+              },
               "_links": {
                 "description": "Download and hash links",
                 "type": "object",
@@ -135,11 +139,12 @@
               "rid",
               "os",
               "arch",
+              "hash_algorithm",
               "_links"
             ]
           }
         },
-        "sdk_feature_bands": {
+        "feature_bands": {
           "description": "List of SDK feature band entries with version information and navigation links",
           "type": "array",
           "items": {
@@ -149,34 +154,32 @@
               "null"
             ],
             "properties": {
-              "kind": {
-                "description": "Type of release, always \u0027band\u0027 for feature bands",
-                "enum": [
-                  "releases-index",
-                  "major-version-index",
-                  "patch-version-index",
-                  "sdk-index",
-                  "manifest",
-                  "band",
-                  "content",
-                  "unknown",
-                  "release-index",
-                  "index",
-                  "major-index",
-                  "major-release-index",
-                  "patch-index",
-                  "patch-release-index",
-                  "major-release",
-                  "patch-release"
-                ]
-              },
               "version": {
                 "description": "Feature band version (e.g., \u00278.0.1xx\u0027, \u00278.0.4xx\u0027)",
                 "type": "string"
               },
+              "date": {
+                "description": "Release date when this feature band became generally available",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
               "label": {
                 "description": "Descriptive label for the feature band",
                 "type": "string"
+              },
+              "support_phase": {
+                "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
+                "enum": [
+                  "preview",
+                  "go-live",
+                  "active",
+                  "maintenance",
+                  "eol",
+                  null
+                ]
               },
               "_links": {
                 "description": "HAL\u002BJSON links for navigation to this feature band\u0027s content",
@@ -184,40 +187,13 @@
                 "additionalProperties": {
                   "$ref": "#/properties/_links/additionalProperties"
                 }
-              },
-              "lifecycle": {
-                "description": "Lifecycle information for this feature band",
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "properties": {
-                  "phase": {
-                    "description": "Current lifecycle phase",
-                    "enum": [
-                      "preview",
-                      "go-live",
-                      "active",
-                      "maintenance",
-                      "eol"
-                    ]
-                  },
-                  "ga_date": {
-                    "description": "Date when the patch version became generally available",
-                    "type": "string",
-                    "format": "date-time"
-                  }
-                },
-                "required": [
-                  "phase",
-                  "ga_date"
-                ]
               }
             },
             "required": [
-              "kind",
               "version",
+              "date",
               "label",
+              "support_phase",
               "_links"
             ]
           }
@@ -226,97 +202,55 @@
           "description": "List of SDK patch release entries with version information and navigation links",
           "type": "array",
           "items": {
-            "description": "Individual release entry within a version index, containing version metadata and navigation links (legacy)",
+            "description": "Individual SDK release entry containing version metadata and navigation links",
             "type": [
               "object",
               "null"
             ],
             "properties": {
               "version": {
-                "description": "Version identifier (e.g., \u00278.0\u0027 for major version, \u00278.0.1\u0027 for patch version)",
+                "description": "SDK version (e.g., \u00278.0.100\u0027, \u00279.0.200\u0027)",
                 "type": "string"
               },
-              "kind": {
-                "description": "Type of release (index, major-release, patch-release, etc.)",
+              "date": {
+                "description": "Release date when this SDK version became generally available",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "support_phase": {
+                "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
                 "enum": [
-                  "releases-index",
-                  "major-version-index",
-                  "patch-version-index",
-                  "sdk-index",
-                  "manifest",
-                  "band",
-                  "content",
-                  "unknown",
-                  "release-index",
-                  "index",
-                  "major-index",
-                  "major-release-index",
-                  "patch-index",
-                  "patch-release-index",
-                  "major-release",
-                  "patch-release"
+                  "preview",
+                  "go-live",
+                  "active",
+                  "maintenance",
+                  "eol",
+                  null
                 ]
               },
               "_links": {
-                "description": "HAL\u002BJSON links for navigation to this release\u0027s content",
+                "description": "HAL\u002BJSON links for navigation to this SDK release\u0027s content",
                 "type": "object",
                 "additionalProperties": {
                   "$ref": "#/properties/_links/additionalProperties"
-                }
-              },
-              "lifecycle": {
-                "description": "Lifecycle information (phase and release-date)",
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "properties": {
-                  "phase": {
-                    "description": "Current lifecycle phase",
-                    "enum": [
-                      "preview",
-                      "go-live",
-                      "active",
-                      "maintenance",
-                      "eol"
-                    ]
-                  },
-                  "ga_date": {
-                    "description": "Date when the patch version became generally available",
-                    "type": "string",
-                    "format": "date-time"
-                  }
-                },
-                "required": [
-                  "phase",
-                  "ga_date"
-                ]
-              },
-              "cve_records": {
-                "description": "CVE IDs associated with this release",
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
                 }
               }
             },
             "required": [
               "version",
-              "kind",
+              "date",
+              "support_phase",
               "_links"
             ]
           }
         }
       },
       "required": [
-        "latest_downloads",
-        "sdk_feature_bands",
+        "downloads",
+        "feature_bands",
         "releases"
       ]
     },
