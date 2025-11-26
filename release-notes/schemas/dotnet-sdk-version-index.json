@@ -1,0 +1,358 @@
+{
+  "description": "Index of .NET SDK releases organized by feature bands, supporting navigation from major versions to specific SDK releases",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "kind": {
+      "description": "Type of release document, always \u0027index\u0027 for SDK indexes",
+      "enum": [
+        "releases-index",
+        "major-version-index",
+        "patch-version-index",
+        "sdk-index",
+        "manifest",
+        "band",
+        "content",
+        "unknown",
+        "release-index",
+        "index",
+        "major-index",
+        "major-release-index",
+        "patch-index",
+        "patch-release-index",
+        "major-release",
+        "patch-release"
+      ]
+    },
+    "component": {
+      "description": "Component type, always \u0027sdk\u0027 for SDK indexes",
+      "type": "string"
+    },
+    "version": {
+      "description": "SDK version (e.g., \u00278.0\u0027 for .NET SDK 8.0)",
+      "type": "string"
+    },
+    "label": {
+      "description": "Descriptive label for the SDK version",
+      "type": "string"
+    },
+    "_links": {
+      "description": "HAL\u002BJSON links for hypermedia navigation",
+      "type": "object",
+      "additionalProperties": {
+        "description": "HAL\u002BJSON hypermedia link providing navigation to related resources",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "href": {
+            "description": "Absolute URL to the linked resource",
+            "type": "string"
+          },
+          "path": {
+            "description": "Absolute path from the repository root (starts with /)",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "description": "Descriptive title for the linked resource",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "MIME type of the linked resource",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "templated": {
+            "description": "Indicates that the href is a URI template (RFC 6570)",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "href"
+        ]
+      }
+    },
+    "_embedded": {
+      "description": "Embedded SDK feature band entries",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "latest_downloads": {
+          "description": "Latest SDK downloads keyed by RID for direct access",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "description": "Individual SDK download file for a specific platform",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "name": {
+                "description": "File name",
+                "type": "string"
+              },
+              "rid": {
+                "description": "Runtime identifier",
+                "type": "string"
+              },
+              "os": {
+                "description": "Operating system",
+                "type": "string"
+              },
+              "arch": {
+                "description": "Architecture",
+                "type": "string"
+              },
+              "_links": {
+                "description": "Download and hash links",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              }
+            },
+            "required": [
+              "name",
+              "rid",
+              "os",
+              "arch",
+              "_links"
+            ]
+          }
+        },
+        "sdk_feature_bands": {
+          "description": "List of SDK feature band entries with version information and navigation links",
+          "type": "array",
+          "items": {
+            "description": "Individual SDK feature band entry containing version metadata and navigation links",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "kind": {
+                "description": "Type of release, always \u0027band\u0027 for feature bands",
+                "enum": [
+                  "releases-index",
+                  "major-version-index",
+                  "patch-version-index",
+                  "sdk-index",
+                  "manifest",
+                  "band",
+                  "content",
+                  "unknown",
+                  "release-index",
+                  "index",
+                  "major-index",
+                  "major-release-index",
+                  "patch-index",
+                  "patch-release-index",
+                  "major-release",
+                  "patch-release"
+                ]
+              },
+              "version": {
+                "description": "Feature band version (e.g., \u00278.0.1xx\u0027, \u00278.0.4xx\u0027)",
+                "type": "string"
+              },
+              "label": {
+                "description": "Descriptive label for the feature band",
+                "type": "string"
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this feature band\u0027s content",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              },
+              "lifecycle": {
+                "description": "Lifecycle information for this feature band",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "phase": {
+                    "description": "Current lifecycle phase",
+                    "enum": [
+                      "preview",
+                      "go-live",
+                      "active",
+                      "maintenance",
+                      "eol"
+                    ]
+                  },
+                  "ga_date": {
+                    "description": "Date when the patch version became generally available",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "phase",
+                  "ga_date"
+                ]
+              }
+            },
+            "required": [
+              "kind",
+              "version",
+              "label",
+              "_links"
+            ]
+          }
+        },
+        "releases": {
+          "description": "List of SDK patch release entries with version information and navigation links",
+          "type": "array",
+          "items": {
+            "description": "Individual release entry within a version index, containing version metadata and navigation links (legacy)",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "version": {
+                "description": "Version identifier (e.g., \u00278.0\u0027 for major version, \u00278.0.1\u0027 for patch version)",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Type of release (index, major-release, patch-release, etc.)",
+                "enum": [
+                  "releases-index",
+                  "major-version-index",
+                  "patch-version-index",
+                  "sdk-index",
+                  "manifest",
+                  "band",
+                  "content",
+                  "unknown",
+                  "release-index",
+                  "index",
+                  "major-index",
+                  "major-release-index",
+                  "patch-index",
+                  "patch-release-index",
+                  "major-release",
+                  "patch-release"
+                ]
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this release\u0027s content",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              },
+              "lifecycle": {
+                "description": "Lifecycle information (phase and release-date)",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "phase": {
+                    "description": "Current lifecycle phase",
+                    "enum": [
+                      "preview",
+                      "go-live",
+                      "active",
+                      "maintenance",
+                      "eol"
+                    ]
+                  },
+                  "ga_date": {
+                    "description": "Date when the patch version became generally available",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "phase",
+                  "ga_date"
+                ]
+              },
+              "cve_records": {
+                "description": "CVE IDs associated with this release",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "version",
+              "kind",
+              "_links"
+            ]
+          }
+        }
+      },
+      "required": [
+        "latest_downloads",
+        "sdk_feature_bands",
+        "releases"
+      ]
+    },
+    "_metadata": {
+      "description": "Metadata about when and how this document was generated",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "schema_version": {
+          "description": "Version of the schema used for this document",
+          "type": "string"
+        },
+        "generated_on": {
+          "description": "ISO 8601 timestamp when this document was generated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_by": {
+          "description": "Name of the tool or script that generated this document",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "generated_on",
+        "generated_by"
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "component",
+    "version",
+    "label",
+    "_links"
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "description": "Index of major .NET releases with full lifecycle information",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "kind": {
+      "description": "Type of release document, always \u0027index\u0027 for version-based indexes",
+      "enum": [
+        "releases-index",
+        "major-version-index",
+        "patch-version-index",
+        "sdk-index",
+        "manifest",
+        "band",
+        "content",
+        "unknown",
+        "release-index",
+        "index",
+        "major-index",
+        "major-release-index",
+        "patch-index",
+        "patch-release-index",
+        "major-release",
+        "patch-release"
+      ]
+    },
+    "title": {
+      "description": "Concise title for the document",
+      "type": "string"
+    },
+    "description": {
+      "description": "Description of the index scope",
+      "type": "string"
+    },
+    "latest": {
+      "description": "Latest stable .NET version",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latest_lts": {
+      "description": "Latest LTS (Long-Term Support) .NET version",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latest_year": {
+      "description": "Latest year with .NET releases (cross-reference to timeline)",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "_links": {
+      "description": "HAL\u002BJSON links for hypermedia navigation",
+      "type": "object",
+      "additionalProperties": {
+        "description": "HAL\u002BJSON hypermedia link providing navigation to related resources",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "href": {
+            "description": "Absolute URL to the linked resource",
+            "type": "string"
+          },
+          "path": {
+            "description": "Absolute path from the repository root (starts with /)",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "description": "Descriptive title for the linked resource",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "MIME type of the linked resource",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "templated": {
+            "description": "Indicates that the href is a URI template (RFC 6570)",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "href"
+        ]
+      }
+    },
+    "usage": {
+      "description": "Usage links to documentation and help resources",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "_links": {
+          "description": "HAL\u002BJSON links for usage-related resources",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/properties/_links/additionalProperties"
+          }
+        }
+      }
+    },
+    "glossary": {
+      "description": "Glossary of terms and definitions",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "_embedded": {
+      "description": "Embedded major version entries",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "releases": {
+          "description": "List of major version entries with full lifecycle information",
+          "type": "array",
+          "items": {
+            "description": "Major version entry within the root index, containing full lifecycle information",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "version": {
+                "description": "Major version identifier (e.g., \u00278.0\u0027, \u00279.0\u0027)",
+                "type": "string"
+              },
+              "kind": {
+                "description": "Type of release (index for major version)",
+                "enum": [
+                  "releases-index",
+                  "major-version-index",
+                  "patch-version-index",
+                  "sdk-index",
+                  "manifest",
+                  "band",
+                  "content",
+                  "unknown",
+                  "release-index",
+                  "index",
+                  "major-index",
+                  "major-release-index",
+                  "patch-index",
+                  "patch-release-index",
+                  "major-release",
+                  "patch-release"
+                ]
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this major version\u0027s content",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              },
+              "lifecycle": {
+                "description": "Full lifecycle information (release-type, phase, eol-date, supported)",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "release_type": {
+                    "description": "Support model (LTS or STS), null for feature bands",
+                    "enum": [
+                      "lts",
+                      "sts",
+                      null
+                    ]
+                  },
+                  "phase": {
+                    "description": "Current lifecycle phase",
+                    "enum": [
+                      "preview",
+                      "go-live",
+                      "active",
+                      "maintenance",
+                      "eol"
+                    ]
+                  },
+                  "ga_date": {
+                    "description": "Date when the version became generally available",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "eol_date": {
+                    "description": "End of Life date when support ends",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "supported": {
+                    "description": "Whether this release is currently supported (based on EOL date and lifecycle phase)",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "release_type",
+                  "phase",
+                  "ga_date",
+                  "eol_date"
+                ]
+              }
+            },
+            "required": [
+              "version",
+              "kind",
+              "_links"
+            ]
+          }
+        }
+      },
+      "required": [
+        "releases"
+      ]
+    },
+    "_metadata": {
+      "description": "Metadata about when and how this document was generated",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "schema_version": {
+          "description": "Version of the schema used for this document",
+          "type": "string"
+        },
+        "generated_on": {
+          "description": "ISO 8601 timestamp when this document was generated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_by": {
+          "description": "Name of the tool or script that generated this document",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "generated_on",
+        "generated_by"
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "title",
+    "description"
+  ]
+}
