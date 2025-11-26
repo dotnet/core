@@ -30,6 +30,29 @@
       "description": "Patch version identifier (e.g., \u00278.0.1\u0027, \u00279.0.2\u0027)",
       "type": "string"
     },
+    "date": {
+      "description": "Release date when this patch became generally available",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "security": {
+      "description": "True if this release includes security fixes (CVEs); defaults to true for safety",
+      "type": "boolean"
+    },
+    "support_phase": {
+      "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
+      "enum": [
+        "preview",
+        "go-live",
+        "active",
+        "maintenance",
+        "eol",
+        null
+      ]
+    },
     "title": {
       "description": "Concise title for the document",
       "type": "string"
@@ -85,34 +108,6 @@
           "href"
         ]
       }
-    },
-    "lifecycle": {
-      "description": "Simplified lifecycle information (phase and release-date only)",
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "phase": {
-          "description": "Current lifecycle phase",
-          "enum": [
-            "preview",
-            "go-live",
-            "active",
-            "maintenance",
-            "eol"
-          ]
-        },
-        "ga_date": {
-          "description": "Date when the patch version became generally available",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "phase",
-        "ga_date"
-      ]
     },
     "_embedded": {
       "description": "Embedded SDK and CVE disclosure information",
@@ -365,6 +360,9 @@
   "required": [
     "kind",
     "version",
+    "date",
+    "security",
+    "support_phase",
     "title",
     "description",
     "_links"

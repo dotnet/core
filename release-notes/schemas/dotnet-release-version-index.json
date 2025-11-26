@@ -153,27 +153,6 @@
                 "description": "Major version identifier (e.g., \u00278.0\u0027, \u00279.0\u0027)",
                 "type": "string"
               },
-              "kind": {
-                "description": "Type of release (index for major version)",
-                "enum": [
-                  "releases-index",
-                  "major-version-index",
-                  "patch-version-index",
-                  "sdk-index",
-                  "manifest",
-                  "band",
-                  "content",
-                  "unknown",
-                  "release-index",
-                  "index",
-                  "major-index",
-                  "major-release-index",
-                  "patch-index",
-                  "patch-release-index",
-                  "major-release",
-                  "patch-release"
-                ]
-              },
               "_links": {
                 "description": "HAL\u002BJSON links for navigation to this major version\u0027s content",
                 "type": "object",
@@ -231,7 +210,6 @@
             },
             "required": [
               "version",
-              "kind",
               "_links"
             ]
           }
