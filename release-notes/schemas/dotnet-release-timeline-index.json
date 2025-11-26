@@ -126,23 +126,12 @@
               "null"
             ],
             "properties": {
-              "kind": {
-                "description": "Type of history index for this year",
-                "enum": [
-                  "timeline-index",
-                  "year-index",
-                  "month-index",
-                  "release-timeline-index",
-                  "timeline-year-index",
-                  "timeline-month-index"
-                ]
+              "year": {
+                "description": "Year identifier (e.g., \u00272025\u0027)",
+                "type": "string"
               },
               "description": {
                 "description": "Description of the year\u0027s releases",
-                "type": "string"
-              },
-              "year": {
-                "description": "Year identifier (e.g., \u00272025\u0027)",
                 "type": "string"
               },
               "_links": {
@@ -167,9 +156,8 @@
               }
             },
             "required": [
-              "kind",
-              "description",
               "year",
+              "description",
               "_links"
             ]
           }
