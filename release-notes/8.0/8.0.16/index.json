@@ -1,9 +1,21 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-patch-detail-index.json",
-  "kind": "patch-release-index",
+  "kind": "patch-version-index",
   "version": "8.0.16",
+  "date": "2025-05-22T00:00:00\u002B00:00",
+  "security": true,
+  "cve_count": 1,
+  "support_phase": "active",
   "title": ".NET 8.0.16 Patch Index",
   "description": "Patch information for .NET 8.0.16",
+  "runtime_version": "8.0.16",
+  "sdk_versions": [
+    "8.0.410",
+    "8.0.313",
+    "8.0.409",
+    "8.0.312",
+    "8.0.116"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/index.json",
@@ -11,7 +23,7 @@
       "title": "8.0.16 Patch Index",
       "type": "application/hal\u002Bjson"
     },
-    "release": {
+    "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/release.json",
       "path": "/8.0/8.0.16/release.json",
       "title": "8.0.16 Release Information",
@@ -29,20 +41,189 @@
       "title": ".NET SDK 8.0 Release Information",
       "type": "application/hal\u002Bjson"
     },
-    "month-timeline-index": {
+    "month-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/index.json",
       "path": "/timeline/2025/05/index.json",
       "title": "Release timeline index for 2025-05",
       "type": "application/hal\u002Bjson"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/cve.json",
+      "path": "/timeline/2025/05/cve.json",
+      "title": "CVE Information",
+      "type": "application/json"
     }
   },
-  "lifecycle": {
-    "phase": "active",
-    "release-date": "2025-05-22T00:00:00\u002B00:00"
+  "_embedded": {
+    "runtime": {
+      "version": "8.0.16",
+      "_links": {
+        "release-notes-markdown": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/8.0.16.md",
+          "path": "/8.0/8.0.16/8.0.16.md",
+          "title": "8.0.16 Release Notes",
+          "type": "application/markdown"
+        },
+        "release-notes-markdown-rendered": {
+          "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.16/8.0.16.md",
+          "path": "/8.0/8.0.16/8.0.16.md",
+          "title": "8.0.16 Release Notes (Rendered)",
+          "type": "application/markdown"
+        }
+      }
+    },
+    "sdks": [
+      {
+        "version": "8.0.410",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.4xx.json",
+            "path": "/8.0/sdk/sdk-8.0.4xx.json",
+            "title": ".NET SDK 8.0.4xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/8.0.410.md",
+            "path": "/8.0/8.0.16/8.0.410.md",
+            "title": "SDK 8.0.410 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.16/8.0.410.md",
+            "path": "/8.0/8.0.16/8.0.410.md",
+            "title": "SDK 8.0.410 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.313",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.3xx.json",
+            "path": "/8.0/sdk/sdk-8.0.3xx.json",
+            "title": ".NET SDK 8.0.3xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/8.0.313.md",
+            "path": "/8.0/8.0.16/8.0.313.md",
+            "title": "SDK 8.0.313 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.16/8.0.313.md",
+            "path": "/8.0/8.0.16/8.0.313.md",
+            "title": "SDK 8.0.313 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.409",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.4xx.json",
+            "path": "/8.0/sdk/sdk-8.0.4xx.json",
+            "title": ".NET SDK 8.0.4xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/8.0.16.md",
+            "path": "/8.0/8.0.16/8.0.16.md",
+            "title": "8.0.16 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.16/8.0.16.md",
+            "path": "/8.0/8.0.16/8.0.16.md",
+            "title": "8.0.16 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.312",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.3xx.json",
+            "path": "/8.0/sdk/sdk-8.0.3xx.json",
+            "title": ".NET SDK 8.0.3xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/8.0.312.md",
+            "path": "/8.0/8.0.16/8.0.312.md",
+            "title": "SDK 8.0.312 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.16/8.0.312.md",
+            "path": "/8.0/8.0.16/8.0.312.md",
+            "title": "SDK 8.0.312 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.116",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.1xx.json",
+            "path": "/8.0/sdk/sdk-8.0.1xx.json",
+            "title": ".NET SDK 8.0.1xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/8.0.116.md",
+            "path": "/8.0/8.0.16/8.0.116.md",
+            "title": "SDK 8.0.116 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.16/8.0.116.md",
+            "path": "/8.0/8.0.16/8.0.116.md",
+            "title": "SDK 8.0.116 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      }
+    ],
+    "cve_records": [
+      "CVE-2025-26646"
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2025-26646",
+        "title": ".NET and Visual Studio Spoofing Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/356",
+            "title": "CVE-2025-26646"
+          }
+        },
+        "cvss_score": 8,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2025-05-13",
+        "affected_releases": [
+          "070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753",
+          "391e16c3b5c49938029e20d9ee69c4d5bdf51c70",
+          "7892f91f7191adb473a9e97a79e1c4ca8a2c9247",
+          "ad312fc3980fd8c562fac172bc17318c447eeb75",
+          "d00609e7978ee1b0fe62b39a378611311cf85603"
+        ],
+        "affected_products": [
+          "dotnet-sdk"
+        ],
+        "platforms": [
+          "all"
+        ]
+      }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.409606\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:02:42.6401118\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

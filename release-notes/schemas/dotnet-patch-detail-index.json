@@ -43,6 +43,10 @@
       "description": "True if this release includes security fixes (CVEs); defaults to true for safety",
       "type": "boolean"
     },
+    "cve_count": {
+      "description": "Number of CVEs fixed in this release",
+      "type": "integer"
+    },
     "support_phase": {
       "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
       "enum": [
@@ -61,6 +65,26 @@
     "description": {
       "description": "Description of the patch release",
       "type": "string"
+    },
+    "runtime_version": {
+      "description": "Runtime version for this patch (same as version)",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sdk_versions": {
+      "description": "SDK versions shipped with this runtime patch",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
     },
     "_links": {
       "description": "HAL\u002BJSON links for hypermedia navigation",
@@ -111,34 +135,25 @@
       }
     },
     "_embedded": {
-      "description": "Embedded SDK and CVE disclosure information",
+      "description": "Embedded runtime, SDK, and CVE disclosure information",
       "type": [
         "object",
         "null"
       ],
       "properties": {
-        "sdks": {
-          "description": "SDK versions shipped with this runtime patch",
+        "runtime": {
+          "description": "Runtime information with release notes links",
           "type": [
             "object",
             "null"
           ],
           "properties": {
-            "dotnet_sdk": {
-              "description": "SDK versions shipped with this runtime",
-              "type": [
-                "array",
-                "null"
-              ],
-              "items": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
+            "version": {
+              "description": "Runtime version",
+              "type": "string"
             },
             "_links": {
-              "description": "Links to SDK feature band information",
+              "description": "Links to runtime release notes",
               "type": [
                 "object",
                 "null"
@@ -147,6 +162,42 @@
                 "$ref": "#/properties/_links/additionalProperties"
               }
             }
+          },
+          "required": [
+            "version"
+          ]
+        },
+        "sdks": {
+          "description": "SDK versions shipped with this runtime patch",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "description": "SDK version and links for a patch release",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "version": {
+                "description": "SDK version",
+                "type": "string"
+              },
+              "_links": {
+                "description": "Links to SDK feature band and release notes",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              }
+            },
+            "required": [
+              "version"
+            ]
           }
         },
         "cve_records": {
@@ -320,16 +371,6 @@
         }
       }
     },
-    "disclosures": {
-      "description": "CVE security vulnerability disclosures for this patch release (deprecated, use _embedded.disclosures)",
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "$ref": "#/properties/_embedded/properties/disclosures/items"
-      }
-    },
     "_metadata": {
       "description": "Metadata about when and how this document was generated",
       "type": [
@@ -363,9 +404,9 @@
     "version",
     "date",
     "security",
+    "cve_count",
     "support_phase",
     "title",
-    "description",
-    "_links"
+    "description"
   ]
 }
