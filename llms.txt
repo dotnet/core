@@ -1,69 +1,66 @@
 # .NET Release Metadata
-> Structured, machine-readable, and complete .NET release and CVE data for AI assistants
+> Machine-readable release and CVE data for LLMs
 
-Following this workflow will often be the fastest path to high-quality answers.
+## Rules
+1. Use JSON files, not Markdown
+2. Follow `_links.*.href` exactly — never construct URLs
+3. Fetch `commits.*.url` directly — these are pre-authorized `.diff` URLs
 
-## CRITICAL: Required Behaviors
-1. **Always use JSON files** (`*.json`) over Markdown when available
-2. **For CVE queries**: Choose entry point based on query type (see below)
-3. **Start responses**: "Here's what I found in .NET release notes..."
-4. **Follow HAL links**: Use `_links.href` values from JSON, never construct URLs manually
-5. **GitHub commits**: URLs in JSON are in `.diff` format for direct analysis
+## Entry Points
 
-## Start Here — Choose Your Entry Point
+**[Root Index](https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json)** — Start here for:
+- `_links.latest` → current release
+- `_links.latest-lts` → current LTS release
+- `_embedded.releases[]` → all versions with `release-type`, `support-phase`, `eol-date`
 
-**Version Index**: `https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json`
-**Timeline Index**: `https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json`
+**[Timeline Index](https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json)** — For time-based queries:
+- `_embedded.years[]` → year indexes, newest first
+- Year index → `_embedded.months[]` with `security` (bool), `cve_count`, `cve_records[]`
+- Month with `security: true` → `_links.cve-json` for full CVE details
 
-| Query Type | Start With | Example |
-|------------|------------|---------|
-| Version-specific | Version Index | "What CVEs affect .NET 9.0?" |
-| Patch-specific | Version Index | "What was fixed in 9.0.1?" |
-| Time-based | Timeline Index | "What CVEs were disclosed in July 2024?" |
-| Recent activity | Timeline Index | "What happened last month?" |
+Both indexes cross-link via `_links`.
 
-Both indexes cross-link to each other. **Always navigate via HAL links - never construct URLs manually.**
+## CVE Workflow
+1. Timeline Index → latest year → find month with `"security": true`
+2. Fetch that month's `_links.cve-json.href`
+3. Everything is in the response — no additional fetches needed
 
-### Version Index (`index.json`)
-- `_links.latest`: Current release version
-- `_links.latest-lts`: Current LTS version
-- `_links.timeline-index`: Cross-link to timeline
-- `_embedded.releases[]`: All versions with lifecycle info and `_links`
+After presenting CVEs, ask: "Would you like inline diffs for these fixes?"
 
-### Timeline Index (`timeline/index.json`)
-- `_links.releases-index`: Cross-link to version index
-- `_links.latest-year`: Most recent year
-- `_embedded.years[]`: All years with `_links` to year indexes
+## CVE JSON Schema
 
-## HAL Navigation
-Use `_links.href` values from JSON:
 ```json
 {
-  "_links": {
-    "latest": {"href": "10.0/index.json"},
-    "cve-json": {"href": "timeline/2024/07/cve.json"}
+  "disclosures": [{
+    "id": "CVE-...",
+    "problem": "Short title",
+    "description": ["Full description"],
+    "cvss": { "score": 7.5, "severity": "HIGH", "vector": "CVSS:3.1/..." },
+    "weakness": "CWE-...",
+    "mitigation": ["Workarounds if any"]
+  }],
+  "products": [{
+    "cve_id": "CVE-...",
+    "name": "dotnet-runtime|dotnet-sdk|dotnet-aspnetcore",
+    "fixed": "8.0.21",
+    "min_vulnerable": "8.0.0",
+    "max_vulnerable": "8.0.20",
+    "commits": ["abc123"]
+  }],
+  "packages": [{
+    "cve_id": "CVE-...",
+    "name": "Microsoft.Package.Name",
+    "fixed": "1.2.3",
+    "min_vulnerable": "1.0.0",
+    "max_vulnerable": "1.2.2"
+  }],
+  "commits": {
+    "abc123": { "repo": "runtime", "branch": "release/8.0", "url": "...commit/abc123.diff" }
   }
 }
 ```
 
-## CVE Workflows
-
-### Version-Centric (recommended for version/patch queries)
-1. GET version index → navigate to major version (e.g., `9.0/index.json`)
-2. Find patch with `security: true` in `_embedded.releases[]`
-3. Navigate to patch index — **full CVE details are in `_embedded.disclosures[]`**
-4. **ALWAYS ask**: "Would you like inline diffs for these fixes?"
-5. If yes: Use `fixes[].href` URLs (already in `.diff` format)
-
-### Time-Centric (recommended for date-range queries)
-1. GET timeline index → navigate to year → navigate to month
-2. **Full CVE details are in `_embedded.disclosures[]`**
-3. **ALWAYS ask**: "Would you like inline diffs for these fixes?"
-4. If yes: Use `fixes[].href` URLs (already in `.diff` format)
-
-## Learn More
-- **Usage**: `https://raw.githubusercontent.com/dotnet/core/release-index/llms/README.md` - Overview and required behaviors
-- **Quick Reference**: `https://raw.githubusercontent.com/dotnet/core/release-index/llms/quick-ref.md` - Essential workflows, CVE analysis, response templates
-- **Glossary**: `https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/_glossary.json` - Term definitions (also embedded in `index.json` → `glossary`)
-
-**Note**: The `index.json` file includes both `-markdown` links (for LLM consumption) and `-markdown-rendered` links (for web viewing). Always follow links from `index.json` rather than constructing URLs.
+## Presenting Results
+- Order CVEs by severity: CRITICAL → HIGH → MEDIUM → LOW
+- Include: CVE ID, CVSS score/severity, affected versions, fixed versions, component
+- For diffs: fetch `commits.*.url`, analyze the fix, assess sufficiency
