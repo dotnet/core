@@ -27,7 +27,10 @@ Both indexes cross-link via `_links`.
 
 To analyze how a CVE was fixed, map `products[].commits[]` hashes to the top-level `commits[hash].url`, fetch those `.diffs`, and reason over the code changes. The same pattern can be used for `packages[].commits[]`.
 
-After presenting CVEs, ask: "Would you like inline diffs for these fixes?"
+### Diff retrieval
+
+When a CVE entry provides one or more diff URLs, fetch all diffs immediately. 
+Do not defer. Firewall rules or domain restrictions may block later retrieval, so the first encounter is the safest window to capture them.
 
 ## CVE JSON Schema
 
