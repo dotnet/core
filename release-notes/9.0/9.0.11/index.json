@@ -1,9 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-patch-detail-index.json",
-  "kind": "patch-release-index",
+  "kind": "patch-version-index",
   "version": "9.0.11",
+  "date": "2025-11-11T00:00:00\u002B00:00",
+  "security": false,
+  "cve_count": 0,
+  "support_phase": "active",
   "title": ".NET 9.0.11 Patch Index",
   "description": "Patch information for .NET 9.0.11",
+  "runtime_version": "9.0.11",
+  "sdk_versions": [
+    "9.0.307",
+    "9.0.112"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/index.json",
@@ -11,7 +20,7 @@
       "title": "9.0.11 Patch Index",
       "type": "application/hal\u002Bjson"
     },
-    "release": {
+    "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/release.json",
       "path": "/9.0/9.0.11/release.json",
       "title": "9.0.11 Release Information",
@@ -29,20 +38,83 @@
       "title": ".NET SDK 9.0 Release Information",
       "type": "application/hal\u002Bjson"
     },
-    "month-timeline-index": {
+    "month-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/11/index.json",
       "path": "/timeline/2025/11/index.json",
       "title": "Release timeline index for 2025-11",
       "type": "application/hal\u002Bjson"
     }
   },
-  "lifecycle": {
-    "phase": "active",
-    "release-date": "2025-11-11T00:00:00\u002B00:00"
+  "_embedded": {
+    "runtime": {
+      "version": "9.0.11",
+      "_links": {
+        "release-notes-markdown": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/9.0.11.md",
+          "path": "/9.0/9.0.11/9.0.11.md",
+          "title": "9.0.11 Release Notes",
+          "type": "application/markdown"
+        },
+        "release-notes-markdown-rendered": {
+          "href": "https://github.com/dotnet/core/blob/main/release-notes/9.0/9.0.11/9.0.11.md",
+          "path": "/9.0/9.0.11/9.0.11.md",
+          "title": "9.0.11 Release Notes (Rendered)",
+          "type": "application/markdown"
+        }
+      }
+    },
+    "sdks": [
+      {
+        "version": "9.0.307",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/sdk-9.0.3xx.json",
+            "path": "/9.0/sdk/sdk-9.0.3xx.json",
+            "title": ".NET SDK 9.0.3xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/9.0.11.md",
+            "path": "/9.0/9.0.11/9.0.11.md",
+            "title": "9.0.11 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/9.0/9.0.11/9.0.11.md",
+            "path": "/9.0/9.0.11/9.0.11.md",
+            "title": "9.0.11 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "9.0.112",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/sdk-9.0.1xx.json",
+            "path": "/9.0/sdk/sdk-9.0.1xx.json",
+            "title": ".NET SDK 9.0.1xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/9.0.112.md",
+            "path": "/9.0/9.0.11/9.0.112.md",
+            "title": "SDK 9.0.112 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/9.0/9.0.11/9.0.112.md",
+            "path": "/9.0/9.0.11/9.0.112.md",
+            "title": "SDK 9.0.112 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.468449\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:06.2014168\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

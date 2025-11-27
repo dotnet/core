@@ -1,9 +1,19 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-patch-detail-index.json",
-  "kind": "patch-release-index",
+  "kind": "patch-version-index",
   "version": "8.0.3",
+  "date": "2024-03-12T00:00:00\u002B00:00",
+  "security": true,
+  "cve_count": 2,
+  "support_phase": "active",
   "title": ".NET 8.0.3 Patch Index",
   "description": "Patch information for .NET 8.0.3",
+  "runtime_version": "8.0.3",
+  "sdk_versions": [
+    "8.0.203",
+    "8.0.202",
+    "8.0.103"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/index.json",
@@ -11,7 +21,7 @@
       "title": "8.0.3 Patch Index",
       "type": "application/hal\u002Bjson"
     },
-    "release": {
+    "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/release.json",
       "path": "/8.0/8.0.3/release.json",
       "title": "8.0.3 Release Information",
@@ -29,7 +39,7 @@
       "title": ".NET SDK 8.0 Release Information",
       "type": "application/hal\u002Bjson"
     },
-    "month-timeline-index": {
+    "month-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json",
       "path": "/timeline/2024/03/index.json",
       "title": "Release timeline index for 2024-03",
@@ -42,12 +52,96 @@
       "type": "application/json"
     }
   },
-  "lifecycle": {
-    "phase": "active",
-    "release-date": "2024-03-12T00:00:00\u002B00:00"
-  },
   "_embedded": {
-    "cve-records": [
+    "runtime": {
+      "version": "8.0.3",
+      "_links": {
+        "release-notes-markdown": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/8.0.3.md",
+          "path": "/8.0/8.0.3/8.0.3.md",
+          "title": "8.0.3 Release Notes",
+          "type": "application/markdown"
+        },
+        "release-notes-markdown-rendered": {
+          "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.3/8.0.3.md",
+          "path": "/8.0/8.0.3/8.0.3.md",
+          "title": "8.0.3 Release Notes (Rendered)",
+          "type": "application/markdown"
+        }
+      }
+    },
+    "sdks": [
+      {
+        "version": "8.0.203",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.2xx.json",
+            "path": "/8.0/sdk/sdk-8.0.2xx.json",
+            "title": ".NET SDK 8.0.2xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/8.0.203.md",
+            "path": "/8.0/8.0.3/8.0.203.md",
+            "title": "SDK 8.0.203 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.3/8.0.203.md",
+            "path": "/8.0/8.0.3/8.0.203.md",
+            "title": "SDK 8.0.203 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.202",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.2xx.json",
+            "path": "/8.0/sdk/sdk-8.0.2xx.json",
+            "title": ".NET SDK 8.0.2xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/8.0.3.md",
+            "path": "/8.0/8.0.3/8.0.3.md",
+            "title": "8.0.3 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.3/8.0.3.md",
+            "path": "/8.0/8.0.3/8.0.3.md",
+            "title": "8.0.3 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.103",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.1xx.json",
+            "path": "/8.0/sdk/sdk-8.0.1xx.json",
+            "title": ".NET SDK 8.0.1xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/8.0.103.md",
+            "path": "/8.0/8.0.3/8.0.103.md",
+            "title": "SDK 8.0.103 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.3/8.0.103.md",
+            "path": "/8.0/8.0.3/8.0.103.md",
+            "title": "SDK 8.0.103 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      }
+    ],
+    "cve_records": [
       "CVE-2024-21392",
       "CVE-2024-26190"
     ],
@@ -56,28 +150,19 @@
         "id": "CVE-2024-21392",
         "title": ".NET Denial of Service Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/299",
-            "title": "Announcement for CVE-2024-21392"
+            "title": "CVE-2024-21392"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/0c7efec09666babeebea1f608c91757b8faccca0.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2024-03-12",
+        "affected_releases": [
+          "0c7efec09666babeebea1f608c91757b8faccca0",
+          "24a00b5b75b4e60620768e02c11e79bc65386e5b"
         ],
-        "cvss-score": 7.5,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2024-03-12",
-        "affected-releases": [
-          "7.0",
-          "8.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
         "platforms": [
@@ -88,28 +173,19 @@
         "id": "CVE-2024-26190",
         "title": "Microsoft QUIC Denial of Service Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/300",
-            "title": "Announcement for CVE-2024-26190"
+            "title": "CVE-2024-26190"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/ddb41ec46ddc558be2f43135a1daa01ebac8e841.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2024-03-12",
+        "affected_releases": [
+          "8a9929bf0b6ae93ea10f4c3e71b03b9958411c1d",
+          "ddb41ec46ddc558be2f43135a1daa01ebac8e841"
         ],
-        "cvss-score": 7.5,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2024-03-12",
-        "affected-releases": [
-          "7.0",
-          "8.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
         "platforms": [
@@ -119,8 +195,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.431603\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:02:42.6450529\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

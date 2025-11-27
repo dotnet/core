@@ -1,10 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2024-03",
-  "description": "Release timeline for 2024-03 (6.0\u20139.0, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2024-03 (latest: 9.0)",
   "year": "2024",
   "month": "03",
+  "security": true,
+  "latest_release": "9.0",
+  "releases": [
+    "9.0",
+    "8.0",
+    "7.0",
+    "6.0"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json",
@@ -18,16 +26,16 @@
       "title": "CVE Information",
       "type": "application/json"
     },
-    "cve-markdown-raw": {
+    "cve-markdown": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/cve.md",
       "path": "/timeline/2024/03/cve.md",
-      "title": "CVE Information (Raw Markdown)",
+      "title": "CVE Information",
       "type": "application/markdown"
     },
-    "cve-markdown": {
+    "cve-markdown-rendered": {
       "href": "https://github.com/dotnet/core/blob/main/release-notes/timeline/2024/03/cve.md",
       "path": "/timeline/2024/03/cve.md",
-      "title": "CVE Information (Markdown)",
+      "title": "CVE Information (Rendered)",
       "type": "application/markdown"
     },
     "prev": {
@@ -44,179 +52,185 @@
     }
   },
   "_embedded": {
-    "releases": {
-      "9.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "9.0.0-preview.2.24128.5"
-          ],
-          "dotnet-sdk": [
-            "9.0.100-preview.2.24157.14"
-          ]
-        },
+    "releases": [
+      {
+        "version": "9.0",
+        "release_type": "sts",
+        "phase": "preview",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2024-09-10T00:00:00\u002B00:00",
+        "eol_date": "2026-11-10T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "9.0.0-preview.2.24128.5"
+        ],
+        "sdk_patches": [
+          "9.0.100-preview.2.24157.14"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
             "path": "/9.0/index.json",
-            "title": ".NET 9.0 Version Index",
+            "title": ".NET 9.0",
             "type": "application/hal\u002Bjson"
           },
-          "9.0.0-preview.2.24128.5": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.2/release.json",
-            "path": "/9.0/9.0.0-preview.2/release.json",
-            "title": ".NET 9.0.0-preview.2.24128.5 Release",
-            "type": "application/json"
-          },
-          "9.0.0-preview.2.24128.5-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.2/README.md",
-            "path": "/9.0/9.0.0-preview.2/README.md",
-            "title": ".NET 9.0.0-preview.2.24128.5 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
-          },
-          "sdk-index": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
-            "path": "/9.0/sdk/index.json",
-            "title": ".NET SDK 9.0 Release Information",
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.2.24128.5/index.json",
+            "path": "/9.0/9.0.0-preview.2.24128.5/index.json",
+            "title": ".NET 9.0.0-preview.2.24128.5",
             "type": "application/hal\u002Bjson"
-          },
-          "sdk-9.0.1xx": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/sdk-9.0.1xx.json",
-            "path": "/9.0/sdk/sdk-9.0.1xx.json",
-            "title": ".NET SDK 9.0.1xx",
-            "type": "application/json"
           }
         }
       },
-      "8.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "8.0.3"
-          ],
-          "dotnet-sdk": [
-            "8.0.203",
-            "8.0.202",
-            "8.0.103"
-          ]
-        },
-        "cve-records": [
+      {
+        "version": "8.0",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": true,
+        "security": true,
+        "cve_count": 2,
+        "ga_date": "2023-09-14T00:00:00\u002B00:00",
+        "eol_date": "2026-11-10T00:00:00\u002B00:00",
+        "cve_records": [
           "CVE-2024-26190",
           "CVE-2024-21392"
         ],
+        "runtimes_patches": [
+          "8.0.3"
+        ],
+        "sdk_patches": [
+          "8.0.203",
+          "8.0.202",
+          "8.0.103"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
             "path": "/8.0/index.json",
-            "title": ".NET 8.0 Version Index",
+            "title": ".NET 8.0",
             "type": "application/hal\u002Bjson"
           },
-          "8.0.3": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/release.json",
-            "path": "/8.0/8.0.3/release.json",
-            "title": ".NET 8.0.3 Release",
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/index.json",
+            "path": "/8.0/8.0.3/index.json",
+            "title": ".NET 8.0.3",
+            "type": "application/hal\u002Bjson"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/cve.json",
+            "path": "/timeline/2024/03/cve.json",
+            "title": "CVE Information",
             "type": "application/json"
           },
-          "8.0.3-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/README.md",
-            "path": "/8.0/8.0.3/README.md",
-            "title": ".NET 8.0.3 Release Notes (Raw Markdown)",
+          "cve-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/cve.md",
+            "path": "/timeline/2024/03/cve.md",
+            "title": "CVE Information",
             "type": "application/markdown"
           },
-          "sdk-index": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
-            "path": "/8.0/sdk/index.json",
-            "title": ".NET SDK 8.0 Release Information",
-            "type": "application/hal\u002Bjson"
-          },
-          "sdk-8.0.2xx": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.2xx.json",
-            "path": "/8.0/sdk/sdk-8.0.2xx.json",
-            "title": ".NET SDK 8.0.2xx",
-            "type": "application/json"
-          },
-          "sdk-8.0.1xx": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.1xx.json",
-            "path": "/8.0/sdk/sdk-8.0.1xx.json",
-            "title": ".NET SDK 8.0.1xx",
-            "type": "application/json"
+          "cve-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/timeline/2024/03/cve.md",
+            "path": "/timeline/2024/03/cve.md",
+            "title": "CVE Information (Rendered)",
+            "type": "application/markdown"
           }
         }
       },
-      "7.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "7.0.17"
-          ],
-          "dotnet-sdk": [
-            "7.0.407",
-            "7.0.314",
-            "7.0.117"
-          ]
-        },
-        "cve-records": [
+      {
+        "version": "7.0",
+        "release_type": "sts",
+        "phase": "active",
+        "supported": false,
+        "security": true,
+        "cve_count": 2,
+        "ga_date": "2022-09-14T00:00:00\u002B00:00",
+        "eol_date": "2024-05-14T00:00:00\u002B00:00",
+        "cve_records": [
           "CVE-2024-26190",
           "CVE-2024-21392"
         ],
+        "runtimes_patches": [
+          "7.0.17"
+        ],
+        "sdk_patches": [
+          "7.0.407",
+          "7.0.314",
+          "7.0.117"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/index.json",
             "path": "/7.0/index.json",
-            "title": ".NET 7.0 Version Index",
+            "title": ".NET 7.0",
             "type": "application/hal\u002Bjson"
           },
-          "7.0.17": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.17/release.json",
-            "path": "/7.0/7.0.17/release.json",
-            "title": ".NET 7.0.17 Release",
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.17/index.json",
+            "path": "/7.0/7.0.17/index.json",
+            "title": ".NET 7.0.17",
+            "type": "application/hal\u002Bjson"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/cve.json",
+            "path": "/timeline/2024/03/cve.json",
+            "title": "CVE Information",
             "type": "application/json"
           },
-          "7.0.17-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.17/README.md",
-            "path": "/7.0/7.0.17/README.md",
-            "title": ".NET 7.0.17 Release Notes (Raw Markdown)",
+          "cve-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/cve.md",
+            "path": "/timeline/2024/03/cve.md",
+            "title": "CVE Information",
+            "type": "application/markdown"
+          },
+          "cve-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/timeline/2024/03/cve.md",
+            "path": "/timeline/2024/03/cve.md",
+            "title": "CVE Information (Rendered)",
             "type": "application/markdown"
           }
         }
       },
-      "6.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "6.0.28"
-          ],
-          "dotnet-sdk": [
-            "6.0.420",
-            "6.0.128"
-          ]
-        },
+      {
+        "version": "6.0",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2021-09-14T00:00:00\u002B00:00",
+        "eol_date": "2024-11-12T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "6.0.28"
+        ],
+        "sdk_patches": [
+          "6.0.420",
+          "6.0.128"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/index.json",
             "path": "/6.0/index.json",
-            "title": ".NET 6.0 Version Index",
+            "title": ".NET 6.0",
             "type": "application/hal\u002Bjson"
           },
-          "6.0.28": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.28/release.json",
-            "path": "/6.0/6.0.28/release.json",
-            "title": ".NET 6.0.28 Release",
-            "type": "application/json"
-          },
-          "6.0.28-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.28/README.md",
-            "path": "/6.0/6.0.28/README.md",
-            "title": ".NET 6.0.28 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.28/index.json",
+            "path": "/6.0/6.0.28/index.json",
+            "title": ".NET 6.0.28",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    },
+    ],
     "disclosures": [
       {
         "id": "CVE-2024-26190",
         "title": "Microsoft QUIC Denial of Service Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/300",
-            "title": "Announcement for CVE-2024-26190"
+            "title": "CVE-2024-26190"
           }
         },
         "fixes": [
@@ -235,14 +249,14 @@
             "release": "8.0"
           }
         ],
-        "cvss-score": 7.5,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2024-03-12",
-        "affected-releases": [
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2024-03-12",
+        "affected_releases": [
           "7.0",
           "8.0"
         ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
         "platforms": [
@@ -253,9 +267,9 @@
         "id": "CVE-2024-21392",
         "title": ".NET Denial of Service Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/299",
-            "title": "Announcement for CVE-2024-21392"
+            "title": "CVE-2024-21392"
           }
         },
         "fixes": [
@@ -274,14 +288,14 @@
             "release": "7.0"
           }
         ],
-        "cvss-score": 7.5,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2024-03-12",
-        "affected-releases": [
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2024-03-12",
+        "affected_releases": [
           "7.0",
           "8.0"
         ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
         "platforms": [
@@ -291,8 +305,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.500358\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7523289\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }

@@ -1,10 +1,17 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2017-05",
-  "description": "Release timeline for 2017-05 (1.0\u20132.0, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2017-05 (latest: 2.0)",
   "year": "2017",
   "month": "05",
+  "security": false,
+  "latest_release": "2.0",
+  "releases": [
+    "2.0",
+    "1.1",
+    "1.0"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2017/05/index.json",
@@ -26,93 +33,93 @@
     }
   },
   "_embedded": {
-    "releases": {
-      "2.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "2.0.0-preview1-002111-00"
-          ]
-        },
+    "releases": [
+      {
+        "version": "2.0",
+        "release_type": "sts",
+        "phase": "preview",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2017-08-14T00:00:00\u002B00:00",
+        "eol_date": "2018-10-01T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "2.0.0-preview1-002111-00"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.0/index.json",
             "path": "/2.0/index.json",
-            "title": ".NET 2.0 Version Index",
+            "title": ".NET 2.0",
             "type": "application/hal\u002Bjson"
           },
-          "2.0.0-preview1-002111-00": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.0/2.0.0-preview1/release.json",
-            "path": "/2.0/2.0.0-preview1/release.json",
-            "title": ".NET 2.0.0-preview1-002111-00 Release",
-            "type": "application/json"
-          },
-          "2.0.0-preview1-002111-00-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.0/2.0.0-preview1/README.md",
-            "path": "/2.0/2.0.0-preview1/README.md",
-            "title": ".NET 2.0.0-preview1-002111-00 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.0/2.0.0-preview1-002111-00/index.json",
+            "path": "/2.0/2.0.0-preview1-002111-00/index.json",
+            "title": ".NET 2.0.0-preview1-002111-00",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "1.1": {
-        "patches": {
-          "dotnet-runtime": [
-            "1.1.2"
-          ]
-        },
+      {
+        "version": "1.1",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2016-11-16T00:00:00\u002B00:00",
+        "eol_date": "2019-06-27T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "1.1.2"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/index.json",
             "path": "/1.1/index.json",
-            "title": ".NET 1.1 Version Index",
+            "title": ".NET 1.1",
             "type": "application/hal\u002Bjson"
           },
-          "1.1.2": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/1.1.2/release.json",
-            "path": "/1.1/1.1.2/release.json",
-            "title": ".NET 1.1.2 Release",
-            "type": "application/json"
-          },
-          "1.1.2-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/1.1.2/README.md",
-            "path": "/1.1/1.1.2/README.md",
-            "title": ".NET 1.1.2 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/1.1.2/index.json",
+            "path": "/1.1/1.1.2/index.json",
+            "title": ".NET 1.1.2",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "1.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "1.0.5"
-          ]
-        },
+      {
+        "version": "1.0",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2016-06-27T00:00:00\u002B00:00",
+        "eol_date": "2019-06-27T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "1.0.5"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/index.json",
             "path": "/1.0/index.json",
-            "title": ".NET 1.0 Version Index",
+            "title": ".NET 1.0",
             "type": "application/hal\u002Bjson"
           },
-          "1.0.5": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/1.0.5/release.json",
-            "path": "/1.0/1.0.5/release.json",
-            "title": ".NET 1.0.5 Release",
-            "type": "application/json"
-          },
-          "1.0.5-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/1.0.5/README.md",
-            "path": "/1.0/1.0.5/README.md",
-            "title": ".NET 1.0.5 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/1.0.5/index.json",
+            "path": "/1.0/1.0.5/index.json",
+            "title": ".NET 1.0.5",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.812395\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7666491\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }
