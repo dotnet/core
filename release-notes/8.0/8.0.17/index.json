@@ -154,12 +154,21 @@
             "title": "CVE-2025-30399"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/b33d4e34e1cbf993583d78fc1b64ea8400935978.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 7.5,
         "cvss_severity": "HIGH",
         "disclosure_date": "2025-06-10",
         "affected_releases": [
-          "214743ee2a5a25b9a3a07e3f0451da73eb4e97e2",
-          "b33d4e34e1cbf993583d78fc1b64ea8400935978"
+          "8.0",
+          "9.0"
         ],
         "affected_products": [
           "dotnet-runtime"
@@ -172,7 +181,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T04:02:42.6397488\u002B00:00",
+    "generated_on": "2025-11-27T06:09:49.9992015\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }

@@ -4,7 +4,7 @@
 ## Rules
 1. Use JSON files, not Markdown
 2. Follow `_links.*.href` exactly — never construct URLs
-3. Fetch `commits.*.url` directly — these are pre-authorized `.diff` URLs
+3. Fetch `commits[hash].url` directly — these are pre-authorized GitHub `.diff` URLs for the fixes.
 
 ## Entry Points
 
@@ -24,6 +24,8 @@ Both indexes cross-link via `_links`.
 1. Timeline Index → latest year → find month with `"security": true`
 2. Fetch that month's `_links.cve-json.href`
 3. Everything is in the response — no additional fetches needed
+
+To analyze how a CVE was fixed, map `products[].commits[]` hashes to the top-level `commits[hash].url`, fetch those `.diffs`, and reason over the code changes. The same pattern can be used for `packages[].commits[]`.
 
 After presenting CVEs, ask: "Would you like inline diffs for these fixes?"
 

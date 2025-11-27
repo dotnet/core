@@ -160,11 +160,8 @@
         "cvss_severity": "HIGH",
         "disclosure_date": "2025-10-14",
         "affected_releases": [
-          "02bf66295b64ab368d12933041f7281aad186a2d",
-          "09c1be8483dad070189c3a0c660e7acacf478402",
-          "728984d96edf07d56918a88b0f37fec6b1dfbbc9",
-          "aa888d3214e5adb503c48c3bad2bfc6c5aff638a",
-          "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
+          "8.0",
+          "9.0"
         ],
         "affected_products": [
           "dotnet-sdk"
@@ -182,12 +179,21 @@
             "title": "CVE-2025-55248"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/44527b9ed8427463578126a4494c3654dda11866.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 4.8,
         "cvss_severity": "MEDIUM",
         "disclosure_date": "2025-10-14",
         "affected_releases": [
-          "18e28d767acf44208afa6c4e2e67a10c65e9647e",
-          "44527b9ed8427463578126a4494c3654dda11866"
+          "8.0",
+          "9.0"
         ],
         "affected_products": [
           "dotnet-runtime"
@@ -205,12 +211,21 @@
             "title": "CVE-2025-55315"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/aspnetcore/commit/61794b7f3aac0b6719f783db5b5c725fefc8b695.diff",
+            "repo": "dotnet/aspnetcore",
+            "branch": "release/8.0",
+            "title": "Fix commit in aspnetcore (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 9.9,
         "cvss_severity": "CRITICAL",
         "disclosure_date": "2025-10-14",
         "affected_releases": [
-          "61794b7f3aac0b6719f783db5b5c725fefc8b695",
-          "97a86434195a82fc7e302a4c57d5ec7f885c1ad5"
+          "8.0",
+          "9.0"
         ],
         "affected_products": [
           "dotnet-aspnetcore"
@@ -223,7 +238,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T04:02:42.6350577\u002B00:00",
+    "generated_on": "2025-11-27T06:09:49.9979442\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
