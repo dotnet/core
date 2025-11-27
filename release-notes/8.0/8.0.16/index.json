@@ -202,15 +202,28 @@
             "title": "CVE-2025-26646"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/sdk/commit/7892f91f7191adb473a9e97a79e1c4ca8a2c9247.diff",
+            "repo": "dotnet/sdk",
+            "branch": "release/8.0",
+            "title": "Fix commit in sdk (release/8.0)",
+            "release": "8.0"
+          },
+          {
+            "href": "https://github.com/dotnet/sdk/commit/d00609e7978ee1b0fe62b39a378611311cf85603.diff",
+            "repo": "dotnet/sdk",
+            "branch": "release/8.0",
+            "title": "Fix commit in sdk (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 8,
         "cvss_severity": "HIGH",
         "disclosure_date": "2025-05-13",
         "affected_releases": [
-          "070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753",
-          "391e16c3b5c49938029e20d9ee69c4d5bdf51c70",
-          "7892f91f7191adb473a9e97a79e1c4ca8a2c9247",
-          "ad312fc3980fd8c562fac172bc17318c447eeb75",
-          "d00609e7978ee1b0fe62b39a378611311cf85603"
+          "8.0",
+          "9.0"
         ],
         "affected_products": [
           "dotnet-sdk"
@@ -223,7 +236,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T04:02:42.6401118\u002B00:00",
+    "generated_on": "2025-11-27T06:09:49.9996161\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
