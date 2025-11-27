@@ -1,10 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2020-12",
-  "description": "Release timeline for 2020-12 (5.0\u20135.0, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2020-12 (latest: 5.0)",
   "year": "2020",
   "month": "12",
+  "security": false,
+  "latest_release": "5.0",
+  "releases": [
+    "5.0"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/12/index.json",
@@ -17,45 +22,51 @@
       "path": "/timeline/2020/11/index.json",
       "title": "Release timeline index for 2020-11",
       "type": "application/hal\u002Bjson"
+    },
+    "next": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2021/01/index.json",
+      "path": "/timeline/2021/01/index.json",
+      "title": "Release timeline index for 2021-01",
+      "type": "application/hal\u002Bjson"
     }
   },
   "_embedded": {
-    "releases": {
-      "5.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "5.0.1"
-          ],
-          "dotnet-sdk": [
-            "5.0.101"
-          ]
-        },
+    "releases": [
+      {
+        "version": "5.0",
+        "release_type": "sts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2020-09-14T00:00:00\u002B00:00",
+        "eol_date": "2022-05-10T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "5.0.1"
+        ],
+        "sdk_patches": [
+          "5.0.101"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/index.json",
             "path": "/5.0/index.json",
-            "title": ".NET 5.0 Version Index",
+            "title": ".NET 5.0",
             "type": "application/hal\u002Bjson"
           },
-          "5.0.1": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.1/release.json",
-            "path": "/5.0/5.0.1/release.json",
-            "title": ".NET 5.0.1 Release",
-            "type": "application/json"
-          },
-          "5.0.1-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.1/README.md",
-            "path": "/5.0/5.0.1/README.md",
-            "title": ".NET 5.0.1 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.1/index.json",
+            "path": "/5.0/5.0.1/index.json",
+            "title": ".NET 5.0.1",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.646933\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7602793\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }

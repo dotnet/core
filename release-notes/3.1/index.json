@@ -1,8 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-version-index.json",
-  "kind": "major-release-index",
+  "kind": "major-version-index",
   "title": ".NET 3.1 Patch Release Index",
-  "description": "Index of .NET versions 3.1.0\u20133.1.32 (latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": ".NET 3.1 (latest: 3.1.32)",
+  "release_type": "lts",
+  "phase": "eol",
+  "supported": false,
+  "ga_date": "2019-12-03T00:00:00\u002B00:00",
+  "eol_date": "2022-12-13T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/index.json",
@@ -22,25 +27,18 @@
       "title": "Complete (large file) release information for all patch releases",
       "type": "application/json"
     },
-    "linux-packages-markdown-raw": {
+    "linux-packages-markdown": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/linux-packages.md",
       "path": "/3.1/linux-packages.md",
-      "title": "Linux Packages (Raw Markdown)",
+      "title": "Linux Packages",
       "type": "application/markdown"
     },
-    "linux-packages-markdown": {
+    "linux-packages-markdown-rendered": {
       "href": "https://github.com/dotnet/core/blob/main/release-notes/3.1/linux-packages.md",
       "path": "/3.1/linux-packages.md",
-      "title": "Linux Packages (Markdown)",
+      "title": "Linux Packages (Rendered)",
       "type": "application/markdown"
     }
-  },
-  "lifecycle": {
-    "release-type": "lts",
-    "phase": "eol",
-    "release-date": "2019-12-03T00:00:00\u002B00:00",
-    "eol-date": "2022-12-13T00:00:00\u002B00:00",
-    "supported": false
   },
   "_embedded": {
     "releases": [],
@@ -92,8 +90,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.514184\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T01:47:55.6478482\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

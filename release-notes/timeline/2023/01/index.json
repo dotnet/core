@@ -1,15 +1,27 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2023-01",
-  "description": "Release timeline for 2023-01 (6.0\u20137.0, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2023-01 (latest: 7.0)",
   "year": "2023",
   "month": "01",
+  "security": false,
+  "latest_release": "7.0",
+  "releases": [
+    "7.0",
+    "6.0"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/01/index.json",
       "path": "/timeline/2023/01/index.json",
       "title": "Release timeline index for 2023-01",
+      "type": "application/hal\u002Bjson"
+    },
+    "prev": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2022/12/index.json",
+      "path": "/timeline/2022/12/index.json",
+      "title": "Release timeline index for 2022-12",
       "type": "application/hal\u002Bjson"
     },
     "next": {
@@ -20,74 +32,74 @@
     }
   },
   "_embedded": {
-    "releases": {
-      "7.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "7.0.2"
-          ],
-          "dotnet-sdk": [
-            "7.0.102"
-          ]
-        },
+    "releases": [
+      {
+        "version": "7.0",
+        "release_type": "sts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2022-09-14T00:00:00\u002B00:00",
+        "eol_date": "2024-05-14T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "7.0.2"
+        ],
+        "sdk_patches": [
+          "7.0.102"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/index.json",
             "path": "/7.0/index.json",
-            "title": ".NET 7.0 Version Index",
+            "title": ".NET 7.0",
             "type": "application/hal\u002Bjson"
           },
-          "7.0.2": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.2/release.json",
-            "path": "/7.0/7.0.2/release.json",
-            "title": ".NET 7.0.2 Release",
-            "type": "application/json"
-          },
-          "7.0.2-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.2/README.md",
-            "path": "/7.0/7.0.2/README.md",
-            "title": ".NET 7.0.2 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.2/index.json",
+            "path": "/7.0/7.0.2/index.json",
+            "title": ".NET 7.0.2",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "6.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "6.0.13"
-          ],
-          "dotnet-sdk": [
-            "6.0.405",
-            "6.0.308",
-            "6.0.113"
-          ]
-        },
+      {
+        "version": "6.0",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2021-09-14T00:00:00\u002B00:00",
+        "eol_date": "2024-11-12T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "6.0.13"
+        ],
+        "sdk_patches": [
+          "6.0.405",
+          "6.0.308",
+          "6.0.113"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/index.json",
             "path": "/6.0/index.json",
-            "title": ".NET 6.0 Version Index",
+            "title": ".NET 6.0",
             "type": "application/hal\u002Bjson"
           },
-          "6.0.13": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.13/release.json",
-            "path": "/6.0/6.0.13/release.json",
-            "title": ".NET 6.0.13 Release",
-            "type": "application/json"
-          },
-          "6.0.13-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.13/README.md",
-            "path": "/6.0/6.0.13/README.md",
-            "title": ".NET 6.0.13 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.13/index.json",
+            "path": "/6.0/6.0.13/index.json",
+            "title": ".NET 6.0.13",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.558334\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7558978\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }

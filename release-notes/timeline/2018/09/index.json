@@ -1,10 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2018-09",
-  "description": "Release timeline for 2018-09 (2.1\u20132.2, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2018-09 (latest: 2.2)",
   "year": "2018",
   "month": "09",
+  "security": false,
+  "latest_release": "2.2",
+  "releases": [
+    "2.2",
+    "2.1"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/09/index.json",
@@ -26,66 +32,66 @@
     }
   },
   "_embedded": {
-    "releases": {
-      "2.2": {
-        "patches": {
-          "dotnet-runtime": [
-            "2.2.0-preview2-26905-02"
-          ]
-        },
+    "releases": [
+      {
+        "version": "2.2",
+        "release_type": "sts",
+        "phase": "preview",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2018-12-04T00:00:00\u002B00:00",
+        "eol_date": "2019-12-23T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "2.2.0-preview2-26905-02"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/index.json",
             "path": "/2.2/index.json",
-            "title": ".NET 2.2 Version Index",
+            "title": ".NET 2.2",
             "type": "application/hal\u002Bjson"
           },
-          "2.2.0-preview2-26905-02": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.0-preview2/release.json",
-            "path": "/2.2/2.2.0-preview2/release.json",
-            "title": ".NET 2.2.0-preview2-26905-02 Release",
-            "type": "application/json"
-          },
-          "2.2.0-preview2-26905-02-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.0-preview2/README.md",
-            "path": "/2.2/2.2.0-preview2/README.md",
-            "title": ".NET 2.2.0-preview2-26905-02 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.0-preview2-26905-02/index.json",
+            "path": "/2.2/2.2.0-preview2-26905-02/index.json",
+            "title": ".NET 2.2.0-preview2-26905-02",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "2.1": {
-        "patches": {
-          "dotnet-runtime": [
-            "2.1.4"
-          ]
-        },
+      {
+        "version": "2.1",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2018-05-07T00:00:00\u002B00:00",
+        "eol_date": "2021-08-21T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "2.1.4"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/index.json",
             "path": "/2.1/index.json",
-            "title": ".NET 2.1 Version Index",
+            "title": ".NET 2.1",
             "type": "application/hal\u002Bjson"
           },
-          "2.1.4": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.4/release.json",
-            "path": "/2.1/2.1.4/release.json",
-            "title": ".NET 2.1.4 Release",
-            "type": "application/json"
-          },
-          "2.1.4-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.4/README.md",
-            "path": "/2.1/2.1.4/README.md",
-            "title": ".NET 2.1.4 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.4/index.json",
+            "path": "/2.1/2.1.4/index.json",
+            "title": ".NET 2.1.4",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.760389\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7646247\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }
