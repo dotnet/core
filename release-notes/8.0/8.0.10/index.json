@@ -157,11 +157,20 @@
             "title": "CVE-2024-38229"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/aspnetcore/commit/1002b673be5803ba63173ef8a2fdebe3e388a34a.diff",
+            "repo": "dotnet/aspnetcore",
+            "branch": "release/8.0",
+            "title": "Fix commit in aspnetcore (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 8.1,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-10-08",
         "affected_releases": [
-          "1002b673be5803ba63173ef8a2fdebe3e388a34a"
+          "8.0"
         ],
         "affected_products": [
           "dotnet-aspnetcore"
@@ -179,12 +188,22 @@
             "title": "CVE-2024-43483"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 7.5,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-10-08",
         "affected_releases": [
-          "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8",
-          "741b04589cdd3514d032cbfd041fb7178bbd15c9"
+          "6.0",
+          "8.0",
+          "9.0"
         ],
         "affected_products": [
           "dotnet-runtime"
@@ -207,14 +226,28 @@
             "title": "CVE-2024-43484"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          },
+          {
+            "href": "https://github.com/dotnet/runtime/commit/c2891d32a0408ce62771120dd7c03bc3dde1fca7.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 7.5,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-10-08",
         "affected_releases": [
-          "132fb31922b8c4d5fb11ac6294042d7bb1a4b1d8",
-          "40d60a122dfd637e1b8a7cccbbbc363d508fb0d7",
-          "741b04589cdd3514d032cbfd041fb7178bbd15c9",
-          "c2891d32a0408ce62771120dd7c03bc3dde1fca7"
+          "6.0",
+          "8.0"
         ],
         "affected_packages": [
           "System.IO.Packaging"
@@ -232,12 +265,21 @@
             "title": "CVE-2024-43485"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/be46d16f6ff2daa6632136f7f100c5de89de6809.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/8.0",
+            "title": "Fix commit in runtime (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 7.5,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-10-08",
         "affected_releases": [
-          "be46d16f6ff2daa6632136f7f100c5de89de6809",
-          "c3c2cc2e61411fc1c56ca962684348ccf5563ce4"
+          "6.0",
+          "8.0"
         ],
         "affected_products": [
           "dotnet-runtime"
@@ -253,7 +295,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T04:02:42.6426668\u002B00:00",
+    "generated_on": "2025-11-27T06:09:50.0036469\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
