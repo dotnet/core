@@ -154,12 +154,21 @@
             "title": "CVE-2025-24070"
           }
         },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/aspnetcore/commit/67f3b04274d3acb607fe95796dcb35f4f11149bf.diff",
+            "repo": "dotnet/aspnetcore",
+            "branch": "release/8.0",
+            "title": "Fix commit in aspnetcore (release/8.0)",
+            "release": "8.0"
+          }
+        ],
         "cvss_score": 7,
         "cvss_severity": "HIGH",
         "disclosure_date": "2025-03-11",
         "affected_releases": [
-          "67f3b04274d3acb607fe95796dcb35f4f11149bf",
-          "f71e283286d8470639486804053f28391f92fafc"
+          "8.0",
+          "9.0"
         ],
         "affected_products": [
           "dotnet-aspnetcore"
@@ -172,7 +181,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T04:02:42.6408977\u002B00:00",
+    "generated_on": "2025-11-27T06:09:50.0005164\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
