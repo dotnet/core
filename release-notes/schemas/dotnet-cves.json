@@ -454,6 +454,17 @@
       },
       "default": null
     },
+    "severity_cves": {
+      "description": "Dictionary of CVE IDs grouped by severity threshold. Each key includes CVEs with that severity or higher (CRITICAL, HIGH, MEDIUM, LOW).",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "$ref": "#/properties/product_cves/additionalProperties"
+      },
+      "default": null
+    },
     "cve_releases": {
       "description": "Dictionary of release versions affected by each CVE, keyed by CVE ID.",
       "type": [
