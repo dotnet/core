@@ -1,2 +1,2 @@
 # Get the latest LTS version
-."latest-lts"
+.latest_lts
