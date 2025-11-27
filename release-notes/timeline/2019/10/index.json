@@ -1,10 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2019-10",
-  "description": "Release timeline for 2019-10 (3.1\u20133.1, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2019-10 (latest: 3.1)",
   "year": "2019",
   "month": "10",
+  "security": false,
+  "latest_release": "3.1",
+  "releases": [
+    "3.1"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/10/index.json",
@@ -26,42 +31,42 @@
     }
   },
   "_embedded": {
-    "releases": {
-      "3.1": {
-        "patches": {
-          "dotnet-runtime": [
-            "3.1.0-preview1.19506.1"
-          ],
-          "dotnet-sdk": [
-            "3.1.100-preview1-014459"
-          ]
-        },
+    "releases": [
+      {
+        "version": "3.1",
+        "release_type": "lts",
+        "phase": "preview",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2019-12-03T00:00:00\u002B00:00",
+        "eol_date": "2022-12-13T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "3.1.0-preview1.19506.1"
+        ],
+        "sdk_patches": [
+          "3.1.100-preview1-014459"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/index.json",
             "path": "/3.1/index.json",
-            "title": ".NET 3.1 Version Index",
+            "title": ".NET 3.1",
             "type": "application/hal\u002Bjson"
           },
-          "3.1.0-preview1.19506.1": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.0-preview1/release.json",
-            "path": "/3.1/3.1.0-preview1/release.json",
-            "title": ".NET 3.1.0-preview1.19506.1 Release",
-            "type": "application/json"
-          },
-          "3.1.0-preview1.19506.1-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.0-preview1/README.md",
-            "path": "/3.1/3.1.0-preview1/README.md",
-            "title": ".NET 3.1.0-preview1.19506.1 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.0-preview1.19506.1/index.json",
+            "path": "/3.1/3.1.0-preview1.19506.1/index.json",
+            "title": ".NET 3.1.0-preview1.19506.1",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.706241\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7624752\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }

@@ -1,8 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-version-index.json",
-  "kind": "major-release-index",
+  "kind": "major-version-index",
   "title": ".NET 9.0 Patch Release Index",
-  "description": "Index of .NET versions 9.0.0\u20139.0.11 (latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": ".NET 9.0 (latest: 9.0.11)",
+  "latest": "9.0.11",
+  "latest_security": "9.0.10",
+  "release_type": "sts",
+  "phase": "active",
+  "supported": true,
+  "ga_date": "2024-11-12T00:00:00\u002B00:00",
+  "eol_date": "2026-11-10T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
@@ -34,31 +41,39 @@
       "title": "Supported OSes",
       "type": "application/json"
     },
-    "supported-os-markdown-raw": {
+    "supported-os-markdown": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/supported-os.md",
       "path": "/9.0/supported-os.md",
-      "title": "Supported OSes (Raw Markdown)",
+      "title": "Supported OSes",
       "type": "application/markdown"
     },
-    "supported-os-markdown": {
+    "supported-os-markdown-rendered": {
       "href": "https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md",
       "path": "/9.0/supported-os.md",
-      "title": "Supported OSes (Markdown)",
+      "title": "Supported OSes (Rendered)",
       "type": "application/markdown"
+    },
+    "latest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/index.json",
+      "path": "/9.0/9.0.11/index.json",
+      "title": "Latest patch release (9.0.11)",
+      "type": "application/hal\u002Bjson"
+    },
+    "latest-security": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.10/index.json",
+      "path": "/9.0/9.0.10/index.json",
+      "title": "Latest security patch (9.0.10)",
+      "type": "application/hal\u002Bjson"
     }
-  },
-  "lifecycle": {
-    "release-type": "sts",
-    "phase": "active",
-    "release-date": "2024-11-12T00:00:00\u002B00:00",
-    "eol-date": "2026-11-10T00:00:00\u002B00:00",
-    "supported": true
   },
   "_embedded": {
     "releases": [
       {
         "version": "9.0.11",
-        "kind": "patch-release",
+        "date": "2025-11-11T00:00:00\u002B00:00",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/index.json",
@@ -66,15 +81,14 @@
             "title": "9.0.11 Patch Index",
             "type": "application/hal\u002Bjson"
           }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-11-11T00:00:00\u002B00:00"
         }
       },
       {
         "version": "9.0.10",
-        "kind": "patch-release",
+        "date": "2025-10-14T00:00:00\u002B00:00",
+        "security": true,
+        "cve_count": 3,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.10/index.json",
@@ -83,11 +97,7 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-10-14T00:00:00\u002B00:00"
-        },
-        "cve-records": [
+        "cve_records": [
           "CVE-2025-55247",
           "CVE-2025-55315",
           "CVE-2025-55248"
@@ -95,7 +105,10 @@
       },
       {
         "version": "9.0.9",
-        "kind": "patch-release",
+        "date": "2025-09-09T00:00:00\u002B00:00",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.9/index.json",
@@ -103,15 +116,14 @@
             "title": "9.0.9 Patch Index",
             "type": "application/hal\u002Bjson"
           }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-09-09T00:00:00\u002B00:00"
         }
       },
       {
         "version": "9.0.8",
-        "kind": "patch-release",
+        "date": "2025-08-05T00:00:00\u002B00:00",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.8/index.json",
@@ -119,15 +131,14 @@
             "title": "9.0.8 Patch Index",
             "type": "application/hal\u002Bjson"
           }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-08-05T00:00:00\u002B00:00"
         }
       },
       {
         "version": "9.0.7",
-        "kind": "patch-release",
+        "date": "2025-07-17T00:00:00\u002B00:00",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.7/index.json",
@@ -135,15 +146,14 @@
             "title": "9.0.7 Patch Index",
             "type": "application/hal\u002Bjson"
           }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-07-17T00:00:00\u002B00:00"
         }
       },
       {
         "version": "9.0.6",
-        "kind": "patch-release",
+        "date": "2025-06-10T00:00:00\u002B00:00",
+        "security": true,
+        "cve_count": 1,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.6/index.json",
@@ -152,17 +162,16 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-06-10T00:00:00\u002B00:00"
-        },
-        "cve-records": [
+        "cve_records": [
           "CVE-2025-30399"
         ]
       },
       {
         "version": "9.0.5",
-        "kind": "patch-release",
+        "date": "2025-05-13T00:00:00\u002B00:00",
+        "security": true,
+        "cve_count": 1,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.5/index.json",
@@ -171,17 +180,16 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-05-13T00:00:00\u002B00:00"
-        },
-        "cve-records": [
+        "cve_records": [
           "CVE-2025-26646"
         ]
       },
       {
         "version": "9.0.4",
-        "kind": "patch-release",
+        "date": "2025-04-08T00:00:00\u002B00:00",
+        "security": true,
+        "cve_count": 1,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.4/index.json",
@@ -190,17 +198,16 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-04-08T00:00:00\u002B00:00"
-        },
-        "cve-records": [
+        "cve_records": [
           "CVE-2025-26682"
         ]
       },
       {
         "version": "9.0.3",
-        "kind": "patch-release",
+        "date": "2025-03-11T00:00:00\u002B00:00",
+        "security": true,
+        "cve_count": 1,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.3/index.json",
@@ -209,17 +216,16 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-03-11T00:00:00\u002B00:00"
-        },
-        "cve-records": [
+        "cve_records": [
           "CVE-2025-24070"
         ]
       },
       {
         "version": "9.0.2",
-        "kind": "patch-release",
+        "date": "2025-02-11T00:00:00\u002B00:00",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.2/index.json",
@@ -227,15 +233,14 @@
             "title": "9.0.2 Patch Index",
             "type": "application/hal\u002Bjson"
           }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-02-11T00:00:00\u002B00:00"
         }
       },
       {
         "version": "9.0.1",
-        "kind": "patch-release",
+        "date": "2025-01-14T00:00:00\u002B00:00",
+        "security": true,
+        "cve_count": 4,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.1/index.json",
@@ -244,11 +249,7 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-01-14T00:00:00\u002B00:00"
-        },
-        "cve-records": [
+        "cve_records": [
           "CVE-2025-21171",
           "CVE-2025-21172",
           "CVE-2025-21176",
@@ -257,7 +258,10 @@
       },
       {
         "version": "9.0.0",
-        "kind": "patch-release",
+        "date": "2024-12-03T00:00:00\u002B00:00",
+        "security": true,
+        "cve_count": 2,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0/index.json",
@@ -266,11 +270,7 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2024-12-03T00:00:00\u002B00:00"
-        },
-        "cve-records": [
+        "cve_records": [
           "CVE-2024-43498",
           "CVE-2024-43499"
         ]
@@ -300,7 +300,7 @@
         }
       }
     ],
-    "cve-records": [
+    "cve_records": [
       "CVE-2024-43498",
       "CVE-2024-43499",
       "CVE-2025-21171",
@@ -317,8 +317,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.513152\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:06.2239063\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

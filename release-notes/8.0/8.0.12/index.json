@@ -1,9 +1,19 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-patch-detail-index.json",
-  "kind": "patch-release-index",
+  "kind": "patch-version-index",
   "version": "8.0.12",
+  "date": "2025-01-14T00:00:00\u002B00:00",
+  "security": true,
+  "cve_count": 3,
+  "support_phase": "active",
   "title": ".NET 8.0.12 Patch Index",
   "description": "Patch information for .NET 8.0.12",
+  "runtime_version": "8.0.12",
+  "sdk_versions": [
+    "8.0.405",
+    "8.0.308",
+    "8.0.112"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/index.json",
@@ -11,7 +21,7 @@
       "title": "8.0.12 Patch Index",
       "type": "application/hal\u002Bjson"
     },
-    "release": {
+    "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/release.json",
       "path": "/8.0/8.0.12/release.json",
       "title": "8.0.12 Release Information",
@@ -29,7 +39,7 @@
       "title": ".NET SDK 8.0 Release Information",
       "type": "application/hal\u002Bjson"
     },
-    "month-timeline-index": {
+    "month-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/01/index.json",
       "path": "/timeline/2025/01/index.json",
       "title": "Release timeline index for 2025-01",
@@ -42,13 +52,98 @@
       "type": "application/json"
     }
   },
-  "lifecycle": {
-    "phase": "active",
-    "release-date": "2025-01-14T00:00:00\u002B00:00"
-  },
   "_embedded": {
-    "cve-records": [
+    "runtime": {
+      "version": "8.0.12",
+      "_links": {
+        "release-notes-markdown": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/8.0.12.md",
+          "path": "/8.0/8.0.12/8.0.12.md",
+          "title": "8.0.12 Release Notes",
+          "type": "application/markdown"
+        },
+        "release-notes-markdown-rendered": {
+          "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.12/8.0.12.md",
+          "path": "/8.0/8.0.12/8.0.12.md",
+          "title": "8.0.12 Release Notes (Rendered)",
+          "type": "application/markdown"
+        }
+      }
+    },
+    "sdks": [
+      {
+        "version": "8.0.405",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.4xx.json",
+            "path": "/8.0/sdk/sdk-8.0.4xx.json",
+            "title": ".NET SDK 8.0.4xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/8.0.12.md",
+            "path": "/8.0/8.0.12/8.0.12.md",
+            "title": "8.0.12 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.12/8.0.12.md",
+            "path": "/8.0/8.0.12/8.0.12.md",
+            "title": "8.0.12 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.308",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.3xx.json",
+            "path": "/8.0/sdk/sdk-8.0.3xx.json",
+            "title": ".NET SDK 8.0.3xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/8.0.308.md",
+            "path": "/8.0/8.0.12/8.0.308.md",
+            "title": "SDK 8.0.308 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.12/8.0.308.md",
+            "path": "/8.0/8.0.12/8.0.308.md",
+            "title": "SDK 8.0.308 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.112",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.1xx.json",
+            "path": "/8.0/sdk/sdk-8.0.1xx.json",
+            "title": ".NET SDK 8.0.1xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/8.0.112.md",
+            "path": "/8.0/8.0.12/8.0.112.md",
+            "title": "SDK 8.0.112 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.12/8.0.112.md",
+            "path": "/8.0/8.0.12/8.0.112.md",
+            "title": "SDK 8.0.112 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      }
+    ],
+    "cve_records": [
       "CVE-2025-21172",
+      "CVE-2025-21173",
       "CVE-2025-21176"
     ],
     "disclosures": [
@@ -56,28 +151,19 @@
         "id": "CVE-2025-21172",
         "title": ".NET and Visual Studio Remote Code Execution Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/339",
-            "title": "Announcement for CVE-2025-21172"
+            "title": "CVE-2025-21172"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/89ef51c5d8f5239345127a1e282e11036e590c8b.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2025-01-14",
+        "affected_releases": [
+          "32d8ea6eecf7f192a75162645390847b14b56dbb",
+          "89ef51c5d8f5239345127a1e282e11036e590c8b"
         ],
-        "cvss-score": 7.5,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2025-01-14",
-        "affected-releases": [
-          "8.0",
-          "9.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
         "platforms": [
@@ -85,31 +171,47 @@
         ]
       },
       {
+        "id": "CVE-2025-21173",
+        "title": ".NET Elevation of Privilege Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/337",
+            "title": "CVE-2025-21173"
+          }
+        },
+        "cvss_score": 7.3,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2025-01-14",
+        "affected_releases": [
+          "1ba623839f23fe8857d2aa0dc23783692325deab",
+          "2a98e615955be9b9d0752d090c3f92f70c7d0223",
+          "7034fd96502b925b5f65c31e34e99116870bc59f",
+          "802c364c05180a487624fc839870677625810b10"
+        ],
+        "affected_products": [
+          "dotnet-sdk"
+        ],
+        "platforms": [
+          "linux"
+        ]
+      },
+      {
         "id": "CVE-2025-21176",
         "title": ".NET and Visual Studio Remote Code Execution Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/338",
-            "title": "Announcement for CVE-2025-21176"
+            "title": "CVE-2025-21176"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/89ef51c5d8f5239345127a1e282e11036e590c8b.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 8.8,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2025-01-14",
+        "affected_releases": [
+          "32d8ea6eecf7f192a75162645390847b14b56dbb",
+          "89ef51c5d8f5239345127a1e282e11036e590c8b"
         ],
-        "cvss-score": 8.8,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2025-01-14",
-        "affected-releases": [
-          "8.0",
-          "9.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
         "platforms": [
@@ -119,8 +221,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.41576\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:02:42.6416184\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

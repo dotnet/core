@@ -1,169 +1,184 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-sdk-version-index.json",
-  "kind": "index",
-  "component": "sdk",
+  "kind": "sdk-index",
   "version": "10.0",
-  "label": ".NET SDK 10.0",
+  "title": ".NET SDK 10.0 Index",
+  "description": "SDK release index for .NET 10.0",
+  "latest": "10.0.100-rc.2.25502.107",
+  "latest_security": "10.0.100-rc.2.25502.107",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/index.json",
       "path": "/10.0/sdk/index.json",
       "title": ".NET SDK 10.0",
       "type": "application/hal\u002Bjson"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
+      "path": "/10.0/index.json",
+      "title": ".NET 10.0",
+      "type": "application/hal\u002Bjson"
+    },
+    "downloads": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/sdk-10.0.json",
+      "path": "/10.0/sdk/sdk-10.0.json",
+      "title": ".NET SDK 10.0 Downloads",
+      "type": "application/json"
     }
   },
   "_embedded": {
-    "latest-downloads": {
-      "linux-arm": {
-        "name": "dotnet-sdk-linux-arm.tar.gz",
-        "rid": "linux-arm",
-        "os": "linux",
-        "arch": "arm",
+    "releases": [
+      {
+        "version": "10.0.100-rc.2.25502.107",
+        "date": "2025-10-14T00:00:00-08:00",
+        "security": true,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-arm.tar.gz",
-            "title": "Download dotnet-sdk-linux-arm.tar.gz"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-arm.tar.gz.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-rc.2/index.json",
+            "path": "/10.0/10.0.0-rc.2/index.json",
+            "title": "10.0.0-rc.2",
+            "type": "application/hal\u002Bjson"
+          }
+        },
+        "cve_records": [
+          "CVE-2025-55247",
+          "CVE-2025-55315"
+        ]
+      },
+      {
+        "version": "10.0.100-rc.1.25451.107",
+        "date": "2025-09-09T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-rc.1/index.json",
+            "path": "/10.0/10.0.0-rc.1/index.json",
+            "title": "10.0.0-rc.1",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "linux-arm64": {
-        "name": "dotnet-sdk-linux-arm64.tar.gz",
-        "rid": "linux-arm64",
-        "os": "linux",
-        "arch": "arm64",
+      {
+        "version": "10.0.100-preview.7.25380.108",
+        "date": "2025-08-12T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-arm64.tar.gz",
-            "title": "Download dotnet-sdk-linux-arm64.tar.gz"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-arm64.tar.gz.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.7/index.json",
+            "path": "/10.0/10.0.0-preview.7/index.json",
+            "title": "10.0.0-preview.7",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "linux-musl": {
-        "name": "dotnet-sdk-linux-musl-x64.tar.gz",
-        "rid": "linux-musl",
-        "os": "linux",
-        "arch": "musl",
+      {
+        "version": "10.0.100-preview.6.25358.103",
+        "date": "2025-07-15T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-musl-x64.tar.gz",
-            "title": "Download dotnet-sdk-linux-musl-x64.tar.gz"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-musl-x64.tar.gz.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.6/index.json",
+            "path": "/10.0/10.0.0-preview.6/index.json",
+            "title": "10.0.0-preview.6",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "linux-x64": {
-        "name": "dotnet-sdk-linux-x64.tar.gz",
-        "rid": "linux-x64",
-        "os": "linux",
-        "arch": "x64",
+      {
+        "version": "10.0.100-preview.5.25277.114",
+        "date": "2025-06-10T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-x64.tar.gz",
-            "title": "Download dotnet-sdk-linux-x64.tar.gz"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-linux-x64.tar.gz.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.5/index.json",
+            "path": "/10.0/10.0.0-preview.5/index.json",
+            "title": "10.0.0-preview.5",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "osx-arm64": {
-        "name": "dotnet-sdk-osx-arm64.tar.gz",
-        "rid": "osx-arm64",
-        "os": "osx",
-        "arch": "arm64",
+      {
+        "version": "10.0.100-preview.4.25258.110",
+        "date": "2025-05-13T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-osx-arm64.tar.gz",
-            "title": "Download dotnet-sdk-osx-arm64.tar.gz"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-osx-arm64.tar.gz.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.4/index.json",
+            "path": "/10.0/10.0.0-preview.4/index.json",
+            "title": "10.0.0-preview.4",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "osx-x64": {
-        "name": "dotnet-sdk-osx-x64.tar.gz",
-        "rid": "osx-x64",
-        "os": "osx",
-        "arch": "x64",
+      {
+        "version": "10.0.100-preview.3.25201.16",
+        "date": "2025-04-10T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-osx-x64.tar.gz",
-            "title": "Download dotnet-sdk-osx-x64.tar.gz"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-osx-x64.tar.gz.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.3/index.json",
+            "path": "/10.0/10.0.0-preview.3/index.json",
+            "title": "10.0.0-preview.3",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "win-arm64": {
-        "name": "dotnet-sdk-win-arm64.zip",
-        "rid": "win-arm64",
-        "os": "win",
-        "arch": "arm64",
+      {
+        "version": "10.0.100-preview.2.25164.34",
+        "date": "2025-03-18T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-win-arm64.zip",
-            "title": "Download dotnet-sdk-win-arm64.zip"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-win-arm64.zip.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.2/index.json",
+            "path": "/10.0/10.0.0-preview.2/index.json",
+            "title": "10.0.0-preview.2",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "win-x64": {
-        "name": "dotnet-sdk-win-x64.zip",
-        "rid": "win-x64",
-        "os": "win",
-        "arch": "x64",
+      {
+        "version": "10.0.100-preview.1.25120.13",
+        "date": "2025-02-25T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x64.zip",
-            "title": "Download dotnet-sdk-win-x64.zip"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x64.zip.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.1/index.json",
+            "path": "/10.0/10.0.0-preview.1/index.json",
+            "title": "10.0.0-preview.1",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "win-x86": {
-        "name": "dotnet-sdk-win-x86.zip",
-        "rid": "win-x86",
-        "os": "win",
-        "arch": "x86",
+      {
+        "version": "10.0.100",
+        "date": "2025-11-11T00:00:00-08:00",
+        "security": false,
+        "support_phase": "active",
         "_links": {
-          "download": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x86.zip",
-            "title": "Download dotnet-sdk-win-x86.zip"
-          },
-          "hash": {
-            "href": "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x86.zip.sha512",
-            "title": "SHA512 hash file"
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/index.json",
+            "path": "/10.0/10.0.0/index.json",
+            "title": "10.0.0",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    },
-    "sdk-feature-bands": [
+    ],
+    "feature_bands": [
       {
-        "kind": "band",
         "version": "10.0.xx",
+        "date": "2025-11-11T00:00:00-08:00",
         "label": ".NET SDK 10.0.xx",
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/sdk-10.0.xx.json",
@@ -171,185 +186,13 @@
             "title": ".NET SDK 10.0.xx",
             "type": "application/json"
           }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-11-11T00:00:00-08:00"
-        }
-      }
-    ],
-    "releases": [
-      {
-        "version": "10.0.100-rc.2.25502.107",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-rc.2/10.0.0-rc.2.md",
-            "path": "/10.0/10.0.0-rc.2/10.0.0-rc.2.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-10-14T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-rc.1.25451.107",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-rc.1/10.0.0-rc.1.md",
-            "path": "/10.0/10.0.0-rc.1/10.0.0-rc.1.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-09-09T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-preview.7.25380.108",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.7/10.0.0-preview.7.md",
-            "path": "/10.0/10.0.0-preview.7/10.0.0-preview.7.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-08-12T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-preview.6.25358.103",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.6/10.0.0-preview.6.md",
-            "path": "/10.0/10.0.0-preview.6/10.0.0-preview.6.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-07-15T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-preview.5.25277.114",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.5/10.0.0-preview.5.md",
-            "path": "/10.0/10.0.0-preview.5/10.0.0-preview.5.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-06-10T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-preview.4.25258.110",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.4/10.0.0-preview.4.md",
-            "path": "/10.0/10.0.0-preview.4/10.0.0-preview.4.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-05-13T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-preview.3.25201.16",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.3/10.0.0-preview.3.md",
-            "path": "/10.0/10.0.0-preview.3/10.0.0-preview.3.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-04-10T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-preview.2.25164.34",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.2/10.0.0-preview.2.md",
-            "path": "/10.0/10.0.0-preview.2/10.0.0-preview.2.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-03-18T00:00:00-07:00"
-        }
-      },
-      {
-        "version": "10.0.100-preview.1.25120.13",
-        "kind": "patch-release",
-        "_links": {
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.1/10.0.0-preview.1.md",
-            "path": "/10.0/10.0.0-preview.1/10.0.0-preview.1.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-02-25T00:00:00-08:00"
-        }
-      },
-      {
-        "version": "10.0.100",
-        "kind": "patch-release",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/release.json",
-            "path": "/10.0/10.0.0/release.json",
-            "title": "10.0.0 Release Information",
-            "type": "application/json"
-          },
-          "release-notes-markdown": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/10.0.0.md",
-            "path": "/10.0/10.0.0/10.0.0.md",
-            "title": "Release Notes",
-            "type": "application/markdown"
-          }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-11-11T00:00:00-08:00"
         }
       }
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.529663\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T05:02:56.5923763\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

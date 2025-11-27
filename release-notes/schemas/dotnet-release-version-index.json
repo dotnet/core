@@ -154,64 +154,108 @@
                 "description": "Major version identifier (e.g., \u00278.0\u0027, \u00279.0\u0027)",
                 "type": "string"
               },
+              "release_type": {
+                "description": "Release type: lts (Long-Term Support) or sts (Standard-Term Support)",
+                "enum": [
+                  "lts",
+                  "sts",
+                  null
+                ]
+              },
+              "phase": {
+                "description": "Current support phase (preview, go-live, active, maintenance, eol)",
+                "enum": [
+                  "preview",
+                  "go-live",
+                  "active",
+                  "maintenance",
+                  "eol",
+                  null
+                ]
+              },
+              "supported": {
+                "description": "Whether this version is currently supported",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "security": {
+                "description": "True if this release includes security fixes",
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "cve_count": {
+                "description": "Number of CVEs affecting this release",
+                "type": "integer"
+              },
+              "ga_date": {
+                "description": "General Availability date when this version was released",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "eol_date": {
+                "description": "End of Life date when support ends",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "cve_records": {
+                "description": "CVE identifiers affecting this release",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "runtimes_patches": {
+                "description": "Runtime patch versions for this major version released in the period",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "sdk_patches": {
+                "description": "SDK patch versions for this major version released in the period",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
               "_links": {
                 "description": "HAL\u002BJSON links for navigation to this major version\u0027s content",
                 "type": "object",
                 "additionalProperties": {
                   "$ref": "#/properties/_links/additionalProperties"
                 }
-              },
-              "lifecycle": {
-                "description": "Full lifecycle information (release-type, phase, eol-date, supported)",
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "properties": {
-                  "release_type": {
-                    "description": "Support model (LTS or STS), null for feature bands",
-                    "enum": [
-                      "lts",
-                      "sts",
-                      null
-                    ]
-                  },
-                  "phase": {
-                    "description": "Current lifecycle phase",
-                    "enum": [
-                      "preview",
-                      "go-live",
-                      "active",
-                      "maintenance",
-                      "eol"
-                    ]
-                  },
-                  "ga_date": {
-                    "description": "Date when the version became generally available",
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "eol_date": {
-                    "description": "End of Life date when support ends",
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "supported": {
-                    "description": "Whether this release is currently supported (based on EOL date and lifecycle phase)",
-                    "type": "boolean"
-                  }
-                },
-                "required": [
-                  "release_type",
-                  "phase",
-                  "ga_date",
-                  "eol_date"
-                ]
               }
             },
             "required": [
-              "version",
-              "_links"
+              "version"
             ]
           }
         }
