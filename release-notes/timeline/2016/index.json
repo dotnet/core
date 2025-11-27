@@ -1,9 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-year-index",
+  "kind": "year-index",
   "title": ".NET Release Timeline Index - 2016",
-  "description": "Release timeline for 2016 (1.0\u20131.1, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2016 (latest: 1.1)",
   "year": "2016",
+  "latest_month": "11",
+  "latest_release": "1.1",
+  "releases": [
+    "1.1",
+    "1.0"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/index.json",
@@ -16,12 +22,26 @@
       "path": "/timeline/2017/index.json",
       "title": "Release timeline index for 2017",
       "type": "application/hal\u002Bjson"
+    },
+    "latest-month": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/11/index.json",
+      "path": "/timeline/2016/11/index.json",
+      "title": "Latest month (Release timeline index for 2016-11)",
+      "type": "application/hal\u002Bjson"
+    },
+    "latest-release": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/index.json",
+      "path": "/1.1/index.json",
+      "title": "Latest release (.NET 1.1)",
+      "type": "application/hal\u002Bjson"
     }
   },
   "_embedded": {
     "months": [
       {
         "month": "11",
+        "security": false,
+        "cve_count": 0,
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/11/index.json",
@@ -30,12 +50,14 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "dotnet-releases": [
+        "dotnet_releases": [
           "1.1"
         ]
       },
       {
         "month": "12",
+        "security": false,
+        "cve_count": 0,
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/12/index.json",
@@ -44,12 +66,14 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "dotnet-releases": [
+        "dotnet_releases": [
           "1.0"
         ]
       },
       {
         "month": "10",
+        "security": false,
+        "cve_count": 0,
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/10/index.json",
@@ -58,12 +82,14 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "dotnet-releases": [
+        "dotnet_releases": [
           "1.0"
         ]
       },
       {
         "month": "09",
+        "security": false,
+        "cve_count": 0,
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/09/index.json",
@@ -72,12 +98,14 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "dotnet-releases": [
+        "dotnet_releases": [
           "1.0"
         ]
       },
       {
         "month": "06",
+        "security": false,
+        "cve_count": 0,
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/06/index.json",
@@ -86,7 +114,7 @@
             "type": "application/hal\u002Bjson"
           }
         },
-        "dotnet-releases": [
+        "dotnet_releases": [
           "1.0"
         ]
       }
@@ -94,34 +122,34 @@
     "releases": [
       {
         "version": "1.1",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "cve_count": 0,
+        "ga_date": "2016-11-16T00:00:00\u002B00:00",
+        "eol_date": "2019-06-27T00:00:00\u002B00:00",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/index.json",
-            "path": "/timeline/2016/index.json",
-            "title": "Release timeline index for 2016",
-            "type": "application/hal\u002Bjson"
-          },
-          "next": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2017/index.json",
-            "path": "/timeline/2017/index.json",
-            "title": "Release timeline index for 2017",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/index.json",
+            "path": "/1.1/index.json",
+            "title": ".NET 1.1",
             "type": "application/hal\u002Bjson"
           }
         }
       },
       {
         "version": "1.0",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "cve_count": 0,
+        "ga_date": "2016-06-27T00:00:00\u002B00:00",
+        "eol_date": "2019-06-27T00:00:00\u002B00:00",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/index.json",
-            "path": "/timeline/2016/index.json",
-            "title": "Release timeline index for 2016",
-            "type": "application/hal\u002Bjson"
-          },
-          "next": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2017/index.json",
-            "path": "/timeline/2017/index.json",
-            "title": "Release timeline index for 2017",
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/index.json",
+            "path": "/1.0/index.json",
+            "title": ".NET 1.0",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -129,8 +157,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.836411\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7677526\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }

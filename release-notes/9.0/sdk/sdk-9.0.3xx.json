@@ -1,14 +1,28 @@
 {
-  "component": "sdk",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-sdk-download.json",
+  "kind": "sdk-download",
   "version": "9.0.3xx",
-  "label": ".NET SDK 9.0.3xx",
-  "hash-algorithm": "sha512",
+  "support_phase": "active",
+  "title": ".NET SDK 9.0.3xx Downloads",
+  "description": "SDK downloads for .NET SDK 9.0.3xx feature band",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/sdk-9.0.3xx.json",
       "path": "/9.0/sdk/sdk-9.0.3xx.json",
       "title": ".NET SDK 9.0.3xx Downloads",
       "type": "application/json"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
+      "path": "/9.0/sdk/index.json",
+      "title": ".NET SDK 9.0",
+      "type": "application/hal\u002Bjson"
+    },
+    "major-version-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
+      "path": "/9.0/index.json",
+      "title": ".NET 9.0",
+      "type": "application/hal\u002Bjson"
     }
   },
   "_embedded": {
@@ -18,6 +32,7 @@
         "rid": "linux-arm",
         "os": "linux",
         "arch": "arm",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-linux-arm.tar.gz",
@@ -34,6 +49,7 @@
         "rid": "linux-arm64",
         "os": "linux",
         "arch": "arm64",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-linux-arm64.tar.gz",
@@ -50,6 +66,7 @@
         "rid": "linux-musl",
         "os": "linux",
         "arch": "musl",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-linux-musl-x64.tar.gz",
@@ -66,6 +83,7 @@
         "rid": "linux-x64",
         "os": "linux",
         "arch": "x64",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-linux-x64.tar.gz",
@@ -82,6 +100,7 @@
         "rid": "osx-arm64",
         "os": "osx",
         "arch": "arm64",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-osx-arm64.tar.gz",
@@ -98,6 +117,7 @@
         "rid": "osx-x64",
         "os": "osx",
         "arch": "x64",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-osx-x64.tar.gz",
@@ -114,6 +134,7 @@
         "rid": "win-arm64",
         "os": "win",
         "arch": "arm64",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-win-arm64.zip",
@@ -130,6 +151,7 @@
         "rid": "win-x64",
         "os": "win",
         "arch": "x64",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-win-x64.zip",
@@ -146,6 +168,7 @@
         "rid": "win-x86",
         "os": "win",
         "arch": "x86",
+        "hash_algorithm": "sha512",
         "_links": {
           "download": {
             "href": "https://aka.ms/dotnet/9.0.3xx/dotnet-sdk-win-x86.zip",

@@ -6,7 +6,7 @@
   ],
   "properties": {
     "kind": {
-      "description": "Type of release document, always \u0027index\u0027 for SDK indexes",
+      "description": "Type of release document, always \u0027sdk-index\u0027 for SDK indexes",
       "enum": [
         "releases-index",
         "major-version-index",
@@ -27,21 +27,38 @@
         "patch-release"
       ]
     },
-    "component": {
-      "description": "Component type, always \u0027sdk\u0027 for SDK indexes",
-      "type": "string"
-    },
     "version": {
-      "description": "SDK version (e.g., \u00278.0\u0027 for .NET SDK 8.0)",
+      "description": "SDK major version (e.g., \u00278.0\u0027, \u00279.0\u0027)",
       "type": "string"
     },
-    "label": {
-      "description": "Descriptive label for the SDK version",
+    "title": {
+      "description": "Concise title for the document",
       "type": "string"
+    },
+    "description": {
+      "description": "Description of the SDK index",
+      "type": "string"
+    },
+    "latest": {
+      "description": "Latest SDK version",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latest_security": {
+      "description": "Latest SDK version that includes security fixes",
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "_links": {
       "description": "HAL\u002BJSON links for hypermedia navigation",
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": {
         "description": "HAL\u002BJSON hypermedia link providing navigation to related resources",
         "type": [
@@ -88,59 +105,75 @@
       }
     },
     "_embedded": {
-      "description": "Embedded SDK feature band entries",
+      "description": "Embedded SDK feature band entries and releases",
       "type": [
         "object",
         "null"
       ],
       "properties": {
-        "downloads": {
-          "description": "SDK downloads keyed by RID for direct access",
-          "type": [
-            "object",
-            "null"
-          ],
-          "additionalProperties": {
-            "description": "Individual SDK download file for a specific platform",
+        "releases": {
+          "description": "List of SDK patch release entries with version information and navigation links",
+          "type": "array",
+          "items": {
+            "description": "Individual SDK release entry containing version metadata and navigation links",
             "type": [
               "object",
               "null"
             ],
             "properties": {
-              "name": {
-                "description": "File name",
+              "version": {
+                "description": "SDK version (e.g., \u00278.0.100\u0027, \u00279.0.200\u0027)",
                 "type": "string"
               },
-              "rid": {
-                "description": "Runtime identifier",
-                "type": "string"
+              "date": {
+                "description": "Release date when this SDK version became generally available",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
               },
-              "os": {
-                "description": "Operating system",
-                "type": "string"
+              "security": {
+                "description": "Whether this release includes security fixes",
+                "type": "boolean"
               },
-              "arch": {
-                "description": "Architecture",
-                "type": "string"
-              },
-              "hash_algorithm": {
-                "description": "Hash algorithm used for file verification (e.g., \u0027sha512\u0027)",
-                "type": "string"
+              "support_phase": {
+                "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
+                "enum": [
+                  "preview",
+                  "go-live",
+                  "active",
+                  "maintenance",
+                  "eol",
+                  null
+                ]
               },
               "_links": {
-                "description": "Download and hash links",
+                "description": "HAL\u002BJSON links for navigation to this SDK release\u0027s content",
                 "type": "object",
                 "additionalProperties": {
                   "$ref": "#/properties/_links/additionalProperties"
                 }
+              },
+              "cve_records": {
+                "description": "List of CVE IDs addressed in this release",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               }
             },
             "required": [
-              "name",
-              "rid",
-              "os",
-              "arch",
-              "hash_algorithm",
+              "version",
+              "date",
+              "security",
+              "support_phase",
               "_links"
             ]
           }
@@ -198,61 +231,11 @@
               "_links"
             ]
           }
-        },
-        "releases": {
-          "description": "List of SDK patch release entries with version information and navigation links",
-          "type": "array",
-          "items": {
-            "description": "Individual SDK release entry containing version metadata and navigation links",
-            "type": [
-              "object",
-              "null"
-            ],
-            "properties": {
-              "version": {
-                "description": "SDK version (e.g., \u00278.0.100\u0027, \u00279.0.200\u0027)",
-                "type": "string"
-              },
-              "date": {
-                "description": "Release date when this SDK version became generally available",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date-time"
-              },
-              "support_phase": {
-                "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
-                "enum": [
-                  "preview",
-                  "go-live",
-                  "active",
-                  "maintenance",
-                  "eol",
-                  null
-                ]
-              },
-              "_links": {
-                "description": "HAL\u002BJSON links for navigation to this SDK release\u0027s content",
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/properties/_links/additionalProperties"
-                }
-              }
-            },
-            "required": [
-              "version",
-              "date",
-              "support_phase",
-              "_links"
-            ]
-          }
         }
       },
       "required": [
-        "downloads",
-        "feature_bands",
-        "releases"
+        "releases",
+        "feature_bands"
       ]
     },
     "_metadata": {
@@ -285,9 +268,8 @@
   },
   "required": [
     "kind",
-    "component",
     "version",
-    "label",
-    "_links"
+    "title",
+    "description"
   ]
 }

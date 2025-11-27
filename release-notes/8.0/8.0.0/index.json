@@ -1,9 +1,17 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-patch-detail-index.json",
-  "kind": "patch-release-index",
+  "kind": "patch-version-index",
   "version": "8.0.0",
+  "date": "2023-11-14T00:00:00\u002B00:00",
+  "security": true,
+  "cve_count": 3,
+  "support_phase": "active",
   "title": ".NET 8.0.0 Patch Index",
   "description": "Patch information for .NET 8.0.0",
+  "runtime_version": "8.0.0",
+  "sdk_versions": [
+    "8.0.100"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/index.json",
@@ -11,7 +19,7 @@
       "title": "8.0.0 Patch Index",
       "type": "application/hal\u002Bjson"
     },
-    "release": {
+    "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/release.json",
       "path": "/8.0/8.0.0/release.json",
       "title": "8.0.0 Release Information",
@@ -29,7 +37,7 @@
       "title": ".NET SDK 8.0 Release Information",
       "type": "application/hal\u002Bjson"
     },
-    "month-timeline-index": {
+    "month-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/index.json",
       "path": "/timeline/2023/11/index.json",
       "title": "Release timeline index for 2023-11",
@@ -42,12 +50,50 @@
       "type": "application/json"
     }
   },
-  "lifecycle": {
-    "phase": "active",
-    "release-date": "2023-11-14T00:00:00\u002B00:00"
-  },
   "_embedded": {
-    "cve-records": [
+    "runtime": {
+      "version": "8.0.0",
+      "_links": {
+        "release-notes-markdown": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/8.0.0.md",
+          "path": "/8.0/8.0.0/8.0.0.md",
+          "title": "8.0.0 Release Notes",
+          "type": "application/markdown"
+        },
+        "release-notes-markdown-rendered": {
+          "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.0/8.0.0.md",
+          "path": "/8.0/8.0.0/8.0.0.md",
+          "title": "8.0.0 Release Notes (Rendered)",
+          "type": "application/markdown"
+        }
+      }
+    },
+    "sdks": [
+      {
+        "version": "8.0.100",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.1xx.json",
+            "path": "/8.0/sdk/sdk-8.0.1xx.json",
+            "title": ".NET SDK 8.0.1xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/8.0.0.md",
+            "path": "/8.0/8.0.0/8.0.0.md",
+            "title": "8.0.0 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.0/8.0.0.md",
+            "path": "/8.0/8.0.0/8.0.0.md",
+            "title": "8.0.0 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      }
+    ],
+    "cve_records": [
       "CVE-2023-36038",
       "CVE-2023-36049",
       "CVE-2023-36558"
@@ -57,27 +103,18 @@
         "id": "CVE-2023-36038",
         "title": ".NET Denial of Service Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/286",
-            "title": "Announcement for CVE-2023-36038"
+            "title": "CVE-2023-36038"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/5536e61a3d7b77667f9544b45c5270a73905154d.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 8.2,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2023-11-14",
+        "affected_releases": [
+          "5536e61a3d7b77667f9544b45c5270a73905154d"
         ],
-        "cvss-score": 8.2,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2023-11-14",
-        "affected-releases": [
-          "8.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-aspnetcore"
         ],
         "platforms": [
@@ -88,29 +125,20 @@
         "id": "CVE-2023-36049",
         "title": ".NET Elevation of Privilege Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/287",
-            "title": "Announcement for CVE-2023-36049"
+            "title": "CVE-2023-36049"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/4796219f6bc0d09dafd21708c2d503279890da5d.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 7.6,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2023-11-14",
+        "affected_releases": [
+          "4796219f6bc0d09dafd21708c2d503279890da5d",
+          "8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30",
+          "9865d1c190bce3aa18cb9d8c82bfcb2857bdfe5d"
         ],
-        "cvss-score": 7.6,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2023-11-14",
-        "affected-releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
         "platforms": [
@@ -121,29 +149,20 @@
         "id": "CVE-2023-36558",
         "title": ".NET Security Feature Bypass Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/288",
-            "title": "Announcement for CVE-2023-36558"
+            "title": "CVE-2023-36558"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/416da79a1244c311e573db468a58c08d1e50e809.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 6.2,
+        "cvss_severity": "MEDIUM",
+        "disclosure_date": "2023-11-14",
+        "affected_releases": [
+          "416da79a1244c311e573db468a58c08d1e50e809",
+          "9ec7bd0ebb9dbd8e250e2f1a342758a575d63da1",
+          "b056b7af6535c39c5464aff05d6202d807de8af2"
         ],
-        "cvss-score": 6.2,
-        "cvss-severity": "MEDIUM",
-        "disclosure-date": "2023-11-14",
-        "affected-releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected-packages": [
+        "affected_packages": [
           "Microsoft.AspNetCore.Components"
         ],
         "platforms": [
@@ -153,8 +172,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.462703\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:02:42.6475267\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

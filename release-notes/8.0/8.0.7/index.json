@@ -1,9 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-patch-detail-index.json",
-  "kind": "patch-release-index",
+  "kind": "patch-version-index",
   "version": "8.0.7",
+  "date": "2024-07-09T00:00:00\u002B00:00",
+  "security": true,
+  "cve_count": 3,
+  "support_phase": "active",
   "title": ".NET 8.0.7 Patch Index",
   "description": "Patch information for .NET 8.0.7",
+  "runtime_version": "8.0.7",
+  "sdk_versions": [
+    "8.0.303",
+    "8.0.107"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.7/index.json",
@@ -11,7 +20,7 @@
       "title": "8.0.7 Patch Index",
       "type": "application/hal\u002Bjson"
     },
-    "release": {
+    "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.7/release.json",
       "path": "/8.0/8.0.7/release.json",
       "title": "8.0.7 Release Information",
@@ -29,7 +38,7 @@
       "title": ".NET SDK 8.0 Release Information",
       "type": "application/hal\u002Bjson"
     },
-    "month-timeline-index": {
+    "month-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/index.json",
       "path": "/timeline/2024/07/index.json",
       "title": "Release timeline index for 2024-07",
@@ -42,12 +51,73 @@
       "type": "application/json"
     }
   },
-  "lifecycle": {
-    "phase": "active",
-    "release-date": "2024-07-09T00:00:00\u002B00:00"
-  },
   "_embedded": {
-    "cve-records": [
+    "runtime": {
+      "version": "8.0.7",
+      "_links": {
+        "release-notes-markdown": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.7/8.0.7.md",
+          "path": "/8.0/8.0.7/8.0.7.md",
+          "title": "8.0.7 Release Notes",
+          "type": "application/markdown"
+        },
+        "release-notes-markdown-rendered": {
+          "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.7/8.0.7.md",
+          "path": "/8.0/8.0.7/8.0.7.md",
+          "title": "8.0.7 Release Notes (Rendered)",
+          "type": "application/markdown"
+        }
+      }
+    },
+    "sdks": [
+      {
+        "version": "8.0.303",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.3xx.json",
+            "path": "/8.0/sdk/sdk-8.0.3xx.json",
+            "title": ".NET SDK 8.0.3xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.7/8.0.7.md",
+            "path": "/8.0/8.0.7/8.0.7.md",
+            "title": "8.0.7 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.7/8.0.7.md",
+            "path": "/8.0/8.0.7/8.0.7.md",
+            "title": "8.0.7 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      },
+      {
+        "version": "8.0.107",
+        "_links": {
+          "feature-band": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/sdk-8.0.1xx.json",
+            "path": "/8.0/sdk/sdk-8.0.1xx.json",
+            "title": ".NET SDK 8.0.1xx",
+            "type": "application/json"
+          },
+          "release-notes-markdown": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.7/8.0.107.md",
+            "path": "/8.0/8.0.7/8.0.107.md",
+            "title": "SDK 8.0.107 Release Notes",
+            "type": "application/markdown"
+          },
+          "release-notes-markdown-rendered": {
+            "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.7/8.0.107.md",
+            "path": "/8.0/8.0.7/8.0.107.md",
+            "title": "SDK 8.0.107 Release Notes (Rendered)",
+            "type": "application/markdown"
+          }
+        }
+      }
+    ],
+    "cve_records": [
       "CVE-2024-30105",
       "CVE-2024-35264",
       "CVE-2024-38095"
@@ -57,30 +127,21 @@
         "id": "CVE-2024-30105",
         "title": ".NET Denial of Service Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/315",
-            "title": "Announcement for CVE-2024-30105"
+            "title": "CVE-2024-30105"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/fa5b0d8f4a8b424732cc992158aa92842f8a2846.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2024-07-09",
+        "affected_releases": [
+          "fa5b0d8f4a8b424732cc992158aa92842f8a2846"
         ],
-        "cvss-score": 7.5,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2024-07-09",
-        "affected-releases": [
-          "8.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
-        "affected-packages": [
+        "affected_packages": [
           "System.Text.Json"
         ],
         "platforms": [
@@ -91,27 +152,18 @@
         "id": "CVE-2024-35264",
         "title": ".NET Remote Code Execution Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/314",
-            "title": "Announcement for CVE-2024-35264"
+            "title": "CVE-2024-35264"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 8.1,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2024-07-09",
+        "affected_releases": [
+          "c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc"
         ],
-        "cvss-score": 8.1,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2024-07-09",
-        "affected-releases": [
-          "8.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-aspnetcore"
         ],
         "platforms": [
@@ -122,31 +174,22 @@
         "id": "CVE-2024-38095",
         "title": ".NET Denial of Service Vulnerability",
         "_links": {
-          "announcement": {
+          "self": {
             "href": "https://github.com/dotnet/announcements/issues/312",
-            "title": "Announcement for CVE-2024-38095"
+            "title": "CVE-2024-38095"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/4a8d5a007971d19f389ca17f7b8eb4f9bb199991.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0"
-          }
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2024-07-09",
+        "affected_releases": [
+          "4a8d5a007971d19f389ca17f7b8eb4f9bb199991",
+          "979135d5ca4efaf6436ee13539cc3f1e039d570a"
         ],
-        "cvss-score": 7.5,
-        "cvss-severity": "HIGH",
-        "disclosure-date": "2024-07-09",
-        "affected-releases": [
-          "6.0",
-          "8.0"
-        ],
-        "affected-products": [
+        "affected_products": [
           "dotnet-runtime"
         ],
-        "affected-packages": [
+        "affected_packages": [
           "System.Formats.Asn1"
         ],
         "platforms": [
@@ -156,8 +199,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.421117\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:02:42.6435411\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

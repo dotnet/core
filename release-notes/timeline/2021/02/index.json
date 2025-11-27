@@ -1,10 +1,17 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2021-02",
-  "description": "Release timeline for 2021-02 (2.1\u20136.0, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2021-02 (latest: 6.0)",
   "year": "2021",
   "month": "02",
+  "security": false,
+  "latest_release": "6.0",
+  "releases": [
+    "6.0",
+    "3.1",
+    "2.1"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2021/02/index.json",
@@ -26,104 +33,104 @@
     }
   },
   "_embedded": {
-    "releases": {
-      "6.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "6.0.0-preview.1.21102.12"
-          ],
-          "dotnet-sdk": [
-            "6.0.100-preview.1.21103.13"
-          ]
-        },
+    "releases": [
+      {
+        "version": "6.0",
+        "release_type": "lts",
+        "phase": "preview",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2021-09-14T00:00:00\u002B00:00",
+        "eol_date": "2024-11-12T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "6.0.0-preview.1.21102.12"
+        ],
+        "sdk_patches": [
+          "6.0.100-preview.1.21103.13"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/index.json",
             "path": "/6.0/index.json",
-            "title": ".NET 6.0 Version Index",
+            "title": ".NET 6.0",
             "type": "application/hal\u002Bjson"
           },
-          "6.0.0-preview.1.21102.12": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.0-preview.1/release.json",
-            "path": "/6.0/6.0.0-preview.1/release.json",
-            "title": ".NET 6.0.0-preview.1.21102.12 Release",
-            "type": "application/json"
-          },
-          "6.0.0-preview.1.21102.12-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.0-preview.1/README.md",
-            "path": "/6.0/6.0.0-preview.1/README.md",
-            "title": ".NET 6.0.0-preview.1.21102.12 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.0-preview.1.21102.12/index.json",
+            "path": "/6.0/6.0.0-preview.1.21102.12/index.json",
+            "title": ".NET 6.0.0-preview.1.21102.12",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "3.1": {
-        "patches": {
-          "dotnet-runtime": [
-            "3.1.12"
-          ],
-          "dotnet-sdk": [
-            "3.1.406",
-            "3.1.112"
-          ]
-        },
+      {
+        "version": "3.1",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2019-12-03T00:00:00\u002B00:00",
+        "eol_date": "2022-12-13T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "3.1.12"
+        ],
+        "sdk_patches": [
+          "3.1.406",
+          "3.1.112"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/index.json",
             "path": "/3.1/index.json",
-            "title": ".NET 3.1 Version Index",
+            "title": ".NET 3.1",
             "type": "application/hal\u002Bjson"
           },
-          "3.1.12": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.12/release.json",
-            "path": "/3.1/3.1.12/release.json",
-            "title": ".NET 3.1.12 Release",
-            "type": "application/json"
-          },
-          "3.1.12-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.12/README.md",
-            "path": "/3.1/3.1.12/README.md",
-            "title": ".NET 3.1.12 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.12/index.json",
+            "path": "/3.1/3.1.12/index.json",
+            "title": ".NET 3.1.12",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
-      "2.1": {
-        "patches": {
-          "dotnet-runtime": [
-            "2.1.25"
-          ],
-          "dotnet-sdk": [
-            "2.1.813",
-            "2.1.521"
-          ]
-        },
+      {
+        "version": "2.1",
+        "release_type": "lts",
+        "phase": "active",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2018-05-07T00:00:00\u002B00:00",
+        "eol_date": "2021-08-21T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "2.1.25"
+        ],
+        "sdk_patches": [
+          "2.1.813",
+          "2.1.521"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/index.json",
             "path": "/2.1/index.json",
-            "title": ".NET 2.1 Version Index",
+            "title": ".NET 2.1",
             "type": "application/hal\u002Bjson"
           },
-          "2.1.25": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.25/release.json",
-            "path": "/2.1/2.1.25/release.json",
-            "title": ".NET 2.1.25 Release",
-            "type": "application/json"
-          },
-          "2.1.25-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.25/README.md",
-            "path": "/2.1/2.1.25/README.md",
-            "title": ".NET 2.1.25 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.25/index.json",
+            "path": "/2.1/2.1.25/index.json",
+            "title": ".NET 2.1.25",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.637569\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.7597332\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }

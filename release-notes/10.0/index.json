@@ -1,8 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-version-index.json",
-  "kind": "major-release-index",
+  "kind": "major-version-index",
   "title": ".NET 10.0 Patch Release Index",
-  "description": "Index of .NET versions 10.0.0\u201310.0.0-rc.2 (latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": ".NET 10.0 (latest: 10.0.0)",
+  "latest": "10.0.0",
+  "release_type": "lts",
+  "phase": "active",
+  "supported": true,
+  "ga_date": "2025-11-11T00:00:00\u002B00:00",
+  "eol_date": "2028-11-14T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
@@ -34,31 +40,33 @@
       "title": "Supported OSes",
       "type": "application/json"
     },
-    "supported-os-markdown-raw": {
+    "supported-os-markdown": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/supported-os.md",
       "path": "/10.0/supported-os.md",
-      "title": "Supported OSes (Raw Markdown)",
+      "title": "Supported OSes",
       "type": "application/markdown"
     },
-    "supported-os-markdown": {
+    "supported-os-markdown-rendered": {
       "href": "https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md",
       "path": "/10.0/supported-os.md",
-      "title": "Supported OSes (Markdown)",
+      "title": "Supported OSes (Rendered)",
       "type": "application/markdown"
+    },
+    "latest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/index.json",
+      "path": "/10.0/10.0.0/index.json",
+      "title": "Latest patch release (10.0.0)",
+      "type": "application/hal\u002Bjson"
     }
-  },
-  "lifecycle": {
-    "release-type": "lts",
-    "phase": "active",
-    "release-date": "2025-11-11T00:00:00\u002B00:00",
-    "eol-date": "2028-11-14T00:00:00\u002B00:00",
-    "supported": true
   },
   "_embedded": {
     "releases": [
       {
         "version": "10.0.0",
-        "kind": "patch-release",
+        "date": "2025-11-11T00:00:00\u002B00:00",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/index.json",
@@ -66,10 +74,6 @@
             "title": "10.0.0 Patch Index",
             "type": "application/hal\u002Bjson"
           }
-        },
-        "lifecycle": {
-          "phase": "active",
-          "release-date": "2025-11-11T00:00:00\u002B00:00"
         }
       }
     ],
@@ -88,8 +92,8 @@
     ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:01:38.356421\u002B00:00",
-    "generated-by": "VersionIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:06.1998267\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }

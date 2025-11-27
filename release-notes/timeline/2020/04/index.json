@@ -1,10 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/dotnet-release-timeline-index.json",
-  "kind": "timeline-month-index",
+  "kind": "month-index",
   "title": ".NET Release Timeline Index - 2020-04",
-  "description": "Release timeline for 2020-04 (5.0\u20135.0, latest first); This file is cache-friendly; follow links for the most current details.",
+  "description": "Release timeline for 2020-04 (latest: 5.0)",
   "year": "2020",
   "month": "04",
+  "security": false,
+  "latest_release": "5.0",
+  "releases": [
+    "5.0"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/04/index.json",
@@ -26,56 +31,44 @@
     }
   },
   "_embedded": {
-    "releases": {
-      "5.0": {
-        "patches": {
-          "dotnet-runtime": [
-            "5.0.0-preview.3.20214.6",
-            "5.0.0-preview.2.20160.6"
-          ],
-          "dotnet-sdk": [
-            "5.0.100-preview.3.20216.6",
-            "5.0.100-preview.2.20176.6"
-          ]
-        },
+    "releases": [
+      {
+        "version": "5.0",
+        "release_type": "sts",
+        "phase": "preview",
+        "supported": false,
+        "security": false,
+        "cve_count": 0,
+        "ga_date": "2020-09-14T00:00:00\u002B00:00",
+        "eol_date": "2022-05-10T00:00:00\u002B00:00",
+        "runtimes_patches": [
+          "5.0.0-preview.3.20214.6",
+          "5.0.0-preview.2.20160.6"
+        ],
+        "sdk_patches": [
+          "5.0.100-preview.3.20216.6",
+          "5.0.100-preview.2.20176.6"
+        ],
         "_links": {
-          "version-index": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/index.json",
             "path": "/5.0/index.json",
-            "title": ".NET 5.0 Version Index",
+            "title": ".NET 5.0",
             "type": "application/hal\u002Bjson"
           },
-          "5.0.0-preview.3.20214.6": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.0-preview.3/release.json",
-            "path": "/5.0/5.0.0-preview.3/release.json",
-            "title": ".NET 5.0.0-preview.3.20214.6 Release",
-            "type": "application/json"
-          },
-          "5.0.0-preview.3.20214.6-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.0-preview.3/README.md",
-            "path": "/5.0/5.0.0-preview.3/README.md",
-            "title": ".NET 5.0.0-preview.3.20214.6 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
-          },
-          "5.0.0-preview.2.20160.6": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.0-preview.2/release.json",
-            "path": "/5.0/5.0.0-preview.2/release.json",
-            "title": ".NET 5.0.0-preview.2.20160.6 Release",
-            "type": "application/json"
-          },
-          "5.0.0-preview.2.20160.6-markdown-raw": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.0-preview.2/README.md",
-            "path": "/5.0/5.0.0-preview.2/README.md",
-            "title": ".NET 5.0.0-preview.2.20160.6 Release Notes (Raw Markdown)",
-            "type": "application/markdown"
+          "patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.0-preview.3.20214.6/index.json",
+            "path": "/5.0/5.0.0-preview.3.20214.6/index.json",
+            "title": ".NET 5.0.0-preview.3.20214.6",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
-    }
+    ]
   },
   "_metadata": {
-    "schema-version": "1.0",
-    "generated-on": "2025-11-21T02:02:39.675778\u002B00:00",
-    "generated-by": "ShipIndex"
+    "schema_version": "1.0",
+    "generated_on": "2025-11-27T04:06:08.761341\u002B00:00",
+    "generated_by": "ShipIndex"
   }
 }
