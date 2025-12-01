@@ -134,14 +134,7 @@
                 "description": "Description of the year\u0027s releases",
                 "type": "string"
               },
-              "_links": {
-                "description": "HAL\u002BJSON links for navigation to this year\u0027s content",
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/properties/_links/additionalProperties"
-                }
-              },
-              "dotnet_releases": {
+              "releases": {
                 "description": "List of .NET version identifiers released during this year",
                 "type": [
                   "array",
@@ -153,12 +146,18 @@
                     "null"
                   ]
                 }
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this year\u0027s content",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
               }
             },
             "required": [
               "year",
-              "description",
-              "_links"
+              "description"
             ]
           }
         }
