@@ -80,10 +80,12 @@ Query: "What .NET versions are currently supported?"
 | releases-index | `releases-index.json` | **6 KB** |
 
 ```bash
-$ jq -r '._embedded.releases[] | select(.supported) | .version' release-notes/index.json
-10.0
-9.0
-8.0
+ROOT="https://raw.githubusercontent.com/dotnet/core/main/release-notes/index.json"
+
+curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.supported) | .version'
+# 10.0
+# 9.0
+# 8.0
 ```
 
 **Winner:** releases-index (smaller for basic version queries)
@@ -98,19 +100,21 @@ Query: "What CVEs were fixed in the latest .NET 8.0 security patch?"
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,219 KB** |
 
 ```bash
-# Step 1: Get the 8.0 version link from root index
-$ jq -r '._embedded.releases[] | select(.version == "8.0") | ._links.self.path' release-notes/index.json
-/8.0/index.json
+ROOT="https://raw.githubusercontent.com/dotnet/core/main/release-notes/index.json"
 
-# Step 2: Get the latest security patch link
-$ jq -r '._links["latest-security"].path' release-notes/8.0/index.json
-/8.0/8.0.21/index.json
+# Step 1: Get the 8.0 version href
+VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "8.0") | ._links.self.href')
+# https://raw.githubusercontent.com/dotnet/core/main/release-notes/8.0/index.json
+
+# Step 2: Get the latest security patch href
+PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
+# https://raw.githubusercontent.com/dotnet/core/main/release-notes/8.0/8.0.21/index.json
 
 # Step 3: Get the CVE records
-$ jq -r '._embedded.cve_records[]' release-notes/8.0/8.0.21/index.json
-CVE-2025-55247
-CVE-2025-55248
-CVE-2025-55315
+curl -s "$PATCH_HREF" | jq -r '._embedded.cve_records[]'
+# CVE-2025-55247
+# CVE-2025-55248
+# CVE-2025-55315
 ```
 
 **Winner:** hal-index (**21x smaller**)
@@ -125,36 +129,44 @@ Query: "What High+ severity CVEs were fixed in the latest .NET 8.0 security patc
 | releases-index | `releases-index.json` + `8.0/releases.json` + external CVE sources | **1,219 KB** (incomplete) |
 
 ```bash
-# Steps 1-2: Same as above to reach 8.0/8.0.21/index.json
+ROOT="https://raw.githubusercontent.com/dotnet/core/main/release-notes/index.json"
+
+# Step 1: Get the 8.0 version href
+VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "8.0") | ._links.self.href')
+
+# Step 2: Get the latest security patch href
+PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
 
 # Step 3: Filter HIGH+ severity with titles
-$ jq -r '._embedded.disclosures[] | select(.cvss_severity == "HIGH" or .cvss_severity == "CRITICAL") | "\(.id): \(.title) (\(.cvss_severity))"' release-notes/8.0/8.0.21/index.json
-CVE-2025-55247: .NET Denial of Service Vulnerability (HIGH)
-CVE-2025-55315: .NET Security Feature Bypass Vulnerability (CRITICAL)
+curl -s "$PATCH_HREF" | jq -r '._embedded.disclosures[] | select(.cvss_severity == "HIGH" or .cvss_severity == "CRITICAL") | "\(.id): \(.title) (\(.cvss_severity))"'
+# CVE-2025-55247: .NET Denial of Service Vulnerability (HIGH)
+# CVE-2025-55315: .NET Security Feature Bypass Vulnerability (CRITICAL)
 ```
 
 **Winner:** hal-index (releases-index has CVE IDs only—no severity or titles)
 
-### CVE Queries Across All Supported Versions
+### Recent CVEs Across All Supported Versions
 
-Query: "What CVEs affect any supported .NET version?" (8.0, 9.0, 10.0)
+Query: "What CVEs were fixed in the last 2 security releases?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` + 3 version indexes | **84 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` | **25 KB** |
 | releases-index | `releases-index.json` + 3 releases.json | **2,402 KB** |
 
 ```bash
-$ jq -r '._embedded.cve_records[]' release-notes/8.0/index.json release-notes/9.0/index.json release-notes/10.0/index.json | sort -u
-CVE-2023-36038
-CVE-2023-36049
-CVE-2023-36558
-CVE-2024-0057
-CVE-2024-20672
-...
+TIMELINE="https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/index.json"
+
+# Step 1: Get the latest year href
+YEAR_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[0]._links.self.href')
+
+# Step 2: Get the last 2 security months with CVEs
+curl -s "$YEAR_HREF" | jq -r '[._embedded.months[] | select(.security)] | .[0:2] | .[] | "\(.month)/2025: \(.cve_records | join(", "))"'
+# 10/2025: CVE-2025-55248, CVE-2025-55315, CVE-2025-55247
+# 06/2025: CVE-2025-30399
 ```
 
-**Winner:** hal-index (**29x smaller**)
+**Winner:** hal-index (**96x smaller**)
 
 ### CVE Details for a Month
 
@@ -162,64 +174,66 @@ Query: "What CVEs were disclosed in January 2025 with full details?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **58 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **39 KB** |
 | releases-index | Multiple releases.json + external CVE sources | **2+ MB** (incomplete) |
 
 ```bash
-# Step 1: Get timeline link from root
-$ jq -r '._links["timeline-index"].path' release-notes/index.json
-/timeline/index.json
+TIMELINE="https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/index.json"
 
-# Step 2: Get 2025 year link
-$ jq -r '._embedded.years[] | select(.year == "2025") | ._links.self.path' release-notes/timeline/index.json
-/timeline/2025/index.json
+# Step 1: Get 2025 year href
+YEAR_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[] | select(.year == "2025") | ._links.self.href')
+# https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2025/index.json
 
-# Step 3: Get January month link with cve.json
-$ jq -r '._embedded.months[] | select(.month == "01") | ._links["cve-json"].path' release-notes/timeline/2025/index.json
-/timeline/2025/01/cve.json
+# Step 2: Get January cve.json href
+CVE_HREF=$(curl -s "$YEAR_HREF" | jq -r '._embedded.months[] | select(.month == "01") | ._links["cve-json"].href')
+# https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/2025/01/cve.json
 
-# Step 4: Get CVE details
-$ jq -r '.disclosures[] | "\(.id): \(.problem)"' release-notes/timeline/2025/01/cve.json
-CVE-2025-21171: .NET Remote Code Execution Vulnerability
-CVE-2025-21172: .NET and Visual Studio Remote Code Execution Vulnerability
-CVE-2025-21176: .NET and Visual Studio Remote Code Execution Vulnerability
-CVE-2025-21173: .NET Elevation of Privilege Vulnerability
+# Step 3: Get CVE details
+curl -s "$CVE_HREF" | jq -r '.disclosures[] | "\(.id): \(.problem)"'
+# CVE-2025-21171: .NET Remote Code Execution Vulnerability
+# CVE-2025-21172: .NET and Visual Studio Remote Code Execution Vulnerability
+# CVE-2025-21176: .NET and Visual Studio Remote Code Execution Vulnerability
+# CVE-2025-21173: .NET Elevation of Privilege Vulnerability
 ```
 
-**Winner:** hal-index (releases-index cannot fully answer this query)
+**Winner:** hal-index (**51x smaller**, and releases-index cannot fully answer this query)
 
-### Security Patches This Year
+### Security Patches in the Last 12 Months
 
-Query: "List all security patches released in 2024"
+Query: "List all CVEs fixed in the last 12 months"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `timeline/index.json` → `timeline/2024/index.json` | **45 KB** |
+| hal-index | `timeline/index.json` → up to 12 month indexes (via `prev` links) | **~105 KB** |
 | releases-index | All version releases.json files | **2.4+ MB** |
 
 ```bash
-# Step 1: Get timeline link from root
-$ jq -r '._links["timeline-index"].path' release-notes/index.json
-/timeline/index.json
+TIMELINE="https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/index.json"
 
-# Step 2: Get 2024 year link
-$ jq -r '._embedded.years[] | select(.year == "2024") | ._links.self.path' release-notes/timeline/index.json
-/timeline/2024/index.json
+# Step 1: Get the latest month href
+MONTH_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[0]._links["latest-month"].href')
 
-# Step 3: Get security months with CVEs
-$ jq -r '._embedded.months[] | select(.security) | "\(.month): \(.cve_records | join(", "))"' release-notes/timeline/2024/index.json
-10: CVE-2024-43483, CVE-2024-43484, CVE-2024-43485, CVE-2024-38229
-08: CVE-2024-38167, CVE-2024-38168
-07: CVE-2024-30105, CVE-2024-35264, CVE-2024-38081, CVE-2024-38095
-05: CVE-2024-30045, CVE-2024-30046
-04: CVE-2024-21409
-03: CVE-2024-26190, CVE-2024-21392
-02: CVE-2024-21386, CVE-2024-21404
-11: CVE-2024-43498, CVE-2024-43499
-01: CVE-2024-0056, CVE-2024-0057, CVE-2024-21319
+# Step 2: Walk back 12 months using prev links, collecting security CVEs
+for i in {1..12}; do
+  DATA=$(curl -s "$MONTH_HREF")
+  YEAR_MONTH=$(echo "$DATA" | jq -r '"\(.year)-\(.month)"')
+  SECURITY=$(echo "$DATA" | jq -r '.security')
+  if [ "$SECURITY" = "true" ]; then
+    CVES=$(echo "$DATA" | jq -r '[._embedded.disclosures[].id] | join(", ")')
+    echo "$YEAR_MONTH: $CVES"
+  fi
+  MONTH_HREF=$(echo "$DATA" | jq -r '._links.prev.href // empty')
+  [ -z "$MONTH_HREF" ] && break
+done
+# 2025-10: CVE-2025-55248, CVE-2025-55315, CVE-2025-55247
+# 2025-06: CVE-2025-30399
+# 2025-05: CVE-2025-26646
+# 2025-04: CVE-2025-26682
+# 2025-03: CVE-2025-24070
+# 2025-01: CVE-2025-21171, CVE-2025-21172, CVE-2025-21176, CVE-2025-21173
 ```
 
-**Winner:** hal-index (**53x smaller**)
+**Winner:** hal-index (**23x smaller**)
 
 ### Critical CVE This Month
 
@@ -227,28 +241,37 @@ Query: "Is there a critical CVE in any supported release this month?" (November 
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/11/index.json` | **52 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/11/index.json` | **30 KB** |
 | releases-index | `releases-index.json` + all supported releases.json | **2.4+ MB** (incomplete—no severity data) |
 
 ```bash
-$ jq -r '._embedded.disclosures[] | select(.cvss_severity == "CRITICAL") | "\(.id): \(.title)"' release-notes/timeline/2025/11/index.json
-(no critical CVEs this month)
+TIMELINE="https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/index.json"
+
+# Step 1: Get 2025 year href
+YEAR_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[] | select(.year == "2025") | ._links.self.href')
+
+# Step 2: Get November month href
+MONTH_HREF=$(curl -s "$YEAR_HREF" | jq -r '._embedded.months[] | select(.month == "11") | ._links.self.href')
+
+# Step 3: Check for CRITICAL CVEs
+curl -s "$MONTH_HREF" | jq -r '._embedded.disclosures // [] | .[] | select(.cvss_severity == "CRITICAL") | "\(.id): \(.title)"'
+# (no critical CVEs this month)
 ```
 
-**Winner:** hal-index (releases-index cannot answer this query—CVE severity is not available)
+**Winner:** hal-index (**80x smaller**, and releases-index cannot answer this query—CVE severity is not available)
 
 ## Query Capability Comparison
 
-| Query Type | hal-index | releases-index |
-|------------|-------------|----------------|
-| List versions | ✅ | ✅ |
-| Version lifecycle (EOL, LTS) | ✅ | ✅ |
-| Latest patch per version | ✅ | ✅ (with large file) |
-| CVEs per version | ✅ | ✅ (with large file) |
-| CVEs per month | ✅ | ❌ |
-| CVE details (severity, fixes) | ✅ | ❌ |
-| Timeline navigation | ✅ | ❌ |
-| SDK-first navigation | ✅ | ❌ |
+| Query Type | hal-index | releases-index | Ratio |
+|------------|-----------|----------------|-------|
+| List versions | ✅ | ✅ | 3x larger |
+| Version lifecycle (EOL, LTS) | ✅ | ✅ | 3x larger |
+| Latest patch per version | ✅ | ✅ | 21x smaller |
+| CVEs per version | ✅ | ✅ | 21x smaller |
+| CVEs per month | ✅ | ❌ | — |
+| CVE details (severity, fixes) | ✅ | ❌ | — |
+| Timeline navigation | ✅ | ❌ | — |
+| SDK-first navigation | ✅ | ❌ | — |
 
 ## Cache Coherency
 
@@ -284,8 +307,8 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 |--------|-------------|----------------|
 | Basic version queries | 19 KB | 6 KB |
 | CVE queries (latest security patch) | 57 KB | 1,219 KB |
-| CVE queries (all supported) | 84 KB | 2.4 MB |
-| Monthly security summary | 16 KB | N/A |
+| Recent CVEs (last 2 security releases) | 25 KB | 2.4 MB |
+| CVEs in last 12 months | ~105 KB | 2.4 MB |
 | Cache coherency | ✅ Atomic | ❌ TTL mismatch risk |
 | Query syntax | snake_case (clean) | kebab-case (brackets) |
 | CVE details | ✅ Full | ❌ ID + URL only |
