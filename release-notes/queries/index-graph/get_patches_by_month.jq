@@ -3,7 +3,7 @@
 ._embedded.releases[] |
 {
   version,
-  runtime: .runtimes_patches,
+  runtime: .runtime_patches,
   sdk: .sdk_patches,
   cves: .cve_records
 }
