@@ -22,8 +22,11 @@ Queries are designed to be terse and avoid ugly escaping tricks or complicated `
 | Timeline Index | `/release-notes/timeline/index.json` | Release timeline by year |
 | Year Index | `/release-notes/timeline/{year}/index.json` | Months within a year |
 | Month Index | `/release-notes/timeline/{year}/{month}/index.json` | Releases and CVEs for a month |
+| CVE Details | `/release-notes/timeline/{year}/{month}/cve.json` | Full CVE vulnerability details |
 
 ## Query Reference
+
+### Graph Queries (index.json)
 
 | Query | Description |
 |-------|-------------|
@@ -53,6 +56,18 @@ Queries are designed to be terse and avoid ugly escaping tricks or complicated `
 | `get_patches_by_month.jq` | Patches released in a month |
 | `get_versions_active_in_year.jq` | Versions active during a year |
 | `cves_by_year_table.jq` | CVEs by month markdown table |
+
+### Deep CVE Queries (cve.json)
+
+| Query | Description |
+|-------|-------------|
+| `get_cve_weakness.jq` | CWE weakness classifications |
+| `get_cve_description.jq` | Full descriptions and FAQ |
+| `get_cve_version_range.jq` | Vulnerable version ranges |
+| `check_version_vulnerable.jq` | Check if version is vulnerable |
+| `get_cve_by_product.jq` | CVEs by product (runtime/SDK) |
+| `get_cve_by_severity.jq` | CVEs by severity level |
+| `get_cve_commits_for_release.jq` | Fix commits for a release |
 
 ---
 
@@ -464,18 +479,17 @@ $ jq -r '._embedded.disclosures[] | {id, title, cvss_severity, affected_releases
 Use with `/release-notes/timeline/{year}/{month}/index.json`
 
 ```bash
-$ jq -r '._embedded.releases[] | {version, runtime: .runtimes_patches, sdk: .sdk_patches}' release-notes/timeline/2024/07/index.json
+$ jq -r '._embedded.releases[] | {version, runtime: .runtime_patches, sdk: .sdk_patches}' release-notes/timeline/2025/01/index.json
 {
   "version": "9.0",
-  "runtime": ["9.0.0-preview.6.24327.7"],
-  "sdk": ["9.0.100-preview.6.24328.19"]
+  "runtime": ["9.0.1"],
+  "sdk": ["9.0.102"]
 }
 {
   "version": "8.0",
-  "runtime": ["8.0.7"],
-  "sdk": ["8.0.303", "8.0.107"]
+  "runtime": ["8.0.12"],
+  "sdk": ["8.0.405", "8.0.308", "8.0.112"]
 }
-...
 ```
 
 **Grade:** ⭐⭐⭐
@@ -499,6 +513,197 @@ $ jq -rf queries/cves_by_year_table.jq release-notes/timeline/2024/index.json
 **Grade:** ⭐⭐⭐
 
 [📁 cves_by_year_table.jq](index-graph/cves_by_year_table.jq)
+
+---
+
+## Deep CVE Analysis (cve.json)
+
+The month `index.json` embeds CVE summaries, but `cve.json` contains complete vulnerability information including CWE weakness types, version ranges, detailed descriptions, and FAQs. Use these queries when you need full vulnerability details.
+
+Use with `/release-notes/timeline/{year}/{month}/cve.json`
+
+### get_cve_weakness.jq
+
+Get CWE weakness classifications for vulnerabilities:
+
+```bash
+$ jq -rf queries/get_cve_weakness.jq release-notes/timeline/2025/01/cve.json
+{
+  "id": "CVE-2025-21171",
+  "problem": ".NET Remote Code Execution Vulnerability",
+  "weakness": "CWE-122",
+  "cvss_score": 7.5,
+  "cvss_severity": "HIGH"
+}
+{
+  "id": "CVE-2025-21172",
+  "problem": ".NET and Visual Studio Remote Code Execution Vulnerability",
+  "weakness": "CWE-190",
+  "cvss_score": 7.5,
+  "cvss_severity": "HIGH"
+}
+...
+```
+
+**Grade:** ⭐⭐⭐ (only available in cve.json)
+
+[📁 get_cve_weakness.jq](index-graph/get_cve_weakness.jq)
+
+### check_version_vulnerable.jq
+
+Check if a specific runtime or SDK version is vulnerable:
+
+```bash
+$ jq --arg version "8.0.11" -rf queries/check_version_vulnerable.jq release-notes/timeline/2025/01/cve.json
+{
+  "cve_id": "CVE-2025-21172",
+  "product": "dotnet-runtime",
+  "vulnerable_range": "8.0.0 - 8.0.11",
+  "fixed_in": "8.0.12"
+}
+{
+  "cve_id": "CVE-2025-21176",
+  "product": "dotnet-runtime",
+  "vulnerable_range": "8.0.0 - 8.0.11",
+  "fixed_in": "8.0.12"
+}
+```
+
+**Grade:** ⭐⭐⭐ (only available in cve.json)
+
+[📁 check_version_vulnerable.jq](index-graph/check_version_vulnerable.jq)
+
+### get_cve_version_range.jq
+
+Get vulnerable version ranges for all products:
+
+```bash
+$ jq -rf queries/get_cve_version_range.jq release-notes/timeline/2025/01/cve.json
+{
+  "cve_id": "CVE-2025-21172",
+  "product": "dotnet-runtime",
+  "release": "8.0",
+  "min_vulnerable": "8.0.0",
+  "max_vulnerable": "8.0.11",
+  "fixed": "8.0.12"
+}
+...
+```
+
+**Grade:** ⭐⭐⭐ (only available in cve.json)
+
+[📁 get_cve_version_range.jq](index-graph/get_cve_version_range.jq)
+
+### get_cve_by_product.jq
+
+Get CVEs affecting a specific product:
+
+```bash
+$ jq --arg product "dotnet-runtime" -rf queries/get_cve_by_product.jq release-notes/timeline/2025/01/cve.json
+[
+  "CVE-2025-21171",
+  "CVE-2025-21172",
+  "CVE-2025-21176"
+]
+```
+
+**Grade:** ⭐⭐⭐ (pre-indexed lookup in cve.json)
+
+[📁 get_cve_by_product.jq](index-graph/get_cve_by_product.jq)
+
+### get_cve_by_severity.jq
+
+Get CVEs by severity level:
+
+```bash
+$ jq --arg severity "HIGH" -rf queries/get_cve_by_severity.jq release-notes/timeline/2025/01/cve.json
+[
+  "CVE-2025-21171",
+  "CVE-2025-21172",
+  "CVE-2025-21173",
+  "CVE-2025-21176"
+]
+```
+
+**Grade:** ⭐⭐⭐ (pre-indexed lookup in cve.json)
+
+[📁 get_cve_by_severity.jq](index-graph/get_cve_by_severity.jq)
+
+### get_cve_description.jq
+
+Get full CVE descriptions and FAQ:
+
+```bash
+$ jq -rf queries/get_cve_description.jq release-notes/timeline/2025/01/cve.json
+{
+  "id": "CVE-2025-21171",
+  "problem": ".NET Remote Code Execution Vulnerability",
+  "description": ["An attacker could exploit this vulnerability..."],
+  "faq": [
+    {
+      "question": "According to the CVSS metric, the attack vector is network (AV:N)...",
+      "answer": "This attack requires a victim to perform a specific action..."
+    }
+  ]
+}
+...
+```
+
+**Grade:** ⭐⭐⭐ (only available in cve.json)
+
+[📁 get_cve_description.jq](index-graph/get_cve_description.jq)
+
+### get_cve_commits_for_release.jq
+
+Get all fix commits for a specific release:
+
+```bash
+$ jq --arg release "8.0" -rf queries/get_cve_commits_for_release.jq release-notes/timeline/2025/01/cve.json
+{
+  "cve_id": "CVE-2025-21172",
+  "product": "dotnet-runtime",
+  "fixed": "8.0.12",
+  "commits": ["89ef51c5d8f5239345127a1e282e11036e590c8b"]
+}
+...
+```
+
+**Grade:** ⭐⭐⭐
+
+[📁 get_cve_commits_for_release.jq](index-graph/get_cve_commits_for_release.jq)
+
+---
+
+## Graph vs cve.json: When to Use Each
+
+The HAL-embedded `_embedded.disclosures` in index files provides quick access to CVE summaries without additional fetches. Use the graph when you need:
+
+- CVE IDs affecting a version or patch
+- Basic severity and title information
+- Fix commit URLs
+- Affected releases list
+
+Fetch `cve.json` when you need:
+
+- CWE weakness classifications
+- Vulnerable version ranges (min/max)
+- Full problem descriptions
+- Microsoft FAQ content
+- Product-to-CVE mappings
+- Severity-to-CVE indexes
+- Acknowledgment credits
+
+**Transfer cost comparison** (January 2025 CVEs):
+
+| Query | Graph Only | Graph + cve.json |
+|-------|------------|------------------|
+| "List CVE IDs for 8.0.12" | 10 KB | - |
+| "Get CVE severity and title" | 10 KB | - |
+| "Check if 8.0.11 is vulnerable" | - | 14 KB |
+| "Get CWE weakness types" | - | 14 KB |
+| "Full CVE details with FAQ" | - | 14 KB |
+
+The graph provides 80% of common CVE queries at 10 KB. The full cve.json (14 KB) is only needed for deep vulnerability analysis.
 
 ---
 

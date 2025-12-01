@@ -35,9 +35,9 @@
         "supported": true,
         "security": false,
         "cve_count": 0,
-        "ga_date": "2025-09-09T00:00:00\u002B00:00",
+        "ga_date": "2025-11-11T00:00:00\u002B00:00",
         "eol_date": "2028-11-14T00:00:00\u002B00:00",
-        "runtimes_patches": [
+        "runtime_patches": [
           "10.0.0"
         ],
         "sdk_patches": [
@@ -50,10 +50,16 @@
             "title": ".NET 10.0",
             "type": "application/hal\u002Bjson"
           },
-          "patch": {
+          "release-patch": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/index.json",
             "path": "/10.0/10.0.0/index.json",
             "title": ".NET 10.0.0",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/index.json",
+            "path": "/10.0/sdk/index.json",
+            "title": ".NET SDK 10.0 Release Information",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -65,9 +71,9 @@
         "supported": true,
         "security": false,
         "cve_count": 0,
-        "ga_date": "2024-09-10T00:00:00\u002B00:00",
+        "ga_date": "2024-11-12T00:00:00\u002B00:00",
         "eol_date": "2026-11-10T00:00:00\u002B00:00",
-        "runtimes_patches": [
+        "runtime_patches": [
           "9.0.11"
         ],
         "sdk_patches": [
@@ -81,10 +87,16 @@
             "title": ".NET 9.0",
             "type": "application/hal\u002Bjson"
           },
-          "patch": {
+          "release-patch": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/index.json",
             "path": "/9.0/9.0.11/index.json",
             "title": ".NET 9.0.11",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
+            "path": "/9.0/sdk/index.json",
+            "title": ".NET SDK 9.0 Release Information",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -96,9 +108,9 @@
         "supported": true,
         "security": false,
         "cve_count": 0,
-        "ga_date": "2023-09-14T00:00:00\u002B00:00",
+        "ga_date": "2023-11-14T00:00:00\u002B00:00",
         "eol_date": "2026-11-10T00:00:00\u002B00:00",
-        "runtimes_patches": [
+        "runtime_patches": [
           "8.0.22"
         ],
         "sdk_patches": [
@@ -113,10 +125,16 @@
             "title": ".NET 8.0",
             "type": "application/hal\u002Bjson"
           },
-          "patch": {
+          "release-patch": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.22/index.json",
             "path": "/8.0/8.0.22/index.json",
             "title": ".NET 8.0.22",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+            "path": "/8.0/sdk/index.json",
+            "title": ".NET SDK 8.0 Release Information",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -125,7 +143,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T04:06:08.7000146\u002B00:00",
+    "generated_on": "2025-12-01T03:26:16.8709347\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }
