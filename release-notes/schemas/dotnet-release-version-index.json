@@ -220,7 +220,7 @@
                   ]
                 }
               },
-              "runtimes_patches": {
+              "runtime_patches": {
                 "description": "Runtime patch versions for this major version released in the period",
                 "type": [
                   "array",
@@ -235,6 +235,19 @@
               },
               "sdk_patches": {
                 "description": "SDK patch versions for this major version released in the period",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "years": {
+                "description": "Years with releases for this major version (cross-reference to timeline)",
                 "type": [
                   "array",
                   "null"

@@ -66,15 +66,8 @@
       "description": "Description of the patch release",
       "type": "string"
     },
-    "runtime_version": {
-      "description": "Runtime version for this patch (same as version)",
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "sdk_versions": {
-      "description": "SDK versions shipped with this runtime patch",
+    "sdk_patches": {
+      "description": "SDK patch versions shipped with this runtime patch",
       "type": [
         "array",
         "null"
@@ -141,33 +134,7 @@
         "null"
       ],
       "properties": {
-        "runtime": {
-          "description": "Runtime information with release notes links",
-          "type": [
-            "object",
-            "null"
-          ],
-          "properties": {
-            "version": {
-              "description": "Runtime version",
-              "type": "string"
-            },
-            "_links": {
-              "description": "Links to runtime release notes",
-              "type": [
-                "object",
-                "null"
-              ],
-              "additionalProperties": {
-                "$ref": "#/properties/_links/additionalProperties"
-              }
-            }
-          },
-          "required": [
-            "version"
-          ]
-        },
-        "sdks": {
+        "sdk": {
           "description": "SDK versions shipped with this runtime patch",
           "type": [
             "array",
