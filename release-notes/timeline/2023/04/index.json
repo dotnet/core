@@ -41,9 +41,9 @@
         "supported": false,
         "security": false,
         "cve_count": 0,
-        "ga_date": "2023-09-14T00:00:00\u002B00:00",
+        "ga_date": "2023-11-14T00:00:00\u002B00:00",
         "eol_date": "2026-11-10T00:00:00\u002B00:00",
-        "runtimes_patches": [
+        "runtime_patches": [
           "8.0.0-preview.3.23174.8"
         ],
         "sdk_patches": [
@@ -56,10 +56,16 @@
             "title": ".NET 8.0",
             "type": "application/hal\u002Bjson"
           },
-          "patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0-preview.3.23174.8/index.json",
-            "path": "/8.0/8.0.0-preview.3.23174.8/index.json",
+          "release-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/preview/preview3/index.json",
+            "path": "/8.0/preview/preview3/index.json",
             "title": ".NET 8.0.0-preview.3.23174.8",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+            "path": "/8.0/sdk/index.json",
+            "title": ".NET SDK 8.0 Release Information",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -71,9 +77,9 @@
         "supported": false,
         "security": false,
         "cve_count": 0,
-        "ga_date": "2022-09-14T00:00:00\u002B00:00",
+        "ga_date": "2022-11-08T00:00:00\u002B00:00",
         "eol_date": "2024-05-14T00:00:00\u002B00:00",
-        "runtimes_patches": [
+        "runtime_patches": [
           "7.0.5"
         ],
         "sdk_patches": [
@@ -88,7 +94,7 @@
             "title": ".NET 7.0",
             "type": "application/hal\u002Bjson"
           },
-          "patch": {
+          "release-patch": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.5/index.json",
             "path": "/7.0/7.0.5/index.json",
             "title": ".NET 7.0.5",
@@ -103,9 +109,9 @@
         "supported": false,
         "security": false,
         "cve_count": 0,
-        "ga_date": "2021-09-14T00:00:00\u002B00:00",
+        "ga_date": "2021-11-08T00:00:00\u002B00:00",
         "eol_date": "2024-11-12T00:00:00\u002B00:00",
-        "runtimes_patches": [
+        "runtime_patches": [
           "6.0.16"
         ],
         "sdk_patches": [
@@ -120,7 +126,7 @@
             "title": ".NET 6.0",
             "type": "application/hal\u002Bjson"
           },
-          "patch": {
+          "release-patch": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.16/index.json",
             "path": "/6.0/6.0.16/index.json",
             "title": ".NET 6.0.16",
@@ -132,7 +138,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T04:06:08.7554653\u002B00:00",
+    "generated_on": "2025-12-01T03:26:16.9214265\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }
