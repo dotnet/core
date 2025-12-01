@@ -8,8 +8,7 @@
   "support_phase": "active",
   "title": ".NET 8.0.2 Patch Index",
   "description": "Patch information for .NET 8.0.2",
-  "runtime_version": "8.0.2",
-  "sdk_versions": [
+  "sdk_patches": [
     "8.0.201",
     "8.0.200",
     "8.0.102"
@@ -21,56 +20,81 @@
       "title": "8.0.2 Patch Index",
       "type": "application/hal\u002Bjson"
     },
+    "release-major": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+      "path": "/8.0/index.json",
+      "title": ".NET 8.0 Patch Release Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "latest-sdk": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+      "path": "/8.0/sdk/index.json",
+      "title": ".NET SDK 8.0 Release Information",
+      "type": "application/hal\u002Bjson"
+    },
+    "prev": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.1/index.json",
+      "path": "/8.0/8.0.1/index.json",
+      "title": "8.0.1 Patch Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "next": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/index.json",
+      "path": "/8.0/8.0.3/index.json",
+      "title": "8.0.3 Patch Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "release-notes-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.2/8.0.2.md",
+      "path": "/8.0/8.0.2/8.0.2.md",
+      "title": "8.0.2 Release Notes",
+      "type": "application/markdown"
+    },
+    "release-notes-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.2/8.0.2.md",
+      "path": "/8.0/8.0.2/8.0.2.md",
+      "title": "8.0.2 Release Notes (Rendered)",
+      "type": "application/markdown"
+    },
+    "release-month": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/02/index.json",
+      "path": "/timeline/2024/02/index.json",
+      "title": "Release timeline index for 2024-02",
+      "type": "application/hal\u002Bjson"
+    },
+    "release-year": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/index.json",
+      "path": "/timeline/2024/index.json",
+      "title": "Release timeline index for 2024",
+      "type": "application/hal\u002Bjson"
+    },
     "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.2/release.json",
       "path": "/8.0/8.0.2/release.json",
       "title": "8.0.2 Release Information",
       "type": "application/json"
     },
-    "major-version-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
-      "path": "/8.0/index.json",
-      "title": ".NET 8.0 Patch Release Index",
-      "type": "application/hal\u002Bjson"
-    },
-    "sdk-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
-      "path": "/8.0/sdk/index.json",
-      "title": ".NET SDK 8.0 Release Information",
-      "type": "application/hal\u002Bjson"
-    },
-    "month-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/02/index.json",
-      "path": "/timeline/2024/02/index.json",
-      "title": "Release timeline index for 2024-02",
-      "type": "application/hal\u002Bjson"
-    },
     "cve-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/02/cve.json",
       "path": "/timeline/2024/02/cve.json",
       "title": "CVE Information",
       "type": "application/json"
+    },
+    "cve-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/02/cve.md",
+      "path": "/timeline/2024/02/cve.md",
+      "title": "CVE Information",
+      "type": "application/markdown"
+    },
+    "cve-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/timeline/2024/02/cve.md",
+      "path": "/timeline/2024/02/cve.md",
+      "title": "CVE Information (Rendered)",
+      "type": "application/markdown"
     }
   },
   "_embedded": {
-    "runtime": {
-      "version": "8.0.2",
-      "_links": {
-        "release-notes-markdown": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.2/8.0.2.md",
-          "path": "/8.0/8.0.2/8.0.2.md",
-          "title": "8.0.2 Release Notes",
-          "type": "application/markdown"
-        },
-        "release-notes-markdown-rendered": {
-          "href": "https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.2/8.0.2.md",
-          "path": "/8.0/8.0.2/8.0.2.md",
-          "title": "8.0.2 Release Notes (Rendered)",
-          "type": "application/markdown"
-        }
-      }
-    },
-    "sdks": [
+    "sdk": [
       {
         "version": "8.0.201",
         "_links": {
@@ -216,7 +240,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-11-27T06:09:50.0079288\u002B00:00",
+    "generated_on": "2025-12-01T03:26:05.879524\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
