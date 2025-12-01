@@ -189,7 +189,10 @@
               },
               "cve_count": {
                 "description": "Number of CVEs affecting this release",
-                "type": "integer"
+                "type": [
+                  "integer",
+                  "null"
+                ]
               },
               "ga_date": {
                 "description": "General Availability date when this version was released",

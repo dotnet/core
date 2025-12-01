@@ -47,6 +47,19 @@
       "description": "Number of CVEs fixed in this release",
       "type": "integer"
     },
+    "cve_records": {
+      "description": "CVE identifiers fixed in this release (for quick enumeration)",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
     "support_phase": {
       "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
       "enum": [
@@ -164,19 +177,6 @@
             },
             "required": [
               "version"
-            ]
-          }
-        },
-        "cve_records": {
-          "description": "CVE IDs associated with this patch release",
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": [
-              "string",
-              "null"
             ]
           }
         },
@@ -372,6 +372,7 @@
     "date",
     "security",
     "cve_count",
+    "cve_records",
     "support_phase",
     "title",
     "description"

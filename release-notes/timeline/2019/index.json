@@ -21,16 +21,16 @@
       "title": "Release timeline index for 2019",
       "type": "application/hal\u002Bjson"
     },
-    "prev": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/index.json",
-      "path": "/timeline/2018/index.json",
-      "title": "Release timeline index for 2018",
-      "type": "application/hal\u002Bjson"
-    },
     "next": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/index.json",
       "path": "/timeline/2020/index.json",
       "title": "Release timeline index for 2020",
+      "type": "application/hal\u002Bjson"
+    },
+    "prev": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/index.json",
+      "path": "/timeline/2018/index.json",
+      "title": "Release timeline index for 2018",
       "type": "application/hal\u002Bjson"
     },
     "latest-month": {
@@ -43,6 +43,12 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/index.json",
       "path": "/3.1/index.json",
       "title": "Latest release (.NET 3.1)",
+      "type": "application/hal\u002Bjson"
+    },
+    "timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "path": "/timeline/index.json",
+      "title": ".NET Release Timeline Index",
       "type": "application/hal\u002Bjson"
     }
   },
@@ -281,7 +287,6 @@
         "release_type": "lts",
         "phase": "active",
         "supported": false,
-        "cve_count": 0,
         "ga_date": "2019-12-03T00:00:00\u002B00:00",
         "eol_date": "2022-12-13T00:00:00\u002B00:00",
         "_links": {
@@ -291,16 +296,16 @@
             "title": ".NET 3.1",
             "type": "application/hal\u002Bjson"
           },
-          "latest-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.0/index.json",
-            "path": "/3.1/3.1.0/index.json",
-            "title": "Latest patch (3.1.0)",
-            "type": "application/hal\u002Bjson"
-          },
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/12/index.json",
             "path": "/timeline/2019/12/index.json",
             "title": "Latest month (2019-12)",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.0/index.json",
+            "path": "/3.1/3.1.0/index.json",
+            "title": "Latest patch (3.1.0)",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -310,7 +315,6 @@
         "release_type": "sts",
         "phase": "active",
         "supported": false,
-        "cve_count": 0,
         "ga_date": "2019-09-23T00:00:00\u002B00:00",
         "eol_date": "2020-03-03T00:00:00\u002B00:00",
         "_links": {
@@ -320,16 +324,16 @@
             "title": ".NET 3.0",
             "type": "application/hal\u002Bjson"
           },
-          "latest-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/3.0.1/index.json",
-            "path": "/3.0/3.0.1/index.json",
-            "title": "Latest patch (3.0.1)",
-            "type": "application/hal\u002Bjson"
-          },
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/11/index.json",
             "path": "/timeline/2019/11/index.json",
             "title": "Latest month (2019-11)",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/3.0.1/index.json",
+            "path": "/3.0/3.0.1/index.json",
+            "title": "Latest patch (3.0.1)",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -339,7 +343,6 @@
         "release_type": "sts",
         "phase": "active",
         "supported": false,
-        "cve_count": 0,
         "ga_date": "2018-12-04T00:00:00\u002B00:00",
         "eol_date": "2019-12-23T00:00:00\u002B00:00",
         "_links": {
@@ -349,16 +352,16 @@
             "title": ".NET 2.2",
             "type": "application/hal\u002Bjson"
           },
-          "latest-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.8/index.json",
-            "path": "/2.2/2.2.8/index.json",
-            "title": "Latest patch (2.2.8)",
-            "type": "application/hal\u002Bjson"
-          },
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/11/index.json",
             "path": "/timeline/2019/11/index.json",
             "title": "Latest month (2019-11)",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.8/index.json",
+            "path": "/2.2/2.2.8/index.json",
+            "title": "Latest patch (2.2.8)",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -368,7 +371,6 @@
         "release_type": "lts",
         "phase": "active",
         "supported": false,
-        "cve_count": 0,
         "ga_date": "2018-05-30T00:00:00\u002B00:00",
         "eol_date": "2021-08-21T00:00:00\u002B00:00",
         "_links": {
@@ -378,16 +380,16 @@
             "title": ".NET 2.1",
             "type": "application/hal\u002Bjson"
           },
-          "latest-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.14/index.json",
-            "path": "/2.1/2.1.14/index.json",
-            "title": "Latest patch (2.1.14)",
-            "type": "application/hal\u002Bjson"
-          },
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/11/index.json",
             "path": "/timeline/2019/11/index.json",
             "title": "Latest month (2019-11)",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.14/index.json",
+            "path": "/2.1/2.1.14/index.json",
+            "title": "Latest patch (2.1.14)",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -397,7 +399,6 @@
         "release_type": "lts",
         "phase": "active",
         "supported": false,
-        "cve_count": 0,
         "ga_date": "2016-11-16T00:00:00\u002B00:00",
         "eol_date": "2019-06-27T00:00:00\u002B00:00",
         "_links": {
@@ -407,16 +408,16 @@
             "title": ".NET 1.1",
             "type": "application/hal\u002Bjson"
           },
-          "latest-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/1.1.13/index.json",
-            "path": "/1.1/1.1.13/index.json",
-            "title": "Latest patch (1.1.13)",
-            "type": "application/hal\u002Bjson"
-          },
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/05/index.json",
             "path": "/timeline/2019/05/index.json",
             "title": "Latest month (2019-05)",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/1.1.13/index.json",
+            "path": "/1.1/1.1.13/index.json",
+            "title": "Latest patch (1.1.13)",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -426,7 +427,6 @@
         "release_type": "lts",
         "phase": "active",
         "supported": false,
-        "cve_count": 0,
         "ga_date": "2016-06-27T00:00:00\u002B00:00",
         "eol_date": "2019-06-27T00:00:00\u002B00:00",
         "_links": {
@@ -436,16 +436,16 @@
             "title": ".NET 1.0",
             "type": "application/hal\u002Bjson"
           },
-          "latest-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/1.0.16/index.json",
-            "path": "/1.0/1.0.16/index.json",
-            "title": "Latest patch (1.0.16)",
-            "type": "application/hal\u002Bjson"
-          },
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/05/index.json",
             "path": "/timeline/2019/05/index.json",
             "title": "Latest month (2019-05)",
+            "type": "application/hal\u002Bjson"
+          },
+          "latest-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/1.0.16/index.json",
+            "path": "/1.0/1.0.16/index.json",
+            "title": "Latest patch (1.0.16)",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -454,7 +454,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-01T03:26:16.9298416\u002B00:00",
+    "generated_on": "2025-12-01T05:09:45.4267737\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }
