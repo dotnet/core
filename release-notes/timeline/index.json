@@ -13,12 +13,6 @@
       "title": ".NET Release Timeline Index",
       "type": "application/hal\u002Bjson"
     },
-    "releases-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json",
-      "path": "/index.json",
-      "title": ".NET Release Index",
-      "type": "application/hal\u002Bjson"
-    },
     "latest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
       "path": "/10.0/index.json",
@@ -31,10 +25,22 @@
       "title": "Latest LTS release (.NET 10.0)",
       "type": "application/hal\u002Bjson"
     },
+    "latest-security-month": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json",
+      "path": "/timeline/2025/10/index.json",
+      "title": "Latest security month (2025-10)",
+      "type": "application/hal\u002Bjson"
+    },
     "latest-year": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/index.json",
       "path": "/timeline/2025/index.json",
       "title": "Latest year (2025)",
+      "type": "application/hal\u002Bjson"
+    },
+    "releases-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json",
+      "path": "/index.json",
+      "title": ".NET Release Index",
       "type": "application/hal\u002Bjson"
     }
   },
@@ -83,8 +89,8 @@
         "releases": [
           "9.0",
           "8.0",
-          "6.0",
-          "7.0"
+          "7.0",
+          "6.0"
         ],
         "_links": {
           "self": {
@@ -130,8 +136,8 @@
         "releases": [
           "7.0",
           "6.0",
-          "3.1",
-          "5.0"
+          "5.0",
+          "3.1"
         ],
         "_links": {
           "self": {
@@ -178,8 +184,8 @@
         "releases": [
           "5.0",
           "3.1",
-          "2.1",
-          "3.0"
+          "3.0",
+          "2.1"
         ],
         "_links": {
           "self": {
@@ -229,9 +235,9 @@
           "3.0",
           "2.2",
           "2.1",
+          "2.0",
           "1.1",
-          "1.0",
-          "2.0"
+          "1.0"
         ],
         "_links": {
           "self": {
@@ -297,7 +303,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-01T03:26:16.9359226\u002B00:00",
+    "generated_on": "2025-12-01T05:09:45.4333079\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }

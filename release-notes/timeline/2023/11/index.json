@@ -6,6 +6,12 @@
   "year": "2023",
   "month": "11",
   "security": true,
+  "cve_count": 3,
+  "cve_records": [
+    "CVE-2023-36038",
+    "CVE-2023-36049",
+    "CVE-2023-36558"
+  ],
   "latest_release": "8.0",
   "releases": [
     "8.0",
@@ -17,6 +23,18 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/index.json",
       "path": "/timeline/2023/11/index.json",
       "title": "Release timeline index for 2023-11",
+      "type": "application/hal\u002Bjson"
+    },
+    "next": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/01/index.json",
+      "path": "/timeline/2024/01/index.json",
+      "title": "Release timeline index for 2024-01",
+      "type": "application/hal\u002Bjson"
+    },
+    "prev": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/10/index.json",
+      "path": "/timeline/2023/10/index.json",
+      "title": "Release timeline index for 2023-10",
       "type": "application/hal\u002Bjson"
     },
     "cve-json": {
@@ -37,16 +55,16 @@
       "title": "CVE Information (Rendered)",
       "type": "application/markdown"
     },
-    "prev": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/10/index.json",
-      "path": "/timeline/2023/10/index.json",
-      "title": "Release timeline index for 2023-10",
+    "timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "path": "/timeline/index.json",
+      "title": ".NET Release Timeline Index",
       "type": "application/hal\u002Bjson"
     },
-    "next": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/01/index.json",
-      "path": "/timeline/2024/01/index.json",
-      "title": "Release timeline index for 2024-01",
+    "year-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/index.json",
+      "path": "/timeline/2023/index.json",
+      "title": ".NET Release Timeline Index - 2023",
       "type": "application/hal\u002Bjson"
     }
   },
@@ -79,18 +97,6 @@
             "title": ".NET 8.0",
             "type": "application/hal\u002Bjson"
           },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/index.json",
-            "path": "/8.0/8.0.0/index.json",
-            "title": ".NET 8.0.0",
-            "type": "application/hal\u002Bjson"
-          },
-          "latest-sdk": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
-            "path": "/8.0/sdk/index.json",
-            "title": ".NET SDK 8.0 Release Information",
-            "type": "application/hal\u002Bjson"
-          },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/cve.json",
             "path": "/timeline/2023/11/cve.json",
@@ -108,6 +114,18 @@
             "path": "/timeline/2023/11/cve.md",
             "title": "CVE Information (Rendered)",
             "type": "application/markdown"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+            "path": "/8.0/sdk/index.json",
+            "title": ".NET SDK 8.0 Release Information",
+            "type": "application/hal\u002Bjson"
+          },
+          "release-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/index.json",
+            "path": "/8.0/8.0.0/index.json",
+            "title": ".NET 8.0.0",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
@@ -139,12 +157,6 @@
             "title": ".NET 7.0",
             "type": "application/hal\u002Bjson"
           },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.14/index.json",
-            "path": "/7.0/7.0.14/index.json",
-            "title": ".NET 7.0.14",
-            "type": "application/hal\u002Bjson"
-          },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/cve.json",
             "path": "/timeline/2023/11/cve.json",
@@ -162,6 +174,12 @@
             "path": "/timeline/2023/11/cve.md",
             "title": "CVE Information (Rendered)",
             "type": "application/markdown"
+          },
+          "release-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.14/index.json",
+            "path": "/7.0/7.0.14/index.json",
+            "title": ".NET 7.0.14",
+            "type": "application/hal\u002Bjson"
           }
         }
       },
@@ -193,12 +211,6 @@
             "title": ".NET 6.0",
             "type": "application/hal\u002Bjson"
           },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.25/index.json",
-            "path": "/6.0/6.0.25/index.json",
-            "title": ".NET 6.0.25",
-            "type": "application/hal\u002Bjson"
-          },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/cve.json",
             "path": "/timeline/2023/11/cve.json",
@@ -216,6 +228,12 @@
             "path": "/timeline/2023/11/cve.md",
             "title": "CVE Information (Rendered)",
             "type": "application/markdown"
+          },
+          "release-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.25/index.json",
+            "path": "/6.0/6.0.25/index.json",
+            "title": ".NET 6.0.25",
+            "type": "application/hal\u002Bjson"
           }
         }
       }
@@ -350,7 +368,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-01T03:26:16.9202921\u002B00:00",
+    "generated_on": "2025-12-01T05:09:45.4156862\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }
