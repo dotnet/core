@@ -6,6 +6,11 @@
   "year": "2024",
   "month": "11",
   "security": true,
+  "cve_count": 2,
+  "cve_records": [
+    "CVE-2024-43498",
+    "CVE-2024-43499"
+  ],
   "latest_release": "8.0",
   "releases": [
     "8.0",
@@ -16,6 +21,18 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/11/index.json",
       "path": "/timeline/2024/11/index.json",
       "title": "Release timeline index for 2024-11",
+      "type": "application/hal\u002Bjson"
+    },
+    "next": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/12/index.json",
+      "path": "/timeline/2024/12/index.json",
+      "title": "Release timeline index for 2024-12",
+      "type": "application/hal\u002Bjson"
+    },
+    "prev": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/10/index.json",
+      "path": "/timeline/2024/10/index.json",
+      "title": "Release timeline index for 2024-10",
       "type": "application/hal\u002Bjson"
     },
     "cve-json": {
@@ -36,16 +53,16 @@
       "title": "CVE Information (Rendered)",
       "type": "application/markdown"
     },
-    "prev": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/10/index.json",
-      "path": "/timeline/2024/10/index.json",
-      "title": "Release timeline index for 2024-10",
+    "timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "path": "/timeline/index.json",
+      "title": ".NET Release Timeline Index",
       "type": "application/hal\u002Bjson"
     },
-    "next": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/12/index.json",
-      "path": "/timeline/2024/12/index.json",
-      "title": "Release timeline index for 2024-12",
+    "year-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/index.json",
+      "path": "/timeline/2024/index.json",
+      "title": ".NET Release Timeline Index - 2024",
       "type": "application/hal\u002Bjson"
     }
   },
@@ -75,16 +92,16 @@
             "title": ".NET 8.0",
             "type": "application/hal\u002Bjson"
           },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.11/index.json",
-            "path": "/8.0/8.0.11/index.json",
-            "title": ".NET 8.0.11",
-            "type": "application/hal\u002Bjson"
-          },
           "latest-sdk": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
             "path": "/8.0/sdk/index.json",
             "title": ".NET SDK 8.0 Release Information",
+            "type": "application/hal\u002Bjson"
+          },
+          "release-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.11/index.json",
+            "path": "/8.0/8.0.11/index.json",
+            "title": ".NET 8.0.11",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -194,7 +211,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-01T03:26:16.9190539\u002B00:00",
+    "generated_on": "2025-12-01T05:09:45.4145358\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }
