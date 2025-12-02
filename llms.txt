@@ -29,6 +29,7 @@ All deeper navigation must follow HAL links from these indexes.
 * Both indexes cross-link via `_links` to enable wormhole navigation
 * Properties use snake-case-lower
 * Link relations use kebab-case-lower
+* `latest-release` and `latest_release` always referenced supported not preview releases
 * Referenced `cve.json` files provide rich query dictionaries
 
 ## Canonical navigation
@@ -102,9 +103,9 @@ Do not defer; firewall or domain restrictions may block later access.
 
 ## Releases Index
 
-(Use for **version-based** prompts. Entry-point URL is fixed.)
+For **version-based** prompts.
 
-**Endpoint:** https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json
+Endpoint: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json
 
 * Latest supported release: `latest`
 * Latest LTS release: `latest_lts`
@@ -152,9 +153,9 @@ Do not defer; firewall or domain restrictions may block later access.
 
 ## Timeline Index
 
-(Use for **time-based** prompts. Entry-point URL is fixed.)
+For **time-based** prompts.
 
-**Endpoint:** https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json
+Endpoint: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json
 
 * Latest year: `latest_year`
 * Releases index: `_links.releases-index`
