@@ -88,7 +88,7 @@ $ jq -r '._embedded.releases[].version' release-notes/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_all_versions.jq](index-graph/get_all_versions.jq)
+[📁 get_all_versions.jq](hal-graph/get_all_versions.jq)
 
 ### get_supported_versions.jq
 
@@ -101,7 +101,7 @@ $ jq -r '._embedded.releases[] | select(.supported == true) | .version' release-
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_supported_versions.jq](index-graph/get_supported_versions.jq)
+[📁 get_supported_versions.jq](hal-graph/get_supported_versions.jq)
 
 ### get_lts_versions.jq
 
@@ -116,7 +116,7 @@ $ jq -r '._embedded.releases[] | select(.release_type == "lts") | .version' rele
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_lts_versions.jq](index-graph/get_lts_versions.jq)
+[📁 get_lts_versions.jq](hal-graph/get_lts_versions.jq)
 
 ### get_sts_versions.jq
 
@@ -130,7 +130,7 @@ $ jq -r '._embedded.releases[] | select(.release_type == "sts") | .version' rele
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_sts_versions.jq](index-graph/get_sts_versions.jq)
+[📁 get_sts_versions.jq](hal-graph/get_sts_versions.jq)
 
 ### get_eol_versions.jq
 
@@ -144,7 +144,7 @@ $ jq -r '._embedded.releases[] | select(.phase == "eol") | .version' release-not
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_eol_versions.jq](index-graph/get_eol_versions.jq)
+[📁 get_eol_versions.jq](hal-graph/get_eol_versions.jq)
 
 ### get_latest_version.jq
 
@@ -155,7 +155,7 @@ $ jq -r '.latest' release-notes/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_latest_version.jq](index-graph/get_latest_version.jq)
+[📁 get_latest_version.jq](hal-graph/get_latest_version.jq)
 
 ### get_latest_lts.jq
 
@@ -166,7 +166,7 @@ $ jq -r '.latest_lts' release-notes/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_latest_lts.jq](index-graph/get_latest_lts.jq)
+[📁 get_latest_lts.jq](hal-graph/get_latest_lts.jq)
 
 ---
 
@@ -188,7 +188,7 @@ $ jq --arg version "9.0" -r '._embedded.releases[] | select(.version == $version
 
 **Grade:** ⭐⭐⭐
 
-[📁 check_version_supported.jq](index-graph/check_version_supported.jq)
+[📁 check_version_supported.jq](hal-graph/check_version_supported.jq)
 
 ### versions_with_eol_dates.jq
 
@@ -204,7 +204,7 @@ $ jq -r '._embedded.releases[] | {version, eol_date, supported}' release-notes/i
 
 **Grade:** ⭐⭐⭐
 
-[📁 versions_with_eol_dates.jq](index-graph/versions_with_eol_dates.jq)
+[📁 versions_with_eol_dates.jq](hal-graph/versions_with_eol_dates.jq)
 
 ### active_versions_with_dates.jq
 
@@ -221,7 +221,7 @@ $ jq -r '._embedded.releases[] | select(.phase == "active") | {version, release_
 
 **Grade:** ⭐⭐⭐
 
-[📁 active_versions_with_dates.jq](index-graph/active_versions_with_dates.jq)
+[📁 active_versions_with_dates.jq](hal-graph/active_versions_with_dates.jq)
 
 ### versions_by_support_type.jq
 
@@ -237,7 +237,7 @@ $ jq -rf queries/versions_by_support_type.jq release-notes/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 versions_by_support_type.jq](index-graph/versions_by_support_type.jq)
+[📁 versions_by_support_type.jq](hal-graph/versions_by_support_type.jq)
 
 ---
 
@@ -254,7 +254,7 @@ $ jq -r '._embedded.releases[0].version' release-notes/9.0/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_latest_patch.jq](index-graph/get_latest_patch.jq)
+[📁 get_latest_patch.jq](hal-graph/get_latest_patch.jq)
 
 ### get_latest_security_patch.jq
 
@@ -265,7 +265,7 @@ $ jq -r '.latest_security' release-notes/9.0/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_latest_security_patch.jq](index-graph/get_latest_security_patch.jq)
+[📁 get_latest_security_patch.jq](hal-graph/get_latest_security_patch.jq)
 
 ### get_security_patches.jq
 
@@ -282,7 +282,7 @@ $ jq -r '._embedded.releases[] | select(.security == true) | .version' release-n
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_security_patches.jq](index-graph/get_security_patches.jq)
+[📁 get_security_patches.jq](hal-graph/get_security_patches.jq)
 
 ### get_cves_for_version.jq
 
@@ -297,7 +297,7 @@ CVE-2025-21172
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_cves_for_version.jq](index-graph/get_cves_for_version.jq)
+[📁 get_cves_for_version.jq](hal-graph/get_cves_for_version.jq)
 
 ### security_patches_table.jq
 
@@ -313,7 +313,7 @@ $ jq -rf queries/security_patches_table.jq release-notes/9.0/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 security_patches_table.jq](index-graph/security_patches_table.jq)
+[📁 security_patches_table.jq](hal-graph/security_patches_table.jq)
 
 ---
 
@@ -333,7 +333,7 @@ CVE-2025-21176
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_cves_for_patch.jq](index-graph/get_cves_for_patch.jq)
+[📁 get_cves_for_patch.jq](hal-graph/get_cves_for_patch.jq)
 
 ### get_cve_details.jq
 
@@ -353,7 +353,7 @@ $ jq -r '._embedded.disclosures[] | {id, title, cvss_score, cvss_severity, affec
 
 **Recommendation:** Object construction is needed to select fields. This is acceptable - full disclosure objects contain many fields and selective projection is appropriate.
 
-[📁 get_cve_details.jq](index-graph/get_cve_details.jq)
+[📁 get_cve_details.jq](hal-graph/get_cve_details.jq)
 
 ### get_cve_fixes.jq
 
@@ -374,7 +374,7 @@ $ jq -r '._embedded.disclosures[] | {id, fixes: [.fixes[] | {repo, branch, href}
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_cve_fixes.jq](index-graph/get_cve_fixes.jq)
+[📁 get_cve_fixes.jq](hal-graph/get_cve_fixes.jq)
 
 ### get_high_severity_cves.jq
 
@@ -390,7 +390,7 @@ $ jq -r '._embedded.disclosures[] | select(.cvss_severity == "HIGH" or .cvss_sev
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_high_severity_cves.jq](index-graph/get_high_severity_cves.jq)
+[📁 get_high_severity_cves.jq](hal-graph/get_high_severity_cves.jq)
 
 ---
 
@@ -411,7 +411,7 @@ $ jq -r '._embedded.years[].year' release-notes/timeline/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_timeline_years.jq](index-graph/get_timeline_years.jq)
+[📁 get_timeline_years.jq](hal-graph/get_timeline_years.jq)
 
 ### get_versions_active_in_year.jq
 
@@ -430,7 +430,7 @@ $ jq -r '._embedded.releases[] | {version, release_type, phase, supported}' rele
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_versions_active_in_year.jq](index-graph/get_versions_active_in_year.jq)
+[📁 get_versions_active_in_year.jq](hal-graph/get_versions_active_in_year.jq)
 
 ### get_months_with_cves.jq
 
@@ -451,7 +451,7 @@ $ jq -r '._embedded.months[] | select(.security) | {month, cve_count: (.cve_reco
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_months_with_cves.jq](index-graph/get_months_with_cves.jq)
+[📁 get_months_with_cves.jq](hal-graph/get_months_with_cves.jq)
 
 ### get_cves_by_month.jq
 
@@ -472,7 +472,7 @@ $ jq -r '._embedded.disclosures[] | {id, title, cvss_severity, affected_releases
 
 **Recommendation:** Same as `get_cve_details.jq` - object construction for field selection is acceptable.
 
-[📁 get_cves_by_month.jq](index-graph/get_cves_by_month.jq)
+[📁 get_cves_by_month.jq](hal-graph/get_cves_by_month.jq)
 
 ### get_patches_by_month.jq
 
@@ -494,7 +494,7 @@ $ jq -r '._embedded.releases[] | {version, runtime: .runtime_patches, sdk: .sdk_
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_patches_by_month.jq](index-graph/get_patches_by_month.jq)
+[📁 get_patches_by_month.jq](hal-graph/get_patches_by_month.jq)
 
 ### cves_by_year_table.jq
 
@@ -512,7 +512,7 @@ $ jq -rf queries/cves_by_year_table.jq release-notes/timeline/2024/index.json
 
 **Grade:** ⭐⭐⭐
 
-[📁 cves_by_year_table.jq](index-graph/cves_by_year_table.jq)
+[📁 cves_by_year_table.jq](hal-graph/cves_by_year_table.jq)
 
 ---
 
@@ -547,7 +547,7 @@ $ jq -rf queries/get_cve_weakness.jq release-notes/timeline/2025/01/cve.json
 
 **Grade:** ⭐⭐⭐ (only available in cve.json)
 
-[📁 get_cve_weakness.jq](index-graph/get_cve_weakness.jq)
+[📁 get_cve_weakness.jq](hal-graph/get_cve_weakness.jq)
 
 ### check_version_vulnerable.jq
 
@@ -571,7 +571,7 @@ $ jq --arg version "8.0.11" -rf queries/check_version_vulnerable.jq release-note
 
 **Grade:** ⭐⭐⭐ (only available in cve.json)
 
-[📁 check_version_vulnerable.jq](index-graph/check_version_vulnerable.jq)
+[📁 check_version_vulnerable.jq](hal-graph/check_version_vulnerable.jq)
 
 ### get_cve_version_range.jq
 
@@ -592,7 +592,7 @@ $ jq -rf queries/get_cve_version_range.jq release-notes/timeline/2025/01/cve.jso
 
 **Grade:** ⭐⭐⭐ (only available in cve.json)
 
-[📁 get_cve_version_range.jq](index-graph/get_cve_version_range.jq)
+[📁 get_cve_version_range.jq](hal-graph/get_cve_version_range.jq)
 
 ### get_cve_by_product.jq
 
@@ -609,7 +609,7 @@ $ jq --arg product "dotnet-runtime" -rf queries/get_cve_by_product.jq release-no
 
 **Grade:** ⭐⭐⭐ (pre-indexed lookup in cve.json)
 
-[📁 get_cve_by_product.jq](index-graph/get_cve_by_product.jq)
+[📁 get_cve_by_product.jq](hal-graph/get_cve_by_product.jq)
 
 ### get_cve_by_severity.jq
 
@@ -627,7 +627,7 @@ $ jq --arg severity "HIGH" -rf queries/get_cve_by_severity.jq release-notes/time
 
 **Grade:** ⭐⭐⭐ (pre-indexed lookup in cve.json)
 
-[📁 get_cve_by_severity.jq](index-graph/get_cve_by_severity.jq)
+[📁 get_cve_by_severity.jq](hal-graph/get_cve_by_severity.jq)
 
 ### get_cve_description.jq
 
@@ -651,7 +651,7 @@ $ jq -rf queries/get_cve_description.jq release-notes/timeline/2025/01/cve.json
 
 **Grade:** ⭐⭐⭐ (only available in cve.json)
 
-[📁 get_cve_description.jq](index-graph/get_cve_description.jq)
+[📁 get_cve_description.jq](hal-graph/get_cve_description.jq)
 
 ### get_cve_commits_for_release.jq
 
@@ -670,7 +670,7 @@ $ jq --arg release "8.0" -rf queries/get_cve_commits_for_release.jq release-note
 
 **Grade:** ⭐⭐⭐
 
-[📁 get_cve_commits_for_release.jq](index-graph/get_cve_commits_for_release.jq)
+[📁 get_cve_commits_for_release.jq](hal-graph/get_cve_commits_for_release.jq)
 
 ---
 

@@ -1,40 +1,206 @@
-# .NET Release Metadata - Usage Guide
+# Quick Reference
 
-Structured, machine-readable .NET release data optimized for AI assistant consumption.
+## Entry Points
 
-## Documentation
+| Query Type | Entry Point |
+|------------|-------------|
+| Version/patch queries | `https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json` |
+| Time-based queries | `https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json` |
 
-This usage guide provides an overview. For detailed workflows and field definitions:
+**CRITICAL**: Never construct URLs manually. Always follow `_links.href` values from JSON responses.
 
-- **[quick-ref.md](quick-ref.md)** - Essential workflows, response patterns, and field definitions
-- **[llms.txt](../llms.txt)** - Discovery file (root of repo)
-- **Glossary**: Available in `index.json` → `glossary` or `release-notes/_glossary.json`
+## Common Workflows
 
-**About link types**: The `index.json` file provides both `-markdown` links (for raw markdown consumption by LLMs) and `-markdown-rendered` links (for web viewing on GitHub). Always follow the appropriate link from `index.json` rather than constructing URLs.
+| Task | Path |
+|------|------|
+| Latest release | `index.json` → `_links.latest.href` |
+| Latest LTS | `index.json` → `_links.latest-lts.href` |
+| Version patches | `index.json` → version → `_embedded.releases[]` |
+| Security patches | `9.0/index.json` → `_links.latest-security.href` |
+| CVEs for version | `9.0/index.json` → `_embedded.cve_records` |
+| CVEs for patch | `9.0/9.0.1/index.json` → `_embedded.disclosures[]` |
+| CVEs by month | `timeline/index.json` → year → month → `_embedded.disclosures[]` |
+| SDK downloads | `9.0/sdk/index.json` |
+| OS support | `9.0/supported-os.json` |
 
-## Quick Start — Choose Your Entry Point
+## CVE Analysis Workflows
 
-| Query Type | Entry Point | Example |
-|------------|-------------|---------|
-| Version/patch queries | Version Index | "What CVEs affect .NET 9.0?" |
-| Time-based queries | Timeline Index | "What was disclosed in July 2024?" |
+### Version-Centric (for version/patch queries)
 
-**Version Index**: `https://raw.githubusercontent.com/dotnet/core/main/release-notes/index.json`
-**Timeline Index**: `https://raw.githubusercontent.com/dotnet/core/main/release-notes/timeline/index.json`
+1. GET `index.json` → navigate to major version (e.g., `9.0/index.json`)
+2. View all CVEs for version in `_embedded.cve_records`
+3. Find security patches: `_embedded.releases[]` where `security: true`
+4. Navigate to patch index → **full details in `_embedded.disclosures[]`**
+5. **Always ask**: "Would you like inline diffs for these fixes?"
+6. If yes: Use `fixes[].href` URLs (already `.diff` format)
 
-Both indexes cross-link to each other. All resources use HAL+JSON for navigation. Always follow `_links.href` values - never construct URLs manually.
+### Time-Centric (for date-range queries)
 
-## Required Behaviors
+1. GET `timeline/index.json` → navigate to year → navigate to month
+2. View CVEs inline: `_embedded.disclosures[]` has full details
+3. **Always ask**: "Would you like inline diffs for these fixes?"
+4. If yes: Use `fixes[].href` URLs (already `.diff` format)
 
-1. **Always use JSON files** over Markdown when available
-2. **CVE queries**: Choose entry point based on query type, always offer inline diffs
-3. **HAL navigation**: Follow `_links.href`, never construct URLs
-4. **GitHub commits**: URLs are `.diff` format for direct analysis
-5. **Start responses**: "Here's what I found in .NET release notes..."
+## Disclosure Object Structure
 
-## Core Principles
+The `_embedded.disclosures[]` array (in patch and month indexes) contains full CVE details:
 
-- **JSON-first**: Use `*.json` for authoritative data
-- **HAL navigation**: Discover resources via `_links`
-- **Embedded data**: Full CVE details are in `_embedded.disclosures[]` — often no extra fetch needed
-- **Cross-linked**: Version and timeline indexes link to each other; patch indexes link to month indexes
+```json
+{
+  "id": "CVE-2025-21171",
+  "title": ".NET Remote Code Execution Vulnerability",
+  "_links": { "self": { "href": "https://github.com/dotnet/announcements/issues/340" } },
+  "fixes": [
+    {
+      "href": "https://github.com/dotnet/runtime/commit/9da8c6a4a6ea03054e776275d3fd5c752897842e.diff",
+      "repo": "dotnet/runtime",
+      "branch": "release/9.0",
+      "release": "9.0"
+    }
+  ],
+  "cvss_score": 7.5,
+  "cvss_severity": "HIGH",
+  "disclosure_date": "2025-01-14",
+  "affected_releases": ["9.0"],
+  "affected_products": ["dotnet-runtime"],
+  "affected_packages": ["System.Text.Json"],
+  "platforms": ["all"]
+}
+```
+
+## CVE JSON Quick Queries (for cve.json files)
+
+```bash
+# Get all CVE IDs
+jq -r '.cves[].id' cve.json
+
+# CVEs for .NET 8.0
+jq -r '.["release_cves"]["8.0"][]' cve.json
+
+# CVEs affecting .NET Runtime product
+jq -r '.["product_cves"]["dotnet-runtime"][]' cve.json
+
+# CVEs affecting a specific package
+jq -r '.["package_cves"]["System.Text.Json"][]' cve.json
+
+# Commits for specific CVE
+jq -r '. as $root | .["cve_commits"]["CVE-2024-38095"][] | $root.commits[.].url' cve.json
+
+# Critical severity only
+jq -r '.cves[] | select(.severity == "Critical") | .id' cve.json
+```
+
+## GitHub Commit URLs
+
+CVE JSON includes `.diff` URLs for immediate analysis:
+
+- **`.diff`** - Raw unified diff (best for code analysis)
+- **`.patch`** - Git patch with commit message (best for context)
+- **(no extension)** - Web view (for humans)
+
+## Response Templates
+
+**Opening**:
+
+```text
+"Here's what I found in .NET release notes..."
+```
+
+**CVE follow-up** (mandatory):
+
+```text
+[After listing CVEs]
+"Would you like inline diffs for these fixes?"
+```
+
+**Diff analysis**:
+
+```text
+"Here are the commit URLs (diff format, ready for analysis):
+- https://github.com/dotnet/runtime/commit/abc123.diff
+Note: Change '.diff' to '.patch' for commit message, or remove for web view"
+```
+
+## Index Structure Summary
+
+### Major Version Index (e.g., `9.0/index.json`)
+
+- **`_embedded.releases[]`** - Patches with `security`, `cve_records`
+- **`_embedded.cve_records`** - All CVE IDs for this major version
+- **`_embedded.years[]`** - Cross-links to timeline years
+- **`_links.latest-security`** - Most recent security patch
+
+### Patch Index (e.g., `9.0/9.0.1/index.json`)
+
+- **`_embedded.disclosures[]`** - Full CVE details with fixes
+- **`_embedded.cve_records`** - CVE IDs for this patch
+- **`_links.month-index`** - Cross-link to timeline month
+- **`_links.cve-json`** - Link to month's cve.json
+
+### Month Index (e.g., `timeline/2024/07/index.json`)
+
+- **`_embedded.disclosures[]`** - Full CVE details with fixes
+- **`_embedded.patches{}`** - Per-version patch info with `cve_records`
+- **`_links.cve`** - Link to cve.json for this month
+
+### CVE JSON (e.g., `timeline/2024/07/cve.json`) — Full Schema
+
+- **`cves[]`** - CVE metadata (id, severity, cvss, description, references)
+- **`products[]`** - SDK components (dotnet-runtime, dotnet-aspnetcore, dotnet-sdk, dotnet-windowsdesktop)
+- **`packages[]`** - NuGet packages (System.Text.Json, Microsoft.IO.Redist, etc.)
+- **`commits{}`** - Commit details by hash
+- **`product_name{}`** - Product ID → display name
+- **`product_cves{}`** - Product ID → CVE IDs
+- **`package_cves{}`** - Package name → CVE IDs
+- **`cve_commits{}`** - CVE → commit hashes
+- **`cve_releases{}`** - CVE → affected versions
+- **`release_cves{}`** - Version → CVE IDs
+
+## HAL Links Reference (`_links`)
+
+### Navigation
+
+- **`self`**: Current document
+- **`prev`** / **`next`**: Adjacent documents (months, years)
+
+### Version Navigation
+
+- **`latest`**: Most recent release (any support type)
+- **`latest-lts`**: Most recent LTS release
+- **`latest-security`**: Most recent security patch
+- **`major-version-index`**: Parent version index (from patch)
+
+### Cross-Links
+
+- **`timeline-index`**: From version index to timeline
+- **`releases-index`**: From timeline to version index
+- **`month-index`**: From patch to timeline month
+- **`latest-year`**: Most recent year in timeline
+
+### Resources
+
+- **`supported-os`**: OS support information
+- **`cve-json`** / **`cve`**: Security vulnerability data
+- **`sdk-index`**: SDK information
+- **`release-manifest`**: Full release manifest
+
+### Link Properties
+
+- **`href`**: URL (always follow this, never construct)
+- **`path`**: Relative path within repo
+- **`title`**: Human-readable description
+- **`type`**: Media type (`application/hal+json`, `application/json`, `application/markdown`)
+
+## Error Handling
+
+- **404 on JSON**: Fall back to `.md` version
+- **Malformed JSON**: Skip resource, continue
+- **GitHub access denied**: Provide URL to user for manual paste
+- **Missing fields**: Check existence before accessing
+
+## Performance Tips
+
+- Follow HAL `_links.href` values
+- Fetch minimal, focused documents
+- Most data available in `_embedded` without additional requests
+- Files are CDN-optimized and cache-friendly

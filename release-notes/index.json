@@ -39,12 +39,6 @@
     "llms-txt": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms/README.md",
       "path": "/llms/README.md",
-      "title": "LLM Usage Guide",
-      "type": "application/markdown"
-    },
-    "llms-txt-quick-reference": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms/quick-ref.md",
-      "path": "/llms/quick-ref.md",
       "title": "LLM Quick Reference",
       "type": "application/markdown"
     }
@@ -52,28 +46,21 @@
   "glossary": {
     "lts": "Long-Term Support \u2013 3-year support window",
     "sts": "Standard-Term Support \u2013 18-month support window",
-    "preview": "Pre-release phase for testing and feedback; not supported",
-    "go-live": "Production-supported release candidate before GA",
-    "active": "Full support with functional and security improvements",
-    "maintenance": "Final 6 months of support; security fixes only",
-    "eol": "End of Life \u2013 No longer supported",
-    "release": "General Availability \u2013 Production-ready release",
-    "feature-band": "Quarterly SDK minor version releases (e.g., 8.0.1xx, 8.0.2xx)",
-    "patch": "Cumulative monthly update released on Patch Tuesday"
+    "latest-release": "Highest stable (GA) major version; excludes preview and RC releases",
+    "latest": "Alias for latest-release",
+    "latest-lts": "Highest stable LTS major version currently in support",
+    "latest-sdk": "SDK index for the latest stable major version"
   },
   "_embedded": {
     "releases": [
       {
         "version": "10.0",
         "release_type": "lts",
-        "phase": "active",
         "supported": true,
-        "ga_date": "2025-11-11T00:00:00\u002B00:00",
         "eol_date": "2028-11-14T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
-            "path": "/10.0/index.json",
             "title": ".NET 10.0",
             "type": "application/hal\u002Bjson"
           }
@@ -82,14 +69,11 @@
       {
         "version": "9.0",
         "release_type": "sts",
-        "phase": "active",
         "supported": true,
-        "ga_date": "2024-11-12T00:00:00\u002B00:00",
         "eol_date": "2026-11-10T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
-            "path": "/9.0/index.json",
             "title": ".NET 9.0",
             "type": "application/hal\u002Bjson"
           }
@@ -98,14 +82,11 @@
       {
         "version": "8.0",
         "release_type": "lts",
-        "phase": "active",
         "supported": true,
-        "ga_date": "2023-11-14T00:00:00\u002B00:00",
         "eol_date": "2026-11-10T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
-            "path": "/8.0/index.json",
             "title": ".NET 8.0",
             "type": "application/hal\u002Bjson"
           }
@@ -114,14 +95,11 @@
       {
         "version": "7.0",
         "release_type": "sts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2022-11-08T00:00:00\u002B00:00",
         "eol_date": "2024-05-14T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/index.json",
-            "path": "/7.0/index.json",
             "title": ".NET 7.0",
             "type": "application/hal\u002Bjson"
           }
@@ -130,14 +108,11 @@
       {
         "version": "6.0",
         "release_type": "lts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2021-11-08T00:00:00\u002B00:00",
         "eol_date": "2024-11-12T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/index.json",
-            "path": "/6.0/index.json",
             "title": ".NET 6.0",
             "type": "application/hal\u002Bjson"
           }
@@ -146,14 +121,11 @@
       {
         "version": "5.0",
         "release_type": "sts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2020-11-10T00:00:00\u002B00:00",
         "eol_date": "2022-05-10T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/index.json",
-            "path": "/5.0/index.json",
             "title": ".NET 5.0",
             "type": "application/hal\u002Bjson"
           }
@@ -162,15 +134,12 @@
       {
         "version": "3.1",
         "release_type": "lts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2019-12-03T00:00:00\u002B00:00",
         "eol_date": "2022-12-13T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/index.json",
-            "path": "/3.1/index.json",
-            "title": ".NET 3.1",
+            "title": ".NET Core 3.1",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -178,15 +147,12 @@
       {
         "version": "3.0",
         "release_type": "sts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2019-09-23T00:00:00\u002B00:00",
         "eol_date": "2020-03-03T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/index.json",
-            "path": "/3.0/index.json",
-            "title": ".NET 3.0",
+            "title": ".NET Core 3.0",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -194,15 +160,12 @@
       {
         "version": "2.2",
         "release_type": "sts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2018-12-04T00:00:00\u002B00:00",
         "eol_date": "2019-12-23T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/index.json",
-            "path": "/2.2/index.json",
-            "title": ".NET 2.2",
+            "title": ".NET Core 2.2",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -210,15 +173,12 @@
       {
         "version": "2.1",
         "release_type": "lts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2018-05-30T00:00:00\u002B00:00",
         "eol_date": "2021-08-21T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/index.json",
-            "path": "/2.1/index.json",
-            "title": ".NET 2.1",
+            "title": ".NET Core 2.1",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -226,15 +186,12 @@
       {
         "version": "2.0",
         "release_type": "sts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2017-08-14T00:00:00\u002B00:00",
         "eol_date": "2018-10-01T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.0/index.json",
-            "path": "/2.0/index.json",
-            "title": ".NET 2.0",
+            "title": ".NET Core 2.0",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -242,15 +199,12 @@
       {
         "version": "1.1",
         "release_type": "lts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2016-11-16T00:00:00\u002B00:00",
         "eol_date": "2019-06-27T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/index.json",
-            "path": "/1.1/index.json",
-            "title": ".NET 1.1",
+            "title": ".NET Core 1.1",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -258,15 +212,12 @@
       {
         "version": "1.0",
         "release_type": "lts",
-        "phase": "eol",
         "supported": false,
-        "ga_date": "2016-06-27T00:00:00\u002B00:00",
         "eol_date": "2019-06-27T00:00:00\u002B00:00",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/index.json",
-            "path": "/1.0/index.json",
-            "title": ".NET 1.0",
+            "title": ".NET Core 1.0",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -275,7 +226,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-02T00:22:01.509724\u002B00:00",
+    "generated_on": "2025-12-02T05:27:11.6833845\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }

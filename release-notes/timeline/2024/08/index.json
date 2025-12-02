@@ -11,7 +11,7 @@
     "CVE-2024-38167",
     "CVE-2024-38168"
   ],
-  "latest_release": "9.0",
+  "latest_release": "6.0",
   "releases": [
     "9.0",
     "6.0"
@@ -35,6 +35,18 @@
       "title": "Release timeline index for 2024-07",
       "type": "application/hal\u002Bjson"
     },
+    "timeline-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "path": "/timeline/index.json",
+      "title": ".NET Release Timeline Index",
+      "type": "application/hal\u002Bjson"
+    },
+    "year-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/index.json",
+      "path": "/timeline/2024/index.json",
+      "title": ".NET Release Timeline Index - 2024",
+      "type": "application/hal\u002Bjson"
+    },
     "cve-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/08/cve.json",
       "path": "/timeline/2024/08/cve.json",
@@ -52,34 +64,17 @@
       "path": "/timeline/2024/08/cve.md",
       "title": "CVE Information (Rendered)",
       "type": "application/markdown"
-    },
-    "timeline-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
-      "path": "/timeline/index.json",
-      "title": ".NET Release Timeline Index",
-      "type": "application/hal\u002Bjson"
-    },
-    "year-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/index.json",
-      "path": "/timeline/2024/index.json",
-      "title": ".NET Release Timeline Index - 2024",
-      "type": "application/hal\u002Bjson"
     }
   },
   "_embedded": {
     "releases": [
       {
-        "version": "9.0",
-        "release_type": "sts",
-        "phase": "preview",
-        "supported": false,
+        "version": "9.0.0-preview.7.24405.7",
+        "year": "2024",
+        "month": "08",
         "security": false,
         "cve_count": 0,
-        "ga_date": "2024-11-12T00:00:00\u002B00:00",
-        "eol_date": "2026-11-10T00:00:00\u002B00:00",
-        "runtime_patches": [
-          "9.0.0-preview.7.24405.7"
-        ],
+        "support_phase": "preview",
         "sdk_patches": [
           "9.0.100-preview.7.24407.12"
         ],
@@ -95,27 +90,17 @@
             "path": "/9.0/sdk/index.json",
             "title": ".NET SDK 9.0 Release Information",
             "type": "application/hal\u002Bjson"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/preview/preview7/index.json",
-            "path": "/9.0/preview/preview7/index.json",
-            "title": ".NET 9.0.0-preview.7.24405.7",
-            "type": "application/hal\u002Bjson"
           }
         }
       },
       {
-        "version": "6.0",
-        "release_type": "lts",
-        "phase": "active",
-        "supported": false,
+        "version": "6.0.33",
+        "date": "2024-08-13T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "08",
         "security": false,
         "cve_count": 0,
-        "ga_date": "2021-11-08T00:00:00\u002B00:00",
-        "eol_date": "2024-11-12T00:00:00\u002B00:00",
-        "runtime_patches": [
-          "6.0.33"
-        ],
+        "support_phase": "active",
         "sdk_patches": [
           "6.0.425",
           "6.0.133"
@@ -125,12 +110,6 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/index.json",
             "path": "/6.0/index.json",
             "title": ".NET 6.0",
-            "type": "application/hal\u002Bjson"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.33/index.json",
-            "path": "/6.0/6.0.33/index.json",
-            "title": ".NET 6.0.33",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -203,7 +182,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-01T05:09:45.4121305\u002B00:00",
+    "generated_on": "2025-12-02T05:56:49.4228484\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }

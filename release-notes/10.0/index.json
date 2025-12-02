@@ -78,6 +78,22 @@
       "type": "application/markdown"
     }
   },
+  "glossary": {
+    "lts": "Long-Term Support \u2013 3-year support window",
+    "sts": "Standard-Term Support \u2013 18-month support window",
+    "preview": "Pre-release phase for testing and feedback; not supported",
+    "go-live": "Production-supported release candidate before GA",
+    "active": "Full support with functional and security improvements",
+    "maintenance": "Final 6 months of support; security fixes only",
+    "eol": "End of Life \u2013 No longer supported",
+    "feature-band": "Quarterly SDK minor version releases (e.g., 8.0.1xx, 8.0.2xx)",
+    "patch": "Cumulative monthly update released on Patch Tuesday",
+    "latest-release": "Highest stable (GA) major version; excludes preview and RC releases",
+    "latest": "Alias for latest-release",
+    "latest-lts": "Highest stable LTS major version currently in support",
+    "latest-sdk": "SDK index for the latest stable major version",
+    "latest-security": "Most recent patch release containing security fixes"
+  },
   "_embedded": {
     "releases": [
       {
@@ -88,6 +104,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
+        "sdk_patches": [
+          "10.0.100"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/index.json",
@@ -115,6 +134,9 @@
           "CVE-2025-55315"
         ],
         "support_phase": "go-live",
+        "sdk_patches": [
+          "10.0.100-rc.2.25502.107"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc2/index.json",
@@ -122,17 +144,17 @@
             "title": "10.0.0-rc.2 Patch Index",
             "type": "application/hal\u002Bjson"
           },
-          "cve-json": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/cve.json",
-            "path": "/timeline/2025/10/cve.json",
-            "title": "CVE Information",
-            "type": "application/json"
-          },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json",
             "path": "/timeline/2025/10/index.json",
             "title": "Release timeline index for 2025-10",
             "type": "application/hal\u002Bjson"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/cve.json",
+            "path": "/timeline/2025/10/cve.json",
+            "title": "CVE Information",
+            "type": "application/json"
           }
         }
       },
@@ -144,6 +166,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "go-live",
+        "sdk_patches": [
+          "10.0.100-rc.1.25451.107"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc1/index.json",
@@ -167,6 +192,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
+        "sdk_patches": [
+          "10.0.100-preview.7.25380.108"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/preview7/index.json",
@@ -190,6 +218,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
+        "sdk_patches": [
+          "10.0.100-preview.6.25358.103"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/preview6/index.json",
@@ -213,6 +244,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
+        "sdk_patches": [
+          "10.0.100-preview.5.25277.114"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/preview5/index.json",
@@ -236,6 +270,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
+        "sdk_patches": [
+          "10.0.100-preview.4.25258.110"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/preview4/index.json",
@@ -259,6 +296,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
+        "sdk_patches": [
+          "10.0.100-preview.3.25201.16"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/preview3/index.json",
@@ -282,6 +322,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
+        "sdk_patches": [
+          "10.0.100-preview.2.25164.34"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/preview2/index.json",
@@ -305,6 +348,9 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
+        "sdk_patches": [
+          "10.0.100-preview.1.25120.13"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/preview1/index.json",
@@ -341,7 +387,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-02T00:07:30.205564\u002B00:00",
+    "generated_on": "2025-12-02T05:56:43.5721805\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
