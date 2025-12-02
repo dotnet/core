@@ -27,6 +27,14 @@
         "patch-release"
       ]
     },
+    "title": {
+      "description": "Concise title for the document",
+      "type": "string"
+    },
+    "description": {
+      "description": "Description of the patch release",
+      "type": "string"
+    },
     "version": {
       "description": "Patch version identifier (e.g., \u00278.0.1\u0027, \u00279.0.2\u0027)",
       "type": "string"
@@ -38,6 +46,17 @@
         "null"
       ],
       "format": "date-time"
+    },
+    "support_phase": {
+      "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
+      "enum": [
+        "preview",
+        "go-live",
+        "active",
+        "maintenance",
+        "eol",
+        null
+      ]
     },
     "security": {
       "description": "True if this release includes security fixes (CVEs); defaults to true for safety",
@@ -59,25 +78,6 @@
           "null"
         ]
       }
-    },
-    "support_phase": {
-      "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
-      "enum": [
-        "preview",
-        "go-live",
-        "active",
-        "maintenance",
-        "eol",
-        null
-      ]
-    },
-    "title": {
-      "description": "Concise title for the document",
-      "type": "string"
-    },
-    "description": {
-      "description": "Description of the patch release",
-      "type": "string"
     },
     "sdk_patches": {
       "description": "SDK patch versions shipped with this runtime patch",
@@ -368,13 +368,13 @@
   },
   "required": [
     "kind",
+    "title",
+    "description",
     "version",
     "date",
+    "support_phase",
     "security",
     "cve_count",
-    "cve_records",
-    "support_phase",
-    "title",
-    "description"
+    "cve_records"
   ]
 }
