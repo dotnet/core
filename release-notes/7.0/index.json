@@ -15,18 +15,6 @@
       "title": ".NET 7.0",
       "type": "application/hal\u002Bjson"
     },
-    "linux-packages-markdown": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/linux-packages.md",
-      "path": "/7.0/linux-packages.md",
-      "title": "Linux Packages",
-      "type": "application/markdown"
-    },
-    "linux-packages-markdown-rendered": {
-      "href": "https://github.com/dotnet/core/blob/main/release-notes/7.0/linux-packages.md",
-      "path": "/7.0/linux-packages.md",
-      "title": "Linux Packages (Rendered)",
-      "type": "application/markdown"
-    },
     "release-manifest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/manifest.json",
       "path": "/7.0/manifest.json",
@@ -38,6 +26,18 @@
       "path": "/index.json",
       "title": ".NET Release Index",
       "type": "application/hal\u002Bjson"
+    },
+    "linux-packages-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/linux-packages.md",
+      "path": "/7.0/linux-packages.md",
+      "title": "Linux Packages",
+      "type": "application/markdown"
+    },
+    "linux-packages-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/7.0/linux-packages.md",
+      "path": "/7.0/linux-packages.md",
+      "title": "Linux Packages (Rendered)",
+      "type": "application/markdown"
     },
     "releases-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/releases.json",
@@ -69,6 +69,22 @@
       "title": "Release Notes (Rendered)",
       "type": "application/markdown"
     }
+  },
+  "glossary": {
+    "lts": "Long-Term Support \u2013 3-year support window",
+    "sts": "Standard-Term Support \u2013 18-month support window",
+    "preview": "Pre-release phase for testing and feedback; not supported",
+    "go-live": "Production-supported release candidate before GA",
+    "active": "Full support with functional and security improvements",
+    "maintenance": "Final 6 months of support; security fixes only",
+    "eol": "End of Life \u2013 No longer supported",
+    "feature-band": "Quarterly SDK minor version releases (e.g., 8.0.1xx, 8.0.2xx)",
+    "patch": "Cumulative monthly update released on Patch Tuesday",
+    "latest-release": "Highest stable (GA) major version; excludes preview and RC releases",
+    "latest": "Alias for latest-release",
+    "latest-lts": "Highest stable LTS major version currently in support",
+    "latest-sdk": "SDK index for the latest stable major version",
+    "latest-security": "Most recent patch release containing security fixes"
   },
   "_embedded": {
     "releases": [],
@@ -110,7 +126,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-02T00:07:30.612888\u002B00:00",
+    "generated_on": "2025-12-02T05:19:02.7519098\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }

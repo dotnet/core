@@ -6,7 +6,7 @@
   "year": "2024",
   "month": "09",
   "security": false,
-  "latest_release": "9.0",
+  "latest_release": "8.0",
   "releases": [
     "9.0",
     "8.0"
@@ -46,17 +46,12 @@
   "_embedded": {
     "releases": [
       {
-        "version": "9.0",
-        "release_type": "sts",
-        "phase": "go-live",
-        "supported": true,
+        "version": "9.0.0-rc.1.24431.7",
+        "year": "2024",
+        "month": "09",
         "security": false,
         "cve_count": 0,
-        "ga_date": "2024-11-12T00:00:00\u002B00:00",
-        "eol_date": "2026-11-10T00:00:00\u002B00:00",
-        "runtime_patches": [
-          "9.0.0-rc.1.24431.7"
-        ],
+        "support_phase": "go-live",
         "sdk_patches": [
           "9.0.100-rc.1.24452.12"
         ],
@@ -72,27 +67,17 @@
             "path": "/9.0/sdk/index.json",
             "title": ".NET SDK 9.0 Release Information",
             "type": "application/hal\u002Bjson"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/preview/rc1/index.json",
-            "path": "/9.0/preview/rc1/index.json",
-            "title": ".NET 9.0.0-rc.1.24431.7",
-            "type": "application/hal\u002Bjson"
           }
         }
       },
       {
-        "version": "8.0",
-        "release_type": "lts",
-        "phase": "active",
-        "supported": true,
+        "version": "8.0.8",
+        "date": "2024-09-24T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "09",
         "security": false,
         "cve_count": 0,
-        "ga_date": "2023-11-14T00:00:00\u002B00:00",
-        "eol_date": "2026-11-10T00:00:00\u002B00:00",
-        "runtime_patches": [
-          "8.0.8"
-        ],
+        "support_phase": "active",
         "sdk_patches": [
           "8.0.402",
           "8.0.401",
@@ -112,12 +97,6 @@
             "path": "/8.0/sdk/index.json",
             "title": ".NET SDK 8.0 Release Information",
             "type": "application/hal\u002Bjson"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.8/index.json",
-            "path": "/8.0/8.0.8/index.json",
-            "title": ".NET 8.0.8",
-            "type": "application/hal\u002Bjson"
           }
         }
       }
@@ -125,7 +104,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-01T05:09:45.4118487\u002B00:00",
+    "generated_on": "2025-12-02T05:56:49.4226059\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }

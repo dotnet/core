@@ -47,51 +47,71 @@
   "_embedded": {
     "releases": [
       {
-        "version": "3.0",
-        "release_type": "sts",
-        "phase": "active",
-        "supported": false,
+        "version": "3.0.0-rc1-19456-20",
+        "year": "2019",
+        "month": "09",
         "security": false,
         "cve_count": 0,
-        "ga_date": "2019-09-23T00:00:00\u002B00:00",
-        "eol_date": "2020-03-03T00:00:00\u002B00:00",
-        "runtime_patches": [
-          "3.0.0-rc1-19456-20",
-          "3.0.0-preview9-19423-09",
-          "3.0.0"
-        ],
+        "support_phase": "go-live",
         "sdk_patches": [
-          "3.0.100-rc1-014190",
-          "3.0.100-preview9-014004",
+          "3.0.100-rc1-014190"
+        ],
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/index.json",
+            "path": "/3.0/index.json",
+            "title": ".NET Core 3.0",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      },
+      {
+        "version": "3.0.0-preview9-19423-09",
+        "year": "2019",
+        "month": "09",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "preview",
+        "sdk_patches": [
+          "3.0.100-preview9-014004"
+        ],
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/index.json",
+            "path": "/3.0/index.json",
+            "title": ".NET Core 3.0",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      },
+      {
+        "version": "3.0.0",
+        "date": "2019-09-23T00:00:00\u002B00:00",
+        "year": "2019",
+        "month": "09",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
+        "sdk_patches": [
           "3.0.100"
         ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/index.json",
             "path": "/3.0/index.json",
-            "title": ".NET 3.0",
-            "type": "application/hal\u002Bjson"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/3.0.0-rc1-19456-20/index.json",
-            "path": "/3.0/3.0.0-rc1-19456-20/index.json",
-            "title": ".NET 3.0.0-rc1-19456-20",
+            "title": ".NET Core 3.0",
             "type": "application/hal\u002Bjson"
           }
         }
       },
       {
-        "version": "2.2",
-        "release_type": "sts",
-        "phase": "active",
-        "supported": false,
+        "version": "2.2.7",
+        "date": "2019-09-10T00:00:00\u002B00:00",
+        "year": "2019",
+        "month": "09",
         "security": false,
         "cve_count": 0,
-        "ga_date": "2018-12-04T00:00:00\u002B00:00",
-        "eol_date": "2019-12-23T00:00:00\u002B00:00",
-        "runtime_patches": [
-          "2.2.7"
-        ],
+        "support_phase": "active",
         "sdk_patches": [
           "2.2.402",
           "2.2.206",
@@ -101,29 +121,19 @@
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/index.json",
             "path": "/2.2/index.json",
-            "title": ".NET 2.2",
-            "type": "application/hal\u002Bjson"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.7/index.json",
-            "path": "/2.2/2.2.7/index.json",
-            "title": ".NET 2.2.7",
+            "title": ".NET Core 2.2",
             "type": "application/hal\u002Bjson"
           }
         }
       },
       {
-        "version": "2.1",
-        "release_type": "lts",
-        "phase": "active",
-        "supported": false,
+        "version": "2.1.13",
+        "date": "2019-09-10T00:00:00\u002B00:00",
+        "year": "2019",
+        "month": "09",
         "security": false,
         "cve_count": 0,
-        "ga_date": "2018-05-30T00:00:00\u002B00:00",
-        "eol_date": "2021-08-21T00:00:00\u002B00:00",
-        "runtime_patches": [
-          "2.1.13"
-        ],
+        "support_phase": "active",
         "sdk_patches": [
           "2.1.802",
           "2.1.606",
@@ -133,13 +143,7 @@
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/index.json",
             "path": "/2.1/index.json",
-            "title": ".NET 2.1",
-            "type": "application/hal\u002Bjson"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.13/index.json",
-            "path": "/2.1/2.1.13/index.json",
-            "title": ".NET 2.1.13",
+            "title": ".NET Core 2.1",
             "type": "application/hal\u002Bjson"
           }
         }
@@ -148,7 +152,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-01T05:09:45.4248192\u002B00:00",
+    "generated_on": "2025-12-02T05:56:49.4348023\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }
