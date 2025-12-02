@@ -49,7 +49,7 @@ Notes:
 | [Fedora][13]        | 43, 42, 41 | Arm32, Arm64, x64 | [Lifecycle][14] |
 | [openSUSE Leap][15] | 16.0, 15.6 | Arm64, x64        | [Lifecycle][16] |
 | [Red Hat Enterprise Linux][17] | 10, 9, 8 | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Enterprise Linux][19] | 16.0, 15.7, 15.6 | Arm64, x64 | [Lifecycle][20] |
+| [SUSE Linux Enterprise][19] | 16.0, 15.7, 15.6 | Arm64, x64 | [Lifecycle][20] |
 | [Ubuntu][21]        | 25.10, 24.04, 22.04 | Arm32, Arm64, x64 | [Lifecycle][22] |
 
 Notes:
@@ -137,9 +137,9 @@ The following operating system versions are no longer supported.
 | macOS   | 12      | [2024-09-16](https://developer.apple.com/documentation/macos-release-notes/macos-12_0_1-release-notes) |
 | openSUSE Leap | 15.5 | 2024-12-31 |
 | openSUSE Leap | 15.4 | 2023-12-07 |
-| SUSE Enterprise Linux | 15.5 | 2024-12-31 |
-| SUSE Enterprise Linux | 12.5 | 2024-10-31 |
-| SUSE Enterprise Linux | 15.4 | 2023-12-31 |
+| SUSE Linux Enterprise | 15.5 | 2024-12-31 |
+| SUSE Linux Enterprise | 12.5 | 2024-10-31 |
+| SUSE Linux Enterprise | 15.4 | 2023-12-31 |
 | tvOS    | 17      | 2024-09-16 |
 | tvOS    | 16      | 2023-09-18 |
 | tvOS    | 15      | 2022-09-12 |
