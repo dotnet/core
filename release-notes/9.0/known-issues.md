@@ -60,6 +60,16 @@ The behavior will be **fixed in .NET 9 RC1** release.
 
 ## .NET SDK
 
+### .NET SDK 9.0.307 on Windows fails with MSB4216
+
+On Windows, projects that use MSBuild tasks configured to run in a separate process will fail with an error like
+
+```terminal
+error MSB4216: Could not run the "ReplaceTokenInFileTask" task because MSBuild could not create or connect to a task host with runtime "NET" and architecture "x64". Please ensure that (1) the requested runtime and/or architecture are available on the machine, and (2) that the required executable "C:\Program Files\dotnet\sdk\9.0.307\MSBuild.dll" exists and can be run.
+```
+
+Details on this issue can be found in [dotnet/msbuild#12751](https://github.com/dotnet/msbuild/issues/12751). A fixed SDK will be released.
+
 ### .NET SDK 9.0.100-RC.1 will fail when used with Visual Studio 17.11
 
 There is an incompatible dependency between a file referenced in the SDK and the dependencies that Visual Studio includes.

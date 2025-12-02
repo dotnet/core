@@ -1,8 +1,6 @@
 # .NET 10
 
-.NET 10 is a [Long Term Support (LTS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for 36 months.
-
-It is currently in development and not supported. .NET 10 is expected to be released in late 2025.
+.NET 10 is a [Long Term Support (LTS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for three years from November 11, 2025 to November 14, 2028.
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/10.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
@@ -16,6 +14,7 @@ It is currently in development and not supported. .NET 10 is expected to be rele
 
 | Date | Release |
 | :-- | :-- |
+| 2025/11/11 | [10.0.0](./10.0.0/10.0.0.md) |
 | 2025/10/14 | [10.0.0 RC 2](preview/rc2/README.md) |
 | 2025/09/09 | [10.0.0 RC 1](preview/rc1/README.md) |
 | 2025/08/12 | [10.0.0 Preview 7](preview/preview7/README.md) |
