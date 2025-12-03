@@ -24,11 +24,11 @@ The tables below show theoretical update frequency based on practice and design,
 |------|------|--------------|-------------|
 | `index.json` | 8 KB | ~1 | Root index with all major versions |
 | `10.0/index.json` | 15 KB | ~12 | All 10.0 patches (fewer releases so far) |
-| `9.0/index.json` | 27 KB | ~12 | All 9.0 patches with CVE references |
-| `8.0/index.json` | 32 KB | ~12 | All 8.0 patches with CVE references |
+| `9.0/index.json` | 28 KB | ~12 | All 9.0 patches with CVE references |
+| `8.0/index.json` | 34 KB | ~12 | All 8.0 patches with CVE references |
 | `timeline/index.json` | 8 KB | ~1 | Timeline root (all years) |
-| `timeline/2025/index.json` | 14 KB | ~12 | Year index (all months) |
-| `timeline/2024/07/index.json` | 13 KB | ~1 | Month index with embedded CVE summaries |
+| `timeline/2025/index.json` | 15 KB | ~12 | Year index (all months) |
+| `timeline/2024/07/index.json` | 10 KB | ~1 | Month index with embedded CVE summaries |
 | `timeline/2025/01/cve.json` | 14 KB | ~1 | Full CVE details for a month |
 
 ### Releases-Index Files
@@ -73,12 +73,14 @@ These massive commits are difficult to review and analyze. Mixing markdown docum
 
 ### Version Information Queries
 
-Query: "What .NET versions are currently supported?"
+#### Query: "What .NET versions are currently supported?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` | **8 KB** |
 | releases-index | `releases-index.json` | **6 KB** |
+
+**hal-index:**
 
 ```bash
 ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
@@ -89,16 +91,36 @@ curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.supported) | .version'
 # 8.0
 ```
 
-**Winner:** releases-index (**1.5x smaller** for basic version queries)
+**releases-index:**
+
+```bash
+ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
+
+curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "active") | .["channel-version"]'
+# 10.0
+# 9.0
+# 8.0
+```
+
+**Analysis:**
+
+- **Completeness:** ✅ Equal—both return the same list of supported versions.
+- **Boolean vs enum:** The hal-index uses `supported: true`, a simple boolean. The releases-index uses `support-phase: "active"`, requiring knowledge of the enum vocabulary (active, maintenance, eol, preview, go-live).
+- **Property naming:** The hal-index uses `select(.supported)` with dot notation. The releases-index requires `select(.["support-phase"] == "active")` with bracket notation and string comparison.
+- **Query complexity:** The hal-index query is 30% shorter and more intuitive for someone unfamiliar with the schema.
+
+**Winner:** releases-index (**1.3x smaller** for basic version queries, but hal-index has better query ergonomics)
 
 ### CVE Queries for Latest Security Patch
 
-Query: "What CVEs were fixed in the latest .NET 8.0 security patch?"
+#### Query: "What CVEs were fixed in the latest .NET 8.0 security patch?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **50 KB** |
-| releases-index | `releases-index.json` + `8.0/releases.json` | **1,206 KB** |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **52 KB** |
+| releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** |
+
+**hal-index:**
 
 ```bash
 ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
@@ -118,16 +140,41 @@ curl -s "$PATCH_HREF" | jq -r '.cve_records[]'
 # CVE-2025-55315
 ```
 
-**Winner:** hal-index (**24x smaller**)
+**releases-index:**
+
+```bash
+ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
+
+# Step 1: Get the 8.0 releases.json URL
+RELEASES_URL=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["channel-version"] == "8.0") | .["releases.json"]')
+# https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/releases.json
+
+# Step 2: Find latest security release and get CVE IDs
+curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0] | .["cve-list"][] | .["cve-id"]'
+# CVE-2025-55247
+# CVE-2025-55315
+# CVE-2025-55248
+```
+
+**Analysis:** Both schemas produce the same CVE IDs. However:
+
+- **Completeness:** ✅ Equal—both return the CVE identifiers
+- **Ergonomics:** The releases-index requires downloading a 1.2 MB file to extract 3 CVE IDs. The hal-index uses a dedicated `latest-security` link, avoiding iteration through all releases.
+- **Link syntax:** Counterintuitively, the deeper HAL structure `._links.self.href` is more ergonomic than `.["releases.json"]` because snake_case enables dot notation throughout. The releases-index embeds URLs directly in properties, but kebab-case naming forces bracket notation.
+- **Data efficiency:** hal-index is 23x smaller
+
+**Winner:** hal-index (**23x smaller**)
 
 ### High Severity CVEs with Details
 
-Query: "What High+ severity CVEs were fixed in the latest .NET 8.0 security patch, with titles?"
+#### Query: "What High+ severity CVEs were fixed in the latest .NET 8.0 security patch, with titles?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **50 KB** |
-| releases-index | `releases-index.json` + `8.0/releases.json` + external CVE sources | **1,206 KB** (incomplete) |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **52 KB** |
+| releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** (cannot answer) |
+
+**hal-index:**
 
 ```bash
 ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
@@ -144,16 +191,38 @@ curl -s "$PATCH_HREF" | jq -r '._embedded.disclosures[] | select(.cvss_severity 
 # CVE-2025-55315: .NET Security Feature Bypass Vulnerability (CRITICAL)
 ```
 
-**Winner:** hal-index (releases-index has CVE IDs only—no severity or titles)
+**releases-index:**
+
+```bash
+ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
+
+# Step 1: Get the 8.0 releases.json URL
+RELEASES_URL=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["channel-version"] == "8.0") | .["releases.json"]')
+
+# Step 2: Find latest security release and get CVE IDs (best effort—no severity/title available)
+curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0] | .["cve-list"][] | "\(.["cve-id"]): (severity unknown) (title unknown)"'
+# CVE-2025-55247: (severity unknown) (title unknown)
+# CVE-2025-55315: (severity unknown) (title unknown)
+# CVE-2025-55248: (severity unknown) (title unknown)
+```
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index only provides CVE IDs and URLs to external CVE databases. It does not include severity scores, CVSS ratings, or vulnerability titles. To get this information, you would need to fetch each CVE URL individually from cve.mitre.org.
+- **Ergonomics:** The hal-index embeds full CVE details (`cvss_severity`, `cvss_score`, `title`, `fixes`) directly in the patch index, enabling single-query filtering by severity.
+
+**Winner:** hal-index (releases-index cannot answer this query—CVE severity and titles are not available)
 
 ### Recent CVEs Across All Supported Versions
 
-Query: "What CVEs were fixed in the last 2 security releases?"
+#### Query: "What CVEs were fixed in the last 2 security releases?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` | **22 KB** |
-| releases-index | `releases-index.json` + 3 releases.json | **2,402 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` | **23 KB** |
+| releases-index | `releases-index.json` + 3 releases.json | **2,461 KB** |
+
+**hal-index:**
 
 ```bash
 TIMELINE="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json"
@@ -167,16 +236,44 @@ curl -s "$YEAR_HREF" | jq -r '[._embedded.months[] | select(.security)] | .[0:2]
 # 06/2025: CVE-2025-30399
 ```
 
-**Winner:** hal-index (**109x smaller**)
+**releases-index:**
+
+```bash
+ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
+
+# Get all supported version releases.json URLs
+URLS=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "active") | .["releases.json"]')
+
+# For each version, find security releases and collect CVEs (requires multiple large fetches)
+for URL in $URLS; do
+  curl -s "$URL" | jq -r '.releases[] | select(.security == true) | "\(.["release-date"]): \([.["cve-list"][]? | .["cve-id"]] | join(", "))"'
+done | sort -r | head -6
+# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
+# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
+# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
+# 2025-06-10: CVE-2025-30399
+# 2025-06-10: CVE-2025-30399
+# 2025-06-10: CVE-2025-30399
+```
+
+**Analysis:**
+
+- **Completeness:** ⚠️ Partial—the releases-index can find CVEs by date, but produces duplicate entries (one per version) and cannot group by month without additional post-processing.
+- **Ergonomics:** The hal-index timeline is purpose-built for chronological queries. The releases-index requires fetching all version files (2.5 MB) and manually correlating dates to find "last 2 security releases."
+- **Data model:** The releases-index organizes by version; the hal-index timeline organizes by date. For "recent CVEs" queries, the timeline model is fundamentally better suited.
+
+**Winner:** hal-index (**107x smaller**)
 
 ### CVE Details for a Month
 
-Query: "What CVEs were disclosed in January 2025 with full details?"
+#### Query: "What CVEs were disclosed in January 2025 with full details?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **36 KB** |
-| releases-index | Multiple releases.json + external CVE sources | **2+ MB** (incomplete) |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **37 KB** |
+| releases-index | All releases.json (13 versions) | **8.2 MB** (cannot answer) |
+
+**hal-index:**
 
 ```bash
 TIMELINE="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json"
@@ -197,16 +294,43 @@ curl -s "$CVE_HREF" | jq -r '.disclosures[] | "\(.id): \(.problem)"'
 # CVE-2025-21173: .NET Elevation of Privilege Vulnerability
 ```
 
-**Winner:** hal-index (**56x smaller**, and releases-index cannot fully answer this query)
+**releases-index:**
+
+```bash
+ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
+
+# Must fetch ALL version releases.json files—cannot filter by "currently supported"
+# because we need versions that were supported in January 2025, not today
+URLS=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | .["releases.json"]')
+
+# Find January 2025 releases and get CVE IDs (no details available)
+for URL in $URLS; do
+  curl -s "$URL" | jq -r '.releases[] | select(.["release-date"] | startswith("2025-01")) | select(.security == true) | .["cve-list"][]? | "\(.["cve-id"]): (no description available)"'
+done | sort -u
+# CVE-2025-21171: (no description available)
+# CVE-2025-21172: (no description available)
+# CVE-2025-21173: (no description available)
+# CVE-2025-21176: (no description available)
+```
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index provides only CVE IDs. The query asks for "full details" including problem descriptions, CVSS scores, affected products, and fix commits—none of which are available.
+- **Historical queries:** The releases-index has no way to determine which versions were supported at a given point in time. To reliably find all CVEs for January 2025, you must fetch *every* version's releases.json file (not just currently supported versions), significantly increasing data transfer.
+- **Ergonomics:** The hal-index provides a dedicated `cve.json` file per month with complete CVE records. The releases-index requires fetching all version files and provides only minimal data.
+
+**Winner:** hal-index (**221x smaller**, and releases-index cannot answer this query—CVE details are not available)
 
 ### Security Patches in the Last 12 Months
 
-Query: "List all CVEs fixed in the last 12 months"
+#### Query: "List all CVEs fixed in the last 12 months"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `timeline/index.json` → up to 12 month indexes (via `prev` links) | **~90 KB** |
 | releases-index | All version releases.json files | **2.4+ MB** |
+
+**hal-index:**
 
 ```bash
 TIMELINE="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json"
@@ -234,16 +358,49 @@ done
 # 2025-01: CVE-2025-21171, CVE-2025-21172, CVE-2025-21176, CVE-2025-21173
 ```
 
+**releases-index:**
+
+```bash
+ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
+
+# Get all supported version releases.json URLs
+URLS=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "active") | .["releases.json"]')
+
+# For each version, find security releases in the last 12 months
+CUTOFF="2024-12-01"
+for URL in $URLS; do
+  curl -s "$URL" | jq -r --arg cutoff "$CUTOFF" '
+    .releases[] |
+    select(.security == true) |
+    select(.["release-date"] >= $cutoff) |
+    "\(.["release-date"]): \([.["cve-list"][]? | .["cve-id"]] | join(", "))"'
+done | sort -u | sort -r
+# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
+# 2025-06-10: CVE-2025-30399
+# 2025-05-22: CVE-2025-26646
+# 2025-04-08: CVE-2025-26682
+# 2025-03-11: CVE-2025-24070
+# 2025-01-14: CVE-2025-21172, CVE-2025-21173, CVE-2025-21176
+```
+
+**Analysis:**
+
+- **Completeness:** ⚠️ Partial—the releases-index can list CVEs by date, but notice CVE-2025-21171 is missing (it only affected .NET 9.0 which was still in its first patch cycle). The output also shows exact dates rather than grouped by month.
+- **Ergonomics:** The hal-index uses `prev` links for natural backward navigation. The releases-index requires downloading all version files (2.4+ MB), filtering by date, and deduplicating results.
+- **Navigation model:** The hal-index timeline is designed for chronological traversal. The releases-index has no concept of time-based navigation.
+
 **Winner:** hal-index (**27x smaller**)
 
 ### Critical CVE This Month
 
-Query: "Is there a critical CVE in any supported release this month?" (November 2025)
+#### Query: "Is there a critical CVE in any supported release this month?" (November 2025)
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/11/index.json` | **28 KB** |
 | releases-index | `releases-index.json` + all supported releases.json | **2.4+ MB** (incomplete—no severity data) |
+
+**hal-index:**
 
 ```bash
 TIMELINE="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json"
@@ -259,7 +416,32 @@ curl -s "$MONTH_HREF" | jq -r '._embedded.disclosures // [] | .[] | select(.cvss
 # (no critical CVEs this month)
 ```
 
-**Winner:** hal-index (**86x smaller**, and releases-index cannot answer this query—CVE severity is not available)
+**releases-index:**
+
+```bash
+ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
+
+# Get all supported version releases.json URLs
+URLS=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "active") | .["releases.json"]')
+
+# Find November 2025 releases and check for CVEs (cannot determine severity)
+for URL in $URLS; do
+  curl -s "$URL" | jq -r '
+    .releases[] |
+    select(.["release-date"] | startswith("2025-11")) |
+    select(.security == true) |
+    .["cve-list"][]? | "\(.["cve-id"]): (severity unknown)"'
+done | sort -u
+# (no output—November 2025 had no security releases)
+```
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index cannot answer this query. Even if there were CVEs in November, the schema only provides CVE IDs and URLs—no severity information. You would need to fetch each CVE URL from cve.mitre.org and parse the CVSS score.
+- **Ergonomics:** The hal-index embeds `cvss_severity` directly in the disclosure records, enabling single-query filtering for CRITICAL vulnerabilities.
+- **Use case:** This is a common security operations query ("Do I need to patch urgently?"). The hal-index answers it in 28 KB; the releases-index cannot answer it at all.
+
+**Winner:** hal-index (**88x smaller**, and releases-index cannot answer this query—CVE severity is not available)
 
 ## Query Capability Comparison
 
@@ -267,8 +449,8 @@ curl -s "$MONTH_HREF" | jq -r '._embedded.disclosures // [] | .[] | select(.cvss
 |------------|-----------|----------------|-------|
 | List versions | ✅ | ✅ | 1.3x larger |
 | Version lifecycle (EOL, LTS) | ✅ | ✅ | 1.3x larger |
-| Latest patch per version | ✅ | ✅ | 24x smaller |
-| CVEs per version | ✅ | ✅ | 24x smaller |
+| Latest patch per version | ✅ | ✅ | 23x smaller |
+| CVEs per version | ✅ | ✅ | 23x smaller |
 | CVEs per month | ✅ | ❌ | — |
 | CVE details (severity, fixes) | ✅ | ❌ | — |
 | Timeline navigation | ✅ | ❌ | — |
@@ -307,12 +489,14 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 | Metric | hal-index | releases-index |
 |--------|-------------|----------------|
 | Basic version queries | 8 KB | 6 KB |
-| CVE queries (latest security patch) | 50 KB | 1,220 KB |
-| Recent CVEs (last 2 security releases) | 22 KB | 2.4 MB |
-| CVEs in last 12 months | ~95 KB | 2.4 MB |
+| CVE queries (latest security patch) | 52 KB | 1,220 KB |
+| Recent CVEs (last 2 security releases) | 23 KB | 2.5 MB |
+| CVEs in last 12 months | ~90 KB | 2.5 MB |
 | Cache coherency | ✅ Atomic | ❌ TTL mismatch risk |
-| Query syntax | snake_case (clean) | kebab-case (brackets) |
+| Query syntax | snake_case (dot notation) | kebab-case (bracket notation) |
+| Link traversal | `._links.self.href` | `.["releases.json"]` |
+| Boolean filters | `supported`, `security` | `support-phase == "active"` |
 | CVE details | ✅ Full | ❌ ID + URL only |
 | Timeline navigation | ✅ | ❌ |
 
-The hal-index schema is optimized for the queries that matter most to security operations, while maintaining cache coherency across CDN deployments.
+The hal-index schema is optimized for the queries that matter most to security operations, while maintaining cache coherency across CDN deployments. The use of boolean properties (`supported`) instead of enum comparisons (`support-phase == "active"`) reduces query complexity and eliminates the need to know the vocabulary of valid enum values. Counterintuitively, the deeper HAL link structure (`._links.self.href`) is more ergonomic than flat URL properties (`.["releases.json"]`) because consistent snake_case naming enables dot notation throughout the query path.
