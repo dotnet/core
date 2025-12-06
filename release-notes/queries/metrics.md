@@ -105,7 +105,7 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 **Analysis:**
 
 - **Completeness:** ✅ Equal—both return the same list of supported versions.
-- **Boolean vs enum:** The hal-index uses `supported: true`, a simple boolean. The releases-index uses `support-phase: "active"`, requiring knowledge of the enum vocabulary (active, maintenance, eol, preview, go-live).
+- **Boolean vs enum:** The hal-index uses `supported: true`, a simple boolean. The releases-index only exposes `support-phase: "active"` (which hal-index also has), requiring knowledge of the enum vocabulary (active, maintenance, eol, preview, go-live).
 - **Property naming:** The hal-index uses `select(.supported)` with dot notation. The releases-index requires `select(.["support-phase"] == "active")` with bracket notation and string comparison.
 - **Query complexity:** The hal-index query is 30% shorter and more intuitive for someone unfamiliar with the schema.
 
@@ -449,7 +449,7 @@ done | sort -u
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **~45 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **162 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -464,12 +464,21 @@ VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version 
 BC_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["compatibility-json"].href')
 
 # Step 3: Count breaking changes by category
-curl -s "$BC_HREF" | jq -r '[.breaking_changes[].category] | group_by(.) | map({category: .[0], count: length}) | sort_by(-.count) | .[] | "\(.category): \(.count)"'
+curl -s "$BC_HREF" | jq -r '[.breaks[].category] | group_by(.) | map({category: .[0], count: length}) | sort_by(-.count) | .[] | "\(.category): \(.count)"'
 # sdk: 23
 # core-libraries: 16
 # aspnet-core: 9
-# extensions: 8
-# ...
+# cryptography: 8
+# extensions: 6
+# windows-forms: 6
+# interop: 3
+# networking: 3
+# reflection: 2
+# serialization: 2
+# wpf: 2
+# containers: 1
+# globalization: 1
+# install-tool: 1
 ```
 
 **releases-index:** Not available.
@@ -487,7 +496,7 @@ curl -s "$BC_HREF" | jq -r '[.breaking_changes[].category] | group_by(.) | map({
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **~45 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **162 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -502,10 +511,23 @@ VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version 
 BC_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["compatibility-json"].href')
 
 # Step 3: Filter by category
-curl -s "$BC_HREF" --arg cat "core-libraries" | jq -r '.breaking_changes[] | select(.category == $cat) | .title'
-# API obsoletions with custom diagnostic IDs
-# BinaryReader.Read(Span) and Stream.Read(Span) return data on partial read
-# ...
+curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.category == $cat) | .title'
+# ActivitySource.CreateActivity and ActivitySource.StartActivity behavior changes
+# System.Linq.AsyncEnumerable in .NET 10
+# BufferedStream.WriteByte no longer performs implicit flush
+# C# 14 overload resolution with span parameters
+# Default trace context propagator updated to W3C standard
+# 'DynamicallyAccessedMembers' annotation removed from 'DefaultValueAttribute' ctor
+# DriveInfo.DriveFormat returns Linux filesystem types
+# FilePatternMatch.Stem changed to non-nullable
+# Consistent shift behavior in generic math
+# Specifying explicit struct Size disallowed with InlineArray
+# LDAP DirectoryControl parsing is now more stringent
+# MacCatalyst version normalization
+# .NET 10 obsoletions with custom IDs
+# .NET runtime no longer provides default termination signal handler
+# Arm64 SVE nonfaulting loads require mask parameter
+# GnuTarEntry and PaxTarEntry exclude atime and ctime by default
 ```
 
 **releases-index:** Not available.
@@ -523,7 +545,7 @@ curl -s "$BC_HREF" --arg cat "core-libraries" | jq -r '.breaking_changes[] | sel
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **~45 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **162 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -538,10 +560,23 @@ VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version 
 BC_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["compatibility-json"].href')
 
 # Step 3: Get raw markdown URLs for core-libraries breaking changes
-curl -s "$BC_HREF" --arg cat "core-libraries" | jq -r '.breaking_changes[] | select(.category == $cat) | .references[] | select(.type == "documentation-source") | .href'
+curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.category == $cat) | .references[]? | select(.type == "documentation-source") | .url'
 # https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/activity-sampling.md
 # https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/asyncenumerable.md
-# ...
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/bufferedstream-writebyte-flush.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/csharp-overload-resolution.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/default-trace-context-propagator.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/defaultvalueattribute-dynamically-accessed-members.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/driveinfo-driveformat-linux.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/filepatternmatch-stem-nonnullable.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/generic-math.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/inlinearray-explicit-size-disallowed.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/ldap-directorycontrol-parsing.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/maccatalyst-version-normalization.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/obsolete-apis.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/sigterm-signal-handler.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/sve-nonfaulting-loads-mask-parameter.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/tar-atime-ctime-default.md
 ```
 
 **releases-index:** Not available.
