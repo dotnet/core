@@ -1,102 +1,541 @@
-# Quick Reference
+# .NET Release Metadata Graph — Extended Reference
+
+This document provides detailed workflows, schema examples, and operational guidance for AI assistants working with the .NET release metadata graph.
+
+For quick reference, see [llms.txt](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms.txt).
 
 ## Entry Points
 
 | Query Type | Entry Point |
 |------------|-------------|
-| Version/patch queries | `https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json` |
-| Time-based queries | `https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json` |
+| Version/patch queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json` |
+| Time-based queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json` |
 
-**CRITICAL**: Never construct URLs manually. Always follow `_links.href` values from JSON responses.
+**CRITICAL**: Never construct URLs manually. Always follow `_links["..."].href` values from JSON responses.
 
 ## Common Workflows
 
 | Task | Path |
 |------|------|
-| Latest release | `index.json` → `_links.latest.href` |
-| Latest LTS | `index.json` → `_links.latest-lts.href` |
+| Latest release | `index.json` → `_links["latest"].href` |
+| Latest LTS | `index.json` → `_links["latest-lts"].href` |
 | Version patches | `index.json` → version → `_embedded.releases[]` |
-| Security patches | `9.0/index.json` → `_links.latest-security.href` |
-| CVEs for version | `9.0/index.json` → `_embedded.cve_records` |
-| CVEs for patch | `9.0/9.0.1/index.json` → `_embedded.disclosures[]` |
+| Security patches | `10.0/index.json` → `_links["latest-security"].href` |
+| CVEs for version | `10.0/index.json` → `_embedded.releases[]` where `security: true` |
+| CVEs for patch | `10.0/10.0.1/index.json` → `_embedded.disclosures[]` |
 | CVEs by month | `timeline/index.json` → year → month → `_embedded.disclosures[]` |
-| SDK downloads | `9.0/sdk/index.json` |
-| OS support | `9.0/supported-os.json` |
+| Breaking changes | `10.0/index.json` → `_links["compatibility-json"].href` |
+| SDK downloads | `10.0/sdk/index.json` |
+| OS support | `10.0/manifest.json` → `_links["supported-os-json"].href` |
 
 ## CVE Analysis Workflows
 
 ### Version-Centric (for version/patch queries)
 
-1. GET `index.json` → navigate to major version (e.g., `9.0/index.json`)
-2. View all CVEs for version in `_embedded.cve_records`
-3. Find security patches: `_embedded.releases[]` where `security: true`
+1. GET `index.json` → navigate to major version (e.g., `10.0/index.json`)
+2. View embedded CVE summaries in `_embedded.releases[]` where `security: true`
+3. Find latest security patch: `_links["latest-security"].href`
 4. Navigate to patch index → **full details in `_embedded.disclosures[]`**
-5. **Always ask**: "Would you like inline diffs for these fixes?"
-6. If yes: Use `fixes[].href` URLs (already `.diff` format)
+5. For package-level details or commit diffs: `_links["cve-json"].href`
+6. **Always ask**: "Would you like inline diffs for these fixes?"
+7. If yes: **Fetch immediately** — use `commits[hash].url` (already `.diff` format)
 
 ### Time-Centric (for date-range queries)
 
 1. GET `timeline/index.json` → navigate to year → navigate to month
 2. View CVEs inline: `_embedded.disclosures[]` has full details
-3. **Always ask**: "Would you like inline diffs for these fixes?"
-4. If yes: Use `fixes[].href` URLs (already `.diff` format)
+3. For package-level details: `_links["cve-json"].href`
+4. **Always ask**: "Would you like inline diffs for these fixes?"
+5. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
 
-## Disclosure Object Structure
+### Diff Retrieval (IMPORTANT)
 
-The `_embedded.disclosures[]` array (in patch and month indexes) contains full CVE details:
+Always fetch all provided diff URLs immediately when analyzing CVEs. Do not defer.
+
+GitHub commit URLs support multiple formats:
+- **`.diff`** — Raw unified diff (best for code analysis)
+- **`.patch`** — Git patch with commit message (best for context)
+- **(no extension)** — Web view (for humans)
+
+The graph provides `.diff` URLs by default in `commits[hash].url`.
+
+## Breaking Changes Workflow
+
+1. GET `index.json` → navigate to major version
+2. Follow `_links["compatibility-json"].href`
+3. Use pre-computed rollups for overview:
+   - `categories` — list of all categories
+   - `impact_breakdown` — count by impact level
+   - `type_breakdown` — count by change type
+4. Filter `breaks[]` by `category`, `impact`, or `type`
+5. For migration guidance: check `required_action` field
+6. For raw documentation: filter `references[]` by `type: "documentation-source"`
+
+## Schema Examples
+
+### Releases Index (`index.json`)
 
 ```json
 {
-  "id": "CVE-2025-21171",
-  "title": ".NET Remote Code Execution Vulnerability",
-  "_links": { "self": { "href": "https://github.com/dotnet/announcements/issues/340" } },
-  "fixes": [
-    {
-      "href": "https://github.com/dotnet/runtime/commit/9da8c6a4a6ea03054e776275d3fd5c752897842e.diff",
-      "repo": "dotnet/runtime",
-      "branch": "release/9.0",
-      "release": "9.0"
+  "kind": "releases-index",
+  "latest": "10.0",
+  "latest_lts": "10.0",
+  "_links": {
+    "self": {
+      "href": ".../release-notes/index.json",
+      "type": "application/hal+json"
+    },
+    "latest": {
+      "href": ".../release-notes/10.0/index.json",
+      "title": "Latest .NET release (.NET 10.0)"
+    },
+    "latest-lts": {
+      "href": ".../release-notes/10.0/index.json",
+      "title": "Latest LTS release (.NET 10.0)"
+    },
+    "timeline-index": {
+      "href": ".../release-notes/timeline/index.json"
     }
-  ],
-  "cvss_score": 7.5,
-  "cvss_severity": "HIGH",
-  "disclosure_date": "2025-01-14",
-  "affected_releases": ["9.0"],
-  "affected_products": ["dotnet-runtime"],
-  "affected_packages": ["System.Text.Json"],
-  "platforms": ["all"]
+  },
+  "_embedded": {
+    "releases": [
+      {
+        "version": "10.0",
+        "release_type": "lts",
+        "supported": true,
+        "eol_date": "2028-11-14T00:00:00+00:00",
+        "_links": {
+          "self": {
+            "href": ".../release-notes/10.0/index.json",
+            "title": ".NET 10.0",
+            "type": "application/hal+json"
+          }
+        }
+      }
+    ]
+  }
 }
 ```
 
-## CVE JSON Quick Queries (for cve.json files)
+### Major Version Index (`10.0/index.json`)
+
+```json
+{
+  "kind": "major-version-index",
+  "latest": "10.0.1",
+  "latest_security": "10.0.1",
+  "support_phase": "active",
+  "supported": true,
+  "release_type": "lts",
+  "ga_date": "2025-11-11T00:00:00+00:00",
+  "eol_date": "2028-11-14T00:00:00+00:00",
+  "_links": {
+    "self": { "href": ".../10.0/index.json" },
+    "latest": { "href": ".../10.0/10.0.1/index.json" },
+    "latest-security": { "href": ".../10.0/10.0.1/index.json" },
+    "compatibility-json": { "href": ".../10.0/compatibility.json" },
+    "release-manifest": { "href": ".../10.0/manifest.json" },
+    "releases-index": { "href": ".../index.json" }
+  },
+  "_embedded": {
+    "releases": [
+      {
+        "version": "10.0.1",
+        "date": "2025-12-09T00:00:00+00:00",
+        "security": true,
+        "cve_count": 3,
+        "support_phase": "active",
+        "_links": {
+          "self": { "href": ".../10.0/10.0.1/index.json" },
+          "release-month": { "href": ".../timeline/2025/12/index.json" }
+        }
+      }
+    ]
+  }
+}
+```
+
+### Patch Index (`10.0/10.0.1/index.json`)
+
+```json
+{
+  "kind": "patch-version-index",
+  "version": "10.0.1",
+  "date": "2025-12-09T00:00:00+00:00",
+  "security": true,
+  "cve_count": 3,
+  "support_phase": "active",
+  "_links": {
+    "self": { "href": ".../10.0/10.0.1/index.json" },
+    "prev": { "href": ".../10.0/10.0.0/index.json" },
+    "cve-json": { "href": ".../timeline/2025/12/cve.json" },
+    "release-month": { "href": ".../timeline/2025/12/index.json" }
+  },
+  "_embedded": {
+    "disclosures": [
+      {
+        "id": "CVE-2025-12345",
+        "title": ".NET Remote Code Execution Vulnerability",
+        "cvss_score": 8.1,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2025-12-09",
+        "affected_releases": ["10.0", "9.0"],
+        "affected_products": ["dotnet-runtime"],
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/abc123.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/10.0",
+            "release": "10.0"
+          }
+        ],
+        "_links": {
+          "self": { "href": "https://github.com/dotnet/announcements/issues/999" }
+        }
+      }
+    ]
+  }
+}
+```
+
+### Timeline Index (`timeline/index.json`)
+
+```json
+{
+  "kind": "timeline-index",
+  "latest": "10.0",
+  "latest_lts": "10.0",
+  "latest_year": "2025",
+  "_links": {
+    "self": { "href": ".../timeline/index.json" },
+    "releases-index": { "href": ".../index.json" }
+  },
+  "_embedded": {
+    "years": [
+      {
+        "year": "2025",
+        "releases": ["10.0", "9.0", "8.0"],
+        "_links": {
+          "self": { "href": ".../timeline/2025/index.json" }
+        }
+      }
+    ]
+  }
+}
+```
+
+### Month Index (`timeline/2025/01/index.json`)
+
+```json
+{
+  "kind": "month-index",
+  "year": "2025",
+  "month": "01",
+  "security": true,
+  "cve_count": 4,
+  "cve_records": ["CVE-2025-21171", "CVE-2025-21172", "CVE-2025-21173", "CVE-2025-21176"],
+  "_links": {
+    "self": { "href": ".../timeline/2025/01/index.json" },
+    "prev": { "href": ".../timeline/2024/12/index.json" },
+    "cve-json": { "href": ".../timeline/2025/01/cve.json" }
+  },
+  "_embedded": {
+    "disclosures": [
+      {
+        "id": "CVE-2025-21171",
+        "title": ".NET Remote Code Execution Vulnerability",
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "affected_releases": ["9.0"],
+        "affected_products": ["dotnet-runtime"],
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/9da8c6a.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/9.0"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### CVE JSON (`timeline/2025/01/cve.json`)
+
+The CVE JSON file provides full details and pre-computed query dictionaries:
+
+```json
+{
+  "title": "CVE data for January 2025",
+  "last_updated": "2025-01-14T00:00:00+00:00",
+
+  "disclosures": [
+    {
+      "id": "CVE-2025-21171",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "description": ["Full vulnerability description..."],
+      "cvss": {
+        "score": 7.5,
+        "severity": "HIGH",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H"
+      },
+      "weakness": "CWE-122",
+      "mitigation": ["Upgrade to .NET 9.0.1 or later"]
+    }
+  ],
+
+  "products": [
+    {
+      "cve_id": "CVE-2025-21171",
+      "name": "dotnet-runtime",
+      "fixed": "9.0.1",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.0",
+      "commits": ["9da8c6a4a6ea03054e776275d3fd5c752897842e"]
+    }
+  ],
+
+  "packages": [
+    {
+      "cve_id": "CVE-2025-21172",
+      "name": "System.Text.Json",
+      "fixed": "9.0.1",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.0"
+    }
+  ],
+
+  "commits": {
+    "9da8c6a4a6ea03054e776275d3fd5c752897842e": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "url": "https://github.com/dotnet/runtime/commit/9da8c6a4a6ea03054e776275d3fd5c752897842e.diff"
+    }
+  },
+
+  "product_cves": {
+    "dotnet-runtime": ["CVE-2025-21171", "CVE-2025-21172", "CVE-2025-21176"],
+    "dotnet-sdk": ["CVE-2025-21173"]
+  },
+
+  "package_cves": {
+    "System.Text.Json": ["CVE-2025-21172"]
+  },
+
+  "release_cves": {
+    "8.0": ["CVE-2025-21172", "CVE-2025-21173", "CVE-2025-21176"],
+    "9.0": ["CVE-2025-21171", "CVE-2025-21172", "CVE-2025-21173", "CVE-2025-21176"]
+  },
+
+  "severity_cves": {
+    "CRITICAL": [],
+    "HIGH": ["CVE-2025-21171", "CVE-2025-21172", "CVE-2025-21173", "CVE-2025-21176"],
+    "MEDIUM": [],
+    "LOW": []
+  },
+
+  "cve_releases": {
+    "CVE-2025-21171": ["9.0"],
+    "CVE-2025-21172": ["8.0", "9.0"]
+  },
+
+  "cve_commits": {
+    "CVE-2025-21171": ["9da8c6a4a6ea03054e776275d3fd5c752897842e"],
+    "CVE-2025-21172": ["32d8ea6eecf7f192a75162645390847b14b56dbb", "89ef51c5d8f5239345127a1e282e11036e590c8b"]
+  }
+}
+```
+
+### Compatibility JSON (`10.0/compatibility.json`)
+
+```json
+{
+  "title": ".NET 10.0 Breaking Changes",
+  "version": "10.0",
+  "breaking_change_count": 83,
+  "last_updated": "2025-12-01T00:00:00+00:00",
+
+  "categories": ["sdk", "core-libraries", "aspnet-core", "cryptography", "extensions", "windows-forms"],
+
+  "impact_breakdown": {
+    "high": 12,
+    "medium": 45,
+    "low": 26
+  },
+
+  "type_breakdown": {
+    "source-incompatible": 35,
+    "binary-incompatible": 18,
+    "behavioral": 30
+  },
+
+  "breaks": [
+    {
+      "id": "aspnet-core-10-apidescription-client-deprecated",
+      "title": "Microsoft.Extensions.ApiDescription.Client package deprecated",
+      "category": "aspnet-core",
+      "type": "source-incompatible",
+      "version_introduced": "10.0-preview.7",
+      "impact": "medium",
+      "description": "The Microsoft.Extensions.ApiDescription.Client package has been deprecated...",
+      "required_action": "Remove any PackageReference to Microsoft.Extensions.ApiDescription.Client...",
+      "affected_apis": ["OpenApiReference", "OpenApiProjectReference", "dotnet openapi"],
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/aspnet-core/10/apidescription-client-deprecated",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/aspnet-core/10/apidescription-client-deprecated.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/aspnet/Announcements/issues/518",
+          "title": "GitHub announcement"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Manifest JSON (`10.0/manifest.json`)
+
+```json
+{
+  "kind": "release-manifest",
+  "version": "10.0",
+  "title": ".NET 10.0",
+  "label": ".NET 10",
+  "release_type": "lts",
+  "support_phase": "active",
+  "supported": true,
+  "ga_date": "2025-11-11T00:00:00+00:00",
+  "eol_date": "2028-11-14T00:00:00+00:00",
+  "_links": {
+    "self": { "href": ".../10.0/manifest.json" },
+    "whats-new-rendered": {
+      "href": "https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview",
+      "title": "What's new in .NET 10"
+    },
+    "downloads-rendered": {
+      "href": "https://dotnet.microsoft.com/download/dotnet/10.0",
+      "title": "Download .NET 10.0"
+    },
+    "release-blog-rendered": {
+      "href": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/",
+      "title": ".NET 10 announcement blog"
+    },
+    "supported-os-json": {
+      "href": ".../10.0/supported-os.json",
+      "title": "Supported operating systems"
+    },
+    "supported-os-markdown": {
+      "href": ".../10.0/supported-os.md",
+      "title": "Supported OS (markdown)"
+    },
+    "compatibility-rendered": {
+      "href": "https://learn.microsoft.com/dotnet/core/compatibility/10.0",
+      "title": "Breaking changes in .NET 10"
+    },
+    "os-packages-json": {
+      "href": ".../10.0/os-packages.json",
+      "title": "OS package dependencies"
+    },
+    "releases-json": {
+      "href": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/10.0/releases.json",
+      "title": "Legacy releases.json (download URLs)"
+    }
+  }
+}
+```
+
+## CVE JSON Quick Queries
 
 ```bash
 # Get all CVE IDs
-jq -r '.cves[].id' cve.json
+jq -r '.disclosures[].id' cve.json
 
-# CVEs for .NET 8.0
-jq -r '.["release_cves"]["8.0"][]' cve.json
+# CVEs for .NET 9.0
+jq -r '.release_cves["9.0"][]' cve.json
 
 # CVEs affecting .NET Runtime product
-jq -r '.["product_cves"]["dotnet-runtime"][]' cve.json
+jq -r '.product_cves["dotnet-runtime"][]' cve.json
 
 # CVEs affecting a specific package
-jq -r '.["package_cves"]["System.Text.Json"][]' cve.json
+jq -r '.package_cves["System.Text.Json"][]' cve.json
 
 # Commits for specific CVE
-jq -r '. as $root | .["cve_commits"]["CVE-2024-38095"][] | $root.commits[.].url' cve.json
+jq -r '. as $root | .cve_commits["CVE-2025-21171"][] | $root.commits[.].url' cve.json
 
-# Critical severity only
-jq -r '.cves[] | select(.severity == "Critical") | .id' cve.json
+# HIGH severity only
+jq -r '.severity_cves["HIGH"][]' cve.json
+
+# Full disclosure for a CVE
+jq '.disclosures[] | select(.id == "CVE-2025-21171")' cve.json
 ```
 
-## GitHub Commit URLs
+## Breaking Changes Quick Queries
 
-CVE JSON includes `.diff` URLs for immediate analysis:
+```bash
+# Count by category
+jq -r '[.breaks[].category] | group_by(.) | map({category: .[0], count: length}) | sort_by(-.count) | .[] | "\(.category): \(.count)"' compatibility.json
 
-- **`.diff`** - Raw unified diff (best for code analysis)
-- **`.patch`** - Git patch with commit message (best for context)
-- **(no extension)** - Web view (for humans)
+# Filter by category
+jq -r '.breaks[] | select(.category == "core-libraries") | .title' compatibility.json
+
+# HIGH impact only
+jq -r '.breaks[] | select(.impact == "high") | "\(.category): \(.title)"' compatibility.json
+
+# Get documentation source URLs for a category
+jq -r '.breaks[] | select(.category == "sdk") | .references[] | select(.type == "documentation-source") | .url' compatibility.json
+```
+
+## HAL Links Reference (`_links`)
+
+### Navigation
+
+| Link | Purpose |
+|------|---------|
+| `self` | Current document |
+| `prev` | Previous document (months, patches) |
+
+### Version Navigation
+
+| Link | Purpose |
+|------|---------|
+| `latest` | Most recent release |
+| `latest-lts` | Most recent LTS release |
+| `latest-security` | Most recent security patch |
+| `releases-index` | Root releases index |
+
+### Cross-Links
+
+| Link | Purpose |
+|------|---------|
+| `timeline-index` | From releases to timeline |
+| `releases-index` | From timeline to releases |
+| `release-month` | From patch to timeline month |
+
+### Resources
+
+| Link | Purpose |
+|------|---------|
+| `compatibility-json` | Breaking changes data |
+| `release-manifest` | External resource links |
+| `cve-json` | Full CVE details |
+| `supported-os-json` | OS support matrix |
+
+### Link Properties
+
+- **`href`** — URL (always follow this, never construct)
+- **`path`** — Relative path within repo
+- **`title`** — Human-readable description
+- **`type`** — Media type (`application/hal+json`, `application/json`)
 
 ## Response Templates
 
@@ -121,86 +560,24 @@ CVE JSON includes `.diff` URLs for immediate analysis:
 Note: Change '.diff' to '.patch' for commit message, or remove for web view"
 ```
 
-## Index Structure Summary
+**Breaking changes follow-up**:
 
-### Major Version Index (e.g., `9.0/index.json`)
-
-- **`_embedded.releases[]`** - Patches with `security`, `cve_records`
-- **`_embedded.cve_records`** - All CVE IDs for this major version
-- **`_embedded.years[]`** - Cross-links to timeline years
-- **`_links.latest-security`** - Most recent security patch
-
-### Patch Index (e.g., `9.0/9.0.1/index.json`)
-
-- **`_embedded.disclosures[]`** - Full CVE details with fixes
-- **`_embedded.cve_records`** - CVE IDs for this patch
-- **`_links.month-index`** - Cross-link to timeline month
-- **`_links.cve-json`** - Link to month's cve.json
-
-### Month Index (e.g., `timeline/2024/07/index.json`)
-
-- **`_embedded.disclosures[]`** - Full CVE details with fixes
-- **`_embedded.patches{}`** - Per-version patch info with `cve_records`
-- **`_links.cve`** - Link to cve.json for this month
-
-### CVE JSON (e.g., `timeline/2024/07/cve.json`) — Full Schema
-
-- **`cves[]`** - CVE metadata (id, severity, cvss, description, references)
-- **`products[]`** - SDK components (dotnet-runtime, dotnet-aspnetcore, dotnet-sdk, dotnet-windowsdesktop)
-- **`packages[]`** - NuGet packages (System.Text.Json, Microsoft.IO.Redist, etc.)
-- **`commits{}`** - Commit details by hash
-- **`product_name{}`** - Product ID → display name
-- **`product_cves{}`** - Product ID → CVE IDs
-- **`package_cves{}`** - Package name → CVE IDs
-- **`cve_commits{}`** - CVE → commit hashes
-- **`cve_releases{}`** - CVE → affected versions
-- **`release_cves{}`** - Version → CVE IDs
-
-## HAL Links Reference (`_links`)
-
-### Navigation
-
-- **`self`**: Current document
-- **`prev`** / **`next`**: Adjacent documents (months, years)
-
-### Version Navigation
-
-- **`latest`**: Most recent release (any support type)
-- **`latest-lts`**: Most recent LTS release
-- **`latest-security`**: Most recent security patch
-- **`major-version-index`**: Parent version index (from patch)
-
-### Cross-Links
-
-- **`timeline-index`**: From version index to timeline
-- **`releases-index`**: From timeline to version index
-- **`month-index`**: From patch to timeline month
-- **`latest-year`**: Most recent year in timeline
-
-### Resources
-
-- **`supported-os`**: OS support information
-- **`cve-json`** / **`cve`**: Security vulnerability data
-- **`sdk-index`**: SDK information
-- **`release-manifest`**: Full release manifest
-
-### Link Properties
-
-- **`href`**: URL (always follow this, never construct)
-- **`path`**: Relative path within repo
-- **`title`**: Human-readable description
-- **`type`**: Media type (`application/hal+json`, `application/json`, `application/markdown`)
+```text
+[After listing breaking changes]
+"Would you like the raw documentation markdown for migration guidance?"
+```
 
 ## Error Handling
 
-- **404 on JSON**: Fall back to `.md` version
-- **Malformed JSON**: Skip resource, continue
+- **404 on JSON**: Resource may not exist for that version
+- **Malformed JSON**: Skip resource, continue with workflow
 - **GitHub access denied**: Provide URL to user for manual paste
-- **Missing fields**: Check existence before accessing
+- **Missing fields**: Check existence before accessing; schema evolves
 
 ## Performance Tips
 
-- Follow HAL `_links.href` values
-- Fetch minimal, focused documents
-- Most data available in `_embedded` without additional requests
+- Follow HAL `_links["..."].href` values — never construct URLs
+- Embedded data (`_embedded`) often has what you need without additional requests
+- Use query dictionaries in `cve.json` instead of iterating arrays
+- Use rollup fields in `compatibility.json` (`impact_breakdown`, etc.) for summaries
 - Files are CDN-optimized and cache-friendly
