@@ -2,5 +2,5 @@
 (["| Version | Support Type | Phase | EOL Date |",
   "| ------- | ------------ | ----- | -------- |"] +
  [._embedded.releases[] |
-  "| \(.version) | \(.release_type) | \(.phase) | \(.eol_date // "N/A" | split("T")[0]) |"]) |
+  "| \(.version) | \(.release_type) | \(.support_phase) | \(.eol_date // "N/A" | split("T")[0]) |"]) |
 .[]
