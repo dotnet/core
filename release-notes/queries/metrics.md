@@ -23,12 +23,12 @@ The tables below show theoretical update frequency based on practice and design,
 | File | Size | Updates/Year | Description |
 |------|------|--------------|-------------|
 | `index.json` | 8 KB | ~1 | Root index with all major versions |
-| `10.0/index.json` | 15 KB | ~12 | All 10.0 patches (fewer releases so far) |
+| `10.0/index.json` | 14 KB | ~12 | All 10.0 patches (fewer releases so far) |
 | `9.0/index.json` | 28 KB | ~12 | All 9.0 patches with CVE references |
-| `8.0/index.json` | 34 KB | ~12 | All 8.0 patches with CVE references |
+| `8.0/index.json` | 33 KB | ~12 | All 8.0 patches with CVE references |
 | `timeline/index.json` | 8 KB | ~1 | Timeline root (all years) |
 | `timeline/2025/index.json` | 15 KB | ~12 | Year index (all months) |
-| `timeline/2024/07/index.json` | 10 KB | ~1 | Month index with embedded CVE summaries |
+| `timeline/2024/07/index.json` | 9 KB | ~1 | Month index with embedded CVE summaries |
 | `timeline/2025/01/cve.json` | 14 KB | ~1 | Full CVE details for a month |
 
 ### Releases-Index Files
@@ -117,7 +117,7 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **52 KB** |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **51 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** |
 
 **hal-index:**
@@ -171,7 +171,7 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **52 KB** |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **51 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** (cannot answer) |
 
 **hal-index:**
@@ -443,6 +443,116 @@ done | sort -u
 
 **Winner:** hal-index (**88x smaller**, and releases-index cannot answer this query—CVE severity is not available)
 
+### Breaking Changes Summary
+
+#### Query: "How many breaking changes are there in .NET 10 by category?"
+
+| Schema | Files Required | Total Transfer |
+|--------|----------------|----------------|
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **~45 KB** |
+| releases-index | N/A | N/A (not available) |
+
+**hal-index:**
+
+```bash
+ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
+
+# Step 1: Get the 10.0 version href
+VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "10.0") | ._links.self.href')
+
+# Step 2: Get the compatibility-json href
+BC_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["compatibility-json"].href')
+
+# Step 3: Count breaking changes by category
+curl -s "$BC_HREF" | jq -r '[.breaking_changes[].category] | group_by(.) | map({category: .[0], count: length}) | sort_by(-.count) | .[] | "\(.category): \(.count)"'
+# sdk: 23
+# core-libraries: 16
+# aspnet-core: 9
+# extensions: 8
+# ...
+```
+
+**releases-index:** Not available.
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index does not include breaking changes data. The hal-index provides full breaking changes with category, impact level, required actions, and references.
+- **Ergonomics:** The hal-index uses discoverable HAL links (`._links["compatibility-json"]`) to navigate to breaking changes data, enabling filtering and prioritization.
+
+**Winner:** hal-index only
+
+### Breaking Changes by Category
+
+#### Query: "What are the core-libraries breaking changes in .NET 10?"
+
+| Schema | Files Required | Total Transfer |
+|--------|----------------|----------------|
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **~45 KB** |
+| releases-index | N/A | N/A (not available) |
+
+**hal-index:**
+
+```bash
+ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
+
+# Step 1: Get the 10.0 version href
+VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "10.0") | ._links.self.href')
+
+# Step 2: Get the compatibility-json href
+BC_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["compatibility-json"].href')
+
+# Step 3: Filter by category
+curl -s "$BC_HREF" --arg cat "core-libraries" | jq -r '.breaking_changes[] | select(.category == $cat) | .title'
+# API obsoletions with custom diagnostic IDs
+# BinaryReader.Read(Span) and Stream.Read(Span) return data on partial read
+# ...
+```
+
+**releases-index:** Not available.
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index does not include breaking changes data.
+- **Ergonomics:** The hal-index enables filtering breaking changes by category, impact level, or affected component, helping developers prioritize migration work.
+
+**Winner:** hal-index only
+
+### Breaking Changes Documentation URLs
+
+#### Query: "Get the raw markdown URLs for core-libraries breaking changes (for LLM context)"
+
+| Schema | Files Required | Total Transfer |
+|--------|----------------|----------------|
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **~45 KB** |
+| releases-index | N/A | N/A (not available) |
+
+**hal-index:**
+
+```bash
+ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
+
+# Step 1: Get the 10.0 version href
+VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "10.0") | ._links.self.href')
+
+# Step 2: Get the compatibility-json href
+BC_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["compatibility-json"].href')
+
+# Step 3: Get raw markdown URLs for core-libraries breaking changes
+curl -s "$BC_HREF" --arg cat "core-libraries" | jq -r '.breaking_changes[] | select(.category == $cat) | .references[] | select(.type == "documentation-source") | .href'
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/activity-sampling.md
+# https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/asyncenumerable.md
+# ...
+```
+
+**releases-index:** Not available.
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index does not include breaking changes data.
+- **Ergonomics:** These raw markdown URLs can be fetched and fed directly to an LLM for analysis or migration assistance. Breaking changes include multiple reference types; `documentation-source` provides raw markdown content.
+
+**Winner:** hal-index only
+
 ## Query Capability Comparison
 
 | Query Type | hal-index | releases-index | Ratio |
@@ -455,6 +565,7 @@ done | sort -u
 | CVE details (severity, fixes) | ✅ | ❌ | — |
 | Timeline navigation | ✅ | ❌ | — |
 | SDK-first navigation | ✅ | ❌ | — |
+| Breaking changes by category | ✅ | ❌ | hal-index only |
 
 ## Cache Coherency
 
@@ -489,7 +600,7 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 | Metric | hal-index | releases-index |
 |--------|-------------|----------------|
 | Basic version queries | 8 KB | 6 KB |
-| CVE queries (latest security patch) | 52 KB | 1,220 KB |
+| CVE queries (latest security patch) | 51 KB | 1,220 KB |
 | Recent CVEs (last 2 security releases) | 23 KB | 2.5 MB |
 | CVEs in last 12 months | ~90 KB | 2.5 MB |
 | Cache coherency | ✅ Atomic | ❌ TTL mismatch risk |
