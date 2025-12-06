@@ -1,0 +1,1883 @@
+{
+  "version": "9.0",
+  "title": ".NET 9.0 Breaking Changes",
+  "description": "Breaking changes introduced in .NET 9.0 across all technology areas",
+  "breaking_change_count": 64,
+  "last_updated": "2025-12-05",
+  "breaks": [
+    {
+      "id": "aspnet-core-9-certificate-export",
+      "title": "Dev cert export no longer creates folder",
+      "category": "aspnet-core",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about the breaking change in ASP.NET Core 9 where exporting the development certificate no longer creates the target directory if it doesn\u0027t exist.",
+      "impact": "medium",
+      "required_action": "Create the target directory (with appropriate permissions) before invoking \u0060dotnet dev-certs\u0060.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/aspnet-core/9.0/certificate-export",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/aspnet-core/9.0/certificate-export.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "aspnet-core-9-forwarded-headers-unknown-proxies",
+      "title": "Forwarded Headers Middleware ignores X-Forwarded-* headers from unknown proxies",
+      "category": "aspnet-core",
+      "type": "behavioral-change",
+      "version_introduced": "8.0.17",
+      "description": "Learn about the breaking change in ASP.NET Core where Forwarded Headers Middleware now ignores headers from proxies that aren\u0027t explicitly configured as trusted.",
+      "impact": "medium",
+      "required_action": "Review your deployment topology. Ensure that all legitimate proxy servers in front of your app are properly added to \u003Cxref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies\u003E or \u003Cxref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks\u003E in your \u003Cxref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions\u003E configuration.\n\n[code sample]\n\nOr, for a network:\n\n[code sample]\n\nIf you wish to enable the previous behavior, which isn\u0027t recommended due to security risks, you ...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/aspnet-core/8.0/forwarded-headers-unknown-proxies",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/aspnet-core/8.0/forwarded-headers-unknown-proxies.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*"
+      ]
+    },
+    {
+      "id": "aspnet-core-9-hostbuilder-validation",
+      "title": "HostBuilder enables ValidateOnBuild/ValidateScopes in development environment",
+      "category": "aspnet-core",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the breaking change in .NET 9 where HostBuilder now enables ValidateOnBuild and ValidateScopes in the development environment.",
+      "impact": "medium",
+      "required_action": "No action necessary if your application validates successfully. If you do see a validation error when testing in development, first try to fix it. If you can\u0027t fix it, you can disable validation by calling \u003Cxref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseDefaultServiceProvider%2A\u003E.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/aspnet-core/9.0/hostbuilder-validation",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/aspnet-core/9.0/hostbuilder-validation.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.Extensions.Hosting.HostBuilder",
+        "Microsoft.Extensions.Hosting.HostBuilder.Build"
+      ]
+    },
+    {
+      "id": "aspnet-core-9-key-resolution",
+      "title": "DefaultKeyResolution.ShouldGenerateNewKey has altered meaning",
+      "category": "aspnet-core",
+      "type": "behavioral-change",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in ASP.NET Core 9.0 where DefaultKeyResolution.ShouldGenerateNewKey has a slightly altered meaning.",
+      "impact": "medium",
+      "required_action": "If you have an \u0060IDefaultKeyResolver\u0060 implementation that tries to replicate the expiry logic, you can remove that logic (however, leaving it is fine as well).\n\nIf you were consuming \u0060IDefaultKeyResolver\u0060 directly to determine whether expiration was pending, you can check the default key\u0027s \u0060ExpirationDate\u0060 property directly.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/aspnet-core/9.0/key-resolution",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/aspnet-core/9.0/key-resolution.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.AspNetCore.DataProtection.KeyManagement.Internal.DefaultKeyResolution.ShouldGenerateNewKey"
+      ]
+    },
+    {
+      "id": "aspnet-core-9-legacy-apis",
+      "title": "Legacy Mono and Emscripten JavaScript APIs not exported to global namespace in Blazor WebAssembly apps",
+      "category": "aspnet-core",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in ASP.NET Core 9 where legacy Mono and Emscripten APIs are now accessible through the Blazor.runtime object instead of the global namespace.",
+      "impact": "medium",
+      "required_action": "Instead of accessing Emscripten APIs from the \u0060window\u0060 object, access them from the \u0060Blazor.runtime\u0060 object.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/aspnet-core/9.0/legacy-apis",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/aspnet-core/9.0/legacy-apis.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/aspnet/Announcements/issues/516",
+          "title": "GitHub announcement"
+        }
+      ],
+      "affected_apis": [
+        "window.MONO.*",
+        "window.BINDING.*",
+        "window.Module.*"
+      ]
+    },
+    {
+      "id": "aspnet-core-9-middleware-constructors",
+      "title": "Middleware types with multiple constructors",
+      "category": "aspnet-core",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about the breaking change in ASP.NET Core 9 where having multiple constructors in a middleware type can cause an exception at runtime.",
+      "impact": "medium",
+      "required_action": "If this happens and you can\u0027t upgrade to a dependency injection container that implements \u003Cxref:Microsoft.Extensions.DependencyInjection.IServiceProviderIsService\u003E, you can add the \u003Cxref:Microsoft.Extensions.DependencyInjection.ActivatorUtilitiesConstructorAttribute\u003E to the preferred constructor of the affected middleware type.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/aspnet-core/9.0/middleware-constructors",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/aspnet-core/9.0/middleware-constructors.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware"
+      ]
+    },
+    {
+      "id": "containers-9-monitor-images",
+      "title": ".NET Monitor images simplified to version-only tags",
+      "category": "containers",
+      "type": "behavioral-change",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in containers where the .NET Monitor 9 image offering has been simplified to only provide Azure Linux distroless images.",
+      "impact": "medium",
+      "required_action": "Update your tag usage to indicate which image from the .NET Monitor 9 image offering you want to use. The following examples show some recommended migrations:\n\n- \u00608-cbl-mariner-distroless\u0060 -\u003E \u00609\u0060\n- \u00608.0-cbl-mariner-distroless\u0060 -\u003E \u00609.0\u0060\n- \u00608-ubuntu-chiseled\u0060 -\u003E \u00609\u0060\n- \u00608.0-ubuntu-chiseled\u0060 -\u003E \u00609.0\u0060\n\nThe following table shows the recommended .NET Monitor 9 tags.\n\n| Tag   | Recommended use                                                     |\n|-------|---------------------------------------------...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/containers/9.0/monitor-images",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/containers/9.0/monitor-images.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/dotnet/docs/issues/43379",
+          "title": "GitHub announcement"
+        }
+      ]
+    },
+    {
+      "id": "containers-9-no-zlib",
+      "title": ".NET 9 container images no longer install \u0060zlib\u0060",
+      "category": "containers",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the breaking change in containers where .NET 9 container images no longer install the zlib package.",
+      "impact": "medium",
+      "required_action": "For most scenarios, no action is required. If your containerized .NET app has a direct package dependency on \u0060zlib\u0060, you should manually install it in your Dockerfile using the package manager.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/containers/9.0/no-zlib",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/containers/9.0/no-zlib.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "core-libraries-9-ambiguous-overload",
+      "title": "Ambiguous overload resolution affecting StringValues implicit operators",
+      "category": "core-libraries",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where ambiguous overload resolution now throws error CS0121.",
+      "impact": "medium",
+      "required_action": "Explicitly specify the method you intend to call by casting the arguments to the appropriate type or apply named parameters.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/ambiguous-overload",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/ambiguous-overload.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.String.Concat(System.ReadOnlySpan{System.String})",
+        "System.String.Join(System.Char,System.ReadOnlySpan{System.String})",
+        "System.String.Join(System.String,System.ReadOnlySpan{System.String})",
+        "System.IO.Path.Combine(System.ReadOnlySpan{System.String})",
+        "System.IO.Path.Join(System.ReadOnlySpan{System.String})",
+        "System.Text.StringBuilder.AppendJoin(System.String,System.ReadOnlySpan{System.String})",
+        "System.Text.StringBuilder.AppendJoin(System.Char,System.ReadOnlySpan{System.Object})"
+      ]
+    },
+    {
+      "id": "core-libraries-9-async-callback",
+      "title": "IncrementingPollingCounter initial callback is asynchronous",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where the IncrementingPollingCounter initial callback is no longer synchronous.",
+      "impact": "medium",
+      "required_action": "No action is required for scenarios that use \u0060IncrementingPollingCounters\u0060 to visualize metrics in external monitoring tools. These scenarios should continue to work normally.\n\nFor scenarios that do in-process testing or other consumption of counter data via \u0060EventListener\u0060, check if your code expects to observe a specific modification to the counter value made on the same thread that called \u0060EnableEvents()\u0060. If it does, we recommend waiting to observe at least one counter event from the \u0060Eve...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/async-callback",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/async-callback.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Diagnostics.Tracing.IncrementingPollingCounter"
+      ]
+    },
+    {
+      "id": "core-libraries-9-biginteger-limit",
+      "title": "BigInteger maximum length",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where a maximum length for BigInteger is enforced.",
+      "impact": "medium",
+      "required_action": "If your code is affected, decrease the length of value you\u0027re assigning to \u003Cxref:System.Numerics.BigInteger\u003E or add a length check.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/biginteger-limit",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/biginteger-limit.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Numerics.BigInteger"
+      ]
+    },
+    {
+      "id": "core-libraries-9-binaryreader",
+      "title": "BinaryReader.GetString() returns \u0027\\uFFFD\u0027 on malformed sequences",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where BinaryReader.GetString() returns \u0022\\uFFFD\u0022 on malformed encoded string sequences.",
+      "impact": "medium",
+      "required_action": "If you want to keep the previous behavior where incomplete byte sequence were omitted at the end of the string, call \u0060TrimEnd(\u0022\\uFFFD\u0022)\u0060 on the result.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/binaryreader",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/binaryreader.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.IO.BinaryReader.ReadString"
+      ]
+    },
+    {
+      "id": "core-libraries-9-compressionlevel-bits",
+      "title": "Adding a ZipArchiveEntry with CompressionLevel sets ZIP central directory header general-purpose bit flags",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.5",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where adding a ZipArchiveEntry with a specified CompressionLevel sets the ZIP central directory header general-purpose bit flags.",
+      "impact": "medium",
+      "required_action": "If you want to ensure that new \u0060ZipArchiveEntry\u0060 records added to the \u0060ZipArchive\u0060 have general-purpose bit flags of \u00600\u0060, specify a \u0060CompressionLevel\u0060 of \u0060CompressionLevel.Optimal\u0060 or \u0060CompressionLevel.NoCompression\u0060 when you call \u003Cxref:System.IO.Compression.ZipArchive.CreateEntry(System.String,System.IO.Compression.CompressionLevel)?displayProperty=nameWithType\u003E.\n\nIf you use \u003Cxref:System.IO.Packaging.Package.CreatePart(System.Uri,System.String,System.IO.Packaging.CompressionOption)?displayPr...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/compressionlevel-bits",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/compressionlevel-bits.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.IO.Compression.ZipArchive.CreateEntry(System.String,System.IO.Compression.CompressionLevel)",
+        "System.IO.Packaging.Package.CreatePart(System.Uri,System.String,System.IO.Packaging.CompressionOption)"
+      ]
+    },
+    {
+      "id": "core-libraries-9-empty-env-variable",
+      "title": "Support for empty environment variables",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where passing \u0060string.Empty\u0060 to \u0060Environment.SetEnvironmentVariable\u0060 no longer deletes the environment variable.",
+      "impact": "medium",
+      "required_action": "To delete an environment variable using \u003Cxref:System.Environment.SetEnvironmentVariable(System.String,System.String)?displayProperty=nameWithType\u003E, change your code to pass \u0060null\u0060 instead of \u0060string.Empty\u0060 as the value argument.\n\nTo set the environment variable to an empty value using \u003Cxref:System.Diagnostics.ProcessStartInfo.Environment?displayProperty=nameWithType\u003E or \u003Cxref:System.Diagnostics.ProcessStartInfo.EnvironmentVariables?displayProperty=nameWithType\u003E, change your code to set these ...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/empty-env-variable",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/empty-env-variable.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Environment.SetEnvironmentVariable(System.String,System.String)",
+        "System.Diagnostics.ProcessStartInfo.Environment",
+        "System.Diagnostics.ProcessStartInfo.EnvironmentVariables"
+      ]
+    },
+    {
+      "id": "core-libraries-9-enumconverter",
+      "title": "EnumConverter validates registered types to be enum",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the .NET 9 breaking change where EnumConverter now validates that the type to be registered is an enum type.",
+      "impact": "medium",
+      "required_action": "There is no easy workaround if an \u003Cxref:System.ComponentModel.EnumConverter\u003E is used to convert to and from a non-\u0060enum\u0060 type.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/enumconverter",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/enumconverter.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.ComponentModel.EnumConverter.%23ctor(System.Type)"
+      ]
+    },
+    {
+      "id": "core-libraries-9-getsubarray-return",
+      "title": "RuntimeHelpers.GetSubArray returns different type",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where the type of array instance returned by RuntimeHelpers.GetSubArray matches the source array.",
+      "impact": "medium",
+      "required_action": "The recommended action is to remove dependency of the affected code on array covariance.\n\nFor example, change:\n\n[code sample]\n\nto:\n\n[code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/getsubarray-return",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/getsubarray-return.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray%60%601(%60%600[],System.Range)"
+      ]
+    },
+    {
+      "id": "core-libraries-9-inlinearray-size",
+      "title": "Inline array struct size limit is enforced",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where the size limit for inline arrays is now enforced.",
+      "impact": "medium",
+      "required_action": "If you have code that uses inline array structs with very large instances that exceed the limit, reduce the size of these structs.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/inlinearray-size",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/inlinearray-size.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Runtime.CompilerServices.InlineArrayAttribute"
+      ]
+    },
+    {
+      "id": "core-libraries-9-inlinearrayattribute",
+      "title": "Default \u0060Equals()\u0060 and \u0060GetHashCode()\u0060 throw for types marked with \u0060InlineArrayAttribute\u0060",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where the default implementations of \u0060Equals()\u0060 and \u0060GetHashCode()\u0060 throw an exception for types marked with \u0060InlineArrayAttribute\u0060.",
+      "impact": "medium",
+      "required_action": "Library authors should implement both \u003Cxref:System.ValueType.Equals(System.Object)\u003E and \u003Cxref:System.ValueType.GetHashCode\u003E on all types marked with \u003Cxref:System.Runtime.CompilerServices.InlineArrayAttribute\u003E.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/inlinearrayattribute",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/inlinearrayattribute.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.ValueType.Equals(System.Object)",
+        "System.ValueType.GetHashCode"
+      ]
+    },
+    {
+      "id": "core-libraries-9-inmemorydirinfo-prepends-rootdir",
+      "title": "InMemoryDirectoryInfo prepends rootDir to files",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where InMemoryDirectoryInfo prepends the root directory to its file paths.",
+      "impact": "medium",
+      "required_action": "If you depended on the previous behavior, adjust your code to account for the files now being prepended with the root directory. For example:\n\n[code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/inmemorydirinfo-prepends-rootdir",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/inmemorydirinfo-prepends-rootdir.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.Extensions.FileSystemGlobbing.InMemoryDirectoryInfo",
+        "Microsoft.Extensions.FileSystemGlobbing.MatcherExtensions.Match(Microsoft.Extensions.FileSystemGlobbing.Matcher,System.String,System.String)",
+        "Microsoft.Extensions.FileSystemGlobbing.MatcherExtensions.Match(Microsoft.Extensions.FileSystemGlobbing.Matcher,System.String,System.Collections.Generic.IEnumerable{System.String})"
+      ]
+    },
+    {
+      "id": "core-libraries-9-non-keyed-params",
+      "title": "FromKeyedServicesAttribute no longer injects non-keyed parameter",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries (dependency injection) where FromKeyedServicesAttribute no longer injects a non-keyed parameter.",
+      "impact": "medium",
+      "required_action": "If \u0060FromKeyedServicesAttribute\u0060 is used, ensure that the corresponding service is registered as a keyed service, such as by using     \u0060IServiceCollection.AddKeyedScoped()\u0060, \u0060IServiceCollection.AddKeyedSingleton()\u0060, or \u0060IServiceCollection.AddKeyedTransient()\u0060.\n\nThe fix has also been backported to .NET 8.0.9, so both .NET 8 and .NET 9 have the same behavior. If your application depends on the old behavior, a feature switch was added for .NET 8.0.9 (but not .NET 9) named \u0060Microsoft.Extensions.De...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/non-keyed-params",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/non-keyed-params.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.Extensions.DependencyInjection.FromKeyedServicesAttribute.%23ctor(System.Object)"
+      ]
+    },
+    {
+      "id": "core-libraries-9-obsolete-apis-with-custom-diagnostics",
+      "title": ".NET 9 obsoletions with custom IDs",
+      "category": "core-libraries",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the APIs that have been marked as obsolete in .NET 9 with a custom diagnostic ID.",
+      "impact": "medium",
+      "required_action": "- Follow the specific guidance provided for the each diagnostic ID using the URL link provided on the warning.\n\n- Warnings or errors for these obsoletions can\u0027t be suppressed using the standard diagnostic ID for obsolete types or members; use the custom \u0060SYSLIBxxxx\u0060 diagnostic ID value instead.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/obsolete-apis-with-custom-diagnostics",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/obsolete-apis-with-custom-diagnostics.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Net.AuthenticationManager",
+        "System.Net.ServicePointManager",
+        "System.Threading.Thread.VolatileRead%2A",
+        "System.Threading.Thread.VolatileWrite%2A",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.Arm64.ShiftRightLogicalRoundedNarrowingSaturateScalar(System.Runtime.Intrinsics.Vector64{System.Int64},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.Arm64.ShiftRightLogicalRoundedNarrowingSaturateScalar(System.Runtime.Intrinsics.Vector64{System.Int16},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.Arm64.ShiftRightLogicalRoundedNarrowingSaturateScalar(System.Runtime.Intrinsics.Vector64{System.Int32},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateLower(System.Runtime.Intrinsics.Vector128{System.Int16},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateLower(System.Runtime.Intrinsics.Vector128{System.Int64},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateLower(System.Runtime.Intrinsics.Vector128{System.Int32},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateUpper(System.Runtime.Intrinsics.Vector64{System.SByte},System.Runtime.Intrinsics.Vector128{System.Int16},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateUpper(System.Runtime.Intrinsics.Vector64{System.Int16},System.Runtime.Intrinsics.Vector128{System.Int32},System.Byte)",
+        "System.Runtime.Intrinsics.Arm.AdvSimd.ShiftRightLogicalRoundedNarrowingSaturateUpper(System.Runtime.Intrinsics.Vector64{System.Int32},System.Runtime.Intrinsics.Vector128{System.Int64},System.Byte)",
+        "System.Reflection.Assembly.LoadFrom(System.String,System.Byte[],System.Configuration.Assemblies.AssemblyHashAlgorithm)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.Byte[])",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.ReadOnlySpan{System.Byte})",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.String)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.Byte[],System.Security.SecureString)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.Byte[],System.String)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.String,System.Security.SecureString)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.String,System.String)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Char},System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.String,System.ReadOnlySpan{System.Char},System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2.%23ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.Byte[])",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.String)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.Byte[],System.Security.SecureString)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.Byte[],System.String)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.String,System.Security.SecureString)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.String,System.String)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.Byte[],System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.String,System.Security.SecureString,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.%23ctor(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.Byte[])",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.ReadOnlySpan{System.Byte})",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.ReadOnlySpan{System.Byte})",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.Byte[],System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Char},System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.ReadOnlySpan{System.Byte},System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.String,System.ReadOnlySpan{System.Char},System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",
+        "System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromSignedFile(System.String)"
+      ]
+    },
+    {
+      "id": "core-libraries-9-oob-packages",
+      "title": "New version of some OOB packages",
+      "category": "core-libraries",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in core .NET libraries where updates were made to TFMs and package versions for several OOB packages.",
+      "impact": "medium",
+      "required_action": "Depending on the package, different recommended actions are provided. For more information, see the [package support policy](https://github.com/dotnet/maintenance-packages/tree/main/package-support-policy.md).",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/oob-packages",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/oob-packages.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/dotnet/docs/issues/43564",
+          "title": "GitHub announcement"
+        }
+      ],
+      "affected_apis": [
+        "All APIs contained in the affected packages."
+      ]
+    },
+    {
+      "id": "core-libraries-9-params-overloads",
+      "title": "C# overload resolution prefers \u0060params\u0060 span-type overloads",
+      "category": "core-libraries",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in .NET 9 where C# overload resolution prefers \u0060params\u0060 span-type overloads, which can\u0027t be used in \u0060Expression\u0060 lambdas.",
+      "impact": "medium",
+      "required_action": "If your code is affected, the recommended workaround is to call the method with an explicit array so the call binds to the \u0060params\u0060 array overload.\n\nFor the previous example, use \u0060new string[] { ... }\u0060:\n\n[code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/params-overloads",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/params-overloads.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Collections.Immutable.ImmutableArray.Create\u0060\u00601(System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableArray\u00601.AddRange(System.ReadOnlySpan{\u00600})",
+        "System.Collections.Immutable.ImmutableArray\u00601.InsertRange(System.Int32,System.ReadOnlySpan{\u00600})",
+        "System.Collections.Immutable.ImmutableArray\u00601.Builder.AddRange(System.ReadOnlySpan{\u00600})",
+        "System.Collections.Immutable.ImmutableArray\u00601.Builder.AddRange\u0060\u00601(System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableHashSet.Create\u0060\u00601(System.Collections.Generic.IEqualityComparer{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableHashSet.Create\u0060\u00601(System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableList.Create\u0060\u00601(System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableQueue.Create\u0060\u00601(System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableSortedSet.Create\u0060\u00601(System.Collections.Generic.IComparer{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableSortedSet.Create\u0060\u00601(System.ReadOnlySpan{\u0060\u00600})",
+        "System.Collections.Immutable.ImmutableStack.Create\u0060\u00601(System.ReadOnlySpan{\u0060\u00600})",
+        "System.Console.Write(System.String,System.ReadOnlySpan{System.Object})",
+        "System.Console.WriteLine(System.String,System.ReadOnlySpan{System.Object})",
+        "System.Diagnostics.Metrics.Counter\u00601.Add(\u00600,System.ReadOnlySpan{System.Collections.Generic.KeyValuePair{System.String,System.Object}})",
+        "System.Diagnostics.Metrics.Gauge\u00601.Record(\u00600,System.ReadOnlySpan{System.Collections.Generic.KeyValuePair{System.String,System.Object}})",
+        "System.Diagnostics.Metrics.UpDownCounter\u00601.Add(\u00600,System.ReadOnlySpan{System.Collections.Generic.KeyValuePair{System.String,System.Object}})",
+        "System.Diagnostics.Metrics.Histogram\u00601.Record(\u00600,System.ReadOnlySpan{System.Collections.Generic.KeyValuePair{System.String,System.Object}})",
+        "System.MemoryExtensions.TryWrite(System.Span{System.Char},System.IFormatProvider,System.Text.CompositeFormat,System.Int32@,System.ReadOnlySpan{System.Object})",
+        "System.Delegate.Combine(System.ReadOnlySpan{System.Delegate})",
+        "System.String.Concat(System.ReadOnlySpan{System.Object})",
+        "System.String.Concat(System.ReadOnlySpan{System.String})",
+        "System.String.Format(System.IFormatProvider,System.Text.CompositeFormat,System.ReadOnlySpan{System.Object})",
+        "System.String.Format(System.IFormatProvider,System.String,System.ReadOnlySpan{System.Object})",
+        "System.String.Format(System.String,System.ReadOnlySpan{System.Object})",
+        "System.String.Join(System.Char,System.ReadOnlySpan{System.Object})",
+        "System.String.Join(System.Char,System.ReadOnlySpan{System.String})",
+        "System.String.Join(System.String,System.ReadOnlySpan{System.Object})",
+        "System.String.Join(System.String,System.ReadOnlySpan{System.String})",
+        "System.String.Split(System.ReadOnlySpan{System.Char})",
+        "System.CodeDom.Compiler.IndentedTextWriter.Write(System.String,System.ReadOnlySpan{System.Object})",
+        "System.CodeDom.Compiler.IndentedTextWriter.WriteLine(System.String,System.ReadOnlySpan{System.Object})",
+        "System.IO.Path.Combine(System.ReadOnlySpan{System.String})",
+        "System.IO.Path.Join(System.ReadOnlySpan{System.String})",
+        "System.IO.StreamWriter.Write(System.String,System.ReadOnlySpan{System.Object})",
+        "System.IO.StreamWriter.WriteLine(System.String,System.ReadOnlySpan{System.Object})",
+        "System.IO.TextWriter.Write(System.String,System.ReadOnlySpan{System.Object})",
+        "System.IO.TextWriter.WriteLine(System.String,System.ReadOnlySpan{System.Object})",
+        "System.Text.StringBuilder.AppendFormat(System.IFormatProvider,System.Text.CompositeFormat,System.ReadOnlySpan{System.Object})",
+        "System.Text.StringBuilder.AppendFormat(System.IFormatProvider,System.String,System.ReadOnlySpan{System.Object})",
+        "System.Text.StringBuilder.AppendFormat(System.String,System.ReadOnlySpan{System.Object})",
+        "System.Text.StringBuilder.AppendJoin(System.Char,System.ReadOnlySpan{System.Object})",
+        "System.Text.StringBuilder.AppendJoin(System.Char,System.ReadOnlySpan{System.String})",
+        "System.Text.StringBuilder.AppendJoin(System.String,System.ReadOnlySpan{System.Object})",
+        "System.Text.StringBuilder.AppendJoin(System.String,System.ReadOnlySpan{System.String})",
+        "System.Threading.CancellationTokenSource.CreateLinkedTokenSource(System.ReadOnlySpan{System.Threading.CancellationToken})",
+        "System.Threading.Tasks.Task.WaitAll(System.ReadOnlySpan{System.Threading.Tasks.Task})",
+        "System.Threading.Tasks.Task.WhenAll(System.ReadOnlySpan{System.Threading.Tasks.Task})",
+        "System.Threading.Tasks.Task.WhenAll\u0060\u00601(System.ReadOnlySpan{System.Threading.Tasks.Task{\u0060\u00600}})",
+        "System.Threading.Tasks.Task.WhenAny(System.ReadOnlySpan{System.Threading.Tasks.Task})",
+        "System.Threading.Tasks.Task.WhenAny\u0060\u00601(System.ReadOnlySpan{System.Threading.Tasks.Task{\u0060\u00600}})",
+        "System.Text.Json.Nodes.JsonArray.%23ctor(System.Text.Json.Nodes.JsonNodeOptions,System.ReadOnlySpan{System.Text.Json.Nodes.JsonNode})",
+        "System.Text.Json.Nodes.JsonArray.%23ctor(System.ReadOnlySpan{System.Text.Json.Nodes.JsonNode})",
+        "System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver.Combine(System.ReadOnlySpan{System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver})"
+      ]
+    },
+    {
+      "id": "core-libraries-9-string-trim",
+      "title": "String.Trim*(params ReadOnlySpan\u003Cchar\u003E) overloads removed",
+      "category": "core-libraries",
+      "type": "binary-source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in core .NET libraries where the String.Trim*(params ReadOnlySpan\u003Cchar\u003E) methods have been removed due to potential behavioral changes.",
+      "impact": "high",
+      "required_action": "Recompile any projects that were built against .NET 9 Preview 6, .NET 9 Preview 7, .NET 9 RC1, or .NET 9 RC2. If the project compiles with no errors, no further work is required. If the project no longer compiles, adjust your code. One possible substitution example is shown here:\n\n[code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/string-trim",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/string-trim.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.String.Trim(System.ReadOnlySpan{System.Char})",
+        "System.String.TrimEnd(System.ReadOnlySpan{System.Char})",
+        "System.String.TrimStart(System.ReadOnlySpan{System.Char})"
+      ]
+    },
+    {
+      "id": "core-libraries-9-timespan-from-overloads",
+      "title": "New TimeSpan.From*() overloads that take integers",
+      "category": "core-libraries",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-preview.3",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where new TimeSpan.From*() overloads were introduced that take integer arguments.",
+      "impact": "medium",
+      "required_action": "If this change affects your F# code, specify the type of argument so the compiler selects the appropriate overload.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/timespan-from-overloads",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.TimeSpan.FromDays*",
+        "System.TimeSpan.FromHours*",
+        "System.TimeSpan.FromMicroseconds*",
+        "System.TimeSpan.FromMilliseconds*",
+        "System.TimeSpan.FromMinutes*",
+        "System.TimeSpan.FromSeconds*"
+      ]
+    },
+    {
+      "id": "core-libraries-9-type-instance",
+      "title": "Creating type of array of System.Void not allowed",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where it\u0027s no longer allowed to create a type of array of System.Void.",
+      "impact": "medium",
+      "required_action": "Remove code that tries to create a type for an array of \u003Cxref:System.Void?displayProperty=fullName\u003E.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/type-instance",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/type-instance.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Type.MakeArrayType"
+      ]
+    },
+    {
+      "id": "core-libraries-9-unsafeaccessor-generics",
+      "title": "Altered UnsafeAccessor support for closed generics",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where support for UnsafeAccessor with closed generics has been altered.",
+      "impact": "medium",
+      "required_action": "Read the updated documentation for the \u003Cxref:System.Runtime.CompilerServices.UnsafeAccessorAttribute\u003E API and change your code as necessary to match the new restrictions for generic types.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/unsafeaccessor-generics",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/unsafeaccessor-generics.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Runtime.CompilerServices.UnsafeAccessorAttribute"
+      ]
+    },
+    {
+      "id": "core-libraries-9-ziparchiveentry-encoding",
+      "title": "ZipArchiveEntry names and comments respect UTF8 flag",
+      "category": "core-libraries",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about the .NET 9 breaking change in core .NET libraries where ZipArchiveEntry names and comments now respect the UTF8 flag when decoding.",
+      "impact": "medium",
+      "required_action": "If your code passes an encoding to the [ZipArchive constructor](xref:System.IO.Compression.ZipArchive.%23ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean,System.Text.Encoding)), be aware that this encoding isn\u0027t respected in all situations. It will only be used if the entry\u0027s UTF8 bit is not set.\n\nIf you\u0027re using \u003Cxref:System.IO.Compression.ZipArchive\u003E to parse ZIP entries with names encoded in non-UTF8 format (but which have the UTF8 bit flag set), you will no longer...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/core-libraries/9.0/ziparchiveentry-encoding",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/9.0/ziparchiveentry-encoding.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.IO.Compression.ZipArchive.%23ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean,System.Text.Encoding)",
+        "System.IO.Compression.ZipFile.ExtractToDirectory(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+        "System.IO.Compression.ZipFile.ExtractToDirectory(System.String,System.String,System.Text.Encoding,System.Boolean)",
+        "System.IO.Compression.ZipFile.ExtractToDirectory(System.String,System.String,System.Text.Encoding)",
+        "System.IO.Compression.ZipFile.ExtractToDirectory(System.IO.Stream,System.String,System.Text.Encoding)",
+        "System.IO.Compression.ZipFile.Open(System.String,System.IO.Compression.ZipArchiveMode,System.Text.Encoding)"
+      ]
+    },
+    {
+      "id": "cryptography-9-api-removed-pkcs",
+      "title": "APIs Removed from System.Security.Cryptography.Pkcs netstandard2.0",
+      "category": "cryptography",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in .NET 9 where certain APIs were removed from System.Security.Cryptography.Pkcs netstandard2.0.",
+      "impact": "medium",
+      "required_action": "If these additional members are needed, compile specifically for a TFM that includes them, such as \u0060net8.0\u0060.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/cryptography/9.0/api-removed-pkcs",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/cryptography/9.0/api-removed-pkcs.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/dotnet/docs/issues/45186",
+          "title": "GitHub announcement"
+        }
+      ],
+      "affected_apis": [
+        "System.Security.Cryptography.Pkcs.CmsSigner.%23ctor*",
+        "System.Security.Cryptography.Pkcs.CmsSigner.PrivateKey",
+        "System.Security.Cryptography.Pkcs.CmsSigner.SignaturePadding",
+        "System.Security.Cryptography.Pkcs.ContentInfo.GetContentType(System.ReadOnlySpan{System.Byte})",
+        "System.Security.Cryptography.Pkcs.EnvelopedCms.Decode(System.ReadOnlySpan{System.Byte})",
+        "System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.Pkcs.RecipientInfo,System.Security.Cryptography.AsymmetricAlgorithm)",
+        "System.Security.Cryptography.Pkcs.SignedCms.AddCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+        "System.Security.Cryptography.Pkcs.SignedCms.Decode(System.ReadOnlySpan{System.Byte})",
+        "System.Security.Cryptography.Pkcs.SignedCms.RemoveCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)",
+        "System.Security.Cryptography.Pkcs.SignerInfo.AddUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)",
+        "System.Security.Cryptography.Pkcs.SignerInfo.SignatureAlgorithm",
+        "System.Security.Cryptography.Pkcs.SignerInfo.GetSignature",
+        "System.Security.Cryptography.Pkcs.SignerInfo.RemoveUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)",
+        "System.Security.Cryptography.Pkcs.SubjectIdentifier.MatchesCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)"
+      ]
+    },
+    {
+      "id": "cryptography-9-evp-pkey-handle",
+      "title": "SafeEvpPKeyHandle.DuplicateHandle up-refs the handle",
+      "category": "cryptography",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the .NET 9 breaking change in cryptography where SafeEvpPKeyHandle.DuplicateHandle now increments the reference count of the EVP_PKEY handle instead of creating a new instance.",
+      "impact": "medium",
+      "required_action": "Avoid modifications of \u0060EVP_PKEY\u0060 passed in to .NET APIs. If you can\u0027t avoid modifications to \u0060EVP_PKEY\u0060, create a copy of \u0060EVP_PKEY\u0060 yourself (that is, copy parameters into the new \u0060EVP_PKEY\u0060 instance).",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/cryptography/9.0/evp-pkey-handle",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/cryptography/9.0/evp-pkey-handle.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Security.Cryptography.SafeEvpPKeyHandle.DuplicateHandle",
+        "System.Security.Cryptography.ECDsaOpenSsl.%23ctor(System.Security.Cryptography.SafeEvpPKeyHandle)",
+        "System.Security.Cryptography.RSAOpenSsl.%23ctor(System.Security.Cryptography.SafeEvpPKeyHandle)",
+        "System.Security.Cryptography.SafeEvpPKeyHandle"
+      ]
+    },
+    {
+      "id": "cryptography-9-private-key-lifetime",
+      "title": "Windows private key lifetime simplified",
+      "category": "cryptography",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the .NET 9 breaking change in cryptography where the lifetime of a Windows private key has been simplified.",
+      "impact": "medium",
+      "required_action": "If you understood the collection-load lifetime management and depended on calling \u0060Dispose\u0060 on a clone to cause key erasure, ensure that you\u0027re also (or instead) calling \u0060Dispose\u0060 on the original loaded object.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/cryptography/9.0/private-key-lifetime",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/cryptography/9.0/private-key-lifetime.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import*"
+      ]
+    },
+    {
+      "id": "cryptography-9-x509-certificates",
+      "title": "Some X509Certificate2 and X509Certificate constructors are obsolete",
+      "category": "cryptography",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the .NET 9 breaking change in cryptography where X509Certificate2 and X509Certificate constructors for binary and file content are obsolete.",
+      "impact": "medium",
+      "required_action": "For workarounds, see [Workaround](../../../../fundamentals/syslib-diagnostics/syslib0057.md#workaround).",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/cryptography/9.0/x509-certificates",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/cryptography/9.0/x509-certificates.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "For affected APIs, see SYSLIB0057."
+      ]
+    },
+    {
+      "id": "deployment-9-monovm-packages",
+      "title": "Deprecated desktop Windows/macOS/Linux MonoVM runtime packages",
+      "category": "deployment",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the breaking change in .NET 9 where the desktop Windows, macOS, and Linux MonoVM runtime packages are deprecated.",
+      "impact": "medium",
+      "required_action": "If your application publish relies on these packages, we recommend staying on .NET 8 LTS while you migrate the application to the default desktop runtime NuGet packages. Each of these platforms has a corresponding runtime NuGet package.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/deployment/9.0/monovm-packages",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/deployment/9.0/monovm-packages.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "interop-9-cet-support",
+      "title": "CET supported by default",
+      "category": "interop",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the breaking change in interop in .NET 9 where CET is supported by default.",
+      "impact": "medium",
+      "required_action": "Workarounds:\n\n- You can opt out of CET by adding \u0060\u003CCETCompat\u003Efalse\u003C/CETCompat\u003E\u0060 to your app\u0027s project file (for example, *.csproj* file).\n- Use the Windows Security app or a group policy to opt out of the hardware-supported stack enforcement for the specific .NET application. For more information, see [Enable exploit protection](/defender-endpoint/enable-exploit-protection).",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/interop/9.0/cet-support",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/interop/9.0/cet-support.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "jit-compiler-9-fp-to-integer",
+      "title": "Floating point-to-integer conversions are saturating",
+      "category": "jit-compiler",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.4",
+      "description": "Learn about the breaking change in .NET 9 where floating point-to-integer conversions have saturating behavior.",
+      "impact": "medium",
+      "required_action": "If you relied on the values shown in the [Previous behavior](#previous-behavior) section to be returned from the conversion, even if they were incorrect, update your code to expect the values shown in the [New behavior](#new-behavior) section.\n\nIf the performance overhead of the new behavior is undesirable for your scenario, you can use the new \u0060ConvertToIntegerNative\u003CTInteger\u003E\u0060 methods on [Single](xref:System.Single.ConvertToIntegerNative\u0060\u00601(System.Single)), [Double](xref:System.Double.Conve...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/jit/9.0/fp-to-integer",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/jit/9.0/fp-to-integer.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "(int)val",
+        "Vector.ConvertToInt32(Vector\u003Cfloat\u003E val)",
+        "(long)val",
+        "Vector.ConvertToInt64(Vector\u003Cdouble\u003E val)",
+        "(uint)val",
+        "Vector.ConvertToUInt32(Vector\u003Cfloat\u003E val)",
+        "(ulong)val",
+        "Vector.ConvertToUInt64(Vector\u003Cdouble\u003E val)"
+      ]
+    },
+    {
+      "id": "jit-compiler-9-sve-apis",
+      "title": "Some SVE APIs removed",
+      "category": "jit-compiler",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-rc.2",
+      "description": "Learn about the breaking change in .NET 9 where some SVE APIs that take 32-bit address have been removed.",
+      "impact": "medium",
+      "required_action": "Stop using the removed APIs and instead use the overloads that take 64-bit addresses as input.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/jit/9.0/sve-apis",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/jit/9.0/sve-apis.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch16Bit(System.Numerics.Vector{System.Int16},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch16Bit(System.Numerics.Vector{System.UInt16},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch32Bit(System.Numerics.Vector{System.Int32},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch32Bit(System.Numerics.Vector{System.UInt32},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch64Bit(System.Numerics.Vector{System.UInt64},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch64Bit(System.Numerics.Vector{System.UInt64},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch8Bit(System.Numerics.Vector{System.Byte},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherPrefetch8Bit(System.Numerics.Vector{System.SByte},System.Numerics.Vector{System.UInt32},System.Runtime.Intrinsics.Arm.SvePrefetchType)",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherVectorInt16SignExtendFirstFaulting(System.Numerics.Vector{System.Int32},System.Numerics.Vector{System.UInt32})",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherVectorInt16SignExtendFirstFaulting(System.Numerics.Vector{System.UInt32},System.Numerics.Vector{System.UInt32})",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherVectorSByteSignExtendFirstFaulting(System.Numerics.Vector{System.Int32},System.Numerics.Vector{System.UInt32})",
+        "System.Runtime.Intrinsics.Arm.Sve.GatherVectorSByteSignExtendFirstFaulting(System.Numerics.Vector{System.UInt32},System.Numerics.Vector{System.UInt32})"
+      ]
+    },
+    {
+      "id": "networking-9-default-handler",
+      "title": "HttpClientFactory uses SocketsHttpHandler as primary handler",
+      "category": "networking",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the breaking change in networking in .NET 9 where HttpClientFactory now uses SocketsHttpHandler as the default primary handler.",
+      "impact": "medium",
+      "required_action": "There are three options to work around the breaking change:\n\n- Explicitly specify and configure a primary handler for each of your clients:\n\n  [code sample]\n\n- Overwrite the default primary handler for all clients using \u003Cxref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})\u003E:\n\n  [code sample]\n\n-...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/networking/9.0/default-handler",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/networking/9.0/default-handler.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.Extensions.Http.HttpMessageHandlerBuilder.PrimaryHandler",
+        "Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder,System.Action{System.Net.Http.HttpMessageHandler,System.IServiceProvider})"
+      ]
+    },
+    {
+      "id": "networking-9-query-redaction-events",
+      "title": "URI query redaction in HttpClient EventSource events",
+      "category": "networking",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the breaking change in networking in .NET 9 where HttpClient EventSource events scrub query strings by default to enhance privacy.",
+      "impact": "medium",
+      "required_action": "If you need query string information when consuming \u0060HttpClient\u0060 or \u0060SocketsHttpHandler\u0060 events and you\u0027re confident that it\u0027s safe to do so, you can enable query string logging globally by setting an AppContext switch in one of three ways:\n\n- In the project file.\n\n  [code sample]\n\n- In the *runtimeconfig.json* file.\n\n  [code sample]\n\n- Through an environment variable.\n\n  Set \u0060DOTNET_SYSTEM_NET_HTTP_DISABLEURIREDACTION\u0060 to \u0060true\u0060 or 1.\n\nOtherwise, no action is required, and the default behavi...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/networking/9.0/query-redaction-events",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/networking/9.0/query-redaction-events.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Net.Http.SocketsHttpHandler.Send)",
+        "System.Net.Http.SocketsHttpHandler.SendAsync)"
+      ]
+    },
+    {
+      "id": "networking-9-query-redaction-logs",
+      "title": "URI query redaction in IHttpClientFactory logs",
+      "category": "networking",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the breaking change in networking in .NET 9 where the IHttpClientFactory implementation scrubs query strings in logs to enhance privacy.",
+      "impact": "medium",
+      "required_action": "If your application relies on logging query strings and you\u0027re confident that it\u0027s safe to do so, you can enable query string logging globally by setting an AppContext switch in one of three ways:\n\n- In the project file.\n\n  [code sample]\n\n- In the *runtimeconfig.json* file.\n\n  [code sample]\n\n- Through an environment variable.\n\n  Set \u0060DOTNET_SYSTEM_NET_HTTP_DISABLEURIREDACTION\u0060 to \u0060true\u0060 or 1.\n\nOtherwise, no action is required, and the default behavior will help enhance the privacy aspects of ...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/networking/9.0/query-redaction-logs",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*"
+      ]
+    },
+    {
+      "id": "networking-9-redact-headers",
+      "title": "HttpClientFactory logging redacts header values by default",
+      "category": "networking",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about the .NET 9 breaking change in networking where HttpClientFactory logging redacts all header values by default.",
+      "impact": "medium",
+      "required_action": "If you want to log the headers, assess which headers might contain sensitive information and explicitly specify them using the \u0060RedactLoggedHeaders\u0060 API. You can redact headers per client, or globally for all clients by using the \u003Cxref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})\u003E.\n\nConsider...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/networking/9.0/redact-headers",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/networking/9.0/redact-headers.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*"
+      ]
+    },
+    {
+      "id": "networking-9-server-port-attribute",
+      "title": "HttpClient metrics report \u0060server.port\u0060 unconditionally",
+      "category": "networking",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.7",
+      "description": "Learn about the breaking change in networking in .NET 9 where HttpClient metrics now report the \u0060server.port\u0060 attribute unconditionally to maintain compliance with Open Telemetry standards.",
+      "impact": "medium",
+      "required_action": "No action is needed if you don\u0027t rely on [HttpClient metrics](../../../../fundamentals/networking/telemetry/metrics.md). If you use the \u0060http.client.request.duration\u0060, \u0060http.client.connection.duration\u0060, or \u0060http.client.open_connections\u0060 instruments, this change might break existing queries in monitoring software like Prometheus.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/networking/9.0/server-port-attribute",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/networking/9.0/server-port-attribute.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Net.Http.SocketsHttpHandler.Send(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+        "System.Net.Http.SocketsHttpHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+        "System.Net.Http.HttpClientHandler.Send(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+        "System.Net.Http.HttpClientHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)"
+      ]
+    },
+    {
+      "id": "networking-9-useragent-nullable",
+      "title": "HttpListenerRequest.UserAgent is nullable",
+      "category": "networking",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the .NET 9 breaking change in networking where the HttpListenerRequest.UserAgent property is annotated as being nullable.",
+      "impact": "medium",
+      "required_action": "Update calling code to guard against \u0060null\u0060 for this property.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/networking/9.0/useragent-nullable",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/networking/9.0/useragent-nullable.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Net.HttpListenerRequest.UserAgent"
+      ]
+    },
+    {
+      "id": "sdk-9-default-rid",
+      "title": "Default RID used when targeting .NET Framework",
+      "category": "sdk",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in the .NET 9 SDK where a new default RID is used for apps that target .NET Framework.",
+      "impact": "medium",
+      "required_action": "If you\u0027re affected by this change, choose one of the following actions:\n\n- Update your runtime identifier to a value supported by the portable RID graph. Project file example:\n\n   [code sample]\n\n  If you specify the RID as a command-line argument, make a similar change. For example, \u0060dotnet publish --runtime win-x64\u0060.\n\n- Switch back to the old RID graph by setting \u0060UseRidGraph\u0060 to \u0060true\u0060 in the project file:\n\n  [code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/default-rid",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/default-rid.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/dotnet/docs/issues/43692",
+          "title": "GitHub announcement"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-dotnet-sln",
+      "title": "\u0027dotnet sln add\u0027 no longer allows invalid file names",
+      "category": "sdk",
+      "type": "behavioral-change",
+      "version_introduced": "9.0.2",
+      "description": "Learn about the breaking change in the .NET SDK where the CLI command \u0027dotnet sln add\u0027 adds support for .slnx solution files and no longer allows invalid file names.",
+      "impact": "medium",
+      "required_action": "Review project and solution folders names to ensure they comply with the new naming restrictions.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/dotnet-sln",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/dotnet-sln.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/dotnet/docs/issues/43882",
+          "title": "GitHub announcement"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-dotnet-watch",
+      "title": "\u0027dotnet watch\u0027 incompatible with Hot Reload for old frameworks",
+      "category": "sdk",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about a breaking change in the .NET 9 SDK where \u0027dotnet watch\u0027 requires disabling Hot Reload for projects targeting .NET 5 or earlier.",
+      "impact": "medium",
+      "required_action": "Pass \u0060--no-hot-reload\u0060 to \u0060dotnet watch\u0060 on the command line, or update your project to target \u0060net6.0\u0060 or later (using the \u0060TargetFramework\u0060 property).",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/dotnet-watch",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/dotnet-watch.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-dotnet-workload-output",
+      "title": "\u0060dotnet workload\u0060 commands output change",
+      "category": "sdk",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about a breaking change in the .NET 9 SDK where the \u0060dotnet workload\u0060 commands output only the JSON body.",
+      "impact": "medium",
+      "required_action": "If your code searches for the following start and end boundary text prior to parsing JSON, you no longer need to search the output for these boundaries. Instead, consider the output of these commands to directly be the JSON body.\n\n- \u0060==workloadListJsonOutputStart==/==workloadListJsonOutputEnd==\u0060\n- \u0060==allPackageLinksJsonOutputStart==/==allPackageLinksJsonOutputEnd==\u0060\n- \u0060==workloadRollbackDefinitionJsonOutputStart==/==workloadRollbackDefinitionJsonOutputEnd==\u0060",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/dotnet-workload-output",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/dotnet-workload-output.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-net70-warning",
+      "title": "Warning emitted when targeting net7.0",
+      "category": "sdk",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in the .NET SDK where a warning is issued for apps that target net7.0, which is out of support.",
+      "impact": "medium",
+      "required_action": "Upgrade your app to target \u0060net8.0\u0060.\n\nIf you must continue targeting \u0060net7.0\u0060, you can set the MSBuild property \u0060CheckEolTargetFramework\u0060 to \u0060false\u0060. You can set it in the project file or by passing \u0060/p:CheckEolTargetFramework=false\u0060 to a .NET CLI command such as \u0060dotnet build\u0060.\n\nExample *.csproj* or *.vbproj* file:\n\n[code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/net70-warning",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/net70-warning.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-netstandard-warning",
+      "title": "Warning emitted for .NET Standard 1.x targets",
+      "category": "sdk",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about a breaking change in the .NET 9 SDK where the a build warning is produced if your project targets any .NET Standard version below 2.0.",
+      "impact": "medium",
+      "required_action": "Update your \u0060TargetFramework\u0060 property to \u0060netstandard2.0\u0060 or \u0060netstandard2.1\u0060.\n\nIf you must stay on an older .NET Standard version, you can set \u0060\u003CCheckNotRecommendedTargetFramework\u003E\u0060 to \u0060false\u0060 in your project file (for example, *.csproj* file) or *Directory.Build.props* file to skip the target framework version check:\n\n[code sample]\n\nAlternatively, you can suppress the warning using the \u0060\u003CNoWarn\u003E\u0060 property in your project file:\n\n[code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/netstandard-warning",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/netstandard-warning.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-productcommits-versions",
+      "title": "\u0060installer\u0060 repo version no longer included in \u0060productcommits\u0060 files",
+      "category": "sdk",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.5",
+      "description": "Learn about a breaking change in the .NET 9 SDK where the \u0060installer\u0060 repo commit and version are no longer included in the \u0060productcommits\u0060 files.",
+      "impact": "medium",
+      "required_action": "Any tooling that depends on the \u0060productcommit\u0060 file should be updated to use the \u0060sdk\u0060 version.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/productcommits-versions",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/productcommits-versions.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-terminal-logger",
+      "title": "Terminal Logger is default",
+      "category": "sdk",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about a breaking change in the .NET 9 SDK where Terminal Logger is used by default for interactive MSBuild invocations.",
+      "impact": "medium",
+      "required_action": "If you need to revert to the console logger, you can disable Terminal Logger in the following ways:\n\n- To disable Terminal Logger for a specific command, specify \u0060--tl:off\u0060 on the command line or via an MSBuild response file.\n- To disable Terminal Logger for all commands, set the \u0060MSBUILDTERMINALLOGGER\u0060 environment variable to \u0060off\u0060.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/terminal-logger",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/terminal-logger.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "sdk-9-version-requirements",
+      "title": "Version requirements for .NET 9 SDK",
+      "category": "sdk",
+      "type": "source-incompatible",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in the .NET 9 SDK where specific versions of Visual Studio and MSBuild are required.",
+      "impact": "medium",
+      "required_action": "Upgrade your Visual Studio version to the required version.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/sdk/9.0/version-requirements",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/sdk/9.0/version-requirements.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "serialization-9-binaryformatter-removal",
+      "title": "In-box BinaryFormatter implementation removed and always throws",
+      "category": "serialization",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the .NET 9 breaking change in serialization where the in-box BinaryFormatter implementation was removed and always throws exceptions.",
+      "impact": "medium",
+      "required_action": "If your code uses \u0060BinaryFormatter\u0060, you should select a new serialization format and migrate your code.\n\nIf you judge the risk of \u0060BinaryFormatter\u0060 acceptable for your use cases and you\u0027re committed to using a class that can\u0027t be made secure, you\u0027ll still be able to use \u0060BinaryFormatter\u0060 through a separate, unsupported NuGet package.\n\nFor more information, including guidance on alternative serializers, see the [BinaryFormatter migration guide](../../../../standard/serialization/binaryformatt...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/serialization/9.0/binaryformatter-removal",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/serialization/9.0/binaryformatter-removal.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter"
+      ]
+    },
+    {
+      "id": "serialization-9-json-metadata-reader",
+      "title": "System.Text.Json metadata reader now unescapes metadata property names",
+      "category": "serialization",
+      "type": "behavioral-change",
+      "version_introduced": "9.0",
+      "description": "System.Text.Json now unescapes metadata property names, affecting reference preservation and metadata property validation.",
+      "impact": "low",
+      "required_action": "Avoid using escaping to bypass metadata property validation. Instead, pick property names that don\u0027t conflict with metadata properties.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/serialization/9.0/json-metadata-reader",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/serialization/9.0/json-metadata-reader.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/dotnet/docs/issues/44748",
+          "title": "GitHub announcement"
+        }
+      ],
+      "affected_apis": [
+        "System.Text.Json",
+        "System.Text.Json.JsonSerializer.Deserialize*"
+      ]
+    },
+    {
+      "id": "serialization-9-jsondocument-props",
+      "title": "Nullable JsonDocument properties deserialize to JsonValueKind.Null",
+      "category": "serialization",
+      "type": "behavioral-change",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in serialization in .NET 9 where nullable JsonDocument values deserialize to JsonValueKind.Null instead of null.",
+      "impact": "medium",
+      "required_action": "Update code that consumes deserialized objects containing \u0060JsonDocument\u0060 types to expect \u0060JsonValueKind.Null\u0060 instead of \u0060null\u0060.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/serialization/9.0/jsondocument-props",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/serialization/9.0/jsondocument-props.md",
+          "title": "Documentation source (markdown)"
+        },
+        {
+          "type": "announcement",
+          "url": "https://github.com/dotnet/docs/issues/43869",
+          "title": "GitHub announcement"
+        }
+      ],
+      "affected_apis": [
+        "System.Text.Json.JsonSerializer.Deserialize*",
+        "System.Text.Json.JsonDocument"
+      ]
+    },
+    {
+      "id": "windows-forms-9-componentdesigner-initialize",
+      "title": "ComponentDesigner.Initialize throws ArgumentNullException",
+      "category": "windows-forms",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the breaking change in .NET 9 for Windows Forms where ComponentDesigner.Initialize now throws ArgumentNullException if the component argument is null.",
+      "impact": "medium",
+      "required_action": "Make sure you don\u0027t call \u003Cxref:System.ComponentModel.Design.ComponentDesigner.Initialize%2A?displayProperty=nameWithType\u003E with a \u0060null\u0060 argument.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/componentdesigner-initialize",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/componentdesigner-initialize.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.ComponentModel.Design.ComponentDesigner.Initialize%2A"
+      ]
+    },
+    {
+      "id": "windows-forms-9-datagridviewheadercell-nre",
+      "title": "No exception if DataGridView is null",
+      "category": "windows-forms",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the breaking change in .NET 9 for Windows Forms where DataGridViewHeaderCell methods no longer throw an exception if the DataGridView property is null.",
+      "impact": "medium",
+      "required_action": "If you were relying on the code to throw a \u003Cxref:System.NullReferenceException\u003E in this scenario, change your code to check the return value instead.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/datagridviewheadercell-nre",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/datagridviewheadercell-nre.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Windows.Forms.DataGridViewHeaderCell.MouseDownUnsharesRow(System.Windows.Forms.DataGridViewCellMouseEventArgs)",
+        "System.Windows.Forms.DataGridViewHeaderCell.MouseEnterUnsharesRow(System.Int32)",
+        "System.Windows.Forms.DataGridViewHeaderCell.MouseLeaveUnsharesRow(System.Int32)",
+        "System.Windows.Forms.DataGridViewHeaderCell.MouseUpUnsharesRow(System.Windows.Forms.DataGridViewCellMouseEventArgs)"
+      ]
+    },
+    {
+      "id": "windows-forms-9-datagridviewrowaccessibleobject-name-row",
+      "title": "DataGridViewRowAccessibleObject.Name starting row index",
+      "category": "windows-forms",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the breaking change in .NET 9 for Windows Forms where the starting index for the DataGridViewRowAccessibleObject.Name property is now 1 instead of 0.",
+      "impact": "medium",
+      "required_action": "If your application relied on the previous behavior and you prefer the row index to start at 0, you can set the new switch \u0060System.Windows.Forms.DataGridViewUIAStartRowCountAtZero\u0060. To maintain the original functionality, create a *runtimeconfig.template.json* file at the root folder of your project and set this switch to \u0060true\u0060. Update your codebase accordingly to accommodate this change and ensure that the \u003Cxref:System.Windows.Forms.DataGridViewRow.DataGridViewRowAccessibleObject\u003E displays ...",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/datagridviewrowaccessibleobject-name-row",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/datagridviewrowaccessibleobject-name-row.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Windows.Forms.DataGridViewRow.DataGridViewRowAccessibleObject.Name"
+      ]
+    },
+    {
+      "id": "windows-forms-9-httpclient-exceptions",
+      "title": "PictureBox raises HttpClient exceptions",
+      "category": "windows-forms",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.6",
+      "description": "Learn about the breaking change in .NET 9 for Windows Forms where \u0060PictureBox\u0060 raises HttpClient exceptions for network errors when loading an image from a URL.",
+      "impact": "medium",
+      "required_action": "Update your code to catch \u003Cxref:System.Net.Http.HttpRequestException\u003E and \u003Cxref:System.Threading.Tasks.TaskCanceledException\u003E instead of \u003Cxref:System.Net.WebException\u003E.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/httpclient-exceptions",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/httpclient-exceptions.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Windows.Forms.PictureBox"
+      ]
+    },
+    {
+      "id": "windows-forms-9-imsocomponent-support",
+      "title": "IMsoComponent support is opt-in",
+      "category": "windows-forms",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.2",
+      "description": "Learn about the breaking change in .NET 9 for Windows Forms where IMsoComponent support is now opt-in.",
+      "impact": "medium",
+      "required_action": "If you wish to revert to the previous behavior, you can opt in to \u0060IMsoComponent\u0060 support using a switch in the *runtimeconfig.json* file or as a \u0060RuntimeHostConfigurationOption\u0060 item in the project file.\n\n*runtimeconfig.json* file:\n\n[code sample]\n\nProject file:\n\n[code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/imsocomponent-support",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/imsocomponent-support.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "IMsoComponent interface)",
+        "IMsoComponentManager interface)"
+      ]
+    },
+    {
+      "id": "windows-forms-9-nullability-changes",
+      "title": "Changes to nullability annotations (Windows Forms)",
+      "category": "windows-forms",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the .NET 9 breaking change in Windows Forms where some nullable reference type annotations have changed.",
+      "impact": "medium",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/nullability-changes",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/nullability-changes.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Windows.Forms.Design.IWindowsFormsEditorService.DropDownControl(System.Windows.Forms.Control)"
+      ]
+    },
+    {
+      "id": "windows-forms-9-security-analyzers",
+      "title": "New security analyzers",
+      "category": "windows-forms",
+      "type": "source-incompatible",
+      "version_introduced": "9.0-rc.1",
+      "description": "Learn about the .NET 9 breaking change in Windows Forms where new security analyzers have been introduced to prevent accidental leaks of sensitive data.",
+      "impact": "medium",
+      "required_action": "- Review the properties flagged by the analyzer and configure appropriate serialization settings as needed.\n- For a quick fix (not recommended), add the following entry in an *.editorconfig* file at the solution folder or project folder level:\n\n  [code sample]",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/security-analyzers",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/security-analyzers.md",
+          "title": "Documentation source (markdown)"
+        }
+      ]
+    },
+    {
+      "id": "windows-forms-9-sortdescriptions-return-value",
+      "title": "BindingSource.SortDescriptions doesn\u0027t return null",
+      "category": "windows-forms",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.1",
+      "description": "Learn about the breaking change in .NET 9 for Windows Forms where BindingSource.SortDescriptions no longer returns null if the data source is not an IBindingListView.",
+      "impact": "medium",
+      "required_action": "If your code expects \u0060null\u0060 from \u003Cxref:System.Windows.Forms.BindingSource.SortDescriptions?displayProperty=nameWithType\u003E for any reason, update your code to expect an empty \u003Cxref:System.ComponentModel.ListSortDescriptionCollection\u003E instead.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/sortdescriptions-return-value",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/sortdescriptions-return-value.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Windows.Forms.BindingSource.SortDescriptions"
+      ]
+    },
+    {
+      "id": "windows-forms-9-statusstrip-renderer",
+      "title": "System.Windows.Forms.StatusStrip uses a different default renderer",
+      "category": "windows-forms",
+      "type": "behavioral-change",
+      "version_introduced": "9.0",
+      "description": "Learn about the breaking change in .NET 9 for Windows Forms where System.Windows.Forms.StatusStrip uses a different default value for the RenderMode property.",
+      "impact": "medium",
+      "required_action": "The new behavior is recommended for accessibility reasons. If you want to revert to the previous behavior, set the \u0060RenderMode\u0060 property to \u003Cxref:System.Windows.Forms.ToolStripRenderMode.System?displayProperty=nameWithType\u003E.\n\n\u003E [!NOTE]\n\u003E The new behavior was reverted to the previous behavior in a .NET 9 servicing release and [.NET 10 Preview 1](../10.0/statusstrip-renderer.md).",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/windows-forms/9.0/statusstrip-renderer",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/windows-forms/9.0/statusstrip-renderer.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Windows.Forms.StatusStrip",
+        "System.Windows.Forms.ToolStripManager.RenderMode"
+      ]
+    },
+    {
+      "id": "wpf-9-xml-namespace-maps",
+      "title": "\u0027GetXmlNamespaceMaps\u0027 type change",
+      "category": "wpf",
+      "type": "behavioral-change",
+      "version_introduced": "9.0-preview.3",
+      "description": "Learn about the breaking change in .NET 9 for WPF where the backing property of \u0027XmlNamespaceMaps\u0027 has been changed from \u0027String\u0027 to \u0027Hashtable\u0027.",
+      "impact": "medium",
+      "required_action": "Pass \u0060Hashtable\u0060 instead of a string to the \u003Cxref:System.Windows.Markup.XmlAttributeProperties.SetXmlNamespaceMaps%2A\u003E API.",
+      "references": [
+        {
+          "type": "documentation",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/wpf/9.0/xml-namespace-maps",
+          "title": "Breaking change documentation"
+        },
+        {
+          "type": "documentation-source",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/wpf/9.0/xml-namespace-maps.md",
+          "title": "Documentation source (markdown)"
+        }
+      ],
+      "affected_apis": [
+        "System.Windows.Markup.XmlAttributeProperties.GetXmlNamespaceMaps(System.Windows.DependencyObject)",
+        "System.Windows.Markup.XmlAttributeProperties.SetXmlNamespaceMaps%2A"
+      ]
+    }
+  ],
+  "categories": {
+    "aspnet-core": [
+      "aspnet-core-9-key-resolution",
+      "aspnet-core-9-certificate-export",
+      "aspnet-core-9-forwarded-headers-unknown-proxies",
+      "aspnet-core-9-hostbuilder-validation",
+      "aspnet-core-9-legacy-apis",
+      "aspnet-core-9-middleware-constructors"
+    ],
+    "containers": [
+      "containers-9-no-zlib",
+      "containers-9-monitor-images"
+    ],
+    "core-libraries": [
+      "core-libraries-9-compressionlevel-bits",
+      "core-libraries-9-unsafeaccessor-generics",
+      "core-libraries-9-ambiguous-overload",
+      "core-libraries-9-obsolete-apis-with-custom-diagnostics",
+      "core-libraries-9-biginteger-limit",
+      "core-libraries-9-binaryreader",
+      "core-libraries-9-params-overloads",
+      "core-libraries-9-type-instance",
+      "core-libraries-9-enumconverter",
+      "core-libraries-9-inlinearrayattribute",
+      "core-libraries-9-non-keyed-params",
+      "core-libraries-9-async-callback",
+      "core-libraries-9-inlinearray-size",
+      "core-libraries-9-inmemorydirinfo-prepends-rootdir",
+      "core-libraries-9-timespan-from-overloads",
+      "core-libraries-9-oob-packages",
+      "core-libraries-9-getsubarray-return",
+      "core-libraries-9-string-trim",
+      "core-libraries-9-empty-env-variable",
+      "core-libraries-9-ziparchiveentry-encoding"
+    ],
+    "cryptography": [
+      "cryptography-9-api-removed-pkcs",
+      "cryptography-9-evp-pkey-handle",
+      "cryptography-9-x509-certificates",
+      "cryptography-9-private-key-lifetime"
+    ],
+    "deployment": [
+      "deployment-9-monovm-packages"
+    ],
+    "interop": [
+      "interop-9-cet-support"
+    ],
+    "jit-compiler": [
+      "jit-compiler-9-fp-to-integer",
+      "jit-compiler-9-sve-apis"
+    ],
+    "networking": [
+      "networking-9-server-port-attribute",
+      "networking-9-redact-headers",
+      "networking-9-default-handler",
+      "networking-9-useragent-nullable",
+      "networking-9-query-redaction-events",
+      "networking-9-query-redaction-logs"
+    ],
+    "sdk": [
+      "sdk-9-dotnet-sln",
+      "sdk-9-dotnet-watch",
+      "sdk-9-dotnet-workload-output",
+      "sdk-9-productcommits-versions",
+      "sdk-9-default-rid",
+      "sdk-9-terminal-logger",
+      "sdk-9-version-requirements",
+      "sdk-9-netstandard-warning",
+      "sdk-9-net70-warning"
+    ],
+    "serialization": [
+      "serialization-9-binaryformatter-removal",
+      "serialization-9-jsondocument-props",
+      "serialization-9-json-metadata-reader"
+    ],
+    "windows-forms": [
+      "windows-forms-9-sortdescriptions-return-value",
+      "windows-forms-9-nullability-changes",
+      "windows-forms-9-componentdesigner-initialize",
+      "windows-forms-9-datagridviewrowaccessibleobject-name-row",
+      "windows-forms-9-imsocomponent-support",
+      "windows-forms-9-security-analyzers",
+      "windows-forms-9-datagridviewheadercell-nre",
+      "windows-forms-9-httpclient-exceptions",
+      "windows-forms-9-statusstrip-renderer"
+    ],
+    "wpf": [
+      "wpf-9-xml-namespace-maps"
+    ]
+  },
+  "type_breakdown": {
+    "behavioral-change": 46,
+    "source-incompatible": 17,
+    "binary-source-incompatible": 1
+  },
+  "impact_breakdown": {
+    "medium": 62,
+    "high": 1,
+    "low": 1
+  },
+  "_metadata": {
+    "schema_version": "1.0",
+    "generated_on": "2025-12-05T22:15:46.0861472+00:00",
+    "generated_by": "BreakingChangesIndex",
+    "source_repository": "https://github.com/dotnet/docs",
+    "source_path": "docs/core/compatibility/9.md"
+  }
+}
