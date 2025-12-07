@@ -8,42 +8,39 @@
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
-      "title": ".NET Release Index",
-      "type": "application/hal\u002Bjson"
+      "title": ".NET Release Index"
     },
     "latest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
-      "title": "Latest .NET release (.NET 10.0)",
-      "type": "application/hal\u002Bjson"
+      "title": "Major version index"
     },
     "latest-lts": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
-      "title": "Latest LTS release (.NET 10.0)",
-      "type": "application/hal\u002Bjson"
+      "title": "Latest LTS"
     },
     "latest-sdk": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/sdk/index.json",
-      "title": "Latest .NET SDK (10.0)",
-      "type": "application/hal\u002Bjson"
+      "title": "Latest SDK"
     },
     "timeline-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
-      "title": ".NET Release Timeline Index",
-      "type": "application/hal\u002Bjson"
+      "title": ".NET Release Timeline Index"
+    },
+    "glossary-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/glossary.md",
+      "title": "Glossary",
+      "type": "application/markdown"
+    },
+    "glossary-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/glossary.md",
+      "title": "Glossary (Rendered)",
+      "type": "text/html"
     },
     "llms-txt": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms/README.md",
       "title": "LLM Quick Reference",
       "type": "application/markdown"
     }
-  },
-  "glossary": {
-    "lts": "Long-Term Support \u2013 3-year support window",
-    "sts": "Standard-Term Support \u2013 18-month support window",
-    "latest-release": "Highest stable (GA) major version; excludes preview and RC releases",
-    "latest": "Alias for latest-release",
-    "latest-lts": "Highest stable LTS major version currently in support",
-    "latest-sdk": "SDK index for the latest stable major version"
   },
   "_embedded": {
     "releases": [
@@ -55,8 +52,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
-            "title": ".NET 10.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 10.0"
           }
         }
       },
@@ -68,8 +64,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/index.json",
-            "title": ".NET 9.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 9.0"
           }
         }
       },
@@ -81,8 +76,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/index.json",
-            "title": ".NET 8.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 8.0"
           }
         }
       },
@@ -94,8 +88,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/index.json",
-            "title": ".NET 7.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 7.0"
           }
         }
       },
@@ -107,8 +100,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/index.json",
-            "title": ".NET 6.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 6.0"
           }
         }
       },
@@ -120,8 +112,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/5.0/index.json",
-            "title": ".NET 5.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 5.0"
           }
         }
       },
@@ -133,8 +124,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/3.1/index.json",
-            "title": ".NET Core 3.1",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Core 3.1"
           }
         }
       },
@@ -146,8 +136,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/3.0/index.json",
-            "title": ".NET Core 3.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Core 3.0"
           }
         }
       },
@@ -159,8 +148,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/2.2/index.json",
-            "title": ".NET Core 2.2",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Core 2.2"
           }
         }
       },
@@ -172,8 +160,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/2.1/index.json",
-            "title": ".NET Core 2.1",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Core 2.1"
           }
         }
       },
@@ -185,8 +172,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/2.0/index.json",
-            "title": ".NET Core 2.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Core 2.0"
           }
         }
       },
@@ -198,8 +184,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/index.json",
-            "title": ".NET Core 1.1",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Core 1.1"
           }
         }
       },
@@ -211,8 +196,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.0/index.json",
-            "title": ".NET Core 1.0",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Core 1.0"
           }
         }
       }
@@ -220,7 +204,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-07T00:54:42.4440357\u002B00:00",
+    "generated_on": "2025-12-07T18:25:02.5394059\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
