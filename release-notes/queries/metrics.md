@@ -213,27 +213,39 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 
 **Winner:** hal-index (releases-index cannot answer this query—CVE severity and titles are not available)
 
-### Recent CVEs Across All Supported Versions
+### Last 3 Security Releases for a Version
 
-#### Query: "What CVEs were fixed in the last 2 security releases?"
+#### Query: "What CVEs were fixed in the last 3 security releases for .NET 8.0?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` | **23 KB** |
-| releases-index | `releases-index.json` + 3 releases.json | **2,461 KB** |
+| hal-index | `index.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **~60 KB** |
+| releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** |
 
 **hal-index:**
 
 ```bash
-TIMELINE="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json"
+ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
 
-# Step 1: Get the latest year href
-YEAR_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[0]._links.self.href')
+# Step 1: Get the 8.0 latest-security patch href
+VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "8.0") | ._links.self.href')
+PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
 
-# Step 2: Get the last 2 security months with CVEs
-curl -s "$YEAR_HREF" | jq -r '[._embedded.months[] | select(.security)] | .[0:2] | .[] | "\(.month)/2025: \(.cve_records | join(", "))"'
-# 10/2025: CVE-2025-55248, CVE-2025-55315, CVE-2025-55247
-# 06/2025: CVE-2025-30399
+# Step 2: Walk back 3 security patches using prev-security links
+for i in {1..3}; do
+  DATA=$(curl -s "$PATCH_HREF")
+  VERSION=$(echo "$DATA" | jq -r '.version')
+  MONTH=$(echo "$DATA" | jq -r '.date | split("T")[0] | split("-")[1]')
+  echo "$DATA" | jq -r --arg ver "$VERSION" --arg month "$MONTH" \
+    '._embedded.disclosures[] | "8.0 | \($month) | \(.affected_products[0]) | \(.id)"'
+  PATCH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
+  [ -z "$PATCH_HREF" ] && break
+done
+# 8.0 | 10 | dotnet-sdk | CVE-2025-55247
+# 8.0 | 10 | dotnet-runtime | CVE-2025-55248
+# 8.0 | 10 | dotnet-aspnetcore | CVE-2025-55315
+# 8.0 | 06 | dotnet-runtime | CVE-2025-30399
+# 8.0 | 04 | dotnet-aspnetcore | CVE-2025-26682
 ```
 
 **releases-index:**
@@ -241,28 +253,28 @@ curl -s "$YEAR_HREF" | jq -r '[._embedded.months[] | select(.security)] | .[0:2]
 ```bash
 ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json"
 
-# Get all supported version releases.json URLs
-URLS=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "active") | .["releases.json"]')
+# Step 1: Get the 8.0 releases.json URL
+RELEASES_URL=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["channel-version"] == "8.0") | .["releases.json"]')
 
-# For each version, find security releases and collect CVEs (requires multiple large fetches)
-for URL in $URLS; do
-  curl -s "$URL" | jq -r '.releases[] | select(.security == true) | "\(.["release-date"]): \([.["cve-list"][]? | .["cve-id"]] | join(", "))"'
-done | sort -r | head -6
-# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
-# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
-# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
-# 2025-06-10: CVE-2025-30399
-# 2025-06-10: CVE-2025-30399
-# 2025-06-10: CVE-2025-30399
+# Step 2: Find security releases and get CVE IDs (no component info available)
+curl -s "$RELEASES_URL" | jq -r '
+  [.releases[] | select(.security == true)] | .[0:3] | .[] |
+  .["release-date"] as $date |
+  .["cve-list"][]? | "8.0 | \($date | split("-")[1]) | (unknown) | \(.["cve-id"])"'
+# 8.0 | 10 | (unknown) | CVE-2025-55247
+# 8.0 | 10 | (unknown) | CVE-2025-55315
+# 8.0 | 10 | (unknown) | CVE-2025-55248
+# 8.0 | 06 | (unknown) | CVE-2025-30399
+# 8.0 | 04 | (unknown) | CVE-2025-26682
 ```
 
 **Analysis:**
 
-- **Completeness:** ⚠️ Partial—the releases-index can find CVEs by date, but produces duplicate entries (one per version) and cannot group by month without additional post-processing.
-- **Ergonomics:** The hal-index timeline is purpose-built for chronological queries. The releases-index requires fetching all version files (2.5 MB) and manually correlating dates to find "last 2 security releases."
-- **Data model:** The releases-index organizes by version; the hal-index timeline organizes by date. For "recent CVEs" queries, the timeline model is fundamentally better suited.
+- **Completeness:** ⚠️ Partial—the releases-index returns CVE IDs but lacks `affected_products` (component) information.
+- **Ergonomics:** The hal-index uses `prev-security` links to skip non-security patches (SDK-only releases), directly navigating to security releases. The releases-index requires downloading a 1.2 MB file and filtering in memory.
+- **Navigation model:** The `prev-security` link enables efficient backward traversal through security history without fetching intermediate non-security releases.
 
-**Winner:** hal-index (**107x smaller**)
+**Winner:** hal-index (**20x smaller**, with component information)
 
 ### CVE Details for a Month
 
@@ -321,13 +333,13 @@ done | sort -u
 
 **Winner:** hal-index (**221x smaller**, and releases-index cannot answer this query—CVE details are not available)
 
-### Security Patches in the Last 12 Months
+### Security Releases Over the Last 6 Months
 
-#### Query: "List all CVEs fixed in the last 12 months"
+#### Query: "What CVEs were fixed in the last 6 security releases across all versions?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → up to 12 month indexes (via `prev` links) | **~90 KB** |
+| hal-index | `timeline/index.json` → 6 month indexes (via `prev-security`) | **~60 KB** |
 | releases-index | All version releases.json files | **2.4+ MB** |
 
 **hal-index:**
@@ -335,27 +347,24 @@ done | sort -u
 ```bash
 TIMELINE="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json"
 
-# Step 1: Get the latest month href
-MONTH_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[0]._links["latest-month"].href')
+# Step 1: Get the latest security month href
+MONTH_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[0]._links["latest-security-month"].href')
 
-# Step 2: Walk back 12 months using prev links, collecting security CVEs
-for i in {1..12}; do
+# Step 2: Walk back 6 security months using prev-security links
+for i in {1..6}; do
   DATA=$(curl -s "$MONTH_HREF")
-  YEAR_MONTH=$(echo "$DATA" | jq -r '"\(.year)-\(.month)"')
-  SECURITY=$(echo "$DATA" | jq -r '.security')
-  if [ "$SECURITY" = "true" ]; then
-    CVES=$(echo "$DATA" | jq -r '[._embedded.disclosures[].id] | join(", ")')
-    echo "$YEAR_MONTH: $CVES"
-  fi
-  MONTH_HREF=$(echo "$DATA" | jq -r '._links.prev.href // empty')
+  MONTH=$(echo "$DATA" | jq -r '.month')
+  echo "$DATA" | jq -r --arg month "$MONTH" \
+    '._embedded.disclosures[] | "\(.affected_releases | join(", ")) | \($month) | \(.affected_products[0]) | \(.id)"'
+  MONTH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
   [ -z "$MONTH_HREF" ] && break
 done
-# 2025-10: CVE-2025-55248, CVE-2025-55315, CVE-2025-55247
-# 2025-06: CVE-2025-30399
-# 2025-05: CVE-2025-26646
-# 2025-04: CVE-2025-26682
-# 2025-03: CVE-2025-24070
-# 2025-01: CVE-2025-21171, CVE-2025-21172, CVE-2025-21176, CVE-2025-21173
+# 8.0, 9.0 | 10 | dotnet-sdk | CVE-2025-55247
+# 8.0, 9.0 | 10 | dotnet-runtime | CVE-2025-55248
+# 8.0, 9.0 | 10 | dotnet-aspnetcore | CVE-2025-55315
+# 8.0, 9.0 | 06 | dotnet-runtime | CVE-2025-30399
+# 8.0, 9.0 | 05 | dotnet-runtime | CVE-2025-26646
+# 8.0, 9.0 | 04 | dotnet-aspnetcore | CVE-2025-26682
 ```
 
 **releases-index:**
@@ -366,30 +375,28 @@ ROOT="https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index
 # Get all supported version releases.json URLs
 URLS=$(curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "active") | .["releases.json"]')
 
-# For each version, find security releases in the last 12 months
-CUTOFF="2024-12-01"
+# For each version, find security releases (no component info, duplicates across versions)
 for URL in $URLS; do
-  curl -s "$URL" | jq -r --arg cutoff "$CUTOFF" '
-    .releases[] |
-    select(.security == true) |
-    select(.["release-date"] >= $cutoff) |
-    "\(.["release-date"]): \([.["cve-list"][]? | .["cve-id"]] | join(", "))"'
-done | sort -u | sort -r
-# 2025-10-14: CVE-2025-55247, CVE-2025-55315, CVE-2025-55248
-# 2025-06-10: CVE-2025-30399
-# 2025-05-22: CVE-2025-26646
-# 2025-04-08: CVE-2025-26682
-# 2025-03-11: CVE-2025-24070
-# 2025-01-14: CVE-2025-21172, CVE-2025-21173, CVE-2025-21176
+  curl -s "$URL" | jq -r '
+    [.releases[] | select(.security == true)] | .[0:6] | .[] |
+    .["release-date"] as $date |
+    .["cve-list"][]? | "(unknown) | \($date | split("-")[1]) | (unknown) | \(.["cve-id"])"'
+done | sort -u | head -12
+# (unknown) | 10 | (unknown) | CVE-2025-55247
+# (unknown) | 10 | (unknown) | CVE-2025-55315
+# (unknown) | 10 | (unknown) | CVE-2025-55248
+# (unknown) | 06 | (unknown) | CVE-2025-30399
+# (unknown) | 05 | (unknown) | CVE-2025-26646
+# (unknown) | 04 | (unknown) | CVE-2025-26682
 ```
 
 **Analysis:**
 
-- **Completeness:** ⚠️ Partial—the releases-index can list CVEs by date, but notice CVE-2025-21171 is missing (it only affected .NET 9.0 which was still in its first patch cycle). The output also shows exact dates rather than grouped by month.
-- **Ergonomics:** The hal-index uses `prev` links for natural backward navigation. The releases-index requires downloading all version files (2.4+ MB), filtering by date, and deduplicating results.
-- **Navigation model:** The hal-index timeline is designed for chronological traversal. The releases-index has no concept of time-based navigation.
+- **Completeness:** ⚠️ Partial—the releases-index lacks `affected_releases` (which major versions) and `affected_products` (component) information.
+- **Ergonomics:** The hal-index uses `prev-security` links to jump directly between security months, skipping non-security months entirely. The releases-index requires downloading all version files (2.4+ MB), filtering by security flag, and deduplicating results.
+- **Navigation model:** The `prev-security` link on timeline months enables efficient backward traversal through security history. The releases-index has no concept of time-based navigation.
 
-**Winner:** hal-index (**27x smaller**)
+**Winner:** hal-index (**40x smaller**, with version and component information)
 
 ### Critical CVE This Month
 
@@ -599,6 +606,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 | CVEs per month | ✅ | ❌ | — |
 | CVE details (severity, fixes) | ✅ | ❌ | — |
 | Timeline navigation | ✅ | ❌ | — |
+| Security history navigation (`prev-security`) | ✅ | ❌ | — |
 | SDK-first navigation | ✅ | ❌ | — |
 | Breaking changes by category | ✅ | ❌ | hal-index only |
 
@@ -636,8 +644,8 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 |--------|-------------|----------------|
 | Basic version queries | 8 KB | 6 KB |
 | CVE queries (latest security patch) | 51 KB | 1,220 KB |
-| Recent CVEs (last 2 security releases) | 23 KB | 2.5 MB |
-| CVEs in last 12 months | ~90 KB | 2.5 MB |
+| Last 3 security releases (version) | ~60 KB | 1,220 KB |
+| Last 6 security months (timeline) | ~60 KB | 2.4 MB |
 | Cache coherency | ✅ Atomic | ❌ TTL mismatch risk |
 | Query syntax | snake_case (dot notation) | kebab-case (bracket notation) |
 | Link traversal | `._links.self.href` | `.["releases.json"]` |

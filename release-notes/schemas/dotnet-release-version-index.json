@@ -80,7 +80,7 @@
             ]
           },
           "type": {
-            "description": "MIME type of the linked resource",
+            "description": "MIME type of the linked resource. Omit for HAL\u002BJSON (default).",
             "type": [
               "string",
               "null"
@@ -231,18 +231,12 @@
                   ]
                 }
               },
-              "sdk_patches": {
-                "description": "SDK patch versions for this major version released in the period",
+              "sdk_release": {
+                "description": "Highest SDK version for this major version released in the period",
                 "type": [
-                  "array",
+                  "string",
                   "null"
-                ],
-                "items": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
+                ]
               },
               "years": {
                 "description": "Years with releases for this major version (cross-reference to timeline)",

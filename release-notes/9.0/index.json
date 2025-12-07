@@ -11,40 +11,25 @@
   "ga_date": "2024-11-12T00:00:00\u002B00:00",
   "eol_date": "2026-11-10T00:00:00\u002B00:00",
   "_links": {
-    "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/index.json",
-      "title": ".NET 9.0",
-      "type": "application/hal\u002Bjson"
-    },
     "downloads": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/index.json",
-      "title": ".NET 9.0 Downloads",
-      "type": "application/hal\u002Bjson"
+      "title": ".NET 9.0 Downloads"
     },
     "latest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.11/index.json",
-      "title": "Latest patch release (9.0.11)",
-      "type": "application/hal\u002Bjson"
+      "title": "Latest patch"
     },
     "latest-sdk": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/sdk/index.json",
-      "title": ".NET SDK 9.0 Release Information",
-      "type": "application/hal\u002Bjson"
+      "title": ".NET SDK 9.0 Release Information"
     },
     "latest-security": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.10/index.json",
-      "title": "Latest security patch (9.0.10)",
-      "type": "application/hal\u002Bjson"
-    },
-    "release-manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/manifest.json",
-      "title": "Release manifest",
-      "type": "application/hal\u002Bjson"
+      "title": "Latest security patch"
     },
     "releases-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
-      "title": ".NET Release Index",
-      "type": "application/hal\u002Bjson"
+      "title": "Release index"
     },
     "compatibility-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/compatibility.json",
@@ -57,22 +42,6 @@
       "type": "application/json"
     }
   },
-  "glossary": {
-    "lts": "Long-Term Support \u2013 3-year support window",
-    "sts": "Standard-Term Support \u2013 18-month support window",
-    "preview": "Pre-release phase for testing and feedback; not supported",
-    "go-live": "Production-supported release candidate before GA",
-    "active": "Full support with functional and security improvements",
-    "maintenance": "Final 6 months of support; security fixes only",
-    "eol": "End of Life \u2013 No longer supported",
-    "feature-band": "Quarterly SDK minor version releases (e.g., 8.0.1xx, 8.0.2xx)",
-    "patch": "Cumulative monthly update released on Patch Tuesday",
-    "latest-release": "Highest stable (GA) major version; excludes preview and RC releases",
-    "latest": "Alias for latest-release",
-    "latest-lts": "Highest stable LTS major version currently in support",
-    "latest-sdk": "SDK index for the latest stable major version",
-    "latest-security": "Most recent patch release containing security fixes"
-  },
   "_embedded": {
     "releases": [
       {
@@ -83,20 +52,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.307",
-          "9.0.112"
-        ],
+        "sdk_release": "9.0.307",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.11/index.json",
-            "title": "9.0.11 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.11 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/11/index.json",
-            "title": "Release timeline index for 2025-11",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -113,24 +77,19 @@
           "CVE-2025-55315"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.306",
-          "9.0.111"
-        ],
+        "sdk_release": "9.0.306",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.10/index.json",
-            "title": "9.0.10 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.10 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
-            "title": "Release timeline index for 2025-10",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -143,20 +102,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.305",
-          "9.0.110"
-        ],
+        "sdk_release": "9.0.305",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.9/index.json",
-            "title": "9.0.9 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.9 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/09/index.json",
-            "title": "Release timeline index for 2025-09",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -168,20 +122,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.304",
-          "9.0.109"
-        ],
+        "sdk_release": "9.0.304",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.8/index.json",
-            "title": "9.0.8 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.8 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/08/index.json",
-            "title": "Release timeline index for 2025-08",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -193,21 +142,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.303",
-          "9.0.302",
-          "9.0.108"
-        ],
+        "sdk_release": "9.0.303",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/index.json",
-            "title": "9.0.7 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.7 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json",
-            "title": "Release timeline index for 2025-07",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -222,25 +165,19 @@
           "CVE-2025-30399"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.301",
-          "9.0.205",
-          "9.0.107"
-        ],
+        "sdk_release": "9.0.301",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.6/index.json",
-            "title": "9.0.6 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.6 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/06/index.json",
-            "title": "Release timeline index for 2025-06",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/06/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -256,25 +193,19 @@
           "CVE-2025-26646"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.300",
-          "9.0.204",
-          "9.0.106"
-        ],
+        "sdk_release": "9.0.300",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.5/index.json",
-            "title": "9.0.5 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.5 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/05/index.json",
-            "title": "Release timeline index for 2025-05",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/05/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -290,24 +221,19 @@
           "CVE-2025-26682"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.203",
-          "9.0.105"
-        ],
+        "sdk_release": "9.0.203",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.4/index.json",
-            "title": "9.0.4 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.4 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/04/index.json",
-            "title": "Release timeline index for 2025-04",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/04/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -323,25 +249,19 @@
           "CVE-2025-24070"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.202",
-          "9.0.201",
-          "9.0.104"
-        ],
+        "sdk_release": "9.0.202",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.3/index.json",
-            "title": "9.0.3 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.3 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/03/index.json",
-            "title": "Release timeline index for 2025-03",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/03/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -354,20 +274,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.200",
-          "9.0.103"
-        ],
+        "sdk_release": "9.0.200",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.2/index.json",
-            "title": "9.0.2 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.2 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/02/index.json",
-            "title": "Release timeline index for 2025-02",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -385,23 +300,19 @@
           "CVE-2025-21176"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.102"
-        ],
+        "sdk_release": "9.0.102",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.1/index.json",
-            "title": "9.0.1 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.1 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/01/index.json",
-            "title": "Release timeline index for 2025-01",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/01/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -418,24 +329,19 @@
           "CVE-2024-43499"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.101",
-          "9.0.100"
-        ],
+        "sdk_release": "9.0.101",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.0/index.json",
-            "title": "9.0.0 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/12/index.json",
-            "title": "Release timeline index for 2024-12",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/12/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -451,23 +357,19 @@
           "CVE-2024-43483"
         ],
         "support_phase": "go-live",
-        "sdk_patches": [
-          "9.0.100-rc.2.24474.11"
-        ],
+        "sdk_release": "9.0.100-rc.2.24474.11",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/rc2/index.json",
-            "title": "9.0.0-rc.2 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-rc.2 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/10/index.json",
-            "title": "Release timeline index for 2024-10",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           },
           "cve-json": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/10/cve.json",
-            "title": "CVE Information",
+            "title": "CVE records (JSON)",
             "type": "application/json"
           }
         }
@@ -480,19 +382,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "go-live",
-        "sdk_patches": [
-          "9.0.100-rc.1.24452.12"
-        ],
+        "sdk_release": "9.0.100-rc.1.24452.12",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/rc1/index.json",
-            "title": "9.0.0-rc.1 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-rc.1 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/09/index.json",
-            "title": "Release timeline index for 2024-09",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -504,19 +402,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
-        "sdk_patches": [
-          "9.0.100-preview.7.24407.12"
-        ],
+        "sdk_release": "9.0.100-preview.7.24407.12",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview7/index.json",
-            "title": "9.0.0-preview.7 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-preview.7 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/08/index.json",
-            "title": "Release timeline index for 2024-08",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -528,19 +422,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
-        "sdk_patches": [
-          "9.0.100-preview.6.24328.19"
-        ],
+        "sdk_release": "9.0.100-preview.6.24328.19",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview6/index.json",
-            "title": "9.0.0-preview.6 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-preview.6 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/07/index.json",
-            "title": "Release timeline index for 2024-07",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -552,19 +442,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
-        "sdk_patches": [
-          "9.0.100-preview.5.24307.3"
-        ],
+        "sdk_release": "9.0.100-preview.5.24307.3",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview5/index.json",
-            "title": "9.0.0-preview.5 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-preview.5 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/06/index.json",
-            "title": "Release timeline index for 2024-06",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -576,19 +462,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
-        "sdk_patches": [
-          "9.0.100-preview.4.24267.66"
-        ],
+        "sdk_release": "9.0.100-preview.4.24267.66",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview4/index.json",
-            "title": "9.0.0-preview.4 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-preview.4 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/index.json",
-            "title": "Release timeline index for 2024-05",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -600,19 +482,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
-        "sdk_patches": [
-          "9.0.100-preview.3.24204.13"
-        ],
+        "sdk_release": "9.0.100-preview.3.24204.13",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview3/index.json",
-            "title": "9.0.0-preview.3 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-preview.3 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/04/index.json",
-            "title": "Release timeline index for 2024-04",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -624,19 +502,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
-        "sdk_patches": [
-          "9.0.100-preview.2.24157.14"
-        ],
+        "sdk_release": "9.0.100-preview.2.24157.14",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/index.json",
-            "title": "9.0.0-preview.2 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-preview.2 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/03/index.json",
-            "title": "Release timeline index for 2024-03",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       },
@@ -648,19 +522,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "preview",
-        "sdk_patches": [
-          "9.0.100-preview.1.24101.2"
-        ],
+        "sdk_release": "9.0.100-preview.1.24101.2",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview1/index.json",
-            "title": "9.0.0-preview.1 Patch Index",
-            "type": "application/hal\u002Bjson"
+            "title": "9.0.0-preview.1 Patch Index"
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/02/index.json",
-            "title": "Release timeline index for 2024-02",
-            "type": "application/hal\u002Bjson"
+            "title": "Release month index"
           }
         }
       }
@@ -671,8 +541,7 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/index.json",
-            "title": ".NET Release Timeline 2025 (chronological)",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Release Timeline 2025 (chronological)"
           }
         }
       },
@@ -681,32 +550,15 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/index.json",
-            "title": ".NET Release Timeline 2024 (chronological)",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET Release Timeline 2024 (chronological)"
           }
         }
       }
-    ],
-    "cve_records": [
-      "CVE-2024-43483",
-      "CVE-2024-43498",
-      "CVE-2024-43499",
-      "CVE-2025-21171",
-      "CVE-2025-21172",
-      "CVE-2025-21173",
-      "CVE-2025-21176",
-      "CVE-2025-24070",
-      "CVE-2025-26646",
-      "CVE-2025-26682",
-      "CVE-2025-30399",
-      "CVE-2025-55247",
-      "CVE-2025-55248",
-      "CVE-2025-55315"
     ]
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-07T00:54:42.4270794\u002B00:00",
+    "generated_on": "2025-12-07T18:25:02.5238729\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }
