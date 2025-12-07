@@ -1,27 +1,29 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/dotnet-sdk-download.json",
-  "kind": "sdk-download",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/dotnet-component-download.json",
+  "kind": "component-download",
+  "component": "sdk",
   "version": "9.0",
-  "support_phase": "active",
-  "title": ".NET SDK 9.0 Downloads",
-  "description": "SDK downloads for .NET 9.0 (latest feature band)",
+  "title": ".NET SDK Downloads",
+  "description": "Evergreen download links for .NET SDK 9.0 (latest feature band)",
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/sdk/sdk-9.0.json",
-      "path": "/9.0/sdk/sdk-9.0.json",
-      "title": ".NET SDK 9.0 Downloads",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/sdk.json",
+      "title": ".NET SDK Downloads",
       "type": "application/json"
     },
-    "sdk-index": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/sdk/index.json",
-      "path": "/9.0/sdk/index.json",
-      "title": ".NET SDK 9.0",
+    "downloads-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/index.json",
+      "title": ".NET 9.0 Downloads",
       "type": "application/hal\u002Bjson"
     },
     "release-major": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/index.json",
-      "path": "/9.0/index.json",
       "title": ".NET 9.0",
+      "type": "application/hal\u002Bjson"
+    },
+    "sdk-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/sdk/index.json",
+      "title": ".NET SDK 9.0",
       "type": "application/hal\u002Bjson"
     }
   },
@@ -61,11 +63,45 @@
           }
         }
       },
-      "linux-musl": {
+      "linux-musl-arm": {
+        "name": "dotnet-sdk-linux-musl-arm.tar.gz",
+        "rid": "linux-musl-arm",
+        "os": "linux-musl",
+        "arch": "arm",
+        "hash_algorithm": "sha512",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-musl-arm.tar.gz",
+            "title": "Download dotnet-sdk-linux-musl-arm.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-musl-arm.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "linux-musl-arm64": {
+        "name": "dotnet-sdk-linux-musl-arm64.tar.gz",
+        "rid": "linux-musl-arm64",
+        "os": "linux-musl",
+        "arch": "arm64",
+        "hash_algorithm": "sha512",
+        "_links": {
+          "download": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-musl-arm64.tar.gz",
+            "title": "Download dotnet-sdk-linux-musl-arm64.tar.gz"
+          },
+          "hash": {
+            "href": "https://aka.ms/dotnet/9.0/dotnet-sdk-linux-musl-arm64.tar.gz.sha512",
+            "title": "SHA512 hash file"
+          }
+        }
+      },
+      "linux-musl-x64": {
         "name": "dotnet-sdk-linux-musl-x64.tar.gz",
-        "rid": "linux-musl",
-        "os": "linux",
-        "arch": "musl",
+        "rid": "linux-musl-x64",
+        "os": "linux-musl",
+        "arch": "x64",
         "hash_algorithm": "sha512",
         "_links": {
           "download": {
@@ -181,5 +217,10 @@
         }
       }
     }
+  },
+  "_metadata": {
+    "schema_version": "1.0",
+    "generated_on": "2025-12-07T01:00:55.53922\u002B00:00",
+    "generated_by": "VersionIndex"
   }
 }
