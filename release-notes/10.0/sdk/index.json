@@ -2,188 +2,50 @@
   "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/dotnet-sdk-version-index.json",
   "kind": "sdk-index",
   "version": "10.0",
-  "title": ".NET SDK 10.0 Index",
-  "description": "SDK release index for .NET 10.0",
+  "title": ".NET SDK 10.0",
+  "description": "SDK feature band metadata for .NET 10.0",
   "latest": "10.0.100-rc.2.25502.107",
   "latest_security": "10.0.100-rc.2.25502.107",
+  "latest_feature_band": "10.0.xx",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/sdk/index.json",
-      "path": "/10.0/sdk/index.json",
       "title": ".NET SDK 10.0",
+      "type": "application/hal\u002Bjson"
+    },
+    "downloads": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/index.json",
+      "title": ".NET 10.0 Downloads",
       "type": "application/hal\u002Bjson"
     },
     "release-major": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
-      "path": "/10.0/index.json",
       "title": ".NET 10.0",
       "type": "application/hal\u002Bjson"
-    },
-    "downloads": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/sdk/sdk-10.0.json",
-      "path": "/10.0/sdk/sdk-10.0.json",
-      "title": ".NET SDK 10.0 Downloads",
-      "type": "application/json"
     }
   },
   "_embedded": {
-    "releases": [
-      {
-        "version": "10.0.100-rc.2.25502.107",
-        "date": "2025-10-14T00:00:00-08:00",
-        "security": true,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-rc.2/index.json",
-            "path": "/10.0/10.0.0-rc.2/index.json",
-            "title": "10.0.0-rc.2",
-            "type": "application/hal\u002Bjson"
-          }
-        },
-        "cve_records": [
-          "CVE-2025-55247",
-          "CVE-2025-55315"
-        ]
-      },
-      {
-        "version": "10.0.100-rc.1.25451.107",
-        "date": "2025-09-09T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-rc.1/index.json",
-            "path": "/10.0/10.0.0-rc.1/index.json",
-            "title": "10.0.0-rc.1",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100-preview.7.25380.108",
-        "date": "2025-08-12T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.7/index.json",
-            "path": "/10.0/10.0.0-preview.7/index.json",
-            "title": "10.0.0-preview.7",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100-preview.6.25358.103",
-        "date": "2025-07-15T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.6/index.json",
-            "path": "/10.0/10.0.0-preview.6/index.json",
-            "title": "10.0.0-preview.6",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100-preview.5.25277.114",
-        "date": "2025-06-10T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.5/index.json",
-            "path": "/10.0/10.0.0-preview.5/index.json",
-            "title": "10.0.0-preview.5",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100-preview.4.25258.110",
-        "date": "2025-05-13T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.4/index.json",
-            "path": "/10.0/10.0.0-preview.4/index.json",
-            "title": "10.0.0-preview.4",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100-preview.3.25201.16",
-        "date": "2025-04-10T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.3/index.json",
-            "path": "/10.0/10.0.0-preview.3/index.json",
-            "title": "10.0.0-preview.3",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100-preview.2.25164.34",
-        "date": "2025-03-18T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.2/index.json",
-            "path": "/10.0/10.0.0-preview.2/index.json",
-            "title": "10.0.0-preview.2",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100-preview.1.25120.13",
-        "date": "2025-02-25T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.1/index.json",
-            "path": "/10.0/10.0.0-preview.1/index.json",
-            "title": "10.0.0-preview.1",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      },
-      {
-        "version": "10.0.100",
-        "date": "2025-11-11T00:00:00-08:00",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0/index.json",
-            "path": "/10.0/10.0.0/index.json",
-            "title": "10.0.0",
-            "type": "application/hal\u002Bjson"
-          }
-        }
-      }
-    ],
     "feature_bands": [
       {
-        "version": "10.0.xx",
-        "date": "2025-11-11T00:00:00-08:00",
+        "version": "10.0.100-rc.2.25502.107",
+        "band": "10.0.xx",
+        "date": "2025-10-14T00:00:00-08:00",
         "label": ".NET SDK 10.0.xx",
         "support_phase": "active",
         "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/sdk/sdk-10.0.xx.json",
-            "path": "/10.0/sdk/sdk-10.0.xx.json",
-            "title": ".NET SDK 10.0.xx",
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
+            "title": "2025-10",
+            "type": "application/hal\u002Bjson"
+          },
+          "release-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/rc2/index.json",
+            "title": "10.0.0-rc.2",
+            "type": "application/hal\u002Bjson"
+          },
+          "downloads": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/sdk-10.0.xx.json",
+            "title": ".NET SDK 10.0.xx Downloads",
             "type": "application/json"
           }
         }
@@ -192,7 +54,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-06T00:51:53.8045748\u002B00:00",
+    "generated_on": "2025-12-07T01:00:55.5457843\u002B00:00",
     "generated_by": "VersionIndex"
   }
 }

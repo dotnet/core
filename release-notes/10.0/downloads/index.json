@@ -1,0 +1,91 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/dotnet-downloads-index.json",
+  "kind": "downloads-index",
+  "version": "10.0",
+  "title": ".NET 10.0 Downloads",
+  "description": "Evergreen download links for .NET 10.0 components",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/index.json",
+      "title": ".NET 10.0 Downloads",
+      "type": "application/hal\u002Bjson"
+    },
+    "release-major": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
+      "title": ".NET 10.0",
+      "type": "application/hal\u002Bjson"
+    }
+  },
+  "_embedded": {
+    "components": [
+      {
+        "name": "runtime",
+        "title": ".NET Runtime",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/runtime.json",
+            "title": ".NET Runtime",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "name": "aspnetcore",
+        "title": "ASP.NET Core Runtime",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/aspnetcore.json",
+            "title": "ASP.NET Core Runtime",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "name": "windowsdesktop",
+        "title": "Windows Desktop Runtime",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/windowsdesktop.json",
+            "title": "Windows Desktop Runtime",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "name": "sdk",
+        "title": ".NET SDK",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/sdk.json",
+            "title": ".NET SDK",
+            "type": "application/json"
+          },
+          "sdk-index": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/sdk/index.json",
+            "title": ".NET SDK 10.0",
+            "type": "application/hal\u002Bjson"
+          }
+        }
+      }
+    ],
+    "feature_bands": [
+      {
+        "version": "10.0.xx",
+        "title": ".NET SDK 10.0.xx",
+        "support_phase": "active",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/sdk-10.0.xx.json",
+            "title": ".NET SDK 10.0.xx",
+            "type": "application/json"
+          }
+        }
+      }
+    ]
+  },
+  "_metadata": {
+    "schema_version": "1.0",
+    "generated_on": "2025-12-07T01:00:55.533509\u002B00:00",
+    "generated_by": "VersionIndex"
+  }
+}
