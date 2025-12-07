@@ -21,38 +21,48 @@
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
-      "title": "Release timeline index for 2025-10",
-      "type": "application/hal\u002Bjson"
+      "title": "Release timeline index for 2025-10"
     },
     "prev": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/09/index.json",
-      "title": "Release timeline index for 2025-09",
-      "type": "application/hal\u002Bjson"
+      "title": "Release timeline index for 2025-09"
+    },
+    "prev-security": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/06/index.json",
+      "title": "Release timeline index for 2025-06"
     },
     "timeline-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
-      "title": ".NET Release Timeline Index",
-      "type": "application/hal\u002Bjson"
+      "title": ".NET Release Timeline Index"
     },
     "year-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/index.json",
-      "title": ".NET Release Timeline Index - 2025",
-      "type": "application/hal\u002Bjson"
+      "title": ".NET Release Timeline Index - 2025"
     },
     "cve-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/cve.json",
-      "title": "CVE Information",
+      "title": "CVE records (JSON)",
       "type": "application/json"
     },
     "cve-markdown": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/cve.md",
-      "title": "CVE Information",
+      "title": "CVE information",
       "type": "application/markdown"
     },
     "cve-markdown-rendered": {
       "href": "https://github.com/dotnet/core/blob/main/release-notes/timeline/2025/10/cve.md",
-      "title": "CVE Information (Rendered)",
+      "title": "CVE information (Rendered)",
+      "type": "text/html"
+    },
+    "glossary-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/glossary.md",
+      "title": "Glossary",
       "type": "application/markdown"
+    },
+    "glossary-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/glossary.md",
+      "title": "Glossary (Rendered)",
+      "type": "text/html"
     }
   },
   "_embedded": {
@@ -64,19 +74,15 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "go-live",
-        "sdk_patches": [
-          "10.0.100-rc.2.25502.107"
-        ],
+        "sdk_release": "10.0.100-rc.2.25502.107",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-rc.2.25502.107/index.json",
-            "title": ".NET 10.0.0-rc.2.25502.107",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 10.0.0-rc.2.25502.107"
           },
           "latest-sdk": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/sdk/index.json",
-            "title": ".NET SDK 10.0 Release Information",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET SDK 10.0 Release Information"
           }
         }
       },
@@ -93,20 +99,15 @@
           "CVE-2025-55247"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "9.0.306",
-          "9.0.111"
-        ],
+        "sdk_release": "9.0.306",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.10/index.json",
-            "title": ".NET 9.0.10",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 9.0.10"
           },
           "latest-sdk": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/sdk/index.json",
-            "title": ".NET SDK 9.0 Release Information",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET SDK 9.0 Release Information"
           }
         }
       },
@@ -123,21 +124,15 @@
           "CVE-2025-55247"
         ],
         "support_phase": "active",
-        "sdk_patches": [
-          "8.0.415",
-          "8.0.318",
-          "8.0.121"
-        ],
+        "sdk_release": "8.0.415",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.21/index.json",
-            "title": ".NET 8.0.21",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET 8.0.21"
           },
           "latest-sdk": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/sdk/index.json",
-            "title": ".NET SDK 8.0 Release Information",
-            "type": "application/hal\u002Bjson"
+            "title": ".NET SDK 8.0 Release Information"
           }
         }
       }
@@ -288,7 +283,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-07T00:54:45.0046192\u002B00:00",
+    "generated_on": "2025-12-07T18:53:51.7246781\u002B00:00",
     "generated_by": "ShipIndex"
   }
 }
