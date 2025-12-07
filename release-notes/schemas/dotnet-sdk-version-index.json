@@ -15,6 +15,8 @@
         "manifest",
         "band",
         "sdk-download",
+        "downloads-index",
+        "component-download",
         "content",
         "unknown",
         "release-index",
@@ -53,6 +55,13 @@
         "null"
       ]
     },
+    "latest_feature_band": {
+      "description": "Latest active feature band version (e.g., \u00278.0.4xx\u0027)",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "_links": {
       "description": "HAL\u002BJSON links for hypermedia navigation",
       "type": [
@@ -69,13 +78,6 @@
           "href": {
             "description": "Absolute URL to the linked resource",
             "type": "string"
-          },
-          "path": {
-            "description": "Absolute path from the repository root (starts with /)",
-            "type": [
-              "string",
-              "null"
-            ]
           },
           "title": {
             "description": "Descriptive title for the linked resource",
@@ -111,73 +113,6 @@
         "null"
       ],
       "properties": {
-        "releases": {
-          "description": "List of SDK patch release entries with version information and navigation links",
-          "type": "array",
-          "items": {
-            "description": "Individual SDK release entry containing version metadata and navigation links",
-            "type": [
-              "object",
-              "null"
-            ],
-            "properties": {
-              "version": {
-                "description": "SDK version (e.g., \u00278.0.100\u0027, \u00279.0.200\u0027)",
-                "type": "string"
-              },
-              "date": {
-                "description": "Release date when this SDK version became generally available",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date-time"
-              },
-              "security": {
-                "description": "Whether this release includes security fixes",
-                "type": "boolean"
-              },
-              "support_phase": {
-                "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
-                "enum": [
-                  "preview",
-                  "go-live",
-                  "active",
-                  "maintenance",
-                  "eol",
-                  null
-                ]
-              },
-              "_links": {
-                "description": "HAL\u002BJSON links for navigation to this SDK release\u0027s content",
-                "type": "object",
-                "additionalProperties": {
-                  "$ref": "#/properties/_links/additionalProperties"
-                }
-              },
-              "cve_records": {
-                "description": "List of CVE IDs addressed in this release",
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "required": [
-              "version",
-              "date",
-              "security",
-              "support_phase",
-              "_links"
-            ]
-          }
-        },
         "feature_bands": {
           "description": "List of SDK feature band entries with version information and navigation links",
           "type": "array",
@@ -189,11 +124,15 @@
             ],
             "properties": {
               "version": {
-                "description": "Feature band version (e.g., \u00278.0.1xx\u0027, \u00278.0.4xx\u0027)",
+                "description": "Latest SDK version in this feature band (e.g., \u00279.0.307\u0027)",
+                "type": "string"
+              },
+              "band": {
+                "description": "Feature band identifier (e.g., \u00279.0.3xx\u0027)",
                 "type": "string"
               },
               "date": {
-                "description": "Release date when this feature band became generally available",
+                "description": "Release date of the latest SDK in this feature band",
                 "type": [
                   "string",
                   "null"
@@ -202,10 +141,13 @@
               },
               "label": {
                 "description": "Descriptive label for the feature band",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "support_phase": {
-                "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
+                "description": "Support phase (preview, go-live, active, maintenance, eol)",
                 "enum": [
                   "preview",
                   "go-live",
@@ -225,6 +167,7 @@
             },
             "required": [
               "version",
+              "band",
               "date",
               "label",
               "support_phase",
@@ -234,7 +177,6 @@
         }
       },
       "required": [
-        "releases",
         "feature_bands"
       ]
     },
