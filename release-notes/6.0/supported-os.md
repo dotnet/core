@@ -55,7 +55,7 @@ OS                              | Versions                    | Architectures   
 [Fedora][13]                    | 40, 39                      | Arm32, Arm64, x64     | [Lifecycle][14]
 [openSUSE Leap][15]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][16]
 [Red Hat Enterprise Linux][17]  | 9, 8                        | Arm64, x64            | [Lifecycle][18]
-[SUSE Enterprise Linux][19]     | 15.6, 15.5, 12.5            | Arm64, x64            | [Lifecycle][20]
+[SUSE Linux Enterprise][19]     | 15.6, 15.5, 12.5            | Arm64, x64            | [Lifecycle][20]
 [Ubuntu][21]                    | 24.04, 22.04, 20.04         | Arm32, Arm64, x64     | [Lifecycle][22]
 
 Notes:
@@ -161,12 +161,12 @@ openSUSE Leap           | 15.4          | 2023-12-07
 openSUSE Leap           | 15.3          | [2022-12-31](https://web.archive.org/web/20230521063245/https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/15.3/)
 openSUSE Leap           | 15.2          | [2022-01-04](https://web.archive.org/web/20230529015218/https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/15.2/)
 Red Hat Enterprise Linux | 7            | 2024-06-30
-SUSE Enterprise Linux   | 15.4          | 2023-12-31
-SUSE Enterprise Linux   | 15.3          | 2022-12-31
-SUSE Enterprise Linux   | 15.2          | 2021-12-31
-SUSE Enterprise Linux   | 12.4          | 2020-06-30
-SUSE Enterprise Linux   | 12.3          | 2019-06-30
-SUSE Enterprise Linux   | 12.2          | 2018-03-31
+SUSE Linux Enterprise   | 15.4          | 2023-12-31
+SUSE Linux Enterprise   | 15.3          | 2022-12-31
+SUSE Linux Enterprise   | 15.2          | 2021-12-31
+SUSE Linux Enterprise   | 12.4          | 2020-06-30
+SUSE Linux Enterprise   | 12.3          | 2019-06-30
+SUSE Linux Enterprise   | 12.2          | 2018-03-31
 tvOS                    | 17            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
 tvOS                    | 16            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)
 tvOS                    | 15            | [2023-05-08](https://dotnet.microsoft.com/platform/support/policy/maui)

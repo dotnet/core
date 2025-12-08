@@ -1,6 +1,6 @@
 # .NET 10.0 - Supported OS versions
 
-Last Updated: 2025/11/19; Support phase: Active
+Last Updated: 2025/12/07; Support phase: Active
 
 [.NET 10.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -48,8 +48,8 @@ Notes:
 | [Debian][11]        | 13, 12   | Arm32, Arm64, x64 | [Lifecycle][12] |
 | [Fedora][13]        | 43, 42   | Arm32, Arm64, x64 | [Lifecycle][14] |
 | [openSUSE Leap][15] | 16.0, 15.6 | Arm64, x64      | [Lifecycle][16] |
-| [Red Hat Enterprise Linux][17] | 10, 9 | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Enterprise Linux][19] | 16.0, 15.7, 15.6 | Arm64, x64 | [Lifecycle][20] |
+| [Red Hat Enterprise Linux][17] | 10, 9, 8 | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Linux Enterprise][19] | 16.0, 15.7, 15.6 | Arm64, x64 | [Lifecycle][20] |
 | [Ubuntu][21]        | 25.10, 24.04, 22.04 | Arm32, Arm64, x64 | [Lifecycle][22] |
 
 Notes:

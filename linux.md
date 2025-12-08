@@ -24,6 +24,7 @@ Please note that these other .NET container image distributions will have differ
 - [Alpine Linux](https://pkgs.alpinelinux.org/packages?name=dotnet*)
 - [Arch Linux](https://archlinux.org/packages/?q=dotnet)
 - [Arch Linux User Repository](https://aur.archlinux.org/packages?K=dotnet)
+- [Azure Linux](https://packages.microsoft.com/azurelinux/3.0/prod/base/x86_64/)
 - [Fedora](https://packages.fedoraproject.org/search?query=dotnet)
 - [Red Hat Enterprise Linux](https://docs.redhat.com/documentation/net)
 - [Tizen](https://developer.samsung.com/tizen/About-Tizen.NET/Tizen.NET.html)
@@ -49,9 +50,9 @@ Microsoft is [no longer publishing packages for Ubuntu starting with Ubuntu 24.0
 
 .NET has multiple dependencies that must be installed. If you install .NET via packages, these packages will typically already be installed.
 
-- [.NET 6 dependencies](./release-notes/6.0/linux-packages.md)
-- [.NET 8 dependencies](./release-notes/8.0/linux-packages.md)
+- [.NET 8 dependencies](./release-notes/8.0/os-packages.md)
 - [.NET 9 dependencies](./release-notes/9.0/os-packages.md)
+- [.NET 10 dependencies](./release-notes/10.0/os-packages.md)
 
 ## Portable build compatibility
 

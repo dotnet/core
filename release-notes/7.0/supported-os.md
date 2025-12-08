@@ -51,7 +51,7 @@ OS                              | Versions                    | Architectures   
 [Fedora][13]                    | 40, 39                      | Arm32, Arm64, x64     | [Lifecycle][14]
 [openSUSE Leap][15]             | 15.6, 15.5                  | Arm64, x64            | [Lifecycle][16]
 [Red Hat Enterprise Linux][17]  | 9, 8, 7                     | Arm64, x64            | [Lifecycle][18]
-[SUSE Enterprise Linux][19]     | 15.5, 15.4                  | Arm64, x64            | [Lifecycle][20]
+[SUSE Linux Enterprise][19]     | 15.5, 15.4                  | Arm64, x64            | [Lifecycle][20]
 [Ubuntu][21]                    | 24.04, 23.10, 22.04, 20.04  | Arm32, Arm64, x64     | [Lifecycle][22]
 
 Notes:
@@ -138,11 +138,11 @@ macOS                   | 11            | [2023-09-26](https://support.apple.com
 macOS                   | 10.15         | [2022-09-12](https://support.apple.com/HT210642)
 openSUSE Leap           | 15.4          | 2023-12-07
 openSUSE Leap           | 15.3          | [2022-12-31](https://web.archive.org/web/20230521063245/https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/15.3/)
-SUSE Enterprise Linux   | 12.5          | 2024-10-31
-SUSE Enterprise Linux   | 15.3          | 2022-12-31
-SUSE Enterprise Linux   | 12.4          | 2020-06-30
-SUSE Enterprise Linux   | 12.3          | 2019-06-30
-SUSE Enterprise Linux   | 12.2          | 2018-03-31
+SUSE Linux Enterprise   | 12.5          | 2024-10-31
+SUSE Linux Enterprise   | 15.3          | 2022-12-31
+SUSE Linux Enterprise   | 12.4          | 2020-06-30
+SUSE Linux Enterprise   | 12.3          | 2019-06-30
+SUSE Linux Enterprise   | 12.2          | 2018-03-31
 tvOS                    | 17            | -
 tvOS                    | 16            | -
 tvOS                    | 15            | -
