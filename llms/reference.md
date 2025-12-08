@@ -33,49 +33,6 @@ Reference:
 | SDK downloads | `10.0/sdk/index.json` |
 | OS support | `10.0/manifest.json` → `_links["supported-os-json"].href` |
 
-## CVE Analysis Workflows
-
-### Version-Centric (for version/patch queries)
-
-1. GET `index.json` → navigate to major version (e.g., `10.0/index.json`)
-2. View embedded CVE summaries in `_embedded.releases[]` where `security: true`
-3. Find latest security patch: `_links["latest-security"].href`
-4. Navigate to patch index → **full details in `_embedded.disclosures[]`**
-5. For package-level details or commit diffs: `_links["cve-json"].href`
-6. **Always ask**: "Would you like inline diffs for these fixes?"
-7. If yes: **Fetch immediately** — use `commits[hash].url` (already `.diff` format)
-
-### Time-Centric (for date-range queries)
-
-1. GET `timeline/index.json` → navigate to year → navigate to month
-2. View CVEs inline: `_embedded.disclosures[]` has full details
-3. For package-level details: `_links["cve-json"].href`
-4. **Always ask**: "Would you like inline diffs for these fixes?"
-5. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
-
-### Diff Retrieval (IMPORTANT)
-
-Always fetch all provided diff URLs immediately when analyzing CVEs. Do not defer.
-
-GitHub commit URLs support multiple formats:
-- **`.diff`** — Raw unified diff (best for code analysis)
-- **`.patch`** — Git patch with commit message (best for context)
-- **(no extension)** — Web view (for humans)
-
-The graph provides `.diff` URLs by default in `commits[hash].url`.
-
-## Breaking Changes Workflow
-
-1. GET `index.json` → navigate to major version
-2. Follow `_links["compatibility-json"].href`
-3. Use pre-computed rollups for overview:
-   - `categories` — list of all categories
-   - `impact_breakdown` — count by impact level
-   - `type_breakdown` — count by change type
-4. Filter `breaks[]` by `category`, `impact`, or `type`
-5. For migration guidance: check `required_action` field
-6. For raw documentation: filter `references[]` by `type: "documentation-source"`
-
 ## Discovering Resource Schema
 
 HAL resources are self-describing. If you're unsure what's available, inspect the resource:
@@ -514,6 +471,49 @@ The CVE JSON file provides full details and pre-computed query dictionaries:
   }
 }
 ```
+
+## CVE Analysis Workflows
+
+### Version-Centric (for version/patch queries)
+
+1. GET `index.json` → navigate to major version (e.g., `10.0/index.json`)
+2. View embedded CVE summaries in `_embedded.releases[]` where `security: true`
+3. Find latest security patch: `_links["latest-security"].href`
+4. Navigate to patch index → **full details in `_embedded.disclosures[]`**
+5. For package-level details or commit diffs: `_links["cve-json"].href`
+6. **Always ask**: "Would you like inline diffs for these fixes?"
+7. If yes: **Fetch immediately** — use `commits[hash].url` (already `.diff` format)
+
+### Time-Centric (for date-range queries)
+
+1. GET `timeline/index.json` → navigate to year → navigate to month
+2. View CVEs inline: `_embedded.disclosures[]` has full details
+3. For package-level details: `_links["cve-json"].href`
+4. **Always ask**: "Would you like inline diffs for these fixes?"
+5. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
+
+### Diff Retrieval (IMPORTANT)
+
+Always fetch all provided diff URLs immediately when analyzing CVEs. Do not defer.
+
+GitHub commit URLs support multiple formats:
+- **`.diff`** — Raw unified diff (best for code analysis)
+- **`.patch`** — Git patch with commit message (best for context)
+- **(no extension)** — Web view (for humans)
+
+The graph provides `.diff` URLs by default in `commits[hash].url`.
+
+## Breaking Changes Workflow
+
+1. GET `index.json` → navigate to major version
+2. Follow `_links["compatibility-json"].href`
+3. Use pre-computed rollups for overview:
+   - `categories` — list of all categories
+   - `impact_breakdown` — count by impact level
+   - `type_breakdown` — count by change type
+4. Filter `breaks[]` by `category`, `impact`, or `type`
+5. For migration guidance: check `required_action` field
+6. For raw documentation: filter `references[]` by `type: "documentation-source"`
 
 ## CVE JSON Quick Queries
 
