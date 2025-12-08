@@ -1,0 +1,199 @@
+{
+  "description": "Provides chronological access to .NET releases organized by time periods (years \u2192 months \u2192 releases)",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "kind": {
+      "description": "Type of timeline index (release-timeline-index, timeline-year-index, timeline-month-index)",
+      "enum": [
+        "timeline-index",
+        "year-index",
+        "month-index",
+        "release-timeline-index",
+        "timeline-year-index",
+        "timeline-month-index"
+      ]
+    },
+    "title": {
+      "description": "Concise title for the document",
+      "type": "string"
+    },
+    "description": {
+      "description": "Context-aware description of the time period",
+      "type": "string"
+    },
+    "latest": {
+      "description": "Latest major .NET version (cross-reference to releases)",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latest_lts": {
+      "description": "Latest LTS .NET version (cross-reference to releases)",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latest_year": {
+      "description": "Latest year with .NET releases (primary)",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latest_security_month": {
+      "description": "Latest month with security releases (format: YYYY-MM, e.g., \u00272025-10\u0027)",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "_links": {
+      "description": "HAL\u002BJSON links for hypermedia navigation",
+      "type": "object",
+      "additionalProperties": {
+        "description": "HAL\u002BJSON hypermedia link providing navigation to related resources",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "href": {
+            "description": "Absolute URL to the linked resource",
+            "type": "string"
+          },
+          "title": {
+            "description": "Descriptive title for the linked resource",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "MIME type of the linked resource. Omit for HAL\u002BJSON (default).",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "templated": {
+            "description": "Indicates that the href is a URI template (RFC 6570)",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "href"
+        ]
+      }
+    },
+    "glossary": {
+      "description": "Glossary of timeline-specific terms and definitions",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "_embedded": {
+      "description": "Embedded time-based navigation entries and release summaries",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "years": {
+          "description": "Yearly navigation entries (root level history index)",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "description": "Year entry in the release history, containing annual release information",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "year": {
+                "description": "Year identifier (e.g., \u00272025\u0027)",
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of the year\u0027s releases",
+                "type": "string"
+              },
+              "releases": {
+                "description": "List of .NET version identifiers released during this year",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this year\u0027s content",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              }
+            },
+            "required": [
+              "year",
+              "description"
+            ]
+          }
+        }
+      }
+    },
+    "_metadata": {
+      "description": "Metadata about when and how this document was generated",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "schema_version": {
+          "description": "Version of the schema used for this document",
+          "type": "string"
+        },
+        "generated_on": {
+          "description": "ISO 8601 timestamp when this document was generated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_by": {
+          "description": "Name of the tool or script that generated this document",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "generated_on",
+        "generated_by"
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "title",
+    "description"
+  ]
+}

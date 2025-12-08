@@ -1,0 +1,219 @@
+{
+  "description": "Index of download files for a major .NET version",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "kind": {
+      "description": "Type of document, always \u0027downloads-index\u0027",
+      "enum": [
+        "releases-index",
+        "major-version-index",
+        "patch-version-index",
+        "sdk-index",
+        "manifest",
+        "band",
+        "sdk-download",
+        "downloads-index",
+        "component-download",
+        "content",
+        "unknown",
+        "release-index",
+        "index",
+        "major-index",
+        "major-release-index",
+        "patch-index",
+        "patch-release-index",
+        "major-release",
+        "patch-release"
+      ]
+    },
+    "version": {
+      "description": "Major version (e.g., \u00278.0\u0027, \u00279.0\u0027)",
+      "type": "string"
+    },
+    "title": {
+      "description": "Concise title for the document",
+      "type": "string"
+    },
+    "description": {
+      "description": "Description of the downloads index",
+      "type": "string"
+    },
+    "_links": {
+      "description": "HAL\u002BJSON links for hypermedia navigation",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "description": "HAL\u002BJSON hypermedia link providing navigation to related resources",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "href": {
+            "description": "Absolute URL to the linked resource",
+            "type": "string"
+          },
+          "title": {
+            "description": "Descriptive title for the linked resource",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "MIME type of the linked resource. Omit for HAL\u002BJSON (default).",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "templated": {
+            "description": "Indicates that the href is a URI template (RFC 6570)",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "href"
+        ]
+      }
+    },
+    "_embedded": {
+      "description": "Embedded component and feature band entries",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "components": {
+          "description": "List of component download entries (runtime, aspnetcore, windowsdesktop, sdk)",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "description": "Component entry in the downloads index",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "name": {
+                "description": "Component name (e.g., \u0027runtime\u0027, \u0027aspnetcore\u0027, \u0027windowsdesktop\u0027, \u0027sdk\u0027)",
+                "type": "string"
+              },
+              "title": {
+                "description": "Human-readable title for the component",
+                "type": "string"
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this component\u0027s download file",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              }
+            },
+            "required": [
+              "name",
+              "title"
+            ]
+          }
+        },
+        "feature_bands": {
+          "description": "List of SDK feature band download entries",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "description": "Feature band entry in the downloads index",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "version": {
+                "description": "Feature band version (e.g., \u00278.0.4xx\u0027)",
+                "type": "string"
+              },
+              "title": {
+                "description": "Human-readable title for the feature band",
+                "type": "string"
+              },
+              "support_phase": {
+                "description": "Support phase (active, eol)",
+                "enum": [
+                  "preview",
+                  "go-live",
+                  "active",
+                  "maintenance",
+                  "eol",
+                  null
+                ]
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this feature band\u0027s download file",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              }
+            },
+            "required": [
+              "version",
+              "title",
+              "support_phase"
+            ]
+          }
+        }
+      }
+    },
+    "_metadata": {
+      "description": "Metadata about when and how this document was generated",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "schema_version": {
+          "description": "Version of the schema used for this document",
+          "type": "string"
+        },
+        "generated_on": {
+          "description": "ISO 8601 timestamp when this document was generated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_by": {
+          "description": "Name of the tool or script that generated this document",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "generated_on",
+        "generated_by"
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "version",
+    "title",
+    "description"
+  ]
+}
