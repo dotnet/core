@@ -24,10 +24,10 @@ The tables below show theoretical update frequency based on practice and design,
 |------|------|--------------|-------------|
 | `index.json` | 5 KB | ~1 | Root index with all major versions |
 | `10.0/index.json` | 10 KB | ~12 | All 10.0 patches (fewer releases so far) |
-| `9.0/index.json` | 21 KB | ~12 | All 9.0 patches with CVE references |
-| `8.0/index.json` | 24 KB | ~12 | All 8.0 patches with CVE references |
-| `timeline/index.json` | 5 KB | ~1 | Timeline root (all years) |
-| `timeline/2025/index.json` | 13 KB | ~12 | Year index (all months) |
+| `9.0/index.json` | 20 KB | ~12 | All 9.0 patches with CVE references |
+| `8.0/index.json` | 23 KB | ~12 | All 8.0 patches with CVE references |
+| `timeline/index.json` | 4 KB | ~1 | Timeline root (all years) |
+| `timeline/2025/index.json` | 12 KB | ~12 | Year index (all months) |
 | `timeline/2025/10/index.json` | 9 KB | ~1 | Month index with embedded CVE summaries |
 | `timeline/2025/01/cve.json` | 14 KB | ~1 | Full CVE details for a month |
 
@@ -185,13 +185,52 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 
 **Note on URL length:** The hal-index currently uses long GitHub raw URLs (91 chars per URL). With equivalent short CDN URLs, the hal-index would be **4.4 KB**—31% smaller than releases-index.
 
+### Target Framework Queries
+
+#### Query: "What Android platform version does each supported .NET version target?"
+
+| Schema | Files Required | Total Transfer |
+|--------|----------------|----------------|
+| hal-index | `index.json` → `{version}/target-frameworks.json` per version | **~20 KB** |
+| releases-index | N/A | N/A (not available) |
+
+**hal-index:**
+
+```bash
+ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
+
+# Get target-frameworks.json for each supported version and extract Android TFM
+curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.supported) | ._links.self.href' | while read VERSION_HREF; do
+  TFM_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["target-frameworks-json"].href')
+  curl -s "$TFM_HREF" | jq -r '.frameworks[] | select(.platform == "android") | "\(.tfm) (Android \(.platform_version))"'
+done
+```
+
+**Output:**
+
+```text
+net10.0-android (Android 36.0)
+net9.0-android (Android 35.0)
+net8.0-android (Android 34.0)
+```
+
+**releases-index:** Not available.
+
+**Analysis:**
+
+- **Platform versioning:** Each .NET version targets a specific Android API level. This query reveals the progression: .NET 8 → Android 34, .NET 9 → Android 35, .NET 10 → Android 36.
+- **Upgrade planning:** Knowing the platform version helps teams plan SDK requirements when upgrading .NET versions.
+- **Discoverability:** The `target-frameworks-json` link makes this data accessible through HAL navigation.
+
+**Winner:** hal-index only
+
 ### CVE Queries for Latest Security Patch
 
 #### Query: "What CVEs were fixed in the latest .NET 8.0 security patch?"
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **39 KB** |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **37 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** |
 
 **hal-index:**
@@ -245,7 +284,7 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **39 KB** |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **37 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** (cannot answer) |
 
 **hal-index:**
@@ -293,7 +332,7 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **51 KB** |
+| hal-index | `index.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **55 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** |
 
 **hal-index:**
@@ -356,7 +395,7 @@ curl -s "$RELEASES_URL" | jq -r '
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **32 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **30 KB** |
 | releases-index | All releases.json (13 versions) | **8.2 MB** (cannot answer) |
 
 **hal-index:**
@@ -413,7 +452,7 @@ done | sort -u
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` → 6 month indexes (via `prev-security`) | **60 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → 6 month indexes (via `prev-security`) | **55 KB** |
 | releases-index | All version releases.json files | **2.4 MB** |
 
 **hal-index:**
@@ -478,7 +517,7 @@ done | sort -u | head -12
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/10/index.json` | **27 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/10/index.json` | **25 KB** |
 | releases-index | `releases-index.json` + all supported releases.json | **2.4 MB** (incomplete—no severity data) |
 
 **hal-index:**
@@ -532,7 +571,7 @@ done | sort -u
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **155 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -579,7 +618,7 @@ curl -s "$BC_HREF" | jq -r '[.breaks[].category] | group_by(.) | map({category: 
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **155 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -628,7 +667,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **155 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -726,6 +765,7 @@ curl -s "$PACKAGES_URL" | jq -r '
 | Timeline navigation | ✅ | ❌ | — |
 | Security history navigation (`prev-security`) | ✅ | ❌ | — |
 | SDK-first navigation | ✅ | ❌ | — |
+| Target frameworks (TFMs, platform versions) | ✅ | ❌ | hal-index only |
 | Breaking changes by category | ✅ | ❌ | hal-index only |
 | OS package dependencies | ✅ | ❌ | hal-index only |
 
@@ -762,9 +802,9 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 | Metric | hal-index | releases-index |
 |--------|-------------|----------------|
 | Basic version queries | 5 KB | 6 KB |
-| CVE queries (latest security patch) | 39 KB | 1,240 KB |
-| Last 3 security releases (version) | 51 KB | 1,240 KB |
-| Last 6 security months (timeline) | 60 KB | 2.4 MB |
+| CVE queries (latest security patch) | 37 KB | 1,240 KB |
+| Last 3 security releases (version) | 55 KB | 1,240 KB |
+| Last 6 security months (timeline) | 55 KB | 2.4 MB |
 | Cache coherency | ✅ Atomic | ❌ TTL mismatch risk |
 | Query syntax | snake_case (dot notation) | kebab-case (bracket notation) |
 | Link traversal | `._links.self.href` | `.["releases.json"]` |
