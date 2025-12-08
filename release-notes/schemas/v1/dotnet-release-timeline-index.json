@@ -22,7 +22,10 @@
     },
     "description": {
       "description": "Context-aware description of the time period",
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "latest": {
       "description": "Latest major .NET version (cross-reference to releases)",
@@ -132,7 +135,10 @@
               },
               "description": {
                 "description": "Description of the year\u0027s releases",
-                "type": "string"
+                "type": [
+                  "string",
+                  "null"
+                ]
               },
               "releases": {
                 "description": "List of .NET version identifiers released during this year",
@@ -156,44 +162,15 @@
               }
             },
             "required": [
-              "year",
-              "description"
+              "year"
             ]
           }
         }
       }
-    },
-    "_metadata": {
-      "description": "Metadata about when and how this document was generated",
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "schema_version": {
-          "description": "Version of the schema used for this document",
-          "type": "string"
-        },
-        "generated_on": {
-          "description": "ISO 8601 timestamp when this document was generated",
-          "type": "string",
-          "format": "date-time"
-        },
-        "generated_by": {
-          "description": "Name of the tool or script that generated this document",
-          "type": "string"
-        }
-      },
-      "required": [
-        "schema_version",
-        "generated_on",
-        "generated_by"
-      ]
     }
   },
   "required": [
     "kind",
-    "title",
-    "description"
+    "title"
   ]
 }

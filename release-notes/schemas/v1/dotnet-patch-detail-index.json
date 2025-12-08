@@ -33,10 +33,6 @@
       "description": "Concise title for the document",
       "type": "string"
     },
-    "description": {
-      "description": "Description of the patch release",
-      "type": "string"
-    },
     "version": {
       "description": "Patch version identifier (e.g., \u00278.0.1\u0027, \u00279.0.2\u0027)",
       "type": "string"
@@ -80,6 +76,13 @@
           "null"
         ]
       }
+    },
+    "description": {
+      "description": "Description of the patch release",
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "sdk_release": {
       "description": "Highest SDK version shipped with this runtime patch",
@@ -425,39 +428,11 @@
           }
         }
       }
-    },
-    "_metadata": {
-      "description": "Metadata about when and how this document was generated",
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "schema_version": {
-          "description": "Version of the schema used for this document",
-          "type": "string"
-        },
-        "generated_on": {
-          "description": "ISO 8601 timestamp when this document was generated",
-          "type": "string",
-          "format": "date-time"
-        },
-        "generated_by": {
-          "description": "Name of the tool or script that generated this document",
-          "type": "string"
-        }
-      },
-      "required": [
-        "schema_version",
-        "generated_on",
-        "generated_by"
-      ]
     }
   },
   "required": [
     "kind",
     "title",
-    "description",
     "version",
     "date",
     "support_phase",
