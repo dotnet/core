@@ -1,12 +1,13 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/dotnet-release-version-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-version-index.json",
   "kind": "releases-index",
   "title": ".NET Release Index",
   "latest": "10.0",
   "latest_lts": "10.0",
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
+      "title": ".NET Release Index"
     },
     "latest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
@@ -30,7 +31,6 @@
     "releases": [
       {
         "version": "10.0",
-        "target_framework": "net10.0",
         "release_type": "lts",
         "supported": true,
         "_links": {
@@ -41,7 +41,6 @@
       },
       {
         "version": "9.0",
-        "target_framework": "net9.0",
         "release_type": "sts",
         "supported": true,
         "_links": {
@@ -52,7 +51,6 @@
       },
       {
         "version": "8.0",
-        "target_framework": "net8.0",
         "release_type": "lts",
         "supported": true,
         "_links": {
@@ -63,7 +61,6 @@
       },
       {
         "version": "7.0",
-        "target_framework": "net7.0",
         "release_type": "sts",
         "supported": false,
         "_links": {
@@ -74,7 +71,6 @@
       },
       {
         "version": "6.0",
-        "target_framework": "net6.0",
         "release_type": "lts",
         "supported": false,
         "_links": {
@@ -85,7 +81,6 @@
       },
       {
         "version": "5.0",
-        "target_framework": "net5.0",
         "release_type": "sts",
         "supported": false,
         "_links": {
@@ -96,7 +91,6 @@
       },
       {
         "version": "3.1",
-        "target_framework": "netcoreapp3.1",
         "release_type": "lts",
         "supported": false,
         "_links": {
@@ -107,7 +101,6 @@
       },
       {
         "version": "3.0",
-        "target_framework": "netcoreapp3.0",
         "release_type": "sts",
         "supported": false,
         "_links": {
@@ -118,7 +111,6 @@
       },
       {
         "version": "2.2",
-        "target_framework": "netcoreapp2.2",
         "release_type": "sts",
         "supported": false,
         "_links": {
@@ -129,7 +121,6 @@
       },
       {
         "version": "2.1",
-        "target_framework": "netcoreapp2.1",
         "release_type": "lts",
         "supported": false,
         "_links": {
@@ -140,7 +131,6 @@
       },
       {
         "version": "2.0",
-        "target_framework": "netcoreapp2.0",
         "release_type": "sts",
         "supported": false,
         "_links": {
@@ -151,7 +141,6 @@
       },
       {
         "version": "1.1",
-        "target_framework": "netcoreapp1.1",
         "release_type": "lts",
         "supported": false,
         "_links": {
@@ -162,7 +151,6 @@
       },
       {
         "version": "1.0",
-        "target_framework": "netcoreapp1.0",
         "release_type": "lts",
         "supported": false,
         "_links": {
