@@ -45,13 +45,13 @@ Reference:
 
 **"What CVEs since [date]?"** — Timeline with `prev-security`:
 
-1. Timeline Index → year → `latest-security-month`
-2. Follow `prev-security` links until reaching target date (skips non-security months)
+1. Timeline Index → year → `latest-security-month` (starts at most recent security month, skipping empty months)
+2. Follow `prev-security` links until the month is before target date (stop when `month < target`)
 3. Each month index has `_embedded.disclosures[]` with severity, title, affected versions, fix commits
 4. Filter by `affected_releases` if user specified versions (e.g., "for my .NET 8 and 9")
 5. Only fetch `cve.json` if detailed descriptions or package version ranges are needed
 
-This approach deduplicates CVEs affecting multiple versions — each CVE appears once per month, not once per affected version.
+The `latest-security-month` and `prev-security` links are pre-computed — trust them to skip non-security months efficiently. This approach also deduplicates CVEs affecting multiple versions.
 
 **"What patch should I install for .NET X?"** — Direct version lookup:
 
