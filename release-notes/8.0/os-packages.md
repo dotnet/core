@@ -1,4 +1,4 @@
-# .NET 10.0 Required Packages
+# .NET 8.0 Required Packages
 
 Various packages must be installed to run .NET apps and the .NET SDK on some operating systems. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
 
@@ -6,7 +6,7 @@ Various packages must be installed to run .NET apps and the .NET SDK on some ope
 
 | Id           | Name      | Required scenarios | Notes                                                       |
 | ------------ | --------- | ------------------ | ----------------------------------------------------------- |
-| [libc][0]    | C Library | All                | <https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md#linux-compatibility> ; <https://www.gnu.org/software/libc/libc.html> ; <https://musl.libc.org/> |
+| [libc][0]    | C Library | All                | <https://github.com/dotnet/core/blob/main/release-notes/8.0/supported-os.md#linux-compatibility> ; <https://www.gnu.org/software/libc/libc.html> ; <https://musl.libc.org/> |
 | [libgcc][1]  | GCC low-level runtime library | All | <https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html>    |
 | [ca-certificates][2] | CA Certificates | Https | <https://www.redhat.com/sysadmin/ca-certificates-cli>      |
 | [openssl][3] | OpenSSL   | Https ; Cryptography | Minimum required version 1.1.1 ; <https://www.openssl.org/> |
@@ -40,6 +40,20 @@ sudo apk add \
 ```
 
 ### Alpine 3.21
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
+
+### Alpine 3.20
 
 ```bash
 sudo apk add \
@@ -102,6 +116,20 @@ sudo dnf install -y \
 ```
 
 ### Fedora 42
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### Fedora 41
 
 ```bash
 sudo dnf install -y \
