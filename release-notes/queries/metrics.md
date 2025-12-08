@@ -109,7 +109,9 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 - **Property naming:** The hal-index uses `select(.supported)` with dot notation. The releases-index requires `select(.["support-phase"] == "active")` with bracket notation and string comparison.
 - **Query complexity:** The hal-index query is 30% shorter and more intuitive for someone unfamiliar with the schema.
 
-**Winner:** releases-index (**1.3x smaller** for basic version queries, but hal-index has better query ergonomics)
+**Winner:** Tie (see note below)
+
+**Note on URL length:** The hal-index currently uses long GitHub raw URLs (`https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/...` = 91 chars). The releases-index uses shorter CDN URLs (`https://builds.dotnet.microsoft.com/dotnet/release-metadata/...` = 64 chars). With equivalent short URLs (`https://builds.dotnet.microsoft.com/dotnet/release-notes/...`), the hal-index would be **6.3 KB**—actually smaller than releases-index (6.5 KB). The current size difference is entirely due to URL verbosity, not schema overhead. When the hal-index moves to the `builds.dotnet.microsoft.com` domain, the files will be equivalent in size.
 
 ### CVE Queries for Latest Security Patch
 
@@ -595,20 +597,63 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 
 **Winner:** hal-index only
 
+### OS Package Dependencies
+
+#### Query: "Generate an apt-get install command for .NET 10 dependencies on Ubuntu 24.04"
+
+| Schema | Files Required | Total Transfer |
+|--------|----------------|----------------|
+| hal-index | `index.json` → `10.0/index.json` → `10.0/manifest.json` → `10.0/os-packages.json` | **30 KB** |
+| releases-index | N/A | N/A (not available) |
+
+**hal-index:**
+
+```bash
+ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
+
+# Navigate to .NET 10 manifest, then os-packages.json
+MAJOR_URL=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "10.0") | ._links.self.href')
+MANIFEST_URL=$(curl -s "$MAJOR_URL" | jq -r '._links["release-manifest"].href')
+PACKAGES_URL=$(curl -s "$MANIFEST_URL" | jq -r '._links["os-packages-json"].href')
+
+# Generate install command for Ubuntu 24.04
+curl -s "$PACKAGES_URL" | jq -r '
+  .distributions[] | select(.name == "Ubuntu") |
+  .releases[] | select(.release == "24.04") |
+  "sudo apt-get update && sudo apt-get install -y " + ([.packages[].name] | join(" "))
+'
+# sudo apt-get update && sudo apt-get install -y libc6 libgcc-s1 ca-certificates libssl3t64 libstdc++6 libicu74 tzdata libgssapi-krb5-2
+```
+
+**releases-index:**
+
+```bash
+# Not available - releases-index does not include OS package dependency information
+```
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index does not include OS package dependency information.
+- **Ergonomics:** The hal-index `os-packages.json` includes distribution-specific package names, install commands, and version requirements. Package names vary by distribution (e.g., `libssl3t64` on Ubuntu 24.04 vs `libssl3` on Debian 12 vs `openssl-libs` on RHEL).
+- **Use case:** Essential for container builds, CI/CD pipelines, and deployment scripts that need to install .NET runtime dependencies on minimal base images.
+
+**Winner:** hal-index only
+
 ## Query Capability Comparison
 
 | Query Type | hal-index | releases-index | Ratio |
 |------------|-----------|----------------|-------|
-| List versions | ✅ | ✅ | 1.3x larger |
-| Version lifecycle (EOL, LTS) | ✅ | ✅ | 1.3x larger |
-| Latest patch per version | ✅ | ✅ | 23x smaller |
-| CVEs per version | ✅ | ✅ | 23x smaller |
+| List versions | ✅ | ✅ | Tie |
+| Version lifecycle (EOL, LTS) | ✅ | ✅ | Tie |
+| Latest patch per version | ✅ | ✅ | 31x smaller |
+| CVEs per version | ✅ | ✅ | 31x smaller |
 | CVEs per month | ✅ | ❌ | — |
 | CVE details (severity, fixes) | ✅ | ❌ | — |
 | Timeline navigation | ✅ | ❌ | — |
 | Security history navigation (`prev-security`) | ✅ | ❌ | — |
 | SDK-first navigation | ✅ | ❌ | — |
 | Breaking changes by category | ✅ | ❌ | hal-index only |
+| OS package dependencies | ✅ | ❌ | hal-index only |
 
 ## Cache Coherency
 
