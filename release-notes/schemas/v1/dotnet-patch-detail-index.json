@@ -1,0 +1,468 @@
+{
+  "description": "Detailed index for a specific patch release with CVE disclosure information",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "kind": {
+      "description": "Type of release document, always \u0027patch-index\u0027 for patch detail indexes",
+      "enum": [
+        "releases-index",
+        "major-version-index",
+        "patch-version-index",
+        "sdk-index",
+        "manifest",
+        "band",
+        "sdk-download",
+        "downloads-index",
+        "component-download",
+        "content",
+        "unknown",
+        "release-index",
+        "index",
+        "major-index",
+        "major-release-index",
+        "patch-index",
+        "patch-release-index",
+        "major-release",
+        "patch-release"
+      ]
+    },
+    "title": {
+      "description": "Concise title for the document",
+      "type": "string"
+    },
+    "description": {
+      "description": "Description of the patch release",
+      "type": "string"
+    },
+    "version": {
+      "description": "Patch version identifier (e.g., \u00278.0.1\u0027, \u00279.0.2\u0027)",
+      "type": "string"
+    },
+    "date": {
+      "description": "Release date when this patch became generally available",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "support_phase": {
+      "description": "Support phase at time of release (preview, go-live, active, maintenance, eol)",
+      "enum": [
+        "preview",
+        "go-live",
+        "active",
+        "maintenance",
+        "eol",
+        null
+      ]
+    },
+    "security": {
+      "description": "True if this release includes security fixes (CVEs); defaults to true for safety",
+      "type": "boolean"
+    },
+    "cve_count": {
+      "description": "Number of CVEs fixed in this release",
+      "type": "integer"
+    },
+    "cve_records": {
+      "description": "CVE identifiers fixed in this release (for quick enumeration)",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "sdk_release": {
+      "description": "Highest SDK version shipped with this runtime patch",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sdk_feature_bands": {
+      "description": "SDK feature band versions shipped with this runtime patch",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "_links": {
+      "description": "HAL\u002BJSON links for hypermedia navigation",
+      "type": "object",
+      "additionalProperties": {
+        "description": "HAL\u002BJSON hypermedia link providing navigation to related resources",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "href": {
+            "description": "Absolute URL to the linked resource",
+            "type": "string"
+          },
+          "title": {
+            "description": "Descriptive title for the linked resource",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "description": "MIME type of the linked resource. Omit for HAL\u002BJSON (default).",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "templated": {
+            "description": "Indicates that the href is a URI template (RFC 6570)",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "href"
+        ]
+      }
+    },
+    "_embedded": {
+      "description": "Embedded runtime, SDK, and CVE disclosure information",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "sdk_release": {
+          "description": "Highest SDK release as a feature band object (for quick lookup)",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "version": {
+              "description": "Latest SDK version in this feature band (e.g., \u00279.0.307\u0027)",
+              "type": "string"
+            },
+            "band": {
+              "description": "Feature band identifier (e.g., \u00279.0.3xx\u0027)",
+              "type": "string"
+            },
+            "date": {
+              "description": "Release date of the latest SDK in this feature band",
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "label": {
+              "description": "Descriptive label for the feature band",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "support_phase": {
+              "description": "Support phase (preview, go-live, active, maintenance, eol)",
+              "enum": [
+                "preview",
+                "go-live",
+                "active",
+                "maintenance",
+                "eol",
+                null
+              ]
+            },
+            "_links": {
+              "description": "HAL\u002BJSON links for navigation to this feature band\u0027s content",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/properties/_links/additionalProperties"
+              }
+            }
+          },
+          "required": [
+            "version",
+            "band",
+            "date",
+            "label",
+            "support_phase",
+            "_links"
+          ]
+        },
+        "sdk_feature_bands": {
+          "description": "All SDK feature bands shipped with this runtime patch",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "description": "Individual SDK feature band entry containing version metadata and navigation links",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "version": {
+                "description": "Latest SDK version in this feature band (e.g., \u00279.0.307\u0027)",
+                "type": "string"
+              },
+              "band": {
+                "description": "Feature band identifier (e.g., \u00279.0.3xx\u0027)",
+                "type": "string"
+              },
+              "date": {
+                "description": "Release date of the latest SDK in this feature band",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "label": {
+                "description": "Descriptive label for the feature band",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "support_phase": {
+                "description": "Support phase (preview, go-live, active, maintenance, eol)",
+                "enum": [
+                  "preview",
+                  "go-live",
+                  "active",
+                  "maintenance",
+                  "eol",
+                  null
+                ]
+              },
+              "_links": {
+                "$ref": "#/properties/_embedded/properties/sdk_release/properties/_links"
+              }
+            },
+            "required": [
+              "version",
+              "band",
+              "date",
+              "label",
+              "support_phase",
+              "_links"
+            ]
+          }
+        },
+        "disclosures": {
+          "description": "CVE security vulnerability disclosures for this patch release",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "description": "Simplified CVE record for embedding in indexes",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "id": {
+                "description": "CVE identifier (e.g., \u0027CVE-2025-12345\u0027)",
+                "type": "string"
+              },
+              "title": {
+                "description": "Title describing the vulnerability",
+                "type": "string"
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links to related CVE resources",
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "fixes": {
+                "description": "List of fix commit links that resolve this CVE",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "description": "Link to a Git commit with repository context",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "href": {
+                      "description": "URL to the commit diff",
+                      "type": "string"
+                    },
+                    "repo": {
+                      "description": "Repository name (e.g., \u0027aspnetcore\u0027, \u0027runtime\u0027)",
+                      "type": "string"
+                    },
+                    "branch": {
+                      "description": "Branch name (e.g., \u0027release/8.0\u0027)",
+                      "type": "string"
+                    },
+                    "title": {
+                      "description": "Descriptive title for the commit",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "release": {
+                      "description": ".NET release version (e.g., \u00278.0\u0027)",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "href",
+                    "repo",
+                    "branch"
+                  ]
+                }
+              },
+              "cvss_score": {
+                "description": "CVSS base score",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "cvss_severity": {
+                "description": "CVSS severity rating (e.g., \u0027HIGH\u0027, \u0027CRITICAL\u0027)",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "disclosure_date": {
+                "description": "Date when the CVE was publicly disclosed",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "affected_releases": {
+                "description": "List of .NET major versions affected by this CVE",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "affected_products": {
+                "description": "List of products affected by this CVE",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "affected_packages": {
+                "description": "List of packages affected by this CVE",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "platforms": {
+                "description": "Platforms affected by the CVE (e.g., \u0027linux\u0027, \u0027windows\u0027, \u0027all\u0027)",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "id",
+              "title"
+            ]
+          }
+        }
+      }
+    },
+    "_metadata": {
+      "description": "Metadata about when and how this document was generated",
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "schema_version": {
+          "description": "Version of the schema used for this document",
+          "type": "string"
+        },
+        "generated_on": {
+          "description": "ISO 8601 timestamp when this document was generated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_by": {
+          "description": "Name of the tool or script that generated this document",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "generated_on",
+        "generated_by"
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "title",
+    "description",
+    "version",
+    "date",
+    "support_phase",
+    "security",
+    "cve_count",
+    "cve_records"
+  ]
+}
