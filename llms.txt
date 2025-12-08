@@ -34,27 +34,30 @@ Reference:
 
 ## Do first
 
-1. Identify whether the user prompt is version-based or time-based
-   - "I have .NET X installed" or "what patches for version Y" → **version-based**
-   - "What happened in [month]" or "CVEs this year" → **time-based**
-   - "CVEs since [date] for my installed versions" → **version-based** (the date is context, versions are the key)
-2. Select the appropriate index (Releases or Timeline)
+1. Identify the query's primary dimension:
+   - **Single version**: "What's the latest patch for .NET 8?" → start at Releases Index, navigate to that version
+   - **Time range**: "What CVEs since September?" → start at Timeline Index, walk `prev-security`
+   - **Time range + version filter**: "CVEs since September for my .NET 8 and 9" → Timeline (deduplicates across versions), filter by `affected_releases`
+2. Most queries combine version and time — choose the entry point that minimizes fetches
 3. Confirm the scope so all necessary data can be fetched in a single pass
 
 ## Common queries
 
-**"What CVEs since [date]?"** — Use `prev-security` to walk backwards:
+**"What CVEs since [date]?"** — Timeline with `prev-security`:
 
 1. Timeline Index → year → `latest-security-month`
-2. Follow `prev-security` links until reaching target date
-3. Each month has embedded `_embedded.disclosures[]` with severity, title, affected versions
+2. Follow `prev-security` links until reaching target date (skips non-security months)
+3. Each month index has `_embedded.disclosures[]` with severity, title, affected versions, fix commits
+4. Filter by `affected_releases` if user specified versions (e.g., "for my .NET 8 and 9")
+5. Only fetch `cve.json` if detailed descriptions or package version ranges are needed
 
-**"What patches should I install?"** or **"CVEs since [date] for my versions"** — Version-based is more efficient when specific versions are known:
+This approach deduplicates CVEs affecting multiple versions — each CVE appears once per month, not once per affected version.
 
-1. Releases Index → each installed version's `latest-security` link
-2. Compare returned patch version to installed version
-3. Embedded disclosures show what's fixed, filter by `affected_releases` for the user's versions
-4. For hybrid queries (time + version), this approach is often faster than walking the timeline
+**"What patch should I install for .NET X?"** — Direct version lookup:
+
+1. Releases Index → version index (e.g., `8.0/index.json`)
+2. Check `latest_security` property for current security patch version
+3. If user needs CVE details, follow `_links["latest-security"]` to patch index
 
 **"Any critical CVEs this month?"** — Direct month lookup:
 
@@ -63,7 +66,7 @@ Reference:
 
 ## Releases Index
 
-For **version-based** prompts.
+Best for **single-version** queries (e.g., "latest patch for .NET 8").
 
 * `latest`, `latest_lts` — current supported versions
 * `_embedded.releases[]` — all major versions (newest first)
@@ -71,7 +74,7 @@ For **version-based** prompts.
 
 ## Timeline Index
 
-For **time-based** prompts.
+Best for **time-range** queries (e.g., "CVEs since September"), even with version filters.
 
 * `latest_year` — most recent year
 * `_embedded.years[]` → `_embedded.months[]`
@@ -120,31 +123,25 @@ From a **month index** (e.g., `timeline/2025/01/index.json`):
 
 ## CVE data
 
-CVE information is embedded at multiple levels:
+CVE information exists at two levels of detail:
 
-* **Patch index**: `cve_count`, `_embedded.disclosures[]` with severity, title, affected products
-* **Month index**: Same disclosure summaries grouped by time
-* **cve.json**: Full details (see below)
+**Month/patch index** (`_embedded.disclosures[]`) — sufficient for most queries:
 
-For security analysis, the embedded disclosures are usually sufficient. Fetch `cve.json` only when you need package-level vulnerability ranges or commit diffs.
+* `id`, `title`, `cvss_score`, `cvss_severity`
+* `affected_releases`, `affected_products`, `affected_packages`
+* `platforms`, `disclosure_date`
+* `fixes[]` with commit diff URLs
 
-Follow `_links["cve-json"]` from any security patch or month index to get:
+**cve.json** — fetch only for detailed analysis or advanced queries:
 
-* `disclosures[]` — full CVE records with `id`, `cvss`, `weakness`, `mitigation`
-* `products[]` — affected products with `fixed`, `min_vulnerable`, `max_vulnerable`, `commits[]`
-* `packages[]` — affected NuGet packages with version ranges
-* `commits{}` — commit details keyed by hash, each with `repo`, `branch`, `url` (`.diff` URL)
+* CVSS vector string, CWE weakness identifier
+* Full `description[]` text, `mitigation` guidance
+* `packages[]` with exact vulnerable/fixed version ranges
+* Pre-computed lookup dictionaries (`product_cves`, `severity_cves`, `package_cves`, etc.)
+
+**Efficiency tip:** The `_embedded` disclosures answer most queries (severity, affected versions, fix commits) without additional fetches. Only fetch `cve.json` for detailed vulnerability analysis or when you need the lookup dictionaries.
 
 **Fetch diffs immediately** — firewall or domain restrictions may block later access.
-
-Pre-computed query dictionaries (no iteration needed):
-
-* `product_cves` — `{"dotnet-runtime": ["CVE-..."], ...}`
-* `package_cves` — `{"Package.Name": ["CVE-..."], ...}`
-* `release_cves` — `{"9.0": ["CVE-..."], ...}`
-* `severity_cves` — `{"CRITICAL": [...], "HIGH": [...], ...}`
-* `cve_releases` — `{"CVE-...": ["8.0", "9.0"], ...}`
-* `cve_commits` — `{"CVE-...": ["abc123", ...], ...}`
 
 ## Breaking changes
 

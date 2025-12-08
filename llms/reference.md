@@ -29,7 +29,7 @@ Reference:
 | CVEs for version | `10.0/index.json` → `_embedded.releases[]` where `security: true` |
 | CVEs for patch | `10.0/10.0.1/index.json` → `_embedded.disclosures[]` |
 | CVEs by month | `timeline/index.json` → year → month → `_embedded.disclosures[]` |
-| **CVEs since date** | `timeline/index.json` → year → `latest-security-month` → follow `prev-security` until target date |
+| **CVEs since date** | `timeline/index.json` → year → `latest-security-month` → follow `prev-security` until target date → filter `_embedded.disclosures[]` by `affected_releases` |
 | Breaking changes | `10.0/index.json` → `_links["compatibility-json"].href` |
 | SDK downloads | `10.0/sdk/index.json` |
 | OS support | `10.0/manifest.json` → `_links["supported-os-json"].href` |
@@ -487,14 +487,17 @@ The CVE JSON file provides full details and pre-computed query dictionaries:
 
 ### Time-Centric (for date-range queries)
 
-**For "CVEs since [date]" queries**, use `prev-security` to walk backwards efficiently:
+**For "CVEs since [date]" queries** (with or without version filter), use `prev-security` to walk backwards:
 
 1. GET `timeline/index.json` → navigate to year → `_links["latest-security-month"].href`
 2. Follow `prev-security` links until reaching target date (skips non-security months automatically)
-3. Each month has `_embedded.disclosures[]` with severity, title, affected versions
-4. For package-level details: `_links["cve-json"].href`
-5. **Always ask**: "Would you like inline diffs for these fixes?"
-6. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
+3. Each month has `_embedded.disclosures[]` with severity, title, affected versions, fix commits
+4. Filter by `affected_releases` if user specified versions (e.g., "for my .NET 8 and 9")
+5. Only fetch `cve.json` if detailed descriptions or package version ranges are needed
+6. **Always ask**: "Would you like inline diffs for these fixes?"
+7. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
+
+Timeline is more efficient than version-based for "since [date]" queries because month indexes deduplicate CVEs affecting multiple versions (fetched once, not per-version).
 
 **For specific month queries**, navigate directly:
 
