@@ -502,7 +502,8 @@ jq -r '.breaks[] | select(.category == "sdk") | .references[] | select(.type == 
 | Link | Purpose |
 |------|---------|
 | `self` | Current document |
-| `prev` | Previous document (months, patches) |
+| `prev` | Previous in sequence (patches, months, years) |
+| `prev-security` | Previous security release in sequence |
 
 ### Version Navigation
 
@@ -511,15 +512,27 @@ jq -r '.breaks[] | select(.category == "sdk") | .references[] | select(.type == 
 | `latest` | Most recent release |
 | `latest-lts` | Most recent LTS release |
 | `latest-security` | Most recent security patch |
+| `latest-patch` | Latest patch for a major version |
 | `releases-index` | Root releases index |
+
+### Timeline Navigation
+
+| Link | Purpose |
+|------|---------|
+| `timeline-index` | Root timeline index |
+| `year-index` | Parent year index |
+| `latest-year` | Most recent year index |
+| `latest-month` | Most recent month index |
+| `latest-security-month` | Most recent month with security releases |
+| `release-month` | Timeline month for a patch |
 
 ### Cross-Links
 
 | Link | Purpose |
 |------|---------|
-| `timeline-index` | From releases to timeline |
 | `releases-index` | From timeline to releases |
-| `release-month` | From patch to timeline month |
+| `release-major` | Parent major version index |
+| `release-patch` | Patch index for an SDK release |
 
 ### Resources
 
@@ -529,6 +542,9 @@ jq -r '.breaks[] | select(.category == "sdk") | .references[] | select(.type == 
 | `release-manifest` | External resource links |
 | `cve-json` | Full CVE details |
 | `supported-os-json` | OS support matrix |
+| `downloads` | Downloads index for binaries |
+| `release-json` | Full release information |
+| `release-notes-markdown` | Release notes (Markdown) |
 
 ### Link Properties
 
@@ -536,6 +552,43 @@ jq -r '.breaks[] | select(.category == "sdk") | .references[] | select(.type == 
 - **`path`** — Relative path within repo
 - **`title`** — Human-readable description
 - **`type`** — Media type (`application/hal+json`, `application/json`)
+
+## Key Properties Reference
+
+Properties that appear frequently across index types:
+
+### Filtering
+
+| Property | Type | Purpose |
+|----------|------|---------|
+| `supported` | boolean | Version is currently receiving updates |
+| `security` | boolean | Release includes security fixes |
+| `release_type` | enum | `lts` or `sts` |
+| `support_phase` | enum | `active`, `maintenance`, `eol`, `preview`, `go-live` |
+
+### Versioning
+
+| Property | Type | Purpose |
+|----------|------|---------|
+| `latest` | string | Latest version in context |
+| `latest_lts` | string | Latest LTS version |
+| `latest_security` | string | Latest security patch version |
+| `latest_release` | string | Latest major version in time period |
+
+### Dates
+
+| Property | Type | Purpose |
+|----------|------|---------|
+| `date` | ISO 8601 | Release date |
+| `ga_date` | ISO 8601 | General Availability date |
+| `eol_date` | ISO 8601 | End of Life date |
+
+### CVE
+
+| Property | Type | Purpose |
+|----------|------|---------|
+| `cve_count` | integer | Number of CVEs in release |
+| `cve_records` | array | CVE identifiers (e.g., `["CVE-2025-21172"]`) |
 
 ## Response Templates
 
