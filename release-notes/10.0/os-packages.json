@@ -71,8 +71,8 @@
       ],
       "releases": [
         {
-          "name": "Alpine 3.20",
-          "release": "3.20",
+          "name": "Alpine 3.22",
+          "release": "3.22",
           "packages": [
             {
               "id": "libgcc",
@@ -109,8 +109,8 @@
           ]
         },
         {
-          "name": "Alpine 3.19",
-          "release": "3.19",
+          "name": "Alpine 3.21",
+          "release": "3.21",
           "packages": [
             {
               "id": "libgcc",
@@ -164,6 +164,44 @@
       ],
       "releases": [
         {
+          "name": "Debian 13 (Trixie)",
+          "release": "13",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "libc6"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc-s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libssl3t64"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu76"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "libgssapi-krb5-2"
+            }
+          ]
+        },
+        {
           "name": "Debian 12 (Bookworm)",
           "release": "12",
           "packages": [
@@ -214,8 +252,46 @@
       ],
       "releases": [
         {
-          "name": "Fedora 40",
-          "release": "40",
+          "name": "Fedora 43",
+          "release": "43",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "openssl-libs"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5-libs"
+            }
+          ]
+        },
+        {
+          "name": "Fedora 42",
+          "release": "42",
           "packages": [
             {
               "id": "libc",
@@ -280,6 +356,396 @@
       ]
     },
     {
+      "name": "openSUSE Leap",
+      "install-commands": [
+        {
+          "run-under-sudo": true,
+          "command-root": "zypper",
+          "command-parts": ["install", "-y", "{packageName}"]
+        }
+      ],
+      "releases": [
+        {
+          "name": "openSUSE Leap 16.0",
+          "release": "16.0",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc_s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libopenssl3"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "timezone"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        },
+        {
+          "name": "openSUSE Leap 15.6",
+          "release": "15.6",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc_s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libopenssl3"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "timezone"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SLES",
+      "install-commands": [
+        {
+          "run-under-sudo": true,
+          "command-root": "zypper",
+          "command-parts": ["install", "-y", "{packageName}"]
+        }
+      ],
+      "releases": [
+        {
+          "name": "SLES 16.0",
+          "release": "16.0",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc_s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libopenssl3"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "timezone"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        },
+        {
+          "name": "SLES 15.7",
+          "release": "15.7",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc_s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libopenssl3"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "timezone"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        },
+        {
+          "name": "SLES 15.6",
+          "release": "15.6",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc_s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libopenssl3"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "timezone"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Azure Linux",
+      "install-commands": [
+        {
+          "run-under-sudo": true,
+          "command-root": "tdnf",
+          "command-parts": ["install", "-y", "{packageName}"]
+        }
+      ],
+      "releases": [
+        {
+          "name": "Azure Linux 3.0",
+          "release": "3.0",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "openssl-libs"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "libicu",
+              "name": "icu"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CentOS Stream",
+      "install-commands": [
+        {
+          "run-under-sudo": true,
+          "command-root": "dnf",
+          "command-parts": ["install", "-y", "{packageName}"]
+        }
+      ],
+      "releases": [
+        {
+          "name": "CentOS Stream 10",
+          "release": "10",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "openssl-libs"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5-libs"
+            }
+          ]
+        },
+        {
+          "name": "CentOS Stream 9",
+          "release": "9",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "openssl-libs"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5-libs"
+            }
+          ]
+        },
+        {
+          "name": "CentOS Stream 8",
+          "release": "8",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "openssl-libs"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5-libs"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "RHEL",
       "install-commands": [
         {
@@ -290,8 +756,8 @@
       ],
       "releases": [
         {
-          "name": "RHEL 8",
-          "release": "8",
+          "name": "RHEL 10",
+          "release": "10",
           "packages": [
             {
               "id": "libc",
@@ -364,6 +830,44 @@
               "name": "krb5-libs"
             }
           ]
+        },
+        {
+          "name": "RHEL 8",
+          "release": "8",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "openssl-libs"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5-libs"
+            }
+          ]
         }
       ]
     },
@@ -383,8 +887,8 @@
       ],
       "releases": [
         {
-          "name": "Ubuntu 24.10 (Oracular Oriole)",
-          "release": "24.10",
+          "name": "Ubuntu 26.04 LTS (Resolute Raccoon)",
+          "release": "26.04",
           "packages": [
             {
               "id": "libc",
@@ -408,7 +912,45 @@
             },
             {
               "id": "libicu",
-              "name": "libicu74"
+              "name": "libicu76"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "libgssapi-krb5-2"
+            }
+          ]
+        },
+        {
+          "name": "Ubuntu 25.10 (Questing Quokka)",
+          "release": "25.10",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "libc6"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc-s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libssl3t64"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu76"
             },
             {
               "id": "tzdata",
