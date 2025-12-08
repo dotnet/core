@@ -22,13 +22,13 @@ The tables below show theoretical update frequency based on practice and design,
 
 | File | Size | Updates/Year | Description |
 |------|------|--------------|-------------|
-| `index.json` | 8 KB | ~1 | Root index with all major versions |
-| `10.0/index.json` | 14 KB | ~12 | All 10.0 patches (fewer releases so far) |
-| `9.0/index.json` | 28 KB | ~12 | All 9.0 patches with CVE references |
-| `8.0/index.json` | 33 KB | ~12 | All 8.0 patches with CVE references |
-| `timeline/index.json` | 8 KB | ~1 | Timeline root (all years) |
-| `timeline/2025/index.json` | 15 KB | ~12 | Year index (all months) |
-| `timeline/2024/07/index.json` | 9 KB | ~1 | Month index with embedded CVE summaries |
+| `index.json` | 7 KB | ~1 | Root index with all major versions |
+| `10.0/index.json` | 10 KB | ~12 | All 10.0 patches (fewer releases so far) |
+| `9.0/index.json` | 20 KB | ~12 | All 9.0 patches with CVE references |
+| `8.0/index.json` | 24 KB | ~12 | All 8.0 patches with CVE references |
+| `timeline/index.json` | 6 KB | ~1 | Timeline root (all years) |
+| `timeline/2025/index.json` | 13 KB | ~12 | Year index (all months) |
+| `timeline/2025/10/index.json` | 10 KB | ~1 | Month index with embedded CVE summaries |
 | `timeline/2025/01/cve.json` | 14 KB | ~1 | Full CVE details for a month |
 
 ### Releases-Index Files
@@ -36,9 +36,9 @@ The tables below show theoretical update frequency based on practice and design,
 | File | Size | Updates/Year | Description |
 |------|------|--------------|-------------|
 | `releases-index.json` | 6 KB | ~12 | Root index (version list only) |
-| `10.0/releases.json` | **433 KB** | ~12 | All 10.0 releases with full download metadata |
-| `9.0/releases.json` | **751 KB** | ~12 | All 9.0 releases with full download metadata |
-| `8.0/releases.json` | **1,214 KB** | ~12 | All 8.0 releases with full download metadata |
+| `10.0/releases.json` | **440 KB** | ~12 | All 10.0 releases with full download metadata |
+| `9.0/releases.json` | **769 KB** | ~12 | All 9.0 releases with full download metadata |
+| `8.0/releases.json` | **1,234 KB** | ~12 | All 8.0 releases with full download metadata |
 
 ### Measurements
 
@@ -77,7 +77,7 @@ These massive commits are difficult to review and analyze. Mixing markdown docum
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` | **8 KB** |
+| hal-index | `index.json` | **7 KB** |
 | releases-index | `releases-index.json` | **6 KB** |
 
 **hal-index:**
@@ -117,8 +117,8 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **51 KB** |
-| releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **40 KB** |
+| releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** |
 
 **hal-index:**
 
@@ -161,9 +161,9 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 - **Completeness:** ✅ Equal—both return the CVE identifiers
 - **Ergonomics:** The releases-index requires downloading a 1.2 MB file to extract 3 CVE IDs. The hal-index uses a dedicated `latest-security` link, avoiding iteration through all releases.
 - **Link syntax:** Counterintuitively, the deeper HAL structure `._links.self.href` is more ergonomic than `.["releases.json"]` because snake_case enables dot notation throughout. The releases-index embeds URLs directly in properties, but kebab-case naming forces bracket notation.
-- **Data efficiency:** hal-index is 23x smaller
+- **Data efficiency:** hal-index is 31x smaller
 
-**Winner:** hal-index (**23x smaller**)
+**Winner:** hal-index (**31x smaller**)
 
 ### High Severity CVEs with Details
 
@@ -171,8 +171,8 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **51 KB** |
-| releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** (cannot answer) |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **40 KB** |
+| releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** (cannot answer) |
 
 **hal-index:**
 
@@ -219,8 +219,8 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **~60 KB** |
-| releases-index | `releases-index.json` + `8.0/releases.json` | **1,220 KB** |
+| hal-index | `index.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **58 KB** |
+| releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** |
 
 **hal-index:**
 
@@ -274,7 +274,7 @@ curl -s "$RELEASES_URL" | jq -r '
 - **Ergonomics:** The hal-index uses `prev-security` links to skip non-security patches (SDK-only releases), directly navigating to security releases. The releases-index requires downloading a 1.2 MB file and filtering in memory.
 - **Navigation model:** The `prev-security` link enables efficient backward traversal through security history without fetching intermediate non-security releases.
 
-**Winner:** hal-index (**20x smaller**, with component information)
+**Winner:** hal-index (**21x smaller**, with component information)
 
 ### CVE Details for a Month
 
@@ -282,7 +282,7 @@ curl -s "$RELEASES_URL" | jq -r '
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **37 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **33 KB** |
 | releases-index | All releases.json (13 versions) | **8.2 MB** (cannot answer) |
 
 **hal-index:**
@@ -339,8 +339,8 @@ done | sort -u
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → 6 month indexes (via `prev-security`) | **~60 KB** |
-| releases-index | All version releases.json files | **2.4+ MB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → 6 month indexes (via `prev-security`) | **65 KB** |
+| releases-index | All version releases.json files | **2.4 MB** |
 
 **hal-index:**
 
@@ -396,7 +396,7 @@ done | sort -u | head -12
 - **Ergonomics:** The hal-index uses `prev-security` links to jump directly between security months, skipping non-security months entirely. The releases-index requires downloading all version files (2.4+ MB), filtering by security flag, and deduplicating results.
 - **Navigation model:** The `prev-security` link on timeline months enables efficient backward traversal through security history. The releases-index has no concept of time-based navigation.
 
-**Winner:** hal-index (**40x smaller**, with version and component information)
+**Winner:** hal-index (**37x smaller**, with version and component information)
 
 ### Critical CVE This Month
 
@@ -404,8 +404,8 @@ done | sort -u | head -12
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/11/index.json` | **28 KB** |
-| releases-index | `releases-index.json` + all supported releases.json | **2.4+ MB** (incomplete—no severity data) |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/11/index.json` | **24 KB** |
+| releases-index | `releases-index.json` + all supported releases.json | **2.4 MB** (incomplete—no severity data) |
 
 **hal-index:**
 
@@ -446,9 +446,9 @@ done | sort -u
 
 - **Completeness:** ❌ The releases-index cannot answer this query. Even if there were CVEs in November, the schema only provides CVE IDs and URLs—no severity information. You would need to fetch each CVE URL from cve.mitre.org and parse the CVSS score.
 - **Ergonomics:** The hal-index embeds `cvss_severity` directly in the disclosure records, enabling single-query filtering for CRITICAL vulnerabilities.
-- **Use case:** This is a common security operations query ("Do I need to patch urgently?"). The hal-index answers it in 28 KB; the releases-index cannot answer it at all.
+- **Use case:** This is a common security operations query ("Do I need to patch urgently?"). The hal-index answers it in 24 KB; the releases-index cannot answer it at all.
 
-**Winner:** hal-index (**88x smaller**, and releases-index cannot answer this query—CVE severity is not available)
+**Winner:** hal-index (**100x smaller**, and releases-index cannot answer this query—CVE severity is not available)
 
 ### Breaking Changes Summary
 
@@ -456,7 +456,7 @@ done | sort -u
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **162 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **156 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -503,7 +503,7 @@ curl -s "$BC_HREF" | jq -r '[.breaks[].category] | group_by(.) | map({category: 
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **162 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **156 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -552,7 +552,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **162 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **156 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -642,10 +642,10 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 
 | Metric | hal-index | releases-index |
 |--------|-------------|----------------|
-| Basic version queries | 8 KB | 6 KB |
-| CVE queries (latest security patch) | 51 KB | 1,220 KB |
-| Last 3 security releases (version) | ~60 KB | 1,220 KB |
-| Last 6 security months (timeline) | ~60 KB | 2.4 MB |
+| Basic version queries | 7 KB | 6 KB |
+| CVE queries (latest security patch) | 40 KB | 1,240 KB |
+| Last 3 security releases (version) | 58 KB | 1,240 KB |
+| Last 6 security months (timeline) | 65 KB | 2.4 MB |
 | Cache coherency | ✅ Atomic | ❌ TTL mismatch risk |
 | Query syntax | snake_case (dot notation) | kebab-case (bracket notation) |
 | Link traversal | `._links.self.href` | `.["releases.json"]` |
