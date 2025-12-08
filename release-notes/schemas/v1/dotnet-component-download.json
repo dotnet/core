@@ -43,7 +43,10 @@
     },
     "description": {
       "description": "Description of the component download",
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "feature_band": {
       "description": "Feature band version for SDK files (e.g., \u00278.0.4xx\u0027)",
@@ -157,40 +160,12 @@
       "required": [
         "downloads"
       ]
-    },
-    "_metadata": {
-      "description": "Metadata about when and how this document was generated",
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "schema_version": {
-          "description": "Version of the schema used for this document",
-          "type": "string"
-        },
-        "generated_on": {
-          "description": "ISO 8601 timestamp when this document was generated",
-          "type": "string",
-          "format": "date-time"
-        },
-        "generated_by": {
-          "description": "Name of the tool or script that generated this document",
-          "type": "string"
-        }
-      },
-      "required": [
-        "schema_version",
-        "generated_on",
-        "generated_by"
-      ]
     }
   },
   "required": [
     "kind",
     "component",
     "version",
-    "title",
-    "description"
+    "title"
   ]
 }
