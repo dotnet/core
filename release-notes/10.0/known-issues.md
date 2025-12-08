@@ -29,7 +29,7 @@ The behavior will be **fixed in the .NET 10 preview 5** release. The workaround 
 
 ## `global.json` is used for test runner selection instead of `dotnet.config`
 
-In .NET 10 versions up to RC1, we supported the use of a `dotnet.config` file, an INI-formatted file that is currently used only to set the test runner to use with `dotnet test`. Setting this is required in order to use the new Microsoft.Testing.Platform. In 10.0.100 RC2 and beyond, the use of this file is removed in favor of the pre-existing `dotnet.config` file. 
+In .NET 10 versions up to RC1, we supported the use of a `dotnet.config` file, an INI-formatted file that is currently used only to set the test runner to use with `dotnet test`. Setting this is required in order to use the new Microsoft.Testing.Platform. In 10.0.100 RC2 and beyond, the use of this file is removed in favor of the pre-existing `dotnet.config` file.
 
 Instead of using `dotnet.config` to specify a runner:
 
@@ -84,3 +84,4 @@ SDK and runtime installers for macOS install a `createdump` binary that lacks th
 .NET 10.0 packages for Debian 13 (Trixie) are functional and install successfully. However, during installation, users may see multiple warnings like `W: Unknown TAR header type 120`. These warnings are cosmetic and do not affect the functionality of the installed .NET SDK or runtime. We are actively working to resolve these warnings in a future update.
 
 For installation instructions, see [Install .NET on Debian](https://learn.microsoft.com/dotnet/core/install/linux-debian).
+
