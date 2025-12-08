@@ -149,6 +149,13 @@
                 "description": "Major version identifier (e.g., \u00278.0\u0027, \u00279.0\u0027)",
                 "type": "string"
               },
+              "target_framework": {
+                "description": "Target framework moniker for this version (e.g., \u0027net10.0\u0027, \u0027netcoreapp3.1\u0027)",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "release_type": {
                 "description": "Release type: lts (Long-Term Support) or sts (Standard-Term Support)",
                 "enum": [
