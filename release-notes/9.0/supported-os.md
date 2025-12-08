@@ -1,6 +1,6 @@
 # .NET 9.0 - Supported OS versions
 
-Last Updated: 2025/12/07; Support phase: Active
+Last Updated: 2025/11/19; Support phase: Active
 
 [.NET 9.0](README.md) is an [STS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 

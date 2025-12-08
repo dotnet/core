@@ -1,6 +1,6 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2025/12/07; Support phase: Active
+Last Updated: 2025/10/28; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
