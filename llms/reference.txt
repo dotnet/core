@@ -76,6 +76,62 @@ The graph provides `.diff` URLs by default in `commits[hash].url`.
 5. For migration guidance: check `required_action` field
 6. For raw documentation: filter `references[]` by `type: "documentation-source"`
 
+## Discovering Resource Schema
+
+HAL resources are self-describing. If you're unsure what's available, inspect the resource:
+
+```bash
+# Quick: list available link relations
+jq '._links | keys[]'
+
+# Full: discover properties, links, and embedded resources
+jq '{
+  properties: [to_entries[] | select(.key | startswith("_") | not) | "\(.key) (\(.value | type))"],
+  links: [._links | keys[]],
+  embedded: [._embedded | keys[]]
+}'
+```
+
+Example output for a patch index:
+```json
+{
+  "properties": ["kind (string)", "version (string)", "date (string)", "security (boolean)", "cve_count (number)", "cve_records (array)"],
+  "links": ["cve-json", "prev", "prev-security", "release-major", "release-month", "self"],
+  "embedded": ["disclosures", "sdk_feature_bands", "sdk_release"]
+}
+```
+
+### Link Relations by Resource Type
+
+**Root index** (`index.json`):
+- `latest`, `latest-lts` — jump to current releases
+- `timeline-index` — switch to time-based navigation
+- `llms-txt` — LLM quick reference
+
+**Major version** (`10.0/index.json`):
+- `latest`, `latest-security` — jump to patches
+- `compatibility-json` — breaking changes
+- `downloads`, `latest-sdk` — SDK information
+- `target-frameworks-json` — TFM data
+
+**Patch release** (`10.0/10.0.1/index.json`):
+- `prev`, `prev-security` — backward navigation
+- `cve-json`, `cve-markdown` — CVE details
+- `release-major`, `release-month` — context navigation
+
+**Manifest** (`10.0/manifest.json`):
+- `os-packages-json`, `supported-os-json` — OS dependencies
+- `*-rendered` suffixes — GitHub HTML views
+
+### Naming Conventions
+
+Link relation names are self-documenting:
+- `-json` suffix → machine-readable data file
+- `-markdown` suffix → raw markdown source
+- `-rendered` suffix → HTML view on GitHub
+- `prev-` prefix → backward navigation
+- `latest-` prefix → jump to most recent
+
 ## Schema Examples
 
 ### Releases Index (`index.json`)
