@@ -54,6 +54,66 @@ sudo apk add \
     tzdata
 ```
 
+## Azure Linux
+
+### Azure Linux 3.0
+
+```bash
+sudo tdnf install -y \
+    ca-certificates \
+    glibc \
+    icu \
+    krb5 \
+    libgcc \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+## CentOS Stream
+
+### CentOS Stream 10
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### CentOS Stream 9
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### CentOS Stream 8
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
 ## Debian
 
 ### Debian 13 (Trixie)
@@ -156,110 +216,6 @@ sudo zypper install -y \
     timezone
 ```
 
-## SLES
-
-### SLES 16.0
-
-```bash
-sudo zypper install -y \
-    ca-certificates \
-    glibc \
-    krb5 \
-    libgcc_s1 \
-    libicu \
-    libopenssl3 \
-    libstdc++6 \
-    timezone
-```
-
-### SLES 15.7
-
-```bash
-sudo zypper install -y \
-    ca-certificates \
-    glibc \
-    krb5 \
-    libgcc_s1 \
-    libicu \
-    libopenssl3 \
-    libstdc++6 \
-    timezone
-```
-
-### SLES 15.6
-
-```bash
-sudo zypper install -y \
-    ca-certificates \
-    glibc \
-    krb5 \
-    libgcc_s1 \
-    libicu \
-    libopenssl3 \
-    libstdc++6 \
-    timezone
-```
-
-## Azure Linux
-
-### Azure Linux 3.0
-
-```bash
-sudo tdnf install -y \
-    ca-certificates \
-    glibc \
-    icu \
-    krb5 \
-    libgcc \
-    libstdc++ \
-    openssl-libs \
-    tzdata
-```
-
-## CentOS Stream
-
-### CentOS Stream 10
-
-```bash
-sudo dnf install -y \
-    ca-certificates \
-    glibc \
-    krb5-libs \
-    libgcc \
-    libicu \
-    libstdc++ \
-    openssl-libs \
-    tzdata
-```
-
-### CentOS Stream 9
-
-```bash
-sudo dnf install -y \
-    ca-certificates \
-    glibc \
-    krb5-libs \
-    libgcc \
-    libicu \
-    libstdc++ \
-    openssl-libs \
-    tzdata
-```
-
-### CentOS Stream 8
-
-```bash
-sudo dnf install -y \
-    ca-certificates \
-    glibc \
-    krb5-libs \
-    libgcc \
-    libicu \
-    libstdc++ \
-    openssl-libs \
-    tzdata
-```
-
 ## RHEL
 
 ### RHEL 10
@@ -302,6 +258,50 @@ sudo dnf install -y \
     libstdc++ \
     openssl-libs \
     tzdata
+```
+
+## SLES
+
+### SLES 16.0
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
+```
+
+### SLES 15.7
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
+```
+
+### SLES 15.6
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
 ```
 
 ## Ubuntu
