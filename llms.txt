@@ -35,8 +35,31 @@ Reference:
 ## Do first
 
 1. Identify whether the user prompt is version-based or time-based
+   - "I have .NET X installed" or "what patches for version Y" → **version-based**
+   - "What happened in [month]" or "CVEs this year" → **time-based**
+   - "CVEs since [date] for my installed versions" → **version-based** (the date is context, versions are the key)
 2. Select the appropriate index (Releases or Timeline)
 3. Confirm the scope so all necessary data can be fetched in a single pass
+
+## Common queries
+
+**"What CVEs since [date]?"** — Use `prev-security` to walk backwards:
+
+1. Timeline Index → year → `latest-security-month`
+2. Follow `prev-security` links until reaching target date
+3. Each month has embedded `_embedded.disclosures[]` with severity, title, affected versions
+
+**"What patches should I install?"** or **"CVEs since [date] for my versions"** — Version-based is more efficient when specific versions are known:
+
+1. Releases Index → each installed version's `latest-security` link
+2. Compare returned patch version to installed version
+3. Embedded disclosures show what's fixed, filter by `affected_releases` for the user's versions
+4. For hybrid queries (time + version), this approach is often faster than walking the timeline
+
+**"Any critical CVEs this month?"** — Direct month lookup:
+
+1. Timeline Index → current year → current month
+2. Filter `_embedded.disclosures[]` by `cvss_severity == "CRITICAL"`
 
 ## Releases Index
 
