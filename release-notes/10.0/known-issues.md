@@ -84,4 +84,3 @@ SDK and runtime installers for macOS install a `createdump` binary that lacks th
 .NET 10.0 packages for Debian 13 (Trixie) are functional and install successfully. However, during installation, users may see multiple warnings like `W: Unknown TAR header type 120`. These warnings are cosmetic and do not affect the functionality of the installed .NET SDK or runtime. We are actively working to resolve these warnings in a future update.
 
 For installation instructions, see [Install .NET on Debian](https://learn.microsoft.com/dotnet/core/install/linux-debian).
-
