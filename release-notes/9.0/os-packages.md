@@ -14,6 +14,7 @@ Various packages must be installed to run .NET apps and the .NET SDK on some ope
 | [libicu][5]  | ICU       | Globalization      | <https://icu.unicode.org> ; <https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md> |
 | [tzdata][6]  | tz database | Globalization    | <https://data.iana.org/time-zones/tz-link.html>             |
 | [krb5][7]    | Kerberos  | Kerberos           | <https://web.mit.edu/kerberos>                              |
+
 [0]: https://pkgs.org/search/?q=libc
 [1]: https://pkgs.org/search/?q=libgcc
 [2]: https://pkgs.org/search/?q=ca-certificates
