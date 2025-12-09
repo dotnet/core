@@ -45,13 +45,28 @@ Reference:
 
 **"What CVEs since [date]?"** — Timeline with `prev-security`:
 
-1. Timeline Index → year → `latest-security-month` (starts at most recent security month, skipping empty months)
-2. Follow `prev-security` links until the month is before target date (stop when `month < target`)
+1. Timeline Index → year → `latest-security-month`
+2. Follow `prev-security` links until month is before target date
 3. Each month index has `_embedded.disclosures[]` with severity, title, affected versions, fix commits
-4. Filter by `affected_releases` if user specified versions (e.g., "for my .NET 8 and 9")
-5. Only fetch `cve.json` if detailed descriptions or package version ranges are needed
+4. Filter by `affected_releases` if user specified versions
+5. Only fetch `cve.json` for CVSS vectors, CWE, or package version ranges
 
-The `latest-security-month` and `prev-security` links are pre-computed — trust them to skip non-security months efficiently. This approach also deduplicates CVEs affecting multiple versions.
+The `prev-security` links are pre-computed and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
+
+Example traversal for "CVEs since September 2024":
+
+```text
+Timeline Index → 2025/index.json
+  → latest-security-month → 2025/10 ✓
+  → prev-security → 2025/06 ✓
+  → prev-security → 2025/04 ✓
+  → prev-security → 2025/01 ✓
+  → prev-security → 2024/11 ✓  (crosses year boundary)
+  → prev-security → 2024/10 ✓
+  → prev-security → 2024/08 (before Sept, STOP)
+```
+
+**Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually. The `prev-security` chain already encodes this — follow it instead.
 
 **"What patch should I install for .NET X?"** — Direct version lookup:
 
@@ -63,6 +78,14 @@ The `latest-security-month` and `prev-security` links are pre-computed — trust
 
 1. Timeline Index → current year → current month
 2. Filter `_embedded.disclosures[]` by `cvss_severity == "CRITICAL"`
+
+**Expected fetch counts** (for self-assessment):
+
+* "Latest patch for .NET X": 2–3 fetches
+* "CVEs since [date]": 1 + number of security months in range
+* "CVEs for specific patch": 2–3 fetches
+
+If your count significantly exceeds these, you may be navigating inefficiently.
 
 ## Releases Index
 
