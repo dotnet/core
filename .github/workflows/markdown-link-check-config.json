@@ -2,7 +2,28 @@
   "ignorePatterns": [
     {
       "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^release-notes/templates/"
+    },
+    {
+      "pattern": "dotnet\\.microsoft\\.com/download/dotnet/10\\.0"
+    },
+    {
+      "pattern": "github\\.com/.*/releases/tag/10\\.0"
+    },
+    {
+      "pattern": "github\\.com/.*/compare/.*10\\.0"
+    },
+    {
+      "pattern": "builds\\.dotnet\\.microsoft\\.com/.*10\\.0"
+    },
+    {
+      "pattern": "devblogs\\.microsoft\\.com/.*servicing-updates"
     }
   ],
-  "aliveStatusCodes": [429, 200]
+  "aliveStatusCodes": [
+    429,
+    200
+  ]
 }

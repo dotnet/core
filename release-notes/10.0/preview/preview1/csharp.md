@@ -25,11 +25,11 @@ The argument to a `nameof` expression can be an unbound generic type, like `List
 
 C# 14 introduces first-class support for `Span<T>` and `ReadOnlySpan<T>` in the language. `Span<T>` and `ReadOnlySpan<T>` are used in many key ways in C# and the runtime. This support involves new implicit conversions allowing more natural programming with these types.
 
-You can learn more in the article on [built-in types](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/built-in-types.md) in the C# guide.
+You can learn more in the article on [built-in types](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/built-in-types) in the C# guide.
 
 ## Modifiers on simple lambda parameters
 
-You can add parameter modifiers, such as `ref`, `in`, or `out` to lambda expressions without specifying the type of the parameters. This makes it easier for you to use these modifiers. You can learn more in the article on [lambda expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions.md#input-parameters-of-a-lambda-expression) in the C# language reference.
+You can add parameter modifiers, such as `ref`, `in`, or `out` to lambda expressions without specifying the type of the parameters. This makes it easier for you to use these modifiers. You can learn more in the article on [lambda expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions#input-parameters-of-a-lambda-expression) in the C# language reference.
 
 ## Experimental feature: String literals in data section
 

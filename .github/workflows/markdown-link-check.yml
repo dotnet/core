@@ -5,9 +5,12 @@ on:
     paths:
       - '**.md'
   pull_request:
-    branches: [main]
+    branches: '**'
     paths:
       - '**.md'
+
+permissions:
+  contents: read
 
 jobs:
   markdown-link-check:

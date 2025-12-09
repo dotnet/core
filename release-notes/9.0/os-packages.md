@@ -1,23 +1,19 @@
-# .NET 9 Required Packages
+# .NET 9.0 Required Packages
 
-Various packages must be installed to run .NET apps and the .NET SDK. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
-
-This file is generated from [os-packages.json](os-packages.json).
+Various packages must be installed to run .NET apps and the .NET SDK on some operating systems. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
 
 ## Package Overview
 
-The following table lists required packages, including the scenarios by which they are needed.
-
-Id              | Name      | Required scenarios | Notes
---------------- | --------- | ------------- | ------------------------------
-[libc][0]       | C Library | All           | <https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#linux-compatibility>;<https://www.gnu.org/software/libc/libc.html>;<https://musl.libc.org/>
-[libgcc][1]     | GCC low-level runtime library | All | <https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html>
-[ca-certificates][2] | CA Certificates | Https | <https://www.redhat.com/sysadmin/ca-certificates-cli>
-[openssl][3]    | OpenSSL   | Https;Cryptography | Minimum required version 1.1.1;<https://www.openssl.org/>
-[libstdc++][4]  | C++ Library | Runtime     | <https://gcc.gnu.org/onlinedocs/libstdc++/>
-[libicu][5]     | ICU       | Globalization | <https://icu.unicode.org>;<https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md>
-[tzdata][6]     | tz database | Globalization | <https://data.iana.org/time-zones/tz-link.html>
-[krb5][7]       | Kerberos  | Kerberos      | <https://web.mit.edu/kerberos>
+| Id           | Name      | Required scenarios | Notes                                                       |
+| ------------ | --------- | ------------------ | ----------------------------------------------------------- |
+| [libc][0]    | C Library | All                | <https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#linux-compatibility> ; <https://www.gnu.org/software/libc/libc.html> ; <https://musl.libc.org/> |
+| [libgcc][1]  | GCC low-level runtime library | All | <https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html>    |
+| [ca-certificates][2] | CA Certificates | Https | <https://www.redhat.com/sysadmin/ca-certificates-cli>      |
+| [openssl][3] | OpenSSL   | Https ; Cryptography | Minimum required version 1.1.1 ; <https://www.openssl.org/> |
+| [libstdc++][4] | C++ Library | Runtime        | <https://gcc.gnu.org/onlinedocs/libstdc++/>                 |
+| [libicu][5]  | ICU       | Globalization      | <https://icu.unicode.org> ; <https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md> |
+| [tzdata][6]  | tz database | Globalization    | <https://data.iana.org/time-zones/tz-link.html>             |
+| [krb5][7]    | Kerberos  | Kerberos           | <https://web.mit.edu/kerberos>                              |
 
 [0]: https://pkgs.org/search/?q=libc
 [1]: https://pkgs.org/search/?q=libgcc
@@ -29,6 +25,34 @@ Id              | Name      | Required scenarios | Notes
 [7]: https://pkgs.org/search/?q=krb5
 
 ## Alpine
+
+### Alpine 3.22
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
+
+### Alpine 3.21
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
 
 ### Alpine 3.20
 
@@ -44,21 +68,82 @@ sudo apk add \
     tzdata
 ```
 
-### Alpine 3.19
+## Azure Linux
+
+### Azure Linux 3.0
 
 ```bash
-sudo apk add \
+sudo tdnf install -y \
     ca-certificates \
-    icu-data-full \
-    icu-libs \
+    glibc \
+    icu \
     krb5 \
     libgcc \
-    libssl3 \
     libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+## CentOS Stream
+
+### CentOS Stream 10
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### CentOS Stream 9
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### CentOS Stream 8
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
     tzdata
 ```
 
 ## Debian
+
+### Debian 13 (Trixie)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y \
+    ca-certificates \
+    libc6 \
+    libgcc-s1 \
+    libgssapi-krb5-2 \
+    libicu76 \
+    libssl3t64 \
+    libstdc++6 \
+    tzdata
+```
 
 ### Debian 12 (Bookworm)
 
@@ -77,7 +162,35 @@ sudo apt-get install -y \
 
 ## Fedora
 
-### Fedora 40
+### Fedora 43
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### Fedora 42
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### Fedora 41
 
 ```bash
 sudo dnf install -y \
@@ -101,9 +214,39 @@ sudo pkg install -A \
     krb5
 ```
 
+## openSUSE Leap
+
+### openSUSE Leap 16.0
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
+```
+
+### openSUSE Leap 15.6
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
+```
+
 ## RHEL
 
-### RHEL 8
+### RHEL 10
 
 ```bash
 sudo dnf install -y \
@@ -131,9 +274,67 @@ sudo dnf install -y \
     tzdata
 ```
 
+### RHEL 8
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+## SLES
+
+### SLES 16.0
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
+```
+
+### SLES 15.7
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
+```
+
+### SLES 15.6
+
+```bash
+sudo zypper install -y \
+    ca-certificates \
+    glibc \
+    krb5 \
+    libgcc_s1 \
+    libicu \
+    libopenssl3 \
+    libstdc++6 \
+    timezone
+```
+
 ## Ubuntu
 
-### Ubuntu 24.10 (Oracular Oriole)
+### Ubuntu 26.04 LTS (Resolute Raccoon)
 
 ```bash
 sudo apt-get update && \
@@ -142,7 +343,22 @@ sudo apt-get install -y \
     libc6 \
     libgcc-s1 \
     libgssapi-krb5-2 \
-    libicu74 \
+    libicu76 \
+    libssl3t64 \
+    libstdc++6 \
+    tzdata
+```
+
+### Ubuntu 25.10 (Questing Quokka)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y \
+    ca-certificates \
+    libc6 \
+    libgcc-s1 \
+    libgssapi-krb5-2 \
+    libicu76 \
     libssl3t64 \
     libstdc++6 \
     tzdata
@@ -177,3 +393,7 @@ sudo apt-get install -y \
     libstdc++6 \
     tzdata
 ```
+
+## About
+
+This file is generated from [os-packages.json](os-packages.json).

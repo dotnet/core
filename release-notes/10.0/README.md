@@ -1,5 +1,135 @@
 # .NET 10
 
-.NET 10 is a [Long Term Support (LTS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for 36 months.
+.NET 10 is a [Long Term Support (LTS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for three years from November 11, 2025 to November 14, 2028.
 
-It is currently in development and not supported. .NET 10 is expected to be released in late 2025.
+- [Downloads](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
+- [Containers](https://hub.docker.com/_/microsoft-dotnet)
+- [Supported OSes](supported-os.md)
+- [OS packages](./os-packages.md)
+- [Known Issues](known-issues.md)
+- [Installation instructions](install.md)
+
+## Release notes
+
+| Date | Release |
+| :-- | :-- |
+| 2025/12/09 | [10.0.1](./10.0.1/10.0.1.md) |
+| 2025/11/11 | [10.0.0](./10.0.0/10.0.0.md) |
+| 2025/10/14 | [10.0.0 RC 2](preview/rc2/README.md) |
+| 2025/09/09 | [10.0.0 RC 1](preview/rc1/README.md) |
+| 2025/08/12 | [10.0.0 Preview 7](preview/preview7/README.md) |
+| 2025/07/15 | [10.0.0 Preview 6](preview/preview6/README.md) |
+| 2025/06/10 | [10.0.0 Preview 5](preview/preview5/README.md) |
+| 2025/05/10 | [10.0.0 Preview 4](preview/preview4/README.md) |
+| 2025/04/10 | [10.0.0 Preview 3](preview/preview3/README.md) |
+| 2025/03/18 | [10.0.0 Preview 2](preview/preview2/README.md) |
+| 2025/02/25 | [10.0.0 Preview 1](preview/preview1/README.md) |
+
+### .NET Libraries
+
+- [What's new in .NET 10 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview#net-libraries)
+- [RC 1](preview/rc1/libraries.md)
+- [Preview 7](preview/preview7/libraries.md)
+- [Preview 6](preview/preview6/libraries.md)
+- [Preview 5](preview/preview5/libraries.md)
+- [Preview 4](preview/preview4/libraries.md)
+- [Preview 3](preview/preview3/libraries.md)
+- [Preview 2](preview/preview2/libraries.md)
+- [Preview 1](preview/preview1/libraries.md)
+
+### .NET Runtime
+
+- [What's new in the .NET 10 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/runtime)
+- [RC 1](preview/rc1/runtime.md)
+- [Preview 7](preview/preview7/runtime.md)
+- [Preview 6](preview/preview6/runtime.md)
+- [Preview 5](preview/preview5/runtime.md)
+- [Preview 4](preview/preview4/runtime.md)
+- [Preview 3](preview/preview3/runtime.md)
+- [Preview 2](preview/preview2/runtime.md)
+- [Preview 1](preview/preview1/runtime.md)
+
+### .NET SDK
+
+- [What's new in the SDK for .NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/sdk)
+- [RC 1](preview/rc1/sdk.md)
+- [Preview 7](preview/preview7/sdk.md)
+- [Preview 6](preview/preview6/sdk.md)
+- [Preview 5](preview/preview5/sdk.md)
+- [Preview 4](preview/preview4/sdk.md)
+- [Preview 3](preview/preview3/sdk.md)
+- [Preview 2](preview/preview2/sdk.md)
+- [Preview 1](preview/preview1/sdk.md)
+
+### C\#
+
+- [What's new in C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14)
+- [RC 1](preview/rc1/csharp.md)
+- [Preview 7](preview/preview7/csharp.md)
+- [Preview 6](preview/preview6/csharp.md)
+- [Preview 5](preview/preview5/csharp.md)
+- [Preview 4](preview/preview4/csharp.md)
+- [Preview 3](preview/preview3/csharp.md)
+- [Preview 2](preview/preview2/csharp.md)
+- [Preview 1](preview/preview1/csharp.md)
+
+### ASP.NET Core
+
+- [What's new in ASP.NET Core 10.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-10.0)
+- [RC 1](preview/rc1/aspnetcore.md)
+- [Preview 7](preview/preview7/aspnetcore.md)
+- [Preview 6](preview/preview6/aspnetcore.md)
+- [Preview 5](preview/preview5/aspnetcore.md)
+- [Preview 4](preview/preview4/aspnetcore.md)
+- [Preview 3](preview/preview3/aspnetcore.md)
+- [Preview 2](preview/preview2/aspnetcore.md)
+- [Preview 1](preview/preview1/aspnetcore.md)
+
+### .NET MAUI
+
+- [What's new in .NET MAUI for .NET 10](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-10)
+- [RC 1](preview/rc1/dotnetmaui.md)
+- [Preview 7](preview/preview7/dotnetmaui.md)
+- [Preview 6](preview/preview6/dotnetmaui.md)
+- [Preview 5](preview/preview5/dotnetmaui.md)
+- [Preview 4](preview/preview4/dotnetmaui.md)
+- [Preview 3](preview/preview3/dotnetmaui.md)
+- [Preview 2](preview/preview2/dotnetmaui.md)
+- [Preview 1](preview/preview1/dotnetmaui.md)
+
+### Entity Framework Core
+
+- [What's new in EF Core 10](https://learn.microsoft.com/ef/core/what-is-new/ef-core-10.0/whatsnew)
+- [RC 1](preview/rc1/efcore.md)
+- [Preview 7](preview/preview7/efcore.md)
+- [Preview 6](preview/preview6/efcore.md)
+- [Preview 5](preview/preview5/efcore.md)
+- [Preview 4](preview/preview4/efcore.md)
+- [Preview 3](preview/preview3/efcore.md)
+- [Preview 2](preview/preview2/efcore.md)
+- [Preview 1](preview/preview1/efcore.md)
+
+### Windows Forms
+
+- [What's new in Windows Forms for .NET 10](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net100)
+- [RC 1](preview/rc1/winforms.md)
+- [Preview 7](preview/preview7/winforms.md)
+- [Preview 6](preview/preview6/winforms.md)
+- [Preview 5](preview/preview5/winforms.md)
+- [Preview 4](preview/preview4/winforms.md)
+- [Preview 3](preview/preview3/winforms.md)
+- [Preview 2](preview/preview2/winforms.md)
+- [Preview 1](preview/preview1/winforms.md)
+
+### Windows Presentation Foundation (WPF)
+
+- [What's new in WPF for .NET 10](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net100)
+- [RC 1](preview/rc1/wpf.md)
+- [Preview 7](preview/preview7/wpf.md)
+- [Preview 6](preview/preview6/wpf.md)
+- [Preview 5](preview/preview5/wpf.md)
+- [Preview 4](preview/preview4/wpf.md)
+- [Preview 3](preview/preview3/wpf.md)
+- [Preview 2](preview/preview2/wpf.md)
+- [Preview 1](preview/preview1/wpf.md)

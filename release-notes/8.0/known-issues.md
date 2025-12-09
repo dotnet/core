@@ -2,6 +2,14 @@
 
 You may encounter the following known issues, which may include workarounds, mitigations, or expected resolution timeframes.
 
+## ASP.NET
+
+### [8.0.17] Breaking Change: UseForwardedHeaders middleware now always checks ForwardedHeadersOptions.KnownNetworks and ForwardedHeadersOptions.KnownProxies
+
+`UseForwardedHeaders` middleware now always checks `ForwardedHeadersOptions.KnownNetworks` and `ForwardedHeadersOptions.KnownProxies`. Because both `KnownNetworks` and `KnownProxies` default to Loopback this means deployed applications may fail to apply `X-Forwarded-*` headers resulting in properties like scheme and host not being updated which can have side-effects e.g. `UseHttpsRedirection()` might always see http and always redirecting the request.
+ 
+The recommended fix is to set the `KnownNetworks` and `KnownProxies` values to the appropriate values. See https://learn.microsoft.com/aspnet/core/host-and-deploy/proxy-load-balancer for more details on using proxies and `UseForwardedHeaders()`. Alternatively, if you are fine accepting `X-Forwarded-*` headers from any source, which introduces security vulnerabilities, you can clear the `KnownNetworks` and `KnownProxies` properties.
+
 ## .NET SDK
 
 ### [8.0.4xx] `dotnet workload restore` with a workload set configured in the global.json will not work

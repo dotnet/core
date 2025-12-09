@@ -8,6 +8,28 @@ Your app needs to be on the latest .NET 9 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 9.0.11 (November 2025)
+  - No new CVEs.
+- 9.0.10 (October 2025)
+  - [CVE-2025-55248 | .NET Information Disclosure Vulnerability](https://github.com/dotnet/announcements/issues/372)
+  - [CVE-2025-55315 | .NET Security Feature Bypass Vulnerability](https://github.com/dotnet/announcements/issues/371)
+  - [CVE-2025-55247 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/370)
+- 9.0.9 (September 2025)
+  - No new CVEs.
+- 9.0.8 (August 2025)
+  - No new CVEs.
+- 9.0.7 (July 2025)
+  - No new CVEs.
+- 9.0.6 (June 2025)
+  - [CVE-2025-30399 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/362)
+- 9.0.5 (May 2025)
+  - [CVE-2025-26646 | .NET and Visual Studio Spoofing Vulnerability](https://github.com/dotnet/announcements/issues/356)
+- 9.0.4 (April 2025)
+  - [CVE-2025-26682 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/352)
+- 9.0.3 (March 2025)
+  - [CVE-2025-24070 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/348)
+- 9.0.2 (February 2025)
+  - No new CVEs.
 - 9.0.1 (January 2025)
   - [CVE-2025-21171 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/340)
   - [CVE-2025-21172 | .NET Remote Code Execution Vulnerability](https://github.com/dotnet/announcements/issues/339)

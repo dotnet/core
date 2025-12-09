@@ -1,6 +1,6 @@
 # .NET 9
 
-[.NET 9](https://aka.ms/dotnet/9/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for 18 months, from November 12th, 2024 to May 12th, 2026.
+[.NET 9](https://aka.ms/dotnet/9/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for two years, from November 12th, 2024 to November 10th, 2026.
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/9.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
@@ -12,22 +12,34 @@
 
 ## Release notes
 
-| Date | Release |
-| :-- | :-- |
-| 2025/02/11 | [9.0.2](./9.0.2/9.0.2.md) |
-| 2025/01/14 | [9.0.1](./9.0.1/9.0.1.md) |
-| 2024/12/10 | [9.0.200 Preview SDK](./9.0.0/9.0.200-preview.md) |
-| 2024/12/03 | [9.0.101 SDK](./9.0.0/9.0.101.md) |
-| 2024/11/12 | [9.0.0](./9.0.0/9.0.0.md) |
-| 2024/10/08 | [9.0.0 RC 2](preview/rc2/README.md) |
-| 2024/09/10 | [9.0.0 RC 1](preview/rc1/README.md) |
-| 2024/08/13 | [9.0.0 Preview 7](preview/preview7/README.md) |
-| 2024/07/09 | [9.0.0 Preview 6](preview/preview6/README.md) |
-| 2024/06/11 | [9.0.0 Preview 5](preview/preview5/README.md) |
-| 2024/05/21 | [9.0.0 Preview 4](preview/preview4/README.md) |
-| 2024/04/11 | [9.0.0 Preview 3](preview/preview3/README.md) |
-| 2024/03/12 | [9.0.0 Preview 2](preview/preview2/README.md) |
-| 2024/02/13 | [9.0.0 Preview 1](preview/preview1/README.md) |
+| Date | Release | SDK |
+| :-- | :-- | :-- |
+| 2025/11/18 | [9.0.11](./9.0.11/9.0.11.md) | [9.0.308](./9.0.11/9.0.308.md) |
+| 2025/11/11 | [9.0.11](./9.0.11/9.0.11.md) | [9.0.307](./9.0.11/9.0.11.md), [9.0.112](./9.0.11/9.0.112.md) |
+| 2025/10/14 | [9.0.10](./9.0.10/9.0.10.md) | [9.0.306](./9.0.10/9.0.10.md), [9.0.111](./9.0.10/9.0.111.md) |
+| 2025/09/09 | [9.0.9](./9.0.9/9.0.9.md) | [9.0.305](./9.0.9/9.0.9.md), [9.0.110](./9.0.9/9.0.110.md) |
+| 2025/08/05 | [9.0.8](./9.0.8/9.0.8.md) | [9.0.304](./9.0.8/9.0.8.md), [9.0.109](./9.0.8/9.0.109.md) |
+| 2025/07/17 | [9.0.7](./9.0.7/9.0.7.md) | [9.0.303](./9.0.7/9.0.303.md) |
+| 2025/07/08 | [9.0.7](./9.0.7/9.0.7.md) | [9.0.302](./9.0.7/9.0.7.md), [9.0.108](./9.0.7/9.0.108.md) |
+| 2025/06/10 | [9.0.6](./9.0.6/9.0.6.md) | [9.0.301](./9.0.6/9.0.6.md), [9.0.205](./9.0.6/9.0.205.md), [9.0.107](./9.0.6/9.0.107.md) |
+| 2025/05/13 | [9.0.5](./9.0.5/9.0.5.md) | [9.0.106](./9.0.5/9.0.106.md), [9.0.204](./9.0.5/9.0.204.md), [9.0.300](./9.0.5/9.0.5.md) |
+| 2025/04/08 | [9.0.4](./9.0.4/9.0.4.md) | [9.0.105](./9.0.4/9.0.105.md), [9.0.203](./9.0.4/9.0.4.md) |
+| 2025/03/18 | [9.0.3](./9.0.3/9.0.3.md) | [9.0.202](./9.0.3/9.0.202.md) |
+| 2025/03/11 | [9.0.3](./9.0.3/9.0.3.md) | [9.0.104](./9.0.3/9.0.104.md), [9.0.201](./9.0.3/9.0.3.md) |
+| 2025/02/11 | [9.0.2](./9.0.2/9.0.2.md) | [9.0.103](./9.0.2/9.0.103.md), [9.0.200](./9.0.2/9.0.2.md) |
+| 2025/01/14 | [9.0.1](./9.0.1/9.0.1.md) | [9.0.102](./9.0.1/9.0.1.md)|
+| 2024/12/10 | [9.0.0](./9.0.0/9.0.0.md)  | [9.0.200 Preview](./9.0.0/9.0.200-preview.md) |
+| 2024/12/03 | [9.0.0](./9.0.0/9.0.0.md)  | [9.0.101](./9.0.0/9.0.101.md) |
+| 2024/11/12 | [9.0.0](./9.0.0/9.0.0.md) | [9.0.100](./9.0.0/9.0.0.md) |
+| 2024/10/08 | [9.0.0 RC 2](preview/rc2/README.md) | [9.0.100-rc.2.24474.11](preview/rc2/9.0.0-rc.2.md) |
+| 2024/09/10 | [9.0.0 RC 1](preview/rc1/README.md) | [9.0.100-rc.1.24452.12](preview/rc1/9.0.0-rc.1.md)|
+| 2024/08/13 | [9.0.0 Preview 7](preview/preview7/README.md) | [9.0.100-preview.7.24407.12](preview/preview7/9.0.0-preview.7.md) |
+| 2024/07/09 | [9.0.0 Preview 6](preview/preview6/README.md) | [9.0.100-preview.6.24328.19](preview/preview6/9.0.0-preview.6.md) |
+| 2024/06/11 | [9.0.0 Preview 5](preview/preview5/README.md) | [9.0.100-preview.5.24307.3](preview/preview5/9.0.0-preview.5.md) |
+| 2024/05/21 | [9.0.0 Preview 4](preview/preview4/README.md) | [9.0.100-preview.4.24267.66](preview/preview4/9.0.0-preview.4.md) |
+| 2024/04/11 | [9.0.0 Preview 3](preview/preview3/README.md) | [9.0.100-preview.3.24204.13](preview/preview3/9.0.0-preview.3.md) |
+| 2024/03/12 | [9.0.0 Preview 2](preview/preview2/README.md) | [9.0.100-preview.2.24157.14](preview/preview2/9.0.0-preview.2.md) |
+| 2024/02/13 | [9.0.0 Preview 1](preview/preview1/README.md) | [9.0.100-preview.1.24101.2](preview/preview1/9.0.0-preview.1.md) |
 
 ### .NET Libraries
 

@@ -1,6 +1,6 @@
-# .NET 8 installation instructions for Linux
+# .NET 8.0 installation instructions for Linux
 
-The following instructions demonstrate installing .NET 8 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
+The following instructions demonstrate installing .NET 8.0 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
 
 [Linux package dependencies](linux-packages.md) describes the set of packages required to run .NET on Linux.
 
@@ -12,22 +12,22 @@ The following distributions are available for Linux:
 - .NET Runtime: includes the .NET runtime and libraries, enabling running console applications.
 - ASP.NET Core Runtime: includes the .NET and ASP.NET Core runtimes, enabling running console, and web applications.
 
-We recommend you install the .NET SDK to develop and build applications, and to install one of the runtimes packages (like ASP.NET Core) to exclusively run applications.
+We recommend you install the .NET SDK to develop and build applications, and to install one of the runtime packages (like ASP.NET Core) to exclusively run applications.
 
 ## Downloads
 
 Each of the distributions can be downloaded from:
 
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [.NET 8 release notes](README.md)
+- [.NET 8.0 release notes](README.md)
 
 [Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Linux (Alpine, Debian, and Ubuntu).
 
 ## Install using deb/rpm packages
 
-Preview release installers are not available from the Microsoft package repositories. The steps below provide an easy way to install .NET 8 using your Distro package manager.
+Preview release installers are not available from the Microsoft package repositories. The steps below provide an easy way to install .NET 8.0 using your Distro package manager.
 
-**Note:** `curl` must be available on the system before running the following steps. Once you have confirmed that `curl` is available, complete the steps to download and install the latest .NET 8 Preview SDK and Runtime.
+**Note:** `curl` must be available on the system before running the following steps. Once you have confirmed that `curl` is available, complete the steps to download and install the latest .NET 8.0 Preview SDK and Runtime.
 
 1. Create a directory to use for the download location and change into that directory. For example, `mkdir $HOME/dotnet_install && cd $HOME/dotnet_install`
 2. Run `curl -L https://aka.ms/install-dotnet-preview -o install-dotnet-preview.sh`
@@ -36,7 +36,7 @@ Preview release installers are not available from the Microsoft package reposito
 Here's what the script does.
 
 - Detects the distribution and version. The script supports platforms and versions listed in [.NET 8.0 - Supported OS versions](supported-os.md).
-- Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack that installer packages.
+- Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack the installer packages.
 - Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
 - Downloads the system dependency installer, if needed.
 - Expands the tar.gz into ./dotnet_packages
@@ -65,14 +65,14 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -Lo dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/d2abdb4c-a96e-4123-9351-e4dd2ea20905/e8010ae2688786ffc1ebca4ebb52f41b/dotnet-sdk-8.0.406-linux-x64.tar.gz
+~# curl -Lo dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.416/dotnet-sdk-8.0.416-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
 ~# export DOTNET_ROOT=~/dotnet
 ~# export PATH=$PATH:~/dotnet
 ~# dotnet --version
-8.0.406
+8.0.416
 ```
 
 The `DOTNET_ROOT` environment variable is required to launch an application with their executables (like `myapp.exe`). The executables look for this environment variable to find the runtime if it isn't installed in its regular location. The `PATH` environment variable must be updated if you want to use `dotnet` without absolute paths to its location. Setting both of these environment variables is optional.
