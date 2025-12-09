@@ -8,8 +8,8 @@ For quick reference, see [llms.txt](https://raw.githubusercontent.com/dotnet/cor
 
 | Query Type | Entry Point |
 |------------|-------------|
-| Version/patch queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json` |
-| Time-based queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json` |
+| Single-version queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json` |
+| Time-range queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json` |
 
 **CRITICAL**: Never construct URLs manually. Always follow `_links["..."].href` values from JSON responses.
 
@@ -256,6 +256,7 @@ Link relation names are self-documenting:
   "_links": {
     "self": { "href": ".../timeline/2025/01/index.json" },
     "prev": { "href": ".../timeline/2024/12/index.json" },
+    "prev-security": { "href": ".../timeline/2024/11/index.json" },
     "cve-json": { "href": ".../timeline/2025/01/cve.json" }
   },
   "_embedded": {
@@ -500,6 +501,27 @@ The CVE JSON file provides full details and pre-computed query dictionaries:
 The `prev-security` links are pre-computed at publish time and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
 
 **Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually (this adds fetches and duplicates work the graph already did). The `prev-security` chain already encodes this — follow it instead.
+
+Example traversal for "CVEs since September 2024":
+
+```text
+Timeline Index → 2025/index.json
+  → latest-security-month → 2025/10 ✓
+  → prev-security → 2025/06 ✓
+  → prev-security → 2025/04 ✓
+  → prev-security → 2025/01 ✓
+  → prev-security → 2024/11 ✓  (crosses year boundary)
+  → prev-security → 2024/10 ✓
+  → prev-security → 2024/08 (before Sept, STOP)
+```
+
+**Expected fetch counts** (for self-assessment):
+
+* "Latest patch for .NET X": 2–3 fetches
+* "CVEs since [date]": 1 + number of security months in range
+* "CVEs for specific patch": 2–3 fetches
+
+If your count significantly exceeds these, you may be navigating inefficiently.
 
 **For specific month queries**, navigate directly:
 
