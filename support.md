@@ -36,6 +36,10 @@ Canonical supports .NET on Ubuntu, per the following.
 * .NET 6 is supported in Ubuntu 22.04+
 * .NET 8 is supported in Ubuntu 22.04+.
 
+### HeroDevs
+
+HeroDevs provides [Never Ending Support (NES) for .NET 6+](https://www.herodevs.com/support/dot-net-nes) on Windows and Linux.
+
 ### Microsoft
 
 Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [commercial support](https://support.serviceshub.microsoft.com/supportforbusiness/onboarding) for .NET on [multiple operating systems](os-lifecycle-policy.md), per [.NET support policy](https://dotnet.microsoft.com/platform/support/policy).
@@ -45,3 +49,6 @@ Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [c
 ### Red Hat
 
 Red Hat supports .NET on Red Hat Enterprise Linux, per [.NET life cycle policy](https://access.redhat.com/support/policy/updates/net-core).
+
+### TuxCare
+TuxCare provides [commercial support](https://tuxcare.com/endless-lifecycle-support/net-eol-support) for certain out-of-support .NET versions, on Windows and Linux, across multiple distributions.
