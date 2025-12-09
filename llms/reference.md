@@ -490,14 +490,16 @@ The CVE JSON file provides full details and pre-computed query dictionaries:
 **For "CVEs since [date]" queries** (with or without version filter), use `prev-security` to walk backwards:
 
 1. GET `timeline/index.json` → navigate to year → `_links["latest-security-month"].href`
-2. Follow `prev-security` links until the month is before target date (stop when `month < target`)
+2. Follow `prev-security` links until month is before target date
 3. Each month has `_embedded.disclosures[]` with severity, title, affected versions, fix commits
-4. Filter by `affected_releases` if user specified versions (e.g., "for my .NET 8 and 9")
-5. Only fetch `cve.json` if detailed descriptions or package version ranges are needed
+4. Filter by `affected_releases` if user specified versions
+5. Only fetch `cve.json` for CVSS vectors, CWE, or package version ranges
 6. **Always ask**: "Would you like inline diffs for these fixes?"
 7. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
 
-The `latest-security-month` and `prev-security` links are pre-computed — trust them to skip non-security months. This approach also deduplicates CVEs affecting multiple versions (fetched once, not per-version).
+The `prev-security` links are pre-computed and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
+
+**Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually. The `prev-security` chain already encodes this — follow it instead.
 
 **For specific month queries**, navigate directly:
 
