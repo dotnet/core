@@ -51,4 +51,5 @@ Microsoft provides [stable builds](https://dotnet.microsoft.com/download) and [c
 Red Hat supports .NET on Red Hat Enterprise Linux, per [.NET life cycle policy](https://access.redhat.com/support/policy/updates/net-core).
 
 ### TuxCare
+
 TuxCare provides [commercial support](https://tuxcare.com/endless-lifecycle-support/net-eol-support/) for certain out-of-support .NET versions, on Windows and Linux, across multiple distributions.
