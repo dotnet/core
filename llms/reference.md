@@ -490,7 +490,7 @@ The CVE JSON file provides full details and pre-computed query dictionaries:
 
 **For "CVEs since [date]" queries** (with or without version filter), use `prev-security` to walk backwards:
 
-1. GET `timeline/index.json` → navigate to year → `_links["latest-security-month"].href`
+1. GET `timeline/index.json` → `_links["latest-year"]` → `_links["latest-security-month"].href`
 2. Follow `prev-security` links until month is before target date
 3. Each month has `_embedded.disclosures[]` with severity, title, affected versions, fix commits
 4. Filter by `affected_releases` if user specified versions
@@ -498,27 +498,30 @@ The CVE JSON file provides full details and pre-computed query dictionaries:
 6. **Always ask**: "Would you like inline diffs for these fixes?"
 7. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
 
-The `prev-security` links are pre-computed at publish time and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
+The `prev-security` links are pre-computed at publish time and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). Once you have the first month, no additional year index fetches are needed.
 
-**Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually (this adds fetches and duplicates work the graph already did). The `prev-security` chain already encodes this — follow it instead.
+**Anti-pattern:** Do not fetch multiple year indexes to inspect `_embedded.months[]` and plan which months to fetch. The `prev-security` chain crosses year boundaries automatically — just follow it.
 
 Example traversal for "CVEs since September 2024":
 
 ```text
-Timeline Index → 2025/index.json
-  → latest-security-month → 2025/10 ✓
-  → prev-security → 2025/06 ✓
-  → prev-security → 2025/04 ✓
-  → prev-security → 2025/01 ✓
-  → prev-security → 2024/11 ✓  (crosses year boundary)
-  → prev-security → 2024/10 ✓
+Timeline Index (1)
+  → latest-year → 2025/index.json (2)
+  → latest-security-month → 2025/10/index.json (3) ✓
+  → prev-security → 2025/06 (4) ✓
+  → prev-security → 2025/04 (5) ✓
+  → prev-security → 2025/01 (6) ✓
+  → prev-security → 2024/11 (7) ✓  (crosses year boundary automatically)
+  → prev-security → 2024/10 (8) ✓
   → prev-security → 2024/08 (before Sept, STOP)
+
+Total: 8 fetches (2 indexes + 6 security months)
 ```
 
 **Expected fetch counts** (for self-assessment):
 
 * "Latest patch for .NET X": 2–3 fetches
-* "CVEs since [date]": 1 + number of security months in range
+* "CVEs since [date]": 2 + number of security months in range (Timeline Index + Year Index + months)
 * "CVEs for specific patch": 2–3 fetches
 
 If your count significantly exceeds these, you may be navigating inefficiently.
