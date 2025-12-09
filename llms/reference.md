@@ -29,7 +29,7 @@ Reference:
 | CVEs for version | `10.0/index.json` → `_embedded.releases[]` where `security: true` |
 | CVEs for patch | `10.0/10.0.1/index.json` → `_embedded.disclosures[]` |
 | CVEs by month | `timeline/index.json` → year → month → `_embedded.disclosures[]` |
-| **CVEs since date** | `timeline/index.json` → year → `latest-security-month` → follow `prev-security` until target date → filter `_embedded.disclosures[]` by `affected_releases` |
+| **CVEs since date** | `timeline/index.json` → `latest-year` → `latest-security-month` → follow `prev-security` until target date → filter by `affected_releases` |
 | Breaking changes | `10.0/index.json` → `_links["compatibility-json"].href` |
 | SDK downloads | `10.0/sdk/index.json` |
 | OS support | `10.0/manifest.json` → `_links["supported-os-json"].href` |
@@ -227,6 +227,7 @@ Link relation names are self-documenting:
   "latest_year": "2025",
   "_links": {
     "self": { "href": ".../timeline/index.json" },
+    "latest-year": { "href": ".../timeline/2025/index.json" },
     "releases-index": { "href": ".../index.json" }
   },
   "_embedded": {
@@ -236,6 +237,36 @@ Link relation names are self-documenting:
         "releases": ["10.0", "9.0", "8.0"],
         "_links": {
           "self": { "href": ".../timeline/2025/index.json" }
+        }
+      }
+    ]
+  }
+}
+```
+
+### Year Index (`timeline/2025/index.json`)
+
+```json
+{
+  "kind": "year-index",
+  "year": "2025",
+  "latest_month": "11",
+  "latest_security_month": "10",
+  "_links": {
+    "self": { "href": ".../timeline/2025/index.json" },
+    "prev": { "href": ".../timeline/2024/index.json" },
+    "latest-month": { "href": ".../timeline/2025/11/index.json" },
+    "latest-security-month": { "href": ".../timeline/2025/10/index.json" },
+    "timeline-index": { "href": ".../timeline/index.json" }
+  },
+  "_embedded": {
+    "months": [
+      {
+        "month": "10",
+        "security": true,
+        "cve_count": 3,
+        "_links": {
+          "self": { "href": ".../timeline/2025/10/index.json" }
         }
       }
     ]
