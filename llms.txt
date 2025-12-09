@@ -51,7 +51,7 @@ Reference:
 4. Filter by `affected_releases` if user specified versions
 5. Only fetch `cve.json` for CVSS vectors, CWE, or package version ranges
 
-The `prev-security` links are pre-computed and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
+The `prev-security` links are pre-computed at publish time and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
 
 Example traversal for "CVEs since September 2024":
 
@@ -66,7 +66,7 @@ Timeline Index → 2025/index.json
   → prev-security → 2024/08 (before Sept, STOP)
 ```
 
-**Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually. The `prev-security` chain already encodes this — follow it instead.
+**Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually (this adds fetches and duplicates work the graph already did). The `prev-security` chain already encodes this — follow it instead.
 
 **"What patch should I install for .NET X?"** — Direct version lookup:
 

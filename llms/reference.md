@@ -497,9 +497,9 @@ The CVE JSON file provides full details and pre-computed query dictionaries:
 6. **Always ask**: "Would you like inline diffs for these fixes?"
 7. If yes: **Fetch immediately** — firewall or domain restrictions may block later access
 
-The `prev-security` links are pre-computed and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
+The `prev-security` links are pre-computed at publish time and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). No year index fetches needed after the first.
 
-**Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually. The `prev-security` chain already encodes this — follow it instead.
+**Anti-pattern:** Do not fetch year indexes to inspect `_embedded.months[]` and plan fetches manually (this adds fetches and duplicates work the graph already did). The `prev-security` chain already encodes this — follow it instead.
 
 **For specific month queries**, navigate directly:
 
