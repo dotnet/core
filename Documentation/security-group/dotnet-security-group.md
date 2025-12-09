@@ -19,6 +19,7 @@ Members:
 - IBM
 - Microsoft
 - Red Hat
+- TuxCare
 
 ## Responsibilities
 
