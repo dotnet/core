@@ -533,20 +533,17 @@ The `prev-security` links are pre-computed at publish time and cross year bounda
 
 **Anti-pattern:** Do not fetch multiple year indexes to inspect `_embedded.months[]` and plan which months to fetch. The `prev-security` chain crosses year boundaries automatically — just follow it.
 
-Example traversal for "CVEs since September 2024":
+Example traversal for "CVEs since December 2024":
 
 ```text
 Timeline Index (1)
   → latest-year → 2025/index.json (2)
   → latest-security-month → 2025/10/index.json (3) ✓
   → prev-security → 2025/06 (4) ✓
-  → prev-security → 2025/04 (5) ✓
-  → prev-security → 2025/01 (6) ✓
-  → prev-security → 2024/11 (7) ✓  (crosses year boundary automatically)
-  → prev-security → 2024/10 (8) ✓
-  → prev-security → 2024/08 (before Sept, STOP)
+  → prev-security → 2025/01 (5) ✓  (crosses year boundary automatically)
+  → prev-security → 2024/11 (before Dec, STOP)
 
-Total: 8 fetches (2 indexes + 6 security months)
+Total: 5 fetches (2 indexes + 3 security months)
 ```
 
 **Expected fetch counts** (for self-assessment):
