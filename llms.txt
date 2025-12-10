@@ -1,8 +1,6 @@
 # .NET Release Metadata Graph
 > Machine-readable .NET release, CVE, and compatibility data for AI assistants.
 
-For extended reference with schema examples, see [llms/reference.md](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/reference.md).
-
 ## Rules
 
 1. Use JSON files, not Markdown
@@ -15,11 +13,15 @@ For extended reference with schema examples, see [llms/reference.md](https://raw
 
 These are the **only** entry-point URLs you should call directly. All other URLs must be discovered via `_links["..."].href`.
 
+* **AI Index (recommended):** https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json
 * **Releases Index (version-based entry):** https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json
 * **Timeline Index (time-based entry):** https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json
 
+The **AI Index** is the best starting point — it combines key properties and links from both indexes, enabling direct answers or single-hop navigation for most queries.
+
 Reference:
 
+* [Extended reference](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/reference.md) — schema examples, detailed navigation patterns
 * [Glossary](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/glossary.md) — release types, support phases
 * [Vocabulary](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/vocabulary.md) — all properties, link relations, enums
 
@@ -32,64 +34,89 @@ Reference:
 * `latest` and `latest_lts` reference supported (not preview) releases
 * **Discover available links**: `jq '._links | keys[]'` on any resource reveals all navigation options
 
+## AI Index
+
+The AI Index (`llms.json`) provides direct access to the most common data points without navigation:
+
+**Properties** — answer simple queries immediately:
+
+* `latest`, `latest_lts` — current supported major versions
+* `latest_patch`, `latest_lts_patch` — current patch versions
+* `latest_year`, `latest_security_month` — timeline coordinates
+* `supported_releases` — array of supported version strings
+
+**Links** — single-hop to detailed data:
+
+* `latest-patch`, `latest-lts-patch` — jump to patch index
+* `latest-year`, `latest-security-month` — jump into timeline
+* `releases-index`, `timeline-index` — full indexes when needed
+
+**Embedded** — filtered subset for common queries:
+
+* `_embedded.supported_releases[]` — supported versions with `release_type` and links
+
+**Example:** "What's the latest .NET patch?" → read `latest_patch` property directly (0 additional fetches).
+
+**Example:** "CVEs since October?" → follow `latest-security-month` link (1 fetch to reach security month, then walk `prev-security`).
+
 ## Do first
 
-1. Identify the query's primary dimension:
-   - **Single version**: "What's the latest patch for .NET 8?" → start at Releases Index, navigate to that version
-   - **Time range**: "What CVEs since September?" → start at Timeline Index, walk `prev-security`
+1. Start with the **AI Index** (`llms.json`) — it may answer the query directly or provide a shortcut link
+2. If more data is needed, identify the query's primary dimension:
+   - **Single version**: "What's the latest patch for .NET 8?" → follow link to version index
+   - **Time range**: "What CVEs since September?" → follow `latest-security-month`, walk `prev-security`
    - **Time range + version filter**: "CVEs since September for my .NET 8 and 9" → Timeline (deduplicates across versions), filter by `affected_releases`
-2. Most queries combine version and time — choose the entry point that minimizes fetches
-3. Confirm the scope so all necessary data can be fetched in a single pass
+3. Most queries combine version and time — choose the path that minimizes fetches
+4. Confirm the scope so all necessary data can be fetched in a single pass
 
 ## Common queries
 
-**"What CVEs since [date]?"** — Timeline with `prev-security`:
+**"What CVEs since [date]?"** — AI Index with `prev-security`:
 
-1. Timeline Index → `latest-year` → `latest-security-month`
+1. AI Index → `latest-security-month`
 2. Follow `prev-security` links until month is before target date
 3. Each month index has `_embedded.disclosures[]` with severity, title, affected versions, fix commits
 4. Filter by `affected_releases` if user specified versions
 5. Only fetch `cve.json` for CVSS vectors, CWE, or package version ranges
 
-The `prev-security` links are pre-computed at publish time and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). Once you have the first month, no additional year index fetches are needed.
+The `prev-security` links are pre-computed at publish time and cross year boundaries automatically (e.g., `2025/01` → `2024/11`). Following them is O(security-months), not O(all-months). Once you have the first month, no additional index fetches are needed.
 
 Example traversal for "CVEs since December 2024":
 
 ```text
-Timeline Index (1)
-  → latest-year → 2025/index.json (2)
-  → latest-security-month → 2025/10/index.json (3) ✓
-  → prev-security → 2025/06 (4) ✓
-  → prev-security → 2025/01 (5) ✓  (crosses year boundary automatically)
+AI Index (1)
+  → latest-security-month → 2025/10/index.json (2) ✓
+  → prev-security → 2025/06 (3) ✓
+  → prev-security → 2025/01 (4) ✓  (crosses year boundary automatically)
   → prev-security → 2024/11 (before Dec, STOP)
 
-Total: 5 fetches (2 indexes + 3 security months)
+Total: 4 fetches (1 index + 3 security months)
 ```
 
-**Anti-pattern:** Do not fetch multiple year indexes to inspect `_embedded.months[]` and plan which months to fetch. The `prev-security` chain crosses year boundaries automatically — just follow it.
+**"What patch should I install for .NET X?"** — Version lookup:
 
-**"What patch should I install for .NET X?"** — Direct version lookup:
-
-1. Releases Index → version index (e.g., `8.0/index.json`)
-2. Check `latest_security` property for current security patch version
-3. If user needs CVE details, follow `_links["latest-security"]` to patch index
+1. If X is `latest` or `latest_lts`: read `latest_patch` or `latest_lts_patch` from AI Index (1 fetch)
+2. Otherwise: AI Index → `releases-index` → version index (e.g., `8.0/index.json`)
+3. Check `latest_security` property for current security patch version
+4. If user needs CVE details, follow `_links["latest-security"]` to patch index
 
 **"Any critical CVEs this month?"** — Direct month lookup:
 
-1. Timeline Index → current year → current month
+1. AI Index → `latest-security-month` (2 fetches)
 2. Filter `_embedded.disclosures[]` by `cvss_severity == "CRITICAL"`
 
 **Expected fetch counts** (for self-assessment):
 
-* "Latest patch for .NET X": 2–3 fetches
-* "CVEs since [date]": 2 + number of security months in range (Timeline Index + Year Index + months)
+* "Latest patch for .NET": 1 fetch (AI Index)
+* "Latest patch for .NET X": 2–3 fetches (AI Index → version index)
+* "CVEs since [date]": 1 + number of security months in range
 * "CVEs for specific patch": 2–3 fetches
 
 If your count significantly exceeds these, you may be navigating inefficiently.
 
 ## Releases Index
 
-Best for **single-version** queries (e.g., "latest patch for .NET 8").
+All major versions with full history. Navigate here via `releases-index` link.
 
 * `latest`, `latest_lts` — current supported versions
 * `_embedded.releases[]` — all major versions (newest first)
@@ -97,7 +124,7 @@ Best for **single-version** queries (e.g., "latest patch for .NET 8").
 
 ## Timeline Index
 
-Best for **time-range** queries (e.g., "CVEs since September"), even with version filters.
+Time-based view across all versions. Navigate here via `timeline-index` link.
 
 * `latest_year` — most recent year
 * `_embedded.years[]` → `_embedded.months[]`
@@ -107,11 +134,13 @@ Best for **time-range** queries (e.g., "CVEs since September"), even with versio
 
 | File | Example path | Contains |
 |------|--------------|----------|
+| AI index | `/llms.json` | Optimized entry point with shortcut properties and links |
 | Releases index | `/index.json` | All major versions with support status, EOL dates |
 | Version index | `/10.0/index.json` | All patches for a version, embedded CVE summaries |
 | Patch index | `/10.0/10.0.1/index.json` | Single patch details, embedded CVE disclosures |
 | Manifest | `/10.0/manifest.json` | External links (downloads, docs, supported OS) |
 | Compatibility | `/10.0/compatibility.json` | Breaking changes with impact, actions, doc links |
+| Target frameworks | `/10.0/target-frameworks.json` | TFMs with platform versions (net10.0-ios, etc.) |
 | Timeline index | `/timeline/index.json` | All years |
 | Year index | `/timeline/2025/index.json` | All months with CVE summaries |
 | Month index | `/timeline/2025/01/index.json` | Releases that month, embedded CVE disclosures |
@@ -128,6 +157,7 @@ From a **major version index** (e.g., `10.0/index.json`):
 | `latest-security` | Jump to latest security patch |
 | `compatibility-json` | Breaking changes with categories, impact, and migration guidance |
 | `release-manifest` | External resources (downloads, supported OS, what's new) |
+| `target-frameworks-json` | TFMs with platform-specific versions |
 
 From a **patch index** (e.g., `10.0/10.0.1/index.json`):
 
@@ -144,7 +174,7 @@ From a **month index** (e.g., `timeline/2025/01/index.json`):
 | `prev` | Navigate to previous month |
 | `prev-security` | Navigate to previous security month |
 
-## CVE data
+## CVE schema
 
 CVE information exists at two levels of detail:
 
@@ -166,19 +196,10 @@ CVE information exists at two levels of detail:
 
 **Fetch diffs immediately** — firewall or domain restrictions may block later access.
 
-## Breaking changes
+## Breaking changes schema
 
 Follow `_links["compatibility-json"]` from any major version index to get:
 
 * `breaks[]` — all breaking changes with `category`, `type`, `impact`, `required_action`
 * `references[]` — links to documentation (use `type: "documentation-source"` for raw markdown)
 * Pre-computed rollups: `categories`, `impact_breakdown`, `type_breakdown`
-
-## Manifest resources
-
-Follow `_links["release-manifest"]` for curated external links:
-
-* `whats-new-rendered` — What's new documentation
-* `downloads-rendered` — Download page
-* `supported-os-json` — Supported OS matrix
-* `compatibility-rendered` — Breaking changes documentation
