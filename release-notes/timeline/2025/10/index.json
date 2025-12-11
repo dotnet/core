@@ -4,6 +4,7 @@
   "title": ".NET Release Timeline Index - 2025-10",
   "year": "2025",
   "month": "10",
+  "date": "2025-10-14T00:00:00\u002B00:00",
   "security": true,
   "cve_count": 3,
   "cve_records": [
@@ -60,8 +61,12 @@
         "release": "10.0",
         "year": "2025",
         "month": "10",
-        "security": false,
-        "cve_count": 0,
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2025-55315",
+          "CVE-2025-55247"
+        ],
         "support_phase": "go-live",
         "sdk_version": "10.0.100-rc.2.25502.107",
         "_links": {
@@ -154,8 +159,8 @@
         "cvss_severity": "MEDIUM",
         "disclosure_date": "2025-10-14",
         "affected_releases": [
-          "8.0",
-          "9.0"
+          "9.0",
+          "8.0"
         ],
         "affected_products": [
           "dotnet-runtime"
@@ -192,8 +197,9 @@
         "cvss_severity": "CRITICAL",
         "disclosure_date": "2025-10-14",
         "affected_releases": [
-          "8.0",
-          "9.0"
+          "10.0",
+          "9.0",
+          "8.0"
         ],
         "affected_products": [
           "dotnet-aspnetcore"
@@ -249,8 +255,9 @@
         "cvss_severity": "HIGH",
         "disclosure_date": "2025-10-14",
         "affected_releases": [
-          "8.0",
-          "9.0"
+          "10.0",
+          "9.0",
+          "8.0"
         ],
         "affected_products": [
           "dotnet-sdk"
