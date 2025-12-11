@@ -8,8 +8,11 @@ For quick reference, see [llms.txt](https://raw.githubusercontent.com/dotnet/cor
 
 | Query Type | Entry Point |
 |------------|-------------|
+| **AI Index (recommended)** | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json` |
 | Single-version queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json` |
 | Time-range queries | `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json` |
+
+The **AI Index** is the best starting point — it combines key properties and links from both indexes, with embedded data for common queries.
 
 **CRITICAL**: Never construct URLs manually. Always follow `_links["..."].href` values from JSON responses.
 
@@ -22,14 +25,17 @@ Reference:
 
 | Task | Path |
 |------|------|
-| Latest release | `index.json` → `_links["latest"].href` |
-| Latest LTS | `index.json` → `_links["latest-lts"].href` |
+| Latest patch for .NET 9 | `llms.json` → `_embedded.latest_patches[]` where `release == "9.0"` |
+| CVEs in latest security month | `llms.json` → `_embedded.latest_security_month[]` |
+| Critical CVEs for .NET 8 over time | `llms.json` → `_embedded.latest_security_month[]` where `release == "8.0"` → `_links["latest-security"]` → walk `prev-security` |
+| Latest release | `llms.json` → `_links["latest"].href` |
+| Latest LTS | `llms.json` → `_links["latest-lts"].href` |
 | Version patches | `index.json` → version → `_embedded.releases[]` |
 | Security patches | `10.0/index.json` → `_links["latest-security"].href` |
 | CVEs for version | `10.0/index.json` → `_embedded.releases[]` where `security: true` |
 | CVEs for patch | `10.0/10.0.1/index.json` → `_embedded.disclosures[]` |
 | CVEs by month | `timeline/index.json` → year → month → `_embedded.disclosures[]` |
-| **CVEs since date** | `timeline/index.json` → `latest-year` → `latest-security-month` → follow `prev-security` until target date → filter by `affected_releases` |
+| **CVEs since date** | `llms.json` → `_links["latest-security-month"]` → follow `prev-security` until target date → filter by `affected_releases` |
 | Breaking changes | `10.0/index.json` → `_links["compatibility-json"].href` |
 | SDK downloads | `10.0/sdk/index.json` |
 | OS support | `10.0/manifest.json` → `_links["supported-os-json"].href` |
@@ -61,6 +67,13 @@ Example output for a patch index:
 
 ### Link Relations by Resource Type
 
+**AI index** (`llms.json`):
+- `latest`, `latest-lts` — jump to major version index
+- `latest-month`, `latest-security-month` — jump to timeline month
+- `latest-year` — jump to year index
+- `releases-index`, `timeline-index` — full indexes
+- `llms-txt` — AI navigation guide
+
 **Root index** (`index.json`):
 - `latest`, `latest-lts` — jump to current releases
 - `timeline-index` — switch to time-based navigation
@@ -91,6 +104,71 @@ Link relation names are self-documenting:
 - `latest-` prefix → jump to most recent
 
 ## Schema Examples
+
+### AI Index (`llms.json`)
+
+```json
+{
+  "kind": "llms-index",
+  "title": ".NET Release Index for AI",
+  "latest": "10.0",
+  "latest_lts": "10.0",
+  "latest_year": "2025",
+  "releases": ["10.0", "9.0", "8.0"],
+  "_links": {
+    "self": { "href": ".../llms.json" },
+    "latest": { "href": ".../10.0/index.json", "title": ".NET 10.0" },
+    "latest-lts": { "href": ".../10.0/index.json", "title": ".NET 10.0 (LTS)" },
+    "latest-month": { "href": ".../timeline/2025/12/index.json", "title": "2025-12" },
+    "latest-security-month": { "href": ".../timeline/2025/10/index.json", "title": "2025-10" },
+    "latest-year": { "href": ".../timeline/2025/index.json", "title": "2025" },
+    "releases-index": { "href": ".../index.json" },
+    "timeline-index": { "href": ".../timeline/index.json" },
+    "llms-txt": { "href": ".../llms.txt", "type": "text/plain" }
+  },
+  "_embedded": {
+    "latest_patches": [
+      {
+        "version": "10.0.1",
+        "release": "10.0",
+        "release_type": "lts",
+        "date": "2025-12-09T00:00:00+00:00",
+        "year": "2025",
+        "month": "12",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "active",
+        "sdk_version": "10.0.101",
+        "_links": {
+          "self": { "href": ".../10.0/10.0.1/index.json" },
+          "latest-security": { "href": ".../10.0/10.0.0/index.json" }
+        }
+      }
+    ],
+    "latest_security_month": [
+      {
+        "release": "8.0",
+        "release_type": "lts",
+        "version": "8.0.21",
+        "sdk_version": "8.0.415",
+        "year": "2025",
+        "month": "10",
+        "security": true,
+        "cve_count": 3,
+        "cve_records": ["CVE-2025-55247", "CVE-2025-55248", "CVE-2025-55315"],
+        "_links": {
+          "self": { "href": ".../timeline/2025/10/index.json" }
+        }
+      }
+    ]
+  }
+}
+```
+
+**Key embedded collections:**
+
+- `_embedded.latest_patches[]` — Latest patch per supported version. Filter by `release` (e.g., `select(.release == "9.0")`). The `self` link points to the patch index; the `latest-security` link jumps to the security patch index for `prev-security` traversal.
+- `_embedded.latest_security_month[]` — Security status per version for the latest security month. Includes `cve_records[]` inline. The `self` link points to the month index.
 
 ### Releases Index (`index.json`)
 
