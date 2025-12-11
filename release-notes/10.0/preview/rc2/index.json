@@ -7,6 +7,10 @@
   "support_phase": "go-live",
   "security": true,
   "cve_count": 2,
+  "cve_records": [
+    "CVE-2025-55247",
+    "CVE-2025-55315"
+  ],
   "sdk_version": "10.0.100-rc.2.25502.107",
   "sdk_feature_bands": [
     "10.0.100-rc.2.25502.107"
@@ -34,6 +38,21 @@
     "releases-index": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json",
       "title": "Release index"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/cve.json",
+      "title": "CVE records (JSON)",
+      "type": "application/json"
+    },
+    "cve-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/cve.md",
+      "title": "CVE records (JSON)",
+      "type": "application/markdown"
+    },
+    "cve-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/timeline/2025/10/cve.md",
+      "title": "CVE records (JSON) (Rendered)",
+      "type": "application/markdown"
     },
     "release-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc2/release.json",
@@ -96,6 +115,54 @@
             "type": "application/json"
           }
         }
+      }
+    ],
+    "disclosures": [
+      {
+        "id": "CVE-2025-55247",
+        "title": ".NET Denial of Service Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/370"
+          }
+        },
+        "cvss_score": 7.3,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2025-10-14",
+        "affected_releases": [
+          "10.0",
+          "9.0",
+          "8.0"
+        ],
+        "affected_products": [
+          "dotnet-sdk"
+        ],
+        "platforms": [
+          "linux"
+        ]
+      },
+      {
+        "id": "CVE-2025-55315",
+        "title": ".NET Security Feature Bypass Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/371"
+          }
+        },
+        "cvss_score": 9.9,
+        "cvss_severity": "CRITICAL",
+        "disclosure_date": "2025-10-14",
+        "affected_releases": [
+          "10.0",
+          "9.0",
+          "8.0"
+        ],
+        "affected_products": [
+          "dotnet-aspnetcore"
+        ],
+        "platforms": [
+          "all"
+        ]
       }
     ]
   }
