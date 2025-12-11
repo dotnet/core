@@ -567,19 +567,13 @@ done
 # 8.0.12 | CVE-2025-21172: .NET Remote Code Execution Vulnerability
 ```
 
-**llms-index:** Uses `_embedded.latest_security_month` to find the starting point, then navigates to version-specific patches:
+**llms-index:** Uses `_embedded.latest_patches` with `latest-security` link for direct access:
 
 ```bash
 LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
 
-# Get the 8.0 patch from latest_security_month, then follow to version index
-PATCH_DATA=$(curl -s "$LLMS" | jq -r '._embedded.latest_security_month[] | select(.release == "8.0")')
-VERSION_HREF=$(curl -s "$LLMS" | jq -r '._embedded.latest_patches[] | select(.release == "8.0") | ._links.self.href' | sed 's|/8.0.[0-9]*/|/|')/../index.json
-
-# Alternative: navigate via releases-index link to 8.0/index.json
-VERSION_HREF=$(curl -s "$LLMS" | jq -r '._links["releases-index"].href')
-VERSION_HREF=$(curl -s "$VERSION_HREF" | jq -r '._embedded.releases[] | select(.version == "8.0") | ._links.self.href')
-PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
+# Direct jump to 8.0's latest security patch via latest-security link
+PATCH_HREF=$(curl -s "$LLMS" | jq -r '._embedded.latest_patches[] | select(.release == "8.0") | ._links["latest-security"].href')
 
 # Walk back security patches for 8.0
 for i in {1..6}; do
@@ -601,7 +595,7 @@ done
 - **The `release` property:** Patch entries include a `release` property (e.g., `"release": "8.0"`) that enables filtering by major version. This is what makes `select(.release == "8.0")` work on embedded patch collections like `_embedded.latest_patches[]` or `_embedded.latest_security_month[]`.
 - **Use case:** Version-specific security audits ("Is my .NET 8 deployment exposed to any critical vulnerabilities?").
 
-**Winner:** hal-index (**24x smaller**, releases-index cannot answer this query); llms-index requires extra navigation (no direct 8.0 shortcut in embedded data)
+**Winner:** hal-index (**24x smaller**, releases-index cannot answer this query); llms-index is 10% smaller (50 KB vs 55 KB) with direct `latest-security` link
 
 ### Breaking Changes Summary
 
