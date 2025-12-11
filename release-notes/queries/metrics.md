@@ -1,147 +1,6 @@
-# Schema Metrics Comparison
+# Query Cost Comparison
 
-This document compares the data transfer costs between the new **hal-index** schema and the legacy **releases-index** schema for common query patterns.
-
-## Design Context
-
-The hal-index schema was designed to solve fundamental problems with the releases-index approach:
-
-1. **Cache Coherency** - The releases-index.json references external files (e.g., `9.0/releases.json`) that may have different CDN cache TTLs, leading to inconsistent data when patch versions are updated.
-
-2. **Data Efficiency** - The `releases.json` files contain download URLs and hashes for every binary artifact, making them 30-50x larger than necessary for most queries.
-
-3. **Atomic Consistency** - The hal-index uses HAL `_embedded` to include all referenced data in a single document, ensuring a consistent snapshot per fetch.
-
-See [dotnet/core#10143](https://github.com/dotnet/core/issues/10143) for full design rationale.
-
-## File Characteristics
-
-The tables below show theoretical update frequency based on practice and design, with file sizes measured from actual files.
-
-### Hal-Graph Files
-
-| File | Size | Updates/Year | Description |
-|------|------|--------------|-------------|
-| `index.json` | 5 KB | ~1 | Root index with all major versions |
-| `10.0/index.json` | 10 KB | ~12 | All 10.0 patches (fewer releases so far) |
-| `9.0/index.json` | 20 KB | ~12 | All 9.0 patches with CVE references |
-| `8.0/index.json` | 23 KB | ~12 | All 8.0 patches with CVE references |
-| `timeline/index.json` | 4 KB | ~1 | Timeline root (all years) |
-| `timeline/2025/index.json` | 12 KB | ~12 | Year index (all months) |
-| `timeline/2025/10/index.json` | 9 KB | ~1 | Month index with embedded CVE summaries |
-| `timeline/2025/01/cve.json` | 14 KB | ~1 | Full CVE details for a month |
-
-### Releases-Index Files
-
-| File | Size | Updates/Year | Description |
-|------|------|--------------|-------------|
-| `releases-index.json` | 6 KB | ~12 | Root index (version list only) |
-| `10.0/releases.json` | **440 KB** | ~12 | All 10.0 releases with full download metadata |
-| `9.0/releases.json` | **769 KB** | ~12 | All 9.0 releases with full download metadata |
-| `8.0/releases.json` | **1,234 KB** | ~12 | All 8.0 releases with full download metadata |
-
-### Measurements
-
-Actual git commits in the last 12 months (Nov 2024 - Nov 2025):
-
-| File | Commits | Notes |
-|------|---------|-------|
-| `releases-index.json` | 29 | Root index (all versions) |
-| `10.0/releases.json` | 22 | Includes previews/RCs and SDK-only releases |
-| `9.0/releases.json` | 24 | Includes SDK-only releases, fixes, URL rewrites |
-| `8.0/releases.json` | 18 | Includes SDK-only releases, fixes, URL rewrites |
-
-The commit counts are significantly higher than the theoretical ~12/year due to:
-
-- **SDK-only releases**: Additional releases between Patch Tuesdays (e.g., [9.0.308 SDK](https://github.com/dotnet/core/commit/24a83fcc189ecf3c514dc06963ce779dcbf64ad5) released 8 days after November Patch Tuesday)
-- **Metadata corrections**: Simple changes like [updating .NET 9's EOL date](https://github.com/dotnet/core/commit/24ff22598de88e3c9681e579aab5fe344cdc21b0) require updating both `releases-index.json` and `9.0/releases.json`
-- **Post-release corrections**: `fix hashes`, `sdk array mismatch`
-- **Infrastructure changes**: `Update file URLs`, `Rewrite URLs to builds.dotnet`
-- **Rollbacks**: `Revert "Switch links..."`
-
-The EOL date example illustrates a key architectural tradeoff: with releases-index, metadata changes to any version require updating the root file. With hal-index, we give up rich information in the root file, but in exchange we can safely propagate useful information to many locations (authored in `9.0/_manifest.json`, generated into `9.0/manifest.json`, `9.0/index.json`, timeline indexes, etc.)—provided it doesn't violate the core rule: **the root `index.json` is never touched for version-specific changes**.
-
-Note that Patch Tuesday releases are batched—a single commit like [November 2025](https://github.com/dotnet/core/commit/484b00682d598f8d11a81607c257c1f0a099b84c) updates `releases-index.json`, `8.0/releases.json`, `9.0/releases.json`, and `10.0/releases.json` together (6,802 lines changed across 30 files). Even with batching, the root file still requires ~30 updates/year.
-
-These massive commits are difficult to review and analyze. Mixing markdown documentation with JSON data files in the same commit makes it hard to distinguish content changes from data updates. The hal-index design separates these concerns—JSON index files are generated automatically, while markdown content is authored separately.
-
-**Operational Risk:** These files are effectively mission-critical live-site APIs, driving hundreds of GBs of downloads monthly. Yet they require ~20-30 manual updates per year each, carrying risk of human error (as the fix commits demonstrate), cache invalidation complexity, and CDN propagation delays.
-
-**Key insight:** The hal-index root file (`index.json`) is updated ~1x/year when a new major version is added. The releases-index root file (`releases-index.json`) is updated ~30x/year. This makes the hal-index root file ideal for aggressive CDN caching, while the releases-index files are constantly-moving targets.
-
-## Link Relation Discovery
-
-One of HAL's key benefits is self-describing APIs. Clients can discover available operations by inspecting `_links` without documentation.
-
-#### Query: "What operations are available from the root index?"
-
-```bash
-curl -s "$ROOT" | jq -r '._links | keys[]'
-# latest
-# latest-lts
-# llms-txt
-# self
-# timeline-index
-```
-
-#### Query: "What operations are available for a major version?"
-
-```bash
-curl -s "$ROOT" | jq -r '._embedded.releases[0]._links.self.href' | xargs curl -s | jq -r '._links | keys[]'
-# compatibility-json
-# downloads
-# latest
-# latest-release-json
-# latest-sdk
-# latest-security
-# releases-index
-# target-frameworks-json
-```
-
-#### Query: "What operations are available for a patch release?"
-
-```bash
-curl -s "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.21/index.json" | jq -r '._links | keys[]'
-# cve-json
-# cve-markdown
-# cve-markdown-rendered
-# latest-sdk
-# prev
-# prev-security
-# release-json
-# release-major
-# release-month
-# release-notes-markdown
-# release-notes-markdown-rendered
-# releases-index
-# self
-```
-
-#### Query: "What documentation links are available from the manifest?"
-
-```bash
-curl -s "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/manifest.json" | jq -r '._links | keys[]'
-# compatibility-rendered
-# downloads-rendered
-# os-packages-json
-# release-blog-rendered
-# releases-json
-# self
-# supported-os-json
-# supported-os-markdown
-# supported-os-markdown-rendered
-# usage-markdown-rendered
-# whats-new-rendered
-```
-
-The naming convention makes relations self-documenting:
-- `-json` suffix: machine-readable data
-- `-markdown` suffix: raw markdown source
-- `-rendered` suffix: HTML-rendered view (GitHub blob URLs)
-- `prev-` prefix: backward navigation
-- `latest-` prefix: jump to most recent
-
-## Query Cost Comparison
+See [overview.md](overview.md) for design context, file characteristics, and link relation discovery.
 
 ### Version Information Queries
 
@@ -150,6 +9,7 @@ The naming convention makes relations self-documenting:
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` | **5 KB** |
+| llms-index | `llms.json` | **5 KB** |
 | releases-index | `releases-index.json` | **6 KB** |
 
 **hal-index:**
@@ -158,6 +18,17 @@ The naming convention makes relations self-documenting:
 ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
 
 curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.supported) | .version'
+# 10.0
+# 9.0
+# 8.0
+```
+
+**llms-index:** The `releases` property provides a direct array `["10.0", "9.0", "8.0"]`—no filtering required:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+curl -s "$LLMS" | jq -r '.releases[]'
 # 10.0
 # 9.0
 # 8.0
@@ -181,7 +52,7 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 - **Property naming:** The hal-index uses `select(.supported)` with dot notation. The releases-index requires `select(.["support-phase"] == "active")` with bracket notation and string comparison.
 - **Query complexity:** The hal-index query is 30% shorter and more intuitive for someone unfamiliar with the schema.
 
-**Winner:** hal-index (**17% smaller**)
+**Winner:** hal-index (**17% smaller**); llms-index equivalent (direct array, no filtering)
 
 **Note on URL length:** The hal-index currently uses long GitHub raw URLs (91 chars per URL). With equivalent short CDN URLs, the hal-index would be **4.4 KB**—31% smaller than releases-index.
 
@@ -192,6 +63,7 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `{version}/target-frameworks.json` per version | **~20 KB** |
+| llms-index | `llms.json` → `{version}/target-frameworks.json` per version | **~20 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -222,7 +94,7 @@ net8.0-android (Android 34.0)
 - **Upgrade planning:** Knowing the platform version helps teams plan SDK requirements when upgrading .NET versions.
 - **Discoverability:** The `target-frameworks-json` link makes this data accessible through HAL navigation.
 
-**Winner:** hal-index only
+**Winner:** hal-index only; llms-index equivalent
 
 ### CVE Queries for Latest Security Patch
 
@@ -231,6 +103,7 @@ net8.0-android (Android 34.0)
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **37 KB** |
+| llms-index | `llms.json` | **5 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** |
 
 **hal-index:**
@@ -248,6 +121,17 @@ PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
 
 # Step 3: Get the CVE records
 curl -s "$PATCH_HREF" | jq -r '.cve_records[]'
+# CVE-2025-55247
+# CVE-2025-55248
+# CVE-2025-55315
+```
+
+**llms-index:** The `_embedded.latest_security_month` array provides CVE records directly:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+curl -s "$LLMS" | jq -r '._embedded.latest_security_month[] | select(.release == "8.0") | .cve_records[]'
 # CVE-2025-55247
 # CVE-2025-55248
 # CVE-2025-55315
@@ -276,7 +160,7 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 - **Link syntax:** Counterintuitively, the deeper HAL structure `._links.self.href` is more ergonomic than `.["releases.json"]` because snake_case enables dot notation throughout. The releases-index embeds URLs directly in properties, but kebab-case naming forces bracket notation.
 - **Data efficiency:** hal-index is 32x smaller
 
-**Winner:** hal-index (**32x smaller**)
+**Winner:** hal-index (**32x smaller**); llms-index is 7x smaller still (5 KB vs 37 KB)
 
 ### High Severity CVEs with Details
 
@@ -285,6 +169,7 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **37 KB** |
+| llms-index | `llms.json` → `timeline/2025/10/index.json` | **14 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** (cannot answer) |
 
 **hal-index:**
@@ -302,6 +187,16 @@ PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
 curl -s "$PATCH_HREF" | jq -r '._embedded.disclosures[] | select(.cvss_severity == "HIGH" or .cvss_severity == "CRITICAL") | "\(.id): \(.title) (\(.cvss_severity))"'
 # CVE-2025-55247: .NET Denial of Service Vulnerability (HIGH)
 # CVE-2025-55315: .NET Security Feature Bypass Vulnerability (CRITICAL)
+```
+
+**llms-index:** Follow the `self` link from `latest_security_month` to get severity details:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+# Get the month index URL for 8.0's latest security month
+MONTH_URL=$(curl -s "$LLMS" | jq -r '._embedded.latest_security_month[] | select(.release == "8.0") | ._links.self.href')
+curl -s "$MONTH_URL" | jq -r '._embedded.disclosures[] | select(.cvss_severity == "HIGH" or .cvss_severity == "CRITICAL") | "\(.id): \(.title) (\(.cvss_severity))"'
 ```
 
 **releases-index:**
@@ -324,7 +219,7 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 - **Completeness:** ❌ The releases-index only provides CVE IDs and URLs to external CVE databases. It does not include severity scores, CVSS ratings, or vulnerability titles. To get this information, you would need to fetch each CVE URL individually from cve.mitre.org.
 - **Ergonomics:** The hal-index embeds full CVE details (`cvss_severity`, `cvss_score`, `title`, `fixes`) directly in the patch index, enabling single-query filtering by severity.
 
-**Winner:** hal-index (releases-index cannot answer this query—CVE severity and titles are not available)
+**Winner:** hal-index (releases-index cannot answer this query); llms-index is 2.6x smaller (14 KB vs 37 KB)
 
 ### Last 3 Security Releases for a Version
 
@@ -333,6 +228,7 @@ curl -s "$RELEASES_URL" | jq -r '[.releases[] | select(.security == true)] | .[0
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **55 KB** |
+| llms-index | `llms.json` → 3 month indexes (via `prev-security`) | **32 KB** |
 | releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** |
 
 **hal-index:**
@@ -387,7 +283,7 @@ curl -s "$RELEASES_URL" | jq -r '
 - **Ergonomics:** The hal-index uses `prev-security` links to skip non-security patches (SDK-only releases), directly navigating to security releases. The releases-index requires downloading a 1.2 MB file and filtering in memory.
 - **Navigation model:** The `prev-security` link enables efficient backward traversal through security history without fetching intermediate non-security releases.
 
-**Winner:** hal-index (**24x smaller**, with component information)
+**Winner:** hal-index (**24x smaller**, with component information); llms-index is 1.7x smaller (32 KB vs 55 KB)
 
 ### CVE Details for a Month
 
@@ -396,6 +292,7 @@ curl -s "$RELEASES_URL" | jq -r '
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **30 KB** |
+| llms-index | `llms.json` → `timeline/2025/index.json` → `timeline/2025/01/cve.json` | **30 KB** |
 | releases-index | All releases.json (13 versions) | **8.2 MB** (cannot answer) |
 
 **hal-index:**
@@ -444,7 +341,7 @@ done | sort -u
 - **Historical queries:** The releases-index has no way to determine which versions were supported at a given point in time. To reliably find all CVEs for January 2025, you must fetch *every* version's releases.json file (not just currently supported versions), significantly increasing data transfer.
 - **Ergonomics:** The hal-index provides a dedicated `cve.json` file per month with complete CVE records. The releases-index requires fetching all version files and provides only minimal data.
 
-**Winner:** hal-index (**256x smaller**, and releases-index cannot answer this query—CVE details are not available)
+**Winner:** hal-index (**256x smaller**, releases-index cannot answer this query); llms-index equivalent
 
 ### Security Releases Over the Last 6 Months
 
@@ -453,6 +350,7 @@ done | sort -u
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `timeline/index.json` → `timeline/2025/index.json` → 6 month indexes (via `prev-security`) | **55 KB** |
+| llms-index | `llms.json` → 6 month indexes (via `prev-security`) | **50 KB** |
 | releases-index | All version releases.json files | **2.4 MB** |
 
 **hal-index:**
@@ -509,7 +407,7 @@ done | sort -u | head -12
 - **Ergonomics:** The hal-index uses `prev-security` links to jump directly between security months, skipping non-security months entirely. The releases-index requires downloading all version files (2.4+ MB), filtering by security flag, and deduplicating results.
 - **Navigation model:** The `prev-security` link on timeline months enables efficient backward traversal through security history. The releases-index has no concept of time-based navigation.
 
-**Winner:** hal-index (**40x smaller**, with version and component information)
+**Winner:** hal-index (**40x smaller**, with version and component information); llms-index is 10% smaller (50 KB vs 55 KB)
 
 ### Critical CVE This Month
 
@@ -518,6 +416,7 @@ done | sort -u | head -12
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `timeline/index.json` → `timeline/2025/index.json` → `timeline/2025/10/index.json` | **25 KB** |
+| llms-index | `llms.json` → `timeline/2025/10/index.json` | **14 KB** |
 | releases-index | `releases-index.json` + all supported releases.json | **2.4 MB** (incomplete—no severity data) |
 
 **hal-index:**
@@ -534,6 +433,15 @@ MONTH_HREF=$(curl -s "$YEAR_HREF" | jq -r '._embedded.months[] | select(.month =
 # Step 3: Check for CRITICAL CVEs
 curl -s "$MONTH_HREF" | jq -r '._embedded.disclosures // [] | .[] | select(.cvss_severity == "CRITICAL") | "\(.id): \(.title)"'
 # CVE-2025-55315: .NET Security Feature Bypass Vulnerability
+```
+
+**llms-index:** Uses the `latest-security-month` link to jump directly to October 2025:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+MONTH_URL=$(curl -s "$LLMS" | jq -r '._links["latest-security-month"].href')
+curl -s "$MONTH_URL" | jq -r '._embedded.disclosures[] | select(.cvss_severity == "CRITICAL") | "\(.id): \(.title)"'
 ```
 
 **releases-index:**
@@ -563,7 +471,137 @@ done | sort -u
 - **Ergonomics:** The hal-index embeds `cvss_severity` directly in the disclosure records, enabling single-query filtering for CRITICAL vulnerabilities.
 - **Use case:** This is a common security operations query ("Do I need to patch urgently?"). The hal-index answers it in 27 KB; the releases-index cannot answer it at all.
 
-**Winner:** hal-index (**89x smaller**, and releases-index cannot answer this query—CVE severity is not available)
+**Winner:** hal-index (**89x smaller**, releases-index cannot answer this query); llms-index is 1.8x smaller (14 KB vs 25 KB)
+
+### Critical CVEs Over the Last 6 Months
+
+#### Query: "List all Critical severity CVEs fixed in the last 6 months"
+
+| Schema | Files Required | Total Transfer |
+|--------|----------------|----------------|
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → 6 month indexes (via `prev-security`) | **55 KB** |
+| llms-index | `llms.json` → 6 month indexes (via `prev-security`) | **50 KB** |
+| releases-index | All version releases.json files | **2.4 MB** (cannot answer) |
+
+**hal-index:**
+
+```bash
+TIMELINE="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json"
+
+# Step 1: Get the latest security month href
+MONTH_HREF=$(curl -s "$TIMELINE" | jq -r '._embedded.years[0]._links["latest-security-month"].href')
+
+# Step 2: Walk back 6 security months, filtering for CRITICAL CVEs
+for i in {1..6}; do
+  DATA=$(curl -s "$MONTH_HREF")
+  YEAR=$(echo "$DATA" | jq -r '.year')
+  MONTH=$(echo "$DATA" | jq -r '.month')
+  echo "$DATA" | jq -r --arg ym "$YEAR-$MONTH" \
+    '._embedded.disclosures[] | select(.cvss_severity == "CRITICAL") | "\($ym) | \(.affected_releases | join(", ")) | \(.id): \(.title)"'
+  MONTH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
+  [ -z "$MONTH_HREF" ] && break
+done
+# 2025-10 | 8.0, 9.0 | CVE-2025-55315: .NET Security Feature Bypass Vulnerability
+# 2025-01 | 8.0, 9.0 | CVE-2025-21172: .NET Remote Code Execution Vulnerability
+```
+
+**llms-index:** Uses `latest-security-month` link as starting point:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+# Start from the latest security month
+MONTH_HREF=$(curl -s "$LLMS" | jq -r '._links["latest-security-month"].href')
+
+# Walk back 6 security months, filtering for CRITICAL CVEs
+for i in {1..6}; do
+  DATA=$(curl -s "$MONTH_HREF")
+  YEAR=$(echo "$DATA" | jq -r '.year')
+  MONTH=$(echo "$DATA" | jq -r '.month')
+  echo "$DATA" | jq -r --arg ym "$YEAR-$MONTH" \
+    '._embedded.disclosures[] | select(.cvss_severity == "CRITICAL") | "\($ym) | \(.affected_releases | join(", ")) | \(.id): \(.title)"'
+  MONTH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
+  [ -z "$MONTH_HREF" ] && break
+done
+```
+
+**releases-index:** Cannot answer—no severity data available.
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index only provides CVE IDs and URLs. Severity information requires fetching each CVE from cve.mitre.org individually.
+- **Ergonomics:** The hal-index embeds `cvss_severity` in each disclosure, enabling in-query filtering. The `prev-security` chain efficiently skips non-security months.
+- **Use case:** Critical for security compliance reporting ("Have we been exposed to any critical vulnerabilities in the past 6 months?").
+
+**Winner:** hal-index (**44x smaller**, releases-index cannot answer this query); llms-index is 10% smaller (50 KB vs 55 KB)
+
+### Critical CVEs for a Specific Version Over Time
+
+#### Query: "List all Critical severity CVEs affecting .NET 8.0 in the last 6 months"
+
+| Schema | Files Required | Total Transfer |
+|--------|----------------|----------------|
+| hal-index | `index.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **55 KB** |
+| llms-index | `llms.json` → `8.0/index.json` → 3 patch indexes (via `prev-security`) | **50 KB** |
+| releases-index | `releases-index.json` + `8.0/releases.json` | **1,240 KB** (cannot answer) |
+
+**hal-index:**
+
+```bash
+ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
+
+# Step 1: Get the 8.0 latest-security patch href
+VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "8.0") | ._links.self.href')
+PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
+
+# Step 2: Walk back security patches, filtering for CRITICAL CVEs
+for i in {1..6}; do
+  DATA=$(curl -s "$PATCH_HREF")
+  VERSION=$(echo "$DATA" | jq -r '.version')
+  echo "$DATA" | jq -r --arg ver "$VERSION" \
+    '._embedded.disclosures[] | select(.cvss_severity == "CRITICAL") | "\($ver) | \(.id): \(.title)"'
+  PATCH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
+  [ -z "$PATCH_HREF" ] && break
+done
+# 8.0.21 | CVE-2025-55315: .NET Security Feature Bypass Vulnerability
+# 8.0.12 | CVE-2025-21172: .NET Remote Code Execution Vulnerability
+```
+
+**llms-index:** Uses `_embedded.latest_security_month` to find the starting point, then navigates to version-specific patches:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+# Get the 8.0 patch from latest_security_month, then follow to version index
+PATCH_DATA=$(curl -s "$LLMS" | jq -r '._embedded.latest_security_month[] | select(.release == "8.0")')
+VERSION_HREF=$(curl -s "$LLMS" | jq -r '._embedded.latest_patches[] | select(.release == "8.0") | ._links.self.href' | sed 's|/8.0.[0-9]*/|/|')/../index.json
+
+# Alternative: navigate via releases-index link to 8.0/index.json
+VERSION_HREF=$(curl -s "$LLMS" | jq -r '._links["releases-index"].href')
+VERSION_HREF=$(curl -s "$VERSION_HREF" | jq -r '._embedded.releases[] | select(.version == "8.0") | ._links.self.href')
+PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
+
+# Walk back security patches for 8.0
+for i in {1..6}; do
+  DATA=$(curl -s "$PATCH_HREF")
+  VERSION=$(echo "$DATA" | jq -r '.version')
+  echo "$DATA" | jq -r --arg ver "$VERSION" \
+    '._embedded.disclosures[] | select(.cvss_severity == "CRITICAL") | "\($ver) | \(.id): \(.title)"'
+  PATCH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
+  [ -z "$PATCH_HREF" ] && break
+done
+```
+
+**releases-index:** Cannot answer—no severity data available.
+
+**Analysis:**
+
+- **Completeness:** ❌ The releases-index only provides CVE IDs. To filter by severity, you would need to fetch each CVE from cve.mitre.org.
+- **Version-specific traversal:** The hal-index `prev-security` links on patch indexes stay within the major version, efficiently walking through 8.0.21 → 8.0.20 → 8.0.19 etc.
+- **The `release` property:** Patch entries include a `release` property (e.g., `"release": "8.0"`) that enables filtering by major version. This is what makes `select(.release == "8.0")` work on embedded patch collections like `_embedded.latest_patches[]` or `_embedded.latest_security_month[]`.
+- **Use case:** Version-specific security audits ("Is my .NET 8 deployment exposed to any critical vulnerabilities?").
+
+**Winner:** hal-index (**24x smaller**, releases-index cannot answer this query); llms-index requires extra navigation (no direct 8.0 shortcut in embedded data)
 
 ### Breaking Changes Summary
 
@@ -572,6 +610,7 @@ done | sort -u
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
+| llms-index | `llms.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -610,7 +649,7 @@ curl -s "$BC_HREF" | jq -r '[.breaks[].category] | group_by(.) | map({category: 
 - **Completeness:** ❌ The releases-index does not include breaking changes data. The hal-index provides full breaking changes with category, impact level, required actions, and references.
 - **Ergonomics:** The hal-index uses discoverable HAL links (`._links["compatibility-json"]`) to navigate to breaking changes data, enabling filtering and prioritization.
 
-**Winner:** hal-index only
+**Winner:** hal-index only; llms-index equivalent
 
 ### Breaking Changes by Category
 
@@ -619,6 +658,7 @@ curl -s "$BC_HREF" | jq -r '[.breaks[].category] | group_by(.) | map({category: 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
+| llms-index | `llms.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -659,7 +699,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 - **Completeness:** ❌ The releases-index does not include breaking changes data.
 - **Ergonomics:** The hal-index enables filtering breaking changes by category, impact level, or affected component, helping developers prioritize migration work.
 
-**Winner:** hal-index only
+**Winner:** hal-index only; llms-index equivalent
 
 ### Breaking Changes Documentation URLs
 
@@ -668,6 +708,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
+| llms-index | `llms.json` → `10.0/index.json` → `10.0/compatibility.json` | **151 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -708,7 +749,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 - **Completeness:** ❌ The releases-index does not include breaking changes data.
 - **Ergonomics:** These raw markdown URLs can be fetched and fed directly to an LLM for analysis or migration assistance. Breaking changes include multiple reference types; `documentation-source` provides raw markdown content.
 
-**Winner:** hal-index only
+**Winner:** hal-index only; llms-index equivalent
 
 ### OS Package Dependencies
 
@@ -717,6 +758,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | hal-index | `index.json` → `10.0/index.json` → `10.0/manifest.json` → `10.0/os-packages.json` | **29 KB** |
+| llms-index | `llms.json` → `10.0/index.json` → `10.0/manifest.json` → `10.0/os-packages.json` | **29 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **hal-index:**
@@ -750,24 +792,26 @@ curl -s "$PACKAGES_URL" | jq -r '
 - **Ergonomics:** The hal-index `os-packages.json` includes distribution-specific package names, install commands, and version requirements. Package names vary by distribution (e.g., `libssl3t64` on Ubuntu 24.04 vs `libssl3` on Debian 12 vs `openssl-libs` on RHEL).
 - **Use case:** Essential for container builds, CI/CD pipelines, and deployment scripts that need to install .NET runtime dependencies on minimal base images.
 
-**Winner:** hal-index only
+**Winner:** hal-index only; llms-index equivalent
 
 ## Query Capability Comparison
 
-| Query Type | hal-index | releases-index | Ratio |
-|------------|-----------|----------------|-------|
-| List versions | ✅ | ✅ | 17% smaller |
-| Version lifecycle (EOL, LTS) | ✅ | ✅ | 17% smaller |
-| Latest patch per version | ✅ | ✅ | 32x smaller |
-| CVEs per version | ✅ | ✅ | 32x smaller |
-| CVEs per month | ✅ | ❌ | — |
-| CVE details (severity, fixes) | ✅ | ❌ | — |
-| Timeline navigation | ✅ | ❌ | — |
-| Security history navigation (`prev-security`) | ✅ | ❌ | — |
-| SDK-first navigation | ✅ | ❌ | — |
-| Target frameworks (TFMs, platform versions) | ✅ | ❌ | hal-index only |
-| Breaking changes by category | ✅ | ❌ | hal-index only |
-| OS package dependencies | ✅ | ❌ | hal-index only |
+| Query Type | hal-index | llms-index | releases-index | Ratio |
+|------------|-----------|------------|----------------|-------|
+| List versions | ✅ | ✅ (direct array) | ✅ | 17% smaller |
+| Version lifecycle (EOL, LTS) | ✅ | ✅ | ✅ | 17% smaller |
+| Latest patch per version | ✅ | ✅ (embedded) | ✅ | 32x smaller |
+| CVEs per version | ✅ | ✅ (embedded) | ✅ | 32x smaller |
+| CVEs per month | ✅ | ✅ | ❌ | — |
+| CVE details (severity, fixes) | ✅ | ✅ | ❌ | — |
+| Timeline navigation | ✅ | ✅ | ❌ | — |
+| Security history navigation (`prev-security`) | ✅ | ✅ | ❌ | — |
+| SDK-first navigation | ✅ | ✅ | ❌ | — |
+| Target frameworks (TFMs, platform versions) | ✅ | ✅ | ❌ | hal-index only |
+| Breaking changes by category | ✅ | ✅ | ❌ | hal-index only |
+| OS package dependencies | ✅ | ✅ | ❌ | hal-index only |
+
+The llms-index provides all hal-index capabilities plus embedded shortcuts for common AI queries. However, it is updated more frequently (~12+/year vs ~1/year for hal-index root) and is not intended for mission-critical workflows.
 
 ## Cache Coherency
 
@@ -799,17 +843,22 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 
 ## Summary
 
-| Metric | hal-index | releases-index |
-|--------|-------------|----------------|
-| Basic version queries | 5 KB | 6 KB |
-| CVE queries (latest security patch) | 37 KB | 1,240 KB |
-| Last 3 security releases (version) | 55 KB | 1,240 KB |
-| Last 6 security months (timeline) | 55 KB | 2.4 MB |
-| Cache coherency | ✅ Atomic | ❌ TTL mismatch risk |
-| Query syntax | snake_case (dot notation) | kebab-case (bracket notation) |
-| Link traversal | `._links.self.href` | `.["releases.json"]` |
-| Boolean filters | `supported`, `security` | `support-phase == "active"` |
-| CVE details | ✅ Full | ❌ ID + URL only |
-| Timeline navigation | ✅ | ❌ |
+| Metric | hal-index | llms-index | releases-index |
+|--------|-----------|------------|----------------|
+| Basic version queries | 5 KB | 5 KB | 6 KB |
+| CVE queries (latest security patch) | 37 KB | 5 KB | 1,240 KB |
+| Last 3 security releases (version) | 55 KB | 32 KB | 1,240 KB |
+| Last 6 security months (timeline) | 55 KB | 50 KB | 2.4 MB |
+| Critical CVE this month | 25 KB | 14 KB | 2.4 MB |
+| Cache coherency | ✅ Atomic | ✅ Atomic | ❌ TTL mismatch risk |
+| Query syntax | snake_case (dot notation) | snake_case | kebab-case (bracket notation) |
+| Link traversal | `._links.self.href` | `._links.self.href` | `.["releases.json"]` |
+| Boolean filters | `supported`, `security` | `supported`, `security` | `support-phase == "active"` |
+| CVE details | ✅ Full | ✅ Full | ❌ ID + URL only |
+| Timeline navigation | ✅ | ✅ | ❌ |
+| Update frequency | ~1/year (root) | ~12+/year | ~30/year |
+| Mission-critical | ✅ | ❌ | ✅ |
 
 The hal-index schema is optimized for the queries that matter most to security operations, while maintaining cache coherency across CDN deployments. The use of boolean properties (`supported`) instead of enum comparisons (`support-phase == "active"`) reduces query complexity and eliminates the need to know the vocabulary of valid enum values. Counterintuitively, the deeper HAL link structure (`._links.self.href`) is more ergonomic than flat URL properties (`.["releases.json"]`) because consistent snake_case naming enables dot notation throughout the query path.
+
+The llms-index provides additional efficiency for AI workloads by embedding common query results directly. It is not suitable for mission-critical cloud-native scenarios due to its higher update frequency, but offers significant fetch savings for interactive AI assistants (e.g., 7x smaller for "CVEs per version" queries).
