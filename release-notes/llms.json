@@ -60,6 +60,8 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
+        "supported": true,
+        "eol_date": "2028-11-14",
         "sdk_version": "10.0.101",
         "_links": {
           "self": {
@@ -68,6 +70,14 @@
           "latest-security": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc2/index.json",
             "title": "10.0.0-rc.2"
+          },
+          "release-major": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
+            "title": ".NET 10.0"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/index.json",
+            "title": ".NET 10.0 SDK Index"
           }
         }
       },
@@ -81,6 +91,8 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
+        "supported": true,
+        "eol_date": "2026-11-10",
         "sdk_version": "9.0.308",
         "_links": {
           "self": {
@@ -89,6 +101,14 @@
           "latest-security": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.10/index.json",
             "title": "9.0.10"
+          },
+          "release-major": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
+            "title": ".NET 9.0"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
+            "title": ".NET 9.0 SDK Index"
           }
         }
       },
@@ -102,6 +122,8 @@
         "security": false,
         "cve_count": 0,
         "support_phase": "active",
+        "supported": true,
+        "eol_date": "2026-11-10",
         "sdk_version": "8.0.416",
         "_links": {
           "self": {
@@ -110,24 +132,53 @@
           "latest-security": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.21/index.json",
             "title": "8.0.21"
+          },
+          "release-major": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
+            "title": ".NET 8.0"
+          },
+          "latest-sdk": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
+            "title": ".NET 8.0 SDK Index"
           }
         }
       }
     ],
     "latest_security_month": [
       {
+        "release": "10.0",
+        "release_type": "lts",
+        "version": "10.0.0-rc.2",
+        "sdk_version": "10.0.100-rc.2.25502.107",
+        "date": "2025-10-14T00:00:00+00:00",
+        "year": "2025",
+        "month": "10",
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2025-55247",
+          "CVE-2025-55315"
+        ],
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json"
+          }
+        }
+      },
+      {
         "release": "9.0",
         "release_type": "sts",
         "version": "9.0.10",
         "sdk_version": "9.0.306",
+        "date": "2025-10-14T00:00:00+00:00",
         "year": "2025",
         "month": "10",
         "security": true,
         "cve_count": 3,
         "cve_records": [
           "CVE-2025-55247",
-          "CVE-2025-55248",
-          "CVE-2025-55315"
+          "CVE-2025-55315",
+          "CVE-2025-55248"
         ],
         "_links": {
           "self": {
@@ -140,14 +191,15 @@
         "release_type": "lts",
         "version": "8.0.21",
         "sdk_version": "8.0.415",
+        "date": "2025-10-14T00:00:00+00:00",
         "year": "2025",
         "month": "10",
         "security": true,
         "cve_count": 3,
         "cve_records": [
           "CVE-2025-55247",
-          "CVE-2025-55248",
-          "CVE-2025-55315"
+          "CVE-2025-55315",
+          "CVE-2025-55248"
         ],
         "_links": {
           "self": {
