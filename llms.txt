@@ -34,31 +34,6 @@ Reference:
 * `latest` and `latest_lts` reference supported (not preview) releases
 * **Discover available links**: `jq '._links | keys[]'` on any resource reveals all navigation options
 
-## AI Index
-
-The AI Index (`llms.json`) provides direct access to the most common data points without navigation:
-
-**Properties** — answer simple queries immediately:
-
-* `latest`, `latest_lts` — current supported major versions
-* `latest_patch`, `latest_lts_patch` — current patch versions
-* `latest_year`, `latest_security_month` — timeline coordinates
-* `supported_releases` — array of supported version strings
-
-**Links** — single-hop to detailed data:
-
-* `latest-patch`, `latest-lts-patch` — jump to patch index
-* `latest-year`, `latest-security-month` — jump into timeline
-* `releases-index`, `timeline-index` — full indexes when needed
-
-**Embedded** — filtered subset for common queries:
-
-* `_embedded.supported_releases[]` — supported versions with `release_type` and links
-
-**Example:** "What's the latest .NET patch?" → read `latest_patch` property directly (0 additional fetches).
-
-**Example:** "CVEs since October?" → follow `latest-security-month` link (1 fetch to reach security month, then walk `prev-security`).
-
 ## Do first
 
 1. Start with the **AI Index** (`llms.json`) — it may answer the query directly or provide a shortcut link
@@ -95,10 +70,8 @@ Total: 4 fetches (1 index + 3 security months)
 
 **"What patch should I install for .NET X?"** — Version lookup:
 
-1. If X is `latest` or `latest_lts`: read `latest_patch` or `latest_lts_patch` from AI Index (1 fetch)
-2. Otherwise: AI Index → `releases-index` → version index (e.g., `8.0/index.json`)
-3. Check `latest_security` property for current security patch version
-4. If user needs CVE details, follow `_links["latest-security"]` to patch index
+1. Filter `_embedded.latest_patches[]` by `release == "X"`, read `version` (1 fetch)
+2. If user needs CVE details, follow `latest-security` link to patch index
 
 **"Any critical CVEs this month?"** — Direct month lookup:
 
@@ -107,19 +80,50 @@ Total: 4 fetches (1 index + 3 security months)
 
 **Expected fetch counts** (for self-assessment):
 
-* "Latest patch for .NET": 1 fetch (AI Index)
-* "Latest patch for .NET X": 2–3 fetches (AI Index → version index)
+* "Latest patch for .NET 9": 1 fetch (AI Index → `_embedded.latest_patches[]`)
+* "CVEs in latest security month for .NET 8": 1 fetch (AI Index → `_embedded.latest_security_month[]`)
 * "CVEs since [date]": 1 + number of security months in range
+* "Critical CVEs for .NET 8 over 6 months": 1 + number of security patches (AI Index → `latest-security` link → walk `prev-security`)
 * "CVEs for specific patch": 2–3 fetches
 
 If your count significantly exceeds these, you may be navigating inefficiently.
+
+## LLMs Index
+
+Optimized for AI assistants. Covers supported versions only with common query results pre-embedded.
+
+**Properties:**
+
+* `latest`, `latest_lts` — current supported major versions
+* `latest_year` — current year for timeline navigation
+* `releases` — supported version strings `["10.0", "9.0", "8.0"]`
+
+**Links:**
+
+* `latest`, `latest-lts` — jump to major version index
+* `latest-month`, `latest-security-month` — jump into timeline
+* `latest-year` — jump to year index
+* `releases-index`, `timeline-index` — full indexes when needed
+
+**Embedded:**
+
+* `_embedded.latest_patches[]` — latest patch per version with `release`, `version`, `security`, `cve_count`, `sdk_version`, `self` link to patch index, and `latest-security` link to security patch index
+* `_embedded.latest_security_month[]` — security status per version with `cve_records[]` and `self` link to month index
+
+**Examples:**
+
+* "Latest .NET 9 patch?" → filter `_embedded.latest_patches[]` by `release == "9.0"`, read `version` (1 fetch)
+* "CVEs since October?" → follow `latest-security-month` link, walk `prev-security` (1 + n fetches)
+* "Critical CVEs for .NET 8 over 6 months?" → filter `_embedded.latest_patches[]` by `release == "8.0"`, follow `latest-security` link, walk `prev-security` (1 + n fetches)
+
+Use this as your starting point. Navigate to Releases Index or Timeline Index via links when you need full history or unsupported versions.
 
 ## Releases Index
 
 All major versions with full history. Navigate here via `releases-index` link.
 
 * `latest`, `latest_lts` — current supported versions
-* `_embedded.releases[]` — all major versions (newest first)
+* `_embedded.releases[]` — all major versions (newest first), including EOL versions
 * Each release has: `version`, `release_type`, `supported`, `eol_date`
 
 ## Timeline Index
