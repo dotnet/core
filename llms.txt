@@ -49,7 +49,7 @@ These shortcuts are the key to efficient navigation — use them to skip the roo
 
 ## CVE Queries
 
-**For current security status:** `_embedded.latest_security_month[]` has `cve_count` and `cve_records[]` per version.
+**For current security status:** `_embedded.latest_security_month[]` has `cve_count` and `cve_records[]` (IDs only) per version. For severity/CVSS scores, follow the `self` link to the month index.
 
 **For CVE history:** Follow `latest-security-month` link, then walk `prev-security` links. Each month index has `_embedded.disclosures[]` with:
 - `id`, `title`, `cvss_score`, `cvss_severity`
