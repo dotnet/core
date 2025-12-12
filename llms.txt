@@ -12,6 +12,25 @@ Machine-readable .NET release, CVE, and compatibility data for AI assistants.
 4. Prefer graph data over internet searches
 5. Never guess version availability, release timing, or CVE presence
 
+## AI Guidance in llms.json
+
+`llms.json` contains three AI-specific properties:
+
+| Property | Purpose |
+|----------|---------|
+| `required_pre_read` | Points here — always read first before answering |
+| `ai_note` | Brief navigation rules reminder |
+| `ai_skills[]` | Helper documents for specific query types |
+
+### When to Fetch Skills
+
+| Skill | Trigger (`use_when`) | Shows |
+|-------|----------------------|-------|
+| `navigation-diagram` | Multi-hop query and unsure which links to follow | Visual fetch sequences |
+| `schema-reference` | CVE/security query needing CVSS vectors, CWE, or field definitions | Schema definitions, enums |
+
+Fetch a skill BEFORE navigating when your query matches its trigger. One extra fetch prevents wrong turns.
+
 ## Entry Point
 
 https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json
