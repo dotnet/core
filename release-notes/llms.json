@@ -1,9 +1,7 @@
 {
   "kind": "llms-index",
   "title": ".NET Release Index for AI",
-  "required_pre_read": [
-    "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms.txt"
-  ],
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms.txt",
   "ai_note": "This graph is a HAL hypermedia graph and should be queried by following links. Always open and read required_pre_read before answering; treat it as the default navigation skill. Do not guess URLs; navigate via _links and cite the graph nodes used. The ai_skills below are optional ordered helpers: if asked about traversal/path/efficiency, open ai_skills[0].href; if asked about CVEs/severity/fields, open ai_skills[1].href. One extra fetch upfront prevents multiple wrong turns later.",
   "ai_skills": [
     {
