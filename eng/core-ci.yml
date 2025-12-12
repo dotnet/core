@@ -1,5 +1,8 @@
 name: CoreCI
-trigger: main
+trigger:
+  branches:
+    include:
+      - main
 
 resources:
   repositories:
