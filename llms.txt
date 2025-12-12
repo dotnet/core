@@ -2,6 +2,8 @@
 
 Machine-readable .NET release, CVE, and compatibility data for AI assistants.
 
+**TL;DR:** Fetch `llms.json` first. For supported versions, data is embedded. For EOL versions, follow `releases-index` → version → `latest-security`. Never construct URLs — follow `_links` only.
+
 ## Rules
 
 1. Follow `_links["..."].href` exactly — never construct URLs
@@ -56,7 +58,7 @@ These shortcuts are the key to efficient navigation — use them to skip the roo
 - `affected_releases`, `affected_products`
 - `fixes[]` with commit diff URLs (fetch diffs immediately — firewalls may block later)
 
-**For deep CVE analysis:** Follow `cve-json` link from month index for CVSS vectors, CWE, package version ranges.
+**For deep CVE analysis:** Follow `cve-json` link from month index for CVSS vectors, CWE, package version ranges. Only fetch `cve.json` if you need these details — the month index `_embedded.disclosures[]` has severity, titles, and fix commits.
 
 The `prev-security` links skip non-security months and cross year boundaries automatically.
 
