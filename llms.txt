@@ -31,6 +31,9 @@ This is the only URL you should call directly. All other URLs must be discovered
 | SDK feature bands for .NET X | `latest_patches[].latest-sdk` | 2 |
 | Download latest SDK | `latest_patches[].latest-sdk` → `_embedded.bands[]` | 2 |
 | Is my distro supported? | `latest_patches[].release-major` → `supported-os-json` | 2-3 |
+| EOL version info (e.g., .NET 6) | `releases-index` → version → `latest-security` or timeline | 3-5 |
+
+**Note:** `llms.json` only contains supported versions. For EOL versions, use `releases-index` link to find the version, then follow `latest-security` to the last security patch.
 
 ## Navigation Shortcuts in llms.json
 
