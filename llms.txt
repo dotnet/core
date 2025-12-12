@@ -69,6 +69,31 @@ The `prev-security` links skip non-security months and cross year boundaries aut
 
 If your count significantly exceeds these, you may be navigating inefficiently.
 
+## Example Walkthroughs
+
+**Example 1: CVEs affecting .NET 8 this month** (1 fetch)
+```
+1. Fetch llms.json
+2. Filter _embedded.latest_security_month[] where release == "8.0"
+3. Read cve_count and cve_records[] → done
+```
+
+**Example 2: Breaking changes for .NET 10** (2 fetches)
+```
+1. Fetch llms.json
+2. Find _embedded.latest_patches[] where release == "10.0"
+3. Follow _links.release-major.href → 10.0/index.json
+4. Follow _links.compatibility-json.href → done
+```
+
+**Example 3: CVEs since September 2025** (1 + N fetches)
+```
+1. Fetch llms.json
+2. Follow _links.latest-security-month.href → 2025/10/index.json
+3. Read _embedded.disclosures[], then follow _links.prev-security.href
+4. Repeat until month < September → done
+```
+
 ## Graph Structure
 
 - Properties use `snake_case`; link relations use `kebab-case`
