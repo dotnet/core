@@ -99,6 +99,8 @@ All patches for a major version (e.g., `10.0/index.json`).
 - `_embedded.patches[]` — all patches for this version (newest first)
 - Each patch has: `version`, `date`, `security`, `cve_count`, `_links.self`
 
+**Note:** For EOL versions, `_embedded.patches[]` may be empty to reduce file size. Use `_links.latest-security` to navigate to the last security patch, or use the timeline index to find historical patches.
+
 **Key links:**
 | Link | Purpose |
 |------|---------|
