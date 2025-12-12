@@ -1,0 +1,354 @@
+# .NET Release Graph — Schema Reference
+
+Detailed schema documentation for the .NET release metadata graph.
+For quick navigation patterns, see: https://raw.githubusercontent.com/dotnet/core/release-index/llms.txt
+
+## File Types
+
+| File | Example Path | Contains |
+|------|--------------|----------|
+| AI index | `/llms.json` | Optimized entry point with embedded data and shortcut links |
+| Releases index | `/index.json` | All major versions with support status, EOL dates |
+| Version index | `/10.0/index.json` | All patches for a version, embedded CVE summaries |
+| Patch index | `/10.0/10.0.1/index.json` | Single patch details, embedded CVE disclosures |
+| Manifest | `/10.0/manifest.json` | External links (downloads, docs, supported OS) |
+| Compatibility | `/10.0/compatibility.json` | Breaking changes with impact, actions, doc links |
+| Target frameworks | `/10.0/target-frameworks.json` | TFMs with platform versions (net10.0-ios, etc.) |
+| SDK index | `/10.0/sdk/index.json` | SDK feature bands with support status and downloads |
+| Supported OS | `/10.0/supported-os.json` | Supported distros, libc requirements |
+| OS packages | `/10.0/os-packages.json` | Distro-specific package names for dependencies |
+| Timeline index | `/timeline/index.json` | All years |
+| Year index | `/timeline/2025/index.json` | All months with CVE summaries |
+| Month index | `/timeline/2025/01/index.json` | Releases that month, embedded CVE disclosures |
+| CVE details | `/timeline/2025/01/cve.json` | Full CVE data: products, packages, commit diffs |
+
+Paths are illustrative — always follow `_links["..."].href` to get actual URLs.
+
+## LLMs Index Schema
+
+Optimized for AI assistants. Covers supported versions only.
+
+**Root properties:**
+- `latest`, `latest_lts` — current supported major versions (e.g., "10.0")
+- `latest_year` — current year for timeline navigation
+- `releases` — supported version strings `["10.0", "9.0", "8.0"]`
+
+**Root links:**
+- `latest`, `latest-lts` — jump to major version index
+- `latest-month`, `latest-security-month` — jump into timeline
+- `latest-year` — jump to year index
+- `releases-index`, `timeline-index` — full indexes when needed
+
+**Embedded arrays:**
+
+`_embedded.latest_patches[]` — one object per supported version:
+- `version` — patch version (e.g., "10.0.1")
+- `release` — major version (e.g., "10.0")
+- `release_type` — "lts" or "sts"
+- `date` — release date (ISO 8601)
+- `security` — boolean, true if this patch fixed CVEs
+- `cve_count` — number of CVEs fixed
+- `support_phase` — "active", "maintenance", or "eol"
+- `supported` — boolean
+- `eol_date` — end of life date (ISO 8601)
+- `sdk_version` — corresponding SDK version
+- `_links.self` — link to patch index
+- `_links.latest-security` — link to latest security patch for this version
+- `_links.release-major` — link to major version index
+- `_links.latest-sdk` — link to SDK index
+
+`_embedded.latest_security_month[]` — one object per version with CVEs in latest security month:
+- `release`, `release_type`, `version`, `sdk_version`, `date`
+- `security` — always true
+- `cve_count` — number of CVEs
+- `cve_records[]` — array of CVE IDs (e.g., ["CVE-2025-55247", "CVE-2025-55248"])
+- `_links.self` — link to month index
+
+## Releases Index Schema
+
+All major versions with full history. Navigate here via `releases-index` link from llms.json.
+
+**Root properties:**
+- `latest`, `latest_lts` — current supported versions
+
+**Embedded:**
+- `_embedded.releases[]` — all major versions (newest first), including EOL versions
+- Each release has: `version`, `release_type`, `supported`, `eol_date`, `_links.self`
+
+## Timeline Index Schema
+
+Time-based view across all versions. Navigate here via `timeline-index` link.
+
+**Root properties:**
+- `latest_year` — most recent year
+
+**Embedded:**
+- `_embedded.years[]` — each year has `_embedded.months[]`
+- Each month has: `security`, `cve_count`, `cve_records[]`, `_links.self`, `_links.prev-security`
+
+## Version Index Schema
+
+All patches for a major version (e.g., `10.0/index.json`).
+
+**Properties:**
+- `version` — major version (e.g., "10.0")
+- `release_type`, `supported`, `eol_date`, `support_phase`
+- `latest` — latest patch version string
+
+**Embedded:**
+- `_embedded.patches[]` — all patches for this version (newest first)
+- Each patch has: `version`, `date`, `security`, `cve_count`, `_links.self`
+
+**Key links:**
+| Link | Purpose |
+|------|---------|
+| `latest-security` | Jump to latest security patch |
+| `compatibility-json` | Breaking changes |
+| `release-manifest` | External resources (downloads, supported OS) |
+| `target-frameworks-json` | TFMs with platform-specific versions |
+| `sdk-index` | SDK feature bands |
+
+## Patch Index Schema
+
+Single patch details (e.g., `10.0/10.0.1/index.json`).
+
+**Properties:**
+- `version`, `date`, `security`, `cve_count`
+- `sdk_version` — corresponding SDK version
+- `runtime_version`, `aspnetcore_version`, etc.
+
+**Embedded (for security patches):**
+- `_embedded.disclosures[]` — CVE details (see CVE Schema below)
+
+**Key links:**
+| Link | Purpose |
+|------|---------|
+| `cve-json` | Full CVE details (only for `security: true` patches) |
+| `release-month` | Jump to timeline month |
+| `prev` | Previous patch |
+| `prev-security` | Previous security patch |
+
+## Month Index Schema
+
+Releases for a calendar month (e.g., `timeline/2025/10/index.json`).
+
+**Properties:**
+- `year`, `month`, `security`, `cve_count`
+- `cve_records[]` — array of CVE IDs
+
+**Embedded:**
+- `_embedded.releases[]` — patches released that month (across all versions)
+- `_embedded.disclosures[]` — CVE details (for security months)
+
+**Key links:**
+| Link | Purpose |
+|------|---------|
+| `cve-json` | Full CVE details for that month |
+| `prev` | Previous month |
+| `prev-security` | Previous security month (skips non-security months, crosses year boundaries) |
+
+## CVE Schema
+
+CVE information exists at two levels of detail:
+
+### Embedded Disclosures (`_embedded.disclosures[]`)
+
+Available in patch indexes and month indexes. Sufficient for most queries:
+
+- `id` — CVE ID (e.g., "CVE-2025-55247")
+- `title` — vulnerability title
+- `cvss_score` — numeric score (e.g., 7.3)
+- `cvss_severity` — "CRITICAL", "HIGH", "MEDIUM", "LOW"
+- `affected_releases[]` — major versions affected (e.g., ["8.0", "9.0"])
+- `affected_products[]` — products affected (e.g., [".NET SDK", "ASP.NET Core"])
+- `affected_packages[]` — NuGet packages affected
+- `platforms[]` — affected platforms (e.g., ["Linux"], or ["All"])
+- `disclosure_date` — date disclosed (ISO 8601)
+- `fixes[]` — array of fix objects with `repository`, `hash`, `url` (commit diff URL)
+- `_links.announcement` — GitHub security announcement
+
+### Full CVE Details (`cve.json`)
+
+Fetch only for detailed analysis. Contains everything in disclosures plus:
+
+- `cvss_vector` — full CVSS vector string
+- `cwe` — CWE weakness identifier
+- `description[]` — full description text
+- `mitigation` — mitigation guidance
+- `packages[]` — exact vulnerable/fixed version ranges per package
+- Pre-computed lookup dictionaries:
+  - `product_cves` — CVEs by product
+  - `severity_cves` — CVEs by severity
+  - `package_cves` — CVEs by package name
+
+**Efficiency tip:** Use `_embedded.disclosures[]` for severity, affected versions, and fix commits. Only fetch `cve.json` for CVSS vectors, CWE, or package version ranges.
+
+## Breaking Changes Schema
+
+Follow `compatibility-json` link from any major version index.
+
+**Properties:**
+- `version` — major version
+- `total_count` — total breaking changes
+
+**Arrays:**
+- `breaks[]` — all breaking changes:
+  - `id` — unique identifier
+  - `title` — breaking change title
+  - `category` — e.g., "ASP.NET Core", "SDK", "Runtime"
+  - `type` — e.g., "behavioral", "source", "binary"
+  - `impact` — e.g., "low", "medium", "high"
+  - `required_action` — what developers need to do
+  - `references[]` — links to documentation
+    - Use `type: "documentation-source"` for raw markdown (LLM-friendly)
+    - Use `type: "documentation"` for rendered HTML
+
+**Pre-computed rollups:**
+- `categories` — count per category
+- `impact_breakdown` — count per impact level
+- `type_breakdown` — count per type
+
+## SDK Index Schema
+
+Follow `latest-sdk` link from llms.json patch objects, or `sdk-index` from version index.
+
+**Embedded:**
+- `_embedded.bands[]` — SDK feature bands:
+  - `band` — feature band (e.g., "10.0.1xx")
+  - `latest` — latest SDK version in band
+  - `support_phase` — "active", "maintenance", "eol"
+  - `_links.download` — aka.ms evergreen download link
+
+**Feature band conventions:**
+- `X.0.1xx` — ships with Visual Studio
+- `X.0.3xx` — standalone/CI scenarios
+
+## Target Frameworks Schema
+
+Follow `target-frameworks-json` link from version index.
+
+**Embedded:**
+- `_embedded.frameworks[]` — supported TFMs:
+  - `tfm` — target framework moniker (e.g., "net10.0")
+  - `platform` — platform name if applicable (e.g., "ios", "android")
+  - `platform_version` — platform version if applicable (e.g., "18.0" for iOS)
+
+## Supported OS Schema
+
+Follow `supported-os-json` link from manifest.
+
+**Arrays:**
+- `distributions[]` — supported Linux distros with version ranges
+- `libc[]` — minimum libc versions per architecture:
+  - `name` — "glibc" or "musl"
+  - `version` — minimum version (e.g., "2.27")
+  - `architectures[]` — e.g., ["x64", "arm64"]
+
+## OS Packages Schema
+
+Follow `os-packages-json` link from manifest.
+
+**Arrays:**
+- `distributions[]` — per-distro package requirements:
+  - `name` — distro name (e.g., "ubuntu")
+  - `releases[]` — per-release package lists:
+    - `release` — version (e.g., "24.04")
+    - `packages[]` — required packages with distro-specific names
+
+Package names are the actual names in distro repos (e.g., `libssl3t64` on Ubuntu 24.04, `openssl-libs` on RHEL).
+
+## Glossary
+
+### Release Types
+
+| Term | Definition |
+|------|------------|
+| **LTS** | Long-Term Support — 3-year support window |
+| **STS** | Standard-Term Support — 18-month support window |
+
+### Support Phases
+
+| Value | Definition |
+|-------|------------|
+| `preview` | Pre-release phase for testing and feedback; not production-supported |
+| `go-live` | Production-supported release candidate before GA |
+| `active` | Full support with functional and security improvements |
+| `maintenance` | Final 6 months of support; security fixes only |
+| `eol` | End of Life — no longer supported |
+
+### Release Concepts
+
+| Term | Definition |
+|------|------------|
+| **feature-band** | Quarterly SDK minor version releases (e.g., 8.0.1xx, 8.0.2xx) |
+| **patch** | Cumulative monthly update released on Patch Tuesday |
+
+## All Link Relations
+
+| Relation | Description |
+|----------|-------------|
+| `self` | Canonical URL for this resource |
+| `prev` | Previous resource in sequence (patch, month, or year) |
+| `prev-security` | Previous security release in sequence |
+| `latest` | Latest patch or release in this context |
+| `latest-lts` | Latest Long Term Support version |
+| `latest-sdk` | SDK index for this version |
+| `latest-security` | Latest security patch |
+| `latest-year` | Most recent year index |
+| `latest-month` | Most recent month index |
+| `latest-security-month` | Most recent security month index |
+| `latest-release` | Latest major version index |
+| `latest-patch` | Latest patch index for a major version |
+| `release-major` | Parent major version index |
+| `release-month` | Timeline month index for this release |
+| `releases-index` | Root releases index |
+| `timeline-index` | Root timeline index |
+| `compatibility-json` | Breaking changes data |
+| `target-frameworks-json` | TFM data |
+| `supported-os-json` | Supported OS data |
+| `os-packages-json` | OS package requirements |
+| `cve-json` | CVE disclosure details (JSON) |
+| `cve-markdown` | CVE disclosure details (Markdown) |
+| `release-notes-markdown` | Release notes (Markdown) |
+| `*-rendered` | GitHub HTML-rendered view (e.g., `cve-markdown-rendered`) |
+
+## All Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `kind` | string | Document type (e.g., "releases-index", "patch-version-index") |
+| `version` | string | Version number (e.g., "10.0", "8.0.21") |
+| `release` | string | Major version (e.g., "10.0") |
+| `date` | ISO 8601 | Release date |
+| `year` | string | Calendar year (e.g., "2025") |
+| `month` | string | Calendar month, zero-padded (e.g., "01", "10") |
+| `latest` | string | Latest version in this context |
+| `latest_lts` | string | Latest Long Term Support version |
+| `latest_year` | string | Most recent year with releases |
+| `release_type` | enum | `lts` or `sts` |
+| `support_phase` | enum | `preview`, `go-live`, `active`, `maintenance`, `eol` |
+| `supported` | boolean | Whether the version is currently supported |
+| `security` | boolean | Whether this release includes security fixes |
+| `eol_date` | ISO 8601 | End of Life date |
+| `cve_count` | integer | Number of CVEs addressed |
+| `cve_records` | array | List of CVE identifiers (e.g., ["CVE-2025-55247"]) |
+| `sdk_version` | string | Primary SDK version for this runtime release |
+| `band` | string | SDK feature band identifier (e.g., "8.0.4xx") |
+
+## CVE Severity Levels
+
+| Value | CVSS Score Range |
+|-------|------------------|
+| `CRITICAL` | 9.0 - 10.0 |
+| `HIGH` | 7.0 - 8.9 |
+| `MEDIUM` | 4.0 - 6.9 |
+| `LOW` | 0.1 - 3.9 |
+
+## Affected Products
+
+| Value | Description |
+|-------|-------------|
+| `.NET Runtime` | Core runtime |
+| `ASP.NET Core` | Web framework runtime |
+| `.NET SDK` | Software Development Kit |
+| `Windows Desktop` | WPF/WinForms runtime |
