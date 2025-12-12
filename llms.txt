@@ -37,13 +37,13 @@ This is the only URL you should call directly. All other URLs must be discovered
 
 ## Navigation Shortcuts in llms.json
 
-Each `_embedded.latest_patches[]` object includes:
+Each `_embedded.latest_patches[]` object includes these **key shortcuts** for 2-fetch navigation:
 - `self` — link to patch index
 - `latest-security` — link to latest security patch for that version
-- `release-major` — link to major version index (for TFMs, breaking changes, supported OS)
-- `latest-sdk` — link to SDK index (for feature bands, downloads)
+- `release-major` — link to major version index (breaking changes, TFMs, supported OS, os-packages)
+- `latest-sdk` — link to SDK index (feature bands, downloads)
 
-These shortcuts let you reach version-specific resources in 2 fetches instead of 3.
+These shortcuts are the key to efficient navigation — use them to skip the root index hop.
 
 ## CVE Queries
 
@@ -52,7 +52,7 @@ These shortcuts let you reach version-specific resources in 2 fetches instead of
 **For CVE history:** Follow `latest-security-month` link, then walk `prev-security` links. Each month index has `_embedded.disclosures[]` with:
 - `id`, `title`, `cvss_score`, `cvss_severity`
 - `affected_releases`, `affected_products`
-- `fixes[]` with commit diff URLs
+- `fixes[]` with commit diff URLs (fetch diffs immediately — firewalls may block later)
 
 **For deep CVE analysis:** Follow `cve-json` link from month index for CVSS vectors, CWE, package version ranges.
 
