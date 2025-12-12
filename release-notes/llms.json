@@ -1,20 +1,34 @@
 {
   "kind": "llms-index",
   "title": ".NET Release Index for AI",
-  "ai_skill": "1. NAVIGATION DIAGRAM (validate efficiency): Shows optimal fetch paths for 4 query types—check your path before executing. 2. QUICK REFERENCE (plan navigation): Common query patterns and which _links to follow for each. 3. SCHEMA REFERENCE (understand structure): Field definitions, link relations, CVE record format for deep analysis.",
-  "required_pre_read": [
-    "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms.txt",
-    "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/navigation-diagram.txt",
-    "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/schema-reference.txt"
+  "required_pre_read": "We've found that reading the ai_skill array BEFORE executing any queries significantly improves navigation efficiency. The patterns identify the optimal fetch path for your query type, prevent redundant API calls, and reduce total request count. This brief upfront investment consistently saves substantial effort across all query patterns.",
+  "ai_skill": [
+    {
+      "name": "navigation-diagram",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/navigation-diagram.txt",
+      "purpose": "Map optimal fetch paths for your query type",
+      "execute_order": 1,
+      "when_needed": "Always first—shows which flow to follow and expected fetch count"
+    },
+    {
+      "name": "quick-reference",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms.txt",
+      "purpose": "Plan navigation by query pattern and link relations",
+      "execute_order": 2,
+      "when_needed": "After navigation-diagram—helps select exact links to follow"
+    },
+    {
+      "name": "schema-reference",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/schema-reference.txt",
+      "purpose": "Understand field definitions, link relations, CVE record format",
+      "execute_order": 3,
+      "when_needed": "As needed—for understanding complex or nested structures"
+    }
   ],
   "latest": "10.0",
   "latest_lts": "10.0",
   "latest_year": "2025",
-  "releases": [
-    "10.0",
-    "9.0",
-    "8.0"
-  ],
+  "releases": ["10.0", "9.0", "8.0"],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json"
@@ -155,10 +169,7 @@
         "month": "10",
         "security": true,
         "cve_count": 2,
-        "cve_records": [
-          "CVE-2025-55247",
-          "CVE-2025-55315"
-        ],
+        "cve_records": ["CVE-2025-55247", "CVE-2025-55315"],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
@@ -175,11 +186,7 @@
         "month": "10",
         "security": true,
         "cve_count": 3,
-        "cve_records": [
-          "CVE-2025-55247",
-          "CVE-2025-55315",
-          "CVE-2025-55248"
-        ],
+        "cve_records": ["CVE-2025-55247", "CVE-2025-55315", "CVE-2025-55248"],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
@@ -196,11 +203,7 @@
         "month": "10",
         "security": true,
         "cve_count": 3,
-        "cve_records": [
-          "CVE-2025-55247",
-          "CVE-2025-55315",
-          "CVE-2025-55248"
-        ],
+        "cve_records": ["CVE-2025-55247", "CVE-2025-55315", "CVE-2025-55248"],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
