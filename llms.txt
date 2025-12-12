@@ -30,7 +30,9 @@ This is the only URL you should call directly. All other URLs must be discovered
 | TFMs for .NET X | `latest_patches[].release-major` → `target-frameworks-json` | 2 |
 | SDK feature bands for .NET X | `latest_patches[].latest-sdk` | 2 |
 | Download latest SDK | `latest_patches[].latest-sdk` → `_embedded.bands[]` | 2 |
-| Is my distro supported? | `latest_patches[].release-major` → `supported-os-json` | 2-3 |
+| Is my distro supported? | `latest_patches[].release-major` → `release-manifest` → `supported-os-json` | 3 |
+| OS packages for distro | `latest_patches[].release-major` → `release-manifest` → `os-packages-json` | 3 |
+| Minimum glibc version | `latest_patches[].release-major` → `release-manifest` → `supported-os-json` → `libc[]` | 3 |
 | EOL version info (e.g., .NET 6) | `releases-index` → version → `latest-security` or timeline | 3-5 |
 
 **Note:** `llms.json` only contains supported versions. For EOL versions, use `releases-index` link to find the version, then follow `latest-security` to the last security patch.
@@ -92,6 +94,16 @@ If your count significantly exceeds these, you may be navigating inefficiently.
 2. Follow _links.latest-security-month.href → 2025/10/index.json
 3. Read _embedded.disclosures[], then follow _links.prev-security.href
 4. Repeat until month < September → done
+```
+
+**Example 4: OS packages for Ubuntu 24.04** (3 fetches)
+```
+1. Fetch llms.json
+2. Find _embedded.latest_patches[] where release == "10.0"
+3. Follow _links.release-major.href → 10.0/index.json
+4. Follow _links.release-manifest.href → manifest.json
+5. Follow _links.os-packages-json.href → os-packages.json
+6. Filter distributions[] where name == "ubuntu", releases[] where release == "24.04" → done
 ```
 
 ## Graph Structure
