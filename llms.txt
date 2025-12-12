@@ -36,6 +36,9 @@ This is the only URL you should call directly. All other URLs must be discovered
 | OS packages for distro | `latest_patches[].release-major` → `release-manifest` → `os-packages-json` | 3 |
 | Minimum glibc version | `latest_patches[].release-major` → `release-manifest` → `supported-os-json` → `libc[]` | 3 |
 | EOL version info (e.g., .NET 6) | `releases-index` → version → `latest-security` or timeline | 3-5 |
+| Which patch fixed CVE X? | month index → `_embedded.disclosures[]` → match `id`, read `fixes[]` | 2+ |
+| All CVEs affecting .NET X | month index → `cve-json` → filter by `affected_releases` | 2+ |
+| Deep CVE analysis (CVSS vector, CWE) | month index → `cve-json` → `cvss_vector`, `cwe`, `packages[]` | 2 |
 
 **Note:** `llms.json` only contains supported versions. For EOL versions, use `releases-index` link to find the version, then follow `latest-security` to the last security patch.
 
