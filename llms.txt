@@ -106,6 +106,13 @@ If your count significantly exceeds these, you may be navigating inefficiently.
 6. Filter distributions[] where name == "ubuntu", releases[] where release == "24.04" → done
 ```
 
+## Edge Cases
+
+- `cve_count: 0` with empty `cve_records[]` — normal, no CVEs in this release
+- `prev-security` link missing — end of security history reached, stop traversal
+- `_embedded.patches[]` empty for EOL version — use timeline or `latest-security` link instead
+- Link returns 404 — don't fabricate alternative URLs, report the gap
+
 ## Graph Structure
 
 - Properties use `snake_case`; link relations use `kebab-case`
