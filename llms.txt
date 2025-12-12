@@ -26,8 +26,8 @@ Machine-readable .NET release, CVE, and compatibility data for AI assistants.
 
 | Skill | Trigger (`use_when`) | Shows |
 |-------|----------------------|-------|
-| `navigation-diagram` | Multi-hop query and unsure which links to follow | Visual fetch sequences |
-| `schema-reference` | CVE/security query needing CVSS vectors, CWE, or field definitions | Schema definitions, enums |
+| `navigation-diagram` | Multi-hop query and unsure which links to follow | Visual fetch sequences, link relations, fetch counts |
+| `schema-reference` | CVE/security query needing CVSS vectors, CWE, or field definitions | Severity levels, affected package ranges, field enums |
 
 Fetch a skill BEFORE navigating when your query matches its trigger. One extra fetch prevents wrong turns.
 
@@ -72,6 +72,8 @@ Each `_embedded.latest_patches[]` object includes these **key shortcuts** for 2-
 These shortcuts are the key to efficient navigation — use them to skip the root index hop.
 
 ## CVE Queries
+
+**Quick rule:** `_embedded.latest_security_month[]` has counts and IDs only — fetch the month index for CVSS scores and severity.
 
 **For current security status:** `_embedded.latest_security_month[]` has `cve_count` and `cve_records[]` (IDs only) per version. For severity/CVSS scores, follow the `self` link to the month index.
 
