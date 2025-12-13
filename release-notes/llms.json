@@ -1,22 +1,8 @@
 {
   "kind": "llms-index",
   "title": ".NET Release Index for AI",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms.txt",
-  "ai_note": "HAL graph—follow _links only, never construct URLs. ALWAYS read required_pre_read first. Check ai_skills and fetch when your query matches a use_when trigger.",
-  "ai_skills": [
-    {
-      "skill": "navigation-diagram",
-      "use_when": "Your query spans multiple hops and you're unsure which links to follow",
-      "shows": "Visual fetch sequences for every query type, link relations, fetch counts",
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/navigation-diagram.txt"
-    },
-    {
-      "skill": "schema-reference",
-      "use_when": "CVE/security query needing CVSS vectors, CWE, or field definitions",
-      "shows": "Severity levels, affected package ranges, field enums, file type schemas",
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/schema-reference.txt"
-    }
-  ],
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/SKILL.md",
+  "ai_note": "ALWAYS read required_pre_read first. HAL graph—follow _links only, never construct URLs.",
   "latest": "10.0",
   "latest_lts": "10.0",
   "latest_year": "2025",
