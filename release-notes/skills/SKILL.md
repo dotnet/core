@@ -52,3 +52,21 @@ Each `_embedded.latest_patches[]` entry has `_links` for 2-fetch navigation:
 - `release-major` → version index (breaking changes, TFMs, OS support)
 - `latest-sdk` → SDK index (feature bands, downloads)
 - `latest-security` → last security patch for that version
+
+## Key Relations
+
+From `llms.json._links`:
+
+| Relation | Purpose |
+|----------|---------|
+| `latest` | Newest supported release (LTS or STS) |
+| `latest-lts` | Newest LTS release |
+| `latest-security-month` | Current security month index |
+| `releases-index` | Full version list including EOL |
+
+**Relations that do NOT exist** (common mistakes):
+
+| Relation | Why It Doesn't Exist |
+|----------|---------------------|
+| `next` | Navigate backwards from present — start at `latest*`, walk back with `prev` |
+| `latest_sts` | Not useful — use `latest` if STS is acceptable |
