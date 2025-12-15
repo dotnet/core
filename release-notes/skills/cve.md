@@ -1,5 +1,7 @@
 # CVE Queries
 
+*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
+
 ## Quick Rule
 
 `_embedded.latest_security_month[]` in llms.json has **counts and IDs only** — fetch the month index for CVSS scores and severity.

@@ -1,5 +1,7 @@
 # Navigation Flows
 
+*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
+
 Visual map of navigation patterns through the .NET release graph. Use this when planning multi-hop queries.
 
 ## Entry Points

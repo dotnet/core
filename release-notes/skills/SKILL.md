@@ -13,7 +13,7 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 
 ## Core Rules
 
-1. **Follow `_links["..."].href` exactly** — never construct URLs
+1. **Follow `_links["..."].href` exactly** — never construct graph URLs. External URLs (e.g., GitHub diffs in `fixes[]`) can be used directly.
 2. **Use `_embedded` data first** — it answers most queries without extra fetches
 3. **If data is missing, don't fabricate** — report the gap
 
@@ -27,7 +27,7 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 
 ## Skills for Specific Tasks
 
-Fetch these when your query matches:
+Fetch these when your query matches. **Core Rules above apply to all skills.**
 
 | Skill | Fetch When | URL |
 |-------|------------|-----|
