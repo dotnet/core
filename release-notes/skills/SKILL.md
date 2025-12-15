@@ -21,9 +21,25 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 
 | Property | Contains |
 |----------|----------|
-| `_embedded.latest_patches[]` | Current patch for each supported version (8.0, 9.0, 10.0) with EOL dates, support status |
-| `_embedded.latest_security_month[]` | CVE counts and IDs (severity requires fetching month index) |
+| `_embedded.latest_patches[]` | Latest patch per supported version with EOL dates, support status |
+| `_embedded.latest_security_month[]` | Most recent security month per supported version with CVE IDs |
 | `_links` | Navigation to version indexes, timeline, releases |
+
+`_embedded.latest_patches[]` populated by:
+```
+versions
+    .Where(v => v.Supported)
+    .Select(v => v.Patches.MaxBy(p => p.Date))
+```
+
+`_embedded.latest_security_month[]` populated by:
+```
+versions
+    .Where(v => v.Supported)
+    .Select(v => timeline
+        .Where(m => m.HasSecurityPatch(v))
+        .MaxBy(m => m.Date))
+```
 
 ## Skills
 
