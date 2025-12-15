@@ -2,6 +2,18 @@
 
 *Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
 
+## Stop Criteria
+
+Know when you're done:
+
+| Query Type | Stop When | File Contains |
+|------------|-----------|---------------|
+| Package dependencies | You have `os-packages.json` | Complete `packages[]` list for each distro/release |
+| Distro support | You have `supported-os.json` | All supported `distributions[]` and `libc[]` requirements |
+| glibc/musl version | You have `supported-os.json` | `libc[]` array with versions per architecture |
+
+**Do NOT** look for markdown versions (`.md`) of these JSON files—they don't exist. The JSON files are complete and authoritative.
+
 ## Navigation Flow (3 fetches)
 
 ```
@@ -128,3 +140,12 @@ Common distributions in `supported-os.json`:
 - Alpine uses musl libc, not glibc
 - `architectures` field indicates supported CPU architectures
 - Skip `-rendered` links unless you need human-readable markdown
+
+## Common Mistakes
+
+| Mistake | Why It's Wrong |
+|---------|----------------|
+| Looking for `os-packages.md` | Doesn't exist—`os-packages.json` has everything |
+| Looking for `README.md` | Not part of the graph—follow `_links` only |
+| Fetching both `supported-os.json` AND `os-packages.json` | Pick one based on your query (distro support vs packages) |
+| Searching for package info in `supported-os.json` | Wrong file—use `os-packages.json` for package lists |
