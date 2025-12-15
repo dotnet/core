@@ -111,6 +111,15 @@ From version index:
   target-frameworks-json ──► TFMs
 ```
 
+## Non-Existent Relations (Common LLM Mistakes)
+
+These relations do **not exist** — do not attempt to use them:
+
+| Relation | Why It Doesn't Exist |
+|----------|---------------------|
+| `next` | The graph is designed for backward navigation from the present. Use `latest`, `latest-lts`, or `latest-security-month` to start at the most recent asset, then walk backwards with `prev` or `prev-security`. This is more efficient since most queries care about recent data. |
+| `latest_sts` | Not useful — we always have an LTS release in support, but not always an STS. If STS is acceptable, use `latest` which returns the newest release regardless of type. |
+
 ## Fetch Count Summary
 
 | Pattern | Fetches | Notes |
