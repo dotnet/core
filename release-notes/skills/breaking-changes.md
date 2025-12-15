@@ -1,5 +1,7 @@
 # Breaking Changes Queries
 
+*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
+
 ## Navigation Flow (2 fetches)
 
 ```
