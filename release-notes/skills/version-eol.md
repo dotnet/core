@@ -1,5 +1,7 @@
 # Version and EOL Queries
 
+*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
+
 ## Key Distinction
 
 - **Supported versions** → data embedded in `llms.json`
