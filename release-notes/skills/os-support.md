@@ -141,6 +141,14 @@ Common distributions in `supported-os.json`:
 - `architectures` field indicates supported CPU architectures
 - Skip `-rendered` links unless you need human-readable markdown
 
+## Key Insight: One Version Is Enough
+
+**All supported .NET versions (8.0, 9.0, 10.0) support the same recent Linux distros.** If Ubuntu 24.04 is supported for .NET 10, it's supported for 8.0 and 9.0 too.
+
+**Package requirements are identical** across .NET versions for a given distro/release. Fetching `os-packages.json` once (for any supported .NET version) gives you the packages for all of them.
+
+**Don't fetch manifests for multiple versions.** If asked "which .NET versions work on Ubuntu 24.04?", the answer is: all currently supported versions. Check `llms.json._embedded.latest_patches[]` for the list—no need to verify each one's OS support.
+
 ## Common Mistakes
 
 | Mistake | Why It's Wrong |
@@ -149,3 +157,5 @@ Common distributions in `supported-os.json`:
 | Looking for `README.md` | Not part of the graph—follow `_links` only |
 | Fetching both `supported-os.json` AND `os-packages.json` | Pick one based on your query (distro support vs packages) |
 | Searching for package info in `supported-os.json` | Wrong file—use `os-packages.json` for package lists |
+| Fetching manifests for 8.0, 9.0, AND 10.0 | Redundant—OS support and packages are the same across versions |
+| Constructing URLs like `8.0/manifest.json` | URL fabrication—always follow `_links` from the graph |
