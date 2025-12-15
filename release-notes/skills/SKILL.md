@@ -25,17 +25,25 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 | `_embedded.latest_security_month[]` | CVE counts and IDs (severity requires fetching month index) |
 | `_links` | Navigation to version indexes, timeline, releases |
 
-## Skills for Specific Tasks
+## Skills
 
 Fetch these when your query matches. **Core Rules above apply to all skills.**
 
+### Task-Specific Skills
+
 | Skill | Fetch When | URL |
 |-------|------------|-----|
-| navigation.md | Multi-hop query and unsure which links to follow | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md |
 | cve.md | CVE queries needing severity, CVSS, or history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve.md |
 | breaking-changes.md | Compatibility or migration questions | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes.md |
 | version-eol.md | EOL versions, support lifecycle, or version history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol.md |
 | os-support.md | OS packages, distro support, or glibc requirements | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support.md |
+
+### Broad Skills
+
+| Skill | Fetch When | URL |
+|-------|------------|-----|
+| navigation.md | Multi-hop query and unsure which links to follow | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md |
+| schema.md | Need to understand document structure, properties, or link relations | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema.md |
 
 ## Quick Answers (1 fetch)
 

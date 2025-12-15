@@ -24,10 +24,21 @@ Machine-readable .NET release, CVE, and compatibility data for AI assistants.
 
 ### When to Fetch Skills
 
-| Skill | Trigger (`use_when`) | Shows |
-|-------|----------------------|-------|
-| `navigation-diagram` | Multi-hop query and unsure which links to follow | Visual fetch sequences, link relations, fetch counts |
-| `schema-reference` | CVE/security query needing CVSS vectors, CWE, or field definitions | Severity levels, affected package ranges, field enums |
+**Task-specific skills** (focused guidance):
+
+| Skill | Trigger |
+|-------|---------|
+| `cve` | CVE queries needing severity, CVSS, or history |
+| `breaking-changes` | Compatibility or migration questions |
+| `version-eol` | EOL versions, support lifecycle |
+| `os-support` | OS packages, distro support, glibc |
+
+**Broad skills** (structural understanding):
+
+| Skill | Trigger | Shows |
+|-------|---------|-------|
+| `navigation` | Multi-hop query and unsure which links to follow | Visual fetch sequences, link relations, fetch counts |
+| `schema` | Need to understand document structure, properties, or link relations | File types, all link relations, all properties, glossary |
 
 Fetch a skill BEFORE navigating when your query matches its trigger. One extra fetch prevents wrong turns.
 
@@ -146,7 +157,11 @@ If your count significantly exceeds these, you may be navigating inefficiently.
 - `latest` and `latest_lts` reference supported (not preview) releases
 - Discover available links on any resource: `jq '._links | keys[]'`
 
-## Schema Reference
+## Deep Dives
 
-For detailed schema documentation, file types, and advanced patterns:
-https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/schema-reference.txt
+For structural understanding beyond the patterns above:
+
+| Skill | Purpose |
+|-------|---------|
+| [navigation.md](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md) | Visual map of graph topology and navigation flows |
+| [schema.md](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema.md) | File types, link relations, properties, glossary |
