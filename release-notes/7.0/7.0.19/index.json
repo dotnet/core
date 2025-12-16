@@ -1,0 +1,136 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-patch-detail-index.json",
+  "kind": "patch-version-index",
+  "title": ".NET 7.0.19 Patch Index",
+  "version": "7.0.19",
+  "date": "2024-05-14T00:00:00\u002B00:00",
+  "support_phase": "eol",
+  "security": true,
+  "cve_count": 2,
+  "cve_records": [
+    "CVE-2024-30045",
+    "CVE-2024-30046"
+  ],
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/7.0.19/index.json"
+    },
+    "prev": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/7.0.18/index.json",
+      "title": "Patch index"
+    },
+    "prev-security": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/7.0.18/index.json",
+      "title": "Latest security patch"
+    },
+    "release-major": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/index.json",
+      "title": "Major version index"
+    },
+    "release-month": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/index.json",
+      "title": "Release month index"
+    },
+    "releases-index": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
+      "title": "Release index"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/cve.json",
+      "title": "CVE records (JSON)",
+      "type": "application/json"
+    },
+    "cve-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/cve.md",
+      "title": "CVE records (JSON)",
+      "type": "application/markdown"
+    },
+    "cve-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/timeline/2024/05/cve.md",
+      "title": "CVE records (JSON) (Rendered)",
+      "type": "application/markdown"
+    },
+    "release-notes-markdown": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/7.0.19/7.0.19.md",
+      "title": "Release Notes",
+      "type": "application/markdown"
+    },
+    "release-notes-markdown-rendered": {
+      "href": "https://github.com/dotnet/core/blob/main/release-notes/7.0/7.0.19/7.0.19.md",
+      "title": "Release Notes (Rendered)",
+      "type": "application/markdown"
+    }
+  },
+  "_embedded": {
+    "disclosures": [
+      {
+        "id": "CVE-2024-30045",
+        "title": ".NET Remote Code Execution Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/307"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/runtime/commit/b9c54e25b11aa3e750c20cbef06774eb75ff3da6.diff",
+            "repo": "dotnet/runtime",
+            "branch": "release/7.0",
+            "title": "Fix commit in runtime (release/7.0)",
+            "release": "7.0",
+            "min_vulnerable": "7.0.0",
+            "max_vulnerable": "7.0.18",
+            "fixed": "7.0.19"
+          }
+        ],
+        "cvss_score": 6.3,
+        "cvss_severity": "MEDIUM",
+        "disclosure_date": "2024-05-14",
+        "affected_releases": [
+          "7.0",
+          "8.0"
+        ],
+        "affected_products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2024-30046",
+        "title": ".NET Denial of Service Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/308"
+          }
+        },
+        "fixes": [
+          {
+            "href": "https://github.com/dotnet/aspnetcore/commit/9142e56c11f4351961b9d99482a4a6fc29625b8a.diff",
+            "repo": "dotnet/aspnetcore",
+            "branch": "release/7.0",
+            "title": "Fix commit in aspnetcore (release/7.0)",
+            "release": "7.0",
+            "min_vulnerable": "7.0.0",
+            "max_vulnerable": "7.0.18",
+            "fixed": "7.0.19"
+          }
+        ],
+        "cvss_score": 5.9,
+        "cvss_severity": "MEDIUM",
+        "disclosure_date": "2024-05-14",
+        "affected_releases": [
+          "7.0",
+          "8.0"
+        ],
+        "affected_products": [
+          "dotnet-aspnetcore"
+        ],
+        "platforms": [
+          "all"
+        ]
+      }
+    ]
+  }
+}
