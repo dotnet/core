@@ -4,15 +4,18 @@
 
 ## Stop Criteria
 
-Know when you're done:
+**STOP immediately when you have the JSON file.** The answer is in that file—do not fetch anything else.
 
-| Query Type | Stop When | File Contains |
-|------------|-----------|---------------|
-| Package dependencies | You have `os-packages.json` | Complete `packages[]` list for each distro/release |
-| Distro support | You have `supported-os.json` | All supported `distributions[]` and `libc[]` requirements |
-| glibc/musl version | You have `supported-os.json` | `libc[]` array with versions per architecture |
+| Query Type | Fetch This | Then STOP |
+|------------|------------|-----------|
+| Package dependencies | `os-packages.json` | Filter `distributions[].releases[].packages[]` |
+| Distro support | `supported-os.json` | Check `distributions[].releases[]` |
+| glibc/musl version | `supported-os.json` | Read `libc[]` array |
 
-**Do NOT** look for markdown versions (`.md`) of these JSON files—they don't exist. The JSON files are complete and authoritative.
+**Do NOT:**
+- Look for markdown versions (`.md`)—they don't exist
+- Fetch both JSON files—pick ONE based on your query
+- Re-fetch the same file—if you have it, parse it
 
 ## Navigation Flow (2 fetches)
 
@@ -135,21 +138,20 @@ Common distributions in `supported-os.json`:
 - `architectures` field indicates supported CPU architectures
 - Skip `-rendered` links unless you need human-readable markdown
 
-## Key Insight: One Version Is Enough
+## Key Insight: OS Support Varies by .NET Version
 
-**All supported .NET versions (8.0, 9.0, 10.0) support the same recent Linux distros.** If Ubuntu 24.04 is supported for .NET 10, it's supported for 8.0 and 9.0 too.
+**Newer .NET versions may drop support for older distro releases.** For example, .NET 10 supports fewer Alpine versions than .NET 9. Always check the specific version's `supported-os.json` if exact compatibility matters.
 
-**Package requirements are identical** across .NET versions for a given distro/release. Fetching `os-packages.json` once (for any supported .NET version) gives you the packages for all of them.
-
-**Don't fetch manifests for multiple versions.** If asked "which .NET versions work on Ubuntu 24.04?", the answer is: all currently supported versions. Check `llms.json._embedded.latest_patches[]` for the list—no need to verify each one's OS support.
+**Package requirements are typically identical** across .NET versions for a given distro/release. But distro *support* is not guaranteed to be the same.
 
 ## Common Mistakes
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Looking for `os-packages.md` | Doesn't exist—`os-packages.json` has everything |
-| Looking for `README.md` | Not part of the graph—follow `_links` only |
-| Fetching both `supported-os.json` AND `os-packages.json` | Pick one based on your query (distro support vs packages) |
+| Re-fetching `os-packages.json` | If you got JSON back, parse it—the data is there |
+| Thinking `os-packages.json` "failed" | If fetch succeeded, the answer is in `distributions[].releases[].packages[]` |
+| Looking for `.md` versions | Don't exist—JSON files are complete and authoritative |
+| Fetching both `supported-os.json` AND `os-packages.json` | Pick ONE based on your query |
 | Searching for package info in `supported-os.json` | Wrong file—use `os-packages.json` for package lists |
-| Fetching manifests for 8.0, 9.0, AND 10.0 | Redundant—OS support and packages are the same across versions |
-| Constructing URLs like `8.0/manifest.json` | URL fabrication—always follow `_links` from the graph |
+| Fetching manifests for 8.0, 9.0, AND 10.0 for recent distros | For recent distros (Ubuntu 24.04), one check is usually enough |
+| Constructing URLs | URL fabrication—always follow `_links` from the graph |
