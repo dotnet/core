@@ -3,6 +3,8 @@
   "kind": "major-version-index",
   "title": ".NET Core 1.1 Release Index",
   "target_framework": "netcoreapp1.1",
+  "latest": "1.1.13",
+  "latest_security": "1.1.13",
   "release_type": "lts",
   "support_phase": "eol",
   "supported": false,
@@ -12,6 +14,14 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/index.json"
     },
+    "latest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/1.1.13/index.json",
+      "title": "Latest patch"
+    },
+    "latest-security": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/1.1.13/index.json",
+      "title": "Latest security patch"
+    },
     "release-manifest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/manifest.json",
       "title": "Release manifest"
@@ -20,11 +30,6 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
       "title": "Release index"
     },
-    "latest-release-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/1.1.13/release.json",
-      "title": "Latest release information (1.1.13)",
-      "type": "application/json"
-    },
     "target-frameworks-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/target-frameworks.json",
       "title": ".NET 1.1 Target Frameworks",
@@ -32,7 +37,91 @@
     }
   },
   "_embedded": {
-    "patches": [],
+    "patches": [
+      {
+        "version": "1.1.13",
+        "release": "1.1",
+        "date": "2019-05-14T00:00:00\u002B00:00",
+        "year": "2019",
+        "month": "05",
+        "security": true,
+        "cve_count": 3,
+        "cve_records": [
+          "CVE-2019-0820",
+          "CVE-2019-0980",
+          "CVE-2019-0981"
+        ],
+        "support_phase": "eol",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/1.1.13/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2019/05/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2019/05/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "1.1.12",
+        "release": "1.1",
+        "date": "2019-03-12T00:00:00\u002B00:00",
+        "year": "2019",
+        "month": "03",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          " CVE-2019-0757"
+        ],
+        "support_phase": "eol",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/1.1.12/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2019/03/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2019/03/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "1.1.11",
+        "release": "1.1",
+        "date": "2019-02-12T00:00:00\u002B00:00",
+        "year": "2019",
+        "month": "02",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          " CVE-2019-0657"
+        ],
+        "support_phase": "eol",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.1/1.1.11/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2019/02/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2019/02/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      }
+    ],
     "years": [
       {
         "year": "2019",

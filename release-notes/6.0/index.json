@@ -3,6 +3,8 @@
   "kind": "major-version-index",
   "title": ".NET 6.0 Release Index",
   "target_framework": "net6.0",
+  "latest": "6.0.36",
+  "latest_security": "6.0.35",
   "release_type": "lts",
   "support_phase": "eol",
   "supported": false,
@@ -12,6 +14,14 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/index.json"
     },
+    "latest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.36/index.json",
+      "title": "Latest patch"
+    },
+    "latest-security": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.35/index.json",
+      "title": "Latest security patch"
+    },
     "release-manifest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/manifest.json",
       "title": "Release manifest"
@@ -20,11 +30,6 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
       "title": "Release index"
     },
-    "latest-release-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.36/release.json",
-      "title": "Latest release information (6.0.36)",
-      "type": "application/json"
-    },
     "target-frameworks-json": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/target-frameworks.json",
       "title": ".NET 6.0 Target Frameworks",
@@ -32,7 +37,937 @@
     }
   },
   "_embedded": {
-    "patches": [],
+    "patches": [
+      {
+        "version": "6.0.36",
+        "release": "6.0",
+        "date": "2024-11-12T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "11",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.428",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.36/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/11/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.35",
+        "release": "6.0",
+        "date": "2024-10-08T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "10",
+        "security": true,
+        "cve_count": 3,
+        "cve_records": [
+          "CVE-2024-43483",
+          "CVE-2024-43484",
+          "CVE-2024-43485"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.427",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.35/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/10/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/10/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.33",
+        "release": "6.0",
+        "date": "2024-08-13T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "08",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.425",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.33/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/08/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.32",
+        "release": "6.0",
+        "date": "2024-07-09T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "07",
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2024-38081",
+          "CVE-2024-38095"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.424",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.32/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/07/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/07/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.31",
+        "release": "6.0",
+        "date": "2024-05-28T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "05",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2024-20672"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.423",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.31/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.30",
+        "release": "6.0",
+        "date": "2024-05-14T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "05",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.422",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.30/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.29",
+        "release": "6.0",
+        "date": "2024-04-09T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "04",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2024-21409"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.421",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.29/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/04/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/04/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.28",
+        "release": "6.0",
+        "date": "2024-03-12T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "03",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.420",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.28/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/03/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.27",
+        "release": "6.0",
+        "date": "2024-02-13T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "02",
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2024-21386",
+          "CVE-2024-21404"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.419",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.27/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/02/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/02/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.26",
+        "release": "6.0",
+        "date": "2024-01-09T00:00:00\u002B00:00",
+        "year": "2024",
+        "month": "01",
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2024-0057",
+          "CVE-2024-21319"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.418",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.26/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/01/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/01/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.25",
+        "release": "6.0",
+        "date": "2023-11-14T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "11",
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2023-36049",
+          "CVE-2023-36558"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.417",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.25/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/11/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/11/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.24",
+        "release": "6.0",
+        "date": "2023-10-24T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "10",
+        "security": true,
+        "cve_count": 6,
+        "cve_records": [
+          "CVE-2023-44487",
+          "CVE-2023-36799",
+          "CVE-2023-36796",
+          "CVE-2023-36792",
+          "CVE-2023-36794",
+          "CVE-2023-36793"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.416",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.24/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/10/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/10/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.23",
+        "release": "6.0",
+        "date": "2023-10-10T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "10",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2023-44487"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.415",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.23/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/10/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/10/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.22",
+        "release": "6.0",
+        "date": "2023-09-12T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "09",
+        "security": true,
+        "cve_count": 5,
+        "cve_records": [
+          "CVE-2023-36799",
+          "CVE-2023-36796",
+          "CVE-2023-36792",
+          "CVE-2023-36794",
+          "CVE-2023-36793"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.414",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.22/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/09/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/09/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.21",
+        "release": "6.0",
+        "date": "2023-08-08T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "08",
+        "security": true,
+        "cve_count": 3,
+        "cve_records": [
+          "CVE-2023-35390",
+          "CVE-2023-35391",
+          "CVE-2023-38180"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.413",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.21/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/08/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/08/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.20",
+        "release": "6.0",
+        "date": "2023-07-11T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "07",
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2023-33127",
+          "CVE-2023-33170"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.412",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.20/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/07/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/07/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.19",
+        "release": "6.0",
+        "date": "2023-06-22T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "06",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.411",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.19/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/06/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.18",
+        "release": "6.0",
+        "date": "2023-06-13T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "06",
+        "security": true,
+        "cve_count": 8,
+        "cve_records": [
+          "CVE-2023-24895",
+          "CVE-2023-24897",
+          "CVE-2023-24936",
+          "CVE-2023-29331",
+          "CVE-2023-29337",
+          "CVE-2023-33126",
+          "CVE-2023-33128",
+          "CVE-2023-33135"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.410",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.18/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/06/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/06/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.16",
+        "release": "6.0",
+        "date": "2023-04-11T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "04",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2023-28260"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.408",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.16/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/04/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/04/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.15",
+        "release": "6.0",
+        "date": "2023-03-14T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "03",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.407",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.15/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/03/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.14",
+        "release": "6.0",
+        "date": "2023-02-14T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "02",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2023-21808"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.406",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.14/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/02/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/02/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.13",
+        "release": "6.0",
+        "date": "2023-01-10T00:00:00\u002B00:00",
+        "year": "2023",
+        "month": "01",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2023-21538"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.405",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.13/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/01/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/01/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.12",
+        "release": "6.0",
+        "date": "2022-12-13T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "12",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2022-41089"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.404",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.12/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/12/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/12/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.11",
+        "release": "6.0",
+        "date": "2022-11-08T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "11",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.403",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.11/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/11/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.10",
+        "release": "6.0",
+        "date": "2022-10-11T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "10",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2022-41032"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.402",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.10/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/10/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/10/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.9",
+        "release": "6.0",
+        "date": "2022-09-13T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "09",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2022-38013"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.401",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.9/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/09/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/09/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.8",
+        "release": "6.0",
+        "date": "2022-08-09T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "08",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2022-34716"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.400",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.8/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/08/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/08/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.7",
+        "release": "6.0",
+        "date": "2022-07-12T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "07",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.302",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.7/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/07/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.6",
+        "release": "6.0",
+        "date": "2022-06-14T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "06",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2022-30184"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.301",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.6/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/06/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/06/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.5",
+        "release": "6.0",
+        "date": "2022-05-10T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "05",
+        "security": true,
+        "cve_count": 3,
+        "cve_records": [
+          "CVE-2022-29117",
+          "CVE-2022-23267",
+          "CVE-2022-29145"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.300",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.5/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/05/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/05/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.4",
+        "release": "6.0",
+        "date": "2022-04-12T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "04",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.202",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.4/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/04/index.json",
+            "title": "Release month index"
+          }
+        }
+      },
+      {
+        "version": "6.0.3",
+        "release": "6.0",
+        "date": "2022-03-08T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "03",
+        "security": true,
+        "cve_count": 3,
+        "cve_records": [
+          "CVE-2022-24464",
+          "CVE-2022-24512",
+          "CVE-2020-8927"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.201",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.3/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/03/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/03/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.2",
+        "release": "6.0",
+        "date": "2022-02-08T00:00:00\u002B00:00",
+        "year": "2022",
+        "month": "02",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2022-21986"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.200",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.2/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/02/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/02/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.1",
+        "release": "6.0",
+        "date": "2021-12-14T00:00:00\u002B00:00",
+        "year": "2021",
+        "month": "12",
+        "security": true,
+        "cve_count": 1,
+        "cve_records": [
+          "CVE-2021-43877"
+        ],
+        "support_phase": "eol",
+        "sdk_version": "6.0.101",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.1/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2021/12/index.json",
+            "title": "Release month index"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2021/12/cve.json",
+            "title": "CVE records (JSON)",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "6.0.0",
+        "release": "6.0",
+        "date": "2021-11-08T00:00:00\u002B00:00",
+        "year": "2021",
+        "month": "11",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "eol",
+        "sdk_version": "6.0.100",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.0/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2021/11/index.json",
+            "title": "Release month index"
+          }
+        }
+      }
+    ],
     "years": [
       {
         "year": "2024",
