@@ -150,7 +150,7 @@ Common distributions in `supported-os.json`:
 |---------|----------------|
 | Re-fetching `os-packages.json` | If you got JSON back, parse it—the data is there |
 | Thinking `os-packages.json` "failed" | If fetch succeeded, the answer is in `distributions[].releases[].packages[]` |
-| Looking for `.md` versions | Don't exist—JSON files are complete and authoritative |
+| Looking for `supported-os.md` or `os-packages.md` | These files DO NOT EXIST—only `.json` versions exist |
 | Fetching both `supported-os.json` AND `os-packages.json` | Pick ONE based on your query |
 | Searching for package info in `supported-os.json` | Wrong file—use `os-packages.json` for package lists |
 | Fetching manifests for 8.0, 9.0, AND 10.0 for recent distros | For recent distros (Ubuntu 24.04), one check is usually enough |
