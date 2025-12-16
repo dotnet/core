@@ -91,7 +91,7 @@ Queries are organized by user task, with 2-3 queries per category. CVE analysis 
 **Design validation:**
 - `compatibility.json` linked from major version index (not embedded—large payload, infrequent access)
 - Pre-computed rollups: `categories`, `impact_breakdown`, `type_breakdown`
-- `references[]` includes `documentation-source` type for raw markdown URLs (LLM-friendly)
+- `references[]` includes `documentation` type for raw markdown URLs (LLM-friendly)
 
 ### Category 5: Downloads
 
