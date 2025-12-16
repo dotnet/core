@@ -76,24 +76,20 @@ llms.json
                                 6.0.35/index.json ─► _embedded.disclosures[] ─► DONE
 ```
 
-## Flow 4: Linux/OS Queries (3 fetches)
+## Flow 4: Reference Data Queries (2 fetches)
 
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► _links.release-major
+    └─► _embedded.latest_patches[] ─► _links.release-manifest
             │
             ▼
-        X.0/index.json
+        manifest.json (all reference data in one place)
             │
-            └─► _links.release-manifest
-                    │
-                    ▼
-                manifest.json
-                    │
-                    ├─► _links.supported-os-json ─► DONE (distros, glibc versions)
-                    │
-                    └─► _links.os-packages-json ─► DONE (apt/dnf packages per distro)
+            ├─► _links.compatibility-json ─► DONE (breaking changes)
+            ├─► _links.target-frameworks-json ─► DONE (TFMs)
+            ├─► _links.supported-os-json ─► DONE (distros, glibc versions)
+            └─► _links.os-packages-json ─► DONE (apt/dnf packages per distro)
 ```
 
 ## Key Link Relations
@@ -104,18 +100,23 @@ From llms.json:
   releases-index ──────────► full version list (including EOL)
 
 From latest_patches[]:
-  release-major ───────────► X.0/index.json (version resources)
+  release-major ───────────► X.0/index.json (navigation: patches, timeline)
+  release-manifest ────────► manifest.json (reference data)
   latest-sdk ──────────────► sdk/index.json (SDK bands)
   latest-security ─────────► last security patch
+
+From manifest.json:
+  compatibility-json ──────► breaking changes
+  target-frameworks-json ──► TFMs
+  supported-os-json ───────► distros, glibc versions
+  os-packages-json ────────► apt/dnf packages
 
 From month index:
   prev-security ───────────► previous security month (auto-skips non-security)
   cve-json ────────────────► full CVE details
 
 From version index:
-  release-manifest ────────► manifest.json (OS support, packages)
-  compatibility-json ──────► breaking changes
-  target-frameworks-json ──► TFMs
+  release-manifest ────────► manifest.json (same as from latest_patches[])
 ```
 
 ## Non-Existent Relations (Common LLM Mistakes)
@@ -132,7 +133,7 @@ These relations do **not exist** — do not attempt to use them:
 | Pattern | Fetches | Notes |
 |---------|---------|-------|
 | Embedded data | 1 | patch versions, support status, CVE counts |
-| Version resources | 2 | breaking changes, TFMs, SDK bands |
-| OS/Linux queries | 3 | requires manifest hop |
+| Reference data | 2 | breaking changes, TFMs, OS support (via manifest.json) |
+| SDK info | 2 | feature bands, downloads |
 | EOL version info | 3-5 | must traverse releases-index |
 | CVE history | 1+N | N = security months to traverse |
