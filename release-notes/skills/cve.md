@@ -2,9 +2,11 @@
 
 *Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
 
-## Quick Rule
+## Quick Rules
 
-`_embedded.latest_security_month[]` in llms.json has **counts and IDs only** — fetch the month index for CVSS scores and severity.
+1. **Month index `_embedded.disclosures[]` has EVERYTHING**: severity, CVSS score, titles, fix commits. You rarely need `cve.json`.
+2. **Use `latest-security-month` → `prev-security` chain**: Don't navigate through timeline year indexes.
+3. `_embedded.latest_security_month[]` in llms.json has **counts and IDs only** — fetch the month index for details.
 
 ## Navigation Flow
 
@@ -71,8 +73,16 @@ Each `_embedded.disclosures[]` entry contains:
 | LOW | 0.1 - 3.9 |
 | NONE | 0.0 |
 
+## Common Mistakes
+
+| Mistake | Why It's Wrong |
+|---------|----------------|
+| Fetching `timeline/index.json` or year indexes | Use `latest-security-month` from llms.json, then walk `prev-security` |
+| Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
+| Constructing URLs like `2024/10/cve.json` | URL fabrication—always follow `_links` |
+
 ## Tips
 
 - `prev-security` links skip non-security months automatically
 - Fix commit URLs end in `.diff` — fetch immediately if needed (may be blocked later)
-- `cve-json` is only needed for CVSS vectors, CWE, or package version ranges
+- `cve-json` is only needed for full CVSS vectors, CWE classification, or package version ranges

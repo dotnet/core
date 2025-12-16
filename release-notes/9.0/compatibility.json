@@ -3,7 +3,7 @@
   "title": ".NET 9.0 Breaking Changes",
   "description": "Breaking changes introduced in .NET 9.0 across all technology areas",
   "breaking_change_count": 64,
-  "last_updated": "2025-12-05",
+  "last_updated": "2025-12-16",
   "breaks": [
     {
       "id": "aspnet-core-9-certificate-export",
@@ -13,7 +13,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about the breaking change in ASP.NET Core 9 where exporting the development certificate no longer creates the target directory if it doesn\u0027t exist.",
       "impact": "medium",
-      "required_action": "Create the target directory (with appropriate permissions) before invoking \u0060dotnet dev-certs\u0060.",
       "references": [
         {
           "type": "documentation",
@@ -35,7 +34,6 @@
       "version_introduced": "8.0.17",
       "description": "Learn about the breaking change in ASP.NET Core where Forwarded Headers Middleware now ignores headers from proxies that aren\u0027t explicitly configured as trusted.",
       "impact": "medium",
-      "required_action": "Review your deployment topology. Ensure that all legitimate proxy servers in front of your app are properly added to \u003Cxref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies\u003E or \u003Cxref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks\u003E in your \u003Cxref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions\u003E configuration.\n\n[code sample]\n\nOr, for a network:\n\n[code sample]\n\nIf you wish to enable the previous behavior, which isn\u0027t recommended due to security risks, you ...",
       "references": [
         {
           "type": "documentation",
@@ -60,7 +58,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the breaking change in .NET 9 where HostBuilder now enables ValidateOnBuild and ValidateScopes in the development environment.",
       "impact": "medium",
-      "required_action": "No action necessary if your application validates successfully. If you do see a validation error when testing in development, first try to fix it. If you can\u0027t fix it, you can disable validation by calling \u003Cxref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseDefaultServiceProvider%2A\u003E.",
       "references": [
         {
           "type": "documentation",
@@ -86,7 +83,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in ASP.NET Core 9.0 where DefaultKeyResolution.ShouldGenerateNewKey has a slightly altered meaning.",
       "impact": "medium",
-      "required_action": "If you have an \u0060IDefaultKeyResolver\u0060 implementation that tries to replicate the expiry logic, you can remove that logic (however, leaving it is fine as well).\n\nIf you were consuming \u0060IDefaultKeyResolver\u0060 directly to determine whether expiration was pending, you can check the default key\u0027s \u0060ExpirationDate\u0060 property directly.",
       "references": [
         {
           "type": "documentation",
@@ -111,7 +107,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in ASP.NET Core 9 where legacy Mono and Emscripten APIs are now accessible through the Blazor.runtime object instead of the global namespace.",
       "impact": "medium",
-      "required_action": "Instead of accessing Emscripten APIs from the \u0060window\u0060 object, access them from the \u0060Blazor.runtime\u0060 object.",
       "references": [
         {
           "type": "documentation",
@@ -143,7 +138,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about the breaking change in ASP.NET Core 9 where having multiple constructors in a middleware type can cause an exception at runtime.",
       "impact": "medium",
-      "required_action": "If this happens and you can\u0027t upgrade to a dependency injection container that implements \u003Cxref:Microsoft.Extensions.DependencyInjection.IServiceProviderIsService\u003E, you can add the \u003Cxref:Microsoft.Extensions.DependencyInjection.ActivatorUtilitiesConstructorAttribute\u003E to the preferred constructor of the affected middleware type.",
       "references": [
         {
           "type": "documentation",
@@ -168,7 +162,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in containers where the .NET Monitor 9 image offering has been simplified to only provide Azure Linux distroless images.",
       "impact": "medium",
-      "required_action": "Update your tag usage to indicate which image from the .NET Monitor 9 image offering you want to use. The following examples show some recommended migrations:\n\n- \u00608-cbl-mariner-distroless\u0060 -\u003E \u00609\u0060\n- \u00608.0-cbl-mariner-distroless\u0060 -\u003E \u00609.0\u0060\n- \u00608-ubuntu-chiseled\u0060 -\u003E \u00609\u0060\n- \u00608.0-ubuntu-chiseled\u0060 -\u003E \u00609.0\u0060\n\nThe following table shows the recommended .NET Monitor 9 tags.\n\n| Tag   | Recommended use                                                     |\n|-------|---------------------------------------------...",
       "references": [
         {
           "type": "documentation",
@@ -195,7 +188,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the breaking change in containers where .NET 9 container images no longer install the zlib package.",
       "impact": "medium",
-      "required_action": "For most scenarios, no action is required. If your containerized .NET app has a direct package dependency on \u0060zlib\u0060, you should manually install it in your Dockerfile using the package manager.",
       "references": [
         {
           "type": "documentation",
@@ -217,7 +209,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where ambiguous overload resolution now throws error CS0121.",
       "impact": "medium",
-      "required_action": "Explicitly specify the method you intend to call by casting the arguments to the appropriate type or apply named parameters.",
       "references": [
         {
           "type": "documentation",
@@ -248,7 +239,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where the IncrementingPollingCounter initial callback is no longer synchronous.",
       "impact": "medium",
-      "required_action": "No action is required for scenarios that use \u0060IncrementingPollingCounters\u0060 to visualize metrics in external monitoring tools. These scenarios should continue to work normally.\n\nFor scenarios that do in-process testing or other consumption of counter data via \u0060EventListener\u0060, check if your code expects to observe a specific modification to the counter value made on the same thread that called \u0060EnableEvents()\u0060. If it does, we recommend waiting to observe at least one counter event from the \u0060Eve...",
       "references": [
         {
           "type": "documentation",
@@ -273,7 +263,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where a maximum length for BigInteger is enforced.",
       "impact": "medium",
-      "required_action": "If your code is affected, decrease the length of value you\u0027re assigning to \u003Cxref:System.Numerics.BigInteger\u003E or add a length check.",
       "references": [
         {
           "type": "documentation",
@@ -298,7 +287,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where BinaryReader.GetString() returns \u0022\\uFFFD\u0022 on malformed encoded string sequences.",
       "impact": "medium",
-      "required_action": "If you want to keep the previous behavior where incomplete byte sequence were omitted at the end of the string, call \u0060TrimEnd(\u0022\\uFFFD\u0022)\u0060 on the result.",
       "references": [
         {
           "type": "documentation",
@@ -323,7 +311,6 @@
       "version_introduced": "9.0-preview.5",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where adding a ZipArchiveEntry with a specified CompressionLevel sets the ZIP central directory header general-purpose bit flags.",
       "impact": "medium",
-      "required_action": "If you want to ensure that new \u0060ZipArchiveEntry\u0060 records added to the \u0060ZipArchive\u0060 have general-purpose bit flags of \u00600\u0060, specify a \u0060CompressionLevel\u0060 of \u0060CompressionLevel.Optimal\u0060 or \u0060CompressionLevel.NoCompression\u0060 when you call \u003Cxref:System.IO.Compression.ZipArchive.CreateEntry(System.String,System.IO.Compression.CompressionLevel)?displayProperty=nameWithType\u003E.\n\nIf you use \u003Cxref:System.IO.Packaging.Package.CreatePart(System.Uri,System.String,System.IO.Packaging.CompressionOption)?displayPr...",
       "references": [
         {
           "type": "documentation",
@@ -349,7 +336,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where passing \u0060string.Empty\u0060 to \u0060Environment.SetEnvironmentVariable\u0060 no longer deletes the environment variable.",
       "impact": "medium",
-      "required_action": "To delete an environment variable using \u003Cxref:System.Environment.SetEnvironmentVariable(System.String,System.String)?displayProperty=nameWithType\u003E, change your code to pass \u0060null\u0060 instead of \u0060string.Empty\u0060 as the value argument.\n\nTo set the environment variable to an empty value using \u003Cxref:System.Diagnostics.ProcessStartInfo.Environment?displayProperty=nameWithType\u003E or \u003Cxref:System.Diagnostics.ProcessStartInfo.EnvironmentVariables?displayProperty=nameWithType\u003E, change your code to set these ...",
       "references": [
         {
           "type": "documentation",
@@ -376,7 +362,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the .NET 9 breaking change where EnumConverter now validates that the type to be registered is an enum type.",
       "impact": "medium",
-      "required_action": "There is no easy workaround if an \u003Cxref:System.ComponentModel.EnumConverter\u003E is used to convert to and from a non-\u0060enum\u0060 type.",
       "references": [
         {
           "type": "documentation",
@@ -401,7 +386,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where the type of array instance returned by RuntimeHelpers.GetSubArray matches the source array.",
       "impact": "medium",
-      "required_action": "The recommended action is to remove dependency of the affected code on array covariance.\n\nFor example, change:\n\n[code sample]\n\nto:\n\n[code sample]",
       "references": [
         {
           "type": "documentation",
@@ -426,7 +410,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where the size limit for inline arrays is now enforced.",
       "impact": "medium",
-      "required_action": "If you have code that uses inline array structs with very large instances that exceed the limit, reduce the size of these structs.",
       "references": [
         {
           "type": "documentation",
@@ -451,7 +434,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where the default implementations of \u0060Equals()\u0060 and \u0060GetHashCode()\u0060 throw an exception for types marked with \u0060InlineArrayAttribute\u0060.",
       "impact": "medium",
-      "required_action": "Library authors should implement both \u003Cxref:System.ValueType.Equals(System.Object)\u003E and \u003Cxref:System.ValueType.GetHashCode\u003E on all types marked with \u003Cxref:System.Runtime.CompilerServices.InlineArrayAttribute\u003E.",
       "references": [
         {
           "type": "documentation",
@@ -477,7 +459,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where InMemoryDirectoryInfo prepends the root directory to its file paths.",
       "impact": "medium",
-      "required_action": "If you depended on the previous behavior, adjust your code to account for the files now being prepended with the root directory. For example:\n\n[code sample]",
       "references": [
         {
           "type": "documentation",
@@ -504,7 +485,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries (dependency injection) where FromKeyedServicesAttribute no longer injects a non-keyed parameter.",
       "impact": "medium",
-      "required_action": "If \u0060FromKeyedServicesAttribute\u0060 is used, ensure that the corresponding service is registered as a keyed service, such as by using     \u0060IServiceCollection.AddKeyedScoped()\u0060, \u0060IServiceCollection.AddKeyedSingleton()\u0060, or \u0060IServiceCollection.AddKeyedTransient()\u0060.\n\nThe fix has also been backported to .NET 8.0.9, so both .NET 8 and .NET 9 have the same behavior. If your application depends on the old behavior, a feature switch was added for .NET 8.0.9 (but not .NET 9) named \u0060Microsoft.Extensions.De...",
       "references": [
         {
           "type": "documentation",
@@ -529,7 +509,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the APIs that have been marked as obsolete in .NET 9 with a custom diagnostic ID.",
       "impact": "medium",
-      "required_action": "- Follow the specific guidance provided for the each diagnostic ID using the URL link provided on the warning.\n\n- Warnings or errors for these obsoletions can\u0027t be suppressed using the standard diagnostic ID for obsolete types or members; use the custom \u0060SYSLIBxxxx\u0060 diagnostic ID value instead.",
       "references": [
         {
           "type": "documentation",
@@ -600,7 +579,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in core .NET libraries where updates were made to TFMs and package versions for several OOB packages.",
       "impact": "medium",
-      "required_action": "Depending on the package, different recommended actions are provided. For more information, see the [package support policy](https://github.com/dotnet/maintenance-packages/tree/main/package-support-policy.md).",
       "references": [
         {
           "type": "documentation",
@@ -630,7 +608,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in .NET 9 where C# overload resolution prefers \u0060params\u0060 span-type overloads, which can\u0027t be used in \u0060Expression\u0060 lambdas.",
       "impact": "medium",
-      "required_action": "If your code is affected, the recommended workaround is to call the method with an explicit array so the call binds to the \u0060params\u0060 array overload.\n\nFor the previous example, use \u0060new string[] { ... }\u0060:\n\n[code sample]",
       "references": [
         {
           "type": "documentation",
@@ -708,7 +685,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in core .NET libraries where the String.Trim*(params ReadOnlySpan\u003Cchar\u003E) methods have been removed due to potential behavioral changes.",
       "impact": "high",
-      "required_action": "Recompile any projects that were built against .NET 9 Preview 6, .NET 9 Preview 7, .NET 9 RC1, or .NET 9 RC2. If the project compiles with no errors, no further work is required. If the project no longer compiles, adjust your code. One possible substitution example is shown here:\n\n[code sample]",
       "references": [
         {
           "type": "documentation",
@@ -735,7 +711,6 @@
       "version_introduced": "9.0-preview.3",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where new TimeSpan.From*() overloads were introduced that take integer arguments.",
       "impact": "medium",
-      "required_action": "If this change affects your F# code, specify the type of argument so the compiler selects the appropriate overload.",
       "references": [
         {
           "type": "documentation",
@@ -765,7 +740,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where it\u0027s no longer allowed to create a type of array of System.Void.",
       "impact": "medium",
-      "required_action": "Remove code that tries to create a type for an array of \u003Cxref:System.Void?displayProperty=fullName\u003E.",
       "references": [
         {
           "type": "documentation",
@@ -790,7 +764,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where support for UnsafeAccessor with closed generics has been altered.",
       "impact": "medium",
-      "required_action": "Read the updated documentation for the \u003Cxref:System.Runtime.CompilerServices.UnsafeAccessorAttribute\u003E API and change your code as necessary to match the new restrictions for generic types.",
       "references": [
         {
           "type": "documentation",
@@ -815,7 +788,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about the .NET 9 breaking change in core .NET libraries where ZipArchiveEntry names and comments now respect the UTF8 flag when decoding.",
       "impact": "medium",
-      "required_action": "If your code passes an encoding to the [ZipArchive constructor](xref:System.IO.Compression.ZipArchive.%23ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean,System.Text.Encoding)), be aware that this encoding isn\u0027t respected in all situations. It will only be used if the entry\u0027s UTF8 bit is not set.\n\nIf you\u0027re using \u003Cxref:System.IO.Compression.ZipArchive\u003E to parse ZIP entries with names encoded in non-UTF8 format (but which have the UTF8 bit flag set), you will no longer...",
       "references": [
         {
           "type": "documentation",
@@ -845,7 +817,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in .NET 9 where certain APIs were removed from System.Security.Cryptography.Pkcs netstandard2.0.",
       "impact": "medium",
-      "required_action": "If these additional members are needed, compile specifically for a TFM that includes them, such as \u0060net8.0\u0060.",
       "references": [
         {
           "type": "documentation",
@@ -888,7 +859,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the .NET 9 breaking change in cryptography where SafeEvpPKeyHandle.DuplicateHandle now increments the reference count of the EVP_PKEY handle instead of creating a new instance.",
       "impact": "medium",
-      "required_action": "Avoid modifications of \u0060EVP_PKEY\u0060 passed in to .NET APIs. If you can\u0027t avoid modifications to \u0060EVP_PKEY\u0060, create a copy of \u0060EVP_PKEY\u0060 yourself (that is, copy parameters into the new \u0060EVP_PKEY\u0060 instance).",
       "references": [
         {
           "type": "documentation",
@@ -916,7 +886,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the .NET 9 breaking change in cryptography where the lifetime of a Windows private key has been simplified.",
       "impact": "medium",
-      "required_action": "If you understood the collection-load lifetime management and depended on calling \u0060Dispose\u0060 on a clone to cause key erasure, ensure that you\u0027re also (or instead) calling \u0060Dispose\u0060 on the original loaded object.",
       "references": [
         {
           "type": "documentation",
@@ -941,7 +910,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the .NET 9 breaking change in cryptography where X509Certificate2 and X509Certificate constructors for binary and file content are obsolete.",
       "impact": "medium",
-      "required_action": "For workarounds, see [Workaround](../../../../fundamentals/syslib-diagnostics/syslib0057.md#workaround).",
       "references": [
         {
           "type": "documentation",
@@ -966,7 +934,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the breaking change in .NET 9 where the desktop Windows, macOS, and Linux MonoVM runtime packages are deprecated.",
       "impact": "medium",
-      "required_action": "If your application publish relies on these packages, we recommend staying on .NET 8 LTS while you migrate the application to the default desktop runtime NuGet packages. Each of these platforms has a corresponding runtime NuGet package.",
       "references": [
         {
           "type": "documentation",
@@ -988,7 +955,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the breaking change in interop in .NET 9 where CET is supported by default.",
       "impact": "medium",
-      "required_action": "Workarounds:\n\n- You can opt out of CET by adding \u0060\u003CCETCompat\u003Efalse\u003C/CETCompat\u003E\u0060 to your app\u0027s project file (for example, *.csproj* file).\n- Use the Windows Security app or a group policy to opt out of the hardware-supported stack enforcement for the specific .NET application. For more information, see [Enable exploit protection](/defender-endpoint/enable-exploit-protection).",
       "references": [
         {
           "type": "documentation",
@@ -1010,7 +976,6 @@
       "version_introduced": "9.0-preview.4",
       "description": "Learn about the breaking change in .NET 9 where floating point-to-integer conversions have saturating behavior.",
       "impact": "medium",
-      "required_action": "If you relied on the values shown in the [Previous behavior](#previous-behavior) section to be returned from the conversion, even if they were incorrect, update your code to expect the values shown in the [New behavior](#new-behavior) section.\n\nIf the performance overhead of the new behavior is undesirable for your scenario, you can use the new \u0060ConvertToIntegerNative\u003CTInteger\u003E\u0060 methods on [Single](xref:System.Single.ConvertToIntegerNative\u0060\u00601(System.Single)), [Double](xref:System.Double.Conve...",
       "references": [
         {
           "type": "documentation",
@@ -1042,7 +1007,6 @@
       "version_introduced": "9.0-rc.2",
       "description": "Learn about the breaking change in .NET 9 where some SVE APIs that take 32-bit address have been removed.",
       "impact": "medium",
-      "required_action": "Stop using the removed APIs and instead use the overloads that take 64-bit addresses as input.",
       "references": [
         {
           "type": "documentation",
@@ -1078,7 +1042,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the breaking change in networking in .NET 9 where HttpClientFactory now uses SocketsHttpHandler as the default primary handler.",
       "impact": "medium",
-      "required_action": "There are three options to work around the breaking change:\n\n- Explicitly specify and configure a primary handler for each of your clients:\n\n  [code sample]\n\n- Overwrite the default primary handler for all clients using \u003Cxref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})\u003E:\n\n  [code sample]\n\n-...",
       "references": [
         {
           "type": "documentation",
@@ -1104,7 +1067,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the breaking change in networking in .NET 9 where HttpClient EventSource events scrub query strings by default to enhance privacy.",
       "impact": "medium",
-      "required_action": "If you need query string information when consuming \u0060HttpClient\u0060 or \u0060SocketsHttpHandler\u0060 events and you\u0027re confident that it\u0027s safe to do so, you can enable query string logging globally by setting an AppContext switch in one of three ways:\n\n- In the project file.\n\n  [code sample]\n\n- In the *runtimeconfig.json* file.\n\n  [code sample]\n\n- Through an environment variable.\n\n  Set \u0060DOTNET_SYSTEM_NET_HTTP_DISABLEURIREDACTION\u0060 to \u0060true\u0060 or 1.\n\nOtherwise, no action is required, and the default behavi...",
       "references": [
         {
           "type": "documentation",
@@ -1130,7 +1092,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the breaking change in networking in .NET 9 where the IHttpClientFactory implementation scrubs query strings in logs to enhance privacy.",
       "impact": "medium",
-      "required_action": "If your application relies on logging query strings and you\u0027re confident that it\u0027s safe to do so, you can enable query string logging globally by setting an AppContext switch in one of three ways:\n\n- In the project file.\n\n  [code sample]\n\n- In the *runtimeconfig.json* file.\n\n  [code sample]\n\n- Through an environment variable.\n\n  Set \u0060DOTNET_SYSTEM_NET_HTTP_DISABLEURIREDACTION\u0060 to \u0060true\u0060 or 1.\n\nOtherwise, no action is required, and the default behavior will help enhance the privacy aspects of ...",
       "references": [
         {
           "type": "documentation",
@@ -1155,7 +1116,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about the .NET 9 breaking change in networking where HttpClientFactory logging redacts all header values by default.",
       "impact": "medium",
-      "required_action": "If you want to log the headers, assess which headers might contain sensitive information and explicitly specify them using the \u0060RedactLoggedHeaders\u0060 API. You can redact headers per client, or globally for all clients by using the \u003Cxref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})\u003E.\n\nConsider...",
       "references": [
         {
           "type": "documentation",
@@ -1180,7 +1140,6 @@
       "version_introduced": "9.0-preview.7",
       "description": "Learn about the breaking change in networking in .NET 9 where HttpClient metrics now report the \u0060server.port\u0060 attribute unconditionally to maintain compliance with Open Telemetry standards.",
       "impact": "medium",
-      "required_action": "No action is needed if you don\u0027t rely on [HttpClient metrics](../../../../fundamentals/networking/telemetry/metrics.md). If you use the \u0060http.client.request.duration\u0060, \u0060http.client.connection.duration\u0060, or \u0060http.client.open_connections\u0060 instruments, this change might break existing queries in monitoring software like Prometheus.",
       "references": [
         {
           "type": "documentation",
@@ -1208,7 +1167,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the .NET 9 breaking change in networking where the HttpListenerRequest.UserAgent property is annotated as being nullable.",
       "impact": "medium",
-      "required_action": "Update calling code to guard against \u0060null\u0060 for this property.",
       "references": [
         {
           "type": "documentation",
@@ -1233,7 +1191,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in the .NET 9 SDK where a new default RID is used for apps that target .NET Framework.",
       "impact": "medium",
-      "required_action": "If you\u0027re affected by this change, choose one of the following actions:\n\n- Update your runtime identifier to a value supported by the portable RID graph. Project file example:\n\n   [code sample]\n\n  If you specify the RID as a command-line argument, make a similar change. For example, \u0060dotnet publish --runtime win-x64\u0060.\n\n- Switch back to the old RID graph by setting \u0060UseRidGraph\u0060 to \u0060true\u0060 in the project file:\n\n  [code sample]",
       "references": [
         {
           "type": "documentation",
@@ -1260,7 +1217,6 @@
       "version_introduced": "9.0.2",
       "description": "Learn about the breaking change in the .NET SDK where the CLI command \u0027dotnet sln add\u0027 adds support for .slnx solution files and no longer allows invalid file names.",
       "impact": "medium",
-      "required_action": "Review project and solution folders names to ensure they comply with the new naming restrictions.",
       "references": [
         {
           "type": "documentation",
@@ -1287,7 +1243,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about a breaking change in the .NET 9 SDK where \u0027dotnet watch\u0027 requires disabling Hot Reload for projects targeting .NET 5 or earlier.",
       "impact": "medium",
-      "required_action": "Pass \u0060--no-hot-reload\u0060 to \u0060dotnet watch\u0060 on the command line, or update your project to target \u0060net6.0\u0060 or later (using the \u0060TargetFramework\u0060 property).",
       "references": [
         {
           "type": "documentation",
@@ -1309,7 +1264,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about a breaking change in the .NET 9 SDK where the \u0060dotnet workload\u0060 commands output only the JSON body.",
       "impact": "medium",
-      "required_action": "If your code searches for the following start and end boundary text prior to parsing JSON, you no longer need to search the output for these boundaries. Instead, consider the output of these commands to directly be the JSON body.\n\n- \u0060==workloadListJsonOutputStart==/==workloadListJsonOutputEnd==\u0060\n- \u0060==allPackageLinksJsonOutputStart==/==allPackageLinksJsonOutputEnd==\u0060\n- \u0060==workloadRollbackDefinitionJsonOutputStart==/==workloadRollbackDefinitionJsonOutputEnd==\u0060",
       "references": [
         {
           "type": "documentation",
@@ -1331,7 +1285,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in the .NET SDK where a warning is issued for apps that target net7.0, which is out of support.",
       "impact": "medium",
-      "required_action": "Upgrade your app to target \u0060net8.0\u0060.\n\nIf you must continue targeting \u0060net7.0\u0060, you can set the MSBuild property \u0060CheckEolTargetFramework\u0060 to \u0060false\u0060. You can set it in the project file or by passing \u0060/p:CheckEolTargetFramework=false\u0060 to a .NET CLI command such as \u0060dotnet build\u0060.\n\nExample *.csproj* or *.vbproj* file:\n\n[code sample]",
       "references": [
         {
           "type": "documentation",
@@ -1353,7 +1306,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about a breaking change in the .NET 9 SDK where the a build warning is produced if your project targets any .NET Standard version below 2.0.",
       "impact": "medium",
-      "required_action": "Update your \u0060TargetFramework\u0060 property to \u0060netstandard2.0\u0060 or \u0060netstandard2.1\u0060.\n\nIf you must stay on an older .NET Standard version, you can set \u0060\u003CCheckNotRecommendedTargetFramework\u003E\u0060 to \u0060false\u0060 in your project file (for example, *.csproj* file) or *Directory.Build.props* file to skip the target framework version check:\n\n[code sample]\n\nAlternatively, you can suppress the warning using the \u0060\u003CNoWarn\u003E\u0060 property in your project file:\n\n[code sample]",
       "references": [
         {
           "type": "documentation",
@@ -1375,7 +1327,6 @@
       "version_introduced": "9.0-preview.5",
       "description": "Learn about a breaking change in the .NET 9 SDK where the \u0060installer\u0060 repo commit and version are no longer included in the \u0060productcommits\u0060 files.",
       "impact": "medium",
-      "required_action": "Any tooling that depends on the \u0060productcommit\u0060 file should be updated to use the \u0060sdk\u0060 version.",
       "references": [
         {
           "type": "documentation",
@@ -1397,7 +1348,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about a breaking change in the .NET 9 SDK where Terminal Logger is used by default for interactive MSBuild invocations.",
       "impact": "medium",
-      "required_action": "If you need to revert to the console logger, you can disable Terminal Logger in the following ways:\n\n- To disable Terminal Logger for a specific command, specify \u0060--tl:off\u0060 on the command line or via an MSBuild response file.\n- To disable Terminal Logger for all commands, set the \u0060MSBUILDTERMINALLOGGER\u0060 environment variable to \u0060off\u0060.",
       "references": [
         {
           "type": "documentation",
@@ -1419,7 +1369,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in the .NET 9 SDK where specific versions of Visual Studio and MSBuild are required.",
       "impact": "medium",
-      "required_action": "Upgrade your Visual Studio version to the required version.",
       "references": [
         {
           "type": "documentation",
@@ -1441,7 +1390,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the .NET 9 breaking change in serialization where the in-box BinaryFormatter implementation was removed and always throws exceptions.",
       "impact": "medium",
-      "required_action": "If your code uses \u0060BinaryFormatter\u0060, you should select a new serialization format and migrate your code.\n\nIf you judge the risk of \u0060BinaryFormatter\u0060 acceptable for your use cases and you\u0027re committed to using a class that can\u0027t be made secure, you\u0027ll still be able to use \u0060BinaryFormatter\u0060 through a separate, unsupported NuGet package.\n\nFor more information, including guidance on alternative serializers, see the [BinaryFormatter migration guide](../../../../standard/serialization/binaryformatt...",
       "references": [
         {
           "type": "documentation",
@@ -1466,7 +1414,6 @@
       "version_introduced": "9.0",
       "description": "System.Text.Json now unescapes metadata property names, affecting reference preservation and metadata property validation.",
       "impact": "low",
-      "required_action": "Avoid using escaping to bypass metadata property validation. Instead, pick property names that don\u0027t conflict with metadata properties.",
       "references": [
         {
           "type": "documentation",
@@ -1497,7 +1444,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in serialization in .NET 9 where nullable JsonDocument values deserialize to JsonValueKind.Null instead of null.",
       "impact": "medium",
-      "required_action": "Update code that consumes deserialized objects containing \u0060JsonDocument\u0060 types to expect \u0060JsonValueKind.Null\u0060 instead of \u0060null\u0060.",
       "references": [
         {
           "type": "documentation",
@@ -1528,7 +1474,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the breaking change in .NET 9 for Windows Forms where ComponentDesigner.Initialize now throws ArgumentNullException if the component argument is null.",
       "impact": "medium",
-      "required_action": "Make sure you don\u0027t call \u003Cxref:System.ComponentModel.Design.ComponentDesigner.Initialize%2A?displayProperty=nameWithType\u003E with a \u0060null\u0060 argument.",
       "references": [
         {
           "type": "documentation",
@@ -1553,7 +1498,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the breaking change in .NET 9 for Windows Forms where DataGridViewHeaderCell methods no longer throw an exception if the DataGridView property is null.",
       "impact": "medium",
-      "required_action": "If you were relying on the code to throw a \u003Cxref:System.NullReferenceException\u003E in this scenario, change your code to check the return value instead.",
       "references": [
         {
           "type": "documentation",
@@ -1581,7 +1525,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the breaking change in .NET 9 for Windows Forms where the starting index for the DataGridViewRowAccessibleObject.Name property is now 1 instead of 0.",
       "impact": "medium",
-      "required_action": "If your application relied on the previous behavior and you prefer the row index to start at 0, you can set the new switch \u0060System.Windows.Forms.DataGridViewUIAStartRowCountAtZero\u0060. To maintain the original functionality, create a *runtimeconfig.template.json* file at the root folder of your project and set this switch to \u0060true\u0060. Update your codebase accordingly to accommodate this change and ensure that the \u003Cxref:System.Windows.Forms.DataGridViewRow.DataGridViewRowAccessibleObject\u003E displays ...",
       "references": [
         {
           "type": "documentation",
@@ -1606,7 +1549,6 @@
       "version_introduced": "9.0-preview.6",
       "description": "Learn about the breaking change in .NET 9 for Windows Forms where \u0060PictureBox\u0060 raises HttpClient exceptions for network errors when loading an image from a URL.",
       "impact": "medium",
-      "required_action": "Update your code to catch \u003Cxref:System.Net.Http.HttpRequestException\u003E and \u003Cxref:System.Threading.Tasks.TaskCanceledException\u003E instead of \u003Cxref:System.Net.WebException\u003E.",
       "references": [
         {
           "type": "documentation",
@@ -1631,7 +1573,6 @@
       "version_introduced": "9.0-preview.2",
       "description": "Learn about the breaking change in .NET 9 for Windows Forms where IMsoComponent support is now opt-in.",
       "impact": "medium",
-      "required_action": "If you wish to revert to the previous behavior, you can opt in to \u0060IMsoComponent\u0060 support using a switch in the *runtimeconfig.json* file or as a \u0060RuntimeHostConfigurationOption\u0060 item in the project file.\n\n*runtimeconfig.json* file:\n\n[code sample]\n\nProject file:\n\n[code sample]",
       "references": [
         {
           "type": "documentation",
@@ -1681,7 +1622,6 @@
       "version_introduced": "9.0-rc.1",
       "description": "Learn about the .NET 9 breaking change in Windows Forms where new security analyzers have been introduced to prevent accidental leaks of sensitive data.",
       "impact": "medium",
-      "required_action": "- Review the properties flagged by the analyzer and configure appropriate serialization settings as needed.\n- For a quick fix (not recommended), add the following entry in an *.editorconfig* file at the solution folder or project folder level:\n\n  [code sample]",
       "references": [
         {
           "type": "documentation",
@@ -1703,7 +1643,6 @@
       "version_introduced": "9.0-preview.1",
       "description": "Learn about the breaking change in .NET 9 for Windows Forms where BindingSource.SortDescriptions no longer returns null if the data source is not an IBindingListView.",
       "impact": "medium",
-      "required_action": "If your code expects \u0060null\u0060 from \u003Cxref:System.Windows.Forms.BindingSource.SortDescriptions?displayProperty=nameWithType\u003E for any reason, update your code to expect an empty \u003Cxref:System.ComponentModel.ListSortDescriptionCollection\u003E instead.",
       "references": [
         {
           "type": "documentation",
@@ -1728,7 +1667,6 @@
       "version_introduced": "9.0",
       "description": "Learn about the breaking change in .NET 9 for Windows Forms where System.Windows.Forms.StatusStrip uses a different default value for the RenderMode property.",
       "impact": "medium",
-      "required_action": "The new behavior is recommended for accessibility reasons. If you want to revert to the previous behavior, set the \u0060RenderMode\u0060 property to \u003Cxref:System.Windows.Forms.ToolStripRenderMode.System?displayProperty=nameWithType\u003E.\n\n\u003E [!NOTE]\n\u003E The new behavior was reverted to the previous behavior in a .NET 9 servicing release and [.NET 10 Preview 1](../10.0/statusstrip-renderer.md).",
       "references": [
         {
           "type": "documentation",
@@ -1754,7 +1692,6 @@
       "version_introduced": "9.0-preview.3",
       "description": "Learn about the breaking change in .NET 9 for WPF where the backing property of \u0027XmlNamespaceMaps\u0027 has been changed from \u0027String\u0027 to \u0027Hashtable\u0027.",
       "impact": "medium",
-      "required_action": "Pass \u0060Hashtable\u0060 instead of a string to the \u003Cxref:System.Windows.Markup.XmlAttributeProperties.SetXmlNamespaceMaps%2A\u003E API.",
       "references": [
         {
           "type": "documentation",
@@ -1875,7 +1812,7 @@
   },
   "_metadata": {
     "schema_version": "1.0",
-    "generated_on": "2025-12-05T22:15:46.0861472+00:00",
+    "generated_on": "2025-12-16T01:22:39.4497708+00:00",
     "generated_by": "BreakingChangesIndex",
     "source_repository": "https://github.com/dotnet/docs",
     "source_path": "docs/core/compatibility/9.md"
