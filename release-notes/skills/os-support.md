@@ -14,40 +14,34 @@ Know when you're done:
 
 **Do NOT** look for markdown versions (`.md`) of these JSON files—they don't exist. The JSON files are complete and authoritative.
 
-## Navigation Flow (3 fetches)
+## Navigation Flow (2 fetches)
 
 ```
 llms.json
     │
     └─► _embedded.latest_patches[] ─► find version (e.g., "10.0")
             │
-            └─► _links["release-major"]
+            └─► _links["release-manifest"]
                     │
                     ▼
-                X.0/index.json
+                manifest.json
                     │
-                    └─► _links["release-manifest"]
-                            │
-                            ▼
-                        manifest.json
-                            │
-                            ├─► _links["supported-os-json"] ─► distros, glibc
-                            │
-                            └─► _links["os-packages-json"] ─► apt/dnf packages
+                    ├─► _links["supported-os-json"] ─► distros, glibc
+                    │
+                    └─► _links["os-packages-json"] ─► apt/dnf packages
 ```
 
 ## Common Queries
 
-### Is my distro supported? (3 fetches)
+### Is my distro supported? (2 fetches)
 
 1. Fetch `llms.json`
 2. Find `_embedded.latest_patches[]` where `release == "X.0"`
-3. Follow `_links["release-major"]` → version index
-4. Follow `_links["release-manifest"]` → manifest.json
-5. Follow `_links["supported-os-json"]` → supported-os.json
-6. Check `distributions[]` for your distro
+3. Follow `_links["release-manifest"]` → manifest.json
+4. Follow `_links["supported-os-json"]` → supported-os.json
+5. Check `distributions[]` for your distro
 
-### OS packages for Ubuntu/Debian (3 fetches)
+### OS packages for Ubuntu/Debian (2 fetches)
 
 Same path, but follow `_links["os-packages-json"]`:
 
@@ -55,7 +49,7 @@ Same path, but follow `_links["os-packages-json"]`:
 2. Find `releases[]` where `release == "24.04"`
 3. Read `packages[]` for required apt packages
 
-### Minimum glibc version (3 fetches)
+### Minimum glibc version (2 fetches)
 
 1. Follow path to `supported-os.json`
 2. Read `libc[]` array
