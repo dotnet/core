@@ -73,7 +73,8 @@ These are answered directly from `llms.json`:
 
 Each `_embedded.latest_patches[]` entry has `_links` for 2-fetch navigation:
 
-- `release-major` → version index (breaking changes, TFMs, OS support)
+- `release-manifest` → manifest.json (breaking changes, TFMs, OS support)
+- `release-major` → version index (patch navigation, timeline)
 - `latest-sdk` → SDK index (feature bands, downloads)
 - `latest-security` → last security patch for that version
 
