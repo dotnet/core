@@ -1,12 +1,19 @@
 {
   "kind": "llms-index",
   "title": ".NET Release Index for AI",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/SKILL.md",
-  "ai_note": "ALWAYS read required_pre_read first. HAL graph—follow _links only, never construct URLs.",
+  "ai_note": "Read llms.txt first (required). schema-reference.txt is optional, for complex queries involving SDK bands, OS packages and compatibility, or custom navigation patterns.",
+  "required_pre_read": [
+    "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms.txt",
+    "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/llms/schema-reference.txt"
+  ],
   "latest": "10.0",
   "latest_lts": "10.0",
   "latest_year": "2025",
-  "releases": ["10.0", "9.0", "8.0"],
+  "releases": [
+    "10.0",
+    "9.0",
+    "8.0"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json"
@@ -147,7 +154,10 @@
         "month": "10",
         "security": true,
         "cve_count": 2,
-        "cve_records": ["CVE-2025-55247", "CVE-2025-55315"],
+        "cve_records": [
+          "CVE-2025-55247",
+          "CVE-2025-55315"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
@@ -164,7 +174,11 @@
         "month": "10",
         "security": true,
         "cve_count": 3,
-        "cve_records": ["CVE-2025-55247", "CVE-2025-55315", "CVE-2025-55248"],
+        "cve_records": [
+          "CVE-2025-55247",
+          "CVE-2025-55315",
+          "CVE-2025-55248"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
@@ -181,7 +195,11 @@
         "month": "10",
         "security": true,
         "cve_count": 3,
-        "cve_records": ["CVE-2025-55247", "CVE-2025-55315", "CVE-2025-55248"],
+        "cve_records": [
+          "CVE-2025-55247",
+          "CVE-2025-55315",
+          "CVE-2025-55248"
+        ],
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
