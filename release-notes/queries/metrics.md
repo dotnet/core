@@ -717,7 +717,7 @@ VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version 
 BC_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["compatibility-json"].href')
 
 # Step 3: Get raw markdown URLs for core-libraries breaking changes
-curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.category == $cat) | .references[]? | select(.type == "documentation-source") | .url'
+curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.category == $cat) | .references[]? | select(.type == "documentation") | .url'
 # https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/activity-sampling.md
 # https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/asyncenumerable.md
 # https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/core-libraries/10.0/bufferedstream-writebyte-flush.md
@@ -741,7 +741,7 @@ curl -s "$BC_HREF" | jq -r --arg cat "core-libraries" '.breaks[] | select(.categ
 **Analysis:**
 
 - **Completeness:** ❌ The releases-index does not include breaking changes data.
-- **Ergonomics:** These raw markdown URLs can be fetched and fed directly to an LLM for analysis or migration assistance. Breaking changes include multiple reference types; `documentation-source` provides raw markdown content.
+- **Ergonomics:** These raw markdown URLs can be fetched and fed directly to an LLM for analysis or migration assistance. Breaking changes include multiple reference types; `documentation` provides raw markdown content.
 
 **Winner:** hal-index only; llms-index equivalent
 
