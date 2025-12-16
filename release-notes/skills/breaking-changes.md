@@ -14,9 +14,9 @@ llms.json
                     ▼
                 manifest.json
                     │
-                    ├─► _links["compatibility-json"] ─► breaking changes
+                    ├─► _links["compatibility"] ─► breaking changes
                     │
-                    └─► _links["target-frameworks-json"] ─► TFMs
+                    └─► _links["target-frameworks"] ─► TFMs
 ```
 
 ## Common Queries
@@ -26,17 +26,17 @@ llms.json
 1. Fetch `llms.json`
 2. Find `_embedded.latest_patches[]` where `release == "X.0"`
 3. Follow `_links["release-manifest"]` → manifest.json
-4. Follow `_links["compatibility-json"]` → compatibility.json
+4. Follow `_links["compatibility"]` → compatibility.json
 
 ### TFMs for .NET X (2 fetches)
 
-Same path, but follow `_links["target-frameworks-json"]`
+Same path, but follow `_links["target-frameworks"]`
 
 ## compatibility.json Structure
 
 ```json
 {
-  "breaking_changes": [
+  "breaks": [
     {
       "id": "category-version-short-name",
       "title": "Human-readable title",
@@ -46,8 +46,12 @@ Same path, but follow `_links["target-frameworks-json"]`
       "impact": "low | medium | high",
       "references": [
         {
-          "type": "documentation-source",
-          "url": "https://learn.microsoft.com/..."
+          "type": "documentation",
+          "url": "https://raw.githubusercontent.com/dotnet/docs/main/docs/core/compatibility/..."
+        },
+        {
+          "type": "documentation-rendered",
+          "url": "https://learn.microsoft.com/dotnet/core/compatibility/..."
         }
       ]
     }
@@ -85,8 +89,21 @@ Common categories in `compatibility.json`:
 - `networking` — HTTP, sockets
 - `serialization` — JSON, XML serialization
 
+## Documentation Content
+
+The `documentation` links point to raw markdown with these sections:
+
+- Previous behavior / New behavior
+- Type of breaking change
+- **Reason for change** — Why the change was made
+- **Recommended action** — Migration steps with code examples
+- Affected APIs
+
+Fetch when you need rationale or detailed migration guidance beyond `required_action`.
+
 ## Tips
 
 - Group by `category` for migration planning
 - Filter by `impact == "high"` for critical review
-- Follow `references[].url` for detailed migration guidance
+- Use `references[]` where `type == "documentation"` for raw markdown (LLM-friendly)
+- Use `type == "documentation-rendered"` for HTML view (human-friendly)
