@@ -23,8 +23,13 @@ llms.json
     │
     └─► _embedded.latest_patches[] ─────────────────────────► DONE (patch version, EOL date, support status)
             │
-            ├─► _links.release-major ─► X.0/index.json ─► compatibility-json ─► DONE (breaking changes)
-            │                                          └─► target-frameworks-json ─► DONE (TFMs)
+            ├─► _links.release-major ─► X.0/index.json ─► DONE (navigation: patches, SDKs)
+            │
+            ├─► _links.release-manifest ─► manifest.json ─► DONE (reference data)
+            │       ├─► compatibility-json ─► breaking changes
+            │       ├─► target-frameworks-json ─► TFMs
+            │       ├─► supported-os-json ─► distros, glibc
+            │       └─► os-packages-json ─► apt/dnf packages
             │
             └─► _links.latest-sdk ─► sdk/index.json ─► DONE (feature bands, downloads)
 ```
