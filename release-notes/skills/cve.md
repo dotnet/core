@@ -51,15 +51,16 @@ Best for: **4+ months, full year, or multi-year analysis**
 
 ```
 llms.json → timeline-index → year index
-         → [parallel] batch fetch month indexes where security: true
+         → filter _embedded.months[] by date range AND security: true
+         → [parallel] batch fetch only those month indexes
 ```
 
-- Fetch year index to see all months with `security: true`
-- Batch fetch all relevant month indexes in one turn
+- Fetch year index to see all months
+- **Filter by your date range first** (don't fetch all security months blindly)
+- Batch fetch only the months you actually need
 - 3 turns total regardless of month count
-- Much more efficient for broad queries
 
-Use `_embedded.months[]` to identify which months have `security: true`, then batch fetch those month indexes (or their `cve-json` links if you need CVSS vectors/CWE).
+**Important:** If query asks for "last 12 months", calculate the date range first (e.g., Dec 2024–Dec 2025), then only fetch security months within that range—not every security month in both years.
 
 ### Filtering by Version
 
@@ -140,6 +141,7 @@ Example:
 |---------|----------------|
 | Using year index batch for 1-3 month queries | Overkill—use `prev-security` walk instead |
 | Using `prev-security` walk for 4+ months | Inefficient—use year index batch with parallel fetches |
+| Fetching all security months from year indexes | Filter by date range first—"last 12 months" ≠ "all of 2024 + 2025" |
 | Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
 | Constructing month URLs without checking year index | Always check `_embedded.months[]` for `security: true` first |
 | Fabricating intermediate month URLs | Trust `prev-security` links—they skip non-security months automatically |
