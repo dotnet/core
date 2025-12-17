@@ -24,7 +24,7 @@ The tables below show theoretical update frequency based on practice and design,
 |------|------|--------------|-------------|
 | `llms.json` | 5 KB | ~12+ | AI-optimized entry point with embedded patches and CVE summaries |
 
-The `llms.json` file is designed for AI assistants and can be updated frequently without impacting mission-critical workflows. It embeds `latest_patches` and `latest_security_month` arrays that provide direct answers to common queries.
+The `llms.json` file is designed for AI assistants and can be updated frequently without impacting mission-critical workflows. It embeds `latest_patches` with support status and CVE counts that provide direct answers to common queries.
 
 ### Hal-Index Files
 

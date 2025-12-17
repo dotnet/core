@@ -126,12 +126,14 @@ curl -s "$PATCH_HREF" | jq -r '.cve_records[]'
 # CVE-2025-55315
 ```
 
-**llms-index:** The `_embedded.latest_security_month` array provides CVE records directly:
+**llms-index:** Follow `latest-security-month` link to get CVE records:
 
 ```bash
 LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
 
-curl -s "$LLMS" | jq -r '._embedded.latest_security_month[] | select(.release == "8.0") | .cve_records[]'
+# Get the month index URL
+MONTH_URL=$(curl -s "$LLMS" | jq -r '._links["latest-security-month"].href')
+curl -s "$MONTH_URL" | jq -r '._embedded.disclosures[] | select(.affected_releases | index("8.0")) | .id'
 # CVE-2025-55247
 # CVE-2025-55248
 # CVE-2025-55315
@@ -189,13 +191,13 @@ curl -s "$PATCH_HREF" | jq -r '._embedded.disclosures[] | select(.cvss_severity 
 # CVE-2025-55315: .NET Security Feature Bypass Vulnerability (CRITICAL)
 ```
 
-**llms-index:** Follow the `self` link from `latest_security_month` to get severity details:
+**llms-index:** Follow `latest-security-month` link to get severity details:
 
 ```bash
 LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
 
-# Get the month index URL for 8.0's latest security month
-MONTH_URL=$(curl -s "$LLMS" | jq -r '._embedded.latest_security_month[] | select(.release == "8.0") | ._links.self.href')
+# Get the month index URL
+MONTH_URL=$(curl -s "$LLMS" | jq -r '._links["latest-security-month"].href')
 curl -s "$MONTH_URL" | jq -r '._embedded.disclosures[] | select(.cvss_severity == "HIGH" or .cvss_severity == "CRITICAL") | "\(.id): \(.title) (\(.cvss_severity))"'
 ```
 
@@ -592,7 +594,7 @@ done
 
 - **Completeness:** ❌ The releases-index only provides CVE IDs. To filter by severity, you would need to fetch each CVE from cve.mitre.org.
 - **Version-specific traversal:** The hal-index `prev-security` links on patch indexes stay within the major version, efficiently walking through 8.0.21 → 8.0.20 → 8.0.19 etc.
-- **The `release` property:** Patch entries include a `release` property (e.g., `"release": "8.0"`) that enables filtering by major version. This is what makes `select(.release == "8.0")` work on embedded patch collections like `_embedded.latest_patches[]` or `_embedded.latest_security_month[]`.
+- **The `release` property:** Patch entries include a `release` property (e.g., `"release": "8.0"`) that enables filtering by major version. This is what makes `select(.release == "8.0")` work on embedded patch collections like `_embedded.latest_patches[]`.
 - **Use case:** Version-specific security audits ("Is my .NET 8 deployment exposed to any critical vulnerabilities?").
 
 **Winner:** hal-index (**24x smaller**, releases-index cannot answer this query); llms-index is 10% smaller (50 KB vs 55 KB) with direct `latest-security` link
