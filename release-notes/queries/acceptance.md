@@ -56,7 +56,7 @@ Queries are organized by user task, with 2-3 queries per category. CVE analysis 
 | M3 | Is there a CRITICAL severity CVE this month? | ≤15 KB | 2 |
 
 **Design validation:**
-- `llms.json` embeds `latest_security_month[]` with CVE counts and IDs per version
+- `llms.json._links.latest-security-month` points to current security month
 - `prev-security` links enable efficient backward traversal (skips non-security releases)
 - CVE severity embedded in month/patch indexes (no external fetch required)
 
@@ -274,7 +274,7 @@ These assumptions underlie the design. If an assumption is incorrect, the design
 
 **Evidence:** LLMs benefit from embedded shortcuts and pre-computed results. They tolerate more frequent updates than CDN-cached production tooling.
 
-**Design response:** `llms.json` provides an AI-optimized entry point with embedded shortcuts (`latest_patches[]`, `latest_security_month[]`). It can be updated more frequently (~12+/year) without impacting the hal-index root. The hal-index maintains strict update discipline; `llms.json` trades stability for convenience.
+**Design response:** `llms.json` provides an AI-optimized entry point with embedded shortcuts (`latest_patches[]`). It can be updated more frequently (~12+/year) without impacting the hal-index root. The hal-index maintains strict update discipline; `llms.json` trades stability for convenience.
 
 ### A4: Breaking changes and TFMs are upgrade-time concerns
 
@@ -437,9 +437,8 @@ Each file fully embraces its design point:
 
 - **`llms.json` (7.1 KB)** — Embeds everything an LLM needs for "current state" queries: latest patches, support status, EOL dates, CVE summaries, and navigation links. If an LLM has to make a second fetch for common data, you've paid the 7 KB cost without getting the benefit.
 
-The `llms.json` file embeds two curated arrays:
-- `latest_patches[]` — "What's current?" (patch versions, support status, EOL dates, navigation links)
-- `latest_security_month[]` — "What's urgent?" (CVE counts, CVE IDs per version)
+The `llms.json` file embeds one curated array:
+- `latest_patches[]` — "What's current?" (patch versions, support status, EOL dates, CVE counts, navigation links)
 
 Each `latest_patches[]` object includes `release-major` and `latest-sdk` links for direct navigation to version-specific resources. These links are stable (keyed by major version, change ~1x/year).
 
