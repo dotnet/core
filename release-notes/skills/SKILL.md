@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 | Property | Contains |
 |----------|----------|
 | `_embedded.latest_patches[]` | Latest patch per supported version with EOL dates, support status |
-| `_embedded.latest_security_month[]` | Most recent security month per supported version with CVE IDs |
+| `_embedded.latest_security_months[]` | Last 3 security months (most recent first) with CVE IDs, releases, patches |
 | `_links` | Navigation to version indexes, timeline, releases |
 
 `_embedded.latest_patches[]` populated by:
@@ -32,13 +32,12 @@ versions
     .Select(v => v.Patches.MaxBy(p => p.Date))
 ```
 
-`_embedded.latest_security_month[]` populated by:
+`_embedded.latest_security_months[]` populated by:
 ```
-versions
-    .Where(v => v.Supported)
-    .Select(v => timeline
-        .Where(m => m.HasSecurityPatch(v))
-        .MaxBy(m => m.Date))
+timeline.months
+    .Where(m => m.Security)
+    .OrderByDescending(m => m.YearMonth)
+    .Take(3)
 ```
 
 ## Skills
@@ -67,7 +66,7 @@ These are answered directly from `llms.json`:
 
 - Latest patch for .NET X → `_embedded.latest_patches[]` filter by `release`
 - Is .NET X supported? → `_embedded.latest_patches[]` → `supported`, `eol_date`
-- CVE count this month → `_embedded.latest_security_month[]` → `cve_count`
+- Recent CVE counts → `_embedded.latest_security_months[]` → `cve_count`, `cve_records`
 
 ## Navigation Shortcuts
 
