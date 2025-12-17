@@ -12,8 +12,8 @@ llms.json (AI-optimized)          index.json (all versions)       timeline/index
      ├─► latest_patches[]               ├─► _embedded.releases[]         ├─► _embedded.years[]
      │   (supported versions)           │   (all versions incl EOL)      │   └─► _embedded.months[]
      │                                  │                                │
-     └─► latest_security_month[]        └─► _links.timeline-index        └─► _links.prev-security
-         (current CVE summary)                                               (walk security history)
+     └─► latest_security_months[]       └─► _links.timeline-index        └─► _links.prev-security
+         (last 3 security months)                                            (walk security history)
 ```
 
 ## Flow 1: Supported Version Queries (1-2 fetches)
@@ -39,18 +39,16 @@ llms.json
 ```
 llms.json
     │
-    ├─► _embedded.latest_security_month[] ─► DONE (CVE IDs and counts only)
+    ├─► _embedded.latest_security_months[] ─► DONE (last 3 months: CVE IDs, releases, patches)
+    │       └─► each entry has _links.cve-json for full CVE details
     │
-    └─► _links.latest-security-month
-            │
-            ▼
-        month/index.json ◄──────────────────┐
-            │                               │
-            ├─► _embedded.disclosures[] ────│─► DONE (severity, titles, fixes)
-            │                               │
-            ├─► _links.cve-json ───────────►│   cve.json ─► DONE (CVSS vectors, CWE, packages)
-            │                               │
-            └─► _links.prev-security ───────┘   (repeat for history)
+    └─► _links.latest-security-month ─► month/index.json ◄────┐
+            │                                                 │
+            ├─► _embedded.disclosures[] ─► DONE (severity)    │
+            │                                                 │
+            ├─► _links.cve-json ─► cve.json (CVSS, CWE)       │
+            │                                                 │
+            └─► _links.prev-security ─────────────────────────┘ (walk history)
 ```
 
 ## Flow 3: EOL Version Queries (3-5 fetches)

@@ -5,7 +5,7 @@
 ## Quick Rules
 
 1. **Month index `_embedded.disclosures[]` has EVERYTHING**: severity, CVSS score, titles, fix commits. You rarely need `cve.json`.
-2. **Use `latest-security-month` → `prev-security` chain**: Don't navigate through timeline year indexes.
+2. **Choose your strategy by query scope**: `prev-security` walk for recent CVEs, timeline hierarchy for historical analysis (see below).
 3. `_embedded.latest_security_month[]` in llms.json has **counts and IDs only** — fetch the month index for details.
 
 ## Navigation Flow
@@ -26,6 +26,52 @@ llms.json
             │
             └─► _links["prev-security"] ─► previous security month
 ```
+
+## Navigation Strategies
+
+### Strategy 1: `prev-security` Walk (Recent CVEs)
+
+Best for: Last 1-3 months, sequential certainty
+
+```
+llms.json → latest-security-month → prev-security → prev-security...
+```
+
+- One fetch per month (sequential)
+- Guaranteed to hit only security months
+- Simple, follows links exactly
+
+### Strategy 2: Timeline Hierarchy (Historical Analysis)
+
+Best for: 6-12+ months, broad trend analysis
+
+```
+llms.json → timeline/index.json
+         → [parallel] 2024/index.json + 2025/index.json
+         → [parallel] batch fetch cve.json for months with security: true
+```
+
+- Batch year indexes in one turn
+- Batch multiple cve.json files in one turn
+- 3-4 turns total vs N+1 for sequential walk
+- Much more token-efficient for broad queries
+
+Use year index `_embedded.months[]` to identify which months have `security: true`, then batch fetch those.
+
+### Strategy 3: Version Hierarchy (Specific .NET Version)
+
+Best for: "What CVEs affect .NET 8?" or version-specific queries
+
+```
+llms.json → _embedded.releases["8.0"]._links.self
+         → 8.0/index.json → find security patches in _embedded.releases[]
+         → [parallel] batch fetch patch index.json + timeline cve.json
+```
+
+- Go directly to the version you care about
+- Patch indexes show which releases were security updates
+- Can parallel fetch patch details and CVE data
+- Most efficient when query targets a single .NET version
 
 ## Common Queries
 
@@ -77,9 +123,10 @@ Each `_embedded.disclosures[]` entry contains:
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Fetching `timeline/index.json` or year indexes | Use `latest-security-month` from llms.json, then walk `prev-security` |
+| Using timeline hierarchy for 1-3 month queries | Overkill—use `prev-security` walk instead |
 | Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
-| Constructing URLs like `2024/10/cve.json` | URL fabrication—always follow `_links` |
+| Constructing month URLs without checking year index | Always check `_embedded.months[]` for `security: true` first |
+| Fabricating intermediate month URLs | Trust `prev-security` links—they skip non-security months automatically |
 
 ## Tips
 
