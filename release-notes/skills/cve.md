@@ -26,39 +26,43 @@ llms.json
 
 ## Navigation Strategies
 
-Choose based on query type:
+**Important:** "Last N months" means **calendar months** from today, not "N security releases." Security months are sparse—there may be only 9 security months in a 12-calendar-month window.
+
+Choose based on query scope:
 
 | Query Type | Strategy | Why |
 |------------|----------|-----|
-| "Last N months" (bounded) | `prev-security` walk | Self-limiting, stops when done |
-| "All CVEs in [year]" or multi-year | Year index batch | Parallel fetches for known scope |
+| "Last 1-3 months" | `prev-security` walk | Low overhead, few fetches |
+| "Last 4+ months" | Year index with date filter | Parallel fetches, fewer round trips |
+| "All CVEs in [year]" | Year index batch | Known scope, parallel fetches |
 
-### Strategy 1: `prev-security` Walk (Default)
+### Strategy 1: `prev-security` Walk
 
-**Use for:** Any "last N months" query, regardless of N
-
-```
-llms.json → latest-security-month → prev-security → prev-security... → stop after N months
-```
-
-- Self-limiting: you stop when you've collected enough months
-- Works for 3 months or 12 months—just walk until done
-- No risk of over-fetching
-
-**Example:** "Last 12 months" = start at latest-security-month, walk `prev-security` until you've covered 12 calendar months, stop.
-
-### Strategy 2: Year Index Batch
-
-**Use ONLY for:** "All CVEs in 2024" or "CVEs from 2023-2025" (explicit year scope)
+**Use for:** Small scope (1-3 calendar months)
 
 ```
-llms.json → timeline-index → year index
-         → batch fetch month indexes where security: true
+llms.json → latest-security-month → prev-security → stop when date < cutoff
 ```
 
-- Appropriate when query explicitly names years
-- Fetch all security months within those years
-- NOT for "last N months" queries (use walk instead)
+- Sequential but low overhead for small N
+- Stop when month date falls before your cutoff date
+
+### Strategy 2: Year Index with Date Filter
+
+**Use for:** Larger scope (4+ calendar months) or explicit year queries
+
+```
+llms.json → timeline-index → year index(es)
+         → filter _embedded.months[] by date range AND security: true
+         → parallel fetch only the months you need
+```
+
+**Critical:** Filter to your date range—don't fetch entire years when only part is needed.
+
+**Example:** "Last 12 months" query, today is Oct 2025:
+1. Fetch 2024 and 2025 year indexes
+2. Filter to months where `security: true` AND date >= Oct 2024
+3. Parallel fetch those month indexes (typically 8-10 fetches in one turn)
 
 ### Filtering by Version
 
@@ -78,12 +82,17 @@ Do NOT navigate to the version index (e.g., `8.0/index.json`) for CVE queries—
 2. Follow `_links["latest-security-month"]` → month index
 3. Filter `_embedded.disclosures[]` where `cvss_severity == "CRITICAL"`
 
-### CVEs for .NET X in last N months (2-4 fetches)
+### CVEs for .NET X in last N months (3-5 fetches)
 
-1. Fetch `llms.json`
-2. Follow `_links["latest-security-month"]` → month index
-3. Filter `_embedded.disclosures[]` where `affected_releases` contains "X.0"
-4. Walk `_links["prev-security"]` for N months, filtering each
+**For 1-3 months:** Use `prev-security` walk
+1. Fetch `llms.json` → follow `latest-security-month`
+2. Walk `prev-security` until date < cutoff, filtering by `affected_releases`
+
+**For 4+ months:** Use year index with date filter
+1. Fetch `llms.json` → follow `timeline-index` → fetch relevant year index(es)
+2. Filter `_embedded.months[]` to date range + `security: true`
+3. Parallel fetch those month indexes
+4. Filter `_embedded.disclosures[]` where `affected_releases` contains "X.0"
 5. For code fixes: use `fixes[].href` directly (already `.diff` URLs)
 
 ### Deep CVE analysis (3 fetches)
@@ -137,11 +146,11 @@ Example:
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Using year index batch for "last N months" queries | Use `prev-security` walk instead—it self-limits |
-| Fetching all security months from year indexes | Year index batch is for explicit year queries ("all of 2024"), not "last 12 months" |
+| Fetching ALL months from year indexes | Filter by date range first—"last 12 months" doesn't need all of 2024 |
+| Confusing "12 months" with "12 security releases" | Calendar months, not security months—filter by date, not count |
 | Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
 | Constructing month URLs without checking year index | Always check `_embedded.months[]` for `security: true` first |
-| Fabricating intermediate month URLs | Trust `prev-security` links—they skip non-security months automatically |
+| Fabricating intermediate month URLs | Use `_links` from year index or `prev-security` links |
 | Fabricating GitHub commit URLs | Use `fixes[].href` from disclosures—already formatted as `.diff` URLs |
 
 ## Tips
