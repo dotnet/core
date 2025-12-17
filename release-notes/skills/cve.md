@@ -51,18 +51,22 @@ llms.json → latest-security-month → prev-security → stop when date < cutof
 
 **Use for:** Larger scope (4+ calendar months) or explicit year queries
 
+**Goal: Minimize fetches first, then parallelize.** Don't fetch months outside your date range.
+
 ```
 llms.json → timeline-index → year index(es)
-         → filter _embedded.months[] by date range AND security: true
-         → parallel fetch only the months you need
+         → FILTER _embedded.months[] to ONLY months in your date range with security: true
+         → parallel fetch that filtered set
 ```
 
-**Critical:** Filter to your date range—don't fetch entire years when only part is needed.
+**Filtering is mandatory.** Year indexes list ALL months—you must exclude months outside your query window before fetching.
 
 **Example:** "Last 12 months" query, today is Oct 2025:
 1. Fetch 2024 and 2025 year indexes
-2. Filter to months where `security: true` AND date >= Oct 2024
-3. Parallel fetch those month indexes (typically 8-10 fetches in one turn)
+2. Calculate cutoff: Oct 2025 minus 12 months = Oct 2024
+3. From 2024 index: **exclude** Jan-Sep, keep only Oct+ (typically 2-3 months)
+4. From 2025 index: keep all security months (typically 5-6 months)
+5. Parallel fetch only those ~8 months—not all 15 security months across both years
 
 ### Filtering by Version
 
@@ -146,7 +150,7 @@ Example:
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Fetching ALL months from year indexes | Filter by date range first—"last 12 months" doesn't need all of 2024 |
+| Fetching all `security: true` months from year indexes | **Calculate your cutoff date first.** "Last 12 months" from Oct 2025 means Oct 2024 cutoff—exclude Jan-Sep 2024 even though they have `security: true` |
 | Confusing "12 months" with "12 security releases" | Calendar months, not security months—filter by date, not count |
 | Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
 | Constructing month URLs without checking year index | Always check `_embedded.months[]` for `security: true` first |
