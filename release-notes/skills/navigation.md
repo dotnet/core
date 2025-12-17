@@ -9,11 +9,11 @@ Visual map of navigation patterns through the .NET release graph. Use this when 
 ```
 llms.json (AI-optimized)          index.json (all versions)       timeline/index.json (by date)
      │                                  │                                │
-     ├─► latest_patches[]               ├─► _embedded.releases[]         ├─► _embedded.years[]
-     │   (supported versions)           │   (all versions incl EOL)      │   └─► _embedded.months[]
-     │                                  │                                │
-     └─► latest_security_months[]       └─► _links.timeline-index        └─► _links.prev-security
-         (last 3 security months)                                            (walk security history)
+     └─► latest_patches[]               ├─► _embedded.releases[]         ├─► _embedded.years[]
+         (supported versions)           │   (all versions incl EOL)      │   └─► _embedded.months[]
+                                        │                                │
+                                        └─► _links.timeline-index        └─► _links.prev-security
+                                                                             (walk security history)
 ```
 
 ## Flow 1: Supported Version Queries (1-2 fetches)
@@ -34,13 +34,10 @@ llms.json
             └─► _links.latest-sdk ─► sdk/index.json ─► DONE (feature bands, downloads)
 ```
 
-## Flow 2: CVE Queries (1-N fetches)
+## Flow 2: CVE Queries (2-N fetches)
 
 ```
 llms.json
-    │
-    ├─► _embedded.latest_security_months[] ─► DONE (last 3 months: CVE IDs, releases, patches)
-    │       └─► each entry has _links.cve-json for full CVE details
     │
     └─► _links.latest-security-month ─► month/index.json ◄────┐
             │                                                 │
