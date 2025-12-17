@@ -32,17 +32,17 @@ Fetch these when your query matches. **Core Rules above apply to all skills.**
 
 | Skill | Fetch When | URL |
 |-------|------------|-----|
-| cve.md | CVE queries needing severity, CVSS, or history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve.md |
-| breaking-changes.md | Compatibility or migration questions | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes.md |
-| version-eol.md | EOL versions, support lifecycle, or version history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol.md |
-| os-support.md | OS packages, distro support, or glibc requirements | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support.md |
+| cve.md | CVE queries needing severity, CVSS, or history | https://raw.githubusercontent.com/dotnet/core/f2e0092e15c15c520b8279ecde8c7b554e9c4fbe/release-notes/skills/cve.md |
+| breaking-changes.md | Compatibility or migration questions | https://raw.githubusercontent.com/dotnet/core/f2e0092e15c15c520b8279ecde8c7b554e9c4fbe/release-notes/skills/breaking-changes.md |
+| version-eol.md | EOL versions, support lifecycle, or version history | https://raw.githubusercontent.com/dotnet/core/f2e0092e15c15c520b8279ecde8c7b554e9c4fbe/release-notes/skills/version-eol.md |
+| os-support.md | OS packages, distro support, or glibc requirements | https://raw.githubusercontent.com/dotnet/core/f2e0092e15c15c520b8279ecde8c7b554e9c4fbe/release-notes/skills/os-support.md |
 
 ### Broad Skills
 
 | Skill | Fetch When | URL |
 |-------|------------|-----|
-| navigation.md | Multi-hop query and unsure which links to follow | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md |
-| schema.md | Need to understand document structure, properties, or link relations | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema.md |
+| navigation.md | Multi-hop query and unsure which links to follow | https://raw.githubusercontent.com/dotnet/core/f2e0092e15c15c520b8279ecde8c7b554e9c4fbe/release-notes/skills/navigation.md |
+| schema.md | Need to understand document structure, properties, or link relations | https://raw.githubusercontent.com/dotnet/core/f2e0092e15c15c520b8279ecde8c7b554e9c4fbe/release-notes/skills/schema.md |
 
 ## Quick Answers (1 fetch)
 
