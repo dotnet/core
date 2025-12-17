@@ -6,14 +6,11 @@
 
 1. **Month index `_embedded.disclosures[]` has EVERYTHING**: severity, CVSS score, titles, fix commits. You rarely need `cve.json`.
 2. **Choose your strategy by query scope**: `prev-security` walk for recent CVEs, timeline hierarchy for historical analysis (see below).
-3. `_embedded.latest_security_month[]` in llms.json has **counts and IDs only** — fetch the month index for details.
 
 ## Navigation Flow
 
 ```
 llms.json
-    │
-    ├─► _embedded.latest_security_month[] ─► CVE counts, IDs (no severity)
     │
     └─► _links["latest-security-month"]
             │
@@ -29,49 +26,50 @@ llms.json
 
 ## Navigation Strategies
 
-### Strategy 1: `prev-security` Walk (Recent CVEs)
+Choose based on time range:
 
-Best for: Last 1-3 months, sequential certainty
+| Time Range | Strategy | Why |
+|------------|----------|-----|
+| 1-3 months | `prev-security` walk | Simple, 2-4 fetches |
+| 4+ months or full year | Year index batch | Parallel fetches, fewer turns |
+
+### Strategy 1: `prev-security` Walk
+
+Best for: **1-3 months**
 
 ```
 llms.json → latest-security-month → prev-security → prev-security...
 ```
 
-- One fetch per month (sequential)
-- Guaranteed to hit only security months
+- One fetch per security month (sequential)
+- 2-4 total fetches for typical queries
 - Simple, follows links exactly
 
-### Strategy 2: Timeline Hierarchy (Historical Analysis)
+### Strategy 2: Year Index Batch
 
-Best for: 6-12+ months, broad trend analysis
-
-```
-llms.json → timeline/index.json
-         → [parallel] 2024/index.json + 2025/index.json
-         → [parallel] batch fetch cve.json for months with security: true
-```
-
-- Batch year indexes in one turn
-- Batch multiple cve.json files in one turn
-- 3-4 turns total vs N+1 for sequential walk
-- Much more token-efficient for broad queries
-
-Use year index `_embedded.months[]` to identify which months have `security: true`, then batch fetch those.
-
-### Strategy 3: Version Hierarchy (Specific .NET Version)
-
-Best for: "What CVEs affect .NET 8?" or version-specific queries
+Best for: **4+ months, full year, or multi-year analysis**
 
 ```
-llms.json → _embedded.releases["8.0"]._links.self
-         → 8.0/index.json → find security patches in _embedded.releases[]
-         → [parallel] batch fetch patch index.json + timeline cve.json
+llms.json → timeline-index → year index
+         → [parallel] batch fetch month indexes where security: true
 ```
 
-- Go directly to the version you care about
-- Patch indexes show which releases were security updates
-- Can parallel fetch patch details and CVE data
-- Most efficient when query targets a single .NET version
+- Fetch year index to see all months with `security: true`
+- Batch fetch all relevant month indexes in one turn
+- 3 turns total regardless of month count
+- Much more efficient for broad queries
+
+Use `_embedded.months[]` to identify which months have `security: true`, then batch fetch those month indexes (or their `cve-json` links if you need CVSS vectors/CWE).
+
+### Filtering by Version
+
+For "CVEs affecting .NET X", use either strategy above and filter `_embedded.disclosures[]` by `affected_releases`:
+
+```javascript
+disclosures.filter(d => d.affected_releases.includes("8.0"))
+```
+
+Do NOT navigate to the version index (e.g., `8.0/index.json`) for CVE queries—the timeline path with filtering is more efficient.
 
 ## Common Queries
 
@@ -81,12 +79,13 @@ llms.json → _embedded.releases["8.0"]._links.self
 2. Follow `_links["latest-security-month"]` → month index
 3. Filter `_embedded.disclosures[]` where `cvss_severity == "CRITICAL"`
 
-### CVE history for .NET X (1 + N fetches)
+### CVEs for .NET X in last N months (2-4 fetches)
 
 1. Fetch `llms.json`
-2. Follow `_links["latest-security-month"]`
-3. Walk `_links["prev-security"]` until target date
-4. Filter `_embedded.disclosures[]` by `affected_releases`
+2. Follow `_links["latest-security-month"]` → month index
+3. Filter `_embedded.disclosures[]` where `affected_releases` contains "X.0"
+4. Walk `_links["prev-security"]` for N months, filtering each
+5. For code fixes: use `fixes[].href` directly (already `.diff` URLs)
 
 ### Deep CVE analysis (3 fetches)
 
@@ -123,10 +122,12 @@ Each `_embedded.disclosures[]` entry contains:
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Using timeline hierarchy for 1-3 month queries | Overkill—use `prev-security` walk instead |
+| Using year index batch for 1-3 month queries | Overkill—use `prev-security` walk instead |
+| Using `prev-security` walk for 4+ months | Inefficient—use year index batch with parallel fetches |
 | Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
 | Constructing month URLs without checking year index | Always check `_embedded.months[]` for `security: true` first |
 | Fabricating intermediate month URLs | Trust `prev-security` links—they skip non-security months automatically |
+| Fabricating GitHub commit URLs | Use `fixes[].href` from disclosures—already formatted as `.diff` URLs |
 
 ## Tips
 
