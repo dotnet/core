@@ -26,41 +26,39 @@ llms.json
 
 ## Navigation Strategies
 
-Choose based on time range:
+Choose based on query type:
 
-| Time Range | Strategy | Why |
+| Query Type | Strategy | Why |
 |------------|----------|-----|
-| 1-3 months | `prev-security` walk | Simple, 2-4 fetches |
-| 4+ months or full year | Year index batch | Parallel fetches, fewer turns |
+| "Last N months" (bounded) | `prev-security` walk | Self-limiting, stops when done |
+| "All CVEs in [year]" or multi-year | Year index batch | Parallel fetches for known scope |
 
-### Strategy 1: `prev-security` Walk
+### Strategy 1: `prev-security` Walk (Default)
 
-Best for: **1-3 months**
+**Use for:** Any "last N months" query, regardless of N
 
 ```
-llms.json → latest-security-month → prev-security → prev-security...
+llms.json → latest-security-month → prev-security → prev-security... → stop after N months
 ```
 
-- One fetch per security month (sequential)
-- 2-4 total fetches for typical queries
-- Simple, follows links exactly
+- Self-limiting: you stop when you've collected enough months
+- Works for 3 months or 12 months—just walk until done
+- No risk of over-fetching
+
+**Example:** "Last 12 months" = start at latest-security-month, walk `prev-security` until you've covered 12 calendar months, stop.
 
 ### Strategy 2: Year Index Batch
 
-Best for: **4+ months, full year, or multi-year analysis**
+**Use ONLY for:** "All CVEs in 2024" or "CVEs from 2023-2025" (explicit year scope)
 
 ```
 llms.json → timeline-index → year index
-         → filter _embedded.months[] by date range AND security: true
-         → [parallel] batch fetch only those month indexes
+         → batch fetch month indexes where security: true
 ```
 
-- Fetch year index to see all months
-- **Filter by your date range first** (don't fetch all security months blindly)
-- Batch fetch only the months you actually need
-- 3 turns total regardless of month count
-
-**Important:** If query asks for "last 12 months", calculate the date range first (e.g., Dec 2024–Dec 2025), then only fetch security months within that range—not every security month in both years.
+- Appropriate when query explicitly names years
+- Fetch all security months within those years
+- NOT for "last N months" queries (use walk instead)
 
 ### Filtering by Version
 
@@ -139,9 +137,8 @@ Example:
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Using year index batch for 1-3 month queries | Overkill—use `prev-security` walk instead |
-| Using `prev-security` walk for 4+ months | Inefficient—use year index batch with parallel fetches |
-| Fetching all security months from year indexes | Filter by date range first—"last 12 months" ≠ "all of 2024 + 2025" |
+| Using year index batch for "last N months" queries | Use `prev-security` walk instead—it self-limits |
+| Fetching all security months from year indexes | Year index batch is for explicit year queries ("all of 2024"), not "last 12 months" |
 | Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
 | Constructing month URLs without checking year index | Always check `_embedded.months[]` for `security: true` first |
 | Fabricating intermediate month URLs | Trust `prev-security` links—they skip non-security months automatically |
