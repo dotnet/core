@@ -108,6 +108,22 @@ Each `_embedded.disclosures[]` entry contains:
 | `affected_releases` | Array of .NET versions (e.g., ["8.0", "9.0"]) |
 | `fixes[]` | Commit diff URLs per release branch |
 
+Example:
+
+```json
+{
+  "id": "CVE-2025-55315",
+  "title": ".NET Security Feature Bypass Vulnerability",
+  "cvss_score": 9.9,
+  "cvss_severity": "CRITICAL",
+  "affected_releases": ["8.0", "9.0", "10.0"],
+  "fixes": [
+    { "href": "https://github.com/dotnet/aspnetcore/commit/abc123.diff", "release": "8.0" },
+    { "href": "https://github.com/dotnet/aspnetcore/commit/def456.diff", "release": "9.0" }
+  ]
+}
+```
+
 ## Severity Levels
 
 | Severity | CVSS Range |
