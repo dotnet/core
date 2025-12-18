@@ -21,6 +21,7 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 
 | Property | Contains |
 |----------|----------|
+| `supported_releases` | Canonical list of supported .NET versions (e.g., `["10.0", "9.0", "8.0"]`) |
 | `_embedded.latest_patches[]` | Latest patch per supported version with EOL dates, support status, CVE counts |
 | `_links` | Navigation to version indexes, timeline, security months |
 
