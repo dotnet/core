@@ -2,8 +2,6 @@
 
 Query patterns for discovering and navigating the .NET release metadata graph. These patterns demonstrate how HAL's self-describing structure enables exploration without prior documentation.
 
-See [overview.md](../overview.md) for design context and file characteristics.
-
 ## 1: List Available Link Relations
 
 **Query:** "What operations are available from this index?"
@@ -18,7 +16,6 @@ ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/
 curl -s "$ROOT" | jq -r '._links | keys[]'
 # latest
 # latest-lts
-# llms-txt
 # self
 # timeline-index
 ```
@@ -27,16 +24,13 @@ curl -s "$ROOT" | jq -r '._links | keys[]'
 
 ```bash
 curl -s "$ROOT" | jq -r '._embedded.releases[0]._links.self.href' | xargs curl -s | jq -r '._links | keys[]'
-# compatibility-json
 # downloads
 # latest
-# latest-release-json
 # latest-sdk
 # latest-security
 # manifest
 # releases-index
 # self
-# target-frameworks-json
 ```
 
 **Patch index:**
@@ -44,16 +38,12 @@ curl -s "$ROOT" | jq -r '._embedded.releases[0]._links.self.href' | xargs curl -
 ```bash
 curl -s "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.21/index.json" | jq -r '._links | keys[]'
 # cve-json
-# cve-markdown
-# cve-markdown-rendered
 # latest-sdk
+# manifest
 # prev
 # prev-security
-# release-json
 # release-major
 # release-month
-# release-notes-markdown
-# release-notes-markdown-rendered
 # releases-index
 # self
 ```
@@ -108,20 +98,21 @@ curl -s "$ROOT" | jq -r '._embedded | keys[]'
 # What fields are available in each embedded release?
 curl -s "$ROOT" | jq -r '._embedded.releases[0] | keys[]'
 # _links
-# eol_date
-# lts
+# release_type
 # supported
 # version
 
 # What's embedded in a patch index?
 curl -s "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.21/index.json" | jq -r '._embedded | keys[]'
 # disclosures
+# sdk
+# sdk_feature_bands
 ```
 
 **Analysis:**
 
 - `_embedded` provides complete data inline—no dangling references
-- Root embeds version summaries; patch indexes embed CVE disclosures
+- Root embeds version summaries; patch indexes embed CVE disclosures, SDK info, and feature bands
 - Check `_embedded` first before following links to avoid unnecessary fetches
 
 ---
@@ -175,22 +166,32 @@ ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/
 # Root -> Timeline
 TIMELINE_HREF=$(curl -s "$ROOT" | jq -r '._links["timeline-index"].href')
 curl -s "$TIMELINE_HREF" | jq -r '._links | keys[]'
+# latest
+# latest-lts
 # latest-year
+# releases-index
 # self
 
 # Timeline -> Year
 YEAR_HREF=$(curl -s "$TIMELINE_HREF" | jq -r '._links["latest-year"].href')
 curl -s "$YEAR_HREF" | jq -r '._links | keys[]'
+# latest-month
+# latest-release
 # latest-security-month
-# prev-year
+# prev
 # self
+# timeline-index
 
 # Year -> Month
 MONTH_HREF=$(curl -s "$YEAR_HREF" | jq -r '._links["latest-security-month"].href')
 curl -s "$MONTH_HREF" | jq -r '._links | keys[]'
 # cve-json
+# manifest
+# prev
 # prev-security
 # self
+# timeline-index
+# year-index
 ```
 
 **Analysis:**
@@ -221,7 +222,7 @@ curl -s "$MANIFEST" | jq -r '._links | to_entries[] | select(.key | endswith("-r
 
 # Get the what's new documentation URL
 curl -s "$MANIFEST" | jq -r '._links["whats-new-rendered"].href'
-# https://github.com/dotnet/core/blob/release-index/release-notes/10.0/whats-new.md
+# https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview
 ```
 
 **Analysis:**
@@ -249,15 +250,12 @@ Link relation names follow consistent conventions that reveal their purpose.
 ```bash
 # Find all "latest-" links in a version index
 curl -s "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json" | jq -r '._links | keys[] | select(startswith("latest-"))'
-# latest
-# latest-release-json
 # latest-sdk
 # latest-security
 
 # Find all "-json" links in a manifest
 curl -s "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/manifest.json" | jq -r '._links | keys[] | select(endswith("-json"))'
 # os-packages-json
-# releases-json
 # supported-os-json
 ```
 
