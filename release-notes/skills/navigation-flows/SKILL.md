@@ -29,7 +29,7 @@ llms.json
             │       ├─► supported-os-json ─► distros
             │       └─► os-packages-json ─► packages
             │
-            └─► _links.latest-sdk ─► sdk/index.json ─► DONE
+            └─► _links.latest-security ─► last security patch
 ```
 
 ## Flow 2: CVE Queries (2-N fetches)
@@ -68,7 +68,6 @@ From llms.json:
 From latest_patches[]:
   release-major ───────────► X.0/index.json (patches, timeline)
   release-manifest ────────► manifest.json (reference data)
-  latest-sdk ──────────────► sdk/index.json (SDK bands)
   latest-security ─────────► last security patch
 
 From manifest.json:
