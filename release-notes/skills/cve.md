@@ -1,11 +1,15 @@
+---
+name: cve-queries
+description: CVE queries needing severity, CVSS, affected versions, or security history
+---
+
 # CVE Queries
 
 *Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
 
-## Quick Rules
+## Stop Criteria
 
-1. **Month index `_embedded.disclosures[]` has EVERYTHING**: severity, CVSS score, titles, fix commits. You rarely need `cve.json`.
-2. **Choose your strategy by query scope**: `prev-security` walk for recent CVEs, timeline hierarchy for historical analysis (see below).
+**STOP when you have the month index.** `_embedded.disclosures[]` contains severity, CVSS, titles, and fix commits. Only fetch `cve.json` for full CVSS vectors, CWE, or package version ranges.
 
 ## Navigation Flow
 
@@ -17,148 +21,81 @@ llms.json
             ▼
         month/index.json
             │
-            ├─► _embedded.disclosures[] ─► severity, titles, fix commits
+            ├─► _embedded.disclosures[] ─► severity, titles, fixes
             │
-            ├─► _links["cve-json"] ─► full CVSS vectors, CWE, packages
+            ├─► _links["cve-json"] ─► full CVSS vectors, CWE
             │
             └─► _links["prev-security"] ─► previous security month
 ```
 
-## Navigation Strategies
+## Strategy Selection
 
-**Important:** "Last N months" means **calendar months** from today, not "N security releases." Security months are sparse—there may be only 9 security months in a 12-calendar-month window.
+"Last N months" = **calendar months**, not security releases. Security months are sparse.
 
-Choose based on query scope:
+| Query Scope | Strategy |
+|-------------|----------|
+| 1-3 months | `prev-security` walk from `latest-security-month` |
+| 4+ months or explicit year | Year index with date filter |
 
-| Query Type | Strategy | Why |
-|------------|----------|-----|
-| "Last 1-3 months" | `prev-security` walk | Low overhead, few fetches |
-| "Last 4+ months" | Year index with date filter | Parallel fetches, fewer round trips |
-| "All CVEs in [year]" | Year index batch | Known scope, parallel fetches |
-
-### Strategy 1: `prev-security` Walk
-
-**Use for:** Small scope (1-3 calendar months)
+### `prev-security` Walk (small scope)
 
 ```
 llms.json → latest-security-month → prev-security → stop when date < cutoff
 ```
 
-- Sequential but low overhead for small N
-- Stop when month date falls before your cutoff date
-
-### Strategy 2: Year Index with Date Filter
-
-**Use for:** Larger scope (4+ calendar months) or explicit year queries
-
-**Goal: Minimize fetches first, then parallelize.** Don't fetch months outside your date range.
+### Year Index (large scope)
 
 ```
 llms.json → timeline-index → year index(es)
-         → FILTER _embedded.months[] to ONLY months in your date range with security: true
-         → parallel fetch that filtered set
+         → FILTER _embedded.months[] to date range + security: true
+         → parallel fetch filtered set
 ```
 
-**Filtering is mandatory.** Year indexes list ALL months—you must exclude months outside your query window before fetching.
-
-**Example:** "Last 12 months" query, today is Oct 2025:
-1. Fetch 2024 and 2025 year indexes
-2. Calculate cutoff: Oct 2025 minus 12 months = Oct 2024
-3. From 2024 index: **exclude** Jan-Sep, keep only Oct+ (typically 2-3 months)
-4. From 2025 index: keep all security months (typically 5-6 months)
-5. Parallel fetch only those ~8 months—not all 15 security months across both years
+**Filtering is mandatory.** Calculate cutoff date first. "Last 12 months" from Oct 2025 = Oct 2024 cutoff—exclude Jan-Sep 2024.
 
 ### Filtering by Version
 
-For "CVEs affecting .NET X", use either strategy above and filter `_embedded.disclosures[]` by `affected_releases`:
-
+Filter `_embedded.disclosures[]` by `affected_releases`:
 ```javascript
 disclosures.filter(d => d.affected_releases.includes("8.0"))
 ```
 
-Do NOT navigate to the version index (e.g., `8.0/index.json`) for CVE queries—the timeline path with filtering is more efficient.
+Do NOT use version index for CVE queries—timeline path is more efficient.
 
 ## Common Queries
 
 ### Critical CVEs this month (2 fetches)
 
-1. Fetch `llms.json`
-2. Follow `_links["latest-security-month"]` → month index
-3. Filter `_embedded.disclosures[]` where `cvss_severity == "CRITICAL"`
+1. `llms.json` → `latest-security-month` → month index
+2. Filter `_embedded.disclosures[]` where `cvss_severity == "CRITICAL"`
 
-### CVEs for .NET X in last N months (3-5 fetches)
+### CVEs in last N months (2-5 fetches)
 
-**For 1-3 months:** Use `prev-security` walk
-1. Fetch `llms.json` → follow `latest-security-month`
-2. Walk `prev-security` until date < cutoff, filtering by `affected_releases`
-
-**For 4+ months:** Use year index with date filter
-1. Fetch `llms.json` → follow `timeline-index` → fetch relevant year index(es)
-2. Filter `_embedded.months[]` to date range + `security: true`
-3. Parallel fetch those month indexes
-4. Filter `_embedded.disclosures[]` where `affected_releases` contains "X.0"
-5. For code fixes: use `fixes[].href` directly (already `.diff` URLs)
-
-### Deep CVE analysis (3 fetches)
-
-1. Fetch month index
-2. Follow `_links["cve-json"]` for full details:
-   - `cvss_vector` — full CVSS string
-   - `cwe` — weakness classification
-   - `packages[]` — affected NuGet packages with version ranges
+**1-3 months:** Walk `prev-security` until date < cutoff
+**4+ months:** Year index → filter months by date → parallel fetch
 
 ## Disclosure Fields
 
-Each `_embedded.disclosures[]` entry contains:
-
 | Field | Description |
 |-------|-------------|
-| `id` | CVE identifier (e.g., CVE-2025-55315) |
+| `id` | CVE identifier (CVE-2025-XXXXX) |
 | `title` | Vulnerability title |
-| `cvss_score` | Numeric score (0-10) |
+| `cvss_score` | 0-10 |
 | `cvss_severity` | NONE, LOW, MEDIUM, HIGH, CRITICAL |
-| `affected_releases` | Array of .NET versions (e.g., ["8.0", "9.0"]) |
-| `fixes[]` | Commit diff URLs per release branch |
-
-Example:
-
-```json
-{
-  "id": "CVE-2025-55315",
-  "title": ".NET Security Feature Bypass Vulnerability",
-  "cvss_score": 9.9,
-  "cvss_severity": "CRITICAL",
-  "affected_releases": ["8.0", "9.0", "10.0"],
-  "fixes": [
-    { "href": "https://github.com/dotnet/aspnetcore/commit/abc123.diff", "release": "8.0" },
-    { "href": "https://github.com/dotnet/aspnetcore/commit/def456.diff", "release": "9.0" }
-  ]
-}
-```
-
-## Severity Levels
-
-| Severity | CVSS Range |
-|----------|------------|
-| CRITICAL | 9.0 - 10.0 |
-| HIGH | 7.0 - 8.9 |
-| MEDIUM | 4.0 - 6.9 |
-| LOW | 0.1 - 3.9 |
-| NONE | 0.0 |
+| `affected_releases` | Array: ["8.0", "9.0"] |
+| `fixes[]` | Commit diff URLs (`.diff`) per release |
 
 ## Common Mistakes
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Fetching all `security: true` months from year indexes | **Calculate your cutoff date first.** "Last 12 months" from Oct 2025 means Oct 2024 cutoff—exclude Jan-Sep 2024 even though they have `security: true` |
-| Confusing "12 months" with "12 security releases" | Calendar months, not security months—filter by date, not count |
-| Fetching `cve.json` for severity/CVSS | Month index `_embedded.disclosures[]` already has this data |
-| Constructing month URLs without checking year index | Always check `_embedded.months[]` for `security: true` first |
-| Fabricating intermediate month URLs | Use `_links` from year index or `prev-security` links |
-| Fabricating GitHub commit URLs | Use `fixes[].href` from disclosures—already formatted as `.diff` URLs |
+| Fetching all `security: true` months | Calculate cutoff date first—exclude months before cutoff |
+| Confusing "12 months" with "12 security releases" | Calendar months, not security months |
+| Fetching `cve.json` for severity/CVSS | Month index already has this |
+| Fabricating month or commit URLs | Use `_links` or `fixes[].href` |
 
 ## Tips
 
-- `prev-security` links skip non-security months automatically
-- Fix commit URLs end in `.diff` — fetch immediately if needed (may be blocked later)
-- `cve-json` is only needed for full CVSS vectors, CWE classification, or package version ranges
+- `prev-security` auto-skips non-security months
+- Fix URLs end in `.diff`—use directly
+- `cve-json` only for CVSS vectors, CWE, or package ranges

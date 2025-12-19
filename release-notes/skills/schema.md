@@ -1,81 +1,44 @@
+---
+name: schema-reference
+description: Document structure, properties, link relations, and glossary
+---
+
 # Schema Reference
 
 *Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
 
-The fundamental building blocks of the .NET release graph. Use this when you need to understand what documents contain, what properties mean, or what link relations are available.
+## Stop Criteria
+
+**This is a reference document.** Use it to understand structure, then navigate the actual graph. Do not fetch during normal queries.
 
 ## File Types
 
-| File | Example Path | Contains |
+| File | Path Pattern | Contains |
 |------|--------------|----------|
-| AI index | `llms.json` | Optimized entry point with embedded data and shortcut links |
-| Releases index | `index.json` | All major versions with support status, EOL dates |
-| Version index | `10.0/index.json` | All patches for a version, links to resources |
-| Patch index | `10.0/10.0.1/index.json` | Single patch details, embedded CVE disclosures |
-| Manifest | `10.0/manifest.json` | External links (downloads, docs, supported OS) |
-| Compatibility | `10.0/compatibility.json` | Breaking changes with impact, actions, doc links |
-| Target frameworks | `10.0/target-frameworks.json` | TFMs with platform versions |
-| SDK index | `10.0/sdk/index.json` | SDK feature bands with support status and downloads |
-| Supported OS | `10.0/supported-os.json` | Supported distros, libc requirements |
-| OS packages | `10.0/os-packages.json` | Distro-specific package dependencies |
-| Timeline index | `timeline/index.json` | All years |
-| Year index | `timeline/2025/index.json` | All months with CVE summaries |
-| Month index | `timeline/2025/01/index.json` | Releases that month, embedded CVE disclosures |
-| CVE details | `timeline/2025/01/cve.json` | Full CVE data: CVSS vectors, CWE, packages |
+| AI index | `llms.json` | Entry point with embedded data |
+| Releases index | `index.json` | All versions including EOL |
+| Version index | `X.0/index.json` | Patches, resources for version |
+| Patch index | `X.0/X.0.1/index.json` | Single patch, CVE disclosures |
+| Manifest | `X.0/manifest.json` | External links (OS, docs) |
+| Compatibility | `X.0/compatibility.json` | Breaking changes |
+| SDK index | `X.0/sdk/index.json` | SDK bands, downloads |
+| Month index | `timeline/YYYY/MM/index.json` | Releases, CVE disclosures |
+| CVE details | `timeline/YYYY/MM/cve.json` | Full CVSS vectors, CWE, packages |
 
-Paths are illustrative—always follow `_links["..."].href` to get actual URLs.
+Paths are illustrative—always follow `_links["..."].href`.
 
 ## Link Relations
 
-### Navigation
-
 | Relation | Description |
 |----------|-------------|
-| `self` | Canonical URL for this resource |
-| `prev` | Previous resource in sequence (patch, month, year) |
-| `prev-security` | Previous security release (skips non-security) |
-
-### Latest Shortcuts
-
-| Relation | Description |
-|----------|-------------|
-| `latest` | Latest patch or release in context |
-| `latest-lts` | Latest Long Term Support version |
-| `latest-sdk` | SDK index for this version |
-| `latest-security` | Latest security patch |
-| `latest-year` | Most recent year index |
-| `latest-month` | Most recent month index |
-| `latest-security-month` | Most recent security month index |
-| `latest-release` | Latest major version index |
-| `latest-patch` | Latest patch index for a major version |
-
-### Cross-References
-
-| Relation | Description |
-|----------|-------------|
-| `release-major` | Parent major version index |
-| `release-month` | Timeline month index for this release |
-| `releases-index` | Root releases index |
-| `timeline-index` | Root timeline index |
-| `release-manifest` | Manifest with external resources |
-
-### Data Resources
-
-| Relation | Description |
-|----------|-------------|
-| `compatibility-json` | Breaking changes data |
-| `target-frameworks-json` | TFM data |
-| `supported-os-json` | Supported OS data |
-| `os-packages-json` | OS package requirements |
-| `cve-json` | CVE disclosure details (JSON) |
-| `cve-markdown` | CVE disclosure details (Markdown) |
-| `release-notes-markdown` | Release notes (Markdown) |
-
-### Rendered Views
-
-| Relation | Description |
-|----------|-------------|
-| `*-rendered` | GitHub HTML-rendered view (e.g., `cve-markdown-rendered`) |
+| `self`, `prev`, `prev-security` | Navigation (backward from present) |
+| `latest`, `latest-lts`, `latest-security` | Shortcuts to newest resources |
+| `latest-security-month` | Current security month |
+| `release-major`, `release-manifest` | Cross-references |
+| `releases-index`, `timeline-index` | Root indexes |
+| `compatibility-json`, `supported-os-json`, `os-packages-json` | Data resources |
+| `cve-json` | Full CVE details (CVSS vectors, CWE) |
+| `*-rendered` | GitHub HTML views |
 
 ## Properties
 
@@ -96,14 +59,6 @@ Paths are illustrative—always follow `_links["..."].href` to get actual URLs.
 | `ga_date` | ISO 8601 | General Availability date |
 | `eol_date` | ISO 8601 | End of Life date |
 
-### Timeline
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `year` | string | Calendar year (e.g., "2025") |
-| `month` | string | Calendar month, zero-padded (e.g., "01", "10") |
-| `latest_year` | string | Most recent year with releases |
-
 ### Status
 
 | Property | Type | Description |
@@ -119,14 +74,6 @@ Paths are illustrative—always follow `_links["..."].href` to get actual URLs.
 |----------|------|-------------|
 | `cve_count` | integer | Number of CVEs addressed |
 | `cve_records` | array | List of CVE identifiers (e.g., ["CVE-2025-55247"]) |
-
-### Latest References
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `latest` | string | Latest version in this context |
-| `latest_lts` | string | Latest LTS version |
-| `latest_security` | string | Latest security patch version |
 
 ## Glossary
 
@@ -159,19 +106,15 @@ Even-numbered releases are LTS (8, 10, 12...). Odd-numbered are STS (9, 11, 13..
 | `LOW` | 0.1 - 3.9 |
 | `NONE` | 0.0 |
 
-### Affected Products
+## Common Mistakes
 
-| Value | Description |
-|-------|-------------|
-| `.NET Runtime` | Core runtime |
-| `ASP.NET Core` | Web framework runtime |
-| `.NET SDK` | Software Development Kit |
-| `Windows Desktop` | WPF/WinForms runtime |
+| Mistake | Why It's Wrong |
+|---------|----------------|
+| Fetching schema.md during queries | Reference only—use task-specific skills |
+| Confusing `version` vs `release` | `version` is patch (10.0.1), `release` is major (10.0) |
+| Using `snake_case` for link relations | Links use `kebab-case`; properties use `snake_case` |
 
 ## Conventions
 
-- Properties use `snake_case`
-- Link relations use `kebab-case`
-- `_embedded` contains pre-fetched data
-- `_links` contains navigation
-- Discover available links: `jq '._links | keys[]'`
+- Properties: `snake_case` | Links: `kebab-case`
+- `_embedded`: pre-fetched data | `_links`: navigation
