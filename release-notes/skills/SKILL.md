@@ -1,6 +1,6 @@
 ---
 name: dotnet-releases
-description: Query .NET release data, CVEs, breaking changes, EOL dates, and OS support. Use when answering questions about .NET versions, security vulnerabilities, compatibility, or support status.
+description: Query .NET release data, CVEs, breaking changes, EOL dates, and OS support.
 ---
 
 # .NET Release Graph
@@ -13,69 +13,56 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 
 ## Core Rules
 
-1. **Follow `_links["..."].href` exactly** — never construct graph URLs. External URLs (e.g., GitHub diffs in `fixes[]`) can be used directly.
-2. **Use `_embedded` data first** — it answers most queries without extra fetches
-3. **If data is missing, don't fabricate** — report the gap
+1. **Follow `_links["..."].href` exactly** — never construct URLs
+2. **Use `_embedded` data first** — answers most queries without extra fetches
+3. **Don't fabricate** — report gaps
 
-## What's in llms.json
+## llms.json Contents
 
 | Property | Contains |
 |----------|----------|
-| `supported_releases` | Canonical list of supported .NET versions (e.g., `["10.0", "9.0", "8.0"]`) |
-| `_embedded.latest_patches[]` | Latest patch per supported version with EOL dates, support status, CVE counts |
-| `_links` | Navigation to version indexes, timeline, security months |
+| `supported_releases` | Supported .NET versions |
+| `_embedded.latest_patches[]` | Latest patch per version with EOL, CVE counts |
+| `_links` | Navigation to indexes, timeline, security months |
 
 ## Skills
 
-Fetch these when your query matches. **Core Rules above apply to all skills.**
+Fetch when your query matches. **Core Rules apply to all.**
 
-### Task-Specific Skills
+| Skill | Fetch When |
+|-------|------------|
+| cve.md | CVE severity, CVSS, history |
+| breaking-changes.md | Compatibility, migration |
+| version-eol.md | EOL versions, lifecycle |
+| os-support.md | Distros, packages, glibc |
+| navigation.md | Multi-hop, unsure which links |
+| schema.md | Document structure, properties |
 
-| Skill | Fetch When | URL |
-|-------|------------|-----|
-| cve.md | CVE queries needing severity, CVSS, or history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve.md |
-| breaking-changes.md | Compatibility or migration questions | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes.md |
-| version-eol.md | EOL versions, support lifecycle, or version history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol.md |
-| os-support.md | OS packages, distro support, or glibc requirements | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support.md |
-
-### Broad Skills
-
-| Skill | Fetch When | URL |
-|-------|------------|-----|
-| navigation.md | Multi-hop query and unsure which links to follow | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md |
-| schema.md | Need to understand document structure, properties, or link relations | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema.md |
+Skills URL base: `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/`
 
 ## Quick Answers (1 fetch)
 
-These are answered directly from `llms.json`:
-
-- Latest patch for .NET X → `_embedded.latest_patches[]` filter by `release`
-- Is .NET X supported? → `_embedded.latest_patches[]` → `supported`, `eol_date`
-- CVE count in latest patch → `_embedded.latest_patches[]` → `cve_count`
+From `llms.json._embedded.latest_patches[]`:
+- Latest patch for .NET X → filter by `release`
+- Is .NET X supported? → `supported`, `eol_date`
+- CVE count → `cve_count`
 
 ## Navigation Shortcuts
 
-Each `_embedded.latest_patches[]` entry has `_links` for 2-fetch navigation:
+From `_embedded.latest_patches[]._links`:
 
-- `release-manifest` → manifest.json (breaking changes, TFMs, OS support)
-- `release-major` → version index (patch navigation, timeline)
-- `latest-sdk` → SDK index (feature bands, downloads)
-- `latest-security` → last security patch for that version
-
-## Key Relations
+| Relation | Target |
+|----------|--------|
+| `release-manifest` | manifest.json (OS, breaking changes) |
+| `latest-sdk` | SDK index |
+| `latest-security` | Last security patch |
 
 From `llms.json._links`:
 
-| Relation | Purpose |
-|----------|---------|
-| `latest` | Newest supported release (LTS or STS) |
-| `latest-lts` | Newest LTS release |
-| `latest-security-month` | Current security month index |
-| `releases-index` | Full version list including EOL |
+| Relation | Target |
+|----------|--------|
+| `latest`, `latest-lts` | Newest release |
+| `latest-security-month` | Current security month |
+| `releases-index` | All versions including EOL |
 
-**Relations that do NOT exist** (common mistakes):
-
-| Relation | Why It Doesn't Exist |
-|----------|---------------------|
-| `next` | Navigate backwards from present — start at `latest*`, walk back with `prev` |
-| `latest_sts` | Not useful — use `latest` if STS is acceptable |
+**Non-existent relations:** `next` (use `prev`), `latest_sts` (use `latest`)
