@@ -30,7 +30,8 @@ Paths are illustrative—always follow `_links["..."].href`.
 | Relation | Description |
 |----------|-------------|
 | `self`, `prev`, `prev-security` | Navigation (backward from present) |
-| `latest`, `latest-lts`, `latest-security` | Shortcuts to newest resources |
+| `latest`, `latest-lts` | Newest release; diverge when STS is newer than current LTS |
+| `latest-security` | Newest security patch |
 | `latest-security-month` | Current security month |
 | `release-major`, `release-manifest` | Cross-references |
 | `releases-index`, `timeline-index` | Root indexes |
