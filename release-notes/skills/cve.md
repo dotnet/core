@@ -5,8 +5,6 @@ description: CVE queries needing severity, CVSS, affected versions, or security 
 
 # CVE Queries
 
-*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
-
 ## Stop Criteria
 
 **STOP when you have the month index.** `_embedded.disclosures[]` contains severity, CVSS, titles, and fix commits. Only fetch `cve.json` for full CVSS vectors, CWE, or package version ranges.
