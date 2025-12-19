@@ -29,16 +29,14 @@ https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-n
 
 Fetch when your query matches. **Core Rules apply to all.**
 
-| Skill | Fetch When |
-|-------|------------|
-| cve.md | CVE severity, CVSS, history |
-| breaking-changes.md | Compatibility, migration |
-| version-eol.md | EOL versions, lifecycle |
-| os-support.md | Distros, packages, glibc |
-| navigation.md | Multi-hop, unsure which links |
-| schema.md | Document structure, properties |
-
-Skills URL base: `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/`
+| Skill | Fetch When | URL |
+|-------|------------|-----|
+| cve.md | CVE severity, CVSS, history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve.md |
+| breaking-changes.md | Compatibility, migration | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes.md |
+| version-eol.md | EOL versions, lifecycle | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol.md |
+| os-support.md | Distros, packages, glibc | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support.md |
+| navigation.md | Multi-hop, unsure which links | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md |
+| schema.md | Document structure, properties | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema.md |
 
 ## Quick Answers (1 fetch)
 
