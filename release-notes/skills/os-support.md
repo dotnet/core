@@ -1,30 +1,30 @@
+---
+name: os-support
+description: OS packages, distro support, glibc/musl requirements
+---
+
 # OS Packages and Support Queries
 
 *Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
 
 ## Stop Criteria
 
-**STOP immediately when you have the JSON file.** The answer is in that file—do not fetch anything else.
+**STOP when you have the JSON file.** Parse it—don't fetch anything else.
 
-| Query Type | Fetch This | Then STOP |
-|------------|------------|-----------|
-| Package dependencies | `os-packages.json` | Filter `distributions[].releases[].packages[]` |
-| Distro support | `supported-os.json` | Check `distributions[].releases[]` |
-| glibc/musl version | `supported-os.json` | Read `libc[]` array |
+| Query | File | Path |
+|-------|------|------|
+| Package deps | `os-packages.json` | `distributions[].releases[].packages[]` |
+| Distro support | `supported-os.json` | `distributions[].releases[]` |
+| glibc/musl | `supported-os.json` | `libc[]` |
 
-**Do NOT:**
-- Look for markdown versions (`.md`)—they don't exist
-- Fetch both JSON files—pick ONE based on your query
-- Re-fetch the same file—if you have it, parse it
+**Pick ONE file** based on your query—don't fetch both.
 
 ## Navigation Flow (2 fetches)
 
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► find version (e.g., "10.0")
-            │
-            └─► _links["release-manifest"]
+    └─► _embedded.latest_patches[] ─► _links["release-manifest"]
                     │
                     ▼
                 manifest.json
@@ -36,27 +36,14 @@ llms.json
 
 ## Common Queries
 
-### Is my distro supported? (2 fetches)
+### Distro support (2 fetches)
+`llms.json` → `release-manifest` → `supported-os-json` → check `distributions[]`
 
-1. Fetch `llms.json`
-2. Find `_embedded.latest_patches[]` where `release == "X.0"`
-3. Follow `_links["release-manifest"]` → manifest.json
-4. Follow `_links["supported-os-json"]` → supported-os.json
-5. Check `distributions[]` for your distro
+### Package list (2 fetches)
+`llms.json` → `release-manifest` → `os-packages-json` → read `distributions[].releases[].packages[]`
 
-### OS packages for Ubuntu/Debian (2 fetches)
-
-Same path, but follow `_links["os-packages-json"]`:
-
-1. Filter `distributions[]` where `name == "ubuntu"`
-2. Find `releases[]` where `release == "24.04"`
-3. Read `packages[]` for required apt packages
-
-### Minimum glibc version (2 fetches)
-
-1. Follow path to `supported-os.json`
-2. Read `libc[]` array
-3. Filter by `name == "glibc"` and `architectures` contains your arch
+### Minimum glibc (2 fetches)
+`llms.json` → `release-manifest` → `supported-os-json` → filter `libc[]` by `name == "glibc"`
 
 ## supported-os.json Structure
 
@@ -120,8 +107,6 @@ Same path, but follow `_links["os-packages-json"]`:
 
 ## Supported Distros
 
-Common distributions in `supported-os.json`:
-
 | Distro | Package Manager |
 |--------|-----------------|
 | `ubuntu` | apt |
@@ -131,27 +116,17 @@ Common distributions in `supported-os.json`:
 | `alpine` | apk |
 | `opensuse` | zypper |
 
-## Tips
-
-- Package names vary by distro version (e.g., `libicu74` vs `libicu72`)
-- Alpine uses musl libc, not glibc
-- `architectures` field indicates supported CPU architectures
-- Skip `-rendered` links unless you need human-readable markdown
-
-## Key Insight: OS Support Varies by .NET Version
-
-**Newer .NET versions may drop support for older distro releases.** For example, .NET 10 supports fewer Alpine versions than .NET 9. Always check the specific version's `supported-os.json` if exact compatibility matters.
-
-**Package requirements are typically identical** across .NET versions for a given distro/release. But distro *support* is not guaranteed to be the same.
-
 ## Common Mistakes
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Re-fetching `os-packages.json` | If you got JSON back, parse it—the data is there |
-| Thinking `os-packages.json` "failed" | If fetch succeeded, the answer is in `distributions[].releases[].packages[]` |
-| Looking for `supported-os.md` or `os-packages.md` | These files DO NOT EXIST—only `.json` versions exist |
-| Fetching both `supported-os.json` AND `os-packages.json` | Pick ONE based on your query |
-| Searching for package info in `supported-os.json` | Wrong file—use `os-packages.json` for package lists |
-| Fetching manifests for 8.0, 9.0, AND 10.0 for recent distros | For recent distros (Ubuntu 24.04), one check is usually enough |
-| Constructing URLs | URL fabrication—always follow `_links` from the graph |
+| Looking for `.md` versions | Don't exist—only `.json` |
+| Fetching both JSON files | Pick ONE based on query |
+| Re-fetching after success | Parse the JSON you have |
+| Constructing URLs | Follow `_links` from manifest |
+
+## Tips
+
+- Package names vary by distro version (e.g., `libicu74` vs `libicu72`)
+- Alpine uses musl, not glibc
+- Newer .NET may drop older distro support—check specific version
