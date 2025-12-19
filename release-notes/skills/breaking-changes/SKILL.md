@@ -9,6 +9,15 @@ description: Compatibility queries, breaking changes, migration guidance, and TF
 
 **STOP when you have `compatibility.json`.** It contains all breaking changes with impact levels and doc links. Only fetch `documentation` URLs if you need detailed migration steps or rationale.
 
+## Quick Answers (from compatibility.json)
+
+Once you have `compatibility.json`, answer directly from `breaks[]`:
+
+- How many breaking changes? → `breaks.length`
+- High-impact changes? → filter `impact == "high"`
+- Changes by category? → group by `category`
+- Change type (behavioral/source)? → `type`
+
 ## Navigation Flow (2 fetches)
 
 ```
