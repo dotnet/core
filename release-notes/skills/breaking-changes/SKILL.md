@@ -25,7 +25,7 @@ llms.json
     │
     └─► _embedded.latest_patches[] ─► find version (e.g., "10.0")
             │
-            └─► _links["release-manifest"]
+            └─► _links["manifest"]
                     │
                     ▼
                 manifest.json
@@ -41,7 +41,7 @@ llms.json
 
 1. Fetch `llms.json`
 2. Find `_embedded.latest_patches[]` where `release == "X.0"`
-3. Follow `_links["release-manifest"]` → manifest.json
+3. Follow `_links["manifest"]` → manifest.json
 4. Follow `_links["compatibility"]` → compatibility.json
 
 ### TFMs for .NET X (2 fetches)
