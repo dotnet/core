@@ -53,7 +53,6 @@ From `_embedded.latest_patches[]._links`:
 | Relation | Target |
 | -------- | ------ |
 | `release-manifest` | manifest.json (OS, breaking changes) |
-| `latest-sdk` | SDK index |
 | `latest-security` | Last security patch |
 
 From `llms.json._links`:
