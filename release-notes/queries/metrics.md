@@ -776,7 +776,7 @@ ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/
 
 # Navigate to .NET 10, then manifest.json, then os-packages.json
 MAJOR_URL=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "10.0") | ._links.self.href')
-MANIFEST_URL=$(curl -s "$MAJOR_URL" | jq -r '._links["release-manifest"].href')
+MANIFEST_URL=$(curl -s "$MAJOR_URL" | jq -r '._links["manifest"].href')
 PACKAGES_URL=$(curl -s "$MANIFEST_URL" | jq -r '._links["os-packages-json"].href')
 
 # Generate install command for Ubuntu 24.04
