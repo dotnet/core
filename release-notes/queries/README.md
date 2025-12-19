@@ -707,6 +707,23 @@ The graph provides 80% of common CVE queries at 10 KB. The full cve.json (14 KB)
 
 ---
 
+## Metrics and Analysis
+
+Additional documentation comparing query costs and patterns across different schemas:
+
+| Document | Description |
+|----------|-------------|
+| [overview.md](overview.md) | Schema design context, file characteristics, and cache coherency analysis |
+| [metrics.md](metrics.md) | Detailed query cost comparison between hal-index, llms-index, and releases-index |
+| [metrics/index-discovery.md](metrics/index-discovery.md) | HAL discovery patterns - exploring `_links` and `_embedded` |
+| [metrics/easy-questions.md](metrics/easy-questions.md) | Q1: Easy version questions (0 fetches) |
+| [metrics/cve-stress-test.md](metrics/cve-stress-test.md) | Q2: CVE stress tests (2-15 fetches) |
+| [metrics/upgrade-whats-new.md](metrics/upgrade-whats-new.md) | Q3: Upgrade and breaking changes (2-5 fetches) |
+| [metrics/interacting-with-environment.md](metrics/interacting-with-environment.md) | Q4: Environment-based queries (2-6 fetches) |
+| [metrics/project-file-analysis.md](metrics/project-file-analysis.md) | Q5: Project file analysis (1-8 fetches) |
+
+---
+
 ## Related Resources
 
 - [jq Manual](https://jqlang.github.io/jq/manual/)

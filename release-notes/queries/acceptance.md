@@ -129,7 +129,7 @@ source /etc/os-release
 # Step 2: Navigate to os-packages.json
 ROOT="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json"
 VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version == "10.0") | ._links.self.href')
-MANIFEST_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["release-manifest"].href')
+MANIFEST_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["manifest"].href')
 PACKAGES_HREF=$(curl -s "$MANIFEST_HREF" | jq -r '._links["os-packages-json"].href')
 
 # Step 3: Generate install command for this distro
