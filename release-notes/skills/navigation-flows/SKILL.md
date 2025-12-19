@@ -58,6 +58,25 @@ llms.json
                             └─► _links.latest-security ─► last patch
 ```
 
+## Flow 4: Specific Patch (2-3 fetches)
+
+"What changed in 9.0.10?" or "What CVEs were fixed in 8.0.15?"
+
+```
+llms.json
+    │
+    └─► _embedded.latest_patches[] ─► _links.release-major
+            │
+            ▼
+        9.0/index.json
+            │
+            └─► _embedded.patches[] ─► find version "9.0.10"
+                    │
+                    └─► _links.self ─► 9.0/9.0.10/index.json ─► DONE
+                            │
+                            └─► _embedded.disclosures[] (CVEs fixed)
+```
+
 ## Key Link Relations
 
 ```
@@ -96,5 +115,6 @@ From month index:
 |------------|---------|
 | Supported version data | 1 |
 | Reference data (OS, breaking changes) | 2 |
+| Specific patch details | 2-3 |
 | EOL version info | 3-5 |
 | CVE history | 1 + N months |
