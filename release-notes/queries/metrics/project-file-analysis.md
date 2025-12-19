@@ -10,38 +10,48 @@ See [overview.md](../overview.md) for design context, file characteristics, and 
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| llms-index | `llms.json` | **5 KB** |
-| hal-index | `index.json` | **5 KB** |
-| releases-index | `releases-index.json` | **6 KB** |
+| llms-index | `llms.json` → `manifest.json` → `target-frameworks.json` per version | **~45 KB** |
+| hal-index | `index.json` → `manifest.json` → `target-frameworks.json` per version | **~50 KB** |
+| releases-index | `releases-index.json` (string parsing) | **6 KB** |
 
-**llms-index:** Check `supported_releases` array directly:
+**llms-index:** Navigate via manifest to target-frameworks for each supported release:
 
 ```bash
 LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
 TFM="net7.0"
-VERSION=$(echo "$TFM" | sed 's/net//' | sed 's/\.0$//')  # Extract "7" from "net7.0"
 
-# Check if version is in supported_releases
-curl -s "$LLMS" | jq -r --arg v "$VERSION.0" '
-  if (.supported_releases | index($v)) then
-    "\($v) is supported"
-  else
-    "\($v) is NOT supported. EOL: " + (._embedded.latest_patches[] | select(.release == $v) | .eol_date // "unknown")
-  end
-'
-# 7.0 is NOT supported. EOL: 2024-05-14
+# Check each supported release's target-frameworks.json for the TFM
+LLMS_DATA=$(curl -s "$LLMS")
+SUPPORTED=""
+
+for MANIFEST_HREF in $(echo "$LLMS_DATA" | jq -r '._embedded.latest_patches[]._links.manifest.href'); do
+  TFM_HREF=$(curl -s "$MANIFEST_HREF" | jq -r '._links["target-frameworks"].href')
+  MATCH=$(curl -s "$TFM_HREF" | jq -r --arg tfm "$TFM" '.frameworks[] | select(.tfm == $tfm) | .tfm')
+  if [ -n "$MATCH" ]; then
+    VERSION=$(curl -s "$TFM_HREF" | jq -r '.version')
+    SUPPORTED="$VERSION"
+    break
+  fi
+done
+
+if [ -n "$SUPPORTED" ]; then
+  echo "$TFM is supported (found in .NET $SUPPORTED)"
+else
+  echo "$TFM is NOT supported"
+fi
+# net7.0 is NOT supported
 ```
 
-**Winner:** llms-index (tie with hal-index)
+**Winner:** Tie (all equivalent with string parsing)
 
-- Direct array check, no navigation required
-- EOL date available from embedded data if not supported
+- All schemas can use string parsing for efficiency
+- llms-index/hal-index shown here use authoritative TFM data for correctness
 
 **Analysis:**
 
 - **Completeness:** ✅ All schemas can determine support status.
-- **Zero-fetch answers:** Both llms-index and hal-index embed support status in root; releases-index requires enum comparison.
-- **Project file parsing:** LLM must extract version from TFM format (net7.0 → 7.0).
+- **Correctness vs efficiency:** llms-index uses authoritative TFM data via `target-frameworks` relation; releases-index uses string parsing.
+- **Platform TFMs:** The `target-frameworks` approach correctly handles platform-specific TFMs (e.g., `net10.0-android`) that string parsing would miss.
 
 ---
 
@@ -50,46 +60,58 @@ curl -s "$LLMS" | jq -r --arg v "$VERSION.0" '
 **Query:** "Here's my project file with package references. Have any of my packages had CVEs in the last 6 months?"
 
 ```xml
-<PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0" />
-<PackageReference Include="System.Text.Json" Version="8.0.0" />
-<PackageReference Include="System.Formats.Asn1" Version="8.0.0" />
-<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
+<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.0" />
+<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.1.0" />
 ```
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| llms-index | `llms.json` → 6 month cve.json files (via `prev-security`) | **47 KB** |
-| hal-index | `timeline/index.json` → `timeline/2025/index.json` → 6 month cve.json files | **53 KB** |
-| releases-index | All version releases.json files | **2.4 MB** (incomplete) |
+| llms-index | `llms.json` → 6 month cve.json files (via `prev-security`) | **~60 KB** |
+| hal-index | `timeline/index.json` → `timeline/2025/index.json` → 6 month cve.json files | **~65 KB** |
+| releases-index | N/A | N/A |
 
-**llms-index:** Walk security timeline and check package arrays:
+**llms-index:** Walk security timeline and check packages in cve.json with version comparison:
 
 ```bash
 LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
-PACKAGES=("Microsoft.AspNetCore.Components" "System.Text.Json" "System.Formats.Asn1" "Microsoft.Data.SqlClient")
+
+# Package references from project file (name and version)
+declare -A PKGS
+PKGS["Microsoft.AspNetCore.Identity"]="2.3.0"
+PKGS["Microsoft.AspNetCore.Server.Kestrel.Core"]="2.1.0"
 
 # Start from the latest security month
 MONTH_HREF=$(curl -s "$LLMS" | jq -r '._links["latest-security-month"].href')
 
-# Walk back 6 security months, checking package arrays
+# Walk back 6 security months
 for i in {1..6}; do
   DATA=$(curl -s "$MONTH_HREF")
   YEAR=$(echo "$DATA" | jq -r '.year')
   MONTH=$(echo "$DATA" | jq -r '.month')
+  CVE_HREF=$(echo "$DATA" | jq -r '._links["cve-json"].href // empty')
   
-  # Check each package against the packages array
-  for pkg in "${PACKAGES[@]}"; do
-    echo "$DATA" | jq -r --arg pkg "$pkg" --arg ym "$YEAR-$MONTH" '
-      .packages[]? | select(.name == $pkg) |
-      "\($ym) | \($pkg) | \(.cve_id) | vulnerable: \(.min_vulnerable)-\(.max_vulnerable) | fixed: \(.fixed)"
-    '
-  done
+  if [ -n "$CVE_HREF" ]; then
+    CVE_DATA=$(curl -s "$CVE_HREF")
+    
+    for pkg in "${!PKGS[@]}"; do
+      ver="${PKGS[$pkg]}"
+      echo "$CVE_DATA" | jq -r --arg pkg "$pkg" --arg ver "$ver" --arg ym "$YEAR-$MONTH" '
+        .packages[]? | select(.name == $pkg) |
+        # Compare versions: user version >= min_vulnerable AND <= max_vulnerable
+        if ($ver >= .min_vulnerable and $ver <= .max_vulnerable) then
+          "\($ym) | \($pkg)@\($ver) | \(.cve_id) | vulnerable: \(.min_vulnerable)-\(.max_vulnerable) | fixed: \(.fixed)"
+        else
+          empty
+        end
+      '
+    done
+  fi
   
   MONTH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
   [ -z "$MONTH_HREF" ] && break
 done
-# 2025-10 | Microsoft.AspNetCore.Components | CVE-2025-XXXXX | vulnerable: 8.0.0-8.0.5 | fixed: 8.0.6
-# 2025-08 | System.Text.Json | CVE-2025-XXXXX | vulnerable: 8.0.0-8.0.3 | fixed: 8.0.4
+# 2025-10 | Microsoft.AspNetCore.Server.Kestrel.Core@2.1.0 | CVE-2025-55315 | vulnerable: 2.0.0-2.3.0 | fixed: 2.3.6
+# 2025-03 | Microsoft.AspNetCore.Identity@2.3.0 | CVE-2025-24070 | vulnerable: 2.3.0-2.3.0 | fixed: 2.3.1
 ```
 
 **Winner:** llms-index
@@ -112,28 +134,28 @@ done
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| llms-index | `llms.json` → `10.0/index.json` → `target-frameworks.json` | **20 KB** |
-| hal-index | `index.json` → `10.0/index.json` → `target-frameworks.json` | **25 KB** |
+| llms-index | `llms.json` → `10.0/manifest.json` → `target-frameworks.json` | **20 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/manifest.json` → `target-frameworks.json` | **25 KB** |
 | releases-index | N/A | N/A (not available) |
 
-**llms-index:** Navigate to target-frameworks.json via release-major link:
+**llms-index:** Navigate to target-frameworks.json via manifest link:
 
 ```bash
 LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
 
-# Get target-frameworks.json for .NET 10 via release-major link
-VERSION_HREF=$(curl -s "$LLMS" | jq -r '._embedded.latest_patches[] | select(.release == "10.0") | ._links["release-major"].href')
-TFM_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["target-frameworks-json"].href')
+# Get target-frameworks.json for .NET 10 via manifest link
+MANIFEST_HREF=$(curl -s "$LLMS" | jq -r '._embedded.latest_patches[] | select(.release == "10.0") | ._links.manifest.href')
+TFM_HREF=$(curl -s "$MANIFEST_HREF" | jq -r '._links["target-frameworks"].href')
 
 # Get Android and iOS platform versions
-curl -s "$TFM_HREF" | jq -r '.frameworks[] | select(.platform == "android" or .platform == "ios") | "\(.tfm) targets \(.platform | ascii_upcase) \(.platform_version)"'
-# net10.0-android targets ANDROID 36.0
-# net10.0-ios targets IOS 18.0
+curl -s "$TFM_HREF" | jq -r '.frameworks[] | select(.platform == "android" or .platform == "ios") | "\(.tfm) targets \(.platform_name) \(.platform_version)"'
+# net10.0-android targets Android 36.0
+# net10.0-ios targets iOS 18.7
 ```
 
 **Winner:** llms-index
 
-- Direct path via `release-major` link
+- Direct path via `manifest` link
 - Platform-specific TFM data not available in releases-index
 
 **Analysis:**
