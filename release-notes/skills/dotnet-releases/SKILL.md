@@ -17,12 +17,12 @@ Fetch when your query matches. **Core Rules apply to all.**
 
 | Skill | Fetch When | URL |
 | ----- | ---------- | --- |
-| cve-queries | CVE severity, CVSS, history | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve.md> |
-| breaking-changes | Compatibility, migration | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes.md> |
-| version-eol | EOL versions, lifecycle | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol.md> |
-| os-support | Distros, packages, glibc | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support.md> |
-| navigation-flows | Multi-hop, unsure which links | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md> |
-| schema-reference | Document structure, properties | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema.md> |
+| cve-queries | CVE severity, CVSS, history | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
+| breaking-changes | Compatibility, migration | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md> |
+| version-eol | EOL versions, lifecycle | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol/SKILL.md> |
+| os-support | Distros, packages, glibc | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/SKILL.md> |
+| navigation-flows | Multi-hop, unsure which links | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation-flows/SKILL.md> |
+| schema-reference | Document structure, properties | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema-reference/SKILL.md> |
 
 ## Core Rules
 
