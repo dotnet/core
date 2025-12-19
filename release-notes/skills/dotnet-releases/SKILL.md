@@ -29,6 +29,7 @@ Fetch when your query matches. **Core Rules apply to all.**
 1. **Follow `_links["..."].href` exactly** — never construct URLs
 2. **Use `_embedded` data first** — answers most queries without extra fetches
 3. **Don't fabricate** — report gaps
+4. **Non-existent relations:** `next` (use `prev`), `latest_sts` (use `latest`)
 
 ## llms.json Contents
 
@@ -59,8 +60,6 @@ From `llms.json._links`:
 
 | Relation | Target |
 | -------- | ------ |
-| `latest`, `latest-lts` | Newest release |
+| `latest`, `latest-lts` | Newest release (same when latest is LTS; diverge when STS is newer) |
 | `latest-security-month` | Current security month |
 | `releases-index` | All versions including EOL |
-
-**Non-existent relations:** `next` (use `prev`), `latest_sts` (use `latest`)
