@@ -45,16 +45,17 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 # 8.0
 ```
 
+**Winner:** hal-index
+
+- 17% smaller than releases-index
+- equivalent to llms-index (direct array, no filtering)
+
 **Analysis:**
 
 - **Completeness:** ✅ Equal—both return the same list of supported versions.
 - **Boolean vs enum:** The hal-index uses `supported: true`, a simple boolean. The releases-index only exposes `support-phase: "active"` (which hal-index also has), requiring knowledge of the enum vocabulary (active, maintenance, eol, preview, go-live).
 - **Property naming:** The hal-index uses `select(.supported)` with dot notation. The releases-index requires `select(.["support-phase"] == "active")` with bracket notation and string comparison.
 - **Query complexity:** The hal-index query is 30% shorter and more intuitive for someone unfamiliar with the schema.
-
-**Winner:** hal-index (**17% smaller**); llms-index equivalent (direct array, no filtering)
-
-**Note on URL length:** The hal-index currently uses long GitHub raw URLs (91 chars per URL). With equivalent short CDN URLs, the hal-index would be **4.4 KB**—31% smaller than releases-index.
 
 ### Target Framework Queries
 
@@ -78,6 +79,18 @@ curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.supported) | ._links.se
 done
 ```
 
+**llms-index:** Uses `release-major` link to reach the version index:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+# Get target-frameworks.json for each supported version via release-major link
+curl -s "$LLMS" | jq -r '._embedded.latest_patches[] | select(.supported) | ._links["release-major"].href' | while read VERSION_HREF; do
+  TFM_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["target-frameworks-json"].href')
+  curl -s "$TFM_HREF" | jq -r '.frameworks[] | select(.platform == "android") | "\(.tfm) (Android \(.platform_version))"'
+done
+```
+
 **Output:**
 
 ```text
@@ -88,13 +101,16 @@ net8.0-android (Android 34.0)
 
 **releases-index:** Not available.
 
+**Winner:** hal-index
+
+- not available in releases-index
+- equivalent to llms-index
+
 **Analysis:**
 
 - **Platform versioning:** Each .NET version targets a specific Android API level. This query reveals the progression: .NET 8 → Android 34, .NET 9 → Android 35, .NET 10 → Android 36.
 - **Upgrade planning:** Knowing the platform version helps teams plan SDK requirements when upgrading .NET versions.
 - **Discoverability:** The `target-frameworks-json` link makes this data accessible through HAL navigation.
-
-**Winner:** hal-index only; llms-index equivalent
 
 ### CVE Queries for Latest Security Patch
 
@@ -250,6 +266,31 @@ VERSION_HREF=$(curl -s "$ROOT" | jq -r '._embedded.releases[] | select(.version 
 PATCH_HREF=$(curl -s "$VERSION_HREF" | jq -r '._links["latest-security"].href')
 
 # Step 2: Walk back 3 security patches using prev-security links
+for i in {1..3}; do
+  DATA=$(curl -s "$PATCH_HREF")
+  VERSION=$(echo "$DATA" | jq -r '.version')
+  MONTH=$(echo "$DATA" | jq -r '.date | split("T")[0] | split("-")[1]')
+  echo "$DATA" | jq -r --arg ver "$VERSION" --arg month "$MONTH" \
+    '._embedded.disclosures[] | "8.0 | \($month) | \(.affected_products[0]) | \(.id)"'
+  PATCH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
+  [ -z "$PATCH_HREF" ] && break
+done
+# 8.0 | 10 | dotnet-sdk | CVE-2025-55247
+# 8.0 | 10 | dotnet-runtime | CVE-2025-55248
+# 8.0 | 10 | dotnet-aspnetcore | CVE-2025-55315
+# 8.0 | 06 | dotnet-runtime | CVE-2025-30399
+# 8.0 | 05 | dotnet-sdk | CVE-2025-26646
+```
+
+**llms-index:** Uses `_embedded.latest_patches` with `latest-security` link for direct access:
+
+```bash
+LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+
+# Direct jump to 8.0's latest security patch via latest-security link
+PATCH_HREF=$(curl -s "$LLMS" | jq -r '._embedded.latest_patches[] | select(.release == "8.0") | ._links["latest-security"].href')
+
+# Walk back 3 security patches using prev-security links
 for i in {1..3}; do
   DATA=$(curl -s "$PATCH_HREF")
   VERSION=$(echo "$DATA" | jq -r '.version')
@@ -809,12 +850,12 @@ curl -s "$PACKAGES_URL" | jq -r '
 | List versions | ✅ | ✅ (direct array) | ✅ | 17% smaller |
 | Version lifecycle (EOL, LTS) | ✅ | ✅ | ✅ | 17% smaller |
 | Latest patch per version | ✅ | ✅ (embedded) | ✅ | 37x smaller |
-| CVEs per version | ✅ | ✅ (via link) | ✅ | 37x smaller |
+| CVEs per version | ✅ | ✅ (via `latest-security` link) | ✅ | 37x smaller |
 | CVEs per month | ✅ | ✅ | ❌ | — |
 | CVE details (severity, fixes) | ✅ | ✅ | ❌ | — |
 | Timeline navigation | ✅ | ✅ | ❌ | — |
 | Security history navigation (`prev-security`) | ✅ | ✅ | ❌ | — |
-| SDK-first navigation | ✅ | ✅ | ❌ | — |
+| SDK-first navigation | ✅ | ✅ (via `latest-sdk` link) | ❌ | — |
 | Target frameworks (TFMs, platform versions) | ✅ | ✅ | ❌ | hal-index only |
 | Breaking changes by category | ✅ | ✅ | ❌ | hal-index only |
 | OS package dependencies | ✅ | ✅ | ❌ | hal-index only |
@@ -869,4 +910,4 @@ The HAL `_embedded` pattern ensures that any data referenced within a document i
 
 The hal-index schema is optimized for the queries that matter most to security operations, while maintaining cache coherency across CDN deployments. The use of boolean properties (`supported`) instead of enum comparisons (`support-phase == "active"`) reduces query complexity and eliminates the need to know the vocabulary of valid enum values. Counterintuitively, the deeper HAL link structure (`._links.self.href`) is more ergonomic than flat URL properties (`.["releases.json"]`) because consistent snake_case naming enables dot notation throughout the query path.
 
-The llms-index provides additional efficiency for AI workloads by embedding `latest_patches[]` with direct `latest-security` links for each version. It is not suitable for mission-critical cloud-native scenarios due to its higher update frequency, but offers significant fetch savings for interactive AI assistants (e.g., 2.5x smaller for version-specific CVE queries by skipping the 20 KB version index fetch).
+The llms-index provides additional efficiency for AI workloads by embedding `latest_patches[]` with direct `latest-security` and `latest-sdk` links for each version. It is not suitable for mission-critical cloud-native scenarios due to its higher update frequency, but offers significant fetch savings for interactive AI assistants (e.g., 2.5x smaller for version-specific CVE queries by skipping the 20 KB version index fetch).
