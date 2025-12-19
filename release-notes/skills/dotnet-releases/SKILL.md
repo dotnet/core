@@ -54,7 +54,7 @@ From `_embedded.latest_patches[]._links`:
 
 | Relation | Target |
 | -------- | ------ |
-| `release-manifest` | manifest.json (OS, breaking changes) |
+| `manifest` | manifest.json (OS, breaking changes) |
 | `latest-security` | Last security patch |
 
 From `llms.json._links`:

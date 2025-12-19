@@ -24,7 +24,7 @@ llms.json
     │
     └─► _embedded.latest_patches[] ─► DONE (version, EOL, support)
             │
-            ├─► _links.release-manifest ─► manifest.json
+            ├─► _links.manifest ─► manifest.json
             │       ├─► compatibility-json ─► breaking changes
             │       ├─► supported-os-json ─► distros
             │       └─► os-packages-json ─► packages
@@ -86,7 +86,7 @@ From llms.json:
 
 From latest_patches[]:
   release-major ───────────► X.0/index.json (patches, timeline)
-  release-manifest ────────► manifest.json (reference data)
+  manifest ────────────────► manifest.json (reference data)
   latest-security ─────────► last security patch
 
 From manifest.json:
