@@ -11,6 +11,15 @@ description: EOL versions, support lifecycle, version history, and release types
 
 **For EOL versions:** STOP at the version index (e.g., `6.0/index.json`). It has `eol_date` and links to last security patch.
 
+## Quick Answers (from llms.json)
+
+For supported versions, answer directly from `_embedded.latest_patches[]`:
+
+- When does .NET X go EOL? → `eol_date`
+- Is .NET X LTS or STS? → `release_type`
+- Current patch version? → `version`
+- In maintenance mode? → `support_phase`
+
 ## Key Distinction
 
 - **Supported versions** → data embedded in `llms.json`
