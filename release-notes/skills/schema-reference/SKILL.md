@@ -33,7 +33,7 @@ Paths are illustrative—always follow `_links["..."].href`.
 | `latest`, `latest-lts` | Newest release; diverge when STS is newer than current LTS |
 | `latest-security` | Newest security patch |
 | `latest-security-month` | Current security month |
-| `release-major`, `release-manifest` | Cross-references |
+| `release-major`, `manifest` | Cross-references |
 | `releases-index`, `timeline-index` | Root indexes |
 | `compatibility-json`, `supported-os-json`, `os-packages-json` | Data resources |
 | `cve-json` | Full CVE details (CVSS vectors, CWE) |

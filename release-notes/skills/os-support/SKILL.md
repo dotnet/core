@@ -31,7 +31,7 @@ From `os-packages.json`:
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► _links["release-manifest"]
+    └─► _embedded.latest_patches[] ─► _links["manifest"]
                     │
                     ▼
                 manifest.json
@@ -44,13 +44,13 @@ llms.json
 ## Common Queries
 
 ### Distro support (2 fetches)
-`llms.json` → `release-manifest` → `supported-os-json` → check `distributions[]`
+`llms.json` → `manifest` → `supported-os-json` → check `distributions[]`
 
 ### Package list (2 fetches)
-`llms.json` → `release-manifest` → `os-packages-json` → read `distributions[].releases[].packages[]`
+`llms.json` → `manifest` → `os-packages-json` → read `distributions[].releases[].packages[]`
 
 ### Minimum glibc (2 fetches)
-`llms.json` → `release-manifest` → `supported-os-json` → filter `libc[]` by `name == "glibc"`
+`llms.json` → `manifest` → `supported-os-json` → filter `libc[]` by `name == "glibc"`
 
 ## supported-os.json Structure
 
