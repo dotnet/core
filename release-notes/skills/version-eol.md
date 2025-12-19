@@ -5,8 +5,6 @@ description: EOL versions, support lifecycle, version history, and release types
 
 # Version and EOL Queries
 
-*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
-
 ## Stop Criteria
 
 **For supported versions:** STOP at `llms.json`. All data is in `_embedded.latest_patches[]`.

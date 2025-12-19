@@ -5,8 +5,6 @@ description: Compatibility queries, breaking changes, migration guidance, and TF
 
 # Breaking Changes Queries
 
-*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
-
 ## Stop Criteria
 
 **STOP when you have `compatibility.json`.** It contains all breaking changes with impact levels and doc links. Only fetch `documentation` URLs if you need detailed migration steps or rationale.

@@ -5,8 +5,6 @@ description: OS packages, distro support, glibc/musl requirements
 
 # OS Packages and Support Queries
 
-*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
-
 ## Stop Criteria
 
 **STOP when you have the JSON file.** Parse it—don't fetch anything else.

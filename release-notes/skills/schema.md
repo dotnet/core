@@ -5,8 +5,6 @@ description: Document structure, properties, link relations, and glossary
 
 # Schema Reference
 
-*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
-
 ## Stop Criteria
 
 **This is a reference document.** Use it to understand structure, then navigate the actual graph. Do not fetch during normal queries.
