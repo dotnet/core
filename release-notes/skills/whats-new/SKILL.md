@@ -25,7 +25,7 @@ Once you have `manifest.json._links`:
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► _links["release-manifest"]
+    └─► _embedded.latest_patches[] ─► _links["manifest"]
             │
             ▼
         manifest.json
@@ -44,7 +44,7 @@ llms.json
 ### What's new in .NET X? (2-3 fetches)
 
 1. `llms.json` → find version in `_embedded.latest_patches[]`
-2. Follow `_links["release-manifest"]` → manifest.json
+2. Follow `_links["manifest"]` → manifest.json
 3. Follow `_links["whats-new"]` for raw markdown, or return `whats-new-rendered.href` for HTML link
 
 ### Runtime/Libraries/SDK details? (3 fetches)
