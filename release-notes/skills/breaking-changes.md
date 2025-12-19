@@ -1,6 +1,15 @@
+---
+name: breaking-changes
+description: Compatibility queries, breaking changes, migration guidance, and TFMs
+---
+
 # Breaking Changes Queries
 
 *Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
+
+## Stop Criteria
+
+**STOP when you have `compatibility.json`.** It contains all breaking changes with impact levels and doc links. Only fetch `documentation` URLs if you need detailed migration steps or rationale.
 
 ## Navigation Flow (2 fetches)
 
@@ -100,6 +109,14 @@ The `documentation` links point to raw markdown with these sections:
 - Affected APIs
 
 Fetch when you need rationale or detailed migration guidance beyond `required_action`.
+
+## Common Mistakes
+
+| Mistake | Why It's Wrong |
+|---------|----------------|
+| Fetching docs for every breaking change | Only fetch `documentation` URLs when you need migration details |
+| Constructing `compatibility.json` URLs | Always follow `_links` from manifest.json |
+| Looking for breaking changes in patch releases | Breaking changes are per major version, not per patch |
 
 ## Tips
 

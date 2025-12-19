@@ -1,6 +1,17 @@
+---
+name: version-eol
+description: EOL versions, support lifecycle, version history, and release types
+---
+
 # Version and EOL Queries
 
 *Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
+
+## Stop Criteria
+
+**For supported versions:** STOP at `llms.json`. All data is in `_embedded.latest_patches[]`.
+
+**For EOL versions:** STOP at the version index (e.g., `6.0/index.json`). It has `eol_date` and links to last security patch.
 
 ## Key Distinction
 
@@ -85,6 +96,14 @@ Continue from above:
 | `active` | Full support, regular updates |
 | `maintenance` | Security fixes only |
 | `eol` | No longer supported |
+
+## Common Mistakes
+
+| Mistake | Why It's Wrong |
+|---------|----------------|
+| Navigating to `releases-index` for supported versions | Wastes fetches—`llms.json._embedded.latest_patches[]` has this data |
+| Looking for EOL data in `llms.json` | Only supported versions are embedded—use `releases-index` for EOL |
+| Fetching version index for just EOL date | `releases-index._embedded.releases[]` already has `eol_date` |
 
 ## Tips
 
