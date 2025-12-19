@@ -5,8 +5,6 @@ description: Multi-hop query patterns and visual navigation maps through the rel
 
 # Navigation Flows
 
-*Core Rules from SKILL.md apply: follow `_links` for navigation, use `_embedded` first.*
-
 ## Stop Criteria
 
 **STOP when you reach `─► DONE`.** Each flow shows terminal nodes. Do not fetch beyond them.
