@@ -17,6 +17,15 @@ description: OS packages, distro support, glibc/musl requirements
 
 **Pick ONE file** based on your query—don't fetch both.
 
+## Quick Answers (from JSON files)
+
+From `supported-os.json`:
+- Is Ubuntu 24.04 supported? → `distributions[].releases[]`
+- Minimum glibc version? → `libc[]` where `name == "glibc"`
+
+From `os-packages.json`:
+- What packages for Ubuntu? → `distributions[].releases[].packages[]`
+
 ## Navigation Flow (2 fetches)
 
 ```
