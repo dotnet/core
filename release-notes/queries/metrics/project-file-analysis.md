@@ -60,8 +60,8 @@ fi
 **Query:** "Here's my project file with package references. Have any of my packages had CVEs in the last 6 months?"
 
 ```xml
-<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.0" />
-<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.1.0" />
+<PackageReference Include="Microsoft.Build" Version="17.10.10" />
+<PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.8.10" />
 ```
 
 | Schema | Files Required | Total Transfer |
@@ -77,8 +77,8 @@ LLMS="https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/
 
 # Package references from project file (name and version)
 declare -A PKGS
-PKGS["Microsoft.AspNetCore.Identity"]="2.3.0"
-PKGS["Microsoft.AspNetCore.Server.Kestrel.Core"]="2.1.0"
+PKGS["Microsoft.Build"]="17.10.10"
+PKGS["Microsoft.Build.Tasks.Core"]="17.8.10"
 
 # Start from the latest security month
 MONTH_HREF=$(curl -s "$LLMS" | jq -r '._links["latest-security-month"].href')
@@ -95,11 +95,13 @@ for i in {1..6}; do
     
     for pkg in "${!PKGS[@]}"; do
       ver="${PKGS[$pkg]}"
+      # Check vulnerability and get commit diff URLs
       echo "$CVE_DATA" | jq -r --arg pkg "$pkg" --arg ver "$ver" --arg ym "$YEAR-$MONTH" '
+        .commits as $all_commits |
         .packages[]? | select(.name == $pkg) |
-        # Compare versions: user version >= min_vulnerable AND <= max_vulnerable
         if ($ver >= .min_vulnerable and $ver <= .max_vulnerable) then
-          "\($ym) | \($pkg)@\($ver) | \(.cve_id) | vulnerable: \(.min_vulnerable)-\(.max_vulnerable) | fixed: \(.fixed)"
+          "\($ym) | \($pkg)@\($ver) | \(.cve_id) | vulnerable: \(.min_vulnerable)-\(.max_vulnerable) | fixed: \(.fixed)",
+          (.commits[]? | "  diff: " + ($all_commits[.].url // "unknown"))
         else
           empty
         end
@@ -110,20 +112,23 @@ for i in {1..6}; do
   MONTH_HREF=$(echo "$DATA" | jq -r '._links["prev-security"].href // empty')
   [ -z "$MONTH_HREF" ] && break
 done
-# 2025-10 | Microsoft.AspNetCore.Server.Kestrel.Core@2.1.0 | CVE-2025-55315 | vulnerable: 2.0.0-2.3.0 | fixed: 2.3.6
-# 2025-03 | Microsoft.AspNetCore.Identity@2.3.0 | CVE-2025-24070 | vulnerable: 2.3.0-2.3.0 | fixed: 2.3.1
+# 2025-10 | Microsoft.Build@17.10.10 | CVE-2025-55247 | vulnerable: 17.10.0-17.10.29 | fixed: 17.10.46
+#   diff: https://github.com/dotnet/msbuild/commit/aa888d3214e5adb503c48c3bad2bfc6c5aff638a.diff
+# 2025-10 | Microsoft.Build.Tasks.Core@17.8.10 | CVE-2025-55247 | vulnerable: 17.8.0-17.8.29 | fixed: 17.8.43
+#   diff: https://github.com/dotnet/msbuild/commit/f0cbb13971c30ad15a3f252a8d0171898a01ec11.diff
 ```
 
 **Winner:** llms-index
 
 - Direct `latest-security-month` link as starting point
-- Package-level CVE data in `packages[]` array
-- **51x smaller** than releases-index (which can't answer package-level queries)
+- Package-level CVE data with commit diff URLs
+- Enables code review of security fixes without relying on nuget.org
 
 **Analysis:**
 
-- **Completeness:** ⚠️ releases-index only provides product-level CVEs, not package-level.
-- **Version matching:** LLM must compare package versions against `min_vulnerable`/`max_vulnerable` ranges.
+- **Completeness:** ⚠️ releases-index does not provide package-level CVE data.
+- **Version matching:** String comparison works for semver when patch versions have consistent digit counts.
+- **Commit diffs:** The `.commits` lookup provides direct links to fix diffs on GitHub.
 - **Timeline navigation:** Uses `prev-security` links to efficiently walk security history.
 
 ---
