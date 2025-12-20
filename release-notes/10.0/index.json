@@ -4,6 +4,7 @@
   "title": ".NET Major Release Index - 10.0",
   "target_framework": "net10.0",
   "latest": "10.0.1",
+  "latest_security": "10.0.0-rc.2",
   "release_type": "lts",
   "support_phase": "active",
   "supported": true,
@@ -24,6 +25,10 @@
     "latest-sdk": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/sdk/index.json",
       "title": "Latest SDK - .NET 10.0"
+    },
+    "latest-security": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-rc.2/index.json",
+      "title": "Latest security patch - 10.0.0-rc.2"
     },
     "manifest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/manifest.json",
@@ -71,6 +76,51 @@
           },
           "release-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/11/index.json"
+          }
+        }
+      },
+      {
+        "version": "10.0.0-rc.2",
+        "release": "10.0",
+        "date": "2025-10-14T00:00:00\u002B00:00",
+        "year": "2025",
+        "month": "10",
+        "security": true,
+        "cve_count": 2,
+        "cve_records": [
+          "CVE-2025-55247",
+          "CVE-2025-55315"
+        ],
+        "support_phase": "go-live",
+        "sdk_version": "10.0.100-rc.2.25502.107",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc2/index.json"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/cve.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json"
+          }
+        }
+      },
+      {
+        "version": "10.0.0-rc.1",
+        "release": "10.0",
+        "date": "2025-09-09T00:00:00\u002B00:00",
+        "year": "2025",
+        "month": "09",
+        "security": false,
+        "cve_count": 0,
+        "support_phase": "go-live",
+        "sdk_version": "10.0.100-rc.1.25451.107",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc1/index.json"
+          },
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/09/index.json"
           }
         }
       }

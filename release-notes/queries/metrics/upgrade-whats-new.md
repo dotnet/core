@@ -10,8 +10,8 @@ See [overview.md](../overview.md) for design context, file characteristics, and 
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| llms-index | `llms.json` → `10.0/manifest.json` → `10.0/compatibility.json` | **~115 KB** |
-| hal-index | `index.json` → `10.0/index.json` → `10.0/manifest.json` → `compatibility.json` | **~140 KB** |
+| llms-index | `llms.json` → `10.0/manifest.json` → `10.0/compatibility.json` | **~114 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/manifest.json` → `compatibility.json` | **~117 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **llms-index:**
@@ -58,7 +58,7 @@ curl -s "$COMPAT_HREF" | jq -r '.breaks[] | select(.impact == "high") | "\(.titl
 
 **releases-index:** Cannot answer—no breaking changes data.
 
-**Winner:** llms-index (**~115 KB**, one fewer fetch than hal-index)
+**Winner:** llms-index (**~114 KB**, one fewer fetch than hal-index)
 
 **Analysis:**
 
@@ -75,8 +75,8 @@ curl -s "$COMPAT_HREF" | jq -r '.breaks[] | select(.impact == "high") | "\(.titl
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| llms-index | `llms.json` → `manifest.json` → `compatibility.json` → doc.md | **~120 KB** |
-| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `compatibility.json` → doc.md | **~145 KB** |
+| llms-index | `llms.json` → `manifest.json` → `compatibility.json` → doc.md | **~119 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `compatibility.json` → doc.md | **~122 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **llms-index:**
@@ -149,8 +149,8 @@ var server = host.GetTestServer();
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| llms-index | `llms.json` → `10.0/manifest.json` → `runtime.md` | **~25 KB** |
-| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `runtime.md` | **~50 KB** |
+| llms-index | `llms.json` → `10.0/manifest.json` → `runtime.md` | **~24 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `runtime.md` | **~27 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **llms-index:**

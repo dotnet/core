@@ -68,7 +68,7 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | llms-index | `llms.json` | **5 KB** |
-| hal-index | `index.json` → `10.0/index.json` | **25 KB** |
+| hal-index | `index.json` → `10.0/index.json` | **8 KB** |
 | releases-index | `releases-index.json` | **6 KB** |
 
 **llms-index:** The `_embedded.latest_patches` array contains all details inline:
@@ -127,8 +127,8 @@ This query has two parts:
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | llms-index (date check) | `llms.json` | **5 KB** |
-| llms-index (with CVEs) | `llms.json` → `8.0/8.0.21/index.json` | **13 KB** |
-| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **33 KB** |
+| llms-index (with CVEs) | `llms.json` → `8.0/8.0.21/index.json` | **14 KB** |
+| hal-index | `index.json` → `8.0/index.json` → `8.0/8.0.21/index.json` | **34 KB** |
 | releases-index | `releases-index.json` → `8.0/releases.json` | **1,269 KB** |
 
 **llms-index:** The `_embedded.latest_patches` array includes `latest_security_date` for immediate date comparison:
@@ -185,7 +185,7 @@ curl -s "$RELEASES_URL" | jq -r '
 **Winner:** llms-index
 
 - **Date check only:** 5 KB (zero additional fetches) — `latest_security_date` embedded in root
-- **With CVE IDs:** 13 KB (**97x smaller** than releases-index, **2.5x smaller** than hal-index)
+- **With CVE IDs:** 14 KB (**91x smaller** than releases-index, **2.4x smaller** than hal-index)
 
 **Analysis:**
 
