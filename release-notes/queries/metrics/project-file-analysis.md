@@ -139,8 +139,8 @@ done
 
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
-| llms-index | `llms.json` → `10.0/manifest.json` → `target-frameworks.json` | **20 KB** |
-| hal-index | `index.json` → `10.0/index.json` → `10.0/manifest.json` → `target-frameworks.json` | **25 KB** |
+| llms-index | `llms.json` → `10.0/manifest.json` → `target-frameworks.json` | **11 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `10.0/manifest.json` → `target-frameworks.json` | **14 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **llms-index:** Navigate to target-frameworks.json via manifest link:
