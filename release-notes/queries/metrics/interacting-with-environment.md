@@ -79,7 +79,7 @@ curl -s "$SECURITY_HREF" | jq -r '.cve_records[]'
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | llms-index | `llms.json` → `manifest.json` → `supported-os.json` | **17 KB** |
-| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `supported-os.json` | **20 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `supported-os.json` | **26 KB** |
 | releases-index | N/A | N/A (not available) |
 
 **llms-index:** Navigate to supported-os.json for libc requirements:
@@ -105,7 +105,7 @@ curl -s "$SUPPORTED_OS_HREF" | jq -r --arg a "$ARCH" '.libc[] | select(.architec
 
 - Direct navigation from embedded latest_patches
 - Both glibc and musl requirements in same file
-- **1.2x smaller** than hal-index
+- **1.5x smaller** than hal-index
 
 **Analysis:**
 
@@ -122,7 +122,7 @@ curl -s "$SUPPORTED_OS_HREF" | jq -r --arg a "$ARCH" '.libc[] | select(.architec
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | llms-index | `llms.json` → `manifest.json` → `os-packages.json` + `sdk/index.json` → `downloads/index.json` → `downloads/sdk.json` | **~36 KB** |
-| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `os-packages.json` + SDK files | **~39 KB** |
+| hal-index | `index.json` → `10.0/index.json` → `manifest.json` → `os-packages.json` + SDK files | **~45 KB** |
 | releases-index | `releases-index.json` → `10.0/releases.json` | **~25 KB** (partial) |
 
 **llms-index:** Navigate to OS packages and SDK download:

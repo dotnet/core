@@ -68,7 +68,7 @@ curl -s "$ROOT" | jq -r '.["releases-index"][] | select(.["support-phase"] == "a
 | Schema | Files Required | Total Transfer |
 |--------|----------------|----------------|
 | llms-index | `llms.json` | **5 KB** |
-| hal-index | `index.json` → `10.0/index.json` | **8 KB** |
+| hal-index | `index.json` → `10.0/index.json` | **14 KB** |
 | releases-index | `releases-index.json` | **6 KB** |
 
 **llms-index:** The `_embedded.latest_patches` array contains all details inline:
