@@ -195,7 +195,9 @@
       "max_vulnerable": "10.0.0-rc.1.25451.107",
       "fixed": "10.0.0-rc.2.25476.107",
       "release": "10.0",
-      "commits": []
+      "commits": [
+        "b7fd3ad429eb9d79bbf6d952d3a74a5dc79fc5a7"
+      ]
     },
     {
       "cve_id": "CVE-2025-55315",
@@ -227,7 +229,7 @@
       "fixed": "8.0.121",
       "release": "8.0",
       "commits": [
-        "e7564632db16dae7d5dedfa475d8c618762d8584"
+        "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
       ]
     },
     {
@@ -238,7 +240,7 @@
       "fixed": "8.0.318",
       "release": "8.0",
       "commits": [
-        "3cc3a3249632e240574f2f06663543a44cbbf8f1"
+        "aa888d3214e5adb503c48c3bad2bfc6c5aff638a"
       ]
     },
     {
@@ -249,7 +251,7 @@
       "fixed": "8.0.415",
       "release": "8.0",
       "commits": [
-        "3ee7d2906a329d637bdef318b71dd3287eed65fc"
+        "02bf66295b64ab368d12933041f7281aad186a2d"
       ]
     },
     {
@@ -260,7 +262,7 @@
       "fixed": "9.0.111",
       "release": "9.0",
       "commits": [
-        "39ec3214d827194da6d82fd712e40fc5b16eec3e"
+        "728984d96edf07d56918a88b0f37fec6b1dfbbc9"
       ]
     },
     {
@@ -271,7 +273,7 @@
       "fixed": "9.0.306",
       "release": "9.0",
       "commits": [
-        "8a620b800e15fa6b73e6bd95f671048e70a91e26"
+        "09c1be8483dad070189c3a0c660e7acacf478402"
       ]
     },
     {
@@ -281,21 +283,12 @@
       "max_vulnerable": "10.0.100-rc.1.25451.107",
       "fixed": "10.0.100-rc.2.25502.107",
       "release": "10.0",
-      "commits": []
+      "commits": [
+        "575682ede8404eac3b6a7b872d137883ac8bf0e5"
+      ]
     }
   ],
   "packages": [
-    {
-      "cve_id": "CVE-2025-55315",
-      "name": "Microsoft.AspNetCore.Server.Kestrel.Core",
-      "min_vulnerable": "2.0.0",
-      "max_vulnerable": "2.3.0",
-      "fixed": "2.3.6",
-      "release": "",
-      "commits": [
-        "83a330a683c99bf89398a6b554d8d9bf21b6b969"
-      ]
-    },
     {
       "cve_id": "CVE-2025-55247",
       "name": "Microsoft.Build.Tasks.Core",
@@ -463,6 +456,20 @@
     }
   ],
   "commits": {
+    "575682ede8404eac3b6a7b872d137883ac8bf0e5": {
+      "repo": "dotnet",
+      "branch": "v10.0.100-rc.2.25502.107",
+      "hash": "575682ede8404eac3b6a7b872d137883ac8bf0e5",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/575682ede8404eac3b6a7b872d137883ac8bf0e5.diff"
+    },
+    "b7fd3ad429eb9d79bbf6d952d3a74a5dc79fc5a7": {
+      "repo": "dotnet",
+      "branch": "v10.0.100-rc.2.25502.107",
+      "hash": "b7fd3ad429eb9d79bbf6d952d3a74a5dc79fc5a7",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/b7fd3ad429eb9d79bbf6d952d3a74a5dc79fc5a7.diff"
+    },
     "18e28d767acf44208afa6c4e2e67a10c65e9647e": {
       "repo": "runtime",
       "branch": "release/9.0",
@@ -544,9 +551,6 @@
     ]
   },
   "package_cves": {
-    "Microsoft.AspNetCore.Server.Kestrel.Core": [
-      "CVE-2025-55315"
-    ],
     "Microsoft.Build": [
       "CVE-2025-55247"
     ],
@@ -558,10 +562,6 @@
     ]
   },
   "release_cves": {
-    "10.0": [
-      "CVE-2025-55247",
-      "CVE-2025-55315"
-    ],
     "8.0": [
       "CVE-2025-55247",
       "CVE-2025-55248",
@@ -570,6 +570,10 @@
     "9.0": [
       "CVE-2025-55247",
       "CVE-2025-55248",
+      "CVE-2025-55315"
+    ],
+    "10.0": [
+      "CVE-2025-55247",
       "CVE-2025-55315"
     ]
   },
@@ -594,24 +598,25 @@
   },
   "cve_releases": {
     "CVE-2025-55247": [
-      "10.0",
       "8.0",
-      "9.0"
+      "9.0",
+      "10.0"
     ],
     "CVE-2025-55248": [
       "8.0",
       "9.0"
     ],
     "CVE-2025-55315": [
-      "10.0",
       "8.0",
-      "9.0"
+      "9.0",
+      "10.0"
     ]
   },
   "cve_commits": {
     "CVE-2025-55247": [
       "02bf66295b64ab368d12933041f7281aad186a2d",
       "09c1be8483dad070189c3a0c660e7acacf478402",
+      "575682ede8404eac3b6a7b872d137883ac8bf0e5",
       "728984d96edf07d56918a88b0f37fec6b1dfbbc9",
       "aa888d3214e5adb503c48c3bad2bfc6c5aff638a",
       "f0cbb13971c30ad15a3f252a8d0171898a01ec11"
@@ -622,7 +627,8 @@
     ],
     "CVE-2025-55315": [
       "61794b7f3aac0b6719f783db5b5c725fefc8b695",
-      "97a86434195a82fc7e302a4c57d5ec7f885c1ad5"
+      "97a86434195a82fc7e302a4c57d5ec7f885c1ad5",
+      "b7fd3ad429eb9d79bbf6d952d3a74a5dc79fc5a7"
     ]
   }
 }
