@@ -1,5 +1,5 @@
 {
-  "kind": "llms-index",
+  "kind": "llms",
   "title": ".NET Release Index for AI",
   "ai_note": "ALWAYS read required_pre_read first. HAL graph\u2014follow _links only, never construct URLs.",
   "human_note": "No support or compatibility is offered for this file. Don\u0027t use it for automated workflows. Use index.json instead.",
@@ -31,17 +31,17 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/index.json",
       "title": "Latest year - 2025"
     },
-    "releases-index": {
+    "root": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json",
       "title": ".NET Release Index"
     },
-    "timeline-index": {
+    "timeline": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     }
   },
   "_embedded": {
-    "latest_patches": [
+    "patches": [
       {
         "version": "10.0.1",
         "release": "10.0",
@@ -59,7 +59,7 @@
           "latest-security": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc2/index.json"
           },
-          "release-major": {
+          "major": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json"
           },
           "latest-sdk": {
@@ -87,7 +87,7 @@
           "latest-security": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.10/index.json"
           },
-          "release-major": {
+          "major": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json"
           },
           "latest-sdk": {
@@ -115,7 +115,7 @@
           "latest-security": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.21/index.json"
           },
-          "release-major": {
+          "major": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json"
           },
           "latest-sdk": {
@@ -127,5 +127,11 @@
         }
       }
     ]
-  }
+  },
+  "_discover": {
+    "latest-cve-disclosures": {
+      "follow": ["latest-security-month"],
+      "data": ["disclosures"]
+    }
+  }  
 }
