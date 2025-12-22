@@ -40,6 +40,15 @@
       "title": ".NET Release Timeline Index"
     }
   },
+  "_discover": {
+    "latest-cve-disclosures": {
+      "follow": ["latest-security-month"],
+      "select": ["disclosures"]
+    },
+    "whats-new-runtime": {
+      "follow": ["latest"]
+    }
+  },
   "_embedded": {
     "patches": [
       {
@@ -127,11 +136,5 @@
         }
       }
     ]
-  },
-  "_discover": {
-    "latest-cve-disclosures": {
-      "follow": ["latest-security-month"],
-      "select": ["disclosures"]
-    }
-  }  
+  }
 }
