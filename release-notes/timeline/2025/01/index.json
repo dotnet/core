@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
-  "kind": "month-index",
+  "kind": "month",
   "title": ".NET Month Timeline Index - January 2025",
   "year": "2025",
   "month": "01",
@@ -33,11 +33,11 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/01/manifest.json",
       "title": "Manifest - January 2025"
     },
-    "timeline-index": {
+    "timeline": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
-    "year-index": {
+    "year": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/index.json",
       "title": ".NET Year Timeline Index - 2025"
     },
@@ -51,48 +51,46 @@
     "patches": [
       {
         "version": "9.0.1",
-        "release": "9.0",
         "date": "2025-01-14T00:00:00\u002B00:00",
         "year": "2025",
         "month": "01",
         "security": true,
         "cve_count": 4,
+        "support_phase": "active",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.1/index.json"
+          }
+        },
+        "release": "9.0",
         "cve_records": [
           "CVE-2025-21171",
           "CVE-2025-21172",
           "CVE-2025-21176",
           "CVE-2025-21173"
         ],
-        "support_phase": "active",
-        "supported": true,
-        "sdk_version": "9.0.102",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.1/index.json"
-          }
-        }
+        "sdk_version": "9.0.102"
       },
       {
         "version": "8.0.12",
-        "release": "8.0",
         "date": "2025-01-14T00:00:00\u002B00:00",
         "year": "2025",
         "month": "01",
         "security": true,
         "cve_count": 3,
+        "support_phase": "active",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/index.json"
+          }
+        },
+        "release": "8.0",
         "cve_records": [
           "CVE-2025-21172",
           "CVE-2025-21176",
           "CVE-2025-21173"
         ],
-        "support_phase": "active",
-        "supported": true,
-        "sdk_version": "8.0.405",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.12/index.json"
-          }
-        }
+        "sdk_version": "8.0.405"
       }
     ],
     "disclosures": [

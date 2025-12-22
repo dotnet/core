@@ -25,9 +25,9 @@ llms.json
     └─► _embedded.latest_patches[] ─► DONE (version, EOL, support)
             │
             ├─► _links.manifest ─► manifest.json
-            │       ├─► compatibility-json ─► breaking changes
-            │       ├─► supported-os-json ─► distros
-            │       └─► os-packages-json ─► packages
+            │       ├─► compatibility ─► breaking changes
+            │       ├─► supported-os ─► distros
+            │       └─► os-packages ─► packages
             │
             └─► _links.latest-security ─► last security patch
 ```
@@ -65,7 +65,7 @@ llms.json
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► _links.release-major
+    └─► _embedded.latest_patches[] ─► _links.major-shortcut
             │
             ▼
         9.0/index.json
@@ -85,15 +85,15 @@ From llms.json:
   releases-index ──────────► full version list (including EOL)
 
 From latest_patches[]:
-  release-major ───────────► X.0/index.json (patches, timeline)
+  major-shortcut ──────────► X.0/index.json (patches, timeline)
   manifest ────────────────► manifest.json (reference data)
   latest-security ─────────► last security patch
 
 From manifest.json:
-  compatibility-json ──────► breaking changes
-  target-frameworks-json ──► TFMs
-  supported-os-json ───────► distros, glibc versions
-  os-packages-json ────────► apt/dnf packages
+  compatibility ───────────► breaking changes
+  target-frameworks ───────► TFMs
+  supported-os ────────────► distros, glibc versions
+  os-packages ─────────────► apt/dnf packages
 
 From month index:
   prev-security ───────────► previous security month
