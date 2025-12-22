@@ -18,8 +18,8 @@
       "terminal_kind": "month"
     },
     "whats-new-{component}": {
-      "path": ["latest", "manifest"],
-      "select": ["whats-new-{component}"],
+      "follow": ["latest", "manifest"],
+      "select": ["_links.whats-new-{component}"],
       "yields": "markdown",
       "terminal_kind": "manifest",
       "templated": true
