@@ -15,14 +15,14 @@
     "latest-cve-disclosures": {
       "path": ["latest-security-month"],
       "select": ["disclosures"],
-      "terminal_kind": "month",
-      "hops": 1
+      "terminal_kind": "month"
     },
-    "whats-new-runtime": {
+    "whats-new-{component}": {
       "path": ["latest", "manifest"],
-      "select": ["whats-new-runtime"],
+      "select": ["whats-new-{component}"],
       "yields": "markdown",
-      "terminal_kind": "manifest"
+      "terminal_kind": "manifest",
+      "templates": true
     }
   },
   "_links": {
