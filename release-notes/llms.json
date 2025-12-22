@@ -13,13 +13,13 @@
   ],
   "_workflows": {
     "latest-cve-disclosures": {
-      "follow": ["latest-security-month"],
+      "path": ["latest-security-month"],
       "select": ["disclosures"],
       "terminal_kind": "month",
       "hops": 1
     },
     "whats-new-runtime": {
-      "follow": ["latest", "manifest"],
+      "path": ["latest", "manifest"],
       "select": ["whats-new-runtime"],
       "yields": "markdown",
       "terminal_kind": "manifest"
