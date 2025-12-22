@@ -13,12 +13,12 @@
   ],
   "_workflows": {
     "latest-cve-disclosures": {
-      "follow": ["latest-security-month"],
+      "follow_path": ["latest-security-month"],
       "select_embedded": ["disclosures"],
       "destination_kind": "month"
     },
     "whats-new-{component}": {
-      "follow": ["latest", "manifest"],
+      "follow_path": ["latest", "manifest"],
       "select_link": ["whats-new-{component}"],
       "yields": "markdown",
       "destination_kind": "manifest",
