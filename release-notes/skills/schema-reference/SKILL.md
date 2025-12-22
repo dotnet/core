@@ -33,9 +33,9 @@ Paths are illustrative—always follow `_links["..."].href`.
 | `latest`, `latest-lts` | Newest release; diverge when STS is newer than current LTS |
 | `latest-security` | Newest security patch |
 | `latest-security-month` | Current security month |
-| `release-major`, `manifest` | Cross-references |
+| `major-shortcut`, `manifest` | Cross-references |
 | `releases-index`, `timeline-index` | Root indexes |
-| `compatibility-json`, `supported-os-json`, `os-packages-json` | Data resources |
+| `compatibility`, `supported-os`, `os-packages`, `target-frameworks` | Data resources |
 | `cve-json` | Full CVE details (CVSS vectors, CWE) |
 | `*-rendered` | GitHub HTML views |
 

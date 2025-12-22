@@ -36,21 +36,21 @@ llms.json
                     ▼
                 manifest.json
                     │
-                    ├─► _links["supported-os-json"] ─► distros, glibc
+                    ├─► _links["supported-os"] ─► distros, glibc
                     │
-                    └─► _links["os-packages-json"] ─► apt/dnf packages
+                    └─► _links["os-packages"] ─► apt/dnf packages
 ```
 
 ## Common Queries
 
 ### Distro support (2 fetches)
-`llms.json` → `manifest` → `supported-os-json` → check `distributions[]`
+`llms.json` → `manifest` → `supported-os` → check `distributions[]`
 
 ### Package list (2 fetches)
-`llms.json` → `manifest` → `os-packages-json` → read `distributions[].releases[].packages[]`
+`llms.json` → `manifest` → `os-packages` → read `distributions[].releases[].packages[]`
 
 ### Minimum glibc (2 fetches)
-`llms.json` → `manifest` → `supported-os-json` → filter `libc[]` by `name == "glibc"`
+`llms.json` → `manifest` → `supported-os` → filter `libc[]` by `name == "glibc"`
 
 ## supported-os.json Structure
 

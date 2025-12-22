@@ -30,9 +30,9 @@ llms.json
                     ▼
                 manifest.json
                     │
-                    ├─► _links["compatibility"] ─► breaking changes
+                    ├─► _links["compatibility"] ─► breaking changes (compatibility.json)
                     │
-                    └─► _links["target-frameworks"] ─► TFMs
+                    └─► _links["target-frameworks"] ─► TFMs (target-frameworks.json)
 ```
 
 ## Common Queries
