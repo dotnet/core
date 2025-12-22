@@ -11,6 +11,19 @@
     "9.0",
     "8.0"
   ],
+  "_workflows": {
+    "latest-cve-disclosures": {
+      "follow": ["latest-security-month"],
+      "select": ["disclosures"],
+      "terminal_kind": "month",
+      "hops": 1
+    },
+    "whats-new-runtime": {
+      "follow": ["latest"],
+      "terminal_kind": "manifest",
+      "hops": 2
+    }
+  },
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
@@ -38,18 +51,6 @@
     "timeline": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
-    }
-  },
-  "_workflows": {
-    "latest-cve-disclosures": {
-      "follow": ["latest-security-month"],
-      "select": ["disclosures"],
-      "terminal-kind": "month",
-      "hops": 1
-    },
-    "whats-new-runtime": {
-      "follow": ["latest"],
-      "terminal-kind": "manifest"
     }
   },
   "_embedded": {
