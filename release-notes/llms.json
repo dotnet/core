@@ -40,14 +40,16 @@
       "title": ".NET Release Timeline Index"
     }
   },
-  "_discover": {
+  "_workflows": {
     "latest-cve-disclosures": {
       "follow": ["latest-security-month"],
-      "select": ["disclosures"]
+      "select": ["disclosures"],
+      "terminal-kind": "month",
+      "hops": 1
     },
     "whats-new-runtime": {
       "follow": ["latest"],
-      "terminal": "manifest"
+      "terminal-kind": "manifest"
     }
   },
   "_embedded": {
