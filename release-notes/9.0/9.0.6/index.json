@@ -6,10 +6,11 @@
   "date": "2025-06-10T00:00:00\u002B00:00",
   "support_phase": "active",
   "security": true,
-  "cve_count": 1,
   "cve_records": [
     "CVE-2025-30399"
   ],
+  "prev_patch_date": "2025-05-13T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2025-05-13T00:00:00\u002B00:00",
   "sdk_version": "9.0.301",
   "sdk_feature_bands": [
     "9.0.301",
@@ -20,17 +21,17 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.6/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.5/index.json",
       "title": "Previous patch release - 9.0.5"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.5/index.json",
       "title": "Previous security patch release - 9.0.5"
     },
-    "latest-sdk": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
-      "title": "Latest SDK - .NET 9.0"
+    "downloads": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/downloads/index.json",
+      "title": "Downloads - .NET 9.0"
     },
     "major": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
@@ -40,7 +41,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.6/manifest.json",
       "title": "Manifest - .NET 9.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/06/index.json",
       "title": ".NET Month Timeline Index - June 2025"
     },
@@ -127,42 +128,6 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.6/index.json"
           }
         }
-      }
-    ],
-    "disclosures": [
-      {
-        "id": "CVE-2025-30399",
-        "title": "DLL Hijacking Remote Code Execution Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/362"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/214743ee2a5a25b9a3a07e3f0451da73eb4e97e2.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/9.0",
-            "title": "Fix commit in runtime (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.0",
-            "max_vulnerable": "9.0.5",
-            "fixed": "9.0.6"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2025-06-10",
-        "affected_releases": [
-          "8.0",
-          "9.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "all"
-        ]
       }
     ]
   }

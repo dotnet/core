@@ -6,11 +6,12 @@
   "month": "06",
   "date": "2025-06-10T00:00:00\u002B00:00",
   "security": true,
-  "cve_count": 1,
+  "prev_month_date": "2025-05-22T00:00:00\u002B00:00",
+  "prev_security_month_date": "2025-05-22T00:00:00\u002B00:00",
   "cve_records": [
     "CVE-2025-30399"
   ],
-  "releases": [
+  "major_releases": [
     "10.0",
     "9.0",
     "8.0"
@@ -19,11 +20,11 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/06/index.json"
     },
-    "prev": {
+    "prev-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/index.json",
       "title": "Previous month - May 2025"
     },
-    "prev-security": {
+    "prev-security-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/index.json",
       "title": "Previous security month - May 2025"
     },
@@ -53,14 +54,13 @@
         "year": "2025",
         "month": "06",
         "security": false,
-        "cve_count": 0,
         "support_phase": "preview",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.5.25277.114/index.json"
           }
         },
-        "release": "10.0",
+        "major_release": "10.0",
         "sdk_version": "10.0.100-preview.5.25277.114"
       },
       {
@@ -69,17 +69,13 @@
         "year": "2025",
         "month": "06",
         "security": true,
-        "cve_count": 1,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.6/index.json"
           }
         },
-        "release": "9.0",
-        "cve_records": [
-          "CVE-2025-30399"
-        ],
+        "major_release": "9.0",
         "sdk_version": "9.0.301"
       },
       {
@@ -88,17 +84,13 @@
         "year": "2025",
         "month": "06",
         "security": true,
-        "cve_count": 1,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.17/index.json"
           }
         },
-        "release": "8.0",
-        "cve_records": [
-          "CVE-2025-30399"
-        ],
+        "major_release": "8.0",
         "sdk_version": "8.0.411"
       }
     ],
@@ -111,28 +103,6 @@
             "href": "https://github.com/dotnet/announcements/issues/362"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/214743ee2a5a25b9a3a07e3f0451da73eb4e97e2.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/9.0",
-            "title": "Fix commit in runtime (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.0",
-            "max_vulnerable": "9.0.5",
-            "fixed": "9.0.6"
-          },
-          {
-            "href": "https://github.com/dotnet/runtime/commit/b33d4e34e1cbf993583d78fc1b64ea8400935978.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.16",
-            "fixed": "8.0.17"
-          }
-        ],
         "cvss_score": 7.5,
         "cvss_severity": "HIGH",
         "disclosure_date": "2025-06-10",
