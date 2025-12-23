@@ -1,0 +1,163 @@
+{
+  "kind": "workflows",
+  "title": "Cross-cutting Workflows",
+  "schema_version": "1.0",
+  "skill": "dotnet-releases",
+  "ai_note": "Cross-cutting navigation paths that span multiple domains. Read required_pre_read for behavioral guidance.",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/_workflows.json"
+    },
+    "skill": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md",
+      "title": "Behavioral guidance for .NET release queries"
+    }
+  },
+  "_embedded": {
+    "workflows": {
+      "latest-cve-disclosures": {
+        "description": "CVE disclosures from the most recent security release (use latest-cve-json for full details)",
+        "follow_path": ["kind:llms", "latest-security-month"],
+        "destination_kind": "month",
+        "select_embedded": ["disclosures"],
+        "yields": "json",
+        "query_hints": [
+          "What CVEs were fixed recently?",
+          "Latest security patches?",
+          "Recent .NET vulnerabilities?"
+        ],
+        "keywords": ["cve", "security", "vulnerability", "recent", "latest"],
+        "intent": "security-audit"
+      },
+      "cves-by-month": {
+        "description": "CVEs from a specific month (e.g., October 2024)",
+        "follow_path": ["kind:llms", "timeline", "{year}", "{month}"],
+        "destination_kind": "month",
+        "select_embedded": ["disclosures"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "CVEs from October 2024?",
+          "What vulnerabilities were fixed in March 2025?",
+          "Security patches from last month?"
+        ],
+        "keywords": ["month", "date", "specific", "when"],
+        "intent": "security-audit"
+      },
+      "latest-cve-details": {
+        "description": "Full CVE details (CVSS vectors, CWE, packages) via latest-cve-json shortcut",
+        "follow_path": ["kind:llms", "latest-cve-json"],
+        "destination_kind": "cve",
+        "yields": "json",
+        "query_hints": [
+          "Full details on latest CVEs?",
+          "CVSS vectors for recent vulnerabilities?",
+          "Which packages are affected by recent CVEs?"
+        ],
+        "keywords": ["cvss", "cwe", "packages", "details", "vectors"],
+        "intent": "security-audit",
+        "_links": {
+          "cve-json-workflows": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-schema/workflows.json",
+            "title": "CVE schema interpretation and field definitions"
+          }
+        }
+      },
+      "whats-new-{component}": {
+        "description": "What's new documentation for a specific component (runtime, sdk, libraries)",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "whats-new-{component}"],
+        "destination_kind": "markdown",
+        "yields": "markdown",
+        "templated": true,
+        "query_hints": [
+          "What's new in .NET runtime?",
+          "What's new in .NET SDK?",
+          "What's new in .NET libraries?"
+        ],
+        "keywords": ["whats-new", "features", "improvements", "changes"],
+        "intent": "release-discovery"
+      },
+      "{component}-download": {
+        "description": "Download URL for the latest release of a specific component (runtime, sdk, libraries)",
+        "follow_path": ["kind:llms", "latest-major", "downloads", "{component}"],
+        "destination_kind": "downloads",
+        "yields": "json",
+        "templated": true,
+        "query_hints": [
+          "Where can I download .NET SDK?",
+          "Get .NET 10 SDK",
+          "SDK tarball URL for Linux"
+        ],
+        "keywords": ["download", "sdk", "install", "tarball", "runtime", "ASP.NET Core"],
+        "intent": "installation"
+      },
+      "breaking-changes": {
+        "description": "Breaking changes for upgrade planning, filterable by impact level",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
+        "destination_kind": "compatibility",
+        "yields": "json",
+        "query_hints": [
+          "What are the breaking changes in .NET 10?",
+          "High-impact breaking changes?",
+          "What will break when I upgrade?",
+          "Migration guidance for .NET upgrade"
+        ],
+        "keywords": ["breaking", "compatibility", "upgrade", "migration", "impact"],
+        "intent": "upgrade-planning",
+        "_links": {
+          "compatibility-workflows": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/workflows.json",
+            "title": "Breaking changes schema and filtering workflows"
+          }
+        }
+      },
+      "eol-date": {
+        "description": "End-of-life date for a .NET version (including EOL versions not in latest_patches)",
+        "follow_path": ["kind:llms", "root", "{version}"],
+        "destination_kind": "major",
+        "select_property": ["eol_date", "supported"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "When did .NET 6 go EOL?",
+          "When does .NET 8 end support?",
+          "Is .NET 7 still supported?"
+        ],
+        "keywords": ["eol", "end-of-life", "support", "expiry", "deprecated"],
+        "intent": "support-status"
+      },
+      "version-security-cves": {
+        "description": "CVEs fixed in the last security patch for any .NET version (including EOL)",
+        "follow_path": ["kind:llms", "root", "{version}", "latest-cve-json"],
+        "destination_kind": "cve",
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "What CVEs did .NET 6 last security patch fix?",
+          "CVEs fixed in final .NET 7 update?",
+          "Security vulnerabilities patched in .NET 8?"
+        ],
+        "keywords": ["cve", "security", "version", "patch", "fixed"],
+        "intent": "security-audit"
+      },
+      "version-eol-summary": {
+        "description": "Complete EOL summary: EOL date, last security patch, and CVEs fixed (combines eol-date + version-security-cves)",
+        "follow_path": ["kind:llms", "root", "{version}"],
+        "destination_kind": "major",
+        "select_property": ["eol_date", "supported"],
+        "then_follow": ["latest-security"],
+        "select_from_destination": ["version", "date", "cve_records"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "When did .NET 6 go EOL and what CVEs were in the last patch?",
+          "Full EOL details for .NET 7?",
+          ".NET 5 end of life summary?"
+        ],
+        "keywords": ["eol", "summary", "complete", "cve", "last", "patch"],
+        "intent": "support-status"
+      }
+    }
+  }
+}
