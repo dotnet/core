@@ -8,13 +8,13 @@ workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-n
 
 ## Stop Criteria
 
-**For supported versions:** STOP at `llms.json`. All data is in `_embedded.latest_patches[]`.
+**For supported versions:** STOP at `llms.json`. All data is in `_embedded.patches` (keyed by version).
 
 **For EOL versions:** STOP at the version index (e.g., `6.0/index.json`). It has `eol_date` and links to last security patch.
 
 ## Quick Answers (from llms.json)
 
-For supported versions, answer directly from `_embedded.latest_patches[]`:
+For supported versions, answer directly from `_embedded.patches["X.0"]`:
 
 - When does .NET X go EOL? → `eol_date`
 - Is .NET X LTS or STS? → `release_type`
@@ -28,7 +28,7 @@ For supported versions, answer directly from `_embedded.latest_patches[]`:
 
 ## Supported Versions (1 fetch)
 
-`llms.json` → `_embedded.latest_patches[]` contains all supported versions:
+`llms.json` → `_embedded.patches` is a dictionary keyed by version (e.g., `"8.0"`, `"9.0"`):
 
 | Field | Description |
 |-------|-------------|
@@ -56,7 +56,7 @@ llms.json
                             ▼
                         6.0/index.json ─► eol_date, latest patch
                             │
-                            └─► _links["latest-security"]
+                            └─► _links["latest-security-patch"]
                                     │
                                     ▼
                                 6.0.35/index.json ─► last security CVEs
@@ -67,13 +67,13 @@ llms.json
 ### When does .NET X go EOL? (1 fetch if supported)
 
 1. Fetch `llms.json`
-2. Find `_embedded.latest_patches[]` where `release == "X.0"`
+2. Access `_embedded.patches["X.0"]`
 3. Read `eol_date`
 
 ### What versions are currently supported? (1 fetch)
 
 1. Fetch `llms.json`
-2. All entries in `_embedded.latest_patches[]` are supported
+2. All entries in `_embedded.patches` are supported
 
 ### When did .NET 6 go EOL? (3 fetches)
 
@@ -86,7 +86,7 @@ llms.json
 ### Last security patch for EOL version (4-5 fetches)
 
 Continue from above:
-6. Follow `_links["latest-security"]` → patch index
+6. Follow `_links["latest-security-patch"]` → patch index
 7. Read `_embedded.disclosures[]` for CVEs fixed
 
 ## Release Types
@@ -109,7 +109,7 @@ Continue from above:
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Navigating to `root` for supported versions | Wastes fetches—`llms.json._embedded.latest_patches[]` has this data |
+| Navigating to `root` for supported versions | Wastes fetches—`llms.json._embedded.patches` has this data |
 | Looking for EOL data in `llms.json` | Only supported versions are embedded—use `root` for EOL |
 | Fetching version index for just EOL date | `root._embedded.releases[]` already has `eol_date` |
 
