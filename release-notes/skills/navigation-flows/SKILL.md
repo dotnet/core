@@ -22,14 +22,14 @@ description: Multi-hop query patterns and visual navigation maps through the rel
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► DONE (version, EOL, support)
+    └─► _embedded.patches["X.0"] ─► DONE (version, EOL, support)
             │
             ├─► _links.manifest ─► manifest.json
             │       ├─► compatibility ─► breaking changes
             │       ├─► supported-os ─► distros
             │       └─► os-packages ─► packages
             │
-            └─► _links.latest-security ─► last security patch
+            └─► _links.latest-security-patch ─► last security patch
 ```
 
 ## Flow 2: CVE Queries (2-N fetches)
@@ -55,7 +55,7 @@ llms.json
                     │
                     └─► _links.self ─► 6.0/index.json ─► DONE
                             │
-                            └─► _links.latest-security ─► last patch
+                            └─► _links.latest-security-patch ─► last patch
 ```
 
 ## Flow 4: Specific Patch (2-3 fetches)
@@ -65,12 +65,12 @@ llms.json
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► _links.major-shortcut
+    └─► _embedded.patches["9.0"] ─► _links.major
             │
             ▼
         9.0/index.json
             │
-            └─► _embedded.patches[] ─► find version "9.0.10"
+            └─► _embedded.patches["9.0.10"] ─► find version
                     │
                     └─► _links.self ─► 9.0/9.0.10/index.json ─► DONE
                             │
@@ -84,10 +84,10 @@ From llms.json:
   latest-security-month ──► timeline month (CVE details)
   root ──────────► full version list (including EOL)
 
-From latest_patches[]:
-  major-shortcut ──────────► X.0/index.json (patches, timeline)
+From patches["X.0"]:
+  major ─────────────────────► X.0/index.json (patches, timeline)
   manifest ────────────────► manifest.json (reference data)
-  latest-security ─────────► last security patch
+  latest-security-month ───► last security month
 
 From manifest.json:
   compatibility ───────────► breaking changes
