@@ -2,68 +2,20 @@
   "kind": "workflows",
   "title": "Cross-cutting Workflows",
   "schema_version": "1.0",
-  "skill": "dotnet-releases",
+  "skill": "workflows",
   "ai_note": "Cross-cutting navigation paths that span multiple domains. Read required_pre_read for behavioral guidance.",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/workflows/SKILL.md",
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/_workflows.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/_workflows.json"
     },
     "skill": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md",
-      "title": "Behavioral guidance for .NET release queries"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/workflows/SKILL.md",
+      "title": "How to execute workflows and interpret results"
     }
   },
   "_embedded": {
     "workflows": {
-      "latest-cve-disclosures": {
-        "description": "CVE disclosures from the most recent security release (use latest-cve-json for full details)",
-        "follow_path": ["kind:llms", "latest-security-month"],
-        "destination_kind": "month",
-        "select_embedded": ["disclosures"],
-        "yields": "json",
-        "query_hints": [
-          "What CVEs were fixed recently?",
-          "Latest security patches?",
-          "Recent .NET vulnerabilities?"
-        ],
-        "keywords": ["cve", "security", "vulnerability", "recent", "latest"],
-        "intent": "security-audit"
-      },
-      "cves-by-month": {
-        "description": "CVEs from a specific month (e.g., October 2024)",
-        "follow_path": ["kind:llms", "timeline", "{year}", "{month}"],
-        "destination_kind": "month",
-        "select_embedded": ["disclosures"],
-        "templated": true,
-        "yields": "json",
-        "query_hints": [
-          "CVEs from October 2024?",
-          "What vulnerabilities were fixed in March 2025?",
-          "Security patches from last month?"
-        ],
-        "keywords": ["month", "date", "specific", "when"],
-        "intent": "security-audit"
-      },
-      "latest-cve-details": {
-        "description": "Full CVE details (CVSS vectors, CWE, packages) via latest-cve-json shortcut",
-        "follow_path": ["kind:llms", "latest-cve-json"],
-        "destination_kind": "cve",
-        "yields": "json",
-        "query_hints": [
-          "Full details on latest CVEs?",
-          "CVSS vectors for recent vulnerabilities?",
-          "Which packages are affected by recent CVEs?"
-        ],
-        "keywords": ["cvss", "cwe", "packages", "details", "vectors"],
-        "intent": "security-audit",
-        "_links": {
-          "cve-json-workflows": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-schema/workflows.json",
-            "title": "CVE schema interpretation and field definitions"
-          }
-        }
-      },
       "whats-new-{component}": {
         "description": "What's new documentation for a specific component (runtime, sdk, libraries)",
         "follow_path": ["kind:llms", "latest-major", "manifest", "whats-new-{component}"],
@@ -104,9 +56,12 @@
           "Migration guidance for .NET upgrade"
         ],
         "keywords": ["breaking", "compatibility", "upgrade", "migration", "impact"],
-        "intent": "upgrade-planning",
+        "intent": "upgrade-planning"
+      },
+      "read_compatibility_json": {
+        "description": "How to interpret compatibility.json documents: impact levels, filtering by category, and upgrade planning strategies",
         "_links": {
-          "compatibility-workflows": {
+          "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/workflows.json",
             "title": "Breaking changes schema and filtering workflows"
           }
@@ -126,6 +81,57 @@
         ],
         "keywords": ["eol", "end-of-life", "support", "expiry", "deprecated"],
         "intent": "support-status"
+      },
+      "latest-cve-disclosures": {
+        "description": "CVE disclosures from the most recent security release (use latest-cve-json for full details)",
+        "follow_path": ["kind:llms", "latest-security-month"],
+        "destination_kind": "month",
+        "select_embedded": ["disclosures"],
+        "yields": "json",
+        "query_hints": [
+          "What CVEs were fixed recently?",
+          "Latest security patches?",
+          "Recent .NET vulnerabilities?"
+        ],
+        "keywords": ["cve", "security", "vulnerability", "recent", "latest"],
+        "intent": "security-audit"
+      },
+      "cves-by-month": {
+        "description": "CVEs from a specific month (e.g., October 2024)",
+        "follow_path": ["kind:llms", "timeline", "{year}", "{month}"],
+        "destination_kind": "month",
+        "select_embedded": ["disclosures"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "CVEs from October 2024?",
+          "What vulnerabilities were fixed in March 2025?",
+          "Security patches from last month?"
+        ],
+        "keywords": ["month", "date", "specific", "when"],
+        "intent": "security-audit"
+      },
+      "latest-cve-details": {
+        "description": "Full CVE details (CVSS vectors, CWE, packages) via latest-cve-json shortcut",
+        "follow_path": ["kind:llms", "latest-cve-json"],
+        "destination_kind": "cve",
+        "yields": "json",
+        "query_hints": [
+          "Full details on latest CVEs?",
+          "CVSS vectors for recent vulnerabilities?",
+          "Which packages are affected by recent CVEs?"
+        ],
+        "keywords": ["cvss", "cwe", "packages", "details", "vectors"],
+        "intent": "security-audit"
+      },
+      "read_cve_json": {
+        "description": "How to interpret cve.json documents: field definitions, CVSS vectors, severity filtering, and affected package analysis",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-schema/workflows.json",
+            "title": "CVE schema interpretation and field definitions"
+          }
+        }
       },
       "version-security-cves": {
         "description": "CVEs fixed in the last security patch for any .NET version (including EOL)",
