@@ -12,10 +12,6 @@
     "CVE-2024-43498",
     "CVE-2024-43499"
   ],
-  "major_releases": [
-    "8.0",
-    "6.0"
-  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/11/index.json"
@@ -47,8 +43,8 @@
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "8.0": {
         "version": "8.0.11",
         "date": "2024-11-12T00:00:00\u002B00:00",
         "year": "2024",
@@ -60,10 +56,9 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.11/index.json"
           }
         },
-        "major_release": "8.0",
         "sdk_version": "8.0.404"
       },
-      {
+      "6.0": {
         "version": "6.0.36",
         "date": "2024-11-12T00:00:00\u002B00:00",
         "year": "2024",
@@ -75,10 +70,9 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.36/index.json"
           }
         },
-        "major_release": "6.0",
         "sdk_version": "6.0.428"
       }
-    ],
+    },
     "disclosures": [
       {
         "id": "CVE-2024-43498",

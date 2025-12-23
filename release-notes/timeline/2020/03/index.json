@@ -7,11 +7,6 @@
   "date": "2020-03-24T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2020-02-18T00:00:00\u002B00:00",
-  "major_releases": [
-    "5.0",
-    "3.1",
-    "2.1"
-  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/03/index.json"
@@ -34,8 +29,8 @@
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "5.0": {
         "version": "5.0.0-preview.1.20120.5",
         "date": "2020-03-24T00:00:00\u002B00:00",
         "year": "2020",
@@ -47,10 +42,9 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/5.0/5.0.0-preview.1.20120.5/index.json"
           }
         },
-        "major_release": "5.0",
         "sdk_version": "5.0.100-preview.1.20155.7"
       },
-      {
+      "3.1": {
         "version": "3.1.3",
         "date": "2020-03-24T00:00:00\u002B00:00",
         "year": "2020",
@@ -62,25 +56,9 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.3/index.json"
           }
         },
-        "major_release": "3.1",
         "sdk_version": "3.1.201"
       },
-      {
-        "version": "3.1.2",
-        "date": "2020-03-16T00:00:00\u002B00:00",
-        "year": "2020",
-        "month": "03",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.2/index.json"
-          }
-        },
-        "major_release": "3.1",
-        "sdk_version": "3.1.200"
-      },
-      {
+      "2.1": {
         "version": "2.1.17",
         "date": "2020-03-24T00:00:00\u002B00:00",
         "year": "2020",
@@ -92,9 +70,8 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.17/index.json"
           }
         },
-        "major_release": "2.1",
         "sdk_version": "2.1.805"
       }
-    ]
+    }
   }
 }

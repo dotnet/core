@@ -7,10 +7,6 @@
   "date": "2017-03-07T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2016-12-13T00:00:00\u002B00:00",
-  "major_releases": [
-    "1.1",
-    "1.0"
-  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2017/03/index.json"
@@ -33,8 +29,8 @@
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "1.1": {
         "version": "1.1.1",
         "date": "2017-03-07T00:00:00\u002B00:00",
         "year": "2017",
@@ -45,10 +41,9 @@
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.1/1.1.1/index.json"
           }
-        },
-        "major_release": "1.1"
+        }
       },
-      {
+      "1.0": {
         "version": "1.0.4",
         "date": "2017-03-07T00:00:00\u002B00:00",
         "year": "2017",
@@ -59,9 +54,8 @@
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/1.0.4/index.json"
           }
-        },
-        "major_release": "1.0"
+        }
       }
-    ]
+    }
   }
 }
