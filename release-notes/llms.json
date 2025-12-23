@@ -112,14 +112,16 @@
       "follow_path": [
         "root",
         "{version}",
-        "latest-cve-json"
+        "latest-security-patch"
       ],
-      "destination_kind": "cve",
+      "destination_kind": "month",
+      "select_embedded": [
+        "disclosures"
+      ],
       "yields": "json",
       "templated": true,
       "query_hints": [
-        "What CVEs did .NET 6 last security patch fix?",
-        "CVEs fixed in final .NET 7 update?",
+        "What CVEs did .NET 8 last security patch fix?",
         "Security vulnerabilities patched in .NET 8?"
       ]
     },
