@@ -67,21 +67,6 @@
           }
         }
       },
-      "eol-date": {
-        "description": "End-of-life date for a .NET version (including EOL versions not in latest_patches)",
-        "follow_path": ["kind:llms", "root", "{version}"],
-        "destination_kind": "major",
-        "select_property": ["eol_date", "supported"],
-        "templated": true,
-        "yields": "json",
-        "query_hints": [
-          "When did .NET 6 go EOL?",
-          "When does .NET 8 end support?",
-          "Is .NET 7 still supported?"
-        ],
-        "keywords": ["eol", "end-of-life", "support", "expiry", "deprecated"],
-        "intent": "support-status"
-      },
       "latest-cve-disclosures": {
         "description": "CVE disclosures from the most recent security release (use latest-cve-json for full details)",
         "follow_path": ["kind:llms", "latest-security-month"],
@@ -111,6 +96,20 @@
         "keywords": ["month", "date", "specific", "when"],
         "intent": "security-audit"
       },
+      "cves-by-version": {
+        "description": "CVEs fixed in the last security patch for any .NET version (including EOL)",
+        "follow_path": ["kind:llms", "root", "{version}", "latest-cve-json"],
+        "destination_kind": "cve",
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "What CVEs did .NET 6 last security patch fix?",
+          "CVEs fixed in final .NET 7 update?",
+          "Security vulnerabilities patched in .NET 8?"
+        ],
+        "keywords": ["cve", "security", "version", "patch", "fixed"],
+        "intent": "security-audit"
+      },
       "latest-cve-details": {
         "description": "Full CVE details (CVSS vectors, CWE, packages) via latest-cve-json shortcut",
         "follow_path": ["kind:llms", "latest-cve-json"],
@@ -133,35 +132,19 @@
           }
         }
       },
-      "version-security-cves": {
-        "description": "CVEs fixed in the last security patch for any .NET version (including EOL)",
-        "follow_path": ["kind:llms", "root", "{version}", "latest-cve-json"],
-        "destination_kind": "cve",
-        "templated": true,
-        "yields": "json",
-        "query_hints": [
-          "What CVEs did .NET 6 last security patch fix?",
-          "CVEs fixed in final .NET 7 update?",
-          "Security vulnerabilities patched in .NET 8?"
-        ],
-        "keywords": ["cve", "security", "version", "patch", "fixed"],
-        "intent": "security-audit"
-      },
-      "version-eol-summary": {
-        "description": "Complete EOL summary: EOL date, last security patch, and CVEs fixed (combines eol-date + version-security-cves)",
+      "eol-date": {
+        "description": "End-of-life date for a .NET version (including EOL versions not in latest_patches)",
         "follow_path": ["kind:llms", "root", "{version}"],
         "destination_kind": "major",
         "select_property": ["eol_date", "supported"],
-        "then_follow": ["latest-security"],
-        "select_from_destination": ["version", "date", "cve_records"],
         "templated": true,
         "yields": "json",
         "query_hints": [
-          "When did .NET 6 go EOL and what CVEs were in the last patch?",
-          "Full EOL details for .NET 7?",
-          ".NET 5 end of life summary?"
+          "When did .NET 6 go EOL?",
+          "When does .NET 8 end support?",
+          "Is .NET 7 still supported?"
         ],
-        "keywords": ["eol", "summary", "complete", "cve", "last", "patch"],
+        "keywords": ["eol", "end-of-life", "support", "expiry", "deprecated"],
         "intent": "support-status"
       }
     }
