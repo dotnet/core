@@ -1,0 +1,93 @@
+{
+  "kind": "workflows",
+  "title": "Breaking Changes Workflows",
+  "schema_version": "1.0",
+  "skill": "breaking-changes",
+  "ai_note": "Navigation paths for breaking changes and migration queries. Read required_pre_read for stop criteria, filtering, and interpretation.",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/SKILL.md",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/workflows.json"
+    },
+    "skill": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/SKILL.md"
+    },
+    "root-workflows": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json"
+    }
+  },
+  "_embedded": {
+    "workflows": {
+      "breaking-changes-all": {
+        "description": "All breaking changes for a .NET version",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
+        "destination_kind": "compatibility",
+        "yields": "json",
+        "query_hints": [
+          "What are the breaking changes in .NET 10?",
+          "List all breaking changes for .NET 9",
+          "What changed between .NET versions?"
+        ],
+        "keywords": ["breaking", "changes", "compatibility", "all"],
+        "intent": "upgrade-planning"
+      },
+      "breaking-changes-high-impact": {
+        "description": "High-impact breaking changes requiring immediate attention",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
+        "destination_kind": "compatibility",
+        "filter": "$.breaks[?(@.impact == 'high')]",
+        "yields": "json",
+        "query_hints": [
+          "High-impact breaking changes?",
+          "Critical breaking changes for upgrade?",
+          "What will definitely break?"
+        ],
+        "keywords": ["high", "impact", "critical", "breaking"],
+        "intent": "upgrade-planning"
+      },
+      "breaking-changes-by-category": {
+        "description": "Breaking changes filtered by category (aspnet-core, sdk, core-libraries, etc.)",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
+        "destination_kind": "compatibility",
+        "filter": "$.breaks[?(@.category == '{category}')]",
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "ASP.NET Core breaking changes?",
+          "SDK breaking changes?",
+          "What changed in core libraries?"
+        ],
+        "keywords": ["category", "aspnet", "sdk", "libraries", "wpf", "winforms"],
+        "intent": "upgrade-planning"
+      },
+      "migration-guidance": {
+        "description": "Detailed migration documentation for a specific breaking change",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
+        "destination_kind": "compatibility",
+        "select_property": ["breaks"],
+        "then_follow": "references[?(@.type == 'documentation')].url",
+        "yields": "markdown",
+        "query_hints": [
+          "How do I fix WebHostBuilder deprecation?",
+          "Migration steps for this breaking change?",
+          "Show me the recommended action"
+        ],
+        "keywords": ["migration", "fix", "how", "recommended", "action"],
+        "intent": "code-migration"
+      },
+      "target-frameworks": {
+        "description": "Target framework monikers (TFMs) for a .NET version",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "target-frameworks"],
+        "destination_kind": "target-frameworks",
+        "yields": "json",
+        "query_hints": [
+          "What TFMs does .NET 10 support?",
+          "Target frameworks for MAUI?",
+          "What's the Android TFM for .NET 10?"
+        ],
+        "keywords": ["tfm", "target", "framework", "moniker", "maui", "android", "ios"],
+        "intent": "project-configuration"
+      }
+    }
+  }
+}

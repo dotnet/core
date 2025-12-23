@@ -6,11 +6,12 @@
   "date": "2024-03-12T00:00:00\u002B00:00",
   "support_phase": "active",
   "security": true,
-  "cve_count": 2,
   "cve_records": [
     "CVE-2024-21392",
     "CVE-2024-26190"
   ],
+  "prev_patch_date": "2024-02-13T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2024-02-13T00:00:00\u002B00:00",
   "sdk_version": "8.0.203",
   "sdk_feature_bands": [
     "8.0.203",
@@ -21,17 +22,17 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.2/index.json",
       "title": "Previous patch release - 8.0.2"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.2/index.json",
       "title": "Previous security patch release - 8.0.2"
     },
-    "latest-sdk": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
-      "title": "Latest SDK - .NET 8.0"
+    "downloads": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/downloads/index.json",
+      "title": "Downloads - .NET 8.0"
     },
     "major": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
@@ -41,7 +42,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/manifest.json",
       "title": "Manifest - .NET 8.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json",
       "title": ".NET Month Timeline Index - March 2024"
     },
@@ -128,76 +129,6 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.3/index.json"
           }
         }
-      }
-    ],
-    "disclosures": [
-      {
-        "id": "CVE-2024-21392",
-        "title": ".NET Denial of Service Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/299"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/0c7efec09666babeebea1f608c91757b8faccca0.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.2",
-            "fixed": "8.0.3"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-03-12",
-        "affected_releases": [
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2024-26190",
-        "title": "Microsoft QUIC Denial of Service Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/300"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/ddb41ec46ddc558be2f43135a1daa01ebac8e841.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.2",
-            "fixed": "8.0.3"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-03-12",
-        "affected_releases": [
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "windows"
-        ]
       }
     ]
   }

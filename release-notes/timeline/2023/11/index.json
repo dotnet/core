@@ -6,13 +6,13 @@
   "month": "11",
   "date": "2023-11-14T00:00:00\u002B00:00",
   "security": true,
-  "cve_count": 3,
+  "prev_month_date": "2023-10-24T00:00:00\u002B00:00",
   "cve_records": [
     "CVE-2023-36038",
     "CVE-2023-36049",
     "CVE-2023-36558"
   ],
-  "releases": [
+  "major_releases": [
     "8.0",
     "7.0",
     "6.0"
@@ -21,7 +21,7 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/index.json"
     },
-    "prev": {
+    "prev-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/10/index.json",
       "title": "Previous month - October 2023"
     },
@@ -51,19 +51,13 @@
         "year": "2023",
         "month": "11",
         "security": true,
-        "cve_count": 3,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/index.json"
           }
         },
-        "release": "8.0",
-        "cve_records": [
-          "CVE-2023-36038",
-          "CVE-2023-36049",
-          "CVE-2023-36558"
-        ],
+        "major_release": "8.0",
         "sdk_version": "8.0.100"
       },
       {
@@ -72,18 +66,13 @@
         "year": "2023",
         "month": "11",
         "security": true,
-        "cve_count": 2,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.14/index.json"
           }
         },
-        "release": "7.0",
-        "cve_records": [
-          "CVE-2023-36049",
-          "CVE-2023-36558"
-        ],
+        "major_release": "7.0",
         "sdk_version": "7.0.404"
       },
       {
@@ -92,18 +81,13 @@
         "year": "2023",
         "month": "11",
         "security": true,
-        "cve_count": 2,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.25/index.json"
           }
         },
-        "release": "6.0",
-        "cve_records": [
-          "CVE-2023-36049",
-          "CVE-2023-36558"
-        ],
+        "major_release": "6.0",
         "sdk_version": "6.0.417"
       }
     ],
@@ -116,18 +100,6 @@
             "href": "https://github.com/dotnet/announcements/issues/286"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/5536e61a3d7b77667f9544b45c5270a73905154d.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0-rc.2",
-            "max_vulnerable": "8.0-rc.2",
-            "fixed": "8.0.0"
-          }
-        ],
         "cvss_score": 8.2,
         "cvss_severity": "HIGH",
         "disclosure_date": "2023-11-14",
@@ -149,38 +121,6 @@
             "href": "https://github.com/dotnet/announcements/issues/287"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/4796219f6bc0d09dafd21708c2d503279890da5d.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0-rc.2",
-            "max_vulnerable": "8.0-rc.2",
-            "fixed": "8.0.0"
-          },
-          {
-            "href": "https://github.com/dotnet/runtime/commit/8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/7.0",
-            "title": "Fix commit in runtime (release/7.0)",
-            "release": "7.0",
-            "min_vulnerable": "7.0.0",
-            "max_vulnerable": "7.0.13",
-            "fixed": "7.0.14"
-          },
-          {
-            "href": "https://github.com/dotnet/runtime/commit/9865d1c190bce3aa18cb9d8c82bfcb2857bdfe5d.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.24",
-            "fixed": "6.0.25"
-          }
-        ],
         "cvss_score": 7.6,
         "cvss_severity": "HIGH",
         "disclosure_date": "2023-11-14",
@@ -204,38 +144,6 @@
             "href": "https://github.com/dotnet/announcements/issues/288"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/416da79a1244c311e573db468a58c08d1e50e809.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0-rc.2",
-            "max_vulnerable": "8.0-rc.2",
-            "fixed": "8.0.0"
-          },
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/9ec7bd0ebb9dbd8e250e2f1a342758a575d63da1.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/6.0",
-            "title": "Fix commit in aspnetcore (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.24",
-            "fixed": "6.0.25"
-          },
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/b056b7af6535c39c5464aff05d6202d807de8af2.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/7.0",
-            "title": "Fix commit in aspnetcore (release/7.0)",
-            "release": "7.0",
-            "min_vulnerable": "7.0.0",
-            "max_vulnerable": "7.0.13",
-            "fixed": "7.0.14"
-          }
-        ],
         "cvss_score": 6.2,
         "cvss_severity": "MEDIUM",
         "disclosure_date": "2023-11-14",

@@ -6,12 +6,13 @@
   "month": "05",
   "date": "2024-05-28T00:00:00\u002B00:00",
   "security": true,
-  "cve_count": 2,
+  "prev_month_date": "2024-04-11T00:00:00\u002B00:00",
+  "prev_security_month_date": "2024-04-11T00:00:00\u002B00:00",
   "cve_records": [
     "CVE-2024-30045",
     "CVE-2024-30046"
   ],
-  "releases": [
+  "major_releases": [
     "9.0",
     "8.0",
     "7.0",
@@ -21,11 +22,11 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/05/index.json"
     },
-    "prev": {
+    "prev-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/04/index.json",
       "title": "Previous month - April 2024"
     },
-    "prev-security": {
+    "prev-security-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/04/index.json",
       "title": "Previous security month - April 2024"
     },
@@ -55,14 +56,13 @@
         "year": "2024",
         "month": "05",
         "security": false,
-        "cve_count": 0,
         "support_phase": "preview",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.4.24266.19/index.json"
           }
         },
-        "release": "9.0",
+        "major_release": "9.0",
         "sdk_version": "9.0.100-preview.4.24267.66"
       },
       {
@@ -71,18 +71,13 @@
         "year": "2024",
         "month": "05",
         "security": true,
-        "cve_count": 2,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.5/index.json"
           }
         },
-        "release": "8.0",
-        "cve_records": [
-          "CVE-2024-30045",
-          "CVE-2024-30046"
-        ],
+        "major_release": "8.0",
         "sdk_version": "8.0.300"
       },
       {
@@ -91,18 +86,13 @@
         "year": "2024",
         "month": "05",
         "security": true,
-        "cve_count": 2,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.20/index.json"
           }
         },
-        "release": "7.0",
-        "cve_records": [
-          "CVE-2024-30045",
-          "CVE-2024-30046"
-        ],
+        "major_release": "7.0",
         "sdk_version": "7.0.410"
       },
       {
@@ -111,18 +101,13 @@
         "year": "2024",
         "month": "05",
         "security": true,
-        "cve_count": 2,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.19/index.json"
           }
         },
-        "release": "7.0",
-        "cve_records": [
-          "CVE-2024-30045",
-          "CVE-2024-30046"
-        ],
+        "major_release": "7.0",
         "sdk_version": "7.0.409"
       },
       {
@@ -131,14 +116,13 @@
         "year": "2024",
         "month": "05",
         "security": false,
-        "cve_count": 0,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.31/index.json"
           }
         },
-        "release": "6.0",
+        "major_release": "6.0",
         "sdk_version": "6.0.423"
       },
       {
@@ -147,14 +131,13 @@
         "year": "2024",
         "month": "05",
         "security": false,
-        "cve_count": 0,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.30/index.json"
           }
         },
-        "release": "6.0",
+        "major_release": "6.0",
         "sdk_version": "6.0.422"
       }
     ],
@@ -167,28 +150,6 @@
             "href": "https://github.com/dotnet/announcements/issues/307"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/173b4b8a96434a3eedaabca529a2083b16d616f3.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.4",
-            "fixed": "8.0.5"
-          },
-          {
-            "href": "https://github.com/dotnet/runtime/commit/b9c54e25b11aa3e750c20cbef06774eb75ff3da6.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/7.0",
-            "title": "Fix commit in runtime (release/7.0)",
-            "release": "7.0",
-            "min_vulnerable": "7.0.0",
-            "max_vulnerable": "7.0.18",
-            "fixed": "7.0.19"
-          }
-        ],
         "cvss_score": 6.3,
         "cvss_severity": "MEDIUM",
         "disclosure_date": "2024-05-14",
@@ -211,28 +172,6 @@
             "href": "https://github.com/dotnet/announcements/issues/308"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/90f892827eb441fc76d7f409334f2df40885dd06.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.4",
-            "fixed": "8.0.5"
-          },
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/9142e56c11f4351961b9d99482a4a6fc29625b8a.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/7.0",
-            "title": "Fix commit in aspnetcore (release/7.0)",
-            "release": "7.0",
-            "min_vulnerable": "7.0.0",
-            "max_vulnerable": "7.0.18",
-            "fixed": "7.0.19"
-          }
-        ],
         "cvss_score": 5.9,
         "cvss_severity": "MEDIUM",
         "disclosure_date": "2024-05-14",

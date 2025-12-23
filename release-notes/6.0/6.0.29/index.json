@@ -6,19 +6,20 @@
   "date": "2024-04-09T00:00:00\u002B00:00",
   "support_phase": "active",
   "security": true,
-  "cve_count": 1,
   "cve_records": [
     "CVE-2024-21409"
   ],
+  "prev_patch_date": "2024-03-12T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2024-02-13T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.29/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.28/index.json",
       "title": "Previous patch release - 6.0.28"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.27/index.json",
       "title": "Previous security patch release - 6.0.27"
     },
@@ -30,7 +31,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.29/manifest.json",
       "title": "Manifest - .NET 6.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/04/index.json",
       "title": ".NET Month Timeline Index - April 2024"
     },
@@ -43,44 +44,5 @@
       "title": "CVE records - April 2024",
       "type": "application/json"
     }
-  },
-  "_embedded": {
-    "disclosures": [
-      {
-        "id": "CVE-2024-21409",
-        "title": ".NET Elevation of Privilege Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/303"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/wpf/commit/46dcf8720a1326a2c3f84b10a3d71ceb954cde70.diff",
-            "repo": "dotnet/wpf",
-            "branch": "release/6.0",
-            "title": "Fix commit in wpf (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.28",
-            "fixed": "6.0.29"
-          }
-        ],
-        "cvss_score": 7.3,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-04-09",
-        "affected_releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "windows"
-        ]
-      }
-    ]
   }
 }

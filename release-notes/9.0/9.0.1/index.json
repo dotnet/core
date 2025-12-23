@@ -6,13 +6,14 @@
   "date": "2025-01-14T00:00:00\u002B00:00",
   "support_phase": "active",
   "security": true,
-  "cve_count": 4,
   "cve_records": [
     "CVE-2025-21171",
     "CVE-2025-21172",
     "CVE-2025-21173",
     "CVE-2025-21176"
   ],
+  "prev_patch_date": "2024-12-03T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2024-12-03T00:00:00\u002B00:00",
   "sdk_version": "9.0.102",
   "sdk_feature_bands": [
     "9.0.102"
@@ -21,17 +22,17 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.1/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0/index.json",
       "title": "Previous patch release - 9.0.0"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0/index.json",
       "title": "Previous security patch release - 9.0.0"
     },
-    "latest-sdk": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
-      "title": "Latest SDK - .NET 9.0"
+    "downloads": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/downloads/index.json",
+      "title": "Downloads - .NET 9.0"
     },
     "major": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
@@ -41,7 +42,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.1/manifest.json",
       "title": "Manifest - .NET 9.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/01/index.json",
       "title": ".NET Month Timeline Index - January 2025"
     },
@@ -92,143 +93,6 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.1/index.json"
           }
         }
-      }
-    ],
-    "disclosures": [
-      {
-        "id": "CVE-2025-21171",
-        "title": ".NET Remote Code Execution Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/340"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/9da8c6a4a6ea03054e776275d3fd5c752897842e.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/9.0",
-            "title": "Fix commit in runtime (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.0",
-            "max_vulnerable": "9.0.0",
-            "fixed": "9.0.1"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2025-01-14",
-        "affected_releases": [
-          "9.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2025-21172",
-        "title": ".NET and Visual Studio Remote Code Execution Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/339"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/32d8ea6eecf7f192a75162645390847b14b56dbb.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/9.0",
-            "title": "Fix commit in runtime (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.0",
-            "max_vulnerable": "9.0.0",
-            "fixed": "9.0.1"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2025-01-14",
-        "affected_releases": [
-          "8.0",
-          "9.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2025-21173",
-        "title": ".NET Elevation of Privilege Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/337"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/sdk/commit/802c364c05180a487624fc839870677625810b10.diff",
-            "repo": "dotnet/sdk",
-            "branch": "release/9.0",
-            "title": "Fix commit in sdk (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.100",
-            "max_vulnerable": "9.0.101",
-            "fixed": "9.0.102"
-          }
-        ],
-        "cvss_score": 7.3,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2025-01-14",
-        "affected_releases": [
-          "8.0",
-          "9.0"
-        ],
-        "affected_products": [
-          "dotnet-sdk"
-        ],
-        "platforms": [
-          "linux"
-        ]
-      },
-      {
-        "id": "CVE-2025-21176",
-        "title": ".NET and Visual Studio Remote Code Execution Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/338"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/32d8ea6eecf7f192a75162645390847b14b56dbb.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/9.0",
-            "title": "Fix commit in runtime (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.0",
-            "max_vulnerable": "9.0.0",
-            "fixed": "9.0.1"
-          }
-        ],
-        "cvss_score": 8.8,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2025-01-14",
-        "affected_releases": [
-          "8.0",
-          "9.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "all"
-        ]
       }
     ]
   }

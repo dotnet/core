@@ -6,11 +6,12 @@
   "date": "2024-01-09T00:00:00\u002B00:00",
   "support_phase": "active",
   "security": true,
-  "cve_count": 2,
   "cve_records": [
     "CVE-2024-0057",
     "CVE-2024-21319"
   ],
+  "prev_patch_date": "2023-11-14T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2023-11-14T00:00:00\u002B00:00",
   "sdk_version": "8.0.101",
   "sdk_feature_bands": [
     "8.0.101"
@@ -19,17 +20,17 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.1/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/index.json",
       "title": "Previous patch release - 8.0.0"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/index.json",
       "title": "Previous security patch release - 8.0.0"
     },
-    "latest-sdk": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/sdk/index.json",
-      "title": "Latest SDK - .NET 8.0"
+    "downloads": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/downloads/index.json",
+      "title": "Downloads - .NET 8.0"
     },
     "major": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json",
@@ -39,7 +40,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.1/manifest.json",
       "title": "Manifest - .NET 8.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/01/index.json",
       "title": ".NET Month Timeline Index - January 2024"
     },
@@ -90,78 +91,6 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.1/index.json"
           }
         }
-      }
-    ],
-    "disclosures": [
-      {
-        "id": "CVE-2024-0057",
-        "title": ".NET Security Feature Bypass Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/291"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/72e5ae975785990e904372573c93dd661279f662.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.0",
-            "fixed": "8.0.1"
-          }
-        ],
-        "cvss_score": 9.1,
-        "cvss_severity": "CRITICAL",
-        "disclosure_date": "2024-01-09",
-        "affected_releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2024-21319",
-        "title": ".NET Denial of Service Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/290"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/8b3f5333523ac4f3a7520c5c9261ac6f2a2b6b23.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.0",
-            "fixed": "8.0.1"
-          }
-        ],
-        "cvss_score": 6.8,
-        "cvss_severity": "MEDIUM",
-        "disclosure_date": "2024-01-09",
-        "affected_releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-aspnetcore"
-        ],
-        "platforms": [
-          "all"
-        ]
       }
     ]
   }

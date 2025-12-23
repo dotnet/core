@@ -6,14 +6,15 @@
   "month": "07",
   "date": "2024-07-09T00:00:00\u002B00:00",
   "security": true,
-  "cve_count": 4,
+  "prev_month_date": "2024-06-11T00:00:00\u002B00:00",
+  "prev_security_month_date": "2024-05-28T00:00:00\u002B00:00",
   "cve_records": [
     "CVE-2024-30105",
     "CVE-2024-35264",
     "CVE-2024-38081",
     "CVE-2024-38095"
   ],
-  "releases": [
+  "major_releases": [
     "9.0",
     "8.0",
     "6.0"
@@ -22,11 +23,11 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/index.json"
     },
-    "prev": {
+    "prev-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/06/index.json",
       "title": "Previous month - June 2024"
     },
-    "prev-security": {
+    "prev-security-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/05/index.json",
       "title": "Previous security month - May 2024"
     },
@@ -56,14 +57,13 @@
         "year": "2024",
         "month": "07",
         "security": false,
-        "cve_count": 0,
         "support_phase": "preview",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.6.24327.7/index.json"
           }
         },
-        "release": "9.0",
+        "major_release": "9.0",
         "sdk_version": "9.0.100-preview.6.24328.19"
       },
       {
@@ -72,19 +72,13 @@
         "year": "2024",
         "month": "07",
         "security": true,
-        "cve_count": 3,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.7/index.json"
           }
         },
-        "release": "8.0",
-        "cve_records": [
-          "CVE-2024-30105",
-          "CVE-2024-35264",
-          "CVE-2024-38095"
-        ],
+        "major_release": "8.0",
         "sdk_version": "8.0.303"
       },
       {
@@ -93,18 +87,13 @@
         "year": "2024",
         "month": "07",
         "security": true,
-        "cve_count": 2,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.32/index.json"
           }
         },
-        "release": "6.0",
-        "cve_records": [
-          "CVE-2024-38081",
-          "CVE-2024-38095"
-        ],
+        "major_release": "6.0",
         "sdk_version": "6.0.424"
       }
     ],
@@ -117,18 +106,6 @@
             "href": "https://github.com/dotnet/announcements/issues/315"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/fa5b0d8f4a8b424732cc992158aa92842f8a2846.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.6",
-            "fixed": "8.0.7"
-          }
-        ],
         "cvss_score": 7.5,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-07-09",
@@ -153,18 +130,6 @@
             "href": "https://github.com/dotnet/announcements/issues/314"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/c5721fb7a65ddc13d1b445c2c08c27b72ab57cdc.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/8.0",
-            "title": "Fix commit in aspnetcore (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.6",
-            "fixed": "8.0.7"
-          }
-        ],
         "cvss_score": 8.1,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-07-09",
@@ -186,18 +151,6 @@
             "href": "https://github.com/dotnet/announcements/issues/313"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/0a0dd0e27560e692e11ee286ed9f45471b2131fa.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.31",
-            "fixed": "6.0.32"
-          }
-        ],
         "cvss_score": 7.3,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-07-09",
@@ -222,28 +175,6 @@
             "href": "https://github.com/dotnet/announcements/issues/312"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/4a8d5a007971d19f389ca17f7b8eb4f9bb199991.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/8.0",
-            "title": "Fix commit in runtime (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.6",
-            "fixed": "8.0.7"
-          },
-          {
-            "href": "https://github.com/dotnet/runtime/commit/979135d5ca4efaf6436ee13539cc3f1e039d570a.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.31",
-            "fixed": "6.0.32"
-          }
-        ],
         "cvss_score": 7.5,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-07-09",

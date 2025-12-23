@@ -6,20 +6,21 @@
   "date": "2024-07-09T00:00:00\u002B00:00",
   "support_phase": "maintenance",
   "security": true,
-  "cve_count": 2,
   "cve_records": [
     "CVE-2024-38081",
     "CVE-2024-38095"
   ],
+  "prev_patch_date": "2024-05-28T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2024-05-28T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.32/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.31/index.json",
       "title": "Previous patch release - 6.0.31"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.31/index.json",
       "title": "Previous security patch release - 6.0.31"
     },
@@ -31,7 +32,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.32/manifest.json",
       "title": "Manifest - .NET 6.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/index.json",
       "title": ".NET Month Timeline Index - July 2024"
     },
@@ -44,79 +45,5 @@
       "title": "CVE records - July 2024",
       "type": "application/json"
     }
-  },
-  "_embedded": {
-    "disclosures": [
-      {
-        "id": "CVE-2024-38081",
-        "title": ".NET Elevation of Privilege Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/313"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/0a0dd0e27560e692e11ee286ed9f45471b2131fa.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.31",
-            "fixed": "6.0.32"
-          }
-        ],
-        "cvss_score": 7.3,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-07-09",
-        "affected_releases": [
-          "6.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "windows"
-        ]
-      },
-      {
-        "id": "CVE-2024-38095",
-        "title": ".NET Denial of Service Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/312"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/979135d5ca4efaf6436ee13539cc3f1e039d570a.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.31",
-            "fixed": "6.0.32"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-07-09",
-        "affected_releases": [
-          "6.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "affected_packages": [
-          "System.Formats.Asn1"
-        ],
-        "platforms": [
-          "all"
-        ]
-      }
-    ]
   }
 }

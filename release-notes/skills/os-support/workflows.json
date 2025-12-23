@@ -1,0 +1,80 @@
+{
+  "kind": "workflows",
+  "title": "OS Support Workflows",
+  "schema_version": "1.0",
+  "skill": "os-support",
+  "ai_note": "Navigation paths for OS package and distro support queries. Read required_pre_read for stop criteria and file selection.",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/os-support/SKILL.md",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/os-support/workflows.json"
+    },
+    "skill": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/os-support/SKILL.md"
+    },
+    "root-workflows": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json"
+    }
+  },
+  "_embedded": {
+    "workflows": {
+      "os-packages": {
+        "description": "Required OS packages for a distro (apt-get, dnf commands)",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "os-packages-json"],
+        "destination_kind": "os-packages",
+        "yields": "json",
+        "query_hints": [
+          "What packages do I need for Ubuntu?",
+          "apt-get install command for .NET?",
+          "Required dependencies for Debian?"
+        ],
+        "keywords": ["packages", "apt", "dnf", "dependencies", "install"],
+        "intent": "installation"
+      },
+      "supported-distros": {
+        "description": "Check if a Linux distribution is supported",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "supported-os-json"],
+        "destination_kind": "supported-os",
+        "yields": "json",
+        "query_hints": [
+          "Does .NET 10 support Ubuntu 24.04?",
+          "Is Alpine supported?",
+          "Which distros work with .NET?"
+        ],
+        "keywords": ["supported", "distro", "ubuntu", "debian", "fedora", "alpine"],
+        "intent": "compatibility-check"
+      },
+      "libc-requirements": {
+        "description": "Minimum glibc or musl version requirements",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "supported-os-json"],
+        "destination_kind": "supported-os",
+        "select_property": ["libc"],
+        "yields": "json",
+        "query_hints": [
+          "What glibc version does .NET need?",
+          "Minimum musl version for Alpine?",
+          "libc requirements for .NET 10?"
+        ],
+        "keywords": ["glibc", "musl", "libc", "minimum", "version"],
+        "intent": "compatibility-check"
+      },
+      "docker-setup": {
+        "description": "Combined OS packages and SDK download for container setup",
+        "follow_path": ["kind:llms", "latest-major", "manifest"],
+        "destination_kind": "manifest",
+        "select_link": ["os-packages-json", "downloads"],
+        "yields": "json",
+        "query_hints": [
+          "Set up .NET in Docker",
+          "Dockerfile dependencies for .NET?",
+          "Container setup for .NET SDK"
+        ],
+        "keywords": ["docker", "container", "dockerfile", "setup"],
+        "intent": "installation",
+        "not_for": [
+          "Official .NET Docker images (use mcr.microsoft.com/dotnet)"
+        ]
+      }
+    }
+  }
+}
