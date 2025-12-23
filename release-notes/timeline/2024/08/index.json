@@ -12,10 +12,6 @@
     "CVE-2024-38167",
     "CVE-2024-38168"
   ],
-  "major_releases": [
-    "9.0",
-    "6.0"
-  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/08/index.json"
@@ -47,8 +43,8 @@
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "9.0": {
         "version": "9.0.0-preview.7.24405.7",
         "date": "2024-08-13T00:00:00\u002B00:00",
         "year": "2024",
@@ -60,10 +56,9 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.7.24405.7/index.json"
           }
         },
-        "major_release": "9.0",
         "sdk_version": "9.0.100-preview.7.24407.12"
       },
-      {
+      "6.0": {
         "version": "6.0.33",
         "date": "2024-08-13T00:00:00\u002B00:00",
         "year": "2024",
@@ -75,10 +70,9 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.33/index.json"
           }
         },
-        "major_release": "6.0",
         "sdk_version": "6.0.425"
       }
-    ],
+    },
     "disclosures": [
       {
         "id": "CVE-2024-38167",
