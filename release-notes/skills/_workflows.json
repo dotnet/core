@@ -98,9 +98,9 @@
       },
       "cves-by-version": {
         "description": "CVEs fixed in the last security patch for any .NET version (including EOL)",
-        "follow_path": ["kind:llms", "root", "{version}", "latest-security-patch"],
+        "follow_path": ["kind:llms", "patches.{version}", "latest-security-month"],
         "destination_kind": "month",
-        "select_embedded": ["disclosures"],        
+        "select_embedded": ["disclosures"],
         "templated": true,
         "yields": "json",
         "query_hints": [
@@ -132,10 +132,10 @@
           }
         }
       },
-      "eol-date": {
+      "eol-major-release-date": {
         "description": "End-of-life date for a .NET version (including EOL versions not in latest_patches)",
         "follow_path": ["kind:llms", "root", "{version}"],
-        "destination_kind": "major",
+        "destgitination_kind": "major",
         "select_property": ["eol_date", "supported"],
         "templated": true,
         "yields": "json",
@@ -146,6 +146,21 @@
         ],
         "keywords": ["eol", "end-of-life", "support", "expiry", "deprecated"],
         "intent": "support-status"
+      },
+      "eol-major-release-cves": {
+        "description": "CVEs fixed in the final security patch for an EOL .NET version",
+        "follow_path": ["kind:llms", "root", "{version}", "latest-security-month"],
+        "destination_kind": "month",
+        "select_embedded": ["disclosures"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "What CVEs were in the last .NET 6 patch?",
+          "Final security fixes for .NET 7?",
+          "CVEs patched before .NET 5 went EOL?"
+        ],
+        "keywords": ["eol", "final", "last", "cve", "security", "patch"],
+        "intent": "security-audit"
       }
     }
   }
