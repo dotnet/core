@@ -6,20 +6,21 @@
   "date": "2023-11-14T00:00:00\u002B00:00",
   "support_phase": "maintenance",
   "security": true,
-  "cve_count": 2,
   "cve_records": [
     "CVE-2023-36049",
     "CVE-2023-36558"
   ],
+  "prev_patch_date": "2023-10-24T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2023-10-24T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.14/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.13/index.json",
       "title": "Previous patch release - 7.0.13"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.13/index.json",
       "title": "Previous security patch release - 7.0.13"
     },
@@ -31,7 +32,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.14/manifest.json",
       "title": "Manifest - .NET 7.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/index.json",
       "title": ".NET Month Timeline Index - November 2023"
     },
@@ -44,79 +45,5 @@
       "title": "CVE records - November 2023",
       "type": "application/json"
     }
-  },
-  "_embedded": {
-    "disclosures": [
-      {
-        "id": "CVE-2023-36049",
-        "title": ".NET Elevation of Privilege Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/287"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/8ec9eef6ed42ce6eaeb51b634a5ad875dacbae30.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/7.0",
-            "title": "Fix commit in runtime (release/7.0)",
-            "release": "7.0",
-            "min_vulnerable": "7.0.0",
-            "max_vulnerable": "7.0.13",
-            "fixed": "7.0.14"
-          }
-        ],
-        "cvss_score": 7.6,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2023-11-14",
-        "affected_releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2023-36558",
-        "title": ".NET Security Feature Bypass Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/288"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/b056b7af6535c39c5464aff05d6202d807de8af2.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/7.0",
-            "title": "Fix commit in aspnetcore (release/7.0)",
-            "release": "7.0",
-            "min_vulnerable": "7.0.0",
-            "max_vulnerable": "7.0.13",
-            "fixed": "7.0.14"
-          }
-        ],
-        "cvss_score": 6.2,
-        "cvss_severity": "MEDIUM",
-        "disclosure_date": "2023-11-14",
-        "affected_releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected_packages": [
-          "Microsoft.AspNetCore.Components"
-        ],
-        "platforms": [
-          "all"
-        ]
-      }
-    ]
   }
 }

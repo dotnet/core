@@ -1,0 +1,87 @@
+{
+  "kind": "workflows",
+  "title": "What's New Workflows",
+  "schema_version": "1.0",
+  "skill": "whats-new",
+  "ai_note": "Navigation paths for What's New queries. Read required_pre_read for stop criteria, content types, and common mistakes.",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/whats-new/SKILL.md",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/whats-new/workflows.json"
+    },
+    "skill": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/whats-new/SKILL.md"
+    },
+    "root-workflows": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/workflows.json"
+    }
+  },
+  "_embedded": {
+    "workflows": {
+      "whats-new-overview": {
+        "description": "Feature overview for the latest .NET release",
+        "follow_path": ["kind:llms", "major-manifest", "whats-new"],
+        "yields": "markdown",
+        "query_hints": [
+          "What's new in .NET?",
+          "Tell me about the latest .NET features",
+          "What changed in the newest .NET release?"
+        ],
+        "keywords": ["features", "overview", "latest", "new"],
+        "intent": "release-discovery"
+      },
+      "whats-new-runtime": {
+        "description": "Runtime JIT, GC, and codegen improvements for the latest .NET release",
+        "follow_path": ["kind:llms", "major-manifest", "whats-new-runtime"],
+        "yields": "markdown",
+        "query_hints": [
+          "What's new in the .NET runtime?",
+          "Tell me about JIT improvements",
+          "What GC changes are in the latest release?",
+          "Any AOT improvements?"
+        ],
+        "keywords": ["runtime", "jit", "gc", "performance", "aot", "codegen"],
+        "intent": "release-discovery"
+      },
+      "whats-new-libraries": {
+        "description": "BCL, LINQ, JSON, and crypto API additions for the latest .NET release",
+        "follow_path": ["kind:llms", "major-manifest", "whats-new-libraries"],
+        "yields": "markdown",
+        "query_hints": [
+          "What's new in .NET libraries?",
+          "New BCL APIs?",
+          "What LINQ improvements were added?"
+        ],
+        "keywords": ["libraries", "bcl", "apis", "linq", "json"],
+        "intent": "release-discovery",
+        "not_for": [
+          ".NET 8 library changes (use whats-new-containers instead)"
+        ]
+      },
+      "whats-new-sdk": {
+        "description": "SDK, CLI, MSBuild, and tooling changes for the latest .NET release",
+        "follow_path": ["kind:llms", "major-manifest", "whats-new-sdk"],
+        "yields": "markdown",
+        "query_hints": [
+          "What's new in the .NET SDK?",
+          "Any CLI improvements?",
+          "What MSBuild changes were made?"
+        ],
+        "keywords": ["sdk", "cli", "msbuild", "tooling", "dotnet"],
+        "intent": "release-discovery"
+      },
+      "release-announcement": {
+        "description": "Official release blog post for the latest .NET release",
+        "follow_path": ["kind:llms", "major-manifest", "release-blog-rendered"],
+        "yields": "html",
+        "query_hints": [
+          "Where's the .NET release announcement?",
+          "Link to the latest .NET blog post?",
+          "Official release notes URL?"
+        ],
+        "keywords": ["announcement", "blog", "official", "devblogs"],
+        "intent": "release-discovery"
+      }
+    }
+  }
+}

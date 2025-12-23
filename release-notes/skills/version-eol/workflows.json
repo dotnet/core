@@ -1,0 +1,103 @@
+{
+  "kind": "workflows",
+  "title": "Version EOL Workflows",
+  "schema_version": "1.0",
+  "skill": "version-eol",
+  "ai_note": "Navigation paths for version support and EOL queries. Read required_pre_read for the key distinction between supported vs EOL version lookups.",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/version-eol/SKILL.md",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/version-eol/workflows.json"
+    },
+    "skill": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/version-eol/SKILL.md"
+    },
+    "root-workflows": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json"
+    }
+  },
+  "_embedded": {
+    "workflows": {
+      "supported-versions": {
+        "description": "List all currently supported .NET versions",
+        "follow_path": ["kind:llms"],
+        "destination_kind": "llms",
+        "select_embedded": ["patches"],
+        "yields": "json",
+        "query_hints": [
+          "What .NET versions are supported?",
+          "Which .NET versions can I use?",
+          "Current .NET versions?"
+        ],
+        "keywords": ["supported", "current", "versions", "list"],
+        "intent": "support-status"
+      },
+      "eol-date-supported": {
+        "description": "EOL date for a currently supported version (1 fetch)",
+        "follow_path": ["kind:llms"],
+        "destination_kind": "llms",
+        "select_embedded": ["patches"],
+        "filter": "$._embedded.patches[?(@.major_release == '{version}')]",
+        "select_property": ["eol_date", "support_phase"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "When does .NET 8 go EOL?",
+          "How long is .NET 10 supported?",
+          "End of support for .NET 9?"
+        ],
+        "keywords": ["eol", "end", "support", "when", "date"],
+        "intent": "support-status",
+        "not_for": [
+          "EOL versions like .NET 6, .NET 7 (use eol-date-any)"
+        ]
+      },
+      "eol-date-any": {
+        "description": "EOL date for any version including already-EOL versions (3 fetches)",
+        "follow_path": ["kind:llms", "releases-index", "{version}"],
+        "destination_kind": "major",
+        "select_property": ["eol_date", "supported"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "When did .NET 6 go EOL?",
+          "When did .NET 7 end support?",
+          "EOL date for .NET 5?"
+        ],
+        "keywords": ["eol", "when", "did", "end", "past"],
+        "intent": "support-status"
+      },
+      "release-type": {
+        "description": "Check if a version is LTS or STS",
+        "follow_path": ["kind:llms"],
+        "destination_kind": "llms",
+        "select_embedded": ["patches"],
+        "filter": "$._embedded.patches[?(@.major_release == '{version}')].release_type",
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "Is .NET 10 LTS?",
+          "Is .NET 9 long-term support?",
+          "LTS or STS for .NET 8?"
+        ],
+        "keywords": ["lts", "sts", "long-term", "support", "type"],
+        "intent": "support-status"
+      },
+      "last-security-patch-eol": {
+        "description": "Last security patch details for an EOL version",
+        "follow_path": ["kind:llms", "releases-index", "{version}", "latest-security"],
+        "destination_kind": "patch",
+        "select_property": ["version", "date", "cve_records"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "Last security patch for .NET 6?",
+          "Final CVE fixes for .NET 7?",
+          "What was the last .NET 5 security update?"
+        ],
+        "keywords": ["last", "final", "security", "patch", "eol"],
+        "intent": "security-audit"
+      }
+    }
+  }
+}

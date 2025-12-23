@@ -1,0 +1,120 @@
+{
+  "kind": "workflows",
+  "title": "Root Workflows",
+  "schema_version": "1.0",
+  "skill": "dotnet-releases",
+  "ai_note": "Cross-cutting navigation paths. Read required_pre_read for behavioral guidance. Sub-skill workflows provide domain-specific paths.",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json"
+    },
+    "skill": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md"
+    },
+    "cve-workflows": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-queries/workflows.json",
+      "title": "CVE query workflows"
+    },
+    "whats-new-workflows": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/whats-new/workflows.json",
+      "title": "What's new workflows"
+    },
+    "breaking-changes-workflows": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/workflows.json",
+      "title": "Breaking changes workflows"
+    }
+  },
+  "_embedded": {
+    "workflows": {
+      "latest-cve-disclosures": {
+        "description": "CVE disclosures from the most recent security release",
+        "follow_path": ["kind:llms", "latest-security-month"],
+        "destination_kind": "month",
+        "select_embedded": ["disclosures"],
+        "yields": "json",
+        "query_hints": [
+          "What CVEs were fixed recently?",
+          "Latest security patches?",
+          "Recent .NET vulnerabilities?"
+        ],
+        "keywords": ["cve", "security", "vulnerability", "recent", "latest"],
+        "intent": "security-audit",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-queries/workflows.json",
+            "title": "Full CVE query catalog"
+          }
+        }
+      },
+      "whats-new-{component}": {
+        "description": "What's new documentation for a specific component (runtime, sdk, libraries)",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "whats-new-{component}"],
+        "destination_kind": "markdown",
+        "yields": "markdown",
+        "templated": true,
+        "query_hints": [
+          "What's new in .NET runtime?",
+          "What's new in .NET SDK?",
+          "What's new in .NET libraries?"
+        ],
+        "keywords": ["whats-new", "features", "improvements", "changes"],
+        "intent": "release-discovery",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/whats-new/workflows.json",
+            "title": "Full what's new catalog"
+          }
+        }
+      },
+      "breaking-changes": {
+        "description": "Breaking changes for upgrade planning, filterable by impact level",
+        "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
+        "destination_kind": "compatibility",
+        "yields": "json",
+        "query_hints": [
+          "What are the breaking changes in .NET 10?",
+          "High-impact breaking changes?",
+          "What will break when I upgrade?",
+          "Migration guidance for .NET upgrade"
+        ],
+        "keywords": ["breaking", "compatibility", "upgrade", "migration", "impact"],
+        "intent": "upgrade-planning",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/workflows.json",
+            "title": "Full breaking changes catalog"
+          }
+        }
+      },
+      "eol-date": {
+        "description": "End-of-life date for a .NET version (including EOL versions not in latest_patches)",
+        "follow_path": ["kind:llms", "releases-index", "{version}"],
+        "destination_kind": "major",
+        "select_property": ["eol_date", "supported"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "When did .NET 6 go EOL?",
+          "When does .NET 8 end support?",
+          "Is .NET 7 still supported?"
+        ],
+        "keywords": ["eol", "end-of-life", "support", "expiry", "deprecated"],
+        "intent": "support-status"
+      },
+      "sdk-download": {
+        "description": "SDK download URL for the latest release",
+        "follow_path": ["kind:llms", "latest-major", "downloads", "sdk"],
+        "destination_kind": "downloads",
+        "yields": "json",
+        "query_hints": [
+          "Where can I download .NET SDK?",
+          "Get .NET 10 SDK",
+          "SDK tarball URL for Linux"
+        ],
+        "keywords": ["download", "sdk", "install", "tarball"],
+        "intent": "installation"
+      }
+    }
+  }
+}

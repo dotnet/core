@@ -1,6 +1,7 @@
 ---
 name: version-eol
 description: EOL versions, support lifecycle, version history, and release types
+workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/version-eol/workflows.json
 ---
 
 # Version and EOL Queries

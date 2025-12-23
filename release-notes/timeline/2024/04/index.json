@@ -6,11 +6,12 @@
   "month": "04",
   "date": "2024-04-11T00:00:00\u002B00:00",
   "security": true,
-  "cve_count": 1,
+  "prev_month_date": "2024-03-12T00:00:00\u002B00:00",
+  "prev_security_month_date": "2024-03-12T00:00:00\u002B00:00",
   "cve_records": [
     "CVE-2024-21409"
   ],
-  "releases": [
+  "major_releases": [
     "9.0",
     "8.0",
     "7.0",
@@ -20,11 +21,11 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/04/index.json"
     },
-    "prev": {
+    "prev-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json",
       "title": "Previous month - March 2024"
     },
-    "prev-security": {
+    "prev-security-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json",
       "title": "Previous security month - March 2024"
     },
@@ -54,14 +55,13 @@
         "year": "2024",
         "month": "04",
         "security": false,
-        "cve_count": 0,
         "support_phase": "preview",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.3.24172.9/index.json"
           }
         },
-        "release": "9.0",
+        "major_release": "9.0",
         "sdk_version": "9.0.100-preview.3.24204.13"
       },
       {
@@ -70,17 +70,13 @@
         "year": "2024",
         "month": "04",
         "security": true,
-        "cve_count": 1,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.4/index.json"
           }
         },
-        "release": "8.0",
-        "cve_records": [
-          "CVE-2024-21409"
-        ],
+        "major_release": "8.0",
         "sdk_version": "8.0.204"
       },
       {
@@ -89,17 +85,13 @@
         "year": "2024",
         "month": "04",
         "security": true,
-        "cve_count": 1,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.18/index.json"
           }
         },
-        "release": "7.0",
-        "cve_records": [
-          "CVE-2024-21409"
-        ],
+        "major_release": "7.0",
         "sdk_version": "7.0.408"
       },
       {
@@ -108,17 +100,13 @@
         "year": "2024",
         "month": "04",
         "security": true,
-        "cve_count": 1,
         "support_phase": "active",
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.29/index.json"
           }
         },
-        "release": "6.0",
-        "cve_records": [
-          "CVE-2024-21409"
-        ],
+        "major_release": "6.0",
         "sdk_version": "6.0.421"
       }
     ],
@@ -131,38 +119,6 @@
             "href": "https://github.com/dotnet/announcements/issues/303"
           }
         },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/wpf/commit/3a6bf4b373cb6e0f955d994a317cd6fd84355633.diff",
-            "repo": "dotnet/wpf",
-            "branch": "release/7.0",
-            "title": "Fix commit in wpf (release/7.0)",
-            "release": "7.0",
-            "min_vulnerable": "7.0.0",
-            "max_vulnerable": "7.0.17",
-            "fixed": "7.0.18"
-          },
-          {
-            "href": "https://github.com/dotnet/wpf/commit/46dcf8720a1326a2c3f84b10a3d71ceb954cde70.diff",
-            "repo": "dotnet/wpf",
-            "branch": "release/6.0",
-            "title": "Fix commit in wpf (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.28",
-            "fixed": "6.0.29"
-          },
-          {
-            "href": "https://github.com/dotnet/wpf/commit/8537295cb0637acfc62befc1459244d3bfdb70d4.diff",
-            "repo": "dotnet/wpf",
-            "branch": "release/8.0",
-            "title": "Fix commit in wpf (release/8.0)",
-            "release": "8.0",
-            "min_vulnerable": "8.0.0",
-            "max_vulnerable": "8.0.3",
-            "fixed": "8.0.4"
-          }
-        ],
         "cvss_score": 7.3,
         "cvss_severity": "HIGH",
         "disclosure_date": "2024-04-09",

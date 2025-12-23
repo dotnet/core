@@ -6,21 +6,22 @@
   "date": "2024-10-08T00:00:00\u002B00:00",
   "support_phase": "maintenance",
   "security": true,
-  "cve_count": 3,
   "cve_records": [
     "CVE-2024-43483",
     "CVE-2024-43484",
     "CVE-2024-43485"
   ],
+  "prev_patch_date": "2024-08-13T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2024-07-09T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.35/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.33/index.json",
       "title": "Previous patch release - 6.0.33"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.32/index.json",
       "title": "Previous security patch release - 6.0.32"
     },
@@ -32,7 +33,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.35/manifest.json",
       "title": "Manifest - .NET 6.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/10/index.json",
       "title": ".NET Month Timeline Index - October 2024"
     },
@@ -45,128 +46,5 @@
       "title": "CVE records - October 2024",
       "type": "application/json"
     }
-  },
-  "_embedded": {
-    "disclosures": [
-      {
-        "id": "CVE-2024-43483",
-        "title": ".NET Denial of Service Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/327"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/741b04589cdd3514d032cbfd041fb7178bbd15c9.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.33",
-            "fixed": "6.0.34"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-10-08",
-        "affected_releases": [
-          "6.0",
-          "8.0",
-          "9.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "affected_packages": [
-          "System.IO.Packaging"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2024-43484",
-        "title": "(DoS) System.IO.Packaging - Multiple DoS vectors in use of SortedList",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/328"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/40d60a122dfd637e1b8a7cccbbbc363d508fb0d7.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.0",
-            "fixed": "6.0.1"
-          },
-          {
-            "href": "https://github.com/dotnet/runtime/commit/741b04589cdd3514d032cbfd041fb7178bbd15c9.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.0",
-            "fixed": "6.0.1"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-10-08",
-        "affected_releases": [
-          "6.0",
-          "8.0"
-        ],
-        "affected_packages": [
-          "System.IO.Packaging"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2024-43485",
-        "title": "(DoS) Denial of Service attack against System.Text.Json ExtensionData feature",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/329"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/c3c2cc2e61411fc1c56ca962684348ccf5563ce4.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.33",
-            "fixed": "6.0.34"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-10-08",
-        "affected_releases": [
-          "6.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "affected_packages": [
-          "System.Text.Json"
-        ],
-        "platforms": [
-          "all"
-        ]
-      }
-    ]
   }
 }

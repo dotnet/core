@@ -1,6 +1,7 @@
 ---
 name: dotnet-releases
 description: Query .NET release data, CVEs, breaking changes, EOL dates, and OS support.
+workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json
 ---
 
 # .NET Release Graph
@@ -24,6 +25,15 @@ Fetch when your query matches. **Core Rules apply to all.**
 | os-support | "Does .NET 10 support Ubuntu 24.04?" "What packages needed?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/SKILL.md> |
 | navigation-flows | Multi-hop query, unsure which links to follow | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation-flows/SKILL.md> |
 | schema-reference | Need to understand document structure or properties | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema-reference/SKILL.md> |
+
+## Workflows
+
+For structured navigation paths, fetch [workflows.json](https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json). It contains:
+
+- **Inline workflows** — Cross-cutting paths with `follow_path`, `destination_kind`, `query_hints`
+- **Skill links** — References to domain-specific workflow catalogs (CVE, breaking changes, etc.)
+
+Each skill with workflows includes a `_links.self` reference to its full catalog.
 
 ## Core Rules
 

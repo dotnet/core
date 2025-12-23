@@ -6,10 +6,11 @@
   "date": "2025-05-13T00:00:00\u002B00:00",
   "support_phase": "active",
   "security": true,
-  "cve_count": 1,
   "cve_records": [
     "CVE-2025-26646"
   ],
+  "prev_patch_date": "2025-04-08T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2025-04-08T00:00:00\u002B00:00",
   "sdk_version": "9.0.300",
   "sdk_feature_bands": [
     "9.0.300",
@@ -20,17 +21,17 @@
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.5/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.4/index.json",
       "title": "Previous patch release - 9.0.4"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.4/index.json",
       "title": "Previous security patch release - 9.0.4"
     },
-    "latest-sdk": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/sdk/index.json",
-      "title": "Latest SDK - .NET 9.0"
+    "downloads": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/downloads/index.json",
+      "title": "Downloads - .NET 9.0"
     },
     "major": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
@@ -40,7 +41,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.5/manifest.json",
       "title": "Manifest - .NET 9.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/index.json",
       "title": ".NET Month Timeline Index - May 2025"
     },
@@ -127,62 +128,6 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.5/index.json"
           }
         }
-      }
-    ],
-    "disclosures": [
-      {
-        "id": "CVE-2025-26646",
-        "title": ".NET and Visual Studio Spoofing Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/356"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/sdk/commit/070f5a4d7592b7c7a7f2a65e232efdfbfaf2a753.diff",
-            "repo": "dotnet/sdk",
-            "branch": "release/9.0",
-            "title": "Fix commit in sdk (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.200",
-            "max_vulnerable": "9.0.203",
-            "fixed": "9.0.204"
-          },
-          {
-            "href": "https://github.com/dotnet/sdk/commit/391e16c3b5c49938029e20d9ee69c4d5bdf51c70.diff",
-            "repo": "dotnet/sdk",
-            "branch": "release/9.0",
-            "title": "Fix commit in sdk (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.300",
-            "max_vulnerable": "9.0.303",
-            "fixed": "9.0.304"
-          },
-          {
-            "href": "https://github.com/dotnet/sdk/commit/ad312fc3980fd8c562fac172bc17318c447eeb75.diff",
-            "repo": "dotnet/sdk",
-            "branch": "release/9.0",
-            "title": "Fix commit in sdk (release/9.0)",
-            "release": "9.0",
-            "min_vulnerable": "9.0.100",
-            "max_vulnerable": "9.0.105",
-            "fixed": "9.0.106"
-          }
-        ],
-        "cvss_score": 8,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2025-05-13",
-        "affected_releases": [
-          "8.0",
-          "9.0"
-        ],
-        "affected_products": [
-          "dotnet-sdk"
-        ],
-        "platforms": [
-          "all"
-        ]
       }
     ]
   }
