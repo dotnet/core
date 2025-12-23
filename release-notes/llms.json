@@ -79,6 +79,25 @@
           "title": "Full breaking changes catalog"
         }
       }
+    },
+    "eol-date": {
+      "description": "End-of-life date for a .NET version (including EOL versions not in latest_patches)",
+      "follow_path": [
+        "releases-index",
+        "{version}"
+      ],
+      "destination_kind": "major",
+      "select_property": [
+        "eol_date",
+        "supported"
+      ],
+      "yields": "json",
+      "templated": true,
+      "query_hints": [
+        "When did .NET 6 go EOL?",
+        "When does .NET 8 end support?",
+        "Is .NET 7 still supported?"
+      ]
     }
   },
   "_links": {
