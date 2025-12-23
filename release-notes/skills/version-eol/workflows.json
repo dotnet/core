@@ -37,7 +37,7 @@
         "follow_path": ["kind:llms"],
         "destination_kind": "llms",
         "select_embedded": ["patches"],
-        "filter": "$._embedded.patches[?(@.major_release == '{version}')]",
+        "filter": "$._embedded.patches['{version}']",
         "select_property": ["eol_date", "support_phase"],
         "templated": true,
         "yields": "json",
@@ -72,7 +72,7 @@
         "follow_path": ["kind:llms"],
         "destination_kind": "llms",
         "select_embedded": ["patches"],
-        "filter": "$._embedded.patches[?(@.major_release == '{version}')].release_type",
+        "filter": "$._embedded.patches['{version}'].release_type",
         "templated": true,
         "yields": "json",
         "query_hints": [
@@ -85,7 +85,7 @@
       },
       "last-security-patch-eol": {
         "description": "Last security patch details for an EOL version",
-        "follow_path": ["kind:llms", "root", "{version}", "latest-security"],
+        "follow_path": ["kind:llms", "root", "{version}", "latest-security-patch"],
         "destination_kind": "patch",
         "select_property": ["version", "date", "cve_records"],
         "templated": true,

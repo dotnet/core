@@ -47,25 +47,25 @@ Each skill with workflows includes a `_links.self` reference to its full catalog
 | Property | Contains |
 | -------- | -------- |
 | `supported_releases` | Supported .NET versions |
-| `_embedded.latest_patches[]` | Latest patch per version with EOL, CVE counts |
+| `_embedded.patches` | Dictionary of supported versions keyed by major (e.g., `"8.0"`) |
 | `_links` | Navigation to indexes, timeline, security months |
 
 ## Quick Answers (1 fetch)
 
-From `llms.json._embedded.latest_patches[]`:
+From `llms.json._embedded.patches["X.0"]`:
 
-- Latest patch for .NET X → filter by `release`
+- Latest patch for .NET X → access by version key
 - Is .NET X supported? → `supported`, `eol_date`
 - CVE count → `cve_count`
 
 ## Navigation Shortcuts
 
-From `_embedded.latest_patches[]._links`:
+From `_embedded.patches["X.0"]._links`:
 
 | Relation | Target |
 | -------- | ------ |
 | `manifest` | manifest.json (OS, breaking changes) |
-| `latest-security` | Last security patch |
+| `latest-security-month` | Last security month |
 
 From `llms.json._links`:
 

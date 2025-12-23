@@ -32,7 +32,7 @@ From `os-packages.json`:
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► _links["manifest"]
+    └─► _embedded.patches["X.0"] ─► _links["manifest"]
                     │
                     ▼
                 manifest.json

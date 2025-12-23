@@ -24,7 +24,7 @@ Once you have `compatibility.json`, answer directly from `breaks[]`:
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► find version (e.g., "10.0")
+    └─► _embedded.patches["10.0"] ─► access by version key
             │
             └─► _links["manifest"]
                     │
@@ -41,7 +41,7 @@ llms.json
 ### Breaking changes for .NET X (2 fetches)
 
 1. Fetch `llms.json`
-2. Find `_embedded.latest_patches[]` where `release == "X.0"`
+2. Access `_embedded.patches["X.0"]`
 3. Follow `_links["manifest"]` → manifest.json
 4. Follow `_links["compatibility"]` → compatibility.json
 
