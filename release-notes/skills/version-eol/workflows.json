@@ -54,7 +54,7 @@
       },
       "eol-date-any": {
         "description": "EOL date for any version including already-EOL versions (3 fetches)",
-        "follow_path": ["kind:llms", "releases-index", "{version}"],
+        "follow_path": ["kind:llms", "root", "{version}"],
         "destination_kind": "major",
         "select_property": ["eol_date", "supported"],
         "templated": true,
@@ -85,7 +85,7 @@
       },
       "last-security-patch-eol": {
         "description": "Last security patch details for an EOL version",
-        "follow_path": ["kind:llms", "releases-index", "{version}", "latest-security"],
+        "follow_path": ["kind:llms", "root", "{version}", "latest-security"],
         "destination_kind": "patch",
         "select_property": ["version", "date", "cve_records"],
         "templated": true,

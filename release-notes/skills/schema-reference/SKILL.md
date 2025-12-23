@@ -34,7 +34,7 @@ Paths are illustrative—always follow `_links["..."].href`.
 | `latest-security` | Newest security patch |
 | `latest-security-month` | Current security month |
 | `major-shortcut`, `manifest` | Cross-references |
-| `releases-index`, `timeline-index` | Root indexes |
+| `root`, `timeline-index` | Root indexes |
 | `compatibility`, `supported-os`, `os-packages`, `target-frameworks` | Data resources |
 | `cve-json` | Full CVE details (CVSS vectors, CWE) |
 | `*-rendered` | GitHub HTML views |
@@ -45,7 +45,7 @@ Paths are illustrative—always follow `_links["..."].href`.
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `kind` | string | Document type (e.g., "releases-index", "patch-version-index") |
+| `kind` | string | Document type (e.g., "root", "patch-version-index") |
 | `version` | string | Version number (e.g., "10.0", "8.0.21") |
 | `release` | string | Major version (e.g., "10.0") |
 | `band` | string | SDK feature band identifier (e.g., "8.0.4xx") |
