@@ -24,7 +24,7 @@ For supported versions, answer directly from `_embedded.latest_patches[]`:
 ## Key Distinction
 
 - **Supported versions** → data embedded in `llms.json`
-- **EOL versions** → must navigate via `releases-index`
+- **EOL versions** → must navigate via `root`
 
 ## Supported Versions (1 fetch)
 
@@ -44,7 +44,7 @@ For supported versions, answer directly from `_embedded.latest_patches[]`:
 ```
 llms.json
     │
-    └─► _links["releases-index"]
+    └─► _links["root"]
             │
             ▼
         index.json
@@ -78,7 +78,7 @@ llms.json
 ### When did .NET 6 go EOL? (3 fetches)
 
 1. Fetch `llms.json`
-2. Follow `_links["releases-index"]`
+2. Follow `_links["root"]`
 3. Find `_embedded.releases[]` where `version == "6.0"`
 4. Follow `_links["self"]` → 6.0/index.json
 5. Read `eol_date`
@@ -109,13 +109,13 @@ Continue from above:
 
 | Mistake | Why It's Wrong |
 |---------|----------------|
-| Navigating to `releases-index` for supported versions | Wastes fetches—`llms.json._embedded.latest_patches[]` has this data |
-| Looking for EOL data in `llms.json` | Only supported versions are embedded—use `releases-index` for EOL |
-| Fetching version index for just EOL date | `releases-index._embedded.releases[]` already has `eol_date` |
+| Navigating to `root` for supported versions | Wastes fetches—`llms.json._embedded.latest_patches[]` has this data |
+| Looking for EOL data in `llms.json` | Only supported versions are embedded—use `root` for EOL |
+| Fetching version index for just EOL date | `root._embedded.releases[]` already has `eol_date` |
 
 ## Tips
 
 - Even-numbered releases are LTS (8, 10, 12...)
 - Odd-numbered releases are STS (9, 11, 13...)
-- `releases-index` contains ALL versions including EOL
+- `root` contains ALL versions including EOL
 - `llms.json` only embeds currently supported versions

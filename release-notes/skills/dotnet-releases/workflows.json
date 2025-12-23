@@ -89,7 +89,7 @@
       },
       "eol-date": {
         "description": "End-of-life date for a .NET version (including EOL versions not in latest_patches)",
-        "follow_path": ["kind:llms", "releases-index", "{version}"],
+        "follow_path": ["kind:llms", "root", "{version}"],
         "destination_kind": "major",
         "select_property": ["eol_date", "supported"],
         "templated": true,

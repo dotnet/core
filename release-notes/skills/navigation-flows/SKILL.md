@@ -49,7 +49,7 @@ llms.json
 ```
 llms.json
     │
-    └─► _links.releases-index ─► index.json
+    └─► _links.root ─► index.json
             │
             └─► _embedded.releases[] ─► find EOL version
                     │
@@ -82,7 +82,7 @@ llms.json
 ```
 From llms.json:
   latest-security-month ──► timeline month (CVE details)
-  releases-index ──────────► full version list (including EOL)
+  root ──────────► full version list (including EOL)
 
 From latest_patches[]:
   major-shortcut ──────────► X.0/index.json (patches, timeline)
