@@ -73,4 +73,4 @@ From `llms.json._links`:
 | -------- | ------ |
 | `latest`, `latest-lts` | Newest release (same when latest is LTS; diverge when STS is newer) |
 | `latest-security-month` | Current security month |
-| `releases-index` | All versions including EOL |
+| `root` | All versions including EOL |
