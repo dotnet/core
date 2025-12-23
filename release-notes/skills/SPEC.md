@@ -82,7 +82,7 @@ ASCII flow diagrams are highly effective for LLM comprehension:
 ```
 llms.json
     │
-    └─► _embedded.latest_patches[] ─► _links["manifest"]
+    └─► _embedded.patches["X.0"] ─► _links["manifest"]
             │
             ▼
         manifest.json ─► DONE
