@@ -1,75 +1,76 @@
+---
+name: dotnet-releases
+description: Query .NET release data, CVEs, breaking changes, EOL dates, and OS support.
+workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json
+---
+
 # .NET Release Graph
 
 Machine-readable .NET release, CVE, and compatibility data via HAL hypermedia.
 
 ## Entry Point
 
-https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json
-
-## Core Rules
-
-1. **Follow `_links["..."].href` exactly** — never construct graph URLs. External URLs (e.g., GitHub diffs in `fixes[]`) can be used directly.
-2. **Use `_embedded` data first** — it answers most queries without extra fetches
-3. **If data is missing, don't fabricate** — report the gap
-
-## What's in llms.json
-
-| Property | Contains |
-|----------|----------|
-| `_embedded.latest_patches[]` | Latest patch per supported version with EOL dates, support status, CVE counts |
-| `_links` | Navigation to version indexes, timeline, security months |
+<https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json>
 
 ## Skills
 
-Fetch these when your query matches. **Core Rules above apply to all skills.**
-
-### Task-Specific Skills
+Fetch when your query matches. **Core Rules apply to all.**
 
 | Skill | Fetch When | URL |
-|-------|------------|-----|
-| cve.md | CVE queries needing severity, CVSS, or history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve.md |
-| breaking-changes.md | Compatibility or migration questions | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes.md |
-| version-eol.md | EOL versions, support lifecycle, or version history | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol.md |
-| os-support.md | OS packages, distro support, or glibc requirements | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support.md |
+| ----- | ---------- | --- |
+| cve-queries | "Critical CVEs in .NET 8?" "CVEs fixed last 3 months?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
+| breaking-changes | "Breaking changes in .NET 10?" "Migration impact?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md> |
+| whats-new | "What's new in .NET 10?" "Release highlights?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/SKILL.md> |
+| version-eol | "When does .NET 8 go EOL?" "What versions are supported?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol/SKILL.md> |
+| os-support | "Does .NET 10 support Ubuntu 24.04?" "What packages needed?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/SKILL.md> |
+| navigation-flows | Multi-hop query, unsure which links to follow | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation-flows/SKILL.md> |
+| schema-reference | Need to understand document structure or properties | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema-reference/SKILL.md> |
 
-### Broad Skills
+## Workflows
 
-| Skill | Fetch When | URL |
-|-------|------------|-----|
-| navigation.md | Multi-hop query and unsure which links to follow | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation.md |
-| schema.md | Need to understand document structure, properties, or link relations | https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema.md |
+For structured navigation paths, fetch [workflows.json](https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json). It contains:
+
+- **Inline workflows** — Cross-cutting paths with `follow_path`, `destination_kind`, `query_hints`
+- **Skill links** — References to domain-specific workflow catalogs (CVE, breaking changes, etc.)
+
+Each skill with workflows includes a `_links.self` reference to its full catalog.
+
+## Core Rules
+
+1. **Follow `_links["..."].href` exactly** — never construct URLs
+2. **Use `_embedded` data first** — answers most queries without extra fetches
+3. **Don't fabricate** — report gaps
+4. **Non-existent relations:** `next` (use `prev`), `latest_sts` (use `latest`)
+
+## llms.json Contents
+
+| Property | Contains |
+| -------- | -------- |
+| `supported_releases` | Supported .NET versions |
+| `_embedded.latest_patches[]` | Latest patch per version with EOL, CVE counts |
+| `_links` | Navigation to indexes, timeline, security months |
 
 ## Quick Answers (1 fetch)
 
-These are answered directly from `llms.json`:
+From `llms.json._embedded.latest_patches[]`:
 
-- Latest patch for .NET X → `_embedded.latest_patches[]` filter by `release`
-- Is .NET X supported? → `_embedded.latest_patches[]` → `supported`, `eol_date`
-- CVE count in latest patch → `_embedded.latest_patches[]` → `cve_count`
+- Latest patch for .NET X → filter by `release`
+- Is .NET X supported? → `supported`, `eol_date`
+- CVE count → `cve_count`
 
 ## Navigation Shortcuts
 
-Each `_embedded.latest_patches[]` entry has `_links` for 2-fetch navigation:
+From `_embedded.latest_patches[]._links`:
 
-- `release-manifest` → manifest.json (breaking changes, TFMs, OS support)
-- `release-major` → version index (patch navigation, timeline)
-- `latest-sdk` → SDK index (feature bands, downloads)
-- `latest-security` → last security patch for that version
-
-## Key Relations
+| Relation | Target |
+| -------- | ------ |
+| `manifest` | manifest.json (OS, breaking changes) |
+| `latest-security` | Last security patch |
 
 From `llms.json._links`:
 
-| Relation | Purpose |
-|----------|---------|
-| `latest` | Newest supported release (LTS or STS) |
-| `latest-lts` | Newest LTS release |
-| `latest-security-month` | Current security month index |
-| `releases-index` | Full version list including EOL |
-
-**Relations that do NOT exist** (common mistakes):
-
-| Relation | Why It Doesn't Exist |
-|----------|---------------------|
-| `next` | Navigate backwards from present — start at `latest*`, walk back with `prev` |
-| `latest_sts` | Not useful — use `latest` if STS is acceptable |
+| Relation | Target |
+| -------- | ------ |
+| `latest`, `latest-lts` | Newest release (same when latest is LTS; diverge when STS is newer) |
+| `latest-security-month` | Current security month |
+| `root` | All versions including EOL |
