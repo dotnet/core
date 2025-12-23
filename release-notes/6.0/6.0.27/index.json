@@ -6,20 +6,21 @@
   "date": "2024-02-13T00:00:00\u002B00:00",
   "support_phase": "active",
   "security": true,
-  "cve_count": 2,
   "cve_records": [
     "CVE-2024-21386",
     "CVE-2024-21404"
   ],
+  "prev_patch_date": "2024-01-09T00:00:00\u002B00:00",
+  "prev_security_patch_date": "2024-01-09T00:00:00\u002B00:00",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.27/index.json"
     },
-    "prev": {
+    "prev-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.26/index.json",
       "title": "Previous patch release - 6.0.26"
     },
-    "prev-security": {
+    "prev-security-patch": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.26/index.json",
       "title": "Previous security patch release - 6.0.26"
     },
@@ -31,7 +32,7 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.27/manifest.json",
       "title": "Manifest - .NET 6.0"
     },
-    "month-shortcut": {
+    "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/02/index.json",
       "title": ".NET Month Timeline Index - February 2024"
     },
@@ -44,79 +45,5 @@
       "title": "CVE records - February 2024",
       "type": "application/json"
     }
-  },
-  "_embedded": {
-    "disclosures": [
-      {
-        "id": "CVE-2024-21386",
-        "title": ".NET Denial of Service Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/295"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/aspnetcore/commit/6c687e72d81189db1ae2f045633e16a868865a65.diff",
-            "repo": "dotnet/aspnetcore",
-            "branch": "release/6.0",
-            "title": "Fix commit in aspnetcore (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.26",
-            "fixed": "6.0.27"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-02-13",
-        "affected_releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-aspnetcore"
-        ],
-        "platforms": [
-          "all"
-        ]
-      },
-      {
-        "id": "CVE-2024-21404",
-        "title": ".NET Denial of Service Vulnerability",
-        "_links": {
-          "self": {
-            "href": "https://github.com/dotnet/announcements/issues/296"
-          }
-        },
-        "fixes": [
-          {
-            "href": "https://github.com/dotnet/runtime/commit/7c2d8f8ed9f419a984f77c418b3da860dc6579b9.diff",
-            "repo": "dotnet/runtime",
-            "branch": "release/6.0",
-            "title": "Fix commit in runtime (release/6.0)",
-            "release": "6.0",
-            "min_vulnerable": "6.0.0",
-            "max_vulnerable": "6.0.26",
-            "fixed": "6.0.27"
-          }
-        ],
-        "cvss_score": 7.5,
-        "cvss_severity": "HIGH",
-        "disclosure_date": "2024-02-13",
-        "affected_releases": [
-          "6.0",
-          "7.0",
-          "8.0"
-        ],
-        "affected_products": [
-          "dotnet-runtime"
-        ],
-        "platforms": [
-          "linux"
-        ]
-      }
-    ]
   }
 }

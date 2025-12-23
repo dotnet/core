@@ -1,6 +1,7 @@
 ---
 name: breaking-changes
 description: Compatibility queries, breaking changes, migration guidance, and TFMs
+workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/workflows.json
 ---
 
 # Breaking Changes Queries
