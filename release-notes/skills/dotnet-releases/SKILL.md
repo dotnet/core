@@ -8,9 +8,43 @@ workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-n
 
 Machine-readable .NET release, CVE, and compatibility data via HAL hypermedia.
 
-## Entry Point
+Markdown skills and JSON workflow that describe optimal paths and behavior are provided. Please invest the extra effort to read content specific to your query before 
+jumping in -- it's worth it!
 
-<https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json>
+## Graph Entry Point
+
+Fetch: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms2.json>
+
+A HAL+JSON graph with temporal and version structure to enable diverse queries.
+
+## Workflows
+
+Fetch (workflow hub): <https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json>
+
+Fetch (workflow skill): <https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/workflows/SKILL.md>
+
+This workflow hub contains links to domain-specific `workflow.json` documents with 6-12 **workflow queries** each. Workflows have HAL-native instructions for graph navigation and data selection. The workflow skill describes the workflow syntax.
+
+Workflows have the following form:
+
+```json
+    "latest-cve-disclosures": {
+        "description": "CVE disclosures from the most recent security release (use latest-cve-json for full details)",
+        "follow_path": ["kind:llms", "latest-security-month"],
+        "destination_kind": "month",
+        "select_embedded": ["disclosures"],
+        "yields": "json",
+        "query_hints": [
+            "What CVEs were fixed recently?",
+            "Latest security patches?",
+            "Recent .NET vulnerabilities?"
+        ],
+        "keywords": ["cve", "security", "vulnerability", "recent", "latest"],
+        "intent": "security-audit"
+    },
+```
+
+Once you've matched a workflow to your query, follow its `follow_path` sequence through the HAL graph.
 
 ## Skills
 
@@ -18,6 +52,7 @@ Fetch when your query matches. **Core Rules apply to all.**
 
 | Skill | Fetch When | URL |
 | ----- | ---------- | --- |
+| workflows | Understanding workflow structure, templating, path semantics | <https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/workflows/SKILL.md> |
 | cve-queries | "Critical CVEs in .NET 8?" "CVEs fixed last 3 months?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
 | breaking-changes | "Breaking changes in .NET 10?" "Migration impact?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md> |
 | whats-new | "What's new in .NET 10?" "Release highlights?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/SKILL.md> |
@@ -25,15 +60,6 @@ Fetch when your query matches. **Core Rules apply to all.**
 | os-support | "Does .NET 10 support Ubuntu 24.04?" "What packages needed?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/SKILL.md> |
 | navigation-flows | Multi-hop query, unsure which links to follow | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation-flows/SKILL.md> |
 | schema-reference | Need to understand document structure or properties | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema-reference/SKILL.md> |
-
-## Workflows
-
-For structured navigation paths, fetch [workflows.json](https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json). It contains:
-
-- **Inline workflows** — Cross-cutting paths with `follow_path`, `destination_kind`, `query_hints`
-- **Skill links** — References to domain-specific workflow catalogs (CVE, breaking changes, etc.)
-
-Each skill with workflows includes a `_links.self` reference to its full catalog.
 
 ## Core Rules
 
