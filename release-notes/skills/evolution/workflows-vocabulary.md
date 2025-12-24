@@ -242,16 +242,16 @@ The `yields` property indicates what the LLM will receive at the end of the work
   "title": ".NET Documentation Workflows for LLMs",
   "schema_version": "1.0",
   "ai_note": "Navigation paths for .NET documentation. For behavioral guidance, read required_pre_read first. Skill-specific workflows in _links.",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/SKILL.md",
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/workflows.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/workflows.json"
     },
     "root": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json"
     },
     "cve-queries": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-queries/workflows.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/workflows.json",
       "title": "CVE query workflows"
     }
   },
@@ -286,13 +286,13 @@ The `yields` property indicates what the LLM will receive at the end of the work
   "required_pre_read": "./SKILL.md",
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-queries/workflows.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/workflows.json"
     },
     "skill": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-queries/SKILL.md"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md"
     },
     "root-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/workflows.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/workflows.json"
     }
   },
   "_embedded": {
