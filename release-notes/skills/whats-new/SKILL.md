@@ -1,7 +1,7 @@
 ---
 name: whats-new
 description: Release highlights, new features, and announcements for .NET versions
-workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/whats-new/workflows.json
+workflows: https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/workflows.json
 ---
 
 # What's New Queries
