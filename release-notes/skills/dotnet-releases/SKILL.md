@@ -1,7 +1,7 @@
 ---
 name: dotnet-releases
 description: Query .NET release data, CVEs, breaking changes, EOL dates, and OS support.
-workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json
+workflows: https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/workflows.json
 ---
 
 # .NET Release Graph
@@ -19,9 +19,9 @@ A HAL+JSON graph with temporal and version structure to enable diverse queries.
 
 ## Workflows
 
-Fetch (workflow hub): <https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/workflows.json>
+Fetch (workflow hub): <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/workflows.json>
 
-Fetch (workflow skill): <https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/workflows/SKILL.md>
+Fetch (workflow skill): <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/workflows/SKILL.md>
 
 This workflow hub contains links to domain-specific `workflow.json` documents with 6-12 **workflow queries** each. Workflows have HAL-native instructions for graph navigation and data selection. The workflow skill describes the workflow syntax.
 
@@ -52,7 +52,7 @@ Fetch when your query matches. **Core Rules apply to all.**
 
 | Skill | Fetch When | URL |
 | ----- | ---------- | --- |
-| workflows | Understanding workflow structure, templating, path semantics | <https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/workflows/SKILL.md> |
+| workflows | Understanding workflow structure, templating, path semantics | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/workflows/SKILL.md> |
 | cve-queries | "Critical CVEs in .NET 8?" "CVEs fixed last 3 months?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
 | breaking-changes | "Breaking changes in .NET 10?" "Migration impact?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md> |
 | whats-new | "What's new in .NET 10?" "Release highlights?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/SKILL.md> |
