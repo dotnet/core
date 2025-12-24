@@ -75,18 +75,24 @@
         "keywords": ["migration", "fix", "how", "recommended", "action"],
         "intent": "code-migration"
       },
-      "target-frameworks": {
-        "description": "Target framework monikers (TFMs) for a .NET version",
-        "follow_path": ["kind:llms", "latest-major", "manifest", "target-frameworks"],
-        "destination_kind": "target-frameworks",
-        "yields": "json",
+      "migration-docs-by-category": {
+        "description": "Get migration documentation URLs for a category from compatibility.json",
+        "follow_path": ["kind:compatibility"],
+        "filter": "$.breaks[?(@.category == '{category}')]",
+        "select_property": ["references[?(@.type == 'documentation')].url"],
+        "templated": true,
+        "yields": "urls",
         "query_hints": [
-          "What TFMs does .NET 10 support?",
-          "Target frameworks for MAUI?",
-          "What's the Android TFM for .NET 10?"
+          "Get all ASP.NET Core migration docs",
+          "SDK breaking change documentation",
+          "Migration guides for core-libraries changes"
         ],
-        "keywords": ["tfm", "target", "framework", "moniker", "maui", "android", "ios"],
-        "intent": "project-configuration"
+        "keywords": ["migration", "docs", "category", "aspnet", "sdk", "libraries"],
+        "intent": "code-migration",
+        "example": {
+          "category": "aspnet-core",
+          "result": "URLs to raw markdown migration guides for each ASP.NET Core breaking change"
+        }
       }
     }
   }
