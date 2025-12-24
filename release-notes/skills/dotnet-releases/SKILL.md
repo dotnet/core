@@ -13,7 +13,7 @@ jumping in -- it's worth it!
 
 ## Graph Entry Point
 
-Fetch: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms2.json>
+Fetch: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json>
 
 A HAL+JSON graph with temporal and version structure to enable diverse queries.
 
