@@ -96,18 +96,19 @@
         "keywords": ["month", "date", "specific", "when"],
         "intent": "security-audit"
       },
-      "cves-by-version": {
-        "description": "CVEs fixed in the last security patch for any .NET version (including EOL)",
-        "follow_path": ["kind:llms", "patches.{version}", "latest-security-month"],
-        "destination_kind": "month",
-        "select_embedded": ["disclosures"],
+      "cves-by-major": {
+        "description": "List of CVEs fixed in the last security patch for a .NET major version",
+        "follow_path": ["kind:llms", "patches.{major}", "latest-security-patch"],
+        "destination_kind": "patch",
+        "select_property": ["cve_records"],
         "templated": true,
         "yields": "json",
+        "yields_fields": ["cve_records"],
         "query_hints": [
           "What CVEs did .NET 8 last security patch fix?",
-          "Security vulnerabilities patched in .NET 8?"
+          "List CVEs patched in .NET 8?"
         ],
-        "keywords": ["cve", "security", "version", "patch", "fixed"],
+        "keywords": ["cve", "security", "major", "patch", "list"],
         "intent": "security-audit"
       },
       "latest-cve-details": {
