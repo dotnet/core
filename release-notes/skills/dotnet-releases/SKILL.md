@@ -8,8 +8,7 @@ workflows: https://raw.githubusercontent.com/dotnet/core/refs/heads/release-inde
 
 Machine-readable .NET release, CVE, and compatibility data via HAL hypermedia.
 
-Markdown skills and JSON workflow that describe optimal paths and behavior are provided. Please invest the extra effort to read content specific to your query before 
-jumping in -- it's worth it!
+Markdown skills and JSON workflows describe optimal paths and behavior. Read content specific to your query before jumping in.
 
 ## Graph Entry Point
 
@@ -19,27 +18,29 @@ A HAL+JSON graph with temporal and version structure to enable diverse queries.
 
 ## Workflows
 
-Fetch (workflow hub): <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/workflows.json>
+Fetch: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/workflows.json>
 
-Fetch (workflow skill): <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/workflows/SKILL.md>
+Workflows define navigation paths through the HAL graph. Match your query to a workflow, then follow its `follow_path`:
 
-This workflow hub contains links to domain-specific `workflow.json` documents with 6-12 **workflow queries** each. Workflows have HAL-native instructions for graph navigation and data selection. The workflow skill describes the workflow syntax.
+- `follow_path`: Route as `["kind:llms", "relation", "relation"]`
+- `kind:` prefix: Starting document type
+- `select_embedded`: Extract from `_embedded` (avoids extra fetches)
+- `yields`: Output format (`markdown`, `json`, `html`)
 
-Workflows have the following form:
+Example:
 
 ```json
-    "latest-cve-disclosures": {
-        "description": "CVE disclosures from the most recent security release (use latest-cve-json for full details)",
-        "follow_path": ["kind:llms", "latest-security-month"],
+    "cve-by-version": {
+        "description": "CVEs affecting a specific .NET version",
+        "follow_path": ["kind:llms", "patches.{version}", "latest-security-disclosures"],
         "destination_kind": "month",
         "select_embedded": ["disclosures"],
         "yields": "json",
         "query_hints": [
-            "What CVEs were fixed recently?",
-            "Latest security patches?",
-            "Recent .NET vulnerabilities?"
+            "What CVEs affect .NET 8?",
+            "Security issues for .NET 9.0?"
         ],
-        "keywords": ["cve", "security", "vulnerability", "recent", "latest"],
+        "keywords": ["cve", "security", "version", "affects"],
         "intent": "security-audit"
     },
 ```
@@ -52,14 +53,12 @@ Fetch when your query matches. **Core Rules apply to all.**
 
 | Skill | Fetch When | URL |
 | ----- | ---------- | --- |
-| workflows | Understanding workflow structure, templating, path semantics | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/workflows/SKILL.md> |
-| cve-queries | "Critical CVEs in .NET 8?" "CVEs fixed last 3 months?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
-| breaking-changes | "Breaking changes in .NET 10?" "Migration impact?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md> |
-| whats-new | "What's new in .NET 10?" "Release highlights?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/SKILL.md> |
-| version-eol | "When does .NET 8 go EOL?" "What versions are supported?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol/SKILL.md> |
-| os-support | "Does .NET 10 support Ubuntu 24.04?" "What packages needed?" | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/SKILL.md> |
-| navigation-flows | Multi-hop query, unsure which links to follow | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/navigation-flows/SKILL.md> |
-| schema-reference | Need to understand document structure or properties | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/schema-reference/SKILL.md> |
+| cve-queries | CVE severity, CVSS, security history | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
+| cve-schema | Extraction from cve.json (CVSS vectors, CWE, packages) | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-schema/SKILL.md> |
+| breaking-changes | Breaking changes, migration impact | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md> |
+| whats-new | What's new, release highlights | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/SKILL.md> |
+| version-eol | EOL dates, support status | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol/SKILL.md> |
+| os-support | OS/distro support, packages | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/SKILL.md> |
 
 ## Core Rules
 
@@ -78,11 +77,20 @@ Fetch when your query matches. **Core Rules apply to all.**
 
 ## Quick Answers (1 fetch)
 
-From `llms.json._embedded.patches["X.0"]`:
+From `llms.json._links` (not version-specific):
 
-- Latest patch for .NET X → access by version key
-- Is .NET X supported? → `supported`, `eol_date`
-- CVE count → `cve_count`
+- Latest CVE disclosures → `latest-security-disclosures`
+- Full CVE details → `latest-cve-json`
+- All versions including EOL → `root`
+
+From `llms.json._embedded.patches["X.0"]` (version-specific):
+
+- Latest patch version → `version`
+- Is .NET X supported? → `supported`, `support_phase`
+- Release type → `release_type` (lts/sts)
+- Last security patch → `latest_security_patch`, `latest_security_patch_date`
+- SDK version → `sdk_version`
+- CVE disclosures for this version → `_links.latest-security-disclosures`
 
 ## Navigation Shortcuts
 
@@ -90,13 +98,13 @@ From `_embedded.patches["X.0"]._links`:
 
 | Relation | Target |
 | -------- | ------ |
-| `manifest` | manifest.json (OS, breaking changes) |
-| `latest-security-month` | Last security month |
+| `major-manifest` | manifest.json (OS, breaking changes, what's new) |
+| `latest-security-disclosures` | Security month for this version |
 
 From `llms.json._links`:
 
 | Relation | Target |
 | -------- | ------ |
 | `latest`, `latest-lts` | Newest release (same when latest is LTS; diverge when STS is newer) |
-| `latest-security-month` | Current security month |
+| `latest-security-disclosures` | Latest security month (CVE queries) |
 | `root` | All versions including EOL |

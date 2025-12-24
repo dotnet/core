@@ -81,6 +81,24 @@
         ],
         "keywords": ["announcement", "blog", "official", "devblogs"],
         "intent": "release-discovery"
+      },
+      "whats-new-by-area": {
+        "description": "Extract what's-new URL for a specific area from manifest",
+        "follow_path": ["kind:manifest"],
+        "select_link": ["whats-new-{area}"],
+        "templated": true,
+        "yields": "url",
+        "query_hints": [
+          "Get runtime what's-new URL",
+          "Link to SDK changes doc",
+          "Libraries what's-new for this version"
+        ],
+        "keywords": ["extract", "url", "link", "area"],
+        "intent": "release-discovery",
+        "example": {
+          "area": "runtime",
+          "result": "URL to whats-new-runtime markdown"
+        }
       }
     }
   }

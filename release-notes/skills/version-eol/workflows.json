@@ -32,39 +32,19 @@
         "keywords": ["supported", "current", "versions", "list"],
         "intent": "support-status"
       },
-      "eol-date-supported": {
-        "description": "EOL date for a currently supported version (1 fetch)",
-        "follow_path": ["kind:llms"],
-        "destination_kind": "llms",
-        "select_embedded": ["patches"],
-        "filter": "$._embedded.patches['{version}']",
-        "select_property": ["eol_date", "support_phase"],
+      "eol-date": {
+        "description": "EOL date for any version (requires major index)",
+        "follow_path": ["kind:llms", "root", "{version}"],
+        "destination_kind": "major",
+        "select_property": ["eol_date"],
         "templated": true,
         "yields": "json",
         "query_hints": [
           "When does .NET 8 go EOL?",
-          "How long is .NET 10 supported?",
+          "When did .NET 6 go EOL?",
           "End of support for .NET 9?"
         ],
         "keywords": ["eol", "end", "support", "when", "date"],
-        "intent": "support-status",
-        "not_for": [
-          "EOL versions like .NET 6, .NET 7 (use eol-date-any)"
-        ]
-      },
-      "eol-date-any": {
-        "description": "EOL date for any version including already-EOL versions (3 fetches)",
-        "follow_path": ["kind:llms", "root", "{version}"],
-        "destination_kind": "major",
-        "select_property": ["eol_date", "supported"],
-        "templated": true,
-        "yields": "json",
-        "query_hints": [
-          "When did .NET 6 go EOL?",
-          "When did .NET 7 end support?",
-          "EOL date for .NET 5?"
-        ],
-        "keywords": ["eol", "when", "did", "end", "past"],
         "intent": "support-status"
       },
       "release-type": {
@@ -97,6 +77,24 @@
         ],
         "keywords": ["last", "final", "security", "patch", "eol"],
         "intent": "security-audit"
+      },
+      "version-support-extract": {
+        "description": "Extract support info for a specific version from llms.json",
+        "follow_path": ["kind:llms"],
+        "select_embedded": ["patches['{version}']"],
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "Get .NET 8 support details",
+          "Extract .NET 9 info from this",
+          "What's the status of .NET 10?"
+        ],
+        "keywords": ["extract", "version", "support", "details"],
+        "intent": "support-status",
+        "example": {
+          "version": "8.0",
+          "result": "Support info for .NET 8.0"
+        }
       }
     }
   }

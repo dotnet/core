@@ -6,79 +6,80 @@ workflows: https://raw.githubusercontent.com/dotnet/core/refs/heads/release-inde
 
 # What's New Queries
 
-## Workflows
+## First: Which Content?
 
-This skill uses the following workflows from `workflows.json`:
+| Need | Link relation | Type |
+| ---- | ------------- | ---- |
+| Overview | `whats-new` | markdown |
+| Runtime (JIT, GC, AOT) | `whats-new-runtime` | markdown |
+| Libraries (BCL, LINQ) | `whats-new-libraries` | markdown |
+| SDK/tooling | `whats-new-sdk` | markdown |
+| Announcement blog | `release-blog-html` | HTML |
 
-| Workflow | Use when |
-|----------|----------|
-| `whats-new-overview` | General "what's new" for latest release |
-| `whats-new-runtime` | JIT, GC, AOT, performance improvements |
-| `whats-new-libraries` | BCL, LINQ, JSON, crypto APIs (.NET 9+) |
-| `whats-new-sdk` | CLI, MSBuild, tooling changes |
-| `release-announcement` | Official blog post URL |
+## Quick Answers
+
+From `manifest.json._links`:
+
+- What's new overview? → `whats-new`
+- Runtime improvements? → `whats-new-runtime`
+- Library additions? → `whats-new-libraries`
+- Release blog URL? → `release-blog-html`
 
 ## Stop Criteria
 
-**STOP when you have the manifest.json.** It contains links to "What's New" docs (both raw markdown and HTML) and release blog posts.
+**STOP when you have manifest.json.** It contains links to all "What's New" docs. Only fetch the markdown if you need content.
 
-## Interpretation
+## Workflows
 
-### Quick Answers (from manifest.json)
+```json
+"whats-new-overview": {
+  "follow_path": ["kind:llms", "patches.{version}", "major-manifest", "whats-new"],
+  "destination_kind": "markdown",
+  "yields": "markdown"
+}
+```
 
-Once you have `manifest.json._links`:
+```json
+"whats-new-by-area": {
+  "follow_path": ["kind:manifest"],
+  "select_link": ["whats-new-{area}"],
+  "yields": "url"
+}
+```
 
-| Question | Link relation | Type |
-|----------|---------------|------|
-| What's new overview? | `whats-new` | markdown |
-| What's new in runtime? | `whats-new-runtime` | markdown |
-| What's new in libraries? | `whats-new-libraries` | markdown |
-| What's new in SDK? | `whats-new-sdk` | markdown |
-| HTML docs URL? | `whats-new-rendered` | HTML |
-| Release announcement? | `release-blog-rendered` | HTML |
+**Example:** Get runtime improvements for .NET 10:
 
-### Available Link Relations
+```text
+manifest.json._links["whats-new-runtime"].href
+→ fetch raw markdown for JIT, GC, AOT details
+```
 
-| Relation | Content | Type |
-|----------|---------|------|
+All workflows: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/workflows.json>
+
+## External Schema: manifest.json
+
+| Link relation | Content | Type |
+| ------------- | ------- | ---- |
 | `whats-new` | Overview of new features | markdown |
 | `whats-new-runtime` | Runtime improvements | markdown |
 | `whats-new-libraries` | Library additions (.NET 9+) | markdown |
 | `whats-new-sdk` | SDK and tooling changes | markdown |
-| `whats-new-containers` | Container improvements (.NET 8 only) | markdown |
-| `whats-new-rendered` | Microsoft Learn overview | HTML |
-| `release-blog-rendered` | DevBlogs announcement | HTML |
-| `downloads-rendered` | .NET download page | HTML |
+| `whats-new-html` | Microsoft Learn overview | HTML |
+| `release-blog-html` | DevBlogs announcement | HTML |
+
+**Note:** .NET 8 has `whats-new-containers` instead of `whats-new-libraries`.
 
 ## Common Mistakes
 
 | Mistake | Correction |
-|---------|------------|
-| Constructing raw.githubusercontent.com URLs | Follow `_links` from manifest |
-| Fetching HTML when markdown available | Use `whats-new` (markdown) for LLM processing |
-| Fetching content when URL is enough | If user just needs link, don't fetch the page |
-| Looking for `whats-new-libraries` in .NET 8 | .NET 8 has `whats-new-containers` instead |
-
-## Preview Release Notes
-
-Preview manifests contain detailed per-technology what's-new content written by the .NET team during development. This is point-in-time source material that informed the consolidated Learn documentation.
-
-Preview manifest link relations:
-- `whats-new-runtime`, `whats-new-libraries`, `whats-new-sdk`
-- `whats-new-aspnetcore`, `whats-new-efcore`, `whats-new-csharp`
-- `whats-new-fsharp`, `whats-new-dotnetmaui`, `whats-new-winforms`
-- `whats-new-wpf`, `whats-new-containers`, `whats-new-visualbasic`
-
-Use preview manifests when you need:
-- Per-preview changelog of a specific technology
-- Original developer-written release notes
-- Historical context for when features were introduced
+| ------- | ---------- |
+| Constructing URLs | Follow `_links` from manifest |
+| Fetching HTML when markdown available | Use markdown links for LLM processing |
+| Fetching content when URL is enough | If user just needs link, don't fetch |
+| Looking for `whats-new-libraries` in .NET 8 | Use `whats-new-containers` for .NET 8 |
 
 ## Tips
 
-- Raw markdown links (`whats-new`, `whats-new-runtime`, etc.) are LLM-friendly
-- `-rendered` links are HTML (human-friendly)
+- Raw markdown links are LLM-friendly; `-html` links are for humans
 - For summarization, prefer raw markdown over HTML
-- .NET 8 has containers.md instead of libraries.md
-- `release-blog-rendered` has high-level highlights and context
-- Preview manifests have granular per-technology release notes
+- `release-blog-html` has high-level highlights and context
