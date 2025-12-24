@@ -74,6 +74,25 @@
         "not_for": [
           "Official .NET Docker images (use mcr.microsoft.com/dotnet)"
         ]
+      },
+      "distro-packages": {
+        "description": "Extract packages for a specific distro/release from os-packages.json",
+        "follow_path": ["kind:os-packages"],
+        "filter": "$.distributions[?(@.name == '{distro}')].releases[?(@.release == '{release}')].packages",
+        "templated": true,
+        "yields": "json",
+        "query_hints": [
+          "What packages for Ubuntu 24.04?",
+          "Debian 12 dependencies?",
+          "Extract Fedora packages from this file"
+        ],
+        "keywords": ["packages", "extract", "distro", "release"],
+        "intent": "installation",
+        "example": {
+          "distro": "ubuntu",
+          "release": "24.04",
+          "result": "Package list for Ubuntu 24.04"
+        }
       }
     }
   }
