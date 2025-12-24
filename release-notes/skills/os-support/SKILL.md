@@ -1,7 +1,7 @@
 ---
 name: os-support
 description: OS packages, distro support, glibc/musl requirements
-workflows: https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/os-support/workflows.json
+workflows: https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/workflows.json
 ---
 
 # OS Packages and Support Queries
