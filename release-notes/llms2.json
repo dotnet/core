@@ -8,45 +8,13 @@
   "latest_lts_major": "10.0",
   "latest_patch_date": "2025-12-09T00:00:00+00:00",
   "latest_security_patch_date": "2025-10-14T00:00:00+00:00",
-  "last_updated_date": "2025-12-24T04:21:05.7211712+00:00",
+  "last_updated_date": "2025-12-24T12:33:05.0126291+00:00",
   "supported_major_releases": [
     "10.0",
     "9.0",
     "8.0"
   ],
   "_workflows": {
-    "whats-new-{component}": {
-      "description": "What\u0027s new documentation for a specific component (runtime, sdk, libraries)",
-      "follow_path": [
-        "latest-major",
-        "manifest",
-        "whats-new-{component}"
-      ],
-      "destination_kind": "markdown",
-      "yields": "markdown",
-      "templated": true,
-      "query_hints": [
-        "What\u0027s new in .NET runtime?",
-        "What\u0027s new in .NET SDK?",
-        "What\u0027s new in .NET libraries?"
-      ]
-    },
-    "{component}-download": {
-      "description": "Download URL for the latest release of a specific component (runtime, sdk, libraries)",
-      "follow_path": [
-        "latest-major",
-        "downloads",
-        "{component}"
-      ],
-      "destination_kind": "downloads",
-      "yields": "json",
-      "templated": true,
-      "query_hints": [
-        "Where can I download .NET SDK?",
-        "Get .NET 10 SDK",
-        "SDK tarball URL for Linux"
-      ]
-    },
     "breaking-changes": {
       "description": "Breaking changes for upgrade planning, filterable by impact level",
       "follow_path": [
@@ -61,68 +29,6 @@
         "High-impact breaking changes?",
         "What will break when I upgrade?",
         "Migration guidance for .NET upgrade"
-      ]
-    },
-    "read_compatibility_json": {
-      "description": "How to interpret compatibility.json documents: impact levels, filtering by category, and upgrade planning strategies",
-      "follow_path": [],
-      "_links": {
-        "self": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/breaking-changes/workflows.json",
-          "title": "Breaking changes schema and filtering workflows"
-        }
-      }
-    },
-    "latest-cve-disclosures": {
-      "description": "CVE disclosures from the most recent security release (use latest-cve-json for full details)",
-      "follow_path": [
-        "latest-security-month"
-      ],
-      "destination_kind": "month",
-      "select_embedded": [
-        "disclosures"
-      ],
-      "yields": "json",
-      "query_hints": [
-        "What CVEs were fixed recently?",
-        "Latest security patches?",
-        "Recent .NET vulnerabilities?"
-      ]
-    },
-    "cves-by-month": {
-      "description": "CVEs from a specific month (e.g., October 2024)",
-      "follow_path": [
-        "timeline",
-        "{year}",
-        "{month}"
-      ],
-      "destination_kind": "month",
-      "select_embedded": [
-        "disclosures"
-      ],
-      "yields": "json",
-      "templated": true,
-      "query_hints": [
-        "CVEs from October 2024?",
-        "What vulnerabilities were fixed in March 2025?",
-        "Security patches from last month?"
-      ]
-    },
-    "cves-by-major": {
-      "description": "List of CVEs fixed in the last security patch for a .NET major version",
-      "follow_path": [
-        "patches.{major}",
-        "latest-security-patch"
-      ],
-      "destination_kind": "patch",
-      "select_property": [
-        "cve_records"
-      ],
-      "yields": "json",
-      "templated": true,
-      "query_hints": [
-        "What CVEs did .NET 8 last security patch fix?",
-        "List CVEs patched in .NET 8?"
       ]
     },
     "latest-cve-details": {
@@ -143,47 +49,10 @@
       "follow_path": [],
       "_links": {
         "self": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/cve-schema/workflows.json",
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-schema/workflows.json",
           "title": "CVE schema interpretation and field definitions"
         }
       }
-    },
-    "eol-major-release-date": {
-      "description": "End-of-life date for a .NET version (including EOL versions not in patches)",
-      "follow_path": [
-        "root",
-        "{version}"
-      ],
-      "select_property": [
-        "eol_date",
-        "supported"
-      ],
-      "yields": "json",
-      "templated": true,
-      "query_hints": [
-        "When did .NET 6 go EOL?",
-        "When does .NET 8 end support?",
-        "Is .NET 7 still supported?"
-      ]
-    },
-    "eol-major-release-cves": {
-      "description": "CVEs fixed in the final security patch for an EOL .NET version",
-      "follow_path": [
-        "root",
-        "{version}",
-        "latest-security-month"
-      ],
-      "destination_kind": "month",
-      "select_embedded": [
-        "disclosures"
-      ],
-      "yields": "json",
-      "templated": true,
-      "query_hints": [
-        "What CVEs were in the last .NET 6 patch?",
-        "Final security fixes for .NET 7?",
-        "CVEs patched before .NET 5 went EOL?"
-      ]
     }
   },
   "_links": {
@@ -201,6 +70,10 @@
     "latest-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/12/index.json",
       "title": "Latest month - December 2025"
+    },
+    "latest-security-disclosures": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
+      "title": "Latest security disclosures - October 2025"
     },
     "latest-security-month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
@@ -249,6 +122,9 @@
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/12/index.json"
           },
+          "latest-security-disclosures": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
+          },
           "latest-security-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
           },
@@ -282,6 +158,9 @@
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/11/index.json"
           },
+          "latest-security-disclosures": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
+          },
           "latest-security-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
           },
@@ -314,6 +193,9 @@
           },
           "latest-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/11/index.json"
+          },
+          "latest-security-disclosures": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
           },
           "latest-security-month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
