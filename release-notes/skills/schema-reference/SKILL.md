@@ -31,8 +31,9 @@ Paths are illustrative—always follow `_links["..."].href`.
 |----------|-------------|
 | `self`, `prev`, `prev-security` | Navigation (backward from present) |
 | `latest`, `latest-lts` | Newest release; diverge when STS is newer than current LTS |
+| `latest-security-disclosures` | **CVE/security queries** — month index with disclosures |
+| `latest-security-month` | Alias for `latest-security-disclosures` |
 | `latest-security-patch` | Newest security patch release |
-| `latest-security-month` | Month index for latest security release |
 | `major`, `manifest` | Cross-references |
 | `root`, `timeline-index` | Root indexes |
 | `compatibility`, `supported-os`, `os-packages`, `target-frameworks` | Data resources |

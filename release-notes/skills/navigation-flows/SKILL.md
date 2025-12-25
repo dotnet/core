@@ -32,16 +32,20 @@ llms.json
             └─► _links.latest-security-patch ─► last security patch
 ```
 
-## Flow 2: CVE Queries (2-N fetches)
+## Flow 2: CVE/Security Queries (2-N fetches)
+
+**Use `latest-security-disclosures`** — available at both top-level and patch-level.
 
 ```
 llms.json
     │
-    └─► _links.latest-security-month ─► month/index.json ◄────┐
-            │                                                 │
-            ├─► _embedded.disclosures[] ─► DONE              │
-            ├─► _links.cve-json ─► cve.json (CVSS, CWE)      │
-            └─► _links.prev-security ─────────────────────────┘
+    ├─► _links.latest-security-disclosures ─► month/index.json ◄──┐
+    │                                                              │
+    └─► _embedded.patches["8.0"]._links.latest-security-disclosures│
+                    │                                              │
+                    ├─► _embedded.disclosures[] ─► DONE           │
+                    ├─► _links.cve-json ─► cve.json               │
+                    └─► _links.prev-security ──────────────────────┘
 ```
 
 ## Flow 3: EOL Versions (3-5 fetches)
@@ -80,14 +84,14 @@ llms.json
 ## Key Link Relations
 
 ```
-From llms.json:
-  latest-security-month ──► timeline month (CVE details)
-  root ──────────► full version list (including EOL)
+From llms.json._links:
+  latest-security-disclosures ─► timeline month (CVE disclosures)
+  root ────────────────────────► full version list (including EOL)
 
-From patches["X.0"]:
-  major ─────────────────────► X.0/index.json (patches, timeline)
-  manifest ────────────────► manifest.json (reference data)
-  latest-security-month ───► last security month
+From patches["X.0"]._links:
+  major ───────────────────────► X.0/index.json (patches, timeline)
+  manifest ────────────────────► manifest.json (reference data)
+  latest-security-disclosures ─► security month for this version
 
 From manifest.json:
   compatibility ───────────► breaking changes
