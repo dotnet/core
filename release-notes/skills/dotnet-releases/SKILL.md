@@ -67,6 +67,16 @@ Fetch when your query matches. **Core Rules apply to all.**
 3. **Don't fabricate** — report gaps
 4. **Non-existent relations:** `next` (use `prev`), `latest_sts` (use `latest`)
 
+## Timeline Query Strategies
+
+| Query Type | Strategy | Example |
+| ---------- | -------- | ------- |
+| Short range (1-3 months) | Walk `prev-security-month` links from latest | "Last 3 security months" |
+| Specific unit (1 year or month) | Fetch that year/month index directly | "2024 CVEs", "October 2025" |
+| Large range (cross-year) | Fetch year indexes, filter `_embedded.months` | "Dec 2024 to Nov 2025" |
+
+**Large range queries:** Year indexes expose month metadata (`month`, `security`, links). Filter `_embedded.months` by your date range before collecting links—don't fetch everything then discard.
+
 ## llms.json Contents
 
 | Property | Contains |
@@ -79,9 +89,11 @@ Fetch when your query matches. **Core Rules apply to all.**
 
 From `llms.json._links` (not version-specific):
 
-- Latest CVE disclosures → `latest-security-disclosures`
-- Full CVE details → `latest-cve-json`
+- CVE severity/score → `latest-security-disclosures` (month index)
+- Code diffs, version ranges, CWE → `latest-cve-json` (skip month index)
 - All versions including EOL → `root`
+
+**Code diffs and version ranges need cve.json:** Use `latest-cve-json` directly.
 
 From `llms.json._embedded.patches["X.0"]` (version-specific):
 
@@ -106,5 +118,6 @@ From `llms.json._links`:
 | Relation | Target |
 | -------- | ------ |
 | `latest`, `latest-lts` | Newest release (same when latest is LTS; diverge when STS is newer) |
-| `latest-security-disclosures` | Latest security month (CVE queries) |
+| `latest-security-disclosures` | Latest security month (basic CVE info) |
+| `latest-cve-json` | cve.json directly (code diffs, version ranges, CWE) |
 | `root` | All versions including EOL |
