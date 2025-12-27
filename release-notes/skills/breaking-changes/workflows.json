@@ -1,98 +1,104 @@
 {
   "kind": "workflows",
   "title": "Breaking Changes Workflows",
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "skill": "breaking-changes",
-  "ai_note": "Navigation paths for breaking changes and migration queries. Read required_pre_read for stop criteria, filtering, and interpretation.",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md",
+  "ai_note": "Workflows chain via next_workflow. Follow the chain until your query is satisfied.",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/workflows.json"
-    },
-    "skill": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md"
-    },
-    "root-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/workflows.json"
     }
   },
   "_embedded": {
+    "entry_point": {
+      "description": "Route breaking changes queries to the right workflow",
+      "decision": {
+        "all_changes": { "workflow": "breaking-changes-all", "hint": "list, count, overview" },
+        "high_impact": { "workflow": "breaking-changes-high-impact", "hint": "critical, must-fix, urgent" },
+        "by_category": { "workflow": "breaking-changes-by-category", "hint": "ASP.NET, SDK, libraries" },
+        "migration_docs": { "workflow": "migration-guidance", "hint": "how to fix, code samples" }
+      }
+    },
     "workflows": {
       "breaking-changes-all": {
-        "description": "All breaking changes for a .NET version",
+        "description": "All breaking changes for the latest .NET version",
         "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
         "destination_kind": "compatibility",
-        "yields": "json",
-        "query_hints": [
-          "What are the breaking changes in .NET 10?",
-          "List all breaking changes for .NET 9",
-          "What changed between .NET versions?"
-        ],
-        "keywords": ["breaking", "changes", "compatibility", "all"],
-        "intent": "upgrade-planning"
+        "yields": {
+          "data": "breaks[]",
+          "fields": ["id", "title", "category", "type", "impact"]
+        },
+        "next_workflow": {
+          "condition": "migration steps or code samples needed",
+          "workflow": "migration-extraction",
+          "via": "follow breaks[].references[type='documentation']"
+        }
       },
       "breaking-changes-high-impact": {
         "description": "High-impact breaking changes requiring immediate attention",
         "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
         "destination_kind": "compatibility",
         "filter": "$.breaks[?(@.impact == 'high')]",
-        "yields": "json",
-        "query_hints": [
-          "High-impact breaking changes?",
-          "Critical breaking changes for upgrade?",
-          "What will definitely break?"
-        ],
-        "keywords": ["high", "impact", "critical", "breaking"],
-        "intent": "upgrade-planning"
+        "yields": {
+          "data": "breaks[] where impact='high'",
+          "fields": ["id", "title", "category", "affected_apis"]
+        },
+        "next_workflow": {
+          "condition": "migration steps needed for any high-impact change",
+          "workflow": "migration-extraction",
+          "via": "follow breaks[].references[type='documentation']"
+        }
       },
       "breaking-changes-by-category": {
-        "description": "Breaking changes filtered by category (aspnet-core, sdk, core-libraries, etc.)",
+        "description": "Breaking changes filtered by category",
         "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
         "destination_kind": "compatibility",
         "filter": "$.breaks[?(@.category == '{category}')]",
         "templated": true,
-        "yields": "json",
-        "query_hints": [
-          "ASP.NET Core breaking changes?",
-          "SDK breaking changes?",
-          "What changed in core libraries?"
-        ],
-        "keywords": ["category", "aspnet", "sdk", "libraries", "wpf", "winforms"],
-        "intent": "upgrade-planning"
+        "categories": ["aspnet-core", "sdk", "core-libraries", "windows-forms", "wpf", "cryptography", "extensions", "networking", "serialization"],
+        "yields": {
+          "data": "breaks[] for category"
+        },
+        "next_workflow": {
+          "condition": "migration docs needed",
+          "workflow": "migration-extraction"
+        }
+      },
+      "breaking-changes-by-version": {
+        "description": "Breaking changes for a specific .NET version",
+        "follow_path": ["kind:llms", "patches.{version}", "major-manifest", "compatibility"],
+        "destination_kind": "compatibility",
+        "templated": true,
+        "yields": {
+          "data": "breaks[]"
+        },
+        "next_workflow": {
+          "condition": "migration docs needed",
+          "workflow": "migration-extraction"
+        }
       },
       "migration-guidance": {
-        "description": "Detailed migration documentation for a specific breaking change",
+        "description": "Start here when user needs how-to-fix guidance",
         "follow_path": ["kind:llms", "latest-major", "manifest", "compatibility"],
         "destination_kind": "compatibility",
-        "select_property": ["breaks"],
-        "then_follow": "references[?(@.type == 'documentation')].url",
-        "yields": "markdown",
-        "query_hints": [
-          "How do I fix WebHostBuilder deprecation?",
-          "Migration steps for this breaking change?",
-          "Show me the recommended action"
-        ],
-        "keywords": ["migration", "fix", "how", "recommended", "action"],
-        "intent": "code-migration"
-      },
-      "migration-docs-by-category": {
-        "description": "Get migration documentation URLs for a category from compatibility.json",
-        "follow_path": ["kind:compatibility"],
-        "filter": "$.breaks[?(@.category == '{category}')]",
-        "select_property": ["references[?(@.type == 'documentation')].url"],
-        "templated": true,
-        "yields": "urls",
-        "query_hints": [
-          "Get all ASP.NET Core migration docs",
-          "SDK breaking change documentation",
-          "Migration guides for core-libraries changes"
-        ],
-        "keywords": ["migration", "docs", "category", "aspnet", "sdk", "libraries"],
-        "intent": "code-migration",
-        "example": {
-          "category": "aspnet-core",
-          "result": "URLs to raw markdown migration guides for each ASP.NET Core breaking change"
+        "next_workflow": {
+          "always": true,
+          "workflow": "migration-extraction"
         }
+      },
+      "migration-extraction": {
+        "kind": "extraction",
+        "description": "Extract migration docs from compatibility.json",
+        "source": "compatibility.json already fetched",
+        "patterns": {
+          "doc_url": "$.breaks[].references[?(@.type == 'documentation')].url",
+          "html_url": "$.breaks[].references[?(@.type == 'documentation-html')].url"
+        },
+        "guidance": [
+          "Use documentation URLs for raw markdown (LLM-friendly)",
+          "Use documentation-html URLs for human-readable links",
+          "Only fetch documentation URL if user needs migration steps or code samples"
+        ]
       }
     }
   }
