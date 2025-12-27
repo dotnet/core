@@ -1,37 +1,83 @@
 {
   "kind": "workflows",
   "title": "Root Workflows",
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "skill": "dotnet-releases",
-  "ai_note": "Index of workflow catalogs. Read required_pre_read for behavioral guidance. Follow cross-cutting-workflows for common tasks or domain-specific links for specialized queries.",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/SKILL.md",
+  "ai_note": "Router to specialized skill workflows. Match your query to entry_point.decision, then follow to the specialized skill.",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/workflows.json"
+    }
+  },
+  "_embedded": {
+    "entry_point": {
+      "description": "Route queries to specialized skills",
+      "decision": {
+        "cve_security": {
+          "workflow": "cve-queries",
+          "hint": "CVE, security, CVSS, patches, vulnerabilities",
+          "skill_url": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/workflows.json"
+        },
+        "breaking_changes": {
+          "workflow": "breaking-changes",
+          "hint": "compatibility, migration, breaking changes",
+          "skill_url": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/workflows.json"
+        },
+        "version_eol": {
+          "workflow": "version-eol",
+          "hint": "EOL dates, LTS/STS, support lifecycle",
+          "skill_url": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol/workflows.json"
+        },
+        "whats_new": {
+          "workflow": "whats-new",
+          "hint": "features, release highlights, announcements",
+          "skill_url": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/workflows.json"
+        },
+        "os_support": {
+          "workflow": "os-support",
+          "hint": "distros, packages, glibc, docker",
+          "skill_url": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/workflows.json"
+        },
+        "downloads": { "workflow": "download-latest", "hint": "SDK, runtime, ASP.NET downloads" },
+        "general": { "workflow": "version-info", "hint": "supported versions, current patches" }
+      }
     },
-    "cross-cutting-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/_workflows.json",
-      "title": "Cross-cutting workflows"
-    },
-    "cve-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/workflows.json",
-      "title": "CVE query workflows"
-    },
-    "whats-new-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/workflows.json",
-      "title": "What's new workflows"
-    },
-    "breaking-changes-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/workflows.json",
-      "title": "Breaking changes workflows"
-    },
-    "version-eol-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol/workflows.json",
-      "title": "Version EOL workflows"
-    },
-    "os-support-workflows": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/os-support/workflows.json",
-      "title": "OS support workflows"
+    "workflows": {
+      "version-info": {
+        "description": "Get current version info from embedded data",
+        "follow_path": ["kind:llms"],
+        "destination_kind": "llms",
+        "yields": {
+          "data": "_embedded.patches",
+          "fields": ["version", "release_type", "support_phase", "sdk_version"]
+        },
+        "note": "Zero additional fetches—data is embedded in llms.json"
+      },
+      "download-latest": {
+        "description": "Get download URLs for the latest release",
+        "follow_path": ["kind:llms", "latest-major", "downloads"],
+        "destination_kind": "downloads",
+        "yields": {
+          "data": "download links for SDK, runtime, ASP.NET"
+        }
+      },
+      "manifest-reference": {
+        "description": "Get reference data (OS, TFM, what's new links) from manifest",
+        "follow_path": ["kind:llms", "latest-major", "manifest"],
+        "destination_kind": "manifest",
+        "yields": {
+          "data": "_links to specialized JSON files"
+        },
+        "next_workflow": {
+          "condition": "specific reference data needed",
+          "options": [
+            { "for": "OS packages", "follow": "os-packages-json" },
+            { "for": "Supported distros", "follow": "supported-os-json" },
+            { "for": "Breaking changes", "follow": "compatibility" },
+            { "for": "What's new", "follow": "whats-new" }
+          ]
+        }
+      }
     }
   }
 }
