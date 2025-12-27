@@ -20,7 +20,8 @@ Fetch llms.json + your skill in the same turn. The skill points to workflows.jso
 
 1. Follow `_links` exactly — never construct URLs
 2. Use `_embedded` data first — most queries need zero extra fetches
-3. Match your query to a workflow in the skill, then follow its `follow_path`
+3. Match your query to a workflow, then follow its `follow_path`
+4. Fetch multiple resources per turn when possible
 
 ## Date Queries — Check Before Fetching
 
