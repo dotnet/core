@@ -24,15 +24,31 @@ Fetch llms.json + your skill in the same turn. The skill points to workflows.jso
 
 ## Date Queries — Check Before Fetching
 
-For "since X", "after X", or "has there been" queries:
+### "Since X" / "After X" queries
 
 ```
-query_date = parse(user's date)  // e.g., "November 2025" → 2025-11-01
+query_date = parse(user's date)  // e.g., "November 2025" → 2025-11
 latest = llms.json._embedded.patches[version].latest_security_patch_date
 
 if query_date >= latest:
     Answer: "No security patch since {query_date}. Last was on {latest}."
-    No timeline fetch needed.
+    Stop — no timeline fetch needed.
 ```
 
-Only fetch timeline if query_date < latest AND user wants CVE details.
+If query_date < latest, fetch timeline. May cross year boundary — use `prev-year` links.
+
+### "Between X and Y" / "From X to Y" queries
+
+```
+start = parse(start_date)  // e.g., "November 2024" → 2024-11
+end = parse(end_date)      // e.g., "April 2025" → 2025-04
+
+From year index _embedded.months[], filter BEFORE fetching:
+  Only fetch cve-json where month >= start AND month <= end
+```
+
+May cross year boundary — follow `prev-year` links, don't fabricate URLs.
+
+### "This month" / "This year" queries
+
+Cannot cross year boundary. Use `latest-year` or `latest-security-disclosures` directly.
