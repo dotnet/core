@@ -2,36 +2,37 @@
 
 Machine-readable .NET release, CVE, and compatibility data via HAL hypermedia.
 
-## Entry Points
+## First Fetch — Do These in Parallel
 
-- Data: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json>
-- Skill: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/SKILL.md>
+1. **Data**: <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json>
+2. **Skill**: Pick ONE from the table below based on your query
 
-Fetch both — the skill has detailed guidance for optimal navigation.
+| Query About | Skill |
+|-------------|-------|
+| CVEs, security patches, CVSS | [cve-queries](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md) |
+| Breaking changes, compatibility | [breaking-changes](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md) |
+| Version lifecycle, EOL dates | [version-eol](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/version-eol/SKILL.md) |
+| General queries, unsure | [dotnet-releases](https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/SKILL.md) |
 
-## Key Skills
-
-| Skill | Fetch When |
-| ----- | ---------- |
-| dotnet-releases | Entry point, routing, core rules |
-| cve-queries | CVE severity, CVSS, security history |
-| breaking-changes | Compatibility, migration impact |
-
-## Example Workflow
-
-```json
-"cve-latest": {
-  "follow_path": ["kind:llms", "latest-security-disclosures"],
-  "destination_kind": "month",
-  "select_embedded": ["disclosures"],
-  "yields": "json"
-}
-```
-
-Workflows provide HAL navigation paths. Match your query to a workflow, then follow its `follow_path`.
+Fetch llms.json + your skill in the same turn. The skill points to workflows.json which has chained workflows with `next_workflow` transitions.
 
 ## Core Rules
 
 1. Follow `_links` exactly — never construct URLs
-2. Use `_embedded` data first — answers most queries without extra fetches
-3. Don't fabricate — report gaps
+2. Use `_embedded` data first — most queries need zero extra fetches
+3. Match your query to a workflow in the skill, then follow its `follow_path`
+
+## Date Queries — Check Before Fetching
+
+For "since X", "after X", or "has there been" queries:
+
+```
+query_date = parse(user's date)  // e.g., "November 2025" → 2025-11-01
+latest = llms.json._embedded.patches[version].latest_security_patch_date
+
+if query_date >= latest:
+    Answer: "No security patch since {query_date}. Last was on {latest}."
+    No timeline fetch needed.
+```
+
+Only fetch timeline if query_date < latest AND user wants CVE details.
