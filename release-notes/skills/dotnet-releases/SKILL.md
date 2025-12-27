@@ -53,7 +53,7 @@ Fetch when your query matches. **Core Rules apply to all.**
 
 | Skill | Fetch When | URL |
 | ----- | ---------- | --- |
-| cve-queries | CVE severity, CVSS, security history | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
+| cve-queries | CVE severity, CVSS score, security history | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-queries/SKILL.md> |
 | cve-schema | Extraction from cve.json (CVSS vectors, CWE, packages) | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-schema/SKILL.md> |
 | breaking-changes | Breaking changes, migration impact | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/breaking-changes/SKILL.md> |
 | whats-new | What's new, release highlights | <https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/whats-new/SKILL.md> |

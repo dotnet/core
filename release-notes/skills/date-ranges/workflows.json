@@ -1,0 +1,120 @@
+{
+  "kind": "workflows",
+  "title": "Date Range Workflows",
+  "schema_version": "2.0",
+  "skill": "date-ranges",
+  "ai_note": "Pre-process date queries before graph navigation. Many queries can be answered from embedded data.",
+  "_links": {
+    "self": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/date-ranges/workflows.json"
+    }
+  },
+  "_embedded": {
+    "entry_point": {
+      "description": "Determine if timeline fetch is needed",
+      "decision": {
+        "since_date": {
+          "pattern": "since {date}, after {date}, updated in {date}",
+          "workflow": "since-comparison",
+          "hint": "Compare query date to latest_security_patch_date"
+        },
+        "last_n_months": {
+          "pattern": "last N months, past N months, recent",
+          "workflow": "time-window",
+          "hint": "Calculate cutoff, determine fetch strategy"
+        },
+        "date_range": {
+          "pattern": "between X and Y, from X to Y, X through Y",
+          "workflow": "date-range",
+          "hint": "Calculate span, route to small-range or large-range"
+        },
+        "specific_period": {
+          "pattern": "in {year}, in {month} {year}",
+          "workflow": "specific-period",
+          "hint": "Fetch that specific year/month index"
+        }
+      }
+    },
+    "workflows": {
+      "since-comparison": {
+        "description": "Check if anything happened since a query date",
+        "pre_check": {
+          "compare": "query_date vs latest_security_patch_date",
+          "source": "llms.json._embedded.patches[version] or llms.json",
+          "if_query_date_gte_latest": {
+            "answer": "No {event_type} since {query_date}. Last was on {latest_date}.",
+            "fetch_needed": false
+          },
+          "if_query_date_lt_latest": {
+            "answer": "Yes, {event} on {latest_date}.",
+            "fetch_needed": "only if details requested",
+            "next_workflow": "cve-queries:cve-latest"
+          }
+        },
+        "yields": {
+          "type": "boolean + optional details",
+          "fields": ["has_update", "latest_date", "latest_version"]
+        }
+      },
+      "time-window": {
+        "description": "Calculate time window and determine fetch strategy",
+        "pre_check": {
+          "calculate": "cutoff_date = today - N months",
+          "example": "last 3 months on Dec 26 → cutoff = Sep 26"
+        },
+        "decision": {
+          "zero_security_months_in_range": {
+            "condition": "cutoff >= latest_security_patch_date",
+            "answer": "No security patches in that window.",
+            "fetch_needed": false
+          },
+          "one_to_three_months": {
+            "condition": "1-3 security months in range",
+            "next_workflow": "cve-queries:cve-history.small-range"
+          },
+          "four_plus_months": {
+            "condition": "4+ security months or cross-year",
+            "next_workflow": "cve-queries:cve-history.large-range"
+          }
+        }
+      },
+      "date-range": {
+        "description": "Handle explicit date ranges (X to Y)",
+        "pre_check": {
+          "calculate": [
+            "start_date = parse(X)",
+            "end_date = parse(Y)",
+            "months_span = month_diff(start, end)"
+          ]
+        },
+        "decision": {
+          "small_range": {
+            "condition": "months_span <= 3",
+            "next_workflow": "cve-queries:cve-history.small-range"
+          },
+          "large_range": {
+            "condition": "months_span > 3 or cross-year",
+            "next_workflow": "cve-queries:cve-history.large-range"
+          }
+        }
+      },
+      "specific-period": {
+        "description": "Fetch a specific year or month",
+        "variants": {
+          "year": {
+            "pattern": "in {year}, {year} CVEs",
+            "follow_path": ["kind:llms", "latest-year"],
+            "then": "walk prev-year if needed",
+            "select": "_embedded.months[?security]"
+          },
+          "month": {
+            "pattern": "in {month} {year}",
+            "follow_path": ["kind:llms", "latest-year", "prev-year..."],
+            "then": "find month in _embedded.months",
+            "select": "_links.cve-json"
+          }
+        }
+      }
+    }
+  }
+}
