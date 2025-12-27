@@ -63,5 +63,8 @@ Cannot cross year boundary. Use `latest-year` or `latest-security-disclosures` d
 | Need | Stop At | Has |
 |------|---------|-----|
 | Supported versions, patches | llms.json | `_embedded.patches["X.0"]` |
-| Reference data (OS, TFM) | manifest.json | links to specialized JSON files |
+| What's new (runtime, SDK, etc.) | major manifest | `{version}/manifest.json` has `whats-new-*` links |
+| Reference data (OS, TFM) | major manifest | links to specialized JSON files |
 | Downloads | downloads | component URLs |
+
+**Note:** For what's-new queries, use the **major manifest** (`10.0/manifest.json`), not patch manifests (`10.0/10.0.0/manifest.json`).
