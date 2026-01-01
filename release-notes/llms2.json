@@ -1,60 +1,16 @@
 {
   "kind": "llms",
   "title": ".NET Release Index for AI",
-  "ai_note": "ALWAYS read required_pre_read first. Use skills and workflows when they match; they provide optimal paths. Trust _embedded data\u2014it\u0027s authoritative and current. Never construct URLs.",
-  "human_note": "No support or compatibility is offered for this file. Don\u0027t use it for automated workflows. Use index.json instead.",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/SKILL.md",
   "latest_major": "10.0",
   "latest_lts_major": "10.0",
   "latest_patch_date": "2025-12-09T00:00:00+00:00",
   "latest_security_patch_date": "2025-10-14T00:00:00+00:00",
-  "last_updated_date": "2025-12-24T12:33:05.0126291+00:00",
+  "last_updated_date": "2025-12-26T06:17:39.6838882+00:00",
   "supported_major_releases": [
     "10.0",
     "9.0",
     "8.0"
   ],
-  "_workflows": {
-    "breaking-changes": {
-      "description": "Breaking changes for upgrade planning, filterable by impact level",
-      "follow_path": [
-        "latest-major",
-        "manifest",
-        "compatibility"
-      ],
-      "destination_kind": "compatibility",
-      "yields": "json",
-      "query_hints": [
-        "What are the breaking changes in .NET 10?",
-        "High-impact breaking changes?",
-        "What will break when I upgrade?",
-        "Migration guidance for .NET upgrade"
-      ]
-    },
-    "latest-cve-details": {
-      "description": "Full CVE details (CVSS vectors, CWE, packages) via latest-cve-json shortcut",
-      "follow_path": [
-        "latest-cve-json"
-      ],
-      "destination_kind": "cve",
-      "yields": "json",
-      "query_hints": [
-        "Full details on latest CVEs?",
-        "CVSS vectors for recent vulnerabilities?",
-        "Which packages are affected by recent CVEs?"
-      ]
-    },
-    "read_cve_json": {
-      "description": "How to interpret cve.json documents: field definitions, CVSS vectors, severity filtering, and affected package analysis",
-      "follow_path": [],
-      "_links": {
-        "self": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/cve-schema/workflows.json",
-          "title": "CVE schema interpretation and field definitions"
-        }
-      }
-    }
-  },
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json"
