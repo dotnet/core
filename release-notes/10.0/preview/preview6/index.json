@@ -27,10 +27,6 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
       "title": ".NET Major Release Index - 10.0"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/manifest.json",
-      "title": "Manifest - .NET 10.0"
-    },
     "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json",
       "title": ".NET Month Timeline Index - July 2025"
@@ -38,24 +34,92 @@
     "root": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
       "title": ".NET Release Index"
+    },
+    "release-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/release.json",
+      "title": "Release information",
+      "type": "application/json"
     }
   },
   "_embedded": {
+    "runtime": {
+      "version": "10.0.0-preview.6",
+      "_links": {
+        "downloads-aspnetcore": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/aspnetcore.json"
+        },
+        "downloads-runtime": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/runtime.json"
+        },
+        "downloads-windowsdesktop": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/windowsdesktop.json"
+        },
+        "release-notes": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/10.0.0-preview.6.md",
+          "type": "application/markdown"
+        },
+        "whats-new-aspnetcore": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/aspnetcore.md",
+          "type": "application/markdown"
+        },
+        "whats-new-containers": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/containers.md",
+          "type": "application/markdown"
+        },
+        "whats-new-csharp": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/csharp.md",
+          "type": "application/markdown"
+        },
+        "whats-new-dotnetmaui": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/dotnetmaui.md",
+          "type": "application/markdown"
+        },
+        "whats-new-efcore": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/efcore.md",
+          "type": "application/markdown"
+        },
+        "whats-new-fsharp": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/fsharp.md",
+          "type": "application/markdown"
+        },
+        "whats-new-libraries": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/libraries.md",
+          "type": "application/markdown"
+        },
+        "whats-new-runtime": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/runtime.md",
+          "type": "application/markdown"
+        },
+        "whats-new-sdk": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/sdk.md",
+          "type": "application/markdown"
+        },
+        "whats-new-visualbasic": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/visualbasic.md",
+          "type": "application/markdown"
+        },
+        "whats-new-winforms": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/winforms.md",
+          "type": "application/markdown"
+        },
+        "whats-new-wpf": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/wpf.md",
+          "type": "application/markdown"
+        }
+      }
+    },
     "sdk": {
       "version": "10.0.100-preview.6.25358.103",
       "band": "10.0.1xx",
       "date": "2025-07-15T00:00:00\u002B00:00",
       "label": ".NET SDK 10.0.1xx",
-      "support_phase": "preview",
       "_links": {
         "downloads": {
           "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/sdk-10.0.1xx.json"
         },
-        "release-month": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json"
-        },
-        "release-patch": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/index.json"
+        "release-notes": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/10.0.0-preview.6.md",
+          "type": "application/markdown"
         }
       }
     },
@@ -65,16 +129,13 @@
         "band": "10.0.1xx",
         "date": "2025-07-15T00:00:00\u002B00:00",
         "label": ".NET SDK 10.0.1xx",
-        "support_phase": "preview",
         "_links": {
           "downloads": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/sdk-10.0.1xx.json"
           },
-          "release-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/index.json"
+          "release-notes": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/preview6/10.0.0-preview.6.md",
+            "type": "application/markdown"
           }
         }
       }
