@@ -34,10 +34,6 @@
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/index.json",
       "title": ".NET Major Release Index - 9.0"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/manifest.json",
-      "title": "Manifest - .NET 9.0"
-    },
     "month": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json",
       "title": ".NET Month Timeline Index - July 2025"
@@ -45,24 +41,44 @@
     "root": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
       "title": ".NET Release Index"
+    },
+    "release-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/release.json",
+      "title": "Release information",
+      "type": "application/json"
     }
   },
   "_embedded": {
+    "runtime": {
+      "version": "9.0.7",
+      "_links": {
+        "downloads-aspnetcore": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/aspnetcore.json"
+        },
+        "downloads-runtime": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/runtime.json"
+        },
+        "downloads-windowsdesktop": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/windowsdesktop.json"
+        },
+        "release-notes": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/9.0.7.md",
+          "type": "application/markdown"
+        }
+      }
+    },
     "sdk": {
       "version": "9.0.303",
       "band": "9.0.3xx",
       "date": "2025-07-17T00:00:00\u002B00:00",
       "label": ".NET SDK 9.0.3xx",
-      "support_phase": "active",
       "_links": {
         "downloads": {
           "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/sdk-9.0.3xx.json"
         },
-        "release-month": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json"
-        },
-        "release-patch": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/index.json"
+        "release-notes": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/9.0.303.md",
+          "type": "application/markdown"
         }
       }
     },
@@ -72,16 +88,13 @@
         "band": "9.0.3xx",
         "date": "2025-07-17T00:00:00\u002B00:00",
         "label": ".NET SDK 9.0.3xx",
-        "support_phase": "active",
         "_links": {
           "downloads": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/sdk-9.0.3xx.json"
           },
-          "release-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/index.json"
+          "release-notes": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/9.0.303.md",
+            "type": "application/markdown"
           }
         }
       },
@@ -90,16 +103,13 @@
         "band": "9.0.3xx",
         "date": "2025-07-17T00:00:00\u002B00:00",
         "label": ".NET SDK 9.0.3xx",
-        "support_phase": "active",
         "_links": {
           "downloads": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/sdk-9.0.3xx.json"
           },
-          "release-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/index.json"
+          "release-notes": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/9.0.7.md",
+            "type": "application/markdown"
           }
         }
       },
@@ -108,16 +118,13 @@
         "band": "9.0.1xx",
         "date": "2025-07-17T00:00:00\u002B00:00",
         "label": ".NET SDK 9.0.1xx",
-        "support_phase": "active",
         "_links": {
           "downloads": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/sdk-9.0.1xx.json"
           },
-          "release-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/07/index.json"
-          },
-          "release-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/index.json"
+          "release-notes": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.7/9.0.108.md",
+            "type": "application/markdown"
           }
         }
       }
