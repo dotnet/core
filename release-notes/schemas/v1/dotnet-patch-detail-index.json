@@ -1,5 +1,5 @@
 {
-  "description": "Detailed index for a specific patch release with CVE disclosure information",
+  "description": "Detailed index for a specific patch release. For CVE details, use month or cve-json link.",
   "type": [
     "object",
     "null"
@@ -8,25 +8,18 @@
     "kind": {
       "description": "Type of release document, always \u0027patch-index\u0027 for patch detail indexes",
       "enum": [
-        "releases-index",
-        "major-version-index",
-        "patch-version-index",
-        "sdk-index",
+        "root",
+        "major",
+        "patch",
+        "sdk",
         "manifest",
         "band",
         "sdk-download",
-        "downloads-index",
+        "downloads",
         "component-download",
+        "llms",
         "content",
-        "unknown",
-        "release-index",
-        "index",
-        "major-index",
-        "major-release-index",
-        "patch-index",
-        "patch-release-index",
-        "major-release",
-        "patch-release"
+        "unknown"
       ]
     },
     "title": {
@@ -57,12 +50,8 @@
       ]
     },
     "security": {
-      "description": "True if this release includes security fixes (CVEs); defaults to true for safety",
+      "description": "True if this release includes security fixes (CVEs)",
       "type": "boolean"
-    },
-    "cve_count": {
-      "description": "Number of CVEs fixed in this release",
-      "type": "integer"
     },
     "cve_records": {
       "description": "CVE identifiers fixed in this release (for quick enumeration)",
@@ -84,7 +73,23 @@
         "null"
       ]
     },
-    "sdk_release": {
+    "prev_patch_date": {
+      "description": "Release date of the previous patch",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "prev_security_patch_date": {
+      "description": "Release date of the previous security patch",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "sdk_version": {
       "description": "Highest SDK version shipped with this runtime patch",
       "type": [
         "string",
@@ -152,7 +157,31 @@
         "null"
       ],
       "properties": {
-        "sdk_release": {
+        "runtime": {
+          "description": "Runtime release with download links and release notes",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "version": {
+              "description": "Runtime version (same as patch version, e.g., \u00279.0.1\u0027)",
+              "type": "string"
+            },
+            "_links": {
+              "description": "HAL\u002BJSON links for runtime downloads and release notes",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/properties/_links/additionalProperties"
+              }
+            }
+          },
+          "required": [
+            "version",
+            "_links"
+          ]
+        },
+        "sdk": {
           "description": "Highest SDK release as a feature band object (for quick lookup)",
           "type": [
             "object",
@@ -258,7 +287,7 @@
                 ]
               },
               "_links": {
-                "$ref": "#/properties/_embedded/properties/sdk_release/properties/_links"
+                "$ref": "#/properties/_embedded/properties/sdk/properties/_links"
               }
             },
             "required": [
@@ -268,162 +297,6 @@
               "label",
               "support_phase",
               "_links"
-            ]
-          }
-        },
-        "disclosures": {
-          "description": "CVE security vulnerability disclosures for this patch release",
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "description": "Simplified CVE record for embedding in indexes",
-            "type": [
-              "object",
-              "null"
-            ],
-            "properties": {
-              "id": {
-                "description": "CVE identifier (e.g., \u0027CVE-2025-12345\u0027)",
-                "type": "string"
-              },
-              "title": {
-                "description": "Title describing the vulnerability",
-                "type": "string"
-              },
-              "_links": {
-                "description": "HAL\u002BJSON links to related CVE resources",
-                "type": [
-                  "object",
-                  "null"
-                ]
-              },
-              "fixes": {
-                "description": "List of fix commit links that resolve this CVE",
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "description": "Link to a Git commit with repository context",
-                  "type": [
-                    "object",
-                    "null"
-                  ],
-                  "properties": {
-                    "href": {
-                      "description": "URL to the commit diff",
-                      "type": "string"
-                    },
-                    "repo": {
-                      "description": "Repository name (e.g., \u0027aspnetcore\u0027, \u0027runtime\u0027)",
-                      "type": "string"
-                    },
-                    "branch": {
-                      "description": "Branch name (e.g., \u0027release/8.0\u0027)",
-                      "type": "string"
-                    },
-                    "title": {
-                      "description": "Descriptive title for the commit",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    },
-                    "release": {
-                      "description": ".NET release version (e.g., \u00278.0\u0027)",
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "href",
-                    "repo",
-                    "branch"
-                  ]
-                }
-              },
-              "cvss_score": {
-                "description": "CVSS base score",
-                "type": [
-                  "number",
-                  "null"
-                ]
-              },
-              "cvss_severity": {
-                "description": "CVSS severity rating (e.g., \u0027HIGH\u0027, \u0027CRITICAL\u0027)",
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "disclosure_date": {
-                "description": "Date when the CVE was publicly disclosed",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date"
-              },
-              "affected_releases": {
-                "description": "List of .NET major versions affected by this CVE",
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "affected_products": {
-                "description": "List of products affected by this CVE",
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "affected_packages": {
-                "description": "List of packages affected by this CVE",
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              },
-              "platforms": {
-                "description": "Platforms affected by the CVE (e.g., \u0027linux\u0027, \u0027windows\u0027, \u0027all\u0027)",
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "required": [
-              "id",
-              "title"
             ]
           }
         }
@@ -437,7 +310,6 @@
     "date",
     "support_phase",
     "security",
-    "cve_count",
     "cve_records"
   ]
 }
