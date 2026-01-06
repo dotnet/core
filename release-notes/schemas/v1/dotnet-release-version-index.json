@@ -8,30 +8,30 @@
     "kind": {
       "description": "Type of release document, always \u0027index\u0027 for version-based indexes",
       "enum": [
-        "releases-index",
-        "major-version-index",
-        "patch-version-index",
-        "sdk-index",
+        "root",
+        "major",
+        "patch",
+        "sdk",
         "manifest",
         "band",
         "sdk-download",
-        "downloads-index",
+        "downloads",
         "component-download",
+        "llms",
         "content",
-        "unknown",
-        "release-index",
-        "index",
-        "major-index",
-        "major-release-index",
-        "patch-index",
-        "patch-release-index",
-        "major-release",
-        "patch-release"
+        "unknown"
       ]
     },
     "title": {
       "description": "Concise title for the document",
       "type": "string"
+    },
+    "ai_note": {
+      "description": "Note for AI assistants on how to navigate this graph",
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "description": {
       "description": "Description of the index scope",
@@ -40,15 +40,15 @@
         "null"
       ]
     },
-    "latest": {
-      "description": "Latest stable .NET version",
+    "latest_major": {
+      "description": "Latest major .NET version (e.g., \u002710.0\u0027)",
       "type": [
         "string",
         "null"
       ]
     },
-    "latest_lts": {
-      "description": "Latest LTS (Long-Term Support) .NET version",
+    "latest_lts_major": {
+      "description": "Latest LTS major .NET version (e.g., \u002710.0\u0027)",
       "type": [
         "string",
         "null"
@@ -139,8 +139,11 @@
       ],
       "properties": {
         "releases": {
-          "description": "List of major version entries with full lifecycle information",
-          "type": "array",
+          "description": "List of patch releases for this major version",
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "description": "Major version entry within the root index, containing full lifecycle information",
             "type": [
@@ -273,11 +276,73 @@
               "version"
             ]
           }
+        },
+        "sdk_feature_bands": {
+          "description": "SDK feature bands for this major version (8.0\u002B)",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "description": "Individual SDK feature band entry containing version metadata and navigation links",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "version": {
+                "description": "Latest SDK version in this feature band (e.g., \u00279.0.307\u0027)",
+                "type": "string"
+              },
+              "band": {
+                "description": "Feature band identifier (e.g., \u00279.0.3xx\u0027)",
+                "type": "string"
+              },
+              "date": {
+                "description": "Release date of the latest SDK in this feature band",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "label": {
+                "description": "Descriptive label for the feature band",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "support_phase": {
+                "description": "Support phase (preview, go-live, active, maintenance, eol)",
+                "enum": [
+                  "preview",
+                  "go-live",
+                  "active",
+                  "maintenance",
+                  "eol",
+                  null
+                ]
+              },
+              "_links": {
+                "description": "HAL\u002BJSON links for navigation to this feature band\u0027s content",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/properties/_links/additionalProperties"
+                }
+              }
+            },
+            "required": [
+              "version",
+              "band",
+              "date",
+              "label",
+              "support_phase",
+              "_links"
+            ]
+          }
         }
-      },
-      "required": [
-        "releases"
-      ]
+      }
     }
   },
   "required": [
