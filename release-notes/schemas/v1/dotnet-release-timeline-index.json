@@ -8,12 +8,10 @@
     "kind": {
       "description": "Type of timeline index (release-timeline-index, timeline-year-index, timeline-month-index)",
       "enum": [
-        "timeline-index",
-        "year-index",
-        "month-index",
-        "release-timeline-index",
-        "timeline-year-index",
-        "timeline-month-index"
+        "timeline",
+        "year",
+        "month",
+        "manifest"
       ]
     },
     "title": {
@@ -27,15 +25,15 @@
         "null"
       ]
     },
-    "latest": {
-      "description": "Latest major .NET version (cross-reference to releases)",
+    "latest_major": {
+      "description": "Latest major .NET version (e.g., \u002710.0\u0027)",
       "type": [
         "string",
         "null"
       ]
     },
-    "latest_lts": {
-      "description": "Latest LTS .NET version (cross-reference to releases)",
+    "latest_lts_major": {
+      "description": "Latest LTS major .NET version (e.g., \u002710.0\u0027)",
       "type": [
         "string",
         "null"
@@ -140,8 +138,8 @@
                   "null"
                 ]
               },
-              "releases": {
-                "description": "List of .NET version identifiers released during this year",
+              "major_releases": {
+                "description": "List of .NET major version identifiers released during this year",
                 "type": [
                   "array",
                   "null"
