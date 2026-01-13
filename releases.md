@@ -10,13 +10,13 @@ The following table lists supported releases.
 
 |  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Preview | [10.0.1][10.0.1] | November 14, 2028 |
-| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.11][9.0.11] | November 10, 2026 |
-| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.22][8.0.22] | November 10, 2026 |
+| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Preview | [10.0.2][10.0.2] | November 14, 2028 |
+| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.12][9.0.12] | November 10, 2026 |
+| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.23][8.0.23] | November 10, 2026 |
 
-[10.0.1]: release-notes/10.0/10.0.1/10.0.1.md
-[9.0.11]: release-notes/9.0/9.0.11/9.0.11.md
-[8.0.22]: release-notes/8.0/8.0.22/8.0.22.md
+[10.0.2]: release-notes/10.0/10.0.2/10.0.2.md
+[9.0.12]: release-notes/9.0/9.0.12/9.0.12.md
+[8.0.23]: release-notes/8.0/8.0.23/8.0.23.md
 
 ## End-of-life releases
 
