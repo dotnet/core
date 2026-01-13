@@ -84,3 +84,19 @@ SDK and runtime installers for macOS install a `createdump` binary that lacks th
 .NET 10.0 packages for Debian 13 (Trixie) are functional and install successfully. However, during installation, users may see multiple warnings like `W: Unknown TAR header type 120`. These warnings are cosmetic and do not affect the functionality of the installed .NET SDK or runtime. We are actively working to resolve these warnings in a future update.
 
 For installation instructions, see [Install .NET on Debian](https://learn.microsoft.com/dotnet/core/install/linux-debian).
+
+## .NET SDK
+
+### `dotnet --info` output is poorly formatted in some terminal windows
+This affects 10.0.102 and should be fixed in 10.0.103. The impact is to admin command prompts on Windows for sure but may impact other terminals.
+
+The information is all there but the tabbing of all information from the .NET native host is off.
+
+### `dotnet workload` commands broken on upgrade of package manager SDKs after installing a workload
+Installing workloads like wasm-tools depends on manifests in the dotnet/sdk-manifests folder. When we install, we assume those files are there until we remove them but they were installed by the .NET SDK install. When upgrading with a package manager, the files we're using in sdk-manifest get removed and the .NET SDK cannot recover with existing commands. This won't affect installs from zips or tars, Mac PKG installs, or Windows admin installs as the manifests should be left behind for those scenarios.
+
+**Error message:** _Workload manifest microsoft.net.workload.mono.toolchain.net8: 10.0.100/10.0.100 from workload version 10.0.100.1 was not installed. Running "dotnet workload repair" may resolve this._
+
+Impacts 10.0.101 and newer .NET SDK versions. 
+
+**Workaround**: `dotnet workload config --update-mode manifests` then `dotnet workload update`. After that you can switch back to workload-set updates or stick with manifest until this is resolved. You may need to delete the dotnet/metadata folder as well.
