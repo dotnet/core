@@ -88,7 +88,7 @@ For installation instructions, see [Install .NET on Debian](https://learn.micros
 ## .NET SDK
 
 ### `dotnet --info` output is poorly formatted in some terminal windows
-This affects 10.0.102 and should be fixed in 10.0.103. The impact is to admin command prompts on Windows for sure but may impact other terminals.
+This affects 10.0.102 and should be fixed in 10.0.103. The impact is on Windows using the built in console host (conhost.exe), but the issue does not affect Windows Terminal, or when redirecting output to a file or captured as a child process.
 
 The information is all there but the tabbing of all information from the .NET native host is off.
 
