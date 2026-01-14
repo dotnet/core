@@ -99,9 +99,8 @@ Installing workloads like wasm-tools depends on manifests in the dotnet/sdk-mani
 
 **Error message:** _Workload manifest microsoft.net.workload.mono.toolchain.net8: 10.0.100/10.0.100 from workload version 10.0.100.1 was not installed. Running "dotnet workload repair" may resolve this._
 
-Impacts 10.0.101 and newer .NET SDK versions. 
+Impacts 10.0.101 and newer .NET SDK versions.
 
 **Workaround**: `dotnet workload config --update-mode manifests` then `dotnet workload update`. After that you can switch back to workload-set updates or stick with manifest until this is resolved. You may need to delete the dotnet/metadata folder as well.
 
 Alternatively, you can install the previous SDK that included the manifests that are missing, then update, then uninstall that SDK.
-
