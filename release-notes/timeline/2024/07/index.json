@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - July 2024",
   "year": "2024",
@@ -14,89 +14,77 @@
     "CVE-2024-38081",
     "CVE-2024-38095"
   ],
-  "major_releases": [
-    "9.0",
-    "8.0",
-    "6.0"
-  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/07/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/06/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/06/index.json",
       "title": "Previous month - June 2024"
     },
     "prev-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/05/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/05/index.json",
       "title": "Previous security month - May 2024"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/manifest.json",
-      "title": "Manifest - July 2024"
-    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/index.json",
       "title": ".NET Year Timeline Index - 2024"
     },
     "cve-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/cve.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/07/cve.json",
       "title": "CVE records - July 2024",
       "type": "application/json"
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "9.0": {
         "version": "9.0.0-preview.6.24327.7",
         "date": "2024-07-09T00:00:00\u002B00:00",
         "year": "2024",
         "month": "07",
         "security": false,
         "support_phase": "preview",
+        "sdk_version": "9.0.100-preview.6.24328.19",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.6.24327.7/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.0-preview.6.24327.7/index.json"
           }
-        },
-        "major_release": "9.0",
-        "sdk_version": "9.0.100-preview.6.24328.19"
+        }
       },
-      {
+      "8.0": {
         "version": "8.0.7",
         "date": "2024-07-09T00:00:00\u002B00:00",
         "year": "2024",
         "month": "07",
         "security": true,
         "support_phase": "active",
+        "sdk_version": "8.0.303",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.7/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.7/index.json"
           }
-        },
-        "major_release": "8.0",
-        "sdk_version": "8.0.303"
+        }
       },
-      {
+      "6.0": {
         "version": "6.0.32",
         "date": "2024-07-09T00:00:00\u002B00:00",
         "year": "2024",
         "month": "07",
         "security": true,
         "support_phase": "active",
+        "sdk_version": "6.0.424",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.32/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.32/index.json"
           }
-        },
-        "major_release": "6.0",
-        "sdk_version": "6.0.424"
+        }
       }
-    ],
+    },
     "disclosures": [
       {
         "id": "CVE-2024-30105",

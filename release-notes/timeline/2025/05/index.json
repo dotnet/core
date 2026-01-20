@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - May 2025",
   "year": "2025",
@@ -11,89 +11,77 @@
   "cve_records": [
     "CVE-2025-26646"
   ],
-  "major_releases": [
-    "10.0",
-    "9.0",
-    "8.0"
-  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/05/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/04/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/04/index.json",
       "title": "Previous month - April 2025"
     },
     "prev-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/04/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/04/index.json",
       "title": "Previous security month - April 2025"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/manifest.json",
-      "title": "Manifest - May 2025"
-    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/index.json",
       "title": ".NET Year Timeline Index - 2025"
     },
     "cve-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/05/cve.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/05/cve.json",
       "title": "CVE records - May 2025",
       "type": "application/json"
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "10.0": {
         "version": "10.0.0-preview.4.25258.110",
         "date": "2025-05-22T00:00:00\u002B00:00",
         "year": "2025",
         "month": "05",
         "security": false,
         "support_phase": "preview",
+        "sdk_version": "10.0.100-preview.4.25258.110",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0-preview.4.25258.110/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0-preview.4.25258.110/index.json"
           }
-        },
-        "major_release": "10.0",
-        "sdk_version": "10.0.100-preview.4.25258.110"
+        }
       },
-      {
+      "9.0": {
         "version": "9.0.5",
         "date": "2025-05-13T00:00:00\u002B00:00",
         "year": "2025",
         "month": "05",
         "security": true,
         "support_phase": "active",
+        "sdk_version": "9.0.300",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.5/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.5/index.json"
           }
-        },
-        "major_release": "9.0",
-        "sdk_version": "9.0.300"
+        }
       },
-      {
+      "8.0": {
         "version": "8.0.16",
         "date": "2025-05-22T00:00:00\u002B00:00",
         "year": "2025",
         "month": "05",
         "security": true,
         "support_phase": "active",
+        "sdk_version": "8.0.410",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.16/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.16/index.json"
           }
-        },
-        "major_release": "8.0",
-        "sdk_version": "8.0.410"
+        }
       }
-    ],
+    },
     "disclosures": [
       {
         "id": "CVE-2025-26646",
