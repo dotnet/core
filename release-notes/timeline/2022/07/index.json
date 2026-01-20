@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - July 2022",
   "year": "2022",
@@ -7,67 +7,79 @@
   "date": "2022-07-12T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2022-06-14T00:00:00\u002B00:00",
+  "major_releases": [
+    "7.0",
+    "6.0",
+    "3.1"
+  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/07/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2022/07/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/06/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2022/06/index.json",
       "title": "Previous month - June 2022"
     },
+    "manifest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2022/07/manifest.json",
+      "title": "Manifest - July 2022"
+    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2022/index.json",
       "title": ".NET Year Timeline Index - 2022"
     }
   },
   "_embedded": {
-    "patches": {
-      "7.0": {
+    "patches": [
+      {
         "version": "7.0.0-preview.6.22324.4",
         "date": "2022-07-12T00:00:00\u002B00:00",
         "year": "2022",
         "month": "07",
         "security": false,
         "support_phase": "preview",
-        "sdk_version": "7.0.100-preview.6.22352.1",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/7.0.0-preview.6.22324.4/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.0-preview.6.22324.4/index.json"
           }
-        }
+        },
+        "major_release": "7.0",
+        "sdk_version": "7.0.100-preview.6.22352.1"
       },
-      "6.0": {
+      {
         "version": "6.0.7",
         "date": "2022-07-12T00:00:00\u002B00:00",
         "year": "2022",
         "month": "07",
         "security": false,
         "support_phase": "active",
-        "sdk_version": "6.0.302",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.7/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.7/index.json"
           }
-        }
+        },
+        "major_release": "6.0",
+        "sdk_version": "6.0.302"
       },
-      "3.1": {
+      {
         "version": "3.1.27",
         "date": "2022-07-12T00:00:00\u002B00:00",
         "year": "2022",
         "month": "07",
         "security": false,
         "support_phase": "active",
-        "sdk_version": "3.1.421",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/3.1/3.1.27/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.27/index.json"
           }
-        }
+        },
+        "major_release": "3.1",
+        "sdk_version": "3.1.421"
       }
-    }
+    ]
   }
 }

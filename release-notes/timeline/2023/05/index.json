@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - May 2023",
   "year": "2023",
@@ -7,39 +7,47 @@
   "date": "2023-05-16T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2023-04-11T00:00:00\u002B00:00",
+  "major_releases": [
+    "8.0"
+  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/05/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/05/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/04/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/04/index.json",
       "title": "Previous month - April 2023"
     },
+    "manifest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/05/manifest.json",
+      "title": "Manifest - May 2023"
+    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/index.json",
       "title": ".NET Year Timeline Index - 2023"
     }
   },
   "_embedded": {
-    "patches": {
-      "8.0": {
+    "patches": [
+      {
         "version": "8.0.0-preview.4.23259.5",
         "date": "2023-05-16T00:00:00\u002B00:00",
         "year": "2023",
         "month": "05",
         "security": false,
         "support_phase": "preview",
-        "sdk_version": "8.0.100-preview.4.23260.5",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.0-preview.4.23259.5/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0-preview.4.23259.5/index.json"
           }
-        }
+        },
+        "major_release": "8.0",
+        "sdk_version": "8.0.100-preview.4.23260.5"
       }
-    }
+    ]
   }
 }

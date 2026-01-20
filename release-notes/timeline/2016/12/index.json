@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - December 2016",
   "year": "2016",
@@ -7,26 +7,33 @@
   "date": "2016-12-13T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2016-11-16T00:00:00\u002B00:00",
+  "major_releases": [
+    "1.0"
+  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2016/12/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/12/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2016/11/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/11/index.json",
       "title": "Previous month - November 2016"
     },
+    "manifest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/12/manifest.json",
+      "title": "Manifest - December 2016"
+    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2016/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2016/index.json",
       "title": ".NET Year Timeline Index - 2016"
     }
   },
   "_embedded": {
-    "patches": {
-      "1.0": {
+    "patches": [
+      {
         "version": "1.0.3",
         "date": "2016-12-13T00:00:00\u002B00:00",
         "year": "2016",
@@ -35,10 +42,11 @@
         "support_phase": "active",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/1.0/1.0.3/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/1.0/1.0.3/index.json"
           }
-        }
+        },
+        "major_release": "1.0"
       }
-    }
+    ]
   }
 }

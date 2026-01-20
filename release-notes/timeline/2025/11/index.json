@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - November 2025",
   "year": "2025",
@@ -8,71 +8,83 @@
   "security": false,
   "prev_month_date": "2025-10-14T00:00:00\u002B00:00",
   "prev_security_month_date": "2025-10-14T00:00:00\u002B00:00",
+  "major_releases": [
+    "10.0",
+    "9.0",
+    "8.0"
+  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/11/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/11/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json",
       "title": "Previous month - October 2025"
     },
     "prev-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json",
       "title": "Previous security month - October 2025"
     },
+    "manifest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/11/manifest.json",
+      "title": "Manifest - November 2025"
+    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/index.json",
       "title": ".NET Year Timeline Index - 2025"
     }
   },
   "_embedded": {
-    "patches": {
-      "10.0": {
+    "patches": [
+      {
         "version": "10.0.0",
         "date": "2025-11-11T00:00:00\u002B00:00",
         "year": "2025",
         "month": "11",
         "security": false,
         "support_phase": "active",
-        "sdk_version": "10.0.100",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.0/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.0/index.json"
           }
-        }
+        },
+        "major_release": "10.0",
+        "sdk_version": "10.0.100"
       },
-      "9.0": {
+      {
         "version": "9.0.11",
         "date": "2025-11-19T00:00:00\u002B00:00",
         "year": "2025",
         "month": "11",
         "security": false,
         "support_phase": "active",
-        "sdk_version": "9.0.308",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.11/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.11/index.json"
           }
-        }
+        },
+        "major_release": "9.0",
+        "sdk_version": "9.0.308"
       },
-      "8.0": {
+      {
         "version": "8.0.22",
         "date": "2025-11-11T00:00:00\u002B00:00",
         "year": "2025",
         "month": "11",
         "security": false,
         "support_phase": "active",
-        "sdk_version": "8.0.416",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.22/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.22/index.json"
           }
-        }
+        },
+        "major_release": "8.0",
+        "sdk_version": "8.0.416"
       }
-    }
+    ]
   }
 }
