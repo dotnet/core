@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - August 2024",
   "year": "2024",
@@ -12,73 +12,63 @@
     "CVE-2024-38167",
     "CVE-2024-38168"
   ],
-  "major_releases": [
-    "9.0",
-    "6.0"
-  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/08/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/08/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/07/index.json",
       "title": "Previous month - July 2024"
     },
     "prev-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/07/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/07/index.json",
       "title": "Previous security month - July 2024"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/08/manifest.json",
-      "title": "Manifest - August 2024"
-    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/index.json",
       "title": ".NET Year Timeline Index - 2024"
     },
     "cve-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/08/cve.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/08/cve.json",
       "title": "CVE records - August 2024",
       "type": "application/json"
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "9.0": {
         "version": "9.0.0-preview.7.24405.7",
         "date": "2024-08-13T00:00:00\u002B00:00",
         "year": "2024",
         "month": "08",
         "security": false,
         "support_phase": "preview",
+        "sdk_version": "9.0.100-preview.7.24407.12",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.0-preview.7.24405.7/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.0-preview.7.24405.7/index.json"
           }
-        },
-        "major_release": "9.0",
-        "sdk_version": "9.0.100-preview.7.24407.12"
+        }
       },
-      {
+      "6.0": {
         "version": "6.0.33",
         "date": "2024-08-13T00:00:00\u002B00:00",
         "year": "2024",
         "month": "08",
         "security": false,
         "support_phase": "active",
+        "sdk_version": "6.0.425",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.33/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.33/index.json"
           }
-        },
-        "major_release": "6.0",
-        "sdk_version": "6.0.425"
+        }
       }
-    ],
+    },
     "disclosures": [
       {
         "id": "CVE-2024-38167",
