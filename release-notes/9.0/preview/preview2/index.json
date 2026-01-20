@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-patch-detail-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-patch-detail-index.json",
   "kind": "patch",
   "title": ".NET Patch Release Index - 9.0.0-preview.2",
   "version": "9.0.0-preview.2",
@@ -13,56 +13,49 @@
   ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/preview/preview2/index.json"
     },
     "prev-patch": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview1/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/preview/preview1/index.json",
       "title": "Previous patch release - 9.0.0-preview.1"
     },
     "downloads": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/downloads/index.json",
       "title": "Downloads - .NET 9.0"
     },
     "major": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json",
       "title": ".NET Major Release Index - 9.0"
     },
+    "manifest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/preview/preview2/manifest.json",
+      "title": "Manifest - .NET 9.0"
+    },
     "month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/03/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json",
       "title": ".NET Month Timeline Index - March 2024"
     },
     "root": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json",
       "title": ".NET Release Index"
-    },
-    "release-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/release.json",
-      "title": "Release information",
-      "type": "application/json"
     }
   },
   "_embedded": {
-    "runtime": {
-      "version": "9.0.0-preview.2",
-      "_links": {
-        "release-notes": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/9.0.0-preview.2.md",
-          "type": "application/markdown"
-        }
-      }
-    },
     "sdk": {
       "version": "9.0.100-preview.2.24157.14",
       "band": "9.0.1xx",
       "date": "2024-03-12T00:00:00\u002B00:00",
       "label": ".NET SDK 9.0.1xx",
+      "support_phase": "preview",
       "_links": {
         "downloads": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/sdk-9.0.1xx.json"
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/downloads/sdk-9.0.1xx.json"
         },
-        "release-notes": {
-          "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/9.0.0-preview.2.md",
-          "type": "application/markdown"
+        "release-month": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json"
+        },
+        "release-patch": {
+          "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/preview/preview2/index.json"
         }
       }
     },
@@ -72,38 +65,19 @@
         "band": "9.0.1xx",
         "date": "2024-03-12T00:00:00\u002B00:00",
         "label": ".NET SDK 9.0.1xx",
+        "support_phase": "preview",
         "_links": {
           "downloads": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/sdk-9.0.1xx.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/downloads/sdk-9.0.1xx.json"
           },
-          "release-notes": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/9.0.0-preview.2.md",
-            "type": "application/markdown"
+          "release-month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/03/index.json"
+          },
+          "release-patch": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/preview/preview2/index.json"
           }
         }
       }
-    ],
-    "documentation": {
-      "aspnetcore": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/aspnetcore.md",
-        "type": "application/markdown"
-      },
-      "dotnetmaui": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/dotnetmaui.md",
-        "type": "application/markdown"
-      },
-      "efcoreanddata": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/efcoreanddata.md",
-        "type": "application/markdown"
-      },
-      "runtime": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/runtime.md",
-        "type": "application/markdown"
-      },
-      "sdk": {
-        "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/preview/preview2/sdk.md",
-        "type": "application/markdown"
-      }
-    }
+    ]
   }
 }
