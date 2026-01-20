@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - January 2023",
   "year": "2023",
@@ -7,53 +7,63 @@
   "date": "2023-01-10T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2022-12-13T00:00:00\u002B00:00",
+  "major_releases": [
+    "7.0",
+    "6.0"
+  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/01/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/01/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2022/12/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2022/12/index.json",
       "title": "Previous month - December 2022"
     },
+    "manifest": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/01/manifest.json",
+      "title": "Manifest - January 2023"
+    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/index.json",
       "title": ".NET Year Timeline Index - 2023"
     }
   },
   "_embedded": {
-    "patches": {
-      "7.0": {
+    "patches": [
+      {
         "version": "7.0.2",
         "date": "2023-01-10T00:00:00\u002B00:00",
         "year": "2023",
         "month": "01",
         "security": false,
         "support_phase": "active",
-        "sdk_version": "7.0.102",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/7.0.2/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.2/index.json"
           }
-        }
+        },
+        "major_release": "7.0",
+        "sdk_version": "7.0.102"
       },
-      "6.0": {
+      {
         "version": "6.0.13",
         "date": "2023-01-10T00:00:00\u002B00:00",
         "year": "2023",
         "month": "01",
         "security": false,
         "support_phase": "active",
-        "sdk_version": "6.0.405",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.13/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.13/index.json"
           }
-        }
+        },
+        "major_release": "6.0",
+        "sdk_version": "6.0.405"
       }
-    }
+    ]
   }
 }
