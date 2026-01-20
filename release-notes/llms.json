@@ -2,12 +2,11 @@
   "kind": "llms",
   "title": ".NET Release Index for AI",
   "ai_note": "ALWAYS read required_pre_read first. Use skills and workflows when they match; they provide optimal paths. Trust _embedded data\u2014it\u0027s authoritative and current. Never construct URLs.",
-  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/skills/dotnet-releases/SKILL.md",
+  "required_pre_read": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/skills/dotnet-releases/SKILL.md",
   "latest_major": "10.0",
   "latest_lts_major": "10.0",
-  "latest_patch_date": "2025-12-09T00:00:00+00:00",
+  "latest_patch_date": "2026-01-20T00:00:00+00:00",
   "latest_security_patch_date": "2025-10-14T00:00:00+00:00",
-  "last_updated_date": "2026-01-06T21:44:00.1277847+00:00",
   "supported_major_releases": [
     "10.0",
     "9.0",
@@ -15,156 +14,128 @@
   ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/llms.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/llms.json"
     },
     "latest-lts-major": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
       "title": "Latest LTS major release - .NET 10.0"
     },
     "latest-major": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json",
       "title": "Latest major release - .NET 10.0"
     },
     "latest-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/12/index.json",
-      "title": "Latest month - December 2025"
-    },
-    "latest-security-disclosures": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
-      "title": "Latest security disclosures - October 2025"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2026/01/index.json",
+      "title": "Latest month - January 2026"
     },
     "latest-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/index.json",
       "title": "Latest security month - October 2025"
     },
     "latest-year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/index.json",
-      "title": "Latest year - 2025"
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2026/index.json",
+      "title": "Latest year - 2026"
     },
     "root": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/index.json",
       "title": ".NET Release Index"
     },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "latest-cve-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/cve.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2025/10/cve.json",
       "title": "Latest CVE records - October 2025",
       "type": "application/json"
     }
   },
   "_embedded": {
-    "patches": {
-      "10.0": {
-        "version": "10.0.1",
+    "patches": [
+      {
+        "version": "10.0.2",
+        "major_release": "10.0",
         "release_type": "lts",
         "security": false,
         "support_phase": "active",
         "supported": true,
-        "sdk_version": "10.0.101",
+        "sdk_version": "10.0.102",
         "latest_security_patch": "10.0.0-rc.2",
         "latest_security_patch_date": "2025-10-14T00:00:00+00:00",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.1/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/10.0.2/index.json"
           },
           "downloads": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/downloads/index.json"
-          },
-          "latest-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/12/index.json"
-          },
-          "latest-security-disclosures": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
-          },
-          "latest-security-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/downloads/index.json"
           },
           "latest-security-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/preview/rc2/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/preview/rc2/index.json"
           },
           "major": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/index.json"
           },
-          "manifest": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/manifest.json"
+          "major-manifest": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/10.0/manifest.json"
           }
         }
       },
-      "9.0": {
-        "version": "9.0.11",
+      {
+        "version": "9.0.12",
+        "major_release": "9.0",
         "release_type": "sts",
         "security": false,
         "support_phase": "active",
         "supported": true,
-        "sdk_version": "9.0.308",
+        "sdk_version": "9.0.310",
         "latest_security_patch": "9.0.10",
         "latest_security_patch_date": "2025-10-14T00:00:00+00:00",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.11/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.12/index.json"
           },
           "downloads": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/downloads/index.json"
-          },
-          "latest-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/11/index.json"
-          },
-          "latest-security-disclosures": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
-          },
-          "latest-security-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/downloads/index.json"
           },
           "latest-security-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/9.0.10/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/9.0.10/index.json"
           },
           "major": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/index.json"
           },
-          "manifest": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/manifest.json"
+          "major-manifest": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/9.0/manifest.json"
           }
         }
       },
-      "8.0": {
-        "version": "8.0.22",
+      {
+        "version": "8.0.23",
+        "major_release": "8.0",
         "release_type": "lts",
         "security": false,
         "support_phase": "active",
         "supported": true,
-        "sdk_version": "8.0.416",
+        "sdk_version": "8.0.417",
         "latest_security_patch": "8.0.21",
         "latest_security_patch_date": "2025-10-14T00:00:00+00:00",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.22/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.23/index.json"
           },
           "downloads": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/downloads/index.json"
-          },
-          "latest-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/11/index.json"
-          },
-          "latest-security-disclosures": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
-          },
-          "latest-security-month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/downloads/index.json"
           },
           "latest-security-patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.21/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.21/index.json"
           },
           "major": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/index.json"
           },
-          "manifest": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/manifest.json"
+          "major-manifest": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/manifest.json"
           }
         }
       }
-    }
+    ]
   }
 }
