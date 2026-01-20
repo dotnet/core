@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - December 2018",
   "year": "2018",
@@ -7,35 +7,26 @@
   "date": "2018-12-11T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2018-11-13T00:00:00\u002B00:00",
-  "major_releases": [
-    "3.0",
-    "2.2",
-    "2.1"
-  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/12/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2018/12/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/11/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2018/11/index.json",
       "title": "Previous month - November 2018"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/12/manifest.json",
-      "title": "Manifest - December 2018"
-    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2018/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2018/index.json",
       "title": ".NET Year Timeline Index - 2018"
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "3.0": {
         "version": "3.0.0-preview-27122-01",
         "date": "2018-12-11T00:00:00\u002B00:00",
         "year": "2018",
@@ -44,12 +35,11 @@
         "support_phase": "preview",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/3.0.0-preview-27122-01/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/3.0/3.0.0-preview-27122-01/index.json"
           }
-        },
-        "major_release": "3.0"
+        }
       },
-      {
+      "2.2": {
         "version": "2.2.200-preview",
         "date": "2018-12-06T00:00:00\u002B00:00",
         "year": "2018",
@@ -58,40 +48,11 @@
         "support_phase": "preview",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.200-preview/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/2.2/2.2.200-preview/index.json"
           }
-        },
-        "major_release": "2.2"
+        }
       },
-      {
-        "version": "2.2.101",
-        "date": "2018-12-11T00:00:00\u002B00:00",
-        "year": "2018",
-        "month": "12",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.101/index.json"
-          }
-        },
-        "major_release": "2.2"
-      },
-      {
-        "version": "2.2.0",
-        "date": "2018-12-04T00:00:00\u002B00:00",
-        "year": "2018",
-        "month": "12",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.2/2.2.0/index.json"
-          }
-        },
-        "major_release": "2.2"
-      },
-      {
+      "2.1": {
         "version": "2.1.600-preview",
         "date": "2018-12-06T00:00:00\u002B00:00",
         "year": "2018",
@@ -100,25 +61,10 @@
         "support_phase": "preview",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.600-preview/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/2.1/2.1.600-preview/index.json"
           }
-        },
-        "major_release": "2.1"
-      },
-      {
-        "version": "2.1.502",
-        "date": "2018-12-11T00:00:00\u002B00:00",
-        "year": "2018",
-        "month": "12",
-        "security": false,
-        "support_phase": "active",
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.502/index.json"
-          }
-        },
-        "major_release": "2.1"
+        }
       }
-    ]
+    }
   }
 }

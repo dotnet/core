@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - November 2023",
   "year": "2023",
@@ -12,85 +12,73 @@
     "CVE-2023-36049",
     "CVE-2023-36558"
   ],
-  "major_releases": [
-    "8.0",
-    "7.0",
-    "6.0"
-  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/11/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/10/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/10/index.json",
       "title": "Previous month - October 2023"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/manifest.json",
-      "title": "Manifest - November 2023"
-    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/index.json",
       "title": ".NET Year Timeline Index - 2023"
     },
     "cve-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2023/11/cve.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2023/11/cve.json",
       "title": "CVE records - November 2023",
       "type": "application/json"
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "8.0": {
         "version": "8.0.0",
         "date": "2023-11-14T00:00:00\u002B00:00",
         "year": "2023",
         "month": "11",
         "security": true,
         "support_phase": "active",
+        "sdk_version": "8.0.100",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.0/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.0/index.json"
           }
-        },
-        "major_release": "8.0",
-        "sdk_version": "8.0.100"
+        }
       },
-      {
+      "7.0": {
         "version": "7.0.14",
         "date": "2023-11-14T00:00:00\u002B00:00",
         "year": "2023",
         "month": "11",
         "security": true,
         "support_phase": "active",
+        "sdk_version": "7.0.404",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/7.0/7.0.14/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/7.0/7.0.14/index.json"
           }
-        },
-        "major_release": "7.0",
-        "sdk_version": "7.0.404"
+        }
       },
-      {
+      "6.0": {
         "version": "6.0.25",
         "date": "2023-11-14T00:00:00\u002B00:00",
         "year": "2023",
         "month": "11",
         "security": true,
         "support_phase": "active",
+        "sdk_version": "6.0.417",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.25/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.25/index.json"
           }
-        },
-        "major_release": "6.0",
-        "sdk_version": "6.0.417"
+        }
       }
-    ],
+    },
     "disclosures": [
       {
         "id": "CVE-2023-36038",

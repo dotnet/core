@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - November 2024",
   "year": "2024",
@@ -12,73 +12,63 @@
     "CVE-2024-43498",
     "CVE-2024-43499"
   ],
-  "major_releases": [
-    "8.0",
-    "6.0"
-  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/11/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/11/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/10/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/10/index.json",
       "title": "Previous month - October 2024"
     },
     "prev-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/10/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/10/index.json",
       "title": "Previous security month - October 2024"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/11/manifest.json",
-      "title": "Manifest - November 2024"
-    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/index.json",
       "title": ".NET Year Timeline Index - 2024"
     },
     "cve-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2024/11/cve.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2024/11/cve.json",
       "title": "CVE records - November 2024",
       "type": "application/json"
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "8.0": {
         "version": "8.0.11",
         "date": "2024-11-12T00:00:00\u002B00:00",
         "year": "2024",
         "month": "11",
         "security": false,
         "support_phase": "active",
+        "sdk_version": "8.0.404",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/8.0/8.0.11/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.11/index.json"
           }
-        },
-        "major_release": "8.0",
-        "sdk_version": "8.0.404"
+        }
       },
-      {
+      "6.0": {
         "version": "6.0.36",
         "date": "2024-11-12T00:00:00\u002B00:00",
         "year": "2024",
         "month": "11",
         "security": false,
         "support_phase": "active",
+        "sdk_version": "6.0.428",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/6.0/6.0.36/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/6.0/6.0.36/index.json"
           }
-        },
-        "major_release": "6.0",
-        "sdk_version": "6.0.428"
+        }
       }
-    ],
+    },
     "disclosures": [
       {
         "id": "CVE-2024-43498",

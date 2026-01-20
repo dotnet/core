@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
+  "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-timeline-index.json",
   "kind": "month",
   "title": ".NET Month Timeline Index - January 2020",
   "year": "2020",
@@ -7,79 +7,67 @@
   "date": "2020-01-14T00:00:00\u002B00:00",
   "security": false,
   "prev_month_date": "2019-12-03T00:00:00\u002B00:00",
-  "major_releases": [
-    "3.1",
-    "3.0",
-    "2.1"
-  ],
   "_links": {
     "self": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/01/index.json"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2020/01/index.json"
     },
     "prev-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2019/12/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2019/12/index.json",
       "title": "Previous month - December 2019"
     },
-    "manifest": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/01/manifest.json",
-      "title": "Manifest - January 2020"
-    },
     "timeline": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
       "title": ".NET Release Timeline Index"
     },
     "year": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/timeline/2020/index.json",
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2020/index.json",
       "title": ".NET Year Timeline Index - 2020"
     }
   },
   "_embedded": {
-    "patches": [
-      {
+    "patches": {
+      "3.1": {
         "version": "3.1.1",
         "date": "2020-01-14T00:00:00\u002B00:00",
         "year": "2020",
         "month": "01",
         "security": false,
         "support_phase": "active",
+        "sdk_version": "3.1.101",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.1/3.1.1/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/3.1/3.1.1/index.json"
           }
-        },
-        "major_release": "3.1",
-        "sdk_version": "3.1.101"
+        }
       },
-      {
+      "3.0": {
         "version": "3.0.2",
         "date": "2020-01-14T00:00:00\u002B00:00",
         "year": "2020",
         "month": "01",
         "security": false,
         "support_phase": "active",
+        "sdk_version": "3.0.102",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/3.0/3.0.2/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/3.0/3.0.2/index.json"
           }
-        },
-        "major_release": "3.0",
-        "sdk_version": "3.0.102"
+        }
       },
-      {
+      "2.1": {
         "version": "2.1.15",
         "date": "2020-01-14T00:00:00\u002B00:00",
         "year": "2020",
         "month": "01",
         "security": false,
         "support_phase": "active",
+        "sdk_version": "2.1.803",
         "_links": {
           "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/release-index/release-notes/2.1/2.1.15/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/2.1/2.1.15/index.json"
           }
-        },
-        "major_release": "2.1",
-        "sdk_version": "2.1.803"
+        }
       }
-    ]
+    }
   }
 }
