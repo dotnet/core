@@ -1,17 +1,19 @@
 # What you can expect from Maintainers
 
-The .NET Core maintainer team aims to support a productive and safe working environment for everyone participating in .NET repositories. You can expect maintainers to do three things to that end: respect your contributions, make engagement efficient, and report potential .NET Foundation Code of Conduct violations.
+The .NET maintainer team aims to support a productive and safe working environment for everyone participating in .NET repositories. You can expect maintainers to do three things to that end: respect your contributions, make engagement efficient, and report potential .NET Foundation Code of Conduct violations.
 
 The following two lists summarize how maintainers will act. A more detailed description follows this summary.
 
-**Maintainers will**
+Maintainers will:
+
 - Encourage your contributions and participation and provide clear and direct feedback, including when your contributions are not accepted.
 - Close issues and PRs as a means of making repos more efficient to use for everyone. They can be re-opened, as needed.
 - Edit comments for formatting [if and only if (iff)](https://en.wikipedia.org/wiki/If_and_only_if) the edit adds substantially to the readability or usability of the comment. No changes will be made to spelling, wording, meaning, or emphasis.
 - Report abusive behavior to the [Code of Conduct review group](mailto:conduct@dotnetfoundation.org).
 
-**Maintainers won't**
-- Edit contributor comments as a general rule. GitHub comments don't provide edit history and therefore don't offer maintainers a transparent and accurate way to describe changes made to contributor comments. Transparency is a cornerstone of effective discourse and its absence undermines trust.
+Maintainers won't:
+
+- Edit contributor comments as a general rule. GitHub provides [edit history](https://blog.github.com/changelog/2018-05-24-comment-edit-history/) which makes editing more acceptable as there is a way to see an audit log. However, contributors might still be surprised when they see statements or phrases under their name that they don't recall making. Transparency is a cornerstone of effective discourse and its absence undermines trust. And a change log doesn't fully eliminate these concerns.
 
 ## Respect your Contributions
 
@@ -27,7 +29,7 @@ Maintainers will take actions to make repo engagement more efficient for everyon
 
 Maintainers may edit PR and issue titles to improve readability and/or accuracy. GitHub provides history for title changes.
 
-Maintainers may edit your comments if and only if the edit adds substantially to the readability or usability of the comment and doesn't change the content. The maintainer will add a short descriptive note with their @handle to explain their change at the end of your comment (for example: "_Edited by @richlander -- added call-stack formatting_"). 
+Maintainers may edit your comments if and only if the edit adds substantially to the readability or usability of the comment and doesn't change the content. The maintainer will add a short descriptive note with their @handle to explain their change at the end of your comment (for example: "_Edited by @richlander -- added call-stack formatting_").
 
 Maintainers may make the following changes to contributor comments:
 

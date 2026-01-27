@@ -6,7 +6,20 @@ project.lock.json
 nupkg/
 
 # Visual Studio Code
-.vscode
+.vscode/*
+!.vscode/settings.json
+
+# Rider
+.idea/
+
+# Visual Studio
+.vs/
+
+# Fleet
+.fleet/
+
+# Code Rush
+.cr/
 
 # User-specific files
 *.suo
@@ -30,5 +43,7 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
-# Visual Studio 2015
-.vs/
+# Node.js build artifacts
+node_modules/
+package-lock.json
+package.json

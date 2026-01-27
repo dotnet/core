@@ -1,22 +1,78 @@
-# .NET Core Release Notes
+# .NET Release Notes
 
-The latest supported release is [.NET Core 2.1](2.1/2.1.0.md).
+[Releases](../releases.md) under active support or development:
 
-## Latest Updates
+|  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| [.NET 10.0](./10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.2][10.0.2] | November 14, 2028 |
+| [.NET 9.0](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.12][9.0.12] | November 10, 2026 |
+| [.NET 8.0](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.23][8.0.23] | November 10, 2026 |
 
-You can download the latest updates for .NET Core.
+[10.0.2]: ./10.0/10.0.2/10.0.2.md
+[9.0.12]: ./9.0/9.0.12/9.0.12.md
+[8.0.23]: ./8.0/8.0.23/8.0.23.md
 
-* [.NET Core 2.1.2](download-archives/2.1.2-download.md)
-* [.NET Core 2.0.9](download-archives/2.0.9-download.md)
-* [.NET Core 1.1.9](download-archives/1.1.9-download.md)
-* [.NET Core 1.0.12](download-archives/1.0.12-download.md)
+[policies]: ../release-policies.md
 
-## Release Information
+* [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
+* [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
 
-* [.NET Core Releases](download-archive.md) -- Release notes and downloads
-* [CSV format](releases.csv) -- Releases in CSV format
-* [JSON format](releases.json) -- Releases in JSON format
+You can find release notes for all releases in the [release-notes](.) directory, in markdown and [JSON formats](./schemas/README.md). This content is [licensed](./license-information.md) for broad use.
 
-## CLI Usage Data
+## Monthly patch release notes
 
-* [CLI Usage Data](cli-usage-data.md) - Usage data from the .NET Core SDK
+Patch releases are published monthly, often including fixes for vulnerabilities (AKA CVEs) that are disclosed at the same time.
+
+Release notes include:
+
+* Links to binaries
+* Notable changes, including CVEs
+* Compatibility information
+* Updated packages
+
+Example markdown files:
+
+* [9.0/9.0.11/9.0.11.md](./9.0/9.0.11/9.0.11.md)
+* [8.0/8.0.22/8.0.22.md](./8.0/8.0.22/8.0.22.md)
+
+Example JSON files:
+
+* [Major releases index](./releases-index.json)
+* [Major release](./9.0/releases.json)
+
+`releases-index.json` and all the files it references are stored in blob storage and in GitHub. We use GitHub for easy discoverability of the files and Azure Blob Storage as our production platform.
+
+It is straightforward to programmatically transform the [blob storage links](https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json) to [`raw` GitHub links](https://raw.githubusercontent.com/dotnet/core/main/release-notes/releases-index.json) should that be desired.
+
+Note: monthly previews are published in the same way, often on the same day. They are not supported so do not include CVE information. However, Release Candidate releases follow our ["Go Live" policy](https://github.com/dotnet/core/blob/main/release-policies.md) and may include CVE information.
+
+## Monthly preview release notes
+
+We typically release a preview for the next major version each month. These include detailed feature information.
+
+Examples:
+
+* [.NET 9 Preview 1](./9.0/preview/preview1/README.md)
+* [.NET 9 Preview 6](./9.0/preview/preview6/README.md)
+
+This content is used as source material for [What's New](https://learn.microsoft.com/dotnet/core/whats-new/) pages in official Microsoft docs.
+
+Preview release notes are always in a `preview` folder. This approach was adopted so that preview releases do not distract from stable releases once preview releases are no longer relevant.
+
+## Supported OS
+
+Supported OS information is published for each major release. This information indicates to users which OSes they can expect an app (or the .NET SDK) to run on for a given .NET version. It also indicates which OSes are supported and when they transitioned to EOL status.
+
+Examples:
+
+* [.NET 8 Supported OSes (json)](./8.0/supported-os.json)
+* [.NET 8 Supported OSes (markdown)](./8.0/supported-os.md)
+
+## OS packages
+
+OS package information is published for each major release. This information indicates which packages must be installed on a given distro for a .NET app (or the .NET SDK) to run. [.NET packages](../linux.md) are available for multiple distros, which automatically install all required packages.
+
+Examples:
+
+* [.NET 9 OS packages (json)](./9.0/os-packages.json)
+* [.NET 9 OS packages (markdown)](./9.0/os-packages.md)

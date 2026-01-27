@@ -1,23 +1,27 @@
-# .NET Core Daily Builds -- Servicing and future releases
+# .NET Daily Builds -- Servicing and future releases
 
-The .NET Core team builds many branches of the product daily. You can install these builds to try out functionality prior to release.
+See the [.NET SDK daily builds table](https://github.com/dotnet/dotnet/blob/main/docs/builds-table.md) for the latest daily build.
+
+The .NET team builds many branches of the product daily. You can install these builds to try out functionality prior to release.
+
+Daily builds, for both future and servicing branches, are available as Docker container images from the [Microsoft Container Registry](https://github.com/dotnet/dotnet-docker/blob/nightly/README.md).
 
 ## Future Releases
 
-Preview branches are for new major/minor versions of .NET Core that have not yet been released and are not yet supported.
+Preview branches are for new versions of .NET that have not yet been released and are not yet supported.
 
-|Component|*.NET Core 3.0*|*.NET Core 2.2*|
-|:------:|:------:|:------:|
-|SDK|[.NET Core SDK 3.0.1xx  (Master)](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|[.NET Core SDK 2.2.1xx](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|
-|ASP.NET Core|[ASP.NET Core Shared Framework 3.0 (Master)](https://github.com/aspnet/universe#daily-builds)|[ASP.NET Core Shared Framework 2.2](https://github.com/aspnet/universe#daily-builds)|
-|Runtime|[.NET Core Runtime 3.0 (Master)](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|[.NET Core Runtime 2.2](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|
+|Component|.NET 8.0|
+|:------:|:------:|
+|SDK|[.NET SDK 8.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries) |
+|ASP.NET Core|[ASP.NET Core 8.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md) |
+|Runtime|[.NET Runtime 8.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md) |
 
 ## Servicing Releases
 
-Servicing branches are for new patch versions of .NET Core that have not yet been released and are not yet supported. These patch versions are for previously released major/minor versions.
+Servicing branches are for new patch versions of .NET that have not yet been released and are not yet supported.
 
-|Component|*.NET Core 2.1*|*.NET Core 2.0*|*.NET Core 1.1*|*.NET Core 1.0*|
-|:------:|:------:|:------:|:------:|:------:|
-|SDK|[.NET Core SDK 2.1.401](https://github.com/dotnet/core-sdk/blob/master/README.md#installers-and-binaries)|[.NET Core SDK 2.0](https://github.com/dotnet/cli/blob/release/2.0.0/README.md#installers-and-binaries)|[.NET Core SDK 1.1](https://github.com/dotnet/cli/blob/rel/1.1.0/README.md#installers-and-binaries)|[.NET Core SDK 1.1](https://github.com/dotnet/cli/blob/rel/1.1.0/README.md#installers-and-binaries)|
-|ASP.NET Core|[ASP.NET Core Shared Framework 2.1](https://github.com/aspnet/universe#daily-builds)|**N/A**|**N/A**|**N/A**|
-|Runtime|[.NET Core Runtime 2.1](https://github.com/dotnet/core-setup/blob/master/README.md#daily-builds)|[.NET Core Runtime 2.0](https://github.com/dotnet/core-setup/blob/release/2.0.0/README.md#officially-released-builds)|[.NET Core Runtime 1.1](https://github.com/dotnet/core-setup/blob/release/1.1.0/README.md#latest-versions)|[.NET Core Runtime 1.0](https://github.com/dotnet/core-setup/blob/release/1.0.0/README.md#latest-versions)|
+|Component|.NET 7.0|.NET 6.0|
+|:------:|:------:|:------: |
+|SDK|[.NET SDK 7.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|[.NET SDK 6.0.xxx](https://github.com/dotnet/installer/blob/main/README.md#installers-and-binaries)|
+|ASP.NET Core|[ASP.NET Core 7.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|[ASP.NET Core 6.0](https://github.com/dotnet/aspnetcore/blob/main/docs/DailyBuilds.md)|
+|Runtime|[.NET Runtime 7.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md)|[.NET Core Runtime 6.0](https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md)|

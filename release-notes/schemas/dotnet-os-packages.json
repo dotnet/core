@@ -1,0 +1,199 @@
+{
+  "description": "The set of packages required by a given product version for a set of distros.",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "channel-version": {
+      "description": "Major (or major.minor) version of product.",
+      "type": "string"
+    },
+    "packages": {
+      "description": "Set of nominal packages used by product, with descriptions.",
+      "type": "array",
+      "items": {
+        "description": "A nominal package is a distro-agnostic representation of a package, including the scenarios for which the package is required. A nominal package will be referenced by a distribution package, with a distribution-specific package name.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "id": {
+            "description": "ID of nominal package.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Display name of nominal package.",
+            "type": "string"
+          },
+          "required-scenarios": {
+            "description": "Required scenarios for which the package must be used.",
+            "type": "array",
+            "items": {
+              "description": "Scenarios relating to package dependencies. \u0027All\u0027 includes both CoreCLR and NativeAOT while \u0027Runtime\u0027 is intended to cover CoreCLR, only.",
+              "enum": [
+                "all",
+                "runtime",
+                "https",
+                "cryptography",
+                "globalization",
+                "kerberos"
+              ]
+            }
+          },
+          "min-version": {
+            "description": "Minimum required version of library.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "references": {
+            "description": "Related references.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "default": null
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "required-scenarios"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "distributions": {
+      "description": "Set of distributions where the product can be used.",
+      "type": "array",
+      "items": {
+        "description": "An operating system distribution, with required package install commands and specific packages for distribution releases.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of the distribution, matching ID in /etc/os-release, however, the expectation is that this value starts with a capital letter (proper noun).",
+            "type": "string"
+          },
+          "install-commands": {
+            "description": "Commands required to install packages within the distribution.",
+            "type": "array",
+            "items": {
+              "description": "A command to be run to install packages",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "run-under-sudo": {
+                  "description": "Whether the command needs to be run under sudo.",
+                  "type": "boolean"
+                },
+                "command-root": {
+                  "description": "The command to be run, like apt.",
+                  "type": "string"
+                },
+                "command-parts": {
+                  "description": "The command parts or arguments that need to be used.",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "default": null
+                }
+              },
+              "required": [
+                "run-under-sudo",
+                "command-root"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "releases": {
+            "description": "Releases for that distribution.",
+            "type": "array",
+            "items": {
+              "description": "A distribution release with a list of packages to install.",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "name": {
+                  "description": "The name of the release, matching PRETTY_NAME in /etc/os-release.",
+                  "type": "string"
+                },
+                "release": {
+                  "description": "The version number for the release, matching VERSION_ID in /etc/os-release.",
+                  "type": "string"
+                },
+                "packages": {
+                  "description": "The packages required by the distro release.",
+                  "type": "array",
+                  "items": {
+                    "description": "A distro archive package to install, with a reference to a logical package with more information.",
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "id": {
+                        "description": "Reference to nominal package ID, providing access to required scenarios and other information.",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Package name in the distro archive.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "name",
+                "release",
+                "packages"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "name",
+          "install-commands",
+          "releases"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "channel-version",
+    "packages",
+    "distributions"
+  ],
+  "additionalProperties": false
+}

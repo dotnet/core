@@ -1,48 +1,36 @@
-﻿# .NET Core Home
+# .NET Release Notes
 
-The dotnet/core repository is a good starting point for .NET Core.
+Welcome to the home of .NET [release notes](./release-notes/README.md) and [news](https://github.com/dotnet/core/discussions/categories/news).
 
-The latest major release is [.NET Core 2.1](release-notes/2.1/2.1.2.md). The latest patch updates are listed in [.NET Core release notes](release-notes/README.md)
+## Releases
 
-## Download the latest .NET Core SDK
+[Releases](./releases.md) under active support or development:
 
-* [.NET Core 2.1 SDK](release-notes/2.1/2.1.2.md)
+|  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.2][10.0.2] | November 14, 2028 |
+| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.12][9.0.12] | November 10, 2026 |
+| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.23][8.0.23] | November 10, 2026 |
 
-## .NET Core Releases and Daily Builds
+[10.0.2]: release-notes/10.0/10.0.2/10.0.2.md
+[9.0.12]: release-notes/9.0/9.0.12/9.0.12.md
+[8.0.23]: release-notes/8.0/8.0.23/8.0.23.md
 
-* [.NET Core released builds](release-notes/README.md)
-* [.NET Core daily builds](daily-builds.md)
+[policies]: release-policies.md
 
-## Learn about .NET Core
+* [Release notes](./release-notes/README.md)
+* [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
+* [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
+* [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
 
-* [Learn about .NET Core](https://docs.microsoft.com/dotnet/core)
-* [.NET Core Roadmap](https://github.com/dotnet/core/blob/master/roadmap.md)
-* [Learn how about the .NET platform](https://docs.microsoft.com/dotnet/standard/)
-* [.NET Core release notes](https://github.com/dotnet/core/blob/master/release-notes/README.md)
-* [.NET Core Announcements](https://github.com/dotnet/announcements)
-* [.NET Core blog](https://blogs.msdn.microsoft.com/dotnet/tag/net-core/)
+## Discussions
 
-## Getting help
+Follow [GitHub Discussions](https://github.com/dotnet/core/discussions), where you will find the latest news on releases, including PSAs and CVEs.
 
-* [File a .NET Core issue](https://github.com/dotnet/core/issues)
-* [File an ASP.NET Core issue](https://github.com/aspnet/home/issues)
-* [File an issue for other components](Documentation/core-repos.md)
-* [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net-core)
-* [Contact Microsoft Support](https://support.microsoft.com/contactus/)
+You can subscribe to discussions with the following RSS feeds:
 
-## How to Engage, Contribute and Provide Feedback
-
-The .NET Core team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs. The first step is finding the [.NET Core repository](Documentation/core-repos.md) that you want to contribute to.
-
-## .NET Foundation
-
-The .NET Core platform is part of the [.NET Foundation](http://www.dotnetfoundation.org).
-
-## Licenses
-
-.NET Core repos typically use either the [MIT](LICENSE.TXT) or
-[Apache 2](http://www.apache.org/licenses/LICENSE-2.0) licenses for code.
-Some projects license documentation and other forms of content under
-[Creative Commons Attribution 4.0](http://creativecommons.org/licenses/by/4.0/).
-
-See specific [repos](Documentation/core-repos.md) to understand the license used.
+| Category | GitHub Discussions | RSS Feed |
+| --- | :--: | :--: |
+| All Discussions | [🔗](https://github.com/dotnet/core/discussions) | [🔗](https://github.com/dotnet/core/discussions.atom) |
+| News | [🔗](https://github.com/dotnet/core/discussions/categories/news) | [🔗](https://github.com/dotnet/core/discussions/categories/news.atom) |
+| General  | [🔗](https://github.com/dotnet/core/discussions/categories/general) | [🔗](https://github.com/dotnet/core/discussions/categories/general.atom) |

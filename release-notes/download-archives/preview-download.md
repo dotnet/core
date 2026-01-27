@@ -1,6 +1,7 @@
 # .NET Core 1.1 Preview 1 and .NET Core SDK 1.0 Preview 2.1
 
-The installers and binary archives on this page include .NET Core 1.1 Preview 1 (runtime and shared framework) and the .NET Core 1.0 SDK Preview 2.1. If you only need the runtime and shared framework (no SDK), download links are available on the [Runtime Download](https://github.com/dotnet/core/blob/master/release-notes/preview-runtime-download.md) page. [Checksums](https://dotnetcli.blob.core.windows.net/dotnet/checksums/1.1-Preview-1-SDK-Preview-2.1-3155-SHA.txt) are available to verify downloads.
+The installers and binary archives on this page include .NET Core 1.1 Preview 1 (runtime and shared framework) and the .NET Core 1.0 SDK Preview 2.1. If you only need the runtime and shared framework (no SDK), download links are available on the [Runtime Download](preview-runtime-download.md) page.
+[Checksums](https://builds.dotnet.microsoft.com/dotnet/checksums/1.1-Preview-1-SDK-Preview-2.1-3155-SHA.txt) are available to verify downloads.
 
 | .NET Core 1.1 Preview 1 | SDK Installer                                        | SDK Binaries                                        | Runtime Installer | Runtime Binaries |
 | ----------------------- | :----------------------------------------------: | :----------------------------------------------:|:--|:--|
@@ -33,7 +34,6 @@ dotnet-hostfxr-ubuntu-x64.1.1.0-preview1-001100-00.deb
 dotnet-sharedframework-ubuntu-x64.1.1.0-preview1-001100-00.deb
 dotnet-sdk-ubuntu-x64.1.0.0-preview2.1-003155.deb
 
-
 ### Set up package source
 
 The first step is to establish the source feed for the package manager. This is only needed if you have not previously set up the source or if you are installing on Ubuntu 16.10 for the first time.
@@ -49,7 +49,7 @@ sudo apt-get install dotnet-dev-1.0.0-preview2.1-003155
 
 Installed packages
 
-```
+```bash
 dotnet-host-ubuntu-x64.1.1.0-preview1-001100-00.deb
 dotnet-hostfxr-ubuntu-x64.1.1.0-preview1-001100-00.deb
 dotnet-sharedframework-ubuntu-x64.1.1.0-preview1-001100-00.deb
@@ -67,7 +67,7 @@ sudo apt-get install dotnet-dev-1.0.0-preview2.1-003155
 
 Installed packages
 
-```
+```bash
 dotnet-host-ubuntu.16.04-x64.1.1.0-preview1-001100-00.deb
 dotnet-hostfxr-ubuntu.16.04-x64.1.1.0-preview1-001100-00.deb
 dotnet-sharedframework-ubuntu.16.04-x64.1.1.0-preview1-001100-00.deb
@@ -85,7 +85,7 @@ sudo apt-get install dotnet-dev-1.0.0-preview2.1-003155
 
 Installed packages
 
-```
+```bash
 dotnet-hostfxr-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
 dotnet-host-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
 dotnet-sharedframework-ubuntu.16.10-x64.1.1.0-preview1-001100-00.deb
@@ -93,5 +93,6 @@ dotnet-sdk-ubuntu.16.10-x64.1.0.0-preview2.1-003155.deb
 ```
 
 ## Windows Server Hosting
+
 If you are looking to host stand-alone apps on Windows Servers, the ASP.NET Core Module for IIS can be installed separately on servers without installing .NET Core runtime. You can download the Windows (Server Hosting) installer and run the following command from an Administrator command prompt:
 ``DotNetCore.1.1.0.Preview1-WindowsHosting.exe OPT_INSTALL_LTS_REDIST=0 OPT_INSTALL_FTS_REDIST=0``
