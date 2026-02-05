@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes new Entity Framework Core features & enhancements.
 
-This Preview 1 release does not introduce new Entity Framework Core feature additions.
+Here's a summary of what's new in Entity Framework Core in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 Entity Framework Core updates:
 
