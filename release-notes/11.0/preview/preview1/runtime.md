@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes new .NET Runtime features & enhancements.
 
-This Preview 1 release does not introduce new .NET Runtime features.
+Here's a summary of what's new in .NET Runtime in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 .NET Runtime updates in .NET 11:
 
