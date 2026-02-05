@@ -1,6 +1,12 @@
 # .NET MAUI in .NET 11 Preview 1 - Release Notes
 
-This Preview 1 release does not contain new .NET MAUI feature additions.
+Here's a summary of what's new in .NET MAUI in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 .NET MAUI updates in .NET 11:
 
