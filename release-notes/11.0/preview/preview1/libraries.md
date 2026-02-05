@@ -3,16 +3,14 @@
 .NET 11 Preview 1 includes new .NET Libraries features & enhancements:
 
 - [Zstandard Compression Support](#zstandard-compression-support)
-- [ZipArchiveEntry.Open with FileAccess Parameter](#ziparchiveentry-open-with-fileaccess-parameter)
-- [TimeZone Performance Improvements (per-year caching)](#timezone-performance-improvements)
+- [TimeZone Performance Improvements](#timezone-performance-improvements)
+- [ZipArchiveEntry.Open with FileAccess Parameter](#ziparchiveentryopen-with-fileaccess-parameter)
 - [Generic Interlocked.And and Interlocked.Or Methods](#generic-interlockedand-and-interlockedor-methods)
 - [Span-based IDN APIs for IdnMapping](#span-based-idn-apis-for-idnmapping)
-- [File.OpenNullHandle for Efficient I/O Redirection](#fileopennullhandle-for-efficient-io-redirection)
-- [Standard Handle APIs for Console](#standard-handle-apis-for-console)
 - [CancellationToken Overloads for TextWriter](#cancellationtoken-overloads-for-textwriter)
+- [Process I/O Improvements](#process-io-improvements)
 - [Function Pointer Support in Reflection.Emit](#function-pointer-support-in-reflectionemit)
 - [SOCKS5h Proxy Support in HttpClient](#socks5h-proxy-support-in-httpclient)
-- [HTTP Automatic Decompression with Zstandard](#http-automatic-decompression-with-zstandard)
 
 .NET Libraries updates in .NET 11:
 
@@ -51,29 +49,25 @@ Usage:
 using var compressStream = new ZStandardStream(outputStream, CompressionMode.Compress);
 await inputStream.CopyToAsync(compressStream);
 
-// Decompress data  
+// Decompress data
 using var decompressStream = new ZStandardStream(inputStream, CompressionMode.Decompress);
 await decompressStream.CopyToAsync(outputStream);
 ```
 
-## ZipArchiveEntry.Open with FileAccess Parameter
+### HTTP Automatic Decompression with Zstandard
 
-[dotnet/runtime #122032](https://github.com/dotnet/runtime/pull/122032) adds new overloads to `ZipArchiveEntry.Open()` that accept a `FileAccess` parameter, allowing users to specify the desired access mode when opening an entry stream.
-
-When a `ZipArchive` is opened in `ZipArchiveMode.Update`, calling `ZipArchiveEntry.Open()` always returns a read-write stream by invoking `OpenInUpdateMode()`. This causes the entire entry to be decompressed into memory, even when the caller only intends to read the entry's contents.
-
-New APIs:
+[dotnet/runtime #123531](https://github.com/dotnet/runtime/pull/123531) adds Zstandard to `DecompressionMethods` for automatic HTTP response decompression.
 
 ```csharp
-public Stream Open(FileAccess access);
-public Task<Stream> OpenAsync(FileAccess access, CancellationToken cancellationToken = default);
+var handler = new HttpClientHandler
+{
+    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Zstandard
+};
+
+using var client = new HttpClient(handler);
+// Automatically decompresses zstd-encoded responses
+var response = await client.GetAsync("https://example.com");
 ```
-
-Update Mode Details:
-
-- `FileAccess.Read`: Opens a read-only stream over the entry's compressed data without loading it into memory. Useful for streaming reads.
-- `FileAccess.Write`: Opens an empty writable stream, discarding any existing entry data. Semantically equivalent to "replace the entry content entirely" (like `FileMode.Create`).
-- `FileAccess.ReadWrite`: Same as parameterless `Open()`/`OpenAsync()` - loads existing data into memory and returns a read/write/seekable stream.
 
 ## TimeZone Performance Improvements
 
@@ -115,6 +109,23 @@ BenchmarkDotNet v0.15.2, Linux Ubuntu 25.04 (Plucky Puffin)
 
 This change also fixes several correctness issues with time zone handling (fixes #24839, #24277, #25075, #118915, #114476).
 
+## ZipArchiveEntry.Open with FileAccess Parameter
+
+[dotnet/runtime #122032](https://github.com/dotnet/runtime/pull/122032) adds new overloads to `ZipArchiveEntry.Open()` that accept a `FileAccess` parameter, allowing users to specify the desired access mode when opening an entry stream.
+
+When a `ZipArchive` is opened in `ZipArchiveMode.Update`, calling `ZipArchiveEntry.Open()` always returns a read-write stream by invoking `OpenInUpdateMode()`. This causes the entire entry to be decompressed into memory, even when the caller only intends to read the entry's contents.
+
+```csharp
+public Stream Open(FileAccess access);
+public Task<Stream> OpenAsync(FileAccess access, CancellationToken cancellationToken = default);
+```
+
+Update Mode Details:
+
+- `FileAccess.Read`: Opens a read-only stream over the entry's compressed data without loading it into memory. Useful for streaming reads.
+- `FileAccess.Write`: Opens an empty writable stream, discarding any existing entry data. Semantically equivalent to "replace the entry content entirely" (like `FileMode.Create`).
+- `FileAccess.ReadWrite`: Same as parameterless `Open()`/`OpenAsync()` - loads existing data into memory and returns a read/write/seekable stream.
+
 ## Generic Interlocked.And and Interlocked.Or Methods
 
 [dotnet/runtime #120978](https://github.com/dotnet/runtime/pull/120978) adds generic versions of the `And` and `Or` methods to `System.Threading.Interlocked`, enabling atomic bitwise operations on any enum type or integer type.
@@ -128,8 +139,6 @@ public static class Interlocked
 ```
 
 These methods support all integer primitive types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `nint`, `nuint`) and any enum backed by these types.
-
-Example usage:
 
 ```csharp
 [Flags]
@@ -161,8 +170,6 @@ namespace System.Globalization
 
 These methods throw on invalid input (consistent with existing APIs) and return `false` only when the destination buffer is too small.
 
-Example usage:
-
 ```csharp
 var mapping = new IdnMapping();
 Span<char> buffer = stackalloc char[256];
@@ -172,48 +179,6 @@ if (mapping.TryGetAscii("münchen.de", buffer, out int charsWritten))
 {
     ReadOnlySpan<char> ascii = buffer.Slice(0, charsWritten);
     // ascii contains "xn--mnchen-3ya.de"
-}
-```
-
-## File.OpenNullHandle for Efficient I/O Redirection
-
-[dotnet/runtime #123483](https://github.com/dotnet/runtime/pull/123483) adds `File.OpenNullHandle()` to obtain a handle to the system's null device (`NUL` on Windows, `/dev/null` on Unix). This enables efficient discarding of process output/error streams or providing empty input without the overhead of reading and ignoring data.
-
-```csharp
-namespace System.IO
-{
-    public static class File
-    {
-        public static SafeFileHandle OpenNullHandle();
-    }
-}
-```
-
-Example usage:
-
-```csharp
-// Efficiently discard process output
-using var nullHandle = File.OpenNullHandle();
-var startInfo = new ProcessStartInfo("myapp.exe")
-{
-    RedirectStandardOutput = true,
-    StandardOutputHandle = nullHandle
-};
-```
-
-## Standard Handle APIs for Console
-
-[dotnet/runtime #123478](https://github.com/dotnet/runtime/pull/123478) adds APIs for direct access to standard input/output/error handles.
-
-```csharp
-namespace System
-{
-    public static class Console
-    {
-        public static SafeFileHandle OpenStandardInputHandle();
-        public static SafeFileHandle OpenStandardOutputHandle();
-        public static SafeFileHandle OpenStandardErrorHandle();
-    }
 }
 ```
 
@@ -236,6 +201,32 @@ public abstract class TextWriter
 }
 ```
 
+## Process I/O Improvements
+
+### File.OpenNullHandle
+
+[dotnet/runtime #123483](https://github.com/dotnet/runtime/pull/123483) adds `File.OpenNullHandle()` to obtain a handle to the system's null device (`NUL` on Windows, `/dev/null` on Unix). This enables efficient discarding of process output/error streams or providing empty input without the overhead of reading and ignoring data.
+
+```csharp
+public static class File
+{
+    public static SafeFileHandle OpenNullHandle();
+}
+```
+
+### Standard Handle APIs
+
+[dotnet/runtime #123478](https://github.com/dotnet/runtime/pull/123478) adds APIs for direct access to standard input/output/error handles.
+
+```csharp
+public static class Console
+{
+    public static SafeFileHandle OpenStandardInputHandle();
+    public static SafeFileHandle OpenStandardOutputHandle();
+    public static SafeFileHandle OpenStandardErrorHandle();
+}
+```
+
 ## Function Pointer Support in Reflection.Emit
 
 Two PRs add support for function pointer types in `System.Reflection.Emit`:
@@ -247,28 +238,13 @@ These changes enable more advanced interop scenarios when dynamically generating
 
 ## SOCKS5h Proxy Support in HttpClient
 
-[dotnet/runtime #123218](https://github.com/dotnet/runtime/pull/123218) adds support for the `socks5h://` proxy scheme in `HttpClient`. Previously, attempts to use this scheme threw `NotSupportedException` with the message "Only the 'http', 'https', 'socks4', 'socks4a' and 'socks5' schemes are allowed for proxies."
+[dotnet/runtime #123218](https://github.com/dotnet/runtime/pull/123218) adds support for the `socks5h://` proxy scheme in `HttpClient`. Previously, attempts to use this scheme threw `NotSupportedException`.
 
 The `socks5h://` scheme indicates that DNS resolution should be performed by the proxy server rather than locally.
 
 ```csharp
 using var handler = new SocketsHttpHandler();
-handler.Proxy = new WebProxy("socks5h://username:password@proxy.example.com:1080");
+handler.Proxy = new WebProxy("socks5h://proxy.example.com:1080");
 using HttpClient client = new HttpClient(handler);
 var response = await client.GetStringAsync("http://example.com");
-```
-
-## HTTP Automatic Decompression with Zstandard
-
-[dotnet/runtime #123531](https://github.com/dotnet/runtime/pull/123531) adds Zstandard compression support to `DecompressionMethods` for automatic HTTP response decompression.
-
-```csharp
-var handler = new HttpClientHandler
-{
-    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Zstandard
-};
-
-using var client = new HttpClient(handler);
-// Automatically decompresses zstd-encoded responses
-var response = await client.GetAsync("https://example.com");
 ```
