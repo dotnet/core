@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes the following C# features & enhancements.
 
-This Preview 1 release does not introduce new C# feature additions.
+Here's a summary of what's new in C# in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 C# updates:
 
