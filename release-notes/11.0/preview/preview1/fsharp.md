@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes the following F# features & enhancements.
 
-This Preview 1 release does not introduce new F# feature additions.
+Here's a summary of what's new in F# in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 F# updates:
 
