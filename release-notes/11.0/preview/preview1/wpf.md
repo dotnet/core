@@ -1,6 +1,12 @@
 # WPF in .NET 11 Preview 1 - Release Notes
 
-This Preview 1 release does not introduce new WPF feature additions.
+Here's a summary of what's new in WPF in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 WPF updates in .NET 11:
 
