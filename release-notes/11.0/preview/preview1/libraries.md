@@ -84,7 +84,7 @@ var response = await client.GetStringAsync("http://ifconfig.me/ip");
 
 [PR #123327](https://github.com/dotnet/runtime/pull/123327) by @pavelsavara
 
-[browser] LoopbackServer - make GenericLoopbackServer.CloseWebSocket async
+LoopbackServer - make GenericLoopbackServer.CloseWebSocket async
 
 #### Avoid temporary List allocation with HTTP/3 trailers
 
