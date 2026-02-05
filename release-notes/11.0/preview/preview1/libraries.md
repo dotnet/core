@@ -1,8 +1,15 @@
-# What's New in .NET 11 Libraries (Preview 1)
+# What's New in .NET 11 Libraries - Release Notes
 
-This summarizes new features, performance improvements, and notable changes in .NET Libraries in .NET 11 Preview 1.
+This document summarizes new features, performance improvements, and notable changes coming to .NET Libraries in .NET 11.
 
-## Feature Areas
+
+## Highlights
+
+- **43** new features and APIs
+- **9** performance improvements
+- **74** total notable changes across **27** areas
+
+## Table of Contents
 
 - [Threading & Time](#threading--time) (3)
 - [Networking (HTTP)](#networking-http) (7)
@@ -180,7 +187,7 @@ Add the UnsupportedOSPlatformAttribute for Haiku to managed network functions in
 ```csharp
 > using System.Text.Json;
 > using System.Text.Json.Serialization;
-> 
+>
 > internal static class Reproduction
 > {
 >     public static void Main()
@@ -189,11 +196,11 @@ Add the UnsupportedOSPlatformAttribute for Haiku to managed network functions in
 >         _ = typeof(SourceGenerationContext).GetCustomAttributes(true);
 >     }
 > }
-> 
+>
 > [JsonSourceGenerationOptions(JsonSerializerDefaults.Strict)]
 > [JsonSerializable(typeof(Example))]
 > internal partial class SourceGenerationContext : JsonSerializerContext;
-> 
+>
 > internal class Example;
 >
 ```
@@ -303,7 +310,7 @@ Successfully implemented the approved API proposal for adding CancellationToken 
 
 ```csharp
 > namespace System.IO;
-> 
+>
 > public abstract class TextWriter
 > {
 >     public Task WriteAsync(string? value, CancellationToken token);
@@ -495,7 +502,7 @@ This PR adds new overloads to ZipArchiveEntry.Open() and ZipArchiveEntry.OpenAsy
 > public void InterleavedZipPackagePartStream_Length_Assert()
 > {
 >     using MemoryStream package = new(_partPieceSampleZipPackage);
-> 
+>
 >     using Package zipPackage = Package.Open(package, FileMode.Open, FileAccess.Read);
 >     PackagePart partEntry = zipPackage.GetPart(new Uri("/ReadablePartPieceEntry.bin", UriKind.Relative));
 >     using Stream stream = partEntry.GetStream(FileMode.Open);
@@ -781,27 +788,41 @@ Adding support for aligning AllocateTypeAssociatedMemory
 
 [PR #119662](https://github.com/dotnet/runtime/pull/119662) by @tarekgh
 
-A significant rewrite of time zone handling introduces a **per-year cache** for time zone transitions, dramatically improving performance for time conversions. The cache stores all transitions for a given year in UTC format, eliminating repeated rule lookups during conversions.
+A significant rewrite of time zone handling introduces a **per-year cache** for time zone transitions, improving performance for time conversions. The cache stores all transitions for a given year in UTC format, eliminating repeated rule lookups during conversions.
 
-**Performance improvements (Windows):**
-| Operation | Speedup |
-|-----------|--------|
-| ConvertTimeFromUtc | **3.9x faster** |
-| ConvertTime (Local DateKind) | **3.5x faster** |
-| ConvertTimeToUtc | **3.0x faster** |
-| DateTime.Now | **2.8x faster** |
-| GetUtcOffset | **2.5x faster** |
+**Windows Benchmarks:**
+```
+BenchmarkDotNet v0.15.2, Windows 11 (10.0.26100.6584/24H2/2024Update/HudsonValley)
+11th Gen Intel Core i7-11700 2.50GHz, 1 CPU, 16 logical and 8 physical cores
+```
 
-**Performance improvements (Linux):**
-| Operation | Speedup |
-|-----------|--------|
-| ConvertTimeToUtc | **4.7x faster** |
-| ConvertTime (Local DateKind) | **4.3x faster** |
-| ConvertTimeFromUtc | **3.5x faster** |
-| DateTime.Now | **3.5x faster** |
-| GetUtcOffset | **2.9x faster** |
+| Method                                | base/diff | Base Median (ns) | Diff Median (ns) |
+|---------------------------------------|----------:|-----------------:|-----------------:|
+| ConvertTimeFromUtc                    |      3.93 |            47.97 |            12.21 |
+| ConvertTimeUsingLocalDateKind         |      3.47 |            66.70 |            19.21 |
+| ConvertTimeUsingUnspecifiedDateKind   |      3.34 |            63.77 |            19.07 |
+| ConvertTimeToUtc                      |      2.98 |            48.33 |            16.23 |
+| DateTimeNow                           |      2.81 |            54.57 |            19.42 |
+| GetUtcOffset                          |      2.48 |            98.64 |            39.83 |
+| ConvertTimeUsingUtcDateKind           |      2.39 |            19.66 |             8.23 |
 
-This change also fixes several correctness issues with time zone handling that were difficult to address in the previous implementation.
+**Linux Benchmarks (WSL):**
+```
+BenchmarkDotNet v0.15.2, Linux Ubuntu 25.04 (Plucky Puffin)
+11th Gen Intel Core i7-11700 2.50GHz, 1 CPU, 16 logical and 8 physical cores
+```
+
+| Method                                | base/diff | Base Median (ns) | Diff Median (ns) |
+|---------------------------------------|----------:|-----------------:|-----------------:|
+| ConvertTimeToUtc                      |      4.70 |            63.80 |            13.57 |
+| ConvertTimeUsingLocalDateKind         |      4.25 |            80.09 |            18.84 |
+| ConvertTimeUsingUnspecifiedDateKind   |      4.01 |            79.23 |            19.78 |
+| ConvertTimeFromUtc                    |      3.54 |            39.34 |            11.12 |
+| DateTimeNow                           |      3.51 |            50.99 |            14.54 |
+| GetUtcOffset                          |      2.87 |           100.40 |            34.94 |
+| ConvertTimeUsingUtcDateKind           |      1.64 |            17.60 |            10.73 |
+
+This change also fixes several correctness issues with time zone handling (fixes #24839, #24277, #25075, #118915, #114476).
 
 
 #### Use QueryUnbiasedInterruptTime for more responsive Windows timer behavior
