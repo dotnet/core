@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes the following Visual Basic features & enhancements.
 
-This Preview 1 release does not introduce new Visual Basic feature additions.
+Here's a summary of what's new in Visual Basic in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 Visual Basic updates:
 
