@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes new .NET Libraries features & enhancements.
 
-This Preview 1 release does not introduce new .NET Libraries features.
+Here's a summary of what's new in .NET Libraries in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 .NET Libraries updates in .NET 11:
 
