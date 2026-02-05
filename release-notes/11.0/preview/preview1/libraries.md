@@ -1,4 +1,4 @@
-# What's New in .NET 11 Libraries - Release Notes
+# .NET Libraries in .NET 11 Preview 1 - Release Notes
 
 This document summarizes new features, performance improvements, and notable changes coming to .NET Libraries in .NET 11.
 
