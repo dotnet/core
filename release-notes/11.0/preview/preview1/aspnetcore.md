@@ -13,4 +13,10 @@ ASP.NET Core updates in .NET 11:
 - [Discussion](https://aka.ms/dotnet/11/preview1)
 - [Release notes](README.md)
 
-This Preview 1 release does not contain new ASP.NET Core feature additions.
+Here's a summary of what's new in ASP.NET Core in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
