@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes new .NET SDK features & enhancements.
 
-This Preview 1 release does not introduce new .NET SDK features.
+Here's a summary of what's new in .NET SDK in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 .NET SDK updates in .NET 11:
 
