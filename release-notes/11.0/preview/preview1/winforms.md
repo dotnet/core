@@ -2,7 +2,13 @@
 
 .NET 11 Preview 1 includes new Windows Forms features & enhancements.
 
-This Preview 1 release does not introduce new Windows Forms feature additions.
+Here's a summary of what's new in Windows Forms in this Preview 1 release:
+
+- [Feature](#feature)
+
+## Feature
+
+Feature summary.
 
 Windows Forms updates in .NET 11:
 
