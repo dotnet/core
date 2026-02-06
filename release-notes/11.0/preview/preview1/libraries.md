@@ -3,13 +3,17 @@
 .NET 11 Preview 1 includes new .NET Libraries features & enhancements:
 
 - [Zstandard Compression Support](#zstandard-compression-support)
+- [BFloat16 Floating-Point Type](#bfloat16-floating-point-type)
 - [TimeZone Performance Improvements](#timezone-performance-improvements)
 - [ZipArchiveEntry.Open with FileAccess Parameter](#ziparchiveentryopen-with-fileaccess-parameter)
+- [IReadOnlySet Support in System.Text.Json](#ireadonlyset-support-in-systemtextjson)
+- [Base64 Parity with Base64Url](#base64-parity-with-base64url)
 - [Generic Interlocked.And and Interlocked.Or Methods](#generic-interlockedand-and-interlockedor-methods)
 - [Span-based IDN APIs for IdnMapping](#span-based-idn-apis-for-idnmapping)
 - [CancellationToken Overloads for TextWriter](#cancellationtoken-overloads-for-textwriter)
 - [Process I/O Improvements](#process-io-improvements)
 - [Function Pointer Support in Reflection.Emit](#function-pointer-support-in-reflectionemit)
+- [CGM Extension Support in MediaTypeMap](#cgm-extension-support-in-mediatypemap)
 - [SOCKS5h Proxy Support in HttpClient](#socks5h-proxy-support-in-httpclient)
 
 .NET Libraries updates in .NET 11:
@@ -22,25 +26,7 @@
 
 Zstandard offers significantly faster compression and decompression compared to existing algorithms while maintaining competitive compression ratios.
 
-Benchmarks:
-
-| Method     | Level   | File             | Algorithm |   Mean      | Size | Compressed |
-|----------- |-------- |----------------- |---------- |------------:|-----:|-----:|
-| Compress   | Optimal | alice29.txt      | Brotli    | 2,306.40 μs | 148481 | 54517 |
-| Compress   | Optimal | alice29.txt      | Zstandard | 842.743 μs  | 148481 | 54919 |
-| Compress   | Optimal | alice29.txt      | Deflate   | 2,421.16 μs | 148481 | 53890 |
-| | | | | | | |
-| Decompress | Optimal | alice29.txt      | Brotli    |   320.82 μs |
-| Decompress | Optimal | alice29.txt      | Zstandard | 139.251 μs  |
-| Decompress | Optimal | alice29.txt      | Deflate   |   275.43 μs |
-| | | | | | | |
-| Compress   | Fastest | TestDocument.pdf | Brotli    |   300.40 μs | 121993 | 117104 |
-| Compress   | Fastest | TestDocument.pdf | Zstandard | 137.3 μs    | 121993 | 119405 |
-| Compress   | Fastest | TestDocument.pdf | Deflate   |   947.61 μs | 121993 | 121404 |
-| | | | | | | |
-| Decompress | Fastest | TestDocument.pdf | Brotli    |   233.14 μs |
-| Decompress | Fastest | TestDocument.pdf | Zstandard |  17.22 μs   |
-| Decompress | Fastest | TestDocument.pdf | Deflate   |   238.81 μs |
+Benchmarks from [dotnet/runtime #119575](https://github.com/dotnet/runtime/pull/119575) compare Zstandard against Brotli and Deflate across text (alice29.txt, 148 KB) and binary (TestDocument.pdf, 122 KB) workloads from the [Canterbury Corpus](http://corpus.canterbury.ac.nz/descriptions/) at both Optimal and Fastest compression levels. Zstandard compresses 2–7x faster than Brotli and Deflate at Optimal level, and decompresses 2–14x faster at Fastest level, while achieving comparable compression ratios.
 
 Usage:
 
@@ -69,43 +55,27 @@ using var client = new HttpClient(handler);
 var response = await client.GetAsync("https://example.com");
 ```
 
+## BFloat16 Floating-Point Type
+
+[dotnet/runtime #98643](https://github.com/dotnet/runtime/pull/98643), contributed by community member @huoyaoyuan, adds `System.Numerics.BFloat16`, a 16-bit floating-point type using the "Brain Floating Point" format widely used in machine learning and AI workloads. BFloat16 uses the same number of exponent bits as `float` (8 bits) but with a reduced significand (7 bits), making it ideal for training and inference scenarios where range matters more than precision.
+
+`BFloat16` implements all standard numeric interfaces (`INumber<BFloat16>`, `IFloatingPoint<BFloat16>`, etc.) and supports conversions to and from `float`, `double`, and `Half`.
+
+```csharp
+BFloat16 value = (BFloat16)3.14f;
+float asFloat = (float)value;  // Lossless upcast to float
+
+// Use in ML-style computation
+BFloat16 a = (BFloat16)1.5f;
+BFloat16 b = (BFloat16)2.0f;
+BFloat16 result = a * b;  // 3.0
+```
+
 ## TimeZone Performance Improvements
 
 [dotnet/runtime #119662](https://github.com/dotnet/runtime/pull/119662) introduces a **per-year cache** for time zone transitions, dramatically improving performance for time conversions. The cache stores all transitions for a given year in UTC format, eliminating repeated rule lookups during conversions.
 
-### Windows
-
-```
-BenchmarkDotNet v0.15.2, Windows 11 (10.0.26100.6584/24H2/2024Update/HudsonValley)
-11th Gen Intel Core i7-11700 2.50GHz, 1 CPU, 16 logical and 8 physical cores
-```
-
-| Faster                                               | base/diff | Base Median (ns) | Diff Median (ns) |
-| ---------------------------------------------------- | ---------:| ----------------:| ----------------:|
-| Baseline.Program.ConvertTimeFromUtc                  |      3.93 |            47.97 |            12.21 |
-| Baseline.Program.ConvertTimeUsingLocalDateKind       |      3.47 |            66.70 |            19.21 |
-| Baseline.Program.ConvertTimeUsingUnspecifiedDateKind |      3.34 |            63.77 |            19.07 |
-| Baseline.Program.ConvertTimeToUtc                    |      2.98 |            48.33 |            16.23 |
-| Baseline.Program.DateTimeNow                         |      2.81 |            54.57 |            19.42 |
-| Baseline.Program.GetUtcOffset                        |      2.48 |            98.64 |            39.83 |
-| Baseline.Program.ConvertTimeUsingUtcDateKind         |      2.39 |            19.66 |             8.23 |
-
-### Linux (WSL)
-
-```
-BenchmarkDotNet v0.15.2, Linux Ubuntu 25.04 (Plucky Puffin)
-11th Gen Intel Core i7-11700 2.50GHz, 1 CPU, 16 logical and 8 physical cores
-```
-
-| Faster                                               | base/diff | Base Median (ns) | Diff Median (ns) |
-| ---------------------------------------------------- | ---------:| ----------------:| ----------------:|
-| Baseline.Program.ConvertTimeToUtc                    |      4.70 |            63.80 |            13.57 |
-| Baseline.Program.ConvertTimeUsingLocalDateKind       |      4.25 |            80.09 |            18.84 |
-| Baseline.Program.ConvertTimeUsingUnspecifiedDateKind |      4.01 |            79.23 |            19.78 |
-| Baseline.Program.ConvertTimeFromUtc                  |      3.54 |            39.34 |            11.12 |
-| Baseline.Program.DateTimeNow                         |      3.51 |            50.99 |            14.54 |
-| Baseline.Program.GetUtcOffset                        |      2.87 |           100.40 |            34.94 |
-| Baseline.Program.ConvertTimeUsingUtcDateKind         |      1.64 |            17.60 |            10.73 |
+Benchmarks from [dotnet/runtime #119662](https://github.com/dotnet/runtime/pull/119662) measured seven common time zone operations (`ConvertTimeFromUtc`, `ConvertTimeToUtc`, `DateTimeNow`, `GetUtcOffset`, and three `ConvertTime` variants with different `DateTimeKind` values) on Windows 11 and Linux (WSL) using an 11th Gen Intel Core i7-11700. On Windows, operations are 2.4–3.9x faster (e.g. `ConvertTimeFromUtc` dropped from 48.0 ns to 12.2 ns). On Linux, improvements are even larger at 1.6–4.7x (e.g. `ConvertTimeToUtc` dropped from 63.8 ns to 13.6 ns).
 
 This change also fixes several correctness issues with time zone handling (fixes #24839, #24277, #25075, #118915, #114476).
 
@@ -125,6 +95,38 @@ Update Mode Details:
 - `FileAccess.Read`: Opens a read-only stream over the entry's compressed data without loading it into memory. Useful for streaming reads.
 - `FileAccess.Write`: Opens an empty writable stream, discarding any existing entry data. Semantically equivalent to "replace the entry content entirely" (like `FileMode.Create`).
 - `FileAccess.ReadWrite`: Same as parameterless `Open()`/`OpenAsync()` - loads existing data into memory and returns a read/write/seekable stream.
+
+## IReadOnlySet Support in System.Text.Json
+
+[dotnet/runtime #120306](https://github.com/dotnet/runtime/pull/120306), contributed by community member @sander1095, adds support for serializing and deserializing `IReadOnlySet<T>` collections in `System.Text.Json`. Previously, only `ISet<T>` and concrete set types like `HashSet<T>` were supported. This aligns the library's handling of `IReadOnlySet<T>` with other collection interfaces like `ISet<T>` and `ICollection<T>`.
+
+```csharp
+// Now works - previously threw NotSupportedException
+IReadOnlySet<string> tags = new HashSet<string> { "dotnet", "csharp" };
+string json = JsonSerializer.Serialize(tags);
+IReadOnlySet<string> deserialized = JsonSerializer.Deserialize<IReadOnlySet<string>>(json);
+```
+
+## Base64 Parity with Base64Url
+
+[dotnet/runtime #123151](https://github.com/dotnet/runtime/pull/123151) adds UTF-16 encoding/decoding APIs to `System.Buffers.Text.Base64` that previously only existed on `Base64Url`. The `Base64Url` class introduced a much nicer API surface (with `OperationStatus` returns, `EncodeToString`, `DecodeFromChars`, etc.) that standard `Base64` lacked, forcing developers to use the less capable `Convert` class for standard Base64 operations.
+
+```csharp
+namespace System.Buffers.Text;
+
+public static partial class Base64
+{
+    // New APIs matching Base64Url surface
+    public static byte[] DecodeFromChars(ReadOnlySpan<char> source);
+    public static OperationStatus DecodeFromChars(ReadOnlySpan<char> source, Span<byte> destination,
+        out int charsConsumed, out int bytesWritten, bool isFinalBlock = true);
+    public static string EncodeToString(ReadOnlySpan<byte> source);
+    public static char[] EncodeToChars(ReadOnlySpan<byte> source);
+    public static int GetEncodedLength(int bytesLength);
+    public static int GetMaxDecodedLength(int base64Length);
+    // ... and more
+}
+```
 
 ## Generic Interlocked.And and Interlocked.Or Methods
 
@@ -167,8 +169,6 @@ namespace System.Globalization
     }
 }
 ```
-
-These methods throw on invalid input (consistent with existing APIs) and return `false` only when the destination buffer is too small.
 
 ```csharp
 var mapping = new IdnMapping();
@@ -235,6 +235,10 @@ Two PRs add support for function pointer types in `System.Reflection.Emit`:
 - [dotnet/runtime #121128](https://github.com/dotnet/runtime/pull/121128) extends support for references to unmanaged function pointers
 
 These changes enable more advanced interop scenarios when dynamically generating assemblies.
+
+## CGM Extension Support in MediaTypeMap
+
+[dotnet/runtime #122591](https://github.com/dotnet/runtime/pull/122591) adds the `.cgm` (Computer Graphics Metafile, ISO 8632) extension to `MediaTypeMap` with the IANA-registered MIME type `image/cgm`. Applications using `MediaTypeMap` to resolve `.cgm` files will now correctly identify them instead of returning null. CGM is still actively used in technical documentation, engineering, and aviation industry applications.
 
 ## SOCKS5h Proxy Support in HttpClient
 
