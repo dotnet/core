@@ -65,5 +65,5 @@ The keywords `asr`, `land`, `lor`, `lsl`, `lsr`, and `lxor` — previously reser
 
 F# updates:
 
-- [F# release notes](https://learn.microsoft.com/dotnet/fsharp/whats-new/)
+- [F# release notes](https://fsharp.github.io/fsharp-compiler-docs/release-notes/About.html)
 - [dotnet/fsharp repository](https://github.com/dotnet/fsharp)
