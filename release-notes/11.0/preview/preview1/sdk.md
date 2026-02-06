@@ -4,21 +4,20 @@
 
 Here's a summary of what's new in .NET SDK in this Preview 1 release:
 
-- [.NET SDK in .NET 11 Preview 1 - Release Notes](#net-sdk-in-net-11-preview-1---release-notes)
-  - [CLI command improvements](#cli-command-improvements)
-    - [`dotnet run`: Interactive target framework and device selection](#dotnet-run-interactive-target-framework-and-device-selection)
-    - [`dotnet test`: Positional arguments](#dotnet-test-positional-arguments)
-    - [`dotnet watch`: Hot Reload reference changes and configurable ports](#dotnet-watch-hot-reload-reference-changes-and-configurable-ports)
-    - [`dotnet format`: Hidden severity support](#dotnet-format-hidden-severity-support)
-  - [Code analyzers](#code-analyzers)
-    - [New analyzers](#new-analyzers)
-  - [New .NET SDK capabilities](#new-net-sdk-capabilities)
-    - [`PublishReferenceSymbols` property](#publishreferencesymbols-property)
-  - [Other changes](#other-changes)
-    - [Opt-out of automatic UTF-8 console encoding (mostly for Windows users)](#opt-out-of-automatic-utf-8-console-encoding-mostly-for-windows-users)
-    - [File based apps behave more like project based apps](#file-based-apps-behave-more-like-project-based-apps)
-  - [Community contributors](#community-contributors)
-  - [Useful Links](#useful-links)
+- [CLI command improvements](#cli-command-improvements)
+  - [`dotnet run`: Interactive target framework and device selection](#dotnet-run-interactive-target-framework-and-device-selection)
+  - [`dotnet test`: Positional arguments](#dotnet-test-positional-arguments)
+  - [`dotnet watch`: Hot Reload reference changes and configurable ports](#dotnet-watch-hot-reload-reference-changes-and-configurable-ports)
+  - [`dotnet format`: Hidden severity support](#dotnet-format-hidden-severity-support)
+- [Code analyzers](#code-analyzers)
+  - [New analyzers](#new-analyzers)
+- [New .NET SDK capabilities](#new-net-sdk-capabilities)
+  - [`PublishReferenceSymbols` property](#publishreferencesymbols-property)
+- [Other changes](#other-changes)
+  - [Opt-out of automatic UTF-8 console encoding (mostly for Windows users)](#opt-out-of-automatic-utf-8-console-encoding-mostly-for-windows-users)
+  - [File based apps behave more like project based apps](#file-based-apps-behave-more-like-project-based-apps)
+- [Community contributors](#community-contributors)
+- [Useful Links](#useful-links)
 
 ## CLI command improvements
 
@@ -161,7 +160,5 @@ Thank you to all the community contributors who helped make this release possibl
 - [@xtqqczze](https://github.com/xtqqczze)
 
 ## Useful Links
-
-.NET SDK updates in .NET 11:
 
 - [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview) documentation
