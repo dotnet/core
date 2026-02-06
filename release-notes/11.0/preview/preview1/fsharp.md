@@ -4,8 +4,8 @@
 
 Here's a summary of what's new in F# in this preview release:
 
-- [Performance: Parallel compilation enabled by default](#performance)
-- [Performance: Faster compilation of CE-heavy code](#faster-compilation-of-computation-expressionheavy-code)
+- [Performance: Parallel compilation enabled by default](#compiler-performance)
+- [Performance: Faster compilation of CE-heavy code](#faster-compilation-of-computation-expression-heavy-code)
 - [New features: `--disableLanguageFeature`, `--typecheck-only` for FSI](#new-features)
 - [Breaking changes: ML compatibility removal](#breaking-changes)
 - [Bug fixes](#bug-fixes-and-other-improvements)
@@ -65,6 +65,5 @@ The keywords `asr`, `land`, `lor`, `lsl`, `lsr`, and `lxor` — previously reser
 
 F# updates:
 
-- [F# release notes](https://fsharp.github.io/fsharp-compiler-docs/release-notes/)
+- [F# release notes](https://learn.microsoft.com/dotnet/fsharp/whats-new/)
 - [dotnet/fsharp repository](https://github.com/dotnet/fsharp)
-
