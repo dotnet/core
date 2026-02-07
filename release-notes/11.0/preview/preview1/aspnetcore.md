@@ -486,7 +486,7 @@ The generated OpenAPI document will include the correct media type and response 
 
 ## `IOutputCachePolicyProvider` for custom output caching
 
-ASP.NET Core now provides `IOutputCachePolicyProvider` for implementing custom output caching policy selection logic. This interface enables advanced scenarios where caching policies need to be determined dynamically, such as retrieving policies from external configuration sources or implementing custom policy resolution logic.
+ASP.NET Core now provides `IOutputCachePolicyProvider` for implementing custom output caching policy selection logic. This interface enables advanced scenarios where caching policies need to be determined dynamically, such as retrieving policies from external configuration sources, databases, or implementing custom policy resolution logic based on tenant-specific settings.
 
 ```csharp
 public interface IOutputCachePolicyProvider
@@ -500,47 +500,61 @@ public interface IOutputCachePolicyProvider
 **Usage:**
 
 ```csharp
-public class CustomOutputCachePolicyProvider : IOutputCachePolicyProvider
+public class DatabaseOutputCachePolicyProvider : IOutputCachePolicyProvider
 {
-    private readonly IConfiguration _configuration;
+    private readonly IOptions<OutputCacheOptions> _options;
+    private readonly IPolicyDatabase _policyDatabase;
     
-    public CustomOutputCachePolicyProvider(IConfiguration configuration)
+    public DatabaseOutputCachePolicyProvider(
+        IOptions<OutputCacheOptions> options,
+        IPolicyDatabase policyDatabase)
     {
-        _configuration = configuration;
+        _options = options;
+        _policyDatabase = policyDatabase;
     }
     
     public IReadOnlyList<IOutputCachePolicy> GetBasePolicies()
     {
-        // Return base policies that apply to all requests
-        return new List<IOutputCachePolicy>
+        // Return base policies from options
+        if (_options.Value.BasePolicies is not null && _options.Value.BasePolicies.Count > 0)
         {
-            new OutputCachePolicyBuilder().Expire(TimeSpan.FromMinutes(5)).Build()
-        };
+            return _options.Value.BasePolicies;
+        }
+        return Array.Empty<IOutputCachePolicy>();
     }
     
-    public ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName)
+    public async ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName)
     {
-        // Custom logic to resolve named policies
-        // For example, load from external configuration
-        var duration = _configuration.GetValue<int>($"CachePolicies:{policyName}:DurationMinutes");
-        
-        if (duration > 0)
+        // First check the configured options
+        if (_options.Value.NamedPolicies?.TryGetValue(policyName, out var policy) == true)
         {
-            var policy = new OutputCachePolicyBuilder()
-                .Expire(TimeSpan.FromMinutes(duration))
-                .Build();
-            return ValueTask.FromResult<IOutputCachePolicy?>(policy);
+            return policy;
         }
         
-        return ValueTask.FromResult<IOutputCachePolicy?>(null);
+        // Fall back to loading from database
+        var dbPolicy = await _policyDatabase.GetPolicyAsync(policyName);
+        return dbPolicy;
     }
 }
 
 // Registration
-services.AddSingleton<IOutputCachePolicyProvider, CustomOutputCachePolicyProvider>();
+builder.Services.AddOutputCache(options =>
+{
+    // Configure default policies using OutputCacheOptions
+    options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromMinutes(5)));
+    options.AddPolicy("short", builder => builder.Expire(TimeSpan.FromMinutes(1)));
+});
+
+// Replace the default provider with custom implementation
+builder.Services.AddSingleton<IOutputCachePolicyProvider, DatabaseOutputCachePolicyProvider>();
 ```
 
-This interface provides extensibility for output caching and enables scenarios like loading policies from external configuration sources or implementing custom policy resolution based on tenant-specific settings.
+This interface provides extensibility for output caching, enabling scenarios like:
+
+- Loading policies from external configuration stores
+- Implementing tenant-specific caching strategies  
+- Dynamic policy resolution based on user roles or permissions
+- Integrating with existing policy management systems
 
 Thank you [@lqlive](https://github.com/lqlive) for this contribution!
 
