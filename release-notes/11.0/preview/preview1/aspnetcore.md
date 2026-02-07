@@ -479,14 +479,14 @@ The generated OpenAPI document will include the correct media type and response 
 
 ## `IOutputCachePolicyProvider` for custom output caching
 
-ASP.NET Core now provides `IOutputCachePolicyProvider` for implementing custom output caching policy selection logic. This interface enables advanced scenarios where caching policies need to be determined dynamically based on request context or other runtime factors.
+ASP.NET Core now provides `IOutputCachePolicyProvider` for implementing custom output caching policy selection logic. This interface enables advanced scenarios where caching policies need to be determined dynamically, such as retrieving policies from external configuration sources or implementing custom policy resolution logic.
 
 ```csharp
 public interface IOutputCachePolicyProvider
 {
-    ValueTask<IOutputCachePolicy?> GetPolicyAsync(
-        HttpContext context,
-        string? policyName);
+    IReadOnlyList<IOutputCachePolicy> GetBasePolicies();
+    
+    ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName);
 }
 ```
 
@@ -495,16 +495,37 @@ public interface IOutputCachePolicyProvider
 ```csharp
 public class CustomOutputCachePolicyProvider : IOutputCachePolicyProvider
 {
-    public ValueTask<IOutputCachePolicy?> GetPolicyAsync(
-        HttpContext context,
-        string? policyName)
+    private readonly IConfiguration _configuration;
+    
+    public CustomOutputCachePolicyProvider(IConfiguration configuration)
     {
-        // Custom logic to select caching policy
-        if (context.User.IsInRole("Premium"))
+        _configuration = configuration;
+    }
+    
+    public IReadOnlyList<IOutputCachePolicy> GetBasePolicies()
+    {
+        // Return base policies that apply to all requests
+        return new List<IOutputCachePolicy>
         {
-            return new ValueTask<IOutputCachePolicy?>(premiumPolicy);
+            new OutputCachePolicyBuilder().Expire(TimeSpan.FromMinutes(5)).Build()
+        };
+    }
+    
+    public ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName)
+    {
+        // Custom logic to resolve named policies
+        // For example, load from external configuration
+        var duration = _configuration.GetValue<int>($"CachePolicies:{policyName}:DurationMinutes");
+        
+        if (duration > 0)
+        {
+            var policy = new OutputCachePolicyBuilder()
+                .Expire(TimeSpan.FromMinutes(duration))
+                .Build();
+            return ValueTask.FromResult<IOutputCachePolicy?>(policy);
         }
-        return new ValueTask<IOutputCachePolicy?>(standardPolicy);
+        
+        return ValueTask.FromResult<IOutputCachePolicy?>(null);
     }
 }
 
@@ -512,7 +533,9 @@ public class CustomOutputCachePolicyProvider : IOutputCachePolicyProvider
 services.AddSingleton<IOutputCachePolicyProvider, CustomOutputCachePolicyProvider>();
 ```
 
-This interface provides extensibility for output caching and enables integration with custom policy management systems.
+This interface provides extensibility for output caching and enables scenarios like loading policies from external configuration sources or implementing custom policy resolution based on tenant-specific settings.
+
+Thank you [@lqlive](https://github.com/lqlive) for this contribution!
 
 ## `TimeProvider` in ASP.NET Core Identity
 
