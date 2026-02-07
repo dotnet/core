@@ -27,7 +27,7 @@ ASP.NET Core updates in .NET 11 Preview 1:
 
 - [Release notes](aspnetcore.md)
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11) documentation.
-- [Breaking changes](https://learn.microsoft.com/dotnet/core/compatibility/11.0#aspnet-core)
+- [Breaking changes](https://learn.microsoft.com/aspnet/core/breaking-changes/11/overview)
 - [Roadmap](https://github.com/dotnet/aspnetcore/issues/59443)
 
 .NET 11 Preview 1:
