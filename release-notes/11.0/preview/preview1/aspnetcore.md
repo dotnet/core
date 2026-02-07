@@ -14,6 +14,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`IComponentPropertyActivator` for custom property injection](#icomponentpropertyactivator-for-custom-property-injection)
 - [SignalR `ConfigureConnection` for Interactive Server components](#signalr-configureconnection-for-interactive-server-components)
 - [Improved Blazor reconnection experience](#improved-blazor-reconnection-experience)
+- [Unified startup options format for Blazor scripts](#unified-startup-options-format-for-blazor-scripts)
 - [`IHostedService` support in Blazor WebAssembly](#ihostedservice-support-in-blazor-webassembly)
 - [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
 - [Opt-in metrics and tracing for Blazor WebAssembly](#opt-in-metrics-and-tracing-for-blazor-webassembly)
@@ -382,6 +383,56 @@ The enhanced reconnection logic provides:
 - Reduced false-positive disconnection notifications
 
 These improvements make Blazor applications more resilient to temporary network interruptions and provide a smoother user experience during connectivity issues.
+
+## Unified startup options format for Blazor scripts
+
+The `blazor.server.js` and `blazor.webassembly.js` scripts now accept the same nested options format used by `blazor.web.js`. This provides consistency across all Blazor hosting models and eliminates a potential source of confusion when working with different Blazor templates or migrating between hosting models.
+
+Previously, `blazor.web.js` used a nested structure with `circuit` and `webAssembly` properties, while `blazor.server.js` and `blazor.webassembly.js` expected options at the top level. Now all three scripts support both formats.
+
+**For Blazor Server (`blazor.server.js`):**
+
+```javascript
+// Both formats now work
+Blazor.start({
+    circuit: {
+        reconnectionOptions: {
+            retryIntervalMilliseconds: [0, 2000, 10000, 30000]
+        }
+    }
+});
+
+// Original format still supported
+Blazor.start({
+    reconnectionOptions: {
+        retryIntervalMilliseconds: [0, 2000, 10000, 30000]
+    }
+});
+```
+
+**For Blazor WebAssembly (`blazor.webassembly.js`):**
+
+```javascript
+// Both formats now work
+Blazor.start({
+    webAssembly: {
+        loadBootResource: function(type, name, defaultUri, integrity) {
+            // Custom resource loading logic
+            return defaultUri;
+        }
+    }
+});
+
+// Original format still supported
+Blazor.start({
+    loadBootResource: function(type, name, defaultUri, integrity) {
+        // Custom resource loading logic
+        return defaultUri;
+    }
+});
+```
+
+This change makes it easier to share code examples and documentation across different Blazor hosting models, and reduces friction when developers work with multiple Blazor application types or reference documentation intended for `blazor.web.js`.
 
 ## `IHostedService` support in Blazor WebAssembly
 
