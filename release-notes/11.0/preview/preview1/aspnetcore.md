@@ -10,7 +10,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`GetUriWithHash()` extension method](#geturiwithhash-extension-method)
 - [BasePath component](#basepath-component)
 - [MathML namespace support](#mathml-namespace-support)
-- [BL0010 analyzer for JSInterop](#bl0010-analyzer-for-jsinterop)
+- [Analyzer for JavaScript interop void returns](#analyzer-for-javascript-interop-void-returns)
 - [`IComponentPropertyActivator` for custom property injection](#icomponentpropertyactivator-for-custom-property-injection)
 - [SignalR `ConfigureConnection` for Interactive Server components](#signalr-configureconnection-for-interactive-server-components)
 - [Improved Blazor reconnection experience](#improved-blazor-reconnection-experience)
@@ -264,7 +264,7 @@ Blazor now properly supports MathML elements in interactive rendering. MathML el
 
 This fix ensures that MathML content renders correctly in browsers when added dynamically through Blazor's renderer, resolving issues where MathML elements were previously being created as regular HTML elements without the proper namespace.
 
-## BL0010 analyzer for JSInterop
+## Analyzer for JavaScript interop void returns
 
 A new Blazor analyzer (BL0010) has been added that recommends using `InvokeVoidAsync` instead of `InvokeAsync<object>` when calling JavaScript functions that don't return values. This analyzer helps developers write more efficient JSInterop code.
 
