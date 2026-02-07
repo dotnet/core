@@ -464,53 +464,49 @@ public interface IOutputCachePolicyProvider
 **Usage:**
 
 ```csharp
-public class DatabaseOutputCachePolicyProvider : IOutputCachePolicyProvider
+public class TenantOutputCachePolicyProvider : IOutputCachePolicyProvider
 {
-    private readonly IOptions<OutputCacheOptions> _options;
-    private readonly IPolicyDatabase _policyDatabase;
+    private readonly ITenantService _tenantService;
+    private readonly Dictionary<string, IOutputCachePolicy> _cachedPolicies = new();
     
-    public DatabaseOutputCachePolicyProvider(
-        IOptions<OutputCacheOptions> options,
-        IPolicyDatabase policyDatabase)
+    public TenantOutputCachePolicyProvider(ITenantService tenantService)
     {
-        _options = options;
-        _policyDatabase = policyDatabase;
+        _tenantService = tenantService;
     }
     
     public IReadOnlyList<IOutputCachePolicy> GetBasePolicies()
     {
-        // Return base policies from options
-        if (_options.Value.BasePolicies is not null && _options.Value.BasePolicies.Count > 0)
-        {
-            return _options.Value.BasePolicies;
-        }
+        // Return empty - no base policies in this custom implementation
         return Array.Empty<IOutputCachePolicy>();
     }
     
     public async ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName)
     {
-        // First check the configured options
-        if (_options.Value.NamedPolicies?.TryGetValue(policyName, out var policy) == true)
+        // Check if we've already built this policy
+        if (_cachedPolicies.TryGetValue(policyName, out var cachedPolicy))
         {
-            return policy;
+            return cachedPolicy;
         }
         
-        // Fall back to loading from database
-        var dbPolicy = await _policyDatabase.GetPolicyAsync(policyName);
-        return dbPolicy;
+        // Load policy settings from tenant configuration
+        var tenantSettings = await _tenantService.GetCacheSettingsAsync(policyName);
+        
+        if (tenantSettings == null)
+        {
+            return null;
+        }
+        
+        // Build a custom policy implementation
+        var policy = new CustomOutputCachePolicy(tenantSettings);
+        _cachedPolicies[policyName] = policy;
+        
+        return policy;
     }
 }
 
 // Registration
-builder.Services.AddOutputCache(options =>
-{
-    // Configure default policies using OutputCacheOptions
-    options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromMinutes(5)));
-    options.AddPolicy("short", builder => builder.Expire(TimeSpan.FromMinutes(1)));
-});
-
-// Replace the default provider with custom implementation
-builder.Services.AddSingleton<IOutputCachePolicyProvider, DatabaseOutputCachePolicyProvider>();
+builder.Services.AddOutputCache();
+builder.Services.AddSingleton<IOutputCachePolicyProvider, TenantOutputCachePolicyProvider>();
 ```
 
 This interface provides extensibility for output caching, enabling scenarios like:
