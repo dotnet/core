@@ -145,7 +145,12 @@ The `QuickGrid` component now supports row click events through the new `OnRowCl
 </QuickGrid>
 
 @code {
-    private IQueryable<Person> people = GetPeople();
+    private List<Person> people = new()
+    {
+        new(1, "Alice Smith", "alice@example.com", "Engineering"),
+        new(2, "Bob Johnson", "bob@example.com", "Marketing"),
+        new(3, "Carol Williams", "carol@example.com", "Engineering"),
+    };
 
     void HandleRowClick(Person person)
     {
