@@ -17,7 +17,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`IHostedService` support in Blazor WebAssembly](#ihostedservice-support-in-blazor-webassembly)
 - [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
 - [Opt-in metrics and tracing for Blazor WebAssembly](#opt-in-metrics-and-tracing-for-blazor-webassembly)
-- [Docker support in Blazor WebAssembly template](#docker-support-in-blazor-webassembly-template)
+- [Docker support in Blazor Web App template](#docker-support-in-blazor-web-app-template)
 - [FileContentResult support in OpenAPI](#filecontentresult-support-in-openapi)
 - [`IOutputCachePolicyProvider` for custom output caching](#ioutputcachepolicyprovider-for-custom-output-caching)
 - [`TimeProvider` in ASP.NET Core Identity](#timeprovider-in-aspnet-core-identity)
@@ -414,23 +414,17 @@ builder.Services.AddOpenTelemetry()
 
 Applications can export telemetry data to observability platforms for analysis, helping developers understand client-side performance characteristics and diagnose issues in production.
 
-## Docker support in Blazor WebAssembly template
+## Docker support in Blazor Web App template
 
-The Blazor WebAssembly project template now includes Docker support out of the box. New projects include a Dockerfile and .dockerignore file configured for optimal container deployment.
+The Blazor Web App project template now supports the "Enable Docker" option in Visual Studio and other IDEs. This brings the Blazor Web App template in line with other ASP.NET Core project templates like MVC and Web API, which already had Docker support enabled.
 
-The generated Dockerfile:
+When creating a new Blazor Web App project, you can now:
 
-- Uses multi-stage builds for optimized image size
-- Includes proper caching for NuGet packages and build artifacts
-- Configures the app to run in a production-ready container
+- Select "Enable Docker" during project creation in Visual Studio
+- Automatically generate a Dockerfile and .dockerignore configured for the Blazor Web App
+- Use Docker Compose support for multi-container scenarios
 
-```bash
-# Build and run with Docker
-docker build -t myblazorapp .
-docker run -p 8080:8080 myblazorapp
-```
-
-This makes it easier to containerize Blazor WebAssembly applications and deploy them to container orchestration platforms like Kubernetes or Azure Container Apps.
+This makes it easier to containerize Blazor Web App applications and deploy them to container orchestration platforms like Kubernetes or Azure Container Apps.
 
 ## FileContentResult support in OpenAPI
 
