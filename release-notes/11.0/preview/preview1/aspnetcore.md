@@ -476,6 +476,8 @@ public IActionResult DownloadPdf()
 
 The generated OpenAPI document will include the correct media type and response schema, making it easier for API consumers to understand file download endpoints.
 
+Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
+
 ## `IOutputCachePolicyProvider` for custom output caching
 
 ASP.NET Core now provides `IOutputCachePolicyProvider` for implementing custom output caching policy selection logic. This interface enables advanced scenarios where caching policies need to be determined dynamically, such as retrieving policies from external configuration sources, databases, or implementing custom policy resolution logic based on tenant-specific settings.
