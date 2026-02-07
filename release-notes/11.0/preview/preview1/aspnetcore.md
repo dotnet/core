@@ -139,7 +139,7 @@ The `DisplayName` component checks for `DisplayAttribute.Name` first, then falls
 The `QuickGrid` component now supports row click events through the new `OnRowClick` parameter. When set, the grid automatically applies appropriate styling (cursor pointer) and invokes the callback with the clicked item.
 
 ```razor
-<QuickGrid Items="@people" OnRowClick="@HandleRowClick">
+<QuickGrid Items="@people.AsQueryable()" OnRowClick="@HandleRowClick">
     <PropertyColumn Property="@(p => p.Name)" />
     <PropertyColumn Property="@(p => p.Email)" />
 </QuickGrid>
