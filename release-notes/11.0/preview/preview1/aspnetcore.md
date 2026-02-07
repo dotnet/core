@@ -6,7 +6,6 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Label component for forms](#label-component-for-forms)
 - [DisplayName component](#displayname-component)
 - [QuickGrid `OnRowClick` event](#quickgrid-onrowclick-event)
-- [RenderFragment contravariance](#renderfragment-contravariance)
 - [Relative navigation with `RelativeToCurrentUri`](#relative-navigation-with-relativetocurrenturi)
 - [`GetUriWithHash()` extension method](#geturiwithhash-extension-method)
 - [BasePath component](#basepath-component)
@@ -160,42 +159,6 @@ The `QuickGrid` component now supports row click events through the new `OnRowCl
 ```
 
 The feature includes built-in CSS styling that applies a pointer cursor to clickable rows through the `row-clickable` CSS class, providing clear visual feedback to users.
-
-## RenderFragment contravariance
-
-The `TValue` type parameter in `RenderFragment<TValue>` is now marked as contravariant with the `in` modifier. This enables passing render fragments that accept base types where derived types are expected, eliminating the need for complex reflection-based adapters in generic component composition.
-
-```csharp
-// Before: Invariant delegate blocked this
-public delegate RenderFragment RenderFragment<TValue>(TValue value);
-
-// After: Contravariance enabled
-public delegate RenderFragment RenderFragment<in TValue>(TValue value);
-```
-
-This change enables more flexible component composition:
-
-```csharp
-// Non-generic fragment handling base type
-RenderFragment<IList> baseTemplate = (IList items) => builder => 
-{
-    foreach (var item in items)
-    {
-        // Render item
-    }
-};
-
-// Can now be assigned where specific type is expected
-RenderFragment<List<Product>> specificTemplate = baseTemplate; // ✅ Works with contravariance
-
-// DynamicComponent scenario now works directly
-var parameters = new Dictionary<string, object>
-{
-    ["ItemsTemplate"] = baseTemplate, // ✅ No adapter needed
-};
-```
-
-Note that C# variance only works with reference types due to CLR limitations. Value types (structs, enums, primitives) do not support variance.
 
 ## Relative navigation with `RelativeToCurrentUri`
 
