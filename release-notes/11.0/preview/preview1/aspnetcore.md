@@ -574,6 +574,8 @@ dotnet dev-certs https --trust
 
 This improvement streamlines the development experience when using WSL, removing a common friction point for developers working in Linux environments on Windows.
 
+Thank you [@StickFun](https://github.com/StickFun) for this contribution!
+
 ## Community contributors
 
 Thank you contributors! ❤️
