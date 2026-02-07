@@ -300,7 +300,9 @@ public interface IComponentPropertyActivator
 }
 ```
 
-**Example: Logging property activator**
+**Example:**
+
+This example shows a custom property activator that logs dependency injection for each component property:
 
 ```csharp
 public class LoggingPropertyActivator : IComponentPropertyActivator
