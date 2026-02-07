@@ -145,6 +145,8 @@ The `QuickGrid` component now supports row click events through the new `OnRowCl
 </QuickGrid>
 
 @code {
+    private IQueryable<Person> people = GetPeople();
+
     void HandleRowClick(Person person)
     {
         NavigationManager.NavigateTo($"/person/{person.Id}");
