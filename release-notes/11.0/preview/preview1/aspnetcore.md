@@ -11,7 +11,6 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`GetUriWithHash()` extension method](#geturiwithhash-extension-method)
 - [BasePath component](#basepath-component)
 - [MathML namespace support](#mathml-namespace-support)
-- [InputFile cancel event](#inputfile-cancel-event)
 - [BL0010 analyzer for JSInterop](#bl0010-analyzer-for-jsinterop)
 - [`IComponentPropertyActivator` for custom property injection](#icomponentpropertyactivator-for-custom-property-injection)
 - [SignalR `ConfigureConnection` method](#signalr-configureconnection-method)
@@ -294,36 +293,6 @@ Blazor now properly supports MathML elements in interactive rendering. MathML el
 ```
 
 This fix ensures that MathML content renders correctly in browsers when added dynamically through Blazor's renderer, resolving issues where MathML elements were previously being created as regular HTML elements without the proper namespace.
-
-## InputFile cancel event
-
-The `InputFile` component now supports detecting when file selection is canceled through the new `OnCancel` event callback. This event fires when a user opens the file picker but dismisses it without selecting any files.
-
-```razor
-<InputFile OnChange="@HandleFileSelected" OnCancel="@HandleCanceled" />
-
-@if (isCanceled)
-{
-    <p>File selection was canceled.</p>
-}
-
-@code {
-    bool isCanceled;
-
-    void HandleFileSelected(InputFileChangeEventArgs e)
-    {
-        isCanceled = false;
-        // Handle selected files
-    }
-
-    void HandleCanceled()
-    {
-        isCanceled = true;
-    }
-}
-```
-
-This enables better UX by allowing developers to provide feedback or clear loading states when users cancel file selection.
 
 ## BL0010 analyzer for JSInterop
 
