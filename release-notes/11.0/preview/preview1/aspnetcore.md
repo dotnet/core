@@ -12,7 +12,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [MathML namespace support](#mathml-namespace-support)
 - [BL0010 analyzer for JSInterop](#bl0010-analyzer-for-jsinterop)
 - [`IComponentPropertyActivator` for custom property injection](#icomponentpropertyactivator-for-custom-property-injection)
-- [SignalR `ConfigureConnection` method](#signalr-configureconnection-method)
+- [SignalR `ConfigureConnection` for Interactive Server components](#signalr-configureconnection-for-interactive-server-components)
 - [Improved Blazor reconnection experience](#improved-blazor-reconnection-experience)
 - [`IHostedService` support in Blazor WebAssembly](#ihostedservice-support-in-blazor-webassembly)
 - [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
@@ -317,23 +317,24 @@ services.AddSingleton<IComponentPropertyActivator, CustomPropertyActivator>();
 
 The interface follows the same pattern as MVC's property activators and integrates with Hot Reload for cache invalidation. The default implementation supports keyed services via `[Inject(Key = "...")]` and includes proper trimming annotations for AOT compatibility.
 
-## SignalR `ConfigureConnection` method
+## SignalR `ConfigureConnection` for Interactive Server components
 
-SignalR clients can now configure connection settings using the new `ConfigureConnection` method before the connection starts. This provides a way to customize connection behavior after the builder has been configured but before connection establishment.
+Blazor now provides access to configure the underlying SignalR connection options when using Interactive Server components through the new `ConfigureConnection` property on `ServerComponentsEndpointOptions`. This enables configuration of `HttpConnectionDispatcherOptions` properties that were previously only accessible through workarounds.
 
 ```csharp
-builder.Services.AddBlazorHub(options =>
-{
-    options.ConfigureConnection = connection =>
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode(options =>
     {
-        connection.ServerTimeout = TimeSpan.FromSeconds(60);
-        connection.KeepAliveInterval = TimeSpan.FromSeconds(15);
-        connection.HandshakeTimeout = TimeSpan.FromSeconds(30);
-    };
-});
+        options.ConfigureConnection = dispatcherOptions =>
+        {
+            dispatcherOptions.CloseOnAuthenticationExpiration = true;
+            dispatcherOptions.AllowStatefulReconnects = true;
+            dispatcherOptions.ApplicationMaxBufferSize = 1024 * 1024;
+        };
+    });
 ```
 
-This method complements the existing configuration options and enables more advanced connection setup scenarios where you need to configure the connection object directly.
+This provides a clean, type-safe API for configuring SignalR connection settings without needing to inspect endpoint metadata. The configuration is applied when the Blazor hub is mapped internally, matching the pattern already available with `MapBlazorHub`.
 
 ## Improved Blazor reconnection experience
 
