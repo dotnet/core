@@ -30,14 +30,16 @@ For example, comparing the latest GA release on nuget.org against a staging feed
 
 ### Version Parameters
 
-All version parameters can be auto-discovered from their respective NuGet feeds. If any are omitted, the script queries the feed for the latest `Microsoft.NETCore.App.Ref` package and parses the version string.
+All version parameters can be auto-discovered from their respective NuGet feeds. If any are omitted, the script queries the feed for the latest `Microsoft.NETCore.App.Ref` package and parses the version string. When `PreviousVersion` or `CurrentVersion` is provided, the `MajorMinor` and `PrereleaseLabel` values are extracted from it automatically.
 
 | Parameter | Description | Default |
 |---|---|---|
-| `PreviousMajorMinor` | The "before" .NET major.minor version (e.g., `10.0`) | Discovered from `PreviousNuGetFeed` |
-| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Discovered from `PreviousNuGetFeed` |
-| `CurrentMajorMinor` | The "after" .NET major.minor version (e.g., `10.0`) | Discovered from `CurrentNuGetFeed` |
-| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Discovered from `CurrentNuGetFeed` |
+| `PreviousVersion` | Exact package version for the "before" comparison (e.g., `10.0.0-preview.7.25380.108`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — version is searched)* |
+| `CurrentVersion` | Exact package version for the "after" comparison (e.g., `10.0.0-rc.1.25451.107`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — version is searched)* |
+| `PreviousMajorMinor` | The "before" .NET major.minor version (e.g., `10.0`) | Extracted from `PreviousVersion` or discovered from `PreviousNuGetFeed` |
+| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Extracted from `PreviousVersion` or discovered from `PreviousNuGetFeed` |
+| `CurrentMajorMinor` | The "after" .NET major.minor version (e.g., `10.0`) | Extracted from `CurrentVersion` or discovered from `CurrentNuGetFeed` |
+| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Extracted from `CurrentVersion` or discovered from `CurrentNuGetFeed` |
 
 ### Feed Parameters
 
@@ -54,13 +56,6 @@ All version parameters can be auto-discovered from their respective NuGet feeds.
 | `TmpFolder` | Working directory for downloaded and extracted packages | Auto-created temp directory |
 | `AttributesToExcludeFilePath` | Path to attributes exclusion file | `ApiDiffAttributesToExclude.txt` (same folder as script) |
 | `AssembliesToExcludeFilePath` | Path to assemblies exclusion file | `ApiDiffAssembliesToExclude.txt` (same folder as script) |
-
-### Override Parameters
-
-| Parameter | Description | Default |
-|---|---|---|
-| `PreviousPackageVersion` | Exact package version for the "before" comparison (e.g., `10.0.0`). Bypasses version search. | *(empty — version is searched)* |
-| `CurrentPackageVersion` | Exact package version for the "after" comparison (e.g., `10.0.0-rc.1.25451.107`). Bypasses version search. | *(empty — version is searched)* |
 
 ### Flags
 
@@ -86,21 +81,22 @@ Explicit version parameters (comparing .NET 10.0 Preview 7 to RC 1):
    -PreviousMajorMinor 10.0 `
    -PreviousPrereleaseLabel preview.7 `
    -CurrentMajorMinor 10.0 `
-   -CurrentPrereleaseLabel rc.1 `
-   -CurrentNuGetFeed https://api.nuget.org/v3/index.json
+   -CurrentPrereleaseLabel rc.1
 ```
 
-With exact package versions:
+With exact package versions (MajorMinor and PrereleaseLabel are extracted automatically):
 
 ```powershell
 .\RunApiDiff.ps1 `
-   -PreviousMajorMinor 10.0 `
-   -PreviousPrereleaseLabel preview.7 `
-   -CurrentMajorMinor 10.0 `
-   -CurrentPrereleaseLabel rc.1 `
-   -CurrentNuGetFeed https://api.nuget.org/v3/index.json `
-   -PreviousPackageVersion "10.0.0-preview.7.25380.108" `
-   -CurrentPackageVersion "10.0.0-rc.1.25451.107"
+   -PreviousVersion "10.0.0-preview.7.25380.108" `
+   -CurrentVersion "10.0.0-rc.1.25451.107"
+```
+
+Specifying only a previous version — current is auto-discovered from nuget.org, generating a diff of all APIs added since .NET 8.0:
+
+```powershell
+.\RunApiDiff.ps1 `
+   -PreviousVersion "8.0.0"
 ```
 
 Example of what this script generates: [API diff between .NET 10.0 Preview 1 and .NET 10 Preview 2](https://github.com/dotnet/core/pull/9771)

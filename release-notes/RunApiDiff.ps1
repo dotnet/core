@@ -21,8 +21,8 @@
 # -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
 # -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
 # -InstallApiDiff               : Optional boolean to install or update the ApiDiff tool. Default is false.
-# -PreviousPackageVersion       : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
-# -CurrentPackageVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
+# -PreviousVersion       : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
+# -CurrentVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
 
 # Example — simplest usage with auto-discovery:
 # .\RunApiDiff.ps1 <staging-feed-url>
@@ -30,8 +30,8 @@
 # Example — explicit version parameters:
 # .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1 -CurrentNuGetFeed https://api.nuget.org/v3/index.json
 
-# Example with exact package versions:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1 -PreviousPackageVersion "10.0.0-preview.7.25380.108" -CurrentPackageVersion "10.0.0-rc.1.25451.107" -CurrentNuGetFeed https://api.nuget.org/v3/index.json
+# Example with exact package versions (MajorMinor and PrereleaseLabel are extracted automatically):
+# .\RunApiDiff.ps1 -PreviousVersion "10.0.0-preview.7.25380.108" -CurrentVersion "10.0.0-rc.1.25451.107"
 
 Param (
     [Parameter(Mandatory = $false)]
@@ -101,11 +101,11 @@ Param (
     ,
     [Parameter(Mandatory = $false)]
     [string]
-    $PreviousPackageVersion = ""
+    $PreviousVersion = ""
     ,
     [Parameter(Mandatory = $false)]
     [string]
-    $CurrentPackageVersion = ""
+    $CurrentVersion = ""
 )
 
 #######################
@@ -845,6 +845,41 @@ Function ParsePrereleaseLabel {
     Write-Error "Invalid prerelease label '$label'. Expected format: 'preview.N' or 'rc.N'." -ErrorAction Stop
 }
 
+## Extract MajorMinor and PrereleaseLabel from explicit Version parameters if provided
+Function ParseVersionString {
+    Param (
+        [string] $version,
+        [string] $label
+    )
+    $result = @{ MajorMinor = ""; PrereleaseLabel = "" }
+    If ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+-((?:preview|rc)\.[0-9]+)") {
+        $result.MajorMinor = $Matches[1]
+        $result.PrereleaseLabel = $Matches[2]
+    }
+    ElseIf ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+$") {
+        $result.MajorMinor = $Matches[1]
+        $result.PrereleaseLabel = ""
+    }
+    Else {
+        Write-Error "Could not parse ${label}Version '$version'. Expected format: 'X.Y.Z' or 'X.Y.Z-preview.N.build' / 'X.Y.Z-rc.N.build'." -ErrorAction Stop
+    }
+    Return $result
+}
+
+If (-not [System.String]::IsNullOrWhiteSpace($PreviousVersion)) {
+    $parsed = ParseVersionString $PreviousVersion "Previous"
+    If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) { $PreviousMajorMinor = $parsed.MajorMinor }
+    If ([System.String]::IsNullOrWhiteSpace($PreviousPrereleaseLabel)) { $PreviousPrereleaseLabel = $parsed.PrereleaseLabel }
+    Write-Color green "Parsed from PreviousVersion: MajorMinor=$PreviousMajorMinor, PrereleaseLabel=$(If ($PreviousPrereleaseLabel) { $PreviousPrereleaseLabel } Else { 'GA' })"
+}
+
+If (-not [System.String]::IsNullOrWhiteSpace($CurrentVersion)) {
+    $parsed = ParseVersionString $CurrentVersion "Current"
+    If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = $parsed.MajorMinor }
+    If ([System.String]::IsNullOrWhiteSpace($CurrentPrereleaseLabel)) { $CurrentPrereleaseLabel = $parsed.PrereleaseLabel }
+    Write-Color green "Parsed from CurrentVersion: MajorMinor=$CurrentMajorMinor, PrereleaseLabel=$(If ($CurrentPrereleaseLabel) { $CurrentPrereleaseLabel } Else { 'GA' })"
+}
+
 ## Discover version info from feeds if not provided
 If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -and [System.String]::IsNullOrWhiteSpace($PreviousPrereleaseLabel)) {
     $discovered = DiscoverVersionFromFeed $PreviousNuGetFeed "Previous"
@@ -962,17 +997,17 @@ $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentMajorMinor $CurrentRe
 
 If (-Not $ExcludeNetCore)
 {
-    ProcessSdk "NETCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageVersion $CurrentPackageVersion
+    ProcessSdk "NETCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousVersion $CurrentVersion
 }
 
 If (-Not $ExcludeAspNetCore)
 {
-    ProcessSdk "AspNetCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageVersion $CurrentPackageVersion
+    ProcessSdk "AspNetCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousVersion $CurrentVersion
 }
 
 If (-Not $ExcludeWindowsDesktop)
 {
-    ProcessSdk "WindowsDesktop" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousPackageVersion $CurrentPackageVersion
+    ProcessSdk "WindowsDesktop" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousVersion $CurrentVersion
 }
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
