@@ -717,50 +717,78 @@ Function DownloadPackage {
 Function ProcessSdk
 {
     Param(
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $sdkName
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $previousNuGetFeed
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $currentNuGetFeed
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $apiDiffExe
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $currentDotNetFullName
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $assembliesToExclude
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $attributesToExclude
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $previousDotNetFriendlyName
     ,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $currentDotNetFriendlyName
+    ,
+        [Parameter(Mandatory = $true)]
+        [ValidatePattern("\d+\.\d")]
+        [string]
+        $previousMajorMinor
+    ,
+        [Parameter(Mandatory = $true)]
+        [ValidateSet("preview", "rc", "ga")]
+        [string]
+        $previousReleaseKind
+    ,
+        [Parameter(Mandatory = $true)]
+        [string]
+        $previousPreviewRCNumber
+    ,
+        [Parameter(Mandatory = $true)]
+        [ValidatePattern("\d+\.\d")]
+        [string]
+        $currentMajorMinor
+    ,
+        [Parameter(Mandatory = $true)]
+        [ValidateSet("preview", "rc", "ga")]
+        [string]
+        $currentReleaseKind
+    ,
+        [Parameter(Mandatory = $true)]
+        [string]
+        $currentPreviewRCNumber
     ,
         [Parameter(Mandatory = $false)]
         [string]
@@ -772,21 +800,21 @@ Function ProcessSdk
     )
 
     $beforeDllFolder = ""
-    DownloadPackage $previousNuGetFeed $sdkName "Before" $PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber $previousVersion ([ref]$beforeDllFolder)
+    DownloadPackage $previousNuGetFeed $sdkName "Before" $previousMajorMinor $previousReleaseKind $previousPreviewRCNumber $previousVersion ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage $currentNuGetFeed $sdkName "After" $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber $currentVersion ([ref]$afterDllFolder)
+    DownloadPackage $currentNuGetFeed $sdkName "After" $currentMajorMinor $currentReleaseKind $currentPreviewRCNumber $currentVersion ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
     $beforeReferenceFolder = ""
     $afterReferenceFolder = ""
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
-        DownloadPackage $previousNuGetFeed "NETCore" "Before" $PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber $previousVersion ([ref]$beforeReferenceFolder)
+        DownloadPackage $previousNuGetFeed "NETCore" "Before" $previousMajorMinor $previousReleaseKind $previousPreviewRCNumber $previousVersion ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
         
-        DownloadPackage $currentNuGetFeed "NETCore" "After" $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber $currentVersion ([ref]$afterReferenceFolder)
+        DownloadPackage $currentNuGetFeed "NETCore" "After" $currentMajorMinor $currentReleaseKind $currentPreviewRCNumber $currentVersion ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
 
@@ -943,17 +971,17 @@ $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentMajorMinor $CurrentRe
 
 If (-Not $ExcludeNetCore)
 {
-    ProcessSdk "NETCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousVersion $CurrentVersion
+    ProcessSdk -sdkName "NETCore" -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
 }
 
 If (-Not $ExcludeAspNetCore)
 {
-    ProcessSdk "AspNetCore" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousVersion $CurrentVersion
+    ProcessSdk -sdkName "AspNetCore" -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
 }
 
 If (-Not $ExcludeWindowsDesktop)
 {
-    ProcessSdk "WindowsDesktop" $PreviousNuGetFeed $CurrentNuGetFeed $apiDiffExe $currentDotNetFullName $AssembliesToExcludeFilePath  $AttributesToExcludeFilePath $previousDotNetFriendlyName $currentDotNetFriendlyName $PreviousVersion $CurrentVersion
+    ProcessSdk -sdkName "WindowsDesktop" -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
 }
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
