@@ -10,9 +10,9 @@
 # -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc.
 # -PreviousReleaseKind          : Indicates if the 'before' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
 # -PreviousPreviewRCNumber : The preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
-# -CurrentMajorMinor         : The 'after' .NET version: '6.0', '7.0', '8.0', etc.
-# -CurrentReleaseKind           : Indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
-# -CurrentPreviewRCNumber  : The preview or RC number of the 'after' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
+# -CurrentMajorMinor         : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -CurrentNuGetFeed.
+# -CurrentReleaseKind           : Indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga". If not specified, discovered from -CurrentNuGetFeed.
+# -CurrentPreviewRCNumber  : The preview or RC number of the 'after' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA. If not specified, discovered from -CurrentNuGetFeed.
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo. If not specified, defaults to the git repository root relative to this script.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
@@ -51,14 +51,14 @@ Param (
     [string]
     $PreviousPreviewRCNumber # 0, 1, 2, 3, ...
     ,
-    [Parameter(Mandatory = $true)]
-    [ValidatePattern("\d+\.\d")]
+    [Parameter(Mandatory = $false)]
+    [ValidatePattern("(\d+\.\d)?")]
     [string]
     $CurrentMajorMinor # 7.0, 8.0, 9.0, ...
     ,
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]
-    [ValidateSet("preview", "rc", "ga")]
+    [ValidateSet("preview", "rc", "ga", "")]
     $CurrentReleaseKind
     ,
     [Parameter(Mandatory = $false)]
@@ -791,6 +791,48 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 
 ## Generate strings with no whitespace
 
+## Discover CurrentMajorMinor, CurrentReleaseKind, and CurrentPreviewRCNumber from the feed if not provided
+If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -or [System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) {
+    Write-Color cyan "Discovering current version from feed '$CurrentNuGetFeed'..."
+
+    $discoverHeaders = GetAuthHeadersForFeed $CurrentNuGetFeed
+    $discoverServiceIndex = Invoke-RestMethod -Uri $CurrentNuGetFeed -Headers $discoverHeaders
+    $discoverFlatContainer = $discoverServiceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
+
+    If (-not $discoverFlatContainer) {
+        Write-Error "Could not find PackageBaseAddress endpoint in feed '$CurrentNuGetFeed'. Please specify -CurrentMajorMinor, -CurrentReleaseKind, and -CurrentPreviewRCNumber explicitly." -ErrorAction Stop
+    }
+
+    $discoverBaseUrl = $discoverFlatContainer.'@id'
+    $discoverVersionsUrl = "${discoverBaseUrl}microsoft.netcore.app.ref/index.json"
+    $discoverVersions = Invoke-RestMethod -Uri $discoverVersionsUrl -Headers $discoverHeaders
+
+    If (-not $discoverVersions.versions -or $discoverVersions.versions.Count -eq 0) {
+        Write-Error "No versions of Microsoft.NETCore.App.Ref found on feed '$CurrentNuGetFeed'. Please specify -CurrentMajorMinor, -CurrentReleaseKind, and -CurrentPreviewRCNumber explicitly." -ErrorAction Stop
+    }
+
+    # Take the latest version and parse it
+    $latestVersion = $discoverVersions.versions | Select-Object -Last 1
+    Write-Color cyan "Latest version on feed: $latestVersion"
+
+    # Parse version string: "11.0.0-preview.1.26104.118" or "10.0.0"
+    If ($latestVersion -match "^(\d+)\.(\d+)\.\d+-(preview|rc)\.(\d+)") {
+        If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = "$($Matches[1]).$($Matches[2])" }
+        If ([System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) { $CurrentReleaseKind = $Matches[3] }
+        If ([System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) { $CurrentPreviewRCNumber = $Matches[4] }
+    }
+    ElseIf ($latestVersion -match "^(\d+)\.(\d+)\.(\d+)$") {
+        If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = "$($Matches[1]).$($Matches[2])" }
+        If ([System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) { $CurrentReleaseKind = "ga" }
+        If ([System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) { $CurrentPreviewRCNumber = $Matches[3] }
+    }
+    Else {
+        Write-Error "Could not parse version '$latestVersion'. Please specify -CurrentMajorMinor, -CurrentReleaseKind, and -CurrentPreviewRCNumber explicitly." -ErrorAction Stop
+    }
+
+    Write-Color green "Discovered: CurrentMajorMinor=$CurrentMajorMinor, CurrentReleaseKind=$CurrentReleaseKind, CurrentPreviewRCNumber=$CurrentPreviewRCNumber"
+}
+
 # Default PreviewNumberVersion to "0" when ReleaseKind is "ga"
 If ($PreviousReleaseKind -eq "ga" -and [System.String]::IsNullOrWhiteSpace($PreviousPreviewRCNumber)) {
     $PreviousPreviewRCNumber = "0"
@@ -805,6 +847,11 @@ If ($PreviousReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($Prev
 }
 If ($CurrentReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) {
     Write-Error "CurrentPreviewRCNumber is required when CurrentReleaseKind is '$CurrentReleaseKind'." -ErrorAction Stop
+}
+
+# Validate required values are present
+If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -or [System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) {
+    Write-Error "CurrentMajorMinor and CurrentReleaseKind are required. Specify them explicitly or provide -CurrentNuGetFeed to auto-discover." -ErrorAction Stop
 }
 
 # True when comparing 8.0 GA with 9.0 GA
