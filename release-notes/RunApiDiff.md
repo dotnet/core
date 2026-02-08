@@ -57,14 +57,14 @@ All version parameters can be auto-discovered from their respective NuGet feeds.
 | `AttributesToExcludeFilePath` | Path to attributes exclusion file | `ApiDiffAttributesToExclude.txt` (same folder as script) |
 | `AssembliesToExcludeFilePath` | Path to assemblies exclusion file | `ApiDiffAssembliesToExclude.txt` (same folder as script) |
 
-### Flags
+### Switches
 
-| Parameter | Description | Default |
-|---|---|---|
-| `ExcludeNetCore` | Skip the Microsoft.NETCore.App comparison | `$false` |
-| `ExcludeAspNetCore` | Skip the Microsoft.AspNetCore.App comparison | `$false` |
-| `ExcludeWindowsDesktop` | Skip the Microsoft.WindowsDesktop.App comparison | `$false` |
-| `InstallApiDiff` | Install or update the ApiDiff tool before running | `$false` |
+| Parameter | Description |
+|---|---|
+| `ExcludeNetCore` | Skip the Microsoft.NETCore.App comparison |
+| `ExcludeAspNetCore` | Skip the Microsoft.AspNetCore.App comparison |
+| `ExcludeWindowsDesktop` | Skip the Microsoft.WindowsDesktop.App comparison |
+| `InstallApiDiff` | Install or update the ApiDiff tool before running |
 
 ## Examples
 

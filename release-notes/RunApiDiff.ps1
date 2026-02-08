@@ -17,10 +17,10 @@
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
 # -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://api.nuget.org/v3/index.json
 # -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses https://api.nuget.org/v3/index.json
-# -ExcludeNetCore               : Optional boolean to exclude the NETCore comparison. Default is false.
-# -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
-# -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
-# -InstallApiDiff               : Optional boolean to install or update the ApiDiff tool. Default is false.
+# -ExcludeNetCore               : Switch to exclude the NETCore comparison.
+# -ExcludeAspNetCore            : Switch to exclude the AspNetCore comparison.
+# -ExcludeWindowsDesktop        : Switch to exclude the WindowsDesktop comparison.
+# -InstallApiDiff               : Switch to install or update the ApiDiff tool before running.
 # -PreviousVersion       : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
 # -CurrentVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
 
@@ -84,20 +84,20 @@ Param (
     $CurrentNuGetFeed = "https://api.nuget.org/v3/index.json"
     ,
     [Parameter(Mandatory = $false)]
-    [bool]
-    $ExcludeNetCore = $false
+    [switch]
+    $ExcludeNetCore
     ,
     [Parameter(Mandatory = $false)]
-    [bool]
-    $ExcludeAspNetCore = $false
+    [switch]
+    $ExcludeAspNetCore
     ,
     [Parameter(Mandatory = $false)]
-    [bool]
-    $ExcludeWindowsDesktop = $false
+    [switch]
+    $ExcludeWindowsDesktop
     ,
     [Parameter(Mandatory = $false)]
-    [bool]
-    $InstallApiDiff = $false
+    [switch]
+    $InstallApiDiff
     ,
     [Parameter(Mandatory = $false)]
     [string]
