@@ -587,6 +587,11 @@ Function DownloadPackage {
     $refPackageName = "$fullSdkName.Ref"
     $headers = GetAuthHeadersForFeed $nuGetFeed
 
+    # Get service index and flat2 base URL (used for both version search and download)
+    $serviceIndex = Invoke-RestMethod -Uri $nuGetFeed -Headers $headers
+    $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
+    $flatBaseUrl = If ($flatContainer) { $flatContainer.'@id' } Else { "" }
+
     # If exact version is provided, use it directly
     If (-Not ([System.String]::IsNullOrWhiteSpace($version))) {
         Write-Color cyan "Using exact package version: $version"
@@ -605,15 +610,10 @@ Function DownloadPackage {
             $searchTerm = "$dotNetVersion.*-$releaseKind.$previewNumberVersion*"
         }
 
-        # Get service index
-        $serviceIndex = Invoke-RestMethod -Uri $nuGetFeed -Headers $headers
-
         # Try flat2 (PackageBaseAddress) first — works reliably on all feeds including per-build shipping feeds
-        $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
         $version = ""
 
-        If ($flatContainer) {
-            $flatBaseUrl = $flatContainer.'@id'
+        If ($flatBaseUrl) {
             $pkgIdLower = $refPackageName.ToLower()
             $versionsUrl = "$flatBaseUrl$pkgIdLower/index.json"
             Write-Color cyan "Searching for package '$refPackageName' matching '$searchTerm' via flat2 in feed '$nuGetFeed'..."
@@ -675,15 +675,16 @@ Function DownloadPackage {
     $nupkgFile = [IO.Path]::Combine($TmpFolder, "$refPackageName.$version.nupkg")
 
     If (-Not(Test-Path -Path $nupkgFile)) {
-        # Construct download URL based on the feed
-        if ($nuGetFeed -eq "https://api.nuget.org/v3/index.json") {
-            # Use NuGet.org v2 API for downloads
+        # Construct download URL using flat2 base URL from the service index
+        $pkgIdLower = $refPackageName.ToLower()
+        If ($flatBaseUrl) {
+            $nupkgUrl = "$flatBaseUrl$pkgIdLower/$version/$pkgIdLower.$version.nupkg"
+        }
+        ElseIf ($nuGetFeed -eq "https://api.nuget.org/v3/index.json") {
             $nupkgUrl = "https://www.nuget.org/api/v2/package/$refPackageName/$version"
         }
-        else {
-            # Use flat2 pattern for all other feeds
-            $baseUrl = $nuGetFeed -replace "/v3/index\.json$", ""
-            $nupkgUrl = "$baseUrl/v3/flat2/$refPackageName/$version/$refPackageName.$version.nupkg"
+        Else {
+            Write-Error "Could not determine download URL for package '$refPackageName' version '$version'. No PackageBaseAddress endpoint found in feed '$nuGetFeed'." -ErrorAction Stop
         }
 
         Write-Color yellow "Downloading '$nupkgUrl' to '$nupkgFile'..."
