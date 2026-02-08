@@ -14,16 +14,10 @@ dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --prerelease
 
 ## Quick Start
 
-The simplest usage only requires the NuGet feed URL for the "current" (after) version. All other values are auto-discovered:
+The simplest usage only requires the NuGet feed URL for the "current" (after) version, which will compare the staged release against the most recent publicly released version.
 
 ```powershell
 .\RunApiDiff.ps1 <current-nuget-feed-url>
-```
-
-For example, comparing the latest GA release on nuget.org against a staging feed:
-
-```powershell
-.\RunApiDiff.ps1 <staging-feed-url>
 ```
 
 ## Parameters
@@ -99,4 +93,4 @@ Specifying only a previous version — current is auto-discovered from nuget.org
    -PreviousVersion "8.0.0"
 ```
 
-Example of what this script generates: [API diff between .NET 10.0 Preview 1 and .NET 10 Preview 2](https://github.com/dotnet/core/pull/9771)
+Example of what this script generates: [API diff between .NET 10 GA and .NET 11 Preview 1 (dotnet/core#10240)](https://github.com/dotnet/core/pull/10240/changes)
