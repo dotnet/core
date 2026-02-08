@@ -13,7 +13,7 @@
 # -CurrentDotNetVersion         : The 'after' .NET version: '6.0', '7.0', '8.0', etc.
 # -CurrentPreviewOrRC           : An optional word that indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
 # -CurrentPreviewNumberVersion  : The optional preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...).
-# -CoreRepo                     : The full path to your local clone of the dotnet/core repo.
+# -CoreRepo                     : The full path to your local clone of the dotnet/core repo. If not specified, defaults to the git repository root relative to this script.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
@@ -66,8 +66,7 @@ Param (
     [string]
     $CurrentPreviewNumberVersion # 0, 1, 2, 3, ...
     ,
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
+    [Parameter(Mandatory = $false)]
     [string]
     $CoreRepo #"D:\\core"
     ,
@@ -796,6 +795,21 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 # True when comparing 8.0 GA with 9.0 GA
 $IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And ($PreviousPreviewOrRC -Eq "ga") -And ($CurrentPreviewOrRC -eq "ga")
 
+
+## Resolve CoreRepo if not provided
+If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
+    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    try {
+        $CoreRepo = git -C $scriptDir rev-parse --show-toplevel 2>$null
+    }
+    catch { }
+
+    If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
+        Write-Error "Could not determine the git repository root from '$scriptDir'. Please specify -CoreRepo explicitly." -ErrorAction Stop
+    }
+
+    Write-Color cyan "Using git repo root: $CoreRepo"
+}
 
 ## Check folders passed as parameters exist
 VerifyPathOrExit $CoreRepo
