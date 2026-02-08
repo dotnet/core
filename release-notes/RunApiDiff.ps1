@@ -260,18 +260,6 @@ Function VerifyCountDlls {
     }
 }
 
-Function RunCommand {
-    Param (
-        [Parameter(Mandatory = $True)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $command
-    )
-
-    Write-Color yellow $command
-    Invoke-Expression "$command"
-}
-
 Function GetDotNetFullName {
     Param (
         [Parameter(Mandatory = $true)]
@@ -481,14 +469,16 @@ Function RunApiDiff {
     VerifyPathOrExit $beforeFolder
     VerifyPathOrExit $afterFolder
 
-    $referenceParams = ""
+    $referenceParams = @()
     if (-not [string]::IsNullOrEmpty($beforeReferenceFolder) -and -not [string]::IsNullOrEmpty($afterReferenceFolder)) {
         VerifyPathOrExit $beforeReferenceFolder
         VerifyPathOrExit $afterReferenceFolder
-        $referenceParams = " -rb '$beforeReferenceFolder' -ra '$afterReferenceFolder'"
+        $referenceParams = @('-rb', $beforeReferenceFolder, '-ra', $afterReferenceFolder)
     }
 
-    RunCommand "$apiDiffExe -b '$beforeFolder' -a '$afterFolder' -o '$outputFolder' -tc '$tableOfContentsFileNamePrefix' -eas '$assembliesToExclude' -eattrs '$attributesToExclude' -bfn '$beforeFriendlyName' -afn '$afterFriendlyName'$referenceParams"
+    $arguments = @('-b', $beforeFolder, '-a', $afterFolder, '-o', $outputFolder, '-tc', $tableOfContentsFileNamePrefix, '-eas', $assembliesToExclude, '-eattrs', $attributesToExclude, '-bfn', $beforeFriendlyName, '-afn', $afterFriendlyName) + $referenceParams
+    Write-Color yellow "& $apiDiffExe $arguments"
+    & $apiDiffExe @arguments
 }
 
 Function CreateReadme {
@@ -921,7 +911,8 @@ $InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.
 
 if ($InstallApiDiff) {
     Write-Color white "Installing ApiDiff tool..."
-    RunCommand $InstallApiDiffCommand
+    Write-Color yellow $InstallApiDiffCommand
+    Invoke-Expression $InstallApiDiffCommand
 }
 
 $apiDiffCommand = get-command "apidiff" -ErrorAction SilentlyContinue
