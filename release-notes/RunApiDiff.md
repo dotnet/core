@@ -6,7 +6,7 @@ The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script automatically generates an API c
 
 - PowerShell 7.0 or later
 - Azure CLI (`az login`) if using authenticated Azure DevOps feeds
-- The [Microsoft.DotNet.ApiDiff.Tool](https://www.nuget.org/packages/Microsoft.DotNet.ApiDiff.Tool):
+- The [Microsoft.DotNet.ApiDiff.Tool](https://www.nuget.org/packages/Microsoft.DotNet.ApiDiff.Tool). Install from the transport feed matching the version you're comparing, or use `-InstallApiDiff $true` to have the script install it automatically:
 
 ```
 dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11-transport/nuget/v3/index.json --prerelease
