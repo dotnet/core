@@ -14,7 +14,7 @@
 # -CurrentReleaseKind           : Indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
 # -CurrentPreviewRCNumber  : The preview or RC number of the 'after' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo. If not specified, defaults to the git repository root relative to this script.
-# -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
+# -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
 # -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json
@@ -70,10 +70,9 @@ Param (
     [string]
     $CoreRepo #"D:\\core"
     ,
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
+    [Parameter(Mandatory = $false)]
     [string]
-    $TmpFolder #"D:\tmp"
+    $TmpFolder
     ,
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
@@ -829,7 +828,15 @@ If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
 
 ## Resolve paths to absolute to avoid issues with ~ or relative paths
 $CoreRepo = [System.IO.Path]::GetFullPath((Resolve-Path $CoreRepo).Path)
-$TmpFolder = [System.IO.Path]::GetFullPath((Resolve-Path $TmpFolder).Path)
+
+## Create a temp folder if not provided
+If ([System.String]::IsNullOrWhiteSpace($TmpFolder)) {
+    $TmpFolder = Join-Path ([System.IO.Path]::GetTempPath()) ([System.IO.Path]::GetRandomFileName())
+    New-Item -ItemType Directory -Path $TmpFolder | Out-Null
+    Write-Color cyan "Using temp folder: $TmpFolder"
+} Else {
+    $TmpFolder = [System.IO.Path]::GetFullPath((Resolve-Path $TmpFolder).Path)
+}
 
 ## Check folders passed as parameters exist
 VerifyPathOrExit $CoreRepo
