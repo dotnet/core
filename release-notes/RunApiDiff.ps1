@@ -365,7 +365,7 @@ Function GetReleaseKindFolderName {
         }
 
         # return "7.0.1", "7.0.2", not "ga1, ga2"
-        Return "$dotNetVersion$previewNumberVersion"
+        Return "$dotNetVersion.$previewNumberVersion"
     }
 
     Return "$releaseKind$previewNumberVersion"
