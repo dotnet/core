@@ -492,6 +492,10 @@ Function CreateReadme {
         [ValidateNotNullOrEmpty()]
         [string]
         $dotNetFullName
+        ,
+        [Parameter(Mandatory = $true)]
+        [string[]]
+        $sdkNames
     )
 
     $readmePath = [IO.Path]::Combine($previewFolderPath, "README.md")
@@ -504,9 +508,9 @@ Function CreateReadme {
     Add-Content $readmePath ""
     Add-Content $readmePath "The following API changes were made in $($dotNetFriendlyName):"
     Add-Content $readmePath ""
-    Add-Content $readmePath "- [Microsoft.NETCore.App](./Microsoft.NETCore.App/$dotNetFullName.md)"
-    Add-Content $readmePath "- [Microsoft.AspNetCore.App](./Microsoft.AspNetCore.App/$dotNetFullName.md)"
-    Add-Content $readmePath "- [Microsoft.WindowsDesktop.App](./Microsoft.WindowsDesktop.App/$dotNetFullName.md)"
+    ForEach ($sdk in $sdkNames) {
+        Add-Content $readmePath "- [Microsoft.$sdk.App](./Microsoft.$sdk.App/$dotNetFullName.md)"
+    }
 }
 
 Function GetAuthHeadersForFeed {
@@ -995,7 +999,7 @@ ForEach ($sdk in $sdksToProcess) {
     ProcessSdk -sdkName $sdk @commonParams
 }
 
-CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
+CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName $sdksToProcess
 
 #####################
 ### End Execution ###
