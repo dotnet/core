@@ -4,11 +4,18 @@
 
 - [Zstandard Compression Support](#zstandard-compression-support)
 - [BFloat16 Floating-Point Type](#bfloat16-floating-point-type)
-- [TimeZone Performance Improvements](#timezone-performance-improvements)
-- [ZipArchiveEntry.Open with FileAccess Parameter](#ziparchiveentryopen-with-fileaccess-parameter)
+- [ZipArchiveEntry Improvements](#ziparchiveentry-improvements)
+- [FrozenDictionary Collection Expression Support](#frozendictionary-collection-expression-support)
+- [TimeZone Improvements](#timezone-improvements)
+- [Rune Support Across String, StringBuilder, and TextWriter](#rune-support-across-string-stringbuilder-and-textwriter)
+- [MediaTypeMap for MIME Type Lookups](#mediatypemap-for-mime-type-lookups)
+- [HMAC and KMAC Verification APIs](#hmac-and-kmac-verification-apis)
+- [Hard Link Creation APIs](#hard-link-creation-apis)
+- [DivisionRounding for Integer Division Modes](#divisionrounding-for-integer-division-modes)
 - [IReadOnlySet Support in System.Text.Json](#ireadonlyset-support-in-systemtextjson)
 - [Base64 Parity with Base64Url](#base64-parity-with-base64url)
 - [Generic Interlocked.And and Interlocked.Or Methods](#generic-interlockedand-and-interlockedor-methods)
+- [Happy Eyeballs Support in Socket.ConnectAsync](#happy-eyeballs-support-in-socketconnectasync)
 - [Span-based IDN APIs for IdnMapping](#span-based-idn-apis-for-idnmapping)
 - [CancellationToken Overloads for TextWriter](#cancellationtoken-overloads-for-textwriter)
 - [Process I/O Improvements](#process-io-improvements)
@@ -22,22 +29,38 @@
 
 ## Zstandard Compression Support
 
-[dotnet/runtime #119575](https://github.com/dotnet/runtime/pull/119575) adds native Zstandard (zstd) compression support to .NET through the new `ZStandardStream` class, `ZStandardEncoder`, and `ZStandardDecoder`.
+[dotnet/runtime #119575](https://github.com/dotnet/runtime/pull/119575) adds native Zstandard (zstd) compression support to .NET through the new `ZstandardStream` class, `ZstandardEncoder`, and `ZstandardDecoder`.
 
-Zstandard offers significantly faster compression and decompression compared to existing algorithms while maintaining competitive compression ratios.
+Zstandard offers significantly faster compression and decompression compared to existing algorithms while maintaining competitive compression ratios. The new APIs include a full set of streaming, one-shot, and dictionary-based compression and decompression capabilities.
 
 Benchmarks from [dotnet/runtime #119575](https://github.com/dotnet/runtime/pull/119575) compare Zstandard against Brotli and Deflate across text (alice29.txt, 148 KB) and binary (TestDocument.pdf, 122 KB) workloads from the [Canterbury Corpus](http://corpus.canterbury.ac.nz/descriptions/) at both Optimal and Fastest compression levels. Zstandard compresses 2–7x faster than Brotli and Deflate at Optimal level, and decompresses 2–14x faster at Fastest level, while achieving comparable compression ratios.
 
-Usage:
-
 ```csharp
-// Compress data
-using var compressStream = new ZStandardStream(outputStream, CompressionMode.Compress);
+// Compress data using ZstandardStream
+using var compressStream = new ZstandardStream(outputStream, CompressionMode.Compress);
 await inputStream.CopyToAsync(compressStream);
 
 // Decompress data
-using var decompressStream = new ZStandardStream(inputStream, CompressionMode.Decompress);
+using var decompressStream = new ZstandardStream(inputStream, CompressionMode.Decompress);
 await decompressStream.CopyToAsync(outputStream);
+```
+
+Advanced usage with `ZstandardEncoder` and `ZstandardDecoder` provides fine-grained control over compression parameters, including quality level, window size, dictionary-based compression, and checksum appending:
+
+```csharp
+// One-shot compression with quality settings
+var encoder = new ZstandardEncoder(quality: 5, windowLog: 22);
+// ... use encoder.Compress() for incremental compression
+
+// Configure with options
+var options = new ZstandardCompressionOptions
+{
+    Quality = 5,
+    WindowLog = 22,
+    AppendChecksum = true,
+    EnableLongDistanceMatching = true
+};
+using var stream = new ZstandardStream(outputStream, options);
 ```
 
 ### HTTP Automatic Decompression with Zstandard
@@ -59,7 +82,7 @@ var response = await client.GetAsync("https://example.com");
 
 [dotnet/runtime #98643](https://github.com/dotnet/runtime/pull/98643), contributed by community member @huoyaoyuan, adds `System.Numerics.BFloat16`, a 16-bit floating-point type using the "Brain Floating Point" format widely used in machine learning and AI workloads. BFloat16 uses the same number of exponent bits as `float` (8 bits) but with a reduced significand (7 bits), making it ideal for training and inference scenarios where range matters more than precision.
 
-`BFloat16` implements all standard numeric interfaces (`INumber<BFloat16>`, `IFloatingPoint<BFloat16>`, etc.) and supports conversions to and from `float`, `double`, and `Half`.
+`BFloat16` implements all standard numeric interfaces (`INumber<BFloat16>`, `IFloatingPoint<BFloat16>`, `IBinaryFloatingPointIeee754<BFloat16>`, etc.) and supports conversions to and from `float`, `double`, and `Half`. Supporting APIs are also added across the platform, including `BitConverter`, `BinaryPrimitives`, `BigInteger`, `Complex`, and all `Vector` types (`Vector64`, `Vector128`, `Vector256`, `Vector512`).
 
 ```csharp
 BFloat16 value = (BFloat16)3.14f;
@@ -69,32 +92,205 @@ float asFloat = (float)value;  // Lossless upcast to float
 BFloat16 a = (BFloat16)1.5f;
 BFloat16 b = (BFloat16)2.0f;
 BFloat16 result = a * b;  // 3.0
+
+// Binary serialization with BinaryPrimitives
+Span<byte> buffer = stackalloc byte[2];
+BinaryPrimitives.WriteBFloat16LittleEndian(buffer, value);
+BFloat16 read = BinaryPrimitives.ReadBFloat16LittleEndian(buffer);
 ```
 
-## TimeZone Performance Improvements
+## ZipArchiveEntry Improvements
+
+### Open with FileAccess Parameter
+
+[dotnet/runtime #122032](https://github.com/dotnet/runtime/pull/122032) adds new overloads to `ZipArchiveEntry.Open()` that accept a `FileAccess` parameter, allowing users to specify the desired access mode when opening an entry stream.
+
+When a `ZipArchive` is opened in `ZipArchiveMode.Update`, calling `ZipArchiveEntry.Open()` always returns a read-write stream that loads the entire entry into memory. The new overload lets you open entries in read-only mode for streaming without the memory overhead.
+
+```csharp
+using var archive = ZipFile.Open("archive.zip", ZipArchiveMode.Update);
+var entry = archive.GetEntry("large-file.dat");
+
+// Read-only: streams compressed data without loading into memory
+using var readStream = entry.Open(FileAccess.Read);
+
+// Write-only: replaces entry content entirely
+using var writeStream = entry.Open(FileAccess.Write);
+
+// Async overload also available
+using var asyncStream = await entry.OpenAsync(FileAccess.Read);
+```
+
+### ZipCompressionMethod Property
+
+[dotnet/runtime #95909](https://github.com/dotnet/runtime/issues/95909) exposes the `CompressionMethod` property on `ZipArchiveEntry` and adds the `ZipCompressionMethod` enum. This enables applications to determine the compression algorithm used for each entry without having to compare `CompressedLength` against `Length` as a heuristic.
+
+```csharp
+using var archive = ZipFile.Open("archive.zip", ZipArchiveMode.Read);
+foreach (var entry in archive.Entries)
+{
+    if (entry.CompressionMethod == ZipCompressionMethod.Stored)
+    {
+        Console.WriteLine($"{entry.FullName} is stored without compression");
+    }
+}
+```
+
+## FrozenDictionary Collection Expression Support
+
+[dotnet/runtime #114090](https://github.com/dotnet/runtime/issues/114090) adds the `[CollectionBuilder]` attribute to `FrozenDictionary<TKey, TValue>`, enabling construction from C# [dictionary expressions](https://github.com/dotnet/csharplang/blob/main/proposals/dictionary-expressions.md). This follows the pattern established for `FrozenSet` and `ImmutableDictionary` in earlier releases.
+
+```csharp
+// Create a FrozenDictionary using dictionary expression syntax
+FrozenDictionary<string, int> lookup = [with(StringComparer.Ordinal), "one":1, "two":2, "three":3];
+```
+
+## TimeZone Improvements
 
 [dotnet/runtime #119662](https://github.com/dotnet/runtime/pull/119662) introduces a **per-year cache** for time zone transitions, dramatically improving performance for time conversions. The cache stores all transitions for a given year in UTC format, eliminating repeated rule lookups during conversions.
 
 Benchmarks from [dotnet/runtime #119662](https://github.com/dotnet/runtime/pull/119662) measured seven common time zone operations (`ConvertTimeFromUtc`, `ConvertTimeToUtc`, `DateTimeNow`, `GetUtcOffset`, and three `ConvertTime` variants with different `DateTimeKind` values) on Windows 11 and Linux (WSL) using an 11th Gen Intel Core i7-11700. On Windows, operations are 2.4–3.9x faster (e.g. `ConvertTimeFromUtc` dropped from 48.0 ns to 12.2 ns). On Linux, improvements are even larger at 1.6–4.7x (e.g. `ConvertTimeToUtc` dropped from 63.8 ns to 13.6 ns).
 
-This change also fixes several correctness issues with time zone handling (fixes #24839, #24277, #25075, #118915, #114476).
+The new caching approach also replaces the legacy rule-based conversion path—which had accumulated many incremental patches over the years—with a simplified lookup, fixing several correctness issues where time zone conversions returned incorrect results (fixes #24839, #24277, #25075, #118915, #114476).
 
-## ZipArchiveEntry.Open with FileAccess Parameter
+## Rune Support Across String, StringBuilder, and TextWriter
 
-[dotnet/runtime #122032](https://github.com/dotnet/runtime/pull/122032) adds new overloads to `ZipArchiveEntry.Open()` that accept a `FileAccess` parameter, allowing users to specify the desired access mode when opening an entry stream.
+[dotnet/runtime #27912](https://github.com/dotnet/runtime/issues/27912) flows `System.Text.Rune` through many more APIs across `String`, `StringBuilder`, `TextWriter`, `TextInfo`, and `Char`. This long-requested enhancement makes it significantly easier for applications to work with Unicode text correctly, particularly for characters outside the Basic Multilingual Plane that require surrogate pairs when represented as `char`.
 
-When a `ZipArchive` is opened in `ZipArchiveMode.Update`, calling `ZipArchiveEntry.Open()` always returns a read-write stream by invoking `OpenInUpdateMode()`. This causes the entire entry to be decompressed into memory, even when the caller only intends to read the entry's contents.
+### String
+
+New `Rune`-based overloads have been added for searching, replacing, splitting, and trimming:
 
 ```csharp
-public Stream Open(FileAccess access);
-public Task<Stream> OpenAsync(FileAccess access, CancellationToken cancellationToken = default);
+string text = "Hello 🌍 World";
+Rune globe = new Rune(0x1F30D); // 🌍
+
+bool contains = text.Contains(globe);                    // true
+int index = text.IndexOf(globe);                         // 6
+bool starts = text.StartsWith(globe);                    // false
+string replaced = text.Replace(globe, new Rune('X'));    // "Hello X World"
+string[] parts = text.Split(globe);                      // ["Hello ", " World"]
+string trimmed = text.Trim(globe);
 ```
 
-Update Mode Details:
+Additionally, `Char.Equals(char, StringComparison)` and `String.StartsWith(char, StringComparison)` / `String.EndsWith(char, StringComparison)` overloads fill gaps that previously existed only for `string` parameters.
 
-- `FileAccess.Read`: Opens a read-only stream over the entry's compressed data without loading it into memory. Useful for streaming reads.
-- `FileAccess.Write`: Opens an empty writable stream, discarding any existing entry data. Semantically equivalent to "replace the entry content entirely" (like `FileMode.Create`).
-- `FileAccess.ReadWrite`: Same as parameterless `Open()`/`OpenAsync()` - loads existing data into memory and returns a read/write/seekable stream.
+### StringBuilder
+
+`StringBuilder` gains `Rune`-aware methods for appending, inserting, replacing, and enumerating:
+
+```csharp
+var sb = new StringBuilder("Hello ");
+sb.Append(new Rune(0x1F30D));       // Append 🌍
+Rune r = sb.GetRuneAt(6);           // Get the Rune at index 6
+sb.Replace(new Rune(0x1F30D), new Rune('X'));
+
+// Enumerate Runes in StringBuilder
+foreach (Rune rune in sb.EnumerateRunes())
+{
+    Console.Write(rune);
+}
+```
+
+### RunePosition
+
+The new `RunePosition` struct and its `Utf16Enumerator`/`Utf8Enumerator` provide position-aware Rune enumeration over spans, including information about whether a replacement character was substituted for invalid data:
+
+```csharp
+ReadOnlySpan<char> text = "Hello 🌍";
+foreach (RunePosition pos in RunePosition.EnumerateUtf16(text))
+{
+    Console.WriteLine($"Rune: {pos.Rune}, Start: {pos.StartIndex}, Length: {pos.Length}");
+}
+```
+
+### TextWriter and TextInfo
+
+`TextWriter` gains `Write(Rune)`, `WriteAsync(Rune)`, `WriteLine(Rune)`, and `WriteLineAsync(Rune)` methods. `TextInfo` adds `ToLower(Rune)` and `ToUpper(Rune)` for culture-aware casing.
+
+## MediaTypeMap for MIME Type Lookups
+
+[dotnet/runtime #121017](https://github.com/dotnet/runtime/issues/121017) adds `System.Net.Mime.MediaTypeMap`, a built-in API for mapping between file extensions and MIME/media types. Previously, developers had to re-create this mapping themselves or rely on third-party packages. The new API supports all IANA-registered mappings plus common ones from Apache mime.types.
+
+```csharp
+using System.Net.Mime;
+
+// Get MIME type from file extension
+string? mediaType = MediaTypeMap.GetMediaType(".json");     // "application/json"
+string? pngType = MediaTypeMap.GetMediaType("image.png");   // "image/png"
+
+// Get file extension from MIME type
+string? ext = MediaTypeMap.GetExtension("application/pdf"); // ".pdf"
+
+// Also works with ReadOnlySpan<char>
+ReadOnlySpan<char> path = "/files/document.pdf";
+string? type = MediaTypeMap.GetMediaType(path);
+```
+
+## HMAC and KMAC Verification APIs
+
+[dotnet/runtime #116028](https://github.com/dotnet/runtime/issues/116028) adds `Verify` methods to all HMAC classes (`HMACSHA256`, `HMACSHA384`, `HMACSHA512`, `HMACSHA1`, `HMACMD5`, `HMACSHA3_256`, `HMACSHA3_384`, `HMACSHA3_512`), all KMAC classes (`Kmac128`, `Kmac256`, `KmacXof128`, `KmacXof256`), `IncrementalHash`, and `CryptographicOperations`.
+
+HMAC values often need to be compared in fixed (constant) time to prevent timing attacks. Previously, this required two steps: computing the HMAC with `HashData`, then comparing with `CryptographicOperations.FixedTimeEquals`. This two-step pattern was error-prone — developers often accidentally used LINQ's `SequenceEqual` or similar non-constant-time comparisons. The new `Verify` methods combine both steps into a single, safe call.
+
+```csharp
+// Before: error-prone two-step pattern
+byte[] computed = HMACSHA256.HashData(key, data);
+bool valid = CryptographicOperations.FixedTimeEquals(computed, expectedHash);
+
+// After: single-step verification (always constant-time)
+bool valid = HMACSHA256.Verify(key, data, expectedHash);
+
+// Stream-based and async overloads are also available
+bool validStream = await HMACSHA256.VerifyAsync(key, dataStream, expectedHash);
+
+// Algorithm-agnostic verification via CryptographicOperations
+bool result = CryptographicOperations.VerifyHmac(
+    HashAlgorithmName.SHA256, key, data, expectedHash);
+```
+
+## Hard Link Creation APIs
+
+[dotnet/runtime #69030](https://github.com/dotnet/runtime/issues/69030) adds `File.CreateHardLink` and `FileInfo.CreateAsHardLink` for creating hard links. Since .NET 6, `File.CreateSymbolicLink` has been available, but symbolic links typically require administrator privileges on Windows, whereas hard links do not. Hard links point to the same file data on disk (same inode on Unix, same MFT entry on Windows) and cannot span volumes, making them less of a security risk.
+
+```csharp
+// Create a hard link from File static method
+FileSystemInfo link = File.CreateHardLink("./link.txt", "./original.txt");
+
+// Create a hard link from FileInfo instance
+var fileInfo = new FileInfo("./original.txt");
+fileInfo.CreateAsHardLink("./link.txt");
+```
+
+## DivisionRounding for Integer Division Modes
+
+[dotnet/runtime #93568](https://github.com/dotnet/runtime/issues/93568) adds support for alternative rounding modes in integer division through the new `DivisionRounding` enum and new methods on `IBinaryInteger<T>`: `Divide`, `DivRem`, and `Remainder`.
+
+Most hardware implements truncated division (`/` and `%` in C#), but different languages and problem domains require floored, ceiling, Euclidean, or away-from-zero rounding. While computing any of these is fairly trivial, the most efficient implementation is often non-obvious. These new APIs let developers pick the right mode for their scenario with a well-optimized implementation.
+
+```csharp
+// Standard C# division is truncated: -7 / 2 = -3
+int truncated = int.Divide(-7, 2, DivisionRounding.Truncate);   // -3
+
+// Floored division: rounds towards -infinity
+int floored = int.Divide(-7, 2, DivisionRounding.Floor);        // -4
+
+// Euclidean remainder: always non-negative
+int euclideanRem = int.Remainder(-7, 3, DivisionRounding.Euclidean); // 2
+
+// Get both quotient and remainder at once
+var (q, r) = int.DivRem(-7, 2, DivisionRounding.Floor);         // q=-4, r=1
+```
+
+The `DivisionRounding` enum supports five modes:
+
+| Mode | Description |
+|---|---|
+| `Truncate` | Towards zero (default C# behavior) |
+| `Floor` | Towards negative infinity |
+| `Ceiling` | Towards positive infinity |
+| `AwayFromZero` | Away from zero |
+| `Euclidean` | floor(x / abs(n)) * sign(n) |
 
 ## IReadOnlySet Support in System.Text.Json
 
@@ -153,6 +349,22 @@ Interlocked.Or(ref permissions, FilePermissions.Write);
 
 // Atomically remove Execute permission
 Interlocked.And(ref permissions, ~FilePermissions.Execute);
+```
+
+## Happy Eyeballs Support in Socket.ConnectAsync
+
+[dotnet/runtime #87932](https://github.com/dotnet/runtime/issues/87932) implements [RFC 8305 "Happy Eyeballs"](https://www.rfc-editor.org/rfc/rfc8305) support in `Socket.ConnectAsync` through the new `ConnectAlgorithm` enum. Happy Eyeballs improves connection latency by making A and AAAA DNS requests in parallel and alternating connection attempts between IPv4 and IPv6 addresses.
+
+```csharp
+var e = new SocketAsyncEventArgs();
+e.RemoteEndPoint = new DnsEndPoint("example.com", 443);
+
+// Use Happy Eyeballs algorithm for faster dual-stack connections
+Socket.ConnectAsync(
+    SocketType.Stream,
+    ProtocolType.Tcp,
+    e,
+    ConnectAlgorithm.Parallel);
 ```
 
 ## Span-based IDN APIs for IdnMapping
