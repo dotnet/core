@@ -589,46 +589,73 @@ Function DownloadPackage {
             $searchTerm = "$dotNetversion.*-$previewOrRC.$previewNumberVersion*"
         }
 
-        # Use NuGet API directly instead of Find-Package to support authenticated feeds
-        Write-Color cyan "Searching for package '$refPackageName' matching '$searchTerm' in feed '$nuGetFeed'..."
-        
         $headers = GetAuthHeadersForFeed $nuGetFeed
-        
+
         # Get service index
         $serviceIndex = Invoke-RestMethod -Uri $nuGetFeed -Headers $headers
-        $searchQueryService = $serviceIndex.resources | Where-Object { $_.'@type' -match 'SearchQueryService' } | Select-Object -First 1
-        
-        if (-not $searchQueryService) {
-            Write-Error "Could not find SearchQueryService endpoint in feed '$nuGetFeed'" -ErrorAction Stop
-        }
-        
-        $searchUrl = $searchQueryService.'@id'
-        
-        $searchParams = @{
-            Uri = "$searchUrl`?q=$refPackageName&prerelease=true&take=1"
-            Headers = $headers
-        }
-        
-        $searchResults = Invoke-RestMethod @searchParams
-        
-        If (-not $searchResults.data -or $searchResults.data.Count -eq 0) {
-            Write-Error "No NuGet packages found with ref package name '$refPackageName' in feed '$nuGetFeed'" -ErrorAction Stop
-        }
-        
-        $package = $searchResults.data | Where-Object { $_.id -eq $refPackageName } | Select-Object -First 1
-        
-        If (-not $package) {
-            Write-Error "Package '$refPackageName' not found in search results" -ErrorAction Stop
-        }
-        
-        # Filter versions matching search term
-        $matchingVersions = $package.versions | Where-Object -Property version -Like $searchTerm | Sort-Object version -Descending
-        
-        If ($matchingVersions.Count -eq 0) {
-            Write-Error "No NuGet packages found with search term '$searchTerm'." -ErrorAction Stop
+
+        # Try flat2 (PackageBaseAddress) first — works reliably on all feeds including per-build shipping feeds
+        $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
+        $version = ""
+
+        If ($flatContainer) {
+            $flatBaseUrl = $flatContainer.'@id'
+            $pkgIdLower = $refPackageName.ToLower()
+            $versionsUrl = "$flatBaseUrl$pkgIdLower/index.json"
+            Write-Color cyan "Searching for package '$refPackageName' matching '$searchTerm' via flat2 in feed '$nuGetFeed'..."
+
+            try {
+                $versionsResult = Invoke-RestMethod -Uri $versionsUrl -Headers $headers
+                $matchingVersions = @($versionsResult.versions | Where-Object { $_ -Like $searchTerm } | Sort-Object -Descending)
+
+                If ($matchingVersions.Count -gt 0) {
+                    $version = $matchingVersions[0]
+                    Write-Color green "Found version '$version' via flat2."
+                }
+            }
+            catch {
+                Write-Color yellow "Flat2 lookup failed for '$refPackageName': $_"
+            }
         }
 
-        $version = $matchingVersions[0].version
+        # Fall back to SearchQueryService if flat2 didn't find a match
+        If ([System.String]::IsNullOrWhiteSpace($version)) {
+            Write-Color cyan "Searching for package '$refPackageName' matching '$searchTerm' via search in feed '$nuGetFeed'..."
+
+            $searchQueryService = $serviceIndex.resources | Where-Object { $_.'@type' -match 'SearchQueryService' } | Select-Object -First 1
+
+            if (-not $searchQueryService) {
+                Write-Error "Could not find SearchQueryService endpoint in feed '$nuGetFeed'" -ErrorAction Stop
+            }
+
+            $searchUrl = $searchQueryService.'@id'
+
+            $searchParams = @{
+                Uri = "$searchUrl`?q=$refPackageName&prerelease=true&take=1"
+                Headers = $headers
+            }
+
+            $searchResults = Invoke-RestMethod @searchParams
+
+            If (-not $searchResults.data -or $searchResults.data.Count -eq 0) {
+                Write-Error "No NuGet packages found with ref package name '$refPackageName' in feed '$nuGetFeed'" -ErrorAction Stop
+            }
+
+            $package = $searchResults.data | Where-Object { $_.id -eq $refPackageName } | Select-Object -First 1
+
+            If (-not $package) {
+                Write-Error "Package '$refPackageName' not found in search results" -ErrorAction Stop
+            }
+
+            # Filter versions matching search term
+            $matchingVersions = @($package.versions | Where-Object -Property version -Like $searchTerm | Sort-Object version -Descending)
+
+            If ($matchingVersions.Count -eq 0) {
+                Write-Error "No NuGet packages found with search term '$searchTerm'." -ErrorAction Stop
+            }
+
+            $version = $matchingVersions[0].version
+        }
     }
     
     $nupkgFile = [IO.Path]::Combine($TmpFolder, "$refPackageName.$version.nupkg")
