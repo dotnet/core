@@ -811,6 +811,10 @@ If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
     Write-Color cyan "Using git repo root: $CoreRepo"
 }
 
+## Resolve paths to absolute to avoid issues with ~ or relative paths
+$CoreRepo = [System.IO.Path]::GetFullPath((Resolve-Path $CoreRepo).Path)
+$TmpFolder = [System.IO.Path]::GetFullPath((Resolve-Path $TmpFolder).Path)
+
 ## Check folders passed as parameters exist
 VerifyPathOrExit $CoreRepo
 VerifyPathOrExit $TmpFolder
