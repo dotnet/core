@@ -523,7 +523,7 @@ Function GetAuthHeadersForFeed {
             # Try to get Azure DevOps token using az CLI
             $token = az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query accessToken -o tsv 2>$null
             if ($token) {
-                Write-Host "Using Azure CLI authentication for internal Azure DevOps feed" -ForegroundColor Cyan
+                Write-Color cyan "Using Azure CLI authentication for internal Azure DevOps feed"
                 return @{
                     Authorization = "Bearer $token"
                 }
