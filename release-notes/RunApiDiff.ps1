@@ -922,6 +922,15 @@ If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
 ## Resolve paths to absolute to avoid issues with ~ or relative paths
 $CoreRepo = [System.IO.Path]::GetFullPath((Resolve-Path $CoreRepo).Path)
 
+## Resolve exclude file paths relative to the script's directory if they are relative paths
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+If (-not [System.IO.Path]::IsPathRooted($AttributesToExcludeFilePath)) {
+    $AttributesToExcludeFilePath = [IO.Path]::Combine($scriptDir, $AttributesToExcludeFilePath)
+}
+If (-not [System.IO.Path]::IsPathRooted($AssembliesToExcludeFilePath)) {
+    $AssembliesToExcludeFilePath = [IO.Path]::Combine($scriptDir, $AssembliesToExcludeFilePath)
+}
+
 ## Create a temp folder if not provided
 If ([System.String]::IsNullOrWhiteSpace($TmpFolder)) {
     $TmpFolder = Join-Path ([System.IO.Path]::GetTempPath()) ([System.IO.Path]::GetRandomFileName())
