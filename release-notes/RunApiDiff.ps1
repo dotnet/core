@@ -720,6 +720,11 @@ Function ProcessSdk
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
+        $previewFolderPath
+    ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
         $previousNuGetFeed
     ,
         [Parameter(Mandatory = $true)]
@@ -963,17 +968,17 @@ $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentMajorMinor $CurrentRe
 
 If (-Not $ExcludeNetCore)
 {
-    ProcessSdk -sdkName "NETCore" -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
+    ProcessSdk -sdkName "NETCore" -previewFolderPath $previewFolderPath -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
 }
 
 If (-Not $ExcludeAspNetCore)
 {
-    ProcessSdk -sdkName "AspNetCore" -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
+    ProcessSdk -sdkName "AspNetCore" -previewFolderPath $previewFolderPath -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
 }
 
 If (-Not $ExcludeWindowsDesktop)
 {
-    ProcessSdk -sdkName "WindowsDesktop" -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
+    ProcessSdk -sdkName "WindowsDesktop" -previewFolderPath $previewFolderPath -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
 }
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
