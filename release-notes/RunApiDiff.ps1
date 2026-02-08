@@ -112,6 +112,27 @@ Param (
 ### Start Functions ###
 #######################
 
+## Parse a NuGet version string into MajorMinor and PrereleaseLabel components
+Function ParseVersionString {
+    Param (
+        [string] $version,
+        [string] $label
+    )
+    $result = @{ MajorMinor = ""; PrereleaseLabel = "" }
+    If ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+-((?:preview|rc)\.[0-9]+)") {
+        $result.MajorMinor = $Matches[1]
+        $result.PrereleaseLabel = $Matches[2]
+    }
+    ElseIf ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+$") {
+        $result.MajorMinor = $Matches[1]
+        $result.PrereleaseLabel = ""
+    }
+    Else {
+        Write-Error "Could not parse ${label}Version '$version'. Expected format: 'X.Y.Z' or 'X.Y.Z-preview.N.build' / 'X.Y.Z-rc.N.build'." -ErrorAction Stop
+    }
+    Return $result
+}
+
 Function DiscoverVersionFromFeed {
     Param (
         [Parameter(Mandatory = $true)]
@@ -146,21 +167,7 @@ Function DiscoverVersionFromFeed {
     $latestVersion = $versionsResult.versions | Select-Object -Last 1
     Write-Color cyan "Latest version on feed: $latestVersion"
 
-    $result = @{ MajorMinor = ""; PrereleaseLabel = "" }
-
-    If ($latestVersion -match "^(\d+)\.(\d+)\.\d+-(preview|rc)\.(\d+)") {
-        $result.MajorMinor = "$($Matches[1]).$($Matches[2])"
-        $result.PrereleaseLabel = "$($Matches[3]).$($Matches[4])"
-    }
-    ElseIf ($latestVersion -match "^(\d+)\.(\d+)\.(\d+)$") {
-        $result.MajorMinor = "$($Matches[1]).$($Matches[2])"
-        $result.PrereleaseLabel = ""
-    }
-    Else {
-        Write-Error "Could not parse version '$latestVersion'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
-    }
-
-    Return $result
+    Return ParseVersionString $latestVersion $label
 }
 
 Function Write-Color {
@@ -846,26 +853,6 @@ Function ParsePrereleaseLabel {
 }
 
 ## Extract MajorMinor and PrereleaseLabel from explicit Version parameters if provided
-Function ParseVersionString {
-    Param (
-        [string] $version,
-        [string] $label
-    )
-    $result = @{ MajorMinor = ""; PrereleaseLabel = "" }
-    If ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+-((?:preview|rc)\.[0-9]+)") {
-        $result.MajorMinor = $Matches[1]
-        $result.PrereleaseLabel = $Matches[2]
-    }
-    ElseIf ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+$") {
-        $result.MajorMinor = $Matches[1]
-        $result.PrereleaseLabel = ""
-    }
-    Else {
-        Write-Error "Could not parse ${label}Version '$version'. Expected format: 'X.Y.Z' or 'X.Y.Z-preview.N.build' / 'X.Y.Z-rc.N.build'." -ErrorAction Stop
-    }
-    Return $result
-}
-
 If (-not [System.String]::IsNullOrWhiteSpace($PreviousVersion)) {
     $parsed = ParseVersionString $PreviousVersion "Previous"
     If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) { $PreviousMajorMinor = $parsed.MajorMinor }
