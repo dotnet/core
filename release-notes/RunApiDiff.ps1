@@ -18,7 +18,7 @@
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
 # -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://api.nuget.org/v3/index.json
-# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. No default — must be specified if version parameters are not provided.
+# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses https://api.nuget.org/v3/index.json
 # -ExcludeNetCore               : Optional boolean to exclude the NETCore comparison. Default is false.
 # -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
 # -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
@@ -91,7 +91,7 @@ Param (
     ,
     [Parameter(Mandatory = $false, Position = 0)]
     [string]
-    $CurrentNuGetFeed
+    $CurrentNuGetFeed = "https://api.nuget.org/v3/index.json"
     ,
     [Parameter(Mandatory = $false)]
     [bool]

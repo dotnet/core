@@ -45,7 +45,7 @@ All version parameters can be auto-discovered from their respective NuGet feeds.
 
 | Parameter | Description | Default |
 |---|---|---|
-| `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages. **Positional** — can be passed as the first unnamed argument. | *(none — must be specified)* |
+| `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages. **Positional** — can be passed as the first unnamed argument. | `https://api.nuget.org/v3/index.json` |
 | `PreviousNuGetFeed` | NuGet feed URL for downloading "before" packages | `https://api.nuget.org/v3/index.json` |
 
 ### Path Parameters
