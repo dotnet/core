@@ -7,9 +7,9 @@
 # Usage:
 
 # RunApiDiff.ps1
-# -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc.
-# -PreviousReleaseKind          : Indicates if the 'before' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
-# -PreviousPreviewRCNumber : The preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
+# -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -PreviousNuGetFeed.
+# -PreviousReleaseKind          : Indicates if the 'before' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga". If not specified, discovered from -PreviousNuGetFeed.
+# -PreviousPreviewRCNumber : The preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA. If not specified, discovered from -PreviousNuGetFeed.
 # -CurrentMajorMinor         : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -CurrentNuGetFeed.
 # -CurrentReleaseKind           : Indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga". If not specified, discovered from -CurrentNuGetFeed.
 # -CurrentPreviewRCNumber  : The preview or RC number of the 'after' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA. If not specified, discovered from -CurrentNuGetFeed.
@@ -36,14 +36,14 @@
 # .\RunApiDiff.ps1 -PreviousMajorMinor 9.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 9.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousNuGetFeed "https://api.nuget.org/v3/index.json" -CurrentNuGetFeed "https://api.nuget.org/v3/index.json"
 
 Param (
-    [Parameter(Mandatory = $true)]
-    [ValidatePattern("\d+\.\d")]
+    [Parameter(Mandatory = $false)]
+    [ValidatePattern("(\d+\.\d)?")]
     [string]
     $PreviousMajorMinor # 7.0, 8.0, 9.0, ...
     ,
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]
-    [ValidateSet("preview", "rc", "ga")]
+    [ValidateSet("preview", "rc", "ga", "")]
     $PreviousReleaseKind
     ,
     [Parameter(Mandatory = $false)]
@@ -122,6 +122,59 @@ Param (
 #######################
 ### Start Functions ###
 #######################
+
+Function DiscoverVersionFromFeed {
+    Param (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $feedUrl
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $label # "Previous" or "Current", for error messages
+    )
+
+    Write-Color cyan "Discovering $label version from feed '$feedUrl'..."
+
+    $headers = GetAuthHeadersForFeed $feedUrl
+    $serviceIndex = Invoke-RestMethod -Uri $feedUrl -Headers $headers
+    $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
+
+    If (-not $flatContainer) {
+        Write-Error "Could not find PackageBaseAddress endpoint in feed '$feedUrl'. Please specify -${label}MajorMinor, -${label}ReleaseKind, and -${label}PreviewRCNumber explicitly." -ErrorAction Stop
+    }
+
+    $baseUrl = $flatContainer.'@id'
+    $versionsUrl = "${baseUrl}microsoft.netcore.app.ref/index.json"
+    $versionsResult = Invoke-RestMethod -Uri $versionsUrl -Headers $headers
+
+    If (-not $versionsResult.versions -or $versionsResult.versions.Count -eq 0) {
+        Write-Error "No versions of Microsoft.NETCore.App.Ref found on feed '$feedUrl'. Please specify -${label}MajorMinor, -${label}ReleaseKind, and -${label}PreviewRCNumber explicitly." -ErrorAction Stop
+    }
+
+    $latestVersion = $versionsResult.versions | Select-Object -Last 1
+    Write-Color cyan "Latest version on feed: $latestVersion"
+
+    $result = @{ MajorMinor = ""; ReleaseKind = ""; PreviewRCNumber = "" }
+
+    If ($latestVersion -match "^(\d+)\.(\d+)\.\d+-(preview|rc)\.(\d+)") {
+        $result.MajorMinor = "$($Matches[1]).$($Matches[2])"
+        $result.ReleaseKind = $Matches[3]
+        $result.PreviewRCNumber = $Matches[4]
+    }
+    ElseIf ($latestVersion -match "^(\d+)\.(\d+)\.(\d+)$") {
+        $result.MajorMinor = "$($Matches[1]).$($Matches[2])"
+        $result.ReleaseKind = "ga"
+        $result.PreviewRCNumber = $Matches[3]
+    }
+    Else {
+        Write-Error "Could not parse version '$latestVersion'. Please specify -${label}MajorMinor, -${label}ReleaseKind, and -${label}PreviewRCNumber explicitly." -ErrorAction Stop
+    }
+
+    Return $result
+}
 
 Function Write-Color {
     Param (
@@ -791,45 +844,21 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 
 ## Generate strings with no whitespace
 
+## Discover PreviousMajorMinor, PreviousReleaseKind, and PreviousPreviewRCNumber from the feed if not provided
+If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -or [System.String]::IsNullOrWhiteSpace($PreviousReleaseKind)) {
+    $discovered = DiscoverVersionFromFeed $PreviousNuGetFeed "Previous"
+    If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) { $PreviousMajorMinor = $discovered.MajorMinor }
+    If ([System.String]::IsNullOrWhiteSpace($PreviousReleaseKind)) { $PreviousReleaseKind = $discovered.ReleaseKind }
+    If ([System.String]::IsNullOrWhiteSpace($PreviousPreviewRCNumber)) { $PreviousPreviewRCNumber = $discovered.PreviewRCNumber }
+    Write-Color green "Discovered: PreviousMajorMinor=$PreviousMajorMinor, PreviousReleaseKind=$PreviousReleaseKind, PreviousPreviewRCNumber=$PreviousPreviewRCNumber"
+}
+
 ## Discover CurrentMajorMinor, CurrentReleaseKind, and CurrentPreviewRCNumber from the feed if not provided
 If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -or [System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) {
-    Write-Color cyan "Discovering current version from feed '$CurrentNuGetFeed'..."
-
-    $discoverHeaders = GetAuthHeadersForFeed $CurrentNuGetFeed
-    $discoverServiceIndex = Invoke-RestMethod -Uri $CurrentNuGetFeed -Headers $discoverHeaders
-    $discoverFlatContainer = $discoverServiceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
-
-    If (-not $discoverFlatContainer) {
-        Write-Error "Could not find PackageBaseAddress endpoint in feed '$CurrentNuGetFeed'. Please specify -CurrentMajorMinor, -CurrentReleaseKind, and -CurrentPreviewRCNumber explicitly." -ErrorAction Stop
-    }
-
-    $discoverBaseUrl = $discoverFlatContainer.'@id'
-    $discoverVersionsUrl = "${discoverBaseUrl}microsoft.netcore.app.ref/index.json"
-    $discoverVersions = Invoke-RestMethod -Uri $discoverVersionsUrl -Headers $discoverHeaders
-
-    If (-not $discoverVersions.versions -or $discoverVersions.versions.Count -eq 0) {
-        Write-Error "No versions of Microsoft.NETCore.App.Ref found on feed '$CurrentNuGetFeed'. Please specify -CurrentMajorMinor, -CurrentReleaseKind, and -CurrentPreviewRCNumber explicitly." -ErrorAction Stop
-    }
-
-    # Take the latest version and parse it
-    $latestVersion = $discoverVersions.versions | Select-Object -Last 1
-    Write-Color cyan "Latest version on feed: $latestVersion"
-
-    # Parse version string: "11.0.0-preview.1.26104.118" or "10.0.0"
-    If ($latestVersion -match "^(\d+)\.(\d+)\.\d+-(preview|rc)\.(\d+)") {
-        If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = "$($Matches[1]).$($Matches[2])" }
-        If ([System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) { $CurrentReleaseKind = $Matches[3] }
-        If ([System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) { $CurrentPreviewRCNumber = $Matches[4] }
-    }
-    ElseIf ($latestVersion -match "^(\d+)\.(\d+)\.(\d+)$") {
-        If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = "$($Matches[1]).$($Matches[2])" }
-        If ([System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) { $CurrentReleaseKind = "ga" }
-        If ([System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) { $CurrentPreviewRCNumber = $Matches[3] }
-    }
-    Else {
-        Write-Error "Could not parse version '$latestVersion'. Please specify -CurrentMajorMinor, -CurrentReleaseKind, and -CurrentPreviewRCNumber explicitly." -ErrorAction Stop
-    }
-
+    $discovered = DiscoverVersionFromFeed $CurrentNuGetFeed "Current"
+    If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = $discovered.MajorMinor }
+    If ([System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) { $CurrentReleaseKind = $discovered.ReleaseKind }
+    If ([System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) { $CurrentPreviewRCNumber = $discovered.PreviewRCNumber }
     Write-Color green "Discovered: CurrentMajorMinor=$CurrentMajorMinor, CurrentReleaseKind=$CurrentReleaseKind, CurrentPreviewRCNumber=$CurrentPreviewRCNumber"
 }
 
@@ -850,6 +879,9 @@ If ($CurrentReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($Curre
 }
 
 # Validate required values are present
+If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -or [System.String]::IsNullOrWhiteSpace($PreviousReleaseKind)) {
+    Write-Error "PreviousMajorMinor and PreviousReleaseKind are required. Specify them explicitly or provide -PreviousNuGetFeed to auto-discover." -ErrorAction Stop
+}
 If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -or [System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) {
     Write-Error "CurrentMajorMinor and CurrentReleaseKind are required. Specify them explicitly or provide -CurrentNuGetFeed to auto-discover." -ErrorAction Stop
 }
