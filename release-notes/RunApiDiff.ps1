@@ -568,15 +568,14 @@ Function DownloadPackage {
         [string]
         $dotNetVersion
         ,
-        [Parameter(Mandatory = $true)]
-        [ValidateSet("preview", "rc", "ga")]
+        [Parameter(Mandatory = $false)]
+        [ValidateSet("preview", "rc", "ga", "")]
         [string]
-        $releaseKind
+        $releaseKind = ""
         ,
-        [Parameter(Mandatory = $true)]
-        [ValidatePattern("(\d+)?")]
+        [Parameter(Mandatory = $false)]
         [string]
-        $previewNumberVersion
+        $previewNumberVersion = ""
         ,
         [Parameter(Mandatory = $false)]
         [string]
@@ -597,7 +596,11 @@ Function DownloadPackage {
         Write-Color cyan "Using exact package version: $version"
     }
     Else {
-        # Otherwise, search for the package version
+        If ([System.String]::IsNullOrWhiteSpace($releaseKind) -or [System.String]::IsNullOrWhiteSpace($previewNumberVersion)) {
+            Write-Error "Either -version or both -releaseKind and -previewNumberVersion must be provided to DownloadPackage." -ErrorAction Stop
+        }
+
+        # Search for the package version
         $searchTerm = ""
         If ($releaseKind -eq "ga") {
             $searchTerm = "$dotNetVersion.$previewNumberVersion"
@@ -800,21 +803,21 @@ Function ProcessSdk
     )
 
     $beforeDllFolder = ""
-    DownloadPackage $previousNuGetFeed $sdkName "Before" $previousMajorMinor $previousReleaseKind $previousPreviewRCNumber $previousVersion ([ref]$beforeDllFolder)
+    DownloadPackage -nuGetFeed $previousNuGetFeed -sdkName $sdkName -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage $currentNuGetFeed $sdkName "After" $currentMajorMinor $currentReleaseKind $currentPreviewRCNumber $currentVersion ([ref]$afterDllFolder)
+    DownloadPackage -nuGetFeed $currentNuGetFeed -sdkName $sdkName -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
     $beforeReferenceFolder = ""
     $afterReferenceFolder = ""
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
-        DownloadPackage $previousNuGetFeed "NETCore" "Before" $previousMajorMinor $previousReleaseKind $previousPreviewRCNumber $previousVersion ([ref]$beforeReferenceFolder)
+        DownloadPackage -nuGetFeed $previousNuGetFeed -sdkName "NETCore" -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
         
-        DownloadPackage $currentNuGetFeed "NETCore" "After" $currentMajorMinor $currentReleaseKind $currentPreviewRCNumber $currentVersion ([ref]$afterReferenceFolder)
+        DownloadPackage -nuGetFeed $currentNuGetFeed -sdkName "NETCore" -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
 
