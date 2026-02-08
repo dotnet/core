@@ -89,7 +89,7 @@ Param (
     [string]
     $PreviousNuGetFeed = "https://api.nuget.org/v3/index.json"
     ,
-    [Parameter(Mandatory = $false)]
+    [Parameter(Mandatory = $false, Position = 0)]
     [ValidateNotNullOrEmpty()]
     [string]
     $CurrentNuGetFeed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
