@@ -966,19 +966,33 @@ $currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentMajorMin
 $previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber
 $currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber
 
-If (-Not $ExcludeNetCore)
-{
-    ProcessSdk -sdkName "NETCore" -previewFolderPath $previewFolderPath -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
+$sdksToProcess = @()
+If (-Not $ExcludeNetCore) { $sdksToProcess += "NETCore" }
+If (-Not $ExcludeAspNetCore) { $sdksToProcess += "AspNetCore" }
+If (-Not $ExcludeWindowsDesktop) { $sdksToProcess += "WindowsDesktop" }
+
+$commonParams = @{
+    previewFolderPath = $previewFolderPath
+    previousNuGetFeed = $PreviousNuGetFeed
+    currentNuGetFeed = $CurrentNuGetFeed
+    apiDiffExe = $apiDiffExe
+    currentDotNetFullName = $currentDotNetFullName
+    assembliesToExclude = $AssembliesToExcludeFilePath
+    attributesToExclude = $AttributesToExcludeFilePath
+    previousDotNetFriendlyName = $previousDotNetFriendlyName
+    currentDotNetFriendlyName = $currentDotNetFriendlyName
+    previousMajorMinor = $PreviousMajorMinor
+    previousReleaseKind = $PreviousReleaseKind
+    previousPreviewRCNumber = $PreviousPreviewRCNumber
+    currentMajorMinor = $CurrentMajorMinor
+    currentReleaseKind = $CurrentReleaseKind
+    currentPreviewRCNumber = $CurrentPreviewRCNumber
+    previousVersion = $PreviousVersion
+    currentVersion = $CurrentVersion
 }
 
-If (-Not $ExcludeAspNetCore)
-{
-    ProcessSdk -sdkName "AspNetCore" -previewFolderPath $previewFolderPath -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
-}
-
-If (-Not $ExcludeWindowsDesktop)
-{
-    ProcessSdk -sdkName "WindowsDesktop" -previewFolderPath $previewFolderPath -previousNuGetFeed $PreviousNuGetFeed -currentNuGetFeed $CurrentNuGetFeed -apiDiffExe $apiDiffExe -currentDotNetFullName $currentDotNetFullName -assembliesToExclude $AssembliesToExcludeFilePath -attributesToExclude $AttributesToExcludeFilePath -previousDotNetFriendlyName $previousDotNetFriendlyName -currentDotNetFriendlyName $currentDotNetFriendlyName -previousMajorMinor $PreviousMajorMinor -previousReleaseKind $PreviousReleaseKind -previousPreviewRCNumber $PreviousPreviewRCNumber -currentMajorMinor $CurrentMajorMinor -currentReleaseKind $CurrentReleaseKind -currentPreviewRCNumber $CurrentPreviewRCNumber -previousVersion $PreviousVersion -currentVersion $CurrentVersion
+ForEach ($sdk in $sdksToProcess) {
+    ProcessSdk -sdkName $sdk @commonParams
 }
 
 CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName
