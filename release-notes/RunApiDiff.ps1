@@ -836,8 +836,6 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
     Write-Error "This script requires PowerShell 7.0 or later.  See  https://aka.ms/PSWindows for instructions." -ErrorAction Stop
 }
 
-## Generate strings with no whitespace
-
 ## Extract MajorMinor and PrereleaseLabel from explicit Version parameters if provided
 If (-not [System.String]::IsNullOrWhiteSpace($PreviousVersion)) {
     $parsed = ParseVersionString $PreviousVersion "Previous"
@@ -901,7 +899,6 @@ If ($PreviousMajorMinor -eq $CurrentMajorMinor -and $PreviousPrereleaseLabel -eq
 
 # True when comparing 8.0 GA with 9.0 GA
 $IsComparingReleases = ($PreviousMajorMinor -Ne $CurrentMajorMinor) -And ($PreviousReleaseKind -Eq "ga") -And ($CurrentReleaseKind -eq "ga")
-
 
 ## Resolve CoreRepo if not provided
 If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
