@@ -600,10 +600,10 @@ Function DownloadPackage {
         # Otherwise, search for the package version
         $searchTerm = ""
         If ($releaseKind -eq "ga") {
-            $searchTerm = "$dotNetversion.$previewNumberVersion"
+            $searchTerm = "$dotNetVersion.$previewNumberVersion"
         }
         ElseIf (-Not ([System.String]::IsNullOrWhiteSpace($releaseKind)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion))) {
-            $searchTerm = "$dotNetversion.*-$releaseKind.$previewNumberVersion*"
+            $searchTerm = "$dotNetVersion.*-$releaseKind.$previewNumberVersion*"
         }
 
         $headers = GetAuthHeadersForFeed $nuGetFeed
