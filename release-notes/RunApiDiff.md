@@ -14,12 +14,12 @@ dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs
 
 ```powershell
 .\RunApiDiff.ps1 `
-   -PreviousDotNetVersion 10.0 `
+   -PreviousMajorMinor 10.0 `
    -PreviousReleaseKind preview `
-   -PreviousPreviewNumberVersion 1 `
-   -CurrentDotNetVersion 10.0 `
+   -PreviousPreviewRCNumber 1 `
+   -CurrentMajorMinor 10.0 `
    -CurrentReleaseKind preview `
-   -CurrentPreviewNumberVersion 2 `
+   -CurrentPreviewRCNumber 2 `
    -CoreRepo D:\core\ `
    -TmpFolder D:\tmp\
 ```

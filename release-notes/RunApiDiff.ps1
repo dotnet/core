@@ -7,12 +7,12 @@
 # Usage:
 
 # RunApiDiff.ps1
-# -PreviousDotNetVersion        : The 'before' .NET version: '6.0', '7.0', '8.0', etc.
+# -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc.
 # -PreviousReleaseKind          : Indicates if the 'before' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
-# -PreviousPreviewNumberVersion : The preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
-# -CurrentDotNetVersion         : The 'after' .NET version: '6.0', '7.0', '8.0', etc.
+# -PreviousPreviewRCNumber : The preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
+# -CurrentMajorMinor         : The 'after' .NET version: '6.0', '7.0', '8.0', etc.
 # -CurrentReleaseKind           : Indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga".
-# -CurrentPreviewNumberVersion  : The preview or RC number of the 'after' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
+# -CurrentPreviewRCNumber  : The preview or RC number of the 'after' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA.
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo. If not specified, defaults to the git repository root relative to this script.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
@@ -27,19 +27,19 @@
 # -CurrentPackageVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.2.25502.107"). Overrides version search logic.
 
 # Example:
-# .\RunApiDiff.ps1 -PreviousDotNetVersion 9.0 -PreviousReleaseKind preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentReleaseKind rc -CurrentPreviewNumberVersion 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
+# .\RunApiDiff.ps1 -PreviousMajorMinor 9.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 9.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
 
 # Example with exact package versions:
-# .\RunApiDiff.ps1 -PreviousDotNetVersion 10.0 -PreviousReleaseKind RC -PreviousPreviewNumberVersion 1 -CurrentDotNetVersion 10.0 -CurrentReleaseKind RC -CurrentPreviewNumberVersion 2 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousPackageVersion "10.0.0-rc.1.25451.107" -CurrentPackageVersion "10.0.0-rc.2.25502.107"
+# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousReleaseKind RC -PreviousPreviewRCNumber 1 -CurrentMajorMinor 10.0 -CurrentReleaseKind RC -CurrentPreviewRCNumber 2 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousPackageVersion "10.0.0-rc.1.25451.107" -CurrentPackageVersion "10.0.0-rc.2.25502.107"
 
 # Example with custom NuGet feed:
-# .\RunApiDiff.ps1 -PreviousDotNetVersion 9.0 -PreviousReleaseKind preview -PreviousPreviewNumberVersion 7 -CurrentDotNetVersion 9.0 -CurrentReleaseKind rc -CurrentPreviewNumberVersion 1 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousNuGetFeed "https://api.nuget.org/v3/index.json" -CurrentNuGetFeed "https://api.nuget.org/v3/index.json"
+# .\RunApiDiff.ps1 -PreviousMajorMinor 9.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 9.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousNuGetFeed "https://api.nuget.org/v3/index.json" -CurrentNuGetFeed "https://api.nuget.org/v3/index.json"
 
 Param (
     [Parameter(Mandatory = $true)]
     [ValidatePattern("\d+\.\d")]
     [string]
-    $PreviousDotNetVersion # 7.0, 8.0, 9.0, ...
+    $PreviousMajorMinor # 7.0, 8.0, 9.0, ...
     ,
     [Parameter(Mandatory = $true)]
     [string]
@@ -49,12 +49,12 @@ Param (
     [Parameter(Mandatory = $false)]
     [ValidatePattern("(\d+)?")]
     [string]
-    $PreviousPreviewNumberVersion # 0, 1, 2, 3, ...
+    $PreviousPreviewRCNumber # 0, 1, 2, 3, ...
     ,
     [Parameter(Mandatory = $true)]
     [ValidatePattern("\d+\.\d")]
     [string]
-    $CurrentDotNetVersion # 7.0, 8.0, 9.0, ...
+    $CurrentMajorMinor # 7.0, 8.0, 9.0, ...
     ,
     [Parameter(Mandatory = $true)]
     [string]
@@ -64,7 +64,7 @@ Param (
     [Parameter(Mandatory = $false)]
     [ValidatePattern("(\d+)?")]
     [string]
-    $CurrentPreviewNumberVersion # 0, 1, 2, 3, ...
+    $CurrentPreviewRCNumber # 0, 1, 2, 3, ...
     ,
     [Parameter(Mandatory = $false)]
     [string]
@@ -754,21 +754,21 @@ Function ProcessSdk
     )
 
     $beforeDllFolder = ""
-    DownloadPackage $previousNuGetFeed $sdkName "Before" $PreviousDotNetVersion $PreviousReleaseKind $PreviousPreviewNumberVersion $previousVersion ([ref]$beforeDllFolder)
+    DownloadPackage $previousNuGetFeed $sdkName "Before" $PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber $previousVersion ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage $currentNuGetFeed $sdkName "After" $CurrentDotNetVersion $CurrentReleaseKind $CurrentPreviewNumberVersion $currentVersion ([ref]$afterDllFolder)
+    DownloadPackage $currentNuGetFeed $sdkName "After" $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber $currentVersion ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
     $beforeReferenceFolder = ""
     $afterReferenceFolder = ""
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
-        DownloadPackage $previousNuGetFeed "NETCore" "Before" $PreviousDotNetVersion $PreviousReleaseKind $PreviousPreviewNumberVersion $previousVersion ([ref]$beforeReferenceFolder)
+        DownloadPackage $previousNuGetFeed "NETCore" "Before" $PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber $previousVersion ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
         
-        DownloadPackage $currentNuGetFeed "NETCore" "After" $CurrentDotNetVersion $CurrentReleaseKind $CurrentPreviewNumberVersion $currentVersion ([ref]$afterReferenceFolder)
+        DownloadPackage $currentNuGetFeed "NETCore" "After" $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber $currentVersion ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
 
@@ -793,23 +793,23 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 ## Generate strings with no whitespace
 
 # Default PreviewNumberVersion to "0" when ReleaseKind is "ga"
-If ($PreviousReleaseKind -eq "ga" -and [System.String]::IsNullOrWhiteSpace($PreviousPreviewNumberVersion)) {
-    $PreviousPreviewNumberVersion = "0"
+If ($PreviousReleaseKind -eq "ga" -and [System.String]::IsNullOrWhiteSpace($PreviousPreviewRCNumber)) {
+    $PreviousPreviewRCNumber = "0"
 }
-If ($CurrentReleaseKind -eq "ga" -and [System.String]::IsNullOrWhiteSpace($CurrentPreviewNumberVersion)) {
-    $CurrentPreviewNumberVersion = "0"
+If ($CurrentReleaseKind -eq "ga" -and [System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) {
+    $CurrentPreviewRCNumber = "0"
 }
 
 # Validate that PreviewNumberVersion is provided for non-GA release kinds
-If ($PreviousReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($PreviousPreviewNumberVersion)) {
-    Write-Error "PreviousPreviewNumberVersion is required when PreviousReleaseKind is '$PreviousReleaseKind'." -ErrorAction Stop
+If ($PreviousReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($PreviousPreviewRCNumber)) {
+    Write-Error "PreviousPreviewRCNumber is required when PreviousReleaseKind is '$PreviousReleaseKind'." -ErrorAction Stop
 }
-If ($CurrentReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($CurrentPreviewNumberVersion)) {
-    Write-Error "CurrentPreviewNumberVersion is required when CurrentReleaseKind is '$CurrentReleaseKind'." -ErrorAction Stop
+If ($CurrentReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) {
+    Write-Error "CurrentPreviewRCNumber is required when CurrentReleaseKind is '$CurrentReleaseKind'." -ErrorAction Stop
 }
 
 # True when comparing 8.0 GA with 9.0 GA
-$IsComparingReleases = ($PreviousDotNetVersion -Ne $CurrentDotNetVersion) -And ($PreviousReleaseKind -Eq "ga") -And ($CurrentReleaseKind -eq "ga")
+$IsComparingReleases = ($PreviousMajorMinor -Ne $CurrentMajorMinor) -And ($PreviousReleaseKind -Eq "ga") -And ($CurrentReleaseKind -eq "ga")
 
 
 ## Resolve CoreRepo if not provided
@@ -835,7 +835,7 @@ $TmpFolder = [System.IO.Path]::GetFullPath((Resolve-Path $TmpFolder).Path)
 VerifyPathOrExit $CoreRepo
 VerifyPathOrExit $TmpFolder
 
-$currentMajorVersion = $CurrentDotNetVersion.Split(".")[0]
+$currentMajorVersion = $CurrentMajorMinor.Split(".")[0]
 $InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet$currentMajorVersion-transport/nuget/v3/index.json --prerelease"
 
 if ($InstallApiDiff) {
@@ -853,7 +853,7 @@ if (-Not $apiDiffCommand)
 $apiDiffExe = $apiDiffCommand.Source
 ## Recreate api-diff folder in core repo folder
 
-$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentDotNetVersion $CurrentReleaseKind $CurrentPreviewNumberVersion $IsComparingReleases
+$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber $IsComparingReleases
 If (-Not (Test-Path -Path $previewFolderPath))
 {
     Write-Color white "Creating new diff folder: $previewFolderPath"
@@ -863,11 +863,11 @@ If (-Not (Test-Path -Path $previewFolderPath))
 ## Run the ApiDiff commands
 
 # Example: "10.0-preview2"
-$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentDotNetVersion $CurrentReleaseKind $CurrentPreviewNumberVersion
+$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber
 
 # Examples: ".NET 10 Preview 1" and ".NET 10 Preview 2"
-$previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousDotNetVersion $PreviousReleaseKind $PreviousPreviewNumberVersion
-$currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentDotNetVersion $CurrentReleaseKind $CurrentPreviewNumberVersion
+$previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber
+$currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber
 
 If (-Not $ExcludeNetCore)
 {
