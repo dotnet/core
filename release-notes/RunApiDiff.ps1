@@ -600,7 +600,7 @@ Function DownloadPackage {
         If ($releaseKind -eq "ga") {
             $searchTerm = "$dotNetVersion.$previewNumberVersion"
         }
-        ElseIf (-Not ([System.String]::IsNullOrWhiteSpace($releaseKind)) -And -Not ([System.String]::IsNullOrWhiteSpace($previewNumberVersion))) {
+        Else {
             $searchTerm = "$dotNetVersion.*-$releaseKind.$previewNumberVersion*"
         }
 
