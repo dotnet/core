@@ -35,7 +35,7 @@
 
 Param (
     [Parameter(Mandatory = $false)]
-    [ValidatePattern("(\d+\.\d)?")]
+    [ValidatePattern("^(\d+\.\d+)?$")]
     [string]
     $PreviousMajorMinor # 7.0, 8.0, 9.0, ...
     ,
@@ -46,7 +46,7 @@ Param (
     $PreviousPrereleaseLabel # "preview.7", "rc.1", etc. Omit for GA.
     ,
     [Parameter(Mandatory = $false)]
-    [ValidatePattern("(\d+\.\d)?")]
+    [ValidatePattern("^(\d+\.\d+)?$")]
     [string]
     $CurrentMajorMinor # 7.0, 8.0, 9.0, ...
     ,
