@@ -35,11 +35,9 @@ All version parameters can be auto-discovered from their respective NuGet feeds.
 | Parameter | Description | Default |
 |---|---|---|
 | `PreviousMajorMinor` | The "before" .NET major.minor version (e.g., `10.0`) | Discovered from `PreviousNuGetFeed` |
-| `PreviousReleaseKind` | Release kind for the "before" version: `preview`, `rc`, or `ga` | Discovered from `PreviousNuGetFeed` |
-| `PreviousPreviewRCNumber` | Preview/RC number for the "before" version (e.g., `1`, `2`) | `0` for GA; discovered from `PreviousNuGetFeed` for preview/rc |
+| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Discovered from `PreviousNuGetFeed` |
 | `CurrentMajorMinor` | The "after" .NET major.minor version (e.g., `10.0`) | Discovered from `CurrentNuGetFeed` |
-| `CurrentReleaseKind` | Release kind for the "after" version: `preview`, `rc`, or `ga` | Discovered from `CurrentNuGetFeed` |
-| `CurrentPreviewRCNumber` | Preview/RC number for the "after" version (e.g., `1`, `2`) | `0` for GA; discovered from `CurrentNuGetFeed` for preview/rc |
+| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Discovered from `CurrentNuGetFeed` |
 
 ### Feed Parameters
 
@@ -86,11 +84,9 @@ Explicit version parameters (comparing .NET 10.0 Preview 7 to RC 1):
 ```powershell
 .\RunApiDiff.ps1 `
    -PreviousMajorMinor 10.0 `
-   -PreviousReleaseKind preview `
-   -PreviousPreviewRCNumber 7 `
+   -PreviousPrereleaseLabel preview.7 `
    -CurrentMajorMinor 10.0 `
-   -CurrentReleaseKind rc `
-   -CurrentPreviewRCNumber 1 `
+   -CurrentPrereleaseLabel rc.1 `
    -CurrentNuGetFeed https://api.nuget.org/v3/index.json
 ```
 
@@ -99,11 +95,9 @@ With exact package versions:
 ```powershell
 .\RunApiDiff.ps1 `
    -PreviousMajorMinor 10.0 `
-   -PreviousReleaseKind preview `
-   -PreviousPreviewRCNumber 7 `
+   -PreviousPrereleaseLabel preview.7 `
    -CurrentMajorMinor 10.0 `
-   -CurrentReleaseKind rc `
-   -CurrentPreviewRCNumber 1 `
+   -CurrentPrereleaseLabel rc.1 `
    -CurrentNuGetFeed https://api.nuget.org/v3/index.json `
    -PreviousPackageVersion "10.0.0-preview.7.25380.108" `
    -CurrentPackageVersion "10.0.0-rc.1.25451.107"

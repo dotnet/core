@@ -8,11 +8,9 @@
 
 # RunApiDiff.ps1
 # -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -PreviousNuGetFeed.
-# -PreviousReleaseKind          : Indicates if the 'before' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga". If not specified, discovered from -PreviousNuGetFeed.
-# -PreviousPreviewRCNumber : The preview or RC number of the 'before' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA. If not specified, discovered from -PreviousNuGetFeed.
-# -CurrentMajorMinor         : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -CurrentNuGetFeed.
-# -CurrentReleaseKind           : Indicates if the 'after' version is a Preview, an RC, or GA. Accepted values: "preview", "rc" or "ga". If not specified, discovered from -CurrentNuGetFeed.
-# -CurrentPreviewRCNumber  : The preview or RC number of the 'after' version: '1', '2', '3', etc. For GA, this number is the 3rd one in the released version (7.0.0, 7.0.1, 7.0.2, ...). Defaults to "0" for GA. If not specified, discovered from -CurrentNuGetFeed.
+# -PreviousPrereleaseLabel      : The prerelease label for the 'before' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, discovered from -PreviousNuGetFeed.
+# -CurrentMajorMinor           : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -CurrentNuGetFeed.
+# -CurrentPrereleaseLabel       : The prerelease label for the 'after' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, discovered from -CurrentNuGetFeed.
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo. If not specified, defaults to the git repository root relative to this script.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
@@ -30,10 +28,10 @@
 # .\RunApiDiff.ps1 <staging-feed-url>
 
 # Example — explicit version parameters:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 10.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -CurrentNuGetFeed https://api.nuget.org/v3/index.json
+# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1 -CurrentNuGetFeed https://api.nuget.org/v3/index.json
 
 # Example with exact package versions:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 10.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -PreviousPackageVersion "10.0.0-preview.7.25380.108" -CurrentPackageVersion "10.0.0-rc.1.25451.107" -CurrentNuGetFeed https://api.nuget.org/v3/index.json
+# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1 -PreviousPackageVersion "10.0.0-preview.7.25380.108" -CurrentPackageVersion "10.0.0-rc.1.25451.107" -CurrentNuGetFeed https://api.nuget.org/v3/index.json
 
 Param (
     [Parameter(Mandatory = $false)]
@@ -42,14 +40,10 @@ Param (
     $PreviousMajorMinor # 7.0, 8.0, 9.0, ...
     ,
     [Parameter(Mandatory = $false)]
+    [AllowEmptyString()]
+    [ValidatePattern("^((preview|rc)\.\d+)?$")]
     [string]
-    [ValidateSet("preview", "rc", "ga", "")]
-    $PreviousReleaseKind
-    ,
-    [Parameter(Mandatory = $false)]
-    [ValidatePattern("(\d+)?")]
-    [string]
-    $PreviousPreviewRCNumber # 0, 1, 2, 3, ...
+    $PreviousPrereleaseLabel # "preview.7", "rc.1", etc. Omit for GA.
     ,
     [Parameter(Mandatory = $false)]
     [ValidatePattern("(\d+\.\d)?")]
@@ -57,14 +51,10 @@ Param (
     $CurrentMajorMinor # 7.0, 8.0, 9.0, ...
     ,
     [Parameter(Mandatory = $false)]
+    [AllowEmptyString()]
+    [ValidatePattern("^((preview|rc)\.\d+)?$")]
     [string]
-    [ValidateSet("preview", "rc", "ga", "")]
-    $CurrentReleaseKind
-    ,
-    [Parameter(Mandatory = $false)]
-    [ValidatePattern("(\d+)?")]
-    [string]
-    $CurrentPreviewRCNumber # 0, 1, 2, 3, ...
+    $CurrentPrereleaseLabel # "preview.7", "rc.1", etc. Omit for GA.
     ,
     [Parameter(Mandatory = $false)]
     [string]
@@ -142,7 +132,7 @@ Function DiscoverVersionFromFeed {
     $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
 
     If (-not $flatContainer) {
-        Write-Error "Could not find PackageBaseAddress endpoint in feed '$feedUrl'. Please specify -${label}MajorMinor, -${label}ReleaseKind, and -${label}PreviewRCNumber explicitly." -ErrorAction Stop
+        Write-Error "Could not find PackageBaseAddress endpoint in feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
     }
 
     $baseUrl = $flatContainer.'@id'
@@ -150,26 +140,24 @@ Function DiscoverVersionFromFeed {
     $versionsResult = Invoke-RestMethod -Uri $versionsUrl -Headers $headers
 
     If (-not $versionsResult.versions -or $versionsResult.versions.Count -eq 0) {
-        Write-Error "No versions of Microsoft.NETCore.App.Ref found on feed '$feedUrl'. Please specify -${label}MajorMinor, -${label}ReleaseKind, and -${label}PreviewRCNumber explicitly." -ErrorAction Stop
+        Write-Error "No versions of Microsoft.NETCore.App.Ref found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
     }
 
     $latestVersion = $versionsResult.versions | Select-Object -Last 1
     Write-Color cyan "Latest version on feed: $latestVersion"
 
-    $result = @{ MajorMinor = ""; ReleaseKind = ""; PreviewRCNumber = "" }
+    $result = @{ MajorMinor = ""; PrereleaseLabel = "" }
 
     If ($latestVersion -match "^(\d+)\.(\d+)\.\d+-(preview|rc)\.(\d+)") {
         $result.MajorMinor = "$($Matches[1]).$($Matches[2])"
-        $result.ReleaseKind = $Matches[3]
-        $result.PreviewRCNumber = $Matches[4]
+        $result.PrereleaseLabel = "$($Matches[3]).$($Matches[4])"
     }
     ElseIf ($latestVersion -match "^(\d+)\.(\d+)\.(\d+)$") {
         $result.MajorMinor = "$($Matches[1]).$($Matches[2])"
-        $result.ReleaseKind = "ga"
-        $result.PreviewRCNumber = $Matches[3]
+        $result.PrereleaseLabel = ""
     }
     Else {
-        Write-Error "Could not parse version '$latestVersion'. Please specify -${label}MajorMinor, -${label}ReleaseKind, and -${label}PreviewRCNumber explicitly." -ErrorAction Stop
+        Write-Error "Could not parse version '$latestVersion'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
     }
 
     Return $result
@@ -843,51 +831,64 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 
 ## Generate strings with no whitespace
 
-## Discover PreviousMajorMinor, PreviousReleaseKind, and PreviousPreviewRCNumber from the feed if not provided
-If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -or [System.String]::IsNullOrWhiteSpace($PreviousReleaseKind)) {
+## Parse PrereleaseLabel into internal ReleaseKind and PreviewRCNumber variables
+Function ParsePrereleaseLabel {
+    Param (
+        [string] $label
+    )
+    If ([System.String]::IsNullOrWhiteSpace($label)) {
+        Return @{ ReleaseKind = "ga"; PreviewRCNumber = "0" }
+    }
+    If ($label -match "^(preview|rc)\.(\d+)$") {
+        Return @{ ReleaseKind = $Matches[1]; PreviewRCNumber = $Matches[2] }
+    }
+    Write-Error "Invalid prerelease label '$label'. Expected format: 'preview.N' or 'rc.N'." -ErrorAction Stop
+}
+
+## Discover version info from feeds if not provided
+If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -and [System.String]::IsNullOrWhiteSpace($PreviousPrereleaseLabel)) {
     $discovered = DiscoverVersionFromFeed $PreviousNuGetFeed "Previous"
-    If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) { $PreviousMajorMinor = $discovered.MajorMinor }
-    If ([System.String]::IsNullOrWhiteSpace($PreviousReleaseKind)) { $PreviousReleaseKind = $discovered.ReleaseKind }
-    If ([System.String]::IsNullOrWhiteSpace($PreviousPreviewRCNumber)) { $PreviousPreviewRCNumber = $discovered.PreviewRCNumber }
-    Write-Color green "Discovered: PreviousMajorMinor=$PreviousMajorMinor, PreviousReleaseKind=$PreviousReleaseKind, PreviousPreviewRCNumber=$PreviousPreviewRCNumber"
+    $PreviousMajorMinor = $discovered.MajorMinor
+    $PreviousPrereleaseLabel = $discovered.PrereleaseLabel
+    Write-Color green "Discovered previous: $PreviousMajorMinor $(If ($PreviousPrereleaseLabel) { $PreviousPrereleaseLabel } Else { 'GA' })"
+} ElseIf ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) {
+    $discovered = DiscoverVersionFromFeed $PreviousNuGetFeed "Previous"
+    $PreviousMajorMinor = $discovered.MajorMinor
+    Write-Color green "Discovered previous major.minor: $PreviousMajorMinor"
 }
 
-## Discover CurrentMajorMinor, CurrentReleaseKind, and CurrentPreviewRCNumber from the feed if not provided
-If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -or [System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) {
+If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]::IsNullOrWhiteSpace($CurrentPrereleaseLabel)) {
     $discovered = DiscoverVersionFromFeed $CurrentNuGetFeed "Current"
-    If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = $discovered.MajorMinor }
-    If ([System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) { $CurrentReleaseKind = $discovered.ReleaseKind }
-    If ([System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) { $CurrentPreviewRCNumber = $discovered.PreviewRCNumber }
-    Write-Color green "Discovered: CurrentMajorMinor=$CurrentMajorMinor, CurrentReleaseKind=$CurrentReleaseKind, CurrentPreviewRCNumber=$CurrentPreviewRCNumber"
+    $CurrentMajorMinor = $discovered.MajorMinor
+    $CurrentPrereleaseLabel = $discovered.PrereleaseLabel
+    Write-Color green "Discovered current: $CurrentMajorMinor $(If ($CurrentPrereleaseLabel) { $CurrentPrereleaseLabel } Else { 'GA' })"
+} ElseIf ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) {
+    $discovered = DiscoverVersionFromFeed $CurrentNuGetFeed "Current"
+    $CurrentMajorMinor = $discovered.MajorMinor
+    Write-Color green "Discovered current major.minor: $CurrentMajorMinor"
 }
 
-# Default PreviewNumberVersion to "0" when ReleaseKind is "ga"
-If ($PreviousReleaseKind -eq "ga" -and [System.String]::IsNullOrWhiteSpace($PreviousPreviewRCNumber)) {
-    $PreviousPreviewRCNumber = "0"
-}
-If ($CurrentReleaseKind -eq "ga" -and [System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) {
-    $CurrentPreviewRCNumber = "0"
-}
+## Parse prerelease labels into internal variables used by the rest of the script
+$previousParsed = ParsePrereleaseLabel $PreviousPrereleaseLabel
+$PreviousReleaseKind = $previousParsed.ReleaseKind
+$PreviousPreviewRCNumber = $previousParsed.PreviewRCNumber
 
-# Validate that PreviewNumberVersion is provided for non-GA release kinds
-If ($PreviousReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($PreviousPreviewRCNumber)) {
-    Write-Error "PreviousPreviewRCNumber is required when PreviousReleaseKind is '$PreviousReleaseKind'." -ErrorAction Stop
-}
-If ($CurrentReleaseKind -ne "ga" -and [System.String]::IsNullOrWhiteSpace($CurrentPreviewRCNumber)) {
-    Write-Error "CurrentPreviewRCNumber is required when CurrentReleaseKind is '$CurrentReleaseKind'." -ErrorAction Stop
-}
+$currentParsed = ParsePrereleaseLabel $CurrentPrereleaseLabel
+$CurrentReleaseKind = $currentParsed.ReleaseKind
+$CurrentPreviewRCNumber = $currentParsed.PreviewRCNumber
 
 # Validate required values are present
-If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -or [System.String]::IsNullOrWhiteSpace($PreviousReleaseKind)) {
-    Write-Error "PreviousMajorMinor and PreviousReleaseKind are required. Specify them explicitly or provide -PreviousNuGetFeed to auto-discover." -ErrorAction Stop
+If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) {
+    Write-Error "PreviousMajorMinor is required. Specify it explicitly or provide -PreviousNuGetFeed to auto-discover." -ErrorAction Stop
 }
-If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -or [System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) {
-    Write-Error "CurrentMajorMinor and CurrentReleaseKind are required. Specify them explicitly or provide -CurrentNuGetFeed to auto-discover." -ErrorAction Stop
+If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) {
+    Write-Error "CurrentMajorMinor is required. Specify it explicitly or provide -CurrentNuGetFeed to auto-discover." -ErrorAction Stop
 }
 
 # Validate that previous and current versions are different
-If ($PreviousMajorMinor -eq $CurrentMajorMinor -and $PreviousReleaseKind -eq $CurrentReleaseKind -and $PreviousPreviewRCNumber -eq $CurrentPreviewRCNumber) {
-    Write-Error "Previous and current versions are the same ($PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber). Ensure -PreviousNuGetFeed and -CurrentNuGetFeed point to different versions, or specify version parameters explicitly." -ErrorAction Stop
+If ($PreviousMajorMinor -eq $CurrentMajorMinor -and $PreviousPrereleaseLabel -eq $CurrentPrereleaseLabel) {
+    $previousDesc = If ($PreviousPrereleaseLabel) { "$PreviousMajorMinor-$PreviousPrereleaseLabel" } Else { "$PreviousMajorMinor GA" }
+    Write-Error "Previous and current versions are the same ($previousDesc). Ensure -PreviousNuGetFeed and -CurrentNuGetFeed point to different versions, or specify version parameters explicitly." -ErrorAction Stop
 }
 
 # True when comparing 8.0 GA with 9.0 GA
