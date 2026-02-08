@@ -133,6 +133,20 @@ Function ParseVersionString {
     Return $result
 }
 
+## Parse a PrereleaseLabel into internal ReleaseKind and PreviewRCNumber components
+Function ParsePrereleaseLabel {
+    Param (
+        [string] $label
+    )
+    If ([System.String]::IsNullOrWhiteSpace($label)) {
+        Return @{ ReleaseKind = "ga"; PreviewRCNumber = "0" }
+    }
+    If ($label -match "^(preview|rc)\.(\d+)$") {
+        Return @{ ReleaseKind = $Matches[1]; PreviewRCNumber = $Matches[2] }
+    }
+    Write-Error "Invalid prerelease label '$label'. Expected format: 'preview.N' or 'rc.N'." -ErrorAction Stop
+}
+
 Function DiscoverVersionFromFeed {
     Param (
         [Parameter(Mandatory = $true)]
@@ -837,20 +851,6 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 }
 
 ## Generate strings with no whitespace
-
-## Parse PrereleaseLabel into internal ReleaseKind and PreviewRCNumber variables
-Function ParsePrereleaseLabel {
-    Param (
-        [string] $label
-    )
-    If ([System.String]::IsNullOrWhiteSpace($label)) {
-        Return @{ ReleaseKind = "ga"; PreviewRCNumber = "0" }
-    }
-    If ($label -match "^(preview|rc)\.(\d+)$") {
-        Return @{ ReleaseKind = $Matches[1]; PreviewRCNumber = $Matches[2] }
-    }
-    Write-Error "Invalid prerelease label '$label'. Expected format: 'preview.N' or 'rc.N'." -ErrorAction Stop
-}
 
 ## Extract MajorMinor and PrereleaseLabel from explicit Version parameters if provided
 If (-not [System.String]::IsNullOrWhiteSpace($PreviousVersion)) {
