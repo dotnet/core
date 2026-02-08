@@ -585,6 +585,7 @@ Function DownloadPackage {
     RecreateFolder $destinationFolder
 
     $refPackageName = "$fullSdkName.Ref"
+    $headers = GetAuthHeadersForFeed $nuGetFeed
 
     # If exact version is provided, use it directly
     If (-Not ([System.String]::IsNullOrWhiteSpace($version))) {
@@ -603,8 +604,6 @@ Function DownloadPackage {
         Else {
             $searchTerm = "$dotNetVersion.*-$releaseKind.$previewNumberVersion*"
         }
-
-        $headers = GetAuthHeadersForFeed $nuGetFeed
 
         # Get service index
         $serviceIndex = Invoke-RestMethod -Uri $nuGetFeed -Headers $headers
@@ -688,9 +687,6 @@ Function DownloadPackage {
         }
 
         Write-Color yellow "Downloading '$nupkgUrl' to '$nupkgFile'..."
-        
-        # Get authentication headers if required
-        $headers = GetAuthHeadersForFeed $nuGetFeed
         
         if ($headers.Count -gt 0) {
             Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile -Headers $headers
