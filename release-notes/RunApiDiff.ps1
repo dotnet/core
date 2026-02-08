@@ -190,17 +190,12 @@ Function Write-Color {
         [string] $newColor
     )
 
-    $oldColor = $host.UI.RawUI.ForegroundColor
-    $host.UI.RawUI.ForegroundColor = $newColor
-
     If ($args) {
-        Write-Output $args
+        Write-Host ($args -join ' ') -ForegroundColor $newColor
     }
     Else {
-        $input | Write-Output
+        $input | ForEach-Object { Write-Host $_ -ForegroundColor $newColor }
     }
-
-    $host.UI.RawUI.ForegroundColor = $oldColor
 }
 
 Function VerifyPathOrExit {
