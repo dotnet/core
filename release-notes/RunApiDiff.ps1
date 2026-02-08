@@ -17,23 +17,23 @@
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
-# -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json
-# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json
+# -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://api.nuget.org/v3/index.json
+# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. No default — must be specified if version parameters are not provided.
 # -ExcludeNetCore               : Optional boolean to exclude the NETCore comparison. Default is false.
 # -ExcludeAspNetCore            : Optional boolean to exclude the AspNetCore comparison. Default is false.
 # -ExcludeWindowsDesktop        : Optional boolean to exclude the WindowsDesktop comparison. Default is false.
 # -InstallApiDiff               : Optional boolean to install or update the ApiDiff tool. Default is false.
-# -PreviousPackageVersion       : Optional exact package version for the previous/before comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
-# -CurrentPackageVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.2.25502.107"). Overrides version search logic.
+# -PreviousPackageVersion       : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
+# -CurrentPackageVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
 
-# Example:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 9.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 9.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -CoreRepo C:\Users\calope\source\repos\core\ -SdkRepo C:\Users\calope\source\repos\sdk\ -TmpFolder C:\Users\calope\source\repos\tmp\
+# Example — simplest usage with auto-discovery:
+# .\RunApiDiff.ps1 <staging-feed-url>
+
+# Example — explicit version parameters:
+# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 10.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -CurrentNuGetFeed https://api.nuget.org/v3/index.json
 
 # Example with exact package versions:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousReleaseKind RC -PreviousPreviewRCNumber 1 -CurrentMajorMinor 10.0 -CurrentReleaseKind RC -CurrentPreviewRCNumber 2 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousPackageVersion "10.0.0-rc.1.25451.107" -CurrentPackageVersion "10.0.0-rc.2.25502.107"
-
-# Example with custom NuGet feed:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 9.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 9.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -CoreRepo D:\core\ -TmpFolder D:\tmp -PreviousNuGetFeed "https://api.nuget.org/v3/index.json" -CurrentNuGetFeed "https://api.nuget.org/v3/index.json"
+# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousReleaseKind preview -PreviousPreviewRCNumber 7 -CurrentMajorMinor 10.0 -CurrentReleaseKind rc -CurrentPreviewRCNumber 1 -PreviousPackageVersion "10.0.0-preview.7.25380.108" -CurrentPackageVersion "10.0.0-rc.1.25451.107" -CurrentNuGetFeed https://api.nuget.org/v3/index.json
 
 Param (
     [Parameter(Mandatory = $false)]
@@ -90,9 +90,8 @@ Param (
     $PreviousNuGetFeed = "https://api.nuget.org/v3/index.json"
     ,
     [Parameter(Mandatory = $false, Position = 0)]
-    [ValidateNotNullOrEmpty()]
     [string]
-    $CurrentNuGetFeed = "https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet10/nuget/v3/index.json"
+    $CurrentNuGetFeed
     ,
     [Parameter(Mandatory = $false)]
     [bool]
@@ -884,6 +883,11 @@ If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -or [System.String]
 }
 If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -or [System.String]::IsNullOrWhiteSpace($CurrentReleaseKind)) {
     Write-Error "CurrentMajorMinor and CurrentReleaseKind are required. Specify them explicitly or provide -CurrentNuGetFeed to auto-discover." -ErrorAction Stop
+}
+
+# Validate that previous and current versions are different
+If ($PreviousMajorMinor -eq $CurrentMajorMinor -and $PreviousReleaseKind -eq $CurrentReleaseKind -and $PreviousPreviewRCNumber -eq $CurrentPreviewRCNumber) {
+    Write-Error "Previous and current versions are the same ($PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber). Ensure -PreviousNuGetFeed and -CurrentNuGetFeed point to different versions, or specify version parameters explicitly." -ErrorAction Stop
 }
 
 # True when comparing 8.0 GA with 9.0 GA
