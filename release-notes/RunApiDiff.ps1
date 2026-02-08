@@ -821,7 +821,7 @@ Function ProcessSdk
     $targetFolder = [IO.Path]::Combine($previewFolderPath, "Microsoft.$sdkName.App")
     RecreateFolder $targetFolder
 
-    RunApiDiff $apiDiffExe $targetFolder $beforeDllFolder $afterDllFolder $currentDotNetFullName $assembliesToExclude $attributesToExclude $previousDotNetFriendlyName $currentDotNetFriendlyName $beforeReferenceFolder $afterReferenceFolder
+    RunApiDiff -apiDiffExe $apiDiffExe -outputFolder $targetFolder -beforeFolder $beforeDllFolder -afterFolder $afterDllFolder -tableOfContentsFileNamePrefix $currentDotNetFullName -assembliesToExclude $assembliesToExclude -attributesToExclude $attributesToExclude -beforeFriendlyName $previousDotNetFriendlyName -afterFriendlyName $currentDotNetFriendlyName -beforeReferenceFolder $beforeReferenceFolder -afterReferenceFolder $afterReferenceFolder
 }
 
 #####################
