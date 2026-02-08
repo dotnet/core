@@ -555,38 +555,6 @@ Function GetAuthHeadersForFeed {
     return @{}
 }
 
-Function RebuildIfExeNotFound {
-    Param (
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $exePath
-        ,
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $projectPath
-        ,
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $artifactsPath
-    )
-
-    VerifyPathOrExit $projectPath
-
-    If (-Not (Test-Path -Path $exePath)) {
-        # Building the project
-
-        Write-Color cyan "Building project '$projectPath'"
-        RunCommand "$SdkRepo/.dotnet/dotnet build -c release $projectPath"
-
-        # Verifying expected output from building
-        VerifyPathOrExit $artifactsPath
-        VerifyPathOrExit $exePath
-    }
-}
-
 Function DownloadPackage {
     Param
     (
