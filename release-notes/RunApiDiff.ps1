@@ -58,7 +58,7 @@ Param (
     ,
     [Parameter(Mandatory = $false)]
     [string]
-    $CoreRepo #"D:\\core"
+    $CoreRepo
     ,
     [Parameter(Mandatory = $false)]
     [string]
@@ -371,7 +371,7 @@ Function GetPreviewFolderPath {
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $rootFolder #"D:\\core"
+        $rootFolder
         ,
         [Parameter(Mandatory = $true)]
         [ValidatePattern("\d+\.\d")]
@@ -553,6 +553,11 @@ Function DownloadPackage {
         $nuGetFeed
         ,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $tmpFolder
+        ,
+        [Parameter(Mandatory = $true)]
         [ValidateSet("NETCore", "AspNetCore", "WindowsDesktop")]
         [string]
         $sdkName
@@ -585,7 +590,7 @@ Function DownloadPackage {
     )
 
     $fullSdkName = "Microsoft.$sdkName.App"
-    $destinationFolder = [IO.Path]::Combine($TmpFolder, "$fullSdkName.$beforeOrAfter")
+    $destinationFolder = [IO.Path]::Combine($tmpFolder, "$fullSdkName.$beforeOrAfter")
     RecreateFolder $destinationFolder
 
     $refPackageName = "$fullSdkName.Ref"
@@ -676,7 +681,7 @@ Function DownloadPackage {
         }
     }
     
-    $nupkgFile = [IO.Path]::Combine($TmpFolder, "$refPackageName.$version.nupkg")
+    $nupkgFile = [IO.Path]::Combine($tmpFolder, "$refPackageName.$version.nupkg")
 
     If (-Not(Test-Path -Path $nupkgFile)) {
         # Construct download URL using flat2 base URL from the service index
@@ -725,6 +730,11 @@ Function ProcessSdk
         [ValidateNotNullOrEmpty()]
         [string]
         $previewFolderPath
+    ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $tmpFolder
     ,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -804,21 +814,21 @@ Function ProcessSdk
     )
 
     $beforeDllFolder = ""
-    DownloadPackage -nuGetFeed $previousNuGetFeed -sdkName $sdkName -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeDllFolder)
+    DownloadPackage -nuGetFeed $previousNuGetFeed -tmpFolder $tmpFolder -sdkName $sdkName -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage -nuGetFeed $currentNuGetFeed -sdkName $sdkName -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterDllFolder)
+    DownloadPackage -nuGetFeed $currentNuGetFeed -tmpFolder $tmpFolder -sdkName $sdkName -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
     $beforeReferenceFolder = ""
     $afterReferenceFolder = ""
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
-        DownloadPackage -nuGetFeed $previousNuGetFeed -sdkName "NETCore" -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeReferenceFolder)
+        DownloadPackage -nuGetFeed $previousNuGetFeed -tmpFolder $tmpFolder -sdkName "NETCore" -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
         
-        DownloadPackage -nuGetFeed $currentNuGetFeed -sdkName "NETCore" -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterReferenceFolder)
+        DownloadPackage -nuGetFeed $currentNuGetFeed -tmpFolder $tmpFolder -sdkName "NETCore" -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
 
@@ -905,8 +915,9 @@ If ($PreviousMajorMinor -eq $CurrentMajorMinor -and $PreviousPrereleaseLabel -eq
 $IsComparingReleases = ($PreviousMajorMinor -Ne $CurrentMajorMinor) -And ($PreviousReleaseKind -Eq "ga") -And ($CurrentReleaseKind -eq "ga")
 
 ## Resolve CoreRepo if not provided
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
 If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
-    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     try {
         $CoreRepo = git -C $scriptDir rev-parse --show-toplevel 2>$null
     }
@@ -923,7 +934,6 @@ If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
 $CoreRepo = [System.IO.Path]::GetFullPath((Resolve-Path $CoreRepo).Path)
 
 ## Resolve exclude file paths relative to the script's directory if they are relative paths
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 If (-not [System.IO.Path]::IsPathRooted($AttributesToExcludeFilePath)) {
     $AttributesToExcludeFilePath = [IO.Path]::Combine($scriptDir, $AttributesToExcludeFilePath)
 }
@@ -961,7 +971,8 @@ if (-Not $apiDiffCommand)
 }
 
 $apiDiffExe = $apiDiffCommand.Source
-## Recreate api-diff folder in core repo folder
+
+## Create api-diff folder in core repo folder if it doesn't exist
 
 $previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber $IsComparingReleases
 If (-Not (Test-Path -Path $previewFolderPath))
@@ -986,6 +997,7 @@ If (-Not $ExcludeWindowsDesktop) { $sdksToProcess += "WindowsDesktop" }
 
 $commonParams = @{
     previewFolderPath = $previewFolderPath
+    tmpFolder = $TmpFolder
     previousNuGetFeed = $PreviousNuGetFeed
     currentNuGetFeed = $CurrentNuGetFeed
     apiDiffExe = $apiDiffExe
