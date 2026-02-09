@@ -17,7 +17,7 @@ If `$ARGUMENTS` is provided, use `$0` as the repository. Otherwise ask the user 
 Then ask for:
 2. **Preview name** (e.g. ".NET 11 Preview 1")
 3. **Date range** — start and end dates for merged PRs (ISO 8601, e.g. `2025-10-01..2026-02-01`)
-4. **Output file** — path for the release notes markdown (default: `LIBRARY_RELEASE_NOTES.md` at repo root)
+4. **Output file** — path for the release notes markdown (default: `release-notes/11.0/preview/preview1/libraries.md`)
 
 ## Process
 
