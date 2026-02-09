@@ -43,7 +43,7 @@ While this work is intended to improve the mobile development experience, the un
 
 ### `dotnet test`: Positional arguments
 
-`dotnet test` now accepts the project, solution, directory, or test module as a positional argument — you no longer need to specify `--project` or similar options explicitly. For example:
+`dotnet test` for Microsoft.Testing.Platform now accepts the project, solution, directory, or test module as a positional argument — you no longer need to specify `--project` or similar options explicitly. For example:
 
 ```bash
 # Before (still works)
