@@ -22,6 +22,7 @@
 - [Function Pointer Support in Reflection.Emit](#function-pointer-support-in-reflectionemit)
 - [CGM Extension Support in MediaTypeMap](#cgm-extension-support-in-mediatypemap)
 - [SOCKS5h Proxy Support in HttpClient](#socks5h-proxy-support-in-httpclient)
+- [Performance Improvements](#performance-improvements)
 
 .NET Libraries updates in .NET 11:
 
@@ -463,4 +464,36 @@ using var handler = new SocketsHttpHandler();
 handler.Proxy = new WebProxy("socks5h://proxy.example.com:1080");
 using HttpClient client = new HttpClient(handler);
 var response = await client.GetStringAsync("http://example.com");
+```
+
+## Performance Improvements
+
+### Guid.NewGuid() ~10x Faster on Linux
+
+[dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540) speeds up `Guid.NewGuid()` on Linux by switching from `/dev/urandom` reads to the `getrandom()` syscall and by batching and caching GUIDs. The result is a ~10x improvement: from 614.2 ns to 61.16 ns per call. Contributed by community member @reedz.
+
+### BigInteger Toom-Cook Multiplication
+
+[dotnet/runtime #112876](https://github.com/dotnet/runtime/pull/112876) upgrades `BigInteger.Multiply` to use the Toom-Cook 3-way algorithm for large operands, reducing time complexity from O(n^1.58) (Karatsuba) to O(n^1.46). For very large multiplications, this yields measurable improvements — e.g., a multiplication that previously took 750 μs now completes in 690 μs, with the gap widening as digit counts increase. Contributed by community member @kzrnm.
+
+### Vectorized BitIncrement/BitDecrement in TensorPrimitives
+
+[dotnet/runtime #123610](https://github.com/dotnet/runtime/pull/123610) adds SIMD vectorization for `TensorPrimitives.BitIncrement` and `TensorPrimitives.BitDecrement` on `float` and `double`. Previously these operations were scalar-only.
+
+| Type   | Before       | After    | Improvement |
+|--------|--------------|----------|-------------|
+| float  | 848.3 ns     | 227.8 ns | 3.7x faster |
+| double | 1,691.5 ns   | 445.4 ns | 3.8x faster |
+
+### Directory.GetFiles OS-Level Pattern Filtering on Windows
+
+[dotnet/runtime #122947](https://github.com/dotnet/runtime/pull/122947) optimizes `Directory.GetFiles` on Windows by passing safe search patterns directly to `NtQueryDirectoryFile` as a pre-filter hint, enabling the NTFS B-tree to seek efficiently. For patterns like `"A14881*.jpg"` in a directory with 140,000 files but only 4 matches, this reduces the operation from scanning all 140K entries to returning ~4–10 entries. The managed `MatchesPattern` filter still runs afterward to ensure identical behavior.
+
+### BitArray.PopCount
+
+[dotnet/runtime #119804](https://github.com/dotnet/runtime/pull/119804) adds `BitArray.PopCount()`, which returns the number of set bits using hardware-accelerated population count instructions. Contributed by community member @huoyaoyuan.
+
+```csharp
+var bits = new BitArray(new[] { true, false, true, true, false });
+int count = bits.PopCount(); // 3
 ```
