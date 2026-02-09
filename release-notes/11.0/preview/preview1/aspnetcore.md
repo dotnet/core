@@ -20,7 +20,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Opt-in metrics and tracing for Blazor WebAssembly](#opt-in-metrics-and-tracing-for-blazor-webassembly)
 - [Docker support in Blazor Web App template](#docker-support-in-blazor-web-app-template)
 - [FileContentResult support in OpenAPI](#filecontentresult-support-in-openapi)
-- [`IOutputCachePolicyProvider` for custom output caching](#ioutputcachepolicyprovider-for-custom-output-caching)
+- [`IOutputCachePolicyProvider`](#ioutputcachepolicyprovider)
 - [`TimeProvider` in ASP.NET Core Identity](#timeprovider-in-aspnet-core-identity)
 - [Auto-trust development certificates in WSL](#auto-trust-development-certificates-in-wsl)
 
@@ -529,73 +529,17 @@ The generated OpenAPI document will include the correct media type and response 
 
 Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
-## `IOutputCachePolicyProvider` for custom output caching
+## `IOutputCachePolicyProvider`
 
-ASP.NET Core now provides `IOutputCachePolicyProvider` for implementing custom output caching policy selection logic. This interface enables advanced scenarios where caching policies need to be determined dynamically, such as retrieving policies from external configuration sources, databases, or implementing custom policy resolution logic based on tenant-specific settings.
+ASP.NET Core now provides the `IOutputCachePolicyProvider` interface for implementing custom output caching policy selection logic. This interface allows applications to determine the default base caching policy, check for the existence of named policies, and support advanced scenarios where policies must be resolved dynamically. Examples include loading policies from external configuration sources, databases, or applying tenant‑specific caching rules.
 
 ```csharp
 public interface IOutputCachePolicyProvider
 {
     IReadOnlyList<IOutputCachePolicy> GetBasePolicies();
-    
     ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName);
 }
 ```
-
-**Usage:**
-
-```csharp
-public class TenantOutputCachePolicyProvider : IOutputCachePolicyProvider
-{
-    private readonly ITenantService _tenantService;
-    private readonly Dictionary<string, IOutputCachePolicy> _cachedPolicies = new();
-    
-    public TenantOutputCachePolicyProvider(ITenantService tenantService)
-    {
-        _tenantService = tenantService;
-    }
-    
-    public IReadOnlyList<IOutputCachePolicy> GetBasePolicies()
-    {
-        // Return empty - no base policies in this custom implementation
-        return Array.Empty<IOutputCachePolicy>();
-    }
-    
-    public async ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName)
-    {
-        // Check if we've already built this policy
-        if (_cachedPolicies.TryGetValue(policyName, out var cachedPolicy))
-        {
-            return cachedPolicy;
-        }
-        
-        // Load policy settings from tenant configuration
-        var tenantSettings = await _tenantService.GetCacheSettingsAsync(policyName);
-        
-        if (tenantSettings == null)
-        {
-            return null;
-        }
-        
-        // Build a custom policy implementation
-        var policy = new CustomOutputCachePolicy(tenantSettings);
-        _cachedPolicies[policyName] = policy;
-        
-        return policy;
-    }
-}
-
-// Registration
-builder.Services.AddOutputCache();
-builder.Services.AddSingleton<IOutputCachePolicyProvider, TenantOutputCachePolicyProvider>();
-```
-
-This interface provides extensibility for output caching, enabling scenarios like:
-
-- Loading policies from external configuration stores
-- Implementing tenant-specific caching strategies  
-- Dynamic policy resolution based on user roles or permissions
-- Integrating with existing policy management systems
 
 Thank you [@lqlive](https://github.com/lqlive) for this contribution!
 
