@@ -41,9 +41,9 @@ After a device is selected, `dotnet run` will also invoke the `DeployToDevice` M
 
 While this work is intended to improve the mobile development experience, the underlying extensibility is available for any workload or project type. If your project provides the necessary MSBuild targets, you can leverage this interactive device selection experience your own scenarios.
 
-![GIF of `dotnet run` selections on Windows for Android](media/dotnet-11/dotnet-run-android-preview1.gif)
+![GIF of `dotnet run` selections on Windows for Android](media/dotnet-run-android-preview1.gif)
 
-![GIF of `dotnet run` selections on macOS for iOS](media/dotnet-11/dotnet-run-ios-preview1.gif)
+![GIF of `dotnet run` selections on macOS for iOS](media/dotnet-run-ios-preview1.gif)
 
 ### `dotnet test`: Positional arguments
 
