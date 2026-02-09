@@ -79,7 +79,6 @@ Console.WriteLine(parsed.ProjectImportsCollectionMode); // None
 
 The `WriteLinesToFile` task now writes or appends content in a transactional way. New files are first created in a temporary location, then atomically moved to the final location. Appended-to files are atomically appended to using a `FileShare.Read` handle, so only one process can acquire the write lock at a time. Together, this should prevent errors during parallel builds where multiple processes may attempt to write to the same file concurrently. ([#12627](https://github.com/dotnet/msbuild/pull/12627))
 
-
 ### `MSBUILDDEBUGONSTART=3` for task hosts
 
 A new value `3` for the `MSBUILDDEBUGONSTART` environment variable allows developers to skip the debugger-attach prompt for TaskHost child processes, making it easier to debug the main MSBuild process without interruption from task host prompts. ([#12679](https://github.com/dotnet/msbuild/pull/12679))
