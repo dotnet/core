@@ -1,5 +1,13 @@
 # Step 2: Collect and Filter PRs
 
+## MCP response size
+
+GitHub MCP search tools that return large payloads get saved to temporary files on disk — reading those files back requires PowerShell commands that trigger approval prompts. Prevent this by keeping individual search result sets small:
+
+- Use **label-scoped searches** (e.g. `label:area-System.Text.Json`) instead of fetching all merged PRs at once.
+- Use `perPage: 30` or less for search queries. Only use `perPage: 100` for targeted queries that are expected to return few results.
+- If a search response is saved to a temp file anyway, use the `view` tool (with `view_range` for large files) to read it — **never** use PowerShell/shell commands to read or parse these files.
+
 ## Fetch Merged PRs
 
 Pull merged PRs in the date range from the specified repository, filtered to library areas. The primary method is the **GitHub MCP server** tools; fall back to the **GitHub CLI (`gh`)** if the MCP server is unavailable.
@@ -65,7 +73,33 @@ gh pr list --repo "$REPO" --state merged \
 
 ### Data storage
 
-Store all fetched PR data using the **SQL tool** (see [workflow.md](workflow.md) for schema). Do **not** write cache files to disk — disk I/O triggers approval prompts. Insert each PR into the `prs` table and use SQL queries for all subsequent filtering.
+Store all fetched PR data using the **SQL tool**. Do **not** write cache files to disk — disk I/O triggers approval prompts. Insert each PR into the `prs` table and use SQL queries for all subsequent filtering.
+
+```sql
+CREATE TABLE prs (
+    number INTEGER PRIMARY KEY,
+    title TEXT,
+    author TEXT,
+    author_association TEXT,
+    labels TEXT,           -- comma-separated label names
+    merged_at TEXT,
+    body TEXT,
+    reactions INTEGER DEFAULT 0,
+    is_library INTEGER DEFAULT 0,
+    is_candidate INTEGER DEFAULT 0
+);
+
+CREATE TABLE issues (
+    number INTEGER PRIMARY KEY,
+    title TEXT,
+    body TEXT,
+    labels TEXT,
+    reactions INTEGER DEFAULT 0,
+    pr_number INTEGER     -- the PR that references this issue
+);
+```
+
+Additional PRs can be added to the candidate list manually by number. Use [Enrich](data-3-enrich.md) to fetch their details.
 
 ## Filter to Library PRs
 

@@ -2,6 +2,14 @@
 
 For each library PR, fetch the full body (description) which contains benchmark data, API signatures, and motivation. Building on the PR data, fetch the details for issues referenced by or linked to the pull request — especially any issues resolved by the PR. Issues labeled `api-approved` represent new APIs being added and should be represented in the API diff if it was loaded. The issue often has a more detailed description than the PR, including API usage examples and a statement of impact/value. The final API shape (and usage example) might be somewhat out of date compared to what was approved and merged in the pull request, so usage examples may need to be revised.
 
+## MCP response size
+
+GitHub MCP search tools that return large payloads get saved to temporary files on disk — reading those files back requires PowerShell commands that trigger approval prompts. Prevent this by keeping individual search result sets small:
+
+- Use **label-scoped searches** (e.g. `label:area-System.Text.Json`) instead of fetching all merged PRs at once.
+- Use `perPage: 30` or less for search queries. Only use `perPage: 100` for targeted queries that are expected to return few results.
+- If a search response is saved to a temp file anyway, use the `view` tool (with `view_range` for large files) to read it — **never** use PowerShell/shell commands to read or parse these files.
+
 ## Fetch PR details — GitHub MCP server (primary)
 
 Use `pull_request_read` with method `get` to fetch each PR's full details:
