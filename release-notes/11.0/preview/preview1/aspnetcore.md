@@ -16,7 +16,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Unified startup options format for Blazor scripts](#unified-startup-options-format-for-blazor-scripts)
 - [`IHostedService` support in Blazor WebAssembly](#ihostedservice-support-in-blazor-webassembly)
 - [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
-- [Opt-in metrics and tracing for Blazor WebAssembly](#opt-in-metrics-and-tracing-for-blazor-webassembly)
+- [Blazor WebAssembly component metrics and tracing](#blazor-webassembly-component-metrics-and-tracing)
 - [Docker support in Blazor Web App template](#docker-support-in-blazor-web-app-template)
 - [FileContentResult support in OpenAPI](#filecontentresult-support-in-openapi)
 - [`IOutputCachePolicyProvider`](#ioutputcachepolicyprovider)
@@ -418,23 +418,9 @@ var featureFlag = builder.Configuration["ENABLE_FEATURE_X"];
 
 Environment variables are loaded into the configuration system alongside other configuration sources like `appsettings.json`, providing a unified way to access configuration values regardless of their source.
 
-## Opt-in metrics and tracing for Blazor WebAssembly
+## Blazor WebAssembly component metrics and tracing
 
-Blazor WebAssembly now supports opt-in metrics and distributed tracing through OpenTelemetry. This enables monitoring and observability for WebAssembly applications, providing insights into client-side performance and behavior.
-
-```csharp
-builder.Services.AddOpenTelemetry()
-    .WithMetrics(metrics =>
-    {
-        metrics.AddBlazorWebAssemblyInstrumentation();
-    })
-    .WithTracing(tracing =>
-    {
-        tracing.AddBlazorWebAssemblyInstrumentation();
-    });
-```
-
-Applications can export telemetry data to observability platforms for analysis, helping developers understand client-side performance characteristics and diagnose issues in production.
+Blazor WebAssembly apps now provide component specific metrics and tracing when support for metrics has been enabled in the runtime.
 
 ## Docker support in Blazor Web App template
 
