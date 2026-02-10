@@ -20,7 +20,6 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Enable container support in Blazor Web App template](#enable-container-support-in-blazor-web-app-template)
 - [OpenAPI schema support for binary file responses](#openapi-schema-support-for-binary-file-responses)
 - [`IOutputCachePolicyProvider`](#ioutputcachepolicyprovider)
-- [`TimeProvider` in ASP.NET Core Identity](#timeprovider-in-aspnet-core-identity)
 - [Auto-trust development certificates in WSL](#auto-trust-development-certificates-in-wsl)
 
 ASP.NET Core updates in .NET 11 Preview 1:
@@ -492,23 +491,6 @@ public interface IOutputCachePolicyProvider
 ```
 
 Thank you [@lqlive](https://github.com/lqlive) for this contribution!
-
-## `TimeProvider` in ASP.NET Core Identity
-
-ASP.NET Core Identity now uses `TimeProvider` instead of `DateTime` and `DateTimeOffset` for all time-related operations. This makes Identity components more testable and enables better control over time in tests and specialized scenarios.
-
-```csharp
-// In tests
-var fakeTimeProvider = new FakeTimeProvider(
-    new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero));
-
-services.AddSingleton<TimeProvider>(fakeTimeProvider);
-services.AddIdentity<IdentityUser, IdentityRole>();
-
-// Identity will now use the fake time provider
-```
-
-Using `TimeProvider` makes it easier to write deterministic tests for time-sensitive Identity features like token expiration, lockout durations, and security stamp validation.
 
 ## Auto-trust development certificates in WSL
 
