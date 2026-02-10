@@ -320,7 +320,7 @@ app.MapRazorComponents<App>()
     });
 ```
 
-This provides a clean, type-safe API for configuring SignalR connection settings without needing to inspect endpoint metadata. The configuration is applied when the Blazor hub is mapped internally, matching the pattern already available with `MapBlazorHub`.
+This provides a clean, type-safe API for configuring SignalR connection settings without needing to inspect endpoint metadata.
 
 ## Improved Blazor reconnection experience
 
