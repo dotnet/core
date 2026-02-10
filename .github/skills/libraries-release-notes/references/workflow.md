@@ -35,7 +35,7 @@ Pull all merged PRs in the date range from the specified repository. The primary
 
 ### 2a. Primary — GitHub MCP server
 
-Use `search_pull_requests` to query for merged PRs. Split the date range into batches if needed to stay within query result limits.
+Use `search_pull_requests` to query for merged PRs. The initial query should fetch **all** merged PRs in the date range without label filtering, to avoid missing PRs labeled with less-common area labels (e.g. `area-System.DateTime`, `area-System.Reflection.Emit`, `area-System.Globalization`). Split the date range into sub-ranges if needed to stay within GitHub's 1,000-result search limit.
 
 ```
 search_pull_requests(
@@ -46,7 +46,7 @@ search_pull_requests(
 )
 ```
 
-Page through results (incrementing `page`) until all PRs are collected. Repeat with subsequent date range batches as needed until all PRs from the date range have been collected.
+Page through results (incrementing `page`) until all PRs are collected. If a single date range returns close to 1,000 results, split into smaller sub-ranges (e.g. halve the range) and repeat. Do **not** restrict the initial search to specific area labels — label-based filtering happens later in Step 3.
 
 ### 2b. Fallback — GitHub CLI
 
@@ -76,12 +76,107 @@ Regardless of which method is used, cache files are stored under `.cache/<owner>
 
 ## Step 3: Filter to Library PRs
 
-From the merged set, keep only PRs where:
-- Files modifying `System.*` or `Microsoft.Extensions.*` APIs (either `ref` or `src` changes)
-- Exclude labels: `backport`, `servicing`, `NO-MERGE`
-- Exclude PRs whose title starts with `[release/` or contains `backport`
+### 3a. Label-based filtering
+
+From the merged set, keep only PRs that have a label matching any `area-System.*`, `area-Microsoft.Extensions*`, or `area-Extensions-*` pattern. Match the label prefix broadly — do **not** use a hard-coded list of specific area labels, as that risks missing PRs labeled with less-common areas (e.g. `area-System.DateTime`, `area-System.Reflection.Emit`, `area-System.Globalization`).
+
+**PRs without area labels.** PR labels cannot be entirely trusted — some PRs lack an `area-*` label altogether. Do not discard these PRs immediately. Instead, check their linked or related issues (from the PR description's "Fixes #..." references) for `area-*` labels. If a related issue carries a matching `area-System.*`, `area-Microsoft.Extensions*`, or `area-Extensions-*` label, include the PR in the candidate list.
+
+Additionally exclude:
+- Labels: `backport`, `servicing`, `NO-MERGE`
+- PRs whose title starts with `[release/` or contains `backport`
+- PRs that are purely test, CI, or documentation changes (no `src` changes)
+
+### 3b. Cross-reference with API diff
+
+If the API diff was loaded in Step 1, cross-reference the candidate PRs against the new APIs. For each new API or namespace in the diff, verify that at least one candidate PR covers it. If an API in the diff has **no matching PR**, search for the implementing PR explicitly:
+
+```
+search_pull_requests(
+  owner: "dotnet",
+  repo: "runtime",
+  query: "is:merged <API name or type name>"
+)
+```
+
+This catches PRs that were missed by the date range (merged slightly after the Code Complete date but before the release branch was cut) or that lacked a recognized area label. Add any discovered PRs to the candidate list.
+
+Also use the API diff to discover **issues** that drove new APIs. Many approved APIs originate from `api-approved` issues that may reference a broader feature story. Use `search_issues` to find related issues:
+
+```
+search_issues(
+  owner: "dotnet",
+  repo: "runtime",
+  query: "label:api-approved <API name or type name>"
+)
+```
+
+If such issues exist, trace them to their implementing PRs and ensure those PRs are in the candidate list.
+
+**Unmatched API surface area.** After cross-referencing, if any substantial new APIs in the diff still cannot be correlated to a PR or issue, include a placeholder section in the release notes for each unmatched API group. Use a `**TODO**` marker so the author can manually resolve it later. For example:
+
+```markdown
+## <New API or Feature Name>
+
+**TODO:** The API diff shows new surface area for `<Namespace.TypeName>` but the implementing PR/issue could not be found. Investigate and fill in this section.
+```
 
 Save to `$CACHE_DIR/library_prs.json`.
+
+### 3c. Verify changes are present in the release branch
+
+After filtering, verify that candidate changes actually shipped in the target release by checking the `dotnet/dotnet` Virtual Monolithic Repository (VMR). The VMR contains all .NET source code — including `dotnet/runtime` under `src/runtime/` — and its release branches represent what ships in each preview.
+
+**Determine the release branch name.** The expected branch name pattern is:
+
+```
+release/<MAJOR>.0.1xx-<prerelease>
+```
+
+For example:
+- .NET 11 Preview 1 → `release/11.0.1xx-preview1`
+- .NET 11 Preview 2 → `release/11.0.1xx-preview2`
+- .NET 11 RC 1 → `release/11.0.1xx-rc1`
+
+Use the GitHub MCP server (or CLI fallback) to verify the branch exists:
+
+```
+list_branches(
+  owner: "dotnet",
+  repo: "dotnet"
+)
+```
+
+If the expected branch is **not found**, search for branches matching `release/<MAJOR>.0*` and present the user with the matching branch names so they can select the correct one.
+
+**Spot-check that the newest changes are included.** Start from the most recently merged PRs in the candidate list and work backward. For each PR, verify its changes are present in the VMR release branch by either:
+
+1. **Searching for code** introduced by the PR in the `dotnet/dotnet` repo:
+
+   ```
+   search_code(
+     query: "repo:dotnet/dotnet path:src/runtime <distinctive symbol or text from the PR>"
+   )
+   ```
+
+2. **Checking commit history** on the release branch for runtime source code updates that post-date the PR merge:
+
+   ```
+   list_commits(
+     owner: "dotnet",
+     repo: "dotnet",
+     sha: "release/<MAJOR>.0.1xx-<prerelease>",
+     perPage: 30
+   )
+   ```
+
+   Look for commits with messages like `"Source code updates from dotnet/runtime"` dated after the PR's merge date. The dotnet-maestro bot regularly syncs changes from `dotnet/runtime` into the VMR.
+
+Stop checking after **2 consecutive PRs are confirmed present** — if the two newest changes made it into the release branch, older changes are also included.
+
+If any change is **not found** in the release branch, inform the user that the feature may not have been included in this preview release. Suggest either:
+- Moving that feature to the **next preview's** release notes
+- Confirming with the release team whether a late sync occurred
 
 ## Step 4: Deduplicate Against Previous Release Notes
 
@@ -110,7 +205,18 @@ For each candidate PR, check whether it (or its feature) already appears in a pr
 
 Remove any PR from the candidate list whose feature is already covered. A PR that was merged in the date range of a prior preview but was not included in that preview's release notes may still be included — only exclude PRs whose features were actually written up.
 
-### 4c. Handle cross-preview features
+### 4c. Flag earlier PRs that survived dedup
+
+If any PRs were removed during dedup, review the remaining candidate PRs that were merged **before** the previous release's Code Complete date (i.e. PRs whose merge date falls in the earlier portion of the date range). These PRs were not found in the prior release notes but their merge dates suggest they *could* have been covered elsewhere. Present these PRs to the user and ask whether each should be included or excluded. For example:
+
+> The following PRs were merged before the .NET 11 Preview 1 Code Complete date but were **not** found in any prior release notes. They may have been intentionally omitted or covered in a different document. Please confirm whether to include them:
+>
+> - #12345 — `Add Foo.Bar overload` (merged 2025-11-15)
+> - #12400 — `Optimize Baz serialization` (merged 2025-12-03)
+
+If no PRs were removed during dedup (i.e. nothing overlapped with prior notes), skip this sub-step — the earlier merge dates are expected given the date range and do not need user confirmation.
+
+### 4d. Handle cross-preview features
 
 Some features span multiple PRs across previews (e.g. a Preview 1 PR adds the core API and a Preview 2 PR extends it). In these cases:
 
@@ -134,7 +240,7 @@ pull_request_read(
 )
 ```
 
-Multiple independent PR reads can be issued in parallel for efficiency.
+Multiple independent PR reads can be issued in parallel for efficiency. The PR response includes a `reactions` object with counts for each reaction type (e.g. `+1`, `heart`, `rocket`). Record the **total reaction count** for each PR as a popularity signal — PRs with high reaction counts indicate strong community interest.
 
 After fetching PR details, also fetch the PR's comments to look for **Copilot-generated summaries**. Copilot often posts a comment on PRs that summarizes the changes, intent, and impact — this can provide a concise understanding of the PR that complements the (sometimes lengthy or template-heavy) PR description.
 
@@ -203,7 +309,7 @@ issue_read(
 )
 ```
 
-Multiple independent issue reads can be issued in parallel for efficiency. Prioritize fetching issues that are:
+Multiple independent issue reads can be issued in parallel for efficiency. The issue response includes a `reactions` object — record the **total reaction count** for each issue. Combine the PR and issue reaction counts to form an overall **popularity score** for each feature (sum of all `+1`, `heart`, `rocket`, and other positive reactions across the PR and its linked issues). Prioritize fetching issues that are:
 
 - Referenced by a `Fixes`/`Closes`/`Resolves` keyword (these are the resolved issues)
 - Labeled `api-approved` (these contain the approved API shape and usage examples)
