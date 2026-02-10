@@ -1,11 +1,32 @@
 # ASP.NET Core in .NET 11 Preview 1 - Release Notes
 
-Here's a summary of what's new in ASP.NET Core in this preview release.
+Here's a summary of what's new in ASP.NET Core in this preview release:
 
-ASP.NET Core updates in .NET 11:
+- [EnvironmentBoundary component](#environmentboundary-component)
+- [Label component for forms](#label-component-for-forms)
+- [DisplayName component](#displayname-component)
+- [QuickGrid `OnRowClick` event](#quickgrid-onrowclick-event)
+- [Relative navigation with `RelativeToCurrentUri`](#relative-navigation-with-relativetocurrenturi)
+- [`GetUriWithHash()` extension method](#geturiwithhash-extension-method)
+- [BasePath component](#basepath-component)
+- [MathML namespace support](#mathml-namespace-support)
+- [`InvokeVoidAsync()` analyzer](#invokevoidasync-analyzer)
+- [`IComponentPropertyActivator`](#icomponentpropertyactivator)
+- [SignalR `ConfigureConnection` for Interactive Server components](#signalr-configureconnection-for-interactive-server-components)
+- [Unified startup options format for Blazor scripts](#unified-startup-options-format-for-blazor-scripts)
+- [`IHostedService` support in Blazor WebAssembly](#ihostedservice-support-in-blazor-webassembly)
+- [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
+- [Blazor WebAssembly component metrics and tracing](#blazor-webassembly-component-metrics-and-tracing)
+- [Enable container support in Blazor Web App template](#enable-container-support-in-blazor-web-app-template)
+- [OpenAPI schema support for binary file responses](#openapi-schema-support-for-binary-file-responses)
+- [`IOutputCachePolicyProvider`](#ioutputcachepolicyprovider)
+- [Auto-trust development certificates in WSL](#auto-trust-development-certificates-in-wsl)
 
-- [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11.0) documentation.
-- [Breaking changes](https://learn.microsoft.com/dotnet/core/compatibility/11.0#aspnet-core)
+ASP.NET Core updates in .NET 11 Preview 1:
+
+- [Release notes](aspnetcore.md)
+- [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11) documentation.
+- [Breaking changes](https://learn.microsoft.com/aspnet/core/breaking-changes/11/overview)
 - [Roadmap](https://github.com/dotnet/aspnetcore/issues/59443)
 
 .NET 11 Preview 1:
@@ -13,4 +34,497 @@ ASP.NET Core updates in .NET 11:
 - [Discussion](https://aka.ms/dotnet/11/preview1)
 - [Release notes](README.md)
 
-This Preview 1 release does not contain new ASP.NET Core feature additions.
+## EnvironmentBoundary component
+
+Blazor now includes a built-in `EnvironmentBoundary` component for conditional rendering based on the hosting environment. This component is similar to the MVC environment tag helper and provides a consistent way to render content based on the current environment across both server and WebAssembly hosting models.
+
+The `EnvironmentBoundary` component accepts `Include` and `Exclude` parameters for specifying environment names. The component performs case-insensitive matching and follows the same semantics as the MVC `EnvironmentTagHelper`.
+
+```razor
+@using Microsoft.AspNetCore.Components.Web
+
+<EnvironmentBoundary Include="Development">
+    <div class="alert alert-warning">
+        Debug mode enabled
+    </div>
+</EnvironmentBoundary>
+
+<EnvironmentBoundary Include="Development,Staging">
+    <p>Pre-production environment</p>
+</EnvironmentBoundary>
+
+<EnvironmentBoundary Exclude="Production">
+    <p>@DateTime.Now</p>
+</EnvironmentBoundary>
+```
+
+The component works consistently in both Blazor Server and Blazor WebAssembly scenarios by injecting `IHostEnvironment`, eliminating the need for manual environment checks and conditional logic.
+
+## Label component for forms
+
+A new `Label` component has been added to Blazor forms that renders accessible labels with support for both nested and non-nested patterns. The component automatically extracts display names from `[Display]` or `[DisplayName]` attributes, falling back to the property name if no attributes are present.
+
+The `Label` component supports two common label-input association patterns:
+
+**Nested pattern** (implicit association):
+
+```razor
+<Label For="() => model.Name">
+    <InputText @bind-Value="model.Name" />
+</Label>
+```
+
+Renders:
+
+```html
+<label>
+    Name
+    <input value="..." />
+</label>
+```
+
+**Non-nested pattern** (for/id association):
+
+```razor
+<Label For="() => model.Name" />
+<InputText @bind-Value="model.Name" />
+```
+
+Renders:
+
+```html
+<label for="Name">Name</label>
+<input id="Name" value="..." />
+```
+
+The component works seamlessly with existing form validation and all built-in input components, which now automatically generate `id` attributes.
+
+## DisplayName component
+
+The new `DisplayName` component provides a way to display property names from metadata attributes in Blazor applications, bringing feature parity with MVC's `@Html.DisplayNameFor()` helper. This component reads display names from `[Display]` and `[DisplayName]` attributes with proper localization support.
+
+```razor
+@using Microsoft.AspNetCore.Components.Forms
+
+<EditForm Model="product">
+    <div class="form-group">
+        <label>
+            <DisplayName For="() => product.Name" />
+            <InputText @bind-Value="product.Name" />
+        </label>
+    </div>
+</EditForm>
+```
+
+The component is particularly useful for table headers:
+
+```razor
+<table>
+    <thead>
+        <tr>
+            <th><DisplayName For="() => product.Name" /></th>
+            <th><DisplayName For="() => product.Price" /></th>
+            <th><DisplayName For="() => product.ReleaseDate" /></th>
+        </tr>
+    </thead>
+</table>
+```
+
+The `DisplayName` component checks for `DisplayAttribute.Name` first, then falls back to `DisplayNameAttribute.DisplayName`, and finally uses the property name itself if no attributes are present. This eliminates hardcoded label text and makes localization easier.
+
+## QuickGrid `OnRowClick` event
+
+The `QuickGrid` component now supports row click events through the new `OnRowClick` parameter. When set, the grid automatically applies appropriate styling (cursor pointer) and invokes the callback with the clicked item.
+
+```razor
+<QuickGrid Items="@people.AsQueryable()" OnRowClick="@HandleRowClick">
+    <PropertyColumn Property="@(p => p.Name)" />
+    <PropertyColumn Property="@(p => p.Email)" />
+</QuickGrid>
+
+@code {
+    private List<Person> people = new()
+    {
+        new(1, "Alice Smith", "alice@example.com", "Engineering"),
+        new(2, "Bob Johnson", "bob@example.com", "Marketing"),
+        new(3, "Carol Williams", "carol@example.com", "Engineering"),
+    };
+
+    void HandleRowClick(Person person)
+    {
+        NavigationManager.NavigateTo($"/person/{person.Id}");
+    }
+}
+```
+
+The feature includes built-in CSS styling that applies a pointer cursor to clickable rows through the `row-clickable` CSS class, providing clear visual feedback to users.
+
+## Relative navigation with `RelativeToCurrentUri`
+
+Blazor's `NavigationManager.NavigateTo()` and `NavLink` component now support relative URI navigation through the new `RelativeToCurrentUri` parameter. This enables navigation to URIs relative to the current page path rather than the application's base URI.
+
+**NavigationManager:**
+
+```csharp
+// Navigate to a sibling page
+NavigationManager.NavigateTo("details.html", new NavigationOptions 
+{ 
+    RelativeToCurrentUri = true 
+});
+```
+
+**NavLink:**
+
+```razor
+<NavLink href="details.html" RelativeToCurrentUri="true">
+    View Details
+</NavLink>
+```
+
+When you're at `/docs/getting-started/installation.html` and navigate to `configuration.html` with `RelativeToCurrentUri = true`, you'll navigate to `/docs/getting-started/configuration.html` instead of `/configuration.html`. This is particularly useful for nested folder structures like documentation sites or file explorers.
+
+## `GetUriWithHash()` extension method
+
+A new `GetUriWithHash()` extension method has been added to `NavigationManager` for easily constructing URIs with hash fragments. This helper method provides an efficient, zero-allocation way to append hash fragments to the current URI.
+
+```csharp
+@inject NavigationManager Navigation
+
+<a href="@Navigation.GetUriWithHash("section-1")">
+    Jump to Section 1
+</a>
+
+@code {
+    void NavigateToSection(string sectionId)
+    {
+        var uri = Navigation.GetUriWithHash(sectionId);
+        Navigation.NavigateTo(uri);
+    }
+}
+```
+
+The method uses `string.Create` for optimal performance and works correctly with non-root base URIs (e.g., when using `<base href="/app/">`).
+
+## BasePath component
+
+Blazor Web applications can now use the `BasePath` component instead of manually specifying `<base href="">` in the HTML. This component automatically renders the correct base path based on the current request, making it easier to host apps under subpaths.
+
+```razor
+@using Microsoft.AspNetCore.Components.Endpoints
+
+<!DOCTYPE html>
+<html>
+<head>
+    <BasePath />
+    <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>
+```
+
+The component resolves the href from `NavigationManager.BaseUri` at runtime and falls back to `/` if the base URI cannot be parsed. This provides a first-class, framework-supported solution for apps hosted at paths like `/dashboard` or `/app`, eliminating the need for manual `<base>` element management or JavaScript workarounds.
+
+Note: Standalone Blazor WebAssembly apps should continue using the static `<base href="/" />` element.
+
+## MathML namespace support
+
+Blazor now properly supports MathML elements in interactive rendering. MathML elements like `<math>`, `<mrow>`, `<mi>`, and `<mn>` are now created with the correct namespace (`http://www.w3.org/1998/Math/MathML`) using `document.createElementNS()`, similar to how SVG elements are handled.
+
+```razor
+<math>
+    <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mfrac>
+            <mrow>
+                <mo>−</mo>
+                <mi>b</mi>
+                <mo>±</mo>
+                <msqrt>
+                    <mrow>
+                        <msup><mi>b</mi><mn>2</mn></msup>
+                        <mo>−</mo>
+                        <mn>4</mn>
+                        <mi>a</mi>
+                        <mi>c</mi>
+                    </mrow>
+                </msqrt>
+            </mrow>
+            <mrow>
+                <mn>2</mn>
+                <mi>a</mi>
+            </mrow>
+        </mfrac>
+    </mrow>
+</math>
+```
+
+This fix ensures that MathML content renders correctly in browsers when added dynamically through Blazor's renderer, resolving issues where MathML elements were previously being created as regular HTML elements without the proper namespace.
+
+## `InvokeVoidAsync()` analyzer
+
+A new Blazor analyzer (BL0010) has been added that recommends using `InvokeVoidAsync` instead of `InvokeAsync<object>` when calling JavaScript functions that don't return values. This analyzer helps developers write more efficient JSInterop code.
+
+**Problematic code:**
+
+```csharp
+// ⚠️ BL0010: Use InvokeVoidAsync for JavaScript functions that don't return a value
+await JSRuntime.InvokeAsync<object>("console.log", "Hello");
+```
+
+**Recommended code:**
+
+```csharp
+// ✅ Correct: Use InvokeVoidAsync
+await JSRuntime.InvokeVoidAsync("console.log", "Hello");
+```
+
+The analyzer helps catch performance issues where `InvokeAsync` is unnecessarily used with `object` or ignored return values, guiding developers toward the more appropriate `InvokeVoidAsync` method.
+
+## `IComponentPropertyActivator`
+
+Blazor now provides `IComponentPropertyActivator` for customizing how `[Inject]` properties are populated on components. This enables advanced scenarios like:
+
+- Providing additional context for property resolution
+- Support for custom DI containers that need to intercept property injection
+- Advanced scenarios requiring property injection customization
+
+```csharp
+public interface IComponentPropertyActivator
+{
+    Action<IServiceProvider, IComponent> GetActivator(
+        [DynamicallyAccessedMembers(Component)] Type componentType);
+}
+```
+
+The default implementation caches activators per component type, supports keyed services via `[Inject(Key = "...")]`, integrates with Hot Reload for cache invalidation, and includes proper trimming annotations for AOT compatibility.
+
+## SignalR `ConfigureConnection` for Interactive Server components
+
+Blazor now provides access to configure the underlying SignalR connection options when using Interactive Server components through the new `ConfigureConnection` property on `ServerComponentsEndpointOptions`. This enables configuration of `HttpConnectionDispatcherOptions` properties that were previously only accessible through workarounds.
+
+```csharp
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode(options =>
+    {
+        options.ConfigureConnection = dispatcherOptions =>
+        {
+            dispatcherOptions.CloseOnAuthenticationExpiration = true;
+            dispatcherOptions.AllowStatefulReconnects = true;
+            dispatcherOptions.ApplicationMaxBufferSize = 1024 * 1024;
+        };
+    });
+```
+
+This provides a clean, type-safe API for configuring SignalR connection settings without needing to inspect endpoint metadata.
+
+## Unified startup options format for Blazor scripts
+
+The `blazor.server.js` and `blazor.webassembly.js` scripts now accept the same nested options format used by `blazor.web.js`. This provides consistency across all Blazor hosting models and eliminates a potential source of confusion when working with different Blazor templates or migrating between hosting models.
+
+Previously, `blazor.web.js` used a nested structure with `circuit` and `webAssembly` properties, while `blazor.server.js` and `blazor.webassembly.js` expected options at the top level. Now all three scripts support both formats.
+
+**For Blazor Server (`blazor.server.js`):**
+
+```javascript
+// Both formats now work
+Blazor.start({
+    circuit: {
+        reconnectionOptions: {
+            retryIntervalMilliseconds: [0, 2000, 10000, 30000]
+        }
+    }
+});
+
+// Original format still supported
+Blazor.start({
+    reconnectionOptions: {
+        retryIntervalMilliseconds: [0, 2000, 10000, 30000]
+    }
+});
+```
+
+**For Blazor WebAssembly (`blazor.webassembly.js`):**
+
+```javascript
+// Both formats now work
+Blazor.start({
+    webAssembly: {
+        loadBootResource: function(type, name, defaultUri, integrity) {
+            // Custom resource loading logic
+            return defaultUri;
+        }
+    }
+});
+
+// Original format still supported
+Blazor.start({
+    loadBootResource: function(type, name, defaultUri, integrity) {
+        // Custom resource loading logic
+        return defaultUri;
+    }
+});
+```
+
+This change makes it easier to share code examples and documentation across different Blazor hosting models, and reduces friction when developers work with multiple Blazor application types or reference documentation intended for `blazor.web.js`.
+
+## `IHostedService` support in Blazor WebAssembly
+
+Blazor WebAssembly now supports `IHostedService` for running background services in the browser. This brings feature parity with Blazor Server and enables scenarios like periodic data refresh, real-time updates, or background processing.
+
+```csharp
+public class DataRefreshService : IHostedService
+{
+    private Timer? _timer;
+    
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _timer = new Timer(RefreshData, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+        return Task.CompletedTask;
+    }
+
+    private void RefreshData(object? state)
+    {
+        // Refresh data periodically
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _timer?.Dispose();
+        return Task.CompletedTask;
+    }
+}
+
+// Registration
+builder.Services.AddHostedService<DataRefreshService>();
+```
+
+Hosted services are started when the application starts and stopped when it shuts down, providing a clean lifecycle for background operations in WebAssembly applications.
+
+## Environment variables in Blazor WebAssembly configuration
+
+Blazor WebAssembly applications can now access environment variables through `IConfiguration`. This enables runtime configuration without rebuilding the application, making it easier to deploy the same build to different environments.
+
+```csharp
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+// Environment variables are automatically included in configuration
+var apiEndpoint = builder.Configuration["API_ENDPOINT"];
+var featureFlag = builder.Configuration["ENABLE_FEATURE_X"];
+```
+
+Environment variables are loaded into the configuration system alongside other configuration sources like `appsettings.json`, providing a unified way to access configuration values regardless of their source.
+
+## Blazor WebAssembly component metrics and tracing
+
+Blazor WebAssembly apps now provide component specific metrics and tracing when support for metrics has been enabled in the runtime.
+
+## Enable container support in Blazor Web App template
+
+The Blazor Web App project template now supports the "Enable container support" option in Visual Studio. This makes it easier to containerize Blazor Web Apps and deploy them to container orchestration platforms like Kubernetes or Azure Container Apps.
+
+## OpenAPI schema support for binary file responses
+
+OpenAPI document generation now properly supports generating descriptions for operations that return binary file responses. The new support maps the `FileContentResult` result type to an OpenAPI schema with `type: string` and `format: binary`. This support is available for both Minimal APIs and controller-based apps.
+
+The following example shows a Minimal API endpoint that returns binary content and uses the `Produces<T>` extension method with `T` of `FileContentResult` to specify the response type and content type.
+
+```csharp
+app.MapPost("/filecontentresult", () =>
+{
+    var content = "This endpoint returns a FileContentResult!"u8.ToArray();
+    return TypedResults.File(content);
+})
+.Produces<FileContentResult>(contentType: MediaTypeNames.Application.Octet);
+```
+
+In the generated OpenAPI document, the endpoint response is described like this:
+
+```yaml
+responses:
+  '200':
+    description: OK
+    content:
+      application/octet-stream:
+        schema:
+          $ref: '#/components/schemas/FileContentResult'
+```
+
+with `FileContentResult` defined in `components/schemas` as:
+
+```yaml
+components:
+  schemas:
+    FileContentResult:
+      type: string
+      format: binary
+```
+
+In a controller-based app, use the `ProducesResponseType<T>` attribute with `T` of `FileContentResult` to specify the response type and content type as shown in this example:
+
+```csharp
+[HttpPost("filecontentresult")]
+[ProducesResponseType<FileContentResult>(StatusCodes.Status200OK, MediaTypeNames.Application.Octet)]
+public IActionResult PostFileContentResult()
+{
+    var content = "This endpoint returns a FileContentResult!"u8.ToArray();
+    return new FileContentResult(content, MediaTypeNames.Application.Octet);
+}
+```
+
+This operation will have the same OpenAPI description as shown above.
+
+Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
+
+## `IOutputCachePolicyProvider`
+
+ASP.NET Core now provides the `IOutputCachePolicyProvider` interface for implementing custom output caching policy selection logic. This interface allows applications to determine the default base caching policy, check for the existence of named policies, and support advanced scenarios where policies must be resolved dynamically. Examples include loading policies from external configuration sources, databases, or applying tenant‑specific caching rules.
+
+```csharp
+public interface IOutputCachePolicyProvider
+{
+    IReadOnlyList<IOutputCachePolicy> GetBasePolicies();
+    ValueTask<IOutputCachePolicy?> GetPolicyAsync(string policyName);
+}
+```
+
+Thank you [@lqlive](https://github.com/lqlive) for this contribution!
+
+## Auto-trust development certificates in WSL
+
+The development certificate setup now automatically trusts certificates in WSL (Windows Subsystem for Linux) environments. When running `dotnet dev-certs https --trust` in WSL, the certificate is automatically installed and trusted in both the WSL environment and Windows, eliminating manual trust configuration.
+
+```bash
+# Automatically trusts certificates in both WSL and Windows
+dotnet dev-certs https --trust
+```
+
+This improvement streamlines the development experience when using WSL, removing a common friction point for developers working in Linux environments on Windows.
+
+Thank you [@StickFun](https://github.com/StickFun) for this contribution!
+
+## Community contributors
+
+Thank you contributors! ❤️
+
+- [@Anchels](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3AAnchels)
+- [@JoshuaCooper](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3AJoshuaCooper)
+- [@Kahbazi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3AKahbazi)
+- [@StickFun](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3AStickFun)
+- [@abatishchev](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Aabatishchev)
+- [@benhopkinstech](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Abenhopkinstech)
+- [@campersau](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Acampersau)
+- [@claudiogodoy99](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Aclaudiogodoy99)
+- [@daniloneto](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Adaniloneto)
+- [@desjoerd](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Adesjoerd)
+- [@divyeshio](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Adivyeshio)
+- [@feherzsolt](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Afeherzsolt)
+- [@fkucukkara](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Afkucukkara)
+- [@lqlive](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Alqlive)
+- [@manandre](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Amanandre)
+- [@marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Amarcominerva)
+- [@medhatiwari](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Amedhatiwari)
+- [@voroninp](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3Avoroninp)
+- [@xC0dex](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview1+author%3AxC0dex)
