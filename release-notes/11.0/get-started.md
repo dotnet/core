@@ -3,7 +3,7 @@
 
 To get started, [install the .NET 11 SDK](https://dotnet.microsoft.com/download/dotnet/11.0).
 
-If you're on Windows using Visual Studio, we recommend installing the latest [Visual Studio 2022 preview](https://visualstudio.microsoft.com/vs/preview/), or get started with Visual Studio Code and the [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) extension.
+If you're on Windows using Visual Studio, we recommend installing the latest [Visual Studio 2026 preview](https://visualstudio.microsoft.com/vs/preview/), or get started with Visual Studio Code and the [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) extension.
 
 ## .NET Workloads
 
