@@ -1,14 +1,10 @@
 # .NET 11
 
-.NET 11 is a [Short Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for three years from November 10, 2026 to November 14, 2028.
+[.NET 11](https://aka.ms/dotnet/11/preview1) is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported for two years, from November 10, 2026 to November 9, 2028, on multiple operating systems.
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/11.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
-- [Supported OSes](supported-os.md)
-- [OS packages](./os-packages.md)
-- [Known Issues](known-issues.md)
-- [Installation instructions](install.md)
 
 ## Release notes
 
@@ -18,45 +14,59 @@
 
 ### .NET Libraries
 
-- [What's new in .NET 11 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview#net-libraries)
 - [Preview 1](preview/preview1/libraries.md)
 
 ### .NET Runtime
 
-- [What's new in the .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime)
 - [Preview 1](preview/preview1/runtime.md)
 
 ### .NET SDK
 
-- [What's new in the SDK for .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/sdk)
 - [Preview 1](preview/preview1/sdk.md)
+
+### MSBuild
+
+- [Preview 1](preview/preview1/msbuild.md)
 
 ### C\#
 
-- [What's new in C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14)
+- [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/)
 - [Preview 1](preview/preview1/csharp.md)
+
+### F\#
+
+- [What's new in F#](https://learn.microsoft.com/dotnet/fsharp/whats-new/)
+- [Preview 1](preview/preview1/fsharp.md)
+
+### Visual Basic
+
+- [What's new in Visual Basic](https://learn.microsoft.com/dotnet/visual-basic/whats-new/)
+- [Preview 1](preview/preview1/visualbasic.md)
 
 ### ASP.NET Core
 
-- [What's new in ASP.NET Core 11.0](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11.0)
 - [Preview 1](preview/preview1/aspnetcore.md)
 
 ### .NET MAUI
 
-- [What's new in .NET MAUI for .NET 11](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-11)
+- [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/)
 - [Preview 1](preview/preview1/dotnetmaui.md)
 
 ### Entity Framework Core
 
-- [What's new in EF Core 11](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew)
+- [What's new in EF Core](https://learn.microsoft.com/ef/core/what-is-new/)
 - [Preview 1](preview/preview1/efcore.md)
 
 ### Windows Forms
 
-- [What's new in Windows Forms for .NET 11](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net110)
+- [What's new in Windows Forms](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/)
 - [Preview 1](preview/preview1/winforms.md)
 
 ### Windows Presentation Foundation (WPF)
 
-- [What's new in WPF for .NET 11](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net110)
+- [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/)
 - [Preview 1](preview/preview1/wpf.md)
+
+### Container images
+
+- [Preview 1](preview/preview1/containers.md)

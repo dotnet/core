@@ -4,4 +4,4 @@ You may encounter some known issues, which may include workarounds, mitigations,
 
 ## Covariant overrides of `Task`/`Task<T>` causes TypeLoadException
 
-Refactoring for the [Runtime-Async](https://github.com/dotnet/runtime/issues/109632) feature caused a bug in Task-returning methods with covariant returns. The bug has been fixed for Preview 2, but the fix did not make Preview 1. 
+Refactoring for the [Runtime-Async](https://github.com/dotnet/runtime/issues/109632) feature caused a bug in Task-returning methods with covariant returns. The bug has been fixed for Preview 2, but the fix did not make Preview 1.
