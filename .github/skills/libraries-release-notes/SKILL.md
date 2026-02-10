@@ -1,13 +1,13 @@
 ---
 name: libraries-release-notes
-description: Generate library preview release notes by fetching merged PRs from a GitHub repository, categorizing by impact, and producing formatted markdown with exact benchmark data and code examples.
+description: Generate .NET Libraries release notes by evaluating the release's API diff, fetching merged PRs from a GitHub repository, categorizing by area or theme, and producing formatted markdown with exact benchmark data and code examples.
 disable-model-invocation: true
 argument-hint: "[owner/repo]"
 ---
 
 # Release Notes Generator
 
-Generate library release notes for a given preview period.
+Generate .NET Libraries release notes for a given release.
 
 ## Inputs
 
@@ -21,7 +21,7 @@ Then ask for:
 
 ## Process
 
-1. Follow the [data pipeline](references/workflow.md) to fetch, cache, and filter PRs.
+1. Follow the [data pipeline](references/workflow.md) to fetch, cache, and filter the API diff, pull requests, and backing issues.
 2. Follow the [formatting rules](references/format-template.md) to write the document.
 3. Follow the [editorial rules](references/editorial-rules.md) for benchmarks, attribution, and ranking.
 4. Confirm feature list with the user before finalizing.
