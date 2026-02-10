@@ -105,7 +105,7 @@ dotnet format --diagnostics VSTHRD111 --severity hidden
 Several new .NET code analyzers have been added in this release:
 
 | Analyzer ID | Description | PR |
-|-------------|-------------|-----|
+| --- | --- | --- |
 | [CA1517](https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1517) | Prefer `ReadOnlySpan<char>` over `string` for constant values | [#51216](https://github.com/dotnet/sdk/pull/51216) |
 | [CA1830](https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1830) | Prefer `StringBuilder.Append(char)` over `StringBuilder.Append(new string(char, int))` | [#51215](https://github.com/dotnet/sdk/pull/51215) |
 | [CA1876](https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1876) | Detect misuse of `AsParallel()` in `foreach` loops | [#51287](https://github.com/dotnet/sdk/pull/51287) |

@@ -282,7 +282,7 @@ var (q, r) = int.DivRem(-7, 2, DivisionRounding.Floor);         // q=-4, r=1
 The `DivisionRounding` enum supports five modes:
 
 | Mode | Description |
-|---|---|
+| --- | --- |
 | `Truncate` | Towards zero (default C# behavior) |
 | `Floor` | Towards negative infinity |
 | `Ceiling` | Towards positive infinity |

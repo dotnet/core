@@ -28,12 +28,12 @@
 
 - [Preview 1](preview/preview1/msbuild.md)
 
-### C#
+### C\#
 
 - [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/)
 - [Preview 1](preview/preview1/csharp.md)
 
-### F#
+### F\#
 
 - [What's new in F#](https://learn.microsoft.com/dotnet/fsharp/whats-new/)
 - [Preview 1](preview/preview1/fsharp.md)

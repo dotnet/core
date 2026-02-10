@@ -14,7 +14,7 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
 
 ## XAML source generation by default
 
-XAML source generation is now the default in .NET 11 for all .NET MAUI applications. This provides faster build times, debug performance, and release runtime performance. Debug build app behavior is consistent with release build app behavior. 
+XAML source generation is now the default in .NET 11 for all .NET MAUI applications. This provides faster build times, debug performance, and release runtime performance. Debug build app behavior is consistent with release build app behavior.
 
 To temporarily revert to XAMLC, add this to you project file.
 
@@ -45,8 +45,8 @@ We have enhanced the .NET CLI with [Spectre.Console](https://spectreconsole.net/
 
 So, for multi-targeted projects like .NET MAUI, it will:
 
-* Prompt for a `$(TargetFramework)`
-* Prompt for a device, emulator, simulator if there are more than one.
+- Prompt for a `$(TargetFramework)`
+- Prompt for a device, emulator, simulator if there are more than one.
 
 Console output of your application should appear directly in the terminal, and Ctrl+C will terminate the application.
 
