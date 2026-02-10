@@ -39,7 +39,11 @@ Do not defer this check to the data pipeline — surface the warning as soon as 
 
 ## Execution guidelines
 
-- **Do not write intermediate files to disk.** All data fetching (PR lists, PR details, issue details) uses GitHub MCP server tools or the `gh` CLI, and results should be processed directly in memory. Use the **SQL tool** for structured storage and querying (see [workflow.md](references/workflow.md) for schema). Disk writes trigger unnecessary approval prompts.
+- **Avoid large MCP responses.** GitHub MCP search tools that return large payloads get saved to temporary files on disk — reading those files back requires PowerShell commands that trigger approval prompts. Prevent this by keeping individual search result sets small:
+  - Use **label-scoped searches** (e.g. `label:area-System.Text.Json`) instead of fetching all merged PRs at once. See [data-2-collect-prs.md](references/data-2-collect-prs.md) for the recommended approach.
+  - Use `perPage: 30` or less for search queries. Only use `perPage: 100` for targeted queries that are expected to return few results.
+  - If a search response is saved to a temp file anyway, use the `view` tool (with `view_range` for large files) to read it — **never** use PowerShell/shell commands to read or parse these files.
+- **Do not write intermediate files to disk.** Use the **SQL tool** for structured storage and querying (see [workflow.md](references/workflow.md) for schema).
 - **Do not use shell commands for data processing.** Filter and transform PR/issue data using the SQL tool or direct tool output — not PowerShell scripts that parse JSON files.
 - **Do not run linters, formatters, or validators.** Do not run markdownlint, prettier, link checkers, or any other validation tool on the output. The only output of this skill is the release notes markdown file itself.
 - **Maximize parallel tool calls.** Fetch multiple PR and issue details in a single response to minimize round trips.

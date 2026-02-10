@@ -2,22 +2,48 @@
 
 ## Fetch Merged PRs
 
-Pull all merged PRs in the date range from the specified repository. The primary method is the **GitHub MCP server** tools; fall back to the **GitHub CLI (`gh`)** if the MCP server is unavailable.
+Pull merged PRs in the date range from the specified repository, filtered to library areas. The primary method is the **GitHub MCP server** tools; fall back to the **GitHub CLI (`gh`)** if the MCP server is unavailable.
 
 ### Primary — GitHub MCP server
 
-Use `search_pull_requests` to query for merged PRs. The initial query should fetch **all** merged PRs in the date range without label filtering, to avoid missing PRs labeled with less-common area labels (e.g. `area-System.DateTime`, `area-System.Reflection.Emit`, `area-System.Globalization`). Split the date range into sub-ranges if needed to stay within GitHub's 1,000-result search limit.
+Use `search_pull_requests` with **label-scoped queries** to keep result sets small and avoid large responses being saved to temp files on disk (which then require shell commands to read — triggering approval prompts).
+
+Search for merged PRs one area label at a time. The most common library area labels are listed below, but also search with the broader `label:area-System.` prefix to catch less-common areas:
+
+```
+# Search per area label — one query per label, small result sets
+search_pull_requests(
+  owner: "dotnet",
+  repo: "runtime",
+  query: "is:merged merged:2026-01-26..2026-02-11 label:area-System.Text.Json",
+  perPage: 30
+)
+```
+
+**Recommended area labels to search** (run these in parallel batches):
+
+- `area-System.Text.Json`, `area-System.Net.Http`, `area-System.Collections`
+- `area-System.IO`, `area-System.IO.Compression`, `area-System.Threading`
+- `area-System.Numerics`, `area-System.Runtime`, `area-System.Memory`
+- `area-System.Security`, `area-System.Diagnostics`, `area-System.Globalization`
+- `area-System.Linq`, `area-System.Reflection`, `area-System.Reflection.Emit`
+- `area-System.Formats.*`, `area-System.Net.*`, `area-System.Text.*`
+- `area-Microsoft.Extensions.*`, `area-Extensions-*`
+
+After the label-scoped searches, do a **catch-all search** for any remaining library PRs that may use uncommon area labels. Use a broad query but keep `perPage` small:
 
 ```
 search_pull_requests(
   owner: "dotnet",
   repo: "runtime",
-  query: "is:merged merged:2025-12-01..2026-02-01",
-  perPage: 100
+  query: "is:merged merged:2026-01-26..2026-02-11 label:area-System",
+  perPage: 30
 )
 ```
 
-Page through results (incrementing `page`) until all PRs are collected. If a single date range returns close to 1,000 results, split into smaller sub-ranges (e.g. halve the range) and repeat. Do **not** restrict the initial search to specific area labels — label-based filtering happens later in the filtering step.
+Page through results (incrementing `page`) until all PRs for each query are collected. Deduplicate by PR number across all queries before inserting into the database.
+
+**PRs without area labels.** Some PRs lack an `area-*` label altogether. To catch these, also run a search without label filters but restricted to a short date range and `perPage: 30`. Check the title and description of unlabeled PRs for library-relevant content. If a PR references a library issue (via "Fixes #..." links), fetch the issue to check for `area-*` labels.
 
 ### Fallback — GitHub CLI
 
@@ -43,13 +69,9 @@ Store all fetched PR data using the **SQL tool** (see [workflow.md](workflow.md)
 
 ## Filter to Library PRs
 
-### Label-based filtering
+Since the search queries above are already scoped to library area labels, most results will be relevant. Apply these additional filters before marking PRs as candidates:
 
-From the merged set, keep only PRs that have a label matching any `area-System.*`, `area-Microsoft.Extensions*`, or `area-Extensions-*` pattern. Match the label prefix broadly — do **not** use a hard-coded list of specific area labels, as that risks missing PRs labeled with less-common areas (e.g. `area-System.DateTime`, `area-System.Reflection.Emit`, `area-System.Globalization`).
-
-**PRs without area labels.** PR labels cannot be entirely trusted — some PRs lack an `area-*` label altogether. Do not discard these PRs immediately. Instead, check their linked or related issues (from the PR description's "Fixes #..." references) for `area-*` labels. If a related issue carries a matching `area-System.*`, `area-Microsoft.Extensions*`, or `area-Extensions-*` label, include the PR in the candidate list.
-
-Additionally exclude:
+### Exclusion filters
 - Labels: `backport`, `servicing`, `NO-MERGE`
 - PRs whose title starts with `[release/` or contains `backport`
 - PRs that are purely test, CI, or documentation changes (no `src` changes)
