@@ -17,7 +17,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`IHostedService` support in Blazor WebAssembly](#ihostedservice-support-in-blazor-webassembly)
 - [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
 - [Blazor WebAssembly component metrics and tracing](#blazor-webassembly-component-metrics-and-tracing)
-- [Docker support in Blazor Web App template](#docker-support-in-blazor-web-app-template)
+- [Enable container support in Blazor Web App template](#enable-container-support-in-blazor-web-app-template)
 - [FileContentResult support in OpenAPI](#filecontentresult-support-in-openapi)
 - [`IOutputCachePolicyProvider`](#ioutputcachepolicyprovider)
 - [`TimeProvider` in ASP.NET Core Identity](#timeprovider-in-aspnet-core-identity)
@@ -422,17 +422,9 @@ Environment variables are loaded into the configuration system alongside other c
 
 Blazor WebAssembly apps now provide component specific metrics and tracing when support for metrics has been enabled in the runtime.
 
-## Docker support in Blazor Web App template
+## Enable container support in Blazor Web App template
 
-The Blazor Web App project template now supports the "Enable Docker" option in Visual Studio and other IDEs. This brings the Blazor Web App template in line with other ASP.NET Core project templates like MVC and Web API, which already had Docker support enabled.
-
-When creating a new Blazor Web App project, you can now:
-
-- Select "Enable Docker" during project creation in Visual Studio
-- Automatically generate a Dockerfile and .dockerignore configured for the Blazor Web App
-- Use Docker Compose support for multi-container scenarios
-
-This makes it easier to containerize Blazor Web App applications and deploy them to container orchestration platforms like Kubernetes or Azure Container Apps.
+The Blazor Web App project template now supports the "Enable container support" option in Visual Studio. This makes it easier to containerize Blazor Web Apps and deploy them to container orchestration platforms like Kubernetes or Azure Container Apps.
 
 ## FileContentResult support in OpenAPI
 
