@@ -5,6 +5,7 @@
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
 - [SDK](./sdk.md)
+- [MSBuild](./msbuild.md)
 
 ## Languages
 
