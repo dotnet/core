@@ -13,7 +13,6 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`InvokeVoidAsync()` analyzer](#invokevoidasync-analyzer)
 - [`IComponentPropertyActivator`](#icomponentpropertyactivator)
 - [SignalR `ConfigureConnection` for Interactive Server components](#signalr-configureconnection-for-interactive-server-components)
-- [Improved Blazor reconnection experience](#improved-blazor-reconnection-experience)
 - [Unified startup options format for Blazor scripts](#unified-startup-options-format-for-blazor-scripts)
 - [`IHostedService` support in Blazor WebAssembly](#ihostedservice-support-in-blazor-webassembly)
 - [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
@@ -321,19 +320,6 @@ app.MapRazorComponents<App>()
 ```
 
 This provides a clean, type-safe API for configuring SignalR connection settings without needing to inspect endpoint metadata.
-
-## Improved Blazor reconnection experience
-
-The Blazor reconnection experience has been enhanced to provide better feedback and more reliable reconnection behavior. The improvements include better handling of transient network issues and clearer visual feedback during reconnection attempts.
-
-The enhanced reconnection logic provides:
-
-- More intelligent retry strategies
-- Better handling of edge cases during reconnection
-- Improved visual feedback through the reconnection UI
-- Reduced false-positive disconnection notifications
-
-These improvements make Blazor applications more resilient to temporary network interruptions and provide a smoother user experience during connectivity issues.
 
 ## Unified startup options format for Blazor scripts
 
