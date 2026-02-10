@@ -22,17 +22,10 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`IOutputCachePolicyProvider`](#ioutputcachepolicyprovider)
 - [Auto-trust development certificates in WSL](#auto-trust-development-certificates-in-wsl)
 
-ASP.NET Core updates in .NET 11 Preview 1:
+ASP.NET Core updates in .NET 11:
 
-- [Release notes](aspnetcore.md)
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11) documentation.
-- [Breaking changes](https://learn.microsoft.com/aspnet/core/breaking-changes/11/overview)
 - [Roadmap](https://github.com/dotnet/aspnetcore/issues/59443)
-
-.NET 11 Preview 1:
-
-- [Discussion](https://aka.ms/dotnet/11/preview1)
-- [Release notes](README.md)
 
 ## EnvironmentBoundary component
 

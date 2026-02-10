@@ -5,6 +5,11 @@
 - [Collection expression arguments](#collection-expression-arguments)
 - [Extended layout support](#extended-layout-support)
 
+C# updates:
+
+- [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/) documentation
+- [Breaking changes](https://learn.microsoft.com/dotnet/csharp/whats-new/breaking-changes/)
+
 ## Collection expression arguments
 
 This feature supports scenarios where a collection expression doesn't produce the collection type you need. You might want to pre-allocate storage because you know how you'll use the collection. For sorted collections, you may want to specify a different expression to compare items in the collection. For dictionaries, you may need a different expression to compare or find keys.
@@ -26,8 +31,3 @@ This feature will integrate with [dictionary expressions](https://github.com/dot
 ## Extended layout support
 
 The C# compiler emits the `TypeAttributes.ExtendedLayout` for types that have the `System.Runtime.InteropServices.ExtendedLayoutAttribute` applied. This is primarily intended for the .NET runtime team to use for types in interop scenarios.
-
-C# updates:
-
-- [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/) documentation
-- [Breaking changes](https://learn.microsoft.com/dotnet/csharp/whats-new/breaking-changes/)

@@ -30,10 +30,8 @@ Instructions on getting started with .NET 11 can be found in the [getting starte
 
 You can find a detailed overview of all new features in .NET 11:
 
-- [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview)
 - [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/)
 - [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/)
-- [What's new in ASP.NET Core](https://learn.microsoft.com/aspnet/core/release-notes/)
 - [What's new in Entity Framework Core](https://learn.microsoft.com/ef/core/what-is-new/)
 - [What's new in Windows Forms](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/)
 - [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/)

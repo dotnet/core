@@ -50,9 +50,9 @@ So, for multi-targeted projects like .NET MAUI, it will:
 
 Console output of your application should appear directly in the terminal, and Ctrl+C will terminate the application.
 
-![GIF of `dotnet run` selections on Windows for Android](dotnet-run-android-preview1.gif)
+![GIF of `dotnet run` selections on Windows for Android](./media/dotnet-run-android-preview1.gif)
 
-![GIF of `dotnet run` selections on macOS for iOS](dotnet-run-ios-preview1.gif)
+![GIF of `dotnet run` selections on macOS for iOS](./media/dotnet-run-ios-preview1.gif)
 
 ## Contributors
 

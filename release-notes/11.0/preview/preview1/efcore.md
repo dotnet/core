@@ -11,6 +11,6 @@ Here's a summary of what's new in Entity Framework Core in this Preview 1 releas
 
 - [Complex types and JSON columns on entity types with TPT/TPC inheritance](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew.md#complex-types-and-json-columns-on-entity-types-with-tpttpc-inheritance)
 - [Create and apply migrations in one step](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew.md#create-and-apply-migrations-in-one-step)
-- [Azure Cosmos DB transactional batches]https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew.md#transactional-batches)
+- [Azure Cosmos DB transactional batches](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew.md#transactional-batches)
 - [Azure Cosmos DB bulk execution](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew.md#bulk-execution)
 - [Azure Cosmos DB session token management](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew.md#session-token-management)

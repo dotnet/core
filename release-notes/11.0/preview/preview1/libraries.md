@@ -24,10 +24,6 @@
 - [SOCKS5h Proxy Support in HttpClient](#socks5h-proxy-support-in-httpclient)
 - [Performance Improvements](#performance-improvements)
 
-.NET Libraries updates in .NET 11:
-
-- [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview) documentation
-
 ## Zstandard Compression Support
 
 [dotnet/runtime #119575](https://github.com/dotnet/runtime/pull/119575) adds native Zstandard (zstd) compression support to .NET through the new `ZstandardStream` class, `ZstandardEncoder`, and `ZstandardDecoder`.

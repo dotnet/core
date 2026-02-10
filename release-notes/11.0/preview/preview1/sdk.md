@@ -1,8 +1,6 @@
 # .NET SDK in .NET 11 Preview 1 - Release Notes
 
-.NET 11 Preview 1 includes new .NET SDK features & enhancements.
-
-Here's a summary of what's new in .NET SDK in this Preview 1 release:
+Here's a summary of what's new in .NET SDK in .NET 11 Preview 1:
 
 - [CLI command improvements](#cli-command-improvements)
   - [`dotnet run`: Interactive target framework and device selection](#dotnet-run-interactive-target-framework-and-device-selection)
