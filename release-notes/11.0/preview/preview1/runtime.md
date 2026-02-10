@@ -45,12 +45,6 @@ CoreCLR is now a target in the WebAssembly SDK and browser-hosted CoreCLR gained
 - **Globalization prerequisites**: browser-hosted CoreCLR can download ICU to support globalization scenarios. ([dotnet/runtime#121800](https://github.com/dotnet/runtime/pull/121800))
 - **JavaScript numeric interop**: enables BigInt support in browser-hosted CoreCLR on WASM. ([dotnet/runtime#121025](https://github.com/dotnet/runtime/pull/121025))
 
-### Node.js and corerun workflows
-
-- **CoreCLR `corerun` on Node.js**: enables Node.js as a host for CoreCLR-on-WASM corerun, including statically-linked dependencies, host filesystem access, and environment propagation. ([dotnet/runtime#119250](https://github.com/dotnet/runtime/pull/119250))
-- **More consistent `corewasmrun` builds**: aligns artifact layout for WASM’s corerun equivalent with other corerun scenarios, simplifying the workflow. ([dotnet/runtime#119029](https://github.com/dotnet/runtime/pull/119029))
-- **Support larger workloads**: allows linear-memory growth for corerun on WASM. ([dotnet/runtime#120844](https://github.com/dotnet/runtime/pull/120844))
-
 ### WebAssembly interop and execution features
 
 - **Call into `UnmanagedCallersOnly` from WASM**: adds support for calling `UnmanagedCallersOnly` functions on WASM via runtime-provided entry points similar to reverse P/Invoke stubs. ([dotnet/runtime#121359](https://github.com/dotnet/runtime/pull/121359))
