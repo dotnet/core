@@ -83,11 +83,45 @@ From the merged set, keep only PRs where:
 
 Save to `$CACHE_DIR/library_prs.json`.
 
-## Step 4: Fetch Pull Request and Related Issue Details
+## Step 4: Deduplicate Against Previous Release Notes
+
+Before fetching full PR details, check that candidate features have not already been covered in an earlier preview's release notes for the same major version.
+
+### 4a. Load prior release notes
+
+Load the `libraries.md` file from the immediately preceding release within the same major version. For example, when generating Preview 3, load Preview 2's notes; when generating RC1, load Preview 7's notes.
+
+When generating **Preview 1** release notes for a new major version, there are no prior previews to check. Instead, look back at the prior major version's late-cycle release notes — specifically RC1, RC2, and GA — since features that landed late in the previous release cycle may overlap with early work in the new version. For example, when generating .NET 12 Preview 1 notes, check:
+
+```
+release-notes/11.0/preview/rc1/libraries.md
+release-notes/11.0/preview/rc2/libraries.md
+release-notes/11.0/preview/ga/libraries.md
+```
+
+These files are in the local repository clone under `release-notes/<version>/preview/`.
+
+### 4b. Check for overlap
+
+For each candidate PR, check whether it (or its feature) already appears in a prior release's notes by looking for:
+
+- **PR number references** — search for `#<number>` or the full PR URL in prior files
+- **Feature names** — search for the API name, type name, or feature title (e.g. `IdnMapping`, `File.OpenNullHandle`, `Zstandard`)
+
+Remove any PR from the candidate list whose feature is already covered. A PR that was merged in the date range of a prior preview but was not included in that preview's release notes may still be included — only exclude PRs whose features were actually written up.
+
+### 4c. Handle cross-preview features
+
+Some features span multiple PRs across previews (e.g. a Preview 1 PR adds the core API and a Preview 2 PR extends it). In these cases:
+
+- If the Preview 2 PR is a **substantial extension** (new overloads, new scenarios, significant perf improvement on top of the original, or breaking changes to the API shape), include it as an update referencing the earlier work.
+- If the Preview 2 PR is a **minor follow-up** (bug fix, test addition, doc comment), skip it.
+
+## Step 5: Fetch Pull Request and Related Issue Details
 
 For each library PR, fetch the full body (description) which contains benchmark data, API signatures, and motivation. Building on the PR data, fetch the details for issues referenced by or linked to the pull request — especially any issues resolved by the PR. Issues labeled `api-approved` represent new APIs being added and should be represented in the API diff if it was loaded. The issue often has a more detailed description than the PR, including API usage examples and a statement of impact/value. The final API shape (and usage example) might be somewhat out of date compared to what was approved and merged in the pull request, so usage examples may need to be revised.
 
-### 4a. Fetch PR details — GitHub MCP server (primary)
+### 5a. Fetch PR details — GitHub MCP server (primary)
 
 Use `pull_request_read` with method `get` to fetch each PR's full details:
 
@@ -115,11 +149,11 @@ pull_request_read(
 
 Look for comments authored by `copilot[bot]` or `github-actions[bot]` that contain a summary of the PR. These summaries are especially useful for large PRs where the description is auto-generated or sparse. Use this information to better understand the PR's purpose, but always cross-reference with the actual code changes and PR description for accuracy.
 
-### 4b. Discover related issues from the PR
+### 5b. Discover related issues from the PR
 
 There are two complementary ways to find issues that a PR resolves or references. Use both to build a complete picture.
 
-#### 4b-i. Parse the PR description for issue links
+#### 5b-i. Parse the PR description for issue links
 
 Scan the PR body text for issue references. Common patterns include:
 
@@ -130,7 +164,7 @@ Scan the PR body text for issue references. Common patterns include:
 
 Extract all unique issue numbers from these patterns. For Copilot-authored PRs, also look in the `<details>` / `<summary>Original prompt</summary>` collapsed section, which typically contains the original issue title, description, and a `Fixes` link at the bottom of the PR body.
 
-#### 4b-ii. Use the GitHub MCP server to find linked issues
+#### 5b-ii. Use the GitHub MCP server to find linked issues
 
 Use `search_issues` to find issues that reference the PR or that the PR resolves:
 
@@ -156,7 +190,7 @@ search_issues(
 
 If any discovered issue carries the `api-approved` label, pay extra attention to both that issue and its associated PR. The `api-approved` issue typically contains the approved API shape, usage examples, motivation, and discussion from the API review — all of which are valuable background for writing compelling release notes.
 
-### 4c. Fetch issue details
+### 5c. Fetch issue details
 
 For each discovered issue number, use `issue_read` with method `get`:
 
@@ -181,7 +215,7 @@ The issue body often contains richer context than the PR, including:
 - **Upvote counts** (via reactions) that indicate community demand
 - **Discussion comments** that may contain approved API shapes from API review
 
-### 4d. Fallback — GitHub CLI
+### 5d. Fallback — GitHub CLI
 
 If the GitHub MCP server is not available, use the `gh` CLI:
 
@@ -200,7 +234,7 @@ To find issues closed by a PR via the CLI:
 gh search issues --repo "$REPO" --state closed "linked:pr <PR number or search terms>"
 ```
 
-## Step 5: Categorize by Area/Theme/Impact
+## Step 6: Categorize by Area/Theme/Impact
 
 Group PRs into tiers:
 - **Headline features**: New namespaces or types, implementations of new industry trends/algorithms, major new API surfaces
