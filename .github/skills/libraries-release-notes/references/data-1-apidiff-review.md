@@ -1,5 +1,7 @@
 # Step 1: Analyze API Diff
 
+> **Note:** The [early API diff check](../SKILL.md#early-api-diff-check) in SKILL.md verifies that both the current and previous release API diffs exist *before* the data pipeline starts. By the time this step executes, the user has already been warned about any missing diffs and has chosen to proceed. If a diff is missing, skip the corresponding load step below but continue with the rest of the pipeline.
+
 ## Locate the API diff
 
 Locate and load the `Microsoft.NETCore.App` API diff for the target release. The API diff provides context about which APIs were added or changed and significantly improves the quality of the generated release notes.
@@ -8,8 +10,6 @@ The API diff lives under the `release-notes` folder within an `api-diff` subfold
 * .NET 10 RC 2: `release-notes/10.0/preview/rc2/api-diff/Microsoft.NETCore.App/10.0-RC2.md`
 * .NET 10 GA: `release-notes/10.0/preview/ga/api-diff/Microsoft.NETCore.App/10.0-ga.md`
 * .NET 11 Preview 1: `release-notes/11.0/preview/preview1/api-diff/Microsoft.NETCore.App/11.0-preview1.md`
-
-Check the `release-notes/` folder in the current repository clone for the API diff. If it is not present locally, **warn the user** that the release notes generation gains substantial context from the API diff and suggest generating release notes after the API diff is ready. The user may choose to proceed without it, but quality will be reduced.
 
 ## Load the API diff
 

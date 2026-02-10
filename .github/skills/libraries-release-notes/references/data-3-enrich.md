@@ -114,3 +114,5 @@ To find issues closed by a PR via the CLI:
 # Search for closed issues linked to the PR
 gh search issues --repo "$REPO" --state closed "linked:pr <PR number or search terms>"
 ```
+
+Store all fetched details using the **SQL tool** (update `body` and `reactions` columns in the `prs` table; insert into the `issues` table). Do **not** write intermediate files to disk.

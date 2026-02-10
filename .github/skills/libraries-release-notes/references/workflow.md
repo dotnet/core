@@ -33,19 +33,32 @@ Write the release notes document.
 | 3.2 | **Format** — Apply the document structure and section layout | [author-2-format.md](author-2-format.md) |
 | 3.3 | **Editorial** — Apply rules for benchmarks, attribution, naming, and ranking | [author-3-editorial.md](author-3-editorial.md) |
 
-## Cache Directory Structure
+## Data Storage
 
-```
-.cache/
-└── <owner>/
-    └── <repo>/
-        ├── all_merged_prs.json      # Raw merged PR list
-        ├── batch1.json              # First date range batch
-        ├── batch2.json              # Second date range batch
-        ├── library_prs.json         # Filtered to library-area PRs
-        ├── pr_details.json          # Full PR bodies keyed by number
-        ├── issue_details.json       # Full issue bodies keyed by number
-        └── coauthors.txt            # Copilot PR → assignee mapping
+Keep all intermediate data **in memory** — do not write cache files to disk. Use the **SQL tool** to store and query PR and issue data across steps:
+
+```sql
+CREATE TABLE prs (
+    number INTEGER PRIMARY KEY,
+    title TEXT,
+    author TEXT,
+    author_association TEXT,
+    labels TEXT,           -- comma-separated label names
+    merged_at TEXT,
+    body TEXT,
+    reactions INTEGER DEFAULT 0,
+    is_library INTEGER DEFAULT 0,
+    is_candidate INTEGER DEFAULT 0
+);
+
+CREATE TABLE issues (
+    number INTEGER PRIMARY KEY,
+    title TEXT,
+    body TEXT,
+    labels TEXT,
+    reactions INTEGER DEFAULT 0,
+    pr_number INTEGER     -- the PR that references this issue
+);
 ```
 
-Always check if cache files exist before re-fetching. Only re-fetch if the user asks to refresh or the date range changes.
+This avoids shell commands for file I/O, which trigger unnecessary approval prompts. All filtering, dedup, and enrichment queries can run directly against these tables.

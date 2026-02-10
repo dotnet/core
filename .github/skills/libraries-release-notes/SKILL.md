@@ -11,15 +11,38 @@ Generate .NET Libraries release notes for a given release.
 
 ## Inputs
 
-If `$ARGUMENTS` is provided, use `$0` as the repository. Otherwise ask the user for:
-1. **Repository** — GitHub `owner/repo` to pull PRs from (e.g. `dotnet/runtime`)
+If `$ARGUMENTS` is provided, use `$0` as the repository. Otherwise ask the user for the **repository** (`owner/repo`, e.g. `dotnet/runtime`).
 
-Then ask for:
-2. **Preview name** (e.g. ".NET 11 Preview 1")
-3. **Date range** — ask for the start and end dates separately using the .NET release calendar's "Code complete" milestones:
-   - **Start date**: Ask for the Code Complete date of the *previous* release. For example, when generating .NET 11 Preview 2 notes, ask: *"What is the Code Complete date for .NET 11 Preview 1? (ISO 8601, e.g. 2026-01-27)"*. When generating **Preview 1** notes, ask for the *previous major version's* RC1 Code Complete date instead (e.g. *"What is the Code Complete date for .NET 10 RC1?"*), since that is when the vNext fork occurs. Reassure the user that anything already covered in the prior version's RC1, RC2, or GA release notes will be de-duplicated in the [verify scope](references/verify-1-dedupe.md) step.
-   - **End date**: Ask for the Code Complete date of the *current* release. For example: *"What is the Code Complete date for .NET 11 Preview 1?"*
-4. **Output file** — path for the release notes markdown (default: `release-notes/11.0/preview/preview1/libraries.md`)
+Collect inputs **one at a time** — ask a single question, wait for the answer, then ask the next. After each response, acknowledge what has been collected so far and ask for the next missing input:
+
+1. **Preview name** (e.g. ".NET 11 Preview 2")
+2. **Start date** — ask: *"What was the Code Complete date for the previous release, `<previous preview name>`?"* (ISO 8601). For **Preview 1**, this is the prior major version's RC1 Code Complete date (the vNext fork point); anything already covered in RC1/RC2/GA release notes will be de-duplicated in the [verify scope](references/verify-1-dedupe.md) step.
+3. **End date** — ask: *"What was the Code Complete date for `<this preview name>`? (If it hasn't occurred yet, provide the expected date.)"* (ISO 8601)
+4. **Output file** — path for the release notes markdown (default: `release-notes/<version>/preview/<preview>/libraries.md`)
+
+Once all inputs are collected, **check for API diffs before proceeding** (see below), then start the data pipeline without further confirmation.
+
+## Early API Diff Check
+
+Before starting the data pipeline, verify that the required API diffs are present in the local repository clone. Check for both:
+
+1. **Current release API diff** — e.g. `release-notes/<version>/preview/<preview>/api-diff/Microsoft.NETCore.App/`
+2. **Previous release API diff** — e.g. `release-notes/<version>/preview/<previous-preview>/api-diff/Microsoft.NETCore.App/` (used during [deduplication](references/verify-1-dedupe.md) and cross-referencing)
+
+If **either** API diff directory is missing or empty:
+
+- **Warn the user immediately**, specifying which diff is missing and the expected path.
+- Explain that the API diff significantly improves the quality of the release notes by enabling accurate cross-referencing of new APIs with implementing PRs.
+- Ask whether to proceed without it or wait until the API diff is available.
+
+Do not defer this check to the data pipeline — surface the warning as soon as inputs are collected so the user can decide early whether to generate the API diff first.
+
+## Execution guidelines
+
+- **Do not write intermediate files to disk.** All data fetching (PR lists, PR details, issue details) uses GitHub MCP server tools or the `gh` CLI, and results should be processed directly in memory. Use the **SQL tool** for structured storage and querying (see [workflow.md](references/workflow.md) for schema). Disk writes trigger unnecessary approval prompts.
+- **Do not use shell commands for data processing.** Filter and transform PR/issue data using the SQL tool or direct tool output — not PowerShell scripts that parse JSON files.
+- **Do not run linters, formatters, or validators.** Do not run markdownlint, prettier, link checkers, or any other validation tool on the output. The only output of this skill is the release notes markdown file itself.
+- **Maximize parallel tool calls.** Fetch multiple PR and issue details in a single response to minimize round trips.
 
 ## Process
 

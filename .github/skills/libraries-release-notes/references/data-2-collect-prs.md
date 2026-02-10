@@ -25,25 +25,21 @@ If the GitHub MCP server is not available, use the `gh` CLI instead. Verify avai
 
 ```bash
 REPO="dotnet/runtime"  # Set from user input
-CACHE_DIR=".cache/${REPO}"
-mkdir -p "$CACHE_DIR"
 
 # First batch (newer half of range)
 gh pr list --repo "$REPO" --state merged \
   --search "merged:2025-12-01..2026-02-01" \
-  --limit 1000 --json number,title,labels,author,mergedAt,url \
-  > "$CACHE_DIR/batch1.json"
+  --limit 1000 --json number,title,labels,author,mergedAt,url
 
 # Second batch (older half of range)
 gh pr list --repo "$REPO" --state merged \
   --search "merged:2025-10-01..2025-12-01" \
-  --limit 1000 --json number,title,labels,author,mergedAt,url \
-  > "$CACHE_DIR/batch2.json"
+  --limit 1000 --json number,title,labels,author,mergedAt,url
 ```
 
-### Caching
+### Data storage
 
-Regardless of which method is used, cache files are stored under `.cache/<owner>/<repo>/` so multiple repositories can be cached side-by-side without collision. Merge batches into `$CACHE_DIR/all_merged_prs.json`. This is the authoritative cached dataset — all subsequent steps read from cache.
+Store all fetched PR data using the **SQL tool** (see [workflow.md](workflow.md) for schema). Do **not** write cache files to disk — disk I/O triggers approval prompts. Insert each PR into the `prs` table and use SQL queries for all subsequent filtering.
 
 ## Filter to Library PRs
 
@@ -92,4 +88,4 @@ If such issues exist, trace them to their implementing PRs and ensure those PRs 
 **TODO:** The API diff shows new surface area for `<Namespace.TypeName>` but the implementing PR/issue could not be found. Investigate and fill in this section.
 ```
 
-Save to `$CACHE_DIR/library_prs.json`.
+Mark matching PRs as candidates in the SQL `prs` table (`is_candidate = 1`).
