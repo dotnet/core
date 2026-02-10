@@ -2,7 +2,6 @@
 
 # Prerequisites:
 # - PowerShell 7.0 or later
-# - Azure CLI (az) installed and logged in (required for authenticated Azure DevOps feeds): Run 'az login' before using private feeds
 
 # Usage:
 
@@ -252,8 +251,7 @@ Function DiscoverVersionFromFeed {
 
     Write-Color cyan "Discovering $label version from feed '$feedUrl'..."
 
-    $headers = GetAuthHeadersForFeed $feedUrl
-    $serviceIndex = Invoke-RestMethod -Uri $feedUrl -Headers $headers
+    $serviceIndex = Invoke-RestMethod -Uri $feedUrl
     $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
 
     If (-not $flatContainer) {
@@ -262,7 +260,7 @@ Function DiscoverVersionFromFeed {
 
     $baseUrl = $flatContainer.'@id'
     $versionsUrl = "${baseUrl}microsoft.netcore.app.ref/index.json"
-    $versionsResult = Invoke-RestMethod -Uri $versionsUrl -Headers $headers
+    $versionsResult = Invoke-RestMethod -Uri $versionsUrl
 
     If (-not $versionsResult.versions -or $versionsResult.versions.Count -eq 0) {
         Write-Error "No versions of Microsoft.NETCore.App.Ref found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
@@ -603,37 +601,6 @@ Function CreateReadme {
     }
 }
 
-Function GetAuthHeadersForFeed {
-    Param (
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $feedUrl
-    )
-
-    # Check if authentication is required (internal dnceng feeds)
-    if ($feedUrl -match "dnceng/internal") {
-        try {
-            # Try to get Azure DevOps token using az CLI
-            $token = az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query accessToken -o tsv 2>$null
-            if ($token) {
-                Write-Color cyan "Using Azure CLI authentication for internal Azure DevOps feed"
-                return @{
-                    Authorization = "Bearer $token"
-                }
-            }
-            else {
-                Write-Error "Could not get Azure DevOps token from Azure CLI. Please run 'az login' first." -ErrorAction Stop
-            }
-        }
-        catch {
-            Write-Error "Azure CLI not available or not logged in. Please run 'az login' first." -ErrorAction Stop
-        }
-    }
-    
-    return @{}
-}
-
 Function DownloadPackage {
     Param
     (
@@ -684,10 +651,9 @@ Function DownloadPackage {
     RecreateFolder $destinationFolder
 
     $refPackageName = "$fullSdkName.Ref"
-    $headers = GetAuthHeadersForFeed $nuGetFeed
 
     # Get service index and flat2 base URL (used for both version search and download)
-    $serviceIndex = Invoke-RestMethod -Uri $nuGetFeed -Headers $headers
+    $serviceIndex = Invoke-RestMethod -Uri $nuGetFeed
     $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
     $flatBaseUrl = If ($flatContainer) { $flatContainer.'@id' } Else { "" }
 
@@ -718,7 +684,7 @@ Function DownloadPackage {
             Write-Color cyan "Searching for package '$refPackageName' matching '$searchTerm' via flat2 in feed '$nuGetFeed'..."
 
             try {
-                $versionsResult = Invoke-RestMethod -Uri $versionsUrl -Headers $headers
+                $versionsResult = Invoke-RestMethod -Uri $versionsUrl
                 $matchingVersions = @($versionsResult.versions | Where-Object { $_ -Like $searchTerm } | Sort-Object -Descending)
 
                 If ($matchingVersions.Count -gt 0) {
@@ -745,7 +711,6 @@ Function DownloadPackage {
 
             $searchParams = @{
                 Uri = "$searchUrl`?q=$refPackageName&prerelease=true&take=1"
-                Headers = $headers
             }
 
             $searchResults = Invoke-RestMethod @searchParams
@@ -787,13 +752,7 @@ Function DownloadPackage {
         }
 
         Write-Color yellow "Downloading '$nupkgUrl' to '$nupkgFile'..."
-        
-        if ($headers.Count -gt 0) {
-            Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile -Headers $headers
-        }
-        else {
-            Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile
-        }
+        Invoke-WebRequest -Uri $nupkgUrl -OutFile $nupkgFile
         VerifyPathOrExit $nupkgFile
     }
     Else {

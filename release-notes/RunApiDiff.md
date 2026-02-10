@@ -5,7 +5,6 @@ The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script automatically generates an API c
 ## Prerequisites
 
 - PowerShell 7.0 or later
-- Azure CLI (`az login`) if using authenticated Azure DevOps feeds
 - The [Microsoft.DotNet.ApiDiff.Tool](https://www.nuget.org/packages/Microsoft.DotNet.ApiDiff.Tool). Install from the transport feed matching the version you're comparing, or use `-InstallApiDiff $true` to have the script install it automatically:
 
 ```
@@ -62,48 +61,25 @@ All version parameters can be auto-discovered. When no version information is pr
 
 ## Examples
 
-Simplest — infers the next version from existing api-diffs in the repository:
-
 ```powershell
+# Infer the previous version from the most recent existing api-diff
+# and infer the the current version to be the next version after it
 .\RunApiDiff.ps1
-```
 
-Explicit current version (previous defaults to latest GA on nuget.org):
+# Specify only the current version; previous is inferred from existing api-diffs
+.\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.2
 
-```powershell
-.\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1
-```
-
-Explicit version parameters (comparing .NET 10.0 Preview 7 to RC 1):
-
-```powershell
+# Specify both versions explicitly
 .\RunApiDiff.ps1 `
-   -PreviousMajorMinor 10.0 `
-   -PreviousPrereleaseLabel preview.7 `
-   -CurrentMajorMinor 10.0 `
-   -CurrentPrereleaseLabel rc.1
-```
+   -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 `
+   -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1
 
-With exact package versions (MajorMinor and PrereleaseLabel are extracted automatically):
-
-```powershell
+# Use exact NuGet package versions (MajorMinor and PrereleaseLabel are extracted automatically)
 .\RunApiDiff.ps1 `
    -PreviousVersion "10.0.0-preview.7.25380.108" `
    -CurrentVersion "10.0.0-rc.1.25451.107"
-```
 
-Specifying only a previous version — current is auto-discovered from its default feed, generating a diff of all APIs added since .NET 8.0:
-
-```powershell
-.\RunApiDiff.ps1 `
-   -PreviousVersion "8.0.0" `
-   -CurrentMajorMinor 11.0 `
-   -CurrentPrereleaseLabel preview.1
-```
-
-With a custom feed URL:
-
-```powershell
+# Use a custom feed for the current version's packages
 .\RunApiDiff.ps1 `
    -CurrentNuGetFeed "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/index.json"
 ```
