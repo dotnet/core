@@ -18,7 +18,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [Environment variables in Blazor WebAssembly configuration](#environment-variables-in-blazor-webassembly-configuration)
 - [Blazor WebAssembly component metrics and tracing](#blazor-webassembly-component-metrics-and-tracing)
 - [Enable container support in Blazor Web App template](#enable-container-support-in-blazor-web-app-template)
-- [FileContentResult support in OpenAPI](#filecontentresult-support-in-openapi)
+- [OpenAPI schema support for binary file responses](#openapi-schema-support-for-binary-file-responses)
 - [`IOutputCachePolicyProvider`](#ioutputcachepolicyprovider)
 - [`TimeProvider` in ASP.NET Core Identity](#timeprovider-in-aspnet-core-identity)
 - [Auto-trust development certificates in WSL](#auto-trust-development-certificates-in-wsl)
@@ -426,21 +426,56 @@ Blazor WebAssembly apps now provide component specific metrics and tracing when 
 
 The Blazor Web App project template now supports the "Enable container support" option in Visual Studio. This makes it easier to containerize Blazor Web Apps and deploy them to container orchestration platforms like Kubernetes or Azure Container Apps.
 
-## FileContentResult support in OpenAPI
+## OpenAPI schema support for binary file responses
 
-OpenAPI document generation now properly supports `FileContentResult` and `FileStreamResult` return types. The generated OpenAPI documents correctly represent file download endpoints with appropriate content types and response schemas.
+OpenAPI document generation now properly supports generating descriptions for operations that return binary file responses. The new support maps the `FileContentResult` result type to an OpenAPI schema with `type: string` and `format: binary`. This support is available for both Minimal APIs and controller-based apps.
+
+The following example shows a Minimal API endpoint that returns binary content and uses the `Produces<T>` extension method with `T` of `FileContentResult` to specify the response type and content type.
 
 ```csharp
-[HttpGet("download")]
-[ProducesResponseType<FileContentResult>(StatusCodes.Status200OK, "application/pdf")]
-public IActionResult DownloadPdf()
+app.MapPost("/filecontentresult", () =>
 {
-    var fileBytes = GeneratePdf();
-    return File(fileBytes, "application/pdf", "document.pdf");
+    var content = "This endpoint returns a FileContentResult!"u8.ToArray();
+    return TypedResults.File(content);
+})
+.Produces<FileContentResult>(contentType: MediaTypeNames.Application.Octet);
+```
+
+In the generated OpenAPI document, the endpoint response is described like this:
+
+```yaml
+responses:
+  '200':
+    description: OK
+    content:
+      application/octet-stream:
+        schema:
+          $ref: '#/components/schemas/FileContentResult'
+```
+
+with `FileContentResult` defined in `components/schemas` as:
+
+```yaml
+components:
+  schemas:
+    FileContentResult:
+      type: string
+      format: binary
+```
+
+In a controller-based app, use the `ProducesResponseType<T>` attribute with `T` of `FileContentResult` to specify the response type and content type as shown in this example:
+
+```csharp
+[HttpPost("filecontentresult")]
+[ProducesResponseType<FileContentResult>(StatusCodes.Status200OK, MediaTypeNames.Application.Octet)]
+public IActionResult PostFileContentResult()
+{
+    var content = "This endpoint returns a FileContentResult!"u8.ToArray();
+    return new FileContentResult(content, MediaTypeNames.Application.Octet);
 }
 ```
 
-The generated OpenAPI document will include the correct media type and response schema, making it easier for API consumers to understand file download endpoints.
+This operation will have the same OpenAPI description as shown above.
 
 Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
