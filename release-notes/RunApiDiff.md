@@ -14,10 +14,10 @@ dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --prerelease
 
 ## Quick Start
 
-The simplest usage only requires the NuGet feed URL for the "current" (after) version, which will compare the staged release against the most recent publicly released version.
+Provide the current version information — either the major/minor and prerelease label, or the full version number. The current NuGet feed is automatically constructed from the major version (e.g., `dotnet11` for .NET 11).
 
 ```powershell
-.\RunApiDiff.ps1 <current-nuget-feed-url>
+.\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1
 ```
 
 ## Parameters
@@ -39,7 +39,7 @@ All version parameters can be auto-discovered from their respective NuGet feeds.
 
 | Parameter | Description | Default |
 |---|---|---|
-| `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages. **Positional** — can be passed as the first unnamed argument. | `https://api.nuget.org/v3/index.json` |
+| `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages | Constructed from `CurrentMajorMinor`: `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}/nuget/v3/index.json` |
 | `PreviousNuGetFeed` | NuGet feed URL for downloading "before" packages | `https://api.nuget.org/v3/index.json` |
 
 ### Path Parameters
@@ -62,10 +62,10 @@ All version parameters can be auto-discovered from their respective NuGet feeds.
 
 ## Examples
 
-Simplest — auto-discover everything from the feeds (compares latest on `PreviousNuGetFeed` against latest on `CurrentNuGetFeed`):
+Simplest — provide the current version info, previous defaults to latest GA on nuget.org:
 
 ```powershell
-.\RunApiDiff.ps1 <current-nuget-feed>
+.\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1
 ```
 
 Explicit version parameters (comparing .NET 10.0 Preview 7 to RC 1):
@@ -86,11 +86,20 @@ With exact package versions (MajorMinor and PrereleaseLabel are extracted automa
    -CurrentVersion "10.0.0-rc.1.25451.107"
 ```
 
-Specifying only a previous version — current is auto-discovered from nuget.org, generating a diff of all APIs added since .NET 8.0:
+Specifying only a previous version — current is auto-discovered from its default feed, generating a diff of all APIs added since .NET 8.0:
 
 ```powershell
 .\RunApiDiff.ps1 `
-   -PreviousVersion "8.0.0"
+   -PreviousVersion "8.0.0" `
+   -CurrentMajorMinor 11.0 `
+   -CurrentPrereleaseLabel preview.1
+```
+
+With a custom feed URL:
+
+```powershell
+.\RunApiDiff.ps1 `
+   -CurrentNuGetFeed "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/index.json"
 ```
 
 Example of what this script generates: [API diff between .NET 10 GA and .NET 11 Preview 1 (dotnet/core#10240)](https://github.com/dotnet/core/pull/10240/changes)

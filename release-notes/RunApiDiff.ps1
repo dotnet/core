@@ -16,7 +16,7 @@
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
 # -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://api.nuget.org/v3/index.json
-# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses https://api.nuget.org/v3/index.json
+# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses the dnceng public transport feed based on the current major version (e.g., dotnet11).
 # -ExcludeNetCore               : Switch to exclude the NETCore comparison.
 # -ExcludeAspNetCore            : Switch to exclude the AspNetCore comparison.
 # -ExcludeWindowsDesktop        : Switch to exclude the WindowsDesktop comparison.
@@ -25,10 +25,10 @@
 # -CurrentVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
 
 # Example — simplest usage with auto-discovery:
-# .\RunApiDiff.ps1 <staging-feed-url>
+# .\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1
 
 # Example — explicit version parameters:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1 -CurrentNuGetFeed https://api.nuget.org/v3/index.json
+# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1
 
 # Example with exact package versions (MajorMinor and PrereleaseLabel are extracted automatically):
 # .\RunApiDiff.ps1 -PreviousVersion "10.0.0-preview.7.25380.108" -CurrentVersion "10.0.0-rc.1.25451.107"
@@ -79,9 +79,9 @@ Param (
     [string]
     $PreviousNuGetFeed = "https://api.nuget.org/v3/index.json"
     ,
-    [Parameter(Mandatory = $false, Position = 0)]
+    [Parameter(Mandatory = $false)]
     [string]
-    $CurrentNuGetFeed = "https://api.nuget.org/v3/index.json"
+    $CurrentNuGetFeed
     ,
     [Parameter(Mandatory = $false)]
     [switch]
@@ -863,6 +863,17 @@ If (-not [System.String]::IsNullOrWhiteSpace($CurrentVersion)) {
     If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = $parsed.MajorMinor }
     If ([System.String]::IsNullOrWhiteSpace($CurrentPrereleaseLabel)) { $CurrentPrereleaseLabel = $parsed.PrereleaseLabel }
     Write-Color green "Parsed from CurrentVersion: MajorMinor=$CurrentMajorMinor, PrereleaseLabel=$(If ($CurrentPrereleaseLabel) { $CurrentPrereleaseLabel } Else { 'GA' })"
+}
+
+## Construct default CurrentNuGetFeed from CurrentMajorMinor if not provided
+If ([System.String]::IsNullOrWhiteSpace($CurrentNuGetFeed)) {
+    If (-not [System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) {
+        $currentMajorVersion = $CurrentMajorMinor.Split(".")[0]
+        $CurrentNuGetFeed = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${currentMajorVersion}/nuget/v3/index.json"
+        Write-Color cyan "Using default current feed: $CurrentNuGetFeed"
+    } Else {
+        Write-Error "CurrentNuGetFeed could not be determined. Specify -CurrentMajorMinor, -CurrentVersion, or -CurrentNuGetFeed." -ErrorAction Stop
+    }
 }
 
 ## Discover version info from feeds if not provided
