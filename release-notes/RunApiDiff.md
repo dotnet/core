@@ -14,26 +14,26 @@ dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --prerelease
 
 ## Quick Start
 
-Provide the current version information — either the major/minor and prerelease label, or the full version number. The current NuGet feed is automatically constructed from the major version (e.g., `dotnet11` for .NET 11).
+When run with no arguments, the script infers the next version to diff by scanning existing `api-diff` folders in the repository. For example, if the latest api-diff is for .NET 10 GA, it will automatically generate a diff for .NET 11 Preview 1.
 
 ```powershell
-.\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1
+.\RunApiDiff.ps1
 ```
 
 ## Parameters
 
 ### Version Parameters
 
-All version parameters can be auto-discovered from their respective NuGet feeds. If any are omitted, the script queries the feed for the latest `Microsoft.NETCore.App.Ref` package and parses the version string. When `PreviousVersion` or `CurrentVersion` is provided, the `MajorMinor` and `PrereleaseLabel` values are extracted from it automatically.
+All version parameters can be auto-discovered. When no version information is provided, the script scans existing `api-diff` folders in the repository to find the latest version and infers the next one in the progression (preview.1 → preview.2 → ... → preview.7 → rc.1 → rc.2 → GA → next major preview.1). When `PreviousVersion` or `CurrentVersion` is provided, the `MajorMinor` and `PrereleaseLabel` values are extracted from it automatically.
 
 | Parameter | Description | Default |
 |---|---|---|
-| `PreviousVersion` | Exact package version for the "before" comparison (e.g., `10.0.0-preview.7.25380.108`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — version is searched)* |
-| `CurrentVersion` | Exact package version for the "after" comparison (e.g., `10.0.0-rc.1.25451.107`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — version is searched)* |
-| `PreviousMajorMinor` | The "before" .NET major.minor version (e.g., `10.0`) | Extracted from `PreviousVersion` or discovered from `PreviousNuGetFeed` |
-| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Extracted from `PreviousVersion` or discovered from `PreviousNuGetFeed` |
-| `CurrentMajorMinor` | The "after" .NET major.minor version (e.g., `10.0`) | Extracted from `CurrentVersion` or discovered from `CurrentNuGetFeed` |
-| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Extracted from `CurrentVersion` or discovered from `CurrentNuGetFeed` |
+| `PreviousVersion` | Exact package version for the "before" comparison (e.g., `10.0.0-preview.7.25380.108`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — inferred or searched)* |
+| `CurrentVersion` | Exact package version for the "after" comparison (e.g., `10.0.0-rc.1.25451.107`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — inferred or searched)* |
+| `PreviousMajorMinor` | The "before" .NET major.minor version (e.g., `10.0`) | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
+| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
+| `CurrentMajorMinor` | The "after" .NET major.minor version (e.g., `10.0`) | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
+| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
 
 ### Feed Parameters
 
@@ -62,7 +62,13 @@ All version parameters can be auto-discovered from their respective NuGet feeds.
 
 ## Examples
 
-Simplest — provide the current version info, previous defaults to latest GA on nuget.org:
+Simplest — infers the next version from existing api-diffs in the repository:
+
+```powershell
+.\RunApiDiff.ps1
+```
+
+Explicit current version (previous defaults to latest GA on nuget.org):
 
 ```powershell
 .\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1

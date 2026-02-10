@@ -7,10 +7,10 @@
 # Usage:
 
 # RunApiDiff.ps1
-# -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -PreviousNuGetFeed.
-# -PreviousPrereleaseLabel      : The prerelease label for the 'before' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, discovered from -PreviousNuGetFeed.
-# -CurrentMajorMinor           : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, discovered from -CurrentNuGetFeed.
-# -CurrentPrereleaseLabel       : The prerelease label for the 'after' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, discovered from -CurrentNuGetFeed.
+# -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc. If not specified, inferred from existing api-diffs or discovered from -PreviousNuGetFeed.
+# -PreviousPrereleaseLabel      : The prerelease label for the 'before' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, inferred from existing api-diffs or discovered from -PreviousNuGetFeed.
+# -CurrentMajorMinor           : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, inferred from existing api-diffs or discovered from -CurrentNuGetFeed.
+# -CurrentPrereleaseLabel       : The prerelease label for the 'after' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, inferred from existing api-diffs or discovered from -CurrentNuGetFeed.
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo. If not specified, defaults to the git repository root relative to this script.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
@@ -24,11 +24,11 @@
 # -PreviousVersion       : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
 # -CurrentVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
 
-# Example — simplest usage with auto-discovery:
-# .\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1
+# Example — simplest usage (infers next version from existing api-diffs):
+# .\RunApiDiff.ps1
 
-# Example — explicit version parameters:
-# .\RunApiDiff.ps1 -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1
+# Example — explicit current version:
+# .\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1
 
 # Example with exact package versions (MajorMinor and PrereleaseLabel are extracted automatically):
 # .\RunApiDiff.ps1 -PreviousVersion "10.0.0-preview.7.25380.108" -CurrentVersion "10.0.0-rc.1.25451.107"
@@ -145,6 +145,96 @@ Function ParsePrereleaseLabel {
         Return @{ ReleaseKind = $Matches[1]; PreviewRCNumber = $Matches[2] }
     }
     Write-Error "Invalid prerelease label '$label'. Expected format: 'preview.N' or 'rc.N'." -ErrorAction Stop
+}
+
+## Get a numeric sort weight for a release milestone (preview < rc < ga)
+Function GetMilestoneSortWeight {
+    Param (
+        [string] $releaseKind,
+        [int] $number
+    )
+    Switch ($releaseKind) {
+        "preview" { Return $number }
+        "rc"      { Return 100 + $number }
+        "ga"      { Return 200 }
+    }
+    Return -1
+}
+
+## Parse an api-diff folder name (e.g., "preview1", "rc2", "ga") into MajorMinor and PrereleaseLabel
+Function ParseApiDiffFolderName {
+    Param (
+        [string] $majorMinor,
+        [string] $folderName
+    )
+    If ($folderName -match "^(preview|rc)(\d+)$") {
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "$($Matches[1]).$($Matches[2])" }
+    }
+    If ($folderName -eq "ga") {
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "" }
+    }
+    Return $null
+}
+
+## Scan release-notes for the most recent api-diff and return its version info
+Function FindLatestApiDiff {
+    Param (
+        [string] $coreRepo
+    )
+    $releaseNotesDir = [IO.Path]::Combine($coreRepo, "release-notes")
+
+    # Find all version folders that have preview/*/api-diff subfolders
+    $entries = @()
+    ForEach ($versionDir in (Get-ChildItem -Directory $releaseNotesDir | Where-Object { $_.Name -match "^\d+\.\d+$" })) {
+        $previewDir = [IO.Path]::Combine($versionDir.FullName, "preview")
+        If (-not (Test-Path $previewDir)) { Continue }
+
+        ForEach ($milestoneDir in (Get-ChildItem -Directory $previewDir)) {
+            $apiDiffDir = [IO.Path]::Combine($milestoneDir.FullName, "api-diff")
+            If (-not (Test-Path $apiDiffDir)) { Continue }
+
+            $parsed = ParseApiDiffFolderName $versionDir.Name $milestoneDir.Name
+            If (-not $parsed) { Continue }
+
+            $milestoneParsed = ParsePrereleaseLabel $parsed.PrereleaseLabel
+            $majorVersion = [int]($versionDir.Name.Split(".")[0])
+            $sortKey = $majorVersion * 1000 + (GetMilestoneSortWeight $milestoneParsed.ReleaseKind ([int]$milestoneParsed.PreviewRCNumber))
+
+            $entries += @{ MajorMinor = $parsed.MajorMinor; PrereleaseLabel = $parsed.PrereleaseLabel; SortKey = $sortKey }
+        }
+    }
+
+    If ($entries.Count -eq 0) { Return $null }
+
+    Return ($entries | Sort-Object { $_.SortKey } | Select-Object -Last 1)
+}
+
+## Given a version milestone, return the next one in the progression
+## preview.1 → preview.2 → ... → preview.7 → rc.1 → rc.2 → ga → {next major}.0 preview.1
+Function GetNextVersion {
+    Param (
+        [string] $majorMinor,
+        [string] $prereleaseLabel
+    )
+    $parsed = ParsePrereleaseLabel $prereleaseLabel
+    $kind = $parsed.ReleaseKind
+    $number = [int]$parsed.PreviewRCNumber
+
+    If ($kind -eq "preview" -and $number -lt 7) {
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "preview.$($number + 1)" }
+    }
+    If ($kind -eq "preview") {
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "rc.1" }
+    }
+    If ($kind -eq "rc" -and $number -lt 2) {
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "rc.$($number + 1)" }
+    }
+    If ($kind -eq "rc") {
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "" }
+    }
+    # GA → next major preview.1
+    $major = [int]($majorMinor.Split(".")[0])
+    Return @{ MajorMinor = "$($major + 1).0"; PrereleaseLabel = "preview.1" }
 }
 
 Function DiscoverVersionFromFeed {
@@ -850,6 +940,24 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
     Write-Error "This script requires PowerShell 7.0 or later.  See  https://aka.ms/PSWindows for instructions." -ErrorAction Stop
 }
 
+## Resolve CoreRepo and scriptDir early (needed for api-diff scanning and exclude file paths)
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
+    try {
+        $CoreRepo = git -C $scriptDir rev-parse --show-toplevel 2>$null
+    }
+    catch { }
+
+    If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
+        Write-Error "Could not determine the git repository root from '$scriptDir'. Please specify -CoreRepo explicitly." -ErrorAction Stop
+    }
+
+    Write-Color cyan "Using git repo root: $CoreRepo"
+}
+
+$CoreRepo = [System.IO.Path]::GetFullPath((Resolve-Path $CoreRepo).Path)
+
 ## Extract MajorMinor and PrereleaseLabel from explicit Version parameters if provided
 If (-not [System.String]::IsNullOrWhiteSpace($PreviousVersion)) {
     $parsed = ParseVersionString $PreviousVersion "Previous"
@@ -863,6 +971,28 @@ If (-not [System.String]::IsNullOrWhiteSpace($CurrentVersion)) {
     If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) { $CurrentMajorMinor = $parsed.MajorMinor }
     If ([System.String]::IsNullOrWhiteSpace($CurrentPrereleaseLabel)) { $CurrentPrereleaseLabel = $parsed.PrereleaseLabel }
     Write-Color green "Parsed from CurrentVersion: MajorMinor=$CurrentMajorMinor, PrereleaseLabel=$(If ($CurrentPrereleaseLabel) { $CurrentPrereleaseLabel } Else { 'GA' })"
+}
+
+## Infer current and previous versions from existing api-diffs if not provided
+If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]::IsNullOrWhiteSpace($CurrentPrereleaseLabel) -and [System.String]::IsNullOrWhiteSpace($CurrentNuGetFeed)) {
+    $latestApiDiff = FindLatestApiDiff $CoreRepo
+    If ($latestApiDiff) {
+        $latestDesc = If ($latestApiDiff.PrereleaseLabel) { "$($latestApiDiff.MajorMinor)-$($latestApiDiff.PrereleaseLabel)" } Else { "$($latestApiDiff.MajorMinor) GA" }
+        Write-Color cyan "Latest existing api-diff: $latestDesc"
+
+        $next = GetNextVersion $latestApiDiff.MajorMinor $latestApiDiff.PrereleaseLabel
+        $CurrentMajorMinor = $next.MajorMinor
+        $CurrentPrereleaseLabel = $next.PrereleaseLabel
+        $nextDesc = If ($CurrentPrereleaseLabel) { "$CurrentMajorMinor-$CurrentPrereleaseLabel" } Else { "$CurrentMajorMinor GA" }
+        Write-Color green "Inferred current version: $nextDesc"
+
+        # Also infer previous from the latest api-diff if not explicitly provided
+        If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -and [System.String]::IsNullOrWhiteSpace($PreviousPrereleaseLabel) -and [System.String]::IsNullOrWhiteSpace($PreviousVersion)) {
+            $PreviousMajorMinor = $latestApiDiff.MajorMinor
+            $PreviousPrereleaseLabel = $latestApiDiff.PrereleaseLabel
+            Write-Color green "Inferred previous version: $latestDesc"
+        }
+    }
 }
 
 ## Construct default CurrentNuGetFeed from CurrentMajorMinor if not provided
@@ -924,25 +1054,6 @@ If ($PreviousMajorMinor -eq $CurrentMajorMinor -and $PreviousPrereleaseLabel -eq
 
 # True when comparing 8.0 GA with 9.0 GA
 $IsComparingReleases = ($PreviousMajorMinor -Ne $CurrentMajorMinor) -And ($PreviousReleaseKind -Eq "ga") -And ($CurrentReleaseKind -eq "ga")
-
-## Resolve CoreRepo if not provided
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-
-If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
-    try {
-        $CoreRepo = git -C $scriptDir rev-parse --show-toplevel 2>$null
-    }
-    catch { }
-
-    If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
-        Write-Error "Could not determine the git repository root from '$scriptDir'. Please specify -CoreRepo explicitly." -ErrorAction Stop
-    }
-
-    Write-Color cyan "Using git repo root: $CoreRepo"
-}
-
-## Resolve paths to absolute to avoid issues with ~ or relative paths
-$CoreRepo = [System.IO.Path]::GetFullPath((Resolve-Path $CoreRepo).Path)
 
 ## Resolve exclude file paths relative to the script's directory if they are relative paths
 If (-not [System.IO.Path]::IsPathRooted($AttributesToExcludeFilePath)) {
