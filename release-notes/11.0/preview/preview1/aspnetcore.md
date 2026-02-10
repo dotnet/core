@@ -10,8 +10,8 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [`GetUriWithHash()` extension method](#geturiwithhash-extension-method)
 - [BasePath component](#basepath-component)
 - [MathML namespace support](#mathml-namespace-support)
-- [Analyzer for JavaScript interop void returns](#analyzer-for-javascript-interop-void-returns)
-- [`IComponentPropertyActivator` for custom property injection](#icomponentpropertyactivator-for-custom-property-injection)
+- [`InvokeVoidAsync()` analyzer](#invokevoidasync-analyzer)
+- [`IComponentPropertyActivator`](#icomponentpropertyactivator)
 - [SignalR `ConfigureConnection` for Interactive Server components](#signalr-configureconnection-for-interactive-server-components)
 - [Improved Blazor reconnection experience](#improved-blazor-reconnection-experience)
 - [Unified startup options format for Blazor scripts](#unified-startup-options-format-for-blazor-scripts)
@@ -265,7 +265,7 @@ Blazor now properly supports MathML elements in interactive rendering. MathML el
 
 This fix ensures that MathML content renders correctly in browsers when added dynamically through Blazor's renderer, resolving issues where MathML elements were previously being created as regular HTML elements without the proper namespace.
 
-## Analyzer for JavaScript interop void returns
+## `InvokeVoidAsync()` analyzer
 
 A new Blazor analyzer (BL0010) has been added that recommends using `InvokeVoidAsync` instead of `InvokeAsync<object>` when calling JavaScript functions that don't return values. This analyzer helps developers write more efficient JSInterop code.
 
@@ -285,7 +285,7 @@ await JSRuntime.InvokeVoidAsync("console.log", "Hello");
 
 The analyzer helps catch performance issues where `InvokeAsync` is unnecessarily used with `object` or ignored return values, guiding developers toward the more appropriate `InvokeVoidAsync` method.
 
-## `IComponentPropertyActivator` for custom property injection
+## `IComponentPropertyActivator`
 
 Blazor now provides `IComponentPropertyActivator` for customizing how `[Inject]` properties are populated on components. This enables advanced scenarios like:
 
@@ -299,55 +299,6 @@ public interface IComponentPropertyActivator
     Action<IServiceProvider, IComponent> GetActivator(
         [DynamicallyAccessedMembers(Component)] Type componentType);
 }
-```
-
-**Example:**
-
-This example shows a custom property activator that logs dependency injection for each component property:
-
-```csharp
-public class LoggingPropertyActivator : IComponentPropertyActivator
-{
-    private readonly ILogger<LoggingPropertyActivator> _logger;
-    private readonly ConcurrentDictionary<Type, Action<IServiceProvider, IComponent>> _cache = new();
-
-    public LoggingPropertyActivator(ILogger<LoggingPropertyActivator> logger)
-    {
-        _logger = logger;
-    }
-
-    public Action<IServiceProvider, IComponent> GetActivator(Type componentType)
-    {
-        return _cache.GetOrAdd(componentType, type =>
-        {
-            var injectProperties = type
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .Where(p => p.GetCustomAttribute<InjectAttribute>() != null)
-                .ToList();
-
-            return (serviceProvider, component) =>
-            {
-                foreach (var property in injectProperties)
-                {
-                    var injectAttr = property.GetCustomAttribute<InjectAttribute>();
-                    object? service = injectAttr?.Key != null
-                        ? serviceProvider.GetKeyedService(property.PropertyType, injectAttr.Key)
-                        : serviceProvider.GetService(property.PropertyType);
-
-                    if (service != null)
-                    {
-                        _logger.LogDebug("Injecting {Service} into {Component}.{Property}",
-                            property.PropertyType.Name, type.Name, property.Name);
-                        property.SetValue(component, service);
-                    }
-                }
-            };
-        });
-    }
-}
-
-// Registration - replaces default property injection
-builder.Services.AddSingleton<IComponentPropertyActivator, LoggingPropertyActivator>();
 ```
 
 The default implementation caches activators per component type, supports keyed services via `[Inject(Key = "...")]`, integrates with Hot Reload for cache invalidation, and includes proper trimming annotations for AOT compatibility.
