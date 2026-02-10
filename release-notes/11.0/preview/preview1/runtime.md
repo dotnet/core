@@ -17,19 +17,20 @@ These features are all in-progress.
 
 ## Runtime async
 
-Runtime async is a major runtime feature in .NET 11 that introduces new runtime-level infrastructure for async methods, including runtime-generated thunks/continuations and a runtime-visible “async method variant” concept. The goal is to enable new execution modes and improve performance characteristics of async-heavy codepaths, while keeping tooling and AOT scenarios working.
+Runtime async is a major runtime feature in .NET 11 that introduces new runtime-level infrastructure for async methods. The goal is to improve tooling and performance for async-heavy codepaths.
 
 ### What changed in Preview 1
 
-- **Enabled by default in CoreCLR configuration**: the CoreCLR configuration default for `RuntimeAsync` is now enabled (`RuntimeAsync=1` by default). This turns on runtime async support in the runtime without forcing the compiler feature across all library code. ([dotnet/runtime#121732](https://github.com/dotnet/runtime/pull/121732))
-- **NAOT support for RuntimeAsyn**: - AOT tools are now configured to compile code with awareness for the new feature. ([dotnet/runtime#120772](https://github.com/dotnet/runtime/pull/120772), [dotnet/runtime#120858](https://github.com/dotnet/runtime/pull/120858))
-- **Interop compatibility**: built-in COM interop excludes runtime-async call-convention methods from CCW vtables and GUID calculations to preserve existing COM surface behavior and identifiers. ([dotnet/runtime#122195](https://github.com/dotnet/runtime/pull/122195))
+- **CoreCLR support**: the CoreCLR support for `RuntimeAsync` is now enabled by default, meaning no environment variables need to be set
+- **NAOT support for RuntimeAsync**: Native AOT should now be able to compile runtime-async code.
 
 ### Impact and how to use
 
-- **If you just run .NET apps**: the runtime-side support is enabled by default via `RuntimeAsync`. Most apps won’t need a specific action unless they’re experimenting with runtime async at the compiler level.
-- **If you want to experiment with runtime-async compilation**: you’ll need a compiler/toolchain that can emit the runtime-async representation (e.g., the compiler feature mentioned in [dotnet/runtime#121732](https://github.com/dotnet/runtime/pull/121732)).
-- **If you use AOT (ReadyToRun/NativeAOT)**: Preview 1 includes foundational support so runtime-async methods can be compiled and diagnosed (including continuation support and toolchain plumbing).
+- **If you just run .NET apps**: the runtime-side support is enabled by default. Most apps won’t need a specific action unless they’re experimenting with runtime async at the compiler level.
+- **If you want to experiment with runtime-async compilation**: you’ll need enable preview features and recompile your code with compiler support enabled.
+  - `<EnablePreviewFeatures>true</EnablePreviewFeatures>` must be set in the project file
+  - `<Features>$(Features);runtime-async=on</Features>` must be set in the project file 
+- **If you use NativeAOT**: Preview 1 includes foundational support so runtime-async methods can be compiled and diagnosed (including continuation support and toolchain plumbing). Compiler support needs to be enabled as detailed above.
 
 ## WebAssembly
 
