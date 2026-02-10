@@ -1,5 +1,5 @@
 ---
-name: release-notes-generator
+name: libraries-release-notes
 description: Generate library preview release notes by fetching merged PRs from a GitHub repository, categorizing by impact, and producing formatted markdown with exact benchmark data and code examples.
 disable-model-invocation: true
 argument-hint: "[owner/repo]"
