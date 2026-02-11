@@ -38,20 +38,6 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
 
 .NET 11 includes the initial work to bring CoreCLR support to WebAssembly. This is foundational work that is not yet ready for general use in Preview 1. For more details and to track progress, see the [CoreCLR WASM epic issue](https://github.com/dotnet/runtime/issues/121511).
 
-### WebAssembly interop and execution features
-
-- **Call into `UnmanagedCallersOnly` from WASM**: adds support for calling `UnmanagedCallersOnly` functions on WASM via runtime-provided entry points similar to reverse P/Invoke stubs. ([dotnet/runtime#121359](https://github.com/dotnet/runtime/pull/121359))
-- **Portable EntryPoint (initial)**: starts the Portable EntryPoint work, developed in a WASM-agnostic manner but initially scoped to WASM scenarios. ([dotnet/runtime#119178](https://github.com/dotnet/runtime/pull/119178))
-
-### WebAssembly performance improvements
-
-This preview adds faster allocation helpers and reduces overhead in common interop cases.
-
-- Faster allocation paths:
-  - `RhpNewFast` allocators. ([dotnet/runtime#120896](https://github.com/dotnet/runtime/pull/120896))
-  - `RhpNewArrayFastAlign8`. ([dotnet/runtime#120690](https://github.com/dotnet/runtime/pull/120690))
-- Lightweight enum marshalling: enums can use the lightweight marshaller where applicable, reducing interop overhead. ([dotnet/runtime#118991](https://github.com/dotnet/runtime/pull/118991))
-
 ## WebAssembly JIT (RyuJit)
 
 ### WASM-targeting JIT bring-up
