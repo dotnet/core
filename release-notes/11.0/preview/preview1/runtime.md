@@ -17,7 +17,7 @@ These features are all in-progress.
 
 ## Runtime async
 
-Runtime async is a major runtime feature in .NET 11 that introduces new runtime-level infrastructure for async methods. The goal is to improve tooling and performance for async-heavy codepaths.
+Runtime async is a major runtime feature in .NET 11 that introduces new runtime-level infrastructure for async methods. The goal is to improve tooling and performance for async-heavy codepaths. For more details and to track progress, see the [Runtime Async epic issue](https://github.com/dotnet/runtime/issues/109632).
 
 ### What changed in Preview 1
 
@@ -34,16 +34,9 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
 
 ## WebAssembly
 
-### CoreCLR on WebAssembly: SDK, packaging, and hosting
+### CoreCLR on WebAssembly
 
-CoreCLR is now a target in the WebAssembly SDK and browser-hosted CoreCLR gained core hosting/runtime features.
-
-- **CoreCLR support in the WebAssembly SDK**: connects in-tree CoreCLR artifacts, defines CoreCLR-oriented defaults, and decouples Mono’s native build where applicable. ([dotnet/runtime#122495](https://github.com/dotnet/runtime/pull/122495))
-- **Browser runtime packs for CoreCLR**: adds packaging/layout pieces needed to ship a browser-hosted CoreCLR runtime pack. ([dotnet/runtime#121174](https://github.com/dotnet/runtime/pull/121174))
-- **Runtime features for browser-hosted CoreCLR**: enables `async Main`, thread pool, and timers in the browser host. ([dotnet/runtime#120976](https://github.com/dotnet/runtime/pull/120976))
-- **Runtime option propagation**: browser host can apply runtime options so that linker-related features work as expected in hosted scenarios. ([dotnet/runtime#123331](https://github.com/dotnet/runtime/pull/123331))
-- **Globalization prerequisites**: browser-hosted CoreCLR can download ICU to support globalization scenarios. ([dotnet/runtime#121800](https://github.com/dotnet/runtime/pull/121800))
-- **JavaScript numeric interop**: enables BigInt support in browser-hosted CoreCLR on WASM. ([dotnet/runtime#121025](https://github.com/dotnet/runtime/pull/121025))
+.NET 11 includes the initial work to bring CoreCLR support to WebAssembly. This is foundational work that is not yet ready for general use in Preview 1. For more details and to track progress, see the [CoreCLR WASM epic issue](https://github.com/dotnet/runtime/issues/121511).
 
 ### WebAssembly interop and execution features
 
@@ -70,9 +63,7 @@ This preview adds faster allocation helpers and reduces overhead in common inter
 
 ## Interpreter (CoreCLR)
 
-### What’s new
-
-The CoreCLR interpreter continues to expand its supported IL surface and execution features, improving compatibility when the interpreter is enabled (notably for WASM/iOS scenarios) and improving debugging and toolchain integration.
+The CoreCLR interpreter continues to expand its supported IL surface and execution features, improving compatibility when the interpreter is enabled (notably for WASM/iOS scenarios) and improving debugging and toolchain integration. For more details and to track progress, see the [CoreCLR Interpreter epic issue](https://github.com/dotnet/runtime/issues/112748).
 
 ### New IL and call features supported by the interpreter
 
