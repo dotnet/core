@@ -8,8 +8,8 @@ These features are all in-progress.
 
 - **Runtime async**: a new runtime-level async mechanism (including configuration, diagnostics, and AOT support).
 - **CoreCLR on WebAssembly**: initial foundational work to bring CoreCLR support to WebAssembly (not yet ready for general use in Preview 1).
-- **Interpreter expansion**: more IL coverage, better integration (async/ReJIT/debugging), plus new ports.
-- **Targeted performance work**: JIT improvements, interpreter call and compilation performance improvements, and faster WASM allocation paths.
+- **Interpreter (CoreCLR)**: initial work on interpreter to bring CoreCLR to platforms that do not support runtime code generation (not yet ready for general use in Preview 1).
+- **Targeted performance work**: JIT improvements and faster WASM allocation paths.
 
 .NET Runtime updates in .NET 11:
 
