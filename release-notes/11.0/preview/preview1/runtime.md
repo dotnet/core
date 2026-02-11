@@ -33,7 +33,7 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
   - `<Features>$(Features);runtime-async=on</Features>` must be set in the project file
 - **If you use NativeAOT**: Preview 1 includes foundational support so runtime-async methods can be compiled and diagnosed (including continuation support and toolchain plumbing). Compiler support needs to be enabled as detailed above.
 
-## WebAssembly
+## WebAssembly (CoreCLR)
 
 ### CoreCLR on WebAssembly
 
