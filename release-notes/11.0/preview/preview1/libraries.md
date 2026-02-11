@@ -464,9 +464,9 @@ var response = await client.GetStringAsync("http://example.com");
 
 ## Performance Improvements
 
-### Guid.NewGuid() ~10x Faster on Linux
+### Guid.NewGuid() ~12% Faster on Linux
 
-[dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540) speeds up `Guid.NewGuid()` on Linux by switching from `/dev/urandom` reads to the `getrandom()` syscall and by batching and caching GUIDs. The result is a ~10x improvement: from 614.2 ns to 61.16 ns per call. Contributed by community member @reedz.
+[dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540) speeds up `Guid.NewGuid()` on Linux by switching from `/dev/urandom` reads to the `getrandom()` syscall. The result is a ~12% performance improvement. Contributed by community member @reedz.
 
 ### BigInteger Toom-Cook Multiplication
 
