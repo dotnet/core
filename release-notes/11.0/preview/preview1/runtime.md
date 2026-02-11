@@ -7,7 +7,7 @@
 These features are all in-progress.
 
 - **Runtime async**: a new runtime-level async mechanism (including configuration, diagnostics, and AOT support).
-- **CoreCLR on WebAssembly**: initial foundational work to bring CoreCLR support to WebAssembly (not yet ready for general use in Preview 1).
+- **WebAssembly (CoreCLR)**: initial foundational work to bring CoreCLR support to WebAssembly (not yet ready for general use in Preview 1).
 - **Interpreter (CoreCLR)**: initial work on interpreter to bring CoreCLR to platforms that do not support runtime code generation (not yet ready for general use in Preview 1).
 - **Targeted performance work**: JIT improvements.
 
