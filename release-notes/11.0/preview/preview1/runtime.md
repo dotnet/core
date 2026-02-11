@@ -81,21 +81,6 @@ CoreCLR moves more of its waiting/synchronization infrastructure onto the shared
 - Add `DOTNET_DbgCreateDumpToolPath` to locate `createdump` in NativeAOT scenarios where it isn’t shipped alongside the runtime. ([dotnet/runtime#122989](https://github.com/dotnet/runtime/pull/122989))
 - Increase file descriptor limits in NativeAOT executables to better support FD-heavy workloads. ([dotnet/runtime#118995](https://github.com/dotnet/runtime/pull/118995))
 
-## Diagnostics (DAC / cDAC)
-
-### Expanded cDAC functionality
-
-This preview expands cDAC’s ability to describe GC state and ship the data needed for postmortem diagnostics.
-
-- Add the cDAC GC Contract and supporting descriptor mechanisms. ([dotnet/runtime#118050](https://github.com/dotnet/runtime/pull/118050))
-- Save cDAC datadescriptor JSON blobs into minidumps to improve postmortem diagnostics. ([dotnet/runtime#121360](https://github.com/dotnet/runtime/pull/121360))
-- Publish the cDAC managed transport package. ([dotnet/runtime#120851](https://github.com/dotnet/runtime/pull/120851))
-
-### Architecture coverage
-
-- Add riscv64 managed unwinder for cDAC. ([dotnet/runtime#117436](https://github.com/dotnet/runtime/pull/117436))
-- Add loongarch64 managed unwinder for cDAC. ([dotnet/runtime#121039](https://github.com/dotnet/runtime/pull/121039))
-
 ## Mono Runtime
 
 ### New capabilities and performance-related configuration
