@@ -2,12 +2,12 @@
 
 .NET 11 Preview 1 includes new .NET Runtime features & performance improvements.
 
-## Feature
+## Features
 
 These features are all in-progress.
 
 - **Runtime async**: a new runtime-level async mechanism (including configuration, diagnostics, and AOT support).
-- **CoreCLR on WebAssembly**: CoreCLR support in the WebAssembly SDK plus new browser-host features (threading/timers/interop).
+- **CoreCLR on WebAssembly**: initial foundational work to bring CoreCLR support to WebAssembly (not yet ready for general use in Preview 1).
 - **Interpreter expansion**: more IL coverage, better integration (async/ReJIT/debugging), plus new ports.
 - **Targeted performance work**: JIT improvements, interpreter call and compilation performance improvements, and faster WASM allocation paths.
 
