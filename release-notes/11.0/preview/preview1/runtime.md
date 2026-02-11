@@ -37,16 +37,7 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
 
 ### CoreCLR on WebAssembly
 
-.NET 11 includes the initial work to bring CoreCLR support to WebAssembly. This is foundational work that is not yet ready for general use in Preview 1. For more details and to track progress, see the [CoreCLR WASM epic issue](https://github.com/dotnet/runtime/issues/121511).
-
-## WebAssembly JIT (RyuJit)
-
-### WASM-targeting JIT bring-up
-
-.NET 11 Preview 1 begins bringing up a WASM-targeting RyuJit, including build system support and Crossgen2 integration work needed for AOT/JIT pipelines.
-
-- Create a WASM-targeting RyuJit (target defines/factoring/build support): ([dotnet/runtime#121341](https://github.com/dotnet/runtime/pull/121341))
-- Integrate with Crossgen2 and continue factoring for bring-up: ([dotnet/runtime#121563](https://github.com/dotnet/runtime/pull/121563))
+.NET 11 includes the initial work to bring CoreCLR support to WebAssembly. This is foundational work that is not yet ready for general use in Preview 1. As part of this work, .NET 11 Preview 1 begins bringing up a WASM-targeting RyuJit that will be used for AOT compilation. For more details and to track progress, see the [CoreCLR WASM epic issue](https://github.com/dotnet/runtime/issues/121511) and the [WASM-targeting JIT tracking issue](https://github.com/dotnet/runtime/issues/121141).
 
 ## Interpreter (CoreCLR)
 
