@@ -39,38 +39,7 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
 
 ## Interpreter (CoreCLR)
 
-The CoreCLR interpreter continues to expand its supported IL surface and execution features, improving compatibility when the interpreter is enabled (notably for WASM/iOS scenarios) and improving debugging and toolchain integration. For more details and to track progress, see the [CoreCLR Interpreter epic issue](https://github.com/dotnet/runtime/issues/112748).
-
-### New IL and call features supported by the interpreter
-
-- Add `mkrefany`, `refanyval`, and `refanytype` support. ([dotnet/runtime#118753](https://github.com/dotnet/runtime/pull/118753))
-- Implement tailcalls (CALL/CALLVIRT). ([dotnet/runtime#118901](https://github.com/dotnet/runtime/pull/118901))
-- Implement pinned IL locals. ([dotnet/runtime#118975](https://github.com/dotnet/runtime/pull/118975))
-- Implement `STELEM_U1` and `STELEM_U2`. ([dotnet/runtime#119026](https://github.com/dotnet/runtime/pull/119026))
-- Implement `CEE_CKFINITE`. ([dotnet/runtime#119548](https://github.com/dotnet/runtime/pull/119548))
-- Implement `CEE_JMP`. ([dotnet/runtime#121130](https://github.com/dotnet/runtime/pull/121130))
-- Reverse P/Invoke support under the interpreter. ([dotnet/runtime#119133](https://github.com/dotnet/runtime/pull/119133))
-- P/Invoke `calli` support under the interpreter. ([dotnet/runtime#119356](https://github.com/dotnet/runtime/pull/119356))
-
-### Interpreter runtime integration (async, ReJIT, debugging)
-
-- Runtime async support in the interpreter (context capture/restore + suspend/resume instruction set). ([dotnet/runtime#121862](https://github.com/dotnet/runtime/pull/121862))
-- Synchronized methods support. ([dotnet/runtime#120006](https://github.com/dotnet/runtime/pull/120006))
-- ReJIT support under the interpreter. ([dotnet/runtime#122626](https://github.com/dotnet/runtime/pull/122626))
-- User breakpoints (`System.Diagnostics.Debugger.Break()`) in interpreted code. ([dotnet/runtime#121911](https://github.com/dotnet/runtime/pull/121911))
-- Ability to build `clr-interp` in Release on desktop via a build flag (enables broader performance testing/usage). ([dotnet/runtime#121850](https://github.com/dotnet/runtime/pull/121850))
-
-### Interpreter platform ports and interop
-
-- Interpreter enabled for ARM32 SOFTFP. ([dotnet/runtime#120688](https://github.com/dotnet/runtime/pull/120688))
-- CoreCLR interpreter port to riscv64. ([dotnet/runtime#121276](https://github.com/dotnet/runtime/pull/121276))
-- Unmanaged `thiscall` calling convention support, including Windows Arm64 ABI specifics. ([dotnet/runtime#122600](https://github.com/dotnet/runtime/pull/122600), [dotnet/runtime#123519](https://github.com/dotnet/runtime/pull/123519))
-
-### Interpreter performance improvements
-
-- Faster interpreter calls by reducing per-invocation setup and avoiding unnecessary prestub work. ([dotnet/runtime#120067](https://github.com/dotnet/runtime/pull/120067))
-- Improved compilation performance for very large methods in the interpreter compiler (algorithmic improvements). ([dotnet/runtime#119514](https://github.com/dotnet/runtime/pull/119514))
-- Delegate tail-calling support and improved delegate handling, including WASM scenarios. ([dotnet/runtime#120205](https://github.com/dotnet/runtime/pull/120205))
+.NET 11 includes initial work to bring the CoreCLR interpreter to more platforms and scenarios. This is foundational work that is not yet ready for general use in Preview 1. For more details and to track progress, see the [CoreCLR Interpreter epic issue](https://github.com/dotnet/runtime/issues/112748).
 
 ## JIT
 
@@ -121,16 +90,6 @@ This preview expands cDAC’s ability to describe GC state and ship the data nee
 - Add the cDAC GC Contract and supporting descriptor mechanisms. ([dotnet/runtime#118050](https://github.com/dotnet/runtime/pull/118050))
 - Save cDAC datadescriptor JSON blobs into minidumps to improve postmortem diagnostics. ([dotnet/runtime#121360](https://github.com/dotnet/runtime/pull/121360))
 - Publish the cDAC managed transport package. ([dotnet/runtime#120851](https://github.com/dotnet/runtime/pull/120851))
-
-### New cDAC APIs for profiling and inspection (selected)
-
-These APIs improve what tools like SOS and diagnostics stacks can retrieve and present.
-
-- `IXCLRDataMethodInstance::GetName` and related stack-walk APIs. ([dotnet/runtime#118966](https://github.com/dotnet/runtime/pull/118966))
-- `GetReJITInformation`. ([dotnet/runtime#119111](https://github.com/dotnet/runtime/pull/119111))
-- `GetILForModule`. ([dotnet/runtime#118546](https://github.com/dotnet/runtime/pull/118546))
-- `GetMethodDescFromToken`. ([dotnet/runtime#118619](https://github.com/dotnet/runtime/pull/118619))
-- Remaining GC data APIs (heap/segment/OOM/interesting info). ([dotnet/runtime#119324](https://github.com/dotnet/runtime/pull/119324))
 
 ### Architecture coverage
 
