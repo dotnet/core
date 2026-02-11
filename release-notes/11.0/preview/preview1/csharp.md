@@ -14,7 +14,7 @@ C# updates:
 
 This feature supports scenarios where a collection expression doesn't produce the collection type you need. You might want to pre-allocate storage because you know how you'll use the collection. For sorted collections, you may want to specify a different expression to compare items in the collection. For dictionaries, you may need a different expression to compare or find keys.
 
-You specify arguments to the constructor of the collection in a `with()` element in the [collection expression](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/collection-expressions). The `with()` element must be the first element in the collection exprssion. You can specify values for any of the arguments to a specified constructor for the collection, as shown in the following example:
+You specify arguments to the constructor of the collection in a `with()` element in the [collection expression](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/collection-expressions). The `with()` element must be the first element in the collection expression. You can specify values for any of the arguments to a specified constructor for the collection, as shown in the following example:
 
 ```csharp
 // Initialize to twice the capacity since we'll have to add
