@@ -2,14 +2,14 @@
 
 .NET 11 Preview 1 includes new .NET Runtime features & performance improvements.
 
-## Feature
+## Features
 
 These features are all in-progress.
 
 - **Runtime async**: a new runtime-level async mechanism (including configuration, diagnostics, and AOT support).
-- **CoreCLR on WebAssembly**: CoreCLR support in the WebAssembly SDK plus new browser-host features (threading/timers/interop).
-- **Interpreter expansion**: more IL coverage, better integration (async/ReJIT/debugging), plus new ports.
-- **Targeted performance work**: JIT improvements, interpreter call and compilation performance improvements, and faster WASM allocation paths.
+- **WebAssembly (CoreCLR)**: initial foundational work to bring CoreCLR support to WebAssembly (not yet ready for general use in Preview 1).
+- **Interpreter (CoreCLR)**: work on interpreter to bring CoreCLR to platforms that do not support runtime code generation (not yet ready for general use in Preview 1).
+- **Targeted performance work**: JIT improvements.
 
 .NET Runtime updates in .NET 11:
 
@@ -17,12 +17,13 @@ These features are all in-progress.
 
 ## Runtime async
 
-Runtime async is a major runtime feature in .NET 11 that introduces new runtime-level infrastructure for async methods. The goal is to improve tooling and performance for async-heavy codepaths.
+Runtime async is a major runtime feature in .NET 11 that introduces new runtime-level infrastructure for async methods. The goal is to improve tooling and performance for async-heavy codepaths. For more details and to track progress, see the [Runtime Async epic issue](https://github.com/dotnet/runtime/issues/109632).
 
 ### What changed in Preview 1
 
 - **CoreCLR support**: the CoreCLR support for `RuntimeAsync` is now enabled by default, meaning no environment variables need to be set
-- **NAOT support for RuntimeAsync**: Native AOT should now be able to compile runtime-async code.
+- **Native AOT support for RuntimeAsync**: Native AOT should now be able to compile runtime-async code.
+- **Core libraries**: None of the core runtime libraries are compiled with runtime-async support enabled in Preview 1. It is expected to change in upcoming previews.
 
 ### Impact and how to use
 
@@ -32,78 +33,13 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
   - `<Features>$(Features);runtime-async=on</Features>` must be set in the project file
 - **If you use NativeAOT**: Preview 1 includes foundational support so runtime-async methods can be compiled and diagnosed (including continuation support and toolchain plumbing). Compiler support needs to be enabled as detailed above.
 
-## WebAssembly
+## WebAssembly (CoreCLR)
 
-### CoreCLR on WebAssembly: SDK, packaging, and hosting
-
-CoreCLR is now a target in the WebAssembly SDK and browser-hosted CoreCLR gained core hosting/runtime features.
-
-- **CoreCLR support in the WebAssembly SDK**: connects in-tree CoreCLR artifacts, defines CoreCLR-oriented defaults, and decouples Mono’s native build where applicable. ([dotnet/runtime#122495](https://github.com/dotnet/runtime/pull/122495))
-- **Browser runtime packs for CoreCLR**: adds packaging/layout pieces needed to ship a browser-hosted CoreCLR runtime pack. ([dotnet/runtime#121174](https://github.com/dotnet/runtime/pull/121174))
-- **Runtime features for browser-hosted CoreCLR**: enables `async Main`, thread pool, and timers in the browser host. ([dotnet/runtime#120976](https://github.com/dotnet/runtime/pull/120976))
-- **Runtime option propagation**: browser host can apply runtime options so that linker-related features work as expected in hosted scenarios. ([dotnet/runtime#123331](https://github.com/dotnet/runtime/pull/123331))
-- **Globalization prerequisites**: browser-hosted CoreCLR can download ICU to support globalization scenarios. ([dotnet/runtime#121800](https://github.com/dotnet/runtime/pull/121800))
-- **JavaScript numeric interop**: enables BigInt support in browser-hosted CoreCLR on WASM. ([dotnet/runtime#121025](https://github.com/dotnet/runtime/pull/121025))
-
-### WebAssembly interop and execution features
-
-- **Call into `UnmanagedCallersOnly` from WASM**: adds support for calling `UnmanagedCallersOnly` functions on WASM via runtime-provided entry points similar to reverse P/Invoke stubs. ([dotnet/runtime#121359](https://github.com/dotnet/runtime/pull/121359))
-- **Portable EntryPoint (initial)**: starts the Portable EntryPoint work, developed in a WASM-agnostic manner but initially scoped to WASM scenarios. ([dotnet/runtime#119178](https://github.com/dotnet/runtime/pull/119178))
-
-### WebAssembly performance improvements
-
-This preview adds faster allocation helpers and reduces overhead in common interop cases.
-
-- Faster allocation paths:
-  - `RhpNewFast` allocators. ([dotnet/runtime#120896](https://github.com/dotnet/runtime/pull/120896))
-  - `RhpNewArrayFastAlign8`. ([dotnet/runtime#120690](https://github.com/dotnet/runtime/pull/120690))
-- Lightweight enum marshalling: enums can use the lightweight marshaller where applicable, reducing interop overhead. ([dotnet/runtime#118991](https://github.com/dotnet/runtime/pull/118991))
-
-## WebAssembly JIT (RyuJit)
-
-### WASM-targeting JIT bring-up
-
-.NET 11 Preview 1 begins bringing up a WASM-targeting RyuJit, including build system support and Crossgen2 integration work needed for AOT/JIT pipelines.
-
-- Create a WASM-targeting RyuJit (target defines/factoring/build support): ([dotnet/runtime#121341](https://github.com/dotnet/runtime/pull/121341))
-- Integrate with Crossgen2 and continue factoring for bring-up: ([dotnet/runtime#121563](https://github.com/dotnet/runtime/pull/121563))
+.NET 11 includes the initial work to bring CoreCLR support to WebAssembly. This is foundational work that is not yet ready for general use in Preview 1. As part of this work, .NET 11 Preview 1 begins bringing up a WASM-targeting RyuJit that will be used for AOT compilation. For more details and to track progress, see the [CoreCLR WASM epic issue](https://github.com/dotnet/runtime/issues/121511) and the [WASM-targeting JIT tracking issue](https://github.com/dotnet/runtime/issues/121141).
 
 ## Interpreter (CoreCLR)
 
-### What’s new
-
-The CoreCLR interpreter continues to expand its supported IL surface and execution features, improving compatibility when the interpreter is enabled (notably for WASM/iOS scenarios) and improving debugging and toolchain integration.
-
-### New IL and call features supported by the interpreter
-
-- Add `mkrefany`, `refanyval`, and `refanytype` support. ([dotnet/runtime#118753](https://github.com/dotnet/runtime/pull/118753))
-- Implement tailcalls (CALL/CALLVIRT). ([dotnet/runtime#118901](https://github.com/dotnet/runtime/pull/118901))
-- Implement pinned IL locals. ([dotnet/runtime#118975](https://github.com/dotnet/runtime/pull/118975))
-- Implement `STELEM_U1` and `STELEM_U2`. ([dotnet/runtime#119026](https://github.com/dotnet/runtime/pull/119026))
-- Implement `CEE_CKFINITE`. ([dotnet/runtime#119548](https://github.com/dotnet/runtime/pull/119548))
-- Implement `CEE_JMP`. ([dotnet/runtime#121130](https://github.com/dotnet/runtime/pull/121130))
-- Reverse P/Invoke support under the interpreter. ([dotnet/runtime#119133](https://github.com/dotnet/runtime/pull/119133))
-- P/Invoke `calli` support under the interpreter. ([dotnet/runtime#119356](https://github.com/dotnet/runtime/pull/119356))
-
-### Interpreter runtime integration (async, ReJIT, debugging)
-
-- Runtime async support in the interpreter (context capture/restore + suspend/resume instruction set). ([dotnet/runtime#121862](https://github.com/dotnet/runtime/pull/121862))
-- Synchronized methods support. ([dotnet/runtime#120006](https://github.com/dotnet/runtime/pull/120006))
-- ReJIT support under the interpreter. ([dotnet/runtime#122626](https://github.com/dotnet/runtime/pull/122626))
-- User breakpoints (`System.Diagnostics.Debugger.Break()`) in interpreted code. ([dotnet/runtime#121911](https://github.com/dotnet/runtime/pull/121911))
-- Ability to build `clr-interp` in Release on desktop via a build flag (enables broader performance testing/usage). ([dotnet/runtime#121850](https://github.com/dotnet/runtime/pull/121850))
-
-### Interpreter platform ports and interop
-
-- Interpreter enabled for ARM32 SOFTFP. ([dotnet/runtime#120688](https://github.com/dotnet/runtime/pull/120688))
-- CoreCLR interpreter port to riscv64. ([dotnet/runtime#121276](https://github.com/dotnet/runtime/pull/121276))
-- Unmanaged `thiscall` calling convention support, including Windows Arm64 ABI specifics. ([dotnet/runtime#122600](https://github.com/dotnet/runtime/pull/122600), [dotnet/runtime#123519](https://github.com/dotnet/runtime/pull/123519))
-
-### Interpreter performance improvements
-
-- Faster interpreter calls by reducing per-invocation setup and avoiding unnecessary prestub work. ([dotnet/runtime#120067](https://github.com/dotnet/runtime/pull/120067))
-- Improved compilation performance for very large methods in the interpreter compiler (algorithmic improvements). ([dotnet/runtime#119514](https://github.com/dotnet/runtime/pull/119514))
-- Delegate tail-calling support and improved delegate handling, including WASM scenarios. ([dotnet/runtime#120205](https://github.com/dotnet/runtime/pull/120205))
+.NET 11 includes work on interpreter that will bring CoreCLR to platforms that do not support runtime code generation (notably for WASM and iOS). This is foundational work that is not yet ready for general use in Preview 1. For more details and to track progress, see the [CoreCLR Interpreter epic issue](https://github.com/dotnet/runtime/issues/112748).
 
 ## JIT
 
@@ -144,31 +80,6 @@ CoreCLR moves more of its waiting/synchronization infrastructure onto the shared
 - Implement `Thread.Interrupt` on NativeAOT on Windows, improving feature parity for interruption-based patterns. ([dotnet/runtime#118968](https://github.com/dotnet/runtime/pull/118968))
 - Add `DOTNET_DbgCreateDumpToolPath` to locate `createdump` in NativeAOT scenarios where it isn’t shipped alongside the runtime. ([dotnet/runtime#122989](https://github.com/dotnet/runtime/pull/122989))
 - Increase file descriptor limits in NativeAOT executables to better support FD-heavy workloads. ([dotnet/runtime#118995](https://github.com/dotnet/runtime/pull/118995))
-
-## Diagnostics (DAC / cDAC)
-
-### Expanded cDAC functionality
-
-This preview expands cDAC’s ability to describe GC state and ship the data needed for postmortem diagnostics.
-
-- Add the cDAC GC Contract and supporting descriptor mechanisms. ([dotnet/runtime#118050](https://github.com/dotnet/runtime/pull/118050))
-- Save cDAC datadescriptor JSON blobs into minidumps to improve postmortem diagnostics. ([dotnet/runtime#121360](https://github.com/dotnet/runtime/pull/121360))
-- Publish the cDAC managed transport package. ([dotnet/runtime#120851](https://github.com/dotnet/runtime/pull/120851))
-
-### New cDAC APIs for profiling and inspection (selected)
-
-These APIs improve what tools like SOS and diagnostics stacks can retrieve and present.
-
-- `IXCLRDataMethodInstance::GetName` and related stack-walk APIs. ([dotnet/runtime#118966](https://github.com/dotnet/runtime/pull/118966))
-- `GetReJITInformation`. ([dotnet/runtime#119111](https://github.com/dotnet/runtime/pull/119111))
-- `GetILForModule`. ([dotnet/runtime#118546](https://github.com/dotnet/runtime/pull/118546))
-- `GetMethodDescFromToken`. ([dotnet/runtime#118619](https://github.com/dotnet/runtime/pull/118619))
-- Remaining GC data APIs (heap/segment/OOM/interesting info). ([dotnet/runtime#119324](https://github.com/dotnet/runtime/pull/119324))
-
-### Architecture coverage
-
-- Add riscv64 managed unwinder for cDAC. ([dotnet/runtime#117436](https://github.com/dotnet/runtime/pull/117436))
-- Add loongarch64 managed unwinder for cDAC. ([dotnet/runtime#121039](https://github.com/dotnet/runtime/pull/121039))
 
 ## Mono Runtime
 
