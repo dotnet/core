@@ -39,7 +39,7 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
 
 ## Interpreter (CoreCLR)
 
-.NET 11 includes initial work to bring the CoreCLR interpreter to more platforms and scenarios. This is foundational work that is not yet ready for general use in Preview 1. For more details and to track progress, see the [CoreCLR Interpreter epic issue](https://github.com/dotnet/runtime/issues/112748).
+.NET 11 includes work on interpreter that will bring CoreCLR to platforms that do not support runtime code generation (notably for WASM and iOS). This is foundational work that is not yet ready for general use in Preview 1. For more details and to track progress, see the [CoreCLR Interpreter epic issue](https://github.com/dotnet/runtime/issues/112748).
 
 ## JIT
 
