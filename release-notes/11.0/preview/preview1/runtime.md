@@ -22,7 +22,7 @@ Runtime async is a major runtime feature in .NET 11 that introduces new runtime-
 ### What changed in Preview 1
 
 - **CoreCLR support**: the CoreCLR support for `RuntimeAsync` is now enabled by default, meaning no environment variables need to be set
-- **NAOT support for RuntimeAsync**: Native AOT should now be able to compile runtime-async code.
+- **Native AOT support for RuntimeAsync**: Native AOT should now be able to compile runtime-async code.
 - **Core libraries**: None of the core runtime libraries are compiled with runtime-async support enabled in Preview 1. It is expected to change in upcoming previews.
 
 ### Impact and how to use
