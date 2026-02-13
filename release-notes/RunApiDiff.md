@@ -23,7 +23,7 @@ When run with no arguments, the script infers the next version to diff by scanni
 
 ### Version Parameters
 
-All version parameters can be auto-discovered. When no version information is provided, the script scans existing `api-diff` folders in the repository to find the latest version and infers the next one in the progression (preview.1 → preview.2 → ... → preview.7 → rc.1 → rc.2 → GA → next major preview.1). When `PreviousVersion` or `CurrentVersion` is provided, the `MajorMinor` and `PrereleaseLabel` values are extracted from it automatically.
+By default the script assumes a diff will be produced for the next preview. When no version information is provided, the script scans existing `api-diff` folders in the repository to find the latest version and infers the next one in the progression (preview.1 → preview.2 → ... → preview.7 → rc.1 → rc.2 → GA → next major preview.1). When `PreviousVersion` or `CurrentVersion` is provided, the `MajorMinor` and `PrereleaseLabel` values are extracted from it automatically.
 
 | Parameter | Description | Default |
 |---|---|---|
