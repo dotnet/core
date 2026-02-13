@@ -6,30 +6,24 @@ disable-model-invocation: true
 
 # API Diff Generation
 
-This skill runs `release-notes/RunApiDiff.ps1` to generate API comparison reports between .NET versions.
+This skill interprets the user's request and runs `release-notes/RunApiDiff.ps1` with the appropriate parameters.
 
 ## Workflow
 
-### 1. Interpret the user's request
+### 1. Map the user's intent to script parameters
 
-Map user input to script parameters. Read [reference/interpreting-input.md](reference/interpreting-input.md) for version format rules, clarification prompts, and examples.
+Read [reference/interpreting-input.md](reference/interpreting-input.md) for version format rules and examples of how to map natural language to script parameters. Read [reference/parameters.md](reference/parameters.md) for the full parameter reference.
 
-Key points:
-- "generate the next API diff" → no params (auto-infers from existing api-diffs)
-- "Preview N" → `-PrereleaseLabel preview.N`; "RC N" → `-PrereleaseLabel rc.N`; "GA" → omit PrereleaseLabel
-- Full NuGet version strings → use `-PreviousVersion` / `-CurrentVersion` directly
+By default (when the user doesn't specify versions), RunApiDiff.ps1 auto-infers the next version from existing api-diff folders. Only supply parameters when the user explicitly mentions versions.
 
-### 2. Construct the command
+### 2. Run the script
 
-Build the PowerShell command from the mapped parameters. See [reference/parameters.md](reference/parameters.md) for the full parameter reference.
+Run the constructed command from the repository root. Set an initial wait of at least 300 seconds — the script takes several minutes to download packages and generate diffs. Use `read_powershell` to poll for completion.
 
 ```powershell
 .\release-notes\RunApiDiff.ps1 [mapped parameters]
 ```
 
-### 3. Run the script
+**Detecting completion:** The API diff tool writes progress bars with ANSI escape sequences to the terminal, which makes output noisy and hard to parse. Do not try to detect completion from the command output. Instead, check whether the PowerShell process has exited — when the shell returns to a prompt or `read_powershell` reports the process has ended, the script is done. The script does not print a final "done" message; it simply exits after generating a README.md in the output folder.
 
-1. Confirm the constructed command with the user before running.
-2. Run via PowerShell 7+ (`pwsh`). Set an initial wait of at least 300 seconds.
-3. While the script is running, check the output folder for newly created files and mention them to the user as progress updates. Read [reference/progress-monitoring.md](reference/progress-monitoring.md) for disk monitoring instructions.
-4. After completion, summarize the results: how many diff files were generated and where.
+After completion, summarize the results: how many diff files were generated and where.
