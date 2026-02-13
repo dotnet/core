@@ -22,7 +22,7 @@ All optional — auto-inferred from existing api-diffs if omitted.
 Usually not needed.
 
 - `-CurrentNuGetFeed` — defaults to `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}/nuget/v3/index.json`
-- `-PreviousNuGetFeed` — defaults to `https://api.nuget.org/v3/index.json`
+- `-PreviousNuGetFeed` — defaults to `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}/nuget/v3/index.json`
 
 ## Switches
 

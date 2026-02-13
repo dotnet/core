@@ -39,7 +39,7 @@ By default the script assumes a diff will be produced for the next preview. When
 | Parameter | Description | Default |
 |---|---|---|
 | `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages | Constructed from `CurrentMajorMinor`: `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}/nuget/v3/index.json` |
-| `PreviousNuGetFeed` | NuGet feed URL for downloading "before" packages | `https://api.nuget.org/v3/index.json` |
+| `PreviousNuGetFeed` | NuGet feed URL for downloading "before" packages | Constructed from `PreviousMajorMinor`: `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}/nuget/v3/index.json` |
 
 ### Path Parameters
 

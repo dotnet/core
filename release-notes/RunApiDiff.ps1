@@ -14,7 +14,7 @@
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
-# -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses https://api.nuget.org/v3/index.json
+# -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses the dnceng public transport feed based on the previous major version (e.g., dotnet10).
 # -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses the dnceng public transport feed based on the current major version (e.g., dotnet11).
 # -ExcludeNetCore               : Switch to exclude the NETCore comparison.
 # -ExcludeAspNetCore            : Switch to exclude the AspNetCore comparison.
@@ -74,9 +74,8 @@ Param (
     $AssembliesToExcludeFilePath = "ApiDiffAssembliesToExclude.txt"
     ,
     [Parameter(Mandatory = $false)]
-    [ValidateNotNullOrEmpty()]
     [string]
-    $PreviousNuGetFeed = "https://api.nuget.org/v3/index.json"
+    $PreviousNuGetFeed
     ,
     [Parameter(Mandatory = $false)]
     [string]
@@ -962,6 +961,15 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentNuGetFeed)) {
         Write-Color cyan "Using default current feed: $CurrentNuGetFeed"
     } Else {
         Write-Error "CurrentNuGetFeed could not be determined. Specify -CurrentMajorMinor, -CurrentVersion, or -CurrentNuGetFeed." -ErrorAction Stop
+    }
+}
+
+## Construct default PreviousNuGetFeed from PreviousMajorMinor if not provided
+If ([System.String]::IsNullOrWhiteSpace($PreviousNuGetFeed)) {
+    If (-not [System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) {
+        $previousMajorVersion = $PreviousMajorMinor.Split(".")[0]
+        $PreviousNuGetFeed = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${previousMajorVersion}/nuget/v3/index.json"
+        Write-Color cyan "Using default previous feed: $PreviousNuGetFeed"
     }
 }
 
