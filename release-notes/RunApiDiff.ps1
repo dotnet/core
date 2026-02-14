@@ -246,9 +246,17 @@ Function DiscoverVersionFromFeed {
         [ValidateNotNullOrEmpty()]
         [string]
         $label # "Previous" or "Current", for error messages
+        ,
+        [Parameter(Mandatory = $false)]
+        [ValidateSet("NETCore", "AspNetCore", "WindowsDesktop")]
+        [string]
+        $sdkName = "NETCore"
     )
 
-    Write-Color cyan "Discovering $label version from feed '$feedUrl'..."
+    $refPackageName = "Microsoft.$sdkName.App.Ref"
+    $pkgIdLower = $refPackageName.ToLower()
+
+    Write-Color cyan "Discovering $label version of $refPackageName from feed '$feedUrl'..."
 
     $serviceIndex = Invoke-RestMethod -Uri $feedUrl
     $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
@@ -258,15 +266,15 @@ Function DiscoverVersionFromFeed {
     }
 
     $baseUrl = $flatContainer.'@id'
-    $versionsUrl = "${baseUrl}microsoft.netcore.app.ref/index.json"
+    $versionsUrl = "${baseUrl}${pkgIdLower}/index.json"
     $versionsResult = Invoke-RestMethod -Uri $versionsUrl
 
     If (-not $versionsResult.versions -or $versionsResult.versions.Count -eq 0) {
-        Write-Error "No versions of Microsoft.NETCore.App.Ref found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
+        Write-Error "No versions of $refPackageName found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
     }
 
     $latestVersion = $versionsResult.versions | Select-Object -Last 1
-    Write-Color cyan "Latest version on feed: $latestVersion"
+    Write-Color cyan "Latest $refPackageName version on feed: $latestVersion"
 
     Return ParseVersionString $latestVersion $label
 }
@@ -861,12 +869,16 @@ Function ProcessSdk
         $currentVersion = ""
     )
 
+    # For non-NETCore SDKs, don't pass exact NETCore version — versions may differ across frameworks (pre-.NET 10)
+    $sdkPreviousVersion = If ($sdkName -eq "NETCore") { $previousVersion } Else { "" }
+    $sdkCurrentVersion = If ($sdkName -eq "NETCore") { $currentVersion } Else { "" }
+
     $beforeDllFolder = ""
-    DownloadPackage -nuGetFeed $previousNuGetFeed -tmpFolder $tmpFolder -sdkName $sdkName -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeDllFolder)
+    DownloadPackage -nuGetFeed $previousNuGetFeed -tmpFolder $tmpFolder -sdkName $sdkName -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $sdkPreviousVersion -resultingPath ([ref]$beforeDllFolder)
     VerifyPathOrExit $beforeDllFolder
 
     $afterDllFolder = ""
-    DownloadPackage -nuGetFeed $currentNuGetFeed -tmpFolder $tmpFolder -sdkName $sdkName -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterDllFolder)
+    DownloadPackage -nuGetFeed $currentNuGetFeed -tmpFolder $tmpFolder -sdkName $sdkName -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $sdkCurrentVersion -resultingPath ([ref]$afterDllFolder)
     VerifyPathOrExit $afterDllFolder
 
     # For AspNetCore and WindowsDesktop, also download NETCore references to provide core assemblies
