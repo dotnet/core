@@ -207,32 +207,80 @@ Function FindLatestApiDiff {
     Return ($entries | Sort-Object { $_.SortKey } | Select-Object -Last 1)
 }
 
-## Given a version milestone, return the next one in the progression
-## preview.1 → preview.2 → ... → preview.7 → rc.1 → rc.2 → ga → {next major}.0 preview.1
-Function GetNextVersion {
+## Probe the NuGet feed to find the next version after a given milestone
+Function GetNextVersionFromFeed {
     Param (
         [string] $majorMinor,
-        [string] $prereleaseLabel
+        [string] $prereleaseLabel,
+        [string] $feedUrl
     )
-    $parsed = ParsePrereleaseLabel $prereleaseLabel
-    $kind = $parsed.ReleaseKind
-    $number = [int]$parsed.PreviewRCNumber
 
-    If ($kind -eq "preview" -and $number -lt 7) {
-        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "preview.$($number + 1)" }
+    $currentParsed = ParsePrereleaseLabel $prereleaseLabel
+    $currentWeight = GetMilestoneSortWeight $currentParsed.ReleaseKind ([int]$currentParsed.PreviewRCNumber)
+
+    $serviceIndex = Invoke-RestMethod -Uri $feedUrl
+    $flatContainer = $serviceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
+    If (-not $flatContainer) { Return $null }
+
+    $baseUrl = $flatContainer.'@id'
+    $versionsUrl = "${baseUrl}microsoft.netcore.app.ref/index.json"
+
+    try {
+        $versionsResult = Invoke-RestMethod -Uri $versionsUrl
     }
-    If ($kind -eq "preview") {
-        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "rc.1" }
+    catch { Return $null }
+
+    If (-not $versionsResult.versions -or $versionsResult.versions.Count -eq 0) { Return $null }
+
+    # Find versions for the same MajorMinor that come after the current milestone
+    $candidates = @()
+    ForEach ($v in $versionsResult.versions) {
+        $parsed = $null
+        try { $parsed = ParseVersionString $v "probe" } catch { Continue }
+        If ($parsed.MajorMinor -ne $majorMinor) { Continue }
+
+        $milestoneParsed = ParsePrereleaseLabel $parsed.PrereleaseLabel
+        $weight = GetMilestoneSortWeight $milestoneParsed.ReleaseKind ([int]$milestoneParsed.PreviewRCNumber)
+        If ($weight -gt $currentWeight) {
+            $candidates += @{ MajorMinor = $parsed.MajorMinor; PrereleaseLabel = $parsed.PrereleaseLabel; Weight = $weight }
+        }
     }
-    If ($kind -eq "rc" -and $number -lt 2) {
-        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "rc.$($number + 1)" }
+
+    If ($candidates.Count -gt 0) {
+        Return ($candidates | Sort-Object { $_.Weight } | Select-Object -First 1)
     }
-    If ($kind -eq "rc") {
-        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "" }
+
+    # No newer milestone found on the same major — try the next major's feed
+    $nextMajor = [int]($majorMinor.Split(".")[0]) + 1
+    $nextMajorMinor = "$nextMajor.0"
+    $nextFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${nextMajor}/nuget/v3/index.json"
+
+    Write-Color cyan "No newer milestone found for $majorMinor on feed. Probing next major feed for $nextMajorMinor..."
+
+    try {
+        $nextServiceIndex = Invoke-RestMethod -Uri $nextFeedUrl
+        $nextFlatContainer = $nextServiceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
+        If (-not $nextFlatContainer) { Return $null }
+
+        $nextBaseUrl = $nextFlatContainer.'@id'
+        $nextVersionsUrl = "${nextBaseUrl}microsoft.netcore.app.ref/index.json"
+        $nextVersionsResult = Invoke-RestMethod -Uri $nextVersionsUrl
+
+        If ($nextVersionsResult.versions -and $nextVersionsResult.versions.Count -gt 0) {
+            ForEach ($v in $nextVersionsResult.versions) {
+                $parsed = $null
+                try { $parsed = ParseVersionString $v "probe" } catch { Continue }
+                If ($parsed.MajorMinor -eq $nextMajorMinor) {
+                    Return @{ MajorMinor = $parsed.MajorMinor; PrereleaseLabel = $parsed.PrereleaseLabel }
+                }
+            }
+        }
     }
-    # GA → next major preview.1
-    $major = [int]($majorMinor.Split(".")[0])
-    Return @{ MajorMinor = "$($major + 1).0"; PrereleaseLabel = "preview.1" }
+    catch {
+        Write-Color yellow "Could not probe next major feed: $_"
+    }
+
+    Return $null
 }
 
 Function DiscoverVersionFromFeed {
@@ -950,11 +998,19 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]
         $latestDesc = If ($latestApiDiff.PrereleaseLabel) { "$($latestApiDiff.MajorMinor)-$($latestApiDiff.PrereleaseLabel)" } Else { "$($latestApiDiff.MajorMinor) GA" }
         Write-Color cyan "Latest existing api-diff: $latestDesc"
 
-        $next = GetNextVersion $latestApiDiff.MajorMinor $latestApiDiff.PrereleaseLabel
-        $CurrentMajorMinor = $next.MajorMinor
-        $CurrentPrereleaseLabel = $next.PrereleaseLabel
-        $nextDesc = If ($CurrentPrereleaseLabel) { "$CurrentMajorMinor-$CurrentPrereleaseLabel" } Else { "$CurrentMajorMinor GA" }
-        Write-Color green "Inferred current version: $nextDesc"
+        # Probe the feed for the next version after the latest api-diff
+        $latestMajorVersion = $latestApiDiff.MajorMinor.Split(".")[0]
+        $probeFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${latestMajorVersion}/nuget/v3/index.json"
+        $next = GetNextVersionFromFeed $latestApiDiff.MajorMinor $latestApiDiff.PrereleaseLabel $probeFeedUrl
+
+        If ($next) {
+            $CurrentMajorMinor = $next.MajorMinor
+            $CurrentPrereleaseLabel = $next.PrereleaseLabel
+            $nextDesc = If ($CurrentPrereleaseLabel) { "$CurrentMajorMinor-$CurrentPrereleaseLabel" } Else { "$CurrentMajorMinor GA" }
+            Write-Color green "Discovered next version from feed: $nextDesc"
+        } Else {
+            Write-Error "Could not discover the next version from feed '$probeFeedUrl' after $latestDesc. Specify -CurrentMajorMinor and -CurrentPrereleaseLabel explicitly." -ErrorAction Stop
+        }
 
         # Also infer previous from the latest api-diff if not explicitly provided
         If ([System.String]::IsNullOrWhiteSpace($PreviousMajorMinor) -and [System.String]::IsNullOrWhiteSpace($PreviousPrereleaseLabel) -and [System.String]::IsNullOrWhiteSpace($PreviousVersion)) {
