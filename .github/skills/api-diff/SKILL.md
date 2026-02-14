@@ -6,24 +6,31 @@ disable-model-invocation: true
 
 # API Diff Generation
 
-This skill interprets the user's request and runs `release-notes/RunApiDiff.ps1` with the appropriate parameters.
+Map the user's request to parameters for `release-notes/RunApiDiff.ps1` and run it. See [release-notes/RunApiDiff.md](../../../release-notes/RunApiDiff.md) for the full parameter reference.
 
-## Workflow
+When no versions are mentioned, run with no parameters — the script auto-infers versions.
 
-### 1. Map the user's intent to script parameters
+## Mapping natural language to parameters
 
-Read [reference/interpreting-input.md](reference/interpreting-input.md) for version format rules and examples of how to map natural language to script parameters. Read [reference/parameters.md](reference/parameters.md) for the full parameter reference.
+| User says | Parameters |
+|---|---|
+| "generate the next API diff" | *(none)* |
+| ".NET 10 GA vs .NET 11 Preview 1" | `-PreviousMajorMinor 10.0 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.1` |
+| "net9.0-preview6 to net10.0-preview5" | `-PreviousMajorMinor 9.0 -PreviousPrereleaseLabel preview.6 -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel preview.5` |
+| ".NET 10 RC 2 vs .NET 10 GA" | `-PreviousMajorMinor 10.0 -PreviousPrereleaseLabel rc.2 -CurrentMajorMinor 10.0` |
+| "10.0.0-preview.7.25380.108 to 10.0.0-rc.1.25451.107" | `-PreviousVersion "10.0.0-preview.7.25380.108" -CurrentVersion "10.0.0-rc.1.25451.107"` |
 
-By default (when the user doesn't specify versions), RunApiDiff.ps1 auto-infers the next version from existing api-diff folders. Only supply parameters when the user explicitly mentions versions.
+- **GA** or no qualifier → omit the PrereleaseLabel parameter
+- **Preview N** / **previewN** → `-PrereleaseLabel preview.N`
+- **RC N** / **rcN** → `-PrereleaseLabel rc.N`
+- **netX.Y-previewN** (TFM format) → `-MajorMinor X.Y -PrereleaseLabel preview.N`
+- Full NuGet version strings → use `-PreviousVersion` / `-CurrentVersion` directly
+- The "previous" version is always the older version; "current" is the newer one
 
-### 2. Run the script
-
-Run the constructed command from the repository root. Set an initial wait of at least 300 seconds — the script takes several minutes to download packages and generate diffs. Use `read_powershell` to poll for completion.
+## Running the script
 
 ```powershell
 .\release-notes\RunApiDiff.ps1 [mapped parameters]
 ```
 
-**Detecting completion:** The API diff tool writes progress bars with ANSI escape sequences to the terminal, which makes output noisy and hard to parse. Do not try to detect completion from the command output. Instead, check whether the PowerShell process has exited — when the shell returns to a prompt or `read_powershell` reports the process has ended, the script is done. The script does not print a final "done" message; it simply exits after generating a README.md in the output folder.
-
-After completion, summarize the results: how many diff files were generated and where.
+Set an initial wait of at least 300 seconds — the script takes several minutes. Use `read_powershell` to poll for completion. The script does not print a final "done" message; it exits after generating a README.md in the output folder. After completion, summarize the results: how many diff files were generated and where.
