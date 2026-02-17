@@ -1,63 +1,60 @@
-# Scaffold Release Notes Folder (Preview or RC)
+# Scaffold Preview Release Notes Folder
 
-This prompt guides creating the next milestone release-notes folder for a .NET Preview or RC. Supply three inputs when invoking it (no file edits required between runs):
+This prompt guides creating the next `.NET Preview` release-notes folder with only the core files needed to start milestone work.
+
+Supply two inputs when invoking it (no file edits required between runs):
 
 - DOTNET_VERSION (major, e.g. 10, 11)
-- MILESTONE_KIND (`preview` or `rc`)
-- MILESTONE_NUMBER (preview: 1–7, rc: 1–2)
+- PREVIEW_NUMBER (1–7)
 
 Only these values should change between cycles. Keep concrete links and historical references intact unless they genuinely change.
 
-## Runtime Derivations
+## Runtime derivations
 
 Given inputs:
 
-- Milestone Label = if MILESTONE_KIND=preview → `Preview ${MILESTONE_NUMBER}` else `RC ${MILESTONE_NUMBER}`
-- Milestone Prefix = preview → `p${MILESTONE_NUMBER}` ; rc → `rc${MILESTONE_NUMBER}`
-- Base Branch = `dotnet${DOTNET_VERSION}-${MilestonePrefix}`
-- Target Folder = `release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}`
+- Milestone Label = `Preview ${PREVIEW_NUMBER}`
+- Folder Name = `preview${PREVIEW_NUMBER}`
+- Base Branch = `dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}`
+- Target Folder = `release-notes/${DOTNET_VERSION}.0/preview/preview${PREVIEW_NUMBER}`
+- Main Release File = `${DOTNET_VERSION}.0.0-preview.${PREVIEW_NUMBER}.md`
 
-Example (not baked in): DOTNET_VERSION=10, MILESTONE_KIND=rc, MILESTONE_NUMBER=2 ⇒ Label `RC 2`, Prefix `rc2`.
+Example (not baked in): DOTNET_VERSION=10, PREVIEW_NUMBER=7 ⇒ folder `preview7`, main file `10.0.0-preview.7.md`.
 
 ## Steps
 
 1. Navigate to `release-notes/${DOTNET_VERSION}.0/preview/`.
-1. Duplicate the previous milestone folder (prior prefix → new prefix, e.g. `rc1` → `${MilestonePrefix}` or `p6` → `${MilestonePrefix}`).
-1. Remove (do NOT copy):
-   - `api-diff` directory (if present) – will be regenerated later.
-   - `release.json` – create a fresh one if required by process.
-1. For each component markdown file, update the heading and milestone label only; preserve existing anchor structure.
-1. If there are no new feature items yet, insert a neutral placeholder sentence (e.g. `This ${Milestone Label} release does not introduce new ${Product} features.`) instead of a generic "Something about the feature" line. Avoid duplicating placeholder lines.
-1. Run markdown lint: `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/*.md`.
-1. Commit on the base milestone branch (`dotnet${DOTNET_VERSION}-${MilestonePrefix}`) with message: `Scaffold .NET ${DOTNET_VERSION} ${Milestone Label} release notes folder`.
+1. Create `preview${PREVIEW_NUMBER}` if it does not exist.
+1. Scaffold only these two files in that folder:
+   - `${DOTNET_VERSION}.0.0-preview.${PREVIEW_NUMBER}.md`
+   - `README.md`
+1. Do not scaffold or copy component files (`aspnetcore.md`, `runtime.md`, `sdk.md`, etc.), `api-diff`, or `release.json`.
+1. In the new folder `README.md`, update heading text, milestone label, and the link to `./${DOTNET_VERSION}.0.0-preview.${PREVIEW_NUMBER}.md`.
+1. Update the preview root README at `release-notes/${DOTNET_VERSION}.0/preview/README.md` by adding one row for the new preview release linking to `./preview${PREVIEW_NUMBER}/README.md`.
+1. Run markdown lint:
+   - `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/preview${PREVIEW_NUMBER}/*.md`
+   - `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/README.md`
+1. Commit on branch `dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}` with message: `Scaffold .NET ${DOTNET_VERSION} Preview ${PREVIEW_NUMBER} release notes folder`.
 
-## Sample File Template (aspnetcore.md – dynamic)
+## Main file template (${DOTNET_VERSION}.0.0-preview.${PREVIEW_NUMBER}.md)
+
+- Start from the previous preview's main release markdown file and update only version/milestone-specific values.
+- Keep existing structure and anchors unless they are invalid for the new preview.
+
+## Folder README template (dynamic)
 
 ```markdown
-# ASP.NET Core in .NET ${DOTNET_VERSION} ${Milestone Label} - Release Notes
+# .NET ${DOTNET_VERSION} Preview ${PREVIEW_NUMBER} - Release Notes
 
-Here's a summary of what's new in ASP.NET Core in this release (add or remove sections as needed).
+.NET ${DOTNET_VERSION} Preview ${PREVIEW_NUMBER} released on <DATE>. Find more information on new features released in .NET ${DOTNET_VERSION} Preview ${PREVIEW_NUMBER} by browsing through the release notes below:
 
-ASP.NET Core updates in .NET ${DOTNET_VERSION}:
-
-- [What's new in ASP.NET Core in .NET ${DOTNET_VERSION}](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-${DOTNET_VERSION}.0) documentation.
-- [Breaking changes](https://docs.microsoft.com/dotnet/core/compatibility/${DOTNET_VERSION}.0#aspnet-core)
-- [Roadmap](https://github.com/dotnet/aspnetcore/issues/59443)
-
-This ${Milestone Label} release does not contain new ASP.NET Core feature additions.
+- [Main release notes](./${DOTNET_VERSION}.0.0-preview.${PREVIEW_NUMBER}.md)
 ```
 
-## Conventions (stable across milestones)
+## Conventions
 
-- Top-level heading: `# <Product> in .NET <Major> <Milestone Label> - Release Notes`
-- Use sentence case for section headings after the H1.
-- Keep relative links; avoid hardcoding version unless the doc page is versioned (as above for 10.0 links).
-- One blank line between blocks; file ends with a newline.
+- Keep links relative where possible.
+- Preserve one blank line between markdown blocks.
+- Ensure files end with a newline.
 
-## After Scaffolding
-
-- Proceed with per-file PR creation using the separate PR creation prompt.
-- Do not add real feature text until component owners update their individual PRs.
-- Run a Prettier check if any JSON metadata was added: `npx prettier --check "release-notes/${DOTNET_VERSION}.0/**/*.json"`.
-
-No file edits needed between milestones—provide inputs at execution. Leave roadmap issue numbers unless they genuinely change upstream.
+No file edits needed between milestones—provide inputs at execution.
