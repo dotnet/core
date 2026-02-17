@@ -6,5 +6,5 @@
 
 | Date | Release |
 | ---- | ------- |
-| YYYY-MM-DD | [11.0.0 Preview 2](./preview2/README.md) |
-| YYYY-MM-DD | [11.0.0 Preview 1](./preview1/README.md) |
+| TBD | [11.0.0 Preview 2](./preview2/README.md) |
+| 2026/02/10 | [11.0.0 Preview 1](./preview1/README.md) |
