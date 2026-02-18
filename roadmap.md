@@ -1,6 +1,6 @@
 # .NET Project Roadmaps & Backlogs
 
-- [.NET Aspire](https://github.com/dotnet/aspire/milestones)
+- [Aspire](https://github.com/dotnet/aspire/milestones)
 - [.NET Containers](https://aka.ms/netcontainers-roadmap)
 - [.NET MAUI](https://github.com/dotnet/maui/wiki/Roadmap)
 - [ASP.NET Core](https://aka.ms/aspnet/roadmap)
