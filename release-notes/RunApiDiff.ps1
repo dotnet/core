@@ -6,9 +6,9 @@
 # Usage:
 
 # RunApiDiff.ps1
-# -PreviousMajorMinor        : The 'before' .NET version: '6.0', '7.0', '8.0', etc. If not specified, inferred from existing api-diffs or discovered from -PreviousNuGetFeed.
+# -PreviousMajorMinor           : The 'before' .NET version: '6.0', '7.0', '8.0', etc. If not specified, inferred from existing api-diffs or discovered from -PreviousNuGetFeed.
 # -PreviousPrereleaseLabel      : The prerelease label for the 'before' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, inferred from existing api-diffs or discovered from -PreviousNuGetFeed.
-# -CurrentMajorMinor           : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, inferred from existing api-diffs or discovered from -CurrentNuGetFeed.
+# -CurrentMajorMinor            : The 'after' .NET version: '6.0', '7.0', '8.0', etc. If not specified, inferred from existing api-diffs or discovered from -CurrentNuGetFeed.
 # -CurrentPrereleaseLabel       : The prerelease label for the 'after' version (e.g., "preview.7", "rc.1"). Omit for GA releases. If not specified, inferred from existing api-diffs or discovered from -CurrentNuGetFeed.
 # -CoreRepo                     : The full path to your local clone of the dotnet/core repo. If not specified, defaults to the git repository root relative to this script.
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
@@ -20,8 +20,8 @@
 # -ExcludeAspNetCore            : Switch to exclude the AspNetCore comparison.
 # -ExcludeWindowsDesktop        : Switch to exclude the WindowsDesktop comparison.
 # -InstallApiDiff               : Switch to install or update the ApiDiff tool before running.
-# -PreviousVersion       : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
-# -CurrentVersion        : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
+# -PreviousVersion              : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
+# -CurrentVersion               : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
 
 # Example — simplest usage (infers next version from existing api-diffs):
 # .\RunApiDiff.ps1
@@ -177,11 +177,11 @@ Function ParseApiDiffFolderName {
         [string] $majorMinor,
         [string] $folderName
     )
-    If ($folderName -match "^(preview|rc)(\d+)$") {
-        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "$($Matches[1]).$($Matches[2])" }
-    }
     If ($folderName -eq "ga") {
         Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "" }
+    }
+    If ($folderName -match "^(preview|rc)(\d+)$") {
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "$($Matches[1]).$($Matches[2])" }
     }
     Return $null
 }
@@ -802,7 +802,7 @@ Function DownloadPackage {
             $version = $matchingVersions[0].version
         }
     }
-    
+
     $nupkgFile = [IO.Path]::Combine($tmpFolder, "$refPackageName.$version.nupkg")
 
     If (-Not(Test-Path -Path $nupkgFile)) {
@@ -947,7 +947,7 @@ Function ProcessSdk
     if ($sdkName -eq "AspNetCore" -or $sdkName -eq "WindowsDesktop") {
         DownloadPackage -nuGetFeed $previousNuGetFeed -tmpFolder $tmpFolder -sdkName "NETCore" -beforeOrAfter "Before" -dotNetVersion $previousMajorMinor -releaseKind $previousReleaseKind -previewNumberVersion $previousPreviewRCNumber -version $previousVersion -resultingPath ([ref]$beforeReferenceFolder)
         VerifyPathOrExit $beforeReferenceFolder
-        
+
         DownloadPackage -nuGetFeed $currentNuGetFeed -tmpFolder $tmpFolder -sdkName "NETCore" -beforeOrAfter "After" -dotNetVersion $currentMajorMinor -releaseKind $currentReleaseKind -previewNumberVersion $currentPreviewRCNumber -version $currentVersion -resultingPath ([ref]$afterReferenceFolder)
         VerifyPathOrExit $afterReferenceFolder
     }
@@ -1135,7 +1135,7 @@ if ($InstallApiDiff) {
 
 $apiDiffCommand = get-command "apidiff" -ErrorAction SilentlyContinue
 
-if (-Not $apiDiffCommand) 
+if (-Not $apiDiffCommand)
 {
      Write-Error "The command apidiff could not be found.  Please first install the tool using the following command: $InstallApiDiffCommand" -ErrorAction Stop
 }
