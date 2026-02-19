@@ -1087,7 +1087,7 @@ If ($PreviousMajorMinor -eq $CurrentMajorMinor -and $PreviousPrereleaseLabel -eq
     Write-Error "Previous and current versions are the same ($previousDesc). Ensure -PreviousNuGetFeed and -CurrentNuGetFeed point to different versions, or specify version parameters explicitly." -ErrorAction Stop
 }
 
-# True when comparing 8.0 GA with 9.0 GA
+# True when comparing GA releases
 $IsComparingReleases = ($PreviousMajorMinor -Ne $CurrentMajorMinor) -And ($PreviousReleaseKind -Eq "ga") -And ($CurrentReleaseKind -eq "ga")
 
 ## Resolve exclude file paths relative to the script's directory if they are relative paths
