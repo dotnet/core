@@ -110,6 +110,18 @@ Param (
 ### Start Functions ###
 #######################
 
+## Get the dnceng public feed URL for a given major version
+Function GetDncEngFeedUrl {
+    Param (
+        [Parameter(Mandatory = $true)]
+        [int] $majorVersion,
+        [Parameter(Mandatory = $false)]
+        [switch] $Transport
+    )
+    $feedName = If ($Transport) { "dotnet${majorVersion}-transport" } Else { "dotnet${majorVersion}" }
+    Return "https://pkgs.dev.azure.com/dnceng/public/_packaging/${feedName}/nuget/v3/index.json"
+}
+
 ## Parse a NuGet version string into MajorMinor and PrereleaseLabel components
 Function ParseVersionString {
     Param (
@@ -253,7 +265,7 @@ Function GetNextVersionFromFeed {
     # No newer milestone found on the same major — try the next major's feed
     $nextMajor = [int]($majorMinor.Split(".")[0]) + 1
     $nextMajorMinor = "$nextMajor.0"
-    $nextFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${nextMajor}/nuget/v3/index.json"
+    $nextFeedUrl = GetDncEngFeedUrl $nextMajor
 
     Write-Color cyan "No newer milestone found for $majorMinor on feed. Probing next major feed for $nextMajorMinor..."
 
@@ -999,8 +1011,8 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]
         Write-Color cyan "Latest existing api-diff: $latestDesc"
 
         # Probe the feed for the next version after the latest api-diff
-        $latestMajorVersion = $latestApiDiff.MajorMinor.Split(".")[0]
-        $probeFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${latestMajorVersion}/nuget/v3/index.json"
+        $latestMajorVersion = [int]($latestApiDiff.MajorMinor.Split(".")[0])
+        $probeFeedUrl = GetDncEngFeedUrl $latestMajorVersion
         $next = GetNextVersionFromFeed $latestApiDiff.MajorMinor $latestApiDiff.PrereleaseLabel $probeFeedUrl
 
         If ($next) {
@@ -1024,8 +1036,8 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]
 ## Construct default CurrentNuGetFeed from CurrentMajorMinor if not provided
 If ([System.String]::IsNullOrWhiteSpace($CurrentNuGetFeed)) {
     If (-not [System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) {
-        $currentMajorVersion = $CurrentMajorMinor.Split(".")[0]
-        $CurrentNuGetFeed = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${currentMajorVersion}/nuget/v3/index.json"
+        $currentMajorVersion = [int]($CurrentMajorMinor.Split(".")[0])
+        $CurrentNuGetFeed = GetDncEngFeedUrl $currentMajorVersion
         Write-Color cyan "Using default current feed: $CurrentNuGetFeed"
     } Else {
         Write-Error "CurrentNuGetFeed could not be determined. Specify -CurrentMajorMinor, -CurrentVersion, or -CurrentNuGetFeed." -ErrorAction Stop
@@ -1035,8 +1047,8 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentNuGetFeed)) {
 ## Construct default PreviousNuGetFeed from PreviousMajorMinor if not provided
 If ([System.String]::IsNullOrWhiteSpace($PreviousNuGetFeed)) {
     If (-not [System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) {
-        $previousMajorVersion = $PreviousMajorMinor.Split(".")[0]
-        $PreviousNuGetFeed = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${previousMajorVersion}/nuget/v3/index.json"
+        $previousMajorVersion = [int]($PreviousMajorMinor.Split(".")[0])
+        $PreviousNuGetFeed = GetDncEngFeedUrl $previousMajorVersion
         Write-Color cyan "Using default previous feed: $PreviousNuGetFeed"
     }
 }
@@ -1111,8 +1123,9 @@ If ([System.String]::IsNullOrWhiteSpace($TmpFolder)) {
 VerifyPathOrExit $CoreRepo
 VerifyPathOrExit $TmpFolder
 
-$currentMajorVersion = $CurrentMajorMinor.Split(".")[0]
-$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet$currentMajorVersion-transport/nuget/v3/index.json --prerelease"
+$currentMajorVersion = [int]($CurrentMajorMinor.Split(".")[0])
+$transportFeedUrl = GetDncEngFeedUrl $currentMajorVersion -Transport
+$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source $transportFeedUrl --prerelease"
 
 if ($InstallApiDiff) {
     Write-Color white "Installing ApiDiff tool..."
