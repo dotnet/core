@@ -1,6 +1,7 @@
 ---
 name: release-notes
-description: Generate .NET release notes for a preview or RC release. Determines team context, gathers merged PRs, enriches with issue details, categorizes by impact, and produces formatted markdown. Use when asked to write, update, or draft release notes for any .NET component.
+description: Generate .NET release notes for a preview or RC release. Determines team context, gathers merged PRs, enriches with issue details, categorizes by impact, and produces formatted markdown. Use when asked to write, update, or draft release notes, a changelog, or a what's new summary for any .NET component.
+compatibility: Requires GitHub MCP server or gh CLI, SQL tool for structured storage, and access to the dotnet/core repository clone.
 disable-model-invocation: true
 argument-hint: "[team] [owner/repo]"
 ---
@@ -22,7 +23,7 @@ Generate release notes for a .NET preview or RC release. This skill works for an
 
 **[Process inputs](references/process-inputs.md)** — determine which team's release notes are being produced, then collect preview name, Code Complete dates, and output path.
 
-Once the team is identified, load the team context from `references/teams/<team>.md`. The team context specifies:
+Once the team is identified, load the team context from `references/team-<team>.md`. The team context specifies:
 
 - Product name and repositories to search
 - Area labels for PR filtering
@@ -34,9 +35,9 @@ Team contexts with defined references:
 
 | Team | Context file | Component file |
 |------|-------------|----------------|
-| Libraries | [teams/libraries.md](references/teams/libraries.md) | `libraries.md` |
+| Libraries | [team-libraries.md](references/team-libraries.md) | `libraries.md` |
 
-Other teams can be added by creating a `references/teams/<team>.md` file following the same structure.
+Other teams can be added by creating a `references/team-<team>.md` file following the same structure.
 
 ### Step 2: Data pipeline
 
@@ -74,3 +75,27 @@ Present the complete draft to the user:
 3. Any unresolved items (ambiguous PRs, or for teams using API diff review, any unmatched API surface area)
 
 Get user confirmation before writing the output file.
+
+## Example usage
+
+**User prompt:**
+
+> Write the .NET Libraries release notes for .NET 11 Preview 2. The repo is dotnet/runtime.
+
+**Expected output:** A markdown file at `release-notes/11.0/preview/preview2/libraries.md` following the format:
+
+```markdown
+# .NET Libraries in .NET 11 Preview 2 - Release Notes
+
+.NET 11 Preview 2 includes new .NET Libraries features & enhancements:
+
+- [Support for Zstandard compression](#support-for-zstandard-compression)
+- [Faster time zone conversions](#faster-time-zone-conversions)
+...
+
+## Support for Zstandard compression
+
+The new `ZstandardStream` class brings native Zstandard compression
+support to `System.IO.Compression` ([dotnet/runtime#NNNNN](https://github.com/dotnet/runtime/pull/NNNNN)).
+...
+```

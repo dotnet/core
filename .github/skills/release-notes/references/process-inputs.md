@@ -6,7 +6,7 @@ Collect all required inputs from the user and verify that prerequisite data is a
 
 If `$ARGUMENTS` is provided, parse it for the team name and optionally the repository (`owner/repo`). Otherwise, ask the user which team's release notes they are producing.
 
-Once the team is identified, load the team context from `teams/<team>.md`. The team context provides:
+Once the team is identified, load the team context from `team-<team>.md`. The team context provides:
 
 - **Product name** — used in headings and descriptions
 - **Repositories** — which repos to search for PRs

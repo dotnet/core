@@ -22,12 +22,12 @@ Search for merged PRs using these area labels (run in parallel batches):
 
 ## Optional steps
 
-- **API diff review**: Yes — follow [api-diff-review.md](../api-diff-review.md). The API diff path pattern is `release-notes/<version>/preview/<preview>/api-diff/Microsoft.NETCore.App/`. Cross-reference the API diff with candidate PRs after collection and use it to discover implementing PRs and `api-approved` issues.
-- **VMR path**: `src/runtime/` (for [release branch verification](../verify-release-branch.md))
+- **API diff review**: Yes — follow [api-diff-review.md](api-diff-review.md). The API diff path pattern is `release-notes/<version>/preview/<preview>/api-diff/Microsoft.NETCore.App/`. Cross-reference the API diff with candidate PRs after collection and use it to discover implementing PRs and `api-approved` issues.
+- **VMR path**: `src/runtime/` (for [release branch verification](verify-release-branch.md))
 
 ## Categorization guidance
 
-In addition to the common [categorization tiers](../categorize-entries.md):
+In addition to the common [categorization tiers](categorize-entries.md):
 
 - PRs labeled `community-contribution` from contributors with valuable features or quality improvements deserve extra consideration for inclusion
 - Changes to widely-used libraries (`System.Text.Json`, `System.Net.Http`, `System.Collections`, `System.IO`, `System.Threading`) affect more users than changes to narrower namespaces — when two entries are otherwise similar in impact, prefer the one in the more widely-used library
