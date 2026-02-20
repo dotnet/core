@@ -101,6 +101,18 @@ CREATE TABLE issues (
 
 Additional PRs can be added to the candidate list manually by number. Use [Enrich](data-3-enrich.md) to fetch their details.
 
+While enriching PR details, also collect contributor information for the [reviewer suggestion step](suggest-reviewers.md). Store authors, assignees, merged-by, and requested reviewers in the `reviewers` table:
+
+```sql
+CREATE TABLE reviewers (
+    github_login TEXT NOT NULL,
+    role TEXT NOT NULL,          -- 'author', 'assignee', 'merged_by', 'coauthor'
+    pr_number INTEGER NOT NULL,
+    area_labels TEXT,            -- comma-separated area labels from the PR
+    PRIMARY KEY (github_login, role, pr_number)
+);
+```
+
 ## Filter to Library PRs
 
 Since the search queries above are already scoped to library area labels, most results will be relevant. Apply these additional filters before marking PRs as candidates:

@@ -1,5 +1,17 @@
 # Author: Categorize by Area, Theme, and Impact
 
+## Feature Grouping
+
+Group related features under a **single top-level section** rather than scattering them as separate entries. Features that share a common initiative, theme, or parent issue should appear as subsections (`###`) under one heading (`##`).
+
+For example, if a release includes `ProcessExitStatus`, `PosixSignal.SIGKILL`, `File.OpenNullHandle`, and `Console.OpenStandardInputHandle` — all part of the new process APIs initiative — they belong under one `## New Process APIs` section with subsections for each, not as four separate top-level features.
+
+**Signals that features should be grouped:**
+- They reference the same parent issue or initiative (e.g. `dotnet/runtime #123959`)
+- They are in the same namespace or closely related namespaces
+- One feature is a prerequisite for another (e.g. `SIGKILL` enables `SendSignal`)
+- They would be confusing or redundant as separate TOC entries
+
 Group PRs into tiers:
 - **Headline features**: New namespaces or types, implementations of new industry trends/algorithms, major new API surfaces
 - **Quality**: PRs or groups of PRs that improve quality across an area (recognizing `area-*` labels on the PRs and issues)

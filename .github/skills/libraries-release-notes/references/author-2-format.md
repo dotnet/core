@@ -19,14 +19,21 @@ The release notes must mirror the style of the official .NET Preview release not
 
 ## Feature Name
 
-[<owner>/<repo> #NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN) <one-paragraph description>.
+[<owner>/<repo>#NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN) <one-paragraph description>.
 
 ```csharp
 // Code example or API signature
 ```
 ```
 
-## Section Rules
+## Issue and PR References
+
+Use the format `{org}/{repo}#{number}` — no space before the `#` character. Always wrap references in markdown links that expand to the full `github.com` URL, since the release notes are published to a non-GitHub website where auto-linking is not available.
+
+- ✅ `[dotnet/runtime#124264](https://github.com/dotnet/runtime/pull/124264)`
+- ✅ `[dotnet/runtime#118468](https://github.com/dotnet/runtime/issues/118468)`
+- ❌ `[dotnet/runtime #124264](https://github.com/dotnet/runtime/pull/124264)` (space before `#`)
+- ❌ `dotnet/runtime#124264` (bare reference without markdown link)
 
 1. **TOC at top** — Every feature gets a linked entry in the table of contents.
 2. **PR link first** — Each section opens with a link to the PR.
@@ -40,7 +47,7 @@ The release notes must mirror the style of the official .NET Preview release not
 ```markdown
 ## Finding Certificates By Thumbprints Other Than SHA-1
 
-[<owner>/<repo> #NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN) introduces a new method
+[<owner>/<repo>#NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN) introduces a new method
 that accepts the name of the hash algorithm to use for matching, since SHA-2-256 and SHA-3-256
 have the same lengths and making the Find method match any vaguely matching thumbprint was not ideal.
 
