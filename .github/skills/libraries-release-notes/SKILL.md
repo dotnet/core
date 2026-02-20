@@ -29,4 +29,5 @@ Generate .NET Libraries release notes for a given release.
    1. [Categorize entries by area, theme, and impact](references/author-1-entries.md)
    2. [Apply formatting rules](references/author-2-format.md)
    3. [Apply editorial rules](references/author-3-editorial.md)
-5. Confirm feature list with the user before finalizing.
+5. **[Suggest reviewers](references/suggest-reviewers.md)** — gather authors, coauthors, assignees, and mergers from candidate PRs and present suggested reviewers grouped by area.
+6. Confirm feature list and suggested reviewers with the user before finalizing.

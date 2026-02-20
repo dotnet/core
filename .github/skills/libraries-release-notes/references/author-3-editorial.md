@@ -1,5 +1,12 @@
 # Editorial Rules
 
+## Tone
+
+- Maintain a **positive tone** — highlight what new features enable rather than criticizing existing APIs or expressing prior shortcomings.
+  - ✅ `ProcessExitStatus provides a unified representation of how a process terminated.`
+  - ✅ `The new overloads extend TarFile.CreateFromDirectory to support all four tar formats.`
+- When context about the prior state is needed, keep it brief and factual — one clause, not a paragraph — then pivot immediately to the new capability.
+
 ## Benchmarks
 
 - Use **exact data** from PR descriptions — never round, approximate, or paraphrase performance numbers.
