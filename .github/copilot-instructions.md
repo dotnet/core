@@ -85,7 +85,7 @@ git push origin [branch-name]
 
 This repository defines Copilot skills in `/.github/skills/`. Before performing any task, check if a matching skill exists and follow its process. Current skills:
 
-- `libraries-release-notes` - Generate .NET Libraries release notes for a preview release
+- `release-notes` - Generate .NET release notes for a preview or RC release (supports team-specific context)
 
 ## Common Tasks
 

@@ -6,23 +6,18 @@ After authoring the release notes, compile a list of suggested reviewers by anal
 
 For each candidate PR (those with `is_candidate = 1` in the `prs` table), gather contributor information from:
 
-1. **PR author** — the `user.login` field from the PR details (already fetched during [enrichment](data-3-enrich.md)).
+1. **PR author** — the `user.login` field from the PR details (already fetched during [enrichment](enrich-prs.md)).
 2. **PR assignees** — the `assignees` array from the PR details. Assignees are typically the area owner or tech lead who shepherded the PR.
 3. **PR merged-by** — the `merged_by` field. The person who merged the PR is familiar with the changes.
 4. **Coauthors from commits** — fetch the PR's merge commit (or the commits in the PR) and look for `Co-authored-by:` trailers in commit messages. Use `get_commit` with the PR's merge commit SHA, or `list_commits` on the PR's head branch, and parse trailer lines matching `Co-authored-by: Name <email>`.
 
 ## SQL schema
 
-Store reviewer data in a new SQL table:
+Store reviewer data in the `reviewers` table (see [sql-storage.md](sql-storage.md)):
 
 ```sql
-CREATE TABLE reviewers (
-    github_login TEXT NOT NULL,
-    role TEXT NOT NULL,          -- 'author', 'assignee', 'merged_by', 'coauthor'
-    pr_number INTEGER NOT NULL,
-    area_labels TEXT,            -- comma-separated area labels from the PR
-    PRIMARY KEY (github_login, role, pr_number)
-);
+INSERT INTO reviewers (github_login, role, pr_number, area_labels)
+VALUES ('<login>', '<role>', <pr_number>, '<area_labels>');
 ```
 
 Insert one row per contributor-role-PR combination. A single person may appear multiple times across different roles and PRs.
@@ -53,7 +48,7 @@ ORDER BY area_labels, pr_count DESC, github_login;
 
 ## Presentation
 
-Present the suggested reviewers to the user as part of the confirmation step (Step 6). Format as a table or grouped list:
+Present the suggested reviewers to the user as part of the confirmation step. Format as a grouped list:
 
 ```
 ## Suggested Reviewers
@@ -64,10 +59,6 @@ familiar with the changes and well-suited to review specific sections:
 ### Process APIs (System.Diagnostics.Process)
 - @person1 — authored #124264, merged #124256 (2 PRs)
 - @person2 — assigned on #124264 (1 PR)
-
-### Tar Archive (System.Formats.Tar)
-- @person3 — authored #123407
-- @person4 — assigned on #123407, merged #123407
 
 ### System.Text.Json
 - @person5 — authored #123940
