@@ -1,6 +1,6 @@
 # Verify: Confirm Inclusion in Release Branch
 
-After collecting and enriching candidates (including any manually added PRs), verify that candidate changes actually shipped in the target release by checking the `dotnet/dotnet` Virtual Monolithic Repository (VMR). The VMR contains all .NET source code — including `dotnet/runtime` under `src/runtime/` — and its release branches represent what ships in each preview.
+After collecting and enriching candidates (including any manually added PRs), verify that candidate changes actually shipped in the target release by checking the `dotnet/dotnet` Virtual Monolithic Repository (VMR). The VMR contains all .NET source code and its release branches represent what ships in each preview.
 
 ## Determine the release branch name
 
@@ -34,11 +34,13 @@ Start from the most recently merged PRs in the candidate list and work backward.
 
    ```
    search_code(
-     query: "repo:dotnet/dotnet path:src/runtime <distinctive symbol or text from the PR>"
+     query: "repo:dotnet/dotnet path:src/<component> <distinctive symbol or text from the PR>"
    )
    ```
 
-2. **Checking commit history** on the release branch for runtime source code updates that post-date the PR merge:
+   The `path` prefix depends on the team context — e.g., `src/runtime/` for Libraries and Runtime, `src/aspnetcore/` for ASP.NET Core.
+
+2. **Checking commit history** on the release branch for source code updates that post-date the PR merge:
 
    ```
    list_commits(
@@ -49,7 +51,7 @@ Start from the most recently merged PRs in the candidate list and work backward.
    )
    ```
 
-   Look for commits with messages like `"Source code updates from dotnet/runtime"` dated after the PR's merge date. The dotnet-maestro bot regularly syncs changes from `dotnet/runtime` into the VMR.
+   Look for commits with messages like `"Source code updates from dotnet/<repo>"` dated after the PR's merge date. The dotnet-maestro bot regularly syncs changes from component repos into the VMR.
 
 Stop checking after **2 consecutive PRs are confirmed present** — if the two newest changes made it into the release branch, older changes are also included.
 
