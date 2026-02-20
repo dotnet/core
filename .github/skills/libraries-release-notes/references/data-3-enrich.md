@@ -124,3 +124,15 @@ gh search issues --repo "$REPO" --state closed "linked:pr <PR number or search t
 ```
 
 Store all fetched details using the **SQL tool** (update `body` and `reactions` columns in the `prs` table; insert into the `issues` table). Do **not** write intermediate files to disk.
+
+## Collect reviewer data
+
+While fetching PR details, also populate the `reviewers` table (see [suggest-reviewers.md](suggest-reviewers.md)) with contributor data from each candidate PR. For each PR, insert rows for:
+
+- **author** — `user.login`
+- **assignees** — each entry in the `assignees` array
+- **merged_by** — the `merged_by.login` field
+
+Include the PR's area labels (`area-*` labels from the `labels` field) in each row so reviewers can be grouped by area later.
+
+Coauthor extraction from commit trailers is handled separately in Step 5 ([suggest-reviewers.md](suggest-reviewers.md)).
