@@ -1,42 +1,44 @@
-# Create PRs for .NET Preview or RC
+# Create PRs for .NET Preview Component Files
 
-Use this workflow to create one PR per release-notes file for a specific .NET Preview or RC milestone. You will supply three inputs when you invoke it:
+Use this workflow to create one PR per component release-notes file for a specific .NET Preview milestone.
+
+This flow assumes the preview folder was scaffolded with only the two core files (`${DOTNET_VERSION}.0.0-preview.${PREVIEW_NUMBER}.md` and `README.md`) and the component files do not exist yet.
+
+Supply two inputs when you invoke it:
 
 - DOTNET_VERSION (major only, e.g. 10, 11)
-- MILESTONE_KIND (`preview` or `rc`)
-- MILESTONE_NUMBER (preview: 1–7, rc: 1–2)
+- PREVIEW_NUMBER (1–7)
 
-PR numbers and historical references remain concrete; only version and milestone values change per cycle.
+PR numbers and historical references remain concrete; only version and preview values change per cycle.
 
-## Sample Inputs (Example)
-
-Example below uses: DOTNET_VERSION=10, MILESTONE_KIND=rc, MILESTONE_NUMBER=2 (".NET 10 RC 2"). Replace these values when running for a different milestone.
-
-## Runtime Inputs (provide these when invoking)
+## Runtime inputs (provide these when invoking)
 
 Required:
 
 - DOTNET_VERSION (major) – e.g. 10
-- MILESTONE_KIND – `preview` or `rc`
-- MILESTONE_NUMBER – preview: 1–7, rc: 1–2
+- PREVIEW_NUMBER – 1 to 7
 
-Derived (logic performed mentally / by assistant at run time):
+Derived:
 
+- Milestone Label = `Preview ${PREVIEW_NUMBER}`
 - Version Path = `${DOTNET_VERSION}.0`
-- Milestone Label = if preview → `Preview ${MILESTONE_NUMBER}` else `RC ${MILESTONE_NUMBER}`
-- Milestone Prefix = preview → `p${MILESTONE_NUMBER}` ; rc → `rc${MILESTONE_NUMBER}`
-- Base Branch = `dotnet${DOTNET_VERSION}-${MilestonePrefix}` (example: `dotnet10-rc2`)
-- Working Branch Pattern = `dotnet${DOTNET_VERSION}-${MilestonePrefix}-{name}`
-- Release Notes Folder = `release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}` (historical path keeps `preview/rcX` for RC)
+- Base Branch = `dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}`
+- Preview Folder = `release-notes/${DOTNET_VERSION}.0/preview/preview${PREVIEW_NUMBER}`
+- Working Branch Pattern = `dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}-{name-noext}`
 
-Example (NOT to be edited into the file): DOTNET_VERSION=10, MILESTONE_KIND=rc, MILESTONE_NUMBER=2 ⇒ label `RC 2`, prefix `rc2`.
+Example (not baked in): DOTNET_VERSION=10, PREVIEW_NUMBER=7 ⇒ label `Preview 7`, base branch `dotnet10-p7`, folder `release-notes/10.0/preview/preview7`.
 
-## Process (assistant substitutes variables at execution time)
+## Process (repeat for each file, one at a time)
 
-1. Create a new branch from the base branch: `git switch -c dotnet${DOTNET_VERSION}-${MilestonePrefix}-{name} origin/dotnet${DOTNET_VERSION}-${MilestonePrefix}`
-1. Modify the file content. If the file contains a neutral/no-new-features sentence such as `This ${Milestone Label} release does not contain new ...` (or the equivalent for a specific RC) replace that entire sentence block with the scaffold below. If no neutral sentence exists, insert the scaffold directly below the heading (only once; do not duplicate it).
+1. Create a new branch from the milestone base branch:
+   - `git switch -c dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}-{name-noext} origin/dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}`
+1. Create the component file at:
+   - `release-notes/${DOTNET_VERSION}.0/preview/preview${PREVIEW_NUMBER}/{name}`
+1. Add the base content scaffold below, substituting `<Product/Area>` and `${Milestone Label}`:
 
 ```markdown
+# <Product/Area> in .NET ${DOTNET_VERSION} ${Milestone Label} - Release Notes
+
 Here's a summary of what's new in <Product/Area> in this ${Milestone Label} release:
 
 - [Feature](#feature)
@@ -46,10 +48,15 @@ Here's a summary of what's new in <Product/Area> in this ${Milestone Label} rele
 Feature summary
 ```
 
-1. Run markdown lint: `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/{name}`
-1. Commit: `Update {name} for ${Milestone Label}`
-1. Push the branch
-1. Create a pull request with title `Update {name} for ${Milestone Label}` and body:
+1. Run markdown lint for just that file:
+   - `npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/${DOTNET_VERSION}.0/preview/preview${PREVIEW_NUMBER}/{name}`
+1. Commit:
+   - `Add {name} for .NET ${DOTNET_VERSION} ${Milestone Label}`
+1. Push the working branch.
+1. Create a pull request with title:
+   - `Add {name} for .NET ${DOTNET_VERSION} ${Milestone Label}`
+
+   And body:
 
 ```text
 Please update the release notes here as needed for ${Milestone Label}.
@@ -57,26 +64,31 @@ Please update the release notes here as needed for ${Milestone Label}.
 /cc @{assignees}
 ```
 
-1. Assign the PR (first listed person if multiple): `gh pr edit <PR_NUMBER> --add-assignee <username>`
-1. Switch back to `dotnet${DOTNET_VERSION}-${MilestonePrefix}` and continue with the next file.
+1. Assign the PR to the first person listed for that file:
+   - `gh pr edit <PR_NUMBER> --add-assignee <username>`
+1. Switch back to `dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}` and repeat for the next file.
+
+## Important behavior change from older workflow
+
+- Do not look for or replace existing placeholder text in component files.
+- Do not duplicate/copy previous preview component files into this folder.
+- In this workflow, each component file is created fresh in its own branch and PR.
 
 ## Notes
 
-- All milestone release notes live under `release-notes/${DOTNET_VERSION}.0/preview/${MilestonePrefix}/`.
+- All component files for the milestone live under `release-notes/${DOTNET_VERSION}.0/preview/preview${PREVIEW_NUMBER}/`.
 - Keep the same file-to-assignee mapping unless explicitly changed.
 - Use GitHub CLI for assignee setting; it's more reliable than reviewer assignment for this workflow.
-- Always replace placeholders rather than appending text to avoid duplicates.
 - Ensure trailing newline, consistent heading style, and no stray whitespace.
-- Optional: for JSON meta changes run `npx prettier --check "release-notes/${DOTNET_VERSION}.0/**/*.json"` (do not auto-fix when only reporting).
 
-No need to edit this file between milestones. Provide DOTNET_VERSION, MILESTONE_KIND, MILESTONE_NUMBER each time; assistant derives the rest. Leave PR number references and assignment history intact unless ownership changes.
+No need to edit this file between milestones. Provide DOTNET_VERSION and PREVIEW_NUMBER each time; assistant derives the rest.
 
 ## Assignment Table (updated using .NET 10 RC 1 assignees)
 
-The table below reflects the assignee(s) actually used on the most recent component PRs for .NET 10 RC 1 (PRs #10049–#10060). Use these as the current default owners for upcoming milestones unless ownership changes again. Notable change: libraries and runtime primary owners effectively swapped compared to Preview 7 (libraries → @ericstj, runtime → @richlander). Additional previously listed secondary owners were trimmed where they were not present as assignees on the RC 1 PR.
+Use these as default owners unless ownership changes.
 
 | File | Assignee(s) | .NET 10 RC 1 PR |
-|------|-------------|-----------------|
+| ------ | ----------- | --------------- |
 | aspnetcore.md | @danroth27 | #10049 |
 | containers.md | @lbussell | #10050 |
 | csharp.md | @BillWagner | #10051 |
@@ -90,7 +102,7 @@ The table below reflects the assignee(s) actually used on the most recent compon
 | winforms.md | @KlausLoeffelmann @merriemcgaw | #10059 |
 | wpf.md | @harshit7962 @adegeo | #10060 |
 
-Here are the files to process one at a time:
+Files to process one at a time:
 
 - aspnetcore.md
 - containers.md
@@ -109,12 +121,12 @@ Here are the files to process one at a time:
 
 After all component PRs are opened for the milestone, create a consolidation PR:
 
-1. Source: `dotnet${DOTNET_VERSION}-${MilestonePrefix}` → Target: `main`
-2. Title: `Add release notes for .NET ${DOTNET_VERSION} ${Milestone Label} across various components`
+1. Source: `dotnet${DOTNET_VERSION}-p${PREVIEW_NUMBER}` → Target: `main`
+2. Title: `Add release notes for .NET ${DOTNET_VERSION} Preview ${PREVIEW_NUMBER} across various components`
 3. Body sections:
    - Intro sentence
    - Bullet list of component PRs (e.g. `- ASP.NET Core: #<PR>`)
    - CC release management (e.g. `@leecow @rbhanda @victorisr`)
 4. Match the structure used previously (see Preview 7 consolidation PR #10006) for consistency.
 
-When adapting for another milestone, update only the branch name, title milestone label, and intro sentence.
+When adapting for another preview, update only the preview number, branch name, and title milestone label.
