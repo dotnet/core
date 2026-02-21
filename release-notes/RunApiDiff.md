@@ -5,7 +5,7 @@ The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script automatically generates an API c
 ## Prerequisites
 
 - PowerShell 7.0 or later
-- The [Microsoft.DotNet.ApiDiff.Tool](https://www.nuget.org/packages/Microsoft.DotNet.ApiDiff.Tool). Install from the transport feed matching the version you're comparing, or use `-InstallApiDiff $true` to have the script install it automatically:
+- The [Microsoft.DotNet.ApiDiff.Tool](https://www.nuget.org/packages/Microsoft.DotNet.ApiDiff.Tool). Use `-InstallApiDiff` to have the script install it from the `CurrentNuGetFeed`, or install it manually:
 
 ```
 dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --prerelease
@@ -38,8 +38,8 @@ By default the script assumes a diff will be produced for the next preview. When
 
 | Parameter | Description | Default |
 |---|---|---|
-| `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages | Constructed from `CurrentMajorMinor`: `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}/nuget/v3/index.json` |
-| `PreviousNuGetFeed` | NuGet feed URL for downloading "before" packages | Constructed from `PreviousMajorMinor`: `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}/nuget/v3/index.json` |
+| `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages | `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json` |
+| `PreviousNuGetFeed` | NuGet feed URL for downloading "before" packages | `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json` |
 
 ### Path Parameters
 

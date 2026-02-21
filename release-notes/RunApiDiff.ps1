@@ -14,8 +14,8 @@
 # -TmpFolder                    : The full path to the folder where the assets will be downloaded, extracted and compared. If not specified, a temporary folder is created automatically.
 # -AttributesToExcludeFilePath  : The full path to the file containing the attributes to exclude from the report. By default, it is "ApiDiffAttributesToExclude.txt" in the same folder as this script.
 # -AssembliesToExcludeFilePath  : The full path to the file containing the assemblies to exclude from the report. By default, it is "ApiDiffAssembliesToExclude.txt" in the same folder as this script.
-# -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses the dnceng public transport feed based on the previous major version (e.g., dotnet10).
-# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses the dnceng public transport feed based on the current major version (e.g., dotnet11).
+# -PreviousNuGetFeed            : The NuGet feed URL to use for downloading previous/before packages. By default, uses the dotnet-public feed.
+# -CurrentNuGetFeed             : The NuGet feed URL to use for downloading current/after packages. By default, uses the dotnet-public feed.
 # -ExcludeNetCore               : Switch to exclude the NETCore comparison.
 # -ExcludeAspNetCore            : Switch to exclude the AspNetCore comparison.
 # -ExcludeWindowsDesktop        : Switch to exclude the WindowsDesktop comparison.
@@ -110,17 +110,7 @@ Param (
 ### Start Functions ###
 #######################
 
-## Get the dnceng public feed URL for a given major version
-Function GetDncEngFeedUrl {
-    Param (
-        [Parameter(Mandatory = $true)]
-        [int] $majorVersion,
-        [Parameter(Mandatory = $false)]
-        [switch] $Transport
-    )
-    $feedName = If ($Transport) { "dotnet${majorVersion}-transport" } Else { "dotnet${majorVersion}" }
-    Return "https://pkgs.dev.azure.com/dnceng/public/_packaging/${feedName}/nuget/v3/index.json"
-}
+$DotNetPublicFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json"
 
 ## Parse a NuGet version string into MajorMinor and PrereleaseLabel components
 Function ParseVersionString {
@@ -262,15 +252,14 @@ Function GetNextVersionFromFeed {
         Return ($candidates | Sort-Object { $_.Weight } | Select-Object -First 1)
     }
 
-    # No newer milestone found on the same major — try the next major's feed
+    # No newer milestone found on the same major — try the next major
     $nextMajor = [int]($majorMinor.Split(".")[0]) + 1
     $nextMajorMinor = "$nextMajor.0"
-    $nextFeedUrl = GetDncEngFeedUrl $nextMajor
 
-    Write-Color cyan "No newer milestone found for $majorMinor on feed. Probing next major feed for $nextMajorMinor..."
+    Write-Color cyan "No newer milestone found for $majorMinor on feed. Probing for $nextMajorMinor..."
 
     try {
-        $nextServiceIndex = Invoke-RestMethod -Uri $nextFeedUrl
+        $nextServiceIndex = Invoke-RestMethod -Uri $feedUrl
         $nextFlatContainer = $nextServiceIndex.resources | Where-Object { $_.'@type' -match 'PackageBaseAddress' } | Select-Object -First 1
         If (-not $nextFlatContainer) { Return $null }
 
@@ -811,9 +800,6 @@ Function DownloadPackage {
         If ($flatBaseUrl) {
             $nupkgUrl = "$flatBaseUrl$pkgIdLower/$version/$pkgIdLower.$version.nupkg"
         }
-        ElseIf ($nuGetFeed -eq "https://api.nuget.org/v3/index.json") {
-            $nupkgUrl = "https://www.nuget.org/api/v2/package/$refPackageName/$version"
-        }
         Else {
             Write-Error "Could not determine download URL for package '$refPackageName' version '$version'. No PackageBaseAddress endpoint found in feed '$nuGetFeed'." -ErrorAction Stop
         }
@@ -1011,9 +997,7 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]
         Write-Color cyan "Latest existing api-diff: $latestDesc"
 
         # Probe the feed for the next version after the latest api-diff
-        $latestMajorVersion = [int]($latestApiDiff.MajorMinor.Split(".")[0])
-        $probeFeedUrl = GetDncEngFeedUrl $latestMajorVersion
-        $next = GetNextVersionFromFeed $latestApiDiff.MajorMinor $latestApiDiff.PrereleaseLabel $probeFeedUrl
+        $next = GetNextVersionFromFeed $latestApiDiff.MajorMinor $latestApiDiff.PrereleaseLabel $DotNetPublicFeedUrl
 
         If ($next) {
             $CurrentMajorMinor = $next.MajorMinor
@@ -1021,7 +1005,7 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]
             $nextDesc = If ($CurrentPrereleaseLabel) { "$CurrentMajorMinor-$CurrentPrereleaseLabel" } Else { "$CurrentMajorMinor GA" }
             Write-Color green "Discovered next version from feed: $nextDesc"
         } Else {
-            Write-Error "Could not discover the next version from feed '$probeFeedUrl' after $latestDesc. Specify -CurrentMajorMinor and -CurrentPrereleaseLabel explicitly." -ErrorAction Stop
+            Write-Error "Could not discover the next version from feed '$DotNetPublicFeedUrl' after $latestDesc. Specify -CurrentMajorMinor and -CurrentPrereleaseLabel explicitly." -ErrorAction Stop
         }
 
         # Also infer previous from the latest api-diff if not explicitly provided
@@ -1033,24 +1017,15 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]
     }
 }
 
-## Construct default CurrentNuGetFeed from CurrentMajorMinor if not provided
+## Default CurrentNuGetFeed and PreviousNuGetFeed to the dotnet-public feed if not provided
 If ([System.String]::IsNullOrWhiteSpace($CurrentNuGetFeed)) {
-    If (-not [System.String]::IsNullOrWhiteSpace($CurrentMajorMinor)) {
-        $currentMajorVersion = [int]($CurrentMajorMinor.Split(".")[0])
-        $CurrentNuGetFeed = GetDncEngFeedUrl $currentMajorVersion
-        Write-Color cyan "Using default current feed: $CurrentNuGetFeed"
-    } Else {
-        Write-Error "CurrentNuGetFeed could not be determined. Specify -CurrentMajorMinor, -CurrentVersion, or -CurrentNuGetFeed." -ErrorAction Stop
-    }
+    $CurrentNuGetFeed = $DotNetPublicFeedUrl
+    Write-Color cyan "Using default current feed: $CurrentNuGetFeed"
 }
 
-## Construct default PreviousNuGetFeed from PreviousMajorMinor if not provided
 If ([System.String]::IsNullOrWhiteSpace($PreviousNuGetFeed)) {
-    If (-not [System.String]::IsNullOrWhiteSpace($PreviousMajorMinor)) {
-        $previousMajorVersion = [int]($PreviousMajorMinor.Split(".")[0])
-        $PreviousNuGetFeed = GetDncEngFeedUrl $previousMajorVersion
-        Write-Color cyan "Using default previous feed: $PreviousNuGetFeed"
-    }
+    $PreviousNuGetFeed = $DotNetPublicFeedUrl
+    Write-Color cyan "Using default previous feed: $PreviousNuGetFeed"
 }
 
 ## Discover version info from feeds if not provided
@@ -1123,9 +1098,7 @@ If ([System.String]::IsNullOrWhiteSpace($TmpFolder)) {
 VerifyPathOrExit $CoreRepo
 VerifyPathOrExit $TmpFolder
 
-$currentMajorVersion = [int]($CurrentMajorMinor.Split(".")[0])
-$transportFeedUrl = GetDncEngFeedUrl $currentMajorVersion -Transport
-$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source $transportFeedUrl --prerelease"
+$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source $CurrentNuGetFeed --prerelease"
 
 if ($InstallApiDiff) {
     Write-Color white "Installing ApiDiff tool..."
