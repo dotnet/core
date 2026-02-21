@@ -1,4 +1,4 @@
-# This script allows running API-diff to generate the dotnet/core report that compares the APIs introduced between two previews, in the format expected for publishing in the dotnet/core repo.
+﻿# This script allows running API-diff to generate the dotnet/core report that compares the APIs introduced between two previews, in the format expected for publishing in the dotnet/core repo.
 
 # Prerequisites:
 # - PowerShell 7.0 or later
@@ -329,6 +329,7 @@ Function DiscoverVersionFromFeed {
 }
 
 Function Write-Color {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
     Param (
         [ValidateNotNullOrEmpty()]
         [string] $newColor
@@ -544,7 +545,7 @@ Function GetPreviewFolderPath {
         Return [IO.Path]::Combine($prefixFolder, "$dotNetVersion.$previewNumberVersion", $apiDiffFolderName)
     }
 
-    $releaseKindFolderName = GetReleaseKindFolderName $dotNetVersion $releaseKind $previewNumberVersion
+    $releaseKindFolderName = GetReleaseKindFolderName -dotNetVersion $dotNetVersion -releaseKind $releaseKind -previewNumberVersion $previewNumberVersion
     Return [IO.Path]::Combine($prefixFolder, "preview", $releaseKindFolderName, $apiDiffFolderName)
 }
 
@@ -963,7 +964,10 @@ If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
     try {
         $CoreRepo = git -C $scriptDir rev-parse --show-toplevel 2>$null
     }
-    catch { }
+    catch {
+        # git command may fail if not in a repo; ignore
+        $null = $null
+    }
 
     If ([System.String]::IsNullOrWhiteSpace($CoreRepo)) {
         Write-Error "Could not determine the git repository root from '$scriptDir'. Please specify -CoreRepo explicitly." -ErrorAction Stop
@@ -997,7 +1001,7 @@ If ([System.String]::IsNullOrWhiteSpace($CurrentMajorMinor) -and [System.String]
         Write-Color cyan "Latest existing api-diff: $latestDesc"
 
         # Probe the feed for the next version after the latest api-diff
-        $next = GetNextVersionFromFeed $latestApiDiff.MajorMinor $latestApiDiff.PrereleaseLabel $DotNetPublicFeedUrl
+        $next = GetNextVersionFromFeed -majorMinor $latestApiDiff.MajorMinor -prereleaseLabel $latestApiDiff.PrereleaseLabel -feedUrl $DotNetPublicFeedUrl
 
         If ($next) {
             $CurrentMajorMinor = $next.MajorMinor
@@ -1105,7 +1109,7 @@ $InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.
 if ($InstallApiDiff) {
     Write-Color white "Installing ApiDiff tool..."
     Write-Color yellow $InstallApiDiffCommand
-    Invoke-Expression $InstallApiDiffCommand
+    & dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source $transportFeedUrl --prerelease
 }
 
 $apiDiffCommand = get-command "apidiff" -ErrorAction SilentlyContinue
@@ -1119,7 +1123,7 @@ $apiDiffExe = $apiDiffCommand.Source
 
 ## Create api-diff folder in core repo folder if it doesn't exist
 
-$previewFolderPath = GetPreviewFolderPath $CoreRepo $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber $IsComparingReleases
+$previewFolderPath = GetPreviewFolderPath -rootFolder $CoreRepo -dotNetVersion $CurrentMajorMinor -releaseKind $CurrentReleaseKind -previewNumberVersion $CurrentPreviewRCNumber -IsComparingReleases $IsComparingReleases
 If (-Not (Test-Path -Path $previewFolderPath))
 {
     Write-Color white "Creating new diff folder: $previewFolderPath"
@@ -1129,11 +1133,11 @@ If (-Not (Test-Path -Path $previewFolderPath))
 ## Run the ApiDiff commands
 
 # Example: "10.0-preview2"
-$currentDotNetFullName = GetDotNetFullName $IsComparingReleases $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber
+$currentDotNetFullName = GetDotNetFullName -IsComparingReleases $IsComparingReleases -dotNetVersion $CurrentMajorMinor -releaseKind $CurrentReleaseKind -previewNumberVersion $CurrentPreviewRCNumber
 
 # Examples: ".NET 10 Preview 1" and ".NET 10 Preview 2"
-$previousDotNetFriendlyName = GetDotNetFriendlyName $PreviousMajorMinor $PreviousReleaseKind $PreviousPreviewRCNumber
-$currentDotNetFriendlyName = GetDotNetFriendlyName $CurrentMajorMinor $CurrentReleaseKind $CurrentPreviewRCNumber
+$previousDotNetFriendlyName = GetDotNetFriendlyName -DotNetVersion $PreviousMajorMinor -releaseKind $PreviousReleaseKind -PreviewNumberVersion $PreviousPreviewRCNumber
+$currentDotNetFriendlyName = GetDotNetFriendlyName -DotNetVersion $CurrentMajorMinor -releaseKind $CurrentReleaseKind -PreviewNumberVersion $CurrentPreviewRCNumber
 
 $sdksToProcess = @()
 If (-Not $ExcludeNetCore) { $sdksToProcess += "NETCore" }
@@ -1165,7 +1169,7 @@ ForEach ($sdk in $sdksToProcess) {
     ProcessSdk -sdkName $sdk @commonParams
 }
 
-CreateReadme $previewFolderPath $currentDotNetFriendlyName $currentDotNetFullName $sdksToProcess
+CreateReadme -previewFolderPath $previewFolderPath -dotNetFriendlyName $currentDotNetFriendlyName -dotNetFullName $currentDotNetFullName -sdkNames $sdksToProcess
 
 #####################
 ### End Execution ###
