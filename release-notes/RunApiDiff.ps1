@@ -19,7 +19,7 @@
 # -ExcludeNetCore               : Switch to exclude the NETCore comparison.
 # -ExcludeAspNetCore            : Switch to exclude the AspNetCore comparison.
 # -ExcludeWindowsDesktop        : Switch to exclude the WindowsDesktop comparison.
-# -InstallApiDiff               : Switch to install or update the ApiDiff tool before running.
+# -InstallApiDiff               : Switch to install or update the ApiDiff tool from the current transport feed.
 # -PreviousVersion              : Optional exact package version for the previous/before comparison (e.g., "10.0.0-preview.7.25380.108"). Overrides version search logic.
 # -CurrentVersion               : Optional exact package version for the current/after comparison (e.g., "10.0.0-rc.1.25451.107"). Overrides version search logic.
 
@@ -1098,7 +1098,9 @@ If ([System.String]::IsNullOrWhiteSpace($TmpFolder)) {
 VerifyPathOrExit $CoreRepo
 VerifyPathOrExit $TmpFolder
 
-$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source $CurrentNuGetFeed --prerelease"
+$currentMajorVersion = [int]($CurrentMajorMinor.Split(".")[0])
+$transportFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet${currentMajorVersion}-transport/nuget/v3/index.json"
+$InstallApiDiffCommand = "dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source $transportFeedUrl --prerelease"
 
 if ($InstallApiDiff) {
     Write-Color white "Installing ApiDiff tool..."

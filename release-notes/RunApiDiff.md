@@ -5,10 +5,10 @@ The [`RunApiDiff.ps1`](./RunApiDiff.ps1) script automatically generates an API c
 ## Prerequisites
 
 - PowerShell 7.0 or later
-- The [Microsoft.DotNet.ApiDiff.Tool](https://www.nuget.org/packages/Microsoft.DotNet.ApiDiff.Tool). Use `-InstallApiDiff` to have the script install it from the `CurrentNuGetFeed`, or install it manually:
+- The Microsoft.DotNet.ApiDiff.Tool. Use `-InstallApiDiff` to have the script install it automatically from the transport feed constructed from the current version's major version (`https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}-transport/nuget/v3/index.json`), or install it manually:
 
 ```
-dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --prerelease
+dotnet tool install --global Microsoft.DotNet.ApiDiff.Tool --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet{MAJOR}-transport/nuget/v3/index.json --prerelease
 ```
 
 ## Quick Start
@@ -57,7 +57,7 @@ By default the script assumes a diff will be produced for the next preview. When
 | `ExcludeNetCore` | Skip the Microsoft.NETCore.App comparison |
 | `ExcludeAspNetCore` | Skip the Microsoft.AspNetCore.App comparison |
 | `ExcludeWindowsDesktop` | Skip the Microsoft.WindowsDesktop.App comparison |
-| `InstallApiDiff` | Install or update the ApiDiff tool before running |
+| `InstallApiDiff` | Install or update the ApiDiff tool from the current transport feed |
 
 ## Examples
 
