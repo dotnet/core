@@ -15,7 +15,7 @@ ASP.NET Core updates in .NET 11:
 
 ## Native OpenTelemetry tracing for ASP.NET Core
 
-ASP.NET Core now natively adds OpenTelemetry semantic convention attributes to the HTTP server activity, aligning with the [OpenTelemetry HTTP server span specification](https://opentelemetry.io/docs/specs/semconv/http/http-spans/#http-server-span). All required attributes are now included by default, matching the metadata previously only available through the `OpenTelemetry.Instrumentation.AspNetCore` library ([dotnet/aspnetcore#64851](https://github.com/dotnet/aspnetcore/pull/64851)).
+ASP.NET Core now natively adds OpenTelemetry semantic convention attributes to the HTTP server activity, aligning with the [OpenTelemetry HTTP server span specification](https://opentelemetry.io/docs/specs/semconv/http/http-spans/#http-server-span). All required attributes are now included by default, matching the metadata previously only available through the `OpenTelemetry.Instrumentation.AspNetCore` library.
 
 This change means that `Microsoft.AspNetCore.Hosting.SuppressActivityOpenTelemetryData` now defaults to `false`, enabling telemetry on the activity by default in .NET 11. The HTTP request duration metric has also been updated to include the `error.type` attribute for 500+ response status codes.
 
@@ -28,11 +28,11 @@ builder.Services.AddOpenTelemetry()
         .AddConsoleExporter());
 ```
 
-No additional instrumentation library (such as `OpenTelemetry.Instrumentation.AspNetCore`) is needed. The framework now directly populates semantic convention attributes like `http.request.method`, `url.path`, `http.response.status_code`, and `server.address` on the request activity ([dotnet/aspnetcore#52439](https://github.com/dotnet/aspnetcore/issues/52439)).
+No additional instrumentation library (such as `OpenTelemetry.Instrumentation.AspNetCore`) is needed. The framework now directly populates semantic convention attributes like `http.request.method`, `url.path`, `http.response.status_code`, and `server.address` on the request activity.
 
 ## TempData support for Blazor
 
-Blazor Server-Side Rendering (SSR) now supports TempData, a mechanism for storing data that persists between HTTP requests. TempData is ideal for scenarios like flash messages after form submissions, passing data during redirects (POST-Redirect-GET pattern), and one-time notifications ([dotnet/aspnetcore#64749](https://github.com/dotnet/aspnetcore/pull/64749)).
+Blazor Server-Side Rendering (SSR) now supports TempData, a mechanism for storing data that persists between HTTP requests. TempData is ideal for scenarios like flash messages after form submissions, passing data during redirects (POST-Redirect-GET pattern), and one-time notifications.
 
 TempData is automatically registered when calling `AddRazorComponents()` and is provided as a cascading value. The default cookie-based provider uses ASP.NET Core Data Protection for encryption.
 
@@ -66,11 +66,11 @@ TempData is automatically registered when calling `AddRazorComponents()` and is 
 }
 ```
 
-The `ITempData` interface provides `Get`, `Peek`, `Keep`, and `Keep(string)` methods for controlling value lifecycle. A `SessionStorageTempDataProvider` is available as an alternative to the default `CookieTempDataProvider` ([dotnet/aspnetcore#49683](https://github.com/dotnet/aspnetcore/issues/49683)).
+The `ITempData` interface provides `Get`, `Peek`, `Keep`, and `Keep(string)` methods for controlling value lifecycle. A `SessionStorageTempDataProvider` is available as an alternative to the default `CookieTempDataProvider`.
 
 ## OpenAPI 3.2.0 support
 
-`Microsoft.AspNetCore.OpenApi` now supports OpenAPI 3.2.0 through an updated dependency on `Microsoft.OpenApi` 3.3.1. This update includes breaking changes from the underlying library — see the [Microsoft.OpenApi upgrade guide](https://github.com/microsoft/OpenAPI.NET/blob/main/docs/upgrade-guide-3.md) for details ([dotnet/aspnetcore#65415](https://github.com/dotnet/aspnetcore/pull/65415)).
+`Microsoft.AspNetCore.OpenApi` now supports OpenAPI 3.2.0 through an updated dependency on `Microsoft.OpenApi` 3.3.1. This update includes breaking changes from the underlying library — see the [Microsoft.OpenApi upgrade guide](https://github.com/microsoft/OpenAPI.NET/blob/main/docs/upgrade-guide-3.md) for details.
 
 To generate an OpenAPI 3.2.0 document, specify the version when calling `AddOpenApi()`:
 
@@ -81,13 +81,13 @@ builder.Services.AddOpenApi(options =>
 });
 ```
 
-Subsequent updates will take advantage of new capabilities in the 3.2.0 specification, such as item schema support for streaming events ([dotnet/aspnetcore#63754](https://github.com/dotnet/aspnetcore/issues/63754)).
+Subsequent updates will take advantage of new capabilities in the 3.2.0 specification, such as item schema support for streaming events.
 
 Thank you [@baywet](https://github.com/baywet) for this contribution!
 
 ## .NET Web Worker project template
 
-A new `dotnet new webworker` project template provides infrastructure for running .NET code in a Web Worker, keeping Blazor WebAssembly UI responsive during heavy computations ([dotnet/aspnetcore#65037](https://github.com/dotnet/aspnetcore/pull/65037)).
+A new `dotnet new webworker` project template provides infrastructure for running .NET code in a Web Worker, keeping Blazor WebAssembly UI responsive during heavy computations.
 
 ```bash
 # Create a .NET Web Worker project
@@ -102,13 +102,13 @@ await using var worker = await WebWorkerClient.CreateAsync(JSRuntime);
 var result = await worker.InvokeAsync<string>("MyApp.MyWorker.Greet", ["World"]);
 ```
 
-This enables offloading expensive computations to a separate thread without blocking UI rendering ([dotnet/runtime#95452](https://github.com/dotnet/runtime/issues/95452)).
+This enables offloading expensive computations to a separate thread without blocking UI rendering.
 
 ## Infer passkey display name from authenticator
 
-The Blazor Web App project template now automatically infers friendly display names for passkeys based on their AAGUID (Authenticator Attestation GUID). Built-in mappings are included for the most commonly used passkey authenticators, including Google Password Manager, iCloud Keychain, Windows Hello, 1Password, and Bitwarden ([dotnet/aspnetcore#65343](https://github.com/dotnet/aspnetcore/pull/65343)).
+The Blazor Web App project template now automatically infers friendly display names for passkeys based on their AAGUID (Authenticator Attestation GUID). Built-in mappings are included for the most commonly used passkey authenticators, including Google Password Manager, iCloud Keychain, Windows Hello, 1Password, and Bitwarden.
 
-For known authenticators, the name is automatically assigned without prompting the user. For unknown authenticators, the user is redirected to a rename page. Developers can extend the mappings by adding entries to the `PasskeyAuthenticators.cs` dictionary in their project ([dotnet/aspnetcore#63630](https://github.com/dotnet/aspnetcore/issues/63630)).
+For known authenticators, the name is automatically assigned without prompting the user. For unknown authenticators, the user is redirected to a rename page. Developers can extend the mappings by adding entries to the `PasskeyAuthenticators.cs` dictionary in their project.
 
 ## Community contributors
 

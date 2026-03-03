@@ -48,13 +48,13 @@ Every feature entry MUST include:
 
 1. **Why** — What problem does this solve? What scenario does it enable?
 2. **How** — A code sample showing how to use the feature. If a feature cannot be demonstrated with a code sample, reconsider whether it's user-facing enough for release notes.
-3. **Learn more** — Link to the backing issue (if one exists) for details.
+3. **Learn more** — Link to the backing issue (if one exists) for details. However, do not clutter the release notes with links — only include issue links when they provide significant additional context beyond what's in the release notes entry itself.
 
 Keep entries concise — link to docs for full details rather than documenting every option.
 
 ### No PR links
 
-Do NOT include PR links in ASP.NET Core release notes. Features often span multiple PRs, so linking a single PR is misleading. Instead, link to the **backing issue** when one exists. If there is no backing issue, omit the link entirely.
+Do NOT include PR links in ASP.NET Core release notes. Features often span multiple PRs, so linking a single PR is misleading. Issue links are optional — only include them when they provide meaningful additional context.
 
 ## Feature Categorization
 
@@ -108,7 +108,7 @@ Follow the general format template from `author-2-format.md` with these override
 
 - **Document title**: `# ASP.NET Core in .NET <VERSION> <PREVIEW> - Release Notes`
 - **Intro links**: Include links to both the "What's new" docs page and the ASP.NET Core roadmap issue.
-- **PR link format**: Do NOT link to individual PRs. Link to backing issues when they exist, placed at the end of the relevant sentence: `([dotnet/aspnetcore#NNNNN](url))`. If no backing issue exists, omit the link.
+- **PR link format**: Do NOT link to individual PRs. Issue links are optional — only include them when they add meaningful context beyond the release notes text itself.
 
 Example header:
 
