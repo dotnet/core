@@ -7,14 +7,6 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [OpenAPI 3.2.0 support](#openapi-320-support)
 - [.NET Web Worker project template](#net-web-worker-project-template)
 - [Infer passkey display name from authenticator](#infer-passkey-display-name-from-authenticator)
-- [Passkey sign-in enforces confirmation and lockout checks](#passkey-sign-in-enforces-confirmation-and-lockout-checks)
-- [Faster bad request handling in Kestrel](#faster-bad-request-handling-in-kestrel)
-- [Reduced allocations in HTTP logging middleware](#reduced-allocations-in-http-logging-middleware)
-- [Label `id` attribute generation in interactive render mode](#label-id-attribute-generation-in-interactive-render-mode)
-- [Development certificate compatibility with older SDKs](#development-certificate-compatibility-with-older-sdks)
-- [SignalR HTTP/2 with `SkipNegotiation`](#signalr-http2-with-skipnegotiation)
-- [SignalR `WebSocketFactory` for browser environments](#signalr-websocketfactory-for-browser-environments)
-- [Request smuggling mitigation improvement](#request-smuggling-mitigation-improvement)
 
 ASP.NET Core updates in .NET 11:
 
@@ -27,7 +19,16 @@ ASP.NET Core now natively adds OpenTelemetry semantic convention attributes to t
 
 This change means that `Microsoft.AspNetCore.Hosting.SuppressActivityOpenTelemetryData` now defaults to `false`, enabling telemetry on the activity by default in .NET 11. The HTTP request duration metric has also been updated to include the `error.type` attribute for 500+ response status codes.
 
-By building this instrumentation directly into the framework, applications no longer need to rely on external instrumentation libraries and their associated overhead from Diagnostic Source listeners ([dotnet/aspnetcore#52439](https://github.com/dotnet/aspnetcore/issues/52439)).
+To collect the built-in tracing data, subscribe to the `Microsoft.AspNetCore` activity source in your OpenTelemetry configuration:
+
+```csharp
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing => tracing
+        .AddSource("Microsoft.AspNetCore")
+        .AddConsoleExporter());
+```
+
+No additional instrumentation library (such as `OpenTelemetry.Instrumentation.AspNetCore`) is needed. The framework now directly populates semantic convention attributes like `http.request.method`, `url.path`, `http.response.status_code`, and `server.address` on the request activity ([dotnet/aspnetcore#52439](https://github.com/dotnet/aspnetcore/issues/52439)).
 
 ## TempData support for Blazor
 
@@ -71,6 +72,15 @@ The `ITempData` interface provides `Get`, `Peek`, `Keep`, and `Keep(string)` met
 
 `Microsoft.AspNetCore.OpenApi` now supports OpenAPI 3.2.0 through an updated dependency on `Microsoft.OpenApi` 3.3.1. This update includes breaking changes from the underlying library — see the [Microsoft.OpenApi upgrade guide](https://github.com/microsoft/OpenAPI.NET/blob/main/docs/upgrade-guide-3.md) for details ([dotnet/aspnetcore#65415](https://github.com/dotnet/aspnetcore/pull/65415)).
 
+To generate an OpenAPI 3.2.0 document, specify the version when calling `AddOpenApi()`:
+
+```csharp
+builder.Services.AddOpenApi(options =>
+{
+    options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_2;
+});
+```
+
 Subsequent updates will take advantage of new capabilities in the 3.2.0 specification, such as item schema support for streaming events ([dotnet/aspnetcore#63754](https://github.com/dotnet/aspnetcore/issues/63754)).
 
 Thank you [@baywet](https://github.com/baywet) for this contribution!
@@ -100,49 +110,10 @@ The Blazor Web App project template now automatically infers friendly display na
 
 For known authenticators, the name is automatically assigned without prompting the user. For unknown authenticators, the user is redirected to a rename page. Developers can extend the mappings by adding entries to the `PasskeyAuthenticators.cs` dictionary in their project ([dotnet/aspnetcore#63630](https://github.com/dotnet/aspnetcore/issues/63630)).
 
-## Passkey sign-in enforces confirmation and lockout checks
-
-`PasskeySignInAsync()` now calls `PreSignInCheck()` before signing in the user, enforcing `RequireConfirmedEmail`, `RequireConfirmedPhoneNumber`, and lockout checks. Previously, passkey sign-in bypassed these requirements, which was inconsistent with `PasswordSignInAsync()` and other sign-in methods ([dotnet/aspnetcore#65024](https://github.com/dotnet/aspnetcore/pull/65024)).
-
-## Faster bad request handling in Kestrel
-
-Kestrel's HTTP/1.1 request parser now uses a non-throwing code path for handling malformed requests. Instead of relying on `try/catch` with `BadHttpRequestException` for every parse failure, the parser returns a result struct indicating success, incomplete, or error states ([dotnet/aspnetcore#65256](https://github.com/dotnet/aspnetcore/pull/65256)).
-
-In scenarios with many malformed requests — such as port scanning, malicious traffic, or misconfigured clients — this change improves throughput by approximately 20% on an Azure Linux VM, with CPU-bound scenarios showing over 40% improvement as time spent in exception handling drops from approximately 10% to 0.2%. There is no impact on valid request processing.
-
-## Reduced allocations in HTTP logging middleware
-
-The `ResponseBufferingStream` used by `HttpLoggingMiddleware` is now pooled using object pooling instead of being instantiated on every request where response body logging or interceptors are enabled. This reduces allocations on the response logging path ([dotnet/aspnetcore#65147](https://github.com/dotnet/aspnetcore/pull/65147)).
-
-## Label `id` attribute generation in interactive render mode
-
-Building on the [Label component introduced in Preview 1](../preview1/aspnetcore.md), the `id` attribute for input components is now correctly generated in interactive render mode. Previously, `IdAttributeValue` relied solely on `NameAttributeValue`, which is empty in interactive mode. The `id` attribute is now generated independently to support label/input association regardless of render mode ([dotnet/aspnetcore#65263](https://github.com/dotnet/aspnetcore/pull/65263)).
-
-## Development certificate compatibility with older SDKs
-
-The ASP.NET Core development certificate version check has been updated to accept certificates from SDK versions as far back as 10.0.100. Previously, version mismatches between SDK tooling and runtime could cause the runtime to reject valid development certificates, particularly in scenarios with pinned SDKs via `global.json`, preview SDKs, or self-contained NuGet packages ([dotnet/aspnetcore#65151](https://github.com/dotnet/aspnetcore/pull/65151)).
-
-## SignalR HTTP/2 with `SkipNegotiation`
-
-SignalR now correctly creates the `HttpClient` for WebSocket connections when using `SkipNegotiation` mode over HTTP/2. Previously, `SkipNegotiation` would fail when using HTTP/2 transport ([dotnet/aspnetcore#62940](https://github.com/dotnet/aspnetcore/pull/62940)).
-
-Thank you [@WeihanLi](https://github.com/WeihanLi) for this contribution!
-
-## SignalR `WebSocketFactory` for browser environments
-
-The `WebSocketFactory` property on `HttpConnectionOptions` is now correctly set for all environments, including browser platforms. Previously, the factory was only assigned inside a non-browser platform check, which prevented custom `WebSocketFactory` configurations from working in Blazor WebAssembly ([dotnet/aspnetcore#65359](https://github.com/dotnet/aspnetcore/pull/65359)).
-
-Thank you [@BekAllaev](https://github.com/BekAllaev) for this contribution!
-
-## Request smuggling mitigation improvement
-
-The request smuggling mitigation logic that handles conflicting `Transfer-Encoding` and `Content-Length` headers now uses `TryAdd()` when writing the `X-Content-Length` header. This prevents an unhandled exception when a request already includes an explicit `X-Content-Length` header ([dotnet/aspnetcore#65445](https://github.com/dotnet/aspnetcore/pull/65445)).
-
 ## Community contributors
 
 Thank you contributors! ❤️
 
+- [@baywet](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview2+author%3Abaywet)
 - [@BekAllaev](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview2+author%3ABekAllaev)
 - [@WeihanLi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview2+author%3AWeihanLi)
-- [@baywet](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview2+author%3Abaywet)
-Feature summary
