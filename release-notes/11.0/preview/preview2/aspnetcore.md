@@ -4,11 +4,9 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 
 - [Native OpenTelemetry tracing for ASP.NET Core](#native-opentelemetry-tracing-for-aspnet-core)
 - [TempData support for Blazor](#tempdata-support-for-blazor)
-- [OpenAPI 3.2.0 support](#openapi-320-support)
 - [.NET Web Worker project template](#net-web-worker-project-template)
 - [Infer passkey display name from authenticator](#infer-passkey-display-name-from-authenticator)
 - [Passkey sign-in enforces confirmation and lockout checks](#passkey-sign-in-enforces-confirmation-and-lockout-checks)
-- [Validation source generator support for indexer properties](#validation-source-generator-support-for-indexer-properties)
 - [Faster bad request handling in Kestrel](#faster-bad-request-handling-in-kestrel)
 - [Reduced allocations in HTTP logging middleware](#reduced-allocations-in-http-logging-middleware)
 - [Label `id` attribute generation in interactive render mode](#label-id-attribute-generation-in-interactive-render-mode)
@@ -68,14 +66,6 @@ TempData is automatically registered when calling `AddRazorComponents()` and is 
 
 The `ITempData` interface provides `Get`, `Peek`, `Keep`, and `Keep(string)` methods for controlling value lifecycle. A `SessionStorageTempDataProvider` is available as an alternative to the default `CookieTempDataProvider` ([dotnet/aspnetcore#49683](https://github.com/dotnet/aspnetcore/issues/49683)).
 
-## OpenAPI 3.2.0 support
-
-`Microsoft.AspNetCore.OpenApi` now supports OpenAPI 3.2.0 through an updated dependency on `Microsoft.OpenApi` 3.3.1. This update includes breaking changes from the underlying library — see the [Microsoft.OpenApi upgrade guide](https://github.com/microsoft/OpenAPI.NET/blob/main/docs/upgrade-guide-3.md) for details ([dotnet/aspnetcore#65415](https://github.com/dotnet/aspnetcore/pull/65415)).
-
-Subsequent updates will take advantage of new capabilities in the 3.2.0 specification, such as item schema support for streaming events ([dotnet/aspnetcore#63754](https://github.com/dotnet/aspnetcore/issues/63754)).
-
-Thank you [@baywet](https://github.com/baywet) for this contribution!
-
 ## .NET Web Worker project template
 
 A new `dotnet new webworker` project template provides infrastructure for running .NET code in a Web Worker, keeping Blazor WebAssembly UI responsive during heavy computations ([dotnet/aspnetcore#65037](https://github.com/dotnet/aspnetcore/pull/65037)).
@@ -104,10 +94,6 @@ For known authenticators, the name is automatically assigned without prompting t
 ## Passkey sign-in enforces confirmation and lockout checks
 
 `PasskeySignInAsync()` now calls `PreSignInCheck()` before signing in the user, enforcing `RequireConfirmedEmail`, `RequireConfirmedPhoneNumber`, and lockout checks. Previously, passkey sign-in bypassed these requirements, which was inconsistent with `PasswordSignInAsync()` and other sign-in methods ([dotnet/aspnetcore#65024](https://github.com/dotnet/aspnetcore/pull/65024)).
-
-## Validation source generator support for indexer properties
-
-The validation source generator now correctly skips indexer properties when discovering validatable members. Previously, types with indexers (such as `JsonElement` or `Dictionary<string, object>`) used as minimal API endpoint parameters with `AddValidation()` caused a runtime crash because C# indexers were being emitted as `ValidatablePropertyInfo` entries that couldn't be resolved via reflection ([dotnet/aspnetcore#65432](https://github.com/dotnet/aspnetcore/pull/65432)).
 
 ## Faster bad request handling in Kestrel
 
@@ -149,5 +135,4 @@ Thank you contributors! ❤️
 
 - [@BekAllaev](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview2+author%3ABekAllaev)
 - [@WeihanLi](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview2+author%3AWeihanLi)
-- [@baywet](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview2+author%3Abaywet)
 Feature summary
