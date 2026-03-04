@@ -42,7 +42,7 @@ Do not include internal performance optimizations or implementation changes wher
 
 ### Partial features
 
-If part of a feature lands in a release but it's not ready for users to try out, hold off on documenting it until it's in a more complete form. Check with the team if uncertain.
+Follow the standard [partial features and building blocks](editorial-rules.md#partial-features-and-building-blocks) rules. Check with the team if uncertain whether a partially-landed feature is ready to document.
 
 ### Required content per feature
 

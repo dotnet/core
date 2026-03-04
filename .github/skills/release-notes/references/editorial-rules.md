@@ -105,3 +105,22 @@ Exclude:
 - Test-only changes
 - Build/infrastructure changes
 - Backports from servicing branches
+
+### Partial features and building blocks
+
+Some PRs contribute to a broader initiative where the full feature spans multiple previews. These still deserve coverage when they're independently useful — **err on the side of including** a feature if it's questionable. However, watch for building blocks that have no standalone value yet.
+
+**Warning signs to investigate** (none of these alone means "exclude" — use them to trigger closer inspection):
+
+1. **No meaningful code sample** — if you cannot write a code sample where a user does something useful with the feature, it's likely not independently usable yet. The [code sample validation step](validate-samples.md) is the final safety net, but check proactively during categorization.
+2. **PR says "Contributes to" rather than "Fixes"** — this indicates the PR is one piece of a larger effort. Check the parent issue to see how much of the full API surface has shipped versus what's still pending. Many usable features "contribute to" a broad epic — this is a signal to investigate, not to exclude.
+3. **No independent utility** — the change only becomes useful in combination with other changes that haven't shipped yet. Ask: can a user benefit from this change on its own, or does it require an unshipped API, configuration surface, or integration point to be meaningful?
+4. **Release notes text says "upcoming" or "future"** — if the entry has to refer to planned-but-unshipped APIs to explain the feature's value, the feature may not be self-contained enough to document on its own.
+
+**The key question is always: can a user try this today?** If yes, include it — even if it's part of a larger initiative. When a feature IS part of a broader effort, note that context so readers understand the bigger picture (e.g., "This is part of the new ChildProcess API initiative; additional capabilities will follow in future previews.").
+
+**When a building block genuinely has no standalone value:**
+
+- If the parent initiative has a section in the release notes, mention the building blocks briefly as foundational work without giving them their own subsection.
+- If no broader context exists, omit them entirely — they'll be covered when the full feature ships.
+- When in doubt, include it with appropriate context rather than omitting it.

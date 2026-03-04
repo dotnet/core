@@ -23,6 +23,8 @@ Group PRs into tiers:
 
 Only Headline, Quality, Performance, and significant API additions go into the release notes. Use judgment — a 2-line dictionary entry addition is less noteworthy than a new numeric type.
 
+**Before assigning a tier**, check each candidate against the [partial features and building blocks](editorial-rules.md#partial-features-and-building-blocks) heuristics. If a candidate is part of a broader initiative, it may still deserve its own entry — the key question is whether a user can try it today. Features that are independently useful but part of a larger effort should note that context. Features that have no standalone value should be folded into a brief mention or omitted.
+
 The early previews (preview1 through preview5) tend to include more features, and the later previews (preview6, preview7, and rc1) tend to have fewer headline features and more quality improvements and small additions. The RC2 and GA releases typically have fewer changes so quality and performance improvements can be emphasized more.
 
 ## Theme continuations
