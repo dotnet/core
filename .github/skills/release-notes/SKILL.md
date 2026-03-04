@@ -13,7 +13,7 @@ Generate release notes for a .NET preview or RC release. This skill works for an
 ## Execution guidelines
 
 - **Do not write intermediate files to disk.** Use the **SQL tool** for structured storage and querying (see [sql-storage.md](references/sql-storage.md) for schema).
-- **Do not run linters, formatters, or validators.** Do not run markdownlint, prettier, link checkers, or any other validation tool on the output. The only output of this skill is the release notes markdown file itself.
+- **Do not run linters, formatters, or validators.** Do not run markdownlint, prettier, link checkers, or any other validation tool on the output. The outputs of this skill are the release notes markdown file and validated code sample apps.
 - **Maximize parallel tool calls.** Fetch multiple PR and issue details in a single response to minimize round trips.
 - **Follow [GitHub tool guidance](references/github-tools.md)** for all GitHub API interactions.
 
@@ -62,11 +62,15 @@ Write the release notes:
 2. **[Apply formatting rules](references/format-template.md)** — follow the standard .NET release notes document structure.
 3. **[Apply editorial rules](references/editorial-rules.md)** — follow attribution, benchmark, naming, and ranking guidelines.
 
-### Step 5: Suggest reviewers
+### Step 5: Validate code samples
+
+**[Validate code samples](references/validate-samples.md)** — extract every code sample from the authored release notes, scaffold file-based .NET console apps in a `samples/` folder alongside the release notes file, and verify each sample compiles and runs. Fix any code samples in the release notes that fail validation (with user confirmation). A `.gitignore` at `release-notes/.gitignore` ensures the samples folders are not committed.
+
+### Step 6: Suggest reviewers
 
 **[Suggest reviewers](references/suggest-reviewers.md)** — gather authors, coauthors, assignees, and mergers from candidate PRs and present suggested reviewers grouped by area.
 
-### Step 6: Confirm and finalize
+### Step 7: Confirm and finalize
 
 Present the complete draft to the user:
 
