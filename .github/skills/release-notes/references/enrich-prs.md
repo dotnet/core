@@ -107,3 +107,31 @@ gh issue view <number> --repo "<owner>/<repo>" \
 ```
 
 Store all fetched details using the **SQL tool** (update `body` and `reactions` columns in the `prs` table; insert into the `issues` table). Do **not** write intermediate files to disk.
+
+## Detect preview-to-preview feedback fixes
+
+After enriching all candidate PRs with their linked issues, scan for **preview feedback fixes** — bug fixes or behavior changes driven by community feedback on a previous preview. These are especially noteworthy for release notes (see [editorial-rules.md](editorial-rules.md#preview-to-preview-feedback-fixes)).
+
+### Identification heuristics
+
+For each candidate PR that has a linked issue (via `Fixes`/`Closes`/`Resolves`):
+
+1. **Check issue creation date** — if the issue was created *after* the start date (the previous preview's Code Complete), it's a preview-era issue.
+2. **Check issue author** — if the author is NOT a member of the team (not in the PR author list, not a bot, and doesn't appear frequently as a merger/assignee across candidate PRs), flag it as community-reported.
+3. **Check for bug/regression labels** — labels like `bug`, `regression`, `behavior-change`, or team-specific equivalents are strong signals.
+4. **Check reaction and comment counts** — record these as the **community signal strength** for this fix.
+
+### Flag in the database
+
+For PRs that match, update the SQL record:
+
+```sql
+UPDATE prs SET is_preview_feedback_fix = 1,
+  feedback_issue_number = <issue_number>,
+  feedback_issue_reactions = <total_reactions>,
+  feedback_issue_comments = <comment_count>,
+  feedback_reporter = '<issue_author>'
+WHERE number = <pr_number>;
+```
+
+These flagged PRs are included during [categorization](categorize-entries.md) under the "Preview feedback fixes" tier and ranked by community signal strength.

@@ -23,7 +23,9 @@ Do NOT use area-label-scoped searches as described in `collect-prs.md` — those
 
 ASP.NET Core release notes should NOT include bug fixes. Fixing bugs in existing functionality is assumed. The release notes focus exclusively on new capabilities and functionality.
 
-A good rule of thumb: if a PR fixes a behavior that was supposed to work already (even if the fix is important), it does not belong in the release notes. Examples of bug fixes to exclude:
+**Exception — preview feedback fixes:** Bug fixes or behavior changes made in response to community feedback on a previous preview ARE included. See the standard [preview-to-preview feedback fixes](editorial-rules.md#preview-to-preview-feedback-fixes) criteria. These show that the preview process is working and the team is responsive to feedback.
+
+A good rule of thumb: if a PR fixes a behavior that was supposed to work already in a *released* version (even if the fix is important), it does not belong in the release notes. But if a community member reported the issue against a *preview* and the team responded, that's worth calling out. Examples of bug fixes to exclude:
 
 - Fixing a method that bypassed expected checks
 - Fixing attribute generation that only failed in certain render modes

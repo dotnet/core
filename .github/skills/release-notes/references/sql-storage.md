@@ -15,7 +15,12 @@ CREATE TABLE prs (
     body TEXT,
     reactions INTEGER DEFAULT 0,
     is_library INTEGER DEFAULT 0,
-    is_candidate INTEGER DEFAULT 0
+    is_candidate INTEGER DEFAULT 0,
+    is_preview_feedback_fix INTEGER DEFAULT 0,
+    feedback_issue_number INTEGER,
+    feedback_issue_reactions INTEGER,
+    feedback_issue_comments INTEGER,
+    feedback_reporter TEXT
 );
 
 CREATE TABLE issues (
@@ -64,6 +69,19 @@ SELECT * FROM prs
 WHERE is_candidate = 1
   AND labels LIKE '%area-System.Text.Json%'
 ORDER BY merged_at;
+```
+
+### Preview feedback fixes ranked by community signal
+
+```sql
+SELECT p.number, p.title, p.feedback_reporter,
+       p.feedback_issue_number, p.feedback_issue_reactions,
+       p.feedback_issue_comments,
+       (p.feedback_issue_reactions + p.feedback_issue_comments) AS signal_strength
+FROM prs p
+WHERE p.is_candidate = 1
+  AND p.is_preview_feedback_fix = 1
+ORDER BY signal_strength DESC;
 ```
 
 ### Reviewer suggestions by area

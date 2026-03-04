@@ -77,6 +77,29 @@ Include a feature if it gives users something new to try, something that works b
 - High community demand (reaction counts on backing issues)
 - Behavior changes users need to be aware of
 
+### Preview-to-preview feedback fixes
+
+Bug fixes are generally excluded from release notes — fixing existing functionality is assumed. However, **preview-to-preview feedback fixes** are an important exception. These are changes made in response to community feedback on a previous preview, and they demonstrate that the preview process is working as intended.
+
+**Include a bug fix or behavior change when ALL of these apply:**
+
+1. **Preview-era issue** — the linked issue was created *after* the previous preview shipped (within the current release's preview cycle)
+2. **Community-reported** — the issue was filed by someone outside the team (not the PR author or a regular contributor to the repo)
+3. **Responsive fix** — a PR in the current preview directly addresses the reported issue
+
+**Prioritization signals** (more signal = more noteworthy):
+
+- **Reaction count on the issue** — an issue with many 👍 or other reactions indicates broad community impact
+- **Comment activity** — issues with substantive discussion (not just "+1" comments) suggest the problem was significant
+- **Multiple reporters** — if several issues report the same underlying problem, consolidate and note the breadth of feedback
+- **Behavioral change** — fixes that change an API's behavior, defaults, or error handling based on feedback are especially worth calling out, since users who adopted the previous preview behavior need to know
+
+**How to write these entries:**
+
+- Frame them positively — "Based on community feedback, X now does Y" — not as admissions of mistakes
+- Credit the reporter with a link to the issue
+- Briefly describe what changed and why, so users on the previous preview know what to expect
+
 Exclude:
 - Internal refactoring with no user-facing change
 - Test-only changes

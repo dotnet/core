@@ -19,6 +19,7 @@ Group PRs into tiers:
 - **Performance**: PRs with benchmark data showing measurable improvements
 - **Significant API additions**: Notable new API surface that unlocks new scenarios or provides meaningful productivity gains
 - **Small improvements**: Single-mapping additions and minor fixes with public API changes should rarely be included
+- **Preview feedback fixes**: Bug fixes or behavior changes made in response to community feedback on a previous preview. See [editorial-rules.md](editorial-rules.md#preview-to-preview-feedback-fixes) for inclusion criteria. These are ranked by the strength of community signal — an issue with 50+ reactions and active discussion is a headline-level entry, while one with minimal engagement is a minor mention
 
 Only Headline, Quality, Performance, and significant API additions go into the release notes. Use judgment — a 2-line dictionary entry addition is less noteworthy than a new numeric type.
 
