@@ -17,8 +17,6 @@ ASP.NET Core updates in .NET 11:
 
 ASP.NET Core now natively adds OpenTelemetry semantic convention attributes to the HTTP server activity, aligning with the [OpenTelemetry HTTP server span specification](https://opentelemetry.io/docs/specs/semconv/http/http-spans/#http-server-span). All required attributes are now included by default, matching the metadata previously only available through the `OpenTelemetry.Instrumentation.AspNetCore` library.
 
-This change means that `Microsoft.AspNetCore.Hosting.SuppressActivityOpenTelemetryData` now defaults to `false`, enabling telemetry on the activity by default in .NET 11. The HTTP request duration metric has also been updated to include the `error.type` attribute for 500+ response status codes.
-
 To collect the built-in tracing data, subscribe to the `Microsoft.AspNetCore` activity source in your OpenTelemetry configuration:
 
 ```csharp
