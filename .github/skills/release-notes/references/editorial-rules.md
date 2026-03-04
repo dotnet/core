@@ -106,6 +106,38 @@ Exclude:
 - Build/infrastructure changes
 - Backports from servicing branches
 
+### Bug fix summary
+
+Bug fixes excluded from individual feature entries still deserve acknowledgment — they represent real quality improvements and often address issues reported by community members. Include a **"Bug fixes"** section after all feature entries (but before "Community contributors") that briefly lists the areas that received fixes.
+
+**How to build the summary:**
+
+1. Collect all candidate PRs that were excluded from feature entries because they are bug fixes, correctness improvements, or quality changes without new API surface.
+2. Group them by area (namespace or component, e.g., "System.Net.Http", "System.Collections", "Extensions-Configuration").
+3. For each area, note the number of fixes. If any fix has a **community-reported backing issue** (the linked issue was filed by someone outside the team), call it out — this signals that the team is responsive to community feedback.
+
+**Format:**
+
+```markdown
+## Bug fixes
+
+This release includes bug fixes and quality improvements across several areas:
+
+- **System.Net.Http** — Fixed authenticated proxy credential handling ([dotnet/runtime#123363](https://github.com/dotnet/runtime/issues/123363), reported by [@username](https://github.com/username))
+- **System.Collections** — Fixed integer overflow in `ImmutableArray` range validation
+- **System.Xml** — Fixed `XDocument.LoadAsync` to avoid synchronous reads
+- **Extensions-Logging** — Fixed message escaping in `LoggerMessageGenerator`
+```
+
+**Rules:**
+
+- Keep each bullet to one line — area name in bold, brief description of what was fixed
+- When a fix has a community-reported backing issue, include a link to the issue and credit the reporter inline
+- When multiple fixes land in the same area, combine them into one bullet (e.g., "Fixed two issues in ...")
+- Order areas alphabetically for consistency
+- Do not include test-only, CI, doc-only, or infra changes — only fixes that improve user-facing behavior or correctness
+- This section does NOT appear in the TOC — it's a lightweight summary, not a feature entry
+
 ### Partial features and building blocks
 
 Some PRs contribute to a broader initiative where the full feature spans multiple previews. These still deserve coverage when they're independently useful — **err on the side of including** a feature if it's questionable. However, watch for building blocks that have no standalone value yet.

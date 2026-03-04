@@ -24,6 +24,14 @@ The release notes must mirror the style of the official .NET Preview release not
 ```csharp
 // Code example or API signature
 ```
+
+## Bug fixes
+
+<brief summary of areas that received fixes — see [editorial-rules.md](editorial-rules.md#bug-fix-summary)>
+
+## Community contributors
+
+<list of external contributors — see [editorial-rules.md](editorial-rules.md#community-contributors-section)>
 ```
 
 The `<Product>` name comes from the team context (e.g., ".NET Libraries", "ASP.NET Core", "Windows Forms").

@@ -107,6 +107,6 @@ The samples folder is excluded from git via the `.gitignore` created in step 1. 
 
 ## Notes
 
-- **SDK availability**: The target .NET SDK version must be installed locally for the samples to build. If it is not available, warn the user and skip validation rather than silently failing.
+- **SDK availability**: The target .NET SDK version must be installed locally for the samples to build. Check with `dotnet --list-sdks`. If the required SDK is not installed, prompt the user to install a daily build from the [.NET SDK supported platforms builds table](https://github.com/dotnet/dotnet/blob/main/docs/builds-table.md#supported-platforms) — provide this link so they can download the appropriate installer for their platform. Explain that installing the daily build SDK will allow code samples to be validated against the actual build, then **ask the user for confirmation** before proceeding with validation. If the user declines the install, skip validation and note that samples were not verified.
 - **Partial validation is acceptable**: Not every snippet can be a fully runnable app (e.g., ASP.NET middleware pipelines, GUI code). For these, validate that the code compiles even if it cannot be executed.
 - **Do not modify release notes silently**: If a code sample needs correction, always show the user the original and corrected versions and get confirmation before updating the release notes file.
