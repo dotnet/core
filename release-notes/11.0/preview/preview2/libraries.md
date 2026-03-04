@@ -2,42 +2,37 @@
 
 .NET 11 Preview 2 includes new .NET Libraries features & enhancements:
 
-- [New Process APIs](#new-process-apis)
-- [Tar archive format selection](#tar-archive-format-selection)
 - [Generic GetTypeInfo for System.Text.Json](#generic-gettypeinfo-for-systemtextjson)
+- [Tar archive format selection](#tar-archive-format-selection)
+- [Matrix4x4.GetDeterminant ~15% faster](#matrix4x4getdeterminant-15-faster)
 
 .NET Libraries updates in .NET 11:
 
 - [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview) documentation
 
-## New Process APIs
+## Generic GetTypeInfo for System.Text.Json
 
-.NET 11 introduces a new set of process execution APIs designed for simplicity, reliability, and efficiency. This is part of a broader initiative ([dotnet/runtime#123959](https://github.com/dotnet/runtime/issues/123959)) to provide a `ChildProcess` API with built-in support for safe output capture, automatic child process lifetime management, and clean timeout and cancellation handling. Preview 2 includes the first foundational types for this effort.
-
-### ProcessExitStatus
-
-[dotnet/runtime#124264](https://github.com/dotnet/runtime/pull/124264) adds the `ProcessExitStatus` class, which provides a unified representation of how a process terminated — combining the exit code, cancellation status, and termination signal into a single type.
+A common pattern when working with `System.Text.Json` type metadata is to retrieve a `JsonTypeInfo<T>` from `JsonSerializerOptions`, which previously required a manual downcast from the non-generic `GetTypeInfo(Type)` method ([dotnet/runtime#118468](https://github.com/dotnet/runtime/issues/118468)). New generic `GetTypeInfo<T>()` and `TryGetTypeInfo<T>()` methods on `JsonSerializerOptions` eliminate this cast and return strongly-typed metadata directly ([dotnet/runtime#123940](https://github.com/dotnet/runtime/pull/123940)).
 
 ```csharp
-namespace System.Diagnostics;
+// Before: manual downcast required
+JsonTypeInfo<MyType> info = (JsonTypeInfo<MyType>)options.GetTypeInfo(typeof(MyType));
 
-public sealed class ProcessExitStatus
+// After: generic method returns the right type directly
+JsonTypeInfo<MyType> info = options.GetTypeInfo<MyType>();
+
+// TryGetTypeInfo variant for cases where the type may not be registered
+if (options.TryGetTypeInfo<MyType>(out JsonTypeInfo<MyType>? typeInfo))
 {
-    public ProcessExitStatus(int exitCode, bool canceled, PosixSignal? signal = null);
-
-    public int ExitCode { get; }
-    public bool Canceled { get; }
-    public PosixSignal? Signal { get; }
+    // Use typeInfo
 }
 ```
 
-### PosixSignal.SIGKILL
-
-[dotnet/runtime#124256](https://github.com/dotnet/runtime/pull/124256) adds `PosixSignal.SIGKILL` to the `PosixSignal` enum, enabling the new process APIs to send and represent SIGKILL signals. SIGKILL cannot be caught or ignored per POSIX semantics — the OS enforces this naturally, throwing appropriate exceptions if registration is attempted. This supports `SafeChildProcessHandle.SendSignal` and `Kill` methods in the upcoming `ChildProcess` API ([dotnet/runtime#123380](https://github.com/dotnet/runtime/issues/123380)).
+This is particularly useful when working with source generation, NativeAOT, and polymorphic serialization scenarios where type metadata access is common.
 
 ## Tar Archive Format Selection
 
-[dotnet/runtime#123407](https://github.com/dotnet/runtime/pull/123407), contributed by community member @kasperk81, adds new overloads to `TarFile.CreateFromDirectory` that accept a `TarEntryFormat` parameter. The new overloads support all four tar formats (Pax, Ustar, GNU, V7), giving you direct control over the archive format for compatibility with specific tools and environments.
+New overloads on `TarFile.CreateFromDirectory` accept a `TarEntryFormat` parameter, giving you direct control over the archive format ([dotnet/runtime#123407](https://github.com/dotnet/runtime/pull/123407)). Previously, `CreateFromDirectory` always produced Pax archives. The new overloads support all four tar formats — Pax, Ustar, GNU, and V7 — for compatibility with specific tools and environments ([dotnet/runtime#121819](https://github.com/dotnet/runtime/issues/121819)).
 
 ```csharp
 // Create a GNU format tar archive for Linux compatibility
@@ -53,19 +48,38 @@ await TarFile.CreateFromDirectoryAsync("/source/dir", "/dest/archive.tar",
     includeBaseDirectory: true, TarEntryFormat.Pax, cancellationToken);
 ```
 
-## Generic GetTypeInfo for System.Text.Json
+Thank you [@kasperk81](https://github.com/kasperk81) for this contribution!
 
-[dotnet/runtime#123940](https://github.com/dotnet/runtime/pull/123940) adds generic `GetTypeInfo<T>()` and `TryGetTypeInfo<T>()` methods to `JsonSerializerOptions`, providing direct access to strongly-typed `JsonTypeInfo<T>` without manual downcasting.
+## Matrix4x4.GetDeterminant ~15% Faster
 
-```csharp
-// Generic method returns the right type directly
-JsonTypeInfo<MyType> info = options.GetTypeInfo<MyType>();
+`Matrix4x4.GetDeterminant` now uses an SSE-vectorized implementation, improving performance by approximately 15% ([dotnet/runtime#123954](https://github.com/dotnet/runtime/pull/123954)).
 
-// TryGetTypeInfo variant for cases where the type may not be supported
-if (options.TryGetTypeInfo<MyType>(out JsonTypeInfo<MyType>? typeInfo))
-{
-    // Use typeInfo
-}
-```
+| Scenario | Before | After | Improvement |
+| --- | --- | --- | --- |
+| `GetDeterminantBenchmark` | 3.487 ns | 2.971 ns | ~15% faster |
 
-This is particularly useful when working with source generation, NativeAOT, and polymorphic serialization scenarios where type metadata access is common.
+Thank you [@alexcovington](https://github.com/alexcovington) for this contribution!
+
+## Bug fixes
+
+This release includes bug fixes and quality improvements across several areas:
+
+- **System.Collections** — Fixed integer overflow in `ImmutableArray` range validation ([dotnet/runtime#124042](https://github.com/dotnet/runtime/pull/124042))
+- **System.IO.Compression** — Fixed `ZipArchiveEntry.ExtractToFile` preserving files on extraction failure with `overwrite: true` ([dotnet/runtime#123991](https://github.com/dotnet/runtime/pull/123991))
+- **System.Linq** — Fixed `Append`/`Prepend` `GetCount` overflow to correctly throw `OverflowException` ([dotnet/runtime#123821](https://github.com/dotnet/runtime/pull/123821))
+- **System.Net.Http** — Fixed authenticated proxy credential handling for proxies that require proactive `Proxy-Authorization` headers ([dotnet/runtime#123328](https://github.com/dotnet/runtime/pull/123328), reported by [@ptarjan](https://github.com/ptarjan))
+- **System.Net.Http** — Fixed edge-case non-ASCII host handling in HTTP logic ([dotnet/runtime#123934](https://github.com/dotnet/runtime/pull/123934))
+- **System.Numerics** — Fixed `Vector2`/`Vector3` `EqualsAny` and related methods returning incorrect results due to hidden padding elements ([dotnet/runtime#123594](https://github.com/dotnet/runtime/pull/123594), [dotnet/runtime#123586](https://github.com/dotnet/runtime/issues/123586))
+- **System.Numerics** — Fixed missing early returns in `TensorPrimitives.Round` causing double-rounding ([dotnet/runtime#124280](https://github.com/dotnet/runtime/pull/124280))
+- **System.Reflection** — Fixed `MetadataLoadContext` returning internal array types instead of `Type[]` from several methods ([dotnet/runtime#124251](https://github.com/dotnet/runtime/pull/124251), reported by [@smdn](https://github.com/smdn))
+- **System.Runtime** — Fixed vectorization of `Ascii.Equals` for input lengths 8–15 ([dotnet/runtime#123115](https://github.com/dotnet/runtime/pull/123115))
+
+## Community contributors
+
+Thank you contributors! ❤️
+
+- [@alexcovington](https://github.com/dotnet/runtime/pulls?q=is%3Apr+is%3Amerged+merged%3A2026-01-26..2026-02-11+author%3Aalexcovington)
+- [@am11](https://github.com/dotnet/runtime/pulls?q=is%3Apr+is%3Amerged+merged%3A2026-01-26..2026-02-11+author%3Aam11)
+- [@kasperk81](https://github.com/dotnet/runtime/pulls?q=is%3Apr+is%3Amerged+merged%3A2026-01-26..2026-02-11+author%3Akasperk81)
+- [@pentp](https://github.com/dotnet/runtime/pulls?q=is%3Apr+is%3Amerged+merged%3A2026-01-26..2026-02-11+author%3Apentp)
+- [@ptarjan](https://github.com/dotnet/runtime/pulls?q=is%3Apr+is%3Amerged+merged%3A2026-01-26..2026-02-11+author%3Aptarjan)
