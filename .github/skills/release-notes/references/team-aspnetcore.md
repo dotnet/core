@@ -9,13 +9,13 @@ Team-specific overrides and instructions for generating ASP.NET Core release not
 
 ## PR Discovery
 
+**Overrides the default label-based approach** in [collect-prs.md](collect-prs.md).
+
 ASP.NET Core uses **milestones** (e.g., `11.0-preview2`) to organize PRs by release, not area labels. To collect candidate PRs:
 
 1. Search for merged PRs in `dotnet/aspnetcore` with the target milestone (e.g., `milestone:11.0-preview2 is:merged`).
 2. Filter out infrastructure, dependency updates, backports, test-only, and build changes.
 3. Use the `community-contribution` label to identify community contributor PRs.
-
-Do NOT use area-label-scoped searches as described in `collect-prs.md` — those are Libraries-specific.
 
 ## Content Rules
 

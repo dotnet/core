@@ -25,11 +25,17 @@ Generate release notes for a .NET preview or RC release. This skill works for an
 
 Once the team is identified, load the team context from `references/team-<team>.md`. The team context specifies:
 
-- Product name and repositories to search
-- Area labels for PR filtering
+- Product name, component file, and repositories
+- PR discovery approach (area labels, milestones, or other strategies)
+- Content rules (what to include/exclude)
+- Categorization guidance
+- Community contributor details
+- Release branch verification overrides
+- Format overrides (document title, intro links, link format)
 - Optional process steps (e.g., API diff review)
 - Example release notes for reference
-- Team-specific guidance
+
+Each process step below has a default approach defined in its reference file. **Team contexts can add to or override any step.** When a team context specifies an override, follow the team's instructions instead of (or in addition to) the defaults.
 
 Team contexts with defined references:
 
@@ -44,7 +50,7 @@ Other teams can be added by creating a `references/team-<team>.md` file followin
 
 Gather the changes included in the release:
 
-1. **[Collect and filter PRs](references/collect-prs.md)** — search for merged PRs using the repos and labels from the team context.
+1. **[Collect and filter PRs](references/collect-prs.md)** — search for merged PRs using the team context's PR discovery approach (area labels, milestones, or other strategy). The team context overrides the default method when specified.
 2. **[Enrich — fetch PR and issue details](references/enrich-prs.md)** — fetch full PR bodies, discover linked issues, gather reactions and Copilot summaries.
 3. **API diff review** (optional) — if the team context specifies API diff review, follow [api-diff-review.md](references/api-diff-review.md) to cross-reference new APIs with candidate PRs.
 
@@ -60,8 +66,8 @@ Validate the candidate list:
 Write the release notes:
 
 1. **[Categorize entries by area, theme, and impact](references/categorize-entries.md)** — group PRs into impact tiers using common criteria plus any team-specific guidance from the team context. Reference the previous release notes (loaded during deduplication) to identify **theme continuations** — features that build on work from prior previews should acknowledge the earlier coverage and describe what's new.
-2. **[Apply formatting rules](references/format-template.md)** — follow the standard .NET release notes document structure.
-3. **[Apply editorial rules](references/editorial-rules.md)** — follow attribution, benchmark, naming, and ranking guidelines.
+2. **[Apply formatting rules](references/format-template.md)** — follow the standard .NET release notes document structure. Apply team context format overrides (document title, intro links, link format) when specified.
+3. **[Apply editorial rules](references/editorial-rules.md)** — follow attribution, benchmark, naming, and ranking guidelines. Apply team context content rules (e.g., bug fix exclusions, PR link policy) when specified.
 
 ### Step 5: Validate code samples
 

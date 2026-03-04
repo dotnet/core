@@ -1,8 +1,16 @@
 # Collect and Filter PRs
 
-Pull merged PRs in the date range from the repositories specified in the team context, filtered to the team's area labels.
+Pull merged PRs from the repositories specified in the team context.
 
-## Fetch merged PRs
+## Team-specific PR discovery
+
+**Before using the default approach below**, check the team context (`team-<team>.md`) for a **PR Discovery** section. Teams may override the default approach entirely — for example, using milestones instead of labels, or different filtering criteria.
+
+If the team context specifies PR discovery overrides, follow those instructions instead of the default label-based approach below. The exclusion filters and data storage sections still apply regardless of the discovery method.
+
+## Default: Area-label-scoped search
+
+The default approach uses area labels defined in the team context to find relevant PRs. This works for teams that organize PRs by area label (e.g., `area-System.Collections`).
 
 ### Primary — GitHub MCP server
 

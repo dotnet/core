@@ -10,7 +10,12 @@ Once the team is identified, load the team context from `team-<team>.md`. The te
 
 - **Product name** — used in headings and descriptions
 - **Repositories** — which repos to search for PRs
-- **Area labels** — label filters for PR collection
+- **PR discovery** — how to find candidate PRs (area labels, milestones, or other strategy)
+- **Content rules** — what to include/exclude (e.g., bug fix policy, PR link policy)
+- **Categorization guidance** — team-specific tiers or groupings
+- **Community contributor details** — team-specific query format
+- **Release branch verification** — repo, branch pattern, and verification steps (if overriding VMR default)
+- **Format overrides** — document title, intro links, link format
 - **Optional steps** — e.g., whether API diff review applies
 - **Example release notes** — paths to prior release notes for reference and style
 

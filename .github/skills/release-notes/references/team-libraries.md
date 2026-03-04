@@ -6,9 +6,9 @@
 - **Component file**: `libraries.md`
 - **Repository**: `dotnet/runtime`
 
-## Area labels
+## PR Discovery
 
-Search for merged PRs using these area labels (run in parallel batches):
+Uses the default area-label-scoped approach from [collect-prs.md](collect-prs.md). Search for merged PRs using these area labels (run in parallel batches):
 
 - `area-System.Text.Json`, `area-System.Net.Http`, `area-System.Collections`
 - `area-System.IO`, `area-System.IO.Compression`, `area-System.Threading`
@@ -20,10 +20,15 @@ Search for merged PRs using these area labels (run in parallel batches):
 
 **Catch-all prefix**: `area-System` (to catch uncommon area labels)
 
+## Release Branch Verification
+
+Uses the default VMR verification from [verify-release-branch.md](verify-release-branch.md).
+
+- **VMR path**: `src/runtime/`
+
 ## Optional steps
 
 - **API diff review**: Yes — follow [api-diff-review.md](api-diff-review.md). The API diff path pattern is `release-notes/<version>/preview/<preview>/api-diff/Microsoft.NETCore.App/`. Cross-reference the API diff with candidate PRs after collection and use it to discover implementing PRs and `api-approved` issues.
-- **VMR path**: `src/runtime/` (for [release branch verification](verify-release-branch.md))
 
 ## Categorization guidance
 
