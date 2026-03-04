@@ -36,6 +36,7 @@ Team contexts with defined references:
 | Team | Context file | Component file |
 |------|-------------|----------------|
 | Libraries | [team-libraries.md](references/team-libraries.md) | `libraries.md` |
+| ASP.NET Core | [team-aspnetcore.md](references/team-aspnetcore.md) | `aspnetcore.md` |
 
 Other teams can be added by creating a `references/team-<team>.md` file following the same structure.
 
@@ -52,7 +53,7 @@ Gather the changes included in the release:
 Validate the candidate list:
 
 1. **[Deduplicate from previous release notes](references/dedup-previous-releases.md)** — ensure features aren't already covered in an earlier preview. Load the previous release notes for the team's component file (e.g., `libraries.md` for Libraries). **Retain these previous release notes in context** — they are needed during the authoring step for theme continuations.
-2. **[Confirm inclusion in release branch](references/verify-release-branch.md)** — spot-check that candidate changes shipped in the target preview via the VMR.
+2. **[Confirm inclusion in release branch](references/verify-release-branch.md)** — spot-check that candidate changes shipped in the target preview. Uses the VMR by default; team contexts can override the repo, branch pattern, and verification steps.
 
 ### Step 4: Author content
 

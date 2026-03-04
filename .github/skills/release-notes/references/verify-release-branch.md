@@ -1,6 +1,20 @@
 # Verify: Confirm Inclusion in Release Branch
 
-After collecting and enriching candidates (including any manually added PRs), verify that candidate changes actually shipped in the target release by checking the `dotnet/dotnet` Virtual Monolithic Repository (VMR). The VMR contains all .NET source code and its release branches represent what ships in each preview.
+After collecting and enriching candidates (including any manually added PRs), verify that candidate changes actually shipped in the target release.
+
+## Default: VMR verification
+
+By default, verify against the `dotnet/dotnet` Virtual Monolithic Repository (VMR), which contains all .NET source code. Its release branches represent what ships in each preview.
+
+## Team-specific overrides
+
+Some teams verify against their own repository instead of the VMR. **If the team context specifies a release branch override** (different repo, branch pattern, or verification steps), use those instead of the VMR defaults below. The team context takes precedence for:
+
+- **Repository** — which repo to check (e.g., `dotnet/aspnetcore` instead of `dotnet/dotnet`)
+- **Branch pattern** — how the release branch is named (e.g., `release/<MAJOR>.0-preview<N>` instead of the VMR pattern)
+- **Verification steps** — any team-specific process for confirming inclusion (e.g., checking for backport PRs)
+
+When team overrides apply, skip the VMR-specific sections below and follow the team context's instructions instead.
 
 ## Determine the release branch name
 

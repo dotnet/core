@@ -46,6 +46,16 @@ Link to PRs and issues naturally within the description text. Do not force them 
 4. **Usage example** — A short, runnable code snippet showing the feature in action
 5. **Benchmark summary** (if applicable) — State what was measured and the speedup range. Do NOT embed full BenchmarkDotNet tables
 
+## Required content per feature
+
+Every feature entry MUST include:
+
+1. **Why** — What problem does this solve? What scenario does it enable?
+2. **How** — A code sample showing how to use the feature. If a feature cannot be demonstrated with a code sample, reconsider whether it's user-facing enough for release notes.
+3. **Learn more** — Link to the backing issue or PR (if one exists) for additional details. Do not clutter the release notes with links — only include issue/PR links when they provide meaningful context beyond what's already in the entry. (Note: some teams may omit PR links entirely; see the team context.)
+
+These requirements complement the structural section rules above. A well-written entry satisfies both the structural format and these content requirements.
+
 ## Example section
 
 ```markdown

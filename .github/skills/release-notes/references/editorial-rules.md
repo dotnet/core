@@ -41,6 +41,34 @@ Order features by **customer impact**, using both qualitative "wow" factor and q
 - **Reaction counts**: PRs and issues with many 👍, ❤️, or 🚀 reactions indicate strong community demand. Use the combined reaction count across the PR and its linked issues as a tiebreaker within each tier
 - **Linked issue upvotes**: An issue with 50+ reactions is a stronger signal than one with 2
 
+## Community contributors
+
+Use the `community-contribution` label (or equivalent team-specific label) to identify PRs from external contributors.
+
+### Inline attribution
+
+When a documented feature was contributed by a community member, thank them inline at the end of that feature's section:
+
+```markdown
+Thank you [@username](https://github.com/username) for this contribution!
+```
+
+### Community contributors section
+
+Include a "Community contributors" section at the bottom of the release notes listing ALL external contributors for the release — not just those who contributed documented features. This includes contributors whose PRs were bug fixes, test improvements, or other changes not covered in the release notes.
+
+To build this list, search for all merged PRs with the `community-contribution` label within the release's date range (or milestone, per the team context). List contributors alphabetically with links to their relevant PRs:
+
+```markdown
+## Community contributors
+
+Thank you contributors! ❤️
+
+- [@username](https://github.com/<owner>/<repo>/pulls?q=is%3Apr+is%3Amerged+<query>+author%3Ausername)
+```
+
+The link query format depends on the team context (e.g., milestone-based for ASP.NET Core, date-range-based for Libraries).
+
 ## Inclusion criteria
 
 Include a feature if it gives users something new to try, something that works better, or something they asked for. Good signals:

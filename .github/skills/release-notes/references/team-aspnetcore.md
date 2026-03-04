@@ -44,11 +44,7 @@ If part of a feature lands in a release but it's not ready for users to try out,
 
 ### Required content per feature
 
-Every feature entry MUST include:
-
-1. **Why** — What problem does this solve? What scenario does it enable?
-2. **How** — A code sample showing how to use the feature. If a feature cannot be demonstrated with a code sample, reconsider whether it's user-facing enough for release notes.
-3. **Learn more** — Link to the backing issue (if one exists) for details. However, do not clutter the release notes with links — only include issue links when they provide significant additional context beyond what's in the release notes entry itself.
+Follow the standard [required content per feature](format-template.md#required-content-per-feature) rules. No team-specific overrides.
 
 Keep entries concise — link to docs for full details rather than documenting every option.
 
@@ -70,33 +66,21 @@ ASP.NET Core features typically fall into these categories. Order sections by cu
 
 ## Community Contributors
 
-### Inline attribution
+Follow the standard [community contributors](editorial-rules.md#community-contributors) rules for inline attribution and the community contributors section.
 
-When a documented feature was contributed by a community member (identified by the `community-contribution` label), thank them inline at the end of that feature's section:
+**Team-specific details:**
 
-```markdown
-Thank you [@username](https://github.com/username) for this contribution!
-```
-
-### Community contributors section
-
-Include a "Community contributors" section at the bottom of the release notes listing ALL external contributors for the milestone — not just those who contributed documented features. This includes contributors whose PRs were bug fixes, test improvements, or other changes that aren't in the release notes.
-
-To build this list, search for all merged PRs with the `community-contribution` label in the milestone. List contributors alphabetically with links to their milestone PRs:
-
-```markdown
-## Community contributors
-
-Thank you contributors! ❤️
-
-- [@username](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A<MILESTONE>+author%3Ausername)
-```
+- Use the **milestone** (e.g., `milestone:11.0-preview2`) when searching for community contributor PRs, since ASP.NET Core organizes by milestone rather than date ranges.
+- The contributor list link format uses the milestone query: `?q=is%3Apr+is%3Amerged+milestone%3A<MILESTONE>+author%3Ausername`
 
 ## Release Branch Verification
 
-The release branch for ASP.NET Core is in `dotnet/aspnetcore` (not the VMR). The branch name follows the pattern `release/<MAJOR>.0-preview<N>` (e.g., `release/11.0-preview2`).
+**Overrides the default VMR verification** in [verify-release-branch.md](verify-release-branch.md).
 
-When verifying features are in the release:
+- **Repository**: `dotnet/aspnetcore` (not the VMR)
+- **Branch pattern**: `release/<MAJOR>.0-preview<N>` (e.g., `release/11.0-preview2`)
+
+**Verification steps:**
 
 1. Check that the PR merged to `main` before the branch cut date.
 2. If the PR merged after the branch cut, look for a **backport PR** targeting the release branch. Backport PRs with the `Servicing-approved` label indicate the change will ship.
