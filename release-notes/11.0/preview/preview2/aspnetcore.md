@@ -28,6 +28,8 @@ builder.Services.AddOpenTelemetry()
 
 No additional instrumentation library (such as `OpenTelemetry.Instrumentation.AspNetCore`) is needed. The framework now directly populates semantic convention attributes like `http.request.method`, `url.path`, `http.response.status_code`, and `server.address` on the request activity.
 
+If you don't want OpenTelemetry attributes added to the activity you can turn it off by setting the `Microsoft.AspNetCore.Hosting.SuppressActivityOpenTelemetryData` AppContext switch to `true`.
+
 ## TempData support for Blazor
 
 Blazor Server-Side Rendering (SSR) now supports TempData, a mechanism for storing data that persists between HTTP requests. TempData is ideal for scenarios like flash messages after form submissions, passing data during redirects (POST-Redirect-GET pattern), and one-time notifications.
