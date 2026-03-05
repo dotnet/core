@@ -9,9 +9,9 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
   - [VisualStateManager API consistency](#visualstatemanager-api-consistency)
   - [Fix for empty string binding to nullable value types](#fix-for-empty-string-binding-to-nullable-value-types)
 - .NET for Android
-  - [Android 17 (CinnamonBun) bindings](#android-17-cinnamonbun-bindings)
-  - [`dotnet run` emulator discovery and auto-boot](#dotnet-run-emulator-discovery-and-auto-boot)
-  - [Default target: `net11.0-android36.1`](#default-target-net110-android361)
+  - [Fixes and improvements to `dotnet run`](#fixes-and-improvements-to-dotnet-run)
+  - [Use response files when calling `r8.jar`](#use-response-files-when-calling-r8jar)
+  - [CoreCLR now requires API 24 and higher](#coreclr-on-android-requires-api-24-or-higher)
   - [JNI preload exemption support](#jni-preload-exemption-support)
 
 .NET MAUI updates in .NET 11:
@@ -85,25 +85,25 @@ polyline.PolylineClicked += (s, e) =>
 
 When binding `Entry.Text` to a nullable value type property (e.g., `int?`), clearing the Entry now correctly sets the property to `null` instead of retaining the previous value. This long-standing issue affected two-way bindings to nullable types ([dotnet/maui#33536](https://github.com/dotnet/maui/pull/33536)).
 
-## Android 17 (CinnamonBun) bindings
+## Fixes and improvements to `dotnet run`
 
-.NET for Android now includes bindings for Android 17 (CinnamonBun) Beta 1 and Beta 2, providing access to the latest Android APIs ([dotnet/android#10824](https://github.com/dotnet/android/pull/10824), [dotnet/android#10866](https://github.com/dotnet/android/pull/10866)).
+When selecting a device during `dotnet run`, the selection was not properly passed through to all MSBuild steps. ([dotnet/android#10740](https://github.com/dotnet/android/pull/10740))
 
-## `dotnet run` emulator discovery and auto-boot
+## Use response files when calling `r8.jar`
 
-Building on the `dotnet run` enhancements introduced in Preview 1, the Android tooling now discovers available emulators and automatically boots them when selected. When you run `dotnet run` and select a not-running emulator, it will be started automatically before deployment — no need to manually launch emulators first ([dotnet/android#10826](https://github.com/dotnet/android/pull/10826)).
+Complex Android projects can hit [the maximum command-line length](https://learn.microsoft.com/troubleshoot/windows-client/shell-experience/command-line-string-limitation) on Windows. A "response file" is used now to avoid this problem ([dotnet/android#10716](https://github.com/dotnet/android/pull/10716)).
 
-## Default target: `net11.0-android36.1`
+## CoreCLR on Android requires API 24 or higher
 
-.NET 11 now defaults to targeting `net11.0-android36.1` (Android 16.1). Targeting `net11.0-android36` (36.0) is no longer supported on .NET 11; it remains valid for .NET 10 ([dotnet/android#10829](https://github.com/dotnet/android/pull/10829)).
+Various crashes can occur on API 21-23 devices when using the CoreCLR runtime, so we have prevented its usage. We are still evaluating if CoreCLR should support older API levels. Mono will continue to support API 21 and up. ([dotnet/android#10753](https://github.com/dotnet/android/pull/10753))
 
 ## JNI preload exemption support
 
-Applications that need to control native library loading order can now exempt specific libraries from JNI preload. Set `$(AndroidIgnoreAllJniPreload)` to `true` to disable preloading for all JNI libraries, or use the `AndroidNativeLibraryNoJniPreload` item group to exempt individual libraries ([dotnet/android#10787](https://github.com/dotnet/android/pull/10787)).
+[.NET 10](https://github.com/dotnet/android/commit/cba39dcf723b0b0311a050533bd7e2d45facdff5) introduced support for preloading of JNI native libraries at application startup. Applications that need to control native library loading order can now exempt specific libraries from JNI preload. Set `$(AndroidIgnoreAllJniPreload)` to `true` to disable preloading for all JNI libraries, or use the `AndroidNativeLibraryNoJniPreload` item group to exempt individual libraries ([dotnet/android#10787](https://github.com/dotnet/android/pull/10787)).
 
-```xml
+```XML
 <ItemGroup>
-  <AndroidNativeLibraryNoJniPreload Include="libmylibrary" />
+  <AndroidNativeLibraryNoJniPreload Include="libMyLibrary.so" />
 </ItemGroup>
 ```
 
