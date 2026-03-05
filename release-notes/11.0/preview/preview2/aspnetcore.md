@@ -121,11 +121,19 @@ The HTTP logging middleware now pools its `ResponseBufferingStream` instances ([
 
 This release includes bug fixes and quality improvements across several areas:
 
-- **Blazor** — Fixed `Label` component `id` attribute generation in interactive render mode ([dotnet/aspnetcore#65263](https://github.com/dotnet/aspnetcore/pull/65263)); fixed `[EditorRequired]` warning incorrectly shown in SSR mode ([dotnet/aspnetcore#65393](https://github.com/dotnet/aspnetcore/pull/65393))
-- **Identity** — `PasskeySignInAsync()` now enforces `PreSignInCheck()` for confirmation and lockout checks, consistent with other sign-in methods ([dotnet/aspnetcore#65024](https://github.com/dotnet/aspnetcore/pull/65024))
-- **IIS** — Fixed configuration change monitoring for multi-application deployments ([dotnet/aspnetcore#59998](https://github.com/dotnet/aspnetcore/pull/59998))
-- **Kestrel** — Fixed request smuggling mitigation to use `TryAdd()` for `X-Content-Length` header ([dotnet/aspnetcore#65445](https://github.com/dotnet/aspnetcore/pull/65445)); updated development certificate version check to accept certificates from SDK 10.0.100+ ([dotnet/aspnetcore#65151](https://github.com/dotnet/aspnetcore/pull/65151))
-- **SignalR** — Fixed `HttpClient` creation for WebSocket `SkipNegotiation` mode over HTTP/2 ([dotnet/aspnetcore#62940](https://github.com/dotnet/aspnetcore/pull/62940), thank you [@WeihanLi](https://github.com/WeihanLi)!); fixed `WebSocketFactory` not being set in browser environments ([dotnet/aspnetcore#65359](https://github.com/dotnet/aspnetcore/pull/65359), thank you [@BekAllaev](https://github.com/BekAllaev)!)
+- **Blazor**
+  - Fixed `Label` component `id` attribute generation in interactive render mode ([dotnet/aspnetcore#65263](https://github.com/dotnet/aspnetcore/pull/65263))
+  - Fixed `[EditorRequired]` warning incorrectly shown in SSR mode ([dotnet/aspnetcore#65393](https://github.com/dotnet/aspnetcore/pull/65393))
+- **Identity**
+  - `PasskeySignInAsync()` now enforces `PreSignInCheck()` for confirmation and lockout checks, consistent with other sign-in methods ([dotnet/aspnetcore#65024](https://github.com/dotnet/aspnetcore/pull/65024))
+- **IIS**
+  - Fixed configuration change monitoring for multi-application deployments ([dotnet/aspnetcore#59998](https://github.com/dotnet/aspnetcore/pull/59998))
+- **Kestrel**
+  - Fixed request smuggling mitigation to use `TryAdd()` for `X-Content-Length` header ([dotnet/aspnetcore#65445](https://github.com/dotnet/aspnetcore/pull/65445))
+  - Updated development certificate version check to accept certificates from SDK 10.0.100+ ([dotnet/aspnetcore#65151](https://github.com/dotnet/aspnetcore/pull/65151))
+- **SignalR**
+  - Fixed `HttpClient` creation for WebSocket `SkipNegotiation` mode over HTTP/2 ([dotnet/aspnetcore#62940](https://github.com/dotnet/aspnetcore/pull/62940), thank you [@WeihanLi](https://github.com/WeihanLi)!)
+  - Fixed `WebSocketFactory` not being set in browser environments ([dotnet/aspnetcore#65359](https://github.com/dotnet/aspnetcore/pull/65359), thank you [@BekAllaev](https://github.com/BekAllaev)!)
 
 ## Community contributors
 
