@@ -7,6 +7,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 - [OpenAPI 3.2.0 support](#openapi-320-support)
 - [.NET Web Worker project template](#net-web-worker-project-template)
 - [Infer passkey display name from authenticator](#infer-passkey-display-name-from-authenticator)
+- [Performance improvements](#performance-improvements)
 
 ASP.NET Core updates in .NET 11:
 
@@ -109,6 +110,12 @@ This enables offloading expensive computations to a separate thread without bloc
 The Blazor Web App project template now automatically infers friendly display names for passkeys based on their AAGUID (Authenticator Attestation GUID). Built-in mappings are included for the most commonly used passkey authenticators, including Google Password Manager, iCloud Keychain, Windows Hello, 1Password, and Bitwarden ([dotnet/aspnetcore#65343](https://github.com/dotnet/aspnetcore/pull/65343)).
 
 For known authenticators, the name is automatically assigned without prompting the user. For unknown authenticators, the user is redirected to a rename page. Developers can extend the mappings by adding entries to the `PasskeyAuthenticators.cs` dictionary in their project ([dotnet/aspnetcore#63630](https://github.com/dotnet/aspnetcore/issues/63630)).
+
+## Performance improvements
+
+Kestrel's HTTP/1.1 request parser now uses a non-throwing code path for handling malformed requests ([dotnet/aspnetcore#65256](https://github.com/dotnet/aspnetcore/pull/65256)). Instead of throwing `BadHttpRequestException` on every parse failure, the parser returns a result struct indicating success, incomplete, or error states. In scenarios with many malformed requests — such as port scanning, malicious traffic, or misconfigured clients — this eliminates expensive exception handling overhead and improves throughput by up to 20-40%. There's no impact on valid request processing.
+
+The HTTP logging middleware now pools its `ResponseBufferingStream` instances ([dotnet/aspnetcore#65147](https://github.com/dotnet/aspnetcore/pull/65147)), reducing per-request allocations when response body logging or interceptors are enabled.
 
 ## Bug fixes
 
