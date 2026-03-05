@@ -113,8 +113,15 @@ Bug fixes excluded from individual feature entries still deserve acknowledgment 
 **How to build the summary:**
 
 1. Collect all candidate PRs that were excluded from feature entries because they are bug fixes, correctness improvements, or quality changes without new API surface.
-2. Group them by area (namespace or component, e.g., "System.Net.Http", "System.Collections", "Extensions-Configuration").
-3. For each area, note the number of fixes. If any fix has a **community-reported backing issue** (the linked issue was filed by someone outside the team), call it out — this signals that the team is responsive to community feedback.
+2. Group them by area using the team context's grouping strategy (see below).
+3. For each area, list the fixes. If any fix has a **community-reported backing issue** (the linked issue was filed by someone outside the team), call it out — this signals that the team is responsive to community feedback.
+
+**Grouping strategy:**
+
+The bug fix section uses a **nested list** — top-level bullets are area groups, with individual fixes as indented sub-bullets. How fixes are grouped depends on the team context:
+
+- **Default**: Group by namespace or component (e.g., "System.Net.Http", "System.Collections"). Multiple fixes in the same namespace share a single top-level bullet.
+- Team contexts can override the grouping strategy (e.g., by product area like "Blazor", "Kestrel") — see the team context file for details.
 
 **Format:**
 
@@ -123,17 +130,22 @@ Bug fixes excluded from individual feature entries still deserve acknowledgment 
 
 This release includes bug fixes and quality improvements across several areas:
 
-- **System.Net.Http** — Fixed authenticated proxy credential handling ([dotnet/runtime#123363](https://github.com/dotnet/runtime/issues/123363), reported by [@username](https://github.com/username))
-- **System.Collections** — Fixed integer overflow in `ImmutableArray` range validation
-- **System.Xml** — Fixed `XDocument.LoadAsync` to avoid synchronous reads
-- **Extensions-Logging** — Fixed message escaping in `LoggerMessageGenerator`
+- **System.Net.Http**
+  - Fixed authenticated proxy credential handling ([dotnet/runtime#123363](https://github.com/dotnet/runtime/issues/123363), reported by [@username](https://github.com/username))
+  - Fixed edge-case non-ASCII host handling in HTTP logic ([dotnet/runtime#123934](https://github.com/dotnet/runtime/pull/123934))
+- **System.Collections**
+  - Fixed integer overflow in `ImmutableArray` range validation ([dotnet/runtime#124042](https://github.com/dotnet/runtime/pull/124042))
+- **System.Xml**
+  - Fixed `XDocument.LoadAsync` to avoid synchronous reads
 ```
+
+Each area is a top-level bold bullet, with every fix as an indented sub-bullet — even if there is only one fix in that area.
 
 **Rules:**
 
-- Keep each bullet to one line — area name in bold, brief description of what was fixed
+- Area name in bold at the top level
+- Brief description of what was fixed, with PR link
 - When a fix has a community-reported backing issue, include a link to the issue and credit the reporter inline
-- When multiple fixes land in the same area, combine them into one bullet (e.g., "Fixed two issues in ...")
 - Order areas alphabetically for consistency
 - Do not include test-only, CI, doc-only, or infra changes — only fixes that improve user-facing behavior or correctness
 - This section does NOT appear in the TOC — it's a lightweight summary, not a feature entry

@@ -27,7 +27,7 @@ The release notes must mirror the style of the official .NET Preview release not
 
 ## Bug fixes
 
-<brief summary of areas that received fixes — see [editorial-rules.md](editorial-rules.md#bug-fix-summary)>
+<grouped bug fix summary — see [editorial-rules.md](editorial-rules.md#bug-fix-summary) for grouping strategy and format>
 
 ## Community contributors
 

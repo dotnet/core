@@ -23,7 +23,17 @@ Team-specific overrides for generating ASP.NET Core release notes.
 
 ### Bug fixes
 
-Include a **Bug fixes** section listing fixes grouped by area, with each fix as its own sub-bullet. Credit community contributors inline.
+Include a **Bug fixes** section listing fixes grouped by **product area** (e.g., "Blazor", "Kestrel", "SignalR", "Identity", "IIS"), with each fix as an indented sub-bullet under the area. Credit community contributors inline. Order areas alphabetically.
+
+Example:
+
+```markdown
+- **Blazor**
+  - Fixed `Label` component `id` attribute generation in interactive render mode ([dotnet/aspnetcore#65263](https://github.com/dotnet/aspnetcore/pull/65263))
+  - Fixed `[EditorRequired]` warning incorrectly shown in SSR mode ([dotnet/aspnetcore#65393](https://github.com/dotnet/aspnetcore/pull/65393))
+- **Kestrel**
+  - Fixed request smuggling mitigation to use `TryAdd()` for `X-Content-Length` header ([dotnet/aspnetcore#65445](https://github.com/dotnet/aspnetcore/pull/65445))
+```
 
 ### Performance improvements
 
