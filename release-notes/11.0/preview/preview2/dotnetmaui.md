@@ -13,6 +13,8 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
   - [Use response files when calling `r8.jar`](#use-response-files-when-calling-r8jar)
   - [CoreCLR now requires API 24 and higher](#coreclr-on-android-requires-api-24-or-higher)
   - [JNI preload exemption support](#jni-preload-exemption-support)
+- .NET for iOS
+  - [(Experimental) CoreCLR](#experimental-coreclr)
 
 .NET MAUI updates in .NET 11:
 
@@ -106,6 +108,21 @@ Various crashes can occur on API 21-23 devices when using the CoreCLR runtime, s
   <AndroidNativeLibraryNoJniPreload Include="libMyLibrary.so" />
 </ItemGroup>
 ```
+
+## (Experimental) CoreCLR
+
+Enables iOS apps to run on the CoreCLR runtime (instead of Mono). To use it, add the following to your project file for iOS builds:
+
+```XML
+<!-- Use CoreCLR on iOS -->
+<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <UseMonoRuntime>false</UseMonoRuntime>
+</PropertyGroup>
+```
+
+Please try this in your applications and report any issues; when filing feedback, state that you are using UseMonoRuntime=false. Expect that application size is currently larger than with Mono and that debugging and some runtime diagnostics are not fully functional yet; these areas are actively being improved. This is an experimental feature and not intended for production use.
+
+A detailed list of iOS changes can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/).
 
 ## Contributors
 
