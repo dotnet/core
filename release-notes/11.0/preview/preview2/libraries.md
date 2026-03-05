@@ -64,15 +64,22 @@ Thank you [@alexcovington](https://github.com/alexcovington) for this contributi
 
 This release includes bug fixes and quality improvements across several areas:
 
-- **System.Collections** — Fixed integer overflow in `ImmutableArray` range validation ([dotnet/runtime#124042](https://github.com/dotnet/runtime/pull/124042))
-- **System.IO.Compression** — Fixed `ZipArchiveEntry.ExtractToFile` preserving files on extraction failure with `overwrite: true` ([dotnet/runtime#123991](https://github.com/dotnet/runtime/pull/123991))
-- **System.Linq** — Fixed `Append`/`Prepend` `GetCount` overflow to correctly throw `OverflowException` ([dotnet/runtime#123821](https://github.com/dotnet/runtime/pull/123821))
-- **System.Net.Http** — Fixed authenticated proxy credential handling for proxies that require proactive `Proxy-Authorization` headers ([dotnet/runtime#123328](https://github.com/dotnet/runtime/pull/123328), reported by [@ptarjan](https://github.com/ptarjan))
-- **System.Net.Http** — Fixed edge-case non-ASCII host handling in HTTP logic ([dotnet/runtime#123934](https://github.com/dotnet/runtime/pull/123934))
-- **System.Numerics** — Fixed `Vector2`/`Vector3` `EqualsAny` and related methods returning incorrect results due to hidden padding elements ([dotnet/runtime#123594](https://github.com/dotnet/runtime/pull/123594), [dotnet/runtime#123586](https://github.com/dotnet/runtime/issues/123586))
-- **System.Numerics** — Fixed missing early returns in `TensorPrimitives.Round` causing double-rounding ([dotnet/runtime#124280](https://github.com/dotnet/runtime/pull/124280))
-- **System.Reflection** — Fixed `MetadataLoadContext` returning internal array types instead of `Type[]` from several methods ([dotnet/runtime#124251](https://github.com/dotnet/runtime/pull/124251), reported by [@smdn](https://github.com/smdn))
-- **System.Runtime** — Fixed vectorization of `Ascii.Equals` for input lengths 8–15 ([dotnet/runtime#123115](https://github.com/dotnet/runtime/pull/123115))
+- **System.Collections**
+  - Fixed integer overflow in `ImmutableArray` range validation ([dotnet/runtime#124042](https://github.com/dotnet/runtime/pull/124042))
+- **System.IO.Compression**
+  - Fixed `ZipArchiveEntry.ExtractToFile` preserving files on extraction failure with `overwrite: true` ([dotnet/runtime#123991](https://github.com/dotnet/runtime/pull/123991))
+- **System.Linq**
+  - Fixed `Append`/`Prepend` `GetCount` overflow to correctly throw `OverflowException` ([dotnet/runtime#123821](https://github.com/dotnet/runtime/pull/123821))
+- **System.Net.Http**
+  - Fixed authenticated proxy credential handling for proxies that require proactive `Proxy-Authorization` headers ([dotnet/runtime#123328](https://github.com/dotnet/runtime/pull/123328), reported by [@ptarjan](https://github.com/ptarjan))
+  - Fixed edge-case non-ASCII host handling in HTTP logic ([dotnet/runtime#123934](https://github.com/dotnet/runtime/pull/123934))
+- **System.Numerics**
+  - Fixed `Vector2`/`Vector3` `EqualsAny` and related methods returning incorrect results due to hidden padding elements ([dotnet/runtime#123594](https://github.com/dotnet/runtime/pull/123594), [dotnet/runtime#123586](https://github.com/dotnet/runtime/issues/123586))
+  - Fixed missing early returns in `TensorPrimitives.Round` causing double-rounding ([dotnet/runtime#124280](https://github.com/dotnet/runtime/pull/124280))
+- **System.Reflection**
+  - Fixed `MetadataLoadContext` returning internal array types instead of `Type[]` from several methods ([dotnet/runtime#124251](https://github.com/dotnet/runtime/pull/124251), reported by [@smdn](https://github.com/smdn))
+- **System.Runtime**
+  - Fixed vectorization of `Ascii.Equals` for input lengths 8–15 ([dotnet/runtime#123115](https://github.com/dotnet/runtime/pull/123115))
 
 ## Community contributors
 
