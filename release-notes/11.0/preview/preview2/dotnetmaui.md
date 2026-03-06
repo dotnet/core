@@ -13,7 +13,7 @@ Here's a summary of what's new in .NET MAUI, .NET for Android, and .NET for iOS,
   - [Use response files when calling `r8.jar`](#use-response-files-when-calling-r8jar)
   - [CoreCLR now requires API 24 and higher](#coreclr-on-android-requires-api-24-or-higher)
   - [JNI preload exemption support](#jni-preload-exemption-support)
-- .NET for iOS
+- .NET for iOS, Mac Catalyst, macOS, and tvOS
   - [(Experimental) CoreCLR](#experimental-coreclr)
 
 .NET MAUI updates in .NET 11:
@@ -116,6 +116,11 @@ You can now run iOS, tvOS, and Mac Catalyst apps on the CoreCLR runtime (instead
 ```XML
 <!-- Use CoreCLR on iOS -->
 <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <UseMonoRuntime>false</UseMonoRuntime>
+</PropertyGroup>
+
+<!-- Use CoreCLR on Mac Catalyst -->
+<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
     <UseMonoRuntime>false</UseMonoRuntime>
 </PropertyGroup>
 ```
