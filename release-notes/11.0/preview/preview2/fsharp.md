@@ -4,6 +4,8 @@ Here's a summary of what's new in F# in this Preview 2 release:
 
 - [New language feature: Simplified DIM interface hierarchies (preview)](#simplified-dim-interface-hierarchies)
 - [Compiler performance: Overload resolution caching (preview)](#overload-resolution-caching)
+- [New language feature: `#elif` preprocessor directive](#elif-preprocessor-directive)
+- [FSharp.Core: `partitionWith` for collections](#partitionwith-for-collections)
 - [FSharp.Core: Big-O complexity documentation for all collection functions](#big-o-complexity-documentation)
 - [Query expression fixes for EF Core and LINQ providers](#query-expression-fixes)
 - [IDE: Find All References and Rename overhaul](#find-all-references-and-rename-overhaul)
@@ -44,6 +46,50 @@ A new preview feature (`--langversion:preview`) caches overload resolution resul
 
 The cache is keyed on method group identity, argument types, and return type. It is automatically disabled for named arguments, SRTP constraints, and other context-dependent scenarios. ([#18807](https://github.com/dotnet/fsharp/issues/18807), [PR #19072](https://github.com/dotnet/fsharp/pull/19072))
 
+## `#elif` preprocessor directive
+
+F# now supports `#elif` in conditional compilation directives, eliminating the need for deeply nested `#if`/`#else`/`#endif` chains. This has been a frequently requested feature — previously, targeting multiple platforms required awkward nesting:
+
+```fsharp
+#if WIN64
+let path = "/library/x64/runtime.dll"
+#elif WIN86
+let path = "/library/x86/runtime.dll"
+#elif MAC
+let path = "/library/iOS/runtime-osx.dll"
+#else
+let path = "/library/unix/runtime.dll"
+#endif
+```
+
+`#elif` supports `&&`, `||`, and `!` in conditions, arbitrary chaining, and nesting. Requires `--langversion:11.0`. ([RFC FS-1334](https://github.com/fsharp/fslang-design/blob/main/RFCs/FS-1334-elif-preprocessor-directive.md), [Language suggestion #1370](https://github.com/fsharp/fslang-suggestions/issues/1370), [PR #19323](https://github.com/dotnet/fsharp/pull/19323))
+
+## `partitionWith` for collections
+
+New `partitionWith` functions on `Array`, `List`, `Set`, and `Array.Parallel` split a collection into two using a `Choice<'T1, 'T2>` partitioner — allowing each partition to have a different element type, unlike `partition` which keeps the same type for both:
+
+```fsharp
+val inline partitionWith: partitioner: ('T -> Choice<'T1, 'T2>) -> list: 'T list -> 'T1 list * 'T2 list
+```
+
+Since a total active pattern `(|A|B|)` is already `'T -> Choice<'T1, 'T2>`, it can be passed directly:
+
+```fsharp
+let (|Valid|Invalid|) (s: string) =
+    match System.Int32.TryParse s with
+    | true, n -> Valid n
+    | _ -> Invalid s
+
+let parsed, errors =
+    ["42"; "hello"; "7"; "oops"; "99"]
+    |> List.partitionWith (|Valid|Invalid|)
+
+// parsed = [42; 7; 99]
+// errors = ["hello"; "oops"]
+```
+
+([Language suggestion #1119](https://github.com/fsharp/fslang-suggestions/issues/1119), [PR #19335](https://github.com/dotnet/fsharp/pull/19335))
+
 ## Big-O complexity documentation
 
 All 462 functions across `Array`, `List`, `Seq`, `Map`, and `Set` now include Big-O complexity in their XML docs, visible in IDE tooltips:
@@ -60,49 +106,18 @@ val tryFind: key: 'Key -> table: Map<'Key, 'Value> -> 'Value option
 
 ## Query expression fixes
 
-This release fixes **10 longstanding bugs** affecting `query { }` expressions and LINQ provider compatibility, some open for over 10 years. This significantly improves the F# story for Entity Framework Core, Cosmos DB, and other LINQ providers:
-
-- Tuple joins and groupBy now work correctly — `join b on ((a.Id1, a.Id2) = (b.Id1, b.Id2))` finally works. ([#7885](https://github.com/dotnet/fsharp/issues/7885), [#47](https://github.com/dotnet/fsharp/issues/47))
-- Tuple projections preserve `IQueryable` instead of falling back to `Enumerable.Select`, enabling `ToListAsync()` and other async EF Core operations. ([#3782](https://github.com/dotnet/fsharp/issues/3782), [#15133](https://github.com/dotnet/fsharp/issues/15133))
-- Array indexing in LINQ expressions generates proper `ArrayIndex` nodes, enabling Cosmos DB to translate array access. ([#16918](https://github.com/dotnet/fsharp/issues/16918))
-- Anonymous record field ordering in expression trees is now consistent regardless of declaration order. ([#11131](https://github.com/dotnet/fsharp/issues/11131))
-- Conditional queries without an else branch no longer cause type mismatch errors. ([#3445](https://github.com/dotnet/fsharp/issues/3445))
-- Fixed false FS1182 warnings (unused variable) for query variables in `where`, `let`, `join`, and `select` clauses. ([#422](https://github.com/dotnet/fsharp/issues/422))
-
-([PR #19243](https://github.com/dotnet/fsharp/pull/19243))
+This release fixes **10 longstanding bugs** affecting `query { }` expressions and LINQ provider compatibility, some open for over 10 years. Tuple joins, tuple projections preserving `IQueryable`, array indexing for Cosmos DB, anonymous record field ordering, conditional queries without `else`, and false FS1182 warnings on query variables are all resolved. This significantly improves the F# story for Entity Framework Core, Cosmos DB, and other LINQ providers. ([PR #19243](https://github.com/dotnet/fsharp/pull/19243))
 
 ## Find All References and Rename overhaul
 
-A comprehensive pass over the Find All References (FAR) and Rename Symbol features fixes **15+ longstanding bugs**, some open for over 7 years:
-
-- Active pattern cases in signature files now found correctly. ([#19173](https://github.com/dotnet/fsharp/issues/19173), [#14969](https://github.com/dotnet/fsharp/issues/14969))
-- Rename no longer incorrectly renames `get`/`set` keywords on properties. ([#18270](https://github.com/dotnet/fsharp/issues/18270))
-- Rename now handles operators containing `.` (e.g., `-.-`). ([#17221](https://github.com/dotnet/fsharp/issues/17221))
-- C# extension methods now found across all usages. ([#16993](https://github.com/dotnet/fsharp/issues/16993))
-- DU case tester properties (`.IsCase`) now included. ([#16621](https://github.com/dotnet/fsharp/issues/16621))
-- FAR on record types now includes copy-and-update expressions. ([#15290](https://github.com/dotnet/fsharp/issues/15290))
-- Constructor definitions now find all usages. ([#14902](https://github.com/dotnet/fsharp/issues/14902))
-- External DLL symbol searches now scoped to referencing projects only (performance). ([#10227](https://github.com/dotnet/fsharp/issues/10227))
-- `#line` directive remapping now applied correctly. ([#9928](https://github.com/dotnet/fsharp/issues/9928))
-- DU types inside modules now discoverable. ([#5545](https://github.com/dotnet/fsharp/issues/5545))
-- Synthetic event handler values no longer appear in results. ([#4136](https://github.com/dotnet/fsharp/issues/4136))
-- FAR no longer crashes on projects containing non-F# files like `.cshtml`. ([#16394](https://github.com/dotnet/fsharp/issues/16394))
-
-([PR #19252](https://github.com/dotnet/fsharp/pull/19252), [PR #19311](https://github.com/dotnet/fsharp/pull/19311))
+A comprehensive pass over the Find All References (FAR) and Rename Symbol features fixes **15+ longstanding bugs**, some open for over 7 years — covering active patterns in signature files, rename of property accessors and operators, C# extension methods, DU case testers, record copy-and-update expressions, constructor usages, and more. ([PR #19252](https://github.com/dotnet/fsharp/pull/19252), [PR #19311](https://github.com/dotnet/fsharp/pull/19311), [PR #19358](https://github.com/dotnet/fsharp/pull/19358))
 
 ## Bug fixes and other improvements
 
-- Nullness: `int<meter>.ToString()` no longer returns `string | null` for value types. ([#17539](https://github.com/dotnet/fsharp/issues/17539))
-- Nullness: Pipe operator warnings now point at the nullable argument, not the pipe operator. ([#18013](https://github.com/dotnet/fsharp/issues/18013))
-- Nullness: Fixed false positive warning when passing non-null `AllowNullLiteral` constructor result. ([#18021](https://github.com/dotnet/fsharp/issues/18021))
-- Nullness: `not null` constraint on type extensions is now allowed. ([#18334](https://github.com/dotnet/fsharp/issues/18334))
-- Nullness: Tuple null elimination no longer over-infers non-null in pattern matching. ([#19042](https://github.com/dotnet/fsharp/issues/19042))
-- Fixed FS0229 error when reading metadata from assemblies compiled with `LangVersion < 9.0`. ([PR #19260](https://github.com/dotnet/fsharp/pull/19260))
-- Fixed FS3356 false positive for instance extension members with the same name on different types. ([PR #19260](https://github.com/dotnet/fsharp/pull/19260))
-- Fixed graph-based type checking dependency resolution for duplicate module names across files. ([PR #19280](https://github.com/dotnet/fsharp/pull/19280))
-- Fixed F# script default reference paths when an SDK directory is specified. ([PR #19270](https://github.com/dotnet/fsharp/pull/19270))
-
-...and many others.
+- `Set.intersect` no longer has argument-order-dependent performance — previously, `Set.intersect huge tiny` was up to 8,000× slower than `Set.intersect tiny huge`. ([#19139](https://github.com/dotnet/fsharp/issues/19139), [PR #19292](https://github.com/dotnet/fsharp/pull/19292))
+- Improved static compilation of state machines for `task { }` and resumable code patterns. ([#19296](https://github.com/dotnet/fsharp/issues/19296), [#12839](https://github.com/dotnet/fsharp/issues/12839), [PR #19297](https://github.com/dotnet/fsharp/pull/19297))
+- Five fixes to nullable reference type checking — fewer false positives for value types with units of measure, `AllowNullLiteral` constructors, type extensions with `not null` constraints, tuple pattern matching, and better warning locations for piped expressions. ([PR #19262](https://github.com/dotnet/fsharp/pull/19262))
+- Fixed cross-version metadata compatibility (FS0229) when referencing assemblies compiled with `LangVersion < 9.0`. ([PR #19260](https://github.com/dotnet/fsharp/pull/19260))
 
 F# updates:
 
