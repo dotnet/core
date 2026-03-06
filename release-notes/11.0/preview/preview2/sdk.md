@@ -83,6 +83,6 @@ The pack operation still proceeds with a warning to avoid breaking existing proj
 
 ## Community contributors
 
-Thank you to the following community contributors who helped make this release possible! ❤️
+Thank you to the following community contributors who helped make this release possible!
 
 - [@ezhevita](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3Aezhevita) — Fixed CA1515 and CA1034 analyzer false positives with C# extension members
