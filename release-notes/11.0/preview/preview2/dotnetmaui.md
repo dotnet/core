@@ -111,7 +111,7 @@ Various crashes can occur on API 21-23 devices when using the CoreCLR runtime, s
 
 ## (Experimental) CoreCLR
 
-Enables iOS, tvOS and Mac Catalyst apps to run on the CoreCLR runtime (instead of Mono). To use it, add the following to your project file:
+You can now run iOS, tvOS, and Mac Catalyst apps on the CoreCLR runtime (instead of Mono). To use it, add the following to your project file:
 
 ```XML
 <!-- Use CoreCLR on iOS -->
