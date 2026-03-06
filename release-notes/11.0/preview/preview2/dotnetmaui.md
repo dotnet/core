@@ -120,7 +120,11 @@ Enables iOS, tvOS and Mac Catalyst apps to run on the CoreCLR runtime (instead o
 </PropertyGroup>
 ```
 
-Please try this in your applications and report any issues; when filing feedback, state that you are using `UseMonoRuntime=false`. Expect that application size is currently larger than with Mono and that debugging and some runtime diagnostics are not fully functional yet; these areas are actively being improved. This is an experimental feature and not intended for production use.
+We'd love your feedback. Please try this with your apps and let us know how it goes. When filing issues, mention that you're using `UseMonoRuntime=false`. Known limitations in this preview:
+ - Application size is currently larger than with Mono
+ - Debugging and some runtime diagnostics are not fully functional yet
+
+Both areas are actively being improved. This is an experimental feature in Preview 2.
 
 A detailed list of changes can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/).
 
