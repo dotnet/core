@@ -111,7 +111,7 @@ Various crashes can occur on API 21-23 devices when using the CoreCLR runtime, s
 
 ## (Experimental) CoreCLR
 
-Enables iOS apps to run on the CoreCLR runtime (instead of Mono). To use it, add the following to your project file for iOS builds:
+Enables iOS, tvOS and Mac Catalyst apps to run on the CoreCLR runtime (instead of Mono). To use it, add the following to your project file:
 
 ```XML
 <!-- Use CoreCLR on iOS -->
@@ -120,9 +120,9 @@ Enables iOS apps to run on the CoreCLR runtime (instead of Mono). To use it, add
 </PropertyGroup>
 ```
 
-Please try this in your applications and report any issues; when filing feedback, state that you are using UseMonoRuntime=false. Expect that application size is currently larger than with Mono and that debugging and some runtime diagnostics are not fully functional yet; these areas are actively being improved. This is an experimental feature and not intended for production use.
+Please try this in your applications and report any issues; when filing feedback, state that you are using `UseMonoRuntime=false`. Expect that application size is currently larger than with Mono and that debugging and some runtime diagnostics are not fully functional yet; these areas are actively being improved. This is an experimental feature and not intended for production use.
 
-A detailed list of iOS changes can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/).
+A detailed list of changes can be found on the [dotnet/macios GitHub releases](https://github.com/dotnet/macios/releases/).
 
 ## Contributors
 
