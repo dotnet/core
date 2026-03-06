@@ -4,24 +4,26 @@ Before authoring content, check that candidate features have not already been co
 
 ## Load prior release notes
 
-Load the `libraries.md` file from the immediately preceding release within the same major version. For example, when generating Preview 3, load Preview 2's notes; when generating RC1, load Preview 7's notes.
+Load the team's component file (e.g., `libraries.md`, `aspnetcore.md`) from the immediately preceding release within the same major version. For example, when generating Preview 3, load Preview 2's notes; when generating RC1, load Preview 7's notes.
 
 When generating **Preview 1** release notes for a new major version, there are no prior previews to check. Instead, look back at the prior major version's late-cycle release notes — specifically RC1, RC2, and GA — since features that landed late in the previous release cycle may overlap with early work in the new version. For example, when generating .NET 12 Preview 1 notes, check:
 
 ```
-release-notes/11.0/preview/rc1/libraries.md
-release-notes/11.0/preview/rc2/libraries.md
-release-notes/11.0/preview/ga/libraries.md
+release-notes/11.0/preview/rc1/<component>.md
+release-notes/11.0/preview/rc2/<component>.md
+release-notes/11.0/preview/ga/<component>.md
 ```
 
 These files are in the local repository clone under `release-notes/<version>/preview/`.
+
+**Retain the previous release notes in context** — they are needed in the [authoring step](categorize-entries.md) for identifying theme continuations.
 
 ## Check for overlap
 
 For each candidate PR, check whether it (or its feature) already appears in a prior release's notes by looking for:
 
 - **PR number references** — search for `#<number>` or the full PR URL in prior files
-- **Feature names** — search for the API name, type name, or feature title (e.g. `IdnMapping`, `File.OpenNullHandle`, `Zstandard`)
+- **Feature names** — search for the API name, type name, or feature title
 
 Remove any PR from the candidate list whose feature is already covered. A PR that was merged in the date range of a prior preview but was not included in that preview's release notes may still be included — only exclude PRs whose features were actually written up.
 
@@ -40,5 +42,5 @@ If no PRs were removed during dedup (i.e. nothing overlapped with prior notes), 
 
 Some features span multiple PRs across previews (e.g. a Preview 1 PR adds the core API and a Preview 2 PR extends it). In these cases:
 
-- If the Preview 2 PR is a **substantial extension** (new overloads, new scenarios, significant perf improvement on top of the original, or breaking changes to the API shape), include it as an update referencing the earlier work.
-- If the Preview 2 PR is a **minor follow-up** (bug fix, test addition, doc comment), skip it.
+- If the new preview's PR is a **substantial extension** (new overloads, new scenarios, significant perf improvement on top of the original, or breaking changes to the API shape), include it as an update referencing the earlier work. Note the theme continuation for the [authoring step](categorize-entries.md).
+- If the new preview's PR is a **minor follow-up** (bug fix, test addition, doc comment), skip it.
