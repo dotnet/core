@@ -43,6 +43,7 @@ Team contexts with defined references:
 |------|-------------|----------------|
 | Libraries | [team-libraries.md](references/team-libraries.md) | `libraries.md` |
 | ASP.NET Core | [team-aspnetcore.md](references/team-aspnetcore.md) | `aspnetcore.md` |
+| .NET SDK | [team-sdk.md](references/team-sdk.md) | `sdk.md` |
 
 Other teams can be added by creating a `references/team-<team>.md` file following the same structure.
 
