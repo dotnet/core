@@ -95,7 +95,7 @@ Use these as default owners unless ownership changes.
 | dotnetmaui.md | @davidortinau | #10052 |
 | efcore.md | @SamMonoRT @roji | #10053 |
 | fsharp.md | @T-Gro | #10054 |
-| libraries.md | @ericstj @artl93 | #10055 |
+| libraries.md | @artl93 @jeffhandley @SamMonoRT @karelz | #10055 |
 | runtime.md | @richlander | #10056 |
 | sdk.md | @baronfel | #10057 |
 | visualbasic.md | @BillWagner | #10058 |
