@@ -69,7 +69,7 @@ TempData is automatically registered when calling `AddRazorComponents()` and is 
 
 The `ITempData` interface provides `Get`, `Peek`, `Keep`, and `Keep(string)` methods for controlling value lifecycle. A `SessionStorageTempDataProvider` is available as an alternative to the default `CookieTempDataProvider` ([dotnet/aspnetcore#49683](https://github.com/dotnet/aspnetcore/issues/49683)).
 
-## OpenAPI 3.2.0 support
+## OpenAPI 3.2.0 support (Breaking Change)
 
 `Microsoft.AspNetCore.OpenApi` now supports OpenAPI 3.2.0 through an updated dependency on `Microsoft.OpenApi` 3.3.1 ([dotnet/aspnetcore#65415](https://github.com/dotnet/aspnetcore/pull/65415)). This update includes breaking changes from the underlying library — see the [Microsoft.OpenApi upgrade guide](https://github.com/microsoft/OpenAPI.NET/blob/main/docs/upgrade-guide-3.md) for details.
 
