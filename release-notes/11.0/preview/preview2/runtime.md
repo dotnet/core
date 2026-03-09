@@ -1,38 +1,13 @@
 # .NET Runtime in .NET 11 Preview 2
 
-## New APIs
-
-| API | Area | PR |
-|-----|------|----|
-| [`System.IO.Hashing.Adler32`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.IO.Hashing/src/System/IO/Hashing/Adler32.cs) | Hashing | [dotnet/runtime #123601](https://github.com/dotnet/runtime/pull/123601) |
-| [`DecompressionMethods.Zstandard`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Net.Primitives/src/System/Net/DecompressionMethods.cs) | HTTP | [dotnet/runtime #123531](https://github.com/dotnet/runtime/pull/123531) |
-| [`ProcessExitStatus`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.Process/src/System/Diagnostics/ProcessExitStatus.cs) class | Diagnostics | [dotnet/runtime #124264](https://github.com/dotnet/runtime/pull/124264) |
-| [`File.OpenNullHandle()`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/IO/File.cs) | IO | [dotnet/runtime #123483](https://github.com/dotnet/runtime/pull/123483) |
-| [`Console.OpenStandard{Input,Output,Error}Handle()`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Console/src/System/Console.cs) | Console | [dotnet/runtime #123478](https://github.com/dotnet/runtime/pull/123478) |
-| [`JsonSerializerOptions.GetTypeInfo<T>()`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Text.Json/src/System/Text/Json/Serialization/JsonSerializerOptions.Caching.cs) / `TryGetTypeInfo<T>()` | JSON | [dotnet/runtime #123940](https://github.com/dotnet/runtime/pull/123940) |
-| [`IdnMapping.TryGetAscii`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Globalization/IdnMapping.cs) / `TryGetUnicode` (span-based) | Globalization | [dotnet/runtime #123593](https://github.com/dotnet/runtime/pull/123593) |
-| [`TarFile.CreateFromDirectory`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Formats.Tar/src/System/Formats/Tar/TarFile.cs) with `TarEntryFormat` | Archives | [dotnet/runtime #123407](https://github.com/dotnet/runtime/pull/123407) |
-| [`PosixSignal.SIGKILL`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Runtime/InteropServices/PosixSignal.cs) | Process | [dotnet/runtime #124256](https://github.com/dotnet/runtime/pull/124256) |
-| [`[ExcludeFromCodeCoverage]`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Diagnostics/CodeAnalysis/ExcludeFromCodeCoverageAttribute.cs) / `[StackTraceHidden]` on interfaces | Attributes | [dotnet/runtime #123686](https://github.com/dotnet/runtime/pull/123686) |
-| [SVE2 `ShiftRightLogicalNarrowingSaturate(Even\|Odd)`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Arm/Sve2.cs) | ARM intrinsics | [dotnet/runtime #123888](https://github.com/dotnet/runtime/pull/123888) |
-
-### ISO 8601 end-of-day support
-
-`DateTime`, `DateTimeOffset`, `TimeOnly`, `Utf8Parser`, and the JSON serializer now accept `24:00` / `24:00:00` as a valid ISO 8601 end-of-day representation, equivalent to midnight of the next day.
-
-- DateTime/DateTimeOffset/TimeOnly parsing — [dotnet/runtime #124142](https://github.com/dotnet/runtime/pull/124142)
-- XSD DateTime validation — [dotnet/runtime #124437](https://github.com/dotnet/runtime/pull/124437)
-
----
-
-## Runtime Async (Async V2)
+## Runtime Async (V2)
 
 Preview 2 brings significant progress toward runtime-native async. Instead of the compiler generating state-machine classes, the runtime itself manages async suspension and resumption, producing cleaner stack traces, better debuggability, and lower overhead.
 
 ### What shipped in Preview 2
 
 | PR | What |
-|----|------|
+| ---- | ------ |
 | [dotnet/runtime #122126](https://github.com/dotnet/runtime/pull/122126), [dotnet/runtime #122651](https://github.com/dotnet/runtime/pull/122651) | Generic and virtual async methods now work correctly with runtime async, including in ReadyToRun images |
 | [dotnet/runtime #123644](https://github.com/dotnet/runtime/pull/123644) | Debugger breakpoint and stepping support for runtime async methods |
 | [dotnet/runtime #122722](https://github.com/dotnet/runtime/pull/122722) | `Exception.ToString()` includes runtime-async frames |
@@ -83,7 +58,7 @@ static async Task InnerAsync()
 
 **Without `runtime-async` — 13 frames, state-machine infrastructure visible:**
 
-```
+```text
    at Program.<<Main>$>g__InnerAsync|0_2() in Program.cs:line 24
    at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](...)
    at Program.<<Main>$>g__InnerAsync|0_2()
@@ -101,7 +76,7 @@ static async Task InnerAsync()
 
 **With `runtime-async` — 5 frames, the real call chain:**
 
-```
+```text
    at Program.<<Main>$>g__InnerAsync|0_2() in Program.cs:line 24
    at Program.<<Main>$>g__MiddleAsync|0_1() in Program.cs:line 14
    at Program.<<Main>$>g__OuterAsync|0_0() in Program.cs:line 8
@@ -119,56 +94,40 @@ Breakpoints now bind correctly inside runtime-async methods, and the debugger ca
 
 ---
 
-## Performance
+## JIT
 
-### `Guid.NewGuid()` on Linux
+### Bounds check removal for `i + cns < len` pattern
 
-Switches from reading `/dev/urandom` to the `getrandom()` syscall with batch caching, yielding roughly a 12% throughput improvement for GUID generation on Linux. ([dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540))
+The JIT now eliminates bounds checks for the common pattern where an index plus a constant is compared against a length. ([dotnet/runtime #124242](https://github.com/dotnet/runtime/pull/124242))
 
-### `Directory.GetFiles` on Windows
+### Redundant checked context removal
 
-Safe search patterns (e.g. `*.jpg`, `prefix*`) are now pushed down to `NtQueryDirectoryFile` for OS-level filtering instead of client-side enumeration. Searching large directories with selective patterns is dramatically faster. ([dotnet/runtime #122947](https://github.com/dotnet/runtime/pull/122947))
+Checked arithmetic contexts that the JIT can prove are redundant (e.g. the value is already in range) are now optimized away. ([dotnet/runtime #124147](https://github.com/dotnet/runtime/pull/124147), [dotnet/runtime #124184](https://github.com/dotnet/runtime/pull/124184))
 
-### `FileSystemWatcher` on Linux — single inotify instance
+### Devirtualization of non-shared generic virtual methods in R2R
 
-Previously each `FileSystemWatcher` opened its own inotify file descriptor. Now a single instance is shared across all watchers, reducing resource pressure and staying well within the per-user inotify limit (default 128). ([dotnet/runtime #117148](https://github.com/dotnet/runtime/pull/117148))
+ReadyToRun images can now devirtualize non-shared generic virtual method calls, improving ahead-of-time compiled code performance. ([dotnet/runtime #123183](https://github.com/dotnet/runtime/pull/123183))
+
+### SVE2 intrinsics
+
+New ARM SVE2 intrinsics: [`ShiftRightLogicalNarrowingSaturate(Even|Odd)`](https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Arm/Sve2.cs). These require both JIT support and managed API surface. ([dotnet/runtime #123888](https://github.com/dotnet/runtime/pull/123888))
+
+---
+
+## VM
 
 ### Cached interface dispatch on non-JIT platforms
 
 Interface dispatch on platforms that lack JIT support (e.g. iOS) was falling back to an expensive generic fixup path. Enabling cached dispatch by default yields up to 200x improvements in interface-heavy code on these targets. ([dotnet/runtime #123776](https://github.com/dotnet/runtime/pull/123776))
 
-### `Process.KillTree`
+### `Guid.NewGuid()` on Linux
 
-Eliminates excessive exception throwing during child-process enumeration on Windows. With a debugger attached, `KillTree` went from ~23 seconds to ~0.17 seconds. ([dotnet/runtime #123865](https://github.com/dotnet/runtime/pull/123865))
+Switches from reading `/dev/urandom` to the `getrandom()` syscall with batch caching, yielding roughly a 12% throughput improvement for GUID generation on Linux. This is a native PAL change. ([dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540))
 
-### `ImmutableArray.SequenceEqual`
+### ThreadPool semaphore fixes and LIFO unification
 
-Adds optimized paths for `ICollection<T>` types, achieving ~90% improvement for arrays and lists and ~54% for `IList` implementations. ([dotnet/runtime #118932](https://github.com/dotnet/runtime/pull/118932))
+Fixes an exponential backoff initialization bug in threadpool spinning and unifies the Windows/Unix LIFO waiting policy with adaptive spinning. Touches both CoreLib managed code and NativeAOT runtime. ([dotnet/runtime #123921](https://github.com/dotnet/runtime/pull/123921))
 
----
+### CoreCLR iOS-like mode
 
-## Notable Bug Fixes
-
-### `ZipArchive` Update mode no longer rewrites unchanged archives
-
-Opening a zip in `Update` mode and disposing without making changes previously rewrote the entire archive, causing `NotSupportedException` on non-expandable streams (e.g. fixed-size `MemoryStream`). Now unchanged archives are left untouched. ([dotnet/runtime #123719](https://github.com/dotnet/runtime/pull/123719))
-
-### `ZipArchiveEntry.ExtractToFile` corruption prevention
-
-When extracting with `overwrite: true`, if the extraction fails mid-stream, the original destination file was left in a corrupted state. The fix ensures the original file is preserved when extraction encounters errors. ([dotnet/runtime #123991](https://github.com/dotnet/runtime/pull/123991))
-
-### `XDocument.LoadAsync` now truly async
-
-`XDocument.LoadAsync` was internally performing synchronous reads, blocking the calling thread. It now uses genuinely asynchronous I/O throughout. ([dotnet/runtime #123800](https://github.com/dotnet/runtime/pull/123800))
-
-### `ServiceProviderEngineScope.Dispose` aggregates exceptions
-
-Previously, if a scoped service threw during disposal, subsequent services were not disposed at all. Now all disposables are cleaned up and exceptions are aggregated into an `AggregateException`. ([dotnet/runtime #123342](https://github.com/dotnet/runtime/pull/123342))
-
-### `WriteOnceBlock.ReceiveAsync` race condition
-
-A race in TPL Dataflow's `WriteOnceBlock` could cause `ReceiveAsync` to return `null` instead of the posted value. Fixed by reordering value assignment before state updates with a memory barrier. ([dotnet/runtime #123435](https://github.com/dotnet/runtime/pull/123435))
-
-### Certificate disposal in `RemoteCertificateValidationCallback`
-
-`SslStream` was disposing certificates that the application provided via `RemoteCertificateValidationCallback`, causing `NullReferenceException` when the same certificate was reused across connections. ([dotnet/runtime #123875](https://github.com/dotnet/runtime/pull/123875))
+A new `--dynamiccodecompiled false` build option configures CoreCLR + crossgen2 to behave like iOS (JIT disabled, interpreter enabled, cached interface dispatch), enabling desktop testing of iOS-like scenarios without device deployment. ([dotnet/runtime #124168](https://github.com/dotnet/runtime/pull/124168))
