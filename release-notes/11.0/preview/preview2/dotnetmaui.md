@@ -124,7 +124,8 @@ You can now run iOS, tvOS, and Mac Catalyst apps on the CoreCLR runtime (instead
     <UseMonoRuntime>false</UseMonoRuntime>
 </PropertyGroup>
 ```
-
+You can verify your app is using CoreCLR by checking for libcoreclr.framework in your app bundle:
+`find bin -name 'libcoreclr.*' > /dev/null&& echo "Found CoreCLR in the app bundle" || echo "CoreCLR not found, using Mono"`
 We'd love your feedback. Please try this with your apps and let us know how it goes. When filing issues, mention that you're using `UseMonoRuntime=false`. Known limitations in this preview:
  - Application size is currently larger than with Mono
  - Debugging and some runtime diagnostics are not fully functional yet
