@@ -19,21 +19,18 @@
 
 SDK installer size on Linux and macOS has been reduced by deduplicating assemblies using symbolic links. Duplicate `.dll` and `.exe` files are identified by content hash and replaced with symbolic links pointing to a single copy. This affects tarballs, `.pkg`, `.deb`, and `.rpm` installers ([dotnet/sdk#52044](https://github.com/dotnet/sdk/pull/52044)).
 
-Analysis of the .NET SDK layout found that **35% of the SDK directory is duplicate files** — 816 files totaling 140 MB on disk (53 MB compressed) on Linux x64. By replacing these duplicates with symbolic links, the Linux x64 archive drops from 229 MB to 176 MB:
+Analysis of the .NET SDK layout found that **35% of the SDK directory is duplicate files** — 816 files totaling 140 MB on disk (53 MB compressed) on Linux x64. By replacing these duplicates with symbolic links, the Linux x64 archive drops significantly in size:
 
-TODO: get p2 numbers here
-
-| Platform | SDK Artifact | 10.0.105 Size (MB) | 11.0.100-preview3 Size (MB) | % Gain |
+| Platform | SDK Artifact | 10.0.105 Size (MB) | 11.0.100-preview2 Size (MB) | % Gain |
 |---|---|---|---|---|
-| linux-x64 | tarball | 230 | 171 | 25.7% |
-| linux-x64 | deb | 164 | 110 | 32.9% |
-| linux-x64 | rpm | 165 | 113 | 31.5% |
+| linux-x64 | tarball | 230 | 189 | 17.8% |
+| linux-x64 | deb | 164 | 122 | 25.6% |
+| linux-x64 | rpm | 165 | 122 | 26.0% |
 | linux-x64 | containers | Varies per distro/image variant | Varies per distro/image variant | 8-17% |
-| osx-x64 | tarball | 228 | 169 | 25.9% |
-| osx-x64 | pkg | 223 | 170 | 23.8% |
-| windows-x64 | zip/tarball | 289 (zip) | 211 (tarball) | 27.0% |
 
-Windows deduplication is planned separately and tracked in [dotnet/sdk#52182](https://github.com/dotnet/sdk/issues/52182). For the full design and analysis, see the [Eliminate Duplicate SDK Files](https://github.com/dotnet/sdk/blob/main/documentation/general/eliminate-duplicate-files.md) spec ([dotnet/sdk#41128](https://github.com/dotnet/sdk/issues/41128)).
+These results are generally the same across other architectures as well!
+
+Windows deduplication is planned separately and tracked in [dotnet/sdk#52182](https://github.com/dotnet/sdk/issues/52182). For preview 2, macOS tarball deduplication was implemented but caused regressions, so look forward to those starting in preview 3! For the full design and analysis of this feature, see the [Eliminate Duplicate SDK Files](https://github.com/dotnet/sdk/blob/main/documentation/general/eliminate-duplicate-files.md) spec ([dotnet/sdk#41128](https://github.com/dotnet/sdk/issues/41128)).
 
 ## Code analyzer improvements
 
