@@ -42,7 +42,7 @@ Two improvements were made to [CA1873](https://learn.microsoft.com/dotnet/fundam
 
 **Specific reasons in diagnostic messages** — The diagnostic message now includes *why* an argument was flagged, helping developers prioritize which warnings to address ([dotnet/sdk#53030](https://github.com/dotnet/sdk/pull/53030), [dotnet/sdk#53006](https://github.com/dotnet/sdk/issues/53006)):
 
-```
+```shell
 // Before
 warning CA1873: Evaluation of this argument may be expensive and unnecessary if logging is disabled
 
@@ -72,7 +72,7 @@ Projects with `AnalysisLevel=latest` were incorrectly using .NET 9.0 analyzer ru
 
 A new warning is emitted when a project has `PackAsTool=true` and specifies a custom `NuspecFile` property. Tool packages require specific layout and identifier conventions that custom `.nuspec` files typically violate ([dotnet/sdk#52810](https://github.com/dotnet/sdk/pull/52810)):
 
-```
+```shell
 warning NETSDK1235: .NET Tools do not support using a custom .nuspec file, but the nuspec file 'custom.nuspec' was provided. Remove the NuspecFile property from this project to enable packing it as a .NET Tool.
 ```
 
