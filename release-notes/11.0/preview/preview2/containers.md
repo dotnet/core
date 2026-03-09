@@ -19,6 +19,6 @@ The result is a compressed (wire) size reduction of approximately 44 MB for all 
 | Ubuntu 26.04[^1] | amd64 | 331.0[^1] | 292.7[^1] | **-38.3**[^1] | -11.6%[^1] |
 | Ubuntu 26.04[^1] | arm64 | 323.4[^1] | 286.0[^1] | **-37.4**[^1] | -11.6%[^1] |
 
-This size reduction also applies to standalone .NET SDK archives (tar.gz/zip), not just container images.
+This size reduction also applies to [standalone .NET SDK archives and installers](./sdk.md#smaller-sdk-installers-on-linux-and-macos).
 
 [^1]: The difference in size for Ubuntu 26.04 (Resolute) images is due to package updates and not due to differences in the .NET SDK. Ubuntu 26.04 is pre-release software, so it receives frequent package updates that cause the images to fluctuate in size. The SDK layer size reduction is consistent across all images, including Ubuntu 26.04.
