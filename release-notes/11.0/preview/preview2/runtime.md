@@ -4,14 +4,6 @@
 
 Preview 2 brings significant progress toward runtime-native async. Instead of the compiler generating state-machine classes, the runtime itself manages async suspension and resumption, producing cleaner stack traces, better debuggability, and lower overhead.
 
-### What shipped in Preview 2
-
-| PR | What |
-| ---- | ------ |
-| [dotnet/runtime #122126](https://github.com/dotnet/runtime/pull/122126), [dotnet/runtime #122651](https://github.com/dotnet/runtime/pull/122651) | Generic and virtual async methods now work correctly with runtime async, including in ReadyToRun images |
-| [dotnet/runtime #123644](https://github.com/dotnet/runtime/pull/123644) | Debugger breakpoint and stepping support for runtime async methods |
-| [dotnet/runtime #122722](https://github.com/dotnet/runtime/pull/122722) | `Exception.ToString()` includes runtime-async frames |
-| [dotnet/runtime #124183](https://github.com/dotnet/runtime/pull/124183) | Async methods that never actually suspend (no incomplete awaits) can now be inlined |
 
 ### Opting in
 
