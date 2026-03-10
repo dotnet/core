@@ -76,6 +76,8 @@ static async Task InnerAsync()
    at Program.<Main>(String[] args)
 ```
 
+(Note: methods are named `$>g__` because they are local functions, not because they are async)
+
 This improvement benefits profiling tools, diagnostic logging, and the debugger call stack window — anything that inspects the live execution stack rather than exception traces.
 
 > **Note:** Exception stack traces (`catch (Exception ex) { Console.WriteLine(ex); }`) already look the same with or without runtime async, thanks to existing `ExceptionDispatchInfo` cleanup in the compiler-generated code. The improvement is in what you see *during* execution.
