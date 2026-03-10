@@ -116,7 +116,7 @@ Interface dispatch on platforms that lack JIT support (e.g. iOS) was falling bac
 
 ### `Guid.NewGuid()` on Linux
 
-Switches from reading `/dev/urandom` to the `getrandom()` syscall with batch caching, yielding roughly a 12% throughput improvement for GUID generation on Linux. This is a native PAL change. ([dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540))
+Switches from reading `/dev/urandom` to the `getrandom()` syscall with batch caching, yielding roughly a 12% throughput improvement for GUID generation on Linux. ([dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540))
 
 ### CoreCLR iOS-like mode
 
