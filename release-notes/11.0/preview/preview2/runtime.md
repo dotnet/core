@@ -3,6 +3,7 @@
 ## Runtime Async (V2)
 
 Preview 2 brings significant progress toward runtime-native async. Instead of the compiler generating state-machine classes, the runtime itself manages async suspension and resumption, producing cleaner stack traces, better debuggability, and lower overhead.
+
 ### Opting in
 
 Runtime async is still a preview feature. The compiler must emit methods with `MethodImplOptions.Async` for the runtime to treat them as runtime-async. Today this requires a compiler feature flag and the preview-features opt-in:
