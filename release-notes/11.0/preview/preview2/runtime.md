@@ -118,10 +118,6 @@ Interface dispatch on platforms that lack JIT support (e.g. iOS) was falling bac
 
 Switches from reading `/dev/urandom` to the `getrandom()` syscall with batch caching, yielding roughly a 12% throughput improvement for GUID generation on Linux. This is a native PAL change. ([dotnet/runtime #123540](https://github.com/dotnet/runtime/pull/123540))
 
-### ThreadPool semaphore fixes and LIFO unification
-
-Fixes an exponential backoff initialization bug in threadpool spinning and unifies the Windows/Unix LIFO waiting policy with adaptive spinning. Touches both CoreLib managed code and NativeAOT runtime. ([dotnet/runtime #123921](https://github.com/dotnet/runtime/pull/123921))
-
 ### CoreCLR iOS-like mode
 
 A new `--dynamiccodecompiled false` build option configures CoreCLR + crossgen2 to behave like iOS (JIT disabled, interpreter enabled, cached interface dispatch), enabling desktop testing of iOS-like scenarios without device deployment. ([dotnet/runtime #124168](https://github.com/dotnet/runtime/pull/124168))
