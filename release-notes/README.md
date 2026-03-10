@@ -12,7 +12,7 @@
 [11.0.0-preview.2]: release-notes/11.0/preview/preview2/11.0.0-preview.2.md
 [10.0.4]: ./10.0/10.0.4/10.0.4.md
 [9.0.14]: ./9.0/9.0.14/9.0.14.md
-[8.0.24]: ./8.0/8.0.25/8.0.25.md
+[8.0.25]: ./8.0/8.0.25/8.0.25.md
 
 [policies]: ../release-policies.md
 
