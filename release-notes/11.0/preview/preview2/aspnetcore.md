@@ -4,7 +4,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 
 - [Native OpenTelemetry tracing for ASP.NET Core](#native-opentelemetry-tracing-for-aspnet-core)
 - [TempData support for Blazor](#tempdata-support-for-blazor)
-- [OpenAPI 3.2.0 support](#openapi-320-support)
+- [OpenAPI 3.2.0 support](#openapi-320-support-breaking-change)
 - [.NET Web Worker project template](#net-web-worker-project-template)
 - [Infer passkey display name from authenticator](#infer-passkey-display-name-from-authenticator)
 - [Performance improvements](#performance-improvements)
