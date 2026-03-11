@@ -2,6 +2,16 @@
 
 You may encounter some known issues, which may include workarounds, mitigations, or expected resolution timeframes. Watch this space for any known issues in .NET 10.0.
 
+## Debugger crashes on macOS when using VS Code with .NET 10.0.4
+
+We have a known issue in .NET 10.0.4 that causes the debugger to crash when debugging applications on macOS using Visual Studio Code. This regression is unrelated to the security fixes included in 10.0.4.
+
+See [the GitHub issue](https://github.com/dotnet/core/issues/10292) and [related SDK issue](https://github.com/dotnet/sdk/issues/53382) for more details.
+
+### Resolution
+
+An out-of-band (OOB) .NET 10.0.5 release is scheduled for March 12, 2026 to address this regression. **You will only need to install this patch if you are on macOS using VS Code for debugging.** Other platforms and development environments are not affected.
+
 ## ASP.NET Core Runtime Hosting Bundle upgrade breaks IIS hosting on ARM64 machines
 
 Starting in .NET 10 Preview 2, installing the ASP.NET Core Runtime Hosting Bundle for Windows on ARM64 when a earlier version of the hosting bundle was previously installed breaks IIS hosting. This causes problems for both IIS and IIS express on ARM64 machines after attempting to update the hosting bundle. Fortunately, **you can work around this issue by uninstalling all hosting bundles and reinstalling the .NET 10 Preview 2 hosting bundle.**
@@ -104,3 +114,4 @@ Impacts 10.0.101 and newer .NET SDK versions.
 **Workaround**: `dotnet workload config --update-mode manifests` then `dotnet workload update`. After that you can switch back to workload-set updates or stick with manifest until this is resolved. You may need to delete the dotnet/metadata folder as well.
 
 Alternatively, you can install the previous SDK that included the manifests that are missing, then update, then uninstall that SDK.
+
