@@ -16,6 +16,8 @@ CREATE TABLE prs (
     reactions INTEGER DEFAULT 0,
     is_library INTEGER DEFAULT 0,
     is_candidate INTEGER DEFAULT 0,
+    is_revert INTEGER DEFAULT 0,       -- 1 if this PR reverts another PR
+    reverted_by INTEGER,               -- PR number that reverts this PR (full or partial)
     is_preview_feedback_fix INTEGER DEFAULT 0,
     feedback_issue_number INTEGER,
     feedback_issue_reactions INTEGER,
@@ -100,6 +102,16 @@ WHERE github_login NOT LIKE '%[bot]%'
   AND github_login != 'Copilot'
 GROUP BY area_labels, github_login
 ORDER BY area_labels, pr_count DESC, github_login;
+```
+
+### Find reverted PRs (excluded from candidates)
+
+```sql
+SELECT p.number, p.title, p.reverted_by,
+       r.number AS revert_pr, r.title AS revert_title
+FROM prs p
+JOIN prs r ON r.number = p.reverted_by
+WHERE p.reverted_by IS NOT NULL;
 ```
 
 ## Usage notes

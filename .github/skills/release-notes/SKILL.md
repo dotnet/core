@@ -51,7 +51,7 @@ Other teams can be added by creating a `references/team-<team>.md` file followin
 
 Gather the changes included in the release:
 
-1. **[Collect and filter PRs](references/collect-prs.md)** — search for merged PRs using the team context's PR discovery approach (area labels, milestones, or other strategy). The team context overrides the default method when specified.
+1. **[Collect and filter PRs](references/collect-prs.md)** — search for merged PRs using the team context's PR discovery approach (area labels, milestones, or other strategy). Detect revert PRs and exclude both sides of within-release reverts; keep cross-release reverts as candidates since they represent user-visible changes. The team context overrides the default method when specified.
 2. **[Enrich — fetch PR and issue details](references/enrich-prs.md)** — fetch full PR bodies, discover linked issues, gather reactions and Copilot summaries.
 3. **API diff review** (optional) — if the team context specifies API diff review, follow [api-diff-review.md](references/api-diff-review.md) to cross-reference new APIs with candidate PRs.
 

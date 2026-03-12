@@ -72,6 +72,57 @@ Apply these filters before marking PRs as candidates:
 - PRs whose title starts with `[release/` or contains `backport`
 - PRs that are purely test, CI, or documentation changes (no `src` changes)
 
+### Detect and exclude reverts
+
+After collecting all PRs, scan for **revert PRs** — PRs that undo work from another PR. How a revert is handled depends on whether the reverted PR was merged **within the current release period** or in a **previous release**.
+
+- **Within-release revert** — both the original PR and its revert are excluded. The net effect is zero change, so neither should appear in the release notes.
+- **Cross-release revert** — a revert of work from a previous release is effectively a bug fix or behavior change. Keep the revert PR as a candidate (it represents a user-visible change in this release) but do not include the original PR from the prior release.
+
+**Detection patterns — scan every collected PR's title and body:**
+
+1. **Title patterns** (full reverts):
+   - `Revert "Original PR title"` — match the quoted title against other collected PRs
+   - `Revert "<title>" (#1234)` — extract the PR number directly
+   - `Revert #1234` or `Revert PR #1234`
+
+2. **Body patterns** (full or partial reverts):
+   - `Reverts <owner>/<repo>#1234` or `Reverts #1234` — GitHub's auto-generated revert body
+   - `This reverts commit <sha>` — git's revert message; look up which PR introduced that commit
+   - `Partially reverts #1234` or `Reverts part of #1234`
+
+3. **Label patterns**:
+   - PRs labeled `revert` or `reverted`
+
+**For each detected revert, determine the scope:**
+
+1. Mark the revert PR: `UPDATE prs SET is_revert = 1 WHERE number = <revert_pr>;`
+2. Check whether the reverted PR is in the collected set (i.e., merged within the current release period's date range).
+   - **If yes (within-release revert):** mark both for exclusion.
+
+     ```sql
+     UPDATE prs SET reverted_by = <revert_pr> WHERE number = <original_pr>;
+     ```
+
+   - **If no (cross-release revert):** the revert PR is a meaningful change — keep it as a candidate. Clear its `is_revert` flag so it is treated as a normal PR during categorization.
+
+     ```sql
+     UPDATE prs SET is_revert = 0 WHERE number = <revert_pr>;
+     ```
+
+**Partial reverts** require closer inspection. When a PR's title or body indicates a partial revert (e.g., "Revert part of", "Partially reverts"), fetch the revert PR's diff to understand what was undone:
+
+- **Within-release partial revert:** if the partial revert removes the user-facing feature or API introduced by the original PR, treat it the same as a full within-release revert — exclude both. If the partial revert only rolls back an implementation detail while the feature remains intact, keep the original PR as a candidate but note the revert in the PR's context for the authoring step.
+- **Cross-release partial revert:** keep the revert PR as a candidate. It represents a user-visible change worth documenting.
+
+**After revert detection, exclude within-release revert pairs from candidates:**
+
+```sql
+-- Exclude within-release revert pairs (both sides)
+UPDATE prs SET is_candidate = 0
+WHERE is_revert = 1 OR reverted_by IS NOT NULL;
+```
+
 ### Team-specific filters
 
 Apply any additional filters specified in the team context (e.g., specific label inclusions/exclusions, path-based filtering).
