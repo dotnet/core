@@ -42,7 +42,7 @@ search_pull_requests(
 
 Page through results (incrementing `page`) until all PRs for each query are collected. Deduplicate by PR number across all queries before inserting into the database.
 
-**PRs without area labels.** Some PRs lack an area label altogether. To catch these, also run a search without label filters but restricted to the date range and `perPage: 30`. Check the title and description of unlabeled PRs for team-relevant content. If a PR references an issue (via "Fixes #..." links), fetch the issue to check for area labels.
+**PRs without area labels.** Some PRs lack an area label altogether. To catch these, run a search without label filters but restricted to the date range and `perPage: 30`. Page through all results (incrementing `page` until an empty page is returned) to collect all unlabeled PRs. Check the title and description of unlabeled PRs for team-relevant content. If a PR references an issue (via "Fixes #..." links), fetch the issue to check for area labels.
 
 ### Fallback — GitHub CLI
 

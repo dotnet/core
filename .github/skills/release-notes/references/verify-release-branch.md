@@ -24,6 +24,8 @@ The expected branch name pattern is:
 release/<MAJOR>.0.1xx-<prerelease>
 ```
 
+The `1xx` is the SDK feature band — `1xx` is standard for the first SDK release of a major version.
+
 For example:
 - .NET 11 Preview 1 → `release/11.0.1xx-preview1`
 - .NET 11 Preview 2 → `release/11.0.1xx-preview2`
@@ -67,7 +69,7 @@ Start from the most recently merged PRs in the candidate list and work backward.
 
    Look for commits with messages like `"Source code updates from dotnet/<repo>"` dated after the PR's merge date. The dotnet-maestro bot regularly syncs changes from component repos into the VMR.
 
-Stop checking after **2 consecutive PRs are confirmed present** — if the two newest changes made it into the release branch, older changes are also included.
+Stop checking after **2 consecutive PRs are confirmed present** — the VMR syncs from component repos in chronological order, so if the two most recently merged changes made it into the release branch, older changes merged before them are also included. If a gap is found (e.g., PR #5 is present but PR #4 is missing), investigate PR #4 specifically before moving on.
 
 If any change is **not found** in the release branch, inform the user that the feature may not have been included in this preview release. Suggest either:
 - Moving that feature to the **next preview's** release notes

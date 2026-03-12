@@ -38,8 +38,11 @@ Order features by **customer impact**, using both qualitative "wow" factor and q
 3. Smaller additions and fixes that round out the release
 
 **Popularity signals:**
-- **Reaction counts**: PRs and issues with many 👍, ❤️, or 🚀 reactions indicate strong community demand. Use the combined reaction count across the PR and its linked issues as a tiebreaker within each tier
-- **Linked issue upvotes**: An issue with 50+ reactions is a stronger signal than one with 2
+- **Reaction counts**: Use the combined reaction count across the PR and its linked issues as a tiebreaker within each tier. As a rough guide:
+  - **50+ combined reactions** — strong community demand; promote toward the top of the release notes
+  - **10–49 reactions** — moderate interest; a useful signal but not decisive on its own
+  - **Under 10 reactions** — weak signal; rank primarily by qualitative impact instead
+- **Linked issue upvotes**: An issue with 50+ reactions is a stronger signal than one with 2 — check the linked issue, not just the PR, since community members upvote issues more often than PRs
 
 ## Community contributors
 

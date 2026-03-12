@@ -28,8 +28,11 @@ CREATE TABLE issues (
     title TEXT,
     body TEXT,
     labels TEXT,
+    author TEXT,              -- issue author's GitHub login
+    created_at TEXT,          -- ISO 8601 timestamp, used for preview-era detection
     reactions INTEGER DEFAULT 0,
-    pr_number INTEGER     -- the PR that references this issue
+    comments INTEGER DEFAULT 0, -- comment count, used as community signal strength
+    pr_number INTEGER         -- the PR that references this issue
 );
 
 CREATE TABLE reviewers (

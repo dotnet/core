@@ -116,10 +116,10 @@ After enriching all candidate PRs with their linked issues, scan for **preview f
 
 For each candidate PR that has a linked issue (via `Fixes`/`Closes`/`Resolves`):
 
-1. **Check issue creation date** — if the issue was created *after* the start date (the previous preview's Code Complete), it's a preview-era issue.
-2. **Check issue author** — if the author is NOT a member of the team (not in the PR author list, not a bot, and doesn't appear frequently as a merger/assignee across candidate PRs), flag it as community-reported.
+1. **Check issue creation date** — if the issue was created *after* the start date (the previous preview's Code Complete), it's a preview-era issue. Compare the issue's `created_at` field against the start date collected in [process-inputs.md](process-inputs.md).
+2. **Check issue author** — determine whether the reporter is external to the team. An author is considered a **team member** if they appear as a PR author, merger, or assignee on **3 or more** candidate PRs in the current pipeline. Bot accounts are excluded. If the issue author is not a team member by this definition, flag it as community-reported.
 3. **Check for bug/regression labels** — labels like `bug`, `regression`, `behavior-change`, or team-specific equivalents are strong signals.
-4. **Check reaction and comment counts** — record these as the **community signal strength** for this fix.
+4. **Check reaction and comment counts** — record these from the issue's `reactions` total and `comments` count as the **community signal strength** for this fix. See [categorize-entries.md](categorize-entries.md) for how signal strength maps to impact tiers.
 
 ### Flag in the database
 
