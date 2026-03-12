@@ -8,6 +8,8 @@ Your app needs to be on the latest .NET 10 patch version to be secure. The longe
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 10.0.5 (March 2026)
+  - No new CVEs
 - 10.0.4 (March 2026)
   - [CVE-2026-26130](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-26130)
   - [CVE-2026-26127](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-26127)
