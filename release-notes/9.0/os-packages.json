@@ -103,6 +103,82 @@
       ],
       "releases": [
         {
+          "name": "Alpine edge",
+          "release": "edge",
+          "packages": [
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libssl3"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "icu",
+              "name": "icu-libs"
+            },
+            {
+              "id": "icu",
+              "name": "icu-data-full"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        },
+        {
+          "name": "Alpine 3.23",
+          "release": "3.23",
+          "packages": [
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libssl3"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "icu",
+              "name": "icu-libs"
+            },
+            {
+              "id": "icu",
+              "name": "icu-data-full"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5"
+            }
+          ]
+        },
+        {
           "name": "Alpine 3.22",
           "release": "3.22",
           "packages": [
@@ -424,6 +500,44 @@
       ],
       "releases": [
         {
+          "name": "Debian sid (Unstable)",
+          "release": "sid",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "libc6"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc-s1"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "libssl3t64"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++6"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu76"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "libgssapi-krb5-2"
+            }
+          ]
+        },
+        {
           "name": "Debian 13 (Trixie)",
           "release": "13",
           "packages": [
@@ -515,6 +629,44 @@
         }
       ],
       "releases": [
+        {
+          "name": "Fedora 44",
+          "release": "44",
+          "packages": [
+            {
+              "id": "libc",
+              "name": "glibc"
+            },
+            {
+              "id": "libgcc",
+              "name": "libgcc"
+            },
+            {
+              "id": "ca-certificates",
+              "name": "ca-certificates"
+            },
+            {
+              "id": "openssl",
+              "name": "openssl-libs"
+            },
+            {
+              "id": "libstdc++",
+              "name": "libstdc++"
+            },
+            {
+              "id": "libicu",
+              "name": "libicu"
+            },
+            {
+              "id": "tzdata",
+              "name": "tzdata"
+            },
+            {
+              "id": "krb5",
+              "name": "krb5-libs"
+            }
+          ]
+        },
         {
           "name": "Fedora 43",
           "release": "43",
@@ -1060,7 +1212,7 @@
             },
             {
               "id": "libicu",
-              "name": "libicu76"
+              "name": "libicu78"
             },
             {
               "id": "tzdata",
