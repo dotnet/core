@@ -1,6 +1,6 @@
 {
   "channel-version": "8.0",
-  "last-updated": "2025-10-28",
+  "last-updated": "2026-03-12",
   "families": [
     {
       "name": "Android",
@@ -11,8 +11,8 @@
           "link": "https://www.android.com/",
           "lifecycle": "https://support.google.com/android",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["16", "15", "14", "13"],
-          "unsupported-versions": ["12.1", "12", "11"],
+          "supported-versions": ["16", "15", "14"],
+          "unsupported-versions": ["13", "12.1", "12", "11"],
           "notes": ["API 21 is used as the minimum SDK target."]
         }
       ]
@@ -55,8 +55,8 @@
           "name": "tvOS",
           "link": "https://developer.apple.com/tvos/",
           "architectures": ["Arm64"],
-          "supported-versions": ["26", "18"],
-          "unsupported-versions": ["17", "16", "15", "14", "13", "12.2"]
+          "supported-versions": ["26"],
+          "unsupported-versions": ["18", "17", "16", "15", "14", "13", "12.2"]
         }
       ]
     },
@@ -69,7 +69,7 @@
           "link": "https://alpinelinux.org/",
           "lifecycle": "https://alpinelinux.org/releases/",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["3.22", "3.21", "3.20"],
+          "supported-versions": ["3.23", "3.22", "3.21", "3.20"],
           "unsupported-versions": ["3.19", "3.18", "3.17", "3.16"]
         },
         {
@@ -102,8 +102,8 @@
           "link": "https://fedoraproject.org/",
           "lifecycle": "https://fedoraproject.org/wiki/End_of_life",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["43", "42", "41"],
-          "unsupported-versions": ["40", "39", "38", "37"]
+          "supported-versions": ["43", "42"],
+          "unsupported-versions": ["41", "40", "39", "38", "37"]
         },
         {
           "id": "opensuse",
@@ -131,8 +131,8 @@
           "link": "https://www.suse.com/",
           "lifecycle": "https://www.suse.com/lifecycle/",
           "architectures": ["Arm64", "x64"],
-          "supported-versions": ["16.0", "15.7", "15.6"],
-          "unsupported-versions": ["15.5", "15.4", "12.5"]
+          "supported-versions": ["16.0", "15.7"],
+          "unsupported-versions": ["15.6", "15.5", "15.4", "12.5"]
         },
         {
           "id": "ubuntu",
@@ -163,6 +163,8 @@
           "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
           "architectures": ["Arm64", "x64"],
           "supported-versions": [
+            "11-26h1-e",
+            "11-26h1-w",
             "11-25h2-e",
             "11-25h2-w",
             "11-24h2-iot-lts",
@@ -170,13 +172,13 @@
             "11-24h2-e",
             "11-24h2-w",
             "11-23h2-e",
-            "11-23h2-w",
             "10-21h2-e-lts",
             "10-21h2-iot-lts",
             "10-1809-e-lts",
             "10-1607-e-lts"
           ],
           "unsupported-versions": [
+            "11-23h2-w",
             "11-22h2-e",
             "11-22h2-w",
             "11-21h2-e",
@@ -200,11 +202,11 @@
             "2022",
             "2019",
             "2016",
-            "2012-R2",
-            "2012"
+            "2012-R2"
           ],
+          "unsupported-versions": ["2012"],
           "notes": [
-            "Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview)."
+            "Windows Server 2012 R2 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview)."
           ]
         },
         {
@@ -218,11 +220,11 @@
             "2022",
             "2019",
             "2016",
-            "2012-R2",
-            "2012"
+            "2012-R2"
           ],
+          "unsupported-versions": ["2012"],
           "notes": [
-            "Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview)."
+            "Windows Server 2012 R2 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview)."
           ]
         }
       ]
