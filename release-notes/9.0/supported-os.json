@@ -10,10 +10,24 @@
           "name": "Android",
           "link": "https://www.android.com/",
           "lifecycle": "https://support.google.com/android",
-          "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["16", "15", "14", "13"],
-          "unsupported-versions": ["12.1", "12"],
-          "notes": ["API 21 is used as the minimum SDK target."]
+          "architectures": [
+            "Arm32",
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "16",
+            "15",
+            "14",
+            "13"
+          ],
+          "unsupported-versions": [
+            "12.1",
+            "12"
+          ],
+          "notes": [
+            "API 21 is used as the minimum SDK target."
+          ]
         }
       ]
     },
@@ -24,26 +38,53 @@
           "id": "ios",
           "name": "iOS",
           "link": "https://developer.apple.com/ios/",
-          "architectures": ["Arm64"],
-          "supported-versions": ["26", "18"],
-          "unsupported-versions": ["17", "16"],
-          "notes": ["iOS 12.2 is used as the minimum SDK target."]
+          "architectures": [
+            "Arm64"
+          ],
+          "supported-versions": [
+            "26",
+            "18"
+          ],
+          "unsupported-versions": [
+            "17",
+            "16"
+          ],
+          "notes": [
+            "iOS 12.2 is used as the minimum SDK target."
+          ]
         },
         {
           "id": "ipados",
           "name": "iPadOS",
           "link": "https://developer.apple.com/ipados/",
-          "architectures": ["Arm64"],
-          "supported-versions": ["26", "18", "17"],
-          "unsupported-versions": ["16"]
+          "architectures": [
+            "Arm64"
+          ],
+          "supported-versions": [
+            "26",
+            "18",
+            "17"
+          ],
+          "unsupported-versions": [
+            "16"
+          ]
         },
         {
           "id": "macos",
           "name": "macOS",
           "link": "https://developer.apple.com/macos/",
-          "architectures": ["Arm64", "x64"],
-          "supported-versions": ["26", "15", "14"],
-          "unsupported-versions": ["13"],
+          "architectures": [
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "26",
+            "15",
+            "14"
+          ],
+          "unsupported-versions": [
+            "13"
+          ],
           "notes": [
             "The iOS and tvOS simulators are supported on macOS Arm64 and x64.",
             "The x64 emulator (Rosetta 2) is supported on macOS Arm64.",
@@ -54,9 +95,21 @@
           "id": "tvos",
           "name": "tvOS",
           "link": "https://developer.apple.com/tvos/",
-          "architectures": ["Arm64"],
-          "supported-versions": ["26"],
-          "unsupported-versions": ["18", "17", "16", "15", "14", "13", "12.2"]
+          "architectures": [
+            "Arm64"
+          ],
+          "supported-versions": [
+            "26"
+          ],
+          "unsupported-versions": [
+            "18",
+            "17",
+            "16",
+            "15",
+            "14",
+            "13",
+            "12.2"
+          ]
         }
       ]
     },
@@ -68,58 +121,116 @@
           "name": "Alpine",
           "link": "https://alpinelinux.org/",
           "lifecycle": "https://alpinelinux.org/releases/",
-          "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["3.22", "3.21", "3.20"],
-          "unsupported-versions": ["3.19"]
+          "architectures": [
+            "Arm32",
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "3.23",
+            "3.22",
+            "3.21",
+            "3.20"
+          ],
+          "unsupported-versions": [
+            "3.19"
+          ]
         },
         {
           "id": "azure-linux",
           "name": "Azure Linux",
           "link": "https://github.com/microsoft/azurelinux",
-          "architectures": ["Arm64", "x64"],
-          "supported-versions": ["3.0"]
+          "architectures": [
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "3.0"
+          ]
         },
         {
           "id": "centos-stream",
           "name": "CentOS Stream",
           "link": "https://centos.org/",
           "lifecycle": "https://www.centos.org/cl-vs-cs/",
-          "architectures": ["Arm64", "ppc64le", "s390x", "x64"],
-          "supported-versions": ["10", "9"]
+          "architectures": [
+            "Arm64",
+            "ppc64le",
+            "s390x",
+            "x64"
+          ],
+          "supported-versions": [
+            "10",
+            "9"
+          ]
         },
         {
           "id": "debian",
           "name": "Debian",
           "link": "https://www.debian.org/",
           "lifecycle": "https://wiki.debian.org/DebianReleases",
-          "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["13", "12"]
+          "architectures": [
+            "Arm32",
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "13",
+            "12"
+          ]
         },
         {
           "id": "fedora",
           "name": "Fedora",
           "link": "https://fedoraproject.org/",
           "lifecycle": "https://fedoraproject.org/wiki/End_of_life",
-          "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["43", "42", "41"],
-          "unsupported-versions": ["40"]
+          "architectures": [
+            "Arm32",
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "43",
+            "42",
+            "41"
+          ],
+          "unsupported-versions": [
+            "40"
+          ]
         },
         {
           "id": "opensuse",
           "name": "openSUSE Leap",
           "link": "https://www.opensuse.org/",
           "lifecycle": "https://en.opensuse.org/Lifetime",
-          "architectures": ["Arm64", "x64"],
-          "supported-versions": ["16.0", "15.6"],
-          "unsupported-versions": ["15.5"]
+          "architectures": [
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "16.0",
+            "15.6"
+          ],
+          "unsupported-versions": [
+            "15.5"
+          ]
         },
         {
           "id": "rhel",
           "name": "Red Hat Enterprise Linux",
           "link": "https://access.redhat.com/",
           "lifecycle": "https://access.redhat.com/support/policy/updates/errata/",
-          "architectures": ["Arm64", "ppc64le", "s390x", "x64"],
-          "supported-versions": ["10", "9", "8"],
+          "architectures": [
+            "Arm64",
+            "ppc64le",
+            "s390x",
+            "x64"
+          ],
+          "supported-versions": [
+            "10",
+            "9",
+            "8"
+          ],
           "notes": [
             "RHEL-compatible derivatives are supported per [.NET Support](../../support.md)."
           ]
@@ -129,17 +240,35 @@
           "name": "SUSE Linux Enterprise",
           "link": "https://www.suse.com/",
           "lifecycle": "https://www.suse.com/lifecycle/",
-          "architectures": ["Arm64", "x64"],
-          "supported-versions": ["16.0", "15.7", "15.6"]
+          "architectures": [
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "16.0",
+            "15.7",
+            "15.6"
+          ]
         },
         {
           "id": "ubuntu",
           "name": "Ubuntu",
           "link": "https://ubuntu.com/",
           "lifecycle": "https://wiki.ubuntu.com/Releases",
-          "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["25.10", "24.04", "22.04"],
-          "unsupported-versions": ["25.04", "24.10"]
+          "architectures": [
+            "Arm32",
+            "Arm64",
+            "x64"
+          ],
+          "supported-versions": [
+            "25.10",
+            "24.04",
+            "22.04"
+          ],
+          "unsupported-versions": [
+            "25.04",
+            "24.10"
+          ]
         }
       ]
     },
@@ -151,15 +280,24 @@
           "name": "Nano Server",
           "link": "https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images",
           "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
-          "architectures": ["x64"],
-          "supported-versions": ["2025", "2022", "2019"]
+          "architectures": [
+            "x64"
+          ],
+          "supported-versions": [
+            "2025",
+            "2022",
+            "2019"
+          ]
         },
         {
           "id": "windows",
           "name": "Windows",
           "link": "https://www.microsoft.com/windows/",
           "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
-          "architectures": ["Arm64", "x64"],
+          "architectures": [
+            "Arm64",
+            "x64"
+          ],
           "supported-versions": [
             "11-25h2-e",
             "11-25h2-w",
@@ -174,7 +312,10 @@
             "10-1809-e-lts",
             "10-1607-e-lts"
           ],
-          "unsupported-versions": ["11-22h2-e", "10-22h2"],
+          "unsupported-versions": [
+            "11-22h2-e",
+            "10-22h2"
+          ],
           "notes": [
             "The x64 and x86 emulators are supported on Windows 11 Arm64.",
             "The x86 emulator is supported on x64."
@@ -185,7 +326,9 @@
           "name": "Windows Server",
           "link": "https://www.microsoft.com/windows-server",
           "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
-          "architectures": ["x64"],
+          "architectures": [
+            "x64"
+          ],
           "supported-versions": [
             "2025",
             "23H2",
@@ -204,7 +347,10 @@
           "name": "Windows Server Core",
           "link": "https://learn.microsoft.com/virtualization/windowscontainers/manage-containers/container-base-images",
           "lifecycle": "https://learn.microsoft.com/windows-server/get-started/windows-server-release-info",
-          "architectures": ["x64", "x86"],
+          "architectures": [
+            "x64",
+            "x86"
+          ],
           "supported-versions": [
             "2025",
             "2022",
@@ -223,19 +369,28 @@
   "libc": [
     {
       "name": "glibc",
-      "architectures": ["Arm64", "x64"],
+      "architectures": [
+        "Arm64",
+        "x64"
+      ],
       "version": "2.23",
       "source": "Ubuntu 16.04"
     },
     {
       "name": "glibc",
-      "architectures": ["Arm32"],
+      "architectures": [
+        "Arm32"
+      ],
       "version": "2.35",
       "source": "Ubuntu 22.04"
     },
     {
       "name": "musl",
-      "architectures": ["Arm32", "Arm64", "x64"],
+      "architectures": [
+        "Arm32",
+        "Arm64",
+        "x64"
+      ],
       "version": "1.2.2",
       "source": "Alpine 3.13"
     }
