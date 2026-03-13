@@ -115,13 +115,13 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 
 | OS                    | Version     | End of Life   |
 | --------------------- | ----------- | ------------- |
-| Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
+| Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)  |
 | Android               | 13          | 2026-03-02    |
-| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L) |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L)                              |
 | Android               | 12          | 2025-03-03    |
 | Fedora                | 41          | 2025-12-15    |
 | Fedora                | 40          | 2025-05-13    |
-| iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes) |
+| iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes)    |
 | iOS                   | 17          | 2024-11-19    |
 | iPadOS                | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
 | macOS                 | 13          | 2025-09-15    |
@@ -138,6 +138,6 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Ubuntu                | 24.10       | 2025-07-10    |
 | Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows               | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| Windows               | 10 22H2     | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information) |
-| Windows Server        | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
-| Windows Server Core   | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+| Windows               | 10 22H2     | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information)           |
+| Windows Server        | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012)               |
+| Windows Server Core   | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012)               |
