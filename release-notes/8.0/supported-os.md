@@ -53,7 +53,7 @@ Notes:
 | OS                        | Versions                              | Architectures | Lifecycle       |
 | ------------------------- | ------------------------------------- | ------------- | --------------- |
 | [Nano Server][23]         | 2025, 2022, 2019                      | x64           | [Lifecycle][24] |
-| [Windows][25]             | 11 26H1, 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64    | [Lifecycle][26] |
+| [Windows][25]             | 11 26H1, 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64 | [Lifecycle][26] |
 | [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2 | x64           | [Lifecycle][28] |
 | [Windows Server Core][29] | 2025, 2022, 2019, 2016, 2012-R2       | x64           | [Lifecycle][30] |
 
@@ -135,12 +135,12 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | iPadOS  | 15      | 2025-03-31    |
 | macOS   | 13      | 2025-09-15    |
 | macOS   | 12      | [2024-09-16](https://developer.apple.com/documentation/macos-release-notes/macos-12_0_1-release-notes) |
-| openSUSE Leap | 15.5    | 2024-12-31    |
-| openSUSE Leap | 15.4    | 2023-12-07    |
-| SUSE Linux Enterprise | 15.6    | 2025-12-31    |
-| SUSE Linux Enterprise | 15.5    | 2024-12-31    |
-| SUSE Linux Enterprise | 12.5    | 2024-10-31    |
-| SUSE Linux Enterprise | 15.4    | 2023-12-31    |
+| openSUSE Leap | 15.5 | 2024-12-31 |
+| openSUSE Leap | 15.4 | 2023-12-07 |
+| SUSE Linux Enterprise | 15.6 | 2025-12-31 |
+| SUSE Linux Enterprise | 15.5 | 2024-12-31 |
+| SUSE Linux Enterprise | 12.5 | 2024-10-31 |
+| SUSE Linux Enterprise | 15.4 | 2023-12-31 |
 | tvOS    | 18      | 2025-09-15    |
 | tvOS    | 17      | 2024-09-16    |
 | tvOS    | 16      | 2023-09-18    |
@@ -159,5 +159,5 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Windows | 11 22H2 (W) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows | 11 21H2 (E) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows | 10 21H2 (E) | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
-| Windows Server | 2012    | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
-| Windows Server Core | 2012    | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+| Windows Server | 2012 | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+| Windows Server Core | 2012 | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
