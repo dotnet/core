@@ -14,9 +14,12 @@ description: >
 
 Audit and update `os-packages.json` files in this repository. These files declare which Linux packages are required for each .NET release on each distribution. The corresponding `os-packages.md` files are generated from JSON — never hand-edit them.
 
+The scope of `os-packages.json` is broader than `supported-os.json`. It includes any distro version where the package information is helpful — including pre-release versions of supported distros (e.g. Fedora 44 beta) and permanent unstable channels (Alpine edge, Debian sid).
+
 ## When to use
 
 - A new distro version is added to `supported-os.json` and needs package entries
+- A pre-release distro version is available and package info would be helpful (e.g. Fedora beta, Ubuntu interim release)
 - A package name changes between distro releases (e.g. `libicu74` → `libicu76`)
 - An OS version reaches end-of-life and its package entries should be removed
 - Periodic audit to verify package names still exist in distro archives
@@ -113,13 +116,17 @@ The file has two main sections:
 
 #### Common edits
 
-**Add a new distro release** (e.g. when a version is added to supported-os.json):
+**Add a new distro release** (e.g. when a version is added to supported-os.json or a pre-release is available):
 
 Copy the most recent release entry for that distro and update:
 
 - `name` — display name (e.g. `"Ubuntu 26.04 LTS (Resolute Raccoon)"`)
 - `release` — version string (e.g. `"26.04"`)
 - Package names — update any that differ from the previous release
+
+Pre-release versions of supported distros are welcome (e.g. Fedora 44 before GA). The packages list is informational — it does not imply official support.
+
+**Permanent unstable channels** — `Alpine edge` and `Debian sid (Unstable)` are permanent entries that should always be present. They track the rolling release and should have their package names updated when they change, but should never be removed.
 
 ```json
 {
@@ -210,9 +217,11 @@ CI runs markdownlint via super-linter. If linting fails, fix the generator or Ma
 
 ## Key facts
 
+- The scope of `os-packages.json` is broader than `supported-os.json` — it includes pre-release and unstable versions
+- Alpine edge and Debian sid are permanent entries — they should always be present and kept up to date
+- Any pre-release version of a supported distro is OK to add (e.g. Fedora beta, Ubuntu interim)
 - Package names vary across distro versions — e.g. `libicu74` on Ubuntu 24.04 vs `libicu76` on Ubuntu 26.04
 - The verifier only checks Ubuntu and Debian archives; other distros must be reviewed manually
 - Install commands are defined per-distribution (not per-release) — all releases of a distro share the same install method
 - The `{packageName}` placeholder in install commands is replaced with the actual package list at generation time
-- When adding a distro version here, it should already exist in `supported-os.json` — run the `update-supported-os` skill first if needed
 - Active .NET versions with `os-packages.json`: 8.0, 9.0, 10.0
