@@ -21,15 +21,29 @@ Audit and update `supported-os.json` files in this repository. These files decla
 
 ## Prerequisites
 
-The `dotnet-release` tool must be installed. Install from [richlander/dotnet-release](https://github.com/richlander/dotnet-release):
+The `dotnet-release` tool must be installed. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
 
 ```bash
-# From a clone of the dotnet-release repo
-./install.sh
+# GitHub Packages requires authentication — use a GitHub token (PAT or GITHUB_TOKEN)
+dotnet tool install -g Dotnet.Release.Tools \
+  --add-source https://nuget.pkg.github.com/richlander/index.json \
+  --version "0.*"
 
 # Verify
 dotnet-release --help
 ```
+
+> **Note:** GitHub Packages requires authentication even for public repositories. If you get a 401 error, configure credentials for the source:
+>
+> ```bash
+> dotnet nuget add source https://nuget.pkg.github.com/richlander/index.json \
+>   --name github-richlander \
+>   --username USERNAME \
+>   --password "$GITHUB_TOKEN" \
+>   --store-password-in-clear-text
+> ```
+>
+> In GitHub Actions, `GITHUB_TOKEN` is available automatically. For local use, create a [personal access token](https://github.com/settings/tokens) with `read:packages` scope.
 
 ## Inputs
 
