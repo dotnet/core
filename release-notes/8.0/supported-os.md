@@ -112,52 +112,52 @@ Notes:
 
 OS versions that are out of support by the OS publisher are not tested or supported by .NET.
 
-| OS      | Version | End of Life   |
-| ------- | ------- | ------------- |
-| Alpine  | 3.19    | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
-| Alpine  | 3.18    | [2025-05-09](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
-| Alpine  | 3.17    | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
-| Alpine  | 3.16    | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
-| Android | 13      | 2026-03-02    |
-| Android | 12.1    | [2025-03-03](https://developer.android.com/about/versions/12/12L) |
-| Android | 12      | 2025-03-03    |
-| Android | 11      | 2024-02-05    |
-| Debian  | 11      | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html) |
-| Fedora  | 41      | 2025-12-15    |
-| Fedora  | 40      | 2025-05-13    |
-| Fedora  | 39      | 2024-11-26    |
-| Fedora  | 38      | 2024-05-21    |
-| Fedora  | 37      | 2023-12-05    |
-| iOS     | 16      | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes) |
-| iOS     | 15      | 2025-03-31    |
-| iOS     | 17      | 2024-11-19    |
-| iPadOS  | 16      | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
-| iPadOS  | 15      | 2025-03-31    |
-| macOS   | 13      | 2025-09-15    |
-| macOS   | 12      | [2024-09-16](https://developer.apple.com/documentation/macos-release-notes/macos-12_0_1-release-notes) |
-| openSUSE Leap | 15.5 | 2024-12-31 |
-| openSUSE Leap | 15.4 | 2023-12-07 |
-| SUSE Linux Enterprise | 15.6 | 2025-12-31 |
-| SUSE Linux Enterprise | 15.5 | 2024-12-31 |
-| SUSE Linux Enterprise | 12.5 | 2024-10-31 |
-| SUSE Linux Enterprise | 15.4 | 2023-12-31 |
-| tvOS    | 18      | 2025-09-15    |
-| tvOS    | 17      | 2024-09-16    |
-| tvOS    | 16      | 2023-09-18    |
-| tvOS    | 15      | 2022-09-12    |
-| tvOS    | 14      | 2021-09-20    |
-| tvOS    | 13      | 2020-09-16    |
-| tvOS    | 12.2    | -             |
-| Ubuntu  | 25.04   | 2026-01-17    |
-| Ubuntu  | 24.10   | 2025-07-10    |
-| Ubuntu  | 20.04   | 2025-05-31    |
-| Ubuntu  | 23.10   | 2024-07-12    |
-| Ubuntu  | 23.04   | 2024-01-20    |
-| Windows | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| Windows | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| Windows | 10 22H2 | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information) |
-| Windows | 11 22H2 (W) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| Windows | 11 21H2 (E) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| Windows | 10 21H2 (E) | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
-| Windows Server | 2012 | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
-| Windows Server Core | 2012 | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+| OS                    | Version     | End of Life   |
+| --------------------- | ----------- | ------------- |
+| Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
+| Alpine                | 3.18        | [2025-05-09](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
+| Alpine                | 3.17        | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
+| Alpine                | 3.16        | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html) |
+| Android               | 13          | 2026-03-02    |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L) |
+| Android               | 12          | 2025-03-03    |
+| Android               | 11          | 2024-02-05    |
+| Debian                | 11          | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html) |
+| Fedora                | 41          | 2025-12-15    |
+| Fedora                | 40          | 2025-05-13    |
+| Fedora                | 39          | 2024-11-26    |
+| Fedora                | 38          | 2024-05-21    |
+| Fedora                | 37          | 2023-12-05    |
+| iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes) |
+| iOS                   | 15          | 2025-03-31    |
+| iOS                   | 17          | 2024-11-19    |
+| iPadOS                | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
+| iPadOS                | 15          | 2025-03-31    |
+| macOS                 | 13          | 2025-09-15    |
+| macOS                 | 12          | [2024-09-16](https://developer.apple.com/documentation/macos-release-notes/macos-12_0_1-release-notes) |
+| openSUSE Leap         | 15.5        | 2024-12-31    |
+| openSUSE Leap         | 15.4        | 2023-12-07    |
+| SUSE Linux Enterprise | 15.6        | 2025-12-31    |
+| SUSE Linux Enterprise | 15.5        | 2024-12-31    |
+| SUSE Linux Enterprise | 12.5        | 2024-10-31    |
+| SUSE Linux Enterprise | 15.4        | 2023-12-31    |
+| tvOS                  | 18          | 2025-09-15    |
+| tvOS                  | 17          | 2024-09-16    |
+| tvOS                  | 16          | 2023-09-18    |
+| tvOS                  | 15          | 2022-09-12    |
+| tvOS                  | 14          | 2021-09-20    |
+| tvOS                  | 13          | 2020-09-16    |
+| tvOS                  | 12.2        | -             |
+| Ubuntu                | 25.04       | 2026-01-17    |
+| Ubuntu                | 24.10       | 2025-07-10    |
+| Ubuntu                | 20.04       | 2025-05-31    |
+| Ubuntu                | 23.10       | 2024-07-12    |
+| Ubuntu                | 23.04       | 2024-01-20    |
+| Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| Windows               | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| Windows               | 10 22H2     | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information) |
+| Windows               | 11 22H2 (W) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| Windows               | 11 21H2 (E) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| Windows               | 10 21H2 (E) | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
+| Windows Server        | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+| Windows Server Core   | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |

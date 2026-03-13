@@ -113,31 +113,31 @@ Notes:
 
 OS versions that are out of support by the OS publisher are not tested or supported by .NET.
 
-| OS      | Version | End of Life   |
-| ------- | ------- | ------------- |
-| Alpine  | 3.19    | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
-| Android | 13      | 2026-03-02    |
-| Android | 12.1    | [2025-03-03](https://developer.android.com/about/versions/12/12L) |
-| Android | 12      | 2025-03-03    |
-| Fedora  | 41      | 2025-12-15    |
-| Fedora  | 40      | 2025-05-13    |
-| iOS     | 16      | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes) |
-| iOS     | 17      | 2024-11-19    |
-| iPadOS  | 16      | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
-| macOS   | 13      | 2025-09-15    |
-| openSUSE Leap | 15.5 | 2024-12-31 |
-| SUSE Linux Enterprise | 15.6 | 2025-12-31 |
-| tvOS    | 18      | 2025-09-15    |
-| tvOS    | 17      | 2024-09-16    |
-| tvOS    | 16      | 2023-09-18    |
-| tvOS    | 15      | 2022-09-12    |
-| tvOS    | 14      | 2021-09-20    |
-| tvOS    | 13      | 2020-09-16    |
-| tvOS    | 12.2    | -             |
-| Ubuntu  | 25.04   | 2026-01-17    |
-| Ubuntu  | 24.10   | 2025-07-10    |
-| Windows | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| Windows | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| Windows | 10 22H2 | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information) |
-| Windows Server | 2012 | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
-| Windows Server Core | 2012 | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+| OS                    | Version     | End of Life   |
+| --------------------- | ----------- | ------------- |
+| Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html) |
+| Android               | 13          | 2026-03-02    |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L) |
+| Android               | 12          | 2025-03-03    |
+| Fedora                | 41          | 2025-12-15    |
+| Fedora                | 40          | 2025-05-13    |
+| iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes) |
+| iOS                   | 17          | 2024-11-19    |
+| iPadOS                | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
+| macOS                 | 13          | 2025-09-15    |
+| openSUSE Leap         | 15.5        | 2024-12-31    |
+| SUSE Linux Enterprise | 15.6        | 2025-12-31    |
+| tvOS                  | 18          | 2025-09-15    |
+| tvOS                  | 17          | 2024-09-16    |
+| tvOS                  | 16          | 2023-09-18    |
+| tvOS                  | 15          | 2022-09-12    |
+| tvOS                  | 14          | 2021-09-20    |
+| tvOS                  | 13          | 2020-09-16    |
+| tvOS                  | 12.2        | -             |
+| Ubuntu                | 25.04       | 2026-01-17    |
+| Ubuntu                | 24.10       | 2025-07-10    |
+| Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| Windows               | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| Windows               | 10 22H2     | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information) |
+| Windows Server        | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
+| Windows Server Core   | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012) |
