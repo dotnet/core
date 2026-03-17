@@ -1,46 +1,41 @@
-# .NET 10.0 Required Packages
+# .NET 10.0 Linux package dependencies
 
-Various packages must be installed to run .NET apps and the .NET SDK on some operating systems. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
+.NET 10.0 has several dependencies that must be satisfied to run .NET apps. The commands to install these libraries are listed for multiple Linux distributions.
 
-## Package Overview
+Feel free to contribute packages for distributions not (yet) listed in this document, including ones not supported by the .NET Team.
 
-| Id           | Name      | Required scenarios | Notes                                                       |
-| ------------ | --------- | ------------------ | ----------------------------------------------------------- |
-| [libc][0]    | C Library | All                | <https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md#linux-compatibility> ; <https://www.gnu.org/software/libc/libc.html> ; <https://musl.libc.org/> |
-| [libgcc][1]  | GCC low-level runtime library | All | <https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html>    |
-| [ca-certificates][2] | CA Certificates | Https | <https://www.redhat.com/sysadmin/ca-certificates-cli>      |
-| [openssl][3] | OpenSSL   | Https ; Cryptography | Minimum required version 1.1.1 ; <https://www.openssl.org/> |
-| [libstdc++][4] | C++ Library | Runtime        | <https://gcc.gnu.org/onlinedocs/libstdc++/>                 |
-| [libicu][5]  | ICU       | Globalization      | <https://icu.unicode.org> ; <https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md> |
-| [tzdata][6]  | tz database | Globalization    | <https://data.iana.org/time-zones/tz-link.html>             |
-| [krb5][7]    | Kerberos  | Kerberos           | <https://web.mit.edu/kerberos>                              |
+Tips:
 
-[0]: https://pkgs.org/search/?q=libc
-[1]: https://pkgs.org/search/?q=libgcc
-[2]: https://pkgs.org/search/?q=ca-certificates
-[3]: https://pkgs.org/search/?q=openssl
-[4]: https://pkgs.org/search/?q=libstdc++
-[5]: https://pkgs.org/search/?q=libicu
-[6]: https://pkgs.org/search/?q=tzdata
-[7]: https://pkgs.org/search/?q=krb5
+- [runtime-deps container images](https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps) installs these same packages. You can look at those dockerfiles.
+- [pkgs.org](https://pkgs.org/) is a useful site for searching for packages, to find the one for your distribution.
 
-## Alpine
+## Packages
 
-### Alpine 3.22
+.NET depends on the following packages.
 
-```bash
-sudo apk add \
-    ca-certificates \
-    icu-data-full \
-    icu-libs \
-    krb5 \
-    libgcc \
-    libssl3 \
-    libstdc++ \
-    tzdata
-```
+- [C Library][0]
+- [GCC low-level runtime library][1]
+- [CA Certificates][2]
+- [OpenSSL][3]
+- [C++ Library][4]
+- [ICU][5]
+- [tz database][6]
+- [Kerberos][7]
 
-### Alpine 3.21
+You do not need to install ICU if you [enable globalization invariant mode](https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md#enabling-the-invariant-mode).
+
+If your app relies on `https` endpoints, you'll also need to install `ca-certificates`.
+
+[0]: https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md#linux-compatibility
+[1]: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+[2]: https://www.redhat.com/sysadmin/ca-certificates-cli
+[3]: https://www.openssl.org/
+[4]: https://gcc.gnu.org/onlinedocs/libstdc++/
+[5]: https://icu.unicode.org
+[6]: https://data.iana.org/time-zones/tz-link.html
+[7]: https://web.mit.edu/kerberos
+
+## Alpine edge
 
 ```bash
 sudo apk add \
@@ -54,9 +49,49 @@ sudo apk add \
     tzdata
 ```
 
-## Azure Linux
+## Alpine 3.23
 
-### Azure Linux 3.0
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
+
+## Alpine 3.22
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
+
+## Alpine 3.21
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
+
+## Azure Linux 3.0
 
 ```bash
 sudo tdnf install -y \
@@ -70,9 +105,7 @@ sudo tdnf install -y \
     tzdata
 ```
 
-## CentOS Stream
-
-### CentOS Stream 10
+## CentOS Stream 10
 
 ```bash
 sudo dnf install -y \
@@ -86,7 +119,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-### CentOS Stream 9
+## CentOS Stream 9
 
 ```bash
 sudo dnf install -y \
@@ -100,7 +133,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-### CentOS Stream 8
+## CentOS Stream 8
 
 ```bash
 sudo dnf install -y \
@@ -114,9 +147,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## Debian
-
-### Debian 13 (Trixie)
+## Debian sid (Unstable)
 
 ```bash
 sudo apt-get update && \
@@ -131,7 +162,22 @@ sudo apt-get install -y \
     tzdata
 ```
 
-### Debian 12 (Bookworm)
+## Debian 13 (Trixie)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y \
+    ca-certificates \
+    libc6 \
+    libgcc-s1 \
+    libgssapi-krb5-2 \
+    libicu76 \
+    libssl3t64 \
+    libstdc++6 \
+    tzdata
+```
+
+## Debian 12 (Bookworm)
 
 ```bash
 sudo apt-get update && \
@@ -146,9 +192,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-## Fedora
-
-### Fedora 43
+## Fedora 44
 
 ```bash
 sudo dnf install -y \
@@ -162,7 +206,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-### Fedora 42
+## Fedora 43
 
 ```bash
 sudo dnf install -y \
@@ -176,9 +220,21 @@ sudo dnf install -y \
     tzdata
 ```
 
-## FreeBSD
+## Fedora 42
 
-### FreeBSD 14.1
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+## FreeBSD 14.1
 
 ```bash
 sudo pkg install -A \
@@ -186,9 +242,7 @@ sudo pkg install -A \
     krb5
 ```
 
-## openSUSE Leap
-
-### openSUSE Leap 16.0
+## openSUSE Leap 16.0
 
 ```bash
 sudo zypper install -y \
@@ -202,7 +256,7 @@ sudo zypper install -y \
     timezone
 ```
 
-### openSUSE Leap 15.6
+## openSUSE Leap 15.6
 
 ```bash
 sudo zypper install -y \
@@ -216,9 +270,7 @@ sudo zypper install -y \
     timezone
 ```
 
-## RHEL
-
-### RHEL 10
+## RHEL 10
 
 ```bash
 sudo dnf install -y \
@@ -232,7 +284,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-### RHEL 9
+## RHEL 9
 
 ```bash
 sudo dnf install -y \
@@ -246,7 +298,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-### RHEL 8
+## RHEL 8
 
 ```bash
 sudo dnf install -y \
@@ -260,9 +312,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## SLES
-
-### SLES 16.0
+## SLES 16.0
 
 ```bash
 sudo zypper install -y \
@@ -276,7 +326,7 @@ sudo zypper install -y \
     timezone
 ```
 
-### SLES 15.7
+## SLES 15.7
 
 ```bash
 sudo zypper install -y \
@@ -290,7 +340,7 @@ sudo zypper install -y \
     timezone
 ```
 
-### SLES 15.6
+## SLES 15.6
 
 ```bash
 sudo zypper install -y \
@@ -304,9 +354,22 @@ sudo zypper install -y \
     timezone
 ```
 
-## Ubuntu
+## Ubuntu 26.04 LTS (Resolute Raccoon)
 
-### Ubuntu 26.04 LTS (Resolute Raccoon)
+```bash
+sudo apt-get update && \
+sudo apt-get install -y \
+    ca-certificates \
+    libc6 \
+    libgcc-s1 \
+    libgssapi-krb5-2 \
+    libicu78 \
+    libssl3t64 \
+    libstdc++6 \
+    tzdata
+```
+
+## Ubuntu 25.10 (Questing Quokka)
 
 ```bash
 sudo apt-get update && \
@@ -321,22 +384,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-### Ubuntu 25.10 (Questing Quokka)
-
-```bash
-sudo apt-get update && \
-sudo apt-get install -y \
-    ca-certificates \
-    libc6 \
-    libgcc-s1 \
-    libgssapi-krb5-2 \
-    libicu76 \
-    libssl3t64 \
-    libstdc++6 \
-    tzdata
-```
-
-### Ubuntu 24.04 (Noble Numbat)
+## Ubuntu 24.04 (Noble Numbat)
 
 ```bash
 sudo apt-get update && \
@@ -351,7 +399,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-### Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+## Ubuntu 22.04.4 LTS (Jammy Jellyfish)
 
 ```bash
 sudo apt-get update && \
@@ -365,7 +413,3 @@ sudo apt-get install -y \
     libstdc++6 \
     tzdata
 ```
-
-## About
-
-This file is generated from [os-packages.json](os-packages.json).
