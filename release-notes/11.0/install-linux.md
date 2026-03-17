@@ -21,7 +21,6 @@ Each of the distributions can be downloaded from:
 - [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/11.0)
 - [.NET 11 release notes](README.md)
 
-
 ## Installing from a binary archive
 
 You can install .NET with a binary archive. This option is required if you want to install .NET for a single user. It is also recommended if you want to install .NET temporarily.
