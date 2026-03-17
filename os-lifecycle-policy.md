@@ -12,7 +12,7 @@ The following documents describe supported operating systems:
 
 ## Preview .NET versions
 
-N/A
+* [.NET 11 supported OS versions](release-notes/11.0/supported-os.md)
 
 ## Out-of-support .NET versions
 

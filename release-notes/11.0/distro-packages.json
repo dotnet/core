@@ -1,0 +1,244 @@
+{
+  "channel_version": "11.0",
+  "last_verified": "2026-03-17",
+  "components": [
+    {
+      "id": "sdk",
+      "name": ".NET SDK"
+    },
+    {
+      "id": "runtime",
+      "name": ".NET Runtime"
+    },
+    {
+      "id": "aspnetcore-runtime",
+      "name": "ASP.NET Core Runtime"
+    }
+  ],
+  "distributions": [
+    {
+      "name": "NixOS",
+      "releases": [
+        {
+          "name": "NixOS 25.11",
+          "release": "25.11",
+          "feeds": {
+            "nixpkgs": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk_11",
+                "version": "11.0.100-preview.1.26104.118",
+                "architectures": null,
+                "repository": null
+              },
+              {
+                "component_id": "aspnetcore-runtime",
+                "package_name": "dotnet-aspnetcore_11",
+                "version": "11.0.0-preview.1.26104.118",
+                "architectures": null,
+                "repository": null
+              },
+              {
+                "component_id": "runtime",
+                "package_name": "dotnet-runtime_11",
+                "version": "11.0.0-preview.1.26104.118",
+                "architectures": null,
+                "repository": null
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "altlinux p10",
+      "releases": [
+        {
+          "name": "altlinux p10",
+          "release": "rolling",
+          "feeds": {
+            "builtin": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk-6.0",
+                "version": "6.0.136",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "classic-x86_64"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "altlinux p11",
+      "releases": [
+        {
+          "name": "altlinux p11",
+          "release": "rolling",
+          "feeds": {
+            "builtin": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk-10.0",
+                "version": "10.0.100.rel",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "classic-x86_64"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "altlinux sisyphus",
+      "releases": [
+        {
+          "name": "altlinux sisyphus",
+          "release": "rolling",
+          "feeds": {
+            "builtin": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk-11.0",
+                "version": "11.0.100~rc1",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "classic-x86_64"
+              },
+              {
+                "component_id": "runtime",
+                "package_name": "dotnet-runtime-11.0",
+                "version": "11.0.0~rc1",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "classic-x86_64"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "archlinux rolling",
+      "releases": [
+        {
+          "name": "archlinux rolling",
+          "release": "rolling",
+          "feeds": {
+            "builtin": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk",
+                "version": "10.0.4.sdk104",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "archlinux-extra-x86_64"
+              },
+              {
+                "component_id": "runtime",
+                "package_name": "dotnet-runtime",
+                "version": "10.0.4.sdk104",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "archlinux-extra-x86_64"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "openmandriva cooker",
+      "releases": [
+        {
+          "name": "openmandriva cooker",
+          "release": "rolling",
+          "feeds": {
+            "builtin": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk",
+                "version": "10.0.3",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "openmandriva-main-release-x86_64"
+              },
+              {
+                "component_id": "runtime",
+                "package_name": "dotnet-runtime",
+                "version": "10.0.3",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "openmandriva-main-release-x86_64"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "openmandriva rolling",
+      "releases": [
+        {
+          "name": "openmandriva rolling",
+          "release": "rolling",
+          "feeds": {
+            "builtin": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk",
+                "version": "9.0.7",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "openmandriva-main-release-x86_64"
+              },
+              {
+                "component_id": "runtime",
+                "package_name": "dotnet-runtime",
+                "version": "9.0.7",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "openmandriva-main-release-x86_64"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "solus rolling",
+      "releases": [
+        {
+          "name": "solus rolling",
+          "release": "rolling",
+          "feeds": {
+            "builtin": [
+              {
+                "component_id": "sdk",
+                "package_name": "dotnet-sdk",
+                "version": "10.0.3",
+                "architectures": [
+                  "x86_64"
+                ],
+                "repository": "solus-polaris-x86_64"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
