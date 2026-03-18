@@ -353,8 +353,10 @@ Reference the [OS onboarding guide](https://github.com/dotnet/runtime/blob/main/
 **Container image guidelines for `dotnet/dotnet-buildtools-prereqs-docker`:**
 
 - **Alpine:** Keep only the latest stable release + edge. Remove older versions once runtime pipelines have moved off them.
+- **`-WithNode` variant retired:** The old `-WithNode` Alpine image flavor (e.g. `prereqs:alpine-3.19-WithNode`) has been retired. The standard helix images (e.g. `prereqs:alpine-3.23-helix-amd64`) are the replacement. See [dotnet/dotnet-buildtools-prereqs-docker#990](https://github.com/dotnet/dotnet-buildtools-prereqs-docker/issues/990) for context and [PR #1554](https://github.com/dotnet/dotnet-buildtools-prereqs-docker/pull/1554) which removed the last `WithNode` directories. When proposing replacements for repos still using `-WithNode`, recommend the standard helix image.
 - **Fedora:** Provision images for the next Fedora release (N+1) proactively, before the current version (N) reaches EOL. Fedora has a ~13-month lifecycle, so plan ahead.
-- **Debian/Ubuntu LTS:** These have long support windows but should still be cleaned up once EOL.
+- **Debian/Ubuntu LTS:** These have long support windows but should still be cleaned up once EOL. When proposing Ubuntu replacements, push forward to the latest LTS (e.g. 26.04), not back to an older one (e.g. 22.04 or 24.04).
+- **Windows VM images:** Search for `ImageOverride` in YAML files to find VM pool references. Old images like `1es-windows-2019`, `windows.vs2019.amd64`, and `vmImage: windows-2019` should be updated to current equivalents (e.g. `1es-windows-2022`, `windows.vs2026preview.scout.amd64`).
 - Cross-reference `src/<distro>/` directories against what runtime pipelines actually reference to find orphaned images.
 
 ### 9. Create PR
