@@ -13,6 +13,7 @@ Generate release notes for a .NET preview, RC, or GA release. This skill produce
 ## Design principles
 
 - **VMR is source of truth** — the VMR release branch determines what shipped. If code is not on the release branch, it does not get documented.
+- **Local clone, branch-focused** — always work from a local VMR clone (`dotnet/dotnet`). Use git commands against actual branches and tags for verification, not GitHub API heuristics.
 - **Reverts are inherently handled** — reverted code does not appear in the VMR branch diff, so it never enters the pipeline.
 - **Whole product** — one invocation produces release notes for all components (libraries, runtime, ASP.NET Core, SDK, etc.).
 - **Team contexts are editorial** — they define formatting, categorization, and content rules, not PR discovery.
@@ -32,35 +33,46 @@ Collect inputs **one at a time** — ask a single question, wait for the answer,
 
 1. **Release name** (e.g., ".NET 11 Preview 3"). Parse the major version, prerelease label, and preview number.
 2. **Previous release name** (e.g., ".NET 11 Preview 2"). This determines the base VMR reference for comparison.
-3. **Output directory** — path for the release notes files. Default: `release-notes/<version>/preview/<preview>/` (e.g., `release-notes/11.0/preview/preview3/`).
+3. **VMR clone path** — path to local `dotnet/dotnet` clone. Default: `~/git/dotnet`.
+4. **Output directory** — path for the release notes files. Default: `release-notes/<version>/preview/<preview>/` (e.g., `release-notes/11.0/preview/preview3/`).
 
-After collecting inputs, locate the VMR references for comparison:
+### Step 2: Prepare the VMR clone
 
-1. **Find the previous release tag** — list tags on `dotnet/dotnet` matching `v<MAJOR>.0*` and find the tag for the previous release (e.g., `v11.0.100-preview.2.26159.112`).
-2. **Find the current release reference** — look for a `release-pr-*` branch or tag for the current release. If neither exists, use `main` as the head reference.
-3. **Derive the date range** — from the VMR diff commits, the earliest and latest commit dates define the natural date range. Use this for source repo PR searches instead of asking the user for Code Complete dates.
+**Ensure the local VMR clone is up to date** before any analysis:
 
-### Step 2: VMR diff
+```bash
+cd <vmr-clone-path>
+git fetch origin --tags --prune
+```
 
-**[Diff the VMR release branches](references/vmr-diff.md)** — compare the previous and current VMR release branches to identify all code changes that shipped in this release. Group changes by component using the [component mapping](references/component-mapping.md).
+Then locate the release references:
+
+1. **Find the previous release tag** — `git tag -l "v<MAJOR>.0*"` and match the previous release (e.g., `v11.0.100-preview.2.26159.112`).
+2. **Find the current release reference** — `git branch -r | grep "release-pr-<MAJOR>.0"` for in-progress releases, or `git tag -l` for shipped releases. If neither exists, use `origin/main`.
+3. **Verify both refs exist locally** — `git rev-parse --verify <ref>` for both base and head.
+
+### Step 3: VMR diff
+
+**[Diff the VMR release references](references/vmr-diff.md)** — using the local clone, `git log` between the previous tag and current reference to identify all commits and changed files. Group changes by component using the [component mapping](references/component-mapping.md).
 
 This step produces:
 - A list of components with changes (and an estimate of change magnitude)
+- The date range for source repo PR searches (derived from commit timestamps)
 - Components with no meaningful changes (these get minimal stub release notes)
 
-### Step 3: Trace to source repos
+### Step 4: Trace to source repos
 
-**[Trace VMR changes to source repo PRs](references/trace-to-source.md)** — for each component with VMR changes, find the source repo PRs that introduced those changes. Uses both VMR commit analysis and source repo PR searches, but only includes PRs confirmed present in the VMR.
+**[Trace VMR changes to source repo PRs](references/trace-to-source.md)** — for each component with VMR changes, find the source repo PRs that introduced those changes. Uses VMR commit analysis + source repo PR searches, then **verifies each candidate PR's merge commit is reachable from the VMR release branch** using the local clone.
 
-### Step 4: Enrich
+### Step 5: Enrich
 
 **[Fetch PR and issue details](references/enrich-prs.md)** — for each candidate PR, fetch the full body, linked issues, reaction counts, and Copilot summaries. Collect reviewer data for the suggestion step.
 
-### Step 5: Deduplicate
+### Step 6: Deduplicate
 
 **[Check against prior release notes](references/dedup-previous-releases.md)** — for each component, verify that candidate features are not already covered in an earlier preview's release notes. **Retain prior release notes in context** for theme continuation detection during authoring.
 
-### Step 6: Author
+### Step 7: Author
 
 Write release notes for each component that has meaningful changes:
 
@@ -84,11 +96,11 @@ For components with no meaningful changes, produce a minimal stub:
 There are no new features or improvements in <Component> in this release.
 ```
 
-### Step 7: Validate code samples
+### Step 8: Validate code samples
 
 **[Validate code samples](references/validate-samples.md)** — extract every code sample from the authored release notes, scaffold file-based .NET console apps, and verify each compiles and runs. Fix any failing samples with user confirmation.
 
-### Step 8: Suggest reviewers and finalize
+### Step 9: Suggest reviewers and finalize
 
 **[Suggest reviewers](references/suggest-reviewers.md)** — aggregate PR authors, assignees, mergers, and coauthors into component-grouped reviewer suggestions.
 

@@ -1,107 +1,114 @@
-# VMR Diff
+# VMR Diff (Local Clone)
 
-Diff two VMR (`dotnet/dotnet`) release references (tags or branches) to determine what code changes shipped in the target release. This is the foundation of the pipeline — the VMR diff defines the scope of the release.
+Diff two VMR (`dotnet/dotnet`) release references using the **local clone**. All diff operations use git commands against the local repo — no GitHub API for diff analysis. This is the foundation of the pipeline.
 
 ## Why VMR-first
 
-The VMR release tag/branch is the authoritative record of what ships in a .NET release. By starting from the VMR diff:
+The VMR release tag/branch is the authoritative record of what ships in a .NET release:
 
-- **Reverts are inherently excluded** — if code was added and then reverted within the same release period, the net diff shows no change. No heuristic revert detection needed.
-- **Missing syncs are caught** — if a source repo PR was merged but never synced to the VMR, it won't appear in the diff and won't be incorrectly documented.
-- **Scope is exact** — the diff shows precisely what changed between two release milestones.
+- **Reverts are inherently excluded** — reverted code has no net diff, never enters the pipeline
+- **Missing syncs are caught** — unsynced source repo PRs don't appear, won't be documented
+- **Scope is exact** — diff shows precisely what changed between two release milestones
 
-## Step 1: Find the VMR release references
+## Why local clone
 
-VMR uses **tags** for shipped releases and **release-pr branches** for in-progress releases. The naming patterns are:
+GitHub's Compare API has hard limits (300 files, 250 commits) that make it unreliable for VMR diffs. A local clone has no such limits and enables:
+
+- Full `git log` with unlimited commits
+- `git diff --stat` with all files
+- `git log --ancestry-path` for precise commit reachability
+- `git branch -r --contains <sha>` to verify a commit is on a specific branch
+- `git grep` across source at a specific ref
+
+## Step 1: Ensure the clone is fresh
+
+```bash
+cd <vmr-clone-path>
+git fetch origin --tags --prune
+```
+
+## Step 2: Find the release references
+
+VMR uses **tags** for shipped releases and **release-pr branches** for in-progress releases:
 
 | Reference type | Pattern | Example |
 |----------------|---------|---------|
 | Release tag | `v<MAJOR>.0.100-<label>.<build>` | `v11.0.100-preview.2.26159.112` |
-| Release-PR branch | `release-pr-<MAJOR>.0.100-<label>.<build>` | `release-pr-11.0.100-preview.3.26168.106` |
-| Long-lived branch | `release/<MAJOR>.0.1xx` | `release/10.0.1xx` (only for shipped GA releases) |
-| Active development | `main` | For the current in-development major version |
-
-### Finding the previous release tag
+| Release-PR branch | `release-pr-<MAJOR>.0.100-<label>.<build>` | `release-pr-11.0.100-preview.3.26128.104` |
+| Long-lived branch | `release/<MAJOR>.0.1xx` | `release/10.0.1xx` (only shipped GA) |
+| Active development | `main` | Current in-development major |
 
 ```bash
-# List tags matching the major version
-gh api repos/dotnet/dotnet/tags --jq '.[].name' --paginate | grep "^v<MAJOR>.0" | head -20
+# Find previous release tag
+git tag -l "v<MAJOR>.0*" | sort -V
+
+# Find current release reference
+git branch -r | grep "release-pr-<MAJOR>.0.100-<label>"
+
+# Verify both refs resolve
+git rev-parse --verify <previous-tag>
+git rev-parse --verify origin/<current-ref>
 ```
 
-Look for the tag matching the previous release label (e.g., for P3, find the P2 tag like `v11.0.100-preview.2.*`).
-
-### Finding the current release reference
+## Step 3: Get the commit log between releases
 
 ```bash
-# Check for a release-pr branch for the current release
-gh api repos/dotnet/dotnet/branches --jq '.[].name' --paginate | grep "release-pr-<MAJOR>.0"
-
-# Or check for a tag if the release already shipped
-gh api repos/dotnet/dotnet/tags --jq '.[].name' --paginate | grep "^v<MAJOR>.0.100-<label>"
+git log --oneline --format="%H %s" <previous-tag>..origin/<current-ref>
 ```
 
-If neither a tag nor release-pr branch exists for the current release, use `main` as the head reference.
+No API limits. Parse the output to identify:
 
-## Step 2: Get the comparison
+1. **Source sync commits** — pattern: `[main] Source code updates from dotnet/<repo> (#NNNN)`
+2. **Dependency update commits** — pattern: `[main] Update dependencies from dotnet/<repo>`
+3. **Infrastructure commits** — everything else
 
-Use the GitHub API to compare the two references. This gives us commits and changed files:
+Count sync commits per repo:
 
 ```bash
-gh api repos/dotnet/dotnet/compare/<previous-tag>...<current-ref> \
-  --jq '{
-    total_commits: .total_commits,
-    ahead_by: .ahead_by,
-    behind_by: .behind_by,
-    files: [.files[] | {filename: .filename, status: .status, additions: .additions, deletions: .deletions}]
-  }'
+git log --oneline <previous-tag>..origin/<current-ref> --grep="Source code updates from dotnet/" \
+  | sed 's/.*from dotnet\///' | sed 's/ .*//' | sort | uniq -c | sort -rn
 ```
 
-**Important limitations:**
-- GitHub Compare API is limited to **300 files** and **250 commits** per response
-- Infrastructure and build files often fill the file quota before source code appears
-- The `status` field may be `"diverged"` rather than `"ahead"` since branches share a common ancestor
-
-### When the comparison exceeds limits
-
-If the diff has >250 commits or >300 files, **switch to commit-based analysis** instead of file-based:
+## Step 4: Get the file-level diff summary
 
 ```bash
-# Get commits page by page
-gh api "repos/dotnet/dotnet/compare/<previous-tag>...<current-ref>" \
-  --jq '.commits[] | {sha: .sha, message: (.commit.message | split("\n")[0]), date: .commit.committer.date, author: .author.login}'
+# Full diff stat (source files only)
+git diff --stat <previous-tag>..origin/<current-ref> -- src/
+
+# Per-component file counts
+git diff --stat <previous-tag>..origin/<current-ref> -- src/runtime/src/libraries/ | tail -1
+git diff --stat <previous-tag>..origin/<current-ref> -- src/aspnetcore/src/ | tail -1
+git diff --stat <previous-tag>..origin/<current-ref> -- src/sdk/src/ | tail -1
 ```
 
-Focus on **source sync commits** (pattern: `[main] Source code updates from dotnet/<repo>`) to identify which repos had changes. Count sync commits per repo to gauge relative change volume.
+Store results in SQL — insert into `vmr_files` and `vmr_commits` tables (see [sql-storage.md](sql-storage.md)).
 
-**Store the comparison results using the SQL tool** — insert into `vmr_files` and `vmr_commits` tables (see [sql-storage.md](sql-storage.md)).
+## Step 5: Derive the date range
 
-## Step 3: Derive the date range
+```bash
+# Earliest commit date in the range
+git log --format="%ci" <previous-tag>..origin/<current-ref> | tail -1
 
-From the VMR diff commits, extract the date range for source repo PR searches:
-
-```sql
--- After inserting VMR commits into the database
-SELECT MIN(date) AS start_date, MAX(date) AS end_date FROM vmr_commits;
+# Latest commit date
+git log --format="%ci" <previous-tag>..origin/<current-ref> | head -1
 ```
 
-This date range replaces the need to ask users for Code Complete dates. It naturally reflects when code was synced to the VMR for this release.
+This date range drives source repo PR searches. No need to ask users for Code Complete dates.
 
-## Step 4: Classify changes by component
+## Step 6: Classify changes by component
 
-For each changed file or sync commit, classify into a component using the [component mapping](component-mapping.md#path-to-component-mapping):
+For each changed file or sync commit, classify using [component mapping](component-mapping.md#path-to-component-mapping):
 
 1. Match against the longest VMR path prefix
 2. Skip non-source paths (`eng/`, `test/`, `tests/`, `docs/`, build files)
-3. Record the component assignment in the `vmr_files` table
+3. Record the assignment
 
 ```sql
 INSERT INTO vmr_files (path, component, status, additions, deletions)
 VALUES ('<path>', '<component>', '<status>', <additions>, <deletions>);
 ```
 
-## Step 5: Summarize component changes
-
-Query the classified data to determine which components have meaningful changes:
+## Step 7: Summarize and present
 
 ```sql
 SELECT component,
@@ -114,19 +121,15 @@ GROUP BY component
 ORDER BY (total_additions + total_deletions) DESC;
 ```
 
-Present the component summary to the user before proceeding to source repo tracing.
+Present to user before proceeding to source repo tracing.
 
-## Step 6: Extract source repo references from VMR commits
+## Step 8: Extract source repo info from sync commits
 
-VMR source sync commits follow predictable patterns:
+For each source sync commit, examine what changed:
 
-1. **Source update**: `"[main] Source code updates from dotnet/<repo> (#NNNN)"` — these contain the actual code changes
-2. **Dependency update**: `"[main] Update dependencies from dotnet/<repo>"` — version bumps, usually not noteworthy
-3. **Backflow**: `"[automated] Merge branch ..."` — ignore these
-
-**Note:** Source sync commit bodies are often sparse — they may contain only a one-line description rather than listing individual source PRs. Do not rely solely on commit messages for PR discovery. Use the [trace-to-source](trace-to-source.md) step with date-range searches as the primary PR discovery method.
-
-```sql
-INSERT INTO vmr_commits (sha, component, source_repo, source_pr_number, message, date)
-VALUES ('<sha>', '<component>', '<repo>', <pr_number>, '<message>', '<date>');
+```bash
+# Show files changed in a specific sync commit
+git show --stat <commit-sha> -- src/
 ```
+
+**Note:** Sync commit bodies are sparse — do not rely on them for PR discovery. Use [trace-to-source](trace-to-source.md) with date-range searches as primary discovery, with local clone verification as the quality gate.
