@@ -81,6 +81,15 @@ git push origin [branch-name]
 - `release-notes/releases-index.json` - Master index of all .NET releases
 - `CONTRIBUTING.md` - Links to actual contribution guidelines in dotnet/runtime
 
+### Copilot Skills
+
+This repository defines Copilot skills in `/.github/skills/`. Before performing any task, check if a matching skill exists and follow its process. Current skills:
+
+- `release-notes` - Generate .NET release notes for a preview, RC, or GA release (VMR-first, whole-product)
+- `api-diff` - Generate API diff between .NET releases
+- `update-os-packages` - Update OS package definitions
+- `update-supported-os` - Update supported OS matrices
+
 ## Common Tasks
 
 ### Adding New Release Notes
