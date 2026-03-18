@@ -31,11 +31,14 @@ Generate release notes for a .NET preview, RC, or GA release. This skill produce
 Collect inputs **one at a time** — ask a single question, wait for the answer, then ask the next:
 
 1. **Release name** (e.g., ".NET 11 Preview 3"). Parse the major version, prerelease label, and preview number.
-2. **Previous release name** (e.g., ".NET 11 Preview 2"). This determines the base VMR branch for comparison.
-3. **Code Complete dates** — start date (previous release's Code Complete) and end date (this release's Code Complete) in ISO 8601. These are used for source repo PR searches as a secondary discovery method.
-4. **Output directory** — path for the release notes files. Default: `release-notes/<version>/preview/<preview>/` (e.g., `release-notes/11.0/preview/preview3/`).
+2. **Previous release name** (e.g., ".NET 11 Preview 2"). This determines the base VMR reference for comparison.
+3. **Output directory** — path for the release notes files. Default: `release-notes/<version>/preview/<preview>/` (e.g., `release-notes/11.0/preview/preview3/`).
 
-After collecting inputs, determine the VMR release branch names using the patterns in [component-mapping.md](references/component-mapping.md).
+After collecting inputs, locate the VMR references for comparison:
+
+1. **Find the previous release tag** — list tags on `dotnet/dotnet` matching `v<MAJOR>.0*` and find the tag for the previous release (e.g., `v11.0.100-preview.2.26159.112`).
+2. **Find the current release reference** — look for a `release-pr-*` branch or tag for the current release. If neither exists, use `main` as the head reference.
+3. **Derive the date range** — from the VMR diff commits, the earliest and latest commit dates define the natural date range. Use this for source repo PR searches instead of asking the user for Code Complete dates.
 
 ### Step 2: VMR diff
 

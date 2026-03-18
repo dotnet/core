@@ -29,32 +29,46 @@ Maps VMR (`dotnet/dotnet`) source paths to .NET components, their source reposit
 
 ## VMR release branch naming
 
-The VMR (`dotnet/dotnet`) uses this branch naming pattern:
+The VMR (`dotnet/dotnet`) uses **tags** to mark releases and **release-pr branches** for release builds:
 
-```
-release/<MAJOR>.0.1xx-<prerelease-label>
-```
+### Tags
 
-The `1xx` is the SDK feature band (standard for the first SDK release of a major version).
+Each preview, RC, and GA release is tagged with its SDK version:
 
-### Examples
-
-| Release | Branch Name |
+| Release | Tag Pattern |
 |---------|-------------|
-| .NET 11 Preview 1 | `release/11.0.1xx-preview1` |
-| .NET 11 Preview 2 | `release/11.0.1xx-preview2` |
-| .NET 11 Preview 7 | `release/11.0.1xx-preview7` |
-| .NET 11 RC 1 | `release/11.0.1xx-rc1` |
-| .NET 11 RC 2 | `release/11.0.1xx-rc2` |
+| .NET 11 Preview 1 | `v11.0.100-preview.1.26104.118` |
+| .NET 11 Preview 2 | `v11.0.100-preview.2.26159.112` |
+| .NET 10 RC 1 | `v10.0.100-rc.1.25451.107` |
+| .NET 10 GA | `v10.0.100` |
 
-### Constructing branch names from inputs
+The tag format is `v<MAJOR>.0.100-<prerelease-label>.<build-number>`.
 
-Given the release name (e.g., ".NET 11 Preview 3"):
-- Extract major version: `11`
-- Extract prerelease label: `preview3`
-- Construct: `release/11.0.1xx-preview3`
+### Release branches
 
-If the expected branch is not found, list branches matching `release/<MAJOR>.0*` and ask the user to select the correct one.
+For in-progress releases, a `release-pr-*` branch is cut from `main`:
+
+```
+release-pr-11.0.100-preview.3.26168.106
+```
+
+### Long-lived release branches
+
+Shipped major versions have long-lived branches for servicing:
+
+```
+release/<MAJOR>.0.1xx     (e.g., release/10.0.1xx)
+```
+
+### Constructing diff references
+
+To diff between two previews:
+- **Base**: Use the previous release's tag (e.g., `v11.0.100-preview.2.26159.112`)
+- **Head**: Use the current release's tag or `release-pr-*` branch
+
+If the exact tag is unknown, list tags matching the version: `gh api repos/dotnet/dotnet/tags --jq '.[].name' | grep "v<MAJOR>.0"`
+
+Active development for the next major version happens on `main`.
 
 ## Source repo PR search patterns
 

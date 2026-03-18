@@ -1,117 +1,132 @@
-# VMR Branch Diff
+# VMR Diff
 
-Diff two VMR (`dotnet/dotnet`) release branches to determine what code changes shipped in the target release. This is the foundation of the pipeline — the VMR diff defines the scope of the release.
+Diff two VMR (`dotnet/dotnet`) release references (tags or branches) to determine what code changes shipped in the target release. This is the foundation of the pipeline — the VMR diff defines the scope of the release.
 
 ## Why VMR-first
 
-The VMR release branch is the authoritative record of what ships in a .NET release. By starting from the VMR diff:
+The VMR release tag/branch is the authoritative record of what ships in a .NET release. By starting from the VMR diff:
 
 - **Reverts are inherently excluded** — if code was added and then reverted within the same release period, the net diff shows no change. No heuristic revert detection needed.
 - **Missing syncs are caught** — if a source repo PR was merged but never synced to the VMR, it won't appear in the diff and won't be incorrectly documented.
 - **Scope is exact** — the diff shows precisely what changed between two release milestones.
 
-## Step 1: Verify branch existence
+## Step 1: Find the VMR release references
 
-Confirm both VMR release branches exist. Use the branch naming pattern from [component-mapping.md](component-mapping.md#vmr-release-branch-naming):
+VMR uses **tags** for shipped releases and **release-pr branches** for in-progress releases. The naming patterns are:
 
-```
-list_branches(
-  owner: "dotnet",
-  repo: "dotnet"
-)
-```
+| Reference type | Pattern | Example |
+|----------------|---------|---------|
+| Release tag | `v<MAJOR>.0.100-<label>.<build>` | `v11.0.100-preview.2.26159.112` |
+| Release-PR branch | `release-pr-<MAJOR>.0.100-<label>.<build>` | `release-pr-11.0.100-preview.3.26168.106` |
+| Long-lived branch | `release/<MAJOR>.0.1xx` | `release/10.0.1xx` (only for shipped GA releases) |
+| Active development | `main` | For the current in-development major version |
 
-Search for branches matching `release/<MAJOR>.0*`. If either branch is missing, present the available branches and ask the user to confirm.
-
-## Step 2: Get the branch comparison
-
-Use the GitHub CLI to compare the two release branches. This gives us the list of commits and changed files between the base (previous release) and head (current release):
+### Finding the previous release tag
 
 ```bash
-gh api repos/dotnet/dotnet/compare/release/<MAJOR>.0.1xx-<prev>...release/<MAJOR>.0.1xx-<current> \
+# List tags matching the major version
+gh api repos/dotnet/dotnet/tags --jq '.[].name' --paginate | grep "^v<MAJOR>.0" | head -20
+```
+
+Look for the tag matching the previous release label (e.g., for P3, find the P2 tag like `v11.0.100-preview.2.*`).
+
+### Finding the current release reference
+
+```bash
+# Check for a release-pr branch for the current release
+gh api repos/dotnet/dotnet/branches --jq '.[].name' --paginate | grep "release-pr-<MAJOR>.0"
+
+# Or check for a tag if the release already shipped
+gh api repos/dotnet/dotnet/tags --jq '.[].name' --paginate | grep "^v<MAJOR>.0.100-<label>"
+```
+
+If neither a tag nor release-pr branch exists for the current release, use `main` as the head reference.
+
+## Step 2: Get the comparison
+
+Use the GitHub API to compare the two references. This gives us commits and changed files:
+
+```bash
+gh api repos/dotnet/dotnet/compare/<previous-tag>...<current-ref> \
   --jq '{
     total_commits: .total_commits,
-    files: [.files[] | {filename: .filename, status: .status, additions: .additions, deletions: .deletions, changes: .changes}]
-  }' > /dev/null
+    ahead_by: .ahead_by,
+    behind_by: .behind_by,
+    files: [.files[] | {filename: .filename, status: .status, additions: .additions, deletions: .deletions}]
+  }'
 ```
 
-**If the comparison is too large** (GitHub limits compare API to 250 commits / 300 files), fall back to listing commits on the head branch and filtering:
+**Important limitations:**
+- GitHub Compare API is limited to **300 files** and **250 commits** per response
+- Infrastructure and build files often fill the file quota before source code appears
+- The `status` field may be `"diverged"` rather than `"ahead"` since branches share a common ancestor
+
+### When the comparison exceeds limits
+
+If the diff has >250 commits or >300 files, **switch to commit-based analysis** instead of file-based:
 
 ```bash
-# List commits on the current release branch not on the previous
-gh api "repos/dotnet/dotnet/compare/release/<MAJOR>.0.1xx-<prev>...release/<MAJOR>.0.1xx-<current>" \
-  --jq '.commits[] | {sha: .sha, message: (.commit.message | split("\n")[0]), author: .author.login}' \
-  --paginate
+# Get commits page by page
+gh api "repos/dotnet/dotnet/compare/<previous-tag>...<current-ref>" \
+  --jq '.commits[] | {sha: .sha, message: (.commit.message | split("\n")[0]), date: .commit.committer.date, author: .author.login}'
 ```
 
-**Important:** Store the comparison results using the SQL tool — do not write to disk files. Insert each changed file into the `vmr_files` table (see [sql-storage.md](sql-storage.md)).
+Focus on **source sync commits** (pattern: `[main] Source code updates from dotnet/<repo>`) to identify which repos had changes. Count sync commits per repo to gauge relative change volume.
 
-## Step 3: Classify changes by component
+**Store the comparison results using the SQL tool** — insert into `vmr_files` and `vmr_commits` tables (see [sql-storage.md](sql-storage.md)).
 
-For each changed file in the diff, classify it into a component using the [component mapping](component-mapping.md#path-to-component-mapping). Apply the classification rules:
+## Step 3: Derive the date range
+
+From the VMR diff commits, extract the date range for source repo PR searches:
+
+```sql
+-- After inserting VMR commits into the database
+SELECT MIN(date) AS start_date, MAX(date) AS end_date FROM vmr_commits;
+```
+
+This date range replaces the need to ask users for Code Complete dates. It naturally reflects when code was synced to the VMR for this release.
+
+## Step 4: Classify changes by component
+
+For each changed file or sync commit, classify into a component using the [component mapping](component-mapping.md#path-to-component-mapping):
 
 1. Match against the longest VMR path prefix
 2. Skip non-source paths (`eng/`, `test/`, `tests/`, `docs/`, build files)
 3. Record the component assignment in the `vmr_files` table
 
 ```sql
--- After classifying all files
 INSERT INTO vmr_files (path, component, status, additions, deletions)
 VALUES ('<path>', '<component>', '<status>', <additions>, <deletions>);
 ```
 
-## Step 4: Summarize component changes
+## Step 5: Summarize component changes
 
-Query the classified files to determine which components have meaningful changes:
+Query the classified data to determine which components have meaningful changes:
 
 ```sql
 SELECT component,
        COUNT(*) AS file_count,
        SUM(additions) AS total_additions,
-       SUM(deletions) AS total_deletions,
-       SUM(additions + deletions) AS total_changes
+       SUM(deletions) AS total_deletions
 FROM vmr_files
 WHERE component IS NOT NULL
 GROUP BY component
-ORDER BY total_changes DESC;
+ORDER BY (total_additions + total_deletions) DESC;
 ```
 
-Components with zero or trivial changes (e.g., only build file updates that slipped through filters) get minimal stub release notes. Present the component summary to the user before proceeding:
+Present the component summary to the user before proceeding to source repo tracing.
 
-> The VMR diff shows changes in the following components:
->
-> | Component | Files Changed | Lines Changed |
-> |-----------|--------------|---------------|
-> | Libraries | 142 | +3,200 / -800 |
-> | Runtime | 89 | +1,500 / -400 |
-> | ASP.NET Core | 234 | +5,100 / -1,200 |
-> | SDK | 45 | +600 / -200 |
-> | ... | | |
->
-> Components with no changes: Windows Forms, WPF, Visual Basic
->
-> Proceed with tracing these changes to source repo PRs?
+## Step 6: Extract source repo references from VMR commits
 
-## Step 5: Extract source repo references from VMR commits
+VMR source sync commits follow predictable patterns:
 
-VMR commits from the automated code flow (dotnet-maestro bot) follow predictable patterns. Parse commit messages to extract source repo PR references:
+1. **Source update**: `"[main] Source code updates from dotnet/<repo> (#NNNN)"` — these contain the actual code changes
+2. **Dependency update**: `"[main] Update dependencies from dotnet/<repo>"` — version bumps, usually not noteworthy
+3. **Backflow**: `"[automated] Merge branch ..."` — ignore these
 
-### Maestro sync commit patterns
-
-1. **Standard sync**: `"[source-build] Update dependencies from dotnet/<repo>"` or `"Update dependencies from dotnet/<repo>"`
-2. **Source update**: `"Source code updates from dotnet/<repo>"` — these contain the actual code changes
-3. **Backflow**: `"[automated] Merge branch 'release/...' => 'main'"` — ignore these
-
-For source update commits, the commit body often contains references to the source repo PRs that were included. Parse for:
-- `dotnet/<repo>#<number>`
-- `https://github.com/dotnet/<repo>/pull/<number>`
-- `Merge pull request #<number> from ...`
-
-Store discovered PR references in the `vmr_commits` table:
+**Note:** Source sync commit bodies are often sparse — they may contain only a one-line description rather than listing individual source PRs. Do not rely solely on commit messages for PR discovery. Use the [trace-to-source](trace-to-source.md) step with date-range searches as the primary PR discovery method.
 
 ```sql
-INSERT INTO vmr_commits (sha, component, source_repo, source_pr_number, message)
-VALUES ('<sha>', '<component>', '<source_repo>', <pr_number>, '<first line of message>');
+INSERT INTO vmr_commits (sha, component, source_repo, source_pr_number, message, date)
+VALUES ('<sha>', '<component>', '<repo>', <pr_number>, '<message>', '<date>');
 ```
-
-These references serve as the **primary** list of candidate PRs for each component. The [trace-to-source](trace-to-source.md) step will validate and supplement this list.
