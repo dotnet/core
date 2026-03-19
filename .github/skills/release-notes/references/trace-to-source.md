@@ -134,13 +134,19 @@ As a complementary quality gate, use `dotnet-inspect` to verify new **public API
 
 ### Finding nightly package versions
 
-The nightly feed for .NET `<MAJOR>` is `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet<MAJOR>/nuget/v3/index.json`. Use the runtime version from the VMR release reference to find the matching package:
+Canonical references for nightly build feeds:
+- **VMR builds table**: <https://github.com/dotnet/dotnet/blob/main/docs/builds-table.md>
+- **Runtime dogfooding guide**: <https://github.com/dotnet/runtime/blob/main/docs/project/dogfooding.md>
+
+The nightly feed for .NET `<MAJOR>` is `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet<MAJOR>/nuget/v3/index.json` (equivalent to `https://dnceng.pkgs.visualstudio.com/public/_packaging/dotnet<MAJOR>/nuget/v3/index.json`). Use the runtime version from the VMR release reference to find the matching package:
 
 ```bash
 dnx dotnet-inspect -y -- package Microsoft.NETCore.App.Ref --versions --prerelease \
   --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet<MAJOR>/nuget/v3/index.json \
   | grep "preview.<N>"
 ```
+
+> **Note**: For released previews (e.g. P2 after GA), the ref packages are also on nuget.org. For in-progress previews (e.g. P3 before release), the nightly feed is the only source.
 
 ### Verifying a type exists in a specific build
 
