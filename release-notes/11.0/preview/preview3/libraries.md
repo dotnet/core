@@ -3,7 +3,6 @@
 .NET 11 Preview 3 includes new .NET Libraries features & enhancements:
 
 - [ProcessStartOptions with platform-aware path resolution](#processstartoptions-with-platform-aware-path-resolution)
-- [ProcessExitStatus class](#processexitstatus-class)
 - [Async handle support for FileStream on Unix](#async-handle-support-for-filestream-on-unix)
 - [WebProxy credentials from URI UserInfo](#webproxy-credentials-from-uri-userinfo)
 - [Reduced regex backtracking for greedy loops](#reduced-regex-backtracking-for-greedy-loops)
@@ -14,7 +13,7 @@
 
 ## Process improvements
 
-Building on the [Process I/O improvements introduced in Preview 1](../preview1/libraries.md#process-io-improvements), Preview 3 adds new types for safer process launching and richer exit status reporting.
+Building on the [Process I/O improvements introduced in Preview 1](../preview1/libraries.md#process-io-improvements), Preview 3 adds a new type for safer process launching.
 
 ### ProcessStartOptions with platform-aware path resolution
 
@@ -34,10 +33,6 @@ options.Environment["MY_VAR"] = "value";
 ```
 
 Path resolution follows platform conventions — on Windows, it appends `.exe` and searches System32 then PATH; on Unix, it searches PATH only. Current directory is only accessed with an explicit `./` or `.\` prefix.
-
-### ProcessExitStatus class
-
-The new `ProcessExitStatus` class provides structured exit information for processes ([dotnet/runtime#124264](https://github.com/dotnet/runtime/pull/124264), approved in [dotnet/runtime#123380](https://github.com/dotnet/runtime/issues/123380)). This replaces the need to interpret raw exit codes manually, providing properties like `Signal` (Unix-only) and `Canceled` for richer process lifecycle reporting.
 
 ## Async handle support for FileStream on Unix
 

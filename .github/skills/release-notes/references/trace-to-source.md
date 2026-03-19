@@ -125,6 +125,59 @@ WHERE number = <pr_number> AND repo = '<repo>';
 
 Report unconfirmed PRs to the user — they may have been merged in the source repo but not yet synced to the VMR for this release.
 
+## Binary verification with dotnet-inspect
+
+As a complementary quality gate, use `dotnet-inspect` to verify new **public APIs** exist in the actual compiled binaries from nightly builds. This catches two things git grep cannot:
+
+1. **APIs that shipped in the previous preview** — `git grep` only checks "is it on the P3 branch?" but doesn't check "was it already on the P2 branch?" A new type found in both P2 and P3 binaries means it shipped in P2 and should be deduped.
+2. **APIs that exist in source but aren't public** — internal types/methods appear in source but not in ref assemblies.
+
+### Finding nightly package versions
+
+The nightly feed for .NET `<MAJOR>` is `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet<MAJOR>/nuget/v3/index.json`. Use the runtime version from the VMR release reference to find the matching package:
+
+```bash
+dnx dotnet-inspect -y -- package Microsoft.NETCore.App.Ref --versions --prerelease \
+  --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet<MAJOR>/nuget/v3/index.json \
+  | grep "preview.<N>"
+```
+
+### Verifying a type exists in a specific build
+
+```bash
+# Check if a new type exists in the P3 build
+dnx dotnet-inspect -y -- find "<TypeName>" \
+  --package Microsoft.NETCore.App.Ref@<P3-version> \
+  --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet<MAJOR>/nuget/v3/index.json
+
+# Check if it also existed in the P2 build (dedup check)
+dnx dotnet-inspect -y -- find "<TypeName>" \
+  --package Microsoft.NETCore.App.Ref@<P2-version>
+```
+
+If the type is found in **both** P2 and P3 builds, it shipped in P2 and should NOT be documented as a P3 feature — even if the VMR git grep confirms it's on the P3 branch.
+
+### Inspecting API surface of new types
+
+```bash
+# Get full API surface of a new type
+dnx dotnet-inspect -y -- member <TypeName> \
+  --package Microsoft.NETCore.App.Ref@<version> \
+  --source <nightly-feed>
+```
+
+Use this to verify code samples in release notes match the actual public API surface.
+
+### Package mapping for other components
+
+| Component | Ref Package | Notes |
+|-----------|------------|-------|
+| Libraries + Runtime | `Microsoft.NETCore.App.Ref` | Core BCL types |
+| ASP.NET Core | `Microsoft.AspNetCore.App.Ref` | ASP.NET Core types |
+| EF Core | `Microsoft.EntityFrameworkCore` | Regular NuGet package |
+| Windows Forms | `Microsoft.WindowsDesktop.App.Ref` | Windows-only ref package |
+| WPF | `Microsoft.WindowsDesktop.App.Ref` | Windows-only ref package |
+
 ## Handle PRs spanning multiple components
 
 Some PRs touch code in multiple VMR component paths. For these:
