@@ -36,24 +36,53 @@ Collect inputs **one at a time** — ask a single question, wait for the answer,
 3. **VMR clone path** — path to local `dotnet/dotnet` clone. Default: `~/git/dotnet`.
 4. **Output directory** — path for the release notes files. Default: `release-notes/<version>/preview/<preview>/` (e.g., `release-notes/11.0/preview/preview3/`).
 
-### Step 2: Prepare the VMR clone
+### Step 2: Resolve VMR references
 
-**Ensure the local VMR clone is up to date** before any analysis:
+Read [release-branch-mechanics.md](references/release-branch-mechanics.md) to understand the full branch topology and timing across repos.
+
+#### Previous release → VMR tag (from release.json)
+
+Read the **previous preview's `release.json`** in this repo to get the exact runtime build number:
+
+```
+release-notes/<MAJOR>.0/preview/<previous-preview>/release.json
+→ .release.runtime.version  (e.g., "11.0.0-preview.2.26159.112")
+```
+
+Map that version to a VMR tag. Tags come in pairs — runtime and SDK:
+- Runtime: `v11.0.0-preview.2.26159.112`
+- SDK: `v11.0.100-preview.2.26159.112`
+
+Either tag points to the same commit. Verify it exists in the local clone.
+
+#### Current release → VMR reference
+
+For an **unreleased** preview, find the `release-pr-*` branch in the local clone:
 
 ```bash
 cd <vmr-clone-path>
 git fetch origin --tags --prune
+git branch -r | grep "release-pr-<MAJOR>.0.100-<label>"
 ```
 
-Then locate the release references:
+For a **shipped** release, the tag will already exist (same release.json lookup pattern).
 
-1. **Find the previous release tag** — `git tag -l "v<MAJOR>.0*"` and match the previous release (e.g., `v11.0.100-preview.2.26159.112`).
-2. **Find the current release reference** — `git branch -r | grep "release-pr-<MAJOR>.0"` for in-progress releases, or `git tag -l` for shipped releases. If neither exists, use `origin/main`.
-3. **Verify both refs exist locally** — `git rev-parse --verify <ref>` for both base and head.
+If neither a tag nor `release-pr-*` branch exists, use `origin/main`.
+
+#### Compute fork points for commit enumeration
+
+Preview release branches fork from `main` independently — the P2 tag is **not** an ancestor of the P3 reference. For clean commit enumeration, find the fork points on `main`:
+
+```bash
+P2_FORK=$(git merge-base origin/main <P2-tag>)
+P3_FORK=$(git merge-base origin/main origin/<P3-ref>)
+```
+
+Use `$P2_FORK..$P3_FORK` for commit-based PR discovery (new development on main). Use `<P2-tag>..<P3-ref>` for code-level verification (actual content delta). See [release-branch-mechanics.md](references/release-branch-mechanics.md) for why these differ.
 
 ### Step 3: VMR diff
 
-**[Diff the VMR release references](references/vmr-diff.md)** — using the local clone, `git log` between the previous tag and current reference to identify all commits and changed files. Group changes by component using the [component mapping](references/component-mapping.md).
+**[Diff the VMR release references](references/vmr-diff.md)** — using the local clone and fork points, enumerate commits on `main` between releases and classify by component using the [component mapping](references/component-mapping.md).
 
 This step produces:
 - A list of components with changes (and an estimate of change magnitude)

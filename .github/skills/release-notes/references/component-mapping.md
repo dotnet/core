@@ -29,44 +29,19 @@ Maps VMR (`dotnet/dotnet`) source paths to .NET components, their source reposit
 
 ## VMR release branch naming
 
-The VMR (`dotnet/dotnet`) uses **tags** to mark releases and **release-pr branches** for release builds:
+See [release-branch-mechanics.md](release-branch-mechanics.md) for the complete branch topology, timing, and comparison strategy across repos.
 
-### Tags
+Summary of VMR reference types:
 
-Each preview, RC, and GA release is tagged with its SDK version:
+| Reference | Pattern | Example |
+|-----------|---------|---------|
+| Release tag | `v<MAJOR>.0.100-<label>.<build>` | `v11.0.100-preview.2.26159.112` |
+| Release-PR branch | `release-pr-<MAJOR>.0.100-<label>.<build>` | `release-pr-11.0.100-preview.3.26168.106` |
+| Long-lived branch | `release/<MAJOR>.0.1xx` | `release/10.0.1xx` (shipped GA only) |
 
-| Release | Tag Pattern |
-|---------|-------------|
-| .NET 11 Preview 1 | `v11.0.100-preview.1.26104.118` |
-| .NET 11 Preview 2 | `v11.0.100-preview.2.26159.112` |
-| .NET 10 RC 1 | `v10.0.100-rc.1.25451.107` |
-| .NET 10 GA | `v10.0.100` |
+### Finding the previous release tag
 
-The tag format is `v<MAJOR>.0.100-<prerelease-label>.<build-number>`.
-
-### Release branches
-
-For in-progress releases, a `release-pr-*` branch is cut from `main`:
-
-```
-release-pr-11.0.100-preview.3.26168.106
-```
-
-### Long-lived release branches
-
-Shipped major versions have long-lived branches for servicing:
-
-```
-release/<MAJOR>.0.1xx     (e.g., release/10.0.1xx)
-```
-
-### Constructing diff references
-
-To diff between two previews:
-- **Base**: Use the previous release's tag (e.g., `v11.0.100-preview.2.26159.112`)
-- **Head**: Use the current release's tag or `release-pr-*` branch
-
-If the exact tag is unknown, list tags matching the version: `gh api repos/dotnet/dotnet/tags --jq '.[].name' | grep "v<MAJOR>.0"`
+Read `release-notes/<MAJOR>.0/preview/<previous>/release.json` → `.release.runtime.version` to get the exact build number, then match to a VMR tag.
 
 Active development for the next major version happens on `main`.
 

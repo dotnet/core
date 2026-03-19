@@ -2,6 +2,8 @@
 
 Diff two VMR (`dotnet/dotnet`) release references using the **local clone**. All diff operations use git commands against the local repo — no GitHub API for diff analysis. This is the foundation of the pipeline.
 
+See [release-branch-mechanics.md](release-branch-mechanics.md) for the full branch topology, fork timing, and why fork-point-based comparison is necessary.
+
 ## Why VMR-first
 
 The VMR release tag/branch is the authoritative record of what ships in a .NET release:
