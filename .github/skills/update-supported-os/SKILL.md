@@ -152,7 +152,7 @@ Check if any newly added distro versions need entries in `os-packages.json`. If 
    dotnet-release verify supported-os <version> release-notes
    ```
 
-   Expect exit code 0 (or only TIP/CAUTION items remaining).
+   Expect exit code 0 (or only TIP/CAUTION items and ESU-covered WARNING items remaining).
 
 2. Spot-check the generated markdown renders correctly.
 
