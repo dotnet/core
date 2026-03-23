@@ -81,7 +81,7 @@ The report uses GitHub callout blocks to categorize issues:
 
 | Callout | Meaning | Action |
 | --------- | --------- | -------- |
-| `> [!WARNING]` | EOL but still listed as supported | Move to `unsupported-versions` |
+| `> [!WARNING]` | EOL but still listed as "supported" | Move to `unsupported-versions` |
 | `> [!IMPORTANT]` | Active release not listed | Consider adding to `supported-versions` |
 | `> [!TIP]` | Active but listed as unsupported | Verify this is intentional (no action usually needed) |
 | `> [!CAUTION]` | Approaching EOL within 3 months | Informational — no immediate action |
@@ -96,7 +96,7 @@ First, determine whether this .NET version is **GA** or **pre-GA** (preview/RC).
 
 Review the verify report and decide which issues to act on:
 
-- **WARNING items** (EOL but supported):
+- **WARNING items** (EOL but still "supported"):
   - **GA release:** Move to `unsupported-versions`.
   - **Pre-GA release:** Remove from `supported-versions` entirely — do not add to `unsupported-versions` (Rule 1).
   - **Exception — Windows ESU:** Do not remove Windows versions covered by [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview). The verify tool flags these as EOL based on mainstream support dates, but ESU extends their lifecycle. These entries are updated manually — skip them.
