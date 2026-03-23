@@ -61,8 +61,8 @@ Notes:
 
 - Windows: The x64 and x86 emulators are supported on Windows 11 Arm64.
 - Windows: The x86 emulator is supported on x64.
-- Windows Server: Windows Server 2012 R2 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
-- Windows Server Core: Windows Server 2012 R2 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+- Windows Server: Windows Server 2012 R2 is supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+- Windows Server Core: Windows Server 2012 R2 is supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
 [0]: https://www.android.com/
 [1]: https://support.google.com/android
@@ -128,26 +128,10 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Fedora                | 39          | 2024-11-26    |
 | Fedora                | 38          | 2024-05-21    |
 | Fedora                | 37          | 2023-12-05    |
-| iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes)    |
-| iOS                   | 15          | 2025-03-31    |
-| iOS                   | 17          | 2024-11-19    |
-| iPadOS                | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
-| iPadOS                | 15          | 2025-03-31    |
-| macOS                 | 13          | 2025-09-15    |
-| macOS                 | 12          | [2024-09-16](https://developer.apple.com/documentation/macos-release-notes/macos-12_0_1-release-notes)   |
-| openSUSE Leap         | 15.5        | 2024-12-31    |
-| openSUSE Leap         | 15.4        | 2023-12-07    |
 | SUSE Linux Enterprise | 15.6        | 2025-12-31    |
 | SUSE Linux Enterprise | 15.5        | 2024-12-31    |
 | SUSE Linux Enterprise | 12.5        | 2024-10-31    |
 | SUSE Linux Enterprise | 15.4        | 2023-12-31    |
-| tvOS                  | 18          | 2025-09-15    |
-| tvOS                  | 17          | 2024-09-16    |
-| tvOS                  | 16          | 2023-09-18    |
-| tvOS                  | 15          | 2022-09-12    |
-| tvOS                  | 14          | 2021-09-20    |
-| tvOS                  | 13          | 2020-09-16    |
-| tvOS                  | 12.2        | -             |
 | Ubuntu                | 25.04       | 2026-01-17    |
 | Ubuntu                | 24.10       | 2025-07-10    |
 | Ubuntu                | 20.04       | 2025-05-31    |
@@ -161,3 +145,19 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Windows               | 10 21H2 (E) | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
 | Windows Server        | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012)                 |
 | Windows Server Core   | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012)                 |
+| iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes)    |
+| iOS                   | 15          | 2025-03-31    |
+| iOS                   | 17          | 2024-11-19    |
+| iPadOS                | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
+| iPadOS                | 15          | 2025-03-31    |
+| macOS                 | 13          | 2025-09-15    |
+| macOS                 | 12          | [2024-09-16](https://developer.apple.com/documentation/macos-release-notes/macos-12_0_1-release-notes)   |
+| openSUSE Leap         | 15.5        | 2024-12-31    |
+| openSUSE Leap         | 15.4        | 2023-12-07    |
+| tvOS                  | 18          | 2025-09-15    |
+| tvOS                  | 17          | 2024-09-16    |
+| tvOS                  | 16          | 2023-09-18    |
+| tvOS                  | 15          | 2022-09-12    |
+| tvOS                  | 14          | 2021-09-20    |
+| tvOS                  | 13          | 2020-09-16    |
+| tvOS                  | 12.2        | -             |

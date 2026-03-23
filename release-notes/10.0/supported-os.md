@@ -61,8 +61,8 @@ Notes:
 
 - Windows: The x64 and x86 emulators are supported on Windows 11 Arm64.
 - Windows: The x86 emulator is supported on x64.
-- Windows Server: Windows Server 2012 R2 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
-- Windows Server Core: Windows Server 2012 R2 is supported with [Extended Security Updates](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+- Windows Server: Windows Server 2012 R2 is supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+- Windows Server Core: Windows Server 2012 R2 is supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
 [0]: https://www.android.com/
 [1]: https://support.google.com/android
