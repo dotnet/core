@@ -106,7 +106,7 @@ Review the verify report and decide which issues to act on:
 - **TIP items** (active but unsupported) — usually intentional, skip unless the user says otherwise
 - **CAUTION items** (approaching EOL) — informational only, no JSON changes needed
 
-Present findings to the user with recommendations before making changes. For pre-GA releases, explain which items are removed (Rule 1), which additions are excluded (Rule 2), and which preview distros qualify for early addition (Rule 3).
+Present findings to the user with recommendations before making changes. For pre-GA releases, explain which items are removed (Rule 1), which additions are excluded (Rule 2), and which preview distros qualify for early addition (Rule 3). For Rule 3 candidates, verify that a container image exists at [dotnet/dotnet-buildtools-prereqs-docker](https://github.com/dotnet/dotnet-buildtools-prereqs-docker) before recommending addition.
 
 ### 3. Apply changes to supported-os.json
 
@@ -210,12 +210,50 @@ When considering whether to add a new OS version to `supported-versions`, check 
 
 ### Rule 3 — Add preview distros that will GA before .NET GA
 
-If a distro version is currently in preview but is expected to GA **before** the .NET GA date, add it to `supported-versions` (subject to Rule 2's EOL check). Use the distro's published release schedule or cadence to estimate its GA date.
+If a distro version is currently in preview but is expected to GA **before** the .NET GA date, it can be added to `supported-versions` if **all** of the following are true:
 
-- Distro GAs **before** .NET GA → **add it** (if it also passes the GA + 6 months EOL check)
-- Distro GAs **after** .NET GA → **do not add it** yet
+1. The distro version is expected to GA **before** the .NET GA date (use the distro's published release schedule or cadence to estimate)
+2. It passes Rule 2's EOL check (EOL after GA + 6 months)
+3. Preview builds of the distro are publicly available
+4. A container image for the distro version exists at [dotnet/dotnet-buildtools-prereqs-docker](https://github.com/dotnet/dotnet-buildtools-prereqs-docker) (required for CI validation)
 
-**Rationale:** By the time .NET ships, these distro versions will be fully released. Adding them early ensures the support matrix is complete at GA without requiring a last-minute update.
+To check for published images, query the [image-info JSON](https://github.com/dotnet/versions/blob/main/build-info/docker/image-info.dotnet-dotnet-buildtools-prereqs-docker-main.json) which tracks currently active images:
+
+```bash
+# Check for published images (preferred — shows currently active images)
+curl -sL https://github.com/dotnet/versions/raw/refs/heads/main/build-info/docker/image-info.dotnet-dotnet-buildtools-prereqs-docker-main.json \
+  | jq '[.repos[].images[].platforms[].simpleTags[]] | map(select(startswith("<os-name>-<version>"))) | .[]'
+
+# Examples
+curl -sL <same-url> | jq '[.repos[].images[].platforms[].simpleTags[]] | map(select(startswith("ubuntu-26.04"))) | .[]'
+curl -sL <same-url> | jq '[.repos[].images[].platforms[].simpleTags[]] | map(select(startswith("fedora-44"))) | .[]'
+```
+
+You can also check the [full MCR tags list](https://mcr.microsoft.com/v2/dotnet-buildtools/prereqs/tags/list) which includes all ever-published tags:
+
+```bash
+curl -s https://mcr.microsoft.com/v2/dotnet-buildtools/prereqs/tags/list \
+  | jq '.tags[] | select(startswith("<os-name>-<version>"))'
+```
+
+If no published images are found, check whether Dockerfiles exist in the repo (images may be in preparation):
+
+```bash
+gh search code "<os-name>/<version>" --repo dotnet/dotnet-buildtools-prereqs-docker
+```
+
+For example: `gh search code "fedora/44"` or `gh search code "ubuntu/26.04"`. Do **not** use spaces (e.g. `"ubuntu 26.04"`) — the images are organized by folder path.
+
+If conditions 1–3 are met but there is **no container image** at dotnet-buildtools-prereqs-docker:
+
+- Do **not** add the distro version yet
+- Check if a tracking issue already exists at [dotnet/dotnet-buildtools-prereqs-docker](https://github.com/dotnet/dotnet-buildtools-prereqs-docker/issues) for the missing image
+- If no issue exists, ask the user whether to create one
+- Once the image is available, the distro version can be added in a follow-up update
+
+If the distro GAs **after** .NET GA → **do not add it** yet.
+
+**Rationale:** By the time .NET ships, these distro versions will be fully released. Adding them early ensures the support matrix is complete at GA without requiring a last-minute update. However, we can only validate support for a distro version when we have build infrastructure (container images) for it.
 
 ### Examples
 
@@ -233,7 +271,9 @@ If a distro version is currently in preview but is expected to GA **before** the
 
 **Rule 3 — Preview distros:**
 
-- Alpine 3.24 (preview, expected ~May 2026) — **add** (will GA before .NET 11, EOL ~May 2028 is after May 2027)
+- Fedora 44 (preview, expected ~April 2026, EOL ~May 2027) — expected before .NET 11 GA ✅, passes EOL check ✅, preview builds available ✅, prereqs image published ✅ → **add**
+- Fedora 44 (same, but Dockerfiles exist in prereqs repo without published images) — expected before GA ✅, passes EOL check ✅, preview builds available ✅, prereqs image not yet published ❌ → **do not add yet**, check/file issue at dotnet-buildtools-prereqs-docker
+- Ubuntu 26.04 (preview, expected ~April 2026, EOL ~April 2031) — expected before .NET 11 GA ✅, passes EOL check ✅, preview builds available ✅, prereqs image published ✅ → **add**
 - Alpine 3.25 (preview, expected ~December 2026) — **do not add** (will still be preview or just released at .NET 11 GA)
 
 ## Key facts
