@@ -92,14 +92,20 @@ If all versions return exit code 0, the matrix is current. **Stop here.**
 
 ### 2. Determine scope of changes
 
+First, determine whether this .NET version is **GA** or **pre-GA** (preview/RC). Check `releases.json` for the release type or ask the user. If the version is pre-GA, apply the [preview release rules](#preview-release-rules) below.
+
 Review the verify report and decide which issues to act on:
 
-- **WARNING items** (EOL but supported) — always fix these
-- **IMPORTANT items** (missing active releases) — add unless there's a known reason to exclude
+- **WARNING items** (EOL but supported):
+  - **GA release:** Move to `unsupported-versions`.
+  - **Pre-GA release:** Remove from `supported-versions` entirely — do not add to `unsupported-versions` (Rule 1).
+- **IMPORTANT items** (missing active releases):
+  - **GA release:** Add unless there's a known reason to exclude.
+  - **Pre-GA release:** Only add if the version's EOL date is after GA + 6 months (Rule 2).
 - **TIP items** (active but unsupported) — usually intentional, skip unless the user says otherwise
 - **CAUTION items** (approaching EOL) — informational only, no JSON changes needed
 
-Present findings to the user with recommendations before making changes.
+Present findings to the user with recommendations before making changes. For pre-GA releases, explain which items are removed (Rule 1), which additions are excluded (Rule 2), and which preview distros qualify for early addition (Rule 3).
 
 ### 3. Apply changes to supported-os.json
 
@@ -170,6 +176,65 @@ Check if any newly added distro versions need entries in `os-packages.json`. If 
    gh pr create --title "Update supported OS matrix" --body "<description of changes>"
    ```
 
+## Preview release rules
+
+.NET releases go through a preview period before GA (General Availability). During this period, special rules apply to limit documentation cruft at GA and prevent users from deploying to environments that will soon lose support.
+
+### Determining GA date
+
+.NET releases always GA in November. The version number and GA year follow a predictable pattern:
+
+- **Even .NET versions** (10, 12, 14, …) GA in **odd years** — LTS (Long Term Support)
+- **Odd .NET versions** (9, 11, 13, …) GA in **even years** — STS (Standard Term Support)
+
+For example: .NET 10 GAs November 2025, .NET 11 GAs November 2026, .NET 12 GAs November 2027.
+
+To confirm, check [`releases-index.json`](https://github.com/dotnet/core/raw/refs/heads/main/release-notes/releases-index.json) for the `release-date` of the target version. If the GA date is not yet populated, use the November convention above.
+
+### Rule 1 — Remove EOL versions during preview (do not track as unsupported)
+
+While a .NET release is in preview, **remove** OS versions that are already EOL from `supported-versions`. Do **not** add them to `unsupported-versions` — the unsupported list is for versions that were supported during a GA release and later went EOL. Since the .NET release hasn't shipped yet, there is no GA history to preserve.
+
+**Rationale:** The `unsupported-versions` list exists as a historical record for users of a shipped release. During preview, no users depend on the support matrix, so EOL versions should simply be removed to keep the document clean at GA.
+
+### Rule 2 — Only add versions supported at GA + 6 months
+
+When considering whether to add a new OS version to `supported-versions`, check whether the version will still be supported (not EOL) at **GA date + 6 months**.
+
+- If the OS version's EOL date is **after** GA + 6 months → **add it**
+- If the OS version's EOL date is **before** GA + 6 months → **do not add it**
+- If the OS version has no known EOL date (still active with no announced end) → **add it**
+
+**Rationale:** Users should be able to adopt a .NET release at GA and have confidence their OS will remain supported for a reasonable period. Adding OS versions that go EOL shortly after GA creates a "rug-pulling" scenario.
+
+### Rule 3 — Add preview distros that will GA before .NET GA
+
+If a distro version is currently in preview but is expected to GA **before** the .NET GA date, add it to `supported-versions` (subject to Rule 2's EOL check). Use the distro's published release schedule or cadence to estimate its GA date.
+
+- Distro GAs **before** .NET GA → **add it** (if it also passes the GA + 6 months EOL check)
+- Distro GAs **after** .NET GA → **do not add it** yet
+
+**Rationale:** By the time .NET ships, these distro versions will be fully released. Adding them early ensures the support matrix is complete at GA without requiring a last-minute update.
+
+### Examples
+
+.NET 11 (STS, odd version) GAs November 2026. GA + 6 months = May 2027.
+
+**Rule 1 — Remove EOL versions:**
+
+- Alpine 3.20 (EOL 2026-04-01) — **remove** from supported, do not add to unsupported (already EOL, pre-GA)
+- Android 13 (EOL 2026-03-02) — **remove** from supported, do not add to unsupported (already EOL, pre-GA)
+
+**Rule 2 — GA + 6 months gate:**
+
+- Alpine 3.21 (EOL 2026-11-01) — **do not add** (EOL before May 2027)
+- Alpine 3.23 (EOL 2027-11-01) — **add** (EOL after May 2027)
+
+**Rule 3 — Preview distros:**
+
+- Alpine 3.24 (preview, expected ~May 2026) — **add** (will GA before .NET 11, EOL ~May 2028 is after May 2027)
+- Alpine 3.25 (preview, expected ~December 2026) — **do not add** (will still be preview or just released at .NET 11 GA)
+
 ## Key facts
 
 - The `id` field in each distribution matches [endoflife.date](https://endoflife.date) product IDs
@@ -178,4 +243,4 @@ Check if any newly added distro versions need entries in `os-packages.json`. If 
 - `unsupported-versions` tracks previously-supported versions for historical reference
 - Non-Linux OS families (Android, Apple, Windows) follow the same structure but use different lifecycle sources
 - The `last-updated` field should reflect the date of any change
-- Active .NET versions with `supported-os.json`: 8.0, 9.0, 10.0
+- Active .NET versions with `supported-os.json`: 8.0, 9.0, 10.0, 11.0
