@@ -84,7 +84,7 @@ The report uses GitHub callout blocks to categorize issues:
 | `> [!WARNING]` | EOL but still listed as "supported" | Move to `unsupported-versions` |
 | `> [!IMPORTANT]` | Active release not listed | Consider adding to `supported-versions` |
 | `> [!TIP]` | Active but listed as unsupported | Verify this is intentional (no action usually needed) |
-| `> [!CAUTION]` | Approaching EOL within 3 months | Informational — no immediate action |
+| `> [!CAUTION]` | Approaching EOL within 3 months | **GA:** Informational — no immediate action. **Pre-GA:** Remove if EOL is before GA date |
 
 See [references/verify-output-example.md](references/verify-output-example.md) for example output.
 
@@ -104,7 +104,9 @@ Review the verify report and decide which issues to act on:
   - **GA release:** Add unless there's a known reason to exclude.
   - **Pre-GA release:** Only add if the version's EOL date is after GA + 6 months (Rule 2).
 - **TIP items** (active but unsupported) — usually intentional, skip unless the user says otherwise
-- **CAUTION items** (approaching EOL) — informational only, no JSON changes needed
+- **CAUTION items** (approaching EOL):
+  - **GA release:** Informational only, no JSON changes needed.
+  - **Pre-GA release:** If the EOL date is **before** the GA date, remove from `supported-versions` (same rationale as Rule 1 — no users depend on the matrix yet, and the version won't be supported at GA). If the EOL date is **after** GA, no action needed.
 
 Present findings to the user with recommendations before making changes. For pre-GA releases, explain which items are removed (Rule 1), which additions are excluded (Rule 2), and which preview distros qualify for early addition (Rule 3). For Rule 3 candidates, verify that a container image exists at [dotnet/dotnet-buildtools-prereqs-docker](https://github.com/dotnet/dotnet-buildtools-prereqs-docker) before recommending addition.
 
