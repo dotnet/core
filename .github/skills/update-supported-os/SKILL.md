@@ -21,7 +21,11 @@ Audit and update `supported-os.json` files in this repository. These files decla
 
 ## Prerequisites
 
-The `dotnet-release` tool must be installed. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
+The following tools must be installed:
+
+### dotnet-release
+
+The `dotnet-release` tool is used to verify and generate supported OS files. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
 
 ```bash
 # GitHub Packages requires authentication — use a GitHub token (PAT or GITHUB_TOKEN)
@@ -44,6 +48,19 @@ dotnet-release --help
 > ```
 >
 > In GitHub Actions, `GITHUB_TOKEN` is available automatically. For local use, create a [personal access token](https://github.com/settings/tokens) with `read:packages` scope.
+
+### markdownlint
+
+The `markdownlint-cli` tool is used to validate generated markdown. Install via npm:
+
+```bash
+npm install -g markdownlint-cli
+
+# Verify
+npx markdownlint --version
+```
+
+If npm is not available, install Node.js first (e.g. `brew install node` on macOS). This is a required step — do not skip linting.
 
 ## Inputs
 
@@ -138,13 +155,13 @@ This overwrites `supported-os.md` with content derived from the updated JSON.
 
 ### 5. Run markdownlint
 
-Before committing, verify the generated markdown passes linting:
+Verify the generated markdown passes linting (see [prerequisites](#markdownlint)):
 
 ```bash
 npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/<version>/supported-os.md
 ```
 
-CI runs markdownlint via super-linter. If linting fails, fix the generator or Markout library — do not patch the markdown by hand.
+CI runs markdownlint via super-linter and will block the PR if linting fails. If linting fails on generated content, fix the generator or its [Markout](https://github.com/richlander/markout) template in [dotnet-release](https://github.com/richlander/dotnet-release) — do not patch the markdown by hand.
 
 ### 6. Cross-reference with os-packages.json
 
