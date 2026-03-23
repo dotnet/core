@@ -1,6 +1,6 @@
 {
   "channel-version": "11.0",
-  "last-updated": "2026-02-10",
+  "last-updated": "2026-03-23",
   "families": [
     {
       "name": "Android",
@@ -11,7 +11,7 @@
           "link": "https://www.android.com/",
           "lifecycle": "https://support.google.com/android",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["16", "15", "14", "13"],
+          "supported-versions": ["16", "15", "14"],
           "notes": ["API 21 is used as the minimum SDK target."]
         }
       ]
@@ -32,7 +32,7 @@
           "name": "iPadOS",
           "link": "https://developer.apple.com/ipados/",
           "architectures": ["Arm64"],
-          "supported-versions": ["26", "18"]
+          "supported-versions": ["26", "18", "17"]
         },
         {
           "id": "macos",
@@ -64,7 +64,7 @@
           "link": "https://alpinelinux.org/",
           "lifecycle": "https://alpinelinux.org/releases/",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["3.22"]
+          "supported-versions": ["3.23", "3.22"]
         },
         {
           "id": "azure-linux",
@@ -122,7 +122,7 @@
           "link": "https://www.suse.com/",
           "lifecycle": "https://www.suse.com/lifecycle/",
           "architectures": ["Arm64", "x64"],
-          "supported-versions": ["16.0", "15.7", "15.6"]
+          "supported-versions": ["16.0", "15.7"]
         },
         {
           "id": "ubuntu",
@@ -152,6 +152,8 @@
           "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
           "architectures": ["Arm64", "x64"],
           "supported-versions": [
+            "11-26h1-e",
+            "11-26h1-w",
             "11-25h2-e",
             "11-25h2-w",
             "11-24h2-iot-lts",
@@ -159,7 +161,6 @@
             "11-24h2-e",
             "11-24h2-w",
             "11-23h2-e",
-            "11-23h2-w",
             "10-21h2-e-lts",
             "10-21h2-iot-lts",
             "10-1809-e-lts",
