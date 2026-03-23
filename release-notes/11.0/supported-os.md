@@ -32,17 +32,17 @@ Notes:
 
 ## Linux
 
-| OS                             | Versions            | Architectures              | Lifecycle       |
-| ------------------------------ | ------------------- | -------------------------- | --------------- |
-| [Alpine][6]                    | 3.23, 3.22          | Arm32, Arm64, x64          | [Lifecycle][7]  |
-| [Azure Linux][8]               | 3.0                 | Arm64, x64                 | None            |
-| [CentOS Stream][9]             | 10, 9               | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
-| [Debian][11]                   | 13, 12              | Arm32, Arm64, x64          | [Lifecycle][12] |
-| [Fedora][13]                   | 43, 42              | Arm32, Arm64, x64          | [Lifecycle][14] |
-| [openSUSE Leap][15]            | 16.0, 15.6          | Arm64, x64                 | [Lifecycle][16] |
-| [Red Hat Enterprise Linux][17] | 10, 9, 8            | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Linux Enterprise][19]    | 16.0, 15.7          | Arm64, x64                 | [Lifecycle][20] |
-| [Ubuntu][21]                   | 25.10, 24.04, 22.04 | Arm32, Arm64, x64          | [Lifecycle][22] |
+| OS                             | Versions                   | Architectures              | Lifecycle       |
+| ------------------------------ | -------------------------- | -------------------------- | --------------- |
+| [Alpine][6]                    | 3.23, 3.22                 | Arm32, Arm64, x64          | [Lifecycle][7]  |
+| [Azure Linux][8]               | 3.0                        | Arm64, x64                 | None            |
+| [CentOS Stream][9]             | 10, 9                      | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
+| [Debian][11]                   | 13                         | Arm32, Arm64, x64          | [Lifecycle][12] |
+| [Fedora][13]                   | 43                         | Arm32, Arm64, x64          | [Lifecycle][14] |
+| [openSUSE Leap][15]            | 16.0                       | Arm64, x64                 | [Lifecycle][16] |
+| [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Linux Enterprise][19]    | 16.0, 15.7                 | Arm64, x64                 | [Lifecycle][20] |
+| [Ubuntu][21]                   | 26.04, 25.10, 24.04, 22.04 | Arm32, Arm64, x64          | [Lifecycle][22] |
 
 Notes:
 
