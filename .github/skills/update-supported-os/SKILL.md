@@ -99,6 +99,7 @@ Review the verify report and decide which issues to act on:
 - **WARNING items** (EOL but supported):
   - **GA release:** Move to `unsupported-versions`.
   - **Pre-GA release:** Remove from `supported-versions` entirely — do not add to `unsupported-versions` (Rule 1).
+  - **Exception — Windows ESU:** Do not remove Windows versions covered by [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview). The verify tool flags these as EOL based on mainstream support dates, but ESU extends their lifecycle. These entries are updated manually — skip them.
 - **IMPORTANT items** (missing active releases):
   - **GA release:** Add unless there's a known reason to exclude.
   - **Pre-GA release:** Only add if the version's EOL date is after GA + 6 months (Rule 2).
