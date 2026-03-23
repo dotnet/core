@@ -79,12 +79,12 @@ dotnet-release verify supported-os 10.0
 
 The report uses GitHub callout blocks to categorize issues:
 
-| Callout | Meaning | Action |
-| --------- | --------- | -------- |
-| `> [!WARNING]` | EOL but still listed as "supported" | Move to `unsupported-versions` |
-| `> [!IMPORTANT]` | Active release not listed | Consider adding to `supported-versions` |
-| `> [!TIP]` | Active but listed as unsupported | Verify this is intentional (no action usually needed) |
-| `> [!CAUTION]` | Approaching EOL within 3 months | **GA:** Informational — no immediate action. **Pre-GA:** Remove if EOL is before GA date |
+| Callout | Meaning |
+| --------- | --------- |
+| `> [!WARNING]` | EOL but still listed as "supported" |
+| `> [!IMPORTANT]` | Active release not listed in "supported" |
+| `> [!TIP]` | Active but listed as "unsupported" |
+| `> [!CAUTION]` | Supported release approaching EOL within 3 months |
 
 See [references/verify-output-example.md](references/verify-output-example.md) for example output.
 
@@ -92,29 +92,33 @@ If all versions return exit code 0, the matrix is current. **Stop here.**
 
 ### 2. Determine scope of changes
 
-First, determine whether this .NET version is **GA** or **pre-GA** (preview/RC). Check `releases.json` for the release type or ask the user. If the version is pre-GA, apply the [preview release rules](#preview-release-rules) below.
+First, determine whether this .NET version is **GA** or **pre-GA** (preview/RC). Check `releases-index.json` for the `support-phase` field, or ask the user.
 
-Review the verify report and decide which issues to act on:
+#### GA releases
 
-- **WARNING items** (EOL but still "supported"):
-  - **GA release:** Move to `unsupported-versions`.
-  - **Pre-GA release:** Remove from `supported-versions` entirely — do not add to `unsupported-versions` (Rule 1).
-  - **Exception — Windows ESU:** Do not remove Windows versions covered by [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview). The verify tool flags these as EOL based on mainstream support dates, but ESU extends their lifecycle. These entries are updated manually — skip them.
-- **IMPORTANT items** (missing active releases):
-  - **GA release:** Add unless there's a known reason to exclude.
-  - **Pre-GA release:** Only add if the version's EOL date is after GA + 6 months (Rule 2).
-- **TIP items** (active but unsupported) — usually intentional, skip unless the user says otherwise
-- **CAUTION items** (approaching EOL):
-  - **GA release:** Informational only, no JSON changes needed.
-  - **Pre-GA release:** If the EOL date is **before** the GA date, remove from `supported-versions` (same rationale as Rule 1 — no users depend on the matrix yet, and the version won't be supported at GA). If the EOL date is **after** GA, no action needed.
+- **WARNING** — Move to `unsupported-versions`.
+- **IMPORTANT** — Add to `supported-versions` unless there's a known reason to exclude.
+- **CAUTION** — Informational only, no changes needed.
+- **TIP** — Usually intentional, skip unless the user says otherwise.
 
-Present findings to the user with recommendations before making changes. For pre-GA releases, explain which items are removed (Rule 1), which additions are excluded (Rule 2), and which preview distros qualify for early addition (Rule 3). For Rule 3 candidates, verify that a container image exists at [dotnet/dotnet-buildtools-prereqs-docker](https://github.com/dotnet/dotnet-buildtools-prereqs-docker) before recommending addition.
+#### Pre-GA releases
+
+Apply the [preview release rules](#preview-release-rules) below. The support matrix should reflect what will be supported at GA, not what happens to be active today.
+
+- **WARNING** — Remove from `supported-versions` entirely. Do not add to `unsupported-versions` (Rule 1). Exception: skip Windows versions covered by ESU — unless the ESU itself expires before GA (see Rule 1).
+- **IMPORTANT** — Only add if the version's EOL date is after GA + 6 months (Rule 2).
+- **CAUTION** — Check the EOL date against the GA date. If EOL is before GA, remove from `supported-versions` (Rule 1). If EOL is after GA but before GA + 6 months, remove as well (Rule 2). If EOL is after GA + 6 months, no action needed.
+- **TIP** — Same as GA, skip unless the user says otherwise.
+- **Rule 3 check** — Independently of the verify report, check for preview distros that should be [added proactively](#rule-3--add-preview-distros-that-will-ga-before-net-ga).
+
+Present findings to the user with recommendations before making changes.
 
 ### 3. Apply changes to supported-os.json
 
 For each confirmed change, edit `release-notes/<version>/supported-os.json`:
 
-- **Move EOL versions**: Remove from `supported-versions`, add to `unsupported-versions`
+- **EOL versions (GA)**: Remove from `supported-versions`, add to `unsupported-versions`
+- **EOL versions (pre-GA)**: Remove from `supported-versions` only — do not add to `unsupported-versions`
 - **Add new versions**: Insert into `supported-versions` (keep sorted, newest first)
 - **Update `last-updated`**: Set to today's date (format: `YYYY-MM-DD`)
 - Use the `edit` tool for surgical JSON changes
@@ -154,7 +158,11 @@ Check if any newly added distro versions need entries in `os-packages.json`. If 
    dotnet-release verify supported-os <version> release-notes
    ```
 
-   Expect exit code 0 (or only TIP/CAUTION items and ESU-covered WARNING items remaining).
+   Remaining items are acceptable if they are:
+   - TIP items (intentionally unsupported)
+   - ESU-covered WARNING items (GA releases, or pre-GA where ESU outlasts GA)
+   - IMPORTANT items for versions intentionally excluded by Rule 2 (pre-GA)
+   - CAUTION items with EOL after the GA date (pre-GA) or any CAUTION items (GA)
 
 2. Spot-check the generated markdown renders correctly.
 
@@ -194,21 +202,25 @@ For example: .NET 10 GAs November 2025, .NET 11 GAs November 2026, .NET 12 GAs N
 
 To confirm, check [`releases-index.json`](https://github.com/dotnet/core/raw/refs/heads/main/release-notes/releases-index.json) for the `release-date` of the target version. If the GA date is not yet populated, use the November convention above.
 
-### Rule 1 — Remove EOL versions during preview (do not track as unsupported)
+### Rule 1 — Remove versions that won't be supported at GA
 
-While a .NET release is in preview, **remove** OS versions that are already EOL from `supported-versions`. Do **not** add them to `unsupported-versions` — the unsupported list is for versions that were supported during a GA release and later went EOL. Since the .NET release hasn't shipped yet, there is no GA history to preserve.
+While a .NET release is in preview, **remove** OS versions from `supported-versions` if they are already EOL or will reach EOL before the GA date. Do **not** add them to `unsupported-versions` — the unsupported list is for versions that were supported during a GA release and later went EOL. Since the .NET release hasn't shipped yet, there is no GA history to preserve.
 
-**Rationale:** The `unsupported-versions` list exists as a historical record for users of a shipped release. During preview, no users depend on the support matrix, so EOL versions should simply be removed to keep the document clean at GA.
+This rule applies to both WARNING items (already EOL) and CAUTION items (approaching EOL with an EOL date before GA).
 
-### Rule 2 — Only add versions supported at GA + 6 months
+**Windows ESU exception:** Windows versions covered by [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview) are not considered EOL while ESU is active. The verify tool flags these based on mainstream support dates, but ESU extends their lifecycle. However, check whether the ESU program itself expires before the GA date — if it does, the version should be removed.
 
-When considering whether to add a new OS version to `supported-versions`, check whether the version will still be supported (not EOL) at **GA date + 6 months**.
+**Rationale:** The `unsupported-versions` list exists as a historical record for users of a shipped release. During preview, no users depend on the support matrix, so versions that won't survive to GA should simply be removed to keep the document clean.
 
-- If the OS version's EOL date is **after** GA + 6 months → **add it**
-- If the OS version's EOL date is **before** GA + 6 months → **do not add it**
-- If the OS version has no known EOL date (still active with no announced end) → **add it**
+### Rule 2 — Only list versions supported at GA + 6 months
 
-**Rationale:** Users should be able to adopt a .NET release at GA and have confidence their OS will remain supported for a reasonable period. Adding OS versions that go EOL shortly after GA creates a "rug-pulling" scenario.
+When evaluating whether an OS version should be in `supported-versions` — whether adding a new version or reviewing one already listed — check whether the version will still be supported (not EOL) at **GA date + 6 months**.
+
+- If the OS version's EOL date is **after** GA + 6 months → **add or keep it**
+- If the OS version's EOL date is **before** GA + 6 months → **do not add it; if already listed, remove it**
+- If the OS version has no known EOL date (still active with no announced end) → **add or keep it**
+
+**Rationale:** Users should be able to adopt a .NET release at GA and have confidence their OS will remain supported for a reasonable period. Listing OS versions that go EOL shortly after GA creates a "rug-pulling" scenario.
 
 ### Rule 3 — Add preview distros that will GA before .NET GA
 
@@ -265,6 +277,12 @@ If the distro GAs **after** .NET GA → **do not add it** yet.
 
 - Alpine 3.20 (EOL 2026-04-01) — **remove** from supported, do not add to unsupported (already EOL, pre-GA)
 - Android 13 (EOL 2026-03-02) — **remove** from supported, do not add to unsupported (already EOL, pre-GA)
+
+**Rule 1 — Remove approaching-EOL versions (CAUTION items with EOL before GA):**
+
+- openSUSE Leap 15.6 (EOL 2026-04-30) — approaching EOL, EOL before November 2026 GA → **remove** from supported
+- Fedora 42 (EOL 2026-05-13) — approaching EOL, EOL before November 2026 GA → **remove** from supported
+- Debian 12 (EOL 2026-06-10) — approaching EOL, EOL before November 2026 GA → **remove** from supported
 
 **Rule 2 — GA + 6 months gate:**
 
