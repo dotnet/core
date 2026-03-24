@@ -1,0 +1,220 @@
+---
+name: update-distro-packages
+description: >
+  Create and update per-distro package files in release-notes/{version}/distros/
+  that document .NET runtime dependencies and package availability for each
+  Linux distribution. USE FOR: setting up distros/ for a new .NET version,
+  updating dependency package names when distro versions change, auditing
+  package data. DO NOT USE FOR: supported-os.json changes (use
+  update-supported-os skill), os-packages.json (legacy format).
+---
+
+# Update Distro Packages
+
+Create and maintain per-distro JSON files in `release-notes/{version}/distros/`. Each file declares the native packages .NET depends on for a specific distribution, scoped to a single .NET version.
+
+## Directory structure
+
+```
+release-notes/{version}/distros/
+├── dependencies.json    # distro-agnostic dependency list (what .NET needs)
+├── index.json           # lists all per-distro file names
+├── alpine.json          # per-distro: dependencies with distro-specific names
+├── ubuntu.json
+├── fedora.json
+└── ...
+```
+
+## When to use
+
+- A new .NET version needs its `distros/` directory created for the first time
+- A distro release is added or removed from the support matrix
+- A dependency package name changes (e.g. `libicu74` → `libicu76` on a new Ubuntu)
+- Periodic audit to keep dependency data current
+
+## Prerequisites
+
+The `dotnet-release` tool must be installed for package availability queries (optional). Dependency-only updates do not require the tool.
+
+```bash
+dotnet tool install -g Dotnet.Release.Tools \
+  --add-source https://nuget.pkg.github.com/richlander/index.json \
+  --version "0.*"
+```
+
+## Inputs
+
+The user provides:
+
+- **.NET version** — which version to work on (e.g. "11.0")
+- **Task** — what to do: create new distros/ directory, add a distro release, update package names, etc.
+
+## File schemas
+
+### dependencies.json
+
+Distro-agnostic list of packages .NET requires. Updated once per major release — rarely changes.
+
+```json
+{
+  "channel_version": "11.0",
+  "packages": [
+    {
+      "id": "libc",
+      "name": "C Library",
+      "required_scenarios": ["all"],
+      "references": ["https://..."]
+    },
+    {
+      "id": "openssl",
+      "name": "OpenSSL",
+      "required_scenarios": ["https", "cryptography"],
+      "min_version": "1.1.1",
+      "references": ["https://..."]
+    }
+  ]
+}
+```
+
+Omit `min_version` and `references` when null/empty.
+
+### index.json
+
+```json
+{
+  "channel_version": "11.0",
+  "distros": [
+    "alpine.json",
+    "azure_linux.json",
+    "ubuntu.json"
+  ]
+}
+```
+
+Alphabetically sorted list of per-distro file names.
+
+### Per-distro files (e.g. ubuntu.json)
+
+Scoped to the .NET version of the parent directory. No `dotnet_versions` field — the version is the directory.
+
+```json
+{
+  "name": "Ubuntu",
+  "install_command": "apt-get install -y {packages}",
+  "releases": [
+    {
+      "name": "Ubuntu 24.04 (Noble Numbat)",
+      "release": "24.04",
+      "dependencies": [
+        { "id": "ca-certificates", "name": "ca-certificates" },
+        { "id": "libc", "name": "libc6" },
+        { "id": "libicu", "name": "libicu74" },
+        { "id": "openssl", "name": "libssl3t64" }
+      ]
+    }
+  ]
+}
+```
+
+Optional fields (populated by package availability queries):
+
+```json
+{
+  "dotnet_packages": [
+    { "component": "sdk", "name": "dotnet-sdk-11.0" },
+    { "component": "runtime", "name": "dotnet-runtime-11.0" }
+  ],
+  "dotnet_packages_other": {
+    "backports": {
+      "install_command": "# See Ubuntu backports documentation",
+      "packages": [
+        { "component": "sdk", "name": "dotnet-sdk-11.0" }
+      ]
+    }
+  }
+}
+```
+
+## Process
+
+### Creating distros/ for a new .NET version
+
+#### 1. Identify source data
+
+Use `os-packages.json` from the same version (if it exists) or the previous .NET version as the source for dependency data:
+
+```bash
+cat release-notes/{version}/os-packages.json
+# or from a previous version:
+cat release-notes/{prev-version}/os-packages.json
+```
+
+Also reference `release-notes/{version}/supported-os.json` for the list of supported Linux distributions and versions.
+
+#### 2. Create dependencies.json
+
+Extract the `packages` array from `os-packages.json`. Convert keys to snake_case:
+
+- `required-scenarios` → `required_scenarios`
+- `min-version` → `min_version`
+
+This file changes very rarely — it lists what .NET needs, not what distros call things.
+
+#### 3. Create per-distro files
+
+For each distribution in `os-packages.json`:
+
+- **File name**: lowercase distro name, spaces → `_` (e.g. `azure_linux.json`, `centos_stream.json`)
+- **`install_command`**: From the distro's `install-commands` — use the last command, format as `{command-root} {command-parts}`, normalize `{packageName}` → `{packages}`
+- **`releases`**: One entry per distro release, with `dependencies` sorted alphabetically by `id`
+- **Do NOT include** `dotnet_packages` or `dotnet_packages_other` — those are populated separately
+
+#### 4. Create index.json
+
+List all per-distro file names alphabetically.
+
+#### 5. Validate
+
+```bash
+# Verify all JSON parses
+for f in release-notes/{version}/distros/*.json; do
+  python3 -c "import json; json.load(open('$f'))" && echo "OK: $f"
+done
+```
+
+Confirm every Linux distro in `supported-os.json` has a corresponding file.
+
+### Updating existing distros/ files
+
+#### Adding a new distro release
+
+1. Check `supported-os.json` for the new release
+2. In the distro's JSON file, copy the most recent release entry
+3. Update `name`, `release`, and any changed package names (e.g. `libicu74` → `libicu76`)
+4. Insert in version order (newest first)
+
+#### Removing a distro release
+
+Delete the release object from the `releases` array. If the entire distro is dropped, delete the file and remove it from `index.json`.
+
+#### Fixing package names
+
+Update the `name` field in the relevant dependency entry. Package names change between distro releases due to shared library versioning (e.g. `libicu70` on Ubuntu 22.04 → `libicu74` on 24.04).
+
+### Commit
+
+```bash
+git add release-notes/{version}/distros/
+git commit -m "Update {version} distro packages — <summary>"
+```
+
+## Key facts
+
+- Files are version-scoped — `release-notes/11.0/distros/ubuntu.json` is about .NET 11.0 on Ubuntu
+- Dependencies use an agnostic `id` (e.g. `libicu`) with a distro-specific `name` (e.g. `libicu74`)
+- `dependencies.json` is the "what .NET needs" list; per-distro files map those to real package names
+- Package names like `libicu` are versioned on Debian/Ubuntu (e.g. `libicu76`) but not on Fedora/RHEL (just `libicu`)
+- Alpine uses a different naming scheme for .NET packages: `dotnet{major}-{component}` (e.g. `dotnet9-sdk`)
+- Debian/Ubuntu/Fedora use: `dotnet-sdk-{major}.{minor}`, `dotnet-runtime-{major}.{minor}`
+- Microsoft is phasing out packages.microsoft.com for Ubuntu 24.04+ and newer Fedora
+- `install_command` uses `{packages}` as a placeholder for the package list
