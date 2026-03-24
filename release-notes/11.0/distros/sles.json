@@ -1,0 +1,120 @@
+{
+  "name": "SLES",
+  "install_command": "zypper install -y {packages}",
+  "releases": [
+    {
+      "name": "SLES 16.0",
+      "release": "16.0",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc_s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libopenssl3"
+        },
+        {
+          "id": "tzdata",
+          "name": "timezone"
+        }
+      ]
+    },
+    {
+      "name": "SLES 15.7",
+      "release": "15.7",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc_s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libopenssl3"
+        },
+        {
+          "id": "tzdata",
+          "name": "timezone"
+        }
+      ]
+    },
+    {
+      "name": "SLES 15.6",
+      "release": "15.6",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc_s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libopenssl3"
+        },
+        {
+          "id": "tzdata",
+          "name": "timezone"
+        }
+      ]
+    }
+  ]
+}
