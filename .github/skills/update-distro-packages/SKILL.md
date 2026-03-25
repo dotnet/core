@@ -184,6 +184,16 @@ done
 
 Confirm every Linux distro in `supported-os.json` has a corresponding file.
 
+#### 6. Generate markdown
+
+Regenerate `dotnet-dependencies.md` from the JSON files:
+
+```bash
+dotnet-release generate dotnet-dependencies {version} release-notes
+```
+
+This produces `release-notes/{version}/dotnet-dependencies.md` with copy-pasteable install commands for each distro and release. Never hand-edit this file — it is generated from the JSON.
+
 ### Updating existing distros/ files
 
 #### Adding a new distro release
@@ -201,10 +211,20 @@ Delete the release object from the `releases` array. If the entire distro is dro
 
 Update the `name` field in the relevant dependency entry. Package names change between distro releases due to shared library versioning (e.g. `libicu70` on Ubuntu 22.04 → `libicu74` on 24.04).
 
+### Regenerate markdown
+
+After any JSON changes, regenerate the markdown:
+
+```bash
+dotnet-release generate dotnet-dependencies {version} release-notes
+```
+
+> **Important:** Do not hand-edit `dotnet-dependencies.md`. It is generated from the distros/ JSON files. If the output needs to change, update the generator or template in [dotnet-release](https://github.com/richlander/dotnet-release).
+
 ### Commit
 
 ```bash
-git add release-notes/{version}/distros/
+git add release-notes/{version}/distros/ release-notes/{version}/dotnet-dependencies.md
 git commit -m "Update {version} distro packages — <summary>"
 ```
 
