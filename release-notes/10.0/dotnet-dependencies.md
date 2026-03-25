@@ -1,17 +1,13 @@
 # .NET 10.0 Linux package dependencies
 
-.NET 10.0 has several dependencies that must be satisfied to run .NET apps. The commands to install these libraries are listed for multiple Linux distributions.
-
-Feel free to contribute packages for distributions not (yet) listed in this document, including ones not supported by the .NET Team.
+.NET 10.0 has several dependencies that must be installed to run .NET apps. The install commands for each supported Linux distribution are listed below.
 
 Tips:
 
-- [runtime-deps container images](https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps) installs these same packages. You can look at those dockerfiles.
-- [pkgs.org](https://pkgs.org/) is a useful site for searching for packages, to find the one for your distribution.
+- [runtime-deps container images](https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps) install these same packages.
+- [pkgs.org](https://pkgs.org/) is useful for searching packages across distributions.
 
 ## Packages
-
-.NET depends on the following packages.
 
 - [C Library][0]
 - [GCC low-level runtime library][1]
@@ -35,7 +31,9 @@ If your app relies on `https` endpoints, you'll also need to install `ca-certifi
 [6]: https://data.iana.org/time-zones/tz-link.html
 [7]: https://web.mit.edu/kerberos
 
-## Alpine edge
+## Alpine
+
+### Alpine edge
 
 ```bash
 sudo apk add \
@@ -49,7 +47,7 @@ sudo apk add \
     tzdata
 ```
 
-## Alpine 3.23
+### Alpine 3.23
 
 ```bash
 sudo apk add \
@@ -63,7 +61,7 @@ sudo apk add \
     tzdata
 ```
 
-## Alpine 3.22
+### Alpine 3.22
 
 ```bash
 sudo apk add \
@@ -77,7 +75,7 @@ sudo apk add \
     tzdata
 ```
 
-## Alpine 3.21
+### Alpine 3.21
 
 ```bash
 sudo apk add \
@@ -91,7 +89,9 @@ sudo apk add \
     tzdata
 ```
 
-## Azure Linux 3.0
+## Azure Linux
+
+### Azure Linux 3.0
 
 ```bash
 sudo tdnf install -y \
@@ -105,7 +105,9 @@ sudo tdnf install -y \
     tzdata
 ```
 
-## CentOS Stream 10
+## CentOS Stream
+
+### CentOS Stream 10
 
 ```bash
 sudo dnf install -y \
@@ -119,7 +121,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## CentOS Stream 9
+### CentOS Stream 9
 
 ```bash
 sudo dnf install -y \
@@ -133,7 +135,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## CentOS Stream 8
+### CentOS Stream 8
 
 ```bash
 sudo dnf install -y \
@@ -147,7 +149,9 @@ sudo dnf install -y \
     tzdata
 ```
 
-## Debian sid (Unstable)
+## Debian
+
+### Debian sid (Unstable)
 
 ```bash
 sudo apt-get update && \
@@ -162,7 +166,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-## Debian 13 (Trixie)
+### Debian 13 (Trixie)
 
 ```bash
 sudo apt-get update && \
@@ -177,7 +181,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-## Debian 12 (Bookworm)
+### Debian 12 (Bookworm)
 
 ```bash
 sudo apt-get update && \
@@ -192,7 +196,9 @@ sudo apt-get install -y \
     tzdata
 ```
 
-## Fedora 44
+## Fedora
+
+### Fedora 44
 
 ```bash
 sudo dnf install -y \
@@ -206,7 +212,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## Fedora 43
+### Fedora 43
 
 ```bash
 sudo dnf install -y \
@@ -220,7 +226,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## Fedora 42
+### Fedora 42
 
 ```bash
 sudo dnf install -y \
@@ -234,7 +240,9 @@ sudo dnf install -y \
     tzdata
 ```
 
-## FreeBSD 14.1
+## FreeBSD
+
+### FreeBSD 14.1
 
 ```bash
 sudo pkg install -A \
@@ -242,7 +250,9 @@ sudo pkg install -A \
     krb5
 ```
 
-## openSUSE Leap 16.0
+## openSUSE Leap
+
+### openSUSE Leap 16.0
 
 ```bash
 sudo zypper install -y \
@@ -256,7 +266,7 @@ sudo zypper install -y \
     timezone
 ```
 
-## openSUSE Leap 15.6
+### openSUSE Leap 15.6
 
 ```bash
 sudo zypper install -y \
@@ -270,7 +280,9 @@ sudo zypper install -y \
     timezone
 ```
 
-## RHEL 10
+## RHEL
+
+### RHEL 10
 
 ```bash
 sudo dnf install -y \
@@ -284,7 +296,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## RHEL 9
+### RHEL 9
 
 ```bash
 sudo dnf install -y \
@@ -298,7 +310,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-## RHEL 8
+### RHEL 8
 
 ```bash
 sudo dnf install -y \
@@ -312,7 +324,9 @@ sudo dnf install -y \
     tzdata
 ```
 
-## SLES 16.0
+## SLES
+
+### SLES 16.0
 
 ```bash
 sudo zypper install -y \
@@ -326,7 +340,7 @@ sudo zypper install -y \
     timezone
 ```
 
-## SLES 15.7
+### SLES 15.7
 
 ```bash
 sudo zypper install -y \
@@ -340,7 +354,7 @@ sudo zypper install -y \
     timezone
 ```
 
-## SLES 15.6
+### SLES 15.6
 
 ```bash
 sudo zypper install -y \
@@ -354,7 +368,9 @@ sudo zypper install -y \
     timezone
 ```
 
-## Ubuntu 26.04 LTS (Resolute Raccoon)
+## Ubuntu
+
+### Ubuntu 26.04 LTS (Resolute Raccoon)
 
 ```bash
 sudo apt-get update && \
@@ -369,7 +385,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-## Ubuntu 25.10 (Questing Quokka)
+### Ubuntu 25.10 (Questing Quokka)
 
 ```bash
 sudo apt-get update && \
@@ -384,7 +400,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-## Ubuntu 24.04 (Noble Numbat)
+### Ubuntu 24.04 (Noble Numbat)
 
 ```bash
 sudo apt-get update && \
@@ -399,7 +415,7 @@ sudo apt-get install -y \
     tzdata
 ```
 
-## Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+### Ubuntu 22.04.4 LTS (Jammy Jellyfish)
 
 ```bash
 sudo apt-get update && \
