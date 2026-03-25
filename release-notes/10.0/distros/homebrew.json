@@ -1,0 +1,32 @@
+{
+  "name": "Homebrew",
+  "install_command": "brew install {packages}",
+  "releases": [
+    {
+      "name": "Homebrew (rolling)",
+      "release": "rolling",
+      "dotnet_packages": [
+        {
+          "component": "sdk",
+          "name": "dotnet"
+        }
+      ],
+      "dotnet_packages_other": {
+        "cask": {
+          "install_command": "brew install --cask {packages}",
+          "packages": [
+            {
+              "component": "runtime",
+              "name": "dotnet-runtime"
+            },
+            {
+              "component": "sdk",
+              "name": "dotnet-sdk"
+            }
+          ]
+        }
+      },
+      "dependencies": []
+    }
+  ]
+}

@@ -89,6 +89,22 @@ sudo apk add \
     tzdata
 ```
 
+## Arch Linux
+
+### Arch Linux (rolling)
+
+```bash
+sudo pacman -S \
+    ca-certificates \
+    gcc-libs \
+    gcc-libs \
+    glibc \
+    icu \
+    krb5 \
+    openssl \
+    tzdata
+```
+
 ## Azure Linux
 
 ### Azure Linux 3.0
@@ -248,6 +264,22 @@ sudo dnf install -y \
 sudo pkg install -A \
     icu \
     krb5
+```
+
+## Homebrew
+
+### Homebrew (rolling)
+
+```bash
+sudo brew install \
+```
+
+## NixOS
+
+### NixOS 25.11
+
+```bash
+sudo nix-env -iA nixpkgs. \
 ```
 
 ## openSUSE Leap
