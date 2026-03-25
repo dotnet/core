@@ -62,7 +62,9 @@ dotnet tool update -g Dotnet.Release.Tools \
 The user provides:
 
 - **.NET version** — which version to work on (e.g. "11.0")
-- **Task** — what to do: create new distros/ directory, add a distro release, update package names, etc.
+- **Task** — what to do: create new distros/ directory, add a distro release, update package names, populate dotnet packages, etc.
+
+Ask the user: **Do you want to update dotnet packages (which .NET packages are available in each distro)?** If so, ask them to provide or set `PKGS_ORG_TOKEN`. This requires a [pkgs.org Gold+ subscription](https://pkgs.org/about/).
 
 ## File schemas
 
@@ -225,6 +227,109 @@ Delete the release object from the `releases` array. If the entire distro is dro
 #### Fixing package names
 
 Update the `name` field in the relevant dependency entry. Package names change between distro releases due to shared library versioning (e.g. `libicu70` on Ubuntu 22.04 → `libicu74` on 24.04).
+
+### Populating dotnet packages
+
+This populates `dotnet_packages` and `dotnet_packages_other` in each per-distro file — recording which .NET packages (SDK, runtime, ASP.NET Core) are available in each distro's package feeds.
+
+Requires `PKGS_ORG_TOKEN` to be set.
+
+#### 1. Query package feeds
+
+```bash
+export PKGS_ORG_TOKEN=<token>
+dotnet-release query distro-packages --dotnet-version {version} --output /tmp/distro-packages.json
+```
+
+This queries pkgs.org and supplemental feeds (Ubuntu backports via Launchpad, Homebrew, NixOS) and writes a JSON file with package availability per distro.
+
+#### 2. Read query results
+
+The output file has this structure:
+
+```json
+{
+  "channel_version": "10.0",
+  "last_verified": "2026-03-25",
+  "distributions": [
+    {
+      "name": "Ubuntu",
+      "releases": [
+        {
+          "name": "Ubuntu 24.04",
+          "release": "24.04",
+          "feeds": {
+            "builtin": [
+              { "component_id": "sdk", "package_name": "dotnet-sdk-10.0" },
+              { "component_id": "runtime", "package_name": "dotnet-runtime-10.0" },
+              { "component_id": "aspnetcore-runtime", "package_name": "aspnetcore-runtime-10.0" }
+            ],
+            "backports": [
+              { "component_id": "sdk", "package_name": "dotnet-sdk-10.0" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### 3. Map into per-distro files
+
+For each distro+release in the query results, match it to the corresponding per-distro file and update:
+
+- **`feeds["builtin"]`** → **`dotnet_packages`** (flat list)
+- **Any other feed** (e.g. `feeds["backports"]`) → **`dotnet_packages_other["backports"]`**
+
+Field mapping from query → per-distro file:
+
+| Query field | Per-distro field |
+|-------------|-----------------|
+| `component_id` | `component` |
+| `package_name` | `name` |
+
+Example — if the query returns this for Ubuntu 24.04:
+
+```json
+"feeds": {
+  "builtin": [
+    { "component_id": "sdk", "package_name": "dotnet-sdk-10.0" }
+  ],
+  "backports": [
+    { "component_id": "sdk", "package_name": "dotnet-sdk-10.0" }
+  ]
+}
+```
+
+Then `ubuntu.json` release 24.04 becomes:
+
+```json
+{
+  "name": "Ubuntu 24.04 (Noble Numbat)",
+  "release": "24.04",
+  "dependencies": [ ... ],
+  "dotnet_packages": [
+    { "component": "sdk", "name": "dotnet-sdk-10.0" }
+  ],
+  "dotnet_packages_other": {
+    "backports": {
+      "install_command": "# See Ubuntu backports PPA documentation",
+      "packages": [
+        { "component": "sdk", "name": "dotnet-sdk-10.0" }
+      ]
+    }
+  }
+}
+```
+
+#### 4. Handle distros not in query results
+
+Not all distros appear in the query results (e.g. RHEL packages are in a subscription-only repo). Leave `dotnet_packages` absent for those — do not add an empty list.
+
+#### 5. Present summary
+
+Show the user a summary of which distros+releases have packages and from which feeds, and flag any gaps (supported distro but no packages found).
 
 ### Regenerate markdown
 
