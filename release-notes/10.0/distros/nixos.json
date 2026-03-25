@@ -1,0 +1,25 @@
+{
+  "name": "NixOS",
+  "install_command": "nix-env -iA nixpkgs.{packages}",
+  "releases": [
+    {
+      "name": "NixOS 25.11",
+      "release": "25.11",
+      "dotnet_packages": [
+        {
+          "component": "aspnetcore-runtime",
+          "name": "dotnet-aspnetcore_10"
+        },
+        {
+          "component": "runtime",
+          "name": "dotnet-runtime_10"
+        },
+        {
+          "component": "sdk",
+          "name": "dotnet-sdk_10"
+        }
+      ],
+      "dependencies": []
+    }
+  ]
+}

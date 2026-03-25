@@ -1,0 +1,120 @@
+{
+  "name": "Debian",
+  "install_command": "apt-get install -y {packages}",
+  "releases": [
+    {
+      "name": "Debian sid (Unstable)",
+      "release": "sid",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu76"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl3t64"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    },
+    {
+      "name": "Debian 13 (Trixie)",
+      "release": "13",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu76"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl3t64"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    },
+    {
+      "name": "Debian 12 (Bookworm)",
+      "release": "12",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu72"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl3"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    }
+  ]
+}

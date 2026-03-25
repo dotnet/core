@@ -1,0 +1,90 @@
+{
+  "channel_version": "10.0",
+  "packages": [
+    {
+      "id": "libc",
+      "name": "C Library",
+      "required_scenarios": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/core/blob/main/release-notes/10.0/supported-os.md#linux-compatibility",
+        "https://www.gnu.org/software/libc/libc.html",
+        "https://musl.libc.org/"
+      ]
+    },
+    {
+      "id": "libgcc",
+      "name": "GCC low-level runtime library",
+      "required_scenarios": [
+        "all"
+      ],
+      "references": [
+        "https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html"
+      ]
+    },
+    {
+      "id": "ca-certificates",
+      "name": "CA Certificates",
+      "required_scenarios": [
+        "https"
+      ],
+      "references": [
+        "https://www.redhat.com/sysadmin/ca-certificates-cli"
+      ]
+    },
+    {
+      "id": "openssl",
+      "name": "OpenSSL",
+      "required_scenarios": [
+        "https",
+        "cryptography"
+      ],
+      "min_version": "1.1.1",
+      "references": [
+        "https://www.openssl.org/"
+      ]
+    },
+    {
+      "id": "libstdc++",
+      "name": "C++ Library",
+      "required_scenarios": [
+        "runtime"
+      ],
+      "references": [
+        "https://gcc.gnu.org/onlinedocs/libstdc++/"
+      ]
+    },
+    {
+      "id": "libicu",
+      "name": "ICU",
+      "required_scenarios": [
+        "globalization"
+      ],
+      "references": [
+        "https://icu.unicode.org",
+        "https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md"
+      ]
+    },
+    {
+      "id": "tzdata",
+      "name": "tz database",
+      "required_scenarios": [
+        "globalization"
+      ],
+      "references": [
+        "https://data.iana.org/time-zones/tz-link.html"
+      ]
+    },
+    {
+      "id": "krb5",
+      "name": "Kerberos",
+      "required_scenarios": [
+        "kerberos"
+      ],
+      "references": [
+        "https://web.mit.edu/kerberos"
+      ]
+    }
+  ]
+}

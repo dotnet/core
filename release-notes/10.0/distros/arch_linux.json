@@ -1,0 +1,73 @@
+{
+  "name": "Arch Linux",
+  "install_command": "pacman -S {packages}",
+  "releases": [
+    {
+      "name": "Arch Linux (rolling)",
+      "release": "rolling",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "gcc-libs"
+        },
+        {
+          "id": "libicu",
+          "name": "icu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "gcc-libs"
+        },
+        {
+          "id": "openssl",
+          "name": "openssl"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ],
+      "dotnet_packages": [
+        {
+          "component": "runtime",
+          "name": "dotnet-runtime"
+        },
+        {
+          "component": "sdk",
+          "name": "dotnet-sdk"
+        }
+      ],
+      "dotnet_packages_other": {
+        "aur": {
+          "install_command": "# Install from AUR using an AUR helper (e.g. yay, paru)",
+          "packages": [
+            {
+              "component": "aspnetcore-runtime",
+              "name": "aspnet-runtime-bin"
+            },
+            {
+              "component": "runtime",
+              "name": "dotnet-runtime-bin"
+            },
+            {
+              "component": "sdk",
+              "name": "dotnet-sdk-bin"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
