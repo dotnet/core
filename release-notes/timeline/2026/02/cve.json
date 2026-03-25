@@ -1,0 +1,147 @@
+{
+  "last_updated": "2026-02-10",
+  "title": ".NET Security Updates for February 2026 (2026-02-10)",
+  "disclosures": [
+    {
+      "id": "CVE-2026-21218",
+      "problem": ".NET Spoofing Vulnerability",
+      "description": [
+        "Improper handling of missing special element in .NET allows an unauthorized attacker to perform spoofing over a network."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-02-10",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-02-10",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/380"
+      ],
+      "weakness": "CWE-166",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Spoofing",
+        "acknowledgments": [
+          "vcsjones with GitHub"
+        ],
+        "faq": [
+          {
+            "question": "According to the CVSS metric, the privileges required is none (PR:N). What does that mean for this vulnerability?",
+            "answer": "The score is based on no user account is needed to perform the attack."
+          },
+          {
+            "question": "According to the CVSS metrics, successful exploitation of this vulnerability could lead to no loss of confidentiality (C:N) and no loss of availability (A:N), but could lead to major loss of integrity (I:H). What does that mean for this vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could bypass critical-header validation and the service may accept a message it should reject."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [],
+  "packages": [
+    {
+      "cve_id": "CVE-2026-21218",
+      "name": "System.Security.Cryptography.Cose",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.1",
+      "fixed": "8.0.2",
+      "release": "8.0"
+    },
+    {
+      "cve_id": "CVE-2026-21218",
+      "name": "System.Security.Cryptography.Cose",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.12",
+      "fixed": "9.0.13",
+      "release": "9.0"
+    },
+    {
+      "cve_id": "CVE-2026-21218",
+      "name": "System.Security.Cryptography.Cose",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.2",
+      "fixed": "10.0.3",
+      "release": "10.0"
+    }
+  ],
+  "commits": {
+    "runtime@9e1f70e": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "9e1f70e56f7d49f64c61b2a24984e4a0193a0229",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/9e1f70e56f7d49f64c61b2a24984e4a0193a0229.diff"
+    },
+    "runtime@6abb139": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "6abb1393bf7fcb32bbd7ee58158e0e62f90be5f8",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/6abb1393bf7fcb32bbd7ee58158e0e62f90be5f8.diff"
+    },
+    "dotnet@02d5bc6": {
+      "repo": "dotnet",
+      "branch": "release/10.0",
+      "hash": "02d5bc6d5bca9b8da8993ab363512f846f5377c3",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/02d5bc6d5bca9b8da8993ab363512f846f5377c3.diff"
+    }
+  },
+  "product_name": {},
+  "product_cves": {},
+  "package_cves": {
+    "System.Security.Cryptography.Cose": [
+      "CVE-2026-21218"
+    ]
+  },
+  "release_cves": {
+    "8.0": [
+      "CVE-2026-21218"
+    ],
+    "9.0": [
+      "CVE-2026-21218"
+    ],
+    "10.0": [
+      "CVE-2026-21218"
+    ]
+  },
+  "severity_cves": {
+    "CRITICAL": [],
+    "HIGH": [
+      "CVE-2026-21218"
+    ],
+    "MEDIUM": [],
+    "LOW": []
+  },
+  "cve_releases": {
+    "CVE-2026-21218": [
+      "8.0",
+      "9.0",
+      "10.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2026-21218": [
+      "runtime@9e1f70e",
+      "runtime@6abb139",
+      "dotnet@02d5bc6"
+    ]
+  }
+}

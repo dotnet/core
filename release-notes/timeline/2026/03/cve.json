@@ -1,0 +1,321 @@
+{
+  "last_updated": "2026-03-10",
+  "title": ".NET Security Updates for March 2026 (2026-03-10)",
+  "disclosures": [
+    {
+      "id": "CVE-2026-26130",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "description": [
+        "Allocation of resources without limits or throttling in ASP.NET Core allows an unauthorized attacker to deny service over a network."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-03-10",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-03-10",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/385"
+      ],
+      "weakness": "CWE-770",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Denial of Service",
+        "acknowledgments": [
+          "Bartłomiej Dach"
+        ]
+      }
+    },
+    {
+      "id": "CVE-2026-26127",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "Out-of-bounds read in .NET allows an unauthorized attacker to deny service over a network."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-03-10",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-03-10",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/384"
+      ],
+      "weakness": "CWE-125",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Denial of Service"
+      }
+    },
+    {
+      "id": "CVE-2026-26131",
+      "problem": ".NET Elevation of Privilege Vulnerability",
+      "description": [
+        "Incorrect default permissions in .NET allows an authorized attacker to elevate privileges locally."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.8,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-03-10",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-03-10",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "linux"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/386"
+      ],
+      "weakness": "CWE-276",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": [
+          "Igor Kovalchuk"
+        ],
+        "faq": [
+          {
+            "question": "What privileges could be gained by an attacker who successfully exploited this vulnerability?",
+            "answer": "An attacker who successfully exploited this vulnerability could gain the highest privileges on the system."
+          }
+        ]
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2026-26130",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.24",
+      "fixed": "8.0.25",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@d663515"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-26130",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.13",
+      "fixed": "9.0.14",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@ccb435d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-26130",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.3",
+      "fixed": "10.0.4",
+      "release": "10.0",
+      "commits": [
+        "dotnet@06833e0"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-26127",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.13",
+      "fixed": "9.0.14",
+      "release": "9.0",
+      "commits": [
+        "runtime@19c0782"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-26127",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.3",
+      "fixed": "10.0.4",
+      "release": "10.0",
+      "commits": [
+        "dotnet@80d3e14"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-26131",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.3",
+      "fixed": "10.0.4",
+      "release": "10.0",
+      "commits": []
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2026-26127",
+      "name": "Microsoft.Bcl.Memory",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.13",
+      "fixed": "9.0.14",
+      "release": "9.0"
+    },
+    {
+      "cve_id": "CVE-2026-26127",
+      "name": "Microsoft.Bcl.Memory",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.3",
+      "fixed": "10.0.4",
+      "release": "10.0"
+    }
+  ],
+  "commits": {
+    "aspnetcore@d663515": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "d6635154cc824fe159a31a949c9db37fdaec90aa",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/d6635154cc824fe159a31a949c9db37fdaec90aa.diff"
+    },
+    "aspnetcore@ccb435d": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "ccb435d137e842fe5013a1175cf0bd1a120213af",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/ccb435d137e842fe5013a1175cf0bd1a120213af.diff"
+    },
+    "dotnet@06833e0": {
+      "repo": "dotnet",
+      "branch": "release/10.0",
+      "hash": "06833e01cbb7b59f2b43475c6dcd5433d2272b0d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/06833e01cbb7b59f2b43475c6dcd5433d2272b0d.diff"
+    },
+    "runtime@19c0782": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "19c07820cb72aafc554c3bc8fe3c54010f5123f0",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/19c07820cb72aafc554c3bc8fe3c54010f5123f0.diff"
+    },
+    "dotnet@80d3e14": {
+      "repo": "dotnet",
+      "branch": "release/10.0",
+      "hash": "80d3e14f5e08b4888f464e3cd0d0b2445b63ec46",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/80d3e14f5e08b4888f464e3cd0d0b2445b63ec46.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-aspnetcore": "ASP.NET Core Runtime",
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-aspnetcore": [
+      "CVE-2026-26130"
+    ],
+    "dotnet-runtime": [
+      "CVE-2026-26127",
+      "CVE-2026-26131"
+    ]
+  },
+  "package_cves": {
+    "Microsoft.Bcl.Memory": [
+      "CVE-2026-26127"
+    ]
+  },
+  "release_cves": {
+    "8.0": [
+      "CVE-2026-26130"
+    ],
+    "9.0": [
+      "CVE-2026-26127",
+      "CVE-2026-26130"
+    ],
+    "10.0": [
+      "CVE-2026-26127",
+      "CVE-2026-26130",
+      "CVE-2026-26131"
+    ]
+  },
+  "severity_cves": {
+    "CRITICAL": [],
+    "HIGH": [
+      "CVE-2026-26127",
+      "CVE-2026-26130",
+      "CVE-2026-26131"
+    ],
+    "MEDIUM": [],
+    "LOW": []
+  },
+  "cve_releases": {
+    "CVE-2026-26127": [
+      "9.0",
+      "10.0"
+    ],
+    "CVE-2026-26130": [
+      "8.0",
+      "9.0",
+      "10.0"
+    ],
+    "CVE-2026-26131": [
+      "10.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2026-26127": [
+      "runtime@19c0782",
+      "dotnet@80d3e14"
+    ],
+    "CVE-2026-26130": [
+      "aspnetcore@d663515",
+      "aspnetcore@ccb435d",
+      "dotnet@06833e0"
+    ],
+    "CVE-2026-26131": []
+  }
+}
