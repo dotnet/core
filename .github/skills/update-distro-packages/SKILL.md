@@ -399,18 +399,22 @@ Show the user a summary of which distros+releases have packages and from which f
 
 ### Regenerate markdown
 
-After any JSON changes, regenerate the markdown:
+After any JSON changes, regenerate both markdown files:
 
 ```bash
 dotnet-release generate dotnet-dependencies {version} release-notes
+dotnet-release generate dotnet-packages {version} release-notes
 ```
 
-> **Important:** Do not hand-edit `dotnet-dependencies.md`. It is generated from the distros/ JSON files. If the output needs to change, update the generator or template in [dotnet-release](https://github.com/richlander/dotnet-release).
+- `dotnet-dependencies.md` — what OS packages .NET requires (from dependency data)
+- `dotnet-packages.md` — where to get .NET packages (from `dotnet_packages` / `dotnet_packages_other` data)
+
+> **Important:** Do not hand-edit these markdown files. They are generated from the distros/ JSON files. If the output needs to change, update the generator or template in [dotnet-release](https://github.com/richlander/dotnet-release).
 
 ### Commit
 
 ```bash
-git add release-notes/{version}/distros/ release-notes/{version}/dotnet-dependencies.md
+git add release-notes/{version}/distros/ release-notes/{version}/dotnet-dependencies.md release-notes/{version}/dotnet-packages.md
 git commit -m "Update {version} distro packages — <summary>"
 ```
 
