@@ -339,7 +339,31 @@ Then `ubuntu.json` release 24.04 becomes:
 
 Not all distros appear in the query results (e.g. RHEL packages are in a subscription-only repo). Leave `dotnet_packages` absent for those — do not add an empty list.
 
-#### 5. Present summary
+#### 5. Query distro package lists directly
+
+pkgs.org may not have data for newly released distro versions yet. When a supported distro release is missing from the query results, check the distro's own package list as a fallback.
+
+**Ubuntu** — query `packages.ubuntu.com` for the release codename:
+
+```bash
+curl -s "https://packages.ubuntu.com/{codename}/allpackages?format=txt.gz" \
+  | gunzip | grep -i "dotnet.*{major}"
+curl -s "https://packages.ubuntu.com/{codename}/allpackages?format=txt.gz" \
+  | gunzip | grep -i "aspnetcore.*{major}"
+```
+
+For example, to check Ubuntu 26.04 (codename `resolute`) for .NET 10:
+
+```bash
+curl -s "https://packages.ubuntu.com/resolute/allpackages?format=txt.gz" \
+  | gunzip | grep -iE "(dotnet|aspnetcore).*10"
+```
+
+If the packages are found (e.g. `dotnet-sdk-10.0`, `dotnet-runtime-10.0`, `aspnetcore-runtime-10.0` in the `universe` component), add them as `dotnet_packages` for that release.
+
+**Other distros** — similar direct queries may be possible (e.g. Alpine `pkgs.alpinelinux.org`, Fedora `packages.fedoraproject.org`), but pkgs.org generally covers these well. Only fall back to direct queries when pkgs.org is missing data for a release you expect to have packages.
+
+#### 6. Present summary
 
 Show the user a summary of which distros+releases have packages and from which feeds, and flag any gaps (supported distro but no packages found).
 
