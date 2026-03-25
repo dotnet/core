@@ -76,6 +76,20 @@
           "id": "tzdata",
           "name": "tzdata"
         }
+      ],
+      "dotnet_packages": [
+        {
+          "component": "sdk",
+          "name": "dotnet-sdk-10.0"
+        },
+        {
+          "component": "runtime",
+          "name": "dotnet-runtime-10.0"
+        },
+        {
+          "component": "aspnetcore-runtime",
+          "name": "aspnetcore-runtime-10.0"
+        }
       ]
     },
     {
@@ -113,6 +127,20 @@
         {
           "id": "tzdata",
           "name": "tzdata"
+        }
+      ],
+      "dotnet_packages": [
+        {
+          "component": "sdk",
+          "name": "dotnet-sdk-10.0"
+        },
+        {
+          "component": "runtime",
+          "name": "dotnet-runtime-10.0"
+        },
+        {
+          "component": "aspnetcore-runtime",
+          "name": "aspnetcore-runtime-10.0"
         }
       ]
     },
@@ -152,7 +180,25 @@
           "id": "tzdata",
           "name": "tzdata"
         }
-      ]
+      ],
+      "dotnet_packages_other": {
+        "backports": {
+          "packages": [
+            {
+              "component": "sdk",
+              "name": "dotnet-sdk-10.0"
+            },
+            {
+              "component": "runtime",
+              "name": "dotnet-runtime-10.0"
+            },
+            {
+              "component": "aspnetcore-runtime",
+              "name": "dotnet-aspnetcore-runtime-10.0"
+            }
+          ]
+        }
+      }
     }
   ]
 }
