@@ -34,10 +34,25 @@ release-notes/{version}/distros/
 
 ## Prerequisites
 
-The `dotnet-release` tool must be installed for package availability queries (optional). Dependency-only updates do not require the tool.
+The `dotnet-release` tool must be installed for markdown generation and package availability queries.
+
+```bash
+# Check if already installed
+dotnet-release --version
+```
+
+If not installed:
 
 ```bash
 dotnet tool install -g Dotnet.Release.Tools \
+  --add-source https://nuget.pkg.github.com/richlander/index.json \
+  --version "0.*"
+```
+
+If already installed, update to latest:
+
+```bash
+dotnet tool update -g Dotnet.Release.Tools \
   --add-source https://nuget.pkg.github.com/richlander/index.json \
   --version "0.*"
 ```
