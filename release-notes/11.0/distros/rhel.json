@@ -1,0 +1,120 @@
+{
+  "name": "RHEL",
+  "install_command": "dnf install -y {packages}",
+  "releases": [
+    {
+      "name": "RHEL 10",
+      "release": "10",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5-libs"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++"
+        },
+        {
+          "id": "openssl",
+          "name": "openssl-libs"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    },
+    {
+      "name": "RHEL 9",
+      "release": "9",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5-libs"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++"
+        },
+        {
+          "id": "openssl",
+          "name": "openssl-libs"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    },
+    {
+      "name": "RHEL 8",
+      "release": "8",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5-libs"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++"
+        },
+        {
+          "id": "openssl",
+          "name": "openssl-libs"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    }
+  ]
+}

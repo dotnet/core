@@ -1,0 +1,82 @@
+{
+  "name": "Fedora",
+  "install_command": "dnf install -y {packages}",
+  "releases": [
+    {
+      "name": "Fedora 43",
+      "release": "43",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5-libs"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++"
+        },
+        {
+          "id": "openssl",
+          "name": "openssl-libs"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    },
+    {
+      "name": "Fedora 42",
+      "release": "42",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5-libs"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++"
+        },
+        {
+          "id": "openssl",
+          "name": "openssl-libs"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    }
+  ]
+}

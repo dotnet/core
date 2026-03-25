@@ -1,28 +1,35 @@
-# .NET 11.0 Required Packages
+# .NET 11.0 Linux package dependencies
 
-Various packages must be installed to run .NET apps and the .NET SDK on some operating systems. This is handled automatically if .NET is [installed through archive packages](../../linux.md).
+.NET 11.0 has several dependencies that must be installed to run .NET apps. The install commands for each supported Linux distribution are listed below.
 
-## Package Overview
+Tips:
 
-| Id           | Name      | Required scenarios | Notes                                                       |
-| ------------ | --------- | ------------------ | ----------------------------------------------------------- |
-| [libc][0]    | C Library | All                | <https://github.com/dotnet/core/blob/main/release-notes/11.0/supported-os.md#linux-compatibility> ; <https://www.gnu.org/software/libc/libc.html> ; <https://musl.libc.org/> |
-| [libgcc][1]  | GCC low-level runtime library | All | <https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html>    |
-| [ca-certificates][2] | CA Certificates | Https | <https://www.redhat.com/sysadmin/ca-certificates-cli>      |
-| [openssl][3] | OpenSSL   | Https ; Cryptography | Minimum required version 1.1.1 ; <https://www.openssl.org/> |
-| [libstdc++][4] | C++ Library | Runtime        | <https://gcc.gnu.org/onlinedocs/libstdc++/>                 |
-| [libicu][5]  | ICU       | Globalization      | <https://icu.unicode.org> ; <https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md> |
-| [tzdata][6]  | tz database | Globalization    | <https://data.iana.org/time-zones/tz-link.html>             |
-| [krb5][7]    | Kerberos  | Kerberos           | <https://web.mit.edu/kerberos>                              |
+- [runtime-deps container images](https://github.com/dotnet/dotnet-docker/tree/main/src/runtime-deps) install these same packages.
+- [pkgs.org](https://pkgs.org/) is useful for searching packages across distributions.
 
-[0]: https://pkgs.org/search/?q=libc
-[1]: https://pkgs.org/search/?q=libgcc
-[2]: https://pkgs.org/search/?q=ca-certificates
-[3]: https://pkgs.org/search/?q=openssl
-[4]: https://pkgs.org/search/?q=libstdc++
-[5]: https://pkgs.org/search/?q=libicu
-[6]: https://pkgs.org/search/?q=tzdata
-[7]: https://pkgs.org/search/?q=krb5
+## Packages
+
+- [C Library][0]
+- [GCC low-level runtime library][1]
+- [CA Certificates][2]
+- [OpenSSL][3]
+- [C++ Library][4]
+- [ICU][5]
+- [tz database][6]
+- [Kerberos][7]
+
+You do not need to install ICU if you [enable globalization invariant mode](https://github.com/dotnet/runtime/blob/main/docs/design/features/globalization-invariant-mode.md#enabling-the-invariant-mode).
+
+If your app relies on `https` endpoints, you'll also need to install `ca-certificates`.
+
+[0]: https://github.com/dotnet/core/blob/main/release-notes/11.0/supported-os.md#linux-compatibility
+[1]: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+[2]: https://www.redhat.com/sysadmin/ca-certificates-cli
+[3]: https://www.openssl.org/
+[4]: https://gcc.gnu.org/onlinedocs/libstdc++/
+[5]: https://icu.unicode.org
+[6]: https://data.iana.org/time-zones/tz-link.html
+[7]: https://web.mit.edu/kerberos
 
 ## Alpine
 
@@ -365,7 +372,3 @@ sudo apt-get install -y \
     libstdc++6 \
     tzdata
 ```
-
-## About
-
-This file is generated from [os-packages.json](os-packages.json).

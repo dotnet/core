@@ -1,0 +1,20 @@
+{
+  "name": "FreeBSD",
+  "install_command": "pkg install -A {packages}",
+  "releases": [
+    {
+      "name": "FreeBSD 14.1",
+      "release": "14.1",
+      "dependencies": [
+        {
+          "id": "krb5",
+          "name": "krb5"
+        },
+        {
+          "id": "libicu",
+          "name": "icu"
+        }
+      ]
+    }
+  ]
+}
