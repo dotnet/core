@@ -361,7 +361,37 @@ curl -s "https://packages.ubuntu.com/resolute/allpackages?format=txt.gz" \
 
 If the packages are found (e.g. `dotnet-sdk-10.0`, `dotnet-runtime-10.0`, `aspnetcore-runtime-10.0` in the `universe` component), add them as `dotnet_packages` for that release.
 
-**Other distros** — similar direct queries may be possible (e.g. Alpine `pkgs.alpinelinux.org`, Fedora `packages.fedoraproject.org`), but pkgs.org generally covers these well. Only fall back to direct queries when pkgs.org is missing data for a release you expect to have packages.
+**Fedora** — query the Bodhi update system and source RPM spec:
+
+```bash
+# Check which Fedora releases have dotnet builds
+curl -s "https://bodhi.fedoraproject.org/updates/?packages=dotnet{major}.{minor}&rows_per_page=20" \
+  | python3 -c "
+import sys, json
+for u in json.load(sys.stdin).get('updates', []):
+    print(f\"{u['release']['name']}: {u['title']} ({u['status']})\")"
+```
+
+For example, to check .NET 10.0:
+
+```bash
+curl -s "https://bodhi.fedoraproject.org/updates/?packages=dotnet10.0&rows_per_page=20" \
+  | python3 -c "
+import sys, json
+for u in json.load(sys.stdin).get('updates', []):
+    print(f\"{u['release']['name']}: {u['title']} ({u['status']})\")"
+```
+
+Results show each Fedora release with its build status (e.g. `F44: dotnet10.0-10.0.104-1.fc44 (testing)`). To confirm the subpackage names, check the spec file:
+
+```bash
+curl -s "https://src.fedoraproject.org/rpms/dotnet{major}.{minor}/blob/f{release}/f/dotnet{major}.{minor}.spec" \
+  | grep -E "^%package|^Name:"
+```
+
+Fedora packages follow a consistent naming scheme (`dotnet-sdk-{major}.{minor}`, `dotnet-runtime-{major}.{minor}`, `aspnetcore-runtime-{major}.{minor}`), so this is mainly a confirmation step.
+
+**Other distros** — Alpine packages can be checked at `pkgs.alpinelinux.org`. For most other distros, pkgs.org covers them well. Only fall back to direct queries when pkgs.org is missing data for a release you expect to have packages.
 
 #### 6. Present summary
 
