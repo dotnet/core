@@ -186,6 +186,14 @@ For each distribution in `os-packages.json`:
 - **`releases`**: One entry per distro release, with `dependencies` sorted alphabetically by `id`
 - **Do NOT include** `dotnet_packages` or `dotnet_packages_other` — those are populated separately
 
+The scope of distros/ is broader than `supported-os.json`. Include pre-release distro versions and permanent rolling channels where the package information is helpful:
+
+- **Alpine edge** — always include; it tracks the rolling release
+- **Debian sid (Unstable)** — always include
+- **Pre-release distro versions** — e.g. Fedora beta, Ubuntu interim release before GA
+
+These are informational — their presence does not imply official .NET support.
+
 #### 4. Create index.json
 
 List all per-distro file names alphabetically.
