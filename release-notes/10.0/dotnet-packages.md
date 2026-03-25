@@ -6,7 +6,7 @@
 | ------------ | ------- | ---- |
 | Alpine       | Alpine edge | Built-in |
 | Alpine       | Alpine 3.23 | Built-in |
-| Arch Linux   | Arch Linux (rolling) | Built-in, Aur |
+| Arch Linux   | Arch Linux (rolling) | Built-in, AUR |
 | CentOS Stream | CentOS Stream 10 | Built-in |
 | CentOS Stream | CentOS Stream 9 | Built-in |
 | Fedora       | Fedora 44 | Built-in |
@@ -52,7 +52,7 @@ sudo pacman -S \
     dotnet-sdk
 ```
 
-**Aur:**
+**AUR:**
 
 Register the feed:
 
