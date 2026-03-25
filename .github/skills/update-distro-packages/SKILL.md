@@ -456,3 +456,21 @@ If the query returns a feed name not listed above, ask the user for the registra
 - Debian/Ubuntu/Fedora use: `dotnet-sdk-{major}.{minor}`, `dotnet-runtime-{major}.{minor}`
 - Microsoft is phasing out packages.microsoft.com for Ubuntu 24.04+ and newer Fedora
 - `install_command` uses `{packages}` as a placeholder for the package list
+
+## Display name rules
+
+The `name` fields (both top-level distro name and per-release names) must use full display names, **never acronyms**. These names appear in generated markdown and user-facing documentation.
+
+| ❌ Acronym | ✅ Full display name |
+|-----------|----------------------|
+| RHEL | Red Hat Enterprise Linux |
+| SLES | SUSE Linux Enterprise Server |
+
+**Examples:**
+
+- Top-level: `"name": "Red Hat Enterprise Linux"` (not `"RHEL"`)
+- Release: `"name": "Red Hat Enterprise Linux 9"` (not `"RHEL 9"`)
+- Top-level: `"name": "SUSE Linux Enterprise Server"` (not `"SLES"`)
+- Release: `"name": "SUSE Linux Enterprise Server 15.7"` (not `"SLES 15.7"`)
+
+File names (`rhel.json`, `sles.json`) remain short — only the `name` fields inside must use full names. When creating new distro files or adding releases, always verify the display name is the full product name, not an abbreviation.
