@@ -133,7 +133,7 @@ Scoped to the .NET version of the parent directory. No `dotnet_versions` field �
 }
 ```
 
-Optional fields (populated by package availability queries):
+Optional fields on each release (populated by package availability queries):
 
 ```json
 {
@@ -143,7 +143,7 @@ Optional fields (populated by package availability queries):
   ],
   "dotnet_packages_other": {
     "backports": {
-      "install_command": "# See Ubuntu backports documentation",
+      "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
       "packages": [
         { "component": "sdk", "name": "dotnet-sdk-11.0" }
       ]
@@ -151,6 +151,8 @@ Optional fields (populated by package availability queries):
   }
 }
 ```
+
+The `install_command` in `dotnet_packages_other` is the command to **register the feed** — it must be run before packages can be installed with the distro's normal install command. This field is required for every alternative feed entry. See [Known alternative feed commands](#known-alternative-feed-commands) for values.
 
 ## Process
 
@@ -297,6 +299,8 @@ Field mapping from query → per-distro file:
 | `component_id` | `component` |
 | `package_name` | `name` |
 
+Every `dotnet_packages_other` entry **must** include an `install_command` — the command to register that feed before packages can be installed. See [Known alternative feed commands](#known-alternative-feed-commands) for the values to use.
+
 Example — if the query returns this for Ubuntu 24.04:
 
 ```json
@@ -322,7 +326,7 @@ Then `ubuntu.json` release 24.04 becomes:
   ],
   "dotnet_packages_other": {
     "backports": {
-      "install_command": "# See Ubuntu backports PPA documentation",
+      "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
       "packages": [
         { "component": "sdk", "name": "dotnet-sdk-10.0" }
       ]
@@ -355,6 +359,34 @@ dotnet-release generate dotnet-dependencies {version} release-notes
 git add release-notes/{version}/distros/ release-notes/{version}/dotnet-dependencies.md
 git commit -m "Update {version} distro packages — <summary>"
 ```
+
+## Known alternative feed commands
+
+When packages come from a non-builtin feed, the `install_command` field tells users how to register that feed before installing packages. Use the exact commands below.
+
+### Ubuntu backports PPA
+
+Feed name: `backports`
+
+```
+sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
+```
+
+This PPA provides .NET packages for older Ubuntu LTS releases that don't carry .NET in the default archive. After registering, packages are installed with the normal `apt-get install` command.
+
+### Microsoft packages.microsoft.com (PMC)
+
+Feed name: `microsoft`
+
+```
+wget https://packages.microsoft.com/config/{distro}/{version}/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb && sudo dpkg -i /tmp/packages-microsoft-prod.deb && rm /tmp/packages-microsoft-prod.deb
+```
+
+Replace `{distro}` and `{version}` with the distro name and version (e.g. `ubuntu/22.04`, `debian/12`). Note: Microsoft is phasing out PMC for Ubuntu 24.04+ — prefer the builtin or backports feed when available.
+
+### Other feeds
+
+If the query returns a feed name not listed above, ask the user for the registration command. Do not guess — incorrect feed setup commands are worse than none.
 
 ## Key facts
 
