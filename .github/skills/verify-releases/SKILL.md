@@ -1,13 +1,14 @@
 ---
 name: verify-releases
 description: >
-  Verify release data integrity: URL liveness, file hashes, CDN latest.version
-  files, and aka.ms redirect targets. Uses dotnet-release verify and generate
-  commands against the local release-notes directory.
-  USE FOR: validating that all download links return HTTP 200, verifying SHA512
-  hashes match downloaded content, checking CDN latest.version files match
-  releases.json, checking aka.ms redirects point to the correct download URLs,
-  regenerating releases-index.json and releases.md after source data changes.
+  Validate releases and release links: URL liveness, file hashes, CDN
+  latest.version files, and aka.ms redirect targets. Uses dotnet-release verify
+  and generate commands against the local release-notes directory.
+  USE FOR: validate the latest release, validate release links, validating that
+  all download links return HTTP 200, verifying SHA512 hashes match downloaded
+  content, checking CDN latest.version files match releases.json, checking
+  aka.ms redirects point to the correct download URLs, regenerating
+  releases-index.json and releases.md after source data changes.
   DO NOT USE FOR: editing releases.json or release.json (edit source data
   directly), graph regeneration (use update-release-graph skill), supported-os
   changes (use update-supported-os skill).
