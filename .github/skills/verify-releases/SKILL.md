@@ -26,17 +26,23 @@ Validate the integrity of release data in `release-notes/`. This skill checks th
 - Periodic validation that CDN state matches repository data
 - After regenerating the release graph to verify link consistency
 
-## Prerequisites
+## Setup — MUST DO FIRST
 
-### dotnet-release tool
+Before running any commands, install or update the tool. **Do not skip this step.** The `verify releases`, `generate releases-index`, and `generate releases` commands require the latest version.
 
 ```bash
-dotnet tool install -g Dotnet.Release.Tools \
+dotnet tool update -g Dotnet.Release.Tools \
   --add-source https://nuget.pkg.github.com/richlander/index.json \
   --version "0.*"
 ```
 
-Or run from source:
+Then verify the tool has the required commands:
+
+```bash
+dotnet-release 2>&1 | grep -q "verify releases" && echo "✅ Ready" || echo "❌ Tool is outdated — re-run the install command above"
+```
+
+If the install fails or the tool is still outdated, run from source as a fallback:
 
 ```bash
 cd ~/git/dotnet-release
@@ -142,7 +148,11 @@ If `downloads/*.json` files are not present (older versions), this check is sile
 
 ## Process — Verify after a new patch release
 
-### 1. Quick validation (skip hashes)
+### 1. Install/update the tool
+
+Follow the [Setup](#setup--must-do-first) section above. Confirm `dotnet-release` has the `verify releases` command before proceeding.
+
+### 2. Quick validation (skip hashes)
 
 ```bash
 dotnet-release verify releases 10.0 release-notes --skip-hash
@@ -150,7 +160,7 @@ dotnet-release verify releases 10.0 release-notes --skip-hash
 
 Review any broken links or redirect mismatches. Fix source data if needed.
 
-### 2. Full validation (with hashes)
+### 3. Full validation (with hashes)
 
 ```bash
 dotnet-release verify releases 10.0 release-notes
@@ -158,14 +168,14 @@ dotnet-release verify releases 10.0 release-notes
 
 This downloads every file to verify SHA512 hashes. Can take several minutes per version.
 
-### 3. Regenerate derived files
+### 4. Regenerate derived files
 
 ```bash
 dotnet-release generate releases-index release-notes
 dotnet-release generate releases release-notes
 ```
 
-### 4. Commit
+### 5. Commit
 
 ```bash
 git add release-notes/releases-index.json release-notes/releases.md
