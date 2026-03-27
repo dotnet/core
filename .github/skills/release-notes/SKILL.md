@@ -14,6 +14,10 @@ Generate and maintain release notes for .NET preview, RC, and GA releases.
 2. The agent reads `changes.json` and writes curated markdown release notes for high-value features
 3. Output is one PR per release milestone in dotnet/core, maintained incrementally
 
+## Design
+
+- [DESIGN.md](DESIGN.md) — architecture, rationale, and how all the pieces connect
+
 ## Reference documents
 
 - [quality-bar.md](references/quality-bar.md) — what good release notes look like
