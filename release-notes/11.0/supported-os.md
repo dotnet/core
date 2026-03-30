@@ -1,8 +1,8 @@
 # .NET 11.0 - Supported OS versions
 
-Last Updated: 2026/03/23; Support phase: Unknown
+Last Updated: 2026/03/23; Support phase: Preview
 
-[.NET 11.0](README.md) is an [Unknown](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
+[.NET 11.0](README.md) is an [STS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 ## Android
 
