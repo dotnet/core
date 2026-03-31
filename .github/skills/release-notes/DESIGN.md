@@ -120,19 +120,24 @@ These are **goal-oriented**, not procedural. They describe what good release not
 
 A [GitHub Agentic Workflow](https://github.github.com/gh-aw/) defined in `.github/workflows/release-notes.md`. It runs on a daily cron schedule and manages the full lifecycle:
 
-### Branch lifecycle
+### Milestone detection
 
-The workflow detects preview milestones by checking the VMR (`dotnet/dotnet`) for:
+The workflow determines which milestone needs release notes using three data sources:
 
-- Release branches: `release/{major}.0.1xx-preview{N}`
-- Release tags: `v{major}.0.0-preview.{N}.{build}`
-- Release-PR branches: `release-pr-*` (signals an imminent release)
+1. **`releases.json`** (this repo) — the list of shipped releases. The latest entry tells you the most recently shipped preview and provides the baseline.
+2. **`eng/Versions.props`** (VMR `main` branch) — `PreReleaseVersionIteration` tells you which milestone `main` is currently building.
+3. **VMR tags** — `v{major}.0.0-preview.{N}.{build}` tags identify the exact commit that shipped each preview, providing the `--base` ref for generating diffs.
 
-For each detected milestone:
+The decision is deterministic: if the iteration on `main` is ahead of the latest shipped release, that's the target milestone. If they match, there's nothing new to do.
+
+### PR lifecycle
+
+For the target milestone:
 
 1. **No PR exists** → create branch, run tool, write initial drafts, open draft PR
 2. **PR exists, source changed** → regenerate `changes.json`, add/update markdown sections
 3. **PR exists, human edited** → preserve human edits, only touch untouched sections
+4. **Milestone just shipped** (new tag appeared) → final regeneration with `--head <tag>` for exact shipped content
 
 ### Safe outputs
 

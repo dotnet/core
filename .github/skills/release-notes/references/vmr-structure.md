@@ -79,23 +79,41 @@ Code flows between component repos and the VMR via automated PRs:
 
 Codeflow PRs come from `dotnet-maestro[bot]` with titles like `[{branch}] Source code updates from dotnet/{repo}`. The `github-merge-flow.jsonc` files in some components define the merge chain (e.g., `release/10.0.1xx → release/10.0.2xx → release/10.0.3xx → main`).
 
-## Finding the previous release tag
+## Finding the base tag
 
-To determine what's new in a preview, you need the previous release's VMR tag. Find it by reading the previous preview's `release.json` in this repo:
+To determine what's new in a preview, you need the previous release's VMR tag as the `--base` ref. Two reliable methods:
 
-```text
-release-notes/{major}.0/preview/{previous-preview}/release.json
-→ .release.runtime.version  (e.g., "11.0.0-preview.2.26159.112")
+### Method 1: From VMR tags (preferred)
+
+List tags and find the latest one for the shipped iteration:
+
+```bash
+git tag -l 'v11.0.0-preview.*' --sort=-v:refname | head -5
+# → v11.0.0-preview.2.26159.112  ← base tag for preview 3
+# → v11.0.0-preview.1.26104.118
 ```
 
-Map that version to a VMR tag: `v11.0.0-preview.2.26159.112`.
+### Method 2: From releases.json
 
-## Version metadata
+Read the runtime version from `releases.json` and map to a tag:
 
-The VMR's `eng/Versions.props` tracks the current version:
+```bash
+jq -r '.releases[0].runtime.version' release-notes/11.0/releases.json
+# → 11.0.0-preview.2.26159.112  → tag: v11.0.0-preview.2.26159.112
+```
 
-- `PreReleaseVersionLabel` — e.g., `preview`
-- `PreReleaseVersionIteration` — e.g., `3` (for preview 3)
+## Version metadata — milestone detection
+
+The VMR's `eng/Versions.props` on `main` tracks the current development milestone:
+
+```xml
+<PreReleaseVersionLabel>preview</PreReleaseVersionLabel>
+<PreReleaseVersionIteration>3</PreReleaseVersionIteration>
+```
+
+This tells you that `main` is currently building **preview.3**. Combined with `releases.json` (which tracks what has shipped) and VMR tags (which provide base refs), this gives a deterministic signal for which milestone needs release notes.
+
+**Key insight**: when a preview ships, a tag is created. Then `main`'s `PreReleaseVersionIteration` is bumped to the next number. So comparing the iteration against the latest shipped release always tells you the current target.
 
 ## What's NOT in the VMR
 

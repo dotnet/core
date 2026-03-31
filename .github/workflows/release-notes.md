@@ -72,32 +72,83 @@ Read these files from `.github/skills/release-notes/references/` for detailed gu
 
 ## What to do each run
 
-### 1. Detect active milestones
+### 1. Determine the target milestone
 
-Check the VMR (`dotnet/dotnet`) for the current development train. Look for:
+Use three data sources to deterministically identify which milestone needs release notes.
 
-- Release branches: `release/{major}.0.1xx-{label}` (e.g., `release/11.0.1xx-preview3`)
-- Release tags: `v{major}.0.0-{label}.{build}` (e.g., `v11.0.0-preview.3.26168.106`)
-- Release-PR branches: `release-pr-{major}.0.100-{label}.{build}` (signals an imminent release)
+#### a. What has shipped (this repo)
 
-Determine which milestone(s) need release notes by comparing against open PRs in this repo with the `[release-notes]` title prefix.
+Read `releases.json` to get the latest shipped release:
 
-### 2. Generate changes.json
+```bash
+jq -r '.releases[0] | "\(.["release-version"]) \(.["release-date"])"' release-notes/11.0/releases.json
+# → "11.0.0-preview.2 2026-03-10"
+```
 
-For each milestone that needs work, clone the VMR and run `dotnet-release generate changes`:
+Extract the shipped preview number: `preview.2` → iteration `2`.
+
+#### b. What's being developed (VMR)
+
+Clone the VMR (or reuse a cached clone) and read `eng/Versions.props` on `main`:
 
 ```bash
 git clone --filter=blob:none https://github.com/dotnet/dotnet /tmp/dotnet
-
-dotnet-release generate changes /tmp/dotnet \
-  --base <previous-release-tag> \
-  --head <current-release-ref> \
-  --version "<release-version>" \
-  --labels \
-  --output release-notes/{major}.0/preview/{previewN}/changes.json
+git -C /tmp/dotnet show main:eng/Versions.props | grep -E 'PreReleaseVersionLabel|PreReleaseVersionIteration'
+# → <PreReleaseVersionLabel>preview</PreReleaseVersionLabel>
+# → <PreReleaseVersionIteration>3</PreReleaseVersionIteration>
 ```
 
-Find the previous release tag by reading `release-notes/{major}.0/preview/{previous}/release.json` → `.release.runtime.version` and mapping to a VMR tag (`v{version}`).
+This tells you the milestone that `main` is currently building: **preview.3**.
+
+#### c. Find the base tag (VMR tags)
+
+List VMR tags to find the tag for the latest shipped release:
+
+```bash
+git -C /tmp/dotnet tag -l 'v11.0.0-preview.*' --sort=-v:refname
+# → v11.0.0-preview.2.26159.112
+# → v11.0.0-preview.1.26104.118
+```
+
+The first tag matching the shipped iteration (preview.2) is the `--base` ref.
+
+#### d. Decision logic
+
+```text
+current_iteration = PreReleaseVersionIteration from Versions.props
+latest_shipped    = latest preview number from releases.json
+
+If current_iteration > latest_shipped:
+  → Target: preview.{current_iteration}
+  → Base ref: VMR tag for latest shipped (e.g., v11.0.0-preview.2.26159.112)
+  → Head ref: main
+  → Action: create or update release notes
+
+If current_iteration == latest_shipped:
+  → The current milestone just shipped and main hasn't been bumped yet.
+  → No new milestone to target. Exit.
+```
+
+When the target milestone has just shipped (a new tag appeared since the last run), do a final regeneration using `--head <tag>` instead of `--head main` to capture the exact shipped content.
+
+### 2. Generate changes.json
+
+Using the base tag and head ref determined in step 1:
+
+```bash
+dotnet-release generate changes /tmp/dotnet \
+  --base v11.0.0-preview.2.26159.112 \
+  --head main \
+  --version "11.0.0-preview.3" \
+  --labels \
+  --output release-notes/11.0/preview/preview3/changes.json
+```
+
+Create the output directory if it doesn't exist:
+
+```bash
+mkdir -p release-notes/11.0/preview/preview3
+```
 
 ### 3. Write or update markdown release notes
 
