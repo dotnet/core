@@ -103,7 +103,7 @@ Find the previous release tag by reading `release-notes/{major}.0/preview/{previ
 
 Using `changes.json` as your input:
 
-- Group changes by repo (the `repo` field maps to output files via component-mapping.md)
+- Group changes by product (the `product` field maps to output files via component-mapping.md)
 - For each component with changes, identify which PRs are worth writing about
 - Write feature descriptions following format-template.md and editorial-rules.md
 - For components with no noteworthy changes, produce a minimal stub

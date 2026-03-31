@@ -62,9 +62,10 @@ dotnet-release generate changes <vmr-clone-path> \
 1. **Reads `src/source-manifest.json`** at both refs via local git — this is the VMR bill of materials listing every component repo with its exact commit SHA
 2. **Diffs the manifests** to identify which components changed and their commit ranges
 3. **Queries GitHub compare API** for each changed component to enumerate merged PRs in the commit range
-4. **Fetches PR labels** when `--labels` is provided (useful for agent categorization)
-5. **Cross-references CVEs** when `--cve-repo` is provided (loads `cve.json` from the `release-index` branch)
-6. **Outputs `changes.json`** following the [changes schema](references/changes-schema.md)
+4. **Maps repos to product slugs** using a built-in taxonomy (e.g., `runtime` → `dotnet-runtime`; infra repos get no product)
+5. **Fetches PR labels** when `--labels` is provided (useful for agent categorization)
+6. **Cross-references CVEs** when `--cve-repo` is provided (loads `cve.json` from the `release-index` branch)
+7. **Outputs `changes.json`** following the [changes schema](references/changes-schema.md)
 
 ### What the tool does NOT do
 

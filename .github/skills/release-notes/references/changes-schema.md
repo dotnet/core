@@ -32,13 +32,14 @@ release-notes/{major.minor}/{major.minor.patch}/changes.json   # patches
 | ----- | ---- | ----------- |
 | `id` | int | GitHub PR number; `0` if no public PR |
 | `repo` | string | Short repository name (e.g., `"runtime"`) |
+| `product` | string | Product slug (e.g., `"dotnet-runtime"`); `""` for infra repos |
 | `title` | string | PR title; `""` if not available |
 | `url` | string | Public GitHub PR URL; `""` if non-public |
 | `commit` | string | Key into top-level `commits{}` dict |
 | `is_security` | bool | `true` if this is a security change |
 | `labels` | array | PR labels (only present when `--labels` is used) |
 
-The `repo` field corresponds to the VMR manifest path. Use the [component mapping](component-mapping.md) to map repos to product areas and output files.
+The `product` field is derived from the repo-level [component mapping](component-mapping.md). Infra repos like `arcade` and `symreader` have an empty product. The `repo` field always matches the VMR manifest path.
 
 ## Commit entry fields (values in `commits{}`)
 
@@ -67,6 +68,7 @@ The `repo` field corresponds to the VMR manifest path. Use the [component mappin
     {
       "id": 112345,
       "repo": "runtime",
+      "product": "dotnet-runtime",
       "title": "Add JsonSerializerOptions.Web preset",
       "url": "https://github.com/dotnet/runtime/pull/112345",
       "commit": "runtime@b2d5fa8",
@@ -75,6 +77,7 @@ The `repo` field corresponds to the VMR manifest path. Use the [component mappin
     {
       "id": 54321,
       "repo": "aspnetcore",
+      "product": "dotnet-aspnetcore",
       "title": "Add MapStaticAssets middleware",
       "url": "https://github.com/dotnet/aspnetcore/pull/54321",
       "commit": "aspnetcore@f45f3c9",
@@ -105,6 +108,9 @@ The `repo` field corresponds to the VMR manifest path. Use the [component mappin
 ```bash
 # All changes
 jq -r '.changes[] | .title' changes.json
+
+# Changes by product
+jq -r '.changes[] | select(.product == "dotnet-runtime") | .title' changes.json
 
 # Changes by repo
 jq -r '.changes[] | select(.repo == "runtime") | .title' changes.json
