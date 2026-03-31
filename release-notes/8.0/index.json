@@ -3,10 +3,10 @@
   "kind": "major",
   "title": ".NET Major Release Index - 8.0",
   "target_framework": "net8.0",
-  "latest_patch": "8.0.23",
-  "latest_patch_date": "2026-01-13T00:00:00\u002B00:00",
-  "latest_security_patch": "8.0.21",
-  "latest_security_patch_date": "2025-10-14T00:00:00\u002B00:00",
+  "latest_patch": "8.0.25",
+  "latest_patch_date": "2026-03-10T00:00:00\u002B00:00",
+  "latest_security_patch": "8.0.25",
+  "latest_security_patch_date": "2026-03-10T00:00:00\u002B00:00",
   "release_type": "lts",
   "support_phase": "active",
   "supported": true,
@@ -21,24 +21,24 @@
       "title": "Downloads - .NET 8.0"
     },
     "latest-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/01/index.json",
-      "title": "Latest month - January 2026"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json",
+      "title": "Latest month - March 2026"
     },
     "latest-patch": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.23/index.json",
-      "title": "Latest patch - 8.0.23"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.25/index.json",
+      "title": "Latest patch - 8.0.25"
     },
     "latest-security-disclosures": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
-      "title": "Latest security disclosures - October 2025"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json",
+      "title": "Latest security disclosures - March 2026"
     },
     "latest-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
-      "title": "Latest security month - October 2025"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json",
+      "title": "Latest security month - March 2026"
     },
     "latest-security-patch": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.21/index.json",
-      "title": "Latest security patch - 8.0.21"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.25/index.json",
+      "title": "Latest security patch - 8.0.25"
     },
     "manifest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/manifest.json",
@@ -47,15 +47,58 @@
     "root": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
       "title": ".NET Release Index"
-    },
-    "latest-cve-json": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/cve.json",
-      "title": "Latest CVE records - October 2025",
-      "type": "application/json"
     }
   },
   "_embedded": {
     "patches": [
+      {
+        "version": "8.0.25",
+        "date": "2026-03-10T00:00:00\u002B00:00",
+        "year": "2026",
+        "month": "03",
+        "security": true,
+        "support_phase": "active",
+        "sdk_version": "8.0.419",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.25/index.json"
+          },
+          "month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json"
+          },
+          "security-disclosures": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/cve.json",
+            "type": "application/json"
+          }
+        }
+      },
+      {
+        "version": "8.0.24",
+        "date": "2026-02-10T00:00:00\u002B00:00",
+        "year": "2026",
+        "month": "02",
+        "security": true,
+        "support_phase": "active",
+        "sdk_version": "8.0.418",
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.24/index.json"
+          },
+          "month": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/02/index.json"
+          },
+          "security-disclosures": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/02/index.json"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/02/cve.json",
+            "type": "application/json"
+          }
+        }
+      },
       {
         "version": "8.0.23",
         "date": "2026-01-13T00:00:00\u002B00:00",
@@ -562,9 +605,9 @@
     ],
     "sdk_feature_bands": [
       {
-        "version": "8.0.417",
+        "version": "8.0.419",
         "band": "8.0.4xx",
-        "date": "2026-01-13T00:00:00-08:00",
+        "date": "2026-03-10T00:00:00-08:00",
         "label": ".NET SDK 8.0.4xx",
         "support_phase": "active",
         "_links": {
@@ -572,10 +615,10 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/downloads/sdk-8.0.4xx.json"
           },
           "month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/01/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json"
           },
           "patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.23/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.25/index.json"
           }
         }
       },
@@ -616,9 +659,9 @@
         }
       },
       {
-        "version": "8.0.123",
+        "version": "8.0.125",
         "band": "8.0.1xx",
-        "date": "2026-01-13T00:00:00-08:00",
+        "date": "2026-03-10T00:00:00-08:00",
         "label": ".NET SDK 8.0.1xx",
         "support_phase": "active",
         "_links": {
@@ -626,10 +669,10 @@
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/downloads/sdk-8.0.1xx.json"
           },
           "month": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/01/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json"
           },
           "patch": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.23/index.json"
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/8.0.25/index.json"
           }
         }
       }
