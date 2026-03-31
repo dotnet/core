@@ -84,13 +84,16 @@ Determine which milestone(s) need release notes by comparing against open PRs in
 
 ### 2. Generate changes.json
 
-For each milestone that needs work, run the `dotnet-release generate changes` tool:
+For each milestone that needs work, clone the VMR and run `dotnet-release generate changes`:
 
 ```bash
-dotnet-release generate changes \
-  --vmr-repo dotnet/dotnet \
-  --base-ref <previous-release-tag> \
-  --target-ref <current-release-ref> \
+git clone --filter=blob:none https://github.com/dotnet/dotnet /tmp/dotnet
+
+dotnet-release generate changes /tmp/dotnet \
+  --base <previous-release-tag> \
+  --head <current-release-ref> \
+  --version "<release-version>" \
+  --labels \
   --output release-notes/{major}.0/preview/{previewN}/changes.json
 ```
 
@@ -100,7 +103,7 @@ Find the previous release tag by reading `release-notes/{major}.0/preview/{previ
 
 Using `changes.json` as your input:
 
-- Group changes by component (the `product` field maps to output files via component-mapping.md)
+- Group changes by repo (the `repo` field maps to output files via component-mapping.md)
 - For each component with changes, identify which PRs are worth writing about
 - Write feature descriptions following format-template.md and editorial-rules.md
 - For components with no noteworthy changes, produce a minimal stub

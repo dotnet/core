@@ -62,10 +62,9 @@ dotnet-release generate changes <vmr-clone-path> \
 1. **Reads `src/source-manifest.json`** at both refs via local git — this is the VMR bill of materials listing every component repo with its exact commit SHA
 2. **Diffs the manifests** to identify which components changed and their commit ranges
 3. **Queries GitHub compare API** for each changed component to enumerate merged PRs in the commit range
-4. **Maps components to product slugs** using a built-in taxonomy (e.g., `runtime` → `dotnet-runtime`)
+4. **Fetches PR labels** when `--labels` is provided (useful for agent categorization)
 5. **Cross-references CVEs** when `--cve-repo` is provided (loads `cve.json` from the `release-index` branch)
-6. **Fetches PR labels** when `--labels` is provided (useful for agent categorization)
-7. **Outputs `changes.json`** following the [changes schema](references/changes-schema.md)
+6. **Outputs `changes.json`** following the [changes schema](references/changes-schema.md)
 
 ### What the tool does NOT do
 
@@ -91,7 +90,7 @@ The VMR's `src/source-manifest.json` is a JSON bill of materials:
 
 By comparing this file at two release points, the tool gets exact per-component commit ranges. This replaces any need to parse VMR sync commits, trace codeflow PRs, or calculate fork points. One JSON diff gives everything.
 
-Example (Preview 1 → Preview 2): the tool found 1,389 PRs across 20 changed repos.
+Example (Preview 1 → Preview 2): the tool found 1,389 PRs across 21 changed repos.
 
 ## Layer 2 — The Agent
 
@@ -110,7 +109,7 @@ These are **goal-oriented**, not procedural. They describe what good release not
 
 ### Agent responsibilities
 
-- **Triage** — read `changes.json` and identify which PRs are worth writing about
+- **Triage** — read `changes.json` and identify which PRs are worth writing about. Use the [component mapping](references/component-mapping.md) to route changes from `repo` to the correct output files.
 - **Write** — produce markdown release notes for high-value features, following the quality bar
 - **Verify** — use `dotnet-inspect` against nightly builds when needed to confirm public API changes
 - **Respect edits** — diff the PR branch to see what humans have changed and preserve their work
@@ -210,4 +209,3 @@ Each preview is a coherent release milestone with its own set of features. Maint
 1. **dotnet-inspect in Actions** — the agent needs `dotnet-inspect` to verify public API changes against nightly builds. Availability as a global tool in GitHub Actions runners needs confirmation.
 2. **Cross-repo tokens** — the workflow runs in `dotnet/core` but reads from `dotnet/dotnet` and ~20 component repos. The GitHub token scope and any required app permissions need to be configured.
 3. **Multiple previews in flight** — can the agent handle updating notes for Preview N while Preview N+1's branch has just appeared? The workflow should handle this gracefully.
-4. **Package mapping** — the `package` field in `changes.json` (which NuGet package a PR affects) is hard to automate reliably. May need PR labels or heuristics based on changed file paths.

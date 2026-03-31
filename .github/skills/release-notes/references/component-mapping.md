@@ -1,26 +1,24 @@
 # Component Mapping
 
-Maps VMR source paths to .NET components, their source repositories, product taxonomy slugs, and release notes output files.
+## Repo-to-component mapping
 
-## Path-to-component mapping
+Uses the `repo` field from `changes.json` (which matches `source-manifest.json` `path` values) to identify components.
 
-Uses `source-manifest.json` `path` values to identify components. The `dotnet-release generate changes` tool uses this mapping to populate the `product` field in `changes.json`.
-
-| Manifest Path | Component | Source Repo | Product Slug | Release Notes File |
-| ------------- | --------- | ----------- | ------------ | ------------------ |
-| `runtime` | .NET Libraries | `dotnet/runtime` | `dotnet-runtime` | `libraries.md` |
-| `runtime` | .NET Runtime | `dotnet/runtime` | `dotnet-runtime` | `runtime.md` |
-| `aspnetcore` | ASP.NET Core | `dotnet/aspnetcore` | `dotnet-aspnetcore` | `aspnetcore.md` |
-| `razor` | ASP.NET Core (Razor) | `dotnet/razor` | `dotnet-aspnetcore` | `aspnetcore.md` |
-| `sdk` | .NET SDK | `dotnet/sdk` | `dotnet-sdk` | `sdk.md` |
-| `templating` | .NET SDK (Templating) | `dotnet/templating` | `dotnet-sdk` | `sdk.md` |
-| `msbuild` | MSBuild | `dotnet/msbuild` | `dotnet-msbuild` | `msbuild.md` |
-| `winforms` | Windows Forms | `dotnet/winforms` | `dotnet-winforms` | `winforms.md` |
-| `wpf` | WPF | `dotnet/wpf` | `dotnet-wpf` | `wpf.md` |
-| `efcore` | EF Core | `dotnet/efcore` | `dotnet-efcore` | `efcore.md` |
-| `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `dotnet-roslyn` | `csharp.md` |
-| `fsharp` | F# | `dotnet/fsharp` | `dotnet-fsharp` | `fsharp.md` |
-| `nuget-client` | NuGet | `nuget/nuget.client` | `dotnet-nuget` | `nuget.md` |
+| Manifest Path | Component | Source Repo | Release Notes File |
+| ------------- | --------- | ----------- | ------------------ |
+| `runtime` | .NET Libraries | `dotnet/runtime` | `libraries.md` |
+| `runtime` | .NET Runtime | `dotnet/runtime` | `runtime.md` |
+| `aspnetcore` | ASP.NET Core | `dotnet/aspnetcore` | `aspnetcore.md` |
+| `razor` | ASP.NET Core (Razor) | `dotnet/razor` | `aspnetcore.md` |
+| `sdk` | .NET SDK | `dotnet/sdk` | `sdk.md` |
+| `templating` | .NET SDK (Templating) | `dotnet/templating` | `sdk.md` |
+| `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` |
+| `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` |
+| `wpf` | WPF | `dotnet/wpf` | `wpf.md` |
+| `efcore` | EF Core | `dotnet/efcore` | `efcore.md` |
+| `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` |
+| `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` |
+| `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` |
 
 ### Runtime sub-component classification
 

@@ -32,14 +32,13 @@ release-notes/{major.minor}/{major.minor.patch}/changes.json   # patches
 | ----- | ---- | ----------- |
 | `id` | int | GitHub PR number; `0` if no public PR |
 | `repo` | string | Short repository name (e.g., `"runtime"`) |
-| `product` | string | Product slug from taxonomy (e.g., `"dotnet-runtime"`) |
-| `package` | string | NuGet package name when applicable (e.g., `"System.Text.Json"`) |
 | `title` | string | PR title; `""` if not available |
 | `url` | string | Public GitHub PR URL; `""` if non-public |
 | `commit` | string | Key into top-level `commits{}` dict |
 | `is_security` | bool | `true` if this is a security change |
+| `labels` | array | PR labels (only present when `--labels` is used) |
 
-Both `product` and `package` may be present. At least one SHOULD be present.
+The `repo` field corresponds to the VMR manifest path. Use the [component mapping](component-mapping.md) to map repos to product areas and output files.
 
 ## Commit entry fields (values in `commits{}`)
 
@@ -57,20 +56,17 @@ Both `product` and `package` may be present. At least one SHOULD be present.
 - **Naming** — `snake_case_lower` for JSON fields, `kebab-case-lower` for file names and repo slugs.
 - **Public URLs only** — every URL must resolve publicly.
 - **Commit URLs use `.diff` form** — for machine consumption.
-- **Product slugs** come from the `products.json` taxonomy file (e.g., `dotnet-runtime`, `dotnet-aspnetcore`, `dotnet-sdk`).
 
 ## Example
 
 ```json
 {
-  "release_version": "11.0.0-preview.3",
-  "release_date": "2026-04-08",
+  "release_version": "11.0.0-preview.2",
+  "release_date": "",
   "changes": [
     {
       "id": 112345,
       "repo": "runtime",
-      "product": "dotnet-runtime",
-      "package": "System.Text.Json",
       "title": "Add JsonSerializerOptions.Web preset",
       "url": "https://github.com/dotnet/runtime/pull/112345",
       "commit": "runtime@b2d5fa8",
@@ -79,8 +75,6 @@ Both `product` and `package` may be present. At least one SHOULD be present.
     {
       "id": 54321,
       "repo": "aspnetcore",
-      "product": "dotnet-aspnetcore",
-      "package": "",
       "title": "Add MapStaticAssets middleware",
       "url": "https://github.com/dotnet/aspnetcore/pull/54321",
       "commit": "aspnetcore@f45f3c9",
@@ -90,14 +84,14 @@ Both `product` and `package` may be present. At least one SHOULD be present.
   "commits": {
     "runtime@b2d5fa8": {
       "repo": "runtime",
-      "branch": "main",
+      "branch": "",
       "hash": "b2d5fa8ca2f9c2d7e8f1f0a9d3d0f08e31c0ad5f",
       "org": "dotnet",
       "url": "https://github.com/dotnet/runtime/commit/b2d5fa8ca2f9c2d7e8f1f0a9d3d0f08e31c0ad5f.diff"
     },
     "aspnetcore@f45f3c9": {
       "repo": "aspnetcore",
-      "branch": "main",
+      "branch": "",
       "hash": "f45f3c916df91e3fb175c85ba4a4f58ec1f77ef0",
       "org": "dotnet",
       "url": "https://github.com/dotnet/aspnetcore/commit/f45f3c916df91e3fb175c85ba4a4f58ec1f77ef0.diff"
@@ -112,11 +106,11 @@ Both `product` and `package` may be present. At least one SHOULD be present.
 # All changes
 jq -r '.changes[] | .title' changes.json
 
-# Changes by product
-jq -r '.changes[] | select(.product == "dotnet-runtime") | .title' changes.json
+# Changes by repo
+jq -r '.changes[] | select(.repo == "runtime") | .title' changes.json
 
-# Changes affecting a NuGet package
-jq -r '.changes[] | select(.package == "System.Text.Json") | .title' changes.json
+# Count changes per repo
+jq -r '[.changes[] | .repo] | group_by(.) | map({repo: .[0], count: length}) | sort_by(-.count)[]' changes.json
 
 # Security changes
 jq -r '.changes[] | select(.is_security) | .title' changes.json
