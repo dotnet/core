@@ -130,6 +130,15 @@ The workflow determines which milestone needs release notes using three data sou
 
 The decision is deterministic: if the iteration on `main` is ahead of the latest shipped release, that's the target milestone. If they match, there's nothing new to do.
 
+### Head ref selection
+
+Once the target milestone is identified, check whether it has a VMR tag:
+
+- **No tag** → milestone is in development. Use `--head main` for draft release notes.
+- **Tag exists** → milestone has been finalized. Use `--head <tag>` for exact shipped content.
+
+This is critical: once `main` is bumped to the next iteration, it contains work for the *next* preview. Using `main` at that point would produce incorrect release notes for the previous milestone.
+
 ### PR lifecycle
 
 For the target milestone:

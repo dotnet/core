@@ -121,7 +121,6 @@ latest_shipped    = latest preview number from releases.json
 If current_iteration > latest_shipped:
   → Target: preview.{current_iteration}
   → Base ref: VMR tag for latest shipped (e.g., v11.0.0-preview.2.26159.112)
-  → Head ref: main
   → Action: create or update release notes
 
 If current_iteration == latest_shipped:
@@ -129,7 +128,18 @@ If current_iteration == latest_shipped:
   → No new milestone to target. Exit.
 ```
 
-When the target milestone has just shipped (a new tag appeared since the last run), do a final regeneration using `--head <tag>` instead of `--head main` to capture the exact shipped content.
+#### e. Determine the head ref
+
+Check whether the target milestone has been tagged (finalized) in the VMR:
+
+```bash
+git -C /tmp/dotnet tag -l "v11.0.0-preview.${target_iteration}.*" --sort=-v:refname | head -1
+```
+
+- **No tag found** → the milestone is still in development. Use `--head main`.
+- **Tag found** → the milestone has been finalized. Use `--head <tag>` to capture the exact shipped content.
+
+This matters because once the target milestone ships and `main` is bumped to the next iteration, `main` contains preview N+1 work. Always check for a tag before using `main` as the head ref.
 
 ### 2. Generate changes.json
 
@@ -139,6 +149,17 @@ Using the base tag and head ref determined in step 1:
 dotnet-release generate changes /tmp/dotnet \
   --base v11.0.0-preview.2.26159.112 \
   --head main \
+  --version "11.0.0-preview.3" \
+  --labels \
+  --output release-notes/11.0/preview/preview3/changes.json
+```
+
+If the target milestone has a tag, use the tag instead of `main`:
+
+```bash
+dotnet-release generate changes /tmp/dotnet \
+  --base v11.0.0-preview.2.26159.112 \
+  --head v11.0.0-preview.3.26210.100 \
   --version "11.0.0-preview.3" \
   --labels \
   --output release-notes/11.0/preview/preview3/changes.json
