@@ -54,7 +54,7 @@ These appear in `source-manifest.json` but rarely produce user-facing changes:
 | `sourcelink` | `dotnet/sourcelink` | Source Link |
 | `symreader` | `dotnet/symreader` | Symbol reader |
 | `windowsdesktop` | `dotnet/windowsdesktop` | Metapackage |
-| `vstest` | `microsoft/vstest` | Test platform |
+| `vstest` | `microsoft/vstest` | Test platform (microsoft org — skipped) |
 | `xdt` | `dotnet/xdt` | XML transforms |
 
 These components appear in `changes.json` for completeness but typically don't warrant markdown release notes.

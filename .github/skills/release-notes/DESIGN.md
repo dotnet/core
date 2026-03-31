@@ -173,6 +173,7 @@ Components with no noteworthy changes get a minimal stub file.
 
 - **MAUI** (`dotnet/maui`) — not in the VMR, not in `source-manifest.json`
 - **Container images** (`dotnet/dotnet-docker`) — not in the VMR
+- **Non-dotnet-org repos** — repos under other GitHub orgs (e.g., `microsoft/vstest`) are skipped for now due to SAML token scope. Only `dotnet` org repos are queried. This can be expanded later.
 - **Servicing releases** — separate process, handled by existing automation
 - **Security advisories** — the tool can cross-reference CVEs but the agent doesn't author security bulletins
 
