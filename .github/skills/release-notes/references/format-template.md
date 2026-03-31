@@ -4,6 +4,8 @@ Standard document structure for .NET release notes markdown files.
 
 ## Document structure
 
+### Component file
+
 ```markdown
 # <Component> in .NET <VERSION> <PREVIEW> - Release Notes
 
@@ -11,10 +13,6 @@ Standard document structure for .NET release notes markdown files.
 
 - [Feature Name](#anchor)
 - [Feature Name](#anchor)
-
-<Component> updates in .NET <VERSION>:
-
-- [What's new in .NET <VERSION>](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-<version>/overview) documentation
 
 ## Feature Name
 
@@ -28,6 +26,40 @@ Standard document structure for .NET release notes markdown files.
 
 - [@username](https://github.com/username)
 ```
+
+### README.md (index file)
+
+The README.md links to all component files and includes the general docs link. Component files do NOT include the general "What's new" link — that goes in the README only.
+
+```markdown
+# .NET <VERSION> <PREVIEW> - Release Notes
+
+- [Libraries](libraries.md)
+- [Runtime](runtime.md)
+- [ASP.NET Core](aspnetcore.md)
+...
+
+.NET <VERSION> updates:
+
+- [What's new in .NET <VERSION>](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-<version>/overview)
+```
+
+### Component-specific docs links
+
+Some components have their own "What's new" page on learn.microsoft.com. Include these in the relevant component file when they exist. Discover them from the docs overview source:
+
+`https://github.com/dotnet/docs/raw/refs/heads/main/docs/core/whats-new/dotnet-{major}/overview.md`
+
+Known component docs links:
+
+| Component | Docs URL |
+| --------- | -------- |
+| Runtime | `https://learn.microsoft.com/dotnet/core/whats-new/dotnet-{major}/runtime` |
+| Libraries | `https://learn.microsoft.com/dotnet/core/whats-new/dotnet-{major}/libraries` |
+| SDK | `https://learn.microsoft.com/dotnet/core/whats-new/dotnet-{major}/sdk` |
+| ASP.NET Core | `https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-{major}` |
+| C# | `https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-{lang-version}` |
+| EF Core | `https://learn.microsoft.com/ef/core/what-is-new/ef-core-{major}.0/whatsnew` |
 
 ## Section rules
 
