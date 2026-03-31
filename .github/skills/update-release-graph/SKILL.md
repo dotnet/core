@@ -7,7 +7,7 @@ description: >
   graph generator tools. USE FOR: adding a new patch release to the graph,
   adding a new major version, updating timeline entries after a release,
   refreshing the graph after source data changes.
-  DO NOT USE FOR: CVE data authoring (use cve-enricher skill), supported-os.json
+  DO NOT USE FOR: supported-os.json
   changes (use update-supported-os skill), querying the graph (use
   dotnet-releases skill on release-index branch), editing generated graph files
   by hand (update source data and regenerate).
@@ -27,7 +27,7 @@ Regenerate the HAL+JSON information graph in `release-notes/`. The graph is a se
 | `release.json` | `{ver}/{patch}/release.json` | Individual patch release data (subset of releases.json entry) |
 | `_manifest.json` | `{ver}/_manifest.json` | Lifecycle data and reference links (GA date, EOL date, what's-new, compatibility) |
 | `_llms.json` | `_llms.json` (root, optional) | Partial overrides merged into generated llms.json |
-| `cve.json` | `timeline/{year}/{month}/cve.json` | CVE disclosure records (managed by cve-enricher skill) |
+| `cve.json` | `timeline/{year}/{month}/cve.json` | CVE disclosure records |
 
 ### Generated graph (outputs — do not hand-edit)
 
@@ -79,7 +79,7 @@ dotnet-release generate <type> <input-dir> [output-dir] [--url-root <url>]
 
 - A new .NET patch release ships (monthly servicing) — source data is updated, graph needs regenerating
 - A new .NET major version is added — `_manifest.json` and initial `releases.json` are created
-- CVE data changes — `cve.json` files are updated (by cve-enricher), graph needs refreshing
+- CVE data changes — `cve.json` files are updated, graph needs refreshing
 - A .NET version reaches end-of-life — `_manifest.json` is updated, graph needs regenerating
 - Any source data file is modified and the graph should reflect the changes
 
@@ -381,7 +381,7 @@ Immutable files use only `prev-*` links (no `next`). Mutable files use `latest-*
 - When running individually, order matters: `version-index` → `timeline-index` → `llms-index`; `generate indexes` handles this automatically
 - All `_links.*.href` values are absolute URLs; the base URL is controlled by `--url-root`
 - `_embedded.patches` is an **array** (newest first) in major indexes; an **object** keyed by major version in month indexes
-- CVE data in the graph comes from `timeline/{year}/{month}/cve.json` — use the cve-enricher skill to manage those files
+- CVE data in the graph comes from `timeline/{year}/{month}/cve.json`
 
 ## Common mistakes
 
