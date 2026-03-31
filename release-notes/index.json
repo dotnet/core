@@ -2,19 +2,19 @@
   "$schema": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/schemas/v1/dotnet-release-version-index.json",
   "kind": "root",
   "title": ".NET Release Index",
-  "latest_major": "10.0",
-  "latest_lts_major": "10.0",
+  "latest_major": "9.0",
+  "latest_lts_major": "8.0",
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json"
     },
     "latest-lts-major": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
-      "title": "Latest LTS major release - .NET 10.0"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/8.0/index.json",
+      "title": "Latest LTS major release - .NET 8.0"
     },
     "latest-major": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json",
-      "title": "Latest major release - .NET 10.0"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/9.0/index.json",
+      "title": "Latest major release - .NET 9.0"
     },
     "timeline": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
@@ -23,16 +23,6 @@
   },
   "_embedded": {
     "releases": [
-      {
-        "version": "10.0",
-        "release_type": "lts",
-        "supported": true,
-        "_links": {
-          "self": {
-            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json"
-          }
-        }
-      },
       {
         "version": "9.0",
         "release_type": "sts",
@@ -130,6 +120,26 @@
         "_links": {
           "self": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/2.0/index.json"
+          }
+        }
+      },
+      {
+        "version": "11.0",
+        "release_type": "sts",
+        "supported": false,
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/11.0/index.json"
+          }
+        }
+      },
+      {
+        "version": "10.0",
+        "release_type": "lts",
+        "supported": true,
+        "_links": {
+          "self": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/index.json"
           }
         }
       },
