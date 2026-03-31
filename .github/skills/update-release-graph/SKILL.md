@@ -91,8 +91,7 @@ The `dotnet-release` tool handles both graph generation and legacy file operatio
 
 ```bash
 dotnet tool install -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify — should show graph generation commands
 dotnet-release --help

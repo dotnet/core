@@ -115,7 +115,7 @@ Exit code: `0`
 ## .NET Release Link Verification Report
 
 **Date:** 2026-03-27
-**Tool:** `dotnet-release` v0.5.0
+**Tool:** `dotnet-release` v1.1.0
 **Command:** `dotnet-release verify releases release-notes`
 
 | Version | Latest Release | Download URLs | SHA512 Hashes | CDN latest.version | aka.ms | Status |

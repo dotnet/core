@@ -22,13 +22,12 @@ Validate .NET release data in `release-notes/` using the `dotnet-release` CLI to
 
 ### dotnet-release
 
-The `dotnet-release` tool is published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages). Minimum version: **0.5.0** (first version with `verify releases` command).
+The `dotnet-release` tool is published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
 
 ```bash
 # Install
 dotnet tool install -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify — must show "verify releases" in usage output
 dotnet-release
@@ -48,8 +47,7 @@ dotnet-release
 
 ```bash
 dotnet tool update -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 ```
 
 ## Commands
