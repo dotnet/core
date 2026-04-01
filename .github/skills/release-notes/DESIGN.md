@@ -118,49 +118,97 @@ These are **goal-oriented**, not procedural. They describe what good release not
 
 ## Layer 3 — The Agentic Workflow
 
-A [GitHub Agentic Workflow](https://github.github.com/gh-aw/) defined in `.github/workflows/release-notes.md`. It runs on a daily cron schedule and manages the full lifecycle:
+A [GitHub Agentic Workflow](https://github.github.com/gh-aw/) defined in `.github/workflows/release-notes.md`. It runs nightly and manages the full lifecycle. This is a **multi-master live system** — the agent, component teams, and release managers all edit concurrently.
 
-### Milestone detection
+### Multi-milestone discovery
 
-The workflow determines which milestone needs release notes using three data sources:
+Multiple milestones can be active simultaneously. For example:
 
-1. **`releases.json`** (this repo) — the list of shipped releases. The latest entry tells you the most recently shipped preview and provides the baseline.
-2. **`eng/Versions.props`** (VMR `main` branch) — `PreReleaseVersionIteration` tells you which milestone `main` is currently building.
-3. **VMR tags** — `v{major}.0.0-preview.{N}.{build}` tags identify the exact commit that shipped each preview, providing the `--base` ref for generating diffs.
+```text
+Latest shipped:   Preview 3 (in releases.json)
+VMR main:         Preview 5 (Versions.props iteration=5)
+VMR release/P4:   Preview 4 (release branch exists, no tag yet)
 
-The decision is deterministic: if the iteration on `main` is ahead of the latest shipped release, that's the target milestone. If they match, there's nothing new to do.
+→ Active milestones: Preview 4 (from release branch) AND Preview 5 (from main)
+→ Each gets its own branch and PR on dotnet/core
+```
 
-### Head ref selection
+The workflow discovers all milestones between `latest_shipped + 1` and `main_iteration`, checks for VMR tags and release branches, and creates a branch+PR for each.
 
-Once the target milestone is identified, check whether it has a VMR tag:
+### Head ref selection (per milestone)
 
-- **No tag** → milestone is in development. Use `--head main` for draft release notes.
-- **Tag exists** → milestone has been finalized. Use `--head <tag>` for exact shipped content.
+Each milestone needs its own base and head ref. This is re-validated every run because refs can change:
 
-This is critical: once `main` is bumped to the next iteration, it contains work for the *next* preview. Using `main` at that point would produce incorrect release notes for the previous milestone.
+| Milestone state | Base ref | Head ref |
+| --------------- | -------- | -------- |
+| Has VMR tag (finalized) | Tag for N-1 | Tag for N |
+| Has release branch (stabilizing) | Tag for N-1 | Release branch tip |
+| Only on main (in development) | Tag for N-1 | main |
+
+**Critical**: never use `main` for milestone N if `main` has moved to N+1. Check the iteration in `Versions.props` every run.
+
+### Branch lifecycle on dotnet/core
+
+```text
+Branch:  release-notes/11.0-preview4
+PR:      [release-notes] .NET 11 Preview 4
+
+Branch:  release-notes/11.0-preview5
+PR:      [release-notes] .NET 11 Preview 5
+```
+
+Each branch is long-lived — it's created on the first run and updated nightly until the PR is merged (after the preview ships).
+
+### Human interaction model
+
+This is the most delicate part of the system. The branches are shared workspaces:
+
+**Respecting edits:**
+- Before writing, diff the branch to identify human commits
+- Files humans have edited are partially off-limits — only add new sections, never overwrite their changes
+- When a file has mixed agent + human content, be surgical — touch only agent-authored sections
+
+**Responding to comments:**
+- Read all PR comments and review threads since the last run
+- Classify: actionable feedback, questions, disagreements, resolved
+- For actionable items: make the change and confirm
+- For questions: answer or escalate
+- For disagreements: cross-check `changes.json` and explain findings
+- When intent is unclear: ask for clarification via comment
+- This is a conversation. Engage, don't ignore.
+
+**Handling conflicts:**
+- If a human and the agent both changed the same section, the human's version wins
+- If the agent is unsure whether a human edit was intentional, ask via PR comment
+- Never force-push or rewrite human commits
 
 ### PR lifecycle
 
-For the target milestone:
+| State | Action |
+| ----- | ------ |
+| No PR for milestone | Create branch, generate content, open draft PR |
+| PR exists, source changed | Regenerate `changes.json`, update/add markdown sections |
+| PR exists, human edited | Preserve edits, only update untouched sections |
+| New tag appeared | Final regen with `--head <tag>`, note finalization |
+| Main bumped | Switch earlier milestone's head ref to release branch/tag |
+| PR merged | Skip on future runs |
+| PR closed | Don't reopen, log and move on |
 
-1. **No PR exists** → create branch, run tool, write initial drafts, open draft PR
-2. **PR exists, source changed** → regenerate `changes.json`, add/update markdown sections
-3. **PR exists, human edited** → preserve human edits, only touch untouched sections
-4. **Milestone just shipped** (new tag appeared) → final regeneration with `--head <tag>` for exact shipped content
+### Schedule and transitions
+
+- Runs nightly (~9am Pacific)
+- Previews ship monthly, Feb–Oct (typically patch Tuesday)
+- RC1 ~September, RC2 ~October, GA November
+- Only does meaningful work when VMR state has changed
+- Each run re-validates all refs (tags appear, branches are created, main bumps)
 
 ### Safe outputs
 
-The workflow uses these safe-outputs (the only ways it can modify state):
+The only ways the workflow can modify state:
 
-- `create-pull-request` — create new release notes PRs
-- `push-to-pull-request-branch` — update existing PR branches
-- `add-comment` — comment on PRs with update summaries
-
-### Schedule
-
-- Previews ship monthly, February through October (typically patch Tuesday)
-- RC1 in ~September, RC2 in ~October, GA in November
-- The workflow runs daily but only does meaningful work when the VMR state has changed
+- `create-pull-request` — create new release notes PRs (max 5, for multiple milestones)
+- `push-to-pull-request-branch` — update existing PR branches (max 5)
+- `add-comment` — comment on PRs with updates, replies to feedback, questions (max 20)
 
 ## Output files
 
@@ -224,4 +272,5 @@ Each preview is a coherent release milestone with its own set of features. Maint
 
 1. **dotnet-inspect in Actions** — the agent needs `dotnet-inspect` to verify public API changes against nightly builds. Availability as a global tool in GitHub Actions runners needs confirmation.
 2. **Cross-repo tokens** — the workflow runs in `dotnet/core` but reads from `dotnet/dotnet` and ~20 component repos. The GitHub token scope and any required app permissions need to be configured.
-3. **Multiple previews in flight** — can the agent handle updating notes for Preview N while Preview N+1's branch has just appeared? The workflow should handle this gracefully.
+3. **Conflict resolution heuristics** — when the agent and a human both changed the same section between runs, the human wins. But how granular is "a section"? Need to define this precisely (per-heading? per-file?).
+4. **RC/GA milestone naming** — the multi-milestone logic assumes `previewN` naming. RC and GA milestones use different naming (`rc1`, `rc2`, `ga`). The workflow needs to handle the transition gracefully.
