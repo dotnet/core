@@ -2,9 +2,7 @@
 
 ## Array Enumeration De-Abstraction
 
-> Source: [.NET 10 Preview 2 — Runtime](../../../../release-notes/10.0/preview/preview2/runtime.md)
-
-Progressive benchmark narrative. Starts simple, escalates to harder cases, walks through each optimization layer with measured results.
+Preview 1 brought enhancements to the JIT compiler's devirtualization abilities for array interface methods; this was our first step in reducing the abstraction overhead of array iteration via enumerators. Preview 2 continues this effort with improvements to many other optimizations. Consider the following benchmarks:
 
 ```csharp
 public class ArrayDeAbstraction
@@ -30,6 +28,8 @@ public class ArrayDeAbstraction
 }
 ```
 
+In `foreach_static_readonly_array`, the type of `array` is transparent, so it is easy for the JIT to generate efficient code. In `foreach_static_readonly_array_via_interface`, the type of `array` is hidden behind an `IEnumerable`, introducing an object allocation and virtual calls for advancing and dereferencing the iterator. In .NET 9, this overhead impacts performance profoundly:
+
 | Method                                                       | Mean       | Ratio | Allocated |
 |------------------------------------------------------------- |-----------:|------:|----------:|
 | foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
@@ -42,15 +42,16 @@ Thanks to improvements to the JIT's inlining, stack allocation, and loop cloning
 | foreach_static_readonly_array (.NET 9)                       |   150.8 ns |  1.00 |         - |
 | foreach_static_readonly_array_via_interface (.NET 10)        |   280.0 ns |  1.86 |         - |
 
-**Why it works**: multiple benchmark tables tell a progressive story — problem, partial fix, harder problem, better fix. Each table shows measurable improvement. The reader follows the JIT's reasoning.
+---
+Source: [.NET 10 Preview 2 — Runtime](../../../../release-notes/10.0/preview/preview2/runtime.md)
+Commentary: Progressive benchmark narrative — the best style for JIT optimization stories.
+Why it works: Multiple benchmark tables tell a story (problem → partial fix → harder problem → better fix). Each table shows measurable improvement. The reader follows the JIT's reasoning through escalating complexity.
 
 ---
 
 ## Improved Code Generation for Struct Arguments
 
-> Source: [.NET 10 Preview 6 — Runtime](../../../../release-notes/10.0/preview/preview6/runtime.md)
-
-Before/after assembly comparison. Shows the C# code, the optimal case, the pathological case, and the fix — all through `asm` blocks.
+.NET's JIT compiler is capable of an optimization called physical promotion, where the members of a struct are placed in registers rather than on the stack, eliminating memory accesses. This optimization is particularly useful when passing a struct to a method, and the calling convention requires the struct members to be passed in registers. Consider the following example:
 
 ```csharp
 struct Point
@@ -70,7 +71,7 @@ private static void Main()
 }
 ```
 
-Before — struct fields spill to stack then reload:
+Because `ints` are four bytes wide, and registers are eight bytes wide on x64, the calling convention requires us to pass the members of `Point` in one register. However, the JIT compiler's internal representation of struct members previously wasn't flexible enough to represent values that share a register. Thus, the JIT compiler would first store the values to memory, and then load the eight-byte chunk into a register:
 
 ```asm
 Program:Main() (FullOpts):
@@ -84,7 +85,7 @@ Program:Main() (FullOpts):
        ret
 ```
 
-After — fields packed directly into a register:
+Thanks to [dotnet/runtime #115977](https://github.com/dotnet/runtime/pull/115977), the JIT compiler can now place the promoted members of struct arguments into shared registers:
 
 ```asm
 Program:Main() (FullOpts):
@@ -92,22 +93,28 @@ Program:Main() (FullOpts):
        tail.jmp [Program:Consume(Program+Point)]
 ```
 
-**Why it works**: the reader can count the instructions eliminated. No prose needed to explain the improvement — the assembly speaks for itself.
+---
+Source: [.NET 10 Preview 6 — Runtime](../../../../release-notes/10.0/preview/preview6/runtime.md)
+Commentary: Before/after assembly comparison — the gold standard for codegen improvements.
+Why it works: The reader can count the instructions eliminated. The assembly speaks for itself — no prose needed to explain the magnitude of the improvement.
 
 ---
 
-## JIT Loop Optimizations
+## JIT: Loop Optimizations
 
-> Source: [.NET 9 Preview 1 — Runtime](../../../../release-notes/9.0/preview/preview1/runtime.md)
+RyuJIT already supports multiple powerful loop optimizations, and we plan to expand these capabilities for .NET 9. For Preview 1, we've focused on improving the applicability of existing optimizations by refactoring how loops are represented in RyuJIT. This new graph-based representation is simpler and more effective than the old lexical representation, enabling RyuJIT to recognize -- and thus optimize -- more loops.
 
-Metric-heavy prose, no code. Three optimization categories with measured improvements.
+Here's a quick breakdown of the improvements:
 
-> RyuJIT already supports multiple powerful loop optimizations, and we plan to expand these capabilities for .NET 9. For Preview 1, we've focused on improving the applicability of existing optimizations by refactoring how loops are represented in RyuJIT. This new graph-based representation is simpler and more effective than the old lexical representation, enabling RyuJIT to recognize -- and thus optimize -- more loops.
->
-> Here's a quick breakdown of the improvements:
->
-> - **Loop hoisting** -- finds expressions that don't change in value as the containing loop iterates, and moves (or "hoists") the expressions to above the loop so they evaluate at most once. In our test collections, we saw up to 35.8% more hoisting performed with the new loop representation.
-> - **Loop cloning** -- determines if a conditional check (like a bounds check on an array) inside a loop can be safely eliminated for some of its iterations, and creates a "fast" copy of the loop without the check. With the new loop representation, we saw up to 7.3% more loop cloning.
-> - **Loop alignment** -- improves instruction cache performance by adjusting the offset of a loop to begin at a cache line. With the new loop representation, we saw about 5% more loops aligned across our test collections.
+- **Loop hoisting** -- finds expressions that don't change in value as the containing loop iterates, and moves (or "hoists") the expressions to above the loop so they evaluate at most once. In our test collections, we saw up to 35.8% more hoisting performed with the new loop representation.
+- **Loop cloning** -- determines if a conditional check (like a bounds check on an array) inside a loop can be safely eliminated for some of its iterations, and creates a "fast" copy of the loop without the check. With the new loop representation, we saw up to 7.3% more loop cloning.
+- **Loop alignment** -- improves instruction cache performance by adjusting the offset of a loop to begin at a cache line. With the new loop representation, we saw about 5% more loops aligned across our test collections.
 
-**Why it works**: sells infrastructure improvements through percentages. No code needed because the value is breadth of impact, not a single dramatic before/after.
+This is just a snippet of the improvements RyuJIT's new loop representation brings. To take a closer look at the loop optimization work planned for .NET 9, check out [dotnet/runtime #93144](https://github.com/dotnet/runtime/issues/93144).
+
+---
+Source: [.NET 9 Preview 1 — Runtime](../../../../release-notes/9.0/preview/preview1/runtime.md)
+Commentary: Metric-heavy prose with no code — good for infrastructure improvements where breadth of impact matters more than a single before/after.
+Why it works: Percentages sell the improvement without needing code. Each bullet is self-contained. Links to the tracking issue for depth.
+
+---

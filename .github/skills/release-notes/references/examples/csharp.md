@@ -2,11 +2,7 @@
 
 ## Extension operators
 
-> Source: [.NET 10 Preview 7 — C#](../../../../release-notes/10.0/preview/preview7/csharp.md)
-
-Medium — one sentence of context, then a code block showing the new syntax, then rule bullets. Code-first because the syntax *is* the feature.
-
-> The new extension blocks now include support for *operators*, with the exception of implicit and explicit conversion operators. You can declare operators in extension blocks, as shown in the following example:
+The new extension blocks now include support for *operators*, with the exception of implicit and explicit conversion operators. You can declare operators in extension blocks, as shown in the following example:
 
 ```csharp
 public static class Operators
@@ -22,11 +18,18 @@ public static class Operators
 }
 ```
 
-> Several of the rules for extension operators are demonstrated in the preceding example:
->
-> - At least one of the operands must be the *extended type*, `TElement[]` in the preceding example.
-> - For operators that require pair-wise declarations, such as `==` and `!=`, both operators must be declared in the same static class.
-> - Instance compound assignment operators, and instance increment and decrement operators are expected to mutate the current instance.
-> - Extension operators, like other extension members, can't use the `abstract`, `virtual`, `override`, or `sealed` modifiers.
+Several of the rules for extension operators are demonstrated in the preceding example:
 
-**Why it works**: shows the code immediately — language features need to be seen, not just described. The rule bullets follow naturally as "here's what you need to know." No motivation section needed because C# developers will already understand why extension operators are useful.
+- At least one of the operands must be the *extended type*, `TElement[]` in the preceding example.
+- For operators that require pair-wise declarations, such as `==` and `!=` in the preceding example, both operators must be declared in the same static class. They are not required to be in the same `extension` container.
+- Instance compound assignment operators, and instance increment and decrement operators are expected to mutate the current instance. Therefore reference type parameters must be passed by value and value type parameters must be passed by `ref`. These operators can't be declared when the extended type is an unconstrained type parameter.
+- Extension operators, like other extension members, can't use the `abstract`, `virtual`, `override`, or `sealed` modifiers. This is consistent with other extension members.
+
+Extension members are only considered for overload resolution when no applicable predefined or user defined non-extension members are found.
+
+---
+Source: [.NET 10 Preview 7 — C#](../../../../release-notes/10.0/preview/preview7/csharp.md)
+Commentary: Code-first — one sentence of context, then the syntax, then rule bullets. Language features need to be seen, not just described.
+Why it works: Shows the code immediately. The rule bullets follow naturally as "here's what you need to know." No motivation section needed.
+
+---

@@ -2,13 +2,9 @@
 
 ## Post-Quantum Cryptography Updates
 
-> Source: [.NET 10 Preview 7 — Libraries](../../../../release-notes/10.0/preview/preview7/libraries.md)
+### ML-DSA
 
-Long — subheadings, diff-style before/after, multiple API examples spanning two related features.
-
-> ### ML-DSA
->
-> The `System.Security.Cryptography.MLDsa` class gained ease-of-use updates in this release, allowing some common code patterns to be simplified:
+The `System.Security.Cryptography.MLDsa` class gained ease-of-use updates in this release, allowing some common code patterns to be simplified:
 
 ```diff
 private static byte[] SignData(string privateKeyPath, ReadOnlySpan<byte> data)
@@ -23,7 +19,7 @@ private static byte[] SignData(string privateKeyPath, ReadOnlySpan<byte> data)
 }
 ```
 
-> Additionally, this release added support for HashML-DSA, which we call "PreHash" to help distinguish it from "pure" ML-DSA.
+Additionally, this release added support for HashML-DSA, which we call "PreHash" to help distinguish it from "pure" ML-DSA. As the underlying specification interacts with the Object Identifier (OID) value, the SignPreHash and VerifyPreHash methods on this `[Experimental]` type take the dotted-decimal OID as a string. This may evolve as more scenarios using HashML-DSA become well-defined.
 
 ```csharp
 private static byte[] SignPreHashSha3_256(MLDsa signingKey, ReadOnlySpan<byte> data)
@@ -33,9 +29,9 @@ private static byte[] SignPreHashSha3_256(MLDsa signingKey, ReadOnlySpan<byte> d
 }
 ```
 
-> ### Composite ML-DSA
->
-> This release also introduces new types to support ietf-lamps-pq-composite-sigs (currently at draft 7), and an implementation of the primitive methods for RSA variants.
+### Composite ML-DSA
+
+This release also introduces new types to support ietf-lamps-pq-composite-sigs (currently at draft 7), and an implementation of the primitive methods for RSA variants.
 
 ```csharp
 var algorithm = CompositeMLDsaAlgorithm.MLDsa65WithRSA4096Pss;
@@ -52,4 +48,9 @@ signature[0] ^= 1; // Tamper with signature
 Console.WriteLine(publicKey.VerifyData(data, signature)); // False
 ```
 
-**Why it works**: the `diff` block for ML-DSA immediately shows the simplification — red lines removed, green line added. Subheadings organize related-but-distinct features. The Composite ML-DSA sample is a complete, runnable scenario (generate → sign → verify → tamper → verify-fails).
+---
+Source: [.NET 10 Preview 7 — Libraries](../../../../release-notes/10.0/preview/preview7/libraries.md)
+Commentary: Long — subheadings organize related-but-distinct features. Uses `diff` blocks for API simplification and complete runnable scenarios for new APIs.
+Why it works: The `diff` block immediately shows the simplification (red lines removed, green line added). The Composite ML-DSA sample is a complete scenario (generate → sign → verify → tamper → verify-fails).
+
+---
