@@ -10,7 +10,7 @@ Additionally, the middleware's default behavior has changed: it no longer writes
 
 ---
 Source: [.NET 10 Preview 7 — ASP.NET Core](../../../../release-notes/10.0/preview/preview7/aspnetcore.md)
-Commentary: Short and focused — three sentences covering the new option, the use case, and a behavior change. No code needed.
+Commentary: Short and focused — three sentences covering the new option, the use case, and a behavior change. A code sample showing the callback usage would strengthen it.
 Why it works: The reader immediately knows what changed, why, and whether they're affected.
 ---
 
