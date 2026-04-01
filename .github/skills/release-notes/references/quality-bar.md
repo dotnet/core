@@ -60,6 +60,18 @@ A release note that just names a feature is useless. Every entry must answer:
 
 If you can't write a code sample for a feature, question whether it's user-facing enough for release notes.
 
+## Verify before you write
+
+**Never guess API names.** Before writing about any type, method, property, or enum value, verify it exists using `dotnet-inspect`. See [api-verification.md](api-verification.md) for the workflow.
+
+An incorrect type name in release notes is worse than a placeholder. It teaches developers something wrong and erodes trust. When you can't verify an API:
+
+- Use a `<!-- TODO: verify type name -->` placeholder
+- Describe the feature in prose without naming specific types
+- Link to the PR and let the reader find the API themselves
+
+This applies to code samples too. A fabricated code sample that uses invented types is harmful — it looks authoritative but won't compile.
+
 ## Tone
 
 - Positive — highlight what's new, don't dwell on what was missing

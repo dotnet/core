@@ -112,8 +112,8 @@ These are **goal-oriented**, not procedural. They describe what good release not
 ### Agent responsibilities
 
 - **Triage** — read `changes.json` and identify which PRs are worth writing about. Use the [component mapping](references/component-mapping.md) to route changes from `repo` to the correct output files.
-- **Write** — produce markdown release notes for high-value features, following the quality bar
-- **Verify** — use `dotnet-inspect` against nightly builds when needed to confirm public API changes
+- **Verify** — before writing about any API, use `dotnet-inspect` to confirm it exists with the correct type names, member signatures, and namespaces. See [api-verification.md](references/api-verification.md).
+- **Write** — produce markdown release notes for high-value features, following the quality bar. Only use API names, type names, and code samples that have been verified.
 - **Respect edits** — diff the PR branch to see what humans have changed and preserve their work
 - **Respond** — read PR comments and incorporate human feedback
 
@@ -271,7 +271,6 @@ Each preview is a coherent release milestone with its own set of features. Maint
 
 ## Open questions
 
-1. **dotnet-inspect in Actions** — the agent needs `dotnet-inspect` to verify public API changes against nightly builds. Availability as a global tool in GitHub Actions runners needs confirmation.
-2. **Cross-repo tokens** — the workflow runs in `dotnet/core` but reads from `dotnet/dotnet` and ~20 component repos. The GitHub token scope and any required app permissions need to be configured.
-3. **Conflict resolution heuristics** — when the agent and a human both changed the same section between runs, the human wins. But how granular is "a section"? Need to define this precisely (per-heading? per-file?).
-4. **RC/GA milestone naming** — the multi-milestone logic assumes `previewN` naming. RC and GA milestones use different naming (`rc1`, `rc2`, `ga`). The workflow needs to handle the transition gracefully.
+1. **Cross-repo tokens** — the workflow runs in `dotnet/core` but reads from `dotnet/dotnet` and ~20 component repos. The GitHub token scope and any required app permissions need to be configured.
+2. **Conflict resolution heuristics** — when the agent and a human both changed the same section between runs, the human wins. But how granular is "a section"? Need to define this precisely (per-heading? per-file?).
+3. **RC/GA milestone naming** — the multi-milestone logic assumes `previewN` naming. RC and GA milestones use different naming (`rc1`, `rc2`, `ga`). The workflow needs to handle the transition gracefully.
