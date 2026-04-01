@@ -33,7 +33,7 @@ safe-outputs:
     target: "*"
 tools:
   github:
-    toolsets: [issues, pull_requests, contents, code_search]
+    toolsets: [issues, pull_requests, repos, search]
   bash:
     - dotnet
     - dotnet-release
