@@ -30,8 +30,7 @@ The `dotnet-release` tool is used to verify and generate supported OS files. Pac
 ```bash
 # GitHub Packages requires authentication — use a GitHub token (PAT or GITHUB_TOKEN)
 dotnet tool install -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify
 dotnet-release --help
