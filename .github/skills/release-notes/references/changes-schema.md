@@ -35,11 +35,14 @@ release-notes/{major.minor}/{major.minor.patch}/changes.json   # patches
 | `product` | string | Product slug (e.g., `"dotnet-runtime"`); `""` for infra repos |
 | `title` | string | PR title; `""` if not available |
 | `url` | string | Public GitHub PR URL; `""` if non-public |
-| `commit` | string | Key into top-level `commits{}` dict |
+| `commit` | string | Key into top-level `commits{}` dict (source repo commit) |
+| `dotnet_commit` | string | Key into top-level `commits{}` dict (VMR commit that brought this change in) |
 | `is_security` | bool | `true` if this is a security change |
 | `labels` | array | PR labels (only present when `--labels` is used) |
 
 The `product` field is derived from the repo-level [component mapping](component-mapping.md). Infra repos like `arcade` and `symreader` have an empty product. The `repo` field always matches the VMR manifest path.
+
+The `dotnet_commit` field links to the VMR codeflow commit in `dotnet/dotnet` that synced this change. Multiple source PRs typically map to the same VMR commit (codeflow batches changes).
 
 ## Commit entry fields (values in `commits{}`)
 
@@ -72,6 +75,7 @@ The `product` field is derived from the repo-level [component mapping](component
       "title": "Add JsonSerializerOptions.Web preset",
       "url": "https://github.com/dotnet/runtime/pull/112345",
       "commit": "runtime@b2d5fa8",
+      "dotnet_commit": "dotnet@a1b2c3d",
       "is_security": false
     },
     {
@@ -81,6 +85,7 @@ The `product` field is derived from the repo-level [component mapping](component
       "title": "Add MapStaticAssets middleware",
       "url": "https://github.com/dotnet/aspnetcore/pull/54321",
       "commit": "aspnetcore@f45f3c9",
+      "dotnet_commit": "dotnet@a1b2c3d",
       "is_security": false
     }
   ],
@@ -98,10 +103,19 @@ The `product` field is derived from the repo-level [component mapping](component
       "hash": "f45f3c916df91e3fb175c85ba4a4f58ec1f77ef0",
       "org": "dotnet",
       "url": "https://github.com/dotnet/aspnetcore/commit/f45f3c916df91e3fb175c85ba4a4f58ec1f77ef0.diff"
+    },
+    "dotnet@a1b2c3d": {
+      "repo": "dotnet",
+      "branch": "",
+      "hash": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0.diff"
     }
   }
 }
 ```
+
+Note that both changes share the same `dotnet_commit` — they were synced to the VMR in a single codeflow batch.
 
 ## Querying changes.json
 
