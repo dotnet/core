@@ -4,11 +4,11 @@ Curated examples from previous .NET release notes, organized by component. Load 
 
 | File | Component | Styles shown |
 | ---- | --------- | ------------ |
-| [runtime.md](examples/runtime.md) | JIT, GC, CoreCLR | Benchmark narrative, assembly comparison, metric-heavy prose |
-| [aspnetcore.md](examples/aspnetcore.md) | ASP.NET Core, Blazor | Short behavior change, medium workaround, long community feature |
-| [csharp.md](examples/csharp.md) | C# language | Code-first with rule bullets |
-| [sdk.md](examples/sdk.md) | SDK, CLI, containers | Problem/solution with community attribution |
-| [libraries.md](examples/libraries.md) | BCL, System.* APIs | Subheadings, diff blocks, multiple API examples |
+| [runtime.md](runtime.md) | JIT, GC, CoreCLR | Benchmark narrative, assembly comparison, metric-heavy prose |
+| [aspnetcore.md](aspnetcore.md) | ASP.NET Core, Blazor | Short behavior change, medium workaround, long community feature |
+| [csharp.md](csharp.md) | C# language | Code-first with rule bullets |
+| [sdk.md](sdk.md) | SDK, CLI, containers | Problem/solution with community attribution |
+| [libraries.md](libraries.md) | BCL, System.* APIs | Subheadings, diff blocks, multiple API examples |
 
 ## Principles
 

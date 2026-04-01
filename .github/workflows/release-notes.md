@@ -209,6 +209,7 @@ Things change between runs. Handle these gracefully:
 ### 4. Daily summary
 
 At the end of each run, leave a comment on each active PR noting:
+
 - What was regenerated or updated
 - How many new changes appeared since yesterday
 - Whether the head ref changed
