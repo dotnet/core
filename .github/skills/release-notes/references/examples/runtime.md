@@ -46,7 +46,6 @@ Thanks to improvements to the JIT's inlining, stack allocation, and loop cloning
 Source: [.NET 10 Preview 2 — Runtime](../../../../release-notes/10.0/preview/preview2/runtime.md)
 Commentary: Progressive benchmark narrative — the best style for JIT optimization stories.
 Why it works: Multiple benchmark tables tell a story (problem → partial fix → harder problem → better fix). Each table shows measurable improvement. The reader follows the JIT's reasoning through escalating complexity.
-
 ---
 
 ## Improved Code Generation for Struct Arguments
@@ -97,7 +96,6 @@ Program:Main() (FullOpts):
 Source: [.NET 10 Preview 6 — Runtime](../../../../release-notes/10.0/preview/preview6/runtime.md)
 Commentary: Before/after assembly comparison — the gold standard for codegen improvements.
 Why it works: The reader can count the instructions eliminated. The assembly speaks for itself — no prose needed to explain the magnitude of the improvement.
-
 ---
 
 ## JIT: Loop Optimizations
@@ -116,5 +114,4 @@ This is just a snippet of the improvements RyuJIT's new loop representation brin
 Source: [.NET 9 Preview 1 — Runtime](../../../../release-notes/9.0/preview/preview1/runtime.md)
 Commentary: Metric-heavy prose with no code — good for infrastructure improvements where breadth of impact matters more than a single before/after.
 Why it works: Percentages sell the improvement without needing code. Each bullet is self-contained. Links to the tracking issue for depth.
-
 ---

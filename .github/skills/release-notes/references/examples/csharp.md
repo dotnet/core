@@ -31,5 +31,4 @@ Extension members are only considered for overload resolution when no applicable
 Source: [.NET 10 Preview 7 — C#](../../../../release-notes/10.0/preview/preview7/csharp.md)
 Commentary: Code-first — one sentence of context, then the syntax, then rule bullets. Language features need to be seen, not just described.
 Why it works: Shows the code immediately. The rule bullets follow naturally as "here's what you need to know." No motivation section needed.
-
 ---

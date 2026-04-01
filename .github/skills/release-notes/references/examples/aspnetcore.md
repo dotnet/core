@@ -12,7 +12,6 @@ Additionally, the middleware's default behavior has changed: it no longer writes
 Source: [.NET 10 Preview 7 — ASP.NET Core](../../../../release-notes/10.0/preview/preview7/aspnetcore.md)
 Commentary: Short and focused — three sentences covering the new option, the use case, and a behavior change. No code needed.
 Why it works: The reader immediately knows what changed, why, and whether they're affected.
-
 ---
 
 ## Use PipeReader support in System.Text.Json
@@ -37,7 +36,6 @@ public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSeria
 Source: [.NET 10 Preview 7 — ASP.NET Core](../../../../release-notes/10.0/preview/preview7/aspnetcore.md)
 Commentary: Medium — behavioral change that's mostly invisible but has an edge case. Gives the workaround and the proper fix.
 Why it works: Acknowledges most users won't notice, identifies who *will* be affected, gives an immediate workaround, then the proper fix.
-
 ---
 
 ## `OpenIdConnectHandler` support for Pushed Authorization Requests (PAR)
@@ -78,5 +76,4 @@ This change also introduces a new `OnPushAuthorization` event to `OpenIdConnectE
 Source: [.NET 9 Preview 7 — ASP.NET Core](../../../../release-notes/9.0/preview/preview7/aspnetcore.md)
 Commentary: Long — community contribution with the contributor's own words explaining significance. Good template for features with security or compliance importance.
 Why it works: The block quote lets the contributor explain the significance — more credible than paraphrasing. Then practical: default behavior, how to disable, how to require.
-
 ---

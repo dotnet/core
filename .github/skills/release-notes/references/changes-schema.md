@@ -28,14 +28,14 @@ release-notes/{major.minor}/{major.minor.patch}/changes.json   # patches
 
 | Field | Type | Description |
 | ----- | ---- | ----------- |
-| `id` | int | GitHub PR number; `0` if no public PR |
+| `id` | string | Globally unique identifier — `repo@shortcommit` format (e.g., `"runtime@c5d5be4"`) |
 | `repo` | string | Short repository name (e.g., `"runtime"`) |
 | `product` | string | Product slug (e.g., `"dotnet-runtime"`); absent for infra repos |
 | `title` | string | PR title; `""` if not available |
 | `url` | string | Public GitHub PR URL; `""` if non-public |
 | `commit` | string | Key into top-level `commits{}` dict — the VMR (`dotnet/dotnet`) codeflow commit |
 | `is_security` | bool | `true` if this is a security change |
-| `local_repo_commit` | string | Key into `commits{}` — the source repo commit (e.g., `"runtime@c5d5be4"`) |
+| `local_repo_commit` | string | Key into `commits{}` — the source repo commit (same as `id`) |
 | `labels` | array | PR labels (only present when `--labels` is used) |
 
 The `product` field is derived from the repo-level [component mapping](component-mapping.md). Infra repos like `arcade` and `symreader` have no `product` field. The `repo` field always matches the VMR manifest path.
@@ -67,7 +67,7 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
   "release_date": "",
   "changes": [
     {
-      "id": 112345,
+      "id": "runtime@b2d5fa8",
       "repo": "runtime",
       "product": "dotnet-runtime",
       "title": "Add JsonSerializerOptions.Web preset",
@@ -77,7 +77,7 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
       "local_repo_commit": "runtime@b2d5fa8"
     },
     {
-      "id": 54321,
+      "id": "aspnetcore@f45f3c9",
       "repo": "aspnetcore",
       "product": "dotnet-aspnetcore",
       "title": "Add MapStaticAssets middleware",
