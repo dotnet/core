@@ -105,7 +105,7 @@ The AI agent reads `changes.json` and writes markdown release notes. Its guidanc
 | [component-mapping.md](references/component-mapping.md) | Components → product slugs → output files |
 | [format-template.md](references/format-template.md) | Markdown document structure |
 | [editorial-rules.md](references/editorial-rules.md) | Tone, attribution, naming |
-| [examples.md](references/examples.md) | Curated examples — short, medium, long-form styles |
+| [examples/](references/examples/README.md) | Curated examples by component — short, medium, long-form styles |
 
 These are **goal-oriented**, not procedural. They describe what good release notes look like, not the exact steps to produce them. The agent figures out the HOW.
 

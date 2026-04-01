@@ -69,7 +69,7 @@ Read these files from `.github/skills/release-notes/references/` for detailed gu
 - **component-mapping.md** — VMR paths → components → product slugs → output files
 - **format-template.md** — markdown document structure
 - **editorial-rules.md** — tone, attribution, naming conventions
-- **examples.md** — curated examples from previous releases showing short, medium, and long-form styles
+- **examples/** — curated examples from previous releases, organized by component ([README](examples/README.md) has principles)
 
 ## What to do each run
 
