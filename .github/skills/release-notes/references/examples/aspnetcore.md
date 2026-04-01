@@ -1,17 +1,24 @@
 # ASP.NET Core Examples
 
-## Configure suppressing exception handler diagnostics
+## `ExceptionHandlerMiddleware` option to choose the status code based on the exception
 
-A new configuration option has been added to the [ASP.NET Core exception handler middleware](https://learn.microsoft.com/aspnet/core/fundamentals/error-handling#exception-handler-page) to control diagnostic output: `ExceptionHandlerOptions.SuppressDiagnosticsCallback`. This callback is passed context about the request and exception, allowing you to add logic that determines whether the middleware should write exception logs and other telemetry.
+A new option when configuring the `ExceptionHandlerMiddleware` allows app developers to choose what status code to return when an exception occurs during application request handling. The new option changes the status code being set in the `ProblemDetails` response from the `ExceptionHandlerMiddleware`.
 
-This setting is useful when you know an exception is transient, or has been handled by the exception handler middleware, and don't want the error logs written to your observability platform.
+```csharp
+app.UseExceptionHandler(new ExceptionHandlerOptions
+{
+    StatusCodeSelector = ex => ex is TimeoutException
+        ? StatusCodes.Status503ServiceUnavailable
+        : StatusCodes.Status500InternalServerError,
+});
+```
 
-Additionally, the middleware's default behavior has changed: it no longer writes exception diagnostics for exceptions handled by `IExceptionHandler`. Based on user feedback, logging handled exceptions at the error level was often undesirable when `IExceptionHandler.TryHandleAsync` returned `true`.
+Thanks to [@latonz](https://github.com/latonz) for contributing this new option!
 
 ---
-Source: [.NET 10 Preview 7 — ASP.NET Core](../../../../release-notes/10.0/preview/preview7/aspnetcore.md)
-Commentary: Short and focused — three sentences covering the new option, the use case, and a behavior change. A code sample showing the callback usage would strengthen it.
-Why it works: The reader immediately knows what changed, why, and whether they're affected.
+Source: [.NET 9 Preview 7 — ASP.NET Core](../../../../release-notes/9.0/preview/preview7/aspnetcore.md)
+Commentary: Short and focused — one paragraph of context, a tight code snippet, and community credit.
+Why it works: The code speaks for itself. The reader sees exactly what the API looks like and can immediately use it. No explanation needed beyond "what" and "why."
 ---
 
 ## Use PipeReader support in System.Text.Json
