@@ -1,6 +1,6 @@
 ---
 on:
-  schedule: daily around 9:00 utc-8
+  schedule: every 6 hours
   workflow_dispatch:
     inputs:
       milestone:
