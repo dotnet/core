@@ -23,3 +23,4 @@ Curated examples from previous .NET release notes, organized by component. Load 
 8. **Ask for what you can't generate** — benchmark data, definitive samples, and domain context come from humans. A placeholder with a request is better than a fabrication
 9. **Workarounds are welcome** — if a change might break someone, say so and give the escape hatch
 10. **Link to PRs and issues** — use the `org/repo #number` format: `[dotnet/runtime #115977](https://github.com/dotnet/runtime/pull/115977)`. Links give readers provenance and let them dig deeper
+11. **Avoid jargon and ambiguous words** — "snippet" in a programming context suggests code. Say what you mean plainly. If a word could be misread, pick a simpler one

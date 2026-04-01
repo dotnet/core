@@ -114,4 +114,5 @@ This is just a snippet of the improvements RyuJIT's new loop representation brin
 Source: [.NET 9 Preview 1 — Runtime](../../../../release-notes/9.0/preview/preview1/runtime.md)
 Commentary: Metric-heavy prose with no code — good for infrastructure improvements where breadth of impact matters more than a single before/after.
 Why it works: Percentages sell the improvement without needing code. Each bullet is self-contained. Links to the tracking issue for depth.
+Style note: L111 "snippet" is ambiguous in a programming context — readers may expect a code snippet. Prefer plain language like "a sample of" or "some of."
 ---
