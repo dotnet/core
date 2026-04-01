@@ -16,7 +16,7 @@ Curated examples from previous .NET release notes, organized by component. Load 
 2. **Lead with what changed** — don't bury the lede with background paragraphs
 3. **Prefer active voice** — "The JIT now eliminates bounds checks" not "Bounds checks are now eliminated by the JIT." Passive voice is fine occasionally but active is the strong default
 3. **Code shows, prose explains** — when there's an API, show it; use prose for the why/when
-4. **Attribution is natural** — community contributions get a mention with a GitHub link, not a separate "contributors" section
+4. **Title, Content, Credit** — explain the feature first, credit contributors at the end. Don't restructure a release note into a guest introduction. See the StatusCodeSelector example (good) vs. the PAR example (anti-pattern) in aspnetcore.md
 5. **Diff format for improvements** — when a feature simplifies existing code, `diff` blocks make the improvement immediately visible
 6. **Assembly comparisons for JIT work** — before/after `asm` blocks let readers count the instructions eliminated
 7. **Progressive benchmarks tell a story** — multiple benchmark tables showing incremental improvement are more compelling than a single number

@@ -84,4 +84,5 @@ This change also introduces a new `OnPushAuthorization` event to `OpenIdConnectE
 Source: [.NET 9 Preview 7 — ASP.NET Core](../../../../release-notes/9.0/preview/preview7/aspnetcore.md)
 Commentary: Long — community contribution with the contributor's own words explaining significance. Good template for features with security or compliance importance.
 Why it works: The block quote lets the contributor explain the significance — more credible than paraphrasing. Then practical: default behavior, how to disable, how to require.
+Anti-pattern: The opening ("We'd like to thank...Joe described...as follows") turns the release note into a guest introduction. Prefer the **Title, Content, Credit** pattern — explain the feature first, give credit at the end (like the StatusCodeSelector example above). Credit is good; restructuring the entire note around it is not.
 ---
