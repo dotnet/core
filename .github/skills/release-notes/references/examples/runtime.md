@@ -46,6 +46,7 @@ Thanks to improvements to the JIT's inlining, stack allocation, and loop cloning
 Source: [.NET 10 Preview 2 — Runtime](../../../../release-notes/10.0/preview/preview2/runtime.md)
 Commentary: Progressive benchmark narrative — the best style for JIT optimization stories.
 Why it works: Multiple benchmark tables tell a story (problem → partial fix → harder problem → better fix). Each table shows measurable improvement. The reader follows the JIT's reasoning through escalating complexity.
+Style note: L5 buries the lede with "Preview 1 brought enhancements to..." — passive and backward-looking. Better: "A major focus this release is reducing the abstraction overhead of array iteration via enumerators. We delivered improvements in Preview 1 for array interface methods. In this preview, we've continued on that theme." Active voice, states the goal upfront, then the progression.
 ---
 
 ## Improved Code Generation for Struct Arguments
