@@ -53,4 +53,5 @@ Source: [.NET 10 Preview 7 — Libraries](../../../../release-notes/10.0/preview
 Commentary: Long — subheadings organize related-but-distinct features. Uses `diff` blocks for API simplification and complete runnable scenarios for new APIs.
 Why it works: The `diff` block immediately shows the simplification (red lines removed, green line added). The Composite ML-DSA sample is a complete scenario (generate → sign → verify → tamper → verify-fails).
 Style note: L7 "gained ease-of-use updates" is passive and vague. Prefer active/direct: "Common patterns using `MLDsa` are now easier:" or "Ease-of-use updates simplify common `MLDsa` patterns:".
+
 ---

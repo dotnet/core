@@ -19,6 +19,7 @@ Thanks to [@latonz](https://github.com/latonz) for contributing this new option!
 Source: [.NET 9 Preview 7 — ASP.NET Core](../../../../release-notes/9.0/preview/preview7/aspnetcore.md)
 Commentary: Short and focused — one paragraph of context, a tight code snippet, and community credit.
 Why it works: The code speaks for itself. The reader sees exactly what the API looks like and can immediately use it. No explanation needed beyond "what" and "why."
+
 ---
 
 ## Use PipeReader support in System.Text.Json
@@ -44,6 +45,7 @@ Source: [.NET 10 Preview 7 — ASP.NET Core](../../../../release-notes/10.0/prev
 Commentary: Medium — behavioral change that's mostly invisible but has an edge case. Gives the workaround and the proper fix.
 Why it works: Acknowledges most users won't notice, identifies who *will* be affected, gives an immediate workaround, then the proper fix.
 Style note: The opening phrase "without requiring any code changes from applications" is awkward — it personifies the application. Prefer "without needing application changes." Simpler, active, shorter.
+
 ---
 
 ## `OpenIdConnectHandler` support for Pushed Authorization Requests (PAR)
@@ -85,4 +87,5 @@ Source: [.NET 9 Preview 7 — ASP.NET Core](../../../../release-notes/9.0/previe
 Commentary: Long — community contribution with the contributor's own words explaining significance. Good template for features with security or compliance importance.
 Why it works: The block quote lets the contributor explain the significance — more credible than paraphrasing. Then practical: default behavior, how to disable, how to require.
 Anti-pattern: The opening ("We'd like to thank...Joe described...as follows") turns the release note into a guest introduction. Prefer the **Title, Content, Credit** pattern — explain the feature first, give credit at the end (like the StatusCodeSelector example above). Credit is good; restructuring the entire note around it is not.
+
 ---
