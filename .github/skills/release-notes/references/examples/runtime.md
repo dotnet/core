@@ -43,7 +43,7 @@ Thanks to improvements to the JIT's inlining, stack allocation, and loop cloning
 | foreach_static_readonly_array_via_interface (.NET 10)        |   280.0 ns |  1.86 |         - |
 
 ---
-Source: [.NET 10 Preview 2 — Runtime](../../../../release-notes/10.0/preview/preview2/runtime.md)
+Source: [.NET 10 Preview 2 — Runtime](../../../../../release-notes/10.0/preview/preview2/runtime.md)
 Commentary: Progressive benchmark narrative — the best style for JIT optimization stories.
 Why it works: Multiple benchmark tables tell a story (problem → partial fix → harder problem → better fix). Each table shows measurable improvement. The reader follows the JIT's reasoning through escalating complexity.
 Style note: L5 buries the lede with "Preview 1 brought enhancements to..." — passive and backward-looking. Better: "A major focus this release is reducing the abstraction overhead of array iteration via enumerators. We delivered improvements in Preview 1 for array interface methods. In this preview, we've continued on that theme." Active voice, states the goal upfront, then the progression.
@@ -95,7 +95,7 @@ Program:Main() (FullOpts):
 ```
 
 ---
-Source: [.NET 10 Preview 6 — Runtime](../../../../release-notes/10.0/preview/preview6/runtime.md)
+Source: [.NET 10 Preview 6 — Runtime](../../../../../release-notes/10.0/preview/preview6/runtime.md)
 Commentary: Before/after assembly comparison — the gold standard for codegen improvements.
 Why it works: The reader can count the instructions eliminated. The assembly speaks for itself — no prose needed to explain the magnitude of the improvement.
 
@@ -114,7 +114,7 @@ Here's a quick breakdown of the improvements:
 This is just a snippet of the improvements RyuJIT's new loop representation brings. To take a closer look at the loop optimization work planned for .NET 9, check out [dotnet/runtime #93144](https://github.com/dotnet/runtime/issues/93144).
 
 ---
-Source: [.NET 9 Preview 1 — Runtime](../../../../release-notes/9.0/preview/preview1/runtime.md)
+Source: [.NET 9 Preview 1 — Runtime](../../../../../release-notes/9.0/preview/preview1/runtime.md)
 Commentary: Metric-heavy prose with no code — good for infrastructure improvements where breadth of impact matters more than a single before/after.
 Why it works: Percentages sell the improvement without needing code. Each bullet is self-contained. Links to the tracking issue for depth.
 Style note: L111 "snippet" is ambiguous in a programming context — readers may expect a code snippet. Prefer plain language like "a sample of" or "some of."

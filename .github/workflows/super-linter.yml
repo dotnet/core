@@ -35,6 +35,6 @@ jobs:
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_MARKDOWN_PRETTIER: false
           VALIDATE_JSON_PRETTIER: false
-          FILTER_REGEX_EXCLUDE: .github/skills/.*
+          FILTER_REGEX_EXCLUDE: (.github/skills/.*|.*\.lock\.yml)
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

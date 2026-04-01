@@ -28,7 +28,7 @@ Several of the rules for extension operators are demonstrated in the preceding e
 Extension members are only considered for overload resolution when no applicable predefined or user defined non-extension members are found.
 
 ---
-Source: [.NET 10 Preview 7 — C#](../../../../release-notes/10.0/preview/preview7/csharp.md)
+Source: [.NET 10 Preview 7 — C#](../../../../../release-notes/10.0/preview/preview7/csharp.md)
 Commentary: Code-first — one sentence of context, then the syntax, then rule bullets. Language features need to be seen, not just described.
 Why it works: Shows the code immediately. The rule bullets follow naturally as "here's what you need to know." No motivation section needed.
 Style note: Line 21 ("Several of the rules for extension operators are demonstrated in the preceding example:") is stiff. Prefer something direct like "The rules for extension operators:" or "Extension operator rules:" — the reader can see the example is right above.
