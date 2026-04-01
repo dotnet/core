@@ -40,6 +40,24 @@ A behavioral change that's mostly invisible but has an edge case. Explains what 
 
 Best for: major features, security capabilities, things users have been asking for.
 
+### Example: Array Enumeration De-Abstraction
+
+> From [.NET 10 Preview 2 — Runtime](../../release-notes/10.0/preview/preview2/runtime.md)
+
+A progressive JIT optimization story told through three benchmark tables. Starts with a simple case (transparent type), escalates to a harder case (opaque type behind interface), and walks through each optimization layer (inlining, PGO, guarded devirtualization, conditional escape analysis). Each benchmark shows measurable improvement. The narrative structure — problem, partial solution, harder problem, better solution — keeps the reader engaged.
+
+### Example: Improved Code Generation for Struct Arguments
+
+> From [.NET 10 Preview 6 — Runtime](../../release-notes/10.0/preview/preview6/runtime.md)
+
+Before/after assembly comparison showing a concrete codegen improvement. Starts with C# code, shows the current optimal case, introduces the pathological case with assembly output, then shows the fix. Three `asm` blocks tell the whole story — the reader can literally count the instructions eliminated.
+
+### Example: JIT Loop Optimizations
+
+> From [.NET 9 Preview 1 — Runtime](../../release-notes/9.0/preview/preview1/runtime.md)
+
+No code at all — just crisp prose with percentages. Explains three optimization categories (hoisting, cloning, alignment) with one-paragraph descriptions and measured improvement rates. Good template for infrastructure improvements where the value is breadth of impact rather than a single dramatic before/after.
+
 ### Example: Post-Quantum Cryptography Updates
 
 > From [.NET 10 Preview 7 — Libraries](../../release-notes/10.0/preview/preview7/libraries.md)
@@ -59,4 +77,6 @@ Community contribution with extensive quoted motivation from the contributor. Th
 3. **Code shows, prose explains** — when there's an API, show it; use prose for the why/when
 4. **Attribution is natural** — community contributions get a mention with a GitHub link, not a separate "contributors" section
 5. **Diff format for improvements** — when a feature simplifies existing code, `diff` blocks make the improvement immediately visible
-6. **Workarounds are welcome** — if a change might break someone, say so and give the escape hatch
+6. **Assembly comparisons for JIT work** — before/after `asm` blocks let readers count the instructions eliminated
+7. **Progressive benchmarks tell a story** — multiple benchmark tables showing incremental improvement are more compelling than a single number
+8. **Workarounds are welcome** — if a change might break someone, say so and give the escape hatch
