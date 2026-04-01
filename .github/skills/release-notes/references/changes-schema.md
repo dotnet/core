@@ -2,8 +2,6 @@
 
 Reference for the `changes.json` file produced by `dotnet-release generate changes`. One file per release milestone.
 
-Based on the [changes schema proposal](https://gist.github.com/richlander/a2bf9beb6f09cf9ba7ecf80f5b51784e).
-
 ## Overview
 
 `changes.json` is a comprehensive, machine-readable manifest of every PR and commit that shipped in a release. It is the companion to the editorial markdown release notes — the JSON tells you **everything that shipped**, the markdown tells you **what matters**.
