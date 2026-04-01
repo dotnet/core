@@ -43,6 +43,7 @@ public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSeria
 Source: [.NET 10 Preview 7 — ASP.NET Core](../../../../release-notes/10.0/preview/preview7/aspnetcore.md)
 Commentary: Medium — behavioral change that's mostly invisible but has an edge case. Gives the workaround and the proper fix.
 Why it works: Acknowledges most users won't notice, identifies who *will* be affected, gives an immediate workaround, then the proper fix.
+Style note: The opening phrase "without requiring any code changes from applications" is awkward — it personifies the application. Prefer "without needing application changes." Simpler, active, shorter.
 ---
 
 ## `OpenIdConnectHandler` support for Pushed Authorization Requests (PAR)
