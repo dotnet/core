@@ -16,32 +16,24 @@ Without verification, the agent will guess — and guesses end up in code sample
 
 `dotnet-inspect` is available as a Copilot skill. Invoke it with `dotnet-inspect` to get the full command reference and mental model. The tool queries NuGet packages, platform libraries, and local files.
 
-### Installation
+### Running the tool
 
-The tool runs via `dnx` (like `npx` for .NET). No installation needed — just use:
+The tool runs via `dnx` (like `npx` for .NET). No installation needed:
 
 ```bash
 dnx dotnet-inspect -y -- <command>
 ```
 
-### Getting a current SDK for verification
+### Querying the correct build
 
-By default, `--platform` queries the locally installed SDK. When writing release notes for Preview N, the local SDK may be Preview N-1 or older — so new APIs won't be found. **Always check what version you're querying:**
+When writing release notes for Preview N, the locally installed SDK is often Preview N-1 or older. The `--platform` flag queries the local SDK, so new APIs won't be found. Instead, **query the nightly NuGet packages directly** from the `dotnet11` feed using `--package` and `--source`.
 
-```bash
-dotnet --version  # e.g., 11.0.100-preview.2.26159.112
-```
+The `dotnet-release` tool provides build metadata (package versions, feed URLs) alongside `changes.json`. Use that metadata to construct the correct queries. See [richlander/dotnet-release#42](https://github.com/richlander/dotnet-release/issues/42) for the tracking issue.
 
-If the installed SDK is older than the preview you're writing about, download the correct nightly SDK build.
-
-### Finding the right build
-
-Preview releases ship from release branches, not main. By the time you're writing Preview N release notes, main may have moved to Preview N+1 or alpha. You need the **last daily build from main before the branding changed past Preview N**.
-
-The `dotnet11` NuGet feed publishes daily builds of `Microsoft.NETCore.App.Ref` with version strings like `11.0.0-preview.3.26179.102`. Query the feed to find the latest Preview N build:
+Until that's available, find the correct package version manually:
 
 ```bash
-# Find the latest preview.3 build number from the nightly feed
+# Find the latest preview.3 runtime ref pack version from the nightly feed
 curl -s "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/flat2/microsoft.netcore.app.ref/index.json" \
   | python3 -c "
 import json, sys
@@ -53,74 +45,50 @@ print(p3[-1])
 # Output: 11.0.0-preview.3.26179.102
 ```
 
-The SDK tarball version matches the runtime version's build number. Download it from ci.dot.net:
+The feed URL for .NET 11 nightly builds is documented in the VMR's [`docs/builds-table.md`](https://github.com/dotnet/dotnet/blob/main/docs/builds-table.md):
 
-```bash
-# The version from the feed query above
-VERSION="11.0.100-preview.3.26179.102"
-
-# Download the SDK tarball
-curl -Lo /tmp/dotnet-sdk-p3.tar.gz \
-  "https://ci.dot.net/public/Sdk/${VERSION}/dotnet-sdk-${VERSION}-osx-arm64.tar.gz"
-
-# Extract to a local directory (don't overwrite the system SDK)
-mkdir -p /tmp/dotnet-p3
-tar xzf /tmp/dotnet-sdk-p3.tar.gz -C /tmp/dotnet-p3
-
-# Verify
-/tmp/dotnet-p3/dotnet --version  # 11.0.100-preview.3.26179.102
+```text
+https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/index.json
 ```
-
-Then point `dotnet-inspect` at it with `DOTNET_ROOT`:
-
-```bash
-DOTNET_ROOT=/tmp/dotnet-p3 dnx dotnet-inspect -y -- find "*AnyNewLine*" --platform
-DOTNET_ROOT=/tmp/dotnet-p3 dnx dotnet-inspect -y -- member RegexOptions --platform System.Text.RegularExpressions -k field
-```
-
-### Why this matters: stale builds give false negatives
-
-Without the correct build, `dotnet-inspect --platform` queries whatever SDK is installed locally. If you're on Preview 2 and writing Preview 3 notes, every new P3 API will come back "not found" — but that doesn't mean the API was reverted or doesn't exist. It means you're querying stale data.
-
-A false negative on a stale build is indistinguishable from a genuinely reverted API. **Always verify against a build that matches the preview you're writing about.**
-
-**Report the build version.** When writing release notes, note which SDK build you verified against — either as a comment in the markdown or in your working notes. For example: `<!-- Verified against SDK 11.0.100-preview.3.26179.102 -->`
 
 ### Common verification patterns
 
-**Find a type by name** — when a PR mentions a new type:
+Use `--package Name@Version` with `--source` to query the correct preview build. All queries below are pure data — no SDK installation needed.
+
+**Find a type by name:**
 
 ```bash
-# Search across ASP.NET Core packages for the zstd type
-dnx dotnet-inspect -y -- find "*Zstandard*" --aspnetcore
+FEED="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/index.json"
+VER="11.0.0-preview.3.26179.102"
 
-# Search across all platform libraries
-dnx dotnet-inspect -y -- find "*ProcessStartOptions*" --platform
+# Search the runtime ref pack
+dnx dotnet-inspect -y -- find "*AnyNewLine*" --package "Microsoft.NETCore.App.Ref@${VER}" --source "$FEED"
+
+# Search ASP.NET Core ref pack
+dnx dotnet-inspect -y -- find "*Zstandard*" --package "Microsoft.AspNetCore.App.Ref@${VER}" --source "$FEED"
 ```
 
-**Verify a type's members** — when writing a code sample:
+**Verify a type's members:**
 
 ```bash
-# See the full API surface of a type
-dnx dotnet-inspect -y -- member ZstandardCompressionProvider --aspnetcore
-
-# Check specific method signatures
-dnx dotnet-inspect -y -- member JsonSerializer --package System.Text.Json -m Deserialize
+dnx dotnet-inspect -y -- member RegexOptions --package "Microsoft.NETCore.App.Ref@${VER}" --source "$FEED" --library System.Text.RegularExpressions -k field
 ```
 
-**Verify an enum value** — when referencing specific options:
+**Diff between versions:**
 
 ```bash
-# Check what values an enum has
-dnx dotnet-inspect -y -- member RegexOptions --platform -k field
+dnx dotnet-inspect -y -- diff --package "Microsoft.NETCore.App.Ref@11.0.0-preview.2..11.0.0-preview.3" --source "$FEED"
 ```
 
-**Diff between versions** — when documenting what's new:
+### Report what you verified against
 
-```bash
-# See what APIs were added between previews
-dnx dotnet-inspect -y -- diff --package Microsoft.EntityFrameworkCore@11.0.0-preview.2..11.0.0-preview.3
+Always note the package version in a markdown comment so reviewers know the verification is grounded:
+
+```markdown
+<!-- Verified against Microsoft.NETCore.App.Ref@11.0.0-preview.3.26179.102 -->
 ```
+
+This makes it possible to distinguish "API doesn't exist" from "verified against a stale build."
 
 ## When to verify
 
@@ -140,10 +108,10 @@ You do NOT need to verify:
 
 If `dotnet-inspect` can't find a type:
 
-1. **Check your build version first** — run `dotnet --version` or check `DOTNET_ROOT`. If you're querying a build older than the preview you're writing about, the API may simply not be in that build. Download the correct nightly (see above).
+1. **Check your package version first** — are you querying a Preview N-1 package while writing Preview N notes? Find the correct version (see above).
 2. **Named differently** — search with a broader pattern (`find "*Zstd*"` instead of the exact name).
 3. **Reverted** — check `changes.json` for a revert PR. If the API was added and then reverted in the same preview, it didn't ship. Don't document it.
 4. **Internal** — the type may not be public. Don't document internal types in release notes.
-5. **Read the PR tests** — when the correct nightly build is unavailable, the PR's test files are ground truth. Tests compile and run against the actual API surface. Derive code samples from test assertions rather than guessing type names.
+5. **Read the PR tests** — the PR's test files are ground truth. Tests compile and run against the actual API surface. Derive code samples from test assertions rather than guessing type names.
 
 When in doubt, describe the feature without naming specific types and link to the PR. A correct prose description is always better than a wrong code sample.
