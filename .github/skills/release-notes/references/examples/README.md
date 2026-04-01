@@ -14,6 +14,7 @@ Curated examples from previous .NET release notes, organized by component. Load 
 
 1. **Length matches importance** — a config option gets 3 sentences; a cryptography overhaul gets subheadings and multiple code blocks
 2. **Lead with what changed** — don't bury the lede with background paragraphs
+3. **Prefer active voice** — "The JIT now eliminates bounds checks" not "Bounds checks are now eliminated by the JIT." Passive voice is fine occasionally but active is the strong default
 3. **Code shows, prose explains** — when there's an API, show it; use prose for the why/when
 4. **Attribution is natural** — community contributions get a mention with a GitHub link, not a separate "contributors" section
 5. **Diff format for improvements** — when a feature simplifies existing code, `diff` blocks make the improvement immediately visible
