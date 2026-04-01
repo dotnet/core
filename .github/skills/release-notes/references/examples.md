@@ -79,4 +79,5 @@ Community contribution with extensive quoted motivation from the contributor. Th
 5. **Diff format for improvements** — when a feature simplifies existing code, `diff` blocks make the improvement immediately visible
 6. **Assembly comparisons for JIT work** — before/after `asm` blocks let readers count the instructions eliminated
 7. **Progressive benchmarks tell a story** — multiple benchmark tables showing incremental improvement are more compelling than a single number
-8. **Workarounds are welcome** — if a change might break someone, say so and give the escape hatch
+8. **Ask for what you can't generate** — benchmark data, definitive samples, and domain context come from humans. A placeholder with a request is better than a fabrication
+9. **Workarounds are welcome** — if a change might break someone, say so and give the escape hatch

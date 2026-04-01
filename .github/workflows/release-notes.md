@@ -166,7 +166,17 @@ Using `changes.json` and the reference documents:
 - Write feature descriptions following format-template.md and editorial-rules.md
 - Components with no noteworthy changes get a minimal stub
 
-#### d. Read and respond to PR comments
+#### d. Ask for what you can't generate
+
+Some features need content that only humans can provide — benchmark data, definitive code samples, or domain-specific context. When you identify a feature that would benefit from this:
+
+- **Benchmark data** — if a JIT or performance feature would be better told with numbers, post a comment tagging the PR author asking for benchmark results. Write a placeholder section noting the optimization and what it improves, and flag it as needing data.
+- **Code samples** — if you can't confidently generate a correct, idiomatic sample (e.g., complex API interactions, platform-specific patterns), ask the feature author for one. A description without a sample is better than an incorrect sample.
+- **Domain expertise** — if a feature's significance isn't clear from the PR title and diff alone, ask. "Can you describe the user scenario this improves?" is a valid comment.
+
+Frame these as suggestions, not demands. For example: "This JIT improvement in loop unrolling looks significant. Benchmark data showing the before/after would help tell the story — could you share numbers or point me to a benchmark?"
+
+#### e. Read and respond to PR comments
 
 Check all comments and review threads on the PR since the last run:
 
