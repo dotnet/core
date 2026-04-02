@@ -94,3 +94,24 @@ Include a bug fix when ALL of these apply:
 3. A fix shipped in the current preview
 
 Frame positively: "Based on community feedback, X now does Y."
+
+## Filtered features
+
+When you cut a feature for failing the 20/80 rule or two-sentence test, record it in an HTML comment block in the output file. This creates a learning record — future runs and human reviewers can see what was considered and why it was excluded.
+
+Place the comment block immediately before the Bug fixes section:
+
+```html
+<!-- Filtered features (significant engineering work, but too niche for release notes):
+  - Feature name: one-sentence description of the work. Why it was cut.
+  - Another feature: description. Reason.
+-->
+```
+
+Good filter reasons:
+- **Internal infrastructure** — "Implementation detail of the Mono → CoreCLR unification. Developers don't target the interpreter."
+- **Too narrow** — "Only affects COM interop startup — very narrow audience."
+- **Engineering fix, not a feature** — "Two sentences max. No user-visible behavior change beyond a perf number."
+- **Provider extensibility** — "Only matters to database provider authors, not EF Core users."
+
+The comment is invisible to readers but preserved in the file for the next person (or agent) who reviews the notes.
