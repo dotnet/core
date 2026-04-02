@@ -31,13 +31,13 @@ Tone, attribution, and content guidelines for .NET release notes.
 
 ## Feature ordering
 
-Order features by **customer impact**:
+Order features using three tiers, applied in order:
 
-1. Major new capabilities — especially those with high community reaction counts
-2. Meaningful improvements to existing capabilities
-3. Smaller additions
+1. **Broad interest first** — features most developers will care about go at the top. A new `RegexOptions` value ranks above an ARM64-only instruction set.
+2. **Cluster related features** — group related items together even if they differ in importance. All Regex work in one block, all System.Text.Json work in another, all JIT work together. Readers scan by area.
+3. **Alphabetical within a cluster** — when features within a cluster have roughly equal weight, alphabetical order makes them scannable.
 
-Use PR and issue reaction counts as a signal, but apply judgment — a niche feature with 100 reactions may still be less impactful than a broadly useful one with 10.
+Use PR and issue reaction counts as a signal for tier 1, but apply judgment — a niche feature with 100 reactions may still rank below a broadly useful one with 10.
 
 ## Community attribution
 
