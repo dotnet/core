@@ -42,7 +42,23 @@ The README.md links to all component files and includes the general docs link. C
 .NET <VERSION> updates:
 
 - [What's new in .NET <VERSION>](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-<version>/overview)
+
+## Release information
+
+| | Version |
+| --- | --- |
+| Runtime | <runtime-version> |
+| SDK | <sdk-version> |
+
+### VMR refs
+
+These release notes were generated from the [dotnet/dotnet](https://github.com/dotnet/dotnet) VMR:
+
+- **Base**: [`<base-tag>`](https://github.com/dotnet/dotnet/tree/<base-tag>)
+- **Head**: [`<head-branch>`](https://github.com/dotnet/dotnet/tree/<head-branch>)
 ```
+
+Read the runtime version, SDK version, base ref, and head ref from `build-metadata.json`.
 
 ### Component-specific docs links
 
