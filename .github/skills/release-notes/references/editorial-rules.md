@@ -8,6 +8,10 @@ Tone, attribution, and content guidelines for .NET release notes.
   - ✅ `ProcessExitStatus provides a unified representation of how a process terminated.`
   - ❌ `Previously, there was no way to determine how a process terminated.`
 - When context about the prior state is needed, keep it brief — one clause, then pivot to the new capability
+- **Prefer short, direct sentences** — If a sentence has a parenthetical clause (`which...`, `where...`, `that...`) longer than a few words, split it into two sentences. Lead with the news, follow with context. Long sentences are fine when they flow as a single continuous thought (what → why); they're not fine when a subordinate clause interrupts the main verb.
+  - ✅ `Runtime-async is now enabled for NativeAOT. This eliminates the state-machine overhead of async/await for ahead-of-time compiled applications.`
+  - ❌ `The runtime-async feature, which eliminates the state-machine overhead of async/await, is now enabled for NativeAOT.`
+  - ✅ `The JIT now generates ARM64 SM4 and SHA3 instructions directly, enabling hardware-accelerated implementations on capable processors.` (long but flows — one thought)
 
 ## Entry naming
 
