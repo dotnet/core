@@ -29,6 +29,12 @@ Tone, attribution, and content guidelines for .NET release notes.
 - Include specific before/after measurements when compelling
 - Do **not** embed full BenchmarkDotNet tables — summarize in prose
 
+## What to include
+
+- **The 20/80 rule** — at least 20% of readers need to care about a feature. Write so the other 80% understand why those 20% care and why they might, too. A feature that only matters to a narrow audience can still earn its place if the writeup makes the value legible to everyone.
+- **The two-sentence test** — if you can only write two sentences about a feature, it's probably an engineering fix, not a feature. Cut it. A community contribution or breaking change can lift a borderline entry, but "fixed an internal bug that happened to be visible" is not a feature.
+- **Headlines should convey value** — a heading like "GC regions on macOS" doesn't tell the reader whether this is good or bad. Prefer headings that hint at the benefit: "GC regions enabled on macOS" or "Server GC memory model now available on macOS."
+
 ## Feature ordering
 
 Order features using three tiers, applied in order:
