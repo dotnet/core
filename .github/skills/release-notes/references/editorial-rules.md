@@ -98,6 +98,18 @@ Include a bug fix when ALL of these apply:
 
 Frame positively: "Based on community feedback, X now does Y."
 
+## Preview-to-preview deduplication
+
+When prior previews already documented a feature, don't repeat the same information. But **do** document significant state changes in the current preview. A feature that was introduced as opt-in in P1 and is now enabled by default in P3 is new news — document the change in state, not the feature from scratch.
+
+Ask: "What changed about this feature since the last preview's release notes?" If the answer is meaningful to users (enabled by default, no longer experimental, major perf improvement, new sub-features), write about that. If the answer is just "more PRs landed in the same area," skip it.
+
+Examples:
+- ✅ "Runtime-async is now enabled by default for anyone targeting `net11.0`." (state change: opt-in → default)
+- ✅ "The Regex source generator now handles alternations 3× faster." (new perf data)
+- ❌ Repeating the full explanation of what runtime-async is from P1 (already documented)
+- ❌ "More JIT optimizations landed this preview." (no specific news)
+
 ## Filtered features
 
 When you cut a feature for failing the 20/80 rule or two-sentence test, record it in an HTML comment block in the output file. This creates a learning record — future runs and human reviewers can see what was considered and why it was excluded.
