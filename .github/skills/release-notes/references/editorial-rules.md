@@ -8,6 +8,9 @@ Tone, attribution, and content guidelines for .NET release notes.
   - ✅ `ProcessExitStatus provides a unified representation of how a process terminated.`
   - ❌ `Previously, there was no way to determine how a process terminated.`
 - When context about the prior state is needed, keep it brief — one clause, then pivot to the new capability
+- **Don't editorialize beyond the facts** — state what concretely changed ("enabled by default", "no longer requires opt-in") rather than making claims you can't back up ("ready for production use", "signals maturity"). If a PR removes a preview attribute, say that. Don't interpret it as a promise.
+  - ✅ `Runtime-async is now enabled by default for anyone targeting net11.0.`
+  - ❌ `This signals that runtime-async is ready for production use.`
 - **Prefer short, direct sentences** — If a sentence has a parenthetical clause (`which...`, `where...`, `that...`) longer than a few words, split it into two sentences. Lead with the news, follow with context. Long sentences are fine when they flow as a single continuous thought (what → why); they're not fine when a subordinate clause interrupts the main verb.
   - ✅ `Runtime-async is now enabled for NativeAOT. This eliminates the state-machine overhead of async/await for ahead-of-time compiled applications.`
   - ❌ `The runtime-async feature, which eliminates the state-machine overhead of async/await, is now enabled for NativeAOT.`
