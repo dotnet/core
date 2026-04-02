@@ -26,34 +26,46 @@ dnx dotnet-inspect -y -- <command>
 
 ### Querying the correct build
 
-When writing release notes for Preview N, the locally installed SDK is often Preview N-1 or older. The `--platform` flag queries the local SDK, so new APIs won't be found. Instead, **query the nightly NuGet packages directly** from the `dotnet11` feed using `--package` and `--source`.
+When writing release notes for Preview N, the locally installed SDK is often Preview N-1 or older. The `--platform` flag queries the local SDK, so new APIs won't be found. Instead, **query the nightly NuGet packages directly** using `--package` and `--source`.
 
-The `dotnet-release` tool provides build metadata (package versions, feed URLs) alongside `changes.json`. Use that metadata to construct the correct queries. See [richlander/dotnet-release#42](https://github.com/richlander/dotnet-release/issues/42) for the tracking issue.
+### Step 1: Generate build metadata
 
-Until that's available, find the correct package version manually:
+`dotnet-release generate build-metadata` reads the VMR's version info and queries the nightly NuGet feed to find the correct package versions:
 
 ```bash
-# Find the latest preview.3 runtime ref pack version from the nightly feed
-curl -s "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/flat2/microsoft.netcore.app.ref/index.json" \
-  | python3 -c "
-import json, sys
-versions = json.load(sys.stdin)['versions']
-p3 = sorted([v for v in versions if 'preview.3' in v],
-            key=lambda v: [int(n) for n in v.split('.')[-2:]])
-print(p3[-1])
-"
-# Output: 11.0.0-preview.3.26179.102
+dotnet-release generate build-metadata ~/git/dotnet \
+  --base v11.0.0-preview.2.26159.112 \
+  --head origin/release/11.0.1xx-preview3 \
+  --output build-metadata.json
 ```
 
-The feed URL for .NET 11 nightly builds is documented in the VMR's [`docs/builds-table.md`](https://github.com/dotnet/dotnet/blob/main/docs/builds-table.md):
+This produces:
 
-```text
-https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/index.json
+```json
+{
+  "version": "11.0.0-preview.3",
+  "base_ref": "v11.0.0-preview.2.26159.112",
+  "head_ref": "origin/release/11.0.1xx-preview3",
+  "build": {
+    "version": "11.0.0-preview.3.26179.102",
+    "sdk_version": "11.0.100-preview.3.26179.102",
+    "sdk_url": "https://ci.dot.net/public/Sdk/11.0.100-preview.3.26179.102/dotnet-sdk-11.0.100-preview.3.26179.102-{platform}.tar.gz"
+  },
+  "nuget": {
+    "source": "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet11/nuget/v3/index.json",
+    "packages": {
+      "Microsoft.NETCore.App.Ref": "11.0.0-preview.3.26179.102",
+      "Microsoft.AspNetCore.App.Ref": "11.0.0-preview.3.26179.102",
+      "Microsoft.WindowsDesktop.App.Ref": "11.0.0-preview.3.26179.102",
+      "Microsoft.EntityFrameworkCore": "11.0.0-preview.3.26179.102"
+    }
+  }
+}
 ```
 
-### Common verification patterns
+### Step 2: Verify APIs against the correct packages
 
-Use `--package Name@Version` with `--source` to query the correct preview build. All queries below are pure data — no SDK installation needed.
+Read the `nuget.source` and `nuget.packages` from `build-metadata.json` and use them directly with `dotnet-inspect`. All queries are pure data — no SDK installation needed.
 
 **Find a type by name:**
 
@@ -71,7 +83,7 @@ dnx dotnet-inspect -y -- find "*Zstandard*" --package "Microsoft.AspNetCore.App.
 **Verify a type's members:**
 
 ```bash
-dnx dotnet-inspect -y -- member RegexOptions --package "Microsoft.NETCore.App.Ref@${VER}" --source "$FEED" --library System.Text.RegularExpressions -k field
+dnx dotnet-inspect -y -- member RegexOptions --package "Microsoft.NETCore.App.Ref@${VER}" --source "$FEED" -k field
 ```
 
 **Diff between versions:**
