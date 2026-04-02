@@ -29,3 +29,4 @@ Generate and maintain release notes for .NET preview, RC, and GA releases.
 - [format-template.md](references/format-template.md) — markdown document structure
 - [editorial-rules.md](references/editorial-rules.md) — tone, attribution, naming
 - [api-verification.md](references/api-verification.md) — using dotnet-inspect to verify APIs
+- [examples/](references/examples/) — curated examples from previous releases, organized by component. **Read the examples for your component before writing.** The [examples/README.md](references/examples/README.md) lists 12 editorial principles derived from what works and what doesn't in past release notes.
