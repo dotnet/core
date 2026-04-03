@@ -8,3 +8,8 @@ skip-check:
   # Actions workflow_dispatch inputs MUST be empty."
   # Suppressed as issue-labeler workflows require `workflow_dispatch` inputs.
   - CKV_GHA_7
+
+skip-path:
+  # Exclude GitHub skills and generated workflows
+  - .github/skills/*
+  - .github/workflows/copilot-setup-steps.yml
