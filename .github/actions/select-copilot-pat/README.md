@@ -98,17 +98,24 @@ engine:
 
 There are several details of this implementation that keep our workflows and repositories safe.
 
-1. Secrets adhere to existing trust boundaries
-  - The pool of PAT secrets is provided to the `select-copilot-pat` action within the `pre_activation` job, which is a deterministic and trusted portion of the workflow.
-  - No untrusted context/input is within scope during this job.
-  - The action step runs within that job, and the secrets do not get passed across contexts.
-  - The `select-copilot-pat` action only references the secret values to determine which values are non-empty, filtering the secret numbers to those with values.
-2. The `select-copilot-pat` action does not require any permissions
-  - It merely selects a random number from the pool of non-empty secrets and returns the _number_ (**not the secret**).
-  - The consuming workflow uses the returned secret number to provide the corresponding PAT to the agent job.
-3. The implementation uses existing extensibility hooks in Agentic Workflows
-  - Everything is supported by `gh aw compile` in this approach, and no hand-editing of the compiled output is required
-  - The `pre_activation` job is designed for this type of extensibility, and the [secret override][secret-override] capability was added to support using a secret with a name different from the default `COPILOT_GITHUB_TOKEN`.
+1. **Secrets adhere to existing trust boundaries.** The pool of PAT secrets is
+   provided to the `select-copilot-pat` action within the `pre_activation`
+   job, which is a deterministic and trusted portion of the workflow. No
+   untrusted context or input is within scope during this job. The action step
+   runs within that job, and the secrets do not get passed across contexts. The
+   `select-copilot-pat` action only references the secret values to determine
+   which values are non-empty, filtering the secret numbers to those with
+   values.
+1. **The `select-copilot-pat` action does not require any permissions.** It
+   merely selects a random number from the pool of non-empty secrets and
+   returns the _number_ (**not the secret**). The consuming workflow uses the
+   returned secret number to provide the corresponding PAT to the agent job.
+1. **The implementation uses existing extensibility hooks in Agentic
+   Workflows.** Everything is supported by `gh aw compile` in this approach,
+   and no hand-editing of the compiled output is required. The `pre_activation`
+   job is designed for this type of extensibility, and the
+   [secret override][secret-override] capability was added to support using a
+   secret with a name different from the default `COPILOT_GITHUB_TOKEN`.
 
 Each of the references below contributed to the design and implementation to ensure a secure and reliable design.
 
