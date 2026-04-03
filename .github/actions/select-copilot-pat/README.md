@@ -94,6 +94,24 @@ engine:
     COPILOT_GITHUB_TOKEN: ${{ case(needs.pre_activation.outputs.copilot_pat_number == '0', secrets.COPILOT_PAT_0, needs.pre_activation.outputs.copilot_pat_number == '1', secrets.COPILOT_PAT_1, needs.pre_activation.outputs.copilot_pat_number == '2', secrets.COPILOT_PAT_2, needs.pre_activation.outputs.copilot_pat_number == '3', secrets.COPILOT_PAT_3, needs.pre_activation.outputs.copilot_pat_number == '4', secrets.COPILOT_PAT_4, needs.pre_activation.outputs.copilot_pat_number == '5', secrets.COPILOT_PAT_5, needs.pre_activation.outputs.copilot_pat_number == '6', secrets.COPILOT_PAT_6, needs.pre_activation.outputs.copilot_pat_number == '7', secrets.COPILOT_PAT_7, needs.pre_activation.outputs.copilot_pat_number == '8', secrets.COPILOT_PAT_8, needs.pre_activation.outputs.copilot_pat_number == '9', secrets.COPILOT_PAT_9, secrets.COPILOT_GITHUB_TOKEN) }}
 ```
 
+## Design / Security
+
+There are several details of this implementation that keep our workflows and repositories safe.
+
+1. Secrets adhere to existing trust boundaries
+  - The pool of PAT secrets is provided to the `select-copilot-pat` action within the `pre_activation` job, which is a deterministic and trusted portion of the workflow.
+  - No untrusted context/input is within scope during this job.
+  - The action step runs within that job, and the secrets do not get passed across contexts.
+  - The `select-copilot-pat` action only references the secret values to determine which values are non-empty, filtering the secret numbers to those with values.
+2. The `select-copilot-pat` action does not require any permissions
+  - It merely selects a random number from the pool of non-empty secrets and returns the _number_ (**not the secret**).
+  - The consuming workflow uses the returned secret number to provide the corresponding PAT to the agent job.
+3. The implementation uses existing extensibility hooks in Agentic Workflows
+  - Everything is supported by `gh aw compile` in this approach, and no hand-editing of the compiled output is required
+  - The `pre_activation` job is designed for this type of extensibility, and the [secret override][secret-override] capability was added to support using a secret with a name different from the default `COPILOT_GITHUB_TOKEN`.
+
+Each of the references below contributed to the design and implementation to ensure a secure and reliable design.
+
 ## References
 
 - [Agentic Workflows CLI Extension][cli-setup]
