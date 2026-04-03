@@ -5,6 +5,7 @@ permissions:
   contents: read
   pull-requests: read
   issues: read
+
 runtimes:
   dotnet:
     version: "9.0"
@@ -33,6 +34,7 @@ tools:
     - dotnet-release
     - git
     - jq
+timeout-minutes: 120
 
 on:
   schedule: daily around 9am PDT
