@@ -11,9 +11,9 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 - 10.0.5 (March 2026)
   - No new CVEs
 - 10.0.4 (March 2026)
-  - [CVE-2026-26130](https://github.com/dotnet/announcements/issues/385)
-  - [CVE-2026-26127](https://github.com/dotnet/announcements/issues/384)
-  - [CVE-2026-26131](https://github.com/dotnet/announcements/issues/386)
+  - [CVE-2026-26130 | .NET Denial of Service Vulnerability ](https://github.com/dotnet/announcements/issues/385)
+  - [CVE-2026-26127 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/384)
+  - [CVE-2026-26131 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/386)
 - 10.0.3 (February 2026)
   - [CVE-2026-21218 | .NET Security Feature Bypass Vulnerability](https://github.com/dotnet/announcements/issues/380)
 - 10.0.2 (January 2026)
