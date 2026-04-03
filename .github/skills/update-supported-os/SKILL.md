@@ -30,8 +30,7 @@ The `dotnet-release` tool is used to verify and generate supported OS files. Pac
 ```bash
 # GitHub Packages requires authentication — use a GitHub token (PAT or GITHUB_TOKEN)
 dotnet tool install -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify
 dotnet-release --help
@@ -137,7 +136,7 @@ For each confirmed change, edit `release-notes/<version>/supported-os.json`:
 - **EOL versions (GA)**: Remove from `supported-versions`, add to `unsupported-versions`
 - **EOL versions (pre-GA)**: Remove from `supported-versions` only — do not add to `unsupported-versions`
 - **Add new versions**: Insert into `supported-versions` (keep sorted, newest first)
-- **Update `last-updated`**: Set to today's date (format: `YYYY-MM-DD`)
+- **Always update `last-updated`**: Set to today's date (format: `YYYY-MM-DD`) in every JSON file that is modified — this is required for every change, no matter how small
 - Use the `edit` tool for surgical JSON changes
 - Versions are strings, not numbers — `"3.22"` not `3.22`
 

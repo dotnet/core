@@ -31,8 +31,7 @@ The `dotnet-release` tool must be installed. Packages are published to [GitHub P
 ```bash
 # GitHub Packages requires authentication — use a GitHub token (PAT or GITHUB_TOKEN)
 dotnet tool install -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify
 dotnet-release --help

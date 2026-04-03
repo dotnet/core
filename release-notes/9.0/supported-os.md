@@ -1,8 +1,8 @@
 # .NET 9.0 - Supported OS versions
 
-Last Updated: 2026/03/12; Support phase: Unknown
+Last Updated: 2026/03/30; Support phase: Active
 
-[.NET 9.0](README.md) is an [Unknown](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
+[.NET 9.0](README.md) is an [STS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
 ## Android
 
@@ -50,19 +50,19 @@ Notes:
 
 ## Windows
 
-| OS                        | Versions                              | Architectures | Lifecycle       |
-| ------------------------- | ------------------------------------- | ------------- | --------------- |
-| [Nano Server][23]         | 2025, 2022, 2019                      | x64           | [Lifecycle][24] |
+| OS                        | Versions                                    | Architectures | Lifecycle       |
+| ------------------------- | ------------------------------------------- | ------------- | --------------- |
+| [Nano Server][23]         | 2025, 2022, 2019                            | x64           | [Lifecycle][24] |
 | [Windows][25]             | 11 26H1, 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64 | [Lifecycle][26] |
-| [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2 | x64           | [Lifecycle][28] |
-| [Windows Server Core][29] | 2025, 2022, 2019, 2016, 2012-R2       | x64, x86      | [Lifecycle][30] |
+| [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64           | [Lifecycle][28] |
+| [Windows Server Core][29] | 2025, 2022, 2019, 2016, 2012-R2, 2012       | x64, x86      | [Lifecycle][30] |
 
 Notes:
 
 - Windows: The x64 and x86 emulators are supported on Windows 11 Arm64.
 - Windows: The x86 emulator is supported on x64.
-- Windows Server: Windows Server 2012 R2 is supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
-- Windows Server Core: Windows Server 2012 R2 is supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+- Windows Server: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
+- Windows Server Core: Windows Server 2012 and 2012 R2 are supported with [Extended Security Updates (ESU)](https://learn.microsoft.com/windows-server/get-started/extended-security-updates-overview).
 
 [0]: https://www.android.com/
 [1]: https://support.google.com/android
@@ -127,8 +127,6 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows               | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
 | Windows               | 10 22H2     | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information)           |
-| Windows Server        | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012)               |
-| Windows Server Core   | 2012        | [2023-10-10](https://learn.microsoft.com/lifecycle/products/windows-server-2012)               |
 | iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes)    |
 | iOS                   | 17          | 2024-11-19    |
 | iPadOS                | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |

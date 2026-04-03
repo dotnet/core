@@ -45,16 +45,14 @@ If not installed:
 
 ```bash
 dotnet tool install -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 ```
 
 If already installed, update to latest:
 
 ```bash
 dotnet tool update -g Dotnet.Release.Tools \
-  --add-source https://nuget.pkg.github.com/richlander/index.json \
-  --version "0.*"
+  --add-source https://nuget.pkg.github.com/richlander/index.json
 ```
 
 ## Inputs
