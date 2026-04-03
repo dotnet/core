@@ -1,0 +1,62 @@
+---
+name: "Select Copilot PAT from Pool"
+description: >-
+  Selects a random Copilot PAT from a numbered pool of secrets. Secrets are
+  passed as environment variables SECRET_0 through SECRET_9 by the calling
+  workflow step.
+
+inputs:
+  random-seed:
+    description: >-
+      A seed number to use for the random PAT selection, for deterministic
+      selection if needed.
+    required: false
+    default: ""
+
+outputs:
+  copilot_pat_number:
+    description: >-
+      The 0-9 secret number selected from the pool of specified secrets
+    value: ${{ steps.select-pat-number.outputs.copilot_pat_number }}
+
+runs:
+  using: composite
+  steps:
+    - id: select-pat-number
+      shell: bash
+      env:
+        RANDOM_SEED: ${{ inputs.random-seed }}
+      run: |
+        # Collect numbers with non-empty secrets from SECRET_0..SECRET_9.
+        PAT_NUMBERS=()
+        for i in $(seq 0 9); do
+          var="SECRET_${i}"
+          val="${!var}"
+          if [ -n "$val" ]; then
+            PAT_NUMBERS+=(${i})
+          fi
+        done
+
+        # If none of the secrets in the pool have values, emit a warning
+        # and do not set an output value. The consumer can then fall back
+        # to using COPILOT_GITHUB_TOKEN.
+        if [ ${#PAT_NUMBERS[@]} -eq 0 ]; then
+          warning_message="::warning::None of the specified secrets had values "
+          warning_message+="(checked SECRET_0 through SECRET_9)"
+          echo "$warning_message"
+          exit 0
+        fi
+
+        # Select a random index using the seed if specified
+        if [ -n "$RANDOM_SEED" ]; then
+          RANDOM=$RANDOM_SEED
+        fi
+
+        PAT_INDEX=$(( RANDOM % ${#PAT_NUMBERS[@]} ))
+        PAT_NUMBER="${PAT_NUMBERS[$PAT_INDEX]}"
+        selection_message="Selected token ${PAT_NUMBER}"
+        selection_details="(index: ${PAT_INDEX}; pool size: ${#PAT_NUMBERS[@]})"
+        echo "${selection_message} ${selection_details}"
+
+        # Set the PAT number as the output
+        echo "copilot_pat_number=${PAT_NUMBER}" >> "$GITHUB_OUTPUT"
