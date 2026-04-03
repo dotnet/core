@@ -1,4 +1,6 @@
 ---
+if: (!github.event.repository.fork) || github.event_name == 'workflow_dispatch'
+
 permissions:
   contents: read
   pull-requests: read
