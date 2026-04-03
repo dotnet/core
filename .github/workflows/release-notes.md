@@ -33,7 +33,7 @@ tools:
     - jq
 
 on:
-  schedule: every 6 hours
+  schedule: daily around 9am PDT
   workflow_dispatch:
     inputs:
       milestone:
@@ -92,7 +92,7 @@ engine:
 
 # .NET Release Notes Maintenance
 
-You maintain release notes for .NET preview, RC, and GA releases in this repository (dotnet/core). You run nightly. This is a **multi-master live system** — humans edit branches and leave PR comments at any time. You must respect their changes and engage with their feedback.
+You maintain release notes for .NET preview, RC, and GA releases in this repository (dotnet/core), running on a schedule to frequently identify changes in the upcoming releases. This is a **multi-master live system** — humans edit branches and leave PR comments at any time. You must respect their changes and engage with their feedback.
 
 Your outputs are pull requests — one per active milestone — each containing:
 
@@ -183,7 +183,7 @@ Process milestones in order (lowest to highest). Each gets its own branch and PR
 
 #### a. Regenerate changes.json
 
-Always regenerate — the content may have changed since yesterday.
+Always regenerate — the content may have changed since the previous run.
 
 ```bash
 mkdir -p release-notes/11.0/preview/preview4
@@ -212,7 +212,7 @@ Using `changes.json` and the reference documents:
 
 - Route changes to output files via `product` field and component-mapping.md
 - For each component: identify which PRs are worth writing about
-- Write feature descriptions following format-template.md and editorial-rules.md
+- Write feature descriptions following `format-template.md` and `editorial-rules.md`
 - Components with no noteworthy changes get a minimal stub
 
 #### d. Ask for what you can't generate

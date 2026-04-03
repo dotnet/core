@@ -20,7 +20,7 @@ The system has three layers, each with a distinct responsibility:
 
 ```text
 ┌─────────────────────────────────────────────────┐
-│           Agentic Workflow (cron)                │
+│           Agentic Workflow (cron)               │
 │  .github/workflows/release-notes.md             │
 │  Orchestration: branch lifecycle, PR mgmt,      │
 │  human interaction, scheduling                  │
@@ -119,7 +119,7 @@ These are **goal-oriented**, not procedural. They describe what good release not
 
 ## Layer 3 — The Agentic Workflow
 
-A [GitHub Agentic Workflow](https://github.github.com/gh-aw/) defined in `.github/workflows/release-notes.md`. It runs nightly and manages the full lifecycle. This is a **multi-master live system** — the agent, component teams, and release managers all edit concurrently.
+A [GitHub Agentic Workflow](https://github.github.com/gh-aw/) defined in `.github/workflows/release-notes.md`. It runs on a schedule and manages the full lifecycle. This is a **multi-master live system** — the agent, component teams, and release managers all edit concurrently.
 
 ### Multi-milestone discovery
 
@@ -158,7 +158,7 @@ Branch:  release-notes/11.0-preview5
 PR:      [release-notes] .NET 11 Preview 5
 ```
 
-Each branch is long-lived — it's created on the first run and updated nightly until the PR is merged (after the preview ships).
+Each branch is long-lived — it's created on the first run and updated frequently until the PR is merged (after the preview ships).
 
 ### Human interaction model
 
@@ -197,7 +197,7 @@ This is the most delicate part of the system. The branches are shared workspaces
 
 ### Schedule and transitions
 
-- Runs nightly (~9am Pacific)
+- Runs daily (~9am Pacific)
 - Previews ship monthly, Feb–Oct (typically patch Tuesday)
 - RC1 ~September, RC2 ~October, GA November
 - Only does meaningful work when VMR state has changed
@@ -258,7 +258,7 @@ The data collection step (manifest diff → PR enumeration) is mechanical and de
 
 ### Why goal-oriented reference docs instead of procedural scripts?
 
-The previous iteration had 16 reference documents encoding a rigid 9-step pipeline. It was brittle — any change to the process required updating multiple docs, and the agent followed the steps mechanically without understanding the goals. Goal-oriented docs let the agent adapt to unexpected situations (e.g., a component that reorganized its repo structure).
+Goal-oriented docs let the agent adapt to unexpected situations (e.g., a component that reorganized its repo structure). A procedural approach would limit the agent to mechanically execute a rigid and brittle pipeline.
 
 ### Why one PR per preview?
 
@@ -271,6 +271,5 @@ Each preview is a coherent release milestone with its own set of features. Maint
 
 ## Open questions
 
-1. **Cross-repo tokens** — the workflow runs in `dotnet/core` but reads from `dotnet/dotnet` and ~20 component repos. The GitHub token scope and any required app permissions need to be configured.
-2. **Conflict resolution heuristics** — when the agent and a human both changed the same section between runs, the human wins. But how granular is "a section"? Need to define this precisely (per-heading? per-file?).
-3. **RC/GA milestone naming** — the multi-milestone logic assumes `previewN` naming. RC and GA milestones use different naming (`rc1`, `rc2`, `ga`). The workflow needs to handle the transition gracefully.
+1. **Conflict resolution heuristics** — when the agent and a human both changed the same section between runs, the human wins. But how granular is "a section"? Need to define this precisely (per-heading? per-file?).
+2. **RC/GA milestone naming** — the multi-milestone logic assumes `previewN` naming. RC and GA milestones use different naming (`rc1`, `rc2`, `ga`). The workflow needs to handle the transition gracefully.
