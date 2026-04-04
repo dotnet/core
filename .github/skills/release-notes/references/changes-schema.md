@@ -1,42 +1,47 @@
-# changes.json Schema
+# Shared Schema for `changes.json` and `features.json`
 
-Reference for the `changes.json` file produced by `dotnet-release generate changes`. One file per release milestone.
+Reference for the `changes.json` file produced by `dotnet-release generate changes`, and for the derived `features.json` file used by downstream editorial skills. One file per release milestone.
 
 ## Overview
 
-`changes.json` is a comprehensive, machine-readable manifest of every PR and commit that shipped in a release. It is the companion to the editorial markdown release notes — the JSON tells you **everything that shipped**, the markdown tells you **what matters**.
+`changes.json` is a comprehensive, machine-readable manifest of every PR and commit that shipped in a release. `features.json` is a scored derivative that keeps the same structure while adding optional enrichment for editorial prioritization.
 
-It also serves as a companion to `cve.json` — both files use the same `commits{}` structure and `repo@shortcommit` key format, enabling cross-file joins.
+Both files also serve as companions to `cve.json` — they use the same `commits{}` structure and `repo@shortcommit` key format, enabling cross-file joins.
 
 ## File location
 
 ```text
 release-notes/{major.minor}/preview/{previewN}/changes.json    # previews
 release-notes/{major.minor}/{major.minor.patch}/changes.json   # patches
+release-notes/{major.minor}/preview/{previewN}/features.json   # previews
+release-notes/{major.minor}/{major.minor.patch}/features.json  # patches
 ```
 
 ## Top-level structure
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `release_version` | string | e.g., `"11.0.0-preview.3"` |
-| `release_date` | string | ISO 8601, e.g., `"2026-04-08"` |
-| `changes` | array | The change entries |
-| `commits` | object | Normalized commit metadata, keyed by `repo@shortcommit` |
+| Field             | Type   | Description                                             |
+| ----------------- | ------ | ------------------------------------------------------- |
+| `release_version` | string | e.g., `"11.0.0-preview.3"`                              |
+| `release_date`    | string | ISO 8601, e.g., `"2026-04-08"`                          |
+| `changes`         | array  | The change or feature entries                           |
+| `commits`         | object | Normalized commit metadata, keyed by `repo@shortcommit` |
 
 ## Change entry fields
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `id` | string | Globally unique identifier — `repo@shortcommit` format (e.g., `"runtime@c5d5be4"`) |
-| `repo` | string | Short repository name (e.g., `"runtime"`) |
-| `product` | string | Product slug (e.g., `"dotnet-runtime"`); absent for infra repos |
-| `title` | string | PR title; `""` if not available |
-| `url` | string | Public GitHub PR URL; `""` if non-public |
-| `commit` | string | Key into top-level `commits{}` dict — the VMR (`dotnet/dotnet`) codeflow commit |
-| `is_security` | bool | `true` if this is a security change |
-| `local_repo_commit` | string | Key into `commits{}` — the source repo commit (same as `id`) |
-| `labels` | array | PR labels (only present when `--labels` is used) |
+| Field               | Type   | Description                                                                        |
+| ------------------- | ------ | ---------------------------------------------------------------------------------- |
+| `id`                | string | Globally unique identifier — `repo@shortcommit` format (e.g., `"runtime@c5d5be4"`) |
+| `repo`              | string | Short repository name (e.g., `"runtime"`)                                          |
+| `product`           | string | Product slug (e.g., `"dotnet-runtime"`); absent for infra repos                    |
+| `title`             | string | PR title; `""` if not available                                                    |
+| `url`               | string | Public GitHub PR URL; `""` if non-public                                           |
+| `commit`            | string | Key into top-level `commits{}` dict — the VMR (`dotnet/dotnet`) codeflow commit    |
+| `is_security`       | bool   | `true` if this is a security change                                                |
+| `local_repo_commit` | string | Key into `commits{}` — the source repo commit (same as `id`)                       |
+| `labels`            | array  | PR labels (only present when `--labels` is used)                                   |
+| `score`             | number | Optional editorial score; higher means more likely to document                     |
+| `score_reason`      | string | Optional short explanation for the score                                           |
+| `score_breakdown`   | object | Optional structured scoring details                                                |
 
 The `product` field is derived from the repo-level [component mapping](component-mapping.md). Infra repos like `arcade` and `symreader` have no `product` field. The `repo` field always matches the VMR manifest path.
 
@@ -44,17 +49,17 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
 
 ## Commit entry fields (values in `commits{}`)
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `repo` | string | Short repository name |
-| `branch` | string | Branch the commit landed on |
-| `hash` | string | Full 40-character commit hash |
-| `org` | string | GitHub organization (e.g., `"dotnet"`) |
-| `url` | string | `.diff`-form commit URL |
+| Field    | Type   | Description                            |
+| -------- | ------ | -------------------------------------- |
+| `repo`   | string | Short repository name                  |
+| `branch` | string | Branch the commit landed on            |
+| `hash`   | string | Full 40-character commit hash          |
+| `org`    | string | GitHub organization (e.g., `"dotnet"`) |
+| `url`    | string | `.diff`-form commit URL                |
 
 ## Conventions
 
-- **No nulls** — required fields are always present. Optional fields (`product`, `labels`, `local_repo_commit`) may be absent. Use `""` for missing strings, `0` for missing integers.
+- **No nulls** — required fields are always present. Optional fields (`product`, `labels`, `local_repo_commit`, `score`, `score_reason`, `score_breakdown`) may be absent. Use `""` for missing strings, `0` for missing integers.
 - **Naming** — `snake_case_lower` for JSON fields, `kebab-case-lower` for file names and repo slugs.
 - **Public URLs only** — every URL must resolve publicly.
 - **Commit URLs use `.diff` form** — for machine consumption.
@@ -74,7 +79,9 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
       "url": "https://github.com/dotnet/runtime/pull/112345",
       "commit": "dotnet@a1b2c3d",
       "is_security": false,
-      "local_repo_commit": "runtime@b2d5fa8"
+      "local_repo_commit": "runtime@b2d5fa8",
+      "score": 9,
+      "score_reason": "Broadly useful new JSON configuration preset"
     },
     {
       "id": "aspnetcore@f45f3c9",
@@ -115,7 +122,7 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
 
 Note that both changes share the same `commit` — they were synced to the VMR in a single codeflow batch. The `local_repo_commit` values differ since each originated from a different source repository.
 
-## Querying changes.json
+## Querying `changes.json`
 
 ```bash
 # All changes
@@ -135,14 +142,23 @@ jq -r '.changes[] | select(.is_security) | .title' changes.json
 
 # Cross-file join with cve.json (shared commit key format)
 jq -r '.changes[] | select(.is_security) | .local_repo_commit' changes.json
-# → use these keys to look up CVE IDs in cve.json's cve_commits{}
+# -> use these keys to look up CVE IDs in cve.json's cve_commits{}
 ```
+
+## Relationship between the files
+
+`changes.json` is the **source-of-truth input** to the editorial process. `features.json` is an enriched view that usually adds scoring and notes without changing the underlying identity of the shipped changes.
+
+- `changes.json` has an entry for every PR that shipped
+- `features.json` usually preserves those entries and adds optional scoring metadata
+- Both files can be joined through shared `id` and `commits{}` values
 
 ## Relationship to markdown release notes
 
-`changes.json` is the **input** to the editorial process. The markdown release notes are a curated subset:
+The markdown release notes are a curated subset informed by these JSON files:
 
 - `changes.json` has an entry for every PR that shipped
+- `features.json` helps rank which shipped changes are worth calling out
 - Markdown only covers features worth calling out
-- The agent reads `changes.json` to know what shipped, then decides what to write about
+- The agent reads `changes.json` and/or `features.json` to decide what to write about
 - If a feature isn't in `changes.json`, it must not appear in the markdown

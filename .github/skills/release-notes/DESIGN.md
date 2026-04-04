@@ -16,31 +16,31 @@ How the automated release notes system for .NET works, why it's designed this wa
 
 ## Architecture
 
-The system has three layers, each with a distinct responsibility:
+The system still has three layers, but the AI/editorial layer is now split into reusable skills with JSON handoffs:
 
 ```text
-┌─────────────────────────────────────────────────┐
-│           Agentic Workflow (cron)               │
-│  .github/workflows/release-notes.md             │
-│  Orchestration: branch lifecycle, PR mgmt,      │
-│  human interaction, scheduling                  │
-├─────────────────────────────────────────────────┤
-│           AI Agent (editorial)                  │
-│  Reads changes.json → writes markdown           │
-│  Judgment: which PRs matter, how to describe    │
-│  them, code samples, feature grouping           │
-├─────────────────────────────────────────────────┤
-│           dotnet-release tool (deterministic)   │
-│  `dotnet-release generate changes`              │
-│  Data: source-manifest diff → GitHub API →      │
-│  changes.json                                   │
-└─────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│           Agentic Workflow (cron)                           │
+│  .github/workflows/release-notes.md                         │
+│  Orchestration: branch lifecycle, PR mgmt, comments, timing │
+├──────────────────────────────────────────────────────────────┤
+│           Reusable skills (editorial pipeline)              │
+│  generate-changes → changes.json                            │
+│  generate-features → features.json                          │
+│  api-diff / dotnet-inspect → API evidence                   │
+│  release-notes → markdown                                   │
+├──────────────────────────────────────────────────────────────┤
+│           Tooling (deterministic where possible)            │
+│  dotnet-release, dotnet-inspect, GitHub APIs, local git     │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-### Why three layers?
+### Why split the stages?
 
-- **The tool** handles mechanical data collection. It's deterministic — same inputs always produce the same output. It can be tested, debugged, and improved independently.
-- **The agent** handles editorial judgment. It decides which PRs are worth writing about and how to describe them. This is inherently fuzzy and benefits from AI.
+- **`generate-changes`** handles mechanical data collection. It's deterministic — same inputs always produce the same output.
+- **`generate-features`** adds reusable triage and scoring so release notes, docs, and blogs can share the same ranked feature list.
+- **`api-diff`** verifies the public API story against the actual build, which is the best defense against missed reverts.
+- **`release-notes`** focuses on editorial judgment: which scored items matter, how to describe them, and how to preserve human edits.
 - **The workflow** handles orchestration. It knows when to run, what branches to manage, how to interact with humans, and how to preserve their edits.
 
 ## Layer 1 — The Tool
@@ -70,6 +70,7 @@ dotnet-release generate changes <vmr-clone-path> \
 ### What the tool does NOT do
 
 - Editorial judgment (which PRs are important)
+- Feature scoring (`features.json`)
 - Markdown generation
 - Branch management or PR creation
 
@@ -93,29 +94,30 @@ By comparing this file at two release points, the tool gets exact per-component 
 
 Example (Preview 1 → Preview 2): the tool found 1,389 PRs across 21 changed repos.
 
-## Layer 2 — The Agent
+## Layer 2 — The Skills
 
-The AI agent reads `changes.json` and writes markdown release notes. Its guidance comes from reference documents in `.github/skills/release-notes/references/`:
+The editorial pipeline is intentionally split into small, reusable skills:
 
-| Document | Purpose |
-| -------- | ------- |
-| [quality-bar.md](references/quality-bar.md) | North star — fidelity, value, WHY+HOW |
-| [vmr-structure.md](references/vmr-structure.md) | VMR branches, tags, source-manifest.json |
-| [changes-schema.md](references/changes-schema.md) | The changes.json schema |
-| [component-mapping.md](references/component-mapping.md) | Components → product slugs → output files |
-| [format-template.md](references/format-template.md) | Markdown document structure |
-| [editorial-rules.md](references/editorial-rules.md) | Tone, attribution, naming |
-| [examples/](references/examples/README.md) | Curated examples by component — short, medium, long-form styles |
+| Document                                                | Purpose                                                         |
+| ------------------------------------------------------- | --------------------------------------------------------------- |
+| [quality-bar.md](references/quality-bar.md)             | North star — fidelity, value, WHY+HOW                           |
+| [vmr-structure.md](references/vmr-structure.md)         | VMR branches, tags, source-manifest.json                        |
+| [changes-schema.md](references/changes-schema.md)       | The shared `changes.json` / `features.json` schema              |
+| [feature-scoring.md](references/feature-scoring.md)     | How to rank features for release notes, docs, and blogs         |
+| [component-mapping.md](references/component-mapping.md) | Components → product slugs → output files                       |
+| [format-template.md](references/format-template.md)     | Markdown document structure                                     |
+| [editorial-rules.md](references/editorial-rules.md)     | Tone, attribution, naming                                       |
+| [examples/](references/examples/README.md)              | Curated examples by component — short, medium, long-form styles |
 
-These are **goal-oriented**, not procedural. They describe what good release notes look like, not the exact steps to produce them. The agent figures out the HOW.
+These are **goal-oriented**, not procedural. They describe what good release notes and feature selection look like, not the exact steps to produce them. The skills figure out the HOW.
 
-### Agent responsibilities
+### Skill responsibilities
 
-- **Triage** — read `changes.json` and identify which PRs are worth writing about. Use the [component mapping](references/component-mapping.md) to route changes from `repo` to the correct output files.
-- **Verify** — before writing about any API, use `dotnet-inspect` to confirm it exists with the correct type names, member signatures, and namespaces. See [api-verification.md](references/api-verification.md).
-- **Write** — produce markdown release notes for high-value features, following the quality bar. Only use API names, type names, and code samples that have been verified.
-- **Respect edits** — diff the PR branch to see what humans have changed and preserve their work
-- **Respond** — read PR comments and incorporate human feedback
+- **`generate-changes`** — determine the correct VMR base/head refs, including preview-only multi-branch targeting, and emit `changes.json`
+- **`generate-features`** — read `changes.json`, score likely features, and emit `features.json` using the same schema plus optional scoring
+- **`api-diff`** — verify APIs against the actual build binaries/ref packs and generate diffs when needed
+- **`release-notes`** — produce markdown release notes for high-value features, following the quality bar and only using verified API names and code samples
+- **Workflow-facing behavior** — respect human edits, diff the PR branch, and incorporate PR comments and feedback
 
 ## Layer 3 — The Agentic Workflow
 
@@ -140,11 +142,11 @@ The workflow discovers all milestones between `latest_shipped + 1` and `main_ite
 
 Each milestone needs its own base and head ref. This is re-validated every run because refs can change:
 
-| Milestone state | Base ref | Head ref |
-| --------------- | -------- | -------- |
-| Has VMR tag (finalized) | Tag for N-1 | Tag for N |
+| Milestone state                  | Base ref    | Head ref           |
+| -------------------------------- | ----------- | ------------------ |
+| Has VMR tag (finalized)          | Tag for N-1 | Tag for N          |
 | Has release branch (stabilizing) | Tag for N-1 | Release branch tip |
-| Only on main (in development) | Tag for N-1 | main |
+| Only on main (in development)    | Tag for N-1 | main               |
 
 **Critical**: never use `main` for milestone N if `main` has moved to N+1. Check the iteration in `Versions.props` every run.
 
@@ -165,11 +167,13 @@ Each branch is long-lived — it's created on the first run and updated frequent
 This is the most delicate part of the system. The branches are shared workspaces:
 
 **Respecting edits:**
+
 - Before writing, diff the branch to identify human commits
 - Files humans have edited are partially off-limits — only add new sections, never overwrite their changes
 - When a file has mixed agent + human content, be surgical — touch only agent-authored sections
 
 **Responding to comments:**
+
 - Read all PR comments and review threads since the last run
 - Classify: actionable feedback, questions, disagreements, resolved
 - For actionable items: make the change and confirm
@@ -179,21 +183,22 @@ This is the most delicate part of the system. The branches are shared workspaces
 - This is a conversation. Engage, don't ignore.
 
 **Handling conflicts:**
+
 - If a human and the agent both changed the same section, the human's version wins
 - If the agent is unsure whether a human edit was intentional, ask via PR comment
 - Never force-push or rewrite human commits
 
 ### PR lifecycle
 
-| State | Action |
-| ----- | ------ |
-| No PR for milestone | Create branch, generate content, open draft PR |
-| PR exists, source changed | Regenerate `changes.json`, update/add markdown sections |
-| PR exists, human edited | Preserve edits, only update untouched sections |
-| New tag appeared | Final regen with `--head <tag>`, note finalization |
-| Main bumped | Switch earlier milestone's head ref to release branch/tag |
-| PR merged | Skip on future runs |
-| PR closed | Don't reopen, log and move on |
+| State                     | Action                                                                    |
+| ------------------------- | ------------------------------------------------------------------------- |
+| No PR for milestone       | Create branch, generate content, open draft PR                            |
+| PR exists, source changed | Regenerate `changes.json` / `features.json`, update/add markdown sections |
+| PR exists, human edited   | Preserve edits, only update untouched sections                            |
+| New tag appeared          | Final regen with `--head <tag>`, note finalization                        |
+| Main bumped               | Switch earlier milestone's head ref to release branch/tag                 |
+| PR merged                 | Skip on future runs                                                       |
+| PR closed                 | Don't reopen, log and move on                                             |
 
 ### Schedule and transitions
 
@@ -215,21 +220,22 @@ The only ways the workflow can modify state:
 
 Each release milestone produces these files in `release-notes/{major.minor}/preview/{previewN}/`:
 
-| File | Source | Description |
-| ---- | ------ | ----------- |
-| `changes.json` | Tool | Every PR that shipped — comprehensive, machine-readable |
-| `README.md` | Agent | Index/TOC linking to component files |
-| `libraries.md` | Agent | System.\* BCL APIs (from `dotnet/runtime`) |
-| `runtime.md` | Agent | CoreCLR, Mono, GC, JIT (from `dotnet/runtime`) |
-| `aspnetcore.md` | Agent | ASP.NET Core, Blazor, SignalR |
-| `sdk.md` | Agent | CLI, project system, templating |
-| `efcore.md` | Agent | Entity Framework Core |
-| `csharp.md` | Agent | C# language features |
-| `fsharp.md` | Agent | F# language and compiler |
-| `winforms.md` | Agent | Windows Forms |
-| `wpf.md` | Agent | WPF |
-| `msbuild.md` | Agent | MSBuild |
-| `nuget.md` | Agent | NuGet client |
+| File            | Source              | Description                                             |
+| --------------- | ------------------- | ------------------------------------------------------- |
+| `changes.json`  | `generate-changes`  | Every PR that shipped — comprehensive, machine-readable |
+| `features.json` | `generate-features` | Same schema plus optional scoring and editorial hints   |
+| `README.md`     | `release-notes`     | Index/TOC linking to component files                    |
+| `libraries.md`  | `release-notes`     | System.\* BCL APIs (from `dotnet/runtime`)              |
+| `runtime.md`    | `release-notes`     | CoreCLR, Mono, GC, JIT (from `dotnet/runtime`)          |
+| `aspnetcore.md` | `release-notes`     | ASP.NET Core, Blazor, SignalR                           |
+| `sdk.md`        | `release-notes`     | CLI, project system, templating                         |
+| `efcore.md`     | `release-notes`     | Entity Framework Core                                   |
+| `csharp.md`     | `release-notes`     | C# language features                                    |
+| `fsharp.md`     | `release-notes`     | F# language and compiler                                |
+| `winforms.md`   | `release-notes`     | Windows Forms                                           |
+| `wpf.md`        | `release-notes`     | WPF                                                     |
+| `msbuild.md`    | `release-notes`     | MSBuild                                                 |
+| `nuget.md`      | `release-notes`     | NuGet client                                            |
 
 Components with no noteworthy changes get a minimal stub file.
 
@@ -272,4 +278,5 @@ Each preview is a coherent release milestone with its own set of features. Maint
 ## Open questions
 
 1. **Conflict resolution heuristics** — when the agent and a human both changed the same section between runs, the human wins. But how granular is "a section"? Need to define this precisely (per-heading? per-file?).
-2. **RC/GA milestone naming** — the multi-milestone logic assumes `previewN` naming. RC and GA milestones use different naming (`rc1`, `rc2`, `ga`). The workflow needs to handle the transition gracefully.
+2. **Feature grouping and schema growth** — some notable features span multiple PRs. `features.json` starts schema-compatible with `changes.json`, but may need optional grouping fields over time.
+3. **RC/GA milestone naming** — the multi-milestone logic assumes `previewN` naming. RC and GA milestones use different naming (`rc1`, `rc2`, `ga`). The workflow needs to handle the transition gracefully.
