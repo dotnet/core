@@ -5,9 +5,12 @@
   "year": "2026",
   "month": "02",
   "date": "2026-02-10T00:00:00\u002B00:00",
-  "security": false,
+  "security": true,
   "prev_month_date": "2026-01-20T00:00:00\u002B00:00",
   "prev_security_month_date": "2025-10-14T00:00:00\u002B00:00",
+  "cve_records": [
+    "CVE-2026-21218"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/02/index.json"
@@ -27,6 +30,11 @@
     "year": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/index.json",
       "title": ".NET Year Timeline Index - 2026"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/02/cve.json",
+      "title": "CVE records - February 2026",
+      "type": "application/json"
     }
   },
   "_embedded": {
@@ -36,7 +44,7 @@
         "date": "2026-02-10T00:00:00\u002B00:00",
         "year": "2026",
         "month": "02",
-        "security": false,
+        "security": true,
         "support_phase": "active",
         "sdk_version": "9.0.311",
         "_links": {
@@ -50,7 +58,7 @@
         "date": "2026-02-10T00:00:00\u002B00:00",
         "year": "2026",
         "month": "02",
-        "security": false,
+        "security": true,
         "support_phase": "active",
         "sdk_version": "8.0.418",
         "_links": {
@@ -78,7 +86,7 @@
         "date": "2026-02-10T00:00:00\u002B00:00",
         "year": "2026",
         "month": "02",
-        "security": false,
+        "security": true,
         "support_phase": "active",
         "sdk_version": "10.0.103",
         "_links": {
@@ -87,6 +95,31 @@
           }
         }
       }
-    }
+    },
+    "disclosures": [
+      {
+        "id": "CVE-2026-21218",
+        "title": ".NET Spoofing Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/380"
+          }
+        },
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2026-02-10",
+        "affected_releases": [
+          "8.0",
+          "9.0",
+          "10.0"
+        ],
+        "affected_packages": [
+          "System.Security.Cryptography.Cose"
+        ],
+        "platforms": [
+          "all"
+        ]
+      }
+    ]
   }
 }

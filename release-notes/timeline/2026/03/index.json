@@ -5,9 +5,14 @@
   "year": "2026",
   "month": "03",
   "date": "2026-03-12T00:00:00\u002B00:00",
-  "security": false,
+  "security": true,
   "prev_month_date": "2026-02-10T00:00:00\u002B00:00",
-  "prev_security_month_date": "2025-10-14T00:00:00\u002B00:00",
+  "prev_security_month_date": "2026-02-10T00:00:00\u002B00:00",
+  "cve_records": [
+    "CVE-2026-26130",
+    "CVE-2026-26127",
+    "CVE-2026-26131"
+  ],
   "_links": {
     "self": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json"
@@ -17,8 +22,8 @@
       "title": "Previous month - February 2026"
     },
     "prev-security-month": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2025/10/index.json",
-      "title": "Previous security month - October 2025"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/02/index.json",
+      "title": "Previous security month - February 2026"
     },
     "timeline": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/index.json",
@@ -27,6 +32,11 @@
     "year": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/index.json",
       "title": ".NET Year Timeline Index - 2026"
+    },
+    "cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/cve.json",
+      "title": "CVE records - March 2026",
+      "type": "application/json"
     }
   },
   "_embedded": {
@@ -36,7 +46,7 @@
         "date": "2026-03-10T00:00:00\u002B00:00",
         "year": "2026",
         "month": "03",
-        "security": false,
+        "security": true,
         "support_phase": "active",
         "sdk_version": "9.0.312",
         "_links": {
@@ -50,7 +60,7 @@
         "date": "2026-03-10T00:00:00\u002B00:00",
         "year": "2026",
         "month": "03",
-        "security": false,
+        "security": true,
         "support_phase": "active",
         "sdk_version": "8.0.419",
         "_links": {
@@ -78,7 +88,7 @@
         "date": "2026-03-12T00:00:00\u002B00:00",
         "year": "2026",
         "month": "03",
-        "security": false,
+        "security": true,
         "support_phase": "active",
         "sdk_version": "10.0.201",
         "_links": {
@@ -87,6 +97,77 @@
           }
         }
       }
-    }
+    },
+    "disclosures": [
+      {
+        "id": "CVE-2026-26130",
+        "title": "ASP.NET Core Denial of Service Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/385"
+          }
+        },
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2026-03-10",
+        "affected_releases": [
+          "8.0",
+          "9.0",
+          "10.0"
+        ],
+        "affected_products": [
+          "dotnet-aspnetcore"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2026-26127",
+        "title": ".NET Denial of Service Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/384"
+          }
+        },
+        "cvss_score": 7.5,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2026-03-10",
+        "affected_releases": [
+          "9.0",
+          "10.0"
+        ],
+        "affected_products": [
+          "dotnet-runtime"
+        ],
+        "affected_packages": [
+          "Microsoft.Bcl.Memory"
+        ],
+        "platforms": [
+          "all"
+        ]
+      },
+      {
+        "id": "CVE-2026-26131",
+        "title": ".NET Elevation of Privilege Vulnerability",
+        "_links": {
+          "self": {
+            "href": "https://github.com/dotnet/announcements/issues/386"
+          }
+        },
+        "cvss_score": 7.8,
+        "cvss_severity": "HIGH",
+        "disclosure_date": "2026-03-10",
+        "affected_releases": [
+          "10.0"
+        ],
+        "affected_products": [
+          "dotnet-runtime"
+        ],
+        "platforms": [
+          "linux"
+        ]
+      }
+    ]
   }
 }
