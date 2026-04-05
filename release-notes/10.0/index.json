@@ -5,8 +5,8 @@
   "target_framework": "net10.0",
   "latest_patch": "10.0.5",
   "latest_patch_date": "2026-03-12T00:00:00\u002B00:00",
-  "latest_security_patch": "10.0.4",
-  "latest_security_patch_date": "2026-03-10T00:00:00\u002B00:00",
+  "latest_security_patch": "10.0.5",
+  "latest_security_patch_date": "2026-03-12T00:00:00\u002B00:00",
   "release_type": "lts",
   "support_phase": "active",
   "supported": true,
@@ -37,8 +37,8 @@
       "title": "Latest security month - March 2026"
     },
     "latest-security-patch": {
-      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.4/index.json",
-      "title": "Latest security patch - 10.0.4"
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/10.0.5/index.json",
+      "title": "Latest security patch - 10.0.5"
     },
     "manifest": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/10.0/manifest.json",
@@ -47,6 +47,11 @@
     "root": {
       "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/index.json",
       "title": ".NET Release Index"
+    },
+    "latest-cve-json": {
+      "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/cve.json",
+      "title": "Latest CVE records - March 2026",
+      "type": "application/json"
     }
   },
   "_embedded": {
@@ -56,7 +61,7 @@
         "date": "2026-03-12T00:00:00\u002B00:00",
         "year": "2026",
         "month": "03",
-        "security": false,
+        "security": true,
         "support_phase": "active",
         "sdk_version": "10.0.201",
         "_links": {
@@ -65,6 +70,13 @@
           },
           "month": {
             "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json"
+          },
+          "security-disclosures": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/index.json"
+          },
+          "cve-json": {
+            "href": "https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/timeline/2026/03/cve.json",
+            "type": "application/json"
           }
         }
       },
