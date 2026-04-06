@@ -56,6 +56,8 @@ Preview 3 also adds CRC32 validation when reading ZIP entries, which means
 corrupted payloads now fail fast with `InvalidDataException` instead of being
 silently accepted
 ([dotnet/runtime #124766](https://github.com/dotnet/runtime/pull/124766)).
+If you used the earlier preview package, remove the separate
+`System.IO.Compression.Zstandard` package reference.
 
 ```diff
 -<PackageReference Include="System.IO.Compression.Zstandard" />

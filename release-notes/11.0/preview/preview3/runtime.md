@@ -50,8 +50,8 @@ index-from-end access can drop more redundant bounds checks
 `uint` to `float` / `double` casts are faster on pre-AVX-512 x86 hardware
 ([dotnet/runtime #124114](https://github.com/dotnet/runtime/pull/124114)).
 
-Supporting changes in range analysis, common subexpression elimination, and loop
-cloning let the JIT apply these reductions across more real-world code.
+Supporting compiler work lets the JIT apply these reductions across more
+real-world code.
 
 ```csharp
 bool isSmall = x is 0 or 1 or 2 or 3 or 4;

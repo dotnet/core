@@ -1,23 +1,23 @@
 # C# in .NET 11 Preview 3 - Release Notes
 
-C# in Preview 3 continues the ongoing unsafe-evolution work:
+C# in Preview 3 adds clearer diagnostics and annotations for unsafe code:
 
 - [Unsafe code adds clearer diagnostics and annotations](#unsafe-code-adds-clearer-diagnostics-and-annotations)
 - [Breaking changes](#breaking-changes)
 
 ## Unsafe code adds clearer diagnostics and annotations
 
-The Roslyn *Unsafe evolution* work continues in Preview 3 with clearer
-language-version errors for updated memory-safety rules, better handling around
-`new()` constraints, and new warnings for `unsafe` delegates
+Preview 3 adds clearer language-version errors for updated memory-safety rules,
+better handling around `new()` constraints, and new warnings for `unsafe`
+delegates
 ([dotnet/roslyn #82687](https://github.com/dotnet/roslyn/pull/82687),
 [dotnet/roslyn #82647](https://github.com/dotnet/roslyn/pull/82647),
 [dotnet/roslyn #82730](https://github.com/dotnet/roslyn/pull/82730)). The
-runtime side also picked up supporting unsafe-evolution attributes
+runtime also adds supporting attributes for that work
 ([dotnet/runtime #125721](https://github.com/dotnet/runtime/pull/125721)).
 
-Together, these changes make the unsafe-code rules and annotations more explicit
-in Preview 3.
+Together, these changes make unsafe-code requirements and annotations more
+explicit in Preview 3.
 
 ```csharp
 unsafe delegate int ReadCallback(byte* data, int length);

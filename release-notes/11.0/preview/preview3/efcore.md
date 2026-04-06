@@ -5,7 +5,7 @@
 - [`ChangeTracker.GetEntriesForState()` avoids extra change detection](#changetrackergetentriesforstate-avoids-extra-change-detection)
 - [DbContext configuration can remove providers and add pooled factories](#dbcontext-configuration-can-remove-providers-and-add-pooled-factories)
 - [Migrations get more control and clearer feedback](#migrations-get-more-control-and-clearer-feedback)
-- [SQL generation is leaner and SQL Server adds JSON APIs](#sql-generation-is-leaner-and-sql-server-adds-json-apis)
+- [SQL generation removes unnecessary joins and SQL Server adds JSON APIs](#sql-generation-removes-unnecessary-joins-and-sql-server-adds-json-apis)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -66,12 +66,11 @@ modelBuilder.Entity<Order>()
     .ExcludeForeignKeyFromMigrations(true);
 ```
 
-## SQL generation is leaner and SQL Server adds JSON APIs
+## SQL generation removes unnecessary joins and SQL Server adds JSON APIs
 
-Query generation for to-one joins is now leaner, with cleaner SQL and fewer
-unnecessary joins in common cases
+Query generation for to-one joins now removes unnecessary joins in common cases
 ([dotnet/efcore #37819](https://github.com/dotnet/efcore/pull/37819)). SQL
-Server 2025 users also get `EF.Functions.JsonContains()`, and the earlier
+Server 2025 now supports `EF.Functions.JsonContains()`, and the earlier
 preview API has been renamed to `JsonPathExists()` for clarity
 ([dotnet/efcore #37714](https://github.com/dotnet/efcore/pull/37714),
 [dotnet/efcore #37732](https://github.com/dotnet/efcore/pull/37732)).

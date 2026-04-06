@@ -1,10 +1,11 @@
 # ASP.NET Core in .NET 11 Preview 3 - Release Notes
 
-Here's a summary of what's new in ASP.NET Core in this preview release:
+.NET 11 Preview 3 includes new ASP.NET Core features and improvements:
 
 - [Zstandard response compression and request decompression](#zstandard-response-compression-and-request-decompression)
-- [Virtualize now works better with variable-height items](#virtualize-now-works-better-with-variable-height-items)
-- [HTTP/3 and Blazor WebAssembly both get faster paths](#http3-and-blazor-webassembly-both-get-faster-paths)
+- [Virtualize adapts to variable-height items at runtime](#virtualize-adapts-to-variable-height-items-at-runtime)
+- [HTTP/3 starts processing requests earlier](#http3-starts-processing-requests-earlier)
+- [Blazor WebAssembly moves more interop to JSImport and JSExport](#blazor-webassembly-moves-more-interop-to-jsimport-and-jsexport)
 - [Generate Method now works in Razor files](#generate-method-now-works-in-razor-files)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -12,7 +13,7 @@ Here's a summary of what's new in ASP.NET Core in this preview release:
 ASP.NET Core updates in .NET 11:
 
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
-- [Roadmap](https://github.com/dotnet/aspnetcore/issues/64787)
+- [dotnet/aspnetcore #64787](https://github.com/dotnet/aspnetcore/issues/64787)
 
 <!-- Verified against Microsoft.AspNetCore.App.Ref@11.0.0-preview.3.26179.102 -->
 
@@ -21,8 +22,8 @@ ASP.NET Core updates in .NET 11:
 ASP.NET Core now supports [Zstandard (zstd)](https://facebook.github.io/zstd/)
 for both response compression and request decompression
 ([dotnet/aspnetcore #65479](https://github.com/dotnet/aspnetcore/pull/65479)).
-This gives web developers another standards-based compression option with a very
-familiar programming model.
+This adds zstd support to the existing response-compression and
+request-decompression middleware.
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -37,12 +38,11 @@ builder.Services.Configure<ZstandardCompressionProviderOptions>(options =>
 
 Thank you [@manandre](https://github.com/manandre) for this contribution!
 
-## Virtualize now works better with variable-height items
+## Virtualize adapts to variable-height items at runtime
 
 Blazor's `Virtualize<TItem>` component no longer assumes every item has the same
-height. Preview 3 teaches it to adapt to measured item sizes at runtime, which
-makes scenarios like chat transcripts, cards, and wrapped text lists behave much
-more naturally
+height. Preview 3 updates it to adapt to measured item sizes at runtime, which
+reduces incorrect spacing and scrolling when item heights vary
 ([dotnet/aspnetcore #64964](https://github.com/dotnet/aspnetcore/pull/64964)).
 
 ```razor
@@ -54,13 +54,15 @@ more naturally
 </Virtualize>
 ```
 
-## HTTP/3 and Blazor WebAssembly both get faster paths
+## HTTP/3 starts processing requests earlier
 
 Kestrel now starts processing HTTP/3 requests without waiting for the control
 stream and SETTINGS frame first, which reduces first-request latency on new
 connections ([dotnet/aspnetcore #65399](https://github.com/dotnet/aspnetcore/pull/65399)).
 
-Blazor WebAssembly also moves more interop paths to `JSImport` / `JSExport`
+## Blazor WebAssembly moves more interop to JSImport and JSExport
+
+Blazor WebAssembly now moves more interop paths to `JSImport` / `JSExport`
 ([dotnet/aspnetcore #65895](https://github.com/dotnet/aspnetcore/pull/65895),
 [dotnet/aspnetcore #65897](https://github.com/dotnet/aspnetcore/pull/65897)),
 which is part of the broader runtime/browser work this preview.
@@ -68,8 +70,8 @@ which is part of the broader runtime/browser work this preview.
 ## Generate Method now works in Razor files
 
 The Razor editor now offers the familiar **Generate Method** code action inside
-Razor files, so missing event handlers and helper methods are easier to stub out
-without leaving the editor
+Razor files, so you can stub out missing event handlers and helper methods
+directly in the editor
 ([dotnet/razor #12960](https://github.com/dotnet/razor/pull/12960)).
 
 <!-- Filtered features (significant engineering work, but too niche or already covered elsewhere):
