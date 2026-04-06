@@ -2,7 +2,7 @@
 
 .NET 11 Preview 3 includes new library features and reliability improvements:
 
-- [System.Text.Json gets more control over naming and ignore defaults](#systemtextjson-gets-more-control-over-naming-and-ignore-defaults)
+- [System.Text.Json offers more control over naming and ignore defaults](#systemtextjson-offers-more-control-over-naming-and-ignore-defaults)
 - [Zstandard joins System.IO.Compression and ZIP reads validate CRC32](#zstandard-joins-systemiocompression-and-zip-reads-validate-crc32)
 - [SafeFileHandle and RandomAccess expand pipe support](#safefilehandle-and-randomaccess-expand-pipe-support)
 - [Regex recognizes all Unicode newline sequences](#regex-recognizes-all-unicode-newline-sequences)
@@ -16,7 +16,7 @@
 
 <!-- Verified against Microsoft.NETCore.App.Ref@11.0.0-preview.3.26179.102 -->
 
-## System.Text.Json gets more control over naming and ignore defaults
+## System.Text.Json offers more control over naming and ignore defaults
 
 Preview 3 expands the built-in naming and ignore options in `System.Text.Json`.
 `JsonNamingPolicy.PascalCase` joins the existing camel, snake, and kebab

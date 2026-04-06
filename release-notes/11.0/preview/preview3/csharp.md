@@ -2,10 +2,10 @@
 
 C# in Preview 3 continues the ongoing unsafe-evolution work:
 
-- [Unsafe code gets clearer diagnostics and annotations](#unsafe-code-gets-clearer-diagnostics-and-annotations)
+- [Unsafe code adds clearer diagnostics and annotations](#unsafe-code-adds-clearer-diagnostics-and-annotations)
 - [Breaking changes](#breaking-changes)
 
-## Unsafe code gets clearer diagnostics and annotations
+## Unsafe code adds clearer diagnostics and annotations
 
 The Roslyn *Unsafe evolution* work continues in Preview 3 with clearer
 language-version errors for updated memory-safety rules, better handling around
