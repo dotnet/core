@@ -16,7 +16,7 @@ Standard document structure for .NET release notes markdown files.
 
 ## Feature Name
 
-<description> ([<owner>/<repo>#NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN)).
+<description> ([<owner>/<repo> #NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN)).
 
 ## Breaking changes
 
@@ -84,17 +84,17 @@ Known component docs links:
 ## Section rules
 
 1. **TOC at top** — every feature gets a linked entry
-2. **One paragraph of context** — what the feature does and why it matters, with PR/issue links
+2. **One paragraph of context** — what the feature does and why it matters in concrete terms, with PR/issue links; avoid inferred feelings or marketing-style claims
 3. **Code sample** — show the feature in use
 4. **Feature ordering** — highest customer impact first
 5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections
 
 ## Issue and PR references
 
-Always use markdown links with the `{org}/{repo}#{number}` format:
+Always use markdown links with the `{org}/{repo} #{number}` format, with a space before `#`:
 
-- ✅ `[dotnet/runtime#124264](https://github.com/dotnet/runtime/pull/124264)`
-- ❌ `dotnet/runtime#124264` (bare reference)
+- ✅ `[dotnet/runtime #124264](https://github.com/dotnet/runtime/pull/124264)`
+- ❌ `dotnet/runtime#124264` (wrong spacing and bare reference)
 
 ## Minimal stub
 
@@ -112,7 +112,7 @@ There are no new features or improvements in <Component> in this release.
 ## Finding Certificates By Thumbprints Other Than SHA-1
 
 A new method on `X509Certificate2Collection` accepts the name of the hash algorithm to use
-for thumbprint matching ([dotnet/runtime#NNNNN](https://github.com/dotnet/runtime/pull/NNNNN)).
+for thumbprint matching ([dotnet/runtime #NNNNN](https://github.com/dotnet/runtime/pull/NNNNN)).
 ```
 
 Code sample example:

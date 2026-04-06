@@ -11,6 +11,12 @@ Tone, attribution, and content guidelines for .NET release notes.
 - **Don't editorialize beyond the facts** — state what concretely changed ("enabled by default", "no longer requires opt-in") rather than making claims you can't back up ("ready for production use", "signals maturity"). If a PR removes a preview attribute, say that. Don't interpret it as a promise.
   - ✅ `Runtime-async is now enabled by default for anyone targeting net11.0.`
   - ❌ `This signals that runtime-async is ready for production use.`
+- **Prefer concrete deltas over inferred outcomes** — say what changed and, if useful, the direct consequence for a real scenario. Avoid claims about trust, confidence, convenience, or behavior unless the source explicitly supports them.
+  - ✅ `Regex recognizes all Unicode newline sequences.`
+  - ✅ `Tar extraction now rejects entries that would write outside the destination directory.`
+  - ✅ `Tar extraction now rejects path traversal entries, helping applications avoid overwriting files outside the target folder.`
+  - ❌ `Compression and archive handling are easier to trust.`
+  - ❌ `You can extract archives without worrying about attacks.`
 - **Prefer short, direct sentences** — If a sentence has a parenthetical clause (`which...`, `where...`, `that...`) longer than a few words, split it into two sentences. Lead with the news, follow with context. Long sentences are fine when they flow as a single continuous thought (what → why); they're not fine when a subordinate clause interrupts the main verb.
   - ✅ `Runtime-async is now enabled for NativeAOT. This eliminates the state-machine overhead of async/await for ahead-of-time compiled applications.`
   - ❌ `The runtime-async feature, which eliminates the state-machine overhead of async/await, is now enabled for NativeAOT.`
@@ -86,15 +92,15 @@ Thank you contributors! ❤️
 
 ## Bug fixes section
 
-After features but before community contributors, include a grouped bug fix summary when there are noteworthy fixes:
+After features but before community contributors, include a grouped bug fix summary when there are noteworthy fixes. When citing the source work, use linked `org/repo #number` references with a space before `#`:
 
 ```markdown
 ## Bug fixes
 
 - **System.Net.Http**
-  - Fixed authenticated proxy credential handling ([dotnet/runtime#123363](https://github.com/dotnet/runtime/issues/123363))
+  - Fixed authenticated proxy credential handling ([dotnet/runtime #123363](https://github.com/dotnet/runtime/issues/123363))
 - **System.Collections**
-  - Fixed integer overflow in ImmutableArray range validation ([dotnet/runtime#124042](https://github.com/dotnet/runtime/pull/124042))
+  - Fixed integer overflow in ImmutableArray range validation ([dotnet/runtime #124042](https://github.com/dotnet/runtime/pull/124042))
 ```
 
 Group by namespace/area. Don't include test-only, CI, or infra fixes.
