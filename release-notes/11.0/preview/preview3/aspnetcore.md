@@ -20,7 +20,7 @@ ASP.NET Core updates in .NET 11:
 
 ASP.NET Core now supports [Zstandard (zstd)](https://facebook.github.io/zstd/)
 for both response compression and request decompression
-([dotnet/aspnetcore#65479](https://github.com/dotnet/aspnetcore/pull/65479)).
+([dotnet/aspnetcore #65479](https://github.com/dotnet/aspnetcore/pull/65479)).
 This gives web developers another standards-based compression option with a very
 familiar programming model.
 
@@ -43,7 +43,7 @@ Blazor's `Virtualize<TItem>` component no longer assumes every item has the same
 height. Preview 3 teaches it to adapt to measured item sizes at runtime, which
 makes scenarios like chat transcripts, cards, and wrapped text lists behave much
 more naturally
-([dotnet/aspnetcore#64964](https://github.com/dotnet/aspnetcore/pull/64964)).
+([dotnet/aspnetcore #64964](https://github.com/dotnet/aspnetcore/pull/64964)).
 
 ```razor
 <Virtualize Items="messages" Context="message">
@@ -58,11 +58,11 @@ more naturally
 
 Kestrel now starts processing HTTP/3 requests without waiting for the control
 stream and SETTINGS frame first, which reduces first-request latency on new
-connections ([dotnet/aspnetcore#65399](https://github.com/dotnet/aspnetcore/pull/65399)).
+connections ([dotnet/aspnetcore #65399](https://github.com/dotnet/aspnetcore/pull/65399)).
 
 Blazor WebAssembly also moves more interop paths to `JSImport` / `JSExport`
-([dotnet/aspnetcore#65895](https://github.com/dotnet/aspnetcore/pull/65895),
-[dotnet/aspnetcore#65897](https://github.com/dotnet/aspnetcore/pull/65897)),
+([dotnet/aspnetcore #65895](https://github.com/dotnet/aspnetcore/pull/65895),
+[dotnet/aspnetcore #65897](https://github.com/dotnet/aspnetcore/pull/65897)),
 which is part of the broader runtime/browser work this preview.
 
 ## Generate Method now works in Razor files
@@ -70,7 +70,7 @@ which is part of the broader runtime/browser work this preview.
 The Razor editor now offers the familiar **Generate Method** code action inside
 Razor files, so missing event handlers and helper methods are easier to stub out
 without leaving the editor
-([dotnet/razor#12960](https://github.com/dotnet/razor/pull/12960)).
+([dotnet/razor #12960](https://github.com/dotnet/razor/pull/12960)).
 
 <!-- Filtered features (significant engineering work, but too niche or already covered elsewhere):
   - OpenAPI 3.2 support: a real breaking-change story for OpenAPI users, but already documented in Preview 2 and not repeated here.
@@ -81,19 +81,19 @@ without leaving the editor
 
 - **Blazor**
   - Fixed a null reference error in `Virtualize`
-    ([dotnet/aspnetcore#65207](https://github.com/dotnet/aspnetcore/pull/65207)).
+    ([dotnet/aspnetcore #65207](https://github.com/dotnet/aspnetcore/pull/65207)).
   - Fixed scroll-container detection when `overflow-x` is set
-    ([dotnet/aspnetcore#65744](https://github.com/dotnet/aspnetcore/pull/65744)).
+    ([dotnet/aspnetcore #65744](https://github.com/dotnet/aspnetcore/pull/65744)).
   - Fixed the Web Worker template in published Blazor WebAssembly apps
-    ([dotnet/aspnetcore#65885](https://github.com/dotnet/aspnetcore/pull/65885)).
+    ([dotnet/aspnetcore #65885](https://github.com/dotnet/aspnetcore/pull/65885)).
 - **HTTP / Kestrel**
   - Fixed HTTP/2 and header-decoding issues in several edge cases
-    ([dotnet/aspnetcore#65729](https://github.com/dotnet/aspnetcore/pull/65729),
-    [dotnet/aspnetcore#65765](https://github.com/dotnet/aspnetcore/pull/65765),
-    [dotnet/aspnetcore#65771](https://github.com/dotnet/aspnetcore/pull/65771)).
+    ([dotnet/aspnetcore #65729](https://github.com/dotnet/aspnetcore/pull/65729),
+    [dotnet/aspnetcore #65765](https://github.com/dotnet/aspnetcore/pull/65765),
+    [dotnet/aspnetcore #65771](https://github.com/dotnet/aspnetcore/pull/65771)).
 - **JSON Patch**
   - Fixed `JsonPatchDocument.Replace` for array items backed by `JsonArray` /
-    `IList` ([dotnet/aspnetcore#65470](https://github.com/dotnet/aspnetcore/pull/65470)).
+    `IList` ([dotnet/aspnetcore #65470](https://github.com/dotnet/aspnetcore/pull/65470)).
 
 ## Community contributors
 

@@ -2,9 +2,9 @@
 
 .NET 11 Preview 3 includes new runtime features and performance work:
 
-- [Runtime async is easier to adopt](#runtime-async-is-easier-to-adopt)
-- [The JIT keeps shaving off common overhead](#the-jit-keeps-shaving-off-common-overhead)
-- [Browser and WebAssembly work continues to cluster into a real story](#browser-and-webassembly-work-continues-to-cluster-into-a-real-story)
+- [Runtime async no longer requires preview opt-in](#runtime-async-no-longer-requires-preview-opt-in)
+- [JIT optimizations reduce common overhead](#jit-optimizations-reduce-common-overhead)
+- [Browser and WebAssembly add WebCIL and debugging improvements](#browser-and-webassembly-add-webcil-and-debugging-improvements)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -15,22 +15,22 @@
 
 <!-- Verified against Microsoft.NETCore.App.Ref@11.0.0-preview.3.26179.102 -->
 
-## Runtime async is easier to adopt
+## Runtime async no longer requires preview opt-in
 
-Preview 2 introduced runtime async as a preview feature. Preview 3 makes it much
-more practical to try. The `[RequiresPreviewFeatures]` gate is gone, so a
-`net11.0` project no longer needs `<EnablePreviewFeatures>true</EnablePreviewFeatures>`
-just to enable `runtime-async=on`
-([dotnet/runtime#124488](https://github.com/dotnet/runtime/pull/124488)).
+Preview 3 removes the `[RequiresPreviewFeatures]` gate from runtime async APIs,
+so a `net11.0` project no longer needs
+`<EnablePreviewFeatures>true</EnablePreviewFeatures>` just to enable
+`runtime-async=on`
+([dotnet/runtime #124488](https://github.com/dotnet/runtime/pull/124488)).
 
 Support for NativeAOT and ReadyToRun also landed in this preview
-([dotnet/runtime#123952](https://github.com/dotnet/runtime/pull/123952),
-[dotnet/runtime#124203](https://github.com/dotnet/runtime/pull/124203),
-[dotnet/runtime#125420](https://github.com/dotnet/runtime/pull/125420)).
+([dotnet/runtime #123952](https://github.com/dotnet/runtime/pull/123952),
+[dotnet/runtime #124203](https://github.com/dotnet/runtime/pull/124203),
+[dotnet/runtime #125420](https://github.com/dotnet/runtime/pull/125420)).
 Follow-on work reuses continuation objects more aggressively and avoids saving
 unchanged locals, which reduces allocation pressure in async-heavy code
-([dotnet/runtime#125556](https://github.com/dotnet/runtime/pull/125556),
-[dotnet/runtime#125615](https://github.com/dotnet/runtime/pull/125615)).
+([dotnet/runtime #125556](https://github.com/dotnet/runtime/pull/125556),
+[dotnet/runtime #125615](https://github.com/dotnet/runtime/pull/125615)).
 
 ```diff
  <PropertyGroup>
@@ -39,21 +39,19 @@ unchanged locals, which reduces allocation pressure in async-heavy code
  </PropertyGroup>
 ```
 
-## The JIT keeps shaving off common overhead
+## JIT optimizations reduce common overhead
 
 Preview 3 continues the steady JIT work that benefits normal code without any
 source changes. Common patterns like multi-target `switch` expressions now fold
 into simpler branchless checks
-([dotnet/runtime#124567](https://github.com/dotnet/runtime/pull/124567)),
+([dotnet/runtime #124567](https://github.com/dotnet/runtime/pull/124567)),
 index-from-end access can drop more redundant bounds checks
-([dotnet/runtime#124571](https://github.com/dotnet/runtime/pull/124571)), and
+([dotnet/runtime #124571](https://github.com/dotnet/runtime/pull/124571)), and
 `uint` to `float` / `double` casts are faster on pre-AVX-512 x86 hardware
-([dotnet/runtime#124114](https://github.com/dotnet/runtime/pull/124114)).
+([dotnet/runtime #124114](https://github.com/dotnet/runtime/pull/124114)).
 
-The supporting work in range analysis, common subexpression elimination, and loop
-cloning is more technical, but it all points in the same direction: the JIT is
-getting better at recognizing the code people already write and emitting tighter
-machine code for it.
+Supporting changes in range analysis, common subexpression elimination, and loop
+cloning let the JIT apply these reductions across more real-world code.
 
 ```csharp
 bool isSmall = x is 0 or 1 or 2 or 3 or 4;
@@ -61,23 +59,17 @@ int tail = values[^1] + values[^2];
 double d = someUint;
 ```
 
-## Browser and WebAssembly work continues to cluster into a real story
+## Browser and WebAssembly add WebCIL and debugging improvements
 
-The browser/CoreCLR work in Preview 3 is still a specialist story, but it is now
-coherent enough to call out as a group. CoreCLR-in-the-browser can load WebCIL
-payloads
-([dotnet/runtime#124758](https://github.com/dotnet/runtime/pull/124758),
-[dotnet/runtime#124904](https://github.com/dotnet/runtime/pull/124904)), emit
-symbols and better stack traces for debugging
-([dotnet/runtime#124500](https://github.com/dotnet/runtime/pull/124500),
-[dotnet/runtime#124483](https://github.com/dotnet/runtime/pull/124483)), and
+Preview 3 expands the browser/CoreCLR work with WebCIL payload loading
+([dotnet/runtime #124758](https://github.com/dotnet/runtime/pull/124758),
+[dotnet/runtime #124904](https://github.com/dotnet/runtime/pull/124904)), better
+symbols and stack traces for debugging
+([dotnet/runtime #124500](https://github.com/dotnet/runtime/pull/124500),
+[dotnet/runtime #124483](https://github.com/dotnet/runtime/pull/124483)), and
 marshal `float[]`, `Span<float>`, and `ArraySegment<float>` more directly across
 JS boundaries
-([dotnet/runtime#123642](https://github.com/dotnet/runtime/pull/123642)).
-
-None of these items is a lead story on its own, but together they make the
-browser and WASM experience feel less experimental than it did a few previews
-ago.
+([dotnet/runtime #123642](https://github.com/dotnet/runtime/pull/123642)).
 
 <!-- Filtered features (significant engineering work, but too niche for release notes):
   - cDAC and diagnostics plumbing: important internal debugger infrastructure, but too insider-focused for public release notes.
@@ -89,25 +81,25 @@ ago.
 
 - Unhandled `BackgroundService` exceptions now propagate from the host instead of
   being quietly swallowed
-  ([dotnet/runtime#124863](https://github.com/dotnet/runtime/pull/124863)).
+  ([dotnet/runtime #124863](https://github.com/dotnet/runtime/pull/124863)).
 - NativeAOT native-library outputs now use the conventional `lib` prefix on
   Unix. If your scripts expected `MyLib.so`, update them to look for
   `libMyLib.so`
-  ([dotnet/runtime#124611](https://github.com/dotnet/runtime/pull/124611)).
+  ([dotnet/runtime #124611](https://github.com/dotnet/runtime/pull/124611)).
 
 ## Bug fixes
 
 - **JIT**
   - Fixed correctness issues around async save/restore, if-conversion, and
     return-block cloning
-    ([dotnet/runtime#125044](https://github.com/dotnet/runtime/pull/125044),
-    [dotnet/runtime#125072](https://github.com/dotnet/runtime/pull/125072),
-    [dotnet/runtime#124642](https://github.com/dotnet/runtime/pull/124642)).
+    ([dotnet/runtime #125044](https://github.com/dotnet/runtime/pull/125044),
+    [dotnet/runtime #125072](https://github.com/dotnet/runtime/pull/125072),
+    [dotnet/runtime #124642](https://github.com/dotnet/runtime/pull/124642)).
 - **VM / runtime async**
   - Fixed a race leak in runtime-async resumption stubs and a lock-level issue
     that could deadlock under contention
-    ([dotnet/runtime#125407](https://github.com/dotnet/runtime/pull/125407),
-    [dotnet/runtime#125675](https://github.com/dotnet/runtime/pull/125675)).
+    ([dotnet/runtime #125407](https://github.com/dotnet/runtime/pull/125407),
+    [dotnet/runtime #125675](https://github.com/dotnet/runtime/pull/125675)).
 
 ## Community contributors
 

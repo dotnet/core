@@ -3,8 +3,8 @@
 .NET 11 Preview 3 includes new library features and reliability improvements:
 
 - [System.Text.Json gets more control over naming and ignore defaults](#systemtextjson-gets-more-control-over-naming-and-ignore-defaults)
-- [Compression and archive handling are easier to trust](#compression-and-archive-handling-are-easier-to-trust)
-- [Low-level handle and pipe APIs are more capable](#low-level-handle-and-pipe-apis-are-more-capable)
+- [Zstandard joins System.IO.Compression and ZIP reads validate CRC32](#zstandard-joins-systemiocompression-and-zip-reads-validate-crc32)
+- [SafeFileHandle and RandomAccess expand pipe support](#safefilehandle-and-randomaccess-expand-pipe-support)
 - [Regex recognizes all Unicode newline sequences](#regex-recognizes-all-unicode-newline-sequences)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
@@ -23,9 +23,9 @@ Preview 3 expands the built-in naming and ignore options in `System.Text.Json`.
 presets, `[JsonNamingPolicy]` lets you override naming on individual members,
 and type-level `[JsonIgnore(Condition = ...)]` lets a model set its default
 ignore behavior in one place
-([dotnet/runtime#124644](https://github.com/dotnet/runtime/pull/124644),
-[dotnet/runtime#124645](https://github.com/dotnet/runtime/pull/124645),
-[dotnet/runtime#124646](https://github.com/dotnet/runtime/pull/124646)).
+([dotnet/runtime #124644](https://github.com/dotnet/runtime/pull/124644),
+[dotnet/runtime #124645](https://github.com/dotnet/runtime/pull/124645),
+[dotnet/runtime #124646](https://github.com/dotnet/runtime/pull/124646)).
 
 ```csharp
 using System.Text.Json;
@@ -46,35 +46,34 @@ var options = new JsonSerializerOptions
 };
 ```
 
-## Compression and archive handling are easier to trust
+## Zstandard joins System.IO.Compression and ZIP reads validate CRC32
 
 The Zstandard APIs introduced earlier in .NET 11 now live in
 `System.IO.Compression`, so they sit alongside `DeflateStream`, `GZipStream`,
 and `BrotliStream`
-([dotnet/runtime#124634](https://github.com/dotnet/runtime/pull/124634)).
+([dotnet/runtime #124634](https://github.com/dotnet/runtime/pull/124634)).
 Preview 3 also adds CRC32 validation when reading ZIP entries, which means
 corrupted payloads now fail fast with `InvalidDataException` instead of being
 silently accepted
-([dotnet/runtime#124766](https://github.com/dotnet/runtime/pull/124766)).
+([dotnet/runtime #124766](https://github.com/dotnet/runtime/pull/124766)).
 
 ```diff
 -<PackageReference Include="System.IO.Compression.Zstandard" />
 ```
 
-## Low-level handle and pipe APIs are more capable
+## SafeFileHandle and RandomAccess expand pipe support
 
-Low-level I/O work in Preview 3 makes `SafeFileHandle` a better foundation for
-systems code. `SafeFileHandle.Type` reports whether a handle is a file, pipe,
-socket, directory, or other OS object
-([dotnet/runtime#124561](https://github.com/dotnet/runtime/pull/124561)).
+Preview 3 adds several low-level I/O updates. `SafeFileHandle.Type` reports
+whether a handle is a file, pipe, socket, directory, or other OS object
+([dotnet/runtime #124561](https://github.com/dotnet/runtime/pull/124561)).
 `SafeFileHandle.CreateAnonymousPipe` creates pipe pairs with separate async
 behavior for each end
-([dotnet/runtime#125220](https://github.com/dotnet/runtime/pull/125220)), and
+([dotnet/runtime #125220](https://github.com/dotnet/runtime/pull/125220)), and
 `RandomAccess.Read` / `Write` now work with non-seekable handles such as pipes
-([dotnet/runtime#125512](https://github.com/dotnet/runtime/pull/125512)). On
+([dotnet/runtime #125512](https://github.com/dotnet/runtime/pull/125512)). On
 Windows, `Process` now uses overlapped I/O for redirected stdout/stderr, which
 reduces thread-pool blocking in process-heavy apps
-([dotnet/runtime#125643](https://github.com/dotnet/runtime/pull/125643)).
+([dotnet/runtime #125643](https://github.com/dotnet/runtime/pull/125643)).
 
 ```csharp
 using Microsoft.Win32.SafeHandles;
@@ -91,10 +90,10 @@ Console.WriteLine(readEnd.Type); // Pipe
 
 A new `RegexOptions.AnyNewLine` flag makes `^`, `$`, and `.` treat the full set
 of Unicode newline characters as line terminators, not just `\n`
-([dotnet/runtime#124701](https://github.com/dotnet/runtime/pull/124701)). This
+([dotnet/runtime #124701](https://github.com/dotnet/runtime/pull/124701)). This
 helps when you parse text that may mix Windows, Unix, and Unicode-specific line
-endings. Preview 3 also includes several optimizer improvements for common regex
-patterns, so this area got both a new knob and some welcome throughput polish.
+endings. Preview 3 also includes optimizer improvements for common regex
+patterns.
 
 ```csharp
 using System.Text.RegularExpressions;
@@ -118,27 +117,27 @@ var matches = Regex.Matches(
 - `ZipArchive` now validates CRC32 while reading entries. Corrupt or truncated
   archives that previously slipped through may now throw
   `InvalidDataException`
-  ([dotnet/runtime#124766](https://github.com/dotnet/runtime/pull/124766)).
+  ([dotnet/runtime #124766](https://github.com/dotnet/runtime/pull/124766)).
 - AIA certificate downloads are now disabled by default during server
   client-certificate validation. If you depended on online AIA fetching, review
   your validation setup
-  ([dotnet/runtime#125049](https://github.com/dotnet/runtime/pull/125049)).
+  ([dotnet/runtime #125049](https://github.com/dotnet/runtime/pull/125049)).
 - `TarWriter` now emits `HardLink` entries when the same hard-linked file is
   archived more than once
-  ([dotnet/runtime#123874](https://github.com/dotnet/runtime/pull/123874)).
+  ([dotnet/runtime #123874](https://github.com/dotnet/runtime/pull/123874)).
 
 ## Bug fixes
 
 - **Dependency injection**
   - Factory-based circular dependencies now throw a clear
     `InvalidOperationException` instead of failing much less helpfully
-    ([dotnet/runtime#124331](https://github.com/dotnet/runtime/pull/124331)).
+    ([dotnet/runtime #124331](https://github.com/dotnet/runtime/pull/124331)).
 - **Logging**
   - The logging source generator now supports generic methods
-    ([dotnet/runtime#124638](https://github.com/dotnet/runtime/pull/124638)).
+    ([dotnet/runtime #124638](https://github.com/dotnet/runtime/pull/124638)).
 - **Networking**
   - `HttpListener` on Windows can now control HTTP.sys kernel response buffering
-    ([dotnet/runtime#124720](https://github.com/dotnet/runtime/pull/124720)).
+    ([dotnet/runtime #124720](https://github.com/dotnet/runtime/pull/124720)).
 
 ## Community contributors
 
