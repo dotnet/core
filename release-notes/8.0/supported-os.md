@@ -1,6 +1,6 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2026/03/30; Support phase: Active
+Last Updated: 2026/04/06; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -50,12 +50,12 @@ Notes:
 
 ## Windows
 
-| OS                        | Versions                                    | Architectures | Lifecycle       |
-| ------------------------- | ------------------------------------------- | ------------- | --------------- |
-| [Nano Server][23]         | 2025, 2022, 2019                            | x64           | [Lifecycle][24] |
-| [Windows][25]             | 11 26H1, 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64 | [Lifecycle][26] |
-| [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64           | [Lifecycle][28] |
-| [Windows Server Core][29] | 2025, 2022, 2019, 2016, 2012-R2, 2012       | x64           | [Lifecycle][30] |
+| OS                        | Versions                                    | Architectures   | Lifecycle       |
+| ------------------------- | ------------------------------------------- | --------------- | --------------- |
+| [Nano Server][23]         | 2025, 2022, 2019                            | x64             | [Lifecycle][24] |
+| [Windows][25]             | 11 26H1, 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
+| [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64             | [Lifecycle][28] |
+| [Windows Server Core][29] | 2025, 2022, 2019, 2016, 2012-R2, 2012       | x64             | [Lifecycle][30] |
 
 Notes:
 
