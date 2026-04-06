@@ -15,6 +15,7 @@ release-notes/{major.minor}/preview/{previewN}/changes.json    # previews
 release-notes/{major.minor}/{major.minor.patch}/changes.json   # patches
 release-notes/{major.minor}/preview/{previewN}/features.json   # previews
 release-notes/{major.minor}/{major.minor.patch}/features.json  # patches
+release-notes/features.json                                    # root multi-release features sidecar
 ```
 
 ## Top-level structure
@@ -25,6 +26,47 @@ release-notes/{major.minor}/{major.minor.patch}/features.json  # patches
 | `release_date`    | string | ISO 8601, e.g., `"2026-04-08"`                          |
 | `changes`         | array  | The change or feature entries                           |
 | `commits`         | object | Normalized commit metadata, keyed by `repo@shortcommit` |
+
+## Root `release-notes/features.json` sidecar
+
+`release-notes/features.json` is an optional **root-level sidecar** for
+multi-release or long-running features that need consistent naming, preview
+callouts, and extra editorial notes across multiple milestones.
+
+Use it when:
+
+- a feature remains preview for a full release and may become stable in a later one
+- the same feature may appear in multiple preview or RC milestones
+- the notes should lead with a standard blockquote such as
+  `> This is a preview feature for .NET 11.`
+- the feature has an official name, and any aliases should only help matching that feature across runs
+- common casing or shorthand variants should still resolve to the same feature name
+
+Suggested structure:
+
+```json
+{
+  "features": [
+    {
+      "id": "unsafe-evolution",
+      "official_name": "Unsafe Evolution",
+      "aliases": ["Memory Safety v2", "memory safety v2"],
+      "repos": ["roslyn", "runtime"],
+      "preview_in": "11.0",
+      "stable_in": "12.0",
+      "callout": "This is a preview feature for .NET 11.",
+      "notes": "Use the official name in headings and body copy. Aliases are for matching only. Avoid generic phrasing such as 'Unsafe code adds ...'."
+    }
+  ]
+}
+```
+
+This root file is **separate from** the per-milestone `features.json` files
+under each preview or patch directory. It is curated metadata used by the
+writing stage to keep long-running features consistent across the release.
+
+- `official_name` is the canonical name to use in headings and prose.
+- `aliases` are match-only helpers for recognition, casing variants, or prior shorthand names.
 
 ## Change entry fields
 

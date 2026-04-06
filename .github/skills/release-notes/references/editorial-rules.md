@@ -42,6 +42,14 @@ Tone, attribution, and content guidelines for .NET release notes.
   - ✅ `## System.Text.Json offers more control over naming and ignore defaults`
   - ✅ `## Regex recognizes all Unicode newline sequences`
   - ❌ `## System.Text.Json gets more control over naming and ignore defaults`
+- Avoid anthropomorphic or club-like transition verbs such as `joins` when a more literal term is available. Prefer `moves to`, `is now in`, `adds support for`, or `supports`.
+  - ✅ `## Zstandard moved to System.IO.Compression and ZIP reads validate CRC32`
+  - ❌ `## Zstandard joins System.IO.Compression and ZIP reads validate CRC32`
+- Use the **established feature name** when one exists, especially for long-running preview features. If `release-notes/features.json` lists an `official_name`, use that in headings and prose. Treat aliases as match-only metadata, not as the default wording.
+  - ✅ `## Unsafe Evolution remains a preview feature in .NET 11`
+  - ✅ `## Unsafe Evolution adds clearer diagnostics in Preview 3`
+  - ❌ `## Memory Safety v2 adds clearer diagnostics in Preview 3`
+  - ❌ `## Unsafe code adds clearer diagnostics and annotations`
 - Keep headings concise — 3–8 words
 
 ## Benchmarks

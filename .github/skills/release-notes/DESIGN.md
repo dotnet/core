@@ -44,8 +44,14 @@ The system still has three layers, but the AI/editorial layer is now split into 
 - **`generate-features`** adds reusable triage and scoring so release notes, docs, and blogs can share the same ranked feature list.
 - **`api-diff`** verifies the public API story against the actual build, which is the best defense against missed reverts.
 - **`release-notes`** focuses on editorial judgment: which scored items matter, how to describe them, and how to preserve human edits.
-- **`review-release-notes`** applies a harsher, reader-centric cutoff so the final draft does not drift into API-inventory territory.
+- **`review-release-notes`** applies a harsher, reader-centric cutoff so the final draft does not drift into API-inventory territory. The final pass should fan out to two different models so the system gets a broader editorial read before synthesis.
 - **The workflow** handles orchestration. It knows when to run, what branches to manage, how to interact with humans, and how to preserve their edits.
+
+### Model strategy
+
+- **Claude Opus 4.6 by default** — use Claude Opus 4.6 throughout the main orchestration, scoring, and drafting flow.
+- **Two-model final review** — the preferred final editorial pair is **Claude Opus 4.6 + GPT-5.4**.
+- **Synthesis over voting** — overlap is a strong signal, but the shared rubric and fidelity to the actual shipped changes still outrank raw vote count.
 
 ## Layer 1 — The Tool
 

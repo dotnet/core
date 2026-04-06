@@ -76,6 +76,44 @@ Compare the draft against the component examples:
 - **API inventory mode** — the draft starts mirroring `api-diff` instead of telling a user story
 - **Technical novelty bias** — clever implementation details outrank practical user value
 
+## Multi-model review pattern
+
+For the final editorial QA pass, use this skill as a **two-reviewer parallel check** to get broader viewpoint diversity:
+
+Preferred set:
+
+1. **Claude Opus 4.6**
+2. **GPT-5.4**
+
+Give both reviewers the same inputs and the same requested output:
+
+- most correct scoring
+- most wrong scoring
+- important omissions
+- cut list
+
+Then synthesize the overlap and disagreements. Treat consensus as a strong signal, but do **not** turn this into a blind vote — fidelity to `changes.json`, the shared `editorial-scoring` rubric, and the repo's editorial rules still wins.
+
+## Reviewer checklist
+
+Do not ask reviewers the vague question "do you like this?" Give them the same
+specific checks instead:
+
+1. **Which headings still sound vague, passive, anthropomorphic, or promotional?**
+2. **Which sections fail the 80/20 reader-value test and should be cut, grouped, or demoted?**
+3. **Which sentences infer feelings or outcomes (`trust`, `confidence`, `easier`, `better`) instead of stating the concrete change?**
+4. **Which sections drift into API-inventory mode instead of teaching a user-facing story?**
+5. **Which code samples or examples are weak, confusing, or unsupported by the text?**
+6. **Which links, issue/PR references, or formatting details still violate house style?**
+7. **What is the single highest-value rewrite still needed in the draft?**
+8. **Is the wording conventional, or is it inventing non-standard phrasing or terms?**
+9. **Are the subject and its adjective or adverb paired in a familiar way?**
+10. **Would this phrasing seem normal in release notes for another developer platform?**
+11. **If `release-notes/features.json` lists this feature, does the section begin with the standard preview blockquote?**
+
+Ask reviewers to answer with file + heading + issue + suggested rewrite. This
+produces actionable review instead of general taste feedback.
+
 ## Output
 
 Return a concise review with:

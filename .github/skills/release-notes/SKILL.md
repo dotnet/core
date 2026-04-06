@@ -1,7 +1,7 @@
 ---
 name: release-notes
-description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, `editorial-scoring` for the shared rubric, `api-diff`/`dotnet-inspect` for API verification, and `review-release-notes` for a final editorial QA pass.
-compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, editorial-scoring, api-diff, and review-release-notes skills.
+description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, `editorial-scoring` for the shared rubric, `api-diff`/`dotnet-inspect` for API verification, and a multi-model `review-release-notes` pass for final editorial QA.
+compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, editorial-scoring, api-diff, and review-release-notes skills. Claude Opus 4.6 is the default workflow model; the preferred final reviewer pair is Claude Opus 4.6 + GPT-5.4 for broader editorial feedback.
 ---
 
 # .NET Release Notes
@@ -16,7 +16,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 2. `generate-features` reads `changes.json` and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
 3. `api-diff` / `dotnet-inspect` verifies public APIs and catches missed reverts
 4. `release-notes` writes curated markdown using the higher-value entries from `features.json`
-5. `review-release-notes` checks the selection against the scoring rubric and editorial examples
+5. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
 6. Output is one PR per release milestone in dotnet/core, maintained incrementally
 
 ## Design

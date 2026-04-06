@@ -88,6 +88,7 @@ Known component docs links:
 3. **Code sample** — show the feature in use
 4. **Feature ordering** — highest customer impact first
 5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections
+6. **Preview feature callout** — when a feature is listed in `release-notes/features.json`, start its section with the standard blockquote callout from that file
 
 ## Issue and PR references
 
@@ -113,6 +114,16 @@ There are no new features or improvements in <Component> in this release.
 
 A new method on `X509Certificate2Collection` accepts the name of the hash algorithm to use
 for thumbprint matching ([dotnet/runtime #NNNNN](https://github.com/dotnet/runtime/pull/NNNNN)).
+```
+
+Preview-feature example:
+
+```markdown
+## Unsafe Evolution remains a preview feature in .NET 11
+
+> This is a preview feature for .NET 11.
+
+Preview 3 adds clearer language-version errors for updated memory-safety rules...
 ```
 
 Code sample example:

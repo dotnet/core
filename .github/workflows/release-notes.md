@@ -130,6 +130,14 @@ Read these files and skills for detailed guidance:
 - **editorial-rules.md** — tone, attribution, naming conventions
 - **examples/** — curated examples from previous releases, organized by component ([README](../skills/release-notes/references/examples/README.md) has principles)
 
+## Model strategy
+
+- Use **Claude Opus 4.6** as the default model throughout the workflow for orchestration, scoring, and drafting.
+- For the **final `review-release-notes` pass**, prefer this **two-model reviewer set** to widen the editorial viewpoint:
+  - **Claude Opus 4.6**
+  - **GPT-5.4**
+- Give both reviewers the same inputs and ask for the same output shape. Synthesize the overlap, inspect meaningful disagreements, and prefer the shared `editorial-scoring` rubric over any single model's preference.
+
 ## What to do each run
 
 ### 1. Discover active milestones
@@ -243,6 +251,7 @@ Using `features.json`, `changes.json`, and the reference documents:
 - Route changes to output files via `product` field and component-mapping.md
 - For each component: identify which PRs are worth writing about
 - Write feature descriptions following `format-template.md` and `editorial-rules.md`
+- If `release-notes/features.json` exists, consult it before writing. For matching long-running features, use the established feature name and start the section with the standard preview blockquote from the sidecar file.
 - Components with no noteworthy changes get a minimal stub
 
 #### f. Ask for what you can't generate
@@ -266,7 +275,34 @@ Check all comments and review threads on the PR since the last run:
 
 When unsure about a human's intent, ask. Use `add-comment` to reply. This is a conversation, not a one-shot generation.
 
-#### e. Create or update the PR
+#### h. Run the final multi-model review
+
+Before pushing the draft, run the `review-release-notes` stage as a **two-agent parallel review**:
+
+- **Reviewer 1:** Claude Opus 4.6
+- **Reviewer 2:** GPT-5.4
+
+Have each reviewer critique the same draft using the same rubric, examples, and
+this checklist:
+
+- Which headings still sound vague, passive, anthropomorphic, or promotional?
+- Which sections fail the 80/20 reader-value test and should be cut, grouped, or demoted?
+- Which sentences infer feelings or outcomes instead of stating the concrete change?
+- Which sections drift into API-inventory mode instead of teaching a user story?
+- Which code samples or examples are weak or confusing?
+- Which links, issue/PR references, or formatting details still violate house style?
+- What is the single highest-value rewrite still needed?
+- Is the wording conventional, or is it inventing non-standard phrasing or terms?
+- Are the subject and its adjective or adverb paired in a familiar way?
+- Would this phrasing seem normal within release notes for another developer platform?
+
+Ask for file + heading + issue + suggested rewrite, not generic preference. Then:
+
+- apply the changes that have clear consensus
+- keep a human-readable note of any major disagreement
+- avoid "majority vote" thinking when it conflicts with fidelity or house style
+
+#### i. Create or update the PR
 
 - **No PR exists** → create branch `release-notes/11.0-preview4`, commit, open draft PR
 - **PR exists** → push updates to the existing branch, comment summarizing what changed
