@@ -5,7 +5,7 @@
 - [Solution filters can now be edited from the CLI](#solution-filters-can-now-be-edited-from-the-cli)
 - [File-based apps can be split across files](#file-based-apps-can-be-split-across-files)
 - [`dotnet run -e` passes environment variables from the command line](#dotnet-run--e-passes-environment-variables-from-the-command-line)
-- [`dotnet watch` adds Aspire, crash-relaunch, and Windows desktop improvements](#dotnet-watch-adds-aspire-crash-relaunch-and-windows-desktop-improvements)
+- [`dotnet watch` adds Aspire, crash recovery, and Windows desktop improvements](#dotnet-watch-adds-aspire-crash-recovery-and-windows-desktop-improvements)
 - [Other CLI improvements](#other-cli-improvements)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -44,17 +44,17 @@ Console.WriteLine(Helpers.FormatOutput(new Customer()));
 
 ## `dotnet run -e` passes environment variables from the command line
 
-`dotnet run -e FOO=BAR` gives you Docker-style `-e` environment-variable
-injection for local app runs, without requiring you to export shell state or edit
+`dotnet run -e FOO=BAR` lets you pass environment variables from the command
+line for local app runs, without requiring you to export shell state or edit
 launch profiles ([dotnet/sdk #52664](https://github.com/dotnet/sdk/pull/52664)).
-This keeps short-lived configuration overrides on the command line instead of in
-shell state or launch settings.
+This keeps short-lived configuration overrides on the command line instead of
+in shell state or launch settings.
 
 ```bash
 dotnet run -e ASPNETCORE_ENVIRONMENT=Development -e LOG_LEVEL=Debug
 ```
 
-## `dotnet watch` adds Aspire, crash-relaunch, and Windows desktop improvements
+## `dotnet watch` adds Aspire, crash recovery, and Windows desktop improvements
 
 Preview 3 adds several `dotnet watch` updates for long-running local development
 loops. It can now integrate with Aspire app hosts

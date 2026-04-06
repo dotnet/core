@@ -65,7 +65,7 @@ connections ([dotnet/aspnetcore #65399](https://github.com/dotnet/aspnetcore/pul
 Blazor WebAssembly now moves more interop paths to `JSImport` / `JSExport`
 ([dotnet/aspnetcore #65895](https://github.com/dotnet/aspnetcore/pull/65895),
 [dotnet/aspnetcore #65897](https://github.com/dotnet/aspnetcore/pull/65897)),
-which is part of the broader runtime/browser work this preview.
+which is part of the broader runtime/browser work in this preview.
 
 ## Generate Method now works in Razor files
 

@@ -132,7 +132,7 @@ var matches = Regex.Matches(
 
 - **Dependency injection**
   - Factory-based circular dependencies now throw a clear
-    `InvalidOperationException` instead of failing much less helpfully
+    `InvalidOperationException` instead of failing with a less helpful error
     ([dotnet/runtime #124331](https://github.com/dotnet/runtime/pull/124331)).
 - **Logging**
   - The logging source generator now supports generic methods

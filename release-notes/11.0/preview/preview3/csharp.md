@@ -9,10 +9,9 @@ C# in Preview 3 continues the Unsafe Evolution preview feature:
 
 > This is a preview feature for .NET 11.
 
-Unsafe Evolution, also referred to as *Memory Safety v2*, remains a preview
-feature in .NET 11. Preview 3 adds clearer language-version errors for updated
-memory-safety rules, better handling around `new()` constraints, and new
-warnings for `unsafe` delegates
+Unsafe Evolution remains a preview feature in .NET 11. Preview 3 adds clearer
+language-version errors for updated memory-safety rules, better handling around
+`new()` constraints, and new warnings for `unsafe` delegates
 ([dotnet/roslyn #82687](https://github.com/dotnet/roslyn/pull/82687),
 [dotnet/roslyn #82647](https://github.com/dotnet/roslyn/pull/82647),
 [dotnet/roslyn #82730](https://github.com/dotnet/roslyn/pull/82730)). The

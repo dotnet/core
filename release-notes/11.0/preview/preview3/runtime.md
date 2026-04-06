@@ -2,7 +2,7 @@
 
 .NET 11 Preview 3 includes new runtime features and performance work:
 
-- [Runtime async no longer requires preview opt-in](#runtime-async-no-longer-requires-preview-opt-in)
+- [Runtime async removes the preview-API opt-in requirement](#runtime-async-removes-the-preview-api-opt-in-requirement)
 - [JIT optimizations improve switches, bounds checks, and casts](#jit-optimizations-improve-switches-bounds-checks-and-casts)
 - [Browser and WebAssembly add WebCIL and debugging improvements](#browser-and-webassembly-add-webcil-and-debugging-improvements)
 - [Breaking changes](#breaking-changes)
@@ -15,12 +15,12 @@
 
 <!-- Verified against Microsoft.NETCore.App.Ref@11.0.0-preview.3.26179.102 -->
 
-## Runtime async no longer requires preview opt-in
+## Runtime async removes the preview-API opt-in requirement
 
-Preview 3 removes the `[RequiresPreviewFeatures]` gate from runtime async APIs,
-so a `net11.0` project no longer needs
-`<EnablePreviewFeatures>true</EnablePreviewFeatures>` just to enable
-`runtime-async=on`
+Runtime async still uses the `runtime-async=on` feature switch, but Preview 3
+removes the `[RequiresPreviewFeatures]` gate from its APIs. A `net11.0`
+project no longer needs `<EnablePreviewFeatures>true</EnablePreviewFeatures>`
+just to enable `runtime-async=on`
 ([dotnet/runtime #124488](https://github.com/dotnet/runtime/pull/124488)).
 
 Support for NativeAOT and ReadyToRun also landed in this preview
