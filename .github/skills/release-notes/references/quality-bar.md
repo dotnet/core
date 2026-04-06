@@ -6,7 +6,7 @@ What good .NET release notes look like. This is the north star — when in doubt
 
 ### changes.json — comprehensive and mechanical
 
-Every PR that shipped gets an entry. No editorial judgment — if the `dotnet-release generate changes` tool found it in the source-manifest diff, it goes in. This is the machine-readable record of what shipped.
+Every PR that shipped gets an entry. No editorial judgment — if the `release-notes-gen generate changes` tool found it in the source-manifest diff, it goes in. This is the machine-readable record of what shipped.
 
 Quality criteria:
 

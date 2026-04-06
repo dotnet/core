@@ -30,10 +30,10 @@ When writing release notes for Preview N, the locally installed SDK is often Pre
 
 ### Step 1: Generate build metadata
 
-`dotnet-release generate build-metadata` reads the VMR's version info and queries the nightly NuGet feed to find the correct package versions:
+`release-notes-gen generate build-metadata` reads the VMR's version info and queries the nightly NuGet feed to find the correct package versions:
 
 ```bash
-dotnet-release generate build-metadata ~/git/dotnet \
+release-notes-gen generate build-metadata ~/git/dotnet \
   --base v11.0.0-preview.2.26159.112 \
   --head origin/release/11.0.1xx-preview3 \
   --output build-metadata.json

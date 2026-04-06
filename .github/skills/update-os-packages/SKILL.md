@@ -2,7 +2,7 @@
 name: update-os-packages
 description: >
   Audit and update os-packages.json/md files that document required Linux
-  packages for each .NET release. Uses the dotnet-release tool to verify
+  packages for each .NET release. Uses the release-notes-gen tool to verify
   package names against distro archives and regenerate markdown. USE FOR:
   adding packages for new distro versions, fixing incorrect package names,
   periodic package audits. DO NOT USE FOR: supported-os.json changes (use
@@ -26,15 +26,15 @@ The scope of `os-packages.json` is broader than `supported-os.json`. It includes
 
 ## Prerequisites
 
-The `dotnet-release` tool must be installed. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
+The `release-notes-gen` tool must be installed. The public `dotnet-release` tool is now for browsing release data and CVEs. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
 
 ```bash
 # GitHub Packages requires authentication — use a GitHub token (PAT or GITHUB_TOKEN)
-dotnet tool install -g Dotnet.Release.Tools \
+dotnet tool install -g ReleaseNotes.Gen \
   --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify
-dotnet-release --help
+release-notes-gen --help
 ```
 
 > **Note:** GitHub Packages requires authentication even for public repositories. If you get a 401 error, configure credentials for the source:
@@ -63,17 +63,17 @@ The user provides:
 Run the verify command for each .NET version to audit:
 
 ```bash
-dotnet-release verify os-packages <version> release-notes
+release-notes-gen verify os-packages <version> release-notes
 ```
 
 Examples:
 
 ```bash
 # Check 10.0 against local files
-dotnet-release verify os-packages 10.0 release-notes
+release-notes-gen verify os-packages 10.0 release-notes
 
 # Check against live data on GitHub (no local clone needed)
-dotnet-release verify os-packages 10.0
+release-notes-gen verify os-packages 10.0
 ```
 
 **Interpret the exit code:**
@@ -164,7 +164,7 @@ Delete the release object from the `releases` array for that distribution.
 After updating the JSON, regenerate the markdown file:
 
 ```bash
-dotnet-release generate os-packages <version> release-notes
+release-notes-gen generate os-packages <version> release-notes
 ```
 
 This overwrites `os-packages.md` with content derived from the updated JSON.
@@ -186,7 +186,7 @@ CI runs markdownlint via super-linter. If linting fails, fix the generator or Ma
 1. Run verify again to confirm issues are resolved:
 
    ```bash
-   dotnet-release verify os-packages <version> release-notes
+   release-notes-gen verify os-packages <version> release-notes
    ```
 
    Expect exit code 0 (or only skipped distros remaining).

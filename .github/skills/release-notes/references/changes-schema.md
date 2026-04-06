@@ -1,6 +1,6 @@
 # Shared Schema for `changes.json` and `features.json`
 
-Reference for the `changes.json` file produced by `dotnet-release generate changes`, and for the derived `features.json` file used by downstream editorial skills. One file per release milestone.
+Reference for the `changes.json` file produced by `release-notes-gen generate changes`, and for the derived `features.json` file used by downstream editorial skills. One file per release milestone.
 
 ## Overview
 
