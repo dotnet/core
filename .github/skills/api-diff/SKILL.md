@@ -73,8 +73,8 @@ When the user wants the markdown-ready, repo-shaped API diff output, use `releas
 | ".NET 10 RC 2 vs .NET 10 GA"                          | `-PreviousMajorMinor 10.0 -PreviousPrereleaseLabel rc.2 -CurrentMajorMinor 10.0`                                       |
 | "10.0.0-preview.7.25380.108 to 10.0.0-rc.1.25451.107" | `-PreviousVersion "10.0.0-preview.7.25380.108" -CurrentVersion "10.0.0-rc.1.25451.107"`                                |
 
-- **GA** or no qualifier -> omit the PrereleaseLabel parameter
-- **Preview N** / **previewN** -> `-PrereleaseLabel preview.N`
+- **GA** or no qualifier -> omit the `PrereleaseLabel` parameter for `RunApiDiff.ps1`; if a downstream api-diff release label is needed, use `ga`
+- **Preview N** / **previewN** -> `-PrereleaseLabel preview.N` (for example, `preview.4`, not `preview4`)
 - **RC N** / **rcN** -> `-PrereleaseLabel rc.N`
 - **netX.Y-previewN** (TFM format) -> `-MajorMinor X.Y -PrereleaseLabel preview.N`
 - Full NuGet version strings -> use `-PreviousVersion` / `-CurrentVersion` directly

@@ -26,25 +26,25 @@ When run with no arguments, the script infers the next version to diff by scanni
 By default the script assumes a diff will be produced for the next preview. When no version information is provided, the script scans existing `api-diff` folders in the repository to find the latest version and infers the next one in the progression (preview.1 → preview.2 → ... → preview.7 → rc.1 → rc.2 → GA → next major preview.1). When `PreviousVersion` or `CurrentVersion` is provided, the `MajorMinor` and `PrereleaseLabel` values are extracted from it automatically.
 
 | Parameter | Description | Default |
-|---|---|---|
+| --- | --- | --- |
 | `PreviousVersion` | Exact package version for the "before" comparison (e.g., `10.0.0-preview.7.25380.108`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — inferred or searched)* |
 | `CurrentVersion` | Exact package version for the "after" comparison (e.g., `10.0.0-rc.1.25451.107`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — inferred or searched)* |
 | `PreviousMajorMinor` | The "before" .NET major.minor version (e.g., `10.0`) | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
-| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
+| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.4`, `preview.7`, `rc.1`). Omit for GA when calling `RunApiDiff.ps1`; the api-diff release label itself is `ga`. | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
 | `CurrentMajorMinor` | The "after" .NET major.minor version (e.g., `10.0`) | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
-| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.7`, `rc.1`). Omit for GA. | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
+| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.4`, `preview.7`, `rc.1`). Omit for GA when calling `RunApiDiff.ps1`; the api-diff release label itself is `ga`. | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
 
 ### Feed Parameters
 
 | Parameter | Description | Default |
-|---|---|---|
+| --- | --- | --- |
 | `CurrentNuGetFeed` | NuGet feed URL for downloading "after" packages | `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json` |
 | `PreviousNuGetFeed` | NuGet feed URL for downloading "before" packages | `https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json` |
 
 ### Path Parameters
 
 | Parameter | Description | Default |
-|---|---|---|
+| --- | --- | --- |
 | `CoreRepo` | Path to your local clone of the dotnet/core repo | Git repo root relative to the script |
 | `TmpFolder` | Working directory for downloaded and extracted packages | Auto-created temp directory |
 | `AttributesToExcludeFilePath` | Path to attributes exclusion file | `ApiDiffAttributesToExclude.txt` (same folder as script) |
@@ -53,7 +53,7 @@ By default the script assumes a diff will be produced for the next preview. When
 ### Switches
 
 | Parameter | Description |
-|---|---|
+| --- | --- |
 | `ExcludeNetCore` | Skip the Microsoft.NETCore.App comparison |
 | `ExcludeAspNetCore` | Skip the Microsoft.AspNetCore.App comparison |
 | `ExcludeWindowsDesktop` | Skip the Microsoft.WindowsDesktop.App comparison |
@@ -67,12 +67,17 @@ By default the script assumes a diff will be produced for the next preview. When
 .\RunApiDiff.ps1
 
 # Specify only the current version; previous is inferred from existing api-diffs
-.\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.2
+.\RunApiDiff.ps1 -CurrentMajorMinor 11.0 -CurrentPrereleaseLabel preview.4
 
 # Specify both versions explicitly
 .\RunApiDiff.ps1 `
    -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel preview.7 `
    -CurrentMajorMinor 10.0 -CurrentPrereleaseLabel rc.1
+
+# Compare RC to GA; omit CurrentPrereleaseLabel for GA
+.\RunApiDiff.ps1 `
+   -PreviousMajorMinor 10.0 -PreviousPrereleaseLabel rc.2 `
+   -CurrentMajorMinor 10.0
 
 # Use exact NuGet package versions (MajorMinor and PrereleaseLabel are extracted automatically)
 .\RunApiDiff.ps1 `

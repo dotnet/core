@@ -41,7 +41,7 @@ on:
   workflow_dispatch:
     inputs:
       milestone:
-        description: "Target milestone (e.g., preview4). Leave empty for auto-detection."
+        description: "Target milestone directory (e.g., preview4). Package/API-diff labels use preview.4; GA is ga/omitted depending on the tool. Leave empty for auto-detection."
         required: false
         type: string
 
