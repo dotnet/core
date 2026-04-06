@@ -2,7 +2,7 @@
 
 ## Full verification (with hashes)
 
-Command: `dotnet-release verify releases release-notes`
+Command: `release-notes-gen verify releases release-notes`
 
 ```
 Verifying release links for all supported versions in /Users/rich/git/core/release-notes...
@@ -64,7 +64,7 @@ Exit code: `0`
 
 ## Quick verification (skip hashes)
 
-Command: `dotnet-release verify releases release-notes --skip-hash`
+Command: `release-notes-gen verify releases release-notes --skip-hash`
 
 ```
 Verifying release links for all supported versions in /Users/rich/git/core/release-notes...
@@ -115,8 +115,8 @@ Exit code: `0`
 ## .NET Release Link Verification Report
 
 **Date:** 2026-03-27
-**Tool:** `dotnet-release` v1.1.0
-**Command:** `dotnet-release verify releases release-notes`
+**Tool:** `release-notes-gen` v1.1.0
+**Command:** `release-notes-gen verify releases release-notes`
 
 | Version | Latest Release | Download URLs | SHA512 Hashes | CDN latest.version | aka.ms | Status |
 |---------|---------------|---------------|---------------|-------------------|--------|--------|
