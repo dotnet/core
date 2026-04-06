@@ -3,7 +3,7 @@
 .NET 11 Preview 3 includes new library features and reliability improvements:
 
 - [System.Text.Json offers more control over naming and ignore defaults](#systemtextjson-offers-more-control-over-naming-and-ignore-defaults)
-- [Zstandard joins System.IO.Compression and ZIP reads validate CRC32](#zstandard-joins-systemiocompression-and-zip-reads-validate-crc32)
+- [Zstandard moved to System.IO.Compression and ZIP reads validate CRC32](#zstandard-moved-to-systemiocompression-and-zip-reads-validate-crc32)
 - [SafeFileHandle and RandomAccess expand pipe support](#safefilehandle-and-randomaccess-expand-pipe-support)
 - [Regex recognizes all Unicode newline sequences](#regex-recognizes-all-unicode-newline-sequences)
 - [Breaking changes](#breaking-changes)
@@ -19,7 +19,7 @@
 ## System.Text.Json offers more control over naming and ignore defaults
 
 Preview 3 expands the built-in naming and ignore options in `System.Text.Json`.
-`JsonNamingPolicy.PascalCase` joins the existing camel, snake, and kebab
+`JsonNamingPolicy.PascalCase` adds to the existing camel, snake, and kebab
 presets, `[JsonNamingPolicy]` lets you override naming on individual members,
 and type-level `[JsonIgnore(Condition = ...)]` lets a model set its default
 ignore behavior in one place
@@ -46,7 +46,7 @@ var options = new JsonSerializerOptions
 };
 ```
 
-## Zstandard joins System.IO.Compression and ZIP reads validate CRC32
+## Zstandard moved to System.IO.Compression and ZIP reads validate CRC32
 
 The Zstandard APIs introduced earlier in .NET 11 now live in
 `System.IO.Compression`, so they sit alongside `DeflateStream`, `GZipStream`,
