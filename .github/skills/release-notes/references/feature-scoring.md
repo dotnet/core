@@ -4,23 +4,35 @@ Use optional `score` fields in `features.json` to rank which shipped changes are
 
 The score is a **decision aid**, not a hard rule. Editorial judgment still matters.
 
-## Recommended scale
+## Reader-centric scale
 
 Use a consistent numeric scale within each file. The current default is **0-10**, where higher means "more worth documenting."
 
-| Score  | Meaning                                               | Typical surface                 |
-| ------ | ----------------------------------------------------- | ------------------------------- |
-| `9-10` | Marquee feature with broad appeal or major user value | Blog, docs, and release notes   |
-| `7-8`  | Strong externally visible improvement                 | Release notes and possibly docs |
-| `4-6`  | Moderate or niche feature                             | Optional release notes mention  |
-| `1-3`  | Minor or low-signal change                            | Usually skip                    |
-| `0`    | Noise: infra, tests, churn, refactor-only             | Never document                  |
+Score from the perspective of a reader upgrading to the new release:
+
+| Score | Reader reaction                                                                  | Typical editorial outcome                                |
+| ----- | -------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `10`  | "This is the first feature I'll enable or test."                                 | Lead story; blog, docs, and release notes                |
+| `8+`  | "I'm going to use this when I upgrade."                                          | Strong release-note feature; maybe docs                  |
+| `6+`  | "I'm glad I know about this. It will likely come in handy."                      | Good release-note material, often grouped                |
+| `4+`  | "I can see how someone could use this. I'll look up the docs if I ever need it." | Optional mention, grouping candidate, or short paragraph |
+| `2+`  | "This one is a mystery to me."                                                   | Usually skip unless it becomes clearer with explanation  |
+| `0`   | "This is total gobbledygook — internal .NET engineering work."                   | Never document outside internal notes                    |
+
+## Audience filter: the 80/20 rule
+
+Default to features that make sense to roughly **80% of the user base**.
+
+A feature that mainly helps the other **20%** can still score well, but only if the remaining 80% can still recognize why it matters and think: **"Not for me, but I'm glad it's there for the people who need it."**
+
+Foundational shifts like `Span<T>` can still deserve high scores even before broad adoption, but they need extra explanation so the significance is legible to non-specialists.
 
 ## What increases a score
 
 - **User-visible change** — new public API, CLI switch, behavior change, workflow improvement
 - **Breadth of impact** — helps many developers, not just a narrow edge case
 - **Clarity** — easy to explain with a short WHY+HOW description
+- **Familiar anchor** — easier to understand because it maps to a tool or workflow readers already know
 - **Evidence** — supported by API verification, tests, benchmarks, or a clear PR description
 - **Documentation need** — developers may need guidance, migration notes, or examples
 
@@ -31,10 +43,28 @@ Use a consistent numeric scale within each file. The current default is **0-10**
 - Churn in dependencies or tooling internals
 - Reverts, partial implementations, or APIs that do not appear in the actual build
 - Changes too small or obscure to justify external attention
+- **Stacked audience gates** — if the reader has to care about A, then B, then be willing to do C, the addressable audience shrinks at each step and the score should usually drop hard
+- **Sparse evidence + internal hints** — if the PR barely explains the scenario and drops terms like cDAC, diagnostics plumbing, or runtime internals without a strong end-user story, treat it as near-internal by default
+- **Invisible existing surface** — if the change is framed as a simplification or extension of an existing feature, but that feature is not visible in common model knowledge and not easy to find in Learn docs, default to about a `1` unless stronger customer evidence exists
+- **No identifiable public API** — if the only apparent story is "there is a new API here" but you cannot point to a concrete new public type/member via API diff or `dotnet-inspect`, default to a `1` unless there is a separately strong behavior or workflow story
+- **Bug fix for an unannounced feature** — if the work mostly fixes or rounds out a feature that customers were never really told about, treat it as a bug-fix-level item, often around a `1`
+- **Low-demand bug history** — if the backing issue was filed internally, has little or no outside engagement, and sat for a long time, that is a signal the item likely belongs near `1`
 
 ## Good scoring behavior
 
-- Score based on the **shipped outcome**, not the effort involved
+- Score based on the **reader value of the shipped outcome**, not the effort involved
+- Ask whether a typical upgrader immediately understands why the feature matters
+- Use a short comparison to a familiar tool or workflow when it makes the value legible faster (for example, comparing CLI env-var injection to Docker's `-e` pattern)
+- Discount aggressively for **compound niche scenarios**. "Single-file publishers who deeply care about startup and are willing to do training/tuning work" is much smaller than "people who publish single-file apps."
+- Aggressively score down items that mostly read like internal plumbing or jargon
+- If the strongest concrete clue is an internal term like **cDAC**, assume the feature is for runtime/tooling internals unless there is clear evidence of mainstream developer value
+- For an **existing** feature area, ask two quick questions: "Would the model already recognize this as a real customer scenario?" and "Can I find it in Learn docs?" If both answers are effectively no, treat the item as a `1` by default
+- For an API-centric entry, name the actual public API. If you cannot identify the new public surface area, do not score it like a real API feature
+- Do not promote a **bug fix for an obscure or previously unannounced feature** into a release-note feature just because the subsystem sounds interesting
+- Treat **issue provenance and engagement** as demand signals. An old bug filed by an internal architect with zero reactions is evidence of low urgency, not hidden headline value
+- Consider **cluster value**, not just single-entry value. Several related `2-4` items can earn one grouped writeup when together they tell a coherent story (for example, a set of "Unsafe evolution" changes or a cluster of `[browser]` runtime improvements)
+- Keep niche items only when they still impress or educate the broader audience
+- A community contribution can lift a borderline item slightly, but it does **not** turn a niche optimization into a headline feature by itself
 - Re-check scores after `api-diff` / `dotnet-inspect` confirms or disproves the public API story
 - Prefer a short `score_reason` grounded in evidence over long prose
 - It is okay for many entries to have low scores; `changes.json` is comprehensive, `features.json` is selective

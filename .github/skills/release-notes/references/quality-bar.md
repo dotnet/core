@@ -35,6 +35,12 @@ Include a feature if it gives users something **new to try**, something that **w
 - High community demand (reaction counts on backing issues/PRs)
 - Behavior changes users need to be aware of
 - Preview-to-preview fixes for community-reported issues
+- Features that most readers can immediately understand the value of
+
+Use the **80/20 rule**:
+
+- Default to features that make sense to about **80% of the user base**
+- Keep a more specialized feature only when the other 80% will still think, "Not for me, but I'm glad this exists"
 
 ## What to exclude from markdown
 
@@ -44,6 +50,7 @@ Include a feature if it gives users something **new to try**, something that **w
 - Backports from servicing branches
 - Features that are not independently useful yet (still need unshipped APIs)
 - Anything not confirmed by `changes.json` (i.e., not in the source-manifest diff)
+- Anything that reads like unexplained engineering jargon to most readers
 
 ## The fidelity rule
 
@@ -57,6 +64,8 @@ A release note that just names a feature is useless. Every entry must answer:
 
 1. **Why does this matter?** — what problem does it solve, what scenario does it enable?
 2. **How do I use it?** — a code sample showing the feature in action
+
+When relevant, add a **familiar comparison** to help the reader place the feature quickly. If a new CLI workflow resembles something people already know from another tool, say that briefly. For example, `dotnet run -e FOO=BAR` can be framed as Docker-style environment-variable injection for local runs. Use comparisons to clarify, not to imply exact parity.
 
 If you can't write a code sample for a feature, question whether it's user-facing enough for release notes.
 

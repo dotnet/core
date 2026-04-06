@@ -1,7 +1,7 @@
 ---
 name: release-notes
-description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, and `api-diff`/`dotnet-inspect` for API verification before writing curated markdown for the final notes.
-compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, and api-diff skills.
+description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, `editorial-scoring` for the shared rubric, `api-diff`/`dotnet-inspect` for API verification, and `review-release-notes` for a final editorial QA pass.
+compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, editorial-scoring, api-diff, and review-release-notes skills.
 ---
 
 # .NET Release Notes
@@ -13,10 +13,11 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 ## How it works
 
 1. `generate-changes` diffs `source-manifest.json` between VMR refs to produce `changes.json`
-2. `generate-features` reads `changes.json` and emits `features.json` with optional scores
+2. `generate-features` reads `changes.json` and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
 3. `api-diff` / `dotnet-inspect` verifies public APIs and catches missed reverts
 4. `release-notes` writes curated markdown using the higher-value entries from `features.json`
-5. Output is one PR per release milestone in dotnet/core, maintained incrementally
+5. `review-release-notes` checks the selection against the scoring rubric and editorial examples
+6. Output is one PR per release milestone in dotnet/core, maintained incrementally
 
 ## Design
 
@@ -27,6 +28,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 - [quality-bar.md](references/quality-bar.md) — what good release notes look like
 - [vmr-structure.md](references/vmr-structure.md) — VMR branches, tags, source-manifest.json
 - [changes-schema.md](references/changes-schema.md) — the shared `changes.json` / `features.json` schema
+- [../editorial-scoring/SKILL.md](../editorial-scoring/SKILL.md) — the reusable scoring rubric and cut guidance
 - [feature-scoring.md](references/feature-scoring.md) — how to score and cut features
 - [component-mapping.md](references/component-mapping.md) — components, product slugs, output files
 - [format-template.md](references/format-template.md) — markdown document structure

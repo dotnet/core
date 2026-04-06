@@ -110,14 +110,17 @@ Your outputs are pull requests — one per active milestone — each containing:
 - **High value** — bias toward features users care about. Skip infra, test-only, and internal refactoring.
 - **Never document non-shipping features** — if it's not in `changes.json`, it didn't ship.
 - **Use scoring as guidance, not law** — `features.json` helps prioritize, but humans and editorial judgment still decide what makes the cut.
+- **Reader value first** — use the score from the reader's point of view: 10 = "first thing I'll try", 8 = "I'll use this on upgrade", 6 = "glad to know", 4 = "maybe later", 2 = "mystery", 0 = "internal gobbledygook".
+- **Prefer the 80%** — default to features that make sense to most users. Keep 20%-audience features only when the other 80% can still appreciate why they matter.
 - **Respect human edits** — this is a shared workspace. Humans edit branch content directly. Diff before writing and preserve everything they've touched. When in doubt, ask via PR comment.
 - **Engage with comments** — read PR comments and review threads. Some are actionable, some need discussion. Respond and iterate.
 - **Incremental improvement** — early drafts are rough. Each nightly run improves them.
 
 ## Reference documents
 
-Read these files from `.github/skills/release-notes/references/` for detailed guidance:
+Read these files and skills for detailed guidance:
 
+- **editorial-scoring** — shared reader-centric scoring rubric and 80/20 audience filter ([skill](../skills/editorial-scoring/SKILL.md))
 - **quality-bar.md** — what good release notes look like
 - **vmr-structure.md** — how the VMR works, branch naming, source-manifest.json
 - **changes-schema.md** — the shared `changes.json` / `features.json` schema
@@ -211,7 +214,18 @@ Use `changes.json` as the source of truth and write a sibling `features.json` th
 - down-rank infra, churn, test-only work, and anything that appears reverted
 - preserve any useful human annotations if the file already exists
 
-#### c. Check for human edits on the branch
+#### c. Re-check the cut with the reader rubric
+
+Before finalizing the candidate list, ask:
+
+- Is this one of the **first things a reader will want to try**?
+- Will many readers **use it when they upgrade**?
+- Will readers at least be **glad they learned about it now**?
+- Or does it mainly read like **internal engineering jargon**?
+
+Default to features that make sense to roughly **80% of the audience**. Specialized features are still welcome, but only when the other 80% can still understand why they matter.
+
+#### d. Check for human edits on the branch
 
 If a PR branch already exists:
 
@@ -222,7 +236,7 @@ git log --oneline --author!=github-actions origin/release-notes/11.0-preview4
 
 Identify which markdown files humans have edited. For those files, diff them to understand what changed. Do NOT overwrite human-edited sections. Only add new sections or update sections the agent previously wrote that no human has touched.
 
-#### d. Write or update markdown
+#### e. Write or update markdown
 
 Using `features.json`, `changes.json`, and the reference documents:
 
@@ -231,7 +245,7 @@ Using `features.json`, `changes.json`, and the reference documents:
 - Write feature descriptions following `format-template.md` and `editorial-rules.md`
 - Components with no noteworthy changes get a minimal stub
 
-#### e. Ask for what you can't generate
+#### f. Ask for what you can't generate
 
 Some features need content that only humans can provide — benchmark data, definitive code samples, or domain-specific context. When you identify a feature that would benefit from this:
 
@@ -241,7 +255,7 @@ Some features need content that only humans can provide — benchmark data, defi
 
 Frame these as suggestions, not demands. For example: "This JIT improvement in loop unrolling looks significant. Benchmark data showing the before/after would help tell the story — could you share numbers or point me to a benchmark?"
 
-#### f. Read and respond to PR comments
+#### g. Read and respond to PR comments
 
 Check all comments and review threads on the PR since the last run:
 

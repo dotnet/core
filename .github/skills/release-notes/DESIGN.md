@@ -26,9 +26,11 @@ The system still has three layers, but the AI/editorial layer is now split into 
 ├──────────────────────────────────────────────────────────────┤
 │           Reusable skills (editorial pipeline)              │
 │  generate-changes → changes.json                            │
+│  editorial-scoring → shared rubric                          │
 │  generate-features → features.json                          │
 │  api-diff / dotnet-inspect → API evidence                   │
 │  release-notes → markdown                                   │
+│  review-release-notes → trim / re-score                     │
 ├──────────────────────────────────────────────────────────────┤
 │           Tooling (deterministic where possible)            │
 │  dotnet-release, dotnet-inspect, GitHub APIs, local git     │
@@ -38,9 +40,11 @@ The system still has three layers, but the AI/editorial layer is now split into 
 ### Why split the stages?
 
 - **`generate-changes`** handles mechanical data collection. It's deterministic — same inputs always produce the same output.
+- **`editorial-scoring`** centralizes the rubric so the generator and reviewers use the same definition of importance.
 - **`generate-features`** adds reusable triage and scoring so release notes, docs, and blogs can share the same ranked feature list.
 - **`api-diff`** verifies the public API story against the actual build, which is the best defense against missed reverts.
 - **`release-notes`** focuses on editorial judgment: which scored items matter, how to describe them, and how to preserve human edits.
+- **`review-release-notes`** applies a harsher, reader-centric cutoff so the final draft does not drift into API-inventory territory.
 - **The workflow** handles orchestration. It knows when to run, what branches to manage, how to interact with humans, and how to preserve their edits.
 
 ## Layer 1 — The Tool
@@ -98,25 +102,28 @@ Example (Preview 1 → Preview 2): the tool found 1,389 PRs across 21 changed re
 
 The editorial pipeline is intentionally split into small, reusable skills:
 
-| Document                                                | Purpose                                                         |
-| ------------------------------------------------------- | --------------------------------------------------------------- |
-| [quality-bar.md](references/quality-bar.md)             | North star — fidelity, value, WHY+HOW                           |
-| [vmr-structure.md](references/vmr-structure.md)         | VMR branches, tags, source-manifest.json                        |
-| [changes-schema.md](references/changes-schema.md)       | The shared `changes.json` / `features.json` schema              |
-| [feature-scoring.md](references/feature-scoring.md)     | How to rank features for release notes, docs, and blogs         |
-| [component-mapping.md](references/component-mapping.md) | Components → product slugs → output files                       |
-| [format-template.md](references/format-template.md)     | Markdown document structure                                     |
-| [editorial-rules.md](references/editorial-rules.md)     | Tone, attribution, naming                                       |
-| [examples/](references/examples/README.md)              | Curated examples by component — short, medium, long-form styles |
+| Document                                                       | Purpose                                                         |
+| -------------------------------------------------------------- | --------------------------------------------------------------- |
+| [quality-bar.md](references/quality-bar.md)                    | North star — fidelity, value, WHY+HOW                           |
+| [vmr-structure.md](references/vmr-structure.md)                | VMR branches, tags, source-manifest.json                        |
+| [changes-schema.md](references/changes-schema.md)              | The shared `changes.json` / `features.json` schema              |
+| [../editorial-scoring/SKILL.md](../editorial-scoring/SKILL.md) | Shared reader-centric scoring rubric                            |
+| [feature-scoring.md](references/feature-scoring.md)            | How to rank features for release notes, docs, and blogs         |
+| [component-mapping.md](references/component-mapping.md)        | Components → product slugs → output files                       |
+| [format-template.md](references/format-template.md)            | Markdown document structure                                     |
+| [editorial-rules.md](references/editorial-rules.md)            | Tone, attribution, naming                                       |
+| [examples/](references/examples/README.md)                     | Curated examples by component — short, medium, long-form styles |
 
 These are **goal-oriented**, not procedural. They describe what good release notes and feature selection look like, not the exact steps to produce them. The skills figure out the HOW.
 
 ### Skill responsibilities
 
 - **`generate-changes`** — determine the correct VMR base/head refs, including preview-only multi-branch targeting, and emit `changes.json`
+- **`editorial-scoring`** — define the shared reader-centric scoring rubric and cut thresholds
 - **`generate-features`** — read `changes.json`, score likely features, and emit `features.json` using the same schema plus optional scoring
 - **`api-diff`** — verify APIs against the actual build binaries/ref packs and generate diffs when needed
 - **`release-notes`** — produce markdown release notes for high-value features, following the quality bar and only using verified API names and code samples
+- **`review-release-notes`** — audit the scored output against the editorial examples, demoting over-scored items and promoting missing ones
 - **Workflow-facing behavior** — respect human edits, diff the PR branch, and incorporate PR comments and feedback
 
 ## Layer 3 — The Agentic Workflow

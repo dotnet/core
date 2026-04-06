@@ -18,6 +18,10 @@ Standard document structure for .NET release notes markdown files.
 
 <description> ([<owner>/<repo>#NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN)).
 
+## Breaking changes
+
+- Short migration note or heads-up for narrower changes that users may need to react to
+
 ## Bug fixes
 
 - **Category** — Fix description
@@ -83,6 +87,7 @@ Known component docs links:
 2. **One paragraph of context** — what the feature does and why it matters, with PR/issue links
 3. **Code sample** — show the feature in use
 4. **Feature ordering** — highest customer impact first
+5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections
 
 ## Issue and PR references
 

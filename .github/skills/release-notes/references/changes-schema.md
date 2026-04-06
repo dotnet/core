@@ -28,20 +28,19 @@ release-notes/{major.minor}/{major.minor.patch}/features.json  # patches
 
 ## Change entry fields
 
-| Field               | Type   | Description                                                                        |
-| ------------------- | ------ | ---------------------------------------------------------------------------------- |
-| `id`                | string | Globally unique identifier — `repo@shortcommit` format (e.g., `"runtime@c5d5be4"`) |
-| `repo`              | string | Short repository name (e.g., `"runtime"`)                                          |
-| `product`           | string | Product slug (e.g., `"dotnet-runtime"`); absent for infra repos                    |
-| `title`             | string | PR title; `""` if not available                                                    |
-| `url`               | string | Public GitHub PR URL; `""` if non-public                                           |
-| `commit`            | string | Key into top-level `commits{}` dict — the VMR (`dotnet/dotnet`) codeflow commit    |
-| `is_security`       | bool   | `true` if this is a security change                                                |
-| `local_repo_commit` | string | Key into `commits{}` — the source repo commit (same as `id`)                       |
-| `labels`            | array  | PR labels (only present when `--labels` is used)                                   |
-| `score`             | number | Optional editorial score; higher means more likely to document                     |
-| `score_reason`      | string | Optional short explanation for the score                                           |
-| `score_breakdown`   | object | Optional structured scoring details                                                |
+- `id` (`string`) — globally unique identifier in `repo@shortcommit` format, for example `"runtime@c5d5be4"`
+- `repo` (`string`) — short repository name, for example `"runtime"`
+- `product` (`string`) — product slug, for example `"dotnet-runtime"`; absent for infra repos
+- `title` (`string`) — PR title; `""` if not available
+- `url` (`string`) — public GitHub PR URL; `""` if non-public
+- `commit` (`string`) — key into top-level `commits{}` for the VMR (`dotnet/dotnet`) codeflow commit
+- `is_security` (`bool`) — `true` if this is a security change
+- `local_repo_commit` (`string`) — key into `commits{}` for the source repo commit (same as `id`)
+- `labels` (`array`) — PR labels, only present when `--labels` is used
+- `score` (`number`) — optional editorial score; higher means more likely to document
+- `score_reason` (`string`) — optional short explanation for the score
+- `score_breakdown` (`object`) — optional structured scoring details
+- `breaking_changes` (`bool`) — optional flag for changes users may need to react to, even if they are not headline features
 
 The `product` field is derived from the repo-level [component mapping](component-mapping.md). Infra repos like `arcade` and `symreader` have no `product` field. The `repo` field always matches the VMR manifest path.
 
@@ -59,10 +58,24 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
 
 ## Conventions
 
-- **No nulls** — required fields are always present. Optional fields (`product`, `labels`, `local_repo_commit`, `score`, `score_reason`, `score_breakdown`) may be absent. Use `""` for missing strings, `0` for missing integers.
+- **No nulls** — required fields are always present. Optional fields (`product`, `labels`, `local_repo_commit`, `score`, `score_reason`, `score_breakdown`, `breaking_changes`) may be absent. Use `""` for missing strings, `0` for missing integers.
 - **Naming** — `snake_case_lower` for JSON fields, `kebab-case-lower` for file names and repo slugs.
 - **Public URLs only** — every URL must resolve publicly.
 - **Commit URLs use `.diff` form** — for machine consumption.
+
+## Breaking changes are a separate axis
+
+`breaking_changes` is **not the same thing** as `score`.
+
+- `score` answers: **"How broadly interesting or valuable is this to readers?"**
+- `breaking_changes` answers: **"Do some users need to react to this?"**
+
+That means a change can be:
+
+- **high score + `breaking_changes: true`** — a widely relevant feature that also needs migration guidance
+- **low score + `breaking_changes: true`** — a niche or narrow change that still deserves a short callout near the end of the release notes
+
+In practice, a `score` around `0-4` with `breaking_changes: true` usually means **one line in a "Breaking changes" section**, not a full feature writeup.
 
 ## Example
 
@@ -91,7 +104,10 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
       "url": "https://github.com/dotnet/aspnetcore/pull/54321",
       "commit": "dotnet@a1b2c3d",
       "is_security": false,
-      "local_repo_commit": "aspnetcore@f45f3c9"
+      "local_repo_commit": "aspnetcore@f45f3c9",
+      "score": 4,
+      "score_reason": "Narrower impact but users upgrading affected apps need to be aware of it.",
+      "breaking_changes": true
     }
   ],
   "commits": {
@@ -151,6 +167,7 @@ jq -r '.changes[] | select(.is_security) | .local_repo_commit' changes.json
 
 - `changes.json` has an entry for every PR that shipped
 - `features.json` usually preserves those entries and adds optional scoring metadata
+- `features.json` can also flag entries with `breaking_changes: true` so downstream writing can keep a short migration note even when the score is low
 - Both files can be joined through shared `id` and `commits{}` values
 
 ## Relationship to markdown release notes

@@ -127,3 +127,5 @@ If `dotnet-inspect` can't find a type:
 5. **Read the PR tests** — the PR's test files are ground truth. Tests compile and run against the actual API surface. Derive code samples from test assertions rather than guessing type names.
 
 When in doubt, describe the feature without naming specific types and link to the PR. A correct prose description is always better than a wrong code sample.
+
+For scoring and feature selection, this is also a **quality bar**: if a change only looks interesting because it seems to add a new API, but you cannot identify that API in the public surface, score it down sharply. That usually means it is internal plumbing, a refactor, or an existing niche surface getting maintenance rather than a real release-note feature.

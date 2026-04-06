@@ -16,6 +16,15 @@ Tone, attribution, and content guidelines for .NET release notes.
   - ❌ `The runtime-async feature, which eliminates the state-machine overhead of async/await, is now enabled for NativeAOT.`
   - ✅ `The JIT now generates ARM64 SM4 and SHA3 instructions directly, enabling hardware-accelerated implementations on capable processors.` (long but flows — one thought)
 
+## Familiar comparisons
+
+- When a feature matches a workflow developers already know from another tool, say so. A short comparison can make the value obvious faster than a longer explanation.
+- Use the comparison to **anchor the mental model**, not to claim perfect parity. Say what is similar, then explain the .NET-specific behavior.
+- Prefer common tools and workflows the reader is likely to know already (for example Docker, GitHub Actions, shell usage, or package managers). Skip the comparison if it feels forced or more obscure than the feature itself.
+
+  - ✅ `dotnet run -e FOO=BAR` gives you Docker-style CLI environment-variable injection for local app runs, so you can test configuration changes without editing shell state or launch profiles.
+  - ❌ `dotnet run` now works just like Docker. (overstates the similarity)
+
 ## Entry naming
 
 - Prefer a **brief description** of what the feature does over the API name alone
@@ -38,6 +47,8 @@ Tone, attribution, and content guidelines for .NET release notes.
 - **The two-sentence test** — if you can only write two sentences about a feature, it's probably an engineering fix, not a feature. Cut it. A community contribution or breaking change can lift a borderline entry, but "fixed an internal bug that happened to be visible" is not a feature.
 - **Headlines should convey value** — a heading like "GC regions on macOS" doesn't tell the reader whether this is good or bad. Prefer headings that hint at the benefit: "GC regions enabled on macOS" or "Server GC memory model now available on macOS."
 - **TODO for borderline entries** — when a feature might deserve inclusion but you lack data to justify it (benchmark numbers, real-world impact, user demand), keep the entry but add an HTML `<!-- TODO -->` comment asking for the missing information. This is better than silently including a vague claim or silently cutting something that might matter. The TODO should state what's needed and link to the PR where the data might live.
+- **Breaking changes are separate from hype** — a breaking change can be important even when it is not exciting. Keep the score honest; use `breaking_changes: true` to preserve a short callout instead of inflating the item into a headline feature.
+- **Clusters can be stronger than the parts** — several related low-score items can justify one section when together they tell a clear story. Keep the individual scores honest, then merge them into one writeup instead of emitting several weak mini-features. Good examples include a group of "Unsafe evolution" changes or multiple runtime entries prefixed with `[browser]`.
 
 ## Feature ordering
 
@@ -98,6 +109,8 @@ Include a bug fix when ALL of these apply:
 
 Frame positively: "Based on community feedback, X now does Y."
 
+If the fix is for a feature that was never really announced or is still obscure to most readers, do **not** turn that fix into a standalone feature entry. It usually belongs in the bug-fix bucket, and often scores around `1`.
+
 ## Preview-to-preview deduplication
 
 When prior previews already documented a feature, don't repeat the same information. But **do** document significant state changes in the current preview. A feature that was introduced as opt-in in P1 and is now enabled by default in P3 is new news — document the change in state, not the feature from scratch.
@@ -105,6 +118,7 @@ When prior previews already documented a feature, don't repeat the same informat
 Ask: "What changed about this feature since the last preview's release notes?" If the answer is meaningful to users (enabled by default, no longer experimental, major perf improvement, new sub-features), write about that. If the answer is just "more PRs landed in the same area," skip it.
 
 Examples:
+
 - ✅ "Runtime-async is now enabled by default for anyone targeting `net11.0`." (state change: opt-in → default)
 - ✅ "The Regex source generator now handles alternations 3× faster." (new perf data)
 - ❌ Repeating the full explanation of what runtime-async is from P1 (already documented)
@@ -124,6 +138,7 @@ Place the comment block immediately before the Bug fixes section:
 ```
 
 Good filter reasons:
+
 - **Internal infrastructure** — "Implementation detail of the Mono → CoreCLR unification. Developers don't target the interpreter."
 - **Too narrow** — "Only affects COM interop startup — very narrow audience."
 - **Engineering fix, not a feature** — "Two sentences max. No user-visible behavior change beyond a perf number."
