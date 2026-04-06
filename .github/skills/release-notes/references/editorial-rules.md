@@ -38,6 +38,10 @@ Tone, attribution, and content guidelines for .NET release notes.
   - ✅ `## Faster time zone conversions`
   - ❌ `## ZstandardStream`
   - ❌ `## TimeZoneInfo performance`
+- Prefer **specific, customer-facing verbs** over generic `gets` phrasing. Name the capability the customer now has: `offers`, `adds`, `supports`, `recognizes`, `enables`, and similar verbs are usually stronger.
+  - ✅ `## System.Text.Json offers more control over naming and ignore defaults`
+  - ✅ `## Regex recognizes all Unicode newline sequences`
+  - ❌ `## System.Text.Json gets more control over naming and ignore defaults`
 - Keep headings concise — 3–8 words
 
 ## Benchmarks

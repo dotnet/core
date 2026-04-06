@@ -25,3 +25,4 @@ Curated examples from previous .NET release notes, organized by component. Load 
 11. **Link to PRs and issues** — use the `org/repo #number` format, with a space before `#`: `[dotnet/runtime #115977](https://github.com/dotnet/runtime/pull/115977)`. Links give readers provenance and let them dig deeper
 12. **Avoid jargon and ambiguous words** — "snippet" in a programming context suggests code. Say what you mean plainly. If a word could be misread, pick a simpler one
 13. **Concrete beats promotional** — describe the observable change, not the feeling it might create. "Regex recognizes all Unicode newline sequences" or "Tar extraction now rejects path traversal entries" beats "compression and archive handling are easier to trust."
+14. **Prefer strong verbs over `gets`** — write the customer-facing capability directly: "System.Text.Json offers more control..." is stronger than "System.Text.Json gets more control..."
