@@ -16,7 +16,7 @@ network:
 safe-outputs:
   create-pull-request:
     title-prefix: "[release-notes] "
-    labels: [release-notes, automated]
+    labels: [area-release-notes, automation]
     draft: true
     max: 5
   push-to-pull-request-branch:
