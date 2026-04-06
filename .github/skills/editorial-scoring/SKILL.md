@@ -17,6 +17,10 @@ This skill is intentionally **rubric-focused, not task-focused**. It does not ge
 - `release-notes` — uses the resulting cut to decide what gets written up
 - future blog/docs workflows — can reuse the same rubric with different thresholds
 
+This is the **canonical home** for the shared scoring scale and 80/20 audience
+filter. Other release-notes docs should point back here instead of restating the
+rubric in full.
+
 ## Core question
 
 Score from the perspective of a developer upgrading to the new release — not from the perspective of the engineer who implemented the feature.

@@ -43,24 +43,15 @@ If `features.json` does not exist yet, infer the current implicit scoring from:
 
 ## Core review questions
 
-### 1. Reader-value test
+Use the shared rubric from [`../editorial-scoring/SKILL.md`](../editorial-scoring/SKILL.md)
+rather than inventing a new one here. In particular:
 
-For each selected feature, ask:
+- keep the same reader-centric `10 / 8 / 6 / 4 / 2 / 0` scale
+- apply the same 80/20 audience filter
+- compare the draft against the examples to see whether it still teaches instead
+  of merely enumerating
 
-- **10** — Is this the first thing a reader will want to try?
-- **8+** — Will many readers likely use this when they upgrade?
-- **6+** — Will readers be glad they learned about it now?
-- **4+** — Is it understandable but niche enough that docs can carry the rest?
-- **2+** — Will most readers find it mysterious?
-- **0** — Is this internal gobbledygook that mainly matters to the engineers who built it?
-
-### 2. The 80/20 rule
-
-Default to features that make sense to about **80% of the audience**.
-
-Keep a more specialized feature only when the other 80% can still appreciate why it matters, even if they won't use it directly.
-
-### 3. Example check
+### Example check
 
 Compare the draft against the component examples:
 

@@ -1,31 +1,15 @@
 # Feature Scoring
 
-Use optional `score` fields in `features.json` to rank which shipped changes are worth turning into release notes, docs, or blog content.
+Use optional `score` fields in `features.json` to rank which shipped changes are
+worth turning into release notes, docs, or blog content.
 
-The score is a **decision aid**, not a hard rule. Editorial judgment still matters.
+The score is a **decision aid**, not a hard rule. Editorial judgment still
+matters.
 
-## Reader-centric scale
-
-Use a consistent numeric scale within each file. The current default is **0-10**, where higher means "more worth documenting."
-
-Score from the perspective of a reader upgrading to the new release:
-
-| Score | Reader reaction                                                                  | Typical editorial outcome                                |
-| ----- | -------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| `10`  | "This is the first feature I'll enable or test."                                 | Lead story; blog, docs, and release notes                |
-| `8+`  | "I'm going to use this when I upgrade."                                          | Strong release-note feature; maybe docs                  |
-| `6+`  | "I'm glad I know about this. It will likely come in handy."                      | Good release-note material, often grouped                |
-| `4+`  | "I can see how someone could use this. I'll look up the docs if I ever need it." | Optional mention, grouping candidate, or short paragraph |
-| `2+`  | "This one is a mystery to me."                                                   | Usually skip unless it becomes clearer with explanation  |
-| `0`   | "This is total gobbledygook — internal .NET engineering work."                   | Never document outside internal notes                    |
-
-## Audience filter: the 80/20 rule
-
-Default to features that make sense to roughly **80% of the user base**.
-
-A feature that mainly helps the other **20%** can still score well, but only if the remaining 80% can still recognize why it matters and think: **"Not for me, but I'm glad it's there for the people who need it."**
-
-Foundational shifts like `Span<T>` can still deserve high scores even before broad adoption, but they need extra explanation so the significance is legible to non-specialists.
+Use [`../../editorial-scoring/SKILL.md`](../../editorial-scoring/SKILL.md) as
+the **canonical source** for the shared reader-centric scale, thresholds, and
+80/20 audience filter. This file adds the more specific heuristics that tend to
+matter during .NET release-note triage.
 
 ## What increases a score
 

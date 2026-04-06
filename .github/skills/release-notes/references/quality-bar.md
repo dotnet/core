@@ -37,10 +37,10 @@ Include a feature if it gives users something **new to try**, something that **w
 - Preview-to-preview fixes for community-reported issues
 - Features that most readers can immediately understand the value of
 
-Use the **80/20 rule**:
-
-- Default to features that make sense to about **80% of the user base**
-- Keep a more specialized feature only when the other 80% will still think, "Not for me, but I'm glad this exists"
+Apply the shared **80/20 audience filter** from
+[`../../editorial-scoring/SKILL.md`](../../editorial-scoring/SKILL.md):
+prioritize features most readers can immediately understand, and keep narrower
+items only when the broader audience can still appreciate why they matter.
 
 ## What to exclude from markdown
 
