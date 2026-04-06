@@ -1,15 +1,19 @@
 # .NET 11 Preview 3 - Release Notes
 
-.NET 11 Preview 3 release notes. Find more information on new features released in .NET 11 Preview 3 by browsing through the release notes below:
+These notes cover the highest-value changes that shipped in .NET 11 Preview 3:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
 - [SDK](./sdk.md)
 
-## Workloads, Libraries, & More
+## Languages
+
+- [C#](./csharp.md)
+
+## Web and data
 
 - [ASP.NET Core](./aspnetcore.md)
-- [EF Core & Data](./efcore.md)
+- [EF Core](./efcore.md)
 
 ## Release information
 
@@ -27,13 +31,20 @@ These release notes were generated from the [dotnet/dotnet](https://github.com/d
 
 ## Get Started
 
-Instructions on getting started with .NET 11 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 11 Preview 3 can be found [here on GitHub](./11.0.0-preview.3.md).
+Instructions on getting started with .NET 11 can be found in the
+[getting started guide](../../get-started.md). Installers and binaries for
+.NET 11 Preview 3 are available from
+[dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/11.0) and
+[.NET 11 Releases](../../README.md).
 
-## Stay up-to-date
+## Stay up to date
 
-You can find a detailed overview of all new features in .NET 11:
+You can find a broader overview of .NET 11 here:
 
-- [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview) documentation
-- [What's new in Entity Framework Core](https://learn.microsoft.com/ef/core/what-is-new/)
+- [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview)
+- [What's new in ASP.NET Core for .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
+- [What's new in EF Core 11](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew)
 
-The latest .NET 11 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/11.0) and [.NET 11 Releases](../../README.md).
+The latest .NET 11 release is always available at
+[dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/11.0) and
+[.NET 11 Releases](../../README.md).
