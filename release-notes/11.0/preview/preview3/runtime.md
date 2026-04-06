@@ -3,7 +3,7 @@
 .NET 11 Preview 3 includes new runtime features and performance work:
 
 - [Runtime async no longer requires preview opt-in](#runtime-async-no-longer-requires-preview-opt-in)
-- [JIT optimizations reduce common overhead](#jit-optimizations-reduce-common-overhead)
+- [JIT optimizations improve switches, bounds checks, and casts](#jit-optimizations-improve-switches-bounds-checks-and-casts)
 - [Browser and WebAssembly add WebCIL and debugging improvements](#browser-and-webassembly-add-webcil-and-debugging-improvements)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
@@ -39,7 +39,7 @@ unchanged locals, which reduces allocation pressure in async-heavy code
  </PropertyGroup>
 ```
 
-## JIT optimizations reduce common overhead
+## JIT optimizations improve switches, bounds checks, and casts
 
 Preview 3 continues the steady JIT work that benefits normal code without any
 source changes. Common patterns like multi-target `switch` expressions now fold
