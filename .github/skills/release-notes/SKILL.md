@@ -19,10 +19,6 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 5. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
 6. Output is one PR per release milestone in dotnet/core, maintained incrementally
 
-## Design
-
-- [DESIGN.md](DESIGN.md) — architecture, rationale, and how all the pieces connect
-
 ## Reference documents
 
 - [quality-bar.md](references/quality-bar.md) — what good release notes look like
