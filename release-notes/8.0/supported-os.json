@@ -1,6 +1,6 @@
 {
   "channel-version": "8.0",
-  "last-updated": "2026-03-30",
+  "last-updated": "2026-04-07",
   "families": [
     {
       "name": "Android",
@@ -161,7 +161,7 @@
           "name": "Windows",
           "link": "https://www.microsoft.com/windows/",
           "lifecycle": "https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet",
-          "architectures": ["Arm64", "x64"],
+          "architectures": ["Arm64", "x64", "x86"],
           "supported-versions": [
             "11-26h1-e",
             "11-26h1-w",
@@ -246,6 +246,6 @@
   ],
   "notes": [
     "The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.",
-    "Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [_TIME_BITS](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions."
+    "Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [_TIME_BITS](https://sourceware.org/glibc/manual/latest/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions."
   ]
 }

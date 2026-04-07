@@ -1,6 +1,6 @@
 # .NET 9.0 - Supported OS versions
 
-Last Updated: 2026/03/30; Support phase: Active
+Last Updated: 2026/04/06; Support phase: Active
 
 [.NET 9.0](README.md) is an [STS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -50,12 +50,12 @@ Notes:
 
 ## Windows
 
-| OS                        | Versions                                    | Architectures | Lifecycle       |
-| ------------------------- | ------------------------------------------- | ------------- | --------------- |
-| [Nano Server][23]         | 2025, 2022, 2019                            | x64           | [Lifecycle][24] |
-| [Windows][25]             | 11 26H1, 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64 | [Lifecycle][26] |
-| [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64           | [Lifecycle][28] |
-| [Windows Server Core][29] | 2025, 2022, 2019, 2016, 2012-R2, 2012       | x64, x86      | [Lifecycle][30] |
+| OS                        | Versions                                    | Architectures   | Lifecycle       |
+| ------------------------- | ------------------------------------------- | --------------- | --------------- |
+| [Nano Server][23]         | 2025, 2022, 2019                            | x64             | [Lifecycle][24] |
+| [Windows][25]             | 11 26H1, 11 25H2, 11 24H2 (IoT), 11 24H2 (E), 11 24H2, 11 23H2 (E), 10 21H2 (E), 10 21H2 (IoT), 10 1809 (E), 10 1607 (E) | Arm64, x64, x86 | [Lifecycle][26] |
+| [Windows Server][27]      | 2025, 23H2, 2022, 2019, 2016, 2012-R2, 2012 | x64             | [Lifecycle][28] |
+| [Windows Server Core][29] | 2025, 2022, 2019, 2016, 2012-R2, 2012       | x64, x86        | [Lifecycle][30] |
 
 Notes:
 
@@ -117,7 +117,7 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | --------------------- | ----------- | ------------- |
 | Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)  |
 | Android               | 13          | 2026-03-02    |
-| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L)                              |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L/summary)                      |
 | Android               | 12          | 2025-03-03    |
 | Fedora                | 41          | 2025-12-15    |
 | Fedora                | 40          | 2025-05-13    |
