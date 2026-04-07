@@ -41,7 +41,7 @@ on:
   workflow_dispatch:
     inputs:
       milestone:
-        description: "Target milestone directory (e.g., preview4). Package/API-diff labels use preview.4; GA is ga/omitted depending on the tool. Leave empty for auto-detection."
+        description: "Optional milestone override. Use the directory name, for example preview4, rc1, or ga. Leave empty to auto-detect."
         required: false
         type: string
 
@@ -94,7 +94,7 @@ engine:
     COPILOT_GITHUB_TOKEN: ${{ case(needs.pre_activation.outputs.copilot_pat_number == '0', secrets.COPILOT_PAT_0, needs.pre_activation.outputs.copilot_pat_number == '1', secrets.COPILOT_PAT_1, needs.pre_activation.outputs.copilot_pat_number == '2', secrets.COPILOT_PAT_2, needs.pre_activation.outputs.copilot_pat_number == '3', secrets.COPILOT_PAT_3, needs.pre_activation.outputs.copilot_pat_number == '4', secrets.COPILOT_PAT_4, needs.pre_activation.outputs.copilot_pat_number == '5', secrets.COPILOT_PAT_5, needs.pre_activation.outputs.copilot_pat_number == '6', secrets.COPILOT_PAT_6, needs.pre_activation.outputs.copilot_pat_number == '7', secrets.COPILOT_PAT_7, needs.pre_activation.outputs.copilot_pat_number == '8', secrets.COPILOT_PAT_8, needs.pre_activation.outputs.copilot_pat_number == '9', secrets.COPILOT_PAT_9, secrets.COPILOT_GITHUB_TOKEN) }}
 ---
 
-# .NET Release Notes Maintenance
+# Write Release Notes
 
 You maintain release notes for .NET preview, RC, and GA releases in this repository (dotnet/core), running on a schedule to frequently identify changes in the upcoming releases. This is a **multi-master live system** — humans edit branches and leave PR comments at any time. You must respect their changes and engage with their feedback.
 
