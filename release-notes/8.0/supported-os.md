@@ -106,7 +106,7 @@ Notes:
 ## Notes
 
 - The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
-- Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [_TIME_BITS](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions.
+- Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 incompatible glibc](https://github.com/dotnet/core/discussions/9285) or a Y2038 compatible glibc with [_TIME_BITS](https://sourceware.org/glibc/manual/latest/html_node/Feature-Test-Macros.html) set to 32-bit, for example Debian 12, Ubuntu 22.04, and lower versions.
 
 ## Out of support OS versions
 
@@ -119,7 +119,7 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Alpine                | 3.17        | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)    |
 | Alpine                | 3.16        | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html)            |
 | Android               | 13          | 2026-03-02    |
-| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L)                                |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L/summary)                        |
 | Android               | 12          | 2025-03-03    |
 | Android               | 11          | 2024-02-05    |
 | Debian                | 11          | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html)                      |

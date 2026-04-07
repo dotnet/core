@@ -117,7 +117,7 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | --------------------- | ----------- | ------------- |
 | Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)  |
 | Android               | 13          | 2026-03-02    |
-| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L)                              |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L/summary)                      |
 | Android               | 12          | 2025-03-03    |
 | Fedora                | 41          | 2025-12-15    |
 | Fedora                | 40          | 2025-05-13    |
