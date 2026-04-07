@@ -1,8 +1,12 @@
 # .NET 11 installation instructions for Linux
 
-The following instructions demonstrate installing .NET 11 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
+The following instructions demonstrate installing .NET 11 on Linux. These instructions augment the more general [Install .NET on Linux](https://learn.microsoft.com/dotnet/core/install/linux) guidance, including installing with `.tar.gz` files.
 
-[.NET 11 Required Packages](os-packages.md) describes the set of packages required to run .NET on Linux.
+For distro-specific guidance, see:
+
+- [Supported Linux distributions](supported-os.md)
+- [.NET 11 Linux package dependencies](dotnet-dependencies.md)
+- [Linux package feeds and availability](../../linux.md#packages)
 
 ## Distributions
 
@@ -18,7 +22,7 @@ We recommend you install the .NET SDK to develop and build applications, and to 
 
 Each of the distributions can be downloaded from:
 
-- [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/11.0)
+- [`aka.ms/dotnet`](https://dotnet.microsoft.com/download)
 - [.NET 11 release notes](README.md)
 
 ## Installing from a binary archive
@@ -28,7 +32,7 @@ You can install .NET with a binary archive. This option is required if you want 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
 ```bash
-~# curl -Lo dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/11.0.100-preview.2.26159.112/dotnet-sdk-11.0.100-preview.2.26159.112-linux-x64.tar.gz
+~# curl -Lo dotnet.tar.gz https://aka.ms/dotnet/11.0/preview/dotnet-sdk-linux-x64.tar.gz
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
