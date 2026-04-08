@@ -34,6 +34,7 @@ branch as the **working baseline**, not as a blank slate.
 
 - [quality-bar.md](references/quality-bar.md) — what good release notes look like
 - [vmr-structure.md](references/vmr-structure.md) — VMR branches, tags, source-manifest.json
+- [existing-branch-updates.md](references/existing-branch-updates.md) — how to refresh a populated milestone branch incrementally
 - [changes-schema.md](references/changes-schema.md) — the shared `changes.json` / `features.json` schema
 - [../editorial-scoring/SKILL.md](../editorial-scoring/SKILL.md) — the reusable scoring rubric and cut guidance
 - [feature-scoring.md](references/feature-scoring.md) — how to score and cut features

@@ -124,7 +124,21 @@ Down-rank or exclude:
 
 If a change depends on public APIs, use `api-diff` / `dotnet-inspect` to confirm the API exists in the actual build. Missing or reverted APIs should be scored down or excluded.
 
-### 5. Write `features.json`
+### 5. Merge incrementally when `features.json` already exists
+
+If the milestone branch already has a `features.json`, do **not** throw that
+work away just because `changes.json` was regenerated.
+
+Use the existing file as the editorial baseline:
+
+- preserve prior scores and annotations for unchanged entries
+- score only the newly added or materially changed IDs
+- revisit older scores only when new evidence or review feedback justifies it
+- keep useful human edits instead of flattening them back to a machine pass
+
+This should feel like a **merge** operation, not a full restart.
+
+### 6. Write `features.json`
 
 The output typically lives next to `changes.json`:
 

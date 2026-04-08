@@ -248,6 +248,14 @@ Use `changes.json` as the source of truth and write a sibling `features.json` th
 - cut repo-adjacent IDE/editor/design-time tooling features unless this release note file is explicitly about that tooling surface
 - preserve any useful human annotations if the file already exists
 
+If `features.json` already exists on the branch, treat it as the editorial
+baseline and do a **delta merge**:
+
+- compare the old and new `changes.json` entries by `id`
+- score only newly added or materially changed entries
+- preserve previous scores and notes for unchanged entries
+- avoid rescoring the whole release unless review feedback or new evidence says the earlier cut was wrong
+
 #### c. Re-check the cut with the reader rubric
 
 Before finalizing the candidate list, ask:
@@ -279,6 +287,7 @@ Using `features.json`, `changes.json`, and the reference documents:
 - Route changes to output files via `product` field and component-mapping.md
 - For each component: identify which PRs are worth writing about
 - On a populated branch, start by editing the existing markdown files rather than drafting replacements from zero
+- integrate new material into existing clusters and sections when it fits the current story (for example, extend an existing performance or GC heading instead of creating a duplicate one)
 - Write feature descriptions following `format-template.md` and `editorial-rules.md`
 - If `release-notes/features.json` exists, consult it before writing. For matching long-running features, use the established feature name and start the section with the standard preview blockquote from the sidecar file.
 - Include a **Community contributors** section that mentions every external contributor with at least one merged PR in the milestone, even if their change only appears in bug fixes or was not promoted into a top-level feature section.
