@@ -127,7 +127,8 @@ If a change depends on public APIs, use `api-diff` / `dotnet-inspect` to confirm
 ### 5. Merge incrementally when `features.json` already exists
 
 If the milestone branch already has a `features.json`, do **not** throw that
-work away just because `changes.json` was regenerated.
+work away just because `changes.json` was regenerated. For the full rerun
+workflow, follow [`update-existing-branch`](../update-existing-branch/SKILL.md).
 
 Use the existing file as the editorial baseline:
 

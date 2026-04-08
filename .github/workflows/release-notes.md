@@ -278,7 +278,7 @@ git log --oneline --author!=github-actions origin/release-notes/11.0-preview4
 
 Identify which markdown files humans have edited. For those files, diff them to understand what changed. Do NOT overwrite human-edited sections. Only add new sections or update sections the agent previously wrote that no human has touched.
 
-If the branch already has drafted markdown, that content is the **baseline** for the next run. Do **not** regenerate from scratch or replace entire files just because `changes.json` was refreshed. Default to edit-in-place behavior: preserve the current structure, address unresolved feedback, and update only the sections affected by new evidence or new shipped changes.
+If the branch already has drafted markdown, that content is the **baseline** for the next run. Follow the shared `update-existing-branch` playbook: refresh `changes.json` only if the preview moved forward, merge the delta into `features.json`, preserve the current structure, address unresolved feedback, and update only the sections affected by new evidence or newly shipped changes.
 
 #### e. Write or update markdown
 
