@@ -116,7 +116,7 @@ Down-rank or exclude:
 - infra and dependency churn
 - test-only changes
 - internal refactors with no user-facing impact
-- repo-adjacent IDE, editor, or design-time tooling features that do not belong to the product release surface you are documenting
+- items that violate the product-boundary rule in `editorial-rules.md`
 - reverts and partial work that did not survive into the build
 - items that mostly require insider knowledge to understand why they matter
 

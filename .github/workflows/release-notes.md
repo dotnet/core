@@ -245,7 +245,7 @@ Use `changes.json` as the source of truth and write a sibling `features.json` th
 - keep the same `id` and `commits{}` values
 - assign higher scores to externally meaningful, user-visible changes
 - down-rank infra, churn, test-only work, and anything that appears reverted
-- cut repo-adjacent IDE/editor/design-time tooling features unless this release note file is explicitly about that tooling surface
+- apply the product-boundary rule from `editorial-rules.md`
 - preserve any useful human annotations if the file already exists
 
 If `features.json` already exists on the branch, treat it as the editorial

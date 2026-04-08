@@ -25,7 +25,7 @@ matter during .NET release-note triage.
 - Test-only or infra-only work
 - Mechanical refactors with no user-facing impact
 - Churn in dependencies or tooling internals
-- Higher-level IDE, editor, or design-time tooling work that does not belong to the product notes you are writing
+- **Product-boundary mismatch** — apply the product-boundary rule from `editorial-rules.md`; score these to cut-level unless the release is explicitly about that tooling surface
 - Reverts, partial implementations, or APIs that do not appear in the actual build
 - Changes too small or obscure to justify external attention
 - **Stacked audience gates** — if the reader has to care about A, then B, then be willing to do C, the addressable audience shrinks at each step and the score should usually drop hard
@@ -42,7 +42,6 @@ matter during .NET release-note triage.
 - Use a short comparison to a familiar tool or workflow when it makes the value legible faster (for example, comparing CLI env-var injection to Docker's `-e` pattern)
 - Discount aggressively for **compound niche scenarios**. "Single-file publishers who deeply care about startup and are willing to do training/tuning work" is much smaller than "people who publish single-file apps."
 - Aggressively score down items that mostly read like internal plumbing or jargon
-- Keep product boundaries intact. A Razor editor feature, IDE code action, or language-server improvement should usually be scored to cut-level for ASP.NET Core product notes unless the release is explicitly covering tooling.
 - If the strongest concrete clue is an internal term like **cDAC**, assume the feature is for runtime/tooling internals unless there is clear evidence of mainstream developer value
 - For an **existing** feature area, ask two quick questions: "Would the model already recognize this as a real customer scenario?" and "Can I find it in Learn docs?" If both answers are effectively no, treat the item as a `1` by default
 - For an API-centric entry, name the actual public API. If you cannot identify the new public surface area, do not score it like a real API feature
