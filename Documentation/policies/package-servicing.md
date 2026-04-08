@@ -37,6 +37,17 @@ The following libraries use this servicing model:
 
 Users must be on the latest patch version of the package or a runtime-band to be supported.
 
+## Package Deprecation
+
+The .NET team uses [NuGet Package Deprecation](https://learn.microsoft.com/nuget/nuget-org/deprecate-packages) to indicate that a package or version is no longer supported. Deprecated packages remain available on nuget.org and can still be restored by projects.
+
+.NET packages are marked deprecated when:
+
+- The package version is associated with a .NET version that is out of support per the [.NET Support Policy](https://dotnet.microsoft.com/platform/support/policy).
+- The package was a preview or release candidate that has been superseded by a stable release.
+
+Patch-to-patch updates within a supported version band will also be marked deprecated on a regular schedule following each servicing release. For example, when 8.0.2 ships, 8.0.1 will be deprecated in a subsequent update.
+
 ## Compatibility
 
 Packages retain compatibility for supported .NET versions. A package will not drop support for a .NET version that is in support. When a .NET version goes out of support, packages released after that point may drop support for that .NET version.
