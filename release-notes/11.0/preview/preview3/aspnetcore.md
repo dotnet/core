@@ -5,8 +5,6 @@
 - [Zstandard response compression and request decompression](#zstandard-response-compression-and-request-decompression)
 - [Virtualize adapts to variable-height items at runtime](#virtualize-adapts-to-variable-height-items-at-runtime)
 - [HTTP/3 starts processing requests earlier](#http3-starts-processing-requests-earlier)
-- [Blazor WebAssembly moves more interop to JSImport and JSExport](#blazor-webassembly-moves-more-interop-to-jsimport-and-jsexport)
-- [Generate Method now works in Razor files](#generate-method-now-works-in-razor-files)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -23,7 +21,7 @@ ASP.NET Core now supports [Zstandard (zstd)](https://facebook.github.io/zstd/)
 for both response compression and request decompression
 ([dotnet/aspnetcore #65479](https://github.com/dotnet/aspnetcore/pull/65479)).
 This adds zstd support to the existing response-compression and
-request-decompression middleware.
+request-decompression middleware and enables it by default.
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +30,10 @@ builder.Services.AddResponseCompression();
 builder.Services.AddRequestDecompression();
 builder.Services.Configure<ZstandardCompressionProviderOptions>(options =>
 {
-    options.CompressionOptions = new ZstandardCompressionOptions();
+    options.CompressionOptions = new ZstandardCompressionOptions
+    {
+        Quality = 6 // 1-22, higher = better compression, slower
+    };
 });
 ```
 
@@ -60,20 +61,6 @@ Kestrel now starts processing HTTP/3 requests without waiting for the control
 stream and SETTINGS frame first, which reduces first-request latency on new
 connections ([dotnet/aspnetcore #65399](https://github.com/dotnet/aspnetcore/pull/65399)).
 
-## Blazor WebAssembly moves more interop to JSImport and JSExport
-
-Blazor WebAssembly now moves more interop paths to `JSImport` / `JSExport`
-([dotnet/aspnetcore #65895](https://github.com/dotnet/aspnetcore/pull/65895),
-[dotnet/aspnetcore #65897](https://github.com/dotnet/aspnetcore/pull/65897)),
-which is part of the broader runtime/browser work in this preview.
-
-## Generate Method now works in Razor files
-
-The Razor editor now offers the familiar **Generate Method** code action inside
-Razor files, so you can stub out missing event handlers and helper methods
-directly in the editor
-([dotnet/razor #12960](https://github.com/dotnet/razor/pull/12960)).
-
 <!-- Filtered features (significant engineering work, but too niche or already covered elsewhere):
   - OpenAPI 3.2 support: a real breaking-change story for OpenAPI users, but already documented in Preview 2 and not repeated here.
   - OpenBSD RID support: welcome platform work, but too narrow for the main ASP.NET Core notes.
@@ -88,14 +75,38 @@ directly in the editor
     ([dotnet/aspnetcore #65744](https://github.com/dotnet/aspnetcore/pull/65744)).
   - Fixed the Web Worker template in published Blazor WebAssembly apps
     ([dotnet/aspnetcore #65885](https://github.com/dotnet/aspnetcore/pull/65885)).
+  - Fixed TempData lazy loading: `Get`, `Remove`, `Keep`, and enumeration now correctly trigger lazy loading
+    ([dotnet/aspnetcore #65722](https://github.com/dotnet/aspnetcore/pull/65722)).
+  - Fixed `IJSObjectReference` leak in `ResourceCollectionProvider`
+    ([dotnet/aspnetcore #65606](https://github.com/dotnet/aspnetcore/pull/65606)).
+  - Fixed cache headers for the Blazor resource collection endpoint to include `no-transform` and correct `Vary` headers
+    ([dotnet/aspnetcore #65513](https://github.com/dotnet/aspnetcore/pull/65513)).
+- **Data Protection**
+  - Fixed `ManagedAuthenticatedEncryptor` hash calculation and comparison on .NET Framework targets
+    ([dotnet/aspnetcore #65890](https://github.com/dotnet/aspnetcore/pull/65890)).
 - **HTTP / Kestrel**
-  - Fixed HTTP/2 and header-decoding issues in several edge cases
-    ([dotnet/aspnetcore #65729](https://github.com/dotnet/aspnetcore/pull/65729),
-    [dotnet/aspnetcore #65765](https://github.com/dotnet/aspnetcore/pull/65765),
-    [dotnet/aspnetcore #65771](https://github.com/dotnet/aspnetcore/pull/65771)).
+  - Fixed HTTP/2 HEADERS frame padding length validation to account for PRIORITY flag bytes
+    ([dotnet/aspnetcore #65729](https://github.com/dotnet/aspnetcore/pull/65729)).
+  - Fixed HTTP/2 Content-Length mismatch with trailers split across CONTINUATION frames
+    ([dotnet/aspnetcore #65765](https://github.com/dotnet/aspnetcore/pull/65765)).
+  - Fixed HPACK/QPACK decoder to validate uncompressed header size limits per `MaxRequestHeaderFieldSize` documentation
+    ([dotnet/aspnetcore #65771](https://github.com/dotnet/aspnetcore/pull/65771)).
+  - Fixed oversized TLS record length handling in `TlsListener` per RFC 8446
+    ([dotnet/aspnetcore #65558](https://github.com/dotnet/aspnetcore/pull/65558)).
+  - Updated `ReasonPhrase` validation for HTTP responses
+    ([dotnet/aspnetcore #65797](https://github.com/dotnet/aspnetcore/pull/65797)).
 - **JSON Patch**
-  - Fixed `JsonPatchDocument.Replace` for array items backed by `JsonArray` /
-    `IList` ([dotnet/aspnetcore #65470](https://github.com/dotnet/aspnetcore/pull/65470)).
+  - Fixed `JsonPatchDocument` operations on properties within array elements
+    ([dotnet/aspnetcore #65470](https://github.com/dotnet/aspnetcore/pull/65470)).
+- **Middleware**
+  - Fixed output caching freshness check that incorrectly rejected cached entries when the request arrived on the same tick as the cache write
+    ([dotnet/aspnetcore #65659](https://github.com/dotnet/aspnetcore/pull/65659)).
+- **Minimal APIs**
+  - Fixed validation source generator crash when encountering types with indexers like `JsonElement` and `Dictionary`
+    ([dotnet/aspnetcore #65432](https://github.com/dotnet/aspnetcore/pull/65432)).
+- **SignalR**
+  - Fixed cancellation handling with `StatefulReconnect` to be more aggressive
+    ([dotnet/aspnetcore #65732](https://github.com/dotnet/aspnetcore/pull/65732)).
 
 ## Community contributors
 
@@ -105,4 +116,6 @@ Thank you contributors! ❤️
 - [@DarianBaker](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview3+author%3ADarianBaker)
 - [@HPOD00019](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview3+author%3AHPOD00019)
 - [@kasperk81](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview3+author%3Akasperk81)
+- [@kklocker](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview3+author%3Akklocker)
 - [@manandre](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview3+author%3Amanandre)
+- [@martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+milestone%3A11.0-preview3+author%3Amartincostello)
