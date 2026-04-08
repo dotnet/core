@@ -15,7 +15,7 @@ description: >
 
 # Update Release Graph
 
-Regenerate the HAL+JSON information graph in `release-notes/`. The graph is a set of interconnected JSON files using [HAL](https://stateless.group/hal_specification.html) `_links` and `_embedded` properties. It is **generated** from source data — never hand-edit the output files.
+Regenerate the HAL+JSON information graph in `release-notes/`. The graph is a set of interconnected JSON files using [HAL](https://datatracker.ietf.org/doc/draft-kelly-json-hal/) `_links` and `_embedded` properties. It is **generated** from source data — never hand-edit the output files.
 
 ## Architecture
 
