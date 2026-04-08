@@ -270,12 +270,15 @@ git log --oneline --author!=github-actions origin/release-notes/11.0-preview4
 
 Identify which markdown files humans have edited. For those files, diff them to understand what changed. Do NOT overwrite human-edited sections. Only add new sections or update sections the agent previously wrote that no human has touched.
 
+If the branch already has drafted markdown, that content is the **baseline** for the next run. Do **not** regenerate from scratch or replace entire files just because `changes.json` was refreshed. Default to edit-in-place behavior: preserve the current structure, address unresolved feedback, and update only the sections affected by new evidence or new shipped changes.
+
 #### e. Write or update markdown
 
 Using `features.json`, `changes.json`, and the reference documents:
 
 - Route changes to output files via `product` field and component-mapping.md
 - For each component: identify which PRs are worth writing about
+- On a populated branch, start by editing the existing markdown files rather than drafting replacements from zero
 - Write feature descriptions following `format-template.md` and `editorial-rules.md`
 - If `release-notes/features.json` exists, consult it before writing. For matching long-running features, use the established feature name and start the section with the standard preview blockquote from the sidecar file.
 - Include a **Community contributors** section that mentions every external contributor with at least one merged PR in the milestone, even if their change only appears in bug fixes or was not promoted into a top-level feature section.

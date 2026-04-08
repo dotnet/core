@@ -19,6 +19,17 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 5. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
 6. Output is one PR per release milestone in dotnet/core, maintained incrementally
 
+## Behavior on an existing PR branch
+
+When the milestone branch already exists and contains drafted markdown, treat that
+branch as the **working baseline**, not as a blank slate.
+
+- read the existing markdown, recent human commits, and unresolved review comments first
+- preserve human edits and reviewer-driven rewrites
+- prefer surgical updates over whole-file rewrites
+- only regenerate or replace an entire file when it is still clearly agent-authored and untouched by humans
+- push follow-up changes to the existing milestone branch/PR instead of creating a replacement PR
+
 ## Reference documents
 
 - [quality-bar.md](references/quality-bar.md) — what good release notes look like
