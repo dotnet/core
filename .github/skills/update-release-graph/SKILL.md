@@ -31,7 +31,7 @@ Regenerate the HAL+JSON information graph in `release-notes/`. The graph is a se
 
 ### Generated graph (outputs — do not hand-edit)
 
-```
+```text
 release-notes/
 ├── index.json                          ← root: all major versions
 ├── llms.json                           ← AI entry point: latest patches per supported version
@@ -60,7 +60,7 @@ release-notes/
 
 ### Graph generators
 
-The `release-notes-gen` tool includes four graph generation commands:
+The `release-notes` tool includes four graph generation commands:
 
 | Command | Generates | From |
 |---------|-----------|------|
@@ -71,8 +71,8 @@ The `release-notes-gen` tool includes four graph generation commands:
 
 All accept the same arguments:
 
-```
-release-notes-gen generate <type> <input-dir> [output-dir] [--url-root <url>]
+```bash
+release-notes generate <type> <input-dir> [output-dir] [--url-root <url>]
 ```
 
 ## When to use
@@ -85,16 +85,16 @@ release-notes-gen generate <type> <input-dir> [output-dir] [--url-root <url>]
 
 ## Prerequisites
 
-### release-notes-gen
+### release-notes
 
-The `release-notes-gen` tool handles both graph generation and legacy file operations. The public `dotnet-release` tool is for navigating release data and CVEs. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
+The `release-notes` tool handles both graph generation and legacy file operations. The public `dotnet-release` tool is for navigating release data and CVEs. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
 
 ```bash
-dotnet tool install -g ReleaseNotes.Gen \
+dotnet tool install -g release-notes \
   --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify — should show graph generation commands
-release-notes-gen --help
+release-notes --help
 ```
 
 > **Note:** GitHub Packages requires authentication even for public repositories. If you get a 401 error, configure credentials for the source:
@@ -156,27 +156,27 @@ The simplest approach is `generate indexes` which runs all three generators in s
 
 ```bash
 # Generate all graph files in one shot
-release-notes-gen generate indexes release-notes
+release-notes generate indexes release-notes
 ```
 
 Or run each generator individually (order matters: version-index → timeline-index → llms-index):
 
 ```bash
-release-notes-gen generate version-index release-notes
-release-notes-gen generate timeline-index release-notes
-release-notes-gen generate llms-index release-notes
+release-notes generate version-index release-notes
+release-notes generate timeline-index release-notes
+release-notes generate llms-index release-notes
 ```
 
 **Custom URL root** (for PR review before merging to release-index):
 
 ```bash
-release-notes-gen generate indexes release-notes --url-root https://raw.githubusercontent.com/dotnet/core/<commit-sha>
+release-notes generate indexes release-notes --url-root https://raw.githubusercontent.com/dotnet/core/<commit-sha>
 ```
 
 **Separate output directory** (to inspect output without overwriting source):
 
 ```bash
-release-notes-gen generate indexes release-notes /tmp/graph-output
+release-notes generate indexes release-notes /tmp/graph-output
 ```
 
 The default URL root is `https://raw.githubusercontent.com/dotnet/core/refs/heads/release-index/release-notes/`.
@@ -185,27 +185,28 @@ The default URL root is `https://raw.githubusercontent.com/dotnet/core/refs/head
 
 ```bash
 # Regenerate releases-index.json from releases.json files
-release-notes-gen generate releases-index release-notes
+release-notes generate releases-index release-notes
 
 # Regenerate releases.md
-release-notes-gen generate releases release-notes
+release-notes generate releases release-notes
 ```
 
 ### 4. Validate
 
 ```bash
 # Verify release links and hashes (can take minutes — do not cancel)
-release-notes-gen verify releases release-notes
+release-notes verify releases release-notes
 # Or for a specific version
-release-notes-gen verify releases {ver} release-notes
+release-notes verify releases {ver} release-notes
 # Skip hash verification for faster iteration
-release-notes-gen verify releases release-notes --skip-hash
+release-notes verify releases release-notes --skip-hash
 
 # Lint generated markdown
 npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/releases.md
 ```
 
 **Exit codes for verify:**
+
 - `0` — no issues
 - `2` — issues found (report written to stdout as markdown)
 
@@ -290,7 +291,7 @@ Create the `release.json` in the patch directory.
 
 ### 2. Regenerate
 
-Same as the patch release process — run `release-notes-gen generate indexes release-notes` → legacy files.
+Same as the patch release process — run `release-notes generate indexes release-notes` → legacy files.
 
 ### 3. Verify the new version appears
 
@@ -303,12 +304,14 @@ Same as the patch release process — run `release-notes-gen generate indexes re
 ### 1. Update source data
 
 Edit `release-notes/{ver}/_manifest.json`:
+
 - Set `"support_phase": "eol"`
 - Set `"supported": false` (if present)
 
-### 2. Regenerate
+### 2. Regenerate outputs
 
 Run all generators. The tools will:
+
 - Set `supported: false` in root index
 - Remove from `llms.json` `supported_major_releases` and `_embedded.patches`
 - Update `support_phase` in major index
@@ -328,6 +331,7 @@ The `_links` section contains reference links that are merged into the generated
 Contains the full release data for a single patch: component versions, download URLs, file hashes. This is a subset of the corresponding entry in `releases.json`.
 
 The generators use `release.json` to:
+
 - Build patch detail indexes with embedded runtime/SDK data
 - Generate per-RID download files
 - Compute SDK feature band information
@@ -335,6 +339,7 @@ The generators use `release.json` to:
 ### Preview releases
 
 Preview/RC releases are stored in a different directory structure:
+
 - `{ver}/preview/preview1/` for preview.1
 - `{ver}/preview/rc1/` for RC1
 
@@ -375,8 +380,8 @@ Immutable files use only `prev-*` links (no `next`). Mutable files use `latest-*
 - Never hand-edit generated files (`index.json`, `manifest.json`, `llms.json`, downloads files, timeline indexes)
 - `_manifest.json` (with underscore prefix) is the source; `manifest.json` (without prefix) is the generated output
 - Similarly, `_llms.json` is optional source overrides; `llms.json` is the generated output
-- `releases-index.json` (legacy flat format) is generated by `release-notes-gen generate releases-index`
-- `releases.md` is generated by `release-notes-gen generate releases`
+- `releases-index.json` (legacy flat format) is generated by `release-notes generate releases-index`
+- `releases.md` is generated by `release-notes generate releases`
 - The generators are idempotent — running them on unchanged source data produces identical output
 - When running individually, order matters: `version-index` → `timeline-index` → `llms-index`; `generate indexes` handles this automatically
 - All `_links.*.href` values are absolute URLs; the base URL is controlled by `--url-root`
@@ -389,10 +394,10 @@ Immutable files use only `prev-*` links (no `next`). Mutable files use `latest-*
 |---------|------------|
 | Hand-editing `index.json` or other generated files | Edit source data and re-run the generators |
 | Hand-editing `manifest.json` | Edit `_manifest.json` and re-run `VersionIndex` |
-| Hand-editing `releases-index.json` | Run `release-notes-gen generate releases-index release-notes` |
-| Hand-editing `releases.md` | Run `release-notes-gen generate releases release-notes` |
+| Hand-editing `releases-index.json` | Run `release-notes generate releases-index release-notes` |
+| Hand-editing `releases.md` | Run `release-notes generate releases release-notes` |
 | Running generators in wrong order | Use `generate indexes` (handles order automatically) or run: version-index → timeline-index → llms-index |
 | Missing `_manifest.json` for a version | The generators warn but fall back to `releases.json`; create `_manifest.json` for accurate lifecycle data |
 | Missing `release.json` for a patch | Patch detail index will be incomplete; ensure every patch has a `release.json` |
-| Editing source data without regenerating | Always run `release-notes-gen generate indexes release-notes` after changing source files |
+| Editing source data without regenerating | Always run `release-notes generate indexes release-notes` after changing source files |
 | Forgetting `--url-root` for PR review | Links will use the default release-index branch URL; pass `--url-root` with a commit SHA for verifiable links in PRs |

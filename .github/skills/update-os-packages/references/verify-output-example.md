@@ -1,6 +1,6 @@
 # Verify Output Example
 
-Example output from `release-notes-gen verify os-packages 10.0 release-notes`:
+Example output from `release-notes verify os-packages 10.0 release-notes`:
 
 ````markdown
 # .NET 10.0 — OS Packages Verification

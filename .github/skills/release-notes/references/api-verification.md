@@ -30,10 +30,10 @@ When writing release notes for Preview N, the locally installed SDK is often Pre
 
 ### Step 1: Generate build metadata
 
-`release-notes-gen generate build-metadata` reads the VMR's version info and queries the nightly NuGet feed to find the correct package versions:
+`release-notes generate build-metadata` reads the VMR's version info and queries the nightly NuGet feed to find the correct package versions:
 
 ```bash
-release-notes-gen generate build-metadata ~/git/dotnet \
+release-notes generate build-metadata ~/git/dotnet \
   --base v11.0.0-preview.2.26159.112 \
   --head origin/release/11.0.1xx-preview3 \
   --output build-metadata.json
@@ -122,7 +122,7 @@ If `dotnet-inspect` can't find a type:
 
 1. **Check your package version first** — are you querying a Preview N-1 package while writing Preview N notes? Find the correct version (see above).
 2. **Named differently** — search with a broader pattern (`find "*Zstd*"` instead of the exact name).
-3. **Reverted** — check `changes.json` for a revert PR. If the API was added and then reverted in the same preview, it didn't ship. Don't document it.
+3. **Reverted or backed out** — first scan `changes.json` for revert titles, then search GitHub for a later merged PR that references reverting the original PR number or URL. The revert may live in the next preview and therefore be absent from the current `changes.json`. If the API or behavior is gone in the final build, don't document the original feature.
 4. **Internal** — the type may not be public. Don't document internal types in release notes.
 5. **Read the PR tests** — the PR's test files are ground truth. Tests compile and run against the actual API surface. Derive code samples from test assertions rather than guessing type names.
 

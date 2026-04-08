@@ -36,6 +36,7 @@ The `runtime` manifest entry covers both Libraries and Runtime. When writing mar
 - **Razor → ASP.NET Core** — `dotnet/razor` PRs go in `aspnetcore.md`
 - **Templating → SDK** — `dotnet/templating` PRs go in `sdk.md`
 - **Roslyn** — covers both C# and Visual Basic. Check PR labels/titles to determine language. Produce `csharp.md` (and `visualbasic.md` if VB-specific features exist).
+- **Keep product boundaries clear** — do **not** treat higher-level editor or tooling features as ASP.NET Core features just because they came from `dotnet/razor` or a related repo. Razor editor code actions, language-server behavior, and IDE-only experiences are usually tooling stories and should be skipped from product release notes unless the release is explicitly documenting tooling.
 
 ### Infrastructure components (skip for release notes)
 

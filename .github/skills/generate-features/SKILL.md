@@ -37,6 +37,8 @@ The only additions are **optional enrichment fields** on change entries, such as
 - `score_reason` (`string`) — short explanation of the score
 - `score_breakdown` (`object`) — optional per-dimension scoring details
 - `breaking_changes` (`bool`) — mark changes that users may need to react to, even when they are not headline items
+- `reverted_by` (`array<string>`) — optional PR URLs or refs that later backed out this change
+- `reverts` (`array<string>`) — optional change IDs or PR URLs that this entry reverts or partially reverts
 
 This schema is intentionally loose and can grow as the workflow learns what it needs.
 
@@ -65,7 +67,36 @@ Apply the **80/20 rule** from that document: prefer features that make sense to 
 
 Do **not** invent features from memory, roadmaps, or PR titles found elsewhere. Everything in `features.json` must trace back to `changes.json`.
 
-### 2. Score what shipped
+### 2. Resolve revert state before scoring
+
+Do a quick mechanical revert pass before assigning any positive scores. This step
+exists because the original PR may appear in the current `changes.json` while the
+revert lands in a later preview and therefore does **not** appear in the same file.
+
+Start with the obvious cases:
+
+```bash
+jq -r '.changes[] | select(.title | test("(?i)^(partial(ly)?\\s+)?revert\\b|\\bback out\\b")) | [.repo, .title, .url] | @tsv' changes.json
+```
+
+Then, for each candidate you might promote into the draft, search the source repo
+for later merged PRs that explicitly revert or back out that PR number or URL:
+
+```bash
+gh search prs --repo dotnet/<repo> --state merged \
+  "\"This reverts https://github.com/dotnet/<repo>/pull/<number>\" OR \"revert <number>\" OR \"back out <number>\"" \
+  --json number,title,mergedAt,url
+```
+
+When a revert is found:
+
+- annotate the original entry with `reverted_by`
+- annotate the revert entry with `reverts`, when both are present in the file
+- set the original score to `0` unless you can verify the shipped build still contains the feature
+
+Do **not** promote an item to section-worthy status until this pass is complete.
+
+### 3. Score what shipped
 
 Look for signals such as:
 
@@ -85,14 +116,15 @@ Down-rank or exclude:
 - infra and dependency churn
 - test-only changes
 - internal refactors with no user-facing impact
+- repo-adjacent IDE, editor, or design-time tooling features that do not belong to the product release surface you are documenting
 - reverts and partial work that did not survive into the build
 - items that mostly require insider knowledge to understand why they matter
 
-### 3. Use API evidence to refine the score
+### 4. Use API evidence to refine the score
 
 If a change depends on public APIs, use `api-diff` / `dotnet-inspect` to confirm the API exists in the actual build. Missing or reverted APIs should be scored down or excluded.
 
-### 4. Write `features.json`
+### 5. Write `features.json`
 
 The output typically lives next to `changes.json`:
 

@@ -2,7 +2,7 @@
 name: verify-releases
 description: >
   Validate releases and release links: URL liveness, file hashes, CDN
-  latest.version files, and aka.ms redirect targets. Uses release-notes-gen verify
+  latest.version files, and aka.ms redirect targets. Uses release-notes verify
   and generate commands against the local release-notes directory.
   USE FOR: validate the latest release, validate release links, validating that
   all download links return HTTP 200, verifying SHA512 hashes match downloaded
@@ -16,21 +16,21 @@ description: >
 
 # Verify Releases
 
-Validate .NET release data in `release-notes/` using the `release-notes-gen` CLI tool. This skill checks that download URLs are live, file hashes match, CDN latest.version files are current, and aka.ms redirects resolve correctly.
+Validate .NET release data in `release-notes/` using the `release-notes` CLI tool. This skill checks that download URLs are live, file hashes match, CDN latest.version files are current, and aka.ms redirects resolve correctly.
 
 ## Prerequisites
 
-### release-notes-gen
+### release-notes
 
-The `release-notes-gen` tool is published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages). The public `dotnet-release` tool is now for browsing release data and CVEs.
+The `release-notes` tool is published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages). The public `dotnet-release` tool is now for browsing release data and CVEs.
 
 ```bash
 # Install
-dotnet tool install -g ReleaseNotes.Gen \
+dotnet tool install -g release-notes \
   --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify — must show "verify releases" in usage output
-release-notes-gen
+release-notes
 ```
 
 > **Note:** GitHub Packages requires authentication even for public repositories. If you get a 401 error, configure credentials:
@@ -46,7 +46,7 @@ release-notes-gen
 **Version check:** If the tool usage output does not include `verify releases` in its command list, the installed version is too old. Update with:
 
 ```bash
-dotnet tool update -g ReleaseNotes.Gen \
+dotnet tool update -g release-notes \
   --add-source https://nuget.pkg.github.com/richlander/index.json
 ```
 
@@ -57,7 +57,7 @@ dotnet tool update -g ReleaseNotes.Gen \
 Downloads every binary and verifies SHA512 hashes against `releases.json`. This is the most thorough check and takes several minutes.
 
 ```bash
-release-notes-gen verify releases release-notes
+release-notes verify releases release-notes
 ```
 
 ### Verify all supported versions (quick — skip hashes)
@@ -65,20 +65,20 @@ release-notes-gen verify releases release-notes
 Checks URL liveness, CDN latest.version, and aka.ms redirects only. Much faster — typically under 30 seconds.
 
 ```bash
-release-notes-gen verify releases release-notes --skip-hash
+release-notes verify releases release-notes --skip-hash
 ```
 
 ### Verify a specific major version
 
 ```bash
-release-notes-gen verify releases 10.0 release-notes
-release-notes-gen verify releases 10.0 release-notes --skip-hash
+release-notes verify releases 10.0 release-notes
+release-notes verify releases 10.0 release-notes --skip-hash
 ```
 
 ### Verify a specific patch release
 
 ```bash
-release-notes-gen verify releases 10.0.5 release-notes
+release-notes verify releases 10.0.5 release-notes
 ```
 
 ## What gets verified
@@ -112,13 +112,13 @@ release-notes-gen verify releases 10.0.5 release-notes
 
 ### 1. Check tool version
 
-Confirm `release-notes-gen` is installed and has the `verify releases` command:
+Confirm `release-notes` is installed and has the `verify releases` command:
 
 ```bash
-release-notes-gen
+release-notes
 ```
 
-The usage output must include `release-notes-gen verify releases [version] [path] [--skip-hash]`. If it does not, update the tool (see Prerequisites).
+The usage output must include `release-notes verify releases [version] [path] [--skip-hash]`. If it does not, update the tool (see Prerequisites).
 
 ### 2. Run verification
 
@@ -126,13 +126,13 @@ For a standard validation (recommended for release sign-off):
 
 ```bash
 cd ~/git/core
-release-notes-gen verify releases release-notes
+release-notes verify releases release-notes
 ```
 
 For a quick check during development:
 
 ```bash
-release-notes-gen verify releases release-notes --skip-hash
+release-notes verify releases release-notes --skip-hash
 ```
 
 ### 3. Interpret results
@@ -156,8 +156,8 @@ Present a summary table with per-version results:
 ## .NET Release Link Verification Report
 
 **Date:** YYYY-MM-DD
-**Tool:** `release-notes-gen` vX.Y.Z
-**Command:** `release-notes-gen verify releases release-notes`
+**Tool:** `release-notes` vX.Y.Z
+**Command:** `release-notes verify releases release-notes`
 
 | Version | Latest Release | Download URLs | SHA512 Hashes | CDN latest.version | aka.ms | Status |
 |---------|---------------|---------------|---------------|-------------------|--------|--------|
@@ -177,10 +177,10 @@ After verifying releases, you may also want to regenerate the legacy index and m
 
 ```bash
 # Regenerate releases-index.json
-release-notes-gen generate releases-index release-notes
+release-notes generate releases-index release-notes
 
 # Regenerate releases.md
-release-notes-gen generate releases release-notes
+release-notes generate releases release-notes
 
 # Lint the generated markdown
 npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/releases.md

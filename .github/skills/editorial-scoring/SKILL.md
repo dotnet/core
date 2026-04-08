@@ -61,6 +61,7 @@ This is how foundational but initially niche work can still earn a good score.
 - Build or infrastructure churn
 - Refactoring with no user-visible effect
 - VMR sync noise, dependency updates, or repo automation
+- Higher-level IDE, editor, or design-time tooling features when the release notes are for a different product surface
 - Highly specialized implementation details that read like internal jargon
 - Features that only matter after several stacked conditions are true (for example: uses single-file publish **and** cares deeply about startup **and** is willing to do extra training/tuning)
 - PRs with very thin descriptions where the only concrete signal is an internal runtime/tooling term like cDAC
@@ -80,6 +81,7 @@ This is how foundational but initially niche work can still earn a good score.
 - **Documentation blindness** — if an "existing" feature is not findable in Learn docs and does not show up as a known customer scenario, that is a signal to score it around `1`, not to assume hidden importance
 - **Phantom API stories** — if you cannot identify the concrete new public API, do not give API credit based on a vague title alone
 - **Promotion by association** — a fix in a glamorous subsystem is still just a `1` if it only patches an unannounced or niche feature
+- **Boundary bleed** — a Razor editor code action or other repo-adjacent tooling improvement is not automatically an ASP.NET Core product feature just because it came from a nearby repo
 - **Demand inversion** — do not mistake an old internal bug with no reactions for evidence that many users need to hear about the fix
 - **Fragmentation bias** — do not dismiss each small related item in isolation when several `2-4` items together form one intelligible reader story, such as a cluster of "Unsafe evolution" changes
 

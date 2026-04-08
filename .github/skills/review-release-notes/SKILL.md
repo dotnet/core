@@ -66,6 +66,7 @@ Compare the draft against the component examples:
 - **Under-explaining** — a real `8+` feature is present but buried or not framed clearly
 - **API inventory mode** — the draft starts mirroring `api-diff` instead of telling a user story
 - **Technical novelty bias** — clever implementation details outrank practical user value
+- **Missed revert** — a promoted feature was later backed out or does not appear in the actual build
 
 ## Multi-model review pattern
 
@@ -94,13 +95,14 @@ specific checks instead:
 2. **Which sections fail the 80/20 reader-value test and should be cut, grouped, or demoted?**
 3. **Which sentences infer feelings or outcomes (`trust`, `confidence`, `easier`, `better`) instead of stating the concrete change?**
 4. **Which sections drift into API-inventory mode instead of teaching a user-facing story?**
-5. **Which code samples or examples are weak, confusing, or unsupported by the text?**
-6. **Which links, issue/PR references, or formatting details still violate house style?**
-7. **What is the single highest-value rewrite still needed in the draft?**
-8. **Is the wording conventional, or is it inventing non-standard phrasing or terms?**
-9. **Are the subject and its adjective or adverb paired in a familiar way?**
-10. **Would this phrasing seem normal in release notes for another developer platform?**
-11. **If `release-notes/features.json` lists this feature, does the section begin with the standard preview blockquote?**
+5. **Which promoted items were later reverted, backed out, or are missing from the actual build/package set? Cite the revert PR or verification gap.**
+6. **Which code samples or examples are weak, confusing, or unsupported by the text?**
+7. **Which links, issue/PR references, or formatting details still violate house style?**
+8. **What is the single highest-value rewrite still needed in the draft?**
+9. **Is the wording conventional, or is it inventing non-standard phrasing or terms?**
+10. **Are the subject and its adjective or adverb paired in a familiar way?**
+11. **Would this phrasing seem normal in release notes for another developer platform?**
+12. **If `release-notes/features.json` lists this feature, does the section begin with the standard preview blockquote?**
 
 Ask reviewers to answer with file + heading + issue + suggested rewrite. This
 produces actionable review instead of general taste feedback.

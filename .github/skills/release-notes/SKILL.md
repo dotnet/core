@@ -13,8 +13,8 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 ## How it works
 
 1. `generate-changes` diffs `source-manifest.json` between VMR refs to produce `changes.json`
-2. `generate-features` reads `changes.json` and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
-3. `api-diff` / `dotnet-inspect` verifies public APIs and catches missed reverts
+2. `generate-features` reads `changes.json`, resolves revert/backout relationships, and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
+3. `api-diff` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build
 4. `release-notes` writes curated markdown using the higher-value entries from `features.json`
 5. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
 6. Output is one PR per release milestone in dotnet/core, maintained incrementally
