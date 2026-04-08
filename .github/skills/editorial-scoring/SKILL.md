@@ -61,6 +61,7 @@ This is how foundational but initially niche work can still earn a good score.
 - Build or infrastructure churn
 - Refactoring with no user-visible effect
 - VMR sync noise, dependency updates, or repo automation
+- Product-boundary mismatch — repo-adjacent IDE/editor/design-time tooling work when the notes are for a different product surface
 - Highly specialized implementation details that read like internal jargon
 - Features that only matter after several stacked conditions are true (for example: uses single-file publish **and** cares deeply about startup **and** is willing to do extra training/tuning)
 - PRs with very thin descriptions where the only concrete signal is an internal runtime/tooling term like cDAC

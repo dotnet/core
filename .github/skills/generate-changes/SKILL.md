@@ -2,7 +2,7 @@
 name: generate-changes
 description: >
   Generate `changes.json` for a .NET release milestone by selecting the correct
-  VMR base/head refs and running `release-notes-gen generate changes`. Handles
+  VMR base/head refs and running `release-notes generate changes`. Handles
   preview-only multi-branch targeting (`main` vs release branches vs tags) and
   emits the authoritative manifest of what shipped. DO NOT USE FOR: API
   verification/diffs (use api-diff), feature scoring (use generate-features),
@@ -17,7 +17,7 @@ This is the **VMR-aware data acquisition stage** of the release notes pipeline:
 
 1. Determine which milestone(s) are active
 2. Resolve the correct `--base` and `--head` refs
-3. Run `release-notes-gen generate changes`
+3. Run `release-notes generate changes`
 4. Write `changes.json` into the correct `release-notes/` folder
 
 ## When to use
@@ -90,7 +90,7 @@ For each active milestone:
 ### 4. Generate the file
 
 ```bash
-release-notes-gen generate changes <vmr-clone-path> \
+release-notes generate changes <vmr-clone-path> \
   --base <previous-release-tag> \
   --head <current-release-ref> \
   --version "<release-version>" \
@@ -103,7 +103,7 @@ Examples:
 
 ```bash
 # Preview milestone
-release-notes-gen generate changes ~/git/dotnet \
+release-notes generate changes ~/git/dotnet \
   --base v11.0.0-preview.3.26210.100 \
   --head origin/release/11.0.1xx-preview4 \
   --version "11.0.0-preview.4" \
@@ -111,7 +111,7 @@ release-notes-gen generate changes ~/git/dotnet \
   --output release-notes/11.0/preview/preview4/changes.json
 
 # GA/patch milestone
-release-notes-gen generate changes ~/git/dotnet \
+release-notes generate changes ~/git/dotnet \
   --base v10.0.7 \
   --head v10.0.8 \
   --version "10.0.8" \
