@@ -19,10 +19,10 @@ Mac Catalyst, macOS, and tvOS improvements:
 ## Maps add clustering, styling, and richer interaction APIs
 
 The Map control gets a substantial wave of functionality in Preview 3,
-including pin clustering, custom pin icons, custom JSON styling, long-click
-handling, click events for circles, polygons, and polylines, overlay visibility
-and Z-order control, programmatic info-window control, smoother region changes,
-and richer user-location events
+including pin clustering, custom pin icons, custom JSON styling,
+`MapLongClicked`, click events for circles, polygons, and polylines,
+`MapElement.IsVisible` and `ZIndex`, programmatic info-window control,
+smoother region changes, and richer user-location events
 ([dotnet/maui #29101](https://github.com/dotnet/maui/pull/29101),
 [dotnet/maui #33831](https://github.com/dotnet/maui/pull/33831),
 [dotnet/maui #33950](https://github.com/dotnet/maui/pull/33950),
@@ -57,6 +57,11 @@ stylesheets, reducing unnecessary app size
 ([dotnet/maui #33834](https://github.com/dotnet/maui/pull/33834),
 [dotnet/maui #34723](https://github.com/dotnet/maui/pull/34723),
 [dotnet/maui #33160](https://github.com/dotnet/maui/pull/33160)).
+
+In particular, `InvalidateStyle()` and
+`VisualStateManager.InvalidateVisualStates()` give tooling and app code an
+explicit way to reapply in-place style and visual-state mutations without
+recreating the element tree.
 
 ```xaml
 <ContentPage.Resources>
