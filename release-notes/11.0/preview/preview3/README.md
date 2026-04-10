@@ -9,6 +9,7 @@ These notes cover the highest-value changes that shipped in .NET 11 Preview 3:
 ## Languages
 
 - [C#](./csharp.md)
+- [F#](./fsharp.md)
 
 ## Web and data
 
