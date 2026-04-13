@@ -10,9 +10,10 @@ Mac Catalyst, macOS, and tvOS improvements:
 - [.NET for Android adds Android 17 / API 37 preview support](#net-for-android-adds-android-17--api-37-preview-support)
 - [.NET for Android improves CLI device discovery and deploy flow](#net-for-android-improves-cli-device-discovery-and-deploy-flow)
 - [.NET for Apple workloads improve packaging and binding quality](#net-for-apple-workloads-improve-packaging-and-binding-quality)
-- [Bug fixes](#bug-fixes)
+- [.NET for Apple Xcode 26.3 support](#net-for-apple-xcode-263-support)
+- [CoreCLR improvements on Apple platforms](#coreclr-improvements-on-apple-platforms)
 
-.NET MAUI updates in .NET 11:
+# .NET MAUI updates in .NET 11:
 
 - [What's new in .NET MAUI in .NET 11](https://learn.microsoft.com/dotnet/maui/whats-new/)
 
@@ -134,16 +135,20 @@ release branch also includes binding-quality work such as improved nullability
 annotations for `NSArray` APIs
 ([dotnet/macios #24907](https://github.com/dotnet/macios/pull/24907)).
 
-## Bug fixes
+## .NET for Apple Xcode 26.3 support
 
-- **XAML** - duplicate implicit content assignments now produce clearer
-  warnings, and XamlC respects `ObsoleteAttribute` messaging in generated
-  diagnostics ([dotnet/maui #32654](https://github.com/dotnet/maui/pull/32654),
-  [dotnet/maui #32946](https://github.com/dotnet/maui/pull/32946)).
-- **Android** - fixed a GC live-lock issue that could surface during rapid UI
-  switching ([dotnet/android #10856](https://github.com/dotnet/android/pull/10856)).
-- **Apple packaging** - fixed app bundle post-processing and multi-RID publish
-  handling for Apple workloads ([dotnet/macios #24845](https://github.com/dotnet/macios/pull/24845)).
+Xcode 26.3 is now supported for targeting Apple platforms. No new APIs were introduced.
+
+## CoreCLR improvements on Apple platforms
+
+This preview includes several CoreCLR improvements across all Apple platforms (iOS, macOS, Mac Catalyst, and tvOS):
+ 
+  - Smaller Release builds. Native symbol stripping now covers CoreCLR and ReadyToRun (R2R) frameworks, reducing a MAUI template app's bundle size from
+   77.8 MB to 41.6 MB ([dotnet/macios#24678](https://github.com/dotnet/macios/pull/24678)).
+  - Faster incremental builds. R2R composite images are cached when only user assemblies change, cutting incremental build time from ~39s to ~26s ([dotnet/macios#24735](https://github.com/dotnet/macios/pull/24735)).
+  - Smarter code generation. The R2R compiler now targets the minimum instruction set for your deployment target (e.g., ARMv8.2-A for iOS 16+), producing better native 
+code without sacrificing device compatibility (dotnet/macios#24621).
+  - R2R on macOS. ReadyToRun compilation is now functional on macOS, completing R2R support across all Apple platforms ([dotnet/macios#25080](https://github.com/dotnet/macios/pull/24621)).
 
 ## Contributors
 
