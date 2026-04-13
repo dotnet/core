@@ -13,7 +13,7 @@ Mac Catalyst, macOS, and tvOS improvements:
 - [.NET for Apple Xcode 26.3 support](#net-for-apple-xcode-263-support)
 - [CoreCLR improvements on Apple platforms](#coreclr-improvements-on-apple-platforms)
 
-# .NET MAUI updates in .NET 11:
+.NET MAUI updates in .NET 11:
 
 - [What's new in .NET MAUI in .NET 11](https://learn.microsoft.com/dotnet/maui/whats-new/)
 
@@ -121,7 +121,7 @@ Preview 3 Android release notes:
 
 `dotnet run` can now list available emulators and auto-boot a selected AVD
 before deployment
-([dotnet/android #10826](https://github.com/dotnet/android/pull/10826). These
+([dotnet/android #10826](https://github.com/dotnet/android/pull/10826)). These
 changes make CLI-first Android development less dependent on IDE-only device
 management.
 
@@ -141,14 +141,23 @@ Xcode 26.3 is now supported for targeting Apple platforms. No new APIs were intr
 
 ## CoreCLR improvements on Apple platforms
 
-This preview includes several CoreCLR improvements across all Apple platforms (iOS, macOS, Mac Catalyst, and tvOS):
- 
-  - Smaller Release builds. Native symbol stripping now covers CoreCLR and ReadyToRun (R2R) frameworks, reducing a MAUI template app's bundle size from
-   77.8 MB to 41.6 MB ([dotnet/macios#24678](https://github.com/dotnet/macios/pull/24678)).
-  - Faster incremental builds. R2R composite images are cached when only user assemblies change, cutting incremental build time from ~39s to ~26s ([dotnet/macios#24735](https://github.com/dotnet/macios/pull/24735)).
-  - Smarter code generation. The R2R compiler now targets the minimum instruction set for your deployment target (e.g., ARMv8.2-A for iOS 16+), producing better native 
-code without sacrificing device compatibility (dotnet/macios#24621).
-  - R2R on macOS. ReadyToRun compilation is now functional on macOS, completing R2R support across all Apple platforms ([dotnet/macios#25080](https://github.com/dotnet/macios/pull/24621)).
+This preview includes several CoreCLR improvements across all Apple platforms
+(iOS, macOS, Mac Catalyst, and tvOS):
+
+- Smaller Release builds. Native symbol stripping now covers CoreCLR and
+  ReadyToRun (R2R) frameworks, reducing a MAUI template app's bundle size from
+  77.8 MB to 41.6 MB
+  ([dotnet/macios #24678](https://github.com/dotnet/macios/pull/24678)).
+- Faster incremental builds. R2R composite images are cached when only user
+  assemblies change, cutting incremental build time from ~39s to ~26s
+  ([dotnet/macios #24735](https://github.com/dotnet/macios/pull/24735)).
+- Smarter code generation. The R2R compiler now targets the minimum instruction
+  set for your deployment target (for example, ARMv8.2-A for iOS 16+),
+  producing better native code without sacrificing device compatibility
+  ([dotnet/macios #24621](https://github.com/dotnet/macios/pull/24621)).
+- R2R on macOS. ReadyToRun compilation is now functional on macOS, completing
+  R2R support across all Apple platforms
+  ([dotnet/macios #25080](https://github.com/dotnet/macios/pull/25080)).
 
 ## Contributors
 

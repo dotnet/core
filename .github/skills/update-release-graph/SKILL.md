@@ -15,7 +15,7 @@ description: >
 
 # Update Release Graph
 
-Regenerate the HAL+JSON information graph in `release-notes/`. The graph is a set of interconnected JSON files using [HAL](https://stateless.group/hal_specification.html) `_links` and `_embedded` properties. It is **generated** from source data — never hand-edit the output files.
+Regenerate the HAL+JSON information graph in `release-notes/`. The graph is a set of interconnected JSON files using [HAL](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-11) `_links` and `_embedded` properties. It is **generated** from source data — never hand-edit the output files.
 
 ## Architecture
 
@@ -31,7 +31,7 @@ Regenerate the HAL+JSON information graph in `release-notes/`. The graph is a se
 
 ### Generated graph (outputs — do not hand-edit)
 
-```
+```text
 release-notes/
 ├── index.json                          ← root: all major versions
 ├── llms.json                           ← AI entry point: latest patches per supported version
@@ -71,7 +71,7 @@ The `release-notes-gen` tool includes four graph generation commands:
 
 All accept the same arguments:
 
-```
+```bash
 release-notes-gen generate <type> <input-dir> [output-dir] [--url-root <url>]
 ```
 
@@ -206,6 +206,7 @@ npx markdownlint --config .github/linters/.markdown-lint.yml release-notes/relea
 ```
 
 **Exit codes for verify:**
+
 - `0` — no issues
 - `2` — issues found (report written to stdout as markdown)
 
@@ -303,12 +304,14 @@ Same as the patch release process — run `release-notes-gen generate indexes re
 ### 1. Update source data
 
 Edit `release-notes/{ver}/_manifest.json`:
+
 - Set `"support_phase": "eol"`
 - Set `"supported": false` (if present)
 
-### 2. Regenerate
+### 2. Regenerate graph files
 
 Run all generators. The tools will:
+
 - Set `supported: false` in root index
 - Remove from `llms.json` `supported_major_releases` and `_embedded.patches`
 - Update `support_phase` in major index
@@ -328,6 +331,7 @@ The `_links` section contains reference links that are merged into the generated
 Contains the full release data for a single patch: component versions, download URLs, file hashes. This is a subset of the corresponding entry in `releases.json`.
 
 The generators use `release.json` to:
+
 - Build patch detail indexes with embedded runtime/SDK data
 - Generate per-RID download files
 - Compute SDK feature band information
@@ -335,6 +339,7 @@ The generators use `release.json` to:
 ### Preview releases
 
 Preview/RC releases are stored in a different directory structure:
+
 - `{ver}/preview/preview1/` for preview.1
 - `{ver}/preview/rc1/` for RC1
 
