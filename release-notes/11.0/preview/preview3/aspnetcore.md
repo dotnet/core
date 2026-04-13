@@ -41,10 +41,7 @@ Thank you [@manandre](https://github.com/manandre) for this contribution!
 
 ## Virtualize adapts to variable-height items at runtime
 
-Blazor's `Virtualize<TItem>` component no longer assumes every item has the same
-height. Preview 3 updates it to adapt to measured item sizes at runtime, which
-reduces incorrect spacing and scrolling when item heights vary
-([dotnet/aspnetcore #64964](https://github.com/dotnet/aspnetcore/pull/64964)).
+Blazor's `Virtualize<TItem>` component no longer assumes every item has the same height. The component now adapts to measured item sizes at runtime, which reduces incorrect spacing and scrolling when item heights vary. These updates include an update to the default value of `OverscanCount` from `3` to `15` to increase the precision of average item height calculations. `QuickGrid` continues to use an `OverscanCount` of `3` to reduce the potential for adverse performance impact ([dotnet/aspnetcore #64964](https://github.com/dotnet/aspnetcore/pull/64964)).
 
 ```razor
 <Virtualize Items="messages" Context="message">
