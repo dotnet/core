@@ -15,7 +15,7 @@ Create and maintain per-distro JSON files in `release-notes/{version}/distros/`.
 
 ## Directory structure
 
-```
+```text
 release-notes/{version}/distros/
 ├── dependencies.json    # distro-agnostic dependency list (what .NET needs)
 ├── index.json           # lists all per-distro file names
@@ -34,24 +34,24 @@ release-notes/{version}/distros/
 
 ## Prerequisites
 
-The `release-notes-gen` tool must be installed for markdown generation and package availability queries. The public `dotnet-release` tool is now for browsing release data and CVEs.
+The `release-notes` tool must be installed for markdown generation and package availability queries. The public `dotnet-release` tool is now for browsing release data and CVEs.
 
 ```bash
 # Check if already installed
-release-notes-gen --version
+release-notes --version
 ```
 
 If not installed:
 
 ```bash
-dotnet tool install -g ReleaseNotes.Gen \
+dotnet tool install -g release-notes \
   --add-source https://nuget.pkg.github.com/richlander/index.json
 ```
 
 If already installed, update to latest:
 
 ```bash
-dotnet tool update -g ReleaseNotes.Gen \
+dotnet tool update -g release-notes \
   --add-source https://nuget.pkg.github.com/richlander/index.json
 ```
 
@@ -214,7 +214,7 @@ Confirm every Linux distro in `supported-os.json` has a corresponding file.
 Regenerate `dotnet-dependencies.md` from the JSON files:
 
 ```bash
-release-notes-gen generate dotnet-dependencies {version} release-notes
+release-notes generate dotnet-dependencies {version} release-notes
 ```
 
 This produces `release-notes/{version}/dotnet-dependencies.md` with copy-pasteable install commands for each distro and release. Never hand-edit this file — it is generated from the JSON.
@@ -246,7 +246,7 @@ Requires `PKGS_ORG_TOKEN` to be set.
 
 ```bash
 export PKGS_ORG_TOKEN=<token>
-release-notes-gen query distro-packages --dotnet-version {version} --output /tmp/distro-packages.json
+release-notes query distro-packages --dotnet-version {version} --output /tmp/distro-packages.json
 ```
 
 This queries pkgs.org and supplemental feeds (Ubuntu backports via Launchpad, Homebrew, NixOS) and writes a JSON file with package availability per distro.
@@ -400,8 +400,8 @@ Show the user a summary of which distros+releases have packages and from which f
 After any JSON changes, regenerate both markdown files:
 
 ```bash
-release-notes-gen generate dotnet-dependencies {version} release-notes
-release-notes-gen generate dotnet-packages {version} release-notes
+release-notes generate dotnet-dependencies {version} release-notes
+release-notes generate dotnet-packages {version} release-notes
 ```
 
 - `dotnet-dependencies.md` — what OS packages .NET requires (from dependency data)
@@ -424,7 +424,7 @@ When packages come from a non-builtin feed, the `install_command` field tells us
 
 Feed name: `backports`
 
-```
+```bash
 sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
 ```
 
@@ -434,7 +434,7 @@ This PPA provides .NET packages for older Ubuntu LTS releases that don't carry .
 
 Feed name: `microsoft`
 
-```
+```bash
 wget https://packages.microsoft.com/config/{distro}/{version}/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb && sudo dpkg -i /tmp/packages-microsoft-prod.deb && rm /tmp/packages-microsoft-prod.deb
 ```
 

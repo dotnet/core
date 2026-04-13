@@ -2,7 +2,7 @@
 name: update-supported-os
 description: >
   Audit and update supported-os.json/md files to reflect current OS version
-  support. Uses the release-notes-gen tool for automated verification against
+  support. Uses the release-notes tool for automated verification against
   upstream lifecycle data and markdown regeneration. USE FOR: adding new OS
   versions, moving EOL versions to unsupported, periodic support matrix audits.
   DO NOT USE FOR: os-packages.json changes (use update-os-packages skill),
@@ -23,17 +23,17 @@ Audit and update `supported-os.json` files in this repository. These files decla
 
 The following tools must be installed:
 
-### release-notes-gen
+### release-notes
 
-The `release-notes-gen` tool is used to verify and generate supported OS files. The public `dotnet-release` tool is now for browsing release data and CVEs. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
+The `release-notes` tool is used to verify and generate supported OS files. The public `dotnet-release` tool is now for browsing release data and CVEs. Packages are published to [GitHub Packages](https://github.com/richlander/dotnet-release/packages).
 
 ```bash
 # GitHub Packages requires authentication — use a GitHub token (PAT or GITHUB_TOKEN)
-dotnet tool install -g ReleaseNotes.Gen \
+dotnet tool install -g release-notes \
   --add-source https://nuget.pkg.github.com/richlander/index.json
 
 # Verify
-release-notes-gen --help
+release-notes --help
 ```
 
 > **Note:** GitHub Packages requires authentication even for public repositories. If you get a 401 error, configure credentials for the source:
@@ -75,17 +75,17 @@ The user provides:
 Run the verify command for each .NET version to audit:
 
 ```bash
-release-notes-gen verify supported-os <version> release-notes
+release-notes verify supported-os <version> release-notes
 ```
 
 Examples:
 
 ```bash
 # Check 10.0 against local files
-release-notes-gen verify supported-os 10.0 release-notes
+release-notes verify supported-os 10.0 release-notes
 
 # Check against live data on GitHub (no local clone needed)
-release-notes-gen verify supported-os 10.0
+release-notes verify supported-os 10.0
 ```
 
 **Interpret the exit code:**
@@ -145,7 +145,7 @@ For each confirmed change, edit `release-notes/<version>/supported-os.json`:
 After updating the JSON, regenerate the markdown file:
 
 ```bash
-release-notes-gen generate supported-os <version> release-notes
+release-notes generate supported-os <version> release-notes
 ```
 
 This overwrites `supported-os.md` with content derived from the updated JSON.
@@ -171,7 +171,7 @@ Check if any newly added distro versions need entries in `os-packages.json`. If 
 1. Run verify again to confirm issues are resolved:
 
    ```bash
-   release-notes-gen verify supported-os <version> release-notes
+   release-notes verify supported-os <version> release-notes
    ```
 
    Remaining items are acceptable if they are:

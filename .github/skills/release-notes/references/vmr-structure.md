@@ -36,7 +36,7 @@ By comparing `source-manifest.json` at two release points, you get:
 3. **Which components didn't change** — these get minimal stubs, no investigation needed
 4. **Source repo URLs** — for querying PRs via the GitHub compare API
 
-The `release-notes-gen generate changes` tool automates this: it fetches the manifest at both refs, diffs them, queries GitHub for PRs in each commit range, and outputs `changes.json`.
+The `release-notes generate changes` tool automates this: it fetches the manifest at both refs, diffs them, queries GitHub for PRs in each commit range, and outputs `changes.json`.
 
 ## Branch naming
 

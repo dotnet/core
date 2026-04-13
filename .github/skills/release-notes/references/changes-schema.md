@@ -1,6 +1,6 @@
 # Shared Schema for `changes.json` and `features.json`
 
-Reference for the `changes.json` file produced by `release-notes-gen generate changes`, and for the derived `features.json` file used by downstream editorial skills. One file per release milestone.
+Reference for the `changes.json` file produced by `release-notes generate changes`, and for the derived `features.json` file used by downstream editorial skills. One file per release milestone.
 
 ## Overview
 
@@ -83,6 +83,8 @@ writing stage to keep long-running features consistent across the release.
 - `score_reason` (`string`) — optional short explanation for the score
 - `score_breakdown` (`object`) — optional structured scoring details
 - `breaking_changes` (`bool`) — optional flag for changes users may need to react to, even if they are not headline features
+- `reverted_by` (`array<string>`) — optional list of PR URLs or refs that later reverted or backed out this change
+- `reverts` (`array<string>`) — optional list of change IDs or PR URLs this entry reverts or partially reverts
 
 The `product` field is derived from the repo-level [component mapping](component-mapping.md). Infra repos like `arcade` and `symreader` have no `product` field. The `repo` field always matches the VMR manifest path.
 
@@ -100,7 +102,7 @@ The `commit` field is the VMR codeflow commit in `dotnet/dotnet` that synced thi
 
 ## Conventions
 
-- **No nulls** — required fields are always present. Optional fields (`product`, `labels`, `local_repo_commit`, `score`, `score_reason`, `score_breakdown`, `breaking_changes`) may be absent. Use `""` for missing strings, `0` for missing integers.
+- **No nulls** — required fields are always present. Optional fields (`product`, `labels`, `local_repo_commit`, `score`, `score_reason`, `score_breakdown`, `breaking_changes`, `reverted_by`, `reverts`) may be absent. Use `""` for missing strings, `0` for missing integers.
 - **Naming** — `snake_case_lower` for JSON fields, `kebab-case-lower` for file names and repo slugs.
 - **Public URLs only** — every URL must resolve publicly.
 - **Commit URLs use `.diff` form** — for machine consumption.
@@ -118,6 +120,15 @@ That means a change can be:
 - **low score + `breaking_changes: true`** — a niche or narrow change that still deserves a short callout near the end of the release notes
 
 In practice, a `score` around `0-4` with `breaking_changes: true` usually means **one line in a "Breaking changes" section**, not a full feature writeup.
+
+## Revert annotations
+
+`changes.json` is the raw shipped-change manifest. During editorial triage,
+`features.json` may add `reverted_by` and `reverts` when the agent finds that a
+candidate feature was later backed out or partially reverted.
+
+These annotations exist so downstream skills can suppress the original headline
+without losing the provenance that explains why the item was cut.
 
 ## Example
 

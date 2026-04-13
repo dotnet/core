@@ -25,6 +25,7 @@ matter during .NET release-note triage.
 - Test-only or infra-only work
 - Mechanical refactors with no user-facing impact
 - Churn in dependencies or tooling internals
+- **Product-boundary mismatch** — apply the product-boundary rule from `editorial-rules.md`; score these to cut-level unless the release is explicitly about that tooling surface
 - Reverts, partial implementations, or APIs that do not appear in the actual build
 - Changes too small or obscure to justify external attention
 - **Stacked audience gates** — if the reader has to care about A, then B, then be willing to do C, the addressable audience shrinks at each step and the score should usually drop hard
