@@ -79,9 +79,6 @@ JS boundaries
 
 ## Breaking changes
 
-- Unhandled `BackgroundService` exceptions now propagate from the host instead of
-  being quietly swallowed
-  ([dotnet/runtime #124863](https://github.com/dotnet/runtime/pull/124863)).
 - NativeAOT native-library outputs now use the conventional `lib` prefix on
   Unix. If your scripts expected `MyLib.so`, update them to look for
   `libMyLib.so`

@@ -120,6 +120,9 @@ var matches = Regex.Matches(
   archives that previously slipped through may now throw
   `InvalidDataException`
   ([dotnet/runtime #124766](https://github.com/dotnet/runtime/pull/124766)).
+- Unhandled `BackgroundService` exceptions now stop the host instead of being
+  quietly swallowed
+  ([dotnet/runtime #124863](https://github.com/dotnet/runtime/pull/124863)).
 - AIA certificate downloads are now disabled by default during server
   client-certificate validation. If you depended on online AIA fetching, review
   your validation setup
