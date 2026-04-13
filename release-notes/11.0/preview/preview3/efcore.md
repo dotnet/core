@@ -89,6 +89,13 @@ preview API has been renamed to `JsonPathExists()` for clarity
   `Microsoft.EntityFrameworkCore.Tasks` no longer depend directly on
   `Microsoft.EntityFrameworkCore.Design`
   ([dotnet/efcore #37837](https://github.com/dotnet/efcore/pull/37837)).
+- The `EFOptimizeContext` MSBuild property has been removed. If you set it in
+  your project or build pipeline, remove it and use the `EFScaffoldModelStage`
+  and `EFPrecompileQueriesStage` properties instead
+  ([dotnet/efcore #37838](https://github.com/dotnet/efcore/pull/37838)).
+- `SqlVector` properties are no longer loaded by default. Explicitly project or
+  load vector values if your application needs them
+  ([dotnet/efcore #37829](https://github.com/dotnet/efcore/pull/37829)).
 - Preview 3 updates `Microsoft.Data.SqlClient` to 7.0.0. Review the SqlClient
   release notes if you depend on provider-specific SQL Server behavior
   ([dotnet/efcore #37949](https://github.com/dotnet/efcore/pull/37949)).
