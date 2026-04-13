@@ -119,18 +119,10 @@ Preview 3 Android release notes:
 ## .NET for Android improves CLI device discovery and deploy flow
 
 `dotnet run` can now list available emulators and auto-boot a selected AVD
-before deployment, and Preview 3 also adds finer control over JNI native
-library preloading when startup order matters
-([dotnet/android #10826](https://github.com/dotnet/android/pull/10826),
-[dotnet/android #10787](https://github.com/dotnet/android/pull/10787)). These
+before deployment
+([dotnet/android #10826](https://github.com/dotnet/android/pull/10826). These
 changes make CLI-first Android development less dependent on IDE-only device
 management.
-
-```xml
-<PropertyGroup>
-  <AndroidIgnoreAllJniPreload>true</AndroidIgnoreAllJniPreload>
-</PropertyGroup>
-```
 
 ## .NET for Apple workloads improve packaging and binding quality
 
