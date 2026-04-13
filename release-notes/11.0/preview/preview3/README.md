@@ -13,6 +13,7 @@ These notes cover the highest-value changes that shipped in .NET 11 Preview 3:
 
 ## Web and data
 
+- [.NET MAUI](./dotnetmaui.md)
 - [ASP.NET Core](./aspnetcore.md)
 - [EF Core](./efcore.md)
 
@@ -42,6 +43,7 @@ Instructions on getting started with .NET 11 can be found in the
 
 You can find a broader overview of .NET 11 here:
 
+- [What's new in .NET MAUI in .NET 11](https://learn.microsoft.com/dotnet/maui/whats-new/)
 - [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview)
 - [What's new in ASP.NET Core for .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
 - [What's new in EF Core 11](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew)
