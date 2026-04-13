@@ -19,9 +19,10 @@
 `dotnet sln` can now create and edit solution filters (`.slnf`) directly from
 the CLI ([dotnet/sdk #51156](https://github.com/dotnet/sdk/pull/51156)). This
 lets large repositories load or build a subset of projects without changing the
-main solution.
+main solution. You can learn more about solution filters [in the documentation for them](https://learn.microsoft.com/visualstudio/msbuild/solution-filters)
 
 ```bash
+dotet new slnf --name MyApp.slnf
 dotnet sln MyApp.slnf add src/Lib/Lib.csproj
 dotnet sln MyApp.slnf list
 dotnet sln MyApp.slnf remove src/Lib/Lib.csproj
@@ -48,7 +49,7 @@ Console.WriteLine(Helpers.FormatOutput(new Customer()));
 line for local app runs, without requiring you to export shell state or edit
 launch profiles ([dotnet/sdk #52664](https://github.com/dotnet/sdk/pull/52664)).
 This keeps short-lived configuration overrides on the command line instead of
-in shell state or launch settings.
+in shell state or launch settings. Environment variables passed in this way will be available to MSBuild logic as `RuntimeEnvironmentVariable` Items for processing.
 
 ```bash
 dotnet run -e ASPNETCORE_ENVIRONMENT=Development -e LOG_LEVEL=Debug
@@ -88,11 +89,12 @@ Ctrl+C more gracefully for Windows desktop apps such as WinForms and WPF
 - Fixed `NETSDK1005` when `dotnet run` targets a project that references
   projects with different target frameworks
   ([dotnet/sdk #53523](https://github.com/dotnet/sdk/pull/53523)).
-
+- `dotnet workload repair` can recover from malformed/corrupted workload sets ([dotnet/sdk#52434](https://github.com/dotnet/sdk/pull/52434)).
+- the `--self-contained` option now parses its passed-in value instead of always meaning `true` ([dotnet/sdk#52333](https://github.com/dotnet/sdk/pull/52333)).
 ## Community contributors
 
 Thank you to all the community contributors who helped make this release
-possible! 💜
+possible!
 
 - [@am11](https://github.com/am11)
 - [@Hextaku](https://github.com/Hextaku)
