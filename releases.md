@@ -15,10 +15,10 @@ The following table lists supported releases.
 | [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.15][9.0.15] | November 10, 2026 |
 | [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.25][8.0.25] | November 10, 2026 |
 
-[11.0.0-preview.2]: release-notes/11.0/preview/preview2/11.0.0-preview.2.md
-[10.0.5]: release-notes/10.0/10.0.5/10.0.5.md
+[11.0.0-preview.3]: release-notes/11.0/preview/preview3/11.0.0-preview.3.md
+[10.0.5]: release-notes/10.0/10.0.6/10.0.6.md
 [9.0.15]: release-notes/9.0/9.0.15/9.0.15.md
-[8.0.25]: release-notes/8.0/8.0.25/8.0.25.md
+[8.0.26]: release-notes/8.0/8.0.26/8.0.26.md
 
 ## End-of-life releases
 
