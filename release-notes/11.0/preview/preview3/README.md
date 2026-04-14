@@ -5,6 +5,7 @@ These notes cover the highest-value changes that shipped in .NET 11 Preview 3:
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
 - [SDK](./sdk.md)
+- [Containers](./containers.md)
 
 ## Languages
 
