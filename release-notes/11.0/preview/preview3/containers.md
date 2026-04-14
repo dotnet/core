@@ -4,8 +4,8 @@ Here's a summary of what's new for .NET container images in this Preview 3 relea
 
 ## .NET container images are now signed
 
-All .NET container images now are signed with [Notary Project](https://notaryproject.dev/docs/notary-project-overview/)
-signatures. See the [image signatures documentation](https://github.com/dotnet/dotnet-docker/blob/main/documentation/image-signatures.md)
+All .NET container images now are now cryptographically signed by Microsoft according to the [Notary Project](https://notaryproject.dev/docs/notary-project-overview/)
+specification. See the [image signatures documentation](https://github.com/dotnet/dotnet-docker/blob/main/documentation/image-signatures.md)
 for the latest documentation on inspecting and verifying image signatures.
 
 Use the [Notation CLI](https://github.com/notaryproject/notation) or the
