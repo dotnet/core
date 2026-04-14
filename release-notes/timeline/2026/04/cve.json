@@ -1,0 +1,412 @@
+{
+  "last_updated": "2026-04-14",
+  "title": ".NET Security Updates for April 2026 (2026-04-14)",
+  "disclosures": [
+    {
+      "id": "CVE-2026-26171",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in EncryptedXml class where uncontrolled resource consumption can give an attacker to the ability to perform a Denial of Service attack."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-04-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-04-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/389"
+      ],
+      "weakness": "CWE-400 CWE-611",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Denial of Service"
+      }
+    },
+    {
+      "id": "CVE-2026-32203",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in EncryptedXml class where a buffer overflow can give an attacker to the ability to perform a Denial of Service attack."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-04-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-04-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/391"
+      ],
+      "weakness": "CWE-121 CWE-20",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Denial of Service"
+      }
+    },
+    {
+      "id": "CVE-2026-33116",
+      "problem": ".NET Denial of Service Vulnerability",
+      "description": [
+        "A vulnerability exists in EncryptedXml class where an attacker can cause an infinite loop and perform a Denial of Service attack."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-04-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-04-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/392"
+      ],
+      "weakness": "CWE-835 CWE-400 CWE-20",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Denial of Service"
+      }
+    },
+    {
+      "id": "CVE-2026-32178",
+      "problem": ".NET Spoofing Vulnerability",
+      "description": [
+        "A vulnerability exists in System.Net.Mail where specially crafted data allows an unauthorized attacker to perform a spoofing attack over the network."
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "HIGH"
+      },
+      "timeline": {
+        "disclosure": {
+          "date": "2026-04-14",
+          "description": "Publicly disclosed"
+        },
+        "fixed": {
+          "date": "2026-04-14",
+          "description": "Fix released"
+        }
+      },
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "references": [
+        "https://github.com/dotnet/announcements/issues/390"
+      ],
+      "weakness": "CWE-138",
+      "cna": {
+        "name": "microsoft",
+        "severity": "Important",
+        "impact": "Spoofing"
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2026-32178",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.25",
+      "fixed": "8.0.26",
+      "release": "8.0",
+      "commits": [
+        "runtime@430d284"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-32178",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.14",
+      "fixed": "9.0.15",
+      "release": "9.0",
+      "commits": [
+        "runtime@df1ae78"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-32178",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.5",
+      "fixed": "10.0.6",
+      "release": "10.0",
+      "commits": []
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2026-26171",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.2",
+      "fixed": "8.0.3",
+      "release": "8.0",
+      "commits": [
+        "runtime@1f7bd19"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-26171",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.14",
+      "fixed": "9.0.15",
+      "release": "9.0",
+      "commits": [
+        "runtime@b234b9a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-26171",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.5",
+      "fixed": "10.0.6",
+      "release": "10.0",
+      "commits": [
+        "dotnet@64cba6a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-32203",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.2",
+      "fixed": "8.0.3",
+      "release": "8.0",
+      "commits": [
+        "runtime@430d284"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-32203",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.14",
+      "fixed": "9.0.15",
+      "release": "9.0",
+      "commits": [
+        "runtime@df1ae78"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-32203",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.5",
+      "fixed": "10.0.6",
+      "release": "10.0",
+      "commits": []
+    },
+    {
+      "cve_id": "CVE-2026-33116",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.2",
+      "fixed": "8.0.3",
+      "release": "8.0",
+      "commits": [
+        "runtime@430d284"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-33116",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.14",
+      "fixed": "9.0.15",
+      "release": "9.0",
+      "commits": [
+        "runtime@df1ae78"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-33116",
+      "name": "System.Security.Cryptography.Xml",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.5",
+      "fixed": "10.0.6",
+      "release": "10.0",
+      "commits": []
+    }
+  ],
+  "commits": {
+    "runtime@1f7bd19": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "1f7bd19e9031c48011f2cd2c5531b4e0ae10d35d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/1f7bd19e9031c48011f2cd2c5531b4e0ae10d35d.diff"
+    },
+    "runtime@b234b9a": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "b234b9ae5980f21c499ae0702b098d9898ec786f",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/b234b9ae5980f21c499ae0702b098d9898ec786f.diff"
+    },
+    "dotnet@64cba6a": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "64cba6a982785ae5fe408c538374287da5dbd6a8",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/64cba6a982785ae5fe408c538374287da5dbd6a8.diff"
+    },
+    "runtime@430d284": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "430d2841eb0f523572790a331823f8147a656dd7",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/430d2841eb0f523572790a331823f8147a656dd7.diff"
+    },
+    "runtime@df1ae78": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "df1ae78bed2af9243d55e0b0e7b207dc406cafea",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/df1ae78bed2af9243d55e0b0e7b207dc406cafea.diff"
+    }
+  },
+  "product_name": {
+    "dotnet-runtime": ".NET Runtime Libraries"
+  },
+  "product_cves": {
+    "dotnet-runtime": [
+      "CVE-2026-32178"
+    ]
+  },
+  "package_cves": {
+    "System.Security.Cryptography.Xml": [
+      "CVE-2026-26171",
+      "CVE-2026-32203",
+      "CVE-2026-33116"
+    ]
+  },
+  "release_cves": {
+    "8.0": [
+      "CVE-2026-26171",
+      "CVE-2026-32178",
+      "CVE-2026-32203",
+      "CVE-2026-33116"
+    ],
+    "9.0": [
+      "CVE-2026-26171",
+      "CVE-2026-32178",
+      "CVE-2026-32203",
+      "CVE-2026-33116"
+    ],
+    "10.0": [
+      "CVE-2026-26171",
+      "CVE-2026-32178",
+      "CVE-2026-32203",
+      "CVE-2026-33116"
+    ]
+  },
+  "severity_cves": {
+    "CRITICAL": [],
+    "HIGH": [
+      "CVE-2026-26171",
+      "CVE-2026-32178",
+      "CVE-2026-32203",
+      "CVE-2026-33116"
+    ],
+    "MEDIUM": [],
+    "LOW": []
+  },
+  "cve_releases": {
+    "CVE-2026-26171": [
+      "8.0",
+      "9.0",
+      "10.0"
+    ],
+    "CVE-2026-32178": [
+      "8.0",
+      "9.0",
+      "10.0"
+    ],
+    "CVE-2026-32203": [
+      "8.0",
+      "9.0",
+      "10.0"
+    ],
+    "CVE-2026-33116": [
+      "8.0",
+      "9.0",
+      "10.0"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2026-26171": [
+      "dotnet@64cba6a",
+      "runtime@1f7bd19",
+      "runtime@b234b9a"
+    ],
+    "CVE-2026-32178": [
+      "runtime@430d284",
+      "runtime@df1ae78"
+    ],
+    "CVE-2026-32203": [
+      "runtime@430d284",
+      "runtime@df1ae78"
+    ],
+    "CVE-2026-33116": [
+      "runtime@430d284",
+      "runtime@df1ae78"
+    ]
+  }
+}
