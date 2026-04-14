@@ -10,7 +10,7 @@ The following table lists supported releases.
 
 |  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Preview | [11.0.0-preview.2][11.0.0-preview.2] | TBD |
+| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Preview | [11.0.0-preview.3][11.0.0-preview.3] | TBD |
 | [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Preview | [10.0.5][10.0.5] | November 14, 2028 |
 | [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.14][9.0.14] | November 10, 2026 |
 | [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.25][8.0.25] | November 10, 2026 |
@@ -47,4 +47,5 @@ The following table lists end-of-life releases.
 [2.0.9]: release-notes/2.0/2.0.9.md
 [1.1.13]: release-notes/1.1/1.1.13/1.1.13.md
 [1.0.16]: release-notes/1.0/1.0.16/1.0.16.md
+[11.0.0-preview.3]: release-notes/11.0/11.0.0-preview.3/11.0.0-preview.3.md
 [policies]: release-policies.md
