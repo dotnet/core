@@ -11,8 +11,6 @@ description: >
 compatibility: Requires gh CLI with permission to query and create discussions and issues across dotnet/core and dotnet/announcements.
 ---
 
-<!-- markdownlint-disable-next-line MD013 -->
-
 # Publish Release Announcements
 
 Use this skill when the release notes are already published in this repository
