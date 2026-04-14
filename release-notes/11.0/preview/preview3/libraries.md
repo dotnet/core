@@ -81,9 +81,8 @@ reduces thread-pool blocking in process-heavy apps
 using Microsoft.Win32.SafeHandles;
 using System.IO;
 
-SafeFileHandle readEnd = null!;
-SafeFileHandle writeEnd = null!;
-SafeFileHandle.CreateAnonymousPipe(ref readEnd, ref writeEnd, true, false);
+SafeFileHandle.CreateAnonymousPipe(out SafeFileHandle readEnd, out SafeFileHandle writeEnd,
+    asyncReads: true, asyncWrites: false);
 
 Console.WriteLine(readEnd.Type); // Pipe
 ```
