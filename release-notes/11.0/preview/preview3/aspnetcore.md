@@ -11,7 +11,7 @@
 ASP.NET Core updates in .NET 11:
 
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
-- [dotnet/aspnetcore #64787](https://github.com/dotnet/aspnetcore/issues/64787)
+- [Roadmap](https://github.com/dotnet/aspnetcore/issues/64787)
 
 <!-- Verified against Microsoft.AspNetCore.App.Ref@11.0.0-preview.3.26179.102 -->
 
