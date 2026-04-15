@@ -2,25 +2,25 @@
 
 .NET 10.0 is available in the package feeds of the following Linux distributions.
 
-| Distribution  | Version                              | Feed           |
-| ------------- | ------------------------------------ | -------------- |
-| Alpine        | Alpine edge                          | Built-in       |
-| Alpine        | Alpine 3.23                          | Built-in       |
-| Arch Linux    | Arch Linux (rolling)                 | Built-in, AUR  |
-| CentOS Stream | CentOS Stream 10                     | Built-in       |
-| CentOS Stream | CentOS Stream 9                      | Built-in       |
-| Fedora        | Fedora 44                            | Built-in       |
-| Fedora        | Fedora 43                            | Built-in       |
-| Fedora        | Fedora 42                            | Built-in       |
-| Homebrew      | Homebrew (rolling)                   | Built-in, Cask |
-| NixOS         | NixOS 25.11                          | Built-in       |
-| RHEL          | RHEL 10                              | Built-in       |
-| RHEL          | RHEL 9                               | Built-in       |
-| RHEL          | RHEL 8                               | Built-in       |
-| Ubuntu        | Ubuntu 26.04 LTS (Resolute Raccoon)  | Built-in       |
-| Ubuntu        | Ubuntu 25.10 (Questing Quokka)       | Built-in       |
-| Ubuntu        | Ubuntu 24.04 (Noble Numbat)          | Built-in       |
-| Ubuntu        | Ubuntu 22.04.4 LTS (Jammy Jellyfish) | Backports PPA  |
+| Distribution | Version | Feed |
+| ------------ | ------- | ---- |
+| Alpine       | Alpine edge | Built-in |
+| Alpine       | Alpine 3.23 | Built-in |
+| Arch Linux   | Arch Linux (rolling) | Built-in, AUR |
+| CentOS Stream | CentOS Stream 10 | Built-in |
+| CentOS Stream | CentOS Stream 9 | Built-in |
+| Fedora       | Fedora 44 | Built-in |
+| Fedora       | Fedora 43 | Built-in |
+| Fedora       | Fedora 42 | Built-in |
+| Homebrew     | Homebrew (rolling) | Built-in, Cask |
+| NixOS        | NixOS 25.11 | Built-in |
+| RHEL         | RHEL 10 | Built-in |
+| RHEL         | RHEL 9  | Built-in |
+| RHEL         | RHEL 8  | Built-in |
+| Ubuntu       | Ubuntu 26.04 LTS (Resolute Raccoon) | Built-in |
+| Ubuntu       | Ubuntu 25.10 (Questing Quokka) | Built-in |
+| Ubuntu       | Ubuntu 24.04 (Noble Numbat) | Built-in |
+| Ubuntu       | Ubuntu 22.04.4 LTS (Jammy Jellyfish) | Backports PPA |
 
 ## Alpine
 
