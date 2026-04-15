@@ -98,11 +98,7 @@ Omit `min_version` and `references` when null/empty.
 ```json
 {
   "channel_version": "11.0",
-  "distros": [
-    "alpine.json",
-    "azure_linux.json",
-    "ubuntu.json"
-  ]
+  "distros": ["alpine.json", "azure_linux.json", "ubuntu.json"]
 }
 ```
 
@@ -141,10 +137,8 @@ Optional fields on each release (populated by package availability queries):
   ],
   "dotnet_packages_other": {
     "backports": {
-      "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
-      "packages": [
-        { "component": "sdk", "name": "dotnet-sdk-11.0" }
-      ]
+      "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+      "packages": [{ "component": "sdk", "name": "dotnet-sdk-11.0" }]
     }
   }
 }
@@ -269,8 +263,14 @@ The output file has this structure:
           "feeds": {
             "builtin": [
               { "component_id": "sdk", "package_name": "dotnet-sdk-10.0" },
-              { "component_id": "runtime", "package_name": "dotnet-runtime-10.0" },
-              { "component_id": "aspnetcore-runtime", "package_name": "aspnetcore-runtime-10.0" }
+              {
+                "component_id": "runtime",
+                "package_name": "dotnet-runtime-10.0"
+              },
+              {
+                "component_id": "aspnetcore-runtime",
+                "package_name": "aspnetcore-runtime-10.0"
+              }
             ],
             "backports": [
               { "component_id": "sdk", "package_name": "dotnet-sdk-10.0" }
@@ -292,10 +292,10 @@ For each distro+release in the query results, match it to the corresponding per-
 
 Field mapping from query → per-distro file:
 
-| Query field | Per-distro field |
-|-------------|-----------------|
-| `component_id` | `component` |
-| `package_name` | `name` |
+| Query field    | Per-distro field |
+| -------------- | ---------------- |
+| `component_id` | `component`      |
+| `package_name` | `name`           |
 
 Every `dotnet_packages_other` entry **must** include an `install_command` — the command to register that feed before packages can be installed. See [Known alternative feed commands](#known-alternative-feed-commands) for the values to use.
 
@@ -324,7 +324,7 @@ Then `ubuntu.json` release 24.04 becomes:
   ],
   "dotnet_packages_other": {
     "backports": {
-      "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+      "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
       "packages": [
         { "component": "sdk", "name": "dotnet-sdk-10.0" }
       ]
@@ -425,10 +425,10 @@ When packages come from a non-builtin feed, the `install_command` field tells us
 Feed name: `backports`
 
 ```bash
-sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
+sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
 ```
 
-This PPA provides .NET packages for older Ubuntu LTS releases that don't carry .NET in the default archive. After registering, packages are installed with the normal `apt-get install` command.
+This PPA provides .NET packages for older Ubuntu LTS releases that don't carry .NET in the default archive. `add-apt-repository` comes from `software-properties-common`, which is often missing in containers and other minimal environments. After registering, packages are installed with the normal `apt-get install` command.
 
 ### Microsoft packages.microsoft.com (PMC)
 
@@ -459,10 +459,10 @@ If the query returns a feed name not listed above, ask the user for the registra
 
 The `name` fields (both top-level distro name and per-release names) must use full display names, **never acronyms**. These names appear in generated markdown and user-facing documentation.
 
-| ❌ Acronym | ✅ Full display name |
-|-----------|----------------------|
-| RHEL | Red Hat Enterprise Linux |
-| SLES | SUSE Linux Enterprise Server |
+| ❌ Acronym | ✅ Full display name         |
+| ---------- | ---------------------------- |
+| RHEL       | Red Hat Enterprise Linux     |
+| SLES       | SUSE Linux Enterprise Server |
 
 **Examples:**
 
