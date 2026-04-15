@@ -104,11 +104,17 @@ var status = await Permissions.RequestAsync<Permissions.PostNotifications>();
 ## .NET for Android adds Android 17 / API 37 preview support
 
 .NET for Android Preview 3 aligns with Android 17 / API 37 previews so apps can
-start validating against the upcoming platform now. Set
-`net11.0-android37` together with `EnablePreviewFeatures` to opt into the new
-target framework and platform APIs. This guidance comes from the official
-Preview 3 Android release notes:
-<https://github.com/dotnet/android/releases/tag/36.99.0-preview.3.10>.
+start validating against the upcoming platform now.
+
+We're grateful to the [Uno Platform](https://platform.uno/) team for their deep
+collaboration with the .NET MAUI team in preparation for .NET 11 Preview 3.
+Their contributions helped ensure .NET for Android is aligned with Google's
+latest platform updates, enabling developers to take advantage of Android 17
+previews and API 37 right away. This kind of partnership strengthens the .NET
+ecosystem and reflects our shared commitment to delivering high-quality,
+cross-platform developer experiences.
+
+To opt into API-37, update your `.csproj`:
 
 ```xml
 <PropertyGroup>
@@ -116,6 +122,23 @@ Preview 3 Android release notes:
   <EnablePreviewFeatures>true</EnablePreviewFeatures>
 </PropertyGroup>
 ```
+
+To install API-37 in Visual Studio, use **Tools > Android > Android SDK
+Manager > Repository > Full List**:
+
+![Visual Studio SDK Manager showing the API-37 preview option](./media/api-37-sdk-manager.png)
+
+> [!NOTE]
+> By default the SDK manager installs to
+> `C:\Program Files (x86)\Android\android-sdk\platforms\android-37.0`, which
+> .NET for Android does not automatically locate. Rename the folder to
+> `C:\Program Files (x86)\Android\android-sdk\platforms\android-37` as a
+> workaround until this is addressed in a future release.
+
+See the [API-37 HPKE Encryption Sample](https://github.com/dotnet/android-samples/tree/main/HpkeEncryption)
+for a full example calling new APIs available in Android 17. For the complete
+list of changes, see the
+[.NET for Android Preview 3 release notes](https://github.com/dotnet/android/releases/tag/36.99.0-preview.3.10).
 
 ## .NET for Android improves CLI device discovery and deploy flow
 
