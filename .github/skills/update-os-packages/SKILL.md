@@ -17,8 +17,11 @@ Audit and update `os-packages.json` files in this repository. These files declar
 
 The scope of `os-packages.json` is broader than `supported-os.json`. It includes any distro version where the package information is helpful — including pre-release versions of supported distros (e.g. Fedora 44 beta) and permanent unstable channels (Alpine edge, Debian sid).
 
+`os-packages.*` remains an active maintenance surface only for **8.0, 9.0, and 10.0**. For those versions, keep the newer `release-notes/{version}/distros/` data in sync in the same change by also following [`update-distro-packages`](../update-distro-packages/SKILL.md). For **11.0+**, use only the `distros/` scheme and do not add new `os-packages.*` entries.
+
 ## When to use
 
+- Updating Linux package metadata for **8.0, 9.0, or 10.0**
 - A new distro version is added to `supported-os.json` and needs package entries
 - A pre-release distro version is available and package info would be helpful (e.g. Fedora beta, Ubuntu interim release)
 - A package name changes between distro releases (e.g. `libicu74` → `libicu76`)
@@ -218,6 +221,9 @@ CI runs markdownlint via super-linter. If linting fails, fix the generator or Ma
 ## Key facts
 
 - The scope of `os-packages.json` is broader than `supported-os.json` — it includes pre-release and unstable versions
+- `os-packages.*` is still maintained for **8.0, 9.0, and 10.0** only
+- For **8.0-10.0**, any Linux package metadata update should keep `distros/`, `dotnet-dependencies.md`, and `dotnet-packages.md` aligned in the same change
+- For **11.0+**, update `distros/` only — do not add or revive `os-packages.*`
 - Alpine edge and Debian sid are permanent entries — they should always be present and kept up to date
 - Any pre-release version of a supported distro is OK to add (e.g. Fedora beta, Ubuntu interim)
 - Package names vary across distro versions — e.g. `libicu74` on Ubuntu 24.04 vs `libicu76` on Ubuntu 26.04

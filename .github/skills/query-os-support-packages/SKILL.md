@@ -45,6 +45,11 @@ For maintenance work, use:
 | Native dependencies, legacy schema | `release-notes/<version>/os-packages.json` | Use when the version does not have `distros/` data for that question. `os-packages.md` is a generated view. |
 | Rendered docs | `supported-os.md`, `dotnet-dependencies.md`, `dotnet-packages.md`, `os-packages.md` | Useful for quoting commands, but prefer JSON as the canonical source. |
 
+## Version-specific schema notes
+
+- **8.0, 9.0, 10.0** may have both `distros/` and `os-packages.*`. For read-only answers, prefer `distros/` for Linux dependencies and package-feed availability, but remember maintenance must keep both schemes in sync.
+- **11.0+** uses `distros/` as the Linux package metadata source; there is no companion `os-packages.*` maintenance track.
+
 ## Critical rules
 
 1. Never infer **official support** from package data.

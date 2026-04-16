@@ -1,0 +1,44 @@
+{
+  "name": "Azure Linux",
+  "install_command": "tdnf install -y {packages}",
+  "releases": [
+    {
+      "name": "Azure Linux 3.0",
+      "release": "3.0",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "krb5"
+        },
+        {
+          "id": "libc",
+          "name": "glibc"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc"
+        },
+        {
+          "id": "libicu",
+          "name": "icu"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++"
+        },
+        {
+          "id": "openssl",
+          "name": "openssl-libs"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ]
+    }
+  ]
+}

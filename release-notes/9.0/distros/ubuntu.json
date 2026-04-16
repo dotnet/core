@@ -1,0 +1,229 @@
+{
+  "name": "Ubuntu",
+  "install_command": "apt-get install -y {packages}",
+  "releases": [
+    {
+      "name": "Ubuntu 26.04 LTS (Resolute Raccoon)",
+      "release": "26.04",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu78"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl3t64"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ],
+      "dotnet_packages_other": {
+        "backports": {
+          "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+          "packages": [
+            {
+              "component": "sdk",
+              "name": "dotnet-sdk-9.0"
+            },
+            {
+              "component": "runtime",
+              "name": "dotnet-runtime-9.0"
+            },
+            {
+              "component": "aspnetcore-runtime",
+              "name": "dotnet-aspnetcore-runtime-9.0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Ubuntu 25.10 (Questing Quokka)",
+      "release": "25.10",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu76"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl3t64"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ],
+      "dotnet_packages": [
+        {
+          "component": "sdk",
+          "name": "dotnet-sdk-9.0"
+        },
+        {
+          "component": "runtime",
+          "name": "dotnet-runtime-9.0"
+        },
+        {
+          "component": "aspnetcore-runtime",
+          "name": "aspnetcore-runtime-9.0"
+        }
+      ]
+    },
+    {
+      "name": "Ubuntu 24.04 (Noble Numbat)",
+      "release": "24.04",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu74"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl3t64"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ],
+      "dotnet_packages_other": {
+        "backports": {
+          "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+          "packages": [
+            {
+              "component": "sdk",
+              "name": "dotnet-sdk-9.0"
+            },
+            {
+              "component": "runtime",
+              "name": "dotnet-runtime-9.0"
+            },
+            {
+              "component": "aspnetcore-runtime",
+              "name": "dotnet-aspnetcore-runtime-9.0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Ubuntu 22.04.4 LTS (Jammy Jellyfish)",
+      "release": "22.04",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu70"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl3"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ],
+      "dotnet_packages_other": {
+        "backports": {
+          "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+          "packages": [
+            {
+              "component": "sdk",
+              "name": "dotnet-sdk-9.0"
+            },
+            {
+              "component": "runtime",
+              "name": "dotnet-runtime-9.0"
+            },
+            {
+              "component": "aspnetcore-runtime",
+              "name": "dotnet-aspnetcore-runtime-9.0"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
