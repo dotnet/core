@@ -223,23 +223,9 @@ sudo zypper install -y \
     timezone
 ```
 
-## RHEL
+## Red Hat Enterprise Linux
 
-### RHEL 10
-
-```bash
-sudo dnf install -y \
-    ca-certificates \
-    glibc \
-    krb5-libs \
-    libgcc \
-    libicu \
-    libstdc++ \
-    openssl-libs \
-    tzdata
-```
-
-### RHEL 9
+### Red Hat Enterprise Linux 10
 
 ```bash
 sudo dnf install -y \
@@ -253,7 +239,7 @@ sudo dnf install -y \
     tzdata
 ```
 
-### RHEL 8
+### Red Hat Enterprise Linux 9
 
 ```bash
 sudo dnf install -y \
@@ -267,9 +253,23 @@ sudo dnf install -y \
     tzdata
 ```
 
-## SLES
+### Red Hat Enterprise Linux 8
 
-### SLES 16.0
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+## SUSE Linux Enterprise Server
+
+### SUSE Linux Enterprise Server 16.0
 
 ```bash
 sudo zypper install -y \
@@ -283,7 +283,7 @@ sudo zypper install -y \
     timezone
 ```
 
-### SLES 15.7
+### SUSE Linux Enterprise Server 15.7
 
 ```bash
 sudo zypper install -y \
@@ -297,7 +297,7 @@ sudo zypper install -y \
     timezone
 ```
 
-### SLES 15.6
+### SUSE Linux Enterprise Server 15.6
 
 ```bash
 sudo zypper install -y \
@@ -322,7 +322,7 @@ sudo apt-get install -y \
     libc6 \
     libgcc-s1 \
     libgssapi-krb5-2 \
-    libicu76 \
+    libicu78 \
     libssl3t64 \
     libstdc++6 \
     tzdata

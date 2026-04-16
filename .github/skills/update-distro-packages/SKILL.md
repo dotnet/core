@@ -5,7 +5,8 @@ description: >
   that document .NET runtime dependencies and package availability for each
   Linux distribution. USE FOR: setting up distros/ for a new .NET version,
   updating dependency package names when distro versions change, auditing
-  package data. DO NOT USE FOR: supported-os.json changes (use
+  package data. DO NOT USE FOR: read-only support/package questions (use
+  query-os-support-packages skill), supported-os.json changes (use
   update-supported-os skill), os-packages.json (legacy format).
 ---
 

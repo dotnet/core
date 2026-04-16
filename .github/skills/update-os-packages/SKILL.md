@@ -5,8 +5,9 @@ description: >
   packages for each .NET release. Uses the release-notes tool to verify
   package names against distro archives and regenerate markdown. USE FOR:
   adding packages for new distro versions, fixing incorrect package names,
-  periodic package audits. DO NOT USE FOR: supported-os.json changes (use
-  update-supported-os skill), editing os-packages.md directly (it is
+  periodic package audits. DO NOT USE FOR: read-only support/package
+  questions (use query-os-support-packages skill), supported-os.json changes
+  (use update-supported-os skill), editing os-packages.md directly (it is
   generated from JSON).
 ---
 
