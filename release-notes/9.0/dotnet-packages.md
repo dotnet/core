@@ -142,7 +142,7 @@ sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
-    dotnet-aspnetcore-runtime-9.0 \
+    aspnetcore-runtime-9.0 \
     dotnet-runtime-9.0 \
     dotnet-sdk-9.0
 ```
@@ -170,7 +170,7 @@ sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
-    dotnet-aspnetcore-runtime-9.0 \
+    aspnetcore-runtime-9.0 \
     dotnet-runtime-9.0 \
     dotnet-sdk-9.0
 ```
@@ -188,7 +188,7 @@ sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
-    dotnet-aspnetcore-runtime-9.0 \
+    aspnetcore-runtime-9.0 \
     dotnet-runtime-9.0 \
     dotnet-sdk-9.0
 ```

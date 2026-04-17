@@ -41,7 +41,7 @@ For maintenance work, use:
 | --- | --- | --- |
 | Official OS support | `release-notes/<version>/supported-os.json` | The only authoritative source for whether a .NET version officially supports an OS or distro release. |
 | Native dependencies, newer schema | `release-notes/<version>/distros/<distro>.json` | Use `releases[].dependencies`. `dotnet-dependencies.md` is a generated view of this data. |
-| Package feed availability, newer schema | `release-notes/<version>/distros/<distro>.json` | Use `dotnet_packages` and `dotnet_packages_other`. `dotnet-packages.md` is a generated view of this data. |
+| Package feed availability, newer schema | `release-notes/<version>/distros/<distro>.json` | Use `dotnet_packages` for the base/built-in distro feed and `dotnet_packages_other` for additional feed-registration options. `dotnet-packages.md` is a generated view of this data. |
 | Native dependencies, legacy schema | `release-notes/<version>/os-packages.json` | Use when the version does not have `distros/` data for that question. `os-packages.md` is a generated view. |
 | Rendered docs | `supported-os.md`, `dotnet-dependencies.md`, `dotnet-packages.md`, `os-packages.md` | Useful for quoting commands, but prefer JSON as the canonical source. |
 
@@ -83,7 +83,7 @@ For Linux distro package-manager questions (`apt`, `dnf`, `zypper`, and so on):
 1. Prefer `release-notes/<version>/distros/<distro>.json`.
 2. Find the matching release in `releases[]`.
 3. Use:
-   - `dotnet_packages` for built-in distro feeds
+   - `dotnet_packages` for the base distro feed; treat this as built-in package availability
    - `dotnet_packages_other` for alternative feeds that require a registration step
 4. If those fields are absent, the repo may not document package-feed availability for that version or release. Do not infer "not available" from absence alone.
 
@@ -103,11 +103,60 @@ A distro release can appear in package metadata without being officially support
 
 ### Built-in vs alternative feeds
 
-`dotnet_packages` means the packages are available from the distro's normal package feeds. `dotnet_packages_other` means an extra feed-registration step is required before installation.
+`dotnet_packages` means the packages are available from the distro's base or normal package feeds; treat that as built-in availability. `dotnet_packages_other` means an extra feed-registration step is required before installation.
 
 ### Dependencies vs .NET packages
 
 Native dependencies are OS packages like `libicu`, `libssl`, `libstdc++`, and `tzdata`. They are separate from `.NET` packages like `dotnet-sdk-10.0` or `aspnetcore-runtime-10.0`.
+
+## Automation hints
+
+Do not add a checked-in helper script just to answer a read-only question. If ad hoc automation helps, write a one-off `jq`, Python, or shell snippet locally and discard it after use.
+
+### Canonical join keys
+
+- **Version**: the `release-notes/<version>/` directory name, such as `8.0`, `9.0`, or `10.0`
+- **Distro**: the distro file name and distribution `id`, such as `ubuntu`, `fedora`, or `rhel`
+- **Distro release**: the release string, such as `26.04`, `24.04`, or `9`
+
+### Canonical JSON paths
+
+- Official support:
+  - `families[]`
+  - `families[].distributions[]`
+  - distro match: `.id == "<distro>"`
+  - status fields: `.supported-versions[]` and `.unsupported-versions[]`
+- Newer package/dependency schema:
+  - `releases[]`
+  - release match: `.release == "<distro-release>"`
+  - dependencies: `.dependencies[]`
+  - built-in/base feed packages: `.dotnet_packages[]`
+  - extra-feed options: `.dotnet_packages_other`
+- Legacy dependency schema:
+  - use the matching distro and release entry in `os-packages.json`
+  - package list comes from that release's `packages[]`
+
+### Minimal extraction recipe
+
+1. Enumerate candidate versions from `release-notes/*/supported-os.json`.
+2. For current supported Linux versions, prefer the subset that also has `release-notes/<version>/distros/<distro>.json`.
+3. In each `supported-os.json`, find the distro entry and test whether the requested distro release is in `supported-versions` or `unsupported-versions`.
+4. In each `distros/<distro>.json`, find `releases[] | select(.release == "<distro-release>")`.
+5. Read:
+   - `.dotnet_packages` as built-in/base-feed availability
+   - `.dotnet_packages_other` as additional feed-registration options
+   - `.dependencies` for manual-install or self-contained native requirements
+6. If the distro release is missing from `distros/<distro>.json`, say the repo does not document package-feed availability or dependencies for that version/release instead of inferring absence.
+
+### Good ad hoc output shape
+
+For multi-version questions, script toward a compact row per version:
+
+- version
+- support status
+- built-in packages
+- extra-feed packages and registration command
+- dependency package names
 
 ## Output guidance
 
