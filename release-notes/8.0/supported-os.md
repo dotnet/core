@@ -1,6 +1,6 @@
 # .NET 8.0 - Supported OS versions
 
-Last Updated: 2026/04/06; Support phase: Active
+Last Updated: 2026/04/17; Support phase: Active
 
 [.NET 8.0](README.md) is an [LTS](../../release-policies.md) release and [is supported](../../support.md) on multiple operating systems per their lifecycle policy.
 
@@ -32,17 +32,17 @@ Notes:
 
 ## Linux
 
-| OS                             | Versions               | Architectures              | Lifecycle       |
-| ------------------------------ | ---------------------- | -------------------------- | --------------- |
-| [Alpine][6]                    | 3.23, 3.22, 3.21, 3.20 | Arm32, Arm64, x64          | [Lifecycle][7]  |
-| [Azure Linux][8]               | 3.0                    | Arm64, x64                 | None            |
-| [CentOS Stream][9]             | 10, 9                  | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
-| [Debian][11]                   | 13, 12                 | Arm32, Arm64, x64          | [Lifecycle][12] |
-| [Fedora][13]                   | 43, 42                 | Arm32, Arm64, x64          | [Lifecycle][14] |
-| [openSUSE Leap][15]            | 16.0, 15.6             | Arm64, x64                 | [Lifecycle][16] |
-| [Red Hat Enterprise Linux][17] | 10, 9, 8               | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Linux Enterprise][19]    | 16.0, 15.7             | Arm64, x64                 | [Lifecycle][20] |
-| [Ubuntu][21]                   | 25.10, 24.04, 22.04    | Arm32, Arm64, x64          | [Lifecycle][22] |
+| OS                             | Versions                   | Architectures              | Lifecycle       |
+| ------------------------------ | -------------------------- | -------------------------- | --------------- |
+| [Alpine][6]                    | 3.23, 3.22, 3.21           | Arm32, Arm64, x64          | [Lifecycle][7]  |
+| [Azure Linux][8]               | 3.0                        | Arm64, x64                 | None            |
+| [CentOS Stream][9]             | 10, 9                      | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
+| [Debian][11]                   | 13, 12                     | Arm32, Arm64, x64          | [Lifecycle][12] |
+| [Fedora][13]                   | 43, 42                     | Arm32, Arm64, x64          | [Lifecycle][14] |
+| [openSUSE Leap][15]            | 16.0, 15.6                 | Arm64, x64                 | [Lifecycle][16] |
+| [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Linux Enterprise][19]    | 16.0, 15.7                 | Arm64, x64                 | [Lifecycle][20] |
+| [Ubuntu][21]                   | 26.04, 25.10, 24.04, 22.04 | Arm32, Arm64, x64          | [Lifecycle][22] |
 
 Notes:
 
@@ -114,12 +114,13 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 
 | OS                    | Version     | End of Life   |
 | --------------------- | ----------- | ------------- |
+| Alpine                | 3.20        | [2026-04-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)    |
 | Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)    |
 | Alpine                | 3.18        | [2025-05-09](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)    |
 | Alpine                | 3.17        | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)    |
 | Alpine                | 3.16        | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html)            |
 | Android               | 13          | 2026-03-02    |
-| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L/summary)                        |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L)                                |
 | Android               | 12          | 2025-03-03    |
 | Android               | 11          | 2024-02-05    |
 | Debian                | 11          | [2024-08-14](https://lists.debian.org/debian-release/2024/06/msg00700.html)                      |
