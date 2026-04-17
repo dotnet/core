@@ -47,23 +47,24 @@ For maintenance work, use:
 
 ## Version-specific schema notes
 
-- **8.0, 9.0, 10.0** may have both `distros/` and `os-packages.*`. For read-only answers, prefer `distros/` for Linux dependencies and package-feed availability, but remember maintenance must keep both schemes in sync.
-- **11.0+** uses `distros/` as the Linux package metadata source; there is no companion `os-packages.*` maintenance track.
+- **Supported .NET versions** use a uniform pattern: `supported-os.json` for official support and `distros/<distro>.json` for Linux package-feed availability and native dependencies.
+- **Older .NET versions** may have `supported-os.json` plus legacy `os-packages.json`. That legacy file documents native dependencies only; it does **not** document `.NET` package-feed availability.
 
 ## Critical rules
 
 1. Never infer **official support** from package data.
-2. Never infer **package availability** from `supported-os.json`.
-3. Never infer **package availability** from `os-packages.json`. That file documents native dependencies, not which `.NET` packages a distro feed carries.
-4. If the repo does not document package-feed availability for a version, say that plainly instead of claiming the packages are unavailable.
-5. If a question spans versions that use different schemas, answer each version separately and state which source was used.
-6. When the user asks both support and installation questions, split the answer into **Support**, **Packages**, and **Dependencies**.
+2. Never infer **package availability** from `supported-os.json` or `os-packages.json`.
+3. If the repo does not document package-feed availability for a version or release, say that plainly instead of claiming the packages are unavailable.
+4. Quote package names exactly as documented.
+5. When the user asks both support and installation questions, split the answer into **Support**, **Packages**, and **Dependencies**.
 
 ## Process
 
 ### 1. Identify versions in scope
 
-If the user asks "which versions", check the active release directories that could reasonably apply. For package questions, only versions with relevant package metadata can be answered authoritatively from this repo.
+For Linux distro questions about supported .NET versions, start with versions that have both `supported-os.json` and `distros/<distro>.json`. That is the default, richest query set. Only fall back to older versions that use `os-packages.json` when the user explicitly asks about older or out-of-support versions, or when the question is dependency-only.
+
+If discovery or text search looks wrong, open representative JSON files directly before concluding the data is absent.
 
 ### 2. Determine official support
 
@@ -79,7 +80,7 @@ Treat that result as authoritative for support status.
 
 For Linux distro package-manager questions (`apt`, `dnf`, `zypper`, and so on):
 
-1. Prefer `release-notes/<version>/distros/<distro>.json` when it exists.
+1. Prefer `release-notes/<version>/distros/<distro>.json`.
 2. Find the matching release in `releases[]`.
 3. Use:
    - `dotnet_packages` for built-in distro feeds
@@ -108,22 +109,18 @@ A distro release can appear in package metadata without being officially support
 
 Native dependencies are OS packages like `libicu`, `libssl`, `libstdc++`, and `tzdata`. They are separate from `.NET` packages like `dotnet-sdk-10.0` or `aspnetcore-runtime-10.0`.
 
-### Linux vs non-Linux
-
-Package and dependency questions are mainly Linux-specific in this repo. For Windows and macOS, `supported-os.json` is usually the only relevant source.
-
 ## Output guidance
 
 - Lead with the support answer.
-- Then list package-feed availability, if documented.
+- Then list package-feed availability, distinguishing built-in feeds from extra-feed cases.
 - Then list native dependencies for manual or self-contained scenarios.
+- For multi-version Linux questions, prefer a table. If dependencies are identical across versions, list them once.
 - Call out uncertainty explicitly when the repo has incomplete data for a version.
 
 ## Example framing
 
 For a question like "I'm using Ubuntu 26.04. Which .NET versions are supported, which can I install via `apt`, and what dependencies are required for manual install?":
 
-1. Use each version's `supported-os.json` for support.
-2. Use `distros/ubuntu.json` for package-feed availability when that file exists.
-3. Use `distros/ubuntu.json` or `os-packages.json` for native dependencies.
-4. Present support, packages, and dependencies as separate answers so the user can see where the results differ.
+1. Start with supported versions that have both `supported-os.json` and `distros/ubuntu.json`.
+2. Use `supported-os.json` for support, `distros/ubuntu.json` for package-feed availability, and `distros/ubuntu.json` for dependencies.
+3. Only use `os-packages.json` for older dependency-only fallback cases.
