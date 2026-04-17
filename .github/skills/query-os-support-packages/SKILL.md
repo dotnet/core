@@ -65,7 +65,7 @@ For maintenance work, use:
 
 For Linux distro questions about supported .NET versions, start with versions that have both `supported-os.json` and `distros/<distro>.json`. That is the default, richest query set. Only fall back to older versions that use `os-packages.json` when the user explicitly asks about older or out-of-support versions, or when the question is dependency-only.
 
-Because the current supported versions share the same file layout and keys, prefer direct file reads over broad repo-wide text search. Use discovery only to enumerate candidate version directories if you do not already know them; once you have that list, read the matching JSON files directly.
+Because the current supported versions share the same file layout and keys, prefer direct JSON extraction over broad repo-wide text search. Use discovery only to enumerate candidate version directories if you do not already know them; once you have that list, read or script against the matching JSON files directly.
 
 If discovery or text search looks wrong, open representative JSON files directly before concluding the data is absent.
 
@@ -116,7 +116,7 @@ Native dependencies are OS packages like `libicu`, `libssl`, `libstdc++`, and `t
 
 ## Automation hints
 
-Do not add a checked-in helper script just to answer a read-only question. If ad hoc automation helps, write a one-off `jq`, Python, or shell snippet locally and discard it after use.
+Do not add a checked-in helper script just to answer a read-only question. If ad hoc automation helps, write a one-off `jq`, `python3`, or shell snippet locally and discard it after use. Prefer JSON-oriented extraction over `rg`/`grep` when you already know which files and fields you need.
 
 ### Canonical join keys
 
@@ -152,7 +152,8 @@ Do not add a checked-in helper script just to answer a read-only question. If ad
    - `.dotnet_packages` as built-in/base-feed availability
    - `.dotnet_packages_other` as additional feed-registration options
    - `.dependencies` for manual-install or self-contained native requirements
-7. If the distro release is missing from `distros/<distro>.json`, say the repo does not document package-feed availability or dependencies for that version/release instead of inferring absence.
+7. Prefer a single ad hoc `jq` or `python3` extraction pass over those JSON files instead of repeating `rg`/`grep` queries against known paths.
+8. If the distro release is missing from `distros/<distro>.json`, say the repo does not document package-feed availability or dependencies for that version/release instead of inferring absence.
 
 ### Good ad hoc output shape
 
