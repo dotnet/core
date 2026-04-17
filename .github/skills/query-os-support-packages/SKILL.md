@@ -17,23 +17,11 @@ and Linux package metadata without changing any files.
 
 ## When to use
 
-- "Which .NET versions support Ubuntu 26.04?"
+- "Which .NET versions support Ubuntu RHEL 10?"
 - "Which .NET versions can I install via `apt` on Ubuntu 26.04?"
 - "What dependencies are required if I install .NET manually?"
 - "What native packages are still required for a self-contained deployment?"
 - "Is this distro supported, installable, both, or neither?"
-
-## Do not use
-
-- Updating `supported-os.json` / `supported-os.md`
-- Updating `os-packages.json` / `os-packages.md`
-- Updating `release-notes/{version}/distros/`
-
-For maintenance work, use:
-
-- [`update-supported-os`](../update-supported-os/SKILL.md)
-- [`update-os-packages`](../update-os-packages/SKILL.md)
-- [`update-distro-packages`](../update-distro-packages/SKILL.md)
 
 ## Source precedence
 
@@ -45,18 +33,19 @@ For maintenance work, use:
 | Native dependencies, legacy schema | `release-notes/<version>/os-packages.json` | Use when the version does not have `distros/` data for that question. `os-packages.md` is a generated view. |
 | Rendered docs | `supported-os.md`, `dotnet-dependencies.md`, `dotnet-packages.md`, `os-packages.md` | Useful for quoting commands, but prefer JSON as the canonical source. |
 
-## Version-specific schema notes
+## Schema notes
 
-- **Supported .NET versions** use a uniform pattern: `supported-os.json` for official support and `distros/<distro>.json` for Linux package-feed availability and native dependencies.
-- Because that layout is uniform, many queries can be answered by reading the same small set of JSON fields across versions instead of doing broad discovery or repeated text search.
-- **Older .NET versions** may have `supported-os.json` plus legacy `os-packages.json`. That legacy file documents native dependencies only; it does **not** document `.NET` package-feed availability.
+Currently supported .NET versions share a uniform layout (`supported-os.json` + `distros/<distro>.json`), so most queries reduce to reading the same fields across versions. Older versions may only have `supported-os.json` + legacy `os-packages.json`, which documents native dependencies but **not** package-feed availability.
 
 ## Critical rules
 
 1. Never infer **official support** from package data.
 2. Never infer **package availability** from `supported-os.json` or `os-packages.json`.
-3. Do not reason from preview/GA status when answering support or package questions; use the documented JSON fields only.
-4. If the repo does not document package-feed availability for a version or release, say that plainly instead of claiming the packages are unavailable.
+3. Do not substitute preview/GA status for the documented JSON fields when those fields have a value. Preview/GA status is only a tiebreaker for interpreting null fields (see rule #4).
+4. When `dotnet_packages` and `dotnet_packages_other` are both null, distinguish three cases by cross-checking `releases-index.json` for the channel's `support-phase`:
+   - **Preview** channel: report as **not yet available** — packages may land before GA.
+   - **Active** (or other GA) channel with current `distros/<distro>.json` data: report as **not available** from the distro package manager.
+   - **No `distros/<distro>.json` for that version, or the file predates the distro release**: report as **not documented**.
 5. Quote package names exactly as documented.
 6. When the user asks both support and installation questions, split the answer into **Support**, **Packages**, and **Dependencies**.
 
@@ -106,7 +95,7 @@ For each version:
 2. Find the distro or OS entry.
 3. Check whether the requested release appears in `supported-versions` or `unsupported-versions`.
 
-Treat that result as authoritative for support status.
+Treat that result as authoritative for support status. The absense of a version means "unsupported".
 
 ### 5. Determine package-feed availability
 
@@ -117,7 +106,7 @@ For Linux distro package-manager questions (`apt`, `dnf`, `zypper`, and so on):
 3. Use:
    - `dotnet_packages` for the base distro feed; treat this as built-in package availability
    - `dotnet_packages_other` for alternative feeds that require a registration step
-4. If those fields are absent, the repo may not document package-feed availability for that version or release. Do not infer "not available" from absence alone.
+4. If both fields are null, apply rule #4 in [Critical rules](#critical-rules): use `releases-index.json` `support-phase` to choose between **not yet available** (preview), **not available** (active GA), or **not documented** (stale or missing schema).
 
 ### 6. Determine native dependencies
 
@@ -170,30 +159,10 @@ Prefer JSON-oriented extraction over `rg`/`grep` when you already know which fil
   - use the matching distro and release entry in `os-packages.json`
   - package list comes from that release's `packages[]`
 
-### Generic extraction recipe
+### Extraction tips
 
-1. Normalize the request into:
-   - version scope
-   - distro id
-   - distro release, if any
-   - requested facets: support, packages, dependencies
-2. Resolve the minimum version set:
-   - if the user named a version, use it
-   - otherwise enumerate candidate versions once
-3. Resolve the minimum file set from the requested facets.
-4. Run one ad hoc `jq` or `python3` pass across those files and emit one compact row or object per version.
-5. Stop as soon as all requested facets are answered.
-6. If a needed field or distro release entry is absent, report that facet as **not documented** rather than inferring absence.
-
-### Good ad hoc output shape
-
-For multi-version questions, script toward a compact row per version, but only include the fields the user asked for:
-
-- version
-- support status
-- built-in packages
-- extra-feed packages and registration command
-- dependency package names
+- Run one structured `jq` or `python3` pass across the resolved file set; emit one compact row per version with only the fields the user asked for (support, built-in packages, extra-feed packages, dependencies).
+- Stop as soon as all requested facets are answered — do not collect a superset "just in case."
 
 ## Output guidance
 
@@ -204,11 +173,3 @@ For multi-version questions, script toward a compact row per version, but only i
 - For single-version or single-facet questions, prefer a short direct answer over a full table.
 - Call out uncertainty explicitly when the repo has incomplete data for a version.
 
-## Example framing
-
-For a combined Linux distro query:
-
-1. Resolve whether the user asked about one version or many.
-2. Use `supported-os.json` for support.
-3. Use `distros/<distro>.json` for package-feed availability and dependencies when that schema exists.
-4. Only use `os-packages.json` for older dependency-only fallback cases.
