@@ -55,9 +55,10 @@ For maintenance work, use:
 
 1. Never infer **official support** from package data.
 2. Never infer **package availability** from `supported-os.json` or `os-packages.json`.
-3. If the repo does not document package-feed availability for a version or release, say that plainly instead of claiming the packages are unavailable.
-4. Quote package names exactly as documented.
-5. When the user asks both support and installation questions, split the answer into **Support**, **Packages**, and **Dependencies**.
+3. Do not reason from preview/GA status when answering support or package questions; use the documented JSON fields only.
+4. If the repo does not document package-feed availability for a version or release, say that plainly instead of claiming the packages are unavailable.
+5. Quote package names exactly as documented.
+6. When the user asks both support and installation questions, split the answer into **Support**, **Packages**, and **Dependencies**.
 
 ## Process
 
