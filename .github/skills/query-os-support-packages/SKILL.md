@@ -48,7 +48,7 @@ For maintenance work, use:
 ## Version-specific schema notes
 
 - **Supported .NET versions** use a uniform pattern: `supported-os.json` for official support and `distros/<distro>.json` for Linux package-feed availability and native dependencies.
-- Because that supported-version layout is uniform, **support-only** queries should usually be answered with a direct pass over the relevant `supported-os.json` files instead of broad text discovery. Enumerate the current version directories once, then read the same distro entry from each file.
+- Because that layout is uniform, many queries can be answered by reading the same small set of JSON fields across versions instead of doing broad discovery or repeated text search.
 - **Older .NET versions** may have `supported-os.json` plus legacy `os-packages.json`. That legacy file documents native dependencies only; it does **not** document `.NET` package-feed availability.
 
 ## Critical rules
@@ -61,7 +61,33 @@ For maintenance work, use:
 
 ## Process
 
-### 1. Identify versions in scope
+### 1. Classify the query
+
+Before reading anything, identify the minimum data needed:
+
+- **Support only**
+- **Package-feed availability only**
+- **Native dependencies only**
+- **Combined** support/package/dependency question
+
+Also identify the requested scope:
+
+- a **specific .NET version**
+- a **set of versions** named by the user
+- the **current supported versions** for a distro or distro release
+
+Do not collect package or dependency data for support-only questions, and do not scan every version when the user named one.
+
+### 2. Select the smallest authoritative file set
+
+- **Support** -> `release-notes/<version>/supported-os.json`
+- **Package feeds** for supported Linux versions -> `release-notes/<version>/distros/<distro>.json`
+- **Dependencies** for supported Linux versions -> `release-notes/<version>/distros/<distro>.json`
+- **Dependencies** for older versions without `distros/` data -> `release-notes/<version>/os-packages.json`
+
+If the user named a single version, go straight to that version's files. Enumerate versions only when the scope is broad or unspecified.
+
+### 3. Identify versions in scope
 
 For Linux distro questions about supported .NET versions, start with versions that have both `supported-os.json` and `distros/<distro>.json`. That is the default, richest query set. Only fall back to older versions that use `os-packages.json` when the user explicitly asks about older or out-of-support versions, or when the question is dependency-only.
 
@@ -69,7 +95,7 @@ Because the current supported versions share the same file layout and keys, pref
 
 If discovery or text search looks wrong, open representative JSON files directly before concluding the data is absent.
 
-### 2. Determine official support
+### 4. Determine official support
 
 For support-only questions, this is the fast path: read the distro entry from each `release-notes/<version>/supported-os.json` and stop there unless the user also asked about package feeds or dependencies.
 
@@ -81,7 +107,7 @@ For each version:
 
 Treat that result as authoritative for support status.
 
-### 3. Determine package-feed availability
+### 5. Determine package-feed availability
 
 For Linux distro package-manager questions (`apt`, `dnf`, `zypper`, and so on):
 
@@ -92,7 +118,7 @@ For Linux distro package-manager questions (`apt`, `dnf`, `zypper`, and so on):
    - `dotnet_packages_other` for alternative feeds that require a registration step
 4. If those fields are absent, the repo may not document package-feed availability for that version or release. Do not infer "not available" from absence alone.
 
-### 4. Determine native dependencies
+### 6. Determine native dependencies
 
 For manual installs or self-contained deployments:
 
@@ -116,7 +142,9 @@ Native dependencies are OS packages like `libicu`, `libssl`, `libstdc++`, and `t
 
 ## Automation hints
 
-Do not add a checked-in helper script just to answer a read-only question. If ad hoc automation helps, write a one-off `jq`, `python3`, or shell snippet locally and discard it after use. Prefer JSON-oriented extraction over `rg`/`grep` when you already know which files and fields you need.
+Do not add a checked-in helper script just to answer a read-only question. If ad hoc automation helps, write a one-off `jq`, `python3`, or shell snippet locally and discard it after use.
+
+Prefer JSON-oriented extraction over `rg`/`grep` when you already know which files and fields you need. Favor a single structured pass that emits only the columns needed for the question rather than collecting a superset "just in case."
 
 ### Canonical join keys
 
@@ -141,23 +169,24 @@ Do not add a checked-in helper script just to answer a read-only question. If ad
   - use the matching distro and release entry in `os-packages.json`
   - package list comes from that release's `packages[]`
 
-### Minimal extraction recipe
+### Generic extraction recipe
 
-1. Enumerate candidate versions from `release-notes/*/supported-os.json` once.
-2. For current supported Linux versions, prefer the subset that also has `release-notes/<version>/distros/<distro>.json`.
-3. For support-only questions, stop after step 3 unless the user also asked about packages or dependencies.
-4. In each `supported-os.json`, find the distro entry and test whether the requested distro release is in `supported-versions` or `unsupported-versions`.
-5. In each `distros/<distro>.json`, find `releases[] | select(.release == "<distro-release>")`.
-6. Read:
-   - `.dotnet_packages` as built-in/base-feed availability
-   - `.dotnet_packages_other` as additional feed-registration options
-   - `.dependencies` for manual-install or self-contained native requirements
-7. Prefer a single ad hoc `jq` or `python3` extraction pass over those JSON files instead of repeating `rg`/`grep` queries against known paths.
-8. If the distro release is missing from `distros/<distro>.json`, say the repo does not document package-feed availability or dependencies for that version/release instead of inferring absence.
+1. Normalize the request into:
+   - version scope
+   - distro id
+   - distro release, if any
+   - requested facets: support, packages, dependencies
+2. Resolve the minimum version set:
+   - if the user named a version, use it
+   - otherwise enumerate candidate versions once
+3. Resolve the minimum file set from the requested facets.
+4. Run one ad hoc `jq` or `python3` pass across those files and emit one compact row or object per version.
+5. Stop as soon as all requested facets are answered.
+6. If a needed field or distro release entry is absent, report that facet as **not documented** rather than inferring absence.
 
 ### Good ad hoc output shape
 
-For multi-version questions, script toward a compact row per version:
+For multi-version questions, script toward a compact row per version, but only include the fields the user asked for:
 
 - version
 - support status
@@ -171,12 +200,14 @@ For multi-version questions, script toward a compact row per version:
 - Then list package-feed availability, distinguishing built-in feeds from extra-feed cases.
 - Then list native dependencies for manual or self-contained scenarios.
 - For multi-version Linux questions, prefer a table. If dependencies are identical across versions, list them once.
+- For single-version or single-facet questions, prefer a short direct answer over a full table.
 - Call out uncertainty explicitly when the repo has incomplete data for a version.
 
 ## Example framing
 
-For a question like "I'm using Ubuntu 26.04. Which .NET versions are supported, which can I install via `apt`, and what dependencies are required for manual install?":
+For a combined Linux distro query:
 
-1. Start with supported versions that have both `supported-os.json` and `distros/ubuntu.json`.
-2. Use `supported-os.json` for support, `distros/ubuntu.json` for package-feed availability, and `distros/ubuntu.json` for dependencies.
-3. Only use `os-packages.json` for older dependency-only fallback cases.
+1. Resolve whether the user asked about one version or many.
+2. Use `supported-os.json` for support.
+3. Use `distros/<distro>.json` for package-feed availability and dependencies when that schema exists.
+4. Only use `os-packages.json` for older dependency-only fallback cases.
