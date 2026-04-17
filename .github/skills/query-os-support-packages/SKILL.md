@@ -48,6 +48,7 @@ For maintenance work, use:
 ## Version-specific schema notes
 
 - **Supported .NET versions** use a uniform pattern: `supported-os.json` for official support and `distros/<distro>.json` for Linux package-feed availability and native dependencies.
+- Because that supported-version layout is uniform, **support-only** queries should usually be answered with a direct pass over the relevant `supported-os.json` files instead of broad text discovery. Enumerate the current version directories once, then read the same distro entry from each file.
 - **Older .NET versions** may have `supported-os.json` plus legacy `os-packages.json`. That legacy file documents native dependencies only; it does **not** document `.NET` package-feed availability.
 
 ## Critical rules
@@ -64,9 +65,13 @@ For maintenance work, use:
 
 For Linux distro questions about supported .NET versions, start with versions that have both `supported-os.json` and `distros/<distro>.json`. That is the default, richest query set. Only fall back to older versions that use `os-packages.json` when the user explicitly asks about older or out-of-support versions, or when the question is dependency-only.
 
+Because the current supported versions share the same file layout and keys, prefer direct file reads over broad repo-wide text search. Use discovery only to enumerate candidate version directories if you do not already know them; once you have that list, read the matching JSON files directly.
+
 If discovery or text search looks wrong, open representative JSON files directly before concluding the data is absent.
 
 ### 2. Determine official support
+
+For support-only questions, this is the fast path: read the distro entry from each `release-notes/<version>/supported-os.json` and stop there unless the user also asked about package feeds or dependencies.
 
 For each version:
 
@@ -138,15 +143,16 @@ Do not add a checked-in helper script just to answer a read-only question. If ad
 
 ### Minimal extraction recipe
 
-1. Enumerate candidate versions from `release-notes/*/supported-os.json`.
+1. Enumerate candidate versions from `release-notes/*/supported-os.json` once.
 2. For current supported Linux versions, prefer the subset that also has `release-notes/<version>/distros/<distro>.json`.
-3. In each `supported-os.json`, find the distro entry and test whether the requested distro release is in `supported-versions` or `unsupported-versions`.
-4. In each `distros/<distro>.json`, find `releases[] | select(.release == "<distro-release>")`.
-5. Read:
+3. For support-only questions, stop after step 3 unless the user also asked about packages or dependencies.
+4. In each `supported-os.json`, find the distro entry and test whether the requested distro release is in `supported-versions` or `unsupported-versions`.
+5. In each `distros/<distro>.json`, find `releases[] | select(.release == "<distro-release>")`.
+6. Read:
    - `.dotnet_packages` as built-in/base-feed availability
    - `.dotnet_packages_other` as additional feed-registration options
    - `.dependencies` for manual-install or self-contained native requirements
-6. If the distro release is missing from `distros/<distro>.json`, say the repo does not document package-feed availability or dependencies for that version/release instead of inferring absence.
+7. If the distro release is missing from `distros/<distro>.json`, say the repo does not document package-feed availability or dependencies for that version/release instead of inferring absence.
 
 ### Good ad hoc output shape
 
