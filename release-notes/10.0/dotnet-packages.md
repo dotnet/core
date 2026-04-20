@@ -218,7 +218,7 @@ sudo apt-get install -y \
 Register the feed:
 
 ```bash
-sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
+sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
 ```
 
 ```bash

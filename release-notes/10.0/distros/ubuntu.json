@@ -211,7 +211,7 @@
               "name": "dotnet-aspnetcore-runtime-10.0"
             }
           ],
-          "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update"
+          "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update"
         }
       }
     }

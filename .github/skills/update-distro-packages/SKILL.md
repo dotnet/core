@@ -141,7 +141,7 @@ Optional fields on each release (populated by package availability queries):
   ],
   "dotnet_packages_other": {
     "backports": {
-      "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+      "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
       "packages": [
         { "component": "sdk", "name": "dotnet-sdk-11.0" }
       ]
@@ -324,7 +324,7 @@ Then `ubuntu.json` release 24.04 becomes:
   ],
   "dotnet_packages_other": {
     "backports": {
-      "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+      "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
       "packages": [
         { "component": "sdk", "name": "dotnet-sdk-10.0" }
       ]
@@ -425,10 +425,10 @@ When packages come from a non-builtin feed, the `install_command` field tells us
 Feed name: `backports`
 
 ```bash
-sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
+sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update
 ```
 
-This PPA provides .NET packages for older Ubuntu LTS releases that don't carry .NET in the default archive. After registering, packages are installed with the normal `apt-get install` command.
+This PPA provides .NET packages for older Ubuntu LTS releases that don't carry .NET in the default archive. `add-apt-repository` comes from `software-properties-common`, which is often missing in containers and other minimal environments. After registering, packages are installed with the normal `apt-get install` command.
 
 ### Microsoft packages.microsoft.com (PMC)
 
