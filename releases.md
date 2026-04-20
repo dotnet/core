@@ -48,4 +48,5 @@ The following table lists end-of-life releases.
 [1.1.13]: release-notes/1.1/1.1.13/1.1.13.md
 [1.0.16]: release-notes/1.0/1.0.16/1.0.16.md
 [11.0.0-preview.3]: release-notes/11.0/11.0.0-preview.3/11.0.0-preview.3.md
+[10.0.7]: release-notes/10.0/10.0.7/10.0.7.md
 [policies]: release-policies.md
