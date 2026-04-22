@@ -39,20 +39,25 @@
           "name": "tzdata"
         }
       ],
-      "dotnet_packages": [
-        {
-          "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
-        },
-        {
-          "component": "runtime",
-          "name": "dotnet-runtime-10.0"
-        },
-        {
-          "component": "sdk",
-          "name": "dotnet-sdk-10.0"
+      "dotnet_packages_other": {
+        "backports": {
+          "install_command": "sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update",
+          "packages": [
+            {
+              "component": "sdk",
+              "name": "dotnet-sdk-8.0"
+            },
+            {
+              "component": "runtime",
+              "name": "dotnet-runtime-8.0"
+            },
+            {
+              "component": "aspnetcore-runtime",
+              "name": "aspnetcore-runtime-8.0"
+            }
+          ]
         }
-      ]
+      }
     },
     {
       "name": "Ubuntu 25.10 (Questing Quokka)",
@@ -94,15 +99,15 @@
       "dotnet_packages": [
         {
           "component": "sdk",
-          "name": "dotnet-sdk-10.0"
+          "name": "dotnet-sdk-8.0"
         },
         {
           "component": "runtime",
-          "name": "dotnet-runtime-10.0"
+          "name": "dotnet-runtime-8.0"
         },
         {
           "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
+          "name": "aspnetcore-runtime-8.0"
         }
       ]
     },
@@ -146,15 +151,15 @@
       "dotnet_packages": [
         {
           "component": "sdk",
-          "name": "dotnet-sdk-10.0"
+          "name": "dotnet-sdk-8.0"
         },
         {
           "component": "runtime",
-          "name": "dotnet-runtime-10.0"
+          "name": "dotnet-runtime-8.0"
         },
         {
           "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
+          "name": "aspnetcore-runtime-8.0"
         }
       ]
     },
@@ -195,25 +200,20 @@
           "name": "tzdata"
         }
       ],
-      "dotnet_packages_other": {
-        "backports": {
-          "packages": [
-            {
-              "component": "sdk",
-              "name": "dotnet-sdk-10.0"
-            },
-            {
-              "component": "runtime",
-              "name": "dotnet-runtime-10.0"
-            },
-            {
-              "component": "aspnetcore-runtime",
-              "name": "aspnetcore-runtime-10.0"
-            }
-          ],
-          "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update"
+      "dotnet_packages": [
+        {
+          "component": "sdk",
+          "name": "dotnet-sdk-8.0"
+        },
+        {
+          "component": "runtime",
+          "name": "dotnet-runtime-8.0"
+        },
+        {
+          "component": "aspnetcore-runtime",
+          "name": "aspnetcore-runtime-8.0"
         }
-      }
+      ]
     }
   ]
 }

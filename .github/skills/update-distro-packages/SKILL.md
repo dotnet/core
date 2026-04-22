@@ -5,8 +5,11 @@ description: >
   that document .NET runtime dependencies and package availability for each
   Linux distribution. USE FOR: setting up distros/ for a new .NET version,
   updating dependency package names when distro versions change, auditing
-  package data. DO NOT USE FOR: supported-os.json changes (use
-  update-supported-os skill), os-packages.json (legacy format).
+  package data. DO NOT USE FOR: read-only support/package questions (use
+  query-os-support-packages skill), supported-os.json changes (use
+  update-supported-os skill), or standalone legacy os-packages maintenance.
+  For 8.0-10.0, pair distros updates with update-os-packages; for 11.0+,
+  distros/ is the only Linux package metadata scheme.
 ---
 
 # Update Distro Packages
@@ -31,6 +34,11 @@ release-notes/{version}/distros/
 - A distro release is added or removed from the support matrix
 - A dependency package name changes (e.g. `libicu74` → `libicu76` on a new Ubuntu)
 - Periodic audit to keep dependency data current
+
+## Version-specific maintenance rules
+
+- **8.0, 9.0, 10.0** — keep both `release-notes/{version}/distros/` **and** `os-packages.json` / `os-packages.md` in sync. Use this skill for the `distros/` side and run the companion legacy updates with [`update-os-packages`](../update-os-packages/SKILL.md) in the same change.
+- **11.0+** — update only `release-notes/{version}/distros/` and its generated `dotnet-dependencies.md` / `dotnet-packages.md` outputs. Do not create new `os-packages.*` data for these versions.
 
 ## Prerequisites
 
@@ -98,15 +106,15 @@ Omit `min_version` and `references` when null/empty.
 ```json
 {
   "channel_version": "11.0",
-  "distros": [
-    "alpine.json",
-    "azure_linux.json",
-    "ubuntu.json"
-  ]
+  "distros": {
+    "alpine.json": "Alpine",
+    "azure_linux.json": "Azure Linux",
+    "ubuntu.json": "Ubuntu"
+  }
 }
 ```
 
-Alphabetically sorted list of per-distro file names.
+Filename-to-display-name map, sorted by filename.
 
 ### Per-distro files (e.g. ubuntu.json)
 
@@ -416,6 +424,8 @@ git add release-notes/{version}/distros/ release-notes/{version}/dotnet-dependen
 git commit -m "Update {version} distro packages — <summary>"
 ```
 
+For **8.0-10.0**, include the companion `os-packages.json` / `os-packages.md` updates in the same PR or commit so both Linux package metadata schemes stay aligned.
+
 ## Known alternative feed commands
 
 When packages come from a non-builtin feed, the `install_command` field tells users how to register that feed before installing packages. Use the exact commands below.
@@ -447,6 +457,8 @@ If the query returns a feed name not listed above, ask the user for the registra
 ## Key facts
 
 - Files are version-scoped — `release-notes/11.0/distros/ubuntu.json` is about .NET 11.0 on Ubuntu
+- Versions **8.0-10.0** still have two maintained Linux package metadata schemes: `distros/` and `os-packages.*`
+- Versions **11.0+** use only the `distros/` scheme for Linux package metadata
 - Dependencies use an agnostic `id` (e.g. `libicu`) with a distro-specific `name` (e.g. `libicu74`)
 - `dependencies.json` is the "what .NET needs" list; per-distro files map those to real package names
 - Package names like `libicu` are versioned on Debian/Ubuntu (e.g. `libicu76`) but not on Fedora/RHEL (just `libicu`)

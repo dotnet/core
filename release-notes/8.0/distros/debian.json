@@ -1,48 +1,10 @@
 {
-  "name": "Ubuntu",
+  "name": "Debian",
   "install_command": "apt-get install -y {packages}",
   "releases": [
     {
-      "name": "Ubuntu 26.04 LTS (Resolute Raccoon)",
-      "release": "26.04",
-      "dependencies": [
-        {
-          "id": "ca-certificates",
-          "name": "ca-certificates"
-        },
-        {
-          "id": "krb5",
-          "name": "libgssapi-krb5-2"
-        },
-        {
-          "id": "libc",
-          "name": "libc6"
-        },
-        {
-          "id": "libgcc",
-          "name": "libgcc-s1"
-        },
-        {
-          "id": "libicu",
-          "name": "libicu78"
-        },
-        {
-          "id": "libstdc++",
-          "name": "libstdc++6"
-        },
-        {
-          "id": "openssl",
-          "name": "libssl3t64"
-        },
-        {
-          "id": "tzdata",
-          "name": "tzdata"
-        }
-      ]
-    },
-    {
-      "name": "Ubuntu 25.10 (Questing Quokka)",
-      "release": "25.10",
+      "name": "Debian sid (Unstable)",
+      "release": "sid",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -79,8 +41,8 @@
       ]
     },
     {
-      "name": "Ubuntu 24.04 (Noble Numbat)",
-      "release": "24.04",
+      "name": "Debian 13 (Trixie)",
+      "release": "13",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -100,7 +62,7 @@
         },
         {
           "id": "libicu",
-          "name": "libicu74"
+          "name": "libicu76"
         },
         {
           "id": "libstdc++",
@@ -117,8 +79,8 @@
       ]
     },
     {
-      "name": "Ubuntu 22.04.4 LTS (Jammy Jellyfish)",
-      "release": "22.04",
+      "name": "Debian 12 (Bookworm)",
+      "release": "12",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -138,7 +100,7 @@
         },
         {
           "id": "libicu",
-          "name": "libicu70"
+          "name": "libicu72"
         },
         {
           "id": "libstdc++",

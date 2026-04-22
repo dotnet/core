@@ -1,10 +1,10 @@
 {
-  "name": "Ubuntu",
-  "install_command": "apt-get install -y {packages}",
+  "name": "Fedora",
+  "install_command": "dnf install -y {packages}",
   "releases": [
     {
-      "name": "Ubuntu 26.04 LTS (Resolute Raccoon)",
-      "release": "26.04",
+      "name": "Fedora 44",
+      "release": "44",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -12,51 +12,37 @@
         },
         {
           "id": "krb5",
-          "name": "libgssapi-krb5-2"
+          "name": "krb5-libs"
         },
         {
           "id": "libc",
-          "name": "libc6"
+          "name": "glibc"
         },
         {
           "id": "libgcc",
-          "name": "libgcc-s1"
+          "name": "libgcc"
         },
         {
           "id": "libicu",
-          "name": "libicu78"
+          "name": "libicu"
         },
         {
           "id": "libstdc++",
-          "name": "libstdc++6"
+          "name": "libstdc++"
         },
         {
           "id": "openssl",
-          "name": "libssl3t64"
+          "name": "openssl-libs"
         },
         {
           "id": "tzdata",
           "name": "tzdata"
         }
-      ],
-      "dotnet_packages": [
-        {
-          "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
-        },
-        {
-          "component": "runtime",
-          "name": "dotnet-runtime-10.0"
-        },
-        {
-          "component": "sdk",
-          "name": "dotnet-sdk-10.0"
-        }
       ]
     },
     {
-      "name": "Ubuntu 25.10 (Questing Quokka)",
-      "release": "25.10",
+      "name": "Fedora 43",
+      "release": "43",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -64,27 +50,27 @@
         },
         {
           "id": "krb5",
-          "name": "libgssapi-krb5-2"
+          "name": "krb5-libs"
         },
         {
           "id": "libc",
-          "name": "libc6"
+          "name": "glibc"
         },
         {
           "id": "libgcc",
-          "name": "libgcc-s1"
+          "name": "libgcc"
         },
         {
           "id": "libicu",
-          "name": "libicu76"
+          "name": "libicu"
         },
         {
           "id": "libstdc++",
-          "name": "libstdc++6"
+          "name": "libstdc++"
         },
         {
           "id": "openssl",
-          "name": "libssl3t64"
+          "name": "openssl-libs"
         },
         {
           "id": "tzdata",
@@ -94,21 +80,21 @@
       "dotnet_packages": [
         {
           "component": "sdk",
-          "name": "dotnet-sdk-10.0"
+          "name": "dotnet-sdk-8.0"
         },
         {
           "component": "runtime",
-          "name": "dotnet-runtime-10.0"
+          "name": "dotnet-runtime-8.0"
         },
         {
           "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
+          "name": "aspnetcore-runtime-8.0"
         }
       ]
     },
     {
-      "name": "Ubuntu 24.04 (Noble Numbat)",
-      "release": "24.04",
+      "name": "Fedora 42",
+      "release": "42",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -116,27 +102,27 @@
         },
         {
           "id": "krb5",
-          "name": "libgssapi-krb5-2"
+          "name": "krb5-libs"
         },
         {
           "id": "libc",
-          "name": "libc6"
+          "name": "glibc"
         },
         {
           "id": "libgcc",
-          "name": "libgcc-s1"
+          "name": "libgcc"
         },
         {
           "id": "libicu",
-          "name": "libicu74"
+          "name": "libicu"
         },
         {
           "id": "libstdc++",
-          "name": "libstdc++6"
+          "name": "libstdc++"
         },
         {
           "id": "openssl",
-          "name": "libssl3t64"
+          "name": "openssl-libs"
         },
         {
           "id": "tzdata",
@@ -146,21 +132,21 @@
       "dotnet_packages": [
         {
           "component": "sdk",
-          "name": "dotnet-sdk-10.0"
+          "name": "dotnet-sdk-8.0"
         },
         {
           "component": "runtime",
-          "name": "dotnet-runtime-10.0"
+          "name": "dotnet-runtime-8.0"
         },
         {
           "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
+          "name": "aspnetcore-runtime-8.0"
         }
       ]
     },
     {
-      "name": "Ubuntu 22.04.4 LTS (Jammy Jellyfish)",
-      "release": "22.04",
+      "name": "Fedora 41",
+      "release": "41",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -168,52 +154,33 @@
         },
         {
           "id": "krb5",
-          "name": "libgssapi-krb5-2"
+          "name": "krb5-libs"
         },
         {
           "id": "libc",
-          "name": "libc6"
+          "name": "glibc"
         },
         {
           "id": "libgcc",
-          "name": "libgcc-s1"
+          "name": "libgcc"
         },
         {
           "id": "libicu",
-          "name": "libicu70"
+          "name": "libicu"
         },
         {
           "id": "libstdc++",
-          "name": "libstdc++6"
+          "name": "libstdc++"
         },
         {
           "id": "openssl",
-          "name": "libssl3"
+          "name": "openssl-libs"
         },
         {
           "id": "tzdata",
           "name": "tzdata"
         }
-      ],
-      "dotnet_packages_other": {
-        "backports": {
-          "packages": [
-            {
-              "component": "sdk",
-              "name": "dotnet-sdk-10.0"
-            },
-            {
-              "component": "runtime",
-              "name": "dotnet-runtime-10.0"
-            },
-            {
-              "component": "aspnetcore-runtime",
-              "name": "aspnetcore-runtime-10.0"
-            }
-          ],
-          "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update"
-        }
-      }
+      ]
     }
   ]
 }

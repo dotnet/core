@@ -224,7 +224,7 @@ sudo apt-get install -y software-properties-common && sudo add-apt-repository pp
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y \
-    dotnet-aspnetcore-runtime-10.0 \
+    aspnetcore-runtime-10.0 \
     dotnet-runtime-10.0 \
     dotnet-sdk-10.0
 ```

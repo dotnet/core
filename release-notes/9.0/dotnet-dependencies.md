@@ -1,6 +1,6 @@
-# .NET 11.0 Linux package dependencies
+# .NET 9.0 Linux package dependencies
 
-.NET 11.0 has several dependencies that must be installed to run .NET apps. The install commands for each supported Linux distribution are listed below.
+.NET 9.0 has several dependencies that must be installed to run .NET apps. The install commands for each supported Linux distribution are listed below.
 
 Tips:
 
@@ -22,7 +22,7 @@ You do not need to install ICU if you [enable globalization invariant mode](http
 
 If your app relies on `https` endpoints, you'll also need to install `ca-certificates`.
 
-[0]: https://github.com/dotnet/core/blob/main/release-notes/11.0/supported-os.md#linux-compatibility
+[0]: https://github.com/dotnet/core/blob/main/release-notes/9.0/supported-os.md#linux-compatibility
 [1]: https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
 [2]: https://www.redhat.com/sysadmin/ca-certificates-cli
 [3]: https://www.openssl.org/
@@ -32,6 +32,34 @@ If your app relies on `https` endpoints, you'll also need to install `ca-certifi
 [7]: https://web.mit.edu/kerberos
 
 ## Alpine
+
+### Alpine edge
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
+
+### Alpine 3.23
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
 
 ### Alpine 3.22
 
@@ -48,6 +76,20 @@ sudo apk add \
 ```
 
 ### Alpine 3.21
+
+```bash
+sudo apk add \
+    ca-certificates \
+    icu-data-full \
+    icu-libs \
+    krb5 \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    tzdata
+```
+
+### Alpine 3.20
 
 ```bash
 sudo apk add \
@@ -123,6 +165,21 @@ sudo dnf install -y \
 
 ## Debian
 
+### Debian sid (Unstable)
+
+```bash
+sudo apt-get update && \
+sudo apt-get install -y \
+    ca-certificates \
+    libc6 \
+    libgcc-s1 \
+    libgssapi-krb5-2 \
+    libicu76 \
+    libssl3t64 \
+    libstdc++6 \
+    tzdata
+```
+
 ### Debian 13 (Trixie)
 
 ```bash
@@ -155,6 +212,20 @@ sudo apt-get install -y \
 
 ## Fedora
 
+### Fedora 44
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
 ### Fedora 43
 
 ```bash
@@ -170,6 +241,20 @@ sudo dnf install -y \
 ```
 
 ### Fedora 42
+
+```bash
+sudo dnf install -y \
+    ca-certificates \
+    glibc \
+    krb5-libs \
+    libgcc \
+    libicu \
+    libstdc++ \
+    openssl-libs \
+    tzdata
+```
+
+### Fedora 41
 
 ```bash
 sudo dnf install -y \

@@ -5,8 +5,10 @@ description: >
   support. Uses the release-notes tool for automated verification against
   upstream lifecycle data and markdown regeneration. USE FOR: adding new OS
   versions, moving EOL versions to unsupported, periodic support matrix audits.
-  DO NOT USE FOR: os-packages.json changes (use update-os-packages skill),
-  editing supported-os.md directly (it is generated from JSON).
+  DO NOT USE FOR: read-only support/package questions (use
+  query-os-support-packages skill), os-packages.json changes (use
+  update-os-packages skill), editing supported-os.md directly (it is generated
+  from JSON).
 ---
 
 # Update Supported OS
