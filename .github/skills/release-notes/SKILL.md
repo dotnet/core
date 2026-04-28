@@ -18,11 +18,11 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 4. `api-diff` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build
 5. `release-notes` writes curated markdown using the higher-value entries from `features.json`
 6. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
-7. Output is one PR per release milestone in dotnet/core, maintained incrementally
+7. Output is a set of pull requests per release milestone in dotnet/core: a base PR that holds shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and one PR per component file. Each component PR targets the base branch so component teams review and edit their file in isolation. See [`pr-layout.md`](references/pr-layout.md) for the full layout and naming scheme.
 
 ## Existing-branch reruns
 
-When the milestone branch already exists and contains drafted markdown, invoke
+When the milestone branch set already exists and contains drafted markdown, invoke
 [`update-existing-branch`](../update-existing-branch/SKILL.md). That shared
 skill is the canonical playbook for refreshing `changes.json`, merging the delta
 into `features.json`, integrating new material into existing sections, and
@@ -32,11 +32,12 @@ handling review comments without clobbering human edits.
 
 - [quality-bar.md](references/quality-bar.md) — what good release notes look like
 - [vmr-structure.md](references/vmr-structure.md) — VMR branches, tags, source-manifest.json
-- [../update-existing-branch/SKILL.md](../update-existing-branch/SKILL.md) — how to refresh a populated milestone branch incrementally
+- [pr-layout.md](references/pr-layout.md) — base + per-component branches, PR titles, draft-state rules
+- [../update-existing-branch/SKILL.md](../update-existing-branch/SKILL.md) — how to refresh a populated milestone branch set incrementally
 - [changes-schema.md](references/changes-schema.md) — the shared `changes.json` / `features.json` schema
 - [../editorial-scoring/SKILL.md](../editorial-scoring/SKILL.md) — the reusable scoring rubric and cut guidance
 - [feature-scoring.md](references/feature-scoring.md) — how to score and cut features
-- [component-mapping.md](references/component-mapping.md) — components, product slugs, output files
+- [component-mapping.md](references/component-mapping.md) — components, output files, branch suffixes, default assignees
 - [format-template.md](references/format-template.md) — markdown document structure
 - [editorial-rules.md](references/editorial-rules.md) — tone, attribution, naming
 - [api-verification.md](references/api-verification.md) — using dotnet-inspect to verify APIs
