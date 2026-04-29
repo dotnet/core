@@ -41,7 +41,7 @@ handling review comments without clobbering human edits.
 - [changes-schema.md](references/changes-schema.md) — the shared `changes.json` / `features.json` schema
 - [../editorial-scoring/SKILL.md](../editorial-scoring/SKILL.md) — the reusable scoring rubric and cut guidance
 - [feature-scoring.md](references/feature-scoring.md) — how to score and cut features
-- [component-mapping.md](references/component-mapping.md) — components and their release notes files
+- [component-mapping.md](references/component-mapping.md) — components, product slugs, output files
 - [format-template.md](references/format-template.md) — markdown document structure
 - [editorial-rules.md](references/editorial-rules.md) — tone, attribution, naming
 - [api-verification.md](references/api-verification.md) — using dotnet-inspect to verify APIs
