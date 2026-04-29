@@ -5,9 +5,9 @@ Each release-notes milestone produces a **set of pull requests** instead of one 
 ## Branch set per milestone
 
 - **Base branch** `release-notes/{version}-{milestone-slug}` (e.g. `release-notes/11.0-preview4`) — holds the shared metadata for the milestone (`README.md`, `changes.json`, `features.json`, `build-metadata.json`). Its PR targets `main`.
-- **Component branch** `release-notes/{version}-{milestone-slug}-{branch-suffix}` (e.g. `release-notes/11.0-preview4-aspnetcore`) — holds only that component's `{component}.md`. Its PR targets the base branch.
+- **Component branch** `release-notes/{version}-{milestone-slug}-{file-stem}` (e.g. `release-notes/11.0-preview4-aspnetcore` for `aspnetcore.md`) — holds only that component's `{file-stem}.md`. Its PR targets the base branch.
 
-The set of components and their branch suffixes is defined in [`component-mapping.md`](component-mapping.md). Components with no noteworthy changes still get a stub PR.
+The set of components and their release notes files is defined in [`component-mapping.md`](component-mapping.md). Components with no noteworthy changes still get a stub PR.
 
 ## Invariants
 

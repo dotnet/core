@@ -4,23 +4,23 @@
 
 Uses the `repo` field from `changes.json` (which matches `source-manifest.json` `path` values) to identify components.
 
-| Manifest Path | Component | Source Repo | Release Notes File | Branch Suffix |
-| ------------- | --------- | ----------- | ------------------ | ------------- |
-| `runtime` | .NET Libraries | `dotnet/runtime` | `libraries.md` | `libraries` |
-| `runtime` | .NET Runtime | `dotnet/runtime` | `runtime.md` | `runtime` |
-| `aspnetcore` | ASP.NET Core | `dotnet/aspnetcore` | `aspnetcore.md` | `aspnetcore` |
-| `razor` | ASP.NET Core (Razor) | `dotnet/razor` | `aspnetcore.md` | `aspnetcore` |
-| `sdk` | .NET SDK | `dotnet/sdk` | `sdk.md` | `sdk` |
-| `templating` | .NET SDK (Templating) | `dotnet/templating` | `sdk.md` | `sdk` |
-| `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` | `msbuild` |
-| `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` | `winforms` |
-| `wpf` | WPF | `dotnet/wpf` | `wpf.md` | `wpf` |
-| `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | `efcore` |
-| `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` | `csharp` |
-| `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | `fsharp` |
-| `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` | `nuget` |
+| Manifest Path | Component | Source Repo | Release Notes File |
+| ------------- | --------- | ----------- | ------------------ |
+| `runtime` | .NET Libraries | `dotnet/runtime` | `libraries.md` |
+| `runtime` | .NET Runtime | `dotnet/runtime` | `runtime.md` |
+| `aspnetcore` | ASP.NET Core | `dotnet/aspnetcore` | `aspnetcore.md` |
+| `razor` | ASP.NET Core (Razor) | `dotnet/razor` | `aspnetcore.md` |
+| `sdk` | .NET SDK | `dotnet/sdk` | `sdk.md` |
+| `templating` | .NET SDK (Templating) | `dotnet/templating` | `sdk.md` |
+| `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` |
+| `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` |
+| `wpf` | WPF | `dotnet/wpf` | `wpf.md` |
+| `efcore` | EF Core | `dotnet/efcore` | `efcore.md` |
+| `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` |
+| `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` |
+| `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` |
 
-The branch suffix is used to derive the per-component branch name as `release-notes/{version}-{milestone-slug}-{branch-suffix}`. See [`pr-layout.md`](pr-layout.md) for the full branching scheme.
+Each release notes file gets its own per-component branch named `release-notes/{version}-{milestone-slug}-{file-stem}`, where `{file-stem}` is the release notes filename without `.md` (for example, `aspnetcore.md` → `release-notes/11.0-preview4-aspnetcore`). See [`pr-layout.md`](pr-layout.md) for the full branching scheme.
 
 ### Runtime sub-component classification
 
