@@ -108,7 +108,7 @@ This should feel like a **delta merge**, not a full rescore.
 
 ### 4. Update markdown in place
 
-Use the current draft as the starting point and prefer **integration** over
+Use the current draft as the starting point. Prefer **integration** over
 duplication.
 
 For each component affected by the delta, update **only** that component's
