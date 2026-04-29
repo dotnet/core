@@ -106,13 +106,15 @@ Only rescore:
 
 This should feel like a **delta merge**, not a full rescore.
 
-### 4. Update markdown in place on the right component branch
+### 4. Update markdown in place
+
+Use the current draft as the starting point and prefer **integration** over
+duplication.
 
 For each component affected by the delta, update **only** that component's
 markdown on **its** branch. Before editing, merge the base branch into the
 component branch so the latest metadata is available in your working tree;
-don't touch component branches you aren't editing this run. Use the current
-draft as the starting point and prefer **integration** over duplication.
+don't touch component branches you aren't editing this run.
 
 Examples:
 
