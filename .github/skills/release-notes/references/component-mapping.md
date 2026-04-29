@@ -73,12 +73,12 @@ These appear in `source-manifest.json` but rarely produce user-facing changes:
 
 These components appear in `changes.json` for completeness but typically don't warrant markdown release notes.
 
-## Default component set per preview
+## Expected output files per preview
 
-The agent creates a stub PR for every component below so component owners get a consistent review surface each milestone. Owners close the PR if there is nothing noteworthy this release, or push content into it.
+Every preview should produce these files (stubs for components with no noteworthy changes):
 
 ```text
-README.md              # Index/TOC linking to all component files (base branch)
+README.md              # Index/TOC linking to all component files
 libraries.md           # System.* BCL APIs
 runtime.md             # CoreCLR, Mono, GC, JIT
 aspnetcore.md          # ASP.NET Core, Blazor, SignalR
@@ -92,5 +92,5 @@ msbuild.md             # MSBuild
 nuget.md               # NuGet client
 dotnetmaui.md          # .NET MAUI (team-authored, not in VMR)
 containers.md          # Containers (team-authored, not in VMR)
-changes.json           # Machine-readable change manifest (base branch)
+changes.json           # Machine-readable change manifest
 ```
