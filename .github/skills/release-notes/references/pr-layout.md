@@ -13,6 +13,7 @@ The set of components and their release notes files is defined in [`component-ma
 
 - `changes.json`, `features.json`, `build-metadata.json`, and `README.md` live on the **base branch only**. Component branches never modify them; they rebase or merge from the base branch to pick up refreshed metadata.
 - Each `{component}.md` lives on its **matching component branch only**. The agent never edits another component's file from the wrong branch.
+- The milestone landing page `{version}.md` (for example, `11.0.0-preview.4.md`) is **not produced by this skill**. The .NET release team generates it through separate artifacts-publishing automation, so the agent leaves it alone on every branch.
 
 ## Merge flow
 
