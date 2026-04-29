@@ -22,7 +22,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 
 ## Local testing (no PRs)
 
-To dry-run the skill without opening PRs (for example, to validate the layout against a new milestone before running the workflow), have the agent create the base branch and each component branch locally per [`pr-layout.md`](references/pr-layout.md), commit the right files on each, and skip `gh pr create` (and ideally `git push`). Inspect with `git log --graph --all` and clean up with `git branch -D release-notes/{version}-{milestone-slug}*`.
+To dry-run the skill against a milestone, have the agent create the branch set locally and skip `gh pr create` (and `git push`).
 
 ## Existing-branch reruns
 
