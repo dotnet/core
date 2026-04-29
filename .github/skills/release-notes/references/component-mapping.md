@@ -4,32 +4,34 @@
 
 Uses the `repo` field from `changes.json` (which matches `source-manifest.json` `path` values) to identify components.
 
-| Manifest Path | Component | Source Repo | Release Notes File |
-| ------------- | --------- | ----------- | ------------------ |
-| `runtime` | .NET Libraries | `dotnet/runtime` | `libraries.md` |
-| `runtime` | .NET Runtime | `dotnet/runtime` | `runtime.md` |
-| `aspnetcore` | ASP.NET Core | `dotnet/aspnetcore` | `aspnetcore.md` |
-| `razor` | ASP.NET Core (Razor) | `dotnet/razor` | `aspnetcore.md` |
-| `sdk` | .NET SDK | `dotnet/sdk` | `sdk.md` |
-| `templating` | .NET SDK (Templating) | `dotnet/templating` | `sdk.md` |
-| `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` |
-| `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` |
-| `wpf` | WPF | `dotnet/wpf` | `wpf.md` |
-| `efcore` | EF Core | `dotnet/efcore` | `efcore.md` |
-| `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` |
-| `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` |
-| `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` |
+| Manifest Path | Component | Source Repo | Release Notes File | Default Assignee(s) |
+| ------------- | --------- | ----------- | ------------------ | ------------------- |
+| `runtime` | .NET Libraries | `dotnet/runtime` | `libraries.md` | @artl93 @jeffhandley @SamMonoRT @karelz |
+| `runtime` | .NET Runtime | `dotnet/runtime` | `runtime.md` | @richlander |
+| `aspnetcore` | ASP.NET Core | `dotnet/aspnetcore` | `aspnetcore.md` | @danroth27 |
+| `razor` | ASP.NET Core (Razor) | `dotnet/razor` | `aspnetcore.md` | @danroth27 |
+| `sdk` | .NET SDK | `dotnet/sdk` | `sdk.md` | @baronfel |
+| `templating` | .NET SDK (Templating) | `dotnet/templating` | `sdk.md` | @baronfel |
+| `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` | @baronfel |
+| `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` | @KlausLoeffelmann @merriemcgaw |
+| `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @harshit7962 @adegeo |
+| `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | @SamMonoRT @roji |
+| `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` | @BillWagner |
+| `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | @T-Gro |
+| `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` | @baronfel |
 
 Each release notes file gets its own per-component branch named `release-notes/{version}-{milestone-slug}-{file-stem}`, where `{file-stem}` is the release notes filename without `.md` (for example, `aspnetcore.md` → `release-notes/11.0-preview4-aspnetcore`). See [`pr-layout.md`](pr-layout.md) for the full branching scheme.
+
+The agent assigns each component PR to its default assignee(s) when opening the PR (`gh pr create --assignee ...`), so the right team sees it in their review queue.
 
 ### Components contributed out-of-band (not in the VMR)
 
 These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. The agent still creates a stub PR for each so the component team can push their own content (or close the PR if there is nothing noteworthy this milestone).
 
-| Component | Source Repo | Release Notes File |
-| --------- | ----------- | ------------------ |
-| .NET MAUI | `dotnet/maui` | `dotnetmaui.md` |
-| Containers | `dotnet/sdk-container-builds` | `containers.md` |
+| Component | Source Repo | Release Notes File | Default Assignee(s) |
+| --------- | ----------- | ------------------ | ------------------- |
+| .NET MAUI | `dotnet/maui` | `dotnetmaui.md` | @davidortinau |
+| Containers | `dotnet/dotnet-docker` | `containers.md` | @lbussell |
 
 ### Runtime sub-component classification
 
