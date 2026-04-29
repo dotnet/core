@@ -22,22 +22,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 
 ## Local testing (no PRs)
 
-Use this mode to exercise the branch layout and content generation without opening pull requests — for example, to validate the skill against a new milestone before letting the agentic workflow run, or to dry-run changes to the skill itself.
-
-In this mode the agent should:
-
-1. Create the base branch and each component branch locally per [`pr-layout.md`](references/pr-layout.md), with the right files committed to each branch (metadata on the base branch, the component file on its matching branch).
-2. **Skip `gh pr create`** entirely. Do not open base or component PRs.
-3. **Skip `git push`** unless explicitly requested. Keeping branches local is the safest way to inspect them; if pushing is needed, push to a personal fork rather than `origin`.
-
-When there are no PRs, several pr-layout.md conventions don't apply:
-
-- Draft state, PR titles, PR bodies, labels, and assignees — irrelevant without PRs.
-- The per-run safe-output cap (10) — only binds when the agentic workflow's `safe-outputs` materializes PRs. Locally, create the full branch set in one pass.
-
-Inspect the result with `git log --oneline --graph --all` and `git diff main..release-notes/{version}-{milestone-slug}` (and similar for each component branch). Delete the local branches with `git branch -D release-notes/{version}-{milestone-slug}*` when finished.
-
-Reruns against a local-only branch set follow the same rules as [`update-existing-branch`](../update-existing-branch/SKILL.md), minus the PR-comment ingestion step.
+To dry-run the skill without opening PRs (for example, to validate the layout against a new milestone before running the workflow), have the agent create the base branch and each component branch locally per [`pr-layout.md`](references/pr-layout.md), commit the right files on each, and skip `gh pr create` (and ideally `git push`). Inspect with `git log --graph --all` and clean up with `git branch -D release-notes/{version}-{milestone-slug}*`.
 
 ## Existing-branch reruns
 
@@ -51,12 +36,12 @@ handling review comments without clobbering human edits.
 
 - [quality-bar.md](references/quality-bar.md) — what good release notes look like
 - [vmr-structure.md](references/vmr-structure.md) — VMR branches, tags, source-manifest.json
-- [pr-layout.md](references/pr-layout.md) — base + per-component branches, PR titles, draft-state rules
+- [pr-layout.md](references/pr-layout.md) — base + per-component branch layout
 - [../update-existing-branch/SKILL.md](../update-existing-branch/SKILL.md) — how to refresh a populated milestone branch set incrementally
 - [changes-schema.md](references/changes-schema.md) — the shared `changes.json` / `features.json` schema
 - [../editorial-scoring/SKILL.md](../editorial-scoring/SKILL.md) — the reusable scoring rubric and cut guidance
 - [feature-scoring.md](references/feature-scoring.md) — how to score and cut features
-- [component-mapping.md](references/component-mapping.md) — components, output files, branch suffixes, default assignees
+- [component-mapping.md](references/component-mapping.md) — components, output files, branch suffixes
 - [format-template.md](references/format-template.md) — markdown document structure
 - [editorial-rules.md](references/editorial-rules.md) — tone, attribution, naming
 - [api-verification.md](references/api-verification.md) — using dotnet-inspect to verify APIs

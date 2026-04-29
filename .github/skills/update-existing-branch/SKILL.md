@@ -114,23 +114,15 @@ This should feel like a **delta merge**, not a full rescore.
 ### 4. Propagate refreshed metadata only to component branches you will edit
 
 After committing the metadata refresh to the base branch, do **not** blindly
-merge or rebase every component branch onto the new base. The
-`safe-outputs.push-to-pull-request-branch` budget is capped per run, and most
-component PRs do not need a fresh working tree just because metadata moved —
-GitHub recalculates the PR diff against the updated base automatically.
+merge or rebase every component branch onto the new base. Most component PRs
+do not need a fresh working tree just because metadata moved — GitHub
+recalculates the PR diff against the updated base automatically.
 
-Only update a component branch when:
-
-- you are about to edit that component's markdown in this run (because new
-  evidence or a review comment requires it), or
-- a reviewer's comment cannot be answered without the refreshed metadata in the
-  working tree.
-
-When you do update a component branch, either merge the base branch into it or
-rebase it onto the new base branch tip. Resolve conflicts in favor of the base
-branch for metadata files, and in favor of the component branch for the
-component markdown file. Component branches whose markdown is not changing this
-run are intentionally left "behind"; that is correct steady-state behavior.
+Only update a component branch when you are about to edit its markdown in this
+run, or when a reviewer's comment cannot be answered without the refreshed
+metadata in the working tree. When updating, merge or rebase from the base
+branch tip; resolve conflicts in favor of the base branch for metadata files
+and in favor of the component branch for the component markdown file.
 
 ### 5. Update markdown in place on the right component branch
 
