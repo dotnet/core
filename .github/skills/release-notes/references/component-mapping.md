@@ -23,42 +23,27 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 
 ### Out-of-VMR components
 
-These ship alongside .NET but aren't sourced from the VMR. Include them in the
-milestone branch set when the team is producing notes for the milestone:
+These ship alongside .NET but aren't sourced from the VMR. Include them in the milestone branch set when the team is producing notes for the milestone:
 
 | Component | Source Repo | Output File | Branch Suffix | Default Assignee(s) |
 | --------- | ----------- | ----------- | ------------- | ------------------- |
 | Containers | `dotnet/dotnet-docker` | `containers.md` | `containers` | @lbussell |
 | .NET MAUI | `dotnet/maui` | `dotnetmaui.md` | `dotnetmaui` | @davidortinau |
 
-The branch suffix is used to derive the component branch name as
-`release-notes/{version}-{milestone-slug}-{branch-suffix}`. See
-[`pr-layout.md`](pr-layout.md) for the full branching scheme.
+The branch suffix is used to derive the component branch name as `release-notes/{version}-{milestone-slug}-{branch-suffix}`. See [`pr-layout.md`](pr-layout.md) for the full branching scheme.
 
 #### Sourcing content for out-of-VMR components
 
-Out-of-VMR components are **exempt from the rule that every documented item
-must appear in `changes.json`**, because their changes are not collected by the
-VMR-driven `release-notes generate changes` pipeline.
+Out-of-VMR components are **exempt from the rule that every documented item must appear in `changes.json`**, because their changes are not collected by the VMR-driven `release-notes generate changes` pipeline.
 
 For `containers.md` and `dotnetmaui.md`:
 
-1. Locate the milestone-aligned release branch or tag in the source repo (for
-   example, `dotnet/dotnet-docker` release branches that map to the .NET
-   milestone, or `dotnet/maui` previews tagged for the same release).
-2. Source candidate features from merged PRs and release-notes / changelog
-   files in that source repo since the previous milestone's tag.
-3. Apply the same scoring, editorial, and 80/20 rules from
-   [`feature-scoring.md`](feature-scoring.md) and
-   [`editorial-rules.md`](editorial-rules.md).
-4. If you cannot find authoritative source content, open the component PR as a
-   short stub that names the milestone, links to the relevant source repo, and
-   asks the default assignee from the table above to fill it in. Do not invent
-   content.
+1. Locate the milestone-aligned release branch or tag in the source repo (for example, `dotnet/dotnet-docker` release branches that map to the .NET milestone, or `dotnet/maui` previews tagged for the same release).
+2. Source candidate features from merged PRs and release-notes / changelog files in that source repo since the previous milestone's tag.
+3. Apply the same scoring, editorial, and 80/20 rules from [`feature-scoring.md`](feature-scoring.md) and [`editorial-rules.md`](editorial-rules.md).
+4. If you cannot find authoritative source content, open the component PR as a short stub that names the milestone, links to the relevant source repo, and asks the default assignee from the table above to fill it in. Do not invent content.
 
-The component PR for an out-of-VMR component is otherwise identical to a VMR
-component PR: branch off the milestone base branch, draft state, default
-assignee from the table above, target the base branch.
+The component PR for an out-of-VMR component is otherwise identical to a VMR component PR: branch off the milestone base branch, draft state, default assignee from the table above, target the base branch.
 
 ### Runtime sub-component classification
 
