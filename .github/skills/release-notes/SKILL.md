@@ -20,6 +20,25 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 6. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
 7. Output is a set of pull requests per release milestone in dotnet/core: a base PR that holds shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and one PR per component file. Each component PR targets the base branch so component teams review and edit their file in isolation. See [`pr-layout.md`](references/pr-layout.md) for the full layout and naming scheme.
 
+## Local testing (no PRs)
+
+Use this mode to exercise the branch layout and content generation without opening pull requests — for example, to validate the skill against a new milestone before letting the agentic workflow run, or to dry-run changes to the skill itself.
+
+In this mode the agent should:
+
+1. Create the base branch and each component branch locally per [`pr-layout.md`](references/pr-layout.md), with the right files committed to each branch (metadata on the base branch, the component file on its matching branch).
+2. **Skip `gh pr create`** entirely. Do not open base or component PRs.
+3. **Skip `git push`** unless explicitly requested. Keeping branches local is the safest way to inspect them; if pushing is needed, push to a personal fork rather than `origin`.
+
+When there are no PRs, several pr-layout.md conventions don't apply:
+
+- Draft state, PR titles, PR bodies, labels, and assignees — irrelevant without PRs.
+- The per-run safe-output cap (10) — only binds when the agentic workflow's `safe-outputs` materializes PRs. Locally, create the full branch set in one pass.
+
+Inspect the result with `git log --oneline --graph --all` and `git diff main..release-notes/{version}-{milestone-slug}` (and similar for each component branch). Delete the local branches with `git branch -D release-notes/{version}-{milestone-slug}*` when finished.
+
+Reruns against a local-only branch set follow the same rules as [`update-existing-branch`](../update-existing-branch/SKILL.md), minus the PR-comment ingestion step.
+
 ## Existing-branch reruns
 
 When the milestone branch set already exists and contains drafted markdown, invoke
