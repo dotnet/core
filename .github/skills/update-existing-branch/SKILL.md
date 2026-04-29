@@ -53,11 +53,6 @@ Respect this invariant on every rerun:
 | `README.md` | base branch only |
 | `{component}.md` (e.g. `aspnetcore.md`, `runtime.md`) | matching component branch only |
 
-Do **not** modify `changes.json`/`features.json` from a component branch, and
-do **not** modify another component's markdown from the wrong branch. When a
-component branch needs the latest metadata, rebase or merge it from the base
-branch first.
-
 ## Process
 
 ### 1. Check whether the preview moved forward
@@ -126,8 +121,7 @@ Examples:
 - move a newly demoted item into **Bug fixes** instead of deleting the story without explanation
 
 Keep the existing structure when it still works. Add a new top-level section
-only when the delta introduces a genuinely new story. Components that have no
-delta this run get no commit on this run.
+only when the delta introduces a genuinely new story.
 
 ### 5. Treat review comments as required inputs
 
@@ -136,19 +130,17 @@ the set.
 
 - read them before rewriting anything
 - answer factual questions with evidence from `changes.json`, VMR refs, API verification, or the final build
-- update the markdown when the reviewer is right (on the relevant component branch)
+- update the markdown when the reviewer is right
 - if the reviewer is directionally right but the current build still contains the feature, explain the milestone and branch context clearly
 
 ### 6. Default outcome
 
 For an existing release-notes branch set, the normal loop is:
 
-1. refresh `changes.json` only if the preview moved forward (base branch)
-2. merge the delta into `features.json` (base branch)
-3. update only the affected component markdown files in place, each on its own
-   branch
-4. respond to comments and questions across every PR in the set
-5. push follow-up commits to the same PRs (no new PRs)
+1. refresh `changes.json` only if the preview moved forward
+2. merge the delta into `features.json`
+3. update the existing markdown in place
+4. respond to comments and questions
 
 This keeps the branch set stable for reviewers and avoids throwing away already
 curated editorial work.

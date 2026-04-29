@@ -22,7 +22,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 
 ## Local testing (no PRs)
 
-To dry-run the skill against a milestone, have the agent create the branch set locally and skip `gh pr create` (and `git push`).
+To dry-run the skill against a milestone, only create the branch set locally. Don't push the branches or create the PRs.
 
 ## Existing-branch reruns
 
