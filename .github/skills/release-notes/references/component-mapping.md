@@ -22,6 +22,15 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 
 Each release notes file gets its own per-component branch named `release-notes/{version}-{milestone-slug}-{file-stem}`, where `{file-stem}` is the release notes filename without `.md` (for example, `aspnetcore.md` → `release-notes/11.0-preview4-aspnetcore`). See [`pr-layout.md`](pr-layout.md) for the full branching scheme.
 
+### Components contributed out-of-band (not in the VMR)
+
+These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. The agent still creates a stub PR for each so the component team can push their own content (or close the PR if there is nothing noteworthy this milestone).
+
+| Component | Source Repo | Release Notes File |
+| --------- | ----------- | ------------------ |
+| .NET MAUI | `dotnet/maui` | `dotnetmaui.md` |
+| Containers | `dotnet/sdk-container-builds` | `containers.md` |
+
 ### Runtime sub-component classification
 
 The `runtime` manifest entry covers both Libraries and Runtime. When writing markdown, classify PRs by the files they changed:
@@ -62,12 +71,12 @@ These appear in `source-manifest.json` but rarely produce user-facing changes:
 
 These components appear in `changes.json` for completeness but typically don't warrant markdown release notes.
 
-## Expected output files per preview
+## Default component set per preview
 
-Every preview should produce these files (stubs for components with no noteworthy changes):
+The agent creates a stub PR for every component below so component owners get a consistent review surface each milestone. Owners close the PR if there is nothing noteworthy this release, or push content into it.
 
 ```text
-README.md              # Index/TOC linking to all component files
+README.md              # Index/TOC linking to all component files (base branch)
 libraries.md           # System.* BCL APIs
 runtime.md             # CoreCLR, Mono, GC, JIT
 aspnetcore.md          # ASP.NET Core, Blazor, SignalR
@@ -79,5 +88,7 @@ winforms.md            # Windows Forms
 wpf.md                 # WPF
 msbuild.md             # MSBuild
 nuget.md               # NuGet client
-changes.json           # Machine-readable change manifest
+dotnetmaui.md          # .NET MAUI (team-authored, not in VMR)
+containers.md          # Containers (team-authored, not in VMR)
+changes.json           # Machine-readable change manifest (base branch)
 ```
