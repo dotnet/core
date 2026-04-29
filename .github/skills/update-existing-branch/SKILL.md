@@ -111,24 +111,13 @@ Only rescore:
 
 This should feel like a **delta merge**, not a full rescore.
 
-### 4. Propagate refreshed metadata only to component branches you will edit
-
-After committing the metadata refresh to the base branch, do **not** blindly
-merge or rebase every component branch onto the new base. Most component PRs
-do not need a fresh working tree just because metadata moved — GitHub
-recalculates the PR diff against the updated base automatically.
-
-Only update a component branch when you are about to edit its markdown in this
-run, or when a reviewer's comment cannot be answered without the refreshed
-metadata in the working tree. When updating, merge or rebase from the base
-branch tip; resolve conflicts in favor of the base branch for metadata files
-and in favor of the component branch for the component markdown file.
-
-### 5. Update markdown in place on the right component branch
+### 4. Update markdown in place on the right component branch
 
 For each component affected by the delta, update **only** that component's
-markdown on **its** branch. Use the current draft as the starting point. Prefer
-**integration** over duplication.
+markdown on **its** branch. Before editing, merge the base branch into the
+component branch so the latest metadata is available in your working tree;
+don't touch component branches you aren't editing this run. Use the current
+draft as the starting point and prefer **integration** over duplication.
 
 Examples:
 
@@ -140,7 +129,7 @@ Keep the existing structure when it still works. Add a new top-level section
 only when the delta introduces a genuinely new story. Components that have no
 delta this run get no commit on this run.
 
-### 6. Treat review comments as required inputs
+### 5. Treat review comments as required inputs
 
 Unresolved PR comments are part of the spec for the next run, on every PR in
 the set.
@@ -150,18 +139,16 @@ the set.
 - update the markdown when the reviewer is right (on the relevant component branch)
 - if the reviewer is directionally right but the current build still contains the feature, explain the milestone and branch context clearly
 
-### 7. Default outcome
+### 6. Default outcome
 
 For an existing release-notes branch set, the normal loop is:
 
 1. refresh `changes.json` only if the preview moved forward (base branch)
 2. merge the delta into `features.json` (base branch)
-3. update component branches **only when their markdown is being edited this
-   run** — propagate base metadata into those branches first
-4. update only the affected component markdown files in place, each on its own
+3. update only the affected component markdown files in place, each on its own
    branch
-5. respond to comments and questions across every PR in the set
-6. push follow-up commits to the same PRs (no new PRs)
+4. respond to comments and questions across every PR in the set
+5. push follow-up commits to the same PRs (no new PRs)
 
 This keeps the branch set stable for reviewers and avoids throwing away already
 curated editorial work.
