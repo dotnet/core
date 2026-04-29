@@ -1,14 +1,25 @@
 ---
 name: update-existing-branch
 description: >
-  Refresh an existing .NET release-notes milestone branch set incrementally. Checks whether the VMR ref moved, regenerates `changes.json` only when needed, merges the delta into `features.json`, integrates new material into existing markdown clusters across the per-component branches, and responds to review feedback. USE FOR: reruns on a populated release-notes branch set. DO NOT USE FOR: first-pass generation of a new milestone (use generate-changes, generate-features, and release-notes).
+  Refresh an existing .NET release-notes milestone branch set incrementally.
+  Checks whether the VMR ref moved, regenerates `changes.json` only when needed,
+  merges the delta into `features.json`, integrates new material into existing
+  markdown clusters across the per-component branches, and responds to review
+  feedback. USE FOR: reruns on a populated release-notes branch set. DO NOT USE
+  FOR: first-pass generation of a new milestone (use generate-changes,
+  generate-features, and release-notes).
 ---
 
 # Update Existing Branch
 
-Use this skill when the milestone branch set already exists and contains drafted markdown, `features.json`, reviewer comments, or human edits. The branch set is the base branch plus its per-component branches as defined in [`release-notes/references/pr-layout.md`](../release-notes/references/pr-layout.md).
+Use this skill when the milestone branch set already exists and contains
+drafted markdown, `features.json`, reviewer comments, or human edits. The
+branch set is the base branch plus its per-component branches as defined in
+[`release-notes/references/pr-layout.md`](../release-notes/references/pr-layout.md).
 
-This is the **incremental rerun** stage of the release-notes pipeline. It is the branch-maintenance equivalent of what `editorial-scoring` is for scoring: the canonical place to describe how follow-up runs should behave.
+This is the **incremental rerun** stage of the release-notes pipeline. It is the
+branch-maintenance equivalent of what `editorial-scoring` is for scoring: the
+canonical place to describe how follow-up runs should behave.
 
 ## Purpose
 
@@ -27,7 +38,8 @@ Read these before making changes:
 
 1. the current base branch and its PR
 2. every per-component branch and its PR
-3. the existing `changes.json`, `features.json`, and `build-metadata.json` on the base branch
+3. the existing `changes.json`, `features.json`, and `build-metadata.json` on
+   the base branch
 4. the existing markdown files on each component branch
 5. unresolved PR review comments and discussion threads on every PR in the set
 
@@ -41,15 +53,21 @@ Respect this invariant on every rerun:
 | `README.md` | base branch only |
 | `{component}.md` (e.g. `aspnetcore.md`, `runtime.md`) | matching component branch only |
 
-Do **not** modify `changes.json`/`features.json` from a component branch, and do **not** modify another component's markdown from the wrong branch. When a component branch needs the latest metadata, rebase or merge it from the base branch first.
+Do **not** modify `changes.json`/`features.json` from a component branch, and
+do **not** modify another component's markdown from the wrong branch. When a
+component branch needs the latest metadata, rebase or merge it from the base
+branch first.
 
 ## Process
 
 ### 1. Check whether the preview moved forward
 
-Determine whether later `dotnet/dotnet` codeflow commits landed for the same preview branch or tag since the last run.
+Determine whether later `dotnet/dotnet` codeflow commits landed for the same
+preview branch or tag since the last run.
 
-If the relevant VMR ref moved forward, regenerate `changes.json` on the base branch. If it did not, keep the current file and focus on editorial fixes and comment responses on the component branches.
+If the relevant VMR ref moved forward, regenerate `changes.json` on the base
+branch. If it did not, keep the current file and focus on editorial fixes and
+comment responses on the component branches.
 
 Typical signals:
 
@@ -68,11 +86,13 @@ Classify changes as:
 - **removed or superseded** — no longer relevant to the current build story, or later evidence shows the original interpretation was wrong
 - **unchanged** — keep the prior editorial work
 
-Do **not** treat a refreshed `changes.json` as permission to restart the whole release from zero.
+Do **not** treat a refreshed `changes.json` as permission to restart the whole
+release from zero.
 
 ### 3. Merge into the existing `features.json`
 
-When `features.json` already exists, use it as the editorial baseline and merge the delta into it on the base branch.
+When `features.json` already exists, use it as the editorial baseline and merge
+the delta into it on the base branch.
 
 Preserve prior annotations for unchanged entries, including:
 
@@ -93,18 +113,30 @@ This should feel like a **delta merge**, not a full rescore.
 
 ### 4. Propagate refreshed metadata only to component branches you will edit
 
-After committing the metadata refresh to the base branch, do **not** blindly merge or rebase every component branch onto the new base. The `safe-outputs.push-to-pull-request-branch` budget is capped per run, and most component PRs do not need a fresh working tree just because metadata moved — GitHub recalculates the PR diff against the updated base automatically.
+After committing the metadata refresh to the base branch, do **not** blindly
+merge or rebase every component branch onto the new base. The
+`safe-outputs.push-to-pull-request-branch` budget is capped per run, and most
+component PRs do not need a fresh working tree just because metadata moved —
+GitHub recalculates the PR diff against the updated base automatically.
 
 Only update a component branch when:
 
-- you are about to edit that component's markdown in this run (because new evidence or a review comment requires it), or
-- a reviewer's comment cannot be answered without the refreshed metadata in the working tree.
+- you are about to edit that component's markdown in this run (because new
+  evidence or a review comment requires it), or
+- a reviewer's comment cannot be answered without the refreshed metadata in the
+  working tree.
 
-When you do update a component branch, either merge the base branch into it or rebase it onto the new base branch tip. Resolve conflicts in favor of the base branch for metadata files, and in favor of the component branch for the component markdown file. Component branches whose markdown is not changing this run are intentionally left "behind"; that is correct steady-state behavior.
+When you do update a component branch, either merge the base branch into it or
+rebase it onto the new base branch tip. Resolve conflicts in favor of the base
+branch for metadata files, and in favor of the component branch for the
+component markdown file. Component branches whose markdown is not changing this
+run are intentionally left "behind"; that is correct steady-state behavior.
 
 ### 5. Update markdown in place on the right component branch
 
-For each component affected by the delta, update **only** that component's markdown on **its** branch. Use the current draft as the starting point. Prefer **integration** over duplication.
+For each component affected by the delta, update **only** that component's
+markdown on **its** branch. Use the current draft as the starting point. Prefer
+**integration** over duplication.
 
 Examples:
 
@@ -112,11 +144,14 @@ Examples:
 - on the libraries branch, extend an existing **Unsafe Evolution** block in `libraries.md` instead of creating a second heading
 - move a newly demoted item into **Bug fixes** instead of deleting the story without explanation
 
-Keep the existing structure when it still works. Add a new top-level section only when the delta introduces a genuinely new story. Components that have no delta this run get no commit on this run.
+Keep the existing structure when it still works. Add a new top-level section
+only when the delta introduces a genuinely new story. Components that have no
+delta this run get no commit on this run.
 
 ### 6. Treat review comments as required inputs
 
-Unresolved PR comments are part of the spec for the next run, on every PR in the set.
+Unresolved PR comments are part of the spec for the next run, on every PR in
+the set.
 
 - read them before rewriting anything
 - answer factual questions with evidence from `changes.json`, VMR refs, API verification, or the final build
@@ -129,9 +164,12 @@ For an existing release-notes branch set, the normal loop is:
 
 1. refresh `changes.json` only if the preview moved forward (base branch)
 2. merge the delta into `features.json` (base branch)
-3. update component branches **only when their markdown is being edited this run** — propagate base metadata into those branches first
-4. update only the affected component markdown files in place, each on its own branch
+3. update component branches **only when their markdown is being edited this
+   run** — propagate base metadata into those branches first
+4. update only the affected component markdown files in place, each on its own
+   branch
 5. respond to comments and questions across every PR in the set
 6. push follow-up commits to the same PRs (no new PRs)
 
-This keeps the branch set stable for reviewers and avoids throwing away already curated editorial work.
+This keeps the branch set stable for reviewers and avoids throwing away already
+curated editorial work.
