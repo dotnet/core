@@ -18,8 +18,8 @@ Notes:
 
 | OS          | Versions   | Architectures | Lifecycle |
 | ----------- | ---------- | ------------- | --------- |
-| [iOS][2]    | 26, 18     | Arm64         | None      |
-| [iPadOS][3] | 26, 18, 17 | Arm64         | None      |
+| [iOS][2]    | 26         | Arm64         | None      |
+| [iPadOS][3] | 26, 18     | Arm64         | None      |
 | [macOS][4]  | 26, 15, 14 | Arm64, x64    | None      |
 | [tvOS][5]   | 26         | Arm64         | None      |
 
@@ -38,7 +38,7 @@ Notes:
 | [Azure Linux][8]               | 3.0                        | Arm64, x64                 | None            |
 | [CentOS Stream][9]             | 10, 9                      | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
 | [Debian][11]                   | 13                         | Arm32, Arm64, x64          | [Lifecycle][12] |
-| [Fedora][13]                   | 43                         | Arm32, Arm64, x64          | [Lifecycle][14] |
+| [Fedora][13]                   | 44, 43                     | Arm32, Arm64, x64          | [Lifecycle][14] |
 | [openSUSE Leap][15]            | 16.0                       | Arm64, x64                 | [Lifecycle][16] |
 | [Red Hat Enterprise Linux][17] | 10, 9, 8                   | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
 | [SUSE Linux Enterprise][19]    | 16.0, 15.7                 | Arm64, x64                 | [Lifecycle][20] |
@@ -108,3 +108,12 @@ Notes:
 
 - The [QEMU](https://www.qemu.org/) emulator is not supported to run .NET apps. QEMU is used, for example, to emulate Arm64 containers on x64, and vice versa.
 - Microsoft-provided portable Arm32 glibc builds are supported on distro versions with a [Y2038 compatible glibc](https://github.com/dotnet/core/discussions/9285), for example Debian 12, Ubuntu 22.04, and higher versions.
+
+## Out of support OS versions
+
+OS versions that are out of support by the OS publisher are not tested or supported by .NET.
+
+| OS     | Version | End of Life |
+| ------ | ------- | ----------- |
+| iOS    | 18      | 2026-04-22  |
+| iPadOS | 17      | 2025-09-15  |

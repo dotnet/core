@@ -18,8 +18,8 @@ Notes:
 
 | OS          | Versions   | Architectures | Lifecycle |
 | ----------- | ---------- | ------------- | --------- |
-| [iOS][2]    | 26, 18     | Arm64         | None      |
-| [iPadOS][3] | 26, 18, 17 | Arm64         | None      |
+| [iOS][2]    | 26         | Arm64         | None      |
+| [iPadOS][3] | 26, 18     | Arm64         | None      |
 | [macOS][4]  | 26, 15, 14 | Arm64, x64    | None      |
 | [tvOS][5]   | 26         | Arm64         | None      |
 
@@ -32,17 +32,17 @@ Notes:
 
 ## Linux
 
-| OS                             | Versions               | Architectures              | Lifecycle       |
-| ------------------------------ | ---------------------- | -------------------------- | --------------- |
-| [Alpine][6]                    | 3.23, 3.22, 3.21, 3.20 | Arm32, Arm64, x64          | [Lifecycle][7]  |
-| [Azure Linux][8]               | 3.0                    | Arm64, x64                 | None            |
-| [CentOS Stream][9]             | 10, 9                  | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
-| [Debian][11]                   | 13, 12                 | Arm32, Arm64, x64          | [Lifecycle][12] |
-| [Fedora][13]                   | 43, 42                 | Arm32, Arm64, x64          | [Lifecycle][14] |
-| [openSUSE Leap][15]            | 16.0, 15.6             | Arm64, x64                 | [Lifecycle][16] |
-| [Red Hat Enterprise Linux][17] | 10, 9, 8               | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
-| [SUSE Linux Enterprise][19]    | 16.0, 15.7             | Arm64, x64                 | [Lifecycle][20] |
-| [Ubuntu][21]                   | 25.10, 24.04, 22.04    | Arm32, Arm64, x64          | [Lifecycle][22] |
+| OS                             | Versions            | Architectures              | Lifecycle       |
+| ------------------------------ | ------------------- | -------------------------- | --------------- |
+| [Alpine][6]                    | 3.23, 3.22, 3.21    | Arm32, Arm64, x64          | [Lifecycle][7]  |
+| [Azure Linux][8]               | 3.0                 | Arm64, x64                 | None            |
+| [CentOS Stream][9]             | 10, 9               | Arm64, ppc64le, s390x, x64 | [Lifecycle][10] |
+| [Debian][11]                   | 13, 12              | Arm32, Arm64, x64          | [Lifecycle][12] |
+| [Fedora][13]                   | 44, 43, 42          | Arm32, Arm64, x64          | [Lifecycle][14] |
+| [openSUSE Leap][15]            | 16.0                | Arm64, x64                 | [Lifecycle][16] |
+| [Red Hat Enterprise Linux][17] | 10, 9, 8            | Arm64, ppc64le, s390x, x64 | [Lifecycle][18] |
+| [SUSE Linux Enterprise][19]    | 16.0, 15.7          | Arm64, x64                 | [Lifecycle][20] |
+| [Ubuntu][21]                   | 25.10, 24.04, 22.04 | Arm32, Arm64, x64          | [Lifecycle][22] |
 
 Notes:
 
@@ -113,8 +113,12 @@ Notes:
 
 OS versions that are out of support by the OS publisher are not tested or supported by .NET.
 
-| OS      | Version     | End of Life       |
-| ------- | ----------- | ----------------- |
-| Android | 13          | 2026-03-02        |
-| SUSE Linux Enterprise | 15.6 | 2025-12-31 |
-| Windows | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| OS                    | Version | End of Life           |
+| --------------------- | ------- | --------------------- |
+| Alpine                | 3.20    | [2026-04-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)      |
+| Android               | 13      | 2026-03-02            |
+| SUSE Linux Enterprise | 15.6    | 2025-12-31            |
+| Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
+| iOS                   | 18      | 2026-04-22            |
+| iPadOS                | 17      | 2025-09-15            |
+| openSUSE Leap         | 15.6    | [2026-04-30](https://en.opensuse.org/openSUSE:Roadmap#Leap_15.6)                                   |

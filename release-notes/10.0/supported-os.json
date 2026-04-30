@@ -25,7 +25,8 @@
           "name": "iOS",
           "link": "https://developer.apple.com/ios/",
           "architectures": ["Arm64"],
-          "supported-versions": ["26", "18"],
+          "supported-versions": ["26"],
+          "unsupported-versions": ["18"],
           "notes": ["iOS 12.2 is used as the minimum SDK target."]
         },
         {
@@ -33,7 +34,8 @@
           "name": "iPadOS",
           "link": "https://developer.apple.com/ipados/",
           "architectures": ["Arm64"],
-          "supported-versions": ["26", "18", "17"]
+          "supported-versions": ["26", "18"],
+          "unsupported-versions": ["17"]
         },
         {
           "id": "macos",
@@ -65,7 +67,8 @@
           "link": "https://alpinelinux.org/",
           "lifecycle": "https://alpinelinux.org/releases/",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["3.23", "3.22", "3.21", "3.20"]
+          "supported-versions": ["3.23", "3.22", "3.21"],
+          "unsupported-versions": ["3.20"]
         },
         {
           "id": "azure-linux",
@@ -96,7 +99,7 @@
           "link": "https://fedoraproject.org/",
           "lifecycle": "https://fedoraproject.org/wiki/End_of_life",
           "architectures": ["Arm32", "Arm64", "x64"],
-          "supported-versions": ["43", "42"]
+          "supported-versions": ["44", "43", "42"]
         },
         {
           "id": "opensuse",
@@ -104,7 +107,8 @@
           "link": "https://www.opensuse.org/",
           "lifecycle": "https://en.opensuse.org/Lifetime",
           "architectures": ["Arm64", "x64"],
-          "supported-versions": ["16.0", "15.6"]
+          "supported-versions": ["16.0"],
+          "unsupported-versions": ["15.6"]
         },
         {
           "id": "rhel",
