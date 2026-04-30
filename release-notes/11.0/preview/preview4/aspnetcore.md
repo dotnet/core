@@ -111,11 +111,9 @@ Moving the template into ASP.NET Core makes it discoverable from `dotnet new lis
 
 Two related changes make it easier to diagnose and customize TLS connections in Kestrel.
 
-`ITlsHandshakeFeature` now exposes the exception thrown during a failed TLS handshake, so middleware and logging can record why a connection failed instead of seeing a bare `IOException` further up the stack ([dotnet/aspnetcore #65807](https://github.com/dotnet/aspnetcore/pull/65807)). The feature continues to work after the handshake fails — Kestrel snapshots the relevant fields off the underlying `SslStream` before it is disposed.
+`ITlsHandshakeFeature` now exposes an `Exception` property containing the exception thrown during a failed TLS handshake, so middleware and logging can record why a connection failed instead of seeing a bare `IOException` further up the stack ([dotnet/aspnetcore #65807](https://github.com/dotnet/aspnetcore/pull/65807)). The feature continues to work after the handshake fails — Kestrel snapshots the relevant fields off the underlying `SslStream` before it is disposed.
 
 The `TlsClientHelloBytesCallback` option on `HttpsConnectionAdapterOptions` was reworked as a connection middleware ([dotnet/aspnetcore #65808](https://github.com/dotnet/aspnetcore/pull/65808)). The previous callback shape is now obsolete; configure ClientHello inspection via the connection-builder pipeline instead.
-
-<!-- TODO: confirm the exact property name on ITlsHandshakeFeature and the recommended replacement API for TlsClientHelloBytesCallback once API ref is published. -->
 
 ## Response compression always emits `Vary: Accept-Encoding`
 
@@ -127,8 +125,8 @@ Thank you [@pedrobsaila](https://github.com/pedrobsaila) for this contribution!
 
 Two changes round out the minimal API + OpenAPI experience this preview:
 
-- **File result types appear in OpenAPI documents.** `FileStreamResult`, `FileContentHttpResult`, and `FileStreamHttpResult` are now described as binary string schemas in generated OpenAPI documents, so clients see accurate response shapes for endpoints that stream files ([dotnet/aspnetcore #64562](https://github.com/dotnet/aspnetcore/pull/64562)). Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
-- **Endpoint filters can observe parameter-binding failures.** When a minimal API endpoint has filters configured and its delegate returns `ValueTask<object?>`, the filter pipeline now runs even if parameter binding fails. Filters can read the 400 response and substitute their own. Endpoints without filters continue to short-circuit with a 400 as before ([dotnet/aspnetcore #64539](https://github.com/dotnet/aspnetcore/pull/64539)). Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
+- **File result types appear in OpenAPI documents.** `FileStreamResult`, `FileContentHttpResult`, and `FileStreamHttpResult` are now described as binary string schemas in generated OpenAPI documents, so clients see accurate response shapes for endpoints that stream files ([dotnet/aspnetcore #64562](https://github.com/dotnet/aspnetcore/pull/64562)). Annotate the endpoint with `.Produces<FileContentHttpResult>(contentType: "application/pdf")` (or the equivalent `*StreamHttpResult`/`FileStreamResult` type) so OpenAPI sees the result type and emits the binary schema. Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
+- **Endpoint filters can observe parameter-binding failures.** When a minimal API endpoint has any filters or filter factories configured, the filter pipeline now runs even if parameter binding fails. Filters can read `HttpContext.Response.StatusCode == 400` and substitute their own response body. Endpoints without filters continue to short-circuit with a 400 as before ([dotnet/aspnetcore #64539](https://github.com/dotnet/aspnetcore/pull/64539)). In Development, set `RouteHandlerOptions.ThrowOnBadRequest = false` so the framework returns a 400 the filter can observe instead of throwing `BadHttpRequestException` to the developer exception page. Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
 ## Smaller Blazor WebAssembly publish output
 
