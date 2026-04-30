@@ -18,7 +18,7 @@ Notes:
 
 | OS          | Versions   | Architectures | Lifecycle |
 | ----------- | ---------- | ------------- | --------- |
-| [iOS][2]    | 26         | Arm64         | None      |
+| [iOS][2]    | 26, 18     | Arm64         | None      |
 | [iPadOS][3] | 26, 18     | Arm64         | None      |
 | [macOS][4]  | 26, 15, 14 | Arm64, x64    | None      |
 | [tvOS][5]   | 26         | Arm64         | None      |
@@ -119,6 +119,5 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Android               | 13      | 2026-03-02            |
 | SUSE Linux Enterprise | 15.6    | 2025-12-31            |
 | Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information) |
-| iOS                   | 18      | 2026-04-22            |
 | iPadOS                | 17      | 2025-09-15            |
 | openSUSE Leap         | 15.6    | [2026-04-30](https://en.opensuse.org/openSUSE:Roadmap#Leap_15.6)                                   |

@@ -18,7 +18,7 @@ Notes:
 
 | OS          | Versions   | Architectures | Lifecycle |
 | ----------- | ---------- | ------------- | --------- |
-| [iOS][2]    | 26         | Arm64         | None      |
+| [iOS][2]    | 26, 18     | Arm64         | None      |
 | [iPadOS][3] | 26, 18     | Arm64         | None      |
 | [macOS][4]  | 26, 15, 14 | Arm64, x64    | None      |
 | [tvOS][5]   | 26         | Arm64         | None      |
@@ -115,5 +115,4 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 
 | OS     | Version | End of Life |
 | ------ | ------- | ----------- |
-| iOS    | 18      | 2026-04-22  |
 | iPadOS | 17      | 2025-09-15  |

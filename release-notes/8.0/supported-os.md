@@ -18,7 +18,7 @@ Notes:
 
 | OS          | Versions   | Architectures | Lifecycle |
 | ----------- | ---------- | ------------- | --------- |
-| [iOS][2]    | 26         | Arm64         | None      |
+| [iOS][2]    | 26, 18     | Arm64         | None      |
 | [iPadOS][3] | 26, 18     | Arm64         | None      |
 | [macOS][4]  | 26, 15, 14 | Arm64, x64    | None      |
 | [tvOS][5]   | 26         | Arm64         | None      |
@@ -144,7 +144,6 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Windows               | 11 22H2 (W) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information)   |
 | Windows               | 11 21H2 (E) | [2024-10-08](https://learn.microsoft.com/windows/release-health/windows11-release-information)   |
 | Windows               | 10 21H2 (E) | [2024-06-11](https://learn.microsoft.com/lifecycle/products/windows-10-enterprise-and-education) |
-| iOS                   | 18          | 2026-04-22    |
 | iOS                   | 16          | [2025-03-31](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes)    |
 | iOS                   | 15          | 2025-03-31    |
 | iOS                   | 17          | 2024-11-19    |
