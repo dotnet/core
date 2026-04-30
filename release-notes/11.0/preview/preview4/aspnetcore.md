@@ -178,8 +178,8 @@ Apps that use OpenTelemetry or hot reload aren't affected — the feature switch
 
 Thank you contributors! ❤️
 
-- [@Emik03](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AEmik03)
-- [@kilifu](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Akilifu)
-- [@marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amarcominerva)
-- [@MatthewSteeples](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AMatthewSteeples)
-- [@pedrobsaila](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Apedrobsaila)
+- [@Emik03](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AEmik03+milestone%3A11.0-preview4)
+- [@kilifu](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Akilifu+milestone%3A11.0-preview4)
+- [@marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amarcominerva+milestone%3A11.0-preview4)
+- [@MatthewSteeples](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AMatthewSteeples+milestone%3A11.0-preview4)
+- [@pedrobsaila](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Apedrobsaila+milestone%3A11.0-preview4)
