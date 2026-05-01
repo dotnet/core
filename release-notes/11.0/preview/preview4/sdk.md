@@ -39,6 +39,11 @@ You can also pre-select a device on the command line:
 dotnet watch --device <device-id>
 ```
 
+`dotnet watch` works for Android devices and emulators, in addition to iOS
+Simulators.
+
+![GIF of `dotnet watch` on Windows for Android](media/net11p4-dotnet-watch-android.gif)
+
 The framework prompt itself was upgraded to use Spectre.Console as well, so
 arrow-key navigation, search, and pagination now work the same way as in
 `dotnet run` ([dotnet/sdk #53540](https://github.com/dotnet/sdk/pull/53540)).
@@ -59,7 +64,9 @@ Several long-standing `dotnet watch` issues are fixed in Preview 4:
   ([dotnet/sdk #54023](https://github.com/dotnet/sdk/pull/54023)).
 
 Together these make `dotnet watch` usable end-to-end on a `dotnet new maui`
-project running in the iOS simulator.
+project running in the iOS Simulator.
+
+![GIF of `dotnet watch` on macOS for iOS](media/net11p4-dotnet-watch-ios.gif)
 
 ## Fish shell completions match Bash, Zsh, and PowerShell
 
