@@ -2,16 +2,18 @@
 
 .NET 11 Preview 4 includes new ASP.NET Core features and improvements:
 
-- [Support for the HTTP QUERY method](#support-for-the-http-query-method)
+- [HTTP QUERY in generated OpenAPI documents](#http-query-in-generated-openapi-documents)
 - [SupplyParameterFromTempData for Blazor](#supplyparameterfromtempdata-for-blazor)
 - [Server-initiated Blazor Server circuit pause](#server-initiated-blazor-server-circuit-pause)
 - [Virtualize keeps the viewport stable when content above it changes](#virtualize-keeps-the-viewport-stable-when-content-above-it-changes)
+- [Virtualize AnchorMode for stable viewports during prepend and append](#virtualize-anchormode-for-stable-viewports-during-prepend-and-append)
 - [Blazor WebAssembly service defaults template](#blazor-webassembly-service-defaults-template)
 - [MCP Server template ships with the .NET SDK](#mcp-server-template-ships-with-the-net-sdk)
 - [TLS handshake observability in Kestrel](#tls-handshake-observability-in-kestrel)
 - [Response compression always emits `Vary: Accept-Encoding`](#response-compression-always-emits-vary-accept-encoding)
 - [OpenAPI and minimal API improvements](#openapi-and-minimal-api-improvements)
 - [Smaller Blazor WebAssembly publish output](#smaller-blazor-webassembly-publish-output)
+- [Runtime-async enabled for shared framework libraries](#runtime-async-enabled-for-shared-framework-libraries)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -20,9 +22,9 @@ ASP.NET Core updates in .NET 11:
 
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
 
-## Support for the HTTP QUERY method
+## HTTP QUERY in generated OpenAPI documents
 
-ASP.NET Core now recognizes [HTTP QUERY](https://datatracker.ietf.org/doc/draft-ietf-httpbis-safe-method-w-body/) as a first-class HTTP method in routing, minimal APIs, and OpenAPI document generation ([dotnet/aspnetcore #65714](https://github.com/dotnet/aspnetcore/pull/65714)). QUERY is a proposed safe, idempotent method that lets clients send a request body when describing a search — useful when a query is too large or too structured to fit in a URL.
+OpenAPI document generation now recognizes [HTTP QUERY](https://datatracker.ietf.org/doc/draft-ietf-httpbis-safe-method-w-body/) as a first-class operation type ([dotnet/aspnetcore #65714](https://github.com/dotnet/aspnetcore/pull/65714)). QUERY is a proposed safe, idempotent method that lets clients send a request body when describing a search — useful when a query is too large or too structured to fit in a URL. Routing already accepted arbitrary verb strings via `MapMethods`; this change makes QUERY endpoints show up correctly in the generated OpenAPI document so client generators and API explorers can consume them.
 
 ```csharp
 var app = WebApplication.Create();
@@ -32,6 +34,8 @@ app.MapMethods("/search", ["QUERY"], (SearchRequest request) =>
 
 app.Run();
 ```
+
+Thank you [@kilifu](https://github.com/kilifu) for this contribution!
 
 The method shows up in generated OpenAPI documents alongside `GET`, `POST`, and friends, so client generators and API explorers pick it up automatically.
 
@@ -79,9 +83,34 @@ The method returns `true` when the client was successfully asked to begin pausin
 
 ## Virtualize keeps the viewport stable when content above it changes
 
-Preview 3 taught Blazor's `Virtualize<TItem>` to handle items with different heights. Preview 4 builds on that with viewport stability: visible items stay in place when items above the viewport change height, and when items are prepended to the collection ([dotnet/aspnetcore #65951](https://github.com/dotnet/aspnetcore/pull/65951)).
+Blazor's `Virtualize<TItem>` no longer shifts visible content when items above the viewport change height ([dotnet/aspnetcore #65951](https://github.com/dotnet/aspnetcore/pull/65951)). Previously the component disabled the browser's native scroll anchoring (to avoid an infinite render loop) which meant any height change above the viewport — item expansion, data updates, lazy-loaded content — would cause visible items to jump on screen.
 
-The component uses native CSS scroll anchoring where the browser supports it and falls back to manual scroll compensation otherwise (notably for `<table>` layouts and Safari). Apps using `Virtualize` get this automatically — no API changes required.
+The fix uses a hybrid approach: native CSS scroll anchoring on browsers that support it for non-`<table>` layouts, with a manual `ResizeObserver`-based scroll-compensation fallback for `<table>` layouts and Safari (where native anchoring miscalculates positions on `<tr>` candidates). Apps using `Virtualize` get this automatically — no API changes required.
+
+## Virtualize AnchorMode for stable viewports during prepend and append
+
+A new `AnchorMode` parameter on `Virtualize<TItem>` controls viewport behavior at list edges when items are added dynamically — for chat UIs, news feeds, log viewers, and similar scenarios ([dotnet/aspnetcore #66521](https://github.com/dotnet/aspnetcore/pull/66521)). The component snapshots an anchor element before each render and restores its position after, so the visible items stay where the user is looking even when items are inserted before the current viewport (prepend) or after it (append). The mechanism works for both fixed- and variable-height items.
+
+```razor
+<Virtualize Items="@messages"
+            AnchorMode="VirtualizeAnchorMode.Beginning"
+            ItemComparer="@_messageById">
+    <ItemContent Context="msg">@msg.Text</ItemContent>
+</Virtualize>
+
+@code {
+    private static readonly IEqualityComparer<Message> _messageById =
+        EqualityComparer<Message>.Create((a, b) => a?.Id == b?.Id, m => m.Id.GetHashCode());
+}
+```
+
+`AnchorMode` accepts:
+
+- `VirtualizeAnchorMode.Beginning` — preserve viewport when items are prepended (auto-follow the bottom for chat-style UIs).
+- `VirtualizeAnchorMode.End` — preserve viewport when items are appended.
+- `VirtualizeAnchorMode.None` — no anchoring (default).
+
+For reference-type items, also supply an `ItemComparer` so the component can correlate items across renders. Without one, `Virtualize` falls back to `EqualityComparer<T>.Default`, which uses reference equality for reference types and won't recognize a re-fetched item as the same logical entity.
 
 ## Blazor WebAssembly service defaults template
 
@@ -137,6 +166,12 @@ Two trimming changes shrink published Blazor WebAssembly apps that don't use Ope
 
 Apps that use OpenTelemetry or hot reload aren't affected — the feature switches default on in those configurations.
 
+## Runtime-async enabled for shared framework libraries
+
+ASP.NET Core's shared-framework-only libraries are now compiled with the `runtime-async` feature on `net11.0+` ([dotnet/aspnetcore #66449](https://github.com/dotnet/aspnetcore/pull/66449), backporting [#66200](https://github.com/dotnet/aspnetcore/pull/66200)). Runtime-async lets the runtime, rather than the C# compiler, generate the state machine for `async`/`await`, which can reduce per-await allocations and improve diagnostics. This is an internal codegen change with no public API impact — apps targeting `net11.0` automatically benefit when they call into the affected ASP.NET Core libraries.
+
+Libraries that ship as both shared-framework members and standalone NuGet packages are excluded, because runtime-async is incompatible with WebAssembly and would otherwise break wasm consumers of those packages.
+
 ## Breaking changes
 
 - **`%2F` is preserved in HTTP/1.1 absolute-form request targets.** Previously, a request like `GET http://host/a%2Fb` was decoded to a path of `/a/b`, while `GET /a%2Fb` (origin-form) preserved the encoded slash. Both forms now resolve to `/a%2Fb`. Apps that depended on the inconsistent absolute-form behavior should update their routing or middleware to expect the encoded segment ([dotnet/aspnetcore #65930](https://github.com/dotnet/aspnetcore/pull/65930)).
@@ -151,7 +186,6 @@ Apps that use OpenTelemetry or hot reload aren't affected — the feature switch
   - Razor editor/IDE fixes (#13017, #13023, #13035, #13043, #13044, #13057, #13063, #13065): tooling/IDE work — product-boundary rule excludes these from ASP.NET Core product notes.
   - "Detach methods when disconnection confirmed" (#66275) and resource-collection gzip footer (#66242): rolled into Bug fixes.
   - Blazor Web Worker template renames and clean-up (#66070, #66261): rolled into Bug fixes / templates section.
-  - Runtime-async enablement for SharedFx-only libraries (#66449): cross-stack runtime-async work; covered in the runtime release notes.
   - Numerous infra / dependency / loc / agentic-workflow / source-build PRs: pre-filtered (~69 entries) before scoring.
 -->
 
