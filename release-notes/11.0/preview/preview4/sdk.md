@@ -68,6 +68,19 @@ project running in the iOS Simulator.
 
 ![GIF of `dotnet watch` on macOS for iOS](media/net11p4-dotnet-watch-ios.gif)
 
+### Known issue: `dotnet watch` requires `MtouchLink=None` for iOS Simulator
+
+`dotnet watch` does not work for iOS projects unless `<MtouchLink>None</MtouchLink>`
+is set in the `.csproj` file
+([dotnet/macios #25295](https://github.com/dotnet/macios/issues/25295)). Add the
+following to your project file:
+
+```xml
+<PropertyGroup>
+  <MtouchLink>None</MtouchLink>
+</PropertyGroup>
+```
+
 ## Fish shell completions match Bash, Zsh, and PowerShell
 
 The fish shell provider previously emitted a one-liner that delegated every
