@@ -64,22 +64,40 @@ The Blazor Identity project template was rewritten to use this attribute instead
 
 `Circuit.RequestCircuitPauseAsync` lets server-side code ask the connected Blazor client to begin the graceful circuit-pause flow ([dotnet/aspnetcore #66455](https://github.com/dotnet/aspnetcore/pull/66455)). Until now, pause was only triggered by client-side navigation; this gives operators a programmatic way to drain circuits during deployments or load-balancer rebalancing.
 
+There is no public registry of active circuits, so the supported way to obtain a `Circuit` instance is to capture it from `CircuitHandler.OnConnectionUpAsync`. A small handler that tracks circuits and lets a hosted service drain them looks like this:
+
 ```csharp
-public class RebalanceService(CircuitRegistry circuits)
+public class CircuitTracker : CircuitHandler
 {
-    public async Task DrainAsync(CancellationToken ct)
+    private static readonly ConcurrentDictionary<string, Circuit> _circuits = new();
+
+    public static IReadOnlyCollection<Circuit> ActiveCircuits => _circuits.Values.ToArray();
+
+    public override Task OnConnectionUpAsync(Circuit circuit, CancellationToken cancellationToken)
     {
-        foreach (var circuit in circuits.GetActiveCircuits())
-        {
-            await circuit.RequestCircuitPauseAsync();
-        }
+        _circuits[circuit.Id] = circuit;
+        return Task.CompletedTask;
     }
+
+    public override Task OnCircuitClosedAsync(Circuit circuit, CancellationToken cancellationToken)
+    {
+        _circuits.TryRemove(circuit.Id, out _);
+        return Task.CompletedTask;
+    }
+}
+
+// In Program.cs:
+builder.Services.AddScoped<CircuitTracker>();
+builder.Services.AddScoped<CircuitHandler>(sp => sp.GetRequiredService<CircuitTracker>());
+
+// In a drain service:
+foreach (var circuit in CircuitTracker.ActiveCircuits)
+{
+    await circuit.RequestCircuitPauseAsync();
 }
 ```
 
-The method returns `true` when the client was successfully asked to begin pausing. Clients can defer the request via the optional `onPauseRequested` callback in `CircuitStartOptions`.
-
-<!-- TODO: verify exact shape of CircuitRegistry / how a hosting app obtains a Circuit instance; PR shows the new API on Circuit but not the discovery path. -->
+`RequestCircuitPauseAsync` returns `true` when the client was successfully asked to begin pausing, and `false` if the circuit is already disposed, not yet initialized, or not currently connected. On the JS side, clients can defer the request via the optional `onPauseRequested` callback on the Blazor.start() options.
 
 ## Virtualize keeps the viewport stable when content above it changes
 
