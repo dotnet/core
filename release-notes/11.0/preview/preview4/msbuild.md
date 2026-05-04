@@ -6,6 +6,8 @@
 - [SdkResolver environment variables take precedence over the ambient environment](#sdkresolver-environment-variables-take-precedence-over-the-ambient-environment)
 - [Multithreaded build: more in-box tasks enlightened](#multithreaded-build-more-in-box-tasks-enlightened)
 
+These features are mostly in service of the [Multithreaded execution](https://github.com/dotnet/msbuild/blob/main/documentation/specs/multithreading/multithreaded-msbuild.md) feature, which is still under active development.
+
 ## TaskHost callbacks enabled by default
 
 Tasks that run in an out-of-process TaskHost — for example, when a project uses `-mt` (multithreaded) builds or when a task explicitly opts into `TaskHostFactory` — can now call back into the engine through `IBuildEngine` to build other projects. The `BuildProjectFile`, `BuildProjectFilesInParallel`, and related overloads are forwarded from the TaskHost to the owning worker node, so callbacks behave the same as in-proc builds ([dotnet/msbuild #13350](https://github.com/dotnet/msbuild/pull/13350), [dotnet/msbuild #13579](https://github.com/dotnet/msbuild/pull/13579)).
