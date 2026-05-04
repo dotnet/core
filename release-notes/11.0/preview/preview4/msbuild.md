@@ -14,9 +14,8 @@ Tasks that run in an out-of-process TaskHost — for example, when a project use
 
 The most visible impact is WPF: XAML compilation uses `GenerateTemporaryTargetAssembly`, which calls `BuildProjectFile` from a TaskHost. Before this change, building any WPF project with `-mt` failed with `MSB5022`. With Preview 4, this works without any opt-in.
 
-```
+```shell
 dotnet build MyWpfApp.csproj -mt
-```
 
 The previous opt-in environment variable (`MSBUILDENABLETASKHOSTCALLBACKS=1`) is no longer required; the feature is on by default.
 
