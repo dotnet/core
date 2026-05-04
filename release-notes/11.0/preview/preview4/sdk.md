@@ -171,7 +171,8 @@ Preview 4 lays the groundwork for a NativeAOT-compiled `dotnet` CLI host
 introduces three layers:
 
 - `dn.exe` — a NativeAOT host that resolves `DOTNET_ROOT` and `hostfxr` and
-  marshals arguments into a NativeAOT shared library.
+  marshals arguments into a NativeAOT shared library. This is for SDK-repo
+  dogfooding, not for production usage.
 - `dotnet-aot.dll` — a NativeAOT shared library that handles simple commands
   such as `--version` and `--info` directly, and falls back to the full managed
   CLI via `hostfxr` for everything else.
