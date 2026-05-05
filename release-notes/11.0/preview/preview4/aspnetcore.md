@@ -226,7 +226,7 @@ Fetch the response from a Razor component to drive client-side behavior:
 
 ### End-to-end sample
 
-A complete working setup — standalone Blazor WebAssembly client, ASP.NET Core backend, and a Gateway wired up with both YARP proxying and a config endpoint — is in the [`GatewayDemo` sample](https://github.com/danroth27/AspNetCore11Samples/tree/dotnet11p4/GatewayDemo). The sample also shows how to wire up [`Microsoft.Extensions.ServiceDiscovery`](https://learn.microsoft.com/dotnet/core/extensions/service-discovery) so YARP destinations can be resolved by service name in addition to absolute URLs.
+A complete working setup — standalone Blazor WebAssembly client, ASP.NET Core backend, and a Gateway wired up with both YARP proxying and a config endpoint — is in the [`BlazorWasmFeatures` sample](https://github.com/danroth27/AspNetCore11Samples/tree/dotnet11p4/BlazorWasmFeatures) (with sibling `BackendApi/` and `Gateway/` projects).
 
 ## MCP Server template ships with the .NET SDK
 
