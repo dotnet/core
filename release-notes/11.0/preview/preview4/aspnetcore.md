@@ -11,7 +11,8 @@
 - [MCP Server template ships with the .NET SDK](#mcp-server-template-ships-with-the-net-sdk)
 - [TLS handshake observability in Kestrel](#tls-handshake-observability-in-kestrel)
 - [Response compression always emits `Vary: Accept-Encoding`](#response-compression-always-emits-vary-accept-encoding)
-- [OpenAPI and minimal API improvements](#openapi-and-minimal-api-improvements)
+- [File result types appear in OpenAPI documents](#file-result-types-appear-in-openapi-documents)
+- [Endpoint filters observe parameter-binding failures](#endpoint-filters-observe-parameter-binding-failures)
 - [Smaller Blazor WebAssembly publish output](#smaller-blazor-webassembly-publish-output)
 - [Runtime-async enabled for shared framework libraries](#runtime-async-enabled-for-shared-framework-libraries)
 - [Breaking changes](#breaking-changes)
@@ -34,8 +35,6 @@ app.MapMethods("/search", ["QUERY"], (SearchRequest request) =>
 
 app.Run();
 ```
-
-Thank you [@kilifu](https://github.com/kilifu) for this contribution!
 
 The method shows up in generated OpenAPI documents alongside `GET`, `POST`, and friends, so client generators and API explorers pick it up automatically.
 
@@ -160,7 +159,23 @@ Two related changes make it easier to diagnose and customize TLS connections in 
 
 `ITlsHandshakeFeature` now exposes an `Exception` property containing the exception thrown during a failed TLS handshake, so middleware and logging can record why a connection failed instead of seeing a bare `IOException` further up the stack ([dotnet/aspnetcore #65807](https://github.com/dotnet/aspnetcore/pull/65807)). The feature continues to work after the handshake fails — Kestrel snapshots the relevant fields off the underlying `SslStream` before it is disposed.
 
-The `TlsClientHelloBytesCallback` option on `HttpsConnectionAdapterOptions` was reworked as a connection middleware ([dotnet/aspnetcore #65808](https://github.com/dotnet/aspnetcore/pull/65808)). The previous callback shape is now obsolete; configure ClientHello inspection via the connection-builder pipeline instead.
+The `TlsClientHelloBytesCallback` option on `HttpsConnectionAdapterOptions` was reworked as a connection middleware ([dotnet/aspnetcore #65808](https://github.com/dotnet/aspnetcore/pull/65808)). The previous callback shape is now obsolete; configure ClientHello inspection via the new `ListenOptions.UseTlsClientHelloListener` extension instead:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5001, listenOptions =>
+    {
+        listenOptions.UseHttps();
+        listenOptions.UseTlsClientHelloListener((connection, clientHelloBytes) =>
+        {
+            // Inspect the ClientHello (SNI, ALPN, etc.) for diagnostics or routing.
+        });
+    });
+});
+```
 
 ## Response compression always emits `Vary: Accept-Encoding`
 
@@ -168,12 +183,17 @@ The response-compression middleware now adds `Vary: Accept-Encoding` to every re
 
 Thank you [@pedrobsaila](https://github.com/pedrobsaila) for this contribution!
 
-## OpenAPI and minimal API improvements
+## File result types appear in OpenAPI documents
 
-Two changes round out the minimal API + OpenAPI experience this preview:
+`FileStreamResult`, `FileContentHttpResult`, and `FileStreamHttpResult` are now described as binary string schemas in generated OpenAPI documents, so clients see accurate response shapes for endpoints that stream files ([dotnet/aspnetcore #64562](https://github.com/dotnet/aspnetcore/pull/64562)). Annotate the endpoint with `.Produces<FileContentHttpResult>(contentType: "application/pdf")` (or the equivalent `*StreamHttpResult`/`FileStreamResult` type) so OpenAPI sees the result type and emits the binary schema.
 
-- **File result types appear in OpenAPI documents.** `FileStreamResult`, `FileContentHttpResult`, and `FileStreamHttpResult` are now described as binary string schemas in generated OpenAPI documents, so clients see accurate response shapes for endpoints that stream files ([dotnet/aspnetcore #64562](https://github.com/dotnet/aspnetcore/pull/64562)). Annotate the endpoint with `.Produces<FileContentHttpResult>(contentType: "application/pdf")` (or the equivalent `*StreamHttpResult`/`FileStreamResult` type) so OpenAPI sees the result type and emits the binary schema. Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
-- **Endpoint filters can observe parameter-binding failures.** When a minimal API endpoint has any filters or filter factories configured, the filter pipeline now runs even if parameter binding fails. Filters can read `HttpContext.Response.StatusCode == 400` and substitute their own response body. Endpoints without filters continue to short-circuit with a 400 as before ([dotnet/aspnetcore #64539](https://github.com/dotnet/aspnetcore/pull/64539)). In Development, set `RouteHandlerOptions.ThrowOnBadRequest = false` so the framework returns a 400 the filter can observe instead of throwing `BadHttpRequestException` to the developer exception page. Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
+Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
+
+## Endpoint filters observe parameter-binding failures
+
+When a minimal API endpoint has any filters or filter factories configured, the filter pipeline now runs even if parameter binding fails ([dotnet/aspnetcore #64539](https://github.com/dotnet/aspnetcore/pull/64539)). Filters can read `HttpContext.Response.StatusCode == 400` and substitute their own response body. Endpoints without filters continue to short-circuit with a 400 as before. In Development, set `RouteHandlerOptions.ThrowOnBadRequest = false` so the framework returns a 400 the filter can observe instead of throwing `BadHttpRequestException` to the developer exception page.
+
+Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
 ## Smaller Blazor WebAssembly publish output
 
@@ -196,18 +216,6 @@ Because runtime-async changes how `async`/`await` is generated for a large porti
 
 - **`%2F` is preserved in HTTP/1.1 absolute-form request targets.** Previously, a request like `GET http://host/a%2Fb` was decoded to a path of `/a/b`, while `GET /a%2Fb` (origin-form) preserved the encoded slash. Both forms now resolve to `/a%2Fb`. Apps that depended on the inconsistent absolute-form behavior should update their routing or middleware to expect the encoded segment ([dotnet/aspnetcore #65930](https://github.com/dotnet/aspnetcore/pull/65930)).
 - **`HttpsConnectionAdapterOptions.TlsClientHelloBytesCallback` is obsolete.** Use the new connection middleware shape introduced in [dotnet/aspnetcore #65808](https://github.com/dotnet/aspnetcore/pull/65808). The property continues to work in 11.0 but produces an obsoletion warning.
-
-<!-- Filtered features (significant engineering work, but too niche or off-product for ASP.NET Core release notes):
-  - IConnectionEndPointFeature implemented in Kestrel/HttpSys/IIS (#62162): plumbing for diagnostics features that don't have a user-facing surface this preview.
-  - StaticAssetDescriptor.Order from manifest (#65975): SDK-side enabler for SPA fallback ordering; the user-visible story will land with the companion SDK change.
-  - SignalR extra backpressure timeout (#66318): internal hardening, no public API or scenario story for end users.
-  - Razor warning waves infrastructure (dotnet/razor #13016): plumbing only, no new warnings yet — not independently useful.
-  - Razor IR/refactor PRs (#13002, #13003, #13004, #13005, #13007, #13008, #13053): compiler internals with no user-visible change.
-  - Razor editor/IDE fixes (#13017, #13023, #13035, #13043, #13044, #13057, #13063, #13065): tooling/IDE work — product-boundary rule excludes these from ASP.NET Core product notes.
-  - "Detach methods when disconnection confirmed" (#66275) and resource-collection gzip footer (#66242): rolled into Bug fixes.
-  - Blazor Web Worker template renames and clean-up (#66070, #66261): rolled into Bug fixes / templates section.
-  - Numerous infra / dependency / loc / agentic-workflow / source-build PRs: pre-filtered (~69 entries) before scoring.
--->
 
 ## Bug fixes
 
