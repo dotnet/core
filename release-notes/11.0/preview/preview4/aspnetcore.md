@@ -25,7 +25,9 @@ ASP.NET Core updates in .NET 11:
 
 ## HTTP QUERY in generated OpenAPI documents
 
-OpenAPI document generation now recognizes [HTTP QUERY](https://datatracker.ietf.org/doc/draft-ietf-httpbis-safe-method-w-body/) as a first-class operation type ([dotnet/aspnetcore #65714](https://github.com/dotnet/aspnetcore/pull/65714)). QUERY is a proposed safe, idempotent method that lets clients send a request body when describing a search — useful when a query is too large or too structured to fit in a URL. Routing already accepted arbitrary verb strings via `MapMethods`; this change makes QUERY endpoints show up correctly in the generated OpenAPI document so client generators and API explorers can consume them.
+OpenAPI document generation now recognizes [HTTP QUERY](https://datatracker.ietf.org/doc/draft-ietf-httpbis-safe-method-w-body/) as a known operation type ([dotnet/aspnetcore #65714](https://github.com/dotnet/aspnetcore/pull/65714)). QUERY is a proposed safe, idempotent method that lets clients send a request body when describing a search — useful when a query is too large or too structured to fit in a URL. Routing already accepted arbitrary verb strings via `MapMethods`, and OpenAPI 3.2 adds a [`query` field to the Path Item Object](https://spec.openapis.org/oas/v3.2.0.html#fixed-fields-6) so this can be described in the OpenAPI document. This change makes QUERY endpoints show up correctly in the generated OpenAPI document so client generators and API explorers can consume them.
+
+Note that `query` is only valid in an OpenAPI 3.2 document, so you'll want to set the `OpenApiVersion` in the `OpenApiOptions`. In earlier OpenAPI versions, the `query` operation is generated within a `x-oai-additionalOperations` specification extension in the Path Item Object.
 
 ```csharp
 var app = WebApplication.Create();
@@ -36,7 +38,7 @@ app.MapMethods("/search", ["QUERY"], (SearchRequest request) =>
 app.Run();
 ```
 
-The method shows up in generated OpenAPI documents alongside `GET`, `POST`, and friends, so client generators and API explorers pick it up automatically.
+The method shows up in generated OpenAPI documents alongside `get`, `post`, and friends, so client generators and API explorers pick it up automatically.
 
 Thank you [@kilifu](https://github.com/kilifu) for this contribution!
 
@@ -159,7 +161,7 @@ Two related changes make it easier to diagnose and customize TLS connections in 
 
 `ITlsHandshakeFeature` now exposes an `Exception` property containing the exception thrown during a failed TLS handshake, so middleware and logging can record why a connection failed instead of seeing a bare `IOException` further up the stack ([dotnet/aspnetcore #65807](https://github.com/dotnet/aspnetcore/pull/65807)). The feature continues to work after the handshake fails — Kestrel snapshots the relevant fields off the underlying `SslStream` before it is disposed.
 
-The `TlsClientHelloBytesCallback` option on `HttpsConnectionAdapterOptions` was reworked as a connection middleware ([dotnet/aspnetcore #65808](https://github.com/dotnet/aspnetcore/pull/65808)). The previous callback shape is now obsolete; configure ClientHello inspection via the new `ListenOptions.UseTlsClientHelloListener` extension instead:
+The `TlsClientHelloBytesCallback` option on `HttpsConnectionAdapterOptions` was reworked as a connection middleware ([dotnet/aspnetcore #65808](https://github.com/dotnet/aspnetcore/pull/65808)). The previous callback shape is now obsolete; configure ClientHello inspection via the new `ListenOptions.UseTlsClientHelloListener` extension instead. The example below uses both features together — connection middleware reads `ITlsHandshakeFeature.Exception` after the handshake, and `UseTlsClientHelloListener` inspects the ClientHello before TLS:
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -168,11 +170,23 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5001, listenOptions =>
     {
-        listenOptions.UseHttps();
+        listenOptions.Use(next => async context =>
+        {
+            await next(context);
+
+            var tlsHandshakeFeature = context.Features.Get<ITlsHandshakeFeature>();
+            if (tlsHandshakeFeature?.Exception is { } ex)
+            {
+                Console.WriteLine($"[TLS Handshake Failed] ConnectionId={context.ConnectionId}, Exception={ex.GetType().Name}: {ex.Message}");
+            }
+        });
+
+        // UseTlsClientHelloListener must be called before UseHttps()
         listenOptions.UseTlsClientHelloListener((connection, clientHelloBytes) =>
         {
-            // Inspect the ClientHello (SNI, ALPN, etc.) for diagnostics or routing.
+            Console.WriteLine($"TLS Client Hello received on {connection.ConnectionId}, {clientHelloBytes.Length} bytes");
         });
+        listenOptions.UseHttps();
     });
 });
 ```
@@ -191,7 +205,11 @@ Thank you [@marcominerva](https://github.com/marcominerva) for this contribution
 
 ## Endpoint filters observe parameter-binding failures
 
-When a minimal API endpoint has any filters or filter factories configured, the filter pipeline now runs even if parameter binding fails ([dotnet/aspnetcore #64539](https://github.com/dotnet/aspnetcore/pull/64539)). Filters can read `HttpContext.Response.StatusCode == 400` and substitute their own response body. Endpoints without filters continue to short-circuit with a 400 as before. In Development, set `RouteHandlerOptions.ThrowOnBadRequest = false` so the framework returns a 400 the filter can observe instead of throwing `BadHttpRequestException` to the developer exception page.
+When a minimal API endpoint has any filters or filter factories configured, the filter pipeline now runs even if parameter binding fails ([dotnet/aspnetcore #64539](https://github.com/dotnet/aspnetcore/pull/64539)). Filters can read `HttpContext.Response.StatusCode == 400` and substitute their own response body.
+
+In the `Development` environment, set `RouteHandlerOptions.ThrowOnBadRequest = false` so the framework returns a 400 the filter can observe instead of throwing `BadHttpRequestException` to the developer exception page. This is already the default in non-`Development` environments.
+
+This change has also been backported to 10.0.8.
 
 Thank you [@marcominerva](https://github.com/marcominerva) for this contribution!
 
