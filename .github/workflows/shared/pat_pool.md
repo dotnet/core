@@ -60,8 +60,8 @@ jobs:
           echo "Selected PAT number ${PAT_NUMBER} (index: ${PAT_INDEX})"
 
           # Emit a markdown table of the pool entries to the step summary
-          echo "|1|2|3|4|5|6|7|8|9|" >> "$GITHUB_STEP_SUMMARY"
-          echo "|-|-|-|-|-|-|-|-|-|" >> "$GITHUB_STEP_SUMMARY"
+          echo "|0|1|2|3|4|5|6|7|8|9|" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-|-|-|-|-|-|-|-|-|-|" >> "$GITHUB_STEP_SUMMARY"
           (IFS='|'; printf '|%s' "${POOL_INDICATORS[@]}"; printf '|\n') >> "$GITHUB_STEP_SUMMARY"
 
           # Set the PAT number as the output
