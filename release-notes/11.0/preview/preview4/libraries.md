@@ -8,7 +8,6 @@
 - [UTF validation and invalid-subsequence search](#utf-validation-and-invalid-subsequence-search)
 - [Rate-limiting fixes for RetryAfter, fractional permits, and ChainedRateLimiter](#rate-limiting-fixes-for-retryafter-fractional-permits-and-chainedratelimiter)
 - [System.Text.Json improvements](#systemtextjson-improvements)
-- [LINQ tuple overloads for joins](#linq-tuple-overloads-for-joins)
 - [Regex source generator and engine fixes](#regex-source-generator-and-engine-fixes)
 - [Configuration binding and file-provider improvements](#configuration-binding-and-file-provider-improvements)
 - [Built-in OpenTelemetry metrics for MemoryCache](#built-in-opentelemetry-metrics-for-memorycache)
@@ -36,14 +35,12 @@
 using System.Diagnostics;
 
 // One-shot capture: stdout and stderr together, plus exit code.
-ProcessResult result = await Process.RunAndCaptureTextAsync(
-    new ProcessStartInfo("git", ["status", "--porcelain"]));
+ProcessTextOutput result = await Process.RunAndCaptureTextAsync(
+    "git", ["status", "--porcelain"]);
 
 Console.WriteLine(result.StandardOutput);
-Console.WriteLine($"exit code: {result.ExitCode}");
+Console.WriteLine($"exit code: {result.ExitStatus.ExitCode}");
 ```
-
-<!-- TODO: verify exact result type name (ProcessResult vs ProcessRunResult) and stdout/stderr property names from PR 127210 -->
 
 **Fire-and-forget launches.** `Process.StartAndForget` starts a child process when you don't intend to wait for or interact with it; the runtime detaches the handle for you ([dotnet/runtime #126078](https://github.com/dotnet/runtime/pull/126078)). `ProcessStartInfo.StartDetached` goes further by detaching from the parent's session/console so the child outlives a terminal exit ([dotnet/runtime #126632](https://github.com/dotnet/runtime/pull/126632)). On Windows, `ProcessStartInfo.KillOnParentExit` requests the inverse — the child is terminated when the parent goes away ([dotnet/runtime #126699](https://github.com/dotnet/runtime/pull/126699)).
 
@@ -60,32 +57,32 @@ Thank you [@tmds](https://github.com/tmds) for the Linux/OSX `Process` optimizat
 `System.IO.Compression` now offers `Span<byte>`/`ReadOnlySpan<byte>` encode and decode entry points for the Deflate, ZLib, and GZip formats ([dotnet/runtime #123145](https://github.com/dotnet/runtime/pull/123145)). The new APIs mirror the shape of `BrotliEncoder`/`BrotliDecoder` and the recently-added Zstandard primitives, so you can compress and decompress one-shot or streaming buffers without allocating a `Stream`. This is the missing piece for high-throughput scenarios such as protocol parsers, log shippers, and middleware that already operate on spans.
 
 ```csharp
+using System.Buffers;
 using System.IO.Compression;
 
 ReadOnlySpan<byte> source = File.ReadAllBytes("payload.bin");
 Span<byte> destination = new byte[source.Length];
 
-OperationStatus status = ZLibEncoder.Compress(
+using ZLibEncoder encoder = new();
+OperationStatus status = encoder.Compress(
     source, destination, out int bytesConsumed, out int bytesWritten,
-    CompressionLevel.Optimal);
+    isFinalBlock: true);
 ```
-
-<!-- TODO: verify final type names (ZLibEncoder vs ZLibCompressor, GZipEncoder, DeflateEncoder) and exact method signatures from PR 123145 -->
 
 ## Floating-point hex formatting and parsing
 
 `double`, `float`, and `Half` can now be formatted and parsed in their hexadecimal IEEE-754 form ([dotnet/runtime #124139](https://github.com/dotnet/runtime/pull/124139)). The hex form preserves every bit of the underlying value, which makes it the right choice for golden-file tests, cross-language interop with C/C++ `printf("%a", ...)`, and any scenario where round-tripping a `double` through decimal text is too lossy.
 
 ```csharp
+using System.Globalization;
+
 double value = Math.PI;
 
-string hex = value.ToString("X"); // hex form, e.g., "0x1.921FB54442D18p+1"
-double round = double.Parse(hex);
+string hex = value.ToString("X"); // hex form, e.g., "0X1.921FB54442D18P+1"
+double round = double.Parse(hex, NumberStyles.HexFloat);
 
 Console.WriteLine(round == value); // True — exact round-trip
 ```
-
-<!-- TODO: verify the exact format specifier used (X vs A) and whether parsing requires NumberStyles.AllowHexSpecifier or similar from PR 124139 -->
 
 ## UTF validation and invalid-subsequence search
 
@@ -140,30 +137,10 @@ type Shape =
     | Square of side: float
 
 let json = System.Text.Json.JsonSerializer.Serialize(Circle 1.5)
-// {"Case":"Circle","Fields":[1.5]}
+// {"$type":"Circle","radius":1.5}
 ```
-
-<!-- TODO: confirm JSON shape used for F# DUs (Case/Fields vs adjacently-tagged) from PR 125610 description -->
 
 Thank you [@prozolic](https://github.com/prozolic) for the `JsonElement` and source-generator fixes!
-
-## LINQ tuple overloads for joins
-
-`Enumerable.Join`, `LeftJoin`, and `RightJoin` add overloads that return `ValueTuple` directly, so you can write a join without naming an anonymous type or projecting twice ([dotnet/runtime #121998](https://github.com/dotnet/runtime/pull/121998)). The shape is identical to the existing key-selector overloads, just with a tuple result instead of a custom selector.
-
-```csharp
-using System.Linq;
-
-var orderItems = orders
-    .Join(customers, o => o.CustomerId, c => c.Id);
-// orderItems is IEnumerable<(Order, Customer)>
-
-var withMissing = orders
-    .LeftJoin(customers, o => o.CustomerId, c => c.Id);
-// withMissing is IEnumerable<(Order, Customer?)>
-```
-
-A separate `GroupJoin` overload returning `IGrouping` was reverted in this preview ([dotnet/runtime #121999](https://github.com/dotnet/runtime/pull/121999) / [dotnet/runtime #126624](https://github.com/dotnet/runtime/pull/126624)) and is not part of Preview 4.
 
 ## Regex source generator and engine fixes
 
@@ -250,7 +227,7 @@ Two `System.Net.Security` items improve TLS reliability. `SslStream` server-side
 
 <!-- Filtered features (significant engineering work, but too niche for release notes):
   - Half FP16 ISA acceleration: shipped as PR 122649, then reverted by PR 127042. Not part of Preview 4.
-  - GroupJoin tuple overload: shipped as PR 121999, reverted by PR 126624. Not in Preview 4.
+  - LINQ tuple overloads for Join/LeftJoin/RightJoin/GroupJoin (PRs 121998, 121999): all reverted by PR 126624; reinstatement (PR 126649) merged to main only and not back-ported to release/11.0-preview4. Not in Preview 4.
   - Box value types implementing IXmlSerializable in XmlSerializer generated IL (PR 117473): correctness fix in serializer-generated IL, no API surface, narrow audience.
   - System.Diagnostics.EventLog NRT annotations (PR 119891): annotation pass with no behavior change.
   - BigInteger nuint limbs rewrite (PR 125799): internal perf rework; user-visible only as a perf delta. Pending benchmark numbers.
