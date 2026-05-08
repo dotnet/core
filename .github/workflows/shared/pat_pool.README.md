@@ -111,8 +111,7 @@ This approach aligns with GitHub's documented guidance for [passing secrets][pas
 There are several details of this implementation that keep our workflows and repositories safe.
 
 1. **Secrets adhere to existing trust boundaries.** The pool of PAT secrets is
-   provided to the `select-pat-number` action within the dedicated `pat_pool`
-   job defined by [`workflow-import.md`](./workflow-import.md). That job runs
+   provided to a dedicated step within the `pat_pool` job. That job runs
    after `pre_activation` and contains only the trusted checkout and action
    steps--no untrusted context or input is within scope. The
    `select-pat-number` action only references the secret values to determine
