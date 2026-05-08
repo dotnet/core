@@ -9,6 +9,7 @@
 - [Virtualize AnchorMode for stable viewports during prepend and append](#virtualize-anchormode-for-stable-viewports-during-prepend-and-append)
 - [Blazor WebAssembly service defaults template](#blazor-webassembly-service-defaults-template)
 - [MCP Server template ships with the .NET SDK](#mcp-server-template-ships-with-the-net-sdk)
+- [Blazor Web Worker template updates](#blazor-web-worker-template-updates)
 - [TLS handshake observability in Kestrel](#tls-handshake-observability-in-kestrel)
 - [Response compression always emits `Vary: Accept-Encoding`](#response-compression-always-emits-vary-accept-encoding)
 - [File result types appear in OpenAPI documents](#file-result-types-appear-in-openapi-documents)
@@ -27,15 +28,54 @@ ASP.NET Core updates in .NET 11:
 
 OpenAPI document generation now recognizes [HTTP QUERY](https://datatracker.ietf.org/doc/draft-ietf-httpbis-safe-method-w-body/) as a known operation type ([dotnet/aspnetcore #65714](https://github.com/dotnet/aspnetcore/pull/65714)). QUERY is a proposed safe, idempotent method that lets clients send a request body when describing a search — useful when a query is too large or too structured to fit in a URL. Routing already accepted arbitrary verb strings via `MapMethods`, and OpenAPI 3.2 adds a [`query` field to the Path Item Object](https://spec.openapis.org/oas/v3.2.0.html#fixed-fields-6) so this can be described in the OpenAPI document. This change makes QUERY endpoints show up correctly in the generated OpenAPI document so client generators and API explorers can consume them.
 
-Note that `query` is only valid in an OpenAPI 3.2 document, so you'll want to set the `OpenApiVersion` in the `OpenApiOptions`. In earlier OpenAPI versions, the `query` operation is generated within a `x-oai-additionalOperations` specification extension in the Path Item Object.
+Note that `query` is only valid in an OpenAPI 3.2 document, so you'll want to set the `OpenApiVersion` in the `OpenApiOptions`. In earlier OpenAPI versions, the `query` operation is generated within an `x-oai-additionalOperations` specification extension in the Path Item Object.
 
 ```csharp
-var app = WebApplication.Create();
+using Microsoft.OpenApi;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddOpenApi(options =>
+{
+    options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_2;
+});
+
+var app = builder.Build();
+
+app.MapOpenApi();
 
 app.MapMethods("/search", ["QUERY"], (SearchRequest request) =>
     SearchService.Run(request));
 
 app.Run();
+```
+
+In an OpenAPI 3.2 document, the QUERY operation is described inline as a sibling of `get`, `post`, and friends:
+
+```json
+"paths": {
+  "/search": {
+    "query": {
+      "requestBody": { ... },
+      "responses": { "200": { ... } }
+    }
+  }
+}
+```
+
+In OpenAPI 3.0 and 3.1 documents, the same operation is represented under the `x-oai-additionalOperations` extension on the Path Item:
+
+```json
+"paths": {
+  "/search": {
+    "x-oai-additionalOperations": {
+      "QUERY": {
+        "requestBody": { ... },
+        "responses": { "200": { ... } }
+      }
+    }
+  }
+}
 ```
 
 The method shows up in generated OpenAPI documents alongside `get`, `post`, and friends, so client generators and API explorers pick it up automatically.
@@ -111,23 +151,25 @@ The fix uses a hybrid approach: native CSS scroll anchoring on browsers that sup
 A new `AnchorMode` parameter on `Virtualize<TItem>` controls viewport behavior at list edges when items are added dynamically — for chat UIs, news feeds, log viewers, and similar scenarios ([dotnet/aspnetcore #66521](https://github.com/dotnet/aspnetcore/pull/66521)). The component snapshots an anchor element before each render and restores its position after, so the visible items stay where the user is looking even when items are inserted before the current viewport (prepend) or after it (append). The mechanism works for both fixed- and variable-height items.
 
 ```razor
-<Virtualize Items="@messages"
+<Virtualize Items="@notifications"
             AnchorMode="VirtualizeAnchorMode.Beginning"
-            ItemComparer="@_messageById">
-    <ItemContent Context="msg">@msg.Text</ItemContent>
+            ItemComparer="@_notificationById">
+    <ItemContent Context="item">@item.Text</ItemContent>
 </Virtualize>
 
 @code {
-    private static readonly IEqualityComparer<Message> _messageById =
-        EqualityComparer<Message>.Create((a, b) => a?.Id == b?.Id, m => m.Id.GetHashCode());
+    private static readonly IEqualityComparer<Notification> _notificationById =
+        EqualityComparer<Notification>.Create((a, b) => a?.Id == b?.Id, n => n.Id.GetHashCode());
 }
 ```
 
-`AnchorMode` accepts:
+`AnchorMode` is a `[Flags]` enum that accepts:
 
-- `VirtualizeAnchorMode.Beginning` — preserve viewport when items are prepended (auto-follow the bottom for chat-style UIs).
-- `VirtualizeAnchorMode.End` — preserve viewport when items are appended.
-- `VirtualizeAnchorMode.None` — no anchoring (default).
+- `VirtualizeAnchorMode.Beginning` (default) — pins the first visible item. When the user is at or near the top of the list and items are prepended, the viewport stays at the top showing the newest items — matching news feed and notification list UX.
+- `VirtualizeAnchorMode.End` — pins the last visible item. When the user is at or near the bottom of the list and items are appended, the viewport auto-scrolls to show them — matching chat and log viewer UX. If the user has scrolled away, auto-scroll disengages until they return to the bottom.
+- `VirtualizeAnchorMode.None` — no edge pinning. The viewport stays at its current scroll position regardless of item changes.
+
+Combine `Beginning | End` to pin both edges.
 
 For reference-type items, also supply an `ItemComparer` so the component can correlate items across renders. Without one, `Virtualize` falls back to `EqualityComparer<T>.Default`, which uses reference equality for reference types and won't recognize a re-fetched item as the same logical entity.
 
@@ -154,6 +196,19 @@ dotnet new mcpserver -o MyMcpServer
 ```
 
 Moving the template into ASP.NET Core makes it discoverable from `dotnet new list` without a separate install step, and aligns its servicing with the rest of the web stack.
+
+## Blazor Web Worker template updates
+
+The standalone `.NET Web Worker` template — which scaffolds a Web Worker client for offloading long-running work to a background thread in Blazor WebAssembly and Blazor Web apps — was renamed to **`Blazor Web Worker`** to make it clearer that it's part of the Blazor stack ([dotnet/aspnetcore #66070](https://github.com/dotnet/aspnetcore/pull/66070)). The same change adds two often-requested capabilities to the generated `WebWorkerClient`:
+
+- **`InvokeVoidAsync`** for fire-and-forget worker calls that don't return a value, mirroring the shape on `IJSRuntime`.
+- **Cancellation and timeout support** on both worker creation and worker invocations, so callers can pass a `CancellationToken` and tear down a stuck worker cleanly.
+
+```bash
+dotnet new blazorwebworker -o MyApp.Worker
+```
+
+Existing projects created with the old template continue to work — the rename only affects the template name shown in `dotnet new list` and Visual Studio.
 
 ## TLS handshake observability in Kestrel
 
@@ -247,9 +302,8 @@ Because runtime-async changes how `async`/`await` is generated for a large porti
 - **MVC**
   - Fixed `JsonSerializerSettings.DateFormatString` overwriting `DateFormatHandling` when copying serializer settings ([dotnet/aspnetcore #61251](https://github.com/dotnet/aspnetcore/pull/61251)).
 - **Templates**
-  - Renamed the standalone `.NET Web Worker` template to `Blazor Web Worker`, added `InvokeVoidAsync` on `WebWorkerClient`, and added cancellation/timeout support to worker creation and invocation ([dotnet/aspnetcore #66070](https://github.com/dotnet/aspnetcore/pull/66070)).
-  - Removed the obsolete `net11.0` framework-choice descriptions from the `BlazorWebWorker` template ([dotnet/aspnetcore #66261](https://github.com/dotnet/aspnetcore/pull/66261)).
   - Added `Microsoft.Data.SqlClient.Extensions.Azure` to the MVC, Blazor, and Razor Pages Individual Auth templates so Azure App Service deployments using `Authentication=Active Directory Default` work without a separate package install ([dotnet/aspnetcore #66179](https://github.com/dotnet/aspnetcore/pull/66179)).
+  - Removed the obsolete `net11.0` framework-choice descriptions from the `BlazorWebWorker` template ([dotnet/aspnetcore #66261](https://github.com/dotnet/aspnetcore/pull/66261)).
 - **Middleware**
   - Clarified `UseStatusCodePages` documentation to call out that the default options handler prefers Problem Details when `IProblemDetailsService` is registered, and falls back to plain text otherwise ([dotnet/aspnetcore #66172](https://github.com/dotnet/aspnetcore/pull/66172)).
 
