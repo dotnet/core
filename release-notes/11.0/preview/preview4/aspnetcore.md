@@ -78,8 +78,6 @@ In OpenAPI 3.0 and 3.1 documents, the same operation is represented under the `x
 }
 ```
 
-The method shows up in generated OpenAPI documents alongside `get`, `post`, and friends, so client generators and API explorers pick it up automatically.
-
 Thank you [@kilifu](https://github.com/kilifu) for this contribution!
 
 ## `SupplyParameterFromTempData` for Blazor
