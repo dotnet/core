@@ -17,26 +17,15 @@
 
 - [What's new in .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime)
 
-## Runtime async is now built into the shared framework
+## The shared framework is now compiled with runtime-async
 
-Preview 3 removed the `[RequiresPreviewFeatures]` opt-in for runtime-async. Preview 4 takes the next step and turns runtime-async on inside the shared framework itself: every supported `IsNETCoreAppSrc` source project targeting `net11.0` is built with `runtime-async=on`, and the `DOTNET_RuntimeAsync` / `UNSUPPORTED_RuntimeAsync` config knob has been removed. The runtime no longer carries a "runtime-async off" code path ([dotnet/runtime #125406](https://github.com/dotnet/runtime/pull/125406), [dotnet/runtime #126754 and friends — see also "Enable runtime-async unconditionally in System.Private.CoreLib (CoreCLR and NativeAOT)"](https://github.com/dotnet/runtime/pull/125406)). Out-of-band NuGet packages that ship cross-runtime (for example `System.Text.Json`, `System.Collections.Immutable`) stay on compiler-generated async for now.
+Preview 3 removed the `[RequiresPreviewFeatures]` opt-in for runtime-async. Preview 4 takes the next step and turns runtime-async on inside the shared framework itself: all shared framework libraries are built with `runtime-async=on`. Out-of-band NuGet packages that ship cross-runtime (for example `System.Text.Json`, `System.Collections.Immutable`) stay on compiler-generated async for now.
 
-Runtime-async also picked up two notable capability fixes:
+If you are testing out runtime-async yourself, this might mean a performance improvement (although there are still improvements needed to unlock the full runtime-async chain). If you are not using runtime-async in your app, the performance will likely not change at all. If you see any regressions, however, please report them as issues.
+
+Runtime-async also picked up one notable capability fixx:
 
 - **Covariant `Task` → `Task<T>` overrides** — when a derived class returns `Task<T>` for a base method that returns `Task`, the runtime now generates a void-returning thunk that bridges the calling convention difference, so virtual dispatch works for both flavors. The same fix landed for NativeAOT ([dotnet/runtime #125900](https://github.com/dotnet/runtime/pull/125900), [dotnet/runtime #126768](https://github.com/dotnet/runtime/pull/126768)).
-- **Reclaimed continuation-dispatch performance** — earlier debugger/TPL instrumentation in `RuntimeAsyncTask::DispatchContinuations` had cost about 7%. Preview 4 splits the method into instrumented and non-instrumented variants and switches between them on demand, keeping the hot path 379 bytes smaller and recovering most of the lost throughput on Windows x64 ([dotnet/runtime #126091](https://github.com/dotnet/runtime/pull/126091)). Thanks [@lateralusX](https://github.com/lateralusX) for the measurement-driven fix.
-
-The JIT also added a shared `GT_RETURN_SUSPEND` block when a method has more than one `await`, producing modest R2R size reductions across `System.IO.Compression`, `System.Linq.AsyncEnumerable`, `System.Net.Http`, and `System.Private.Xml` ([dotnet/runtime #125174](https://github.com/dotnet/runtime/pull/125174)).
-
-```xml
-<!-- Project files no longer need to opt in for the shared framework path. -->
-<PropertyGroup>
-  <TargetFramework>net11.0</TargetFramework>
-  <!-- runtime-async is on by default for shared-framework source projects -->
-</PropertyGroup>
-```
-
-To opt a specific project out, set `<UseRuntimeAsync>false</UseRuntimeAsync>`.
 
 ## JIT improvements for everyday code
 
