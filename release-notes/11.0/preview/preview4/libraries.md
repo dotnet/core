@@ -162,19 +162,17 @@ public sealed class AppOptions
 }
 ```
 
-<!-- TODO: verify attribute namespace (Microsoft.Extensions.Configuration vs ...Binder) from PR 126396 -->
-
 `ConfigurationBinder` now binds an empty array to a constructor parameter instead of throwing ([dotnet/runtime #126470](https://github.com/dotnet/runtime/pull/126470)), and the binder source-generator suppressor only suppresses the calls it actually intercepts ([dotnet/runtime #126878](https://github.com/dotnet/runtime/pull/126878)).
 
 `Microsoft.Extensions.FileProviders` is more forgiving of unusual paths: `PhysicalFilesWatcher` no longer throws when its root directory does not yet exist ([dotnet/runtime #126411](https://github.com/dotnet/runtime/pull/126411)), and `InMemoryDirectoryInfo` resolves `..` and other relative segments consistently with the physical provider ([dotnet/runtime #126320](https://github.com/dotnet/runtime/pull/126320)).
 
 ## Built-in OpenTelemetry metrics for MemoryCache
 
-`Microsoft.Extensions.Caching.Memory.MemoryCache` now emits a built-in set of OpenTelemetry-compatible metrics (hits, misses, evictions, current size) without an extra adapter package ([dotnet/runtime #126146](https://github.com/dotnet/runtime/pull/126146)). The instrument names follow the OTel semantic-convention naming alignment that landed in the same preview ([dotnet/runtime #126451](https://github.com/dotnet/runtime/pull/126451)), so dashboards picked up from sample OTel collectors will work without renaming.
+`Microsoft.Extensions.Caching.Memory.MemoryCache` now emits a built-in set of OpenTelemetry-compatible metrics without an extra adapter package ([dotnet/runtime #126146](https://github.com/dotnet/runtime/pull/126146)). The new `Microsoft.Extensions.Caching.Memory.MemoryCache` meter publishes four observable instruments — `dotnet.cache.requests` (with a `dotnet.cache.request.type` tag distinguishing `hit` from `miss`), `dotnet.cache.evictions`, `dotnet.cache.entries`, and `dotnet.cache.estimated_size` — and the names follow the OTel semantic-convention naming alignment that landed in the same preview ([dotnet/runtime #126451](https://github.com/dotnet/runtime/pull/126451)), so dashboards picked up from sample OTel collectors will work without renaming.
+
+To opt in, set `MemoryCacheOptions.TrackStatistics = true`. Pass an `IMeterFactory` to the new `MemoryCache(options, loggerFactory, meterFactory)` constructor for per-instance metrics; without one, the instruments are aggregated process-wide on a shared meter.
 
 A related `System.Diagnostics` addition: `ActivityTraceFlags.RandomTraceId` ([dotnet/runtime #124851](https://github.com/dotnet/runtime/pull/124851)) lets producers signal that the trace ID was generated with sufficient entropy, which is required by the W3C Trace Context Level 2 sampling guidance.
-
-<!-- TODO: confirm exact MemoryCache instrument names emitted by PR 126146 -->
 
 Thank you [@rjmurillo](https://github.com/rjmurillo) and [@Kielek](https://github.com/Kielek) for these contributions!
 
@@ -184,7 +182,7 @@ Thank you [@rjmurillo](https://github.com/rjmurillo) and [@Kielek](https://githu
 
 Preview 4 introduces `UnionAttribute` and `IUnion` in `System.Runtime.CompilerServices` ([dotnet/runtime #127001](https://github.com/dotnet/runtime/pull/127001)). These types are the runtime side of the long-running C# discriminated-union design. They are not directly user-facing yet — the C# compiler and source generators are the expected producers — but they ship in the framework so libraries can begin authoring against the surface.
 
-<!-- TODO: link to the C# language-design DU proposal once Preview 4 lang docs are published -->
+For the language-side design, see the [C# unions proposal](https://github.com/dotnet/csharplang/blob/main/proposals/unions.md) (champion issue [dotnet/csharplang #9662](https://github.com/dotnet/csharplang/issues/9662)).
 
 ## MetadataLoadContext additions
 
