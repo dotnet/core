@@ -18,8 +18,6 @@
 - [TarReader supports GNU sparse format 1.0](#tarreader-supports-gnu-sparse-format-10)
 - [TLS handshake hardening and certificate-validation alerts on Linux](#tls-handshake-hardening-and-certificate-validation-alerts-on-linux)
 - [HTTP/2 automatic downgrade for Windows authentication](#http2-automatic-downgrade-for-windows-authentication)
-- [System.Security.Cryptography.Xml mitigations](#systemsecuritycryptographyxml-mitigations)
-- [LDAP filter escaping in System.DirectoryServices.AccountManagement](#ldap-filter-escaping-in-systemdirectoryservicesaccountmanagement)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -249,16 +247,6 @@ Two `System.Net.Security` items improve TLS reliability. `SslStream` server-side
 ## HTTP/2 automatic downgrade for Windows authentication
 
 `HttpClient` automatically downgrades to HTTP/1.1 when a request requires Windows authentication (NTLM/Negotiate) over HTTP/2 ([dotnet/runtime #123827](https://github.com/dotnet/runtime/pull/123827)). The HTTP/2 specification disallows the connection-bound auth schemes that NTLM and Kerberos rely on, so previously these requests would fail. With the downgrade in place, applications targeting mixed-auth environments — common in enterprise intranets — work without explicit `HttpRequestMessage.Version` overrides.
-
-## System.Security.Cryptography.Xml mitigations
-
-Preview 4 applies a set of mitigations to `System.Security.Cryptography.Xml` components ([dotnet/runtime #126957](https://github.com/dotnet/runtime/pull/126957)). The change tightens validation of XML signature and encryption inputs. Applications that consume signed XML from untrusted sources should review the migration guidance in the linked PR; some inputs that previously verified may now be rejected.
-
-<!-- TODO: link to the security advisory or migration doc once published, and call out specific behavior changes (e.g., transform allowlist, reference-URI handling) -->
-
-## LDAP filter escaping in System.DirectoryServices.AccountManagement
-
-`System.DirectoryServices.AccountManagement` now escapes user-supplied values before splicing them into LDAP filters ([dotnet/runtime #126433](https://github.com/dotnet/runtime/pull/126433)). This closes an LDAP-injection vector for code paths that built filter strings from search parameters (`UserPrincipal.FindByIdentity`, `PrincipalSearcher`-style queries). Applications that explicitly supplied pre-escaped values should not see a behavior change; applications that did not now get correct results for inputs containing `*`, `(`, `)`, or `\`.
 
 <!-- Filtered features (significant engineering work, but too niche for release notes):
   - Half FP16 ISA acceleration: shipped as PR 122649, then reverted by PR 127042. Not part of Preview 4.
