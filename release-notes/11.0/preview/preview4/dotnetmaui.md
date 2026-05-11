@@ -5,22 +5,19 @@ adoption on Android, single-project icon improvements, and `dotnet watch`
 support for both Android and iOS — alongside a large reliability sweep across
 CollectionView, Shell, Maps, and platform-specific controls.
 
-- [`x:Code` directive for inline C# in XAML](#xcode-directive-for-inline-c-in-xaml)
+- [CoreCLR runtime default](#coreclr-runtime-default)
 - [Material 3 expands across Android controls](#material-3-expands-across-android-controls)
-- [`MonochromeFile` support for Android adaptive icons](#monochromefile-support-for-android-adaptive-icons)
+- [`x:Code` directive for inline C# in XAML](#xcode-directive-for-inline-c-in-xaml)
 - [Compiled bindings inside `DataTemplate`s](#compiled-bindings-inside-datatemplates)
 - [`dotnet watch` for Android](#dotnet-watch-for-android)
 - [`dotnet watch` for iOS](#dotnet-watch-for-ios)
-- [Bug fixes](#bug-fixes)
+- [`MonochromeFile` support for Android adaptive icons](#monochromefile-support-for-android-adaptive-icons)
+- [Apple platforms (.NET for iOS, Mac Catalyst, macOS, tvOS)](#apple-platforms-net-for-ios-mac-catalyst-macos-tvos)
 - [Contributors](#contributors)
 
-## `x:Code` directive for inline C# in XAML
+## CoreCLR runtime default
 
-The XAML compiler now supports an `x:Code` directive that lets you inline a
-small block of C# directly inside a XAML file. This makes it easier to keep
-view-local glue code next to the markup it serves without creating a code-behind
-partial just for a single helper
-([dotnet/maui #34715](https://github.com/dotnet/maui/pull/34715)).
+CoreCLR is now the default runtime on all .NET MAUI platforms for projects built with and targeting .NET 11 Preview 4. This is a complete unification of runtime with benefits for debugging, profiling, hot reload, app size, and app performance. For a detailed overview of this transition, see our [announcement blog post](https://aka.ms/maui-coreclr).
 
 ## Material 3 expands across Android controls
 
@@ -33,13 +30,29 @@ unlocking the Material 3 theming system:
 - `Entry` ([dotnet/maui #33673](https://github.com/dotnet/maui/pull/33673))
 - `Slider` ([dotnet/maui #33603](https://github.com/dotnet/maui/pull/33603))
 
-## `MonochromeFile` support for Android adaptive icons
+![dark and light control samples for material 3 design system in .NET MAUI](media/material3.png)
 
-Single-project app icons can now declare a dedicated monochrome layer for
-Android themed icons via a new `MonochromeFile` attribute on `MauiIcon`. This
-lets your themed icon use a different glyph than the foreground layer, instead
-of being a tinted reuse of it
-([dotnet/maui #34569](https://github.com/dotnet/maui/pull/34569)).
+## `x:Code` directive for inline C# in XAML
+
+The XAML Source Generator now supports an `x:Code` directive that lets you inline a
+small block of C# directly inside a XAML file. This makes it easier to keep
+view-local glue code next to the markup it serves without creating a code-behind
+partial just for a single helper
+([dotnet/maui #34715](https://github.com/dotnet/maui/pull/34715)). The `EnablePreviewFeatures` flag is required for this.
+
+```xml
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyApp.MainPage">
+    <x:Code><![CDATA[
+        void OnButtonClicked(object sender, EventArgs e)
+        {
+            // inline C# method
+        }
+    ]]></x:Code>
+    <Button Clicked="OnButtonClicked" Text="Click me" />
+</ContentPage>
+```
 
 ## Compiled bindings inside `DataTemplate`s
 
@@ -91,44 +104,37 @@ following to your project file:
 </PropertyGroup>
 ```
 
-## Bug fixes
+## `MonochromeFile` support for Android adaptive icons
 
-Preview 4 includes a broad reliability pass across the framework. Highlights
-grouped by area:
+Single-project app icons can now declare a dedicated monochrome layer for
+Android themed icons via a new `MonochromeFile` attribute on `MauiIcon`. This
+lets your themed icon use a different glyph than the foreground layer, instead
+of being a tinted reuse of it
+([dotnet/maui #34569](https://github.com/dotnet/maui/pull/34569)).
 
-- **CollectionView / CarouselView** — incorrect `FirstVisibleItemIndex` after
-  programmatic scroll on iOS, excessive height when `ObservableCollection`
-  loads with delay, sizing inside `RefreshView`, footer reuse on grouped
-  layouts, `EmptyView` swap stale-holder bug, accessibility "double tap to
-  activate" announcement on Android, and `SafeAreaEdges` not being respected.
-- **Shell** — `OnNavigatingFrom` reporting the wrong `DestinationPage`, tab
-  bar visibility after the first tab becomes invisible, the iOS "More" tab
-  not picking up Shell appearance, `InvalidCastException` when using
-  `QueryPropertyAttribute` with nullable types, and `GoToAsync` back
-  navigation not animating on iOS.
-- **Maps** — Android polygon clearing, `MapElements.Clear()` not removing
-  native elements on Android, and a `NullReferenceException` when tapping an
-  iOS map with no overlays.
-- **MediaPicker / Essentials** — picked images getting a stray `_processed`
-  suffix on Android, `PickPhotosAsync` returning empty when selecting 4+
-  images with `CompressionQuality` set on iOS, and the iOS connectivity
-  changed event not firing when toggling Wi-Fi.
-- **iOS 26 compatibility** — `NavigationPage` hangs after rapid push/pop,
-  `Stepper` not reaching min/max when the increment exceeds the remaining
-  range, and `SearchHandler` placeholder text not displaying.
-- **Windows** — `CollectionView` NRE when toggling `IsGrouped` to `false`,
-  Narrator announcing typed characters for password `Entry`, `DatePicker`
-  `CharacterSpacing` ignored, and `TimePicker` rendering a default value when
-  bound to `null`.
-- **Layout / Drawing** — `LayoutCycleException` from nested `Border`s on
-  Windows, `GraphicsView` `dirtyRect` mismatch on density change, and
-  `GraphicsView.GetStringSize()` returning inaccurate measurements.
+## Apple platforms (.NET for iOS, Mac Catalyst, macOS, tvOS)
 
-See the full Preview 4 changelog for the complete list:
-<https://github.com/dotnet/maui/compare/11.0.0-preview.3.26203.7...release/11.0.1xx-preview4>
+- **Xcode 26.4 Stable** is now the supported Xcode version
+  ([dotnet/macios #25005](https://github.com/dotnet/macios/pull/25005)), with
+  refreshed bindings across UIKit, AVFoundation, WebKit, Metal, Photos,
+  PassKit, CarPlay, AuthenticationServices, and more. One Apple-side breaking
+  change: `HMError.QuotaExceeded` was removed by Apple and is no longer
+  available
+  ([dotnet/macios #25024](https://github.com/dotnet/macios/pull/25024)).
+- **HTTP digest authentication** is now supported in `NSUrlSessionHandler`
+  ([dotnet/macios #25180](https://github.com/dotnet/macios/pull/25180)).
+- CoreCLR is the default runtime for .NET for iOS, Mac Catalyst, macOS, and
+  tvOS in this release — see [CoreCLR runtime default](#coreclr-runtime-default)
+  above
+  ([dotnet/macios #25050](https://github.com/dotnet/macios/pull/25050)).
+
+Preview 4 also includes a broad reliability and packaging pass across
+`NSUrlSessionHandler`, MSBuild, the linker, and runtime internals. See the
+full Preview 4 changelog for the complete list:
+<https://github.com/dotnet/macios/compare/release/11.0.1xx-preview3...release/11.0.1xx-preview4>
 
 ## Contributors
 
 Thank you contributors! ❤️
 
-[@Ahamed-Ali](https://github.com/Ahamed-Ali), [@akoeplinger](https://github.com/akoeplinger), [@BagavathiPerumal](https://github.com/BagavathiPerumal), [@CathyZhu0110](https://github.com/CathyZhu0110), [@devanathan-vaithiyanathan](https://github.com/devanathan-vaithiyanathan), [@Dhivya-SF4094](https://github.com/Dhivya-SF4094), [@HarishKumarSF4517](https://github.com/HarishKumarSF4517), [@HarishwaranVijayakumar](https://github.com/HarishwaranVijayakumar), [@ilonatommy](https://github.com/ilonatommy), [@JanKrivanek](https://github.com/JanKrivanek), [@jeremy-visionaid](https://github.com/jeremy-visionaid), [@jfversluis](https://github.com/jfversluis), [@jonathanpeppers](https://github.com/jonathanpeppers), [@jpd21122012](https://github.com/jpd21122012), [@KarthikRajaKalaimani](https://github.com/KarthikRajaKalaimani), [@kubaflo](https://github.com/kubaflo), [@Kyranio](https://github.com/Kyranio), [@maonaoda](https://github.com/maonaoda), [@mattleibow](https://github.com/mattleibow), [@mduchev](https://github.com/mduchev), [@mmitche](https://github.com/mmitche), [@NafeelaNazhir](https://github.com/NafeelaNazhir), [@NanthiniMahalingam](https://github.com/NanthiniMahalingam), [@NirmalKumarYuvaraj](https://github.com/NirmalKumarYuvaraj), [@nivetha-nagalingam](https://github.com/nivetha-nagalingam), [@Oxymoron290](https://github.com/Oxymoron290), [@prakashKannanSf3972](https://github.com/prakashKannanSf3972), [@praveenkumarkarunanithi](https://github.com/praveenkumarkarunanithi), [@PureWeen](https://github.com/PureWeen), [@sbomer](https://github.com/sbomer), [@Shalini-Ashokan](https://github.com/Shalini-Ashokan), [@sheiksyedm](https://github.com/sheiksyedm), [@simonrozsival](https://github.com/simonrozsival), [@StephaneDelcroix](https://github.com/StephaneDelcroix), [@SubhikshaSf4851](https://github.com/SubhikshaSf4851), [@SyedAbdulAzeemSF4852](https://github.com/SyedAbdulAzeemSF4852), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman), [@TamilarasanSF4853](https://github.com/TamilarasanSF4853), and [@Vignesh-SF3580](https://github.com/Vignesh-SF3580)
+[@Ahamed-Ali](https://github.com/Ahamed-Ali), [@akoeplinger](https://github.com/akoeplinger), [@BagavathiPerumal](https://github.com/BagavathiPerumal), [@CathyZhu0110](https://github.com/CathyZhu0110), [@dalexsoto](https://github.com/dalexsoto), [@devanathan-vaithiyanathan](https://github.com/devanathan-vaithiyanathan), [@Dhivya-SF4094](https://github.com/Dhivya-SF4094), [@emaf](https://github.com/emaf), [@HarishKumarSF4517](https://github.com/HarishKumarSF4517), [@HarishwaranVijayakumar](https://github.com/HarishwaranVijayakumar), [@ilonatommy](https://github.com/ilonatommy), [@JanKrivanek](https://github.com/JanKrivanek), [@jeremy-visionaid](https://github.com/jeremy-visionaid), [@jfversluis](https://github.com/jfversluis), [@jonathanpeppers](https://github.com/jonathanpeppers), [@jpd21122012](https://github.com/jpd21122012), [@KarthikRajaKalaimani](https://github.com/KarthikRajaKalaimani), [@kotlarmilos](https://github.com/kotlarmilos), [@kubaflo](https://github.com/kubaflo), [@Kyranio](https://github.com/Kyranio), [@maonaoda](https://github.com/maonaoda), [@mattleibow](https://github.com/mattleibow), [@mduchev](https://github.com/mduchev), [@mmitche](https://github.com/mmitche), [@NafeelaNazhir](https://github.com/NafeelaNazhir), [@NanthiniMahalingam](https://github.com/NanthiniMahalingam), [@NirmalKumarYuvaraj](https://github.com/NirmalKumarYuvaraj), [@nivetha-nagalingam](https://github.com/nivetha-nagalingam), [@Oxymoron290](https://github.com/Oxymoron290), [@prakashKannanSf3972](https://github.com/prakashKannanSf3972), [@praveenkumarkarunanithi](https://github.com/praveenkumarkarunanithi), [@PureWeen](https://github.com/PureWeen), [@rolfbjarne](https://github.com/rolfbjarne), [@SAY-5](https://github.com/SAY-5), [@sbomer](https://github.com/sbomer), [@Shalini-Ashokan](https://github.com/Shalini-Ashokan), [@sheiksyedm](https://github.com/sheiksyedm), [@simonrozsival](https://github.com/simonrozsival), [@StephaneDelcroix](https://github.com/StephaneDelcroix), [@SubhikshaSf4851](https://github.com/SubhikshaSf4851), [@SyedAbdulAzeemSF4852](https://github.com/SyedAbdulAzeemSF4852), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman), [@TamilarasanSF4853](https://github.com/TamilarasanSF4853), and [@Vignesh-SF3580](https://github.com/Vignesh-SF3580)
