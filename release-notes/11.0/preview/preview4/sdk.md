@@ -221,20 +221,6 @@ in their targets.
   engine libraries directly will need to retarget; the `dotnet new` CLI is
   unaffected.
 
-<!-- Filtered features (significant engineering work, but too niche or too internal for release notes):
-  - dotnet/templating → dotnet/sdk repo merge (#53647, #53680, #53733, #53734): infrastructure-only consolidation.
-    No user-visible behavior change. Template authors and dotnet new users see the same surface.
-  - xUnit v3 migration (#52930) and its revert (#53788): test infrastructure churn, no shipped behavior change.
-  - StaticWebAssets and Blazor WASM internal plumbing (#53602): mostly an internal cleanup that moves
-    BlazorRoutingEnableRegexConstraint into the SDK. The user-facing regex routing feature itself was
-    documented previously in ASP.NET Core notes.
-  - Containers OCI digest validation (#53724, #53933): rounds out a feature that customers have not been
-    explicitly told about; stays in the bug-fix bucket.
-  - NET10_0_OR_GREATER not emitted on MSBuild < 18 (#53976): real fix for a small audience (net10 + VS 17.14);
-    grouped under bug fixes rather than a feature section.
-  - Aspire host launcher fix (#53877): listed in bug fixes; no API change.
-  - Various CI, Helix, OneLocBuild, dependency-bump, and merge-flow PRs: pure build infrastructure.
--->
 
 ## Bug fixes
 
