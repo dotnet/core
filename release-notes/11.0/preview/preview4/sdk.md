@@ -279,7 +279,4 @@ Thank you contributors! ❤️
 - [@Christian-Sidak](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3AChristian-Sidak)
 - [@hwoodiwiss](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3Ahwoodiwiss)
 - [@slang25](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3Aslang25)
-- [@Youssef1313](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3AYoussef1313)
 
-<!-- TODO: Confirm whether `elias-io` is a Microsoft employee. Their PR(s) in the milestone window were
-     dependency / infrastructure-adjacent; included only if confirmed external. -->
