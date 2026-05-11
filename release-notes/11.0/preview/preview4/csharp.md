@@ -2,42 +2,12 @@
 
 .NET 11 Preview 4 includes the following C# language and compiler updates:
 
-- [Unsafe Evolution adds support for unsafe property accessors](#unsafe-evolution-adds-support-for-unsafe-property-accessors)
 - [Clearer diagnostic for misplaced `#!` shebang directives](#clearer-diagnostic-for-misplaced--shebang-directives)
 - [Opt-in compilation cache for the VBCSCompiler build server](#opt-in-compilation-cache-for-the-vbcscompiler-build-server)
 
 C# updates:
 
 - [What's new in C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14)
-
-## Unsafe Evolution adds support for unsafe property accessors
-
-> This is a preview feature for .NET 11.
-
-Unsafe Evolution is the ongoing work to let `unsafe` denote *requires-unsafe* members directly, rather than relying on a separate `[RequiresUnsafe]` attribute. Preview 4 extends that work to property accessors, so individual `get` and `set` accessors can now carry the `unsafe` modifier ([dotnet/roslyn #83115](https://github.com/dotnet/roslyn/pull/83115)).
-
-```csharp
-public class Buffer
-{
-    private byte[] _data = new byte[16];
-
-    public unsafe byte* Pointer
-    {
-        get { fixed (byte* p = _data) return p; }
-    }
-
-    public int First
-    {
-        get => _data[0];
-        unsafe set
-        {
-            fixed (byte* p = _data) { *p = (byte)value; }
-        }
-    }
-}
-```
-
-Tracked under the [Unsafe Evolution test plan](https://github.com/dotnet/roslyn/issues/81207); the corresponding language-spec change is in [dotnet/csharplang #10091](https://github.com/dotnet/csharplang/pull/10091). Unsafe Evolution remains a preview feature; the surface and rules can still change before it ships.
 
 ## Clearer diagnostic for misplaced `#!` shebang directives
 
