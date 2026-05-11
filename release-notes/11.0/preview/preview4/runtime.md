@@ -2,13 +2,12 @@
 
 .NET 11 Preview 4 includes new runtime features and performance work:
 
-- [Runtime async is now built into the shared framework](#runtime-async-is-now-built-into-the-shared-framework)
-- [JIT improvements for everyday code](#jit-improvements-for-everyday-code)
-- [Hardware intrinsics and code generation for x86/x64 and Arm64](#hardware-intrinsics-and-code-generation-for-x86x64-and-arm64)
+- [Runtime libraries are now compiled with runtime-async](#runtime-libraries-are-now-compiled-with-runtime-async)
+- [JIT optimizations](#jit-optimizations)
+- [Hardware intrinsics and code generation](#hardware-intrinsics-and-code-generation)
 - [ReadyToRun improvements](#readytorun-improvements)
-- [GC fixes for pinning, async returns, and background marking](#gc-fixes-for-pinning-async-returns-and-background-marking)
 - [Browser/WebAssembly CoreCLR enablement](#browserwebassembly-coreclr-enablement)
-- [Platform support: >1024 CPUs and Haiku bring-up](#platform-support-1024-cpus-and-haiku-bring-up)
+- [Platform support: >1024 CPUs](#platform-support-1024-cpus)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -17,21 +16,28 @@
 
 - [What's new in .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime)
 
-## The shared framework is now compiled with runtime-async
+## Runtime libraries are now compiled with runtime-async
 
-Preview 3 removed the `[RequiresPreviewFeatures]` opt-in for runtime-async. Preview 4 takes the next step and turns runtime-async on inside the shared framework itself: all shared framework libraries are built with `runtime-async=on`. Out-of-band NuGet packages that ship cross-runtime (for example `System.Text.Json`, `System.Collections.Immutable`) stay on compiler-generated async for now.
+The runtime libraries are now built with `runtime-async=on`. That means that the runtime libraries do not contain compiler-generated state machines, but rely on the runtime-provided async feature. Enabling runtime async for all runtime libraries provides excellent functional and performance testing. It also enables migrating an entire app (with only library dependencies) to the new model. This change builds on Preview 3, which removed the `[RequiresPreviewFeatures]` opt-in for runtime-async.
 
-If you are testing out runtime-async yourself, this might mean a performance improvement (although there are still improvements needed to unlock the full runtime-async chain). If you are not using runtime-async in your app, the performance will likely not change at all. If you see any regressions, however, please report them as issues.
+We expect runtime async to deliver throughput and library size improvements. Change is expected to be commensurate with the degree of async usage. We will appreciate any reports, with either positive or negative results.
 
-Runtime-async also picked up one notable capability fixx:
+Preview 4 also include:
 
 - **Covariant `Task` → `Task<T>` overrides** — when a derived class returns `Task<T>` for a base method that returns `Task`, the runtime now generates a void-returning thunk that bridges the calling convention difference, so virtual dispatch works for both flavors. The same fix landed for NativeAOT ([dotnet/runtime #125900](https://github.com/dotnet/runtime/pull/125900), [dotnet/runtime #126768](https://github.com/dotnet/runtime/pull/126768)).
+- **Runtime-async method inlining in crossgen2.** Restrictions that prevented runtime-async methods from being inlined during ReadyToRun compilation have been removed; all 69 async tests pass with both crossgen2 and composite R2R, and inlining of awaitless async calls (the sync-fast-path) is now confirmed end-to-end ([dotnet/runtime #125472](https://github.com/dotnet/runtime/pull/125472)).
 
-## JIT improvements for everyday code
+## JIT optimizations
 
 Several JIT optimizations landed this preview that benefit normal C# without any source changes.
 
-**`SequenceEqual` over constants folds away.** The JIT can now value-number through `SequenceEqual` and reduce a comparison of two known strings (or any constant span sequence) to a single `xor` ([dotnet/runtime #121985](https://github.com/dotnet/runtime/pull/121985)). Thanks [@hez2010](https://github.com/hez2010) for the contribution.
+### Inlining improvements
+
+Several JIT optimizations are included that are most visible after inlining, when constants and guards from different methods land in the same compiled body and become eligible for folding. The optimizations apply outside inlining too, but inlining is the most common way the necessary preconditions get exposed.
+
+**Constant-folding `SequenceEqual`.** The JIT can now fold a `string.Equals` or `ReadOnlySpan<T>.SequenceEqual` call whose two operands are both constants, replacing the byte-by-byte compare with the constant `true`/`false` result ([dotnet/runtime #121985](https://github.com/dotnet/runtime/pull/121985)). Thanks [@hez2010](https://github.com/hez2010) for the contribution.
+
+Here's the simplest possible case — two string literals compared directly:
 
 ```csharp
 public static string Str1 => "abcdef";
@@ -41,7 +47,7 @@ public static string Str2 => "bcdefg";
 public static bool CompareStr() => Str1.Equals(Str2);
 ```
 
-Before:
+Before, the JIT emitted the full character-by-character compare:
 
 ```asm
        mov      rax, 0x2DA4A1AEFF0      ; 'abcdef'
@@ -58,28 +64,57 @@ Before:
        ret
 ```
 
-After:
+After, the comparison folds to a constant `false`:
 
 ```asm
        xor      eax, eax
        ret
 ```
 
-**`BOUNDS_CHECK(0, length)` is eliminated when `length != 0` is already known.** A common pattern after an empty-guard on a span — `if (!span.IsEmpty && span[0] == value)` — used to keep the bounds check on `span[0]`. The JIT now scans assertions for an `OAK_NOT_EQUAL` against `0` on the length and tightens the lower bound, dropping the check ([dotnet/runtime #126856](https://github.com/dotnet/runtime/pull/126856)).
+In typical code, it is rare to compare two literals against each other since the result is known by the developer while writing the code. The optimization matters because *inlining causes constants to collide*. A helper like `IsAdmin(role) => role == "Admin"` looks like a comparison between a parameter and a literal, but when it gets inlined into a caller that passes another literal — say `IsAdmin("Guest")` — the JIT ends up with `"Guest" == "Admin"` in one method body and can fold it. The same pattern is what makes a magic-number check (`if (bytes.SequenceEqual(GZipMagic)) ...`) disappear when the surrounding wrapper is inlined and `bytes` resolves to a known constant span.
 
-**Dominating redundant branch elimination.** When a dominating predicate is implied by a dominated branch — for example `if (x > 0) if (x > 1) S();` — the JIT can now fold the outer `if (x > 0)` away ([dotnet/runtime #126587](https://github.com/dotnet/runtime/pull/126587)).
+What counts as a constant for this folding is whatever the JIT's *value numbering* can prove is a known, immutable value. Value numbering is the JIT pass that assigns each expression a tag identifying which value it computes; expressions tagged with a known literal value can then be folded directly. For this optimization, the candidates are: string literals (`"abc"`), `const string` fields (the C# compiler inlines them as `ldstr` at every use site), and UTF-8 literals (`"PNG"u8`, which compile to a `ReadOnlySpan<byte>` over an RVA blob). `static readonly string` fields generally do *not* qualify — the reference isn't known until the static constructor runs, so value numbering treats them as opaque. Enums aren't relevant here because `SequenceEqual` and `string.Equals` don't take enum operands; enum `==` is plain integer compare and the JIT has folded those for years.
 
-**SSA-aware PHI jump threading.** Redundant-branch jump threading now keeps working through PHI-based blocks when the PHI uses can be fully accounted for in the block and its immediate successors, expanding the cases where the JIT can short-circuit a control-flow diamond ([dotnet/runtime #126812](https://github.com/dotnet/runtime/pull/126812), [dotnet/runtime #127103](https://github.com/dotnet/runtime/pull/127103)).
+**Folding dominated redundant branches.** When an outer predicate is already implied by an inner branch, the outer check is now removed:
 
-**Loop cloning correctness for down-counting loops.** Down-counting loops were being cloned without verifying that the initial value was strictly less than the array length, which could let the fast path execute when it shouldn't ([dotnet/runtime #126770](https://github.com/dotnet/runtime/pull/126770)).
+```csharp
+if (x > 0)
+{
+    if (x > 1) S();  // outer `x > 0` is now folded away
+}
+```
 
-Other JIT items that landed this preview include shared funclet iteration ([dotnet/runtime #126491](https://github.com/dotnet/runtime/pull/126491), [dotnet/runtime #126588](https://github.com/dotnet/runtime/pull/126588)) and refined SSA in ambiguously-threaded blocks ([dotnet/runtime #126907](https://github.com/dotnet/runtime/pull/126907)).
+This shows up naturally after inlining, where a caller's guard and a callee's guard land in the same body and one ends up implying the other ([dotnet/runtime #126587](https://github.com/dotnet/runtime/pull/126587)).
 
-## Hardware intrinsics and code generation for x86/x64 and Arm64
+### Eliminating bounds checks after an empty-span guard
+
+A familiar pattern — peek at the first element only if the span isn't empty — used to keep a bounds check on `span[0]` even though `!span.IsEmpty` had just been proven:
+
+```csharp
+if (!span.IsEmpty && span[0] == value)
+{
+    // ...
+}
+```
+
+The JIT now picks up the `length != 0` assertion from the empty check and combines it with the knowledge that `length >= 0` is always true to conclude `length >= 1`. That is enough to prove the bounds check on `span[0]` always succeeds, so the check is dropped ([dotnet/runtime #126856](https://github.com/dotnet/runtime/pull/126856)). The JIT previously didn't understand that `length` cannot be negative (since `length` is a signed `int`) which required a `length > 0` check in addition to `length != 0`.
+
+### Skipping a redundant test after a branch
+
+When code picks a value in one branch and then immediately tests it, the second test is often redundant — whichever arm of the first branch ran has already determined the answer. The JIT can now short-circuit more of these cases by routing each predecessor directly to its known outcome:
+
+```csharp
+int x = condition ? 1 : 2;
+if (x == 1) A(); else B();   // the second test is now skipped
+```
+
+The `condition`-true arm goes straight to `A()` and the false arm goes straight to `B()`, with no separate `x == 1` test in between, provided by [dotnet/runtime #126812](https://github.com/dotnet/runtime/pull/126812) and [dotnet/runtime #127103](https://github.com/dotnet/runtime/pull/127103).
+
+## Hardware intrinsics and code generation
 
 **F16C acceleration for `Half` ↔ `float` conversions on x64.** When the CPU supports F16C (most AVX2-capable hardware), conversions between `System.Half` and `float`/`double` now use the dedicated `vcvtph2ps` / `vcvtps2ph` instructions instead of helper calls. On a simple `HalfToSingle`/`SingleToHalf` benchmark, this collapses a stack-spill + helper invocation down to a register-only sequence ([dotnet/runtime #127094](https://github.com/dotnet/runtime/pull/127094)). An earlier broader change that introduced a `TYP_HALF` kind was reverted for ABI reasons ([dotnet/runtime #127042](https://github.com/dotnet/runtime/pull/127042)); the F16C work is the simpler, ABI-safe replacement.
 
-**Better cost modeling for x86/x64 SIMD and floating-point.** Floating-point execution and size costs hadn't been refreshed since the x87 era, and most hardware-intrinsic nodes were stuck at `costEx=1, costSz=1`, which actively suppressed CSE and other optimizations. The costs now reflect modern reality, which lets the JIT make better decisions about hoisting and CSE around SIMD code ([dotnet/runtime #127048](https://github.com/dotnet/runtime/pull/127048)).
+**Better cost modeling for x86/x64 SIMD and floating-point.** The JIT's floating-point execution and size costs still reflected x87-era assumptions — back when FP went through a separate coprocessor stack and was much slower than today's SSE/AVX register operations — and most hardware-intrinsic nodes were stuck at `costEx=1, costSz=1`, which actively suppressed CSE and other optimizations. The costs now reflect modern reality, which lets the JIT make better decisions about hoisting and CSE around SIMD code ([dotnet/runtime #127048](https://github.com/dotnet/runtime/pull/127048)).
 
 **Faster `DotProduct` on AVX-capable x86.** Lowering for `Vector128.Dot`-style operations now emits a `mul + permute + add` sequence instead of `vdpps`/`vdppd` when AVX is available, which is consistently faster:
 
@@ -102,17 +137,7 @@ Numbers are from the `System.Numerics.Tests` perf harness and are pulled from th
 
 ## ReadyToRun improvements
 
-**`Comparer<T>` and `EqualityComparer<T>` are intrinsified in R2R.** The default `Comparer<T>.Default` / `EqualityComparer<T>.Default` cctor used `CreateInstanceForAnotherGenericParameter` reflection that R2R could not see, so callers fell back to the interpreter / JIT. R2R now generates a specialized helper in the image, mirroring the NativeAOT approach. The PR reports `System.Collections.ContainsFalse_Int32_.ImmutableList` running 20× faster, with about a 0.5% R2R image size increase ([dotnet/runtime #126204](https://github.com/dotnet/runtime/pull/126204)).
-
-**Async method inlining is no longer blocked in crossgen2.** Restrictions that prevented async methods from being inlined during ReadyToRun compilation have been removed; all 69 async tests pass with both crossgen2 and composite R2R, and inlining of awaitless async calls is now confirmed end-to-end ([dotnet/runtime #125472](https://github.com/dotnet/runtime/pull/125472)).
-
-**A new `ILCompiler.ReadyToRun.Tests` project** lets the team assert structural facts about R2R output (which methods got inlined, which got compiled) instead of relying solely on behavioral tests ([dotnet/runtime #126486](https://github.com/dotnet/runtime/pull/126486)).
-
-## GC fixes for pinning, async returns, and background marking
-
-- **GC heap size with heavy pinning.** A regression in heap sizing when many pinned objects were present has been redone with a fix for the infinite loop in `allocate_in_condemned_generations` that the first attempt introduced ([dotnet/runtime #126043](https://github.com/dotnet/runtime/pull/126043)).
-- **GC write barrier for async return values.** The interpreter was checking only whether the *type* contained GC refs when emitting the write barrier for an async method return into the continuation object, which could miss the case where an object without refs was returned. Fixes intermittent `System.Text.Json.Tests` GC crashes ([dotnet/runtime #126721](https://github.com/dotnet/runtime/pull/126721)).
-- **Background GC mark phase join.** `background_mark_phase` was using `gc_t_join` (intended for foreground marking) instead of `bgc_t_join`, which could hang the runtime on certain `GCPerfSim` shapes ([dotnet/runtime #126389](https://github.com/dotnet/runtime/pull/126389)).
+**`Comparer<T>` and `EqualityComparer<T>` are specialized in R2R.** The default `Comparer<T>.Default` / `EqualityComparer<T>.Default` cctor used `CreateInstanceForAnotherGenericParameter` reflection that R2R could not see, so callers fell back to the interpreter / JIT. R2R now generates a specialized helper in the image, mirroring the NativeAOT approach. The PR reports `System.Collections.ContainsFalse_Int32_.ImmutableList` running 20× faster, with about a 0.5% R2R image size increase ([dotnet/runtime #126204](https://github.com/dotnet/runtime/pull/126204)).
 
 ## Browser/WebAssembly CoreCLR enablement
 
@@ -125,10 +150,9 @@ CoreCLR continues its bring-up on WebAssembly. Highlights from this preview:
 - **RyuJIT WASM codegen progress.** Many incremental codegen fixes landed for the WASM-targeting RyuJIT — bounds checks on `GT_INDEX_ADDR` ([dotnet/runtime #126111](https://github.com/dotnet/runtime/pull/126111)), block-store edge cases ([dotnet/runtime #125770](https://github.com/dotnet/runtime/pull/125770)), int-to-float casts ([dotnet/runtime #126209](https://github.com/dotnet/runtime/pull/126209)), `genStructReturn` ([dotnet/runtime #126326](https://github.com/dotnet/runtime/pull/126326)), funclet prolog/epilog and EH/unwind frames ([dotnet/runtime #126663](https://github.com/dotnet/runtime/pull/126663), [dotnet/runtime #127043](https://github.com/dotnet/runtime/pull/127043)), and multi-entry try regions ([dotnet/runtime #126374](https://github.com/dotnet/runtime/pull/126374)). WASM vector width is now declared as 128 bits ([dotnet/runtime #126375](https://github.com/dotnet/runtime/pull/126375)).
 - **NativeAOT publish for WASM no longer drops package satellites.** Satellite assemblies coming from NuGet packages are now passed to ILC via `--satellite:` and pruned from the publish output, fixing localization for AOT-published apps that depend on packages like `System.CommandLine` ([dotnet/runtime #127089](https://github.com/dotnet/runtime/pull/127089)).
 
-## Platform support: >1024 CPUs and Haiku bring-up
+## Platform support: >1024 CPUs
 
 - **More than 1024 CPUs.** A customer report uncovered that .NET fails to initialize on machines with more than 1024 logical processors because `sched_getaffinity` was being called with the default `cpu_set_t` (capped at 1024). The runtime now allocates the CPU set dynamically, the GC keeps a 1024-heap limit but lifts the CPU limit, and `MAX_SUPPORTED_CPUS` was renamed to `MAX_SUPPORTED_HEAPS` to reflect what it actually bounds ([dotnet/runtime #126763](https://github.com/dotnet/runtime/pull/126763)).
-- **Haiku initial managed libraries.** First managed libraries (notably `System.Private.CoreLib`) now build for Haiku, with the matching native PAL plumbing — part of the broader Haiku port ([dotnet/runtime #121880](https://github.com/dotnet/runtime/pull/121880)). Thanks [@trungnt2910](https://github.com/trungnt2910) for continuing the Haiku work.
 
 <!-- Filtered features (significant engineering work, but too niche for release notes):
   - cDAC plumbing — Loader/RuntimeTypeSystem/DacDbi/contract-versioning/typed-fields/etc. (~30 PRs). Important to the team building the new managed debugger contract, but reads as internal jargon to the 80/20 audience and does not yet expose mainstream developer-facing APIs.
@@ -180,9 +204,6 @@ CoreCLR continues its bring-up on WebAssembly. Highlights from this preview:
   - Reverse P/Invoke initialization race for `t_MostRecentUMEntryThunkData` ([dotnet/runtime #126579](https://github.com/dotnet/runtime/pull/126579)).
   - Cached version-resilient hash code on `MethodTableAuxiliaryData` to avoid superlinear behavior with polymorphic recursion ([dotnet/runtime #126534](https://github.com/dotnet/runtime/pull/126534)).
   - Better `InvalidCastException` message for generic argument coming from a different `AssemblyLoadContext` ([dotnet/runtime #125973](https://github.com/dotnet/runtime/pull/125973)).
-  - LoongArch64 floating-point register copy in `SoftwareExceptionFrame::UpdateContextFromTransitionBlock` ([dotnet/runtime #126597](https://github.com/dotnet/runtime/pull/126597)).
-  - LoongArch64 emitter `getInsExecutionCharacteristics()` initialization for perfscore ([dotnet/runtime #126938](https://github.com/dotnet/runtime/pull/126938)).
-  - RISC-V fine-grained fence variants for memory barriers ([dotnet/runtime #126566](https://github.com/dotnet/runtime/pull/126566)).
 - **Mono**
   - Avoid incorrectly resolving a `MonoClass` for `MONO_TYPE_GENERICINST` when loading custom attribute values ([dotnet/runtime #123439](https://github.com/dotnet/runtime/pull/123439)).
 
