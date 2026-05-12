@@ -223,25 +223,6 @@ Two `System.Net.Security` items improve TLS reliability. `SslStream` server-side
 
 `HttpClient` automatically downgrades to HTTP/1.1 when a request requires Windows authentication (NTLM/Negotiate) over HTTP/2 ([dotnet/runtime #123827](https://github.com/dotnet/runtime/pull/123827)). The HTTP/2 specification disallows the connection-bound auth schemes that NTLM and Kerberos rely on, so previously these requests would fail. With the downgrade in place, applications targeting mixed-auth environments — common in enterprise intranets — work without explicit `HttpRequestMessage.Version` overrides.
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Half FP16 ISA acceleration: shipped as PR 122649, then reverted by PR 127042. Not part of Preview 4.
-  - LINQ tuple overloads for Join/LeftJoin/RightJoin/GroupJoin (PRs 121998, 121999): all reverted by PR 126624; reinstatement (PR 126649) merged to main only and not back-ported to release/11.0-preview4. Not in Preview 4.
-  - Box value types implementing IXmlSerializable in XmlSerializer generated IL (PR 117473): correctness fix in serializer-generated IL, no API surface, narrow audience.
-  - System.Diagnostics.EventLog NRT annotations (PR 119891): annotation pass with no behavior change.
-  - BigInteger nuint limbs rewrite (PR 125799): internal perf rework; user-visible only as a perf delta. Pending benchmark numbers.
-  - Dictionary.Remove split inner loops for value-type key (PR 125884): JIT-friendly restructure; perf-only, no API change.
-  - SortedSet<T>.TreeSubSet.Clear improvement (PR 126410): perf-only on a niche surface.
-  - AsyncEnumerable.ToAsyncEnumerable shortcut for IAsyncEnumerable inputs (PR 126362): single-call shortcut; mostly affects bridges, not consumers.
-  - Add Log10 to IBinaryInteger (PR 126065): generic-math gap fill; narrow audience.
-  - OverloadResolutionPriority on MemoryMarshal.AsBytes/Cast (PR 126252): API hygiene; readers won't notice unless they use ambiguous overloads.
-  - Utf8JsonWriter early init / FrameworkEventSource init (PR 126737): startup optimization, not user-facing.
-  - HttpClientBuilder docstring typos (PR 126702), IChangeToken docs clarification (PR 126640): docs-only.
-  - Process trimming/MacCatalyst correctness items (PR 126478, PR 126449 follow-ups): rolled into the Process section as a single quality-of-implementation paragraph.
-  - SmtpException.GetMessageForStatus distinct messages (PR 126602): small message-quality fix; bug-bucket only.
-  - decimal NumberStyles validation fix (PR 126644): bug-bucket; no API change.
-  - DirectoryNotFoundException.DirectoryPath property (PR 126428): small API addition with thin description; covered as a one-liner in bug fixes if desired.
--->
-
 ## Breaking changes
 
 - `Microsoft.Extensions.Logging` moves several internal types to a new location and ships obsolete compatibility shims in their original namespaces ([dotnet/runtime #127194](https://github.com/dotnet/runtime/pull/127194)). Code that referenced the old types (mostly logging-library authors and source generators) will compile with `[Obsolete]` warnings; migrate to the new locations before the shims are removed in a future release.
