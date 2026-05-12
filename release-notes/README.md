@@ -6,8 +6,8 @@
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | [.NET 11.0](./11.0/README.md) | November 10, 2026 | [STS][policies] | Preview | [11.0.0-preview.3][11.0.0-preview.3] | TBD |
 | [.NET 10.0](./10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.8][10.0.8] | November 14, 2028 |
-| [.NET 9.0](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.16][9.0.16] | November 10, 2026 |
-| [.NET 8.0](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.27][8.0.27] | November 10, 2026 |
+| [.NET 9.0](./9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Maintenance | [9.0.16][9.0.16] | November 10, 2026 |
+| [.NET 8.0](./8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Maintenance | [8.0.27][8.0.27] | November 10, 2026 |
 
 [11.0.0-preview.3]: ./11.0/preview/preview3/11.0.0-preview.3.md
 [10.0.8]: ./10.0/10.0.8/10.0.8.md
