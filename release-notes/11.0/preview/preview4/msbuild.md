@@ -77,5 +77,3 @@ Thank you contributors! ❤️
 
 - [@snechaev](https://github.com/dotnet/msbuild/pulls?q=is%3Apr+is%3Amerged+author%3Asnechaev)
 - [@OvesN](https://github.com/dotnet/msbuild/pulls?q=is%3Apr+is%3Amerged+author%3AOvesN)
-
-<!-- TODO: verify whether @nareshjo (#13509) is an external community contributor or a Microsoft employee submitting via the VS Perf Rel AI Agent; include in the list above if external. -->
