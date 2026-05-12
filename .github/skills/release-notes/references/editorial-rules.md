@@ -95,12 +95,15 @@ At the bottom of each component's notes, list ALL external contributors — not 
 
 **Vet the list** — the `community-contribution` label is sometimes wrong. Exclude usernames containing `-msft`, `-microsoft`, or other Microsoft suffixes. When in doubt about whether someone is a Microsoft employee, leave them out of the community list.
 
+**Scope `dotnet/aspnetcore` links to the milestone.** That repo tags every PR with a release milestone (e.g. `11.0-preview4`), so the contributor link should append `+milestone%3A<slug>` to limit it to this milestone's contributions. Look up the exact slug with `gh pr view <pr> --repo dotnet/aspnetcore --json milestone`. Most other source repos don't apply milestones consistently — for those, omit the filter and link to the author's merged PRs without scope.
+
 ```markdown
 ## Community contributors
 
 Thank you contributors! ❤️
 
-- [@username](https://github.com/<owner>/<repo>/pulls?q=is%3Apr+is%3Amerged+author%3Ausername)
+- [@username](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Ausername+milestone%3A<slug>)
+- [@username](https://github.com/<other-owner>/<other-repo>/pulls?q=is%3Apr+is%3Amerged+author%3Ausername)
 ```
 
 ## Bug fixes section
