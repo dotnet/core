@@ -44,14 +44,6 @@ The MSBuild multithreaded build mode (`-mt`) requires built-in tasks to declare 
 
 No project changes are needed; these tasks now run directly on worker threads when a build uses `-mt`, reducing the number of out-of-process TaskHost handoffs during a multithreaded build.
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Migration of unit tests to RoslynCodeTaskFactory / xunit.v3 / various test stabilizations: test-only changes.
-  - Branding bumps, VMR merges, gh-aw / skill / reviewer-agent automation: repo infrastructure.
-  - GetCanonicalForm refactor (#13532), ValueTuple deploy removal (#13507), bootstrap re-sign on macOS (#13513): internal plumbing with no user-visible behavior change.
-  - Localized string check-in (#13437): localization automation.
-  - vs18.6 backport entries: covered by the corresponding main-branch entry already documented.
--->
-
 ## Bug fixes
 
 - **Build engine**
