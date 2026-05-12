@@ -221,7 +221,6 @@ in their targets.
   engine libraries directly will need to retarget; the `dotnet new` CLI is
   unaffected.
 
-
 ## Bug fixes
 
 - **CLI**
@@ -265,4 +264,3 @@ Thank you contributors! ❤️
 - [@Christian-Sidak](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3AChristian-Sidak)
 - [@hwoodiwiss](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3Ahwoodiwiss)
 - [@slang25](https://github.com/dotnet/sdk/pulls?q=is%3Apr+is%3Amerged+author%3Aslang25)
-

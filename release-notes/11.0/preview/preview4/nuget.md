@@ -27,4 +27,3 @@ The intended use is hosted/CI builds, where each build starts from a clean state
   - Stricter validation when reading `.nupkg` files surfaces malformed packages earlier instead of failing later in restore ([NuGet/NuGet.Client #7284](https://github.com/NuGet/NuGet.Client/pull/7284)).
 - **Package signing**
   - Fixed a non-DER-compliant encoding in generated `TSTInfo` structures used by NuGet's RFC 3161 timestamp handling. Existing consumers were lenient enough to accept the prior output, and remain compatible with the corrected encoding ([NuGet/NuGet.Client #7248](https://github.com/NuGet/NuGet.Client/pull/7248), [NuGet/Home #14838](https://github.com/NuGet/Home/issues/14838)).
-
