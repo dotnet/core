@@ -137,16 +137,6 @@ regenerating the snapshot rather than adding a redundant migration. The warning
 only fires when the snapshot's major version is older than the running EF Core
 major version and the detected changes are deterministic.
 
-<!-- Filtered features (significant engineering work, but too narrow or too internal for release notes):
-  - ApiChief tool for EF Core API baseline management (#38041): internal API-review tooling, not a developer-facing feature.
-  - API review follow-ups for full-text/vector index builders (#38027): captured under Breaking changes since P3 documented the previous names.
-  - Cosmos JSON serialization pipeline modernization (#38024): provider-internal refactor with no user-visible change.
-  - PMC tools warning for platform-specific apps (#38000): one-line tooling warning, two-sentence test fails.
-  - Improved XML doc on GetMappingStrategy (#38091): documentation polish, not a feature.
-  - Multiple `[release/10.0] Source code updates` and `Update dependencies from build ...` PRs: VMR/dependency sync noise.
-  - Numerous CI / GitHub Actions / Cosmos test infrastructure PRs (e.g. #38003, #37999, #38005, #38088, #38118, #38128, #38147): infra only.
--->
-
 ## Breaking changes
 
 - **SQL Server full-text and vector index builder API renames.** Following

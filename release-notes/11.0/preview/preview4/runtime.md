@@ -154,17 +154,6 @@ CoreCLR continues its bring-up on WebAssembly. Highlights from this preview:
 
 - **More than 1024 CPUs.** A customer report uncovered that .NET fails to initialize on machines with more than 1024 logical processors because `sched_getaffinity` was being called with the default `cpu_set_t` (capped at 1024). The runtime now allocates the CPU set dynamically, the GC keeps a 1024-heap limit but lifts the CPU limit, and `MAX_SUPPORTED_CPUS` was renamed to `MAX_SUPPORTED_HEAPS` to reflect what it actually bounds ([dotnet/runtime #126763](https://github.com/dotnet/runtime/pull/126763)).
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - cDAC plumbing — Loader/RuntimeTypeSystem/DacDbi/contract-versioning/typed-fields/etc. (~30 PRs). Important to the team building the new managed debugger contract, but reads as internal jargon to the 80/20 audience and does not yet expose mainstream developer-facing APIs.
-  - ILTrim hackathon sources, descriptor support, property/event preservation. Foundation for a future trimmer story; Preview 4 only adds infrastructure with no end-user trimming behavior.
-  - LoongArch64 emitter / SoftwareExceptionFrame fixes and RISC-V fence/CSE flag display. Ongoing arch-enablement work; valuable, but scoring near 1 by the 80/20 filter.
-  - SuperPMI / SPMI infrastructure refactors (#125874, parallelsuperpmi cleanup). JIT-developer tooling.
-  - COM stub rework (#126002, #127021, #126731, #127241). Internal interop refactor; behavior is unchanged for users.
-  - iOS-CLR (`[ios-clr]`) bring-up commits. Active CoreCLR-on-Apple-mobile work, but still pre-shipping.
-  - Cross-process synchronization, hotreload-utils repo merge, and createdump alt-stack detection. Diagnostics / build plumbing.
-  - "Apply.Base.Relocs.For.Webcil" and other in-progress WIP items where the PR title itself flags incompleteness.
--->
-
 ## Breaking changes
 
 - The `DOTNET_RuntimeAsync` / `UNSUPPORTED_RuntimeAsync` configuration switch is gone. There is no longer a way to disable runtime-async at the runtime level — code that relied on the env var to fall back to compiler-generated async will need to either rebuild with `UseRuntimeAsync=false` per project, or stop setting the variable ([dotnet/runtime #125406](https://github.com/dotnet/runtime/pull/125406)).
@@ -182,7 +171,7 @@ CoreCLR continues its bring-up on WebAssembly. Highlights from this preview:
 - **GC**
   - Heap-size regression in heavily pinning scenarios ([dotnet/runtime #126043](https://github.com/dotnet/runtime/pull/126043)).
   - Wrong join in BGC mark phase causing rare hangs ([dotnet/runtime #126389](https://github.com/dotnet/runtime/pull/126389)).
-  - Linux `madvise()` advice values were being combined incorrectly with bitwise-OR in `GCToOSInterface::VirtualReset` ([dotnet/runtime #126780](https://github.com/dotnet/runtime/pull/126780) <!-- TODO: confirm PR# — bitwise-OR madvise fix appears in slice but title-only -->).
+  - Linux `madvise()` advice values were being combined incorrectly with bitwise-OR in `GCToOSInterface::VirtualReset` ([dotnet/runtime #126780](https://github.com/dotnet/runtime/pull/126780)).
 - **Runtime async**
   - Missing GC write barrier when writing an async method return into the continuation object ([dotnet/runtime #126721](https://github.com/dotnet/runtime/pull/126721)).
   - x86 runtime-async frame pointer mismatch in `GetSpForDiagnosticReporting` and DBI generic-type resolution ([dotnet/runtime #126717](https://github.com/dotnet/runtime/pull/126717), [dotnet/runtime #126915](https://github.com/dotnet/runtime/pull/126915)).

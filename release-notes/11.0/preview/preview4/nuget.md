@@ -17,7 +17,6 @@ The intended use is hosted/CI builds, where each build starts from a clean state
 </PropertyGroup>
 ```
 
-
 ## Bug fixes
 
 - **dotnet CLI**

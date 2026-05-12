@@ -5,16 +5,6 @@ notable user-facing change in this preview is a clipboard regression fix.
 
 - [Bug fixes](#bug-fixes)
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Add documentation and in-code awareness for shared WinForms/WPF clipboard/OLE infrastructure (dotnet/winforms #14306). Repo-internal contributor docs only; no behavior change.
-  - Adding NuGet package for Microsoft.Private.Windows.Core assembly (dotnet/winforms #14429). Internal transport package for VS/WPF consumption; not a public surface.
-  - Updating TFM for .NET Framework assembly from net472 to net481 (dotnet/winforms #14450). Build/infra-only change to internal projects.
-  - Pin System.Formats.Nrbf and its transitive dependencies to 10.0.4 release for .NET Framework (dotnet/winforms #14487). Dependency pin for .NET Framework build; no app-visible change.
-  - Fix WinformsControlTest exit when clicking Column2 header (dotnet/winforms #14477). Bug in the in-repo test/sample app, not the product.
-  - Multiple "[main] Source code updates from dotnet/dotnet" PRs (#14409, #14419, #14426, #14431, #14432, #14433, #14437, #14443, #14444, #14446, #14456, #14464, #14470, #14476, #14479). VMR sync noise.
-  - Repo Copilot/skill workflow updates (#14428, #14451, #14480). Repo automation only.
--->
-
 ## Bug fixes
 
 - **System.Windows.Forms.Clipboard / DataObject**
