@@ -17,14 +17,6 @@ The intended use is hosted/CI builds, where each build starts from a clean state
 </PropertyGroup>
 ```
 
-<!-- Filtered features (engineering work, but not user-facing enough for a writeup):
-  - PR pipeline / agent pool / 1ES SBOM / OneLocBuild / lscache ignore / branding 7.7: build infrastructure.
-  - PowerShell-to-Apex test migrations (#7246, #7270) and MockServer flake fix (#7296): test-only.
-  - NuGet.Protocol nullability Phase 1 (#7267) and PackageIdValidator env-var caching (#7266): internal refactors / micro-optimizations with no observable behavior change.
-  - "update public API shipping in 7.6.x" (#7269): internal API tracking file.
-  - "Simplify localization docs" (#7262): repo docs only.
-  - PM UI restore refresh (#7209), GetInstalledVersions init (#7245), EnvDTE.Project thread affinity (#7292): Visual Studio Package Manager UI work — product-boundary rule, belongs to VS tooling notes.
--->
 
 ## Bug fixes
 
@@ -37,8 +29,3 @@ The intended use is hosted/CI builds, where each build starts from a clean state
 - **Package signing**
   - Fixed a non-DER-compliant encoding in generated `TSTInfo` structures used by NuGet's RFC 3161 timestamp handling. Existing consumers were lenient enough to accept the prior output, and remain compatible with the corrected encoding ([NuGet/NuGet.Client #7248](https://github.com/NuGet/NuGet.Client/pull/7248), [NuGet/Home #14838](https://github.com/NuGet/Home/issues/14838)).
 
-## Community contributors
-
-Thank you contributors! ❤️
-
-<!-- TODO: confirm @agr (Andrei Grigorev, PR #7248) is an external community contributor before crediting; remove this section if they are a Microsoft employee. -->
