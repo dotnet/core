@@ -36,6 +36,8 @@ unlocking the Material 3 theming system:
 - `Entry` ([dotnet/maui #33673](https://github.com/dotnet/maui/pull/33673))
 - `Slider` ([dotnet/maui #33603](https://github.com/dotnet/maui/pull/33603))
 
+![material 3 screenshots](media/material3.png)
+
 ## `x:Code` directive for inline C# in XAML
 
 The XAML Source Generator now supports an `x:Code` directive that lets you inline a
