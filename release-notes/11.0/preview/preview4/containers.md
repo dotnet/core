@@ -1,6 +1,6 @@
 # Containers in .NET 11 Preview 4 - Release Notes
 
-Here's a summary of what's new for .NET container images in this Preview 3 release:
+Here's a summary of what's new for .NET container images in this Preview 4 release:
 
 ## .NET 11 SDK container images include PowerShell 7.7
 
