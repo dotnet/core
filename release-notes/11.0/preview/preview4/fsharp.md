@@ -89,7 +89,7 @@ The reported scenario — a multi-project solution referencing a generative type
 
 ## Bug fixes and other improvements
 
-**Computation expressions and SRTP**
+### Computation expressions and SRTP
 
 - Pattern-based extension method lookups for computation-expression members (`Bind`, `Delay`, `Run`, etc.) and for the `Dispose` pattern in `use` bindings now honor accessibility and type-compatibility checks. Previously they could resolve to private extension methods or methods on incompatible types ([dotnet/fsharp #19536](https://github.com/dotnet/fsharp/pull/19536)). Thank you [@evgTSV](https://github.com/evgTSV)!
 - Fixed `seq { }` `try`/`with` running the handler body twice when the handler itself yielded ([dotnet/fsharp #19660](https://github.com/dotnet/fsharp/pull/19660)).
@@ -97,7 +97,7 @@ The reported scenario — a multi-project solution referencing a generative type
 - Fixed SRTP trait call overload resolution returning the wrong typed value across multiple FSI submissions ([dotnet/fsharp #19471](https://github.com/dotnet/fsharp/pull/19471)).
 - Fixed a `NullReferenceException` when calling virtual `Object` methods on value types through inline SRTP code ([dotnet/fsharp #8098](https://github.com/dotnet/fsharp/pull/8098)).
 
-**Symbols API, tooltips, and completion**
+### Symbols API, tooltips, and completion
 
 - `CLIEvent` properties are now reported as events through the Symbols API: `IsEvent` returns `true`, the XML doc signature uses the `E:` prefix, and tooltips render `event EventName` ([dotnet/fsharp #18584](https://github.com/dotnet/fsharp/pull/18584)).
 - Methods are now tagged as `Method` rather than `Member` in tooltips, fixing a regression that affected colorization and classification ([dotnet/fsharp #19507](https://github.com/dotnet/fsharp/pull/19507)).
@@ -105,7 +105,7 @@ The reported scenario — a multi-project solution referencing a generative type
 - Completion now consistently filters obsolete fields and events ([dotnet/fsharp #13512](https://github.com/dotnet/fsharp/pull/13512)).
 - `IlxGen` now emits the `CompilationMapping` attribute for generic values ([dotnet/fsharp #19643](https://github.com/dotnet/fsharp/pull/19643)). Thank you [@auduchinok](https://github.com/auduchinok)!
 
-**Compiler correctness**
+### Compiler correctness
 
 - `AttributeUsage.AllowMultiple` is now correctly inherited through C#-defined attribute hierarchies — the inheritance walk previously only consulted F# augmentation data and missed IL-imported supertypes ([dotnet/fsharp #19315](https://github.com/dotnet/fsharp/pull/19315)). Thank you [@edgarfgp](https://github.com/edgarfgp)!
 - Type definitions no longer emit duplicate or incorrect metadata: DU case names that match IWSAM member names no longer produce duplicate property entries, `DefaultAugmentation(false)` no longer causes duplicate method-table entries, and abstract event `add_`/`remove_` accessors are now emitted with the `SpecialName` flag ([dotnet/fsharp #19341](https://github.com/dotnet/fsharp/pull/19341)).
