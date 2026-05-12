@@ -35,18 +35,6 @@ The cache is enabled by setting the `ROSLYN_CACHE_PATH` environment variable, or
 
 This is most useful for CI scenarios that re-build the same projects with stable inputs. Treat it as experimental for this preview.
 
-<!-- Filtered features (significant engineering work, but not language/compiler product news for this preview):
-  - File-based apps automatic discovery (dotnet/roslyn #82863): Area-IDE / VSCode "Run File" tooling. Belongs in tooling notes.
-  - Preserve `#:` directives during formatting (dotnet/roslyn #82996): formatter/IDE behavior, not a language change.
-  - Fix with-element indentation in collection expressions on multiple lines (dotnet/roslyn #83030): formatter/IDE.
-  - Fixers: bounds checks and boundary \r/\n stripping (dotnet/roslyn #83098): IDE code fixer.
-  - LSP TypeHierarchy support, Call Hierarchy fixes, completion behavior, rename, hot reload, EnC, brokered services (numerous PRs): IDE/tooling, not C# language.
-  - fix: raising of CS8618 on static members (dotnet/roslyn #83146): Area-IDE — IDE-side analyzer behavior, not a compiler diagnostic change.
-  - Improve TextLine and line table performance (dotnet/roslyn #83000): internal compiler-host plumbing; no user-visible API or workflow change.
-  - Numerous test ports to Linux, arcade dependency updates, VMR source-code updates, build/CI/loc changes: infrastructure.
-  - VB-only items (e.g. minor cleanups related to attributes in VB, VB EnC ANE fix): not part of the C# notes for this preview.
--->
-
 ## Bug fixes
 
 - **C# compiler**
