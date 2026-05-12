@@ -19,6 +19,12 @@ CollectionView, Shell, Maps, and platform-specific controls.
 
 CoreCLR is now the default runtime on all .NET MAUI platforms for projects built with and targeting .NET 11 Preview 4. This is a complete unification of runtime with benefits for debugging, profiling, hot reload, app size, and app performance. For a detailed overview of this transition, see our [announcement blog post](https://aka.ms/maui-coreclr).
 
+There is not yet a debugger available for CoreCLR on mobile platforms. If you need to use a debugger in Visual Studio or Visual Studio Code for iOS or Android, add to your project:
+
+```xml
+<UseMonoRuntime Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows'">true</UseMonoRuntime>
+```
+
 ## Material 3 expands across Android controls
 
 The Android handlers for several core controls now use Material 3 styling and
