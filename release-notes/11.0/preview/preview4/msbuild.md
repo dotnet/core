@@ -16,6 +16,7 @@ The most visible impact is WPF: XAML compilation uses `GenerateTemporaryTargetAs
 
 ```shell
 dotnet build MyWpfApp.csproj -mt
+```
 
 The previous opt-in environment variable (`MSBUILDENABLETASKHOSTCALLBACKS=1`) is no longer required; the feature is on by default.
 
