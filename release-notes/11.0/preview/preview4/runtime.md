@@ -22,7 +22,7 @@ The runtime libraries are now built with `runtime-async=on`. That means that the
 
 We expect runtime async to deliver throughput and library size improvements. Change is expected to be commensurate with the degree of async usage. We will appreciate any reports, with either positive or negative results.
 
-Preview 4 also include:
+Preview 4 also includes:
 
 - **Covariant `Task` → `Task<T>` overrides** — when a derived class returns `Task<T>` for a base method that returns `Task`, the runtime now generates a void-returning thunk that bridges the calling convention difference, so virtual dispatch works for both flavors. The same fix landed for NativeAOT ([dotnet/runtime #125900](https://github.com/dotnet/runtime/pull/125900), [dotnet/runtime #126768](https://github.com/dotnet/runtime/pull/126768)).
 - **Runtime-async method inlining in crossgen2.** Restrictions that prevented runtime-async methods from being inlined during ReadyToRun compilation have been removed; all 69 async tests pass with both crossgen2 and composite R2R, and inlining of awaitless async calls (the sync-fast-path) is now confirmed end-to-end ([dotnet/runtime #125472](https://github.com/dotnet/runtime/pull/125472)).
