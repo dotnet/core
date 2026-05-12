@@ -9,14 +9,14 @@ Welcome to the home of .NET [release notes](./release-notes/README.md) and [news
 |  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Preview | [11.0.0-preview.3][11.0.0-preview.3] | TBD |
-| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.7][10.0.7] | November 14, 2028 |
-| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.15][9.0.15] | November 10, 2026 |
-| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.26][8.0.26] | November 10, 2026 |
+| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.8][10.0.8] | November 14, 2028 |
+| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Active | [9.0.16][9.0.16] | November 10, 2026 |
+| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Active | [8.0.27][8.0.27] | November 10, 2026 |
 
 [11.0.0-preview.3]: release-notes/11.0/preview/preview3/11.0.0-preview.3.md
-[10.0.7]: release-notes/10.0/10.0.7/10.0.7.md
-[9.0.15]: release-notes/9.0/9.0.15/9.0.15.md
-[8.0.26]: release-notes/8.0/8.0.26/8.0.26.md
+[10.0.8]: release-notes/10.0/10.0.8/10.0.8.md
+[9.0.16]: release-notes/9.0/9.0.16/9.0.16.md
+[8.0.27]: release-notes/8.0/8.0.27/8.0.27.md
 
 [policies]: release-policies.md
 

@@ -8,6 +8,11 @@ Your app needs to be on the latest .NET 10 patch version to be secure. The longe
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 10.0.8 (May 2026)
+  - [CVE-2026-32177 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/created_by/xxx)
+  - [CVE-2026-35433 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/created_by/xxx)
+  - [CVE-2026-32175 | .NET Core Tampering Vulnerability](https://github.com/dotnet/announcements/issues/created_by/xxx)
+  - [CVE-2026-42899 | ASP.NET Core Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/created_by/xxx)
 - 10.0.7 (April 2026)
   - [CVE-2026-40372 | ASP.NET Core Security Feature Bypass Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-40372) 
 - 10.0.6 (April 2026)
