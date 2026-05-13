@@ -7,7 +7,7 @@
 
 C# updates:
 
-- [What's new in C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14)
+- [What's new in C# 15](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-15)
 
 ## Clearer diagnostic for misplaced `#!` shebang directives
 
