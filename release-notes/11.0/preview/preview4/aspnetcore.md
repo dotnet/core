@@ -173,7 +173,7 @@ For reference-type items, also supply an `ItemComparer` so the component can cor
 
 ## Blazor WebAssembly service defaults template
 
-A new `blazor-wasm-servicedefaults` template scaffolds a service-defaults library for Blazor WebAssembly clients with .NET Aspire integration ([dotnet/aspnetcore #64807](https://github.com/dotnet/aspnetcore/pull/64807)). It mirrors the service-defaults pattern that Aspire already uses for server projects and `dotnet/maui` ships for MAUI clients.
+A new `blazor-wasm-servicedefaults` template scaffolds a service-defaults library for Blazor WebAssembly clients with Aspire integration ([dotnet/aspnetcore #64807](https://github.com/dotnet/aspnetcore/pull/64807)). It mirrors the service-defaults pattern that Aspire already uses for server projects and `dotnet/maui` ships for MAUI clients.
 
 ```bash
 dotnet new blazor-wasm-servicedefaults -o MyBlazorApp.ServiceDefaults
