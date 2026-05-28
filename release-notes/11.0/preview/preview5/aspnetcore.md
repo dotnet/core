@@ -11,7 +11,6 @@
 - [Blazor WebAssembly templates use Gateway](#blazor-webassembly-templates-use-gateway)
 - [Kestrel applies trailer header timeouts](#kestrel-applies-trailer-header-timeouts)
 - [OpenAPI schemas better match ASP.NET Core behavior](#openapi-schemas-better-match-aspnet-core-behavior)
-- [MVC and minimal APIs preserve multiple response types per status code](#mvc-and-minimal-apis-preserve-multiple-response-types-per-status-code)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
