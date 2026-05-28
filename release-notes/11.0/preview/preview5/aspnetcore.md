@@ -245,7 +245,7 @@ Thank you [@marcominerva](https://github.com/marcominerva) for the array schema 
   - Fixed a crash when an interactive component was rendered from a layout during enhanced navigation ([dotnet/aspnetcore #66007](https://github.com/dotnet/aspnetcore/pull/66007)).
   - Added missing `StringSyntaxAttribute.DateTimeFormat` annotations to `BindConverter` `DateTimeOffset` format overloads, improving editor support for format strings ([dotnet/aspnetcore #66532](https://github.com/dotnet/aspnetcore/pull/66532)).
 - **Data Protection and antiforgery**
-  - Fixed cold-start thread-pool starvation in `KeyRingProvider` when many callers request data protection keys before a key ring is cached ([dotnet/aspnetcore #66683](https://github.com/dotnet/aspnetcore/pull/66683), [dotnet/aspnetcore #66743](https://github.com/dotnet/aspnetcore/pull/66743)).
+  - Fixed cold-start thread-pool starvation in `KeyRingProvider` when many callers request data protection keys before a key ring is cached ([dotnet/aspnetcore #66683](https://github.com/dotnet/aspnetcore/pull/66683)).
   - Hardened antiforgery token validation, data protection payload parsing, and span-based protect/unprotect fallback behavior ([dotnet/aspnetcore #66508](https://github.com/dotnet/aspnetcore/pull/66508)).
 - **Hosting and observability**
   - Stopped setting the `Activity` status description when a request throws, aligning ASP.NET Core hosting telemetry with OpenTelemetry ASP.NET Core instrumentation behavior ([dotnet/aspnetcore #65825](https://github.com/dotnet/aspnetcore/pull/65825)).
@@ -254,7 +254,6 @@ Thank you [@marcominerva](https://github.com/marcominerva) for the array schema 
   - Close the connection after processing a request that contains both `Content-Length` and `Transfer-Encoding`, as required by RFC 9112 ([dotnet/aspnetcore #66671](https://github.com/dotnet/aspnetcore/pull/66671)).
 - **Minimal APIs and Problem Details**
   - Fixed optional non-nullable struct query parameters with `= default` throwing when `RequestDelegateFactory` created the endpoint delegate ([dotnet/aspnetcore #66091](https://github.com/dotnet/aspnetcore/pull/66091)).
-  - Passed `HttpContext.RequestAborted` when the default Problem Details writer serializes JSON, so disconnected requests can cancel the write ([dotnet/aspnetcore #66606](https://github.com/dotnet/aspnetcore/pull/66606)).
   - Preserved `application/problem+json` and `application/problem+xml` as preferred content types when `ProducesAttribute` also specifies a content type ([dotnet/aspnetcore #66461](https://github.com/dotnet/aspnetcore/pull/66461)).
   - Fixed endpoint metadata and fallback validation responses so `ProblemDetails` and `HttpValidationProblemDetails` report the expected content type and 400 status ([dotnet/aspnetcore #66499](https://github.com/dotnet/aspnetcore/pull/66499), [dotnet/aspnetcore #66602](https://github.com/dotnet/aspnetcore/pull/66602)).
 - **Security and routing**
