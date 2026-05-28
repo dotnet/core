@@ -3,6 +3,8 @@
 .NET 11 Preview 5 includes new ASP.NET Core features and improvements:
 
 - [Blazor SSR forms validate in the browser](#blazor-ssr-forms-validate-in-the-browser)
+- [Blazor forms support async validation](#blazor-forms-support-async-validation)
+- [Validation supports resource-based localization](#validation-supports-resource-based-localization)
 - [QuickGrid works without interactivity](#quickgrid-works-without-interactivity)
 - [Blazor WebAssembly preserves server culture](#blazor-webassembly-preserves-server-culture)
 - [SupplyParameterFromSession for Blazor](#supplyparameterfromsession-for-blazor)
@@ -49,6 +51,78 @@ Blazor SSR forms now render client-side validation metadata from `System.Compone
         [EmailAddress]
         public string? Email { get; set; }
     }
+}
+```
+
+## Blazor forms support async validation
+
+Blazor forms now support asynchronous validation rules without leaving the `EditContext` model ([dotnet/aspnetcore #66526](https://github.com/dotnet/aspnetcore/pull/66526)). `EditContext.AddValidationTask(FieldIdentifier, Task, CancellationTokenSource)` registers an in-flight check that the framework tracks per field, cancels when superseded, and surfaces through new `IsValidationPending`, `IsValidationFaulted`, and `IsValidationSuperseded` queries. `OnValidationRequestedAsync` lets submit handlers await the same pipeline before reporting overall validity, so async uniqueness, server lookups, and remote calls participate in the standard `ValidationMessageStore`/`ValidationSummary` flow.
+
+```razor
+<EditForm EditContext="editContext" OnSubmit="HandleSubmit">
+    <InputText @bind-Value="model.Username" />
+    @if (editContext.IsValidationPending(() => model.Username))
+    {
+        <span>Checking availability...</span>
+    }
+    <ValidationMessage For="() => model.Username" />
+    <button type="submit">Register</button>
+</EditForm>
+
+@code {
+    [Inject] public UserService Users { get; set; } = default!;
+
+    private readonly RegistrationModel model = new();
+    private EditContext editContext = default!;
+    private ValidationMessageStore messages = default!;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+        messages = new ValidationMessageStore(editContext);
+        editContext.OnFieldChanged += (_, e) =>
+        {
+            if (e.FieldIdentifier.FieldName == nameof(model.Username))
+            {
+                var cts = new CancellationTokenSource();
+                editContext.AddValidationTask(e.FieldIdentifier,
+                    CheckAsync(e.FieldIdentifier, model.Username, cts.Token), cts);
+            }
+        };
+    }
+
+    private async Task CheckAsync(FieldIdentifier field, string value, CancellationToken ct)
+    {
+        messages.Clear(field);
+        if (await Users.IsUsernameTakenAsync(value, ct))
+        {
+            messages.Add(field, "Username is taken.");
+        }
+        editContext.NotifyValidationStateChanged();
+    }
+
+    private async Task HandleSubmit() => await editContext.ValidateAsync();
+}
+```
+
+## Validation supports resource-based localization
+
+`Microsoft.Extensions.Validation` now ships with built-in localization that flows through Blazor's `DataAnnotationsValidator` and minimal APIs that opt into the new validation pipeline ([dotnet/aspnetcore #66646](https://github.com/dotnet/aspnetcore/pull/66646)). `AddValidationLocalization<TResource>()` registers an `IValidationLocalizer` that resolves `[Display(Name = ...)]` values and `ValidationAttribute.ErrorMessage` keys against an `IStringLocalizer<TResource>` backed by `.resx` files. The same model produces the same display names and validation messages on the server, in the rendered HTML for client-side validation, and in localized API error responses.
+
+```csharp
+builder.Services.AddLocalization();
+builder.Services.AddValidation();
+builder.Services.AddValidationLocalization<ValidationMessages>();
+```
+
+```csharp
+[ValidatableType]
+public class ContactModel
+{
+    [Required(ErrorMessage = nameof(ValidationMessages.RequiredError))]
+    [EmailAddress(ErrorMessage = nameof(ValidationMessages.EmailError))]
+    [Display(Name = nameof(ValidationMessages.ContactEmail))]
+    public string? Email { get; set; }
 }
 ```
 
