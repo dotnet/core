@@ -11,6 +11,7 @@
 - [Blazor WebAssembly templates use Gateway](#blazor-webassembly-templates-use-gateway)
 - [Kestrel applies trailer header timeouts](#kestrel-applies-trailer-header-timeouts)
 - [OpenAPI schemas better match ASP.NET Core behavior](#openapi-schemas-better-match-aspnet-core-behavior)
+- [MVC and minimal APIs preserve multiple response types per status code](#mvc-and-minimal-apis-preserve-multiple-response-types-per-status-code)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -227,6 +228,8 @@ app.MapGet("/orders", (OrderStatus status) => Results.Ok(status));
 ```
 
 With this configuration, a body schema can still describe `OrderStatus.PendingReview` as `pending-review`, while the query parameter schema describes the accepted value as `PendingReview`.
+
+MVC controllers and minimal APIs can now declare multiple `[ProducesResponseType]` attributes (or `.Produces<T>` calls) for the same status code ([dotnet/aspnetcore #65650](https://github.com/dotnet/aspnetcore/pull/65650)). Prior releases collapsed each status code to a single response type and quietly dropped the rest, which made polymorphic results impossible to describe accurately. `ApiExplorer` now preserves every declared response type with deterministic ordering, and the generated OpenAPI document carries all of them so generated clients can model every shape an endpoint can return.
 
 Thank you [@marcominerva](https://github.com/marcominerva) for the array schema reference contribution!
 
