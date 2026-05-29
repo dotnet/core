@@ -316,13 +316,36 @@ Function DiscoverVersionFromFeed {
 
     $baseUrl = $flatContainer.'@id'
     $versionsUrl = "${baseUrl}${pkgIdLower}/index.json"
+    Write-Host $versionsUrl
     $versionsResult = Invoke-RestMethod -Uri $versionsUrl
 
     If (-not $versionsResult.versions -or $versionsResult.versions.Count -eq 0) {
         Write-Error "No versions of $refPackageName found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
     }
 
-    $latestVersion = $versionsResult.versions | Select-Object -Last 1
+    # The NuGet flat container API does not guarantee the order of the versions
+    # array, so parse and sort explicitly to find the latest version.
+    $candidates = @()
+    ForEach ($v in $versionsResult.versions) {
+        $parsed = $null
+        try { $parsed = ParseVersionString $v "probe" } catch { Continue }
+        $mm = $parsed.MajorMinor.Split(".")
+        $milestoneParsed = ParsePrereleaseLabel $parsed.PrereleaseLabel
+        $weight = GetMilestoneSortWeight $milestoneParsed.ReleaseKind ([int]$milestoneParsed.PreviewRCNumber)
+        $candidates += [PSCustomObject]@{
+            Version = $v
+            Major   = [int]$mm[0]
+            Minor   = [int]$mm[1]
+            Weight  = $weight
+        }
+    }
+
+    If ($candidates.Count -eq 0) {
+        Write-Error "No parseable versions of $refPackageName found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
+    }
+
+    $latest = $candidates | Sort-Object -Property Major, Minor, Weight -Descending | Select-Object -First 1
+    $latestVersion = $latest.Version
     Write-Color cyan "Latest $refPackageName version on feed: $latestVersion"
 
     Return ParseVersionString $latestVersion $label
