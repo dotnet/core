@@ -2,9 +2,9 @@
 
 .NET 11 Preview 5 includes new ASP.NET Core features and improvements:
 
-- [Blazor SSR forms validate in the browser](#blazor-ssr-forms-validate-in-the-browser)
-- [Blazor forms support async validation](#blazor-forms-support-async-validation)
-- [Validation supports resource-based localization](#validation-supports-resource-based-localization)
+- [Blazor SSR supports client-side validation](#blazor-ssr-supports-client-side-validation)
+- [Blazor supports async form validation](#blazor-supports-async-form-validation)
+- [Blazor and Minimal APIs support localized validation errors](#blazor-and-minimal-apis-support-error-localization)
 - [QuickGrid works without interactivity](#quickgrid-works-without-interactivity)
 - [Blazor WebAssembly preserves server culture](#blazor-webassembly-preserves-server-culture)
 - [SupplyParameterFromSession for Blazor](#supplyparameterfromsession-for-blazor)
@@ -20,43 +20,63 @@ ASP.NET Core updates in .NET 11:
 
 <!-- Verified against Microsoft.AspNetCore.App.Ref@11.0.0-preview.5.26276.113, Microsoft.AspNetCore.Components.WebAssembly.Server@11.0.0-preview.5.26276.113, and Microsoft.AspNetCore.Components.QuickGrid@11.0.0-preview.5.26276.113. -->
 
-## Blazor SSR forms validate in the browser
+## Blazor SSR supports client-side validation
 
-Blazor SSR forms now render client-side validation metadata from `System.ComponentModel.DataAnnotations` attributes and include a small JavaScript validator that reads the generated `data-val-*` attributes ([dotnet/aspnetcore #66441](https://github.com/dotnet/aspnetcore/pull/66441), [dotnet/aspnetcore #66420](https://github.com/dotnet/aspnetcore/pull/66420)). Static SSR forms that already use `DataAnnotationsValidator` can show validation messages before posting back to the server. The .NET model remains the source of truth for validation rules, and the browser gets the same instant feedback pattern used by MVC unobtrusive validation.
+Blazor SSR forms now get instant, in-browser validation feedback without a server round-trip, matching the experience provided by interactive Blazor apps and MVC apps with unobtrusive validation ([dotnet/aspnetcore #66441](https://github.com/dotnet/aspnetcore/pull/66441), [dotnet/aspnetcore #66420](https://github.com/dotnet/aspnetcore/pull/66420)). The .NET model remains the single source of truth for validation rules. The server renders metadata for the validation rules which are then enforced by the Blazor JS code on the client-side.
 
-```razor
-@page "/subscribe"
-@using System.ComponentModel.DataAnnotations
+The feature is enabled by default for all SSR forms that include the `DataAnnotationsValidator` component. Both enhanced and non-enhanced forms are supported.
 
-<EditForm Model="Model" FormName="subscribe" OnValidSubmit="SubscribeAsync">
+```csharp
+<EditForm Model="Model" Enhance FormName="registration" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
 
-    <label>
-        Email
-        <InputText @bind-Value="Model.Email" />
-    </label>
-    <ValidationMessage For="() => Model.Email" />
+    <div>
+        <label for="Email">Email</label>
+        <InputText @bind-Value="Model.Email" id="Email" />
+        <ValidationMessage For="@(() => Model.Email)" />
+    </div>
 
-    <button type="submit">Subscribe</button>
+    <div>
+        <label for="Password">Password</label>
+        <InputText @bind-Value="Model.Password" id="Password" type="password" />
+        <ValidationMessage For="@(() => Model.Password)" />
+    </div>
+
+    <div>
+        <label for="ConfirmPassword">Confirm Password</label>
+        <InputText @bind-Value="Model.ConfirmPassword" id="ConfirmPassword" type="password" />
+        <ValidationMessage For="@(() => Model.ConfirmPassword)" />
+    </div>
+
+    <div>
+        <button type="submit" id="submit-btn">Register</button>
+    </div>
 </EditForm>
+```
 
-@code {
-    private SubscribeForm Model { get; } = new();
+```csharp
+public class RegistrationModel
+{
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
 
-    private Task SubscribeAsync() => Task.CompletedTask;
+    [Required]
+    [StringLength(100, MinimumLength = 8)]
+    public string Password { get; set; }
 
-    private sealed class SubscribeForm
-    {
-        [Required]
-        [EmailAddress]
-        public string? Email { get; set; }
-    }
+    [Required]
+    [Compare("Password")]
+    [Display(Name = "Confirm Password")]
+    public string ConfirmPassword { get; set; }
 }
 ```
 
-## Blazor forms support async validation
+## Blazor supports async form validation
 
-Blazor forms now support asynchronous validation rules without leaving the `EditContext` model ([dotnet/aspnetcore #66526](https://github.com/dotnet/aspnetcore/pull/66526)). `EditContext.AddValidationTask(FieldIdentifier, Task, CancellationTokenSource)` registers an in-flight check that the framework tracks per field, cancels when superseded, and surfaces through new `IsValidationPending`, `IsValidationFaulted`, and `IsValidationSuperseded` queries. `OnValidationRequestedAsync` lets submit handlers await the same pipeline before reporting overall validity, so async uniqueness, server lookups, and remote calls participate in the standard `ValidationMessageStore`/`ValidationSummary` flow.
+Blazor forms get support for async validation rules such as database lookups or remote API calls ([dotnet/aspnetcore #66526](https://github.com/dotnet/aspnetcore/pull/66526)). In any rendering mode, `EditForm` submit validation now properly awaits async validators end-to-end. In interactive modes, validator components can register per-field async tasks via `EditContext.AddValidationTask`. The framework tracks them, cancels superseded tasks, and exposes progress status via `IsValidationPending(field)` and `IsValidationFaulted(field)`.
+
+While Preview 5 ships the building blocks for Blazor forms, the full built-in async validation experience will be enabled when the new asynchronous `DataAnnotations` APIs are released in a later Preview. These APIs will be fully supported by the existing `DataAnnotationsValidator` component.
 
 ```razor
 <EditForm EditContext="editContext" OnSubmit="HandleSubmit">
@@ -105,24 +125,54 @@ Blazor forms now support asynchronous validation rules without leaving the `Edit
 }
 ```
 
-## Validation supports resource-based localization
+## Blazor and Minimal APIs support error localization
 
-`Microsoft.Extensions.Validation` now ships with built-in localization that flows through Blazor's `DataAnnotationsValidator` and minimal APIs that opt into the new validation pipeline ([dotnet/aspnetcore #66646](https://github.com/dotnet/aspnetcore/pull/66646)). `AddValidationLocalization<TResource>()` registers an `IValidationLocalizer` that resolves `[Display(Name = ...)]` values and `ValidationAttribute.ErrorMessage` keys against an `IStringLocalizer<TResource>` backed by `.resx` files. The same model produces the same display names and validation messages on the server, in the rendered HTML for client-side validation, and in localized API error responses.
+Validation of Blazor forms and Minimal API endpoints gets first-class support for localization of error messages and property names ([dotnet/aspnetcore #66646](https://github.com/dotnet/aspnetcore/pull/66646)). By default, localization uses language-specific RESX files deployed as part of the assembly.
 
 ```csharp
-builder.Services.AddLocalization();
-builder.Services.AddValidation();
-builder.Services.AddValidationLocalization<ValidationMessages>();
+builder.Services.AddValidation()
+    .AddValidationLocalization<ValidationMessages>();
+    // Resolves to ValidationMessages.en.resx, ValidationMessages.es.resx, ...
 ```
 
 ```csharp
 [ValidatableType]
 public class ContactModel
 {
-    [Required(ErrorMessage = nameof(ValidationMessages.RequiredError))]
-    [EmailAddress(ErrorMessage = nameof(ValidationMessages.EmailError))]
-    [Display(Name = nameof(ValidationMessages.ContactEmail))]
+    // Values of ErrorMessage are used as localization keys.
+    [Required(ErrorMessage = "RequiredError")]
+    [EmailAddress(ErrorMessage = "EmailError")]
+    [Display(Name = "ContactEmail")]
     public string? Email { get; set; }
+}
+```
+
+Applications can also register custom `IStringLocalizerFactory` implementations to read the localized strings from other sources such as databases or JSON files. User registered type takes precedence over the default RESX localization.
+
+```csharp
+builder.Services.AddValidation()
+    .AddValidationLocalization();
+builder.Services.AddSingleton<IStringLocalizerFactory, DbStringLocalizerFactory>();
+```
+
+Applications can also configure a programmatic strategy for localization, removing the need to specify localization keys on every validation attribute.
+
+```csharp
+builder.Services.AddValidation()
+    .AddValidationLocalization<ValidationMessages>(options =>
+    {
+        options.ErrorMessageKeyProvider = ctx =>
+            ctx.Attribute.ErrorMessage ?? $"{ctx.Attribute.GetType().Name}_Error";
+    });
+```
+
+```csharp
+[ValidatableType]
+public class ContactModel
+{
+    // Looks-up localized string for 'RequiredAttribute_Error' automatically.
+    [Required]
+    public string? Username { get; set; }
 }
 ```
 
@@ -228,7 +278,7 @@ app.MapGet("/orders", (OrderStatus status) => Results.Ok(status));
 
 With this configuration, a body schema can still describe `OrderStatus.PendingReview` as `pending-review`, while the query parameter schema describes the accepted value as `PendingReview`.
 
-MVC controllers and minimal APIs can now declare multiple `[ProducesResponseType]` attributes (or `.Produces<T>` calls) for the same status code ([dotnet/aspnetcore #65650](https://github.com/dotnet/aspnetcore/pull/65650)). Prior releases collapsed each status code to a single response type and quietly dropped the rest, which made polymorphic results impossible to describe accurately. `ApiExplorer` now preserves every declared response type with deterministic ordering, and the generated OpenAPI document carries all of them so generated clients can model every shape an endpoint can return.
+Minimal API endpoints can support multiple `Produces<T>()` extension methods for the same status code—for example, to specify that a 200 response may arrive as `application/json` or `text/plain` with different schemas ([dotnet/aspnetcore #65650](https://github.com/dotnet/aspnetcore/pull/65650)). The same support applies to MVC controllers via multiple `[ProducesResponseType]` attributes. In prior releases the framework collapsed each status code to a single response type and silently dropped the rest, making it impossible to describe endpoints that serve multiple content types. ApiExplorer now preserves every declared response type with deterministic ordering, and the generated OpenAPI document emits separate content entries per media type—or an `anyOf` schema when multiple types share the same content type—so generated clients can accurately model every shape an endpoint returns.
 
 Thank you [@marcominerva](https://github.com/marcominerva) for the array schema reference contribution!
 
@@ -264,7 +314,6 @@ Thank you [@marcominerva](https://github.com/marcominerva) for the array schema 
 
 Thank you contributors! ❤️
 
-- [@cincuranet](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Acincuranet+milestone%3A11.0-preview5)
 - [@EduardF1](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AEduardF1+milestone%3A11.0-preview5)
 - [@marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amarcominerva+milestone%3A11.0-preview5)
 - [@martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amartincostello+milestone%3A11.0-preview5)
