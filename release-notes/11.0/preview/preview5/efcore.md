@@ -30,7 +30,8 @@ working for SDK-style projects.
 ```bash
 dotnet ef migrations add InitialCreate --file .\App.cs
 
-dotnet ef dbcontext scaffold "Data Source=app.db" \
+dotnet ef dbcontext scaffold \
+    "Data Source=app.db" \
     Microsoft.EntityFrameworkCore.Sqlite \
     --file .\Model.cs \
     --startup-file .\App.cs
@@ -47,8 +48,8 @@ message.
 `dotnet ef` now supports loading default options from a
 `.config/dotnet-ef.json` file. This makes repeated commands simpler by letting
 you set values such as project and startup project once and override them on
-the command line only when needed
-([dotnet/efcore #37966](https://github.com/dotnet/efcore/pull/37966)).
+the command line only when needed. See
+[dotnet/efcore #37966](https://github.com/dotnet/efcore/pull/37966).
 
 ## EF1004 warns when async EF queries run synchronously
 
