@@ -3,19 +3,19 @@
 .NET 11 Preview 5 includes new EF Core features and improvements:
 
 - [`dotnet ef` supports file-based apps](#dotnet-ef-supports-file-based-apps)
+- [Configuration file support for `dotnet ef`](#configuration-file-support-for-dotnet-ef)
 - [EF1004 warns when async EF queries run synchronously](#ef1004-warns-when-async-ef-queries-run-synchronously)
 - [SQL Server 2022 compatibility is now the default](#sql-server-2022-compatibility-is-now-the-default)
-- [Generated C# uses file-scoped namespaces and UTF-8 without BOM](#generated-c-uses-file-scoped-namespaces-and-utf-8-without-bom)
+- [Temporal period properties can map to CLR properties](#temporal-period-properties-can-map-to-clr-properties)
+- [Generated C# uses file-scoped namespaces](#generated-c-uses-file-scoped-namespaces)
 - [Query translation produces cleaner SQL](#query-translation-produces-cleaner-sql)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
-EF Core updates in .NET 11:
+All EF Core updates in .NET 11:
 
 - [What's new in EF Core](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew)
-
-<!-- Verified against Microsoft.EntityFrameworkCore@11.0.0-preview.5.26276.113 and Microsoft.EntityFrameworkCore.Analyzers@11.0.0-preview.5.26276.113. SQL Server provider behavior was verified against the source shipped in the Preview 5 VMR because the SQL Server package was not listed in build-metadata.json. -->
 
 ## `dotnet ef` supports file-based apps
 
@@ -30,7 +30,8 @@ working for SDK-style projects.
 ```bash
 dotnet ef migrations add InitialCreate --file .\App.cs
 
-dotnet ef dbcontext scaffold "Data Source=app.db" Microsoft.EntityFrameworkCore.Sqlite \
+dotnet ef dbcontext scaffold "Data Source=app.db" \
+    Microsoft.EntityFrameworkCore.Sqlite \
     --file .\Model.cs \
     --startup-file .\App.cs
 ```
@@ -40,6 +41,14 @@ metadata failures ([dotnet/efcore #38190](https://github.com/dotnet/efcore/pull/
 When metadata build output includes the root MSBuild or SDK error, `dotnet ef`
 now surfaces that error instead of replacing it with a generic project-metadata
 message.
+
+## Configuration file support for `dotnet ef`
+
+`dotnet ef` now supports loading default options from a
+`.config/dotnet-ef.json` file. This makes repeated commands simpler by letting
+you set values such as project and startup project once and override them on
+the command line only when needed
+([dotnet/efcore #37966](https://github.com/dotnet/efcore/pull/37966)).
 
 ## EF1004 warns when async EF queries run synchronously
 
@@ -81,13 +90,21 @@ optionsBuilder.UseSqlServer(
     sqlServerOptions => sqlServerOptions.UseCompatibilityLevel(150));
 ```
 
-## Generated C# uses file-scoped namespaces and UTF-8 without BOM
+## Temporal period properties can map to CLR properties
 
-EF Core's generated C# now uses file-scoped namespace declarations and writes
-UTF-8 files without a byte-order mark ([dotnet/efcore #38256](https://github.com/dotnet/efcore/pull/38256)).
-The change applies to generated migrations, model snapshots, compiled models,
-and reverse-engineered code. It removes one indentation level from generated
-files and aligns EF Core output with modern C# project templates.
+SQL Server temporal period columns can now map to regular CLR properties
+instead of requiring shadow properties
+([dotnet/efcore #38110](https://github.com/dotnet/efcore/pull/38110)). This
+allows direct use of period values in queries and projections without
+`EF.Property(...)`.
+
+## Generated C# uses file-scoped namespaces
+
+EF Core's generated C# now uses file-scoped namespace declarations
+([dotnet/efcore #38256](https://github.com/dotnet/efcore/pull/38256)). The
+change applies to generated migrations, model snapshots, compiled models, and
+reverse-engineered code. It removes one indentation level from generated files
+and aligns EF Core output with modern C# project templates.
 
 ```csharp
 namespace MyApp.Migrations;
@@ -138,25 +155,17 @@ var withPayload = await context.Documents
   marked obsolete before EF Core 11
   ([dotnet/efcore #38145](https://github.com/dotnet/efcore/pull/38145)). Move
   to the replacement APIs before upgrading.
-- **Several preview APIs were renamed after API review.** Renames include
-  `CosmosDbContextOptionsBuilder.BulkExecutionEnabled` to `BulkExecutionAllowed`,
-  `ModelSnapshot.LatestMigrationId` to `LastMigrationId`,
-  `ProviderMismatchEventData.CompiledProviderName` to `MismatchedProviderName`,
-  and `JsonPath` / `JsonPathSegment` to `StructuredJsonPath` /
-  `StructuredJsonPathSegment`
-  ([dotnet/efcore #38188](https://github.com/dotnet/efcore/pull/38188)).
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - SQL Server VECTOR_SEARCH() API updates (#38144): aligns vector search with updated SQL Server 2025 syntax, but Preview 4 already documented the user-facing WithApproximate() story and this preview does not add a new application scenario.
-  - StructuredJsonPath API rename (#38188): important for provider authors and compiled-model internals, but provider extensibility details are not promoted as user-facing EF Core features.
--->
+- **Cosmos `id` escaping changed.** When EF Core generates Cosmos `id` values
+  from composite keys, illegal characters are no longer escaped
+  ([dotnet/efcore #38244](https://github.com/dotnet/efcore/issues/38244)).
+  Review this change before upgrading if your existing data depends on escaped
+  IDs.
 
 ## Bug fixes
 
-- **Change tracking and seeding**
-  - `EnsureCreated`, `EnsureCreatedAsync`, `Migrate`, and `MigrateAsync` no
-    longer clear the `ChangeTracker` on execution-strategy retry. Seed delegates
-    that already completed are skipped on retry instead
+- **Database initialization and migrations**
+  - `EnsureCreated`, `EnsureCreatedAsync`, `Migrate`, and `MigrateAsync` now use
+    an execution strategy to retry on transient failures
     ([dotnet/efcore #38274](https://github.com/dotnet/efcore/pull/38274)).
 - **`dotnet ef`**
   - `dotnet ef migrations bundle --configuration <Name>` now forwards custom
