@@ -316,7 +316,6 @@ Function DiscoverVersionFromFeed {
 
     $baseUrl = $flatContainer.'@id'
     $versionsUrl = "${baseUrl}${pkgIdLower}/index.json"
-    Write-Host $versionsUrl
     $versionsResult = Invoke-RestMethod -Uri $versionsUrl
 
     If (-not $versionsResult.versions -or $versionsResult.versions.Count -eq 0) {
