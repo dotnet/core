@@ -81,9 +81,15 @@ public interface IUnion
 }
 ```
 
-## Unsafe code focuses on unsafe operations
+## Unsafe Evolution
 
-Unsafe Evolution continues in Preview 5. Pointer types and pointer values can now appear outside an `unsafe` context; the `unsafe` boundary moves to operations that dereference unmanaged memory or call members that are marked `unsafe` ([dotnet/roslyn #83133](https://github.com/dotnet/roslyn/pull/83133), [dotnet/roslyn #83295](https://github.com/dotnet/roslyn/pull/83295), [dotnet/roslyn #83452](https://github.com/dotnet/roslyn/pull/83452)).
+> This is a preview feature for .NET 11.
+
+Unsafe Evolution is the ongoing work to let `unsafe` denote *requires-unsafe* members directly, rather than relying on a separate `[RequiresUnsafe]` attribute.
+
+Tracked under the [Unsafe Evolution test plan](https://github.com/dotnet/roslyn/issues/81207); the corresponding language-spec change is in [dotnet/csharplang #10091](https://github.com/dotnet/csharplang/pull/10091). Unsafe Evolution remains a preview feature; the surface and rules can still change before it ships.
+
+In Preview 5, pointer types and pointer values can now appear outside an `unsafe` context; the `unsafe` boundary moves to operations that dereference unmanaged memory or call members that are marked `unsafe` ([dotnet/roslyn #83133](https://github.com/dotnet/roslyn/pull/83133), [dotnet/roslyn #83295](https://github.com/dotnet/roslyn/pull/83295), [dotnet/roslyn #83452](https://github.com/dotnet/roslyn/pull/83452)).
 
 ```csharp
 int value = 42;
