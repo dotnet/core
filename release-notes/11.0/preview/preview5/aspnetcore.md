@@ -33,20 +33,20 @@ The feature is enabled by default for all SSR forms that include the `DataAnnota
 
     <div>
         <label for="Email">Email</label>
-        <InputText @bind-Value="Model.Email" id="Email" />
-        <ValidationMessage For="@(() => Model.Email)" />
+        <InputText @bind-Value="Model!.Email" id="Email" />
+        <ValidationMessage For="@(() => Model!.Email)" />
     </div>
 
     <div>
         <label for="Password">Password</label>
-        <InputText @bind-Value="Model.Password" id="Password" type="password" />
-        <ValidationMessage For="@(() => Model.Password)" />
+        <InputText @bind-Value="Model!.Password" id="Password" type="password" />
+        <ValidationMessage For="@(() => Model!.Password)" />
     </div>
 
     <div>
         <label for="ConfirmPassword">Confirm Password</label>
-        <InputText @bind-Value="Model.ConfirmPassword" id="ConfirmPassword" type="password" />
-        <ValidationMessage For="@(() => Model.ConfirmPassword)" />
+        <InputText @bind-Value="Model!.ConfirmPassword" id="ConfirmPassword" type="password" />
+        <ValidationMessage For="@(() => Model!.ConfirmPassword)" />
     </div>
 
     <div>
@@ -56,7 +56,9 @@ The feature is enabled by default for all SSR forms that include the `DataAnnota
 
 @code {
     [SupplyParameterFromForm]
-    private RegistrationModel Model { get; set; } = new();
+    private RegistrationModel? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
 
     private void HandleValidSubmit() { }
 }
