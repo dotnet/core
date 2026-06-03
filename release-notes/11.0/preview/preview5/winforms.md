@@ -43,9 +43,3 @@ ToolStrip, layout, designer, and dark mode scenarios.
     rendering
     ([dotnet/winforms #14339](https://github.com/dotnet/winforms/pull/14339)).
 
-## Community contributors
-
-Thank you contributors! ❤️
-
-- [@LeafShi1](https://github.com/dotnet/winforms/pulls?q=is%3Apr+is%3Amerged+author%3ALeafShi1)
-- [@SimonZhao888](https://github.com/dotnet/winforms/pulls?q=is%3Apr+is%3Amerged+author%3ASimonZhao888)
