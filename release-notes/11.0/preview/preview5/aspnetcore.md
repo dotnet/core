@@ -9,6 +9,7 @@
 - [Blazor WebAssembly preserves server culture](#blazor-webassembly-preserves-server-culture)
 - [SupplyParameterFromSession for Blazor](#supplyparameterfromsession-for-blazor)
 - [Blazor WebAssembly templates use Gateway](#blazor-webassembly-templates-use-gateway)
+- [Pass child content across render mode boundaries](#pass-child-content-across-render-mode-boundaries)
 - [Kestrel applies trailer header timeouts](#kestrel-applies-trailer-header-timeouts)
 - [OpenAPI schemas better match ASP.NET Core behavior](#openapi-schemas-better-match-aspnet-core-behavior)
 - [Bug fixes](#bug-fixes)
@@ -26,7 +27,7 @@ Blazor SSR forms now get instant, in-browser validation feedback without a serve
 
 The feature is enabled by default for all SSR forms that include the `DataAnnotationsValidator` component. Both enhanced and non-enhanced forms are supported.
 
-```csharp
+```razor
 <EditForm Model="Model" Enhance FormName="registration" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
 
@@ -52,6 +53,13 @@ The feature is enabled by default for all SSR forms that include the `DataAnnota
         <button type="submit" id="submit-btn">Register</button>
     </div>
 </EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private RegistrationModel Model { get; set; } = new();
+
+    private void HandleValidSubmit() { }
+}
 ```
 
 ```csharp
@@ -198,6 +206,8 @@ public class ContactModel
 }
 ```
 
+The URL-driven behavior is enabled by default. Apps can opt out by setting the `Microsoft.AspNetCore.Components.QuickGrid.EnableUrlBasedQuickGridNavigationAndSorting` `AppContext` switch to `false`, which restores the previous `<button>`-based pagination and sort controls. Switching the rendered element from `<button>` to `<a>` may also require CSS updates for apps that style those controls with element selectors.
+
 ## Blazor WebAssembly preserves server culture
 
 Blazor WebAssembly apps prerendered on the server now persist the server's `CurrentCulture` and `CurrentUICulture` into component state and apply them on the client before satellite assemblies load ([dotnet/aspnetcore #63144](https://github.com/dotnet/aspnetcore/pull/63144)). The behavior is enabled by default for interactive WebAssembly components, so a prerendered page and its hydrated client render with the same culture. Apps that need the client to choose culture independently can opt out with `WebAssemblyComponentsOptions.UseCultureFromServer`.
@@ -251,6 +261,16 @@ The standalone Blazor WebAssembly template now uses `Microsoft.AspNetCore.Compon
 dotnet new blazorwasm -o MyBlazorApp
 ```
 
+## Pass child content across render mode boundaries
+
+Components rendered with `@rendermode` can now accept `ChildContent` (and other non-generic `RenderFragment` parameters) when the content originates from a different render mode ([dotnet/aspnetcore #66754](https://github.com/dotnet/aspnetcore/pull/66754), backport of [dotnet/aspnetcore #66528](https://github.com/dotnet/aspnetcore/pull/66528)). Previously this combination threw `InvalidOperationException` because `RenderFragment` is a delegate and could not be serialized across the SSR→interactive boundary. Blazor now prerenders the fragment on the server, captures the resulting render tree, and rehydrates it inside the interactive child component.
+
+```razor
+<MyComponent @rendermode="InteractiveServer">
+    <p>This is ChildContent rendered as SSR and projected into the interactive component.</p>
+</MyComponent>
+```
+
 ## Kestrel applies trailer header timeouts
 
 Kestrel now applies `RequestHeadersTimeout` to fragmented HTTP/2 and HTTP/3 trailer headers that do not finish sending the header block ([dotnet/aspnetcore #66249](https://github.com/dotnet/aspnetcore/pull/66249)). The same timeout that protects initial request headers now also prevents connections from staying open indefinitely while Kestrel waits for trailer `HEADERS` frames to complete.
@@ -283,7 +303,6 @@ Minimal API endpoints can support multiple `Produces<T>()` extension methods for
 Thank you [@marcominerva](https://github.com/marcominerva) for the array schema reference contribution!
 
 <!-- Filtered features (significant engineering work, but too niche for release notes):
-  - RenderFragment serialization: enables component-state plumbing for Blazor internals, but the shipped PR in this range did not expose a broad, standalone app-facing workflow.
   - MCP Server template transfer: Preview 4 already documented that the template ships with the SDK, and Preview 5 did not add a meaningful user-facing state change.
   - Runtime-async shared framework compilation: Preview 4 already documented the ASP.NET Core shared-framework runtime-async change.
   - Virtualize AnchorMode and server-initiated circuit pause: Preview 4 already documented these features; Preview 5 contains matching milestone/codeflow entries without new user-facing behavior.
