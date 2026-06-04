@@ -18,59 +18,59 @@
 
 ### .NET Libraries
 
-- [Preview 4](preview/preview4/libraries.md)
+- [Preview 5](preview/preview5/libraries.md)
 
 ### .NET Runtime
 
-- [Preview 4](preview/preview4/runtime.md)
+- [Preview 5](preview/preview5/runtime.md)
 
 ### .NET SDK
 
-- [Preview 4](preview/preview4/sdk.md)
+- [Preview 5](preview/preview5/sdk.md)
 
 ### MSBuild
 
-- [Preview 4](preview/preview4/msbuild.md)
+- [Preview 5](preview/preview5/msbuild.md)
 
 ### C\#
 
 - [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/)
-- [Preview 4](preview/preview4/csharp.md)
+- [Preview 5](preview/preview5/csharp.md)
 
 ### F\#
 
 - [What's new in F#](https://learn.microsoft.com/dotnet/fsharp/whats-new/)
-- [Preview 4](preview/preview4/fsharp.md)
+- [Preview 5](preview/preview5/fsharp.md)
 
 ### Visual Basic
 
 - [What's new in Visual Basic](https://learn.microsoft.com/dotnet/visual-basic/whats-new/)
-- [Preview 4](preview/preview4/visualbasic.md)
+- [Preview 5](preview/preview5/visualbasic.md)
 
 ### ASP.NET Core
 
-- [Preview 4](preview/preview4/aspnetcore.md)
+- [Preview 5](preview/preview5/aspnetcore.md)
 
 ### .NET MAUI
 
 - [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/)
-- [Preview 4](preview/preview4/dotnetmaui.md)
+- [Preview 5](preview/preview5/dotnetmaui.md)
 
 ### Entity Framework Core
 
 - [What's new in EF Core](https://learn.microsoft.com/ef/core/what-is-new/)
-- [Preview 4](preview/preview4/efcore.md)
+- [Preview 5](preview/preview5/efcore.md)
 
 ### Windows Forms
 
 - [What's new in Windows Forms](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/)
-- [Preview 4](preview/preview4/winforms.md)
+- [Preview 5](preview/preview5/winforms.md)
 
 ### Windows Presentation Foundation (WPF)
 
 - [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/)
-- [Preview 4](preview/preview4/wpf.md)
+- [Preview 5](preview/preview5/wpf.md)
 
 ### Container images
 
-- [Preview 4](preview/preview4/containers.md)
+- [Preview 5](preview/preview5/containers.md)
