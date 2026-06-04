@@ -10,6 +10,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2026/06/09 | [11.0.0-preview.5](./preview/preview5/11.0.0-preview.5.md) |
 | 2026/05/12 | [11.0.0-preview.4](./preview/preview4/11.0.0-preview.4.md) |
 | 2026/04/14 | [11.0.0-preview.3](preview/preview3/README.md) |
 | 2026/03/10 | [11.0.0 Preview 2](preview/preview2/README.md) |

@@ -10,12 +10,12 @@ The following table lists supported releases.
 
 |  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Preview | [11.0.0-preview.4][11.0.0-preview.4] | TBD |
+| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Preview | [11.0.0-preview.5][11.0.0-preview.5] | TBD |
 | [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.8][10.0.8] | November 14, 2028 |
 | [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Maintenance | [9.0.16][9.0.16] | November 10, 2026 |
 | [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Maintenance | [8.0.27][8.0.27] | November 10, 2026 |
 
-[11.0.0-preview.4]: release-notes/11.0/preview/preview4/11.0.0-preview.4.md
+[11.0.0-preview.5]: release-notes/11.0/preview/preview5/11.0.0-preview.5.md
 [10.0.8]: release-notes/10.0/10.0.8/10.0.8.md
 [9.0.16]: release-notes/9.0/9.0.16/9.0.16.md
 [8.0.27]: release-notes/8.0/8.0.27/8.0.27.md
@@ -47,5 +47,5 @@ The following table lists end-of-life releases.
 [2.0.9]: release-notes/2.0/2.0.9.md
 [1.1.13]: release-notes/1.1/1.1.13/1.1.13.md
 [1.0.16]: release-notes/1.0/1.0.16/1.0.16.md
-[11.0.0-preview.4]: release-notes/11.0/preview/preview4/11.0.0-preview.4.md
+[11.0.0-preview.5]: release-notes/11.0/preview/preview5/11.0.0-preview.5.md
 [policies]: release-policies.md
