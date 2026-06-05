@@ -4,7 +4,7 @@
 
 - [Closed class hierarchies](#closed-class-hierarchies)
 - [Union declarations and union patterns](#union-declarations-and-union-patterns)
-- [Unsafe code focuses on unsafe operations](#unsafe-code-focuses-on-unsafe-operations)
+- [Unsafe code focuses on unsafe operations](#unsafe-evolution)
 
 C# updates:
 
