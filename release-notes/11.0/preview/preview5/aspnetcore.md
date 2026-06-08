@@ -257,7 +257,7 @@ app.UseSession();
 
 ## Blazor WebAssembly Gateway
 
-Standalone Blazor WebAssembly apps now host their development server on `Microsoft.AspNetCore.Components.Gateway`, a lightweight ASP.NET Core process that replaces the older `Microsoft.AspNetCore.Components.WebAssembly.DevServer` ([dotnet/aspnetcore #65982](https://github.com/dotnet/aspnetcore/pull/65982), first added in Preview 4). The Preview 5 standalone Blazor WebAssembly template now references the Gateway package and opts the project into the SDK's `StaticWebAssetSpaFallbackEnabled` property so the static web assets manifest emits the SPA fallback endpoints the Gateway serves ([dotnet/aspnetcore #66729](https://github.com/dotnet/aspnetcore/pull/66729)).
+Standalone Blazor WebAssembly apps have a new development server: `Microsoft.AspNetCore.Components.Gateway`, a lightweight ASP.NET Core process that replaces the older `Microsoft.AspNetCore.Components.WebAssembly.DevServer` ([dotnet/aspnetcore #65982](https://github.com/dotnet/aspnetcore/pull/65982), first added in Preview 4). The Preview 5 standalone Blazor WebAssembly template now references the Gateway package and opts the project into the SDK's `StaticWebAssetSpaFallbackEnabled` property so the static web assets manifest emits the SPA fallback endpoints the Gateway serves ([dotnet/aspnetcore #66729](https://github.com/dotnet/aspnetcore/pull/66729)).
 
 Because the Gateway is a full ASP.NET Core host instead of a static-file dev tool, standalone Blazor WebAssembly apps get capabilities that DevServer never had:
 
