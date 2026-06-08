@@ -10,7 +10,7 @@ targeted new APIs and Android platform progress:
 - [Material 3 handlers and helpers are now public](#material-3-handlers-and-helpers-are-now-public)
 - [Toolbar back button supports an accessibility label](#toolbar-back-button-supports-an-accessibility-label)
 - [Android raises its minimum SDK to API 24](#android-raises-its-minimum-sdk-to-api-24)
-- [.NET for Android stabilizes API 37 and adds new CLI capabilities](#net-for-android-stabilizes-api-37-and-adds-new-cli-capabilities)
+- [.NET for Android stabilizes API 37](#net-for-android-stabilizes-api-37)
 - [.NET for Apple workloads refresh bindings and improve dev-loop builds](#net-for-apple-workloads-refresh-bindings-and-improve-dev-loop-builds)
 - [Apple Intelligence APIs ship in Essentials.AI](#apple-intelligence-apis-ship-in-essentialsai)
 - [Bug fixes](#bug-fixes)
@@ -157,7 +157,7 @@ projects pick up this change automatically; existing projects upgrading from
 API 24 / Android 7.0 covers more than 95% of active Android devices and
 aligns .NET MAUI with the broader Android ecosystem's minimum-API guidance.
 
-## .NET for Android stabilizes API 37 and adds new CLI capabilities
+## .NET for Android stabilizes API 37
 
 .NET for Android `36.99.0-preview.5.308` graduates API 37 / Android 17 from
 preview to **Stable** and defaults .NET 11 projects to target
@@ -182,6 +182,47 @@ public class MyApplication : MauiApplication
 }
 ```
 
+### 🚨 Minimum API level unified to 24
+
+.NET for Android now uses a single minimum supported API level —
+**API 24 (Android 7.0)** — across all runtimes (Mono, CoreCLR, and NativeAOT)
+([dotnet/android #11331](https://github.com/dotnet/android/pull/11331)).
+Previously the floor differed by runtime; consolidating on API 24 simplifies
+the support matrix and lets the workload drop conditional code paths for
+older versions. Existing projects with `SupportedOSPlatformVersion` lower
+than `24.0` should bump it before upgrading to .NET 11.
+
+### TrimmableTypeMap progresses toward smaller, AOT-friendly apps
+
+A substantial block of `TrimmableTypeMap` work landed this preview, moving
+the new trim-friendly typemap from internal scaffolding to a usable runtime
+path on both CoreCLR and NativeAOT. Highlights include:
+
+- JNI replacement APIs are recognized by the trimmable typemap
+  ([dotnet/android #11270](https://github.com/dotnet/android/pull/11270)).
+- `[Export]` and `[ExportField]` callbacks — including dynamic export array
+  callbacks — are wired through the trimmable path
+  ([dotnet/android #11123](https://github.com/dotnet/android/pull/11123),
+  [dotnet/android #11428](https://github.com/dotnet/android/pull/11428)).
+- Default package naming switches to `Crc64` with `LowercaseCrc64`
+  compatibility for existing apps
+  ([dotnet/android #11193](https://github.com/dotnet/android/pull/11193)).
+- The trimmable typemap runtime initializes correctly for app startup on
+  CoreCLR and NativeAOT
+  ([dotnet/android #11252](https://github.com/dotnet/android/pull/11252),
+  [dotnet/android #11292](https://github.com/dotnet/android/pull/11292)).
+- Open generic JNI construction is rejected with a clear error
+  ([dotnet/android #11273](https://github.com/dotnet/android/pull/11273)),
+  and `[JniAddNativeMethodRegistrationAttribute]` is refused with `XA4251`
+  ([dotnet/android #11274](https://github.com/dotnet/android/pull/11274)).
+- ReadyToRun trimmable typemap assemblies are now packaged
+  ([dotnet/android #11473](https://github.com/dotnet/android/pull/11473)),
+  and base UCO wrappers are reused for inherited overrides
+  ([dotnet/android #11466](https://github.com/dotnet/android/pull/11466)).
+
+These changes are foundational for the Android app size and trim quality
+improvements landing in subsequent .NET 11 previews.
+
 Other notable .NET for Android changes:
 
 - CoreCLR release APKs no longer ship diagnostic libraries
@@ -192,9 +233,6 @@ Other notable .NET for Android changes:
 - The .NET runtime crash reporting path now activates before native signal
   chaining, so crash dumps include managed context more reliably
   ([dotnet/android #11291](https://github.com/dotnet/android/pull/11291)).
-- A large block of `TrimmableTypeMap` infrastructure lays the foundation for
-  smaller, more deterministic Android app size in upcoming previews
-  ([dotnet/android compare](https://github.com/dotnet/android/compare/36.99.0-preview.4.137...36.99.0-preview.5.308)).
 
 ## .NET for Apple workloads refresh bindings and improve dev-loop builds
 
