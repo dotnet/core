@@ -6,7 +6,6 @@
 - [JIT optimizations](#jit-optimizations)
 - [Arm intrinsics add native integer and SVE2 predicates](#arm-intrinsics-add-native-integer-and-sve2-predicates)
 - [GC trimming and compaction improvements](#gc-trimming-and-compaction-improvements)
-- [NativeAOT diagnostics use cDAC data descriptors](#nativeaot-diagnostics-use-cdac-data-descriptors)
 - [Browser/WebAssembly CoreCLR enablement](#browserwebassembly-coreclr-enablement)
 - [Diagnostics and loader messages](#diagnostics-and-loader-messages)
 - [Bug fixes](#bug-fixes)
@@ -172,12 +171,6 @@ GC compaction now keeps the `heap_segment_used` watermark accurate after relocat
 | Avg throughput (entries) | 3,322,843 | 3,391,784 | +2.1% |
 | Peak throughput | 4,708,191 | 5,152,893 | +9.4% |
 | OOM count | 52 | 34 | -35% |
-
-## NativeAOT diagnostics use cDAC data descriptors
-
-NativeAOT now emits cDAC data descriptors so diagnostic tools can inspect NativeAOT runtime state through the same contract-based model used by CoreCLR ([dotnet/runtime #126972](https://github.com/dotnet/runtime/pull/126972)). The descriptor data covers thread state, allocation contexts, method-table fields, exception traversal, stress log data, GC descriptors, and managed type descriptors produced by ILC.
-
-The PR validation reported `1586/1586` cDAC reader tests passing and verified all three NativeAOT descriptor sources in dump inspection: the main descriptor, the managed descriptor for `System.Threading.Thread`, and the GC descriptor.
 
 ## Browser/WebAssembly CoreCLR enablement
 
