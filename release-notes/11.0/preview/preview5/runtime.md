@@ -2,7 +2,7 @@
 
 .NET 11 Preview 5 includes new runtime features and performance work:
 
-- [Runtime-async suspension and OSR are faster](#runtime-async-suspension-and-osr-are-faster)
+- [Runtime-async suspension is faster](#runtime-async-suspension-is-faster)
 - [JIT optimizations](#jit-optimizations)
 - [Arm intrinsics add native integer and SVE2 predicates](#arm-intrinsics-add-native-integer-and-sve2-predicates)
 - [GC trimming and compaction improvements](#gc-trimming-and-compaction-improvements)
@@ -18,30 +18,25 @@
 
 <!-- Verified against Microsoft.NETCore.App.Ref@11.0.0-preview.5.26276.113 -->
 
-## Runtime-async suspension and OSR are faster
+## Runtime-async suspension is faster
 
-Runtime-async suspension and resumption continue to get faster in Preview 5. The biggest win is for async methods that resume inside OSR-compiled code: resumption now jumps directly from tier 0 code into the OSR method instead of going through the patchpoint helper. The PR reports that the patchpoint-helper overhead was around 10-20x, and the sample suspension-heavy benchmark improved from `Took 6357.1 ms` to `Took 457.1 ms` ([dotnet/runtime #127074](https://github.com/dotnet/runtime/pull/127074)).
+Runtime-async suspension and resumption continue to get faster in Preview 5. The biggest win is for async methods that are optimized by on-stack replacement (OSR). OSR is the JIT feature that lets a long-running method switch from initial code to optimized code while the method is still executing.
 
-```diff
--       mov      ecx, dword ptr [rbp-0x8C]
--       call     CORINFO_HELP_PATCHPOINT_FORCED
-+       jmp      qword ptr [rbp-0x90]
-        int3
-```
+Runtime-async now resumes those methods directly into optimized code instead of taking the general-purpose OSR transition path. The PR reports that the transition overhead was around 10-20x, and the sample suspension-heavy benchmark improved from `Took 6357.1 ms` to `Took 457.1 ms` ([dotnet/runtime #127074](https://github.com/dotnet/runtime/pull/127074)).
 
 Other runtime-async changes reduce the cost and size of generated suspension code:
 
-- The JIT now calls `FinishSuspensionNoContinuationContext` and `FinishSuspensionWithContinuationContext` helpers for the common suspension paths. The PR reports an approximately 8% improvement on a suspension-heavy microbenchmark, with five runs moving from `284.2 ms`, `286.2 ms`, `285.4 ms`, `286.6 ms`, and `286.7 ms` to `264.6 ms`, `265.4 ms`, `266.3 ms`, `265.9 ms`, and `265.6 ms`. The generated code in the PR sample shrank from 766 bytes to 751 bytes ([dotnet/runtime #126041](https://github.com/dotnet/runtime/pull/126041)).
-- Suspension/resumption now stores `Thread.CurrentThread` inside `RuntimeAsyncAwaitState`, moves TLS object fields into a stack-allocated `ref struct` on the hot paths, and removes several write barriers. The PR sample improved from `Took 350.3 ms` to `Took 291.3 ms` ([dotnet/runtime #127336](https://github.com/dotnet/runtime/pull/127336)).
-- Runtime-async callable thunks for `ValueTask` now cache and reuse a custom continuation when an `IValueTaskSource`-backed `ValueTask` suspends. This removes the allocation that previously happened on that path ([dotnet/runtime #127973](https://github.com/dotnet/runtime/pull/127973)).
+- Common suspension paths now use smaller generated code. The PR reports an approximately 8% improvement on a suspension-heavy microbenchmark, and the generated code in the PR sample shrank from 766 bytes to 751 bytes ([dotnet/runtime #126041](https://github.com/dotnet/runtime/pull/126041)).
+- Suspension and resumption now do less thread-local-storage work and avoid several write barriers on hot paths. The PR sample improved from `Took 350.3 ms` to `Took 291.3 ms` ([dotnet/runtime #127336](https://github.com/dotnet/runtime/pull/127336)).
+- Runtime-async now reuses continuations when an `IValueTaskSource`-backed `ValueTask` suspends, removing an allocation on that path ([dotnet/runtime #127973](https://github.com/dotnet/runtime/pull/127973)).
 
 ## JIT optimizations
 
-Several JIT optimizations landed this preview that benefit normal C# without source changes.
+Several JIT optimizations landed this preview that benefit typical C# without source changes.
 
 ### Redundant span and null checks
 
-The JIT now removes more range checks from span loops that repeatedly slice off a fixed-width prefix. In this loop, the `data.Length >= Vector128<int>.Count` guard proves that the next `Vector128.Create(data)` and `data.Slice(Vector128<int>.Count)` are in range across the loop back edge:
+The JIT now removes more range checks from span loops that repeatedly slice off a fixed-width prefix. These loops commonly use a length check to ask, "is at least this much data left?". In the following example, the `data.Length >= Vector128<int>.Count` guard proves that the next `Vector128.Create(data)` and `data.Slice(Vector128<int>.Count)` are in range across the loop back edge:
 
 ```csharp
 int Sum(ReadOnlySpan<int> data)
@@ -126,7 +121,7 @@ Null-check propagation also looks through PHIs that merge a newly-created value 
 
 ### Smaller arithmetic and faster casts
 
-The JIT can now transform `CONST - x` into `x ^ CONST` when range information proves the identities are equivalent. For `255 - byte`, the generated code changes from `neg` + `add` to a single `xor`; for `-1 - x`, it changes to `not` ([dotnet/runtime #126529](https://github.com/dotnet/runtime/pull/126529)). Thank you [@BoyBaykiller](https://github.com/BoyBaykiller) for this contribution!
+The JIT can now transform `CONST - x` into `x ^ CONST` when range information proves the identities are equivalent. This works when the constant is an all-ones mask for the bits that `x` can use. For a byte, `255` is `1111_1111`, so `x ^ 255` flips exactly those eight bits and produces the same result as `255 - x`. For `255 - byte`, the generated code changes from `neg` + `add` to a single `xor`; for `-1 - x`, it changes to `not` ([dotnet/runtime #126529](https://github.com/dotnet/runtime/pull/126529)). Thank you [@BoyBaykiller](https://github.com/BoyBaykiller) for this contribution!
 
 ```diff
         movzx    rax, dl
@@ -159,7 +154,7 @@ if (Crc32.IsSupported)
 }
 ```
 
-SVE2 gained `CreateWhileGreaterThanMask*` and `CreateWhileReadAfterWriteMask*` predicate-generation intrinsics. The new `CreateWhileGreaterThanMask*` methods cover byte, signed byte, 16-bit, 32-bit, 64-bit, `double`, and `single` element masks, while `CreateWhileReadAfterWriteMask*` methods create masks from pointer ranges ([dotnet/runtime #127538](https://github.com/dotnet/runtime/pull/127538)).
+SVE2 now has `CreateWhileGreaterThanMask*` and `CreateWhileReadAfterWriteMask*` predicate-generation intrinsics. The new `CreateWhileGreaterThanMask*` methods cover byte, signed byte, 16-bit, 32-bit, 64-bit, `double`, and `single` element masks, while `CreateWhileReadAfterWriteMask*` methods create masks from pointer ranges ([dotnet/runtime #127538](https://github.com/dotnet/runtime/pull/127538)).
 
 ## GC trimming and compaction improvements
 
@@ -195,7 +190,7 @@ Browser CoreCLR continues its bring-up in Preview 5:
 
 ## Diagnostics and loader messages
 
-Heap dumps now use HEAP2 by default. This path unifies memory-region enumeration and includes code heaps, the global loader allocator, app-domain loader allocators, assembly loader allocators, module loader allocators, and collectible loader heaps. The old environment-variable workarounds for slow dumps are deprecated ([dotnet/runtime #127321](https://github.com/dotnet/runtime/pull/127321)).
+Heap dumps are smaller and faster by default because `createdump` now uses HEAP2. HEAP2 uses a unified memory-region enumeration path for the runtime data diagnostic tools need, while skipping several older enumeration paths that made dumps slower and larger. The old environment-variable workarounds for slow dumps are deprecated ([dotnet/runtime #127321](https://github.com/dotnet/runtime/pull/127321)).
 
 Assembly version conflicts now include details about the already-loaded assembly in `FileLoadException` messages. When a lower-versioned assembly is already loaded, the message can now include the loaded assembly identity and path ([dotnet/runtime #123969](https://github.com/dotnet/runtime/pull/123969)):
 
