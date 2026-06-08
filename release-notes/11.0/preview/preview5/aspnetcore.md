@@ -257,11 +257,11 @@ app.UseSession();
 
 ## Blazor WebAssembly Gateway
 
-Standalone Blazor WebAssembly apps now host their development server on `Microsoft.AspNetCore.Components.Gateway`, a lightweight ASP.NET Core process that replaces the older `Microsoft.AspNetCore.Components.WebAssembly.DevServer` ([dotnet/aspnetcore #65982](https://github.com/dotnet/aspnetcore/pull/65982), first added in Preview 4). The Preview 5 standalone Blazor WebAssembly template now references the Gateway package and adopts the SDK's `StaticWebAssetSpaFallbackEnabled` property instead of carrying custom fallback MSBuild targets ([dotnet/aspnetcore #66729](https://github.com/dotnet/aspnetcore/pull/66729)).
+Standalone Blazor WebAssembly apps now host their development server on `Microsoft.AspNetCore.Components.Gateway`, a lightweight ASP.NET Core process that replaces the older `Microsoft.AspNetCore.Components.WebAssembly.DevServer` ([dotnet/aspnetcore #65982](https://github.com/dotnet/aspnetcore/pull/65982), first added in Preview 4). The Preview 5 standalone Blazor WebAssembly template now references the Gateway package and opts the project into the SDK's `StaticWebAssetSpaFallbackEnabled` property so the static web assets manifest emits the SPA fallback endpoints the Gateway serves ([dotnet/aspnetcore #66729](https://github.com/dotnet/aspnetcore/pull/66729)).
 
 Because the Gateway is a full ASP.NET Core host instead of a static-file dev tool, standalone Blazor WebAssembly apps get capabilities that DevServer never had:
 
-- **Built-in SPA fallback routing.** Requests that don't match a static asset fall back to `index.html`, so client-side routes such as `/orders/42` work on browser refresh and direct navigation without a custom MSBuild target.
+- **Built-in SPA fallback routing.** Requests that don't match a static asset fall back to `index.html`, so client-side routes such as `/orders/42` work on browser refresh and direct navigation. The fallback endpoints come from the static web assets manifest the SDK emits when `StaticWebAssetSpaFallbackEnabled` is set, so no custom routing code or middleware is needed in the app.
 - **Multiple Blazor WebAssembly clients per host.** A single Gateway instance can serve more than one Blazor WebAssembly client under different path prefixes, configured through its `ClientApps` section. This is the integration point .NET Aspire uses to host Blazor WebAssembly clients alongside backend services in a single AppHost run.
 - **Built-in YARP reverse proxy infrastructure.** YARP is bundled with the Gateway, providing the foundation for forwarding backend traffic alongside the WebAssembly client and enabling the Aspire multi-client scenarios above.
 
