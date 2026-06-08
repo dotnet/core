@@ -10,7 +10,7 @@
 - [Process line reading and KillOnParentExit expand](#process-line-reading-and-killonparentexit-expand)
 - [Reflection exposes nullable underlying types](#reflection-exposes-nullable-underlying-types)
 - [Network APIs add video MIME names and QUIC stream priority](#network-apis-add-video-mime-names-and-quic-stream-priority)
-- [Syndication is annotated for trimming and Native AOT](#syndication-is-annotated-for-trimming-and-native-aot)
+- [Syndication supports trimmed and Native AOT feed loading](#syndication-supports-trimmed-and-native-aot-feed-loading)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -131,6 +131,8 @@ The generic overloads complement the existing `Next`, `NextInt64`, `NextSingle`,
 
 `StringBuilder.MoveChunks(StringBuilder)` transfers the internal chunk chain from one builder to a new builder in O(1) time ([dotnet/runtime #127823](https://github.com/dotnet/runtime/pull/127823)). The source builder is drained but remains usable. This gives parsers, generators, and text abstractions a way to hand off accumulated text without first materializing a contiguous `string` or copying every chunk.
 
+The API is also an ownership boundary. The returned builder owns the completed text, while the original builder is empty and can be used for more work. That separation avoids aliasing bugs: the consumer never receives another reference, or alias, to the producer's mutable `StringBuilder`.
+
 ```csharp
 using System.Text;
 
@@ -146,7 +148,7 @@ Console.WriteLine(scratch.Length); // 0
 scratch.Append("ready for reuse");
 ```
 
-The API is especially useful for components that need an immutable view over the completed text while reusing the original builder for more work.
+The API is especially useful for components that need an immutable view over completed text while reusing the original builder for more work, such as source generators that produce Roslyn `SourceText`.
 
 ## Process line reading and KillOnParentExit expand
 
@@ -212,18 +214,18 @@ using var content = new ByteArrayContent(File.ReadAllBytes("clip.mp4"));
 content.Headers.ContentType = new MediaTypeHeaderValue(MediaTypeNames.Video.Mp4);
 ```
 
-`System.Net.Quic.QuicStream` also gains a `Priority` property and `DefaultPriority` constant ([dotnet/runtime #127275](https://github.com/dotnet/runtime/pull/127275)). QUIC applications can mark streams with relative priority without dropping down to MsQuic-specific handles.
+`System.Net.Quic.QuicStream` also gains a `Priority` property and `DefaultPriority` constant ([dotnet/runtime #127275](https://github.com/dotnet/runtime/pull/127275)). QUIC applications can mark streams with relative priority without dropping down to MsQuic-specific handles. The connection acts like a scheduler for multiple in-flight stream writes: when more than one stream has data queued, priority controls which stream gets sent first. This helps protocols send control, metadata, or interactive streams ahead of bulk-transfer streams.
 
 ```csharp
 using System.Net.Quic;
 
 QuicStream stream = await connection.OpenOutboundStreamAsync(QuicStreamType.Bidirectional);
-stream.Priority = 0; // Higher priority than QuicStream.DefaultPriority.
+stream.Priority = byte.MaxValue; // Higher priority than QuicStream.DefaultPriority.
 ```
 
-## Syndication is annotated for trimming and Native AOT
+## Syndication supports trimmed and Native AOT feed loading
 
-`System.ServiceModel.Syndication` is now annotated for trimming and Native AOT compatibility ([dotnet/runtime #114028](https://github.com/dotnet/runtime/pull/114028)). The library's reflection use is limited enough that common RSS and Atom feed scenarios can be analyzed by the trimmer instead of producing broad warnings.
+`System.ServiceModel.Syndication` now works better in trimmed and Native AOT apps ([dotnet/runtime #114028](https://github.com/dotnet/runtime/pull/114028)). Common RSS and Atom feed-loading code, including `SyndicationFeed.Load`, can publish without the previous false-positive IL2067 trim warning, and Native AOT keeps the formatter metadata needed at runtime.
 
 ```csharp
 using System.ServiceModel.Syndication;
