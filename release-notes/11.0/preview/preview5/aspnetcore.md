@@ -19,8 +19,6 @@ ASP.NET Core updates in .NET 11:
 
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
 
-<!-- Verified against Microsoft.AspNetCore.App.Ref@11.0.0-preview.5.26276.113, Microsoft.AspNetCore.Components.WebAssembly.Server@11.0.0-preview.5.26276.113, and Microsoft.AspNetCore.Components.QuickGrid@11.0.0-preview.5.26276.113. -->
-
 ## Blazor SSR supports client-side validation
 
 Blazor SSR forms now get instant, in-browser validation feedback without a server round-trip, matching the experience provided by interactive Blazor apps and MVC apps with unobtrusive validation ([dotnet/aspnetcore #66441](https://github.com/dotnet/aspnetcore/pull/66441), [dotnet/aspnetcore #66420](https://github.com/dotnet/aspnetcore/pull/66420)). The .NET model remains the single source of truth for validation rules. The server renders metadata for the validation rules which are then enforced by the Blazor JS code on the client-side.
