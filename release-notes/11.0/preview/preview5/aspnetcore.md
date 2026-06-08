@@ -317,12 +317,6 @@ Minimal API endpoints can support multiple `Produces<T>()` extension methods for
 
 Thank you [@marcominerva](https://github.com/marcominerva) for the array schema reference contribution!
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - MCP Server template transfer: Preview 4 already documented that the template ships with the SDK, and Preview 5 did not add a meaningful user-facing state change.
-  - Runtime-async shared framework compilation: Preview 4 already documented the ASP.NET Core shared-framework runtime-async change.
-  - Virtualize AnchorMode and server-initiated circuit pause: Preview 4 already documented these features; Preview 5 contains matching milestone/codeflow entries without new user-facing behavior.
--->
-
 ## Bug fixes
 
 - **Blazor**
