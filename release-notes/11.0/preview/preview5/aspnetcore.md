@@ -263,8 +263,8 @@ Adopting the Gateway in an existing standalone Blazor WebAssembly app is a one-l
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0-preview.5.*" />
-  <PackageReference Include="Microsoft.AspNetCore.Components.Gateway" Version="11.0.0-preview.5.*" PrivateAssets="all" />
+  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0-preview.5.26302.115" />
+  <PackageReference Include="Microsoft.AspNetCore.Components.Gateway" Version="11.0.0-preview.5.26302.115" PrivateAssets="all" />
 </ItemGroup>
 ```
 
