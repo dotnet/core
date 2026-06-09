@@ -42,4 +42,3 @@ ToolStrip, layout, designer, and dark mode scenarios.
   - `ProgressBar` now has default foreground and background colors for dark mode
     rendering
     ([dotnet/winforms #14339](https://github.com/dotnet/winforms/pull/14339)).
-
