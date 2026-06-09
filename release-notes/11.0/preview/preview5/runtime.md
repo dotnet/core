@@ -200,7 +200,7 @@ To confirm the app is running on CoreCLR, open the browser developer console and
 globalThis.getDotnetRuntime(0).INTERNAL.GetDotNetRuntimeHeap()
 ```
 
-CoreCLR returns a memory dump; Mono does not implement this hook.
+CoreCLR exposes this `GetDotNetRuntimeHeap` hook (returning a `Uint8Array`); the Mono WebAssembly runtime does not, so a successful call is itself the signal you're on CoreCLR. The returned buffer may be empty depending on runtime state.
 
 A dedicated native WebAssembly toolchain/workload for browser CoreCLR isn't available yet, so AOT and the native build paths still require the Mono runtime in Preview 5.
 
