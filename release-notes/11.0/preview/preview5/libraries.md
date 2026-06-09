@@ -10,7 +10,9 @@
 - [Process line reading and KillOnParentExit expand](#process-line-reading-and-killonparentexit-expand)
 - [Reflection exposes nullable underlying types](#reflection-exposes-nullable-underlying-types)
 - [Network APIs add video MIME names and QUIC stream priority](#network-apis-add-video-mime-names-and-quic-stream-priority)
+- [Cryptography adds X25519 key agreement](#cryptography-adds-x25519-key-agreement)
 - [Syndication supports trimmed and Native AOT feed loading](#syndication-supports-trimmed-and-native-aot-feed-loading)
+- [Options validation accepts a validator type](#options-validation-accepts-a-validator-type)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -19,7 +21,7 @@
 
 - [What's new in .NET 11 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/libraries)
 
-<!-- Verified public APIs with dotnet-inspect against Microsoft.NETCore.App.Ref@11.0.0-preview.5.26276.113 from the dnceng dotnet11 feed. -->
+<!-- Verified public APIs with dotnet-inspect against Microsoft.NETCore.App.Ref@11.0.0-preview.5.26302.115 from the dnceng dotnet11 feed. -->
 
 ## System.Text.Json supports JSON Lines serialization
 
@@ -91,6 +93,15 @@ public sealed record Sale(string Sku, int Quantity);
 
 `Queryable.FullJoin` exposes the same operation for query providers, and `AsyncEnumerable.FullJoin` covers async streams.
 
+Preview 5 also adds tuple-returning overloads for `Join`, `LeftJoin`, `RightJoin`, and `GroupJoin` on `Enumerable`, `Queryable`, and `AsyncEnumerable` ([dotnet/runtime #121998](https://github.com/dotnet/runtime/pull/121998)). These let queries return `IEnumerable<(TOuter, TInner)>` (or the nullable-element variants for `LeftJoin`, `RightJoin`, and `FullJoin`) without an explicit result selector, which is convenient when the natural result of a join is a pair.
+
+```csharp
+foreach (var (product, sale) in catalog.Join(sales, p => p.Sku, s => s.Sku))
+{
+    Console.WriteLine($"{product.Sku}: {product.Name}, sold {sale.Quantity}");
+}
+```
+
 ## EqualityComparer of T adds key-selector creation
 
 `EqualityComparer<T>.Create` now has a key-selector overload ([dotnet/runtime #125024](https://github.com/dotnet/runtime/pull/125024)). It builds an equality comparer by projecting each item to a comparison key, with an optional comparer for that key. This is useful when a type should be compared by one property for a specific collection or query, without adding global equality semantics to the type.
@@ -100,7 +111,7 @@ using System.Collections.Generic;
 
 var users = new HashSet<User>(
     EqualityComparer<User>.Create(
-        user => user.Email,
+        user => user!.Email,
         StringComparer.OrdinalIgnoreCase));
 
 users.Add(new User("ada@example.com", "Ada"));
@@ -223,6 +234,29 @@ QuicStream stream = await connection.OpenOutboundStreamAsync(QuicStreamType.Bidi
 stream.Priority = byte.MaxValue; // Higher priority than QuicStream.DefaultPriority.
 ```
 
+## Cryptography adds X25519 key agreement
+
+`System.Security.Cryptography.X25519DiffieHellman` is a new abstract class that implements X25519 elliptic-curve Diffie-Hellman key agreement ([dotnet/runtime #127248](https://github.com/dotnet/runtime/pull/127248)). X25519 is the key-agreement curve used by TLS 1.3, the Signal Protocol, the Noise Protocol, and many other modern protocols. The class includes platform-specific implementations — `X25519DiffieHellmanCng` on Windows and `X25519DiffieHellmanOpenSsl` on OpenSSL platforms — and supports `GenerateKey`, raw shared-secret derivation, byte and PKCS#8 export/import (including encrypted PKCS#8 and PEM), and `SubjectPublicKeyInfo` export. `X25519DiffieHellman.IsSupported` reports whether the current platform has an implementation.
+
+```csharp
+using System.Security.Cryptography;
+
+using X25519DiffieHellman alice = X25519DiffieHellman.GenerateKey();
+using X25519DiffieHellman bob = X25519DiffieHellman.GenerateKey();
+
+byte[] alicePublic = alice.ExportPublicKey();
+byte[] bobPublic = bob.ExportPublicKey();
+
+byte[] aliceShared = new byte[X25519DiffieHellman.SecretAgreementSizeInBytes];
+byte[] bobShared = new byte[X25519DiffieHellman.SecretAgreementSizeInBytes];
+alice.DeriveRawSecretAgreement(bobPublic, aliceShared);
+bob.DeriveRawSecretAgreement(alicePublic, bobShared);
+
+// aliceShared and bobShared are byte-identical 32-byte secrets.
+```
+
+`CryptographicOperations` also adds a `FixedTimeEquals(ReadOnlySpan<byte> source, byte value)` overload for constant-time comparison of a buffer against a single byte ([dotnet/runtime #127826](https://github.com/dotnet/runtime/pull/127826)). This is useful for checking that a buffer is all one value (typically zero) without leaking the answer through a timing side channel.
+
 ## Syndication supports trimmed and Native AOT feed loading
 
 `System.ServiceModel.Syndication` now works better in trimmed and Native AOT apps ([dotnet/runtime #114028](https://github.com/dotnet/runtime/pull/114028)). Common RSS and Atom feed-loading code, including `SyndicationFeed.Load`, can publish without the previous false-positive IL2067 trim warning, and Native AOT keeps the formatter metadata needed at runtime.
@@ -241,6 +275,29 @@ foreach (SyndicationItem item in feed.Items)
 ```
 
 Thank you [@reflectronic](https://github.com/reflectronic) for this contribution!
+
+## Options validation accepts a validator type
+
+`OptionsBuilder<TOptions>.Validate<TValidateOptions>()` is a new fluent overload that registers an `IValidateOptions<TOptions>` implementation by type ([dotnet/runtime #127264](https://github.com/dotnet/runtime/pull/127264)). Until this preview, callers had to either inline validation logic in a `Validate(...)` lambda or wire the `IValidateOptions<T>` service up themselves. The new overload lets configuration code register a typed validator the same way it registers any other DI service, and the validator is resolved from the DI container so it can take its own constructor dependencies.
+
+```csharp
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
+services.AddOptions<SmtpSettings>()
+    .Configure(s => { /* bind from configuration */ })
+    .Validate<SmtpSettingsValidator>();
+
+public sealed class SmtpSettingsValidator : IValidateOptions<SmtpSettings>
+{
+    public ValidateOptionsResult Validate(string? name, SmtpSettings options) =>
+        string.IsNullOrWhiteSpace(options.Host)
+            ? ValidateOptionsResult.Fail("Host is required.")
+            : ValidateOptionsResult.Success;
+}
+```
+
+Validation runs the first time `IOptions<TOptions>.Value` is requested and throws `OptionsValidationException` on failure.
 
 ## Breaking changes
 
