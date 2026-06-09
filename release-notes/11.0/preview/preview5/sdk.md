@@ -177,7 +177,7 @@ telemetry. Preview 5 also adds `COPILOT_CLI` to that detection set
 
 ## NativeAOT CLI fast path is packaged and opt-in
 
-As part of our journey towards making the `dotnet` CLI a NAtive AOT application,
+As part of our journey towards making the `dotnet` CLI a Native AOT application,
 we're now packaging the .NET CLI with an opt-in Native AOT mode.
 
 Preview 4 introduced the NativeAOT `dotnet` CLI fast-path foundation. Preview 5
