@@ -177,6 +177,9 @@ telemetry. Preview 5 also adds `COPILOT_CLI` to that detection set
 
 ## NativeAOT CLI fast path is packaged and opt-in
 
+As part of our journey towards making the `dotnet` CLI a NAtive AOT application,
+we're now packaging the .NET CLI with an opt-in Native AOT mode.
+
 Preview 4 introduced the NativeAOT `dotnet` CLI fast-path foundation. Preview 5
 packages the `dotnet-aot` native library into SDK layouts and installers
 ([dotnet/sdk #54056](https://github.com/dotnet/sdk/pull/54056),
@@ -190,6 +193,11 @@ environment variable is unset, the bridge falls through to the managed CLI path.
 This keeps the fast path available for SDK development and testing without
 changing the default command behavior.
 
+In preview 5 there are no commands that are fully-served by the AOT mode,
+but in subsequent previews we will be lighting up more commands - as well as
+pushing more cross-cutting functionality like .NET SDK tool invocation fully
+into the AOT pathway for improved performance.
+
 ## Breaking changes
 
 - **Container registry auth challenges are validated more strictly.** Container
@@ -200,13 +208,6 @@ changing the default command behavior.
   Duplicate directives other than `#:project` and `#:ref` now produce an error
   even when the duplicate appears in a file brought in through `#:include`
   ([dotnet/sdk #54101](https://github.com/dotnet/sdk/pull/54101)).
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Template engine System.Text.Json migration: internal dependency cleanup with no user-facing CLI behavior change.
-  - Template engine README and search-cache updates: documentation and repo-consolidation plumbing.
-  - IMultiThreadableTask migrations: SDK/MSBuild integration cleanup, not a feature most SDK users act on directly.
-  - `-skipCrossgen` repo build option: useful for SDK contributors, not product release-note material.
--->
 
 ## Bug fixes
 
