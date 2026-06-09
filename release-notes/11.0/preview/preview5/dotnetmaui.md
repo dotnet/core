@@ -296,7 +296,6 @@ Thank you contributors! ❤️
 
 [@Ahamed-Ali](https://github.com/Ahamed-Ali),
 [@BagavathiPerumal](https://github.com/BagavathiPerumal),
-[@Copilot](https://github.com/Copilot),
 [@dalexsoto](https://github.com/dalexsoto),
 [@devanathan-vaithiyanathan](https://github.com/devanathan-vaithiyanathan),
 [@Dhivya-SF4094](https://github.com/Dhivya-SF4094),
