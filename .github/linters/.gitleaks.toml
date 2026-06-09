@@ -1,0 +1,26 @@
+# Gitleaks configuration for super-linter.
+#
+# Super-linter v7 looks for gitleaks rules at .github/linters/.gitleaks.toml
+# (the same location as the other linter rule files in this directory).
+#
+# [extend] useDefault = true preserves the upstream gitleaks default rule set
+# (otherwise specifying a custom config silently disables every built-in rule).
+# We only add an allowlist for the auto-generated release-notes data files
+# whose VMR commit-SHA contents trigger false positives.
+#
+# Specifically, release-notes/**/changes.json contains thousands of 40-char
+# hex Git commit SHAs. SHAs that happen to start with "eaaa..." match the
+# square-access-token rule (which scans for EAAA[A-Za-z0-9_-]{60+}). The
+# files are tool-generated, not authored, so allowlisting them by path is
+# the right scope.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Release-notes skill generated data files"
+paths = [
+  '''release-notes/.+/changes\.json''',
+  '''release-notes/.+/features\.json''',
+  '''release-notes/.+/build-metadata\.json''',
+]
