@@ -7,6 +7,7 @@
 - [Arm intrinsics add native integer and SVE2 predicates](#arm-intrinsics-add-native-integer-and-sve2-predicates)
 - [GC trimming and compaction improvements](#gc-trimming-and-compaction-improvements)
 - [Browser/WebAssembly CoreCLR enablement](#browserwebassembly-coreclr-enablement)
+  - [Try browser CoreCLR in a Blazor WebAssembly app](#try-browser-coreclr-in-a-blazor-webassembly-app)
 - [Diagnostics and loader messages](#diagnostics-and-loader-messages)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -180,6 +181,29 @@ Browser CoreCLR continues its bring-up in Preview 5:
 - **Download retry is on by default.** The browser loader now enables download retry by default and improves retry sequencing for framework assets ([dotnet/runtime #127559](https://github.com/dotnet/runtime/pull/127559)).
 - **Reverse P/Invoke and `UnmanagedCallersOnly` codegen.** WASM RyuJIT can now generate code for reverse P/Invoke and `UnmanagedCallersOnly` paths ([dotnet/runtime #127751](https://github.com/dotnet/runtime/pull/127751)).
 - **Interpreter code resolution on portable-entrypoint platforms.** Browser CoreCLR can resolve interpreter code when `FEATURE_PORTABLE_ENTRYPOINTS` is enabled, which supports diagnostics paths such as sampling and profiler lookups ([dotnet/runtime #127370](https://github.com/dotnet/runtime/pull/127370)).
+
+### Try browser CoreCLR in a Blazor WebAssembly app
+
+The browser CoreCLR runtime is opt-in this preview. To use it in a Blazor WebAssembly project that already targets `net11.0`, add the `UseMonoRuntime` property to the WebAssembly client project file:
+
+```xml
+<PropertyGroup>
+  <TargetFramework>net11.0</TargetFramework>
+  <UseMonoRuntime>false</UseMonoRuntime>
+</PropertyGroup>
+```
+
+The same property (or `/p:UseMonoRuntime=false` on the command line) works for non-Blazor WebAssembly projects that use `<Project Sdk="Microsoft.NET.Sdk.WebAssembly">`.
+
+To confirm the app is running on CoreCLR, open the browser developer console and run:
+
+```javascript
+globalThis.getDotnetRuntime(0).INTERNAL.GetDotNetRuntimeHeap()
+```
+
+CoreCLR returns a memory dump; Mono does not implement this hook.
+
+A dedicated native WebAssembly toolchain/workload for browser CoreCLR isn't available yet, so AOT and the native build paths still require the Mono runtime in Preview 5.
 
 ## Diagnostics and loader messages
 
