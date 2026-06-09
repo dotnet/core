@@ -81,9 +81,3 @@ Thank you [@sbomer](https://github.com/sbomer) for this contribution!
 - **Package pruning**
   - `NU1510` now describes explicitly referenced packages that are automatically available as package-pruning candidates instead of calling them unused ([NuGet/NuGet.Client #7380](https://github.com/NuGet/NuGet.Client/pull/7380)).
 
-## Community contributors
-
-Thank you contributors! ❤️
-
-- [@omajid](https://github.com/NuGet/NuGet.Client/pulls?q=is%3Apr+is%3Amerged+author%3Aomajid)
-- [@sbomer](https://github.com/NuGet/NuGet.Client/pulls?q=is%3Apr+is%3Amerged+author%3Asbomer)
