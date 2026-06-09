@@ -8,6 +8,10 @@ Your app needs to be on the latest .NET 9 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 9.0.17 (June 2026)
+  - [CVE-2026-45591 | ASP.NET Core Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-45591)
+  - [CVE-2026-45491 | .NET Elevation of Privilege Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-45491)
+  - [CVE-2026-45490 | .NET Elevation of Privilege Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-45490)
 - 9.0.16 (May 2026)
   - [CVE-2026-32177 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/399)
   - [CVE-2026-35433 | .NET Elevation of Privilege Vulnerability](https://github.com/dotnet/announcements/issues/398)
