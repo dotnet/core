@@ -6,6 +6,7 @@
 
 | Date | Release |
 | ---- | ------- |
+| 2026/06/09 | [11.0.0 Preview 5](./preview5/README.md) |
 | 2026/05/12 | [11.0.0 Preview 4](./preview4/README.md) |
 | 2026/04/14 | [11.0.0 Preview 3](./preview3/README.md) |
 | 2026/03/10 | [11.0.0 Preview 2](./preview2/README.md) |
