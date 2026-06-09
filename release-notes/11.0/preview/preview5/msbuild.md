@@ -26,6 +26,8 @@ Preview 5 also moves more in-box tasks onto the multithreaded execution model. T
 - Manifest tasks, including `GenerateApplicationManifest`, `GenerateDeploymentManifest`, `ResolveManifestFiles`, `AddToWin32Manifest`, `UpdateManifest`, and `CreateManifestResourceName` ([dotnet/msbuild #13177](https://github.com/dotnet/msbuild/pull/13177))
 - `ResolveAssemblyReference` ([dotnet/msbuild #13319](https://github.com/dotnet/msbuild/pull/13319))
 
+Multithreaded builds at this point should be completely compatible - meaning they should build the same way and produce the same outputs as multi-process builds today - but we continue to expect them to be slower than multiprocess builds due to increased usage of processes for Task isolation, which requires more communication overhead. We expect this gap to narrow as we continue to enlighten built-in Tasks.
+
 ## MSBuild evaluation and item filtering are faster
 
 MSBuild's escaping helpers now allocate less and run faster in evaluation-heavy workloads ([dotnet/msbuild #13426](https://github.com/dotnet/msbuild/pull/13426)). `EscapingUtilities.Escape` and `EscapingUtilities.UnescapeAll` are used throughout property and item evaluation. In the PR benchmarks on .NET 10.0, `Escape_NoSpecialChars` improved from `17.96 ns` to `5.37 ns`, `Escape_FewSpecialChars` improved from `191.8 ns` to `84.9 ns`, and `UnescapeAll_InvalidEscapeSequences` dropped its allocation from `48 B` to `0 B`.
