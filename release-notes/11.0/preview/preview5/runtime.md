@@ -7,7 +7,6 @@
 - [Arm intrinsics add native integer and SVE2 predicates](#arm-intrinsics-add-native-integer-and-sve2-predicates)
 - [GC trimming and compaction improvements](#gc-trimming-and-compaction-improvements)
 - [Browser/WebAssembly CoreCLR enablement](#browserwebassembly-coreclr-enablement)
-  - [Try browser CoreCLR in a Blazor WebAssembly app](#try-browser-coreclr-in-a-blazor-webassembly-app)
 - [Diagnostics and loader messages](#diagnostics-and-loader-messages)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
