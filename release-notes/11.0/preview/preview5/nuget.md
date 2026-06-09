@@ -73,4 +73,3 @@ Thank you [@sbomer](https://github.com/sbomer) for this contribution!
   - Target framework version compatibility now distinguishes Windows OS-version TFMs such as `net10.0-windows10.0.17763.1` from the corresponding `.0` revision TFMs ([NuGet/NuGet.Client #7287](https://github.com/NuGet/NuGet.Client/pull/7287), [NuGet/Home #14859](https://github.com/NuGet/Home/issues/14859)).
 - **Package pruning**
   - `NU1510` now describes explicitly referenced packages that are automatically available as package-pruning candidates instead of calling them unused ([NuGet/NuGet.Client #7380](https://github.com/NuGet/NuGet.Client/pull/7380)).
-

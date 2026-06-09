@@ -20,6 +20,7 @@
 .NET Libraries updates in .NET 11:
 
 - [What's new in .NET 11 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/libraries)
+
 ## System.Text.Json supports JSON Lines serialization
 
 `System.Text.Json` can now serialize an `IAsyncEnumerable<T>` as [JSON Lines](https://jsonlines.org/) by using the new `JsonSerializer.SerializeAsyncEnumerable` overloads with `topLevelValues: true` ([dotnet/runtime #127567](https://github.com/dotnet/runtime/pull/127567)). The same method also writes a root-level JSON array by default, matching the existing `DeserializeAsyncEnumerable` shape. JSON Lines output uses `\n` between values and ignores `WriteIndented`, so each item stays on one line for log streams, message feeds, and batch processing.

@@ -14,6 +14,7 @@
 .NET Runtime updates in .NET 11:
 
 - [What's new in .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime)
+
 ## Runtime-async suspension is faster
 
 Runtime-async suspension and resumption continue to get faster in Preview 5. The biggest win is for async methods that are optimized by on-stack replacement (OSR). OSR is the JIT feature that lets a long-running method switch from initial code to optimized code while the method is still executing.
