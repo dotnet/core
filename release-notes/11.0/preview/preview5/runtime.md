@@ -14,9 +14,6 @@
 .NET Runtime updates in .NET 11:
 
 - [What's new in .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime)
-
-<!-- Verified against Microsoft.NETCore.App.Ref@11.0.0-preview.5.26276.113 -->
-
 ## Runtime-async suspension is faster
 
 Runtime-async suspension and resumption continue to get faster in Preview 5. The biggest win is for async methods that are optimized by on-stack replacement (OSR). OSR is the JIT feature that lets a long-running method switch from initial code to optimized code while the method is still executing.
@@ -213,12 +210,6 @@ Assembly version conflicts now include details about the already-loaded assembly
 ```text
 A different copy of assembly 'LibA' is already loaded. Loaded assembly: 'LibA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' from 'C:\repos\helloworld\bin\Debug\net10.0\LibA.dll'
 ```
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - cDAC DacDbi API parity: many debugger-contract methods landed this preview. Kept as bug-fix/diagnostics bullets because each individual API primarily serves debugger implementation parity rather than a broad developer-facing feature.
-  - WASM R2R and generated-callhelper infrastructure: important CoreCLR-on-WASM enablement, but most changes are build/linking internals without an independently usable behavior change.
-  - Additional JIT assertion, liveness, SVE unknown-size-frame, and APX fixes: valuable codegen work, but most entries are narrow correctness fixes without benchmark data or broad behavioral impact.
--->
 
 ## Bug fixes
 

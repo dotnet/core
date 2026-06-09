@@ -49,14 +49,6 @@ MSBuild now recognizes Haiku as a Unix-like operating system ([dotnet/msbuild #1
 
 Thank you [@trungnt2910](https://github.com/trungnt2910) for this contribution!
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Terminal Logger task input logging: fixed a major performance trap but fits better as a bug fix because it restores expected logger overhead instead of adding a new user workflow.
-  - SkipNonexistentTargets through metaprojects: important correctness fix for specialized project-reference dispatch, but not broad enough for a feature section.
-  - RestoreTask transient TaskHost routing: important server and multithreaded-mode reliability fix, but it is an implementation detail of task isolation.
-  - UsingTask Runtime="NET" default architecture: prevents x86 .NET Framework hosts from looking for an unshipped x86 .NET task host, but it is a narrow compatibility fix.
-  - Haiku support: included despite narrow platform scope because it is a clear platform enablement change and a community contribution.
--->
-
 ## Bug fixes
 
 - **Build engine**

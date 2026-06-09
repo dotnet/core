@@ -65,13 +65,6 @@ let error = ParseFailed(12, "Unexpected token")
 // that preserve both the line number and message fields.
 ```
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Parser grammar rebuild automation and emitted-IL baseline splitting: internal build/test infrastructure, not user-visible compiler behavior.
-  - Agentic workflow, PR tooling, WIF, SWIX, and dependency-update PRs: repository infrastructure or dependency flow only.
-  - Unfinished enum-pattern parser recovery and completion: useful editor-service work, but out of scope for these compiler/language/FSharp.Core/FSI notes.
-  - FSharp.Core documentation-only fixes for Array.exists2 and Async.StartChild: documentation corrections, not runtime or API behavior changes.
--->
-
 ## Bug fixes and other improvements
 
 ### Compiler correctness

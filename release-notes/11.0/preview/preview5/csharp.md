@@ -105,13 +105,6 @@ The pointer declaration and address-of expression are allowed outside the `unsaf
 
 The stack allocation rule is now opt-in: a `stackalloc` converted to `Span<T>` or `ReadOnlySpan<T>` inside a `[SkipLocalsInit]` member only requires an `unsafe` context when the project opts in to the updated memory-safety rules ([dotnet/roslyn #83639](https://github.com/dotnet/roslyn/pull/83639)).
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Non-virtual static interface members without default interface method runtime support: implementation detail needed by union member providers, not a standalone feature for most readers.
-  - Compiler feature-status tracking PRs for compound assignment in initializers and typeless receivers: documentation/status updates only; no shipped compiler behavior to describe.
-  - Additional Razor, LSP, and IDE changes: outside the C# language/compiler product boundary for these notes.
-  - Caching compiler follow-up PRs: Preview 4 already documented the opt-in VBCSCompiler cache; Preview 5 changes were operational follow-up.
--->
-
 ## Community contributors
 
 Thank you contributors! ❤️

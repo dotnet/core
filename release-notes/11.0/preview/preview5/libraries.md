@@ -20,9 +20,6 @@
 .NET Libraries updates in .NET 11:
 
 - [What's new in .NET 11 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/libraries)
-
-<!-- Verified public APIs with dotnet-inspect against Microsoft.NETCore.App.Ref@11.0.0-preview.5.26302.115 from the dnceng dotnet11 feed. -->
-
 ## System.Text.Json supports JSON Lines serialization
 
 `System.Text.Json` can now serialize an `IAsyncEnumerable<T>` as [JSON Lines](https://jsonlines.org/) by using the new `JsonSerializer.SerializeAsyncEnumerable` overloads with `topLevelValues: true` ([dotnet/runtime #127567](https://github.com/dotnet/runtime/pull/127567)). The same method also writes a root-level JSON array by default, matching the existing `DeserializeAsyncEnumerable` shape. JSON Lines output uses `\n` between values and ignores `WriteIndented`, so each item stays on one line for log streams, message feeds, and batch processing.
@@ -303,12 +300,6 @@ Validation runs the first time `IOptions<TOptions>.Value` is requested and throw
 
 - Custom `Type` subclasses must override `Type.GetNullableUnderlyingType()` if they support nullable type inspection. The base implementation throws `NotSupportedException` ([dotnet/runtime #126905](https://github.com/dotnet/runtime/pull/126905)).
 - The pipe used by the `System.IO.Pipes` shared server has stricter permissions ([dotnet/runtime #127239](https://github.com/dotnet/runtime/pull/127239)). Applications that depend on out-of-process access to that implementation detail should review their assumptions.
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - System.Numerics and System.Runtime unsafe-code reductions: useful implementation cleanup, but no new user-facing API or behavior beyond internal safety hardening.
-  - System.Reflection.Metadata cleanup and BlobBuilder fixes: important for tooling correctness, but too narrow for a feature section.
-  - QUIC allocation reductions and LINQ Min/Max shuffle optimizations: performance work without benchmark data in the PR body to support a release-note claim.
--->
 
 ## Bug fixes
 

@@ -60,13 +60,6 @@ Projects that treat warnings as errors should update affected packages or contac
 
 Thank you [@sbomer](https://github.com/sbomer) for this contribution!
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - NuGet.Protocol System.Text.Json and nullability work: many PRs migrated converters and nullable annotations. This is library maintenance, not a NuGet client feature most SDK users can try.
-  - NuGet.Protocol JObject removals: breaking API cleanup for protocol extensibility. Important for affected extensions, but too narrow for the client release notes.
-  - Package Manager UI refresh and InfiniteScrollList fixes: Visual Studio-specific UI work, outside the requested restore, pack, push, central package management, and package validation scope.
-  - Telemetry, localization, CI, benchmark stubs, and test migrations: internal infrastructure or test-only changes.
--->
-
 ## Bug fixes
 
 - **NuGet Audit**
