@@ -67,20 +67,6 @@ Union rules in this preview:
 
 The compiler also recognizes hand-authored union types marked with `System.Runtime.CompilerServices.UnionAttribute`, including union members supplied by a nested `IUnionMembers` provider interface ([dotnet/roslyn #83048](https://github.com/dotnet/roslyn/pull/83048), [dotnet/roslyn #83208](https://github.com/dotnet/roslyn/pull/83208)).
 
-In this preview, projects that declare unions need the compiler support types available to the compilation:
-
-```csharp
-namespace System.Runtime.CompilerServices;
-
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false)]
-public sealed class UnionAttribute : Attribute { }
-
-public interface IUnion
-{
-    object? Value { get; }
-}
-```
-
 ## Unsafe Evolution
 
 > This is a preview feature for .NET 11.
