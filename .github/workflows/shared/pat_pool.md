@@ -3,6 +3,7 @@ description: Agentic workflow import to integrate the Copilot PAT Pool
 
 jobs:
   pat_pool:
+    environment: copilot-pat-pool
     needs: [pre_activation]
     runs-on: ubuntu-slim
     outputs:
