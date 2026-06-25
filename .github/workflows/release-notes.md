@@ -20,8 +20,8 @@ safe-outputs:
     draft: true
     max: 5
   push-to-pull-request-branch:
-    title-prefix: "[release-notes] "
-    labels: [area-release-notes, automation]
+    required-title-prefix: "[release-notes] "
+    required-labels: [area-release-notes, automation]
     max: 5
   add-comment:
     max: 20
@@ -47,21 +47,36 @@ on:
         type: string
 
 # ###############################################################
-# Override COPILOT_GITHUB_TOKEN with a random PAT from the pool.
-# Ensure this agentic jobs run from the isolated
-# `copilot-pat-pool` environment where the PAT pool is available.
-# This stop-gap will be removed when org billing is available.
-# See: .github/workflows/shared/pat_pool.README.md for more info.
+# Select a PAT from the pool and override COPILOT_GITHUB_TOKEN.
+# Run agentic jobs in an isolated `copilot-pat-pool` environment.
+#
+# When org-level billing is available, this will be removed.
+# See `shared/pat_pool.README.md` for more information.
 # ###############################################################
 imports:
-  - shared/pat_pool.md
+  - uses: shared/pat_pool.md
+    with:
+      environment: copilot-pat-pool
 
 environment: copilot-pat-pool
 
 engine:
   id: copilot
   env:
-    COPILOT_GITHUB_TOKEN: ${{ case(needs.pat_pool.outputs.pat_number == '0', secrets.COPILOT_PAT_0, needs.pat_pool.outputs.pat_number == '1', secrets.COPILOT_PAT_1, needs.pat_pool.outputs.pat_number == '2', secrets.COPILOT_PAT_2, needs.pat_pool.outputs.pat_number == '3', secrets.COPILOT_PAT_3, needs.pat_pool.outputs.pat_number == '4', secrets.COPILOT_PAT_4, needs.pat_pool.outputs.pat_number == '5', secrets.COPILOT_PAT_5, needs.pat_pool.outputs.pat_number == '6', secrets.COPILOT_PAT_6, needs.pat_pool.outputs.pat_number == '7', secrets.COPILOT_PAT_7, needs.pat_pool.outputs.pat_number == '8', secrets.COPILOT_PAT_8, needs.pat_pool.outputs.pat_number == '9', secrets.COPILOT_PAT_9, 'NO COPILOT PAT AVAILABLE') }}
+     COPILOT_GITHUB_TOKEN: |
+      ${{ case(
+        needs.pat_pool.outputs.pat_number == '0', secrets.COPILOT_PAT_0,
+        needs.pat_pool.outputs.pat_number == '1', secrets.COPILOT_PAT_1,
+        needs.pat_pool.outputs.pat_number == '2', secrets.COPILOT_PAT_2,
+        needs.pat_pool.outputs.pat_number == '3', secrets.COPILOT_PAT_3,
+        needs.pat_pool.outputs.pat_number == '4', secrets.COPILOT_PAT_4,
+        needs.pat_pool.outputs.pat_number == '5', secrets.COPILOT_PAT_5,
+        needs.pat_pool.outputs.pat_number == '6', secrets.COPILOT_PAT_6,
+        needs.pat_pool.outputs.pat_number == '7', secrets.COPILOT_PAT_7,
+        needs.pat_pool.outputs.pat_number == '8', secrets.COPILOT_PAT_8,
+        needs.pat_pool.outputs.pat_number == '9', secrets.COPILOT_PAT_9,
+        'NO COPILOT PAT AVAILABLE')
+      }}
 ---
 
 # Write Release Notes
@@ -126,8 +141,8 @@ The shipped preview number is the **floor**. Everything above it may need work.
 #### b. What's building on main (VMR)
 
 ```bash
-git clone --filter=blob:none https://github.com/dotnet/dotnet /tmp/dotnet
-git -C /tmp/dotnet show main:eng/Versions.props | grep -E 'PreReleaseVersionLabel|PreReleaseVersionIteration'
+git clone --filter=blob:none https://github.com/dotnet/dotnet /tmp/gh-aw/agent/dotnet
+git -C /tmp/gh-aw/agent/dotnet show main:eng/Versions.props | grep -E 'PreReleaseVersionLabel|PreReleaseVersionIteration'
 ```
 
 This tells you the milestone `main` is building (e.g., iteration `5`).
@@ -136,10 +151,10 @@ This tells you the milestone `main` is building (e.g., iteration `5`).
 
 ```bash
 # Tags — each represents a shipped or finalized milestone
-git -C /tmp/dotnet tag -l 'v11.0.0-preview.*' --sort=-v:refname
+git -C /tmp/gh-aw/agent/dotnet tag -l 'v11.0.0-preview.*' --sort=-v:refname
 
 # Release branches — each represents an in-flight milestone being stabilized
-git -C /tmp/dotnet branch -r -l 'origin/release/11.0.1xx-preview*'
+git -C /tmp/gh-aw/agent/dotnet branch -r -l 'origin/release/11.0.1xx-preview*'
 ```
 
 #### d. Build the milestone list
@@ -175,7 +190,7 @@ Always regenerate — the content may have changed since the previous run.
 
 ```bash
 mkdir -p release-notes/11.0/preview/preview4
-release-notes generate changes /tmp/dotnet \
+release-notes generate changes /tmp/gh-aw/agent/dotnet \
   --base v11.0.0-preview.3.26210.100 \
   --head main \
   --version "11.0.0-preview.4" \
