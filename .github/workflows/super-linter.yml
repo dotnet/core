@@ -43,7 +43,7 @@ jobs:
           VALIDATE_JSON_PRETTIER: false
           # Exclude GitHub skills and generated workflows
           # yamllint disable rule:line-length
-          FILTER_REGEX_EXCLUDE: (.github/skills/.*|.github/workflows/copilot-setup-steps\.yml|.github/workflows/.*\.lock\.yml)
+          FILTER_REGEX_EXCLUDE: (.github/agents/.*|.github/skills/.*|.github/workflows/copilot-setup-steps\.yml|.github/workflows/agentics-maintenance\.yml|.github/workflows/.*\.lock\.yml)
           # yamllint enable rule:line-length
           DEFAULT_BRANCH: ${{ github.base_ref || 'main' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
