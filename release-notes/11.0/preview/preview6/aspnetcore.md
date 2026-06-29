@@ -20,7 +20,7 @@ ASP.NET Core updates in .NET 11:
 
 Minimal API validation now supports asynchronous validators end-to-end ([dotnet/aspnetcore #66487](https://github.com/dotnet/aspnetcore/pull/66487), [dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Preview 5 shipped the building blocks for asynchronous form validation in Blazor. Preview 6 adds the new asynchronous `DataAnnotations` APIs in the base libraries — `AsyncValidationAttribute`, `IAsyncValidatableObject`, and `Validator.ValidateObjectAsync` — and `Microsoft.Extensions.Validation` now runs them when an endpoint validates a request.
 
-This lets a validation rule do real work, such as a database lookup or a remote API call, without blocking a thread. A model implements `IAsyncValidatableObject` and returns validation results as an `IAsyncEnumerable<ValidationResult>`:
+This lets a validation rule do real work, such as a database lookup or a remote API call, without blocking a thread. A model implements `IAsyncValidatableObject` and returns validation results as an `IAsyncEnumerable<ValidationResult>`. Because `IAsyncValidatableObject` extends `IValidatableObject`, also implement the synchronous `Validate` method (return no results when all the validation is asynchronous):
 
 ```csharp
 using System.ComponentModel.DataAnnotations;
@@ -32,6 +32,9 @@ public class ReservationRequest : IAsyncValidatableObject
     public string Email { get; set; } = "";
 
     public DateOnly Date { get; set; }
+
+    // IValidatableObject (synchronous) — no synchronous rules here.
+    public IEnumerable<ValidationResult> Validate(ValidationContext context) => [];
 
     public async IAsyncEnumerable<ValidationResult> ValidateAsync(
         ValidationContext context,
@@ -56,7 +59,7 @@ app.MapPost("/reservations", (ReservationRequest request) =>
     Results.Ok(request));
 ```
 
-Validators run concurrently where possible: asynchronous attributes on the same member start together, collection items validate in parallel, and the framework preserves the existing ordering between member, type, and `IValidatableObject` validation. For attribute-based rules, derive from `AsyncValidationAttribute` and override `GetValidationResultAsync`. Thank you [@Youssef1313](https://github.com/Youssef1313) for the implementation work on this feature.
+Validators run concurrently where possible: asynchronous attributes on the same member start together, collection items validate in parallel, and the framework preserves the existing ordering between member, type, and `IValidatableObject` validation. For attribute-based rules, derive from `AsyncValidationAttribute` and override its `IsValidAsync` method. Thank you [@Youssef1313](https://github.com/Youssef1313) for the implementation work on this feature.
 
 ## Blazor Virtualize can scroll to an item
 
@@ -74,7 +77,7 @@ The `Virtualize<TItem>` component can now open at a specific item and scroll to 
 
 @code {
     private Virtualize<Product> list = default!;
-    private IReadOnlyList<Product> products = ProductCatalog.All;
+    private List<Product> products = ProductCatalog.All;
 
     private async Task GoToTop() => await list.ScrollToIndexAsync(0);
 }
@@ -90,19 +93,24 @@ This builds on the Preview 5 support for declaring multiple response types per s
 
 ## Short-circuit endpoints with an attribute
 
-The new `[ShortCircuit]` attribute marks an endpoint to run immediately after routing, skipping the rest of the middleware pipeline ([dotnet/aspnetcore #67249](https://github.com/dotnet/aspnetcore/pull/67249)). This is the attribute form of the existing `ShortCircuit()` endpoint convention, so it can be applied directly to MVC controllers and actions. Short-circuiting is useful for endpoints that don't need authentication, CORS, or other middleware — for example a health check or a `robots.txt` response — and it avoids the cost of running that middleware. An optional status code sets the response status when the endpoint is short-circuited. Thank you [@Porozhniakov](https://github.com/Porozhniakov) for contributing this feature!
+The new `[ShortCircuit]` attribute marks an endpoint to run immediately after routing, skipping the rest of the middleware pipeline ([dotnet/aspnetcore #67249](https://github.com/dotnet/aspnetcore/pull/67249)). This is the attribute form of the existing `ShortCircuit()` endpoint convention, so it can be applied directly to MVC controllers and actions. Short-circuiting is useful for endpoints that don't need authentication, CORS, or other middleware — for example a health check or a `robots.txt` response — and it avoids the cost of running that middleware. The endpoint still runs and produces its response; pass an optional status code, such as `[ShortCircuit(404)]`, to set the response status code. Thank you [@Porozhniakov](https://github.com/Porozhniakov) for contributing this feature!
 
 ```csharp
-[ShortCircuit(404)]
+[ApiController]
 [Route("robots.txt")]
-public class RobotsController : Controller
+[ShortCircuit]
+public class RobotsController : ControllerBase
 {
     [HttpGet]
     public IActionResult Get() => Content("User-agent: *\nDisallow:", "text/plain");
 }
 ```
 
-The same attribute works on minimal API endpoints, and the existing `ShortCircuit()` convention continues to work unchanged.
+The same attribute works on minimal API endpoints, and the existing `ShortCircuit()` convention continues to work unchanged:
+
+```csharp
+app.MapGet("/health", [ShortCircuit] () => "Healthy");
+```
 
 ## SignalR refreshes authentication on long-lived connections
 
