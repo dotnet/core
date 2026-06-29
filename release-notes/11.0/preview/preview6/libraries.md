@@ -46,7 +46,7 @@ await httpContent.CopyToAsync(request);
 
 `System.ComponentModel.DataAnnotations` now supports asynchronous validation ([dotnet/runtime #128656](https://github.com/dotnet/runtime/pull/128656)). A validation rule that needs to do I/O — a database lookup, a remote API call — can now run without blocking a thread. There are three new ways to express an async rule:
 
-- Derive from `AsyncValidationAttribute` and override `GetValidationResultAsync`.
+- Derive from `AsyncValidationAttribute` and override its `IsValidAsync` method.
 - Implement `IAsyncValidatableObject` on the model.
 - Call the new `Validator.ValidateObjectAsync`, `TryValidateObjectAsync`, `ValidatePropertyAsync`, and `ValidateValueAsync` methods.
 
@@ -55,7 +55,10 @@ using System.ComponentModel.DataAnnotations;
 
 public sealed class UniqueUserNameAttribute : AsyncValidationAttribute
 {
-    public override async Task<ValidationResult?> GetValidationResultAsync(
+    protected override ValidationResult? IsValid(object? value, ValidationContext context)
+        => ValidationResult.Success;
+
+    protected override async Task<ValidationResult?> IsValidAsync(
         object? value, ValidationContext context, CancellationToken cancellationToken)
     {
         var users = context.GetRequiredService<IUserStore>();
