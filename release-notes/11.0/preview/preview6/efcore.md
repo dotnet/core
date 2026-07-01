@@ -226,10 +226,10 @@ Thank you [@m-x-shokhzod](https://github.com/m-x-shokhzod) for this contribution
 ## SQLite now bundles encryption support
 
 `Microsoft.Data.Sqlite` and `Microsoft.EntityFrameworkCore.Sqlite` now ship with
-the [SQLite3 Multiple Ciphers](https://github.com/niclas-timm/sqlite3mc) bundle
+the [SQLite3 Multiple Ciphers bundle](https://github.com/utelle/SQLite3MultipleCiphers)
 instead of `e_sqlite3`
 ([dotnet/efcore #38402](https://github.com/dotnet/efcore/pull/38402)). This gives
-applications built-in SQLite encryption without an additional package reference.
+applications built-in SQLite encryption via an actively maintained SQLite build.
 
 <!-- Cut candidates:
 - #38411: IManyToManyLoaderFactory injectable (internal plumbing, NativeAOT)
