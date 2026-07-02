@@ -38,7 +38,7 @@ var result = await context.Customers
 ```sql
 SELECT [c].[Id], [c].[Name], [o].[Id], [o].[CustomerId], [o].[Total]
 FROM [Customers] AS [c]
-FULL JOIN [Orders] AS [o] ON [c].[Id] = [o].[CustomerId]
+FULL OUTER JOIN [Orders] AS [o] ON [c].[Id] = [o].[CustomerId]
 ```
 
 ## LINQ query translation improvements
@@ -73,7 +73,7 @@ produces shorter SQL and can improve query-plan efficiency.
 
 Thank you [@ranma42](https://github.com/ranma42) for this contribution!
 
-### Translate List&lt;T&gt;.Exists to SQL
+### Translate `List<T>.Exists` to SQL
 
 `List<T>.Exists(predicate)` is now rewritten to `Queryable.Any(predicate)` and
 translated to an `EXISTS` subquery
