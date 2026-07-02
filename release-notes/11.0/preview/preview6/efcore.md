@@ -223,8 +223,8 @@ Thank you [@m-x-shokhzod](https://github.com/m-x-shokhzod) for this contribution
 
 ## Microsoft.Data.Sqlite now depends on SQLite3MC.PCLRaw.bundle
 
-`Microsoft.Data.Sqlite` now depends on the
-[SQLite3 Multiple Ciphers bundle](https://github.com/utelle/SQLite3MultipleCiphers)
+`Microsoft.Data.Sqlite` now depends on `SQLite3MC.PCLRaw.bundle`, the
+[SQLite3 Multiple Ciphers bundle](https://github.com/utelle/SQLite3MultipleCiphers),
 instead of `e_sqlite3`
 ([dotnet/efcore #38402](https://github.com/dotnet/efcore/pull/38402)). This gives
 applications built-in SQLite encryption via an actively maintained SQLite build.
