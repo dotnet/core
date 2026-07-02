@@ -31,7 +31,7 @@ Use `release-notes/RunApiDiff.ps1`. See [release-notes/RunApiDiff.md](../../../r
 - **GA** or no qualifier -> omit the `PrereleaseLabel` parameter for `RunApiDiff.ps1`; if a downstream api-diff release label is needed, use `ga`
 - **Preview N** / **previewN** -> `-PrereleaseLabel preview.N` (for example, `preview.4`, not `preview4`)
 - **RC N** / **rcN** -> `-PrereleaseLabel rc.N`
-- **Other prerelease labels** (Alpha N, Beta N, ...) -> `-PrereleaseLabel <label>.N` (for example, `alpha.1`, `beta.2`); `RunApiDiff.ps1` accepts any `<label>.N`, treating everything except RC and GA as a plain semantic-version label
+- **Alpha N** / **Beta N** -> `-PrereleaseLabel <label>.N` (for example, `alpha.1`, `beta.2`); `RunApiDiff.ps1` accepts only the `alpha`, `beta`, `preview`, and `rc` prerelease labels
 - **netX.Y-previewN** (TFM format) -> `-MajorMinor X.Y -PrereleaseLabel preview.N`
 - Full NuGet version strings -> use `-PreviousVersion` / `-CurrentVersion` directly
 - The "previous" version is always the older version; "current" is the newer one

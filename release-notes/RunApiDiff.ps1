@@ -40,7 +40,7 @@ Param (
     ,
     [Parameter(Mandatory = $false)]
     [AllowEmptyString()]
-    [ValidatePattern("^([A-Za-z]+\.\d+)?$")]
+    [ValidatePattern("^((?i:alpha|beta|preview|rc)\.\d+)?$")]
     [string]
     $PreviousPrereleaseLabel # "preview.7", "rc.1", etc. Omit for GA.
     ,
@@ -51,7 +51,7 @@ Param (
     ,
     [Parameter(Mandatory = $false)]
     [AllowEmptyString()]
-    [ValidatePattern("^([A-Za-z]+\.\d+)?$")]
+    [ValidatePattern("^((?i:alpha|beta|preview|rc)\.\d+)?$")]
     [string]
     $CurrentPrereleaseLabel # "preview.7", "rc.1", etc. Omit for GA.
     ,
@@ -112,23 +112,27 @@ Param (
 
 $DotNetPublicFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json"
 
-## Parse a NuGet version string into MajorMinor and PrereleaseLabel components
+## Parse a NuGet version string into MajorMinor and PrereleaseLabel components. Only the
+## supported prerelease labels (alpha, beta, preview, rc) parse; anything else is treated as
+## unparseable, so feed callers that wrap this in try/catch skip unrecognized versions.
 Function ParseVersionString {
     Param (
         [string] $version,
         [string] $label
     )
     $result = @{ MajorMinor = ""; PrereleaseLabel = "" }
-    If ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+-([A-Za-z]+\.[0-9]+)") {
+    If ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+-((?i:alpha|beta|preview|rc)\.[0-9]+)") {
         $result.MajorMinor = $Matches[1]
-        $result.PrereleaseLabel = $Matches[2]
+        # Normalize the label casing (e.g. "RC.1" -> "rc.1") so a mixed-case feed or user
+        # input yields consistent comparisons, paths, and folder names downstream.
+        $result.PrereleaseLabel = $Matches[2].ToLowerInvariant()
     }
     ElseIf ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+$") {
         $result.MajorMinor = $Matches[1]
         $result.PrereleaseLabel = ""
     }
     Else {
-        Write-Error "Could not parse ${label}Version '$version'. Expected format: 'X.Y.Z' or 'X.Y.Z-<label>.N.build' (e.g. '10.0.0-preview.7.25380.108', '10.0.0-rc.1.25451.107', '11.0.0-alpha.1.26058.6')." -ErrorAction Stop
+        Write-Error "Could not parse ${label}Version '$version'. Expected format: 'X.Y.Z' or 'X.Y.Z-<label>.N' (where <label> is one of alpha, beta, preview, rc) optionally followed by build metadata (e.g. '10.0.0-preview.7.25380.108', '10.0.0-rc.1.25451.107', '11.0.0-alpha.1.26058.6')." -ErrorAction Stop
     }
     Return $result
 }
@@ -142,33 +146,38 @@ Function ParsePrereleaseLabel {
     If ([System.String]::IsNullOrWhiteSpace($label)) {
         Return @{ ReleaseKind = "ga"; PreviewRCNumber = "0" }
     }
-    If ($label -match "^([A-Za-z]+)\.(\d+)$") {
+    If ($label -match "^(alpha|beta|preview|rc)\.(\d+)$") {
         Return @{ ReleaseKind = $Matches[1].ToLowerInvariant(); PreviewRCNumber = $Matches[2] }
     }
-    Write-Error "Invalid prerelease label '$label'. Expected format: '<label>.N' (e.g. 'alpha.1', 'preview.7', 'rc.1')." -ErrorAction Stop
+    Write-Error "Invalid prerelease label '$label'. Expected '<label>.N' where <label> is one of alpha, beta, preview, rc (e.g. 'alpha.1', 'preview.7', 'rc.1')." -ErrorAction Stop
 }
 
 ## Get a numeric sort weight for a release milestone. Within a major, milestones sort by
 ## SemVer, which for .NET's prerelease labels is alphabetical (alpha < beta < preview <
-## rc), then by number; GA (stable) is newest. Milestone numbers are assumed < 100, so
-## each label occupies a distinct 100-wide band and the result stays < 1000 (callers add
-## major * 1000 to order across majors).
+## rc), then by number; GA (stable) is newest. Milestone numbers must be < 100 (enforced
+## below), so each label occupies a distinct 100-wide band and the result stays < 1000
+## (callers add major * 1000 to order across majors).
 Function GetMilestoneSortWeight {
     Param (
         [string] $releaseKind,
         [int] $number
     )
+    If ($number -lt 0 -or $number -ge 100) {
+        Write-Error "Milestone number '$number' is out of range for '$releaseKind'; expected 0-99 so each prerelease label occupies a distinct 100-wide sort band." -ErrorAction Stop
+    }
     Switch ($releaseKind) {
         "alpha"   { Return 100 + $number }
         "beta"    { Return 200 + $number }
         "preview" { Return 300 + $number }
         "rc"      { Return 400 + $number }
         "ga"      { Return 500 }
-        default   { Return $number } # unknown label: order by number, below the named milestones
+        default   { Write-Error "Unknown prerelease label kind '$releaseKind'; expected one of alpha, beta, preview, rc (or ga)." -ErrorAction Stop }
     }
 }
 
-## Parse an api-diff folder name (e.g., "preview1", "rc2", "alpha1", "ga") into MajorMinor and PrereleaseLabel
+## Parse an api-diff folder name (e.g., "preview1", "rc2", "alpha1", "ga") into MajorMinor and
+## PrereleaseLabel. An unrecognized label returns $null so unexpected folders are skipped
+## rather than being treated as a milestone (which would abort the scan downstream).
 Function ParseApiDiffFolderName {
     Param (
         [string] $majorMinor,
@@ -177,8 +186,10 @@ Function ParseApiDiffFolderName {
     If ($folderName -eq "ga") {
         Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "" }
     }
-    If ($folderName -match "^([A-Za-z]+)(\d+)$") {
-        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "$($Matches[1]).$($Matches[2])" }
+    If ($folderName -match "^((?i:alpha|beta|preview|rc))(\d+)$") {
+        # Normalize the label casing (e.g. folder "RC1" -> "rc.1") so it matches the
+        # canonical lower-case labels used by ParseVersionString and feed probing.
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "$($Matches[1].ToLowerInvariant()).$($Matches[2])" }
     }
     Return $null
 }
@@ -343,6 +354,11 @@ Function DiscoverVersionFromFeed {
             Major   = [int]$mm[0]
             Minor   = [int]$mm[1]
             Weight  = $weight
+            # Include the original string so exact build numbers participate in the sort
+            # after Major, Minor, Weight. System.Version cannot parse Semantic Version 2.0
+            # labels with multiple dots ("-preview.1.25050.1"), but padding the string
+            # ensures "100" sorts after "99".
+            SortableVersion = [regex]::Replace($v, "\d+", { $args[0].Value.PadLeft(10, '0') })
         }
     }
 
@@ -350,7 +366,7 @@ Function DiscoverVersionFromFeed {
         Write-Error "No parseable versions of $refPackageName found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
     }
 
-    $latest = $candidates | Sort-Object -Property Major, Minor, Weight -Descending | Select-Object -First 1
+    $latest = $candidates | Sort-Object -Property Major, Minor, Weight, SortableVersion -Descending | Select-Object -First 1
     $latestVersion = $latest.Version
     Write-Color cyan "Latest $refPackageName version on feed: $latestVersion"
 
@@ -786,7 +802,7 @@ Function DownloadPackage {
 
             try {
                 $versionsResult = Invoke-RestMethod -Uri $versionsUrl
-                $matchingVersions = @($versionsResult.versions | Where-Object { $_ -Like $searchTerm } | Sort-Object -Descending)
+                $matchingVersions = @($versionsResult.versions | Where-Object { $_ -Like $searchTerm } | Sort-Object { [regex]::Replace($_, "\d+", { $args[0].Value.PadLeft(10, '0') }) } -Descending)
 
                 If ($matchingVersions.Count -gt 0) {
                     $version = $matchingVersions[0]
@@ -827,7 +843,7 @@ Function DownloadPackage {
             }
 
             # Filter versions matching search term
-            $matchingVersions = @($package.versions | Where-Object -Property version -Like $searchTerm | Sort-Object version -Descending)
+            $matchingVersions = @($package.versions | Where-Object -Property version -Like $searchTerm | Sort-Object { [regex]::Replace($_.version, "\d+", { $args[0].Value.PadLeft(10, '0') }) } -Descending)
 
             If ($matchingVersions.Count -eq 0) {
                 Write-Error "No NuGet packages found with search term '$searchTerm'." -ErrorAction Stop
