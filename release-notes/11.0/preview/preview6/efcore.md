@@ -4,13 +4,12 @@
 
 .NET 11 Preview 6 includes new EF Core features and improvements:
 
-- [FULL OUTER JOIN support in LINQ](#full-outer-join-support-in-linq)
 - [LINQ query translation improvements](#linq-query-translation-improvements)
 - [Keys and indexes traverse complex-type properties](#keys-and-indexes-traverse-complex-type-properties)
+- [Unconstrained foreign key relationships](#unconstrained-foreign-key-relationships)
 - [Azure Cosmos DB provider improvements](#azure-cosmos-db-provider-improvements)
-- [SQL Server JSON indexes](#sql-server-json-indexes)
 - [Migrations improvements](#migrations-improvements)
-- [SQLite now bundles encryption support](#sqlite-now-bundles-encryption-support)
+- [`Microsoft.Data.Sqlite` now depends on `SQLite3MC.PCLRaw.bundle`](#microsoftdatasqlite-now-depends-on-sqlite3mcpclrawbundle)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -18,7 +17,9 @@ All EF Core updates in .NET 11:
 
 - [What's new in EF Core](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew)
 
-## FULL OUTER JOIN support in LINQ
+## LINQ query translation improvements
+
+### FULL OUTER JOIN support in LINQ
 
 EF Core translates the new `Queryable.FullJoin` LINQ operator to SQL `FULL OUTER JOIN`
 ([dotnet/efcore #38340](https://github.com/dotnet/efcore/pull/38340)). This mirrors
@@ -40,8 +41,6 @@ SELECT [c].[Id], [c].[Name], [o].[Id], [o].[CustomerId], [o].[Total]
 FROM [Customers] AS [c]
 FULL OUTER JOIN [Orders] AS [o] ON [c].[Id] = [o].[CustomerId]
 ```
-
-## LINQ query translation improvements
 
 ### Translate to NULLIF
 
@@ -134,15 +133,14 @@ Properties used in a key or index are automatically marked as required, along
 with the complex properties on the path. Validation errors are raised for
 collection complex properties or optional complex properties in keys.
 
-## Azure Cosmos DB provider improvements
+### SQL Server JSON indexes
 
-### JSON, composite, include, and exclude indexes
+Indexes can now be defined on properties inside JSON-mapped columns on SQL
+Server ([dotnet/efcore #38302](https://github.com/dotnet/efcore/pull/38302)).
+This enables query performance tuning for JSON document properties without
+leaving the EF Core model builder.
 
-The Cosmos provider now supports configuring JSON indexes, composite indexes,
-include/exclude paths, and full-text indexes through the model builder
-([dotnet/efcore #38360](https://github.com/dotnet/efcore/pull/38360)).
-
-### Unconstrained foreign key relationships
+## Unconstrained foreign key relationships
 
 A new `IsConstrained(bool)` API on foreign keys marks relationships that are
 not backed by a database constraint
@@ -159,6 +157,14 @@ modelBuilder.Entity<Order>()
     .IsConstrained(false);
 ```
 
+## Azure Cosmos DB provider improvements
+
+### JSON, composite, include, and exclude indexes
+
+The Cosmos provider now supports configuring JSON indexes, composite indexes,
+include/exclude paths, and full-text indexes through the model builder
+([dotnet/efcore #38360](https://github.com/dotnet/efcore/pull/38360)).
+
 ### Improved cast and convert support
 
 The Cosmos provider now properly handles `Convert` operations in LINQ
@@ -168,13 +174,6 @@ types that previously caused client evaluation
 
 Thank you [@ChrisJollyAU](https://github.com/ChrisJollyAU) for this
 contribution!
-
-## SQL Server JSON indexes
-
-Indexes can now be defined on properties inside JSON-mapped columns on SQL
-Server ([dotnet/efcore #38302](https://github.com/dotnet/efcore/pull/38302)).
-This enables query performance tuning for JSON document properties without
-leaving the EF Core model builder.
 
 ## Migrations improvements
 
@@ -223,10 +222,10 @@ flag, making them visible in `SELECT *` results
 
 Thank you [@m-x-shokhzod](https://github.com/m-x-shokhzod) for this contribution!
 
-## SQLite now bundles encryption support
+## `Microsoft.Data.Sqlite` now depends on `SQLite3MC.PCLRaw.bundle`
 
-`Microsoft.Data.Sqlite` and `Microsoft.EntityFrameworkCore.Sqlite` now ship with
-the [SQLite3 Multiple Ciphers bundle](https://github.com/utelle/SQLite3MultipleCiphers)
+`Microsoft.Data.Sqlite` now depends on the
+[SQLite3 Multiple Ciphers bundle](https://github.com/utelle/SQLite3MultipleCiphers)
 instead of `e_sqlite3`
 ([dotnet/efcore #38402](https://github.com/dotnet/efcore/pull/38402)). This gives
 applications built-in SQLite encryption via an actively maintained SQLite build.
