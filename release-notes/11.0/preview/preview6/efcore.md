@@ -9,7 +9,6 @@
 - [Unconstrained foreign key relationships](#unconstrained-foreign-key-relationships)
 - [Azure Cosmos DB provider improvements](#azure-cosmos-db-provider-improvements)
 - [Migrations improvements](#migrations-improvements)
-- [`Microsoft.Data.Sqlite` now depends on `SQLite3MC.PCLRaw.bundle`](#microsoftdatasqlite-now-depends-on-sqlite3mcpclrawbundle)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -222,7 +221,7 @@ flag, making them visible in `SELECT *` results
 
 Thank you [@m-x-shokhzod](https://github.com/m-x-shokhzod) for this contribution!
 
-## `Microsoft.Data.Sqlite` now depends on `SQLite3MC.PCLRaw.bundle`
+## Microsoft.Data.Sqlite now depends on SQLite3MC.PCLRaw.bundle
 
 `Microsoft.Data.Sqlite` now depends on the
 [SQLite3 Multiple Ciphers bundle](https://github.com/utelle/SQLite3MultipleCiphers)
