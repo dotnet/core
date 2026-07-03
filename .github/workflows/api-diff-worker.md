@@ -69,7 +69,19 @@ safe-outputs:
     required-labels: [automation, api-diff]
   noop:
     report-as-issue: false
+features:
+  # Let a maintainer promote an external contributor's comment to "approved" by adding an
+  # endorsement reaction (👍/❤️), so the agent then sees and can act on it. Enabling this
+  # auto-enables the CLI proxy that attributes the reacting user.
+  integrity-reactions: true
 tools:
+  github:
+    # Only content at "approved" integrity or higher reaches the agent. Write-access
+    # authors (OWNER/MEMBER/COLLABORATOR) are approved; feedback from anyone else is
+    # filtered out before the agent sees it unless a maintainer endorses it (see
+    # integrity-reactions). This is the single source of truth for feedback trust --
+    # the worker does no host-side trust handling of its own.
+    min-integrity: approved
   # Full bash: the agent commits the generated reports, runs markdownlint, and fetches /
   # checks out the maintained PR branch. The AWF sandbox + firewall (network.allowed),
   # the read-only agent permissions, and the safe-outputs allow-lists are the boundaries.
@@ -207,8 +219,8 @@ engine:
 You maintain a **public API diff report** for one in-flight .NET release diff in this
 repository (dotnet/core). The report is factual: the `api-diff` skill's `RunApiDiff.ps1`
 already generated it during setup from **real published builds** and staged it into the
-working tree. Your job is to publish it as a pull request and keep its description
-accurate — not to author prose. **Never merge**; humans merge.
+working tree. Your job is to publish it as a pull request, keep its description accurate,
+and act on reviewer feedback — not to author prose. **Never merge**; humans merge.
 
 ## 1. Read your context
 
@@ -229,28 +241,85 @@ Read `/tmp/gh-aw/agent/target.json`:
   for the automation to take over; either way, treat it as yours and (re)write the identity marker
   into its body on this refresh.
 - `produce` — **if `false`, STOP: emit a `noop` safe output and open no PR**
-- `noop` — **if `true`, STOP: nothing changed (build unchanged, same status); emit a `noop` safe output and post no comment**
-- `metadata_only` — the build is unchanged but the status flipped (draft→Ready). **Do
-  not regenerate reports** (the staged reports are already correct); only
+- `noop` — **if `true`, STOP: nothing changed (build unchanged, same status, no new review activity); emit a `noop` safe output and post no comment**
+- `metadata_only` — the build is unchanged but the status flipped and/or new review activity arrived. **Do
+  not regenerate reports** (the staged reports are already correct); only apply feedback exclusions,
   refresh the body (advancing `generated_at`), flip draft→Ready if `status` is `code-complete`, and
   publish — even when no report file changed.
 - `blocked` — a human already owns this diff (a non-automation `api-diff` PR touches this content).
   Treated as a no-op: do nothing.
-- `generated_at` — this run's report-generation timestamp, captured before generation began. Stamp it
-  into the PR body's yaml block as the new `generated_at`; the post-run validation checks the refreshed
-  body carries this exact value.
+- `has_new_feedback` — `true` when the setup's author-agnostic wake gate saw review activity newer than
+  `watermark` on the maintained PR (it never reads comment bodies). When the build is caught up but this
+  is `true`, the setup routes a metadata-only refresh so you fold in the feedback and the watermark advances.
+- `watermark` — the PR body's current `generated_at` value (empty on a fresh PR); the cutoff for which
+  review feedback is new this run (see step 2).
+- `generated_at` — this run's start time, captured before generation began. Stamp it back into the PR
+  body's yaml block as the new `generated_at`; the next run reads it as the `watermark`. (Because it is
+  captured at the start, review activity that arrives while this run executes carries a later timestamp
+  and is picked up by the next run rather than skipped.)
 - `report_count`, `temp_excluded_attributes`
 
 **If `produce` is `false` or `noop` is `true`, emit a single `noop` safe output and otherwise do nothing**:
 open/disturb no PR, post no comment. A no-op is the typical scheduled outcome and must be silent.
 
-## 2. Commit the generated reports
+## 2. Honoring reviewer feedback (only when `existing_pr_number` is set)
+
+Whenever the maintained PR exists and there is new review activity (`target.json.has_new_feedback` =
+true) — on a full refresh (build changed) or a metadata-only refresh (build unchanged) — address
+reviewer feedback on that PR as part of this run, before you stage any report change.
+
+**Trust is handled by the framework, not by you.** This workflow runs under GitHub integrity filtering
+(`min-integrity: approved`): the only PR reviews and review comments your GitHub tools can see are those
+from write-access reviewers (`OWNER`/`MEMBER`/`COLLABORATOR`) plus any external comment a maintainer has
+explicitly endorsed with a 👍/❤️ reaction (which promotes that item to approved). Feedback from anyone
+else is filtered out before it reaches you. So treat **every** review comment you can read as trusted
+reviewer guidance — you do not need to sanitize it, infer its author's trust level, or reason about
+prompt-injection. Integrity filtering governs **who** may give you feedback; the scope limits below
+still govern **what** you may act on. If you never see a comment, it was not endorsed; do not go looking
+for it or try to work around the filter.
+
+- **Collect the feedback.** Use your GitHub tools to read the maintained PR's submitted reviews, inline
+  review-comment threads, and standard PR timeline comments (list the pull request's reviews, review
+  comments, and issue comments for `existing_pr_number`). Consider all of these as review feedback.
+- **Scope to what is new.** `target.json.watermark` is the PR body's current `generated_at`. Act only on
+  review feedback **created after** that watermark; read anything at or before it for context only (e.g.
+  to understand a terse follow-up that builds on an earlier comment), and do not re-process it. Ignore
+  your own summary comments and any other bot comments. On a fresh PR the watermark is empty and there is
+  no prior feedback.
+- **Settle contradictions.** When two new comments conflict, respect the **most recent** guidance (the
+  larger created timestamp) and ignore the superseded direction.
+- **Act only on exclusion requests within scope.** Do not act on feedback that asks for prose, changes
+  the diff semantics, or excludes real API changes; briefly note in the summary comment that such
+  requests are out of scope for this automation. Route each in-scope exclusion request by kind, using the
+  apidiff file format — **attributes as `T:<FullyQualifiedTypeName>`** (one per line), **assemblies as the
+  bare assembly name** (no extension):
+  - **Permanently** exclude an attribute (drop it from every diff) → append `T:<FullName>` to the global
+    `permanent_attributes_file`.
+  - **Temporarily** exclude an attribute (just this diff) → append `T:<FullName>` to the per-report
+    `temporary_attributes_file`. (The setup step merges permanent + temporary for generation.)
+  - **Permanently** exclude an assembly → append `<name>` to the global `permanent_assemblies_file`.
+    **There is no temporary assembly exclusion** — assembly exclusions are always permanent.
+- For every exclusion you apply, also: (1) remove the now-excluded entries from the current `.md` reports
+  under `content_dir` so the PR reflects it immediately (reports show the display name, e.g.
+  `[System.ObsoleteAttribute]`); and (2) record it in your update comment and the PR body's **Feedback
+  applied** section.
+- **Advance the watermark.** When you refresh the PR body (the PR description, step 4), set `generated_at` to
+  `target.json.generated_at` (this run's start time). This is the durable, cross-run dedup signal — the
+  next run only reconsiders feedback created after it, so this run's feedback is never re-processed, even
+  the non-actionable or out-of-scope items. Advance it even when there was no actionable feedback this
+  run, so the wake does not repeat.
+
+This feedback pass is schedule-driven — it runs as part of the normal scheduled refresh, picking up
+review feedback left since the previous run. Do **not** add a `pull_request_review` (or other review)
+trigger; reacting to review events directly is out of scope for this workflow.
+
+## 3. Commit the generated reports
 
 The host setup already generated this run's reports into `content_dir` and **positioned the
 working tree on the branch you publish to**: detached at the base commit for a **fresh** diff
 (`existing_pr_number` empty), or checked out on the maintained PR branch `target_branch` for
-an **incremental** update (`existing_pr_number` set). Normalize and commit the reports
-(allow-listed paths only):
+an **incremental** update (`existing_pr_number` set). After applying any in-scope feedback
+exclusions (step 2), normalize and commit the reports (allow-listed paths only):
 
 ```bash
 # markdownlint --fix the generated reports (collapse blank-line runs first) so the committed
@@ -293,7 +362,7 @@ Commit **only** the allow-listed files (reports under `content_dir` and the two 
 `ApiDiff*ToExclude.txt` files). Do **not** push, switch branches, amend, rebase, or
 force-push -- the safe-output jobs own all publishing.
 
-## 3. Publish via native safe outputs
+## 4. Publish via native safe outputs
 
 Publish through the native gh-aw safe outputs -- never a hand-rolled `gh pr` call. Use
 `pr_title` from `target.json` **verbatim** as the PR title (e.g.
@@ -316,7 +385,7 @@ automatically.
   description") and set the title to `pr_title`. Always refresh the body, even on a
   metadata-only run whose report delta is empty, so the description never goes stale.
 - **`add-comment`** (`pull_request_number` = `existing_pr_number`) -- one short summary of
-  what changed this run (reports refreshed or metadata-only). At most one.
+  what changed this run (reports refreshed, feedback applied, or metadata-only). At most one.
 
 **Mark Ready** -- when `target.json.status` is `code-complete`, also emit
 **`mark-pull-request-as-ready-for-review`** (`pull_request_number` = `existing_pr_number`) so
@@ -352,9 +421,10 @@ Then, succinct and factual:
 3. **Status** — `in-development` (draft while the major is still the in-development
    frontier on `main`) or `code-complete` (Ready for Review, once `main` has forked
    to the next major).
-4. **Exclusions applied** — the exclusions now in effect. List **temporary attribute**
-   exclusions (`temp_excluded_attributes`), and separately note any **permanent attribute** or
-   **permanent assembly** exclusions in the global files. "None." only if all are empty.
+4. **Feedback applied** — the exclusions now in effect. List **temporary attribute**
+   exclusions (`temp_excluded_attributes` plus any you added this run), and separately note any
+   **permanent attribute** or **permanent assembly** exclusions you added this run (to the global
+   files). "None." only if all are empty.
 5. A fenced ```yaml``` block carrying the machine-managed state, delimited by visible marker comments.
    **The first line inside the block is `# api-diff:state:begin` and the last line is
    `# api-diff:state:end`**; immediately after the begin line comes the identity marker,

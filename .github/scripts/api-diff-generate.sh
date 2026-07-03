@@ -6,7 +6,8 @@
 # diff, or the maintained PR branch for an incremental update) and generates the milestone's
 # API diff reports from real published builds, then writes the agent context. Heavy/networked
 # work happens here (pwsh + feed access) so the agent only commits the result and publishes it
-# through the native safe outputs.
+# through the native safe outputs. Reviewer feedback is collected by the agent itself under
+# gh-aw integrity filtering, not here.
 #
 # Ref packs come from the feeds the target pins: the current build from the
 # dotnet{major} channel feed, and the baseline (previous prerelease milestone or
@@ -32,10 +33,11 @@
 #                  this target's content_dir -> a human owns this diff; stand down
 #                  (produce=false, open/disturb nothing).
 #   FAST no-op   : an existing PR whose recorded current_version AND status are
-#                  unchanged (and that still carries this target's marker) skips all
-#                  work (noop=true).
-#   METADATA-only: build unchanged but status flipped (draft->ready) -> refresh PR
-#                  body/ready/exclusions WITHOUT the expensive full regeneration.
+#                  unchanged and that has no review activity newer than the recorded
+#                  generated_at watermark skips all work (noop=true).
+#   METADATA-only: build unchanged but status flipped (draft->ready) and/or new review
+#                  activity arrived -> refresh PR body/ready/exclusions WITHOUT the
+#                  expensive full regeneration.
 #   COMPLETE-or-nothing: a full regeneration must produce every non-excluded SDK
 #                  report (NETCore + AspNetCore + WindowsDesktop). A non-zero
 #                  RunApiDiff exit or any missing SDK report -> produce=false; we
@@ -58,9 +60,11 @@ CONTENT_ROOT="${CONTENT_ROOT:-release-notes}"
 REPO="${GITHUB_REPOSITORY:-}"
 mkdir -p "$AGENT_DIR"
 
-# The report-generation timestamp recorded in the PR body's yaml block. Captured before
-# generation begins so it reflects when this run started; the manifest validation checks
-# that the agent stamps this exact value into the refreshed body.
+# Capture the feedback watermark at the START of the run, not the end. Generation can
+# take many minutes, and any review activity that arrives while it runs must be picked
+# up by a later run rather than being stamped as already-processed. The agent stamps
+# this value back into the PR body's yaml block as the new generated_at; the next run
+# reads it as the lower bound for which review feedback is new (run_started_at).
 generated_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 jqr() { jq -r "$1" <<<"$TARGET"; }
@@ -230,10 +234,12 @@ fi
 
 # ---- 1. No-op / metadata-only decision -------------------------------------
 # Compare against the state the last successful run recorded in the PR body's yaml
-# block: current_version, status, and whether the resolved PR still carries this
-# target's marker.
+# block: current_version, status, generated_at (the feedback watermark), and whether
+# the resolved PR still carries this target's marker.
 noop=false
 metadata_only=false
+has_new_feedback=false
+watermark=""
 if [ "$pr_list_failed" = true ]; then
 	# Discovery failed above; we cannot know whether a PR already exists, so stand down
 	# without opening or refreshing anything (generated_at is not advanced; retried next run).
@@ -243,21 +249,81 @@ elif [ "$blocked" = true ]; then
 	noop=true
 elif [ -n "$existing_pr_number" ]; then
 	body_yaml="$(gh pr view "$existing_pr_number" --json body -q '.body' 2>/dev/null | tr -d '\r' || true)"
-	recorded="$(sed -n 's/^[[:space:]]*current-version: "\(.*\)"$/\1/p' <<<"$body_yaml" | head -1)"
-	recorded_status="$(sed -n 's/^[[:space:]]*status: "\(.*\)"$/\1/p' <<<"$body_yaml" | head -1)"
+
+	tracking_value() {
+		local name="$1"
+		# Tolerate an optional leading markdown list/quote marker (-, *, +, >) before the field
+		# name. The identity guard that gates a PR write accepts the field in this same anchored,
+		# tolerant form, so anything it admits is recoverable here.
+		sed -n "s/^[[:space:]]*[-*+>]*[[:space:]]*${name}:[[:space:]]*//p" |
+			head -1 | tr -d '"'\''\r' | sed 's/[[:space:]]*#.*$//; s/[[:space:]]*$//'
+	}
+
+	tracking_block() {
+		# Emit only the machine-managed state block -- the fenced yaml block the agent writes as the
+		# VERY LAST thing in the body, delimited by the visible `# api-diff:state:begin`/`:end`
+		# comment lines (matched as whole comment lines: leading indent and a trailing CR are tolerated,
+		# but the "# " prefix and ":state:begin"/":state:end" suffix must be exact). Take the LAST
+		# begin..end range so human prose anywhere above it -- a quoted or bulleted "field:" line, an
+		# older state block a maintainer pastes in as a note, or a "+ field:" line inside a ```diff
+		# report -- cannot win tracking_value's first match and force a false caught-up no-op or silently
+		# suppress real reviewer feedback via a bogus watermark. A begin with no matching end (a human
+		# truncated the block) still yields its fields rather than an empty read.
+		awk -v b="# api-diff:state:begin" -v e="# api-diff:state:end" '
+			{ t=$0; sub(/\r$/,"",t); gsub(/^[[:space:]]+|[[:space:]]+$/,"",t) }
+			t == b { inb=1; buf=$0 ORS; next }
+			inb    { buf=buf $0 ORS; if (t == e) { inb=0; last=buf } }
+			END    { if (inb) last=buf; printf "%s", last }'
+	}
+
+	recorded="$(printf '%s\n' "$body_yaml" | tracking_block | tracking_value "current-version")"
+	watermark="$(printf '%s\n' "$body_yaml" | tracking_block | tracking_value "generated-at")"
+	recorded_status="$(printf '%s\n' "$body_yaml" | tracking_block | tracking_value "status")"
+
 	# Whether the resolved PR already carries THIS target's marker. An adopted (human-
 	# bootstrapped) PR or one whose marker line a human deleted has no marker yet; we
 	# must (re)write it, so such a PR never qualifies for a silent no-op. Uses the same
 	# whole-line matcher as the PR resolution above (single source of truth).
 	has_marker="$(jq -rn --arg b "$body_yaml" --arg m "$marker" \
 		'($b | gsub("\r";"") | split("\n") | any(gsub("^[ \t]+|[ \t]+$";"") == "# " + $m))')"
-	if [ "$recorded" = "$current_version" ]; then
-		if [ "$recorded_status" = "$status" ] && [ "$has_marker" = true ]; then
+	# Body-free, author-agnostic wake gate: is there any review activity newer than the
+	# recorded watermark? This only decides whether a caught-up PR is worth waking the
+	# agent for -- it NEVER reads comment bodies, authors, or trust level. The agent
+	# collects and evaluates the actual review feedback itself under gh-aw integrity
+	# filtering (min-integrity: approved + integrity-reactions), the single source of
+	# truth for which feedback is trusted and actionable. Over-waking (e.g. for an
+	# un-endorsed external comment the agent will not act on) is harmless; under-waking
+	# is not. Any query failure is fail-closed to a stand-down (below): we must not
+	# advance the generated_at watermark off an incomplete read, or feedback that
+	# arrived would be silently skipped -- so we publish nothing and retry next run.
+	feedback_query_failed=false
+	if [ -n "$REPO" ] && [ -n "${GH_TOKEN:-}" ]; then
+		fb_times="$(mktemp)"
+		if ! gh api "repos/${REPO}/issues/${existing_pr_number}/comments" --paginate \
+			-q '.[] | select(.user.type != "Bot") | .created_at' >>"$fb_times" 2>/dev/null; then feedback_query_failed=true; fi
+		if ! gh api "repos/${REPO}/pulls/${existing_pr_number}/comments" --paginate \
+			-q '.[] | select(.user.type != "Bot") | .created_at' >>"$fb_times" 2>/dev/null; then feedback_query_failed=true; fi
+		if ! gh api "repos/${REPO}/pulls/${existing_pr_number}/reviews" --paginate \
+			-q '.[] | select(.user.type != "Bot") | .submitted_at' >>"$fb_times" 2>/dev/null; then feedback_query_failed=true; fi
+		if [ "$feedback_query_failed" = false ]; then
+			new_count="$(awk -v since="$watermark" 'NF && (since=="" || $0 > since)' "$fb_times" | grep -c . || true)"
+			[ "${new_count:-0}" -gt 0 ] && has_new_feedback=true
+		fi
+		rm -f "$fb_times"
+	fi
+	if [ "$feedback_query_failed" = true ]; then
+		# Fail closed: a review-activity query failed, so the real count is unknown.
+		# Stand down without publishing so generated_at is not advanced and the same
+		# feedback window is retried next run rather than being skipped.
+		noop=true
+		echo "::warning::review-activity query failed for PR #${existing_pr_number}; standing down (generated_at not advanced, retried next run)."
+	elif [ "$recorded" = "$current_version" ]; then
+		if [ "$recorded_status" = "$status" ] && [ "$has_marker" = true ] && [ "$has_new_feedback" != true ]; then
 			noop=true
-			echo "::notice::no-op: ${current_version_milestone} unchanged (${current_version}), status '${status}'."
+			echo "::notice::no-op: ${current_version_milestone} unchanged (${current_version}), status '${status}', no new review activity since ${watermark:-<none>}."
 		else
 			metadata_only=true
-			echo "::notice::metadata-only: build unchanged; status '${recorded_status:-?}'->'${status}', marker_present=${has_marker}."
+			echo "::notice::metadata-only: build unchanged; status '${recorded_status:-?}'->'${status}', new_feedback=${has_new_feedback}, marker_present=${has_marker}."
 		fi
 	fi
 fi
@@ -431,6 +497,10 @@ report_count="$(find "$content_dir" -type f -name '*.md' ! -name 'README.md' 2>/
 # or partial seeded reports in content_dir, and we must not publish those.
 if [ "$noop" = true ] || [ "$blocked" = true ]; then
 	produce=false
+	# Defensive: metadata_only is mutually exclusive with noop/blocked upstream, but
+	# reset it here too so the gate alone guarantees produce=false never pairs with
+	# metadata_only=true (an unreconcilable manifest), like the report_count=0 branch.
+	metadata_only=false
 elif [ "$report_count" -eq 0 ]; then
 	produce=false
 	if [ "$metadata_only" = true ]; then
@@ -438,9 +508,10 @@ elif [ "$report_count" -eq 0 ]; then
 		# seeded from the branch. Zero reports here means seeding did not run
 		# (e.g. the branch fetch failed), so keep the flags consistent instead
 		# of emitting produce=false with metadata_only=true, which the agent
-		# cannot reconcile.
+		# cannot reconcile. Leaving generated_at un-advanced re-wakes on the
+		# same review activity next run rather than dropping it.
 		metadata_only=false
-		echo "::warning::metadata-only refresh for ${current_version_milestone} found no seeded reports; standing down."
+		echo "::warning::metadata-only refresh for ${current_version_milestone} found no seeded reports; standing down so new review activity is retried next run."
 	else
 		echo "::notice::no reports for ${current_version_milestone} (no build / no API changes); no PR will be opened."
 	fi
@@ -486,6 +557,8 @@ jq -n \
 	--argjson blocked "$blocked" \
 	--argjson report_count "$report_count" \
 	--argjson temp_excluded_attributes "$temp_excluded" \
+	--argjson has_new_feedback "$has_new_feedback" \
+	--arg watermark "$watermark" \
 	--arg generated_at "$generated_at" \
 	'$target + {
      content_dir: $content_dir,
@@ -504,13 +577,15 @@ jq -n \
      blocked: $blocked,
      report_count: $report_count,
      temp_excluded_attributes: $temp_excluded_attributes,
+     has_new_feedback: $has_new_feedback,
+     watermark: $watermark,
      generated_at: $generated_at
    }' >"$AGENT_DIR/target.json"
 
 rm -f "$temp_keep"
 echo "=== target.json ==="
 jq '.' "$AGENT_DIR/target.json"
-echo "noop=${noop} metadata_only=${metadata_only} blocked=${blocked} produce=${produce} reports=${report_count} branch=${target_branch}"
+echo "noop=${noop} metadata_only=${metadata_only} blocked=${blocked} produce=${produce} reports=${report_count} new_feedback=${has_new_feedback} branch=${target_branch}"
 
 # ---- 5. Always emit a run overview to the job step summary (incl. no-op) ----
 # Every worker run -- publish, metadata-only refresh, blocked, or a silent
@@ -520,7 +595,7 @@ if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
 	if [ "$blocked" = true ]; then
 		decision="🚫 Blocked — a non-automation \`api-diff\` PR already owns this diff; standing down."
 	elif [ "$noop" = true ]; then
-		decision="😴 No-op — build unchanged, same status. Nothing to do."
+		decision="😴 No-op — build unchanged, same status, no new review activity. Nothing to do."
 	elif [ "$metadata_only" = true ] && [ "$produce" = true ]; then
 		decision="📝 Metadata-only refresh — body/ready/feedback update, no regeneration."
 	elif [ "$produce" = true ]; then
@@ -538,6 +613,7 @@ if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
 		echo "| Status | \`${status}\` |"
 		echo "| Decision | ${decision} |"
 		echo "| Reports | ${report_count} |"
+		echo "| New review activity | ${has_new_feedback} |"
 		echo "| Target branch | \`${target_branch}\` |"
 		echo "| Existing PR | ${existing_pr_number:-—} |"
 		echo "| Generated at | ${generated_at} |"
