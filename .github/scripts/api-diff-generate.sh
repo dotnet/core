@@ -174,11 +174,42 @@ if [ -n "${GH_TOKEN:-}" ]; then
 		target_branch="$(jq -r '.headRefName' <<<"$match")"
 		echo "::notice::reusing marker PR #${existing_pr_number} on ${target_branch}"
 	else
+		# (b) Adopt a marker-less PR for this target so a human can hand-start a PR the
+		# automation then takes over. A body carrying any `api-diff-marker:` already belongs
+		# to some target and is never adopted. Our exact target branch is proof of ownership,
+		# so adopt a marker-less PR on it regardless of labels (a human may have stripped them
+		# or bootstrapped it there). On any OTHER branch, only adopt a PR a human explicitly
+		# opted into automation for (both `automation` + `api-diff`) that already introduces
+		# reports under this target's content_dir (confirmed per-PR via `gh pr view` to stay
+		# truncation-safe, like the external-PR guard below).
+		adopt_branch="$(jq -r --arg br "$desired_branch" \
+			'map(select(((.body // "") | contains("api-diff-marker:") | not) and (.headRefName == $br))) | (.[0].number // empty)' <<<"$api_diff_prs")"
+		if [ -n "$adopt_branch" ]; then
+			existing_pr_number="$adopt_branch"
+			target_branch="$desired_branch"
+			echo "::notice::adopting marker-less PR #${existing_pr_number} on target branch ${target_branch} (marker will be written on this refresh)."
+		else
+			adopt_cands="$(jq -r --arg br "$desired_branch" \
+				'map(select(((.body // "") | contains("api-diff-marker:") | not) and (.headRefName != $br) and ([.labels[].name] | index("automation")) and ([.labels[].name] | index("api-diff")))) | .[].number' <<<"$api_diff_prs")"
+			for acand in $adopt_cands; do
+				if gh pr view "$acand" --json files --jq '.files[].path' 2>/dev/null |
+					awk -v p="${content_dir%/}/" 'index($0, p) == 1 { found = 1 } END { exit !found }'; then
+					existing_pr_number="$acand"
+					target_branch="$(jq -r --argjson n "$acand" 'map(select(.number == $n)) | .[0].headRefName // empty' <<<"$api_diff_prs")"
+					echo "::notice::adopting automation PR #${existing_pr_number} on ${target_branch} (no marker yet; introduces reports under ${content_dir})."
+					break
+				fi
+			done
+		fi
+	fi
+	# (c) When we neither reused nor adopted a PR: pick a collision branch if the desired
+	# branch is already taken, then stand down if a non-automation api-diff PR owns this diff.
+	if [ -z "$existing_pr_number" ] && [ "$blocked" = false ]; then
 		if git ls-remote --exit-code --heads "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" "$desired_branch" >/dev/null 2>&1; then
 			target_branch="${desired_branch}_${GH_RUN_ID:-$(date +%s)}"
 			echo "::notice::${desired_branch} already exists; using collision branch ${target_branch}"
 		fi
-		# (b) External-PR guard: only when WE don't already own a PR for this diff.
+		# External-PR guard: only when WE don't already own or adopt a PR for this diff.
 		# A human-authored api-diff PR might touch >100 files, in which case the GraphQL/REST API
 		# truncates the `files` array on `gh pr list`. We must fetch the file list via `gh pr view`
 		# for each non-automation candidate to accurately detect collisions.

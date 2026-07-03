@@ -224,8 +224,10 @@ Read `/tmp/gh-aw/agent/target.json`:
 - `permanent_assemblies_file` — the global `release-notes/ApiDiffAssembliesToExclude.txt`
 - `marker`, `pr_title`, `tldr`, `status_note` — PR identity + description pieces (use verbatim)
 - `target_branch` — the branch you publish to (already resolved, including any collision suffix)
-- `existing_pr_number` — the open PR to update (empty = open a new one). Treat it as yours and
-  (re)write the identity marker into its body on this refresh.
+- `existing_pr_number` — the open PR to update (empty = open a new one). This may be a PR the
+  automation opened earlier **or** one a person bootstrapped and labeled `automation` + `api-diff`
+  for the automation to take over; either way, treat it as yours and (re)write the identity marker
+  into its body on this refresh.
 - `produce` — **if `false`, STOP: emit a `noop` safe output and open no PR**
 - `noop` — **if `true`, STOP: nothing changed (build unchanged, same status); emit a `noop` safe output and post no comment**
 - `metadata_only` — the build is unchanged but the status flipped (draft→Ready). **Do
