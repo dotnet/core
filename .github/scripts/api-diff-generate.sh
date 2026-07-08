@@ -347,7 +347,8 @@ if [ "$noop" = false ]; then
 			git checkout -q -B "$target_branch" FETCH_HEAD
 			echo "::notice::checked out maintained PR branch ${target_branch} (tokened fetch)"
 		else
-			echo "::error::could not check out maintained PR branch ${target_branch} for the incremental update."; exit 1
+			echo "::error::could not check out maintained PR branch ${target_branch} for the incremental update."
+			exit 1
 		fi
 	else
 		git checkout -q --detach
