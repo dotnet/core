@@ -68,19 +68,22 @@ Validators run concurrently where possible: asynchronous attributes on the same 
 
 ## Automatic cross-origin (CSRF) protection
 
-Apps built with `WebApplicationBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Same-origin and user-initiated requests are allowed; a cross-origin request that tries to consume a form is rejected.
+Apps built with `WebApplication.CreateBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Unlike the token-based antiforgery system, it issues no tokens: safe HTTP methods, same-origin and user-initiated requests, and non-browser clients (`curl`, server-to-server, mobile apps) all pass through, while a cross-origin browser request that tries to consume a form is rejected. It's additive to token antiforgery, and both can run on the same endpoint.
 
-The check runs as auto-injected middleware after routing and authentication, and records its verdict on `IAntiforgeryValidationFeature` instead of short-circuiting the request ([dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). Framework form consumers (MVC, minimal API `[FromForm]`, and Blazor SSR) enforce the verdict when they read the form, so token antiforgery and cross-origin CSRF share a single, lazily enforced result. Apps that call `UseAntiforgery()` see no change. To customize or replace the policy, register an `ICsrfProtection` implementation:
+The check runs as auto-injected middleware after authentication and authorization, and records its verdict on `IAntiforgeryValidationFeature` instead of short-circuiting the request ([dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). Framework form consumers (MVC, minimal API `[FromForm]`, and Blazor SSR) enforce the verdict when they read the form, so token antiforgery and cross-origin CSRF share a single, lazily enforced result. Apps that call `UseAntiforgery()` see no change, and endpoints that never read a form (such as JSON APIs) aren't rejected.
+
+The most common upgrade action is allowing a trusted cross-origin caller. The middleware reuses the endpoint's CORS policy, so declaring the origin there is enough — `AllowAnyOrigin` is intentionally not treated as trusted for writes:
 
 ```csharp
-public sealed class MyCsrfProtection : ICsrfProtection
-{
-    public ValueTask<CsrfProtectionResult> ValidateAsync(HttpContext context) =>
-        ValueTask.FromResult(CsrfProtectionResult.Allowed());
-}
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(policy =>
+        policy.WithOrigins("https://app.contoso.com").AllowAnyHeader().AllowAnyMethod()));
 
-builder.Services.AddSingleton<ICsrfProtection, MyCsrfProtection>();
+var app = builder.Build();
+app.UseCors();
 ```
+
+To opt an endpoint out, use `.DisableAntiforgery()` (Minimal APIs) or `[IgnoreAntiforgeryToken]` (MVC); to turn the feature off app-wide, set the `DisableCsrfProtection` configuration key. For full control over the trust decision, register a custom `ICsrfProtection` implementation. See [Automatic CSRF protection in ASP.NET Core](https://learn.microsoft.com/aspnet/core/security/csrf-protection?view=aspnetcore-11.0) and [Adopt automatic CSRF protection](https://learn.microsoft.com/aspnet/core/migration/antiforgery-to-csrf?view=aspnetcore-11.0).
 
 ## Blazor Virtualize can scroll to an item
 
