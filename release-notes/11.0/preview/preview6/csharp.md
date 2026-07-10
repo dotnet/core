@@ -60,6 +60,6 @@ Preview 6 also refines the language rules for unions:
 - A `union` declaration can use a non-public constructor that takes a single parameter ([dotnet/roslyn #83788](https://github.com/dotnet/roslyn/pull/83788)).
 - A `not` pattern applies to the incoming union value rather than its contained value ([dotnet/roslyn #83904](https://github.com/dotnet/roslyn/pull/83904)).
 - Custom union types support inheritance of their generated `Create` methods ([dotnet/roslyn #83991](https://github.com/dotnet/roslyn/pull/83991)).
-- The compiler reports a clear error when a custom `union` declaration is missing the minimal set of required APIs ([dotnet/roslyn #83813](https://github.com/dotnet/roslyn/pull/83813)).
+- The compiler reports a clear error when a custom union declaration is missing the minimal set of required APIs ([dotnet/roslyn #83813](https://github.com/dotnet/roslyn/pull/83813)).
 
 Unions remain a preview feature; enable `<LangVersion>preview</LangVersion>` to try them, and expect the surface to keep evolving before the feature ships.
