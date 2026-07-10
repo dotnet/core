@@ -4,12 +4,16 @@
 .NET 11 Preview 6 includes new ASP.NET Core features and improvements:
 
 - [Async validation for minimal APIs](#async-validation-for-minimal-apis)
+- [Automatic cross-origin (CSRF) protection](#automatic-cross-origin-csrf-protection)
 - [Blazor Virtualize can scroll to an item](#blazor-virtualize-can-scroll-to-an-item)
+- [Configure browser behavior from the server](#configure-browser-behavior-from-the-server)
+- [Render content by environment in Blazor](#render-content-by-environment-in-blazor)
 - [OpenAPI 3.2 by default](#openapi-32-by-default)
 - [Unions in ASP.NET Core](#unions-in-aspnet-core)
 - [Short-circuit endpoints with an attribute](#short-circuit-endpoints-with-an-attribute)
 - [SignalR authentication refresh](#signalr-authentication-refresh)
 - [Cancel hub invocations from the client](#cancel-hub-invocations-from-the-client)
+- [dotnet user-jwts supports file-based apps](#dotnet-user-jwts-supports-file-based-apps)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -64,6 +68,22 @@ app.MapPost("/reservations", (ReservationRequest request) =>
 
 Validators run concurrently where possible: asynchronous attributes on the same member start together, collection items validate in parallel, and the framework preserves the existing ordering between member, type, and `IValidatableObject` validation. For attribute-based rules, derive from `AsyncValidationAttribute` and override its `IsValidAsync` method. Thank you [@Youssef1313](https://github.com/Youssef1313) for the implementation work on this feature.
 
+## Automatic cross-origin (CSRF) protection
+
+Apps built with `WebApplicationBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Same-origin and user-initiated requests are allowed; a cross-origin request that tries to consume a form is rejected.
+
+The check runs as auto-injected middleware after routing and authentication, and records its result on `IAntiforgeryValidationFeature`. Framework form consumers (MVC, minimal API `[FromForm]`, and Blazor SSR) enforce the verdict when they read the form — see the related [breaking change](#breaking-changes). To customize or replace the policy, register an `ICsrfProtection` implementation:
+
+```csharp
+public sealed class MyCsrfProtection : ICsrfProtection
+{
+    public ValueTask<CsrfProtectionResult> ValidateAsync(HttpContext context) =>
+        ValueTask.FromResult(CsrfProtectionResult.Allowed());
+}
+
+builder.Services.AddSingleton<ICsrfProtection, MyCsrfProtection>();
+```
+
 ## Blazor Virtualize can scroll to an item
 
 The `Virtualize<TItem>` component can now open at a specific item and scroll to any item on demand ([dotnet/aspnetcore #66753](https://github.com/dotnet/aspnetcore/pull/66753)). Two new public APIs make this possible:
@@ -87,6 +107,38 @@ The `Virtualize<TItem>` component can now open at a specific item and scroll to 
 ```
 
 Out-of-range indexes are clamped to the valid range. If a second `ScrollToIndexAsync` call starts while one is still in flight, the last call wins. Calling `ScrollToIndexAsync` before the first interactive render throws `InvalidOperationException`; use `InitialIndex` to set the starting position instead.
+
+## Configure browser behavior from the server
+
+Blazor apps can configure client-side behavior from the server when mapping Razor components, using `WithBrowserOptions` ([dotnet/aspnetcore #67337](https://github.com/dotnet/aspnetcore/pull/67337)). Options include the client-side log level, interactive-server reconnection behavior, whether server-side rendering preserves the DOM during enhanced navigation, and environment variables passed to a WebAssembly runtime.
+
+```csharp
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode()
+    .WithBrowserOptions(options =>
+    {
+        options.LogLevel = LogLevel.Warning;
+        options.Server.ReconnectionRetryInterval = TimeSpan.FromSeconds(1.5);
+        options.Ssr.PreserveDom = true;
+        options.WebAssembly.EnvironmentVariables["OTEL_EXPORTER_OTLP_ENDPOINT"] = "https://localhost:4318";
+    });
+```
+
+## Render content by environment in Blazor
+
+The new `EnvironmentView` component renders its child content based on the current hosting environment, similar to MVC's `<environment>` tag helper ([dotnet/aspnetcore #67369](https://github.com/dotnet/aspnetcore/pull/67369)). Use `Include` and `Exclude` to target one or more environments:
+
+```razor
+<EnvironmentView Include="Development">
+    <p>Debug tools are enabled.</p>
+</EnvironmentView>
+
+<EnvironmentView Exclude="Development">
+    <p>Running in a non-development environment.</p>
+</EnvironmentView>
+```
+
+`NavigationManager` also adds `GetUriWithFragment`, which builds a URI from the current location with a different fragment while preserving the query string ([dotnet/aspnetcore #67368](https://github.com/dotnet/aspnetcore/pull/67368)).
 
 ## OpenAPI 3.2 by default
 
@@ -203,6 +255,14 @@ public class WorkHub : Hub
 }
 ```
 
+## dotnet user-jwts supports file-based apps
+
+`dotnet user-jwts` can now issue development JWTs for file-based apps with the new `--file` option ([dotnet/aspnetcore #66919](https://github.com/dotnet/aspnetcore/pull/66919)). This makes it easy to test authenticated endpoints in a single-file app (`app.cs`) without a project file.
+
+```bash
+dotnet user-jwts create --file app.cs
+```
+
 ## Breaking changes
 
 - **Custom minimal API validation resolvers** — `Microsoft.Extensions.Validation.IValidatableInfo` was split into `IValidatableTypeInfo`, `IValidatableParameterInfo`, and `IValidatablePropertyInfo`, and `ValidateContext.ValidationErrors` is now a read-only dictionary that you add to with the new `ValidateContext.AddValidationError` method ([dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Apps that use the built-in `[ValidatableType]` and `AddValidation()` are unaffected; only code that implements `IValidatableInfoResolver` directly needs to update.
@@ -218,6 +278,9 @@ public class WorkHub : Hub
   - Added the key sub-delimiter between multi-value `Vary` header values in response and output caching ([dotnet/aspnetcore #66936](https://github.com/dotnet/aspnetcore/pull/66936)).
 - **Metrics**
   - Fixed the default value of `System.Diagnostics.Metrics.Meter.IsSupported` ([dotnet/aspnetcore #66846](https://github.com/dotnet/aspnetcore/pull/66846)).
+  - Added `QUERY` to the known HTTP methods used by hosting metrics ([dotnet/aspnetcore #63276](https://github.com/dotnet/aspnetcore/pull/63276)).
+- **Blazor**
+  - `WebViewRenderer` no longer throws `NotSupportedException` when a Blazor Hybrid app renders a component annotated with `@rendermode`; render modes are treated as no-ops because a WebView is always interactive ([dotnet/aspnetcore #65876](https://github.com/dotnet/aspnetcore/pull/65876)).
 
 ## Community contributors
 
