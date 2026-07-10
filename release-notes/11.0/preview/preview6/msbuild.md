@@ -122,6 +122,7 @@ Preview 6 migrates more in-box tasks to the multithreaded execution model, remov
   - `TaskParameterTaskItem.ToString()` now returns the item-spec instead of the .NET type name, fixing task output marshaling under `-mt` ([dotnet/msbuild #14095](https://github.com/dotnet/msbuild/pull/14095)).
   - `ResolveAssemblyReference` metadata dispenser activation no longer fails with `CLR_E_SHIM_RUNTIMELOAD` in hosts that did not enter the CLR via mscoree ([dotnet/msbuild #13899](https://github.com/dotnet/msbuild/pull/13899)).
   - `MSB4216` error message now reports the actual launch path for `Runtime="NET"` task hosts when no app host is present ([dotnet/msbuild #13889](https://github.com/dotnet/msbuild/pull/13889)).
+  - `Runtime="NET"` task host launches no longer fail with `MSB4216` when the worker node and task host node architectures differ; the handshake is now architecture-agnostic ([dotnet/msbuild #13890](https://github.com/dotnet/msbuild/pull/13890)).
 - **Logging**
   - Terminal Logger auto-detection now works correctly under MSBuild Server on Unix, consulting the client's transmitted console capabilities instead of the server node's redirected pipe ([dotnet/msbuild #14077](https://github.com/dotnet/msbuild/pull/14077)).
 - **Globbing**
