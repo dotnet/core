@@ -1,13 +1,15 @@
-<!-- Verified against Microsoft.AspNetCore.App.Ref@11.0.0-preview.6.26328.106 and Microsoft.NETCore.App.Ref@11.0.0-preview.6.26328.106 -->
+<!-- Verified against the .NET 11 Preview 6 SDK (11.0.100-preview.6.26359.118) by building and running samples at https://github.com/danroth27/aspnetcore11samples, and cross-checked against the dotnet/dotnet release/11.0.1xx-preview6 source. -->
 # ASP.NET Core in .NET 11 Preview 6 - Release Notes
 
 .NET 11 Preview 6 includes new ASP.NET Core features and improvements:
 
-- [Minimal API validation runs async validators](#minimal-api-validation-runs-async-validators)
+- [Async validation for minimal APIs](#async-validation-for-minimal-apis)
 - [Blazor Virtualize can scroll to an item](#blazor-virtualize-can-scroll-to-an-item)
-- [OpenAPI documents default to 3.2 and describe union types](#openapi-documents-default-to-32-and-describe-union-types)
+- [OpenAPI 3.2 by default](#openapi-32-by-default)
+- [Unions in ASP.NET Core](#unions-in-aspnet-core)
 - [Short-circuit endpoints with an attribute](#short-circuit-endpoints-with-an-attribute)
-- [SignalR refreshes authentication on long-lived connections](#signalr-refreshes-authentication-on-long-lived-connections)
+- [SignalR authentication refresh](#signalr-authentication-refresh)
+- [Cancel hub invocations from the client](#cancel-hub-invocations-from-the-client)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -16,11 +18,11 @@ ASP.NET Core updates in .NET 11:
 
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
 
-## Minimal API validation runs async validators
+## Async validation for minimal APIs
 
-Minimal API validation now supports asynchronous validators end-to-end ([dotnet/aspnetcore #66487](https://github.com/dotnet/aspnetcore/pull/66487), [dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Preview 5 shipped the building blocks for asynchronous form validation in Blazor. Preview 6 adds the new asynchronous `DataAnnotations` APIs in the base libraries — `AsyncValidationAttribute`, `IAsyncValidatableObject`, and `Validator.ValidateObjectAsync` — and `Microsoft.Extensions.Validation` now runs them when an endpoint validates a request.
+Minimal API validation now supports asynchronous validators end-to-end ([dotnet/aspnetcore #66487](https://github.com/dotnet/aspnetcore/pull/66487), [dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Preview 5 shipped the building blocks for asynchronous form validation in Blazor. Preview 6 adds the new asynchronous `DataAnnotations` APIs in the base libraries — `AsyncValidationAttribute`, `IAsyncValidatableObject`, and `Validator.ValidateObjectAsync` — and `Microsoft.Extensions.Validation` now runs them when an endpoint validates a request. The new base-library APIs are covered in the [.NET libraries release notes](./libraries.md#asynchronous-validation-with-dataannotations).
 
-This lets a validation rule do real work, such as a database lookup or a remote API call, without blocking a thread. A model implements `IAsyncValidatableObject` and returns validation results as an `IAsyncEnumerable<ValidationResult>`. Because `IAsyncValidatableObject` extends `IValidatableObject`, also implement the synchronous `Validate` method (return no results when all the validation is asynchronous):
+This lets a validation rule do real work, such as a database lookup or a remote API call, without blocking a thread. A model implements `IAsyncValidatableObject` and returns validation results as an `IAsyncEnumerable<ValidationResult>`. Because `IAsyncValidatableObject` extends `IValidatableObject`, also implement the synchronous `Validate` method. When a type validates asynchronously only, throw from `Validate` so it isn't silently validated through the synchronous APIs:
 
 ```csharp
 using System.ComponentModel.DataAnnotations;
@@ -33,8 +35,9 @@ public class ReservationRequest : IAsyncValidatableObject
 
     public DateOnly Date { get; set; }
 
-    // IValidatableObject (synchronous) — no synchronous rules here.
-    public IEnumerable<ValidationResult> Validate(ValidationContext context) => [];
+    // IValidatableObject (synchronous) — this type validates asynchronously only.
+    public IEnumerable<ValidationResult> Validate(ValidationContext context) =>
+        throw new NotSupportedException("Validate this type with ValidateAsync.");
 
     public async IAsyncEnumerable<ValidationResult> ValidateAsync(
         ValidationContext context,
@@ -85,11 +88,32 @@ The `Virtualize<TItem>` component can now open at a specific item and scroll to 
 
 Out-of-range indexes are clamped to the valid range. If a second `ScrollToIndexAsync` call starts while one is still in flight, the last call wins. Calling `ScrollToIndexAsync` before the first interactive render throws `InvalidOperationException`; use `InitialIndex` to set the starting position instead.
 
-## OpenAPI documents default to 3.2 and describe union types
+## OpenAPI 3.2 by default
 
-Generated OpenAPI documents now target OpenAPI 3.2 by default ([dotnet/aspnetcore #67097](https://github.com/dotnet/aspnetcore/pull/67097), [dotnet/aspnetcore #67007](https://github.com/dotnet/aspnetcore/pull/67007)). Endpoints that return C# union types are now described with an `anyOf` schema listing each case type ([dotnet/aspnetcore #67001](https://github.com/dotnet/aspnetcore/pull/67001)). Unlike polymorphic types, union cases don't carry a `$type` discriminator, so a case schema such as `Kitten` reuses the standalone `#/components/schemas/Kitten` component instead of producing a duplicated, prefixed component. ApiExplorer detects a union through `JsonTypeInfoKind.Union` on the parent type, so the same metadata flows through to MVC controllers, minimal APIs, and external consumers such as Swashbuckle and NSwag.
+Generated OpenAPI documents now target OpenAPI 3.2 by default ([dotnet/aspnetcore #67097](https://github.com/dotnet/aspnetcore/pull/67097), [dotnet/aspnetcore #67007](https://github.com/dotnet/aspnetcore/pull/67007)). OpenAPI 3.2 is the newest version of the specification. Documents continue to generate as before; set the document version explicitly if you need to target an earlier version for tooling that hasn't adopted 3.2 yet.
 
-This builds on the Preview 5 support for declaring multiple response types per status code, so an endpoint that returns one of several shapes is now described accurately in the document.
+## Unions in ASP.NET Core
+
+C# union types are a preview language feature in .NET 11 (see the [C# release notes](./csharp.md)), and `System.Text.Json` serializes them natively (see the [.NET libraries release notes](./libraries.md#systemtextjson-serializes-c-union-types)). Because ASP.NET Core uses `System.Text.Json` for JSON, union types work as JSON request bodies and return types throughout the stack with no ASP.NET-specific configuration:
+
+- **Minimal APIs** — union body parameters and return types, including `Task<Union>`, `IAsyncEnumerable<Union>`, and `Results<T1, T2>`, in both the runtime (`RequestDelegateFactory`) and source-generated request delegates ([dotnet/aspnetcore #66951](https://github.com/dotnet/aspnetcore/pull/66951)).
+- **MVC and Razor Pages** — union types as `[FromBody]` parameters and action or page-handler return types ([dotnet/aspnetcore #67005](https://github.com/dotnet/aspnetcore/pull/67005)).
+- **SignalR** — union types as hub method parameters, return values, and stream items when using the JSON hub protocol ([dotnet/aspnetcore #67125](https://github.com/dotnet/aspnetcore/pull/67125)).
+- **Blazor** — union types as component parameters, JS interop arguments and results, and persisted component state. Server and WebAssembly prerendering now correctly round-trip a union whose active case is `null` ([dotnet/aspnetcore #67296](https://github.com/dotnet/aspnetcore/pull/67296)).
+
+```csharp
+// Requires <LangVersion>preview</LangVersion>
+public record class Dog(string Name);
+public record class Cat(int Lives);
+public union Pet(Dog, Cat);
+
+// The active case is serialized on the way out and described with anyOf in OpenAPI.
+app.MapGet("/pets/{id}", Pet (int id) => id == 0 ? new Dog("Rex") : new Cat(9));
+```
+
+For **OpenAPI**, an endpoint that returns a union is described with an `anyOf` schema listing each case type ([dotnet/aspnetcore #67001](https://github.com/dotnet/aspnetcore/pull/67001)). Unlike polymorphic types, union cases don't carry a `$type` discriminator, so a case such as `Dog` reuses the standalone `#/components/schemas/Dog` component instead of a duplicated, prefixed one. ApiExplorer detects a union through `JsonTypeInfoKind.Union`, so the schema also flows through to Swashbuckle and NSwag.
+
+A few limits apply in this preview. Only JSON request bodies and responses are supported — binding a union from the query string, route values, headers, or form fields is not yet available ([dotnet/aspnetcore #66648](https://github.com/dotnet/aspnetcore/issues/66648)). When multiple cases serialize to the same JSON shape, disambiguate them with a `[JsonUnion]` classifier (a `System.Text.Json` feature). SignalR unions require the JSON hub protocol; the MessagePack and Newtonsoft.Json protocols don't support unions.
 
 ## Short-circuit endpoints with an attribute
 
@@ -112,20 +136,23 @@ The same attribute works on minimal API endpoints, and the existing `ShortCircui
 app.MapGet("/health", [ShortCircuit] () => "Healthy");
 ```
 
-## SignalR refreshes authentication on long-lived connections
+## SignalR authentication refresh
 
-SignalR connections can now refresh authentication without dropping the connection when the access token expires ([dotnet/aspnetcore #67400](https://github.com/dotnet/aspnetcore/pull/67400)). The server exposes a `/refresh` endpoint alongside `/negotiate` and reports the token lifetime in the negotiate response. The .NET client automatically re-authenticates before the token expires, so a hub connection that previously closed when its bearer token aged out can stay open.
+SignalR connections can now refresh authentication without dropping the connection when the access token expires ([dotnet/aspnetcore #67400](https://github.com/dotnet/aspnetcore/pull/67400)). The server exposes a `/refresh` endpoint alongside `/negotiate` and reports the token lifetime in the negotiate response. The .NET client re-authenticates before the token expires, so a hub connection that previously closed when its bearer token aged out can stay open. In this preview the feature is implemented for the .NET client; the JavaScript/TypeScript client and Azure SignalR Service support are in progress.
 
-Enable the feature when mapping the hub:
+Enable the feature per hub on the server:
 
 ```csharp
 app.MapHub<ChatHub>("/chat", options =>
 {
     options.EnableAuthenticationRefresh = true;
+
+    // Optional: decide whether a given connection may refresh.
+    options.OnAuthenticationRefresh = context => ValueTask.FromResult(true);
 });
 ```
 
-A hub can react to a refreshed identity by overriding `OnAuthenticationRefreshedAsync`, and the server can customize the refresh decision with `HttpConnectionDispatcherOptions.OnAuthenticationRefresh`:
+A hub can react to a refreshed identity by overriding `OnAuthenticationRefreshedAsync`:
 
 ```csharp
 public class ChatHub : Hub
@@ -134,6 +161,44 @@ public class ChatHub : Hub
     {
         // The connection's User has been updated with the refreshed token.
         return Task.CompletedTask;
+    }
+}
+```
+
+Automatic refresh is on by default in the .NET client and is configurable with `WithAuthenticationRefresh`:
+
+```csharp
+var connection = new HubConnectionBuilder()
+    .WithUrl("https://example.com/chat")
+    .WithAuthenticationRefresh(options =>
+    {
+        // EnableAutoRefresh is true by default.
+        options.RefreshBeforeExpiration = TimeSpan.FromMinutes(1);
+        options.OnAuthenticationRefreshed = context => Task.CompletedTask;
+        options.OnAuthenticationRefreshFailed = context => Task.CompletedTask;
+    })
+    .Build();
+```
+
+## Cancel hub invocations from the client
+
+The SignalR client can now cancel a regular, non-streaming hub method invocation ([dotnet/aspnetcore #64098](https://github.com/dotnet/aspnetcore/pull/64098)). Previously only streaming invocations could be cancelled from the client. Now, when you pass a `CancellationToken` to `InvokeAsync` and cancel it, the client sends a cancellation message and the hub method's `CancellationToken` parameter is triggered on the server.
+
+```csharp
+// Client — cancelling the token cancels the server-side invocation.
+using var cts = new CancellationTokenSource();
+var work = connection.InvokeAsync("LongRunningWork", cts.Token);
+// ...
+cts.Cancel();
+```
+
+```csharp
+// Hub — accept a CancellationToken to observe client cancellation.
+public class WorkHub : Hub
+{
+    public async Task LongRunningWork(CancellationToken cancellationToken)
+    {
+        await Task.Delay(TimeSpan.FromMinutes(5), cancellationToken);
     }
 }
 ```
@@ -158,13 +223,11 @@ public class ChatHub : Hub
 
 Thank you contributors! ❤️
 
-- [@Alex-Sob](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AAlex-Sob+milestone%3A11.0-preview6)
 - [@Bellambharath](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3ABellambharath+milestone%3A11.0-preview6)
 - [@classyk12](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Aclassyk12+milestone%3A11.0-preview6)
 - [@desjoerd](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Adesjoerd+milestone%3A11.0-preview6)
 - [@doominator42](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Adoominator42+milestone%3A11.0-preview6)
 - [@GrantTotinov](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AGrantTotinov+milestone%3A11.0-preview6)
-- [@jesuszarate](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Ajesuszarate+milestone%3A11.0-preview6)
 - [@medhatiwari](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amedhatiwari+milestone%3A11.0-preview6)
 - [@Porozhniakov](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3APorozhniakov+milestone%3A11.0-preview6)
 - [@rdeveen](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Ardeveen+milestone%3A11.0-preview6)
