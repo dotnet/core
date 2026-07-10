@@ -21,9 +21,9 @@
 ## NativeAOT CLI serves the full command surface
 
 Preview 5 packaged the NativeAOT `dotnet-aot` library and gated it behind
-`DOTNET_CLI_ENABLEAOT=true`. Preview 6 keeps the off-by-default behavior, but 
-unifies the managed and NativeAOT CLI parsers into a single shared implementation, 
-so the AOT fast path now parses, validates, and renders `--help` for every command 
+`DOTNET_CLI_ENABLEAOT=true`. Preview 6 keeps the off-by-default behavior, but
+unifies the managed and NativeAOT CLI parsers into a single shared implementation,
+so the AOT fast path now parses, validates, and renders `--help` for every command
 — not just the small subset it previously handled
 ([dotnet/sdk #54653](https://github.com/dotnet/sdk/pull/54653)).
 
@@ -100,6 +100,14 @@ forwarded to MSBuild instead of being passed as test application arguments
 1.1.0, stdout/stderr and `IOutputDevice` messages are streamed live through the
 terminal reporter instead of being shown only on failure
 ([dotnet/sdk #54825](https://github.com/dotnet/sdk/pull/54825)).
+
+**Live display of currently running tests** — the progress area now shows the
+tests that are in flight while a run is underway, using a new
+`TestInProgressMessages` IPC event that MTP emits for started tests
+([dotnet/sdk #54486](https://github.com/dotnet/sdk/pull/54486)). The panel keeps
+per-assembly `... and X more` trimming for large parallel runs and is enabled
+only for interactive ANSI terminals — it stays off in CI, `--no-ansi`,
+`--no-progress`, and non-interactive environments.
 
 **Two-stage Ctrl+C cancellation** — the first press stops scheduling new test
 apps and shows a hint; the second press force-kills all child test processes
