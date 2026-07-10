@@ -102,6 +102,26 @@ Always note the package version in a markdown comment so reviewers know the veri
 
 This makes it possible to distinguish "API doesn't exist" from "verified against a stale build."
 
+## Capturing preview API changes
+
+Preview notes double as an upgrade guide, so a preview that renames, reshapes, or removes a preview API must call that out — even when the feature already shipped in an earlier preview. A single-milestone `changes.json` can miss these: a rename often looks like an ordinary PR, and `breaking_changes` isn't always set.
+
+Diff the previous preview's ref packs against the current preview's to surface every public API delta:
+
+```bash
+dnx dotnet-inspect -y -- diff \
+  --package "Microsoft.AspNetCore.App.Ref@11.0.0-preview.5..11.0.0-preview.6" \
+  --source "$FEED"
+```
+
+For each removed or renamed public type or member:
+
+1. **Search the prior previews' notes for the old name.** If it was documented, the change is a _preview API change_ — add a migration note (`OldName` is now `NewName`) to the `Preview API changes` section and don't re-document the feature.
+2. **If it shipped in the last stable release** and the change breaks code written against it, it's a _breaking change_ instead.
+3. **If it was never public or never documented**, it usually needs no note.
+
+Record the diff range you used in a markdown comment, the same way you record verification packages, so reviewers can see the coverage.
+
 ## When to verify
 
 Verify **every** API name that appears in:

@@ -146,6 +146,22 @@ Examples:
 - ❌ Repeating the full explanation of what runtime-async is from P1 (already documented)
 - ❌ "More JIT optimizations landed this preview." (no specific news)
 
+## Preview API changes vs. breaking changes
+
+Preview release notes are an upgrade guide from the previous preview. When a preview API is renamed, reshaped, or removed between previews, document the change so adopters can update — even if the feature itself was already covered in an earlier preview.
+
+- **Use a dedicated `Preview API changes` section** — list these as short migration notes (`OldName` is now `NewName`), not as new feature writeups. Don't re-document the feature; just record what changed.
+- **Reserve `Breaking changes` for version-to-version breaks** — a preview-to-preview rename is not a breaking change, because the API has not shipped in a stable release yet. Only put changes that break code written against a shipped-stable API (for example, a .NET 10 → .NET 11 behavior change) under `Breaking changes`.
+- **New default behavior is a feature, not a breaking change** — when a preview turns on new functionality by default (for example, automatic CSRF protection), document it as a feature and note the new default inside that feature's section.
+- **Check earlier previews before writing** — when an API changed, look at the prior previews' notes for the original name. If it was documented before under a different name, frame the entry as a rename that points back to that earlier coverage. This catches renames a single-milestone diff would otherwise miss (for example, `EnvironmentBoundary`, documented in Preview 1, became `EnvironmentView` in Preview 6).
+
+Examples:
+
+- ✅ "`EnvironmentBoundary` was renamed to `EnvironmentView`." (preview → preview rename, in `Preview API changes`)
+- ✅ "Cross-origin requests are now rejected by default." (new default behavior, documented as a feature)
+- ❌ Listing a preview-only rename under `Breaking changes`
+- ❌ Re-documenting the whole `EnvironmentView` feature when only the name changed
+
 ## Filtered features
 
 When you cut a feature for failing the 20/80 rule or two-sentence test, record it in an HTML comment block in the output file. This creates a learning record — future runs and human reviewers can see what was considered and why it was excluded.

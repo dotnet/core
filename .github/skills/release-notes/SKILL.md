@@ -15,7 +15,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 1. `generate-changes` diffs `source-manifest.json` between VMR refs to produce `changes.json`
 2. `generate-features` reads `changes.json`, resolves revert/backout relationships, and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
 3. `update-existing-branch` handles incremental reruns when a milestone branch already exists, merging deltas instead of restarting from scratch
-4. `api-diff` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build
+4. `api-diff` / `dotnet-inspect` verifies public APIs, confirms suspect features still exist in the shipped build, and diffs the previous preview against the current one to capture preview API changes (see [api-verification.md](references/api-verification.md#capturing-preview-api-changes))
 5. `release-notes` writes curated markdown using the higher-value entries from `features.json`
 6. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
 7. Output is a set of pull requests per release milestone in dotnet/core: a base PR that holds shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and one PR per component file. Each component PR targets the base branch so component teams review and edit their file in isolation. See [`pr-layout.md`](references/pr-layout.md) for the full layout and naming scheme.
