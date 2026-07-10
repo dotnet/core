@@ -21,10 +21,10 @@
 ## NativeAOT CLI serves the full command surface
 
 Preview 5 packaged the NativeAOT `dotnet-aot` library and gated it behind
-`DOTNET_CLI_ENABLEAOT=true`. Preview 6 unifies the managed and NativeAOT CLI
-parsers into a single shared implementation, so the AOT fast path now parses,
-validates, and renders `--help` for every command — not just the small subset it
-previously handled
+`DOTNET_CLI_ENABLEAOT=true`. Preview 6 keeps the off-by-default behavior, but 
+unifies the managed and NativeAOT CLI parsers into a single shared implementation, 
+so the AOT fast path now parses, validates, and renders `--help` for every command 
+— not just the small subset it previously handled
 ([dotnet/sdk #54653](https://github.com/dotnet/sdk/pull/54653)).
 
 Commands that can run entirely without the managed runtime execute natively.
@@ -181,10 +181,6 @@ The OTLP telemetry exporter is now also enabled when any standard OpenTelemetry
 headers, or timeout — including signal-specific `_TRACES_*` and `_METRICS_*`
 variants), in addition to the existing `DOTNET_CLI_TELEMETRY_ENABLE_EXPORTER`
 flag ([dotnet/sdk #54386](https://github.com/dotnet/sdk/pull/54386)).
-
-<!-- Filtered: MSBuild IMultiThreadableTask migrations (20+ PRs), internal test suite MSTest migrations,
-     CI/CD pipeline restructuring, GenAPI formatting improvements, telemetry LLM detection expansion,
-     branding updates, dependency flow, merge commits, localization check-ins -->
 
 ## Bug fixes
 
