@@ -16,11 +16,11 @@
 NuGet.Protocol now has a feature-flagged System.Text.Json deserialization path across plugin messages, V2 autocomplete, V3 search, package metadata, service-index, registration, repository-signature, and vulnerability metadata resources. The work also annotates AOT-incompatible paths and removes remaining Newtonsoft.Json calls from trimmed AOT paths, reducing one measured AOT-trimmed app by about 6 MB ([NuGet/NuGet.Client #7326](https://github.com/NuGet/NuGet.Client/pull/7326), [NuGet/NuGet.Client #7422](https://github.com/NuGet/NuGet.Client/pull/7422), [NuGet/NuGet.Client #7424](https://github.com/NuGet/NuGet.Client/pull/7424), [NuGet/NuGet.Client #7449](https://github.com/NuGet/NuGet.Client/pull/7449), [NuGet/NuGet.Client #7465](https://github.com/NuGet/NuGet.Client/pull/7465), [NuGet/NuGet.Client #7472](https://github.com/NuGet/NuGet.Client/pull/7472), [NuGet/NuGet.Client #7473](https://github.com/NuGet/NuGet.Client/pull/7473), [NuGet/NuGet.Client #7480](https://github.com/NuGet/NuGet.Client/pull/7480), [NuGet/NuGet.Client #7481](https://github.com/NuGet/NuGet.Client/pull/7481), [NuGet/NuGet.Client #7493](https://github.com/NuGet/NuGet.Client/pull/7493)).
 
 ```console
-> set NUGET_USE_SYSTEM_TEXT_JSON_DESERIALIZATION=1
+> set NUGET_USE_SYSTEM_TEXT_JSON_DESERIALIZATION=true
 > dotnet restore
 ```
 
-Visual Studio can also enable the same path through experimentation. If the environment variable is set, it remains the primary source of truth.
+The environment variable enables the System.Text.Json path when set to `true`.
 
 ## Package search supports package-type filters consistently
 
