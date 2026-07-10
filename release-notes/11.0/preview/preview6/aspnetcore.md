@@ -6,15 +6,13 @@
 - [Async validation for minimal APIs](#async-validation-for-minimal-apis)
 - [Automatic cross-origin (CSRF) protection](#automatic-cross-origin-csrf-protection)
 - [Blazor Virtualize can scroll to an item](#blazor-virtualize-can-scroll-to-an-item)
-- [Configure browser behavior from the server](#configure-browser-behavior-from-the-server)
-- [Render content by environment in Blazor](#render-content-by-environment-in-blazor)
 - [OpenAPI 3.2 by default](#openapi-32-by-default)
 - [Unions in ASP.NET Core](#unions-in-aspnet-core)
 - [Short-circuit endpoints with an attribute](#short-circuit-endpoints-with-an-attribute)
 - [SignalR authentication refresh](#signalr-authentication-refresh)
 - [Cancel hub invocations from the client](#cancel-hub-invocations-from-the-client)
 - [dotnet user-jwts supports file-based apps](#dotnet-user-jwts-supports-file-based-apps)
-- [Breaking changes](#breaking-changes)
+- [Preview API changes](#preview-api-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -72,7 +70,7 @@ Validators run concurrently where possible: asynchronous attributes on the same 
 
 Apps built with `WebApplicationBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Same-origin and user-initiated requests are allowed; a cross-origin request that tries to consume a form is rejected.
 
-The check runs as auto-injected middleware after routing and authentication, and records its result on `IAntiforgeryValidationFeature`. Framework form consumers (MVC, minimal API `[FromForm]`, and Blazor SSR) enforce the verdict when they read the form — see the related [breaking change](#breaking-changes). To customize or replace the policy, register an `ICsrfProtection` implementation:
+The check runs as auto-injected middleware after routing and authentication, and records its verdict on `IAntiforgeryValidationFeature` instead of short-circuiting the request ([dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). Framework form consumers (MVC, minimal API `[FromForm]`, and Blazor SSR) enforce the verdict when they read the form, so token antiforgery and cross-origin CSRF share a single, lazily enforced result. Apps that call `UseAntiforgery()` see no change. To customize or replace the policy, register an `ICsrfProtection` implementation:
 
 ```csharp
 public sealed class MyCsrfProtection : ICsrfProtection
@@ -107,38 +105,6 @@ The `Virtualize<TItem>` component can now open at a specific item and scroll to 
 ```
 
 Out-of-range indexes are clamped to the valid range. If a second `ScrollToIndexAsync` call starts while one is still in flight, the last call wins. Calling `ScrollToIndexAsync` before the first interactive render throws `InvalidOperationException`; use `InitialIndex` to set the starting position instead.
-
-## Configure browser behavior from the server
-
-Blazor apps can configure client-side behavior from the server when mapping Razor components, using `WithBrowserOptions` ([dotnet/aspnetcore #67337](https://github.com/dotnet/aspnetcore/pull/67337)). Options include the client-side log level, interactive-server reconnection behavior, whether server-side rendering preserves the DOM during enhanced navigation, and environment variables passed to a WebAssembly runtime.
-
-```csharp
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode()
-    .WithBrowserOptions(options =>
-    {
-        options.LogLevel = LogLevel.Warning;
-        options.Server.ReconnectionRetryInterval = TimeSpan.FromSeconds(1.5);
-        options.Ssr.PreserveDom = true;
-        options.WebAssembly.EnvironmentVariables["OTEL_EXPORTER_OTLP_ENDPOINT"] = "https://localhost:4318";
-    });
-```
-
-## Render content by environment in Blazor
-
-The new `EnvironmentView` component renders its child content based on the current hosting environment, similar to MVC's `<environment>` tag helper ([dotnet/aspnetcore #67369](https://github.com/dotnet/aspnetcore/pull/67369)). Use `Include` and `Exclude` to target one or more environments:
-
-```razor
-<EnvironmentView Include="Development">
-    <p>Debug tools are enabled.</p>
-</EnvironmentView>
-
-<EnvironmentView Exclude="Development">
-    <p>Running in a non-development environment.</p>
-</EnvironmentView>
-```
-
-`NavigationManager` also adds `GetUriWithFragment`, which builds a URI from the current location with a different fragment while preserving the query string ([dotnet/aspnetcore #67368](https://github.com/dotnet/aspnetcore/pull/67368)).
 
 ## OpenAPI 3.2 by default
 
@@ -263,10 +229,15 @@ public class WorkHub : Hub
 dotnet user-jwts create --file app.cs
 ```
 
-## Breaking changes
+## Preview API changes
 
-- **Custom minimal API validation resolvers** — `Microsoft.Extensions.Validation.IValidatableInfo` was split into `IValidatableTypeInfo`, `IValidatableParameterInfo`, and `IValidatablePropertyInfo`, and `ValidateContext.ValidationErrors` is now a read-only dictionary that you add to with the new `ValidateContext.AddValidationError` method ([dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Apps that use the built-in `[ValidatableType]` and `AddValidation()` are unaffected; only code that implements `IValidatableInfoResolver` directly needs to update.
-- **Antiforgery and cross-origin CSRF share one verdict** — `CsrfProtectionMiddleware` no longer short-circuits a cross-origin request. It records its verdict on `IAntiforgeryValidationFeature`, and the request is rejected only when a component actually reads the form ([dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). Apps that call `UseAntiforgery()` see no change. This unifies token antiforgery and cross-origin CSRF behind a single, lazily enforced verdict.
+These preview and experimental APIs changed in Preview 6. If you adopted them in an earlier build, update your code. None of them has shipped in a stable release, so these are not breaking changes.
+
+- **`EnvironmentView` component** — the Blazor `EnvironmentBoundary` component (added in [Preview 1](../preview1/aspnetcore.md#environmentboundary-component)) was renamed to `EnvironmentView` ([dotnet/aspnetcore #67369](https://github.com/dotnet/aspnetcore/pull/67369)). Its `Include` and `Exclude` parameters are unchanged.
+- **`NavigationManager.GetUriWithFragment`** — `GetUriWithHash` was renamed to `GetUriWithFragment` ([dotnet/aspnetcore #67368](https://github.com/dotnet/aspnetcore/pull/67368)).
+- **Blazor browser options** — the server-side browser configuration API was reshaped ([dotnet/aspnetcore #67337](https://github.com/dotnet/aspnetcore/pull/67337)): `WithBrowserConfiguration` is now `WithBrowserOptions`, `BrowserConfiguration` is now `BrowserOptions`, `ServerBrowserOptions` is now `InteractiveServerBrowserOptions`, `SsrBrowserOptions.DisableDomPreservation` is now `PreserveDom` (with the opposite meaning), and `CircuitInactivityTimeoutMs` is now `CircuitInactivityTimeout` (a `TimeSpan`).
+- **Blazor media components moved** — the experimental `Image`, `Video`, `FileDownload`, and `MediaSource` components were removed from `Microsoft.AspNetCore.Components.Web` (namespace `Microsoft.AspNetCore.Components.Web.Media`) and are moving to a separate `Microsoft.AspNetCore.Components.Media` package and namespace ([dotnet/aspnetcore #67130](https://github.com/dotnet/aspnetcore/pull/67130)).
+- **Minimal API validation resolvers** — `Microsoft.Extensions.Validation.IValidatableInfo` was split into `IValidatableTypeInfo`, `IValidatableParameterInfo`, and `IValidatablePropertyInfo`, and `ValidateContext.ValidationErrors` is now a read-only dictionary that you add to with the new `ValidateContext.AddValidationError` method ([dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Apps that use the built-in `[ValidatableType]` and `AddValidation()` are unaffected; only code that implements `IValidatableInfoResolver` directly needs to update.
 
 ## Bug fixes
 
