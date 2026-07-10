@@ -1,7 +1,5 @@
 # MSBuild in .NET 11 Preview 6 - Release Notes
 
-<!-- Verified against changes.json for .NET 11 Preview 6 (SDK 11.0.100-preview.6.26328.106) -->
-
 .NET 11 Preview 6 includes new MSBuild features & enhancements:
 
 - [Parallel project evaluation](#parallel-project-evaluation)
@@ -103,12 +101,6 @@ Preview 6 migrates more in-box tasks to the multithreaded execution model, remov
 - `GenerateLauncher` ([dotnet/msbuild #13699](https://github.com/dotnet/msbuild/pull/13699))
 - `LC` ([dotnet/msbuild #13786](https://github.com/dotnet/msbuild/pull/13786))
 - `TlbImp` and `AxImp` ([dotnet/msbuild #13708](https://github.com/dotnet/msbuild/pull/13708))
-
-<!-- Cut candidates:
-- #13926 CS8618 suppressor for [Required] task properties — useful for task authors but narrow audience
-- #13577 Terminal Logger shows enabled log paths — nice but diagnostic-verbosity-only in most cases
-- #13653 MSBuild Coordinator — infrastructure, not user-configurable yet
--->
 
 ## Bug fixes
 
