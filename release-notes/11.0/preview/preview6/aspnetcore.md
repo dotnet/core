@@ -223,11 +223,13 @@ public class WorkHub : Hub
 
 Thank you contributors! ❤️
 
+- [@Alex-Sob](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AAlex-Sob+milestone%3A11.0-preview6)
 - [@Bellambharath](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3ABellambharath+milestone%3A11.0-preview6)
 - [@classyk12](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Aclassyk12+milestone%3A11.0-preview6)
 - [@desjoerd](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Adesjoerd+milestone%3A11.0-preview6)
 - [@doominator42](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Adoominator42+milestone%3A11.0-preview6)
 - [@GrantTotinov](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AGrantTotinov+milestone%3A11.0-preview6)
+- [@jesuszarate](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Ajesuszarate+milestone%3A11.0-preview6)
 - [@medhatiwari](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amedhatiwari+milestone%3A11.0-preview6)
 - [@Porozhniakov](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3APorozhniakov+milestone%3A11.0-preview6)
 - [@rdeveen](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Ardeveen+milestone%3A11.0-preview6)
