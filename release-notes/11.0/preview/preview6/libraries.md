@@ -34,10 +34,10 @@ using System.Text;
 using Stream config = new StringStream(yamlText, Encoding.UTF8);
 var settings = ParseConfiguration(config);
 
-// Expose an existing buffer as a read-only stream.
+// Expose an existing buffer as a read-only stream, for example as an HTTP request body.
 ReadOnlyMemory<byte> payload = GetPayload();
-using Stream request = new ReadOnlyMemoryStream(payload);
-await httpContent.CopyToAsync(request);
+using Stream body = new ReadOnlyMemoryStream(payload);
+await httpClient.PostAsync(uri, new StreamContent(body));
 ```
 
 `ReadOnlySequenceStream` is especially useful with `System.IO.Pipelines`, because it streams directly over the segments of a `ReadOnlySequence<byte>` instead of allocating a contiguous copy.
@@ -53,7 +53,7 @@ await httpContent.CopyToAsync(request);
 ```csharp
 using System.ComponentModel.DataAnnotations;
 
-public sealed class UniqueUserNameAttribute : AsyncValidationAttribute
+public sealed class ValidVatNumberAttribute : AsyncValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext context)
         => ValidationResult.Success;
@@ -61,21 +61,25 @@ public sealed class UniqueUserNameAttribute : AsyncValidationAttribute
     protected override async Task<ValidationResult?> IsValidAsync(
         object? value, ValidationContext context, CancellationToken cancellationToken)
     {
-        var users = context.GetRequiredService<IUserStore>();
-        return await users.ExistsAsync((string?)value, cancellationToken)
-            ? new ValidationResult("That user name is already taken.")
-            : ValidationResult.Success;
+        var registry = context.GetRequiredService<IVatRegistry>();
+        return await registry.IsRegisteredAsync((string?)value, cancellationToken)
+            ? ValidationResult.Success
+            : new ValidationResult("That VAT number isn't registered with the tax authority.");
     }
 }
 
-public class Registration
+public class Invoice
 {
+    // Synchronous rules check the format; the asynchronous rule checks the registry.
     [Required]
-    [UniqueUserName]
-    public string UserName { get; set; } = "";
+    [StringLength(14, MinimumLength = 8)]
+    [RegularExpression(@"^[A-Z]{2}[A-Z0-9]+$")]
+    [ValidVatNumber] // asynchronous
+    public string VatNumber { get; set; } = "";
 }
 
-// Validate asynchronously
+// Always validate on the server during submission.
+// Never trust client-side validation as it's purely for an improved user experience.
 var context = new ValidationContext(model, serviceProvider, items: null);
 await Validator.ValidateObjectAsync(model, context, validateAllProperties: true);
 ```
@@ -117,7 +121,7 @@ The same release adds `ActivitySourceFactory` and unseals `ActivitySource`, whic
 
 - **Patterned construction** — `CreateGeometricSequence`, `CreateAlternatingSequence`, and `CreateHarmonicSequence` build a vector from a starting value and a rule.
 - **Interleave and de-interleave** — `Zip`, `ZipLower`/`ZipUpper`, `Unzip`, `UnzipEven`/`UnzipOdd`.
-- **Rearrange** — `Concat` (lower/upper halves), `Reverse`, `Shuffle`, and `ShuffleNative`.
+- **Rearrange** — the `Concat` family (`ConcatLowerLower`, `ConcatLowerUpper`, `ConcatUpperLower`, `ConcatUpperUpper`) and `Reverse`.
 
 ```csharp
 using System.Runtime.Intrinsics;
