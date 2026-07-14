@@ -121,6 +121,8 @@ That means a change can be:
 
 In practice, a `score` around `0-4` with `breaking_changes: true` usually means **one line in a "Breaking changes" section**, not a full feature writeup.
 
+`breaking_changes: true` also covers **preview-to-preview API changes** — renames, reshapes, or removals of APIs that have not shipped in a stable release. The writing stage routes those to a separate `Preview API changes` section and reserves `Breaking changes` for version-to-version breaks of shipped-stable APIs. See [editorial-rules.md](editorial-rules.md#preview-api-changes-vs-breaking-changes).
+
 ## Revert annotations
 
 `changes.json` is the raw shipped-change manifest. During editorial triage,

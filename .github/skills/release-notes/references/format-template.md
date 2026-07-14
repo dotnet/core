@@ -18,9 +18,13 @@ Standard document structure for .NET release notes markdown files.
 
 <description> ([<owner>/<repo> #NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN)).
 
+## Preview API changes
+
+- Migration note for a preview API that changed since the previous preview (`OldName` is now `NewName`) — preview only, not a version-to-version break
+
 ## Breaking changes
 
-- Short migration note or heads-up for narrower changes that users may need to react to
+- Short migration note or heads-up for a version-to-version break of an API that shipped in a stable release
 
 ## Bug fixes
 
@@ -87,7 +91,7 @@ Known component docs links:
 2. **One paragraph of context** — what the feature does and why it matters in concrete terms, with PR/issue links; avoid inferred feelings or marketing-style claims
 3. **Code sample** — show the feature in use
 4. **Feature ordering** — highest customer impact first
-5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections
+5. **Breaking changes vs. Preview API changes** — put version-to-version breaks of shipped-stable APIs in a short `Breaking changes` section before Bug fixes. Put preview-to-preview API changes (renames, reshapes, or removals of APIs that have not shipped stable) in a separate `Preview API changes` section, framed as migration notes (`OldName` is now `NewName`). Both hold low-score `breaking_changes: true` entries, not full feature sections; omit either section when it would be empty. See [editorial-rules.md](editorial-rules.md#preview-api-changes-vs-breaking-changes).
 6. **Preview feature callout** — when a feature is listed in `release-notes/features.json`, start its section with the standard blockquote callout from that file
 
 ## Issue and PR references
