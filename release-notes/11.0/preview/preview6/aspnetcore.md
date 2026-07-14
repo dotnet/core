@@ -122,7 +122,7 @@ The `Virtualize<TItem>` component can now open at a specific item and scroll to 
 }
 ```
 
-Out-of-range indexes are clamped to the valid range. If a second `ScrollToIndexAsync` call starts while one is still in flight, the last call wins. Calling `ScrollToIndexAsync` before the first interactive render throws `InvalidOperationException`; use `InitialIndex` to set the starting position instead.
+Out-of-range indexes are clamped to the valid range. If a second `ScrollToIndexAsync` call starts while one is still in flight, the last call wins. If the user scrolls during a `ScrollToIndexAsync` call, the user's scroll wins. Calling `ScrollToIndexAsync` before the first interactive render throws `InvalidOperationException`; use `InitialIndex` to set the starting position instead.
 
 ## OpenAPI 3.2 by default
 
@@ -147,7 +147,7 @@ public union Pet(Dog, Cat);
 app.MapGet("/pets/{id}", Pet (int id) => id == 0 ? new Dog("Rex") : new Cat(9));
 ```
 
-For **OpenAPI**, an endpoint that returns a union is described with an `anyOf` schema listing each case type ([dotnet/aspnetcore #67001](https://github.com/dotnet/aspnetcore/pull/67001)). Unlike polymorphic types, union cases don't carry a `$type` discriminator, so a case such as `Dog` reuses the standalone `#/components/schemas/Dog` component instead of a duplicated, prefixed one. ApiExplorer detects a union through `JsonTypeInfoKind.Union`, so the schema also flows through to Swashbuckle and NSwag.
+For **OpenAPI**, an endpoint that returns a union is described with an `anyOf` schema listing each case type ([dotnet/aspnetcore #67001](https://github.com/dotnet/aspnetcore/pull/67001)). Unlike polymorphic types, union cases don't carry a `$type` discriminator, so a case such as `Dog` reuses the standalone `#/components/schemas/Dog` component instead of a duplicated, prefixed one. Third-party generators such as Swashbuckle and NSwag do not yet recognize unions and will produce their default schema shape.
 
 A few limits apply in this preview. Only JSON request bodies and responses are supported. Binding a union from the query string, route values, headers, or form fields is not yet available ([dotnet/aspnetcore #66648](https://github.com/dotnet/aspnetcore/issues/66648)). When multiple cases serialize to the same JSON shape, disambiguate them with a `[JsonUnion]` classifier (a `System.Text.Json` feature). SignalR unions require the JSON hub protocol; the MessagePack and Newtonsoft.Json protocols don't support unions.
 
