@@ -291,7 +291,7 @@ These preview and experimental APIs changed in Preview 6. If you adopted them in
   - Added `QUERY` to the known HTTP methods used by hosting metrics ([dotnet/aspnetcore #63276](https://github.com/dotnet/aspnetcore/pull/63276)). Thank you [@doominator42](https://github.com/doominator42)!
 - **Blazor**
   - `WebViewRenderer` no longer throws `NotSupportedException` when a Blazor Hybrid app renders a component annotated with `@rendermode`; render modes are treated as no-ops because a WebView is always interactive ([dotnet/aspnetcore #65876](https://github.com/dotnet/aspnetcore/pull/65876)).
-  - The `Virtualize` component no longer violates a strict `style-src 'self'` Content Security Policy. Its runtime spacer styles are emitted in a `data-blazor-style` attribute and applied through the CSS Object Model by a `MutationObserver`, instead of inline `style` attributes ([dotnet/aspnetcore #66680](https://github.com/dotnet/aspnetcore/pull/66680)).
+  - The `Virtualize` component no longer violates a strict `style-src 'self'` Content Security Policy. The one style it computes at runtime, the spacer height, is now written to a `data-blazor-virtualize-reserved-height` attribute and applied on the client through the CSS Object Model, instead of an inline `style` attribute ([dotnet/aspnetcore #66680](https://github.com/dotnet/aspnetcore/pull/66680)).
   - For pages that use session-backed features (a `[SupplyParameterFromSession]` parameter or the session-storage TempData provider), the `.AspNetCore.Session` cookie is now issued before streaming SSR begins, so the value persists even if nothing is ultimately written ([dotnet/aspnetcore #66832](https://github.com/dotnet/aspnetcore/pull/66832)).
 
 ## Community contributors
