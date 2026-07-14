@@ -3,7 +3,7 @@ description: Agentic workflow import to integrate the Copilot PAT Pool
 
 jobs:
   pat_pool:
-    environment: copilot-pat-pool
+    environment: ${{ github.aw.import-inputs.environment }}
     needs: [pre_activation]
     runs-on: ubuntu-slim
     outputs:
@@ -69,6 +69,9 @@ jobs:
           echo "copilot_pat_number=${PAT_NUMBER}" >> "$GITHUB_OUTPUT"
 
 import-schema:
+  environment:
+    type: string
+    required: true
   COPILOT_PAT_0:
     type: string
     required: false
