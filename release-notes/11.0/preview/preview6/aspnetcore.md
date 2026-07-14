@@ -265,7 +265,7 @@ These preview and experimental APIs changed in Preview 6. If you adopted them in
   - Added the key sub-delimiter between multi-value `Vary` header values in response and output caching ([dotnet/aspnetcore #66936](https://github.com/dotnet/aspnetcore/pull/66936)).
 - **Metrics**
   - Fixed the default value of `System.Diagnostics.Metrics.Meter.IsSupported` ([dotnet/aspnetcore #66846](https://github.com/dotnet/aspnetcore/pull/66846)).
-  - Added `QUERY` to the known HTTP methods used by hosting metrics ([dotnet/aspnetcore #63276](https://github.com/dotnet/aspnetcore/pull/63276)).
+  - Added `QUERY` to the known HTTP methods used by hosting metrics ([dotnet/aspnetcore #63276](https://github.com/dotnet/aspnetcore/pull/63276)). Thank you [@doominator42](https://github.com/doominator42)!
 - **Blazor**
   - `WebViewRenderer` no longer throws `NotSupportedException` when a Blazor Hybrid app renders a component annotated with `@rendermode`; render modes are treated as no-ops because a WebView is always interactive ([dotnet/aspnetcore #65876](https://github.com/dotnet/aspnetcore/pull/65876)).
 
