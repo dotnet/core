@@ -22,9 +22,9 @@ ASP.NET Core updates in .NET 11:
 
 ## Async validation for minimal APIs
 
-Minimal API validation now supports asynchronous validators end-to-end ([dotnet/aspnetcore #66487](https://github.com/dotnet/aspnetcore/pull/66487), [dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Preview 5 shipped the building blocks for asynchronous form validation in Blazor. Preview 6 adds the new asynchronous `DataAnnotations` APIs in the base libraries — `AsyncValidationAttribute`, `IAsyncValidatableObject`, and `Validator.ValidateObjectAsync` — and `Microsoft.Extensions.Validation` now runs them when an endpoint validates a request. The new base-library APIs are covered in the [.NET libraries release notes](./libraries.md#asynchronous-validation-with-dataannotations).
+Minimal API validation now supports asynchronous validators end-to-end ([dotnet/aspnetcore #66487](https://github.com/dotnet/aspnetcore/pull/66487), [dotnet/aspnetcore #67183](https://github.com/dotnet/aspnetcore/pull/67183)). Preview 5 shipped the building blocks for asynchronous form validation in Blazor. Preview 6 adds new asynchronous `DataAnnotations` APIs in the base libraries (`AsyncValidationAttribute` and `IAsyncValidatableObject`), and `Microsoft.Extensions.Validation` now runs them when an endpoint validates a request. The full set of new base-library APIs, including `Validator.ValidateObjectAsync`, is covered in the [.NET libraries release notes](./libraries.md#asynchronous-validation-with-dataannotations).
 
-This lets a validation rule do real work, such as a database lookup or a remote API call, without blocking a thread. A model implements `IAsyncValidatableObject` and returns validation results as an `IAsyncEnumerable<ValidationResult>`. Because `IAsyncValidatableObject` extends `IValidatableObject`, also implement the synchronous `Validate` method. When a type validates asynchronously only, throw from `Validate` so it isn't silently validated through the synchronous APIs:
+This lets a validation rule query a database or call a remote API without blocking a thread. A model implements `IAsyncValidatableObject` and returns validation results as an `IAsyncEnumerable<ValidationResult>`. Because `IAsyncValidatableObject` extends `IValidatableObject`, also implement the synchronous `Validate` method. When a type validates asynchronously only, throw from `Validate` so its validation isn't silently skipped by the synchronous APIs:
 
 ```csharp
 using System.ComponentModel.DataAnnotations;
@@ -39,7 +39,7 @@ public class ReservationRequest : IAsyncValidatableObject
 
     // IValidatableObject (synchronous) — this type validates asynchronously only.
     public IEnumerable<ValidationResult> Validate(ValidationContext context) =>
-        throw new NotSupportedException("Validate this type with ValidateAsync.");
+        throw new InvalidOperationException("Validate this type with ValidateAsync.");
 
     public async IAsyncEnumerable<ValidationResult> ValidateAsync(
         ValidationContext context,
@@ -98,7 +98,7 @@ Out-of-range indexes are clamped to the valid range. If a second `ScrollToIndexA
 
 ## OpenAPI 3.2 by default
 
-Generated OpenAPI documents now target OpenAPI 3.2 by default ([dotnet/aspnetcore #67097](https://github.com/dotnet/aspnetcore/pull/67097), [dotnet/aspnetcore #67007](https://github.com/dotnet/aspnetcore/pull/67007)). OpenAPI 3.2 is the newest version of the specification. Documents continue to generate as before; set the document version explicitly if you need to target an earlier version for tooling that hasn't adopted 3.2 yet.
+Generated OpenAPI documents now target OpenAPI 3.2 by default ([dotnet/aspnetcore #67097](https://github.com/dotnet/aspnetcore/pull/67097), [dotnet/aspnetcore #67007](https://github.com/dotnet/aspnetcore/pull/67007)). OpenAPI 3.2 is the newest version of the specification. Only the default version changes; your generation code and configuration are unchanged. Set the OpenAPI version explicitly to target an earlier one for tooling that hasn't adopted 3.2 yet.
 
 ## Unions in ASP.NET Core
 
@@ -121,11 +121,11 @@ app.MapGet("/pets/{id}", Pet (int id) => id == 0 ? new Dog("Rex") : new Cat(9));
 
 For **OpenAPI**, an endpoint that returns a union is described with an `anyOf` schema listing each case type ([dotnet/aspnetcore #67001](https://github.com/dotnet/aspnetcore/pull/67001)). Unlike polymorphic types, union cases don't carry a `$type` discriminator, so a case such as `Dog` reuses the standalone `#/components/schemas/Dog` component instead of a duplicated, prefixed one. ApiExplorer detects a union through `JsonTypeInfoKind.Union`, so the schema also flows through to Swashbuckle and NSwag.
 
-A few limits apply in this preview. Only JSON request bodies and responses are supported — binding a union from the query string, route values, headers, or form fields is not yet available ([dotnet/aspnetcore #66648](https://github.com/dotnet/aspnetcore/issues/66648)). When multiple cases serialize to the same JSON shape, disambiguate them with a `[JsonUnion]` classifier (a `System.Text.Json` feature). SignalR unions require the JSON hub protocol; the MessagePack and Newtonsoft.Json protocols don't support unions.
+A few limits apply in this preview. Only JSON request bodies and responses are supported. Binding a union from the query string, route values, headers, or form fields is not yet available ([dotnet/aspnetcore #66648](https://github.com/dotnet/aspnetcore/issues/66648)). When multiple cases serialize to the same JSON shape, disambiguate them with a `[JsonUnion]` classifier (a `System.Text.Json` feature). SignalR unions require the JSON hub protocol; the MessagePack and Newtonsoft.Json protocols don't support unions.
 
 ## Short-circuit endpoints with an attribute
 
-The new `[ShortCircuit]` attribute marks an endpoint to run immediately after routing, skipping the rest of the middleware pipeline ([dotnet/aspnetcore #67249](https://github.com/dotnet/aspnetcore/pull/67249)). This is the attribute form of the existing `ShortCircuit()` endpoint convention, so it can be applied directly to MVC controllers and actions. Short-circuiting is useful for endpoints that don't need authentication, CORS, or other middleware — for example a health check or a `robots.txt` response — and it avoids the cost of running that middleware. The endpoint still runs and produces its response; pass an optional status code, such as `[ShortCircuit(404)]`, to set the response status code. Thank you [@Porozhniakov](https://github.com/Porozhniakov) for contributing this feature!
+The new `[ShortCircuit]` attribute marks an endpoint to run immediately after routing, skipping the rest of the middleware pipeline ([dotnet/aspnetcore #67249](https://github.com/dotnet/aspnetcore/pull/67249)). This is the attribute form of the existing `ShortCircuit()` endpoint convention, so it can be applied directly to MVC controllers and actions. Short-circuiting is useful for endpoints that don't need authentication, CORS, or other middleware, such as a health check or a `robots.txt` response. It avoids the cost of running that middleware. The endpoint still runs and produces its response; pass an optional status code, such as `[ShortCircuit(404)]`, to set the response status. Thank you [@Porozhniakov](https://github.com/Porozhniakov) for contributing this feature!
 
 ```csharp
 [ApiController]
