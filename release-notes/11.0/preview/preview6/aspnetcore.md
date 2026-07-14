@@ -6,6 +6,7 @@
 - [Async validation for minimal APIs](#async-validation-for-minimal-apis)
 - [Automatic cross-origin (CSRF) protection](#automatic-cross-origin-csrf-protection)
 - [Blazor Virtualize can scroll to an item](#blazor-virtualize-can-scroll-to-an-item)
+- [Configure Blazor client behavior from the server](#configure-blazor-client-behavior-from-the-server)
 - [OpenAPI 3.2 by default](#openapi-32-by-default)
 - [Unions in ASP.NET Core](#unions-in-aspnet-core)
 - [Short-circuit endpoints with an attribute](#short-circuit-endpoints-with-an-attribute)
@@ -123,6 +124,28 @@ The `Virtualize<TItem>` component can now open at a specific item and scroll to 
 ```
 
 Out-of-range indexes are clamped to the valid range. If a second `ScrollToIndexAsync` call starts while one is still in flight, the last call wins. If the user scrolls during a `ScrollToIndexAsync` call, the user's scroll wins. Calling `ScrollToIndexAsync` before the first interactive render throws `InvalidOperationException`; use `InitialIndex` to set the starting position instead.
+
+## Configure Blazor client behavior from the server
+
+Blazor apps can now configure client-side startup behavior from the server in C# when mapping Razor components, instead of hand-writing `Blazor.start` JavaScript ([dotnet/aspnetcore #67337](https://github.com/dotnet/aspnetcore/pull/67337), [dotnet/aspnetcore #66393](https://github.com/dotnet/aspnetcore/issues/66393)). `WithBrowserOptions` sets options that the server serializes into the rendered page and the Blazor script applies in the browser, across the Server, WebAssembly, and Auto render modes. The options cover the client log level, interactive Server reconnection, whether enhanced navigation preserves the DOM, and a WebAssembly runtime's environment name, culture, and environment variables:
+
+```csharp
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode()
+    .WithBrowserOptions(options =>
+    {
+        options.LogLevel = LogLevel.Warning;
+        options.Server.ReconnectionMaxRetries = 10;
+        options.Server.ReconnectionRetryInterval = TimeSpan.FromSeconds(1.5);
+        options.Ssr.PreserveDom = true;
+        options.WebAssembly.EnvironmentName = "Staging";
+        options.WebAssembly.EnvironmentVariables["OTEL_EXPORTER_OTLP_ENDPOINT"] = "https://localhost:4318";
+    });
+```
+
+You can also set the options from a component with `<ConfigureBrowser>`, or read the resolved options from `HttpContext` with `GetBrowserOptions()`.
+
+The API was introduced in Preview 4 and reshaped in Preview 6 to follow options conventions. If you adopted the earlier shape, `WithBrowserConfiguration` is now `WithBrowserOptions`, `BrowserConfiguration` is now `BrowserOptions`, `ServerBrowserOptions` is now `InteractiveServerBrowserOptions`, `SsrBrowserOptions.DisableDomPreservation` is now `PreserveDom` (with the opposite meaning), and `CircuitInactivityTimeoutMs` is now `CircuitInactivityTimeout` (a `TimeSpan`).
 
 ## OpenAPI 3.2 by default
 
