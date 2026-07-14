@@ -133,9 +133,9 @@ Generated OpenAPI documents now target OpenAPI 3.2 by default ([dotnet/aspnetcor
 [C# union types](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/union) are a preview language feature in .NET 11, and [`System.Text.Json` serializes them natively](./libraries.md#systemtextjson-serializes-c-union-types). Because ASP.NET Core uses `System.Text.Json` for JSON, union types work as JSON request bodies and return types throughout the stack with no ASP.NET-specific configuration:
 
 - **Minimal APIs** — union body parameters and return types, including `Task<Union>`, `IAsyncEnumerable<Union>`, and `Results<T1, T2>`, in both the runtime (`RequestDelegateFactory`) and source-generated request delegates ([dotnet/aspnetcore #66951](https://github.com/dotnet/aspnetcore/pull/66951)).
-- **MVC and Razor Pages** — union types in `[FromBody]` parameters and JSON responses ([dotnet/aspnetcore #67005](https://github.com/dotnet/aspnetcore/pull/67005)).
+- **MVC and Razor Pages** — union types in JSON request bodies and responses ([dotnet/aspnetcore #67005](https://github.com/dotnet/aspnetcore/pull/67005)).
 - **SignalR** — union types as hub method parameters, return values, and stream items when using the JSON hub protocol ([dotnet/aspnetcore #67125](https://github.com/dotnet/aspnetcore/pull/67125)).
-- **Blazor** — union types as component parameters, JS interop arguments and results, and persisted component state ([dotnet/aspnetcore #67296](https://github.com/dotnet/aspnetcore/pull/67296)). During prerendering, a component's parameters are serialized and then deserialized when the component becomes interactive, and a union whose active case is `null` now restores correctly on Server and WebAssembly instead of failing to deserialize.
+- **Blazor** — union types as component parameters, JS interop arguments and results, and persisted component state ([dotnet/aspnetcore #67296](https://github.com/dotnet/aspnetcore/pull/67296)).
 
 ```csharp
 // Requires <LangVersion>preview</LangVersion>
