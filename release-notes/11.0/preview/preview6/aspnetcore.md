@@ -130,7 +130,7 @@ Generated OpenAPI documents now target OpenAPI 3.2 by default ([dotnet/aspnetcor
 
 ## Unions in ASP.NET Core
 
-C# union types are a preview language feature in .NET 11 (see the [C# release notes](./csharp.md)), and `System.Text.Json` serializes them natively (see the [.NET libraries release notes](./libraries.md#systemtextjson-serializes-c-union-types)). Because ASP.NET Core uses `System.Text.Json` for JSON, union types work as JSON request bodies and return types throughout the stack with no ASP.NET-specific configuration:
+[C# union types](./csharp.md#unions-ship-their-support-types-in-the-box) are a preview language feature in .NET 11, and [`System.Text.Json` serializes them natively](./libraries.md#systemtextjson-serializes-c-union-types). Because ASP.NET Core uses `System.Text.Json` for JSON, union types work as JSON request bodies and return types throughout the stack with no ASP.NET-specific configuration:
 
 - **Minimal APIs** — union body parameters and return types, including `Task<Union>`, `IAsyncEnumerable<Union>`, and `Results<T1, T2>`, in both the runtime (`RequestDelegateFactory`) and source-generated request delegates ([dotnet/aspnetcore #66951](https://github.com/dotnet/aspnetcore/pull/66951)).
 - **MVC and Razor Pages** — union types as `[FromBody]` parameters and action or page-handler return types ([dotnet/aspnetcore #67005](https://github.com/dotnet/aspnetcore/pull/67005)).
