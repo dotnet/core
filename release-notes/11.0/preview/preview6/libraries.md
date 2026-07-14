@@ -51,13 +51,14 @@ await httpClient.PostAsync(uri, new StreamContent(body));
 - Call the new `Validator.ValidateObjectAsync`, `TryValidateObjectAsync`, `ValidatePropertyAsync`, and `ValidateValueAsync` methods.
 
 ```csharp
+using System;
 using System.ComponentModel.DataAnnotations;
 
 public sealed class ValidVatNumberAttribute : AsyncValidationAttribute
 {
-    protected override ValidationResult? IsValid(object? value, ValidationContext context)
-        => ValidationResult.Success;
-
+    // Synchronous IsValid. This attribute validates asynchronously only.
+    protected override ValidationResult? IsValid(object? value, ValidationContext context) =>
+        throw new InvalidOperationException("Validate this attribute with IsValidAsync.");
     protected override async Task<ValidationResult?> IsValidAsync(
         object? value, ValidationContext context, CancellationToken cancellationToken)
     {
