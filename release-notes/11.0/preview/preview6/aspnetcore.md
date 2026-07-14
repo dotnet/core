@@ -241,7 +241,7 @@ public class WorkHub : Hub
 
 ## dotnet user-jwts supports file-based apps
 
-`dotnet user-jwts` can now issue development JWTs for file-based apps with the new `--file` option ([dotnet/aspnetcore #66919](https://github.com/dotnet/aspnetcore/pull/66919)). This makes it easy to test authenticated endpoints in a single-file app (`app.cs`) without a project file.
+`dotnet user-jwts` creates signed development JWTs so you can call an app's authenticated endpoints without setting up a real identity provider. `create` generates a token, stores its signing key in the app's user secrets, and prints the token to use as a bearer token. It now works with file-based apps (a single `app.cs` with no project file) through the new `--file` option ([dotnet/aspnetcore #66919](https://github.com/dotnet/aspnetcore/pull/66919)).
 
 ```bash
 dotnet user-jwts create --file app.cs
