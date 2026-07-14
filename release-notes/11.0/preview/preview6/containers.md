@@ -24,7 +24,7 @@ Azure Linux image is 185.1 MB (32.7%) smaller.
 | Image | Before | After | Saved |
 | --- | ---: | ---: | ---: |
 | `mcr.microsoft.com/dotnet/sdk:11.0-preview-alpine3.23-aot` | 401.2 MB | 277.3 MB | 123.9 MB (30.9%) |
-| `mcr.microsoft.com/dotnet/sdk:11.0-preview-azurelinux3.0-aot`<br/> (now `11.0-preview-azurelinux4.0-aot`) | 565.5 MB | 380.4 MB | 185.1 MB (32.7%) |
+| `mcr.microsoft.com/dotnet/sdk:11.0-preview-azurelinux3.0-aot` (now `11.0-preview-azurelinux4.0-aot`) | 565.5 MB | 380.4 MB | 185.1 MB (32.7%) |
 | `mcr.microsoft.com/dotnet/sdk:11.0-preview-resolute-aot` | 429.5 MB | 362.7 MB | 66.8 MB (15.6%) |
 
 For more information, see
