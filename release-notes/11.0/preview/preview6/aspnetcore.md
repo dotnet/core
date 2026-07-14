@@ -96,7 +96,7 @@ Validators run concurrently where possible: asynchronous attributes on the same 
 
 ## Automatic cross-origin (CSRF) protection
 
-Apps built with `WebApplication.CreateBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585), [dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Same-origin requests, user-initiated navigations, and non-browser clients are allowed, while a cross-origin browser request that tries to consume a form is rejected. It can be used in place of or alongside the existing token-based antiforgery system.
+Apps built with `WebApplication.CreateBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585), [dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Same-origin requests, user-initiated navigations, and non-browser clients are allowed, while a cross-origin browser request that tries to consume a form is rejected. It can be used in place of or alongside the existing token-based antiforgery system. Because it runs automatically, the Blazor Web App project templates no longer call `app.UseAntiforgery()`.
 
 To opt an endpoint out, use `.DisableAntiforgery()` (Minimal APIs) or `[IgnoreAntiforgeryToken]` (MVC); to turn the feature off app-wide, set the `DisableCsrfProtection` configuration key. For full control over the trust decision, register a custom `ICsrfProtection` implementation.
 
@@ -268,6 +268,8 @@ These preview and experimental APIs changed in Preview 6. If you adopted them in
   - Added `QUERY` to the known HTTP methods used by hosting metrics ([dotnet/aspnetcore #63276](https://github.com/dotnet/aspnetcore/pull/63276)). Thank you [@doominator42](https://github.com/doominator42)!
 - **Blazor**
   - `WebViewRenderer` no longer throws `NotSupportedException` when a Blazor Hybrid app renders a component annotated with `@rendermode`; render modes are treated as no-ops because a WebView is always interactive ([dotnet/aspnetcore #65876](https://github.com/dotnet/aspnetcore/pull/65876)).
+  - The `Virtualize` component no longer violates a strict `style-src 'self'` Content Security Policy. Its runtime spacer styles are emitted in a `data-blazor-style` attribute and applied through the CSS Object Model by a `MutationObserver`, instead of inline `style` attributes ([dotnet/aspnetcore #66680](https://github.com/dotnet/aspnetcore/pull/66680)).
+  - For pages that use session-backed features (a `[SupplyParameterFromSession]` parameter or the session-storage TempData provider), the `.AspNetCore.Session` cookie is now issued before streaming SSR begins, so the value persists even if nothing is ultimately written ([dotnet/aspnetcore #66832](https://github.com/dotnet/aspnetcore/pull/66832)).
 
 ## Community contributors
 
