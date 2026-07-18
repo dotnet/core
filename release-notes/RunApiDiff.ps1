@@ -40,7 +40,7 @@ Param (
     ,
     [Parameter(Mandatory = $false)]
     [AllowEmptyString()]
-    [ValidatePattern("^((preview|rc)\.\d+)?$")]
+    [ValidatePattern("^((?i:alpha|beta|preview|rc)\.\d+)?$")]
     [string]
     $PreviousPrereleaseLabel # "preview.7", "rc.1", etc. Omit for GA.
     ,
@@ -51,7 +51,7 @@ Param (
     ,
     [Parameter(Mandatory = $false)]
     [AllowEmptyString()]
-    [ValidatePattern("^((preview|rc)\.\d+)?$")]
+    [ValidatePattern("^((?i:alpha|beta|preview|rc)\.\d+)?$")]
     [string]
     $CurrentPrereleaseLabel # "preview.7", "rc.1", etc. Omit for GA.
     ,
@@ -112,28 +112,33 @@ Param (
 
 $DotNetPublicFeedUrl = "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json"
 
-## Parse a NuGet version string into MajorMinor and PrereleaseLabel components
+## Parse a NuGet version string into MajorMinor and PrereleaseLabel components. Only the
+## supported prerelease labels (alpha, beta, preview, rc) parse; anything else is treated as
+## unparseable, so feed callers that wrap this in try/catch skip unrecognized versions.
 Function ParseVersionString {
     Param (
         [string] $version,
         [string] $label
     )
     $result = @{ MajorMinor = ""; PrereleaseLabel = "" }
-    If ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+-((?:preview|rc)\.[0-9]+)") {
+    If ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+-((?i:alpha|beta|preview|rc)\.[0-9]+)") {
         $result.MajorMinor = $Matches[1]
-        $result.PrereleaseLabel = $Matches[2]
+        # Normalize the label casing (e.g. "RC.1" -> "rc.1") so a mixed-case feed or user
+        # input yields consistent comparisons, paths, and folder names downstream.
+        $result.PrereleaseLabel = $Matches[2].ToLowerInvariant()
     }
     ElseIf ($version -match "^([1-9][0-9]*\.[0-9]+)\.[0-9]+$") {
         $result.MajorMinor = $Matches[1]
         $result.PrereleaseLabel = ""
     }
     Else {
-        Write-Error "Could not parse ${label}Version '$version'. Expected format: 'X.Y.Z' or 'X.Y.Z-preview.N.build' / 'X.Y.Z-rc.N.build'." -ErrorAction Stop
+        Write-Error "Could not parse ${label}Version '$version'. Expected format: 'X.Y.Z' or 'X.Y.Z-<label>.N' (where <label> is one of alpha, beta, preview, rc) optionally followed by build metadata (e.g. '10.0.0-preview.7.25380.108', '10.0.0-rc.1.25451.107', '11.0.0-alpha.1.26058.6')." -ErrorAction Stop
     }
     Return $result
 }
 
-## Parse a PrereleaseLabel into internal ReleaseKind and PreviewRCNumber components
+## Parse a PrereleaseLabel (e.g. "alpha.1", "preview.7", "rc.1") into internal
+## ReleaseKind (the label word) and PreviewRCNumber components. An empty label is GA.
 Function ParsePrereleaseLabel {
     Param (
         [string] $label
@@ -141,27 +146,38 @@ Function ParsePrereleaseLabel {
     If ([System.String]::IsNullOrWhiteSpace($label)) {
         Return @{ ReleaseKind = "ga"; PreviewRCNumber = "0" }
     }
-    If ($label -match "^(preview|rc)\.(\d+)$") {
-        Return @{ ReleaseKind = $Matches[1]; PreviewRCNumber = $Matches[2] }
+    If ($label -match "^(alpha|beta|preview|rc)\.(\d+)$") {
+        Return @{ ReleaseKind = $Matches[1].ToLowerInvariant(); PreviewRCNumber = $Matches[2] }
     }
-    Write-Error "Invalid prerelease label '$label'. Expected format: 'preview.N' or 'rc.N'." -ErrorAction Stop
+    Write-Error "Invalid prerelease label '$label'. Expected '<label>.N' where <label> is one of alpha, beta, preview, rc (e.g. 'alpha.1', 'preview.7', 'rc.1')." -ErrorAction Stop
 }
 
-## Get a numeric sort weight for a release milestone (preview < rc < ga)
+## Get a numeric sort weight for a release milestone. Within a major, milestones sort by
+## SemVer, which for .NET's prerelease labels is alphabetical (alpha < beta < preview <
+## rc), then by number; GA (stable) is newest. Milestone numbers must be < 100 (enforced
+## below), so each label occupies a distinct 100-wide band and the result stays < 1000
+## (callers add major * 1000 to order across majors).
 Function GetMilestoneSortWeight {
     Param (
         [string] $releaseKind,
         [int] $number
     )
-    Switch ($releaseKind) {
-        "preview" { Return $number }
-        "rc"      { Return 100 + $number }
-        "ga"      { Return 200 }
+    If ($number -lt 0 -or $number -ge 100) {
+        Write-Error "Milestone number '$number' is out of range for '$releaseKind'; expected 0-99 so each prerelease label occupies a distinct 100-wide sort band." -ErrorAction Stop
     }
-    Return -1
+    Switch ($releaseKind) {
+        "alpha"   { Return 100 + $number }
+        "beta"    { Return 200 + $number }
+        "preview" { Return 300 + $number }
+        "rc"      { Return 400 + $number }
+        "ga"      { Return 500 }
+        default   { Write-Error "Unknown prerelease label kind '$releaseKind'; expected one of alpha, beta, preview, rc (or ga)." -ErrorAction Stop }
+    }
 }
 
-## Parse an api-diff folder name (e.g., "preview1", "rc2", "ga") into MajorMinor and PrereleaseLabel
+## Parse an api-diff folder name (e.g., "preview1", "rc2", "alpha1", "ga") into MajorMinor and
+## PrereleaseLabel. An unrecognized label returns $null so unexpected folders are skipped
+## rather than being treated as a milestone (which would abort the scan downstream).
 Function ParseApiDiffFolderName {
     Param (
         [string] $majorMinor,
@@ -170,8 +186,10 @@ Function ParseApiDiffFolderName {
     If ($folderName -eq "ga") {
         Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "" }
     }
-    If ($folderName -match "^(preview|rc)(\d+)$") {
-        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "$($Matches[1]).$($Matches[2])" }
+    If ($folderName -match "^((?i:alpha|beta|preview|rc))(\d+)$") {
+        # Normalize the label casing (e.g. folder "RC1" -> "rc.1") so it matches the
+        # canonical lower-case labels used by ParseVersionString and feed probing.
+        Return @{ MajorMinor = $majorMinor; PrereleaseLabel = "$($Matches[1].ToLowerInvariant()).$($Matches[2])" }
     }
     Return $null
 }
@@ -336,6 +354,11 @@ Function DiscoverVersionFromFeed {
             Major   = [int]$mm[0]
             Minor   = [int]$mm[1]
             Weight  = $weight
+            # Include the original string so exact build numbers participate in the sort
+            # after Major, Minor, Weight. System.Version cannot parse Semantic Version 2.0
+            # labels with multiple dots ("-preview.1.25050.1"), but padding the string
+            # ensures "100" sorts after "99".
+            SortableVersion = [regex]::Replace($v, "\d+", { $args[0].Value.PadLeft(10, '0') })
         }
     }
 
@@ -343,7 +366,7 @@ Function DiscoverVersionFromFeed {
         Write-Error "No parseable versions of $refPackageName found on feed '$feedUrl'. Please specify -${label}MajorMinor and -${label}PrereleaseLabel explicitly." -ErrorAction Stop
     }
 
-    $latest = $candidates | Sort-Object -Property Major, Minor, Weight -Descending | Select-Object -First 1
+    $latest = $candidates | Sort-Object -Property Major, Minor, Weight, SortableVersion -Descending | Select-Object -First 1
     $latestVersion = $latest.Version
     Write-Color cyan "Latest $refPackageName version on feed: $latestVersion"
 
@@ -388,7 +411,24 @@ Function RemoveFolderIfExists {
 
     If (Test-Path -Path $path) {
         Write-Color yellow "Removing existing folder: $path"
-        Remove-Item -Recurse -Path $path
+        # 'Remove-Item -Recurse' intermittently fails on .NET/Linux with
+        # "Directory ... is not empty" when a child (for example an extracted
+        # nupkg's _rels folder) is still being enumerated as the parent is
+        # removed. This reproduces reliably when a shared temp folder such as
+        # Microsoft.NETCore.App.Before is recreated to stage reference assemblies
+        # for a second SDK. Use the framework recursive delete with a bounded
+        # retry so a transient failure never aborts the entire diff run.
+        For ($attempt = 1; ; $attempt++) {
+            Try {
+                [System.IO.Directory]::Delete($path, $true)
+                Break
+            }
+            Catch {
+                If (-Not (Test-Path -Path $path)) { Break }
+                If ($attempt -ge 5) { Throw }
+                Start-Sleep -Milliseconds 200
+            }
+        }
     }
 }
 
@@ -435,7 +475,6 @@ Function GetDotNetFullName {
         ,
         [Parameter(Mandatory = $true)]
         [string]
-        [ValidateSet("preview", "rc", "ga")]
         $releaseKind
         ,
         [Parameter(Mandatory = $true)]
@@ -471,7 +510,6 @@ Function GetDotNetFriendlyName {
         ,
         [Parameter(Mandatory = $true)]
         [string]
-        [ValidateSet("preview", "rc", "ga")]
         $releaseKind
         ,
         [Parameter(Mandatory = $true)]
@@ -480,25 +518,27 @@ Function GetDotNetFriendlyName {
         $PreviewNumberVersion # 0, 1, 2, 3, ...
     )
 
-    $friendlyPreview = ""
-    If ($releaseKind -eq "preview") {
-        $friendlyPreview = "Preview"
-    }
-    ElseIf ($releaseKind -eq "rc") {
-        $friendlyPreview = "RC"
-    }
-    ElseIf ($releaseKind -eq "ga") {
-        $friendlyPreview = "GA"
+    # RC and GA get special casing; every other label (preview, alpha, beta, ...) is
+    # rendered as its title-cased name.
+    If ($releaseKind -eq "ga") {
         If ($PreviewNumberVersion -eq 0) {
-            # Example: Don't return "7.0 GA 0", instead just return "7.0 GA"
-            Return ".NET $DotNetVersion $friendlyPreview"
+            # Example: Don't return ".NET 7.0 GA 0", instead just return ".NET 7.0 GA"
+            Return ".NET $DotNetVersion GA"
         }
 
-        # Examples: Don't include "ga", instead just return "7.0.1", "7.0.2"
+        # Examples: Don't include "ga", instead just return ".NET 7.0.1", ".NET 7.0.2"
         Return ".NET $DotNetVersion.$PreviewNumberVersion"
     }
 
-    # Examples: "7.0 Preview 5", "7.0 RC 2"
+    $friendlyPreview = If ($releaseKind -eq "rc") {
+        "RC"
+    }
+    Else {
+        # "preview" -> "Preview", "alpha" -> "Alpha", "beta" -> "Beta"
+        $releaseKind.Substring(0, 1).ToUpperInvariant() + $releaseKind.Substring(1)
+    }
+
+    # Examples: ".NET 7.0 Preview 5", ".NET 7.0 RC 2", ".NET 11.0 Alpha 1"
     Return ".NET $DotNetVersion $friendlyPreview $PreviewNumberVersion"
 }
 
@@ -511,7 +551,6 @@ Function GetReleaseKindFolderName {
         ,
         [Parameter(Mandatory = $true)]
         [string]
-        [ValidateSet("preview", "rc", "ga")]
         $releaseKind
         ,
         [Parameter(Mandatory = $true)]
@@ -547,7 +586,6 @@ Function GetPreviewFolderPath {
         ,
         [Parameter(Mandatory = $true)]
         [string]
-        [ValidateSet("preview", "rc", "ga")]
         $releaseKind
         ,
         [Parameter(Mandatory = $true)]
@@ -709,7 +747,7 @@ Function DownloadPackage {
         $dotNetVersion
         ,
         [Parameter(Mandatory = $false)]
-        [ValidateSet("preview", "rc", "ga", "")]
+        [ValidatePattern("^([A-Za-z]+)?$")]
         [string]
         $releaseKind = ""
         ,
@@ -764,7 +802,7 @@ Function DownloadPackage {
 
             try {
                 $versionsResult = Invoke-RestMethod -Uri $versionsUrl
-                $matchingVersions = @($versionsResult.versions | Where-Object { $_ -Like $searchTerm } | Sort-Object -Descending)
+                $matchingVersions = @($versionsResult.versions | Where-Object { $_ -Like $searchTerm } | Sort-Object { [regex]::Replace($_, "\d+", { $args[0].Value.PadLeft(10, '0') }) } -Descending)
 
                 If ($matchingVersions.Count -gt 0) {
                     $version = $matchingVersions[0]
@@ -805,7 +843,7 @@ Function DownloadPackage {
             }
 
             # Filter versions matching search term
-            $matchingVersions = @($package.versions | Where-Object -Property version -Like $searchTerm | Sort-Object version -Descending)
+            $matchingVersions = @($package.versions | Where-Object -Property version -Like $searchTerm | Sort-Object { [regex]::Replace($_.version, "\d+", { $args[0].Value.PadLeft(10, '0') }) } -Descending)
 
             If ($matchingVersions.Count -eq 0) {
                 Write-Error "No NuGet packages found with search term '$searchTerm'." -ErrorAction Stop
@@ -837,7 +875,21 @@ Function DownloadPackage {
 
     Expand-Archive -Path $nupkgFile -DestinationPath $destinationFolder -ErrorAction Stop
 
-    $dllPath = [IO.Path]::Combine($destinationFolder, "ref", "net$dotNetVersion")
+    # The ref pack stores its assemblies under ref/net<TFM>. Normally <TFM> matches the
+    # package's own major.minor (e.g. net11.0 for an 11.0.0-* pack), but the earliest builds
+    # of a new major still carry the PREVIOUS major's TFM folder until the in-repo TFM bump
+    # lands (e.g. 11.0.0-alpha.1 ships ref/net10.0). Prefer the expected folder; otherwise
+    # fall back to whichever net<X> folder the pack actually contains so early alphas still diff.
+    $refRoot = [IO.Path]::Combine($destinationFolder, "ref")
+    VerifyPathOrExit $refRoot
+    $dllPath = [IO.Path]::Combine($refRoot, "net$dotNetVersion")
+    If (-Not (Test-Path -Path $dllPath)) {
+        $netFolders = @(Get-ChildItem -Path $refRoot -Directory -Filter "net*" | Sort-Object { [regex]::Replace($_.Name, "\d+", { $args[0].Value.PadLeft(10, '0') }) })
+        If ($netFolders.Count -gt 0) {
+            Write-Color yellow "Expected 'ref/net$dotNetVersion' not found in $refPackageName $version; using '$($netFolders[-1].Name)' (early-prerelease TFM lag)."
+            $dllPath = $netFolders[-1].FullName
+        }
+    }
     VerifyPathOrExit $dllPath
     VerifyCountDlls $dllPath
     $resultingPath.value = $dllPath
@@ -907,7 +959,6 @@ Function ProcessSdk
         $previousMajorMinor
     ,
         [Parameter(Mandatory = $true)]
-        [ValidateSet("preview", "rc", "ga")]
         [string]
         $previousReleaseKind
     ,
@@ -921,7 +972,6 @@ Function ProcessSdk
         $currentMajorMinor
     ,
         [Parameter(Mandatory = $true)]
-        [ValidateSet("preview", "rc", "ga")]
         [string]
         $currentReleaseKind
     ,

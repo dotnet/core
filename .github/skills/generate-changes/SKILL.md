@@ -4,9 +4,9 @@ description: >
   Generate `changes.json` for a .NET release milestone by selecting the correct
   VMR base/head refs and running `release-notes generate changes`. Handles
   preview-only multi-branch targeting (`main` vs release branches vs tags) and
-  emits the authoritative manifest of what shipped. DO NOT USE FOR: API
-  verification/diffs (use api-diff), feature scoring (use generate-features),
-  or writing markdown release notes (use release-notes).
+  emits the authoritative manifest of what shipped. DO NOT USE FOR: API diffs
+  (use api-diff), API verification (use api-diff-validation), feature scoring
+  (use generate-features), or writing markdown release notes (use release-notes).
 ---
 
 # Generate `changes.json`

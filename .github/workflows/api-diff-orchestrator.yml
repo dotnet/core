@@ -1,0 +1,90 @@
+name: API Diff Orchestrator
+
+# Orchestration only: evaluate the dnceng NuGet feeds to discover the active,
+# not-yet-shipped release milestones and dispatch one API Diff run per
+# milestone. Deterministic discovery (no agent), so this is a plain workflow.
+# The API Diff Worker workflow is invoked as a reusable workflow (workflow_call) so it
+# runs in this run's context and inherits the orchestrator's actor, satisfying its
+# gh-aw activation role check.
+
+on:
+  schedule:
+    - cron: "17 13 * * *" # daily, ~06:17 PT
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry-Run: Compute and print targets without dispatching workers."
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: api-diff-orchestrator
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    name: Discover milestones
+    if: ${{ github.event_name == 'workflow_dispatch' || !github.event.repository.fork }}
+    runs-on: ubuntu-latest
+    outputs:
+      targets: ${{ steps.discover.outputs.targets }}
+      count: ${{ steps.discover.outputs.count }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
+        with:
+          dotnet-version: "10.0.x"
+      - name: Discover API diff milestones from the NuGet feeds
+        id: discover
+        run: |
+          set -euo pipefail
+          # The C# app writes the JSON array to this file so the "dotnet run"
+          # build/restore output on stdout never contaminates the captured value.
+          out="${RUNNER_TEMP}/api-diff-targets.json"
+          dotnet run .github/scripts/api-diff-discover.cs -- "$out"
+          targets="$(cat "$out")"
+          count="$(jq 'length' <<<"$targets")"
+          echo "Discovered ${count} milestone target(s):"
+          jq '.' <<<"$targets"
+          {
+            echo "targets<<__EOF__"; jq -c '.' <<<"$targets"; echo "__EOF__"
+            echo "count=${count}"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "## Discovered ${count} API diff milestone(s)"
+            echo '```json'; jq '.' <<<"$targets"; echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  api_diff:
+    name: API Diff
+    needs: discover
+    if: ${{ needs.discover.outputs.count != '0' && !inputs.dry_run }}
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: read
+      packages: read
+    strategy:
+      fail-fast: false
+      # Workers share one concurrency group ("gh-aw-<workflow>", cancel-in-progress
+      # false), so distinct targets serialize regardless of this value. Dispatch them
+      # one at a time so a queued target is never dropped by concurrency's
+      # pending-run-replacement rule.
+      max-parallel: 1
+      matrix:
+        target: ${{ fromJSON(needs.discover.outputs.targets) }}
+    # Invoke the API Diff Worker workflow via workflow_call so it runs in this
+    # run's context and inherits the orchestrator's actor, satisfying its gh-aw role
+    # check. (A GITHUB_TOKEN workflow_dispatch would run as github-actions[bot],
+    # which has no repo role and fails activation.)
+    uses: ./.github/workflows/api-diff-worker.lock.yml
+    with:
+      target: ${{ toJSON(matrix.target) }}
+    secrets: inherit

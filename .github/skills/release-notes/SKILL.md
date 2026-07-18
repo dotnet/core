@@ -1,7 +1,7 @@
 ---
 name: release-notes
-description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, `update-existing-branch` for incremental reruns on populated branches, `editorial-scoring` for the shared rubric, `api-diff`/`dotnet-inspect` for API verification, and a multi-model `review-release-notes` pass for final editorial QA.
-compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, update-existing-branch, editorial-scoring, api-diff, and review-release-notes skills. Claude Opus 4.6 is the default workflow model; the preferred final reviewer pair is Claude Opus 4.6 + GPT-5.4 for broader editorial feedback.
+description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, `update-existing-branch` for incremental reruns on populated branches, `editorial-scoring` for the shared rubric, `api-diff` to generate API diff reports and `api-diff-validation` for API verification, and a multi-model `review-release-notes` pass for final editorial QA.
+compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, update-existing-branch, editorial-scoring, api-diff, api-diff-validation, and review-release-notes skills. Claude Opus 4.6 is the default workflow model; the preferred final reviewer pair is Claude Opus 4.6 + GPT-5.4 for broader editorial feedback.
 ---
 
 # .NET Release Notes
@@ -15,7 +15,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 1. `generate-changes` diffs `source-manifest.json` between VMR refs to produce `changes.json`
 2. `generate-features` reads `changes.json`, resolves revert/backout relationships, and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
 3. `update-existing-branch` handles incremental reruns when a milestone branch already exists, merging deltas instead of restarting from scratch
-4. `api-diff` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build
+4. `api-diff-validation` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build
 5. `release-notes` writes curated markdown using the higher-value entries from `features.json`
 6. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
 7. Output is a set of pull requests per release milestone in dotnet/core: a base PR that holds shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and one PR per component file. Each component PR targets the base branch so component teams review and edit their file in isolation. See [`pr-layout.md`](references/pr-layout.md) for the full layout and naming scheme.

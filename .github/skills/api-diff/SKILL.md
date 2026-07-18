@@ -1,67 +1,22 @@
 ---
 name: api-diff
 description: >
-  Download, inspect, and diff .NET APIs for a given build or release. Use
-  `dotnet-inspect` to verify that APIs actually exist in the shipped packages,
-  detect missed reverts, and generate before/after API diffs. Use
-  `RunApiDiff.ps1` when a full markdown diff report is needed.
+  Generate before/after .NET public API diff reports for a release milestone with
+  `RunApiDiff.ps1`. Pure report generation only; to verify the diff against the
+  shipped build (dotnet-inspect, revert detection) use the api-diff-validation skill.
 ---
 
-# API Downloading, Verification, and Diffing
+# API Diffing
 
-Use this skill when you need evidence about the **actual public API surface** of a .NET build.
+Use this skill to produce the markdown-ready, repo-shaped **API diff reports** for a
+release milestone (previous milestone -> current). This skill is pure generation: it
+runs the diff tool and writes the reports. Verifying that the diffed APIs actually
+shipped, tracing them to PRs, and catching reverts is the separate
+[api-diff-validation](../api-diff-validation/SKILL.md) skill.
 
-This is primarily for:
+## Generate the reports with `RunApiDiff.ps1`
 
-- confirming whether an API really shipped in the build binaries/ref packs
-- catching reverts or incomplete rollouts before they end up in release notes
-- generating before/after API diffs for a release milestone
-
-## Preferred workflow
-
-### 1. Query the right build first
-
-Do **not** trust the locally installed SDK for preview work. Query the target build's packages directly.
-
-Use the process in [api-verification.md](../release-notes/references/api-verification.md):
-
-1. Generate or read `build-metadata.json`
-2. Get `nuget.source` and the package versions for the target release
-3. Run `dotnet-inspect` against those exact packages
-
-### 2. Verify APIs with `dotnet-inspect`
-
-Typical tasks:
-
-- **Find a type or member** to confirm the API exists
-- **Compare versions** to see what changed between previews or between RC and GA
-- **Validate naming** before writing prose or code samples
-
-Examples:
-
-```bash
-# Find a type in the runtime ref pack
-dnx dotnet-inspect -y -- find "*AnyNewLine*" \
-  --package "Microsoft.NETCore.App.Ref@${VER}" \
-  --source "$FEED"
-
-# Verify members on a type
-dnx dotnet-inspect -y -- member RegexOptions \
-  --package "Microsoft.NETCore.App.Ref@${VER}" \
-  --source "$FEED" \
-  -k field
-
-# Diff public APIs between two versions
-dnx dotnet-inspect -y -- diff \
-  --package "Microsoft.NETCore.App.Ref@11.0.0-preview.2..11.0.0-preview.3" \
-  --source "$FEED"
-```
-
-If the API is missing from the target build, treat that as a serious signal: it may have been renamed, kept internal, or reverted.
-
-### 3. Use `RunApiDiff.ps1` for full diff reports
-
-When the user wants the markdown-ready, repo-shaped API diff output, use `release-notes/RunApiDiff.ps1`. See [release-notes/RunApiDiff.md](../../../release-notes/RunApiDiff.md) for the full parameter reference.
+Use `release-notes/RunApiDiff.ps1`. See [release-notes/RunApiDiff.md](../../../release-notes/RunApiDiff.md) for the full parameter reference.
 
 ## Mapping natural language to parameters
 
@@ -76,6 +31,7 @@ When the user wants the markdown-ready, repo-shaped API diff output, use `releas
 - **GA** or no qualifier -> omit the `PrereleaseLabel` parameter for `RunApiDiff.ps1`; if a downstream api-diff release label is needed, use `ga`
 - **Preview N** / **previewN** -> `-PrereleaseLabel preview.N` (for example, `preview.4`, not `preview4`)
 - **RC N** / **rcN** -> `-PrereleaseLabel rc.N`
+- **Alpha N** / **Beta N** -> `-PrereleaseLabel <label>.N` (for example, `alpha.1`, `beta.2`); `RunApiDiff.ps1` accepts only the `alpha`, `beta`, `preview`, and `rc` prerelease labels
 - **netX.Y-previewN** (TFM format) -> `-MajorMinor X.Y -PrereleaseLabel preview.N`
 - Full NuGet version strings -> use `-PreviousVersion` / `-CurrentVersion` directly
 - The "previous" version is always the older version; "current" is the newer one

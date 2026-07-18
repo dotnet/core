@@ -30,9 +30,9 @@ By default the script assumes a diff will be produced for the next preview. When
 | `PreviousVersion` | Exact package version for the "before" comparison (e.g., `10.0.0-preview.7.25380.108`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — inferred or searched)* |
 | `CurrentVersion` | Exact package version for the "after" comparison (e.g., `10.0.0-rc.1.25451.107`). MajorMinor and PrereleaseLabel are extracted automatically. | *(empty — inferred or searched)* |
 | `PreviousMajorMinor` | The "before" .NET major.minor version (e.g., `10.0`) | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
-| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.4`, `preview.7`, `rc.1`). Omit for GA when calling `RunApiDiff.ps1`; the api-diff release label itself is `ga`. | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
+| `PreviousPrereleaseLabel` | Prerelease label for the "before" version (e.g., `preview.7`, `rc.1`, `alpha.1`; supported labels are `alpha`, `beta`, `preview`, and `rc`). Omit for GA when calling `RunApiDiff.ps1`; the api-diff release label itself is `ga`. | Inferred from api-diffs, extracted from `PreviousVersion`, or discovered from `PreviousNuGetFeed` |
 | `CurrentMajorMinor` | The "after" .NET major.minor version (e.g., `10.0`) | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
-| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.4`, `preview.7`, `rc.1`). Omit for GA when calling `RunApiDiff.ps1`; the api-diff release label itself is `ga`. | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
+| `CurrentPrereleaseLabel` | Prerelease label for the "after" version (e.g., `preview.7`, `rc.1`, `alpha.1`; supported labels are `alpha`, `beta`, `preview`, and `rc`). Omit for GA when calling `RunApiDiff.ps1`; the api-diff release label itself is `ga`. | Inferred from api-diffs, extracted from `CurrentVersion`, or discovered from `CurrentNuGetFeed` |
 
 ### Feed Parameters
 
