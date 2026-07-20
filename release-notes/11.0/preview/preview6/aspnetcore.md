@@ -152,18 +152,25 @@ The API was introduced in Preview 4 and reshaped in Preview 6 to follow options 
 
 The [Blazor Gateway](../preview5/aspnetcore.md#blazor-webassembly-gateway) — the development-time host for standalone Blazor WebAssembly apps introduced in Preview 5 — can now proxy the app's HTTP calls to backend services through a built-in [YARP](https://learn.microsoft.com/aspnet/core/fundamentals/servers/yarp/getting-started) reverse proxy ([dotnet/aspnetcore #67048](https://github.com/dotnet/aspnetcore/pull/67048)). Because the WebAssembly client makes only same-origin requests to the Gateway, which forwards them to the backend server-to-server, **no CORS configuration is needed** on the client or the backend.
 
-Configure the proxy with a standard YARP `ReverseProxy` section describing the routes and clusters to forward. The Gateway runs as a separate process that reads this configuration from environment variables (or command-line arguments) rather than the app project's `appsettings.json`, so the simplest place to set it during development is the app's `launchSettings.json`:
+Configure the proxy with a standard YARP `ReverseProxy` section describing the routes and clusters to forward. The Gateway runs as a separate process that reads this configuration from environment variables (or command-line arguments) rather than the app project's `appsettings.json`, so the simplest place to set it during development is the `environmentVariables` of a launch profile in the app's `launchSettings.json`:
 
 ```json
-"environmentVariables": {
-  "ASPNETCORE_ENVIRONMENT": "Development",
-  "ReverseProxy__Routes__weather__ClusterId": "backend",
-  "ReverseProxy__Routes__weather__Match__Path": "/api/{**catch-all}",
-  "ReverseProxy__Clusters__backend__Destinations__backend1__Address": "http://localhost:5100/"
+{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ReverseProxy__Routes__weather__ClusterId": "backend",
+        "ReverseProxy__Routes__weather__Match__Path": "/api/{**catch-all}",
+        "ReverseProxy__Clusters__backend__Destinations__backend1__Address": "http://localhost:5100/"
+      }
+    }
+  }
 }
 ```
 
-With this configuration the WebAssembly app calls its own origin (for example `Http.GetFromJsonAsync<WeatherForecast[]>("api/weather")`), the Gateway matches the `/api/**` route, and forwards the request to the backend at `http://localhost:5100/`. The Gateway also registers .NET service discovery, so a destination address can be a logical service name resolved from `services:<name>:<endpoint>:<index>` configuration in addition to a literal URL.
+With this configuration the WebAssembly app calls its own origin (for example `Http.GetFromJsonAsync<WeatherForecast[]>("api/weather")`), the Gateway matches the `/api/**` route, and forwards the request to the backend at `http://localhost:5100/`. The Gateway also enables [.NET service discovery](https://learn.microsoft.com/dotnet/core/extensions/service-discovery), so a cluster destination address can be a logical service name that's resolved at request time instead of a literal URL.
 
 A complete end-to-end sample is available at [danroth27/AspNetCore11Samples](https://github.com/danroth27/AspNetCore11Samples): the `BlazorWasmFeatures` app calls the separate `BackendApi` service through the Gateway with no CORS.
 
