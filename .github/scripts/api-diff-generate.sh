@@ -279,6 +279,10 @@ elif [ -n "$existing_pr_number" ]; then
 	recorded="$(printf '%s\n' "$body_yaml" | tracking_block | tracking_value "current-version")"
 	watermark="$(printf '%s\n' "$body_yaml" | tracking_block | tracking_value "generated-at")"
 	recorded_status="$(printf '%s\n' "$body_yaml" | tracking_block | tracking_value "status")"
+	has_review_checklist=false
+	if printf '%s\n' "$body_yaml" | tr -d '\r' | grep -Fqx '## Review checklist'; then
+		has_review_checklist=true
+	fi
 
 	# Whether the resolved PR already carries THIS target's marker. An adopted (human-
 	# bootstrapped) PR or one whose marker line a human deleted has no marker yet; we
@@ -318,12 +322,13 @@ elif [ -n "$existing_pr_number" ]; then
 		noop=true
 		echo "::warning::review-activity query failed for PR #${existing_pr_number}; standing down (generated_at not advanced, retried next run)."
 	elif [ "$recorded" = "$current_version" ]; then
-		if [ "$recorded_status" = "$status" ] && [ "$has_marker" = true ] && [ "$has_new_feedback" != true ]; then
+		if [ "$recorded_status" = "$status" ] && [ "$has_marker" = true ] &&
+			[ "$has_new_feedback" != true ] && [ "$has_review_checklist" = true ]; then
 			noop=true
 			echo "::notice::no-op: ${current_version_milestone} unchanged (${current_version}), status '${status}', no new review activity since ${watermark:-<none>}."
 		else
 			metadata_only=true
-			echo "::notice::metadata-only: build unchanged; status '${recorded_status:-?}'->'${status}', new_feedback=${has_new_feedback}, marker_present=${has_marker}."
+			echo "::notice::metadata-only: build unchanged; status '${recorded_status:-?}'->'${status}', new_feedback=${has_new_feedback}, marker_present=${has_marker}, checklist_present=${has_review_checklist}."
 		fi
 	fi
 fi
