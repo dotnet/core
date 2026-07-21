@@ -176,9 +176,9 @@ post-steps:
         typ=$(jq -r ".items[$i].type" "$out")
         body=$(jq -r ".items[$i].body" "$out")
         miss=""
-        # Extract the LAST `# api-diff:state:begin` .. `:state:end` block (the body ends with it),
-        # matching each delimiter as a whole yaml-comment line (leading indent / trailing CR
-        # tolerated) exactly as the next run's setup script reads it.
+        # Extract the LAST `# api-diff:state:begin` .. `:state:end` block from the final collapsed
+        # details section, matching each delimiter as a whole yaml-comment line (leading indent /
+        # trailing CR tolerated) exactly as the next run's setup script reads it.
         blk=$(printf '%s' "$body" | awk '{t=$0;sub(/\r$/,"",t);gsub(/^[[:space:]]+|[[:space:]]+$/,"",t)} t=="# api-diff:state:begin"{inb=1;buf=$0 ORS;next} inb{buf=buf $0 ORS; if(t=="# api-diff:state:end"){inb=0;last=buf}} END{if(inb)last=buf; printf "%s", last}')
         printf '%s\n' "$body" | awk '{t=$0;sub(/\r$/,"",t);gsub(/^[[:space:]]+|[[:space:]]+$/,"",t)} t=="# api-diff:state:begin"{f=1} END{exit !f}' || miss="$miss begin-marker"
         printf '%s\n' "$body" | awk '{t=$0;sub(/\r$/,"",t);gsub(/^[[:space:]]+|[[:space:]]+$/,"",t)} t=="# api-diff:state:end"{f=1} END{exit !f}' || miss="$miss end-marker"
@@ -508,14 +508,19 @@ Then, succinct and factual:
    exclusions (`temp_excluded_attributes` plus any you added this run), and separately note any
    **permanent attribute** or **permanent assembly** exclusions you added this run (to the global
    files). "None." only if all are empty.
-7. A fenced ```yaml``` block carrying the machine-managed state, delimited by visible marker comments.
-   **The first line inside the block is `# api-diff:state:begin` and the last line is
-   `# api-diff:state:end`**; immediately after the begin line comes the identity marker,
-   verbatim from `target.json`'s `marker` (i.e. `# <marker>`). All are visible YAML comments, never HTML
-   comments (hidden markers trip content scanners). The begin/end lines delimit the state so the next run
-   reads it back scoped to this block -- human prose added elsewhere in the body cannot shadow it -- and
-   the identity marker is the stable handle the automation uses to find this diff's PR. Emit the begin/end
-   lines exactly as shown. All must be present and exact:
+7. End the body with a collapsed `<details>` element containing a fenced ```yaml``` block for the
+   machine-managed state, delimited by visible marker comments. **The first line inside the block
+   is `# api-diff:state:begin` and the last line is `# api-diff:state:end`**; immediately after
+   the begin line comes the identity marker, verbatim from `target.json`'s `marker` (i.e.
+   `# <marker>`). All are visible YAML comments, never HTML comments (hidden markers trip content
+   scanners). The begin/end lines delimit the state so the next run reads it back scoped to this
+   block -- human prose added elsewhere in the body cannot shadow it -- and the identity marker is
+   the stable handle the automation uses to find this diff's PR. Emit the begin/end lines exactly
+   as shown. All must be present and exact:
+
+   ````markdown
+   <details>
+   <summary>Automation state</summary>
 
    ```yaml
    # api-diff:state:begin
@@ -533,6 +538,9 @@ Then, succinct and factual:
    temporary-attributes-excluded: [<the per-report temporary attribute exclusions, T: form>]
    # api-diff:state:end
    ```
+
+   </details>
+   ````
 
    The `# api-diff:state:begin`/`:end` delimiters, the `# <marker>`, `current-version`, and
    `generated-at` lines are required and machine-parsed; the post-steps validation rejects any

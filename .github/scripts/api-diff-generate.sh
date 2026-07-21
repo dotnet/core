@@ -260,8 +260,8 @@ elif [ -n "$existing_pr_number" ]; then
 	}
 
 	tracking_block() {
-		# Emit only the machine-managed state block -- the fenced yaml block the agent writes as the
-		# VERY LAST thing in the body, delimited by the visible `# api-diff:state:begin`/`:end`
+		# Emit only the machine-managed state block -- the fenced yaml block nested in the final
+		# collapsed details element, delimited by the visible `# api-diff:state:begin`/`:end`
 		# comment lines (matched as whole comment lines: leading indent and a trailing CR are tolerated,
 		# but the "# " prefix and ":state:begin"/":state:end" suffix must be exact). Take the LAST
 		# begin..end range so human prose anywhere above it -- a quoted or bulleted "field:" line, an
