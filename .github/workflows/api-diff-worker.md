@@ -381,6 +381,13 @@ milestone belongs in the body).
 description" below). It is created as a draft (policy) and labeled `automation` + `api-diff`
 automatically.
 
+**Create guard** -- construct the complete PR body before the one allowed
+`create-pull-request` call. Confirm the body is non-empty and contains the required state block
+from "### PR description"; it must be the actual `body` field in the safe-output item. If you
+write it to a file first, pass that file's contents through the safe-output mechanism -- never
+pass `--body -`, which is the literal one-character body `-`, not standard input. Do not make a
+test or retry create call: this workflow allows exactly one real PR creation per run.
+
 **Incremental** (`existing_pr_number` set): emit these, each targeting `existing_pr_number`:
 
 - **`push-to-pull-request-branch`** (`pull_request_number` = `existing_pr_number`) -- pushes
