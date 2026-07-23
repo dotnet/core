@@ -59,12 +59,8 @@ safe-outputs:
   update-pull-request:
     target: "*"
     required-labels: [automation, api-diff]
-    title: true
+    title: false
     body: true
-  add-comment:
-    target: "*"
-    required-labels: [automation, api-diff]
-    max: 1
   mark-pull-request-as-ready-for-review:
     target: "*"
     required-labels: [automation, api-diff]
@@ -295,8 +291,8 @@ for it or try to work around the filter.
 - **Settle contradictions.** When two new comments conflict, respect the **most recent** guidance (the
   larger created timestamp) and ignore the superseded direction.
 - **Act only on exclusion requests within scope.** Do not act on feedback that asks for prose, changes
-  the diff semantics, or excludes real API changes; briefly note in the summary comment that such
-  requests are out of scope for this automation. Route each in-scope exclusion request by kind, using the
+  the diff semantics, or excludes real API changes; record those requests as out of scope in the PR body's
+  **Feedback applied** section. Route each in-scope exclusion request by kind, using the
   apidiff file format — **attributes as `T:<FullyQualifiedTypeName>`** (one per line), **assemblies as the
   bare assembly name** (no extension):
   - **Permanently** exclude an attribute (drop it from every diff) → append `T:<FullName>` to the global
@@ -307,8 +303,7 @@ for it or try to work around the filter.
     **There is no temporary assembly exclusion** — assembly exclusions are always permanent.
 - For every exclusion you apply, also: (1) remove the now-excluded entries from the current `.md` reports
   under `content_dir` so the PR reflects it immediately (reports show the display name, e.g.
-  `[System.ObsoleteAttribute]`); and (2) record it in your update comment and the PR body's **Feedback
-  applied** section.
+  `[System.ObsoleteAttribute]`); and (2) record it in the PR body's **Feedback applied** section.
 - **Advance the watermark.** When you refresh the PR body (the PR description, step 4), set `generated_at` to
   `target.json.generated_at` (this run's start time). This is the durable, cross-run dedup signal — the
   next run only reconsiders feedback created after it, so this run's feedback is never re-processed, even
@@ -395,10 +390,13 @@ test or retry create call: this workflow allows exactly one real PR creation per
   run; with no new commit it is a no-op (`if-no-changes: ignore`).
 - **`update-pull-request`** (`pull_request_number` = `existing_pr_number`, full-body
   **replace**) -- regenerate the **entire** PR body to the current state (see "### PR
-  description") and set the title to `pr_title`. Always refresh the body, even on a
-  metadata-only run whose report delta is empty, so the description never goes stale.
-- **`add-comment`** (`pull_request_number` = `existing_pr_number`) -- one short summary of
-  what changed this run (reports refreshed, feedback applied, or metadata-only). At most one.
+  description"). This is the **only** `update-pull-request` output permitted in a run: never emit
+  a title-only or bodyless update. Always refresh the body, even on a metadata-only run whose
+  report delta is empty, so the description never goes stale. The title is set when the PR is
+  created and is not updated incrementally.
+
+Do **not** create PR timeline comments. Record automation status and reviewer feedback only in the
+refreshed PR body; scheduled metadata-only refreshes must remain notification-free.
 
 **Mark Ready** -- when `target.json.status` is `code-complete`, also emit
 **`mark-pull-request-as-ready-for-review`** (`pull_request_number` = `existing_pr_number`) so
