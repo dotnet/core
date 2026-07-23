@@ -23,7 +23,7 @@ jobs:
         else echo "status=invalid" >> "$GITHUB_OUTPUT"; fi
     steps:
       - name: Setup gh-aw scripts
-        uses: github/gh-aw-actions/setup@8c7d04ebf1ece56cd381446125da3e0f6896294a # v0.80.9
+        uses: github/gh-aw-actions/setup@cec6394202d7db187b02310d928812194988eb20 # v0.82.6
         with:
           destination: ${{ runner.temp }}/gh-aw/actions
 
