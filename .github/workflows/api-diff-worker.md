@@ -21,11 +21,15 @@ network:
     - github
     - node
 safe-outputs:
-  # The review checklist is built from dotnet/runtime's live area-owners table.
-  # Allow every lead and owner currently listed there so the generated checklist
-  # can notify the intended reviewers instead of escaping their handles.
+  # Allow the static repo reviewers plus every lead and owner currently listed in
+  # dotnet/runtime's live area-owners table so the generated review checklist can
+  # notify the intended reviewers instead of escaping their handles.
   mentions:
     allowed:
+      - dotnet/aspnet-api-review
+      - dotnet/dotnet-winforms
+      - dotnet/wpf-developers
+      - dotnet/dotnet-wpf-maintainers
       - agocke
       - elinor-fung
       - lewing
