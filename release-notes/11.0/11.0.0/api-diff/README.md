@@ -1,6 +1,6 @@
-# .NET 11.0 Preview 7 API Changes
+# .NET 11.0 RC 1 API Changes
 
-The following API changes were made in .NET 11.0 Preview 7:
+The following API changes were made in .NET 11.0 RC 1:
 
 - [Microsoft.NETCore.App](./Microsoft.NETCore.App/11.0.0.md)
 - [Microsoft.AspNetCore.App](./Microsoft.AspNetCore.App/11.0.0.md)
