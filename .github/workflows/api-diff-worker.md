@@ -199,6 +199,7 @@ post-steps:
 # See `shared/pat_pool.README.md` for more information.
 # ###############################################################
 imports:
+  - shared/allowed-mentions.md
   - uses: shared/pat_pool.md
     with:
       environment: copilot-pat-pool
