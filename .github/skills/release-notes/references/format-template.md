@@ -89,6 +89,34 @@ Known component docs links:
 4. **Feature ordering** — highest customer impact first
 5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections
 6. **Preview feature callout** — when a feature is listed in `release-notes/features.json`, start its section with the standard blockquote callout from that file
+7. **Call out what breaks an upgrade from the previous preview** — see below
+
+## Upgrading from the previous preview
+
+Preview notes are read mostly by people who are already running the *previous* preview. For them the
+most valuable content is often not the new feature, but the thing that stops their existing code
+from building or working after they move to this build.
+
+Cover these when they apply. They tend to surface only when an existing project is actually upgraded
+to the new build, which is one of the reasons
+[`validate-code-samples`](../../validate-code-samples/SKILL.md) runs against a maintained sample set:
+
+- **Renamed APIs**, especially renames that invert meaning (`EnableX` becoming `DisableX`). Show the
+  before and after, and state the new default explicitly.
+- **New analyzer diagnostics that fire on previously clean code.** Code that built without warnings
+  on the last preview and now reports diagnostics is an upgrade issue even though nothing in the
+  user's code changed. Name the diagnostic IDs.
+- **Removed or replaced workarounds.** If a bug that required a workaround is now fixed, say so, so
+  users can delete the workaround rather than carrying it forward.
+- **Changed defaults**, where existing code keeps compiling but behaves differently.
+
+Do not turn this into a changelog of everything that moved. Include an item only when a user
+upgrading from the previous preview would otherwise hit a build error, a new warning, or a silent
+behavior change.
+
+Attribute these to the milestone that actually changed them. A fix that shipped two previews ago is
+not upgrade guidance for this one — see
+[api-verification.md](api-verification.md) for the provenance rule.
 
 ## Issue and PR references
 

@@ -126,4 +126,40 @@ The output file must follow the shared schema documented in [changes-schema.md](
 - stable `id` values in `repo@shortcommit` format
 - same authoritative source of truth used by later skills
 
+## Milestone cross-check
+
+`changes.json` is derived from a VMR source-manifest diff. That makes it authoritative for *what
+flowed into the build*, but it is a commit-shaped view, and a feature can be easy to overlook in it.
+For the repos that maintain preview milestones, sweep the milestone as a **second, independent view**
+of the same release and reconcile anything that looks like a user-facing feature but never made it
+into the notes.
+
+```bash
+gh api -X GET search/issues \
+  -f q="repo:dotnet/aspnetcore is:pr is:merged milestone:11.0-preview7" \
+  --jq '.total_count'
+```
+
+Milestone discipline varies by repo, so this check only applies where it is actually maintained.
+Measured for 11.0-preview7:
+
+| Repo | Merged PRs in milestone | Entries in `changes.json` | Use it? |
+| ---- | ----------------------- | ------------------------- | ------- |
+| `dotnet/sdk` | 177 | 199 | Yes |
+| `dotnet/aspnetcore` | 176 | 205 | Yes |
+| `dotnet/runtime` | 583 | 692 | Yes |
+| `dotnet/efcore` | 77 | 107 | Yes, with weaker coverage |
+| `dotnet/roslyn`, `dotnet/razor` | no `11.x` milestones exist | 108 (roslyn) | No |
+
+Rules for using it:
+
+- **Supplement, never replace.** `changes.json` stays the source of truth. The milestone is a
+  prompt to go back and look, not an alternative manifest.
+- **The milestone is a subset.** It excludes infrastructure and dependency-flow PRs that
+  legitimately appear in `changes.json`, so the counts will not match and are not meant to.
+- **Only the missing direction matters.** What is worth acting on is a PR in the milestone that
+  describes a user-facing change and has no corresponding entry in the notes.
+- **Confirm the milestone exists before relying on its absence.** Repos without `11.x` milestones
+  will return zero results, which means "not tracked here", not "nothing shipped".
+
 Once `changes.json` exists, the next step is usually `generate-features`.

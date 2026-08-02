@@ -15,6 +15,31 @@ The set of components and their release notes files is defined in [`component-ma
 - Each `{component}.md` lives on its **matching component branch only**. The agent never edits another component's file from the wrong branch.
 - The milestone landing page `{version}.md` (for example, `11.0.0-preview.4.md`) is **not produced by this skill**. The .NET release team generates it through separate artifacts-publishing automation, so the agent leaves it alone on every branch.
 
+## Creating the PRs
+
+Order matters, and two of these steps fail silently.
+
+1. **Push the base branch first.** Component PRs target it, so it must exist on the remote before
+   any component PR can be opened. Note that a glob like `release-notes/{version}-{slug}-*` matches
+   the component branches but **not** the base branch — verifying with that pattern reports success
+   while the base branch is still local-only.
+2. **Confirm each component branch's parent is the base branch commit.** When it is, each component
+   PR shows a clean one-file diff instead of also restating the shared metadata.
+3. **Open the base PR against `main`**, then the component PRs against the base branch.
+4. **Verify assignees after creating each PR.** GitHub silently drops assignees who lack access to
+   the repo: the API returns success and the PR is created with the assignee missing. Re-read the PR
+   and compare against the intended list rather than trusting the exit code.
+
+### gh pr edit does not work for assignees on this repo
+
+`gh pr edit --add-assignee` / `--remove-assignee` fails against `dotnet/core` with a Projects
+(classic) GraphQL deprecation error, leaving assignees unchanged. Use the REST endpoints:
+
+```bash
+gh api -X POST   repos/dotnet/core/issues/{number}/assignees -f "assignees[]=<user>"
+gh api -X DELETE repos/dotnet/core/issues/{number}/assignees -f "assignees[]=<user>"
+```
+
 ## Merge flow
 
 Each component PR merges into the base branch. When all component PRs merge, the base PR's diff is the full milestone — there is no separate consolidation PR.

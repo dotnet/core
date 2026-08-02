@@ -116,6 +116,32 @@ You do NOT need to verify:
 - General concepts (e.g., "Zstandard compression" as a concept vs `ZstandardCompressionProvider` as a type)
 - CLI flags (e.g., `dotnet test --artifacts-path`)
 
+## Verify the change shipped in *this* milestone
+
+API verification answers "does this exist in the build". It does not answer "did this change in this
+release" — and those come apart in a way that is easy to miss.
+
+A behavior observed in the Preview 7 build was traced to a fix that shipped in **Preview 3**. It was
+real, it was verifiable, and documenting it in the Preview 7 notes would have been wrong. Anything
+still present from an earlier release will verify perfectly against the current build.
+
+The rule: **every documented change must trace to a PR in this milestone**, not merely be observably
+true in the build.
+
+1. **`changes.json` membership is the primary test.** If a change has no entry, it did not flow into
+   this milestone. Confirm before writing it up.
+2. **Check the PR's merge date and milestone** where the repo maintains them —
+   `dotnet/aspnetcore`, `dotnet/runtime`, `dotnet/sdk`, and `dotnet/efcore` do;
+   `dotnet/roslyn` and `dotnet/razor` do not (see
+   [`generate-changes`](../../generate-changes/SKILL.md)). For repos without milestones,
+   `changes.json` membership is the only available provenance signal.
+3. **Be suspicious of anything discovered by testing rather than from `changes.json`.** Finding a
+   nice behavior while validating samples is a good way to find *previous* releases' features. Trace
+   it to a PR in this milestone before promoting it.
+
+This is the mirror image of the revert check below: a revert means something in `changes.json` is not
+in the build, and stale provenance means something in the build is not in `changes.json`.
+
 ## What to do when verification fails
 
 If `dotnet-inspect` can't find a type:
@@ -127,5 +153,17 @@ If `dotnet-inspect` can't find a type:
 5. **Read the PR tests** — the PR's test files are ground truth. Tests compile and run against the actual API surface. Derive code samples from test assertions rather than guessing type names.
 
 When in doubt, describe the feature without naming specific types and link to the PR. A correct prose description is always better than a wrong code sample.
+
+## Static verification is not enough
+
+Everything above confirms that a *managed symbol exists*. Three important classes of error survive it:
+
+- **JavaScript and browser-facing APIs** are invisible to `dotnet-inspect` entirely.
+- **Defaults and polarity** are not checked by a name lookup. A rename from `EnableX` to `DisableX`
+  passes an existence check while inverting the meaning of the documented claim.
+- **Runtime behavior** — a sample can compile and still fail on request.
+
+After the notes are drafted, run [`validate-code-samples`](../../validate-code-samples/SKILL.md) to
+build and execute the documented claims against the milestone build.
 
 For scoring and feature selection, this is also a **quality bar**: if a change only looks interesting because it seems to add a new API, but you cannot identify that API in the public surface, score it down sharply. That usually means it is internal plumbing, a refactor, or an existing niche surface getting maintenance rather than a real release-note feature.

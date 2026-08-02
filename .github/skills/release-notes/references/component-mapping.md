@@ -24,6 +24,23 @@ Each release notes file gets its own per-component branch named `release-notes/{
 
 The agent assigns each component PR to its default assignee(s) when opening the PR (`gh pr create --assignee ...`), so the right team sees it in their review queue.
 
+### Check that the owners are still current
+
+This table is maintained by hand and goes stale as people change roles. In a single milestone, three
+of the rows were wrong: one owner had retired, one had moved off the component, and one component had
+been handed to someone new.
+
+Before opening the PRs, confirm each assignee can actually be assigned:
+
+```bash
+gh api repos/dotnet/core/assignees/<user> --silent   # exit 0 = assignable, 404 = not
+```
+
+A 404 means the mapping is stale, not that the call failed — GitHub will accept the PR creation and
+silently drop that assignee. Treat it as a prompt to confirm the current owner and update this file,
+rather than working around it. See [`pr-layout.md`](pr-layout.md) for the verification step after
+the PRs are created.
+
 ### Components contributed out-of-band (not in the VMR)
 
 These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. The agent still creates a stub PR for each so the component team can push their own content (or close the PR if there is nothing noteworthy this milestone).
