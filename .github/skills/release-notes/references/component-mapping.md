@@ -13,8 +13,8 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 | `sdk` | .NET SDK | `dotnet/sdk` | `sdk.md` | @baronfel |
 | `templating` | .NET SDK (Templating) | `dotnet/templating` | `sdk.md` | @baronfel |
 | `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` | @baronfel |
-| `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` | @KlausLoeffelmann @merriemcgaw |
-| `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @harshit7962 @adegeo |
+| `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` | @KlausLoeffelmann |
+| `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @vinnarayana-msft |
 | `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | @SamMonoRT @roji |
 | `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` | @BillWagner |
 | `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | @T-Gro |
