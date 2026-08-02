@@ -15,7 +15,7 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 | `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` | @baronfel |
 | `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` | @KlausLoeffelmann |
 | `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @vinnarayana-msft |
-| `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | @SamMonoRT @roji |
+| `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | @SamMonoRT |
 | `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` | @BillWagner |
 | `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | @T-Gro |
 | `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` | @baronfel |
