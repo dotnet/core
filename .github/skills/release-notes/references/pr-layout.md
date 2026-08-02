@@ -19,6 +19,8 @@ The set of components and their release notes files is defined in [`component-ma
 
 Each component PR merges into the base branch. When all component PRs merge, the base PR's diff is the full milestone — there is no separate consolidation PR.
 
+**The component owner merges their own PR.** Reviewing and approving is not enough — the owner is responsible for merging their component PR into the base branch once it's ready, rather than leaving it for someone else to merge.
+
 ## PR title convention
 
 - Base PR: `[release-notes] .NET {version} {milestone-label}` (e.g. `[release-notes] .NET 11 Preview 4`).
@@ -26,4 +28,6 @@ Each component PR merges into the base branch. When all component PRs merge, the
 
 ## Draft state
 
-Open both the base PR and every component PR as **drafts** (`gh pr create --draft`). Component teams promote their PR to ready-for-review once they've vetted the AI-authored content (including any `<!-- TODO -->` placeholders). The base PR stays a draft until the milestone ships.
+Open both the base PR and every component PR as **drafts** (`gh pr create --draft`). Component teams promote their PR to ready-for-review once they've vetted the AI-authored content (including any `<!-- TODO -->` placeholders), then merge it into the base branch themselves. The base PR stays a draft until the milestone ships.
+
+When notifying owners that their PRs are open, state that they own the merge, not just the review.
