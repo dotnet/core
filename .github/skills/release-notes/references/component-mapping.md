@@ -14,7 +14,7 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 | `templating` | .NET SDK (Templating) | `dotnet/templating` | `sdk.md` | @baronfel |
 | `msbuild` | MSBuild | `dotnet/msbuild` | `msbuild.md` | @baronfel |
 | `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` | @KlausLoeffelmann |
-| `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @vinnarayana-msft |
+| `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @subhajitm |
 | `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | @SamMonoRT @AndriySvyryd |
 | `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` | @BillWagner |
 | `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | @T-Gro |
