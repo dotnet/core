@@ -110,20 +110,22 @@ Thank you contributors! ❤️
 
 After features but before community contributors, include a bug fix summary when there are noteworthy fixes.
 
-Keep it a **flat bulleted list with one bullet per fix**. Each bullet is a single markdown link whose target is the PR that made the fix and whose display text is a cleaned-up version of the PR or issue title:
+Group the fixes by namespace or area, with a **flat list of one bullet per fix** under each group. Each bullet is a single markdown link whose target is the PR that made the fix and whose display text is a cleaned-up version of the PR or issue title:
 
 ```markdown
 ## Bug fixes
 
-- [Fix authenticated proxy credential handling](https://github.com/dotnet/runtime/pull/123363)
-- [Fix integer overflow in ImmutableArray range validation](https://github.com/dotnet/runtime/pull/124042)
+- **System.Net.Http**
+  - [Fix authenticated proxy credential handling](https://github.com/dotnet/runtime/pull/123363)
+- **System.Collections**
+  - [Fix integer overflow in ImmutableArray range validation](https://github.com/dotnet/runtime/pull/124042)
 ```
 
 Rules:
 
 - **One fix per bullet.** If a single behavior was fixed by several PRs, give each PR its own bullet rather than bundling links into one sentence.
 - **Link to the PR**, not the issue, even when the issue has the better title. Take the wording from whichever reads more clearly and point the link at the PR.
-- **No sub-grouping and no category headings.** Do not nest bullets under area names.
+- **Group by namespace or area**, exactly one level deep. Use the namespace where the component has one (`System.Text.Json`), otherwise a feature area (`Blazor`, `JIT / code generation`).
 - **No trailing prose.** The bullet is the link and nothing else — no explanation after it, and no `org/repo #number` citation, since the link already carries that.
 
 This overrides the general `org/repo #number` citation style used elsewhere in the notes; that style still applies in feature sections and breaking changes.
