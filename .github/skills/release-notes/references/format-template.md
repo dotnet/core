@@ -87,15 +87,18 @@ Known component docs links:
 2. **One paragraph of context** — what the feature does and why it matters in concrete terms, with PR/issue links; avoid inferred feelings or marketing-style claims
 3. **Code sample** — show the feature in use
 4. **Feature ordering** — highest customer impact first
-5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections
+5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections. In preview notes this section is also the upgrade guidance for readers coming from the previous preview — see below
 6. **Preview feature callout** — when a feature is listed in `release-notes/features.json`, start its section with the standard blockquote callout from that file
-7. **Call out what breaks an upgrade from the previous preview** — see below
 
-## Upgrading from the previous preview
+## Breaking changes
 
 Preview notes are read mostly by people who are already running the *previous* preview. For them the
 most valuable content is often not the new feature, but the thing that stops their existing code
 from building or working after they move to this build.
+
+Because each preview's Breaking changes section covers what changed *in that milestone*, it is
+already the preview-to-preview upgrade story. Write it for the reader doing that upgrade rather than
+as an abstract list of incompatibilities with the last GA release.
 
 Cover these when they apply. They tend to surface only when an existing project is actually upgraded
 to the new build, which is one of the reasons
@@ -106,9 +109,11 @@ to the new build, which is one of the reasons
 - **New analyzer diagnostics that fire on previously clean code.** Code that built without warnings
   on the last preview and now reports diagnostics is an upgrade issue even though nothing in the
   user's code changed. Name the diagnostic IDs.
-- **Removed or replaced workarounds.** If a bug that required a workaround is now fixed, say so, so
-  users can delete the workaround rather than carrying it forward.
 - **Changed defaults**, where existing code keeps compiling but behaves differently.
+
+**Removed or replaced workarounds** are the one upgrade item that is not a breaking change. If a bug
+that required a workaround is now fixed, say so with the fix in Bug fixes, so users can delete the
+workaround rather than carrying it forward.
 
 Do not turn this into a changelog of everything that moved. Include an item only when a user
 upgrading from the previous preview would otherwise hit a build error, a new warning, or a silent

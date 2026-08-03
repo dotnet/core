@@ -125,7 +125,7 @@ A behavior observed in the Preview 7 build was traced to a fix that shipped in *
 real, it was verifiable, and documenting it in the Preview 7 notes would have been wrong. Anything
 still present from an earlier release will verify perfectly against the current build.
 
-The rule: **every documented change must trace to a PR in this milestone**, not merely be observably
+The rule: **every documented change must trace to a PR associated with this milestone**, not merely be observably
 true in the build.
 
 1. **`changes.json` membership is the primary test.** If a change has no entry, it did not flow into
@@ -137,7 +137,7 @@ true in the build.
    `changes.json` membership is the only available provenance signal.
 3. **Be suspicious of anything discovered by testing rather than from `changes.json`.** Finding a
    nice behavior while validating samples is a good way to find *previous* releases' features. Trace
-   it to a PR in this milestone before promoting it.
+   it to a PR associated with this milestone before promoting it.
 
 This is the mirror image of the revert check below: a revert means something in `changes.json` is not
 in the build, and stale provenance means something in the build is not in `changes.json`.

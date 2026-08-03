@@ -26,11 +26,7 @@ The agent assigns each component PR to its default assignee(s) when opening the 
 
 ### Check that the owners are still current
 
-This table is maintained by hand and goes stale as people change roles. In a single milestone, three
-of the rows were wrong: one owner had retired, one had moved off the component, and one component had
-been handed to someone new.
-
-Before opening the PRs, confirm each assignee can actually be assigned:
+This table is maintained by hand and goes stale as people change roles. Before opening the PRs, confirm each assignee can actually be assigned:
 
 ```bash
 gh api repos/dotnet/core/assignees/<user> --silent   # exit 0 = assignable, 404 = not

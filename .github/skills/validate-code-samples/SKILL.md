@@ -14,21 +14,6 @@ this problem: does a managed type or member exist in the ref pack? That check is
 cheap, but it is not sufficient. It cannot see JavaScript APIs, it cannot tell you what a default
 value is, and it cannot tell you whether a documented sequence of calls actually works.
 
-## Why this stage exists
-
-Every one of these shipped in a draft and survived static verification. All were caught only by
-running code:
-
-| Failure | What static verification reported | What running it showed |
-| ------- | --------------------------------- | ---------------------- |
-| `Blazor.pause.waitFor(fn)` | Nothing - JS surface is invisible to `dotnet-inspect` | The API does not exist. The served `blazor.web.js` exposes only `pauseCircuit` / `resumeCircuit`; the real hook is a circuit handler callback |
-| `.RequireAntiforgeryToken()` | Nothing - inferred from a PR title, never compiled | Does not exist. A reflection sweep of the shipped assembly found only `DisableAntiforgery` |
-| `EnableClientValidation` | Member found, so the draft looked verified | Renamed to `DisableClientValidation` **and the polarity inverted**. A name-only check actively confirmed the wrong claim |
-| Documented sample page | Built cleanly | Returned HTTP 500 - the attribute silently requires a *public* property |
-
-The pattern: **a name is not a behavior.** Static verification answers "does this symbol exist",
-which is a much weaker question than "does this documented claim hold".
-
 ## Acquiring a build
 
 Do not test against whatever SDK happens to be on the machine. Test against the milestone build.
