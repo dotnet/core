@@ -30,14 +30,20 @@ Order matters, and two of these steps fail silently.
    the repo: the API returns success and the PR is created with the assignee missing. Re-read the PR
    and compare against the intended list rather than trusting the exit code.
 
-### gh pr edit does not work for assignees on this repo
+### gh pr edit does not work on this repo
 
-`gh pr edit --add-assignee` / `--remove-assignee` fails against `dotnet/core` with a Projects
-(classic) GraphQL deprecation error, leaving assignees unchanged. Use the REST endpoints:
+`gh pr edit` fails against `dotnet/core` with a Projects (classic) GraphQL deprecation error and
+leaves the PR unchanged. This affects the whole command, not just one flag — `--add-assignee`,
+`--remove-assignee`, and `--body` / `--body-file` all fail the same way. It exits non-zero, but the
+error text is about Projects rather than about what you were trying to change, so it is easy to
+mistake for a warning. Use the REST endpoints:
 
 ```bash
 gh api -X POST   repos/dotnet/core/issues/{number}/assignees -f "assignees[]=<user>"
 gh api -X DELETE repos/dotnet/core/issues/{number}/assignees -f "assignees[]=<user>"
+
+# Editing the PR title or body
+'{"body": "..."}' | gh api -X PATCH repos/dotnet/core/pulls/{number} --input -
 ```
 
 ## Merge flow
