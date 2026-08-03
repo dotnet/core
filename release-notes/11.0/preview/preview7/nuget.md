@@ -89,12 +89,10 @@ Visual Studio's Error List now offers a "Fix Vulnerabilities with GitHub Copilot
 
 ## Bug fixes
 
-- **Pack**
-  - `GetPackOutputItemsTask` now computes the same `.nupkg` file name that `PackTask` writes when a project uses `NuspecFile` or `NuspecProperties` (including dynamically generated versions), and respects `OutputFileNamesWithoutVersion` when producing the version-less output name ([NuGet/NuGet.Client #7531](https://github.com/NuGet/NuGet.Client/pull/7531), [NuGet/Home #14711](https://github.com/NuGet/Home/issues/14711), [NuGet/Home #12644](https://github.com/NuGet/Home/issues/12644)).
-  - `GetPackOutputItems` no longer fails when a nuspec is generated later in the pack pipeline (for example by Roslyn's analyzer packages, which produce their nuspec in a `BeforeTargets="GenerateNuspec"` target that runs after `GetPackOutputItems`) ([NuGet/NuGet.Client #7565](https://github.com/NuGet/NuGet.Client/pull/7565), [NuGet/Home #14711](https://github.com/NuGet/Home/issues/14711)).
-- **Visual Studio**
-  - When the Package Manager UI fails to construct, a document window now opens with the exception message and stack trace so customers can see what went wrong instead of an empty tab. Fault telemetry is still recorded ([NuGet/NuGet.Client #7542](https://github.com/NuGet/NuGet.Client/pull/7542), [NuGet/Home #14977](https://github.com/NuGet/Home/issues/14977)).
-  - Locating an already-open Package Manager UI window now queries Visual Studio's UI shell for the specific editor GUID instead of enumerating open windows and forcing each tab's document view to load. Lazy-loaded tabs stay lazy ([NuGet/NuGet.Client #7568](https://github.com/NuGet/NuGet.Client/pull/7568), [NuGet/Home #14995](https://github.com/NuGet/Home/issues/14995)).
+- [Fix mismatch between GetPackOutputItemsTask and PackTask generated filenames](https://github.com/NuGet/NuGet.Client/pull/7531)
+- [Fix GetPackOutputItems when nuspec does not exist](https://github.com/NuGet/NuGet.Client/pull/7565)
+- [When PM UI fails to load, show a window with exception details](https://github.com/NuGet/NuGet.Client/pull/7542)
+- [Find existing PM UI windows by editor type](https://github.com/NuGet/NuGet.Client/pull/7568)
 
 ## Community contributors
 
