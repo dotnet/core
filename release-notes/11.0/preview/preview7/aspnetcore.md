@@ -407,62 +407,50 @@ If your rules intentionally emit a scheme-relative or absolute URL, provide the 
 
 ## Bug fixes
 
-- **Antiforgery / CSRF**
-  - The default CSRF middleware's per-request work was reduced so it no longer regresses throughput on high-QPS endpoints ([dotnet/aspnetcore #67488](https://github.com/dotnet/aspnetcore/pull/67488)).
-  - `PostRoutingPipeline` is now re-run when `UseStatusCodePagesWithReExecute` re-routes a request, so a re-executed request goes through CSRF checks again instead of being served with stale routing state ([dotnet/aspnetcore #67618](https://github.com/dotnet/aspnetcore/pull/67618)).
-  - Antiforgery validation failures on unauthenticated requests that carry an authenticated token now log a clearer message: *"The provided antiforgery token was meant for an authenticated user, but the current request is not authenticated."* ([dotnet/aspnetcore #67942](https://github.com/dotnet/aspnetcore/pull/67942)).
-  - Passkey login no longer breaks when Blazor SSR client-side validation is enabled ([dotnet/aspnetcore #67258](https://github.com/dotnet/aspnetcore/pull/67258)); passkey registration works under CSRF protection ([dotnet/aspnetcore #67589](https://github.com/dotnet/aspnetcore/pull/67589)).
-- **Blazor**
-  - Blazor Hybrid `WebView` no longer crashes on publish when `blazor.modules.json` is missing; a conditional fallback is applied instead ([dotnet/aspnetcore #67374](https://github.com/dotnet/aspnetcore/pull/67374)).
-  - `Virtualize` with `AnchorMode=End` no longer re-engages the bottom after the user scrolls up ([dotnet/aspnetcore #67555](https://github.com/dotnet/aspnetcore/pull/67555)), and a scroll-jump caused by native anchoring double-compensating a JS anchor is fixed ([dotnet/aspnetcore #67934](https://github.com/dotnet/aspnetcore/pull/67934)). Appending to an end-anchored list no longer flashes a placeholder ([dotnet/aspnetcore #67679](https://github.com/dotnet/aspnetcore/pull/67679)). `QuickGrid` with an async `ItemsProvider` no longer drifts on prepend in either `None` or `Start` anchor modes ([dotnet/aspnetcore #67931](https://github.com/dotnet/aspnetcore/pull/67931), [dotnet/aspnetcore #67935](https://github.com/dotnet/aspnetcore/pull/67935)).
-  - `AmbiguousMatchException` in `DataAnnotationsValidator` for hidden (`new`) property members is fixed ([dotnet/aspnetcore #67075](https://github.com/dotnet/aspnetcore/pull/67075), community contribution).
-  - The WebAssembly debug proxy page HTML-encodes incoming parameters, preventing reflected content injection when a developer opens the debug UI ([dotnet/aspnetcore #67875](https://github.com/dotnet/aspnetcore/pull/67875)).
-  - `discoverBrowserConfiguration` is now executed on every enhanced navigation, not only the initial page load ([dotnet/aspnetcore #67387](https://github.com/dotnet/aspnetcore/pull/67387)).
-- **OpenAPI**
-  - JSON pointers referencing an array element (for example `#/components/schemas/Item/oneOf/0`) and pointers containing `~0` / `~1` escapes now resolve correctly against `JsonNode` schemas ([dotnet/aspnetcore #67573](https://github.com/dotnet/aspnetcore/pull/67573)).
-  - `tags` in the generated document now preserve declaration order instead of being alphabetically shuffled ([dotnet/aspnetcore #65728](https://github.com/dotnet/aspnetcore/pull/65728), community contribution).
-  - `OpenApiSchemaService` now handles `Properties` implementations that aren't `Dictionary<,>` ([dotnet/aspnetcore #67384](https://github.com/dotnet/aspnetcore/pull/67384), community contribution).
-  - `PropertyAsParameterInfo` no longer throws `InvalidCastException` when a parameter's attribute set contains an attribute of an unexpected type ([dotnet/aspnetcore #67284](https://github.com/dotnet/aspnetcore/pull/67284)).
-  - Nullability handling in OpenAPI is corrected for nested reference types ([dotnet/aspnetcore #67661](https://github.com/dotnet/aspnetcore/pull/67661)).
-  - `UnauthorizedHttpResult` now implements `IEndpointMetadataProvider`, so a minimal-API endpoint that returns it advertises `401` in its OpenAPI operation ([dotnet/aspnetcore #65611](https://github.com/dotnet/aspnetcore/pull/65611), community contribution).
-  - A new `OpenApiGenerationEnvironment` MSBuild property sets the environment name used when the build generates OpenAPI documents, so a document produced at build time can differ from the one served at development time ([dotnet/aspnetcore #68040](https://github.com/dotnet/aspnetcore/pull/68040)).
-  - OpenAPI parameter matching now respects `IModelNameProvider`, so a parameter renamed with `[FromQuery(Name = "...")]` is matched by its bound name ([dotnet/aspnetcore #67971](https://github.com/dotnet/aspnetcore/pull/67971)).
-- **Data protection**
-  - `IDataProtector` no longer eagerly loads `currentKeyRing` on resolution — a startup optimization that also avoids logging spurious key-ring warnings for apps that resolve the service but never protect anything ([dotnet/aspnetcore #67465](https://github.com/dotnet/aspnetcore/pull/67465)).
-  - Every authenticated encryptor now runs its self-test on construction, not only in the specific paths that previously did ([dotnet/aspnetcore #66413](https://github.com/dotnet/aspnetcore/pull/66413)).
-- **RDG / Minimal API source generator**
-  - `RequestDelegateGenerator` no longer emits invalid code for parameter types produced by another source generator ([dotnet/aspnetcore #65453](https://github.com/dotnet/aspnetcore/pull/65453)).
-  - `MapFallback` is handled correctly by RDG ([dotnet/aspnetcore #67562](https://github.com/dotnet/aspnetcore/pull/67562)), and endpoint-uniqueness checks no longer false-positive on legitimate multi-verb registrations ([dotnet/aspnetcore #67591](https://github.com/dotnet/aspnetcore/pull/67591)).
-  - The generator's service-parameter detection is more precise, so plain minimal-API parameters aren't misclassified as `[FromServices]` ([dotnet/aspnetcore #67578](https://github.com/dotnet/aspnetcore/pull/67578)).
-  - `ValidationsGenerator` now supports validating `internal` types and skips C# `file`-local types (which would fail to compile from generated code) ([dotnet/aspnetcore #67399](https://github.com/dotnet/aspnetcore/pull/67399)).
-  - `ExperimentalAttribute` was removed from the validation attributes so `[ValidatableType]` no longer requires a diagnostic suppression to use ([dotnet/aspnetcore #67634](https://github.com/dotnet/aspnetcore/pull/67634)).
-  - The `IValidatableTypeInfo`, `IValidatablePropertyInfo`, and `IValidatableParameterInfo` interfaces gain synchronous `Validate` methods alongside the existing `ValidateAsync` ones, so validation logic that has nothing to await no longer has to allocate and await a `Task` ([dotnet/aspnetcore #67427](https://github.com/dotnet/aspnetcore/pull/67427)).
-- **Identity**
-  - `CreateTwoFactorRecoveryCode` now uses `RandomNumberGenerator.GetItems<char>` instead of calling `RNG.Fill` per character, which is both simpler and faster ([dotnet/aspnetcore #67670](https://github.com/dotnet/aspnetcore/pull/67670), community contribution from [@RichardD2](https://github.com/RichardD2)).
-  - `UserOptions.AllowedUserNameCharacters` accepts `null` to disable the character-set restriction ([dotnet/aspnetcore #67731](https://github.com/dotnet/aspnetcore/pull/67731), community contribution).
-  - The cookie authentication handler clears the cached session key on sign-out so a re-issued cookie doesn't reuse the old session ([dotnet/aspnetcore #67049](https://github.com/dotnet/aspnetcore/pull/67049)).
-- **Client errors**
-  - `ClientErrorMapping` for status 500 now uses the RFC 9110 title *"Internal Server Error"* ([dotnet/aspnetcore #65590](https://github.com/dotnet/aspnetcore/pull/65590), community contribution).
-  - `Problem` / `ValidationProblem` extension calls that conflict with default arguments no longer throw `ArgumentException` ([dotnet/aspnetcore #67690](https://github.com/dotnet/aspnetcore/pull/67690), community contribution).
-- **Miscellaneous**
-  - Rewrite middleware no longer allows a bare leading `\` to bypass the leading-slash collapse ([dotnet/aspnetcore #67928](https://github.com/dotnet/aspnetcore/pull/67928)).
-  - Wildcard route templates with empty inner segments are matched more strictly, closing a pattern-injection edge case ([dotnet/aspnetcore #67757](https://github.com/dotnet/aspnetcore/pull/67757)).
-  - `SearchValues`, `ContainsAny`, and other span helpers are used in more places on the networking hot path ([dotnet/aspnetcore #67018](https://github.com/dotnet/aspnetcore/pull/67018), [dotnet/aspnetcore #67150](https://github.com/dotnet/aspnetcore/pull/67150) — community).
-  - Sensitive `DataProtection` buffers are zeroed with `ZeroMemory` on dispose ([dotnet/aspnetcore #66577](https://github.com/dotnet/aspnetcore/pull/66577), community contribution).
-  - Blazor Web App templates no longer include a redundant `app.UseAntiforgery()` call, since [automatic CSRF protection](../preview6/aspnetcore.md#automatic-cross-origin-csrf-protection) covers the same ground ([dotnet/aspnetcore #67119](https://github.com/dotnet/aspnetcore/pull/67119)).
-  - `QuickGrid` diagnostics now identify a `GridSort<T>` whose type mismatches the grid ([dotnet/aspnetcore #67413](https://github.com/dotnet/aspnetcore/pull/67413), community contribution) and a keyboard-focus accessibility issue is fixed ([dotnet/aspnetcore #67674](https://github.com/dotnet/aspnetcore/pull/67674)).
-
-<!-- Filtered features (significant engineering work, but too niche or tooling-only for these notes):
-  - Client-side pause deferral via `circuitHandlers` / `onCircuitPausing` (67098) — covered as part of the automatic pause section.
-  - Rename `CacheBoundary` → `CacheView`, `CacheBoundaryVaryBy` → `CacheVaryBy`, and the attribute split (67776) — folded into the CacheView feature description because CacheBoundary was never shipped.
-  - `[StringSyntax(Json)]` on Blazor/Identity string parameters (66358) — DX polish; no runtime behavior change.
-  - `[Obsolete]` mapped to `deprecated` in OpenAPI (67953) — backported to preview7 from an earlier feature branch; behavior already described elsewhere.
-  - `OpenAPI` TerminalLogger surfacing (66922) — build-time diagnostic only, no runtime API.
-  - Add safety comment to `Utf8HashLookup` (67477) — code hygiene.
-  - IDE0005 enabled in the build (49080) — repository infrastructure.
-  - Fuzzing infra updates (67498) — repository infrastructure.
-  - Doc clarifications (67481, 67665) — documentation-only.
--->
+- [Fix CsrfProtectionMiddleware perf degradations](https://github.com/dotnet/aspnetcore/pull/67488)
+- [Rerun PostRoutingPipeline on Rerouting](https://github.com/dotnet/aspnetcore/pull/67618)
+- [Improve antiforgery error message for unauthenticated requests with authenticated tokens](https://github.com/dotnet/aspnetcore/pull/67942)
+- [Fix passkey login broken by SSR client-side validation](https://github.com/dotnet/aspnetcore/pull/67258)
+- [Fix Blazor passkey registration under CsrfProtection](https://github.com/dotnet/aspnetcore/pull/67589)
+- [Blazor: Fix WebView blazor.modules.json publish crash via conditional fallback](https://github.com/dotnet/aspnetcore/pull/67375)
+- [Fix Virtualize AnchorMode=End re-engaging bottom after user scrolls up](https://github.com/dotnet/aspnetcore/pull/67555)
+- [Fix Virtualize scroll jump from native/JS anchoring double-compensation](https://github.com/dotnet/aspnetcore/pull/67934)
+- [Fix placeholder flash when appending to an End-anchored virtualized list](https://github.com/dotnet/aspnetcore/pull/67679)
+- [Fix QuickGrid None-mode async-provider prepend viewport drift](https://github.com/dotnet/aspnetcore/pull/67931)
+- [Fix QuickGrid Start-mode async-provider prepend viewport drift](https://github.com/dotnet/aspnetcore/pull/67935)
+- [Fixed AmbiguousMatchException in DataAnnotationsValidator for Hidden Members](https://github.com/dotnet/aspnetcore/pull/67075)
+- [Wasm: Html Encode incoming parameters to debug page](https://github.com/dotnet/aspnetcore/pull/67875)
+- [Blazor: Execute `discoverBrowserConfiguration` on every enhanced navigation](https://github.com/dotnet/aspnetcore/pull/67387)
+- [Fix array handling for JSON pointers when resolving OpenAPI schemas](https://github.com/dotnet/aspnetcore/pull/67573)
+- [Fix tags ordering in OpenAPI generation](https://github.com/dotnet/aspnetcore/pull/65728)
+- [Fix OpenApiSchemaService to handle implementation different from Dictionary<,> for schema.Properties](https://github.com/dotnet/aspnetcore/pull/67384)
+- [Fix InvalidCastException when retrieving attributes for PropertyAsParameterInfo](https://github.com/dotnet/aspnetcore/pull/67284)
+- [Fix nullability handling in OpenApi](https://github.com/dotnet/aspnetcore/pull/67661)
+- [Add IEndpointMetadataProvider to UnauthorizedHttpResult](https://github.com/dotnet/aspnetcore/pull/65611)
+- [Add OpenApiGenerationEnvironment property support for API description server document generation](https://github.com/dotnet/aspnetcore/pull/68040)
+- [Respect IModelNameProvider when matching OpenAPI parameters](https://github.com/dotnet/aspnetcore/pull/67971)
+- [Fix eager load of currentKeyRing on resolving IDataProtector](https://github.com/dotnet/aspnetcore/pull/67465)
+- [Always run self test on encryptors](https://github.com/dotnet/aspnetcore/pull/66413)
+- [Fix RDG generating invalid code for types from other source generators](https://github.com/dotnet/aspnetcore/pull/65453)
+- [Fix MapFallback handling in RDG](https://github.com/dotnet/aspnetcore/pull/67562)
+- [Fix RDG check for endpoint uniqueness](https://github.com/dotnet/aspnetcore/pull/67591)
+- [Fix service parameter detection logic for minimal API validation filter](https://github.com/dotnet/aspnetcore/pull/67578)
+- [ValidationsGenerator: Allow validating internal types](https://github.com/dotnet/aspnetcore/pull/67399)
+- [Remove ExperimentalAttribute from validation attributes](https://github.com/dotnet/aspnetcore/pull/67634)
+- [Add synchronous Validate method in Microsoft.Extensions.Validation](https://github.com/dotnet/aspnetcore/pull/67427)
+- [Improve CreateTwoFactorRecoveryCode in .NET 8+](https://github.com/dotnet/aspnetcore/pull/67670)
+- [Allow `null` on `UserOptions.AllowedUserNameCharacters`](https://github.com/dotnet/aspnetcore/pull/67731)
+- [Clear cached session key in cookie auth handler sign-out](https://github.com/dotnet/aspnetcore/pull/67049)
+- [Fix ClientErrorMapping 500 title to match RFC 9110](https://github.com/dotnet/aspnetcore/pull/65590)
+- [Avoid ArgumentException when Problem/ValidationProblem extensions conflict with defaults](https://github.com/dotnet/aspnetcore/pull/67690)
+- [Fix url normalizer backslashes](https://github.com/dotnet/aspnetcore/pull/67928)
+- [Harden wildcard matching with empty segments inside](https://github.com/dotnet/aspnetcore/pull/67757)
+- [Use SearchValues/ContainsAny/span helpers in more places](https://github.com/dotnet/aspnetcore/pull/67018)
+- [Use more performant span APIs](https://github.com/dotnet/aspnetcore/pull/67150)
+- [Zero sensitive buffers on clear](https://github.com/dotnet/aspnetcore/pull/66577)
+- [Remove redundant app.UseAntiforgery() from Blazor Web templates](https://github.com/dotnet/aspnetcore/pull/67119)
+- [Improve QuickGrid diagnostics for mismatched GridSort types](https://github.com/dotnet/aspnetcore/pull/67413)
+- [Fix QuickGrid accessibility issue](https://github.com/dotnet/aspnetcore/pull/67674)
 
 ## Community contributors
 
