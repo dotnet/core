@@ -306,85 +306,22 @@ back to an offline error
 
 ## Bug fixes
 
-- **CLI**
-  - `dotnet sln add` prefers a nearby `.slnx` over an unrelated `.sln` in a
-    parent directory
-    ([dotnet/sdk #55048](https://github.com/dotnet/sdk/pull/55048)).
-  - `dotnet sln` parses `.slnf` files whose paths contain unescaped
-    backslashes (for example, `..\App.slnx`), and `dotnet new slnf` emits
-    valid JSON on Windows
-    ([dotnet/sdk #54622](https://github.com/dotnet/sdk/pull/54622)).
-  - Running a .NET Framework `.exe` on non-Windows now produces a descriptive
-    error instead of a generic `Cannot open assembly` failure
-    ([dotnet/sdk #54581](https://github.com/dotnet/sdk/pull/54581)).
-  - `Ctrl+C` no longer produces `ObjectDisposedException` in the Unix process
-    reaper on shutdown
-    ([dotnet/sdk #55121](https://github.com/dotnet/sdk/pull/55121)).
-  - `Product.Version` now reports the correct SDK version under the Native AOT
-    CLI. The SDK `.version` file is resolved from the resolved SDK directory,
-    so separated Native AOT layouts such as the muxer no longer report the
-    wrong version
-    ([dotnet/sdk #55410](https://github.com/dotnet/sdk/pull/55410)).
-  - Mark of the Web detection no longer misses marked files on Windows; the
-    incorrect `MUTZ_ISFILE` flag has been removed from the zone check
-    ([dotnet/sdk #54937](https://github.com/dotnet/sdk/pull/54937)).
-- **`dotnet run`**
-  - `dotnet run` now re-reads the `@(RuntimeEnvironmentVariable)` item group
-    after `ComputeRunArguments`, so targets that add or change environment
-    variables affect the launched process
-    ([dotnet/sdk #54922](https://github.com/dotnet/sdk/pull/54922)).
-- **`dotnet watch`**
-  - `IntermediateOutputPath` is normalized to forward slashes on POSIX
-    platforms so file-watching honors the actual `obj/` directory
-    ([dotnet/sdk #54536](https://github.com/dotnet/sdk/pull/54536)).
-  - `GenerateRuntimeConfigurationFiles` writes Hot Reload options into the
-    generated `runtimeconfig.json` so the runtime picks up the metadata
-    updater configuration automatically
-    ([dotnet/sdk #53715](https://github.com/dotnet/sdk/pull/53715)).
-- **Publish**
-  - Composite ReadyToRun publishing succeeds when a resolved reference's
-    `RelativePath` contains a path component
-    ([dotnet/sdk #55200](https://github.com/dotnet/sdk/pull/55200)).
-- **Source generators**
-  - The SDK no longer embeds a `ValidatableTypeAttribute` in projects that
-    target `net11.0` or later; the type now lives in the shared framework
-    ([dotnet/sdk #55163](https://github.com/dotnet/sdk/pull/55163)).
-- **Analyzers**
-  - `CA2007` no longer fires on pattern-based `await using` and `await foreach`
-    expressions where the enumerator or disposable does not expose
-    `ConfigureAwait`, thanks to
-    [@DoctorKrolic](https://github.com/DoctorKrolic)
-    ([dotnet/sdk #55036](https://github.com/dotnet/sdk/pull/55036)).
-  - `CA1860` recognizes abstract collection types when suggesting the fast
-    `Count`/`Length` path over `Any()`, thanks to
-    [@verdie-g](https://github.com/verdie-g)
-    ([dotnet/sdk #50461](https://github.com/dotnet/sdk/pull/50461)).
-  - `CA1873` compares log level correctly when detecting redundant
-    `IsEnabled` checks, thanks to [@dnnr](https://github.com/dnnr)
-    ([dotnet/sdk #54891](https://github.com/dotnet/sdk/pull/54891)).
-- **Tools**
-  - RID-specific tool pointer packages emit `DotnetToolSettings.xml` under
-    `tools/any/any/` so a single top-level package can point at RID-specific
-    payload packages
-    ([dotnet/sdk #55107](https://github.com/dotnet/sdk/pull/55107)).
-- **Templates**
-  - `GlobalSettingsTemplatePackageProvider.EnsureInstallPrerequisites` no
-    longer treats identical paths as different because of case
-    ([dotnet/sdk #55105](https://github.com/dotnet/sdk/pull/55105)).
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Vendor `dotnet test` shared source instead of consuming Internal.DotnetTest package (#55130) — pure repo-plumbing move.
-  - Sync vendored TestFx protocol changes (#55247, #55338, #55372) — dependency alignment; no user-visible surface change.
-  - Consolidate logger utilities between run and test (#55073) — internal refactor.
-  - Cache GetFileVersion in GenerateDepsFile (#55033), Minimize RuntimeFramework cache key (#55034), Batch WithSource project-file rewrites (#55269) — perf plumbing without published numbers.
-  - Adopt MSBuild partial evaluation (#55271) — folded into MSBuild-server section as the CLI-perf angle; standalone entry would repeat that.
-  - dotnetup bootstrap scripts (#55145, #55153, #55208) — SDK build/infra plumbing only.
-  - [mono] workload telemetry extension point and UsingBrowserRuntimeWorkload (#55026, #55089) — telemetry-only, no observable user behavior.
-  - Persist-then-drain CLI telemetry exporter and Application Insights connection-string migration (#55211, #55127) — internal telemetry plumbing; no user-facing behavior or API change.
-  - MTP crash/hang dump extensions in Helix (#55133) — CI-only.
-  - Enable NativeAOT CI legs and VS 2026 image (#54719, #55326, #55291) — infrastructure only.
-  - Keep MSTest.Sdk in sync with MSTest framework (#55302) — internal versioning discipline.
--->
+- [Update FindSolutionFilesAtOrAbovePath to prioritize *.slnx over *.sln found in parent directories](https://github.com/dotnet/sdk/pull/55048)
+- [Fix `dotnet sln` failing to parse `.slnf` files with unescaped backslashes in path](https://github.com/dotnet/sdk/pull/54622)
+- [Emit more descriptive error when running .NET Framework exe on non-Windows](https://github.com/dotnet/sdk/pull/54581)
+- [Fix ObjectDisposedException in UnixProcessReaper during Ctrl+C shutdown](https://github.com/dotnet/sdk/pull/55121)
+- [Fix Native AOT SDK version lookup](https://github.com/dotnet/sdk/pull/55410)
+- [Fix Mark of the Web detection by removing MUTZ_ISFILE flag](https://github.com/dotnet/sdk/pull/54937)
+- [Honor @(RuntimeEnvironmentVariable) item changes when launching the app](https://github.com/dotnet/sdk/pull/54922)
+- [Normalize IntermediateOutputPath slashes on POSIX platforms](https://github.com/dotnet/sdk/pull/54536)
+- [Update GenerateRuntimeConfigurationFiles task to generate Hot Reload runtime options](https://github.com/dotnet/sdk/pull/53715)
+- [Fix composite ReadyToRun publish when RelativePath has a path component](https://github.com/dotnet/sdk/pull/55200)
+- [Don't generate embedded ValidatableTypeAttribute for .NET 11 and later](https://github.com/dotnet/sdk/pull/55163)
+- [Do not report `CA2007` for pattern-based `await using` and `await foreach`](https://github.com/dotnet/sdk/pull/55036)
+- [Make CA1860 work with abstract collections](https://github.com/dotnet/sdk/pull/50461)
+- [CA1873: Fix log level comparison](https://github.com/dotnet/sdk/pull/54891)
+- [Pack RID-specific tool pointer packages with DotnetToolSettings.xml under tools/any/any](https://github.com/dotnet/sdk/pull/55107)
+- [Fix case-sensitive path comparison in GlobalSettingsTemplatePackageProvider.EnsureInstallPrerequisites](https://github.com/dotnet/sdk/pull/55105)
 
 ## Community contributors
 
