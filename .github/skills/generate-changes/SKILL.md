@@ -155,14 +155,14 @@ Rules for using it:
   legitimately appear in `changes.json`, so the counts will not match and are not meant to.
 - **Only the missing direction matters.** What is worth acting on is a PR in the milestone that
   describes a user-facing change and has no corresponding entry in the notes.
-- **Verify every addition independently before writing it up.** Milestone membership is a label
-  applied by hand, so it proves someone intended the PR for this release — not that the change
-  actually shipped in it. A PR can be milestoned and then reverted, retargeted to a later preview,
-  or milestoned in error. Before promoting anything found this way, confirm it appears in
-  `changes.json` and exists in the build (see
+- **Verify every addition independently before writing it up.** Milestones are applied by
+  automation, so they are usually right — but they can be changed or applied incorrectly by hand
+  afterwards, and a milestoned PR can still be reverted. Treat a milestone as reliable evidence of
+  where to look and weak evidence that the change shipped. Before promoting anything found this
+  way, confirm it appears in `changes.json` and exists in the build (see
   [`api-verification.md`](../release-notes/references/api-verification.md) and
-  [`validate-code-samples`](../validate-code-samples/SKILL.md)). The milestone tells you where to
-  look; it is not evidence on its own.
+  [`validate-code-samples`](../validate-code-samples/SKILL.md)). The expected outcome is that it
+  checks out; the point is to catch the occasional one that does not.
 - **Confirm the milestone exists before relying on its absence.** Repos without `11.x` milestones
   will return zero results, which means "not tracked here", not "nothing shipped".
 
