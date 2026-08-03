@@ -321,68 +321,41 @@ AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
 
 ## Bug fixes
 
-- **System.Numerics**
-  - Fixed rounding of `BigInteger` conversions to floating-point types, and sped up the conversion ([dotnet/runtime #130565](https://github.com/dotnet/runtime/pull/130565), [dotnet/runtime #130721](https://github.com/dotnet/runtime/pull/130721)).
-  - Fixed `decimal` ↔ floating-point conversions to round correctly ([dotnet/runtime #130566](https://github.com/dotnet/runtime/pull/130566)).
-  - Fixed the extra negative sign when a value rounds to zero in a two-section custom format ([dotnet/runtime #130558](https://github.com/dotnet/runtime/pull/130558)).
-  - Fixed the Dragon4 shortest formatting for exact powers of two ([dotnet/runtime #131131](https://github.com/dotnet/runtime/pull/131131)).
-  - Ensured `float`-to-`BFloat16` conversion preserves NaN ([dotnet/runtime #130583](https://github.com/dotnet/runtime/pull/130583)).
-- **System.Net**
-  - Rejected CR and LF in `MailAddress` parsing ([dotnet/runtime #130175](https://github.com/dotnet/runtime/pull/130175)).
-  - Detected CR/LF and URL-encoded CR/LF in `FtpWebRequest` URIs and command parameters ([dotnet/runtime #128983](https://github.com/dotnet/runtime/pull/128983)).
-  - Escaped quotes and backslashes in `MailAddress` display name when encoding SMTP headers ([dotnet/runtime #128979](https://github.com/dotnet/runtime/pull/128979)).
-  - Fell back to `localhost` when `localhost.` resolution fails ([dotnet/runtime #130504](https://github.com/dotnet/runtime/pull/130504)).
-  - Compared `CredentialCache` prefix path case-sensitively ([dotnet/runtime #130636](https://github.com/dotnet/runtime/pull/130636)).
-  - Fixed CRLF encoding in `EightBitStream` ([dotnet/runtime #130757](https://github.com/dotnet/runtime/pull/130757)).
-- **System.Net.Security**
-  - `SslStream` on Android now consults the platform's `X509TrustManager` (including `network_security_config.xml`) instead of ignoring it — apps that pin certificates on Android will now see the platform's verdict in `RemoteCertificateValidationCallback` ([dotnet/runtime #124173](https://github.com/dotnet/runtime/pull/124173)).
-  - Improved malformed TLS handshake frame detection ([dotnet/runtime #130756](https://github.com/dotnet/runtime/pull/130756)).
-- **System.IO.Compression**
-  - Fixed `ZstandardStream` truncating multi-frame `zstd` responses to the first frame ([dotnet/runtime #129047](https://github.com/dotnet/runtime/pull/129047)). Thank you [@christosk92](https://github.com/christosk92)!
-  - Fixed Unix permissions on ZIP entries ([dotnet/runtime #130304](https://github.com/dotnet/runtime/pull/130304)).
-  - Configured `ZstandardStream` decompression with `MaxWindowLog2 = 23` per RFC 9659 ([dotnet/runtime #130024](https://github.com/dotnet/runtime/pull/130024)).
-  - Added a `ZstandardDecompressionOptions` constructor to `ZstandardStream`/`ZstandardDecoder` so callers can tie decoder lifetime to the stream ([dotnet/runtime #129768](https://github.com/dotnet/runtime/pull/129768)).
-- **System.Text.Json**
-  - Fixed the source generator serializing `null` `byte[]` as an empty string ([dotnet/runtime #129834](https://github.com/dotnet/runtime/pull/129834)). Thank you [@lezzi](https://github.com/lezzi)!
-  - Percent-encode JSON pointer reference tokens in `JsonSchemaExporter` `$ref` values ([dotnet/runtime #130164](https://github.com/dotnet/runtime/pull/130164)).
-  - Produced a `deprecated` property in `JsonSchema` for obsolete types ([dotnet/runtime #130665](https://github.com/dotnet/runtime/pull/130665)).
-  - Re-enabled source-generator support for inaccessible `[JsonInclude]` members ([dotnet/runtime #130163](https://github.com/dotnet/runtime/pull/130163)).
-  - Allowed empty-string identifiers on non-flags enums in `JsonStringEnumConverter` ([dotnet/runtime #128285](https://github.com/dotnet/runtime/pull/128285)).
-- **System.Diagnostics.Process**
-  - Fixed `Process.Kill(entireProcessTree: true)` when an intermediate child has `KillOnParentExit` ([dotnet/runtime #128598](https://github.com/dotnet/runtime/pull/128598)).
-  - Allowed a child process to escape its parent's job when `KillOnParentExit` is set ([dotnet/runtime #130032](https://github.com/dotnet/runtime/pull/130032)).
-  - Skipped non-executable files during process filename resolution on Unix ([dotnet/runtime #130281](https://github.com/dotnet/runtime/pull/130281)). Thank you [@tmds](https://github.com/tmds)!
-- **System.Reflection**
-  - Fixed `ParameterInfo.DefaultValue` and enum reflection APIs for nested enums on open generic types ([dotnet/runtime #129424](https://github.com/dotnet/runtime/pull/129424)).
-- **System.Globalization**
-  - Fixed `"GMT Standard Time"` being incorrectly interpreted as a fixed-offset zone on Android ([dotnet/runtime #130340](https://github.com/dotnet/runtime/pull/130340)).
-- **Microsoft.Extensions.Configuration**
-  - Fixed duplicated collection items when a constructor parameter name differs only by case from the property ([dotnet/runtime #129775](https://github.com/dotnet/runtime/pull/129775)).
-  - Fixed a configuration binding source-generator `CS0103` for `required`/`init` properties with a matching constructor parameter ([dotnet/runtime #130483](https://github.com/dotnet/runtime/pull/130483)).
-- **Microsoft.Extensions.Options**
-  - Skipped null elements in `[ValidateEnumeratedItems]` validation ([dotnet/runtime #130720](https://github.com/dotnet/runtime/pull/130720)).
-  - Escaped C# keyword identifiers in the `OptionsValidator` generated code ([dotnet/runtime #130415](https://github.com/dotnet/runtime/pull/130415)). Thank you [@UditDewan](https://github.com/UditDewan)!
-- **Microsoft.Extensions.Logging**
-  - Sanitized control and format characters in console-logger output across all formatters ([dotnet/runtime #128741](https://github.com/dotnet/runtime/pull/128741)).
-- **System.Security.Cryptography**
-  - Applied a set of mitigations to `System.Security.Cryptography.Xml` ([dotnet/runtime #130705](https://github.com/dotnet/runtime/pull/130705)).
-  - Fixed the blob type in `CopyWithPrivateKey` for ML-DSA ([dotnet/runtime #129839](https://github.com/dotnet/runtime/pull/129839)).
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Async profiler V1 TPL instrumentation (#129043, #129801, #130083, #130297, #130299). Deep internals of the ETW/EventPipe async profiler protocol; no user-facing API beyond profiler authors.
-  - Modernize System.Text.Json product code (#130976). Internal refactor; no user-facing behavior change.
-  - JIT intrinsification of Task/ValueTask factory methods (#129810). Codegen change; runtime.md owns it.
-  - Sm4/SHA3 hardware intrinsic implementations on wasm PackedSimd (#129838). Backend enablement — covered generically by the SHA3/SM4 API section.
-  - AvxVnni.V512 hardware intrinsics (#128365). Belongs to runtime.md's intrinsics area rather than libraries.
-  - Add `NumberStyles` option to stop parsing on invalid character (#130210). Superseded within Preview 7 by `TryParsePartial` (#130789); called out as a breaking change instead.
-  - CompositeMLDsa CNG plumbing (#130053). Internal-only in P7; covered by the BCrypt Composite ML-DSA breaking-change note.
-  - Add public property for VersionMadeBy — folded into the ZIP archive password section.
-  - MemoryExtensions.Min/Max (#128306). Small addition; too narrow to headline, documented as a bullet under "Other API additions".
-  - Add IParsable/ISpanParsable to Rune (#129464). Small conformance addition.
-  - Rune interfaces are worth mentioning to the community-contributor list only.
-  - Reduce unsafe code refactors (#130743, #129626, #130727, #126187). Internal quality; no user-facing change.
-  - QUIC MsQuic 2.5 update (#130173). Version bump; behavior improvements are internal.
--->
+- [Fix rounding of BigInteger conversions to floating-point types](https://github.com/dotnet/runtime/pull/130565)
+- [Speed up BigInteger conversions to floating-point types](https://github.com/dotnet/runtime/pull/130721)
+- [Fix decimal to/from floating-point conversions to round correctly](https://github.com/dotnet/runtime/pull/130566)
+- [Fix extra negative sign when a value rounds to zero in a two-section custom format](https://github.com/dotnet/runtime/pull/130558)
+- [Fix Dragon4 shortest formatting for exact powers of two](https://github.com/dotnet/runtime/pull/131131)
+- [Ensure float to BFloat16 conversion keeps NaN as NaN](https://github.com/dotnet/runtime/pull/130583)
+- [Reject CR/LF in MailAddress parsing](https://github.com/dotnet/runtime/pull/130175)
+- [Detect CR/LF and URL-encoded CR/LF in FtpWebRequest URI and command parameters](https://github.com/dotnet/runtime/pull/128983)
+- [Escape quotes and backslashes in MailAddress display name when encoding SMTP headers](https://github.com/dotnet/runtime/pull/128979)
+- [System.Net.NameResolution: Fall back to localhost when `localhost.` resolution fails](https://github.com/dotnet/runtime/pull/130504)
+- [Compare CredentialCache prefix path case-sensitively](https://github.com/dotnet/runtime/pull/130636)
+- [Fix CRLF encoding in EightBitStream](https://github.com/dotnet/runtime/pull/130757)
+- [Android: Respect platform trust manager in SslStream](https://github.com/dotnet/runtime/pull/124173)
+- [Improve malformed TLS handshake frame detection](https://github.com/dotnet/runtime/pull/130756)
+- [Fix ZstandardStream truncating multi-frame zstd responses to the first frame](https://github.com/dotnet/runtime/pull/129047)
+- [Fix zip Unix permissions](https://github.com/dotnet/runtime/pull/130304)
+- [Configure ZstandardStream decompression with MaxWindowLog=23 per RFC 9659](https://github.com/dotnet/runtime/pull/130024)
+- [Add ZstandardDecompressionOptions for symmetric decoder configuration](https://github.com/dotnet/runtime/pull/129768)
+- [JSON: Fix source generator serializing null `byte[]` as empty string](https://github.com/dotnet/runtime/pull/129834)
+- [Percent-encode JSON pointer reference tokens in JsonSchemaExporter $ref values](https://github.com/dotnet/runtime/pull/130164)
+- [Produce deprecated property in JsonSchema for obsolete types](https://github.com/dotnet/runtime/pull/130665)
+- [Re-enable source generator support for inaccessible `[JsonInclude]` members](https://github.com/dotnet/runtime/pull/130163)
+- [Allow empty string identifiers on non-flags enums in JsonStringEnumConverter](https://github.com/dotnet/runtime/pull/128285)
+- [Fix Process.Kill(entireProcessTree: true) when intermediate child has KillOnParentExit](https://github.com/dotnet/runtime/pull/128598)
+- [Allow for Job escape when using KillOnParentExit](https://github.com/dotnet/runtime/pull/130032)
+- [Process.Unix: skip non-executable files during process filename resolution](https://github.com/dotnet/runtime/pull/130281)
+- [Fix `ParameterInfo.DefaultValue` and enum reflection APIs for nested enums on open generic types](https://github.com/dotnet/runtime/pull/129424)
+- [Fix "GMT Standard Time" incorrectly interpreted as fixed-offset zone on Android](https://github.com/dotnet/runtime/pull/130340)
+- [Fix duplicated collection items when a constructor parameter name differs only by case from the property](https://github.com/dotnet/runtime/pull/129775)
+- [Fix config binding generator CS0103 for required/init property with matching ctor param](https://github.com/dotnet/runtime/pull/130483)
+- [Skip null elements in `[ValidateEnumeratedItems]` validation](https://github.com/dotnet/runtime/pull/130720)
+- [Escape C# keyword identifiers in OptionsValidator generated code](https://github.com/dotnet/runtime/pull/130415)
+- [Sanitize control/format characters in console logger output across all formatters](https://github.com/dotnet/runtime/pull/128741)
+- [Apply a number of mitigations to System.Security.Cryptography.Xml](https://github.com/dotnet/runtime/pull/130705)
+- [Fix blob type in CopyWithPrivateKey for ML-DSA](https://github.com/dotnet/runtime/pull/129839)
 
 ## Community contributors
 
