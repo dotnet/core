@@ -165,21 +165,17 @@ Open-world reflective paths (loading tasks, SDK resolvers, loggers, or build che
 
 ## Bug fixes
 
-- **Build engine**
-  - `BuildRequestConfiguration.RequestedTargets` is now serialized across node boundaries, fixing `MSB4057: The target "Pack" does not exist in the project` when building a solution with a non-default target (for example `Pack`) under parallel or `-mt` builds. Serial builds were unaffected because they never round-tripped the configuration ([dotnet/msbuild #14223](https://github.com/dotnet/msbuild/pull/14223)).
-  - `FindPublicMethodBySignature` (introduced in the trim-compat rewrite) no longer matches static methods when resolving an instance call. Conditions such as `$(TargetOS.Equals($(TargetOS.ToLower()), StringComparison.InvariantCulture))` — used in `dotnet/runtime`'s `Directory.Build.targets` — now resolve to the instance `String.Equals` overload again instead of the static one ([dotnet/msbuild #14191](https://github.com/dotnet/msbuild/pull/14191)).
-  - `CachingFileSystemWrapper` no longer shares a single existence cache across `FileExists`, `DirectoryExists`, and `FileOrDirectoryExists`. A `FileExists(dir)` miss no longer poisons a later `DirectoryExists(dir)` lookup, fixing project-level wildcard expansion after calls such as `GetDirectoryNameOfFileAbove(..., '')` ([dotnet/msbuild #14249](https://github.com/dotnet/msbuild/pull/14249)).
-  - Invoking MSBuild from a symlinked working directory on Unix no longer produces different `MSBuildProjectDirectory` / `TargetDir` values depending on whether the project path was relative or absolute. Relative paths are resolved against the logical shell `PWD` when it matches the physical current directory ([dotnet/msbuild #13752](https://github.com/dotnet/msbuild/pull/13752)).
-- **Tasks & task host**
-  - .NET task-host launches from a .NET Framework MSBuild host (for example Visual Studio) no longer fail with `MSB4216` when the host and child derive their SDK tools-directory string with different drive-letter casing. The handshake salt is now case-insensitive on the child side ([dotnet/msbuild #14027](https://github.com/dotnet/msbuild/pull/14027)).
-  - The out-of-proc task host no longer throws `NullReferenceException` when the requested task type cannot be loaded; it now returns a clean `MSB4036`-style error ([dotnet/msbuild #14007](https://github.com/dotnet/msbuild/pull/14007)).
-  - `WriteLinesToFile` with `WriteOnlyWhenDifferent="true"` no longer rewrites an unchanged file when a custom `Encoding` is specified (`utf-8`, `unicode`, `utf-32`, …). Previously the byte-for-byte comparison used the default UTF-8 encoding and ignored the BOM, so the content never matched and the file was rewritten on every build — churning timestamps and triggering downstream rebuilds ([dotnet/msbuild #14146](https://github.com/dotnet/msbuild/pull/14146)).
-  - `CopyUpToDateMarker` (the marker Visual Studio's fast up-to-date check consults) is now touched when the project's main implementation assembly is copied to `OutDir` and `ProduceReferenceAssembly=true`, so referencing projects see implementation-only changes even when reference assemblies are unchanged ([dotnet/msbuild #14231](https://github.com/dotnet/msbuild/pull/14231)).
-- **Logging**
-  - `EmbedInBinlog` items with a relative `Include` path from a child project are no longer silently dropped. Relative paths are now resolved against the declaring project's directory, and worker nodes forward the project directory to the entrypoint logger scoped to `EmbedInBinlog` events ([dotnet/msbuild #13990](https://github.com/dotnet/msbuild/pull/13990)).
-  - Forwarding loggers registered as distributed central loggers via `ReusableLogger` are no longer skipped by the duplicate-registration check before their forwarding sink is initialized — a regression first shipped in MSBuild 18.0.2 ([dotnet/msbuild #14396](https://github.com/dotnet/msbuild/pull/14396)).
-- **.NET Framework host**
-  - `Microsoft.IO.Path.GetFullPath` replaces the legacy `FEATURE_LEGACY_GETFULLPATH` codepath on .NET Framework, aligning path canonicalization with the .NET Core behavior MSBuild uses everywhere else ([dotnet/msbuild #13769](https://github.com/dotnet/msbuild/pull/13769)).
+- [Serialize BuildRequestConfiguration.RequestedTargets to fix solution metaproject MSB4057 in parallel builds](https://github.com/dotnet/msbuild/pull/14223)
+- [Fix FindPublicMethodBySignature matching static methods for instance calls](https://github.com/dotnet/msbuild/pull/14191)
+- [Fix existence cache kind poisoning](https://github.com/dotnet/msbuild/pull/14249)
+- [Fix MSBuild producing different output paths for absolute and relative path inputs](https://github.com/dotnet/msbuild/pull/13752)
+- [Fix NET task host MSB4216 handshake failure via child-side salt widening](https://github.com/dotnet/msbuild/pull/14027)
+- [Handle null task type in OutOfProc task host to avoid NullReferenceException](https://github.com/dotnet/msbuild/pull/14007)
+- [Fix WriteLinesToFile rewriting unchanged file when custom encoding is used](https://github.com/dotnet/msbuild/pull/14146)
+- [Refresh copy marker when implementation output changes](https://github.com/dotnet/msbuild/pull/14231)
+- [Fix EmbedInBinlog items with relative paths from child projects](https://github.com/dotnet/msbuild/pull/13990)
+- [Fix forwarding logger issue](https://github.com/dotnet/msbuild/pull/14396)
+- [Remove `FEATURE_LEGACY_GETFULLPATH` and use `Microsoft.IO.Path.GetFullPath` in .NET Framework](https://github.com/dotnet/msbuild/pull/13769)
 
 ## Community contributors
 
