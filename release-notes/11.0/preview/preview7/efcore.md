@@ -137,6 +137,8 @@ var joined = await context.Orders
     .ToListAsync();
 ```
 
+Thank you [@ajcvickers](https://github.com/ajcvickers) for this contribution!
+
 ### Materialize left-joined non-entity projections as `null` on no-match
 
 A `LEFT JOIN` — via `GroupJoin` + `DefaultIfEmpty()` or the `LeftJoin` operator —
@@ -245,11 +247,9 @@ behavior when the metadata is empty
 ### Reordered migrations for TPC sequence transitions
 
 When a TPC hierarchy consolidates per-table sequences into a shared hierarchy
-sequence (or renames the shared sequence), the migrations differ used to emit
-`DropSequence` before rewriting column defaults that still referenced the old
-sequence, producing an invalid migration. Sequence drops that have no
-replacement now run **after** the alter-column phase, so the old default
-expressions continue to bind until they are rewritten
+sequence (or renames the shared sequence), the generated migration used to drop
+the old sequence before rewriting column defaults that still referenced it,
+producing an invalid migration. This ordering issue is now fixed
 ([dotnet/efcore #38583](https://github.com/dotnet/efcore/pull/38583)).
 
 ## `Half` type support on SQLite
