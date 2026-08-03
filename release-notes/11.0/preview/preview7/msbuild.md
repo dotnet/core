@@ -165,17 +165,21 @@ Open-world reflective paths (loading tasks, SDK resolvers, loggers, or build che
 
 ## Bug fixes
 
-- [Serialize BuildRequestConfiguration.RequestedTargets to fix solution metaproject MSB4057 in parallel builds](https://github.com/dotnet/msbuild/pull/14223)
-- [Fix FindPublicMethodBySignature matching static methods for instance calls](https://github.com/dotnet/msbuild/pull/14191)
-- [Fix existence cache kind poisoning](https://github.com/dotnet/msbuild/pull/14249)
-- [Fix MSBuild producing different output paths for absolute and relative path inputs](https://github.com/dotnet/msbuild/pull/13752)
-- [Fix NET task host MSB4216 handshake failure via child-side salt widening](https://github.com/dotnet/msbuild/pull/14027)
-- [Handle null task type in OutOfProc task host to avoid NullReferenceException](https://github.com/dotnet/msbuild/pull/14007)
-- [Fix WriteLinesToFile rewriting unchanged file when custom encoding is used](https://github.com/dotnet/msbuild/pull/14146)
-- [Refresh copy marker when implementation output changes](https://github.com/dotnet/msbuild/pull/14231)
-- [Fix EmbedInBinlog items with relative paths from child projects](https://github.com/dotnet/msbuild/pull/13990)
-- [Fix forwarding logger issue](https://github.com/dotnet/msbuild/pull/14396)
-- [Remove `FEATURE_LEGACY_GETFULLPATH` and use `Microsoft.IO.Path.GetFullPath` in .NET Framework](https://github.com/dotnet/msbuild/pull/13769)
+- **Build engine**
+  - [Serialize BuildRequestConfiguration.RequestedTargets to fix solution metaproject MSB4057 in parallel builds](https://github.com/dotnet/msbuild/pull/14223)
+  - [Fix FindPublicMethodBySignature matching static methods for instance calls](https://github.com/dotnet/msbuild/pull/14191)
+  - [Fix existence cache kind poisoning](https://github.com/dotnet/msbuild/pull/14249)
+  - [Fix MSBuild producing different output paths for absolute and relative path inputs](https://github.com/dotnet/msbuild/pull/13752)
+- **Tasks & task host**
+  - [Fix NET task host MSB4216 handshake failure via child-side salt widening](https://github.com/dotnet/msbuild/pull/14027)
+  - [Handle null task type in OutOfProc task host to avoid NullReferenceException](https://github.com/dotnet/msbuild/pull/14007)
+  - [Fix WriteLinesToFile rewriting unchanged file when custom encoding is used](https://github.com/dotnet/msbuild/pull/14146)
+  - [Refresh copy marker when implementation output changes](https://github.com/dotnet/msbuild/pull/14231)
+- **Logging**
+  - [Fix EmbedInBinlog items with relative paths from child projects](https://github.com/dotnet/msbuild/pull/13990)
+  - [Fix forwarding logger issue](https://github.com/dotnet/msbuild/pull/14396)
+- **.NET Framework host**
+  - [Remove `FEATURE_LEGACY_GETFULLPATH` and use `Microsoft.IO.Path.GetFullPath` in .NET Framework](https://github.com/dotnet/msbuild/pull/13769)
 
 ## Community contributors
 
