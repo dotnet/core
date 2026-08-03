@@ -24,7 +24,7 @@ Standard document structure for .NET release notes markdown files.
 
 ## Bug fixes
 
-- **Category** — Fix description
+- [Cleaned up PR or issue title](https://github.com/<owner>/<repo>/pull/NNNNN)
 
 ## Community contributors
 
