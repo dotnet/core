@@ -232,54 +232,42 @@ Additional runtime diagnostics improvements:
 
 ## Bug fixes
 
-- **GC / thread state**
-  - Fixed cgroup v2 memory limit extraction to stop walking past the root cgroup mount, which caused a NativeAOT app to crash in environments (e.g. Google Colab) where the process is assigned to the root cgroup ([dotnet/runtime #130377](https://github.com/dotnet/runtime/pull/130377)).
-  - `GCHandle` assignments now publish with release semantics, so weak-reference readers on weakly ordered Arm64 hardware can no longer observe a partially initialized object through a handle. This showed up as rare `NullReferenceException`s from `Regex.Replace` ([dotnet/runtime #130213](https://github.com/dotnet/runtime/pull/130213)). Thanks [@BradBarnich](https://github.com/BradBarnich)!
-  - Fixed a thread-static bootstrap infinite recursion on WebAssembly ([dotnet/runtime #131120](https://github.com/dotnet/runtime/pull/131120)).
-- **JIT / code generation**
-  - Fixed incorrect bounds-check removal for `Phi` indices whose minimum was negative ([dotnet/runtime #130217](https://github.com/dotnet/runtime/pull/130217)).
-  - Fixed range-check monotonicity for multiplication ([dotnet/runtime #130426](https://github.com/dotnet/runtime/pull/130426)).
-  - Fixed stale value numbers in the redundant-branch dominating-branch simplification ([dotnet/runtime #129914](https://github.com/dotnet/runtime/pull/129914)).
-  - Fixed a GC hole in large stack-target struct block copies ([dotnet/runtime #130352](https://github.com/dotnet/runtime/pull/130352)).
-  - Fixed x86 codegen non-determinism across host architectures ([dotnet/runtime #130059](https://github.com/dotnet/runtime/pull/130059)).
-  - Fixed folding of scalar/vector `CompareScalar` `True`/`False` intrinsic constants ([dotnet/runtime #130222](https://github.com/dotnet/runtime/pull/130222)).
-  - Fixed two latent `HWIntrinsic` miscompiles and side-effect reordering when folding a constant zero-mask `BlendVariable` ([dotnet/runtime #130832](https://github.com/dotnet/runtime/pull/130832), [dotnet/runtime #130946](https://github.com/dotnet/runtime/pull/130946)).
-  - Folded floating-point comparisons against a constant `NaN` in morph ([dotnet/runtime #130838](https://github.com/dotnet/runtime/pull/130838)).
-- **Runtime-async**
-  - Preview 6 disabled runtime-async compilation of synchronous `Task`-returning methods in crossgen2 to fix a correctness bug; that code path is re-enabled with the underlying fix ([dotnet/runtime #129474](https://github.com/dotnet/runtime/pull/129474), [dotnet/runtime #129884](https://github.com/dotnet/runtime/pull/129884)).
-  - Fixed the async resumption stub with `byref` parameters ([dotnet/runtime #129999](https://github.com/dotnet/runtime/pull/129999)).
-  - Blocked async version inlining for P/Invokes and fixed generation of instantiating stubs for the target encoded in async return-dropping thunk IL ([dotnet/runtime #129797](https://github.com/dotnet/runtime/pull/129797), [dotnet/runtime #130424](https://github.com/dotnet/runtime/pull/130424)).
-- **NativeAOT**
-  - Fixed `NativeAOT` reflection invoke copyback of ref parameters ([dotnet/runtime #130065](https://github.com/dotnet/runtime/pull/130065)).
-  - Fixed the reverse delegate stub signature when runtime marshalling is disabled ([dotnet/runtime #130239](https://github.com/dotnet/runtime/pull/130239)).
-  - Fixed assembly name mangling collisions that could produce clashing symbol names in the compiled output ([dotnet/runtime #130012](https://github.com/dotnet/runtime/pull/130012)).
-  - Aligned the NativeAOT array element size limit with CoreCLR ([dotnet/runtime #130019](https://github.com/dotnet/runtime/pull/130019)).
-  - Emitted correct ELF symbol types for data in NativeAOT objects, so tools that inspect the output don't misclassify data symbols as code ([dotnet/runtime #129950](https://github.com/dotnet/runtime/pull/129950)).
-- **Interop / marshalling**
-  - `Delegate.GetHashCode` now returns the same value for type-equivalent delegates that point to the same method, fixing a violation of the `Equals`/`GetHashCode` contract discovered while reviewing [dotnet/runtime #99200](https://github.com/dotnet/runtime/pull/99200) ([dotnet/runtime #130542](https://github.com/dotnet/runtime/pull/130542)).
-  - Fixed HFA/HVA by-value argument marshalling on Arm64 in `CallTargetWorker` ([dotnet/runtime #130580](https://github.com/dotnet/runtime/pull/130580)).
-  - Pinned blittable layout classes in NativeAOT marshalling to keep them stable across GC ([dotnet/runtime #130279](https://github.com/dotnet/runtime/pull/130279)).
-- **WebAssembly / Mono**
-  - Fixed reverse-P/Invoke thunk key computation for nested `[UnmanagedCallersOnly]` types on both CoreCLR and Mono ([dotnet/runtime #130740](https://github.com/dotnet/runtime/pull/130740)).
-  - Fixed Mono `[UnmanagedCallersOnly]` exports with more than 8 arguments and P/Invokes with 64-bit `enum` arguments on WASM ([dotnet/runtime #131058](https://github.com/dotnet/runtime/pull/131058), [dotnet/runtime #131021](https://github.com/dotnet/runtime/pull/131021)).
-  - Fixed AOT + `BlazorWebAssemblyLazyLoad` startup crash ([dotnet/runtime #131020](https://github.com/dotnet/runtime/pull/131020)).
-  - Fixed a Mono interpreter crash when `MethodImpl.override` was used on portable entry points ([dotnet/runtime #126124](https://github.com/dotnet/runtime/pull/126124)).
-  - Fixed EventPipe CPU sampling stalls under coarse browser timer resolution ([dotnet/runtime #129848](https://github.com/dotnet/runtime/pull/129848)).
-- **Type system**
-  - Fixed variant interface GVM resolution in the managed type system ([dotnet/runtime #130218](https://github.com/dotnet/runtime/pull/130218)). Thanks [@hez2010](https://github.com/hez2010)!
-  - Optimized `MethodDataObject::FillEntryDataForAncestor` for `MethodImpl` hierarchies ([dotnet/runtime #130151](https://github.com/dotnet/runtime/pull/130151)).
-- **Mobile**
-  - `SslStream` on Android now consults the platform's `X509TrustManager`, so `network_security_config.xml` — including certificate pinning — is honored during the TLS handshake ([dotnet/runtime #124173](https://github.com/dotnet/runtime/pull/124173)).
-  - `CompareStringNative` on iOS drops a redundant `stringByFoldingWithOptions` call that consumed ~9% of native time ([dotnet/runtime #130691](https://github.com/dotnet/runtime/pull/130691)).
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - cDAC (data contract abstraction) API buildout: dozens of PRs implementing DacDbi APIs, contract registration, and per-architecture GC-info decoders. Enables cross-platform SOS/debugger work but is invisible to app authors.
-  - Async return-dropping thunk RDT lookup, thunk NonVersionable marking, synchronized async variant handling: internal runtime-async plumbing already covered structurally in preview 5/6.
-  - `crossgen2` framework-crossgen concurrency tuning on macOS.
-  - Numerous test/CI enabling PRs (mobile NativeAOT, Android CoreCLR runtime tests, OpenBSD runtime tests).
-  - Delegate layout size reduction (#99200): correctness follow-up (Delegate.GetHashCode) is called out; the layout change is covered in bug fixes context.
-  - Small SIMD/HWIntrinsic emitter cleanups and lowering hardening (many PRs) that don't change observable behavior.
--->
+- [Fix cgroup v2 memory max extraction](https://github.com/dotnet/runtime/pull/130377)
+- [Publish GCHandle assignments with release semantics](https://github.com/dotnet/runtime/pull/130213)
+- [Fix thread-statics bootstrap recursion on WASM](https://github.com/dotnet/runtime/pull/131120)
+- [JIT: fix incorrect bounds check removal for Phi indices with a negative minimum](https://github.com/dotnet/runtime/pull/130217)
+- [Fix range-check monotonicity for multiplication](https://github.com/dotnet/runtime/pull/130426)
+- [JIT: fix stale VN in redundant branch opts dominating-branch simplification](https://github.com/dotnet/runtime/pull/129914)
+- [JIT: fix GC holes in large stack-target struct block ops](https://github.com/dotnet/runtime/pull/130352)
+- [Fix x86 codegen non-determinism across host architecture](https://github.com/dotnet/runtime/pull/130059)
+- [Fix incorrect constant folding of CompareScalar True/False comparisons](https://github.com/dotnet/runtime/pull/130222)
+- [Fix two latent HWIntrinsic miscompiles in gentree.cpp](https://github.com/dotnet/runtime/pull/130832)
+- [Fix side-effect reordering when folding constant-zero-mask BlendVariable](https://github.com/dotnet/runtime/pull/130946)
+- [Fold floating-point comparisons with a constant NaN in morph](https://github.com/dotnet/runtime/pull/130838)
+- [Reenable compiling runtime-async versions of synchronous task-returning methods in crossgen2](https://github.com/dotnet/runtime/pull/129474)
+- [Avoid stripping IL of non-async Task-returning methods](https://github.com/dotnet/runtime/pull/129884)
+- [Fix async resumption stub with byref parameters](https://github.com/dotnet/runtime/pull/129999)
+- [Ensure we do not try to inline async versions of pinvokes](https://github.com/dotnet/runtime/pull/129797)
+- [Ensure instantiating stub for target encoded in async return dropping thunk IL](https://github.com/dotnet/runtime/pull/130424)
+- [Fix NativeAOT reflection invoke copyback](https://github.com/dotnet/runtime/pull/130065)
+- [Fix NativeAOT reverse delegate stub signature with runtime marshalling disabled](https://github.com/dotnet/runtime/pull/130239)
+- [Fix NativeAOT assembly name mangling collisions](https://github.com/dotnet/runtime/pull/130012)
+- [Align NativeAOT array element size limit](https://github.com/dotnet/runtime/pull/130019)
+- [Emit correct ELF symbol types for data in NativeAOT objects](https://github.com/dotnet/runtime/pull/129950)
+- [Optimize and simplify delegate layout](https://github.com/dotnet/runtime/pull/99200)
+- [Fix Delegate.GetHashCode for type-equivalent delegates](https://github.com/dotnet/runtime/pull/130542)
+- [Fix HFA/HVA by-value argument marshalling on ARM64 in CallTargetWorker](https://github.com/dotnet/runtime/pull/130580)
+- [Pin blittable layout classes in NativeAOT marshalling](https://github.com/dotnet/runtime/pull/130279)
+- [Wasm: Fix reverse P/Invoke thunk key for nested `[UnmanagedCallersOnly]` types (CoreCLR + Mono)](https://github.com/dotnet/runtime/pull/130740)
+- [Mono/wasm: Fix UnmanagedCallersOnly exports with more than 8 arguments](https://github.com/dotnet/runtime/pull/131058)
+- [Mono/wasm: Fix pinvoke with 64-bit enum argument](https://github.com/dotnet/runtime/pull/131021)
+- [Mono/wasm: Fix AOT + BlazorWebAssemblyLazyLoad startup crash](https://github.com/dotnet/runtime/pull/131020)
+- [Wasm: Fix interpreter crash with MethodImpl .override on PortableEntryPoints](https://github.com/dotnet/runtime/pull/126124)
+- [Browser: Fix EventPipe CPU sampling stall under coarse browser timer resolution](https://github.com/dotnet/runtime/pull/129848)
+- [Fix variant interface GVM resolution in managed type system](https://github.com/dotnet/runtime/pull/130218)
+- [Optimize MethodDataObject::FillEntryDataForAncestor for MethodImpl hierarchies](https://github.com/dotnet/runtime/pull/130151)
+- [Android: Respect platform trust manager in SslStream](https://github.com/dotnet/runtime/pull/124173)
+- [IOS: Optimize CompareStringNative performance](https://github.com/dotnet/runtime/pull/130691)
 
 ## Community contributors
 
