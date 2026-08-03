@@ -89,10 +89,12 @@ Visual Studio's Error List now offers a "Fix Vulnerabilities with GitHub Copilot
 
 ## Bug fixes
 
-- [Fix mismatch between GetPackOutputItemsTask and PackTask generated filenames](https://github.com/NuGet/NuGet.Client/pull/7531)
-- [Fix GetPackOutputItems when nuspec does not exist](https://github.com/NuGet/NuGet.Client/pull/7565)
-- [When PM UI fails to load, show a window with exception details](https://github.com/NuGet/NuGet.Client/pull/7542)
-- [Find existing PM UI windows by editor type](https://github.com/NuGet/NuGet.Client/pull/7568)
+- **Pack**
+  - [Fix mismatch between GetPackOutputItemsTask and PackTask generated filenames](https://github.com/NuGet/NuGet.Client/pull/7531)
+  - [Fix GetPackOutputItems when nuspec does not exist](https://github.com/NuGet/NuGet.Client/pull/7565)
+- **Visual Studio**
+  - [When PM UI fails to load, show a window with exception details](https://github.com/NuGet/NuGet.Client/pull/7542)
+  - [Find existing PM UI windows by editor type](https://github.com/NuGet/NuGet.Client/pull/7568)
 
 ## Community contributors
 
