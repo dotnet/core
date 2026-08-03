@@ -306,22 +306,30 @@ back to an offline error
 
 ## Bug fixes
 
-- [Update FindSolutionFilesAtOrAbovePath to prioritize *.slnx over *.sln found in parent directories](https://github.com/dotnet/sdk/pull/55048)
-- [Fix `dotnet sln` failing to parse `.slnf` files with unescaped backslashes in path](https://github.com/dotnet/sdk/pull/54622)
-- [Emit more descriptive error when running .NET Framework exe on non-Windows](https://github.com/dotnet/sdk/pull/54581)
-- [Fix ObjectDisposedException in UnixProcessReaper during Ctrl+C shutdown](https://github.com/dotnet/sdk/pull/55121)
-- [Fix Native AOT SDK version lookup](https://github.com/dotnet/sdk/pull/55410)
-- [Fix Mark of the Web detection by removing MUTZ_ISFILE flag](https://github.com/dotnet/sdk/pull/54937)
-- [Honor @(RuntimeEnvironmentVariable) item changes when launching the app](https://github.com/dotnet/sdk/pull/54922)
-- [Normalize IntermediateOutputPath slashes on POSIX platforms](https://github.com/dotnet/sdk/pull/54536)
-- [Update GenerateRuntimeConfigurationFiles task to generate Hot Reload runtime options](https://github.com/dotnet/sdk/pull/53715)
-- [Fix composite ReadyToRun publish when RelativePath has a path component](https://github.com/dotnet/sdk/pull/55200)
-- [Don't generate embedded ValidatableTypeAttribute for .NET 11 and later](https://github.com/dotnet/sdk/pull/55163)
-- [Do not report `CA2007` for pattern-based `await using` and `await foreach`](https://github.com/dotnet/sdk/pull/55036)
-- [Make CA1860 work with abstract collections](https://github.com/dotnet/sdk/pull/50461)
-- [CA1873: Fix log level comparison](https://github.com/dotnet/sdk/pull/54891)
-- [Pack RID-specific tool pointer packages with DotnetToolSettings.xml under tools/any/any](https://github.com/dotnet/sdk/pull/55107)
-- [Fix case-sensitive path comparison in GlobalSettingsTemplatePackageProvider.EnsureInstallPrerequisites](https://github.com/dotnet/sdk/pull/55105)
+- **CLI**
+  - [Update FindSolutionFilesAtOrAbovePath to prioritize *.slnx over *.sln found in parent directories](https://github.com/dotnet/sdk/pull/55048)
+  - [Fix `dotnet sln` failing to parse `.slnf` files with unescaped backslashes in path](https://github.com/dotnet/sdk/pull/54622)
+  - [Emit more descriptive error when running .NET Framework exe on non-Windows](https://github.com/dotnet/sdk/pull/54581)
+  - [Fix ObjectDisposedException in UnixProcessReaper during Ctrl+C shutdown](https://github.com/dotnet/sdk/pull/55121)
+  - [Fix Native AOT SDK version lookup](https://github.com/dotnet/sdk/pull/55410)
+  - [Fix Mark of the Web detection by removing MUTZ_ISFILE flag](https://github.com/dotnet/sdk/pull/54937)
+- **`dotnet run`**
+  - [Honor @(RuntimeEnvironmentVariable) item changes when launching the app](https://github.com/dotnet/sdk/pull/54922)
+- **`dotnet watch`**
+  - [Normalize IntermediateOutputPath slashes on POSIX platforms](https://github.com/dotnet/sdk/pull/54536)
+  - [Update GenerateRuntimeConfigurationFiles task to generate Hot Reload runtime options](https://github.com/dotnet/sdk/pull/53715)
+- **Publish**
+  - [Fix composite ReadyToRun publish when RelativePath has a path component](https://github.com/dotnet/sdk/pull/55200)
+- **Source generators**
+  - [Don't generate embedded ValidatableTypeAttribute for .NET 11 and later](https://github.com/dotnet/sdk/pull/55163)
+- **Analyzers**
+  - [Do not report `CA2007` for pattern-based `await using` and `await foreach`](https://github.com/dotnet/sdk/pull/55036)
+  - [Make CA1860 work with abstract collections](https://github.com/dotnet/sdk/pull/50461)
+  - [CA1873: Fix log level comparison](https://github.com/dotnet/sdk/pull/54891)
+- **Tools**
+  - [Pack RID-specific tool pointer packages with DotnetToolSettings.xml under tools/any/any](https://github.com/dotnet/sdk/pull/55107)
+- **Templates**
+  - [Fix case-sensitive path comparison in GlobalSettingsTemplatePackageProvider.EnsureInstallPrerequisites](https://github.com/dotnet/sdk/pull/55105)
 
 ## Community contributors
 
