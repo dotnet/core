@@ -170,6 +170,8 @@ var q = context.Owners
     .ToListAsync();
 ```
 
+Thank you [@ajcvickers](https://github.com/ajcvickers) for this contribution!
+
 ## Azure Cosmos DB provider improvements
 
 ### Modernize the query materializer and serialization pipeline
@@ -256,10 +258,8 @@ producing an invalid migration. This ordering issue is now fixed
 
 `Microsoft.Data.Sqlite` and the EF Core SQLite provider now read, bind, and map
 `System.Half` — the 16-bit floating point type introduced in .NET 5
-([dotnet/efcore #37481](https://github.com/dotnet/efcore/pull/37481)). Values are
-read via `GetFloat` and bound via `BindDouble`, matching the existing `float`
-implementation. A `JsonValueReaderWriter<Half>` is also registered so `Half`
-properties inside JSON-mapped columns round-trip correctly
+([dotnet/efcore #37481](https://github.com/dotnet/efcore/pull/37481)), including
+`Half` properties inside JSON-mapped columns
 ([dotnet/efcore #38492](https://github.com/dotnet/efcore/pull/38492)).
 
 ```csharp
@@ -318,6 +318,15 @@ is no longer supported by `Microsoft.Data.Sqlite`. Applications targeting
 
 Thank you to the community contributors who made EF Core better in this preview! ❤️
 
+- [@ajcvickers](https://github.com/dotnet/efcore/pulls?q=is%3Apr+is%3Amerged+author%3Aajcvickers):
+  Folded `ValueTuple`/`Tuple` member access through constructor-bound projections,
+  and materialized left-joined non-entity projections as `null`/`default(T)` on
+  no-match
+  ([dotnet/efcore #38560](https://github.com/dotnet/efcore/pull/38560),
+  [dotnet/efcore #38479](https://github.com/dotnet/efcore/pull/38479),
+  [dotnet/efcore #38499](https://github.com/dotnet/efcore/pull/38499),
+  [dotnet/efcore #38577](https://github.com/dotnet/efcore/pull/38577),
+  [dotnet/efcore #38555](https://github.com/dotnet/efcore/pull/38555)).
 - [@atiq-bs23](https://github.com/dotnet/efcore/pulls?q=is%3Apr+is%3Amerged+author%3Aatiq-bs23):
   Fixed alter-column type `JSON` → `nvarchar`
   ([dotnet/efcore #38464](https://github.com/dotnet/efcore/pull/38464)).
