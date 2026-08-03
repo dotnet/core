@@ -286,85 +286,28 @@ is no longer supported by `Microsoft.Data.Sqlite`. Applications targeting
 
 ## Bug fixes
 
-- **Query translation**
-  - Don't reject JSON entities reached only through `Include` under
-    `AsNoTrackingWithIdentityResolution`
-    ([dotnet/efcore #38556](https://github.com/dotnet/efcore/pull/38556)).
-  - Improve handling of `null` values in JSON properties mapped to primitive
-    collections: shaper detects `null` before invoking the collection converter
-    and required properties throw `NullValueInRequiredJsonProperty` with a
-    property-named message
-    ([dotnet/efcore #38498](https://github.com/dotnet/efcore/pull/38498)).
-  - Fix `JsonReaderData` buffer refill to respect valid bytes on partial stream
-    reads, preventing stale-byte corruption during JSON tokenization
-    ([dotnet/efcore #38666](https://github.com/dotnet/efcore/pull/38666)).
-  - Fix invalid shadow property names in precompiled queries and JSON
-    discriminator metadata
-    ([dotnet/efcore #38458](https://github.com/dotnet/efcore/pull/38458)).
-  - Fix complex property projection for entity-splitting mappings
-    ([dotnet/efcore #38592](https://github.com/dotnet/efcore/pull/38592)).
-  - Handle out-of-order split-include rows during concurrent inserts
-    ([dotnet/efcore #38676](https://github.com/dotnet/efcore/pull/38676)).
-  - Lift `try..catch` out of an expression and replace it with a temporary
-    variable during translation
-    ([dotnet/efcore #34912](https://github.com/dotnet/efcore/pull/34912)).
-- **Change tracking**
-  - Warn (and detach the orphan) when a row's outer owned entity is `null` but
-    an inner owned entity has non-`NULL` values, replacing the previous
-    misleading identity-conflict exception on `SaveChanges`. Configurable via
-    the new `CoreEventId.InconsistentOwnedDataWarning`
-    ([dotnet/efcore #38596](https://github.com/dotnet/efcore/pull/38596)).
-  - Fix `OriginalValues.ToObject` for added complex collections
-    ([dotnet/efcore #38493](https://github.com/dotnet/efcore/pull/38493)).
-  - Fix `DetectChanges` throwing when a nullable nested complex property with a
-    nested collection is set to `null`
-    ([dotnet/efcore #38667](https://github.com/dotnet/efcore/pull/38667)).
-  - Propagate case-only principal string key updates to dependent foreign keys
-    when the key comparer is case-insensitive
-    ([dotnet/efcore #38585](https://github.com/dotnet/efcore/pull/38585)).
-  - Decrement the active-contexts count after a pooled `DbContext` is torn down
-    ([dotnet/efcore #38554](https://github.com/dotnet/efcore/pull/38554)).
-- **Migrations and model**
-  - Fix foreign key to entity-split principal referencing the fragment table
-    instead of the main table
-    ([dotnet/efcore #38586](https://github.com/dotnet/efcore/pull/38586)).
-  - Fix foreign key diff matching across identically named tables in different
-    schemas
-    ([dotnet/efcore #38582](https://github.com/dotnet/efcore/pull/38582)).
-  - Avoid false circular-dependency edges for unchanged unique-index values
-    during update batching
-    ([dotnet/efcore #38581](https://github.com/dotnet/efcore/pull/38581)).
-  - Handle seed-data cycle diagnostics without crashing during migration
-    scaffolding
-    ([dotnet/efcore #38589](https://github.com/dotnet/efcore/pull/38589)).
-  - Prevent `FindCollectionMapping` `NullReferenceException` on legacy
-    string/vector snapshot mappings
-    ([dotnet/efcore #38594](https://github.com/dotnet/efcore/pull/38594)).
-  - Fix shared-type entity type name generation in the model snapshot
-    ([dotnet/efcore #38611](https://github.com/dotnet/efcore/pull/38611)).
-  - Normalize Unicode strings from seed data before comparing
-    ([dotnet/efcore #38617](https://github.com/dotnet/efcore/pull/38617)).
-- **SQL Server**
-  - Fix alter-column type `JSON` → `nvarchar` producing an invalid migration
-    ([dotnet/efcore #38464](https://github.com/dotnet/efcore/pull/38464)).
-  - Send XML parameters directly instead of round-tripping through `SqlXml`
-    ([dotnet/efcore #38506](https://github.com/dotnet/efcore/pull/38506)).
-- **SQLite**
-  - Ensure `SqliteCommand.Deactivate` does not use a disposed handle on return
-    ([dotnet/efcore #38574](https://github.com/dotnet/efcore/pull/38574)).
-
-<!-- Cut candidates:
-  - #38484 Make element type a creation-time concern — internal type-mapping plumbing.
-  - #38481 Reuse CosmosTypeMapping.Default for primitive JSON reader/writers — internal.
-  - #38578 Cosmos: disable full-text/vector indexes on complex collection wildcard paths in tests — test-only.
-  - #38530 / #38567 / #38568 empty PR titles — infra/backport bumps.
-  - #38633 test helper method override assertions — test infrastructure.
-  - #38551 allow all warnings in dev build — build/infra.
-  - #38607 SQLitePCLRaw 2.1.12 servicing on release/10.0 — not net11 preview7.
-  - #38650, #38509, #38513, #38514, #38520, #38516, #38523, #38678, #38644, #38679, #38670, #38642 — dependency bumps.
-  - #38494 Configure Dependabot NuGet updates — infra.
-  - #38641 Restrict dependabot to patch-only — infra.
--->
+- [Don't reject JSON entities reached only through Include under AsNoTrackingWithIdentityResolution](https://github.com/dotnet/efcore/pull/38556)
+- [Improve handling of null values in JSON properties mapped to primitive collections](https://github.com/dotnet/efcore/pull/38498)
+- [Fix JsonReaderData buffer refill to respect valid bytes on partial stream reads](https://github.com/dotnet/efcore/pull/38666)
+- [Fix invalid shadow property names in precompiled queries and JSON discriminator metadata](https://github.com/dotnet/efcore/pull/38458)
+- [Fix complex property projection for entity splitting mappings](https://github.com/dotnet/efcore/pull/38592)
+- [Handle out-of-order split include rows during concurrent inserts](https://github.com/dotnet/efcore/pull/38676)
+- [Lift try..catch out of an expression and replace with a temporary variable](https://github.com/dotnet/efcore/pull/34912)
+- [Warn and fix identity conflict when owned entity has inconsistent data in DB](https://github.com/dotnet/efcore/pull/38596)
+- [Fix OriginalValues.ToObject for added complex collections](https://github.com/dotnet/efcore/pull/38493)
+- [Fix DetectChanges throwing when nullable nested complex property with nested collection is set to null](https://github.com/dotnet/efcore/pull/38667)
+- [Propagate case-only principal string key updates to dependent FKs](https://github.com/dotnet/efcore/pull/38585)
+- [Decrement active contexts count after a pooled DbContext instance is torn-down](https://github.com/dotnet/efcore/pull/38554)
+- [Fix FK to entity-split principal referencing wrong (fragment) table](https://github.com/dotnet/efcore/pull/38586)
+- [Fix FK diff matching across same table names in different schemas](https://github.com/dotnet/efcore/pull/38582)
+- [Avoid false circular dependency edges for unchanged unique index values during update batching](https://github.com/dotnet/efcore/pull/38581)
+- [Handle seed-data cycle diagnostics without crashing during migration scaffolding](https://github.com/dotnet/efcore/pull/38589)
+- [Prevent `FindCollectionMapping` NRE on legacy string/vector snapshot mappings](https://github.com/dotnet/efcore/pull/38594)
+- [Fix shared type entity type name generation in model snapshot](https://github.com/dotnet/efcore/pull/38611)
+- [Normalize Unicode strings from seed data before comparing](https://github.com/dotnet/efcore/pull/38617)
+- [Fix altering a column type from JSON to nvarchar](https://github.com/dotnet/efcore/pull/38464)
+- [Avoid using SqlXml for serialization](https://github.com/dotnet/efcore/pull/38506)
+- [SQLite: Ensure Deactivate does not use disposed handle on return](https://github.com/dotnet/efcore/pull/38574)
 
 ## Community contributors
 
