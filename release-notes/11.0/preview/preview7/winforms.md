@@ -8,26 +8,26 @@
 - [React to system visual settings](#react-to-system-visual-settings)
 - [Deferred form reveal](#deferred-form-reveal)
 - [Suspend painting during bulk mutations](#suspend-painting-during-bulk-mutations)
-- [Toggle-switch appearance for CheckBox](#toggle-switch-appearance-for-checkbox)
-- [Configurable TreeView node leading](#configurable-treeview-node-leading)
 
 ## Opt in to .NET 11 visual styles
 
-Windows Forms in Preview 7 introduces an application- and control-level opt-in
-for a refreshed rendering pipeline. `Application.SetDefaultVisualStylesMode` and
-the new `Control.VisualStylesMode` property select between the classic renderer
-(`VisualStylesMode.Classic`), visual styles turned off
-(`VisualStylesMode.Disabled`), and the modern renderer
-(`VisualStylesMode.Net11`). `VisualStylesMode.Latest` always resolves to the
-newest mode the runtime supports, and child controls default to
-`VisualStylesMode.Inherit` so the setting cascades. In this preview, `Net11`
-brings modern adapters for `ComboBox`, `GroupBox`, `CheckBox`, `RadioButton`,
-and related buttons. Because switching modes can require different metrics or
-handle recreation, `Control.GetVisualStylesModeChangeImpact` reports what the
-runtime needs to do, and `EffectiveVisualStylesMode` returns the resolved value
-after inheritance
-([dotnet/winforms #14809](https://github.com/dotnet/winforms/pull/14809),
-[dotnet/winforms #14811](https://github.com/dotnet/winforms/pull/14811)).
+Windows Forms in Preview 7 introduces an application- and control-level opt-in for a refreshed rendering pipeline. Application.SetDefaultVisualStylesMode` and the new `Control.VisualStylesMode` property select between the classic renderer
+(`VisualStylesMode.Classic`), visual styles turned off (`VisualStylesMode.Disabled`), and the modern renderer
+(`VisualStylesMode.Net11`). `VisualStylesMode.Latest` always resolves to the newest mode the runtime supports, and child controls default to
+`VisualStylesMode.Inherit` so the setting cascades. In this preview, `Net11` brings modernized rendering adapters for 
+
+* `Button` - The `FlatStyle` property defines the used render style for the context.
+* `ComboBox`
+* `GroupBox`
+* `CheckBox`
+* `RadioButton`
+* `TextBox` - The `Borderstyle` property lets interpret the setting for 
+* `RichTextBox`
+
+Note, that `Control.VisualStylesMode` is an ambient property, meaning [...]. In the case of VisualStylesMode, the root is not the top-level container, but the static `Application.DefaultVisualStylesMode` property, which you set globally for the whole Application life cycle with `Application.SetDefaultVisualStylesMode`.
+
+Because switching modes can require different metrics or handle recreation, `Control.GetVisualStylesModeChangeImpact` reports what the runtime needs to do, and `EffectiveVisualStylesMode` returns the resolved value
+after inheritance ([dotnet/winforms #14809](https://github.com/dotnet/winforms/pull/14809), [dotnet/winforms #14811](https://github.com/dotnet/winforms/pull/14811)).
 
 ```csharp
 using System.Windows.Forms;
@@ -104,10 +104,11 @@ Application.Run(form);
 
 ## Suspend painting during bulk mutations
 
-The new `ISupportSuspendPainting` interface and `ControlMutationExtensions.SuspendPainting`
-extension method combine `BeginUpdate`/`EndUpdate` and `SuspendLayout`/`ResumeLayout`
-into a single `IDisposable` scope. `LayoutSuspendTraversal` chooses whether the
-suspension applies to the target only or to the target and its descendants, and
+The new `ISupportSuspendPainting` interface and `ControlMutationExtensions.SuspendPainting` extension method combine `BeginUpdate`/`EndUpdate` and `SuspendLayout`/`ResumeLayout` into a single `IDisposable` scope. `LayoutSuspendTraversal` chooses whether the suspension applies to the target only or to the target and its descendants. In the past, if you had nested containers, you needed to `SuspendLayout` for each of the inner containers respectively, as you often see it in `InitializeComponent`:
+
+
+
+, and
 an optional filter lets callers opt individual container children out of the
 layout freeze. `ComboBox`, `ListBox`, `ListView`, `RichTextBox`, and `TreeView`
 implement the interface and override `BeginSuspendPaintingCore` and
@@ -128,7 +129,7 @@ using (list.SuspendPainting(LayoutSuspendTraversal.TargetAndDescendants))
 }
 ```
 
-## Toggle-switch appearance for CheckBox
+## Toggle-switch appearance for CheckBox, RadioButton
 
 `Appearance.ToggleSwitch` is a new value for `CheckBox.Appearance` that renders
 the control as a switch under `VisualStylesMode.Net11`. Existing `Checked`,
@@ -147,23 +148,11 @@ CheckBox toggle = new()
 };
 ```
 
-## Configurable TreeView node leading
+**IMPORTANT:**
 
-`TreeView.NodeLeading` sets the extra vertical space around each node as a
-multiplier of the node height, letting apps loosen or tighten row density
-without owner-drawing. Values are clamped to a sensible range and the
-`NodeLeadingChanged` event fires when the property is updated
-([dotnet/winforms #14809](https://github.com/dotnet/winforms/pull/14809)).
+Rendering behavior for Visual Styles and the associated new APIs is not yet final and will continue to change until .NET 11 reaches GA. Based on exploratory testing and customer feedback, controls using non-classic Visual Style settings may occupy more or less space in upcoming .NET 11 releases (RC, GA) than they do in Preview 7. The behavior of the new APIs may likewise change in detail or in specific scenarios.
 
-```csharp
-using System.Windows.Forms;
-
-TreeView tree = new()
-{
-    Dock = DockStyle.Fill,
-    NodeLeading = 1.5f,
-};
-```
+For this reason — among others — we recommend avoiding pixel-perfect design when adopting these features. Prefer layout-based approaches using `TableLayoutPanel` and `FlowLayoutPanel`, which adapt automatically to changes in control metrics.
 
 ## Bug fixes
 
