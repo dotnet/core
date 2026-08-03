@@ -167,17 +167,25 @@ TreeView tree = new()
 
 ## Bug fixes
 
-- [Fix SendKeys sequential immediate modifier(^a^c, +a+c, %f%t) parsing regression](https://github.com/dotnet/winforms/pull/14691)
-- [Fix KeyboardToolTipStateMachine KeyNotFoundException when focus changes during tooltip popup event](https://github.com/dotnet/winforms/pull/14731)
-- [Correct IsSynchronized values across ListBox collections](https://github.com/dotnet/winforms/pull/14679)
-- [Fix NumericUpDown button rendering regression when visual styles are disabled](https://github.com/dotnet/winforms/pull/14643)
-- [Handle transient GDI+ ExternalException in SplitContainer.RepaintSplitterRect during display-session transition](https://github.com/dotnet/winforms/pull/14565)
-- [Fix ToolStrip scroll-down button throwing when scrolling](https://github.com/dotnet/winforms/pull/14537)
-- [Fix indeterminate and checked ToolStripMenuItem icons being hard to see in dark mode](https://github.com/dotnet/winforms/pull/14317)
-- [Fix Property Page button icon changing when LargeButtons is toggled on high DPI](https://github.com/dotnet/winforms/pull/14672)
-- [Fix PropertyGrid.ResetHelpForeColor resetting the back color instead of the fore color](https://github.com/dotnet/winforms/pull/14572)
-- [Fix PrintPreviewControl ForeColor rendering incorrectly when set to White](https://github.com/dotnet/winforms/pull/14424)
-- [Fix LinkLabel contrast in Dark Mode](https://github.com/dotnet/winforms/pull/14283)
-- [Fix TabControl nested in SplitContainer not matching dark mode](https://github.com/dotnet/winforms/pull/14504)
-- [Fix HelpProvider text being barely visible in dark mode](https://github.com/dotnet/winforms/pull/14338)
-- [Fix ToolTip not switching to dark mode when SystemColorMode.Dark is set](https://github.com/dotnet/winforms/pull/14381)
+- **System.Windows.Forms.Control**
+  - [Fix SendKeys sequential immediate modifier(^a^c, +a+c, %f%t) parsing regression](https://github.com/dotnet/winforms/pull/14691)
+  - [Fix KeyboardToolTipStateMachine KeyNotFoundException when focus changes during tooltip popup event](https://github.com/dotnet/winforms/pull/14731)
+- **System.Windows.Forms.ListBox**
+  - [Correct IsSynchronized values across ListBox collections](https://github.com/dotnet/winforms/pull/14679)
+- **System.Windows.Forms.NumericUpDown**
+  - [Fix NumericUpDown button rendering regression when visual styles are disabled](https://github.com/dotnet/winforms/pull/14643)
+- **System.Windows.Forms.SplitContainer**
+  - [Handle transient GDI+ ExternalException in SplitContainer.RepaintSplitterRect during display-session transition](https://github.com/dotnet/winforms/pull/14565)
+- **System.Windows.Forms.ToolStrip**
+  - [Fix ToolStrip scroll-down button throwing when scrolling](https://github.com/dotnet/winforms/pull/14537)
+  - [Fix indeterminate and checked ToolStripMenuItem icons being hard to see in dark mode](https://github.com/dotnet/winforms/pull/14317)
+- **System.Windows.Forms.PropertyGrid**
+  - [Fix Property Page button icon changing when LargeButtons is toggled on high DPI](https://github.com/dotnet/winforms/pull/14672)
+  - [Fix PropertyGrid.ResetHelpForeColor resetting the back color instead of the fore color](https://github.com/dotnet/winforms/pull/14572)
+- **System.Windows.Forms.PrintPreviewControl**
+  - [Fix PrintPreviewControl ForeColor rendering incorrectly when set to White](https://github.com/dotnet/winforms/pull/14424)
+- **System.Windows.Forms dark mode**
+  - [Fix LinkLabel contrast in Dark Mode](https://github.com/dotnet/winforms/pull/14283)
+  - [Fix TabControl nested in SplitContainer not matching dark mode](https://github.com/dotnet/winforms/pull/14504)
+  - [Fix HelpProvider text being barely visible in dark mode](https://github.com/dotnet/winforms/pull/14338)
+  - [Fix ToolTip not switching to dark mode when SystemColorMode.Dark is set](https://github.com/dotnet/winforms/pull/14381)
