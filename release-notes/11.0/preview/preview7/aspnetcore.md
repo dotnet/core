@@ -162,17 +162,11 @@ Both APIs only take effect when `Virtualize="true"`. `ScrollToItemAsync` throws 
 
 ## `wasm-tools` uses Emscripten 6
 
-The .NET 11 `wasm-tools` workload now uses Emscripten 6.0.3, upgraded from Emscripten 5.0.6 in Preview 6 ([dotnet/emsdk #1789](https://github.com/dotnet/emsdk/pull/1789), [dotnet/emsdk #1788](https://github.com/dotnet/emsdk/pull/1788)). `wasm-tools` uses Emscripten when a WebAssembly project is AOT-compiled or links native dependencies. Blazor WebAssembly projects that don't use AOT or native dependencies don't require changes.
+The .NET 11 `wasm-tools` workload now uses Emscripten 6.0.3, upgraded from Emscripten 5.0.6 in Preview 6 ([dotnet/emsdk #1789](https://github.com/dotnet/emsdk/pull/1789), [dotnet/emsdk #1788](https://github.com/dotnet/emsdk/pull/1788)). Blazor developers don't typically interact with Emscripten directly, but it provides the compiler toolchain used for WebAssembly AOT compilation and native dependencies.
 
-Projects with custom native build scripts or Emscripten arguments should review these changes:
+Emscripten 6 updates the underlying native toolchain and libraries, including musl libc, libpng, compiler-rt, and libunwind. Generated output can rely on WebAssembly mutable globals and sign-extension instructions without a Babel transpilation step. It also adds capabilities for native code and toolchain authors, including Memory64 through `-m64`, FMA intrinsics, wasm-bindgen integration, and real dynamic libraries by default. Streaming Fetch operations now cap chunks at 8 MB so large downloads don't arrive as a single allocation in WebAssembly memory.
 
-- On Windows, Emscripten tools such as `emcc` now use `.exe` launchers instead of `.bat` or `.ps1` files. Update scripts that explicitly call `emcc.bat` to call `emcc` or `emcc.exe`.
-- The minimum browser engine versions for Emscripten-generated code are now Chrome 85, Firefox 79, and Safari 14.1. These versions are older than the [browsers supported by Blazor](https://learn.microsoft.com/aspnet/core/blazor/supported-platforms), so this doesn't change the supported-browser baseline for Blazor apps.
-- `-sUSE_PTHREADS` and `-sMEMORY64` are deprecated. Custom arguments should use `-pthread` and `-m64` (or `--target=wasm64`) instead.
-- `-shared` now produces a real dynamic library by default because `FAKE_DYLIBS` is disabled. Custom native build pipelines that relied on fake dynamic libraries must pass `-sFAKE_DYLIBS=1` explicitly or update for Emscripten dynamic linking.
-- Emscripten 6.0.3 has a known issue where `-fcoverage-mapping` doesn't work because its LLVM and compiler-rt versions don't match.
-
-See the upstream release notes for [Emscripten 6.0.0](https://github.com/emscripten-core/emscripten/releases/tag/6.0.0), [6.0.1](https://github.com/emscripten-core/emscripten/releases/tag/6.0.1), [6.0.2](https://github.com/emscripten-core/emscripten/releases/tag/6.0.2), and [6.0.3](https://github.com/emscripten-core/emscripten/releases/tag/6.0.3) for the complete list.
+Existing Blazor app source doesn't need to change to benefit from the upgraded toolchain. See the [Emscripten 6 changelog](https://github.com/emscripten-core/emscripten/blob/6.0.3/ChangeLog.md) for the complete list of changes.
 
 ## Razor accepts literal attributes for union-typed component parameters
 
