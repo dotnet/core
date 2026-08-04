@@ -164,7 +164,7 @@ Both APIs only take effect when `Virtualize="true"`. `ScrollToItemAsync` throws 
 
 The .NET 11 `wasm-tools` workload now uses Emscripten 6.0.3, upgraded from Emscripten 5.0.6 in Preview 6 ([dotnet/emsdk #1789](https://github.com/dotnet/emsdk/pull/1789), [dotnet/emsdk #1788](https://github.com/dotnet/emsdk/pull/1788)). Blazor developers don't typically interact with Emscripten directly, but it provides the compiler toolchain used for WebAssembly AOT compilation and native dependencies.
 
-Emscripten 6 updates the underlying native toolchain and libraries, including musl libc, libpng, compiler-rt, and libunwind. Generated output can rely on WebAssembly mutable globals and sign-extension instructions without a Babel transpilation step. It also adds capabilities for native code and toolchain authors, including Memory64 through `-m64`, FMA intrinsics, wasm-bindgen integration, and real dynamic libraries by default. Streaming Fetch operations now cap chunks at 8 MB so large downloads don't arrive as a single allocation in WebAssembly memory.
+Emscripten 6 updates the underlying native toolchain and libraries, including musl libc, llvm/clang, and libunwind. These updates bring in multiple years of optimizations across a wide range of areas from these upstream projects.
 
 Existing Blazor app source doesn't need to change to benefit from the upgraded toolchain. See the [Emscripten 6 changelog](https://github.com/emscripten-core/emscripten/blob/6.0.3/ChangeLog.md) for the complete list of changes.
 
