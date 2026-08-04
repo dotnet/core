@@ -158,8 +158,8 @@ Rules for using it:
 - **Verify every addition independently before writing it up.** Milestones are applied by
   automation, so they are usually right — but they can be changed or applied incorrectly by hand
   afterwards, and a milestoned PR can still be reverted. Treat a milestone as reliable evidence of
-  where to look and weak evidence that the change shipped. Before promoting anything found this
-  way, confirm it appears in `changes.json` and exists in the build (see
+  where to look and strong but not conclusive evidence that the change shipped. Before promoting
+  anything found this way, confirm it appears in `changes.json` and exists in the build (see
   [`api-verification.md`](../release-notes/references/api-verification.md) and
   [`validate-code-samples`](../validate-code-samples/SKILL.md)). The expected outcome is that it
   checks out; the point is to catch the occasional one that does not.
