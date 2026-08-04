@@ -12,7 +12,7 @@ Last Updated: 2026/07/13; Support phase: Preview
 
 Notes:
 
-- Android: API 21 is used as the minimum SDK target.
+- Android: API 24 is used as the minimum SDK target.
 
 ## Apple
 
