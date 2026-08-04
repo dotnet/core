@@ -14,7 +14,6 @@
 - [Consistent authorization metadata across the stack](#consistent-authorization-metadata-across-the-stack)
 - [OpenAPI Server-Sent Events in OpenAPI 3.2](#openapi-server-sent-events-in-openapi-32)
 - [TLS channel-binding token access from `ITlsConnectionFeature`](#tls-channel-binding-token-access-from-itlsconnectionfeature)
-- [`PathString.StartsWithSegments` treats `\` as a segment boundary](#pathstringstartswithsegments-treats--as-a-segment-boundary)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -335,10 +334,6 @@ app.Use(async (context, next) =>
 
 Kestrel returns the binding from `SslStream.TransportContext.GetChannelBinding`. IIS and HTTP.sys return it from the request; on HTTP.sys the new `HttpSysOptions.Authentication.HardeningLevel` (defaults to `Medium`) controls whether the OS is asked to enforce channel binding, and setting it to `Strict` now fails startup if the OS cannot apply that hardening rather than silently degrading ([dotnet/aspnetcore #67720](https://github.com/dotnet/aspnetcore/pull/67720)).
 
-## `PathString.StartsWithSegments` treats `\` as a segment boundary
-
-`PathString.StartsWithSegments` used to treat only `/` as a segment boundary. A request like `/foo%5Cbar` (which decodes to `/foo\bar`) therefore failed to match `app.Map("/foo")`, so a segment-guarded middleware branch could be bypassed. All four `StartsWithSegments` overloads now treat `\` as equivalent to `/` for boundary detection, which aligns with the WHATWG URL Standard (which normalizes `\` → `/` for HTTP URLs) and with how `HttpSys` and IIS already expose backslashes in `HttpRequest.Path` ([dotnet/aspnetcore #67093](https://github.com/dotnet/aspnetcore/pull/67093)). The original character is preserved in both `matched` and `remaining`, and the `PathString` constructor was relaxed to accept `\` as a leading character so that `remaining` from a matched `Map` branch can begin with one.
-
 ## Breaking changes
 
 - **Preview 6 `Virtualize<TItem>` APIs renamed.** `InitialIndex` is now `InitialItemIndex`, `ScrollToIndexAsync` is now `ScrollToItemAsync`, and `VirtualizeAnchorMode.Beginning` is now `VirtualizeAnchorMode.Start`. The behavior is unchanged. `AnchorMode` values are now `None`, `Start`, and `End` ([dotnet/aspnetcore #67312](https://github.com/dotnet/aspnetcore/pull/67312), [dotnet/aspnetcore #67313](https://github.com/dotnet/aspnetcore/pull/67313)).
@@ -408,6 +403,7 @@ Kestrel returns the binding from `SslStream.TransportContext.GetChannelBinding`.
   - [Enforce MultipartHeadersLengthLimit across buffered reads](https://github.com/dotnet/aspnetcore/pull/67840)
   - [Collapse scheme-relative leading slashes in Rewrite middleware targets](https://github.com/dotnet/aspnetcore/pull/66961)
   - [Normalize backslashes in Rewrite middleware targets](https://github.com/dotnet/aspnetcore/pull/67928)
+  - [Treat backslashes as segment boundaries in PathString.StartsWithSegments](https://github.com/dotnet/aspnetcore/pull/67093)
 - **Miscellaneous**
   - [Harden wildcard matching with empty segments inside](https://github.com/dotnet/aspnetcore/pull/67757)
   - [Use SearchValues/ContainsAny/span helpers in more places](https://github.com/dotnet/aspnetcore/pull/67018)
