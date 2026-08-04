@@ -2,20 +2,18 @@
 
 .NET 11 Preview 7 includes new ASP.NET Core features and improvements:
 
-- [Blazor Server automatic circuit pause](#blazor-server-automatic-circuit-pause)
+- [Auto pause Blazor circuits on inactivity](#auto-pause-blazor-circuits-on-inactivity)
 - [Cache Blazor SSR output with `CacheView`](#cache-blazor-ssr-output-with-cacheview)
 - [New Blazor analyzers](#new-blazor-analyzers)
-- [Blazor `Virtualize` API renames and improvements](#blazor-virtualize-api-renames-and-improvements)
+- [Blazor `Virtualize` no longer requires an `ItemComparer`](#blazor-virtualize-no-longer-requires-an-itemcomparer)
 - [`QuickGrid` supports `InitialItemIndex` and `ScrollToItemAsync`](#quickgrid-supports-initialitemindex-and-scrolltoitemasync)
 - [Razor accepts literal attributes for union-typed component parameters](#razor-accepts-literal-attributes-for-union-typed-component-parameters)
-- [Blazor SSR client-side form validation reworked](#blazor-ssr-client-side-form-validation-reworked)
+- [Blazor SSR client-side form validation is enabled by default](#blazor-ssr-client-side-form-validation-is-enabled-by-default)
 - [Validation localization is built in](#validation-localization-is-built-in)
-- [SignalR auth refresh works behind Azure SignalR](#signalr-auth-refresh-works-behind-azure-signalr)
+- [SignalR .NET client supports auth refresh after redirects](#signalr-net-client-supports-auth-refresh-after-redirects)
 - [Consistent authorization metadata across the stack](#consistent-authorization-metadata-across-the-stack)
 - [OpenAPI Server-Sent Events in OpenAPI 3.2](#openapi-server-sent-events-in-openapi-32)
 - [TLS channel-binding token access from `ITlsConnectionFeature`](#tls-channel-binding-token-access-from-itlsconnectionfeature)
-- [Kestrel and IIS hardening](#kestrel-and-iis-hardening)
-- [Rewrite middleware collapses scheme-relative slashes](#rewrite-middleware-collapses-scheme-relative-slashes)
 - [`PathString.StartsWithSegments` treats `\` as a segment boundary](#pathstringstartswithsegments-treats--as-a-segment-boundary)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
@@ -25,11 +23,11 @@ ASP.NET Core updates in .NET 11:
 
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
 
-## Blazor Server automatic circuit pause
+## Auto pause Blazor circuits on inactivity
 
-Interactive Server circuits can now pause themselves automatically when the browser tab is hidden, releasing SignalR and server-side memory until the user comes back ([dotnet/aspnetcore #67098](https://github.com/dotnet/aspnetcore/pull/67098)). Preview 6 added [`Circuit.RequestCircuitPauseAsync`](https://github.com/dotnet/aspnetcore/issues/64886) so the server could pause a circuit on demand; Preview 7 adds a matching client-driven path that fires after a configurable inactivity delay while a page is hidden.
+Interactive Server circuits can now pause themselves automatically when the browser tab is hidden, releasing server resources until the user comes back ([dotnet/aspnetcore #67098](https://github.com/dotnet/aspnetcore/pull/67098)). Preview 6 added [`Circuit.RequestCircuitPauseAsync`](https://github.com/dotnet/aspnetcore/issues/64886) so the server could pause a circuit on demand; Preview 7 adds a matching client-driven path that fires after a configurable inactivity delay while a page is hidden.
 
-Configure it per app on the render mode via `AddAutoPause` on `BrowserOptions`. The behavior ships in the separate `Microsoft.AspNetCore.Components.Server.AutoPause` package, so add a reference to opt in:
+To enable support for auto pausing circuits, add the `Microsoft.AspNetCore.Components.Server.AutoPause` package and configure it for the app via `AddAutoPause` on `BrowserOptions`:
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Components.Server.AutoPause" />
@@ -48,7 +46,7 @@ app.MapRazorComponents<App>()
     });
 ```
 
-Auto-pause defers itself while a pause would lose data or interrupt work in progress. The shipped checks are a text input or `contenteditable` element whose value differs from its default (including inside shadow DOM and same-origin iframes), an `<audio>` or `<video>` element that is playing unmuted, an open [Picture-in-Picture](https://developer.mozilla.org/docs/Web/API/Picture-in-Picture_API) window, a held [Web Lock](https://developer.mozilla.org/docs/Web/API/Web_Locks_API), and any in-flight circuit activity such as a running `IJSRuntime` call, a `DotNetStreamReference`/`JSStreamReference` transfer, or a queued render.
+Auto-pause defers itself when a pause would lose data or interrupt work in progress. The shipped checks are a text input or `contenteditable` element whose value differs from its default (including inside shadow DOM and same-origin iframes), an `<audio>` or `<video>` element that is playing unmuted, an open [Picture-in-Picture](https://developer.mozilla.org/docs/Web/API/Picture-in-Picture_API) window, a held [Web Lock](https://developer.mozilla.org/docs/Web/API/Web_Locks_API), and any in-flight circuit activity such as a running `IJSRuntime` call, a `DotNetStreamReference`/`JSStreamReference` transfer, or a queued render.
 
 Apps can add their own deferral with a client-side circuit handler that implements `onCircuitPausing`. Blazor awaits every registered handler before it pauses, for both auto-pause and server-initiated pauses. Register it from a [JS initializer](https://learn.microsoft.com/aspnet/core/blazor/fundamentals/startup#javascript-initializers):
 
@@ -118,38 +116,24 @@ configure the CacheView to vary by Query, or move the component outside the Cach
 
 ## New Blazor analyzers
 
-Preview 7 adds five new analyzers to the Blazor SDK targeting pack. All are on by default and ship as `Warning`:
+Preview 7 adds five new Blazor analyzers to help improve code quality. All are on by default and ship as `Warning`:
 
-| ID | Diagnostic | PR |
+| ID | What it detects | Contribution |
 |---|---|---|
-| `BL0012` | `StateHasChanged` is unnecessary in method '…' and can be removed | [dotnet/aspnetcore #67176](https://github.com/dotnet/aspnetcore/pull/67176) |
-| `BL0013` | '…' calls `GetAuthenticationStateAsync` on `AuthenticationStateProvider` without subscribing to the `AuthenticationStateChanged` event. This may result in using stale authentication state | [dotnet/aspnetcore #67383](https://github.com/dotnet/aspnetcore/pull/67383) |
-| `BL0014` | For loop iterator '…' is used in a closure or `RenderFragment`/`ChildContent`. This can lead to unexpected runtime behavior | [dotnet/aspnetcore #67228](https://github.com/dotnet/aspnetcore/pull/67228) |
-| `BL0015` | Method '…' decorated with `[JSInvokable]` should be public | [dotnet/aspnetcore #67137](https://github.com/dotnet/aspnetcore/pull/67137) |
-| `BL0016` | JS interop call '…' is not guarded with a try/catch block | [dotnet/aspnetcore #67900](https://github.com/dotnet/aspnetcore/pull/67900) |
-
-`BL0012` flags `StateHasChanged()` calls that the framework already schedules for you — for example inside `OnInitializedAsync`, an `EventCallback` handler, or a component parameter setter — and offers a code fix that removes them. `BL0013` catches the common bug where a component reads `GetAuthenticationStateAsync()` once and then serves a stale user because it never subscribed to `AuthenticationStateChanged`. `BL0014` catches a classic Blazor bug where a `for`-loop counter is captured by a lambda used in `@onclick` or a child component's parameter, so every button ends up bound to the final iteration value. `BL0015` flags `[JSInvokable]` methods that aren't `public` — they compile but JavaScript can't call them — and offers a code fix that makes them public. `BL0016` warns when an `IJSRuntime.InvokeAsync` / `InvokeVoidAsync` call is not inside a `try`/`catch`, so a disconnected circuit or a JS exception doesn't tear down the component.
-
-Four of these were community contributions — see the [community section](#community-contributors) at the end.
+| `BL0012` | Unnecessary `StateHasChanged()` calls in methods where the framework already schedules a render, such as `OnInitializedAsync`, an `EventCallback` handler, or a component parameter setter. Includes a code fix that removes the call. | [@MayaKirova](https://github.com/MayaKirova), [dotnet/aspnetcore #67176](https://github.com/dotnet/aspnetcore/pull/67176) |
+| `BL0013` | Calls to `GetAuthenticationStateAsync()` without subscribing to `AuthenticationStateChanged`, which can leave a component using stale authentication state. | [@kdinev](https://github.com/kdinev), [dotnet/aspnetcore #67383](https://github.com/dotnet/aspnetcore/pull/67383) |
+| `BL0014` | A `for`-loop counter captured by a closure or `RenderFragment`, which can bind every callback or rendered fragment to the final iteration value. | [@skrustev](https://github.com/skrustev), [dotnet/aspnetcore #67228](https://github.com/dotnet/aspnetcore/pull/67228) |
+| `BL0015` | A non-public `[JSInvokable]` method, which compiles but can't be invoked from JavaScript. Includes a code fix that makes the method public. | [@damyanpetev](https://github.com/damyanpetev), [dotnet/aspnetcore #67137](https://github.com/dotnet/aspnetcore/pull/67137) |
+| `BL0016` | An `IJSRuntime.InvokeAsync` or `InvokeVoidAsync` call outside a `try`/`catch`, where a disconnected circuit or JavaScript exception can tear down the component. | [@MayaKirova](https://github.com/MayaKirova), [dotnet/aspnetcore #67900](https://github.com/dotnet/aspnetcore/pull/67900) |
 
 Because all five default to `Warning`, upgrading an existing app from Preview 6 will surface new warnings in code that previously built clean. Two cases are worth calling out:
 
-- `BL0012` fires on the common pattern of calling `StateHasChanged()` at the top of an `async` event handler before an `await`. The call really is redundant — `ComponentBase` re-renders as soon as the handler yields — so the code fix is safe. If the handler relies on the UI updating before a long synchronous block, keep the `await Task.Yield()`; that, not `StateHasChanged()`, is what lets the render reach the browser.
+- `BL0012` fires on the common pattern of calling `StateHasChanged()` at the top of an `async` event handler before an `await`. The call really is redundant because `ComponentBase` re-renders as soon as the handler yields, so the code fix is safe. If the handler relies on the UI updating before a long synchronous block, keep the `await Task.Yield()`; that, not `StateHasChanged()`, is what lets the render reach the browser.
 - `BL0016` also fires on reusable wrapper and library code that deliberately lets `JSException` / `JSDisconnectedException` propagate to its caller. Wrapping those calls in a `try`/`catch` that swallows the exception would be wrong; suppress the diagnostic with a justification instead.
 
-## Blazor `Virtualize` API renames and improvements
+## Blazor `Virtualize` no longer requires an `ItemComparer`
 
-The two new `Virtualize<TItem>` APIs added in Preview 6 were renamed in API review to align with the existing `ItemComparer` and `ScrollToBottom` shape ([dotnet/aspnetcore #67312](https://github.com/dotnet/aspnetcore/pull/67312), [dotnet/aspnetcore #67313](https://github.com/dotnet/aspnetcore/pull/67313)):
-
-| Preview 6 name | Preview 7 name |
-|---|---|
-| `InitialIndex` (`int`) | `InitialItemIndex` (`int`) |
-| `ScrollToIndexAsync(int, CancellationToken)` | `ScrollToItemAsync(int, CancellationToken)` |
-| `VirtualizeAnchorMode.Beginning` | `VirtualizeAnchorMode.Start` |
-
-The parameter and method behavior is unchanged; only the names moved. `AnchorMode` keeps its `VirtualizeAnchorMode` type, whose values are now `None`, `Start`, and `End`. `VirtualizeAnchorMode.End` keeps the viewport pinned to the bottom of the list as items are appended (useful for chat), and `Start` — the default — keeps the visible window anchored while items are prepended.
-
-Prepend/append detection also improved: `Virtualize<TItem>` now runs it with the default `EqualityComparer<TItem>.Default` instead of requiring you to assign `ItemComparer` explicitly, which covers value-type items and reference-type items whose provider returns stable references ([dotnet/aspnetcore #67905](https://github.com/dotnet/aspnetcore/pull/67905)).
+`Virtualize<TItem>` now detects prepends and appends with `EqualityComparer<TItem>.Default` instead of requiring an explicit `ItemComparer`. This works for value-type items and reference-type items whose provider returns stable references ([dotnet/aspnetcore #67905](https://github.com/dotnet/aspnetcore/pull/67905)).
 
 ## `QuickGrid` supports `InitialItemIndex` and `ScrollToItemAsync`
 
@@ -196,16 +180,12 @@ In Preview 6 the Razor compiler couldn't convert a literal attribute value to th
 <Toast Message="Saved 3 items." />
 ```
 
-One gap remains: child content between the component's tags still doesn't populate a `RenderFragment` case, so that case has to be supplied as an expression ([dotnet/razor #13200](https://github.com/dotnet/razor/issues/13200)).
+## Blazor SSR client-side form validation is enabled by default
 
-## Blazor SSR client-side form validation reworked
-
-Preview 5 added client-side validation for Blazor static SSR forms: adding `<DataAnnotationsValidator />` inside a static `EditForm` now runs `[Required]`, `[Range]`, `[RegularExpression]`, `[StringLength]`, and similar rules in the browser before the form posts. Preview 7 keeps that feature but reworks the implementation and the API shape after review feedback ([dotnet/aspnetcore #67324](https://github.com/dotnet/aspnetcore/pull/67324), [dotnet/aspnetcore #67855](https://github.com/dotnet/aspnetcore/pull/67855)):
+Preview 5 added client-side validation for Blazor static SSR forms without requiring an interactive render mode. Preview 7 keeps that feature but reworks the implementation and the API shape after review feedback ([dotnet/aspnetcore #67324](https://github.com/dotnet/aspnetcore/pull/67324), [dotnet/aspnetcore #67855](https://github.com/dotnet/aspnetcore/pull/67855)):
 
 - Rules are now delivered through a single inert per-form carrier element instead of MVC-style `data-val-*` attributes on every input.
-- `DataAnnotationsValidator.EnableClientValidation` was replaced by `DisableClientValidation` (default `false`, so client validation is on out of the box). A global `RazorComponentsServiceOptions.DisableClientValidation` opt-out turns rule emission off for every form.
-- `IClientValidationAdapter` was renamed to `IClientValidationRuleProvider`. `ClientValidationRule.Parameters` is now a non-nullable empty dictionary when unset.
-- The `ClientValidation` types moved from `Microsoft.AspNetCore.Components.Forms.ClientValidation` to `Microsoft.AspNetCore.Components.Forms`.
+- Client-side validation is enabled by default. Set `DataAnnotationsValidator.DisableClientValidation="true"` for one form, or set `RazorComponentsServiceOptions.DisableClientValidation` to disable rule emission for the app.
 
 ```razor
 <EditForm Model="Model" OnValidSubmit="Submit" FormName="reservation">
@@ -220,7 +200,7 @@ Preview 5 added client-side validation for Blazor static SSR forms: adding `<Dat
 
 ## Validation localization is built in
 
-`Microsoft.Extensions.Validation` localizes validation messages and display names without a separate package. The preview-only `Microsoft.Extensions.Validation.Localization` package and its `AddValidationLocalization<TResource>()` / `IValidationLocalizer` API are removed; localization now activates automatically as soon as an `IStringLocalizerFactory` is registered, and the lookup is emitted by the validation source generator into your assembly ([dotnet/aspnetcore #68005](https://github.com/dotnet/aspnetcore/pull/68005)).
+`Microsoft.Extensions.Validation` now localizes validation messages and display names without a separate package. The preview-only `Microsoft.Extensions.Validation.Localization` package and its `AddValidationLocalization<TResource>()` / `IValidationLocalizer` API are removed; localization now activates automatically as soon as an `IStringLocalizerFactory` is registered, and the lookup is emitted by the validation source generator into your assembly ([dotnet/aspnetcore #68005](https://github.com/dotnet/aspnetcore/pull/68005)).
 
 ```csharp
 builder.Services.AddLocalization();
@@ -245,7 +225,7 @@ builder.Services.AddValidation(options =>
     // Resolve every model's keys from one shared resource file.
     options.LocalizerProvider = (_, factory) => factory.Create(typeof(ValidationMessages));
 
-    // Supply a key by convention when an attribute has no ErrorMessage — for example
+    // Supply a key by convention when an attribute has no ErrorMessage, for example
     // [Range] => "RangeAttribute_Error".
     options.MessageKeyProvider = ctx => $"{ctx.ValidatorType.Name}_Error";
 });
@@ -263,21 +243,19 @@ public sealed class DivisibleByAttribute : ValidationAttribute, IValidationMessa
 }
 ```
 
-The same rules apply to minimal API endpoint validation, Blazor interactive form validation, and Blazor SSR client-side validation, so a message localizes identically wherever the model is used.
+The same localization rules apply to validation for minimal APIs and Blazor, so a message localizes identically wherever the model is used.
 
 `Microsoft.Extensions.Validation` also drops its `[Experimental("ASP0029")]` markers in Preview 7 ([dotnet/aspnetcore #67634](https://github.com/dotnet/aspnetcore/pull/67634)). If you suppressed `ASP0029` to use `[ValidatableType]` or `AddValidation()`, you can remove the suppression.
 
-## SignalR auth refresh works behind Azure SignalR
+## SignalR .NET client supports auth refresh after redirects
 
-Preview 6 introduced [SignalR authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh), which keeps a hub connection open across access-token expiration by exposing a `/refresh` endpoint on the server and a matching flow in the .NET client. Preview 7 extends the .NET client so refresh also works when negotiate redirects to a different server — the shape used by Azure SignalR Service ([dotnet/aspnetcore #67612](https://github.com/dotnet/aspnetcore/pull/67612), community contribution from [@MoChilia](https://github.com/MoChilia)).
+Preview 7 updates the SignalR .NET client so [authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) works when negotiate redirects to another server ([dotnet/aspnetcore #67612](https://github.com/dotnet/aspnetcore/pull/67612), contributed by [@MoChilia](https://github.com/MoChilia)). This client change enables support for redirecting servers such as Azure SignalR Service, but Azure SignalR Service has not enabled the feature yet.
 
-Behind Azure SignalR the app token authenticates against the app server, and the transport uses a separate service token issued by the redirect. Before this change the client posted `/refresh` with the wrong token, ignored any refreshed transport token in the response, and lost the `tokenLifetimeSeconds` value across the redirect. The client now captures the app-token provider before transports overwrite it, sends `/refresh` with the app token, adopts a refreshed `accessToken` from the response when one is present, and preserves the negotiate hop's `tokenLifetimeSeconds` so auto-refresh scheduling keeps working past the original expiry.
-
-Self-hosted SignalR is unaffected — the redirect-only fields are optional and omitted there.
+The client now preserves the app-token provider across the redirect, adopts a refreshed transport token from the response, and retains `tokenLifetimeSeconds` so automatic refresh remains scheduled after the original token expires.
 
 ## Consistent authorization metadata across the stack
 
-`[Authorize]` policies aren't the only shape of authorization metadata attached to an endpoint. `AuthorizationPolicy` instances used directly as metadata and `IAuthorizationRequirementData` attributes (which carry requirements without a named policy) are equally valid, and endpoint routing's `AuthorizationMiddleware` has honored all three for years. Preview 7 brings MVC filters, SignalR hub method authorization, and Blazor's `AuthorizeView` / `AuthorizeRouteView` into line so the same custom authorization attribute behaves consistently everywhere ([dotnet/aspnetcore #67765](https://github.com/dotnet/aspnetcore/pull/67765)).
+Authorization metadata can be expressed as `IAuthorizeData`, an `AuthorizationPolicy`, or an `IAuthorizationRequirementData` attribute. Preview 7 makes MVC filters, SignalR hub methods, and Blazor's `AuthorizeView` and `AuthorizeRouteView` apply all three forms consistently ([dotnet/aspnetcore #67765](https://github.com/dotnet/aspnetcore/pull/67765)).
 
 A new `AuthorizationPolicy.CombineAsync` overload is the shared implementation:
 
@@ -290,11 +268,11 @@ public class AuthorizationPolicy
 }
 ```
 
-You typically don't call it yourself: MVC's `AuthorizeFilter`, SignalR's hub method dispatcher, and Blazor's authorize view components all now route through it, so a single attribute that implements both `IAuthorizeData` and `IAuthorizationRequirementData` contributes to each side of the decision exactly once. The legacy non-endpoint-routing MVC path (`EnableEndpointRouting = false`) is deliberately not updated.
+MVC, SignalR, and Blazor now use this overload internally. A custom attribute that implements both `IAuthorizeData` and `IAuthorizationRequirementData` contributes to the decision once. The legacy MVC path with `EnableEndpointRouting = false` is unchanged.
 
 ## OpenAPI Server-Sent Events in OpenAPI 3.2
 
-Endpoints that return `SseItem<T>` are now described in the generated OpenAPI document with the OpenAPI 3.2 `itemSchema` shape for `text/event-stream` responses ([dotnet/aspnetcore #67461](https://github.com/dotnet/aspnetcore/pull/67461)). Preview 6 made [OpenAPI 3.2 the default](../preview6/aspnetcore.md#openapi-32-by-default); Preview 7 uses that headroom to describe a stream's per-event payload shape instead of falling back to a plain `string` schema.
+Endpoints that return `SseItem<T>` are now described in the generated OpenAPI document with the OpenAPI 3.2 `itemSchema` shape for `text/event-stream` responses ([dotnet/aspnetcore #67461](https://github.com/dotnet/aspnetcore/pull/67461)). The `itemSchema` describes a stream's per-event payload shape instead of falling back to a plain `string` schema.
 
 ```csharp
 app.MapGet("/todos/stream", (CancellationToken ct) =>
@@ -312,7 +290,7 @@ static async IAsyncEnumerable<SseItem<Todo>> GetTodosAsync(
 }
 ```
 
-Route the stream through `TypedResults.ServerSentEvents`. Returning an `IAsyncEnumerable<SseItem<T>>` directly from the handler is not an SSE response — minimal APIs serialize it as a JSON array, and the document describes it that way. Note also that `ServerSentEvents` has a dedicated `IAsyncEnumerable<SseItem<T>>` overload that takes no `eventType`; passing `eventType:` alongside `SseItem<T>` items instead binds `ServerSentEvents<T>(IAsyncEnumerable<T>, string?)` with `T` inferred as `SseItem<Todo>`, which serializes the whole envelope into `data`. Use `TypedResults.ServerSentEvents(items, eventType: "todo")` with a plain `IAsyncEnumerable<Todo>` when one event name covers the stream.
+Return the stream through `TypedResults.ServerSentEvents`. A handler that returns `IAsyncEnumerable<SseItem<T>>` directly is serialized as JSON instead of SSE. Use the dedicated `SseItem<T>` overload without `eventType`. To use one event name for the whole stream, pass a plain `IAsyncEnumerable<T>` with `eventType`.
 
 The generated 3.2 document describes the event payload with `itemSchema` referencing `#/components/schemas/Todo`, plus the standard SSE `event` / `id` string fields:
 
@@ -357,53 +335,24 @@ app.Use(async (context, next) =>
 
 Kestrel returns the binding from `SslStream.TransportContext.GetChannelBinding`. IIS and HTTP.sys return it from the request; on HTTP.sys the new `HttpSysOptions.Authentication.HardeningLevel` (defaults to `Medium`) controls whether the OS is asked to enforce channel binding, and setting it to `Strict` now fails startup if the OS cannot apply that hardening rather than silently degrading ([dotnet/aspnetcore #67720](https://github.com/dotnet/aspnetcore/pull/67720)).
 
-## Kestrel and IIS hardening
-
-A cluster of security fixes closed protocol-level gaps in Kestrel, HTTP/2, HTTP/3, and the ASP.NET Core Module.
-
-**Connection-specific headers on HTTP/2 and HTTP/3** — the check that rejects `connection`, `transfer-encoding`, `keep-alive`, `proxy-connection`, `upgrade`, and `te` when they arrive over HTTP/2 or HTTP/3 previously ran only on literal-name representations. Kestrel now also rejects them when they arrive as an HPACK / QPACK indexed name (for example `transfer-encoding` sent as HPACK static-table entry 57 with a literal `chunked` value) so a peer can no longer smuggle `Transfer-Encoding: chunked` past the guard on multiplexed connections ([dotnet/aspnetcore #67584](https://github.com/dotnet/aspnetcore/pull/67584)).
-
-**`Content-Length` sign check** — RFC 9110 defines `Content-Length` as `1*DIGIT`, but the underlying UTF-8 parser accepted a leading `+` or `-`. Kestrel now rejects headers such as `Content-Length: +5` before they reach request-body reading ([dotnet/aspnetcore #67635](https://github.com/dotnet/aspnetcore/pull/67635)).
-
-**ANCM `Transfer-Encoding: chunked` hardening** — the ASP.NET Core Module's chunked-body reader now applies stricter framing checks so a malformed chunked request cannot desynchronize an in-process request ([dotnet/aspnetcore #67512](https://github.com/dotnet/aspnetcore/pull/67512)).
-
-**Zstandard request decompression window cap** — the request decompression middleware caps the zstd decoder window at 8 MB (RFC 9659's ceiling) so a small compressed payload cannot force a 128 MB decoder allocation. Well-behaved clients that emit a ≤ 2 MB window are unaffected ([dotnet/aspnetcore #67688](https://github.com/dotnet/aspnetcore/pull/67688)).
-
-**CONNECT close-on-reject** — HTTP/1.1 `CONNECT` requests that Kestrel rejects with a 3xx-or-higher status now close the connection instead of keeping it alive, per [RFC 9931 §8](https://www.rfc-editor.org/rfc/rfc9931#section-8) ([dotnet/aspnetcore #67929](https://github.com/dotnet/aspnetcore/pull/67929)). HTTP/2, HTTP/3, and accepted (2xx) CONNECTs are unaffected.
-
-**Multipart headers limit enforced across buffer boundaries** — the `MultipartHeadersLengthLimit` enforcement now spans buffered reads so a peer can no longer split a huge header across chunks to slip past the limit ([dotnet/aspnetcore #67840](https://github.com/dotnet/aspnetcore/pull/67840)).
-
-## Rewrite middleware collapses scheme-relative slashes
-
-`AddRedirect`, IIS URL Rewrite, and Apache `mod_rewrite` all let a back-reference or a literal rule produce a redirect / rewrite target that starts with `//`, `///`, or `/\`. When the app has no `PathBase`, the resulting `Location` header is scheme-relative and resolves off-origin — an [open redirect](https://cwe.mitre.org/data/definitions/601.html) reachable through user-controlled URL segments. Rewrite middleware now collapses any leading run of `/` and `\` in the target down to a single `/` before it is used ([dotnet/aspnetcore #66961](https://github.com/dotnet/aspnetcore/pull/66961), [dotnet/aspnetcore #67928](https://github.com/dotnet/aspnetcore/pull/67928)):
-
-```csharp
-app.UseRewriter(new RewriteOptions()
-    .AddRedirect("legacy/(.*)", "/$1", statusCode: 302));
-
-// GET /legacy/attacker.example
-// Preview 6: Location: //attacker.example  (scheme-relative — off-origin)
-// Preview 7: Location: /attacker.example   (collapsed to a single leading slash)
-```
-
-If your rules intentionally emit a scheme-relative or absolute URL, provide the full `https://host/…` form; the collapse only applies to leading slash / backslash runs on relative paths.
-
 ## `PathString.StartsWithSegments` treats `\` as a segment boundary
 
 `PathString.StartsWithSegments` used to treat only `/` as a segment boundary. A request like `/foo%5Cbar` (which decodes to `/foo\bar`) therefore failed to match `app.Map("/foo")`, so a segment-guarded middleware branch could be bypassed. All four `StartsWithSegments` overloads now treat `\` as equivalent to `/` for boundary detection, which aligns with the WHATWG URL Standard (which normalizes `\` → `/` for HTTP URLs) and with how `HttpSys` and IIS already expose backslashes in `HttpRequest.Path` ([dotnet/aspnetcore #67093](https://github.com/dotnet/aspnetcore/pull/67093)). The original character is preserved in both `matched` and `remaining`, and the `PathString` constructor was relaxed to accept `\` as a leading character so that `remaining` from a matched `Map` branch can begin with one.
 
 ## Breaking changes
 
-- **Removed long-obsolete MVC APIs** — `CompatibilityVersion`, `IMvcBuilder.SetCompatibilityVersion` / `IMvcCoreBuilder.SetCompatibilityVersion`, `MvcCompatibilityOptions`, `ConfigureCompatibilityOptions<TOptions>`, the `ImageTagHelper` constructor that took `IWebHostEnvironment` and `TagHelperMemoryCacheProvider`, `ImageTagHelper.HostingEnvironment`, `ImageTagHelper.Cache`, and the `ModelMetadataIdentity.ForProperty(Type, string, Type)` overload have been removed after multiple releases of obsolete-with-warning. Use the `PropertyInfo`-based `ModelMetadataIdentity.ForProperty` overload; delete `SetCompatibilityVersion` calls (the "current" behavior is the only supported one) ([dotnet/aspnetcore #67077](https://github.com/dotnet/aspnetcore/pull/67077)).
-- **`EditContext.Validate` is `[Obsolete]`** — the synchronous method is marked obsolete in favor of `EditContext.ValidateAsync`, completing the async form-validation API shape approved in review. The Blazor Web App template calls `ValidateAsync` now. Update your own call sites, or suppress the obsolete warning where sync-only validation is still intended ([dotnet/aspnetcore #67662](https://github.com/dotnet/aspnetcore/pull/67662)).
-- **Default CSRF middleware only validates opted-in endpoints** — Preview 6's [automatic CSRF protection](../preview6/aspnetcore.md#automatic-cross-origin-csrf-protection) validated every unsafe request by default. In Preview 7 the middleware validates only endpoints whose metadata contains `IAntiforgeryMetadata { RequiresValidation: true }` — the same rule the classic `AntiforgeryMiddleware` uses. Plain `MapPost` and plain MVC `[HttpPost]` endpoints without antiforgery metadata now pass through, matching .NET 10 behavior, so no endpoint that worked on .NET 10 starts failing on .NET 11. Blazor SSR forms, Razor Pages/MVC form binding, and minimal API handlers that bind form data (`[FromForm]`, `IFormFile`, `IFormCollection`) stay protected, because all of them attach `RequireAntiforgeryTokenAttribute` automatically. To opt an endpoint back in, bind its form data or apply `[ValidateAntiForgeryToken]`; `DisableAntiforgery()` still opts out ([dotnet/aspnetcore #67460](https://github.com/dotnet/aspnetcore/pull/67460), [dotnet/aspnetcore #67839](https://github.com/dotnet/aspnetcore/pull/67839)). `QUERY` is also now treated as a safe HTTP method for CSRF and antiforgery.
-- **`ValidateContext.ValidationErrors` element type changed** — the dictionary value type changed from `IEnumerable<string>` to `IReadOnlyList<ValidationError>`, where `ValidationError` is a new class carrying `Name`, `Path`, `ErrorMessage`, and `Container` ([dotnet/aspnetcore #67659](https://github.com/dotnet/aspnetcore/pull/67659)). The full property is now `IReadOnlyDictionary<string, IReadOnlyList<ValidationError>>?`. `AddValidationError` takes a `ValidationError` in place of the removed `ValidationErrorContext` struct, and the `OnValidationError` event and the `required ValidationContext` property were removed from `ValidateContext` ([dotnet/aspnetcore #67549](https://github.com/dotnet/aspnetcore/pull/67549)). `ValidateContext` gains a `ServiceProvider` property so validators can resolve services without going through DataAnnotations' `ValidationContext`.
-- **`Microsoft.Extensions.Validation`: abstract `Validatable*Info` moved to source-generation** — `ValidatableTypeInfo`, `ValidatableParameterInfo`, and `ValidatablePropertyInfo` are no longer part of the public API. The validation source generator now emits them as `file` classes in your assembly, and `IValidatableInfoResolver` returns the interface types (`IValidatableTypeInfo`, etc.). Apps that use `[ValidatableType]` and `builder.Services.AddValidation()` are unaffected. Code that constructed these types directly must move to implementing the interfaces or rely on the generator ([dotnet/aspnetcore #67956](https://github.com/dotnet/aspnetcore/pull/67956)). Related: `System.ComponentModel.DataAnnotations.ValidationContext` was removed from the `Microsoft.Extensions.Validation` public API surface ([dotnet/aspnetcore #67549](https://github.com/dotnet/aspnetcore/pull/67549)).
-- **`WebApplicationFactory.ConfigureHostApplicationBuilder` renamed to `ConfigureWebApplicationBuilder`** — the protected virtual method on `WebApplicationFactory<TEntryPoint>` was renamed to avoid confusion with `Host.CreateApplicationBuilder`. Rename any override in your test fixtures ([dotnet/aspnetcore #67917](https://github.com/dotnet/aspnetcore/pull/67917)).
-- **`UseWebAssemblyDebugging` obsolete, DevServer package deprecated** — `WebAssemblyNetDebugProxyAppBuilderExtensions.UseWebAssemblyDebugging` is now `[Obsolete("ASPDEPR011")]`, and the `Microsoft.AspNetCore.Components.WebAssembly.DevServer` NuGet package is marked deprecated in favor of the new Blazor Gateway host, which ships as the `Microsoft.AspNetCore.Components.Gateway` package and a `Microsoft.AspNetCore.Components.Gateway.Cli` .NET tool ([dotnet/aspnetcore #67990](https://github.com/dotnet/aspnetcore/pull/67990)). The Gateway serves a standalone WebAssembly app with HTTPS redirection, HSTS, health-check endpoints, and telemetry configurable through a `Gateway` configuration section. The Blazor Web App templates no longer call `UseWebAssemblyDebugging` — Visual Studio, VS Code, and `dotnet run` attach the WebAssembly debugger automatically. Remove `app.UseWebAssemblyDebugging()` from your `Program.cs` if you added it manually ([dotnet/aspnetcore #67861](https://github.com/dotnet/aspnetcore/pull/67861), [dotnet/aspnetcore #67862](https://github.com/dotnet/aspnetcore/pull/67862)).
-- **`Microsoft.AspNetCore.Grpc.Swagger` package removed** — the OpenAPI-for-gRPC-transcoding package is deleted. Use ASP.NET Core's built-in OpenAPI document generation on the transcoded HTTP endpoints instead ([dotnet/aspnetcore #67919](https://github.com/dotnet/aspnetcore/pull/67919)).
-- **`WebAssemblyComponentsOptions` culture toggle is no longer public** — the public `WebAssemblyComponentsOptions.UseCultureFromServer` property and the `AddInteractiveWebAssemblyComponents(builder, Action<WebAssemblyComponentsOptions>?)` overload were removed. Culture persistence is now opt-in through the `Components:UseCultureFromServer` configuration value; the default fall-back is based on whether `AddLocalization()` is registered ([dotnet/aspnetcore #67367](https://github.com/dotnet/aspnetcore/pull/67367)).
-- **Null / missing session is handled uniformly** — the Blazor Endpoints session and TempData features used to throw in some code paths, silently return empty in others, and return `null` in a third. Now: if a session is expected but not configured under an active `HttpContext` (static SSR), the framework throws `InvalidOperationException`; when there is no `HttpContext` at all (interactive Server circuit / WebAssembly), the value gracefully yields `null` / empty and logs one warning. Untrusted or corrupt stored data is still swallowed. Static SSR pages that use `[SupplyParameterFromTempData]` or a session-storage TempData provider without registering session middleware will now fail fast instead of silently returning `null` ([dotnet/aspnetcore #67641](https://github.com/dotnet/aspnetcore/pull/67641)).
+- **Preview 6 `Virtualize<TItem>` APIs renamed.** `InitialIndex` is now `InitialItemIndex`, `ScrollToIndexAsync` is now `ScrollToItemAsync`, and `VirtualizeAnchorMode.Beginning` is now `VirtualizeAnchorMode.Start`. The behavior is unchanged. `AnchorMode` values are now `None`, `Start`, and `End` ([dotnet/aspnetcore #67312](https://github.com/dotnet/aspnetcore/pull/67312), [dotnet/aspnetcore #67313](https://github.com/dotnet/aspnetcore/pull/67313)).
+- **Blazor SSR client-validation APIs changed.** `DataAnnotationsValidator.EnableClientValidation` was replaced by `DisableClientValidation`, which defaults to `false` so client validation is enabled. `IClientValidationAdapter` was renamed to `IClientValidationRuleProvider`, and the client-validation types moved from `Microsoft.AspNetCore.Components.Forms.ClientValidation` to `Microsoft.AspNetCore.Components.Forms`. `ClientValidationRule.Parameters` is now a non-nullable empty dictionary when unset ([dotnet/aspnetcore #67324](https://github.com/dotnet/aspnetcore/pull/67324), [dotnet/aspnetcore #67855](https://github.com/dotnet/aspnetcore/pull/67855)).
+- **Removed long-obsolete MVC APIs.** `CompatibilityVersion`, `IMvcBuilder.SetCompatibilityVersion` / `IMvcCoreBuilder.SetCompatibilityVersion`, `MvcCompatibilityOptions`, `ConfigureCompatibilityOptions<TOptions>`, the `ImageTagHelper` constructor that took `IWebHostEnvironment` and `TagHelperMemoryCacheProvider`, `ImageTagHelper.HostingEnvironment`, `ImageTagHelper.Cache`, and the `ModelMetadataIdentity.ForProperty(Type, string, Type)` overload have been removed after multiple releases of obsolete-with-warning. Use the `PropertyInfo`-based `ModelMetadataIdentity.ForProperty` overload; delete `SetCompatibilityVersion` calls (the "current" behavior is the only supported one) ([dotnet/aspnetcore #67077](https://github.com/dotnet/aspnetcore/pull/67077)).
+- **`EditContext.Validate` is `[Obsolete]`.** The synchronous method is marked obsolete in favor of `EditContext.ValidateAsync`, completing the async form-validation API shape approved in review. The Blazor Web App template calls `ValidateAsync` now. Update your own call sites, or suppress the obsolete warning where sync-only validation is still intended ([dotnet/aspnetcore #67662](https://github.com/dotnet/aspnetcore/pull/67662)).
+- **Default CSRF middleware only validates opted-in endpoints.** Preview 6's [automatic CSRF protection](../preview6/aspnetcore.md#automatic-cross-origin-csrf-protection) validated every unsafe request by default. In Preview 7 the middleware validates only endpoints whose metadata contains `IAntiforgeryMetadata { RequiresValidation: true }`, the same rule the classic `AntiforgeryMiddleware` uses. Plain `MapPost` and plain MVC `[HttpPost]` endpoints without antiforgery metadata now pass through, matching .NET 10 behavior, so no endpoint that worked on .NET 10 starts failing on .NET 11. Blazor SSR forms, Razor Pages/MVC form binding, and minimal API handlers that bind form data (`[FromForm]`, `IFormFile`, `IFormCollection`) stay protected, because all of them attach `RequireAntiforgeryTokenAttribute` automatically. To opt an endpoint back in, bind its form data or apply `[ValidateAntiForgeryToken]`; `DisableAntiforgery()` still opts out ([dotnet/aspnetcore #67460](https://github.com/dotnet/aspnetcore/pull/67460), [dotnet/aspnetcore #67839](https://github.com/dotnet/aspnetcore/pull/67839)). `QUERY` is also now treated as a safe HTTP method for CSRF and antiforgery.
+- **`ValidateContext.ValidationErrors` element type changed.** The dictionary value type changed from `IEnumerable<string>` to `IReadOnlyList<ValidationError>`, where `ValidationError` is a new class carrying `Name`, `Path`, `ErrorMessage`, and `Container` ([dotnet/aspnetcore #67659](https://github.com/dotnet/aspnetcore/pull/67659)). The full property is now `IReadOnlyDictionary<string, IReadOnlyList<ValidationError>>?`. `AddValidationError` takes a `ValidationError` in place of the removed `ValidationErrorContext` struct, and the `OnValidationError` event and the `required ValidationContext` property were removed from `ValidateContext` ([dotnet/aspnetcore #67549](https://github.com/dotnet/aspnetcore/pull/67549)). `ValidateContext` gains a `ServiceProvider` property so validators can resolve services without going through DataAnnotations' `ValidationContext`.
+- **`Microsoft.Extensions.Validation`: abstract `Validatable*Info` moved to source-generation.** `ValidatableTypeInfo`, `ValidatableParameterInfo`, and `ValidatablePropertyInfo` are no longer part of the public API. The validation source generator now emits them as `file` classes in your assembly, and `IValidatableInfoResolver` returns the interface types (`IValidatableTypeInfo`, etc.). Apps that use `[ValidatableType]` and `builder.Services.AddValidation()` are unaffected. Code that constructed these types directly must move to implementing the interfaces or rely on the generator ([dotnet/aspnetcore #67956](https://github.com/dotnet/aspnetcore/pull/67956)). Related: `System.ComponentModel.DataAnnotations.ValidationContext` was removed from the `Microsoft.Extensions.Validation` public API surface ([dotnet/aspnetcore #67549](https://github.com/dotnet/aspnetcore/pull/67549)).
+- **`WebApplicationFactory.ConfigureHostApplicationBuilder` renamed to `ConfigureWebApplicationBuilder`.** The protected virtual method on `WebApplicationFactory<TEntryPoint>` was renamed to avoid confusion with `Host.CreateApplicationBuilder`. Rename any override in your test fixtures ([dotnet/aspnetcore #67917](https://github.com/dotnet/aspnetcore/pull/67917)).
+- **`UseWebAssemblyDebugging` obsolete, DevServer package deprecated.** `WebAssemblyNetDebugProxyAppBuilderExtensions.UseWebAssemblyDebugging` is now `[Obsolete("ASPDEPR011")]`, and the `Microsoft.AspNetCore.Components.WebAssembly.DevServer` NuGet package is marked deprecated in favor of the new Blazor Gateway host, which ships as the `Microsoft.AspNetCore.Components.Gateway` package and a `Microsoft.AspNetCore.Components.Gateway.Cli` .NET tool ([dotnet/aspnetcore #67990](https://github.com/dotnet/aspnetcore/pull/67990)). The Gateway serves a standalone WebAssembly app with HTTPS redirection, HSTS, health-check endpoints, and telemetry configurable through a `Gateway` configuration section. The Blazor Web App templates no longer call `UseWebAssemblyDebugging`; Visual Studio, VS Code, and `dotnet run` attach the WebAssembly debugger automatically. Remove `app.UseWebAssemblyDebugging()` from your `Program.cs` if you added it manually ([dotnet/aspnetcore #67861](https://github.com/dotnet/aspnetcore/pull/67861), [dotnet/aspnetcore #67862](https://github.com/dotnet/aspnetcore/pull/67862)).
+- **`Microsoft.AspNetCore.Grpc.Swagger` package removed.** The OpenAPI-for-gRPC-transcoding package is deleted. Use ASP.NET Core's built-in OpenAPI document generation on the transcoded HTTP endpoints instead ([dotnet/aspnetcore #67919](https://github.com/dotnet/aspnetcore/pull/67919)).
+- **`WebAssemblyComponentsOptions` culture toggle is no longer public.** The public `WebAssemblyComponentsOptions.UseCultureFromServer` property and the `AddInteractiveWebAssemblyComponents(builder, Action<WebAssemblyComponentsOptions>?)` overload were removed. Culture persistence is now opt-in through the `Components:UseCultureFromServer` configuration value; the default fall-back is based on whether `AddLocalization()` is registered ([dotnet/aspnetcore #67367](https://github.com/dotnet/aspnetcore/pull/67367)).
+- **Null / missing session is handled uniformly.** The Blazor Endpoints session and TempData features used to throw in some code paths, silently return empty in others, and return `null` in a third. Now, if a session is expected but not configured under an active `HttpContext` (static SSR), the framework throws `InvalidOperationException`. When there is no `HttpContext` at all (interactive Server circuit / WebAssembly), the value gracefully yields `null` / empty and logs one warning. Untrusted or corrupt stored data is still swallowed. Static SSR pages that use `[SupplyParameterFromTempData]` or a session-storage TempData provider without registering session middleware will now fail fast instead of silently returning `null` ([dotnet/aspnetcore #67641](https://github.com/dotnet/aspnetcore/pull/67641)).
 
 ## Bug fixes
 
@@ -450,8 +399,16 @@ If your rules intentionally emit a scheme-relative or absolute URL, provide the 
 - **Client errors**
   - [Fix ClientErrorMapping 500 title to match RFC 9110](https://github.com/dotnet/aspnetcore/pull/65590)
   - [Avoid ArgumentException when Problem/ValidationProblem extensions conflict with defaults](https://github.com/dotnet/aspnetcore/pull/67690)
+- **Server and middleware hardening**
+  - [Reject connection-specific headers sent via HPACK/QPACK indexed names](https://github.com/dotnet/aspnetcore/pull/67584)
+  - [Reject Content-Length with a leading plus or minus sign](https://github.com/dotnet/aspnetcore/pull/67635)
+  - [Harden chunked request handling in the ASP.NET Core Module](https://github.com/dotnet/aspnetcore/pull/67512)
+  - [Cap the Zstandard request decompression window at 8 MB](https://github.com/dotnet/aspnetcore/pull/67688)
+  - [Close rejected HTTP/1.1 CONNECT requests](https://github.com/dotnet/aspnetcore/pull/67929)
+  - [Enforce MultipartHeadersLengthLimit across buffered reads](https://github.com/dotnet/aspnetcore/pull/67840)
+  - [Collapse scheme-relative leading slashes in Rewrite middleware targets](https://github.com/dotnet/aspnetcore/pull/66961)
+  - [Normalize backslashes in Rewrite middleware targets](https://github.com/dotnet/aspnetcore/pull/67928)
 - **Miscellaneous**
-  - [Fix url normalizer backslashes](https://github.com/dotnet/aspnetcore/pull/67928)
   - [Harden wildcard matching with empty segments inside](https://github.com/dotnet/aspnetcore/pull/67757)
   - [Use SearchValues/ContainsAny/span helpers in more places](https://github.com/dotnet/aspnetcore/pull/67018)
   - [Use more performant span APIs](https://github.com/dotnet/aspnetcore/pull/67150)
