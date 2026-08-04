@@ -7,6 +7,7 @@
 - [New Blazor analyzers](#new-blazor-analyzers)
 - [Blazor `Virtualize` no longer requires an `ItemComparer`](#blazor-virtualize-no-longer-requires-an-itemcomparer)
 - [`QuickGrid` supports `InitialItemIndex` and `ScrollToItemAsync`](#quickgrid-supports-initialitemindex-and-scrolltoitemasync)
+- [`wasm-tools` uses Emscripten 6](#wasm-tools-uses-emscripten-6)
 - [Razor accepts literal attributes for union-typed component parameters](#razor-accepts-literal-attributes-for-union-typed-component-parameters)
 - [Blazor SSR client-side form validation is enabled by default](#blazor-ssr-client-side-form-validation-is-enabled-by-default)
 - [Validation localization is built in](#validation-localization-is-built-in)
@@ -158,6 +159,20 @@ Because all five default to `Warning`, upgrading an existing app from Preview 6 
 Both APIs only take effect when `Virtualize="true"`. `ScrollToItemAsync` throws `InvalidOperationException` if virtualization is disabled or the grid hasn't rendered yet; the last call wins if a scroll is already in flight.
 
 `QuickGrid` also exposes experimental `AnchorMode` and `ItemComparer` parameters (marked `[Experimental("ASP0030")]`) so grids backed by an `ItemsProvider` can pin to the end or detect prepend/append across data loads, matching the equivalents on `Virtualize` ([dotnet/aspnetcore #67783](https://github.com/dotnet/aspnetcore/pull/67783)).
+
+## `wasm-tools` uses Emscripten 6
+
+The .NET 11 `wasm-tools` workload now uses Emscripten 6.0.3, upgraded from Emscripten 5.0.6 in Preview 6 ([dotnet/emsdk #1789](https://github.com/dotnet/emsdk/pull/1789), [dotnet/emsdk #1788](https://github.com/dotnet/emsdk/pull/1788)). `wasm-tools` uses Emscripten when a WebAssembly project is AOT-compiled or links native dependencies. Blazor WebAssembly projects that don't use AOT or native dependencies don't require changes.
+
+Projects with custom native build scripts or Emscripten arguments should review these changes:
+
+- On Windows, Emscripten tools such as `emcc` now use `.exe` launchers instead of `.bat` or `.ps1` files. Update scripts that explicitly call `emcc.bat` to call `emcc` or `emcc.exe`.
+- The minimum browser engine versions for Emscripten-generated code are now Chrome 85, Firefox 79, and Safari 14.1. These versions are older than the [browsers supported by Blazor](https://learn.microsoft.com/aspnet/core/blazor/supported-platforms), so this doesn't change the supported-browser baseline for Blazor apps.
+- `-sUSE_PTHREADS` and `-sMEMORY64` are deprecated. Custom arguments should use `-pthread` and `-m64` (or `--target=wasm64`) instead.
+- `-shared` now produces a real dynamic library by default because `FAKE_DYLIBS` is disabled. Custom native build pipelines that relied on fake dynamic libraries must pass `-sFAKE_DYLIBS=1` explicitly or update for Emscripten dynamic linking.
+- Emscripten 6.0.3 has a known issue where `-fcoverage-mapping` doesn't work because its LLVM and compiler-rt versions don't match.
+
+See the upstream release notes for [Emscripten 6.0.0](https://github.com/emscripten-core/emscripten/releases/tag/6.0.0), [6.0.1](https://github.com/emscripten-core/emscripten/releases/tag/6.0.1), [6.0.2](https://github.com/emscripten-core/emscripten/releases/tag/6.0.2), and [6.0.3](https://github.com/emscripten-core/emscripten/releases/tag/6.0.3) for the complete list.
 
 ## Razor accepts literal attributes for union-typed component parameters
 
