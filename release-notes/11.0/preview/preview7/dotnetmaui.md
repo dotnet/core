@@ -24,6 +24,13 @@ register a credential, and `Passkeys.AssertAsync` to authenticate with an
 existing credential
 ([dotnet/maui #36837](https://github.com/dotnet/maui/pull/36837)).
 
+`IsSupported` checks the platform version, but successful registration also
+requires platform trust configuration. Apple apps need Associated Domains,
+an Apple App Site Association file, and signing; Android apps need Digital
+Asset Links. See the
+[Passkeys setup guide](https://github.com/dotnet/maui/blob/release/11.0.1xx-preview7/src/Essentials/samples/README-Passkeys.md)
+for the platform prerequisites.
+
 The relying-party server supplies the standard WebAuthn options JSON and
 verifies the response JSON returned by MAUI. The API handles the platform
 ceremony, but does not perform server-side verification, attestation
@@ -146,9 +153,10 @@ for the complete set of changes.
 ## .NET for Android
 
 Preview 7 streamlines the Android development loop. `FastDeploy2` is now the
-default app-install fast deployment strategy and reduces the incremental path
-to three serial `adb` operations; the legacy strategy remains available as a
-fallback ([dotnet/android #11795](https://github.com/dotnet/android/pull/11795)).
+default app-install fast deployment strategy and can reduce the healthy warm
+incremental path to as few as three serial `adb` operations; the legacy
+strategy remains available as a fallback
+([dotnet/android #11795](https://github.com/dotnet/android/pull/11795)).
 CoreCLR Debug builds also keep typemaps stable across C#-only rebuilds that do
 not change Java-callable mappings, avoiding unnecessary native compilation,
 APK rebuilding, and signing

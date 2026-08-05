@@ -2,27 +2,17 @@
 
 These notes cover the highest-value changes that shipped in .NET 11 Preview 7:
 
-- [Libraries](./libraries.md)
-- [Runtime](./runtime.md)
-- [SDK](./sdk.md)
-- [Containers](./containers.md)
-
 ## Languages
 
-- [C#](./csharp.md)
 - [F#](./fsharp.md)
 
 ## Web and data
 
 - [.NET MAUI](./dotnetmaui.md)
-- [ASP.NET Core](./aspnetcore.md)
 - [EF Core](./efcore.md)
 
 ## Tooling
 
-- [MSBuild](./msbuild.md)
-- [NuGet](./nuget.md)
-- [Windows Forms](./winforms.md)
 - [WPF](./wpf.md)
 
 ## Release information
