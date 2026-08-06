@@ -6,7 +6,6 @@
 - [Restore runs safely under multithreaded MSBuild](#restore-runs-safely-under-multithreaded-msbuild)
 - [Pack reuses existing project evaluations](#pack-reuses-existing-project-evaluations)
 - [Performance improvements](#performance-improvements)
-- [Visual Studio](#visual-studio)
 - [Bug fixes](#bug-fixes)
 
 ## Restore records analyzer assets in project.assets.json
@@ -68,10 +67,6 @@ dotnet pack MySolution.sln
 ## Performance improvements
 
 - Restore no longer scans the full version list of the global packages folder or fallback folders when it can't find an exact package version there. That fallback scan was never meaningful for local folders — their version list is never used to satisfy a graph — so restore now only performs it against real package sources, reducing work on warm restores against a large global packages folder ([NuGet/NuGet.Client #7569](https://github.com/NuGet/NuGet.Client/pull/7569), [NuGet/Home #14963](https://github.com/NuGet/Home/issues/14963), [NuGet/Home #14974](https://github.com/NuGet/Home/issues/14974)).
-
-## Visual Studio
-
-- The Error List can now trigger the "Fix Vulnerabilities with GitHub Copilot" action directly on NuGet Audit warnings `NU1901`–`NU1904`, next to the existing entry point in the Solution Explorer info bar ([NuGet/NuGet.Client #7556](https://github.com/NuGet/NuGet.Client/pull/7556)).
 
 ## Bug fixes
 
