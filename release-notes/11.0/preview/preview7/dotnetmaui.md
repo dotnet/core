@@ -58,6 +58,9 @@ The feature is off by default in Preview 7. Enable it for Debug builds with:
 When the switch is off, MAUI continues to use the existing XAML Hot Reload
 path ([dotnet/maui #36832](https://github.com/dotnet/maui/pull/36832)).
 
+For supported edits and current limitations, see [XAML Hot
+Reload](https://learn.microsoft.com/dotnet/maui/xaml/hot-reload?view=net-maui-11.0).
+
 ## Shell route templates
 
 Shell routes now support path parameters inspired by ASP.NET Core and Blazor
@@ -73,6 +76,9 @@ await Shell.Current.GoToAsync("//products/product/seed-tomato");
 Values are delivered through the existing `QueryProperty` and
 `IQueryAttributable` mechanisms. Template routes currently require absolute
 navigation; relative navigation is not yet supported.
+
+See [Shell
+navigation](https://learn.microsoft.com/dotnet/maui/fundamentals/shell/navigation?view=net-maui-11.0).
 
 ## AOT-safe RelativeSource bindings
 
@@ -95,6 +101,9 @@ resolved at compile time continue to use the runtime binding path. An
 follow-up also removes a false-positive `MAUIG2045` warning for unsealed
 ancestor types
 ([dotnet/maui #36905](https://github.com/dotnet/maui/pull/36905)).
+
+Learn more about [compiled
+bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/compiled-bindings?view=net-maui-11.0).
 
 ## Third-party platform backends
 
@@ -127,6 +136,10 @@ The handler is the default in Preview 7. `TabbedRenderer` remains available in
 the Compatibility layer as a manual fallback, so apps with extensive
 `TabbedPage` customizations should test this preview.
 
+See the [`TabbedPage`
+documentation](https://learn.microsoft.com/dotnet/maui/user-interface/pages/tabbedpage?view=net-maui-11.0)
+for migration guidance.
+
 ## Platform-specific capabilities
 
 - **Status bar appearance** - `Window.StatusBarTheme` controls the icon
@@ -143,6 +156,11 @@ the Compatibility layer as a manual fallback, so apps with extensive
   activations to the running instance. This also enables `WebAuthenticator`
   callbacks in single-instance apps
   ([dotnet/maui #36640](https://github.com/dotnet/maui/pull/36640)).
+
+See the updated [media picker](https://learn.microsoft.com/dotnet/maui/platform-integration/device-media/picker?view=net-maui-11.0),
+[window](https://learn.microsoft.com/dotnet/maui/user-interface/controls/window?view=net-maui-11.0),
+and [app lifecycle](https://learn.microsoft.com/dotnet/maui/fundamentals/app-lifecycle?view=net-maui-11.0)
+documentation.
 
 Preview 7 also improves keyboard activation for `Border` on Windows
 ([dotnet/maui #35578](https://github.com/dotnet/maui/pull/35578)) and native
