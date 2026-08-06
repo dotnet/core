@@ -179,11 +179,20 @@ Several MTP reporter capabilities landed in Preview 7:
   the whole-run test count, but the per-module `Exit code: 8` diagnostic is
   preserved for troubleshooting
   ([dotnet/sdk #55362](https://github.com/dotnet/sdk/pull/55362)).
-- **`--no-artifact-post-processing`** — a new opt-out skips the merge step
-  that relaunches test applications to combine TRX and code coverage
-  artifacts, and post-processing failures (including Ctrl+C) can no longer
-  crash a completed run
+- **Automatic artifact consolidation** — for multi-module Microsoft.Testing.Platform
+  runs, `dotnet test` now consolidates compatible per-test-application TRX and
+  code-coverage artifacts before showing the final summary
+  ([dotnet/sdk #55453](https://github.com/dotnet/sdk/pull/55453)). If
+  post-processing is unavailable or fails, the original artifacts and test-run
+  exit code are preserved. Use `--no-artifact-post-processing` to keep one
+  artifact per test application; post-processing failures and cancellation
+  (including Ctrl+C) no longer crash or alter an already-completed run
   ([dotnet/sdk #55493](https://github.com/dotnet/sdk/pull/55493)).
+- **More useful failure summaries** — when a failing MTP test host emits very
+  large standard output, `dotnet test` now preserves the first 30 and last 10
+  lines and replaces the omitted middle with a truncation marker, so the
+  actual error isn't buried under hundreds of lines of command help
+  ([dotnet/sdk #55300](https://github.com/dotnet/sdk/pull/55300)).
 - **CLI polish** — `dotnet test` now exposes `-nologo`, `--no-logo`, and
   `--no-banner` for suppressing the header
   ([dotnet/sdk #55454](https://github.com/dotnet/sdk/pull/55454),
