@@ -89,9 +89,11 @@ resolved at compile time
 
 This avoids a string-based binding path that relies on reflection and could
 lose bound members during trimming in AOT Release builds. `Self`,
-`TemplatedParent`, unresolved ancestor sources, and unresolved `x:Reference`
-bindings continue to use the runtime binding path. A follow-up also removes a
-false-positive `MAUIG2045` warning for unsealed ancestor types
+`TemplatedParent`, and `x:Reference` bindings whose source type can't be
+resolved at compile time continue to use the runtime binding path. An
+`AncestorType` that can't be resolved causes XAML compilation to fail. A
+follow-up also removes a false-positive `MAUIG2045` warning for unsealed
+ancestor types
 ([dotnet/maui #36905](https://github.com/dotnet/maui/pull/36905)).
 
 ## Third-party platform backends
