@@ -5,6 +5,7 @@
 - [Restore records analyzer assets in project.assets.json](#restore-records-analyzer-assets-in-projectassetsjson)
 - [Restore runs safely under multithreaded MSBuild](#restore-runs-safely-under-multithreaded-msbuild)
 - [Pack reuses existing project evaluations](#pack-reuses-existing-project-evaluations)
+- [Pack warns about non-restricted package IDs](#pack-warns-about-non-restricted-package-ids)
 - [Performance improvements](#performance-improvements)
 - [Bug fixes](#bug-fixes)
 
@@ -63,6 +64,16 @@ Static-graph restore already spawns a fresh short-lived process per build and is
 ```console
 dotnet pack MySolution.sln
 ```
+
+## Pack warns about non-restricted package IDs
+
+nuget.org is phasing in stricter [package ID standards](https://github.com/NuGet/Announcements/issues/75): new package IDs must already be ASCII-only, and nuget.org will soon reject pushes of any non-conforming ID outright. Ahead of that enforcement, `dotnet pack` in SDK-style projects now warns **NU5052** when a package's ID doesn't start with a letter, digit, or underscore, or contains characters other than ASCII letters, digits, dots (`.`), dashes (`-`), and underscores (`_`), or has consecutive dots or dashes:
+
+```console
+warning NU5052: The package ID 'Contoso.Café' is invalid. Package IDs must start with a letter, digit, or underscore, and contain only ASCII letters, digits, dots (.), dashes (-), and underscores (_), with no consecutive dots or dashes.
+```
+
+The warning is advisory only — pack still produces the package — giving authors time to fix a noncompliant ID before nuget.org starts rejecting it ([NuGet/NuGet.Client #7487](https://github.com/NuGet/NuGet.Client/pull/7487), [NuGet/Home #14949](https://github.com/NuGet/Home/issues/14949), [NuGet/Announcements #75](https://github.com/NuGet/Announcements/issues/75)).
 
 ## Performance improvements
 
