@@ -11,20 +11,22 @@
 
 ## Opt in to .NET 11 visual styles
 
-Windows Forms in Preview 7 introduces an application- and control-level opt-in for a refreshed rendering pipeline. `Application.SetDefaultVisualStylesMode` and the new `Control.VisualStylesMode` property select between the classic renderer
-(`VisualStylesMode.Classic`), visual styles (also the legacy XP-VisualStyles!) turned off (`VisualStylesMode.Disabled`), and the modern renderer (`VisualStylesMode.Net11`). `VisualStylesMode.Latest` always resolves to the newest mode the runtime supports, and child controls default to `VisualStylesMode.Inherit` so the setting cascades. In this preview, `Net11` brings modernized rendering adapters for 
+Windows Forms in Preview 7 introduces an application- and control-level opt-in for a refreshed rendering pipeline. `Application.SetDefaultVisualStylesMode` and the new `Control.VisualStylesMode` property select between the classic renderer (`VisualStylesMode.Classic`), visual styles turned off entirely — including the legacy XP visual styles (`VisualStylesMode.Disabled`) — and the modern renderer (`VisualStylesMode.Net11`). `VisualStylesMode.Latest` always resolves to the newest mode the runtime supports, and child controls default to `VisualStylesMode.Inherit` so the setting cascades.
 
-* `Button` - The `FlatStyle` property defines the used render style for the context. Windows AccentColors are being taken into account when using some FlatStyles.
-* `CheckBox` - `FlatStyle` property defines render style for the context.
-* `RadioButton` - `FlatStyle` property defines render style for the context.
-* `GroupBox` - `FlatStyle` property defines render style for the context.
-* `TextBox` - The `Borderstyle` property in this case is controlling the rendering. `FixedSingle` - conventional Borderstyle. `Fixed3D` - rounded Rectangle. Note that TextBox' `Padding` is accessible in the Property Grid from .NET 11 on. The `Padding` settings, however, can only be applied for VisualStylesMode >= NET11.
-* `RichTextBox` - The `Borderstyle` property in this case is controlling the rendering. `FixedSingle` - conventional Borderstyle. `Fixed3D` - rounded Rectangle. Note that TextBox' `Padding` is accessible in the Property Grid from .NET 11 on. The `Padding` settings, however, can only be applied for VisualStylesMode >= NET11.
+In this preview, `Net11` brings modernized rendering adapters for:
 
-Note, that `Control.VisualStylesMode` is an ambient property, meaning [...]. In the case of `VisualStylesMode`, the property setting root source is _not_ the top-level container, but the static `Application.DefaultVisualStylesMode` property, which you set globally for the whole Application life cycle with `Application.SetDefaultVisualStylesMode`.
+* `Button` — the `FlatStyle` property defines the render style used for the context. Windows accent colors are taken into account for some `FlatStyle` values.
+* `CheckBox` — the `FlatStyle` property defines the render style for the context.
+* `RadioButton` — the `FlatStyle` property defines the render style for the context.
+* `GroupBox` — the `FlatStyle` property defines the render style for the context.
+* `TextBox` — the `BorderStyle` property controls the rendering here: `FixedSingle` yields the conventional border, `Fixed3D` yields a rounded rectangle. (`Fixed3D` is the value that historically requested the *decorated* border, so under `Net11` it maps to the modern decorated look rather than to the classic sunken 3D edge.) Note that the `Padding` property of `TextBox` is accessible in the Property Grid from .NET 11 on. The `Padding` setting, however, is only applied when the effective `VisualStylesMode` is `Net11` or newer.
+* `RichTextBox` — the `BorderStyle` property controls the rendering here as well: `FixedSingle` yields the conventional border, `Fixed3D` yields a rounded rectangle. As with `TextBox`, the `Padding` property of `RichTextBox` is accessible in the Property Grid from .NET 11 on, and is only applied when the effective `VisualStylesMode` is `Net11` or newer.
 
-Because switching modes can require different metrics or handle recreation, `Control.GetVisualStylesModeChangeImpact` reports what the runtime needs to do, and `EffectiveVisualStylesMode` returns the resolved value
-after inheritance.
+Note that `Control.VisualStylesMode` is an ambient property. An ambient property is one whose value a control does not necessarily hold itself: as long as it has not been assigned an explicit value, the control asks its parent for the value, and the parent asks *its* parent, until some ancestor supplies a concrete setting. `BackColor`, `ForeColor`, `Font`, and `Cursor` are the classic examples — set the `Font` on a `Form` and every child that has not been given its own `Font` renders with it. The "unset" marker for `VisualStylesMode` is `VisualStylesMode.Inherit`, which is why that is the default for child controls: it means "I have no opinion, ask upwards."
+
+In the case of `VisualStylesMode`, however, the root source of the property setting is *not* the top-level container. It is the static `Application.DefaultVisualStylesMode` property, which you set globally for the whole application lifetime with `Application.SetDefaultVisualStylesMode`. So the resolution walks up the parent chain as usual, but when it runs out of parents — rather than falling back to a hard-coded control default — it falls through to the application-wide setting. This matters in practice for controls that are not (yet) parented, and for forms shown from a library that has no access to your form hierarchy: they still pick up the application's mode.
+
+Because switching modes can require different metrics or handle recreation, `Control.GetVisualStylesModeChangeImpact` reports what the runtime needs to do, and `EffectiveVisualStylesMode` returns the resolved value after inheritance.
 
 ```csharp
 using System.Windows.Forms;
@@ -52,7 +54,7 @@ metrics, and text scale factor as a single snapshot, and the new
 `Application.SystemVisualSettingsChanged` event fires whenever one of those
 categories changes. `SystemVisualSettingsChangedEventArgs.Changed` is a
 `SystemVisualSettingsCategories` flags value that indicates exactly which
-categories moved, so apps can update only the affected UI instead of rebuilding
+categories changed, so apps can update only the affected UI instead of rebuilding
 theme resources on every notification. Controls can also override
 `OnSystemVisualSettingsChanged` to react locally
 ([dotnet/winforms #14809](https://github.com/dotnet/winforms/pull/14809)).
@@ -76,9 +78,9 @@ Application.SystemVisualSettingsChanged += (sender, e) =>
 };
 ```
 
-## Avoid "White dak mode flashes" - Deferred form revealing
+## Avoid white dark-mode flashes — deferred form revealing
 
-`FormRevealMode` gives applications control over when a form becomes visible during startup. `FormRevealMode.Deferred` keeps a form conceiled until its initial layout and theming settle, avoiding the brief flash of an 'unstyled' window that can occur when dark mode or the new visual styles apply after the form is first shown. `FormRevealMode.Classic` preserves the existing show-immediately behavior, and `FormRevealMode.Inherit` follows the value set with `Application.SetDefaultFormRevealMode`.
+`FormRevealMode` gives applications control over when a form becomes visible during startup. `FormRevealMode.Deferred` keeps a form concealed until its initial layout and theming settle, avoiding the brief flash of an unstyled window that can occur when dark mode or the new visual styles are applied after the form is first shown. `FormRevealMode.Classic` preserves the existing show-immediately behavior, and `FormRevealMode.Inherit` follows the value set with `Application.SetDefaultFormRevealMode`.
 
 `Application.IsFormRevealDeferred` reports the resolved state, and `Form.FormRevealModeChanged` fires when the value changes
 ([dotnet/winforms #14809](https://github.com/dotnet/winforms/pull/14809)).
