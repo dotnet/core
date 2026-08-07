@@ -9,8 +9,9 @@
 - [`QuickGrid` supports `InitialItemIndex` and `ScrollToItemAsync`](#quickgrid-supports-initialitemindex-and-scrolltoitemasync)
 - [`wasm-tools` uses Emscripten 6](#wasm-tools-uses-emscripten-6)
 - [Razor accepts literal attributes for union-typed component parameters](#razor-accepts-literal-attributes-for-union-typed-component-parameters)
-- [Blazor SSR client-side form validation is enabled by default](#blazor-ssr-client-side-form-validation-is-enabled-by-default)
+- [Blazor SSR client-side form validation improvements](#blazor-ssr-client-side-form-validation-improvements)
 - [Validation localization is built in](#validation-localization-is-built-in)
+- [Validation attributes are no longer experimental](#validation-attributes-are-no-longer-experimental)
 - [SignalR .NET client supports auth refresh after redirects](#signalr-net-client-supports-auth-refresh-after-redirects)
 - [Consistent authorization metadata across the stack](#consistent-authorization-metadata-across-the-stack)
 - [OpenAPI Server-Sent Events in OpenAPI 3.2](#openapi-server-sent-events-in-openapi-32)
@@ -25,7 +26,7 @@ ASP.NET Core updates in .NET 11:
 
 ## Auto pause Blazor circuits on inactivity
 
-Interactive Server circuits can now pause themselves automatically when the browser tab is hidden, releasing server resources until the user comes back ([dotnet/aspnetcore #67098](https://github.com/dotnet/aspnetcore/pull/67098)). Preview 6 added [`Circuit.RequestCircuitPauseAsync`](https://github.com/dotnet/aspnetcore/issues/64886) so the server could pause a circuit on demand; Preview 7 adds a matching client-driven path that fires after a configurable inactivity delay while a page is hidden.
+Interactive Server circuits can now pause themselves automatically when the browser tab is hidden, releasing server resources until the user comes back ([dotnet/aspnetcore #67098](https://github.com/dotnet/aspnetcore/pull/67098)). Preview 6 added [`Circuit.RequestCircuitPauseAsync`](https://github.com/dotnet/aspnetcore/issues/64886) so the server could pause a circuit on demand. Preview 7 adds an opt-in package that detects when to request a pause after a configurable inactivity delay while a page is hidden.
 
 To enable support for auto pausing circuits, add the `Microsoft.AspNetCore.Components.Server.AutoPause` package and configure it for the app via `AddAutoPause` on `BrowserOptions`:
 
@@ -46,7 +47,7 @@ app.MapRazorComponents<App>()
     });
 ```
 
-Auto-pause defers itself when a pause would lose data or interrupt work in progress. The shipped checks are a text input or `contenteditable` element whose value differs from its default (including inside shadow DOM and same-origin iframes), an `<audio>` or `<video>` element that is playing unmuted, an open [Picture-in-Picture](https://developer.mozilla.org/docs/Web/API/Picture-in-Picture_API) window, a held [Web Lock](https://developer.mozilla.org/docs/Web/API/Web_Locks_API), and any in-flight circuit activity such as a running `IJSRuntime` call, a `DotNetStreamReference`/`JSStreamReference` transfer, or a queued render.
+Auto-pause is deferred by default in some situations when a pause could cause data loss or interrupt work in progress. These situations include a text input or `contenteditable` element whose value differs from its default (including inside shadow DOM and same-origin iframes), an `<audio>` or `<video>` element that is playing unmuted, an open [Picture-in-Picture](https://developer.mozilla.org/docs/Web/API/Picture-in-Picture_API) window, a held [Web Lock](https://developer.mozilla.org/docs/Web/API/Web_Locks_API), and any in-flight circuit activity such as a running `IJSRuntime` call, a `DotNetStreamReference`/`JSStreamReference` transfer, or a queued render.
 
 Apps can add their own deferral with a client-side circuit handler that implements `onCircuitPausing`. Blazor awaits every registered handler before it pauses, for both auto-pause and server-initiated pauses. Register it from a [JS initializer](https://learn.microsoft.com/aspnet/core/blazor/fundamentals/startup#javascript-initializers):
 
@@ -188,27 +189,16 @@ In Preview 6 the Razor compiler couldn't convert a literal attribute value to th
 <Toast Message="Saved 3 items." />
 ```
 
-## Blazor SSR client-side form validation is enabled by default
+## Blazor SSR client-side form validation improvements
 
-Preview 5 added client-side validation for Blazor static SSR forms without requiring an interactive render mode. Preview 7 keeps that feature but reworks the implementation and the API shape after review feedback ([dotnet/aspnetcore #67324](https://github.com/dotnet/aspnetcore/pull/67324), [dotnet/aspnetcore #67855](https://github.com/dotnet/aspnetcore/pull/67855)):
+Preview 5 added client-side validation for Blazor static SSR forms without requiring an interactive render mode. Preview 7 improves the behavior to align more closely with interactive Blazor validation ([dotnet/aspnetcore #67324](https://github.com/dotnet/aspnetcore/pull/67324), [dotnet/aspnetcore #67855](https://github.com/dotnet/aspnetcore/pull/67855)):
 
-- Rules are now delivered through a single inert per-form carrier element instead of MVC-style `data-val-*` attributes on every input.
-- Client-side validation is enabled by default. Set `DataAnnotationsValidator.DisableClientValidation="true"` for one form, or set `RazorComponentsServiceOptions.DisableClientValidation` to disable rule emission for the app.
-
-```razor
-<EditForm Model="Model" OnValidSubmit="Submit" FormName="reservation">
-    <DataAnnotationsValidator />
-
-    <InputText @bind-Value="Model.Email" />
-    <ValidationMessage For="() => Model.Email" />
-
-    <button type="submit">Book</button>
-</EditForm>
-```
+- Client validation applies the same CSS classes used by interactive forms, including `valid`, `invalid`, and `modified`.
+- Client validation rules are emitted only for fields that server-side validation also validates.
 
 ## Validation localization is built in
 
-`Microsoft.Extensions.Validation` now localizes validation messages and display names without a separate package. The preview-only `Microsoft.Extensions.Validation.Localization` package and its `AddValidationLocalization<TResource>()` / `IValidationLocalizer` API are removed; localization now activates automatically as soon as an `IStringLocalizerFactory` is registered, and the lookup is emitted by the validation source generator into your assembly ([dotnet/aspnetcore #68005](https://github.com/dotnet/aspnetcore/pull/68005)).
+`Microsoft.Extensions.Validation` now localizes validation messages and display names without a separate package. The preview-only `Microsoft.Extensions.Validation.Localization` package and its `AddValidationLocalization<TResource>()` / `IValidationLocalizer` API are removed; localization now activates automatically as soon as an `IStringLocalizerFactory` is registered, and the lookup is emitted by the validation source generator into your assembly ([dotnet/aspnetcore #67987](https://github.com/dotnet/aspnetcore/pull/67987)).
 
 ```csharp
 builder.Services.AddLocalization();
@@ -253,7 +243,9 @@ public sealed class DivisibleByAttribute : ValidationAttribute, IValidationMessa
 
 The same localization rules apply to validation for minimal APIs and Blazor, so a message localizes identically wherever the model is used.
 
-`Microsoft.Extensions.Validation` also drops its `[Experimental("ASP0029")]` markers in Preview 7 ([dotnet/aspnetcore #67634](https://github.com/dotnet/aspnetcore/pull/67634)). If you suppressed `ASP0029` to use `[ValidatableType]` or `AddValidation()`, you can remove the suppression.
+## Validation attributes are no longer experimental
+
+`ValidatableTypeAttribute` and `SkipValidationAttribute` are no longer marked experimental ([dotnet/aspnetcore #67634](https://github.com/dotnet/aspnetcore/pull/67634)). If you suppressed `ASP0029` to use either attribute, you can remove the suppression.
 
 ## SignalR .NET client supports auth refresh after redirects
 
@@ -354,7 +346,7 @@ Kestrel returns the binding from `SslStream.TransportContext.GetChannelBinding`.
 - **`Microsoft.Extensions.Validation`: abstract `Validatable*Info` moved to source-generation.** `ValidatableTypeInfo`, `ValidatableParameterInfo`, and `ValidatablePropertyInfo` are no longer part of the public API. The validation source generator now emits them as `file` classes in your assembly, and `IValidatableInfoResolver` returns the interface types (`IValidatableTypeInfo`, etc.). Apps that use `[ValidatableType]` and `builder.Services.AddValidation()` are unaffected. Code that constructed these types directly must move to implementing the interfaces or rely on the generator ([dotnet/aspnetcore #67956](https://github.com/dotnet/aspnetcore/pull/67956)). Related: `System.ComponentModel.DataAnnotations.ValidationContext` was removed from the `Microsoft.Extensions.Validation` public API surface ([dotnet/aspnetcore #67549](https://github.com/dotnet/aspnetcore/pull/67549)).
 - **`WebApplicationFactory.ConfigureHostApplicationBuilder` renamed to `ConfigureWebApplicationBuilder`.** The protected virtual method on `WebApplicationFactory<TEntryPoint>` was renamed to avoid confusion with `Host.CreateApplicationBuilder`. Rename any override in your test fixtures ([dotnet/aspnetcore #67917](https://github.com/dotnet/aspnetcore/pull/67917)).
 - **`UseWebAssemblyDebugging` obsolete, DevServer package deprecated.** `WebAssemblyNetDebugProxyAppBuilderExtensions.UseWebAssemblyDebugging` is now `[Obsolete("ASPDEPR011")]`, and the `Microsoft.AspNetCore.Components.WebAssembly.DevServer` NuGet package is marked deprecated in favor of the new Blazor Gateway host, which ships as the `Microsoft.AspNetCore.Components.Gateway` package and a `Microsoft.AspNetCore.Components.Gateway.Cli` .NET tool ([dotnet/aspnetcore #67990](https://github.com/dotnet/aspnetcore/pull/67990)). The Gateway serves a standalone WebAssembly app with HTTPS redirection, HSTS, health-check endpoints, and telemetry configurable through a `Gateway` configuration section. The Blazor Web App templates no longer call `UseWebAssemblyDebugging`; Visual Studio and VS Code attach the WebAssembly debugger automatically. Remove `app.UseWebAssemblyDebugging()` from your `Program.cs` if you added it manually ([dotnet/aspnetcore #67861](https://github.com/dotnet/aspnetcore/pull/67861), [dotnet/aspnetcore #67862](https://github.com/dotnet/aspnetcore/pull/67862)).
-- **`Microsoft.AspNetCore.Grpc.Swagger` package removed.** The OpenAPI-for-gRPC-transcoding package is deleted. Use ASP.NET Core's built-in OpenAPI document generation on the transcoded HTTP endpoints instead ([dotnet/aspnetcore #67919](https://github.com/dotnet/aspnetcore/pull/67919)).
+- **`Microsoft.AspNetCore.Grpc.Swagger` package removed.** The package, which integrated gRPC JSON transcoding with Swashbuckle, is deleted ([dotnet/aspnetcore #67919](https://github.com/dotnet/aspnetcore/pull/67919)).
 - **`WebAssemblyComponentsOptions` culture toggle is no longer public.** The public `WebAssemblyComponentsOptions.UseCultureFromServer` property and the `AddInteractiveWebAssemblyComponents(builder, Action<WebAssemblyComponentsOptions>?)` overload were removed. Culture persistence is now opt-in through the `Components:UseCultureFromServer` configuration value; the default fall-back is based on whether `AddLocalization()` is registered ([dotnet/aspnetcore #67367](https://github.com/dotnet/aspnetcore/pull/67367)).
 - **Null / missing session is handled uniformly.** The Blazor Endpoints session and TempData features used to throw in some code paths, silently return empty in others, and return `null` in a third. Now, if a session is expected but not configured under an active `HttpContext` (static SSR), the framework throws `InvalidOperationException`. When there is no `HttpContext` at all (interactive Server circuit / WebAssembly), the value gracefully yields `null` / empty and logs one warning. Untrusted or corrupt stored data is still swallowed. Static SSR pages that use `[SupplyParameterFromTempData]` or a session-storage TempData provider without registering session middleware will now fail fast instead of silently returning `null` ([dotnet/aspnetcore #67641](https://github.com/dotnet/aspnetcore/pull/67641)).
 
