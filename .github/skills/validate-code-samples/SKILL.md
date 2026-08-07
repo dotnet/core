@@ -1,7 +1,7 @@
 ---
 name: validate-code-samples
-description: Verify release notes claims by building and running them against the actual .NET build for the milestone. Covers acquiring a scoped SDK from ci.dot.net, exercising every documented API and code sample, and catching the errors that static API verification cannot see - non-existent JavaScript APIs, inverted defaults, and runtime failures. USE FOR - validating a drafted component's release notes before the PR goes up, checking that documented samples compile and run, confirming a feature is actually reachable in the shipped build. DO NOT USE FOR - generating the API diff (use api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
-compatibility: Requires a build-metadata.json for the milestone (produced by `release-notes generate build-metadata`) and network access to ci.dot.net. Pairs with api-diff-validation, which covers the static half of the same problem.
+description: Verify release notes claims by building and running them against the actual .NET build for the milestone. Covers acquiring a scoped SDK from the latest builds table linked from the dotnet/sdk repository, exercising every documented API and code sample, and catching the errors that static API verification cannot see - non-existent JavaScript APIs, inverted defaults, and runtime failures. USE FOR - validating a drafted component's release notes before the PR goes up, checking that documented samples compile and run, confirming a feature is actually reachable in the shipped build. DO NOT USE FOR - generating the API diff (use api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
+compatibility: Requires network access to GitHub and the public .NET build artifacts. Uses build-metadata.json for the milestone when available to confirm build provenance. Pairs with api-diff-validation, which covers the static half of the same problem.
 ---
 
 # Validate Code Samples
@@ -16,26 +16,19 @@ value is, and it cannot tell you whether a documented sequence of calls actually
 
 ## Acquiring a build
 
-Do not test against whatever SDK happens to be on the machine. Test against the milestone build.
+Do not test against whatever SDK happens to be on the machine. Select an appropriate build for the
+milestone from the build listings linked by the .NET SDK repository.
 
-### Preferred: derive the URL from `build-metadata.json`
+### Select a build from the .NET SDK repository
 
-`release-notes generate build-metadata` already emits an `sdk_url` with a `{platform}` placeholder,
-so no scraping is needed. Substitute the platform and download:
+Start from the [`dotnet/sdk` Installing the SDK
+section](https://github.com/dotnet/sdk#installing-the-sdk) and follow its **.NET SDK latest builds
+table** link. Select the column that matches the milestone's SDK feature band or release branch,
+then download the archive for the validation machine's platform. Preview notes should use the
+matching preview column, not the build from `main`.
 
-```text
-https://ci.dot.net/public/Sdk/{sdk_version}/dotnet-sdk-{sdk_version}-win-x64.zip
-https://ci.dot.net/public/Sdk/{sdk_version}/dotnet-sdk-{sdk_version}-linux-x64.tar.gz
-```
-
-### Other sources
-
-- **<https://github.com/dotnet/dotnet/blob/main/docs/builds-table.md>** — the latest-build table in
-  the VMR repo. Use it when there is no `build-metadata.json` yet, or to sanity-check that the
-  version you derived is really the current build. It also documents the `dotnet11` NuGet feed
-  needed for runtime packs in self-contained scenarios.
-- **<https://release.dot.net>** — the human-facing list of builds the team installs from. Fine for a
-  person, but prefer a URL derived from `build-metadata.json` for anything scripted.
+The builds table also documents the public NuGet feed needed when development builds must acquire
+runtime packs or other assets that aren't included in the SDK archive.
 
 ### Confirm the build matches the notes
 
@@ -55,7 +48,8 @@ https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-win-x64.json
 
 The `commit` is the **VMR commit** the build came from. Check it against the head ref used to
 generate `changes.json`. If they disagree, you are validating a different build than the one you
-documented, and any "the API is missing" conclusion is unreliable.
+documented, and any "the API is missing" conclusion is unreliable. When `build-metadata.json` is
+available, also compare its SDK version and VMR ref with the selected build before testing.
 
 ### Install it scoped, not machine-wide
 
