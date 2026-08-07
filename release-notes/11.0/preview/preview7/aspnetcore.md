@@ -193,8 +193,8 @@ In Preview 6 the Razor compiler couldn't convert a literal attribute value to th
 
 Preview 5 added client-side validation for Blazor static SSR forms without requiring an interactive render mode. Preview 7 improves the behavior to align more closely with interactive Blazor validation ([dotnet/aspnetcore #67324](https://github.com/dotnet/aspnetcore/pull/67324), [dotnet/aspnetcore #67855](https://github.com/dotnet/aspnetcore/pull/67855)):
 
-- Client validation applies the same CSS classes used by interactive forms, including `valid`, `invalid`, and `modified`.
-- Client validation rules are emitted only for fields that server-side validation also validates.
+- The client-side engine applies the same CSS classes as interactive Blazor validation: `valid` and `invalid` on inputs, with `modified` once the user edits a field, `validation-message` on message elements, and `validation-summary-errors` or `validation-summary-valid` on the summary.
+- Client-side rules are emitted only for fields that server-side validation also validates. Server-side validation is authoritative, so a field that the server ignores, such as a nested property in an app that hasn't called `AddValidation`, no longer gets a client-side rule that suggests otherwise.
 
 ## Validation localization is built in
 
