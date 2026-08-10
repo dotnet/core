@@ -126,9 +126,16 @@ DnsResult<SrvRecord> result = await Dns.ResolveSrvAsync("_ldap._tcp.example.com"
 
 if (result.ResponseCode == DnsResponseCode.NoError)
 {
-    foreach (SrvRecord record in result.Records)
+    if (result.Records.Count == 0)
     {
-        Console.WriteLine($"{record.Target}:{record.Port} pri={record.Priority} wt={record.Weight}");
+        Console.WriteLine("No SRV records returned.");
+    }
+    else
+    {
+        foreach (SrvRecord record in result.Records)
+        {
+            Console.WriteLine($"{record.Target}:{record.Port} pri={record.Priority} wt={record.Weight}");
+        }
     }
 }
 ```
