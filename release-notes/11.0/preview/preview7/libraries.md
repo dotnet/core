@@ -208,21 +208,21 @@ int written = value.AsSpan().ToUpperOrdinal(buffer);
 
 ## Polymorphism inference for closed type hierarchies in System.Text.Json
 
-`System.Text.Json` can now infer polymorphic serialization for closed type hierarchies without an explicit `[JsonDerivedType]` attribute on the base type ([dotnet/runtime #130808](https://github.com/dotnet/runtime/pull/130808)). Set the new `JsonSerializerOptions.InferClosedTypePolymorphism` property (or the equivalent source-generator option) and the serializer discovers the derived types of a `sealed`, `abstract`, or otherwise closed hierarchy — including generic specializations — and assigns deterministic discriminators. Explicit `[JsonDerivedType]` registrations still take precedence, and the source generator reports diagnostics for hierarchies it cannot infer safely. This pairs naturally with the Preview 6 support for C# union serialization, which also relies on closed hierarchies.
+`System.Text.Json` can now infer polymorphic serialization for C# `closed` type hierarchies without an explicit `[JsonDerivedType]` attribute on the base type ([dotnet/runtime #130808](https://github.com/dotnet/runtime/pull/130808)). Set the new `JsonSerializerOptions.InferClosedTypePolymorphism` property (or the equivalent source-generator option) and the serializer discovers the derived types of a closed hierarchy — including generic specializations — and assigns deterministic discriminators. Explicit `[JsonDerivedType]` registrations still take precedence, and the source generator reports diagnostics for hierarchies it cannot infer safely. This pairs naturally with the Preview 6 support for C# union serialization, which also relies on closed hierarchies.
 
 ```csharp
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
-public abstract record Shape;
-public sealed record Circle(double Radius) : Shape;
-public sealed record Square(double Side) : Shape;
-
+// Requires C# preview (`<LangVersion>preview</LangVersion>`) for `closed`.
 var options = new JsonSerializerOptions { InferClosedTypePolymorphism = true };
 
 Shape shape = new Circle(1.5);
 string json = JsonSerializer.Serialize(shape, options);
-// {"$type":"Circle","Radius":1.5}
+Console.WriteLine(json); // {"$type":"Circle","Radius":1.5}
+
+public closed record Shape;
+public sealed record Circle(double Radius) : Shape;
+public sealed record Square(double Side) : Shape;
 ```
 
 ## Asynchronous ChangeToken.OnChange
