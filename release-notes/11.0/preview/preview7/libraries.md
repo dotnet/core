@@ -87,11 +87,12 @@ using HttpResponseMessage response = await client.SendAsync(request);
 
 ## Configurable HTTP connection eviction
 
-`SocketsHttpHandler` gains a `ShouldEvictConnection` callback that lets an application decide, per pooled connection, whether that connection should be retired instead of reused ([dotnet/runtime #130476](https://github.com/dotnet/runtime/pull/130476)). The callback receives a `SocketsHttpConnectionEvictionContext` that exposes the pooled connection's `Age`, `ConnectionId`, `DnsEndPoint`, `RemoteEndPoint`, and negotiated `HttpVersion`, and returns a `Task<bool>`. Related APIs expose a stable `ConnectionId` on `SocketsHttpConnectionContext`, `HttpConnectionContext`, and `HttpResponseMessage`, and `HttpRequestMessage` gains a settable `ConnectionId` so callers can pin a request to a specific connection. A follow-up avoids allocations during eviction evaluation ([dotnet/runtime #131142](https://github.com/dotnet/runtime/pull/131142)).
+`SocketsHttpHandler` gains the experimental `ShouldEvictConnection` callback, which lets an application decide during pooled-connection maintenance whether a connection should be retired ([dotnet/runtime #130476](https://github.com/dotnet/runtime/pull/130476)). The callback receives a `SocketsHttpConnectionEvictionContext` that exposes the pooled connection's `Age`, `ConnectionId`, `DnsEndPoint`, `RemoteEndPoint`, and negotiated `HttpVersion`, and returns a `Task<bool>`. Related APIs expose a stable `ConnectionId` on `SocketsHttpConnectionContext` and `SocketsHttpPlaintextStreamFilterContext`. `SocketsHttpHandler` stamps `HttpRequestMessage.ConnectionId` after sending a request, allowing callers to correlate it with the connection that served it. A follow-up avoids allocations during eviction evaluation ([dotnet/runtime #131142](https://github.com/dotnet/runtime/pull/131142)).
 
 ```csharp
 using System.Net.Http;
 
+#pragma warning disable SYSLIB5008 // ShouldEvictConnection is experimental.
 var handler = new SocketsHttpHandler
 {
     ShouldEvictConnection = (ctx, cancellationToken) =>
@@ -101,6 +102,7 @@ var handler = new SocketsHttpHandler
         return Task.FromResult(retire);
     },
 };
+#pragma warning restore SYSLIB5008
 
 using var client = new HttpClient(handler);
 ```
