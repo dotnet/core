@@ -291,8 +291,11 @@ handle.Resume(); // sends SIGCONT on macOS
 `AssemblyLoadContext.SetAssemblyLocationOverride` is a new static, set-once callback that overrides the value returned by `Assembly.Location` on CoreCLR, Mono, and NativeAOT ([dotnet/runtime #129773](https://github.com/dotnet/runtime/pull/129773)). Thank you [@cdmazom](https://github.com/cdmazom)! The callback receives the assembly and the location the runtime would otherwise report, and returns the location to use instead. Hosts that stage assemblies in temporary directories or bundle them (single-file publishing, embedded resources, virtual file systems) can now report a meaningful location to code that inspects `Assembly.Location` for diagnostics or resource-loading purposes. The set-once semantics prevent later components from silently redirecting an in-flight override.
 
 ```csharp
+using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
+
+string realInstallDirectory = @"C:\app";
 
 AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
     assembly.GetName().Name is { } name
