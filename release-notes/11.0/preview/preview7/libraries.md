@@ -7,9 +7,7 @@
 - [Generic Complex\<T\>](#generic-complext)
 - [HTTP request compression](#http-request-compression)
 - [Configurable HTTP connection eviction](#configurable-http-connection-eviction)
-- [Other HTTP and proxy changes](#other-http-and-proxy-changes)
 - [DNS record resolution APIs](#dns-record-resolution-apis)
-- [SHA3 and SM4 hardware intrinsics](#sha3-and-sm4-hardware-intrinsics)
 - [ZIP archive password support](#zip-archive-password-support)
 - [Ordinal casing APIs](#ordinal-casing-apis)
 - [Polymorphism inference for closed type hierarchies in System.Text.Json](#polymorphism-inference-for-closed-type-hierarchies-in-systemtextjson)
@@ -20,7 +18,7 @@
 - [Reduced contention in System.IO.Pipelines](#reduced-contention-in-systemiopipelines)
 - [Other API additions](#other-api-additions)
 - [Breaking changes](#breaking-changes)
-- [Bug fixes](#bug-fixes)
+- [Bug fixes and performance enhancements](#bug-fixes-and-performance-enhancements)
 - [Community contributors](#community-contributors)
 
 .NET Libraries updates in .NET 11:
@@ -29,7 +27,7 @@
 
 ## IEEE 754 decimal floating-point types
 
-`System.Numerics` gains three IEEE 754-2019 decimal floating-point types — `Decimal32`, `Decimal64`, and `Decimal128` — with 7, 16, and 34 digits of decimal precision, respectively. Unlike `System.Decimal` (a 96-bit fixed-precision type), these use the IEEE binary integer decimal (BID) encoding standardized for interchange, and they participate fully in generic math through `IDecimalFloatingPointIeee754<TSelf>`. Preview 7 completes the API surface across a series of PRs by [@RaymondHuy](https://github.com/RaymondHuy) and [@tannergooding](https://github.com/tannergooding): the layout and parsing types ([dotnet/runtime #100729](https://github.com/dotnet/runtime/pull/100729)), arithmetic and comparison operators ([dotnet/runtime #130508](https://github.com/dotnet/runtime/pull/130508)), conversions and `INumberBase<TSelf>` ([dotnet/runtime #130807](https://github.com/dotnet/runtime/pull/130807)), `INumber` and `IFloatingPoint` ([dotnet/runtime #130890](https://github.com/dotnet/runtime/pull/130890)), `Sqrt`/`FusedMultiplyAdd`/`Quantize` and the rest of the exact operations ([dotnet/runtime #130956](https://github.com/dotnet/runtime/pull/130956)), the transcendentals ([dotnet/runtime #131019](https://github.com/dotnet/runtime/pull/131019)), a performance pass ([dotnet/runtime #130957](https://github.com/dotnet/runtime/pull/130957)), and a final alignment with the approved API — `Lerp`, `ReciprocalEstimate`, `EncodeBinary`/`DecodeBinary`, and densely packed decimal `EncodeDecimal`/`DecodeDecimal` — in [dotnet/runtime #131098](https://github.com/dotnet/runtime/pull/131098). Non-trivial arithmetic is ported from the Intel Decimal Floating-Point Math Library reference implementation and validated bit-exact against Intel's own test vectors.
+`System.Numerics` gains three IEEE 754-2019 decimal floating-point types — `Decimal32`, `Decimal64`, and `Decimal128` — with 7, 16, and 34 digits of decimal precision, respectively. Unlike `System.Decimal` (a 96-bit fixed-precision type), these typically use the IEEE binary integer decimal (BID) encoding standardized for interchange, subject to the underlying ABI, and they participate fully in generic math through `IDecimalFloatingPointIeee754<TSelf>`. Preview 7 completes the API surface across a series of PRs by [@RaymondHuy](https://github.com/RaymondHuy) and [@tannergooding](https://github.com/tannergooding): the layout and parsing types ([dotnet/runtime #100729](https://github.com/dotnet/runtime/pull/100729)), arithmetic and comparison operators ([dotnet/runtime #130508](https://github.com/dotnet/runtime/pull/130508)), conversions and `INumberBase<TSelf>` ([dotnet/runtime #130807](https://github.com/dotnet/runtime/pull/130807)), `INumber` and `IFloatingPoint` ([dotnet/runtime #130890](https://github.com/dotnet/runtime/pull/130890)), `Sqrt`/`FusedMultiplyAdd`/`Quantize` and the rest of the exact operations ([dotnet/runtime #130956](https://github.com/dotnet/runtime/pull/130956)), the transcendentals ([dotnet/runtime #131019](https://github.com/dotnet/runtime/pull/131019)), a performance pass ([dotnet/runtime #130957](https://github.com/dotnet/runtime/pull/130957)), and a final alignment with the approved API — `Lerp`, `ReciprocalEstimate`, `EncodeBinary`/`DecodeBinary`, and densely packed decimal `EncodeDecimal`/`DecodeDecimal` — in [dotnet/runtime #131098](https://github.com/dotnet/runtime/pull/131098). Basic arithmetic is ported from the Intel Decimal Floating-Point Math Library reference implementation and validated bit-exact against Intel's own test vectors. Higher-level functions such as transcendentals are not exact in .NET 11 but are planned to be revised in a future version.
 
 ```csharp
 using System.Numerics;
@@ -38,7 +36,7 @@ using System.Numerics;
 Decimal64 price = Decimal64.Parse("19.95");
 Decimal64 taxRate = Decimal64.Parse("0.0875");
 
-// Generic math works via IFloatingPoint<TSelf>.
+// Generic math works via IFloatingPoint<T>.
 static T RoundToCents<T>(T value) where T : IFloatingPoint<T> =>
     T.Round(value, digits: 2, MidpointRounding.ToEven);
 
@@ -52,7 +50,7 @@ Decimal128 y = Decimal128.Sqrt(Decimal128.Parse("2")); // 1.41421356237309504880
 
 ## Generic Complex\<T\>
 
-`System.Numerics.Complex<T>` is a new generic complex number type that mirrors the full public surface of the existing `Complex` struct across any `T : IFloatingPointIeee754<T>, IMinMaxValue<T>` — so complex arithmetic can now use `float`, `Half`, `BFloat16`, or `NFloat` instead of only `double` ([dotnet/runtime #130414](https://github.com/dotnet/runtime/pull/130414)). All arithmetic operators (including `T × Complex<T>` and `Complex<T> × T` overloads), the `Abs`/`Conjugate`/`Reciprocal`/`Log`/`Exp`/`Sqrt`/`Pow` math surface, the trigonometric and hyperbolic families, parsing, formatting, and `INumberBase<Complex<T>>` are all implemented. The non-generic `Complex` now delegates most of its implementation to `Complex<double>`, so both types stay in sync — including the C23 Annex G conformance updates for signed zeros, infinities, and NaNs added in [dotnet/runtime #131132](https://github.com/dotnet/runtime/pull/131132).
+`System.Numerics.Complex<T>` is a new generic complex number type that mirrors the full public surface of the existing `Complex` struct across any `T : IFloatingPointIeee754<T>, IMinMaxValue<T>` — so complex arithmetic can now use `float`, `Half`, `BFloat16`, `NFloat`, or the new `Decimal32`, `Decimal64`, and `Decimal128` types instead of only `double` ([dotnet/runtime #130414](https://github.com/dotnet/runtime/pull/130414)). All arithmetic operators (including `T × Complex<T>` and `Complex<T> × T` overloads), the `Abs`/`Conjugate`/`Reciprocal`/`Log`/`Exp`/`Sqrt`/`Pow` math surface, the trigonometric and hyperbolic families, parsing, formatting, and `INumberBase<Complex<T>>` are all implemented. The non-generic `Complex` now delegates most of its implementation to `Complex<double>`, so both types stay in sync — including the C23 Annex G conformance updates for signed zeros, infinities, and NaNs added in [dotnet/runtime #131132](https://github.com/dotnet/runtime/pull/131132).
 
 ```csharp
 using System.Numerics;
@@ -63,12 +61,12 @@ Console.WriteLine(z.GetMagnitude()); // 5
 Console.WriteLine(Complex<float>.Sqrt(z));
 
 // Interop with the non-generic Complex.
-Complex<double> zd = Complex<double>.CreateChecked(new Complex(1, 1));
+Complex<double> zd = Complex<double>.CreateSaturating(new Complex(1, 1));
 ```
 
 ## HTTP request compression
 
-`System.Net.Http` gains three `HttpContent` wrappers that compress request bodies on the wire — `GZipCompressedContent`, `BrotliCompressedContent`, and `ZstandardCompressedContent` in the `System.Net.Http` namespace ([dotnet/runtime #130082](https://github.com/dotnet/runtime/pull/130082)). Each wrapper sets the corresponding `Content-Encoding` header, clears `Content-Length`, and streams the compressed bytes as the request is serialized. Two constructors are provided per algorithm: one that takes a `CompressionLevel` for a quick speed/size knob, and one that takes the algorithm's full options type (`ZLibCompressionOptions`, `BrotliCompressionOptions`, or `ZstandardCompressionOptions`) for fine-grained tuning. A follow-up ([dotnet/runtime #130802](https://github.com/dotnet/runtime/pull/130802)) enforces RFC 9659 compliance for `zstd` request bodies, so `ZstandardCompressedContent` produces content that conforms to the HTTP `zstd` coding.
+`System.Net.Http` gains three `HttpContent` wrappers that compress request bodies on the wire — `GZipCompressedContent`, `BrotliCompressedContent`, and `ZstandardCompressedContent` in the `System.Net.Http` namespace ([dotnet/runtime #130082](https://github.com/dotnet/runtime/pull/130082)). Each wrapper sets the corresponding `Content-Encoding` header, clears `Content-Length`, and streams the compressed bytes as the request is serialized. Two constructors are provided per algorithm: one that takes a `CompressionLevel` for a quick speed/size knob, and one that takes the algorithm's full options type (`ZLibCompressionOptions`, `BrotliCompressionOptions`, or `ZstandardCompressionOptions`) for fine-grained tuning. A follow-up ([dotnet/runtime #130802](https://github.com/dotnet/runtime/pull/130802)) enforces the [RFC 9659 window-size requirement](https://datatracker.ietf.org/doc/html/rfc9659#name-window-size) for `zstd` request bodies. Request compression is opt-in: use it only when you know the server supports the selected content coding, because `HttpClient` does not negotiate request content compression automatically.
 
 ```csharp
 using System.IO.Compression;
@@ -87,33 +85,34 @@ using HttpResponseMessage response = await client.SendAsync(request);
 
 ## Configurable HTTP connection eviction
 
-`SocketsHttpHandler` gains the experimental `ShouldEvictConnection` callback, which lets an application decide during pooled-connection maintenance whether a connection should be retired ([dotnet/runtime #130476](https://github.com/dotnet/runtime/pull/130476)). The callback receives a `SocketsHttpConnectionEvictionContext` that exposes the pooled connection's `Age`, `ConnectionId`, `DnsEndPoint`, `RemoteEndPoint`, and negotiated `HttpVersion`, and returns a `Task<bool>`. Related APIs expose a stable `ConnectionId` on `SocketsHttpConnectionContext` and `SocketsHttpPlaintextStreamFilterContext`. `SocketsHttpHandler` stamps `HttpRequestMessage.ConnectionId` after sending a request, allowing callers to correlate it with the connection that served it. A follow-up avoids allocations during eviction evaluation ([dotnet/runtime #131142](https://github.com/dotnet/runtime/pull/131142)).
+`SocketsHttpHandler` gains a new experimental `ShouldEvictConnection` callback that lets an application decide, per pooled connection, whether that connection should be retired early ([dotnet/runtime #130102](https://github.com/dotnet/runtime/issues/130102)). The asynchronous callback receives information about the connection (`Age`, `ConnectionId`, `DnsEndPoint`, `RemoteEndPoint`, and negotiated `HttpVersion`) and returns a `bool` indicating whether the connection should be evicted early.
+
+We're also exposing `ConnectionId` properties on `HttpRequestMessage` and `ConnectCallback`/`PlaintextStreamFilter` contexts, which can be used to correlate which connection served a given request ([dotnet/runtime #130108](https://github.com/dotnet/runtime/issues/130108)).
+This information can, among other things, be used to inform whether a problematic connection should be evicted.
+The ID is the same as what was already exposed via `EventSource` telemetry.
+
+Previously, `PooledConnectionLifetime` was often used to ensure that DNS changes will be picked up by `HttpClient`s. This resulted in healthy connections being unnecessarily recycled even when nothing changed. The sample below uses the new eviction callback to only remove connections if their DNS changed to point at different IPs.
 
 ```csharp
-using System.Net.Http;
+using System.Net;
 
-#pragma warning disable SYSLIB5008 // ShouldEvictConnection is experimental.
 var handler = new SocketsHttpHandler
 {
-    ShouldEvictConnection = (ctx, cancellationToken) =>
+    PooledConnectionLifetime = Timeout.InfiniteTimeSpan,
+    ShouldEvictConnection = async (context, ct) =>
     {
-        // Retire long-lived connections early, but keep freshly established ones.
-        bool retire = ctx.Age > TimeSpan.FromMinutes(5);
-        return Task.FromResult(retire);
+        if (context.RemoteEndPoint is IPEndPoint connectionIp)
+        {
+            var addresses = await Dns.GetHostAddressesAsync(context.DnsEndPoint.Host, connectionIp.AddressFamily, ct);
+
+            // Evict a connection only if its DNS changed to point at different IPs.
+            return !addresses.Contains(connectionIp.Address);
+        }
+
+        return context.Age > TimeSpan.FromMinutes(10);
     },
 };
-#pragma warning restore SYSLIB5008
-
-using var client = new HttpClient(handler);
 ```
-
-## Other HTTP and proxy changes
-
-Three smaller networking changes ship alongside connection eviction:
-
-- `SocketsHttpHandler` limits the number of pending HTTP/2 `PING` ACKs, mitigating a denial-of-service pattern in which a peer floods a connection with `PING` frames ([dotnet/runtime #130997](https://github.com/dotnet/runtime/pull/130997)).
-- H2C (cleartext HTTP/2) connections can now be established through an HTTP `CONNECT` proxy tunnel ([dotnet/runtime #129485](https://github.com/dotnet/runtime/pull/129485)).
-- Proxy authentication headers are cleared when failing over between entries in a multi-proxy list, so credentials intended for one proxy are no longer sent to the next ([dotnet/runtime #131080](https://github.com/dotnet/runtime/pull/131080)).
 
 ## DNS record resolution APIs
 
@@ -140,28 +139,9 @@ if (result.ResponseCode == DnsResponseCode.NoError)
 }
 ```
 
-## SHA3 and SM4 hardware intrinsics
-
-Arm64 gains hardware intrinsic surfaces for the SHA3 and SM4 instruction set extensions, both contributed by [@a74nh](https://github.com/a74nh). `System.Runtime.Intrinsics.Arm.Sha3`, `Sha3.Arm64`, `Sm4`, and `Sm4.Arm64` expose the fixed-length intrinsics ([dotnet/runtime #126941](https://github.com/dotnet/runtime/pull/126941), [dotnet/runtime #130039](https://github.com/dotnet/runtime/pull/130039)), and the `SveSha3` and `SveSm4` types expose matching vector-length-agnostic operations. Together these let cryptography and hashing libraries call the SHA3 (`EOR3`, `RAX1`, `XAR`, `BCAX`) and SM4 (`SM4E`, `SM4EKEY`) instructions directly on capable Arm64 processors.
-
-```csharp
-using System.Runtime.Intrinsics;
-using System.Runtime.Intrinsics.Arm;
-
-Vector128<ulong> a = Vector128<ulong>.Zero;
-Vector128<ulong> b = Vector128<ulong>.Zero;
-Vector128<ulong> c = Vector128<ulong>.Zero;
-
-if (Sha3.Arm64.IsSupported)
-{
-    // Three-way XOR in a single instruction on hardware that supports SHA3.
-    Vector128<ulong> eor3 = Sha3.Xor(a, b, c);
-}
-```
-
 ## ZIP archive password support
 
-`System.IO.Compression` now reads and writes password-protected ZIP entries ([dotnet/runtime #122093](https://github.com/dotnet/runtime/pull/122093)). `ZipArchiveEntry` gains `Open` and `OpenAsync` overloads that accept a `ReadOnlySpan<char>` password, `ZipArchive.CreateEntry` gains overloads that take a password and a `ZipEncryptionMethod` (`ZipCrypto`, `Aes128`, `Aes192`, `Aes256`), and a new `ZipArchiveEntry.EncryptionMethod` property surfaces the algorithm used by an existing entry. A companion change exposes `ZipArchiveEntry.VersionMadeBy` so callers can inspect the platform/version fields written by other tools ([dotnet/runtime #130109](https://github.com/dotnet/runtime/pull/130109)).
+`System.IO.Compression` now reads and writes password-protected ZIP entries ([dotnet/runtime #122093](https://github.com/dotnet/runtime/pull/122093)). `ZipArchiveEntry` gains `Open` and `OpenAsync` overloads that accept a `ReadOnlySpan<char>` password, `ZipArchive.CreateEntry` gains overloads that take a password and a `ZipEncryptionMethod` (`ZipCrypto`, `Aes128`, `Aes192`, `Aes256`), and a new `ZipArchiveEntry.EncryptionMethod` property surfaces the algorithm used by an existing entry.
 
 ```csharp
 using System.IO.Compression;
@@ -227,7 +207,7 @@ public sealed record Square(double Side) : Shape;
 
 ## Asynchronous ChangeToken.OnChange
 
-`Microsoft.Extensions.Primitives.ChangeToken.OnChange` gains `Func<Task>` overloads so callers can run asynchronous logic when a token fires without falling back to `async void` or blocking a thread ([dotnet/runtime #129624](https://github.com/dotnet/runtime/pull/129624)). When the async consumer is used, the change token is only re-registered once the returned `Task` completes, so overlapping notifications are coalesced into a single subsequent invocation. Synchronous exceptions still propagate to the code that triggered the token; asynchronous faults are left unobserved (surfaced through `TaskScheduler.UnobservedTaskException`), matching the semantics documented on the approved API. See the [breaking changes](#breaking-changes) section for the source-level impact on existing `async` lambdas passed to `OnChange`.
+`Microsoft.Extensions.Primitives.ChangeToken.OnChange` gains `Func<Task>` overloads so callers can run asynchronous logic when a token fires without falling back to `async void` or blocking a thread ([dotnet/runtime #129624](https://github.com/dotnet/runtime/pull/129624)). When the async consumer is used, the change token is only re-registered once the returned `Task` completes, so overlapping notifications are coalesced into a single subsequent invocation. Synchronous exceptions still propagate to the code that triggered the token; asynchronous faults are left unobserved (surfaced through `TaskScheduler.UnobservedTaskException`). See the [breaking changes](#breaking-changes) section for the source-level impact on existing `async` lambdas passed to `OnChange`.
 
 ```csharp
 using Microsoft.Extensions.Primitives;
@@ -325,9 +305,13 @@ AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
 
 - **`ReadOnlySpan<T>.Min` and `Max`** extension methods return the smallest or largest element of a span, with optional `IComparer<T>` overloads ([dotnet/runtime #128306](https://github.com/dotnet/runtime/pull/128306)). They match the LINQ operators' semantics on an empty span — throwing `InvalidOperationException` for value types and returning `null` for reference types — but avoid the enumerator allocation.
 
+- **`ZipArchiveEntry.VersionMadeBy`** exposes the platform and version fields written by ZIP tools ([dotnet/runtime #130109](https://github.com/dotnet/runtime/pull/130109)).
+
+- **`INumberBase<TSelf>.TryParsePartial`** adds partial-parse overloads that report characters consumed for `string` and `ReadOnlySpan<char>` inputs, or bytes consumed for `ReadOnlySpan<byte>` ([dotnet/runtime #130789](https://github.com/dotnet/runtime/pull/130789)).
+
 ## Breaking changes
 
-- **`Math.Round` and `MathF.Round` round more accurately for `digits` overloads.** The multi-digit rounding overloads previously computed `Round(value * 10^digits, mode) / 10^digits`, which could produce the wrong result when `value * 10^digits` was not exactly representable ([dotnet/runtime #130574](https://github.com/dotnet/runtime/pull/130574)). Roughly 5% of random inputs returned an incorrectly rounded result. For example, `Math.Round(655.925, 2, MidpointRounding.AwayFromZero)` now returns `655.92` (correct — `655.925` is stored as `655.924999999999954525…`) instead of `655.93`. Code that depended on the previous, incorrect result will observe a one-ulp change.
+- **`Math.Round` and `MathF.Round` round exactly for `digits` overloads.** The multi-digit rounding overloads previously computed `Round(value * 10^digits, mode) / 10^digits`, which could produce the wrong result when `value * 10^digits` was not exactly representable ([dotnet/runtime #130574](https://github.com/dotnet/runtime/pull/130574)). Roughly 5% of random inputs returned an incorrectly rounded result. For example, `Math.Round(655.925, 2, MidpointRounding.AwayFromZero)` now returns `655.92` (correct — `655.925` is stored as `655.924999999999954525…`) instead of `655.93`. Code that depended on the previous, incorrect result will observe a one-ulp change.
 - **`Complex<T>` (and `Complex`) conforms to C23 Annex G special-value handling** ([dotnet/runtime #131132](https://github.com/dotnet/runtime/pull/131132)). Because the non-generic `Complex` defers most of its implementation to `Complex<double>`, signed-zero, infinity, and NaN behavior in `Complex` changes to match the standard.
 - **`Math.Round` `digits` overloads validate `MidpointRounding` up front.** As part of [dotnet/runtime #130574](https://github.com/dotnet/runtime/pull/130574), out-of-range `MidpointRounding` values now throw immediately instead of being silently coerced.
 - **`ChangeToken.OnChange` binds `async` lambdas to the new `Func<Task>` overloads.** Existing code that passes an `async` lambda to `ChangeToken.OnChange` previously bound to the `Action` overload (`async void`); it now binds to the new `Func<Task>` overload and re-registration is deferred until the returned task completes ([dotnet/runtime #129624](https://github.com/dotnet/runtime/pull/129624)). This is a source-only, generally-more-correct change; ambiguous throwing statement lambdas may need an explicit `(Action)` cast.
@@ -335,10 +319,10 @@ AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
 - **`Process.Run`, `RunAsync`, `RunAndCaptureText`, `RunAndCaptureTextAsync`, and `StartAndForget` accept `IEnumerable<string>?` for `arguments`.** The parameter was previously `IList<string>?` but was only iterated ([dotnet/runtime #130630](https://github.com/dotnet/runtime/pull/130630)). Source-only impact on the new-in-.NET 11 APIs; existing code that passes an array or list is unaffected.
 - **`ZipArchive` in `Update` mode returns forward-only streams for compressed parts.** `System.IO.Packaging` and `ZipFile` now stream compressed parts directly from the archive instead of first decompressing them into a seekable `MemoryStream` ([dotnet/runtime #129698](https://github.com/dotnet/runtime/pull/129698)). Streams for compressed parts that haven't been modified in the current session report `CanSeek == false`; `Length` is unchanged. To keep seek-back semantics, copy the returned stream into a `MemoryStream` first.
 - **`TensorPrimitives.Clamp` no longer throws when `min > max`.** The scalar path now matches the vectorized path (`Min(Max(x, min), max)`) rather than throwing `ArgumentException` ([dotnet/runtime #130703](https://github.com/dotnet/runtime/pull/130703)). Behavior is consistent across position and vector width.
-- **`INumberBase<TSelf>` partial-parse overloads renamed to `TryParsePartial`.** The `TryParse(..., out TSelf result, out int charsConsumed)` overloads added in earlier .NET 11 previews are now public `TryParsePartial` methods, and the temporary `NumberStyles.AllowTrailingInvalidCharacters` public flag has been withdrawn in favor of an internal sentinel ([dotnet/runtime #130789](https://github.com/dotnet/runtime/pull/130789)).
 - **Composite ML-DSA on Windows now uses BCrypt by default.** On Windows Insider builds that support Composite ML-DSA in BCrypt, `System.Security.Cryptography.CompositeMLDsa` switches from its managed implementation to the BCrypt provider ([dotnet/runtime #129612](https://github.com/dotnet/runtime/pull/129612)). Where BCrypt is used, the supported algorithm set is reduced to the four algorithms listed in the CNG documentation; Windows versions without BCrypt Composite ML-DSA support don't expose Composite ML-DSA through this provider.
+- **`FileConfigurationSource.OnLoadException` receives I/O errors.** The callback now observes all load failures, including I/O errors, rather than only missing-file and parsing errors ([dotnet/runtime #126093](https://github.com/dotnet/runtime/pull/126093)).
 
-## Bug fixes
+## Bug fixes and performance enhancements
 
 - **System.Numerics**
   - [Fix rounding of BigInteger conversions to floating-point types](https://github.com/dotnet/runtime/pull/130565)
