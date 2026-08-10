@@ -312,6 +312,9 @@ AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
 - **`EmptyServiceProvider`** is a shared, allocation-free service provider that resolves nothing ([dotnet/runtime #129578](https://github.com/dotnet/runtime/pull/129578)). Use `EmptyServiceProvider.Instance` where an `IServiceProvider` is required but no services are available — for example in tests, in default constructor arguments, or as a fallback instead of passing `null` and guarding every call site. It implements `IServiceProvider`, `IKeyedServiceProvider`, `IServiceProviderIsService`, and `IServiceProviderIsKeyedService` explicitly, so cast to the interface you need:
 
   ```csharp
+  using Microsoft.Extensions.DependencyInjection;
+  using Microsoft.Extensions.Logging;
+
   IServiceProvider services = EmptyServiceProvider.Instance;
 
   object? logger = services.GetService(typeof(ILogger)); // null
