@@ -38,7 +38,7 @@ using System.Numerics;
 Decimal64 price = Decimal64.Parse("19.95");
 Decimal64 taxRate = Decimal64.Parse("0.0875");
 
-// Generic math works via IFloatingPointIeee754<TSelf>.
+// Generic math works via IFloatingPoint<TSelf>.
 static T RoundToCents<T>(T value) where T : IFloatingPoint<T> =>
     T.Round(value, digits: 2, MidpointRounding.ToEven);
 
@@ -46,7 +46,7 @@ Decimal64 total = RoundToCents(price + price * taxRate);
 Console.WriteLine(total); // 21.70
 
 // Full transcendental surface with the standard's preferred exponent semantics.
-Decimal128 x = Decimal128.Log(Decimal128.E);        // 1
+Decimal128 x = Decimal128.Log(Decimal128.E);        // approximately 1
 Decimal128 y = Decimal128.Sqrt(Decimal128.Parse("2")); // 1.414213562373095048801688724209698
 ```
 
