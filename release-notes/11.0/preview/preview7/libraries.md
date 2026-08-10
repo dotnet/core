@@ -135,16 +135,20 @@ if (result.ResponseCode == DnsResponseCode.NoError)
 
 ## SHA3 and SM4 hardware intrinsics
 
-Arm64 gains hardware intrinsic surfaces for the SHA3 and SM4 instruction set extensions, both contributed by [@a74nh](https://github.com/a74nh). `System.Runtime.Intrinsics.Arm.Sha3`, `Sha3.Arm64`, `Sm4`, and `Sm4.Arm64` expose the fixed-length intrinsics ([dotnet/runtime #126941](https://github.com/dotnet/runtime/pull/126941), [dotnet/runtime #130039](https://github.com/dotnet/runtime/pull/130039)), and matching SVE2 surfaces (`Sve2.Sha3` and `Sve2.Sm4`) expose the vector-length-agnostic versions. Together these let cryptography and hashing libraries call the SHA3 (`EOR3`, `RAX1`, `XAR`, `BCAX`) and SM4 (`SM4E`, `SM4EKEY`) instructions directly on capable Arm64 processors.
+Arm64 gains hardware intrinsic surfaces for the SHA3 and SM4 instruction set extensions, both contributed by [@a74nh](https://github.com/a74nh). `System.Runtime.Intrinsics.Arm.Sha3`, `Sha3.Arm64`, `Sm4`, and `Sm4.Arm64` expose the fixed-length intrinsics ([dotnet/runtime #126941](https://github.com/dotnet/runtime/pull/126941), [dotnet/runtime #130039](https://github.com/dotnet/runtime/pull/130039)), and the `SveSha3` and `SveSm4` types expose matching vector-length-agnostic operations. Together these let cryptography and hashing libraries call the SHA3 (`EOR3`, `RAX1`, `XAR`, `BCAX`) and SM4 (`SM4E`, `SM4EKEY`) instructions directly on capable Arm64 processors.
 
 ```csharp
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 
+Vector128<ulong> a = Vector128<ulong>.Zero;
+Vector128<ulong> b = Vector128<ulong>.Zero;
+Vector128<ulong> c = Vector128<ulong>.Zero;
+
 if (Sha3.Arm64.IsSupported)
 {
     // Three-way XOR in a single instruction on hardware that supports SHA3.
-    Vector128<ulong> eor3 = Sha3.Arm64.Xor(a, b, c);
+    Vector128<ulong> eor3 = Sha3.Xor(a, b, c);
 }
 ```
 
