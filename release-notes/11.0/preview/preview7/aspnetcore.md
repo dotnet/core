@@ -215,21 +215,16 @@ public class CustomerModel
 }
 ```
 
-Keys resolve against the model's own resources, and a miss falls back to the attribute's built-in message. Two hooks on `ValidationOptions` cover the rest:
+Keys resolve against the model's own resources, and a miss falls back to the attribute's built-in message. Use `ValidationOptions.LocalizerProvider` to resolve keys from a shared resource file instead:
 
 ```csharp
 builder.Services.AddValidation(options =>
 {
-    // Resolve every model's keys from one shared resource file.
     options.LocalizerProvider = (_, factory) => factory.Create(typeof(ValidationMessages));
-
-    // Supply a key by convention when an attribute has no ErrorMessage, for example
-    // [Range] => "RangeAttribute_Error".
-    options.MessageKeyProvider = ctx => $"{ctx.ValidatorType.Name}_Error";
 });
 ```
 
-An explicit `ErrorMessage` always wins and is used as the key, so `MessageKeyProvider` only fills the gaps. Attributes that already localize themselves (`ErrorMessageResourceType`, `[Display(ResourceType = …)]`) bypass the pipeline entirely. A custom attribute that needs to substitute its own values into the message template can implement `IValidationMessageFormatter`:
+Attributes that already localize themselves (`ErrorMessageResourceType`, `[Display(ResourceType = …)]`) bypass the pipeline entirely. A custom attribute that needs to substitute its own values into the message template can implement `IValidationMessageFormatter`:
 
 ```csharp
 public sealed class DivisibleByAttribute : ValidationAttribute, IValidationMessageFormatter
@@ -314,7 +309,7 @@ If the event payload is a discriminated union (a preview C# 14 feature), OpenAPI
 
 ## TLS channel-binding token access from `ITlsConnectionFeature`
 
-Applications that authenticate with Kerberos, NTLM, or another SSPI-based scheme over TLS can now read the connection's channel binding token to defend against relay attacks ([dotnet/aspnetcore #67436](https://github.com/dotnet/aspnetcore/pull/67436)):
+Applications using TLS can now read the connection's channel binding token to defend against relay attacks ([dotnet/aspnetcore #67436](https://github.com/dotnet/aspnetcore/pull/67436)):
 
 ```csharp
 using System.Security.Authentication.ExtendedProtection;
@@ -333,7 +328,11 @@ app.Use(async (context, next) =>
 });
 ```
 
-Kestrel returns the binding from `SslStream.TransportContext.GetChannelBinding`. IIS and HTTP.sys return it from the request; on HTTP.sys the new `HttpSysOptions.Authentication.HardeningLevel` (defaults to `Medium`) controls whether the OS is asked to enforce channel binding, and setting it to `Strict` now fails startup if the OS cannot apply that hardening rather than silently degrading ([dotnet/aspnetcore #67720](https://github.com/dotnet/aspnetcore/pull/67720)).
+Kestrel returns the binding from `SslStream.TransportContext.GetChannelBinding`. IIS and HTTP.sys return it from the request. On HTTP.sys, `HttpSysOptions.HttpAuthenticationHardeningLevel` controls Extended Protection and channel-binding token exposure:
+
+- `Legacy` disables channel-binding validation and doesn't expose the token.
+- `Medium`, the default, exposes the token and validates it when supplied, but tolerates its absence.
+- `Strict` requires the token for authenticated requests and rejects requests without one. It also fails startup if the OS can't apply the configuration, while `Legacy` and `Medium` log the configuration failure and continue ([dotnet/aspnetcore #67720](https://github.com/dotnet/aspnetcore/pull/67720)).
 
 ## Breaking changes
 
@@ -430,7 +429,6 @@ Thank you contributors! ❤️
 - [@martincostello](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amartincostello+milestone%3A11.0-preview7)
 - [@MayaKirova](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AMayaKirova+milestone%3A11.0-preview7)
 - [@medhatiwari](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amedhatiwari+milestone%3A11.0-preview7)
-- [@oroztocil](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Aoroztocil+milestone%3A11.0-preview7)
 - [@PreethikaSelvam](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3APreethikaSelvam+milestone%3A11.0-preview7)
 - [@RichardD2](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3ARichardD2+milestone%3A11.0-preview7)
 - [@skrustev](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Askrustev+milestone%3A11.0-preview7)
