@@ -9,7 +9,7 @@ workflows:
 - [Shell route templates](#shell-route-templates)
 - [AOT-safe RelativeSource bindings](#aot-safe-relativesource-bindings)
 - [Third-party platform backends](#third-party-platform-backends)
-- [TabbedPage adopts handlers on Apple platforms](#tabbedpage-adopts-handlers-on-apple-platforms)
+- [NavigationPage and TabbedPage adopt handlers on Apple platforms](#navigationpage-and-tabbedpage-adopt-handlers-on-apple-platforms)
 - [Platform-specific capabilities](#platform-specific-capabilities)
 - [.NET for Android](#net-for-android)
 - [Apple platforms (.NET for iOS, Mac Catalyst, macOS, tvOS)](#apple-platforms-net-for-ios-mac-catalyst-macos-tvos)
@@ -130,19 +130,25 @@ activating a backend for either a recognized platform TFM or a neutral
 these APIs let a community backend integrate through a NuGet package instead
 of patching MAUI.
 
-## TabbedPage adopts handlers on Apple platforms
+## NavigationPage and TabbedPage adopt handlers on Apple platforms
 
-`TabbedPage` on iOS and Mac Catalyst now uses the standard handler
-architecture. `TabbedViewHandler` and a shared `TabBarControllerManager`
-replace the monolithic `TabbedRenderer`
+`NavigationPage` and `TabbedPage` on iOS and Mac Catalyst now use the standard
+handler architecture. `NavigationViewHandler` replaces the monolithic
+`NavigationRenderer`
+([dotnet/maui #36109](https://github.com/dotnet/maui/pull/36109)), while
+`TabbedViewHandler` and a shared `TabBarControllerManager` replace
+`TabbedRenderer`
 ([dotnet/maui #36507](https://github.com/dotnet/maui/pull/36507)).
 
-The handler is the default in Preview 7. `TabbedRenderer` remains available in
-the Compatibility layer as a manual fallback, so apps with extensive
-`TabbedPage` customizations should test this preview.
+The handlers are the defaults in Preview 7. `NavigationRenderer` and
+`TabbedRenderer` remain available in the Compatibility layer as manual
+fallbacks, so apps with custom renderers or extensive page customizations
+should test this preview.
 
-For background, see the [`TabbedPage`
-documentation](https://learn.microsoft.com/dotnet/maui/user-interface/pages/tabbedpage?view=net-maui-11.0)
+For background, see the [`NavigationPage`
+documentation](https://learn.microsoft.com/dotnet/maui/user-interface/pages/navigationpage?view=net-maui-11.0),
+[`TabbedPage`
+documentation](https://learn.microsoft.com/dotnet/maui/user-interface/pages/tabbedpage?view=net-maui-11.0),
 and [reuse custom renderers in .NET
 MAUI](https://learn.microsoft.com/dotnet/maui/migration/custom-renderers?view=net-maui-11.0).
 
