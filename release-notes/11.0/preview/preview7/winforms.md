@@ -15,12 +15,12 @@ Windows Forms in Preview 7 introduces an application- and control-level opt-in f
 
 In this preview, `Net11` brings modernized rendering adapters for:
 
-* `Button` — the `FlatStyle` property defines the render style used for the context. Windows accent colors are taken into account for some `FlatStyle` values.
-* `CheckBox` — the `FlatStyle` property defines the render style for the context.
-* `RadioButton` — the `FlatStyle` property defines the render style for the context.
-* `GroupBox` — the `FlatStyle` property defines the render style for the context.
-* `TextBox` — the `BorderStyle` property controls the rendering here: `FixedSingle` yields the conventional border, `Fixed3D` yields a rounded rectangle. (`Fixed3D` is the value that historically requested the *decorated* border, so under `Net11` it maps to the modern decorated look rather than to the classic sunken 3D edge.) Note that the `Padding` property of `TextBox` is accessible in the Property Grid from .NET 11 on. The `Padding` setting, however, is only applied when the effective `VisualStylesMode` is `Net11` or newer.
-* `RichTextBox` — the `BorderStyle` property controls the rendering here as well: `FixedSingle` yields the conventional border, `Fixed3D` yields a rounded rectangle. As with `TextBox`, the `Padding` property of `RichTextBox` is accessible in the Property Grid from .NET 11 on, and is only applied when the effective `VisualStylesMode` is `Net11` or newer.
+- `Button` — the `FlatStyle` property defines the render style used for the context. Windows accent colors are taken into account for some `FlatStyle` values.
+- `CheckBox` — the `FlatStyle` property defines the render style for the context.
+- `RadioButton` — the `FlatStyle` property defines the render style for the context.
+- `GroupBox` — the `FlatStyle` property defines the render style for the context.
+- `TextBox` — the `BorderStyle` property controls the rendering here: `FixedSingle` yields the conventional border, `Fixed3D` yields a rounded rectangle. (`Fixed3D` is the value that historically requested the *decorated* border, so under `Net11` it maps to the modern decorated look rather than to the classic sunken 3D edge.) Note that the `Padding` property of `TextBox` is accessible in the Property Grid from .NET 11 on. The `Padding` setting, however, is only applied when the effective `VisualStylesMode` is `Net11` or newer.
+- `RichTextBox` — the `BorderStyle` property controls the rendering here as well: `FixedSingle` yields the conventional border, `Fixed3D` yields a rounded rectangle. As with `TextBox`, the `Padding` property of `RichTextBox` is accessible in the Property Grid from .NET 11 on, and is only applied when the effective `VisualStylesMode` is `Net11` or newer.
 
 Note that `Control.VisualStylesMode` is an ambient property. An ambient property is one whose value a control does not necessarily hold itself: as long as it has not been assigned an explicit value, the control asks its parent for the value, and the parent asks *its* parent, until some ancestor supplies a concrete setting. `BackColor`, `ForeColor`, `Font`, and `Cursor` are the classic examples — set the `Font` on a `Form` and every child that has not been given its own `Font` renders with it. The "unset" marker for `VisualStylesMode` is `VisualStylesMode.Inherit`, which is why that is the default for child controls: it means "I have no opinion, ask upwards."
 
@@ -78,7 +78,7 @@ Application.SystemVisualSettingsChanged += (sender, e) =>
 };
 ```
 
-## Avoid white dark-mode flashes — deferred form revealing
+## Deferred form reveal
 
 `FormRevealMode` gives applications control over when a form becomes visible during startup. `FormRevealMode.Deferred` keeps a form concealed until its initial layout and theming settle, avoiding the brief flash of an unstyled window that can occur when dark mode or the new visual styles are applied after the form is first shown. `FormRevealMode.Classic` preserves the existing show-immediately behavior, and `FormRevealMode.Inherit` follows the value set with `Application.SetDefaultFormRevealMode`.
 
@@ -95,7 +95,7 @@ Form form = new() { Text = "No unstyled flash on startup" };
 Application.Run(form);
 ```
 
-## Suspend painting during bulk control mutations (location, size changes)
+## Suspend painting during bulk mutations
 
 The new `ISupportSuspendPainting` interface and the `ControlMutationExtensions.SuspendPainting` extension method combine `BeginUpdate`/`EndUpdate` and `SuspendLayout`/`ResumeLayout` into a single `IDisposable` scope. `LayoutSuspendTraversal` controls whether the suspension applies to the target only, or to the target and all of its descendants.
 
@@ -163,11 +163,11 @@ In the past, if you had nested containers, you needed to call `SuspendLayout` fo
    }
 ```
 
-There are situations where you want nested containers to do exactly that _and_ additionally suppress any paint messages until the final size calculation of every affected control has been completed. This happens, for example, when you have a lot of controls placed in `TableLayoutPanel` containers, have their rows and/or columns set to `AutoSize`, and use `AutoSize` on the controls themselves as well.
+There are situations where you want nested containers to do exactly that *and* additionally suppress any paint messages until the final size calculation of every affected control has been completed. This happens, for example, when you have a lot of controls placed in `TableLayoutPanel` containers, have their rows and/or columns set to `AutoSize`, and use `AutoSize` on the controls themselves as well.
 
-Consider, as an example, the following hypothetical scenario: a `Panel` inside a Form hosts changing views for the end user, and those views are represented by user controls. Consider further that each user control's constituent controls are nested `TableLayoutPanel` containers, which in turn hold the actual controls the user is working with. In this sample, the user can change — say — the font size or certain styling aspects of _each_ of the controls, which triggers a cascading re-layout of every cell.
+Consider, as an example, the following hypothetical scenario: a `Panel` inside a Form hosts changing views for the end user, and those views are represented by user controls. Consider further that each user control's constituent controls are nested `TableLayoutPanel` containers, which in turn hold the actual controls the user is working with. In this sample, the user can change — say — the font size or certain styling aspects of *each* of the controls, which triggers a cascading re-layout of every cell.
 
-The consequence of _not_ suspending the layout of every one of the nested controls is a layout storm. Every single mutation invalidates the preferred size of the control it touches, which invalidates the preferred size of the cell, which invalidates the row and column, which invalidates the containing `TableLayoutPanel` — and because that panel is itself `AutoSize`d inside another `AutoSize`d panel, the invalidation keeps bubbling up to the form and then measures its way back down again. With _n_ mutated controls in a tree of depth _d_, you don't get one layout pass; you get roughly _n_ full measure/arrange cycles over the entire subtree, each one an O(rows × columns) preferred-size computation at every level. Worse, each of those intermediate results is actually committed to the screen: controls visibly jump to a wrong position, get resized, jump again, and the whole view flickers and "settles" over several hundred milliseconds instead of simply changing. On a dense form this is the difference between an instant switch and a visible, jittering reflow.
+The consequence of *not* suspending the layout of every one of the nested controls is a layout storm. Every single mutation invalidates the preferred size of the control it touches, which invalidates the preferred size of the cell, which invalidates the row and column, which invalidates the containing `TableLayoutPanel` — and because that panel is itself `AutoSize`d inside another `AutoSize`d panel, the invalidation keeps bubbling up to the form and then measures its way back down again. With *n* mutated controls in a tree of depth *d*, you don't get one layout pass; you get roughly *n* full measure/arrange cycles over the entire subtree, each one an O(rows × columns) preferred-size computation at every level. Worse, each of those intermediate results is actually committed to the screen: controls visibly jump to a wrong position, get resized, jump again, and the whole view flickers and "settles" over several hundred milliseconds instead of simply changing. On a dense form this is the difference between an instant switch and a visible, jittering reflow.
 
 This is where `SuspendPainting` gives you a real and convenient advantage — both for performance and for flicker-free reconfiguration of a view:
 
@@ -200,10 +200,10 @@ This is where `SuspendPainting` gives you a real and convenient advantage — bo
 
 A few things are worth pointing out here:
 
-* The scope is opened on `this` — the form — with `LayoutSuspendTraversal.TargetAndDescendants`. That single call replaces the recursive walk you would otherwise have to write yourself to reach every nested `TableLayoutPanel`, `GroupBox`, and `FlowLayoutPanel` in the view. Using `LayoutSuspendTraversal.Target` here would be wrong: the mutations happen deep inside the tree, and the inner containers would still lay out and paint on every change.
-* `using var scope = ...` (rather than a `using` block) deliberately extends the suspension to the end of the method. `ApplyVisualStylesMode` walks the control tree and retargets every control, `ApplyFlatStyle` potentially changes the border metrics of each of them, and `SynchronizeBoundsAndRender` repositions the adorner. All three would independently trigger layout and paint. Because they all live inside the same scope, they are coalesced into one measure/arrange pass and one repaint.
-* Ordering matters: `_selectedVisualStylesMode` is assigned _before_ the scope is opened, because `UpdateViewAppearanceMenu` reads it back to update the checked states. The menu update is intentionally inside the scope as well — the menu strip is part of the same subtree, and letting it repaint separately would produce exactly the two-stage flash the scope is meant to avoid.
-* When `scope` is disposed at the end of the method, layout resumes, the accumulated invalidation is resolved in a single pass, and the freshly computed result is painted once. The user perceives the style change as instantaneous rather than as a cascade.
+- The scope is opened on `this` — the form — with `LayoutSuspendTraversal.TargetAndDescendants`. That single call replaces the recursive walk you would otherwise have to write yourself to reach every nested `TableLayoutPanel`, `GroupBox`, and `FlowLayoutPanel` in the view. Using `LayoutSuspendTraversal.Target` here would be wrong: the mutations happen deep inside the tree, and the inner containers would still lay out and paint on every change.
+- `using var scope = ...` (rather than a `using` block) deliberately extends the suspension to the end of the method. `ApplyVisualStylesMode` walks the control tree and retargets every control, `ApplyFlatStyle` potentially changes the border metrics of each of them, and `SynchronizeBoundsAndRender` repositions the adorner. All three would independently trigger layout and paint. Because they all live inside the same scope, they are coalesced into one measure/arrange pass and one repaint.
+- Ordering matters: `_selectedVisualStylesMode` is assigned *before* the scope is opened, because `UpdateViewAppearanceMenu` reads it back to update the checked states. The menu update is intentionally inside the scope as well — the menu strip is part of the same subtree, and letting it repaint separately would produce exactly the two-stage flash the scope is meant to avoid.
+- When `scope` is disposed at the end of the method, layout resumes, the accumulated invalidation is resolved in a single pass, and the freshly computed result is painted once. The user perceives the style change as instantaneous rather than as a cascade.
 
 An optional filter lets callers opt individual container children out of the layout freeze.
 
