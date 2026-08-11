@@ -6,7 +6,7 @@
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
 - [Containers](https://hub.docker.com/_/microsoft-dotnet)
 - [Supported OSes](supported-os.md)
-- [OS packages](./os-packages.md)
+- [OS packages](./dotnet-dependencies.md)
 - [Known Issues](known-issues.md)
 - [Installation instructions](install.md)
 
@@ -14,6 +14,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2026/08/11 | [10.0.11](./10.0.11/10.0.11.md) |
 | 2026/07/14 | [10.0.10](./10.0.10/10.0.10.md) |
 | 2026/06/09 | [10.0.9](./10.0.9/10.0.9.md) |
 | 2026/05/12 | [10.0.8](./10.0.8/10.0.8.md) |
