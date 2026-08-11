@@ -9,6 +9,7 @@
 - [Configurable HTTP connection eviction](#configurable-http-connection-eviction)
 - [DNS record resolution APIs](#dns-record-resolution-apis)
 - [ZIP archive password support](#zip-archive-password-support)
+- [New ZIP creation/extraction options and async helpers](#new-zip-creationextraction-options-and-async-helpers)
 - [Ordinal casing APIs](#ordinal-casing-apis)
 - [Polymorphism inference for closed type hierarchies in System.Text.Json](#polymorphism-inference-for-closed-type-hierarchies-in-systemtextjson)
 - [Asynchronous ChangeToken.OnChange](#asynchronous-changetokenonchange)
@@ -185,6 +186,10 @@ using (var archive = ZipFile.OpenRead("secrets.zip"))
 }
 ```
 
+## New ZIP creation/extraction options and async helpers
+
+`System.IO.Compression` adds `ZipFileCreationOptions` and `ZipExtractionOptions` to configure bulk ZIP operations ([dotnet/runtime #122093](https://github.com/dotnet/runtime/pull/122093)). The creation options control compression level, entry-name encoding, inclusion of the base directory, and the password and encryption method. The extraction options configure entry-name encoding, overwriting, and the password. `ZipFile.CreateFromDirectory` and `ExtractToDirectory` now accept these options and have asynchronous counterparts. `ZipArchive` and `ZipArchiveEntry` also gain helpers to create entries from files and extract archives or individual entries asynchronously.
+
 ## Ordinal casing APIs
 
 `char`, `string`, `Rune`, and `MemoryExtensions` all gain `ToUpperOrdinal` and `ToLowerOrdinal` variants ([dotnet/runtime #130140](https://github.com/dotnet/runtime/pull/130140)). Ordinal casing uses the same simple one-to-one mapping as `OrdinalIgnoreCase` comparisons — that is, `a.Equals(b, OrdinalIgnoreCase)` if and only if `a.ToUpperOrdinal()` equals `b.ToUpperOrdinal()` ordinally. This gives applications that already compare case-insensitively with ordinal semantics a matching case conversion that doesn't depend on the current culture, sidestepping Turkish-i–style surprises. `string.ToUpperOrdinal()` and `ToLowerOrdinal()` also return the same instance when an all-ASCII string is already in the requested case, avoiding an allocation.
@@ -204,7 +209,7 @@ int written = value.AsSpan().ToUpperOrdinal(buffer);
 
 ## Polymorphism inference for closed type hierarchies in System.Text.Json
 
-`System.Text.Json` can now infer polymorphic serialization for C# `closed` type hierarchies without an explicit `[JsonDerivedType]` attribute on the base type ([dotnet/runtime #130808](https://github.com/dotnet/runtime/pull/130808)). Set the new `JsonSerializerOptions.InferClosedTypePolymorphism` property (or the equivalent source-generator option) and the serializer discovers the derived types of a closed hierarchy — including generic specializations — and assigns deterministic discriminators. Explicit `[JsonDerivedType]` registrations still take precedence, and the source generator reports diagnostics for hierarchies it cannot infer safely. This pairs naturally with the Preview 6 support for C# union serialization, which also relies on closed hierarchies.
+`System.Text.Json` can now infer polymorphic serialization for C# `closed` type hierarchies without an explicit `[JsonDerivedType]` attribute on the base type ([dotnet/runtime #130808](https://github.com/dotnet/runtime/pull/130808)). Set the new `JsonSerializerOptions.InferClosedTypePolymorphism` property (or the equivalent source-generator option) and the serializer discovers the derived types of a closed hierarchy — including generic specializations — and assigns deterministic discriminators. Explicit `[JsonDerivedType]` registrations still take precedence, and the source generator reports diagnostics for hierarchies it cannot infer safely.
 
 ```csharp
 using System.Text.Json;
@@ -322,6 +327,10 @@ AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
 - **`ReadOnlySpan<T>.Min` and `Max`** extension methods return the smallest or largest element of a span, with optional `IComparer<T>` overloads ([dotnet/runtime #128306](https://github.com/dotnet/runtime/pull/128306)). They match the LINQ operators' semantics on an empty span — throwing `InvalidOperationException` for value types and returning `null` for reference types — but avoid the enumerator allocation.
 
 - **`ZipArchiveEntry.VersionMadeBy`** exposes the platform and version fields written by ZIP tools ([dotnet/runtime #130109](https://github.com/dotnet/runtime/pull/130109)).
+
+- **Process startup callbacks** let applications use custom native process-creation APIs while retaining `Process` features such as redirected I/O and exit handling ([dotnet/runtime #128862](https://github.com/dotnet/runtime/pull/128862)). `WindowsProcessStartArguments.Start` and `UnixProcessStartArguments.Start` supply a callback with prepared command-line or argument-vector, environment, and standard-handle data.
+
+- **AVX-VNNI V512 intrinsics** add `AvxVnni.V512` dot-product operations for supporting x86 processors ([dotnet/runtime #128365](https://github.com/dotnet/runtime/pull/128365)). The `MultiplyWideningAndAdd` and saturating variants operate on `Vector512<T>` byte/sbyte and short/short inputs, accumulating into `Vector512<int>`.
 
 - **`INumberBase<TSelf>.TryParsePartial`** adds partial-parse overloads that report characters consumed for `string` and `ReadOnlySpan<char>` inputs, or bytes consumed for `ReadOnlySpan<byte>` ([dotnet/runtime #130789](https://github.com/dotnet/runtime/pull/130789)).
 
