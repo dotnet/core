@@ -11,7 +11,7 @@ This is the official .NET release notes and announcements repository. It is NOT 
 Set up the validation tools needed for this documentation repository:
 
 ```bash
-npm install markdownlint-cli markdown-link-check prettier
+npm install markdownlint-cli @umbrelladocs/linkspector prettier
 pip install checkov
 ```
 
@@ -29,9 +29,10 @@ Always run these validation commands before committing changes. All commands hav
 2. **Link checking** (takes 30-180 seconds depending on external links - NEVER CANCEL):
 
    ```bash
-   npx markdown-link-check --config .github/workflows/markdown-link-check-config.json README.md
-   npx markdown-link-check --config .github/workflows/markdown-link-check-config.json [specific-file].md
+   npx linkspector check -c .linkspector.yml
    ```
+
+   Scope is controlled by `.linkspector.yml` (it defaults to `modifiedFilesOnly: true`, matching CI). To check a single file regardless of git status, temporarily list it under `files:` in the config.
 
    TIMEOUT WARNING: Set timeout to 5+ minutes for link checking. External links may be slow or blocked by network restrictions.
 
@@ -106,7 +107,7 @@ Always validate JSON syntax and schema compliance after edits.
 
 1. Edit markdown files in `/Documentation/` or root level
 2. Run markdown linting: `npx markdownlint --config .github/linters/.markdown-lint.yml [file]`
-3. Check links: `npx markdown-link-check --config .github/workflows/markdown-link-check-config.json [file]`
+3. Check links: `npx linkspector check -c .linkspector.yml`
 4. Verify changes don't break existing navigation or references
 
 ## Validation Requirements
@@ -142,7 +143,7 @@ The repository uses GitHub Actions workflows:
 | Command               | Expected Time  | Timeout Setting |
 | --------------------- | -------------- | --------------- |
 | markdownlint          | 1 second       | 30 seconds      |
-| markdown-link-check   | 30-180 seconds | 5+ minutes      |
+| linkspector           | 30-180 seconds | 5+ minutes      |
 | checkov security scan | 38 seconds     | 2 minutes       |
 | prettier format check | 5 seconds      | 30 seconds      |
 

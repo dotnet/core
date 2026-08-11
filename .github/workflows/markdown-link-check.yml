@@ -16,11 +16,12 @@ jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+    - uses: actions/checkout@v4
       with:
-        use-quiet-mode: 'yes'
-        use-verbose-mode: 'yes'
-        check-modified-files-only: 'yes'
-        config-file: '.github/workflows/markdown-link-check-config.json'
-        base-branch: ${{ github.base_ref || 'main' }}
+        fetch-depth: 2
+    - uses: umbrelladocs/action-linkspector@v1
+      with:
+        config_file: '.linkspector.yml'
+        reporter: local
+        filter_mode: nofilter
+        fail_level: error
