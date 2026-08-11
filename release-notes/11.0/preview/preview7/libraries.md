@@ -167,6 +167,22 @@ using (var archive = ZipFile.OpenRead("secrets.zip"))
     using Stream stream = entry.Open("correct horse battery staple");
     Console.WriteLine(new StreamReader(stream).ReadToEnd());
 }
+
+// An incorrect password is rejected with InvalidDataException.
+// This exception also occurs when an entry is corrupt or otherwise invalid.
+using (var archive = ZipFile.OpenRead("secrets.zip"))
+{
+    ZipArchiveEntry entry = archive.GetEntry("notes.txt")!;
+    try
+    {
+        using Stream stream = entry.Open("incorrect password");
+        _ = new StreamReader(stream).ReadToEnd();
+    }
+    catch (InvalidDataException)
+    {
+        Console.WriteLine("Cannot read ZIP entry. The password might be incorrect.");
+    }
+}
 ```
 
 ## Ordinal casing APIs
