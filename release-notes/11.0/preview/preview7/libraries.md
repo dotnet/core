@@ -9,7 +9,7 @@
 - [Configurable HTTP connection eviction](#configurable-http-connection-eviction)
 - [DNS record resolution APIs](#dns-record-resolution-apis)
 - [ZIP archive password support](#zip-archive-password-support)
-- [New ZIP creation/extraction options and async helpers](#new-zip-creationextraction-options-and-async-helpers)
+- [More ZIP creation, extraction, and metadata APIs](#more-zip-creation-extraction-and-metadata-apis)
 - [Ordinal casing APIs](#ordinal-casing-apis)
 - [Polymorphism inference for closed type hierarchies in System.Text.Json](#polymorphism-inference-for-closed-type-hierarchies-in-systemtextjson)
 - [Asynchronous ChangeToken.OnChange](#asynchronous-changetokenonchange)
@@ -190,9 +190,9 @@ using (var archive = ZipFile.OpenRead("secrets.zip"))
 }
 ```
 
-## New ZIP creation/extraction options and async helpers
+## More ZIP creation, extraction, and metadata APIs
 
-`System.IO.Compression` adds `ZipFileCreationOptions` and `ZipExtractionOptions` to configure bulk ZIP operations ([dotnet/runtime #122093](https://github.com/dotnet/runtime/pull/122093)). The creation options control compression level, entry-name encoding, inclusion of the base directory, and the password and encryption method. The extraction options configure entry-name encoding, overwriting, and the password. `ZipFile.CreateFromDirectory` and `ExtractToDirectory` now accept these options and have asynchronous counterparts. `ZipArchive` and `ZipArchiveEntry` also gain helpers to create entries from files and extract archives or individual entries asynchronously.
+`System.IO.Compression` adds `ZipFileCreationOptions` and `ZipExtractionOptions` to configure bulk ZIP operations ([dotnet/runtime #122093](https://github.com/dotnet/runtime/pull/122093)). The creation options control compression level, entry-name encoding, inclusion of the base directory, and the password and encryption method. The extraction options configure entry-name encoding, overwriting, and the password. `ZipFile.CreateFromDirectory` and `ExtractToDirectory` now accept these options and have asynchronous counterparts. `ZipArchive` and `ZipArchiveEntry` also gain helpers to create entries from files and extract archives or individual entries asynchronously. `ZipArchiveEntry.VersionMadeBy` exposes the platform and version fields written by ZIP tools ([dotnet/runtime #130109](https://github.com/dotnet/runtime/pull/130109)).
 
 ## Ordinal casing APIs
 
@@ -329,8 +329,6 @@ AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
   `GetService` returns `null` and the `IsService` queries return `false` for every type. The `GetRequiredService`/`GetRequiredKeyedService` paths still throw `InvalidOperationException`, matching the behavior of a real provider that has no matching registration.
 
 - **`ReadOnlySpan<T>.Min` and `Max`** extension methods return the smallest or largest element of a span, with optional `IComparer<T>` overloads ([dotnet/runtime #128306](https://github.com/dotnet/runtime/pull/128306)). They match the LINQ operators' semantics on an empty span — throwing `InvalidOperationException` for value types and returning `null` for reference types — but avoid the enumerator allocation.
-
-- **`ZipArchiveEntry.VersionMadeBy`** exposes the platform and version fields written by ZIP tools ([dotnet/runtime #130109](https://github.com/dotnet/runtime/pull/130109)).
 
 - **Process startup callbacks** let applications use custom native process-creation APIs while retaining `Process` features such as redirected I/O and exit handling ([dotnet/runtime #128862](https://github.com/dotnet/runtime/pull/128862)). `WindowsProcessStartArguments.Start` and `UnixProcessStartArguments.Start` supply a callback with prepared command-line or argument-vector, environment, and standard-handle data.
 
