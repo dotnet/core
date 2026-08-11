@@ -8,6 +8,17 @@ Your app needs to be on the latest .NET 8 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 8.0.30 (August 2026)
+  - [CVE-2026-62898 | .NET Information Disclosure Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62898)
+  - [CVE-2026-62899 | .NET Security Feature Bypass Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62899)
+  - [CVE-2026-62900 | .NET Information Disclosure Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62900)
+  - [CVE-2026-62901 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62901)
+  - [CVE-2026-62886 | .NET Elevation of Privilege Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62886)
+  - [CVE-2026-62871 | .NET Elevation of Privilege Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62871)
+  - [CVE-2026-70354 | .NET Core Remote Code Execution Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70354)
+  - [CVE-2026-62902 | .NET Information Disclosure Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62902)
+  - [CVE-2026-62897 | .NET Remote Code Execution Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62897)
+  - [CVE-2026-62909 | .NET Elevation of Privilege Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62909)
 - 8.0.29 (July 2026)
   - [CVE-2026-50651 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-50651)
   - [CVE-2026-50526 | .NET Tampering Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-50526)
