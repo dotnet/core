@@ -1,6 +1,6 @@
 # .NET MAUI in .NET 11 Preview 7 - Release Notes
 
-.NET 11 Preview 7 adds cross-platform passkey authentication, opt-in XAML
+.NET 11 Preview 7 adds cross-platform passkey authentication, XAML
 Incremental Hot Reload, Shell route templates, and faster device development
 workflows:
 
@@ -38,7 +38,7 @@ validation, or challenge generation.
 
 ## XAML Incremental Hot Reload
 
-> XAML Incremental Hot Reload is an opt-in preview feature in .NET 11.
+> XAML Incremental Hot Reload is a preview feature in .NET 11.
 
 XAML Incremental Hot Reload uses a source generator and a
 `MetadataUpdateHandler` to update already-instantiated pages without rebuilding
@@ -46,19 +46,23 @@ the app. It supports property changes, child additions and removals, structural
 reordering, attached properties, markup extensions, bindings, and
 `ResourceDictionary` updates
 ([dotnet/maui #34338](https://github.com/dotnet/maui/pull/34338)).
+The same source-generated update path also applies XAML edits during
+`dotnet watch` sessions.
 
-The feature is off by default in Preview 7. Enable it for Debug builds with:
+The feature is enabled by default for Debug builds in Preview 7. Release and
+publish builds remain disabled by default. To opt out for Debug builds and use
+the existing XAML Hot Reload path, set:
 
 ```xml
 <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-  <EnableMauiIncrementalHotReload>true</EnableMauiIncrementalHotReload>
+  <EnableMauiIncrementalHotReload>false</EnableMauiIncrementalHotReload>
 </PropertyGroup>
 ```
 
-When the switch is off, MAUI continues to use the existing XAML Hot Reload
-path ([dotnet/maui #36832](https://github.com/dotnet/maui/pull/36832)).
+This Debug default and opt-out behavior was finalized in
+[dotnet/maui #37163](https://github.com/dotnet/maui/pull/37163).
 
-For supported edits and current limitations, see [XAML Hot
+For general XAML Hot Reload background, see [XAML Hot
 Reload](https://learn.microsoft.com/dotnet/maui/xaml/hot-reload?view=net-maui-11.0).
 
 ## Shell route templates
@@ -82,10 +86,9 @@ navigation](https://learn.microsoft.com/dotnet/maui/fundamentals/shell/navigatio
 
 ## AOT-safe RelativeSource bindings
 
-The XAML source generator now compiles
-`{RelativeSource AncestorType=...}` bindings to trim-safe
-`TypedBinding<TAncestor, TProperty>` instances when the ancestor type can be
-resolved at compile time
+The XAML source generator now compiles `{RelativeSource AncestorType=...}`
+bindings to trim-safe `TypedBinding<TAncestor, TProperty>` instances when the
+ancestor type can be resolved at compile time
 ([dotnet/maui #34408](https://github.com/dotnet/maui/pull/34408)).
 
 ```xaml
@@ -94,12 +97,14 @@ resolved at compile time
 ```
 
 This avoids a string-based binding path that relies on reflection and could
-lose bound members during trimming in AOT Release builds. `Self`,
-`TemplatedParent`, and `x:Reference` bindings whose source type can't be
-resolved at compile time continue to use the runtime binding path. An
-`AncestorType` that can't be resolved causes XAML compilation to fail. A
-follow-up also removes a false-positive `MAUIG2045` warning for unsealed
-ancestor types
+lose bound members during trimming in AOT Release builds. `Self` and
+`TemplatedParent` bindings continue to use the runtime binding path. An
+`x:Reference` binding compiles when the referenced element and binding path can
+be resolved; when the element resolves but its binding path can't be compiled,
+the binding falls back to the runtime path. An unresolved `x:Reference` name
+causes XAML compilation to fail with `MAUIG1001`; an `AncestorType` that can't
+be resolved also causes compilation to fail. A follow-up removes a
+false-positive `MAUIG2045` warning for unsealed ancestor types
 ([dotnet/maui #36905](https://github.com/dotnet/maui/pull/36905)).
 
 Learn more about [compiled
@@ -136,9 +141,10 @@ The handler is the default in Preview 7. `TabbedRenderer` remains available in
 the Compatibility layer as a manual fallback, so apps with extensive
 `TabbedPage` customizations should test this preview.
 
-See the [`TabbedPage`
+For background, see the [`TabbedPage`
 documentation](https://learn.microsoft.com/dotnet/maui/user-interface/pages/tabbedpage?view=net-maui-11.0)
-for migration guidance.
+and [reuse custom renderers in .NET
+MAUI](https://learn.microsoft.com/dotnet/maui/migration/custom-renderers?view=net-maui-11.0).
 
 ## Platform-specific capabilities
 
@@ -157,9 +163,11 @@ for migration guidance.
   callbacks in single-instance apps
   ([dotnet/maui #36640](https://github.com/dotnet/maui/pull/36640)).
 
-See the updated [media picker](https://learn.microsoft.com/dotnet/maui/platform-integration/device-media/picker?view=net-maui-11.0),
+For general API background, see the [media
+picker](https://learn.microsoft.com/dotnet/maui/platform-integration/device-media/picker?view=net-maui-11.0),
 [window](https://learn.microsoft.com/dotnet/maui/user-interface/controls/window?view=net-maui-11.0),
-and [app lifecycle](https://learn.microsoft.com/dotnet/maui/fundamentals/app-lifecycle?view=net-maui-11.0)
+and [app
+lifecycle](https://learn.microsoft.com/dotnet/maui/fundamentals/app-lifecycle?view=net-maui-11.0)
 documentation.
 
 Preview 7 also improves keyboard activation for `Border` on Windows
