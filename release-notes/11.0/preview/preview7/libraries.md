@@ -4,6 +4,7 @@
 .NET 11 Preview 7 includes new .NET libraries features and improvements:
 
 - [IEEE 754 decimal floating-point types](#ieee-754-decimal-floating-point-types)
+- [Partial numeric parsing](#partial-numeric-parsing)
 - [Generic Complex\<T\>](#generic-complext)
 - [HTTP request compression](#http-request-compression)
 - [Configurable HTTP connection eviction](#configurable-http-connection-eviction)
@@ -28,11 +29,11 @@
 
 ## IEEE 754 decimal floating-point types
 
-`System.Numerics` gains three IEEE 754-2019 decimal floating-point types — `Decimal32`, `Decimal64`, and `Decimal128` — with 7, 16, and 34 digits of decimal precision, respectively. Unlike `System.Decimal`, these types use the IEEE binary integer decimal (BID) interchange encoding, subject to the underlying ABI. They support generic math through `IDecimalFloatingPointIeee754<TSelf>`, so generic numeric algorithms can use them alongside the existing floating-point types.
+`System.Numerics` gains three IEEE 754-2019 decimal floating-point types — `Decimal32`, `Decimal64`, and `Decimal128` — with 7, 16, and 34 digits of decimal precision, respectively. Unlike `System.Decimal`, they use the IEEE binary integer decimal (BID) interchange encoding, subject to the underlying ABI, and support IEEE special values such as infinities and NaNs. They support generic math through `IDecimalFloatingPointIeee754<TSelf>`, so generic numeric algorithms can use them alongside the existing floating-point types.
 
 The types include parsing, conversions, arithmetic and comparison operators, rounding, fused multiply-add, quantization, and binary and decimal encoding APIs. Basic arithmetic is validated bit-exact against Intel Decimal Floating-Point Math Library test vectors. Higher-level functions such as transcendentals are not exact in .NET 11 but are planned to be made exact in a future version.
 
-Thank you [@RaymondHuy](https://github.com/RaymondHuy) for this contribution! The feature was completed across [dotnet/runtime #100729](https://github.com/dotnet/runtime/pull/100729), [#130508](https://github.com/dotnet/runtime/pull/130508), [#130807](https://github.com/dotnet/runtime/pull/130807), [#130890](https://github.com/dotnet/runtime/pull/130890), [#130956](https://github.com/dotnet/runtime/pull/130956), [#130957](https://github.com/dotnet/runtime/pull/130957), [#131019](https://github.com/dotnet/runtime/pull/131019), and [#131098](https://github.com/dotnet/runtime/pull/131098).
+The foundational implementation was contributed by [@RaymondHuy](https://github.com/RaymondHuy) in [dotnet/runtime #100729](https://github.com/dotnet/runtime/pull/100729), with the feature completed by the .NET libraries team across [#130508](https://github.com/dotnet/runtime/pull/130508), [#130807](https://github.com/dotnet/runtime/pull/130807), [#130890](https://github.com/dotnet/runtime/pull/130890), [#130956](https://github.com/dotnet/runtime/pull/130956), [#130957](https://github.com/dotnet/runtime/pull/130957), [#131019](https://github.com/dotnet/runtime/pull/131019), and [#131098](https://github.com/dotnet/runtime/pull/131098).
 
 ```csharp
 using System.Numerics;
@@ -51,6 +52,28 @@ Console.WriteLine(total); // 21.70
 // Full transcendental surface with the standard's preferred exponent semantics.
 Decimal128 x = Decimal128.Log(Decimal128.E);        // approximately 1
 Decimal128 y = Decimal128.Sqrt(Decimal128.Parse("2")); // 1.414213562373095048801688724209698
+```
+
+## Partial numeric parsing
+
+`INumberBase<TSelf>.TryParsePartial` adds generic numeric parsing overloads that report how much input was consumed. This enables parsers for formats such as CSV to parse one numeric field and continue processing the remaining input without copying it or treating the delimiter as a parse failure ([dotnet/runtime #130789](https://github.com/dotnet/runtime/pull/130789)).
+
+```csharp
+using System;
+using System.Globalization;
+
+ReadOnlySpan<char> input = "123; 456";
+if (int.TryParsePartial(
+        input,
+        NumberStyles.Integer,
+        CultureInfo.InvariantCulture,
+        out int value,
+        out int charsConsumed))
+{
+    Console.WriteLine(value); // 123
+    input = input[charsConsumed..];
+    Console.WriteLine(input); // ; 456
+}
 ```
 
 ## Generic Complex\<T\>
@@ -333,8 +356,6 @@ AssemblyLoadContext.SetAssemblyLocationOverride((assembly, defaultLocation) =>
 - **Process startup callbacks** let applications use custom native process-creation APIs while retaining `Process` features such as redirected I/O and exit handling ([dotnet/runtime #128862](https://github.com/dotnet/runtime/pull/128862)). `WindowsProcessStartArguments.Start` and `UnixProcessStartArguments.Start` supply a callback with prepared command-line or argument-vector, environment, and standard-handle data.
 
 - **AVX-VNNI V512 intrinsics** add `AvxVnni.V512` dot-product operations for supporting x86 processors ([dotnet/runtime #128365](https://github.com/dotnet/runtime/pull/128365)). The `MultiplyWideningAndAdd` and saturating variants operate on `Vector512<T>` byte/sbyte and short/short inputs, accumulating into `Vector512<int>`.
-
-- **`INumberBase<TSelf>.TryParsePartial`** adds partial-parse overloads that report characters consumed for `string` and `ReadOnlySpan<char>` inputs, or bytes consumed for `ReadOnlySpan<byte>` ([dotnet/runtime #130789](https://github.com/dotnet/runtime/pull/130789)).
 
 ## Breaking changes
 
