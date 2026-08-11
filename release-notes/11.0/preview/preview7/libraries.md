@@ -236,7 +236,7 @@ int written = value.AsSpan().ToUpperOrdinal(buffer);
 
 ## Polymorphism inference for closed type hierarchies in System.Text.Json
 
-`System.Text.Json` can now infer polymorphic serialization for C# `closed` type hierarchies without an explicit `[JsonDerivedType]` attribute on the base type ([dotnet/runtime #130808](https://github.com/dotnet/runtime/pull/130808)). Set the new `JsonSerializerOptions.InferClosedTypePolymorphism` property (or the equivalent source-generator option) and the serializer discovers the derived types of a closed hierarchy — including generic specializations — and assigns deterministic discriminators. Explicit `[JsonDerivedType]` registrations still take precedence, and the source generator reports diagnostics for hierarchies it cannot infer safely.
+`System.Text.Json` can now infer polymorphic serialization for C# `closed` type hierarchies without explicit `[JsonDerivedType]` attributes on the base type ([dotnet/runtime #130808](https://github.com/dotnet/runtime/pull/130808)). Set the new `JsonSerializerOptions.InferClosedTypePolymorphism` property (or the equivalent source-generator option) and the serializer discovers the derived types of a closed hierarchy — including generic specializations — and assigns deterministic discriminators. Explicit `[JsonDerivedType]` registrations still take precedence, and the source generator reports diagnostics for hierarchies it cannot infer safely.
 
 ```csharp
 using System.Text.Json;
