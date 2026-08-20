@@ -2,6 +2,28 @@
 
 You may encounter the following known issues, which may include workarounds, mitigations, or expected resolution timeframes.
 
+## WPF printing and PDF/XPS generation may fail with certain fonts
+
+After installing the August 2026 .NET update, some WPF applications may fail with a `System.IO.FileFormatException` when printing or generating PDF/XPS content that uses certain fonts, including Calibri.
+
+### Workaround for WPF printing and PDF/XPS generation
+
+Applications may mitigate the issue by enabling the `Switch.MS.Internal.TtfDelta.DisableCmapAndSbitOverflowProtection` AppContext switch in the application's `runtimeconfig.json` file:
+
+```json
+{
+  "configProperties": {
+    "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false,
+    "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false,
+    "Switch.MS.Internal.TtfDelta.DisableCmapAndSbitOverflowProtection": true
+  }
+}
+```
+
+This switch disables security protections introduced in the August 2026 update and may increase exposure to the vulnerabilities addressed by that update. Microsoft recommends using this workaround only as a temporary measure and only when required to address this issue.
+
+**Status:** Investigating.
+
 ## F#
 ### error NU1403: Package content hash validation failed for FSharp.Core.9.0.300. The package is different than the last restore.
 When using lock files with nuget, a package content hash validation fails for FSharp.Core 9.0.303.
