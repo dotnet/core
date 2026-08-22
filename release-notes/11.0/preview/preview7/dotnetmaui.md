@@ -1,12 +1,13 @@
 # .NET MAUI in .NET 11 Preview 7 - Release Notes
 
 .NET 11 Preview 7 adds cross-platform passkey authentication, XAML
-Incremental Hot Reload, Shell route templates, and faster device development
-workflows:
+Incremental Hot Reload, Shell route templates, Avalonia support for the MAUI
+app template, and faster device development workflows:
 
 - [Cross-platform passkey authentication](#cross-platform-passkey-authentication)
 - [XAML Incremental Hot Reload](#xaml-incremental-hot-reload)
 - [Shell route templates](#shell-route-templates)
+- [Create MAUI apps with Avalonia support](#create-maui-apps-with-avalonia-support)
 - [AOT-safe RelativeSource bindings](#aot-safe-relativesource-bindings)
 - [Third-party platform backends](#third-party-platform-backends)
 - [NavigationPage and TabbedPage adopt handlers on Apple platforms](#navigationpage-and-tabbedpage-adopt-handlers-on-apple-platforms)
@@ -83,6 +84,27 @@ navigation; relative navigation is not yet supported.
 
 See [Shell
 navigation](https://learn.microsoft.com/dotnet/maui/fundamentals/shell/navigation?view=net-maui-11.0).
+
+## Create MAUI apps with Avalonia support
+
+The MAUI app template now supports `--with-avalonia`, which adds
+`Avalonia.Controls.Maui`, `Avalonia.Controls.Maui.Desktop`, and a
+platform-neutral `net11.0` desktop target to the generated project. The desktop
+target renders with Avalonia on Windows, macOS, and Linux. The Android, iOS,
+Mac Catalyst, and Windows heads keep native MAUI controls as the default and
+enable Avalonia embedding, so apps can combine native and Avalonia UI
+([dotnet/maui #35950](https://github.com/dotnet/maui/pull/35950)).
+
+```console
+dotnet new maui --with-avalonia
+```
+
+The Avalonia option is ignored when `--sample-content` is enabled.
+
+<https://github.com/user-attachments/assets/2bc14441-7feb-4cd4-83ca-5558a15390d2>
+
+Thank you [@drasticactions](https://github.com/drasticactions) for this
+contribution!
 
 ## AOT-safe RelativeSource bindings
 
