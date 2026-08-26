@@ -19,9 +19,9 @@ Here's a summary of what's new in .NET MAUI in this release:
 
 We've added comprehensive diagnostics and metrics tracking for .NET MAUI applications, focusing on layout performance monitoring with an extensible architecture for future observability needs.
 
-![.NET Aspire dashboard showing several .NET MAUI traces](media/maui-aspire-1.png)
+![Aspire dashboard showing several .NET MAUI traces](media/maui-aspire-1.png)
 
-![.NET Aspire dashboard showing trace detail for an element](media/maui-aspire-2.png)
+![Aspire dashboard showing trace detail for an element](media/maui-aspire-2.png)
 
 **Core Diagnostics Infrastructure:**
 
@@ -101,5 +101,4 @@ This release includes continued integration with multiple .NET runtimes, and sev
 
 Thank you contributors! ❤️
 
-[@Ahamed-Ali](https://github.com/Ahamed-Ali), [@anandhan-rajagopal](https://github.com/anandhan-rajagopal), [@Dhivya-SF4094](https://github.com/Dhivya-SF4094), [@davidnguyen-tech](https://github.com/davidnguyen-tech), [@emaf](https://github.com/emaf), [@grendello](https://github.com/grendello), [@HarishwaranVijayakumar](https://github.com/HarishwaranVijayakumar), [@jfversluis](https://github.com/jfversluis), [@jonathanpeppers](https://github.com/jonathanpeppers), [@jsuarezruiz](https://github.com/jsuarezruiz), [@kubaflo](https://github.com/kubaflo), [@LogishaSelvarajSF4525](https://github.com/LogishaSelvarajSF4525), [@mattleibow](https://github.com/mattleibow), [@NafeelaNazhir](https://github.com/NafeelaNazhir), [@NanthiniMahalingam](https://github.com/NanthiniMahalingam), [@nivetha-nagalingam](https://github.com/nivetha-nagalingam), [@PaulAndersonS](https://github.com/PaulAndersonS), [@pictos](https://github.com/pictos), [@postalservice14](https://github.com/postalservice14), [@prakashKannanSf3972](https://github.com/prakashKannanSf3972), [@PureWeen](https://github.com/PureWeen), [@rmarinho](https://github.com/rmarinho), [@rolfbjarne](https://github.com/rolfbjarne), [@sheiksyedm](https://github.com/sheiksyedm), [@SuthiYuvaraj](https://github.com/SuthiYuvaraj), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman), and [@tj-devel709](https://github.com/tj-devel709).
-
+[@Ahamed-Ali](https://github.com/Ahamed-Ali), @anandhan-rajagopal, [@Dhivya-SF4094](https://github.com/Dhivya-SF4094), [@davidnguyen-tech](https://github.com/davidnguyen-tech), [@emaf](https://github.com/emaf), [@grendello](https://github.com/grendello), [@HarishwaranVijayakumar](https://github.com/HarishwaranVijayakumar), [@jfversluis](https://github.com/jfversluis), [@jonathanpeppers](https://github.com/jonathanpeppers), [@jsuarezruiz](https://github.com/jsuarezruiz), [@kubaflo](https://github.com/kubaflo), [@LogishaSelvarajSF4525](https://github.com/LogishaSelvarajSF4525), [@mattleibow](https://github.com/mattleibow), [@NafeelaNazhir](https://github.com/NafeelaNazhir), [@NanthiniMahalingam](https://github.com/NanthiniMahalingam), [@nivetha-nagalingam](https://github.com/nivetha-nagalingam), [@PaulAndersonS](https://github.com/PaulAndersonS), [@pictos](https://github.com/pictos), [@postalservice14](https://github.com/postalservice14), [@prakashKannanSf3972](https://github.com/prakashKannanSf3972), [@PureWeen](https://github.com/PureWeen), [@rmarinho](https://github.com/rmarinho), [@rolfbjarne](https://github.com/rolfbjarne), [@sheiksyedm](https://github.com/sheiksyedm), [@SuthiYuvaraj](https://github.com/SuthiYuvaraj), [@Tamilarasan-Paranthaman](https://github.com/Tamilarasan-Paranthaman), and [@tj-devel709](https://github.com/tj-devel709).

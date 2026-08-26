@@ -10,7 +10,7 @@ The default package servicing model is “latest version”. The team publishes 
 
 The following libraries use this servicing model:
 
-- [.NET Aspire](https://github.com/dotnet/aspire)
+- [Aspire](https://github.com/microsoft/aspire)
 - [.NET Platform Extensions](https://github.com/dotnet/extensions)
 - [ML.NET](https://github.com/dotnet/machinelearning)
 - [Maintenance-packages](https://github.com/dotnet/maintenance-packages)
