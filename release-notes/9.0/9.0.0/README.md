@@ -32,7 +32,7 @@ You can find a detailed overview of all new features in .NET 9:
 * [What's new in C# 13](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-13)
 * [What's new in F# 9](https://learn.microsoft.com/dotnet/fsharp/whats-new/fsharp-9)
 * [What's new in ASP.NET Core](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-9.0)
-* [What's new in .NET Aspire](https://learn.microsoft.com/dotnet/aspire/whats-new/)
+* [What's new in Aspire](https://aspire.dev/whats-new/)
 * [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-9)
 * [What's new in EF Core](https://learn.microsoft.com/ef/core/what-is-new/ef-core-9.0/whatsnew)
 * [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/net90)
