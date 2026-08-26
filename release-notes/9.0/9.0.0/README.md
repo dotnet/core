@@ -18,7 +18,7 @@
 
 ## Get Started
 
-Instructions on getting started with .NET 9 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 9 can be found [here on GitHub](./9.0.0.md).
+Instructions on getting started with .NET 9 can be found in the [getting started guide](../get-started.md). Installers and binaries for .NET 9 can be found [here on GitHub](./9.0.0.md).
 
 ## Announcements & Discussions
 
