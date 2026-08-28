@@ -21,11 +21,10 @@ The build selects CoreCLR alongside Mono, the libraries, host, and packs on the 
 
 The in-process crash reporter is now available on Linux and macOS through the existing crash-report settings ([dotnet/runtime #131410](https://github.com/dotnet/runtime/pull/131410)). When `DOTNET_DbgEnableMiniDump` isn't enabled, setting `DOTNET_EnableCrashReport=1` or `DOTNET_EnableCrashReportOnly=1` selects the in-process reporter. Existing createdump behavior remains in place when minidumps are enabled.
 
-The reporter can also generate a JSON or text report on demand while the runtime is still running ([dotnet/runtime #131220](https://github.com/dotnet/runtime/pull/131220)). This internal entry point separates report generation from fatal-signal handling and writes to a caller-provided callback, enabling native fatal-error handlers to request the same diagnostic data without managing the reporter's watchdog or file output.
-
 Community contributions extended the in-process reporter across the remaining Unix platforms and added s390x support ([dotnet/runtime #131604](https://github.com/dotnet/runtime/pull/131604), [dotnet/runtime #131796](https://github.com/dotnet/runtime/pull/131796)). Thank you [@am11](https://github.com/am11) and [@saitama951](https://github.com/saitama951) for these contributions!
 
 <!-- Filtered features (significant engineering work, but too niche for standalone release-note sections):
+  - On-demand in-process crash-report generation (dotnet/runtime #131220): Internal infrastructure for native fatal-error handlers, not a public user-facing capability.
   - WebAssembly RyuJIT and ReadyToRun fixes: Important stabilization work, but the individual changes are architecture-specific fixes rather than a new RC 1 capability.
   - cDAC debugger contract expansion: Primarily diagnostics-tool implementation work without a broad end-user workflow to announce in RC 1.
   - Arm64 SVE constant vectors and masks: Valuable architecture enablement, but limited to specialized SVE code generation and not supported by RC 1 benchmark evidence.
