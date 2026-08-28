@@ -172,6 +172,9 @@ Thank you [@ldsenow](https://github.com/ldsenow) for this contribution!
 
 ## Experimental DirectTls transport
 
+> [!WARNING]
+> DirectTls is experimental in .NET 11 and produces diagnostic `ASPNETCORE_DIRECTTLS_001`.
+
 **DirectTls** is an opt-in Kestrel transport for Linux that terminates TLS directly on the connection's socket by using the runtime's low-level TLS APIs ([dotnet/aspnetcore #67912](https://github.com/dotnet/aspnetcore/pull/67912)). The transport requires OpenSSL and is marked with the `ASPNETCORE_DIRECTTLS_001` experimental diagnostic. It doesn't replace the default sockets transport.
 
 ## Breaking changes
