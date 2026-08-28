@@ -7,7 +7,7 @@
 - [Validation localization uses message conventions](#validation-localization-uses-message-conventions)
 - [Blazor browser options are finalized](#blazor-browser-options-are-finalized)
 - [Select an environment for build-time OpenAPI](#select-an-environment-for-build-time-openapi)
-- [Experimental authentication and transport work](#experimental-authentication-and-transport-work)
+- [Experimental DirectTls transport](#experimental-directtls-transport)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
@@ -18,7 +18,7 @@ ASP.NET Core updates in .NET 11:
 
 ## SignalR authentication refresh is finalized
 
-.NET 11 Preview 6 introduced authentication refresh so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the API shape, adds support to the TypeScript client, and updates Interactive Server circuits when the connection's principal changes ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
+.NET 11 Preview 6 introduced authentication refresh so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shape and updates Interactive Server circuits when the connection's principal changes ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
 
 The server opts in for each hub and can inspect or reject a refreshed identity:
 
@@ -70,7 +70,7 @@ await connection.StartAsync();
 await connection.RefreshAuthenticationAsync();
 ```
 
-For a complete server and client that demonstrate automatic refresh, a manual claims update, and rejection of an identity change, see [danroth27/AspNetCore11Samples #5](https://github.com/danroth27/AspNetCore11Samples/pull/5).
+For a complete server and client that demonstrate automatic refresh, a manual claims update, and rejection of an identity change, see [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5).
 
 ## OpenAPI reflects obsolete APIs
 
@@ -96,7 +96,7 @@ public sealed record LegacyCatalogItem(
 
 The legacy operation, its response schema, and the `Sku` property are marked deprecated in the generated document. An `IOpenApiOperationTransformer` or `IOpenApiSchemaTransformer` can override the generated value for a specific API.
 
-See [danroth27/AspNetCore11Samples #5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a runnable example and its generated OpenAPI document.
+See [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a runnable example and its generated OpenAPI document.
 
 ## Validation localization uses message conventions
 
@@ -130,7 +130,7 @@ public sealed class RegistrationModel
 
 An explicit `ErrorMessage` remains the first resource key to try. If no resource resolves, validation falls back to the non-localized message. The same conventions apply to Blazor static SSR client validation.
 
-See [danroth27/AspNetCore11Samples #5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a localized Blazor form and its end-to-end tests.
+See [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a localized Blazor form and its end-to-end tests.
 
 ## Blazor browser options are finalized
 
@@ -153,7 +153,7 @@ app.MapRazorComponents<App>()
 
 The finalized properties are `InteractiveServer`, `StaticServer`, and `InteractiveWebAssembly`. Server code can read the resolved configuration with `BrowserOptions.GetBrowserOptions(HttpContext)`.
 
-See [danroth27/AspNetCore11Samples #5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a Blazor app that configures and displays the resolved options.
+See [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a Blazor app that configures and displays the resolved options.
 
 ## Select an environment for build-time OpenAPI
 
@@ -170,12 +170,9 @@ The value is passed to the application host in the same role as `ASPNETCORE_ENVI
 
 Thank you [@ldsenow](https://github.com/ldsenow) for this contribution!
 
-## Experimental authentication and transport work
+## Experimental DirectTls transport
 
-RC 1 includes two explicitly experimental areas for early evaluation:
-
-- **Device Bound Session Credentials (DBSC)** are available in the separate `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). The package implements a prototype of the W3C editor's draft for binding a browser session to a device-held private key. Its APIs are marked with the `ASP0030` experimental diagnostic, and the protocol and API shape are expected to change.
-- **DirectTls** is an opt-in Kestrel transport for Linux that terminates TLS directly on the connection's socket by using the runtime's low-level TLS APIs ([dotnet/aspnetcore #67912](https://github.com/dotnet/aspnetcore/pull/67912)). The transport requires OpenSSL and is marked with the `ASPNETCORE_DIRECTTLS_001` experimental diagnostic. It doesn't replace the default sockets transport.
+**DirectTls** is an opt-in Kestrel transport for Linux that terminates TLS directly on the connection's socket by using the runtime's low-level TLS APIs ([dotnet/aspnetcore #67912](https://github.com/dotnet/aspnetcore/pull/67912)). The transport requires OpenSSL and is marked with the `ASPNETCORE_DIRECTTLS_001` experimental diagnostic. It doesn't replace the default sockets transport.
 
 ## Breaking changes
 
@@ -189,6 +186,8 @@ Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MS
 
 <!-- Filtered features (significant engineering work, but not verified as available stable functionality):
   - Components.AI streaming chat and rich-text rendering: the package wasn't available in the validated RC 1 build, so these APIs aren't documented as shipped.
+  - Device Bound Session Credentials: the separate experimental package wasn't available from the validated RC 1 feeds.
+  - SignalR TypeScript authentication refresh: the RC 1 npm package wasn't published when these notes were validated.
   - Concise asset-path compiler transformation: asset metadata work appears in changes.json, but the user-facing compiler transformation wasn't present in the validated RC 1 build.
 -->
 
