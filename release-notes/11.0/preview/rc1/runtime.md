@@ -4,6 +4,7 @@
 
 - [CoreCLR support for linux-bionic](#coreclr-support-for-linux-bionic)
 - [In-process crash reporting on Unix](#in-process-crash-reporting-on-unix)
+- [Half operations use FP16 hardware instructions](#half-operations-use-fp16-hardware-instructions)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -22,6 +23,12 @@ The build selects CoreCLR alongside Mono, the libraries, host, and packs on the 
 The in-process crash reporter is now available on Linux and macOS through the existing crash-report settings ([dotnet/runtime #131410](https://github.com/dotnet/runtime/pull/131410)). When `DOTNET_DbgEnableMiniDump` isn't enabled, setting `DOTNET_EnableCrashReport=1` or `DOTNET_EnableCrashReportOnly=1` selects the in-process reporter. Existing createdump behavior remains in place when minidumps are enabled.
 
 Community contributions extended the in-process reporter across the remaining Unix platforms and added s390x support ([dotnet/runtime #131604](https://github.com/dotnet/runtime/pull/131604), [dotnet/runtime #131796](https://github.com/dotnet/runtime/pull/131796)). Thank you [@am11](https://github.com/am11) and [@saitama951](https://github.com/saitama951) for these contributions!
+
+## Half operations use FP16 hardware instructions
+
+The JIT now uses hardware FP16 instructions for `System.Half` arithmetic and conversions when the processor supports them ([dotnet/runtime #130512](https://github.com/dotnet/runtime/pull/130512)). On x64, arithmetic uses AVX10.1 while conversions between `Half` and `float` can use F16C. On Arm64, arithmetic uses the optional FP16 instruction set, while conversions between `Half` and `float` or `double` use baseline Arm64 instructions.
+
+The optimization requires no application changes and preserves the existing ABI representation of `Half`.
 
 <!-- Filtered features (significant engineering work, but too niche for standalone release-note sections):
   - On-demand in-process crash-report generation (dotnet/runtime #131220): Internal infrastructure for native fatal-error handlers, not a public user-facing capability.
