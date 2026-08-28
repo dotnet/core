@@ -11,6 +11,7 @@
 - [Reuse compression encoders and decoders](#reuse-compression-encoders-and-decoders)
 - [TLS channel binding on Unix](#tls-channel-binding-on-unix)
 - [Faster authenticated encryption on Apple platforms](#faster-authenticated-encryption-on-apple-platforms)
+- [AES Key Wrap support](#aes-key-wrap-support)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -114,6 +115,12 @@ This enables Extended Protection scenarios that bind authentication to the under
 `AesGcm` and `ChaCha20Poly1305` avoid passing empty associated data to CryptoKit, allowing the native implementation to use its empty-AAD fast path ([dotnet/runtime #131630](https://github.com/dotnet/runtime/pull/131630)). On Apple platforms version 26 and later, encryption also skips a copy that was required as a workaround for older Foundation implementations.
 
 On an Apple M1 Ultra running macOS Tahoe 26.6, encrypting a 16-byte payload with empty AAD improved from 2.658 μs to 1.952 μs for `AesGcm`, and from 2.798 μs to 2.135 μs for `ChaCha20Poly1305`. The corresponding decrypt measurements improved from 2.908 μs to 2.548 μs and from 3.213 μs to 2.927 μs.
+
+## AES Key Wrap support
+
+The `Aes` class now supports the unpadded AES Key Wrap algorithm defined by RFC 3394 ([dotnet/runtime #132477](https://github.com/dotnet/runtime/pull/132477)). The new `EncryptKeyWrap`, `DecryptKeyWrap`, `TryDecryptKeyWrap`, and `GetKeyWrapLength` methods complement the padded AES-KWP APIs added earlier in .NET 11.
+
+The APIs provide array-returning and span-based overloads for wrapping cryptographic keys, including scenarios used by JOSE libraries.
 
 <!-- Filtered features (significant engineering work, but too niche for standalone release-note sections):
   - Vectorized Base64 in-place decoding: Useful throughput optimization, but the PR provides no broad end-to-end workload story for RC 1.
