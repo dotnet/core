@@ -10,6 +10,12 @@ set of EF Core 11 features, see
   - Fixed `OPENJSON ... AS JSON` queries for native `json` columns on Azure SQL
     at compatibility level 170
     ([dotnet/efcore #38665](https://github.com/dotnet/efcore/pull/38665)).
+  - Fixed query shaping for primitive collections that use native provider
+    representations instead of JSON strings
+    ([dotnet/efcore #38810](https://github.com/dotnet/efcore/pull/38810)).
+  - Preserved the discriminating `ORDER BY` expression required to materialize
+    many-to-many collections reliably
+    ([dotnet/efcore #38811](https://github.com/dotnet/efcore/pull/38811)).
 - **Model building and migrations**
   - Fixed model finalization and migration scaffolding when a foreign key
     references a key declared on a complex type property
