@@ -70,8 +70,6 @@ await connection.StartAsync();
 await connection.RefreshAuthenticationAsync();
 ```
 
-For a complete server and client that demonstrate automatic refresh, a manual claims update, and rejection of an identity change, see [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5).
-
 ## OpenAPI reflects obsolete APIs
 
 ASP.NET Core OpenAPI generation now maps `[Obsolete]` to `deprecated: true` automatically for operations, schema types, and schema properties ([dotnet/aspnetcore #66355](https://github.com/dotnet/aspnetcore/pull/66355)). API clients and documentation tools can therefore surface the same deprecation information as .NET callers without a custom OpenAPI transformer.
@@ -95,8 +93,6 @@ public sealed record LegacyCatalogItem(
 ```
 
 The legacy operation, its response schema, and the `Sku` property are marked deprecated in the generated document. An `IOpenApiOperationTransformer` or `IOpenApiSchemaTransformer` can override the generated value for a specific API.
-
-See [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a runnable example and its generated OpenAPI document.
 
 ## Validation localization uses message conventions
 
@@ -130,8 +126,6 @@ public sealed class RegistrationModel
 
 An explicit `ErrorMessage` remains the first resource key to try. If no resource resolves, validation falls back to the non-localized message. The same conventions apply to Blazor static SSR client validation.
 
-See [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a localized Blazor form and its end-to-end tests.
-
 ## Blazor browser options are finalized
 
 The server-to-client configuration API introduced in Preview 6 now uses its final RC 1 names ([dotnet/aspnetcore #67918](https://github.com/dotnet/aspnetcore/pull/67918)). Configure browser startup behavior in C# with `WithBrowserOptions`:
@@ -152,8 +146,6 @@ app.MapRazorComponents<App>()
 ```
 
 The finalized properties are `InteractiveServer`, `StaticServer`, and `InteractiveWebAssembly`. Server code can read the resolved configuration with `BrowserOptions.GetBrowserOptions(HttpContext)`.
-
-See [danroth27/AspNetCore11Samples#5](https://github.com/danroth27/AspNetCore11Samples/pull/5) for a Blazor app that configures and displays the resolved options.
 
 ## Select an environment for build-time OpenAPI
 
