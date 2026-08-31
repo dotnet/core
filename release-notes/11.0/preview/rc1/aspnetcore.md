@@ -20,7 +20,7 @@ ASP.NET Core updates in .NET 11:
 
 ## SignalR authentication refresh APIs are finalized
 
-[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shapes ([dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
+[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shapes ([dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
 
 When upgrading from Preview 7:
 
@@ -111,7 +111,7 @@ If you used an earlier RC 1 build, move `onAuthenticationRefreshed` and `onAuthe
 
 ## Blazor Server circuits update after authentication refresh
 
-Interactive Server components now receive the refreshed `ClaimsPrincipal` without reconnecting the circuit ([dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459)). When authentication refresh is enabled for the SignalR connection, Blazor updates its authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims.
+Interactive Server components now receive the refreshed `ClaimsPrincipal` without reconnecting the circuit ([dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221)). When authentication refresh is enabled for the SignalR connection, Blazor updates its authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims.
 
 ## OpenAPI reflects obsolete APIs
 
