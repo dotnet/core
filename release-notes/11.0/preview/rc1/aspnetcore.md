@@ -18,7 +18,13 @@ ASP.NET Core updates in .NET 11:
 
 ## SignalR authentication refresh is finalized
 
-.NET 11 Preview 6 introduced authentication refresh so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shape and updates Interactive Server circuits when the connection's principal changes ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
+[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shape and updates Interactive Server circuits when the connection's principal changes ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
+
+When upgrading from Preview 7:
+
+- Move the `OnAuthenticationRefreshed` and `OnAuthenticationRefreshFailed` callbacks from `AuthenticationRefreshOptions` to the `HubConnection.AuthenticationRefreshed` and `HubConnection.AuthenticationRefreshFailed` events.
+- Update references to `Microsoft.AspNetCore.Http.Connections.AuthenticationRefreshContext` to use `Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext`.
+- Replace `IConnectionUserRefreshFeature` with `IConnectionAuthenticationRefreshFeature` if your transport integration uses the lower-level connection feature.
 
 The server opts in for each hub and can inspect or reject a refreshed identity:
 
@@ -96,7 +102,9 @@ The legacy operation, its response schema, and the `Sku` property are marked dep
 
 ## Validation localization uses message conventions
 
-Preview 7 integrated localization directly into `Microsoft.Extensions.Validation`. RC 1 replaces the preview-only `MessageKeyProvider` API with built-in resource-name conventions ([dotnet/aspnetcore #68202](https://github.com/dotnet/aspnetcore/pull/68202)).
+[Preview 7 integrated localization directly into `Microsoft.Extensions.Validation`](../preview7/aspnetcore.md#validation-localization-is-built-in). RC 1 replaces the preview-only `MessageKeyProvider` API with built-in resource-name conventions ([dotnet/aspnetcore #68202](https://github.com/dotnet/aspnetcore/pull/68202)).
+
+When upgrading from Preview 7, remove assignments to `ValidationOptions.MessageKeyProvider` and rename the corresponding resource keys to match one of the built-in conventions below. The `ValidationMessageKeyContext` type was also removed because custom key providers are no longer used.
 
 When a validation attribute doesn't specify `ErrorMessage`, localization tries these keys from most to least specific:
 
@@ -128,7 +136,20 @@ An explicit `ErrorMessage` remains the first resource key to try. If no resource
 
 ## Blazor browser options are finalized
 
-The server-to-client configuration API introduced in Preview 6 now uses its final RC 1 names ([dotnet/aspnetcore #67918](https://github.com/dotnet/aspnetcore/pull/67918)). Configure browser startup behavior in C# with `WithBrowserOptions`:
+The [server-to-client configuration API introduced in Preview 6](../preview6/aspnetcore.md#configure-blazor-client-behavior-from-the-server) now uses its final RC 1 names ([dotnet/aspnetcore #67918](https://github.com/dotnet/aspnetcore/pull/67918)).
+
+When upgrading from Preview 7, update the following APIs:
+
+| Preview 7 | RC 1 |
+| --- | --- |
+| `BrowserOptions.Server` | `BrowserOptions.InteractiveServer` |
+| `BrowserOptions.Ssr` | `BrowserOptions.StaticServer` |
+| `BrowserOptions.WebAssembly` | `BrowserOptions.InteractiveWebAssembly` |
+| `SsrBrowserOptions` | `StaticServerBrowserOptions` |
+| `WebAssemblyBrowserOptions` | `InteractiveWebAssemblyBrowserOptions` |
+| `httpContext.GetBrowserOptions()` | `BrowserOptions.GetBrowserOptions(httpContext)` |
+
+Configure browser startup behavior in C# with `WithBrowserOptions`:
 
 ```csharp
 app.MapRazorComponents<App>()
@@ -173,11 +194,11 @@ Thank you [@ldsenow](https://github.com/ldsenow) for this contribution!
 
 ### Preview-only insecure chunked parsing switch removed
 
-The `Microsoft.AspNetCore.Server.Kestrel.InsecureChunkedParsing` AppContext switch has been removed ([dotnet/aspnetcore #68553](https://github.com/dotnet/aspnetcore/pull/68553)). The switch was introduced during .NET 11 previews but wasn't intended to be part of .NET 11.
+The `Microsoft.AspNetCore.Server.Kestrel.InsecureChunkedParsing` AppContext switch has been removed ([dotnet/aspnetcore #68553](https://github.com/dotnet/aspnetcore/pull/68553)). The switch was introduced during .NET 11 previews but wasn't intended to be part of .NET 11. Remove any call that enables the switch; there is no replacement, and Kestrel always uses secure chunked-request parsing.
 
 ### Bootstrap 4 Identity UI is obsolete
 
-Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MSBuild warning ([dotnet/aspnetcore #68477](https://github.com/dotnet/aspnetcore/pull/68477)). Bootstrap 5 remains the supported Identity UI framework selection.
+Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MSBuild warning ([dotnet/aspnetcore #68477](https://github.com/dotnet/aspnetcore/pull/68477)). Change the value to `Bootstrap5`, or remove the property to use the default. Bootstrap 5 remains the supported Identity UI framework selection.
 
 <!-- Filtered features (significant engineering work, but not verified as available stable functionality):
   - Components.AI streaming chat and rich-text rendering: the package wasn't available in the validated RC 1 build, so these APIs aren't documented as shipped.
