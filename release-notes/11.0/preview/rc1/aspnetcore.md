@@ -107,8 +107,6 @@ await connection.start();
 await connection.refreshAuthentication();
 ```
 
-If you used an earlier RC 1 build, move `onAuthenticationRefreshed` and `onAuthenticationRefreshFailed` out of the options passed to `withAuthenticationRefresh` and register them on the built `HubConnection` as shown above.
-
 ## Blazor Server circuits update after authentication refresh
 
 Interactive Server components now receive the refreshed `ClaimsPrincipal` without reconnecting the circuit ([dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221)). When authentication refresh is enabled for the SignalR connection, Blazor updates its authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims.
