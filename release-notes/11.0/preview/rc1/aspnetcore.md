@@ -18,11 +18,12 @@ ASP.NET Core updates in .NET 11:
 
 ## SignalR authentication refresh is finalized
 
-[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shape and updates Interactive Server circuits when the connection's principal changes ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
+[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 adds support to the TypeScript client, finalizes the server and client API shapes, and updates Interactive Server circuits when the connection's principal changes ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
 
 When upgrading from Preview 7:
 
-- Move the `OnAuthenticationRefreshed` and `OnAuthenticationRefreshFailed` callbacks from `AuthenticationRefreshOptions` to the `HubConnection.AuthenticationRefreshed` and `HubConnection.AuthenticationRefreshFailed` events.
+- In the .NET client, move the `OnAuthenticationRefreshed` and `OnAuthenticationRefreshFailed` callbacks from `AuthenticationRefreshOptions` to the `HubConnection.AuthenticationRefreshed` and `HubConnection.AuthenticationRefreshFailed` events.
+- In the TypeScript client, move the callbacks from the options passed to `withAuthenticationRefresh` to `HubConnection.onAuthenticationRefreshed` and `HubConnection.onAuthenticationRefreshFailed`.
 - Update references to `Microsoft.AspNetCore.Http.Connections.AuthenticationRefreshContext` to use `Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext`.
 - Replace `IConnectionUserRefreshFeature` with `IConnectionAuthenticationRefreshFeature` if your transport integration uses the lower-level connection feature.
 
@@ -74,6 +75,31 @@ await connection.StartAsync();
 
 // Refresh immediately after acquiring a token with updated claims.
 await connection.RefreshAuthenticationAsync();
+```
+
+The TypeScript client supports the same automatic and manual refresh workflows. Configure automatic refresh with `withAuthenticationRefresh`, register handlers on the built connection, and call `refreshAuthentication` when the application obtains updated claims:
+
+```typescript
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/clock", { accessTokenFactory: getAccessToken })
+    .withAuthenticationRefresh({
+        enableAutoRefresh: true,
+        refreshBeforeExpirationInMilliseconds: 120_000,
+    })
+    .build();
+
+connection.onAuthenticationRefreshed(context => {
+    console.log(`New token lifetime: ${context.newTokenLifetimeInSeconds}`);
+});
+
+connection.onAuthenticationRefreshFailed(context => {
+    console.error(context.error);
+});
+
+await connection.start();
+
+// Refresh immediately after acquiring a token with updated claims.
+await connection.refreshAuthentication();
 ```
 
 ## OpenAPI reflects obsolete APIs
@@ -203,7 +229,6 @@ Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MS
 <!-- Filtered features (significant engineering work, but not verified as available stable functionality):
   - Components.AI streaming chat and rich-text rendering: the package wasn't available in the validated RC 1 build, so these APIs aren't documented as shipped.
   - Device Bound Session Credentials: the separate experimental package wasn't available from the validated RC 1 feeds.
-  - SignalR TypeScript authentication refresh: the RC 1 npm package wasn't published when these notes were validated.
   - Concise asset-path compiler transformation: asset metadata work appears in changes.json, but the user-facing compiler transformation wasn't present in the validated RC 1 build.
 -->
 
