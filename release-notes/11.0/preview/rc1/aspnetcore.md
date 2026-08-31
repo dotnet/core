@@ -2,7 +2,9 @@
 
 .NET 11 RC 1 includes new ASP.NET Core features and improvements:
 
-- [SignalR authentication refresh is finalized](#signalr-authentication-refresh-is-finalized)
+- [SignalR authentication refresh APIs are finalized](#signalr-authentication-refresh-apis-are-finalized)
+- [SignalR TypeScript client supports authentication refresh](#signalr-typescript-client-supports-authentication-refresh)
+- [Blazor Server circuits update after authentication refresh](#blazor-server-circuits-update-after-authentication-refresh)
 - [OpenAPI reflects obsolete APIs](#openapi-reflects-obsolete-apis)
 - [Validation localization uses message conventions](#validation-localization-uses-message-conventions)
 - [Blazor browser options are finalized](#blazor-browser-options-are-finalized)
@@ -16,14 +18,13 @@ ASP.NET Core updates in .NET 11:
 
 - [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
 
-## SignalR authentication refresh is finalized
+## SignalR authentication refresh APIs are finalized
 
-[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 adds support to the TypeScript client, finalizes the server and client API shapes, and updates Interactive Server circuits when the connection's principal changes ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
+[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shapes ([dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
 
 When upgrading from Preview 7:
 
 - In the .NET client, move the `OnAuthenticationRefreshed` and `OnAuthenticationRefreshFailed` callbacks from `AuthenticationRefreshOptions` to the `HubConnection.AuthenticationRefreshed` and `HubConnection.AuthenticationRefreshFailed` events.
-- In the TypeScript client, move the callbacks from the options passed to `withAuthenticationRefresh` to `HubConnection.onAuthenticationRefreshed` and `HubConnection.onAuthenticationRefreshFailed`.
 - Update references to `Microsoft.AspNetCore.Http.Connections.AuthenticationRefreshContext` to use `Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext`.
 - Replace `IConnectionUserRefreshFeature` with `IConnectionAuthenticationRefreshFeature` if your transport integration uses the lower-level connection feature.
 
@@ -77,7 +78,11 @@ await connection.StartAsync();
 await connection.RefreshAuthenticationAsync();
 ```
 
-The TypeScript client supports the same automatic and manual refresh workflows. Configure automatic refresh with `withAuthenticationRefresh`, register handlers on the built connection, and call `refreshAuthentication` when the application obtains updated claims:
+## SignalR TypeScript client supports authentication refresh
+
+The SignalR TypeScript client now supports refreshing an access token without reconnecting ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)). It can schedule a refresh from the token lifetime reported by the server or refresh immediately after the application obtains updated claims.
+
+Configure automatic refresh with `withAuthenticationRefresh`, register success and failure handlers on the built connection, and call `refreshAuthentication` to request a manual refresh:
 
 ```typescript
 const connection = new signalR.HubConnectionBuilder()
@@ -101,6 +106,12 @@ await connection.start();
 // Refresh immediately after acquiring a token with updated claims.
 await connection.refreshAuthentication();
 ```
+
+If you used an earlier RC 1 build, move `onAuthenticationRefreshed` and `onAuthenticationRefreshFailed` out of the options passed to `withAuthenticationRefresh` and register them on the built `HubConnection` as shown above.
+
+## Blazor Server circuits update after authentication refresh
+
+Interactive Server components now receive the refreshed `ClaimsPrincipal` without reconnecting the circuit ([dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221), [dotnet/aspnetcore #68459](https://github.com/dotnet/aspnetcore/pull/68459)). When authentication refresh is enabled for the SignalR connection, Blazor updates its authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims.
 
 ## OpenAPI reflects obsolete APIs
 
