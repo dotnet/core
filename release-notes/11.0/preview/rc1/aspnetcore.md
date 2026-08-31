@@ -20,7 +20,7 @@ ASP.NET Core updates in .NET 11:
 
 ## SignalR authentication refresh APIs are finalized
 
-[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shapes ([dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)).
+[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shapes ([dotnet/aspnetcore #68702](https://github.com/dotnet/aspnetcore/pull/68702)).
 
 When upgrading from Preview 7:
 
@@ -80,7 +80,7 @@ await connection.RefreshAuthenticationAsync();
 
 ## SignalR TypeScript client supports authentication refresh
 
-The SignalR TypeScript client now supports refreshing an access token without reconnecting ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68676](https://github.com/dotnet/aspnetcore/pull/68676)). It can schedule a refresh from the token lifetime reported by the server or refresh immediately after the application obtains updated claims.
+The SignalR TypeScript client now supports refreshing an access token without reconnecting ([dotnet/aspnetcore #67964](https://github.com/dotnet/aspnetcore/pull/67964), [dotnet/aspnetcore #68702](https://github.com/dotnet/aspnetcore/pull/68702)). It can schedule a refresh from the token lifetime reported by the server or refresh immediately after the application obtains updated claims.
 
 Configure automatic refresh with `withAuthenticationRefresh`, register success and failure handlers on the built connection, and call `refreshAuthentication` to request a manual refresh:
 
@@ -235,7 +235,7 @@ The `Microsoft.AspNetCore.Server.Kestrel.InsecureChunkedParsing` AppContext swit
 
 ### Bootstrap 4 Identity UI is obsolete
 
-Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MSBuild warning ([dotnet/aspnetcore #68477](https://github.com/dotnet/aspnetcore/pull/68477)). Change the value to `Bootstrap5`, or remove the property to use the default. Bootstrap 5 remains the supported Identity UI framework selection.
+Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MSBuild warning ([dotnet/aspnetcore #68575](https://github.com/dotnet/aspnetcore/pull/68575)). Change the value to `Bootstrap5`, or remove the property to use the default. Bootstrap 5 remains the supported Identity UI framework selection.
 
 <!-- Filtered features (significant engineering work, but not verified as available stable functionality):
   - Components.AI streaming chat and rich-text rendering: the package wasn't available in the validated RC 1 build, so these APIs aren't documented as shipped.
