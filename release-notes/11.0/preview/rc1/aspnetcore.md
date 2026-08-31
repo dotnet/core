@@ -109,7 +109,20 @@ await connection.refreshAuthentication();
 
 ## Blazor Server circuits update after authentication refresh
 
-Interactive Server components now receive the refreshed `ClaimsPrincipal` without reconnecting the circuit ([dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221)). When authentication refresh is enabled for the SignalR connection, Blazor updates its authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims.
+Interactive Server components can now receive the refreshed `ClaimsPrincipal` without reconnecting the circuit ([dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221)). Authentication refresh isn't enabled by default for the Blazor SignalR client. Enable it when starting Blazor:
+
+```html
+<script src="_framework/blazor.web.js" autostart="false"></script>
+<script>
+    Blazor.start({
+        configureSignalR: builder => {
+            builder.withAuthenticationRefresh();
+        },
+    });
+</script>
+```
+
+After the connection refreshes its authentication, Blazor updates the authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims. This behavior is useful when a user's roles or permissions change during an active circuit, or when a component needs to reload user-specific content after claims are refreshed. The UI can reflect the new authentication state without forcing the user to reconnect or reload the page.
 
 ## OpenAPI reflects obsolete APIs
 
