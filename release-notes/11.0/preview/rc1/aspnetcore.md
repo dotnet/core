@@ -120,7 +120,7 @@ ASP.NET Core OpenAPI generation now maps `[Obsolete]` to `deprecated: true` auto
 ```csharp
 app.MapGet("/catalog/{id}", GetCatalogItem);
 
-#pragma warning disable CS0618
+#pragma warning disable CS0618 // This endpoint intentionally uses an obsolete handler.
 app.MapGet("/catalog/legacy/{id}", GetLegacyCatalogItem);
 #pragma warning restore CS0618
 
@@ -135,7 +135,35 @@ public sealed record LegacyCatalogItem(
     [property: Obsolete("Use StockKeepingUnit.")] string Sku);
 ```
 
-The legacy operation, its response schema, and the `Sku` property are marked deprecated in the generated document. An `IOpenApiOperationTransformer` or `IOpenApiSchemaTransformer` can override the generated value for a specific API.
+The legacy operation, its response schema, and the `Sku` property are marked deprecated in the generated document:
+
+```json
+{
+  "paths": {
+    "/catalog/legacy/{id}": {
+      "get": {
+        "deprecated": true
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LegacyCatalogItem": {
+        "deprecated": true,
+        "properties": {
+          "sku": {
+            "deprecated": true
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+An `IOpenApiOperationTransformer` or `IOpenApiSchemaTransformer` can override the generated value for a specific API.
+
+Thank you [@fickleEfrit](https://github.com/fickleEfrit) for this contribution!
 
 ## Validation localization uses message conventions
 
@@ -267,6 +295,7 @@ Thank you contributors! ❤️
 
 - [@akshay-zz](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Aakshay-zz+milestone%3A11.0-rc1)
 - [@aw0lid](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Aaw0lid+milestone%3A11.0-rc1)
+- [@fickleEfrit](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3AfickleEfrit+milestone%3A11.0-rc1)
 - [@GrantTotinov](https://github.com/dotnet/aspnetcore/pull/67539)
 - [@hishamco](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Ahishamco+milestone%3A11.0-rc1)
 - [@khellang](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Akhellang+milestone%3A11.0-rc1)
