@@ -2,6 +2,7 @@
 
 .NET 11 RC 1 includes new SDK features and improvements:
 
+- [`dotnet test` runs tests on mobile applications](#dotnet-test-runs-tests-on-mobile-applications)
 - [`dotnet test` coordinates complete test runs](#dotnet-test-coordinates-complete-test-runs)
 - [`dotnet test` can select affected tests](#dotnet-test-can-select-affected-tests)
 - [File-based programs integrate with more SDK workflows](#file-based-programs-integrate-with-more-sdk-workflows)
@@ -13,6 +14,25 @@
 .NET SDK updates in .NET 11:
 
 - [What's new in the .NET 11 SDK](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/sdk)
+
+## `dotnet test` runs tests on mobile applications
+
+`dotnet test` can now build, deploy, and run tests on Android, iOS, and other
+desktop .NET MAUI platforms. For Android and iOS, it can select
+connected devices, emulators, or simulators as applicable, then report the
+results through Microsoft.Testing.Platform.
+
+![GIF of `dotnet test` running tests on an Android emulator](media/dotnet-test-android.gif)
+
+The workloads include test project templates for Android
+(`dotnet new androidtest`), iOS (`dotnet new iostest`), macOS
+(`dotnet new macostest`), and Mac Catalyst
+(`dotnet new maccatalysttest`). They use MSTest by default, but you can configure
+another framework supported by
+[Microsoft.Testing.Platform](https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-intro#supported-test-frameworks).
+
+For device selection, deployment, and other command details, see the
+[`dotnet run` and `dotnet test` specification](https://github.com/dotnet/sdk/blob/a7fba614103a81971c230953d05ce214e12a4e16/documentation/specs/dotnet-run-for-maui.md).
 
 ## `dotnet test` coordinates complete test runs
 
