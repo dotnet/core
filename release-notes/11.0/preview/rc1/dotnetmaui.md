@@ -1,8 +1,9 @@
 # .NET MAUI in .NET 11 RC 1 - Release Notes
 
-.NET 11 RC 1 includes new .NET MAUI controls, asset-processing options, and
-platform behavior:
+.NET 11 RC 1 includes a broader testing experience, new .NET MAUI controls,
+asset-processing options, and platform behavior:
 
+- [Mobile and desktop testing with `dotnet test`](#mobile-and-desktop-testing-with-dotnet-test)
 - [TabbedPage badges](#tabbedpage-badges)
 - [Themed splash screens](#themed-splash-screens)
 - [Explicit SwipeItem colors](#explicit-swipeitem-colors)
@@ -20,6 +21,36 @@ platform behavior:
      documented below. The package still carries a preview.7 version label, so
      this evidence establishes branch/package contents but not final public
      workload promotion. -->
+
+## Mobile and desktop testing with `dotnet test`
+
+.NET 11 extends the familiar `dotnet test` workflow to Android, iOS, macOS, and
+Mac Catalyst projects. Tests run in an app process on mobile devices or
+simulators and on desktop targets
+([dotnet/android #11130](https://github.com/dotnet/android/pull/11130),
+[dotnet/macios #25320](https://github.com/dotnet/macios/pull/25320)).
+
+The new MSTest-configured templates are `dotnet new androidtest`,
+`dotnet new iostest`, `dotnet new macostest`, and
+`dotnet new maccatalysttest`
+([Android template](https://github.com/dotnet/android/pull/10862),
+[Apple templates](https://github.com/dotnet/macios/pull/25195)). For example,
+create and run an Android test project on a connected device or emulator:
+
+```console
+dotnet new androidtest -n MyTests
+cd MyTests
+dotnet test
+```
+
+You can configure any
+[Microsoft.Testing.Platform-supported test framework](https://learn.microsoft.com/dotnet/core/testing/#testing-tools)
+instead. For example, configure NUnit:
+
+```csharp
+builder.ConfigureTestApplication(testApplication =>
+    testApplication.AddNUnit(() => [GetType().Assembly]));
+```
 
 ## TabbedPage badges
 
