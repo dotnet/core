@@ -349,6 +349,8 @@ Include the component styles in `App.razor`:
 <link rel="stylesheet" href="@Assets["_content/Microsoft.AspNetCore.Components.AI/ai-chat.css"]" />
 ```
 
+![Blazor AI chat interface showing a conversation with a travel planning agent](media/blazor-ai-chat.png)
+
 Because `UIAgent` accepts any `IChatClient`, it can also use an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) to connect the Blazor UI to a remote agent over the Agent User Interaction Protocol (AG-UI):
 
 ```csharp
@@ -364,6 +366,8 @@ builder.Services.AddHttpClient<IChatClient>(httpClient =>
 ### Render rich text
 
 The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an `IChatClient` provide complete structured snapshots using `RichTextContent` and `RichTextNode` values. The built-in renderer supports headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Plain `TextContent` continues to render as paragraphs.
+
+![Blazor AI chat interface rendering a heading, emphasized text, a list, a quote, a code block, and a table](media/blazor-ai-rich-text.png)
 
 Components.AI doesn't prescribe a source format or parser. Apps can map a parser's syntax tree into `RichTextNode` values to use the built-in renderer, or register a custom `BlockRenderer`. The following example composes `MessageList` and `MessageInput` directly and uses the community [Markdig](https://www.nuget.org/packages/Markdig) library to render Markdown. Because the generated HTML is rendered as markup, the example also sanitizes it with [HtmlSanitizer](https://www.nuget.org/packages/HtmlSanitizer):
 
