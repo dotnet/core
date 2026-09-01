@@ -287,7 +287,6 @@ The `Microsoft.AspNetCore.Server.Kestrel.InsecureChunkedParsing` AppContext swit
 Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MSBuild warning ([dotnet/aspnetcore #68575](https://github.com/dotnet/aspnetcore/pull/68575)). Change the value to `Bootstrap5`, or remove the property to use the default. Bootstrap 5 remains the supported Identity UI framework selection.
 
 <!-- Filtered features (significant engineering work, but not verified as available stable functionality):
-  - Components.AI streaming chat and rich-text rendering: the package wasn't available in the validated RC 1 build, so these APIs aren't documented as shipped.
   - Concise asset-path compiler transformation: asset metadata work appears in changes.json, but the user-facing compiler transformation wasn't present in the validated RC 1 build.
 -->
 
