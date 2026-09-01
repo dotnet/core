@@ -5,7 +5,7 @@
 - [SignalR authentication refresh APIs are finalized](#signalr-authentication-refresh-apis-are-finalized)
 - [SignalR TypeScript client supports authentication refresh](#signalr-typescript-client-supports-authentication-refresh)
 - [Blazor Server circuits update after authentication refresh](#blazor-server-circuits-update-after-authentication-refresh)
-- [Experimental device-bound sessions limit stolen-cookie reuse](#experimental-device-bound-sessions-limit-stolen-cookie-reuse)
+- [Experimental Device Bound Session Credentials support](#experimental-device-bound-session-credentials-support)
 - [Experimental Components.AI adds streaming chat UI](#experimental-componentsai-adds-streaming-chat-ui)
 - [OpenAPI reflects obsolete APIs](#openapi-reflects-obsolete-apis)
 - [Validation localization uses message conventions](#validation-localization-uses-message-conventions)
@@ -119,14 +119,14 @@ Interactive Server components can now receive the refreshed `ClaimsPrincipal` wi
 
 After the connection refreshes its authentication, Blazor updates the authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims. This behavior is useful when a user's roles or permissions change during an active circuit, or when a component needs to reload user-specific content after claims are refreshed. The UI can reflect the new authentication state without forcing the user to reconnect or reload the page.
 
-## Experimental device-bound sessions limit stolen-cookie reuse
+## Experimental Device Bound Session Credentials support
 
 > [!WARNING]
 > Device Bound Session Credentials (DBSC) and the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package remain prerelease in .NET 11. The APIs are annotated as experimental, and referencing DBSC types by name produces diagnostic `ASP0031`. The underlying web specification and browser support are also experimental.
 
 The [DBSC specification](https://w3c.github.io/webappsec-dbsc/) defines a protocol that binds session refresh to a private key held by the browser. The app issues a short-lived session cookie, and the browser must provide a signed proof of possession to refresh it. A copied session cookie might remain usable until it expires, but an attacker without the device key can't use it to extend the session.
 
-ASP.NET Core RC 1 adds an experimental server-side DBSC implementation in the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). The authentication component layers over an existing cookie authentication scheme and manages the registration and refresh endpoints, a path-scoped refresh cookie, and the short-lived session cookie.
+ASP.NET Core in .NET 11 RC1 adds an experimental server-side DBSC implementation in the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). The authentication component layers over an existing cookie authentication scheme and manages the registration and refresh endpoints, a path-scoped refresh cookie, and the short-lived session cookie.
 
 After adding the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package, configure DBSC over an existing cookie authentication scheme:
 
