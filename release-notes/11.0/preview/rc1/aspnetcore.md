@@ -255,38 +255,23 @@ Thank you [@ldsenow](https://github.com/ldsenow) for this contribution!
 
 **DirectTls** is an opt-in Kestrel transport for Linux that terminates TLS directly on the connection's socket by using the runtime's low-level TLS APIs ([dotnet/aspnetcore #67912](https://github.com/dotnet/aspnetcore/pull/67912)). It binds OpenSSL to the socket file descriptor instead of using `SslStream`, avoiding an intermediate managed copy on the TLS data path. The transport is being explored for connection-dense and handshake-heavy workloads where those copies and allocations can be significant.
 
-DirectTls ships as the standalone `Microsoft.AspNetCore.Server.Kestrel.Transport.DirectTls` package and requires OpenSSL on the host. After adding a reference to the package, register the transport after the default Kestrel transport and select it for a specific endpoint:
+DirectTls ships as the standalone `Microsoft.AspNetCore.Server.Kestrel.Transport.DirectTls` package and requires OpenSSL on the host. After adding a reference to the package, register the transport after the default Kestrel transport and select it for a specific endpoint. The following example assumes that `certificate` is an `X509Certificate2` loaded from the app's secure certificate configuration:
 
 ```csharp
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Transport.DirectTls;
 
 #pragma warning disable ASPNETCORE_DIRECTTLS_001 // DirectTls is experimental.
 
-var builder = WebApplication.CreateBuilder(args);
-var certificate = X509CertificateLoader.LoadPkcs12FromFile(
-    "server.pfx",
-    "password");
-
-builder.WebHost
-    .UseKestrel()
-    .UseDirectTls()
-    .ConfigureKestrel(options =>
-    {
-        var endpoint = new DirectTlsEndpoint(IPAddress.Any, 5001);
-        endpoint.Options.ServerCertificate = certificate;
-
-        options.Listen(
-            endpoint,
-            listenOptions =>
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2);
-    });
-
-var app = builder.Build();
-app.MapGet("/", () => "Hello over DirectTls");
-app.Run();
+builder.WebHost.UseKestrel();
+builder.WebHost.UseDirectTls();
+builder.WebHost.ConfigureKestrel(options =>
+{
+    var endpoint = new DirectTlsEndpoint(IPAddress.Any, 5001);
+    endpoint.Options.ServerCertificate = certificate;
+    options.Listen(endpoint);
+});
 ```
 
 Only endpoints configured with `DirectTlsEndpoint` use DirectTls. Other endpoints continue to use the default sockets transport and the standard Kestrel TLS implementation.
