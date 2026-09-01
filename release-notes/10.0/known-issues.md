@@ -2,6 +2,28 @@
 
 You may encounter some known issues, which may include workarounds, mitigations, or expected resolution timeframes. Watch this space for any known issues in .NET 10.0.
 
+## WPF printing and PDF/XPS generation may fail with certain fonts
+
+After installing the August 2026 .NET update, some WPF applications may fail with a `System.IO.FileFormatException` when printing or generating PDF/XPS content that uses certain fonts, including Calibri.
+
+### Workaround for WPF printing and PDF/XPS generation
+
+Applications may mitigate the issue by enabling the `Switch.MS.Internal.TtfDelta.DisableCmapAndSbitOverflowProtection` AppContext switch in the application's `runtimeconfig.json` file:
+
+```json
+{
+  "configProperties": {
+    "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false,
+    "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false,
+    "Switch.MS.Internal.TtfDelta.DisableCmapAndSbitOverflowProtection": true
+  }
+}
+```
+
+This switch disables security protections introduced in the August 2026 update and may increase exposure to the vulnerabilities addressed by that update. Microsoft recommends using this workaround only as a temporary measure and only when required to address this issue.
+
+**Status:** Investigating.
+
 ## Debugger crashes on macOS when using VS Code with .NET 10.0.4
 
 We have a known issue in .NET 10.0.4 that causes the debugger to crash when debugging applications on macOS using Visual Studio Code. This regression is unrelated to the security fixes included in 10.0.4.
@@ -114,4 +136,3 @@ Impacts 10.0.101 and newer .NET SDK versions.
 **Workaround**: `dotnet workload config --update-mode manifests` then `dotnet workload update`. After that you can switch back to workload-set updates or stick with manifest until this is resolved. You may need to delete the dotnet/metadata folder as well.
 
 Alternatively, you can install the previous SDK that included the manifests that are missing, then update, then uninstall that SDK.
-
