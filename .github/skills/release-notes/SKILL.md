@@ -1,7 +1,7 @@
 ---
 name: release-notes
-description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, `update-existing-branch` for incremental reruns on populated branches, `editorial-scoring` for the shared rubric, `api-diff` to generate API diff reports and `api-diff-validation` for API verification, and a multi-model `review-release-notes` pass for final editorial QA.
-compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, update-existing-branch, editorial-scoring, api-diff, api-diff-validation, and review-release-notes skills. Claude Opus 4.6 is the default workflow model; the preferred final reviewer pair is Claude Opus 4.6 + GPT-5.4 for broader editorial feedback.
+description: Generate and maintain .NET release notes from `features.json`. Uses `generate-changes` for authoritative shipped-change data, `generate-features` for scoring/triage, `update-existing-branch` for incremental reruns on populated branches, `editorial-scoring` for the shared rubric, `api-diff` to generate API diff reports, `api-diff-validation` for API verification, `validate-code-samples` to build and run the documented claims against the milestone build, and a multi-model `review-release-notes` pass for final editorial QA.
+compatibility: Requires GitHub MCP server or gh CLI for cross-repo queries. Pairs with the generate-changes, generate-features, update-existing-branch, editorial-scoring, api-diff, api-diff-validation, validate-code-samples, and review-release-notes skills. Claude Opus 4.6 is the default workflow model; the preferred final reviewer pair is Claude Opus 4.6 + GPT-5.4 for broader editorial feedback.
 ---
 
 # .NET Release Notes
@@ -17,8 +17,9 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 3. `update-existing-branch` handles incremental reruns when a milestone branch already exists, merging deltas instead of restarting from scratch
 4. `api-diff-validation` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build
 5. `release-notes` writes curated markdown using the higher-value entries from `features.json`
-6. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
-7. Output is a set of pull requests per release milestone in dotnet/core: a base PR that holds shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and one PR per component file. Each component PR targets the base branch so component teams review and edit their file in isolation. See [`pr-layout.md`](references/pr-layout.md) for the full layout and naming scheme.
+6. `validate-code-samples` builds and runs the documented claims against the milestone build, catching what static API verification cannot see
+7. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
+8. Output is a set of pull requests per release milestone in dotnet/core: a base PR that holds shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and one PR per component file. Each component PR targets the base branch so component teams review and edit their file in isolation. See [`pr-layout.md`](references/pr-layout.md) for the full layout and naming scheme.
 
 ## Local testing (no PRs)
 
@@ -45,4 +46,5 @@ handling review comments without clobbering human edits.
 - [format-template.md](references/format-template.md) — markdown document structure
 - [editorial-rules.md](references/editorial-rules.md) — tone, attribution, naming
 - [api-verification.md](references/api-verification.md) — using dotnet-inspect to verify APIs
+- [../validate-code-samples/SKILL.md](../validate-code-samples/SKILL.md) — building and running the documented claims against the milestone build
 - [examples/](references/examples/) — curated examples from previous releases, organized by component. **Read the examples for your component before writing.** The [examples/README.md](references/examples/README.md) lists 12 editorial principles derived from what works and what doesn't in past release notes.
