@@ -288,7 +288,6 @@ Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MS
 
 <!-- Filtered features (significant engineering work, but not verified as available stable functionality):
   - Components.AI streaming chat and rich-text rendering: the package wasn't available in the validated RC 1 build, so these APIs aren't documented as shipped.
-  - Device Bound Session Credentials: the separate experimental package wasn't available from the validated RC 1 feeds.
   - Concise asset-path compiler transformation: asset metadata work appears in changes.json, but the user-facing compiler transformation wasn't present in the validated RC 1 build.
 -->
 
