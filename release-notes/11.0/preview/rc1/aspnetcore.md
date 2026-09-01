@@ -121,8 +121,8 @@ After the connection refreshes its authentication, Blazor updates the authentica
 
 ## Experimental Device Bound Session Credentials support
 
-> [!WARNING]
-> Device Bound Session Credentials (DBSC) and the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package remain prerelease in .NET 11. The APIs are annotated as experimental, and referencing DBSC types by name produces diagnostic `ASP0031`. The underlying web specification and browser support are also experimental.
+> [!IMPORTANT]
+> The `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package is experimental and will remain prerelease throughout .NET 11 and until the specification stabilizes. For .NET 11 RC1, use version `0.11.0-rc.1.26427.112` of the package.
 
 The [DBSC specification](https://w3c.github.io/webappsec-dbsc/) defines a protocol that binds session refresh to a private key held by the browser. The app issues a short-lived session cookie, and the browser must provide a signed proof of possession to refresh it. A copied session cookie might remain usable until it expires, but an attacker without the device key can't use it to extend the session.
 
@@ -144,8 +144,8 @@ Browser support currently requires an experimental DBSC implementation, such as 
 
 ## Experimental Components.AI adds streaming chat UI
 
-> [!WARNING]
-> The `Microsoft.AspNetCore.Components.AI` package remains prerelease throughout .NET 11. RC 1 packages therefore retain a `preview.7` version prefix.
+> [!IMPORTANT]
+> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `11.0.0-preview.7.26427.112` of the package.
 
 `Microsoft.AspNetCore.Components.AI` adds a provider- and protocol-neutral Blazor component model for streaming AI conversations ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)). Apps supply an `IChatClient` from `Microsoft.Extensions.AI`. `UIAgent` turns its streaming responses into observable conversation state, while components such as `ChatPage`, `MessageList`, and `MessageInput` render the conversation and respond to streaming, cancellation, error, and retry updates.
 
