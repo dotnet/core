@@ -124,7 +124,9 @@ After the connection refreshes its authentication, Blazor updates the authentica
 > [!WARNING]
 > Device Bound Session Credentials (DBSC) and the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package remain prerelease in .NET 11. The APIs are annotated as experimental, and referencing DBSC types by name produces diagnostic `ASP0031`. The underlying web specification and browser support are also experimental.
 
-DBSC adds an experimental hardening layer for cookie authentication ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). It binds session refresh to a private key held by the browser. The app issues a short-lived session cookie, and the browser must provide a signed proof of possession to refresh it. A copied session cookie might remain usable until it expires, but an attacker without the device key can't use it to extend the session.
+The [DBSC specification](https://w3c.github.io/webappsec-dbsc/) defines a protocol that binds session refresh to a private key held by the browser. The app issues a short-lived session cookie, and the browser must provide a signed proof of possession to refresh it. A copied session cookie might remain usable until it expires, but an attacker without the device key can't use it to extend the session.
+
+ASP.NET Core RC 1 adds an experimental server-side DBSC implementation in the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). The authentication component layers over an existing cookie authentication scheme and manages the registration and refresh endpoints, a path-scoped refresh cookie, and the short-lived session cookie.
 
 After adding the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package, configure DBSC over an existing cookie authentication scheme:
 
@@ -138,7 +140,7 @@ builder.Services
     });
 ```
 
-DBSC manages the registration and refresh endpoints, a path-scoped refresh cookie, and the short-lived session cookie. Browser support currently requires an experimental DBSC implementation, such as the feature available behind a flag in Chromium.
+Browser support currently requires an experimental DBSC implementation, such as the feature available behind a flag in Chromium.
 
 ## Experimental Components.AI adds streaming chat UI
 
