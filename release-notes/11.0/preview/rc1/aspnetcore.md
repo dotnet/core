@@ -140,7 +140,7 @@ builder.Services
     });
 ```
 
-Browser support currently requires an experimental DBSC implementation, such as the feature available behind a flag in Chromium.
+Browser support currently requires an experimental DBSC implementation. See [Chrome's DBSC documentation](https://developer.chrome.com/docs/web-platform/device-bound-session-credentials) for implementation and enablement details.
 
 ## Experimental Components.AI adds streaming chat UI
 
