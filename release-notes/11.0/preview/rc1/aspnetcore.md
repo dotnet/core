@@ -5,12 +5,12 @@
 - [SignalR authentication refresh APIs are finalized](#signalr-authentication-refresh-apis-are-finalized)
 - [SignalR TypeScript client supports authentication refresh](#signalr-typescript-client-supports-authentication-refresh)
 - [Blazor Server circuits update after authentication refresh](#blazor-server-circuits-update-after-authentication-refresh)
-- [Experimental Device Bound Session Credentials support](#experimental-device-bound-session-credentials-support)
-- [Experimental Components.AI adds streaming chat UI](#experimental-componentsai-adds-streaming-chat-ui)
 - [OpenAPI reflects obsolete APIs](#openapi-reflects-obsolete-apis)
 - [Validation localization uses message conventions](#validation-localization-uses-message-conventions)
 - [Blazor browser options are finalized](#blazor-browser-options-are-finalized)
 - [Select an environment for build-time OpenAPI](#select-an-environment-for-build-time-openapi)
+- [Experimental Device Bound Session Credentials support](#experimental-device-bound-session-credentials-support)
+- [Experimental Components.AI adds streaming chat UI](#experimental-componentsai-adds-streaming-chat-ui)
 - [Experimental DirectTls transport](#experimental-directtls-transport)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
@@ -118,61 +118,6 @@ await connection.refreshAuthentication();
 Interactive Server components can now receive the refreshed `ClaimsPrincipal` without reconnecting the circuit ([dotnet/aspnetcore #68221](https://github.com/dotnet/aspnetcore/pull/68221)). The Blazor component hub and client enable authentication refresh automatically, so no additional configuration is required ([dotnet/aspnetcore #68593](https://github.com/dotnet/aspnetcore/pull/68593)).
 
 After the connection refreshes its authentication, Blazor updates the authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims. This behavior is useful when a user's roles or permissions change during an active circuit, or when a component needs to reload user-specific content after claims are refreshed. The UI can reflect the new authentication state without forcing the user to reconnect or reload the page.
-
-## Experimental Device Bound Session Credentials support
-
-> [!IMPORTANT]
-> The `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package is experimental and will remain prerelease throughout .NET 11 and until the specification stabilizes. For .NET 11 RC1, use version `0.11.0-rc.1.26427.112` of the package.
-
-The [DBSC specification](https://w3c.github.io/webappsec-dbsc/) defines a protocol that binds session refresh to a private key held by the browser. The app issues a short-lived session cookie, and the browser must provide a signed proof of possession to refresh it. A copied session cookie might remain usable until it expires, but an attacker without the device key can't use it to extend the session.
-
-ASP.NET Core in .NET 11 RC1 adds an experimental server-side DBSC implementation in the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). The authentication component layers over an existing cookie authentication scheme and manages the registration and refresh endpoints, a path-scoped refresh cookie, and the short-lived session cookie.
-
-After adding the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package, configure DBSC over an existing cookie authentication scheme:
-
-```csharp
-builder.Services
-    .AddAuthentication("Application")
-    .AddCookie("Application")
-    .AddDeviceBoundSession("Application", options =>
-    {
-        options.ShortLivedCookieExpiration = TimeSpan.FromMinutes(10);
-    });
-```
-
-Browser support currently requires an experimental DBSC implementation. See [Chrome's DBSC documentation](https://developer.chrome.com/docs/web-platform/device-bound-session-credentials) for implementation and enablement details.
-
-## Experimental Components.AI adds streaming chat UI
-
-> [!IMPORTANT]
-> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `11.0.0-preview.7.26427.112` of the package.
-
-`Microsoft.AspNetCore.Components.AI` adds a provider- and protocol-neutral Blazor component model for streaming AI conversations ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)). Apps supply an `IChatClient` from `Microsoft.Extensions.AI`. `UIAgent` turns its streaming responses into observable conversation state, while components such as `ChatPage`, `MessageList`, and `MessageInput` render the conversation and respond to streaming, cancellation, error, and retry updates.
-
-The following component creates a `UIAgent` over an app-provided `IChatClient` and renders a complete chat UI:
-
-```razor
-@using Microsoft.AspNetCore.Components.AI
-@using Microsoft.Extensions.AI
-@rendermode InteractiveServer
-@implements IDisposable
-@inject IChatClient ChatClient
-
-<ChatPage Agent="_agent" Placeholder="Type a message..." />
-
-@code {
-    private UIAgent _agent = default!;
-
-    protected override void OnInitialized()
-    {
-        _agent = new UIAgent(ChatClient);
-    }
-
-    public void Dispose() => _agent.Dispose();
-}
-```
-
-RC 1 also adds structured rich-text content and rendering ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)). Apps can map Markdown or another source format into `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Parsing remains an application concern, so Components.AI doesn't require or prescribe a Markdown library.
 
 ## OpenAPI reflects obsolete APIs
 
@@ -328,6 +273,61 @@ Build-time OpenAPI generation can now run the app under a specified hosting envi
 The value is passed to the application host in the same role as `ASPNETCORE_ENVIRONMENT` or `DOTNET_ENVIRONMENT`.
 
 Thank you [@ldsenow](https://github.com/ldsenow) for this contribution!
+
+## Experimental Device Bound Session Credentials support
+
+> [!IMPORTANT]
+> The `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package is experimental and will remain prerelease throughout .NET 11 and until the specification stabilizes. For .NET 11 RC1, use version `0.11.0-rc.1.26427.112` of the package.
+
+The [DBSC specification](https://w3c.github.io/webappsec-dbsc/) defines a protocol that binds session refresh to a private key held by the browser. The app issues a short-lived session cookie, and the browser must provide a signed proof of possession to refresh it. A copied session cookie might remain usable until it expires, but an attacker without the device key can't use it to extend the session.
+
+ASP.NET Core in .NET 11 RC1 adds an experimental server-side DBSC implementation in the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). The authentication component layers over an existing cookie authentication scheme and manages the registration and refresh endpoints, a path-scoped refresh cookie, and the short-lived session cookie.
+
+After adding the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package, configure DBSC over an existing cookie authentication scheme:
+
+```csharp
+builder.Services
+    .AddAuthentication("Application")
+    .AddCookie("Application")
+    .AddDeviceBoundSession("Application", options =>
+    {
+        options.ShortLivedCookieExpiration = TimeSpan.FromMinutes(10);
+    });
+```
+
+Browser support currently requires an experimental DBSC implementation. See [Chrome's DBSC documentation](https://developer.chrome.com/docs/web-platform/device-bound-session-credentials) for implementation and enablement details.
+
+## Experimental Components.AI adds streaming chat UI
+
+> [!IMPORTANT]
+> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `11.0.0-preview.7.26427.112` of the package.
+
+`Microsoft.AspNetCore.Components.AI` adds a provider- and protocol-neutral Blazor component model for streaming AI conversations ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)). Apps supply an `IChatClient` from `Microsoft.Extensions.AI`. `UIAgent` turns its streaming responses into observable conversation state, while components such as `ChatPage`, `MessageList`, and `MessageInput` render the conversation and respond to streaming, cancellation, error, and retry updates.
+
+The following component creates a `UIAgent` over an app-provided `IChatClient` and renders a complete chat UI:
+
+```razor
+@using Microsoft.AspNetCore.Components.AI
+@using Microsoft.Extensions.AI
+@rendermode InteractiveServer
+@implements IDisposable
+@inject IChatClient ChatClient
+
+<ChatPage Agent="_agent" Placeholder="Type a message..." />
+
+@code {
+    private UIAgent _agent = default!;
+
+    protected override void OnInitialized()
+    {
+        _agent = new UIAgent(ChatClient);
+    }
+
+    public void Dispose() => _agent.Dispose();
+}
+```
+
+RC 1 also adds structured rich-text content and rendering ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)). Apps can map Markdown or another source format into `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Parsing remains an application concern, so Components.AI doesn't require or prescribe a Markdown library.
 
 ## Experimental DirectTls transport
 
