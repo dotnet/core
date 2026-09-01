@@ -10,7 +10,7 @@
 - [Blazor browser options are finalized](#blazor-browser-options-are-finalized)
 - [Select an environment for build-time OpenAPI](#select-an-environment-for-build-time-openapi)
 - [Experimental Device Bound Session Credentials support](#experimental-device-bound-session-credentials-support)
-- [Experimental Components.AI adds streaming chat UI](#experimental-componentsai-adds-streaming-chat-ui)
+- [Experimental Blazor AI components for agentic user interfaces](#experimental-blazor-ai-components-for-agentic-user-interfaces)
 - [Experimental DirectTls transport](#experimental-directtls-transport)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
@@ -297,14 +297,26 @@ builder.Services
 
 Browser support currently requires an experimental DBSC implementation. See [Chrome's DBSC documentation](https://developer.chrome.com/docs/web-platform/device-bound-session-credentials) for implementation and enablement details.
 
-## Experimental Components.AI adds streaming chat UI
+## Experimental Blazor AI components for agentic user interfaces
+
+Modern AI apps increasingly provide rich interactions with agents. A complete agentic user interface may need to stream ongoing work, visualize agent reasoning and progress, request approval before tools act, accept multimodal input, and synchronize state between the app and the agent. The Blazor AI components are designed to provide building blocks for creating these experiences using Blazor's component model.
+
+.NET 11 RC1 includes an initial set of Blazor AI components focused on streaming chat and rich-text rendering.
 
 > [!IMPORTANT]
 > The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `11.0.0-preview.7.26427.112` of the package.
 
-`Microsoft.AspNetCore.Components.AI` adds a provider- and protocol-neutral Blazor component model for streaming AI conversations ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)). Apps supply an `IChatClient` from `Microsoft.Extensions.AI`. `UIAgent` turns its streaming responses into observable conversation state, while components such as `ChatPage`, `MessageList`, and `MessageInput` render the conversation and respond to streaming, cancellation, error, and retry updates.
+### Stream conversations into Blazor components
 
-The following component creates a `UIAgent` over an app-provided `IChatClient` and renders a complete chat UI:
+The initial streaming chat support ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)) is provider- and protocol-neutral. Apps supply an `IChatClient` from `Microsoft.Extensions.AI`, and `UIAgent` converts its streaming responses into observable content blocks that the UI can render as they arrive. `UIAgent` also retains the message history for subsequent turns.
+
+`ChatPage` is a complete chat shell that combines three lower-level components:
+
+- `AgentBoundary` creates and cascades the conversation state.
+- `MessageList` renders each turn as it streams and provides default typing, error, and retry UI.
+- `MessageInput` sends messages from a text area and disables input while a response is streaming.
+
+The following component creates a `UIAgent` over an app-provided `IChatClient` and renders the conversation with `ChatPage`:
 
 ```razor
 @using Microsoft.AspNetCore.Components.AI
@@ -313,7 +325,11 @@ The following component creates a `UIAgent` over an app-provided `IChatClient` a
 @implements IDisposable
 @inject IChatClient ChatClient
 
-<ChatPage Agent="_agent" Placeholder="Type a message..." />
+<ChatPage Agent="_agent" Placeholder="Type a message...">
+    <WelcomeContent>
+        <p>Ask the agent a question.</p>
+    </WelcomeContent>
+</ChatPage>
 
 @code {
     private UIAgent _agent = default!;
@@ -327,7 +343,76 @@ The following component creates a `UIAgent` over an app-provided `IChatClient` a
 }
 ```
 
-RC 1 also adds structured rich-text content and rendering ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)). Apps can map Markdown or another source format into `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Parsing remains an application concern, so Components.AI doesn't require or prescribe a Markdown library.
+Include the component styles in `App.razor`:
+
+```razor
+<link rel="stylesheet" href="@Assets["_content/Microsoft.AspNetCore.Components.AI/ai-chat.css"]" />
+```
+
+Because `UIAgent` accepts any `IChatClient`, it can also use an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) to connect the Blazor UI to a remote agent over the Agent User Interaction Protocol (AG-UI):
+
+```csharp
+using AGUI.Client;
+using Microsoft.Extensions.AI;
+
+builder.Services.AddHttpClient<IChatClient>(httpClient =>
+    new AGUIChatClient(new(httpClient, "https://api.example.com/agent")));
+```
+
+`AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The RC1 components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
+
+### Render rich text
+
+The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an `IChatClient` provide complete structured snapshots using `RichTextContent` and `RichTextNode` values. The built-in renderer supports headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Plain `TextContent` continues to render as paragraphs.
+
+Components.AI doesn't prescribe a source format or parser. Apps can map a parser's syntax tree into `RichTextNode` values to use the built-in renderer, or register a custom `BlockRenderer`. The following example composes `MessageList` and `MessageInput` directly and uses the community [Markdig](https://www.nuget.org/packages/Markdig) library to render Markdown. Because the generated HTML is rendered as markup, the example also sanitizes it with [HtmlSanitizer](https://www.nuget.org/packages/HtmlSanitizer):
+
+```razor
+@using Ganss.Xss
+@using Markdig
+@using Microsoft.AspNetCore.Components.AI
+@using Microsoft.Extensions.AI
+@rendermode InteractiveServer
+@implements IDisposable
+@inject IChatClient ChatClient
+
+<AgentBoundary Agent="_agent">
+    <MessageList>
+        <EmptyContent>
+            <p>Ask the agent a question.</p>
+        </EmptyContent>
+        <ChildContent>
+            <BlockRenderer TBlock="RichContentBlock" Context="block">
+                @RenderMarkdown(block.RawText)
+            </BlockRenderer>
+        </ChildContent>
+    </MessageList>
+    <MessageInput Placeholder="Type a message..." />
+</AgentBoundary>
+
+@code {
+    private static readonly MarkdownPipeline MarkdownPipeline =
+        new MarkdownPipelineBuilder()
+            .UseAdvancedExtensions()
+            .DisableHtml()
+            .Build();
+    private static readonly HtmlSanitizer HtmlSanitizer = new();
+    private UIAgent _agent = default!;
+
+    protected override void OnInitialized()
+    {
+        _agent = new UIAgent(ChatClient);
+    }
+
+    private static MarkupString RenderMarkdown(string markdown)
+    {
+        var html = Markdown.ToHtml(markdown, MarkdownPipeline);
+        return new MarkupString(HtmlSanitizer.Sanitize(html));
+    }
+
+    public void Dispose() => _agent.Dispose();
+}
+```
 
 ## Experimental DirectTls transport
 
