@@ -5,6 +5,8 @@
 - [SignalR authentication refresh APIs are finalized](#signalr-authentication-refresh-apis-are-finalized)
 - [SignalR TypeScript client supports authentication refresh](#signalr-typescript-client-supports-authentication-refresh)
 - [Blazor Server circuits update after authentication refresh](#blazor-server-circuits-update-after-authentication-refresh)
+- [Experimental device-bound sessions limit stolen-cookie reuse](#experimental-device-bound-sessions-limit-stolen-cookie-reuse)
+- [Experimental Components.AI adds streaming chat UI](#experimental-componentsai-adds-streaming-chat-ui)
 - [OpenAPI reflects obsolete APIs](#openapi-reflects-obsolete-apis)
 - [Validation localization uses message conventions](#validation-localization-uses-message-conventions)
 - [Blazor browser options are finalized](#blazor-browser-options-are-finalized)
@@ -31,14 +33,18 @@ When upgrading from Preview 7:
 The server opts in for each hub and can inspect or reject a refreshed identity:
 
 ```csharp
+using System.Security.Claims;
+
 app.MapHub<ClockHub>("/clock", options =>
 {
     options.EnableAuthenticationRefresh = true;
     options.CloseOnAuthenticationExpiration = true;
     options.OnAuthenticationRefresh = context =>
     {
-        var previousSubject = context.PreviousUser.FindFirstValue("sub");
-        var newSubject = context.NewUser.FindFirstValue("sub");
+        var previousSubject = context.PreviousUser.FindFirstValue("sub")
+            ?? context.PreviousUser.FindFirstValue(ClaimTypes.NameIdentifier);
+        var newSubject = context.NewUser.FindFirstValue("sub")
+            ?? context.NewUser.FindFirstValue(ClaimTypes.NameIdentifier);
 
         return Task.FromResult(
             previousSubject is not null &&
@@ -86,19 +92,19 @@ Configure automatic refresh with `withAuthenticationRefresh`, register success a
 
 ```typescript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/clock", { accessTokenFactory: getAccessToken })
-    .withAuthenticationRefresh({
-        enableAutoRefresh: true,
-        refreshBeforeExpirationInMilliseconds: 120_000,
-    })
-    .build();
+  .withUrl("/clock", { accessTokenFactory: getAccessToken })
+  .withAuthenticationRefresh({
+    enableAutoRefresh: true,
+    refreshBeforeExpirationInMilliseconds: 120_000,
+  })
+  .build();
 
-connection.onAuthenticationRefreshed(context => {
-    console.log(`New token lifetime: ${context.newTokenLifetimeInSeconds}`);
+connection.onAuthenticationRefreshed((context) => {
+  console.log(`New token lifetime: ${context.newTokenLifetimeInSeconds}`);
 });
 
-connection.onAuthenticationRefreshFailed(context => {
-    console.error(context.error);
+connection.onAuthenticationRefreshFailed((context) => {
+  console.error(context.error);
 });
 
 await connection.start();
@@ -113,6 +119,59 @@ Interactive Server components can now receive the refreshed `ClaimsPrincipal` wi
 
 After the connection refreshes its authentication, Blazor updates the authentication state and raises `AuthenticationStateChanged`. Components that consume `AuthenticationStateProvider`, including `AuthorizeView`, re-render using the refreshed identity and claims. This behavior is useful when a user's roles or permissions change during an active circuit, or when a component needs to reload user-specific content after claims are refreshed. The UI can reflect the new authentication state without forcing the user to reconnect or reload the page.
 
+## Experimental device-bound sessions limit stolen-cookie reuse
+
+> [!WARNING]
+> Device Bound Session Credentials (DBSC) and the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package remain prerelease in .NET 11. The APIs are annotated as experimental, and referencing DBSC types by name produces diagnostic `ASP0031`. The underlying web specification and browser support are also experimental.
+
+DBSC adds an experimental hardening layer for cookie authentication ([dotnet/aspnetcore #67388](https://github.com/dotnet/aspnetcore/pull/67388)). It binds session refresh to a private key held by the browser. The app issues a short-lived session cookie, and the browser must provide a signed proof of possession to refresh it. A copied session cookie might remain usable until it expires, but an attacker without the device key can't use it to extend the session.
+
+After adding the `Microsoft.AspNetCore.Authentication.DeviceBoundSessions` package, configure DBSC over an existing cookie authentication scheme:
+
+```csharp
+builder.Services
+    .AddAuthentication("Application")
+    .AddCookie("Application")
+    .AddDeviceBoundSession("Application", options =>
+    {
+        options.ShortLivedCookieExpiration = TimeSpan.FromMinutes(10);
+    });
+```
+
+DBSC manages the registration and refresh endpoints, a path-scoped refresh cookie, and the short-lived session cookie. Browser support currently requires an experimental DBSC implementation, such as the feature available behind a flag in Chromium.
+
+## Experimental Components.AI adds streaming chat UI
+
+> [!WARNING]
+> The `Microsoft.AspNetCore.Components.AI` package remains prerelease throughout .NET 11. RC 1 packages therefore retain a `preview.7` version prefix.
+
+`Microsoft.AspNetCore.Components.AI` adds a provider- and protocol-neutral Blazor component model for streaming AI conversations ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)). Apps supply an `IChatClient` from `Microsoft.Extensions.AI`. `UIAgent` turns its streaming responses into observable conversation state, while components such as `ChatPage`, `MessageList`, and `MessageInput` render the conversation and respond to streaming, cancellation, error, and retry updates.
+
+The following component creates a `UIAgent` over an app-provided `IChatClient` and renders a complete chat UI:
+
+```razor
+@using Microsoft.AspNetCore.Components.AI
+@using Microsoft.Extensions.AI
+@rendermode InteractiveServer
+@implements IDisposable
+@inject IChatClient ChatClient
+
+<ChatPage Agent="_agent" Placeholder="Type a message..." />
+
+@code {
+    private UIAgent _agent = default!;
+
+    protected override void OnInitialized()
+    {
+        _agent = new UIAgent(ChatClient);
+    }
+
+    public void Dispose() => _agent.Dispose();
+}
+```
+
+RC 1 also adds structured rich-text content and rendering ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)). Apps can map Markdown or another source format into `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Parsing remains an application concern, so Components.AI doesn't require or prescribe a Markdown library.
+
 ## OpenAPI reflects obsolete APIs
 
 ASP.NET Core OpenAPI generation now maps `[Obsolete]` to `deprecated: true` automatically for operations, schema types, and schema properties ([dotnet/aspnetcore #66355](https://github.com/dotnet/aspnetcore/pull/66355)). API clients and documentation tools can therefore surface the same deprecation information as .NET callers without a custom OpenAPI transformer.
@@ -120,19 +179,28 @@ ASP.NET Core OpenAPI generation now maps `[Obsolete]` to `deprecated: true` auto
 ```csharp
 app.MapGet("/catalog/{id}", GetCatalogItem);
 
-#pragma warning disable CS0618 // This endpoint intentionally uses an obsolete handler.
+#pragma warning disable CS0618 // This example intentionally declares and maps obsolete APIs.
 app.MapGet("/catalog/legacy/{id}", GetLegacyCatalogItem);
-#pragma warning restore CS0618
 
 [Obsolete("Use /catalog/{id}.")]
 static LegacyCatalogItem GetLegacyCatalogItem(int id) =>
     new(id, $"Product {id}", $"SKU-{id:D4}");
+
+static CatalogItem GetCatalogItem(int id) =>
+    new(id, $"Product {id}", $"SKU-{id:D4}");
+
+public sealed record CatalogItem(
+    int Id,
+    string Name,
+    string StockKeepingUnit);
 
 [Obsolete("Use CatalogItem.")]
 public sealed record LegacyCatalogItem(
     int Id,
     string Name,
     [property: Obsolete("Use StockKeepingUnit.")] string Sku);
+
+#pragma warning restore CS0618
 ```
 
 The legacy operation, its response schema, and the `Sku` property are marked deprecated in the generated document:
@@ -180,11 +248,14 @@ When a validation attribute doesn't specify `ErrorMessage`, localization tries t
 For example, this model can use `RegistrationModel_Username_RequiredAttribute_Error`, `RegistrationModel_RequiredAttribute_Error`, or the shared `RequiredAttribute_Error` resource:
 
 ```csharp
+using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Validation;
+
 builder.Services.AddLocalization();
 builder.Services.AddValidation(options =>
 {
     options.LocalizerProvider = (_, factory) =>
-        factory.Create(typeof(ValidationMessages));
+        factory.Create(typeof(MyApp.Resources.ValidationMessages));
 });
 
 [ValidatableType]
@@ -192,8 +263,16 @@ public sealed class RegistrationModel
 {
     [Required]
     [StringLength(20, MinimumLength = 4)]
-    [Display(Name = nameof(ValidationMessages.Username))]
+    [Display(Name = "Username")]
     public string Username { get; set; } = "";
+}
+
+namespace MyApp.Resources
+{
+    // Resources/ValidationMessages.resx uses this type's namespace and name.
+    public sealed class ValidationMessages
+    {
+    }
 }
 ```
 
@@ -205,13 +284,13 @@ The [server-to-client configuration API introduced in Preview 6](../preview6/asp
 
 When upgrading from Preview 7, update the following APIs:
 
-| Preview 7 | RC 1 |
-| --- | --- |
-| `BrowserOptions.Server` | `BrowserOptions.InteractiveServer` |
-| `BrowserOptions.Ssr` | `BrowserOptions.StaticServer` |
-| `BrowserOptions.WebAssembly` | `BrowserOptions.InteractiveWebAssembly` |
-| `SsrBrowserOptions` | `StaticServerBrowserOptions` |
-| `WebAssemblyBrowserOptions` | `InteractiveWebAssemblyBrowserOptions` |
+| Preview 7                         | RC 1                                            |
+| --------------------------------- | ----------------------------------------------- |
+| `BrowserOptions.Server`           | `BrowserOptions.InteractiveServer`              |
+| `BrowserOptions.Ssr`              | `BrowserOptions.StaticServer`                   |
+| `BrowserOptions.WebAssembly`      | `BrowserOptions.InteractiveWebAssembly`         |
+| `SsrBrowserOptions`               | `StaticServerBrowserOptions`                    |
+| `WebAssemblyBrowserOptions`       | `InteractiveWebAssemblyBrowserOptions`          |
 | `httpContext.GetBrowserOptions()` | `BrowserOptions.GetBrowserOptions(httpContext)` |
 
 Configure browser startup behavior in C# with `WithBrowserOptions`:
@@ -235,12 +314,12 @@ The finalized properties are `InteractiveServer`, `StaticServer`, and `Interacti
 
 ## Select an environment for build-time OpenAPI
 
-Build-time OpenAPI generation can now run the app under a specified hosting environment ([dotnet/aspnetcore #63856](https://github.com/dotnet/aspnetcore/pull/63856)). Set `OpenApiGenerateEnvironment` when environment-specific services, endpoints, or transformers affect the generated document:
+Build-time OpenAPI generation can now run the app under a specified hosting environment ([dotnet/aspnetcore #63856](https://github.com/dotnet/aspnetcore/pull/63856)). For projects that use the `Microsoft.Extensions.ApiDescription.Server` package to generate OpenAPI documents at build time, set `OpenApiGenerationEnvironment` when environment-specific services, endpoints, or transformers affect the generated document:
 
 ```xml
 <PropertyGroup>
   <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
-  <OpenApiGenerateEnvironment>Development</OpenApiGenerateEnvironment>
+  <OpenApiGenerationEnvironment>Development</OpenApiGenerationEnvironment>
 </PropertyGroup>
 ```
 
@@ -255,7 +334,7 @@ Thank you [@ldsenow](https://github.com/ldsenow) for this contribution!
 
 **DirectTls** is an opt-in Kestrel transport for Linux that terminates TLS directly on the connection's socket by using the runtime's low-level TLS APIs ([dotnet/aspnetcore #67912](https://github.com/dotnet/aspnetcore/pull/67912)). It binds OpenSSL to the socket file descriptor instead of using `SslStream`, avoiding an intermediate managed copy on the TLS data path. The transport is being explored for connection-dense and handshake-heavy workloads where those copies and allocations can be significant.
 
-DirectTls ships as the standalone `Microsoft.AspNetCore.Server.Kestrel.Transport.DirectTls` package and requires OpenSSL on the host. After adding a reference to the package, register the transport after the default Kestrel transport and select it for a specific endpoint. The following example assumes that `certificate` is an `X509Certificate2` loaded from the app's secure certificate configuration:
+DirectTls ships as the standalone `Microsoft.AspNetCore.Server.Kestrel.Transport.DirectTls` package and requires OpenSSL on the host. After adding a reference to the package, call `UseDirectTls()` to register the transport and select it for a specific endpoint. The following example assumes that `certificate` is an `X509Certificate2` loaded from the app's secure certificate configuration:
 
 ```csharp
 using System.Net;
