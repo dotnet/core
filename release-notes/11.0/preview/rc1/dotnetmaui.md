@@ -47,6 +47,8 @@ cd MyTests
 dotnet test
 ```
 
+![Running Android tests with dotnet test](media/dotnet-test-android.gif)
+
 You can configure any
 [Microsoft.Testing.Platform-supported test framework](https://learn.microsoft.com/dotnet/core/testing/#testing-tools)
 instead. For example, configure NUnit:
