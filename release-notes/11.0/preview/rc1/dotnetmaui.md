@@ -136,8 +136,8 @@ Thank you [@Kebechet](https://github.com/Kebechet) for this contribution!
 
 `FlyoutPage` now uses `FlyoutViewHandler` by default on iOS and Mac Catalyst,
 completing the Apple-platform handler migration for the primary multi-page
-controls. The handler adds custom `FlyoutWidth` support and keeps flyout
-subscriptions isolated between multiple page instances
+controls. The handler keeps flyout subscriptions isolated between multiple
+page instances
 ([dotnet/maui #36676](https://github.com/dotnet/maui/pull/36676)).
 
 Apps that depend on a custom `PhoneFlyoutPageRenderer` can register the
