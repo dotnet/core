@@ -52,11 +52,12 @@ dotnet package update --vulnerable
   </PropertyGroup>
   ```
 
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - NuGet.Config cooldown settings: RC 1 adds configuration read/write support for minPublishAgeHours and minPublishAgeExceptions, but the authoritative change does not establish that package acquisition enforces the cooldown in this release.
-  - Package Source Mapping Copilot command and vulnerability InfoBar: Visual Studio-specific experiences outside the NuGet CLI/client release-note boundary.
-  - Nullable annotation completion: API annotation maintenance without a distinct package-management workflow.
--->
+- **NuGet client libraries now target .NET 10.** The newest NuGet client
+  library packages replace their `net8.0` assets with `net10.0` assets
+  ([NuGet/NuGet.Client #7657](https://github.com/NuGet/NuGet.Client/pull/7657)).
+  This change affects only applications and tools that reference these
+  libraries directly. It does not change target frameworks for projects that
+  use NuGet through the .NET SDK.
 
 ## Bug fixes
 
