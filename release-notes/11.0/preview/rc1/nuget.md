@@ -15,10 +15,6 @@ of forcing separate evaluations with `BuildProjectReferences=false`
 This reduces redundant evaluation work, particularly for multi-targeted
 projects with project references. No project-file change is required.
 
-The implementation retains `BuildProjectReferences=false` for the framework
-assembly reference lookup when `NoBuild=true`, so `dotnet pack --no-build`
-continues not to build referenced projects.
-
 ## Vulnerable package updates work with warnings as errors
 
 `dotnet package update --vulnerable` now works when a project enables
