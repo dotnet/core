@@ -3,7 +3,7 @@
 .NET 11 RC 1 includes new MSBuild features and improvements:
 
 - [Create and extract tar archives](#create-and-extract-tar-archives)
-- [MSBuild server APIs move to a stable namespace](#msbuild-server-apis-move-to-a-stable-namespace)
+- [Expose item glob patterns to build tooling](#expose-item-glob-patterns-to-build-tooling)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 
@@ -21,7 +21,7 @@ gzip-compressed archive with `Compression="GZip"`:
 <Target Name="ArchiveOutput" AfterTargets="Publish">
   <TarDirectory
       SourceDirectory="$(PublishDir)"
-      DestinationFile="$(ArtifactsPath)\package.tar.gz"
+      DestinationFile="$(OutputPath)package.tar.gz"
       Compression="GZip"
       Overwrite="true" />
 </Target>
@@ -44,26 +44,38 @@ optionally overwrite read-only destination files:
 </Target>
 ```
 
-## MSBuild server APIs move to a stable namespace
+## Expose item glob patterns to build tooling
 
-The MSBuild server's public entry points have moved from
-`Microsoft.Build.Experimental` to `Microsoft.Build.Server`
-([dotnet/msbuild #13964](https://github.com/dotnet/msbuild/pull/13964)):
+MSBuild can now expose a project's unevaluated include, exclude, and remove
+glob patterns during a regular build
+([dotnet/msbuild #14389](https://github.com/dotnet/msbuild/pull/14389)).
+This lets build tooling inspect a project's wildcard patterns without hosting
+the MSBuild object model or evaluating the project again.
 
-- `MSBuildClient`
-- `MSBuildClientExitResult`
-- `MSBuildClientExitType`
-- `OutOfProcServerNode`, including its `BuildCallback` delegate
+Set `MSBuildProvideItemGlobs` to the item types that the tooling needs. MSBuild
+then creates an `MSBuildItemGlob` item for each matching include element:
 
-Update source imports and rebuild code that consumes these APIs:
+```xml
+<PropertyGroup>
+  <MSBuildProvideItemGlobs>Compile;Content</MSBuildProvideItemGlobs>
+</PropertyGroup>
 
-```diff
--using Microsoft.Build.Experimental;
-+using Microsoft.Build.Server;
+<Target Name="ShowItemGlobs">
+  <Message
+      Importance="high"
+      Text="%(MSBuildItemGlob.Identity): include=%(MSBuildItemGlob.Include); exclude=%(MSBuildItemGlob.Exclude); remove=%(MSBuildItemGlob.Remove)" />
+</Target>
 ```
 
-This is a binary-breaking namespace move with no forwarding types. Libraries
-compiled against the experimental namespace must be recompiled.
+Each item identifies its item type and provides the `Include`, `Exclude`, and
+`Remove` metadata. The glob patterns remain unexpanded and retain their project
+file order. MSBuild does not create these items when the property is unset.
+
+On the command line, escape the semicolon as `%3B`:
+
+```console
+dotnet build /p:MSBuildProvideItemGlobs=Compile%3BContent
+```
 
 ## Breaking changes
 
@@ -80,12 +92,6 @@ compiled against the experimental namespace must be recompiled.
   `MSBUILDDISABLEFEATURESFROMVERSION`. A value that names a retired wave is
   clamped to 18.4 and produces warning MSB4272. Update the build to work with
   the current behavior instead of depending on the retired opt-out.
-
-<!-- Filtered features (significant engineering work, but too niche for release notes):
-  - Event-level task telemetry: diagnostics plumbing intended for telemetry consumers rather than a general build workflow.
-  - FileAccessData glob-pattern APIs: specialized extensibility for file-access instrumentation.
-  - Directory.Parse.config tolerant parsing: compatibility infrastructure without a broadly applicable project-file feature.
--->
 
 ## Bug fixes
 
