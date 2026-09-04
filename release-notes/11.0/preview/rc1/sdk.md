@@ -1,13 +1,14 @@
 # .NET SDK in .NET 11 RC 1 - Release Notes
 
-.NET 11 RC 1 includes new SDK features and improvements:
+.NET 11 RC 1 includes updates for testing, container publishing, formatting,
+file-based programs, and other CLI workflows:
 
-- [`dotnet test` runs tests on mobile applications](#dotnet-test-runs-tests-on-mobile-applications)
-- [`dotnet test` coordinates complete test runs](#dotnet-test-coordinates-complete-test-runs)
-- [`dotnet test` can select affected tests](#dotnet-test-can-select-affected-tests)
-- [File-based programs integrate with more SDK workflows](#file-based-programs-integrate-with-more-sdk-workflows)
-- [`dotnet format` narrows configuration discovery](#dotnet-format-narrows-configuration-discovery)
-- [`dotnet new install` can select prerelease templates](#dotnet-new-install-can-select-prerelease-templates)
+- [`dotnet test` improves mobile application testing](#dotnet-test-improves-mobile-application-testing)
+- [`dotnet test` adds run-level controls and result layouts](#dotnet-test-adds-run-level-controls-and-result-layouts)
+- [Container publishing produces reproducible images and skips redundant uploads](#container-publishing-produces-reproducible-images-and-skips-redundant-uploads)
+- [File-based programs add Native AOT reuse and formatting support](#file-based-programs-add-native-aot-reuse-and-formatting-support)
+- [`dotnet format` limits configuration discovery to included files](#dotnet-format-limits-configuration-discovery-to-included-files)
+- [Additional CLI improvements](#additional-cli-improvements)
 - [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 
@@ -15,12 +16,11 @@
 
 - [What's new in the .NET 11 SDK](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/sdk)
 
-## `dotnet test` runs tests on mobile applications
+## `dotnet test` improves mobile application testing
 
-`dotnet test` can now build, deploy, and run tests on Android, iOS, and other
-desktop .NET MAUI platforms. For Android and iOS, it can select
-connected devices, emulators, or simulators as applicable, then report the
-results through Microsoft.Testing.Platform.
+The Microsoft.Testing.Platform path for `dotnet test` supports test projects
+that target Android, iOS, macOS, and Mac Catalyst. For Android and iOS, it can
+select connected devices, emulators, or simulators as applicable.
 
 ![GIF of `dotnet test` running tests on an Android emulator](media/dotnet-test-android.gif)
 
@@ -31,10 +31,19 @@ The workloads include test project templates for Android
 another framework supported by
 [Microsoft.Testing.Platform](https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-intro#supported-test-frameworks).
 
+RC 1 fixes a duplicate runtime-pack crash during device deployment
+([dotnet/sdk #55502](https://github.com/dotnet/sdk/pull/55502)).
+`dotnet test` now reports the underlying MSBuild errors when deployment or
+run-argument discovery fails
+([dotnet/sdk #55524](https://github.com/dotnet/sdk/pull/55524)).
+`dotnet test -bl` also records device selection, deployment, and run-argument
+builds in one coherent binary log
+([dotnet/sdk #55589](https://github.com/dotnet/sdk/pull/55589)).
+
 For device selection, deployment, and other command details, see the
 [`dotnet run` and `dotnet test` specification](https://github.com/dotnet/sdk/blob/a7fba614103a81971c230953d05ce214e12a4e16/documentation/specs/dotnet-run-for-maui.md).
 
-## `dotnet test` coordinates complete test runs
+## `dotnet test` adds run-level controls and result layouts
 
 The Microsoft.Testing.Platform path for `dotnet test` adds options that apply to
 the complete run rather than to each test application. Place these options
@@ -59,6 +68,10 @@ separate output directory. This prevents reports with the same relative file
 name from overwriting one another. The default remains `flat`
 ([dotnet/sdk #55475](https://github.com/dotnet/sdk/pull/55475)).
 
+```console
+dotnet test --results-directory-layout per-module
+```
+
 ```text
 TestResults/
   MyTests/
@@ -82,11 +95,15 @@ expands nested traversal projects, de-duplicates diamond references, and honors
 dotnet test dirs.proj
 ```
 
-## `dotnet test` can select affected tests
+`dotnet test --nologo` now maps to Microsoft.Testing.Platform's `--no-banner`
+option, and `--no-banner` appears in the command help
+([dotnet/sdk #55376](https://github.com/dotnet/sdk/pull/55376) and
+[dotnet/sdk #55412](https://github.com/dotnet/sdk/pull/55412)).
 
-An experimental Microsoft.Testing.Platform workflow can collect a repository's
+An experimental affected-test workflow is also available through a separately
+distributed Microsoft.Testing.Platform extension. It can collect a repository's
 test map and then run the tests affected by a change
-([dotnet/sdk #55574](https://github.com/dotnet/sdk/pull/55574)).
+([dotnet/sdk #55574](https://github.com/dotnet/sdk/pull/55574)):
 
 ```powershell
 $env:DOTNET_CLI_ENABLE_AFFECTED_TESTS = "1"
@@ -94,18 +111,42 @@ dotnet test --collect-test-map
 dotnet test --affected-tests
 ```
 
-The repository analysis, test-map storage, and filtering are supplied by a
-separately distributed MTP extension. Collection and affected-test selection
-are mutually exclusive, and they can't be combined with device testing,
-parallel modules, or minimum-test policies.
+Collection and affected-test selection are mutually exclusive and cannot be
+combined with device testing, parallel modules, or minimum-test policies.
 
-## File-based programs integrate with more SDK workflows
+## Container publishing produces reproducible images and skips redundant uploads
 
-The Native AOT command-line path can now launch an unchanged file-based program
-directly from its existing build outputs. Supported cached launches include
+Publishing the same application more than once could previously produce
+different container image digests because timestamps, archive headers, and
+directory enumeration order varied between builds. Set `SOURCE_DATE_EPOCH` to a
+stable Unix timestamp to make independent publishes of the same inputs produce
+the same digest ([dotnet/sdk #55836](https://github.com/dotnet/sdk/pull/55836)).
+
+```bash
+dotnet publish /t:PublishContainer \
+  -p:ContainerRegistry=registry.example.com \
+  -p:SOURCE_DATE_EPOCH="$(git log -1 --pretty=%ct)"
+```
+
+Remote registry publishes now check whether the computed image manifest already
+exists in the destination repository. When it does, the SDK skips processing
+the layers and configuration while still applying every requested image tag.
+This optimization is enabled by default. Set `ContainerPushNoCache=true` to
+bypass the manifest-level check. The SDK still checks each layer and
+configuration blob and does not upload blobs that are already present
+([dotnet/sdk #55838](https://github.com/dotnet/sdk/pull/55838)).
+
+Thank you [@jetersen](https://github.com/jetersen) for the original work in
+[dotnet/sdk #55689](https://github.com/dotnet/sdk/pull/55689) and
+[dotnet/sdk #55690](https://github.com/dotnet/sdk/pull/55690)!
+
+## File-based programs add Native AOT reuse and formatting support
+
+The Native AOT command-line path can reuse existing build outputs when it runs
+an unchanged file-based program. Supported cached launches include
 `dotnet run --file app.cs`, `dotnet run app.cs`, and `dotnet app.cs`. If the
-cache or command shape can't be proven safe, the CLI falls back to the managed
-path ([dotnet/sdk #55529](https://github.com/dotnet/sdk/pull/55529)).
+cached output does not match the current command arguments, the CLI falls back
+to the managed path ([dotnet/sdk #55529](https://github.com/dotnet/sdk/pull/55529)).
 
 `dotnet format` also accepts a file-based program
 ([dotnet/sdk #55626](https://github.com/dotnet/sdk/pull/55626)):
@@ -118,7 +159,7 @@ When a repository enables the SDK artifacts layout, file-based program outputs
 are now placed under that repository's artifacts directory instead of the
 default per-user cache ([dotnet/sdk #55697](https://github.com/dotnet/sdk/pull/55697)).
 
-## `dotnet format` narrows configuration discovery
+## `dotnet format` limits configuration discovery to included files
 
 In folder mode, `dotnet format` now finds `.editorconfig` files by walking the
 ancestor directories of files that will actually be formatted. It no longer
@@ -129,25 +170,25 @@ scans unrelated subtrees such as large `node_modules` directories
 dotnet format whitespace . --folder --include src/App/Program.cs
 ```
 
-The PR's monorepo measurement for formatting one included file improved from
+In one monorepo benchmark, formatting one included file improved from
 1.09 seconds to 0.55 seconds. Use `.globalconfig`, rather than an
 `is_global = true` `.editorconfig` in an unrelated subtree, for configuration
 that must apply globally.
 
 Thank you [@wellWINeo](https://github.com/wellWINeo) for this contribution!
 
-## `dotnet new install` can select prerelease templates
+## Additional CLI improvements
 
-`dotnet new install --prerelease` selects the latest available version,
-including prerelease versions, when a template package version isn't specified
-explicitly ([dotnet/sdk #55503](https://github.com/dotnet/sdk/pull/55503)).
-
-```console
-dotnet new install Contoso.Templates --prerelease
-```
-
-An explicit package version, such as
-`Contoso.Templates@2.0.0-preview.3`, continues to select that exact version.
+- **Install prerelease templates.** `dotnet new install --prerelease` selects
+  the latest available version, including prerelease versions, when a template
+  package version is not specified explicitly. An explicit package version,
+  such as `Contoso.Templates@2.0.0-preview.3`, continues to select that exact
+  version ([dotnet/sdk #55503](https://github.com/dotnet/sdk/pull/55503)).
+- **Report corrected workload set versions.** Workload operations and
+  `global.json` now detect versions written in the internal NuGet package
+  format. The error reports the corrected user-facing format instead of a
+  package-not-found error
+  ([dotnet/sdk #54929](https://github.com/dotnet/sdk/pull/54929)).
 
 ## Breaking changes
 
@@ -175,6 +216,10 @@ An explicit package version, such as
   - [Harden MTP artifact post-processing and add an opt-out](https://github.com/dotnet/sdk/pull/55480)
   - [Close SDK-side gaps in MTP artifact post-processing](https://github.com/dotnet/sdk/pull/55554)
 - **Publishing**
+  - [Emit `NETSDK1244` when `IncludeAllContentForSelfExtract` enables legacy full extraction](https://github.com/dotnet/sdk/pull/55559).
+    Remove the property to use the default in-memory single-file behavior, or
+    use `IncludeNativeLibrariesForSelfExtract` when only native libraries must
+    be extracted.
   - [Fix `dotnet publish -o .` excluding all source files](https://github.com/dotnet/sdk/pull/55461)
   - [Fix single-file publish when XML documentation isn't copied to output](https://github.com/dotnet/sdk/pull/53156)
 - **Workloads**
