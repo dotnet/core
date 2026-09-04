@@ -43,8 +43,15 @@ and other compiler-based tools
 
 > This is a preview feature for .NET 11.
 
-Unsafe Evolution remains independent of C# 15 and still requires
-`<LangVersion>preview</LangVersion>`. RC 1 completes several user-facing rules:
+Unsafe Evolution remains independent of C# 15 and still requires C# language
+preview and the feature flag for the new memory safety rules:
+
+```xml
+<LangVersion>preview</LangVersion>
+<Features>$(Features);updated-memory-safety-rules</Features>
+```
+
+RC 1 completes several user-facing rules:
 
 - `await` is allowed inside an `unsafe` context
   ([dotnet/roslyn #84616](https://github.com/dotnet/roslyn/pull/84616)).
@@ -63,10 +70,13 @@ Unsafe Evolution remains independent of C# 15 and still requires
 unsafe async Task<int> ReadAsync()
 {
     int* value = stackalloc int[1];
-    *value = 42;
-    int result = *value;
-    await Task.Yield();
-    return result;
+    unsafe
+    {
+        *value = 42;
+        int result = *value;
+        await Task.Yield();
+        return result;
+    }
 }
 
 [LibraryImport("native")]
