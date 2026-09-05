@@ -406,8 +406,6 @@ var update = new ChatResponseUpdate
 
 `ChatPage` and `MessageList` render the structured nodes without requiring a custom renderer.
 
-![Blazor AI chat interface rendering a heading, emphasized text, a list, a quote, a code block, and a table](media/blazor-ai-rich-text.png)
-
 Components.AI doesn't prescribe a source format or parser. Apps are responsible for mapping Markdown or another structured source format into `RichTextNode` values.
 
 ## Experimental DirectTls transport
