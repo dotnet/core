@@ -1,6 +1,6 @@
-# ASP.NET Core in .NET 11 RC 1 - Release Notes
+# ASP.NET Core in .NET 11 Release Candidate 1 (RC1) - Release Notes
 
-.NET 11 RC 1 includes new ASP.NET Core features and improvements:
+.NET 11 RC1 includes new ASP.NET Core features and improvements:
 
 - [SignalR authentication refresh APIs are finalized](#signalr-authentication-refresh-apis-are-finalized)
 - [SignalR TypeScript client supports authentication refresh](#signalr-typescript-client-supports-authentication-refresh)
@@ -9,6 +9,7 @@
 - [Validation localization uses message conventions](#validation-localization-uses-message-conventions)
 - [Blazor browser options are finalized](#blazor-browser-options-are-finalized)
 - [Select an environment for build-time OpenAPI](#select-an-environment-for-build-time-openapi)
+- [Negotiate authentication uses TLS channel binding](#negotiate-authentication-uses-tls-channel-binding)
 - [Experimental Device Bound Session Credentials support](#experimental-device-bound-session-credentials-support)
 - [Experimental Blazor AI components for agentic user interfaces](#experimental-blazor-ai-components-for-agentic-user-interfaces)
 - [Experimental DirectTls transport](#experimental-directtls-transport)
@@ -22,7 +23,7 @@ ASP.NET Core updates in .NET 11:
 
 ## SignalR authentication refresh APIs are finalized
 
-[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC 1 finalizes the server and .NET client API shapes ([dotnet/aspnetcore #68702](https://github.com/dotnet/aspnetcore/pull/68702)).
+[.NET 11 Preview 6 introduced authentication refresh](../preview6/aspnetcore.md#signalr-authentication-refresh) so a SignalR client can replace an expiring access token without dropping its connection. RC1 finalizes the server and .NET client API shapes ([dotnet/aspnetcore #68702](https://github.com/dotnet/aspnetcore/pull/68702)).
 
 When upgrading from Preview 7:
 
@@ -182,7 +183,7 @@ Thank you [@fickleEfrit](https://github.com/fickleEfrit) for this contribution!
 
 ## Validation localization uses message conventions
 
-[Preview 7 integrated localization directly into `Microsoft.Extensions.Validation`](../preview7/aspnetcore.md#validation-localization-is-built-in). RC 1 replaces the preview-only `MessageKeyProvider` API with built-in resource-name conventions ([dotnet/aspnetcore #68202](https://github.com/dotnet/aspnetcore/pull/68202)).
+[Preview 7 integrated localization directly into `Microsoft.Extensions.Validation`](../preview7/aspnetcore.md#validation-localization-is-built-in). RC1 replaces the preview-only `MessageKeyProvider` API with built-in resource-name conventions ([dotnet/aspnetcore #68202](https://github.com/dotnet/aspnetcore/pull/68202)).
 
 When upgrading from Preview 7, remove assignments to `ValidationOptions.MessageKeyProvider` and rename the corresponding resource keys to match one of the built-in conventions below. The `ValidationMessageKeyContext` type was also removed because custom key providers are no longer used.
 
@@ -227,11 +228,11 @@ An explicit `ErrorMessage` remains the first resource key to try. If no resource
 
 ## Blazor browser options are finalized
 
-The [server-to-client configuration API introduced in Preview 6](../preview6/aspnetcore.md#configure-blazor-client-behavior-from-the-server) now uses its final RC 1 names ([dotnet/aspnetcore #67918](https://github.com/dotnet/aspnetcore/pull/67918)).
+The [server-to-client configuration API introduced in Preview 6](../preview6/aspnetcore.md#configure-blazor-client-behavior-from-the-server) now uses its final RC1 names ([dotnet/aspnetcore #67918](https://github.com/dotnet/aspnetcore/pull/67918)).
 
 When upgrading from Preview 7, update the following APIs:
 
-| Preview 7                         | RC 1                                            |
+| Preview 7                         | RC1                                             |
 | --------------------------------- | ----------------------------------------------- |
 | `BrowserOptions.Server`           | `BrowserOptions.InteractiveServer`              |
 | `BrowserOptions.Ssr`              | `BrowserOptions.StaticServer`                   |
@@ -273,6 +274,12 @@ Build-time OpenAPI generation can now run the app under a specified hosting envi
 The value is passed to the application host in the same role as `ASPNETCORE_ENVIRONMENT` or `DOTNET_ENVIRONMENT`.
 
 Thank you [@ldsenow](https://github.com/ldsenow) for this contribution!
+
+## Negotiate authentication uses TLS channel binding
+
+Negotiate authentication on Kestrel now uses the TLS endpoint channel binding token for HTTPS connections ([dotnet/aspnetcore #68317](https://github.com/dotnet/aspnetcore/pull/68317)). The authentication handler supplies the token to the underlying Kerberos or NTLM exchange and retains it across multi-round authentication.
+
+No configuration changes are required. Non-HTTPS connections and HTTPS connections where a channel binding token isn't available continue to use the existing behavior.
 
 ## Experimental Device Bound Session Credentials support
 
@@ -448,6 +455,12 @@ Only endpoints configured with `DirectTlsEndpoint` use DirectTls. Other endpoint
 
 ## Breaking changes
 
+### Sign-in confirmation requirements apply after registration
+
+Identity UI and Blazor Identity templates now honor all configured sign-in confirmation requirements after password or external registration ([dotnet/aspnetcore #68655](https://github.com/dotnet/aspnetcore/pull/68655)). Users who require a confirmed email address, phone number, or account are redirected to registration confirmation instead of being signed in automatically.
+
+Apps that require automatic sign-in after registration must disable the corresponding `SignInOptions.RequireConfirmedEmail`, `SignInOptions.RequireConfirmedPhoneNumber`, or `SignInOptions.RequireConfirmedAccount` setting. There is no compatibility switch to require confirmation for later sign-ins while bypassing it during registration; that behavior requires customizing the registration page and explicitly signing in the user.
+
 ### Preview-only insecure chunked parsing switch removed
 
 The `Microsoft.AspNetCore.Server.Kestrel.InsecureChunkedParsing` AppContext switch has been removed ([dotnet/aspnetcore #68553](https://github.com/dotnet/aspnetcore/pull/68553)). The switch was introduced during .NET 11 previews but wasn't intended to be part of .NET 11. Remove any call that enables the switch; there is no replacement, and Kestrel always uses secure chunked-request parsing.
@@ -457,7 +470,7 @@ The `Microsoft.AspNetCore.Server.Kestrel.InsecureChunkedParsing` AppContext swit
 Projects that set `IdentityUIFrameworkVersion` to `Bootstrap4` now receive an MSBuild warning ([dotnet/aspnetcore #68575](https://github.com/dotnet/aspnetcore/pull/68575)). Change the value to `Bootstrap5`, or remove the property to use the default. Bootstrap 5 remains the supported Identity UI framework selection.
 
 <!-- Filtered features (significant engineering work, but not verified as available stable functionality):
-  - Concise asset-path compiler transformation: asset metadata work appears in changes.json, but the user-facing compiler transformation wasn't present in the validated RC 1 build.
+  - Concise asset-path compiler transformation: asset metadata work appears in changes.json, but the user-facing compiler transformation wasn't present in the validated RC1 build.
 -->
 
 ## Bug fixes
