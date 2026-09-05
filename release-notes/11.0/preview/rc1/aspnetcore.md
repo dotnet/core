@@ -457,7 +457,7 @@ Only endpoints configured with `DirectTlsEndpoint` use DirectTls. Other endpoint
 
 ### Sign-in confirmation requirements apply after registration
 
-Identity UI and Blazor Identity templates now honor all configured sign-in confirmation requirements after password or external registration ([dotnet/aspnetcore #68655](https://github.com/dotnet/aspnetcore/pull/68655)). Users who require a confirmed email address, phone number, or account are redirected to registration confirmation instead of being signed in automatically.
+The default ASP.NET Core Identity UI implementations now honor all configured sign-in confirmation requirements after password or external registration ([dotnet/aspnetcore #68655](https://github.com/dotnet/aspnetcore/pull/68655)). Users who require a confirmed email address, phone number, or account are redirected to registration confirmation instead of being signed in automatically.
 
 Apps that require automatic sign-in after registration must disable the corresponding `SignInOptions.RequireConfirmedEmail`, `SignInOptions.RequireConfirmedPhoneNumber`, or `SignInOptions.RequireConfirmedAccount` setting. There is no compatibility switch to require confirmation for later sign-ins while bypassing it during registration; that behavior requires customizing the registration page and explicitly signing in the user.
 
