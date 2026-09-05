@@ -306,12 +306,12 @@ Browser support currently requires an experimental DBSC implementation. See [Chr
 
 ## Experimental Blazor AI components for agentic user interfaces
 
+> [!IMPORTANT]
+> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `11.0.0-preview.7.26427.112` of the package.
+
 Modern AI apps increasingly provide rich interactions with agents. A complete agentic user interface may need to stream ongoing work, visualize agent reasoning and progress, request approval before tools act, accept multimodal input, and synchronize state between the app and the agent. The Blazor AI components are designed to provide building blocks for creating these experiences using Blazor's component model.
 
 .NET 11 RC1 includes an initial set of Blazor AI components focused on streaming chat and rich-text rendering.
-
-> [!IMPORTANT]
-> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `11.0.0-preview.7.26427.112` of the package.
 
 ### Stream conversations into Blazor components
 
