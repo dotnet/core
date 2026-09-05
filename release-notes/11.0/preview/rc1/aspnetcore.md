@@ -370,60 +370,45 @@ builder.Services.AddHttpClient<IChatClient>(httpClient =>
 
 `AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The RC1 components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
 
-### Render rich text
+### Render structured rich text
 
 The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an `IChatClient` provide complete structured snapshots using `RichTextContent` and `RichTextNode` values. The built-in renderer supports headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Plain `TextContent` continues to render as paragraphs.
 
+The following example creates a structured response with a heading and emphasized text:
+
+```csharp
+var heading = new HeadingNode
+{
+    Level = 2,
+};
+heading.AddChild(new TextNode("Release summary"));
+
+var strong = new StrongNode();
+strong.AddChild(new TextNode("structured rich text"));
+
+var paragraph = new ParagraphNode();
+paragraph.AddChild(new TextNode("This response contains "));
+paragraph.AddChild(strong);
+paragraph.AddChild(new TextNode("."));
+
+var update = new ChatResponseUpdate
+{
+    Role = ChatRole.Assistant,
+    MessageId = "release-summary",
+    Contents =
+    [
+        new RichTextContent(
+            "Release summary\nThis response contains structured rich text.",
+            [heading, paragraph])
+    ],
+};
+```
+
+`ChatPage` and `MessageList` render the structured nodes without requiring a custom renderer.
+
 ![Blazor AI chat interface rendering a heading, emphasized text, a list, a quote, a code block, and a table](media/blazor-ai-rich-text.png)
 
-Components.AI doesn't prescribe a source format or parser. Apps can map a parser's syntax tree into `RichTextNode` values to use the built-in renderer, or register a custom `BlockRenderer`. The following example composes `MessageList` and `MessageInput` directly and uses the community [Markdig](https://www.nuget.org/packages/Markdig) library to render Markdown. Because the generated HTML is rendered as markup, the example also sanitizes it with [HtmlSanitizer](https://www.nuget.org/packages/HtmlSanitizer):
-
-```razor
-@using Ganss.Xss
-@using Markdig
-@using Microsoft.AspNetCore.Components.AI
-@using Microsoft.Extensions.AI
-@rendermode InteractiveServer
-@implements IDisposable
-@inject IChatClient ChatClient
-
-<AgentBoundary Agent="_agent">
-    <MessageList>
-        <EmptyContent>
-            <p>Ask the agent a question.</p>
-        </EmptyContent>
-        <ChildContent>
-            <BlockRenderer TBlock="RichContentBlock" Context="block">
-                @RenderMarkdown(block.RawText)
-            </BlockRenderer>
-        </ChildContent>
-    </MessageList>
-    <MessageInput Placeholder="Type a message..." />
-</AgentBoundary>
-
-@code {
-    private static readonly MarkdownPipeline MarkdownPipeline =
-        new MarkdownPipelineBuilder()
-            .UseAdvancedExtensions()
-            .DisableHtml()
-            .Build();
-    private static readonly HtmlSanitizer HtmlSanitizer = new();
-    private UIAgent _agent = default!;
-
-    protected override void OnInitialized()
-    {
-        _agent = new UIAgent(ChatClient);
-    }
-
-    private static MarkupString RenderMarkdown(string markdown)
-    {
-        var html = Markdown.ToHtml(markdown, MarkdownPipeline);
-        return new MarkupString(HtmlSanitizer.Sanitize(html));
-    }
-
-    public void Dispose() => _agent.Dispose();
-}
-```
+Components.AI doesn't prescribe a source format or parser. Apps are responsible for mapping Markdown or another structured source format into `RichTextNode` values.
 
 ## Experimental DirectTls transport
 
