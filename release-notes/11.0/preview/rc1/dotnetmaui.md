@@ -331,7 +331,7 @@ for the complete set of changes.
 
 RC 1 also includes reliability and packaging work across Hot Reload, linking,
 the registrar, bindings, and MSBuild. See the
-[full Apple platforms RC 1 compare](https://github.com/dotnet/macios/compare/release/11.0.1xx-preview7...36cc717537e7deaf6a8161bd96a977195cacd434)
+[full Apple platforms RC 1 compare](https://github.com/dotnet/macios/compare/release/11.0.1xx-preview7...release/11.0.1xx-rc.1)
 for the complete set of changes.
 
 <!-- Filtered features (significant work considered for these notes):
