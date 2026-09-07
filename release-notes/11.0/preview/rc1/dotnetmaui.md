@@ -314,7 +314,7 @@ for the complete set of changes.
 ## Apple platforms (.NET for iOS, Mac Catalyst, macOS, tvOS)
 
 - **NativeAOT registrar default** - NativeAOT and CoreCLR apps that target .NET 11 now use
-  the trimmable-static registrar and assembly preparation by default. 
+  the trimmable-static registrar and assembly preparation by default.
   ([dotnet/macios #26346](https://github.com/dotnet/macios/pull/26346)).
 - **NativeAOT debug symbols** - macOS and Mac Catalyst NativeAOT builds now
   generate dSYM files by default, even when `ArchiveOnBuild` is not enabled.
