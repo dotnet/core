@@ -8,6 +8,7 @@
 - [DNS record resolution on Linux](#dns-record-resolution-on-linux)
 - [JSON support for new numeric types and binary schemas](#json-support-for-new-numeric-types-and-binary-schemas)
 - [JSON closed-type polymorphism and union support](#json-closed-type-polymorphism-and-union-support)
+- [Options validation compatibility](#options-validation-compatibility)
 - [Construct BitArray values from spans](#construct-bitarray-values-from-spans)
 - [Reuse compression encoders and decoders](#reuse-compression-encoders-and-decoders)
 - [TLS channel binding on Unix](#tls-channel-binding-on-unix)
@@ -116,6 +117,62 @@ public sealed record Cat(string Name, int Lives);
 
 [JsonSerializable(typeof(PetUnion))]
 internal partial class PetJsonContext : JsonSerializerContext;
+```
+
+## Options validation compatibility
+
+Source-generated options validators now provide the synchronous `IValidateOptions<TOptions>.Validate` implementation in addition to asynchronous validation ([dotnet/runtime #130263](https://github.com/dotnet/runtime/pull/130263)). This preserves compatibility with existing options-validation call sites while supporting asynchronous validators.
+
+`IStartupValidator` is now obsolete; implement `IAsyncStartupValidator` instead ([dotnet/runtime #131197](https://github.com/dotnet/runtime/pull/131197)).
+
+An `IAsyncValidateOptions<TOptions>` implementation can validate a service dependency during application startup. This example ensures that the configured backend host resolves to at least one IP address:
+
+```csharp
+#:sdk Microsoft.NET.Sdk.Web
+
+using System.Net;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+
+HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+
+builder.Services
+    .AddOptions<BackendOptions>()
+    .Configure(options =>
+    {
+        options.HostName = "localhost";
+    })
+    .Validate<BackendOptionsValidator>()
+    .ValidateOnStart();
+
+using IHost host = builder.Build();
+await host.StartAsync();
+
+public sealed class BackendOptions
+{
+    public string HostName { get; set; } = string.Empty;
+}
+
+public sealed class BackendOptionsValidator : IAsyncValidateOptions<BackendOptions>
+{
+    public async Task<ValidateOptionsResult> ValidateAsync(
+        string? name,
+        BackendOptions options,
+        CancellationToken cancellationToken = default)
+    {
+        DnsResult<AddressRecord> result =
+            await Dns.ResolveAddressesAsync(options.HostName, cancellationToken);
+
+        return result.ResponseCode == DnsResponseCode.NoError && result.Records.Count > 0
+            ? ValidateOptionsResult.Success
+            : ValidateOptionsResult.Fail(
+                $"Backend HostName '{options.HostName}' did not resolve to an IP address.");
+    }
+
+    public ValidateOptionsResult Validate(string? name, BackendOptions options) =>
+        ValidateOptionsResult.Fail("Backend validation must run asynchronously.");
+}
 ```
 
 ## Construct BitArray values from spans
