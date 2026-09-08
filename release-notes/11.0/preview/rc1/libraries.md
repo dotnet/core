@@ -7,6 +7,7 @@
 - [Experimental caller-driven TLS sessions](#experimental-caller-driven-tls-sessions)
 - [DNS record resolution on Linux](#dns-record-resolution-on-linux)
 - [JSON support for new numeric types and binary schemas](#json-support-for-new-numeric-types-and-binary-schemas)
+- [JSON closed-type polymorphism and union support](#json-closed-type-polymorphism-and-union-support)
 - [Construct BitArray values from spans](#construct-bitarray-values-from-spans)
 - [Reuse compression encoders and decoders](#reuse-compression-encoders-and-decoders)
 - [TLS channel binding on Unix](#tls-channel-binding-on-unix)
@@ -77,11 +78,44 @@ Measurement? roundTripped = JsonSerializer.Deserialize<Measurement>(json);
 public readonly record struct Measurement(Decimal64 Voltage);
 ```
 
-`JsonSchemaExporter` also identifies the base64 representation used for `byte[]`, `Memory<byte>`, and `ReadOnlyMemory<byte>` ([dotnet/runtime #130881](https://github.com/dotnet/runtime/pull/130881)):
+`JsonSchemaExporter` also identifies the base64 representation used for `byte[]`, `Memory<byte>`, and `ReadOnlyMemory<byte>` ([dotnet/runtime #130881](https://github.com/dotnet/runtime/pull/130881)). For `byte[]`, the schema change is:
 
 ```diff
 - { "type": ["string", "null"] }
 + { "type": ["string", "null"], "contentEncoding": "base64" }
+```
+
+The `Memory<byte>` and `ReadOnlyMemory<byte>` schemas remain non-nullable (`"type": "string"`) and also include `contentEncoding`.
+
+## JSON closed-type polymorphism and union support
+
+`JsonPolymorphicAttribute.InferClosedTypePolymorphism` lets a closed polymorphic hierarchy opt in to derived-type inference without requiring an application-wide `JsonSerializerOptions` setting ([dotnet/runtime #131623](https://github.com/dotnet/runtime/pull/131623)). This lets library authors enable the behavior for their own types without changing how an application serializes other polymorphic hierarchies.
+
+`JsonUnionTypeStructuralClassifier` is a new `JsonTypeClassifierFactory` extension point for classifying C# union types structurally ([dotnet/runtime #132427](https://github.com/dotnet/runtime/pull/132427)). It completes the JSON infrastructure required for union-type support.
+
+For a union with object-shaped cases, specify the classifier on the union to select the case from its distinguishing property names:
+
+```csharp
+#:property LangVersion=preview
+
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+PetUnion? pet = JsonSerializer.Deserialize<PetUnion>(
+    """{"Name":"Misty","Lives":9}""",
+    PetJsonContext.Default.PetUnion);
+
+Console.WriteLine(pet?.Value is Cat); // True
+
+[JsonUnion(TypeClassifier = typeof(JsonUnionTypeStructuralClassifier))]
+public union PetUnion(Dog, Cat);
+
+public sealed record Dog(string Name, string Breed);
+
+public sealed record Cat(string Name, int Lives);
+
+[JsonSerializable(typeof(PetUnion))]
+internal partial class PetJsonContext : JsonSerializerContext;
 ```
 
 ## Construct BitArray values from spans
