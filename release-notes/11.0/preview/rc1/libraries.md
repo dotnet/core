@@ -8,7 +8,7 @@
 - [DNS record resolution on Linux](#dns-record-resolution-on-linux)
 - [JSON support for new numeric types and binary schemas](#json-support-for-new-numeric-types-and-binary-schemas)
 - [JSON closed-type polymorphism and union support](#json-closed-type-polymorphism-and-union-support)
-- [Options validation compatibility](#options-validation-compatibility)
+- [Async options validation](#async-options-validation)
 - [Construct BitArray values from spans](#construct-bitarray-values-from-spans)
 - [Reuse compression encoders and decoders](#reuse-compression-encoders-and-decoders)
 - [TLS channel binding on Unix](#tls-channel-binding-on-unix)
@@ -120,7 +120,7 @@ public sealed record Cat(string Name, int Lives);
 internal partial class PetJsonContext : JsonSerializerContext;
 ```
 
-## Options validation compatibility
+## Async options validation
 
 Source-generated options validators now provide the synchronous `IValidateOptions<TOptions>.Validate` implementation in addition to asynchronous validation ([dotnet/runtime #130263](https://github.com/dotnet/runtime/pull/130263)). This preserves compatibility with existing options-validation call sites while supporting asynchronous validators.
 
