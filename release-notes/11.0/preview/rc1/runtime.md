@@ -12,11 +12,6 @@
 
 - [What's new in the .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime)
 
-## CoreCLR support for linux-bionic
-
-CoreCLR is now enabled for `linux-bionic-arm64` and `linux-bionic-x64`, including Termux scenarios on Android ([dotnet/runtime #131115](https://github.com/dotnet/runtime/pull/131115)). The linux-bionic AppHost pack now includes `singlefilehost`, so self-contained single-file applications use the expected bundled host instead of falling back to an apphost that cannot launch the bundle.
-
-The build selects CoreCLR alongside Mono, the libraries, host, and packs on the supported linux-bionic architectures. NativeAOT remains the fallback for linux-bionic architectures where CoreCLR isn't enabled.
 
 ## In-process crash reporting on Unix
 
@@ -51,6 +46,8 @@ The optimization requires no application changes and preserves the existing ABI 
 - **Type system and interop**
   - Loading recursive nullable types that implement static abstract interfaces no longer crashes on Linux ([dotnet/runtime #130088](https://github.com/dotnet/runtime/pull/130088)).
   - The `ComWrappers` runtime-callable-wrapper cache is partitioned into per-processor buckets, reducing contention between native-to-managed transitions and finalization ([dotnet/runtime #132033](https://github.com/dotnet/runtime/pull/132033)).
+- **linux-bionic**
+  - CoreCLR has fixes for packages on `linux-bionic-arm64` and `linux-bionic-x64`, including Termux scenarios on Android ([dotnet/runtime #131115](https://github.com/dotnet/runtime/pull/131115)). The linux-bionic AppHost pack now includes `singlefilehost`, so self-contained single-file applications use the expected bundled host instead of falling back to an apphost that cannot launch the bundle.
 
 ## Community contributors
 
