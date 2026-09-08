@@ -180,6 +180,8 @@ public sealed class BackendOptionsValidator : IAsyncValidateOptions<BackendOptio
 `BitArray` now accepts `ReadOnlySpan<bool>`, `ReadOnlySpan<byte>`, and `ReadOnlySpan<int>` ([dotnet/runtime #131500](https://github.com/dotnet/runtime/pull/131500)). Applications can construct bit arrays directly from slices or stack-allocated data without first allocating an array.
 
 ```csharp
+using System.Collections;
+
 Span<byte> bytes = stackalloc byte[] { 0b_0000_0011, 0b_1000_0000 };
 var bits = new BitArray(bytes);
 
@@ -188,7 +190,7 @@ Console.WriteLine(bits[1]);  // True
 Console.WriteLine(bits[15]); // True
 ```
 
-In the PR's Windows Arm64 benchmarks, direct span construction was 33–51% faster than the `span.ToArray()` workaround. Allocations were approximately 50% lower for byte and integer inputs and up to 89% lower for Boolean inputs.
+Using the Span-based APIs improves performance, with Windows Arm64 benchmarks showing 33–51% faster results compared to using `span.ToArray()`. Allocations were approximately 50% lower for byte and integer inputs and up to 89% lower for Boolean inputs.
 
 Thank you [@joshuajyue](https://github.com/joshuajyue) for this contribution!
 
