@@ -377,25 +377,157 @@ builder.Services.AddHttpClient<IChatClient>(httpClient =>
 
 Register browser-owned functions with `UIAgentOptions.RegisterUIAction`. A matching model tool call becomes a `UIActionBlock` that a renderer in `ChatPage.MessageListContent` can invoke by calling `InvokeAsync`. The action runs in the current Blazor circuit, and its result is sent back through `IChatClient` so the conversation can continue ([dotnet/aspnetcore #68325](https://github.com/dotnet/aspnetcore/pull/68325)).
 
+```csharp
+var setAccentColor = AIFunctionFactory.Create(
+    async (string color) =>
+    {
+        await InvokeAsync(() => accentColor = color);
+        return $"Changed the accent color to {color}.";
+    },
+    name: "set_accent_color");
+
+var agent = new UIAgent(
+    chatClient,
+    options => options.RegisterUIAction(setAccentColor));
+```
+
+Render a button or other UI for the pending action:
+
+```razor
+<BlockRenderer TBlock="UIActionBlock" Context="action">
+    <button @onclick="() => action.InvokeAsync()">
+        Run @action.ToolName
+    </button>
+</BlockRenderer>
+```
+
 ### Render server tool calls
 
 Server-owned tool calls become `FunctionInvocationContentBlock` instances that apps can render with `BlockRenderer`. The package's source generator creates strongly typed handlers from classes annotated with `ToolBlock`, `ToolParameter`, and `ToolResult`. Register the generated handlers by calling `options.AddGeneratedToolBlocks()` when constructing the `UIAgent` ([dotnet/aspnetcore #68327](https://github.com/dotnet/aspnetcore/pull/68327)).
+
+```csharp
+[ToolBlock("get_weather")]
+public partial class WeatherToolBlock : FunctionInvocationContentBlock
+{
+    [ToolParameter(Name = "location")]
+    public string? Location { get; set; }
+
+    [ToolResult]
+    public WeatherInfo? Weather { get; set; }
+}
+```
+
+```csharp
+var agent = new UIAgent(
+    chatClient,
+    options => options.AddGeneratedToolBlocks());
+```
+
+Render the generated block in `MessageListContent`:
+
+```razor
+<BlockRenderer TBlock="WeatherToolBlock">
+    <p>@context.Location: @context.Weather?.Temperature&deg;C</p>
+</BlockRenderer>
+```
+
+The same typed block is updated when the tool result arrives, so its renderer can transition from a pending state to completed content.
+
+![A generated typed tool block rendering a weather result](media/blazor-ai-tool-block.png)
 
 ### Require approval before tools run
 
 Tool calls that require confirmation become `FunctionApprovalBlock` instances. The conversation pauses until the UI calls `Approve` or `Reject`, which enables human-in-the-loop confirmation before work continues ([dotnet/aspnetcore #68329](https://github.com/dotnet/aspnetcore/pull/68329)).
 
-### Display activities and typed state
+```razor
+<BlockRenderer TBlock="FunctionApprovalBlock" Context="approval">
+    <p>Allow <code>@approval.ToolName</code> to run?</p>
+    <button @onclick="approval.Approve">Approve</button>
+    <button @onclick="() => approval.Reject()">Reject</button>
+</BlockRenderer>
+```
 
-Use `UIAgent<TState>` to expose typed, observable UI state separately from conversational content. A state mapper processes selected `ChatResponseUpdate` content and calls `SetState` to update `AgentState<TState>`. Apps can also derive from `ActivityHandler<TBlock>` to map application-specific updates into a mutable `ActivityContentBlock` that changes in place while a response streams ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
+Approving lets the tool run and resumes the conversation. Rejecting returns that decision to the agent without running the tool.
+
+![A tool call waiting for human approval](media/blazor-ai-tool-approval.png)
+
+### Display activities
+
+Derive from `ActivityHandler<TBlock>` to map application-specific progress updates into a mutable `ActivityContentBlock` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)):
+
+```csharp
+var agent = new UIAgent(chatClient, options =>
+{
+    options.AddBlockHandler(new ResearchActivityHandler());
+});
+```
+
+`TryCreateBlock` creates the activity from its first update. `TryUpdateBlock` changes the same block as later updates arrive and indicates when the activity is complete:
+
+```razor
+<BlockRenderer TBlock="ResearchActivityBlock">
+    <p>@context.Text</p>
+</BlockRenderer>
+```
+
+The rendered progress updates in place while the agent works.
+
+### Synchronize typed state
+
+Use `UIAgent<TState>` to expose typed, observable UI state separately from conversational content. A state mapper processes selected `ChatResponseUpdate` content and calls `SetState` to update `AgentState<TState>` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)):
+
+```csharp
+var agent = new UIAgent<RecipeState>(chatClient, options =>
+{
+    options.StateMapper = context =>
+    {
+        foreach (var content in context.UnhandledContents)
+        {
+            if (content is RecipeStateContent recipe)
+            {
+                context.MarkHandled(content);
+                context.SetState(recipe.Value);
+            }
+        }
+    };
+});
+```
+
+Read the current value from `agent.State.Value`, and subscribe to `agent.State.OnChanged` when the surrounding component needs to rerender. State mappers can handle custom content or protocol-specific snapshots and deltas.
+
+![Typed agent state rendered as a recipe card](media/blazor-ai-shared-state.png)
 
 ### Persist and restore conversations
 
 An `IConversationThread` persists completed turns and can retain a remote service's conversation identifier across requests. Assign the thread through `UIAgentOptions.Thread`, and call `UIAgent.RestoreAsync` or `AgentContext.RestoreAsync` to explicitly rebuild conversation history and typed state ([dotnet/aspnetcore #68334](https://github.com/dotnet/aspnetcore/pull/68334)).
 
+```csharp
+var agent = new UIAgent(
+    chatClient,
+    options => options.Thread = conversationThread);
+
+var restoredBlocks = await agent.RestoreAsync();
+```
+
+Creating an agent with a thread doesn't automatically restore it. `RestoreAsync` replays the stored updates into content blocks and state before the conversation continues.
+
 ### Show predictive UI state
 
 A state mapper can call `SetPredictiveState` to display a provisional value while an interactive tool call is pending. The UI can inspect `HasPendingPredictiveState` and call `AcceptPredictiveState` or `RejectPredictiveState`. Unresolved predictions automatically roll back when the turn ends ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)).
+
+```csharp
+context.SetPredictiveState(predictedState);
+
+if (agent.State.HasPendingPredictiveState)
+{
+    agent.State.AcceptPredictiveState();
+    // Or call RejectPredictiveState() to restore the committed value.
+}
+```
+
+The provisional value is immediately available from `agent.State.Value`. Accepting commits it; rejecting restores the previous committed value.
+
+![A pending predictive state with accept and reject actions](media/blazor-ai-predictive-state.png)
 
 ### Render structured rich text
 
