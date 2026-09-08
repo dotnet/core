@@ -2,7 +2,6 @@
 
 .NET 11 RC 1 includes new runtime platform and diagnostics capabilities:
 
-- [CoreCLR support for linux-bionic](#coreclr-support-for-linux-bionic)
 - [In-process crash reporting on Unix](#in-process-crash-reporting-on-unix)
 - [Half operations use FP16 hardware instructions](#half-operations-use-fp16-hardware-instructions)
 - [Bug fixes](#bug-fixes)
@@ -11,7 +10,6 @@
 .NET Runtime updates in .NET 11:
 
 - [What's new in the .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime)
-
 
 ## In-process crash reporting on Unix
 

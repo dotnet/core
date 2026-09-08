@@ -1,4 +1,4 @@
-<!-- Verified against the .NET 11 Preview 6 SDK (11.0.100-preview.6.26359.118) by building and running samples at https://github.com/danroth27/aspnetcore11samples, and cross-checked against the dotnet/dotnet release/11.0.1xx-preview6 source. -->
+<!-- Verified against the .NET 11 Preview 6 SDK (11.0.100-preview.6.26359.118) and cross-checked against the dotnet/dotnet release/11.0.1xx-preview6 source. -->
 # ASP.NET Core in .NET 11 Preview 6 - Release Notes
 
 .NET 11 Preview 6 includes new ASP.NET Core features and improvements:
@@ -171,8 +171,6 @@ Configure the proxy with a standard YARP `ReverseProxy` section describing the r
 ```
 
 With this configuration the WebAssembly app calls its own origin (for example `Http.GetFromJsonAsync<WeatherForecast[]>("api/weather")`), the Gateway matches the `/api/**` route, and forwards the request to the backend at `http://localhost:5100/`. The Gateway also enables [.NET service discovery](https://learn.microsoft.com/dotnet/core/extensions/service-discovery), so a cluster destination address can be a logical service name that's resolved at request time instead of a literal URL.
-
-A complete end-to-end sample is available at [danroth27/AspNetCore11Samples](https://github.com/danroth27/AspNetCore11Samples): the `BlazorWasmFeatures` app calls the separate `BackendApi` service through the Gateway with no CORS.
 
 ## OpenAPI 3.2 by default
 

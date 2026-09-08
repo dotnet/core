@@ -531,7 +531,7 @@ The provisional value is immediately available from `agent.State.Value`. Accepti
 
 ### Render structured rich text
 
-The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an `IChatClient` provide complete structured snapshots using `RichTextContent` and `RichTextNode` values. Each snapshot replaces the previous one for the same message. The built-in renderer supports headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Plain `TextContent` continues to render as paragraphs.
+The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) provides a structured presentation model using `RichTextContent` and `RichTextNode` values. Apps can create nodes for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Each complete snapshot replaces the previous one for the same message.
 
 The following example creates a structured response with a heading and emphasized text:
 
@@ -563,9 +563,9 @@ var update = new ChatResponseUpdate
 };
 ```
 
-`ChatPage` and `MessageList` render the structured nodes without requiring a custom renderer.
+`ChatPage` and `MessageList` include a rendering path for the structured nodes without requiring a custom `BlockRenderer`. Plain `TextContent` continues to render as paragraphs.
 
-Components.AI doesn't prescribe a source format or parser. Apps are responsible for mapping Markdown or another structured source format into `RichTextNode` values.
+Components.AI doesn't parse plain text or Markdown into rich content. Apps are responsible for mapping their source format into `RichTextNode` values.
 
 ## Breaking changes
 
