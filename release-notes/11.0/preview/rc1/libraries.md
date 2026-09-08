@@ -69,9 +69,12 @@ The implementation uses the platform resolver configuration by default and suppo
 using System.Numerics;
 using System.Text.Json;
 
-Decimal64 value = Decimal64.Parse("19.95");
-string json = JsonSerializer.Serialize(value);
-Decimal64 roundTripped = JsonSerializer.Deserialize<Decimal64>(json);
+var measurement = new Measurement((Decimal64)1.229m);
+string json = JsonSerializer.Serialize(measurement);
+// {"Voltage":1.229}
+Measurement? roundTripped = JsonSerializer.Deserialize<Measurement>(json);
+
+public readonly record struct Measurement(Decimal64 Voltage);
 ```
 
 `JsonSchemaExporter` also identifies the base64 representation used for `byte[]`, `Memory<byte>`, and `ReadOnlyMemory<byte>` ([dotnet/runtime #130881](https://github.com/dotnet/runtime/pull/130881)):
