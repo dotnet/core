@@ -14,6 +14,7 @@
 - [TLS channel binding on Unix](#tls-channel-binding-on-unix)
 - [Faster authenticated encryption on Apple platforms](#faster-authenticated-encryption-on-apple-platforms)
 - [AES Key Wrap support](#aes-key-wrap-support)
+- [Breaking changes](#breaking-changes)
 - [Bug fixes](#bug-fixes)
 - [Community contributors](#community-contributors)
 
@@ -215,6 +216,18 @@ On an Apple M1 Ultra running macOS Tahoe 26.6, encrypting a 16-byte payload with
 The `Aes` class now supports the unpadded AES Key Wrap algorithm defined by RFC 3394 ([dotnet/runtime #132477](https://github.com/dotnet/runtime/pull/132477)). The new `EncryptKeyWrap`, `DecryptKeyWrap`, `TryDecryptKeyWrap`, and `GetKeyWrapLength` methods complement the padded AES-KWP APIs added earlier in .NET 11.
 
 The APIs provide array-returning and span-based overloads for wrapping cryptographic keys, including scenarios used by JOSE libraries.
+
+## Breaking changes
+
+### Numeric conversions are now correctly rounded
+
+Starting in .NET 11 Preview 7, conversions between `decimal` and binary floating-point types, and conversions from `BigInteger` to binary floating-point types, round the exact source value once to the nearest representable destination value ([dotnet/runtime #130565](https://github.com/dotnet/runtime/pull/130565), [dotnet/runtime #130566](https://github.com/dotnet/runtime/pull/130566)). The previous conversions could lose significant digits or round through an intermediate value, so existing binaries and code rebuilt with a .NET 11 Preview 7 or later SDK can produce different results.
+
+For example, converting the `double` literal `1.23` to `decimal` now preserves the exact binary floating-point value rather than producing `1.23`. If a value is intended to be decimal, use a decimal literal such as `1.23m` instead of converting a `double` literal. Update tests and serialized expected values that relied on the previous result; there is no compatibility switch to restore the former conversion algorithms. For complete guidance, see [dotnet/docs#55743](https://github.com/dotnet/docs/issues/55743).
+
+### HTTP metrics are observable instruments
+
+The high-cardinality HTTP `open_connections` and `active_requests` metrics are now observable instruments ([dotnet/runtime #131275](https://github.com/dotnet/runtime/pull/131275)). Code that uses `MeterListener` directly must call `RecordObservableInstruments` to receive measurements from these instruments.
 
 <!-- Filtered features (significant engineering work, but too niche for standalone release-note sections):
   - Vectorized Base64 in-place decoding: Useful throughput optimization, but the PR provides no broad end-to-end workload story for RC 1.
