@@ -383,7 +383,7 @@ The components can turn streamed tool calls and results into custom Blazor UI:
 
 ### Synchronize agent and UI state
 
-Use `UIAgent<TState>` to expose typed, observable state separately from conversational content. A state mapper can consume selected `ChatResponseUpdate` content and update `AgentState<TState>`. Apps can derive from `ActivityHandler<TBlock>` to map application-specific updates into an `ActivityContentBlock` that changes while a response streams ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
+Use `UIAgent<TState>` to expose typed, observable UI state separately from conversational content. A state mapper can consume selected `ChatResponseUpdate` content and update `AgentState<TState>`. Apps can derive from `ActivityHandler<TBlock>` to map application-specific updates into a mutable `ActivityContentBlock` that is updated while a response streams ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
 
 An `IConversationThread` can persist completed turns and retain a remote service's conversation identifier across requests. Call `UIAgent.RestoreAsync` or `AgentContext.RestoreAsync` to rebuild history and typed state from the thread ([dotnet/aspnetcore #68334](https://github.com/dotnet/aspnetcore/pull/68334)). A state mapper can also call `SetPredictiveState` while an interactive tool call streams. The UI can display the provisional value immediately and then call `AcceptPredictiveState` or `RejectPredictiveState`; unresolved predictive state automatically rolls back when the turn ends ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)).
 
