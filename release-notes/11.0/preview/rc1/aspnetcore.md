@@ -306,11 +306,15 @@ Browser support currently requires an experimental DBSC implementation. See [Chr
 ## Experimental Blazor AI components for agentic user interfaces
 
 > [!IMPORTANT]
-> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `11.0.0-preview.7.26427.112` of the package.
+> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `0.1.0-preview.1.26458.102` from the [`dotnet12-transport` feed](https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet12-transport/nuget/v3/index.json).
+
+```dotnetcli
+dotnet add package Microsoft.AspNetCore.Components.AI --version 0.1.0-preview.1.26458.102 --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet12-transport/nuget/v3/index.json
+```
 
 Modern AI apps increasingly provide rich interactions with agents. A complete agentic user interface may need to stream ongoing work, visualize agent reasoning and progress, request approval before tools act, accept multimodal input, and synchronize state between the app and the agent. The Blazor AI components are designed to provide building blocks for creating these experiences using Blazor's component model.
 
-.NET 11 RC1 includes an initial set of Blazor AI components focused on streaming chat and rich-text rendering.
+.NET 11 RC1 includes an initial set of Blazor AI components for streaming chat, rich-text and tool rendering, human approval flows, and typed, shared, and predictive UI state.
 
 ### Stream conversations into Blazor components
 
@@ -368,6 +372,20 @@ builder.Services.AddHttpClient<IChatClient>(httpClient =>
 ```
 
 `AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The RC1 components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
+
+### Render tools and approval flows
+
+The components can turn streamed tool calls and results into custom Blazor UI:
+
+- Register a browser-owned function with `UIAgentOptions.RegisterUIAction`. A matching model tool call becomes a `UIActionBlock` that a renderer can invoke in the current Blazor circuit. The result is sent back through `IChatClient` so the conversation can continue ([dotnet/aspnetcore #68325](https://github.com/dotnet/aspnetcore/pull/68325)).
+- Server-owned tool calls become `FunctionInvocationContentBlock` instances. Custom `BlockRenderer` components can show arguments, progress, and results. The package's source generator can create strongly typed handlers from types annotated with `ToolBlock`, `ToolParameter`, and `ToolResult` ([dotnet/aspnetcore #68327](https://github.com/dotnet/aspnetcore/pull/68327)).
+- Tool calls that require confirmation become `FunctionApprovalBlock` instances. The conversation pauses until the UI calls `Approve` or `Reject`, which allows an app to present a human-in-the-loop confirmation experience before work continues ([dotnet/aspnetcore #68329](https://github.com/dotnet/aspnetcore/pull/68329)).
+
+### Synchronize agent and UI state
+
+Use `UIAgent<TState>` to expose typed, observable state separately from conversational content. A state mapper can consume selected `ChatResponseUpdate` content and update `AgentState<TState>`, while `ActivityContentBlock` can represent progress that changes during a streamed response ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
+
+An `IConversationThread` can persist completed turns, restore rendered history, and retain a remote service's conversation identifier across requests ([dotnet/aspnetcore #68334](https://github.com/dotnet/aspnetcore/pull/68334)). State can also be marked as predictive while a tool call streams. The UI can display the provisional value immediately and then accept it or roll back to the previously committed value ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)).
 
 ### Render structured rich text
 
