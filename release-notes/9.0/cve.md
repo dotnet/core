@@ -8,6 +8,13 @@ Your app needs to be on the latest .NET 9 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 9.0.20 (September 2026)
+  - [CVE-2026-69439 | TBD](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69439)
+  - [CVE-2026-71328 | TBD](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-71328)
+  - [CVE-2026-69522 | TBD](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69522)
+  - [CVE-2026-69304 | TBD](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69304)
+  - [CVE-2026-58649 | TBD](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-58649)
+  - [CVE-2026-69806 | TBD](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69806)
 - 9.0.19 (August 2026)
   - [CVE-2026-62898 | .NET Information Disclosure Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62898)
   - [CVE-2026-62899 | .NET Security Feature Bypass Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62899)
@@ -47,9 +54,9 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
   - [CVE-2026-32175 | .NET Core Tampering Vulnerability](https://github.com/dotnet/announcements/issues/396)
   - [CVE-2026-42899 | ASP.NET Core Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/397)
 - 9.0.15 (April 2026)
-  - [CVE-2026-26171 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26171) 
-  - [CVE-2026-32203 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-32203) 
-  - [CVE-2026-33116 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-33116) 
+  - [CVE-2026-26171 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26171)
+  - [CVE-2026-32203 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-32203)
+  - [CVE-2026-33116 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-33116)
   - [CVE-2026-32178 | .NET Spoofing Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-32178)
 - 9.0.14 (March 2026)
   - [CVE-2026-26130 | .NET Denial of Service Vulnerability](https://github.com/dotnet/announcements/issues/385)
