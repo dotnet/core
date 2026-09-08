@@ -27,15 +27,13 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-using Process process = Process.Start("worker")!;
-
 if (OperatingSystem.IsLinux() || OperatingSystem.IsMacOS())
 {
+    using Process process = Process.Start("sleep", "30")!;
     process.Signal(PosixSignal.SIGTERM);
+    ProcessExitStatus status = await process.WaitForExitStatusAsync();
+    Console.WriteLine(status);
 }
-
-ProcessExitStatus status = await process.WaitForExitStatusAsync();
-Console.WriteLine(status);
 ```
 
 The exact RC 1 API additions are:
