@@ -373,23 +373,33 @@ builder.Services.AddHttpClient<IChatClient>(httpClient =>
 
 `AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The RC1 components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
 
-### Render tools and approval flows
+### Run tools in the Blazor UI
 
-The components can turn streamed tool calls and results into custom Blazor UI:
+Register browser-owned functions with `UIAgentOptions.RegisterUIAction`. A matching model tool call becomes a `UIActionBlock` that a renderer in `ChatPage.MessageListContent` can invoke by calling `InvokeAsync`. The action runs in the current Blazor circuit, and its result is sent back through `IChatClient` so the conversation can continue ([dotnet/aspnetcore #68325](https://github.com/dotnet/aspnetcore/pull/68325)).
 
-- Register a browser-owned function with `UIAgentOptions.RegisterUIAction`. A matching model tool call becomes a `UIActionBlock` that a renderer can invoke in the current Blazor circuit. The result is sent back through `IChatClient` so the conversation can continue ([dotnet/aspnetcore #68325](https://github.com/dotnet/aspnetcore/pull/68325)).
-- Server-owned tool calls become `FunctionInvocationContentBlock` instances. Custom `BlockRenderer` components, registered in `ChatPage.MessageListContent`, can show arguments, progress, and results. The package's source generator can create strongly typed handlers from types annotated with `ToolBlock`, `ToolParameter`, and `ToolResult`; register the generated handlers by calling `options.AddGeneratedToolBlocks()` when constructing the `UIAgent` ([dotnet/aspnetcore #68327](https://github.com/dotnet/aspnetcore/pull/68327)).
-- Tool calls that require confirmation become `FunctionApprovalBlock` instances. The conversation pauses until the UI calls `Approve` or `Reject`, which allows an app to present a human-in-the-loop confirmation experience before work continues ([dotnet/aspnetcore #68329](https://github.com/dotnet/aspnetcore/pull/68329)).
+### Render server tool calls
 
-### Synchronize agent and UI state
+Server-owned tool calls become `FunctionInvocationContentBlock` instances that apps can render with `BlockRenderer`. The package's source generator creates strongly typed handlers from classes annotated with `ToolBlock`, `ToolParameter`, and `ToolResult`. Register the generated handlers by calling `options.AddGeneratedToolBlocks()` when constructing the `UIAgent` ([dotnet/aspnetcore #68327](https://github.com/dotnet/aspnetcore/pull/68327)).
 
-Use `UIAgent<TState>` to expose typed, observable UI state separately from conversational content. A state mapper can consume selected `ChatResponseUpdate` content and update `AgentState<TState>`. Apps can derive from `ActivityHandler<TBlock>` to map application-specific updates into a mutable `ActivityContentBlock` that is updated while a response streams ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
+### Require approval before tools run
 
-An `IConversationThread` can persist completed turns and retain a remote service's conversation identifier across requests. Call `UIAgent.RestoreAsync` or `AgentContext.RestoreAsync` to rebuild history and typed state from the thread ([dotnet/aspnetcore #68334](https://github.com/dotnet/aspnetcore/pull/68334)). A state mapper can also call `SetPredictiveState` while an interactive tool call streams. The UI can display the provisional value immediately and then call `AcceptPredictiveState` or `RejectPredictiveState`; unresolved predictive state automatically rolls back when the turn ends ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)).
+Tool calls that require confirmation become `FunctionApprovalBlock` instances. The conversation pauses until the UI calls `Approve` or `Reject`, which enables human-in-the-loop confirmation before work continues ([dotnet/aspnetcore #68329](https://github.com/dotnet/aspnetcore/pull/68329)).
+
+### Display activities and typed state
+
+Use `UIAgent<TState>` to expose typed, observable UI state separately from conversational content. A state mapper processes selected `ChatResponseUpdate` content and calls `SetState` to update `AgentState<TState>`. Apps can also derive from `ActivityHandler<TBlock>` to map application-specific updates into a mutable `ActivityContentBlock` that changes in place while a response streams ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
+
+### Persist and restore conversations
+
+An `IConversationThread` persists completed turns and can retain a remote service's conversation identifier across requests. Assign the thread through `UIAgentOptions.Thread`, and call `UIAgent.RestoreAsync` or `AgentContext.RestoreAsync` to explicitly rebuild conversation history and typed state ([dotnet/aspnetcore #68334](https://github.com/dotnet/aspnetcore/pull/68334)).
+
+### Show predictive UI state
+
+A state mapper can call `SetPredictiveState` to display a provisional value while an interactive tool call is pending. The UI can inspect `HasPendingPredictiveState` and call `AcceptPredictiveState` or `RejectPredictiveState`. Unresolved predictions automatically roll back when the turn ends ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)).
 
 ### Render structured rich text
 
-The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an `IChatClient` provide complete structured snapshots using `RichTextContent` and `RichTextNode` values. The built-in renderer supports headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Plain `TextContent` continues to render as paragraphs.
+The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an `IChatClient` provide complete structured snapshots using `RichTextContent` and `RichTextNode` values. Each snapshot replaces the previous one for the same message. The built-in renderer supports headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Plain `TextContent` continues to render as paragraphs.
 
 The following example creates a structured response with a heading and emphasized text:
 
