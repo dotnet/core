@@ -554,7 +554,59 @@ An activity is an application-defined progress item that updates in place while 
 
 `ActivityHandler<TBlock>` is a protocol-neutral extension point that maps provider- or application-specific progress updates into a mutable `ActivityContentBlock` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)). `TryCreateBlock` initializes and emits the block for the first matching update. `TryUpdateBlock` mutates the same block as later updates arrive and indicates when the activity is complete. Register the handler with `UIAgentOptions.AddBlockHandler`, then provide a `BlockRenderer` for the application-specific block. Activities don't have a default visual representation.
 
-AG-UI's `ACTIVITY_SNAPSHOT` and `ACTIVITY_DELTA` events are one possible source of these updates. `AGUIChatClient` exposes the original event through `ChatResponseUpdate.RawRepresentation`, where a handler can initialize the activity from a snapshot and apply subsequent JSON Patch deltas. The application defines the activity payload and completion semantics; Components.AI doesn't include an AG-UI-specific activity handler or JSON Patch implementation.
+AG-UI's `ACTIVITY_SNAPSHOT` and `ACTIVITY_DELTA` events are one possible source of these updates. `AGUIChatClient` exposes the original event through `ChatResponseUpdate.RawRepresentation`. For example, an application can handle replacing snapshots whose payload includes an application-defined `complete` property:
+
+```csharp
+using System.Text.Json;
+using AGUI.Abstractions;
+
+public sealed class ResearchActivityBlock : ActivityContentBlock
+{
+    public string ActivityMessageId { get; set; } = "";
+}
+
+public sealed class ResearchActivityHandler
+    : ActivityHandler<ResearchActivityBlock>
+{
+    protected override bool TryCreateBlock(
+        BlockMappingContext context,
+        ResearchActivityBlock state)
+        => TryApplySnapshot(context, state, out _);
+
+    protected override bool TryUpdateBlock(
+        BlockMappingContext context,
+        ResearchActivityBlock state,
+        out bool isCompleted)
+        => TryApplySnapshot(context, state, out isCompleted);
+
+    private static bool TryApplySnapshot(
+        BlockMappingContext context,
+        ResearchActivityBlock state,
+        out bool isCompleted)
+    {
+        isCompleted = false;
+        if (context.Update.RawRepresentation is not ActivitySnapshotEvent snapshot ||
+            (state.ActivityMessageId.Length > 0 &&
+             (state.ActivityMessageId != snapshot.MessageId ||
+              snapshot.Replace == false)))
+        {
+            return false;
+        }
+
+        state.ActivityMessageId = snapshot.MessageId;
+        state.ActivityType = snapshot.ActivityType;
+        state.Content = snapshot.Content;
+        isCompleted =
+            snapshot.Content.ValueKind == JsonValueKind.Object &&
+            snapshot.Content.TryGetProperty("complete", out var complete) &&
+            complete.ValueKind == JsonValueKind.True;
+        context.MarkUpdateHandled();
+        return true;
+    }
+}
+```
+
+The handler stores the AG-UI message ID on the block to correlate later snapshots. Applications that consume `ActivityDeltaEvent` instead apply its RFC 6902 JSON Patch operations to the current `Content` before returning from `TryUpdateBlock`. The application defines the activity payload and completion semantics; Components.AI doesn't include an AG-UI-specific activity handler or JSON Patch implementation.
 
 ### Shared state
 
