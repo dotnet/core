@@ -641,18 +641,33 @@ For the corresponding MAF server configuration, including mapping tool results t
 
 Predictive state lets an app render an agent's proposed state change while the model is still generating it without replacing the committed state. For example, as an agent generates the complete contents of an edited document in a tool argument, the UI can progressively display the proposed document and a diff. When generation finishes, the user can accept the completed proposal or reject it and restore the committed document.
 
-An AG-UI server integration can map streamed arguments for a state-writing tool to provisional state events. The completed tool-call arguments are the authoritative proposal. A Components.AI state mapper calls `SetPredictiveState` as the provisional updates arrive, and `AgentState<TState>` retains the prior committed value for rollback ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)):
+An AG-UI server integration can map streamed arguments for a state-writing tool to provisional state events. The completed tool-call arguments are the authoritative proposal. When creating the `UIAgent<TState>`, configure its state mapper to deserialize those events and call `SetPredictiveState`. `AgentState<TState>` then retains the prior committed value for rollback ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)):
 
 ```csharp
-context.SetPredictiveState(predictedState);
+var agent = new UIAgent<DocumentState>(chatClient, options =>
+{
+    options.StateMapper = context =>
+    {
+        if (context.Update.RawRepresentation is StateSnapshotEvent snapshot &&
+            snapshot.Snapshot.Deserialize<DocumentState>() is { } predictedState)
+        {
+            context.SetPredictiveState(predictedState);
+        }
+    };
+
+    options.RegisterUIAction(AIFunctionFactory.Create(
+        ConfirmChanges,
+        name: "confirm_changes",
+        description: "Confirm the proposed document changes."));
+});
 ```
 
-When the proposal is complete, a frontend action can let the user accept or reject it and then report the decision to the agent:
+The example also registers a `confirm_changes` frontend action. When the action appears, a custom block renderer displays the accept and reject controls. The renderer adds the user's choice as the `accepted` argument and calls `UIActionBlock.InvokeAsync`, which runs the registered callback:
 
 ```csharp
-private async Task ResolvePrediction(UIActionBlock action, bool accept)
+private string ConfirmChanges(bool accepted)
 {
-    if (accept)
+    if (accepted)
     {
         agent.State.AcceptPredictiveState();
     }
@@ -661,11 +676,13 @@ private async Task ResolvePrediction(UIActionBlock action, bool accept)
         agent.State.RejectPredictiveState();
     }
 
-    await action.InvokeAsync();
+    return accepted
+        ? "The user accepted the changes."
+        : "The user rejected the changes.";
 }
 ```
 
-The provisional value is immediately available from `agent.State.Value`, and `HasPendingPredictiveState` indicates that it hasn't been committed. Accepting commits the completed proposal; rejecting restores the baseline. Invoking the frontend action sends the decision back to the agent in a follow-up run. If generation fails, is canceled, or ends without a decision, the provisional value is automatically rolled back. The server-side extraction and mapping of streamed tool arguments must be configured explicitly; see [State management with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/state-management).
+The provisional value is immediately available from `agent.State.Value`, and `HasPendingPredictiveState` indicates that it hasn't been committed. The callback commits the completed proposal or restores the baseline, and its return value reports the decision to the agent in a follow-up run. If generation fails, is canceled, or ends without a decision, the provisional value is automatically rolled back. The server-side extraction and mapping of streamed tool arguments must be configured explicitly; see [State management with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/state-management).
 
 ![An express shipping proposal with accept and reject actions](media/blazor-ai-predictive-state.png)
 
