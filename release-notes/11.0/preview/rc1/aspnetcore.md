@@ -556,8 +556,6 @@ An activity is an application-defined progress item that updates in place while 
 
 AG-UI's `ACTIVITY_SNAPSHOT` and `ACTIVITY_DELTA` events are one possible source of these updates. `AGUIChatClient` exposes the original event through `ChatResponseUpdate.RawRepresentation`, where a handler can initialize the activity from a snapshot and apply subsequent JSON Patch deltas. The application defines the activity payload and completion semantics; Components.AI doesn't include an AG-UI-specific activity handler or JSON Patch implementation.
 
-![An application-defined research activity showing in-progress source discovery](media/blazor-ai-activity.png)
-
 ### Synchronize typed state
 
 Agentic UIs often show a shared workspace alongside the conversation, such as a recipe, document, form, or plan that the agent can update. `UIAgent<TState>` exposes this data as typed, observable UI state separately from conversational content ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
