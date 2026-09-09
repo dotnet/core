@@ -528,9 +528,9 @@ else
 }
 ```
 
-`InvokeAsync` executes the registered function using the arguments supplied by the agent and sends its result back through `IChatClient` so the conversation can continue. Register each frontend `AIFunction` separately, and use the renderer's `When` predicate and `action.ToolName`—the name passed to `AIFunctionFactory.Create`—to select the handling for each tool. A renderer can alternatively request input or confirmation before invoking the function.
+Calling `InvokeAsync` executes the registered function with the arguments supplied by the agent. When the function completes, `UIAgent` sends its result back to the agent and continues the conversation. Use the renderer's `When` predicate to provide different handling for each `action.ToolName`. A renderer can invoke the action automatically, as shown here, or present UI that collects input or confirmation first.
 
-For Blazor Server apps, the frontend tool executes in the server-side Blazor circuit; for WebAssembly, it executes in the browser.
+The function runs wherever the Blazor UI runs: in the server-side circuit for Blazor Server or in the browser for WebAssembly.
 
 ### Require approval before tools run
 
