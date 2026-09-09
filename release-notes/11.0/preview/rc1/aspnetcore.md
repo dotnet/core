@@ -555,13 +555,71 @@ An activity is an application-defined progress item that updates in place while 
 Derive from `ActivityHandler<TBlock>` to map the application-specific progress content into a mutable `ActivityContentBlock` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)):
 
 ```csharp
+public sealed class ResearchActivityContent(
+    string id,
+    string text,
+    bool complete) : AIContent
+{
+    public string Id { get; } = id;
+    public string Text { get; } = text;
+    public bool Complete { get; } = complete;
+}
+
+public sealed class ResearchActivityBlock : ActivityContentBlock
+{
+    public string ActivityId { get; set; } = "";
+    public string Text { get; set; } = "";
+}
+
+public sealed class ResearchActivityHandler
+    : ActivityHandler<ResearchActivityBlock>
+{
+    protected override bool TryCreateBlock(
+        BlockMappingContext context,
+        ResearchActivityBlock state)
+        => TryApply(context, state, out _);
+
+    protected override bool TryUpdateBlock(
+        BlockMappingContext context,
+        ResearchActivityBlock state,
+        out bool isCompleted)
+        => TryApply(context, state, out isCompleted);
+
+    private static bool TryApply(
+        BlockMappingContext context,
+        ResearchActivityBlock state,
+        out bool isCompleted)
+    {
+        foreach (var content in context.UnhandledContents)
+        {
+            if (content is ResearchActivityContent activity &&
+                (state.ActivityId.Length == 0 ||
+                 state.ActivityId == activity.Id))
+            {
+                context.MarkHandled(activity);
+                state.ActivityId = activity.Id;
+                state.Text = activity.Text;
+                isCompleted = activity.Complete;
+                return true;
+            }
+        }
+
+        isCompleted = false;
+        return false;
+    }
+}
+```
+
+Register the handler when constructing the agent:
+
+```csharp
 var agent = new UIAgent(chatClient, options =>
 {
     options.AddBlockHandler(new ResearchActivityHandler());
 });
 ```
 
-`TryCreateBlock` creates the activity from its first update. `TryUpdateBlock` changes the same block as later updates arrive and indicates when the activity is complete:
+`TryCreateBlock` creates the activity from its first update. `TryUpdateBlock` changes the same block as later updates arrive and indicates when the activity is complete. Render the block in `MessageListContent`:
 
 ```razor
 <BlockRenderer TBlock="ResearchActivityBlock">
