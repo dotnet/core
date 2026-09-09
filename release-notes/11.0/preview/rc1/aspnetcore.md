@@ -309,14 +309,35 @@ Modern AI apps increasingly provide rich interactions with agents. A complete ag
 
 The new [Microsoft.AspNetCore.Components.AI](https://nuget.org/packages/microsoft.aspnetcore.components.ai) package includes an initial set of Blazor AI components for streaming chat, rich-text and tool rendering, human approval flows, and typed, shared, and predictive UI state.
 
+### Get started
+
 > [!IMPORTANT]
 > The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `0.1.0-preview.1.26458.102`.
 
-To get started, add the package to a Blazor app:
+Add the package to a Blazor app:
 
 ```dotnetcli
 dotnet add package Microsoft.AspNetCore.Components.AI --version 0.1.0-preview.1.26458.102
 ```
+
+Basic chat and the Components.AI block model work with any `IChatClient`. To connect the Blazor app to a remote agent over the [Agent User Interaction Protocol (AG-UI)](https://ag-ui.com), register an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) as the app's `IChatClient`:
+
+```csharp
+using AGUI.Client;
+using Microsoft.Extensions.AI;
+
+builder.Services.AddHttpClient(
+    "agent",
+    httpClient => httpClient.BaseAddress = new("https://api.example.com"));
+
+builder.Services.AddChatClient(services => new AGUIChatClient(new(
+    services.GetRequiredService<IHttpClientFactory>().CreateClient("agent"),
+    "/agent")));
+```
+
+`AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The Blazor AI components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions. AG-UI is required when a remote server and the Blazor client need to exchange frontend tool declarations, backend tool events, approval interrupts, shared-state events, or AG-UI conversation identifiers.
+
+Microsoft Agent Framework (MAF) can expose an `AIAgent` through an ASP.NET Core AG-UI endpoint. For the server-side setup, see [AG-UI integration with Agent Framework](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/) and its [.NET getting-started guide](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/getting-started).
 
 ### Build a basic streaming conversation
 
@@ -365,6 +386,32 @@ Include the component styles in `App.razor`:
 
 ![Blazor AI chat interface showing a conversation with a travel planning agent](media/blazor-ai-chat.png)
 
+### Render content blocks
+
+`UIAgent` converts response content into `ContentBlock` objects that can update while a response streams. The built-in block types include:
+
+- `RichContentBlock` for streamed text and structured rich content.
+- `FunctionInvocationContentBlock` for a server function call and its eventual result.
+- `UIActionBlock` for a function that runs in the Blazor app.
+- `FunctionApprovalBlock` for a function call that is waiting for user approval.
+- `ActivityContentBlock` for application-defined progress that updates in place.
+
+`ChatPage` renders common blocks such as `RichContentBlock` by default. Place a `BlockRenderer<TBlock>` in `ChatPage.MessageListContent` to replace the default rendering or render another block type. Its child content receives the matching `TBlock` as `context`, including the block's current properties as they change during streaming.
+
+The following example replaces the default rendering for conversational content:
+
+```razor
+<ChatPage Agent="agent">
+    <MessageListContent>
+        <BlockRenderer TBlock="RichContentBlock" Context="block">
+            <div class="agent-response">@block.RawText</div>
+        </BlockRenderer>
+    </MessageListContent>
+</ChatPage>
+```
+
+Use the renderer's `When` predicate to handle only selected blocks of a type. If multiple renderers match, the most recently registered renderer takes precedence. Apps can also define custom `ContentBlock` types and map response content to them with a `ContentBlockHandler<TState>`.
+
 ### Render structured rich text
 
 The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an agent return a structured presentation model instead of plain text. `RichTextContent` contains `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Each complete snapshot replaces the previous one for the same message.
@@ -401,40 +448,11 @@ var update = new ChatResponseUpdate
 
 `ChatPage` and `MessageList` render the structured nodes without requiring a custom `BlockRenderer`. Plain `TextContent` continues to render as paragraphs. Apps and `IChatClient` integrations can map Markdown or other source formats into the node model, retaining control over the supported formatting and presentation.
 
-### Connect to remote agents with AG-UI
-
-Basic chat and the Components.AI block model work with any `IChatClient`. Use an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) when the Blazor app connects to a remote agent over the [Agent User Interaction Protocol (AG-UI)](https://ag-ui.com), particularly for protocol-level features such as remote tool events, approval interrupts, shared state, and conversation identifiers.
-
-The following registration uses a named `HttpClient` for the remote endpoint and registers `AGUIChatClient` as the app's `IChatClient`:
-
-```csharp
-using AGUI.Client;
-using Microsoft.Extensions.AI;
-
-builder.Services.AddHttpClient(
-    "agent",
-    httpClient => httpClient.BaseAddress = new("https://api.example.com"));
-
-builder.Services.AddChatClient(services => new AGUIChatClient(new(
-    services.GetRequiredService<IHttpClientFactory>().CreateClient("agent"),
-    "/agent")));
-```
-
-`AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The Blazor AI components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
-
-The Components.AI block and state APIs don't require AG-UI. AG-UI is required for the examples below when a remote server and the Blazor client need to exchange frontend tool declarations, backend tool events, approval interrupts, shared-state events, or AG-UI conversation identifiers.
-
-Microsoft Agent Framework (MAF) can expose an `AIAgent` through an ASP.NET Core AG-UI endpoint. For the server-side setup, see [AG-UI integration with Agent Framework](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/) and its [.NET getting-started guide](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/getting-started).
-
-### Render content blocks
-
-`UIAgent` represents streamed response content as content blocks. `ChatPage` renders common blocks such as text by default. To customize other content, place a `BlockRenderer<TBlock>` in `ChatPage.MessageListContent`. The renderer selects blocks of the specified type and uses its child content as the rendering template.
-
-The following scenarios use content blocks to render server tools, frontend tools, approvals, and activities.
-
 ### Render server tool calls
 
-For example, a weather tool may run on the agent server while the Blazor app renders its call and result as a weather card. Server tool calls become `FunctionInvocationContentBlock` instances, which pair the `FunctionCallContent` with its eventual `FunctionResultContent` and expose the tool name, arguments, and completion state.
+An agent can call a tool that runs on its server while the Blazor app renders the operation using app-specific UI. For example, the agent can call a weather tool and the app can show the requested location immediately, followed by a weather card when the server returns the result.
+
+Server tool calls become `FunctionInvocationContentBlock` instances, which pair the `FunctionCallContent` with its eventual `FunctionResultContent` and expose the tool name, arguments, and completion state.
 
 The package's source generator creates a strongly typed block handler from a class annotated with `ToolBlock`, `ToolParameter`, and `ToolResult` ([dotnet/aspnetcore #68327](https://github.com/dotnet/aspnetcore/pull/68327)):
 
@@ -508,7 +526,9 @@ Place a `BlockRenderer<UIActionBlock>` in `MessageListContent` to choose how the
 ```razor
 <ChatPage Agent="agent">
     <MessageListContent>
-        <BlockRenderer TBlock="UIActionBlock" Context="action">
+        <BlockRenderer TBlock="UIActionBlock"
+                       When='action => action.ToolName == "set_accent_color"'
+                       Context="action">
             <button @onclick="() => action.InvokeAsync()">
                 Run @action.ToolName
             </button>
@@ -517,7 +537,7 @@ Place a `BlockRenderer<UIActionBlock>` in `MessageListContent` to choose how the
 </ChatPage>
 ```
 
-One `BlockRenderer<UIActionBlock>` handles all registered frontend tools. Register each `AIFunction` separately, then use `action.ToolName`—the name passed to `AIFunctionFactory.Create`—to select tool-specific UI or delegate to a component for that tool. Unlike generated server tool blocks, a `UIActionBlock` retains the registered executable `AIFunction` so that `InvokeAsync` can run it in the UI; its call and result remain available through `Call` and `Result`.
+Register each frontend `AIFunction` separately. Use the renderer's `When` predicate and `action.ToolName`—the name passed to `AIFunctionFactory.Create`—to select the UI for each tool. Unlike generated server tool blocks, a `UIActionBlock` retains the registered executable `AIFunction` so that `InvokeAsync` can run it in the UI; its call and result remain available through `Call` and `Result`.
 
 For Blazor Server apps, the frontend tool executes in the server-side Blazor circuit; for WebAssembly, it executes in the browser.
 
@@ -561,6 +581,8 @@ var agent = new UIAgent(chatClient, options =>
 ```
 
 The rendered progress updates in place while the agent works.
+
+![A research activity showing in-progress source discovery](media/blazor-ai-activity.png)
 
 ### Synchronize typed state
 
