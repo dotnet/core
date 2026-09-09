@@ -399,7 +399,7 @@ var update = new ChatResponseUpdate
 };
 ```
 
-`ChatPage` and `MessageList` render the structured nodes without requiring a custom `BlockRenderer`. Plain `TextContent` continues to render as paragraphs. Components.AI doesn't parse plain text or Markdown into rich content; the app or its `IChatClient` integration is responsible for producing the nodes.
+`ChatPage` and `MessageList` render the structured nodes without requiring a custom `BlockRenderer`. Plain `TextContent` continues to render as paragraphs. Apps and `IChatClient` integrations can map Markdown or other source formats into the node model, retaining control over the supported formatting and presentation.
 
 ### Connect to remote agents with AG-UI
 
@@ -422,13 +422,17 @@ builder.Services.AddChatClient(services => new AGUIChatClient(new(
 
 `AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The Blazor AI components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
 
-The Components.AI block and state APIs don't require AG-UI. AG-UI is required for the examples below when a remote MAF server and the Blazor client need to exchange frontend tool declarations, backend tool events, approval interrupts, shared-state events, or AG-UI conversation identifiers. An integration based on another `IChatClient` can provide the same UI scenarios by producing the corresponding `Microsoft.Extensions.AI` content and updates itself.
+The Components.AI block and state APIs don't require AG-UI. AG-UI is required for the examples below when a remote server and the Blazor client need to exchange frontend tool declarations, backend tool events, approval interrupts, shared-state events, or AG-UI conversation identifiers.
 
 Microsoft Agent Framework (MAF) can expose an `AIAgent` through an ASP.NET Core AG-UI endpoint. For the server-side setup, see [AG-UI integration with Agent Framework](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/) and its [.NET getting-started guide](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/getting-started).
 
-### Render server tool calls
+### Render content blocks
 
 `UIAgent` represents streamed response content as content blocks. `ChatPage` renders common blocks such as text by default. To customize other content, place a `BlockRenderer<TBlock>` in `ChatPage.MessageListContent`. The renderer selects blocks of the specified type and uses its child content as the rendering template.
+
+The following scenarios use content blocks to render server tools, frontend tools, approvals, and activities.
+
+### Render server tool calls
 
 For example, a weather tool may run on the agent server while the Blazor app renders its call and result as a weather card. Server tool calls become `FunctionInvocationContentBlock` instances, which pair the `FunctionCallContent` with its eventual `FunctionResultContent` and expose the tool name, arguments, and completion state.
 
@@ -460,13 +464,20 @@ Then render the generated block in `MessageListContent`:
 <ChatPage Agent="agent">
     <MessageListContent>
         <BlockRenderer TBlock="WeatherToolBlock">
-            <p>@context.Location: @context.Weather?.Temperature&deg;C</p>
+            @if (context.HasResult)
+            {
+                <p>@context.Location: @context.Weather?.Temperature&deg;C</p>
+            }
+            else
+            {
+                <p>Checking the weather for @context.Location...</p>
+            }
         </BlockRenderer>
     </MessageListContent>
 </ChatPage>
 ```
 
-The same typed block is updated when the tool result arrives, so its renderer can transition from a pending state to completed content.
+The renderer's `context` is the generated `WeatherToolBlock`. Initially, it contains the typed call arguments and `HasResult` is `false`, so the UI can show pending content. When the result arrives, the block's generated handler populates `Weather`, sets `HasResult` to `true`, and rerenders the same block as the completed weather card.
 
 ![A generated typed tool block rendering a weather result](media/blazor-ai-tool-block.png)
 
@@ -506,7 +517,9 @@ Place a `BlockRenderer<UIActionBlock>` in `MessageListContent` to choose how the
 </ChatPage>
 ```
 
-For Interactive Server, the frontend tool executes in the server-side Blazor circuit; for WebAssembly, it executes in the browser. When the remote agent uses MAF and AG-UI, see [Frontend tool rendering with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/frontend-tools).
+One `BlockRenderer<UIActionBlock>` handles all registered frontend tools. Register each `AIFunction` separately, then use `action.ToolName`—the name passed to `AIFunctionFactory.Create`—to select tool-specific UI or delegate to a component for that tool. Unlike generated server tool blocks, a `UIActionBlock` retains the registered executable `AIFunction` so that `InvokeAsync` can run it in the UI; its call and result remain available through `Call` and `Result`.
+
+For Blazor Server apps, the frontend tool executes in the server-side Blazor circuit; for WebAssembly, it executes in the browser.
 
 ### Require approval before tools run
 
@@ -580,23 +593,35 @@ For the corresponding MAF server configuration, including mapping tool results t
 
 ### Show predictive UI state
 
-Predictive state lets the UI show a proposed change before the user commits it. For example, while an agent proposes express shipping, the order summary can immediately preview that selection and then keep or discard it based on the user's response.
+Predictive state lets an app render an agent's proposed state change while the model is still generating it without replacing the committed state. For example, as an agent generates the complete contents of an edited document in a tool argument, the UI can progressively display the proposed document and a diff. When generation finishes, the user can accept the completed proposal or reject it and restore the committed document.
 
-A state mapper calls `SetPredictiveState` instead of `SetState` for the provisional value. The UI reads the proposed value from `agent.State.Value`, checks `HasPendingPredictiveState`, and calls `AcceptPredictiveState` or `RejectPredictiveState`. Unresolved predictions automatically roll back when the turn ends ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)):
+An AG-UI server integration can map streamed arguments for a state-writing tool to provisional state events. The completed tool-call arguments are the authoritative proposal. A Components.AI state mapper calls `SetPredictiveState` as the provisional updates arrive, and `AgentState<TState>` retains the prior committed value for rollback ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)):
 
 ```csharp
 context.SetPredictiveState(predictedState);
+```
 
-if (agent.State.HasPendingPredictiveState)
+When the proposal is complete, a frontend action can let the user accept or reject it and then report the decision to the agent:
+
+```csharp
+private async Task ResolvePrediction(UIActionBlock action, bool accept)
 {
-    agent.State.AcceptPredictiveState();
-    // Or call RejectPredictiveState() to restore the committed value.
+    if (accept)
+    {
+        agent.State.AcceptPredictiveState();
+    }
+    else
+    {
+        agent.State.RejectPredictiveState();
+    }
+
+    await action.InvokeAsync();
 }
 ```
 
-The provisional value is immediately available from `agent.State.Value`. Accepting commits it; rejecting restores the previous committed value.
+The provisional value is immediately available from `agent.State.Value`, and `HasPendingPredictiveState` indicates that it hasn't been committed. Accepting commits the completed proposal; rejecting restores the baseline. Invoking the frontend action sends the decision back to the agent in a follow-up run. If generation fails, is canceled, or ends without a decision, the provisional value is automatically rolled back. The server-side extraction and mapping of streamed tool arguments must be configured explicitly; see [State management with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/state-management).
 
-![A pending predictive state with accept and reject actions](media/blazor-ai-predictive-state.png)
+![An express shipping proposal with accept and reject actions](media/blazor-ai-predictive-state.png)
 
 ### Persist and restore conversations
 
