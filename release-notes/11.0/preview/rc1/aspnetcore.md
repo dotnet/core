@@ -413,16 +413,95 @@ Use the renderer's `When` predicate to handle only selected blocks of a type. If
 
 The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an agent return a structured presentation model instead of plain text. `RichTextContent` is response content that contains both plain text and `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. `UIAgent` maps it to the same `RichContentBlock` used for plain `TextContent`, but uses the supplied node tree instead of creating simple paragraphs.
 
-For example, an `IChatClient` decorator can accumulate streamed `TextContent` by message ID, parse the current text as Markdown, and insert a `RichTextContent` snapshot into each update:
+For example, suppose an agent streams a Markdown response like this:
 
-```csharp
-var markdown = accumulatedText.ToString();
-update.Contents.Insert(
-    0,
-    new RichTextContent(markdown, ParseMarkdown(markdown)));
+```markdown
+## Blazor components
+
+Blazor renders **interactive UI** with `C#`.
+
+- [Server rendering](https://learn.microsoft.com/aspnet/core/blazor/)
+- WebAssembly rendering
 ```
 
-Here, `ParseMarkdown` represents an app-provided adapter from its Markdown parser to `RichTextNode` values. `RichTextContent` is a complete snapshot, so each new snapshot replaces the previous content for the same message without exposing a partially updated node tree. `ChatPage` and `MessageList` render these nodes without requiring a custom `BlockRenderer`.
+An app can wrap its model client in a `DelegatingChatClient` that accumulates text fragments with the same message ID. After each fragment, the wrapper parses all the Markdown received so far and inserts a complete `RichTextContent` snapshot:
+
+```csharp
+using System.Runtime.CompilerServices;
+using System.Text;
+using Microsoft.AspNetCore.Components.AI;
+using Microsoft.Extensions.AI;
+
+sealed class FormattedChatClient : DelegatingChatClient
+{
+    public FormattedChatClient(IChatClient innerClient)
+        : base(innerClient)
+    {
+    }
+
+    public override async IAsyncEnumerable<ChatResponseUpdate> GetStreamingResponseAsync(
+        IEnumerable<ChatMessage> messages,
+        ChatOptions? options = null,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        var textByMessageId =
+            new Dictionary<string, StringBuilder>(StringComparer.Ordinal);
+
+        await foreach (var update in base.GetStreamingResponseAsync(
+            messages,
+            options,
+            cancellationToken))
+        {
+            if (string.IsNullOrEmpty(update.MessageId))
+            {
+                yield return update;
+                continue;
+            }
+
+            var firstTextIndex = -1;
+            var chunks = new List<string>();
+            for (var i = 0; i < update.Contents.Count; i++)
+            {
+                if (update.Contents[i] is not TextContent textContent)
+                {
+                    continue;
+                }
+
+                if (firstTextIndex < 0)
+                {
+                    firstTextIndex = i;
+                }
+                chunks.Add(textContent.Text ?? string.Empty);
+            }
+
+            if (firstTextIndex >= 0)
+            {
+                if (!textByMessageId.TryGetValue(update.MessageId, out var text))
+                {
+                    text = new StringBuilder();
+                    textByMessageId.Add(update.MessageId, text);
+                }
+
+                foreach (var chunk in chunks)
+                {
+                    text.Append(chunk);
+                }
+
+                var markdown = text.ToString();
+                update.Contents.Insert(
+                    firstTextIndex,
+                    new RichTextContent(
+                        markdown,
+                        MarkdownRichTextParser.Parse(markdown)));
+            }
+
+            yield return update;
+        }
+    }
+}
+```
+
+`MarkdownRichTextParser` represents an app-provided adapter from a Markdown parser to `RichTextNode` values; the package doesn't require or include a particular Markdown implementation. Wrap the original client with `new FormattedChatClient(innerClient)` before passing it to `UIAgent`. Each `RichTextContent` is a complete snapshot, so it atomically replaces the previous content for the same message as streaming progresses. `ChatPage` and `MessageList` then render the heading, emphasis, inline code, link, and list without requiring a custom `BlockRenderer`.
 
 ### Render server tool calls
 
