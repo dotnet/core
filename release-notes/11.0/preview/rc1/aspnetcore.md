@@ -312,12 +312,12 @@ The new [Microsoft.AspNetCore.Components.AI](https://nuget.org/packages/microsof
 ### Get started
 
 > [!IMPORTANT]
-> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `0.1.0-preview.1.26458.102`.
+> The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `0.1.0-preview.1.26459.102`.
 
 Add the package to a Blazor app:
 
 ```dotnetcli
-dotnet add package Microsoft.AspNetCore.Components.AI --version 0.1.0-preview.1.26458.102
+dotnet add package Microsoft.AspNetCore.Components.AI --version 0.1.0-preview.1.26459.102
 ```
 
 Basic chat and the Components.AI block model work with any `IChatClient`. To connect the Blazor app to a remote agent over the [Agent User Interaction Protocol (AG-UI)](https://ag-ui.com), register an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) as the app's `IChatClient`:
