@@ -552,7 +552,9 @@ For a MAF agent, the server decides which functions require approval and AG-UI t
 
 An activity is an application-defined progress item that updates in place while an agent performs longer-running work. For example, a research agent can show that it is searching sources, comparing results, and then completing the research without adding a separate message for every update.
 
-Derive from `ActivityHandler<TBlock>` to map the application-specific progress content into a mutable `ActivityContentBlock` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)):
+Components.AI doesn't prescribe how an `IChatClient` represents progress updates. A chat integration can expose them as custom `AIContent` values or through `ChatResponseUpdate.RawRepresentation`. The following example uses `ResearchActivityContent` values that carry a stable activity ID, the latest status text, and whether the activity is complete.
+
+Derive from `ActivityHandler<TBlock>` to map these model-facing updates into a mutable `ActivityContentBlock` for the UI ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)). `ActivityContentBlock` provides an activity type and a JSON payload for generic scenarios; a derived block can instead expose strongly typed properties for its renderer:
 
 ```csharp
 public sealed class ResearchActivityContent(
@@ -577,7 +579,10 @@ public sealed class ResearchActivityHandler
     protected override bool TryCreateBlock(
         BlockMappingContext context,
         ResearchActivityBlock state)
-        => TryApply(context, state, out _);
+    {
+        state.ActivityType = "research";
+        return TryApply(context, state, out _);
+    }
 
     protected override bool TryUpdateBlock(
         BlockMappingContext context,
@@ -619,7 +624,9 @@ var agent = new UIAgent(chatClient, options =>
 });
 ```
 
-`TryCreateBlock` creates the activity from its first update. `TryUpdateBlock` changes the same block as later updates arrive and indicates when the activity is complete. Render the block in `MessageListContent`:
+For the first matching update, `TryCreateBlock` initializes and emits the block. `ActivityHandler<TBlock>` uses the response message ID for the block ID, or generates one when the update doesn't have an ID. Later updates are offered to `TryUpdateBlock`, which mutates the same block and indicates when it is complete. Each change notifies the message list to rerender the block in place, and completion changes its lifecycle state to inactive.
+
+Activities don't have a default visual representation. Render the application-specific block in `MessageListContent`:
 
 ```razor
 <BlockRenderer TBlock="ResearchActivityBlock">
