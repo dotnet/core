@@ -528,9 +528,7 @@ else
 }
 ```
 
-Calling `InvokeAsync` executes the registered function with the arguments supplied by the agent. When the function completes, `UIAgent` sends its result back to the agent and continues the conversation. Use the renderer's `When` predicate to provide different handling for each `action.ToolName`. A renderer can invoke the action automatically, as shown here, or present UI that collects input or confirmation first.
-
-The function runs wherever the Blazor UI runs: in the server-side circuit for Blazor Server or in the browser for WebAssembly.
+Calling `InvokeAsync` executes the registered function with the arguments supplied by the agent. The function runs wherever the Blazor UI runs: in the server-side circuit for Blazor Server or in the browser for WebAssembly. When the function completes, `UIAgent` sends its result back to the agent and continues the conversation. Use the renderer's `When` predicate to provide different handling for each `action.ToolName`. A renderer can invoke the action automatically, as shown here, or present UI that collects input or confirmation first.
 
 ### Require approval before tools run
 
