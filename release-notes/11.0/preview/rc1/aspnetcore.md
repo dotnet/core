@@ -326,16 +326,11 @@ Basic chat and the Components.AI block model work with any `IChatClient`. To con
 using AGUI.Client;
 using Microsoft.Extensions.AI;
 
-builder.Services.AddHttpClient(
-    "agent",
-    httpClient => httpClient.BaseAddress = new("https://api.example.com"));
-
-builder.Services.AddChatClient(services => new AGUIChatClient(new(
-    services.GetRequiredService<IHttpClientFactory>().CreateClient("agent"),
-    "/agent")));
+builder.Services.AddHttpClient<IChatClient>(httpClient =>
+    new AGUIChatClient(new(httpClient, "https://api.example.com/agent")));
 ```
 
-`AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The Blazor AI components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions. AG-UI is required when a remote server and the Blazor client need to exchange frontend tool declarations, backend tool events, approval interrupts, shared-state events, or AG-UI conversation identifiers.
+`AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The Blazor AI components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions. While basic chat functionality is supported with any `IChatClient`, AG-UI is required when a remote server and the Blazor client need to exchange frontend tool declarations, backend tool events, approval interrupts, shared-state events, or AG-UI conversation identifiers.
 
 Microsoft Agent Framework (MAF) can expose an `AIAgent` through an ASP.NET Core AG-UI endpoint. For the server-side setup, see [AG-UI integration with Agent Framework](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/) and its [.NET getting-started guide](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/getting-started).
 
@@ -388,7 +383,9 @@ Include the component styles in `App.razor`:
 
 ### Render content blocks
 
-`UIAgent` converts response content into `ContentBlock` objects that can update while a response streams. The built-in block types include:
+An `IChatClient` streams model-facing content, such as `TextContent`, `RichTextContent`, and `FunctionCallContent`, in `ChatResponseUpdate` values. `UIAgent` maps this response content into UI-facing `ContentBlock` objects that retain rendering state and can update in place while the response streams. For example, both plain-text fragments and structured rich-text snapshots map to a `RichContentBlock`.
+
+The built-in block types include:
 
 - `RichContentBlock` for streamed text and structured rich content.
 - `FunctionInvocationContentBlock` for a server function call and its eventual result.
@@ -396,7 +393,7 @@ Include the component styles in `App.razor`:
 - `FunctionApprovalBlock` for a function call that is waiting for user approval.
 - `ActivityContentBlock` for application-defined progress that updates in place.
 
-`ChatPage` renders common blocks such as `RichContentBlock` by default. Place a `BlockRenderer<TBlock>` in `ChatPage.MessageListContent` to replace the default rendering or render another block type. Its child content receives the matching `TBlock` as `context`, including the block's current properties as they change during streaming.
+`ChatPage` and `MessageList` include default rendering for `RichContentBlock` and `FunctionApprovalBlock`. Add a `BlockRenderer<TBlock>` to `ChatPage.MessageListContent` to replace this default rendering or render another block type. Its child content receives the matching block as `context`, including its current properties as they change during streaming.
 
 The following example replaces the default rendering for conversational content:
 
@@ -414,39 +411,18 @@ Use the renderer's `When` predicate to handle only selected blocks of a type. If
 
 ### Render structured rich text
 
-The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an agent return a structured presentation model instead of plain text. `RichTextContent` contains `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Each complete snapshot replaces the previous one for the same message.
+The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an agent return a structured presentation model instead of plain text. `RichTextContent` is response content that contains both plain text and `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. `UIAgent` maps it to the same `RichContentBlock` used for plain `TextContent`, but uses the supplied node tree instead of creating simple paragraphs.
 
-The following example creates a structured response with a heading and emphasized text:
+For example, an `IChatClient` decorator can accumulate streamed `TextContent` by message ID, parse the current text as Markdown, and insert a `RichTextContent` snapshot into each update:
 
 ```csharp
-var heading = new HeadingNode
-{
-    Level = 2,
-};
-heading.AddChild(new TextNode("Release summary"));
-
-var strong = new StrongNode();
-strong.AddChild(new TextNode("structured rich text"));
-
-var paragraph = new ParagraphNode();
-paragraph.AddChild(new TextNode("This response contains "));
-paragraph.AddChild(strong);
-paragraph.AddChild(new TextNode("."));
-
-var update = new ChatResponseUpdate
-{
-    Role = ChatRole.Assistant,
-    MessageId = "release-summary",
-    Contents =
-    [
-        new RichTextContent(
-            "Release summary\nThis response contains structured rich text.",
-            [heading, paragraph])
-    ],
-};
+var markdown = accumulatedText.ToString();
+update.Contents.Insert(
+    0,
+    new RichTextContent(markdown, ParseMarkdown(markdown)));
 ```
 
-`ChatPage` and `MessageList` render the structured nodes without requiring a custom `BlockRenderer`. Plain `TextContent` continues to render as paragraphs. Apps and `IChatClient` integrations can map Markdown or other source formats into the node model, retaining control over the supported formatting and presentation.
+Here, `ParseMarkdown` represents an app-provided adapter from its Markdown parser to `RichTextNode` values. `RichTextContent` is a complete snapshot, so each new snapshot replaces the previous content for the same message without exposing a partially updated node tree. `ChatPage` and `MessageList` render these nodes without requiring a custom `BlockRenderer`.
 
 ### Render server tool calls
 
@@ -495,7 +471,7 @@ Then render the generated block in `MessageListContent`:
 </ChatPage>
 ```
 
-The renderer's `context` is the generated `WeatherToolBlock`. Initially, it contains the typed call arguments and `HasResult` is `false`, so the UI can show pending content. When the result arrives, the block's generated handler populates `Weather`, sets `HasResult` to `true`, and rerenders the same block as the completed weather card.
+As the call arguments stream, the generated handler updates `Location` while `HasResult` remains `false`. When the result arrives, it populates `Weather`, sets `HasResult` to `true`, and rerenders the same block as the completed weather card.
 
 ![A generated typed tool block rendering a weather result](media/blazor-ai-tool-block.png)
 
@@ -505,7 +481,7 @@ When MAF hosts the remote agent, backend tools use its normal tool pipeline and 
 
 Frontend tools run in the client application rather than on the agent server. For example, a Blazor app can expose a tool that changes UI state, reads a local preference, or asks the user for input. Create the tool with `AIFunctionFactory` from `Microsoft.Extensions.AI`, then register it with `UIAgentOptions.RegisterUIAction` ([dotnet/aspnetcore #68325](https://github.com/dotnet/aspnetcore/pull/68325)).
 
-`RegisterUIAction` advertises the `AIFunction` to the agent through `ChatOptions`. When the agent requests it, `UIAgent` creates a `UIActionBlock` instead of executing the function immediately:
+`RegisterUIAction` advertises the `AIFunction` to the agent. When the agent requests it, `UIAgent` creates a `UIActionBlock` instead of executing the function immediately:
 
 ```csharp
 var setAccentColor = AIFunctionFactory.Create(
@@ -521,7 +497,7 @@ var agent = new UIAgent(
     options => options.RegisterUIAction(setAccentColor));
 ```
 
-Place a `BlockRenderer<UIActionBlock>` in `MessageListContent` to choose how the pending tool appears. Calling `action.InvokeAsync()` executes the registered function in the current Blazor app and sends its result back through `IChatClient` so the conversation can continue:
+Place a `BlockRenderer<UIActionBlock>` in `MessageListContent` to handle the function call requested by the agent. For example, the renderer can use a component that automatically invokes the function and displays its progress:
 
 ```razor
 <ChatPage Agent="agent">
@@ -529,15 +505,39 @@ Place a `BlockRenderer<UIActionBlock>` in `MessageListContent` to choose how the
         <BlockRenderer TBlock="UIActionBlock"
                        When='action => action.ToolName == "set_accent_color"'
                        Context="action">
-            <button @onclick="() => action.InvokeAsync()">
-                Run @action.ToolName
-            </button>
+            <AutoInvokeAction Action="action" />
         </BlockRenderer>
     </MessageListContent>
 </ChatPage>
 ```
 
-Register each frontend `AIFunction` separately. Use the renderer's `When` predicate and `action.ToolName`—the name passed to `AIFunctionFactory.Create`—to select the UI for each tool. Unlike generated server tool blocks, a `UIActionBlock` retains the registered executable `AIFunction` so that `InvokeAsync` can run it in the UI; its call and result remain available through `Call` and `Result`.
+The `AutoInvokeAction` component calls `InvokeAsync` when it receives the block:
+
+```razor
+@if (Action.IsComplete)
+{
+    <span>Accent color updated</span>
+}
+else
+{
+    <span>Updating accent color...</span>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public UIActionBlock Action { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!Action.IsComplete)
+        {
+            await Action.InvokeAsync();
+        }
+    }
+}
+```
+
+`InvokeAsync` executes the registered function using the arguments supplied by the agent and sends its result back through `IChatClient` so the conversation can continue. Register each frontend `AIFunction` separately, and use the renderer's `When` predicate and `action.ToolName`—the name passed to `AIFunctionFactory.Create`—to select the handling for each tool. A renderer can alternatively request input or confirmation before invoking the function.
 
 For Blazor Server apps, the frontend tool executes in the server-side Blazor circuit; for WebAssembly, it executes in the browser.
 
