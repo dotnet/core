@@ -552,91 +552,11 @@ For a MAF agent, the server decides which functions require approval and AG-UI t
 
 An activity is an application-defined progress item that updates in place while an agent performs longer-running work. For example, a research agent can show that it is searching sources, comparing results, and then completing the research without adding a separate message for every update.
 
-Components.AI doesn't prescribe how an `IChatClient` represents progress updates. A chat integration can expose them as custom `AIContent` values or through `ChatResponseUpdate.RawRepresentation`. The following example uses `ResearchActivityContent` values that carry a stable activity ID, the latest status text, and whether the activity is complete.
+`ActivityHandler<TBlock>` is a protocol-neutral extension point that maps provider- or application-specific progress updates into a mutable `ActivityContentBlock` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)). `TryCreateBlock` initializes and emits the block for the first matching update. `TryUpdateBlock` mutates the same block as later updates arrive and indicates when the activity is complete. Register the handler with `UIAgentOptions.AddBlockHandler`, then provide a `BlockRenderer` for the application-specific block. Activities don't have a default visual representation.
 
-Derive from `ActivityHandler<TBlock>` to map these model-facing updates into a mutable `ActivityContentBlock` for the UI ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)). `ActivityContentBlock` provides an activity type and a JSON payload for generic scenarios; a derived block can instead expose strongly typed properties for its renderer:
+AG-UI's `ACTIVITY_SNAPSHOT` and `ACTIVITY_DELTA` events are one possible source of these updates. `AGUIChatClient` exposes the original event through `ChatResponseUpdate.RawRepresentation`, where a handler can initialize the activity from a snapshot and apply subsequent JSON Patch deltas. The application defines the activity payload and completion semantics; Components.AI doesn't include an AG-UI-specific activity handler or JSON Patch implementation.
 
-```csharp
-public sealed class ResearchActivityContent(
-    string id,
-    string text,
-    bool complete) : AIContent
-{
-    public string Id { get; } = id;
-    public string Text { get; } = text;
-    public bool Complete { get; } = complete;
-}
-
-public sealed class ResearchActivityBlock : ActivityContentBlock
-{
-    public string ActivityId { get; set; } = "";
-    public string Text { get; set; } = "";
-}
-
-public sealed class ResearchActivityHandler
-    : ActivityHandler<ResearchActivityBlock>
-{
-    protected override bool TryCreateBlock(
-        BlockMappingContext context,
-        ResearchActivityBlock state)
-    {
-        state.ActivityType = "research";
-        return TryApply(context, state, out _);
-    }
-
-    protected override bool TryUpdateBlock(
-        BlockMappingContext context,
-        ResearchActivityBlock state,
-        out bool isCompleted)
-        => TryApply(context, state, out isCompleted);
-
-    private static bool TryApply(
-        BlockMappingContext context,
-        ResearchActivityBlock state,
-        out bool isCompleted)
-    {
-        foreach (var content in context.UnhandledContents)
-        {
-            if (content is ResearchActivityContent activity &&
-                (state.ActivityId.Length == 0 ||
-                 state.ActivityId == activity.Id))
-            {
-                context.MarkHandled(activity);
-                state.ActivityId = activity.Id;
-                state.Text = activity.Text;
-                isCompleted = activity.Complete;
-                return true;
-            }
-        }
-
-        isCompleted = false;
-        return false;
-    }
-}
-```
-
-Register the handler when constructing the agent:
-
-```csharp
-var agent = new UIAgent(chatClient, options =>
-{
-    options.AddBlockHandler(new ResearchActivityHandler());
-});
-```
-
-For the first matching update, `TryCreateBlock` initializes and emits the block. `ActivityHandler<TBlock>` uses the response message ID for the block ID, or generates one when the update doesn't have an ID. Later updates are offered to `TryUpdateBlock`, which mutates the same block and indicates when it is complete. Each change notifies the message list to rerender the block in place, and completion changes its lifecycle state to inactive.
-
-Activities don't have a default visual representation. Render the application-specific block in `MessageListContent`:
-
-```razor
-<BlockRenderer TBlock="ResearchActivityBlock">
-    <p>@context.Text</p>
-</BlockRenderer>
-```
-
-The rendered progress updates in place while the agent works.
-
-![A research activity showing in-progress source discovery](media/blazor-ai-activity.png)
+![An application-defined research activity showing in-progress source discovery](media/blazor-ai-activity.png)
 
 ### Synchronize typed state
 
