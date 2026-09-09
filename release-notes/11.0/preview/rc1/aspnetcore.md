@@ -305,20 +305,22 @@ Browser support currently requires an experimental DBSC implementation. See [Chr
 
 ## Experimental Blazor AI components for agentic user interfaces
 
+Modern AI apps increasingly provide rich interactions with agents. A complete agentic user interface may need to stream ongoing work, visualize agent reasoning and progress, request approval before tools act, accept multimodal input, and synchronize state between the app and the agent. The Blazor AI components are designed to provide building blocks for creating these experiences using Blazor's component model.
+
+The new [Microsoft.AspNetCore.Components.AI](https://nuget.org/packages/microsoft.aspnetcore.components.ai) package includes an initial set of Blazor AI components for streaming chat, rich-text and tool rendering, human approval flows, and typed, shared, and predictive UI state.
+
 > [!IMPORTANT]
 > The `Microsoft.AspNetCore.Components.AI` package is experimental and will remain prerelease throughout .NET 11. For .NET 11 RC1, use version `0.1.0-preview.1.26458.102`.
+
+To get started, add the package to a Blazor app:
 
 ```dotnetcli
 dotnet add package Microsoft.AspNetCore.Components.AI --version 0.1.0-preview.1.26458.102
 ```
 
-Modern AI apps increasingly provide rich interactions with agents. A complete agentic user interface may need to stream ongoing work, visualize agent reasoning and progress, request approval before tools act, accept multimodal input, and synchronize state between the app and the agent. The Blazor AI components are designed to provide building blocks for creating these experiences using Blazor's component model.
+### Build a basic streaming conversation
 
-.NET 11 RC1 includes an initial set of Blazor AI components for streaming chat, rich-text and tool rendering, human approval flows, and typed, shared, and predictive UI state.
-
-### Stream conversations into Blazor components
-
-The initial streaming chat support ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)) is provider- and protocol-neutral. Apps supply an `IChatClient` from `Microsoft.Extensions.AI`, and `UIAgent` converts its streaming responses into observable content blocks that the UI can render as they arrive. `UIAgent` also retains the message history for subsequent turns.
+The first step in an agentic UI is often a basic conversation that streams responses and retains message history across turns. The initial chat support ([dotnet/aspnetcore #68323](https://github.com/dotnet/aspnetcore/pull/68323)) is provider- and protocol-neutral: apps supply an `IChatClient` from `Microsoft.Extensions.AI`, and `UIAgent` converts its streaming responses into observable content blocks.
 
 `ChatPage` is a complete chat shell that combines three lower-level components:
 
@@ -353,6 +355,8 @@ The following component creates a `UIAgent` over an app-provided `IChatClient` a
 }
 ```
 
+`Placeholder` sets the hint shown in the empty message input. `WelcomeContent` supplies the content shown before the first message is sent.
+
 Include the component styles in `App.razor`:
 
 ```razor
@@ -361,177 +365,9 @@ Include the component styles in `App.razor`:
 
 ![Blazor AI chat interface showing a conversation with a travel planning agent](media/blazor-ai-chat.png)
 
-Because `UIAgent` accepts any `IChatClient`, it can also use an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) to connect the Blazor UI to a remote agent over the Agent User Interaction Protocol (AG-UI):
-
-```csharp
-using AGUI.Client;
-using Microsoft.Extensions.AI;
-
-builder.Services.AddHttpClient<IChatClient>(httpClient =>
-    new AGUIChatClient(new(httpClient, "https://api.example.com/agent")));
-```
-
-`AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The RC1 components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
-
-### Run tools in the Blazor UI
-
-Register browser-owned functions with `UIAgentOptions.RegisterUIAction`. A matching model tool call becomes a `UIActionBlock` that a renderer in `ChatPage.MessageListContent` can invoke by calling `InvokeAsync`. The action runs in the current Blazor circuit, and its result is sent back through `IChatClient` so the conversation can continue ([dotnet/aspnetcore #68325](https://github.com/dotnet/aspnetcore/pull/68325)).
-
-```csharp
-var setAccentColor = AIFunctionFactory.Create(
-    async (string color) =>
-    {
-        await InvokeAsync(() => accentColor = color);
-        return $"Changed the accent color to {color}.";
-    },
-    name: "set_accent_color");
-
-var agent = new UIAgent(
-    chatClient,
-    options => options.RegisterUIAction(setAccentColor));
-```
-
-Render a button or other UI for the pending action:
-
-```razor
-<BlockRenderer TBlock="UIActionBlock" Context="action">
-    <button @onclick="() => action.InvokeAsync()">
-        Run @action.ToolName
-    </button>
-</BlockRenderer>
-```
-
-### Render server tool calls
-
-Server-owned tool calls become `FunctionInvocationContentBlock` instances that apps can render with `BlockRenderer`. The package's source generator creates strongly typed handlers from classes annotated with `ToolBlock`, `ToolParameter`, and `ToolResult`. Register the generated handlers by calling `options.AddGeneratedToolBlocks()` when constructing the `UIAgent` ([dotnet/aspnetcore #68327](https://github.com/dotnet/aspnetcore/pull/68327)).
-
-```csharp
-[ToolBlock("get_weather")]
-public partial class WeatherToolBlock : FunctionInvocationContentBlock
-{
-    [ToolParameter(Name = "location")]
-    public string? Location { get; set; }
-
-    [ToolResult]
-    public WeatherInfo? Weather { get; set; }
-}
-```
-
-```csharp
-var agent = new UIAgent(
-    chatClient,
-    options => options.AddGeneratedToolBlocks());
-```
-
-Render the generated block in `MessageListContent`:
-
-```razor
-<BlockRenderer TBlock="WeatherToolBlock">
-    <p>@context.Location: @context.Weather?.Temperature&deg;C</p>
-</BlockRenderer>
-```
-
-The same typed block is updated when the tool result arrives, so its renderer can transition from a pending state to completed content.
-
-![A generated typed tool block rendering a weather result](media/blazor-ai-tool-block.png)
-
-### Require approval before tools run
-
-Tool calls that require confirmation become `FunctionApprovalBlock` instances. The conversation pauses until the UI calls `Approve` or `Reject`, which enables human-in-the-loop confirmation before work continues ([dotnet/aspnetcore #68329](https://github.com/dotnet/aspnetcore/pull/68329)).
-
-```razor
-<BlockRenderer TBlock="FunctionApprovalBlock" Context="approval">
-    <p>Allow <code>@approval.ToolName</code> to run?</p>
-    <button @onclick="approval.Approve">Approve</button>
-    <button @onclick="() => approval.Reject()">Reject</button>
-</BlockRenderer>
-```
-
-Approving lets the tool run and resumes the conversation. Rejecting returns that decision to the agent without running the tool.
-
-![A tool call waiting for human approval](media/blazor-ai-tool-approval.png)
-
-### Display activities
-
-Derive from `ActivityHandler<TBlock>` to map application-specific progress updates into a mutable `ActivityContentBlock` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)):
-
-```csharp
-var agent = new UIAgent(chatClient, options =>
-{
-    options.AddBlockHandler(new ResearchActivityHandler());
-});
-```
-
-`TryCreateBlock` creates the activity from its first update. `TryUpdateBlock` changes the same block as later updates arrive and indicates when the activity is complete:
-
-```razor
-<BlockRenderer TBlock="ResearchActivityBlock">
-    <p>@context.Text</p>
-</BlockRenderer>
-```
-
-The rendered progress updates in place while the agent works.
-
-### Synchronize typed state
-
-Use `UIAgent<TState>` to expose typed, observable UI state separately from conversational content. A state mapper processes selected `ChatResponseUpdate` content and calls `SetState` to update `AgentState<TState>` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)):
-
-```csharp
-var agent = new UIAgent<RecipeState>(chatClient, options =>
-{
-    options.StateMapper = context =>
-    {
-        foreach (var content in context.UnhandledContents)
-        {
-            if (content is RecipeStateContent recipe)
-            {
-                context.MarkHandled(content);
-                context.SetState(recipe.Value);
-            }
-        }
-    };
-});
-```
-
-Read the current value from `agent.State.Value`, and subscribe to `agent.State.OnChanged` when the surrounding component needs to rerender. State mappers can handle custom content or protocol-specific snapshots and deltas.
-
-![Typed agent state rendered as a recipe card](media/blazor-ai-shared-state.png)
-
-### Persist and restore conversations
-
-An `IConversationThread` persists completed turns and can retain a remote service's conversation identifier across requests. Assign the thread through `UIAgentOptions.Thread`, and call `UIAgent.RestoreAsync` or `AgentContext.RestoreAsync` to explicitly rebuild conversation history and typed state ([dotnet/aspnetcore #68334](https://github.com/dotnet/aspnetcore/pull/68334)).
-
-```csharp
-var agent = new UIAgent(
-    chatClient,
-    options => options.Thread = conversationThread);
-
-var restoredBlocks = await agent.RestoreAsync();
-```
-
-Creating an agent with a thread doesn't automatically restore it. `RestoreAsync` replays the stored updates into content blocks and state before the conversation continues.
-
-### Show predictive UI state
-
-A state mapper can call `SetPredictiveState` to display a provisional value while an interactive tool call is pending. The UI can inspect `HasPendingPredictiveState` and call `AcceptPredictiveState` or `RejectPredictiveState`. Unresolved predictions automatically roll back when the turn ends ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)).
-
-```csharp
-context.SetPredictiveState(predictedState);
-
-if (agent.State.HasPendingPredictiveState)
-{
-    agent.State.AcceptPredictiveState();
-    // Or call RejectPredictiveState() to restore the committed value.
-}
-```
-
-The provisional value is immediately available from `agent.State.Value`. Accepting commits it; rejecting restores the previous committed value.
-
-![A pending predictive state with accept and reject actions](media/blazor-ai-predictive-state.png)
-
 ### Render structured rich text
 
-The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) provides a structured presentation model using `RichTextContent` and `RichTextNode` values. Apps can create nodes for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Each complete snapshot replaces the previous one for the same message.
+The rich-text support ([dotnet/aspnetcore #68324](https://github.com/dotnet/aspnetcore/pull/68324)) lets an agent return a structured presentation model instead of plain text. `RichTextContent` contains `RichTextNode` values for headings, paragraphs, emphasis, links, lists, code blocks, tables, and other presentation elements. Each complete snapshot replaces the previous one for the same message.
 
 The following example creates a structured response with a heading and emphasized text:
 
@@ -563,9 +399,220 @@ var update = new ChatResponseUpdate
 };
 ```
 
-`ChatPage` and `MessageList` include a rendering path for the structured nodes without requiring a custom `BlockRenderer`. Plain `TextContent` continues to render as paragraphs.
+`ChatPage` and `MessageList` render the structured nodes without requiring a custom `BlockRenderer`. Plain `TextContent` continues to render as paragraphs. Components.AI doesn't parse plain text or Markdown into rich content; the app or its `IChatClient` integration is responsible for producing the nodes.
 
-Components.AI doesn't parse plain text or Markdown into rich content. Apps are responsible for mapping their source format into `RichTextNode` values.
+### Connect to remote agents with AG-UI
+
+Basic chat and the Components.AI block model work with any `IChatClient`. Use an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) when the Blazor app connects to a remote agent over the [Agent User Interaction Protocol (AG-UI)](https://ag-ui.com), particularly for protocol-level features such as remote tool events, approval interrupts, shared state, and conversation identifiers.
+
+The following registration uses a named `HttpClient` for the remote endpoint and registers `AGUIChatClient` as the app's `IChatClient`:
+
+```csharp
+using AGUI.Client;
+using Microsoft.Extensions.AI;
+
+builder.Services.AddHttpClient(
+    "agent",
+    httpClient => httpClient.BaseAddress = new("https://api.example.com"));
+
+builder.Services.AddChatClient(services => new AGUIChatClient(new(
+    services.GetRequiredService<IHttpClientFactory>().CreateClient("agent"),
+    "/agent")));
+```
+
+`AGUIChatClient` streams AG-UI events as `ChatResponseUpdate` values. The Blazor AI components render the conversational content from these updates, while apps can use the additional AG-UI event information to build richer agentic interactions.
+
+The Components.AI block and state APIs don't require AG-UI. AG-UI is required for the examples below when a remote MAF server and the Blazor client need to exchange frontend tool declarations, backend tool events, approval interrupts, shared-state events, or AG-UI conversation identifiers. An integration based on another `IChatClient` can provide the same UI scenarios by producing the corresponding `Microsoft.Extensions.AI` content and updates itself.
+
+Microsoft Agent Framework (MAF) can expose an `AIAgent` through an ASP.NET Core AG-UI endpoint. For the server-side setup, see [AG-UI integration with Agent Framework](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/) and its [.NET getting-started guide](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/getting-started).
+
+### Render server tool calls
+
+`UIAgent` represents streamed response content as content blocks. `ChatPage` renders common blocks such as text by default. To customize other content, place a `BlockRenderer<TBlock>` in `ChatPage.MessageListContent`. The renderer selects blocks of the specified type and uses its child content as the rendering template.
+
+For example, a weather tool may run on the agent server while the Blazor app renders its call and result as a weather card. Server tool calls become `FunctionInvocationContentBlock` instances, which pair the `FunctionCallContent` with its eventual `FunctionResultContent` and expose the tool name, arguments, and completion state.
+
+The package's source generator creates a strongly typed block handler from a class annotated with `ToolBlock`, `ToolParameter`, and `ToolResult` ([dotnet/aspnetcore #68327](https://github.com/dotnet/aspnetcore/pull/68327)):
+
+```csharp
+[ToolBlock("get_weather")]
+public partial class WeatherToolBlock : FunctionInvocationContentBlock
+{
+    [ToolParameter(Name = "location")]
+    public string? Location { get; set; }
+
+    [ToolResult]
+    public WeatherInfo? Weather { get; set; }
+}
+```
+
+Register the generated handlers when constructing the `UIAgent`:
+
+```csharp
+var agent = new UIAgent(
+    chatClient,
+    options => options.AddGeneratedToolBlocks());
+```
+
+Then render the generated block in `MessageListContent`:
+
+```razor
+<ChatPage Agent="agent">
+    <MessageListContent>
+        <BlockRenderer TBlock="WeatherToolBlock">
+            <p>@context.Location: @context.Weather?.Temperature&deg;C</p>
+        </BlockRenderer>
+    </MessageListContent>
+</ChatPage>
+```
+
+The same typed block is updated when the tool result arrives, so its renderer can transition from a pending state to completed content.
+
+![A generated typed tool block rendering a weather result](media/blazor-ai-tool-block.png)
+
+When MAF hosts the remote agent, backend tools use its normal tool pipeline and AG-UI transports the call and result to the client. See [Backend tool rendering with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/backend-tool-rendering).
+
+### Run frontend tools
+
+Frontend tools run in the client application rather than on the agent server. For example, a Blazor app can expose a tool that changes UI state, reads a local preference, or asks the user for input. Create the tool with `AIFunctionFactory` from `Microsoft.Extensions.AI`, then register it with `UIAgentOptions.RegisterUIAction` ([dotnet/aspnetcore #68325](https://github.com/dotnet/aspnetcore/pull/68325)).
+
+`RegisterUIAction` advertises the `AIFunction` to the agent through `ChatOptions`. When the agent requests it, `UIAgent` creates a `UIActionBlock` instead of executing the function immediately:
+
+```csharp
+var setAccentColor = AIFunctionFactory.Create(
+    async (string color) =>
+    {
+        await InvokeAsync(() => accentColor = color);
+        return $"Changed the accent color to {color}.";
+    },
+    name: "set_accent_color");
+
+var agent = new UIAgent(
+    chatClient,
+    options => options.RegisterUIAction(setAccentColor));
+```
+
+Place a `BlockRenderer<UIActionBlock>` in `MessageListContent` to choose how the pending tool appears. Calling `action.InvokeAsync()` executes the registered function in the current Blazor app and sends its result back through `IChatClient` so the conversation can continue:
+
+```razor
+<ChatPage Agent="agent">
+    <MessageListContent>
+        <BlockRenderer TBlock="UIActionBlock" Context="action">
+            <button @onclick="() => action.InvokeAsync()">
+                Run @action.ToolName
+            </button>
+        </BlockRenderer>
+    </MessageListContent>
+</ChatPage>
+```
+
+For Interactive Server, the frontend tool executes in the server-side Blazor circuit; for WebAssembly, it executes in the browser. When the remote agent uses MAF and AG-UI, see [Frontend tool rendering with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/frontend-tools).
+
+### Require approval before tools run
+
+An app can require the user to approve a consequential tool call, such as scheduling a meeting, before the agent proceeds. Tool approval requests become `FunctionApprovalBlock` instances. The conversation pauses until the UI calls `Approve` or `Reject` ([dotnet/aspnetcore #68329](https://github.com/dotnet/aspnetcore/pull/68329)):
+
+```razor
+<BlockRenderer TBlock="FunctionApprovalBlock" Context="approval">
+    <p>Allow <code>@approval.ToolName</code> to run?</p>
+    <button @onclick="approval.Approve">Approve</button>
+    <button @onclick="() => approval.Reject()">Reject</button>
+</BlockRenderer>
+```
+
+Approving lets the tool run and resumes the conversation. Rejecting returns that decision to the agent without running the tool.
+
+![A tool call waiting for human approval](media/blazor-ai-tool-approval.png)
+
+For a MAF agent, the server decides which functions require approval and AG-UI transports the request and decision. See [Human-in-the-loop with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/human-in-the-loop).
+
+### Display activities
+
+An activity is an application-defined progress item that updates in place while an agent performs longer-running work. For example, a research agent can show that it is searching sources, comparing results, and then completing the research without adding a separate message for every update.
+
+Derive from `ActivityHandler<TBlock>` to map the application-specific progress content into a mutable `ActivityContentBlock` ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)):
+
+```csharp
+var agent = new UIAgent(chatClient, options =>
+{
+    options.AddBlockHandler(new ResearchActivityHandler());
+});
+```
+
+`TryCreateBlock` creates the activity from its first update. `TryUpdateBlock` changes the same block as later updates arrive and indicates when the activity is complete:
+
+```razor
+<BlockRenderer TBlock="ResearchActivityBlock">
+    <p>@context.Text</p>
+</BlockRenderer>
+```
+
+The rendered progress updates in place while the agent works.
+
+### Synchronize typed state
+
+Agentic UIs often show a shared workspace alongside the conversation, such as a recipe, document, form, or plan that the agent can update. `UIAgent<TState>` exposes this data as typed, observable UI state separately from conversational content ([dotnet/aspnetcore #68333](https://github.com/dotnet/aspnetcore/pull/68333)).
+
+The app configures a state mapper for the `ChatResponseUpdate` values produced by its `IChatClient`. In an AG-UI integration, the agent server explicitly maps selected tool results to `STATE_SNAPSHOT` or `STATE_DELTA` events. `AGUIChatClient` then exposes those events through `ChatResponseUpdate.RawRepresentation`, where the Blazor app can deserialize them and call `SetState`:
+
+```csharp
+using System.Text.Json;
+using AGUI.Abstractions;
+
+var agent = new UIAgent<RecipeState>(chatClient, options =>
+{
+    options.StateMapper = context =>
+    {
+        if (context.Update.RawRepresentation is StateSnapshotEvent snapshot &&
+            snapshot.Snapshot.Deserialize<RecipeState>() is { } state)
+        {
+            context.SetState(state);
+        }
+    };
+});
+```
+
+Read the current value from `agent.State.Value`, and subscribe to `agent.State.OnChanged` when the surrounding component needs to rerender. State mappers can also handle app-specific `AIContent` from other `IChatClient` implementations.
+
+![Typed agent state rendered as a recipe card](media/blazor-ai-shared-state.png)
+
+For the corresponding MAF server configuration, including mapping tool results to state snapshots and deltas, see [State management with AG-UI](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/state-management).
+
+### Show predictive UI state
+
+Predictive state lets the UI show a proposed change before the user commits it. For example, while an agent proposes express shipping, the order summary can immediately preview that selection and then keep or discard it based on the user's response.
+
+A state mapper calls `SetPredictiveState` instead of `SetState` for the provisional value. The UI reads the proposed value from `agent.State.Value`, checks `HasPendingPredictiveState`, and calls `AcceptPredictiveState` or `RejectPredictiveState`. Unresolved predictions automatically roll back when the turn ends ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)):
+
+```csharp
+context.SetPredictiveState(predictedState);
+
+if (agent.State.HasPendingPredictiveState)
+{
+    agent.State.AcceptPredictiveState();
+    // Or call RejectPredictiveState() to restore the committed value.
+}
+```
+
+The provisional value is immediately available from `agent.State.Value`. Accepting commits it; rejecting restores the previous committed value.
+
+![A pending predictive state with accept and reject actions](media/blazor-ai-predictive-state.png)
+
+### Persist and restore conversations
+
+An `IConversationThread` stores completed turns so a UI can rebuild its conversation after the component or app restarts. A thread can also retain protocol metadata, such as the `threadId` and previous `runId` used to continue a server-owned AG-UI conversation.
+
+Pass the thread when constructing `UIAgent`, then call `UIAgent.RestoreAsync` or `AgentContext.RestoreAsync` to explicitly replay the stored updates into content blocks and typed state ([dotnet/aspnetcore #68334](https://github.com/dotnet/aspnetcore/pull/68334)):
+
+```csharp
+var agent = new UIAgent(
+    chatClient,
+    options => options.Thread = conversationThread);
+
+var restoredBlocks = await agent.RestoreAsync();
+```
+
+Passing a thread to `UIAgent` enables new completed turns to be persisted, but doesn't automatically restore earlier turns. For MAF-hosted AG-UI agents, see [AG-UI conversation continuity](https://learn.microsoft.com/agent-framework/integrations/by-component/ui/ag-ui/getting-started#conversation-continuity).
 
 ## Breaking changes
 
