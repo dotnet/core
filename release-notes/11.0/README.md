@@ -48,7 +48,6 @@
 ### Visual Basic
 
 - [What's new in Visual Basic](https://learn.microsoft.com/dotnet/visual-basic/whats-new/)
-- [Preview 5](preview/preview5/visualbasic.md)
 
 ### ASP.NET Core
 
