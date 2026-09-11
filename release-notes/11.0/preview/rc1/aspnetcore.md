@@ -320,7 +320,13 @@ Add the package to a Blazor app:
 dotnet add package Microsoft.AspNetCore.Components.AI --version 0.1.0-preview.1.26459.102
 ```
 
-Basic chat and the Components.AI block model work with any `IChatClient`. To connect the Blazor app to a remote agent over the [Agent User Interaction Protocol (AG-UI)](https://ag-ui.com), register an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) as the app's `IChatClient`:
+Basic chat and the Components.AI block model work with any `IChatClient`. To connect the Blazor app to a remote agent over the [Agent User Interaction Protocol (AG-UI)](https://ag-ui.com), install the `AGUI.Client` package:
+
+```dotnetcli
+dotnet add package AGUI.Client
+```
+
+`AGUI.Client` includes a transitive reference to `AGUI.Abstractions`, which provides the AG-UI event types used in later examples. Register an [`AGUIChatClient`](https://docs.ag-ui.com/sdk/dotnet/client/chat-client) as the app's `IChatClient`:
 
 ```csharp
 using AGUI.Client;
@@ -478,7 +484,11 @@ Frontend tools run in the client application rather than on the agent server. Fo
 var setAccentColor = AIFunctionFactory.Create(
     async (string color) =>
     {
-        await InvokeAsync(() => accentColor = color);
+        await InvokeAsync(() =>
+        {
+            accentColor = color;
+            StateHasChanged();
+        });
         return $"Changed the accent color to {color}.";
     },
     name: "set_accent_color");
@@ -535,11 +545,15 @@ Calling `InvokeAsync` executes the registered function with the arguments suppli
 An app can require the user to approve a consequential tool call, such as scheduling a meeting, before the agent proceeds. Tool approval requests become `FunctionApprovalBlock` instances. The conversation pauses until the UI calls `Approve` or `Reject` ([dotnet/aspnetcore #68329](https://github.com/dotnet/aspnetcore/pull/68329)):
 
 ```razor
-<BlockRenderer TBlock="FunctionApprovalBlock" Context="approval">
-    <p>Allow <code>@approval.ToolName</code> to run?</p>
-    <button @onclick="approval.Approve">Approve</button>
-    <button @onclick="() => approval.Reject()">Reject</button>
-</BlockRenderer>
+<ChatPage Agent="agent">
+    <MessageListContent>
+        <BlockRenderer TBlock="FunctionApprovalBlock" Context="approval">
+            <p>Allow <code>@approval.ToolName</code> to run?</p>
+            <button @onclick="approval.Approve">Approve</button>
+            <button @onclick="() => approval.Reject()">Reject</button>
+        </BlockRenderer>
+    </MessageListContent>
+</ChatPage>
 ```
 
 Approving lets the tool run and resumes the conversation. Rejecting returns that decision to the agent without running the tool.
@@ -559,6 +573,7 @@ AG-UI's `ACTIVITY_SNAPSHOT` and `ACTIVITY_DELTA` events are one possible source 
 ```csharp
 using System.Text.Json;
 using AGUI.Abstractions;
+using Microsoft.AspNetCore.Components.AI;
 
 public sealed class ResearchActivityBlock : ActivityContentBlock
 {
@@ -617,13 +632,15 @@ The app configures a state mapper for the `ChatResponseUpdate` values produced b
 ```csharp
 using System.Text.Json;
 using AGUI.Abstractions;
+using Microsoft.AspNetCore.Components.AI;
 
 var agent = new UIAgent<RecipeState>(chatClient, options =>
 {
     options.StateMapper = context =>
     {
         if (context.Update.RawRepresentation is StateSnapshotEvent snapshot &&
-            snapshot.Snapshot.Deserialize<RecipeState>() is { } state)
+            snapshot.Snapshot.Deserialize<RecipeState>(
+                JsonSerializerOptions.Web) is { } state)
         {
             context.SetState(state);
         }
@@ -644,12 +661,17 @@ Predictive state lets an app render an agent's proposed state change while the m
 An AG-UI server integration can map streamed arguments for a state-writing tool to provisional state events. The completed tool-call arguments are the authoritative proposal. When creating the `UIAgent<TState>`, configure its state mapper to deserialize those events and call `SetPredictiveState`. `AgentState<TState>` then retains the prior committed value for rollback ([dotnet/aspnetcore #68335](https://github.com/dotnet/aspnetcore/pull/68335)):
 
 ```csharp
+using System.Text.Json;
+using AGUI.Abstractions;
+using Microsoft.AspNetCore.Components.AI;
+
 var agent = new UIAgent<DocumentState>(chatClient, options =>
 {
     options.StateMapper = context =>
     {
         if (context.Update.RawRepresentation is StateSnapshotEvent snapshot &&
-            snapshot.Snapshot.Deserialize<DocumentState>() is { } predictedState)
+            snapshot.Snapshot.Deserialize<DocumentState>(
+                JsonSerializerOptions.Web) is { } predictedState)
         {
             context.SetPredictiveState(predictedState);
         }
