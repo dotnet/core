@@ -126,4 +126,44 @@ The output file must follow the shared schema documented in [changes-schema.md](
 - stable `id` values in `repo@shortcommit` format
 - same authoritative source of truth used by later skills
 
+## Milestone cross-check
+
+`changes.json` is derived from a VMR source-manifest diff. That makes it authoritative for *what
+flowed into the build*, but it is a commit-shaped view, and a feature can be easy to overlook in it.
+For the repos that maintain preview milestones, sweep the milestone as a **second, independent view**
+of the same release and reconcile anything that looks like a user-facing feature but never made it
+into the notes.
+
+```bash
+gh api -X GET search/issues \
+  -f q="repo:dotnet/aspnetcore is:pr is:merged milestone:11.0-preview7" \
+  --jq '.total_count'
+```
+
+Milestone discipline varies by repo, so this check only applies for the repos where it is actually maintained:
+
+- dotnet/sdk
+- dotnet/aspnetcore
+- dotnet/runtime
+- dotnet/efcore
+
+Rules for using it:
+
+- **Supplement, never replace.** `changes.json` stays the source of truth. The milestone is a
+  prompt to go back and look, not an alternative manifest.
+- **The milestone is a subset.** It excludes infrastructure and dependency-flow PRs that
+  legitimately appear in `changes.json`, so the counts will not match and are not meant to.
+- **Only the missing direction matters.** What is worth acting on is a PR in the milestone that
+  describes a user-facing change and has no corresponding entry in the notes.
+- **Verify every addition independently before writing it up.** Milestones are applied by
+  automation, so they are usually right — but they can be changed or applied incorrectly by hand
+  afterwards, and a milestoned PR can still be reverted. Treat a milestone as reliable evidence of
+  where to look and strong but not conclusive evidence that the change shipped. Before promoting
+  anything found this way, confirm it appears in `changes.json` and exists in the build (see
+  [`api-verification.md`](../release-notes/references/api-verification.md) and
+  [`validate-code-samples`](../validate-code-samples/SKILL.md)). The expected outcome is that it
+  checks out; the point is to catch the occasional one that does not.
+- **Confirm the milestone exists before relying on its absence.** Repos without `11.x` milestones
+  will return zero results, which means "not tracked here", not "nothing shipped".
+
 Once `changes.json` exists, the next step is usually `generate-features`.

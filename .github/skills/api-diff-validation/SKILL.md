@@ -38,8 +38,8 @@ the real ref packs from the build's feed, so it answers "does this API exist in
 Read `build-metadata.json` for the target. Use its `nuget.source` as `$FEED` and
 the ref-pack versions (e.g. `Microsoft.NETCore.App.Ref@<version>`) as `$VER`. For
 behavior that requires the SDK (rare here), install it side-by-side and scoped —
-see the `validate-code-samples` skill. Do **not** trust a machine-wide SDK for
-preview work.
+see the [`validate-code-samples`](../validate-code-samples/SKILL.md) skill. Do
+**not** trust a machine-wide SDK for preview work.
 
 ## 2. Verify APIs exist with dotnet-inspect
 
