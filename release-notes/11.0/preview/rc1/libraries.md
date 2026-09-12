@@ -231,6 +231,12 @@ Console.WriteLine(
 
 ## Breaking changes
 
+### Numeric conversions are now correctly rounded
+
+Starting in .NET 11 Preview 7, conversions between `decimal` and binary floating-point types, and conversions from `BigInteger` to binary floating-point types, round the exact source value once to the nearest representable destination value ([dotnet/runtime #130565](https://github.com/dotnet/runtime/pull/130565), [dotnet/runtime #130566](https://github.com/dotnet/runtime/pull/130566)). The previous conversions could lose significant digits or round through an intermediate value, so existing binaries and code rebuilt with a .NET 11 Preview 7 or later SDK can produce different results.
+
+For example, converting the `double` literal `1.23` to `decimal` now preserves the exact binary floating-point value rather than producing `1.23`. If a value is intended to be decimal, use a decimal literal such as `1.23m` instead of converting a `double` literal. Update tests and serialized expected values that relied on the previous result; there is no compatibility switch to restore the former conversion algorithms. For complete guidance, see [dotnet/docs#55743](https://github.com/dotnet/docs/issues/55743).
+
 ### HTTP metrics are observable instruments
 
 The high-cardinality HTTP `open_connections` and `active_requests` metrics are now observable instruments ([dotnet/runtime #131275](https://github.com/dotnet/runtime/pull/131275)). Code that uses `MeterListener` directly must call `RecordObservableInstruments` to receive measurements from these instruments.
