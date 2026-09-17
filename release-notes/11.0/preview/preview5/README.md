@@ -1,57 +1,39 @@
 # .NET 11 Preview 5 - Release Notes
 
-These notes cover the highest-value changes that shipped in .NET 11 Preview 5:
+.NET 11 Preview 5 release notes. Find more information on new features released in .NET 11 Preview 5 by browsing through the release notes below:
 
 - [Libraries](./libraries.md)
 - [Runtime](./runtime.md)
 - [SDK](./sdk.md)
-- [Containers](./containers.md)
+- [MSBuild](./msbuild.md)
+- [NuGet](./nuget.md)
 
 ## Languages
 
 - [C#](./csharp.md)
 - [F#](./fsharp.md)
 
-## Web and data
+## Workloads, Libraries, & More
 
 - [.NET MAUI](./dotnetmaui.md)
 - [ASP.NET Core](./aspnetcore.md)
-- [EF Core](./efcore.md)
-
-## Tooling
-
-- [MSBuild](./msbuild.md)
-- [NuGet](./nuget.md)
+- [Container images](./containers.md)
+- [EF Core & Data](./efcore.md)
 - [Windows Forms](./winforms.md)
 - [WPF](./wpf.md)
 
-## Release information
-
-| | Version |
-| --- | --- |
-| Runtime | 11.0.0-preview.5.26276.113 |
-| SDK | 11.0.100-preview.5.26276.113 |
-
-### VMR refs
-
-These release notes were generated from the [dotnet/dotnet](https://github.com/dotnet/dotnet) VMR:
-
-- **Base**: [`v11.0.0-preview.4.26230.115`](https://github.com/dotnet/dotnet/tree/v11.0.0-preview.4.26230.115)
-- **Head**: [`release/11.0.1xx-preview5`](https://github.com/dotnet/dotnet/tree/release/11.0.1xx-preview5)
-
 ## Get Started
 
-Instructions on getting started with .NET 11 can be found in the
-[getting started guide](../../get-started.md). Installers and binaries for
-.NET 11 Preview 5 are available from
-[dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/11.0) and
-[.NET 11 Releases](../../README.md).
+Instructions on getting started with .NET 11 can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET 11 Preview 5 can be found [here on GitHub](./11.0.0-preview.5.md).
 
-## Stay up to date
+## Stay up-to-date
 
-You can find a broader overview of .NET 11 here:
+You can find a detailed overview of all new features in .NET 11:
 
-- [What's new in .NET 11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview)
-- [What's new in ASP.NET Core for .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11)
-- [What's new in EF Core 11](https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew)
-- [What's new in .NET MAUI in .NET 11](https://learn.microsoft.com/dotnet/maui/whats-new/)
+- [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/)
+- [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/)
+- [What's new in Entity Framework Core](https://learn.microsoft.com/ef/core/what-is-new/)
+- [What's new in Windows Forms](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/)
+- [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/)
+
+The latest .NET 11 release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/11.0) and [.NET 11 Releases](../../README.md).
