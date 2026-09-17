@@ -98,8 +98,6 @@ The `Memory<byte>` and `ReadOnlyMemory<byte>` schemas remain non-nullable (`"typ
 For a union with object-shaped cases, specify the classifier on the union to select the case from its distinguishing property names:
 
 ```csharp
-#:property LangVersion=preview
-
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -213,9 +211,23 @@ On an Apple M1 Ultra running macOS Tahoe 26.6, encrypting a 16-byte payload with
 
 ## AES Key Wrap support
 
-The `Aes` class now supports the unpadded AES Key Wrap algorithm defined by RFC 3394 ([dotnet/runtime #132477](https://github.com/dotnet/runtime/pull/132477)). The new `EncryptKeyWrap`, `DecryptKeyWrap`, `TryDecryptKeyWrap`, and `GetKeyWrapLength` methods complement the padded AES-KWP APIs added earlier in .NET 11.
+The `Aes` class now supports the unpadded AES Key Wrap algorithm defined by RFC 3394 ([dotnet/runtime #132477](https://github.com/dotnet/runtime/pull/132477)). The new `EncryptKeyWrap`, `DecryptKeyWrap`, `TryDecryptKeyWrap`, and `GetKeyWrapLength` methods complement the padded AES-KWP APIs added in .NET 10.
 
 The APIs provide array-returning and span-based overloads for wrapping cryptographic keys, including scenarios used by JOSE libraries.
+
+```csharp
+using System.Security.Cryptography;
+
+using Aes aes = Aes.Create();
+aes.Key = RandomNumberGenerator.GetBytes(32);
+
+byte[] keyToWrap = RandomNumberGenerator.GetBytes(16);
+byte[] wrappedKey = aes.EncryptKeyWrap(keyToWrap);
+byte[] unwrappedKey = aes.DecryptKeyWrap(wrappedKey);
+
+Console.WriteLine(
+    CryptographicOperations.FixedTimeEquals(keyToWrap, unwrappedKey));
+```
 
 ## Breaking changes
 
