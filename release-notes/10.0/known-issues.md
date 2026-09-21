@@ -2,6 +2,14 @@
 
 You may encounter some known issues, which may include workarounds, mitigations, or expected resolution timeframes. Watch this space for any known issues in .NET 10.0.
 
+## .NET crashes on Windows devices with multiple CPU groups (more than 64 CPU cores)
+
+We have a known issue in .NET 10.0.12 that causes runtime to crash in GC on Windows devices with more than 64 CPU cores. 
+
+### Available Workaround
+
+Set environment variables `DOTNET_GCCpuGroup=1` to enable CPU groups support in the .NET runtime. You may also want to set `DOTNET_Thread_UseAllCpuGroups=0` to keep user threads to be placed only on the CPUs in the current CPU group to keep the behavior of .NET threading unchanged. This should fix the crashes. Please note that this will make GC use all the CPUs on the machine instead of being limited to a subset of 64 of them (current CPU group), so you may want to reduce number of GC heaps explicitly.
+
 ## Debugger crashes on macOS when using VS Code with .NET 10.0.4
 
 We have a known issue in .NET 10.0.4 that causes the debugger to crash when debugging applications on macOS using Visual Studio Code. This regression is unrelated to the security fixes included in 10.0.4.
