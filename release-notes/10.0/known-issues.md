@@ -10,6 +10,10 @@ We have a known issue in .NET 10.0.12 that causes runtime to crash in GC on Wind
 
 Set environment variables `DOTNET_GCCpuGroup=1` to enable CPU groups support in the .NET runtime. You may also want to set `DOTNET_Thread_UseAllCpuGroups=0` to keep user threads to be placed only on the CPUs in the current CPU group to keep the behavior of .NET threading unchanged. This should fix the crashes. Please note that this will make GC use all the CPUs on the machine instead of being limited to a subset of 64 of them (current CPU group), so you may want to reduce number of GC heaps explicitly.
 
+### Resolution
+
+The https://github.com/dotnet/runtime/pull/134223 has a fix for the issue and it is going to be released in .NET 10.0.13.
+ 
 ## Debugger crashes on macOS when using VS Code with .NET 10.0.4
 
 We have a known issue in .NET 10.0.4 that causes the debugger to crash when debugging applications on macOS using Visual Studio Code. This regression is unrelated to the security fixes included in 10.0.4.
