@@ -76,7 +76,7 @@ Use one working sample set per major release and component. Upgrade it from prev
 
 Prefer a maintained sample when a claim tests runtime behavior, defaults, JavaScript or browser APIs, public feature reachability, or anything worth checking again in the next preview. For a one-off compile check that has no continuing regression value, create an isolated project in a scratch directory and remove it after validation.
 
-Keep expected results with the maintained scenario in a short README, assertion, or script. Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets. These projects use the milestone SDK selected above and are invoked explicitly by this validation workflow; they do not need to participate in the repository's normal documentation checks.
+Keep expected results with the maintained scenario in a short README, assertion, or script. Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets.
 
 ## What to validate
 
