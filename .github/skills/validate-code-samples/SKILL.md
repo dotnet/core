@@ -70,7 +70,7 @@ Always print `dotnet --version` and confirm it before trusting any result.
 
 ## Where samples live
 
-Keep maintained validation samples in this repository under `release-notes/<major>.0/samples/<component>/`, for example `release-notes/11.0/samples/aspnetcore/`. These are executable validation fixtures for the release notes, not a general-purpose or reader-facing samples collection.
+Keep maintained validation samples in this repository under `release-notes/<major>.0/samples/<component>/`, for example `release-notes/11.0/samples/aspnetcore/`. These are executable fixtures primarily for verifying release notes, not a general-purpose or reader-facing samples collection. They do not replace the officially documented samples maintained by the relevant product and documentation teams.
 
 Use one working sample set per major release and component. Upgrade it from preview to preview so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface naturally. Start each major release with a new sample set instead of copying or retargeting scenarios from the previous release. Component owners review changes to their sample set alongside the corresponding release notes.
 
