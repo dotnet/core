@@ -68,6 +68,16 @@ dotnet --version   # confirm this is the milestone build, not the machine SDK
 
 Always print `dotnet --version` and confirm it before trusting any result.
 
+## Where samples live
+
+Keep maintained validation samples in this repository under `release-notes/<major>.0/samples/<component>/`, for example `release-notes/11.0/samples/aspnetcore/`. These are executable validation fixtures for the release notes, not a general-purpose or reader-facing samples collection.
+
+Use one working sample set per major release and component. Upgrade it from preview to preview so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface naturally. When work starts on the next major release, copy or retarget only the scenarios that still provide useful coverage. Component owners review changes to their sample set alongside the corresponding release notes.
+
+Prefer a maintained sample when a claim tests runtime behavior, defaults, JavaScript or browser APIs, public feature reachability, or anything worth checking again in the next preview. For a one-off compile check that has no continuing regression value, create an isolated project in a scratch directory and remove it after validation.
+
+Keep expected results with the maintained scenario in a short README, assertion, or script. Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets. These projects use the milestone SDK selected above and are invoked explicitly by this validation workflow; they do not need to participate in the repository's normal documentation checks.
+
 ## What to validate
 
 Work through the drafted component markdown claim by claim.
@@ -116,7 +126,7 @@ search for a rename, look for a revert, confirm the member is public. Then:
 - **Do not delegate this to a sub-agent.** Verification depends on reading real command output and
   reacting to it. Summarizing agents reliably report that samples "look correct" - the failures in
   the table above were all found by running the code directly.
-- **A maintained samples repository is the cheapest way to run this stage.** Upgrading an existing
-  set of working samples to the new build surfaces renames, inverted defaults, and new analyzer
+- **A maintained sample set is the cheapest way to run this stage.** Upgrading the existing
+  component samples to the new build surfaces renames, inverted defaults, and new analyzer
   diagnostics as build errors and warnings, which is exactly the
   [upgrade guidance](../release-notes/references/format-template.md) preview users need.
