@@ -16,15 +16,18 @@ value is, and it cannot tell you whether a documented sequence of calls actually
 
 ## Acquiring a build
 
-Do not test against whatever SDK happens to be on the machine, and do not select a second build from the .NET SDK builds table. The release-notes workflow already generates `build-metadata.json` for the milestone. Treat its `build.sdk_version` as the exact SDK to install.
+Do not test against whatever SDK happens to be on the machine or select a second build from the .NET SDK builds table. The release-notes workflow already generates `build-metadata.json` for the milestone. Use its `build.sdk_version` to install the exact SDK.
 
 If `build-metadata.json` is missing, stop and generate it through the release-notes workflow before validating samples. See [`api-verification.md`](../release-notes/references/api-verification.md). Do not silently substitute the latest SDK from the milestone channel.
 
 ### Read the exact SDK version
 
+From the milestone directory:
+
 ```powershell
 $metadata = Get-Content build-metadata.json -Raw | ConvertFrom-Json
 $sdkVersion = $metadata.build.sdk_version
+if (-not $sdkVersion) { throw "build.sdk_version is missing from build-metadata.json" }
 ```
 
 ### Confirm the build matches the notes
@@ -43,14 +46,14 @@ https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-{rid}.json
 }
 ```
 
-Confirm that `sdk.version` matches `build.sdk_version` from `build-metadata.json`. The `commit` is the exact VMR commit that produced the build; confirm that it belongs to the milestone branch recorded by `head_ref`. If the branch has advanced since the build was produced, use the product commit as the authoritative snapshot for runtime conclusions. If the version differs or the commit is not on the intended milestone branch, stop instead of testing a different build.
+Confirm that `sdk.version` matches `build.sdk_version` from `build-metadata.json`. The `sdk.commit` is the exact VMR commit that produced the build. Compare it with the resolved head commit used to generate `changes.json`, not just the current tip of the branch named by `head_ref`. Record that head commit when generating the notes: `changes.json` and `build-metadata.json` retain the ref name, not its SHA. If the head commit was not recorded and the ref has moved, regenerate the change set against the build commit before relying on sample results. Being an ancestor of the branch is not enough to prove the same changes shipped.
 
 ### Install it scoped, not machine-wide
 
 Use the official public [`dotnet-install`](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) script to install the exact version from `build-metadata.json`. Install into a scratch directory, not machine-wide; a global install makes results non-reproducible and can disrupt other work on a shared machine.
 
 ```powershell
-$root = "$env:TEMP\dotnet-p7"
+$root = Join-Path $env:TEMP "dotnet-release-notes-$([guid]::NewGuid())"
 $installScript = Join-Path $env:TEMP "dotnet-install-$([guid]::NewGuid()).ps1"
 try {
     Invoke-WebRequest https://dot.net/v1/dotnet-install.ps1 -OutFile $installScript
@@ -59,20 +62,43 @@ try {
         -AzureFeed https://ci.dot.net/public `
         -InstallDir $root `
         -NoPath
+    if ($LASTEXITCODE -ne 0) { throw "dotnet-install failed with exit code $LASTEXITCODE" }
 }
 finally {
-    Remove-Item $installScript -Force -ErrorAction SilentlyContinue
+    if (Test-Path $installScript) { Remove-Item $installScript -Force }
 }
 
 $env:DOTNET_ROOT = $root
 $env:PATH = "$root;$env:PATH"
-$env:DOTNET_MULTILEVEL_LOOKUP = "0"
-& "$root\dotnet.exe" --version
+$installedVersion = & "$root\dotnet.exe" --version
+if ($LASTEXITCODE -ne 0 -or $installedVersion -ne $sdkVersion) {
+    throw "Expected SDK $sdkVersion, found $installedVersion"
+}
+$installedVersion
 ```
 
-On Linux or macOS, use `https://dot.net/v1/dotnet-install.sh` with the equivalent `--version`, `--azure-feed`, `--install-dir`, and `--no-path` arguments.
+On Linux or macOS, set `sdk_version` to `build.sdk_version` from the same metadata and run:
 
-Always print the installed SDK version and confirm that it exactly matches `build.sdk_version` before trusting any result.
+```bash
+set -e
+: "${sdk_version:?Set sdk_version from build-metadata.json}"
+root="$(mktemp -d "${TMPDIR:-/tmp}/dotnet-release-notes.XXXXXX")"
+install_script="$(mktemp "${TMPDIR:-/tmp}/dotnet-install.XXXXXX")"
+trap 'rm -f "$install_script"' EXIT
+curl -fsSL https://dot.net/v1/dotnet-install.sh -o "$install_script"
+bash "$install_script" --version "$sdk_version" \
+  --azure-feed https://ci.dot.net/public --install-dir "$root" --no-path
+export DOTNET_ROOT="$root"
+export PATH="$root:$PATH"
+installed_version="$("$root/dotnet" --version)"
+if [ "$installed_version" != "$sdk_version" ]; then
+  printf 'Expected SDK %s, found %s\n' "$sdk_version" "$installed_version" >&2
+  exit 1
+fi
+printf '%s\n' "$installed_version"
+```
+
+Check `dotnet --version` from each sample project's directory too: a `global.json` can change SDK resolution there. It must match `build.sdk_version` before trusting the sample results.
 
 ## Where samples live
 
