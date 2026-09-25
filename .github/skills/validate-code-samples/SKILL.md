@@ -1,7 +1,7 @@
 ---
 name: validate-code-samples
-description: Verify release notes claims by building and running them against the actual .NET build for the milestone. Covers acquiring a scoped SDK from the latest builds table linked from the dotnet/sdk repository, exercising every documented API and code sample, and catching the errors that static API verification cannot see - non-existent JavaScript APIs, inverted defaults, and runtime failures. USE FOR - validating a drafted component's release notes before the PR goes up, checking that documented samples compile and run, confirming a feature is actually reachable in the shipped build. DO NOT USE FOR - generating the API diff (use api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
-compatibility: Requires network access to GitHub and the public .NET build artifacts. Uses build-metadata.json for the milestone when available to confirm build provenance. Pairs with api-diff-validation, which covers the static half of the same problem.
+description: Verify release notes claims by building and running them against the actual .NET build for the milestone. Reads the exact SDK version from build-metadata.json, installs it in a scoped location with the official dotnet-install script, exercises every documented API and code sample, and catches the errors that static API verification cannot see - non-existent JavaScript APIs, inverted defaults, and runtime failures. USE FOR - validating a drafted component's release notes before the PR goes up, checking that documented samples compile and run, confirming a feature is actually reachable in the shipped build. DO NOT USE FOR - generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
+compatibility: Requires the milestone's build-metadata.json, network access to the public .NET build artifacts, and PowerShell or a POSIX shell. Pairs with api-diff-validation, which covers the static half of the same problem.
 ---
 
 # Validate Code Samples
@@ -16,26 +16,23 @@ value is, and it cannot tell you whether a documented sequence of calls actually
 
 ## Acquiring a build
 
-Do not test against whatever SDK happens to be on the machine. Select an appropriate build for the
-milestone from the build listings linked by the .NET SDK repository.
+Do not test against whatever SDK happens to be on the machine, and do not select a second build from the .NET SDK builds table. The release-notes workflow already generates `build-metadata.json` for the milestone. Treat its `build.sdk_version` as the exact SDK to install.
 
-### Select a build from the .NET SDK repository
+If `build-metadata.json` is missing, stop and generate it through the release-notes workflow before validating samples. See [`api-verification.md`](../release-notes/references/api-verification.md). Do not silently substitute the latest SDK from the milestone channel.
 
-Start from the [`dotnet/sdk` Installing the SDK
-section](https://github.com/dotnet/sdk#installing-the-sdk) and follow its **.NET SDK latest builds
-table** link. Select the column that matches the milestone's SDK feature band or release branch,
-then download the archive for the validation machine's platform. Preview notes should use the
-matching preview column, not the build from `main`.
+### Read the exact SDK version
 
-The builds table also documents the public NuGet feed needed when development builds must acquire
-runtime packs or other assets that aren't included in the SDK archive.
+```powershell
+$metadata = Get-Content build-metadata.json -Raw | ConvertFrom-Json
+$sdkVersion = $metadata.build.sdk_version
+```
 
 ### Confirm the build matches the notes
 
-Each build publishes a commit manifest next to the SDK:
+Each build publishes a commit manifest next to the SDK. Use the RID for the validation machine:
 
 ```text
-https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-win-x64.json
+https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-{rid}.json
 ```
 
 ```json
@@ -46,27 +43,36 @@ https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-win-x64.json
 }
 ```
 
-The `commit` is the **VMR commit** the build came from. Check it against the head ref used to
-generate `changes.json`. If they disagree, you are validating a different build than the one you
-documented, and any "the API is missing" conclusion is unreliable. When `build-metadata.json` is
-available, also compare its SDK version and VMR ref with the selected build before testing.
+Confirm that `sdk.version` matches `build.sdk_version` from `build-metadata.json`. The `commit` is the exact VMR commit that produced the build; confirm that it belongs to the milestone branch recorded by `head_ref`. If the branch has advanced since the build was produced, use the product commit as the authoritative snapshot for runtime conclusions. If the version differs or the commit is not on the intended milestone branch, stop instead of testing a different build.
 
 ### Install it scoped, not machine-wide
 
-Extract the archive to a scratch directory and point the environment at it. Do not install
-machine-wide — a global install makes results non-reproducible and can disrupt other work on a
-shared machine.
+Use the official public [`dotnet-install`](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) script to install the exact version from `build-metadata.json`. Install into a scratch directory, not machine-wide; a global install makes results non-reproducible and can disrupt other work on a shared machine.
 
 ```powershell
 $root = "$env:TEMP\dotnet-p7"
-Expand-Archive dotnet-sdk-*-win-x64.zip -DestinationPath $root
+$installScript = Join-Path $env:TEMP "dotnet-install-$([guid]::NewGuid()).ps1"
+try {
+    Invoke-WebRequest https://dot.net/v1/dotnet-install.ps1 -OutFile $installScript
+    & $installScript `
+        -Version $sdkVersion `
+        -AzureFeed https://ci.dot.net/public `
+        -InstallDir $root `
+        -NoPath
+}
+finally {
+    Remove-Item $installScript -Force -ErrorAction SilentlyContinue
+}
+
 $env:DOTNET_ROOT = $root
 $env:PATH = "$root;$env:PATH"
 $env:DOTNET_MULTILEVEL_LOOKUP = "0"
-dotnet --version   # confirm this is the milestone build, not the machine SDK
+& "$root\dotnet.exe" --version
 ```
 
-Always print `dotnet --version` and confirm it before trusting any result.
+On Linux or macOS, use `https://dot.net/v1/dotnet-install.sh` with the equivalent `--version`, `--azure-feed`, `--install-dir`, and `--no-path` arguments.
+
+Always print the installed SDK version and confirm that it exactly matches `build.sdk_version` before trusting any result.
 
 ## Where samples live
 
