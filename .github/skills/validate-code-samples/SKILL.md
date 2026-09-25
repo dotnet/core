@@ -46,7 +46,7 @@ https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-{rid}.json
 }
 ```
 
-Confirm that `sdk.version` matches `build.sdk_version` from `build-metadata.json`. The `sdk.commit` is the exact VMR commit that produced the build. Compare it with the resolved head commit used to generate `changes.json`, not just the current tip of the branch named by `head_ref`. Record that head commit when generating the notes: `changes.json` and `build-metadata.json` retain the ref name, not its SHA. If the head commit was not recorded and the ref has moved, regenerate the change set against the build commit before relying on sample results. Being an ancestor of the branch is not enough to prove the same changes shipped.
+Confirm that `sdk.version` matches `build.sdk_version` from `build-metadata.json`. The `sdk.commit` is the exact VMR commit that produced the build. Require `build-metadata.json` to record that same full commit SHA as `head_ref`: a branch name can move, and merely finding the build commit in its history does not prove that `changes.json` covers the same build. If `head_ref` is a branch name or differs from `sdk.commit`, regenerate both `changes.json` and `build-metadata.json` with `--head <sdk.commit>` and their original base and release options. If the change set differs, update `features.json` and the notes too. Verify that the regenerated SDK version and `head_ref` match the selected build; otherwise stop before validating samples.
 
 ### Install it scoped, not machine-wide
 
