@@ -1,0 +1,3 @@
+# Libraries release-note validation
+
+Run `dotnet run --project Libraries.csproj` with SDK `11.0.100-rc.2.26475.137`. The sample reads a CBOR array across two chunks in lax conformance mode, formats a `RangeAttribute` message template, checks that composite ML-KEM encapsulation and decapsulation agree, and seals and opens data using HPKE. It exercises experimental APIs through reflection so compiler diagnostics are not suppressed. It throws on an unexpected result. On platforms without either selected algorithm, it reports that support is unavailable rather than claiming a successful cryptographic round trip.
