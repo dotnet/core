@@ -183,7 +183,7 @@ Model types must be in .cs files because validation uses source generators, and 
 
 ## Blazor diagnostics improvements
 
-Blazor Server traces are now top-level activities instead of being nested under HTTP or SignalR activities. This simplifies viewing traces in diagnostic tools like the .NET Aspire dashboard or Application Insights.
+Blazor Server traces are now top-level activities instead of being nested under HTTP or SignalR activities. This simplifies viewing traces in diagnostic tools like the Aspire dashboard or Application Insights.
 
 The `CircuitStart` trace moved to a separate `Microsoft.AspNetCore.Components.Server.Circuits` source.
 
