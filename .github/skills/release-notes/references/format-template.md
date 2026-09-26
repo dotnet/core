@@ -101,6 +101,8 @@ Because each preview's Breaking changes section covers what changed *in that mil
 already the preview-to-preview upgrade story. Write it for the reader doing that upgrade rather than
 as an abstract list of incompatibilities with the last GA release.
 
+Review the [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades) for public API changes that affect prior-preview users. Use it to find migration candidates, not to populate the notes with every API delta.
+
 Cover these when they apply. They tend to surface only when an existing project is actually upgraded
 to the new build, which is one of the reasons
 [`validate-code-samples`](../../validate-code-samples/SKILL.md) runs against a maintained sample set:

@@ -125,6 +125,8 @@ Examples:
 Keep the existing structure when it still works. Add a new top-level section
 only when the delta introduces a genuinely new story.
 
+When the target build changes or an incremental API diff becomes available, review it for [preview-to-preview migration signals](../release-notes/references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades). Integrate verified guidance into the affected component's existing **Breaking changes** section without rewriting unrelated notes.
+
 ### 5. Treat review comments as required inputs
 
 Unresolved PR comments are part of the spec for the next run, on every PR in

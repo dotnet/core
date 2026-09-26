@@ -15,7 +15,7 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 1. `generate-changes` diffs `source-manifest.json` between VMR refs to produce `changes.json`
 2. `generate-features` reads `changes.json`, resolves revert/backout relationships, and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
 3. `update-existing-branch` handles incremental reruns when a milestone branch already exists, merging deltas instead of restarting from scratch
-4. `api-diff-validation` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build
+4. `api-diff-validation` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build; review the [incremental API diff](references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades) for preview-to-preview migration signals
 5. `release-notes` writes curated markdown using the higher-value entries from `features.json`
 6. `validate-code-samples` builds and runs the documented claims against the milestone build, catching what static API verification cannot see
 7. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples

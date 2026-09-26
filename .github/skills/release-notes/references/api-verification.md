@@ -142,6 +142,14 @@ true in the build.
 This is the mirror image of the revert check below: a revert means something in `changes.json` is not
 in the build, and stale provenance means something in the build is not in `changes.json`.
 
+## Review incremental API diffs for preview upgrades
+
+Before finalizing preview or RC notes, review the milestone's incremental `api-diff/` report against the previous shipped preview. The report may still be in a draft PR; if it is unavailable, generate it with [`api-diff`](../../api-diff/SKILL.md) rather than assuming there were no API changes.
+
+Treat removals and signature changes as leads, not automatic release-note entries. Look for a corresponding addition that indicates a rename, check earlier preview notes for the old API, trace the change to a PR in this milestone's `changes.json`, and verify the current API in the build. Build or upgrade a maintained sample to establish how existing usage needs to change.
+
+When upgrading would cause a build error, new warning, or behavior change, explain what changed and how to migrate in the existing **Breaking changes** section. Don't list every diff entry or create a separate preview API section; new APIs belong in curated feature coverage. Ref-pack diffs cannot reveal behavior-only, analyzer, or JavaScript changes, so also review the PRs and run the samples.
+
 ## What to do when verification fails
 
 If `dotnet-inspect` can't find a type:
