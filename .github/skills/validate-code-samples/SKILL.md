@@ -51,7 +51,7 @@ search for a rename, look for a revert, confirm the member is public. Then:
 
 - **Fix the notes, not the sample**, when the notes describe an API that does not exist. Rewrite the
   section around what actually shipped.
-- **Update the sample and document the migration** when the notes are right but the new release
-  requires changes to an existing sample. Explain the preview-to-preview change in the notes.
+- **Update the sample and document the migration** when the new release requires changes to an
+  existing sample. Explain the preview-to-preview change in the notes.
 - **Drop the claim** when neither holds up. A correct prose description with a PR link always beats a
   confident, wrong code sample.
