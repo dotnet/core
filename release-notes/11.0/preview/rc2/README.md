@@ -3,7 +3,7 @@
 Component notes are being reviewed in separate draft pull requests. Links will be added as each component PR is merged.
 
 - Libraries
-- Runtime
+- [Runtime](./runtime.md)
 - SDK
 - MSBuild
 - NuGet
