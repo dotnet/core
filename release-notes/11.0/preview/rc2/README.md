@@ -16,7 +16,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 ## Workloads, Libraries, & More
 
 - .NET MAUI
-- ASP.NET Core
+- [ASP.NET Core](./aspnetcore.md)
 - Container images
 - EF Core & Data
 - Windows Forms
