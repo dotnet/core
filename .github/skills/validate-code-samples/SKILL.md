@@ -16,64 +16,11 @@ value is, and it cannot tell you whether a documented sequence of calls actually
 
 ## Acquiring a build
 
-Do not test against whatever SDK happens to be on the machine or select a second build from the .NET SDK builds table. The release-notes workflow already generates `build-metadata.json` for the milestone. Read `build.sdk_version` from that file and use it to install the exact SDK; stop if it is missing.
+Use `build.sdk_version` from the milestone's existing `build-metadata.json`. If the file or version is missing, generate the metadata through the release-notes workflow before validating samples; see [`api-verification.md`](../release-notes/references/api-verification.md). Do not substitute the machine SDK or a latest-channel build.
 
-If `build-metadata.json` is missing, stop and generate it through the release-notes workflow before validating samples. See [`api-verification.md`](../release-notes/references/api-verification.md). Do not silently substitute the latest SDK from the milestone channel.
+Install that exact version into a fresh, empty temporary directory with the official public [`dotnet-install` script](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) for the host OS. Pass the exact version (`-Version` or `--version`), the `https://ci.dot.net/public` feed (`-AzureFeed` or `--azure-feed`), and the temporary install directory (`-InstallDir` or `--install-dir`); stop if installation fails. Set `DOTNET_ROOT` to that directory and prepend it to `PATH` for sample builds and runs. Do not install the preview SDK machine-wide.
 
-### Install it scoped, not machine-wide
-
-Use the official public [`dotnet-install`](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) script to install the exact version from `build-metadata.json`. Install into a scratch directory, not machine-wide; a global install makes results non-reproducible and can disrupt other work on a shared machine.
-
-On Windows, set `$sdkVersion` to `build.sdk_version` from the milestone's metadata and run:
-
-```powershell
-if (-not $sdkVersion) { throw "Set sdkVersion from build-metadata.json" }
-$root = Join-Path $env:TEMP "dotnet-release-notes-$([guid]::NewGuid())"
-$installScript = Join-Path $env:TEMP "dotnet-install-$([guid]::NewGuid()).ps1"
-try {
-    Invoke-WebRequest https://dot.net/v1/dotnet-install.ps1 -OutFile $installScript
-    & $installScript `
-        -Version $sdkVersion `
-        -AzureFeed https://ci.dot.net/public `
-        -InstallDir $root `
-        -NoPath
-    if ($LASTEXITCODE -ne 0) { throw "dotnet-install failed with exit code $LASTEXITCODE" }
-}
-finally {
-    if (Test-Path $installScript) { Remove-Item $installScript -Force }
-}
-
-$env:DOTNET_ROOT = $root
-$env:PATH = "$root;$env:PATH"
-$installedVersion = & "$root\dotnet.exe" --version
-if ($LASTEXITCODE -ne 0 -or $installedVersion -ne $sdkVersion) {
-    throw "Expected SDK $sdkVersion, found $installedVersion"
-}
-$installedVersion
-```
-
-On Linux or macOS, set `sdk_version` to `build.sdk_version` from the same metadata and run:
-
-```bash
-set -e
-: "${sdk_version:?Set sdk_version from build-metadata.json}"
-root="$(mktemp -d "${TMPDIR:-/tmp}/dotnet-release-notes.XXXXXX")"
-install_script="$(mktemp "${TMPDIR:-/tmp}/dotnet-install.XXXXXX")"
-trap 'rm -f "$install_script"' EXIT
-curl -fsSL https://dot.net/v1/dotnet-install.sh -o "$install_script"
-bash "$install_script" --version "$sdk_version" \
-  --azure-feed https://ci.dot.net/public --install-dir "$root" --no-path
-export DOTNET_ROOT="$root"
-export PATH="$root:$PATH"
-installed_version="$("$root/dotnet" --version)"
-if [ "$installed_version" != "$sdk_version" ]; then
-  printf 'Expected SDK %s, found %s\n' "$sdk_version" "$installed_version" >&2
-  exit 1
-fi
-printf '%s\n' "$installed_version"
-```
-
-Check `dotnet --version` from each sample project's directory too: a `global.json` can change SDK resolution there. It must match `build.sdk_version` before trusting the sample results.
+Verify the installed SDK reports `build.sdk_version`, then run `dotnet --version` from each sample project's directory. If either version differs, stop: a sample's `global.json` can select another SDK.
 
 ## Where samples live
 
@@ -104,16 +51,7 @@ Work through the drafted component markdown claim by claim.
 
 ## Recording what you verified
 
-Note the build next to the claim so a reviewer can tell "this is wrong" apart from "this was checked
-against a stale build":
-
-```markdown
-<!-- Verified against SDK 11.0.100-preview.7.26381.103 -->
-```
-
-For samples that assert a specific runtime result, keep the expected result in the sample itself
-(a header comment recording the expected HTTP status, for example) so drift shows up the next time
-the sample is run.
+Record the SDK version and observed behavior with the validation evidence so reviewers can distinguish a stale build from an incorrect claim.
 
 ## When a claim fails validation
 
@@ -127,13 +65,3 @@ search for a rename, look for a revert, confirm the member is public. Then:
   pinned to the previous preview will fail against a rename that the notes correctly documented.
 - **Drop the claim** when neither holds up. A correct prose description with a PR link always beats a
   confident, wrong code sample.
-
-## Notes
-
-- **Do not delegate this to a sub-agent.** Verification depends on reading real command output and
-  reacting to it. Summarizing agents reliably report that samples "look correct" - the failures in
-  the table above were all found by running the code directly.
-- **A maintained sample set is the cheapest way to run this stage.** Upgrading the existing
-  component samples to the new build surfaces renames, inverted defaults, and new analyzer
-  diagnostics as build errors and warnings, which is exactly the
-  [upgrade guidance](../release-notes/references/format-template.md) preview users need.
