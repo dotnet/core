@@ -1,6 +1,6 @@
 ---
 name: validate-code-samples
-description: Validate release-note code snippets against the milestone build and identify preview-to-preview migration steps when updating maintained samples. Reads the exact SDK version from build-metadata.json and installs it in a scoped location with the official dotnet-install script. USE FOR - validating that drafted code snippets build, run, and behave as described, and documenting changes needed to update maintained samples to a new preview. DO NOT USE FOR - generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
+description: Validate every release-note feature and its code snippets against the milestone build, and identify preview-to-preview migration steps when updating maintained samples. Reads the exact SDK version from build-metadata.json and installs it in a scoped location with the official dotnet-install script. USE FOR - building and running samples for release-note features, testing documented snippets and behavior, and documenting changes needed to update maintained samples to a new preview. DO NOT USE FOR - generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
 compatibility: Requires the milestone's build-metadata.json, network access to the public .NET build artifacts, and PowerShell or a POSIX shell. Pairs with api-diff-validation, which covers the static half of the same problem.
 ---
 
@@ -28,13 +28,14 @@ Keep maintained validation samples in this repository under `release-notes/<majo
 
 Use one working sample set per major release and component. Upgrade it from preview to preview so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface naturally. Start each major release with a new sample set instead of copying or retargeting scenarios from the previous release. Component owners review changes to their sample set alongside the corresponding release notes.
 
-Prefer a maintained sample when a claim tests runtime behavior, defaults, JavaScript or browser APIs, public feature reachability, or anything worth checking again in the next preview. For a one-off compile check that has no continuing regression value, create an isolated project in a scratch directory and remove it after validation.
+Keep samples for release-note features in the maintained component set so they can be rerun in later previews. For one-off compile checks outside feature validation, use a scratch project and remove it afterward.
 
 Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets.
 
 ## What to validate
 
-- Build and run the code snippets in the release notes against the milestone build. Confirm they behave as described, including any defaults or behavior explicitly claimed in the notes.
+- Build or update a sample for every feature in the release notes, even if the notes have no code snippet for it. Run each sample against the milestone build and confirm the described behavior, including any defaults explicitly claimed in the notes.
+- Test any code snippets from the release notes as part of those samples. Confirm the snippets build, run, and behave as described.
 - As you update existing maintained samples to the new preview, note changes required by the new release. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
 
 ## Recording what you verified
