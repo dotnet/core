@@ -87,9 +87,9 @@ You can find a detailed overview of all new features in .NET <VERSION>:
 The latest .NET <VERSION> release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/<version>) and [.NET <VERSION> Releases](../../README.md).
 ```
 
-When the Libraries PR adds `libraries.md`, it changes only `- Libraries` to
-`- [Libraries](./libraries.md)` in the index. Leave the other entries unlinked
-until their files are present on the respective branches. Apply these rules
+When a component PR adds its Markdown file, replace only its unlinked index
+entry with a relative link to that file. Keep other pending entries unlinked
+and preserve links already merged from other components. Apply these rules
 when generating and completing the index:
 
 1. Preallocate an unlinked entry for every planned component file on the base
