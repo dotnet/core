@@ -11,7 +11,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 ## Languages
 
 - C#
-- F#
+- [F#](./fsharp.md)
 
 ## Workloads, Libraries, & More
 
