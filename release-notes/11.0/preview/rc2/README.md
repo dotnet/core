@@ -1,6 +1,6 @@
 # .NET 11 RC 2 - Release Notes
 
-Component notes are being reviewed in separate draft pull requests. Links will be added as each component PR is merged.
+Browse the .NET 11 RC 2 release notes by component:
 
 - Libraries
 - Runtime
