@@ -18,9 +18,13 @@ Standard document structure for .NET release notes markdown files.
 
 <description> ([<owner>/<repo> #NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN)).
 
-## Breaking changes
+## Breaking changes from .NET <PREVIOUS_MAJOR>
 
-- Short migration note or heads-up for narrower changes that users may need to react to
+- Migration note for a change affecting apps upgrading from the previous stable .NET release
+
+## Changes since the previous preview
+
+- Migration note for a change to an API or behavior introduced during this major's previews
 
 ## Bug fixes
 
@@ -88,18 +92,16 @@ Known component docs links:
 2. **One paragraph of context** — what the feature does and why it matters in concrete terms, with PR/issue links; avoid inferred feelings or marketing-style claims
 3. **Code sample** — show the feature in use
 4. **Feature ordering** — highest customer impact first
-5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections. In preview notes this section is also the upgrade guidance for readers coming from the previous preview — see below
+5. **Upgrade guidance near the end** — keep version-to-version breaking changes separate from changes affecting only preview users. `breaking_changes: true` flags migration significance, not which section an item belongs in; see below.
 6. **Preview feature callout** — when a feature is listed in `release-notes/features.json`, start its section with the standard blockquote callout from that file
 
-## Breaking changes
+## Upgrade guidance
 
-Preview notes are read mostly by people who are already running the *previous* preview. For them the
-most valuable content is often not the new feature, but the thing that stops their existing code
-from building or working after they move to this build.
+Use **Breaking changes from .NET N** (where N is the previous stable major version) for changes that affect code or behavior from that release. Keep these visible in preview notes and make sure they are covered in the new version's aggregate compatibility documentation. State which preview introduced the change and link the published breaking-change guidance when available; a preview note alone is not the aggregate documentation.
 
-Because each preview's Breaking changes section covers what changed *in that milestone*, it is
-already the preview-to-preview upgrade story. Write it for the reader doing that upgrade rather than
-as an abstract list of incompatibilities with the last GA release.
+Use **Changes since the previous preview** for migrations that only affect code written against this major's earlier previews or RCs. For an RC, compare against the preceding prerelease, including an earlier RC. Name the old and new behavior and the affected preview or RC. Do not carry preview-only churn into the version-to-version breaking-change list. Omit either section when it has no entries.
+
+The [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades) and maintained samples can reveal migration candidates, but do not determine which baseline they break.
 
 Cover these when they apply. They tend to surface only when an existing project is actually upgraded
 to the new build, which is one of the reasons
@@ -116,9 +118,9 @@ to the new build, which is one of the reasons
 that required a workaround is now fixed, say so with the fix in Bug fixes, so users can delete the
 workaround rather than carrying it forward.
 
-Do not turn this into a changelog of everything that moved. Include an item only when a user
-upgrading from the previous preview would otherwise hit a build error, a new warning, or a silent
-behavior change.
+Do not turn this into a changelog of everything that moved. Include an item when a user upgrading
+from the previous stable release or preview would otherwise hit a build error, a new warning, or a
+silent behavior change.
 
 Attribute these to the milestone that actually changed them. A fix that shipped two previews ago is
 not upgrade guidance for this one — see

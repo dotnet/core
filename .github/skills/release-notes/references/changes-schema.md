@@ -119,7 +119,7 @@ That means a change can be:
 - **high score + `breaking_changes: true`** — a widely relevant feature that also needs migration guidance
 - **low score + `breaking_changes: true`** — a niche or narrow change that still deserves a short callout near the end of the release notes
 
-In practice, a `score` around `0-4` with `breaking_changes: true` usually means **one line in a "Breaking changes" section**, not a full feature writeup.
+In practice, a `score` around `0-4` with `breaking_changes: true` usually means a short migration note, not a full feature writeup. The flag does not say whether a change affects the previous stable release or only earlier previews; classify it against the stable baseline when writing the notes.
 
 ## Revert annotations
 

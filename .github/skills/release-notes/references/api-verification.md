@@ -142,6 +142,18 @@ true in the build.
 This is the mirror image of the revert check below: a revert means something in `changes.json` is not
 in the build, and stale provenance means something in the build is not in `changes.json`.
 
+## Review incremental API diffs for preview upgrades
+
+Before finalizing preview or RC notes, review the milestone's `api-diff/` report. For the first preview of a new major, compare against the previous major's stable GA; for later previews and RCs, compare against the preceding shipped prerelease. The report may still be in a draft PR; if it is unavailable, generate it with [`api-diff`](../../api-diff/SKILL.md) rather than assuming there were no API changes.
+
+If generation also fails, continue drafting from `changes.json`, PRs, compatibility guidance, and maintained samples, but record the pending API-diff review on the milestone's base PR. Revisit it when the report becomes available. Do not treat an unavailable diff as evidence of no API changes or finalize the notes without reviewing it, unless the component owner explicitly records an exception and the remaining uncertainty on the base PR.
+
+Treat removals and signature changes as leads, not automatic release-note entries. Look for a corresponding addition that indicates a rename, check earlier preview notes for the old API, trace the change to a PR in this milestone's `changes.json`, and verify the current API in the build. Build or upgrade a maintained sample to establish how existing usage needs to change.
+
+To classify a migration, compare the old API or behavior with the previous stable .NET release, not just the previous preview. Check the target version's [.NET compatibility index](https://learn.microsoft.com/dotnet/core/compatibility/11) and [ASP.NET Core breaking-change index](https://learn.microsoft.com/aspnet/core/breaking-changes/11/overview?view=aspnetcore-11.0). These URLs are examples for .NET 11: for another major, replace `11` in both paths and `aspnetcore-11.0` in the query with the target major, and confirm the indexes exist. Also check [dotnet/announcements](https://github.com/dotnet/announcements/issues?q=is%3Aissue%20label%3A%22Breaking%20Change%22), [aspnet/Announcements](https://github.com/aspnet/Announcements/issues?q=is%3Aissue%20label%3A%22Breaking%20Change%22), and upstream PRs labeled `breaking-change`. Published entries often name the preview and source PR, but they can appear late or be incomplete: search open and closed issues, and do not treat absence as proof that no stable-version break occurred. Verify the change against this milestone's `changes.json` and build rather than assigning it to a preview by publication date.
+
+If it affects users upgrading from the previous stable .NET release, put it in **Breaking changes from .NET N** (using that release's major version for N) and confirm it is covered by the new version's aggregate compatibility documentation. If that documentation is missing, flag the gap to the component owner rather than assuming the preview note is sufficient. If it only affects users of earlier previews, put it in **Changes since the previous preview**. Explain the impact and migration in either section; don't list every API delta or duplicate the same change across both sections. New APIs belong in curated feature coverage. Ref-pack diffs cannot reveal behavior-only, analyzer, or JavaScript changes, so also review the PRs and run the samples.
+
 ## What to do when verification fails
 
 If `dotnet-inspect` can't find a type:
