@@ -19,6 +19,7 @@ This skill **reuses the shared rubric** from [`editorial-scoring`](../editorial-
 
 - After `generate-features` produced `features.json`
 - After `release-notes` drafted the markdown
+- Before finalizing a milestone or a refreshed draft
 - When the selection feels too broad, too niche, or too internally focused
 - When you want to compare the current draft against the examples and recalibrate the cut
 
@@ -27,7 +28,7 @@ This skill **reuses the shared rubric** from [`editorial-scoring`](../editorial-
 Review these, in order:
 
 1. `changes.json` — the source of truth for what shipped
-2. `features.json` — the scored candidate list, if present
+2. `features.json` — the shipped-change entries with scored candidates
 3. Draft markdown files (`libraries.md`, `runtime.md`, `sdk.md`, etc.)
 4. Editorial examples in `references/examples/`
 5. The scoring and quality bar references:
@@ -35,11 +36,15 @@ Review these, in order:
    - `references/feature-scoring.md`
    - `references/quality-bar.md`
 
-If `features.json` does not exist yet, infer the current implicit scoring from:
+If `features.json` is missing or is only a placeholder without `changes[]` and
+`commits{}`, stop the review and complete `generate-features` first. Do not
+infer scores from the draft as a substitute for the shared triage stage.
 
-- which features were promoted to headings
-- how much space each feature received
-- what was grouped into bug-fix buckets or omitted
+Compare noteworthy candidates in `features.json` and `changes.json` with the
+completed component drafts. For each important omission, either update the
+notes or record the reason for leaving it out in the review output or its
+`score_reason`. Do not treat a PR's presence in `changes.json` as a requirement
+to give it a release-note section; apply the reader-centric rubric.
 
 ## Core review questions
 

@@ -219,7 +219,7 @@ jq -r '.changes[] | select(.is_security) | .local_repo_commit' changes.json
 `changes.json` is the **source-of-truth input** to the editorial process. `features.json` is an enriched view that usually adds scoring and notes without changing the underlying identity of the shipped changes.
 
 - `changes.json` has an entry for every PR that shipped
-- `features.json` usually preserves those entries and adds optional scoring metadata
+- `features.json` preserves the shipped change entries and commit mapping, and adds optional scoring metadata to noteworthy candidates; it is not a placeholder for per-component triage
 - `features.json` can also flag entries with `breaking_changes: true` so downstream writing can keep a short migration note even when the score is low
 - Both files can be joined through shared `id` and `commits{}` values
 
