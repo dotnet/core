@@ -103,7 +103,7 @@ as an abstract list of incompatibilities with the last GA release.
 
 Cover these when they apply. They tend to surface only when an existing project is actually upgraded
 to the new build, which is one of the reasons
-[`validate-code-samples`](../../validate-code-samples/SKILL.md) runs against a maintained sample set:
+[`validate-code-samples`](../../validate-code-samples/SKILL.md) upgrades the component's maintained sample set under `release-notes/<major>.0/samples/<component>/`:
 
 - **Renamed APIs**, especially renames that invert meaning (`EnableX` becoming `DisableX`). Show the
   before and after, and state the new default explicitly.
