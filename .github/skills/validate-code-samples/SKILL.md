@@ -1,7 +1,7 @@
 ---
 name: validate-code-samples
-description: Verify release notes claims by building and running them against the actual .NET build for the milestone. Covers acquiring a scoped SDK from the latest builds table linked from the dotnet/sdk repository, exercising every documented API and code sample, and catching the errors that static API verification cannot see - non-existent JavaScript APIs, inverted defaults, and runtime failures. USE FOR - validating a drafted component's release notes before the PR goes up, checking that documented samples compile and run, confirming a feature is actually reachable in the shipped build. DO NOT USE FOR - generating the API diff (use api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
-compatibility: Requires network access to GitHub and the public .NET build artifacts. Uses build-metadata.json for the milestone when available to confirm build provenance. Pairs with api-diff-validation, which covers the static half of the same problem.
+description: Validate every release-note feature and its code snippets against the milestone build, and identify preview-to-preview migration steps when updating maintained samples. Reads the exact SDK version from build-metadata.json and installs it in a scoped location with the official dotnet-install script. USE FOR - building and running samples for release-note features, testing documented snippets and behavior, and documenting changes needed to update maintained samples to a new preview. DO NOT USE FOR - generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
+compatibility: Requires the milestone's build-metadata.json, network access to the public .NET build artifacts, and PowerShell or a POSIX shell. Pairs with api-diff-validation, which covers the static half of the same problem.
 ---
 
 # Validate Code Samples
@@ -16,87 +16,33 @@ value is, and it cannot tell you whether a documented sequence of calls actually
 
 ## Acquiring a build
 
-Do not test against whatever SDK happens to be on the machine. Select an appropriate build for the
-milestone from the build listings linked by the .NET SDK repository.
+Use `build.sdk_version` from the milestone's existing `build-metadata.json`. If the file or version is missing, generate the metadata through the release-notes workflow before validating samples; see [`api-verification.md`](../release-notes/references/api-verification.md). Do not substitute the machine SDK or a latest-channel build.
 
-### Select a build from the .NET SDK repository
+Install that exact version into a fresh, empty temporary directory with the official public [`dotnet-install` script](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) for the host OS. Pass the exact version (`-Version` or `--version`), the `https://ci.dot.net/public` feed (`-AzureFeed` or `--azure-feed`), and the temporary install directory (`-InstallDir` or `--install-dir`); stop if installation fails. Set `DOTNET_ROOT` to that directory and prepend it to `PATH` for sample builds and runs. Do not install the preview SDK machine-wide.
 
-Start from the [`dotnet/sdk` Installing the SDK
-section](https://github.com/dotnet/sdk#installing-the-sdk) and follow its **.NET SDK latest builds
-table** link. Select the column that matches the milestone's SDK feature band or release branch,
-then download the archive for the validation machine's platform. Preview notes should use the
-matching preview column, not the build from `main`.
+Verify the installed SDK reports `build.sdk_version`; stop if it does not.
 
-The builds table also documents the public NuGet feed needed when development builds must acquire
-runtime packs or other assets that aren't included in the SDK archive.
+## Where samples live
 
-### Confirm the build matches the notes
+Keep maintained validation samples in this repository under `release-notes/<major>.0/samples/<component>/`, for example `release-notes/11.0/samples/aspnetcore/`. These are executable fixtures primarily for verifying release notes, not a general-purpose or reader-facing samples collection. They do not replace the officially documented samples maintained by the relevant product and documentation teams.
 
-Each build publishes a commit manifest next to the SDK:
+Use one working sample set per major release and component. Upgrade it from preview to preview so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface naturally. Start each major release with a new sample set instead of copying or retargeting scenarios from the previous release. Component owners review changes to their sample set alongside the corresponding release notes.
 
-```text
-https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-win-x64.json
-```
+Keep samples for release-note features in the maintained component set so they can be rerun in later previews. For one-off compile checks outside feature validation, use a scratch project and remove it afterward.
 
-```json
-{
-  "runtime":    { "commit": "e2c1e00b...", "version": "11.0.0-preview.7.26381.103" },
-  "aspnetcore": { "commit": "e2c1e00b...", "version": "11.0.0-preview.7.26381.103" },
-  "sdk":        { "commit": "e2c1e00b...", "version": "11.0.100-preview.7.26381.103" }
-}
-```
-
-The `commit` is the **VMR commit** the build came from. Check it against the head ref used to
-generate `changes.json`. If they disagree, you are validating a different build than the one you
-documented, and any "the API is missing" conclusion is unreliable. When `build-metadata.json` is
-available, also compare its SDK version and VMR ref with the selected build before testing.
-
-### Install it scoped, not machine-wide
-
-Extract the archive to a scratch directory and point the environment at it. Do not install
-machine-wide — a global install makes results non-reproducible and can disrupt other work on a
-shared machine.
-
-```powershell
-$root = "$env:TEMP\dotnet-p7"
-Expand-Archive dotnet-sdk-*-win-x64.zip -DestinationPath $root
-$env:DOTNET_ROOT = $root
-$env:PATH = "$root;$env:PATH"
-$env:DOTNET_MULTILEVEL_LOOKUP = "0"
-dotnet --version   # confirm this is the milestone build, not the machine SDK
-```
-
-Always print `dotnet --version` and confirm it before trusting any result.
+Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets.
 
 ## What to validate
 
-Work through the drafted component markdown claim by claim.
-
-1. **Every code sample compiles.** Not "looks plausible" — actually builds against the milestone
-   build. A sample that does not compile is worse than no sample.
-2. **Every documented default and polarity.** If the notes say a flag defaults to `true`, read the
-   value. Renames that invert meaning (`EnableX` becoming `DisableX`) are the highest-risk class of
-   change, because the name check passes while the meaning is backwards.
-3. **Every JavaScript or browser-facing API.** `dotnet-inspect` cannot see these at all. Serve the
-   app and inspect the actual shipped script, or call the API from the page. Never document a JS API
-   from a PR description alone.
-4. **Every documented endpoint or runtime behavior.** Request it. Record the status code. Build
-   success does not imply the page renders.
-5. **Feature reachability.** Confirm the feature is reachable through the public surface in the
-   shipped build, not merely present in source.
+- Build or update a sample for every feature in the release notes, even if the notes have no code snippet for it. Run each sample against the milestone build and verify the claimed behavior, such as a browser API call, an endpoint response, or an explicitly stated default or flag polarity. A successful build or startup alone is not enough.
+- Test any code snippets from the release notes as part of those samples. Confirm the snippets build, run, and behave as described.
+- As you update existing maintained samples to the new preview, note changes required by the new release. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
 
 ## Recording what you verified
 
-Note the build next to the claim so a reviewer can tell "this is wrong" apart from "this was checked
-against a stale build":
+Create `release-notes/<major>.0/samples/README.md` when adding maintained samples. Explain their purpose and record the SDK version against which all component sample sets were last validated. Update the version after validating the sets against a new SDK.
 
-```markdown
-<!-- Verified against SDK 11.0.100-preview.7.26381.103 (VMR e2c1e00b) -->
-```
-
-For samples that assert a specific runtime result, keep the expected result in the sample itself
-(a header comment recording the expected HTTP status, for example) so drift shows up the next time
-the sample is run.
+In each `<component>/README.md`, describe the component's samples, how to run them, and their expected behavior. Keep it current as the samples change.
 
 ## When a claim fails validation
 
@@ -106,17 +52,7 @@ search for a rename, look for a revert, confirm the member is public. Then:
 
 - **Fix the notes, not the sample**, when the notes describe an API that does not exist. Rewrite the
   section around what actually shipped.
-- **Fix the sample, not the notes**, when the notes are right and the sample is stale. A sample
-  pinned to the previous preview will fail against a rename that the notes correctly documented.
+- **Update the sample and document the migration** when the new release requires changes to an
+  existing sample. Explain the preview-to-preview change in the notes.
 - **Drop the claim** when neither holds up. A correct prose description with a PR link always beats a
   confident, wrong code sample.
-
-## Notes
-
-- **Do not delegate this to a sub-agent.** Verification depends on reading real command output and
-  reacting to it. Summarizing agents reliably report that samples "look correct" - the failures in
-  the table above were all found by running the code directly.
-- **A maintained samples repository is the cheapest way to run this stage.** Upgrading an existing
-  set of working samples to the new build surfaces renames, inverted defaults, and new analyzer
-  diagnostics as build errors and warnings, which is exactly the
-  [upgrade guidance](../release-notes/references/format-template.md) preview users need.
