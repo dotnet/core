@@ -20,7 +20,7 @@ Use `build.sdk_version` from the milestone's existing `build-metadata.json`. If 
 
 Install that exact version into a fresh, empty temporary directory with the official public [`dotnet-install` script](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) for the host OS. Pass the exact version (`-Version` or `--version`), the `https://ci.dot.net/public` feed (`-AzureFeed` or `--azure-feed`), and the temporary install directory (`-InstallDir` or `--install-dir`); stop if installation fails. Set `DOTNET_ROOT` to that directory and prepend it to `PATH` for sample builds and runs. Do not install the preview SDK machine-wide.
 
-Verify the installed SDK reports `build.sdk_version`, then run `dotnet --version` from each sample project's directory. If either version differs, stop: a sample's `global.json` can select another SDK.
+Verify the installed SDK reports `build.sdk_version`; stop if it does not.
 
 ## Where samples live
 
