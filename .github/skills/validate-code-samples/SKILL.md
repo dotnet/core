@@ -51,7 +51,7 @@ Work through the drafted component markdown claim by claim.
 
 ## Recording what you verified
 
-In each maintained component sample set's README, record the SDK version the set was last successfully validated against. Update it only after validating the set with that SDK. Record observed behavior with the validation evidence so reviewers can distinguish a stale build from an incorrect claim.
+Record the last validated SDK version in `release-notes/<major>.0/samples/README.md`. Update it after validating the maintained component sample sets against that SDK. Record observed behavior with the validation evidence so reviewers can distinguish a stale build from an incorrect claim.
 
 ## When a claim fails validation
 
