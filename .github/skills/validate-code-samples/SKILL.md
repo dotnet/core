@@ -34,7 +34,7 @@ Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, o
 
 ## What to validate
 
-- Build or update a sample for every feature in the release notes, even if the notes have no code snippet for it. Run each sample against the milestone build and confirm the described behavior, including any defaults explicitly claimed in the notes.
+- Build or update a sample for every feature in the release notes, even if the notes have no code snippet for it. Run each sample against the milestone build and verify the claimed behavior, such as a browser API call, an endpoint response, or an explicitly stated default or flag polarity. A successful build or startup alone is not enough.
 - Test any code snippets from the release notes as part of those samples. Confirm the snippets build, run, and behave as described.
 - As you update existing maintained samples to the new preview, note changes required by the new release. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
 
