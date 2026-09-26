@@ -16,7 +16,7 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 | `winforms` | Windows Forms | `dotnet/winforms` | `winforms.md` | @KlausLoeffelmann |
 | `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @subhajitm |
 | `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | @SamMonoRT @AndriySvyryd |
-| `roslyn` | C# / Visual Basic | `dotnet/roslyn` | `csharp.md` | @BillWagner |
+| `roslyn` | C# | `dotnet/roslyn` | `csharp.md` | @BillWagner |
 | `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | @T-Gro |
 | `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` | @baronfel |
 
@@ -39,7 +39,7 @@ the PRs are created.
 
 ### Components contributed out-of-band (not in the VMR)
 
-These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. The agent still creates a stub PR for each so the component team can push their own content (or close the PR if there is nothing noteworthy this milestone).
+These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. The agent still creates a stub PR for each so the component team can add its own content. If there is nothing noteworthy this milestone, merge the stub so its file and index link remain in the release notes.
 
 | Component | Source Repo | Release Notes File | Default Assignee(s) |
 | --------- | ----------- | ------------------ | ------------------- |
@@ -61,7 +61,6 @@ The `runtime` manifest entry covers both Libraries and Runtime. When writing mar
 
 - **Razor → ASP.NET Core** — `dotnet/razor` PRs go in `aspnetcore.md`
 - **Templating → SDK** — `dotnet/templating` PRs go in `sdk.md`
-- **Roslyn** — publish C# features in `csharp.md`. Check PR labels/titles for Visual Basic changes too; flag noteworthy VB-specific changes for editorial review with the language owner rather than planning a separate component PR.
 - **Apply the product-boundary rule** — Razor editor code actions, language-server behavior, and other IDE-only experiences are usually tooling stories, not ASP.NET Core product notes. See `editorial-rules.md`.
 
 ### Infrastructure components (skip for release notes)
