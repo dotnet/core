@@ -15,7 +15,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 
 ## Workloads, Libraries, & More
 
-- .NET MAUI
+- [.NET MAUI](./dotnetmaui.md)
 - ASP.NET Core
 - Container images
 - EF Core & Data
