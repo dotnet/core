@@ -5,7 +5,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 - Libraries
 - Runtime
 - SDK
-- MSBuild
+- [MSBuild](./msbuild.md)
 - NuGet
 
 ## Languages
