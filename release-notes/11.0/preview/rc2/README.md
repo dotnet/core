@@ -24,7 +24,7 @@ Browse the .NET 11 RC 2 release notes by component:
 
 ## Get Started
 
-Find installation guidance in the [getting started guide](../../get-started.md). When .NET 11 RC 2 ships, installers and binaries will be available from [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/11.0) and the [.NET 11 releases index](../../README.md).
+Find installation guidance in the [getting started guide](../../get-started.md). Installers and binaries for .NET 11 RC 2 are available from [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/11.0) and the [.NET 11 releases index](../../README.md).
 
 ## Stay up-to-date
 
