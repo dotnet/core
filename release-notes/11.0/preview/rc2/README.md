@@ -20,7 +20,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 - Container images
 - EF Core & Data
 - Windows Forms
-- WPF
+- [WPF](./wpf.md)
 
 ## Get Started
 
