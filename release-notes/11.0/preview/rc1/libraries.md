@@ -215,20 +215,6 @@ The `Aes` class now supports the unpadded AES Key Wrap algorithm defined by RFC 
 
 The APIs provide array-returning and span-based overloads for wrapping cryptographic keys, including scenarios used by JOSE libraries.
 
-```csharp
-using System.Security.Cryptography;
-
-using Aes aes = Aes.Create();
-aes.Key = RandomNumberGenerator.GetBytes(32);
-
-byte[] keyToWrap = RandomNumberGenerator.GetBytes(16);
-byte[] wrappedKey = aes.EncryptKeyWrap(keyToWrap);
-byte[] unwrappedKey = aes.DecryptKeyWrap(wrappedKey);
-
-Console.WriteLine(
-    CryptographicOperations.FixedTimeEquals(keyToWrap, unwrappedKey));
-```
-
 ## Breaking changes
 
 ### Numeric conversions are now correctly rounded
