@@ -10,7 +10,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 
 ## Languages
 
-- C#
+- [C#](./csharp.md)
 - F#
 
 ## Workloads, Libraries, & More
