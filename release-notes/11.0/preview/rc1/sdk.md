@@ -100,20 +100,6 @@ option, and `--no-banner` appears in the command help
 ([dotnet/sdk #55376](https://github.com/dotnet/sdk/pull/55376) and
 [dotnet/sdk #55412](https://github.com/dotnet/sdk/pull/55412)).
 
-An experimental affected-test workflow is also available through a separately
-distributed Microsoft.Testing.Platform extension. It can collect a repository's
-test map and then run the tests affected by a change
-([dotnet/sdk #55574](https://github.com/dotnet/sdk/pull/55574)):
-
-```powershell
-$env:DOTNET_CLI_ENABLE_AFFECTED_TESTS = "1"
-dotnet test --collect-test-map
-dotnet test --affected-tests
-```
-
-Collection and affected-test selection are mutually exclusive and cannot be
-combined with device testing, parallel modules, or minimum-test policies.
-
 ## Container publishing produces reproducible images and skips redundant uploads
 
 Publishing the same application more than once could previously produce
@@ -205,6 +191,7 @@ Thank you [@wellWINeo](https://github.com/wellWINeo) for this contribution!
   property name ([dotnet/sdk #55671](https://github.com/dotnet/sdk/pull/55671)).
 
 <!-- Filtered features (significant engineering work, but too niche for release notes):
+  - Affected-test selection: experimental SDK orchestration requires a separately distributed MTP extension and storage contract that are not available for RC 1, so no complete user workflow ships in this release.
   - Shared SDK resolution during Pack and Publish discovery: internal evaluation reuse without a distinct user workflow.
   - NativeAOT CLI size optimization: useful engineering work, but no stable customer-facing command change or published size measurement in the authoritative entry.
   - MSBuild task multithreading migrations: implementation work covered by the broader MSBuild multithreading story in earlier previews.
