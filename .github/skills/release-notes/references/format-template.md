@@ -91,10 +91,9 @@ entry with a relative link to that file. Keep other pending entries unlinked
 and preserve links already merged from other components. Apply these rules
 when generating and completing the index:
 
-1. Preallocate an unlinked entry for every planned component file on the base
-   branch. Omit optional entries that will not have a file, such as
-   `visualbasic.md` when no Visual Basic notes are planned. Do not link a file
-   that exists only on another branch.
+1. Preallocate an unlinked entry for every expected component file listed in
+   `component-mapping.md` on the base branch, including components without
+   noteworthy changes. Do not link a file that exists only on another branch.
 2. Each component PR links exactly its own entry when adding the matching file
    (and any matching validation samples). Before the base PR leaves draft,
    verify that every expected component file exists and is linked exactly once.
