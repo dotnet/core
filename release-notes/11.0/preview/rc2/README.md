@@ -18,7 +18,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 - .NET MAUI
 - ASP.NET Core
 - Container images
-- EF Core & Data
+- [EF Core & Data](./efcore.md)
 - Windows Forms
 - WPF
 
