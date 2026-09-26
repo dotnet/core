@@ -30,7 +30,7 @@ Use one working sample set per major release and component. Upgrade it from prev
 
 Prefer a maintained sample when a claim tests runtime behavior, defaults, JavaScript or browser APIs, public feature reachability, or anything worth checking again in the next preview. For a one-off compile check that has no continuing regression value, create an isolated project in a scratch directory and remove it after validation.
 
-Keep expected results with the maintained scenario in a short README, assertion, or script. Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets.
+Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets.
 
 ## What to validate
 
@@ -51,7 +51,9 @@ Work through the drafted component markdown claim by claim.
 
 ## Recording what you verified
 
-Record the last validated SDK version in `release-notes/<major>.0/samples/README.md`. Update it after validating the maintained component sample sets against that SDK. Record observed behavior with the validation evidence so reviewers can distinguish a stale build from an incorrect claim.
+Create `release-notes/<major>.0/samples/README.md` when adding maintained samples. Explain their purpose and record the SDK version against which all component sample sets were last validated. Update the version after validating the sets against a new SDK.
+
+In each `<component>/README.md`, describe the component's samples, how to run them, and their expected behavior. Keep it current as the samples change.
 
 ## When a claim fails validation
 
