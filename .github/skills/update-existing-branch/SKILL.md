@@ -125,6 +125,8 @@ Examples:
 Keep the existing structure when it still works. Add a new top-level section
 only when the delta introduces a genuinely new story.
 
+When the target build changes or an incremental API diff becomes available, review it for [upgrade-impacting changes](../release-notes/references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades), including any API-diff review left pending on the base PR. Put verified guidance in the affected component's version-to-version or preview-only section as appropriate, without rewriting unrelated notes. Incorporate newly published compatibility guidance even if the build has not changed.
+
 ### 5. Treat review comments as required inputs
 
 Unresolved PR comments are part of the spec for the next run, on every PR in
@@ -143,6 +145,12 @@ For an existing release-notes branch set, the normal loop is:
 2. merge the delta into `features.json`
 3. update the existing markdown in place
 4. respond to comments and questions
+
+Before finalizing the refreshed draft, run
+[`review-release-notes`](../review-release-notes/SKILL.md) against the merged
+`features.json`, `changes.json`, and component files on their own branches
+until merged. Resolve noteworthy omissions or record the editorial reason in
+the corresponding `features.json` entry's `score_reason` on the base branch.
 
 This keeps the branch set stable for reviewers and avoids throwing away already
 curated editorial work.
