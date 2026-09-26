@@ -23,14 +23,15 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 
 Before drafting or delegating component files, confirm that the milestone's
 `features.json` contains the real `changes[]` and `commits{}` from `changes.json`,
-with scored candidates for noteworthy changes. Do not substitute a schema stub
-or defer feature selection to the component PRs. Give component writers the
-relevant candidate entries with their scores and reasons rather than a slim
-list of titles and labels.
+with matching change IDs and commit keys and scored candidates for noteworthy
+changes. Do not substitute a schema stub or defer feature selection to the
+component PRs. Give component writers the relevant candidate entries with
+their scores and reasons rather than a slim list of titles and labels.
 
 Before finalizing the milestone, run `review-release-notes` against the
-`changes.json`, `features.json`, and completed component drafts. Resolve
-noteworthy omissions it finds or record why the candidates were left out.
+`changes.json`, `features.json`, and completed component drafts on their
+branches (or the base branch after they merge). Resolve noteworthy omissions
+it finds or record the editorial reason in `features.json`.
 
 ## Local testing (no PRs)
 
