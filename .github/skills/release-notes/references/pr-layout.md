@@ -35,8 +35,7 @@ Order matters, and two of these steps fail silently.
 5. **Check links on both the base and component branches.** The base README must have no links
    to pending files; a component branch must add its link and file together. If adjacent README
    edits conflict as owners merge, retain all previously merged links and add only the current
-   component's link. After all component PRs merge, update the draft introduction to describe
-   the completed index before publishing.
+   component's link.
 
 ### gh pr edit does not work on this repo
 

@@ -47,7 +47,7 @@ matching file. Component files do NOT repeat the general links.
 ```markdown
 # .NET <VERSION> <MILESTONE> - Release Notes
 
-.NET <VERSION> <MILESTONE> component notes are under review. Links will be added as each component PR is merged.
+Browse the .NET <VERSION> <MILESTONE> release notes by component:
 
 - Libraries
 - Runtime
@@ -59,7 +59,6 @@ matching file. Component files do NOT repeat the general links.
 
 - C#
 - F#
-- Visual Basic
 
 ## Workloads, Libraries, & More
 
@@ -98,8 +97,7 @@ when generating and completing the index:
    that exists only on another branch.
 2. Each component PR links exactly its own entry when adding the matching file
    (and any matching validation samples). Before the base PR leaves draft,
-   verify that every expected component file exists and is linked exactly once,
-   and replace the "under review" introduction with the release-ready one.
+   verify that every expected component file exists and is linked exactly once.
 3. Keep Libraries, Runtime, SDK, MSBuild, and NuGet before the grouped sections.
 4. Use **Languages** for language release notes and
    **Workloads, Libraries, & More** for application frameworks, workloads,
