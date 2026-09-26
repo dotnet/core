@@ -4,7 +4,7 @@ Component notes are being reviewed in separate draft pull requests. Links will b
 
 - Libraries
 - Runtime
-- SDK
+- [SDK](./sdk.md)
 - MSBuild
 - NuGet
 
