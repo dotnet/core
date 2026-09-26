@@ -125,7 +125,7 @@ Examples:
 Keep the existing structure when it still works. Add a new top-level section
 only when the delta introduces a genuinely new story.
 
-When the target build changes or an incremental API diff becomes available, review it for [upgrade-impacting changes](../release-notes/references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades). Put verified guidance in the affected component's version-to-version or preview-only section as appropriate, without rewriting unrelated notes. Incorporate newly published compatibility guidance even if the build has not changed.
+When the target build changes or an incremental API diff becomes available, review it for [upgrade-impacting changes](../release-notes/references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades), including any API-diff review left pending on the base PR. Put verified guidance in the affected component's version-to-version or preview-only section as appropriate, without rewriting unrelated notes. Incorporate newly published compatibility guidance even if the build has not changed.
 
 ### 5. Treat review comments as required inputs
 
