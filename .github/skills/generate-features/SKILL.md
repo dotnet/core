@@ -161,7 +161,7 @@ changes in the file so the final review can check the editorial cut.
 
 Keep the file mechanically friendly:
 
-- preserve the same IDs and commit keys when possible
+- preserve every shipped change ID and commit key from `changes.json`
 - make `score` optional, not required
 - keep `score_reason` brief and evidence-based
 
