@@ -1,6 +1,6 @@
 ---
 name: validate-code-samples
-description: Verify release notes claims by building and running them against the actual .NET build for the milestone. Reads the exact SDK version from build-metadata.json, installs it in a scoped location with the official dotnet-install script, exercises every documented API and code sample, and catches the errors that static API verification cannot see - non-existent JavaScript APIs, inverted defaults, and runtime failures. USE FOR - validating a drafted component's release notes before the PR goes up, checking that documented samples compile and run, confirming a feature is actually reachable in the shipped build. DO NOT USE FOR - generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
+description: Validate release-note code snippets against the milestone build and identify preview-to-preview migration steps when updating maintained samples. Reads the exact SDK version from build-metadata.json and installs it in a scoped location with the official dotnet-install script. USE FOR - validating that drafted code snippets build, run, and behave as described, and documenting changes needed to update maintained samples to a new preview. DO NOT USE FOR - generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
 compatibility: Requires the milestone's build-metadata.json, network access to the public .NET build artifacts, and PowerShell or a POSIX shell. Pairs with api-diff-validation, which covers the static half of the same problem.
 ---
 
@@ -34,20 +34,8 @@ Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, o
 
 ## What to validate
 
-Work through the drafted component markdown claim by claim.
-
-1. **Every code sample compiles.** Not "looks plausible" — actually builds against the milestone
-   build. A sample that does not compile is worse than no sample.
-2. **Every documented default and polarity.** If the notes say a flag defaults to `true`, read the
-   value. Renames that invert meaning (`EnableX` becoming `DisableX`) are the highest-risk class of
-   change, because the name check passes while the meaning is backwards.
-3. **Every JavaScript or browser-facing API.** `dotnet-inspect` cannot see these at all. Serve the
-   app and inspect the actual shipped script, or call the API from the page. Never document a JS API
-   from a PR description alone.
-4. **Every documented endpoint or runtime behavior.** Request it. Record the status code. Build
-   success does not imply the page renders.
-5. **Feature reachability.** Confirm the feature is reachable through the public surface in the
-   shipped build, not merely present in source.
+- Build and run the code snippets in the release notes against the milestone build. Confirm they behave as described, including any defaults or behavior explicitly claimed in the notes.
+- As you update existing maintained samples to the new preview, note changes required by the new release. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
 
 ## Recording what you verified
 
@@ -63,7 +51,7 @@ search for a rename, look for a revert, confirm the member is public. Then:
 
 - **Fix the notes, not the sample**, when the notes describe an API that does not exist. Rewrite the
   section around what actually shipped.
-- **Fix the sample, not the notes**, when the notes are right and the sample is stale. A sample
-  pinned to the previous preview will fail against a rename that the notes correctly documented.
+- **Update the sample and document the migration** when the notes are right but the new release
+  requires changes to an existing sample. Explain the preview-to-preview change in the notes.
 - **Drop the claim** when neither holds up. A correct prose description with a PR link always beats a
   confident, wrong code sample.
