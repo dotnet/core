@@ -16,25 +16,18 @@ value is, and it cannot tell you whether a documented sequence of calls actually
 
 ## Acquiring a build
 
-Do not test against whatever SDK happens to be on the machine or select a second build from the .NET SDK builds table. The release-notes workflow already generates `build-metadata.json` for the milestone. Use its `build.sdk_version` to install the exact SDK.
+Do not test against whatever SDK happens to be on the machine or select a second build from the .NET SDK builds table. The release-notes workflow already generates `build-metadata.json` for the milestone. Read `build.sdk_version` from that file and use it to install the exact SDK; stop if it is missing.
 
 If `build-metadata.json` is missing, stop and generate it through the release-notes workflow before validating samples. See [`api-verification.md`](../release-notes/references/api-verification.md). Do not silently substitute the latest SDK from the milestone channel.
-
-### Read the exact SDK version
-
-From the milestone directory:
-
-```powershell
-$metadata = Get-Content build-metadata.json -Raw | ConvertFrom-Json
-$sdkVersion = $metadata.build.sdk_version
-if (-not $sdkVersion) { throw "build.sdk_version is missing from build-metadata.json" }
-```
 
 ### Install it scoped, not machine-wide
 
 Use the official public [`dotnet-install`](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) script to install the exact version from `build-metadata.json`. Install into a scratch directory, not machine-wide; a global install makes results non-reproducible and can disrupt other work on a shared machine.
 
+On Windows, set `$sdkVersion` to `build.sdk_version` from the milestone's metadata and run:
+
 ```powershell
+if (-not $sdkVersion) { throw "Set sdkVersion from build-metadata.json" }
 $root = Join-Path $env:TEMP "dotnet-release-notes-$([guid]::NewGuid())"
 $installScript = Join-Path $env:TEMP "dotnet-install-$([guid]::NewGuid()).ps1"
 try {
