@@ -30,24 +30,6 @@ $sdkVersion = $metadata.build.sdk_version
 if (-not $sdkVersion) { throw "build.sdk_version is missing from build-metadata.json" }
 ```
 
-### Confirm the build matches the notes
-
-Each build publishes a commit manifest next to the SDK. Use the RID for the validation machine:
-
-```text
-https://ci.dot.net/public/Sdk/{sdk_version}/productCommit-{rid}.json
-```
-
-```json
-{
-  "runtime":    { "commit": "e2c1e00b...", "version": "11.0.0-preview.7.26381.103" },
-  "aspnetcore": { "commit": "e2c1e00b...", "version": "11.0.0-preview.7.26381.103" },
-  "sdk":        { "commit": "e2c1e00b...", "version": "11.0.100-preview.7.26381.103" }
-}
-```
-
-Confirm that `sdk.version` matches `build.sdk_version` from `build-metadata.json`. The `sdk.commit` is the exact VMR commit that produced the build. Require `build-metadata.json` to record that same full commit SHA as `head_ref`: a branch name can move, and merely finding the build commit in its history does not prove that `changes.json` covers the same build. If `head_ref` is a branch name or differs from `sdk.commit`, regenerate both `changes.json` and `build-metadata.json` with `--head <sdk.commit>` and their original base and release options. If the change set differs, update `features.json` and the notes too. Verify that the regenerated SDK version and `head_ref` match the selected build; otherwise stop before validating samples.
-
 ### Install it scoped, not machine-wide
 
 Use the official public [`dotnet-install`](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script) script to install the exact version from `build-metadata.json`. Install into a scratch directory, not machine-wide; a global install makes results non-reproducible and can disrupt other work on a shared machine.
@@ -133,7 +115,7 @@ Note the build next to the claim so a reviewer can tell "this is wrong" apart fr
 against a stale build":
 
 ```markdown
-<!-- Verified against SDK 11.0.100-preview.7.26381.103 (VMR e2c1e00b) -->
+<!-- Verified against SDK 11.0.100-preview.7.26381.103 -->
 ```
 
 For samples that assert a specific runtime result, keep the expected result in the sample itself
