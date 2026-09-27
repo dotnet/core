@@ -38,36 +38,36 @@ Standard document structure for .NET release notes markdown files.
 
 ### README.md (index file)
 
-The README.md is the reader-facing index for the milestone. It links to every
-component file, groups the links consistently, points to the release downloads,
-and provides durable product documentation links. Component files do NOT repeat
-these general links.
+The README.md is the reader-facing index for the milestone. The base branch
+preallocates unlinked entries for expected component files, groups them
+consistently, points to the release downloads, and provides durable product
+documentation links. Each component PR links its own entry when it adds the
+matching file. Component files do NOT repeat the general links.
 
 ```markdown
 # .NET <VERSION> <MILESTONE> - Release Notes
 
-.NET <VERSION> <MILESTONE> release notes. Find more information on new features released in .NET <VERSION> <MILESTONE> by browsing through the release notes below:
+Browse the .NET <VERSION> <MILESTONE> release notes by component:
 
-- [Libraries](./libraries.md)
-- [Runtime](./runtime.md)
-- [SDK](./sdk.md)
-- [MSBuild](./msbuild.md)
-- [NuGet](./nuget.md)
+- Libraries
+- Runtime
+- SDK
+- MSBuild
+- NuGet
 
 ## Languages
 
-- [C#](./csharp.md)
-- [F#](./fsharp.md)
-- [Visual Basic](./visualbasic.md)
+- C#
+- F#
 
 ## Workloads, Libraries, & More
 
-- [.NET MAUI](./dotnetmaui.md)
-- [ASP.NET Core](./aspnetcore.md)
-- [Container images](./containers.md)
-- [EF Core & Data](./efcore.md)
-- [Windows Forms](./winforms.md)
-- [WPF](./wpf.md)
+- .NET MAUI
+- ASP.NET Core
+- Container images
+- EF Core & Data
+- Windows Forms
+- WPF
 
 ## Get Started
 
@@ -86,22 +86,29 @@ You can find a detailed overview of all new features in .NET <VERSION>:
 The latest .NET <VERSION> release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/<version>) and [.NET <VERSION> Releases](../../README.md).
 ```
 
-Apply these rules when generating the index:
+When a component PR adds its Markdown file, replace only its unlinked index
+entry with a relative link to that file. Keep other pending entries unlinked
+and preserve links already merged from other components. Apply these rules
+when generating and completing the index:
 
-1. Link every component markdown file exactly once. Omit only optional files
-   that were not produced, such as `visualbasic.md`.
-2. Keep Libraries, Runtime, SDK, MSBuild, and NuGet before the grouped sections.
-3. Use **Languages** for language release notes and
+1. Preallocate an unlinked entry for every expected component file listed in
+   `component-mapping.md` on the base branch, including components without
+   noteworthy changes. Do not link a file that exists only on another branch.
+2. Each component PR links exactly its own entry when adding the matching file
+   (and any matching validation samples). Before the base PR leaves draft,
+   verify that every expected component file exists and is linked exactly once.
+3. Keep Libraries, Runtime, SDK, MSBuild, and NuGet before the grouped sections.
+4. Use **Languages** for language release notes and
    **Workloads, Libraries, & More** for application frameworks, workloads,
    container images, and desktop frameworks.
-4. If the artifacts-publishing automation has already created the milestone
+5. If the artifacts-publishing automation has already created the milestone
    landing page, link to it directly from **Get Started**. Otherwise, use the
    general download page and version release index shown in the template; do
    not create or link to a landing page that does not exist yet.
-5. Keep the reader-facing index focused on navigation and documentation. Store
+6. Keep the reader-facing index focused on navigation and documentation. Store
    runtime/SDK versions and VMR base/head refs in `build-metadata.json`; do not
    expose release-notes generation provenance in README.md.
-6. Use the stable documentation entry points shown in the template. Do not
+7. Use the stable documentation entry points shown in the template. Do not
    guess milestone-specific documentation URLs that might not exist yet.
 
 ### Component-specific docs links
