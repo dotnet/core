@@ -115,21 +115,21 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 
 | OS                    | Version     | End of Life   |
 | --------------------- | ----------- | ------------- |
-| Alpine                | 3.20        | [2026-04-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)     |
-| Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)     |
+| Alpine                | 3.20        | [2026-04-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)        |
+| Alpine                | 3.19        | [2025-11-01](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)        |
 | Android               | 13          | 2026-03-02    |
-| Android               | 12.1        | [2025-03-03](https://developer.android.com/)                                                      |
+| Android               | 12.1        | 2025-03-03    |
 | Android               | 12          | 2025-03-03    |
 | Fedora                | 42          | 2026-05-27    |
 | Fedora                | 41          | 2025-12-15    |
 | Fedora                | 40          | 2025-05-13    |
-| iOS                   | 16          | [Active](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes) |
+| iOS                   | 16          | [Active](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-16-release-notes)    |
 | iOS                   | 17          | 2025-05-13    |
 | iPadOS                | 17          | Active        |
 | iPadOS                | 16          | [Active](https://developer.apple.com/documentation/ios-ipados-release-notes/ipados-16-release-notes) |
 | macOS                 | 14          | 2026-09-14    |
 | macOS                 | 13          | 2025-09-15    |
-| openSUSE Leap         | 15.6        | [2026-04-30](https://en.opensuse.org/openSUSE:Roadmap#Leap_15.6)                                  |
+| openSUSE Leap         | 15.6        | [2026-04-30](https://en.opensuse.org/openSUSE:Roadmap#Leap_15.6)                                     |
 | openSUSE Leap         | 15.5        | 2024-12-31    |
 | SUSE Linux Enterprise | 15.6        | 2025-12-31    |
 | tvOS                  | 26          | 2026-09-14    |
@@ -143,6 +143,6 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Ubuntu                | 25.10       | 2026-07-01    |
 | Ubuntu                | 25.04       | 2026-01-17    |
 | Ubuntu                | 24.10       | 2025-07-10    |
-| Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information)    |
-| Windows               | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information)    |
-| Windows               | 10 22H2     | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information)              |
+| Windows               | 11 23H2 (W) | [2025-11-11](https://learn.microsoft.com/windows/release-health/windows11-release-information)       |
+| Windows               | 11 22H2 (E) | [2025-10-14](https://learn.microsoft.com/windows/release-health/windows11-release-information)       |
+| Windows               | 10 22H2     | [2025-10-14](https://learn.microsoft.com/windows/release-health/release-information)                 |
