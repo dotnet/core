@@ -18,13 +18,18 @@ Standard document structure for .NET release notes markdown files.
 
 <description> ([<owner>/<repo> #NNNNN](https://github.com/<owner>/<repo>/pull/NNNNN)).
 
-## Breaking changes
+## Breaking changes from .NET <PREVIOUS_MAJOR>
 
-- Short migration note or heads-up for narrower changes that users may need to react to
+- Migration note for a change affecting apps upgrading from the previous stable .NET release
+
+## Changes since the previous preview
+
+- Migration note for a change to an API or behavior introduced during this major's previews
 
 ## Bug fixes
 
-- **Category** — Fix description
+- **Namespace or area**
+  - [Cleaned up PR or issue title](https://github.com/<owner>/<repo>/pull/NNNNN)
 
 ## Community contributors
 
@@ -33,36 +38,78 @@ Standard document structure for .NET release notes markdown files.
 
 ### README.md (index file)
 
-The README.md links to all component files and includes the general docs link. Component files do NOT include the general "What's new" link — that goes in the README only.
+The README.md is the reader-facing index for the milestone. The base branch
+preallocates unlinked entries for expected component files, groups them
+consistently, points to the release downloads, and provides durable product
+documentation links. Each component PR links its own entry when it adds the
+matching file. Component files do NOT repeat the general links.
 
 ```markdown
-# .NET <VERSION> <PREVIEW> - Release Notes
+# .NET <VERSION> <MILESTONE> - Release Notes
 
-- [Libraries](libraries.md)
-- [Runtime](runtime.md)
-- [ASP.NET Core](aspnetcore.md)
-...
+Browse the .NET <VERSION> <MILESTONE> release notes by component:
 
-.NET <VERSION> updates:
+- Libraries
+- Runtime
+- SDK
+- MSBuild
+- NuGet
 
-- [What's new in .NET <VERSION>](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-<version>/overview)
+## Languages
 
-## Release information
+- C#
+- F#
 
-| | Version |
-| --- | --- |
-| Runtime | <runtime-version> |
-| SDK | <sdk-version> |
+## Workloads, Libraries, & More
 
-### VMR refs
+- .NET MAUI
+- ASP.NET Core
+- Container images
+- EF Core & Data
+- Windows Forms
+- WPF
 
-These release notes were generated from the [dotnet/dotnet](https://github.com/dotnet/dotnet) VMR:
+## Get Started
 
-- **Base**: [`<base-tag>`](https://github.com/dotnet/dotnet/tree/<base-tag>)
-- **Head**: [`<head-branch>`](https://github.com/dotnet/dotnet/tree/<head-branch>)
+Instructions on getting started with .NET <VERSION> can be found in the [getting started guide](../../get-started.md). Installers and binaries for .NET <VERSION> <MILESTONE> are available from [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/<version>) and [.NET <VERSION> Releases](../../README.md).
+
+## Stay up-to-date
+
+You can find a detailed overview of all new features in .NET <VERSION>:
+
+- [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/)
+- [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/)
+- [What's new in Entity Framework Core](https://learn.microsoft.com/ef/core/what-is-new/)
+- [What's new in Windows Forms](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/)
+- [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/)
+
+The latest .NET <VERSION> release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/<version>) and [.NET <VERSION> Releases](../../README.md).
 ```
 
-Read the runtime version, SDK version, base ref, and head ref from `build-metadata.json`.
+When a component PR adds its Markdown file, replace only its unlinked index
+entry with a relative link to that file. Keep other pending entries unlinked
+and preserve links already merged from other components. Apply these rules
+when generating and completing the index:
+
+1. Preallocate an unlinked entry for every expected component file listed in
+   `component-mapping.md` on the base branch, including components without
+   noteworthy changes. Do not link a file that exists only on another branch.
+2. Each component PR links exactly its own entry when adding the matching file
+   (and any matching validation samples). Before the base PR leaves draft,
+   verify that every expected component file exists and is linked exactly once.
+3. Keep Libraries, Runtime, SDK, MSBuild, and NuGet before the grouped sections.
+4. Use **Languages** for language release notes and
+   **Workloads, Libraries, & More** for application frameworks, workloads,
+   container images, and desktop frameworks.
+5. If the artifacts-publishing automation has already created the milestone
+   landing page, link to it directly from **Get Started**. Otherwise, use the
+   general download page and version release index shown in the template; do
+   not create or link to a landing page that does not exist yet.
+6. Keep the reader-facing index focused on navigation and documentation. Store
+   runtime/SDK versions and VMR base/head refs in `build-metadata.json`; do not
+   expose release-notes generation provenance in README.md.
+7. Use the stable documentation entry points shown in the template. Do not
+   guess milestone-specific documentation URLs that might not exist yet.
 
 ### Component-specific docs links
 
@@ -87,8 +134,39 @@ Known component docs links:
 2. **One paragraph of context** — what the feature does and why it matters in concrete terms, with PR/issue links; avoid inferred feelings or marketing-style claims
 3. **Code sample** — show the feature in use
 4. **Feature ordering** — highest customer impact first
-5. **Breaking changes near the end** — low-score entries with `breaking_changes: true` usually belong in a short section before Bug fixes, not as full feature sections
+5. **Upgrade guidance near the end** — keep version-to-version breaking changes separate from changes affecting only preview users. `breaking_changes: true` flags migration significance, not which section an item belongs in; see below.
 6. **Preview feature callout** — when a feature is listed in `release-notes/features.json`, start its section with the standard blockquote callout from that file
+
+## Upgrade guidance
+
+Use **Breaking changes from .NET N** (where N is the previous stable major version) for changes that affect code or behavior from that release. Keep these visible in preview notes and make sure they are covered in the new version's aggregate compatibility documentation. State which preview introduced the change and link the published breaking-change guidance when available; a preview note alone is not the aggregate documentation.
+
+Use **Changes since the previous preview** for migrations that only affect code written against this major's earlier previews or RCs. For an RC, compare against the preceding prerelease, including an earlier RC. Name the old and new behavior and the affected preview or RC. Do not carry preview-only churn into the version-to-version breaking-change list. Omit either section when it has no entries.
+
+The [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades) and maintained samples can reveal migration candidates, but do not determine which baseline they break.
+
+Cover these when they apply. They tend to surface only when an existing project is actually upgraded
+to the new build, which is one of the reasons
+[`validate-code-samples`](../../validate-code-samples/SKILL.md) upgrades the component's maintained sample set under `release-notes/<major>.0/samples/<component>/`:
+
+- **Renamed APIs**, especially renames that invert meaning (`EnableX` becoming `DisableX`). Show the
+  before and after, and state the new default explicitly.
+- **New analyzer diagnostics that fire on previously clean code.** Code that built without warnings
+  on the last preview and now reports diagnostics is an upgrade issue even though nothing in the
+  user's code changed. Name the diagnostic IDs.
+- **Changed defaults**, where existing code keeps compiling but behaves differently.
+
+**Removed or replaced workarounds** are the one upgrade item that is not a breaking change. If a bug
+that required a workaround is now fixed, say so with the fix in Bug fixes, so users can delete the
+workaround rather than carrying it forward.
+
+Do not turn this into a changelog of everything that moved. Include an item when a user upgrading
+from the previous stable release or preview would otherwise hit a build error, a new warning, or a
+silent behavior change.
+
+Attribute these to the milestone that actually changed them. A fix that shipped two previews ago is
+not upgrade guidance for this one — see
+[api-verification.md](api-verification.md) for the provenance rule.
 
 ## Issue and PR references
 

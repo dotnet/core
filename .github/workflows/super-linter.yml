@@ -35,6 +35,7 @@ jobs:
       - name: Lint Code Base
         # github/super-linter slim v7.4.0
         uses: github/super-linter/slim@12150456a73e248bdc94d0794898f94e23127c88
+
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JSCPD: false
