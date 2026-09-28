@@ -21,7 +21,7 @@ Notes:
 | [iOS][2]    | 27, 26, 18 | Arm64         | None      |
 | [iPadOS][3] | 27, 26, 18 | Arm64         | None      |
 | [macOS][4]  | 27, 26, 15 | Arm64, x64    | None      |
-| [tvOS][5]   | 27         | Arm64         | None      |
+| [tvOS][5]   | 27, 26     | Arm64         | None      |
 
 Notes:
 
@@ -132,7 +132,6 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | openSUSE Leap         | 15.6        | [2026-04-30](https://en.opensuse.org/openSUSE:Roadmap#Leap_15.6)                                     |
 | openSUSE Leap         | 15.5        | 2024-12-31    |
 | SUSE Linux Enterprise | 15.6        | 2025-12-31    |
-| tvOS                  | 26          | 2026-09-14    |
 | tvOS                  | 18          | 2025-09-15    |
 | tvOS                  | 17          | 2024-09-16    |
 | tvOS                  | 16          | 2023-09-18    |

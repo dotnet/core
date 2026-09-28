@@ -21,7 +21,7 @@ Notes:
 | [iOS][2]    | 27, 26, 18 | Arm64         | None      |
 | [iPadOS][3] | 27, 26, 18 | Arm64         | None      |
 | [macOS][4]  | 27, 26, 15 | Arm64, x64    | None      |
-| [tvOS][5]   | 27         | Arm64         | None      |
+| [tvOS][5]   | 27, 26     | Arm64         | None      |
 
 Notes:
 
@@ -146,7 +146,6 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | SUSE Linux Enterprise | 15.5        | 2024-12-31    |
 | SUSE Linux Enterprise | 12.5        | 2024-10-31    |
 | SUSE Linux Enterprise | 15.4        | 2023-12-31    |
-| tvOS                  | 26          | 2026-09-14    |
 | tvOS                  | 18          | 2025-09-15    |
 | tvOS                  | 17          | 2024-09-16    |
 | tvOS                  | 16          | 2023-09-18    |
