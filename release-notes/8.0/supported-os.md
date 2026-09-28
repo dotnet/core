@@ -120,7 +120,7 @@ OS versions that are out of support by the OS publisher are not tested or suppor
 | Alpine                | 3.17        | [2024-11-22](https://alpinelinux.org/posts/Alpine-3.17.10-3.18.9-3.19.4-3.20.3-released.html)     |
 | Alpine                | 3.16        | [2024-05-23](https://alpinelinux.org/posts/Alpine-3.16.9-3.17.7-3.18.6-released.html)             |
 | Android               | 13          | 2026-03-02    |
-| Android               | 12.1        | [2025-03-03](https://developer.android.com/about/versions/12/12L)                                 |
+| Android               | 12.1        | [2025-03-03](https://developer.android.com/)                                                      |
 | Android               | 12          | 2025-03-03    |
 | Android               | 11          | 2024-02-05    |
 | Debian                | 11          | [2026-08-31](https://lists.debian.org/debian-release/2024/06/msg00700.html)                       |
