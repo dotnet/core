@@ -18,7 +18,7 @@ Browse the .NET 11 RC 2 release notes by component:
 - .NET MAUI
 - ASP.NET Core
 - Container images
-- [EF Core & Data](./efcore.md)
+- EF Core & Data
 - Windows Forms
 - WPF
 
