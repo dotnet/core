@@ -5990,7 +5990,9 @@
       "commit": "dotnet@00b0142",
       "is_security": false,
       "product": "dotnet-msbuild",
-      "local_repo_commit": "msbuild@65f75f9"
+      "local_repo_commit": "msbuild@65f75f9",
+      "score": 7,
+      "score_reason": "Change Wave 18.11's optimized wildcard matching improved full isolated SDK-style project evaluation by 10–13% and allocations by 16–34% in the final Windows 11 .NET 11 ShortRun workload matrix. The result is limited to the tested project shapes and requires the wave to be enabled."
     },
     {
       "id": "msbuild@c9b4d14",
@@ -6148,7 +6150,9 @@
       "commit": "dotnet@ac25bd1",
       "is_security": false,
       "product": "dotnet-msbuild",
-      "local_repo_commit": "msbuild@f8839a0"
+      "local_repo_commit": "msbuild@f8839a0",
+      "score": 5,
+      "score_reason": "Property/item/metadata expansion microbenchmarks show gains, including up to 59.3% in a mixed 100-item .NET 11 case, but do not establish a corresponding full project-evaluation or build-time gain. Useful context for the performance cluster, not a standalone reader story."
     },
     {
       "id": "msbuild@1168e26",
