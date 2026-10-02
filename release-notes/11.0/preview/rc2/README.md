@@ -15,7 +15,7 @@ Browse the .NET 11 RC 2 release notes by component:
 
 ## Workloads, Libraries, & More
 
-- .NET MAUI
+- [.NET MAUI](./dotnetmaui.md)
 - ASP.NET Core
 - Container images
 - EF Core & Data
