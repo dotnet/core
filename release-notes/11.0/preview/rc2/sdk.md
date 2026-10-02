@@ -7,18 +7,31 @@
 
 ## Quoted file-level directive values
 
-File-based programs can use quoted values containing spaces in `#:property` directives. The `#:package`, `#:project`, and `#:ref` directives also accept trailing `Name=Value` tokens for MSBuild item metadata ([dotnet/sdk #55960](https://github.com/dotnet/sdk/pull/55960)).
+File-based programs can use quoted values containing spaces in `#:property` directives. The `#:package`, `#:project`, and `#:ref` directives also accept trailing `Name=Value` tokens for MSBuild item metadata. This example uses the `Aliases` metadata on a package directive and references the package through the resulting C# extern alias ([dotnet/sdk #55960](https://github.com/dotnet/sdk/pull/55960)).
 
 ```csharp
 #:property Company="RC2 Validation Team"
+#:property AssemblyTitle="RC2 Directive Validation"
+#:package System.CommandLine@2.0.1 Aliases=CommandLine
 
+extern alias CommandLine;
 using System.Reflection;
-Console.WriteLine(Assembly.GetExecutingAssembly()
-    .GetCustomAttribute<AssemblyCompanyAttribute>()?.Company);
-// RC2 Validation Team
+
+string? company = Assembly.GetExecutingAssembly()
+    .GetCustomAttribute<AssemblyCompanyAttribute>()?.Company;
+var nameOption = new CommandLine::System.CommandLine.Option<string>("--name");
+var command = new CommandLine::System.CommandLine.RootCommand();
+command.Options.Add(nameOption);
+string? name = command.Parse(args).GetValue(nameOption);
+if (company != "RC2 Validation Team" || name != "RC2")
+{
+    throw new Exception($"Unexpected metadata or argument: {company}, {name}.");
+}
+
+Console.WriteLine($"Company: {company}; name: {name}");
 ```
 
-Run the file with `dotnet run Program.cs`. The quoted value becomes the generated assembly's `Company` metadata.
+Run the file with `dotnet run Program.cs -- --name RC2`. The quoted value becomes the generated assembly's `Company` metadata, and `System.CommandLine` parses the supplied option through the `CommandLine` alias.
 
 See the [file-based apps documentation](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) for supported directives and the broader workflow.
 
