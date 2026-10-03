@@ -14,6 +14,6 @@ RC 2 improves validation of C# union cases and fixes Blazor and server behavior.
 
 ## Bug fixes
 
-- **Validation:** The validation generator discovers C# union case types, and Blazor client-side validation handles custom attributes ([dotnet/aspnetcore #68846](https://github.com/dotnet/aspnetcore/pull/68846), [dotnet/aspnetcore #69026](https://github.com/dotnet/aspnetcore/pull/69026)).
+- **Validation:** The validation generator discovers C# union case types, and Blazor client-side validation better supports custom validation attributes ([dotnet/aspnetcore #68846](https://github.com/dotnet/aspnetcore/pull/68846), [dotnet/aspnetcore #69026](https://github.com/dotnet/aspnetcore/pull/69026)).
 - **Blazor:** `Virtualize` with end anchoring now fills the viewport after its initial provider load ([dotnet/aspnetcore #69388](https://github.com/dotnet/aspnetcore/pull/69388)).
 - **Kestrel:** HTTP/2 rejects newline characters in trailers and dynamic HPACK table entries ([dotnet/aspnetcore #69247](https://github.com/dotnet/aspnetcore/pull/69247)).
