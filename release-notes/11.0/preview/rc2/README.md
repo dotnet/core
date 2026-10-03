@@ -11,7 +11,7 @@ Browse the .NET 11 RC 2 release notes by component:
 ## Languages
 
 - C#
-- F#
+- [F#](./fsharp.md)
 
 ## Workloads, Libraries, & More
 
