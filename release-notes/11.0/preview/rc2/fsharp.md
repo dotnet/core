@@ -7,7 +7,7 @@
 - [reraise in computation expressions](#reraise-in-computation-expressions)
 - [Require named arguments for selected APIs](#require-named-arguments-for-selected-apis)
 - [Lower allocations in FSharp.Core collections](#lower-allocations-in-fsharpcore-collections)
-- [Compiler memory usage improvements](#compiler-memory-usage-improvements)
+- [Compiler memory usage improvements](#compiler-memory-usage-improvements) - [Read the full performance evaluation](./fsharp-memory-savings.md)
 - [Bound concurrent asynchronous work](#bound-concurrent-asynchronous-work)
 - [Trimming and Native AOT improvements](#trimming-and-native-aot-improvements)
 - [Breaking changes from .NET 10](#breaking-changes-from-net-10)
