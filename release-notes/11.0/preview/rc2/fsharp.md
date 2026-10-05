@@ -83,7 +83,6 @@ let calculation () =
 Here `runtimeTask` is the custom builder defined by the tests, not a shipped FSharp.Core symbol.
 Its `Run` method passes the delayed body to `StateMachineHelpers.__runtimeAsyncReturn`.
 Its `Source` methods use `AsyncHelpers.Await` to await tasks before handing their results to the continuation.
-The [maintained fixture](../../samples/fsharp/README.md) includes a small test-derived builder and runs this example across suspension.
 
 This release gives library authors the building blocks to create their own computation-expression APIs.
 FSharp.Core does not yet ship a builder using these mechanics.
@@ -129,8 +128,7 @@ type Calculator() =
 let answer = Calculator().Double(value = 21) // 42
 ```
 
-The [maintained fixture](../../samples/fsharp/README.md) includes the attribute definition.
-It verifies that the named call runs and that `Calculator().Double(21)` reports `FS3923` under preview.
+`Calculator().Double(21)` reports `FS3923` under preview.
 The default language version does not enforce this attribute.
 
 ## Lower allocations in FSharp.Core collections
