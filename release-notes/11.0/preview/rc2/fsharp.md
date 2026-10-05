@@ -172,6 +172,8 @@ These measurements describe their specific workloads, not peak process memory or
 The compiler improvements are enabled by default.
 Thank you [@auduchinok](https://github.com/auduchinok) for this contribution!
 
+For the measured combined impact of F# 11 compiler and FSharp.Core improvements, see [the full performance evaluation](./fsharp-memory-savings.md).
+
 ## Bound concurrent asynchronous work
 
 `Async.parallelLimit` runs asynchronous computations with a maximum number in flight and returns results in input order.
