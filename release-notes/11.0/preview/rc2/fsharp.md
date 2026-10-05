@@ -2,9 +2,9 @@
 
 .NET 11 RC 2 includes the following F# updates:
 
-- [Extend existing types for generic code](#extend-existing-types-for-generic-code)
-- [Build computation expressions on runtime-async](#build-computation-expressions-on-runtime-async)
-- [Reraise from a computation expression handler](#reraise-from-a-computation-expression-handler)
+- [SRTP for extension members and operators](#srtp-for-extension-members-and-operators)
+- [Runtime async support](#runtime-async-support)
+- [reraise in computation expressions](#reraise-in-computation-expressions)
 - [Require named arguments for selected APIs](#require-named-arguments-for-selected-apis)
 - [Lower allocations in FSharp.Core collections](#lower-allocations-in-fsharpcore-collections)
 - [Compiler memory usage improvements](#compiler-memory-usage-improvements)
@@ -24,7 +24,7 @@ Features marked **preview** require this setting in your project:
 
 For F# Interactive, use `dotnet fsi --langversion:preview`. Other updates use the default F# 11 language version.
 
-## Extend existing types for generic code
+## SRTP for extension members and operators
 
 > **Preview.**
 
@@ -60,7 +60,7 @@ This capability was already available in RC 1
 ([dotnet/fsharp#19602](https://github.com/dotnet/fsharp/pull/19602)).
 Thank you [@gusty](https://github.com/gusty) for this contribution!
 
-## Build computation expressions on runtime-async
+## Runtime async support
 
 > **Preview.**
 
@@ -91,7 +91,7 @@ The existing `task {}` and `async {}` builders are unchanged.
 The example targets `net11.0` and runs on the .NET 11 RC 2 runtime.
 The intrinsics come from FSharp.Core's `net10.0` asset, not its `netstandard2.0` asset; the target and executing runtime must support runtime-async.
 
-## Reraise from a computation expression handler
+## reraise in computation expressions
 
 > **Preview.**
 
