@@ -2,13 +2,14 @@
 
 .NET 11 RC 2 includes the following F# updates:
 
-- [Lower allocations in collections and compilation](#lower-allocations-in-collections-and-compilation)
-- [Bound concurrent asynchronous work](#bound-concurrent-asynchronous-work)
-- [Require named arguments for selected APIs](#require-named-arguments-for-selected-apis)
+- [Extend existing types for generic code](#extend-existing-types-for-generic-code)
+- [Build computation expressions on runtime-async](#build-computation-expressions-on-runtime-async)
 - [Reraise from a computation expression handler](#reraise-from-a-computation-expression-handler)
+- [Require named arguments for selected APIs](#require-named-arguments-for-selected-apis)
+- [Lower allocations in FSharp.Core collections](#lower-allocations-in-fsharpcore-collections)
+- [Compiler memory usage improvements](#compiler-memory-usage-improvements)
+- [Bound concurrent asynchronous work](#bound-concurrent-asynchronous-work)
 - [Trimming and Native AOT improvements](#trimming-and-native-aot-improvements)
-- [Preview catch-up: extension members and operators](#preview-catch-up-extension-members-and-operators)
-- [Other preview feature status](#other-preview-feature-status)
 - [Breaking changes from .NET 10](#breaking-changes-from-net-10)
 - [Bug fixes and other improvements](#bug-fixes-and-other-improvements)
 - [Community contributors](#community-contributors)
@@ -23,59 +24,93 @@ Features marked **preview** require this setting in your project:
 
 For F# Interactive, use `dotnet fsi --langversion:preview`. Other updates use the default F# 11 language version.
 
-## Lower allocations in collections and compilation
+## Extend existing types for generic code
 
-More `List` and `Array` traversal functions, including `fold`, `exists`, and `tryPick`, can now inline their callback lambdas.
-This removes callback closures from common collection operations
-([dotnet/fsharp#20422](https://github.com/dotnet/fsharp/pull/20422)).
+> **Preview.**
 
-```fsharp
-let sumWithOffset k xs =
-    List.fold (fun total value -> total + value + k) 0 xs
-
-let total = sumWithOffset 1 [ 1; 2; 3 ] // 9
-```
-
-The author's capturing-lambda microbenchmarks report 24 bytes per call with FSharp.Core 9.0.100 versus zero with the updated Core.
-This applies to the measured `List.fold`, `List.exists`, `Array.fold`, and `Array.fold2` calls, not every collection function.
-`OptimizeClosureIfNotInlined` is also enabled by default in F# 11.
-It lets library authors adapt non-literal callbacks outside an inlined loop
-([dotnet/fsharp#20571](https://github.com/dotnet/fsharp/pull/20571)).
-
-In the author-reported self-build for [dotnet/fsharp#20422](https://github.com/dotnet/fsharp/pull/20422), compiler closure allocations fell from 231,625,834 to 149,844,308 (35.31%).
-That comparison used SDK 10.0.400/FSharp.Core 10.1 versus the PR's compiler/Core 11.
-It measures that workload's closure allocations, not a general build-time speedup.
-RC 2 also avoids duplicate expression copying during inlining and reduces constraint-solver closures
-([dotnet/fsharp#20363](https://github.com/dotnet/fsharp/pull/20363),
-[dotnet/fsharp#20367](https://github.com/dotnet/fsharp/pull/20367)).
-
-FSharp.Compiler.Service shares imported assembly data between projects by default, reducing retained metadata in multi-project tools.
-Tool authors can opt out with `shareImportedAssemblies = false` on `FSharpChecker.Create`
-([dotnet/fsharp#20296](https://github.com/dotnet/fsharp/pull/20296)).
-These compiler-service improvements do not require the preview language version.
-Thank you [@auduchinok](https://github.com/auduchinok) for this contribution!
-
-## Bound concurrent asynchronous work
-
-`Async.parallelLimit` runs asynchronous computations with a maximum number in flight and returns results in input order.
-Use it to limit concurrent work in a batch without writing a separate concurrency limiter.
-Related helpers include `Async.parallelDoLimit`, `Task.parallelLimit`, and sequential variants
-([dotnet/fsharp#20294](https://github.com/dotnet/fsharp/pull/20294)).
-The task helpers accept functions that start tasks, so the limit applies before the work starts.
+Bring existing .NET and third-party types into generic F# algorithms without changing those types or introducing wrappers.
+Statically resolved type parameter (SRTP) constraints can select extension members, including operators, supplied by your code or a library.
+An algorithm no longer needs every operation to be declared inside the original type.
 
 ```fsharp
-let results =
-    [ for i in 1..5 -> async { return i * i } ]
-    |> Async.parallelLimit 2
-    |> Async.RunSynchronously
-// [| 1; 4; 9; 16; 25 |]
+open System
+
+type MyOffset = { Hours: float }
+
+type System.DateTime with
+    static member (+) (date: DateTime, offset: MyOffset) =
+        date.AddHours(offset.Hours)
+
+let inline shift (date: DateTime) offset = date + offset
+
+let oneHourLater = shift DateTime.MinValue (TimeSpan.FromHours 1.0)
+let twoHoursLater = shift DateTime.MinValue { Hours = 2.0 }
 ```
 
-Thank you [@bartelink](https://github.com/bartelink) for this contribution!
+The same `shift` function accepts the built-in `TimeSpan` and a domain-specific offset added through an extension.
+Inline overload resolution stays open until the call site instead of fixing the offset type to `TimeSpan` at the function definition.
+Libraries can use this mechanism to adapt existing types to generic operations.
+
+Only public extensions can satisfy these constraints.
+When using extensions from another assembly, open their defining module at the call site.
+Built-in operations still take precedence when they already apply.
+Ordinary extension-member calls do not require preview.
+
+This capability was already available in RC 1
+([dotnet/fsharp#19602](https://github.com/dotnet/fsharp/pull/19602)).
+Thank you [@gusty](https://github.com/gusty) for this contribution!
+
+## Build computation expressions on runtime-async
+
+> **Preview.**
+
+Library authors can build custom computation-expression builders on .NET's runtime-async execution model.
+RC 2 supplies compiler-recognized return and await intrinsics for generating runtime-async methods
+([dotnet/fsharp#20235](https://github.com/dotnet/fsharp/pull/20235)).
+The runtime manages asynchronous suspension and continuation instead of requiring a compiler-generated await state machine.
+
+The [compiler's prototype builder](https://github.com/dotnet/fsharp/blob/9cd6167a7265ce7264b22719503b7dfa9eb8f83c/tests/FSharp.Compiler.ComponentTests/Language/RuntimeAsync/RuntimeTaskBuilder.fs) demonstrates familiar `let!`, `return`, loops, exception handling, and resource management on these mechanics:
+
+```fsharp
+let calculation () =
+    runtimeTask {
+        let captured = 40
+        let! delta = delayed 2
+        return captured + delta
+    }
+```
+
+Here `runtimeTask` is the custom builder defined by the tests, not a shipped FSharp.Core symbol.
+Its `Run` method passes the delayed body to `StateMachineHelpers.__runtimeAsyncReturn`.
+Its `Source` methods use `AsyncHelpers.Await` to await tasks before handing their results to the continuation.
+The [maintained fixture](../../samples/fsharp/README.md) includes a small test-derived builder and runs this example across suspension.
+
+This release gives library authors the building blocks to create their own computation-expression APIs.
+FSharp.Core does not yet ship a builder using these mechanics.
+The existing `task {}` and `async {}` builders are unchanged.
+The example targets `net11.0` and runs on the .NET 11 RC 2 runtime.
+The intrinsics come from FSharp.Core's `net10.0` asset, not its `netstandard2.0` asset; the target and executing runtime must support runtime-async.
+
+## Reraise from a computation expression handler
+
+> **Preview.**
+
+`reraise ()` now works inside the `with` handler of an `async`, `task`, or custom computation expression.
+It propagates the original exception and preserves its stack trace, unlike rethrowing with `raise e`
+([dotnet/fsharp#20405](https://github.com/dotnet/fsharp/pull/20405)).
+
+```fsharp
+let operation = async {
+    try
+        failwith "operation failed"
+    with _ ->
+        reraise ()
+}
+```
 
 ## Require named arguments for selected APIs
 
-> This feature requires `<LangVersion>preview</LangVersion>` or `--langversion:preview` in RC 2.
+> **Preview.**
 
 API authors can apply `System.Diagnostics.CodeAnalysis.RequireNamedArgumentsAttribute` to methods and constructors.
 With preview enabled, positional calls report `FS3923`, requiring callers to name the affected arguments
@@ -98,22 +133,64 @@ The [maintained fixture](../../samples/fsharp/README.md) includes the attribute 
 It verifies that the named call runs and that `Calculator().Double(21)` reports `FS3923` under preview.
 The default language version does not enforce this attribute.
 
-## Reraise from a computation expression handler
+## Lower allocations in FSharp.Core collections
 
-> This feature requires `<LangVersion>preview</LangVersion>` or `--langversion:preview` in RC 2.
-
-`reraise ()` now works inside the `with` handler of an `async`, `task`, or custom computation expression.
-It propagates the original exception and preserves its stack trace, unlike rethrowing with `raise e`
-([dotnet/fsharp#20405](https://github.com/dotnet/fsharp/pull/20405)).
+More `List` and `Array` traversal functions, including `fold`, `exists`, and `tryPick`, can now inline their callback lambdas.
+This removes callback closures from common collection operations in your applications
+([dotnet/fsharp#20422](https://github.com/dotnet/fsharp/pull/20422)).
 
 ```fsharp
-let operation = async {
-    try
-        failwith "operation failed"
-    with _ ->
-        reraise ()
-}
+let sumWithOffset k xs =
+    List.fold (fun total value -> total + value + k) 0 xs
+
+let total = sumWithOffset 1 [ 1; 2; 3 ] // 9
 ```
+
+The author's capturing-lambda microbenchmarks report 24 bytes per call with FSharp.Core 9.0.100 versus zero with the updated Core.
+This applies to the measured `List.fold`, `List.exists`, `Array.fold`, and `Array.fold2` calls, not every collection function.
+`OptimizeClosureIfNotInlined` is also enabled by default in F# 11.
+It lets library authors adapt non-literal callbacks outside an inlined loop
+([dotnet/fsharp#20571](https://github.com/dotnet/fsharp/pull/20571)).
+
+## Compiler memory usage improvements
+
+Compilation and project analysis create fewer temporary objects and retain less duplicated assembly metadata.
+RC 2 combines expression copying and type instantiation during inlining, removes constraint-solver closures, and reuses metadata objects
+([dotnet/fsharp#20363](https://github.com/dotnet/fsharp/pull/20363),
+[dotnet/fsharp#20367](https://github.com/dotnet/fsharp/pull/20367),
+[dotnet/fsharp#20255](https://github.com/dotnet/fsharp/pull/20255),
+[dotnet/fsharp#20489](https://github.com/dotnet/fsharp/pull/20489)).
+
+The PE-reader reuse PR's FSharp.Common build benchmark reports allocated bytes decreasing from 2,912 MB to 2,606 MB (10.5%).
+These are cumulative allocations during compilation, separate from the application runtime allocations described above.
+
+FSharp.Compiler.Service also shares imported assembly data between projects by default and creates referenced-type metadata only when needed
+([dotnet/fsharp#20296](https://github.com/dotnet/fsharp/pull/20296),
+[dotnet/fsharp#20494](https://github.com/dotnet/fsharp/pull/20494)).
+The sharing PR's 10-project ReSharper.FSharp benchmark reports retained memory decreasing from 1,547 MB to 1,002 MB (35.2%).
+Tool authors can opt out with `shareImportedAssemblies = false` on `FSharpChecker.Create`.
+
+These measurements describe their specific workloads, not peak process memory or a universal build-time speedup.
+The compiler improvements are enabled by default.
+Thank you [@auduchinok](https://github.com/auduchinok) for this contribution!
+
+## Bound concurrent asynchronous work
+
+`Async.parallelLimit` runs asynchronous computations with a maximum number in flight and returns results in input order.
+Use it to limit concurrent work in a batch without writing a separate concurrency limiter.
+Related helpers include `Async.parallelDoLimit`, `Task.parallelLimit`, and sequential variants
+([dotnet/fsharp#20294](https://github.com/dotnet/fsharp/pull/20294)).
+The task helpers accept functions that start tasks, so the limit applies before the work starts.
+
+```fsharp
+let results =
+    [ for i in 1..5 -> async { return i * i } ]
+    |> Async.parallelLimit 2
+    |> Async.RunSynchronously
+// [| 1; 4; 9; 16; 25 |]
+```
+
+Thank you [@bartelink](https://github.com/bartelink) for this contribution!
 
 ## Trimming and Native AOT improvements
 
@@ -128,46 +205,6 @@ let value = matrix[1, 2] // 12
 
 Compiled F# assemblies now embed their metadata-trimming rules, including when assemblies are linked
 ([dotnet/fsharp#20527](https://github.com/dotnet/fsharp/pull/20527)).
-These changes do not require the preview language version.
-
-## Preview catch-up: extension members and operators
-
-> This feature requires `<LangVersion>preview</LangVersion>` or `--langversion:preview`. It was already available in RC 1.
-
-Extension members can satisfy statically resolved type parameter (SRTP) constraints, including constraints used by operators.
-This feature was omitted from the [RC 1 article](../rc1/fsharp.md), rather than newly implemented in RC 2
-([dotnet/fsharp#19602](https://github.com/dotnet/fsharp/pull/19602)).
-
-```fsharp
-type System.String with
-    static member (*) (s: string, n: int) =
-        System.String.Concat(Array.replicate n s)
-
-let repeated = "ha" * 3 // "hahaha"
-
-type System.Int32 with
-    static member (++) (a: int, b: int) = a + b + 1
-
-let inline incAdd (x: ^T) (y: ^T) = x ++ y
-let result = incAdd 3 4 // 8
-```
-
-The first call resolves an extension operator on a concrete type.
-The second resolves one through a generic inline function.
-The preview requirement applies to extension-based constraint resolution, not to ordinary extension-member calls.
-Thank you [@gusty](https://github.com/gusty) for this contribution!
-
-## Other preview feature status
-
-> Runtime-async compiler support requires `<LangVersion>preview</LangVersion>` or `--langversion:preview` in RC 2.
-
-RC 2 adds compiler support for .NET runtime-async intrinsics for custom computation-expression builder authors
-([dotnet/fsharp#20235](https://github.com/dotnet/fsharp/pull/20235)).
-This also requires a target/runtime that supports runtime-async.
-The stock `task {}` and `async {}` builders do not use this path in RC 2.
-
-[Record constructors](../rc1/fsharp.md#record-constructors) remain **preview**, unchanged from RC 1.
-The other features described in the RC 1 article are not reannounced here.
 
 ## Breaking changes from .NET 10
 
