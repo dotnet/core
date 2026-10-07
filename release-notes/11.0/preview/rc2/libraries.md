@@ -20,7 +20,13 @@ reader.ReadStartArray();
 int first = reader.ReadInt32(); // 10
 
 if (reader.PeekState() == CborReaderState.NeedsMoreData)
-    reader.SlideData(nextChunk, isFinalBlock: true);
+{
+    if (reader.BytesRemaining == 0)
+        reader.SlideData(nextChunk, isFinalBlock: true);
+    else
+        throw new Exception("Buffer management omitted from the sample.");
+}
+
 int second = reader.ReadInt32(); // 20
 reader.ReadEndArray();
 ```
