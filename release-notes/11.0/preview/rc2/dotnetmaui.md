@@ -26,8 +26,9 @@ dotnet new maui -n MyApp --ui csharp
 ```
 
 The `maui` template can now generate `App.cs`, `AppShell.cs`, and `MainPage.cs`
-without XAML files or an additional C# UI library. XAML remains the default.
-The `--sample-content` option remains XAML-only
+with Shell and page UI authored in C#, without an additional C# UI library.
+`App.xaml` and the XAML style dictionaries remain for application resources.
+XAML UI remains the default. The `--sample-content` option remains XAML-only
 ([dotnet/maui#34864](https://github.com/dotnet/maui/pull/34864)).
 
 The multi-project template also supports an optional Avalonia desktop project:
@@ -88,9 +89,19 @@ for this contribution!
 
 ## XAML authoring and Hot Reload
 
-With source-generated XAML, C# expressions now support type references through
-XML namespace prefixes and attached bindable property access. These expressions
-are not supported by XamlC or runtime inflation. For example:
+To use C# expressions, enable XAML source generation and preview features in
+the project:
+
+```xml
+<PropertyGroup>
+  <MauiXamlInflator>SourceGen</MauiXamlInflator>
+  <EnablePreviewFeatures>true</EnablePreviewFeatures>
+</PropertyGroup>
+```
+
+C# expressions now support type references through XML namespace prefixes and
+attached bindable property access. These expressions are not supported by
+XamlC or runtime inflation. For example:
 
 ```xaml
 <ContentPage
@@ -201,8 +212,12 @@ for the complete set of changes.
   across UIKit, AppKit, AVFoundation, WebKit, and other frameworks
   ([dotnet/macios#26607](https://github.com/dotnet/macios/pull/26607)).
 - **Custom HTTP proxies** are now supported in `NSUrlSessionHandler`.
-  Configure `Proxy` with an `IWebProxy`, use proxy credentials, or set
-  `UseProxy=false` to bypass the system proxy configuration
+  Configure `Proxy` with an `IWebProxy`, or set `UseProxy=false` to bypass
+  the system proxy configuration. Proxy selection uses the first request's
+  destination for the whole handler session. Use separate handlers for
+  destinations that require different proxy settings. Proxy credentials
+  apply to HTTPS destinations through CONNECT tunnels, not plain HTTP
+  destinations
   ([dotnet/macios#26021](https://github.com/dotnet/macios/pull/26021)).
 - **Info.plist entries from MSBuild** can now be added, overridden, or removed
   with typed `AppManifestEntry` items. Boolean, string, and string-array
@@ -273,11 +288,15 @@ for the complete set of changes.
   obsoletion diagnostics
   ([dotnet/android#12682](https://github.com/dotnet/android/pull/12682)).
 - **Apple desktop architecture defaults**: Release builds for macOS and
-  Mac Catalyst with `SupportedOSPlatformVersion` set to `27.0` or later
+  Mac Catalyst with an effective deployment target of `27.0` or later
   now default to the host architecture, rather than a universal app, when no
-  runtime identifier is specified. Set `RuntimeIdentifiers` explicitly if
-  you need both architectures. Earlier deployment targets retain the
-  universal default
+  runtime identifier is specified. The SDK reads `SupportedOSPlatformVersion`
+  during SDK props evaluation, or uses `TargetPlatformVersion` if that property
+  isn't available yet. Earlier deployment targets retain the universal
+  default only when specified at that stage. Set the deployment target or
+  explicit `RuntimeIdentifiers` early, in `Directory.Build.props` or on the
+  command line. A lower deployment target set later in the project file
+  doesn't guarantee a universal build
   ([dotnet/macios#26731](https://github.com/dotnet/macios/pull/26731)).
 
 ## Contributors
