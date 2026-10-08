@@ -5990,7 +5990,9 @@
       "commit": "dotnet@00b0142",
       "is_security": false,
       "product": "dotnet-msbuild",
-      "local_repo_commit": "msbuild@65f75f9"
+      "local_repo_commit": "msbuild@65f75f9",
+      "score": 7,
+      "score_reason": "Change Wave 18.11's optimized wildcard matching improved full isolated SDK-style project evaluation by 10–13% and allocations by 16–34% in the final Windows 11 .NET 11 ShortRun workload matrix. The result is limited to the tested project shapes and requires the wave to be enabled."
     },
     {
       "id": "msbuild@c9b4d14",
@@ -6148,7 +6150,9 @@
       "commit": "dotnet@ac25bd1",
       "is_security": false,
       "product": "dotnet-msbuild",
-      "local_repo_commit": "msbuild@f8839a0"
+      "local_repo_commit": "msbuild@f8839a0",
+      "score": 5,
+      "score_reason": "Property/item/metadata expansion microbenchmarks show gains, including up to 59.3% in a mixed 100-item .NET 11 case, but do not establish a corresponding full project-evaluation or build-time gain. Useful context for the performance cluster, not a standalone reader story."
     },
     {
       "id": "msbuild@1168e26",
@@ -7428,7 +7432,9 @@
       "commit": "dotnet@b26f93f",
       "is_security": false,
       "product": "dotnet-nuget",
-      "local_repo_commit": "nuget-client@6bee687"
+      "local_repo_commit": "nuget-client@6bee687",
+      "score": 4,
+      "score_reason": "Advisory package-ID warning on direct package add helps authors catch non-standard IDs before adoption"
     },
     {
       "id": "nuget-client@a5295d7",
@@ -7438,7 +7444,9 @@
       "commit": "dotnet@b26f93f",
       "is_security": false,
       "product": "dotnet-nuget",
-      "local_repo_commit": "nuget-client@a5295d7"
+      "local_repo_commit": "nuget-client@a5295d7",
+      "score": 3,
+      "score_reason": "Extends package-ID warning to non-SDK pack flows; narrower than standard SDK workflows"
     },
     {
       "id": "nuget-client@c3dfa23",
@@ -7468,7 +7476,9 @@
       "commit": "dotnet@e9cae4a",
       "is_security": false,
       "product": "dotnet-nuget",
-      "local_repo_commit": "nuget-client@b2be1e3"
+      "local_repo_commit": "nuget-client@b2be1e3",
+      "score": 3,
+      "score_reason": "Narrow restore guard for floating versions when cooldown leaves no eligible version"
     },
     {
       "id": "nuget-client@bb52356",
