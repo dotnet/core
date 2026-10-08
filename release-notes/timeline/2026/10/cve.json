@@ -4,7 +4,7 @@
   "disclosures": [
     {
       "id": "CVE-2026-102870",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "TBD",
       "weakness": "CWE-94",
       "timeline": {
         "disclosure": {
@@ -23,7 +23,7 @@
         "acknowledgments": []
       },
       "description": [
-        "The Blazor WebAssembly debug proxy embeds attacker-controlled ToString(), description, and class-name values into generated C# without consistently escaping them. When a developer evaluates an expression while debugging, the value can escape the generated string literal and execute code on the developer\u0027s machine."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -39,8 +39,44 @@
       }
     },
     {
+      "id": "CVE-2026-105016",
+      "problem": "TBD",
+      "weakness": "TBD",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-10-13",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-10-13",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "critical",
+        "impact": "TBD",
+        "acknowledgments": []
+      },
+      "description": [
+        "TBD"
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "score": 9.8,
+        "severity": "critical"
+      }
+    },
+    {
       "id": "CVE-2026-58280",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -59,7 +95,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Signed XML fixes add input-depth and operation-count limits, prohibit DTD processing by default, validate entity references, bound encrypted-data candidate processing, and cap attributes and namespaces used by C14N transforms."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -76,7 +112,7 @@
     },
     {
       "id": "CVE-2026-66822",
-      "problem": ".NET Information Disclosure Vulnerability",
+      "problem": "TBD",
       "weakness": "CWE-201",
       "timeline": {
         "disclosure": {
@@ -95,7 +131,7 @@
         "acknowledgments": []
       },
       "description": [
-        "SocketsHttpHandler can retain a Proxy-Authorization header across an HTTP redirect and leak basic proxy credentials to the destination server."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -112,7 +148,7 @@
     },
     {
       "id": "CVE-2026-69651",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -131,7 +167,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Signed XML fixes add input-depth and operation-count limits, prohibit DTD processing by default, validate entity references, bound encrypted-data candidate processing, and cap attributes and namespaces used by C14N transforms."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -148,7 +184,7 @@
     },
     {
       "id": "CVE-2026-70007",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -167,7 +203,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Crafted WPF pixel-shader bytecode can desynchronize the two parsing passes in CPSTrans::Initialize, causing heap out-of-bounds writes or reads."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -186,7 +222,7 @@
     },
     {
       "id": "CVE-2026-70035",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -205,7 +241,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Restrictive XAML and XPS security fixes block unsafe URI fetching and navigation, propagate untrusted-input state through hyperlink navigation, add TrueType font protection and XAML nesting-depth limits, and avoid caching positive DNS zone-policy decisions."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -224,7 +260,7 @@
     },
     {
       "id": "CVE-2026-70159",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -243,7 +279,7 @@
         "acknowledgments": []
       },
       "description": [
-        "SignalR stateful reconnect clients can indefinitely block broadcasts through MessageBuffer.ResendAsync backpressure and retain associated resources."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -260,7 +296,7 @@
     },
     {
       "id": "CVE-2026-70161",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -279,7 +315,7 @@
         "acknowledgments": []
       },
       "description": [
-        "An attacker-controlled workload manifest ID can traverse paths under %ProgramData%\\dotnet and import attacker-controlled MSBuild targets during elevated workload operations."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -298,7 +334,7 @@
     },
     {
       "id": "CVE-2026-70162",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -317,7 +353,7 @@
         "acknowledgments": []
       },
       "description": [
-        "On Windows, EnvelopedCms.Decode can perform quadratic work while processing attacker-supplied CMS or PKCS#7 attributes, causing pre-authentication CPU exhaustion."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -336,7 +372,7 @@
     },
     {
       "id": "CVE-2026-70165",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -355,7 +391,7 @@
         "acknowledgments": []
       },
       "description": [
-        "A junction planted over the workload startup-marker path can redirect an elevated write into the Windows Common Startup directory and enable code execution."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -374,7 +410,7 @@
     },
     {
       "id": "CVE-2026-70174",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -393,7 +429,7 @@
         "acknowledgments": []
       },
       "description": [
-        "WPF XPS hyperlink navigation can bypass URI restrictions and reach an attacker-controlled ObjectDataProvider, enabling remote code execution after user interaction."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -412,7 +448,7 @@
     },
     {
       "id": "CVE-2026-70175",
-      "problem": ".NET Information Disclosure Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -431,7 +467,7 @@
         "acknowledgments": []
       },
       "description": [
-        "ASP.NET Core Identity password-reset and confirmation flows can send mail to the unvalidated request address instead of the user\u0027s stored canonical address."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -448,7 +484,7 @@
     },
     {
       "id": "CVE-2026-70179",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -467,7 +503,7 @@
         "acknowledgments": []
       },
       "description": [
-        "ASP.NET Core Negotiate LDAP authentication can associate an authenticated identity with an unintended LDAP principal when the LDAP result is not verified against the Kerberos principal SID."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -484,7 +520,7 @@
     },
     {
       "id": "CVE-2026-70181",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -503,7 +539,7 @@
         "acknowledgments": []
       },
       "description": [
-        "FileBufferingReadStream eagerly rents buffers during multipart processing, allowing memory exhaustion and denial of service."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -520,7 +556,7 @@
     },
     {
       "id": "CVE-2026-70183",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "CWE-863",
       "timeline": {
         "disclosure": {
@@ -539,7 +575,7 @@
         "acknowledgments": []
       },
       "description": [
-        "A stale asynchronous authorization result in Blazor AuthorizeRouteView can be applied after navigation or an authorization-state change, bypassing the current [Authorize] decision."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -556,7 +592,7 @@
     },
     {
       "id": "CVE-2026-70186",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -575,7 +611,7 @@
         "acknowledgments": []
       },
       "description": [
-        "An unauthenticated remote attacker can send crafted HTTP/3 reset or abort sequences that deadlock Kestrel connection handling. Repeated requests can cause excessive blocked-thread creation and exhaust server resources, resulting in denial of service. The application must expose an HTTP/3 endpoint to the attacker."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -592,7 +628,7 @@
     },
     {
       "id": "CVE-2026-70188",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -611,7 +647,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Kestrel accepts newline characters in HTTP/2 request trailers and values retrieved from the dynamic HPACK table instead of treating them as malformed."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -628,7 +664,7 @@
     },
     {
       "id": "CVE-2026-70190",
-      "problem": ".NET Elevation of Privilege Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -647,7 +683,7 @@
         "acknowledgments": []
       },
       "description": [
-        "The elevated SDK workload installer can follow a junction or symlink under %ProgramData%\\dotnet, enabling local privilege escalation."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -666,7 +702,7 @@
     },
     {
       "id": "CVE-2026-70194",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -685,7 +721,7 @@
         "acknowledgments": []
       },
       "description": [
-        ".NET 11 post-handshake TLS client authentication can fail to verify the client certificate, allowing mutual-authentication requirements to be bypassed."
+        "TBD"
       ],
       "platforms": [
         "linux",
@@ -703,7 +739,7 @@
     },
     {
       "id": "CVE-2026-70196",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -722,7 +758,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Incrementally arriving form data can cause FormPipeReader to repeatedly rescan the full buffered body, resulting in quadratic CPU consumption and denial of service."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -738,46 +774,8 @@
       }
     },
     {
-      "id": "CVE-2026-70197",
-      "problem": ".NET Remote Code Execution Vulnerability",
-      "weakness": "TBD",
-      "timeline": {
-        "disclosure": {
-          "date": "2026-10-13",
-          "description": "Disclosed"
-        },
-        "fixed": {
-          "date": "2026-10-13",
-          "description": "Fixed"
-        }
-      },
-      "cna": {
-        "name": "microsoft",
-        "severity": "high",
-        "impact": "Remote Code Execution",
-        "acknowledgments": []
-      },
-      "description": [
-        "On Windows, reusing a SocketAsyncEventArgs instance across IPv4 and IPv6 datagram sockets can retain an undersized cached native address buffer, allowing an unauthenticated out-of-bounds write during ReceiveFromAsync."
-      ],
-      "platforms": [
-        "windows"
-      ],
-      "architectures": [
-        "x86",
-        "x64",
-        "arm64"
-      ],
-      "cvss": {
-        "version": "3.1",
-        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-        "score": 8.1,
-        "severity": "high"
-      }
-    },
-    {
       "id": "CVE-2026-83520",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -796,7 +794,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Restrictive XAML and XPS security fixes block unsafe URI fetching and navigation, propagate untrusted-input state through hyperlink navigation, add TrueType font protection and XAML nesting-depth limits, and avoid caching positive DNS zone-policy decisions."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -815,7 +813,7 @@
     },
     {
       "id": "CVE-2026-84008",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -834,7 +832,7 @@
         "acknowledgments": []
       },
       "description": [
-        "SignedCms.CheckSignature can repeatedly reparse attacker-controlled X.509 data, causing unauthenticated quadratic CPU exhaustion."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -851,7 +849,7 @@
     },
     {
       "id": "CVE-2026-85363",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -870,7 +868,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Attacker-controlled XPS glyph coordinates can overflow destination pointer arithmetic in CD3DGlyphBank::RectFillAlpha, causing an out-of-bounds write and process termination."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -889,7 +887,7 @@
     },
     {
       "id": "CVE-2026-85790",
-      "problem": ".NET Information Disclosure Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -908,7 +906,7 @@
         "acknowledgments": []
       },
       "description": [
-        "MsQuic 2.5.11 security servicing bundle. Multiple Important MsQuic cases are delivered through one native-binary dependency update."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -926,7 +924,7 @@
     },
     {
       "id": "CVE-2026-87697",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -945,7 +943,7 @@
         "acknowledgments": []
       },
       "description": [
-        "WPF XPS synthetic hyperlinks exposed through UI Automation can bypass restrictive navigation checks and reach attacker-controlled content, enabling remote code execution after user interaction."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -964,7 +962,7 @@
     },
     {
       "id": "CVE-2026-88092",
-      "problem": ".NET Information Disclosure Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -983,7 +981,7 @@
         "acknowledgments": []
       },
       "description": [
-        "An aborted Kestrel HTTP/1 connection can reparse unread request-body bytes as another request, creating a request-smuggling or desynchronization path."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1000,7 +998,7 @@
     },
     {
       "id": "CVE-2026-92707",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1019,7 +1017,7 @@
         "acknowledgments": []
       },
       "description": [
-        "SignalR\u0027s MessagePack protocol can consume excessive memory while deserializing deeply nested attacker-controlled arrays, resulting in unauthenticated remote denial of service."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1036,7 +1034,7 @@
     },
     {
       "id": "CVE-2026-96222",
-      "problem": ".NET Spoofing Vulnerability",
+      "problem": "TBD",
       "weakness": "CWE-295",
       "timeline": {
         "disclosure": {
@@ -1055,7 +1053,7 @@
         "acknowledgments": []
       },
       "description": [
-        "KeyInfoX509Data can accept serialized certificate formats containing attacker-controlled chain metadata instead of requiring a plain X.509 certificate, contributing to certificate-forgery and token-spoofing paths."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1072,7 +1070,7 @@
     },
     {
       "id": "CVE-2026-96224",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1091,7 +1089,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Crafted WPF pixel-shader bytecode can desynchronize the two parsing passes in CPSTrans::Initialize, causing heap out-of-bounds writes or reads."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -1110,7 +1108,7 @@
     },
     {
       "id": "CVE-2026-96225",
-      "problem": ".NET Elevation of Privilege Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1129,7 +1127,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Unix named-mutex and shared-memory paths can be manipulated through insecure global directories, symlink races, and unsafe permission changes, allowing local attackers to truncate or overwrite files, widen directory permissions, or elevate privileges."
+        "TBD"
       ],
       "platforms": [
         "linux",
@@ -1147,7 +1145,7 @@
     },
     {
       "id": "CVE-2026-96229",
-      "problem": ".NET Information Disclosure Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1166,7 +1164,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Restrictive XAML and XPS security fixes block unsafe URI fetching and navigation, propagate untrusted-input state through hyperlink navigation, add TrueType font protection and XAML nesting-depth limits, and avoid caching positive DNS zone-policy decisions."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -1185,7 +1183,7 @@
     },
     {
       "id": "CVE-2026-96230",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "TBD",
       "weakness": "CWE-79",
       "timeline": {
         "disclosure": {
@@ -1204,7 +1202,7 @@
         "acknowledgments": []
       },
       "description": [
-        "The Blazor WebAssembly development-server debug page can reflect unencoded exception text, allowing cross-origin script injection through the unauthenticated /_framework/debug endpoint used by dotnet watch."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1221,7 +1219,7 @@
     },
     {
       "id": "CVE-2026-96231",
-      "problem": ".NET Elevation of Privilege Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1240,7 +1238,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Unix named-mutex and shared-memory paths can be manipulated through insecure global directories, symlink races, and unsafe permission changes, allowing local attackers to truncate or overwrite files, widen directory permissions, or elevate privileges."
+        "TBD"
       ],
       "platforms": [
         "linux",
@@ -1258,7 +1256,7 @@
     },
     {
       "id": "CVE-2026-96232",
-      "problem": ".NET Information Disclosure Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1277,7 +1275,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Restrictive XAML and XPS security fixes block unsafe URI fetching and navigation, propagate untrusted-input state through hyperlink navigation, add TrueType font protection and XAML nesting-depth limits, and avoid caching positive DNS zone-policy decisions."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -1296,7 +1294,7 @@
     },
     {
       "id": "CVE-2026-96233",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1315,7 +1313,7 @@
         "acknowledgments": []
       },
       "description": [
-        "DateTime Hebrew-number parsing can read outside expected stack bounds and terminate the process."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1332,7 +1330,7 @@
     },
     {
       "id": "CVE-2026-96234",
-      "problem": ".NET Information Disclosure Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1351,7 +1349,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Restrictive XAML and XPS security fixes block unsafe URI fetching and navigation, propagate untrusted-input state through hyperlink navigation, add TrueType font protection and XAML nesting-depth limits, and avoid caching positive DNS zone-policy decisions."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -1370,7 +1368,7 @@
     },
     {
       "id": "CVE-2026-96235",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1389,7 +1387,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Crafted WPF pixel-shader bytecode can desynchronize the two parsing passes in CPSTrans::Initialize, causing heap out-of-bounds writes or reads."
+        "TBD"
       ],
       "platforms": [
         "windows"
@@ -1408,7 +1406,7 @@
     },
     {
       "id": "CVE-2026-96236",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1427,7 +1425,7 @@
         "acknowledgments": []
       },
       "description": [
-        "ASP.NET Core request-localization fallback can add attacker-supplied synthetic culture names to the runtime\u0027s global cache, allowing unauthenticated requests to cause unbounded memory growth and denial of service."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1444,7 +1442,7 @@
     },
     {
       "id": "CVE-2026-96237",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1463,7 +1461,7 @@
         "acknowledgments": []
       },
       "description": [
-        "SDK workload package downloads and integrity-repair paths can bypass NuGet Package Source Mapping, allowing packages to be reacquired from an unmapped attacker-controlled feed and potentially enabling remote code execution."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1480,7 +1478,7 @@
     },
     {
       "id": "CVE-2026-96238",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1499,7 +1497,7 @@
         "acknowledgments": []
       },
       "description": [
-        "dotnet new install can acquire a template package from a feed that is not permitted by NuGet Package Source Mapping, bypassing the configured feed trust boundary."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1516,7 +1514,7 @@
     },
     {
       "id": "CVE-2026-96239",
-      "problem": ".NET Elevation of Privilege Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1535,7 +1533,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Unix named-mutex and shared-memory paths can be manipulated through insecure global directories, symlink races, and unsafe permission changes, allowing local attackers to truncate or overwrite files, widen directory permissions, or elevate privileges."
+        "TBD"
       ],
       "platforms": [
         "linux",
@@ -1553,7 +1551,7 @@
     },
     {
       "id": "CVE-2026-96956",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1572,7 +1570,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Deeply nested CBOR map keys can trigger repeated key hashing in CborReader, causing unauthenticated quadratic CPU consumption and denial of service."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1589,7 +1587,7 @@
     },
     {
       "id": "CVE-2026-96957",
-      "problem": ".NET Security Feature Bypass Vulnerability",
+      "problem": "TBD",
       "weakness": "CWE-347",
       "timeline": {
         "disclosure": {
@@ -1608,7 +1606,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Signature verification for .NET file-based apps can fail to enforce the expected trust decision."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1625,7 +1623,7 @@
     },
     {
       "id": "CVE-2026-96958",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1644,7 +1642,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Signed XML fixes add input-depth and operation-count limits, prohibit DTD processing by default, validate entity references, bound encrypted-data candidate processing, and cap attributes and namespaces used by C14N transforms."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1661,7 +1659,7 @@
     },
     {
       "id": "CVE-2026-96959",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1680,7 +1678,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Signed XML fixes add input-depth and operation-count limits, prohibit DTD processing by default, validate entity references, bound encrypted-data candidate processing, and cap attributes and namespaces used by C14N transforms."
+        "TBD"
       ],
       "platforms": [
         "all"
@@ -1697,7 +1695,7 @@
     },
     {
       "id": "CVE-2026-96960",
-      "problem": ".NET Denial of Service Vulnerability",
+      "problem": "TBD",
       "weakness": "TBD",
       "timeline": {
         "disclosure": {
@@ -1716,7 +1714,7 @@
         "acknowledgments": []
       },
       "description": [
-        "Signed XML fixes add input-depth and operation-count limits, prohibit DTD processing by default, validate entity references, bound encrypted-data candidate processing, and cap attributes and namespaces used by C14N transforms."
+        "TBD"
       ],
       "platforms": [
         "all"
