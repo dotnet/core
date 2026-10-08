@@ -20,7 +20,7 @@ Browse the .NET 11 RC 2 release notes by component:
 - Container images
 - EF Core & Data
 - Windows Forms
-- WPF
+- [WPF](./wpf.md)
 
 ## Get Started
 
