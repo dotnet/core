@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="456" viewBox="0 0 1100 456" role="img" aria-labelledby="title desc">
+<title id="title">Less managed heap retained after checking</title><desc id="desc">Less managed heap retained after checking. Actual MB; zero baseline. FsAutoComplete: Old (SDK 10) 571.1 MB, SDK 11 RC1 488.7 MB, New (source) 398.6 MB. Oxpecker: Old (SDK 10) 113.2 MB, SDK 11 RC1 88.5 MB, New (source) 78.5 MB.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif;font-size:16px;fill:#172b3a}.title{font-size:27px;font-weight:700}.label{font-weight:600}.small{font-size:14px;fill:#405466}.grid{stroke:#d7e0e6;stroke-width:1}.axis{stroke:#6b7d8a;stroke-width:1}</style>
+<rect width="1100" height="456" fill="#fff"/>
+<text x="28" y="44" class="title" text-anchor="start">Less managed heap retained after checking</text>
+<text x="28" y="77" class="small" text-anchor="start">Live managed heap after full GC, in MB. All projects share the same scale.</text>
+<line x1="250" y1="110" x2="250" y2="364" class="axis"/>
+<text x="250" y="100" class="small" text-anchor="middle">0</text>
+<line x1="366.66666666666663" y1="110" x2="366.66666666666663" y2="364" class="grid"/>
+<text x="366.66666666666663" y="100" class="small" text-anchor="middle">100</text>
+<line x1="483.3333333333333" y1="110" x2="483.3333333333333" y2="364" class="grid"/>
+<text x="483.3333333333333" y="100" class="small" text-anchor="middle">200</text>
+<line x1="600" y1="110" x2="600" y2="364" class="grid"/>
+<text x="600" y="100" class="small" text-anchor="middle">300</text>
+<line x1="716.6666666666666" y1="110" x2="716.6666666666666" y2="364" class="grid"/>
+<text x="716.6666666666666" y="100" class="small" text-anchor="middle">400</text>
+<line x1="833.3333333333334" y1="110" x2="833.3333333333334" y2="364" class="grid"/>
+<text x="833.3333333333334" y="100" class="small" text-anchor="middle">500</text>
+<line x1="950" y1="110" x2="950" y2="364" class="grid"/>
+<text x="950" y="100" class="small" text-anchor="middle">600</text>
+<text x="28" y="136" class="label" text-anchor="start">FsAutoComplete</text>
+<text x="238" y="164" class="small" text-anchor="end">Old (SDK 10)</text>
+<rect x="250" y="148" width="666.284" height="19" fill="#64748b"/>
+<text x="925.2835946666667" y="164" class="label" text-anchor="start">571.1 MB</text>
+<text x="238" y="190" class="small" text-anchor="end">SDK 11 RC1</text>
+<rect x="250" y="174" width="570.187" height="19" fill="#2563a6"/>
+<text x="829.1867826666667" y="190" class="label" text-anchor="start">488.7 MB</text>
+<text x="238" y="216" class="small" text-anchor="end">New (source)</text>
+<rect x="250" y="200" width="465.039" height="19" fill="#087f73"/>
+<text x="724.0394980000001" y="216" class="label" text-anchor="start">398.6 MB</text>
+<text x="28" y="264" class="label" text-anchor="start">Oxpecker</text>
+<text x="238" y="292" class="small" text-anchor="end">Old (SDK 10)</text>
+<rect x="250" y="276" width="132.023" height="19" fill="#64748b"/>
+<text x="391.0225713333333" y="292" class="label" text-anchor="start">113.2 MB</text>
+<text x="238" y="318" class="small" text-anchor="end">SDK 11 RC1</text>
+<rect x="250" y="302" width="103.217" height="19" fill="#2563a6"/>
+<text x="362.21675" y="318" class="label" text-anchor="start">88.5 MB</text>
+<text x="238" y="344" class="small" text-anchor="end">New (source)</text>
+<rect x="250" y="328" width="91.568" height="19" fill="#087f73"/>
+<text x="350.5681853333333" y="344" class="label" text-anchor="start">78.5 MB</text>
+<text x="28" y="406" class="small" text-anchor="start">Retained managed heap (MB), measured while the checker, options and results remain alive.</text>
+<text x="28" y="432" class="small" text-anchor="start">Old = released SDK 10 generation. New = source-built F# 11. Medians of 12 measured runs.</text>
+</svg>
