@@ -16,6 +16,12 @@ The set of components and their release notes files is defined in [`component-ma
 - Never link an entry to a file absent from that branch. Keep unlinked entries for pending component PRs; once all component PRs merge, verify that every expected entry links to its existing file. Retain push and PR link checks throughout.
 - The milestone landing page `{version}.md` (for example, `11.0.0-preview.4.md`) is **not produced by this skill**. The .NET release team generates it through separate artifacts-publishing automation, so the agent leaves it alone on every branch.
 
+Publication scope is the component article, its own index link, and explicitly approved companion reports or required media.
+Validation alone does not authorize repository fixtures or other experiment artifacts.
+Add or change maintained fixtures only when explicitly requested or already agreed in the task scope.
+Do not silently delete existing files.
+Skill-policy updates belong in a separate documentation PR, not a release-article PR.
+
 ## Creating the PRs
 
 Order matters, and two of these steps fail silently.
@@ -25,7 +31,7 @@ Order matters, and two of these steps fail silently.
    the component branches but **not** the base branch — verifying with that pattern reports success
    while the base branch is still local-only.
 2. **Confirm each component branch starts from the base branch commit.** Each component PR should
-   show only its component file, any matching validation samples, and its single README link change;
+   show only its component file, its single README link change, and approved companion material or maintained fixtures;
    it should not restate shared metadata or other components' entries. If the base branch moves,
    merge it into the component branch before updating the entry and verify the diff again.
 3. **Open the base PR against `main`**, then the component PRs against the base branch.
@@ -36,6 +42,15 @@ Order matters, and two of these steps fail silently.
    to pending files; a component branch must add its link and file together. If adjacent README
    edits conflict as owners merge, retain all previously merged links and add only the current
    component's link.
+
+### Updating and reporting
+
+- Update an existing PR's head branch only. Preserve its draft state and base unless explicitly authorized otherwise.
+- Use ordinary commits and non-force pushes. Do not amend commits or publish directly to the target branch or `main`.
+- Leave promotion and merging to the authorized owner. Do not merge as part of a documentation edit.
+- Report the actual branch and commit SHA. Distinguish local, committed, pushed, and merged state.
+- Report whole-PR file counts and additions/deletions against the base, not only the latest patch.
+- Bound research to the requested changes. For prose-only edits, use the smallest existing Markdown and reference checks, not code builds.
 
 ### gh pr edit does not work on this repo
 

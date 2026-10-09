@@ -31,7 +31,7 @@ Review these, in order:
 2. `features.json` — the shipped-change entries with scored candidates
 3. Draft markdown files (`libraries.md`, `runtime.md`, `sdk.md`, etc.) from each
    component PR branch if unmerged, or the milestone base branch if merged
-4. Editorial examples in `references/examples/`
+4. Editorial examples in `references/examples/` and published predecessor articles for the component
 5. The scoring and quality bar references:
    - `../editorial-scoring/SKILL.md`
    - `references/feature-scoring.md`
@@ -54,6 +54,9 @@ entry's `score_reason`, adjusting its score if the review changes the
 assessment. Do not treat a PR's presence in `changes.json` as a requirement
 to give it a release-note section; apply the reader-centric rubric.
 
+Inspect pinned source and tests for important omissions and meaningful usage scenarios.
+Compare against prior announcements to remove unchanged material and verify the chronology of explicitly requested catch-up coverage.
+
 ## Core review questions
 
 Use the shared rubric from [`../editorial-scoring/SKILL.md`](../editorial-scoring/SKILL.md)
@@ -66,12 +69,13 @@ rather than inventing a new one here. In particular:
 
 ### Example check
 
-Compare the draft against the component examples:
+Read the component examples and actual predecessor articles. Review these dimensions separately:
 
-- Does the length match the importance?
-- Are medium-value items grouped instead of getting their own heavyweight sections?
-- Are performance stories backed by evidence?
-- Does the draft teach, not just enumerate?
+- **Voice** — positive, concrete developer possibilities compared with the predecessors
+- **Style** — established terminology, structure, and length proportional to importance
+- **Selection** — feature importance, explicit priorities, order, omissions, and deduplication
+
+Check grouped items and performance evidence through the existing rubric and [editorial rules](../release-notes/references/editorial-rules.md).
 
 ## Common failure modes
 
@@ -99,12 +103,15 @@ Give both reviewers the same inputs and the same requested output:
 
 Then synthesize the overlap and disagreements. Treat consensus as a strong signal, but do **not** turn this into a blind vote — fidelity to `changes.json`, the shared `editorial-scoring` rubric, and the repo's editorial rules still wins.
 
+Record which files each reviewer actually read, actionable findings, and resulting changes.
+Naming files in a prompt is not proof of comparison. Do not claim a multi-model panel unless it ran.
+
 ## Reviewer checklist
 
 Do not ask reviewers the vague question "do you like this?" Give them the same
 specific checks instead:
 
-1. **Which headings still sound vague, passive, anthropomorphic, or promotional?**
+1. **Which headings replace established names with branding, or remain vague, passive, or anthropomorphic?**
 2. **Which sections fail the 80/20 reader-value test and should be cut, grouped, or demoted?**
 3. **Which sentences infer feelings or outcomes (`trust`, `confidence`, `easier`, `better`) instead of stating the concrete change?**
 4. **Which sections drift into API-inventory mode instead of teaching a user-facing story?**
@@ -115,7 +122,11 @@ specific checks instead:
 9. **Is the wording conventional, or is it inventing non-standard phrasing or terms?**
 10. **Are the subject and its adjective or adverb paired in a familiar way?**
 11. **Would this phrasing seem normal in release notes for another developer platform?**
-12. **If `release-notes/features.json` lists this feature, does the section begin with the standard preview blockquote?**
+12. **Are preview opt-ins defined once, affected sections labeled, and default-enabled changes distinct? Are actual per-feature requirements and metadata-derived warnings preserved?**
+13. **Is the audience clear? Are shipped foundations distinguished from test-only integrations, unshipped builders, and unchanged stock behavior?**
+14. **Do performance stories separate application and compiler audiences, metrics, baselines, and cohorts while preserving regressions?**
+15. **Does publication follow the approved article, index, report/media, and maintained-fixture scope in [PR layout](../release-notes/references/pr-layout.md)?**
+16. **Do relative links, anchors, images, and remote source targets resolve? Are unavailable checks reported rather than counted as passed?**
 
 Ask reviewers to answer with file + heading + issue + suggested rewrite. This
 produces actionable review instead of general taste feedback.

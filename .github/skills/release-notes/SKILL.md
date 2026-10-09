@@ -28,6 +28,24 @@ changes. Do not substitute a schema stub or defer feature selection to the
 component PRs. Give component writers the relevant candidate entries with
 their scores and reasons rather than a slim list of titles and labels.
 
+Read previous component announcements before selecting or rewriting features.
+Use their voice, structure, length, and selection as references.
+Audit the pinned shipped changes and source tests. Apply the [quality bar](references/quality-bar.md)
+for omission discovery and explicitly requested catch-up coverage.
+Follow the [editorial rules](references/editorial-rules.md) for naming,
+audience, evidence, ordering, and companion reports.
+
+Use the [format template](references/format-template.md) for article-level
+preview setup and accurate section labels. Preserve each feature's actual
+requirements and metadata-derived safety notices.
+
+Validate claims through `validate-code-samples`, but keep temporary projects,
+checkers, and results in session or scratch storage by default.
+Commit maintained fixtures only when explicitly requested or already agreed
+in the task scope. Follow [PR layout](references/pr-layout.md) for publication
+scope and source-branch updates. Bound research to the changed claims.
+For prose-only edits, run the smallest existing documentation checks, not code builds.
+
 Before finalizing the milestone, run `review-release-notes` against the
 `changes.json`, `features.json`, and completed component drafts on their
 branches (or the base branch after they merge). Resolve noteworthy omissions
