@@ -231,4 +231,4 @@ The markdown release notes are a curated subset informed by these JSON files:
 - `features.json` helps rank which shipped changes are worth calling out
 - Markdown only covers features worth calling out
 - The agent reads `changes.json` and/or `features.json` to decide what to write about
-- If a feature isn't in `changes.json`, it must not appear in the markdown
+- Claims of newly shipped changes must trace to this milestone's `changes.json`. See [the fidelity rule](quality-bar.md#the-fidelity-rule) for explicitly requested catch-up coverage and full-cycle reports.

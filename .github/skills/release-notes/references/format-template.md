@@ -94,8 +94,8 @@ when generating and completing the index:
 1. Preallocate an unlinked entry for every expected component file listed in
    `component-mapping.md` on the base branch, including components without
    noteworthy changes. Do not link a file that exists only on another branch.
-2. Each component PR links exactly its own entry when adding the matching file
-   (and any matching validation samples). Before the base PR leaves draft,
+2. Each component PR links exactly its own entry when adding the matching file.
+   Before the base PR leaves draft,
    verify that every expected component file exists and is linked exactly once.
 3. Keep Libraries, Runtime, SDK, MSBuild, and NuGet before the grouped sections.
 4. Use **Languages** for language release notes and
@@ -131,11 +131,22 @@ Known component docs links:
 ## Section rules
 
 1. **TOC at top** — every feature gets a linked entry
-2. **One paragraph of context** — what the feature does and why it matters in concrete terms, with PR/issue links; avoid inferred feelings or marketing-style claims
-3. **Code sample** — show the feature in use
-4. **Feature ordering** — highest customer impact first
+2. **Context proportional to importance** — name the audience and concrete developer possibilities, with PR/issue links. Positive benefit-focused narrative is welcome when evidence supports it.
+3. **Useful scenario** — show substantial supported usage, or representative measurements for default-enabled and grouped performance changes. Validation projects stay in scratch storage unless maintained fixtures are in scope.
+4. **Feature ordering** — explicit user priorities first, otherwise reader impact. Keep the TOC and body aligned.
 5. **Upgrade guidance near the end** — keep version-to-version breaking changes separate from changes affecting only preview users. `breaking_changes: true` flags migration significance, not which section an item belongs in; see below.
-6. **Preview feature callout** — when a feature is listed in `release-notes/features.json`, start its section with the standard blockquote callout from that file
+6. **Preview requirements** — apply each feature's actual opt-ins and metadata-derived safety notices, as described below.
+
+### Preview setup
+
+Define shared component-specific opt-ins once near the article opening.
+For example, F# language-version setup can apply to several sections.
+Label affected sections **Preview** or refer to that setup without repeating XML or CLI flags.
+Keep default-enabled improvements distinct and state any different per-feature requirements.
+
+When `release-notes/features.json` provides a standard callout, preserve its safety information, including broader product-preview warnings.
+Shared setup does not replace those notices with a language-version assumption.
+Use compact section labels only where they preserve the applicable requirements and warnings.
 
 ## Upgrade guidance
 
@@ -146,8 +157,8 @@ Use **Changes since the previous preview** for migrations that only affect code 
 The [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades) and maintained samples can reveal migration candidates, but do not determine which baseline they break.
 
 Cover these when they apply. They tend to surface only when an existing project is actually upgraded
-to the new build, which is one of the reasons
-[`validate-code-samples`](../../validate-code-samples/SKILL.md) upgrades the component's maintained sample set under `release-notes/<major>.0/samples/<component>/`:
+to the new build. [`validate-code-samples`](../../validate-code-samples/SKILL.md)
+uses scratch projects by default and upgrades maintained component samples when they are in scope:
 
 - **Renamed APIs**, especially renames that invert meaning (`EnableX` becoming `DisableX`). Show the
   before and after, and state the new default explicitly.

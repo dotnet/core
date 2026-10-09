@@ -24,25 +24,39 @@ Verify the installed SDK reports `build.sdk_version`; stop if it does not.
 
 ## Where samples live
 
-Keep maintained validation samples in this repository under `release-notes/<major>.0/samples/<component>/`, for example `release-notes/11.0/samples/aspnetcore/`. These are executable fixtures primarily for verifying release notes, not a general-purpose or reader-facing samples collection. They do not replace the officially documented samples maintained by the relevant product and documentation teams.
+Keep temporary validation projects, checkers, and results in session or scratch storage by default.
+Validation is required, but committing its artifacts is not.
+Add or change maintained repository fixtures only when explicitly requested or already agreed in the task scope.
+Existing fixtures do not authorize silent deletion or unrelated expansion.
 
-Use one working sample set per major release and component. Upgrade it from preview to preview so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface naturally. Start each major release with a new sample set instead of copying or retargeting scenarios from the previous release. Component owners review changes to their sample set alongside the corresponding release notes.
+When maintained fixtures are in scope, keep them under `release-notes/<major>.0/samples/<component>/`, for example `release-notes/11.0/samples/aspnetcore/`. These are executable fixtures primarily for verifying release notes, not a general-purpose or reader-facing samples collection. They do not replace the officially documented samples maintained by the relevant product and documentation teams.
 
-Keep samples for release-note features in the maintained component set so they can be rerun in later previews. For one-off compile checks outside feature validation, use a scratch project and remove it afterward.
+For an agreed maintained set, use one working sample set per major release and component. Upgrade it from preview to preview so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface naturally. Start each major release with a new sample set instead of copying or retargeting scenarios from the previous release. Component owners review changes to their sample set alongside the corresponding release notes.
+
+Otherwise, use scratch copies for upgrade checks without changing repository fixtures.
+Remove temporary projects when no longer needed. Keep verification records in session storage.
 
 Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets.
 
 ## What to validate
 
-- Build or update a sample for every feature in the release notes, even if the notes have no code snippet for it. Run each sample against the milestone build and verify the claimed behavior, such as a browser API call, an endpoint response, or an explicitly stated default or flag polarity. A successful build or startup alone is not enough.
+- Validate every feature's documented claims, even without a code snippet. Build or update scratch samples unless maintained fixtures are in scope. Run applicable scenarios against the milestone build and verify the claimed behavior, such as a browser API call, an endpoint response, or an explicitly stated default or flag polarity. A successful build or startup alone is not enough.
 - Test any code snippets from the release notes as part of those samples. Confirm the snippets build, run, and behave as described.
-- As you update existing maintained samples to the new preview, note changes required by the new release. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
+- Check source-test conditions and expected outcomes. Negative tests, skipped cases, unmet conditions, and test-only integrations do not establish shipped runtime support.
+- For grouped performance changes, check representative workloads and source measurements, not one new fixture per implementation PR.
+- Do not rerun unrelated benchmarks or builds for prose-only changes.
+- During scratch or maintained sample upgrades, record required changes. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
 
 ## Recording what you verified
 
-Create `release-notes/<major>.0/samples/README.md` when adding maintained samples. Explain their purpose and record the SDK version against which all component sample sets were last validated. Update the version after validating the sets against a new SDK.
+Record the exact SDK, claim, expected and observed behavior, sources, and limits in session storage.
+Keep failed or unavailable checks separate from passed checks. Do not imply verification beyond the evidence.
 
-In each `<component>/README.md`, describe the component's samples, how to run them, and their expected behavior. Keep it current as the samples change.
+Only when maintained samples are in scope, create or update `release-notes/<major>.0/samples/README.md`.
+Explain their purpose and record the SDK version against which all component sample sets were last validated.
+Update the version after validating the sets against a new SDK.
+
+For that maintained set, keep each `<component>/README.md` current with its scenarios, run instructions, and expected behavior.
 
 ## When a claim fails validation
 
