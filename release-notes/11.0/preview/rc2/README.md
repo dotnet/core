@@ -4,14 +4,14 @@ Browse the .NET 11 RC 2 release notes by component:
 
 - Libraries
 - Runtime
-- SDK
-- MSBuild
-- NuGet
+- [SDK](./sdk.md)
+- [MSBuild](./msbuild.md)
+- [NuGet](./nuget.md)
 
 ## Languages
 
 - C#
-- F#
+- [F#](./fsharp.md)
 
 ## Workloads, Libraries, & More
 
@@ -20,7 +20,7 @@ Browse the .NET 11 RC 2 release notes by component:
 - Container images
 - EF Core & Data
 - Windows Forms
-- WPF
+- [WPF](./wpf.md)
 
 ## Get Started
 
