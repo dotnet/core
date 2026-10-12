@@ -65,9 +65,6 @@ if (CompositeMLKem.IsAlgorithmSupported(algorithm))
         throw new Exception("The composite ML-KEM shared secrets do not match.");
     }
     Console.WriteLine("Composite ML-KEM round trip passed.");
-
-    }
-    Console.WriteLine("Composite ML-KEM certificate public-key access passed.");
 }
 else
 {
@@ -191,16 +188,16 @@ if ((OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst()) || OperatingSy
     string path = Path.Combine(Path.GetTempPath(), $"file-share-{Guid.NewGuid():N}");
     try
     {
-        using var first = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
+        using var firstStream = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None);
         if (lockingDisabled)
         {
-            using var second = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            using var secondStream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
         }
         else
         {
             try
             {
-                using var second = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                using var secondStream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
                 throw new Exception("FileShare.None was not enforced with locking enabled.");
             }
             catch (IOException)
