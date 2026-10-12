@@ -39,15 +39,13 @@ reader.ReadEndArray();
 
 ## Experimental composite ML-KEM and HPKE APIs
 
-`CompositeMLKem` combines post-quantum and classical key encapsulation so both contribute to the shared secret. RC 2 includes a managed implementation for OpenSSL-backed platforms and a Windows implementation using supporting cryptographic providers ([dotnet/runtime #134163](https://github.com/dotnet/runtime/pull/134163), [dotnet/runtime #134164](https://github.com/dotnet/runtime/pull/134164), [dotnet/runtime #134165](https://github.com/dotnet/runtime/pull/134165)). Check `CompositeMLKem.IsAlgorithmSupported` before using an algorithm.
-
-RC 2 also adds certificate accessors. `X509Certificate2.GetCompositeMLKemPublicKey` extracts the public key, but private-key extraction and `CopyWithPrivateKey(CompositeMLKem)` are not implemented for matching certificates and throw `PlatformNotSupportedException`. The public API surface is in place for certificate integration, and the implementations will be added in servicing releases once the underlying platform support is available ([dotnet/runtime #134289](https://github.com/dotnet/runtime/pull/134289)).
+`CompositeMLKem` combines post-quantum and classical key encapsulation so both contribute to the shared secret. RC 2 includes support on platforms that already support ML-KEM. Checking `CompositeMLKem.IsAlgorithmSupported` will tell you whether or not the particular combination of algorithms is supported. [dotnet/runtime #134163](https://github.com/dotnet/runtime/pull/134163), et al.
 
 Separately, `Hpke` provides Hybrid Public Key Encryption ([dotnet/runtime #134443](https://github.com/dotnet/runtime/pull/134443)). RC 2 implements classical DHKEM suites; ML-KEM and hybrid ML-KEM suites are not yet supported. Check `Hpke.IsSupported` for the selected suite. Both `Hpke` and `CompositeMLKem` are experimental and may change; direct use requires opting in to `SYSLIB5009` and `SYSLIB5006`, respectively.
 
 ### Encrypt CMS messages with ML-KEM
 
-`EnvelopedCms` adds ML-KEM encryption and decryption using KEM recipients ([dotnet/runtime #134310](https://github.com/dotnet/runtime/pull/134310)). This uses the managed CMS implementation on non-Windows platforms with ML-KEM support. Windows KEM recipient support and Composite ML-KEM CMS operations are not implemented in RC 2.
+`EnvelopedCms` adds ML-KEM encryption and decryption using KEM recipients ([dotnet/runtime #134310](https://github.com/dotnet/runtime/pull/134310)). In RC 2, support is limited to the pure ML-KEM algorithm, and non-Windows platforms.
 
 ## Format DataAnnotations messages with attribute-specific arguments
 

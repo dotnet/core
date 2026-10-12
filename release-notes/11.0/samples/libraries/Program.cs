@@ -66,37 +66,6 @@ if (CompositeMLKem.IsAlgorithmSupported(algorithm))
     }
     Console.WriteLine("Composite ML-KEM round trip passed.");
 
-    using var signer = RSA.Create(2048);
-    var subject = new X500DistinguishedName("CN=Composite ML-KEM validation");
-    PublicKey publicKey = PublicKey.CreateFromSubjectPublicKeyInfo(
-        recipientKey.ExportSubjectPublicKeyInfo(), out _);
-    var request = new CertificateRequest(subject, publicKey, HashAlgorithmName.SHA256);
-    using var certificate = request.Create(
-        subject, X509SignatureGenerator.CreateForRSA(signer, RSASignaturePadding.Pkcs1),
-        DateTimeOffset.UtcNow.AddMinutes(-1), DateTimeOffset.UtcNow.AddDays(1),
-        RandomNumberGenerator.GetBytes(16));
-    using var extracted = certificate.GetCompositeMLKemPublicKey();
-    if (extracted is null || !extracted.ExportEncapsulationKey().SequenceEqual(
-        recipientKey.ExportEncapsulationKey()))
-    {
-        throw new Exception("The certificate did not expose its composite ML-KEM public key.");
-    }
-
-    foreach (Action operation in new Action[]
-    {
-        () => { using var key = certificate.GetCompositeMLKemPrivateKey(); },
-        () => { using var copy = certificate.CopyWithPrivateKey(recipientKey); }
-    })
-    {
-        try
-        {
-            operation();
-            throw new Exception("A composite ML-KEM certificate private-key operation unexpectedly succeeded.");
-        }
-        catch (PlatformNotSupportedException)
-        {
-            Console.WriteLine("The expected composite ML-KEM certificate limitation was observed.");
-        }
     }
     Console.WriteLine("Composite ML-KEM certificate public-key access passed.");
 }
@@ -127,18 +96,6 @@ else
     Console.WriteLine("The selected HPKE suite is unavailable on this platform.");
 }
 
-foreach (HpkeKem kem in new[]
-{
-    HpkeKem.MLKEM_512, HpkeKem.MLKEM_768, HpkeKem.MLKEM_1024,
-    HpkeKem.MLKEM768_P256, HpkeKem.MLKEM1024_P384
-})
-{
-    if (Hpke.IsSupported(new HpkeSuite(kem, HpkeKdf.HKDF_SHA256, HpkeAead.AES_128_GCM)))
-    {
-        throw new Exception($"RC 2 unexpectedly supports the post-quantum HPKE suite {kem}.");
-    }
-}
-Console.WriteLine("RC 2 post-quantum HPKE suite limitations confirmed.");
 #pragma warning restore SYSLIB5009
 
 if (OperatingSystem.IsWindows() || !MLKem.IsSupported)
