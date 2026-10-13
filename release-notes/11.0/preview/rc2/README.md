@@ -19,7 +19,7 @@ Browse the .NET 11 RC 2 release notes by component:
 - [ASP.NET Core](./aspnetcore.md)
 - [Container images](./containers.md)
 - EF Core & Data
-- Windows Forms
+- [Windows Forms](./winforms.md)
 - [WPF](./wpf.md)
 
 ## Get Started
