@@ -15,6 +15,7 @@
 
 | Date | Release |
 | :-- | :-- |
+| 2026/10/13 | [11.0.0-rc.2](./preview/rc2/11.0.0-rc.2.md) |
 | 2026/09/08 | [11.0.0-rc.1](./preview/rc1/11.0.0-rc.1.md) |
 | 2026/08/11 | [11.0.0-preview.7](./preview/preview7/11.0.0-preview.7.md) |
 | 2026/07/14 | [11.0.0-preview.6](./preview/preview6/11.0.0-preview.6.md) |
@@ -26,6 +27,7 @@
 
 ### .NET Libraries
 
+- [RC 2](preview/rc2/libraries.md)
 - [RC 1](preview/rc1/libraries.md)
 - [Preview 7](preview/preview7/libraries.md)
 - [Preview 6](preview/preview6/libraries.md)
@@ -37,6 +39,7 @@
 
 ### .NET Runtime
 
+- [RC 2](preview/rc2/runtime.md)
 - [RC 1](preview/rc1/runtime.md)
 - [Preview 7](preview/preview7/runtime.md)
 - [Preview 6](preview/preview6/runtime.md)
@@ -48,6 +51,7 @@
 
 ### .NET SDK
 
+- [RC 2](preview/rc2/sdk.md)
 - [RC 1](preview/rc1/sdk.md)
 - [Preview 7](preview/preview7/sdk.md)
 - [Preview 6](preview/preview6/sdk.md)
@@ -59,6 +63,7 @@
 
 ### MSBuild
 
+- [RC 2](preview/rc2/msbuild.md)
 - [RC 1](preview/rc1/msbuild.md)
 - [Preview 7](preview/preview7/msbuild.md)
 - [Preview 6](preview/preview6/msbuild.md)
@@ -68,6 +73,7 @@
 
 ### NuGet
 
+- [RC 2](preview/rc2/nuget.md)
 - [RC 1](preview/rc1/nuget.md)
 - [Preview 7](preview/preview7/nuget.md)
 - [Preview 6](preview/preview6/nuget.md)
@@ -77,6 +83,7 @@
 ### C\#
 
 - [What's new in C#](https://learn.microsoft.com/dotnet/csharp/whats-new/)
+- [RC 2](preview/rc2/csharp.md)
 - [RC 1](preview/rc1/csharp.md)
 - [Preview 7](preview/preview7/csharp.md)
 - [Preview 6](preview/preview6/csharp.md)
@@ -88,6 +95,7 @@
 ### F\#
 
 - [What's new in F#](https://learn.microsoft.com/dotnet/fsharp/whats-new/)
+- [RC 2](preview/rc2/fsharp.md)
 - [RC 1](preview/rc1/fsharp.md)
 - [Preview 7](preview/preview7/fsharp.md)
 - [Preview 6](preview/preview6/fsharp.md)
@@ -104,6 +112,7 @@
 
 ### ASP.NET Core
 
+- [RC 2](preview/rc2/aspnetcore.md)
 - [RC 1](preview/rc1/aspnetcore.md)
 - [Preview 7](preview/preview7/aspnetcore.md)
 - [Preview 6](preview/preview6/aspnetcore.md)
@@ -116,6 +125,7 @@
 ### .NET MAUI
 
 - [What's new in .NET MAUI](https://learn.microsoft.com/dotnet/maui/whats-new/)
+- [RC 2](preview/rc2/dotnetmaui.md)
 - [RC 1](preview/rc1/dotnetmaui.md)
 - [Preview 7](preview/preview7/dotnetmaui.md)
 - [Preview 6](preview/preview6/dotnetmaui.md)
@@ -128,6 +138,7 @@
 ### Entity Framework Core
 
 - [What's new in EF Core](https://learn.microsoft.com/ef/core/what-is-new/)
+- [RC 2](preview/rc2/efcore.md)
 - [RC 1](preview/rc1/efcore.md)
 - [Preview 7](preview/preview7/efcore.md)
 - [Preview 6](preview/preview6/efcore.md)
@@ -140,6 +151,7 @@
 ### Windows Forms
 
 - [What's new in Windows Forms](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/)
+- [RC 2](preview/rc2/winforms.md)
 - [RC 1](preview/rc1/winforms.md)
 - [Preview 7](preview/preview7/winforms.md)
 - [Preview 6](preview/preview6/winforms.md)
@@ -150,6 +162,7 @@
 ### Windows Presentation Foundation (WPF)
 
 - [What's new in WPF](https://learn.microsoft.com/dotnet/desktop/wpf/whats-new/)
+- [RC 2](preview/rc2/wpf.md)
 - [RC 1](preview/rc1/wpf.md)
 - [Preview 7](preview/preview7/wpf.md)
 - [Preview 6](preview/preview6/wpf.md)
@@ -161,6 +174,7 @@
 
 ### Container images
 
+- [RC 2](preview/rc2/containers.md)
 - [RC 1](preview/rc1/containers.md)
 - [Preview 7](preview/preview7/containers.md)
 - [Preview 6](preview/preview6/containers.md)
