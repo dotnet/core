@@ -69,10 +69,9 @@ RC 2 gives `TextBox`, `MaskedTextBox`, and `RichTextBox` state-specific borders 
 
 For controls derived from `TextBoxBase`, `Padding` affects the text layout when the effective visual styles mode is `VisualStylesMode.Net11` or later. The property is now available in the Windows Forms Designer's Properties window and is serialized into generated Designer code. This is not a binary breaking change: the existing `Padding` property is retained. It remains ineffective for text layout in `Classic` and `Disabled` modes.
 
-What's important for layouting your Form and UserControls: Modern chrome can and will change preferred sizes, padding, and layout. Auto-sized and intrinsically sized controls request layout updates automatically, while fixed-size multiline text boxes can have a slightly smaller client area. Prefer `TableLayoutPanel` and `FlowLayoutPanel` over pixel-perfect sizing; see the [layout guidance](https://github.com/dotnet/winforms/blob/main/docs/net11-visualstyles-layout-guidance.md).
+When laying out forms and user controls, keep in mind that modern chrome can and will change preferred sizes, padding, and layout. Auto-sized and intrinsically sized controls request layout updates automatically, while fixed-size multiline text boxes can have a slightly smaller client area. Prefer `TableLayoutPanel` and `FlowLayoutPanel` over pixel-perfect sizing; see the [layout guidance](https://github.com/dotnet/winforms/blob/main/docs/net11-visualstyles-layout-guidance.md).
 
-Using `VisualStylesMode` with setings >= `NET11` _will_ break pixel-perfect layouts.
-That is expected and the nature of the beast - but: You can use Copilot or other AI-based tooling options to refactor pixel-perfect layout approaches into Fluent layouts based on the TableLayoutPanel control. Please also consider to that add new WinForms Skills, which we are actively working on, and whose preview versions you can already [find and use here](https://github.com/dotnet/skills/tree/main/plugins/dotnet-winforms/skills/winforms-expert).
+Using `VisualStylesMode.Net11` or later _will_ break pixel-perfect layouts. This is expected. You can use Copilot or other AI tools to refactor pixel-perfect layouts into Fluent layouts based on the `TableLayoutPanel` control. You can also use the [preview WinForms skills](https://github.com/dotnet/skills/tree/main/plugins/dotnet-winforms/skills/winforms-expert), which are being actively developed.
 
 The following APIs support custom controls and the framework's built-in rendering updates:
 
@@ -126,7 +125,7 @@ The toggle renderer takes precedence over `FlatStyle.System`. A `CheckBox` with 
 
 ### Handle changes on the form or control
 
-**Inside a form, use the inherited instance event `SystemVisualSettingsChanged`, not the static `Application.SystemVisualSettingsChanged` event.** The instance path follows the control's lifetime and needs no unsubscription when the control is disposed. A custom control can instead override `OnSystemVisualSettingsChanged(SystemVisualSettingsChangedEventArgs)` and call the base implementation.
+**Inside a form, use the inherited instance event `SystemVisualSettingsChanged`, not the static `Application.SystemVisualSettingsChanged` event.** The instance path follows the control's lifetime and does not require unsubscribing when the control is disposed. A custom control can instead override `OnSystemVisualSettingsChanged(SystemVisualSettingsChangedEventArgs)` and call the base implementation.
 
 ```csharp
 using System.Windows.Forms;
@@ -163,7 +162,7 @@ public partial class MainForm : Form
 
 `SystemVisualSettingsCategories` defines `None` (`0`), `AccentColor` (`1`), `TextScale` (`2`), `HighContrast` (`4`), `ClientAreaAnimations` (`8`), `KeyboardCues` (`16`), and `FocusMetrics` (`32`). Several flags can be combined in one transition.
 
-WinForms normalizes Windows setting, accent-color, theme, and system-color notifications into settings transitions. The static `Application.SystemVisualSettingsChanged` event remains available for application-lifetime consumers such as theming engines and services; its sender is `null`. Shorter-lived consumers of that static event must unsubscribe to avoid lifetime leaks.
+WinForms normalizes notifications about Windows settings, accent colors, themes, and system colors into settings transitions. The static `Application.SystemVisualSettingsChanged` event remains available for application-lifetime consumers such as theming engines and services; its sender is `null`. Shorter-lived consumers of that static event must unsubscribe to avoid lifetime leaks.
 
 Instance notifications cascade through parented controls. An unparented control can miss a transition, so query `Application.SystemVisualSettings` when it is parented or creates its handle. High Contrast changes also trigger visual-style processing for controls whose effective renderer changes.
 
@@ -297,7 +296,7 @@ Custom controls can override the protected `Control.BeginSuspendPaintingCore()` 
 | `OnContainerControlChanged(EventArgs)` / `OnFullScreenChanged(EventArgs)` | Protected virtual hooks that raise the corresponding events. |
 | `Dispose(bool)` | Releases the component's runtime resources and subscriptions. |
 
-Keyboard shortcuts are evaluated only while the managed form or a child has input focus. Keyboard and mouse activity is observed through the application's message queue, not global hooks or system-wide hot keys.
+Keyboard shortcuts are evaluated only while the managed form or a child has input focus. Keyboard and mouse activity are observed through the application's message queue, not global hooks or system-wide hot keys.
 
 ```csharp
 using System.Windows.Forms;
@@ -321,7 +320,7 @@ Application.Run(form);
 
 **This component is not a security boundary.** It does not guarantee that users cannot interrupt the application, switch applications, or access the operating system. Secure kiosk lockdown must be configured at the Windows/system level by an IT administrator.
 
-Windows 11 offers kiosk setup through **Windows > Settings > Accounts > Other users > Set up a kiosk > Get started**:
+Windows 11 offers kiosk setup through **Windows > Settings > Accounts > Other users > Set up a kiosk > Get started**.
 
 The Windows kiosk configuration is separate from `KioskModeManager`. The Settings single-app Assigned Access experience supports eligible UWP applications or Microsoft Edge; it is not a way to select any arbitrary WinForms executable. Administrators should choose the appropriate Windows kiosk/restricted-user configuration for the deployment and Windows edition. See [Configure a single-app kiosk with Assigned Access](https://learn.microsoft.com/en-us/windows/configuration/assigned-access/configure-single-app-kiosk).
 
