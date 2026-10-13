@@ -2,25 +2,25 @@
 
 Browse the .NET 11 RC 2 release notes by component:
 
-- Libraries
-- Runtime
-- SDK
-- MSBuild
-- NuGet
+- [Libraries](./libraries.md)
+- [Runtime](./runtime.md)
+- [SDK](./sdk.md)
+- [MSBuild](./msbuild.md)
+- [NuGet](./nuget.md)
 
 ## Languages
 
-- C#
-- F#
+- [C#](./csharp.md)
+- [F#](./fsharp.md)
 
 ## Workloads, Libraries, & More
 
-- .NET MAUI
-- ASP.NET Core
+- [.NET MAUI](./dotnetmaui.md)
+- [ASP.NET Core](./aspnetcore.md)
 - Container images
 - EF Core & Data
 - [Windows Forms](./winforms.md)
-- WPF
+- [WPF](./wpf.md)
 
 ## Get Started
 
