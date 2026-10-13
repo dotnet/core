@@ -67,7 +67,7 @@ Modern rendering updates supported buttons, check boxes, radio buttons, group bo
 
 RC 2 gives `TextBox`, `MaskedTextBox`, and `RichTextBox` state-specific borders for Rest, Hover, Focused, Disabled, and ReadOnly states. A stronger bottom edge adds elevation, and the focused bottom edge uses the accent color. Border colors are independent of `ForeColor` ([dotnet/winforms#15147](https://github.com/dotnet/winforms/pull/15147)).
 
-Also note, that enabling `VisualStyleMode` with at least `NET11` makes the `Padding` property work for `TextBoxBase` derived controls. `Padding` is therefore now present (and serializable!) in the PropertyGrid/in the WinFormsd Out-of-Proc Designer. This is, however, NOT a binary breaking change, since the Padding property always existed - it was just without any effects (and is still not outside `VisualStylesMode`).  
+For controls derived from `TextBoxBase`, `Padding` affects the text layout when the effective visual styles mode is `VisualStylesMode.Net11` or later. The property is now available in the Windows Forms Designer's Properties window and is serialized into generated Designer code. This is not a binary breaking change: the existing `Padding` property is retained. It remains ineffective for text layout in `Classic` and `Disabled` modes.
 
 What's important for layouting your Form and UserControls: Modern chrome can and will change preferred sizes, padding, and layout. Auto-sized and intrinsically sized controls request layout updates automatically, while fixed-size multiline text boxes can have a slightly smaller client area. Prefer `TableLayoutPanel` and `FlowLayoutPanel` over pixel-perfect sizing; see the [layout guidance](https://github.com/dotnet/winforms/blob/main/docs/net11-visualstyles-layout-guidance.md).
 
