@@ -323,8 +323,6 @@ Application.Run(form);
 
 Windows 11 offers kiosk setup through **Windows > Settings > Accounts > Other users > Set up a kiosk > Get started**:
 
-![Windows 11 Settings showing Set up a kiosk and the Get started button](WinFormsNet11ReleaseNoteRc2-kiosk.png)
-
 The Windows kiosk configuration is separate from `KioskModeManager`. The Settings single-app Assigned Access experience supports eligible UWP applications or Microsoft Edge; it is not a way to select any arbitrary WinForms executable. Administrators should choose the appropriate Windows kiosk/restricted-user configuration for the deployment and Windows edition. See [Configure a single-app kiosk with Assigned Access](https://learn.microsoft.com/en-us/windows/configuration/assigned-access/configure-single-app-kiosk).
 
 ## New Designer-guiding analyzers
