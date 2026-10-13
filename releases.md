@@ -10,7 +10,7 @@ The following table lists supported releases.
 
 |  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Go-Live | [11.0.0-rc.2][11.0.0-rc.2] | October 13, 2026 |
+| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Go-Live | [11.0.0-rc.2][11.0.0-rc.2] | November 10, 2026 |
 | [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.12][10.0.12] | November 14, 2028 |
 | [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Maintenance | [9.0.20][9.0.20] | November 10, 2026 |
 | [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Maintenance | [8.0.31][8.0.31] | November 10, 2026 |
