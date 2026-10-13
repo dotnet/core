@@ -69,9 +69,9 @@ RC 2 gives `TextBox`, `MaskedTextBox`, and `RichTextBox` state-specific borders 
 
 Also note, that enabling `VisualStyleMode` with at least `NET11` makes the `Padding` property work for `TextBoxBase` derived controls. `Padding` is therefore now present (and serializable!) in the PropertyGrid/in the WinFormsd Out-of-Proc Designer. This is, however, NOT a binary breaking change, since the Padding property always existed - it was just without any effects (and is still not outside `VisualStylesMode`).  
 
-What's important for layouting your Form and UserControls: Modern chrome can and will change preferred sizes, padding, and layout. Auto-sized and intrinsically sized controls request layout updates automatically, while fixed-size multiline text boxes can have a slightly smaller client area. Prefer `TableLayoutPanel` and `FlowLayoutPanel` over pixel-perfect sizing; see the [layout guidance](https://github.com/dotnet/winforms/blob/main/docs/net11-visualstyles-layout-guidance.md). 
+What's important for layouting your Form and UserControls: Modern chrome can and will change preferred sizes, padding, and layout. Auto-sized and intrinsically sized controls request layout updates automatically, while fixed-size multiline text boxes can have a slightly smaller client area. Prefer `TableLayoutPanel` and `FlowLayoutPanel` over pixel-perfect sizing; see the [layout guidance](https://github.com/dotnet/winforms/blob/main/docs/net11-visualstyles-layout-guidance.md).
 
-Using `VisualStylesMode` with setings >= `NET11` _will_ break pixel-perfect layouts. 
+Using `VisualStylesMode` with setings >= `NET11` _will_ break pixel-perfect layouts.
 That is expected and the nature of the beast - but: You can use Copilot or other AI-based tooling options to refactor pixel-perfect layout approaches into Fluent layouts based on the TableLayoutPanel control. Please also consider to that add new WinForms Skills, which we are actively working on, and whose preview versions you can already [find and use here](https://github.com/dotnet/skills/tree/main/plugins/dotnet-winforms/skills/winforms-expert).
 
 The following APIs support custom controls and the framework's built-in rendering updates:
