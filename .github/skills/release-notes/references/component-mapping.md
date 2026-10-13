@@ -39,7 +39,7 @@ the PRs are created.
 
 ### Components contributed out-of-band (not in the VMR)
 
-These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. The agent still creates a stub PR for each so the component team can add its own content. If there is nothing noteworthy this milestone, merge the stub so its file and index link remain in the release notes.
+These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. Initialize their pending stubs and README links on the base branch along with the other components. Open a component PR with an owner-facing TODO requesting team-authored content in its existing file, without editing the index. If there is nothing noteworthy this milestone, replace the pending stub with the final no-noteworthy-changes text and have the component owner review and merge it.
 
 | Component | Source Repo | Release Notes File | Default Assignee(s) |
 | --------- | ----------- | ------------------ | ------------------- |
@@ -87,7 +87,7 @@ These components appear in `changes.json` for completeness but typically don't w
 
 ## Expected output files per preview
 
-Every preview should produce these files (stubs for components with no noteworthy changes):
+Every preview should produce these files. Initialize all component files as pending stubs on the base branch; component PRs replace them with notes or confirmed no-noteworthy-changes text.
 
 ```text
 README.md              # Index/TOC linking to all component files
