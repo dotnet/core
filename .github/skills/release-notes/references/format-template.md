@@ -38,36 +38,32 @@ Standard document structure for .NET release notes markdown files.
 
 ### README.md (index file)
 
-The README.md is the reader-facing index for the milestone. The base branch
-preallocates unlinked entries for expected component files, groups them
-consistently, points to the release downloads, and provides durable product
-documentation links. Each component PR links its own entry when it adds the
-matching file. Component files do NOT repeat the general links.
+The README.md is the reader-facing index for the milestone. The base branch creates pending stubs for all expected component files and links them from the complete index before creating component branches. It groups the entries consistently, points to the release downloads, and provides durable product documentation links. Component PRs replace their own stubs without editing the shared README. Component files do NOT repeat the general links.
 
 ```markdown
 # .NET <VERSION> <MILESTONE> - Release Notes
 
 Browse the .NET <VERSION> <MILESTONE> release notes by component:
 
-- Libraries
-- Runtime
-- SDK
-- MSBuild
-- NuGet
+- [Libraries](./libraries.md)
+- [Runtime](./runtime.md)
+- [SDK](./sdk.md)
+- [MSBuild](./msbuild.md)
+- [NuGet](./nuget.md)
 
 ## Languages
 
-- C#
-- F#
+- [C#](./csharp.md)
+- [F#](./fsharp.md)
 
 ## Workloads, Libraries, & More
 
-- .NET MAUI
-- ASP.NET Core
-- Container images
-- EF Core & Data
-- Windows Forms
-- WPF
+- [.NET MAUI](./dotnetmaui.md)
+- [ASP.NET Core](./aspnetcore.md)
+- [Container images](./containers.md)
+- [EF Core & Data](./efcore.md)
+- [Windows Forms](./winforms.md)
+- [WPF](./wpf.md)
 
 ## Get Started
 
@@ -86,17 +82,16 @@ You can find a detailed overview of all new features in .NET <VERSION>:
 The latest .NET <VERSION> release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/<version>) and [.NET <VERSION> Releases](../../README.md).
 ```
 
-When a component PR adds its Markdown file, replace only its unlinked index
-entry with a relative link to that file. Keep other pending entries unlinked
-and preserve links already merged from other components. Apply these rules
-when generating and completing the index:
+The base branch owns the index; component PRs leave it unchanged. Apply these rules when generating and completing the index:
 
-1. Preallocate an unlinked entry for every expected component file listed in
+1. Create a pending stub for every expected component file listed in
    `component-mapping.md` on the base branch, including components without
-   noteworthy changes. Do not link a file that exists only on another branch.
-2. Each component PR links exactly its own entry when adding the matching file
-   (and any matching validation samples). Before the base PR leaves draft,
-   verify that every expected component file exists and is linked exactly once.
+   noteworthy changes and components contributed out-of-band. Link every stub
+   from the README before creating component branches.
+2. Each component PR replaces only its own pending stub with notes or the final
+   no-noteworthy-changes text (and any matching validation samples). Before the
+   base PR leaves draft, verify that every expected file exists, is linked exactly
+   once, and contains no pending-stub text or unresolved TODO placeholders.
 3. Keep Libraries, Runtime, SDK, MSBuild, and NuGet before the grouped sections.
 4. Use **Languages** for language release notes and
    **Workloads, Libraries, & More** for application frameworks, workloads,
@@ -175,9 +170,23 @@ Always use markdown links with the `{org}/{repo} #{number}` format, with a space
 - ✅ `[dotnet/runtime #124264](https://github.com/dotnet/runtime/pull/124264)`
 - ❌ `dotnet/runtime#124264` (wrong spacing and bare reference)
 
+## Pending stub
+
+Create this on the base branch for every expected component before creating component branches:
+
+```markdown
+# <Component> in .NET <VERSION> <MILESTONE> - Release Notes
+
+Release notes for <Component> are being prepared.
+
+<!-- TODO: Replace this pending stub with reviewed release notes or the final no-noteworthy-changes text. -->
+```
+
+The pending text distinguishes work awaiting review from a confirmed absence of noteworthy changes. Replace it on the matching component branch; never publish pending stubs.
+
 ## Minimal stub
 
-For components with no noteworthy changes:
+For components confirmed to have no noteworthy changes, replace the pending stub with:
 
 ```markdown
 # <Component> in .NET <VERSION> <PREVIEW> - Release Notes
