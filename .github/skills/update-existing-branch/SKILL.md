@@ -50,7 +50,7 @@ Respect this invariant on every rerun:
 | Artifact | Lives on |
 | -------- | -------- |
 | `changes.json`, `features.json`, `build-metadata.json` | base branch only |
-| `README.md` | base branch only |
+| `README.md` | base branch preallocates entries; each component branch links only its own entry alongside the matching file |
 | `{component}.md` (e.g. `aspnetcore.md`, `runtime.md`) | matching component branch only |
 
 ## Process
@@ -112,9 +112,11 @@ Use the current draft as the starting point. Prefer **integration** over
 duplication.
 
 For each component affected by the delta, update **only** that component's
-markdown on **its** branch. Before editing, merge the base branch into the
-component branch so the latest metadata is available in your working tree;
-don't touch component branches you aren't editing this run.
+markdown and its own README entry on **its** branch. Before editing, merge the
+base branch into the component branch so the latest metadata and already-merged
+index links are available in your working tree; don't touch component branches
+you aren't editing this run. Add a link only when adding the matching component
+file; keep other pending entries unlinked and preserve links already merged.
 
 Examples:
 

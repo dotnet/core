@@ -26,15 +26,16 @@ jobs:
     steps:
       - name: Checkout code
         # actions/checkout v4.2.2
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           # Full git history is needed to get a proper list of changed files
           # within `super-linter`.
           fetch-depth: 0
 
       - name: Lint Code Base
-        # github/super-linter slim v7
-        uses: github/super-linter/slim@b807e99ddd37e444d189cfd2c2ca1274d8ae8ef1
+        # github/super-linter slim v7.4.0
+        uses: github/super-linter/slim@12150456a73e248bdc94d0794898f94e23127c88
+
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JSCPD: false
