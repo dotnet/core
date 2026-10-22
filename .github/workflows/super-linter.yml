@@ -39,11 +39,9 @@ jobs:
 
         env:
           VALIDATE_ALL_CODEBASE: false
+          # Unlisted validators are enabled; keep this configuration in exclusion mode.
           VALIDATE_JSCPD: false
           VALIDATE_NATURAL_LANGUAGE: false
-          VALIDATE_BIOME_FORMAT: true
-          VALIDATE_BIOME_LINT: true
-          VALIDATE_GITHUB_ACTIONS_ZIZMOR: true
           VALIDATE_MARKDOWN_PRETTIER: false
           VALIDATE_JSON_PRETTIER: false
           # Exclude GitHub skills and generated workflows
