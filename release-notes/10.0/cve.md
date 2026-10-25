@@ -10,9 +10,9 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
 
 - 10.0.14 (October 2026)
   - [CVE-2026-111497 | Brotli decoder out-of-bounds write](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-111497)
-  - [CVE-2026-70197 | SocketAsyncEventArgs memory corruption](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70197)
-  - [CVE-2026-102870 | Blazor debugger packaging](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-102870)
-  - [CVE-2026-114148 | Source-build tarball ownership](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-114148)
+  - [CVE-2026-70197 | Windows SocketAsyncEventArgs memory corruption](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70197)
+  - [CVE-2026-102870 | Blazor WebAssembly debugger remote code execution](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-102870)
+  - [CVE-2026-114148 | Linux .NET tarball ownership](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-114148)
 - 10.0.13 (October 2026)
   - [CVE-2026-66822 | .NET and Visual Studio Information Disclosure Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-66822)
   - [CVE-2026-58280 | .NET and Visual Studio Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-58280)
