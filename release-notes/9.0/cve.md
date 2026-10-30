@@ -8,6 +8,10 @@ Your app needs to be on the latest .NET 9 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- 9.0.22 (October 2026)
+  - [CVE-2026-111497 | Brotli decoder out-of-bounds write](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-111497)
+  - [CVE-2026-70197 | Windows SocketAsyncEventArgs memory corruption](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70197)
+  - [CVE-2026-114148 | Linux .NET tarball ownership](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-114148)
 - 9.0.21 (October 2026)
   - [CVE-2026-66822 | .NET and Visual Studio Information Disclosure Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-66822)
   - [CVE-2026-58280 | .NET and Visual Studio Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-58280)
