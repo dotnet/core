@@ -50,8 +50,10 @@ Respect this invariant on every rerun:
 | Artifact | Lives on |
 | -------- | -------- |
 | `changes.json`, `features.json`, `build-metadata.json` | base branch only |
-| `README.md` | base branch preallocates entries; each component branch links only its own entry alongside the matching file |
-| `{component}.md` (e.g. `aspnetcore.md`, `runtime.md`) | matching component branch only |
+| `README.md` | base branch owns the complete index linking to all initialized component files; component PRs leave it unchanged |
+| `{component}.md` (e.g. `aspnetcore.md`, `runtime.md`) | base branch initializes pending stubs; content updates belong to the matching component branch until merged |
+
+Stub initialization is for new branch sets, not reruns. Never replace existing drafts or merged notes with fresh stubs. For branch sets created with the earlier layout, preserve existing component README edits and merged links; do not retrofit stubs during a content refresh.
 
 ## Process
 
@@ -111,12 +113,7 @@ This should feel like a **delta merge**, not a full rescore.
 Use the current draft as the starting point. Prefer **integration** over
 duplication.
 
-For each component affected by the delta, update **only** that component's
-markdown and its own README entry on **its** branch. Before editing, merge the
-base branch into the component branch so the latest metadata and already-merged
-index links are available in your working tree; don't touch component branches
-you aren't editing this run. Add a link only when adding the matching component
-file; keep other pending entries unlinked and preserve links already merged.
+For each component affected by the delta, update **only** that component's markdown and matching validation samples on **its** branch. Before editing, merge the base branch into the component branch so the latest metadata and other components' merged notes are available in your working tree; don't touch component branches you aren't editing this run. Replace a pending stub with the component's notes, but leave the shared README unchanged.
 
 Examples:
 
@@ -153,6 +150,8 @@ Before finalizing the refreshed draft, run
 `features.json`, `changes.json`, and component files on their own branches
 until merged. Resolve noteworthy omissions or record the editorial reason in
 the corresponding `features.json` entry's `score_reason` on the base branch.
+
+Before the base PR leaves draft, verify that every expected component file exists and is linked exactly once, and that no pending stubs or unresolved TODO placeholders remain.
 
 This keeps the branch set stable for reviewers and avoids throwing away already
 curated editorial work.
