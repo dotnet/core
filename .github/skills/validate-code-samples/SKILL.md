@@ -1,6 +1,6 @@
 ---
 name: validate-code-samples
-description: Validate every release-note feature and its code snippets against the milestone build, and identify preview-to-preview migration steps when updating maintained samples. Reads the exact SDK version from build-metadata.json and installs it in a scoped location with the official dotnet-install script. USE FOR - building and running samples for release-note features, testing documented snippets and behavior, and documenting changes needed to update maintained samples to a new preview. DO NOT USE FOR - generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
+description: Validate every release-note feature and its code snippets against the milestone build using local-only scratch projects, and identify preview-to-preview migration steps. Reads the exact SDK version from build-metadata.json and installs it in a scoped location with the official dotnet-install script. USE FOR - building and running local samples for release-note features, testing documented snippets and behavior, and verifying migration guidance. DO NOT USE FOR - committing sample projects, generating build-metadata.json or the API diff (use the release-notes workflow and api-diff), confirming a managed API exists in a ref pack (use api-diff-validation), scoring features (use generate-features).
 compatibility: Requires the milestone's build-metadata.json, network access to the public .NET build artifacts, and PowerShell or a POSIX shell. Pairs with api-diff-validation, which covers the static half of the same problem.
 ---
 
@@ -24,25 +24,21 @@ Verify the installed SDK reports `build.sdk_version`; stop if it does not.
 
 ## Where samples live
 
-Keep maintained validation samples in this repository under `release-notes/<major>.0/samples/<component>/`, for example `release-notes/11.0/samples/aspnetcore/`. These are executable fixtures primarily for verifying release notes, not a general-purpose or reader-facing samples collection. They do not replace the officially documented samples maintained by the relevant product and documentation teams.
+Create validation samples only in a temporary scratch directory outside the repository checkout. Do not add or commit sample source files, projects, validation scripts, fixtures, or supporting assets to this repository. Code snippets in the Markdown release notes are still appropriate; executable validation projects are local-only.
 
-Use one working sample set per major release and component. Upgrade it from preview to preview so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface naturally. Start each major release with a new sample set instead of copying or retargeting scenarios from the previous release. Component owners review changes to their sample set alongside the corresponding release notes.
+To check preview-to-preview migrations, reproduce the earlier documented usage in a scratch project and upgrade it to the target build. Use earlier release notes and the corresponding shipped build as the baseline so API renames, changed defaults, analyzer diagnostics, and runtime regressions surface without a checked-in sample set.
 
-Keep samples for release-note features in the maintained component set so they can be rerun in later previews. For one-off compile checks outside feature validation, use a scratch project and remove it afterward.
-
-Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets.
+Do not commit downloaded SDKs, packages, build outputs, certificates, secrets, or generated assets. Stop any processes started for validation and remove the temporary sample projects and downloaded validation artifacts when finished.
 
 ## What to validate
 
 - Build or update a sample for every feature in the release notes, even if the notes have no code snippet for it. Run each sample against the milestone build and verify the claimed behavior, such as a browser API call, an endpoint response, or an explicitly stated default or flag polarity. A successful build or startup alone is not enough.
 - Test any code snippets from the release notes as part of those samples. Confirm the snippets build, run, and behave as described.
-- As you update existing maintained samples to the new preview, note changes required by the new release. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
+- As you upgrade scratch projects from the previous preview, note changes required by the new release. Document the resulting preview-to-preview breaking changes and migration steps in the release notes.
 
 ## Recording what you verified
 
-Create `release-notes/<major>.0/samples/README.md` when adding maintained samples. Explain their purpose and record the SDK version against which all component sample sets were last validated. Update the version after validating the sets against a new SDK.
-
-In each `<component>/README.md`, describe the component's samples, how to run them, and their expected behavior. Keep it current as the samples change.
+Summarize validation in the component PR description or a review comment: record the exact SDK version, scenarios tested, expected and observed behavior, and any failures or unverified claims. Do not create sample READMEs or commit validation projects or their outputs. Keep reader-facing release notes focused on the verified feature and any necessary migration guidance.
 
 ## When a claim fails validation
 

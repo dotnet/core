@@ -89,18 +89,22 @@ Your outputs are pull requests — one per active milestone — each containing:
 - **Respect human edits** — this is a shared workspace. Humans edit branch content directly. Diff before writing and preserve everything they've touched. When in doubt, ask via PR comment.
 - **Engage with comments** — read PR comments and review threads. Some are actionable, some need discussion. Respond and iterate.
 - **Incremental improvement** — early drafts are rough. Each nightly run improves them.
+- **Conflict-free component PRs** — initialize every expected component stub and its link in the milestone README on the base branch before creating component branches. Component PRs update only their inherited notes file and never edit the shared README; keep index changes on the base branch.
+- **Local-only validation** — build and run samples in temporary scratch projects outside the checkout. Never commit sample source files, projects, validation scripts, fixtures, or supporting assets. Code snippets in Markdown release notes are still appropriate.
 
 ## Reference documents
 
 Read these files and skills for detailed guidance:
 
 - **editorial-scoring** — shared reader-centric scoring rubric and 80/20 audience filter ([skill](../skills/editorial-scoring/SKILL.md))
+- **validate-code-samples** — verify documented claims against the milestone build using local-only scratch projects ([skill](../skills/validate-code-samples/SKILL.md))
 - **quality-bar.md** — what good release notes look like
 - **vmr-structure.md** — how the VMR works, branch naming, source-manifest.json
 - **changes-schema.md** — the shared `changes.json` / `features.json` schema
 - **feature-scoring.md** — how to score and cut candidate features
 - **component-mapping.md** — VMR paths → components → product slugs → output files
 - **format-template.md** — markdown document structure
+- **pr-layout.md** — initialize linked stubs on the base branch, then update notes in component-only PRs ([reference](../skills/release-notes/references/pr-layout.md))
 - **editorial-rules.md** — tone, attribution, naming conventions
 - **examples/** — curated examples from previous releases, organized by component ([README](../skills/release-notes/references/examples/README.md) has principles)
 
@@ -258,6 +262,7 @@ If the branch already has drafted markdown, that content is the **baseline** for
 
 Using `features.json`, `changes.json`, and the reference documents:
 
+- For a new milestone, commit all expected component stubs and the fully linked README on the base branch before branching for component PRs. On reruns, preserve existing content and fix missing stubs or index links only on the base branch, following `update-existing-branch`.
 - Route changes to output files via `product` field and component-mapping.md
 - For each component: identify which PRs are worth writing about
 - On a populated branch, start by editing the existing markdown files rather than drafting replacements from zero
@@ -266,6 +271,8 @@ Using `features.json`, `changes.json`, and the reference documents:
 - If `release-notes/features.json` exists, consult it before writing. For matching long-running features, use the established feature name and start the section with the standard preview blockquote from the sidecar file.
 - Include a **Community contributors** section that mentions every external contributor with at least one merged PR in the milestone, even if their change only appears in bug fixes or was not promoted into a top-level feature section.
 - Components with no noteworthy changes get a minimal stub
+
+Before the final review, run `validate-code-samples` for every documented feature and snippet, including changed claims and migration guidance on reruns. Record the exact SDK version, scenarios, expected and observed behavior, and any failures or unverified claims in the component PR description or review comments, not in checked-in sample files. Stop validation processes and remove the temporary projects and downloaded validation artifacts when finished.
 
 #### f. Ask for what you can't generate
 

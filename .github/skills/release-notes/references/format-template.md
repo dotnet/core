@@ -38,36 +38,32 @@ Standard document structure for .NET release notes markdown files.
 
 ### README.md (index file)
 
-The README.md is the reader-facing index for the milestone. The base branch
-preallocates unlinked entries for expected component files, groups them
-consistently, points to the release downloads, and provides durable product
-documentation links. Each component PR links its own entry when it adds the
-matching file. Component files do NOT repeat the general links.
+The README.md is the reader-facing index for the milestone. The base branch creates every expected component file as a stub and links all of them from the start, groups them consistently, points to the release downloads, and provides durable product documentation links. Component PRs replace only their inherited notes stubs and never edit the shared README. Component files do NOT repeat the general links.
 
 ```markdown
 # .NET <VERSION> <MILESTONE> - Release Notes
 
 Browse the .NET <VERSION> <MILESTONE> release notes by component:
 
-- Libraries
-- Runtime
-- SDK
-- MSBuild
-- NuGet
+- [Libraries](./libraries.md)
+- [Runtime](./runtime.md)
+- [SDK](./sdk.md)
+- [MSBuild](./msbuild.md)
+- [NuGet](./nuget.md)
 
 ## Languages
 
-- C#
-- F#
+- [C#](./csharp.md)
+- [F#](./fsharp.md)
 
 ## Workloads, Libraries, & More
 
-- .NET MAUI
-- ASP.NET Core
-- Container images
-- EF Core & Data
-- Windows Forms
-- WPF
+- [.NET MAUI](./dotnetmaui.md)
+- [ASP.NET Core](./aspnetcore.md)
+- [Container images](./containers.md)
+- [EF Core & Data](./efcore.md)
+- [Windows Forms](./winforms.md)
+- [WPF](./wpf.md)
 
 ## Get Started
 
@@ -86,17 +82,16 @@ You can find a detailed overview of all new features in .NET <VERSION>:
 The latest .NET <VERSION> release is always available at [dotnet.microsoft.com](https://dotnet.microsoft.com/download/dotnet/<version>) and [.NET <VERSION> Releases](../../README.md).
 ```
 
-When a component PR adds its Markdown file, replace only its unlinked index
-entry with a relative link to that file. Keep other pending entries unlinked
-and preserve links already merged from other components. Apply these rules
-when generating and completing the index:
+Apply these rules when generating and completing the index:
 
-1. Preallocate an unlinked entry for every expected component file listed in
+1. Create a [component stub](#component-stubs) for every expected file listed in
    `component-mapping.md` on the base branch, including components without
-   noteworthy changes. Do not link a file that exists only on another branch.
-2. Each component PR links exactly its own entry when adding the matching file
-   (and any matching validation samples). Before the base PR leaves draft,
-   verify that every expected component file exists and is linked exactly once.
+   noteworthy changes and out-of-band components. Commit the stubs and their
+   README links together before creating any component branches.
+2. Each component PR updates only its inherited component file, not the README.
+   Verify that every expected component file exists and is linked exactly once.
+   Before the base PR leaves draft, replace every initial placeholder with reviewed
+   notes or the no-noteworthy-changes statement.
 3. Keep Libraries, Runtime, SDK, MSBuild, and NuGet before the grouped sections.
 4. Use **Languages** for language release notes and
    **Workloads, Libraries, & More** for application frameworks, workloads,
@@ -143,11 +138,11 @@ Use **Breaking changes from .NET N** (where N is the previous stable major versi
 
 Use **Changes since the previous preview** for migrations that only affect code written against this major's earlier previews or RCs. For an RC, compare against the preceding prerelease, including an earlier RC. Name the old and new behavior and the affected preview or RC. Do not carry preview-only churn into the version-to-version breaking-change list. Omit either section when it has no entries.
 
-The [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades) and maintained samples can reveal migration candidates, but do not determine which baseline they break.
+The [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades) and local sample validation can reveal migration candidates, but do not determine which baseline they break.
 
 Cover these when they apply. They tend to surface only when an existing project is actually upgraded
 to the new build, which is one of the reasons
-[`validate-code-samples`](../../validate-code-samples/SKILL.md) upgrades the component's maintained sample set under `release-notes/<major>.0/samples/<component>/`:
+[`validate-code-samples`](../../validate-code-samples/SKILL.md) reproduces earlier usage and upgrades it in temporary scratch projects outside the repository checkout, without committing the projects:
 
 - **Renamed APIs**, especially renames that invert meaning (`EnableX` becoming `DisableX`). Show the
   before and after, and state the new default explicitly.
@@ -175,9 +170,17 @@ Always use markdown links with the `{org}/{repo} #{number}` format, with a space
 - ✅ `[dotnet/runtime #124264](https://github.com/dotnet/runtime/pull/124264)`
 - ❌ `dotnet/runtime#124264` (wrong spacing and bare reference)
 
-## Minimal stub
+## Component stubs
 
-For components with no noteworthy changes:
+On the base branch, initialize every expected component file with this stub before creating component branches. Use a pending placeholder rather than claiming there are no noteworthy changes before reviewing the component:
+
+```markdown
+# <Component> in .NET <VERSION> <PREVIEW> - Release Notes
+
+<!-- TODO: Replace this stub with verified release notes or the no-noteworthy-changes statement before publication. -->
+```
+
+On the matching component branch, replace the inherited stub with the reviewed notes. For components confirmed to have no noteworthy changes, use:
 
 ```markdown
 # <Component> in .NET <VERSION> <PREVIEW> - Release Notes
