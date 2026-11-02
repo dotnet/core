@@ -113,8 +113,6 @@ duplication.
 
 For each component affected by the delta, update **only** that component's markdown on **its** branch. Before editing, merge the base branch into the component branch so the latest metadata and fully linked index are available in your working tree; don't touch component branches you aren't editing this run. Component PRs never edit the shared README.
 
-If an older branch set lacks the linked stubs, add only missing component files and complete the index on the base branch first. Preserve existing notes and human edits. When merging this base update into a component branch that already added its file, resolve any add/add conflict by retaining the authored component content rather than replacing it with the base stub.
-
 Examples:
 
 - on the runtime branch, add a new GC item into the existing **Garbage Collection Performance Improvements** section in `runtime.md`
@@ -126,7 +124,7 @@ only when the delta introduces a genuinely new story.
 
 When the target build changes or an incremental API diff becomes available, review it for [upgrade-impacting changes](../release-notes/references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades), including any API-diff review left pending on the base PR. Put verified guidance in the affected component's version-to-version or preview-only section as appropriate, without rewriting unrelated notes. Incorporate newly published compatibility guidance even if the build has not changed.
 
-Use [`validate-code-samples`](../validate-code-samples/SKILL.md) to verify new or changed claims and migration steps in temporary scratch projects outside the checkout. Do not add or update checked-in sample projects, validation scripts, fixtures, or supporting assets. Record validation results in the component PR description or review comments, then remove the temporary projects.
+Use [`validate-code-samples`](../validate-code-samples/SKILL.md) to verify new or changed claims and migration examples against the target build in local-only scratch projects.
 
 ### 5. Treat review comments as required inputs
 

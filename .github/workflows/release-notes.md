@@ -89,8 +89,8 @@ Your outputs are pull requests — one per active milestone — each containing:
 - **Respect human edits** — this is a shared workspace. Humans edit branch content directly. Diff before writing and preserve everything they've touched. When in doubt, ask via PR comment.
 - **Engage with comments** — read PR comments and review threads. Some are actionable, some need discussion. Respond and iterate.
 - **Incremental improvement** — early drafts are rough. Each nightly run improves them.
-- **Conflict-free component PRs** — initialize every expected component stub and its link in the milestone README on the base branch before creating component branches. Component PRs update only their inherited notes file and never edit the shared README; keep index changes on the base branch.
-- **Local-only validation** — build and run samples in temporary scratch projects outside the checkout. Never commit sample source files, projects, validation scripts, fixtures, or supporting assets. Code snippets in Markdown release notes are still appropriate.
+- **Conflict-free component PRs** — create all component stubs and their README links on the base branch before branching. Component PRs update only their notes file, never the shared README.
+- **Local-only validation** — run samples outside the checkout; never commit validation projects or supporting files. Markdown code snippets are allowed.
 
 ## Reference documents
 
@@ -104,7 +104,7 @@ Read these files and skills for detailed guidance:
 - **feature-scoring.md** — how to score and cut candidate features
 - **component-mapping.md** — VMR paths → components → product slugs → output files
 - **format-template.md** — markdown document structure
-- **pr-layout.md** — initialize linked stubs on the base branch, then update notes in component-only PRs ([reference](../skills/release-notes/references/pr-layout.md))
+- **pr-layout.md** — base and component branch layout ([reference](../skills/release-notes/references/pr-layout.md))
 - **editorial-rules.md** — tone, attribution, naming conventions
 - **examples/** — curated examples from previous releases, organized by component ([README](../skills/release-notes/references/examples/README.md) has principles)
 
@@ -262,7 +262,6 @@ If the branch already has drafted markdown, that content is the **baseline** for
 
 Using `features.json`, `changes.json`, and the reference documents:
 
-- For a new milestone, commit all expected component stubs and the fully linked README on the base branch before branching for component PRs. On reruns, preserve existing content and fix missing stubs or index links only on the base branch, following `update-existing-branch`.
 - Route changes to output files via `product` field and component-mapping.md
 - For each component: identify which PRs are worth writing about
 - On a populated branch, start by editing the existing markdown files rather than drafting replacements from zero
@@ -272,7 +271,7 @@ Using `features.json`, `changes.json`, and the reference documents:
 - Include a **Community contributors** section that mentions every external contributor with at least one merged PR in the milestone, even if their change only appears in bug fixes or was not promoted into a top-level feature section.
 - Components with no noteworthy changes get a minimal stub
 
-Before the final review, run `validate-code-samples` for every documented feature and snippet, including changed claims and migration guidance on reruns. Record the exact SDK version, scenarios, expected and observed behavior, and any failures or unverified claims in the component PR description or review comments, not in checked-in sample files. Stop validation processes and remove the temporary projects and downloaded validation artifacts when finished.
+Before final review, run `validate-code-samples` for documented features, snippets, and migration guidance, including changed claims on reruns. Record results in the component PR description or review comments.
 
 #### f. Ask for what you can't generate
 

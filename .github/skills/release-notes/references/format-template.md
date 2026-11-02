@@ -38,7 +38,7 @@ Standard document structure for .NET release notes markdown files.
 
 ### README.md (index file)
 
-The README.md is the reader-facing index for the milestone. The base branch creates every expected component file as a stub and links all of them from the start, groups them consistently, points to the release downloads, and provides durable product documentation links. Component PRs replace only their inherited notes stubs and never edit the shared README. Component files do NOT repeat the general links.
+The milestone README links to every component file, release downloads, and product documentation. Component files do not repeat the general links.
 
 ```markdown
 # .NET <VERSION> <MILESTONE> - Release Notes
@@ -138,7 +138,7 @@ Use **Breaking changes from .NET N** (where N is the previous stable major versi
 
 Use **Changes since the previous preview** for migrations that only affect code written against this major's earlier previews or RCs. For an RC, compare against the preceding prerelease, including an earlier RC. Name the old and new behavior and the affected preview or RC. Do not carry preview-only churn into the version-to-version breaking-change list. Omit either section when it has no entries.
 
-Identify migration candidates from the [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades), `changes.json`, upstream PRs, and published compatibility guidance. Use that evidence to determine the affected baseline. [`validate-code-samples`](../../validate-code-samples/SKILL.md) tests the documented replacement code and behavior against the target milestone build; do not reconstruct earlier projects and upgrade them to discover breaking changes.
+Identify migrations and affected baselines from the [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades), `changes.json`, upstream PRs, and published compatibility guidance. Use [`validate-code-samples`](../../validate-code-samples/SKILL.md) to test replacement code against the target build, not to reconstruct and upgrade earlier projects.
 
 Cover these when supported by the evidence:
 
@@ -170,15 +170,21 @@ Always use markdown links with the `{org}/{repo} #{number}` format, with a space
 
 ## Component stubs
 
-On the base branch, initialize every expected component file with this stub before creating component branches. Use a pending placeholder rather than claiming there are no noteworthy changes before reviewing the component:
+Initialize each component file on the base branch with:
 
 ```markdown
 # <Component> in .NET <VERSION> <PREVIEW> - Release Notes
 
-<!-- TODO: Replace this stub with verified release notes or the no-noteworthy-changes statement before publication. -->
+<!-- TODO: Add release notes or confirm there are no noteworthy changes. -->
 ```
 
-On the matching component branch, replace the inherited stub with the reviewed notes. For components confirmed to have no noteworthy changes, use:
+On the component branch, replace the stub with reviewed notes. If only the inherited stub is available and owner input is pending, replace its TODO with this owner-handoff comment and commit it before opening the draft PR:
+
+```markdown
+<!-- TODO: <Component> team: add release notes or confirm there are no noteworthy changes. -->
+```
+
+For components confirmed to have no noteworthy changes, use:
 
 ```markdown
 # <Component> in .NET <VERSION> <PREVIEW> - Release Notes

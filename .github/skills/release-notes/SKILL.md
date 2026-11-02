@@ -16,10 +16,10 @@ This skill is the **editorial writing stage** of the pipeline. It turns a scored
 2. `generate-features` reads `changes.json`, resolves revert/backout relationships, and emits `features.json` with optional scores using the shared `editorial-scoring` rubric
 3. `update-existing-branch` handles incremental reruns when a milestone branch already exists, merging deltas instead of restarting from scratch
 4. `api-diff-validation` / `dotnet-inspect` verifies public APIs and confirms suspect features still exist in the shipped build; review the [incremental API diff](references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades) for preview-to-preview migration signals
-5. `release-notes` first creates a stub for every expected component file and a fully linked milestone `README.md` on the base branch. Component branches inherit these files and replace only their own stub with curated markdown using the higher-value entries from `features.json`; they never edit the shared README. See [`format-template.md`](references/format-template.md).
+5. `release-notes` creates linked component stubs on the base branch, then writes curated component markdown from `features.json` on component branches. See [`format-template.md`](references/format-template.md).
 6. `validate-code-samples` builds and runs the documented claims against the milestone build in local-only scratch projects outside the checkout, catching what static API verification cannot see
 7. `review-release-notes` runs a final multi-model editorial QA pass against the scoring rubric and examples
-8. Output is a set of pull requests per release milestone in dotnet/core: a base PR that holds shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and all component stubs, plus one PR per component that updates only its inherited notes file. Each component PR targets the base branch so component teams review their own notes without conflicting README edits. See [`pr-layout.md`](references/pr-layout.md) for the full layout and naming scheme.
+8. Output is a base PR with shared metadata (`changes.json`, `features.json`, `README.md`, `build-metadata.json`) and component stubs, plus one PR per component targeting the base branch. Component PRs update only their notes file, never the shared README. See [`pr-layout.md`](references/pr-layout.md).
 
 Before drafting or delegating component files, confirm that the milestone's
 `features.json` contains the real `changes[]` and `commits{}` from `changes.json`,
@@ -33,7 +33,7 @@ Before finalizing the milestone, run `review-release-notes` against the
 branches (or the base branch after they merge). Resolve noteworthy omissions
 it finds or record the editorial reason in `features.json`.
 
-Do not commit executable sample projects, validation scripts, fixtures, or supporting sample assets. Keep validation local-only and record the results in the component PR description or review comments. Code snippets within the Markdown release notes remain appropriate.
+Markdown code snippets are allowed; executable validation projects and supporting files must not be committed.
 
 ## Local testing (no PRs)
 
