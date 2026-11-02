@@ -578,7 +578,9 @@
       "labels": [
         "area-dataprotection",
         "area-perf"
-      ]
+      ],
+      "score": 4,
+      "score_reason": "Managed Data Protection allocation improvement with upstream benchmark evidence; retain comparison-only GA coverage rather than add a standalone performance story."
     },
     {
       "id": "aspnetcore@d5d779b",
@@ -1997,7 +1999,9 @@
       "local_repo_commit": "efcore@570c1e7",
       "labels": [
         "Servicing-approved"
-      ]
+      ],
+      "score": 3,
+      "score_reason": "Context-dependent query-filter regression fix; comparison-only GA coverage rather than a standalone feature."
     },
     {
       "id": "efcore@e2e868a",
@@ -6111,7 +6115,9 @@
       "labels": [
         "Servicing-approved",
         "area-System.Text.Json"
-      ]
+      ],
+      "score": 3,
+      "score_reason": "Customer-reported JSONL streaming correctness fix, including nested asynchronous serialization; comparison-only GA coverage rather than a separate feature section."
     },
     {
       "id": "runtime@4c29572",
@@ -7913,7 +7919,9 @@
         "Area-dotnet test",
         "backport",
         "Area-dotnet test (MTP)"
-      ]
+      ],
+      "score": 0,
+      "score_reason": "Servicing backport: no independently verified new RC3-to-GA test-reporting behavior. Retain the source comparison; owner must confirm the baseline before promoting this as a new GA fix."
     },
     {
       "id": "sdk@2c6e307",
