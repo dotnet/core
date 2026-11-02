@@ -89,18 +89,22 @@ Your outputs are pull requests — one per active milestone — each containing:
 - **Respect human edits** — this is a shared workspace. Humans edit branch content directly. Diff before writing and preserve everything they've touched. When in doubt, ask via PR comment.
 - **Engage with comments** — read PR comments and review threads. Some are actionable, some need discussion. Respond and iterate.
 - **Incremental improvement** — early drafts are rough. Each nightly run improves them.
+- **Conflict-free component PRs** — create all component stubs and their README links on the base branch before branching. Component PRs update only their notes file, never the shared README.
+- **Local-only validation** — run samples outside the checkout; never commit validation projects or supporting files. Markdown code snippets are allowed.
 
 ## Reference documents
 
 Read these files and skills for detailed guidance:
 
 - **editorial-scoring** — shared reader-centric scoring rubric and 80/20 audience filter ([skill](../skills/editorial-scoring/SKILL.md))
+- **validate-code-samples** — verify documented claims against the milestone build using local-only scratch projects ([skill](../skills/validate-code-samples/SKILL.md))
 - **quality-bar.md** — what good release notes look like
 - **vmr-structure.md** — how the VMR works, branch naming, source-manifest.json
 - **changes-schema.md** — the shared `changes.json` / `features.json` schema
 - **feature-scoring.md** — how to score and cut candidate features
 - **component-mapping.md** — VMR paths → components → product slugs → output files
 - **format-template.md** — markdown document structure
+- **pr-layout.md** — base and component branch layout ([reference](../skills/release-notes/references/pr-layout.md))
 - **editorial-rules.md** — tone, attribution, naming conventions
 - **examples/** — curated examples from previous releases, organized by component ([README](../skills/release-notes/references/examples/README.md) has principles)
 
@@ -266,6 +270,8 @@ Using `features.json`, `changes.json`, and the reference documents:
 - If `release-notes/features.json` exists, consult it before writing. For matching long-running features, use the established feature name and start the section with the standard preview blockquote from the sidecar file.
 - Include a **Community contributors** section that mentions every external contributor with at least one merged PR in the milestone, even if their change only appears in bug fixes or was not promoted into a top-level feature section.
 - Components with no noteworthy changes get a minimal stub
+
+Before final review, run `validate-code-samples` for documented features, snippets, and migration guidance, including changed claims on reruns. Record results in the component PR description or review comments.
 
 #### f. Ask for what you can't generate
 

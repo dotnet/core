@@ -39,7 +39,7 @@ the PRs are created.
 
 ### Components contributed out-of-band (not in the VMR)
 
-These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. The agent still creates a stub PR for each so the component team can add its own content. If there is nothing noteworthy this milestone, merge the stub so its file and index link remain in the release notes.
+These components ship with .NET but live outside the VMR, so `changes.json` won't contain entries for them. Use the [owner-handoff flow](format-template.md#component-stubs) to open draft PRs for their teams to supply content or confirm there are no noteworthy changes.
 
 | Component | Source Repo | Release Notes File | Default Assignee(s) |
 | --------- | ----------- | ------------------ | ------------------- |

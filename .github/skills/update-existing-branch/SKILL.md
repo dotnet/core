@@ -50,8 +50,8 @@ Respect this invariant on every rerun:
 | Artifact | Lives on |
 | -------- | -------- |
 | `changes.json`, `features.json`, `build-metadata.json` | base branch only |
-| `README.md` | base branch preallocates entries; each component branch links only its own entry alongside the matching file |
-| `{component}.md` (e.g. `aspnetcore.md`, `runtime.md`) | matching component branch only |
+| `README.md` | base branch only, with links to every expected component file |
+| `{component}.md` (e.g. `aspnetcore.md`, `runtime.md`) | initialized as a stub on the base branch; content updated on its matching component branch |
 
 ## Process
 
@@ -111,12 +111,7 @@ This should feel like a **delta merge**, not a full rescore.
 Use the current draft as the starting point. Prefer **integration** over
 duplication.
 
-For each component affected by the delta, update **only** that component's
-markdown and its own README entry on **its** branch. Before editing, merge the
-base branch into the component branch so the latest metadata and already-merged
-index links are available in your working tree; don't touch component branches
-you aren't editing this run. Add a link only when adding the matching component
-file; keep other pending entries unlinked and preserve links already merged.
+For each component affected by the delta, update **only** that component's markdown on **its** branch. Before editing, merge the base branch into the component branch so the latest metadata and fully linked index are available in your working tree; don't touch component branches you aren't editing this run. Component PRs never edit the shared README.
 
 Examples:
 
@@ -128,6 +123,8 @@ Keep the existing structure when it still works. Add a new top-level section
 only when the delta introduces a genuinely new story.
 
 When the target build changes or an incremental API diff becomes available, review it for [upgrade-impacting changes](../release-notes/references/api-verification.md#review-incremental-api-diffs-for-preview-upgrades), including any API-diff review left pending on the base PR. Put verified guidance in the affected component's version-to-version or preview-only section as appropriate, without rewriting unrelated notes. Incorporate newly published compatibility guidance even if the build has not changed.
+
+Use [`validate-code-samples`](../validate-code-samples/SKILL.md) to verify new or changed claims and migration examples against the target build in local-only scratch projects.
 
 ### 5. Treat review comments as required inputs
 
