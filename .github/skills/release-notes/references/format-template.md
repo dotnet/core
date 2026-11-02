@@ -138,11 +138,9 @@ Use **Breaking changes from .NET N** (where N is the previous stable major versi
 
 Use **Changes since the previous preview** for migrations that only affect code written against this major's earlier previews or RCs. For an RC, compare against the preceding prerelease, including an earlier RC. Name the old and new behavior and the affected preview or RC. Do not carry preview-only churn into the version-to-version breaking-change list. Omit either section when it has no entries.
 
-The [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades) and local sample validation can reveal migration candidates, but do not determine which baseline they break.
+Identify migration candidates from the [incremental API diff](api-verification.md#review-incremental-api-diffs-for-preview-upgrades), `changes.json`, upstream PRs, and published compatibility guidance. Use that evidence to determine the affected baseline. [`validate-code-samples`](../../validate-code-samples/SKILL.md) tests the documented replacement code and behavior against the target milestone build; do not reconstruct earlier projects and upgrade them to discover breaking changes.
 
-Cover these when they apply. They tend to surface only when an existing project is actually upgraded
-to the new build, which is one of the reasons
-[`validate-code-samples`](../../validate-code-samples/SKILL.md) reproduces earlier usage and upgrades it in temporary scratch projects outside the repository checkout, without committing the projects:
+Cover these when supported by the evidence:
 
 - **Renamed APIs**, especially renames that invert meaning (`EnableX` becoming `DisableX`). Show the
   before and after, and state the new default explicitly.
