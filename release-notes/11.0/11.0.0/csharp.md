@@ -1,5 +1,5 @@
-# C# updates in .NET 11
+# C# in .NET 11 - Release Notes
 
-For language features, see [What's new in C# 15](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-15).
+The final C# compiler updates for .NET 11 focus on quality and stability.
 
-See the [Roslyn repository changelog](https://github.com/dotnet/roslyn/compare/cf91b80aa2f0eb5b64d7bdb544170d9744883f72...a8dd230136b9707f97901fe1ace580a8f8e5eaa5) for compiler changes since RC3.
+For language features introduced throughout the release, see [What's new in C# 15](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-15).
