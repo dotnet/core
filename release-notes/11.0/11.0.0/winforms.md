@@ -1,7 +1,17 @@
-# Windows Forms updates in .NET 11
+# Windows Forms in .NET 11 - Release Notes
+
+The final Windows Forms updates for .NET 11 focus on quality and stability.
+
+## Bug fixes
+
+### Accessibility
+
+- [Correct the accessibility notification check in Control.AccessibilityNotifyClients](https://github.com/dotnet/winforms/pull/15222)
+
+### Clipboard
+
+- [Fix a clipboard format-dictionary race that can cause operations to fail or hang](https://github.com/dotnet/winforms/pull/15329)
 
 For features introduced throughout the release, see [What's new in Windows Forms for .NET 11](https://learn.microsoft.com/dotnet/desktop/winforms/whats-new/net110).
-
-See the [Windows Forms repository changelog](https://github.com/dotnet/winforms/compare/ba35870d5f10cb77b5a025601de775506ba956d0...bf49e6c5c1361f731760bc67274f9faf6cb19a42) for changes since RC3.
 
 Before upgrading an existing app, review [Breaking changes in .NET 11](https://learn.microsoft.com/dotnet/core/compatibility/11).
