@@ -1,6 +1,6 @@
 # .NET 11
 
-.NET 11 is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for two years, from November 10, 2026, to November 9, 2028.
+.NET 11 is a [Standard Term Support (STS)](../../release-policies.md) release and will be supported on [multiple operating systems](supported-os.md) for two years, from November 10, 2026, to November 14, 2028.
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/11.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
