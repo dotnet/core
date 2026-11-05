@@ -7,7 +7,7 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 | Manifest Path | Component | Source Repo | Release Notes File | Default Assignee(s) |
 | ------------- | --------- | ----------- | ------------------ | ------------------- |
 | `runtime` | .NET Libraries | `dotnet/runtime` | `libraries.md` | @artl93 @jeffhandley @SamMonoRT @karelz |
-| `runtime` | .NET Runtime | `dotnet/runtime` | `runtime.md` | @richlander |
+| `runtime` | .NET Runtime | `dotnet/runtime` | `runtime.md` | @richlander @agocke |
 | `aspnetcore` | ASP.NET Core | `dotnet/aspnetcore` | `aspnetcore.md` | @danroth27 |
 | `razor` | ASP.NET Core (Razor) | `dotnet/razor` | `aspnetcore.md` | @danroth27 |
 | `sdk` | .NET SDK | `dotnet/sdk` | `sdk.md` | @baronfel |
@@ -17,7 +17,7 @@ Uses the `repo` field from `changes.json` (which matches `source-manifest.json` 
 | `wpf` | WPF | `dotnet/wpf` | `wpf.md` | @subhajitm |
 | `efcore` | EF Core | `dotnet/efcore` | `efcore.md` | @SamMonoRT @AndriySvyryd |
 | `roslyn` | C# | `dotnet/roslyn` | `csharp.md` | @BillWagner |
-| `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | @T-Gro |
+| `fsharp` | F# | `dotnet/fsharp` | `fsharp.md` | @T-Gro @abonie |
 | `nuget-client` | NuGet | `nuget/nuget.client` | `nuget.md` | @baronfel |
 
 Each release notes file gets its own per-component branch named `release-notes/{version}-{milestone-slug}-{file-stem}`, where `{file-stem}` is the release notes filename without `.md` (for example, `aspnetcore.md` → `release-notes/11.0-preview4-aspnetcore`). See [`pr-layout.md`](pr-layout.md) for the full branching scheme.
