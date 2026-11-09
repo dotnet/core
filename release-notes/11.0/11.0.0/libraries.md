@@ -2,6 +2,8 @@
 
 The final library updates for .NET 11 include experimental public-key encryption, JSON Lines serialization fixes, and migration guidance for tensor and compression APIs.
 
+For features introduced throughout the release, see [What's new in the .NET 11 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/libraries).
+
 - [Experimental public-key encryption](#experimental-public-key-encryption)
 - [JSON Lines streaming](#json-lines-streaming)
 - [Breaking changes from .NET 10](#breaking-changes-from-net-10)
@@ -44,8 +46,6 @@ dotnet_diagnostic.SYSLIB5009.severity = warning
 ### JSON Lines streaming
 
 `JsonSerializer.SerializeAsyncEnumerable` now streams each JSONL entry instead of buffering the entire entry. This also fixes serialization of entries that contain nested asynchronous enumerables ([dotnet/runtime#134593](https://github.com/dotnet/runtime/pull/134593)).
-
-For features introduced throughout the release, see [What's new in the .NET 11 libraries](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/libraries).
 
 ## Breaking changes from .NET 10
 
