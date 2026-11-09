@@ -243,7 +243,7 @@
         "Servicing-approved"
       ],
       "score": 3,
-      "score_reason": "Native AOT JavaScript-interoperability correctness fix; comparison-only GA coverage."
+      "score_reason": "Native AOT JavaScript-interoperability correctness fix; too narrow for a standalone section."
     },
     {
       "id": "aspnetcore@83b73f0",
@@ -452,7 +452,7 @@
         "feature-blazor-virtualization"
       ],
       "score": 3,
-      "score_reason": "Disposed-component JavaScript-interoperability fix; comparison-only GA coverage."
+      "score_reason": "Disposed-component interoperability fix; omit rather than turn the notes into a full bug inventory."
     },
     {
       "id": "aspnetcore@b01066e",
@@ -508,7 +508,7 @@
         "area-middleware"
       ],
       "score": 3,
-      "score_reason": "Custom output-caching policy correctness fix; comparison-only GA coverage and community acknowledgment."
+      "score_reason": "A custom authenticated-user output-cache policy works again; include a compact fix and retain community attribution."
     },
     {
       "id": "aspnetcore@3c130d7",
@@ -580,7 +580,7 @@
         "area-perf"
       ],
       "score": 4,
-      "score_reason": "Managed Data Protection allocation improvement with upstream benchmark evidence; retain comparison-only GA coverage rather than add a standalone performance story."
+      "score_reason": "Data Protection avoids validation-hash allocations, with upstream benchmark evidence. Include a short fix without extrapolating benchmark percentages."
     },
     {
       "id": "aspnetcore@d5d779b",
@@ -608,8 +608,8 @@
         "area-signalr"
       ],
       "score": 4,
-      "score_reason": "SignalR endpoint token binding is a behavioral hardening change. Retain the source comparison and ask the owner to confirm compatibility guidance; the original PR carries a different milestone.",
-      "breaking_changes": true
+      "score_reason": "Delivered in .NET 11 through backport dotnet/aspnetcore#69835 (source commit 2dd208b). Include a compact bug-fix entry: tokens are bound to their originating endpoint mapping. Supported same-mapping behavior is unchanged; no migration guidance is needed.",
+      "breaking_changes": false
     },
     {
       "id": "aspnetcore@50f709d",
@@ -627,7 +627,7 @@
         "area-networking"
       ],
       "score": 3,
-      "score_reason": "IIS first-request path-base correctness fix; comparison-only GA coverage and community acknowledgment."
+      "score_reason": "IIS virtual-directory startup routing regression; include a compact fix and retain community attribution."
     },
     {
       "id": "aspnetcore@4178259",
@@ -642,7 +642,7 @@
         "area-mvc"
       ],
       "score": 3,
-      "score_reason": "Union validation correctness fix; comparison-only GA coverage."
+      "score_reason": "MVC now validates active union cases. Group with the related Minimal API validation fix, not a new union feature."
     },
     {
       "id": "aspnetcore@8ded432",
@@ -654,7 +654,7 @@
       "product": "dotnet-aspnetcore",
       "local_repo_commit": "aspnetcore@8ded432",
       "score": 3,
-      "score_reason": "Minimal API union validation correctness fix; comparison-only GA coverage."
+      "score_reason": "Minimal API union validation honors skipped validation and traverses collection cases; group with MVC validation."
     },
     {
       "id": "aspnetcore@15f7c1e",
@@ -747,6 +747,21 @@
       "labels": [
         "tell-mode"
       ]
+    },
+    {
+      "id": "aspnetcore@ba4cc22",
+      "repo": "aspnetcore",
+      "title": "[release/11.0] (deps): Bump src/submodules/googletest",
+      "url": "https://github.com/dotnet/aspnetcore/pull/70216",
+      "commit": "dotnet@eb886e6",
+      "is_security": false,
+      "product": "dotnet-aspnetcore",
+      "local_repo_commit": "aspnetcore@ba4cc22",
+      "labels": [
+        "area-infrastructure"
+      ],
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
     },
     {
       "id": "cecil@1ca9b16",
@@ -1719,6 +1734,18 @@
       "local_repo_commit": "diagnostics@bcce635"
     },
     {
+      "id": "diagnostics@3a207d8",
+      "repo": "diagnostics",
+      "title": "Update mirrored cDAC source",
+      "url": "https://github.com/dotnet/diagnostics/pull/6178",
+      "commit": "dotnet@95a103d",
+      "is_security": false,
+      "product": "dotnet-diagnostics",
+      "local_repo_commit": "diagnostics@3a207d8",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
       "id": "efcore@1b2d757",
       "repo": "efcore",
       "title": "Update dependencies from https://github.com/dotnet/arcade build 20260908.10",
@@ -1986,7 +2013,7 @@
         "api-review"
       ],
       "score": 3,
-      "score_reason": "SQLite JSON-index correctness fix; comparison-only GA coverage."
+      "score_reason": "SQLite indexes must target the configured JSON member rather than its entire document; include a concise correctness fix."
     },
     {
       "id": "efcore@570c1e7",
@@ -2001,7 +2028,7 @@
         "Servicing-approved"
       ],
       "score": 3,
-      "score_reason": "Context-dependent query-filter regression fix; comparison-only GA coverage rather than a standalone feature."
+      "score_reason": "Context-based global query filters using EF.Parameter or EF.Constant no longer fail validation; include a concise regression fix."
     },
     {
       "id": "efcore@e2e868a",
@@ -2361,7 +2388,7 @@
         "Servicing-approved"
       ],
       "score": 3,
-      "score_reason": "Query translation correctness fix; comparison-only GA coverage."
+      "score_reason": "Restores LEFT JOIN translation for affected grouped queries, including providers without APPLY support; compact fix, not a new query feature."
     },
     {
       "id": "efcore@b34c0e9",
@@ -2494,7 +2521,7 @@
         "Servicing-approved"
       ],
       "score": 3,
-      "score_reason": "Raw SQL and JSON-mapping correctness fix; comparison-only GA coverage."
+      "score_reason": "Raw SQL with JSON-mapped complex properties no longer fails materialization; too narrow to expand beyond a compact fix."
     },
     {
       "id": "efcore@68d9f6c",
@@ -2616,6 +2643,33 @@
       "is_security": false,
       "product": "dotnet-efcore",
       "local_repo_commit": "efcore@c24253f"
+    },
+    {
+      "id": "efcore@3133306",
+      "repo": "efcore",
+      "title": "[release/11.0] Source code updates from dotnet/dotnet",
+      "url": "https://github.com/dotnet/efcore/pull/39457",
+      "commit": "dotnet@286bfbe",
+      "is_security": false,
+      "product": "dotnet-efcore",
+      "local_repo_commit": "efcore@3133306",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
+      "id": "efcore@9772edb",
+      "repo": "efcore",
+      "title": "[release/11.0] Fix nullable sentinel checks for nested complex collections",
+      "url": "https://github.com/dotnet/efcore/pull/39477",
+      "commit": "dotnet@286bfbe",
+      "is_security": false,
+      "product": "dotnet-efcore",
+      "local_repo_commit": "efcore@9772edb",
+      "labels": [
+        "Servicing-approved"
+      ],
+      "score": 4,
+      "score_reason": "Six RC3 customer reports concern failures with nested JSON complex collections and detailed errors. Include the fix and removal of the disable-detailed-errors workaround, not a new JSON feature."
     },
     {
       "id": "emsdk@6fee0e8",
@@ -2744,6 +2798,61 @@
       "local_repo_commit": "emsdk@d846b1a"
     },
     {
+      "id": "emsdk@d27cafe",
+      "repo": "emsdk",
+      "title": "Update dependencies from build 338602",
+      "url": "https://github.com/dotnet/emsdk/pull/1974",
+      "commit": "dotnet@adff196",
+      "is_security": false,
+      "local_repo_commit": "emsdk@d27cafe",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
+      "id": "emsdk@ec8a340",
+      "repo": "emsdk",
+      "title": "[release/11.0] Source code updates from dotnet/dotnet",
+      "url": "https://github.com/dotnet/emsdk/pull/1978",
+      "commit": "dotnet@adff196",
+      "is_security": false,
+      "local_repo_commit": "emsdk@ec8a340",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
+      "id": "emsdk@376dff0",
+      "repo": "emsdk",
+      "title": "[release/11.0] Source code updates from dotnet/dotnet",
+      "url": "https://github.com/dotnet/emsdk/pull/1980",
+      "commit": "dotnet@adff196",
+      "is_security": false,
+      "local_repo_commit": "emsdk@376dff0",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
+      "id": "emsdk@b01910b",
+      "repo": "emsdk",
+      "title": "[release/11.0] Update dependencies from dotnet/binaryen, dotnet/cpython",
+      "url": "https://github.com/dotnet/emsdk/pull/1990",
+      "commit": "dotnet@adff196",
+      "is_security": false,
+      "local_repo_commit": "emsdk@b01910b",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
+      "id": "emsdk@d43bc9c",
+      "repo": "emsdk",
+      "title": "Update dependencies from build 339532",
+      "url": "https://github.com/dotnet/emsdk/pull/1991",
+      "commit": "dotnet@adff196",
+      "is_security": false,
+      "local_repo_commit": "emsdk@d43bc9c",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
       "id": "fsharp@199cd28",
       "repo": "fsharp",
       "title": "[release/11.0.1xx-rc2] Source code updates from dotnet/dotnet",
@@ -2780,7 +2889,7 @@
         "Servicing-approved"
       ],
       "score": 3,
-      "score_reason": "Compiler witness preservation fix; comparison-only GA coverage."
+      "score_reason": "Preserves extension-member SRTP witnesses; compiler correctness work, not a new final-release language feature."
     },
     {
       "id": "fsharp@142fe4e",
@@ -2795,7 +2904,7 @@
         "Servicing-approved"
       ],
       "score": 3,
-      "score_reason": "State-machine lowering correctness fix; comparison-only GA coverage."
+      "score_reason": "Tupled-argument state-machine lowering correctness fix; use the quality-and-stability statement rather than a compiler implementation inventory."
     },
     {
       "id": "msbuild@19d869b",
@@ -2819,8 +2928,8 @@
       "labels": [
         "Servicing-approved"
       ],
-      "score": 3,
-      "score_reason": "Wildcard exclusion correctness fix; comparison-only GA coverage."
+      "score": 4,
+      "score_reason": "Wildcard exclusions could silently include unwanted files and block customer builds. Include one compact fix, not a new globbing feature."
     },
     {
       "id": "msbuild@581250a",
@@ -2930,7 +3039,7 @@
         "Servicing-consider"
       ],
       "score": 3,
-      "score_reason": "Assembly-resolution cancellation fix; comparison-only GA coverage."
+      "score_reason": "Assembly-resolution cancellation fix; too narrow for a feature writeup. Use the quality-and-stability statement."
     },
     {
       "id": "msbuild@9730694",
@@ -3009,7 +3118,7 @@
       "product": "dotnet-nuget",
       "local_repo_commit": "nuget-client@d932424",
       "score": 3,
-      "score_reason": "Unknown-source error handling fix; comparison-only GA coverage."
+      "score_reason": "Improves the error for an unknown package-source name; no notable new capability. Use the quality-and-stability statement."
     },
     {
       "id": "nuget-client@89e1fe0",
@@ -5852,7 +5961,7 @@
       "product": "dotnet-roslyn",
       "local_repo_commit": "roslyn@1324e1d",
       "score": 3,
-      "score_reason": "Unsafe Evolution compiler correctness fix, not a new GA language feature; link full language documentation."
+      "score_reason": "Unsafe Evolution compiler correctness fix, not a new GA language feature; use the quality-and-stability statement."
     },
     {
       "id": "roslyn@088688a",
@@ -6029,7 +6138,7 @@
         "Approved to merge"
       ],
       "score": 3,
-      "score_reason": "Exhaustive switch code generation fix; comparison-only GA coverage."
+      "score_reason": "Exhaustive-switch code generation correctness fix; no new final-release language capability. Use the quality-and-stability statement."
     },
     {
       "id": "runtime@791fda9",
@@ -6059,7 +6168,7 @@
         "area-System.Security"
       ],
       "score": 5,
-      "score_reason": "Experimental HPKE is relevant to cryptography users, not a broad GA headline. The installed 11.0.0 build contains the HPKE types. Link the full-release libraries documentation rather than duplicate its feature catalogue."
+      "score_reason": "Experimental HPKE provides standardized encryption to a recipient's public key. Include an optional verified example with support checking and visible experimental diagnostics; the specialized audience does not justify a broad cryptography headline."
     },
     {
       "id": "runtime@a753324",
@@ -6116,8 +6225,8 @@
         "Servicing-approved",
         "area-System.Text.Json"
       ],
-      "score": 3,
-      "score_reason": "Customer-reported JSONL streaming correctness fix, including nested asynchronous serialization; comparison-only GA coverage rather than a separate feature section."
+      "score": 4,
+      "score_reason": "JSON Lines serialization now streams individual entries and supports nested asynchronous enumerables. Include a compact explanation of the affected scenario, not a new serializer announcement."
     },
     {
       "id": "runtime@4c29572",
@@ -6133,7 +6242,7 @@
         "area-System.Threading"
       ],
       "score": 3,
-      "score_reason": "Concurrent Unix named-mutex correctness fix; covered by the final-RC-to-GA comparison."
+      "score_reason": "Concurrent Unix named-mutex creation correctness fix; group with cross-target-framework mutex compatibility."
     },
     {
       "id": "runtime@e515c3e",
@@ -6149,7 +6258,7 @@
         "area-System.Threading"
       ],
       "score": 4,
-      "score_reason": "Cross-target-framework named-mutex compatibility matters to affected applications. Keep this final quality fix in the component comparison; the full-release compatibility index covers scope changes."
+      "score_reason": "Unix named mutexes shared with older .NET processes no longer report spurious abandonment. Include a compact interoperability fix."
     },
     {
       "id": "runtime@c43cf3c",
@@ -6341,7 +6450,7 @@
         "area-System.DateTime"
       ],
       "score": 3,
-      "score_reason": "Date/time correctness fix; covered by the final-RC-to-GA comparison rather than a standalone GA feature."
+      "score_reason": "Daylight-saving-gap conversion correctness fix; omit from the curated cut rather than enumerate every library correction."
     },
     {
       "id": "runtime@9a85553",
@@ -6441,7 +6550,7 @@
         "area-System.Numerics.Tensors"
       ],
       "score": 4,
-      "score_reason": "Tensor correctness changes can affect existing package consumers. Link the published shape-alignment and storage-layout compatibility guidance rather than enumerate numerical fixes.",
+      "score_reason": "Tensor shape and storage behavior can affect existing package consumers, including older target frameworks. Keep concise stable-version upgrade guidance linking both published compatibility articles.",
       "breaking_changes": true
     },
     {
@@ -6514,7 +6623,9 @@
       "labels": [
         "Servicing-approved",
         "area-Interop-coreclr"
-      ]
+      ],
+      "score": 3,
+      "score_reason": "Corrects values and exceptions when marshalling arrays to native code; group as a short interoperability fix."
     },
     {
       "id": "runtime@11f94c2",
@@ -6698,7 +6809,7 @@
         "area-System.Formats.Tar"
       ],
       "score": 3,
-      "score_reason": "Archive correctness fix for unusually large ownership identifiers; comparison-only GA coverage."
+      "score_reason": "TAR ownership-identifier edge-case fix; omit from this curated cut."
     },
     {
       "id": "runtime@0d1d8e2",
@@ -6742,7 +6853,7 @@
         "area-System.Diagnostics.Process"
       ],
       "score": 3,
-      "score_reason": "macOS child-process hang fix; comparison-only GA coverage."
+      "score_reason": "Fixes macOS process-tree termination hangs reported by SDK users and other applications; include a compact runtime fix."
     },
     {
       "id": "runtime@b4aa196",
@@ -6803,7 +6914,7 @@
         "area-System.Numerics"
       ],
       "score": 3,
-      "score_reason": "Numeric conversion correctness fix; comparison-only GA coverage."
+      "score_reason": "Numeric conversion correctness fix; omit from this curated cut."
     },
     {
       "id": "runtime@9748a08",
@@ -7048,7 +7159,7 @@
         "area-System.Formats.Tar"
       ],
       "score": 3,
-      "score_reason": "GNU sparse archive correctness fix; comparison-only GA coverage."
+      "score_reason": "Sparse TAR archive edge-case fix; omit from this curated cut."
     },
     {
       "id": "runtime@2e6f907",
@@ -7064,7 +7175,7 @@
         "area-System.IO.Compression"
       ],
       "score": 3,
-      "score_reason": "Compression reset correctness fix; comparison-only GA coverage."
+      "score_reason": "Zstandard reset correctness fix; omit rather than expand the migration note into a compression bug inventory."
     },
     {
       "id": "runtime@df26642",
@@ -7080,7 +7191,7 @@
         "area-Interop-coreclr"
       ],
       "score": 3,
-      "score_reason": "COM property-setter regression fix; comparison-only GA coverage."
+      "score_reason": "COM setter regression fix; omit from the curated cut in favor of the broader native array-marshalling correction."
     },
     {
       "id": "runtime@e67cf04",
@@ -7096,7 +7207,7 @@
         "area-VM-coreclr"
       ],
       "score": 3,
-      "score_reason": "COM enumerator initialization fix; comparison-only GA coverage."
+      "score_reason": "COM enumerator initialization fix; omit from the curated cut in favor of the broader native array-marshalling correction."
     },
     {
       "id": "runtime@5a720bf",
@@ -7120,6 +7231,28 @@
       "commit": "dotnet@c51948a",
       "is_security": false,
       "local_repo_commit": "scenario-tests@22f775f"
+    },
+    {
+      "id": "scenario-tests@88651b7",
+      "repo": "scenario-tests",
+      "title": "[release/11.0] Source code updates from dotnet/dotnet",
+      "url": "https://github.com/dotnet/scenario-tests/pull/387",
+      "commit": "dotnet@f02748a",
+      "is_security": false,
+      "local_repo_commit": "scenario-tests@88651b7",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
+    },
+    {
+      "id": "scenario-tests@09731a6",
+      "repo": "scenario-tests",
+      "title": "[release/11.0] Source code updates from dotnet/dotnet",
+      "url": "https://github.com/dotnet/scenario-tests/pull/391",
+      "commit": "dotnet@f02748a",
+      "is_security": false,
+      "local_repo_commit": "scenario-tests@09731a6",
+      "score": 0,
+      "score_reason": "Source synchronization, dependency, or test infrastructure update; no independent user-facing feature."
     },
     {
       "id": "sdk@d1bdfb6",
@@ -7921,7 +8054,7 @@
         "Area-dotnet test (MTP)"
       ],
       "score": 0,
-      "score_reason": "Servicing backport: no independently verified new RC3-to-GA test-reporting behavior. Retain the source comparison; owner must confirm the baseline before promoting this as a new GA fix."
+      "score_reason": "Servicing backport with no independently verified new RC3-to-GA test-reporting behavior; do not promote as a new GA feature."
     },
     {
       "id": "sdk@2c6e307",
@@ -7985,7 +8118,7 @@
         "backport"
       ],
       "score": 3,
-      "score_reason": "Podman multi-architecture republish correctness fix; comparison-only GA coverage."
+      "score_reason": "Podman multi-architecture republish correction; omit from this curated cut."
     },
     {
       "id": "sdk@d7a8d87",
@@ -8284,8 +8417,8 @@
       "labels": [
         "Servicing-approved"
       ],
-      "score": 3,
-      "score_reason": "Concurrent tool-installation correctness fix; comparison-only GA coverage."
+      "score": 4,
+      "score_reason": "Concurrent tool operations could expose incomplete packages or corrupt shared state. Include a compact fix, without promoting locking implementation details into a feature."
     },
     {
       "id": "sdk@8fb1b7b",
@@ -8313,7 +8446,7 @@
         "Servicing-consider"
       ],
       "score": 3,
-      "score_reason": "Hot Reload fix for static SSR; comparison-only GA coverage."
+      "score_reason": "Restores browser refresh for static SSR pages in Blazor Web apps; include a compact development-workflow fix."
     },
     {
       "id": "sdk@d64640a",
@@ -8344,7 +8477,7 @@
         "backport"
       ],
       "score": 3,
-      "score_reason": "Watch shutdown correctness fix; comparison-only GA coverage."
+      "score_reason": "Watch shutdown correction; omit from this curated cut."
     },
     {
       "id": "sdk@4ca6818",
@@ -8385,7 +8518,7 @@
         "Servicing-approved"
       ],
       "score": 4,
-      "score_reason": "Installer minimum Visual Studio version can affect upgrades. Owner must confirm the published requirement before publication; do not invent a version from the title."
+      "score_reason": "Installer text changes the displayed Visual Studio minimum to 18.11. This alone does not establish the published support requirement; defer a requirement claim until the owner confirms."
     },
     {
       "id": "sdk@93718bf",
@@ -8399,6 +8532,21 @@
       "labels": [
         "Servicing-approved"
       ]
+    },
+    {
+      "id": "sdk@e5668b1",
+      "repo": "sdk",
+      "title": "Do not delay exit waiting for telemetry",
+      "url": "https://github.com/dotnet/sdk/pull/56863",
+      "commit": "dotnet@1e6a5d0",
+      "is_security": false,
+      "product": "dotnet-sdk",
+      "local_repo_commit": "sdk@e5668b1",
+      "labels": [
+        "Servicing-approved"
+      ],
+      "score": 6,
+      "score_reason": "Bounds default local CLI telemetry flushing instead of waiting for network uploads. Include a short paragraph, not a trivial --version example or universal timing claim. The supplied local build and public head need final correlation; CI/custom exporters retain distinct behavior."
     },
     {
       "id": "source-build-assets@f7b2753",
@@ -8877,7 +9025,7 @@
         "servicing-approved"
       ],
       "score": 3,
-      "score_reason": "Accessibility notification correctness fix; comparison-only GA coverage."
+      "score_reason": "Accessibility notification correctness fix; include a compact fix without claiming a new accessibility API."
     },
     {
       "id": "winforms@8dbe5bb",
@@ -8913,7 +9061,7 @@
         "area-Clipboard"
       ],
       "score": 3,
-      "score_reason": "Clipboard concurrency hang fix; comparison-only GA coverage."
+      "score_reason": "Clipboard synchronization fix addresses a dictionary-corruption race; include a compact fix without promising that all clipboard hangs are resolved."
     },
     {
       "id": "winforms@bf49e6c",
@@ -8929,7 +9077,7 @@
         "area-Clipboard"
       ],
       "score": 3,
-      "score_reason": "Clipboard format interoperability fix; comparison-only GA coverage."
+      "score_reason": "Clipboard format interoperability fix; omit from this curated cut."
     },
     {
       "id": "wpf@eda0706",
@@ -9541,6 +9689,13 @@
       "hash": "91671c70a85f2a2ccc293a403da6d9b4c9e63df1",
       "org": "dotnet",
       "url": "https://github.com/dotnet/aspnetcore/commit/91671c70a85f2a2ccc293a403da6d9b4c9e63df1.diff"
+    },
+    "aspnetcore@ba4cc22": {
+      "repo": "aspnetcore",
+      "branch": "release/11.0.1xx",
+      "hash": "ba4cc22769f292db1e5ccf72f4c3becce93289e9",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/ba4cc22769f292db1e5ccf72f4c3becce93289e9.diff"
     },
     "cecil@1ca9b16": {
       "repo": "cecil",
@@ -10221,6 +10376,13 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/diagnostics/commit/bcce635f3bffcb5ce726eabde3e36ed24bc63d56.diff"
     },
+    "diagnostics@3a207d8": {
+      "repo": "diagnostics",
+      "branch": "release/11.0.1xx",
+      "hash": "3a207d800b678ed4534b8045e2213a5c3bd7313f",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/diagnostics/commit/3a207d800b678ed4534b8045e2213a5c3bd7313f.diff"
+    },
     "efcore@1b2d757": {
       "repo": "efcore",
       "branch": "release/11.0.1xx",
@@ -10739,6 +10901,20 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/efcore/commit/c24253f4d4db68244441cc037313b307bad090a0.diff"
     },
+    "efcore@3133306": {
+      "repo": "efcore",
+      "branch": "release/11.0.1xx",
+      "hash": "3133306a227806c25263f501ea6f983441516e5b",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/efcore/commit/3133306a227806c25263f501ea6f983441516e5b.diff"
+    },
+    "efcore@9772edb": {
+      "repo": "efcore",
+      "branch": "release/11.0.1xx",
+      "hash": "9772edba802205b8ddc33bff87ffff6d96e5763c",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/efcore/commit/9772edba802205b8ddc33bff87ffff6d96e5763c.diff"
+    },
     "emsdk@6fee0e8": {
       "repo": "emsdk",
       "branch": "release/11.0.1xx",
@@ -10836,6 +11012,41 @@
       "hash": "d846b1a59fd703965bbda8282607a8fd3afc4855",
       "org": "dotnet",
       "url": "https://github.com/dotnet/emsdk/commit/d846b1a59fd703965bbda8282607a8fd3afc4855.diff"
+    },
+    "emsdk@d27cafe": {
+      "repo": "emsdk",
+      "branch": "release/11.0.1xx",
+      "hash": "d27cafe09dd27e6446ea9c4f2aa08e5aad51d893",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/emsdk/commit/d27cafe09dd27e6446ea9c4f2aa08e5aad51d893.diff"
+    },
+    "emsdk@ec8a340": {
+      "repo": "emsdk",
+      "branch": "release/11.0.1xx",
+      "hash": "ec8a340f1c3430202d0bb082a99fc0f6366282dd",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/emsdk/commit/ec8a340f1c3430202d0bb082a99fc0f6366282dd.diff"
+    },
+    "emsdk@376dff0": {
+      "repo": "emsdk",
+      "branch": "release/11.0.1xx",
+      "hash": "376dff046f35084b667824ae376332c38f8fbcce",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/emsdk/commit/376dff046f35084b667824ae376332c38f8fbcce.diff"
+    },
+    "emsdk@b01910b": {
+      "repo": "emsdk",
+      "branch": "release/11.0.1xx",
+      "hash": "b01910b53d1a56b89becc66a9ca1cdf4750f5da8",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/emsdk/commit/b01910b53d1a56b89becc66a9ca1cdf4750f5da8.diff"
+    },
+    "emsdk@d43bc9c": {
+      "repo": "emsdk",
+      "branch": "release/11.0.1xx",
+      "hash": "d43bc9c4c75b15dcc7643a05d9d0df9ea3793f30",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/emsdk/commit/d43bc9c4c75b15dcc7643a05d9d0df9ea3793f30.diff"
     },
     "fsharp@199cd28": {
       "repo": "fsharp",
@@ -13252,6 +13463,20 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/scenario-tests/commit/22f775f4154d002eb9628d6ff608172d4c61c453.diff"
     },
+    "scenario-tests@88651b7": {
+      "repo": "scenario-tests",
+      "branch": "release/11.0.1xx",
+      "hash": "88651b78393171f529b3553858d3edc280653348",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/scenario-tests/commit/88651b78393171f529b3553858d3edc280653348.diff"
+    },
+    "scenario-tests@09731a6": {
+      "repo": "scenario-tests",
+      "branch": "release/11.0.1xx",
+      "hash": "09731a6b78ebb309b2ba8c11ca376c5a34747a4c",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/scenario-tests/commit/09731a6b78ebb309b2ba8c11ca376c5a34747a4c.diff"
+    },
     "sdk@d1bdfb6": {
       "repo": "sdk",
       "branch": "release/11.0.1xx",
@@ -14029,6 +14254,13 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/sdk/commit/93718bf425cb9f28c46b3ed281301dee812ad4ee.diff"
     },
+    "sdk@e5668b1": {
+      "repo": "sdk",
+      "branch": "release/11.0.1xx",
+      "hash": "e5668b160fc888433229053cd615fc5e300fd847",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/sdk/commit/e5668b160fc888433229053cd615fc5e300fd847.diff"
+    },
     "source-build-assets@f7b2753": {
       "repo": "source-build-assets",
       "branch": "release/11.0.1xx",
@@ -14757,6 +14989,13 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/dotnet/commit/4176346b7dcb36d2c759fdbc0b68616b2e128622.diff"
     },
+    "dotnet@eb886e6": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "eb886e6e382e21ac96f3718bcf1890b516dd9a0c",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/eb886e6e382e21ac96f3718bcf1890b516dd9a0c.diff"
+    },
     "dotnet@bd622e2": {
       "repo": "dotnet",
       "branch": "release/11.0.1xx",
@@ -14925,6 +15164,13 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/dotnet/commit/792243f9d0875385963317f59c653388017db33f.diff"
     },
+    "dotnet@95a103d": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "95a103de85f11823fc7da811440aceab7ce664b6",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/95a103de85f11823fc7da811440aceab7ce664b6.diff"
+    },
     "dotnet@2d0c480": {
       "repo": "dotnet",
       "branch": "release/11.0.1xx",
@@ -15051,6 +15297,13 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/dotnet/commit/3d5702991df1ca34f634ef28985031dede32a430.diff"
     },
+    "dotnet@286bfbe": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "286bfbe935c6e42088ad05352cfcda9eef429d4f",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/286bfbe935c6e42088ad05352cfcda9eef429d4f.diff"
+    },
     "dotnet@afdfc11": {
       "repo": "dotnet",
       "branch": "release/11.0.1xx",
@@ -15127,6 +15380,13 @@
       "hash": "59dd5c896babf134eada2e22ddc0ba9d7a3caeb1",
       "org": "dotnet",
       "url": "https://github.com/dotnet/dotnet/commit/59dd5c896babf134eada2e22ddc0ba9d7a3caeb1.diff"
+    },
+    "dotnet@adff196": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "adff196f4f8b089a31c89914b80e6ea63d69f18c",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/adff196f4f8b089a31c89914b80e6ea63d69f18c.diff"
     },
     "dotnet@b9654f8": {
       "repo": "dotnet",
@@ -15716,6 +15976,13 @@
       "org": "dotnet",
       "url": "https://github.com/dotnet/dotnet/commit/c51948a93c41cd5f9dc80b8186736c599be036a3.diff"
     },
+    "dotnet@f02748a": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "f02748a8e208884b4f32bdc8d95b3f707b093a09",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/f02748a8e208884b4f32bdc8d95b3f707b093a09.diff"
+    },
     "dotnet@9b14435": {
       "repo": "dotnet",
       "branch": "release/11.0.1xx",
@@ -15806,6 +16073,13 @@
       "hash": "7711ea7d4aaf5e14ce99e8d6ccaa4ada02f7a53f",
       "org": "dotnet",
       "url": "https://github.com/dotnet/dotnet/commit/7711ea7d4aaf5e14ce99e8d6ccaa4ada02f7a53f.diff"
+    },
+    "dotnet@1e6a5d0": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "1e6a5d0f81301feee7989f88bc816afb5dac4413",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/1e6a5d0f81301feee7989f88bc816afb5dac4413.diff"
     },
     "dotnet@54fd625": {
       "repo": "dotnet",
