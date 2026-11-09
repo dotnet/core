@@ -22,6 +22,7 @@ Optimized Native AOT publishing is opt-in in .NET 11. Unlike RC3, `UseOptimizedP
   <UseOptimizedPublish>true</UseOptimizedPublish>
 </PropertyGroup>
 ```
+
 ## Bug fixes
 
 ### Hot Reload
