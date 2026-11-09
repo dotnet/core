@@ -6,8 +6,6 @@ description: >
   open/update its draft pull request. Invoked per-target by the API Diff Orchestrator
   (workflow_call) or manually (workflow_dispatch).
 
-if: ${{ github.event_name == 'workflow_dispatch' || !github.event.repository.fork }}
-
 permissions:
   actions: read
   contents: read
@@ -66,6 +64,71 @@ safe-outputs:
     required-labels: [automation, api-diff]
   noop:
     report-as-issue: false
+  # Validate every full-body PR write before the safe-output handlers publish it.
+  # The target snapshot was uploaded before agent execution, so it remains host-authored.
+  steps:
+    - name: Download target identity
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+      with:
+        name: ${{ needs.activation.outputs.artifact_prefix }}api-diff-target
+        path: ${{ runner.temp }}/api-diff-target
+    - name: Validate agent output identity
+      uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+      env:
+        GH_AW_AGENT_OUTPUT: ${{ steps.setup-agent-output-env.outputs.GH_AW_AGENT_OUTPUT }}
+      with:
+        script: |
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const output = JSON.parse(fs.readFileSync(process.env.GH_AW_AGENT_OUTPUT, 'utf8'));
+          const target = JSON.parse(fs.readFileSync(
+            path.join(process.env.RUNNER_TEMP, 'api-diff-target', 'target.json'), 'utf8'));
+          for (const field of ['marker', 'current_version', 'generated_at']) {
+            if (typeof target[field] !== 'string' || !target[field]) {
+              throw new Error(`target.json is missing ${field} -- refusing to publish`);
+            }
+          }
+          const items = output.items ?? [];
+          if (!Array.isArray(items)) throw new Error('Agent output items must be an array');
+          for (const [index, item] of items.entries()) {
+            // Partial and bodyless updates do not replace the tracking identity.
+            if (!(item.type === 'create_pull_request' ||
+                (item.type === 'update_pull_request' && (item.operation ?? 'replace') === 'replace')) ||
+                item.body == null || item.body === '') continue;
+            if (typeof item.body !== 'string') throw new Error(`Item #${index} body must be a string`);
+            const lines = item.body.replace(/\r/g, '').split('\n');
+            let block = [];
+            let pending = [];
+            // Match the last state block, as the next run's discovery script does.
+            for (const line of lines) {
+              if (line.trim() === '# api-diff:state:begin') pending = [line];
+              else if (pending.length) {
+                pending.push(line);
+                if (line.trim() === '# api-diff:state:end') {
+                  block = pending;
+                  pending = [];
+                }
+              }
+            }
+            if (pending.length) block = pending;
+            const field = name => {
+              const prefix = new RegExp(`^\\s*[-*+>]*\\s*${name}:\\s*(.*)$`);
+              for (const line of block) {
+                const match = line.match(prefix);
+                if (match) return match[1].replace(/["']/g, '').replace(/\s*#.*$/, '').trim();
+              }
+              return '';
+            };
+            const missing = [];
+            if (!block.length) missing.push('begin-marker');
+            if (block.at(-1)?.trim() !== '# api-diff:state:end') missing.push('end-marker');
+            if (!lines.some(line => line.trim() === '# ' + target.marker)) missing.push('identity-marker');
+            if (field('current-version') !== target.current_version) missing.push('current-version');
+            if (field('generated-at') !== target.generated_at) missing.push('generated-at');
+            if (missing.length) {
+              core.setFailed(`${item.type} item #${index} is missing required tracking identity: ${missing.join(' ')}`);
+            }
+          }
 features:
   # Let a maintainer promote an external contributor's comment to "approved" by adding an
   # endorsement reaction (👍/❤️), so the agent then sees and can act on it. Enabling this
@@ -95,6 +158,8 @@ checkout:
   fetch: ["*"]
   fetch-depth: 0
 
+if: ${{ github.event_name == 'workflow_dispatch' || !github.event.repository.fork }}
+
 on:
   permissions: {}
   workflow_dispatch:
@@ -120,6 +185,12 @@ steps:
     run: |
       set -euo pipefail
       bash .github/scripts/api-diff-generate.sh
+  - name: Preserve target identity before agent execution
+    uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+    with:
+      name: ${{ needs.activation.outputs.artifact_prefix }}api-diff-target
+      path: /tmp/gh-aw/agent/target.json
+      if-no-files-found: error
   - name: Fetch live runtime area owners
     shell: bash
     run: |
@@ -132,64 +203,6 @@ steps:
         echo "::error::runtime area-owners.md did not contain any area rows"
         exit 1
       }
-
-post-steps:
-  # After the agent runs (read-only) but before the native safe-output jobs publish, verify
-  # every full-body pull-request write still carries the tracking identity the next run reads
-  # back to resume: the `# api-diff:state:begin`/`:end` block, the identity marker, and the
-  # current-version / generated-at fields that must match this run's host-authored target.json.
-  # A body missing any of these would leave the next run unable to recover its place, so fail
-  # before anything is published.
-  - name: Validate agent output identity
-    run: |
-      set -euo pipefail
-      out=/tmp/gh-aw/agent_output.json
-      tgt=/tmp/gh-aw/agent/target.json
-      if [ ! -f "$out" ]; then
-        echo "::notice::No agent output to validate"; exit 0
-      fi
-      if [ ! -f "$tgt" ]; then
-        echo "::error::target.json is missing but agent output exists -- refusing to publish"; exit 1
-      fi
-      t_marker=$(jq -r '.marker' "$tgt")
-      t_cur=$(jq -r '.current_version' "$tgt")
-      t_genat=$(jq -r '.generated_at' "$tgt")
-      # Only full-body PR writes carry the tracking block. Validate create_pull_request and
-      # full-replace update_pull_request items with a non-empty body; skip append/prepend
-      # updates, comments, branch pushes, and no-ops (partial or bodyless).
-      idx=$(jq -r '(.items // []) | to_entries[]
-        | select(.value.type=="create_pull_request"
-            or (.value.type=="update_pull_request"
-                and ((.value.operation // "replace")=="replace")))
-        | select((.value.body // "") != "")
-        | .key' "$out" 2>/dev/null || true)
-      if [ -z "$idx" ]; then
-        echo "::notice::No full-body PR-writing items -- nothing to validate"; exit 0
-      fi
-      rc=0
-      while IFS= read -r i; do
-        [ -n "$i" ] || continue
-        typ=$(jq -r ".items[$i].type" "$out")
-        body=$(jq -r ".items[$i].body" "$out")
-        miss=""
-        # Extract the LAST `# api-diff:state:begin` .. `:state:end` block from the final collapsed
-        # details section, matching each delimiter as a whole yaml-comment line (leading indent /
-        # trailing CR tolerated) exactly as the next run's setup script reads it.
-        blk=$(printf '%s' "$body" | awk '{t=$0;sub(/\r$/,"",t);gsub(/^[[:space:]]+|[[:space:]]+$/,"",t)} t=="# api-diff:state:begin"{inb=1;buf=$0 ORS;next} inb{buf=buf $0 ORS; if(t=="# api-diff:state:end"){inb=0;last=buf}} END{if(inb)last=buf; printf "%s", last}')
-        printf '%s\n' "$body" | awk '{t=$0;sub(/\r$/,"",t);gsub(/^[[:space:]]+|[[:space:]]+$/,"",t)} t=="# api-diff:state:begin"{f=1} END{exit !f}' || miss="$miss begin-marker"
-        printf '%s\n' "$body" | awk '{t=$0;sub(/\r$/,"",t);gsub(/^[[:space:]]+|[[:space:]]+$/,"",t)} t=="# api-diff:state:end"{f=1} END{exit !f}' || miss="$miss end-marker"
-        [ "$(jq -rn --arg b "$body" --arg m "$t_marker" '($b | gsub("\r";"") | split("\n") | any(gsub("^[ \t]+|[ \t]+$";"") == "# " + $m))')" = "true" ] || miss="$miss identity-marker"
-        mf_field() { sed -n "s/^[[:space:]]*[-*+>]*[[:space:]]*$1:[[:space:]]*//p" | head -1 | tr -d '"'\''\r' | sed 's/[[:space:]]*#.*$//; s/[[:space:]]*$//'; }
-        [ "$(printf '%s\n' "$blk" | mf_field current-version)" = "$t_cur" ] || miss="$miss current-version"
-        [ "$(printf '%s\n' "$blk" | mf_field generated-at)" = "$t_genat" ] || miss="$miss generated-at"
-        if [ -n "$miss" ]; then
-          echo "::error::$typ item #$i is missing required tracking identity:$miss"
-          rc=1
-        fi
-      done <<< "$idx"
-      [ "$rc" -eq 0 ] && echo "Agent output identity validated."
-      exit $rc
-
 
 # ###############################################################
 # Select a PAT from the pool and override COPILOT_GITHUB_TOKEN.
