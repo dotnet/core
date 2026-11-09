@@ -2,6 +2,8 @@
 
 The .NET 11 SDK includes a CLI responsiveness improvement, a Hot Reload fix, and updated Native AOT publishing defaults.
 
+For features introduced throughout the release, see [What's new in the .NET 11 SDK](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/sdk).
+
 - [Shorter telemetry waits when CLI commands exit](#shorter-telemetry-waits-when-cli-commands-exit)
 - [Bug fixes](#bug-fixes)
 - [Changes for users of earlier release candidates](#changes-for-users-of-earlier-release-candidates)
@@ -21,8 +23,6 @@ No project changes or opt-in are required.
 ### Tools
 
 - [Prevent races between concurrent tool installations, updates, and removals](https://github.com/dotnet/sdk/pull/51834)
-
-For features introduced throughout the release, see [What's new in the .NET 11 SDK](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/sdk).
 
 ## Changes for users of earlier release candidates
 
