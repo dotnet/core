@@ -21,8 +21,8 @@ Before upgrading an existing app, review [Breaking changes in ASP.NET Core in .N
 
 ### Hosting and caching
 
-- [Honor custom output-cache policies that explicitly allow already-authenticated users](https://github.com/dotnet/aspnetcore/pull/69580)
-- [Fix first-request HTTP 404 errors for IIS in-process apps hosted in virtual directories](https://github.com/dotnet/aspnetcore/pull/69398)
+- [Honor custom output-cache policies that explicitly allow already-authenticated users](https://github.com/dotnet/aspnetcore/pull/69724)
+- [Fix first-request HTTP 404 errors for IIS in-process apps hosted in virtual directories](https://github.com/dotnet/aspnetcore/pull/69837)
 
 ### SignalR
 
@@ -30,5 +30,5 @@ Before upgrading an existing app, review [Breaking changes in ASP.NET Core in .N
 
 ## Community contributors
 
-- [@marcominerva](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3Amarcominerva+milestone%3A12.0-preview1)
-- [@Souheyl7Gouadria](https://github.com/dotnet/aspnetcore/pulls?q=is%3Apr+is%3Amerged+author%3ASouheyl7Gouadria+milestone%3A12.0-preview1)
+- [@marcominerva](https://github.com/marcominerva): [Output caching fix](https://github.com/dotnet/aspnetcore/pull/69724)
+- [@Souheyl7Gouadria](https://github.com/Souheyl7Gouadria): [IIS startup routing fix](https://github.com/dotnet/aspnetcore/pull/69837)
