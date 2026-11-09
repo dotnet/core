@@ -9,15 +9,40 @@ see [What's new in .NET MAUI for .NET 11](https://learn.microsoft.com/dotnet/mau
 > source revisions, and Apple toolchain requirement still need release-owner
 > confirmation.
 
+- [Breaking changes and migration](#breaking-changes-and-migration)
+- [Upgrading from .NET 10](#upgrading-from-net-10)
+- [Updating from previews and release candidates](#updating-from-previews-and-release-candidates)
 - [Controls](#controls)
 - [Platform features](#platform-features)
 - [XAML](#xaml)
 - [Prepare for Google Play code optimization requirements](#prepare-for-google-play-code-optimization-requirements)
 - [Apple platforms](#apple-platforms)
-- [Breaking changes from .NET 10](#breaking-changes-from-net-10)
-- [Changes since RC 2](#changes-since-rc-2)
 - [Bug fixes](#bug-fixes)
 - [Contributors](#contributors)
+
+## Breaking changes and migration
+
+### Upgrading from .NET 10
+
+Direct source calls to
+`Android.Runtime.JNINativeWrapper.CreateDelegate(Delegate)` now produce
+compiler error `CS0619`. Rebuild older binding sources with the current
+.NET for Android binding generator and use its generated JNI callbacks.
+Existing compiled bindings retain the public method and implementation
+([dotnet/android#13128](https://github.com/dotnet/android/pull/13128)).
+
+For changes introduced earlier in .NET 11, including the runtime transition
+and platform minimums, see the
+[full .NET MAUI overview](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-11)
+and [runtime and compilation guidance](https://learn.microsoft.com/dotnet/maui/deployment/runtimes-compilation?view=net-maui-11.0).
+
+### Updating from previews and release candidates
+
+Compared with RC 2, Android CoreCLR builds now reject an explicit `RunAOTCompilation=false` with
+error `XA1044`. This Mono property does not disable CoreCLR ReadyToRun.
+Remove it and use `PublishReadyToRun=false` when you intend to disable
+ReadyToRun compilation
+([dotnet/android#12960](https://github.com/dotnet/android/pull/12960)).
 
 ## Controls
 
@@ -130,28 +155,6 @@ and obfuscation
   assemblies during Pair to Mac builds, matching Mac-driven builds for
   reflection-based consumers
   ([dotnet/macios#26852](https://github.com/dotnet/macios/pull/26852)).
-
-## Breaking changes from .NET 10
-
-Direct source calls to
-`Android.Runtime.JNINativeWrapper.CreateDelegate(Delegate)` now produce
-compiler error `CS0619`. Rebuild older binding sources with the current
-.NET for Android binding generator and use its generated JNI callbacks.
-Existing compiled bindings retain the public method and implementation
-([dotnet/android#13128](https://github.com/dotnet/android/pull/13128)).
-
-For changes introduced earlier in .NET 11, including the runtime transition
-and platform minimums, see the
-[full .NET MAUI overview](https://learn.microsoft.com/dotnet/maui/whats-new/dotnet-11)
-and [runtime and compilation guidance](https://learn.microsoft.com/dotnet/maui/deployment/runtimes-compilation?view=net-maui-11.0).
-
-## Changes since RC 2
-
-Android CoreCLR builds now reject an explicit `RunAOTCompilation=false` with
-error `XA1044`. This Mono property does not disable CoreCLR ReadyToRun.
-Remove it and use `PublishReadyToRun=false` when you intend to disable
-ReadyToRun compilation
-([dotnet/android#12960](https://github.com/dotnet/android/pull/12960)).
 
 ## Bug fixes
 
