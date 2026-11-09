@@ -18,11 +18,13 @@ The final ASP.NET Core updates for .NET 11 focus on quality and stability.
 - [Honor custom output-cache policies that explicitly allow already-authenticated users](https://github.com/dotnet/aspnetcore/pull/69580)
 - [Fix first-request HTTP 404 errors for IIS in-process apps hosted in virtual directories](https://github.com/dotnet/aspnetcore/pull/69398)
 
+### SignalR
+
+- [Bind SignalR connection tokens to their originating endpoint mapping, preventing reuse across separately mapped endpoints](https://github.com/dotnet/aspnetcore/pull/69835)
+
 For features introduced throughout the release, see [What's new in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/release-notes/aspnetcore-11?view=aspnetcore-11.0).
 
 Before upgrading an existing app, review [Breaking changes in ASP.NET Core in .NET 11](https://learn.microsoft.com/aspnet/core/breaking-changes/11/overview?view=aspnetcore-11.0).
-
-<!-- TODO: ASP.NET Core team: confirm delivery attribution and compatibility guidance for https://github.com/dotnet/aspnetcore/pull/69279. Endpoint-token isolation is in the RC3-to-GA source diff, but the upstream PR has milestone 12.0-preview1. -->
 
 ## Community contributors
 
