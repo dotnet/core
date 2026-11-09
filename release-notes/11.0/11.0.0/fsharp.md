@@ -2,10 +2,12 @@
 
 The final F# compiler updates for .NET 11 focus on quality and stability.
 
+For language features introduced throughout the release, see [What's new in F# 11](https://learn.microsoft.com/dotnet/fsharp/whats-new/fsharp-11).
+
 For language and tooling reference, see the [F# documentation](https://learn.microsoft.com/dotnet/fsharp/).
 
 For all F# changes introduced in the .NET 11 previews and release candidates, see:
- 
+
 - [Preview 1](../preview/preview1/fsharp.md)
 - [Preview 2](../preview/preview2/fsharp.md)
 - [Preview 3](../preview/preview3/fsharp.md)
