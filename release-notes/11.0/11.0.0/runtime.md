@@ -2,6 +2,8 @@
 
 The final runtime updates for .NET 11 focus on quality and stability.
 
+For features introduced throughout the release, see [What's new in the .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime).
+
 ## Bug fixes
 
 ### Interoperability
@@ -12,8 +14,6 @@ The final runtime updates for .NET 11 focus on quality and stability.
 ### Process management
 
 - [Fix hangs when terminating a process tree on macOS](https://github.com/dotnet/runtime/pull/135409)
-
-For features introduced throughout the release, see [What's new in the .NET 11 runtime](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/runtime).
 
 Before upgrading an existing app, review [Breaking changes in .NET 11](https://learn.microsoft.com/dotnet/core/compatibility/11).
 
