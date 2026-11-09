@@ -10,6 +10,7 @@ skip-check:
   - CKV_GHA_7
 
 skip-path:
-  # Exclude GitHub skills and generated workflows
+  # Exclude GitHub agents, skills, and workflows
+  - .github/agents/*
   - .github/skills/*
-  - .github/workflows/copilot-setup-steps.yml
+  - .github/workflows/*
