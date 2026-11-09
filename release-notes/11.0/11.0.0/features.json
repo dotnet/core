@@ -608,8 +608,8 @@
         "area-signalr"
       ],
       "score": 4,
-      "score_reason": "Endpoint-token isolation changes behavior in the RC3-to-GA source diff, but the original PR carries milestone 12.0-preview1. Owner must confirm attribution and compatibility guidance before publication; do not make an unverified migration claim.",
-      "breaking_changes": true
+      "score_reason": "Delivered in .NET 11 through backport dotnet/aspnetcore#69835 (source commit 2dd208b). Include a compact bug-fix entry: tokens are bound to their originating endpoint mapping. Supported same-mapping behavior is unchanged; no migration guidance is needed.",
+      "breaking_changes": false
     },
     {
       "id": "aspnetcore@50f709d",
