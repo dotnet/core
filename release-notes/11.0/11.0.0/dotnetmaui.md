@@ -12,10 +12,11 @@ see [What's new in .NET MAUI for .NET 11](https://learn.microsoft.com/dotnet/mau
 - [Controls](#controls)
 - [Platform features](#platform-features)
 - [XAML](#xaml)
-- [.NET for Android](#net-for-android)
+- [Prepare for Google Play code optimization requirements](#prepare-for-google-play-code-optimization-requirements)
 - [Apple platforms](#apple-platforms)
 - [Breaking changes from .NET 10](#breaking-changes-from-net-10)
 - [Changes since RC 2](#changes-since-rc-2)
+- [Bug fixes](#bug-fixes)
 - [Contributors](#contributors)
 
 ## Controls
@@ -81,24 +82,36 @@ files
 [dotnet/maui#39373](https://github.com/dotnet/maui/pull/39373),
 [dotnet/maui#39425](https://github.com/dotnet/maui/pull/39425)).
 
-## .NET for Android
+## Prepare for Google Play code optimization requirements
 
-R8 builds now retain generated AAPT2 keep rules and library-provided AAR
-consumer rules across incremental builds. Generated keep rules also preserve
-Java fields accessed through managed bindings, including when private-member
-obfuscation is enabled
+Starting in February 2027, Google Play requires at least 25% coverage for each
+of code optimization, shrinking, and obfuscation. This applies to apps with
+more than 10 MB of DEX code and games with more than 50 MB. See the
+[Google Play requirements](https://support.google.com/googleplay/android-developer/answer/17492799#dex_code_optimization)
+and [original announcement](https://android-developers.googleblog.com/2026/08/app-quality-memory-optimization-secure-onboarding.html).
+
+On .NET 11, enable R8 for Release builds in your `.csproj` file:
+
+```xml
+<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+  <AndroidLinkTool>r8</AndroidLinkTool>
+</PropertyGroup>
+```
+
+When R8 is enabled, .NET 11 defaults `AndroidR8ObfuscationMode` to
+`private-members`. You do not need to set this property unless your project
+overrides it. In .NET 10, the default is `disabled`.
+
+These settings apply to Java bytecode (DEX), not managed .NET assemblies.
+Test your Release build, then check the optimization, shrinking, and
+obfuscation percentages in Google Play Console's **App bundle explorer**.
+Confirm that your uploaded bundle meets all three thresholds.
+
+R8 fixes preserve required Java code and fields during incremental builds
+and obfuscation
 ([dotnet/android#12974](https://github.com/dotnet/android/pull/12974),
 [dotnet/android#13077](https://github.com/dotnet/android/pull/13077),
 [dotnet/android#13239](https://github.com/dotnet/android/pull/13239)).
-
-With trimmable type maps, full trimming now preserves explicit `[Export]`,
-`[ExportField]`, and exported constructors that Java can call even when no
-managed code references them. This applies to CoreCLR and NativeAOT;
-`[Register]` alone does not preserve a peer
-([dotnet/android#13269](https://github.com/dotnet/android/pull/13269)).
-NativeAOT remains experimental on Android. Fatal managed exceptions now
-terminate the process instead of leaving it running
-([dotnet/android#13238](https://github.com/dotnet/android/pull/13238)).
 
 ## Apple platforms
 
@@ -139,6 +152,11 @@ error `XA1044`. This Mono property does not disable CoreCLR ReadyToRun.
 Remove it and use `PublishReadyToRun=false` when you intend to disable
 ReadyToRun compilation
 ([dotnet/android#12960](https://github.com/dotnet/android/pull/12960)).
+
+## Bug fixes
+
+- **.NET for Android**
+  - [Preserve Java exports during full trimming with trimmable type maps](https://github.com/dotnet/android/pull/13269)
 
 ## Contributors
 
