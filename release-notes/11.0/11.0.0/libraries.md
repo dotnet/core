@@ -68,5 +68,3 @@ dotnet_diagnostic.SYSLIB5009.severity = warning
 ### JSON Lines streaming
 
 `JsonSerializer.SerializeAsyncEnumerable` now streams each JSONL entry instead of buffering the entire entry. This also fixes serialization of entries that contain nested asynchronous enumerables ([dotnet/runtime#134593](https://github.com/dotnet/runtime/pull/134593)).
-
-<!-- API signatures and replacement usage verified against the supplied local .NET 11.0.0 build with SDK 11.0.100. Correlation with the final public GA artifact is pending. -->
