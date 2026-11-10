@@ -4,7 +4,7 @@
   "disclosures": [
     {
       "id": "CVE-2026-105544",
-      "problem": ".NET SDK Elevation of Privilege Vulnerability",
+      "problem": ".NET Elevation of Privilege Vulnerability",
       "weakness": "CWE-284",
       "timeline": {
         "disclosure": {
@@ -23,7 +23,8 @@
         "acknowledgments": []
       },
       "description": [
-        "The VSTest artifact postprocessor can consume a forged executionComplete.json from another local user and execute attacker-controlled output handling."
+        "The VSTest artifact postprocessor can consume a forged executionComplete.json from another local user and execute attacker-controlled output handling.",
+        "Standalone packages must be updated separately from SDK-bundled VSTest. For releases without a same-line fix, use a compatible fixed servicing line; the listed fixed version is an upgrade target."
       ],
       "platforms": [
         "windows",
@@ -269,7 +270,7 @@
     {
       "id": "CVE-2026-114149",
       "problem": "ASP.NET Core Denial of Service Vulnerability",
-      "weakness": "CWE-400",
+      "weakness": "CWE-770",
       "timeline": {
         "disclosure": {
           "date": "2026-11-10",
@@ -344,7 +345,7 @@
     },
     {
       "id": "CVE-2026-114151",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "Visual Studio Remote Code Execution Vulnerability",
       "weakness": "CWE-502, CWE-121",
       "timeline": {
         "disclosure": {
@@ -380,7 +381,7 @@
     },
     {
       "id": "CVE-2026-114152",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "Visual Studio Remote Code Execution Vulnerability",
       "weakness": "CWE-121, CWE-822",
       "timeline": {
         "disclosure": {
@@ -417,7 +418,7 @@
     {
       "id": "CVE-2026-114154",
       "problem": "ASP.NET Core Denial of Service Vulnerability",
-      "weakness": "CWE-400",
+      "weakness": "CWE-401",
       "timeline": {
         "disclosure": {
           "date": "2026-11-10",
@@ -471,10 +472,10 @@
         "acknowledgments": []
       },
       "description": [
-        "Time-of-check time-of-use (toctou) race condition in .NET allows an authorized attacker to elevate privileges locally."
+        "Time-of-check time-of-use (toctou) race condition in .NET allows an authorized attacker to elevate privileges locally.",
+        "Windows is outside this advisory\u0027s affected scope when its temporary directory is private to the current user, as assumed by the implementation. Shared or insecurely configured Windows temporary directories are not covered by that assumption."
       ],
       "platforms": [
-        "windows",
         "linux",
         "macos"
       ],
@@ -491,7 +492,7 @@
     {
       "id": "CVE-2026-114156",
       "problem": "ASP.NET Core Security Feature Bypass Vulnerability",
-      "weakness": "CWE-20",
+      "weakness": "CWE-41",
       "timeline": {
         "disclosure": {
           "date": "2026-11-10",
@@ -564,7 +565,7 @@
     },
     {
       "id": "CVE-2026-114158",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "Visual Studio Remote Code Execution Vulnerability",
       "weakness": "CWE-122",
       "timeline": {
         "disclosure": {
@@ -600,7 +601,7 @@
     },
     {
       "id": "CVE-2026-114159",
-      "problem": ".NET Remote Code Execution Vulnerability",
+      "problem": "Visual Studio Remote Code Execution Vulnerability",
       "weakness": "CWE-122",
       "timeline": {
         "disclosure": {
@@ -637,7 +638,7 @@
     {
       "id": "CVE-2026-118741",
       "problem": "ASP.NET Core Elevation of Privilege Vulnerability",
-      "weakness": "CWE-287",
+      "weakness": "CWE-640",
       "timeline": {
         "disclosure": {
           "date": "2026-11-10",
@@ -927,6 +928,45 @@
         "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L/E:U/RL:O/RC:C",
         "score": 5.3,
         "severity": "medium"
+      }
+    },
+    {
+      "id": "CVE-2026-70175",
+      "problem": "ASP.NET Core Elevation of Privilege Vulnerability",
+      "weakness": "CWE-640",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-10-13",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Additional SDK-template and standalone Identity UI fixes"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": []
+      },
+      "description": [
+        "ASP.NET Core Identity password-reset and confirmation flows can send mail to the unvalidated request address instead of the user\u0027s stored canonical address.",
+        "This update also covers Identity UI and Blazor template paths. Updating a runtime, SDK, or template package does not rewrite application source that was generated previously."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.1,
+        "severity": "high"
       }
     }
   ],
@@ -1645,6 +1685,83 @@
       "commits": [
         "dotnet@679f268"
       ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "10.0.100",
+      "max_vulnerable": "10.0.114",
+      "fixed": "10.0.115",
+      "release": "10.0",
+      "commits": [
+        "dotnet@5b6e2d7"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "10.0.400",
+      "max_vulnerable": "10.0.403",
+      "fixed": "10.0.404",
+      "release": "10.0",
+      "commits": [
+        "dotnet@5b6e2d7"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "11.0.100-preview.1.26104.118",
+      "max_vulnerable": "11.0.100-rc.3.26522.148",
+      "fixed": "11.0.100",
+      "release": "11.0",
+      "commits": [
+        "dotnet@3c5dfbe"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.100",
+      "max_vulnerable": "8.0.133",
+      "fixed": "8.0.134",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@ff2b848"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.400",
+      "max_vulnerable": "8.0.427",
+      "fixed": "8.0.428",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@ff2b848"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.100",
+      "max_vulnerable": "9.0.123",
+      "fixed": "9.0.124",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@62591c7"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.300",
+      "max_vulnerable": "9.0.320",
+      "fixed": "9.0.321",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@62591c7"
+      ]
     }
   ],
   "packages": [
@@ -1862,10 +1979,10 @@
       "name": "System.Formats.Cbor",
       "min_vulnerable": "9.0.0",
       "max_vulnerable": "9.0.23",
-      "fixed": "10.0.15",
+      "fixed": "9.0.24",
       "release": "9.0",
       "commits": [
-        "dotnet@c39c4c2"
+        "runtime@b75eb33"
       ]
     },
     {
@@ -1921,6 +2038,1689 @@
       "release": "11.0",
       "commits": [
         "dotnet@679f268"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.10.0",
+      "max_vulnerable": "17.10.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.10",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.11.0",
+      "max_vulnerable": "17.11.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.11.1",
+      "max_vulnerable": "17.11.1",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.12.0",
+      "max_vulnerable": "17.12.0",
+      "fixed": "17.12.1-hotfix-26509-17",
+      "release": "17.12",
+      "commits": [
+        "vstest@0a893ae"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.13.0",
+      "max_vulnerable": "17.13.0",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.13",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.14.0",
+      "max_vulnerable": "17.14.0",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.14.1",
+      "max_vulnerable": "17.14.1",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.3.0",
+      "max_vulnerable": "17.3.0",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.3.1",
+      "max_vulnerable": "17.3.1",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.3.2",
+      "max_vulnerable": "17.3.2",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.3.3",
+      "max_vulnerable": "17.3.3",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.4.0",
+      "max_vulnerable": "17.4.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.4.1",
+      "max_vulnerable": "17.4.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.5.0",
+      "max_vulnerable": "17.5.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.5",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.6.0",
+      "max_vulnerable": "17.6.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.6.1",
+      "max_vulnerable": "17.6.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.6.2",
+      "max_vulnerable": "17.6.2",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.6.3",
+      "max_vulnerable": "17.6.3",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.7.0",
+      "max_vulnerable": "17.7.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.7.1",
+      "max_vulnerable": "17.7.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.7.2",
+      "max_vulnerable": "17.7.2",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.8.0",
+      "max_vulnerable": "17.8.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.8",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "17.9.0",
+      "max_vulnerable": "17.9.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.9",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.0.0",
+      "max_vulnerable": "18.0.0",
+      "fixed": "18.0.2-hotfix-26509-19",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.0.1",
+      "max_vulnerable": "18.0.1",
+      "fixed": "18.0.2-hotfix-26509-19",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.10.0",
+      "max_vulnerable": "18.10.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.10.1",
+      "max_vulnerable": "18.10.1",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.11.0",
+      "max_vulnerable": "18.11.0",
+      "fixed": "18.11.1-hotfix-26509-22",
+      "release": "18.11",
+      "commits": [
+        "vstest@2caa719"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.3.0",
+      "max_vulnerable": "18.3.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.3",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.4.0",
+      "max_vulnerable": "18.4.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.4",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.5.0",
+      "max_vulnerable": "18.5.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.5.1",
+      "max_vulnerable": "18.5.1",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.6.0",
+      "max_vulnerable": "18.6.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.6",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.7.0",
+      "max_vulnerable": "18.7.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.7",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.8.0",
+      "max_vulnerable": "18.8.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.8.1",
+      "max_vulnerable": "18.8.1",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.NET.Test.Sdk",
+      "min_vulnerable": "18.9.0",
+      "max_vulnerable": "18.9.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.9",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.10.0",
+      "max_vulnerable": "17.10.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.10",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.11.0",
+      "max_vulnerable": "17.11.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.11.1",
+      "max_vulnerable": "17.11.1",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.12.0",
+      "max_vulnerable": "17.12.0",
+      "fixed": "17.12.1-hotfix-26509-17",
+      "release": "17.12",
+      "commits": [
+        "vstest@0a893ae"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.13.0",
+      "max_vulnerable": "17.13.0",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.13",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.14.0",
+      "max_vulnerable": "17.14.0",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.14.1",
+      "max_vulnerable": "17.14.1",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.3.0",
+      "max_vulnerable": "17.3.0",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.3.1",
+      "max_vulnerable": "17.3.1",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.3.2",
+      "max_vulnerable": "17.3.2",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.3.3",
+      "max_vulnerable": "17.3.3",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.4.0",
+      "max_vulnerable": "17.4.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.4.1",
+      "max_vulnerable": "17.4.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.5.0",
+      "max_vulnerable": "17.5.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.5",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.6.0",
+      "max_vulnerable": "17.6.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.6.1",
+      "max_vulnerable": "17.6.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.6.2",
+      "max_vulnerable": "17.6.2",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.6.3",
+      "max_vulnerable": "17.6.3",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.7.0",
+      "max_vulnerable": "17.7.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.7.1",
+      "max_vulnerable": "17.7.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.7.2",
+      "max_vulnerable": "17.7.2",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.8.0",
+      "max_vulnerable": "17.8.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.8",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "17.9.0",
+      "max_vulnerable": "17.9.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.9",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.0.0",
+      "max_vulnerable": "18.0.0",
+      "fixed": "18.0.2-hotfix-26509-19",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.0.1",
+      "max_vulnerable": "18.0.1",
+      "fixed": "18.0.2-hotfix-26509-19",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.10.0",
+      "max_vulnerable": "18.10.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.10.1",
+      "max_vulnerable": "18.10.1",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.11.0",
+      "max_vulnerable": "18.11.0",
+      "fixed": "18.11.1-hotfix-26509-22",
+      "release": "18.11",
+      "commits": [
+        "vstest@2caa719"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.3.0",
+      "max_vulnerable": "18.3.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.3",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.4.0",
+      "max_vulnerable": "18.4.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.4",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.5.0",
+      "max_vulnerable": "18.5.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.5.1",
+      "max_vulnerable": "18.5.1",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.6.0",
+      "max_vulnerable": "18.6.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.6",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.7.0",
+      "max_vulnerable": "18.7.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.7",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.8.0",
+      "max_vulnerable": "18.8.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.8.1",
+      "max_vulnerable": "18.8.1",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform",
+      "min_vulnerable": "18.9.0",
+      "max_vulnerable": "18.9.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.9",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.10.0",
+      "max_vulnerable": "17.10.0",
+      "fixed": "17.11.2",
+      "release": "17.10",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.11.0",
+      "max_vulnerable": "17.11.0",
+      "fixed": "17.11.2",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.11.1",
+      "max_vulnerable": "17.11.1",
+      "fixed": "17.11.2",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.12.0",
+      "max_vulnerable": "17.12.0",
+      "fixed": "17.12.1",
+      "release": "17.12",
+      "commits": [
+        "vstest@0a893ae"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.13.0",
+      "max_vulnerable": "17.13.0",
+      "fixed": "17.14.2",
+      "release": "17.13",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.14.0",
+      "max_vulnerable": "17.14.0",
+      "fixed": "17.14.2",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.14.1",
+      "max_vulnerable": "17.14.1",
+      "fixed": "17.14.2",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.2.0-preview-20220301-01",
+      "max_vulnerable": "17.3.0-preview-20220612-01",
+      "fixed": "17.3.4",
+      "release": "17.2",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.3.0",
+      "max_vulnerable": "17.3.0",
+      "fixed": "17.3.4",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.3.1",
+      "max_vulnerable": "17.3.1",
+      "fixed": "17.3.4",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.3.2",
+      "max_vulnerable": "17.3.2",
+      "fixed": "17.3.4",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.3.3",
+      "max_vulnerable": "17.3.3",
+      "fixed": "17.3.4",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.4.0",
+      "max_vulnerable": "17.4.0",
+      "fixed": "17.8.1",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.4.1",
+      "max_vulnerable": "17.4.1",
+      "fixed": "17.8.1",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.5.0",
+      "max_vulnerable": "17.5.0",
+      "fixed": "17.8.1",
+      "release": "17.5",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.6.0",
+      "max_vulnerable": "17.6.0",
+      "fixed": "17.8.1",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.6.1",
+      "max_vulnerable": "17.6.1",
+      "fixed": "17.8.1",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.6.2",
+      "max_vulnerable": "17.6.2",
+      "fixed": "17.8.1",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.6.3",
+      "max_vulnerable": "17.6.3",
+      "fixed": "17.8.1",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.7.0",
+      "max_vulnerable": "17.7.0",
+      "fixed": "17.8.1",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.7.1",
+      "max_vulnerable": "17.7.1",
+      "fixed": "17.8.1",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.7.2",
+      "max_vulnerable": "17.7.2",
+      "fixed": "17.8.1",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.8.0",
+      "max_vulnerable": "17.8.0",
+      "fixed": "17.8.1",
+      "release": "17.8",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "17.9.0",
+      "max_vulnerable": "17.9.0",
+      "fixed": "17.11.2",
+      "release": "17.9",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.0.0",
+      "max_vulnerable": "18.0.0",
+      "fixed": "18.0.2",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.0.1",
+      "max_vulnerable": "18.0.1",
+      "fixed": "18.0.2",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.10.0",
+      "max_vulnerable": "18.10.0",
+      "fixed": "18.10.2",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.10.1",
+      "max_vulnerable": "18.10.1",
+      "fixed": "18.10.2",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.11.0",
+      "max_vulnerable": "18.11.0",
+      "fixed": "18.11.1",
+      "release": "18.11",
+      "commits": [
+        "vstest@2caa719"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.3.0",
+      "max_vulnerable": "18.3.0",
+      "fixed": "18.7.1",
+      "release": "18.3",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.4.0",
+      "max_vulnerable": "18.4.0",
+      "fixed": "18.7.1",
+      "release": "18.4",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.5.0",
+      "max_vulnerable": "18.5.0",
+      "fixed": "18.7.1",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.5.1",
+      "max_vulnerable": "18.5.1",
+      "fixed": "18.7.1",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.6.0",
+      "max_vulnerable": "18.6.0",
+      "fixed": "18.7.1",
+      "release": "18.6",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.7.0",
+      "max_vulnerable": "18.7.0",
+      "fixed": "18.7.1",
+      "release": "18.7",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.8.0",
+      "max_vulnerable": "18.8.0",
+      "fixed": "18.10.2",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.8.1",
+      "max_vulnerable": "18.8.1",
+      "fixed": "18.10.2",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.CLI",
+      "min_vulnerable": "18.9.0",
+      "max_vulnerable": "18.9.0",
+      "fixed": "18.10.2",
+      "release": "18.9",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.10.0",
+      "max_vulnerable": "17.10.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.10",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.11.0",
+      "max_vulnerable": "17.11.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.11.1",
+      "max_vulnerable": "17.11.1",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.11",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.12.0",
+      "max_vulnerable": "17.12.0",
+      "fixed": "17.12.1-hotfix-26509-17",
+      "release": "17.12",
+      "commits": [
+        "vstest@0a893ae"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.13.0",
+      "max_vulnerable": "17.13.0",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.13",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.14.0",
+      "max_vulnerable": "17.14.0",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.14.1",
+      "max_vulnerable": "17.14.1",
+      "fixed": "17.14.2-hotfix-26509-18",
+      "release": "17.14",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.3.0",
+      "max_vulnerable": "17.3.0",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.3.1",
+      "max_vulnerable": "17.3.1",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.3.2",
+      "max_vulnerable": "17.3.2",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.3.3",
+      "max_vulnerable": "17.3.3",
+      "fixed": "17.3.4-hotfix-20261009-24",
+      "release": "17.3",
+      "commits": [
+        "vstest@81f0e42"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.4.0",
+      "max_vulnerable": "17.4.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.4.1",
+      "max_vulnerable": "17.4.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.4",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.5.0",
+      "max_vulnerable": "17.5.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.5",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.6.0",
+      "max_vulnerable": "17.6.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.6.1",
+      "max_vulnerable": "17.6.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.6.2",
+      "max_vulnerable": "17.6.2",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.6.3",
+      "max_vulnerable": "17.6.3",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.6",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.7.0",
+      "max_vulnerable": "17.7.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.7.1",
+      "max_vulnerable": "17.7.1",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.7.2",
+      "max_vulnerable": "17.7.2",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.7",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.8.0",
+      "max_vulnerable": "17.8.0",
+      "fixed": "17.8.1-hotfix-26509-15",
+      "release": "17.8",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "17.9.0",
+      "max_vulnerable": "17.9.0",
+      "fixed": "17.11.2-hotfix-26509-16",
+      "release": "17.9",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.0.0",
+      "max_vulnerable": "18.0.0",
+      "fixed": "18.0.2-hotfix-26509-19",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.0.1",
+      "max_vulnerable": "18.0.1",
+      "fixed": "18.0.2-hotfix-26509-19",
+      "release": "18.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.10.0",
+      "max_vulnerable": "18.10.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.10.1",
+      "max_vulnerable": "18.10.1",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.10",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.11.0",
+      "max_vulnerable": "18.11.0",
+      "fixed": "18.11.1-hotfix-26509-22",
+      "release": "18.11",
+      "commits": [
+        "vstest@2caa719"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.3.0",
+      "max_vulnerable": "18.3.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.3",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.4.0",
+      "max_vulnerable": "18.4.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.4",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.5.0",
+      "max_vulnerable": "18.5.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.5.1",
+      "max_vulnerable": "18.5.1",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.5",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.6.0",
+      "max_vulnerable": "18.6.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.6",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.7.0",
+      "max_vulnerable": "18.7.0",
+      "fixed": "18.7.1-hotfix-26509-20",
+      "release": "18.7",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.8.0",
+      "max_vulnerable": "18.8.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.8.1",
+      "max_vulnerable": "18.8.1",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.8",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "Microsoft.TestPlatform.TestHost",
+      "min_vulnerable": "18.9.0",
+      "max_vulnerable": "18.9.0",
+      "fixed": "18.10.2-hotfix-26559-08",
+      "release": "18.9",
+      "commits": [
+        "vstest@589384b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.DotNet.Web.ProjectTemplates.10.0",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@5b6e2d7"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.DotNet.Web.ProjectTemplates.8.0",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@ff2b848"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.DotNet.Web.ProjectTemplates.9.0",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@62591c7"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-70175",
+      "name": "Microsoft.AspNetCore.Identity.UI",
+      "min_vulnerable": "2.3.0",
+      "max_vulnerable": "2.3.13",
+      "fixed": "2.3.14",
+      "release": "2.3",
+      "commits": [
+        "aspnetcore@9c53b1e"
       ]
     }
   ],
@@ -2323,6 +4123,69 @@
       "hash": "679f268f7beb3c48fa069fc18f09a2698d424197",
       "org": "dotnet",
       "url": "https://github.com/dotnet/dotnet/commit/679f268f7beb3c48fa069fc18f09a2698d424197"
+    },
+    "vstest@81f0e42": {
+      "repo": "vstest",
+      "branch": "rel/17.3",
+      "hash": "81f0e42b019444edd827c4110a01a70ff01c42b3",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/81f0e42b019444edd827c4110a01a70ff01c42b3"
+    },
+    "vstest@589384b": {
+      "repo": "vstest",
+      "branch": "rel/18.10",
+      "hash": "589384ba98440ae45573019410ee0ec3ce3696fc",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/589384ba98440ae45573019410ee0ec3ce3696fc"
+    },
+    "vstest@2caa719": {
+      "repo": "vstest",
+      "branch": "rel/18.11",
+      "hash": "2caa7193b56c41419b337cd74365115bc8576b4d",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/2caa7193b56c41419b337cd74365115bc8576b4d"
+    },
+    "aspnetcore@ff2b848": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "ff2b848f3529bfe3e1f873e1c44b705a1bf487a6",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/ff2b848f3529bfe3e1f873e1c44b705a1bf487a6"
+    },
+    "aspnetcore@62591c7": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "62591c724e02bbc31ce48c45ad8a038c260fc688",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/62591c724e02bbc31ce48c45ad8a038c260fc688"
+    },
+    "dotnet@5b6e2d7": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "5b6e2d738f9af9dbbc96799131f21bd394f178ac",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/5b6e2d738f9af9dbbc96799131f21bd394f178ac"
+    },
+    "dotnet@3c5dfbe": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "3c5dfbe520f2e924bc55d6aa8faab3d0fd58ad32",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/3c5dfbe520f2e924bc55d6aa8faab3d0fd58ad32"
+    },
+    "aspnetcore@9c53b1e": {
+      "repo": "aspnetcore",
+      "branch": "release/2.3",
+      "hash": "9c53b1eb295a4625cab81ee101953c3e6cd048ec",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/9c53b1eb295a4625cab81ee101953c3e6cd048ec"
+    },
+    "runtime@b75eb33": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "b75eb33713b8c238bb5ce80a249f39ebba434542",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/b75eb33713b8c238bb5ce80a249f39ebba434542"
     }
   },
   "product_name": {
@@ -2333,7 +4196,8 @@
   "product_cves": {
     "dotnet-sdk": [
       "CVE-2026-105544",
-      "CVE-2026-114155"
+      "CVE-2026-114155",
+      "CVE-2026-70175"
     ],
     "dotnet-runtime": [
       "CVE-2026-109475",
@@ -2391,6 +4255,30 @@
     ],
     "System.Text.Json": [
       "CVE-2026-120796"
+    ],
+    "Microsoft.NET.Test.Sdk": [
+      "CVE-2026-105544"
+    ],
+    "Microsoft.TestPlatform": [
+      "CVE-2026-105544"
+    ],
+    "Microsoft.TestPlatform.CLI": [
+      "CVE-2026-105544"
+    ],
+    "Microsoft.TestPlatform.TestHost": [
+      "CVE-2026-105544"
+    ],
+    "Microsoft.DotNet.Web.ProjectTemplates.10.0": [
+      "CVE-2026-118741"
+    ],
+    "Microsoft.DotNet.Web.ProjectTemplates.8.0": [
+      "CVE-2026-118741"
+    ],
+    "Microsoft.DotNet.Web.ProjectTemplates.9.0": [
+      "CVE-2026-118741"
+    ],
+    "Microsoft.AspNetCore.Identity.UI": [
+      "CVE-2026-70175"
     ]
   },
   "release_cves": {
@@ -2415,7 +4303,8 @@
       "CVE-2026-118747",
       "CVE-2026-118748",
       "CVE-2026-118749",
-      "CVE-2026-120796"
+      "CVE-2026-120796",
+      "CVE-2026-70175"
     ],
     "10.0": [
       "CVE-2026-105544",
@@ -2433,7 +4322,8 @@
       "CVE-2026-114159",
       "CVE-2026-118741",
       "CVE-2026-118745",
-      "CVE-2026-118747"
+      "CVE-2026-118747",
+      "CVE-2026-70175"
     ],
     "9.0": [
       "CVE-2026-105544",
@@ -2450,7 +4340,8 @@
       "CVE-2026-114159",
       "CVE-2026-118741",
       "CVE-2026-118745",
-      "CVE-2026-118747"
+      "CVE-2026-118747",
+      "CVE-2026-70175"
     ],
     "8.0": [
       "CVE-2026-105544",
@@ -2468,7 +4359,8 @@
       "CVE-2026-114159",
       "CVE-2026-118741",
       "CVE-2026-118745",
-      "CVE-2026-118747"
+      "CVE-2026-118747",
+      "CVE-2026-70175"
     ],
     "1.2": [
       "CVE-2026-114146"
@@ -2477,7 +4369,77 @@
       "CVE-2026-118741"
     ],
     "2.3": [
-      "CVE-2026-118750"
+      "CVE-2026-118750",
+      "CVE-2026-70175"
+    ],
+    "17.10": [
+      "CVE-2026-105544"
+    ],
+    "17.11": [
+      "CVE-2026-105544"
+    ],
+    "17.12": [
+      "CVE-2026-105544"
+    ],
+    "17.13": [
+      "CVE-2026-105544"
+    ],
+    "17.14": [
+      "CVE-2026-105544"
+    ],
+    "17.3": [
+      "CVE-2026-105544"
+    ],
+    "17.4": [
+      "CVE-2026-105544"
+    ],
+    "17.5": [
+      "CVE-2026-105544"
+    ],
+    "17.6": [
+      "CVE-2026-105544"
+    ],
+    "17.7": [
+      "CVE-2026-105544"
+    ],
+    "17.8": [
+      "CVE-2026-105544"
+    ],
+    "17.9": [
+      "CVE-2026-105544"
+    ],
+    "18.0": [
+      "CVE-2026-105544"
+    ],
+    "18.10": [
+      "CVE-2026-105544"
+    ],
+    "18.11": [
+      "CVE-2026-105544"
+    ],
+    "18.3": [
+      "CVE-2026-105544"
+    ],
+    "18.4": [
+      "CVE-2026-105544"
+    ],
+    "18.5": [
+      "CVE-2026-105544"
+    ],
+    "18.6": [
+      "CVE-2026-105544"
+    ],
+    "18.7": [
+      "CVE-2026-105544"
+    ],
+    "18.8": [
+      "CVE-2026-105544"
+    ],
+    "18.9": [
+      "CVE-2026-105544"
+    ],
+    "17.2": [
+      "CVE-2026-105544"
     ]
   },
   "severity_cves": {
@@ -2503,7 +4465,8 @@
       "CVE-2026-118747",
       "CVE-2026-118748",
       "CVE-2026-118749",
-      "CVE-2026-118750"
+      "CVE-2026-118750",
+      "CVE-2026-70175"
     ],
     "medium": [
       "CVE-2026-109476",
@@ -2519,7 +4482,30 @@
       "11.0",
       "10.0",
       "9.0",
-      "8.0"
+      "8.0",
+      "17.10",
+      "17.11",
+      "17.12",
+      "17.13",
+      "17.14",
+      "17.2",
+      "17.3",
+      "17.4",
+      "17.5",
+      "17.6",
+      "17.7",
+      "17.8",
+      "17.9",
+      "18.0",
+      "18.10",
+      "18.11",
+      "18.3",
+      "18.4",
+      "18.5",
+      "18.6",
+      "18.7",
+      "18.8",
+      "18.9"
     ],
     "CVE-2026-109475": [
       "11.0",
@@ -2635,6 +4621,13 @@
     ],
     "CVE-2026-118750": [
       "2.3"
+    ],
+    "CVE-2026-70175": [
+      "10.0",
+      "11.0",
+      "2.3",
+      "8.0",
+      "9.0"
     ]
   },
   "cve_commits": {
@@ -2645,7 +4638,10 @@
       "vstest@0a893ae",
       "vstest@d4a3823",
       "vstest@81fe01e",
-      "vstest@012c7dc"
+      "vstest@012c7dc",
+      "vstest@2caa719",
+      "vstest@589384b",
+      "vstest@81f0e42"
     ],
     "CVE-2026-109475": [
       "runtime@e8dac74",
@@ -2733,7 +4729,10 @@
       "Scaffolding@9787cd6",
       "Scaffolding@6e07e43",
       "Scaffolding@cf53715",
-      "Scaffolding@7642a55"
+      "Scaffolding@7642a55",
+      "aspnetcore@62591c7",
+      "aspnetcore@ff2b848",
+      "dotnet@5b6e2d7"
     ],
     "CVE-2026-118745": [
       "dotnet@e67c862",
@@ -2747,7 +4746,8 @@
     "CVE-2026-118747": [
       "runtime@ed4c181",
       "dotnet@c39c4c2",
-      "dotnet@b7157d1"
+      "dotnet@b7157d1",
+      "runtime@b75eb33"
     ],
     "CVE-2026-118748": [
       "dotnet@187ed35"
@@ -2760,6 +4760,13 @@
     ],
     "CVE-2026-120796": [
       "dotnet@679f268"
+    ],
+    "CVE-2026-70175": [
+      "aspnetcore@62591c7",
+      "aspnetcore@9c53b1e",
+      "aspnetcore@ff2b848",
+      "dotnet@3c5dfbe",
+      "dotnet@5b6e2d7"
     ]
   }
 }
