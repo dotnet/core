@@ -8,6 +8,8 @@ Your app needs to be on the latest .NET 9 patch version to be secure. The longer
 
 Your app may be vulnerable to the following published security [CVEs](https://www.cve.org/) if you are using an older version.
 
+- System.Formats.Cbor 9.0.24 (November 2026; standalone NuGet package)
+  - [CVE-2026-118747 | .NET Denial of Service Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118747): Update the package, then rebuild and redeploy affected applications. Installing runtime 9.0.23 does not fix this vulnerability.
 - 9.0.23 (November 2026)
   - [CVE-2026-114146 | TBD](https://github.com/dotnet/announcements/issues/xxx)
   - [CVE-2026-109475 | TBD](https://github.com/dotnet/announcements/issues/xxx)
@@ -23,6 +25,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
   - [CVE-2026-114157 | TBD](https://github.com/dotnet/announcements/issues/xxx)
   - [CVE-2026-114158 | TBD](https://github.com/dotnet/announcements/issues/xxx)
   - [CVE-2026-114159 | TBD](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2026-118741 | ASP.NET Core Elevation of Privilege Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118741) (Identity scaffolding and templates; update affected tooling and correct previously generated application code.)
 - 9.0.22 (October 2026)
   - [CVE-2026-111497 | Brotli decoder out-of-bounds write](https://github.com/dotnet/announcements/issues/494)
   - [CVE-2026-70197 | Windows SocketAsyncEventArgs memory corruption](https://github.com/dotnet/announcements/issues/493)
