@@ -1,0 +1,2765 @@
+{
+  "last_updated": "2026-11-10",
+  "title": "CVE disclosures for November 2026",
+  "disclosures": [
+    {
+      "id": "CVE-2026-105544",
+      "problem": ".NET SDK Elevation of Privilege Vulnerability",
+      "weakness": "CWE-284",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": []
+      },
+      "description": [
+        "The VSTest artifact postprocessor can consume a forged executionComplete.json from another local user and execute attacker-controlled output handling."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-109475",
+      "problem": ".NET Denial of Service Vulnerability",
+      "weakness": "CWE-121",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Managed HttpListener can recursively process an unterminated request line and exhaust the process stack."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-109476",
+      "problem": "ASP.NET Core Information Disclosure Vulnerability",
+      "weakness": "CWE-116",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Information Disclosure",
+        "acknowledgments": []
+      },
+      "description": [
+        "A crafted X-Forwarded-Prefix can inject cookie path delimiters unless PathBase-derived cookie paths percent-encode semicolons."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:N/A:N/E:U/RL:O/RC:C",
+        "score": 6.1,
+        "severity": "medium"
+      }
+    },
+    {
+      "id": "CVE-2026-109478",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "weakness": "CWE-407",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Processing comma-separated HTTP header values can cause excessive allocations and resource exhaustion."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-109481",
+      "problem": "ASP.NET Core Elevation of Privilege Vulnerability",
+      "weakness": "CWE-352",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": []
+      },
+      "description": [
+        "The Blazor/SignalR /_blazor/refresh path can accept a cross-site request that binds a victim\u0027s authenticated principal to an attacker-owned circuit."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114146",
+      "problem": "ASP.NET Core Elevation of Privilege Vulnerability",
+      "weakness": "CWE-863",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": []
+      },
+      "description": [
+        "SignalR connections are not consistently bound to the identity negotiated at connection establishment, allowing injected messages to execute Hub invocations as the victim."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 9,
+        "severity": "critical"
+      }
+    },
+    {
+      "id": "CVE-2026-114147",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "weakness": "CWE-401",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "SignalR Redis scale-out can mishandle case-mismatched group removal and leave subscriptions in a state that permits persistent resource amplification and denial of service."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114149",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "weakness": "CWE-400",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Multipart form processing can bypass the configured header-count limit and consume excessive resources."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114150",
+      "problem": "ASP.NET Core Information Disclosure Vulnerability",
+      "weakness": "CWE-908",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Information Disclosure",
+        "acknowledgments": []
+      },
+      "description": [
+        "A reused ResponseBufferingStream can retain pooled tail memory and expose response-body data from another request through HTTP logging."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N/E:U/RL:O/RC:C",
+        "score": 5.9,
+        "severity": "medium"
+      }
+    },
+    {
+      "id": "CVE-2026-114151",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "weakness": "CWE-502, CWE-121",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Remote Code Execution",
+        "acknowledgments": []
+      },
+      "description": [
+        "A crafted PDB LF_DECIMAL payload can trigger an out-of-bounds stack write when processed by DIA."
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.8,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114152",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "weakness": "CWE-121, CWE-822",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Remote Code Execution",
+        "acknowledgments": []
+      },
+      "description": [
+        "Attacker-controlled COFF relocation offsets can cause an out-of-bounds stack write in DiaObjectFile::ApplyFixup."
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.8,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114154",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "weakness": "CWE-400",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Malformed chunked HttpSys requests containing conflicting content-length headers can retain request and connection resources."
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114155",
+      "problem": ".NET Elevation of Privilege Vulnerability",
+      "weakness": "CWE-367",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": []
+      },
+      "description": [
+        "Time-of-check time-of-use (toctou) race condition in .NET allows an authorized attacker to elevate privileges locally."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:C/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114156",
+      "problem": "ASP.NET Core Security Feature Bypass Vulnerability",
+      "weakness": "CWE-20",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Security Feature Bypass",
+        "acknowledgments": []
+      },
+      "description": [
+        "PathString.StartsWithSegments can mishandle percent-encoded backslashes and permit authorization checks to match an unintended path."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N/E:U/RL:O/RC:C",
+        "score": 6.5,
+        "severity": "medium"
+      }
+    },
+    {
+      "id": "CVE-2026-114157",
+      "problem": "ASP.NET Core Security Feature Bypass Vulnerability",
+      "weakness": "CWE-362",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Security Feature Bypass",
+        "acknowledgments": []
+      },
+      "description": [
+        "Concurrent execution using shared resource with improper synchronization (\u0027race condition\u0027) in ASP.NET Core allows an authorized attacker to bypass a security feature locally."
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:N/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114158",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "weakness": "CWE-122",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Remote Code Execution",
+        "acknowledgments": []
+      },
+      "description": [
+        "A Portable PDB EmbeddedSource record with parent RID 0 can trigger an out-of-bounds write."
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.8,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-114159",
+      "problem": ".NET Remote Code Execution Vulnerability",
+      "weakness": "CWE-122",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Remote Code Execution",
+        "acknowledgments": []
+      },
+      "description": [
+        "An oversized Portable PDB document name can be truncated during allocation and cause a heap out-of-bounds write."
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.8,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-118741",
+      "problem": "ASP.NET Core Elevation of Privilege Vulnerability",
+      "weakness": "CWE-287",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Elevation of Privilege",
+        "acknowledgments": []
+      },
+      "description": [
+        "Improper authentication in ASP.NET Core allows an unauthorized attacker to elevate privileges over a network."
+      ],
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.1,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-118745",
+      "problem": "Visual Studio Remote Code Execution Vulnerability",
+      "weakness": "CWE-122",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Remote Code Execution",
+        "acknowledgments": []
+      },
+      "description": [
+        "Heap-based buffer overflow in Visual Studio allows an unauthorized attacker to execute code over a network."
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H/E:U/RL:O/RC:C",
+        "score": 8.8,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-118746",
+      "problem": ".NET Security Feature Bypass Vulnerability",
+      "weakness": "CWE-636",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Security Feature Bypass",
+        "acknowledgments": []
+      },
+      "description": [
+        "Not failing securely (\u0027failing open\u0027) in .NET allows an unauthorized attacker to bypass a security feature over a network."
+      ],
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N/E:U/RL:O/RC:C",
+        "score": 6.8,
+        "severity": "medium"
+      }
+    },
+    {
+      "id": "CVE-2026-118747",
+      "problem": ".NET Denial of Service Vulnerability",
+      "weakness": "CWE-407",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Inefficient algorithmic complexity in .NET allows an unauthorized attacker to deny service over a network."
+      ],
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-118748",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "weakness": "CWE-770",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Allocation of resources without limits or throttling in ASP.NET Core allows an unauthorized attacker to deny service over a network."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-118749",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "weakness": "CWE-407",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Inefficient algorithmic complexity in ASP.NET Core allows an unauthorized attacker to deny service over a network."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-118750",
+      "problem": "ASP.NET Core Denial of Service Vulnerability",
+      "weakness": "CWE-770",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Allocation of resources without limits or throttling in ASP.NET Core allows an unauthorized attacker to deny service over a network."
+      ],
+      "platforms": [
+        "all"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:U/RL:O/RC:C",
+        "score": 7.5,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "CVE-2026-120796",
+      "problem": ".NET Denial of Service Vulnerability",
+      "weakness": "CWE-407",
+      "timeline": {
+        "disclosure": {
+          "date": "2026-11-10",
+          "description": "Disclosed"
+        },
+        "fixed": {
+          "date": "2026-11-10",
+          "description": "Fixed"
+        }
+      },
+      "cna": {
+        "name": "microsoft",
+        "severity": "high",
+        "impact": "Denial of Service",
+        "acknowledgments": []
+      },
+      "description": [
+        "Inefficient algorithmic complexity in .NET allows an unauthorized attacker to deny service over a network."
+      ],
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "architectures": [
+        "all"
+      ],
+      "cvss": {
+        "version": "3.1",
+        "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L/E:U/RL:O/RC:C",
+        "score": 5.3,
+        "severity": "medium"
+      }
+    }
+  ],
+  "products": [
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "11.0.100-preview.1.26104.118",
+      "max_vulnerable": "11.0.100-rc.3.26522.148",
+      "fixed": "11.0.100",
+      "release": "11.0",
+      "commits": [
+        "vstest@46b26d7"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "10.0.400",
+      "max_vulnerable": "10.0.403",
+      "fixed": "10.0.404",
+      "release": "10.0",
+      "commits": [
+        "vstest@3a33235"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.300",
+      "max_vulnerable": "9.0.320",
+      "fixed": "9.0.321",
+      "release": "9.0",
+      "commits": [
+        "vstest@4691222"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "9.0.100",
+      "max_vulnerable": "9.0.123",
+      "fixed": "9.0.124",
+      "release": "9.0",
+      "commits": [
+        "vstest@0a893ae"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.400",
+      "max_vulnerable": "8.0.427",
+      "fixed": "8.0.428",
+      "release": "8.0",
+      "commits": [
+        "vstest@d4a3823"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "8.0.100",
+      "max_vulnerable": "8.0.133",
+      "fixed": "8.0.134",
+      "release": "8.0",
+      "commits": [
+        "vstest@81fe01e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-105544",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "10.0.100",
+      "max_vulnerable": "10.0.114",
+      "fixed": "10.0.115",
+      "release": "10.0",
+      "commits": [
+        "vstest@012c7dc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109475",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "runtime@e8dac74"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109475",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "runtime@0a7474b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109475",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@48e842f"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109475",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@f0b06bc"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109476",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@7ce5a6b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109476",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@ed4e5d9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109476",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@1fa5639"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109476",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@cc5adb9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109478",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@2523887"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-109481",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.6.26359.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@46527b6"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114146",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@db85798"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114146",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@4ff0b1b"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114146",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@fc22fa9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114146",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@e1ae50f"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@9a46560"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@d94f9c2"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@cc53379"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@36b4605"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@d2b5ab1"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@e2fdf87"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@eea3265"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@43b05b9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114150",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@94105af"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114151",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "runtime@9bec8ba"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114151",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@e67c862"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114151",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "runtime@5eeae0e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114151",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@47a1ad4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114152",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@e67c862"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114152",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "runtime@9bec8ba"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114152",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@47a1ad4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114152",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "runtime@5eeae0e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114154",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@8cb8dc4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114154",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@20e629e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114154",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@547f8d2"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114155",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "10.0.300",
+      "max_vulnerable": "10.0.303",
+      "fixed": "10.0.404",
+      "release": "10.0",
+      "commits": [
+        "dotnet@835056d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114155",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "11.0.100-preview.3.26207.106",
+      "max_vulnerable": "11.0.100-rc.3.26522.148",
+      "fixed": "11.0.100",
+      "release": "11.0",
+      "commits": [
+        "dotnet@46ecf02"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114155",
+      "name": "dotnet-sdk",
+      "min_vulnerable": "10.0.400",
+      "max_vulnerable": "10.0.403",
+      "fixed": "10.0.404",
+      "release": "10.0",
+      "commits": [
+        "dotnet@835056d"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114156",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.7.26381.103",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@d4efbec"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114157",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@ef636e5"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114157",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@a4ade6a"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114157",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@164708e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114157",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@671bb7f"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114158",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "runtime@5eeae0e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114158",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@47a1ad4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114158",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@e67c862"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114158",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "runtime@9bec8ba"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114159",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@47a1ad4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114159",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "runtime@5eeae0e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114159",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "runtime@9bec8ba"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114159",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@e67c862"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118745",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@e67c862"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118745",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@47a1ad4"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118745",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "runtime@9bec8ba"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118745",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "runtime@5eeae0e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118746",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@74b6654"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118748",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-preview.7.26381.103",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@187ed35"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118749",
+      "name": "dotnet-aspnetcore",
+      "min_vulnerable": "11.0.0-rc.1.26425.128",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@2b3c3b1"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-120796",
+      "name": "dotnet-runtime",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@679f268"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "cve_id": "CVE-2026-114146",
+      "name": "Microsoft.AspNetCore.Http.Connections",
+      "min_vulnerable": "1.2.0",
+      "max_vulnerable": "1.2.13",
+      "fixed": "1.2.14",
+      "release": "1.2",
+      "commits": [
+        "aspnetcore@514c860"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "Microsoft.AspNetCore.SignalR.StackExchangeRedis",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@9a46560"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "Microsoft.AspNetCore.SignalR.StackExchangeRedis",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@36b4605"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "Microsoft.AspNetCore.SignalR.StackExchangeRedis",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@d94f9c2"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114147",
+      "name": "Microsoft.AspNetCore.SignalR.StackExchangeRedis",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@cc53379"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "Microsoft.AspNetCore.WebUtilities",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.22",
+      "fixed": "9.0.23",
+      "release": "9.0",
+      "commits": [
+        "aspnetcore@eea3265"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "Microsoft.AspNetCore.WebUtilities",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@43b05b9"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "Microsoft.AspNetCore.WebUtilities",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@d2b5ab1"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-114149",
+      "name": "Microsoft.AspNetCore.WebUtilities",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.33",
+      "fixed": "8.0.34",
+      "release": "8.0",
+      "commits": [
+        "aspnetcore@e2fdf87"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.12",
+      "fixed": "9.0.13",
+      "release": "9.0",
+      "commits": [
+        "Scaffolding@9787cd6"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.23",
+      "fixed": "8.0.24",
+      "release": "8.0",
+      "commits": [
+        "Scaffolding@6e07e43"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.VisualStudio.Web.CodeGenerators.Mvc",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.2",
+      "fixed": "10.0.3",
+      "release": "10.0",
+      "commits": [
+        "Scaffolding@cf53715"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.dotnet-scaffold",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.2",
+      "fixed": "10.0.3",
+      "release": "10.0",
+      "commits": [
+        "Scaffolding@cf53715"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.VisualStudio.Web.CodeGenerators.Mvc",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.23",
+      "fixed": "8.0.24",
+      "release": "8.0",
+      "commits": [
+        "Scaffolding@6e07e43"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.dotnet-scaffold-aspnet",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.12",
+      "fixed": "9.0.13",
+      "release": "9.0",
+      "commits": [
+        "Scaffolding@9787cd6"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.dotnet-scaffold",
+      "min_vulnerable": "20.0.0-preview.1.26156.3",
+      "max_vulnerable": "20.1.0",
+      "fixed": "20.3.0",
+      "release": "20.0",
+      "commits": [
+        "Scaffolding@7642a55"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.2",
+      "fixed": "10.0.3",
+      "release": "10.0",
+      "commits": [
+        "Scaffolding@cf53715"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118741",
+      "name": "Microsoft.VisualStudio.Web.CodeGenerators.Mvc",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.12",
+      "fixed": "9.0.13",
+      "release": "9.0",
+      "commits": [
+        "Scaffolding@9787cd6"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118747",
+      "name": "System.Formats.Cbor",
+      "min_vulnerable": "8.0.0",
+      "max_vulnerable": "8.0.1",
+      "fixed": "8.0.2",
+      "release": "8.0",
+      "commits": [
+        "runtime@ed4c181"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118747",
+      "name": "System.Formats.Cbor",
+      "min_vulnerable": "9.0.0",
+      "max_vulnerable": "9.0.23",
+      "fixed": "10.0.15",
+      "release": "9.0",
+      "commits": [
+        "dotnet@c39c4c2"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118747",
+      "name": "System.Formats.Cbor",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@b7157d1"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118747",
+      "name": "System.Formats.Cbor",
+      "min_vulnerable": "10.0.0",
+      "max_vulnerable": "10.0.14",
+      "fixed": "10.0.15",
+      "release": "10.0",
+      "commits": [
+        "dotnet@c39c4c2"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118749",
+      "name": "Microsoft.Extensions.Validation",
+      "min_vulnerable": "11.0.0-rc.1.26425.128",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@2b3c3b1"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-118750",
+      "name": "Microsoft.AspNetCore.WebUtilities",
+      "min_vulnerable": "2.3.0",
+      "max_vulnerable": "2.3.13",
+      "fixed": "2.3.14",
+      "release": "2.3",
+      "commits": [
+        "aspnetcore@9a26c74"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-120796",
+      "name": "System.Text.Json",
+      "min_vulnerable": "11.0.0-preview.1.26104.118",
+      "max_vulnerable": "11.0.0-rc.3.26522.148",
+      "fixed": "11.0.0",
+      "release": "11.0",
+      "commits": [
+        "dotnet@679f268"
+      ]
+    }
+  ],
+  "commits": {
+    "vstest@46b26d7": {
+      "repo": "vstest",
+      "branch": "rel/18.12",
+      "hash": "46b26d7d83b3be99d8dfeef4b5373dc0cb818495",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/46b26d7d83b3be99d8dfeef4b5373dc0cb818495"
+    },
+    "vstest@3a33235": {
+      "repo": "vstest",
+      "branch": "rel/18.7",
+      "hash": "3a33235b44b2bb88a2ae4e09c008a5b50b3cddff",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/3a33235b44b2bb88a2ae4e09c008a5b50b3cddff"
+    },
+    "vstest@4691222": {
+      "repo": "vstest",
+      "branch": "rel/17.14",
+      "hash": "469122275ab10159c247347172be51daa51f47c6",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/469122275ab10159c247347172be51daa51f47c6"
+    },
+    "vstest@0a893ae": {
+      "repo": "vstest",
+      "branch": "rel/17.12",
+      "hash": "0a893aece1833e102575c519cfc951befd760f78",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/0a893aece1833e102575c519cfc951befd760f78"
+    },
+    "vstest@d4a3823": {
+      "repo": "vstest",
+      "branch": "rel/17.11",
+      "hash": "d4a38239893c11c1e42ed0c61352daffb9424e35",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/d4a38239893c11c1e42ed0c61352daffb9424e35"
+    },
+    "vstest@81fe01e": {
+      "repo": "vstest",
+      "branch": "rel/17.8",
+      "hash": "81fe01ee0bd2fa13ac8f02a660a89066f220b45c",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/81fe01ee0bd2fa13ac8f02a660a89066f220b45c"
+    },
+    "vstest@012c7dc": {
+      "repo": "vstest",
+      "branch": "rel/18.0",
+      "hash": "012c7dc39cebbc954b09e5b1b147265b2aea007f",
+      "org": "microsoft",
+      "url": "https://github.com/microsoft/vstest/commit/012c7dc39cebbc954b09e5b1b147265b2aea007f"
+    },
+    "runtime@e8dac74": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "e8dac7445e76b20286570e02e837546f81d628d1",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/e8dac7445e76b20286570e02e837546f81d628d1"
+    },
+    "runtime@0a7474b": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "0a7474b59b69b7e80ecd3cabe5be39676802abae",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/0a7474b59b69b7e80ecd3cabe5be39676802abae"
+    },
+    "dotnet@48e842f": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "48e842f0c3744fd8a96a77ebc6b7906b6551d309",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/48e842f0c3744fd8a96a77ebc6b7906b6551d309"
+    },
+    "dotnet@f0b06bc": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "f0b06bc3f6cebf6a116f27998f1f28a701ebdbba",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/f0b06bc3f6cebf6a116f27998f1f28a701ebdbba"
+    },
+    "aspnetcore@7ce5a6b": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "7ce5a6b05d4d6694bb688bf7053ebb594c00a8e5",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/7ce5a6b05d4d6694bb688bf7053ebb594c00a8e5"
+    },
+    "dotnet@ed4e5d9": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "ed4e5d9fb803746b93b739582dbb4333de6646d5",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/ed4e5d9fb803746b93b739582dbb4333de6646d5"
+    },
+    "aspnetcore@1fa5639": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "1fa5639647ddd2061bafe2ccf60bdc1c345b0b34",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/1fa5639647ddd2061bafe2ccf60bdc1c345b0b34"
+    },
+    "dotnet@cc5adb9": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "cc5adb97b20ce2a3fda8c77a6c692156f7286bea",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/cc5adb97b20ce2a3fda8c77a6c692156f7286bea"
+    },
+    "aspnetcore@2523887": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "2523887d4cca7013afa2737e20cb7f6ba1eed8ff",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/2523887d4cca7013afa2737e20cb7f6ba1eed8ff"
+    },
+    "dotnet@46527b6": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "46527b6fc760355e0f771b5cabd0207fea517df4",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/46527b6fc760355e0f771b5cabd0207fea517df4"
+    },
+    "aspnetcore@514c860": {
+      "repo": "aspnetcore",
+      "branch": "release/2.3",
+      "hash": "514c86030195fd6b649bb26c48975a043d96b791",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/514c86030195fd6b649bb26c48975a043d96b791"
+    },
+    "aspnetcore@db85798": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "db8579880b30153dbd601fa079f49e7e3ce42e08",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/db8579880b30153dbd601fa079f49e7e3ce42e08"
+    },
+    "dotnet@4ff0b1b": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "4ff0b1b73dd985b18ad3e4363c4da85b3e075d33",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/4ff0b1b73dd985b18ad3e4363c4da85b3e075d33"
+    },
+    "dotnet@fc22fa9": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "fc22fa91b21578e78d99c77dca215e5f382a28ad",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/fc22fa91b21578e78d99c77dca215e5f382a28ad"
+    },
+    "aspnetcore@e1ae50f": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "e1ae50f427a49c76528376a5b3af8216bfda55bc",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/e1ae50f427a49c76528376a5b3af8216bfda55bc"
+    },
+    "dotnet@9a46560": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "9a46560e4b838bdb72f4a5217b8c450feaee501f",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/9a46560e4b838bdb72f4a5217b8c450feaee501f"
+    },
+    "aspnetcore@d94f9c2": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "d94f9c231ee7e047c5c3c4cfdabe862274938faf",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/d94f9c231ee7e047c5c3c4cfdabe862274938faf"
+    },
+    "dotnet@36b4605": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "36b4605159c3a30281f0e95c1ba0469ecd879609",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/36b4605159c3a30281f0e95c1ba0469ecd879609"
+    },
+    "aspnetcore@cc53379": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "cc53379f74963c4509ddfa91845132146d7054aa",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/cc53379f74963c4509ddfa91845132146d7054aa"
+    },
+    "aspnetcore@eea3265": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "eea3265c048c88f9c064fc1ff2b3be9570b6f8cc",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/eea3265c048c88f9c064fc1ff2b3be9570b6f8cc"
+    },
+    "dotnet@d2b5ab1": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "d2b5ab1a351f3c15d95b7149dfc6eea0d7347d80",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/d2b5ab1a351f3c15d95b7149dfc6eea0d7347d80"
+    },
+    "aspnetcore@e2fdf87": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "e2fdf87f23ce5747bce1ac9a8c34905b17799a68",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/e2fdf87f23ce5747bce1ac9a8c34905b17799a68"
+    },
+    "dotnet@43b05b9": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "43b05b990439a6aa09741d8d71ef888c37c96822",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/43b05b990439a6aa09741d8d71ef888c37c96822"
+    },
+    "dotnet@94105af": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "94105af02254b861898ffb275a06b1f8b32a6c24",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/94105af02254b861898ffb275a06b1f8b32a6c24"
+    },
+    "runtime@9bec8ba": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "9bec8bab548f78307a39348faad743c053d5376a",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/9bec8bab548f78307a39348faad743c053d5376a"
+    },
+    "dotnet@e67c862": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "e67c862a30db8776fce2ca495f233b87bbaae725",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/e67c862a30db8776fce2ca495f233b87bbaae725"
+    },
+    "runtime@5eeae0e": {
+      "repo": "runtime",
+      "branch": "release/9.0",
+      "hash": "5eeae0e339eb0ae31df3f24ca2ee7f7b349b41a9",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/5eeae0e339eb0ae31df3f24ca2ee7f7b349b41a9"
+    },
+    "dotnet@47a1ad4": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "47a1ad4f78ea5bf3364798cef4b6b99987eac46b",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/47a1ad4f78ea5bf3364798cef4b6b99987eac46b"
+    },
+    "aspnetcore@8cb8dc4": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "8cb8dc4a1d3e5a6aedeb3dbbfd0b390aac59f172",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/8cb8dc4a1d3e5a6aedeb3dbbfd0b390aac59f172"
+    },
+    "aspnetcore@20e629e": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "20e629e9af9cabb0c1c02410be99521821b22f83",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/20e629e9af9cabb0c1c02410be99521821b22f83"
+    },
+    "dotnet@547f8d2": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "547f8d211ed36756252fa8c37ee1425af4077b11",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/547f8d211ed36756252fa8c37ee1425af4077b11"
+    },
+    "dotnet@835056d": {
+      "repo": "dotnet",
+      "branch": "release/10.0.4xx",
+      "hash": "835056d1caa9331cb18b0137b57374efe2a7b7a2",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/835056d1caa9331cb18b0137b57374efe2a7b7a2"
+    },
+    "dotnet@46ecf02": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "46ecf02a8501d3c15139e95cedc542f5abc1fe1e",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/46ecf02a8501d3c15139e95cedc542f5abc1fe1e"
+    },
+    "dotnet@d4efbec": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "d4efbec67fe7967c114de17aca2985b03f6a18ba",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/d4efbec67fe7967c114de17aca2985b03f6a18ba"
+    },
+    "dotnet@ef636e5": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "ef636e50b52334e7127c80e28e8718c8ed797b82",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/ef636e50b52334e7127c80e28e8718c8ed797b82"
+    },
+    "aspnetcore@a4ade6a": {
+      "repo": "aspnetcore",
+      "branch": "release/9.0",
+      "hash": "a4ade6a6848f06681af1a57b5a7b555647d3e19d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/a4ade6a6848f06681af1a57b5a7b555647d3e19d"
+    },
+    "dotnet@164708e": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "164708e2b1c0d07f752ca1da02f15b03ee8f6a9a",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/164708e2b1c0d07f752ca1da02f15b03ee8f6a9a"
+    },
+    "aspnetcore@671bb7f": {
+      "repo": "aspnetcore",
+      "branch": "release/8.0",
+      "hash": "671bb7f9c84e24153ac8440e4e6de307a6cbd920",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/671bb7f9c84e24153ac8440e4e6de307a6cbd920"
+    },
+    "Scaffolding@9787cd6": {
+      "repo": "Scaffolding",
+      "branch": "release/9.0",
+      "hash": "9787cd62957fa536754b3c56b30fb5026dee445e",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/Scaffolding/commit/9787cd62957fa536754b3c56b30fb5026dee445e"
+    },
+    "Scaffolding@6e07e43": {
+      "repo": "Scaffolding",
+      "branch": "release/8.0",
+      "hash": "6e07e43f647e0ed9465121ba034573355dfe1798",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/Scaffolding/commit/6e07e43f647e0ed9465121ba034573355dfe1798"
+    },
+    "Scaffolding@cf53715": {
+      "repo": "Scaffolding",
+      "branch": "release/10.0",
+      "hash": "cf53715f99d651be5df86f1ee5c735779c68161d",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/Scaffolding/commit/cf53715f99d651be5df86f1ee5c735779c68161d"
+    },
+    "Scaffolding@7642a55": {
+      "repo": "Scaffolding",
+      "branch": "main",
+      "hash": "7642a5514036e3eae42450dcecd755dd76935f51",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/Scaffolding/commit/7642a5514036e3eae42450dcecd755dd76935f51"
+    },
+    "dotnet@74b6654": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "74b665417f3c8852337e63ef9386aa88d0a7c198",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/74b665417f3c8852337e63ef9386aa88d0a7c198"
+    },
+    "runtime@ed4c181": {
+      "repo": "runtime",
+      "branch": "release/8.0",
+      "hash": "ed4c181d6e533e56f0fcfe1a3a6c652681448da2",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/runtime/commit/ed4c181d6e533e56f0fcfe1a3a6c652681448da2"
+    },
+    "dotnet@c39c4c2": {
+      "repo": "dotnet",
+      "branch": "release/10.0.1xx",
+      "hash": "c39c4c25f59d5c4a5c297ef4c3355ef937f365f2",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/c39c4c25f59d5c4a5c297ef4c3355ef937f365f2"
+    },
+    "dotnet@b7157d1": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "b7157d1a82bd62e537e8b2683786b025101ab949",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/b7157d1a82bd62e537e8b2683786b025101ab949"
+    },
+    "dotnet@187ed35": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "187ed3509510f855ad5f281a44d020a4be31e267",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/187ed3509510f855ad5f281a44d020a4be31e267"
+    },
+    "dotnet@2b3c3b1": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "2b3c3b12ae0f8f049c1d707fac5aa44584965a50",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/2b3c3b12ae0f8f049c1d707fac5aa44584965a50"
+    },
+    "aspnetcore@9a26c74": {
+      "repo": "aspnetcore",
+      "branch": "release/2.3",
+      "hash": "9a26c7414a4fbff45535c0830253c1b4479b0073",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/aspnetcore/commit/9a26c7414a4fbff45535c0830253c1b4479b0073"
+    },
+    "dotnet@679f268": {
+      "repo": "dotnet",
+      "branch": "release/11.0.1xx",
+      "hash": "679f268f7beb3c48fa069fc18f09a2698d424197",
+      "org": "dotnet",
+      "url": "https://github.com/dotnet/dotnet/commit/679f268f7beb3c48fa069fc18f09a2698d424197"
+    }
+  },
+  "product_name": {
+    "dotnet-sdk": ".NET SDK",
+    "dotnet-runtime": ".NET Runtime Libraries",
+    "dotnet-aspnetcore": "ASP.NET Core Runtime"
+  },
+  "product_cves": {
+    "dotnet-sdk": [
+      "CVE-2026-105544",
+      "CVE-2026-114155"
+    ],
+    "dotnet-runtime": [
+      "CVE-2026-109475",
+      "CVE-2026-114151",
+      "CVE-2026-114152",
+      "CVE-2026-114158",
+      "CVE-2026-114159",
+      "CVE-2026-118745",
+      "CVE-2026-118746",
+      "CVE-2026-120796"
+    ],
+    "dotnet-aspnetcore": [
+      "CVE-2026-109476",
+      "CVE-2026-109478",
+      "CVE-2026-109481",
+      "CVE-2026-114146",
+      "CVE-2026-114147",
+      "CVE-2026-114149",
+      "CVE-2026-114150",
+      "CVE-2026-114154",
+      "CVE-2026-114156",
+      "CVE-2026-114157",
+      "CVE-2026-118748",
+      "CVE-2026-118749"
+    ]
+  },
+  "package_cves": {
+    "Microsoft.AspNetCore.Http.Connections": [
+      "CVE-2026-114146"
+    ],
+    "Microsoft.AspNetCore.SignalR.StackExchangeRedis": [
+      "CVE-2026-114147"
+    ],
+    "Microsoft.AspNetCore.WebUtilities": [
+      "CVE-2026-114149",
+      "CVE-2026-118750"
+    ],
+    "Microsoft.VisualStudio.Web.CodeGeneration.Design": [
+      "CVE-2026-118741"
+    ],
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": [
+      "CVE-2026-118741"
+    ],
+    "Microsoft.dotnet-scaffold": [
+      "CVE-2026-118741"
+    ],
+    "Microsoft.dotnet-scaffold-aspnet": [
+      "CVE-2026-118741"
+    ],
+    "System.Formats.Cbor": [
+      "CVE-2026-118747"
+    ],
+    "Microsoft.Extensions.Validation": [
+      "CVE-2026-118749"
+    ],
+    "System.Text.Json": [
+      "CVE-2026-120796"
+    ]
+  },
+  "release_cves": {
+    "11.0": [
+      "CVE-2026-105544",
+      "CVE-2026-109475",
+      "CVE-2026-109476",
+      "CVE-2026-109481",
+      "CVE-2026-114146",
+      "CVE-2026-114147",
+      "CVE-2026-114149",
+      "CVE-2026-114150",
+      "CVE-2026-114151",
+      "CVE-2026-114152",
+      "CVE-2026-114155",
+      "CVE-2026-114156",
+      "CVE-2026-114157",
+      "CVE-2026-114158",
+      "CVE-2026-114159",
+      "CVE-2026-118745",
+      "CVE-2026-118746",
+      "CVE-2026-118747",
+      "CVE-2026-118748",
+      "CVE-2026-118749",
+      "CVE-2026-120796"
+    ],
+    "10.0": [
+      "CVE-2026-105544",
+      "CVE-2026-109475",
+      "CVE-2026-109476",
+      "CVE-2026-114146",
+      "CVE-2026-114147",
+      "CVE-2026-114149",
+      "CVE-2026-114151",
+      "CVE-2026-114152",
+      "CVE-2026-114154",
+      "CVE-2026-114155",
+      "CVE-2026-114157",
+      "CVE-2026-114158",
+      "CVE-2026-114159",
+      "CVE-2026-118741",
+      "CVE-2026-118745",
+      "CVE-2026-118747"
+    ],
+    "9.0": [
+      "CVE-2026-105544",
+      "CVE-2026-109475",
+      "CVE-2026-109476",
+      "CVE-2026-114146",
+      "CVE-2026-114147",
+      "CVE-2026-114149",
+      "CVE-2026-114151",
+      "CVE-2026-114152",
+      "CVE-2026-114154",
+      "CVE-2026-114157",
+      "CVE-2026-114158",
+      "CVE-2026-114159",
+      "CVE-2026-118741",
+      "CVE-2026-118745",
+      "CVE-2026-118747"
+    ],
+    "8.0": [
+      "CVE-2026-105544",
+      "CVE-2026-109475",
+      "CVE-2026-109476",
+      "CVE-2026-109478",
+      "CVE-2026-114146",
+      "CVE-2026-114147",
+      "CVE-2026-114149",
+      "CVE-2026-114151",
+      "CVE-2026-114152",
+      "CVE-2026-114154",
+      "CVE-2026-114157",
+      "CVE-2026-114158",
+      "CVE-2026-114159",
+      "CVE-2026-118741",
+      "CVE-2026-118745",
+      "CVE-2026-118747"
+    ],
+    "1.2": [
+      "CVE-2026-114146"
+    ],
+    "20.0": [
+      "CVE-2026-118741"
+    ],
+    "2.3": [
+      "CVE-2026-118750"
+    ]
+  },
+  "severity_cves": {
+    "critical": [
+      "CVE-2026-114146"
+    ],
+    "high": [
+      "CVE-2026-105544",
+      "CVE-2026-109475",
+      "CVE-2026-109478",
+      "CVE-2026-109481",
+      "CVE-2026-114147",
+      "CVE-2026-114149",
+      "CVE-2026-114151",
+      "CVE-2026-114152",
+      "CVE-2026-114154",
+      "CVE-2026-114155",
+      "CVE-2026-114157",
+      "CVE-2026-114158",
+      "CVE-2026-114159",
+      "CVE-2026-118741",
+      "CVE-2026-118745",
+      "CVE-2026-118747",
+      "CVE-2026-118748",
+      "CVE-2026-118749",
+      "CVE-2026-118750"
+    ],
+    "medium": [
+      "CVE-2026-109476",
+      "CVE-2026-114150",
+      "CVE-2026-114156",
+      "CVE-2026-118746",
+      "CVE-2026-120796"
+    ],
+    "low": []
+  },
+  "cve_releases": {
+    "CVE-2026-105544": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-109475": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-109476": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-109481": [
+      "11.0"
+    ],
+    "CVE-2026-114146": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0",
+      "1.2"
+    ],
+    "CVE-2026-114147": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-114149": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-114150": [
+      "11.0"
+    ],
+    "CVE-2026-114151": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-114152": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-114155": [
+      "11.0",
+      "10.0"
+    ],
+    "CVE-2026-114156": [
+      "11.0"
+    ],
+    "CVE-2026-114157": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-114158": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-114159": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-118745": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-118746": [
+      "11.0"
+    ],
+    "CVE-2026-118747": [
+      "11.0",
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-118748": [
+      "11.0"
+    ],
+    "CVE-2026-118749": [
+      "11.0"
+    ],
+    "CVE-2026-120796": [
+      "11.0"
+    ],
+    "CVE-2026-114154": [
+      "10.0",
+      "9.0",
+      "8.0"
+    ],
+    "CVE-2026-118741": [
+      "10.0",
+      "9.0",
+      "8.0",
+      "20.0"
+    ],
+    "CVE-2026-109478": [
+      "8.0"
+    ],
+    "CVE-2026-118750": [
+      "2.3"
+    ]
+  },
+  "cve_commits": {
+    "CVE-2026-105544": [
+      "vstest@46b26d7",
+      "vstest@3a33235",
+      "vstest@4691222",
+      "vstest@0a893ae",
+      "vstest@d4a3823",
+      "vstest@81fe01e",
+      "vstest@012c7dc"
+    ],
+    "CVE-2026-109475": [
+      "runtime@e8dac74",
+      "runtime@0a7474b",
+      "dotnet@48e842f",
+      "dotnet@f0b06bc"
+    ],
+    "CVE-2026-109476": [
+      "aspnetcore@7ce5a6b",
+      "dotnet@ed4e5d9",
+      "aspnetcore@1fa5639",
+      "dotnet@cc5adb9"
+    ],
+    "CVE-2026-109478": [
+      "aspnetcore@2523887"
+    ],
+    "CVE-2026-109481": [
+      "dotnet@46527b6"
+    ],
+    "CVE-2026-114146": [
+      "aspnetcore@514c860",
+      "aspnetcore@db85798",
+      "dotnet@4ff0b1b",
+      "dotnet@fc22fa9",
+      "aspnetcore@e1ae50f"
+    ],
+    "CVE-2026-114147": [
+      "dotnet@9a46560",
+      "aspnetcore@d94f9c2",
+      "dotnet@36b4605",
+      "aspnetcore@cc53379"
+    ],
+    "CVE-2026-114149": [
+      "aspnetcore@eea3265",
+      "dotnet@d2b5ab1",
+      "aspnetcore@e2fdf87",
+      "dotnet@43b05b9"
+    ],
+    "CVE-2026-114150": [
+      "dotnet@94105af"
+    ],
+    "CVE-2026-114151": [
+      "runtime@9bec8ba",
+      "dotnet@e67c862",
+      "runtime@5eeae0e",
+      "dotnet@47a1ad4"
+    ],
+    "CVE-2026-114152": [
+      "dotnet@e67c862",
+      "runtime@9bec8ba",
+      "dotnet@47a1ad4",
+      "runtime@5eeae0e"
+    ],
+    "CVE-2026-114154": [
+      "aspnetcore@8cb8dc4",
+      "aspnetcore@20e629e",
+      "dotnet@547f8d2"
+    ],
+    "CVE-2026-114155": [
+      "dotnet@835056d",
+      "dotnet@46ecf02"
+    ],
+    "CVE-2026-114156": [
+      "dotnet@d4efbec"
+    ],
+    "CVE-2026-114157": [
+      "dotnet@ef636e5",
+      "aspnetcore@a4ade6a",
+      "dotnet@164708e",
+      "aspnetcore@671bb7f"
+    ],
+    "CVE-2026-114158": [
+      "runtime@5eeae0e",
+      "dotnet@47a1ad4",
+      "dotnet@e67c862",
+      "runtime@9bec8ba"
+    ],
+    "CVE-2026-114159": [
+      "dotnet@47a1ad4",
+      "runtime@5eeae0e",
+      "runtime@9bec8ba",
+      "dotnet@e67c862"
+    ],
+    "CVE-2026-118741": [
+      "Scaffolding@9787cd6",
+      "Scaffolding@6e07e43",
+      "Scaffolding@cf53715",
+      "Scaffolding@7642a55"
+    ],
+    "CVE-2026-118745": [
+      "dotnet@e67c862",
+      "dotnet@47a1ad4",
+      "runtime@9bec8ba",
+      "runtime@5eeae0e"
+    ],
+    "CVE-2026-118746": [
+      "dotnet@74b6654"
+    ],
+    "CVE-2026-118747": [
+      "runtime@ed4c181",
+      "dotnet@c39c4c2",
+      "dotnet@b7157d1"
+    ],
+    "CVE-2026-118748": [
+      "dotnet@187ed35"
+    ],
+    "CVE-2026-118749": [
+      "dotnet@2b3c3b1"
+    ],
+    "CVE-2026-118750": [
+      "aspnetcore@9a26c74"
+    ],
+    "CVE-2026-120796": [
+      "dotnet@679f268"
+    ]
+  }
+}

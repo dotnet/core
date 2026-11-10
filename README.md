@@ -8,15 +8,15 @@ Welcome to the home of .NET [release notes](./release-notes/README.md) and [news
 
 |  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Go-Live | [11.0.0-rc.3][11.0.0-rc.3] | November 10, 2026 |
-| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.14][10.0.14] | November 14, 2028 |
-| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Maintenance | [9.0.22][9.0.22] | November 10, 2026 |
-| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Maintenance | [8.0.33][8.0.33] | November 10, 2026 |
+| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Active | [11.0.0][11.0.0] | November 14, 2028 |
+| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.15][10.0.15] | November 14, 2028 |
+| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | EOL | [9.0.23][9.0.23] | November 10, 2026 |
+| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | EOL | [8.0.34][8.0.34] | November 10, 2026 |
 
-[11.0.0-rc.3]: release-notes/11.0/preview/rc3/11.0.0-rc.3.md
-[10.0.14]: release-notes/10.0/10.0.14/10.0.14.md
-[9.0.22]: release-notes/9.0/9.0.22/9.0.22.md
-[8.0.33]: release-notes/8.0/8.0.33/8.0.33.md
+[11.0.0]: release-notes/11.0/11.0.0/11.0.0.md
+[10.0.15]: release-notes/10.0/10.0.15/10.0.15.md
+[9.0.23]: release-notes/9.0/9.0.23/9.0.23.md
+[8.0.34]: release-notes/8.0/8.0.34/8.0.34.md
 
 [policies]: release-policies.md
 
