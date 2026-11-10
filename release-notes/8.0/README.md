@@ -1,6 +1,6 @@
 # .NET 8
 
-[.NET 8](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) is a [Long Term Support (LTS)](../../release-policies.md) release and will be supported for 3 years, from November 2023 to November 2026. It is [supported](../../support.md) on [multiple operating systems](supported-os.md).
+[.NET 8](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) is a [Long Term Support (LTS)](../../release-policies.md) release that reached end of support on November 10, 2026. See the [support policy](../../support.md) and the [operating system support history](supported-os.md).
 
 - [Downloads](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Linux Package Managers](https://learn.microsoft.com/dotnet/core/install/linux)
@@ -13,6 +13,7 @@
 
 | Date | Release | SDK |
 | :-- | :-- | :-- |
+| 2026/11/10 | [8.0.34](./8.0.34/8.0.34.md) | [8.0.428](./8.0.34/8.0.34.md), [8.0.134](./8.0.34/8.0.134.md) |
 | 2026/10/25 | [8.0.33](./8.0.33/8.0.33.md) | [8.0.427](./8.0.33/8.0.33.md), [8.0.133](./8.0.33/8.0.133.md) |
 | 2026/10/13 | [8.0.32](./8.0.32/8.0.32.md) | [8.0.426](./8.0.32/8.0.32.md), [8.0.132](./8.0.32/8.0.132.md) |
 | 2026/09/08 | [8.0.31](./8.0.31/8.0.31.md) | [8.0.425](./8.0.31/8.0.31.md), [8.0.131](./8.0.31/8.0.131.md) |
