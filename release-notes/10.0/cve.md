@@ -25,6 +25,7 @@ Your app may be vulnerable to the following published security [CVEs](https://ww
   - [CVE-2026-114157 | TBD](https://github.com/dotnet/announcements/issues/xxx)
   - [CVE-2026-114158 | TBD](https://github.com/dotnet/announcements/issues/xxx)
   - [CVE-2026-114159 | TBD](https://github.com/dotnet/announcements/issues/xxx)
+  - [CVE-2026-118741 | ASP.NET Core Elevation of Privilege Vulnerability](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118741) (Identity scaffolding and templates; update affected tooling and correct previously generated application code.)
 - 10.0.14 (October 2026)
   - [CVE-2026-111497 | Brotli decoder out-of-bounds write](https://github.com/dotnet/announcements/issues/494)
   - [CVE-2026-70197 | Windows SocketAsyncEventArgs memory corruption](https://github.com/dotnet/announcements/issues/493)
