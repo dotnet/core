@@ -10,15 +10,15 @@ The following table lists supported releases.
 
 |  Version  | Release Date | Release type | Support phase | Latest Patch Version | End of Support |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Preview | [11.0.0-preview.6][11.0.0-preview.6] | TBD |
-| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.10][10.0.10] | November 14, 2028 |
-| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Maintenance | [9.0.18][9.0.18] | November 10, 2026 |
-| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Maintenance | [8.0.29][8.0.29] | November 10, 2026 |
+| [.NET 11.0](release-notes/11.0/README.md) | November 10, 2026 | [STS][policies] | Go-Live | [11.0.0-rc.3][11.0.0-rc.3] | November 10, 2026 |
+| [.NET 10.0](release-notes/10.0/README.md) | [November 11, 2025](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/) | [LTS][policies] | Active | [10.0.14][10.0.14] | November 14, 2028 |
+| [.NET 9.0](release-notes/9.0/README.md) | [November 12, 2024](https://devblogs.microsoft.com/dotnet/announcing-dotnet-9/) | [STS][policies] | Maintenance | [9.0.22][9.0.22] | November 10, 2026 |
+| [.NET 8.0](release-notes/8.0/README.md) | [November 14, 2023](https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/) | [LTS][policies] | Maintenance | [8.0.33][8.0.33] | November 10, 2026 |
 
-[11.0.0-preview.6]: release-notes/11.0/preview/preview6/11.0.0-preview.6.md
-[10.0.10]: release-notes/10.0/10.0.10/10.0.10.md
-[9.0.18]: release-notes/9.0/9.0.18/9.0.18.md
-[8.0.29]: release-notes/8.0/8.0.29/8.0.29.md
+[11.0.0-rc.3]: release-notes/11.0/preview/rc3/11.0.0-rc.3.md
+[10.0.14]: release-notes/10.0/10.0.14/10.0.14.md
+[9.0.22]: release-notes/9.0/9.0.22/9.0.22.md
+[8.0.33]: release-notes/8.0/8.0.33/8.0.33.md
 
 ## End-of-life releases
 
@@ -47,5 +47,4 @@ The following table lists end-of-life releases.
 [2.0.9]: release-notes/2.0/2.0.9.md
 [1.1.13]: release-notes/1.1/1.1.13/1.1.13.md
 [1.0.16]: release-notes/1.0/1.0.16/1.0.16.md
-[11.0.0-preview.6]: release-notes/11.0/preview/preview6/11.0.0-preview.6.md
 [policies]: release-policies.md

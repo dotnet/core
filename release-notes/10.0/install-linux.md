@@ -2,7 +2,7 @@
 
 The following instructions demonstrate installing .NET 10 on Linux. These instructions augment the more general [.NET install instructions](install.md), including installing with `.tar.gz` files, that work on multiple operating systems.
 
-[.NET 10 Required Packages](os-packages.md) describes the set of packages required to run .NET on Linux.
+[.NET 10 Required Packages](dotnet-dependencies.md) describes the set of packages required to run .NET on Linux.
 
 ## Distributions
 

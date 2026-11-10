@@ -79,7 +79,7 @@ var response = await client.GetAsync("https://example.com");
 
 [dotnet/runtime #98643](https://github.com/dotnet/runtime/pull/98643), contributed by community member @huoyaoyuan, adds `System.Numerics.BFloat16`, a 16-bit floating-point type using the "Brain Floating Point" format widely used in machine learning and AI workloads. BFloat16 uses the same number of exponent bits as `float` (8 bits) but with a reduced significand (7 bits), making it ideal for training and inference scenarios where range matters more than precision.
 
-`BFloat16` implements all standard numeric interfaces (`INumber<BFloat16>`, `IFloatingPoint<BFloat16>`, `IBinaryFloatingPointIeee754<BFloat16>`, etc.) and supports conversions to and from `float`, `double`, and `Half`. Supporting APIs are also added across the platform, including `BitConverter`, `BinaryPrimitives`, `BigInteger`, `Complex`, and all `Vector` types (`Vector64`, `Vector128`, `Vector256`, `Vector512`).
+`BFloat16` implements all standard numeric interfaces (`INumber<BFloat16>`, `IFloatingPoint<BFloat16>`, `IBinaryFloatingPointIeee754<BFloat16>`, etc.) and supports conversions to and from `float`, `double`, and `Half`. Supporting APIs are also added across the platform, including `BitConverter`, `BinaryPrimitives`, `BigInteger`, and `Complex`.
 
 ```csharp
 BFloat16 value = (BFloat16)3.14f;

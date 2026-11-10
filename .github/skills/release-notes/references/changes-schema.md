@@ -119,7 +119,7 @@ That means a change can be:
 - **high score + `breaking_changes: true`** — a widely relevant feature that also needs migration guidance
 - **low score + `breaking_changes: true`** — a niche or narrow change that still deserves a short callout near the end of the release notes
 
-In practice, a `score` around `0-4` with `breaking_changes: true` usually means **one line in a "Breaking changes" section**, not a full feature writeup.
+In practice, a `score` around `0-4` with `breaking_changes: true` usually means a short migration note, not a full feature writeup. The flag does not identify the upgrade path: for the first preview, compare against the previous stable .NET release; for later previews and RCs, compare against both the previous stable release and the preceding shipped prerelease. Put stable-version breaks in **Breaking changes from .NET N** and preview-only migrations in **Changes since the previous preview**, without duplicating guidance.
 
 ## Revert annotations
 
@@ -219,7 +219,7 @@ jq -r '.changes[] | select(.is_security) | .local_repo_commit' changes.json
 `changes.json` is the **source-of-truth input** to the editorial process. `features.json` is an enriched view that usually adds scoring and notes without changing the underlying identity of the shipped changes.
 
 - `changes.json` has an entry for every PR that shipped
-- `features.json` usually preserves those entries and adds optional scoring metadata
+- `features.json` preserves the shipped change entries and commit mapping, and adds optional scoring metadata to noteworthy candidates; it is not a placeholder for per-component triage
 - `features.json` can also flag entries with `breaking_changes: true` so downstream writing can keep a short migration note even when the score is low
 - Both files can be joined through shared `id` and `commits{}` values
 

@@ -148,9 +148,20 @@ release-notes/{major.minor}/preview/{previewN}/features.json
 release-notes/{major.minor}/{major.minor.patch}/features.json
 ```
 
+Complete this stage before drafting component markdown. Write the actual
+`changes[]` and `commits{}` from `changes.json`, with the same change IDs and
+optional editorial annotations. A placeholder with only a release version or
+a note that feature selection will happen on component branches is not a
+`features.json` output. Score and explain the noteworthy candidates before
+handing them to the writing stage; individual low-value entries do not need
+scores. When review identifies a noteworthy candidate that should be left out,
+record the editorial reason in that entry's `score_reason` and adjust its score
+if needed. Even when nothing is worth a feature writeup, keep the real shipped
+changes in the file so the final review can check the editorial cut.
+
 Keep the file mechanically friendly:
 
-- preserve the same IDs and commit keys when possible
+- preserve every shipped change ID and commit key from `changes.json`
 - make `score` optional, not required
 - keep `score_reason` brief and evidence-based
 

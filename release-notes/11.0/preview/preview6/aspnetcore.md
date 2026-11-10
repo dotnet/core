@@ -1,4 +1,4 @@
-<!-- Verified against the .NET 11 Preview 6 SDK (11.0.100-preview.6.26359.118) by building and running samples at https://github.com/danroth27/aspnetcore11samples, and cross-checked against the dotnet/dotnet release/11.0.1xx-preview6 source. -->
+<!-- Verified against the .NET 11 Preview 6 SDK (11.0.100-preview.6.26359.118) and cross-checked against the dotnet/dotnet release/11.0.1xx-preview6 source. -->
 # ASP.NET Core in .NET 11 Preview 6 - Release Notes
 
 .NET 11 Preview 6 includes new ASP.NET Core features and improvements:
@@ -7,6 +7,7 @@
 - [Automatic cross-origin (CSRF) protection](#automatic-cross-origin-csrf-protection)
 - [Blazor Virtualize can scroll to an item](#blazor-virtualize-can-scroll-to-an-item)
 - [Configure Blazor client behavior from the server](#configure-blazor-client-behavior-from-the-server)
+- [Blazor Gateway can proxy backend API calls](#blazor-gateway-can-proxy-backend-api-calls)
 - [OpenAPI 3.2 by default](#openapi-32-by-default)
 - [Unions in ASP.NET Core](#unions-in-aspnet-core)
 - [Short-circuit endpoints with an attribute](#short-circuit-endpoints-with-an-attribute)
@@ -97,7 +98,7 @@ Validators run concurrently where possible: asynchronous attributes on the same 
 
 ## Automatic cross-origin (CSRF) protection
 
-Apps built with `WebApplication.CreateBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585), [dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Same-origin requests, user-initiated navigations, and non-browser clients are allowed, while a cross-origin browser request that tries to consume a form is rejected. It can be used in place of or alongside the existing token-based antiforgery system. Because it runs automatically, the Blazor Web App project templates no longer call `app.UseAntiforgery()`.
+Apps built with `WebApplication.CreateBuilder` now automatically reject unsafe cross-origin requests based on the browser's `Sec-Fetch-Site` and `Origin` headers ([dotnet/aspnetcore #66585](https://github.com/dotnet/aspnetcore/pull/66585), [dotnet/aspnetcore #67082](https://github.com/dotnet/aspnetcore/pull/67082)). This lightweight cross-site request forgery (CSRF) protection is on with no configuration and applies across Minimal APIs, MVC, Razor Pages, and Blazor. Same-origin requests, user-initiated navigations, and non-browser clients are allowed, while a cross-origin browser request that tries to consume a form is rejected. It can be used in place of or alongside the existing token-based antiforgery system. Because it runs automatically, Blazor Web App projects are no longer required to call `app.UseAntiforgery()`.
 
 To opt an endpoint out, use `.DisableAntiforgery()` (Minimal APIs) or `[IgnoreAntiforgeryToken]` (MVC); to turn the feature off app-wide, set the `DisableCsrfProtection` configuration key. For full control over the trust decision, register a custom `ICsrfProtection` implementation.
 
@@ -146,6 +147,30 @@ app.MapRazorComponents<App>()
 You can also set the options from a component with `<ConfigureBrowser>`, or read the resolved options from `HttpContext` with `GetBrowserOptions()`.
 
 The API was introduced in Preview 4 and reshaped in Preview 6 to follow options conventions. If you adopted the earlier shape, `WithBrowserConfiguration` is now `WithBrowserOptions`, `BrowserConfiguration` is now `BrowserOptions`, `ServerBrowserOptions` is now `InteractiveServerBrowserOptions`, `SsrBrowserOptions.DisableDomPreservation` is now `PreserveDom` (with the opposite meaning), and `CircuitInactivityTimeoutMs` is now `CircuitInactivityTimeout` (a `TimeSpan`).
+
+## Blazor Gateway can proxy backend API calls
+
+The [Blazor Gateway](../preview5/aspnetcore.md#blazor-webassembly-gateway) — the development-time host for standalone Blazor WebAssembly apps introduced in Preview 5 — can now proxy the app's HTTP calls to backend services through a built-in [YARP](https://learn.microsoft.com/aspnet/core/fundamentals/servers/yarp/getting-started) reverse proxy ([dotnet/aspnetcore #67048](https://github.com/dotnet/aspnetcore/pull/67048)). Because the WebAssembly client makes only same-origin requests to the Gateway, which forwards them to the backend server-to-server, **no CORS configuration is needed** on the client or the backend.
+
+Configure the proxy with a standard YARP `ReverseProxy` section describing the routes and clusters to forward. The Gateway runs as a separate process that reads this configuration from environment variables (or command-line arguments) rather than the app project's `appsettings.json`, so the simplest place to set it during development is the `environmentVariables` of a launch profile in the app's `launchSettings.json`:
+
+```json
+{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ReverseProxy__Routes__weather__ClusterId": "backend",
+        "ReverseProxy__Routes__weather__Match__Path": "/api/{**catch-all}",
+        "ReverseProxy__Clusters__backend__Destinations__backend1__Address": "http://localhost:5100/"
+      }
+    }
+  }
+}
+```
+
+With this configuration the WebAssembly app calls its own origin (for example `Http.GetFromJsonAsync<WeatherForecast[]>("api/weather")`), the Gateway matches the `/api/**` route, and forwards the request to the backend at `http://localhost:5100/`. The Gateway also enables [.NET service discovery](https://learn.microsoft.com/dotnet/core/extensions/service-discovery), so a cluster destination address can be a logical service name that's resolved at request time instead of a literal URL.
 
 ## OpenAPI 3.2 by default
 

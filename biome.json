@@ -1,0 +1,27 @@
+{
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "json": {
+    "formatter": {
+      "expand": "always"
+    }
+  },
+  "files": {
+    "includes": [
+      ".github/**/*.json",
+      ".vscode/**/*.json"
+    ]
+  },
+  "overrides": [
+    {
+      "includes": [
+        ".vscode/settings.json"
+      ],
+      "formatter": {
+        "indentWidth": 4
+      }
+    }
+  ]
+}

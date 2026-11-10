@@ -37,7 +37,7 @@
 
 |Repository                                                         |Issues                                                  |Discussions                                                 | Description |
 |-------------------------------------------------------------------|:------------------------------------------------------:|:----------------------------------------------------------:|-------------|
-|[dotnet/aspire](https://github.com/dotnet/aspire)                  |[🔗](https://github.com/dotnet/aspire/issues)          |[🔗](https://github.com/dotnet/aspire/discussions)          |.NET Aspire                                  |
+|[microsoft/aspire](https://github.com/microsoft/aspire)                  |[🔗](https://github.com/microsoft/aspire/issues)          |[🔗](https://github.com/microsoft/aspire/discussions)          |Aspire                                  |
 |[dotnet/aspnetcore](https://github.com/dotnet/aspnetcore)          |[🔗](https://github.com/dotnet/aspnetcore/issues)      |[🔗](https://github.com/dotnet/aspnetcore/discussions)      |ASP.NET Core framework                       |
 |[dotnet/maui](https://github.com/dotnet/maui)                       |[🔗](https://github.com/dotnet/maui/issues)     |[🔗](https://github.com/dotnet/maui/discussions)     |.NET Multi-platform App UI (MAUI)|
 |[dotnet/winforms](https://github.com/dotnet/winforms)               |[🔗](https://github.com/dotnet/winforms/issues) |[🔗](https://github.com/dotnet/winforms/discussions) |Windows Forms|

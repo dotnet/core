@@ -52,4 +52,4 @@ matter during .NET release-note triage.
 - A community contribution can lift a borderline item slightly, but it does **not** turn a niche optimization into a headline feature by itself
 - Re-check scores after `api-diff` / `dotnet-inspect` confirms or disproves the public API story
 - Prefer a short `score_reason` grounded in evidence over long prose
-- It is okay for many entries to have low scores; `changes.json` is comprehensive, `features.json` is selective
+- It is okay for many entries to have low scores or no score; `features.json` retains all shipped entries from `changes.json`, while scores and markdown coverage are selective

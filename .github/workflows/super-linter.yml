@@ -26,24 +26,27 @@ jobs:
     steps:
       - name: Checkout code
         # actions/checkout v4.2.2
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          persist-credentials: false
           # Full git history is needed to get a proper list of changed files
           # within `super-linter`.
           fetch-depth: 0
 
       - name: Lint Code Base
-        # github/super-linter v7
-        uses: github/super-linter@b807e99ddd37e444d189cfd2c2ca1274d8ae8ef1
+        # github/super-linter slim v8.6.0
+        uses: github/super-linter/slim@ce838ab356d25fc8e83a16fa6d1fc6f583e14e87
+
         env:
           VALIDATE_ALL_CODEBASE: false
+          # Unlisted validators are enabled; keep this configuration in exclusion mode.
           VALIDATE_JSCPD: false
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_MARKDOWN_PRETTIER: false
           VALIDATE_JSON_PRETTIER: false
-          # Exclude GitHub skills and generated workflows
+          # Exclude GitHub agents, skills, and workflows
           # yamllint disable rule:line-length
-          FILTER_REGEX_EXCLUDE: (.github/agents/.*|.github/skills/.*|.github/workflows/copilot-setup-steps\.yml|.github/workflows/agentics-maintenance\.yml|.github/workflows/.*\.lock\.yml)
+          FILTER_REGEX_EXCLUDE: (.github/agents/.*|.github/skills/.*|.github/workflows/.*)
           # yamllint enable rule:line-length
           DEFAULT_BRANCH: ${{ github.base_ref || 'main' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
