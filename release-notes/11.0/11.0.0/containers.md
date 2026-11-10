@@ -1,3 +1,3 @@
 # Container images in .NET 11 - Release Notes
 
-<!-- TODO: Add release notes or confirm there are no noteworthy changes. -->
+There are no container image changes for .NET 11.
