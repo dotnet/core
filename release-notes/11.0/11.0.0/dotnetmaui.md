@@ -16,6 +16,7 @@ see [What's new in .NET MAUI for .NET 11](https://learn.microsoft.com/dotnet/mau
 - [Platform features](#platform-features)
 - [XAML](#xaml)
 - [Prepare for Google Play code optimization requirements](#prepare-for-google-play-code-optimization-requirements)
+- [Migrate to the UIKit scene lifecycle on iOS and Mac Catalyst](#migrate-to-the-uikit-scene-lifecycle-on-ios-and-mac-catalyst)
 - [Apple platforms](#apple-platforms)
 - [Bug fixes](#bug-fixes)
 - [Contributors](#contributors)
@@ -138,6 +139,32 @@ and obfuscation
 [dotnet/android#13077](https://github.com/dotnet/android/pull/13077),
 [dotnet/android#13239](https://github.com/dotnet/android/pull/13239)).
 
+## Migrate to the UIKit scene lifecycle on iOS and Mac Catalyst
+
+Apps built against the iOS 27 and Mac Catalyst 27 SDKs (Xcode 27) must use the
+UIKit scene-based lifecycle
+([TN3187](https://developer.apple.com/documentation/technotes/tn3187-migrating-to-the-uikit-scene-based-life-cycle)).
+Apps that still use the legacy `UIApplicationDelegate`-only lifecycle crash at
+launch on iOS 27 or Mac Catalyst 27 with
+`UIScene life cycle is required for apps built with this SDK.`
+
+New .NET MAUI project templates include the required `UIApplicationSceneManifest`
+and `SceneDelegate` configuration, and .NET MAUI forwards scene-based App
+Actions and `WebAuthenticator` callbacks
+([dotnet/maui#38601](https://github.com/dotnet/maui/pull/38601)). Building
+against SDK 27.0 or later also checks that the merged `Info.plist` contains a
+`UIApplicationSceneManifest` dictionary and reports error `MT7199` when it is
+missing ([dotnet/macios#26988](https://github.com/dotnet/macios/pull/26988)).
+
+Updating .NET MAUI packages or workloads does not update existing projects. To
+build an existing app with Xcode 27, add a `SceneDelegate` and
+`UIApplicationSceneManifest` to your iOS and Mac Catalyst platforms and migrate
+any custom lifecycle, deep-link, or App Actions callbacks to scene events. For
+step-by-step migration guidance, see
+[Migrate to the UIKit scene lifecycle](https://learn.microsoft.com/dotnet/maui/ios/uikit-scene-lifecycle?view=net-maui-11.0)
+and
+[Get Your .NET MAUI App Ready for Xcode 27](https://devblogs.microsoft.com/dotnet/migrate-dotnet-maui-apps-uikit-scene-lifecycle/).
+
 ## Apple platforms
 
 - **Incremental builds** avoid recompiling the registrar for CoreCLR builds
@@ -166,6 +193,7 @@ and obfuscation
 Thank you to the contributors whose changes are included in the source ranges
 reviewed for this draft:
 
+[@dalexsoto](https://github.com/dalexsoto),
 [@Dhivya-SF4094](https://github.com/Dhivya-SF4094),
 [@edgiardina](https://github.com/edgiardina),
 [@HarishwaranVijayakumar](https://github.com/HarishwaranVijayakumar),
