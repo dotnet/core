@@ -3,8 +3,8 @@
   "install_command": "apt-get install -y {packages}",
   "releases": [
     {
-      "name": "Ubuntu 26.04 LTS (Resolute Raccoon)",
-      "release": "26.04",
+      "name": "Ubuntu 26.10 (Stonking Stingray)",
+      "release": "26.10",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -55,8 +55,8 @@
       ]
     },
     {
-      "name": "Ubuntu 25.10 (Questing Quokka)",
-      "release": "25.10",
+      "name": "Ubuntu 26.04 LTS (Resolute Raccoon)",
+      "release": "26.04",
       "dependencies": [
         {
           "id": "ca-certificates",
@@ -76,7 +76,7 @@
         },
         {
           "id": "libicu",
-          "name": "libicu76"
+          "name": "libicu78"
         },
         {
           "id": "libstdc++",
@@ -93,16 +93,16 @@
       ],
       "dotnet_packages": [
         {
-          "component": "sdk",
-          "name": "dotnet-sdk-10.0"
+          "component": "aspnetcore-runtime",
+          "name": "aspnetcore-runtime-10.0"
         },
         {
           "component": "runtime",
           "name": "dotnet-runtime-10.0"
         },
         {
-          "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
+          "component": "sdk",
+          "name": "dotnet-sdk-10.0"
         }
       ]
     },
@@ -208,7 +208,7 @@
             },
             {
               "component": "aspnetcore-runtime",
-              "name": "dotnet-aspnetcore-runtime-10.0"
+              "name": "aspnetcore-runtime-10.0"
             }
           ],
           "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update"
