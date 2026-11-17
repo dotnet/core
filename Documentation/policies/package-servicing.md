@@ -1,12 +1,14 @@
 # .NET Package Servicing Model
 
-Most packages in the .NET ecosystem support only the latest version. Many packages from the .NET team operate on this same model. A subset of our packages operate on another model where multiple version bands are supported at the same time, matching in-support runtimes, offering more flexibility to users.
+It is important to understand the .NET package servicing model to ensure your use is supported and you stay up to date with security patches. You are recommended to maintain package versions as close to the supported version as possible. Being close to a supported version means that you have most or all security fixes and likely have no latent compatibility risk that could delay updates.
 
-Users should aim to maintain their package references to be as close to the supported version as possible. Being close to a supported version means that you have most or all security fixes and likely have no latent compatibility risk that can be present when there is a big gap between your reference and the supported version.
+The .NET Team uses multiple policies for package servicing and deprecation, some of which that differ dependending on the package.
 
-## Latest version servicing
+## Latest-version servicing
 
-The default package servicing model is “latest version”. The team publishes an updated package with a security and/or functionality fix. Users can upgrade to the new latest version to get the fix.
+The default package servicing model is "latest version". The team publishes an updated package with a security and/or functionality fixes. 
+
+Support: only the latest package version is supported.
 
 The following libraries use this servicing model:
 
@@ -15,15 +17,15 @@ The following libraries use this servicing model:
 - [ML.NET](https://github.com/dotnet/machinelearning)
 - [Maintenance-packages](https://github.com/dotnet/maintenance-packages)
 
-## Runtime-band servicing
+## Runtime-library servicing
 
-Some packages match a library (in name and content) in the runtime. In this case, the team publishes  fixes for the library in the runtime and the package at the same time. The version numbers will match. Users can upgrade to the new latest patch version to get the fix.
+Some packages match a runtime library (in name and content), like System.Text.Json. In this case, the team publishes fixes for the library in the runtime and the package at the same time. The version numbers will match. In the typical case, there will be multiple releases on the same day, like .NET 10 and 11 runtimes and .NET 10 and 11 packages for runtime-libraries. We update the packages even if they have had no fixes. That's done, in part, to make the version numbers match.
 
-Users can upgrade to the latest library version (like 8.0.x) that matches a supported runtime (like 8.0). Users can also move to the latest patch of a newer major version (like 9.0.x) provided that the runtime is still in support.
+Support: the latest package version of each supported .NET version band is supported, like 10.0.latest and 11.0.latest.
 
-The advantage of matching versions is that the runtime library will be used in place of the package, resulting in smaller deployments and servicing being provided by the runtime. The advantage of using a newer package version is getting access to newer functionality.
+You only need to reference runtime-library packages if you want a later version of the package than what comes with the runtime distribution. For example, if you are targeting `net10.0` and need to use the .NET 11 version System.Text.Json, then you need an `11.0.x` version `PackageReference`. If you are targeting `net10.0` and only need the .NET 10 version of System.Text.Json, then you do not need a `PackageReference` for the runtime-library. See [Package Pruning](https://devblogs.microsoft.com/dotnet/nuget-package-pruning-in-dotnet-10/) for more insight.
 
-It common for .NET Standard libraries to have a reference to these libraries. Libraries and app projects only need a reference if they need access to newer features in a later major version (than their target framework exposes).
+The advantage of using runtime libraries directly (no `PackageRef`) is smaller deployments and servicing being provided by the runtime, at least for apps that use framework-dependent deployments. The advantage of using a newer package version is getting access to newer functionality.
 
 The following libraries use this servicing model:
 
@@ -35,29 +37,15 @@ The following libraries use this servicing model:
 
 ## Support
 
-Users must be on the latest patch version of the package or a runtime-band to be supported.
-
-## Package Deprecation
-
-The .NET team uses [NuGet Package Deprecation](https://learn.microsoft.com/nuget/nuget-org/deprecate-packages) to indicate that a package or version is no longer supported. Deprecated packages remain available on nuget.org and can still be restored by projects.
-
-.NET packages are marked deprecated when:
-
-- The package version is associated with a .NET version that is out of support per the [.NET Support Policy](https://dotnet.microsoft.com/platform/support/policy).
-- The package was a preview or release candidate that has been superseded by a stable release.
-
-Patch-to-patch updates within a supported version band will also be marked deprecated on a regular schedule following each servicing release. For example, when 8.0.2 ships, 8.0.1 will be deprecated in a subsequent update.
+Users must be on the latest patch version of the package to be supported, per the policies above.
 
 ## Compatibility
 
-Packages retain compatibility for supported .NET versions. A package will not drop support for a .NET version that is in support. When a .NET version goes out of support, packages released after that point may drop support for that .NET version.
+Packages will support a given set of .NET versions until .NET version EOL. A package will not drop support for a .NET version that is in support. After that point, a new version of a package may drop support for a given target framework, which could cause a build or runtime break for an out-of-support .NET version.
 
-Mechanically, a package can support multiple target frameworks via either of two approaches:
+Some packages support [.NET Standard](https://learn.microsoft.com/dotnet/standard/net-standard). This does not mean that all possible .NET Standard targets are supported or that an implementation is provided. Instead, it means that the package exposes a .NET Standard compatible API and provides implementations for in-support .NET versions and operating systems.
 
-- Multi-targeting: A project supports and is built for multiple target frameworks, resulting in assets supporting multiple .NET versions in a NuGet package.
-- Branching: A project exists and is built in multiple branches, each targeting a specific target framework and resulting multiple packages that each include a single asset supporting a specific .NET version.
-
-The differences in these approaches are user observable and require users to adopt different patterns with package references. It's the difference between the two versioning strategies defined earlier. They are also patterns that users can adopt for themselves with their own packages.
+You may need to pin to a specific package version in the case that a given package is no longer compatible with your environment, such as is you are using an EOL runtime. Doing that would mean you are no longer in a supported state or receiving security updates.
 
 ## End of Life
 
