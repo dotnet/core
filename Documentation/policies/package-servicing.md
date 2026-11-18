@@ -47,7 +47,7 @@ Packages will support a given set of .NET versions until .NET version EOL. A pac
 
 Some packages support [.NET Standard](https://learn.microsoft.com/dotnet/standard/net-standard). This does not mean that all possible .NET Standard targets are supported or that an implementation is provided. Instead, it means that the package exposes a .NET Standard compatible API and provides implementations for in-support .NET versions and operating systems.
 
-You may need to pin a package to a specific version in the case that it is no longer compatible with your environment, such as if you are using an EOL runtime. The incompatability could also be in the dependency of a package developed by a maintainers. This option isn't guidance but offered as a workaround. Doing that would mean you are no longer in a supported state or receiving security updates.
+You may need to pin a package to a specific version in the case that it is no longer compatible with your environment, such as if you are using an EOL runtime. The incompatibility could also be in the dependency of a package developed by another maintainer. This option isn't guidance but offered as a workaround. Doing that would mean you are no longer in a supported state or receiving security updates.
 
 ## End of Life
 
