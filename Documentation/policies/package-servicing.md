@@ -4,6 +4,8 @@ It is important to understand the .NET package servicing model to ensure your us
 
 The .NET Team uses multiple policies for package servicing and deprecation, some of which that differ dependending on the package.
 
+See [.NET Support](../../support.md) for more general information.
+
 ## Latest-version servicing
 
 The default package servicing model is "latest version". The team publishes an updated package with a security and/or functionality fixes. 
