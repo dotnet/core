@@ -47,7 +47,13 @@ Packages will support a given set of .NET versions until .NET version EOL. A pac
 
 Some packages support [.NET Standard](https://learn.microsoft.com/dotnet/standard/net-standard). This does not mean that all possible .NET Standard targets are supported or that an implementation is provided. Instead, it means that the package exposes a .NET Standard compatible API and provides implementations for in-support .NET versions and operating systems.
 
-You may need to pin a package to a specific version in the case that it is no longer compatible with your environment, such as if you are using an EOL runtime. The incompatibility could also be in the dependency of a package developed by another maintainer. This option isn't guidance but offered as a workaround. Doing that would mean you are no longer in a supported state or receiving security updates.
+You may see this warning:
+
+```bash
+...\.nuget\packages\system.diagnostics.diagnosticsource\11.0.0\buildTransitive\netcoreapp2.0\System.Diagnostics.DiagnosticSource.targets(4,5): warning System.Diagnostics.DiagnosticSource 11.0.0 doesn't support net9.0 and has not been tested with it. Consider upgrading your TargetFramework to net10.0 or later. You may also set <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings> in the project file to ignore this warning and attempt to run in this unsupported configuration at your own risk.
+```
+
+That warnings means that a new package is incompatible with your environment. If you see it, you are recommend to upgrade your app to a later .NET version, as recommended in example warning. If you cannot upgrade, you may need to pin a package to a previous version. You might need to do this because you are using an EOL runtime. The incompatibility might be in the dependency of a package developed by another maintainer. This option isn't guidance but offered as a workaround. Doing that would mean you are no longer in a supported state or receiving security updates.
 
 ## End of Life
 
