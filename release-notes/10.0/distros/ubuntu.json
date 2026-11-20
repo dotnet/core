@@ -3,6 +3,58 @@
   "install_command": "apt-get install -y {packages}",
   "releases": [
     {
+      "name": "Ubuntu 26.10 (Stonking Stingray)",
+      "release": "26.10",
+      "dependencies": [
+        {
+          "id": "ca-certificates",
+          "name": "ca-certificates"
+        },
+        {
+          "id": "krb5",
+          "name": "libgssapi-krb5-2"
+        },
+        {
+          "id": "libc",
+          "name": "libc6"
+        },
+        {
+          "id": "libgcc",
+          "name": "libgcc-s1"
+        },
+        {
+          "id": "libicu",
+          "name": "libicu78"
+        },
+        {
+          "id": "libstdc++",
+          "name": "libstdc++6"
+        },
+        {
+          "id": "openssl",
+          "name": "libssl4"
+        },
+        {
+          "id": "tzdata",
+          "name": "tzdata"
+        }
+      ],
+      "dotnet_packages": [
+        {
+          "component": "aspnetcore-runtime",
+          "name": "aspnetcore-runtime-10.0"
+        },
+        {
+          "component": "runtime",
+          "name": "dotnet-runtime-10.0"
+        },
+        {
+          "component": "sdk",
+          "name": "dotnet-sdk-10.0"
+        }
+      ]
+    },
+    {
       "name": "Ubuntu 26.04 LTS (Resolute Raccoon)",
       "release": "26.04",
       "dependencies": [
@@ -51,58 +103,6 @@
         {
           "component": "sdk",
           "name": "dotnet-sdk-10.0"
-        }
-      ]
-    },
-    {
-      "name": "Ubuntu 25.10 (Questing Quokka)",
-      "release": "25.10",
-      "dependencies": [
-        {
-          "id": "ca-certificates",
-          "name": "ca-certificates"
-        },
-        {
-          "id": "krb5",
-          "name": "libgssapi-krb5-2"
-        },
-        {
-          "id": "libc",
-          "name": "libc6"
-        },
-        {
-          "id": "libgcc",
-          "name": "libgcc-s1"
-        },
-        {
-          "id": "libicu",
-          "name": "libicu76"
-        },
-        {
-          "id": "libstdc++",
-          "name": "libstdc++6"
-        },
-        {
-          "id": "openssl",
-          "name": "libssl3t64"
-        },
-        {
-          "id": "tzdata",
-          "name": "tzdata"
-        }
-      ],
-      "dotnet_packages": [
-        {
-          "component": "sdk",
-          "name": "dotnet-sdk-10.0"
-        },
-        {
-          "component": "runtime",
-          "name": "dotnet-runtime-10.0"
-        },
-        {
-          "component": "aspnetcore-runtime",
-          "name": "aspnetcore-runtime-10.0"
         }
       ]
     },
@@ -208,7 +208,7 @@
             },
             {
               "component": "aspnetcore-runtime",
-              "name": "dotnet-aspnetcore-runtime-10.0"
+              "name": "aspnetcore-runtime-10.0"
             }
           ],
           "install_command": "sudo apt-get install -y software-properties-common && sudo add-apt-repository ppa:dotnet/backports && sudo apt-get update"
