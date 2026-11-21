@@ -190,7 +190,7 @@ ret
 
 Notice the calls to `CORINFO_HELP_NEWSFAST` -- those are the heap allocations for the boxed integer arguments. Also notice that there isn't any call to `Compare`; RyuJIT decided to inline it into `Main`.
 This means the boxes never "escape." In other words, throughout the execution of `Compare`, we know `x` and `y` are actually integers, and we can safely unbox them without affecting the comparison logic (`System.Int32:Equals` just compares the raw integers under-the-hood, anyway).
-In Preview 7, RyuJIT now allocates unescaped boxes on the stack, unlocking several other optimizations. In our example, not only does RyuJIT avoid the heap allocations, but it also evaluates the expressions `x.Equals(y)` and `result ? 0 : 100` at compile-time.
+RyuJIT previously had limited object stack allocation support, but it was disabled by default. The improvements in [dotnet/runtime #103361](https://github.com/dotnet/runtime/pull/103361) enable it by default, improve its profitability heuristics, and extend it to non-escaping boxed value types, unlocking several other optimizations. In our example, not only does RyuJIT avoid the heap allocations, but it also evaluates the expressions `x.Equals(y)` and `result ? 0 : 100` at compile-time.
 
 Here's the updated assembly:
 
@@ -199,7 +199,7 @@ mov      eax, 100
 ret
 ```
 
-To learn more about object stack allocation in RyuJIT, check out [dotnet/runtime #104936](https://github.com/dotnet/runtime/issues/104936).
+For further object stack allocation enhancements beyond this implementation, see [dotnet/runtime #104936](https://github.com/dotnet/runtime/issues/104936).
 
 ## GC Dynamic Adaptation To Application Sizes
 
@@ -234,7 +234,7 @@ With DATAS enabled # of Gen0 and Gen1 GCs are significantly higher
 
 ![Gen0 and Gen1 Counts](./media/Gen0_GC.png)
 
-Full .NET TechEmpower benchmark results are published [here](https://aka.ms/aspnet/benchmarks)
+[Full .NET TechEmpower benchmark results](https://aka.ms/aspnet/benchmarks) are published online.
 
 ### How to Disable DATAS
 
