@@ -25,22 +25,13 @@ Each of the distributions can be downloaded from:
 
 ## Install using deb/rpm packages
 
-Preview release installers are not available from the Microsoft package repositories. The steps below provide an easy way to install .NET 8.0 using your Distro package manager.
+Follow the [Linux package installation instructions](https://learn.microsoft.com/dotnet/core/install/linux) for your distribution and OS version, and select the .NET 8.0 packages. Package availability and repository setup differ between distributions and releases.
 
-**Note:** `curl` must be available on the system before running the following steps. Once you have confirmed that `curl` is available, complete the steps to download and install the latest .NET 8.0 Preview SDK and Runtime.
+For Ubuntu 24.04, use the built-in Ubuntu feed or the Ubuntu .NET backports feed, depending on the .NET version. Microsoft does not publish .NET packages for Ubuntu 24.04 to its package feed. See the [Ubuntu installation instructions](https://learn.microsoft.com/dotnet/core/install/linux-ubuntu-install#ubuntu-2404) for the feed and package commands for each .NET version.
 
-1. Create a directory to use for the download location and change into that directory. For example, `mkdir $HOME/dotnet_install && cd $HOME/dotnet_install`
-2. Run `curl -L https://aka.ms/install-dotnet-preview -o install-dotnet-preview.sh`
-3. Run the script with `sudo bash install-dotnet-preview.sh`
+Use .NET packages from one publisher. Mixing packages from distribution and Microsoft feeds can cause [package resolution problems](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup).
 
-Here's what the script does.
-
-- Detects the distribution and version. The script supports platforms and versions listed in [.NET 8.0 - Supported OS versions](supported-os.md).
-- Determines if additional system dependencies or utilities are needed to successfully complete and install them. For example, `tar` is used to unpack the installer packages.
-- Downloads the tar.gz containing the .NET preview installer packages for the detected distribution.
-- Downloads the system dependency installer, if needed.
-- Expands the tar.gz into ./dotnet_packages
-- Attempts to install the contents of ./dotnet_packages using `rpm` or `dpkg`, as appropriate, for the detected distribution.
+Package-manager installation also installs the required dependencies. For a manual installation, follow the binary archive instructions below and install the packages listed at the start of this guide.
 
 ## Install using Snap
 
