@@ -23,6 +23,16 @@ Each of the distributions can be downloaded from:
 
 [Container images](https://hub.docker.com/_/microsoft-dotnet) are provided for Linux (Alpine, Debian, and Ubuntu).
 
+## Install using deb/rpm packages
+
+Follow the [Linux package installation instructions](https://learn.microsoft.com/dotnet/core/install/linux) for your distribution and OS version, and select the .NET 10.0 packages. Package availability and repository setup differ between distributions and releases.
+
+For Ubuntu 24.04, use the built-in Ubuntu feed or the Ubuntu .NET backports feed, depending on the .NET version. Microsoft does not publish .NET packages for Ubuntu 24.04 to its package feed. See the [Ubuntu installation instructions](https://learn.microsoft.com/dotnet/core/install/linux-ubuntu-install#ubuntu-2404) for the feed and package commands for each .NET version.
+
+Use .NET packages from one publisher. Mixing packages from distribution and Microsoft feeds can cause [package resolution problems](https://learn.microsoft.com/dotnet/core/install/linux-package-mixup).
+
+Package-manager installation also installs the required dependencies. For a manual installation, follow the binary archive instructions below and install the packages listed at the start of this guide.
+
 ## Installing from a binary archive
 
 You can install .NET with a binary archive. This option is required if you want to install .NET for a single user. It is also recommended if you want to install .NET temporarily.
