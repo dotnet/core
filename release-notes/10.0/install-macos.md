@@ -4,7 +4,7 @@ The following instructions demonstrate installing .NET 10 on macOS. These instru
 
 ## Distributions
 
-The following distributions are available for Linux:
+The following distributions are available for macOS:
 
 - .NET SDK: includes tools for building and testing applications, and includes the runtime distributions that follow.
 - .NET Runtime: includes the .NET runtime and libraries, enabling running console applications.
@@ -33,8 +33,11 @@ You can install .NET with a binary archive. This option is required if you want 
 
 The following workflow demonstrates downloading, unpacking, configuring, and running the .NET SDK from the command line. You may choose to do some of these tasks via the browser and functionality provided by your operating system.
 
+Choose the archive architecture for your Mac: use `arm64` for Apple silicon or `x64` for an Intel-based Mac. The example below uses `arm64`; change `sdk_arch` to `x64` for Intel.
+
 ```bash
-~# curl -Lo dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.101/dotnet-sdk-10.0.101-osx-x64.tar.gz
+~# sdk_arch=arm64
+~# curl -Lo dotnet.tar.gz "https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.101/dotnet-sdk-10.0.101-osx-${sdk_arch}.tar.gz"
 ~# mkdir dotnet
 ~# tar -C dotnet -xf dotnet.tar.gz
 ~# rm dotnet.tar.gz
