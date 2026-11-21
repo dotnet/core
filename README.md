@@ -23,6 +23,7 @@ Welcome to the home of .NET [release notes](./release-notes/README.md) and [news
 * [Release notes](./release-notes/README.md)
 * [Binaries and installers](https://dotnet.microsoft.com/download/dotnet)
 * [Installation docs](https://learn.microsoft.com/dotnet/core/install/)
+* [Download automation and availability](Documentation/acquiring-dotnet.md)
 * [dotnet-install scripts](https://learn.microsoft.com/dotnet/core/tools/dotnet-install-script)
 
 ## Discussions
